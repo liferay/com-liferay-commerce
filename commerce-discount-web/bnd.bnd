@@ -1,0 +1,4 @@
+Bundle-Name: Liferay Commerce Discount Web
+Bundle-SymbolicName: com.liferay.commerce.discount.web
+Bundle-Version: 1.0.0
+Web-ContextPath: /commerce-discount-web

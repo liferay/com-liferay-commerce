@@ -1,0 +1,8 @@
+Bundle-Name: Liferay Commerce Product Content Web
+Bundle-SymbolicName: com.liferay.commerce.product.content.web
+Bundle-Version: 1.0.0
+Liferay-JS-Config: /META-INF/resources/js/config.js
+Require-Capability:\
+	soy;\
+		filter:="(type=asset-publisher-web)"
+Web-ContextPath: /commerce-product-content-web
