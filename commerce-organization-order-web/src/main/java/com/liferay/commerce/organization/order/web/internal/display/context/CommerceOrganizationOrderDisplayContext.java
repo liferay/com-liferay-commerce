@@ -19,8 +19,8 @@ import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceShipmentConstants;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
-import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
@@ -86,6 +86,7 @@ import com.liferay.portal.util.PropsValues;
 import java.math.BigDecimal;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.Format;
 
 import java.util.ArrayList;
@@ -115,7 +116,6 @@ public class CommerceOrganizationOrderDisplayContext {
 			CommerceOrderNoteService commerceOrderNoteService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderService commerceOrderService,
-			CommercePriceFormatter commercePriceFormatter,
 			CommerceShipmentItemService commerceShipmentItemService,
 			CPInstanceHelper cpInstanceHelper, JSONFactory jsonFactory,
 			ModelResourcePermission<CommerceOrder> modelResourcePermission,
@@ -128,7 +128,6 @@ public class CommerceOrganizationOrderDisplayContext {
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_commerceOrderService = commerceOrderService;
-		_commercePriceFormatter = commercePriceFormatter;
 		_commerceShipmentItemService = commerceShipmentItemService;
 		_cpInstanceHelper = cpInstanceHelper;
 		_jsonFactory = jsonFactory;
@@ -403,9 +402,18 @@ public class CommerceOrganizationOrderDisplayContext {
 			return StringPool.BLANK;
 		}
 
-		return _commercePriceFormatter.format(
-			commerceOrder.getCommerceCurrency(), percentage,
-			_commerceOrganizationOrderRequestHelper.getLocale());
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
+		DecimalFormat decimalFormat = new DecimalFormat();
+
+		decimalFormat.setMaximumFractionDigits(
+			commerceCurrency.getMaxFractionDigits());
+		decimalFormat.setMinimumFractionDigits(
+			commerceCurrency.getMinFractionDigits());
+		decimalFormat.setNegativeSuffix(StringPool.PERCENT);
+		decimalFormat.setPositiveSuffix(StringPool.PERCENT);
+
+		return decimalFormat.format(percentage);
 	}
 
 	public List<KeyValuePair> getKeyValuePairs(String json, Locale locale)
@@ -864,7 +872,6 @@ public class CommerceOrganizationOrderDisplayContext {
 		_commerceOrganizationOpenOrderPortletInstanceConfiguration;
 	private final CommerceOrganizationOrderRequestHelper
 		_commerceOrganizationOrderRequestHelper;
-	private final CommercePriceFormatter _commercePriceFormatter;
 	private final CommerceShipmentItemService _commerceShipmentItemService;
 	private final CPInstanceHelper _cpInstanceHelper;
 	private final CommerceOrder _currentCommerceOrder;

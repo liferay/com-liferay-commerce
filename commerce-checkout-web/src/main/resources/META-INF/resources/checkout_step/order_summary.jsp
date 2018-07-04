@@ -193,7 +193,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 							</div>
 
 							<div class="commerce-value">
-								<%= HtmlUtil.escape(orderSummaryCheckoutStepDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage(), locale)) %>
+								<%= HtmlUtil.escape(orderSummaryCheckoutStepDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %>
 							</div>
 						</c:if>
 					</div>
@@ -222,7 +222,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 						</div>
 
 						<div class="commerce-value">
-							<%= HtmlUtil.escape(orderSummaryCheckoutStepDisplayContext.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage(), locale)) %>
+							<%= HtmlUtil.escape(orderSummaryCheckoutStepDisplayContext.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage())) %>
 						</div>
 					</c:if>
 				</li>
@@ -251,7 +251,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 						</div>
 
 						<div class="commerce-value">
-							<%= HtmlUtil.escape(orderSummaryCheckoutStepDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage(), locale)) %>
+							<%= HtmlUtil.escape(orderSummaryCheckoutStepDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage())) %>
 						</div>
 					</c:if>
 

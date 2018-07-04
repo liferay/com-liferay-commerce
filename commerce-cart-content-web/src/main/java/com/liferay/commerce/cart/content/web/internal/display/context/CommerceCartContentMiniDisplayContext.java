@@ -15,7 +15,7 @@
 package com.liferay.commerce.cart.content.web.internal.display.context;
 
 import com.liferay.commerce.cart.content.web.internal.portlet.configuration.CommerceCartContentMiniPortletInstanceConfiguration;
-import com.liferay.commerce.currency.util.CommercePriceFormatter;
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 
 import java.math.BigDecimal;
+
+import java.text.DecimalFormat;
 
 import javax.portlet.PortletURL;
 
@@ -45,7 +47,6 @@ public class CommerceCartContentMiniDisplayContext
 			CommerceOrderItemService commerceOrderItemService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
-			CommercePriceFormatter commercePriceFormatter,
 			CPDefinitionHelper cpDefinitionHelper,
 			CPInstanceHelper cpInstanceHelper)
 		throws PortalException {
@@ -63,7 +64,6 @@ public class CommerceCartContentMiniDisplayContext
 				CommerceCartContentMiniPortletInstanceConfiguration.class);
 
 		_commerceOrderHttpHelper = commerceOrderHttpHelper;
-		_commercePriceFormatter = commercePriceFormatter;
 	}
 
 	public String getCommerceCartPortletURL() throws PortalException {
@@ -112,15 +112,23 @@ public class CommerceCartContentMiniDisplayContext
 			return StringPool.BLANK;
 		}
 
-		return _commercePriceFormatter.format(
-			commerceOrder.getCommerceCurrency(), percentage,
-			commerceCartContentRequestHelper.getLocale());
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
+		DecimalFormat decimalFormat = new DecimalFormat();
+
+		decimalFormat.setMaximumFractionDigits(
+			commerceCurrency.getMaxFractionDigits());
+		decimalFormat.setMinimumFractionDigits(
+			commerceCurrency.getMinFractionDigits());
+		decimalFormat.setNegativeSuffix(StringPool.PERCENT);
+		decimalFormat.setPositiveSuffix(StringPool.PERCENT);
+
+		return decimalFormat.format(percentage);
 	}
 
 	private final CommerceCartContentMiniPortletInstanceConfiguration
 		_commerceCartContentMiniPortletInstanceConfiguration;
 	private final CommerceOrderHttpHelper _commerceOrderHttpHelper;
-	private final CommercePriceFormatter _commercePriceFormatter;
 	private long _displayStyleGroupId;
 
 }

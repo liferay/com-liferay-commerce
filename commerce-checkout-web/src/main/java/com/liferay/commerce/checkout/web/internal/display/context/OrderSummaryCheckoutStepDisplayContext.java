@@ -17,8 +17,8 @@ package com.liferay.commerce.checkout.web.internal.display.context;
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
-import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
@@ -32,6 +32,7 @@ import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.document.library.kernel.util.DLUtil;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -39,6 +40,8 @@ import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.PortalUtil;
 
 import java.math.BigDecimal;
+
+import java.text.DecimalFormat;
 
 import java.util.List;
 import java.util.Locale;
@@ -55,7 +58,6 @@ public class OrderSummaryCheckoutStepDisplayContext {
 		CommerceOrderHttpHelper commerceOrderHttpHelper,
 		CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 		CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
-		CommercePriceFormatter commercePriceFormatter,
 		CommerceProductPriceCalculation commerceProductPriceCalculation,
 		CPInstanceHelper cpInstanceHelper,
 		HttpServletRequest httpServletRequest) {
@@ -63,7 +65,6 @@ public class OrderSummaryCheckoutStepDisplayContext {
 		_commerceOrderHttpHelper = commerceOrderHttpHelper;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_commerceOrderValidatorRegistry = commerceOrderValidatorRegistry;
-		_commercePriceFormatter = commercePriceFormatter;
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_cpInstanceHelper = cpInstanceHelper;
 		_httpServletRequest = httpServletRequest;
@@ -124,11 +125,26 @@ public class OrderSummaryCheckoutStepDisplayContext {
 			_commerceOrder);
 	}
 
-	public String getFormattedPercentage(BigDecimal percentage, Locale locale)
+	public String getFormattedPercentage(BigDecimal percentage)
 		throws PortalException {
 
-		return _commercePriceFormatter.format(
-			_commerceOrder.getCommerceCurrency(), percentage, locale);
+		if (_commerceOrder == null) {
+			return StringPool.BLANK;
+		}
+
+		CommerceCurrency commerceCurrency =
+			_commerceOrder.getCommerceCurrency();
+
+		DecimalFormat decimalFormat = new DecimalFormat();
+
+		decimalFormat.setMaximumFractionDigits(
+			commerceCurrency.getMaxFractionDigits());
+		decimalFormat.setMinimumFractionDigits(
+			commerceCurrency.getMinFractionDigits());
+		decimalFormat.setNegativeSuffix(StringPool.PERCENT);
+		decimalFormat.setPositiveSuffix(StringPool.PERCENT);
+
+		return decimalFormat.format(percentage);
 	}
 
 	public String getFormattedPrice(CommerceOrderItem commerceOrderItem)
@@ -154,7 +170,6 @@ public class OrderSummaryCheckoutStepDisplayContext {
 	private final CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 	private final CommerceOrderValidatorRegistry
 		_commerceOrderValidatorRegistry;
-	private final CommercePriceFormatter _commercePriceFormatter;
 	private final CommerceProductPriceCalculation
 		_commerceProductPriceCalculation;
 	private final CPInstanceHelper _cpInstanceHelper;
