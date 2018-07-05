@@ -18,7 +18,6 @@ import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
@@ -26,6 +25,7 @@ import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.KeyValuePair;
-import com.liferay.portal.kernel.util.PortalUtil;
 
 import java.math.BigDecimal;
 
@@ -86,7 +85,7 @@ public class OrderSummaryCheckoutStepDisplayContext {
 
 	public String getCommerceOrderItemThumbnailSrc(
 			CommerceOrderItem commerceOrderItem, ThemeDisplay themeDisplay)
-		throws Exception {
+			throws Exception {
 
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
 			_cpInstanceHelper.getCPAttachmentFileEntries(
@@ -125,6 +124,15 @@ public class OrderSummaryCheckoutStepDisplayContext {
 			_commerceOrder);
 	}
 
+	public CommerceProductPrice getCommerceProductPrice(
+			CommerceOrderItem commerceOrderItem)
+		throws PortalException {
+
+		return _commerceProductPriceCalculation.getCommerceProductPrice(
+			commerceOrderItem.getCPInstanceId(),
+			commerceOrderItem.getQuantity(), _commerceContext);
+	}
+
 	public String getFormattedPercentage(BigDecimal percentage)
 		throws PortalException {
 
@@ -145,17 +153,6 @@ public class OrderSummaryCheckoutStepDisplayContext {
 		decimalFormat.setPositiveSuffix(StringPool.PERCENT);
 
 		return decimalFormat.format(percentage);
-	}
-
-	public String getFormattedPrice(CommerceOrderItem commerceOrderItem)
-		throws PortalException {
-
-		CommerceMoney commerceMoney =
-			_commerceProductPriceCalculation.getFinalPrice(
-				commerceOrderItem.getCPInstanceId(),
-				commerceOrderItem.getQuantity(), _commerceContext);
-
-		return commerceMoney.format(PortalUtil.getLocale(_httpServletRequest));
 	}
 
 	public List<KeyValuePair> getKeyValuePairs(String json, Locale locale)

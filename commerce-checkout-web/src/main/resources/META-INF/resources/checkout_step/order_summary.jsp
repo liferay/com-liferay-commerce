@@ -17,31 +17,23 @@
 <%@ include file="/init.jsp" %>
 
 <%
-OrderSummaryCheckoutStepDisplayContext orderSummaryCheckoutStepDisplayContext = (OrderSummaryCheckoutStepDisplayContext)request.getAttribute(CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT);
-
-CommerceOrder commerceOrder = orderSummaryCheckoutStepDisplayContext.getCommerceOrder();
-
-CommerceOrderPrice commerceOrderPrice = orderSummaryCheckoutStepDisplayContext.getCommerceOrderPrice();
-
-CommerceDiscountValue shippingDiscountValue = commerceOrderPrice.getShippingDiscountValue();
-CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
-CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
-CommerceDiscountValue subtotalDiscountValue = commerceOrderPrice.getSubtotalDiscountValue();
-CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
-CommerceDiscountValue totalDiscountValue = commerceOrderPrice.getTotalDiscountValue();
-CommerceMoney totalOrder = commerceOrderPrice.getTotal();
-
-String commercePaymentMethodName = StringPool.BLANK;
-
-CommercePaymentMethod commercePaymentMethod = commerceOrder.getCommercePaymentMethod();
-
-if (commercePaymentMethod != null) {
-	commercePaymentMethodName = commercePaymentMethod.getName(locale);
-}
-
-String commerceShippingOptionName = commerceOrder.getShippingOptionName();
-
-Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = orderSummaryCheckoutStepDisplayContext.getCommerceOrderValidatorResults();
+	OrderSummaryCheckoutStepDisplayContext orderSummaryCheckoutStepDisplayContext = (OrderSummaryCheckoutStepDisplayContext)request.getAttribute(CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT);
+	CommerceOrder commerceOrder = orderSummaryCheckoutStepDisplayContext.getCommerceOrder();
+	CommerceOrderPrice commerceOrderPrice = orderSummaryCheckoutStepDisplayContext.getCommerceOrderPrice();
+	CommerceDiscountValue shippingDiscountValue = commerceOrderPrice.getShippingDiscountValue();
+	CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
+	CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
+	CommerceDiscountValue subtotalDiscountValue = commerceOrderPrice.getSubtotalDiscountValue();
+	CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
+	CommerceDiscountValue totalDiscountValue = commerceOrderPrice.getTotalDiscountValue();
+	CommerceMoney totalOrder = commerceOrderPrice.getTotal();
+	String commercePaymentMethodName = StringPool.BLANK;
+	CommercePaymentMethod commercePaymentMethod = commerceOrder.getCommercePaymentMethod();
+	if (commercePaymentMethod != null) {
+		commercePaymentMethodName = commercePaymentMethod.getName(locale);
+	}
+	String commerceShippingOptionName = commerceOrder.getShippingOptionName();
+	Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = orderSummaryCheckoutStepDisplayContext.getCommerceOrderValidatorResults();
 %>
 
 <div class="commerce-order-summary">
@@ -64,33 +56,34 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 			<div class="commerce-checkout-summary-body" id="<portlet:namespace />entriesContainer">
 				<liferay-ui:search-container
-					cssClass="list-group-flush"
-					id="commerceOrderItems"
+						cssClass="list-group-flush"
+						id="commerceOrderItems"
 				>
 					<liferay-ui:search-container-results
-						results="<%= commerceOrder.getCommerceOrderItems() %>"
+							results="<%= commerceOrder.getCommerceOrderItems() %>"
 					/>
 
 					<liferay-ui:search-container-row
-						className="com.liferay.commerce.model.CommerceOrderItem"
-						cssClass="entry-display-style"
-						keyProperty="CommerceOrderItemId"
-						modelVar="commerceOrderItem"
+							className="com.liferay.commerce.model.CommerceOrderItem"
+							cssClass="entry-display-style"
+							keyProperty="CommerceOrderItemId"
+							modelVar="commerceOrderItem"
 					>
 
 						<%
-						CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
-
-						String thumbnailSrc = orderSummaryCheckoutStepDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem, themeDisplay);
+							CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
+							String thumbnailSrc = orderSummaryCheckoutStepDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem, themeDisplay);
 						%>
 
 						<liferay-ui:search-container-column-image
-							cssClass="thumbnail-section"
-							src="<%= thumbnailSrc %>"
+								cssClass="thumbnail-section"
+								name="image"
+								src="<%= thumbnailSrc %>"
 						/>
 
 						<liferay-ui:search-container-column-text
-							cssClass="autofit-col-expand"
+								cssClass="autofit-col-expand"
+								name="product"
 						>
 							<div class="description-section">
 								<div class="list-group-text">Brand</div>
@@ -100,13 +93,11 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 								</div>
 
 								<%
-								List<KeyValuePair> keyValuePairs = orderSummaryCheckoutStepDisplayContext.getKeyValuePairs(commerceOrderItem.getJson(), locale);
-
-								StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
-
-								for (KeyValuePair keyValuePair : keyValuePairs) {
-									stringJoiner.add(keyValuePair.getValue());
-								}
+									List<KeyValuePair> keyValuePairs = orderSummaryCheckoutStepDisplayContext.getKeyValuePairs(commerceOrderItem.getJson(), locale);
+									StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
+									for (KeyValuePair keyValuePair : keyValuePairs) {
+										stringJoiner.add(keyValuePair.getValue());
+									}
 								%>
 
 								<div class="list-group-subtitle">SKU: <%= HtmlUtil.escape(stringJoiner.toString()) %></div>
@@ -114,53 +105,86 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 								<c:if test="<%= !commerceOrderValidatorResultMap.isEmpty() %>">
 
 									<%
-									List<CommerceOrderValidatorResult> commerceOrderValidatorResults = commerceOrderValidatorResultMap.get(commerceOrderItem.getCommerceOrderItemId());
-
-									for (CommerceOrderValidatorResult commerceOrderValidatorResult : commerceOrderValidatorResults) {
+										List<CommerceOrderValidatorResult> commerceOrderValidatorResults = commerceOrderValidatorResultMap.get(commerceOrderItem.getCommerceOrderItemId());
+										for (CommerceOrderValidatorResult commerceOrderValidatorResult : commerceOrderValidatorResults) {
 									%>
 
-										<div class="alert-danger commerce-alert-danger">
-											<c:choose>
-												<c:when test="<%= commerceOrderValidatorResult.hasArgument() %>">
-													<liferay-ui:message arguments="<%= commerceOrderValidatorResult.getArgument() %>" key="<%= commerceOrderValidatorResult.getMessage() %>" />
-												</c:when>
-												<c:otherwise>
-													<liferay-ui:message key="<%= commerceOrderValidatorResult.getMessage() %>" />
-												</c:otherwise>
-											</c:choose>
-										</div>
+									<div class="alert-danger commerce-alert-danger">
+										<c:choose>
+											<c:when test="<%= commerceOrderValidatorResult.hasArgument() %>">
+												<liferay-ui:message arguments="<%= commerceOrderValidatorResult.getArgument() %>" key="<%= commerceOrderValidatorResult.getMessage() %>" />
+											</c:when>
+											<c:otherwise>
+												<liferay-ui:message key="<%= commerceOrderValidatorResult.getMessage() %>" />
+											</c:otherwise>
+										</c:choose>
+									</div>
 
 									<%
-									}
+										}
 									%>
 
 								</c:if>
 							</div>
 						</liferay-ui:search-container-column-text>
 
-						<liferay-ui:search-container-column-text>
+						<liferay-ui:search-container-column-text
+								name="quantity"
+						>
 							<div class="quantity-section">
 								<span class="commerce-quantity"><%= commerceOrderItem.getQuantity() %></span><span class="inline-item-after">x</span>
 							</div>
 						</liferay-ui:search-container-column-text>
 
 						<%
-						CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
+							CommerceProductPrice commerceProductPrice = orderSummaryCheckoutStepDisplayContext.getCommerceProductPrice(commerceOrderItem);
+							CommerceDiscountValue discountValue = commerceProductPrice.getDiscountValue();
+							CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+							CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 						%>
 
-						<liferay-ui:search-container-column-text>
+						<liferay-ui:search-container-column-text
+								name="price"
+						>
 							<div class="value-section">
 								<span class="commerce-value">
-									<%= finalPriceMoney.format(locale) %>
+									<%= unitPrice.format(locale) %>
+								</span>
+							</div>
+						</liferay-ui:search-container-column-text>
+
+						<%
+							CommerceMoney discountAmount = null;
+							if (discountValue != null) {
+								discountAmount = discountValue.getDiscountAmount();
+							}
+						%>
+
+						<liferay-ui:search-container-column-text
+								name="discount"
+						>
+							<div class="value-section">
+								<span class="commerce-value">
+									<%= (discountAmount == null) ? StringPool.BLANK : discountAmount.format(locale) %>
+								</span>
+							</div>
+						</liferay-ui:search-container-column-text>
+
+						<liferay-ui:search-container-column-text
+								name="final-price"
+						>
+							<div class="value-section">
+								<span class="commerce-value">
+									<%= finalPrice.format(locale) %>
 								</span>
 							</div>
 						</liferay-ui:search-container-column-text>
 					</liferay-ui:search-container-row>
 
 					<liferay-ui:search-iterator
-						displayStyle="list"
-						markupView="lexicon"
-						paginate="<%= false %>"
+							displayStyle="list"
+							markupView="lexicon"
+							paginate="<%= false %>"
 					/>
 				</liferay-ui:search-container>
 			</div>
@@ -177,7 +201,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 						<c:if test="<%= subtotalDiscountValue != null %>">
 
 							<%
-							CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
+								CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
 							%>
 
 							<div class="autofit-col autofit-col-expand">
@@ -206,7 +230,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 					<c:if test="<%= shippingDiscountValue != null %>">
 
 						<%
-						CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount();
+							CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount();
 						%>
 
 						<div class="autofit-col autofit-col-expand">
@@ -235,7 +259,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 					<c:if test="<%= totalDiscountValue != null %>">
 
 						<%
-						CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount();
+							CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount();
 						%>
 
 						<div class="autofit-col autofit-col-expand">
@@ -265,7 +289,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 		<aui:col cssClass="commerce-checkout-info" width="<%= 30 %>">
 
 			<%
-			CommerceAddress shippingAddress = commerceOrder.getShippingAddress();
+				CommerceAddress shippingAddress = commerceOrder.getShippingAddress();
 			%>
 
 			<c:if test="<%= shippingAddress != null %>">
@@ -275,7 +299,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 					</h5>
 
 					<%
-					request.setAttribute("address.jsp-commerceAddress", shippingAddress);
+						request.setAttribute("address.jsp-commerceAddress", shippingAddress);
 					%>
 
 					<%= shippingAddress.getName() %> <br />
@@ -292,7 +316,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 					<%= shippingAddress.getCity() %> <br />
 
 					<%
-					CommerceCountry commerceCountry = shippingAddress.getCommerceCountry();
+						CommerceCountry commerceCountry = shippingAddress.getCommerceCountry();
 					%>
 
 					<c:if test="<%= commerceCountry != null %>">
