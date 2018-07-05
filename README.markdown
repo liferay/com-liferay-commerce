@@ -20,16 +20,16 @@ it can support millions of products in challenging B2B industries.
 
 ## Quick Start
 
-Requirements: [Liferay Portal 7.1 B3](https://github.com/liferay/liferay-portal)
+Requirements: [Liferay Portal 7.1 GA1](https://github.com/liferay/liferay-portal)
 
-1. Clone the Emporio repository (this [repository](https://github.com/liferay/com-liferay-commerce-private))
+1. Clone the Emporio repository (this [repository](https://github.com/liferay/com-liferay-commerce))
 to the same level of your directory tree as your Liferay Home folder (Liferay
 Home is the folder that contains the Tomcat folder for Liferay 7.1).
 
 2. Start Liferay Portal 7.1.
 
 In the terminal, navigate to the source code folder
-(`com-liferay-commerce-private`).
+(`com-liferay-commerce`).
 
 Windows Users: enter `gradlew.bat deploy -Dbuild.profile=portal`
 
