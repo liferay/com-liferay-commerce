@@ -57,13 +57,13 @@ List<CommerceOrder> results = commerceOrderSearchContainer.getResults();
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
 						name="total"
-						value="<%= commerceOrderContentDisplayContext.getCommerceOrderTotal(commerceOrder.getCommerceOrderId()) %>"
+						value="<%= commerceOrderContentDisplayContext.getCommerceOrderTotal(commerceOrder) %>"
 					/>
 
-					<liferay-ui:search-container-column-status
+					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
-						name="status"
-						status="<%= commerceOrder.getStatus() %>"
+						name="order-status"
+						value="<%= commerceOrderContentDisplayContext.getCommerceOrderStatus(commerceOrder) %>"
 					/>
 
 					<liferay-ui:search-container-column-date

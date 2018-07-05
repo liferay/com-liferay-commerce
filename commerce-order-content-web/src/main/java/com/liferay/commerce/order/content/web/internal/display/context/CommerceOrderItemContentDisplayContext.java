@@ -14,17 +14,39 @@
 
 package com.liferay.commerce.order.content.web.internal.display.context;
 
-import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
+import com.liferay.commerce.order.CommerceOrderValidatorResult;
+import com.liferay.commerce.price.CommerceOrderPrice;
+import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.price.CommerceProductPrice;
+import com.liferay.commerce.price.CommerceProductPriceCalculation;
+import com.liferay.commerce.product.model.CPAttachmentFileEntry;
+import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.document.library.kernel.util.DLUtil;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.KeyValuePair;
+
+import java.math.BigDecimal;
+
+import java.text.DecimalFormat;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -40,32 +62,98 @@ public class CommerceOrderItemContentDisplayContext
 			HttpServletRequest httpServletRequest,
 			CommerceOrderLocalService commerceOrderLocalService,
 			CommerceOrderItemLocalService commerceOrderItemLocalService,
-			CPDefinitionHelper cpDefinitionHelper)
+			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
+			CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
+			CommerceProductPriceCalculation commerceProductPriceCalculation,
+			CPInstanceHelper cpInstanceHelper)
 		throws ConfigurationException {
 
 		super(httpServletRequest, commerceOrderLocalService);
 
 		_commerceOrderItemLocalService = commerceOrderItemLocalService;
-		_cpDefinitionHelper = cpDefinitionHelper;
+		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
+		_commerceOrderValidatorRegistry = commerceOrderValidatorRegistry;
+		_commerceProductPriceCalculation = commerceProductPriceCalculation;
+		_cpInstanceHelper = cpInstanceHelper;
 	}
 
-	public String getCPDefinitionURL(
-			long cpDefinitionId, ThemeDisplay themeDisplay)
-		throws PortalException {
+	public String getCommerceOrderItemThumbnailSrc(
+			CommerceOrderItem commerceOrderItem, ThemeDisplay themeDisplay)
+		throws Exception {
 
-		return _cpDefinitionHelper.getFriendlyURL(cpDefinitionId, themeDisplay);
+		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
+			_cpInstanceHelper.getCPAttachmentFileEntries(
+				commerceOrderItem.getCPDefinitionId(),
+				commerceOrderItem.getJson(),
+				CPAttachmentFileEntryConstants.TYPE_IMAGE);
+
+		if (cpAttachmentFileEntries.isEmpty()) {
+			CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
+
+			return cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
+		}
+
+		CPAttachmentFileEntry cpAttachmentFileEntry =
+			cpAttachmentFileEntries.get(0);
+
+		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
+
+		if (fileEntry == null) {
+			return null;
+		}
+
+		return DLUtil.getThumbnailSrc(fileEntry, themeDisplay);
 	}
 
-	public String getFormattedPrice(long commerceOrderItemId)
+	public CommerceOrderPrice getCommerceOrderPrice() throws PortalException {
+		return _commerceOrderPriceCalculation.getCommerceOrderPrice(
+			getCommerceOrder(), getCommerceContext());
+	}
+
+	public Map<Long, List<CommerceOrderValidatorResult>>
+			getCommerceOrderValidatorResults()
 		throws PortalException {
 
-		CommerceOrderItem commerceOrderItem =
-			_commerceOrderItemLocalService.getCommerceOrderItem(
-				commerceOrderItemId);
+		return _commerceOrderValidatorRegistry.getCommerceOrderValidatorResults(
+			getCommerceOrder());
+	}
 
-		CommerceMoney priceMoney = commerceOrderItem.getUnitPriceMoney();
+	public CommerceProductPrice getCommerceProductPrice(
+			CommerceOrderItem commerceOrderItem)
+		throws PortalException {
 
-		return priceMoney.format(cpRequestHelper.getLocale());
+		return _commerceProductPriceCalculation.getCommerceProductPrice(
+			commerceOrderItem.getCPInstanceId(),
+			commerceOrderItem.getQuantity(), getCommerceContext());
+	}
+
+	public String getFormattedPercentage(BigDecimal percentage)
+		throws PortalException {
+
+		CommerceOrder commerceOrder = getCommerceOrder();
+
+		if (commerceOrder == null) {
+			return StringPool.BLANK;
+		}
+
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
+		DecimalFormat decimalFormat = new DecimalFormat();
+
+		decimalFormat.setMaximumFractionDigits(
+			commerceCurrency.getMaxFractionDigits());
+		decimalFormat.setMinimumFractionDigits(
+			commerceCurrency.getMinFractionDigits());
+		decimalFormat.setNegativeSuffix(StringPool.PERCENT);
+		decimalFormat.setPositiveSuffix(StringPool.PERCENT);
+
+		return decimalFormat.format(percentage);
+	}
+
+	public List<KeyValuePair> getKeyValuePairs(String json, Locale locale)
+		throws PortalException {
+
+		return _cpInstanceHelper.getKeyValuePairs(json, locale);
 	}
 
 	@Override
@@ -107,8 +195,18 @@ public class CommerceOrderItemContentDisplayContext
 		return _searchContainer;
 	}
 
+	protected CommerceContext getCommerceContext() {
+		return (CommerceContext)httpServletRequest.getAttribute(
+			CommerceWebKeys.COMMERCE_CONTEXT);
+	}
+
 	private final CommerceOrderItemLocalService _commerceOrderItemLocalService;
-	private final CPDefinitionHelper _cpDefinitionHelper;
+	private final CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
+	private final CommerceOrderValidatorRegistry
+		_commerceOrderValidatorRegistry;
+	private final CommerceProductPriceCalculation
+		_commerceProductPriceCalculation;
+	private final CPInstanceHelper _cpInstanceHelper;
 	private SearchContainer<CommerceOrderItem> _searchContainer;
 
 }

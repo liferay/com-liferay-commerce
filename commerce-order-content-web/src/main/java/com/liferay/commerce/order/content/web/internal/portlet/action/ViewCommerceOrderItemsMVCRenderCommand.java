@@ -15,8 +15,12 @@
 package com.liferay.commerce.order.content.web.internal.portlet.action;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
+import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.content.web.internal.display.context.CommerceOrderItemContentDisplayContext;
+import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -61,7 +65,10 @@ public class ViewCommerceOrderItemsMVCRenderCommand
 				commerceOrderItemContentDisplayContext =
 					new CommerceOrderItemContentDisplayContext(
 						httpServletRequest, _commerceOrderLocalService,
-						_commerceOrderItemLocalService, _cpDefinitionHelper);
+						_commerceOrderItemLocalService,
+						_commerceOrderPriceCalculation,
+						_commerceOrderValidatorRegistry,
+						_commerceProductPriceCalculation, _cpInstanceHelper);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -81,7 +88,19 @@ public class ViewCommerceOrderItemsMVCRenderCommand
 	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Reference
+	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
+
+	@Reference
+	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
+
+	@Reference
+	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
+
+	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;
+
+	@Reference
+	private CPInstanceHelper _cpInstanceHelper;
 
 	@Reference
 	private Portal _portal;
