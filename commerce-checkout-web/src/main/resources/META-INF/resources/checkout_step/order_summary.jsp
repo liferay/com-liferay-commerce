@@ -17,27 +17,30 @@
 <%@ include file="/init.jsp" %>
 
 <%
-	OrderSummaryCheckoutStepDisplayContext orderSummaryCheckoutStepDisplayContext = (OrderSummaryCheckoutStepDisplayContext)request.getAttribute(CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT);
+OrderSummaryCheckoutStepDisplayContext orderSummaryCheckoutStepDisplayContext = (OrderSummaryCheckoutStepDisplayContext)request.getAttribute(CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT);
 
-	CommerceOrder commerceOrder = orderSummaryCheckoutStepDisplayContext.getCommerceOrder();
-	CommerceOrderPrice commerceOrderPrice = orderSummaryCheckoutStepDisplayContext.getCommerceOrderPrice();
+CommerceOrder commerceOrder = orderSummaryCheckoutStepDisplayContext.getCommerceOrder();
+CommerceOrderPrice commerceOrderPrice = orderSummaryCheckoutStepDisplayContext.getCommerceOrderPrice();
 
-	CommerceDiscountValue shippingDiscountValue = commerceOrderPrice.getShippingDiscountValue();
-	CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
-	CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
-	CommerceDiscountValue subtotalDiscountValue = commerceOrderPrice.getSubtotalDiscountValue();
-	CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
-	CommerceDiscountValue totalDiscountValue = commerceOrderPrice.getTotalDiscountValue();
-	CommerceMoney totalOrder = commerceOrderPrice.getTotal();
-	String commercePaymentMethodName = StringPool.BLANK;
-	CommercePaymentMethod commercePaymentMethod = commerceOrder.getCommercePaymentMethod();
+CommerceDiscountValue shippingDiscountValue = commerceOrderPrice.getShippingDiscountValue();
+CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
+CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
+CommerceDiscountValue subtotalDiscountValue = commerceOrderPrice.getSubtotalDiscountValue();
+CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
+CommerceDiscountValue totalDiscountValue = commerceOrderPrice.getTotalDiscountValue();
+CommerceMoney totalOrder = commerceOrderPrice.getTotal();
 
-	if (commercePaymentMethod != null) {
-		commercePaymentMethodName = commercePaymentMethod.getName(locale);
-	}
+String commercePaymentMethodName = StringPool.BLANK;
 
-	String commerceShippingOptionName = commerceOrder.getShippingOptionName();
-	Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = orderSummaryCheckoutStepDisplayContext.getCommerceOrderValidatorResults();
+CommercePaymentMethod commercePaymentMethod = commerceOrder.getCommercePaymentMethod();
+
+if (commercePaymentMethod != null) {
+	commercePaymentMethodName = commercePaymentMethod.getName(locale);
+}
+
+String commerceShippingOptionName = commerceOrder.getShippingOptionName();
+
+Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = orderSummaryCheckoutStepDisplayContext.getCommerceOrderValidatorResults();
 %>
 
 <div class="commerce-order-summary">
@@ -75,8 +78,9 @@
 					>
 
 						<%
-							CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
-							String thumbnailSrc = orderSummaryCheckoutStepDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem, themeDisplay);
+						CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
+
+						String thumbnailSrc = orderSummaryCheckoutStepDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem, themeDisplay);
 						%>
 
 						<liferay-ui:search-container-column-image
@@ -97,37 +101,38 @@
 								</div>
 
 								<%
-									List<KeyValuePair> keyValuePairs = orderSummaryCheckoutStepDisplayContext.getKeyValuePairs(commerceOrderItem.getJson(), locale);
-									StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
+								List<KeyValuePair> keyValuePairs = orderSummaryCheckoutStepDisplayContext.getKeyValuePairs(commerceOrderItem.getJson(), locale);
 
-									for (KeyValuePair keyValuePair : keyValuePairs) {
-										stringJoiner.add(keyValuePair.getValue());
-									}
+								StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
+
+								for (KeyValuePair keyValuePair : keyValuePairs) {
+									stringJoiner.add(keyValuePair.getValue());
+								}
 								%>
 
-								<div class="list-group-subtitle">SKU: <%= HtmlUtil.escape(stringJoiner.toString()) %></div>
+								<div class="list-group-subtitle"><%= HtmlUtil.escape(stringJoiner.toString()) %></div>
 
 								<c:if test="<%= !commerceOrderValidatorResultMap.isEmpty() %>">
 
 									<%
-										List<CommerceOrderValidatorResult> commerceOrderValidatorResults = commerceOrderValidatorResultMap.get(commerceOrderItem.getCommerceOrderItemId());
+									List<CommerceOrderValidatorResult> commerceOrderValidatorResults = commerceOrderValidatorResultMap.get(commerceOrderItem.getCommerceOrderItemId());
 
-										for (CommerceOrderValidatorResult commerceOrderValidatorResult : commerceOrderValidatorResults) {
+									for (CommerceOrderValidatorResult commerceOrderValidatorResult : commerceOrderValidatorResults) {
 									%>
 
-									<div class="alert-danger commerce-alert-danger">
-										<c:choose>
-											<c:when test="<%= commerceOrderValidatorResult.hasArgument() %>">
-												<liferay-ui:message arguments="<%= commerceOrderValidatorResult.getArgument() %>" key="<%= commerceOrderValidatorResult.getMessage() %>" />
-											</c:when>
-											<c:otherwise>
-												<liferay-ui:message key="<%= commerceOrderValidatorResult.getMessage() %>" />
-											</c:otherwise>
-										</c:choose>
-									</div>
+										<div class="alert-danger commerce-alert-danger">
+											<c:choose>
+												<c:when test="<%= commerceOrderValidatorResult.hasArgument() %>">
+													<liferay-ui:message arguments="<%= commerceOrderValidatorResult.getArgument() %>" key="<%= commerceOrderValidatorResult.getMessage() %>" />
+												</c:when>
+												<c:otherwise>
+													<liferay-ui:message key="<%= commerceOrderValidatorResult.getMessage() %>" />
+												</c:otherwise>
+											</c:choose>
+										</div>
 
 									<%
-										}
+									}
 									%>
 
 								</c:if>
@@ -143,11 +148,11 @@
 						</liferay-ui:search-container-column-text>
 
 						<%
-							CommerceProductPrice commerceProductPrice = orderSummaryCheckoutStepDisplayContext.getCommerceProductPrice(commerceOrderItem);
+						CommerceProductPrice commerceProductPrice = orderSummaryCheckoutStepDisplayContext.getCommerceProductPrice(commerceOrderItem);
 
-							CommerceDiscountValue discountValue = commerceProductPrice.getDiscountValue();
-							CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
-							CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+						CommerceDiscountValue discountValue = commerceProductPrice.getDiscountValue();
+						CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+						CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 						%>
 
 						<liferay-ui:search-container-column-text
@@ -161,11 +166,11 @@
 						</liferay-ui:search-container-column-text>
 
 						<%
-							CommerceMoney discountAmount = null;
+						CommerceMoney discountAmount = null;
 
-							if (discountValue != null) {
-								discountAmount = discountValue.getDiscountAmount();
-							}
+						if (discountValue != null) {
+							discountAmount = discountValue.getDiscountAmount();
+						}
 						%>
 
 						<liferay-ui:search-container-column-text
@@ -209,7 +214,7 @@
 						<c:if test="<%= subtotalDiscountValue != null %>">
 
 							<%
-								CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
+							CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
 							%>
 
 							<div class="autofit-col autofit-col-expand">
@@ -238,7 +243,7 @@
 					<c:if test="<%= shippingDiscountValue != null %>">
 
 						<%
-							CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount();
+						CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount();
 						%>
 
 						<div class="autofit-col autofit-col-expand">
@@ -267,7 +272,7 @@
 					<c:if test="<%= totalDiscountValue != null %>">
 
 						<%
-							CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount();
+						CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount();
 						%>
 
 						<div class="autofit-col autofit-col-expand">
@@ -297,7 +302,7 @@
 		<aui:col cssClass="commerce-checkout-info" width="<%= 30 %>">
 
 			<%
-				CommerceAddress shippingAddress = commerceOrder.getShippingAddress();
+			CommerceAddress shippingAddress = commerceOrder.getShippingAddress();
 			%>
 
 			<c:if test="<%= shippingAddress != null %>">
@@ -307,7 +312,7 @@
 					</h5>
 
 					<%
-						request.setAttribute("address.jsp-commerceAddress", shippingAddress);
+					request.setAttribute("address.jsp-commerceAddress", shippingAddress);
 					%>
 
 					<%= shippingAddress.getName() %> <br />
@@ -324,7 +329,7 @@
 					<%= shippingAddress.getCity() %> <br />
 
 					<%
-						CommerceCountry commerceCountry = shippingAddress.getCommerceCountry();
+					CommerceCountry commerceCountry = shippingAddress.getCommerceCountry();
 					%>
 
 					<c:if test="<%= commerceCountry != null %>">
@@ -351,8 +356,6 @@
 				<h5>
 					<liferay-ui:message key="payment" />
 				</h5>
-
-				<img src="" />
 
 				<div class="shipping-description">
 					<%= HtmlUtil.escape(commercePaymentMethodName) %>
