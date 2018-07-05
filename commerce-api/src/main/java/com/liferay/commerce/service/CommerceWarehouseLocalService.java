@@ -214,6 +214,9 @@ public interface CommerceWarehouseLocalService extends BaseLocalService,
 	public List<CommerceWarehouse> getCommerceWarehouses(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceWarehouse> getCommerceWarehouses(long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWarehouse> getCommerceWarehouses(long groupId,
 		boolean active, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator);

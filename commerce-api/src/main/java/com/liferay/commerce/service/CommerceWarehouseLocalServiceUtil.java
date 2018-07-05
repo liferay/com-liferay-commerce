@@ -243,6 +243,11 @@ public class CommerceWarehouseLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
+		long groupId) {
+		return getService().getCommerceWarehouses(groupId);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
 		long groupId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouse> orderByComparator) {
 		return getService()

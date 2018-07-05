@@ -276,6 +276,12 @@ public class CPMeasurementUnitLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
+		long groupId) {
+		return _cpMeasurementUnitLocalService.getCPMeasurementUnits(groupId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
 		long groupId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator) {
 		return _cpMeasurementUnitLocalService.getCPMeasurementUnits(groupId,
