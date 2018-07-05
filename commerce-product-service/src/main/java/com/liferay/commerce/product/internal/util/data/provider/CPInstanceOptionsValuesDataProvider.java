@@ -16,6 +16,7 @@ package com.liferay.commerce.product.internal.util.data.provider;
 
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
+import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProvider;
@@ -100,7 +101,7 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			Map<String, String> filters = new HashMap<>();
 
 			List<CPDefinitionOptionRel> cpDefinitionOptionRels =
-				_cpDefinitionOptionRelService.getCPDefinitionOptionRels(
+				_cpDefinitionOptionRelLocalService.getCPDefinitionOptionRels(
 					cpDefinitionId, true);
 
 			for (CPDefinitionOptionRel cpDefinitionOptionRel :
@@ -192,7 +193,8 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 		CPInstanceOptionsValuesDataProvider.class);
 
 	@Reference
-	private CPDefinitionOptionRelService _cpDefinitionOptionRelService;
+	private CPDefinitionOptionRelLocalService
+		_cpDefinitionOptionRelLocalService;
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
