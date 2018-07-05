@@ -144,6 +144,11 @@ public class CommerceWarehouseLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceWarehouse> getCommerceWarehouses(long groupId) {
+		return commerceWarehousePersistence.findByGroupId(groupId);
+	}
+
+	@Override
 	public List<CommerceWarehouse> getCommerceWarehouses(
 		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator) {

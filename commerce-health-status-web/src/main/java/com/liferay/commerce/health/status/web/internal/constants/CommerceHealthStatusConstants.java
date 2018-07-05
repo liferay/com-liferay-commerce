@@ -42,6 +42,12 @@ public class CommerceHealthStatusConstants {
 		COMMERCE_WISH_LIST_CONTENT_COMMERCE_HEALTH_STATUS_KEY =
 			"commerce.wish.list.content.commerce.health.status.key";
 
+	public static final String COUNTRIES_COMMERCE_HEALTH_STATUS_DESCRIPTION =
+		"countries.commerce.health.status.description";
+
+	public static final String COUNTRIES_COMMERCE_HEALTH_STATUS_KEY =
+		"countries.commerce.health.status.key";
+
 	public static final String
 		CP_COMPARE_CONTENT_COMMERCE_HEALTH_STATUS_DESCRIPTION =
 			"cp.compare.content.commerce.health.status.description";
@@ -54,5 +60,38 @@ public class CommerceHealthStatusConstants {
 
 	public static final String CP_CONTENT_COMMERCE_HEALTH_STATUS_KEY =
 		"cp.content.commerce.health.status.key";
+
+	public static final String CURRENCIES_COMMERCE_HEALTH_STATUS_DESCRIPTION =
+		"currencies.commerce.health.status.description";
+
+	public static final String CURRENCIES_COMMERCE_HEALTH_STATUS_KEY =
+		"currencies.commerce.health.status.key";
+
+	public static final String
+		MEASUREMENT_UNITS_COMMERCE_HEALTH_STATUS_DESCRIPTION =
+			"measurement.units.commerce.health.status.description";
+
+	public static final String MEASUREMENT_UNITS_COMMERCE_HEALTH_STATUS_KEY =
+		"measurement.units.commerce.health.status.key";
+
+	public static final String
+		ORGANIZATION_TYPES_COMMERCE_HEALTH_STATUS_DESCRIPTION =
+			"organization.types.commerce.health.status.description";
+
+	public static final String ORGANIZATION_TYPES_COMMERCE_HEALTH_STATUS_KEY =
+		"organization.types.commerce.health.status.key";
+
+	public static final String
+		USER_SEGMENTS_COMMERCE_HEALTH_STATUS_DESCRIPTION =
+			"user.segments.commerce.health.status.description";
+
+	public static final String USER_SEGMENTS_COMMERCE_HEALTH_STATUS_KEY =
+		"user.segments.commerce.health.status.key";
+
+	public static final String WAREHOUSES_COMMERCE_HEALTH_STATUS_DESCRIPTION =
+		"warehouses.commerce.health.status.description";
+
+	public static final String WAREHOUSES_COMMERCE_HEALTH_STATUS_KEY =
+		"warehouses.commerce.health.status.key";
 
 }

@@ -38,26 +38,6 @@ import org.osgi.service.component.annotations.Reference;
 public class GroupModelListener extends BaseModelListener<Group> {
 
 	@Override
-	public void onAfterCreate(Group group) throws ModelListenerException {
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setLanguageId(group.getDefaultLanguageId());
-		serviceContext.setScopeGroupId(group.getGroupId());
-		serviceContext.setUserId(group.getCreatorUserId());
-
-		try {
-			_commerceCountryLocalService.importDefaultCountries(serviceContext);
-			_commerceWarehouseLocalService.importDefaultCommerceWarehouse(
-				serviceContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	@Override
 	public void onBeforeRemove(Group group) {
 		try {
 			_commerceAvailabilityEstimateLocalService.

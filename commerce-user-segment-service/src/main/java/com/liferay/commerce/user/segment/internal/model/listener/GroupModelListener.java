@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.user.segment.internal.model.listner;
+package com.liferay.commerce.user.segment.internal.model.listener;
 
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
 import com.liferay.portal.kernel.exception.ModelListenerException;
@@ -32,26 +32,6 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = ModelListener.class)
 public class GroupModelListener extends BaseModelListener<Group> {
-
-	@Override
-	public void onAfterCreate(Group group) throws ModelListenerException {
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setCompanyId(group.getCompanyId());
-		serviceContext.setLanguageId(group.getDefaultLanguageId());
-		serviceContext.setScopeGroupId(group.getGroupId());
-		serviceContext.setUserId(group.getCreatorUserId());
-
-		try {
-			_commerceUserSegmentEntryLocalService.
-				importSystemCommerceUserSegmentEntries(serviceContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
 
 	@Override
 	public void onBeforeRemove(Group group) {
