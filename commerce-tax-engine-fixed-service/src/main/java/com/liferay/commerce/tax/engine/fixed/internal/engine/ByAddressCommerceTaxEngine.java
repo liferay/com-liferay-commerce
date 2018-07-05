@@ -22,11 +22,11 @@ import com.liferay.commerce.tax.CommerceTaxEngine;
 import com.liferay.commerce.tax.CommerceTaxValue;
 import com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel;
 import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
+
+import java.math.BigDecimal;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -53,29 +53,44 @@ public class ByAddressCommerceTaxEngine implements CommerceTaxEngine {
 		throws CommerceTaxEngineException {
 
 		CommerceTaxValue commerceTaxValue = null;
+		long commerceCountryId = 0;
+		long commerceRegionId = 0;
+		String zip = StringPool.BLANK;
 
-		try {
-			CommerceAddress commerceAddress =
-				_commerceAddressLocalService.getCommerceAddress(
-					commerceTaxCalculateRequest.getCommerceAddressId());
+		CommerceAddress commerceAddress =
+			_commerceAddressLocalService.fetchCommerceAddress(
+				commerceTaxCalculateRequest.getCommerceAddressId());
 
-			CommerceTaxFixedRateAddressRel commerceTaxFixedRateAddressRel =
-				_commerceTaxFixedRateAddressRelLocalService.
-					fetchCommerceTaxFixedRateAddressRel(
-						commerceTaxCalculateRequest.getCommerceTaxMethodId(),
-						commerceAddress.getCommerceCountryId(),
-						commerceAddress.getCommerceRegionId(),
-						commerceAddress.getZip());
-
-			if (commerceTaxFixedRateAddressRel == null) {
-				return null;
-			}
+		if (commerceAddress != null) {
+			commerceCountryId = commerceAddress.getCommerceCountryId();
+			commerceRegionId = commerceAddress.getCommerceRegionId();
+			zip = commerceAddress.getZip();
 		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
 
-			throw new CommerceTaxEngineException(pe);
+		CommerceTaxFixedRateAddressRel commerceTaxFixedRateAddressRel =
+			_commerceTaxFixedRateAddressRelLocalService.
+				fetchCommerceTaxFixedRateAddressRel(
+					commerceTaxCalculateRequest.getCommerceTaxMethodId(),
+					commerceCountryId, commerceRegionId, zip);
+
+		if (commerceTaxFixedRateAddressRel == null) {
+			return null;
 		}
+
+		BigDecimal rate = BigDecimal.valueOf(
+			commerceTaxFixedRateAddressRel.getRate());
+
+		BigDecimal amount = commerceTaxCalculateRequest.getPrice();
+
+		BigDecimal taxValue = rate;
+
+		if (commerceTaxCalculateRequest.isPercentage()) {
+			taxValue = amount.multiply(rate);
+
+			taxValue = taxValue.divide(_ONE_HUNDRED);
+		}
+
+		commerceTaxValue = new CommerceTaxValue(KEY, KEY, taxValue);
 
 		return commerceTaxValue;
 	}
@@ -100,8 +115,7 @@ public class ByAddressCommerceTaxEngine implements CommerceTaxEngine {
 			"content.Language", locale, getClass());
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		ByAddressCommerceTaxEngine.class);
+	private static final BigDecimal _ONE_HUNDRED = BigDecimal.valueOf(100);
 
 	@Reference
 	private CommerceAddressLocalService _commerceAddressLocalService;

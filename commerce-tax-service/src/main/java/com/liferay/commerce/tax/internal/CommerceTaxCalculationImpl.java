@@ -72,23 +72,23 @@ public class CommerceTaxCalculationImpl implements CommerceTaxCalculation {
 				commerceOrderItem.getFinalPrice(), commerceContext);
 
 			for (CommerceTaxValue commerceTaxValue : commerceTaxValues) {
-				CommerceTaxValue agregatedCommerceTaxValue = null;
+				CommerceTaxValue aggregatedCommerceTaxValue = null;
 
 				BigDecimal amount = commerceTaxValue.getAmount();
 
 				if (taxValueMap.containsKey(commerceTaxValue.getName())) {
-					agregatedCommerceTaxValue = taxValueMap.get(
+					aggregatedCommerceTaxValue = taxValueMap.get(
 						commerceTaxValue.getName());
 
-					amount = amount.add(agregatedCommerceTaxValue.getAmount());
+					amount = amount.add(aggregatedCommerceTaxValue.getAmount());
 				}
 
-				agregatedCommerceTaxValue = new CommerceTaxValue(
+				aggregatedCommerceTaxValue = new CommerceTaxValue(
 					commerceTaxValue.getName(), commerceTaxValue.getLabel(),
 					amount);
 
 				taxValueMap.put(
-					commerceTaxValue.getName(), agregatedCommerceTaxValue);
+					commerceTaxValue.getName(), aggregatedCommerceTaxValue);
 			}
 		}
 
@@ -142,7 +142,9 @@ public class CommerceTaxCalculationImpl implements CommerceTaxCalculation {
 					commerceTaxEngine.getCommerceTaxValue(
 						commerceTaxCalculateRequest);
 
-				commerceTaxValues.add(commerceTaxValue);
+				if (commerceTaxValue != null) {
+					commerceTaxValues.add(commerceTaxValue);
+				}
 			}
 			catch (CommerceTaxEngineException ctee) {
 				_log.error(ctee, ctee);
