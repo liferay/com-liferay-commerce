@@ -110,17 +110,17 @@ public class CPMeasurementUnitLocalServiceImpl
 	}
 
 	@Override
+	public List<CPMeasurementUnit> getCPMeasurementUnits(long groupId) {
+		return cpMeasurementUnitPersistence.findByGroupId(groupId);
+	}
+
+	@Override
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
 		long groupId, int type, int start, int end,
 		OrderByComparator<CPMeasurementUnit> orderByComparator) {
 
 		return cpMeasurementUnitPersistence.findByG_T(
 			groupId, type, start, end, orderByComparator);
-	}
-
-	@Override
-	public  List<CPMeasurementUnit> getCPMeasurementUnits(long groupId) {
-		return cpMeasurementUnitPersistence.findByGroupId(groupId);
 	}
 
 	@Override

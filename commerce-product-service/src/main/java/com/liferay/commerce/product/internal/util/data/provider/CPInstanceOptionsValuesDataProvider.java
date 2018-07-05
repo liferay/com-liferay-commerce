@@ -17,7 +17,6 @@ package com.liferay.commerce.product.internal.util.data.provider;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
-import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProvider;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContext;

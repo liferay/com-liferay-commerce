@@ -16,8 +16,6 @@ package com.liferay.commerce.health.status.web.internal.util;
 
 import com.liferay.commerce.health.status.CommerceHealthStatus;
 import com.liferay.commerce.health.status.web.internal.constants.CommerceHealthStatusConstants;
-import com.liferay.commerce.product.model.CPMeasurementUnit;
-import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -25,21 +23,20 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.OrganizationConstants;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+
+import java.util.Dictionary;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Dictionary;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 /**
  * @author Alessio Antonio Rendina
@@ -68,7 +65,7 @@ public class OrganizationTypesCommerceHealthStatus
 				Dictionary<String, Object> properties =
 					configuration.getProperties();
 
-				String name = (String) properties.get("name");
+				String name = (String)properties.get("name");
 
 				if (name.equals(OrganizationConstants.TYPE_ORGANIZATION)) {
 					properties.put("childrenTypes", _CHILDREN_TYPES);
@@ -130,15 +127,14 @@ public class OrganizationTypesCommerceHealthStatus
 		return sb.toString();
 	}
 
-	private static final String[] _CHILDREN_TYPES =
-		new String[] {"account", "organization"};
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		OrganizationTypesCommerceHealthStatus.class);
+	private static final String[] _CHILDREN_TYPES = {"account", "organization"};
 
 	private static final String _ORGANIZATION_TYPE_CONFIGURATION_PID =
 		"com.liferay.organizations.service.internal.configuration." +
 			"OrganizationTypeConfiguration";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		OrganizationTypesCommerceHealthStatus.class);
 
 	@Reference
 	private ConfigurationAdmin _configurationAdmin;

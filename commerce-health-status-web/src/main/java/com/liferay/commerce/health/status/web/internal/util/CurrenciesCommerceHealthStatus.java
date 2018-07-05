@@ -18,8 +18,6 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.health.status.CommerceHealthStatus;
 import com.liferay.commerce.health.status.web.internal.constants.CommerceHealthStatusConstants;
-import com.liferay.commerce.model.CommerceWarehouse;
-import com.liferay.commerce.service.CommerceWarehouseLocalService;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -28,13 +26,15 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
@@ -56,7 +56,7 @@ public class CurrenciesCommerceHealthStatus implements CommerceHealthStatus {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			httpServletRequest);
 
-		try	{
+		try {
 			_commerceCurrencyLocalService.importDefaultValues(serviceContext);
 		}
 		catch (Exception e) {
