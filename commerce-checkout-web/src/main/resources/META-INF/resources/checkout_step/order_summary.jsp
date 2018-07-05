@@ -32,18 +32,14 @@ CommerceDiscountValue totalDiscountValue = commerceOrderPrice.getTotalDiscountVa
 CommerceMoney totalOrder = commerceOrderPrice.getTotal();
 
 String commercePaymentMethodName = StringPool.BLANK;
-String commerceShippingMethodName = StringPool.BLANK;
 
 CommercePaymentMethod commercePaymentMethod = commerceOrder.getCommercePaymentMethod();
-CommerceShippingMethod commerceShippingMethod = commerceOrder.getCommerceShippingMethod();
 
 if (commercePaymentMethod != null) {
 	commercePaymentMethodName = commercePaymentMethod.getName(locale);
 }
 
-if (commerceShippingMethod != null) {
-	commerceShippingMethodName = commerceShippingMethod.getName(locale);
-}
+String commerceShippingOptionName = commerceOrder.getShippingOptionName();
 
 Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = orderSummaryCheckoutStepDisplayContext.getCommerceOrderValidatorResults();
 %>
@@ -311,7 +307,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 				</h5>
 
 				<div class="shipping-description">
-					<%= HtmlUtil.escape(commerceShippingMethodName) %>
+					<%= HtmlUtil.escape(commerceShippingOptionName) %>
 				</div>
 
 				<div class="shipping-cost">
