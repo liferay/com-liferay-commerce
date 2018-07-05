@@ -49,8 +49,8 @@ public abstract class BaseCommerceOrderContentDisplayContext<T> {
 	}
 
 	public CommerceOrder getCommerceOrder() {
-		return
-			commerceOrderLocalService.fetchCommerceOrder(getCommerceOrderId());
+		return commerceOrderLocalService.fetchCommerceOrder(
+			getCommerceOrderId());
 	}
 
 	public long getCommerceOrderId() {

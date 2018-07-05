@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.order.content.web.internal.display.context;
 
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -23,6 +24,7 @@ import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -69,15 +71,19 @@ public class CommerceOrderContentDisplayContext
 		return portletURL.toString();
 	}
 
-	public String getCommerceOrderTotal(long commerceOrderId)
+	public String getCommerceOrderStatus(CommerceOrder commerceOrder) {
+		return LanguageUtil.get(
+			httpServletRequest,
+			CommerceOrderConstants.getOrderStatusLabel(
+				commerceOrder.getOrderStatus()));
+	}
+
+	public String getCommerceOrderTotal(CommerceOrder commerceOrder)
 		throws PortalException {
 
 		CommerceContext commerceContext =
 			(CommerceContext)httpServletRequest.getAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT);
-
-		CommerceOrder commerceOrder =
-			commerceOrderLocalService.fetchCommerceOrder(commerceOrderId);
 
 		CommerceMoney total = _commerceOrderPriceCalculation.getTotal(
 			commerceOrder, commerceContext);
