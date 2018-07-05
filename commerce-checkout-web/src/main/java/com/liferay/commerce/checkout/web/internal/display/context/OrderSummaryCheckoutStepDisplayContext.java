@@ -85,7 +85,7 @@ public class OrderSummaryCheckoutStepDisplayContext {
 
 	public String getCommerceOrderItemThumbnailSrc(
 			CommerceOrderItem commerceOrderItem, ThemeDisplay themeDisplay)
-			throws Exception {
+		throws Exception {
 
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
 			_cpInstanceHelper.getCPAttachmentFileEntries(

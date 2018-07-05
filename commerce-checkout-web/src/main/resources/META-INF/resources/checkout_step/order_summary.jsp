@@ -18,8 +18,10 @@
 
 <%
 	OrderSummaryCheckoutStepDisplayContext orderSummaryCheckoutStepDisplayContext = (OrderSummaryCheckoutStepDisplayContext)request.getAttribute(CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT);
+
 	CommerceOrder commerceOrder = orderSummaryCheckoutStepDisplayContext.getCommerceOrder();
 	CommerceOrderPrice commerceOrderPrice = orderSummaryCheckoutStepDisplayContext.getCommerceOrderPrice();
+
 	CommerceDiscountValue shippingDiscountValue = commerceOrderPrice.getShippingDiscountValue();
 	CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
 	CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
@@ -29,9 +31,11 @@
 	CommerceMoney totalOrder = commerceOrderPrice.getTotal();
 	String commercePaymentMethodName = StringPool.BLANK;
 	CommercePaymentMethod commercePaymentMethod = commerceOrder.getCommercePaymentMethod();
+
 	if (commercePaymentMethod != null) {
 		commercePaymentMethodName = commercePaymentMethod.getName(locale);
 	}
+
 	String commerceShippingOptionName = commerceOrder.getShippingOptionName();
 	Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = orderSummaryCheckoutStepDisplayContext.getCommerceOrderValidatorResults();
 %>
@@ -56,18 +60,18 @@
 
 			<div class="commerce-checkout-summary-body" id="<portlet:namespace />entriesContainer">
 				<liferay-ui:search-container
-						cssClass="list-group-flush"
-						id="commerceOrderItems"
+					cssClass="list-group-flush"
+					id="commerceOrderItems"
 				>
 					<liferay-ui:search-container-results
-							results="<%= commerceOrder.getCommerceOrderItems() %>"
+						results="<%= commerceOrder.getCommerceOrderItems() %>"
 					/>
 
 					<liferay-ui:search-container-row
-							className="com.liferay.commerce.model.CommerceOrderItem"
-							cssClass="entry-display-style"
-							keyProperty="CommerceOrderItemId"
-							modelVar="commerceOrderItem"
+						className="com.liferay.commerce.model.CommerceOrderItem"
+						cssClass="entry-display-style"
+						keyProperty="CommerceOrderItemId"
+						modelVar="commerceOrderItem"
 					>
 
 						<%
@@ -76,14 +80,14 @@
 						%>
 
 						<liferay-ui:search-container-column-image
-								cssClass="thumbnail-section"
-								name="image"
-								src="<%= thumbnailSrc %>"
+							cssClass="thumbnail-section"
+							name="image"
+							src="<%= thumbnailSrc %>"
 						/>
 
 						<liferay-ui:search-container-column-text
-								cssClass="autofit-col-expand"
-								name="product"
+							cssClass="autofit-col-expand"
+							name="product"
 						>
 							<div class="description-section">
 								<div class="list-group-text">Brand</div>
@@ -95,6 +99,7 @@
 								<%
 									List<KeyValuePair> keyValuePairs = orderSummaryCheckoutStepDisplayContext.getKeyValuePairs(commerceOrderItem.getJson(), locale);
 									StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
+
 									for (KeyValuePair keyValuePair : keyValuePairs) {
 										stringJoiner.add(keyValuePair.getValue());
 									}
@@ -106,6 +111,7 @@
 
 									<%
 										List<CommerceOrderValidatorResult> commerceOrderValidatorResults = commerceOrderValidatorResultMap.get(commerceOrderItem.getCommerceOrderItemId());
+
 										for (CommerceOrderValidatorResult commerceOrderValidatorResult : commerceOrderValidatorResults) {
 									%>
 
@@ -129,7 +135,7 @@
 						</liferay-ui:search-container-column-text>
 
 						<liferay-ui:search-container-column-text
-								name="quantity"
+							name="quantity"
 						>
 							<div class="quantity-section">
 								<span class="commerce-quantity"><%= commerceOrderItem.getQuantity() %></span><span class="inline-item-after">x</span>
@@ -138,13 +144,14 @@
 
 						<%
 							CommerceProductPrice commerceProductPrice = orderSummaryCheckoutStepDisplayContext.getCommerceProductPrice(commerceOrderItem);
+
 							CommerceDiscountValue discountValue = commerceProductPrice.getDiscountValue();
 							CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 							CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 						%>
 
 						<liferay-ui:search-container-column-text
-								name="price"
+							name="price"
 						>
 							<div class="value-section">
 								<span class="commerce-value">
@@ -155,13 +162,14 @@
 
 						<%
 							CommerceMoney discountAmount = null;
+
 							if (discountValue != null) {
 								discountAmount = discountValue.getDiscountAmount();
 							}
 						%>
 
 						<liferay-ui:search-container-column-text
-								name="discount"
+							name="discount"
 						>
 							<div class="value-section">
 								<span class="commerce-value">
@@ -171,7 +179,7 @@
 						</liferay-ui:search-container-column-text>
 
 						<liferay-ui:search-container-column-text
-								name="final-price"
+							name="final-price"
 						>
 							<div class="value-section">
 								<span class="commerce-value">
@@ -182,9 +190,9 @@
 					</liferay-ui:search-container-row>
 
 					<liferay-ui:search-iterator
-							displayStyle="list"
-							markupView="lexicon"
-							paginate="<%= false %>"
+						displayStyle="list"
+						markupView="lexicon"
+						paginate="<%= false %>"
 					/>
 				</liferay-ui:search-container>
 			</div>
