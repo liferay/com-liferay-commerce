@@ -60,6 +60,8 @@ class AddToCart extends PortletBase {
 			(jsonresponse) => {
 				if (jsonresponse.success) {
 					Liferay.fire('commerce:productAddedToCart', jsonresponse);
+
+                    instance._showNotification(jsonresponse.successMessage, 'success');
 				}
 				else {
 					var validatorErrors = jsonresponse.validatorErrors;
