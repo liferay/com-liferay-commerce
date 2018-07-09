@@ -31,7 +31,7 @@ String type = BeanParamUtil.getString(cpRule, request, "type");
 
 <aui:form action="<%= editCPRuleActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCPRule();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (cpRule == null) ? Constants.ADD : Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="cpRuleId" type="hidden" value="<%= cpRuleId %>" />
 
 	<div class="lfr-form-content">
