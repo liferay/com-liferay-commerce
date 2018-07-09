@@ -109,7 +109,7 @@ public interface CommerceCountryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getShippingCommerceCountries(long groupId,
-		boolean shippingAllowed, boolean active) throws PortalException;
+		boolean shippingAllowed, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getWarehouseCommerceCountries(long groupId,
