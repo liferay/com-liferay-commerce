@@ -61,10 +61,8 @@ public class CommerceDiscountCalculationImpl
 
 	@Override
 	public CommerceDiscountValue getOrderShippingCommerceDiscountValue(
-			BigDecimal orderShippingCost, CommerceContext commerceContext)
+			CommerceOrder commerceOrder, CommerceContext commerceContext)
 		throws PortalException {
-
-		CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
 		if (commerceOrder == null) {
 			return null;
@@ -77,15 +75,17 @@ public class CommerceDiscountCalculationImpl
 			commerceContext.getCouponCode(), Type.APPLY_TO_SHIPPING);
 
 		return _getCommerceDiscountValue(
-			orderShippingCost, commerceContext, searchContext);
+			commerceOrder.getShippingAmount(), commerceContext, searchContext);
 	}
 
 	@Override
 	public CommerceDiscountValue getOrderSubtotalCommerceDiscountValue(
-			BigDecimal orderSubtotal, CommerceContext commerceContext)
+			CommerceOrder commerceOrder, CommerceContext commerceContext)
 		throws PortalException {
 
-		CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+		if (commerceOrder == null) {
+			return null;
+		}
 
 		SearchContext searchContext = buildSearchContext(
 			commerceOrder.getCompanyId(), commerceOrder.getSiteGroupId(), 0, 0,
@@ -94,15 +94,17 @@ public class CommerceDiscountCalculationImpl
 			commerceContext.getCouponCode(), Type.APPLY_TO_SUBTOTAL);
 
 		return _getCommerceDiscountValue(
-			orderSubtotal, commerceContext, searchContext);
+			commerceOrder.getSubtotal(), commerceContext, searchContext);
 	}
 
 	@Override
 	public CommerceDiscountValue getOrderTotalCommerceDiscountValue(
-			BigDecimal orderTotal, CommerceContext commerceContext)
+			CommerceOrder commerceOrder, CommerceContext commerceContext)
 		throws PortalException {
 
-		CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+		if (commerceOrder == null) {
+			return null;
+		}
 
 		SearchContext searchContext = buildSearchContext(
 			commerceOrder.getCompanyId(), commerceOrder.getSiteGroupId(), 0, 0,
@@ -111,7 +113,7 @@ public class CommerceDiscountCalculationImpl
 			commerceContext.getCouponCode(), Type.APPLY_TO_TOTAL);
 
 		return _getCommerceDiscountValue(
-			orderTotal, commerceContext, searchContext);
+			commerceOrder.getTotal(), commerceContext, searchContext);
 	}
 
 	@Override
