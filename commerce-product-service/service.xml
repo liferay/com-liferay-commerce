@@ -694,6 +694,7 @@
 		<column name="skuContributor" type="boolean" />
 		<column name="key" type="String" />
 		<column name="lastPublishDate" type="Date" />
+		<column name="externalReferenceCode" type="String" />
 
 		<!-- Order -->
 
@@ -709,6 +710,9 @@
 		<finder name="G_K" return-type="CPOption" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="key" />
+		</finder>
+		<finder name="ExternalReferenceCode" return-type="CPOption" unique="true">
+			<finder-column name="externalReferenceCode" />
 		</finder>
 
 		<!-- References -->
