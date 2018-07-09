@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -56,22 +57,21 @@ import org.osgi.service.component.annotations.Reference;
 public class JournalArticleDataCreatorImpl
 	implements JournalArticleDataCreator {
 
-	public static final String EMPTY_CONTENT =
-		"<?xml version=\"1.0\"?>" +
-			"<root available-locales=\"en_US\" default-locale=\"en_US\">" +
-				"<dynamic-element name=\"content\" type=\"text_area\" " +
-					"index-type=\"text\" instance-id=\"grgk\">" +
-						"<dynamic-content language-id=\"en_US\">" +
-							"<![CDATA[]]></dynamic-content>" +
-								"</dynamic-element>" + "</root>";
+	public static final String EMPTY_CONTENT = StringBundler.concat(
+		"<?xml version=\"1.0\"?>",
+		"<root available-locales=\"en_US\" default-locale=\"en_US\">",
+		"<dynamic-element name=\"content\" type=\"text_area\" ",
+		"index-type=\"text\" instance-id=\"grgk\">",
+		"<dynamic-content language-id=\"en_US\">",
+		"<![CDATA[]]></dynamic-content></dynamic-element></root>");
 
 	public static final String IMG_TAG =
 		"<img alt='' src='%s' data-fileentryid='%s' />";
 
-	public static final String IMG_TAG_DATA =
-		"<![CDATA[{\"groupId\":\"%s\",\"name\":\"%s\",\"alt\":\"\",\"title\":" +
-			"\"%s\",\"type\":\"journal\",\"uuid\":\"%s\",\"fileEntryId\":" +
-				"\"%s\",\"resourcePrimKey\":\"%s\"}]]>";
+	public static final String IMG_TAG_DATA = StringBundler.concat(
+		"<![CDATA[{\"groupId\":\"%s\",\"name\":\"%s\",\"alt\":\"\",\"title\":",
+		"\"%s\",\"type\":\"journal\",\"uuid\":\"%s\",\"fileEntryId\":",
+		"\"%s\",\"resourcePrimKey\":\"%s\"}]]>");
 
 	public static final String LOCALE_PLACEHOLDER = "[$LOCALE$]";
 
@@ -231,7 +231,7 @@ public class JournalArticleDataCreatorImpl
 				String fileName = placeHolder.substring(
 					2, placeHolder.length() - 2);
 
-				if (fileName != null && !fileName.isEmpty()) {
+				if ((fileName != null) && !fileName.isEmpty()) {
 					FileEntry fileEntry = fetchOrAddFileEntry(
 						classLoader, dependenciesFilePath, fileName,
 						serviceContext);

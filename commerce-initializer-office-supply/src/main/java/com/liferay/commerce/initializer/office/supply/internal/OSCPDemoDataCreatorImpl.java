@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.InputStream;
@@ -198,8 +199,10 @@ public class OSCPDemoDataCreatorImpl implements CPDemoDataCreator {
 						else {
 							if (_log.isWarnEnabled()) {
 								_log.warn(
-									"Image:" + imageFileName + " does not exists for category:" +
-										categoryJSONObject.getString("key"));
+									StringBundler.concat(
+										"Image:", imageFileName,
+										" does not exists for category:",
+										categoryJSONObject.getString("key")));
 							}
 						}
 					}
@@ -243,8 +246,8 @@ public class OSCPDemoDataCreatorImpl implements CPDemoDataCreator {
 			JSONArray cpAttachmentFileEntriesJSONArray =
 				productJSONObject.getJSONArray("images");
 
-			for (int j =
-			 0; j < cpAttachmentFileEntriesJSONArray.length(); j++) {
+			for (int j = 0; j < cpAttachmentFileEntriesJSONArray.length();
+				j++) {
 
 				String fileName = cpAttachmentFileEntriesJSONArray.getString(j);
 
@@ -260,8 +263,10 @@ public class OSCPDemoDataCreatorImpl implements CPDemoDataCreator {
 				else {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Image:" + fileName + " does not exists for product:" +
-								cpDefinitionId);
+							StringBundler.concat(
+								"Image:", fileName,
+								" does not exists for product:",
+								String.valueOf(cpDefinitionId)));
 					}
 				}
 			}
@@ -287,7 +292,8 @@ public class OSCPDemoDataCreatorImpl implements CPDemoDataCreator {
 	}
 
 	private String _getCatalogPath() {
-		return "com/liferay/commerce/initializer/internal/dependencies/data/catalog.json";
+		return "com/liferay/commerce/initializer/internal" +
+			"/dependencies/data/catalog.json";
 	}
 
 	private String _getImagesPath() {
