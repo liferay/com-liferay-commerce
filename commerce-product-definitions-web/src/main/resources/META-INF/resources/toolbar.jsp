@@ -22,81 +22,83 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId", "cp
 CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
-<liferay-frontend:management-bar
-	includeCheckBox="<%= true %>"
-	searchContainerId="<%= searchContainerId %>"
->
-	<liferay-frontend:management-bar-buttons>
-		<c:if test="<%= cpDefinitionsDisplayContext.isShowInfoPanel() %>">
+<div class="definition-toolbar-managment-bar">
+	<liferay-frontend:management-bar
+		includeCheckBox="<%= true %>"
+		searchContainerId="<%= searchContainerId %>"
+	>
+		<liferay-frontend:management-bar-buttons>
+			<c:if test="<%= cpDefinitionsDisplayContext.isShowInfoPanel() %>">
+				<liferay-frontend:management-bar-sidenav-toggler-button
+					icon="info-circle"
+					label="info"
+				/>
+			</c:if>
+
+			<liferay-frontend:management-bar-display-buttons
+				displayViews='<%= new String[] {"icon", "descriptive", "list"} %>'
+				portletURL="<%= cpDefinitionsDisplayContext.getPortletURL() %>"
+				selectedDisplayStyle="<%= cpDefinitionsDisplayContext.getDisplayStyle() %>"
+			/>
+
+			<liferay-frontend:add-menu
+				inline="<%= true %>"
+			>
+
+				<%
+				for (CPType curCPType : cpDefinitionsDisplayContext.getCPTypes()) {
+				%>
+
+					<liferay-portlet:renderURL var="addProductDefinitionURL">
+						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
+						<portlet:param name="mvcRenderCommandName" value="editProductDefinition" />
+						<portlet:param name="backURL" value="<%= PortalUtil.getCurrentCompleteURL(request) %>" />
+						<portlet:param name="productTypeName" value="<%= curCPType.getName() %>" />
+					</liferay-portlet:renderURL>
+
+					<liferay-frontend:add-menu-item
+						title="<%= curCPType.getLabel(locale) %>"
+						url="<%= addProductDefinitionURL.toString() %>"
+					/>
+
+				<%
+				}
+				%>
+
+			</liferay-frontend:add-menu>
+		</liferay-frontend:management-bar-buttons>
+
+		<liferay-frontend:management-bar-filters>
+			<liferay-frontend:management-bar-sort
+				orderByCol="<%= cpDefinitionsDisplayContext.getOrderByCol() %>"
+				orderByType="<%= cpDefinitionsDisplayContext.getOrderByType() %>"
+				orderColumns='<%= new String[] {"modified-date", "display-date", "name"} %>'
+				portletURL="<%= cpDefinitionsDisplayContext.getPortletURL() %>"
+			/>
+
+			<li>
+				<aui:form action="<%= String.valueOf(cpDefinitionsDisplayContext.getPortletURL()) %>" name="searchFm">
+					<liferay-ui:input-search
+						markupView="lexicon"
+					/>
+				</aui:form>
+			</li>
+		</liferay-frontend:management-bar-filters>
+
+		<liferay-frontend:management-bar-action-buttons>
 			<liferay-frontend:management-bar-sidenav-toggler-button
 				icon="info-circle"
 				label="info"
 			/>
-		</c:if>
 
-		<liferay-frontend:management-bar-display-buttons
-			displayViews='<%= new String[] {"icon", "descriptive", "list"} %>'
-			portletURL="<%= cpDefinitionsDisplayContext.getPortletURL() %>"
-			selectedDisplayStyle="<%= cpDefinitionsDisplayContext.getDisplayStyle() %>"
-		/>
-
-		<liferay-frontend:add-menu
-			inline="<%= true %>"
-		>
-
-			<%
-			for (CPType curCPType : cpDefinitionsDisplayContext.getCPTypes()) {
-			%>
-
-				<liferay-portlet:renderURL var="addProductDefinitionURL">
-					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
-					<portlet:param name="mvcRenderCommandName" value="editProductDefinition" />
-					<portlet:param name="backURL" value="<%= PortalUtil.getCurrentCompleteURL(request) %>" />
-					<portlet:param name="productTypeName" value="<%= curCPType.getName() %>" />
-				</liferay-portlet:renderURL>
-
-				<liferay-frontend:add-menu-item
-					title="<%= curCPType.getLabel(locale) %>"
-					url="<%= addProductDefinitionURL.toString() %>"
-				/>
-
-			<%
-			}
-			%>
-
-		</liferay-frontend:add-menu>
-	</liferay-frontend:management-bar-buttons>
-
-	<liferay-frontend:management-bar-filters>
-		<liferay-frontend:management-bar-sort
-			orderByCol="<%= cpDefinitionsDisplayContext.getOrderByCol() %>"
-			orderByType="<%= cpDefinitionsDisplayContext.getOrderByType() %>"
-			orderColumns='<%= new String[] {"modified-date", "display-date", "name"} %>'
-			portletURL="<%= cpDefinitionsDisplayContext.getPortletURL() %>"
-		/>
-
-		<li>
-			<aui:form action="<%= String.valueOf(cpDefinitionsDisplayContext.getPortletURL()) %>" name="searchFm">
-				<liferay-ui:input-search
-					markupView="lexicon"
-				/>
-			</aui:form>
-		</li>
-	</liferay-frontend:management-bar-filters>
-
-	<liferay-frontend:management-bar-action-buttons>
-		<liferay-frontend:management-bar-sidenav-toggler-button
-			icon="info-circle"
-			label="info"
-		/>
-
-		<liferay-frontend:management-bar-button
-			href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCPDefinitions();" %>'
-			icon='<%= TrashUtil.isTrashEnabled(scopeGroupId) ? "trash" : "times" %>'
-			label='<%= TrashUtil.isTrashEnabled(scopeGroupId) ? "recycle-bin" : "delete" %>'
-		/>
-	</liferay-frontend:management-bar-action-buttons>
-</liferay-frontend:management-bar>
+			<liferay-frontend:management-bar-button
+				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCPDefinitions();" %>'
+				icon='<%= TrashUtil.isTrashEnabled(scopeGroupId) ? "trash" : "times" %>'
+				label='<%= TrashUtil.isTrashEnabled(scopeGroupId) ? "recycle-bin" : "delete" %>'
+			/>
+		</liferay-frontend:management-bar-action-buttons>
+	</liferay-frontend:management-bar>
+</div>
 
 <div id="<portlet:namespace />DefinitionToolbarFilter">
 </div>
