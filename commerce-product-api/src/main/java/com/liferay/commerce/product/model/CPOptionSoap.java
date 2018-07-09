@@ -50,6 +50,7 @@ public class CPOptionSoap implements Serializable {
 		soapModel.setSkuContributor(model.isSkuContributor());
 		soapModel.setKey(model.getKey());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 
 		return soapModel;
 	}
@@ -242,6 +243,14 @@ public class CPOptionSoap implements Serializable {
 		_lastPublishDate = lastPublishDate;
 	}
 
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
+	}
+
 	private String _uuid;
 	private long _CPOptionId;
 	private long _groupId;
@@ -258,4 +267,5 @@ public class CPOptionSoap implements Serializable {
 	private boolean _skuContributor;
 	private String _key;
 	private Date _lastPublishDate;
+	private String _externalReferenceCode;
 }

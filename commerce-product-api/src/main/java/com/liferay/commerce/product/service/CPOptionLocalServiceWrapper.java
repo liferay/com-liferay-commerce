@@ -58,6 +58,19 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 			serviceContext);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CPOption addCPOption(
+		java.util.Map<java.util.Locale, String> nameMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
+		String ddmFormFieldTypeName, boolean facetable, boolean required,
+		boolean skuContributor, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpOptionLocalService.addCPOption(nameMap, descriptionMap,
+			ddmFormFieldTypeName, facetable, required, skuContributor, key,
+			externalReferenceCode, serviceContext);
+	}
+
 	/**
 	* Creates a new cp option with the primary key. Does not add the cp option to the database.
 	*
@@ -196,6 +209,12 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
 		com.liferay.portal.kernel.dao.orm.Projection projection) {
 		return _cpOptionLocalService.dynamicQueryCount(dynamicQuery, projection);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPOption fetchByExternalReferenceCode(
+		String externalReferenceCode) {
+		return _cpOptionLocalService.fetchByExternalReferenceCode(externalReferenceCode);
 	}
 
 	@Override
@@ -431,6 +450,19 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 		return _cpOptionLocalService.updateCPOption(cpOptionId, nameMap,
 			descriptionMap, ddmFormFieldTypeName, facetable, required,
 			skuContributor, key, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPOption upsertCPOption(
+		java.util.Map<java.util.Locale, String> nameMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
+		String ddmFormFieldTypeName, boolean facetable, boolean required,
+		boolean skuContributor, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpOptionLocalService.upsertCPOption(nameMap, descriptionMap,
+			ddmFormFieldTypeName, facetable, required, skuContributor, key,
+			externalReferenceCode, serviceContext);
 	}
 
 	@Override

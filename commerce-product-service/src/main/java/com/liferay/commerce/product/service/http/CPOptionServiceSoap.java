@@ -207,5 +207,31 @@ public class CPOptionServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPOptionSoap upsertCPOption(
+		String[] nameMapLanguageIds, String[] nameMapValues,
+		String[] descriptionMapLanguageIds, String[] descriptionMapValues,
+		String ddmFormFieldTypeName, boolean facetable, boolean required,
+		boolean skuContributor, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
+					nameMapValues);
+			Map<Locale, String> descriptionMap = LocalizationUtil.getLocalizationMap(descriptionMapLanguageIds,
+					descriptionMapValues);
+
+			com.liferay.commerce.product.model.CPOption returnValue = CPOptionServiceUtil.upsertCPOption(nameMap,
+					descriptionMap, ddmFormFieldTypeName, facetable, required,
+					skuContributor, key, externalReferenceCode, serviceContext);
+
+			return com.liferay.commerce.product.model.CPOptionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CPOptionServiceSoap.class);
 }

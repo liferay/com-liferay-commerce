@@ -522,6 +522,21 @@ public interface CPOptionModel extends BaseModel<CPOption>, LocalizedModel,
 	@Override
 	public void setLastPublishDate(Date lastPublishDate);
 
+	/**
+	 * Returns the external reference code of this cp option.
+	 *
+	 * @return the external reference code of this cp option
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this cp option.
+	 *
+	 * @param externalReferenceCode the external reference code of this cp option
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
 	@Override
 	public boolean isNew();
 

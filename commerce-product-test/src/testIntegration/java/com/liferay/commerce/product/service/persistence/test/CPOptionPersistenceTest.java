@@ -154,6 +154,8 @@ public class CPOptionPersistenceTest {
 
 		newCPOption.setLastPublishDate(RandomTestUtil.nextDate());
 
+		newCPOption.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		_cpOptions.add(_persistence.update(newCPOption));
 
 		CPOption existingCPOption = _persistence.findByPrimaryKey(newCPOption.getPrimaryKey());
@@ -190,6 +192,8 @@ public class CPOptionPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPOption.getLastPublishDate()),
 			Time.getShortTimestamp(newCPOption.getLastPublishDate()));
+		Assert.assertEquals(existingCPOption.getExternalReferenceCode(),
+			newCPOption.getExternalReferenceCode());
 	}
 
 	@Test
@@ -236,6 +240,15 @@ public class CPOptionPersistenceTest {
 	}
 
 	@Test
+	public void testCountByExternalReferenceCode() throws Exception {
+		_persistence.countByExternalReferenceCode("");
+
+		_persistence.countByExternalReferenceCode("null");
+
+		_persistence.countByExternalReferenceCode((String)null);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPOption newCPOption = addCPOption();
 
@@ -263,7 +276,7 @@ public class CPOptionPersistenceTest {
 			true, "userName", true, "createDate", true, "modifiedDate", true,
 			"name", true, "description", true, "DDMFormFieldTypeName", true,
 			"facetable", true, "required", true, "skuContributor", true, "key",
-			true, "lastPublishDate", true);
+			true, "lastPublishDate", true, "externalReferenceCode", true);
 	}
 
 	@Test
@@ -479,6 +492,11 @@ public class CPOptionPersistenceTest {
 		Assert.assertTrue(Objects.equals(existingCPOption.getKey(),
 				ReflectionTestUtil.invoke(existingCPOption, "getOriginalKey",
 					new Class<?>[0])));
+
+		Assert.assertTrue(Objects.equals(
+				existingCPOption.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(existingCPOption,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
 	}
 
 	protected CPOption addCPOption() throws Exception {
@@ -515,6 +533,8 @@ public class CPOptionPersistenceTest {
 		cpOption.setKey(RandomTestUtil.randomString());
 
 		cpOption.setLastPublishDate(RandomTestUtil.nextDate());
+
+		cpOption.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		_cpOptions.add(_persistence.update(cpOption));
 

@@ -75,6 +75,7 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 		attributes.put("skuContributor", isSkuContributor());
 		attributes.put("key", getKey());
 		attributes.put("lastPublishDate", getLastPublishDate());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 
 		return attributes;
 	}
@@ -176,6 +177,13 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 
 		if (lastPublishDate != null) {
 			setLastPublishDate(lastPublishDate);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 	}
 
@@ -323,6 +331,16 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _cpOption.getExpandoBridge();
+	}
+
+	/**
+	* Returns the external reference code of this cp option.
+	*
+	* @return the external reference code of this cp option
+	*/
+	@Override
+	public String getExternalReferenceCode() {
+		return _cpOption.getExternalReferenceCode();
 	}
 
 	/**
@@ -715,6 +733,16 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_cpOption.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets the external reference code of this cp option.
+	*
+	* @param externalReferenceCode the external reference code of this cp option
+	*/
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_cpOption.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**

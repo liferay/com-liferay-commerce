@@ -120,6 +120,19 @@ public class CPOptionServiceUtil {
 			serviceContext);
 	}
 
+	public static com.liferay.commerce.product.model.CPOption upsertCPOption(
+		java.util.Map<java.util.Locale, String> nameMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
+		String ddmFormFieldTypeName, boolean facetable, boolean required,
+		boolean skuContributor, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .upsertCPOption(nameMap, descriptionMap,
+			ddmFormFieldTypeName, facetable, required, skuContributor, key,
+			externalReferenceCode, serviceContext);
+	}
+
 	public static CPOptionService getService() {
 		return _serviceTracker.getService();
 	}
