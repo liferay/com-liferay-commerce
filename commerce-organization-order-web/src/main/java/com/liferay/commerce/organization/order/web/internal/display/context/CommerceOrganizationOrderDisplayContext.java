@@ -33,6 +33,8 @@ import com.liferay.commerce.organization.order.web.internal.search.CommerceOrder
 import com.liferay.commerce.organization.order.web.internal.search.CommerceOrderSearch;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.price.CommerceProductPrice;
+import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderItemService;
@@ -116,6 +118,7 @@ public class CommerceOrganizationOrderDisplayContext {
 			CommerceOrderNoteService commerceOrderNoteService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderService commerceOrderService,
+			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			CommerceShipmentItemService commerceShipmentItemService,
 			CPInstanceHelper cpInstanceHelper, JSONFactory jsonFactory,
 			ModelResourcePermission<CommerceOrder> modelResourcePermission,
@@ -128,6 +131,7 @@ public class CommerceOrganizationOrderDisplayContext {
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_commerceOrderService = commerceOrderService;
+		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_commerceShipmentItemService = commerceShipmentItemService;
 		_cpInstanceHelper = cpInstanceHelper;
 		_jsonFactory = jsonFactory;
@@ -355,6 +359,16 @@ public class CommerceOrganizationOrderDisplayContext {
 
 		return subtotal.format(
 			_commerceOrganizationOrderRequestHelper.getLocale());
+	}
+
+	public CommerceProductPrice getCommerceProductPrice(
+			CommerceOrderItem commerceOrderItem)
+		throws PortalException {
+
+		return _commerceProductPriceCalculation.getCommerceProductPrice(
+			commerceOrderItem.getCPInstanceId(),
+			commerceOrderItem.getQuantity(),
+			_commerceOrganizationOrderRequestHelper.getCommerceContext());
 	}
 
 	public List<CommerceShipmentItem> getCommerceShipmentItems(
@@ -872,6 +886,8 @@ public class CommerceOrganizationOrderDisplayContext {
 		_commerceOrganizationOpenOrderPortletInstanceConfiguration;
 	private final CommerceOrganizationOrderRequestHelper
 		_commerceOrganizationOrderRequestHelper;
+	private final CommerceProductPriceCalculation
+		_commerceProductPriceCalculation;
 	private final CommerceShipmentItemService _commerceShipmentItemService;
 	private final CPInstanceHelper _cpInstanceHelper;
 	private final CommerceOrder _currentCommerceOrder;
