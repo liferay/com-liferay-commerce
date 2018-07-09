@@ -44,7 +44,8 @@
 				"title": "Weight",
 				"value": "5.64 oz (160 g)",
 				"key": "Weight"
-			}],
+			}
+		],
 		"relatedProducts": [],
 		"options": [{
 				"values": [{
@@ -68,7 +69,8 @@
 				"ddmFormFieldTypeName": "select",
 				"key": "Color-of-product",
 				"required": true
-			}],
+			}
+		],
 		"description": "Leitz 5500. Weight: 5.64 oz (160 g), Dimensions (WxDxH): 1.42 x 2.2 x 5.55\" (36 x 56 x 141 mm)",
 		"productTypeName": "simple",
 		"shortDescription": "Leitz 5500, 5.64 oz (160 g), 1.42 x 2.2 x 5.55\" (36 x 56 x 141 mm)",
