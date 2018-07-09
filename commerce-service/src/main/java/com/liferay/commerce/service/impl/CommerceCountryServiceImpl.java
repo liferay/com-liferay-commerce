@@ -139,12 +139,7 @@ public class CommerceCountryServiceImpl extends CommerceCountryServiceBaseImpl {
 
 	@Override
 	public List<CommerceCountry> getShippingCommerceCountries(
-			long groupId, boolean shippingAllowed, boolean active)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CommerceActionKeys.MANAGE_COMMERCE_COUNTRIES);
+		long groupId, boolean shippingAllowed, boolean active) {
 
 		return commerceCountryLocalService.getShippingCommerceCountries(
 			groupId, shippingAllowed, active);
