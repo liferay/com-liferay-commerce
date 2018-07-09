@@ -188,7 +188,8 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		HttpPrincipal httpPrincipal, long cpDefinitionId)
+		HttpPrincipal httpPrincipal, long cpDefinitionId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionSpecificationOptionValueServiceUtil.class,
@@ -196,7 +197,7 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 					_getCPDefinitionSpecificationOptionValuesParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId);
+					cpDefinitionId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -304,7 +305,10 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 	private static final Class<?>[] _getCPDefinitionSpecificationOptionValueParameterTypes3 =
 		new Class[] { long.class };
 	private static final Class<?>[] _getCPDefinitionSpecificationOptionValuesParameterTypes4 =
-		new Class[] { long.class };
+		new Class[] {
+			long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
 	private static final Class<?>[] _getCPDefinitionSpecificationOptionValuesParameterTypes5 =
 		new Class[] { long.class, long.class };
 	private static final Class<?>[] _updateCPDefinitionSpecificationOptionValueParameterTypes6 =

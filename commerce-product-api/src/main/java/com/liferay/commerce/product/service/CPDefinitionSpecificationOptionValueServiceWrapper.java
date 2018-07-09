@@ -69,9 +69,11 @@ public class CPDefinitionSpecificationOptionValueServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		long cpDefinitionId)
+		long cpDefinitionId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionSpecificationOptionValueService.getCPDefinitionSpecificationOptionValues(cpDefinitionId);
+		return _cpDefinitionSpecificationOptionValueService.getCPDefinitionSpecificationOptionValues(cpDefinitionId,
+			start, end, orderByComparator);
 	}
 
 	@Override
