@@ -1,0 +1,20 @@
+[
+	{
+		"structureFileName": "BRECCIA_CAROUSEL.json",
+		"structureName": "BRECCIA_CAROUSEL",
+		"templateFileName": "BRECCIA_CAROUSEL.ftl",
+		"templateName": "BRECCIA_CAROUSEL"
+	},
+	{
+		"structureFileName": "BRECCIA_BANNER.json",
+		"structureName": "BRECCIA_BANNER",
+		"templateFileName": "BRECCIA_BANNER.ftl",
+		"templateName": "BRECCIA_BANNER"
+	},
+	{
+		"structureFileName": "NEW_ARRIVALS.json",
+		"structureName": "NEW_ARRIVALS",
+		"templateFileName": "NEW_ARRIVALS.ftl",
+		"templateName": "NEW_ARRIVALS"
+	}
+]
