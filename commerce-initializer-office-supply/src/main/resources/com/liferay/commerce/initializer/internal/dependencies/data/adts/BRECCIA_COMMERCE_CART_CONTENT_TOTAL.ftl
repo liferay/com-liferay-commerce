@@ -2,9 +2,9 @@
 	orderId = '${commerceCartContentTotalDisplayContext.getCommerceOrderId()}'
 	orderTotalItems = 0
 	shippingPrice = 'Free'
-	subTotal = '${commerceCartContentTotalDisplayContext.getCommerceOrderSubtotal()}'
+	subTotal = '${commerceCartContentTotalDisplayContext.getCommerceOrderPrice().getSubtotal().getPrice()}'
 	tax = '$0.00'
-	total = '${commerceCartContentTotalDisplayContext.getCommerceOrderSubtotal()}'
+	total = '${commerceCartContentTotalDisplayContext.getCommerceOrderPrice().getTotal().getPrice()}'
 	zipCode = '(No Zip Code)'
 />
 
