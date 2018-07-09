@@ -1,0 +1,26 @@
+[
+	{
+		"articleId": "HOME_PAGE_CAROUSEL",
+		"content": "<?xml version=\"1.0\"?><root available-locales=\"en_US\" default-locale=\"en_US\"><dynamic-element name=\"CAROUSELIMAGE\" type=\"image\" index-type=\"text\" instance-id=\"pqre\"><dynamic-element name=\"CAROUSELIMAGECOLUMNCSSCLASSES\" instance-id=\"uxcp\" type=\"text\" index-type=\"keyword\"><dynamic-content language-id=\"en_US\"><![CDATA[]]></dynamic-content></dynamic-element><dynamic-element name=\"TEXTCOLUMNCSSCLASSES\" instance-id=\"uhqs\" type=\"text\" index-type=\"keyword\"><dynamic-content language-id=\"en_US\"><![CDATA[]]></dynamic-content></dynamic-element><dynamic-element name=\"TEXTCOLUMNHTMLCONTENT\" instance-id=\"gkca\" type=\"text_area\" index-type=\"text\"><dynamic-content language-id=\"en_US\"><![CDATA[<div class=\"h1mb-2mb-md-4text-white\">Get20% OFF ALL Cutting Boards</div><div class=\"h3mb-2mb-md-4text-muted\">for a limited time only</div><div><a class=\"btnbtn-primary\" href=\"#1\">Learn More</a></div>]]></dynamic-content></dynamic-element><dynamic-content language-id=\"en_US\">[%Minette-Top-Banner-Right-Draft1-1.png%]</dynamic-content></dynamic-element></root>",
+		"ddmStructureKey": "BRECCIA_CAROUSEL",
+		"ddmTemplateKey": "BRECCIA_CAROUSEL",
+		"description": "",
+		"title": "HOME_PAGE_CAROUSEL"
+	},
+	{
+		"articleId": "SPECIAL_SAVINGS_MESSAGE",
+		"content": "<?xml version=\"1.0\"?><root available-locales=\"en_US\" default-locale=\"en_US\"><dynamic-element name=\"BGCOLOR\" type=\"ddm-color\" index-type=\"keyword\" instance-id=\"wqwu\"><dynamic-content language-id=\"en_US\"><![CDATA[]]></dynamic-content></dynamic-element><dynamic-element name=\"BANNERCSSCLASSES\" type=\"text\" index-type=\"keyword\" instance-id=\"uzsa\"><dynamic-content language-id=\"en_US\"><![CDATA[bg-light]]></dynamic-content></dynamic-element><dynamic-element name=\"CONTENT\" type=\"text_area\" index-type=\"text\" instance-id=\"mpcy\"><dynamic-content language-id=\"en_US\"><![CDATA[<div class=\"font-weight-normal h1 mb-0 py-5 text-center\">This is a special savings message, take <strong class=\"ml-1\">$50 off any purchase</strong></div>]]></dynamic-content></dynamic-element></root>",
+		"ddmStructureKey": "BRECCIA_BANNER",
+		"ddmTemplateKey": "BRECCIA_BANNER",
+		"description": "",
+		"title": "SPECIAL_SAVINGS_MESSAGE"
+	},
+	{
+		"articleId": "SALES_PROMO_CARDS",
+		"content": "<?xml version=\"1.0\"?><root available-locales=\"en_US\" default-locale=\"en_US\"><dynamic-element name=\"BGCOLOR\" type=\"ddm-color\" index-type=\"keyword\" instance-id=\"tcgj\"><dynamic-content language-id=\"en_US\"><![CDATA[]]></dynamic-content></dynamic-element><dynamic-element name=\"BANNERCSSCLASSES\" type=\"text\" index-type=\"keyword\" instance-id=\"gwru\"><dynamic-content language-id=\"en_US\"><![CDATA[]]></dynamic-content></dynamic-element><dynamic-element name=\"CONTENT\" type=\"text_area\" index-type=\"text\" instance-id=\"jbwk\"><dynamic-content language-id=\"en_US\"><![CDATA[<div class=\"row\"><div class=\"col-md-6 d-flex flex-column px-0 px-md-3\"><div class=\"align-items-center bg-light card d-flex flex-grow-1 justify-content-center p-4 p-sm-5 text-center\"><h2 class=\"mb-0\">NEW SHIPPING INFO</h2></div><div class=\"align-items-center bg-primary card d-flex flex-grow-1 justify-content-center mb-md-0 p-4 p-sm-5 text-center\"><h2 class=\"mb-0\">NEW SHIPPING INFO</h2></div></div><div class=\"col-md-6 d-flex px-0 px-md-3\"><div class=\"align-items-center bg-dark card d-flex flex-grow-1 justify-content-center mb-0 p-4 mh-md-425 mh-lg-625 p-sm-5 text-center text-white\"><h2 class=\"h1 mb-4\">SALES PROMOTION</h2><p class=\"font-weight-normal h4 lh-3 mb-4\">Etiam ipsum turpis, pellentesque id fermentum eu, ornare ac dui. Nulla eu eleifen.</p><a class=\"btn btn-lg btn-primary commerce-btn-cta\">Learn More</a></div></div></div>]]></dynamic-content></dynamic-element></root>",
+		"ddmStructureKey": "BRECCIA_BANNER",
+		"ddmTemplateKey": "BRECCIA_BANNER",
+		"description": "",
+		"title": "SALES_PROMO_CARDS"
+	}
+]
