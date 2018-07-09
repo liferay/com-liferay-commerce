@@ -65,8 +65,9 @@ public class CPOptionValueLocalServiceImpl
 			String key, ServiceContext serviceContext)
 		throws PortalException {
 
-		return addCPOptionValue(cpOptionId, nameMap, priority,
-				key, StringPool.BLANK, serviceContext);
+		return addCPOptionValue(
+			cpOptionId, nameMap, priority, key, StringPool.BLANK,
+			serviceContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -151,10 +152,10 @@ public class CPOptionValueLocalServiceImpl
 	}
 
 	public CPOptionValue fetchByExternalReferenceCode(
-			String externalReferenceCode) {
+		String externalReferenceCode) {
 
 		return cpOptionValuePersistence.fetchByExternalReferenceCode(
-				externalReferenceCode);
+			externalReferenceCode);
 	}
 
 	@Override
@@ -241,16 +242,19 @@ public class CPOptionValueLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		CPOptionValue cpOptionValue = cpOptionValuePersistence.fetchByExternalReferenceCode(
+		CPOptionValue cpOptionValue =
+			cpOptionValuePersistence.fetchByExternalReferenceCode(
 				externalReferenceCode);
 
 		if (cpOptionValue == null) {
-			cpOptionValue = addCPOptionValue(cpOptionId, nameMap, priority,
-				key, externalReferenceCode, serviceContext);
+			cpOptionValue = addCPOptionValue(
+				cpOptionId, nameMap, priority, key, externalReferenceCode,
+				serviceContext);
 		}
 		else {
-			cpOptionValue = updateCPOptionValue(cpOptionValue.getCPOptionValueId(),
-				nameMap, priority, key, serviceContext);
+			cpOptionValue = updateCPOptionValue(
+				cpOptionValue.getCPOptionValueId(), nameMap, priority, key,
+				serviceContext);
 		}
 
 		return cpOptionValue;

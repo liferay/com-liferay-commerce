@@ -130,7 +130,9 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		CPOptionValue cpOptionValue = cpOptionValueLocalService.fetchByExternalReferenceCode(externalReferenceCode);
+		CPOptionValue cpOptionValue =
+			cpOptionValueLocalService.fetchByExternalReferenceCode(
+				externalReferenceCode);
 
 		if (cpOptionValue == null) {
 			_portletResourcePermission.check(
@@ -138,8 +140,9 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 				CPActionKeys.MANAGE_CATALOG);
 		}
 
-		return cpOptionValueLocalService.upsertCPOptionValue(cpOptionId, nameMap, priority,
-				key, externalReferenceCode, serviceContext);
+		return cpOptionValueLocalService.upsertCPOptionValue(
+			cpOptionId, nameMap, priority, key, externalReferenceCode,
+			serviceContext);
 	}
 
 	private static volatile PortletResourcePermission
