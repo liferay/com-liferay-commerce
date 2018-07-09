@@ -17,11 +17,13 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.service.base.CPDefinitionSpecificationOptionValueLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
 import java.util.Locale;
@@ -87,7 +89,8 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 
 		List<CPDefinitionSpecificationOptionValue>
 			cpDefinitionSpecificationOptionValues =
-				getCPDefinitionSpecificationOptionValues(cpDefinitionId);
+				getCPDefinitionSpecificationOptionValues(
+					cpDefinitionId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		// Commerce product definition specification option value
 
@@ -143,10 +146,13 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 
 	@Override
 	public List<CPDefinitionSpecificationOptionValue>
-		getCPDefinitionSpecificationOptionValues(long cpDefinitionId) {
+		getCPDefinitionSpecificationOptionValues(
+			long cpDefinitionId, int start, int end,
+			OrderByComparator<CPDefinitionSpecificationOptionValue>
+				orderByComparator) {
 
 		return cpDefinitionSpecificationOptionValuePersistence.
-			findByCPDefinitionId(cpDefinitionId);
+			findByCPDefinitionId(cpDefinitionId, start, end, orderByComparator);
 	}
 
 	@Override

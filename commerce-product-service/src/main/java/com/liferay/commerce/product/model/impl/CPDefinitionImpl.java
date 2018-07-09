@@ -168,7 +168,9 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 		getCPDefinitionSpecificationOptionValues() {
 
 		return CPDefinitionSpecificationOptionValueLocalServiceUtil.
-			getCPDefinitionSpecificationOptionValues(getCPDefinitionId());
+			getCPDefinitionSpecificationOptionValues(
+				getCPDefinitionId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				null);
 	}
 
 	@Override
