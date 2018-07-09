@@ -153,19 +153,20 @@ public class CPOptionServiceImpl extends CPOptionServiceBaseImpl {
 			String ddmFormFieldTypeName, boolean facetable, boolean required,
 			boolean skuContributor, String key, String externalReferenceCode,
 			ServiceContext serviceContext)
-			throws PortalException {
+		throws PortalException {
 
-		CPOption cpOption = cpOptionLocalService.fetchByExternalReferenceCode(externalReferenceCode);
+		CPOption cpOption = cpOptionLocalService.fetchByExternalReferenceCode(
+			externalReferenceCode);
 
 		if (cpOption == null) {
 			_portletResourcePermission.check(
-					getPermissionChecker(), serviceContext.getScopeGroupId(),
-					CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION);
+				getPermissionChecker(), serviceContext.getScopeGroupId(),
+				CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION);
 		}
 
-		return cpOptionLocalService.upsertCPOption(nameMap, descriptionMap, ddmFormFieldTypeName,
-				facetable, required, skuContributor, key, externalReferenceCode,
-				serviceContext);
+		return cpOptionLocalService.upsertCPOption(
+			nameMap, descriptionMap, ddmFormFieldTypeName, facetable, required,
+			skuContributor, key, externalReferenceCode, serviceContext);
 	}
 
 	private static volatile PortletResourcePermission

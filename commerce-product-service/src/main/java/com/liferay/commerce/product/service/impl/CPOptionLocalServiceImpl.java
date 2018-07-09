@@ -62,11 +62,11 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			String ddmFormFieldTypeName, boolean facetable, boolean required,
 			boolean skuContributor, String key, ServiceContext serviceContext)
-			throws PortalException {
+		throws PortalException {
 
-		return cpOptionLocalService.addCPOption(nameMap, descriptionMap, ddmFormFieldTypeName,
-				facetable, required, skuContributor, key, StringPool.BLANK,
-				serviceContext);
+		return cpOptionLocalService.addCPOption(
+			nameMap, descriptionMap, ddmFormFieldTypeName, facetable, required,
+			skuContributor, key, StringPool.BLANK, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -147,18 +147,16 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 	}
 
 	@Override
+	public CPOption fetchByExternalReferenceCode(String externalReferenceCode) {
+		return cpOptionPersistence.fetchByExternalReferenceCode(
+			externalReferenceCode);
+	}
+
+	@Override
 	public CPOption fetchCPOption(long groupId, String key)
 		throws PortalException {
 
 		return cpOptionPersistence.fetchByG_K(groupId, key);
-	}
-
-	@Override
-	public CPOption fetchByExternalReferenceCode(
-			String externalReferenceCode) {
-
-		return cpOptionPersistence.fetchByExternalReferenceCode(
-				externalReferenceCode);
 	}
 
 	@Override
@@ -286,20 +284,22 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 			String ddmFormFieldTypeName, boolean facetable, boolean required,
 			boolean skuContributor, String key, String externalReferenceCode,
 			ServiceContext serviceContext)
-			throws PortalException {
+		throws PortalException {
 
 		CPOption cpOption = cpOptionPersistence.fetchByExternalReferenceCode(
-				externalReferenceCode);
+			externalReferenceCode);
 
 		if (cpOption == null) {
-			cpOption = addCPOption(nameMap, descriptionMap, ddmFormFieldTypeName,
-					facetable, required, skuContributor, key, externalReferenceCode,
-					serviceContext);
+			cpOption = addCPOption(
+				nameMap, descriptionMap, ddmFormFieldTypeName, facetable,
+				required, skuContributor, key, externalReferenceCode,
+				serviceContext);
 		}
 		else {
-			cpOption = updateCPOption(cpOption.getCPOptionId(), nameMap, descriptionMap,
-					ddmFormFieldTypeName, facetable, required, skuContributor, key,
-					serviceContext);
+			cpOption = updateCPOption(
+				cpOption.getCPOptionId(), nameMap, descriptionMap,
+				ddmFormFieldTypeName, facetable, required, skuContributor, key,
+				serviceContext);
 		}
 
 		return cpOption;

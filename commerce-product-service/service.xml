@@ -707,12 +707,12 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
+		<finder name="ExternalReferenceCode" return-type="CPOption" unique="true">
+			<finder-column name="externalReferenceCode" />
+		</finder>
 		<finder name="G_K" return-type="CPOption" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="key" />
-		</finder>
-		<finder name="ExternalReferenceCode" return-type="CPOption" unique="true">
-			<finder-column name="externalReferenceCode" />
 		</finder>
 
 		<!-- References -->
