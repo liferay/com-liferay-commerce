@@ -371,6 +371,21 @@ public interface CPOptionValueModel extends BaseModel<CPOptionValue>,
 	@Override
 	public void setLastPublishDate(Date lastPublishDate);
 
+	/**
+	 * Returns the external reference code of this cp option value.
+	 *
+	 * @return the external reference code of this cp option value
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this cp option value.
+	 *
+	 * @param externalReferenceCode the external reference code of this cp option value
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
 	@Override
 	public boolean isNew();
 

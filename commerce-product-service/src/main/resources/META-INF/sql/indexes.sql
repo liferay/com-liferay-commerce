@@ -80,6 +80,7 @@ create unique index IX_8CFD4B9C on CPOptionCategory (uuid_[$COLUMN_LENGTH:75$], 
 
 create unique index IX_F4C57C5A on CPOptionValue (CPOptionId, key_[$COLUMN_LENGTH:75$]);
 create index IX_C95EFDB3 on CPOptionValue (companyId);
+create unique index IX_3177EE48 on CPOptionValue (externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_F5E154F5 on CPOptionValue (groupId);
 create index IX_17FEC609 on CPOptionValue (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_1D633ACB on CPOptionValue (uuid_[$COLUMN_LENGTH:75$], groupId);

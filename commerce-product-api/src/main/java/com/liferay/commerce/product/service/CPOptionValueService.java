@@ -90,4 +90,9 @@ public interface CPOptionValueService extends BaseService {
 	public CPOptionValue updateCPOptionValue(long cpOptionValueId,
 		Map<Locale, String> titleMap, double priority, String key,
 		ServiceContext serviceContext) throws PortalException;
+
+	public CPOptionValue upsertCPOptionValue(long cpOptionId,
+		Map<Locale, String> nameMap, double priority, String key,
+		String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 }

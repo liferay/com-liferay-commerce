@@ -269,7 +269,8 @@ create table CPOptionValue (
 	name STRING null,
 	priority DOUBLE,
 	key_ VARCHAR(75) null,
-	lastPublishDate DATE null
+	lastPublishDate DATE null,
+	externalReferenceCode VARCHAR(75) null
 );
 
 create table CPRule (

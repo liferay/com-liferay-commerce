@@ -352,6 +352,7 @@
 			<validator name="required" />
 		</field>
 		<field name="lastPublishDate" type="Date" />
+		<field name="externalReferenceCode" type="String" />
 	</model>
 	<model name="com.liferay.commerce.product.model.CPRule">
 		<field name="CPRuleId" type="long" />

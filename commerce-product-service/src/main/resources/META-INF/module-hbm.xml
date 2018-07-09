@@ -308,6 +308,7 @@
 		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property column="key_" name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lastPublishDate" type="org.hibernate.type.TimestampType" />
+		<property name="externalReferenceCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.commerce.product.model.impl.CPRuleImpl" table="CPRule">
 		<id name="CPRuleId" type="long">
