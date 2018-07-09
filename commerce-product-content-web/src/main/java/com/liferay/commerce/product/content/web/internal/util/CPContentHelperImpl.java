@@ -323,7 +323,9 @@ public class CPContentHelperImpl implements CPContentHelper {
 		List<CPDefinitionSpecificationOptionValue>
 			cpDefinitionSpecificationOptionValues =
 				_cpCatalogEntrySpecificationOptionValueService.
-					getCPDefinitionSpecificationOptionValues(cpDefinitionId);
+					getCPDefinitionSpecificationOptionValues(
+						cpDefinitionId,QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+						null);
 
 		return !cpDefinitionSpecificationOptionValues.isEmpty();
 	}
