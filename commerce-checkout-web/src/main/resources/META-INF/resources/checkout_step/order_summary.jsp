@@ -338,29 +338,33 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 				</address>
 			</c:if>
 
-			<div class="shipping-method">
-				<h5>
-					<liferay-ui:message key="method" />
-				</h5>
+			<c:if test="<%= Validator.isNotNull(commerceShippingOptionName) %>">
+				<div class="shipping-method">
+					<h5>
+						<liferay-ui:message key="method" />
+					</h5>
 
-				<div class="shipping-description">
-					<%= HtmlUtil.escape(commerceShippingOptionName) %>
+					<div class="shipping-description">
+						<%= HtmlUtil.escape(commerceShippingOptionName) %>
+					</div>
+
+					<div class="shipping-cost">
+						<%= HtmlUtil.escape(shippingValue.format(locale)) %>
+					</div>
 				</div>
+			</c:if>
 
-				<div class="shipping-cost">
-					<%= HtmlUtil.escape(shippingValue.format(locale)) %>
+			<c:if test="<%= Validator.isNotNull(commercePaymentMethodName) %>">
+				<div class="payment-method">
+					<h5>
+						<liferay-ui:message key="payment" />
+					</h5>
+
+					<div class="shipping-description">
+						<%= HtmlUtil.escape(commercePaymentMethodName) %>
+					</div>
 				</div>
-			</div>
-
-			<div class="payment-method">
-				<h5>
-					<liferay-ui:message key="payment" />
-				</h5>
-
-				<div class="shipping-description">
-					<%= HtmlUtil.escape(commercePaymentMethodName) %>
-				</div>
-			</div>
+			</c:if>
 		</aui:col>
 	</aui:row>
 </div>
