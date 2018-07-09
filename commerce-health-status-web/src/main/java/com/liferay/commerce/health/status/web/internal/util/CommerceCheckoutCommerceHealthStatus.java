@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -67,12 +68,20 @@ public class CommerceCheckoutCommerceHealthStatus
 		String friendlyURL =
 			StringPool.FORWARD_SLASH + StringUtil.toLowerCase(name);
 
+		boolean privateLayout = true;
+
+		List<Layout> layouts = _layoutService.getLayouts(groupId, true);
+
+		if (layouts.isEmpty()) {
+			privateLayout = false;
+		}
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Layout.class.getName(), httpServletRequest);
 
 		Layout layout = _layoutService.addLayout(
-			groupId, false, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, name,
-			name, null, LayoutConstants.TYPE_PORTLET, true, friendlyURL,
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			name, name, null, LayoutConstants.TYPE_PORTLET, true, friendlyURL,
 			serviceContext);
 
 		LayoutTypePortlet layoutTypePortlet =

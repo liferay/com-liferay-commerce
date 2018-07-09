@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -62,11 +63,19 @@ public class WishListContentCommerceHealthStatus
 			return;
 		}
 
+		boolean privateLayout = true;
+
+		List<Layout> layouts = _layoutService.getLayouts(groupId, true);
+
+		if (layouts.isEmpty()) {
+			privateLayout = false;
+		}
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Layout.class.getName(), httpServletRequest);
 
 		Layout layout = _layoutService.addLayout(
-			groupId, false, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
 			"Wish List", "Wish List", null, LayoutConstants.TYPE_PORTLET, true,
 			"/wishlist", serviceContext);
 
