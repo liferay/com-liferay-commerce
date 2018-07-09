@@ -18,7 +18,6 @@ import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.checkout.web.internal.display.context.ShippingMethodCheckoutStepDisplayContext;
 import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
-import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
@@ -37,6 +36,7 @@ import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -216,8 +216,7 @@ public class ShippingMethodCommerceCheckoutStep
 			PermissionCheckerFactoryUtil.create(themeDisplay.getUser());
 
 		if (!CommerceOrderPermission.contains(
-				permissionChecker, commerceOrder,
-				CommerceOrderActionKeys.CHECKOUT_OPEN_COMMERCE_ORDERS)) {
+				permissionChecker, commerceOrder, ActionKeys.UPDATE)) {
 
 			return;
 		}
