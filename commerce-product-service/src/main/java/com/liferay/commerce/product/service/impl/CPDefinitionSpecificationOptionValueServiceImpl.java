@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
 import java.util.Locale;
@@ -115,14 +116,18 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 
 	@Override
 	public List<CPDefinitionSpecificationOptionValue>
-			getCPDefinitionSpecificationOptionValues(long cpDefinitionId)
+		getCPDefinitionSpecificationOptionValues(
+			long cpDefinitionId, int start, int end,
+			OrderByComparator<CPDefinitionSpecificationOptionValue>
+				orderByComparator)
 		throws PortalException {
 
 		_cpDefinitionModelResourcePermission.check(
 			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
 
 		return cpDefinitionSpecificationOptionValueLocalService.
-			getCPDefinitionSpecificationOptionValues(cpDefinitionId);
+			getCPDefinitionSpecificationOptionValues(
+				cpDefinitionId, start, end, orderByComparator);
 	}
 
 	@Override
