@@ -16,6 +16,18 @@
 	.lfr-order-date-column {
 		max-width: none;
 	}
+
+	.order-details-footer {
+		border: none;
+
+		.autofit-col {
+			padding: 0.5rem;
+		}
+	}
+
+	.order-total {
+		font-weight: 700;
+	}
 }
 
 .portlet-commerce-organization-open-order {
