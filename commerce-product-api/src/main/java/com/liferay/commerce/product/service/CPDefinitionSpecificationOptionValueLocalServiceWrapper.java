@@ -287,8 +287,10 @@ public class CPDefinitionSpecificationOptionValueLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		long cpDefinitionId) {
-		return _cpDefinitionSpecificationOptionValueLocalService.getCPDefinitionSpecificationOptionValues(cpDefinitionId);
+		long cpDefinitionId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> orderByComparator) {
+		return _cpDefinitionSpecificationOptionValueLocalService.getCPDefinitionSpecificationOptionValues(cpDefinitionId,
+			start, end, orderByComparator);
 	}
 
 	@Override

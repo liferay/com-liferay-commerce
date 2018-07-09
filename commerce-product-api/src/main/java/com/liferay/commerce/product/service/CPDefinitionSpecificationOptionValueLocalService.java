@@ -247,7 +247,8 @@ public interface CPDefinitionSpecificationOptionValueLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		long cpDefinitionId);
+		long cpDefinitionId, int start, int end,
+		OrderByComparator<CPDefinitionSpecificationOptionValue> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(

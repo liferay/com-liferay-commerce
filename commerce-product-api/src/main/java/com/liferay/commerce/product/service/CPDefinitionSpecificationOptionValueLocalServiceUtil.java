@@ -283,9 +283,11 @@ public class CPDefinitionSpecificationOptionValueLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
-		long cpDefinitionId) {
+		long cpDefinitionId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> orderByComparator) {
 		return getService()
-				   .getCPDefinitionSpecificationOptionValues(cpDefinitionId);
+				   .getCPDefinitionSpecificationOptionValues(cpDefinitionId,
+			start, end, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
