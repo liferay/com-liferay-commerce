@@ -190,7 +190,8 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 
 	@Override
 	public String getThumbnailSrc() {
-		return _servletContext.getContextPath() + "/images/Breccia-Logo-Square.png";
+		return _servletContext.getContextPath() +
+			"/images/Breccia-Logo-Square.png";
 	}
 
 	@Override
@@ -505,10 +506,15 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 					portletSetup.setValue(key, value);
 				}
 
+				String adtPath =
+					_DEPENDENCY_PATH_ADT + "BRECCIA_BREADCRUMB.ftl";
+
+				String portletClassName =
+					"com.liferay.portal.kernel.servlet.taglib.ui." +
+						"BreadcrumbEntry";
+
 				DDMTemplate ddmTemplate = getDDMTemplate(
-					"com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry",
-					_DEPENDENCY_PATH_ADT + "BRECCIA_BREADCRUMB.ftl", "BRECCIA",
-					serviceContext);
+					portletClassName, adtPath, "BRECCIA", serviceContext);
 
 				String ddmTemplateKey =
 					"ddmTemplate_" + ddmTemplate.getTemplateKey();
@@ -552,9 +558,11 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 				portletSetup.setValue(key, value);
 			}
 
+			String adtPath =
+				_DEPENDENCY_PATH_ADT + "BRECCIA_COMMERCE_CART_CONTENT.ftl";
+
 			DDMTemplate ddmTemplate = getDDMTemplate(
-				_COMMERCE_CART_CONTENT_PORTLET_CLASS_NAME,
-				_DEPENDENCY_PATH_ADT + "BRECCIA_COMMERCE_CART_CONTENT.ftl",
+				_COMMERCE_CART_CONTENT_PORTLET_CLASS_NAME, adtPath,
 				"BRECCIA COMMERCE CONTENT CART", serviceContext);
 
 			String ddmTemplateKey =
@@ -600,9 +608,12 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 				portletSetup.setValue(key, value);
 			}
 
+			String adtPath =
+				_DEPENDENCY_PATH_ADT +
+					"BRECCIA_COMMERCE_CART_CONTENT_TOTAL.ftl";
+
 			DDMTemplate ddmTemplate = getDDMTemplate(
-				_COMMERCE_CART_CONTENT_TOTAL_PORTLET_CLASS_NAME,
-				_DEPENDENCY_PATH_ADT + "BRECCIA_COMMERCE_CART_CONTENT_TOTAL.ftl",
+				_COMMERCE_CART_CONTENT_TOTAL_PORTLET_CLASS_NAME, adtPath,
 				"BRECCIA COMMERCE CONTENT CART TOTAL", serviceContext);
 
 			String ddmTemplateKey =
@@ -667,9 +678,12 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 					portletSetup.setValue(key, value);
 				}
 
+				String adtPath =
+					_DEPENDENCY_PATH_ADT +
+						"BRECCIA_COMMERCE_CATEGORY_CONTENT_TITLE_DESC.ftl";
+
 				DDMTemplate ddmTemplate = getDDMTemplate(
-					_CP_CATEGORY_CONTENT_PORTLET_CLASS_NAME,
-					_DEPENDENCY_PATH_ADT + "BRECCIA_COMMERCE_CATEGORY_CONTENT_TITLE_DESC.ftl",
+					_CP_CATEGORY_CONTENT_PORTLET_CLASS_NAME, adtPath,
 					"BRECCIA_CATEGORY_CONTENT_TITLE", serviceContext);
 
 				String ddmTemplateKey =
@@ -739,18 +753,24 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 			}
 
 			DDMTemplate ddmTemplate;
+			String adtPath;
 
 			if (instanceId.contains("navigation")) {
-				ddmTemplate = getDDMTemplate(
-					_CP_ASSET_CATEGORIES_NAVIGATION_PORTLET_CLASS_NAME,
+				adtPath =
 					_DEPENDENCY_PATH_ADT +
-						"BRECCIA_COMMERCE_CATEGORY_NAVIGATION_DROPDOWN.ftl",
+						"BRECCIA_COMMERCE_CATEGORY_NAVIGATION_DROPDOWN.ftl";
+
+				ddmTemplate = getDDMTemplate(
+					_CP_ASSET_CATEGORIES_NAVIGATION_PORTLET_CLASS_NAME, adtPath,
 					"COMMERCE CATEGORY NAVIGATION DROPDOWN", serviceContext);
 			}
 			else {
+				adtPath = StringBundler.concat(
+					_DEPENDENCY_PATH_ADT,
+					"BRECCIA_COMMERCE_CATEGORY_NAVIGATION_SIMPLE_INLINE.ftl");
+
 				ddmTemplate = getDDMTemplate(
-					_CP_ASSET_CATEGORIES_NAVIGATION_PORTLET_CLASS_NAME,
-					_DEPENDENCY_PATH_ADT + "BRECCIA_COMMERCE_CATEGORY_NAVIGATION_SIMPLE_INLINE.ftl",
+					_CP_ASSET_CATEGORIES_NAVIGATION_PORTLET_CLASS_NAME, adtPath,
 					"COMMERCE CATEGORY NAVIGATION SIMPLE", serviceContext);
 			}
 
@@ -822,7 +842,7 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 			String ddmTemplateKey =
 				"ddmTemplate_" + ddmTemplate.getTemplateKey();
 
-			//portletSetup.setValue("displayStyle", ddmTemplateKey);
+			portletSetup.setValue("displayStyle", ddmTemplateKey);
 
 			portletSetup.setValue(
 				"simple--cpTypeRendererKey", OfficeSupplyCPContentRenderer.KEY);
@@ -890,7 +910,7 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 			String ddmTemplateKey =
 				"ddmTemplate_" + ddmTemplate.getTemplateKey();
 
-			//portletSetup.setValue("displayStyle", ddmTemplateKey);
+			portletSetup.setValue("displayStyle", ddmTemplateKey);
 
 			portletSetup.setValue(
 				"simple--cpTypeListEntryRendererKey",
@@ -1041,7 +1061,8 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 				structureName, structureName, ddmForm, ddmFormLayout,
 				serviceContext);
 
-			_cpFileImporter.getDDMTemplate(_getFile(_TEMPLATES_DEPENDENCY_PATH + templateFileName),
+			_cpFileImporter.getDDMTemplate(
+				_getFile(_TEMPLATES_DEPENDENCY_PATH + templateFileName),
 				ddmStructureClassNameId, ddmStructure.getStructureId(),
 				journalArticleClassNameId, templateName,
 				DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY, null,
@@ -1249,15 +1270,18 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 
 		while (i < 2) {
 			if (i == 0) {
+				String accountName = account.getName();
+
 				emailAddress =
-					"buyer." + account.getName().replace(" ", "") +
-						"@liferay.com";
+					"buyer." + accountName.replace(" ", "") + "@liferay.com";
 				roleName = _configuration.buyerRoleName();
 				firstName = "Buyer";
 			}
 			else {
+				String accountName = account.getName();
+
 				emailAddress =
-					"accountmanager." + account.getName().replace(" ", "") +
+					"accountmanager." + accountName.replace(" ", "") +
 						"@liferay.com";
 				roleName = _configuration.accountManagerRoleName();
 				firstName = "Account Manager";
@@ -1342,7 +1366,7 @@ public class OfficeSupplyGroupInitializer implements SiteInitializer {
 
 	private static final String _COMMERCE_CART_CONTENT_PORTLET_CLASS_NAME =
 		"com.liferay.commerce.cart.content.web.internal.portlet." +
-		"CommerceCartContentPortlet";
+			"CommerceCartContentPortlet";
 
 	private static final String _COMMERCE_CART_CONTENT_TOTAL_PORTLET_CLASS_NAME =
 		"com.liferay.commerce.cart.content.web.internal.portlet." +
