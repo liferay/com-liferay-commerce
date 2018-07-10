@@ -601,8 +601,14 @@ public class CPDefinitionLocalServiceImpl
 	public List<CPDefinition> getCPDefinitions(
 		long groupId, int status, int start, int end) {
 
-		return cpDefinitionPersistence.findByG_NotS(
-			groupId, status, start, end);
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return cpDefinitionPersistence.findByG_NotS(
+				groupId, WorkflowConstants.STATUS_IN_TRASH, start, end);
+		}
+		else {
+			return cpDefinitionPersistence.findByG_S(
+				groupId, status, start, end);
+		}
 	}
 
 	@Override
@@ -650,6 +656,17 @@ public class CPDefinitionLocalServiceImpl
 		}
 
 		return cpDefinitions;
+	}
+
+	@Override
+	public int getCPDefinitionsCount(long groupId, int status) {
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return cpDefinitionPersistence.countByG_NotS(
+				groupId, WorkflowConstants.STATUS_IN_TRASH);
+		}
+		else {
+			return cpDefinitionPersistence.countByG_S(groupId, status);
+		}
 	}
 
 	@Override
