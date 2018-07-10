@@ -510,6 +510,10 @@ public class CPDefinitionLocalServiceUtil {
 		return getService().getCPDefinitionsCount();
 	}
 
+	public static int getCPDefinitionsCount(long groupId, int status) {
+		return getService().getCPDefinitionsCount(groupId, status);
+	}
+
 	public static int getCPDefinitionsCount(long groupId,
 		String productTypeName, String languageId, int status) {
 		return getService()

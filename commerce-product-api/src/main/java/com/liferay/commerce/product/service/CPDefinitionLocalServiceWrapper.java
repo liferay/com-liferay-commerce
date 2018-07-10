@@ -540,6 +540,11 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 	}
 
 	@Override
+	public int getCPDefinitionsCount(long groupId, int status) {
+		return _cpDefinitionLocalService.getCPDefinitionsCount(groupId, status);
+	}
+
+	@Override
 	public int getCPDefinitionsCount(long groupId, String productTypeName,
 		String languageId, int status) {
 		return _cpDefinitionLocalService.getCPDefinitionsCount(groupId,
