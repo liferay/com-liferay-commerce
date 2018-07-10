@@ -55,6 +55,15 @@ public interface CommerceOrder extends CommerceOrderModel, PersistedModel {
 			}
 		};
 
+	public void setSubtotalDiscounts(
+		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue);
+
+	public void setShippingDiscounts(
+		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue);
+
+	public void setTotalDiscounts(
+		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue);
+
 	public CommerceAddress getBillingAddress()
 		throws com.liferay.portal.kernel.exception.PortalException;
 

@@ -1397,6 +1397,12 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		_commerceOrder.setShippingDiscountPercentageLevel4(shippingDiscountPercentageLevel4);
 	}
 
+	@Override
+	public void setShippingDiscounts(
+		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue) {
+		_commerceOrder.setShippingDiscounts(commerceDiscountValue);
+	}
+
 	/**
 	* Sets the shipping option name of this commerce order.
 	*
@@ -1531,6 +1537,12 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		_commerceOrder.setSubtotalDiscountPercentageLevel4(subtotalDiscountPercentageLevel4);
 	}
 
+	@Override
+	public void setSubtotalDiscounts(
+		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue) {
+		_commerceOrder.setSubtotalDiscounts(commerceDiscountValue);
+	}
+
 	/**
 	* Sets the tax amount of this commerce order.
 	*
@@ -1603,6 +1615,12 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	public void setTotalDiscountPercentageLevel4(
 		BigDecimal totalDiscountPercentageLevel4) {
 		_commerceOrder.setTotalDiscountPercentageLevel4(totalDiscountPercentageLevel4);
+	}
+
+	@Override
+	public void setTotalDiscounts(
+		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue) {
+		_commerceOrder.setTotalDiscounts(commerceDiscountValue);
 	}
 
 	/**
