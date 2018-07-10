@@ -65,15 +65,12 @@ Read details on announcements, engage in discussions and learn more by following
 ### Forum
 
 Do you have questions? Ask them on our
-[forums](http://www.liferay.com/community/forums).
+[forums](https://community.liferay.com/forums/-/message_boards/category/110421633).
 
 ### Chat
 
-Join the conversation on Liferay's Community Chat.
+Join the conversation in [`#emporio` channel](https://liferay-community.slack.com/messages/CBJBV8H8U) on Liferay's Community Chat.
 
-* Get your invite: [community-chat.liferay.com](https://community-chat.liferay.com)
-* Enter the chat: [liferay-community.slack.com](https://liferay-community.slack.com)
-* Channel: `#emporio`
 
 ## License
 
