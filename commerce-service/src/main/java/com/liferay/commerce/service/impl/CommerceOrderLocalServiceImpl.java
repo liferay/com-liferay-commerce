@@ -325,34 +325,25 @@ public class CommerceOrderLocalServiceImpl
 				commerceOrder, commerceContext);
 
 		CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
-		CommerceDiscountValue subtotalDiscountValue =
-			commerceOrderPrice.getSubtotalDiscountValue();
-
-		BigDecimal subtotalPrice = subtotal.getPrice();
-
-		if (subtotalDiscountValue != null) {
-			CommerceMoney subtotalDiscountAmount =
-				subtotalDiscountValue.getDiscountAmount();
-
-			subtotalPrice = subtotalPrice.subtract(
-				subtotalDiscountAmount.getPrice());
-		}
-
+		CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
+		CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
 		CommerceMoney total = commerceOrderPrice.getTotal();
-		CommerceDiscountValue totalDiscountValue =
-			commerceOrderPrice.getTotalDiscountValue();
 
-		BigDecimal totalPrice = total.getPrice();
+		BigDecimal subtotalAmount = subtotal.getPrice();
+		BigDecimal shippingAmount = shippingValue.getPrice();
+		BigDecimal taxAmount = taxValue.getPrice();
+		BigDecimal totalAmount = total.getPrice();
 
-		if (totalDiscountValue != null) {
-			CommerceMoney totalDiscountAmount =
-				totalDiscountValue.getDiscountAmount();
-
-			totalPrice = totalPrice.subtract(totalDiscountAmount.getPrice());
-		}
-
-		commerceOrder.setSubtotal(subtotalPrice);
-		commerceOrder.setTotal(totalPrice);
+		commerceOrder.setSubtotal(subtotalAmount);
+		commerceOrder.setSubtotalDiscounts(
+			commerceOrderPrice.getSubtotalDiscountValue());
+		commerceOrder.setShippingAmount(shippingAmount);
+		commerceOrder.setShippingDiscounts(
+			commerceOrderPrice.getShippingDiscountValue());
+		commerceOrder.setTaxAmount(taxAmount);
+		commerceOrder.setTotal(totalAmount);
+		commerceOrder.setTotalDiscounts(
+			commerceOrderPrice.getTotalDiscountValue());
 		commerceOrder.setOrderStatus(
 			CommerceOrderConstants.ORDER_STATUS_IN_PROGRESS);
 
