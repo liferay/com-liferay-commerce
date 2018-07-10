@@ -786,6 +786,7 @@
 		<column name="priority" type="double" />
 		<column name="key" type="String" />
 		<column name="lastPublishDate" type="Date" />
+		<column name="externalReferenceCode" type="String" />
 
 		<!-- Order -->
 
@@ -804,6 +805,9 @@
 		</finder>
 		<finder name="CPOptionId" return-type="Collection">
 			<finder-column name="CPOptionId" />
+		</finder>
+		<finder name="ExternalReferenceCode" return-type="CPOption" unique="true">
+			<finder-column name="externalReferenceCode" />
 		</finder>
 		<finder name="C_K" return-type="CPOptionValue" unique="true">
 			<finder-column name="CPOptionId" />

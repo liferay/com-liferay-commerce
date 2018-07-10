@@ -92,7 +92,8 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 			{ "name", Types.VARCHAR },
 			{ "priority", Types.DOUBLE },
 			{ "key_", Types.VARCHAR },
-			{ "lastPublishDate", Types.TIMESTAMP }
+			{ "lastPublishDate", Types.TIMESTAMP },
+			{ "externalReferenceCode", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -110,9 +111,10 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		TABLE_COLUMNS_MAP.put("priority", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("key_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPOptionValue (uuid_ VARCHAR(75) null,CPOptionValueId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPOptionId LONG,name STRING null,priority DOUBLE,key_ VARCHAR(75) null,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPOptionValue (uuid_ VARCHAR(75) null,CPOptionValueId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPOptionId LONG,name STRING null,priority DOUBLE,key_ VARCHAR(75) null,lastPublishDate DATE null,externalReferenceCode VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table CPOptionValue";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpOptionValue.priority ASC, cpOptionValue.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPOptionValue.priority ASC, CPOptionValue.name ASC";
@@ -130,11 +132,12 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 			true);
 	public static final long CPOPTIONID_COLUMN_BITMASK = 1L;
 	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long GROUPID_COLUMN_BITMASK = 4L;
-	public static final long KEY_COLUMN_BITMASK = 8L;
-	public static final long UUID_COLUMN_BITMASK = 16L;
-	public static final long PRIORITY_COLUMN_BITMASK = 32L;
-	public static final long NAME_COLUMN_BITMASK = 64L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 4L;
+	public static final long GROUPID_COLUMN_BITMASK = 8L;
+	public static final long KEY_COLUMN_BITMASK = 16L;
+	public static final long UUID_COLUMN_BITMASK = 32L;
+	public static final long PRIORITY_COLUMN_BITMASK = 64L;
+	public static final long NAME_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -162,6 +165,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		model.setPriority(soapModel.getPriority());
 		model.setKey(soapModel.getKey());
 		model.setLastPublishDate(soapModel.getLastPublishDate());
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 
 		return model;
 	}
@@ -239,6 +243,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		attributes.put("priority", getPriority());
 		attributes.put("key", getKey());
 		attributes.put("lastPublishDate", getLastPublishDate());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -324,6 +329,13 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 
 		if (lastPublishDate != null) {
 			setLastPublishDate(lastPublishDate);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 	}
 
@@ -653,6 +665,32 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		_lastPublishDate = lastPublishDate;
 	}
 
+	@JSON
+	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
+	}
+
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
@@ -764,6 +802,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		cpOptionValueImpl.setPriority(getPriority());
 		cpOptionValueImpl.setKey(getKey());
 		cpOptionValueImpl.setLastPublishDate(getLastPublishDate());
+		cpOptionValueImpl.setExternalReferenceCode(getExternalReferenceCode());
 
 		cpOptionValueImpl.resetOriginalValues();
 
@@ -856,6 +895,8 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 
 		cpOptionValueModelImpl._originalKey = cpOptionValueModelImpl._key;
 
+		cpOptionValueModelImpl._originalExternalReferenceCode = cpOptionValueModelImpl._externalReferenceCode;
+
 		cpOptionValueModelImpl._columnBitmask = 0;
 	}
 
@@ -934,12 +975,21 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 			cpOptionValueCacheModel.lastPublishDate = Long.MIN_VALUE;
 		}
 
+		cpOptionValueCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = cpOptionValueCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			cpOptionValueCacheModel.externalReferenceCode = null;
+		}
+
 		return cpOptionValueCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -967,6 +1017,8 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		sb.append(getKey());
 		sb.append(", lastPublishDate=");
 		sb.append(getLastPublishDate());
+		sb.append(", externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
 		sb.append("}");
 
 		return sb.toString();
@@ -974,7 +1026,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPOptionValue");
@@ -1032,6 +1084,10 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 			"<column><column-name>lastPublishDate</column-name><column-value><![CDATA[");
 		sb.append(getLastPublishDate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1065,6 +1121,8 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 	private String _key;
 	private String _originalKey;
 	private Date _lastPublishDate;
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _columnBitmask;
 	private CPOptionValue _escapedModel;
 }

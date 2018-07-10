@@ -47,6 +47,7 @@ public class CPOptionValueSoap implements Serializable {
 		soapModel.setPriority(model.getPriority());
 		soapModel.setKey(model.getKey());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 
 		return soapModel;
 	}
@@ -203,6 +204,14 @@ public class CPOptionValueSoap implements Serializable {
 		_lastPublishDate = lastPublishDate;
 	}
 
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
+	}
+
 	private String _uuid;
 	private long _CPOptionValueId;
 	private long _groupId;
@@ -216,4 +225,5 @@ public class CPOptionValueSoap implements Serializable {
 	private double _priority;
 	private String _key;
 	private Date _lastPublishDate;
+	private String _externalReferenceCode;
 }

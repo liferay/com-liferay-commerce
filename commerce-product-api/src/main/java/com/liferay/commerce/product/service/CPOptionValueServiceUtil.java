@@ -99,6 +99,16 @@ public class CPOptionValueServiceUtil {
 			key, serviceContext);
 	}
 
+	public static com.liferay.commerce.product.model.CPOptionValue upsertCPOptionValue(
+		long cpOptionId, java.util.Map<java.util.Locale, String> nameMap,
+		double priority, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .upsertCPOptionValue(cpOptionId, nameMap, priority, key,
+			externalReferenceCode, serviceContext);
+	}
+
 	public static CPOptionValueService getService() {
 		return _serviceTracker.getService();
 	}

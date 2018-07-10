@@ -978,6 +978,70 @@ public class CPOptionValueUtil {
 	}
 
 	/**
+	* Returns the cp option value where externalReferenceCode = &#63; or throws a {@link NoSuchCPOptionValueException} if it could not be found.
+	*
+	* @param externalReferenceCode the external reference code
+	* @return the matching cp option value
+	* @throws NoSuchCPOptionValueException if a matching cp option value could not be found
+	*/
+	public static CPOptionValue findByExternalReferenceCode(
+		String externalReferenceCode)
+		throws com.liferay.commerce.product.exception.NoSuchCPOptionValueException {
+		return getPersistence()
+				   .findByExternalReferenceCode(externalReferenceCode);
+	}
+
+	/**
+	* Returns the cp option value where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param externalReferenceCode the external reference code
+	* @return the matching cp option value, or <code>null</code> if a matching cp option value could not be found
+	*/
+	public static CPOptionValue fetchByExternalReferenceCode(
+		String externalReferenceCode) {
+		return getPersistence()
+				   .fetchByExternalReferenceCode(externalReferenceCode);
+	}
+
+	/**
+	* Returns the cp option value where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp option value, or <code>null</code> if a matching cp option value could not be found
+	*/
+	public static CPOptionValue fetchByExternalReferenceCode(
+		String externalReferenceCode, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByExternalReferenceCode(externalReferenceCode,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the cp option value where externalReferenceCode = &#63; from the database.
+	*
+	* @param externalReferenceCode the external reference code
+	* @return the cp option value that was removed
+	*/
+	public static CPOptionValue removeByExternalReferenceCode(
+		String externalReferenceCode)
+		throws com.liferay.commerce.product.exception.NoSuchCPOptionValueException {
+		return getPersistence()
+				   .removeByExternalReferenceCode(externalReferenceCode);
+	}
+
+	/**
+	* Returns the number of cp option values where externalReferenceCode = &#63;.
+	*
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching cp option values
+	*/
+	public static int countByExternalReferenceCode(String externalReferenceCode) {
+		return getPersistence()
+				   .countByExternalReferenceCode(externalReferenceCode);
+	}
+
+	/**
 	* Returns the cp option value where CPOptionId = &#63; and key = &#63; or throws a {@link NoSuchCPOptionValueException} if it could not be found.
 	*
 	* @param CPOptionId the cp option ID

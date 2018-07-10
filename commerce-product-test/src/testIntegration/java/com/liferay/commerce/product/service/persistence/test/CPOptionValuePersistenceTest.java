@@ -149,6 +149,8 @@ public class CPOptionValuePersistenceTest {
 
 		newCPOptionValue.setLastPublishDate(RandomTestUtil.nextDate());
 
+		newCPOptionValue.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		_cpOptionValues.add(_persistence.update(newCPOptionValue));
 
 		CPOptionValue existingCPOptionValue = _persistence.findByPrimaryKey(newCPOptionValue.getPrimaryKey());
@@ -182,6 +184,8 @@ public class CPOptionValuePersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPOptionValue.getLastPublishDate()),
 			Time.getShortTimestamp(newCPOptionValue.getLastPublishDate()));
+		Assert.assertEquals(existingCPOptionValue.getExternalReferenceCode(),
+			newCPOptionValue.getExternalReferenceCode());
 	}
 
 	@Test
@@ -233,6 +237,15 @@ public class CPOptionValuePersistenceTest {
 	}
 
 	@Test
+	public void testCountByExternalReferenceCode() throws Exception {
+		_persistence.countByExternalReferenceCode("");
+
+		_persistence.countByExternalReferenceCode("null");
+
+		_persistence.countByExternalReferenceCode((String)null);
+	}
+
+	@Test
 	public void testCountByC_K() throws Exception {
 		_persistence.countByC_K(RandomTestUtil.nextLong(), "");
 
@@ -268,7 +281,8 @@ public class CPOptionValuePersistenceTest {
 			true, "CPOptionValueId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
 			"modifiedDate", true, "CPOptionId", true, "name", true, "priority",
-			true, "key", true, "lastPublishDate", true);
+			true, "key", true, "lastPublishDate", true,
+			"externalReferenceCode", true);
 	}
 
 	@Test
@@ -480,6 +494,11 @@ public class CPOptionValuePersistenceTest {
 			ReflectionTestUtil.<Long>invoke(existingCPOptionValue,
 				"getOriginalGroupId", new Class<?>[0]));
 
+		Assert.assertTrue(Objects.equals(
+				existingCPOptionValue.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(existingCPOptionValue,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
+
 		Assert.assertEquals(Long.valueOf(existingCPOptionValue.getCPOptionId()),
 			ReflectionTestUtil.<Long>invoke(existingCPOptionValue,
 				"getOriginalCPOptionId", new Class<?>[0]));
@@ -516,6 +535,8 @@ public class CPOptionValuePersistenceTest {
 		cpOptionValue.setKey(RandomTestUtil.randomString());
 
 		cpOptionValue.setLastPublishDate(RandomTestUtil.nextDate());
+
+		cpOptionValue.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		_cpOptionValues.add(_persistence.update(cpOptionValue));
 

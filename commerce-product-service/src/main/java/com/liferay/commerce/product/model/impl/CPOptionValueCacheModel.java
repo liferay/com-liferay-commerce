@@ -65,7 +65,7 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -93,6 +93,8 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 		sb.append(key);
 		sb.append(", lastPublishDate=");
 		sb.append(lastPublishDate);
+		sb.append(", externalReferenceCode=");
+		sb.append(externalReferenceCode);
 		sb.append("}");
 
 		return sb.toString();
@@ -160,6 +162,13 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 			cpOptionValueImpl.setLastPublishDate(new Date(lastPublishDate));
 		}
 
+		if (externalReferenceCode == null) {
+			cpOptionValueImpl.setExternalReferenceCode("");
+		}
+		else {
+			cpOptionValueImpl.setExternalReferenceCode(externalReferenceCode);
+		}
+
 		cpOptionValueImpl.resetOriginalValues();
 
 		return cpOptionValueImpl;
@@ -186,6 +195,7 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 		priority = objectInput.readDouble();
 		key = objectInput.readUTF();
 		lastPublishDate = objectInput.readLong();
+		externalReferenceCode = objectInput.readUTF();
 	}
 
 	@Override
@@ -235,6 +245,13 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 		}
 
 		objectOutput.writeLong(lastPublishDate);
+
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
+		}
 	}
 
 	public String uuid;
@@ -250,4 +267,5 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 	public double priority;
 	public String key;
 	public long lastPublishDate;
+	public String externalReferenceCode;
 }

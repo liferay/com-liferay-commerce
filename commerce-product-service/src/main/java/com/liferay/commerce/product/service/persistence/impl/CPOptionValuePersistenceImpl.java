@@ -3002,6 +3002,242 @@ public class CPOptionValuePersistenceImpl extends BasePersistenceImpl<CPOptionVa
 	}
 
 	private static final String _FINDER_COLUMN_CPOPTIONID_CPOPTIONID_2 = "cpOptionValue.CPOptionId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_EXTERNALREFERENCECODE = new FinderPath(CPOptionValueModelImpl.ENTITY_CACHE_ENABLED,
+			CPOptionValueModelImpl.FINDER_CACHE_ENABLED,
+			CPOptionValueImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByExternalReferenceCode",
+			new String[] { String.class.getName() },
+			CPOptionValueModelImpl.EXTERNALREFERENCECODE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_EXTERNALREFERENCECODE = new FinderPath(CPOptionValueModelImpl.ENTITY_CACHE_ENABLED,
+			CPOptionValueModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByExternalReferenceCode",
+			new String[] { String.class.getName() });
+
+	/**
+	 * Returns the cp option value where externalReferenceCode = &#63; or throws a {@link NoSuchCPOptionValueException} if it could not be found.
+	 *
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching cp option value
+	 * @throws NoSuchCPOptionValueException if a matching cp option value could not be found
+	 */
+	@Override
+	public CPOptionValue findByExternalReferenceCode(
+		String externalReferenceCode) throws NoSuchCPOptionValueException {
+		CPOptionValue cpOptionValue = fetchByExternalReferenceCode(externalReferenceCode);
+
+		if (cpOptionValue == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("externalReferenceCode=");
+			msg.append(externalReferenceCode);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchCPOptionValueException(msg.toString());
+		}
+
+		return cpOptionValue;
+	}
+
+	/**
+	 * Returns the cp option value where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching cp option value, or <code>null</code> if a matching cp option value could not be found
+	 */
+	@Override
+	public CPOptionValue fetchByExternalReferenceCode(
+		String externalReferenceCode) {
+		return fetchByExternalReferenceCode(externalReferenceCode, true);
+	}
+
+	/**
+	 * Returns the cp option value where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param externalReferenceCode the external reference code
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching cp option value, or <code>null</code> if a matching cp option value could not be found
+	 */
+	@Override
+	public CPOptionValue fetchByExternalReferenceCode(
+		String externalReferenceCode, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { externalReferenceCode };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_EXTERNALREFERENCECODE,
+					finderArgs, this);
+		}
+
+		if (result instanceof CPOptionValue) {
+			CPOptionValue cpOptionValue = (CPOptionValue)result;
+
+			if (!Objects.equals(externalReferenceCode,
+						cpOptionValue.getExternalReferenceCode())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_CPOPTIONVALUE_WHERE);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode == null) {
+				query.append(_FINDER_COLUMN_EXTERNALREFERENCECODE_EXTERNALREFERENCECODE_1);
+			}
+			else if (externalReferenceCode.equals("")) {
+				query.append(_FINDER_COLUMN_EXTERNALREFERENCECODE_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_EXTERNALREFERENCECODE_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				List<CPOptionValue> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_EXTERNALREFERENCECODE,
+						finderArgs, list);
+				}
+				else {
+					CPOptionValue cpOptionValue = list.get(0);
+
+					result = cpOptionValue;
+
+					cacheResult(cpOptionValue);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_EXTERNALREFERENCECODE,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CPOptionValue)result;
+		}
+	}
+
+	/**
+	 * Removes the cp option value where externalReferenceCode = &#63; from the database.
+	 *
+	 * @param externalReferenceCode the external reference code
+	 * @return the cp option value that was removed
+	 */
+	@Override
+	public CPOptionValue removeByExternalReferenceCode(
+		String externalReferenceCode) throws NoSuchCPOptionValueException {
+		CPOptionValue cpOptionValue = findByExternalReferenceCode(externalReferenceCode);
+
+		return remove(cpOptionValue);
+	}
+
+	/**
+	 * Returns the number of cp option values where externalReferenceCode = &#63;.
+	 *
+	 * @param externalReferenceCode the external reference code
+	 * @return the number of matching cp option values
+	 */
+	@Override
+	public int countByExternalReferenceCode(String externalReferenceCode) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_EXTERNALREFERENCECODE;
+
+		Object[] finderArgs = new Object[] { externalReferenceCode };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_CPOPTIONVALUE_WHERE);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode == null) {
+				query.append(_FINDER_COLUMN_EXTERNALREFERENCECODE_EXTERNALREFERENCECODE_1);
+			}
+			else if (externalReferenceCode.equals("")) {
+				query.append(_FINDER_COLUMN_EXTERNALREFERENCECODE_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_EXTERNALREFERENCECODE_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_EXTERNALREFERENCECODE_EXTERNALREFERENCECODE_1 =
+		"cpOptionValue.externalReferenceCode IS NULL";
+	private static final String _FINDER_COLUMN_EXTERNALREFERENCECODE_EXTERNALREFERENCECODE_2 =
+		"cpOptionValue.externalReferenceCode = ?";
+	private static final String _FINDER_COLUMN_EXTERNALREFERENCECODE_EXTERNALREFERENCECODE_3 =
+		"(cpOptionValue.externalReferenceCode IS NULL OR cpOptionValue.externalReferenceCode = '')";
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_K = new FinderPath(CPOptionValueModelImpl.ENTITY_CACHE_ENABLED,
 			CPOptionValueModelImpl.FINDER_CACHE_ENABLED,
 			CPOptionValueImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByC_K",
@@ -3288,6 +3524,10 @@ public class CPOptionValuePersistenceImpl extends BasePersistenceImpl<CPOptionVa
 			new Object[] { cpOptionValue.getUuid(), cpOptionValue.getGroupId() },
 			cpOptionValue);
 
+		finderCache.putResult(FINDER_PATH_FETCH_BY_EXTERNALREFERENCECODE,
+			new Object[] { cpOptionValue.getExternalReferenceCode() },
+			cpOptionValue);
+
 		finderCache.putResult(FINDER_PATH_FETCH_BY_C_K,
 			new Object[] { cpOptionValue.getCPOptionId(), cpOptionValue.getKey() },
 			cpOptionValue);
@@ -3373,6 +3613,13 @@ public class CPOptionValuePersistenceImpl extends BasePersistenceImpl<CPOptionVa
 		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
 			cpOptionValueModelImpl, false);
 
+		args = new Object[] { cpOptionValueModelImpl.getExternalReferenceCode() };
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_EXTERNALREFERENCECODE, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_EXTERNALREFERENCECODE, args,
+			cpOptionValueModelImpl, false);
+
 		args = new Object[] {
 				cpOptionValueModelImpl.getCPOptionId(),
 				cpOptionValueModelImpl.getKey()
@@ -3405,6 +3652,29 @@ public class CPOptionValuePersistenceImpl extends BasePersistenceImpl<CPOptionVa
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					cpOptionValueModelImpl.getExternalReferenceCode()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_EXTERNALREFERENCECODE,
+				args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_EXTERNALREFERENCECODE,
+				args);
+		}
+
+		if ((cpOptionValueModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_EXTERNALREFERENCECODE.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					cpOptionValueModelImpl.getOriginalExternalReferenceCode()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_EXTERNALREFERENCECODE,
+				args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_EXTERNALREFERENCECODE,
+				args);
 		}
 
 		if (clearCurrent) {

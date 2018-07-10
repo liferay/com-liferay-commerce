@@ -282,6 +282,42 @@ public class CPOptionValueServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPOptionValue upsertCPOptionValue(
+		HttpPrincipal httpPrincipal, long cpOptionId,
+		java.util.Map<java.util.Locale, String> nameMap, double priority,
+		String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPOptionValueServiceUtil.class,
+					"upsertCPOptionValue", _upsertCPOptionValueParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					cpOptionId, nameMap, priority, key, externalReferenceCode,
+					serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.product.model.CPOptionValue)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CPOptionValueServiceHttp.class);
 	private static final Class<?>[] _addCPOptionValueParameterTypes0 = new Class[] {
 			long.class, java.util.Map.class, double.class, String.class,
@@ -305,5 +341,9 @@ public class CPOptionValueServiceHttp {
 	private static final Class<?>[] _updateCPOptionValueParameterTypes6 = new Class[] {
 			long.class, java.util.Map.class, double.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
+		};
+	private static final Class<?>[] _upsertCPOptionValueParameterTypes7 = new Class[] {
+			long.class, java.util.Map.class, double.class, String.class,
+			String.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
 }

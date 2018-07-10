@@ -87,6 +87,12 @@ public interface CPOptionValueLocalService extends BaseLocalService,
 		Map<Locale, String> nameMap, double priority, String key,
 		ServiceContext serviceContext) throws PortalException;
 
+	@Indexable(type = IndexableType.REINDEX)
+	public CPOptionValue addCPOptionValue(long cpOptionId,
+		Map<Locale, String> nameMap, double priority, String key,
+		String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	* Creates a new cp option value with the primary key. Does not add the cp option value to the database.
 	*
@@ -186,6 +192,10 @@ public interface CPOptionValueLocalService extends BaseLocalService,
 	*/
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPOptionValue fetchByExternalReferenceCode(
+		String externalReferenceCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOptionValue fetchCPOptionValue(long CPOptionValueId);
@@ -326,4 +336,9 @@ public interface CPOptionValueLocalService extends BaseLocalService,
 	public CPOptionValue updateCPOptionValue(long cpOptionValueId,
 		Map<Locale, String> nameMap, double priority, String key,
 		ServiceContext serviceContext) throws PortalException;
+
+	public CPOptionValue upsertCPOptionValue(long cpOptionId,
+		Map<Locale, String> nameMap, double priority, String key,
+		String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 }
