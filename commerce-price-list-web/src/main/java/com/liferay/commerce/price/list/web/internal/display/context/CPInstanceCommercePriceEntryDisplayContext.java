@@ -206,7 +206,7 @@ public class CPInstanceCommercePriceEntryDisplayContext
 
 	@Override
 	public String getScreenNavigationCategoryKey() {
-		return "price-lists";
+		return CPInstanceScreenNavigationConstants.CATEGORY_KEY_DETAILS;
 	}
 
 	public String getScreenNavigationEntryKey() {
