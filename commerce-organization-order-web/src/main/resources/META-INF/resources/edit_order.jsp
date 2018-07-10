@@ -379,9 +379,9 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 </liferay-ui:search-container>
 
 <aui:row>
-	<aui:col width="<%= 75 %>" />
+	<aui:col width="<%= 70 %>" />
 
-	<aui:col width="<%= 25 %>">
+	<aui:col width="<%= 30 %>">
 		<ul class="order-details-footer">
 			<li class="autofit-row commerce-subtotal">
 				<div class="autofit-col autofit-col-expand">
@@ -390,27 +390,33 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 
 				<div class="autofit-col">
 					<div class="commerce-value"><%= HtmlUtil.escape(subtotal.format(locale)) %></div>
-
-					<c:if test="<%= (subtotalDiscountValue != null) && (BigDecimal.ZERO.compareTo(subtotalDiscountValue.getDiscountPercentage()) < 0) %>">
-
-						<%
-						CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
-						%>
-
-						<div class="autofit-col autofit-col-expand">
-							<div class="commerce-description"><liferay-ui:message key="subtotal-discount" /></div>
-						</div>
-
-						<div class="order-details-subtitle order-value">
-							<%= HtmlUtil.escape(subtotalDiscountAmount.format(locale)) %>
-						</div>
-
-						<div class="order-details-subtitle order-value">
-							<%= HtmlUtil.escape(commerceOrganizationOrderDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %>
-						</div>
-					</c:if>
 				</div>
 			</li>
+
+			<c:if test="<%= (subtotalDiscountValue != null) && (BigDecimal.ZERO.compareTo(subtotalDiscountValue.getDiscountPercentage()) < 0) %>">
+
+				<%
+				CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
+				%>
+
+				<li class="autofit-row commerce-subtotal-discount">
+					<div class="autofit-col autofit-col-expand">
+						<div class="commerce-description"><liferay-ui:message key="subtotal-discount" /></div>
+					</div>
+
+					<div class="order-details-subtitle order-value">
+						<%= HtmlUtil.escape(subtotalDiscountAmount.format(locale)) %>
+					</div>
+				</li>
+				<li class="autofit-row commerce-subtotal-discount">
+					<div class="autofit-col autofit-col-expand"></div>
+
+					<div class="order-details-subtitle order-value">
+						<%= HtmlUtil.escape(commerceOrganizationOrderDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %>
+					</div>
+				</li>
+			</c:if>
+
 			<li class="autofit-row commerce-delivery">
 				<div class="autofit-col autofit-col-expand">
 					<div class="commerce-description"><liferay-ui:message key="delivery" /></div>
@@ -419,13 +425,15 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 				<div class="autofit-col">
 					<div class="commerce-value"><%= HtmlUtil.escape(shippingValue.format(locale)) %></div>
 				</div>
+			</li>
 
-				<c:if test="<%= (shippingDiscountValue != null) && (BigDecimal.ZERO.compareTo(shippingDiscountValue.getDiscountPercentage()) < 0) %>">
+			<c:if test="<%= (shippingDiscountValue != null) && (BigDecimal.ZERO.compareTo(shippingDiscountValue.getDiscountPercentage()) < 0) %>">
 
-					<%
-					CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount();
-					%>
+				<%
+				CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount();
+				%>
 
+				<li class="autofit-row commerce-delivery-discount">
 					<div class="autofit-col autofit-col-expand">
 						<div class="commerce-description"><liferay-ui:message key="delivery-discount" /></div>
 					</div>
@@ -433,12 +441,16 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 					<div class="order-details-subtitle order-value">
 						<%= HtmlUtil.escape(shippingDiscountAmount.format(locale)) %>
 					</div>
+				</li>
+				<li class="autofit-row commerce-delivery-discount">
+					<div class="autofit-col autofit-col-expand"></div>
 
 					<div class="order-details-subtitle order-value">
 						<%= HtmlUtil.escape(commerceOrganizationOrderDisplayContext.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage())) %>
 					</div>
-				</c:if>
-			</li>
+				</li>
+			</c:if>
+
 			<li class="autofit-row commerce-tax">
 				<div class="autofit-col autofit-col-expand">
 					<div class="commerce-description"><liferay-ui:message key="tax" /></div>
@@ -448,13 +460,14 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 					<div class="commerce-value"><%= HtmlUtil.escape(taxValue.format(locale)) %></div>
 				</div>
 			</li>
-			<li class="autofit-row commerce-total">
-				<c:if test="<%= (totalDiscountValue != null) && (BigDecimal.ZERO.compareTo(totalDiscountValue.getDiscountPercentage()) < 0) %>">
 
-					<%
-					CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount();
-					%>
+			<c:if test="<%= (totalDiscountValue != null) && (BigDecimal.ZERO.compareTo(totalDiscountValue.getDiscountPercentage()) < 0) %>">
 
+				<%
+				CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount();
+				%>
+
+				<li class="autofit-row commerce-total-discount">
 					<div class="autofit-col autofit-col-expand">
 						<div class="commerce-description"><liferay-ui:message key="total-discount" /></div>
 					</div>
@@ -462,12 +475,17 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 					<div class="order-details-subtitle order-value">
 						<%= HtmlUtil.escape(totalDiscountAmount.format(locale)) %>
 					</div>
+				</li>
+				<li class="autofit-row commerce-total-discount">
+					<div class="autofit-col autofit-col-expand"></div>
 
 					<div class="order-details-subtitle order-value">
 						<%= HtmlUtil.escape(commerceOrganizationOrderDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage())) %>
 					</div>
-				</c:if>
+				</li>
+			</c:if>
 
+			<li class="autofit-row commerce-total">
 				<div class="autofit-col autofit-col-expand">
 					<div class="commerce-description order-total"><liferay-ui:message key="total" /></div>
 				</div>
