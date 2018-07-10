@@ -237,7 +237,8 @@ create table CPOption (
 	required BOOLEAN,
 	skuContributor BOOLEAN,
 	key_ VARCHAR(75) null,
-	lastPublishDate DATE null
+	lastPublishDate DATE null,
+	externalReferenceCode VARCHAR(75) null
 );
 
 create table CPOptionCategory (

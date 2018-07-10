@@ -66,6 +66,19 @@ public class CPOptionLocalServiceUtil {
 			facetable, required, skuContributor, key, serviceContext);
 	}
 
+	public static com.liferay.commerce.product.model.CPOption addCPOption(
+		java.util.Map<java.util.Locale, String> nameMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
+		String ddmFormFieldTypeName, boolean facetable, boolean required,
+		boolean skuContributor, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCPOption(nameMap, descriptionMap, ddmFormFieldTypeName,
+			facetable, required, skuContributor, key, externalReferenceCode,
+			serviceContext);
+	}
+
 	/**
 	* Creates a new cp option with the primary key. Does not add the cp option to the database.
 	*
@@ -193,6 +206,11 @@ public class CPOptionLocalServiceUtil {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
 		com.liferay.portal.kernel.dao.orm.Projection projection) {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
+	}
+
+	public static com.liferay.commerce.product.model.CPOption fetchByExternalReferenceCode(
+		String externalReferenceCode) {
+		return getService().fetchByExternalReferenceCode(externalReferenceCode);
 	}
 
 	public static com.liferay.commerce.product.model.CPOption fetchCPOption(
@@ -403,6 +421,19 @@ public class CPOptionLocalServiceUtil {
 				   .updateCPOption(cpOptionId, nameMap, descriptionMap,
 			ddmFormFieldTypeName, facetable, required, skuContributor, key,
 			serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CPOption upsertCPOption(
+		java.util.Map<java.util.Locale, String> nameMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
+		String ddmFormFieldTypeName, boolean facetable, boolean required,
+		boolean skuContributor, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .upsertCPOption(nameMap, descriptionMap,
+			ddmFormFieldTypeName, facetable, required, skuContributor, key,
+			externalReferenceCode, serviceContext);
 	}
 
 	public static CPOptionLocalService getService() {
