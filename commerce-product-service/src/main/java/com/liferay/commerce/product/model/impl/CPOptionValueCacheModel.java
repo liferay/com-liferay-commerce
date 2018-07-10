@@ -65,10 +65,12 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
+		sb.append(", externalReferenceCode=");
+		sb.append(externalReferenceCode);
 		sb.append(", CPOptionValueId=");
 		sb.append(CPOptionValueId);
 		sb.append(", groupId=");
@@ -107,6 +109,13 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 		}
 		else {
 			cpOptionValueImpl.setUuid(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			cpOptionValueImpl.setExternalReferenceCode("");
+		}
+		else {
+			cpOptionValueImpl.setExternalReferenceCode(externalReferenceCode);
 		}
 
 		cpOptionValueImpl.setCPOptionValueId(CPOptionValueId);
@@ -168,6 +177,7 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
+		externalReferenceCode = objectInput.readUTF();
 
 		CPOptionValueId = objectInput.readLong();
 
@@ -196,6 +206,13 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 		}
 		else {
 			objectOutput.writeUTF(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
 		}
 
 		objectOutput.writeLong(CPOptionValueId);
@@ -238,6 +255,7 @@ public class CPOptionValueCacheModel implements CacheModel<CPOptionValue>,
 	}
 
 	public String uuid;
+	public String externalReferenceCode;
 	public long CPOptionValueId;
 	public long groupId;
 	public long companyId;

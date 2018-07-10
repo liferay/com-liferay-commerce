@@ -35,6 +35,7 @@ public class CommercePriceListSoap implements Serializable {
 		CommercePriceListSoap soapModel = new CommercePriceListSoap();
 
 		soapModel.setUuid(model.getUuid());
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCommercePriceListId(model.getCommercePriceListId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -46,7 +47,6 @@ public class CommercePriceListSoap implements Serializable {
 		soapModel.setCommerceCurrencyId(model.getCommerceCurrencyId());
 		soapModel.setName(model.getName());
 		soapModel.setPriority(model.getPriority());
-		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setDisplayDate(model.getDisplayDate());
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
@@ -115,6 +115,14 @@ public class CommercePriceListSoap implements Serializable {
 
 	public void setUuid(String uuid) {
 		_uuid = uuid;
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public long getCommercePriceListId() {
@@ -205,14 +213,6 @@ public class CommercePriceListSoap implements Serializable {
 		_priority = priority;
 	}
 
-	public String getExternalReferenceCode() {
-		return _externalReferenceCode;
-	}
-
-	public void setExternalReferenceCode(String externalReferenceCode) {
-		_externalReferenceCode = externalReferenceCode;
-	}
-
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
@@ -270,6 +270,7 @@ public class CommercePriceListSoap implements Serializable {
 	}
 
 	private String _uuid;
+	private String _externalReferenceCode;
 	private long _commercePriceListId;
 	private long _groupId;
 	private long _companyId;
@@ -281,7 +282,6 @@ public class CommercePriceListSoap implements Serializable {
 	private long _commerceCurrencyId;
 	private String _name;
 	private double _priority;
-	private String _externalReferenceCode;
 	private Date _displayDate;
 	private Date _expirationDate;
 	private Date _lastPublishDate;

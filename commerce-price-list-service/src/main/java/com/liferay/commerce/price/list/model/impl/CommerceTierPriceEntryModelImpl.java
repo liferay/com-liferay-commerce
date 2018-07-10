@@ -76,6 +76,7 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 	public static final String TABLE_NAME = "CommerceTierPriceEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
+			{ "externalReferenceCode", Types.VARCHAR },
 			{ "commerceTierPriceEntryId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -84,7 +85,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "commercePriceEntryId", Types.BIGINT },
-			{ "externalReferenceCode", Types.VARCHAR },
 			{ "price", Types.DECIMAL },
 			{ "promoPrice", Types.DECIMAL },
 			{ "minQuantity", Types.INTEGER },
@@ -94,6 +94,7 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceTierPriceEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
@@ -102,14 +103,13 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("commercePriceEntryId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("price", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("promoPrice", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("minQuantity", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceTierPriceEntry (uuid_ VARCHAR(75) null,commerceTierPriceEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commercePriceEntryId LONG,externalReferenceCode VARCHAR(75) null,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,minQuantity INTEGER,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceTierPriceEntry (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceTierPriceEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commercePriceEntryId LONG,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,minQuantity INTEGER,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceTierPriceEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceTierPriceEntry.minQuantity ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceTierPriceEntry.minQuantity ASC";
@@ -147,6 +147,7 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		CommerceTierPriceEntry model = new CommerceTierPriceEntryImpl();
 
 		model.setUuid(soapModel.getUuid());
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCommerceTierPriceEntryId(soapModel.getCommerceTierPriceEntryId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -155,7 +156,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setCommercePriceEntryId(soapModel.getCommercePriceEntryId());
-		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setPrice(soapModel.getPrice());
 		model.setPromoPrice(soapModel.getPromoPrice());
 		model.setMinQuantity(soapModel.getMinQuantity());
@@ -226,6 +226,7 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceTierPriceEntryId", getCommerceTierPriceEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -234,7 +235,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commercePriceEntryId", getCommercePriceEntryId());
-		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("price", getPrice());
 		attributes.put("promoPrice", getPromoPrice());
 		attributes.put("minQuantity", getMinQuantity());
@@ -252,6 +252,13 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long commerceTierPriceEntryId = (Long)attributes.get(
@@ -303,13 +310,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 			setCommercePriceEntryId(commercePriceEntryId);
 		}
 
-		String externalReferenceCode = (String)attributes.get(
-				"externalReferenceCode");
-
-		if (externalReferenceCode != null) {
-			setExternalReferenceCode(externalReferenceCode);
-		}
-
 		BigDecimal price = (BigDecimal)attributes.get("price");
 
 		if (price != null) {
@@ -357,6 +357,32 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 
 	public String getOriginalUuid() {
 		return GetterUtil.getString(_originalUuid);
+	}
+
+	@JSON
+	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
 	}
 
 	@JSON
@@ -512,32 +538,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 
 	@JSON
 	@Override
-	public String getExternalReferenceCode() {
-		if (_externalReferenceCode == null) {
-			return "";
-		}
-		else {
-			return _externalReferenceCode;
-		}
-	}
-
-	@Override
-	public void setExternalReferenceCode(String externalReferenceCode) {
-		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
-
-		if (_originalExternalReferenceCode == null) {
-			_originalExternalReferenceCode = _externalReferenceCode;
-		}
-
-		_externalReferenceCode = externalReferenceCode;
-	}
-
-	public String getOriginalExternalReferenceCode() {
-		return GetterUtil.getString(_originalExternalReferenceCode);
-	}
-
-	@JSON
-	@Override
 	public BigDecimal getPrice() {
 		return _price;
 	}
@@ -630,6 +630,7 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		CommerceTierPriceEntryImpl commerceTierPriceEntryImpl = new CommerceTierPriceEntryImpl();
 
 		commerceTierPriceEntryImpl.setUuid(getUuid());
+		commerceTierPriceEntryImpl.setExternalReferenceCode(getExternalReferenceCode());
 		commerceTierPriceEntryImpl.setCommerceTierPriceEntryId(getCommerceTierPriceEntryId());
 		commerceTierPriceEntryImpl.setGroupId(getGroupId());
 		commerceTierPriceEntryImpl.setCompanyId(getCompanyId());
@@ -638,7 +639,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		commerceTierPriceEntryImpl.setCreateDate(getCreateDate());
 		commerceTierPriceEntryImpl.setModifiedDate(getModifiedDate());
 		commerceTierPriceEntryImpl.setCommercePriceEntryId(getCommercePriceEntryId());
-		commerceTierPriceEntryImpl.setExternalReferenceCode(getExternalReferenceCode());
 		commerceTierPriceEntryImpl.setPrice(getPrice());
 		commerceTierPriceEntryImpl.setPromoPrice(getPromoPrice());
 		commerceTierPriceEntryImpl.setMinQuantity(getMinQuantity());
@@ -713,6 +713,8 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 
 		commerceTierPriceEntryModelImpl._originalUuid = commerceTierPriceEntryModelImpl._uuid;
 
+		commerceTierPriceEntryModelImpl._originalExternalReferenceCode = commerceTierPriceEntryModelImpl._externalReferenceCode;
+
 		commerceTierPriceEntryModelImpl._originalGroupId = commerceTierPriceEntryModelImpl._groupId;
 
 		commerceTierPriceEntryModelImpl._setOriginalGroupId = false;
@@ -726,8 +728,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		commerceTierPriceEntryModelImpl._originalCommercePriceEntryId = commerceTierPriceEntryModelImpl._commercePriceEntryId;
 
 		commerceTierPriceEntryModelImpl._setOriginalCommercePriceEntryId = false;
-
-		commerceTierPriceEntryModelImpl._originalExternalReferenceCode = commerceTierPriceEntryModelImpl._externalReferenceCode;
 
 		commerceTierPriceEntryModelImpl._originalMinQuantity = commerceTierPriceEntryModelImpl._minQuantity;
 
@@ -746,6 +746,15 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 
 		if ((uuid != null) && (uuid.length() == 0)) {
 			commerceTierPriceEntryCacheModel.uuid = null;
+		}
+
+		commerceTierPriceEntryCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = commerceTierPriceEntryCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			commerceTierPriceEntryCacheModel.externalReferenceCode = null;
 		}
 
 		commerceTierPriceEntryCacheModel.commerceTierPriceEntryId = getCommerceTierPriceEntryId();
@@ -784,15 +793,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 
 		commerceTierPriceEntryCacheModel.commercePriceEntryId = getCommercePriceEntryId();
 
-		commerceTierPriceEntryCacheModel.externalReferenceCode = getExternalReferenceCode();
-
-		String externalReferenceCode = commerceTierPriceEntryCacheModel.externalReferenceCode;
-
-		if ((externalReferenceCode != null) &&
-				(externalReferenceCode.length() == 0)) {
-			commerceTierPriceEntryCacheModel.externalReferenceCode = null;
-		}
-
 		commerceTierPriceEntryCacheModel.price = getPrice();
 
 		commerceTierPriceEntryCacheModel.promoPrice = getPromoPrice();
@@ -817,6 +817,8 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
+		sb.append(", externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
 		sb.append(", commerceTierPriceEntryId=");
 		sb.append(getCommerceTierPriceEntryId());
 		sb.append(", groupId=");
@@ -833,8 +835,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		sb.append(getModifiedDate());
 		sb.append(", commercePriceEntryId=");
 		sb.append(getCommercePriceEntryId());
-		sb.append(", externalReferenceCode=");
-		sb.append(getExternalReferenceCode());
 		sb.append(", price=");
 		sb.append(getPrice());
 		sb.append(", promoPrice=");
@@ -860,6 +860,10 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>commerceTierPriceEntryId</column-name><column-value><![CDATA[");
@@ -894,10 +898,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		sb.append(getCommercePriceEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
-		sb.append(getExternalReferenceCode());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>price</column-name><column-value><![CDATA[");
 		sb.append(getPrice());
 		sb.append("]]></column-value></column>");
@@ -925,6 +925,8 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 		};
 	private String _uuid;
 	private String _originalUuid;
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _commerceTierPriceEntryId;
 	private long _groupId;
 	private long _originalGroupId;
@@ -940,8 +942,6 @@ public class CommerceTierPriceEntryModelImpl extends BaseModelImpl<CommerceTierP
 	private long _commercePriceEntryId;
 	private long _originalCommercePriceEntryId;
 	private boolean _setOriginalCommercePriceEntryId;
-	private String _externalReferenceCode;
-	private String _originalExternalReferenceCode;
 	private BigDecimal _price;
 	private BigDecimal _promoPrice;
 	private int _minQuantity;

@@ -240,13 +240,29 @@ public class CPInstanceLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPInstance fetchByExternalReferenceCode(
-		String externalReferenceCode) {
-		return getService().fetchByExternalReferenceCode(externalReferenceCode);
+		long companyId, String externalReferenceCode) {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	public static com.liferay.commerce.product.model.CPInstance fetchCPInstance(
 		long CPInstanceId) {
 		return getService().fetchCPInstance(CPInstanceId);
+	}
+
+	/**
+	* Returns the cp instance with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the cp instance's external reference code
+	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	*/
+	public static com.liferay.commerce.product.model.CPInstance fetchCPInstanceByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return getService()
+				   .fetchCPInstanceByReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	/**
@@ -307,10 +323,12 @@ public class CPInstanceLocalServiceUtil {
 		return getService().getCPInstance(cpDefinitionId, sku);
 	}
 
-	public static com.liferay.commerce.product.model.CPInstance getCPInstance(
-		String externalReferenceCode)
+	public static com.liferay.commerce.product.model.CPInstance getCPInstanceByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPInstance(externalReferenceCode);
+		return getService()
+				   .getCPInstanceByExternalReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	/**

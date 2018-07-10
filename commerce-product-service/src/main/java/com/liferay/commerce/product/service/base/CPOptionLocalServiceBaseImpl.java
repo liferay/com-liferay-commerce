@@ -255,6 +255,19 @@ public abstract class CPOptionLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the cp option with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the cp option's external reference code
+	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
+	 */
+	@Override
+	public CPOption fetchCPOptionByReferenceCode(long companyId,
+		String externalReferenceCode) {
+		return cpOptionPersistence.fetchByC_ERC(companyId, null);
+	}
+
+	/**
 	 * Returns the cp option with the primary key.
 	 *
 	 * @param CPOptionId the primary key of the cp option

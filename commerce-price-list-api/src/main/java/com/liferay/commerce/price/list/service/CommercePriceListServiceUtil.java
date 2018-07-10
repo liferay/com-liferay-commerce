@@ -81,9 +81,11 @@ public class CommercePriceListServiceUtil {
 	}
 
 	public static com.liferay.commerce.price.list.model.CommercePriceList fetchByExternalReferenceCode(
-		String externalReferenceCode)
+		long companyId, String externalReferenceCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().fetchByExternalReferenceCode(externalReferenceCode);
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	public static com.liferay.commerce.price.list.model.CommercePriceList fetchCommercePriceList(

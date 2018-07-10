@@ -159,14 +159,16 @@ public class CommerceTierPriceEntryServiceHttp {
 	}
 
 	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry fetchByExternalReferenceCode(
-		HttpPrincipal httpPrincipal, String externalReferenceCode) {
+		HttpPrincipal httpPrincipal, long companyId,
+		String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"fetchByExternalReferenceCode",
 					_fetchByExternalReferenceCodeParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					externalReferenceCode);
+					companyId, externalReferenceCode);
 
 			Object returnObj = null;
 
@@ -174,6 +176,10 @@ public class CommerceTierPriceEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
@@ -544,7 +550,7 @@ public class CommerceTierPriceEntryServiceHttp {
 	private static final Class<?>[] _deleteCommerceTierPriceEntryParameterTypes2 =
 		new Class[] { long.class };
 	private static final Class<?>[] _fetchByExternalReferenceCodeParameterTypes3 =
-		new Class[] { String.class };
+		new Class[] { long.class, String.class };
 	private static final Class<?>[] _fetchCommerceTierPriceEntriesParameterTypes4 =
 		new Class[] { long.class, int.class, int.class };
 	private static final Class<?>[] _fetchCommerceTierPriceEntryParameterTypes5 = new Class[] {

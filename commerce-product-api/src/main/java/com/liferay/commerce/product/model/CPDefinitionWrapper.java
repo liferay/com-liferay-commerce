@@ -61,6 +61,7 @@ public class CPDefinitionWrapper implements CPDefinition,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("defaultLanguageId", getDefaultLanguageId());
 		attributes.put("CPDefinitionId", getCPDefinitionId());
 		attributes.put("groupId", getGroupId());
@@ -85,7 +86,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 		attributes.put("telcoOrElectronics", isTelcoOrElectronics());
 		attributes.put("DDMStructureKey", getDDMStructureKey());
 		attributes.put("published", isPublished());
-		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("displayDate", getDisplayDate());
 		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
@@ -103,6 +103,13 @@ public class CPDefinitionWrapper implements CPDefinition,
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		String defaultLanguageId = (String)attributes.get("defaultLanguageId");
@@ -250,13 +257,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 
 		if (published != null) {
 			setPublished(published);
-		}
-
-		String externalReferenceCode = (String)attributes.get(
-				"externalReferenceCode");
-
-		if (externalReferenceCode != null) {
-			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Date displayDate = (Date)attributes.get("displayDate");

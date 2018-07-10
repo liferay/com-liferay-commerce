@@ -71,6 +71,8 @@ public class CommerceTierPriceEntryCacheModel implements CacheModel<CommerceTier
 
 		sb.append("{uuid=");
 		sb.append(uuid);
+		sb.append(", externalReferenceCode=");
+		sb.append(externalReferenceCode);
 		sb.append(", commerceTierPriceEntryId=");
 		sb.append(commerceTierPriceEntryId);
 		sb.append(", groupId=");
@@ -87,8 +89,6 @@ public class CommerceTierPriceEntryCacheModel implements CacheModel<CommerceTier
 		sb.append(modifiedDate);
 		sb.append(", commercePriceEntryId=");
 		sb.append(commercePriceEntryId);
-		sb.append(", externalReferenceCode=");
-		sb.append(externalReferenceCode);
 		sb.append(", price=");
 		sb.append(price);
 		sb.append(", promoPrice=");
@@ -111,6 +111,13 @@ public class CommerceTierPriceEntryCacheModel implements CacheModel<CommerceTier
 		}
 		else {
 			commerceTierPriceEntryImpl.setUuid(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			commerceTierPriceEntryImpl.setExternalReferenceCode("");
+		}
+		else {
+			commerceTierPriceEntryImpl.setExternalReferenceCode(externalReferenceCode);
 		}
 
 		commerceTierPriceEntryImpl.setCommerceTierPriceEntryId(commerceTierPriceEntryId);
@@ -140,14 +147,6 @@ public class CommerceTierPriceEntryCacheModel implements CacheModel<CommerceTier
 		}
 
 		commerceTierPriceEntryImpl.setCommercePriceEntryId(commercePriceEntryId);
-
-		if (externalReferenceCode == null) {
-			commerceTierPriceEntryImpl.setExternalReferenceCode("");
-		}
-		else {
-			commerceTierPriceEntryImpl.setExternalReferenceCode(externalReferenceCode);
-		}
-
 		commerceTierPriceEntryImpl.setPrice(price);
 		commerceTierPriceEntryImpl.setPromoPrice(promoPrice);
 		commerceTierPriceEntryImpl.setMinQuantity(minQuantity);
@@ -169,6 +168,7 @@ public class CommerceTierPriceEntryCacheModel implements CacheModel<CommerceTier
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
 		uuid = objectInput.readUTF();
+		externalReferenceCode = objectInput.readUTF();
 
 		commerceTierPriceEntryId = objectInput.readLong();
 
@@ -182,7 +182,6 @@ public class CommerceTierPriceEntryCacheModel implements CacheModel<CommerceTier
 		modifiedDate = objectInput.readLong();
 
 		commercePriceEntryId = objectInput.readLong();
-		externalReferenceCode = objectInput.readUTF();
 		price = (BigDecimal)objectInput.readObject();
 		promoPrice = (BigDecimal)objectInput.readObject();
 
@@ -198,6 +197,13 @@ public class CommerceTierPriceEntryCacheModel implements CacheModel<CommerceTier
 		}
 		else {
 			objectOutput.writeUTF(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
 		}
 
 		objectOutput.writeLong(commerceTierPriceEntryId);
@@ -219,14 +225,6 @@ public class CommerceTierPriceEntryCacheModel implements CacheModel<CommerceTier
 		objectOutput.writeLong(modifiedDate);
 
 		objectOutput.writeLong(commercePriceEntryId);
-
-		if (externalReferenceCode == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(externalReferenceCode);
-		}
-
 		objectOutput.writeObject(price);
 		objectOutput.writeObject(promoPrice);
 
@@ -235,6 +233,7 @@ public class CommerceTierPriceEntryCacheModel implements CacheModel<CommerceTier
 	}
 
 	public String uuid;
+	public String externalReferenceCode;
 	public long commerceTierPriceEntryId;
 	public long groupId;
 	public long companyId;
@@ -243,7 +242,6 @@ public class CommerceTierPriceEntryCacheModel implements CacheModel<CommerceTier
 	public long createDate;
 	public long modifiedDate;
 	public long commercePriceEntryId;
-	public String externalReferenceCode;
 	public BigDecimal price;
 	public BigDecimal promoPrice;
 	public int minQuantity;

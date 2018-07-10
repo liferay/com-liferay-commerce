@@ -102,4 +102,10 @@ public interface CPOptionService extends BaseService {
 		String ddmFormFieldTypeName, boolean facetable, boolean required,
 		boolean skuContributor, String key, ServiceContext serviceContext)
 		throws PortalException;
+
+	public CPOption upsertCPOption(Map<Locale, String> nameMap,
+		Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
+		boolean facetable, boolean required, boolean skuContributor,
+		String key, String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 }

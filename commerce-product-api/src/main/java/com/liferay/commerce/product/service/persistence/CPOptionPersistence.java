@@ -544,6 +544,56 @@ public interface CPOptionPersistence extends BasePersistence<CPOption> {
 	public int countByG_K(long groupId, String key);
 
 	/**
+	* Returns the cp option where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchCPOptionException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching cp option
+	* @throws NoSuchCPOptionException if a matching cp option could not be found
+	*/
+	public CPOption findByC_ERC(long companyId, String externalReferenceCode)
+		throws NoSuchCPOptionException;
+
+	/**
+	* Returns the cp option where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching cp option, or <code>null</code> if a matching cp option could not be found
+	*/
+	public CPOption fetchByC_ERC(long companyId, String externalReferenceCode);
+
+	/**
+	* Returns the cp option where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp option, or <code>null</code> if a matching cp option could not be found
+	*/
+	public CPOption fetchByC_ERC(long companyId, String externalReferenceCode,
+		boolean retrieveFromCache);
+
+	/**
+	* Removes the cp option where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the cp option that was removed
+	*/
+	public CPOption removeByC_ERC(long companyId, String externalReferenceCode)
+		throws NoSuchCPOptionException;
+
+	/**
+	* Returns the number of cp options where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching cp options
+	*/
+	public int countByC_ERC(long companyId, String externalReferenceCode);
+
+	/**
 	* Caches the cp option in the entity cache if it is enabled.
 	*
 	* @param cpOption the cp option

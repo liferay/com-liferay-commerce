@@ -129,6 +129,8 @@ public class CPInstancePersistenceTest {
 
 		newCPInstance.setUuid(RandomTestUtil.randomString());
 
+		newCPInstance.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		newCPInstance.setGroupId(RandomTestUtil.nextLong());
 
 		newCPInstance.setCompanyId(RandomTestUtil.nextLong());
@@ -169,8 +171,6 @@ public class CPInstancePersistenceTest {
 
 		newCPInstance.setPublished(RandomTestUtil.randomBoolean());
 
-		newCPInstance.setExternalReferenceCode(RandomTestUtil.randomString());
-
 		newCPInstance.setDisplayDate(RandomTestUtil.nextDate());
 
 		newCPInstance.setExpirationDate(RandomTestUtil.nextDate());
@@ -191,6 +191,8 @@ public class CPInstancePersistenceTest {
 
 		Assert.assertEquals(existingCPInstance.getUuid(),
 			newCPInstance.getUuid());
+		Assert.assertEquals(existingCPInstance.getExternalReferenceCode(),
+			newCPInstance.getExternalReferenceCode());
 		Assert.assertEquals(existingCPInstance.getCPInstanceId(),
 			newCPInstance.getCPInstanceId());
 		Assert.assertEquals(existingCPInstance.getGroupId(),
@@ -234,8 +236,6 @@ public class CPInstancePersistenceTest {
 			newCPInstance.getCost());
 		Assert.assertEquals(existingCPInstance.isPublished(),
 			newCPInstance.isPublished());
-		Assert.assertEquals(existingCPInstance.getExternalReferenceCode(),
-			newCPInstance.getExternalReferenceCode());
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPInstance.getDisplayDate()),
 			Time.getShortTimestamp(newCPInstance.getDisplayDate()));
@@ -305,15 +305,6 @@ public class CPInstancePersistenceTest {
 	}
 
 	@Test
-	public void testCountByExternalReferenceCode() throws Exception {
-		_persistence.countByExternalReferenceCode("");
-
-		_persistence.countByExternalReferenceCode("null");
-
-		_persistence.countByExternalReferenceCode((String)null);
-	}
-
-	@Test
 	public void testCountByG_ST() throws Exception {
 		_persistence.countByG_ST(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextInt());
@@ -371,6 +362,15 @@ public class CPInstancePersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPInstance newCPInstance = addCPInstance();
 
@@ -394,15 +394,15 @@ public class CPInstancePersistenceTest {
 
 	protected OrderByComparator<CPInstance> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CPInstance", "uuid", true,
-			"CPInstanceId", true, "groupId", true, "companyId", true, "userId",
-			true, "userName", true, "createDate", true, "modifiedDate", true,
-			"CPDefinitionId", true, "sku", true, "gtin", true,
-			"manufacturerPartNumber", true, "purchasable", true, "width", true,
-			"height", true, "depth", true, "weight", true, "price", true,
-			"promoPrice", true, "cost", true, "published", true,
-			"externalReferenceCode", true, "displayDate", true,
-			"expirationDate", true, "lastPublishDate", true, "status", true,
-			"statusByUserId", true, "statusByUserName", true, "statusDate", true);
+			"externalReferenceCode", true, "CPInstanceId", true, "groupId",
+			true, "companyId", true, "userId", true, "userName", true,
+			"createDate", true, "modifiedDate", true, "CPDefinitionId", true,
+			"sku", true, "gtin", true, "manufacturerPartNumber", true,
+			"purchasable", true, "width", true, "height", true, "depth", true,
+			"weight", true, "price", true, "promoPrice", true, "cost", true,
+			"published", true, "displayDate", true, "expirationDate", true,
+			"lastPublishDate", true, "status", true, "statusByUserId", true,
+			"statusByUserName", true, "statusDate", true);
 	}
 
 	@Test
@@ -614,17 +614,20 @@ public class CPInstancePersistenceTest {
 			ReflectionTestUtil.<Long>invoke(existingCPInstance,
 				"getOriginalGroupId", new Class<?>[0]));
 
-		Assert.assertTrue(Objects.equals(
-				existingCPInstance.getExternalReferenceCode(),
-				ReflectionTestUtil.invoke(existingCPInstance,
-					"getOriginalExternalReferenceCode", new Class<?>[0])));
-
 		Assert.assertEquals(Long.valueOf(existingCPInstance.getCPDefinitionId()),
 			ReflectionTestUtil.<Long>invoke(existingCPInstance,
 				"getOriginalCPDefinitionId", new Class<?>[0]));
 		Assert.assertTrue(Objects.equals(existingCPInstance.getSku(),
 				ReflectionTestUtil.invoke(existingCPInstance, "getOriginalSku",
 					new Class<?>[0])));
+
+		Assert.assertEquals(Long.valueOf(existingCPInstance.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCPInstance,
+				"getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCPInstance.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(existingCPInstance,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
 	}
 
 	protected CPInstance addCPInstance() throws Exception {
@@ -633,6 +636,8 @@ public class CPInstancePersistenceTest {
 		CPInstance cpInstance = _persistence.create(pk);
 
 		cpInstance.setUuid(RandomTestUtil.randomString());
+
+		cpInstance.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		cpInstance.setGroupId(RandomTestUtil.nextLong());
 
@@ -673,8 +678,6 @@ public class CPInstancePersistenceTest {
 		cpInstance.setCost(new BigDecimal(RandomTestUtil.nextDouble()));
 
 		cpInstance.setPublished(RandomTestUtil.randomBoolean());
-
-		cpInstance.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		cpInstance.setDisplayDate(RandomTestUtil.nextDate());
 

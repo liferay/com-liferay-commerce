@@ -37,6 +37,7 @@ public class CommercePriceEntrySoap implements Serializable {
 		CommercePriceEntrySoap soapModel = new CommercePriceEntrySoap();
 
 		soapModel.setUuid(model.getUuid());
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCommercePriceEntryId(model.getCommercePriceEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -49,7 +50,6 @@ public class CommercePriceEntrySoap implements Serializable {
 		soapModel.setPrice(model.getPrice());
 		soapModel.setPromoPrice(model.getPromoPrice());
 		soapModel.setHasTierPrice(model.isHasTierPrice());
-		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
 
 		return soapModel;
@@ -112,6 +112,14 @@ public class CommercePriceEntrySoap implements Serializable {
 
 	public void setUuid(String uuid) {
 		_uuid = uuid;
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public long getCommercePriceEntryId() {
@@ -214,14 +222,6 @@ public class CommercePriceEntrySoap implements Serializable {
 		_hasTierPrice = hasTierPrice;
 	}
 
-	public String getExternalReferenceCode() {
-		return _externalReferenceCode;
-	}
-
-	public void setExternalReferenceCode(String externalReferenceCode) {
-		_externalReferenceCode = externalReferenceCode;
-	}
-
 	public Date getLastPublishDate() {
 		return _lastPublishDate;
 	}
@@ -231,6 +231,7 @@ public class CommercePriceEntrySoap implements Serializable {
 	}
 
 	private String _uuid;
+	private String _externalReferenceCode;
 	private long _commercePriceEntryId;
 	private long _groupId;
 	private long _companyId;
@@ -243,6 +244,5 @@ public class CommercePriceEntrySoap implements Serializable {
 	private BigDecimal _price;
 	private BigDecimal _promoPrice;
 	private boolean _hasTierPrice;
-	private String _externalReferenceCode;
 	private Date _lastPublishDate;
 }

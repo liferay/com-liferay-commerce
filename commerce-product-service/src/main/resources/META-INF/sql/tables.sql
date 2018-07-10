@@ -1,5 +1,6 @@
 create table CPAttachmentFileEntry (
 	uuid_ VARCHAR(75) null,
+	externalReferenceCode VARCHAR(75) null,
 	CPAttachmentFileEntryId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -42,6 +43,7 @@ create table CPDSpecificationOptionValue (
 
 create table CPDefinition (
 	uuid_ VARCHAR(75) null,
+	externalReferenceCode VARCHAR(75) null,
 	defaultLanguageId VARCHAR(75) null,
 	CPDefinitionId LONG not null primary key,
 	groupId LONG,
@@ -66,7 +68,6 @@ create table CPDefinition (
 	telcoOrElectronics BOOLEAN,
 	DDMStructureKey VARCHAR(75) null,
 	published BOOLEAN,
-	externalReferenceCode VARCHAR(75) null,
 	displayDate DATE null,
 	expirationDate DATE null,
 	lastPublishDate DATE null,
@@ -172,6 +173,7 @@ create table CPFriendlyURLEntry (
 
 create table CPInstance (
 	uuid_ VARCHAR(75) null,
+	externalReferenceCode VARCHAR(75) null,
 	CPInstanceId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -193,7 +195,6 @@ create table CPInstance (
 	promoPrice DECIMAL(30, 16) null,
 	cost DECIMAL(30, 16) null,
 	published BOOLEAN,
-	externalReferenceCode VARCHAR(75) null,
 	displayDate DATE null,
 	expirationDate DATE null,
 	lastPublishDate DATE null,
@@ -223,6 +224,7 @@ create table CPMeasurementUnit (
 
 create table CPOption (
 	uuid_ VARCHAR(75) null,
+	externalReferenceCode VARCHAR(75) null,
 	CPOptionId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -258,6 +260,7 @@ create table CPOptionCategory (
 
 create table CPOptionValue (
 	uuid_ VARCHAR(75) null,
+	externalReferenceCode VARCHAR(75) null,
 	CPOptionValueId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,

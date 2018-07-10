@@ -71,6 +71,8 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 
 		sb.append("{uuid=");
 		sb.append(uuid);
+		sb.append(", externalReferenceCode=");
+		sb.append(externalReferenceCode);
 		sb.append(", CPInstanceId=");
 		sb.append(CPInstanceId);
 		sb.append(", groupId=");
@@ -113,8 +115,6 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		sb.append(cost);
 		sb.append(", published=");
 		sb.append(published);
-		sb.append(", externalReferenceCode=");
-		sb.append(externalReferenceCode);
 		sb.append(", displayDate=");
 		sb.append(displayDate);
 		sb.append(", expirationDate=");
@@ -143,6 +143,13 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		}
 		else {
 			cpInstanceImpl.setUuid(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			cpInstanceImpl.setExternalReferenceCode("");
+		}
+		else {
+			cpInstanceImpl.setExternalReferenceCode(externalReferenceCode);
 		}
 
 		cpInstanceImpl.setCPInstanceId(CPInstanceId);
@@ -212,13 +219,6 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		cpInstanceImpl.setCost(cost);
 		cpInstanceImpl.setPublished(published);
 
-		if (externalReferenceCode == null) {
-			cpInstanceImpl.setExternalReferenceCode("");
-		}
-		else {
-			cpInstanceImpl.setExternalReferenceCode(externalReferenceCode);
-		}
-
 		if (displayDate == Long.MIN_VALUE) {
 			cpInstanceImpl.setDisplayDate(null);
 		}
@@ -266,6 +266,7 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
 		uuid = objectInput.readUTF();
+		externalReferenceCode = objectInput.readUTF();
 
 		CPInstanceId = objectInput.readLong();
 
@@ -298,7 +299,6 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		cost = (BigDecimal)objectInput.readObject();
 
 		published = objectInput.readBoolean();
-		externalReferenceCode = objectInput.readUTF();
 		displayDate = objectInput.readLong();
 		expirationDate = objectInput.readLong();
 		lastPublishDate = objectInput.readLong();
@@ -318,6 +318,13 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		}
 		else {
 			objectOutput.writeUTF(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
 		}
 
 		objectOutput.writeLong(CPInstanceId);
@@ -382,14 +389,6 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		objectOutput.writeObject(cost);
 
 		objectOutput.writeBoolean(published);
-
-		if (externalReferenceCode == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(externalReferenceCode);
-		}
-
 		objectOutput.writeLong(displayDate);
 		objectOutput.writeLong(expirationDate);
 		objectOutput.writeLong(lastPublishDate);
@@ -409,6 +408,7 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 	}
 
 	public String uuid;
+	public String externalReferenceCode;
 	public long CPInstanceId;
 	public long groupId;
 	public long companyId;
@@ -430,7 +430,6 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 	public BigDecimal promoPrice;
 	public BigDecimal cost;
 	public boolean published;
-	public String externalReferenceCode;
 	public long displayDate;
 	public long expirationDate;
 	public long lastPublishDate;

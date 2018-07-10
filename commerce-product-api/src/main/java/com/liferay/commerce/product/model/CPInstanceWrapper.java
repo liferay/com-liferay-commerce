@@ -62,6 +62,7 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CPInstanceId", getCPInstanceId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -83,7 +84,6 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 		attributes.put("promoPrice", getPromoPrice());
 		attributes.put("cost", getCost());
 		attributes.put("published", isPublished());
-		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("displayDate", getDisplayDate());
 		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
@@ -101,6 +101,13 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long CPInstanceId = (Long)attributes.get("CPInstanceId");
@@ -228,13 +235,6 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 
 		if (published != null) {
 			setPublished(published);
-		}
-
-		String externalReferenceCode = (String)attributes.get(
-				"externalReferenceCode");
-
-		if (externalReferenceCode != null) {
-			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Date displayDate = (Date)attributes.get("displayDate");

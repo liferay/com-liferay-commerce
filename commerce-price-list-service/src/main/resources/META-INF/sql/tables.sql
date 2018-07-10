@@ -15,6 +15,7 @@ create table CPLUserSegmentEntryRel (
 
 create table CommercePriceEntry (
 	uuid_ VARCHAR(75) null,
+	externalReferenceCode VARCHAR(75) null,
 	commercePriceEntryId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -27,12 +28,12 @@ create table CommercePriceEntry (
 	price DECIMAL(30, 16) null,
 	promoPrice DECIMAL(30, 16) null,
 	hasTierPrice BOOLEAN,
-	externalReferenceCode VARCHAR(75) null,
 	lastPublishDate DATE null
 );
 
 create table CommercePriceList (
 	uuid_ VARCHAR(75) null,
+	externalReferenceCode VARCHAR(75) null,
 	commercePriceListId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -44,7 +45,6 @@ create table CommercePriceList (
 	commerceCurrencyId LONG,
 	name VARCHAR(75) null,
 	priority DOUBLE,
-	externalReferenceCode VARCHAR(75) null,
 	displayDate DATE null,
 	expirationDate DATE null,
 	lastPublishDate DATE null,
@@ -56,6 +56,7 @@ create table CommercePriceList (
 
 create table CommerceTierPriceEntry (
 	uuid_ VARCHAR(75) null,
+	externalReferenceCode VARCHAR(75) null,
 	commerceTierPriceEntryId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -64,7 +65,6 @@ create table CommerceTierPriceEntry (
 	createDate DATE null,
 	modifiedDate DATE null,
 	commercePriceEntryId LONG,
-	externalReferenceCode VARCHAR(75) null,
 	price DECIMAL(30, 16) null,
 	promoPrice DECIMAL(30, 16) null,
 	minQuantity INTEGER,

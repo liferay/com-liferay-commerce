@@ -77,6 +77,7 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 	public static final String TABLE_NAME = "CommercePriceEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
+			{ "externalReferenceCode", Types.VARCHAR },
 			{ "commercePriceEntryId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -89,13 +90,13 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 			{ "price", Types.DECIMAL },
 			{ "promoPrice", Types.DECIMAL },
 			{ "hasTierPrice", Types.BOOLEAN },
-			{ "externalReferenceCode", Types.VARCHAR },
 			{ "lastPublishDate", Types.TIMESTAMP }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commercePriceEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
@@ -108,11 +109,10 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		TABLE_COLUMNS_MAP.put("price", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("promoPrice", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("hasTierPrice", Types.BOOLEAN);
-		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommercePriceEntry (uuid_ VARCHAR(75) null,commercePriceEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPInstanceId LONG,commercePriceListId LONG,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,hasTierPrice BOOLEAN,externalReferenceCode VARCHAR(75) null,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommercePriceEntry (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commercePriceEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPInstanceId LONG,commercePriceListId LONG,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,hasTierPrice BOOLEAN,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommercePriceEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY commercePriceEntry.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommercePriceEntry.createDate DESC";
@@ -150,6 +150,7 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		CommercePriceEntry model = new CommercePriceEntryImpl();
 
 		model.setUuid(soapModel.getUuid());
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCommercePriceEntryId(soapModel.getCommercePriceEntryId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -162,7 +163,6 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		model.setPrice(soapModel.getPrice());
 		model.setPromoPrice(soapModel.getPromoPrice());
 		model.setHasTierPrice(soapModel.isHasTierPrice());
-		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setLastPublishDate(soapModel.getLastPublishDate());
 
 		return model;
@@ -230,6 +230,7 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commercePriceEntryId", getCommercePriceEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -242,7 +243,6 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		attributes.put("price", getPrice());
 		attributes.put("promoPrice", getPromoPrice());
 		attributes.put("hasTierPrice", isHasTierPrice());
-		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("lastPublishDate", getLastPublishDate());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
@@ -257,6 +257,13 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long commercePriceEntryId = (Long)attributes.get("commercePriceEntryId");
@@ -331,13 +338,6 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 			setHasTierPrice(hasTierPrice);
 		}
 
-		String externalReferenceCode = (String)attributes.get(
-				"externalReferenceCode");
-
-		if (externalReferenceCode != null) {
-			setExternalReferenceCode(externalReferenceCode);
-		}
-
 		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
 
 		if (lastPublishDate != null) {
@@ -367,6 +367,32 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 
 	public String getOriginalUuid() {
 		return GetterUtil.getString(_originalUuid);
+	}
+
+	@JSON
+	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
 	}
 
 	@JSON
@@ -586,32 +612,6 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 
 	@JSON
 	@Override
-	public String getExternalReferenceCode() {
-		if (_externalReferenceCode == null) {
-			return "";
-		}
-		else {
-			return _externalReferenceCode;
-		}
-	}
-
-	@Override
-	public void setExternalReferenceCode(String externalReferenceCode) {
-		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
-
-		if (_originalExternalReferenceCode == null) {
-			_originalExternalReferenceCode = _externalReferenceCode;
-		}
-
-		_externalReferenceCode = externalReferenceCode;
-	}
-
-	public String getOriginalExternalReferenceCode() {
-		return GetterUtil.getString(_originalExternalReferenceCode);
-	}
-
-	@JSON
-	@Override
 	public Date getLastPublishDate() {
 		return _lastPublishDate;
 	}
@@ -659,6 +659,7 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		CommercePriceEntryImpl commercePriceEntryImpl = new CommercePriceEntryImpl();
 
 		commercePriceEntryImpl.setUuid(getUuid());
+		commercePriceEntryImpl.setExternalReferenceCode(getExternalReferenceCode());
 		commercePriceEntryImpl.setCommercePriceEntryId(getCommercePriceEntryId());
 		commercePriceEntryImpl.setGroupId(getGroupId());
 		commercePriceEntryImpl.setCompanyId(getCompanyId());
@@ -671,7 +672,6 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		commercePriceEntryImpl.setPrice(getPrice());
 		commercePriceEntryImpl.setPromoPrice(getPromoPrice());
 		commercePriceEntryImpl.setHasTierPrice(isHasTierPrice());
-		commercePriceEntryImpl.setExternalReferenceCode(getExternalReferenceCode());
 		commercePriceEntryImpl.setLastPublishDate(getLastPublishDate());
 
 		commercePriceEntryImpl.resetOriginalValues();
@@ -738,6 +738,8 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 
 		commercePriceEntryModelImpl._originalUuid = commercePriceEntryModelImpl._uuid;
 
+		commercePriceEntryModelImpl._originalExternalReferenceCode = commercePriceEntryModelImpl._externalReferenceCode;
+
 		commercePriceEntryModelImpl._originalGroupId = commercePriceEntryModelImpl._groupId;
 
 		commercePriceEntryModelImpl._setOriginalGroupId = false;
@@ -756,8 +758,6 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 
 		commercePriceEntryModelImpl._setOriginalCommercePriceListId = false;
 
-		commercePriceEntryModelImpl._originalExternalReferenceCode = commercePriceEntryModelImpl._externalReferenceCode;
-
 		commercePriceEntryModelImpl._columnBitmask = 0;
 	}
 
@@ -771,6 +771,15 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 
 		if ((uuid != null) && (uuid.length() == 0)) {
 			commercePriceEntryCacheModel.uuid = null;
+		}
+
+		commercePriceEntryCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = commercePriceEntryCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			commercePriceEntryCacheModel.externalReferenceCode = null;
 		}
 
 		commercePriceEntryCacheModel.commercePriceEntryId = getCommercePriceEntryId();
@@ -817,15 +826,6 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 
 		commercePriceEntryCacheModel.hasTierPrice = isHasTierPrice();
 
-		commercePriceEntryCacheModel.externalReferenceCode = getExternalReferenceCode();
-
-		String externalReferenceCode = commercePriceEntryCacheModel.externalReferenceCode;
-
-		if ((externalReferenceCode != null) &&
-				(externalReferenceCode.length() == 0)) {
-			commercePriceEntryCacheModel.externalReferenceCode = null;
-		}
-
 		Date lastPublishDate = getLastPublishDate();
 
 		if (lastPublishDate != null) {
@@ -844,6 +844,8 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
+		sb.append(", externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
 		sb.append(", commercePriceEntryId=");
 		sb.append(getCommercePriceEntryId());
 		sb.append(", groupId=");
@@ -868,8 +870,6 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		sb.append(getPromoPrice());
 		sb.append(", hasTierPrice=");
 		sb.append(isHasTierPrice());
-		sb.append(", externalReferenceCode=");
-		sb.append(getExternalReferenceCode());
 		sb.append(", lastPublishDate=");
 		sb.append(getLastPublishDate());
 		sb.append("}");
@@ -888,6 +888,10 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>commercePriceEntryId</column-name><column-value><![CDATA[");
@@ -938,10 +942,6 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		sb.append(isHasTierPrice());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
-		sb.append(getExternalReferenceCode());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>lastPublishDate</column-name><column-value><![CDATA[");
 		sb.append(getLastPublishDate());
 		sb.append("]]></column-value></column>");
@@ -957,6 +957,8 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 		};
 	private String _uuid;
 	private String _originalUuid;
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _commercePriceEntryId;
 	private long _groupId;
 	private long _originalGroupId;
@@ -978,8 +980,6 @@ public class CommercePriceEntryModelImpl extends BaseModelImpl<CommercePriceEntr
 	private BigDecimal _price;
 	private BigDecimal _promoPrice;
 	private boolean _hasTierPrice;
-	private String _externalReferenceCode;
-	private String _originalExternalReferenceCode;
 	private Date _lastPublishDate;
 	private long _columnBitmask;
 	private CommercePriceEntry _escapedModel;

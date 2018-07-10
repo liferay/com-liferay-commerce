@@ -36,6 +36,7 @@ public class CPAttachmentFileEntrySoap implements Serializable {
 		CPAttachmentFileEntrySoap soapModel = new CPAttachmentFileEntrySoap();
 
 		soapModel.setUuid(model.getUuid());
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCPAttachmentFileEntryId(model.getCPAttachmentFileEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -118,6 +119,14 @@ public class CPAttachmentFileEntrySoap implements Serializable {
 
 	public void setUuid(String uuid) {
 		_uuid = uuid;
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public long getCPAttachmentFileEntryId() {
@@ -289,6 +298,7 @@ public class CPAttachmentFileEntrySoap implements Serializable {
 	}
 
 	private String _uuid;
+	private String _externalReferenceCode;
 	private long _CPAttachmentFileEntryId;
 	private long _groupId;
 	private long _companyId;

@@ -62,6 +62,7 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CPAttachmentFileEntryId", getCPAttachmentFileEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -93,6 +94,13 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long CPAttachmentFileEntryId = (Long)attributes.get(
@@ -326,6 +334,16 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	@Override
 	public Date getExpirationDate() {
 		return _cpAttachmentFileEntry.getExpirationDate();
+	}
+
+	/**
+	* Returns the external reference code of this cp attachment file entry.
+	*
+	* @return the external reference code of this cp attachment file entry
+	*/
+	@Override
+	public String getExternalReferenceCode() {
+		return _cpAttachmentFileEntry.getExternalReferenceCode();
 	}
 
 	@Override
@@ -797,6 +815,16 @@ public class CPAttachmentFileEntryWrapper implements CPAttachmentFileEntry,
 	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_cpAttachmentFileEntry.setExpirationDate(expirationDate);
+	}
+
+	/**
+	* Sets the external reference code of this cp attachment file entry.
+	*
+	* @param externalReferenceCode the external reference code of this cp attachment file entry
+	*/
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_cpAttachmentFileEntry.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**

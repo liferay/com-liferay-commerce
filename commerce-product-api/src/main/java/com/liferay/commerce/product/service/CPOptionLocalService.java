@@ -88,6 +88,13 @@ public interface CPOptionLocalService extends BaseLocalService,
 		boolean facetable, boolean required, boolean skuContributor,
 		String key, ServiceContext serviceContext) throws PortalException;
 
+	@Indexable(type = IndexableType.REINDEX)
+	public CPOption addCPOption(Map<Locale, String> nameMap,
+		Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
+		boolean facetable, boolean required, boolean skuContributor,
+		String key, String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	* Creates a new cp option with the primary key. Does not add the cp option to the database.
 	*
@@ -187,11 +194,26 @@ public interface CPOptionLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPOption fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOption fetchCPOption(long CPOptionId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOption fetchCPOption(long groupId, String key)
 		throws PortalException;
+
+	/**
+	* Returns the cp option with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the cp option's external reference code
+	* @return the matching cp option, or <code>null</code> if a matching cp option could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPOption fetchCPOptionByReferenceCode(long companyId,
+		String externalReferenceCode);
 
 	/**
 	* Returns the cp option matching the UUID and group.
@@ -340,5 +362,11 @@ public interface CPOptionLocalService extends BaseLocalService,
 		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 		String ddmFormFieldTypeName, boolean facetable, boolean required,
 		boolean skuContributor, String key, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CPOption upsertCPOption(Map<Locale, String> nameMap,
+		Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
+		boolean facetable, boolean required, boolean skuContributor,
+		String key, String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
 }

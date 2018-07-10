@@ -199,7 +199,7 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommercePriceEntry fetchByExternalReferenceCode(
+	public CommercePriceEntry fetchByExternalReferenceCode(long companyId,
 		String externalReferenceCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -208,6 +208,17 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceEntry fetchCommercePriceEntry(long cpInstanceId,
 		long commercePriceListId);
+
+	/**
+	* Returns the commerce price entry with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce price entry's external reference code
+	* @return the matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommercePriceEntry fetchCommercePriceEntryByReferenceCode(
+		long companyId, String externalReferenceCode);
 
 	/**
 	* Returns the commerce price entry matching the UUID and group.

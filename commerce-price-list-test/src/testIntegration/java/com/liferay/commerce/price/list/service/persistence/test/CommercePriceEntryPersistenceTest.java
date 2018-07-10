@@ -128,6 +128,8 @@ public class CommercePriceEntryPersistenceTest {
 
 		newCommercePriceEntry.setUuid(RandomTestUtil.randomString());
 
+		newCommercePriceEntry.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		newCommercePriceEntry.setGroupId(RandomTestUtil.nextLong());
 
 		newCommercePriceEntry.setCompanyId(RandomTestUtil.nextLong());
@@ -152,8 +154,6 @@ public class CommercePriceEntryPersistenceTest {
 
 		newCommercePriceEntry.setHasTierPrice(RandomTestUtil.randomBoolean());
 
-		newCommercePriceEntry.setExternalReferenceCode(RandomTestUtil.randomString());
-
 		newCommercePriceEntry.setLastPublishDate(RandomTestUtil.nextDate());
 
 		_commercePriceEntries.add(_persistence.update(newCommercePriceEntry));
@@ -162,6 +162,8 @@ public class CommercePriceEntryPersistenceTest {
 
 		Assert.assertEquals(existingCommercePriceEntry.getUuid(),
 			newCommercePriceEntry.getUuid());
+		Assert.assertEquals(existingCommercePriceEntry.getExternalReferenceCode(),
+			newCommercePriceEntry.getExternalReferenceCode());
 		Assert.assertEquals(existingCommercePriceEntry.getCommercePriceEntryId(),
 			newCommercePriceEntry.getCommercePriceEntryId());
 		Assert.assertEquals(existingCommercePriceEntry.getGroupId(),
@@ -188,8 +190,6 @@ public class CommercePriceEntryPersistenceTest {
 			newCommercePriceEntry.getPromoPrice());
 		Assert.assertEquals(existingCommercePriceEntry.isHasTierPrice(),
 			newCommercePriceEntry.isHasTierPrice());
-		Assert.assertEquals(existingCommercePriceEntry.getExternalReferenceCode(),
-			newCommercePriceEntry.getExternalReferenceCode());
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCommercePriceEntry.getLastPublishDate()),
 			Time.getShortTimestamp(newCommercePriceEntry.getLastPublishDate()));
@@ -251,20 +251,20 @@ public class CommercePriceEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByExternalReferenceCode() throws Exception {
-		_persistence.countByExternalReferenceCode("");
-
-		_persistence.countByExternalReferenceCode("null");
-
-		_persistence.countByExternalReferenceCode((String)null);
-	}
-
-	@Test
 	public void testCountByC_C() throws Exception {
 		_persistence.countByC_C(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong());
 
 		_persistence.countByC_C(0L, 0L);
+	}
+
+	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
 	}
 
 	@Test
@@ -291,11 +291,11 @@ public class CommercePriceEntryPersistenceTest {
 
 	protected OrderByComparator<CommercePriceEntry> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CommercePriceEntry",
-			"uuid", true, "commercePriceEntryId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "CPInstanceId", true,
-			"commercePriceListId", true, "price", true, "promoPrice", true,
-			"hasTierPrice", true, "externalReferenceCode", true,
+			"uuid", true, "externalReferenceCode", true,
+			"commercePriceEntryId", true, "groupId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "CPInstanceId", true, "commercePriceListId",
+			true, "price", true, "promoPrice", true, "hasTierPrice", true,
 			"lastPublishDate", true);
 	}
 
@@ -510,11 +510,6 @@ public class CommercePriceEntryPersistenceTest {
 			ReflectionTestUtil.<Long>invoke(existingCommercePriceEntry,
 				"getOriginalGroupId", new Class<?>[0]));
 
-		Assert.assertTrue(Objects.equals(
-				existingCommercePriceEntry.getExternalReferenceCode(),
-				ReflectionTestUtil.invoke(existingCommercePriceEntry,
-					"getOriginalExternalReferenceCode", new Class<?>[0])));
-
 		Assert.assertEquals(Long.valueOf(
 				existingCommercePriceEntry.getCPInstanceId()),
 			ReflectionTestUtil.<Long>invoke(existingCommercePriceEntry,
@@ -523,6 +518,15 @@ public class CommercePriceEntryPersistenceTest {
 				existingCommercePriceEntry.getCommercePriceListId()),
 			ReflectionTestUtil.<Long>invoke(existingCommercePriceEntry,
 				"getOriginalCommercePriceListId", new Class<?>[0]));
+
+		Assert.assertEquals(Long.valueOf(
+				existingCommercePriceEntry.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCommercePriceEntry,
+				"getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCommercePriceEntry.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(existingCommercePriceEntry,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
 	}
 
 	protected CommercePriceEntry addCommercePriceEntry()
@@ -532,6 +536,8 @@ public class CommercePriceEntryPersistenceTest {
 		CommercePriceEntry commercePriceEntry = _persistence.create(pk);
 
 		commercePriceEntry.setUuid(RandomTestUtil.randomString());
+
+		commercePriceEntry.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		commercePriceEntry.setGroupId(RandomTestUtil.nextLong());
 
@@ -555,8 +561,6 @@ public class CommercePriceEntryPersistenceTest {
 				RandomTestUtil.nextDouble()));
 
 		commercePriceEntry.setHasTierPrice(RandomTestUtil.randomBoolean());
-
-		commercePriceEntry.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		commercePriceEntry.setLastPublishDate(RandomTestUtil.nextDate());
 

@@ -87,6 +87,21 @@ public interface CPDefinitionModel extends BaseModel<CPDefinition>, ShardedModel
 	public void setUuid(String uuid);
 
 	/**
+	 * Returns the external reference code of this cp definition.
+	 *
+	 * @return the external reference code of this cp definition
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this cp definition.
+	 *
+	 * @param externalReferenceCode the external reference code of this cp definition
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the default language ID of this cp definition.
 	 *
 	 * @return the default language ID of this cp definition
@@ -509,21 +524,6 @@ public interface CPDefinitionModel extends BaseModel<CPDefinition>, ShardedModel
 	 * @param published the published of this cp definition
 	 */
 	public void setPublished(boolean published);
-
-	/**
-	 * Returns the external reference code of this cp definition.
-	 *
-	 * @return the external reference code of this cp definition
-	 */
-	@AutoEscape
-	public String getExternalReferenceCode();
-
-	/**
-	 * Sets the external reference code of this cp definition.
-	 *
-	 * @param externalReferenceCode the external reference code of this cp definition
-	 */
-	public void setExternalReferenceCode(String externalReferenceCode);
 
 	/**
 	 * Returns the display date of this cp definition.

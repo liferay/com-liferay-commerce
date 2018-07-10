@@ -271,6 +271,19 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the cp instance with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the cp instance's external reference code
+	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	 */
+	@Override
+	public CPInstance fetchCPInstanceByReferenceCode(long companyId,
+		String externalReferenceCode) {
+		return cpInstancePersistence.fetchByC_ERC(companyId, null);
+	}
+
+	/**
 	 * Returns the cp instance with the primary key.
 	 *
 	 * @param CPInstanceId the primary key of the cp instance

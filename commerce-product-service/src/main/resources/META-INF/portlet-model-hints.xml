@@ -3,6 +3,7 @@
 <model-hints>
 	<model name="com.liferay.commerce.product.model.CPAttachmentFileEntry">
 		<field name="uuid" type="String" />
+		<field name="externalReferenceCode" type="String" />
 		<field name="CPAttachmentFileEntryId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -31,6 +32,7 @@
 	</model>
 	<model name="com.liferay.commerce.product.model.CPDefinition">
 		<field name="uuid" type="String" />
+		<field name="externalReferenceCode" type="String" />
 		<field name="defaultLanguageId" type="String" />
 		<field name="CPDefinitionId" type="long" />
 		<field name="groupId" type="long" />
@@ -65,7 +67,6 @@
 		<field name="published" type="boolean">
 			<hint name="default-value">true</hint>
 		</field>
-		<field name="externalReferenceCode" type="String" />
 		<field name="displayDate" type="Date" />
 		<field name="expirationDate" type="Date" />
 		<field name="lastPublishDate" type="Date" />
@@ -212,6 +213,7 @@
 	</model>
 	<model name="com.liferay.commerce.product.model.CPInstance">
 		<field name="uuid" type="String" />
+		<field name="externalReferenceCode" type="String" />
 		<field name="CPInstanceId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -253,7 +255,6 @@
 		<field name="published" type="boolean">
 			<hint name="default-value">true</hint>
 		</field>
-		<field name="externalReferenceCode" type="String" />
 		<field name="displayDate" type="Date" />
 		<field name="expirationDate" type="Date" />
 		<field name="lastPublishDate" type="Date" />
@@ -287,6 +288,7 @@
 	</model>
 	<model name="com.liferay.commerce.product.model.CPOption">
 		<field name="uuid" type="String" />
+		<field name="externalReferenceCode" type="String" />
 		<field name="CPOptionId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -334,6 +336,7 @@
 	</model>
 	<model name="com.liferay.commerce.product.model.CPOptionValue">
 		<field name="uuid" type="String" />
+		<field name="externalReferenceCode" type="String" />
 		<field name="CPOptionValueId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />

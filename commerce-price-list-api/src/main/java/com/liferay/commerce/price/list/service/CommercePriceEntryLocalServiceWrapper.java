@@ -218,8 +218,9 @@ public class CommercePriceEntryLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.price.list.model.CommercePriceEntry fetchByExternalReferenceCode(
-		String externalReferenceCode) {
-		return _commercePriceEntryLocalService.fetchByExternalReferenceCode(externalReferenceCode);
+		long companyId, String externalReferenceCode) {
+		return _commercePriceEntryLocalService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	@Override
@@ -233,6 +234,20 @@ public class CommercePriceEntryLocalServiceWrapper
 		long cpInstanceId, long commercePriceListId) {
 		return _commercePriceEntryLocalService.fetchCommercePriceEntry(cpInstanceId,
 			commercePriceListId);
+	}
+
+	/**
+	* Returns the commerce price entry with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce price entry's external reference code
+	* @return the matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
+	*/
+	@Override
+	public com.liferay.commerce.price.list.model.CommercePriceEntry fetchCommercePriceEntryByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _commercePriceEntryLocalService.fetchCommercePriceEntryByReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	/**

@@ -81,6 +81,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 	public static final String TABLE_NAME = "CPOptionValue";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
+			{ "externalReferenceCode", Types.VARCHAR },
 			{ "CPOptionValueId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -98,6 +99,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("CPOptionValueId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
@@ -112,7 +114,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPOptionValue (uuid_ VARCHAR(75) null,CPOptionValueId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPOptionId LONG,name STRING null,priority DOUBLE,key_ VARCHAR(75) null,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPOptionValue (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPOptionValueId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPOptionId LONG,name STRING null,priority DOUBLE,key_ VARCHAR(75) null,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPOptionValue";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpOptionValue.priority ASC, cpOptionValue.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPOptionValue.priority ASC, CPOptionValue.name ASC";
@@ -130,11 +132,12 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 			true);
 	public static final long CPOPTIONID_COLUMN_BITMASK = 1L;
 	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long GROUPID_COLUMN_BITMASK = 4L;
-	public static final long KEY_COLUMN_BITMASK = 8L;
-	public static final long UUID_COLUMN_BITMASK = 16L;
-	public static final long PRIORITY_COLUMN_BITMASK = 32L;
-	public static final long NAME_COLUMN_BITMASK = 64L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 4L;
+	public static final long GROUPID_COLUMN_BITMASK = 8L;
+	public static final long KEY_COLUMN_BITMASK = 16L;
+	public static final long UUID_COLUMN_BITMASK = 32L;
+	public static final long PRIORITY_COLUMN_BITMASK = 64L;
+	public static final long NAME_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -150,6 +153,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		CPOptionValue model = new CPOptionValueImpl();
 
 		model.setUuid(soapModel.getUuid());
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCPOptionValueId(soapModel.getCPOptionValueId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -227,6 +231,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CPOptionValueId", getCPOptionValueId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -252,6 +257,13 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long CPOptionValueId = (Long)attributes.get("CPOptionValueId");
@@ -349,6 +361,32 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 
 	public String getOriginalUuid() {
 		return GetterUtil.getString(_originalUuid);
+	}
+
+	@JSON
+	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
 	}
 
 	@JSON
@@ -752,6 +790,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		CPOptionValueImpl cpOptionValueImpl = new CPOptionValueImpl();
 
 		cpOptionValueImpl.setUuid(getUuid());
+		cpOptionValueImpl.setExternalReferenceCode(getExternalReferenceCode());
 		cpOptionValueImpl.setCPOptionValueId(getCPOptionValueId());
 		cpOptionValueImpl.setGroupId(getGroupId());
 		cpOptionValueImpl.setCompanyId(getCompanyId());
@@ -840,6 +879,8 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 
 		cpOptionValueModelImpl._originalUuid = cpOptionValueModelImpl._uuid;
 
+		cpOptionValueModelImpl._originalExternalReferenceCode = cpOptionValueModelImpl._externalReferenceCode;
+
 		cpOptionValueModelImpl._originalGroupId = cpOptionValueModelImpl._groupId;
 
 		cpOptionValueModelImpl._setOriginalGroupId = false;
@@ -869,6 +910,15 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 
 		if ((uuid != null) && (uuid.length() == 0)) {
 			cpOptionValueCacheModel.uuid = null;
+		}
+
+		cpOptionValueCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = cpOptionValueCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			cpOptionValueCacheModel.externalReferenceCode = null;
 		}
 
 		cpOptionValueCacheModel.CPOptionValueId = getCPOptionValueId();
@@ -939,10 +989,12 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
+		sb.append(", externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
 		sb.append(", CPOptionValueId=");
 		sb.append(getCPOptionValueId());
 		sb.append(", groupId=");
@@ -974,7 +1026,7 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPOptionValue");
@@ -983,6 +1035,10 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>CPOptionValueId</column-name><column-value><![CDATA[");
@@ -1044,6 +1100,8 @@ public class CPOptionValueModelImpl extends BaseModelImpl<CPOptionValue>
 		};
 	private String _uuid;
 	private String _originalUuid;
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _CPOptionValueId;
 	private long _groupId;
 	private long _originalGroupId;

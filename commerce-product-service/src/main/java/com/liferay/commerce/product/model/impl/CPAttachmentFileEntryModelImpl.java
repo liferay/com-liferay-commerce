@@ -82,6 +82,7 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 	public static final String TABLE_NAME = "CPAttachmentFileEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
+			{ "externalReferenceCode", Types.VARCHAR },
 			{ "CPAttachmentFileEntryId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -108,6 +109,7 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("CPAttachmentFileEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
@@ -131,7 +133,7 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPAttachmentFileEntry (uuid_ VARCHAR(75) null,CPAttachmentFileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,fileEntryId LONG,displayDate DATE null,expirationDate DATE null,title STRING null,json TEXT null,priority DOUBLE,type_ INTEGER,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPAttachmentFileEntry (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPAttachmentFileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,fileEntryId LONG,displayDate DATE null,expirationDate DATE null,title STRING null,json TEXT null,priority DOUBLE,type_ INTEGER,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPAttachmentFileEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpAttachmentFileEntry.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPAttachmentFileEntry.priority ASC";
@@ -151,11 +153,12 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 	public static final long CLASSPK_COLUMN_BITMASK = 2L;
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
 	public static final long DISPLAYDATE_COLUMN_BITMASK = 8L;
-	public static final long GROUPID_COLUMN_BITMASK = 16L;
-	public static final long STATUS_COLUMN_BITMASK = 32L;
-	public static final long TYPE_COLUMN_BITMASK = 64L;
-	public static final long UUID_COLUMN_BITMASK = 128L;
-	public static final long PRIORITY_COLUMN_BITMASK = 256L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 16L;
+	public static final long GROUPID_COLUMN_BITMASK = 32L;
+	public static final long STATUS_COLUMN_BITMASK = 64L;
+	public static final long TYPE_COLUMN_BITMASK = 128L;
+	public static final long UUID_COLUMN_BITMASK = 256L;
+	public static final long PRIORITY_COLUMN_BITMASK = 512L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -172,6 +175,7 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 		CPAttachmentFileEntry model = new CPAttachmentFileEntryImpl();
 
 		model.setUuid(soapModel.getUuid());
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCPAttachmentFileEntryId(soapModel.getCPAttachmentFileEntryId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -259,6 +263,7 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CPAttachmentFileEntryId", getCPAttachmentFileEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -293,6 +298,13 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long CPAttachmentFileEntryId = (Long)attributes.get(
@@ -445,6 +457,32 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 
 	public String getOriginalUuid() {
 		return GetterUtil.getString(_originalUuid);
+	}
+
+	@JSON
+	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
 	}
 
 	@JSON
@@ -1102,6 +1140,7 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 		CPAttachmentFileEntryImpl cpAttachmentFileEntryImpl = new CPAttachmentFileEntryImpl();
 
 		cpAttachmentFileEntryImpl.setUuid(getUuid());
+		cpAttachmentFileEntryImpl.setExternalReferenceCode(getExternalReferenceCode());
 		cpAttachmentFileEntryImpl.setCPAttachmentFileEntryId(getCPAttachmentFileEntryId());
 		cpAttachmentFileEntryImpl.setGroupId(getGroupId());
 		cpAttachmentFileEntryImpl.setCompanyId(getCompanyId());
@@ -1193,6 +1232,8 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 
 		cpAttachmentFileEntryModelImpl._originalUuid = cpAttachmentFileEntryModelImpl._uuid;
 
+		cpAttachmentFileEntryModelImpl._originalExternalReferenceCode = cpAttachmentFileEntryModelImpl._externalReferenceCode;
+
 		cpAttachmentFileEntryModelImpl._originalGroupId = cpAttachmentFileEntryModelImpl._groupId;
 
 		cpAttachmentFileEntryModelImpl._setOriginalGroupId = false;
@@ -1234,6 +1275,15 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 
 		if ((uuid != null) && (uuid.length() == 0)) {
 			cpAttachmentFileEntryCacheModel.uuid = null;
+		}
+
+		cpAttachmentFileEntryCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = cpAttachmentFileEntryCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			cpAttachmentFileEntryCacheModel.externalReferenceCode = null;
 		}
 
 		cpAttachmentFileEntryCacheModel.CPAttachmentFileEntryId = getCPAttachmentFileEntryId();
@@ -1349,10 +1399,12 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
+		sb.append(", externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
 		sb.append(", CPAttachmentFileEntryId=");
 		sb.append(getCPAttachmentFileEntryId());
 		sb.append(", groupId=");
@@ -1402,7 +1454,7 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPAttachmentFileEntry");
@@ -1411,6 +1463,10 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>CPAttachmentFileEntryId</column-name><column-value><![CDATA[");
@@ -1508,6 +1564,8 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 		};
 	private String _uuid;
 	private String _originalUuid;
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _CPAttachmentFileEntryId;
 	private long _groupId;
 	private long _originalGroupId;

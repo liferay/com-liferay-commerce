@@ -82,6 +82,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 	public static final String TABLE_NAME = "CPInstance";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
+			{ "externalReferenceCode", Types.VARCHAR },
 			{ "CPInstanceId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -103,7 +104,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 			{ "promoPrice", Types.DECIMAL },
 			{ "cost", Types.DECIMAL },
 			{ "published", Types.BOOLEAN },
-			{ "externalReferenceCode", Types.VARCHAR },
 			{ "displayDate", Types.TIMESTAMP },
 			{ "expirationDate", Types.TIMESTAMP },
 			{ "lastPublishDate", Types.TIMESTAMP },
@@ -116,6 +116,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("CPInstanceId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
@@ -137,7 +138,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		TABLE_COLUMNS_MAP.put("promoPrice", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("cost", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("published", Types.BOOLEAN);
-		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("displayDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("expirationDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
@@ -147,7 +147,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPInstance (uuid_ VARCHAR(75) null,CPInstanceId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,sku VARCHAR(75) null,gtin VARCHAR(75) null,manufacturerPartNumber VARCHAR(75) null,purchasable BOOLEAN,json TEXT null,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,cost DECIMAL(30, 16) null,published BOOLEAN,externalReferenceCode VARCHAR(75) null,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPInstance (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPInstanceId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,sku VARCHAR(75) null,gtin VARCHAR(75) null,manufacturerPartNumber VARCHAR(75) null,purchasable BOOLEAN,json TEXT null,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,cost DECIMAL(30, 16) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPInstance";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpInstance.displayDate DESC, cpInstance.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPInstance.displayDate DESC, CPInstance.createDate DESC";
@@ -187,6 +187,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		CPInstance model = new CPInstanceImpl();
 
 		model.setUuid(soapModel.getUuid());
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCPInstanceId(soapModel.getCPInstanceId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -208,7 +209,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		model.setPromoPrice(soapModel.getPromoPrice());
 		model.setCost(soapModel.getCost());
 		model.setPublished(soapModel.isPublished());
-		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setDisplayDate(soapModel.getDisplayDate());
 		model.setExpirationDate(soapModel.getExpirationDate());
 		model.setLastPublishDate(soapModel.getLastPublishDate());
@@ -281,6 +281,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CPInstanceId", getCPInstanceId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -302,7 +303,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		attributes.put("promoPrice", getPromoPrice());
 		attributes.put("cost", getCost());
 		attributes.put("published", isPublished());
-		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("displayDate", getDisplayDate());
 		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
@@ -323,6 +323,13 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long CPInstanceId = (Long)attributes.get("CPInstanceId");
@@ -452,13 +459,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 			setPublished(published);
 		}
 
-		String externalReferenceCode = (String)attributes.get(
-				"externalReferenceCode");
-
-		if (externalReferenceCode != null) {
-			setExternalReferenceCode(externalReferenceCode);
-		}
-
 		Date displayDate = (Date)attributes.get("displayDate");
 
 		if (displayDate != null) {
@@ -524,6 +524,32 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 	public String getOriginalUuid() {
 		return GetterUtil.getString(_originalUuid);
+	}
+
+	@JSON
+	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
 	}
 
 	@JSON
@@ -862,32 +888,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 	@Override
 	public void setPublished(boolean published) {
 		_published = published;
-	}
-
-	@JSON
-	@Override
-	public String getExternalReferenceCode() {
-		if (_externalReferenceCode == null) {
-			return "";
-		}
-		else {
-			return _externalReferenceCode;
-		}
-	}
-
-	@Override
-	public void setExternalReferenceCode(String externalReferenceCode) {
-		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
-
-		if (_originalExternalReferenceCode == null) {
-			_originalExternalReferenceCode = _externalReferenceCode;
-		}
-
-		_externalReferenceCode = externalReferenceCode;
-	}
-
-	public String getOriginalExternalReferenceCode() {
-		return GetterUtil.getString(_originalExternalReferenceCode);
 	}
 
 	@JSON
@@ -1259,6 +1259,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		CPInstanceImpl cpInstanceImpl = new CPInstanceImpl();
 
 		cpInstanceImpl.setUuid(getUuid());
+		cpInstanceImpl.setExternalReferenceCode(getExternalReferenceCode());
 		cpInstanceImpl.setCPInstanceId(getCPInstanceId());
 		cpInstanceImpl.setGroupId(getGroupId());
 		cpInstanceImpl.setCompanyId(getCompanyId());
@@ -1280,7 +1281,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		cpInstanceImpl.setPromoPrice(getPromoPrice());
 		cpInstanceImpl.setCost(getCost());
 		cpInstanceImpl.setPublished(isPublished());
-		cpInstanceImpl.setExternalReferenceCode(getExternalReferenceCode());
 		cpInstanceImpl.setDisplayDate(getDisplayDate());
 		cpInstanceImpl.setExpirationDate(getExpirationDate());
 		cpInstanceImpl.setLastPublishDate(getLastPublishDate());
@@ -1360,6 +1360,8 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 		cpInstanceModelImpl._originalUuid = cpInstanceModelImpl._uuid;
 
+		cpInstanceModelImpl._originalExternalReferenceCode = cpInstanceModelImpl._externalReferenceCode;
+
 		cpInstanceModelImpl._originalGroupId = cpInstanceModelImpl._groupId;
 
 		cpInstanceModelImpl._setOriginalGroupId = false;
@@ -1375,8 +1377,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		cpInstanceModelImpl._setOriginalCPDefinitionId = false;
 
 		cpInstanceModelImpl._originalSku = cpInstanceModelImpl._sku;
-
-		cpInstanceModelImpl._originalExternalReferenceCode = cpInstanceModelImpl._externalReferenceCode;
 
 		cpInstanceModelImpl._originalDisplayDate = cpInstanceModelImpl._displayDate;
 
@@ -1397,6 +1397,15 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 		if ((uuid != null) && (uuid.length() == 0)) {
 			cpInstanceCacheModel.uuid = null;
+		}
+
+		cpInstanceCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = cpInstanceCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			cpInstanceCacheModel.externalReferenceCode = null;
 		}
 
 		cpInstanceCacheModel.CPInstanceId = getCPInstanceId();
@@ -1486,15 +1495,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 		cpInstanceCacheModel.published = isPublished();
 
-		cpInstanceCacheModel.externalReferenceCode = getExternalReferenceCode();
-
-		String externalReferenceCode = cpInstanceCacheModel.externalReferenceCode;
-
-		if ((externalReferenceCode != null) &&
-				(externalReferenceCode.length() == 0)) {
-			cpInstanceCacheModel.externalReferenceCode = null;
-		}
-
 		Date displayDate = getDisplayDate();
 
 		if (displayDate != null) {
@@ -1552,6 +1552,8 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
+		sb.append(", externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
 		sb.append(", CPInstanceId=");
 		sb.append(getCPInstanceId());
 		sb.append(", groupId=");
@@ -1594,8 +1596,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		sb.append(getCost());
 		sb.append(", published=");
 		sb.append(isPublished());
-		sb.append(", externalReferenceCode=");
-		sb.append(getExternalReferenceCode());
 		sb.append(", displayDate=");
 		sb.append(getDisplayDate());
 		sb.append(", expirationDate=");
@@ -1626,6 +1626,10 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>CPInstanceId</column-name><column-value><![CDATA[");
@@ -1712,10 +1716,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		sb.append(isPublished());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
-		sb.append(getExternalReferenceCode());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>displayDate</column-name><column-value><![CDATA[");
 		sb.append(getDisplayDate());
 		sb.append("]]></column-value></column>");
@@ -1755,6 +1755,8 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		};
 	private String _uuid;
 	private String _originalUuid;
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _CPInstanceId;
 	private long _groupId;
 	private long _originalGroupId;
@@ -1784,8 +1786,6 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 	private BigDecimal _promoPrice;
 	private BigDecimal _cost;
 	private boolean _published;
-	private String _externalReferenceCode;
-	private String _originalExternalReferenceCode;
 	private Date _displayDate;
 	private Date _originalDisplayDate;
 	private Date _expirationDate;
