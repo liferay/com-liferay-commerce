@@ -205,6 +205,10 @@ public class CommerceDiscountCalculationImpl
 		for (CommerceDiscountValue commerceDiscountValue :
 				commerceDiscountValues) {
 
+			if (commerceDiscountValue == null) {
+				continue;
+			}
+
 			CommerceMoney discountAmount =
 				commerceDiscountValue.getDiscountAmount();
 
