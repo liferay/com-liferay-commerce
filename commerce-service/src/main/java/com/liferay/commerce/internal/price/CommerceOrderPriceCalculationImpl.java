@@ -65,11 +65,11 @@ public class CommerceOrderPriceCalculationImpl
 
 		CommerceDiscountValue orderShippingCommerceDiscountValue =
 			_commerceDiscountCalculation.getOrderShippingCommerceDiscountValue(
-				commerceOrder, commerceContext);
+				commerceOrder, shippingAmount, commerceContext);
 
 		CommerceDiscountValue orderSubtotalCommerceDiscountValue =
 			_commerceDiscountCalculation.getOrderSubtotalCommerceDiscountValue(
-				commerceOrder, commerceContext);
+				commerceOrder, subtotalAmount, commerceContext);
 
 		BigDecimal totalAmount = subtotalAmount;
 
@@ -93,7 +93,7 @@ public class CommerceOrderPriceCalculationImpl
 
 		CommerceDiscountValue orderTotalCommerceDiscountValue =
 			_commerceDiscountCalculation.getOrderTotalCommerceDiscountValue(
-				commerceOrder, commerceContext);
+				commerceOrder, totalAmount, commerceContext);
 
 		if (orderTotalCommerceDiscountValue != null) {
 			CommerceMoney discountAmount =

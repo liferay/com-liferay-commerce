@@ -61,7 +61,8 @@ public class CommerceDiscountCalculationImpl
 
 	@Override
 	public CommerceDiscountValue getOrderShippingCommerceDiscountValue(
-			CommerceOrder commerceOrder, CommerceContext commerceContext)
+			CommerceOrder commerceOrder, BigDecimal shippingAmount,
+			CommerceContext commerceContext)
 		throws PortalException {
 
 		if (commerceOrder == null) {
@@ -75,12 +76,13 @@ public class CommerceDiscountCalculationImpl
 			commerceContext.getCouponCode(), Type.APPLY_TO_SHIPPING);
 
 		return _getCommerceDiscountValue(
-			commerceOrder.getShippingAmount(), commerceContext, searchContext);
+			shippingAmount, commerceContext, searchContext);
 	}
 
 	@Override
 	public CommerceDiscountValue getOrderSubtotalCommerceDiscountValue(
-			CommerceOrder commerceOrder, CommerceContext commerceContext)
+			CommerceOrder commerceOrder, BigDecimal subtotalAmount,
+			CommerceContext commerceContext)
 		throws PortalException {
 
 		if (commerceOrder == null) {
@@ -94,12 +96,13 @@ public class CommerceDiscountCalculationImpl
 			commerceContext.getCouponCode(), Type.APPLY_TO_SUBTOTAL);
 
 		return _getCommerceDiscountValue(
-			commerceOrder.getSubtotal(), commerceContext, searchContext);
+			subtotalAmount, commerceContext, searchContext);
 	}
 
 	@Override
 	public CommerceDiscountValue getOrderTotalCommerceDiscountValue(
-			CommerceOrder commerceOrder, CommerceContext commerceContext)
+			CommerceOrder commerceOrder, BigDecimal totalAmount,
+			CommerceContext commerceContext)
 		throws PortalException {
 
 		if (commerceOrder == null) {
@@ -113,7 +116,7 @@ public class CommerceDiscountCalculationImpl
 			commerceContext.getCouponCode(), Type.APPLY_TO_TOTAL);
 
 		return _getCommerceDiscountValue(
-			commerceOrder.getTotal(), commerceContext, searchContext);
+			totalAmount, commerceContext, searchContext);
 	}
 
 	@Override
@@ -220,7 +223,7 @@ public class CommerceDiscountCalculationImpl
 		CommerceDiscount commerceDiscount, BigDecimal amount,
 		CommerceCurrency commerceCurrency) {
 
-		if((amount == null) || (amount.compareTo(BigDecimal.ZERO) <= 0)){
+		if ((amount == null) || (amount.compareTo(BigDecimal.ZERO) <= 0)) {
 			return null;
 		}
 

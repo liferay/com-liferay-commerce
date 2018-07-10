@@ -29,15 +29,18 @@ import java.math.BigDecimal;
 public interface CommerceDiscountCalculation {
 
 	public CommerceDiscountValue getOrderShippingCommerceDiscountValue(
-			CommerceOrder commerceOrder, CommerceContext commerceContext)
+			CommerceOrder commerceOrder, BigDecimal shippingAmount,
+			CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceDiscountValue getOrderSubtotalCommerceDiscountValue(
-			CommerceOrder commerceOrder, CommerceContext commerceContext)
+			CommerceOrder commerceOrder, BigDecimal subtotalAmount,
+			CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceDiscountValue getOrderTotalCommerceDiscountValue(
-			CommerceOrder commerceOrder, CommerceContext commerceContext)
+			CommerceOrder commerceOrder, BigDecimal totalAmount,
+			CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceDiscountValue getProductCommerceDiscountValue(
