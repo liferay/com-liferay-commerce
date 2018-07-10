@@ -233,7 +233,7 @@ public class CommerceTierPriceEntryLocalServiceTest {
 
 		CommerceTierPriceEntry commerceTierPriceEntry =
 			_commerceTierPriceEntryLocalService.fetchByExternalReferenceCode(
-				externalReferenceCode);
+				_group.getCompanyId(), externalReferenceCode);
 
 		_assertTierPriceEntryAttributes(
 			commercePriceEntry, minQuantity, price, promoPrice,
@@ -368,7 +368,7 @@ public class CommerceTierPriceEntryLocalServiceTest {
 
 		CommercePriceEntry actualCommercePriceEntry =
 			_commercePriceEntryLocalService.fetchByExternalReferenceCode(
-				priceEntryExternalReferenceCode);
+				_group.getCompanyId(), priceEntryExternalReferenceCode);
 
 		Assert.assertThat(
 			actualCommercePriceEntry.isHasTierPrice(), equalTo(Boolean.TRUE));

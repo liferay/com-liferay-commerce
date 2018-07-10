@@ -84,7 +84,9 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 		return commercePriceEntryId;
 	}
 
-	public CommerceTierPriceEntry getCommerceTierPriceEntry() {
+	public CommerceTierPriceEntry getCommerceTierPriceEntry()
+		throws PortalException {
+
 		if (_commerceTierPriceEntry != null) {
 			return _commerceTierPriceEntry;
 		}
@@ -96,7 +98,7 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 		return _commerceTierPriceEntry;
 	}
 
-	public long getCommerceTierPriceEntryId() {
+	public long getCommerceTierPriceEntryId() throws PortalException {
 		CommerceTierPriceEntry commerceTierPriceEntry =
 			getCommerceTierPriceEntry();
 
