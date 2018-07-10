@@ -21,6 +21,7 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.currency.model.CommerceMoneyFactoryUtil;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
+import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommercePaymentMethod;
@@ -39,6 +40,8 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+
+import java.math.BigDecimal;
 
 import java.util.List;
 
@@ -255,6 +258,130 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 		}
 
 		return false;
+	}
+
+	@Override
+	public void setShippingDiscounts(
+		CommerceDiscountValue commerceDiscountValue) {
+
+		BigDecimal shippingDiscountAmount = BigDecimal.ZERO;
+		BigDecimal shippingDiscountPercentageLevel1 = BigDecimal.ZERO;
+		BigDecimal shippingDiscountPercentageLevel2 = BigDecimal.ZERO;
+		BigDecimal shippingDiscountPercentageLevel3 = BigDecimal.ZERO;
+		BigDecimal shippingDiscountPercentageLevel4 = BigDecimal.ZERO;
+
+		if (commerceDiscountValue != null) {
+			CommerceMoney discountAmount =
+				commerceDiscountValue.getDiscountAmount();
+
+			BigDecimal[] percentages = commerceDiscountValue.getPercentages();
+
+			shippingDiscountAmount = discountAmount.getPrice();
+
+			if ((percentages != null) && (percentages.length > 0)) {
+				shippingDiscountPercentageLevel1 = percentages[0];
+			}
+
+			if ((percentages != null) && (percentages.length > 1)) {
+				shippingDiscountPercentageLevel1 = percentages[1];
+			}
+
+			if ((percentages != null) && (percentages.length > 2)) {
+				shippingDiscountPercentageLevel1 = percentages[2];
+			}
+
+			if ((percentages != null) && (percentages.length > 3)) {
+				shippingDiscountPercentageLevel1 = percentages[3];
+			}
+		}
+
+		setShippingDiscountAmount(shippingDiscountAmount);
+		setShippingDiscountPercentageLevel1(shippingDiscountPercentageLevel1);
+		setShippingDiscountPercentageLevel2(shippingDiscountPercentageLevel2);
+		setShippingDiscountPercentageLevel3(shippingDiscountPercentageLevel3);
+		setShippingDiscountPercentageLevel4(shippingDiscountPercentageLevel4);
+	}
+
+	@Override
+	public void setSubtotalDiscounts(
+		CommerceDiscountValue commerceDiscountValue) {
+
+		BigDecimal subtotalDiscountAmount = BigDecimal.ZERO;
+		BigDecimal subtotalDiscountPercentageLevel1 = BigDecimal.ZERO;
+		BigDecimal subtotalDiscountPercentageLevel2 = BigDecimal.ZERO;
+		BigDecimal subtotalDiscountPercentageLevel3 = BigDecimal.ZERO;
+		BigDecimal subtotalDiscountPercentageLevel4 = BigDecimal.ZERO;
+
+		if (commerceDiscountValue != null) {
+			CommerceMoney discountAmount =
+				commerceDiscountValue.getDiscountAmount();
+
+			BigDecimal[] percentages = commerceDiscountValue.getPercentages();
+
+			subtotalDiscountAmount = discountAmount.getPrice();
+
+			if ((percentages != null) && (percentages.length > 0)) {
+				subtotalDiscountPercentageLevel1 = percentages[0];
+			}
+
+			if ((percentages != null) && (percentages.length > 1)) {
+				subtotalDiscountPercentageLevel1 = percentages[1];
+			}
+
+			if ((percentages != null) && (percentages.length > 2)) {
+				subtotalDiscountPercentageLevel1 = percentages[2];
+			}
+
+			if ((percentages != null) && (percentages.length > 3)) {
+				subtotalDiscountPercentageLevel1 = percentages[3];
+			}
+		}
+
+		setSubtotalDiscountAmount(subtotalDiscountAmount);
+		setSubtotalDiscountPercentageLevel1(subtotalDiscountPercentageLevel1);
+		setSubtotalDiscountPercentageLevel2(subtotalDiscountPercentageLevel2);
+		setSubtotalDiscountPercentageLevel3(subtotalDiscountPercentageLevel3);
+		setSubtotalDiscountPercentageLevel4(subtotalDiscountPercentageLevel4);
+	}
+
+	@Override
+	public void setTotalDiscounts(CommerceDiscountValue commerceDiscountValue) {
+		BigDecimal totalDiscountAmount = BigDecimal.ZERO;
+		BigDecimal totalDiscountPercentageLevel1 = BigDecimal.ZERO;
+		BigDecimal totalDiscountPercentageLevel2 = BigDecimal.ZERO;
+		BigDecimal totalDiscountPercentageLevel3 = BigDecimal.ZERO;
+		BigDecimal totalDiscountPercentageLevel4 = BigDecimal.ZERO;
+
+		if (commerceDiscountValue != null) {
+			CommerceMoney discountAmount =
+				commerceDiscountValue.getDiscountAmount();
+
+			BigDecimal[] percentages = commerceDiscountValue.getPercentages();
+
+			totalDiscountAmount = discountAmount.getPrice();
+
+			if ((percentages != null) && (percentages.length > 0)) {
+				totalDiscountPercentageLevel1 = percentages[0];
+			}
+
+			if ((percentages != null) && (percentages.length > 1)) {
+				totalDiscountPercentageLevel1 = percentages[1];
+			}
+
+			if ((percentages != null) && (percentages.length > 2)) {
+				totalDiscountPercentageLevel1 = percentages[2];
+			}
+
+			if ((percentages != null) && (percentages.length > 3)) {
+				totalDiscountPercentageLevel1 = percentages[3];
+			}
+		}
+
+		setTotalDiscountAmount(totalDiscountAmount);
+		setTotalDiscountPercentageLevel1(totalDiscountPercentageLevel1);
+		setTotalDiscountPercentageLevel2(totalDiscountPercentageLevel2);
+		setTotalDiscountPercentageLevel3(totalDiscountPercentageLevel3);
+		setTotalDiscountPercentageLevel4(totalDiscountPercentageLevel4);
 	}
 
 }
