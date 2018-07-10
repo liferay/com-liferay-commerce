@@ -132,6 +132,8 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			String keywords, int start, int end, Sort sort)
 		throws PortalException {
 
+		checkPermission(groupId, className, classPK);
+
 		return commerceAddressLocalService.searchCommerceAddresses(
 			companyId, groupId, className, classPK, keywords, start, end, sort);
 	}

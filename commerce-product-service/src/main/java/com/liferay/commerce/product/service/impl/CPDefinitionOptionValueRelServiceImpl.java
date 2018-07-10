@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.constants.CPActionKeys;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
@@ -24,6 +26,8 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
@@ -159,7 +163,11 @@ public class CPDefinitionOptionValueRelServiceImpl
 
 	@Override
 	public List<CPDefinitionOptionValueRel> getCPDefinitionOptionValueRels(
-		long groupId, String key, int start, int end) {
+			long groupId, String key, int start, int end)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
 
 		return cpDefinitionOptionValueRelLocalService.
 			getCPDefinitionOptionValueRels(key, start, end);
@@ -231,5 +239,10 @@ public class CPDefinitionOptionValueRelServiceImpl
 			ModelResourcePermissionFactory.getInstance(
 				CPDefinitionOptionValueRelServiceImpl.class,
 				"_cpDefinitionModelResourcePermission", CPDefinition.class);
+	private static volatile PortletResourcePermission
+		_portletResourcePermission =
+			PortletResourcePermissionFactory.getInstance(
+				CPDefinitionOptionValueRelServiceImpl.class,
+				"_portletResourcePermission", CPConstants.RESOURCE_NAME);
 
 }

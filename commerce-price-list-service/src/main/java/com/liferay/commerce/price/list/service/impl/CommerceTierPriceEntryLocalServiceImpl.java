@@ -148,7 +148,7 @@ public class CommerceTierPriceEntryLocalServiceImpl
 
 		commerceTierPriceEntryPersistence.remove(commerceTierPriceEntry);
 
-		// Commerce price entry
+		// Commerce price entries
 
 		List<CommerceTierPriceEntry> commerceTierPriceEntries =
 			commerceTierPriceEntryLocalService.getCommerceTierPriceEntries(

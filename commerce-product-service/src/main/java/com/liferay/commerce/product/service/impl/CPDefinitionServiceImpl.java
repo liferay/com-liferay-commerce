@@ -257,6 +257,9 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 			int start, int end, Sort sort)
 		throws PortalException {
 
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
+
 		return cpDefinitionLocalService.searchCPDefinitions(
 			companyId, groupId, keywords, status, start, end, sort);
 	}
@@ -266,6 +269,9 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 			long companyId, long groupId, String keywords, String filterFields,
 			String filterValues, int start, int end, Sort sort)
 		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
 
 		return cpDefinitionLocalService.searchCPDefinitions(
 			companyId, groupId, keywords, filterFields, filterValues, start,

@@ -16,12 +16,11 @@ package com.liferay.commerce.price.list.service.impl;
 
 import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
+import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.base.CommerceTierPriceEntryServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
@@ -78,10 +77,10 @@ public class CommerceTierPriceEntryServiceImpl
 			_portletResourcePermission.check(
 				getPermissionChecker(), commerceTierPriceEntry.getGroupId(),
 				CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
-
-			commerceTierPriceEntryLocalService.deleteCommerceTierPriceEntry(
-				commerceTierPriceEntryId);
 		}
+
+		commerceTierPriceEntryLocalService.deleteCommerceTierPriceEntry(
+			commerceTierPriceEntryId);
 	}
 
 	@Override
@@ -104,7 +103,12 @@ public class CommerceTierPriceEntryServiceImpl
 
 	@Override
 	public List<CommerceTierPriceEntry> fetchCommerceTierPriceEntries(
-		long groupId, int start, int end) {
+			long groupId, int start, int end)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commerceTierPriceEntryLocalService.fetchCommerceTierPriceEntries(
 			groupId, start, end);
@@ -112,15 +116,34 @@ public class CommerceTierPriceEntryServiceImpl
 
 	@Override
 	public CommerceTierPriceEntry fetchCommerceTierPriceEntry(
-		long commerceTierPriceEntryId) {
+			long commerceTierPriceEntryId)
+		throws PortalException {
 
-		return commerceTierPriceEntryLocalService.fetchCommerceTierPriceEntry(
-			commerceTierPriceEntryId);
+		CommerceTierPriceEntry commerceTierPriceEntry =
+			commerceTierPriceEntryLocalService.fetchCommerceTierPriceEntry(
+				commerceTierPriceEntryId);
+
+		if (commerceTierPriceEntry != null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(), commerceTierPriceEntry.getGroupId(),
+				CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+		}
+
+		return commerceTierPriceEntry;
 	}
 
 	@Override
 	public List<CommerceTierPriceEntry> getCommerceTierPriceEntries(
-		long commercePriceEntryId, int start, int end) {
+			long commercePriceEntryId, int start, int end)
+		throws PortalException {
+
+		CommercePriceEntry commercePriceEntry =
+			commercePriceEntryLocalService.getCommercePriceEntry(
+				commercePriceEntryId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceEntry.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commerceTierPriceEntryLocalService.getCommerceTierPriceEntries(
 			commercePriceEntryId, start, end);
@@ -128,29 +151,49 @@ public class CommerceTierPriceEntryServiceImpl
 
 	@Override
 	public List<CommerceTierPriceEntry> getCommerceTierPriceEntries(
-		long commercePriceEntryId, int start, int end,
-		OrderByComparator<CommerceTierPriceEntry> orderByComparator) {
+			long commercePriceEntryId, int start, int end,
+			OrderByComparator<CommerceTierPriceEntry> orderByComparator)
+		throws PortalException {
+
+		CommercePriceEntry commercePriceEntry =
+			commercePriceEntryLocalService.getCommercePriceEntry(
+				commercePriceEntryId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceEntry.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commerceTierPriceEntryLocalService.getCommerceTierPriceEntries(
 			commercePriceEntryId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceTierPriceEntriesCount(long commercePriceEntryId) {
+	public int getCommerceTierPriceEntriesCount(long commercePriceEntryId)
+		throws PortalException {
+
+		CommercePriceEntry commercePriceEntry =
+			commercePriceEntryLocalService.getCommercePriceEntry(
+				commercePriceEntryId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceEntry.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
 		return
 			commerceTierPriceEntryLocalService.getCommerceTierPriceEntriesCount(
 				commercePriceEntryId);
 	}
 
 	@Override
-	public int getCommerceTierPriceEntriesCountByGroupId(long groupId) {
+	public int getCommerceTierPriceEntriesCountByGroupId(long groupId)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
 		return commerceTierPriceEntryLocalService.
 			getCommerceTierPriceEntriesCountByGroupId(groupId);
-	}
-
-	@Override
-	public Hits search(SearchContext searchContext) {
-		return commerceTierPriceEntryLocalService.search(searchContext);
 	}
 
 	@Override
@@ -159,6 +202,10 @@ public class CommerceTierPriceEntryServiceImpl
 				long companyId, long groupId, long commercePriceEntryId,
 				String keywords, int start, int end, Sort sort)
 		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return
 			commerceTierPriceEntryLocalService.searchCommerceTierPriceEntries(

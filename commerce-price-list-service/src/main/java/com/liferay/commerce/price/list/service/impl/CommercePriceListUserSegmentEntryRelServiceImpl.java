@@ -14,9 +14,14 @@
 
 package com.liferay.commerce.price.list.service.impl;
 
+import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
+import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
+import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
 import com.liferay.commerce.price.list.service.base.CommercePriceListUserSegmentEntryRelServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
@@ -35,6 +40,14 @@ public class CommercePriceListUserSegmentEntryRelServiceImpl
 				int order, ServiceContext serviceContext)
 		throws PortalException {
 
+		CommercePriceList commercePriceList =
+			commercePriceListLocalService.getCommercePriceList(
+				commercePriceListId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceList.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
 		return commercePriceListUserSegmentEntryRelLocalService.
 			addCommercePriceListUserSegmentEntryRel(
 				commercePriceListId, commerceUserSegmentEntryId, order,
@@ -46,6 +59,19 @@ public class CommercePriceListUserSegmentEntryRelServiceImpl
 			long commercePriceListUserSegmentEntryRelId)
 		throws PortalException {
 
+		CommercePriceListUserSegmentEntryRel
+			commercePriceListUserSegmentEntryRel =
+			commercePriceListUserSegmentEntryRelLocalService.
+				fetchCommercePriceListUserSegmentEntryRel(
+					commercePriceListUserSegmentEntryRelId);
+
+		if (commercePriceListUserSegmentEntryRel != null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(),
+				commercePriceListUserSegmentEntryRel.getGroupId(),
+				CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+		}
+
 		commercePriceListUserSegmentEntryRelLocalService.
 			deleteCommercePriceListUserSegmentEntryRel(
 				commercePriceListUserSegmentEntryRelId);
@@ -53,17 +79,38 @@ public class CommercePriceListUserSegmentEntryRelServiceImpl
 
 	@Override
 	public CommercePriceListUserSegmentEntryRel
-		fetchCommercePriceListUserSegmentEntryRel(
-			long commercePriceListId, long commerceUserSegmentEntryId) {
-
-		return commercePriceListUserSegmentEntryRelLocalService.
 			fetchCommercePriceListUserSegmentEntryRel(
-				commercePriceListId, commerceUserSegmentEntryId);
+				long commercePriceListId, long commerceUserSegmentEntryId)
+		throws PortalException {
+
+		CommercePriceListUserSegmentEntryRel
+			commercePriceListUserSegmentEntryRel =
+				commercePriceListUserSegmentEntryRelLocalService.
+					fetchCommercePriceListUserSegmentEntryRel(
+						commercePriceListId, commerceUserSegmentEntryId);
+
+		if (commercePriceListUserSegmentEntryRel != null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(),
+				commercePriceListUserSegmentEntryRel.getGroupId(),
+				CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+		}
+
+		return commercePriceListUserSegmentEntryRel;
 	}
 
 	@Override
 	public List<CommercePriceListUserSegmentEntryRel>
-		getCommercePriceListUserSegmentEntryRels(long commercePriceListId) {
+			getCommercePriceListUserSegmentEntryRels(long commercePriceListId)
+		throws PortalException {
+
+		CommercePriceList commercePriceList =
+			commercePriceListLocalService.getCommercePriceList(
+				commercePriceListId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceList.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListUserSegmentEntryRelLocalService.
 			getCommercePriceListUserSegmentEntryRels(commercePriceListId);
@@ -71,10 +118,19 @@ public class CommercePriceListUserSegmentEntryRelServiceImpl
 
 	@Override
 	public List<CommercePriceListUserSegmentEntryRel>
-		getCommercePriceListUserSegmentEntryRels(
-			long commercePriceListId, int start, int end,
-			OrderByComparator<CommercePriceListUserSegmentEntryRel>
-				orderByComparator) {
+			getCommercePriceListUserSegmentEntryRels(
+				long commercePriceListId, int start, int end,
+				OrderByComparator<CommercePriceListUserSegmentEntryRel>
+					orderByComparator)
+		throws PortalException {
+
+		CommercePriceList commercePriceList =
+			commercePriceListLocalService.getCommercePriceList(
+				commercePriceListId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceList.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListUserSegmentEntryRelLocalService.
 			getCommercePriceListUserSegmentEntryRels(
@@ -83,7 +139,16 @@ public class CommercePriceListUserSegmentEntryRelServiceImpl
 
 	@Override
 	public int getCommercePriceListUserSegmentEntryRelsCount(
-		long commercePriceListId) {
+			long commercePriceListId)
+		throws PortalException {
+
+		CommercePriceList commercePriceList =
+			commercePriceListLocalService.getCommercePriceList(
+				commercePriceListId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceList.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListUserSegmentEntryRelLocalService.
 			getCommercePriceListUserSegmentEntryRelsCount(commercePriceListId);
@@ -96,9 +161,27 @@ public class CommercePriceListUserSegmentEntryRelServiceImpl
 				ServiceContext serviceContext)
 		throws PortalException {
 
+		CommercePriceListUserSegmentEntryRel
+			commercePriceListUserSegmentEntryRel =
+				commercePriceListUserSegmentEntryRelLocalService.
+					getCommercePriceListUserSegmentEntryRel(
+						commercePriceListUserSegmentEntryRelId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(),
+			commercePriceListUserSegmentEntryRel.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
 		return commercePriceListUserSegmentEntryRelLocalService.
 			updateCommercePriceListUserSegmentEntryRel(
 				commercePriceListUserSegmentEntryRelId, order, serviceContext);
 	}
+
+	private static volatile PortletResourcePermission
+		_portletResourcePermission =
+			PortletResourcePermissionFactory.getInstance(
+				CommercePriceListUserSegmentEntryRelServiceImpl.class,
+				"_portletResourcePermission",
+				CommercePriceListConstants.RESOURCE_NAME);
 
 }

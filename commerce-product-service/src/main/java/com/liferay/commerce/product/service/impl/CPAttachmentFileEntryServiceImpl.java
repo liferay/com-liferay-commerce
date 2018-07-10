@@ -109,6 +109,8 @@ public class CPAttachmentFileEntryServiceImpl
 			int end)
 		throws PortalException {
 
+		checkCPAttachmentFileEntryPermissions(classNameId, classPK);
+
 		return cpAttachmentFileEntryLocalService.getCPAttachmentFileEntries(
 			classNameId, classPK, type, status, start, end);
 	}
@@ -119,13 +121,18 @@ public class CPAttachmentFileEntryServiceImpl
 			int end, OrderByComparator<CPAttachmentFileEntry> orderByComparator)
 		throws PortalException {
 
+		checkCPAttachmentFileEntryPermissions(classNameId, classPK);
+
 		return cpAttachmentFileEntryLocalService.getCPAttachmentFileEntries(
 			classNameId, classPK, type, status, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCPAttachmentFileEntriesCount(
-		long classNameId, long classPK, int type, int status) {
+			long classNameId, long classPK, int type, int status)
+		throws PortalException {
+
+		checkCPAttachmentFileEntryPermissions(classNameId, classPK);
 
 		return
 			cpAttachmentFileEntryLocalService.getCPAttachmentFileEntriesCount(
@@ -205,13 +212,8 @@ public class CPAttachmentFileEntryServiceImpl
 	}
 
 	protected void checkCPAttachmentFileEntryPermissions(
-			long scopeGroupId, long classNameId, long classPK, int type)
+			long classNameId, long classPK)
 		throws PortalException {
-
-		String actionKey = getActionKeyByCPAttachmentFileEntryType(type);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), scopeGroupId, actionKey);
 
 		long cpDefinitionClassNameId = _portal.getClassNameId(
 			CPDefinition.class);
@@ -220,6 +222,18 @@ public class CPAttachmentFileEntryServiceImpl
 			_cpDefinitionModelResourcePermission.check(
 				getPermissionChecker(), classPK, ActionKeys.UPDATE);
 		}
+	}
+
+	protected void checkCPAttachmentFileEntryPermissions(
+			long scopeGroupId, long classNameId, long classPK, int type)
+		throws PortalException {
+
+		String actionKey = getActionKeyByCPAttachmentFileEntryType(type);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), scopeGroupId, actionKey);
+
+		checkCPAttachmentFileEntryPermissions(classNameId, classPK);
 	}
 
 	protected String getActionKeyByCPAttachmentFileEntryType(int type) {
