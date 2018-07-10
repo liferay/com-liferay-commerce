@@ -65,20 +65,22 @@ public interface CommercePriceListUserSegmentEntryRelService extends BaseService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceListUserSegmentEntryRel fetchCommercePriceListUserSegmentEntryRel(
-		long commercePriceListId, long commerceUserSegmentEntryId);
+		long commercePriceListId, long commerceUserSegmentEntryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceListUserSegmentEntryRel> getCommercePriceListUserSegmentEntryRels(
-		long commercePriceListId);
+		long commercePriceListId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceListUserSegmentEntryRel> getCommercePriceListUserSegmentEntryRels(
 		long commercePriceListId, int start, int end,
-		OrderByComparator<CommercePriceListUserSegmentEntryRel> orderByComparator);
+		OrderByComparator<CommercePriceListUserSegmentEntryRel> orderByComparator)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommercePriceListUserSegmentEntryRelsCount(
-		long commercePriceListId);
+		long commercePriceListId) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.

@@ -52,28 +52,32 @@ public class CommercePriceListUserSegmentEntryRelServiceWrapper
 
 	@Override
 	public com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel fetchCommercePriceListUserSegmentEntryRel(
-		long commercePriceListId, long commerceUserSegmentEntryId) {
+		long commercePriceListId, long commerceUserSegmentEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commercePriceListUserSegmentEntryRelService.fetchCommercePriceListUserSegmentEntryRel(commercePriceListId,
 			commerceUserSegmentEntryId);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> getCommercePriceListUserSegmentEntryRels(
-		long commercePriceListId) {
+		long commercePriceListId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commercePriceListUserSegmentEntryRelService.getCommercePriceListUserSegmentEntryRels(commercePriceListId);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> getCommercePriceListUserSegmentEntryRels(
 		long commercePriceListId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commercePriceListUserSegmentEntryRelService.getCommercePriceListUserSegmentEntryRels(commercePriceListId,
 			start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommercePriceListUserSegmentEntryRelsCount(
-		long commercePriceListId) {
+		long commercePriceListId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commercePriceListUserSegmentEntryRelService.getCommercePriceListUserSegmentEntryRelsCount(commercePriceListId);
 	}
 

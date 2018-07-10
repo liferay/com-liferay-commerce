@@ -336,34 +336,6 @@ public class CommercePriceListServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.search.Hits search(
-		HttpPrincipal httpPrincipal,
-		com.liferay.portal.kernel.search.SearchContext searchContext) {
-		try {
-			MethodKey methodKey = new MethodKey(CommercePriceListServiceUtil.class,
-					"search", _searchParameterTypes8);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					searchContext);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portal.kernel.search.Hits)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.price.list.model.CommercePriceList> searchCommercePriceLists(
 		HttpPrincipal httpPrincipal, long companyId, long groupId,
 		String keywords, int status, int start, int end,
@@ -372,7 +344,7 @@ public class CommercePriceListServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePriceListServiceUtil.class,
 					"searchCommercePriceLists",
-					_searchCommercePriceListsParameterTypes9);
+					_searchCommercePriceListsParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, groupId, keywords, status, start, end, sort);
@@ -411,7 +383,7 @@ public class CommercePriceListServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePriceListServiceUtil.class,
 					"updateCommercePriceList",
-					_updateCommercePriceListParameterTypes10);
+					_updateCommercePriceListParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commercePriceListId, commerceCurrencyId, name, priority,
@@ -450,7 +422,7 @@ public class CommercePriceListServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePriceListServiceUtil.class,
 					"updateExternalReferenceCode",
-					_updateExternalReferenceCodeParameterTypes11);
+					_updateExternalReferenceCodeParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commercePriceList, groupId, externalReferenceCode);
@@ -490,7 +462,7 @@ public class CommercePriceListServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePriceListServiceUtil.class,
 					"upsertCommercePriceList",
-					_upsertCommercePriceListParameterTypes12);
+					_upsertCommercePriceListParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commercePriceListId, commerceCurrencyId, name, priority,
@@ -553,25 +525,22 @@ public class CommercePriceListServiceHttp {
 	private static final Class<?>[] _getCommercePriceListsCountParameterTypes7 = new Class[] {
 			long.class, int.class
 		};
-	private static final Class<?>[] _searchParameterTypes8 = new Class[] {
-			com.liferay.portal.kernel.search.SearchContext.class
-		};
-	private static final Class<?>[] _searchCommercePriceListsParameterTypes9 = new Class[] {
+	private static final Class<?>[] _searchCommercePriceListsParameterTypes8 = new Class[] {
 			long.class, long.class, String.class, int.class, int.class,
 			int.class, com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _updateCommercePriceListParameterTypes10 = new Class[] {
+	private static final Class<?>[] _updateCommercePriceListParameterTypes9 = new Class[] {
 			long.class, long.class, String.class, double.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, boolean.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateExternalReferenceCodeParameterTypes11 =
+	private static final Class<?>[] _updateExternalReferenceCodeParameterTypes10 =
 		new Class[] {
 			com.liferay.commerce.price.list.model.CommercePriceList.class,
 			long.class, String.class
 		};
-	private static final Class<?>[] _upsertCommercePriceListParameterTypes12 = new Class[] {
+	private static final Class<?>[] _upsertCommercePriceListParameterTypes11 = new Class[] {
 			long.class, long.class, String.class, double.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, String.class, boolean.class,

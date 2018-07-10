@@ -193,7 +193,8 @@ public class CommerceTierPriceEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> fetchCommerceTierPriceEntries(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end) {
+		HttpPrincipal httpPrincipal, long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"fetchCommerceTierPriceEntries",
@@ -208,6 +209,10 @@ public class CommerceTierPriceEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
@@ -221,7 +226,8 @@ public class CommerceTierPriceEntryServiceHttp {
 	}
 
 	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry fetchCommerceTierPriceEntry(
-		HttpPrincipal httpPrincipal, long commerceTierPriceEntryId) {
+		HttpPrincipal httpPrincipal, long commerceTierPriceEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"fetchCommerceTierPriceEntry",
@@ -236,6 +242,10 @@ public class CommerceTierPriceEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
@@ -250,7 +260,7 @@ public class CommerceTierPriceEntryServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> getCommerceTierPriceEntries(
 		HttpPrincipal httpPrincipal, long commercePriceEntryId, int start,
-		int end) {
+		int end) throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"getCommerceTierPriceEntries",
@@ -265,6 +275,10 @@ public class CommerceTierPriceEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
@@ -280,7 +294,8 @@ public class CommerceTierPriceEntryServiceHttp {
 	public static java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> getCommerceTierPriceEntries(
 		HttpPrincipal httpPrincipal, long commercePriceEntryId, int start,
 		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"getCommerceTierPriceEntries",
@@ -295,6 +310,10 @@ public class CommerceTierPriceEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
@@ -308,7 +327,8 @@ public class CommerceTierPriceEntryServiceHttp {
 	}
 
 	public static int getCommerceTierPriceEntriesCount(
-		HttpPrincipal httpPrincipal, long commercePriceEntryId) {
+		HttpPrincipal httpPrincipal, long commercePriceEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"getCommerceTierPriceEntriesCount",
@@ -323,6 +343,10 @@ public class CommerceTierPriceEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
@@ -336,7 +360,8 @@ public class CommerceTierPriceEntryServiceHttp {
 	}
 
 	public static int getCommerceTierPriceEntriesCountByGroupId(
-		HttpPrincipal httpPrincipal, long groupId) {
+		HttpPrincipal httpPrincipal, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"getCommerceTierPriceEntriesCountByGroupId",
@@ -350,38 +375,14 @@ public class CommerceTierPriceEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
 			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(
-		HttpPrincipal httpPrincipal,
-		com.liferay.portal.kernel.search.SearchContext searchContext) {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
-					"search", _searchParameterTypes10);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					searchContext);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portal.kernel.search.Hits)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -398,7 +399,7 @@ public class CommerceTierPriceEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"searchCommerceTierPriceEntries",
-					_searchCommerceTierPriceEntriesParameterTypes11);
+					_searchCommerceTierPriceEntriesParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, groupId, commercePriceEntryId, keywords, start,
@@ -435,7 +436,7 @@ public class CommerceTierPriceEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"updateCommerceTierPriceEntry",
-					_updateCommerceTierPriceEntryParameterTypes12);
+					_updateCommerceTierPriceEntryParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceTierPriceEntryId, price, promoPrice, minQuantity,
@@ -471,7 +472,7 @@ public class CommerceTierPriceEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"updateExternalReferenceCode",
-					_updateExternalReferenceCodeParameterTypes13);
+					_updateExternalReferenceCodeParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceTierPriceEntry, groupId, externalReferenceCode);
@@ -508,7 +509,7 @@ public class CommerceTierPriceEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceTierPriceEntryServiceUtil.class,
 					"upsertCommerceTierPriceEntry",
-					_upsertCommerceTierPriceEntryParameterTypes14);
+					_upsertCommerceTierPriceEntryParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceTierPriceEntryId, commercePriceEntryId,
@@ -567,25 +568,22 @@ public class CommerceTierPriceEntryServiceHttp {
 		new Class[] { long.class };
 	private static final Class<?>[] _getCommerceTierPriceEntriesCountByGroupIdParameterTypes9 =
 		new Class[] { long.class };
-	private static final Class<?>[] _searchParameterTypes10 = new Class[] {
-			com.liferay.portal.kernel.search.SearchContext.class
-		};
-	private static final Class<?>[] _searchCommerceTierPriceEntriesParameterTypes11 =
+	private static final Class<?>[] _searchCommerceTierPriceEntriesParameterTypes10 =
 		new Class[] {
 			long.class, long.class, long.class, String.class, int.class,
 			int.class, com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _updateCommerceTierPriceEntryParameterTypes12 =
+	private static final Class<?>[] _updateCommerceTierPriceEntryParameterTypes11 =
 		new Class[] {
 			long.class, java.math.BigDecimal.class, java.math.BigDecimal.class,
 			int.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateExternalReferenceCodeParameterTypes13 =
+	private static final Class<?>[] _updateExternalReferenceCodeParameterTypes12 =
 		new Class[] {
 			com.liferay.commerce.price.list.model.CommerceTierPriceEntry.class,
 			long.class, String.class
 		};
-	private static final Class<?>[] _upsertCommerceTierPriceEntryParameterTypes14 =
+	private static final Class<?>[] _upsertCommerceTierPriceEntryParameterTypes13 =
 		new Class[] {
 			long.class, long.class, String.class, java.math.BigDecimal.class,
 			java.math.BigDecimal.class, int.class, String.class,

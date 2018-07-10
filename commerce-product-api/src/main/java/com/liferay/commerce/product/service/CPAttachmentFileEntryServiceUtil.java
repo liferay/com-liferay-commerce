@@ -90,7 +90,8 @@ public class CPAttachmentFileEntryServiceUtil {
 	}
 
 	public static int getCPAttachmentFileEntriesCount(long classNameId,
-		long classPK, int type, int status) {
+		long classPK, int type, int status)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCPAttachmentFileEntriesCount(classNameId, classPK, type,
 			status);

@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
@@ -81,26 +79,30 @@ public interface CommerceTierPriceEntryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceTierPriceEntry> fetchCommerceTierPriceEntries(
-		long groupId, int start, int end);
+		long groupId, int start, int end) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceTierPriceEntry fetchCommerceTierPriceEntry(
-		long commerceTierPriceEntryId);
+		long commerceTierPriceEntryId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceTierPriceEntry> getCommerceTierPriceEntries(
-		long commercePriceEntryId, int start, int end);
+		long commercePriceEntryId, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceTierPriceEntry> getCommerceTierPriceEntries(
 		long commercePriceEntryId, int start, int end,
-		OrderByComparator<CommerceTierPriceEntry> orderByComparator);
+		OrderByComparator<CommerceTierPriceEntry> orderByComparator)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceTierPriceEntriesCount(long commercePriceEntryId);
+	public int getCommerceTierPriceEntriesCount(long commercePriceEntryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceTierPriceEntriesCountByGroupId(long groupId);
+	public int getCommerceTierPriceEntriesCountByGroupId(long groupId)
+		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -108,9 +110,6 @@ public interface CommerceTierPriceEntryService extends BaseService {
 	* @return the OSGi service identifier
 	*/
 	public String getOSGiServiceIdentifier();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Hits search(SearchContext searchContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceTierPriceEntry> searchCommerceTierPriceEntries(

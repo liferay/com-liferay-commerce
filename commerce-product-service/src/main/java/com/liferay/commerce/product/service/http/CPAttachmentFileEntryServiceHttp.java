@@ -234,7 +234,7 @@ public class CPAttachmentFileEntryServiceHttp {
 
 	public static int getCPAttachmentFileEntriesCount(
 		HttpPrincipal httpPrincipal, long classNameId, long classPK, int type,
-		int status) {
+		int status) throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPAttachmentFileEntryServiceUtil.class,
 					"getCPAttachmentFileEntriesCount",
@@ -249,6 +249,10 @@ public class CPAttachmentFileEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 

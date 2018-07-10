@@ -59,28 +59,32 @@ public class CommercePriceListUserSegmentEntryRelServiceUtil {
 	}
 
 	public static com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel fetchCommercePriceListUserSegmentEntryRel(
-		long commercePriceListId, long commerceUserSegmentEntryId) {
+		long commercePriceListId, long commerceUserSegmentEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .fetchCommercePriceListUserSegmentEntryRel(commercePriceListId,
 			commerceUserSegmentEntryId);
 	}
 
 	public static java.util.List<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> getCommercePriceListUserSegmentEntryRels(
-		long commercePriceListId) {
+		long commercePriceListId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommercePriceListUserSegmentEntryRels(commercePriceListId);
 	}
 
 	public static java.util.List<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> getCommercePriceListUserSegmentEntryRels(
 		long commercePriceListId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommercePriceListUserSegmentEntryRels(commercePriceListId,
 			start, end, orderByComparator);
 	}
 
 	public static int getCommercePriceListUserSegmentEntryRelsCount(
-		long commercePriceListId) {
+		long commercePriceListId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommercePriceListUserSegmentEntryRelsCount(commercePriceListId);
 	}

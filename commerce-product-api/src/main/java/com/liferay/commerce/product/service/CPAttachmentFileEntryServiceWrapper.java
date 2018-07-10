@@ -86,7 +86,8 @@ public class CPAttachmentFileEntryServiceWrapper
 
 	@Override
 	public int getCPAttachmentFileEntriesCount(long classNameId, long classPK,
-		int type, int status) {
+		int type, int status)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpAttachmentFileEntryService.getCPAttachmentFileEntriesCount(classNameId,
 			classPK, type, status);
 	}
