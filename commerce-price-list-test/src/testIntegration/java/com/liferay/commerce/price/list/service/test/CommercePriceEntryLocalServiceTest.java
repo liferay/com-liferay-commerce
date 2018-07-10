@@ -268,7 +268,7 @@ public class CommercePriceEntryLocalServiceTest {
 
 		CommercePriceEntry commercePriceEntry =
 			_commercePriceEntryLocalService.fetchByExternalReferenceCode(
-				externalReferenceCode);
+				_group.getCompanyId(), externalReferenceCode);
 
 		_assertPriceEntryAttributes(
 			cpInstance, price, promoPrice, commercePriceEntry);

@@ -165,7 +165,8 @@ public class CommercePriceListActionHelper {
 	}
 
 	public CommerceTierPriceEntry getCommerceTierPriceEntry(
-		RenderRequest renderRequest) {
+			RenderRequest renderRequest)
+		throws PortalException {
 
 		long commerceTierPriceEntryId = ParamUtil.getLong(
 			renderRequest, "commerceTierPriceEntryId");

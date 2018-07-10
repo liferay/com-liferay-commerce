@@ -193,7 +193,7 @@ public class CommercePriceListLocalServiceTest {
 
 		CommercePriceList commercePriceList =
 			_commercePriceListLocalService.fetchByExternalReferenceCode(
-				externalReferenceCode);
+				_group.getCompanyId(), externalReferenceCode);
 
 		_assertPriceListAttributes(
 			updatedCurrency, updatedName, commercePriceList);
