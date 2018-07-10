@@ -87,6 +87,21 @@ public interface CPOptionModel extends BaseModel<CPOption>, LocalizedModel,
 	public void setUuid(String uuid);
 
 	/**
+	 * Returns the external reference code of this cp option.
+	 *
+	 * @return the external reference code of this cp option
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this cp option.
+	 *
+	 * @param externalReferenceCode the external reference code of this cp option
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the cp option ID of this cp option.
 	 *
 	 * @return the cp option ID of this cp option

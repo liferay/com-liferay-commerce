@@ -159,7 +159,8 @@ public class CommercePriceEntryServiceHttp {
 	}
 
 	public static com.liferay.commerce.price.list.model.CommercePriceEntry fetchByExternalReferenceCode(
-		HttpPrincipal httpPrincipal, String externalReferenceCode)
+		HttpPrincipal httpPrincipal, long companyId,
+		String externalReferenceCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePriceEntryServiceUtil.class,
@@ -167,7 +168,7 @@ public class CommercePriceEntryServiceHttp {
 					_fetchByExternalReferenceCodeParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					externalReferenceCode);
+					companyId, externalReferenceCode);
 
 			Object returnObj = null;
 
@@ -674,7 +675,7 @@ public class CommercePriceEntryServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _fetchByExternalReferenceCodeParameterTypes3 =
-		new Class[] { String.class };
+		new Class[] { long.class, String.class };
 	private static final Class<?>[] _fetchCommercePriceEntryParameterTypes4 = new Class[] {
 			long.class
 		};

@@ -37,6 +37,7 @@ public class CPInstanceSoap implements Serializable {
 		CPInstanceSoap soapModel = new CPInstanceSoap();
 
 		soapModel.setUuid(model.getUuid());
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCPInstanceId(model.getCPInstanceId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -58,7 +59,6 @@ public class CPInstanceSoap implements Serializable {
 		soapModel.setPromoPrice(model.getPromoPrice());
 		soapModel.setCost(model.getCost());
 		soapModel.setPublished(model.isPublished());
-		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setDisplayDate(model.getDisplayDate());
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
@@ -124,6 +124,14 @@ public class CPInstanceSoap implements Serializable {
 
 	public void setUuid(String uuid) {
 		_uuid = uuid;
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public long getCPInstanceId() {
@@ -302,14 +310,6 @@ public class CPInstanceSoap implements Serializable {
 		_published = published;
 	}
 
-	public String getExternalReferenceCode() {
-		return _externalReferenceCode;
-	}
-
-	public void setExternalReferenceCode(String externalReferenceCode) {
-		_externalReferenceCode = externalReferenceCode;
-	}
-
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
@@ -367,6 +367,7 @@ public class CPInstanceSoap implements Serializable {
 	}
 
 	private String _uuid;
+	private String _externalReferenceCode;
 	private long _CPInstanceId;
 	private long _groupId;
 	private long _companyId;
@@ -388,7 +389,6 @@ public class CPInstanceSoap implements Serializable {
 	private BigDecimal _promoPrice;
 	private BigDecimal _cost;
 	private boolean _published;
-	private String _externalReferenceCode;
 	private Date _displayDate;
 	private Date _expirationDate;
 	private Date _lastPublishDate;

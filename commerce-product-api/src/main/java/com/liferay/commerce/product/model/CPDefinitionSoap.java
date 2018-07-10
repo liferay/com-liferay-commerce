@@ -35,6 +35,7 @@ public class CPDefinitionSoap implements Serializable {
 		CPDefinitionSoap soapModel = new CPDefinitionSoap();
 
 		soapModel.setUuid(model.getUuid());
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setDefaultLanguageId(model.getDefaultLanguageId());
 		soapModel.setCPDefinitionId(model.getCPDefinitionId());
 		soapModel.setGroupId(model.getGroupId());
@@ -59,7 +60,6 @@ public class CPDefinitionSoap implements Serializable {
 		soapModel.setTelcoOrElectronics(model.isTelcoOrElectronics());
 		soapModel.setDDMStructureKey(model.getDDMStructureKey());
 		soapModel.setPublished(model.isPublished());
-		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setDisplayDate(model.getDisplayDate());
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
@@ -125,6 +125,14 @@ public class CPDefinitionSoap implements Serializable {
 
 	public void setUuid(String uuid) {
 		_uuid = uuid;
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public String getDefaultLanguageId() {
@@ -351,14 +359,6 @@ public class CPDefinitionSoap implements Serializable {
 		_published = published;
 	}
 
-	public String getExternalReferenceCode() {
-		return _externalReferenceCode;
-	}
-
-	public void setExternalReferenceCode(String externalReferenceCode) {
-		_externalReferenceCode = externalReferenceCode;
-	}
-
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
@@ -416,6 +416,7 @@ public class CPDefinitionSoap implements Serializable {
 	}
 
 	private String _uuid;
+	private String _externalReferenceCode;
 	private String _defaultLanguageId;
 	private long _CPDefinitionId;
 	private long _groupId;
@@ -440,7 +441,6 @@ public class CPDefinitionSoap implements Serializable {
 	private boolean _telcoOrElectronics;
 	private String _DDMStructureKey;
 	private boolean _published;
-	private String _externalReferenceCode;
 	private Date _displayDate;
 	private Date _expirationDate;
 	private Date _lastPublishDate;

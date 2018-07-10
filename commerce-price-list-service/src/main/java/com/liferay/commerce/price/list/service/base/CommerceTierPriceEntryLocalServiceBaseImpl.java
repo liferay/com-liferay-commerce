@@ -247,6 +247,19 @@ public abstract class CommerceTierPriceEntryLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the commerce tier price entry with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce tier price entry's external reference code
+	 * @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
+	 */
+	@Override
+	public CommerceTierPriceEntry fetchCommerceTierPriceEntryByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return commerceTierPriceEntryPersistence.fetchByC_ERC(companyId, null);
+	}
+
+	/**
 	 * Returns the commerce tier price entry with the primary key.
 	 *
 	 * @param commerceTierPriceEntryId the primary key of the commerce tier price entry

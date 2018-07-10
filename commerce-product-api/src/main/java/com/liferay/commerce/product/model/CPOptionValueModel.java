@@ -87,6 +87,21 @@ public interface CPOptionValueModel extends BaseModel<CPOptionValue>,
 	public void setUuid(String uuid);
 
 	/**
+	 * Returns the external reference code of this cp option value.
+	 *
+	 * @return the external reference code of this cp option value
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this cp option value.
+	 *
+	 * @param externalReferenceCode the external reference code of this cp option value
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the cp option value ID of this cp option value.
 	 *
 	 * @return the cp option value ID of this cp option value

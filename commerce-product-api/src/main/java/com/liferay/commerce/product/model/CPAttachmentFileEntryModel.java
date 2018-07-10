@@ -90,6 +90,21 @@ public interface CPAttachmentFileEntryModel extends AttachedModel,
 	public void setUuid(String uuid);
 
 	/**
+	 * Returns the external reference code of this cp attachment file entry.
+	 *
+	 * @return the external reference code of this cp attachment file entry
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this cp attachment file entry.
+	 *
+	 * @param externalReferenceCode the external reference code of this cp attachment file entry
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the cp attachment file entry ID of this cp attachment file entry.
 	 *
 	 * @return the cp attachment file entry ID of this cp attachment file entry

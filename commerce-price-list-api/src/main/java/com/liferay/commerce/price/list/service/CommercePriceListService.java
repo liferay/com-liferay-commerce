@@ -79,7 +79,7 @@ public interface CommercePriceListService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommercePriceList fetchByExternalReferenceCode(
+	public CommercePriceList fetchByExternalReferenceCode(long companyId,
 		String externalReferenceCode) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

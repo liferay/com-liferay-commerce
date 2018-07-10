@@ -63,6 +63,7 @@ public class CommercePriceEntryWrapper implements CommercePriceEntry,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commercePriceEntryId", getCommercePriceEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -75,7 +76,6 @@ public class CommercePriceEntryWrapper implements CommercePriceEntry,
 		attributes.put("price", getPrice());
 		attributes.put("promoPrice", getPromoPrice());
 		attributes.put("hasTierPrice", isHasTierPrice());
-		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("lastPublishDate", getLastPublishDate());
 
 		return attributes;
@@ -87,6 +87,13 @@ public class CommercePriceEntryWrapper implements CommercePriceEntry,
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long commercePriceEntryId = (Long)attributes.get("commercePriceEntryId");
@@ -159,13 +166,6 @@ public class CommercePriceEntryWrapper implements CommercePriceEntry,
 
 		if (hasTierPrice != null) {
 			setHasTierPrice(hasTierPrice);
-		}
-
-		String externalReferenceCode = (String)attributes.get(
-				"externalReferenceCode");
-
-		if (externalReferenceCode != null) {
-			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Date lastPublishDate = (Date)attributes.get("lastPublishDate");

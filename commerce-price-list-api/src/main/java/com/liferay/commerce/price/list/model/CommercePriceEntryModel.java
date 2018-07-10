@@ -85,6 +85,21 @@ public interface CommercePriceEntryModel extends BaseModel<CommercePriceEntry>,
 	public void setUuid(String uuid);
 
 	/**
+	 * Returns the external reference code of this commerce price entry.
+	 *
+	 * @return the external reference code of this commerce price entry
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this commerce price entry.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce price entry
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the commerce price entry ID of this commerce price entry.
 	 *
 	 * @return the commerce price entry ID of this commerce price entry
@@ -287,21 +302,6 @@ public interface CommercePriceEntryModel extends BaseModel<CommercePriceEntry>,
 	 * @param hasTierPrice the has tier price of this commerce price entry
 	 */
 	public void setHasTierPrice(boolean hasTierPrice);
-
-	/**
-	 * Returns the external reference code of this commerce price entry.
-	 *
-	 * @return the external reference code of this commerce price entry
-	 */
-	@AutoEscape
-	public String getExternalReferenceCode();
-
-	/**
-	 * Sets the external reference code of this commerce price entry.
-	 *
-	 * @param externalReferenceCode the external reference code of this commerce price entry
-	 */
-	public void setExternalReferenceCode(String externalReferenceCode);
 
 	/**
 	 * Returns the last publish date of this commerce price entry.

@@ -129,9 +129,10 @@ public class CommercePriceListServiceSoap {
 	}
 
 	public static com.liferay.commerce.price.list.model.CommercePriceListSoap fetchByExternalReferenceCode(
-		String externalReferenceCode) throws RemoteException {
+		long companyId, String externalReferenceCode) throws RemoteException {
 		try {
-			com.liferay.commerce.price.list.model.CommercePriceList returnValue = CommercePriceListServiceUtil.fetchByExternalReferenceCode(externalReferenceCode);
+			com.liferay.commerce.price.list.model.CommercePriceList returnValue = CommercePriceListServiceUtil.fetchByExternalReferenceCode(companyId,
+					externalReferenceCode);
 
 			return com.liferay.commerce.price.list.model.CommercePriceListSoap.toSoapModel(returnValue);
 		}

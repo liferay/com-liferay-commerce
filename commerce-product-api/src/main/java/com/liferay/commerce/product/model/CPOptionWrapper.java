@@ -60,6 +60,7 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CPOptionId", getCPOptionId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -85,6 +86,13 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long CPOptionId = (Long)attributes.get("CPOptionId");
@@ -323,6 +331,16 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _cpOption.getExpandoBridge();
+	}
+
+	/**
+	* Returns the external reference code of this cp option.
+	*
+	* @return the external reference code of this cp option
+	*/
+	@Override
+	public String getExternalReferenceCode() {
+		return _cpOption.getExternalReferenceCode();
 	}
 
 	/**
@@ -715,6 +733,16 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_cpOption.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets the external reference code of this cp option.
+	*
+	* @param externalReferenceCode the external reference code of this cp option
+	*/
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_cpOption.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**

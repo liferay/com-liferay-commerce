@@ -181,5 +181,27 @@ public class CPOptionValueServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPOptionValueSoap upsertCPOptionValue(
+		long cpOptionId, String[] nameMapLanguageIds, String[] nameMapValues,
+		double priority, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
+					nameMapValues);
+
+			com.liferay.commerce.product.model.CPOptionValue returnValue = CPOptionValueServiceUtil.upsertCPOptionValue(cpOptionId,
+					nameMap, priority, key, externalReferenceCode,
+					serviceContext);
+
+			return com.liferay.commerce.product.model.CPOptionValueSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CPOptionValueServiceSoap.class);
 }

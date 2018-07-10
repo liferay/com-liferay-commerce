@@ -229,6 +229,20 @@ public class CPAttachmentFileEntryLocalServiceWrapper
 	}
 
 	/**
+	* Returns the cp attachment file entry with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the cp attachment file entry's external reference code
+	* @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	*/
+	@Override
+	public com.liferay.commerce.product.model.CPAttachmentFileEntry fetchCPAttachmentFileEntryByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _cpAttachmentFileEntryLocalService.fetchCPAttachmentFileEntryByReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	/**
 	* Returns the cp attachment file entry matching the UUID and group.
 	*
 	* @param uuid the cp attachment file entry's UUID

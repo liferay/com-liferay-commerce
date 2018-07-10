@@ -120,6 +120,19 @@ public class CPOptionServiceWrapper implements CPOptionService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPOption upsertCPOption(
+		java.util.Map<java.util.Locale, String> nameMap,
+		java.util.Map<java.util.Locale, String> descriptionMap,
+		String ddmFormFieldTypeName, boolean facetable, boolean required,
+		boolean skuContributor, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpOptionService.upsertCPOption(nameMap, descriptionMap,
+			ddmFormFieldTypeName, facetable, required, skuContributor, key,
+			externalReferenceCode, serviceContext);
+	}
+
+	@Override
 	public CPOptionService getWrappedService() {
 		return _cpOptionService;
 	}

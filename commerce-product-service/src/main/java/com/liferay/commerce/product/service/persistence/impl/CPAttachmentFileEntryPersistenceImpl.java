@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -4505,6 +4506,271 @@ public class CPAttachmentFileEntryPersistenceImpl extends BasePersistenceImpl<CP
 	private static final String _FINDER_COLUMN_C_C_T_NOTST_CLASSPK_2 = "cpAttachmentFileEntry.classPK = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_T_NOTST_TYPE_2 = "cpAttachmentFileEntry.type = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_T_NOTST_STATUS_2 = "cpAttachmentFileEntry.status != ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_ERC = new FinderPath(CPAttachmentFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CPAttachmentFileEntryModelImpl.FINDER_CACHE_ENABLED,
+			CPAttachmentFileEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_ERC",
+			new String[] { Long.class.getName(), String.class.getName() },
+			CPAttachmentFileEntryModelImpl.COMPANYID_COLUMN_BITMASK |
+			CPAttachmentFileEntryModelImpl.EXTERNALREFERENCECODE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_ERC = new FinderPath(CPAttachmentFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CPAttachmentFileEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the cp attachment file entry where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchCPAttachmentFileEntryException} if it could not be found.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching cp attachment file entry
+	 * @throws NoSuchCPAttachmentFileEntryException if a matching cp attachment file entry could not be found
+	 */
+	@Override
+	public CPAttachmentFileEntry findByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws NoSuchCPAttachmentFileEntryException {
+		CPAttachmentFileEntry cpAttachmentFileEntry = fetchByC_ERC(companyId,
+				externalReferenceCode);
+
+		if (cpAttachmentFileEntry == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", externalReferenceCode=");
+			msg.append(externalReferenceCode);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchCPAttachmentFileEntryException(msg.toString());
+		}
+
+		return cpAttachmentFileEntry;
+	}
+
+	/**
+	 * Returns the cp attachment file entry where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	 */
+	@Override
+	public CPAttachmentFileEntry fetchByC_ERC(long companyId,
+		String externalReferenceCode) {
+		return fetchByC_ERC(companyId, externalReferenceCode, true);
+	}
+
+	/**
+	 * Returns the cp attachment file entry where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	 */
+	@Override
+	public CPAttachmentFileEntry fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { companyId, externalReferenceCode };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_ERC,
+					finderArgs, this);
+		}
+
+		if (result instanceof CPAttachmentFileEntry) {
+			CPAttachmentFileEntry cpAttachmentFileEntry = (CPAttachmentFileEntry)result;
+
+			if ((companyId != cpAttachmentFileEntry.getCompanyId()) ||
+					!Objects.equals(externalReferenceCode,
+						cpAttachmentFileEntry.getExternalReferenceCode())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_CPATTACHMENTFILEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_ERC_COMPANYID_2);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode == null) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1);
+			}
+			else if (externalReferenceCode.equals("")) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				List<CPAttachmentFileEntry> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"CPAttachmentFileEntryPersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					CPAttachmentFileEntry cpAttachmentFileEntry = list.get(0);
+
+					result = cpAttachmentFileEntry;
+
+					cacheResult(cpAttachmentFileEntry);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CPAttachmentFileEntry)result;
+		}
+	}
+
+	/**
+	 * Removes the cp attachment file entry where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the cp attachment file entry that was removed
+	 */
+	@Override
+	public CPAttachmentFileEntry removeByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws NoSuchCPAttachmentFileEntryException {
+		CPAttachmentFileEntry cpAttachmentFileEntry = findByC_ERC(companyId,
+				externalReferenceCode);
+
+		return remove(cpAttachmentFileEntry);
+	}
+
+	/**
+	 * Returns the number of cp attachment file entries where companyId = &#63; and externalReferenceCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the number of matching cp attachment file entries
+	 */
+	@Override
+	public int countByC_ERC(long companyId, String externalReferenceCode) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_ERC;
+
+		Object[] finderArgs = new Object[] { companyId, externalReferenceCode };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_CPATTACHMENTFILEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_ERC_COMPANYID_2);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode == null) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1);
+			}
+			else if (externalReferenceCode.equals("")) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_ERC_COMPANYID_2 = "cpAttachmentFileEntry.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1 = "cpAttachmentFileEntry.externalReferenceCode IS NULL";
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2 = "cpAttachmentFileEntry.externalReferenceCode = ?";
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3 = "(cpAttachmentFileEntry.externalReferenceCode IS NULL OR cpAttachmentFileEntry.externalReferenceCode = '')";
 
 	public CPAttachmentFileEntryPersistenceImpl() {
 		setModelClass(CPAttachmentFileEntry.class);
@@ -4544,6 +4810,12 @@ public class CPAttachmentFileEntryPersistenceImpl extends BasePersistenceImpl<CP
 			new Object[] {
 				cpAttachmentFileEntry.getUuid(),
 				cpAttachmentFileEntry.getGroupId()
+			}, cpAttachmentFileEntry);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC,
+			new Object[] {
+				cpAttachmentFileEntry.getCompanyId(),
+				cpAttachmentFileEntry.getExternalReferenceCode()
 			}, cpAttachmentFileEntry);
 
 		cpAttachmentFileEntry.resetOriginalValues();
@@ -4631,6 +4903,16 @@ public class CPAttachmentFileEntryPersistenceImpl extends BasePersistenceImpl<CP
 			Long.valueOf(1), false);
 		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
 			cpAttachmentFileEntryModelImpl, false);
+
+		args = new Object[] {
+				cpAttachmentFileEntryModelImpl.getCompanyId(),
+				cpAttachmentFileEntryModelImpl.getExternalReferenceCode()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_C_ERC, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC, args,
+			cpAttachmentFileEntryModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
@@ -4655,6 +4937,27 @@ public class CPAttachmentFileEntryPersistenceImpl extends BasePersistenceImpl<CP
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					cpAttachmentFileEntryModelImpl.getCompanyId(),
+					cpAttachmentFileEntryModelImpl.getExternalReferenceCode()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_ERC, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, args);
+		}
+
+		if ((cpAttachmentFileEntryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_ERC.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					cpAttachmentFileEntryModelImpl.getOriginalCompanyId(),
+					cpAttachmentFileEntryModelImpl.getOriginalExternalReferenceCode()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_ERC, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, args);
 		}
 	}
 

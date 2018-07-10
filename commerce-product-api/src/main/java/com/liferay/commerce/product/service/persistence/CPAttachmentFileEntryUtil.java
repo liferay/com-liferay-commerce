@@ -1506,6 +1506,71 @@ public class CPAttachmentFileEntryUtil {
 	}
 
 	/**
+	* Returns the cp attachment file entry where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchCPAttachmentFileEntryException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching cp attachment file entry
+	* @throws NoSuchCPAttachmentFileEntryException if a matching cp attachment file entry could not be found
+	*/
+	public static CPAttachmentFileEntry findByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.product.exception.NoSuchCPAttachmentFileEntryException {
+		return getPersistence().findByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the cp attachment file entry where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	*/
+	public static CPAttachmentFileEntry fetchByC_ERC(long companyId,
+		String externalReferenceCode) {
+		return getPersistence().fetchByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the cp attachment file entry where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	*/
+	public static CPAttachmentFileEntry fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByC_ERC(companyId, externalReferenceCode,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the cp attachment file entry where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the cp attachment file entry that was removed
+	*/
+	public static CPAttachmentFileEntry removeByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.product.exception.NoSuchCPAttachmentFileEntryException {
+		return getPersistence().removeByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the number of cp attachment file entries where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching cp attachment file entries
+	*/
+	public static int countByC_ERC(long companyId, String externalReferenceCode) {
+		return getPersistence().countByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
 	* Caches the cp attachment file entry in the entity cache if it is enabled.
 	*
 	* @param cpAttachmentFileEntry the cp attachment file entry

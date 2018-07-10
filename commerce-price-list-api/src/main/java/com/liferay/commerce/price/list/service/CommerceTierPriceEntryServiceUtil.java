@@ -71,8 +71,11 @@ public class CommerceTierPriceEntryServiceUtil {
 	}
 
 	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry fetchByExternalReferenceCode(
-		String externalReferenceCode) {
-		return getService().fetchByExternalReferenceCode(externalReferenceCode);
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	public static java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> fetchCommerceTierPriceEntries(

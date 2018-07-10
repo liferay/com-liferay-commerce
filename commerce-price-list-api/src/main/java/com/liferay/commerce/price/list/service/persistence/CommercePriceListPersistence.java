@@ -817,52 +817,6 @@ public interface CommercePriceListPersistence extends BasePersistence<CommercePr
 	public int countByCommerceCurrencyId(long commerceCurrencyId);
 
 	/**
-	* Returns the commerce price list where externalReferenceCode = &#63; or throws a {@link NoSuchPriceListException} if it could not be found.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the matching commerce price list
-	* @throws NoSuchPriceListException if a matching commerce price list could not be found
-	*/
-	public CommercePriceList findByExternalReferenceCode(
-		String externalReferenceCode) throws NoSuchPriceListException;
-
-	/**
-	* Returns the commerce price list where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
-	*/
-	public CommercePriceList fetchByExternalReferenceCode(
-		String externalReferenceCode);
-
-	/**
-	* Returns the commerce price list where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param externalReferenceCode the external reference code
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
-	*/
-	public CommercePriceList fetchByExternalReferenceCode(
-		String externalReferenceCode, boolean retrieveFromCache);
-
-	/**
-	* Removes the commerce price list where externalReferenceCode = &#63; from the database.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the commerce price list that was removed
-	*/
-	public CommercePriceList removeByExternalReferenceCode(
-		String externalReferenceCode) throws NoSuchPriceListException;
-
-	/**
-	* Returns the number of commerce price lists where externalReferenceCode = &#63;.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the number of matching commerce price lists
-	*/
-	public int countByExternalReferenceCode(String externalReferenceCode);
-
-	/**
 	* Returns all the commerce price lists where groupId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
@@ -1292,6 +1246,57 @@ public interface CommercePriceListPersistence extends BasePersistence<CommercePr
 	* @return the number of matching commerce price lists
 	*/
 	public int countByLtD_S(Date displayDate, int status);
+
+	/**
+	* Returns the commerce price list where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchPriceListException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce price list
+	* @throws NoSuchPriceListException if a matching commerce price list could not be found
+	*/
+	public CommercePriceList findByC_ERC(long companyId,
+		String externalReferenceCode) throws NoSuchPriceListException;
+
+	/**
+	* Returns the commerce price list where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
+	*/
+	public CommercePriceList fetchByC_ERC(long companyId,
+		String externalReferenceCode);
+
+	/**
+	* Returns the commerce price list where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
+	*/
+	public CommercePriceList fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache);
+
+	/**
+	* Removes the commerce price list where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the commerce price list that was removed
+	*/
+	public CommercePriceList removeByC_ERC(long companyId,
+		String externalReferenceCode) throws NoSuchPriceListException;
+
+	/**
+	* Returns the number of commerce price lists where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching commerce price lists
+	*/
+	public int countByC_ERC(long companyId, String externalReferenceCode);
 
 	/**
 	* Caches the commerce price list in the entity cache if it is enabled.

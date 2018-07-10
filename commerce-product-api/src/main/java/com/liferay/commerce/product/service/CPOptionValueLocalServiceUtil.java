@@ -64,6 +64,16 @@ public class CPOptionValueLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static com.liferay.commerce.product.model.CPOptionValue addCPOptionValue(
+		long cpOptionId, java.util.Map<java.util.Locale, String> nameMap,
+		double priority, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCPOptionValue(cpOptionId, nameMap, priority, key,
+			externalReferenceCode, serviceContext);
+	}
+
 	/**
 	* Creates a new cp option value with the primary key. Does not add the cp option value to the database.
 	*
@@ -193,9 +203,30 @@ public class CPOptionValueLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
+	public static com.liferay.commerce.product.model.CPOptionValue fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.product.model.CPOptionValue fetchCPOptionValue(
 		long CPOptionValueId) {
 		return getService().fetchCPOptionValue(CPOptionValueId);
+	}
+
+	/**
+	* Returns the cp option value with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the cp option value's external reference code
+	* @return the matching cp option value, or <code>null</code> if a matching cp option value could not be found
+	*/
+	public static com.liferay.commerce.product.model.CPOptionValue fetchCPOptionValueByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return getService()
+				   .fetchCPOptionValueByReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	/**
@@ -369,6 +400,16 @@ public class CPOptionValueLocalServiceUtil {
 		return getService()
 				   .updateCPOptionValue(cpOptionValueId, nameMap, priority,
 			key, serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CPOptionValue upsertCPOptionValue(
+		long cpOptionId, java.util.Map<java.util.Locale, String> nameMap,
+		double priority, String key, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .upsertCPOptionValue(cpOptionId, nameMap, priority, key,
+			externalReferenceCode, serviceContext);
 	}
 
 	public static CPOptionValueLocalService getService() {

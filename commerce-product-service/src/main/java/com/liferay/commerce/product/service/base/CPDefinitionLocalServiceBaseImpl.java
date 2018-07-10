@@ -282,6 +282,19 @@ public abstract class CPDefinitionLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the cp definition with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the cp definition's external reference code
+	 * @return the matching cp definition, or <code>null</code> if a matching cp definition could not be found
+	 */
+	@Override
+	public CPDefinition fetchCPDefinitionByReferenceCode(long companyId,
+		String externalReferenceCode) {
+		return cpDefinitionPersistence.fetchByC_ERC(companyId, null);
+	}
+
+	/**
 	 * Returns the cp definition with the primary key.
 	 *
 	 * @param CPDefinitionId the primary key of the cp definition

@@ -260,6 +260,19 @@ public abstract class CPOptionValueLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the cp option value with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the cp option value's external reference code
+	 * @return the matching cp option value, or <code>null</code> if a matching cp option value could not be found
+	 */
+	@Override
+	public CPOptionValue fetchCPOptionValueByReferenceCode(long companyId,
+		String externalReferenceCode) {
+		return cpOptionValuePersistence.fetchByC_ERC(companyId, null);
+	}
+
+	/**
 	 * Returns the cp option value with the primary key.
 	 *
 	 * @param CPOptionValueId the primary key of the cp option value

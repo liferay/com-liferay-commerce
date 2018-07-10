@@ -327,14 +327,29 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 
 	@Override
 	public com.liferay.commerce.product.model.CPDefinition fetchByExternalReferenceCode(
-		String externalReferenceCode) {
-		return _cpDefinitionLocalService.fetchByExternalReferenceCode(externalReferenceCode);
+		long companyId, String externalReferenceCode) {
+		return _cpDefinitionLocalService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	@Override
 	public com.liferay.commerce.product.model.CPDefinition fetchCPDefinition(
 		long CPDefinitionId) {
 		return _cpDefinitionLocalService.fetchCPDefinition(CPDefinitionId);
+	}
+
+	/**
+	* Returns the cp definition with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the cp definition's external reference code
+	* @return the matching cp definition, or <code>null</code> if a matching cp definition could not be found
+	*/
+	@Override
+	public com.liferay.commerce.product.model.CPDefinition fetchCPDefinitionByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _cpDefinitionLocalService.fetchCPDefinitionByReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	/**

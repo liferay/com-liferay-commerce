@@ -127,6 +127,8 @@ public class CPDefinitionPersistenceTest {
 
 		newCPDefinition.setUuid(RandomTestUtil.randomString());
 
+		newCPDefinition.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		newCPDefinition.setDefaultLanguageId(RandomTestUtil.randomString());
 
 		newCPDefinition.setGroupId(RandomTestUtil.nextLong());
@@ -173,8 +175,6 @@ public class CPDefinitionPersistenceTest {
 
 		newCPDefinition.setPublished(RandomTestUtil.randomBoolean());
 
-		newCPDefinition.setExternalReferenceCode(RandomTestUtil.randomString());
-
 		newCPDefinition.setDisplayDate(RandomTestUtil.nextDate());
 
 		newCPDefinition.setExpirationDate(RandomTestUtil.nextDate());
@@ -195,6 +195,8 @@ public class CPDefinitionPersistenceTest {
 
 		Assert.assertEquals(existingCPDefinition.getUuid(),
 			newCPDefinition.getUuid());
+		Assert.assertEquals(existingCPDefinition.getExternalReferenceCode(),
+			newCPDefinition.getExternalReferenceCode());
 		Assert.assertEquals(existingCPDefinition.getDefaultLanguageId(),
 			newCPDefinition.getDefaultLanguageId());
 		Assert.assertEquals(existingCPDefinition.getCPDefinitionId(),
@@ -245,8 +247,6 @@ public class CPDefinitionPersistenceTest {
 			newCPDefinition.getDDMStructureKey());
 		Assert.assertEquals(existingCPDefinition.isPublished(),
 			newCPDefinition.isPublished());
-		Assert.assertEquals(existingCPDefinition.getExternalReferenceCode(),
-			newCPDefinition.getExternalReferenceCode());
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPDefinition.getDisplayDate()),
 			Time.getShortTimestamp(newCPDefinition.getDisplayDate()));
@@ -316,15 +316,6 @@ public class CPDefinitionPersistenceTest {
 	}
 
 	@Test
-	public void testCountByExternalReferenceCode() throws Exception {
-		_persistence.countByExternalReferenceCode("");
-
-		_persistence.countByExternalReferenceCode("null");
-
-		_persistence.countByExternalReferenceCode((String)null);
-	}
-
-	@Test
 	public void testCountByG_S() throws Exception {
 		_persistence.countByG_S(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextInt());
@@ -346,6 +337,15 @@ public class CPDefinitionPersistenceTest {
 			RandomTestUtil.nextInt());
 
 		_persistence.countByLtD_S(RandomTestUtil.nextDate(), 0);
+	}
+
+	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
 	}
 
 	@Test
@@ -372,17 +372,18 @@ public class CPDefinitionPersistenceTest {
 
 	protected OrderByComparator<CPDefinition> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CPDefinition", "uuid",
-			true, "defaultLanguageId", true, "CPDefinitionId", true, "groupId",
-			true, "companyId", true, "userId", true, "userName", true,
-			"createDate", true, "modifiedDate", true, "productTypeName", true,
+			true, "externalReferenceCode", true, "defaultLanguageId", true,
+			"CPDefinitionId", true, "groupId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "productTypeName", true,
 			"availableIndividually", true, "ignoreSKUCombinations", true,
 			"shippable", true, "freeShipping", true, "shipSeparately", true,
 			"shippingExtraPrice", true, "width", true, "height", true, "depth",
 			true, "weight", true, "CPTaxCategoryId", true, "taxExempt", true,
 			"telcoOrElectronics", true, "DDMStructureKey", true, "published",
-			true, "externalReferenceCode", true, "displayDate", true,
-			"expirationDate", true, "lastPublishDate", true, "status", true,
-			"statusByUserId", true, "statusByUserName", true, "statusDate", true);
+			true, "displayDate", true, "expirationDate", true,
+			"lastPublishDate", true, "status", true, "statusByUserId", true,
+			"statusByUserName", true, "statusDate", true);
 	}
 
 	@Test
@@ -594,6 +595,9 @@ public class CPDefinitionPersistenceTest {
 			ReflectionTestUtil.<Long>invoke(existingCPDefinition,
 				"getOriginalGroupId", new Class<?>[0]));
 
+		Assert.assertEquals(Long.valueOf(existingCPDefinition.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCPDefinition,
+				"getOriginalCompanyId", new Class<?>[0]));
 		Assert.assertTrue(Objects.equals(
 				existingCPDefinition.getExternalReferenceCode(),
 				ReflectionTestUtil.invoke(existingCPDefinition,
@@ -606,6 +610,8 @@ public class CPDefinitionPersistenceTest {
 		CPDefinition cpDefinition = _persistence.create(pk);
 
 		cpDefinition.setUuid(RandomTestUtil.randomString());
+
+		cpDefinition.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		cpDefinition.setDefaultLanguageId(RandomTestUtil.randomString());
 
@@ -652,8 +658,6 @@ public class CPDefinitionPersistenceTest {
 		cpDefinition.setDDMStructureKey(RandomTestUtil.randomString());
 
 		cpDefinition.setPublished(RandomTestUtil.randomBoolean());
-
-		cpDefinition.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		cpDefinition.setDisplayDate(RandomTestUtil.nextDate());
 

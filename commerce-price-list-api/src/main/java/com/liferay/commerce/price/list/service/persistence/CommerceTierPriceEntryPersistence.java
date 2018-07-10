@@ -774,52 +774,6 @@ public interface CommerceTierPriceEntryPersistence extends BasePersistence<Comme
 	public int countByCommercePriceEntryId(long commercePriceEntryId);
 
 	/**
-	* Returns the commerce tier price entry where externalReferenceCode = &#63; or throws a {@link NoSuchTierPriceEntryException} if it could not be found.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the matching commerce tier price entry
-	* @throws NoSuchTierPriceEntryException if a matching commerce tier price entry could not be found
-	*/
-	public CommerceTierPriceEntry findByExternalReferenceCode(
-		String externalReferenceCode) throws NoSuchTierPriceEntryException;
-
-	/**
-	* Returns the commerce tier price entry where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
-	*/
-	public CommerceTierPriceEntry fetchByExternalReferenceCode(
-		String externalReferenceCode);
-
-	/**
-	* Returns the commerce tier price entry where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param externalReferenceCode the external reference code
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
-	*/
-	public CommerceTierPriceEntry fetchByExternalReferenceCode(
-		String externalReferenceCode, boolean retrieveFromCache);
-
-	/**
-	* Removes the commerce tier price entry where externalReferenceCode = &#63; from the database.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the commerce tier price entry that was removed
-	*/
-	public CommerceTierPriceEntry removeByExternalReferenceCode(
-		String externalReferenceCode) throws NoSuchTierPriceEntryException;
-
-	/**
-	* Returns the number of commerce tier price entries where externalReferenceCode = &#63;.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the number of matching commerce tier price entries
-	*/
-	public int countByExternalReferenceCode(String externalReferenceCode);
-
-	/**
 	* Returns the commerce tier price entry where commercePriceEntryId = &#63; and minQuantity = &#63; or throws a {@link NoSuchTierPriceEntryException} if it could not be found.
 	*
 	* @param commercePriceEntryId the commerce price entry ID
@@ -1018,6 +972,57 @@ public interface CommerceTierPriceEntryPersistence extends BasePersistence<Comme
 	* @return the number of matching commerce tier price entries
 	*/
 	public int countByC_LtM(long commercePriceEntryId, int minQuantity);
+
+	/**
+	* Returns the commerce tier price entry where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchTierPriceEntryException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce tier price entry
+	* @throws NoSuchTierPriceEntryException if a matching commerce tier price entry could not be found
+	*/
+	public CommerceTierPriceEntry findByC_ERC(long companyId,
+		String externalReferenceCode) throws NoSuchTierPriceEntryException;
+
+	/**
+	* Returns the commerce tier price entry where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
+	*/
+	public CommerceTierPriceEntry fetchByC_ERC(long companyId,
+		String externalReferenceCode);
+
+	/**
+	* Returns the commerce tier price entry where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
+	*/
+	public CommerceTierPriceEntry fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache);
+
+	/**
+	* Removes the commerce tier price entry where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the commerce tier price entry that was removed
+	*/
+	public CommerceTierPriceEntry removeByC_ERC(long companyId,
+		String externalReferenceCode) throws NoSuchTierPriceEntryException;
+
+	/**
+	* Returns the number of commerce tier price entries where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching commerce tier price entries
+	*/
+	public int countByC_ERC(long companyId, String externalReferenceCode);
 
 	/**
 	* Caches the commerce tier price entry in the entity cache if it is enabled.

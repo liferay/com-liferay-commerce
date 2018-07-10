@@ -978,70 +978,6 @@ public class CPInstanceUtil {
 	}
 
 	/**
-	* Returns the cp instance where externalReferenceCode = &#63; or throws a {@link NoSuchCPInstanceException} if it could not be found.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the matching cp instance
-	* @throws NoSuchCPInstanceException if a matching cp instance could not be found
-	*/
-	public static CPInstance findByExternalReferenceCode(
-		String externalReferenceCode)
-		throws com.liferay.commerce.product.exception.NoSuchCPInstanceException {
-		return getPersistence()
-				   .findByExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
-	* Returns the cp instance where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
-	*/
-	public static CPInstance fetchByExternalReferenceCode(
-		String externalReferenceCode) {
-		return getPersistence()
-				   .fetchByExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
-	* Returns the cp instance where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param externalReferenceCode the external reference code
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
-	*/
-	public static CPInstance fetchByExternalReferenceCode(
-		String externalReferenceCode, boolean retrieveFromCache) {
-		return getPersistence()
-				   .fetchByExternalReferenceCode(externalReferenceCode,
-			retrieveFromCache);
-	}
-
-	/**
-	* Removes the cp instance where externalReferenceCode = &#63; from the database.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the cp instance that was removed
-	*/
-	public static CPInstance removeByExternalReferenceCode(
-		String externalReferenceCode)
-		throws com.liferay.commerce.product.exception.NoSuchCPInstanceException {
-		return getPersistence()
-				   .removeByExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
-	* Returns the number of cp instances where externalReferenceCode = &#63;.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the number of matching cp instances
-	*/
-	public static int countByExternalReferenceCode(String externalReferenceCode) {
-		return getPersistence()
-				   .countByExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
 	* Returns all the cp instances where groupId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
@@ -2169,6 +2105,71 @@ public class CPInstanceUtil {
 		int status) {
 		return getPersistence()
 				   .countByC_LtD_S(CPDefinitionId, displayDate, status);
+	}
+
+	/**
+	* Returns the cp instance where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchCPInstanceException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching cp instance
+	* @throws NoSuchCPInstanceException if a matching cp instance could not be found
+	*/
+	public static CPInstance findByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.product.exception.NoSuchCPInstanceException {
+		return getPersistence().findByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the cp instance where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	*/
+	public static CPInstance fetchByC_ERC(long companyId,
+		String externalReferenceCode) {
+		return getPersistence().fetchByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the cp instance where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	*/
+	public static CPInstance fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByC_ERC(companyId, externalReferenceCode,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the cp instance where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the cp instance that was removed
+	*/
+	public static CPInstance removeByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.product.exception.NoSuchCPInstanceException {
+		return getPersistence().removeByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the number of cp instances where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching cp instances
+	*/
+	public static int countByC_ERC(long companyId, String externalReferenceCode) {
+		return getPersistence().countByC_ERC(companyId, externalReferenceCode);
 	}
 
 	/**

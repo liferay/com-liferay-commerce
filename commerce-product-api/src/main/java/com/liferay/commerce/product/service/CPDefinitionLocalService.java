@@ -255,11 +255,22 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDefinition fetchByExternalReferenceCode(
+	public CPDefinition fetchByExternalReferenceCode(long companyId,
 		String externalReferenceCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinition fetchCPDefinition(long CPDefinitionId);
+
+	/**
+	* Returns the cp definition with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the cp definition's external reference code
+	* @return the matching cp definition, or <code>null</code> if a matching cp definition could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPDefinition fetchCPDefinitionByReferenceCode(long companyId,
+		String externalReferenceCode);
 
 	/**
 	* Returns the cp definition matching the UUID and group.

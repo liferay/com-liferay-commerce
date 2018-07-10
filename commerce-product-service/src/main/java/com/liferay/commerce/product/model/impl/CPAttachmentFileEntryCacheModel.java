@@ -65,10 +65,12 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
+		sb.append(", externalReferenceCode=");
+		sb.append(externalReferenceCode);
 		sb.append(", CPAttachmentFileEntryId=");
 		sb.append(CPAttachmentFileEntryId);
 		sb.append(", groupId=");
@@ -125,6 +127,13 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 		}
 		else {
 			cpAttachmentFileEntryImpl.setUuid(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			cpAttachmentFileEntryImpl.setExternalReferenceCode("");
+		}
+		else {
+			cpAttachmentFileEntryImpl.setExternalReferenceCode(externalReferenceCode);
 		}
 
 		cpAttachmentFileEntryImpl.setCPAttachmentFileEntryId(CPAttachmentFileEntryId);
@@ -221,6 +230,7 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
+		externalReferenceCode = objectInput.readUTF();
 
 		CPAttachmentFileEntryId = objectInput.readLong();
 
@@ -263,6 +273,13 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 		}
 		else {
 			objectOutput.writeUTF(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
 		}
 
 		objectOutput.writeLong(CPAttachmentFileEntryId);
@@ -325,6 +342,7 @@ public class CPAttachmentFileEntryCacheModel implements CacheModel<CPAttachmentF
 	}
 
 	public String uuid;
+	public String externalReferenceCode;
 	public long CPAttachmentFileEntryId;
 	public long groupId;
 	public long companyId;

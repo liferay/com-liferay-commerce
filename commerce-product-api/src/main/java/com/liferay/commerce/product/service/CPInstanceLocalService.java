@@ -214,10 +214,22 @@ public interface CPInstanceLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPInstance fetchByExternalReferenceCode(String externalReferenceCode);
+	public CPInstance fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPInstance fetchCPInstance(long CPInstanceId);
+
+	/**
+	* Returns the cp instance with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the cp instance's external reference code
+	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPInstance fetchCPInstanceByReferenceCode(long companyId,
+		String externalReferenceCode);
 
 	/**
 	* Returns the cp instance matching the UUID and group.
@@ -263,8 +275,8 @@ public interface CPInstanceLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPInstance getCPInstance(String externalReferenceCode)
-		throws PortalException;
+	public CPInstance getCPInstanceByExternalReferenceCode(long companyId,
+		String externalReferenceCode) throws PortalException;
 
 	/**
 	* Returns the cp instance matching the UUID and group.

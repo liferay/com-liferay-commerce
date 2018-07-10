@@ -1169,70 +1169,6 @@ public class CommercePriceEntryUtil {
 	}
 
 	/**
-	* Returns the commerce price entry where externalReferenceCode = &#63; or throws a {@link NoSuchPriceEntryException} if it could not be found.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the matching commerce price entry
-	* @throws NoSuchPriceEntryException if a matching commerce price entry could not be found
-	*/
-	public static CommercePriceEntry findByExternalReferenceCode(
-		String externalReferenceCode)
-		throws com.liferay.commerce.price.list.exception.NoSuchPriceEntryException {
-		return getPersistence()
-				   .findByExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
-	* Returns the commerce price entry where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
-	*/
-	public static CommercePriceEntry fetchByExternalReferenceCode(
-		String externalReferenceCode) {
-		return getPersistence()
-				   .fetchByExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
-	* Returns the commerce price entry where externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param externalReferenceCode the external reference code
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
-	*/
-	public static CommercePriceEntry fetchByExternalReferenceCode(
-		String externalReferenceCode, boolean retrieveFromCache) {
-		return getPersistence()
-				   .fetchByExternalReferenceCode(externalReferenceCode,
-			retrieveFromCache);
-	}
-
-	/**
-	* Removes the commerce price entry where externalReferenceCode = &#63; from the database.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the commerce price entry that was removed
-	*/
-	public static CommercePriceEntry removeByExternalReferenceCode(
-		String externalReferenceCode)
-		throws com.liferay.commerce.price.list.exception.NoSuchPriceEntryException {
-		return getPersistence()
-				   .removeByExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
-	* Returns the number of commerce price entries where externalReferenceCode = &#63;.
-	*
-	* @param externalReferenceCode the external reference code
-	* @return the number of matching commerce price entries
-	*/
-	public static int countByExternalReferenceCode(String externalReferenceCode) {
-		return getPersistence()
-				   .countByExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
 	* Returns the commerce price entry where CPInstanceId = &#63; and commercePriceListId = &#63; or throws a {@link NoSuchPriceEntryException} if it could not be found.
 	*
 	* @param CPInstanceId the cp instance ID
@@ -1295,6 +1231,71 @@ public class CommercePriceEntryUtil {
 	*/
 	public static int countByC_C(long CPInstanceId, long commercePriceListId) {
 		return getPersistence().countByC_C(CPInstanceId, commercePriceListId);
+	}
+
+	/**
+	* Returns the commerce price entry where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchPriceEntryException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce price entry
+	* @throws NoSuchPriceEntryException if a matching commerce price entry could not be found
+	*/
+	public static CommercePriceEntry findByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.price.list.exception.NoSuchPriceEntryException {
+		return getPersistence().findByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the commerce price entry where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
+	*/
+	public static CommercePriceEntry fetchByC_ERC(long companyId,
+		String externalReferenceCode) {
+		return getPersistence().fetchByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the commerce price entry where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
+	*/
+	public static CommercePriceEntry fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByC_ERC(companyId, externalReferenceCode,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the commerce price entry where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the commerce price entry that was removed
+	*/
+	public static CommercePriceEntry removeByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.price.list.exception.NoSuchPriceEntryException {
+		return getPersistence().removeByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the number of commerce price entries where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching commerce price entries
+	*/
+	public static int countByC_ERC(long companyId, String externalReferenceCode) {
+		return getPersistence().countByC_ERC(companyId, externalReferenceCode);
 	}
 
 	/**
