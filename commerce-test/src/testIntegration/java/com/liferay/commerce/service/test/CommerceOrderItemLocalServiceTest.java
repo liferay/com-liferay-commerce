@@ -18,6 +18,7 @@ import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
+import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.internal.test.util.CommerceTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
@@ -103,8 +104,7 @@ public class CommerceOrderItemLocalServiceTest {
 				_group.getGroupId(), _user.getUserId());
 
 		CommerceCurrency commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		Assert.assertNotNull(commerceCurrency);
 
@@ -169,8 +169,7 @@ public class CommerceOrderItemLocalServiceTest {
 				_group.getGroupId(), _user.getUserId());
 
 		CommerceCurrency commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		Assert.assertNotNull(commerceCurrency);
 
@@ -218,8 +217,7 @@ public class CommerceOrderItemLocalServiceTest {
 				_group.getGroupId(), _user.getUserId());
 
 		CommerceCurrency commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		Assert.assertNotNull(commerceCurrency);
 

@@ -62,7 +62,7 @@ public class CommerceShippingHelperTest {
 	@Test
 	public void testGetDimensions() throws Exception {
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		CPInstance cpInstance1 = CPTestUtil.addCPInstance(_group.getGroupId());
 		CPInstance cpInstance2 = CPTestUtil.addCPInstance(_group.getGroupId());
@@ -111,7 +111,7 @@ public class CommerceShippingHelperTest {
 	@Test
 	public void testGetWeight() throws Exception {
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		CPInstance cpInstance1 = CPTestUtil.addCPInstance(_group.getGroupId());
 		CPInstance cpInstance2 = CPTestUtil.addCPInstance(_group.getGroupId());

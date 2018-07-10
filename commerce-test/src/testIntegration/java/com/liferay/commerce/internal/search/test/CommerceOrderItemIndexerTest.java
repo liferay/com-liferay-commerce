@@ -87,7 +87,7 @@ public class CommerceOrderItemIndexerTest {
 		CommerceOrderItem[] commerceOrderItems = new CommerceOrderItem[count];
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		for (int i = 0; i < count; i++) {
 			CPInstance cpInstance = CPTestUtil.addCPInstance(
