@@ -59,7 +59,7 @@ public class CommerceCheckoutTest {
 	@Test
 	public void testUserCheckout() throws Exception {
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		CommerceTestUtil.addCheckoutDetailsToUserOrder(
 			commerceOrder, commerceOrder.getUserId());

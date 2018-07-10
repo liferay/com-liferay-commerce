@@ -73,7 +73,7 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
@@ -109,7 +109,7 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
@@ -166,7 +166,7 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
@@ -201,7 +201,7 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
@@ -227,7 +227,7 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
@@ -259,10 +259,10 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceOrder commerceOrder1 = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		CommerceOrder commerceOrder2 = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId());
+			_group.getGroupId(), 0);
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 

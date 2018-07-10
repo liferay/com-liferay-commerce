@@ -200,15 +200,20 @@ public class CommerceTestUtil {
 	public static CommerceWarehouse addCommerceWarehouse(long groupId)
 		throws PortalException {
 
-		CommerceCountry commerceCountry =
-			CommerceCountryLocalServiceUtil.fetchCommerceCountry(groupId, 380);
-
-		CommerceRegion commerceRegion =
-			CommerceRegionLocalServiceUtil.getCommerceRegion(
-				commerceCountry.getCommerceCountryId(), "VE");
-
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
+
+		CommerceCountry commerceCountry =
+			CommerceCountryLocalServiceUtil.addCommerceCountry(
+				RandomTestUtil.randomLocaleStringMap(), true, true, "ZZ", "ZZZ",
+				000, false, RandomTestUtil.randomDouble(), true,
+				serviceContext);
+
+		CommerceRegion commerceRegion =
+			CommerceRegionLocalServiceUtil.addCommerceRegion(
+				commerceCountry.getCommerceCountryId(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomDouble(), true, serviceContext);
 
 		return CommerceWarehouseLocalServiceUtil.addCommerceWarehouse(
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), true,
@@ -272,14 +277,18 @@ public class CommerceTestUtil {
 			RandomTestUtil.randomString(), false, false, serviceContext);
 	}
 
-	public static CommerceOrder addUserCommerceOrder(long groupId)
+	public static CommerceOrder addUserCommerceOrder(long groupId, long userId)
 		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
 
+		if (userId == 0) {
+			userId = serviceContext.getUserId();
+		}
+
 		return CommerceOrderLocalServiceUtil.addUserCommerceOrder(
-			groupId, serviceContext.getUserId());
+			groupId, userId);
 	}
 
 	public static CommerceOrder checkoutOrder(CommerceOrder commerceOrder)

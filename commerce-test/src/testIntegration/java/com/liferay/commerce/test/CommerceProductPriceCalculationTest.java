@@ -20,6 +20,7 @@ import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.currency.service.CommerceCurrencyServiceUtil;
+import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
@@ -124,7 +125,7 @@ public class CommerceProductPriceCalculationTest {
 				String.valueOf(_buyerUser1.getUserId()), 0, serviceContext);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyServiceUtil.fetchPrimaryCommerceCurrency(
+			CommerceCurrencyTestUtil.addCommerceCurrency(
 				_organization.getGroupId());
 
 		CommercePriceList commercePriceList1 =
@@ -230,7 +231,7 @@ public class CommerceProductPriceCalculationTest {
 				String.valueOf(_buyerUser2.getUserId()), 0, serviceContext);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyServiceUtil.fetchPrimaryCommerceCurrency(
+			CommerceCurrencyTestUtil.addCommerceCurrency(
 				_organization.getGroupId());
 
 		CommercePriceList commercePriceList1 =
@@ -324,7 +325,7 @@ public class CommerceProductPriceCalculationTest {
 				String.valueOf(_buyerUser1.getUserId()), 0, serviceContext);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyServiceUtil.fetchPrimaryCommerceCurrency(
+			CommerceCurrencyTestUtil.addCommerceCurrency(
 				_organization.getGroupId());
 
 		CommercePriceList commercePriceList =
@@ -401,7 +402,7 @@ public class CommerceProductPriceCalculationTest {
 				String.valueOf(_buyerUser1.getUserId()), 0, serviceContext);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyServiceUtil.fetchPrimaryCommerceCurrency(
+			CommerceCurrencyTestUtil.addCommerceCurrency(
 				_organization.getGroupId());
 
 		CommercePriceList commercePriceList =
@@ -509,7 +510,7 @@ public class CommerceProductPriceCalculationTest {
 				String.valueOf(_buyerUser1.getUserId()), 0, serviceContext);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyServiceUtil.fetchPrimaryCommerceCurrency(
+			CommerceCurrencyTestUtil.addCommerceCurrency(
 				_organization.getGroupId());
 
 		CommercePriceList commercePriceList =

@@ -16,7 +16,7 @@ package com.liferay.commerce.price.list.internal.search.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyServiceUtil;
+import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.portal.kernel.model.Group;
@@ -80,8 +80,7 @@ public class CommercePriceListIndexerTest {
 		);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyServiceUtil.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
