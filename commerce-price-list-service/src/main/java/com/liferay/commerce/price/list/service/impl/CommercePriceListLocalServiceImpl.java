@@ -187,14 +187,14 @@ public class CommercePriceListLocalServiceImpl
 			CommercePriceList commercePriceList)
 		throws PortalException {
 
-		// Commerce price list
-
-		commercePriceListPersistence.remove(commercePriceList);
-
 		// Commerce price entries
 
 		commercePriceEntryLocalService.deleteCommercePriceEntries(
 			commercePriceList.getCommercePriceListId());
+
+		// Commerce price list
+
+		commercePriceListPersistence.remove(commercePriceList);
 
 		// Expando
 

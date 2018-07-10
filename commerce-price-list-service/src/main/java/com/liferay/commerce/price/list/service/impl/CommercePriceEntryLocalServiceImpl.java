@@ -145,14 +145,14 @@ public class CommercePriceEntryLocalServiceImpl
 			CommercePriceEntry commercePriceEntry)
 		throws PortalException {
 
-		// Commerce price entry
-
-		commercePriceEntryPersistence.remove(commercePriceEntry);
-
 		// Commerce tier price entries
 
 		commerceTierPriceEntryLocalService.deleteCommerceTierPriceEntries(
 			commercePriceEntry.getCommercePriceEntryId());
+
+		// Commerce price entry
+
+		commercePriceEntryPersistence.remove(commercePriceEntry);
 
 		// Expando
 

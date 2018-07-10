@@ -23,8 +23,6 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
@@ -83,10 +81,10 @@ public class CommercePriceEntryServiceImpl
 			_portletResourcePermission.check(
 				getPermissionChecker(), commercePriceEntry.getGroupId(),
 				CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
-
-			commercePriceEntryLocalService.deleteCommercePriceEntry(
-				commercePriceEntryId);
 		}
+
+		commercePriceEntryLocalService.deleteCommercePriceEntry(
+			commercePriceEntryId);
 	}
 
 	@Override
@@ -126,7 +124,16 @@ public class CommercePriceEntryServiceImpl
 
 	@Override
 	public List<CommercePriceEntry> getCommercePriceEntries(
-		long commercePriceListId, int start, int end) {
+			long commercePriceListId, int start, int end)
+		throws PortalException {
+
+		CommercePriceList commercePriceList =
+			commercePriceListLocalService.getCommercePriceList(
+				commercePriceListId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceList.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceEntryLocalService.getCommercePriceEntries(
 			commercePriceListId, start, end);
@@ -240,15 +247,14 @@ public class CommercePriceEntryServiceImpl
 	}
 
 	@Override
-	public Hits search(SearchContext searchContext) {
-		return commercePriceEntryLocalService.search(searchContext);
-	}
-
-	@Override
 	public BaseModelSearchResult<CommercePriceEntry> searchCommercePriceEntries(
 			long companyId, long groupId, long commercePriceListId,
 			String keywords, int start, int end, Sort sort)
 		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceEntryLocalService.searchCommercePriceEntries(
 			companyId, groupId, commercePriceListId, keywords, start, end,
