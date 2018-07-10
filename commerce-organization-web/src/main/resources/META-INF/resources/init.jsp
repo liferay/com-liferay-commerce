@@ -34,7 +34,6 @@ page import="com.liferay.commerce.model.CommerceCountry" %><%@
 page import="com.liferay.commerce.model.CommerceRegion" %><%@
 page import="com.liferay.commerce.organization.constants.CommerceOrganizationConstants" %><%@
 page import="com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationAddressesDisplayContext" %><%@
-page import="com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationBranchesDisplayContext" %><%@
 page import="com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationDetailDisplayContext" %><%@
 page import="com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationMembersDisplayContext" %><%@
 page import="com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationSearchDisplayContext" %><%@
