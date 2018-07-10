@@ -654,6 +654,11 @@ public class CPDefinitionLocalServiceImpl
 	}
 
 	@Override
+	public int getCPDefinitionsCount(long groupId, int status) {
+		return cpDefinitionPersistence.countByG_NotS(groupId, status);
+	}
+
+	@Override
 	public int getCPDefinitionsCount(
 		long groupId, String productTypeName, String languageId, int status) {
 
