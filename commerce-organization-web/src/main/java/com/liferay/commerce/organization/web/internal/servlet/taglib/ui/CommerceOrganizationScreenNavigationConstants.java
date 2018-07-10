@@ -24,9 +24,6 @@ public class CommerceOrganizationScreenNavigationConstants {
 	public static final String ENTRY_KEY_ORGANIZATION_ADDRESSES =
 		"organization-addresses";
 
-	public static final String ENTRY_KEY_ORGANIZATION_BRANCHES =
-		"organization-branches";
-
 	public static final String ENTRY_KEY_ORGANIZATION_DETAIL =
 		"organization-detail";
 
