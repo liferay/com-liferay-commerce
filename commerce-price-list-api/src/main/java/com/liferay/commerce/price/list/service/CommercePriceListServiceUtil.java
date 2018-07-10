@@ -123,11 +123,6 @@ public class CommercePriceListServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static com.liferay.portal.kernel.search.Hits search(
-		com.liferay.portal.kernel.search.SearchContext searchContext) {
-		return getService().search(searchContext);
-	}
-
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.price.list.model.CommercePriceList> searchCommercePriceLists(
 		long companyId, long groupId, String keywords, int status, int start,
 		int end, com.liferay.portal.kernel.search.Sort sort)

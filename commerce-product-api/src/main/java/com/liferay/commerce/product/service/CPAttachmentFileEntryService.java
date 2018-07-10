@@ -89,7 +89,7 @@ public interface CPAttachmentFileEntryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPAttachmentFileEntriesCount(long classNameId, long classPK,
-		int type, int status);
+		int type, int status) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPAttachmentFileEntry getCPAttachmentFileEntry(

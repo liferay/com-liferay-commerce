@@ -79,36 +79,42 @@ public class CommerceTierPriceEntryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> fetchCommerceTierPriceEntries(
-		long groupId, int start, int end) {
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().fetchCommerceTierPriceEntries(groupId, start, end);
 	}
 
 	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry fetchCommerceTierPriceEntry(
-		long commerceTierPriceEntryId) {
+		long commerceTierPriceEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().fetchCommerceTierPriceEntry(commerceTierPriceEntryId);
 	}
 
 	public static java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> getCommerceTierPriceEntries(
-		long commercePriceEntryId, int start, int end) {
+		long commercePriceEntryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceTierPriceEntries(commercePriceEntryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> getCommerceTierPriceEntries(
 		long commercePriceEntryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceTierPriceEntries(commercePriceEntryId, start,
 			end, orderByComparator);
 	}
 
 	public static int getCommerceTierPriceEntriesCount(
-		long commercePriceEntryId) {
+		long commercePriceEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceTierPriceEntriesCount(commercePriceEntryId);
 	}
 
-	public static int getCommerceTierPriceEntriesCountByGroupId(long groupId) {
+	public static int getCommerceTierPriceEntriesCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCommerceTierPriceEntriesCountByGroupId(groupId);
 	}
 
@@ -119,11 +125,6 @@ public class CommerceTierPriceEntryServiceUtil {
 	*/
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(
-		com.liferay.portal.kernel.search.SearchContext searchContext) {
-		return getService().search(searchContext);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> searchCommerceTierPriceEntries(

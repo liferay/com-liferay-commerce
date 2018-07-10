@@ -81,7 +81,8 @@ public interface CommerceCountryService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getCommerceCountries(long groupId,
 		boolean active, int start, int end,
-		OrderByComparator<CommerceCountry> orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getCommerceCountries(long groupId, int start,

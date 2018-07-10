@@ -79,7 +79,8 @@ public class CommercePriceEntryServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.price.list.model.CommercePriceEntry> getCommercePriceEntries(
-		long commercePriceListId, int start, int end) {
+		long commercePriceListId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commercePriceEntryService.getCommercePriceEntries(commercePriceListId,
 			start, end);
 	}
@@ -144,12 +145,6 @@ public class CommercePriceEntryServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commercePriceEntryService.getOSGiServiceIdentifier();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.search.Hits search(
-		com.liferay.portal.kernel.search.SearchContext searchContext) {
-		return _commercePriceEntryService.search(searchContext);
 	}
 
 	@Override

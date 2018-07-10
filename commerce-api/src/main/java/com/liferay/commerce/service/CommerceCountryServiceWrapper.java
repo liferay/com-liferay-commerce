@@ -70,7 +70,8 @@ public class CommerceCountryServiceWrapper implements CommerceCountryService,
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceCountry> getCommerceCountries(
 		long groupId, boolean active, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceCountry> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceCountry> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCountryService.getCommerceCountries(groupId, active,
 			start, end, orderByComparator);
 	}

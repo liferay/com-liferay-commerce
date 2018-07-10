@@ -92,7 +92,8 @@ public class CPDefinitionOptionValueRelServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionOptionValueRel> getCPDefinitionOptionValueRels(
-		long groupId, String key, int start, int end) {
+		long groupId, String key, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCPDefinitionOptionValueRels(groupId, key, start, end);
 	}
