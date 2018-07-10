@@ -183,10 +183,10 @@ public class CommerceTierPriceEntryLocalServiceImpl
 
 	@Override
 	public CommerceTierPriceEntry fetchByExternalReferenceCode(
-		String externalReferenceCode) {
+		long companyId, String externalReferenceCode) {
 
-		return commerceTierPriceEntryPersistence.fetchByExternalReferenceCode(
-			externalReferenceCode);
+		return commerceTierPriceEntryPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -360,8 +360,8 @@ public class CommerceTierPriceEntryLocalServiceImpl
 
 		if (Validator.isNotNull(externalReferenceCode)) {
 			CommerceTierPriceEntry commerceTierPriceEntry =
-				commerceTierPriceEntryPersistence.fetchByExternalReferenceCode(
-					externalReferenceCode);
+				commerceTierPriceEntryPersistence.fetchByC_ERC(
+					serviceContext.getCompanyId(), externalReferenceCode);
 
 			if (commerceTierPriceEntry != null) {
 				return updateCommerceTierPriceEntry(
@@ -387,7 +387,8 @@ public class CommerceTierPriceEntryLocalServiceImpl
 
 		if (Validator.isNotNull(priceEntryExternalReferenceCode)) {
 			CommercePriceEntry commercePriceEntry =
-				_commercePriceEntryPersistence.findByExternalReferenceCode(
+				_commercePriceEntryPersistence.findByC_ERC(
+					serviceContext.getCompanyId(),
 					priceEntryExternalReferenceCode);
 
 			validate(

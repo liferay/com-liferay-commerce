@@ -18,6 +18,7 @@ import com.liferay.commerce.product.exception.CPOptionKeyException;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.search.CPOptionIndexer;
 import com.liferay.commerce.product.service.base.CPOptionLocalServiceBaseImpl;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.SystemEventConstants;
@@ -63,6 +64,20 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 			boolean skuContributor, String key, ServiceContext serviceContext)
 		throws PortalException {
 
+		return cpOptionLocalService.addCPOption(
+			nameMap, descriptionMap, ddmFormFieldTypeName, facetable, required,
+			skuContributor, key, StringPool.BLANK, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CPOption addCPOption(
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String ddmFormFieldTypeName, boolean facetable, boolean required,
+			boolean skuContributor, String key, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
 		User user = userLocalService.getUser(serviceContext.getUserId());
 		long groupId = serviceContext.getScopeGroupId();
 
@@ -87,6 +102,7 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 		cpOption.setSkuContributor(skuContributor);
 		cpOption.setKey(key);
 		cpOption.setExpandoBridgeAttributes(serviceContext);
+		cpOption.setExternalReferenceCode(externalReferenceCode);
 
 		cpOptionPersistence.update(cpOption);
 
@@ -128,6 +144,14 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 		for (CPOption cpOption : cpOptions) {
 			cpOptionLocalService.deleteCPOption(cpOption);
 		}
+	}
+
+	@Override
+	public CPOption fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return cpOptionPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -252,6 +276,33 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 		cpOption.setExpandoBridgeAttributes(serviceContext);
 
 		cpOptionPersistence.update(cpOption);
+
+		return cpOption;
+	}
+
+	@Override
+	public CPOption upsertCPOption(
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String ddmFormFieldTypeName, boolean facetable, boolean required,
+			boolean skuContributor, String key, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CPOption cpOption = cpOptionPersistence.fetchByC_ERC(
+			serviceContext.getCompanyId(), externalReferenceCode);
+
+		if (cpOption == null) {
+			cpOption = addCPOption(
+				nameMap, descriptionMap, ddmFormFieldTypeName, facetable,
+				required, skuContributor, key, externalReferenceCode,
+				serviceContext);
+		}
+		else {
+			cpOption = updateCPOption(
+				cpOption.getCPOptionId(), nameMap, descriptionMap,
+				ddmFormFieldTypeName, facetable, required, skuContributor, key,
+				serviceContext);
+		}
 
 		return cpOption;
 	}

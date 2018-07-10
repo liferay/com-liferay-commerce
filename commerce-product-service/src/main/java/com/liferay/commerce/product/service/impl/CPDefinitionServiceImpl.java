@@ -379,7 +379,7 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 
 		CPDefinition cpDefinition =
 			cpDefinitionLocalService.fetchByExternalReferenceCode(
-				externalReferenceCode);
+				serviceContext.getCompanyId(), externalReferenceCode);
 
 		if (cpDefinition == null) {
 			_portletResourcePermission.check(

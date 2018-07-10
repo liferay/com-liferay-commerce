@@ -91,12 +91,12 @@ public class CommercePriceEntryServiceImpl
 
 	@Override
 	public CommercePriceEntry fetchByExternalReferenceCode(
-			String externalReferenceCode)
+			long companyId, String externalReferenceCode)
 		throws PortalException {
 
 		CommercePriceEntry commercePriceList =
 			commercePriceEntryLocalService.fetchByExternalReferenceCode(
-				externalReferenceCode);
+				companyId, externalReferenceCode);
 
 		if (commercePriceList != null) {
 			_portletResourcePermission.check(

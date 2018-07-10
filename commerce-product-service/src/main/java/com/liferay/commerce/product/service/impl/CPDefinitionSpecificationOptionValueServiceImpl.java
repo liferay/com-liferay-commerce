@@ -116,10 +116,10 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 
 	@Override
 	public List<CPDefinitionSpecificationOptionValue>
-		getCPDefinitionSpecificationOptionValues(
-			long cpDefinitionId, int start, int end,
-			OrderByComparator<CPDefinitionSpecificationOptionValue>
-				orderByComparator)
+			getCPDefinitionSpecificationOptionValues(
+				long cpDefinitionId, int start, int end,
+				OrderByComparator<CPDefinitionSpecificationOptionValue>
+					orderByComparator)
 		throws PortalException {
 
 		_cpDefinitionModelResourcePermission.check(

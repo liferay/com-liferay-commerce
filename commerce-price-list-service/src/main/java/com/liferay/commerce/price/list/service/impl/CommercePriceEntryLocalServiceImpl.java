@@ -177,10 +177,10 @@ public class CommercePriceEntryLocalServiceImpl
 
 	@Override
 	public CommercePriceEntry fetchByExternalReferenceCode(
-		String externalReferenceCode) {
+		long companyId, String externalReferenceCode) {
 
-		return commercePriceEntryPersistence.fetchByExternalReferenceCode(
-			externalReferenceCode);
+		return commercePriceEntryPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -371,8 +371,8 @@ public class CommercePriceEntryLocalServiceImpl
 
 		if (Validator.isNotNull(externalReferenceCode)) {
 			CommercePriceEntry commercePriceEntry =
-				commercePriceEntryPersistence.fetchByExternalReferenceCode(
-					externalReferenceCode);
+				commercePriceEntryPersistence.fetchByC_ERC(
+					serviceContext.getCompanyId(), externalReferenceCode);
 
 			if (commercePriceEntry != null) {
 				return updateCommercePriceEntry(
@@ -395,8 +395,9 @@ public class CommercePriceEntryLocalServiceImpl
 		}
 
 		if (Validator.isNotNull(skuExternalReferenceCode)) {
-			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-				skuExternalReferenceCode);
+			CPInstance cpInstance =
+				_cpInstanceLocalService.getCPInstanceByExternalReferenceCode(
+					serviceContext.getCompanyId(), skuExternalReferenceCode);
 
 			validate(cpInstance.getCPInstanceId(), commercePriceListId);
 

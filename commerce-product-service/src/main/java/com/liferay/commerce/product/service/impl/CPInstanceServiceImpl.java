@@ -270,7 +270,7 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 
 		CPInstance cpInstance =
 			cpInstanceLocalService.fetchByExternalReferenceCode(
-				externalReferenceCode);
+				serviceContext.getCompanyId(), externalReferenceCode);
 
 		if (cpInstance == null) {
 			_cpDefinitionModelResourcePermission.check(
