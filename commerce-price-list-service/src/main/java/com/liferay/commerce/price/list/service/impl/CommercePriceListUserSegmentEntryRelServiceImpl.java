@@ -61,9 +61,9 @@ public class CommercePriceListUserSegmentEntryRelServiceImpl
 
 		CommercePriceListUserSegmentEntryRel
 			commercePriceListUserSegmentEntryRel =
-			commercePriceListUserSegmentEntryRelLocalService.
-				fetchCommercePriceListUserSegmentEntryRel(
-					commercePriceListUserSegmentEntryRelId);
+				commercePriceListUserSegmentEntryRelLocalService.
+					fetchCommercePriceListUserSegmentEntryRel(
+						commercePriceListUserSegmentEntryRelId);
 
 		if (commercePriceListUserSegmentEntryRel != null) {
 			_portletResourcePermission.check(
