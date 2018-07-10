@@ -4,7 +4,7 @@
 <service-builder auto-namespace-tables="false" package-path="com.liferay.commerce.price.list">
 	<author>Alessio Antonio Rendina</author>
 	<namespace>Commerce</namespace>
-	<entity local-service="true" name="CommercePriceEntry" remote-service="true" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CommercePriceEntry" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -29,7 +29,6 @@
 		<column name="price" type="BigDecimal" />
 		<column name="promoPrice" type="BigDecimal" />
 		<column name="hasTierPrice" type="boolean" />
-		<column name="externalReferenceCode" type="String" />
 		<column name="lastPublishDate" type="Date" />
 
 		<!-- Order -->
@@ -52,9 +51,6 @@
 		<finder name="CommercePriceListId" return-type="Collection">
 			<finder-column name="commercePriceListId" />
 		</finder>
-		<finder name="ExternalReferenceCode" return-type="CommercePriceEntry" unique="true">
-			<finder-column name="externalReferenceCode" />
-		</finder>
 		<finder name="C_C" return-type="CommercePriceEntry" unique="true">
 			<finder-column name="CPInstanceId" />
 			<finder-column name="commercePriceListId" />
@@ -64,7 +60,7 @@
 
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-	<entity local-service="true" name="CommercePriceList" remote-service="true" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CommercePriceList" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -88,7 +84,6 @@
 		<column name="commerceCurrencyId" type="long" />
 		<column name="name" type="String" />
 		<column name="priority" type="double" />
-		<column name="externalReferenceCode" type="String" />
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
 		<column name="lastPublishDate" type="Date" />
@@ -118,9 +113,6 @@
 		</finder>
 		<finder name="CommerceCurrencyId" return-type="Collection">
 			<finder-column name="commerceCurrencyId" />
-		</finder>
-		<finder name="ExternalReferenceCode" return-type="CommercePriceList" unique="true">
-			<finder-column name="externalReferenceCode" />
 		</finder>
 		<finder name="G_S" return-type="Collection">
 			<finder-column name="groupId" />
@@ -186,7 +178,7 @@
 
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-	<entity local-service="true" name="CommerceTierPriceEntry" remote-service="true" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CommerceTierPriceEntry" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -207,7 +199,6 @@
 		<!-- Other fields -->
 
 		<column name="commercePriceEntryId" type="long" />
-		<column name="externalReferenceCode" type="String" />
 		<column name="price" type="BigDecimal" />
 		<column name="promoPrice" type="BigDecimal" />
 		<column name="minQuantity" type="int" />
@@ -229,9 +220,6 @@
 		</finder>
 		<finder name="CommercePriceEntryId" return-type="Collection">
 			<finder-column name="commercePriceEntryId" />
-		</finder>
-		<finder name="ExternalReferenceCode" return-type="CommerceTierPriceEntry" unique="true">
-			<finder-column name="externalReferenceCode" />
 		</finder>
 		<finder name="C_M" return-type="CommerceTierPriceEntry" unique="true">
 			<finder-column name="commercePriceEntryId" />

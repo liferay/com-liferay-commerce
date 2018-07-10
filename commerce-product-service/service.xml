@@ -4,7 +4,7 @@
 <service-builder auto-namespace-tables="false" package-path="com.liferay.commerce.product">
 	<author>Marco Leo</author>
 	<namespace>Commerce</namespace>
-	<entity local-service="true" name="CPAttachmentFileEntry" remote-service="true" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CPAttachmentFileEntry" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -79,7 +79,7 @@
 		<reference entity="DLApp" package-path="com.liferay.portlet.documentlibrary" />
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-	<entity local-service="true" name="CPDefinition" remote-service="true" trash-enabled="true" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CPDefinition" remote-service="true" trash-enabled="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -115,7 +115,6 @@
 		<column name="telcoOrElectronics" type="boolean" />
 		<column name="DDMStructureKey" type="String" />
 		<column name="published" type="boolean" />
-		<column name="externalReferenceCode" type="String" />
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
 		<column name="lastPublishDate" type="Date" />
@@ -152,9 +151,6 @@
 		</finder>
 		<finder name="CPTaxCategoryId" return-type="Collection">
 			<finder-column name="CPTaxCategoryId" />
-		</finder>
-		<finder name="ExternalReferenceCode" return-type="CPDefinition" unique="true">
-			<finder-column name="externalReferenceCode" />
 		</finder>
 		<finder name="G_S" return-type="Collection">
 			<finder-column name="groupId" />
@@ -511,7 +507,7 @@
 			<finder-column name="main" />
 		</finder>
 	</entity>
-	<entity local-service="true" name="CPInstance" remote-service="true" trash-enabled="true" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CPInstance" remote-service="true" trash-enabled="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -545,7 +541,6 @@
 		<column name="promoPrice" type="BigDecimal" />
 		<column name="cost" type="BigDecimal" />
 		<column name="published" type="boolean" />
-		<column name="externalReferenceCode" type="String" />
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
 		<column name="lastPublishDate" type="Date" />
@@ -571,9 +566,6 @@
 		</finder>
 		<finder name="CPDefinitionId" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
-		</finder>
-		<finder name="ExternalReferenceCode" return-type="CPInstance" unique="true">
-			<finder-column name="externalReferenceCode" />
 		</finder>
 		<finder name="G_ST" return-type="Collection">
 			<finder-column name="groupId" />
@@ -666,7 +658,7 @@
 			<finder-column name="type" />
 		</finder>
 	</entity>
-	<entity local-service="true" name="CPOption" remote-service="true" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CPOption" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -761,7 +753,7 @@
 			<finder-column name="key" />
 		</finder>
 	</entity>
-	<entity local-service="true" name="CPOptionValue" remote-service="true" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CPOptionValue" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
