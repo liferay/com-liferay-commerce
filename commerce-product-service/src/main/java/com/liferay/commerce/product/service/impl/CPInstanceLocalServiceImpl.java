@@ -395,10 +395,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 	@Override
 	public CPInstance fetchByExternalReferenceCode(
-		String externalReferenceCode) {
+		long companyId, String externalReferenceCode) {
 
-		return cpInstancePersistence.fetchByExternalReferenceCode(
-			externalReferenceCode);
+		return cpInstancePersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -447,11 +447,12 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	}
 
 	@Override
-	public CPInstance getCPInstance(String externalReferenceCode)
+	public CPInstance getCPInstanceByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
 		throws PortalException {
 
-		return cpInstancePersistence.findByExternalReferenceCode(
-			externalReferenceCode);
+		return cpInstancePersistence.findByC_ERC(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -767,9 +768,8 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			boolean neverExpire, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPInstance cpInstance =
-			cpInstancePersistence.fetchByExternalReferenceCode(
-				externalReferenceCode);
+		CPInstance cpInstance = cpInstancePersistence.fetchByC_ERC(
+			serviceContext.getCompanyId(), externalReferenceCode);
 
 		if (cpInstance == null) {
 			cpInstance = addCPInstance(

@@ -18,6 +18,7 @@ import com.liferay.commerce.product.exception.CPOptionValueKeyException;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.base.CPOptionValueLocalServiceBaseImpl;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -64,6 +65,19 @@ public class CPOptionValueLocalServiceImpl
 			String key, ServiceContext serviceContext)
 		throws PortalException {
 
+		return addCPOptionValue(
+			cpOptionId, nameMap, priority, key, StringPool.BLANK,
+			serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CPOptionValue addCPOptionValue(
+			long cpOptionId, Map<Locale, String> nameMap, double priority,
+			String key, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
 		// Commerce product option value
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
@@ -88,6 +102,7 @@ public class CPOptionValueLocalServiceImpl
 		cpOptionValue.setPriority(priority);
 		cpOptionValue.setKey(key);
 		cpOptionValue.setExpandoBridgeAttributes(serviceContext);
+		cpOptionValue.setExternalReferenceCode(externalReferenceCode);
 
 		cpOptionValuePersistence.update(cpOptionValue);
 
@@ -134,6 +149,13 @@ public class CPOptionValueLocalServiceImpl
 		for (CPOptionValue cpOptionValue : cpOptionValues) {
 			cpOptionValueLocalService.deleteCPOptionValue(cpOptionValue);
 		}
+	}
+
+	public CPOptionValue fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return cpOptionValuePersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -209,6 +231,30 @@ public class CPOptionValueLocalServiceImpl
 		cpOptionValuePersistence.update(cpOptionValue);
 
 		reindexCPOption(cpOptionValue.getCPOptionId());
+
+		return cpOptionValue;
+	}
+
+	@Override
+	public CPOptionValue upsertCPOptionValue(
+			long cpOptionId, Map<Locale, String> nameMap, double priority,
+			String key, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CPOptionValue cpOptionValue = cpOptionValuePersistence.fetchByC_ERC(
+			serviceContext.getCompanyId(), externalReferenceCode);
+
+		if (cpOptionValue == null) {
+			cpOptionValue = addCPOptionValue(
+				cpOptionId, nameMap, priority, key, externalReferenceCode,
+				serviceContext);
+		}
+		else {
+			cpOptionValue = updateCPOptionValue(
+				cpOptionValue.getCPOptionValueId(), nameMap, priority, key,
+				serviceContext);
+		}
 
 		return cpOptionValue;
 	}

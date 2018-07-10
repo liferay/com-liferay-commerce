@@ -86,10 +86,20 @@ public class CommerceTierPriceEntryServiceImpl
 
 	@Override
 	public CommerceTierPriceEntry fetchByExternalReferenceCode(
-		String externalReferenceCode) {
+			long companyId, String externalReferenceCode)
+		throws PortalException {
 
-		return commerceTierPriceEntryLocalService.fetchByExternalReferenceCode(
-			externalReferenceCode);
+		CommerceTierPriceEntry commerceTierPriceEntry =
+			commerceTierPriceEntryLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		if (commerceTierPriceEntry != null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(), commerceTierPriceEntry.getGroupId(),
+				CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+		}
+
+		return commerceTierPriceEntry;
 	}
 
 	@Override

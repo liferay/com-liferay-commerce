@@ -238,10 +238,10 @@ public class CommercePriceListLocalServiceImpl
 
 	@Override
 	public CommercePriceList fetchByExternalReferenceCode(
-		String externalReferenceCode) {
+		long companyId, String externalReferenceCode) {
 
-		return commercePriceListPersistence.fetchByExternalReferenceCode(
-			externalReferenceCode);
+		return commercePriceListPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -563,8 +563,8 @@ public class CommercePriceListLocalServiceImpl
 
 		if (Validator.isNotNull(externalReferenceCode)) {
 			CommercePriceList commercePriceList =
-				commercePriceListPersistence.fetchByExternalReferenceCode(
-					externalReferenceCode);
+				commercePriceListPersistence.fetchByC_ERC(
+					serviceContext.getCompanyId(), externalReferenceCode);
 
 			if (commercePriceList != null) {
 				return updateCommercePriceList(

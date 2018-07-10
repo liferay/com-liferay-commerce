@@ -123,6 +123,28 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 			serviceContext);
 	}
 
+	@Override
+	public CPOptionValue upsertCPOptionValue(
+			long cpOptionId, Map<Locale, String> nameMap, double priority,
+			String key, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CPOptionValue cpOptionValue =
+			cpOptionValueLocalService.fetchByExternalReferenceCode(
+				serviceContext.getCompanyId(), externalReferenceCode);
+
+		if (cpOptionValue == null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(), serviceContext.getScopeGroupId(),
+				CPActionKeys.MANAGE_CATALOG);
+		}
+
+		return cpOptionValueLocalService.upsertCPOptionValue(
+			cpOptionId, nameMap, priority, key, externalReferenceCode,
+			serviceContext);
+	}
+
 	private static volatile PortletResourcePermission
 		_portletResourcePermission =
 			PortletResourcePermissionFactory.getInstance(

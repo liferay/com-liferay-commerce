@@ -461,10 +461,10 @@ public class CPDefinitionLocalServiceImpl
 
 	@Override
 	public CPDefinition fetchByExternalReferenceCode(
-		String externalReferenceCode) {
+		long companyId, String externalReferenceCode) {
 
-		return cpDefinitionPersistence.fetchByExternalReferenceCode(
-			externalReferenceCode);
+		return cpDefinitionPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -1372,9 +1372,8 @@ public class CPDefinitionLocalServiceImpl
 			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPDefinition cpDefinition =
-			cpDefinitionPersistence.fetchByExternalReferenceCode(
-				externalReferenceCode);
+		CPDefinition cpDefinition = cpDefinitionPersistence.fetchByC_ERC(
+			serviceContext.getCompanyId(), externalReferenceCode);
 
 		if (cpDefinition == null) {
 			cpDefinition = addCPDefinition(
