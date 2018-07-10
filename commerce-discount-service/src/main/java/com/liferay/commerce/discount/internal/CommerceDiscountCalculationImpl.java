@@ -220,6 +220,10 @@ public class CommerceDiscountCalculationImpl
 		CommerceDiscount commerceDiscount, BigDecimal amount,
 		CommerceCurrency commerceCurrency) {
 
+		if((amount == null) || (amount.compareTo(BigDecimal.ZERO) <= 0)){
+			return null;
+		}
+
 		BigDecimal[] values = new BigDecimal[4];
 
 		if (commerceDiscount.isUsePercentage()) {
