@@ -28,7 +28,7 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.admin.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
-	compileOnly project(":apps:commerce:commerce-notification-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.notification.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-organization-api")
 	compileOnly project(":apps:commerce:commerce-price-list-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
