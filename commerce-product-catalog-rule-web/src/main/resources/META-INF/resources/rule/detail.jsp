@@ -23,6 +23,7 @@ CPRule cpRule = cpCatalogRuleDisplayContext.getCPRule();
 long cpRuleId = cpCatalogRuleDisplayContext.getCPRuleId();
 List<CPRuleType> cpRuleTypes = cpCatalogRuleDisplayContext.getCPRuleTypes();
 
+boolean active = BeanParamUtil.getBoolean(cpRule, request, "active");
 String name = BeanParamUtil.getString(cpRule, request, "name");
 String type = BeanParamUtil.getString(cpRule, request, "type");
 %>
@@ -43,7 +44,7 @@ String type = BeanParamUtil.getString(cpRule, request, "type");
 			<aui:fieldset>
 				<aui:input autoFocus="<%= true %>" name="name" value="<%= name %>" />
 
-				<aui:input checked="<%= (cpRule == null) ? false : cpRule.getActive() %>" name="active" type="toggle-switch" />
+				<aui:input checked="<%= active %>" name="active" type="toggle-switch" />
 
 				<aui:select name="type" onChange='<%= renderResponse.getNamespace() + "selectType();" %>' showEmptyOption="<%= true %>">
 
@@ -93,11 +94,14 @@ String type = BeanParamUtil.getString(cpRule, request, "type");
 		function() {
 			var A = AUI();
 
+			var active = A.one('#<portlet:namespace />active').attr('checked');
+
 			var name = A.one('#<portlet:namespace />name').val();
 			var type = A.one('#<portlet:namespace />type').val();
 
 			var portletURL = new Liferay.PortletURL.createURL('<%= currentURLObj %>');
 
+			portletURL.setParameter('active', active);
 			portletURL.setParameter('name', name);
 			portletURL.setParameter('type', type);
 
