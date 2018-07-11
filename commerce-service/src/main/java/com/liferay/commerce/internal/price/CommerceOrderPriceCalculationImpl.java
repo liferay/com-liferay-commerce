@@ -205,6 +205,10 @@ public class CommerceOrderPriceCalculationImpl
 				});
 		}
 
+		if ((amount == null) || (amount.compareTo(BigDecimal.ZERO) <= 0)) {
+			return null;
+		}
+
 		BigDecimal[] shippingDiscountPercentageValues =
 			{level1, level2, level3, level4};
 
