@@ -194,7 +194,9 @@ public class CommerceOrderPriceCalculationImpl
 		BigDecimal discountAmount, BigDecimal level1, BigDecimal level2,
 		BigDecimal level3, BigDecimal level4) {
 
-		if (discountAmount == null) {
+		if ((discountAmount == null) || (amount == null) ||
+			(amount.compareTo(BigDecimal.ZERO) <= 0)) {
+
 			return new CommerceDiscountValue(
 				0,
 				_commerceMoneyFactory.create(commerceCurrency, BigDecimal.ZERO),
