@@ -2,7 +2,7 @@ dependencies {
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.5.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.test", version: "1.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.test.integration", version: "1.0.0"
-	compileOnly project(":apps:commerce:commerce-user-segment-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "1.0.0"
 }
 
 liferay {

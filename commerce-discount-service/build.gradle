@@ -25,5 +25,5 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-discount-api")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.organization.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-product-api")
-	compileOnly project(":apps:commerce:commerce-user-segment-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "1.0.0"
 }

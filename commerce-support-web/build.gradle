@@ -20,5 +20,5 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-price-list-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
-	compileOnly project(":apps:commerce:commerce-user-segment-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "1.0.0"
 }
