@@ -20,6 +20,6 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.content.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-product-definitions-web")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.service", version: "1.0.0"
-	compileOnly project(":apps:commerce:commerce-product-type-grouped-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.type.grouped.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-taglib")
 }
