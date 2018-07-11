@@ -21,7 +21,6 @@ import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefini
 import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsPortletUtil;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
@@ -296,13 +295,18 @@ public class CPDefinitionsDisplayContext
 				cpDefinitionBaseModelSearchResult.getBaseModels());
 		}
 		else {
+			int total = _cpDefinitionService.getCPDefinitionsCount(
+				themeDisplay.getScopeGroupId(),
+				WorkflowConstants.STATUS_IN_TRASH);
+
+			searchContainer.setTotal(total);
+
 			List<CPDefinition> cpDefinitions =
-				CPDefinitionLocalServiceUtil.getCPDefinitions(
+				_cpDefinitionService.getCPDefinitions(
 					themeDisplay.getScopeGroupId(),
 					WorkflowConstants.STATUS_IN_TRASH,
 					searchContainer.getStart(), searchContainer.getEnd());
 
-			searchContainer.setTotal(cpDefinitions.size());
 			searchContainer.setResults(cpDefinitions);
 		}
 

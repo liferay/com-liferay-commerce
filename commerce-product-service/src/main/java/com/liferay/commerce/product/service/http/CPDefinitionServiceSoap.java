@@ -265,6 +265,37 @@ public class CPDefinitionServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPDefinitionSoap[] getCPDefinitions(
+		long groupId, int status, int start, int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPDefinition> returnValue =
+				CPDefinitionServiceUtil.getCPDefinitions(groupId, status,
+					start, end);
+
+			return com.liferay.commerce.product.model.CPDefinitionSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCPDefinitionsCount(long groupId, int status)
+		throws RemoteException {
+		try {
+			int returnValue = CPDefinitionServiceUtil.getCPDefinitionsCount(groupId,
+					status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCPDefinitionsCount(long groupId,
 		String productTypeName, String languageId, int status)
 		throws RemoteException {

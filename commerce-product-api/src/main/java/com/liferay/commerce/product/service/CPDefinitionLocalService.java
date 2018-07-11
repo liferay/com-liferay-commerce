@@ -405,6 +405,9 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	public int getCPDefinitionsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPDefinitionsCount(long groupId, int status);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPDefinitionsCount(long groupId, String productTypeName,
 		String languageId, int status);
 
