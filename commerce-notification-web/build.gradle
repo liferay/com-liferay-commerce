@@ -22,5 +22,5 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.admin.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.notification.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "1.0.0"
-	compileOnly project(":apps:commerce:commerce-user-segment-item-selector-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.item.selector.api", version: "1.0.0"
 }
