@@ -143,12 +143,24 @@ public class CommerceTestUtil {
 		CommerceOrder commerceOrder =
 			CommerceOrderLocalServiceUtil.getCommerceOrder(commerceOrderId);
 
+		CommerceContext commerceContext = new TestCommerceContext(
+			commerceOrder.getCommerceCurrency(), null, null, null, null);
+
+		return addCommerceOrderItem(
+			commerceOrderId, cpInstanceId, quantity, commerceContext);
+	}
+
+	public static CommerceOrderItem addCommerceOrderItem(
+			long commerceOrderId, long cpInstanceId, int quantity,
+			CommerceContext commerceContext)
+		throws Exception {
+
+		CommerceOrder commerceOrder =
+			CommerceOrderLocalServiceUtil.getCommerceOrder(commerceOrderId);
+
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				commerceOrder.getGroupId());
-
-		CommerceContext commerceContext = new TestCommerceContext(
-			commerceOrder.getCommerceCurrency(), null, null, null, null);
 
 		return CommerceOrderItemLocalServiceUtil.addCommerceOrderItem(
 			commerceOrderId, cpInstanceId, quantity, RandomTestUtil.randomInt(),
