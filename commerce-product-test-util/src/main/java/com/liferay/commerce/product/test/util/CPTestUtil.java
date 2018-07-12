@@ -81,8 +81,8 @@ public class CPTestUtil {
 	}
 
 	public static CPDefinition addCPDefinition(
-			long groupId, boolean ignoreSKUCombinations,
-			boolean hasDefaultInstance, int workflowAction)
+			long groupId, boolean ignoreSKUCombinations, String defaultSku,
+			int workflowAction)
 		throws PortalException {
 
 		ServiceContext serviceContext =
@@ -91,21 +91,20 @@ public class CPTestUtil {
 		serviceContext.setWorkflowAction(workflowAction);
 
 		return _addCPDefinition(
-			SimpleCPTypeConstants.NAME, ignoreSKUCombinations,
-			hasDefaultInstance, serviceContext);
+			SimpleCPTypeConstants.NAME, ignoreSKUCombinations, defaultSku,
+			serviceContext);
 	}
 
 	public static CPDefinition addCPDefinition(
 			long groupId, String productTypeName, boolean ignoreSKUCombinations,
-			boolean hasDefaultInstance)
+			String defaultSku)
 		throws PortalException {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return _addCPDefinition(
-			productTypeName, ignoreSKUCombinations, hasDefaultInstance,
-			serviceContext);
+			productTypeName, ignoreSKUCombinations, defaultSku, serviceContext);
 	}
 
 	public static CPDefinitionOptionRel addCPDefinitionOptionRel(
@@ -138,8 +137,8 @@ public class CPTestUtil {
 			ServiceContextTestUtil.getServiceContext(groupId);
 
 		CPDefinition cpDefinition = _addCPDefinition(
-			SimpleCPTypeConstants.NAME, RandomTestUtil.randomBoolean(), true,
-			serviceContext);
+			SimpleCPTypeConstants.NAME, RandomTestUtil.randomBoolean(),
+			CPInstanceConstants.DEFAULT_SKU, serviceContext);
 
 		return CPInstanceLocalServiceUtil.getCPInstance(
 			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
@@ -190,7 +189,7 @@ public class CPTestUtil {
 
 	private static CPDefinition _addCPDefinition(
 			String productTypeName, boolean ignoreSKUCombinations,
-			boolean hasDefaultInstance, ServiceContext serviceContext)
+			String defaultSku, ServiceContext serviceContext)
 		throws PortalException {
 
 		User user = UserLocalServiceUtil.getUser(serviceContext.getUserId());
@@ -268,7 +267,7 @@ public class CPTestUtil {
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, hasDefaultInstance, serviceContext);
+			neverExpire, defaultSku, serviceContext);
 	}
 
 }

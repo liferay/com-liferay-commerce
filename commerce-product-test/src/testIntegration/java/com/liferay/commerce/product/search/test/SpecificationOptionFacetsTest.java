@@ -16,6 +16,7 @@ package com.liferay.commerce.product.search.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalService;
@@ -88,7 +89,8 @@ public class SpecificationOptionFacetsTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, true);
+			_group.getGroupId(), SimpleCPTypeConstants.NAME, false,
+			CPInstanceConstants.DEFAULT_SKU);
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
@@ -160,7 +162,8 @@ public class SpecificationOptionFacetsTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, true);
+			_group.getGroupId(), SimpleCPTypeConstants.NAME, false,
+			CPInstanceConstants.DEFAULT_SKU);
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());

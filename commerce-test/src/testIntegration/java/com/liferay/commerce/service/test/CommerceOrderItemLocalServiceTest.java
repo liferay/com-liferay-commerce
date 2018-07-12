@@ -149,7 +149,7 @@ public class CommerceOrderItemLocalServiceTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), false, true,
+			_group.getGroupId(), false, CPInstanceConstants.DEFAULT_SKU,
 			WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		ServiceContext serviceContext =
