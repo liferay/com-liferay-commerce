@@ -67,12 +67,12 @@ import java.rmi.RemoteException;
 public class CommerceOrderServiceSoap {
 	public static com.liferay.commerce.model.CommerceOrderSoap addOrganizationCommerceOrder(
 		long groupId, long siteGroupId, long orderOrganizationId,
-		long shippingAddressId, String purchaseOrderNumber)
-		throws RemoteException {
+		long commerceCurrencyId, long shippingAddressId,
+		String purchaseOrderNumber) throws RemoteException {
 		try {
 			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.addOrganizationCommerceOrder(groupId,
-					siteGroupId, orderOrganizationId, shippingAddressId,
-					purchaseOrderNumber);
+					siteGroupId, orderOrganizationId, commerceCurrencyId,
+					shippingAddressId, purchaseOrderNumber);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(returnValue);
 		}
