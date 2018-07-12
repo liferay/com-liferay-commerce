@@ -96,8 +96,14 @@ public class CommercePriceListDisplayContext
 			getCommercePriceListUserSegmentEntryRels()
 		throws PortalException {
 
+		long commercePriceListId = getCommercePriceListId();
+
+		if (commercePriceListId <= 0) {
+			return Collections.emptyList();
+		}
+
 		return _commercePriceListUserSegmentEntryRelService.
-			getCommercePriceListUserSegmentEntryRels(getCommercePriceListId());
+			getCommercePriceListUserSegmentEntryRels(commercePriceListId);
 	}
 
 	public CommerceUserSegmentEntry getCommerceUserSegmentEntry(
