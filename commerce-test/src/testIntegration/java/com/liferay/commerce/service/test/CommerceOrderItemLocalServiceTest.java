@@ -99,14 +99,15 @@ public class CommerceOrderItemLocalServiceTest {
 		CommerceTestUtil.addCommerceWarehouseItem(
 			commerceWarehouse, cpInstance.getCPInstanceId(), 2);
 
-		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.addUserCommerceOrder(
-				_group.getGroupId(), _user.getUserId());
-
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		Assert.assertNotNull(commerceCurrency);
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.addUserCommerceOrder(
+				_group.getGroupId(), _user.getUserId(),
+				commerceCurrency.getCommerceCurrencyId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
 			commerceCurrency, null, null, null, null);
@@ -164,14 +165,15 @@ public class CommerceOrderItemLocalServiceTest {
 		CommerceTestUtil.addCommerceWarehouseItem(
 			commerceWarehouse, cpInstance.getCPInstanceId(), 2);
 
-		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.addUserCommerceOrder(
-				_group.getGroupId(), _user.getUserId());
-
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		Assert.assertNotNull(commerceCurrency);
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.addUserCommerceOrder(
+				_group.getGroupId(), _user.getUserId(),
+				commerceCurrency.getCommerceCurrencyId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
 			commerceCurrency, null, null, null, null);
@@ -212,14 +214,15 @@ public class CommerceOrderItemLocalServiceTest {
 		CommerceTestUtil.addCommerceWarehouseItem(
 			commerceWarehouse, cpInstance.getCPInstanceId(), 2);
 
-		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.addUserCommerceOrder(
-				_group.getGroupId(), _user.getUserId());
-
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		Assert.assertNotNull(commerceCurrency);
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.addUserCommerceOrder(
+				_group.getGroupId(), _user.getUserId(),
+				commerceCurrency.getCommerceCurrencyId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
 			commerceCurrency, null, null, null, null);

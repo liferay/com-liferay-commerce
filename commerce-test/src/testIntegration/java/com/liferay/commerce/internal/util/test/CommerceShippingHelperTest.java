@@ -15,6 +15,8 @@
 package com.liferay.commerce.internal.util.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
 import com.liferay.commerce.internal.test.util.CommerceTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceWarehouse;
@@ -61,8 +63,12 @@ public class CommerceShippingHelperTest {
 
 	@Test
 	public void testGetDimensions() throws Exception {
+		CommerceCurrency commerceCurrency =
+			CommerceCurrencyLocalServiceUtil.fetchPrimaryCommerceCurrency(
+				_group.getGroupId());
+
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId(), 0);
+			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
 
 		CPInstance cpInstance1 = CPTestUtil.addCPInstance(_group.getGroupId());
 		CPInstance cpInstance2 = CPTestUtil.addCPInstance(_group.getGroupId());
@@ -110,8 +116,12 @@ public class CommerceShippingHelperTest {
 
 	@Test
 	public void testGetWeight() throws Exception {
+		CommerceCurrency commerceCurrency =
+			CommerceCurrencyLocalServiceUtil.fetchPrimaryCommerceCurrency(
+				_group.getGroupId());
+
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId(), 0);
+			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
 
 		CPInstance cpInstance1 = CPTestUtil.addCPInstance(_group.getGroupId());
 		CPInstance cpInstance2 = CPTestUtil.addCPInstance(_group.getGroupId());

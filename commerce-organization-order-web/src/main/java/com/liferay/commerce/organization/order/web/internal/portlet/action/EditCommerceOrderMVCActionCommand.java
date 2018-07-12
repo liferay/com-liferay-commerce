@@ -17,6 +17,7 @@ package com.liferay.commerce.organization.order.web.internal.portlet.action;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
@@ -304,10 +305,19 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 				commerceContext);
 		}
 		else {
+			long commerceCurrencyId = 0;
+
+			CommerceCurrency commerceCurrency =
+				commerceContext.getCommerceCurrency();
+
+			if (commerceCurrency != null) {
+				commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
+			}
+
 			_commerceOrderService.addOrganizationCommerceOrder(
 				organization.getGroupId(), themeDisplay.getSiteGroupId(),
-				accountOrganization.getOrganizationId(), shippingAddressId,
-				purchaseOrderNumber);
+				accountOrganization.getOrganizationId(), commerceCurrencyId,
+				shippingAddressId, purchaseOrderNumber);
 		}
 	}
 
