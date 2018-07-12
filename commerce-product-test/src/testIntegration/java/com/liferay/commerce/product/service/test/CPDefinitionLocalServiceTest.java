@@ -26,6 +26,7 @@ import com.liferay.commerce.product.service.CPOptionLocalService;
 import com.liferay.commerce.product.service.CPOptionValueLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.type.simple.constants.SimpleCPTypeConstants;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
@@ -76,7 +77,8 @@ public class CPDefinitionLocalServiceTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, false);
+			_group.getGroupId(), SimpleCPTypeConstants.NAME, false,
+			StringPool.BLANK);
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_DRAFT, cpDefinition.getStatus());
@@ -99,7 +101,8 @@ public class CPDefinitionLocalServiceTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, true);
+			_group.getGroupId(), SimpleCPTypeConstants.NAME, false,
+			CPInstanceConstants.DEFAULT_SKU);
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_DRAFT, cpDefinition.getStatus());
@@ -140,7 +143,8 @@ public class CPDefinitionLocalServiceTest {
 		int cpOptionValuesCount = 2;
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, true);
+			_group.getGroupId(), SimpleCPTypeConstants.NAME, false,
+			CPInstanceConstants.DEFAULT_SKU);
 
 		for (int i = 0; i < cpOptionsCount; i++) {
 			CPOption cpOption = CPTestUtil.addCPOption(
@@ -195,7 +199,8 @@ public class CPDefinitionLocalServiceTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, true, false);
+			_group.getGroupId(), SimpleCPTypeConstants.NAME, true,
+			StringPool.BLANK);
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_DRAFT, cpDefinition.getStatus());
@@ -225,7 +230,8 @@ public class CPDefinitionLocalServiceTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, true, true);
+			_group.getGroupId(), SimpleCPTypeConstants.NAME, true,
+			CPInstanceConstants.DEFAULT_SKU);
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
