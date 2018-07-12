@@ -47,7 +47,8 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	@Override
 	public CommerceOrder addOrganizationCommerceOrder(
 			long groupId, long siteGroupId, long orderOrganizationId,
-			long shippingAddressId, String purchaseOrderNumber)
+			long commerceCurrencyId, long shippingAddressId,
+			String purchaseOrderNumber)
 		throws PortalException {
 
 		_portletResourcePermission.contains(
@@ -56,7 +57,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		return commerceOrderLocalService.addOrganizationCommerceOrder(
 			groupId, getUserId(), siteGroupId, orderOrganizationId,
-			shippingAddressId, purchaseOrderNumber);
+			commerceCurrencyId, shippingAddressId, purchaseOrderNumber);
 	}
 
 	@Override
