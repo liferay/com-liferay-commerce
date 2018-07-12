@@ -289,7 +289,8 @@ public class CommerceTestUtil {
 			RandomTestUtil.randomString(), false, false, serviceContext);
 	}
 
-	public static CommerceOrder addUserCommerceOrder(long groupId, long userId)
+	public static CommerceOrder addUserCommerceOrder(
+			long groupId, long userId, long commerceCurrencyId)
 		throws Exception {
 
 		ServiceContext serviceContext =
@@ -300,7 +301,7 @@ public class CommerceTestUtil {
 		}
 
 		return CommerceOrderLocalServiceUtil.addUserCommerceOrder(
-			groupId, userId);
+			groupId, userId, commerceCurrencyId);
 	}
 
 	public static CommerceOrder checkoutOrder(CommerceOrder commerceOrder)

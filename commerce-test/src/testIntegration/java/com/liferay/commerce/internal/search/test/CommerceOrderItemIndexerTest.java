@@ -15,6 +15,8 @@
 package com.liferay.commerce.internal.search.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
 import com.liferay.commerce.internal.search.CommerceOrderItemIndexer;
 import com.liferay.commerce.internal.test.util.CommerceTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
@@ -86,8 +88,12 @@ public class CommerceOrderItemIndexerTest {
 
 		CommerceOrderItem[] commerceOrderItems = new CommerceOrderItem[count];
 
+		CommerceCurrency commerceCurrency =
+			CommerceCurrencyLocalServiceUtil.fetchPrimaryCommerceCurrency(
+				_group.getGroupId());
+
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId(), 0);
+			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
 
 		for (int i = 0; i < count; i++) {
 			CPInstance cpInstance = CPTestUtil.addCPInstance(
