@@ -53,15 +53,20 @@ public class CommerceOrganizationTestUtil {
 			long groupId, long organizationId)
 		throws Exception {
 
-		CommerceCountry commerceCountry =
-			CommerceCountryLocalServiceUtil.fetchCommerceCountry(groupId, 380);
-
-		CommerceRegion commerceRegion =
-			CommerceRegionLocalServiceUtil.getCommerceRegion(
-				commerceCountry.getCommerceCountryId(), "VE");
-
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
+
+		CommerceCountry commerceCountry =
+			CommerceCountryLocalServiceUtil.addCommerceCountry(
+				RandomTestUtil.randomLocaleStringMap(), true, true, "ZZ", "ZZZ",
+				000, false, RandomTestUtil.randomDouble(), true,
+				serviceContext);
+
+		CommerceRegion commerceRegion =
+			CommerceRegionLocalServiceUtil.addCommerceRegion(
+				commerceCountry.getCommerceCountryId(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomDouble(), true, serviceContext);
 
 		return AddressLocalServiceUtil.addAddress(
 			serviceContext.getUserId(), Organization.class.getName(),

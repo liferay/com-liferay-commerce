@@ -105,8 +105,7 @@ public class CPRuleTestUtil {
 			serviceContext);
 
 		CommerceUserSegmentEntry defaultCommerceUserSegmentEntry =
-			CommerceUserSegmentEntryLocalServiceUtil.
-				getCommerceUserSegmentEntry(groupId, "user");
+			CommerceUserSegmentTestUtil.addDefaultUserSegment(groupId);
 
 		CPRuleUserSegmentRelLocalServiceUtil.addCPRuleUserSegmentRel(
 			cpRule.getCPRuleId(),

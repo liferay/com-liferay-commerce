@@ -21,10 +21,13 @@ import com.liferay.commerce.internal.test.util.CommerceTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.Dimensions;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.util.CommerceShippingHelper;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
@@ -32,6 +35,7 @@ import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.math.BigDecimal;
 
@@ -51,7 +55,9 @@ public class CommerceShippingHelperTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(),
+			PermissionCheckerTestRule.INSTANCE);
 
 	@Before
 	public void setUp() throws Exception {
@@ -73,6 +79,10 @@ public class CommerceShippingHelperTest {
 		CPInstance cpInstance1 = CPTestUtil.addCPInstance(_group.getGroupId());
 		CPInstance cpInstance2 = CPTestUtil.addCPInstance(_group.getGroupId());
 		CPInstance cpInstance3 = CPTestUtil.addCPInstance(_group.getGroupId());
+
+		_addCPDefinitionProperties(cpInstance1);
+		_addCPDefinitionProperties(cpInstance2);
+		_addCPDefinitionProperties(cpInstance3);
 
 		_addAvailability(cpInstance1);
 		_addAvailability(cpInstance2);
@@ -127,6 +137,10 @@ public class CommerceShippingHelperTest {
 		CPInstance cpInstance2 = CPTestUtil.addCPInstance(_group.getGroupId());
 		CPInstance cpInstance3 = CPTestUtil.addCPInstance(_group.getGroupId());
 
+		_addCPDefinitionProperties(cpInstance1);
+		_addCPDefinitionProperties(cpInstance2);
+		_addCPDefinitionProperties(cpInstance3);
+
 		_addAvailability(cpInstance1);
 		_addAvailability(cpInstance2);
 		_addAvailability(cpInstance3);
@@ -166,6 +180,17 @@ public class CommerceShippingHelperTest {
 			_commerceWarehouse, cpInstance.getCPInstanceId(), 10);
 	}
 
+	private static void _addCPDefinitionProperties(CPInstance cpInstance)
+		throws PortalException {
+
+		CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+		cpDefinition.setShippable(true);
+		cpDefinition.setFreeShipping(false);
+
+		_cpDefinitionLocalService.updateCPDefinition(cpDefinition);
+	}
+
 	private static void _addDimensions(
 		CPInstance cpInstance, double dimension) {
 
@@ -183,6 +208,9 @@ public class CommerceShippingHelperTest {
 	}
 
 	private static CommerceWarehouse _commerceWarehouse;
+
+	@Inject
+	private static CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Inject
 	private static CPInstanceLocalService _cpInstanceLocalService;
