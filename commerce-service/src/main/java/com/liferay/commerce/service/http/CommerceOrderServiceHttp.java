@@ -57,8 +57,8 @@ import com.liferay.portal.kernel.util.MethodKey;
 public class CommerceOrderServiceHttp {
 	public static com.liferay.commerce.model.CommerceOrder addOrganizationCommerceOrder(
 		HttpPrincipal httpPrincipal, long groupId, long siteGroupId,
-		long orderOrganizationId, long shippingAddressId,
-		String purchaseOrderNumber)
+		long orderOrganizationId, long commerceCurrencyId,
+		long shippingAddressId, String purchaseOrderNumber)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
@@ -66,8 +66,8 @@ public class CommerceOrderServiceHttp {
 					_addOrganizationCommerceOrderParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					siteGroupId, orderOrganizationId, shippingAddressId,
-					purchaseOrderNumber);
+					siteGroupId, orderOrganizationId, commerceCurrencyId,
+					shippingAddressId, purchaseOrderNumber);
 
 			Object returnObj = null;
 
@@ -1030,7 +1030,10 @@ public class CommerceOrderServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(CommerceOrderServiceHttp.class);
 	private static final Class<?>[] _addOrganizationCommerceOrderParameterTypes0 =
-		new Class[] { long.class, long.class, long.class, long.class, String.class };
+		new Class[] {
+			long.class, long.class, long.class, long.class, long.class,
+			String.class
+		};
 	private static final Class<?>[] _approveCommerceOrderParameterTypes1 = new Class[] {
 			long.class
 		};

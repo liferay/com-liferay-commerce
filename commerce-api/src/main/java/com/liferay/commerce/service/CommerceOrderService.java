@@ -60,8 +60,9 @@ public interface CommerceOrderService extends BaseService {
 	 * Never modify or reference this interface directly. Always use {@link CommerceOrderServiceUtil} to access the commerce order remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceOrderServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceOrder addOrganizationCommerceOrder(long groupId,
-		long siteGroupId, long orderOrganizationId, long shippingAddressId,
-		String purchaseOrderNumber) throws PortalException;
+		long siteGroupId, long orderOrganizationId, long commerceCurrencyId,
+		long shippingAddressId, String purchaseOrderNumber)
+		throws PortalException;
 
 	public CommerceOrder approveCommerceOrder(long commerceOrderId)
 		throws PortalException;
