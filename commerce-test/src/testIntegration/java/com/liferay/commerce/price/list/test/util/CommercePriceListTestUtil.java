@@ -15,7 +15,7 @@
 package com.liferay.commerce.price.list.test.util;
 
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyServiceUtil;
+import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
 import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelServiceUtil;
@@ -83,7 +83,7 @@ public class CommercePriceListTestUtil {
 		throws Exception {
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyServiceUtil.fetchPrimaryCommerceCurrency(groupId);
+			CommerceCurrencyTestUtil.addCommerceCurrency(groupId);
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);

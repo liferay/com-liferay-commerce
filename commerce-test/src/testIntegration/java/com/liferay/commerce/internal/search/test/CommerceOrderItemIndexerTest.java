@@ -22,6 +22,7 @@ import com.liferay.commerce.internal.test.util.CommerceTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.petra.string.StringPool;
@@ -41,6 +42,7 @@ import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,6 +67,7 @@ public class CommerceOrderItemIndexerTest {
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
+			PermissionCheckerTestRule.INSTANCE,
 			SynchronousDestinationTestRule.INSTANCE);
 
 	@Before
@@ -99,9 +102,16 @@ public class CommerceOrderItemIndexerTest {
 			CPInstance cpInstance = CPTestUtil.addCPInstance(
 				commerceOrder.getGroupId());
 
+			cpInstance.setPurchasable(true);
+
+			_cpInstanceLocalService.updateCPInstance(cpInstance);
+
+			CommerceTestUtil.addBackorderCPDefinitionInventory(
+				cpInstance.getCPDefinition());
+
 			commerceOrderItems[i] = CommerceTestUtil.addCommerceOrderItem(
 				commerceOrder.getCommerceOrderId(),
-				cpInstance.getCPInstanceId());
+				cpInstance.getCPInstanceId(), 1);
 		}
 
 		return commerceOrderItems;
@@ -198,6 +208,9 @@ public class CommerceOrderItemIndexerTest {
 
 	@Inject
 	private static IndexerRegistry _indexerRegistry;
+
+	@Inject
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@DeleteAfterTestRun
 	private Group _group;

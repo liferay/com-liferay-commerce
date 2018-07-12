@@ -27,6 +27,10 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 /**
  * @author Andrea Di Giorgi
  * @author Luca Pellizzon
@@ -63,6 +67,26 @@ public class CommerceUserSegmentTestUtil {
 			addCommerceUserSegmentEntry(
 				RandomTestUtil.randomLocaleStringMap(),
 				RandomTestUtil.randomString(), true, false,
+				RandomTestUtil.randomDouble(), serviceContext);
+	}
+
+	public static CommerceUserSegmentEntry addDefaultUserSegment(long groupId)
+		throws PortalException{
+
+		ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(groupId);
+
+		User user = UserTestUtil.getAdminUser(serviceContext.getCompanyId());
+
+		serviceContext.setUserId(user.getUserId());
+
+		Map<Locale, String> nameMap = new HashMap<>();
+
+		nameMap.put(Locale.US, "user");
+
+		return CommerceUserSegmentEntryLocalServiceUtil.
+			addCommerceUserSegmentEntry(
+				nameMap, RandomTestUtil.randomString(), true, false,
 				RandomTestUtil.randomDouble(), serviceContext);
 	}
 
