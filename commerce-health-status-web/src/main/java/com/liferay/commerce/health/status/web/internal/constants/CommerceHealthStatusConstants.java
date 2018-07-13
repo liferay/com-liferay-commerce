@@ -75,13 +75,6 @@ public class CommerceHealthStatusConstants {
 		"measurement.units.commerce.health.status.key";
 
 	public static final String
-		ORGANIZATION_TYPES_COMMERCE_HEALTH_STATUS_DESCRIPTION =
-			"organization.types.commerce.health.status.description";
-
-	public static final String ORGANIZATION_TYPES_COMMERCE_HEALTH_STATUS_KEY =
-		"organization.types.commerce.health.status.key";
-
-	public static final String
 		USER_SEGMENTS_COMMERCE_HEALTH_STATUS_DESCRIPTION =
 			"user.segments.commerce.health.status.description";
 
