@@ -149,12 +149,14 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 						value="<%= finalPriceMoney.format(locale) %>"
 					/>
 
-					<liferay-ui:search-container-column-text>
-						<liferay-ui:icon-delete
-							label="<%= true %>"
-							url="<%= commerceCartContentDisplayContext.getDeleteURL(commerceOrderItem) %>"
-						/>
-					</liferay-ui:search-container-column-text>
+					<c:if test="<%= commerceCartContentDisplayContext.hasPermission(ActionKeys.UPDATE) %>">
+						<liferay-ui:search-container-column-text>
+							<liferay-ui:icon-delete
+								label="<%= true %>"
+								url="<%= commerceCartContentDisplayContext.getDeleteURL(commerceOrderItem) %>"
+							/>
+						</liferay-ui:search-container-column-text>
+					</c:if>
 
 					<liferay-ui:search-container-column-jsp
 						name="quantity"

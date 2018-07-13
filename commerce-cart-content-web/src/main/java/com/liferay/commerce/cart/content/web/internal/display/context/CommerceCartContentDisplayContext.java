@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
@@ -62,7 +63,9 @@ public class CommerceCartContentDisplayContext {
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
 			CPDefinitionHelper cpDefinitionHelper,
-			CPInstanceHelper cpInstanceHelper)
+			CPInstanceHelper cpInstanceHelper,
+			ModelResourcePermission<CommerceOrder>
+				commerceOrderModelResourcePermission)
 		throws PortalException {
 
 		_commerceOrderItemService = commerceOrderItemService;
@@ -71,6 +74,8 @@ public class CommerceCartContentDisplayContext {
 
 		this.cpDefinitionHelper = cpDefinitionHelper;
 		this.cpInstanceHelper = cpInstanceHelper;
+		this.commerceOrderModelResourcePermission =
+			commerceOrderModelResourcePermission;
 
 		commerceCartContentRequestHelper = new CommerceCartContentRequestHelper(
 			httpServletRequest);
@@ -255,6 +260,16 @@ public class CommerceCartContentDisplayContext {
 		return _searchContainer;
 	}
 
+	public boolean hasPermission(String actionId)throws PortalException {
+		if (_commerceOrder == null) {
+			return false;
+		}
+
+		return commerceOrderModelResourcePermission.contains(
+			commerceCartContentRequestHelper.getPermissionChecker(),
+			_commerceOrder, actionId);
+	}
+
 	public boolean isValidCommerceOrder() throws PortalException {
 		CommerceOrder commerceOrder = getCommerceOrder();
 
@@ -286,6 +301,8 @@ public class CommerceCartContentDisplayContext {
 	protected final CommerceCartContentRequestHelper
 		commerceCartContentRequestHelper;
 	protected final CommerceContext commerceContext;
+	protected final ModelResourcePermission<CommerceOrder>
+		commerceOrderModelResourcePermission;
 	protected final CPDefinitionHelper cpDefinitionHelper;
 	protected final CPInstanceHelper cpInstanceHelper;
 
