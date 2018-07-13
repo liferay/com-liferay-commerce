@@ -71,10 +71,10 @@ public class CommerceUserSegmentTestUtil {
 	}
 
 	public static CommerceUserSegmentEntry addDefaultUserSegment(long groupId)
-		throws PortalException{
+		throws PortalException {
 
 		ServiceContext serviceContext =
-				ServiceContextTestUtil.getServiceContext(groupId);
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		User user = UserTestUtil.getAdminUser(serviceContext.getCompanyId());
 
