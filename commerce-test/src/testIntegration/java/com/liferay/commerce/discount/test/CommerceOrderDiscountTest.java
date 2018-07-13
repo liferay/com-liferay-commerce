@@ -74,7 +74,8 @@ public class CommerceOrderDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId(), _user.getUserId());
+			_group.getGroupId(), _user.getUserId(),
+			commerceCurrency.getCommerceCurrencyId());
 
 		commerceOrder.setCommerceCurrencyId(
 			commerceCurrency.getCommerceCurrencyId());
@@ -168,7 +169,8 @@ public class CommerceOrderDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			_group.getGroupId(), _user.getUserId());
+			_group.getGroupId(), _user.getUserId(),
+			commerceCurrency.getCommerceCurrencyId());
 
 		commerceOrder.setCommerceCurrencyId(
 			commerceCurrency.getCommerceCurrencyId());
