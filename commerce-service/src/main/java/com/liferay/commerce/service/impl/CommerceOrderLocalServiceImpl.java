@@ -234,21 +234,13 @@ public class CommerceOrderLocalServiceImpl
 			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrder addUserCommerceOrder(long groupId, long userId)
 		throws PortalException {
 
 		return commerceOrderLocalService.addUserCommerceOrder(
 			groupId, userId, userId);
-	}
-
-	@Override
-	public CommerceOrder addUserCommerceOrder(
-			long groupId, long userId, long commerceCurrencyId)
-		throws PortalException {
-
-		return commerceOrderLocalService.addUserCommerceOrder(
-			groupId, userId, userId, commerceCurrencyId);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
