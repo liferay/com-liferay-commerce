@@ -94,7 +94,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		else {
 			commerceOrder = _commerceOrderLocalService.addUserCommerceOrder(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				commerceCurrencyId);
+				themeDisplay.getUserId(), commerceCurrencyId);
 		}
 
 		setCurrentCommerceOrder(httpServletRequest, commerceOrder);
