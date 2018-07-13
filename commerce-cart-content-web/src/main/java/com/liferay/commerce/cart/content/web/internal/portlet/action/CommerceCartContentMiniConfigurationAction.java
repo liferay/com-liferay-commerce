@@ -16,6 +16,7 @@ package com.liferay.commerce.cart.content.web.internal.portlet.action;
 
 import com.liferay.commerce.cart.content.web.internal.display.context.CommerceCartContentMiniDisplayContext;
 import com.liferay.commerce.constants.CommercePortletKeys;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
@@ -26,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -69,7 +71,8 @@ public class CommerceCartContentMiniConfigurationAction
 						_commerceOrderItemService,
 						_commerceOrderPriceCalculation,
 						_commerceOrderValidatorRegistry, _cpDefinitionHelper,
-						_cpInstanceHelper);
+						_cpInstanceHelper,
+						_commerceOrderModelResourcePermission);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -99,6 +102,12 @@ public class CommerceCartContentMiniConfigurationAction
 
 	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
+	)
+	private ModelResourcePermission<CommerceOrder>
+		_commerceOrderModelResourcePermission;
 
 	@Reference
 	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
