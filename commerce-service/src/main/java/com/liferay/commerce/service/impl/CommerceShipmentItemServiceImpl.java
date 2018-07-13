@@ -16,11 +16,15 @@ package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.service.base.CommerceShipmentItemServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -75,9 +79,9 @@ public class CommerceShipmentItemServiceImpl
 			commerceOrderItemLocalService.getCommerceOrderItem(
 				commerceOrderItemId);
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceOrderItem.getGroupId(),
-			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderItem.getCommerceOrderId(),
+			ActionKeys.VIEW);
 
 		return commerceShipmentItemLocalService.getCommerceShipmentItems(
 			commerceOrderItemId);
@@ -134,6 +138,11 @@ public class CommerceShipmentItemServiceImpl
 			commerceShipmentItemId, quantity);
 	}
 
+	private static volatile ModelResourcePermission<CommerceOrder>
+		_commerceOrderModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CommerceShipmentItemServiceImpl.class,
+				"_commerceOrderModelResourcePermission", CommerceOrder.class);
 	private static volatile PortletResourcePermission
 		_portletResourcePermission =
 			PortletResourcePermissionFactory.getInstance(
