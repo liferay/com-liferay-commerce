@@ -51,7 +51,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			String purchaseOrderNumber)
 		throws PortalException {
 
-		_portletResourcePermission.contains(
+		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
 			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
 
@@ -66,7 +66,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			long shippingAddressId, String purchaseOrderNumber)
 		throws PortalException {
 
-		_portletResourcePermission.contains(
+		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
 			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
 
@@ -253,7 +253,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			OrderByComparator<CommerceOrder> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.contains(
+		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
 			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
@@ -266,7 +266,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			long siteGroupId, int[] orderStatuses)
 		throws PortalException {
 
-		_portletResourcePermission.contains(
+		_portletResourcePermission.check(
 			getPermissionChecker(), siteGroupId,
 			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
@@ -296,7 +296,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public int getCommerceOrdersCount(long groupId) throws PortalException {
-		_portletResourcePermission.contains(
+		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
 			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
