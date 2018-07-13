@@ -99,10 +99,9 @@ public class CommerceOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder addUserCommerceOrder(
-		long groupId, long userId, long commerceCurrencyId)
+		long groupId, long userId, long orderUserId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .addUserCommerceOrder(groupId, userId, commerceCurrencyId);
+		return getService().addUserCommerceOrder(groupId, userId, orderUserId);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder addUserCommerceOrder(

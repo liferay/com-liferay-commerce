@@ -94,10 +94,10 @@ public class CommerceOrderLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrder addUserCommerceOrder(
-		long groupId, long userId, long commerceCurrencyId)
+		long groupId, long userId, long orderUserId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderLocalService.addUserCommerceOrder(groupId, userId,
-			commerceCurrencyId);
+			orderUserId);
 	}
 
 	@Override
