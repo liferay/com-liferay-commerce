@@ -183,6 +183,34 @@ public class CommerceOrderLocalServiceImpl
 	@Override
 	public CommerceOrder addOrganizationCommerceOrder(
 			long groupId, long userId, long siteGroupId,
+			long orderOrganizationId, long commerceCurrencyId,
+			long shippingAddressId, String purchaseOrderNumber)
+		throws PortalException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setUserId(userId);
+
+		if (hasWorkflowDefinition(
+				siteGroupId, CommerceOrderConstants.TYPE_PK_APPROVAL)) {
+
+			serviceContext.setWorkflowAction(
+				WorkflowConstants.ACTION_SAVE_DRAFT);
+		}
+
+		return addCommerceOrder(
+			siteGroupId, orderOrganizationId, userId, commerceCurrencyId, 0,
+			shippingAddressId, 0, 0, null, purchaseOrderNumber, BigDecimal.ZERO,
+			BigDecimal.ZERO, BigDecimal.ZERO,
+			CommerceOrderConstants.PAYMENT_STATUS_PENDING,
+			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrder addOrganizationCommerceOrder(
+			long groupId, long userId, long siteGroupId,
 			long orderOrganizationId, long shippingAddressId,
 			String purchaseOrderNumber)
 		throws PortalException {
@@ -214,6 +242,15 @@ public class CommerceOrderLocalServiceImpl
 			groupId, userId, userId);
 	}
 
+	@Override
+	public CommerceOrder addUserCommerceOrder(
+			long groupId, long userId, long commerceCurrencyId)
+		throws PortalException {
+
+		return commerceOrderLocalService.addUserCommerceOrder(
+			groupId, userId, userId, commerceCurrencyId);
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrder addUserCommerceOrder(
@@ -235,6 +272,32 @@ public class CommerceOrderLocalServiceImpl
 		return addCommerceOrder(
 			groupId, 0, orderUserId, 0, 0, 0, 0, 0, null, null, BigDecimal.ZERO,
 			BigDecimal.ZERO, BigDecimal.ZERO,
+			CommerceOrderConstants.PAYMENT_STATUS_PENDING,
+			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrder addUserCommerceOrder(
+			long groupId, long userId, long orderUserId,
+			long commerceCurrencyId)
+		throws PortalException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setUserId(userId);
+
+		if (hasWorkflowDefinition(
+				groupId, CommerceOrderConstants.TYPE_PK_APPROVAL)) {
+
+			serviceContext.setWorkflowAction(
+				WorkflowConstants.ACTION_SAVE_DRAFT);
+		}
+
+		return addCommerceOrder(
+			groupId, 0, orderUserId, commerceCurrencyId, 0, 0, 0, 0, null, null,
+			BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
 			CommerceOrderConstants.PAYMENT_STATUS_PENDING,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
 	}
