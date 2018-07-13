@@ -64,6 +64,10 @@ public interface CommerceOrderService extends BaseService {
 		long shippingAddressId, String purchaseOrderNumber)
 		throws PortalException;
 
+	public CommerceOrder addOrganizationCommerceOrder(long groupId,
+		long siteGroupId, long orderOrganizationId, long shippingAddressId,
+		String purchaseOrderNumber) throws PortalException;
+
 	public CommerceOrder approveCommerceOrder(long commerceOrderId)
 		throws PortalException;
 
