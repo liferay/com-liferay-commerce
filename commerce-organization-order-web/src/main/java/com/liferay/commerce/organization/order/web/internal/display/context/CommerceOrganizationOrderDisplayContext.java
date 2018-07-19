@@ -484,6 +484,8 @@ public class CommerceOrganizationOrderDisplayContext {
 
 		if (_commerceOrderId > 0) {
 			portletURL.setParameter(
+				"mvcRenderCommandName", "editCommerceOrder");
+			portletURL.setParameter(
 				"commerceOrderId", String.valueOf(_commerceOrderId));
 		}
 		else {
