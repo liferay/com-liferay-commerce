@@ -5,7 +5,7 @@
 		</execute>
 
 		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Health Status" />
+			<var name="navItem" value="Health Check" />
 		</execute>
 
 		<for list="1,2,3,4,5" param="buttonRowNumber">
