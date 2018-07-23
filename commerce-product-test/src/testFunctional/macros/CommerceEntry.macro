@@ -1,6 +1,10 @@
 <definition>
 	<command name="addFullDescriptionViaAlloyEditor">
-		<execute function="Type#typeEditor" locator1="CommerceEntry#FULL_DESCRIPTION_FIELD" value1="${entryFullDescription}" />
+		<execute macro="AlloyEditor#typeEditor">
+			<var name="content" value="${entryFullDescription}" />
+			<var name="editor" value="description" />
+		</execute>
+	</command>
 	</command>
 
 	<command name="addOptionsEntry">
