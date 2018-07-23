@@ -204,6 +204,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>MODAL_NAME_FIELD_SMALL</td>
+	<td>//input[contains(@name,'name')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>WORKFLOW_STATUS</td>
 	<td>//span[@class='workflow-status']//span[contains(.,'${key_status}')]</td>
 	<td></td>
