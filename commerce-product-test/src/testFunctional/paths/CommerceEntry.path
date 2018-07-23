@@ -104,6 +104,15 @@
 	<td></td>
 </tr>
 <tr>
+	<td>NOTIFICATION_TEMPLATE_FROM_NAME_FIELD</td>
+	<td>//label[contains(.,'From Name')]//..//input[contains(@id,'from')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NOTIFICATION_TEMPLATE_FROM_ADDRESS_FIELD</td>
+	<td>//label[contains(.,'From Address')]//..//input[contains(@id,'from')]</td>
+	<td></td>
+</tr>
 	<td>NEVER_EXPIRE_CHECKBOX</td>
 	<td>//input[contains(@name,'neverExpire') and (@type='checkbox')]</td>
 	<td></td>
