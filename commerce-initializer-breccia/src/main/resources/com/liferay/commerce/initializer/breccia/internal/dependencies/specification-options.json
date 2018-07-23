@@ -1,0 +1,243 @@
+[
+	{
+		"CategoryKey": "power",
+		"Key": "ac-input-frequency"
+	},
+	{
+		"CategoryKey": "power",
+		"Key": "ac-input-voltage"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "adjustable-edge-guide"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "adjustable-margin-depth"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "auto-centering"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "binding-capacity-comb-binding",
+		"Title": "Binding Capacity (Comb Binding)"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "binding-capacity-wire-binding",
+		"Title": "Binding Capacity (Wire Binding)"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "binding-comb-diameter-max",
+		"Title": "Binding Comb Diameter (Max)"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "binding-time"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "capacity"
+	},
+	{
+		"CategoryKey": "design",
+		"Key": "certification"
+	},
+	{
+		"CategoryKey": "features",
+		"Key": "clinch-type"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "color-of-product"
+	},
+	{
+		"CategoryKey": "design",
+		"Key": "coloration"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "control-type"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "country-of-origin"
+	},
+	{
+		"CategoryKey": "weight-dimensions",
+		"Key": "depth"
+	},
+	{
+		"CategoryKey": "other-features",
+		"Key": "dimensions-wxdxh",
+		"Title": "Dimensions (wxdxh)"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "double-handle"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "edge-guide"
+	},
+	{
+		"CategoryKey": "design",
+		"Key": "ergonomic-grip"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "format"
+	},
+	{
+		"CategoryKey": "weight-dimensions",
+		"Key": "height"
+	},
+	{
+		"CategoryKey": "features",
+		"Key": "hole-diameter"
+	},
+	{
+		"CategoryKey": "weight-dimensions",
+		"Key": "hole-punch-weight"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "housing-material"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "loop-wire-binding"
+	},
+	{
+		"CategoryKey": "features",
+		"Key": "material"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "maximum-paper-width"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "media-weight"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "method-of-control"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "orientation"
+	},
+	{
+		"CategoryKey": "weight-dimensions",
+		"Key": "package-depth"
+	},
+	{
+		"CategoryKey": "packaging-data",
+		"Key": "package-dimensions-wxdxh",
+		"Title": "Package Dimensions (wxdxh)"
+	},
+	{
+		"CategoryKey": "weight-dimensions",
+		"Key": "package-height"
+	},
+	{
+		"CategoryKey": "weight-dimensions",
+		"Key": "package-weight"
+	},
+	{
+		"CategoryKey": "weight-dimensions",
+		"Key": "package-width"
+	},
+	{
+		"CategoryKey": "features",
+		"Key": "paper-alignment-indicator"
+	},
+	{
+		"CategoryKey": "features",
+		"Key": "paperclips-included"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Facetable": true,
+		"Key": "permanent-stapling"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "plastic-comb-binding"
+	},
+	{
+		"CategoryKey": "other-features",
+		"Key": "power-requirements"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Facetable": true,
+		"Key": "punch-capacity"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "punch-cycle-speed"
+	},
+	{
+		"CategoryKey": "features",
+		"Key": "punch-distance"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "punch-holes-quantity"
+	},
+	{
+		"CategoryKey": "packaging-content",
+		"Key": "quantity"
+	},
+	{
+		"CategoryKey": "features",
+		"Key": "soft-grip"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "staple-reload-window"
+	},
+	{
+		"CategoryKey": "features",
+		"Key": "staple-remover"
+	},
+	{
+		"CategoryKey": "weight-dimensions",
+		"Key": "stapler-dimensions-wxdxh",
+		"Title": "Stapler Dimensions (wxdxh)"
+	},
+	{
+		"CategoryKey": "packaging-content",
+		"Key": "staples-included"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "staples-loading-system"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Facetable": true,
+		"Key": "stapling-capacity"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "throat-depth"
+	},
+	{
+		"CategoryKey": "technical-details",
+		"Key": "type-of-staple"
+	},
+	{
+		"CategoryKey": "weight-dimensions",
+		"Key": "weight"
+	},
+	{
+		"CategoryKey": "weight-dimensions",
+		"Key": "width"
+	}
+]

@@ -1,0 +1,2715 @@
+[
+	{
+		"Categories": ["Staplers"],
+		"Description": "Esselte 5505. Weight: 9.88 oz (280 g), Dimensions (WxDxH): 1.57 x 5.71 x 2.4\" (40 x 145 x 61 mm)",
+		"Images": [
+			"12360609-2964_Red.jpg",
+			"12360609-2964_Silver.jpg",
+			"12360609-2964_Y.jpg",
+			"12360609-2964_30.jpg"
+		],
+		"Name": "Esselte 5505 Red, Silver",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": [
+					"red",
+					"silver"
+				]
+			},
+			{
+				"Key": "stapling-capacity",
+				"Values": [
+					"30",
+					"50"
+				]
+			}
+		],
+		"Price": 3.83,
+		"ShortDescription": "Esselte 5505, 9.88 oz (280 g), 1.57 x 5.71 x 2.4\" (40 x 145 x 61 mm)",
+		"Sku": "55050025",
+		"SpecificationOptions": [
+			{
+				"Key": "capacity",
+				"Value": "200 staples"
+			},
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "1.57 x 5.71 x 2.4\" (40 x 145 x 61 mm)"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Top"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "0.118\" (3 mm)"
+			},
+			{
+				"Key": "weight",
+				"Value": "9.88 oz (280 g)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Esselte 623875",
+		"Images": ["21835095-5730_Red.jpg"],
+		"Name": "Esselte 623875 Red stapler",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["red"]
+			}
+		],
+		"Price": 2.69,
+		"ShortDescription": "Esselte 623875",
+		"Sku": "623875",
+		"SpecificationOptions": [
+			{
+				"Key": "capacity",
+				"Value": "50 staples"
+			},
+			{
+				"Key": "material",
+				"Value": "Metal"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "1.97\" (5 cm)"
+			},
+			{
+				"Key": "type-of-staple",
+				"Value": "6/4 - 21/4"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Esselte Desktop Rapid Economy E12. Weight: 8.47 oz (240 g), Dimensions (WxDxH): 1.61 x 5.2 x 2.4\" (41 x 132 x 61 mm)",
+		"Images": [
+			"19365441-7773_Black.jpg",
+			"19365441-7773_Y.jpg",
+			"19365441-7773_20.jpg"
+		],
+		"Name": "Esselte Desktop Rapid Economy E12 Black",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["black"]
+			},
+			{
+				"Key": "stapling-capacity",
+				"Values": [
+					"20",
+					"50"
+				]
+			}
+		],
+		"Price": 1.52,
+		"ShortDescription": "Esselte Desktop Rapid Economy E12, 8.47 oz (240 g), 1.61 x 5.2 x 2.4\" (41 x 132 x 61 mm)",
+		"Sku": "20530420",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "1.61 x 5.2 x 2.4\" (41 x 132 x 61 mm)"
+			},
+			{
+				"Key": "material",
+				"Value": "ABS synthetics, Metal"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Top"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "2.17\" (5.5 cm)"
+			},
+			{
+				"Key": "type-of-staple",
+				"Value": "24/6, 26/6"
+			},
+			{
+				"Key": "weight",
+				"Value": "8.47 oz (240 g)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Esselte Desktop Rapid T3. Weight: 1.06 oz (30 g), Dimensions (WxDxH): 1.22 x 3.15 x 0.866\" (31 x 80 x 22 mm)",
+		"Images": [
+			"19365446-8722_Blue.jpg",
+			"19365446-8722_Y.jpg",
+			"19365446-8722_20.jpg"
+		],
+		"Name": "Esselte Desktop Rapid T3 Blue",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["blue"]
+			},
+			{
+				"Key": "stapling-capacity",
+				"Values": [
+					"20",
+					"50"
+				]
+			}
+		],
+		"Price": 6.59,
+		"ShortDescription": "Esselte Desktop Rapid T3, 1.06 oz (30 g), 1.22 x 3.15 x 0.866\" (31 x 80 x 22 mm)",
+		"Sku": "20710302",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "1.22 x 3.15 x 0.866\" (31 x 80 x 22 mm)"
+			},
+			{
+				"Key": "material",
+				"Value": "ABS synthetics, Metal"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Top"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "2.05\" (5.2 cm)"
+			},
+			{
+				"Key": "type-of-staple",
+				"Value": "No 10"
+			},
+			{
+				"Key": "weight",
+				"Value": "1.06 oz (30 g)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Esselte Rapid 100E. Weight: 6.61 lbs (3 kg), Dimensions (WxDxH): 6.1 x 12.2 x 7.09\" (155 x 310 x 180 mm)",
+		"Images": ["19418999_7540_50.jpg"],
+		"Name": "Esselte Rapid 100E",
+		"Options": [
+			{
+				"Key": "stapling-capacity",
+				"Values": [
+					"50",
+					"80"
+				]
+			}
+		],
+		"Price": 1.65,
+		"ShortDescription": "Esselte Rapid 100E, 6.61 lbs (3 kg), 6.1 x 12.2 x 7.09\" (155 x 310 x 180 mm)",
+		"Sku": "10801931",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "6.1 x 12.2 x 7.09\" (155 x 310 x 180 mm)"
+			},
+			{
+				"Key": "material",
+				"Value": "Metal, Plastic"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Front"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "3.66\" (9.3 cm)"
+			},
+			{
+				"Key": "type-of-staple",
+				"Value": "44/6-8+"
+			},
+			{
+				"Key": "weight",
+				"Value": "6.61 lbs (3 kg)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Esselte Rapid Supreme R5080e. Weight: 6.61 lbs (3 kg), Dimensions (WxDxH): 6.69 x 16.1 x 8.27\" (170 x 410 x 210 mm)",
+		"Images": [
+			"19518005-1568_Orange.jpg",
+			"19518005-1568_Silver.jpg",
+			"19518005-1568_Y.jpg",
+			"19518005-1568_80.jpg"
+		],
+		"Name": "Esselte Rapid Supreme R5080e Orange, Silver",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": [
+					"orange",
+					"silver"
+				]
+			},
+			{
+				"Key": "permanent-stapling",
+				"Values": [
+					"y",
+					"n"
+				]
+			}
+		],
+		"Price": 5.17,
+		"ShortDescription": "Esselte Rapid Supreme R5080e, 6.61 lbs (3 kg), 6.69 x 16.1 x 8.27\" (170 x 410 x 210 mm)",
+		"Sku": "20993411",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "6.69 x 16.1 x 8.27\" (170 x 410 x 210 mm)"
+			},
+			{
+				"Key": "material",
+				"Value": "Metal, Plastic"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "1.97\" (5 cm)"
+			},
+			{
+				"Key": "type-of-staple",
+				"Value": "5080"
+			},
+			{
+				"Key": "weight",
+				"Value": "6.61 lbs (3 kg)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "GBC 1101667. Color of product: Cream, Material: Metal. Package width: 7.09\" (180 mm), Package depth: 2.17\" (55 mm), Package height: 1.38\" (35 mm)",
+		"Images": ["24322036-Acco-1101667-1-1_Y.jpg"],
+		"Name": "GBC 1101667 Cream hole punch",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["cream"]
+			}
+		],
+		"Price": 0.73,
+		"ShortDescription": "GBC 1101667, Cream, Metal, 7.09\" (180 mm), 2.17\" (55 mm), 1.38\" (35 mm)",
+		"Sku": "1101667",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Cream"
+			},
+			{
+				"Key": "material",
+				"Value": "Metal"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "2.17\" (55 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "1.38\" (35 mm)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "7.09\" (180 mm)"
+			},
+			{
+				"Key": "quantity",
+				"Value": "1"
+			},
+			{
+				"Key": "soft-grip",
+				"Value": "N"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC ClickBind 150E. Width: 14.8\" (375 mm), Depth: 13.8\" (350 mm), Height: 5.12\" (130 mm)",
+		"Images": [
+			"27170311-Acco-4401930UK-1-1_Electric.jpg",
+			"27170311-Acco-4401930UK-1-6_330.jpg",
+			"27170311_3227_15.jpg"
+		],
+		"Name": "GBC ClickBind 150E 330sheets Black",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": [
+					"330",
+					"150"
+				]
+			},
+			{
+				"Key": "punch-capacity",
+				"Values": [
+					"15",
+					"30"
+				]
+			}
+		],
+		"Price": 0.21,
+		"ShortDescription": "GBC ClickBind 150E, 14.8\" (375 mm), 13.8\" (350 mm), 5.12\" (130 mm), 9.99 lbs (4.53 kg), 17.9\" (455 mm), 16.7\" (425 mm)",
+		"Sku": "4401930UK",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Black"
+			},
+			{
+				"Key": "depth",
+				"Value": "13.8\" (350 mm)"
+			},
+			{
+				"Key": "height",
+				"Value": "5.12\" (130 mm)"
+			},
+			{
+				"Key": "maximum-paper-width",
+				"Value": "11.7\" (29.7 cm)"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "16.7\" (425 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "7.87\" (200 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "11.5 lbs (5.23 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "17.9\" (455 mm)"
+			},
+			{
+				"Key": "weight",
+				"Value": "9.99 lbs (4.53 kg)"
+			},
+			{
+				"Key": "width",
+				"Value": "14.8\" (375 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC ClickMan. Width: 18\" (457 mm), Depth: 2.99\" (76 mm), Height: 3.7\" (94 mm)",
+		"Images": [
+			"671398_5061867894_Manual.jpg",
+			"671398_4225683471_145.jpg",
+			"671398_5061867894_6.jpg"
+		],
+		"Name": "GBC ClickMan 145sheets Grey,White",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": [
+					"145",
+					"115"
+				]
+			},
+			{
+				"Key": "punch-capacity",
+				"Values": [
+					"6",
+					"10"
+				]
+			}
+		],
+		"Price": 5.03,
+		"ShortDescription": "GBC ClickMan, 18\" (457 mm), 2.99\" (76 mm), 3.7\" (94 mm), 2.87 lbs (1.3 kg), 3.74\" (95 mm), 18.3\" (465 mm)",
+		"Sku": "CA610000",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Grey, White"
+			},
+			{
+				"Key": "country-of-origin",
+				"Value": "China"
+			},
+			{
+				"Key": "depth",
+				"Value": "2.99\" (76 mm)"
+			},
+			{
+				"Key": "format",
+				"Value": "A4"
+			},
+			{
+				"Key": "height",
+				"Value": "3.7\" (94 mm)"
+			},
+			{
+				"Key": "maximum-paper-width",
+				"Value": "11.7\" (29.7 cm)"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "method-of-control",
+				"Value": "Manual"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "18.3\" (465 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "3.27\" (83 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "3.06 lbs (1.39 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "3.74\" (95 mm)"
+			},
+			{
+				"Key": "weight",
+				"Value": "2.87 lbs (1.3 kg)"
+			},
+			{
+				"Key": "width",
+				"Value": "18\" (457 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC CombBind C100. Package width: 17.3\" (440 mm), Package depth: 17.3\" (440 mm), Package height: 12\" (305 mm)",
+		"Images": [
+			"20868362_4913901068_Comb-binding-machine.jpg",
+			"20868362_9013221055_Manual.jpg",
+			"20868362_4654114476_160.jpg"
+		],
+		"Name": "GBC CombBind C100 Comb binding machine 160sheets Black",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": [
+					"160",
+					"130"
+				]
+			}
+		],
+		"Price": 14.39,
+		"ShortDescription": "GBC CombBind C100, 17.3\" (440 mm), 17.3\" (440 mm), 12\" (305 mm), 6.28 lbs (2.85 kg)",
+		"Sku": "4401843",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Black"
+			},
+			{
+				"Key": "country-of-origin",
+				"Value": "Portugal"
+			},
+			{
+				"Key": "format",
+				"Value": "A4 & A3"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "method-of-control",
+				"Value": "Manual"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "17.3\" (440 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "12\" (305 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "6.28 lbs (2.85 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "17.3\" (440 mm)"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "9 sheets"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC CombBind C250Pro. Package width: 14.4\" (365 mm), Package depth: 17.5\" (445 mm), Package height: 10.9\" (278 mm)",
+		"Images": [
+			"8613573_4070258475_Comb-binding-machine.jpg",
+			"8613573_2179164037_Manual.jpg",
+			"8613573_0515778368_450.jpg"
+		],
+		"Name": "GBC CombBind C250Pro Comb binding machine 450sheets Silver",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["450"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["manual"]
+			}
+		],
+		"Price": 41.48,
+		"ShortDescription": "GBC CombBind C250Pro, 14.4\" (365 mm), 17.5\" (445 mm), 10.9\" (278 mm), 24.7 lbs (11.2 kg)",
+		"Sku": "IB271403",
+		"SpecificationOptions": [
+			{
+				"Key": "binding-comb-diameter-max",
+				"Value": "2.01\" (5.1 cm)"
+			},
+			{
+				"Key": "color-of-product",
+				"Value": "Silver"
+			},
+			{
+				"Key": "format",
+				"Value": "A4, A5, US Letter"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "17.5\" (445 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "10.9\" (278 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "24.7 lbs (11.2 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "14.4\" (365 mm)"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "20 sheets"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "21"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC Desktop VeloBinder. Package width: 13.7\" (348 mm), Package depth: 13.7\" (348 mm), Package height: 2.2\" (56 mm)",
+		"Images": [
+			"5489015_5097405352_Strip-binding-machine.jpg",
+			"5489015_0521996870_Manual.jpg",
+			"5489015_9225597759_200.jpg"
+		],
+		"Name": "GBC Desktop VeloBinder 200sheets Grey",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": [
+					"200",
+					"150"
+				]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["manual"]
+			}
+		],
+		"Price": 31.63,
+		"ShortDescription": "GBC Desktop VeloBinder, 13.7\" (348 mm), 13.7\" (348 mm), 2.2\" (56 mm), 3.57 lbs (1.62 kg)",
+		"Sku": "9707121",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Grey"
+			},
+			{
+				"Key": "country-of-origin",
+				"Value": "China"
+			},
+			{
+				"Key": "format",
+				"Value": "A4"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "13.7\" (348 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "2.2\" (56 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "3.57 lbs (1.62 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "13.7\" (348 mm)"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "20 sheets"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC MultiBind 212. Package width: 9.84\" (250 mm), Package depth: 19.5\" (495 mm), Package height: 6.5\" (165 mm)",
+		"Images": [
+			"25086316_7599752936_Multifunctional-binding-machine.jpg",
+			"25086316_4535294318_Manual.jpg",
+			"25086316_5072648575_145.jpg"
+		],
+		"Name": "GBC MultiBind 212 Multifunctional binding machine 145sheets Black,Silver",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["145"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["manual"]
+			},
+			{
+				"Key": "product-type",
+				"Values": ["multifunctional-binding-machine"]
+			}
+		],
+		"Price": 29.92,
+		"ShortDescription": "GBC MultiBind 212, 9.84\" (250 mm), 19.5\" (495 mm), 6.5\" (165 mm), 13 lbs (5.88 kg)",
+		"Sku": "IB275999",
+		"SpecificationOptions": [
+			{
+				"Key": "binding-capacity-comb-binding",
+				"Value": "145 sheets"
+			},
+			{
+				"Key": "binding-capacity-wire-binding",
+				"Value": "125 sheets"
+			},
+			{
+				"Key": "color-of-product",
+				"Value": "Black, Silver"
+			},
+			{
+				"Key": "country-of-origin",
+				"Value": "Portugal"
+			},
+			{
+				"Key": "format",
+				"Value": "A4"
+			},
+			{
+				"Key": "loop-wire-binding",
+				"Value": "Y"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "19.5\" (495 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "6.5\" (165 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "13 lbs (5.88 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "9.84\" (250 mm)"
+			},
+			{
+				"Key": "plastic-comb-binding",
+				"Value": "Y"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "12 sheets"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC MultiBind 230. Package width: 21.6\" (548 mm), Package depth: 9.37\" (238 mm), Package height: 19.3\" (490 mm)",
+		"Images": [
+			"1355262_1038766675_Multifunctional-binding-machine.jpg",
+			"1355262_1038766675_Manual.jpg",
+			"1355262_5601047068_450.jpg"
+		],
+		"Name": "GBC MultiBind 230 Multifunctional binding machine 450sheets Black,Grey",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["450"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["manual"]
+			},
+			{
+				"Key": "product-type",
+				"Values": ["multifunctional-binding-machine"]
+			}
+		],
+		"Price": 94.89,
+		"ShortDescription": "GBC MultiBind 230, 21.6\" (548 mm), 9.37\" (238 mm), 19.3\" (490 mm), 28.9 lbs (13.1 kg)",
+		"Sku": "4400423",
+		"SpecificationOptions": [
+			{
+				"Key": "adjustable-margin-depth",
+				"Value": "Y"
+			},
+			{
+				"Key": "auto-centering",
+				"Value": "Y"
+			},
+			{
+				"Key": "binding-capacity-comb-binding",
+				"Value": "450 sheets"
+			},
+			{
+				"Key": "binding-capacity-wire-binding",
+				"Value": "125 sheets"
+			},
+			{
+				"Key": "binding-comb-diameter-max",
+				"Value": "2.01\" (5.1 cm)"
+			},
+			{
+				"Key": "color-of-product",
+				"Value": "Black, Grey"
+			},
+			{
+				"Key": "country-of-origin",
+				"Value": "Portugal"
+			},
+			{
+				"Key": "double-handle",
+				"Value": "Y"
+			},
+			{
+				"Key": "format",
+				"Value": "A4/A5"
+			},
+			{
+				"Key": "loop-wire-binding",
+				"Value": "Y"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "orientation",
+				"Value": "Landscape"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "9.37\" (238 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "19.3\" (490 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "28.9 lbs (13.1 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "21.6\" (548 mm)"
+			},
+			{
+				"Key": "plastic-comb-binding",
+				"Value": "Y"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "30 sheets"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "21"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC MultiBind 320. Package width: 20.2\" (512 mm), Package depth: 20.2\" (512 mm), Package height: 20.2\" (512 mm)",
+		"Images": [
+			"5607273_6907158455_Multifunctional-binding-machine.jpg",
+			"5607273_6641027149_Manual.jpg",
+			"5607273_6907158455_450.jpg"
+		],
+		"Name": "GBC MultiBind 320 Multifunctional binding machine 450sheets Black,Silver",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["450"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["manual"]
+			},
+			{
+				"Key": "product-type",
+				"Values": ["multifunctional-binding-machine"]
+			}
+		],
+		"Price": 2.59,
+		"ShortDescription": "GBC MultiBind 320, 20.2\" (512 mm), 20.2\" (512 mm), 20.2\" (512 mm), 30 lbs (13.6 kg)",
+		"Sku": "IB271076",
+		"SpecificationOptions": [
+			{
+				"Key": "binding-capacity-comb-binding",
+				"Value": "450 sheets"
+			},
+			{
+				"Key": "binding-capacity-wire-binding",
+				"Value": "125 sheets"
+			},
+			{
+				"Key": "binding-comb-diameter-max",
+				"Value": "2.01\" (5.1 cm)"
+			},
+			{
+				"Key": "color-of-product",
+				"Value": "Black, Silver"
+			},
+			{
+				"Key": "country-of-origin",
+				"Value": "Portugal"
+			},
+			{
+				"Key": "format",
+				"Value": "A4/A5"
+			},
+			{
+				"Key": "housing-material",
+				"Value": "Metal"
+			},
+			{
+				"Key": "loop-wire-binding",
+				"Value": "Y"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "20.2\" (512 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "20.2\" (512 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "30 lbs (13.6 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "20.2\" (512 mm)"
+			},
+			{
+				"Key": "plastic-comb-binding",
+				"Value": "Y"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "20 sheets"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC MultiBind 420. Width: 16.7\" (425 mm), Depth: 16.7\" (425 mm), Height: 4.92\" (125 mm)",
+		"Images": [
+			"17651083-1044_Manual.jpg",
+			"17651083-1044_450.jpg",
+			"17651083-1044_20.jpg"
+		],
+		"Name": "GBC MultiBind 420 450sheets Black",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["450"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["manual"]
+			},
+			{
+				"Key": "punch-capacity",
+				"Values": ["20"]
+			}
+		],
+		"Price": 8.79,
+		"ShortDescription": "GBC MultiBind 420, 16.7\" (425 mm), 16.7\" (425 mm), 4.92\" (125 mm), 27.8 lbs (12.6 kg)",
+		"Sku": "664021",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Black"
+			},
+			{
+				"Key": "depth",
+				"Value": "16.7\" (425 mm)"
+			},
+			{
+				"Key": "height",
+				"Value": "4.92\" (125 mm)"
+			},
+			{
+				"Key": "maximum-paper-width",
+				"Value": "11.7\" (29.7 cm)"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "1"
+			},
+			{
+				"Key": "weight",
+				"Value": "27.8 lbs (12.6 kg)"
+			},
+			{
+				"Key": "width",
+				"Value": "16.7\" (425 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC Multibind 208. Package width: 16.4\" (417 mm), Package depth: 16.4\" (417 mm), Package height: 13.7\" (347 mm)",
+		"Images": [
+			"3944898_0135296551_Multifunctional-binding-machine.jpg",
+			"3944898_0135296551_Manual.jpg",
+			"3944898_2970554855_125.jpg"
+		],
+		"Name": "GBC Multibind 208 Multifunctional binding machine 125sheets Blue",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["125"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["manual"]
+			},
+			{
+				"Key": "product-type",
+				"Values": ["multifunctional-binding-machine"]
+			}
+		],
+		"Price": 12.56,
+		"ShortDescription": "GBC Multibind 208, 16.4\" (417 mm), 16.4\" (417 mm), 13.7\" (347 mm), 10.1 lbs (4.56 kg)",
+		"Sku": "4400110",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Blue"
+			},
+			{
+				"Key": "country-of-origin",
+				"Value": "China"
+			},
+			{
+				"Key": "format",
+				"Value": "A4"
+			},
+			{
+				"Key": "loop-wire-binding",
+				"Value": "Y"
+			},
+			{
+				"Key": "maximum-paper-width",
+				"Value": "11.7\" (29.7 cm)"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "16.4\" (417 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "13.7\" (347 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "10.1 lbs (4.56 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "16.4\" (417 mm)"
+			},
+			{
+				"Key": "plastic-comb-binding",
+				"Value": "Y"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "8 sheets"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "21"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC SureBind 500. Width: 15.7\" (400 mm), Depth: 19.7\" (500 mm), Height: 5.71\" (145 mm)",
+		"Images": [
+			"12785886_9431674176_Strip-binding-machine.jpg",
+			"12785886_4795273131_Manual.jpg",
+			"12785886_1558685190_500.jpg"
+		],
+		"Name": "GBC SureBind 500 500sheets Silver",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["500"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["manual"]
+			},
+			{
+				"Key": "product-type",
+				"Values": ["strip-binding-machine"]
+			}
+		],
+		"Price": 41.71,
+		"ShortDescription": "GBC SureBind 500, 15.7\" (400 mm), 19.7\" (500 mm), 5.71\" (145 mm), 16.1 lbs (7.3 kg), 11.9\" (301 mm), 22.3\" (567 mm)",
+		"Sku": "4400400",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Silver"
+			},
+			{
+				"Key": "country-of-origin",
+				"Value": "China"
+			},
+			{
+				"Key": "depth",
+				"Value": "19.7\" (500 mm)"
+			},
+			{
+				"Key": "format",
+				"Value": "A4, A3, A2"
+			},
+			{
+				"Key": "height",
+				"Value": "5.71\" (145 mm)"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "22.3\" (567 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "12.9\" (327 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "20.2 lbs (9.17 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "11.9\" (301 mm)"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "25 sheets"
+			},
+			{
+				"Key": "weight",
+				"Value": "16.1 lbs (7.3 kg)"
+			},
+			{
+				"Key": "width",
+				"Value": "15.7\" (400 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC SureBind System 2. Package width: 30.9\" (785 mm), Package depth: 24.9\" (633 mm), Package height: 21.3\" (540 mm)",
+		"Images": [
+			"24461334_1988208322_Electric.jpg",
+			"24461334_1988208322_500.jpg",
+			"24461334_1988208322_22.jpg"
+		],
+		"Name": "GBC SureBind System 2 500sheets Black,Grey",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["500"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["electric"]
+			},
+			{
+				"Key": "punch-capacity",
+				"Values": ["22"]
+			}
+		],
+		"Price": 29.54,
+		"ShortDescription": "GBC SureBind System 2, 30.9\" (785 mm), 24.9\" (633 mm), 21.3\" (540 mm), 72.3 lbs (32.8 kg)",
+		"Sku": "9707051",
+		"SpecificationOptions": [
+			{
+				"Key": "adjustable-edge-guide",
+				"Value": "Y"
+			},
+			{
+				"Key": "binding-time",
+				"Value": "12 s"
+			},
+			{
+				"Key": "color-of-product",
+				"Value": "Black, Grey"
+			},
+			{
+				"Key": "control-type",
+				"Value": "Push buttons"
+			},
+			{
+				"Key": "country-of-origin",
+				"Value": "Portugal"
+			},
+			{
+				"Key": "edge-guide",
+				"Value": "Y"
+			},
+			{
+				"Key": "format",
+				"Value": "A4 & A5"
+			},
+			{
+				"Key": "maximum-paper-width",
+				"Value": "8.27\" (21 cm)"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "24.9\" (633 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "21.3\" (540 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "72.3 lbs (32.8 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "30.9\" (785 mm)"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "10"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "GBC WireBind W25E. Width: 19.5\" (495 mm), Depth: 17.7\" (450 mm), Height: 6.69\" (170 mm)",
+		"Images": [
+			"12785892_2357479780_Wire-binding-machine.jpg",
+			"12785892_1313708312_Electric.jpg",
+			"12785892_2357479780_125.jpg"
+		],
+		"Name": "GBC WireBind W25E Wire binding machine 125sheets Black",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["125"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["electric"]
+			},
+			{
+				"Key": "product-type",
+				"Values": ["wire-binding-machine"]
+			}
+		],
+		"Price": 3.43,
+		"ShortDescription": "GBC WireBind W25E, 19.5\" (495 mm), 17.7\" (450 mm), 6.69\" (170 mm), 39.9 lbs (18.1 kg), 19.3\" (490 mm), 21.5\" (545 mm)",
+		"Sku": "4400427",
+		"SpecificationOptions": [
+			{
+				"Key": "ac-input-frequency",
+				"Value": "50"
+			},
+			{
+				"Key": "ac-input-voltage",
+				"Value": "230"
+			},
+			{
+				"Key": "color-of-product",
+				"Value": "Black"
+			},
+			{
+				"Key": "country-of-origin",
+				"Value": "Portugal"
+			},
+			{
+				"Key": "depth",
+				"Value": "17.7\" (450 mm)"
+			},
+			{
+				"Key": "format",
+				"Value": "A4/A3/A5"
+			},
+			{
+				"Key": "height",
+				"Value": "6.69\" (170 mm)"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "21.5\" (545 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "9.25\" (235 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "41 lbs (18.6 kg)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "19.3\" (490 mm)"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "25 sheets"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "34"
+			},
+			{
+				"Key": "weight",
+				"Value": "39.9 lbs (18.1 kg)"
+			},
+			{
+				"Key": "width",
+				"Value": "19.5\" (495 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "Kensington E2100758. Color of product: Blue. Package width: 4.33\" (110 mm), Package depth: 1.57\" (40 mm), Package height: 2.56\" (65 mm)",
+		"Images": ["26911587-5434_Blue.jpg"],
+		"Name": "Kensington E2100758 Blue hole punch",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["blue"]
+			}
+		],
+		"Price": 7.19,
+		"ShortDescription": "Kensington E2100758, Blue, 4.33\" (110 mm), 1.57\" (40 mm), 2.56\" (65 mm)",
+		"Sku": "E2100758",
+		"SpecificationOptions": [
+			{
+				"Key": "package-depth",
+				"Value": "1.57\" (40 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "2.56\" (65 mm)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "4.33\" (110 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "Kensington E2100762. Color of product: Blue. Package width: 43.7\" (1110 mm), Package depth: 1.97\" (50 mm), Package height: 3.15\" (80 mm)",
+		"Images": ["26911589-Acco-E2100762-1-1_Blue.jpg"],
+		"Name": "Kensington E2100762 Blue hole punch",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["blue"]
+			}
+		],
+		"Price": 9.5,
+		"ShortDescription": "Kensington E2100762, Blue, 43.7\" (1110 mm), 1.97\" (50 mm), 3.15\" (80 mm)",
+		"Sku": "E2100762",
+		"SpecificationOptions": [
+			{
+				"Key": "package-depth",
+				"Value": "1.97\" (50 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "3.15\" (80 mm)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "43.7\" (1110 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "Kensington E2100766.Package width: 4.33\" (110 mm), Package depth: 2.17\" (55 mm), Package height: 3.74\" (95 mm)",
+		"Images": [
+			"26911591-Acco-E2100766-1-1_Blue.jpg",
+			"26911592-Acco-E2100767-1-1_Black.jpg"
+		],
+		"Name": "Kensington E2100766 hole punch",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": [
+					"blue",
+					"black"
+				]
+			}
+		],
+		"Price": 9.36,
+		"ShortDescription": "Kensington E2100766, 4.33\" (110 mm), 2.17\" (55 mm), 3.74\" (95 mm)",
+		"Sku": "E2100766",
+		"SpecificationOptions": [
+			{
+				"Key": "package-depth",
+				"Value": "2.17\" (55 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "3.74\" (95 mm)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "4.33\" (110 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "Kensington R8003E. Color of product: Black. Package width: 11\" (280 mm), Package depth: 7.48\" (190 mm), Package height: 7.09\" (180 mm)",
+		"Images": ["26911859-Acco-R8003E-1-2_Black.jpg"],
+		"Name": "Kensington R8003E Black hole punch",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["black"]
+			}
+		],
+		"Price": 6.16,
+		"ShortDescription": "Kensington R8003E, Black, 11\" (280 mm), 7.48\" (190 mm), 7.09\" (180 mm)",
+		"Sku": "R8003E",
+		"SpecificationOptions": [
+			{
+				"Key": "package-depth",
+				"Value": "7.48\" (190 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "7.09\" (180 mm)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "11\" (280 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "Leitz 17286064. Punch capacity: 2 sheets, Color of product: green, Metallic, Material: Plastic, Stainless steel. Weight: 1.06 oz (30 g). Dimensions (WxDxH): 1.18 x 4.92 x 0.472\" (30 x 125 x 12 mm)",
+		"Images": ["19345609-694_80.jpg"],
+		"Name": "Leitz 17286064 2sheets Green, Metallic hole punch",
+		"Options": [
+			{
+				"Key": "punch-distance",
+				"Values": ["80"]
+			}
+		],
+		"Price": 9.15,
+		"ShortDescription": "Leitz 17286064, 2 sheets, green, Metallic, Plastic, Stainless steel, 3.15\" (8 cm), 1.06 oz (30 g), 1.18 x 4.92 x 0.472\" (30 x 125 x 12 mm)",
+		"Sku": "17286064",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Green, Metallic"
+			},
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "1.18 x 4.92 x 0.472\" (30 x 125 x 12 mm)"
+			},
+			{
+				"Key": "material",
+				"Value": "Plastic, Stainless steel"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "2 sheets"
+			},
+			{
+				"Key": "weight",
+				"Value": "1.06 oz (30 g)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "Leitz 50220085. Punch capacity: 16 sheets, Color of product: Grey. Weight: 33.2 oz (940 g). Dimensions (WxDxH): 10.4 x 2.64 x 4.49\" (265 x 67 x 114 mm)",
+		"Images": ["5401260_8775_Grey.jpg"],
+		"Name": "Leitz 50220085 16sheets Grey hole punch",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["grey"]
+			}
+		],
+		"Price": 8.26,
+		"ShortDescription": "Leitz 50220085, 16 sheets, Grey, 33.2 oz (940 g), 10.4 x 2.64 x 4.49\" (265 x 67 x 114 mm)",
+		"Sku": "50220085",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "10.4 x 2.64 x 4.49\" (265 x 67 x 114 mm)"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "16 sheets"
+			},
+			{
+				"Key": "weight",
+				"Value": "33.2 oz (940 g)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Leitz 5500. Weight: 5.64 oz (160 g), Dimensions (WxDxH): 1.42 x 2.2 x 5.55\" (36 x 56 x 141 mm)",
+		"Images": [
+			"3913340-2700_Black.jpg",
+			"5635421-2419_Blue.jpg",
+			"3913340-2700_Stainless-steel.jpg"
+		],
+		"Name": "Leitz 5500, Stainless steel",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": [
+					"black",
+					"stainless-steel",
+					"blue"
+				]
+			}
+		],
+		"Price": 8.76,
+		"ShortDescription": "Leitz 5500, 5.64 oz (160 g), 1.42 x 2.2 x 5.55\" (36 x 56 x 141 mm)",
+		"Sku": "5500009",
+		"SpecificationOptions": [
+			{
+				"Key": "capacity",
+				"Value": "200 staples"
+			},
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "1.42 x 2.2 x 5.55\" (36 x 56 x 141 mm)"
+			},
+			{
+				"Key": "material",
+				"Value": "Metal, Plastic"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Top"
+			},
+			{
+				"Key": "type-of-staple",
+				"Value": "24/6, 26/6"
+			},
+			{
+				"Key": "weight",
+				"Value": "5.64 oz (160 g)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Leitz 55510084. Weight: 2.2 lbs (1 kg), Dimensions (WxDxH): 2.95 x 11.8 x 5.51\" (75 x 300 x 140 mm)",
+		"Images": [
+			"364838_2925_Y.jpg",
+			"364838_0086_Silver.jpg",
+			"364838_2925_80.jpg"
+		],
+		"Name": "Leitz 55510084 Silver stapler",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["silver"]
+			},
+			{
+				"Key": "staples-included",
+				"Values": ["y"]
+			},
+			{
+				"Key": "stapling-capacity",
+				"Values": ["80"]
+			}
+		],
+		"Price": 5.73,
+		"ShortDescription": "Leitz 55510084, 2.2 lbs (1 kg), 2.95 x 11.8 x 5.51\" (75 x 300 x 140 mm)",
+		"Sku": "55510084",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "2.95 x 11.8 x 5.51\" (75 x 300 x 140 mm)"
+			},
+			{
+				"Key": "material",
+				"Value": "Metal, Plastic"
+			},
+			{
+				"Key": "permanent-stapling",
+				"Value": "Y"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "1.57\" (4 cm)"
+			},
+			{
+				"Key": "type-of-staple",
+				"Value": "Leitz 5591, 5592, 5593, 5594"
+			},
+			{
+				"Key": "weight",
+				"Value": "2.2 lbs (1 kg)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Leitz 55640053. Weight: 8.47 oz (240 g), Dimensions (WxDxH): 3.19 x 1.02 x 6.54\" (81 x 26 x 166 mm)",
+		"Images": [
+			"34639400_1994954477_81-x-26-x-166.jpg",
+			"34639400_1994954477_Green.jpg",
+			"34639400_1994954477_Stainless-steel.jpg",
+			"34639400_1994954477_Y.jpg"
+		],
+		"Name": "Leitz 55640053 Green, Stainless steel stapler",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": [
+					"green",
+					"stainless-steel"
+				]
+			}
+		],
+		"Price": 8.47,
+		"ShortDescription": "Leitz 55640053, 8.47 oz (240 g), 3.19 x 1.02 x 6.54\" (81 x 26 x 166 mm)",
+		"Sku": "55640053",
+		"SpecificationOptions": [
+			{
+				"Key": "capacity",
+				"Value": "150 staples"
+			},
+			{
+				"Key": "material",
+				"Value": "Metal"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Rear"
+			},
+			{
+				"Key": "stapling-capacity",
+				"Value": "15 sheets"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "1.91\" (4.85 cm)"
+			},
+			{
+				"Key": "type-of-staple",
+				"Value": "P2 No. 10"
+			},
+			{
+				"Key": "weight",
+				"Value": "8.47 oz (240 g)"
+			}
+		]
+	},
+	{
+		"Categories": ["Stapler & Hole Punch Sets"],
+		"Description": "Leitz 55996024. Color of product: Red, Coloration: Monotone, Certification: CE. Stapler punch capacity: 10 sheets, Hole punch capacity: 10 sheets, Staples loading system: Top. Stapler dimensions (W x D x H): 9.45 x 3.35 x 5.31\" (240 x 85 x 135 mm), Hole punch weight: 7.76 oz (220 g)",
+		"Images": [
+			"36283070_5902244950_Red.jpg",
+			"36283070_5902244950_10.jpg"
+		],
+		"Name": "Leitz 55996024 stapler & hole punch set",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["red"]
+			},
+			{
+				"Key": "hole-punch-capacity",
+				"Values": ["10"]
+			},
+			{
+				"Key": "stapler-punch-capacity",
+				"Values": ["10"]
+			}
+		],
+		"Price": 7.13,
+		"ShortDescription": "Leitz 55996024, Red, Monotone, CE, 10 sheets, 10 sheets, Top",
+		"Sku": "55996024",
+		"SpecificationOptions": [
+			{
+				"Key": "certification",
+				"Value": "CE"
+			},
+			{
+				"Key": "clinch-type",
+				"Value": "Standard clinch"
+			},
+			{
+				"Key": "coloration",
+				"Value": "Monotone"
+			},
+			{
+				"Key": "ergonomic-grip",
+				"Value": "Y"
+			},
+			{
+				"Key": "format",
+				"Value": "A4"
+			},
+			{
+				"Key": "hole-diameter",
+				"Value": "0.217\" (5.5 mm)"
+			},
+			{
+				"Key": "hole-punch-weight",
+				"Value": "7.76 oz (220 g)"
+			},
+			{
+				"Key": "paper-alignment-indicator",
+				"Value": "Y"
+			},
+			{
+				"Key": "paperclips-included",
+				"Value": "N"
+			},
+			{
+				"Key": "punch-distance",
+				"Value": "3.15\" (8 cm)"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "2"
+			},
+			{
+				"Key": "staple-remover",
+				"Value": "N"
+			},
+			{
+				"Key": "stapler-dimensions-wxdxh",
+				"Value": "9.45 x 3.35 x 5.31\" (240 x 85 x 135 mm)"
+			},
+			{
+				"Key": "staples-included",
+				"Value": "Y"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Top"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "Leitz 73880000. Width: 22\" (560 mm), Depth: 18.5\" (470 mm), Height: 6.3\" (160 mm). Dimensions (WxDxH): 18.1 x 20.1 x 6.3\" (460 x 510 x 160 mm)",
+		"Images": [
+			"1749805-1568_Manual.jpg",
+			"1749805-1568_280.jpg"
+		],
+		"Name": "Leitz 73880000 280sheets binding machine",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["280"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["manual"]
+			}
+		],
+		"Price": 2.79,
+		"ShortDescription": "Leitz 73880000, 22\" (560 mm), 18.5\" (470 mm), 6.3\" (160 mm), 5.18 lbs (2.35 kg), 18.1 x 20.1 x 6.3\" (460 x 510 x 160 mm)",
+		"Sku": "73880000",
+		"SpecificationOptions": [
+			{
+				"Key": "depth",
+				"Value": "18.5\" (470 mm)"
+			},
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "18.1 x 20.1 x 6.3\" (460 x 510 x 160 mm)"
+			},
+			{
+				"Key": "format",
+				"Value": "A4"
+			},
+			{
+				"Key": "height",
+				"Value": "6.3\" (160 mm)"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "orientation",
+				"Value": "Landscape"
+			},
+			{
+				"Key": "weight",
+				"Value": "5.18 lbs (2.35 kg)"
+			},
+			{
+				"Key": "width",
+				"Value": "22\" (560 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "Leitz AKTO. Punch capacity: 30 sheets, Color of product: Silver, Hole diameter: 0.118\" (3 mm). Width: 9.09\" (231 mm), Depth: 13.2\" (335 mm), Height: 9.37\" (238 mm)",
+		"Images": [
+			"1943146-55_A2.jpg",
+			"1943146-55_A3.jpg",
+			"1943146-55_A4.jpg",
+			"1943146-55_A5.jpg",
+			"1943146-55_A6.jpg",
+			"1943146-55_Folio.jpg",
+			"1943146-55_US-Quart.jpg"
+		],
+		"Name": "Leitz AKTO 30sheets Silver hole punch",
+		"Options": [
+			{
+				"Key": "format",
+				"Values": [
+					"a2",
+					"a3",
+					"a4",
+					"a5",
+					"a6",
+					"folio",
+					"us-quart"
+				]
+			}
+		],
+		"Price": 1.27,
+		"ShortDescription": "Leitz AKTO, 30 sheets, Silver, 0.118\" (3 mm), A2, A3, A4, A5, A6, Folio, US-Quart,, 9.09\" (231 mm), 13.2\" (335 mm)",
+		"Sku": "51140084",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Silver"
+			},
+			{
+				"Key": "depth",
+				"Value": "13.2\" (335 mm)"
+			},
+			{
+				"Key": "height",
+				"Value": "9.37\" (238 mm)"
+			},
+			{
+				"Key": "hole-diameter",
+				"Value": "0.118\" (3 mm)"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "30 sheets"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "6"
+			},
+			{
+				"Key": "quantity",
+				"Value": "1"
+			},
+			{
+				"Key": "weight",
+				"Value": "4.1 lbs (1.86 kg)"
+			},
+			{
+				"Key": "width",
+				"Value": "9.09\" (231 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "Leitz ComBIND 300. Weight: 17.4 lbs (7.87 kg). Dimensions (WxDxH): 15.6 x 17.3 x 5.51\" (395 x 440 x 140 mm)",
+		"Images": [
+			"3591223_6784_145.jpg",
+			"3591223-8559_15.jpg",
+			"3591223-8559_305.jpg"
+		],
+		"Name": "Leitz ComBIND 300 145sheets",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["145"]
+			},
+			{
+				"Key": "maximum-paper-width",
+				"Values": ["305"]
+			},
+			{
+				"Key": "punch-capacity",
+				"Values": ["15"]
+			}
+		],
+		"Price": 3.17,
+		"ShortDescription": "Leitz ComBIND 300, 17.4 lbs (7.87 kg), 15.6 x 17.3 x 5.51\" (395 x 440 x 140 mm)",
+		"Sku": "132630",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "15.6 x 17.3 x 5.51\" (395 x 440 x 140 mm)"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "21"
+			},
+			{
+				"Key": "weight",
+				"Value": "17.4 lbs (7.87 kg)"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "Leitz ComBind 500. Width: 21.7\" (550 mm), Depth: 6.69\" (170 mm), Height: 17.7\" (450 mm)",
+		"Images": [
+			"27170216_7738_Electric-manual.jpg",
+			"27170216_7738_500.jpg",
+			"27170216_7738_28.jpg"
+		],
+		"Name": "Leitz ComBind 500 500sheets Blue,Silver",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["500"]
+			},
+			{
+				"Key": "method-of-control",
+				"Values": ["electric-manual"]
+			},
+			{
+				"Key": "punch-capacity",
+				"Values": ["28"]
+			}
+		],
+		"Price": 65.36,
+		"ShortDescription": "Leitz ComBind 500, 21.7\" (550 mm), 6.69\" (170 mm), 17.7\" (450 mm), 37.5 lbs (17 kg)",
+		"Sku": "73240000",
+		"SpecificationOptions": [
+			{
+				"Key": "ac-input-voltage",
+				"Value": "230"
+			},
+			{
+				"Key": "color-of-product",
+				"Value": "Blue, Silver"
+			},
+			{
+				"Key": "depth",
+				"Value": "6.69\" (170 mm)"
+			},
+			{
+				"Key": "height",
+				"Value": "17.7\" (450 mm)"
+			},
+			{
+				"Key": "maximum-paper-width",
+				"Value": "12\" (30.5 cm)"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "1"
+			},
+			{
+				"Key": "weight",
+				"Value": "37.5 lbs (17 kg)"
+			},
+			{
+				"Key": "width",
+				"Value": "21.7\" (550 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "Leitz 50080035, NeXXt. Punch capacity: 30 sheets, Color of product: Blue, White, Punch distance: 3.15\" (8 cm). Width: 4.21\" (107 mm), Depth: 5.39\" (137 mm), Height: 3.94\" (100 mm)",
+		"Images": [
+			"5612556-834_A4.jpg",
+			"5612556-834_A5.jpg",
+			"5612556-834_A6.jpg",
+			"5612556-834_Folio.jpg",
+			"5612556-834_US-Quart.jpg"
+		],
+		"Name": "Leitz NeXXt 50080035 30sheets Blue,White hole punch",
+		"Options": [
+			{
+				"Key": "format",
+				"Values": [
+					"a4",
+					"a5",
+					"a6",
+					"folio",
+					"us-quart"
+				]
+			}
+		],
+		"Price": 9.57,
+		"ShortDescription": "Leitz NeXXt 50080035, 30 sheets, Blue, White, 3.15\" (8 cm), 0.118\" (3 mm), A4, A5, A6, Folio, US-Quart, 4.21\" (107 mm)",
+		"Sku": "50080035",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Blue, White"
+			},
+			{
+				"Key": "depth",
+				"Value": "5.39\" (137 mm)"
+			},
+			{
+				"Key": "height",
+				"Value": "3.94\" (100 mm)"
+			},
+			{
+				"Key": "hole-diameter",
+				"Value": "0.118\" (3 mm)"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "30 sheets"
+			},
+			{
+				"Key": "punch-distance",
+				"Value": "3.15\" (8 cm)"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "2"
+			},
+			{
+				"Key": "quantity",
+				"Value": "1"
+			},
+			{
+				"Key": "weight",
+				"Value": "13.3 oz (378 g)"
+			},
+			{
+				"Key": "width",
+				"Value": "4.21\" (107 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Leitz 55612062, NeXXt. Width: 5.31\" (135 mm), Depth: 9.45\" (240 mm), Height: 3.66\" (93 mm)",
+		"Images": [
+			"26806890_1133021240_410.jpg",
+			"26806890_1133021240_Metallic.jpg",
+			"26806890_1133021240_Violet.jpg",
+			"26806890_1133021240_Y.jpg"
+		],
+		"Name": "Leitz NeXXt 55612062 Metallic, Violet stapler",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": [
+					"metallic",
+					"violet"
+				]
+			}
+		],
+		"Price": 4.15,
+		"ShortDescription": "Leitz NeXXt 55612062, 5.31\" (135 mm), 9.45\" (240 mm), 3.66\" (93 mm), 14.5 oz (410 g)",
+		"Sku": "55612062",
+		"SpecificationOptions": [
+			{
+				"Key": "capacity",
+				"Value": "100 staples"
+			},
+			{
+				"Key": "depth",
+				"Value": "9.45\" (240 mm)"
+			},
+			{
+				"Key": "height",
+				"Value": "3.66\" (93 mm)"
+			},
+			{
+				"Key": "material",
+				"Value": "Metal, Plastic"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "permanent-stapling",
+				"Value": "Y"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Rear"
+			},
+			{
+				"Key": "stapling-capacity",
+				"Value": "10 sheets"
+			},
+			{
+				"Key": "type-of-staple",
+				"Value": "P2 Nr. 10"
+			},
+			{
+				"Key": "width",
+				"Value": "5.31\" (135 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "Leitz NeXXt Series WOW Metal Mini Hole Punch. Punch capacity: 10 sheets, Color of product: Black, Metallic, White, Material: Metal. Weight: 7.76 oz (220 g). Dimensions (WxDxH): 2.64 x 3.94 x 2.8\" (67 x 100 x 71 mm)",
+		"Images": ["19345950-8349_Metal.jpg"],
+		"Name": "Leitz NeXXt Series WOW Metal Mini Hole Punch 10sheets",
+		"Options": [
+			{
+				"Key": "material",
+				"Values": [
+					"metal",
+					"aluminium"
+				]
+			}
+		],
+		"Price": 9.47,
+		"ShortDescription": "Leitz NeXXt Series WOW Metal Mini Hole Punch, 10 sheets, Black, Metallic, White, Metal, 7.76 oz (220 g), 2.64 x 3.94 x 2.8\" (67 x 100 x 71 mm)",
+		"Sku": "50602001",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Black, Metallic, White"
+			},
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "2.64 x 3.94 x 2.8\" (67 x 100 x 71 mm)"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "10 sheets"
+			},
+			{
+				"Key": "weight",
+				"Value": "7.76 oz (220 g)"
+			}
+		]
+	},
+	{
+		"Categories": ["Electric Staplers"],
+		"Description": "Leitz WOW, NeXXt. Stapling capacity: 10 sheets, Color of product: Purple, White. Power source: Battery. Width: 1.97\" (50 mm), Depth: 6.06\" (154 mm), Height: 2.6\" (66 mm)",
+		"Images": [
+			"30130144_0857737750_10.jpg",
+			"30130144_7346774519_Battery.jpg"
+		],
+		"Name": "Leitz NeXXt WOW 10sheets electric stapler",
+		"Options": [
+			{
+				"Key": "power-source",
+				"Values": ["battery"]
+			},
+			{
+				"Key": "stapling-capacity",
+				"Values": ["10"]
+			}
+		],
+		"Price": 5.24,
+		"ShortDescription": "Leitz NeXXt WOW, 10 sheets, Purple, White, Battery, 1.97\" (50 mm), 6.06\" (154 mm), 2.6\" (66 mm)",
+		"Sku": "55661062",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Purple, White"
+			},
+			{
+				"Key": "depth",
+				"Value": "6.06\" (154 mm)"
+			},
+			{
+				"Key": "height",
+				"Value": "2.6\" (66 mm)"
+			},
+			{
+				"Key": "staple-remover",
+				"Value": "N"
+			},
+			{
+				"Key": "weight",
+				"Value": "7.76 oz (220 g)"
+			},
+			{
+				"Key": "width",
+				"Value": "1.97\" (50 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "Leitz ThermoBIND 300. Weight: 5.51 lbs (2.5 kg). Power requirements: AC 220 - 240V, Dimensions (WxDxH): 9.25 x 16.2 x 5.51\" (235 x 412 x 140 mm)",
+		"Images": [
+			"3632273-977_350.jpg",
+			"3632273-977_A4.jpg",
+			"3632273-977_A5.jpg"
+		],
+		"Name": "Leitz ThermoBIND 300 350sheets",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["350"]
+			},
+			{
+				"Key": "maximum-paper-width",
+				"Values": [
+					"a4",
+					"a5"
+				]
+			}
+		],
+		"Price": 7.85,
+		"ShortDescription": "Leitz ThermoBIND 300, 5.51 lbs (2.5 kg), AC 220 - 240V, 9.25 x 16.2 x 5.51\" (235 x 412 x 140 mm)",
+		"Sku": "177182",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "9.25 x 16.2 x 5.51\" (235 x 412 x 140 mm)"
+			},
+			{
+				"Key": "power-requirements",
+				"Value": "AC 220 - 240V"
+			},
+			{
+				"Key": "punch-cycle-speed",
+				"Value": "35 s"
+			},
+			{
+				"Key": "weight",
+				"Value": "5.51 lbs (2.5 kg)"
+			}
+		]
+	},
+	{
+		"Categories": ["Hole Punches"],
+		"Description": "Leitz Topstyle Desktop perforator. Punch capacity: 25 sheets, Color of product: Red, Punch distance: 3.15\" (8 cm). Weight: 10.6 oz (300 g). Dimensions (WxDxH): 4.41 x 2.52 x 4.13\" (112 x 64 x 105 mm)",
+		"Images": ["1943153-4994_80.jpg"],
+		"Name": "Leitz Topstyle Desktop perforator 25sheets Red hole punch",
+		"Options": [
+			{
+				"Key": "punch-distance",
+				"Values": [
+					"80",
+					"60"
+				]
+			}
+		],
+		"Price": 6.75,
+		"ShortDescription": "Leitz Topstyle Desktop perforator, 25 sheets, Red, 3.15\" (8 cm), 10.6 oz (300 g), 4.41 x 2.52 x 4.13\" (112 x 64 x 105 mm)",
+		"Sku": "50050025",
+		"SpecificationOptions": [
+			{
+				"Key": "color-of-product",
+				"Value": "Red"
+			},
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "4.41 x 2.52 x 4.13\" (112 x 64 x 105 mm)"
+			},
+			{
+				"Key": "punch-capacity",
+				"Value": "25 sheets"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "2"
+			},
+			{
+				"Key": "weight",
+				"Value": "10.6 oz (300 g)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Leitz WOW. Width: 0.945\" (24 mm), Depth: 6.3\" (160 mm), Height: 3.23\" (82 mm)",
+		"Images": [
+			"36499334_8527376354_Y.jpg",
+			"36499334_8527376354_Turquoise.jpg",
+			"36499334_7798438137_15.jpg"
+		],
+		"Name": "Leitz WOW Turquoise",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["turquoise"]
+			},
+			{
+				"Key": "stapling-capacity",
+				"Values": [
+					"15",
+					"20"
+				]
+			}
+		],
+		"Price": 8.18,
+		"ShortDescription": "Leitz WOW, 0.945\" (24 mm), 6.3\" (160 mm), 3.23\" (82 mm), 10.2 oz (290 g)",
+		"Sku": "55312051",
+		"SpecificationOptions": [
+			{
+				"Key": "depth",
+				"Value": "6.3\" (160 mm)"
+			},
+			{
+				"Key": "height",
+				"Value": "3.23\" (82 mm)"
+			},
+			{
+				"Key": "media-weight",
+				"Value": "80 g/m�"
+			},
+			{
+				"Key": "staples-included",
+				"Value": "Yes"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Rear"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "1.95\" (4.95 cm)"
+			},
+			{
+				"Key": "type-of-staple",
+				"Value": "P2, No. 10"
+			},
+			{
+				"Key": "weight",
+				"Value": "10.2 oz (290 g)"
+			},
+			{
+				"Key": "width",
+				"Value": "0.945\" (24 mm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "Leitz comBIND 100 . Weight: 3.75 lbs (1.7 kg). Dimensions (WxDxH): 14.6 x 4.72 x 3.54\" (370 x 120 x 90 mm)",
+		"Images": [
+			"1898638-2890_145.jpg",
+			"1898638-2890_8.jpg",
+			"1898638-2890_A4.jpg",
+			"1898638-2890_Letter&US.jpg",
+			"1898638-2890_A5..jpg"
+		],
+		"Name": "Leitz comBIND 100 145sheets",
+		"Options": [
+			{
+				"Key": "maximum-paper-width",
+				"Values": [
+					"a4",
+					"letter&us",
+					"a5."
+				]
+			},
+			{
+				"Key": "punch-capacity",
+				"Values": [
+					"8",
+					"12"
+				]
+			}
+		],
+		"Price": 7.18,
+		"ShortDescription": "Leitz comBIND 100 , 3.75 lbs (1.7 kg), 14.6 x 4.72 x 3.54\" (370 x 120 x 90 mm)",
+		"Sku": "73010000",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "14.6 x 4.72 x 3.54\" (370 x 120 x 90 mm)"
+			},
+			{
+				"Key": "power-requirements",
+				"Value": "N"
+			},
+			{
+				"Key": "punch-holes-quantity",
+				"Value": "21"
+			},
+			{
+				"Key": "weight",
+				"Value": "3.75 lbs (1.7 kg)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Leitz comBIND 500 Machine. Dimensions (WxDxH): 21.7 x 17.7 x 6.69\" (550 x 450 x 170 mm)",
+		"Images": [
+			"7991362-324_Grey.jpg",
+			"7991362-324_Multicolour.jpg",
+			"7991362-324_Y.jpg",
+			"7991362-324_500.jpg"
+		],
+		"Name": "Leitz comBIND 500 Machine Grey, Multicolor",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": [
+					"grey",
+					"multicolour"
+				]
+			},
+			{
+				"Key": "permanent-stapling",
+				"Values": ["y"]
+			},
+			{
+				"Key": "stapling-capacity",
+				"Values": ["500"]
+			}
+		],
+		"Price": 8.37,
+		"ShortDescription": "Leitz comBIND 500 Machine, 21.7 x 17.7 x 6.69\" (550 x 450 x 170 mm)",
+		"Sku": "73020000",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "21.7 x 17.7 x 6.69\" (550 x 450 x 170 mm)"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "0.559\" (1.42 cm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Rexel Apollo",
+		"Images": [
+			"1558822-Acco-2100921-1-1_Black.jpg",
+			"1558822-6560_Silver.jpg",
+			"1558822-Acco-2100921-1-2_Y.jpg",
+			"1558822-6560_180.jpg"
+		],
+		"Name": "Rexel Apollo Black, Silver",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": [
+					"black",
+					"silver"
+				]
+			}
+		],
+		"Price": 5.28,
+		"ShortDescription": "Rexel Apollo",
+		"Sku": "2100921",
+		"SpecificationOptions": [
+			{
+				"Key": "capacity",
+				"Value": "23 staples"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Rexel Gazelle. Weight: 6.7 oz (190 g), Dimensions (WxDxH): 1.3 x 5.31 x 2.48\" (33 x 135 x 63 mm). Package dimensions (WxDxH): 2.44 x 1.54 x 7.6\" (62 x 39 x 193 mm), Package width: 2.44\" (62 mm), Package depth: 1.54\" (39 mm)",
+		"Images": [
+			"479675_4187_190.jpg",
+			"479675_4187_Black.jpg",
+			"479675_9036_Silver.jpg",
+			"479675_9036_Y.jpg"
+		],
+		"Name": "Rexel Gazelle Black, Silver",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": [
+					"black",
+					"silver"
+				]
+			}
+		],
+		"Price": 8.27,
+		"ShortDescription": "Rexel Gazelle, 6.7 oz (190 g), 1.3 x 5.31 x 2.48\" (33 x 135 x 63 mm), 2.44 x 1.54 x 7.6\" (62 x 39 x 193 mm), 2.44\" (62 mm), 1.54\" (39 mm), 7.6\" (193 mm)",
+		"Sku": "2100790",
+		"SpecificationOptions": [
+			{
+				"Key": "dimensions-wxdxh",
+				"Value": "1.3 x 5.31 x 2.48\" (33 x 135 x 63 mm)"
+			},
+			{
+				"Key": "package-depth",
+				"Value": "1.54\" (39 mm)"
+			},
+			{
+				"Key": "package-dimensions-wxdxh",
+				"Value": "2.44 x 1.54 x 7.6\" (62 x 39 x 193 mm)"
+			},
+			{
+				"Key": "package-height",
+				"Value": "7.6\" (193 mm)"
+			},
+			{
+				"Key": "package-weight",
+				"Value": "7.41 oz (210 g)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "2.44\" (62 mm)"
+			},
+			{
+				"Key": "staple-reload-window",
+				"Value": "Y"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Top"
+			},
+			{
+				"Key": "stapling-capacity",
+				"Value": "25 sheets"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "1.97\" (5 cm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Rexel Matador. Weight: 10.3 oz (292 g). Package dimensions (WxDxH): 5.91 x 1.57 x 4.02\" (150 x 40 x 102 mm), Package weight: 11.3 oz (321 g)",
+		"Images": [
+			"12785266-9223_321.jpg",
+			"12785266-9223_Blue.jpg",
+			"12785266-9223_Silver.jpg",
+			"12785266-9223_Y.jpg"
+		],
+		"Name": "Rexel Matador Blue, Silver",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": [
+					"blue",
+					"silver"
+				]
+			}
+		],
+		"Price": 5.52,
+		"ShortDescription": "Rexel Matador, 10.3 oz (292 g), 5.91 x 1.57 x 4.02\" (150 x 40 x 102 mm), 11.3 oz (321 g)",
+		"Sku": "2100951",
+		"SpecificationOptions": [
+			{
+				"Key": "material",
+				"Value": "Metal"
+			},
+			{
+				"Key": "package-dimensions-wxdxh",
+				"Value": "5.91 x 1.57 x 4.02\" (150 x 40 x 102 mm)"
+			},
+			{
+				"Key": "staples-loading-system",
+				"Value": "Top"
+			},
+			{
+				"Key": "stapling-capacity",
+				"Value": "25 sheets"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "1.93\" (4.9 cm)"
+			},
+			{
+				"Key": "weight",
+				"Value": "10.3 oz (292 g)"
+			}
+		]
+	},
+	{
+		"Categories": ["Binding Machines"],
+		"Description": "Rexel Multi Functional Binder",
+		"Images": [
+			"388985-9715_450.jpg",
+			"388985-9715_A4.jpg",
+			"388985-9715_A5.jpg"
+		],
+		"Name": "Rexel Multi Functional Binder 450sheets",
+		"Options": [
+			{
+				"Key": "binding-capacity",
+				"Values": ["450"]
+			},
+			{
+				"Key": "maximum-paper-width",
+				"Values": [
+					"a4",
+					"a5"
+				]
+			}
+		],
+		"Price": 1.58,
+		"ShortDescription": "Rexel Multi Functional Binder",
+		"Sku": "2101436",
+		"SpecificationOptions": []
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Rexel Torador. Package width: 2.68\" (68 mm), Package depth: 7.28\" (185 mm), Package height: 1.65\" (42 mm)",
+		"Images": [
+			"22548523_4236_42.jpg",
+			"22548523_4236_Black.jpg",
+			"22548523_4236_Y.jpg"
+		],
+		"Name": "Rexel Torador Black",
+		"Options": [
+			{
+				"Key": "pinning",
+				"Values": [
+					"y",
+					"n"
+				]
+			}
+		],
+		"Price": 0.99,
+		"ShortDescription": "Rexel Torador, 2.68\" (68 mm), 7.28\" (185 mm), 1.65\" (42 mm)",
+		"Sku": "2101204",
+		"SpecificationOptions": [
+			{
+				"Key": "package-depth",
+				"Value": "7.28\" (185 mm)"
+			},
+			{
+				"Key": "package-width",
+				"Value": "2.68\" (68 mm)"
+			},
+			{
+				"Key": "stapling-capacity",
+				"Value": "25 sheets"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "2.76\" (7 cm)"
+			}
+		]
+	},
+	{
+		"Categories": ["Staplers"],
+		"Description": "Rexel Ulyssey stapler",
+		"Images": [
+			"1558952-3155_Black.jpg",
+			"1558952-3155_Y.jpg"
+		],
+		"Name": "Rexel Ulyssey stapler Black",
+		"Options": [
+			{
+				"Key": "color-of-product",
+				"Values": ["black"]
+			},
+			{
+				"Key": "permanent-stapling",
+				"Values": [
+					"y",
+					"n"
+				]
+			}
+		],
+		"Price": 3.37,
+		"ShortDescription": "Rexel Ulyssey stapler",
+		"Sku": "2100556",
+		"SpecificationOptions": [
+			{
+				"Key": "staples-loading-system",
+				"Value": "Top"
+			},
+			{
+				"Key": "throat-depth",
+				"Value": "1.77\" (4.5 cm)"
+			}
+		]
+	}
+]

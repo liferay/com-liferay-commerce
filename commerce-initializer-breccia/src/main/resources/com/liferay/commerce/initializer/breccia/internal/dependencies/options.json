@@ -1,0 +1,171 @@
+[
+	{
+		"Key": "binding-capacity",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": [
+			"115",
+			"125",
+			"130",
+			"145",
+			"150",
+			"160",
+			"200",
+			"280",
+			"330",
+			"350",
+			"450",
+			"500"
+		]
+	},
+	{
+		"Key": "color-of-product",
+		"Values": [
+			"black",
+			"blue",
+			"cream",
+			"green",
+			"grey",
+			"metallic",
+			"multicolour",
+			"orange",
+			"red",
+			"silver",
+			"stainless-steel",
+			"turquoise",
+			"violet"
+		]
+	},
+	{
+		"Key": "format",
+		"SkuContributor": true,
+		"Values": [
+			"a2",
+			"a3",
+			"a4",
+			"a5",
+			"a6",
+			"folio",
+			"us-quart"
+		]
+	},
+	{
+		"Key": "hole-punch-capacity",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": ["10"]
+	},
+	{
+		"Key": "material",
+		"SkuContributor": true,
+		"Values": [
+			"aluminium",
+			"metal"
+		]
+	},
+	{
+		"Key": "maximum-paper-width",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": [
+			"305",
+			"a4",
+			"a5",
+			"a5.",
+			"letter&us"
+		]
+	},
+	{
+		"Key": "method-of-control",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": [
+			"electric",
+			"electric-manual",
+			"manual"
+		]
+	},
+	{
+		"Key": "permanent-stapling",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": [
+			"n",
+			"y"
+		]
+	},
+	{
+		"Key": "pinning",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": [
+			"y",
+			"n"
+		]
+	},
+	{
+		"Key": "power-source",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": ["battery"]
+	},
+	{
+		"Key": "product-type",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": [
+			"multifunctional-binding-machine",
+			"strip-binding-machine",
+			"wire-binding-machine"
+		]
+	},
+	{
+		"Key": "punch-capacity",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": [
+			"10",
+			"12",
+			"15",
+			"20",
+			"22",
+			"28",
+			"30",
+			"6",
+			"8"
+		]
+	},
+	{
+		"Key": "punch-distance",
+		"SkuContributor": true,
+		"Values": [
+			"60",
+			"80"
+		]
+	},
+	{
+		"Key": "stapler-punch-capacity",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": ["10"]
+	},
+	{
+		"Key": "staples-included",
+		"SkuContributor": true,
+		"Values": ["y"]
+	},
+	{
+		"Key": "stapling-capacity",
+		"Required": true,
+		"SkuContributor": true,
+		"Values": [
+			"10",
+			"15",
+			"20",
+			"30",
+			"50",
+			"500",
+			"80"
+		]
+	}
+]
