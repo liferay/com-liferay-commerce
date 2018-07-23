@@ -89,6 +89,10 @@
 	<td></td>
 </tr>
 <tr>
+	<td>MAXIMUM_DISCOUNT_AMOUNT_FIELD</td>
+	<td>//div/input[contains(@id,'maximumDiscountAmount')]</td>
+	<td></td>
+</tr>
 	<td>NAME_FIELD</td>
 	<td>//div/input[contains(@id,'name')]</td>
 	<td></td>
