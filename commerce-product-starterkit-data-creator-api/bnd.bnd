@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Commerce Product Starter-Kit Data Creator API
-Bundle-SymbolicName: com.liferay.commerce.product.starterkit.data.creator.api
-Bundle-Version: 1.0.0
-Export-Package: com.liferay.commerce.product.starterkit.data.creator

@@ -1,6 +1,0 @@
-dependencies {
-	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
-	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.0.0-20180426.173855-7"
-	compileOnly project(":apps:commerce:commerce-api")
-	compileOnly project(":apps:commerce:commerce-product-api")
-}

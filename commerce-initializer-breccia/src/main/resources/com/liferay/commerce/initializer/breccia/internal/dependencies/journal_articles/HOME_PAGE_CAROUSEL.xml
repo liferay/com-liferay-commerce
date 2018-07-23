@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<root available-locales="en_US" default-locale="en_US">
+	<dynamic-element index-type="text" instance-id="pqre" name="CAROUSELIMAGE" type="image">
+		<dynamic-element index-type="keyword" instance-id="uxcp" name="CAROUSELIMAGECOLUMNCSSCLASSES" type="text">
+			<dynamic-content language-id="en_US"><![CDATA[]]></dynamic-content>
+		</dynamic-element>
+		<dynamic-element index-type="keyword" instance-id="uhqs" name="TEXTCOLUMNCSSCLASSES" type="text">
+			<dynamic-content language-id="en_US"><![CDATA[]]></dynamic-content>
+		</dynamic-element>
+		<dynamic-element index-type="text" instance-id="gkca" name="TEXTCOLUMNHTMLCONTENT" type="text_area">
+			<dynamic-content language-id="en_US"><![CDATA[<div class="h1mb-2mb-md-4text-white">Get20% OFF ALL Cutting Boards</div><div class="h3mb-2mb-md-4text-muted">for a limited time only</div><div><a class="btnbtn-primary" href="#1">Learn More</a></div>]]></dynamic-content>
+		</dynamic-element>
+		<dynamic-content language-id="en_US"><![CDATA[[$Breccia-Top-Banner-Right-Draft1-1.png$]]]></dynamic-content>
+	</dynamic-element>
+</root>

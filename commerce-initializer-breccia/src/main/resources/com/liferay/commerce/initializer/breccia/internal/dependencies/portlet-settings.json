@@ -1,0 +1,123 @@
+[
+	{
+		"instanceId": "breccia_cp_detail",
+		"layoutFriendlyURL": "/product-detail",
+		"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPContentPortlet",
+		"portletPreferences": {
+			"cpType": "simple",
+			"displayStyle": {
+				"FileName": "product_display_template.ftl",
+				"Name": "COMMERCE PRODUCT DETAIL",
+				"PortletClassName": "com.liferay.commerce.product.type.simple.internal.SimpleCPType"
+			},
+			"displayStyleGroupId": "",
+			"grouped--cpTypeRendererKey": "breccia",
+			"simple--cpTypeRendererKey": "breccia",
+			"virtual--cpTypeRendererKey": "breccia"
+		}
+	},
+	{
+		"instanceId": "breccia_cp_list",
+		"layoutFriendlyURL": "/catalog",
+		"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet",
+		"portletPreferences": {
+			"cpContentListRendererKey": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet",
+			"displayStyle": {
+				"FileName": "catalog_display_template.ftl",
+				"Name": "COMMERCE CATALOG OFFICE SUPPLY",
+				"PortletClassName": "com.liferay.commerce.product.content.search.web.internal.portlet.CPSearchResultsPortlet"
+			},
+			"displayStyleGroupId": "",
+			"grouped--cpTypeListEntryRendererKey": "search-result-breccia",
+			"simple--cpTypeListEntryRendererKey": "search-result-breccia",
+			"virtual--cpTypeListEntryRendererKey": "search-result-breccia"
+		}
+	},
+	{
+		"instanceId": "cpAssetCategoriesNavigationPortlet_page_menu",
+		"layoutFriendlyURL": "/home",
+		"portletName": "com_liferay_commerce_product_asset_categories_navigation_web_internal_portlet_CPAssetCategoriesNavigationPortlet",
+		"portletPreferences": {
+			"assetVocabularyId" : "Commerce",
+			"displayDepth": "0",
+			"displayStyle": {
+				"FileName": "BRECCIA_COMMERCE_CATEGORY_NAVIGATION_SIMPLE_INLINE.ftl",
+				"Name": "COMMERCE CATEGORY NAVIGATION SIMPLE",
+				"PortletClassName": "com.liferay.commerce.product.asset.categories.navigation.web.internal.portlet.CPAssetCategoriesNavigationPortlet"
+			},
+			"portletSetupPortletDecoratorId" : "borderless",
+			"portletSetupTitle_en_US" : "Explore Categories",
+			"portletSetupUseCustomTitle" : true
+		}
+	},
+	{
+		"instanceId": "cpAssetCategoriesNavigationPortlet_navigation_menu",
+		"portletName": "com_liferay_commerce_product_asset_categories_navigation_web_internal_portlet_CPAssetCategoriesNavigationPortlet",
+		"portletPreferences": {
+			"assetVocabularyId" : "Commerce",
+			"displayDepth": "0",
+			"displayStyle": {
+				"FileName": "BRECCIA_COMMERCE_CATEGORY_NAVIGATION_DROPDOWN.ftl",
+				"Name": "COMMERCE CATEGORY NAVIGATION DROPDOWN",
+				"PortletClassName": "com.liferay.commerce.product.asset.categories.navigation.web.internal.portlet.CPAssetCategoriesNavigationPortlet"
+			}
+		}
+	},
+	{
+		"instanceId": "catalog_category_content",
+		"layoutFriendlyURL": "/catalog",
+		"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCategoryContentPortlet",
+		"portletPreferences": {
+			"displayStyle": {
+				"FileName": "BRECCIA_COMMERCE_CATEGORY_CONTENT_TITLE_DESC.ftl",
+				"Name": "BRECCIA_CATEGORY_CONTENT_TITLE",
+				"PortletClassName": "com.liferay.commerce.product.content.category.web.internal.portlet.CPCategoryContentPortlet"
+			},
+			"displayStyleGroupId": ""
+		}
+	},
+	{
+		"instanceId": "catalog_bread_crumb",
+		"layoutFriendlyURL": "/catalog",
+		"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet",
+		"portletPreferences": {
+			"displayStyle": {
+				"FileName": "BRECCIA_BREADCRUMB.ftl",
+				"Name": "BRECCIA",
+				"PortletClassName": "com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry"
+			},
+			"displayStyleGroupId": ""
+		}
+	},
+	{
+		"layoutFriendlyURL": "/cart",
+		"portletName": "com_liferay_commerce_cart_content_web_internal_portlet_CommerceCartContentPortlet",
+		"portletPreferences": {
+			"displayStyle": {
+				"FileName": "BRECCIA_COMMERCE_CART_CONTENT.ftl",
+				"Name": "BRECCIA COMMERCE CONTENT CART",
+				"PortletClassName": "com.liferay.commerce.cart.content.web.internal.portlet.CommerceCartContentPortlet"
+			},
+			"displayStyleGroupId": ""
+		}
+	},
+	{
+		"layoutFriendlyURL": "/cart",
+		"portletName": "com_liferay_commerce_cart_content_web_internal_portlet_CommerceCartContentTotalPortlet",
+		"portletPreferences": {
+			"displayStyle": {
+				"FileName": "BRECCIA_COMMERCE_CART_CONTENT_TOTAL.ftl",
+				"Name": "BRECCIA COMMERCE CONTENT CART TOTAL",
+				"PortletClassName": "com.liferay.commerce.cart.content.web.internal.portlet.CommerceCartContentTotalPortlet"
+			},
+			"displayStyleGroupId": ""
+		}
+	},
+	{
+		"instanceId": "templateSearch",
+		"portletName": "com_liferay_portal_search_web_search_bar_portlet_SearchBarPortlet",
+		"portletPreferences": {
+			"destination" : "catalog"
+		}
+	}
+]
