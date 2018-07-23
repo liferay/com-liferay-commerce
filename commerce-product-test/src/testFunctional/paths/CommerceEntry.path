@@ -24,6 +24,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>CODE_FIELD</td>
+	<td>//div/input[contains(@id,'code')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>DESCRIPTION_FIELD</td>
 	<td>//textarea[contains (@id,'description')]</td>
 	<td></td>
