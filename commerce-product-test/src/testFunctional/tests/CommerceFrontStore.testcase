@@ -42,7 +42,7 @@
 
 		<execute macro="CPCommerceCatalog#newOptionsEntry">
 			<var name="optionDescription" value="Option Description" />
-			<var name="optionFieldType" value="Select" />
+			<var name="optionFieldType" value="Select from List" />
 			<var name="optionName" value="Color" />
 			<var name="optionValuesList" value="Black,Blue,White" />
 			<var name="valuePriority" value="1" />
