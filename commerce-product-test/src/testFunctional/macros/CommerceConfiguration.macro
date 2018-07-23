@@ -1,4 +1,31 @@
 <definition>
+	<command name="commerceAdminTearDown">
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="User Segments" />
+		</execute>
+
+		<if>
+			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
+			<then>
+				<execute macro="CommerceProducts#moveCatalogEntriesToRecycleBin" />
+			</then>
+		</if>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Price Lists" />
+		</execute>
+
+		<if>
+			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
+			<then>
+				<execute macro="CommerceProducts#moveCatalogEntriesToRecycleBin" />
+			</then>
+		</if>
+
+		<execute macro="User#logoutPG" />
+	</command>
 	<command name="commerceSetUp">
 		<execute macro="ProductMenu#gotoSitesCommerce">
 			<var name="portlet" value="Settings" />
