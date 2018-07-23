@@ -5,6 +5,153 @@
 			<var name="editor" value="description" />
 		</execute>
 	</command>
+
+	<command name="addNewAvailabilityEstimatesEntry">
+		<execute function="Type" locator1="CommerceEntry#TITLE_FIELD" value1="${entryName}" />
+	</command>
+
+	<command name="addNewCatalogRule">
+		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
+
+		<execute function="Select" locator1="Select#TYPE" value1="${catalogRuleType}" />
+
+		<execute macro="Button#clickSave" />
+
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="User Segments" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceItemSelector#selectEntry">
+			<var name="entryName" value="${userSegmentName}" />
+		</execute>
+	</command>
+
+	<command name="addNewCountriesEntry">
+		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#BILLING_ALLOWED_CHECKBOX" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#SHIPPING_ALLOWED_CHECKBOX" />
+
+		<execute function="Type" locator1="CommerceEntry#TWO_LETTERS_ISO_CODE_FIELD" value1="NC" />
+
+		<execute function="Type" locator1="CommerceEntry#THREE_LETTERS_ISO_CODE_FIELD" value1="NCO" />
+
+		<execute function="Type" locator1="CommerceEntry#NUMERIC_ISO_CODE_FIELD" value1="001" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#SUBJECT_TO_VAT_CHECKBOX" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
+	</command>
+
+	<command name="addNewCurrenciesEntry">
+		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+
+		<execute function="Type" locator1="CommerceEntry#CODE_FIELD" value1="${code}" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#PRIMARY_CHECKBOX" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
+	</command>
+
+	<command name="addNewDimensionUnit">
+		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+
+		<execute function="Type" locator1="CommerceEntry#KEY_FIELD" value1="${entryName}" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#PRIMARY_CHECKBOX" />
+	</command>
+
+	<command name="addNewDiscuntsEntry">
+		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+
+		<execute function="Select" locator1="CommerceEntry#DISCOUNT_TARGET_SELECT" value1="${discountTarget}" />
+
+		<execute function="Click" locator1="Button#SELECT" />
+
+		<execute macro="CommerceItemSelector#selectEntry">
+			<var name="entryName" value="${userSegment}" />
+		</execute>
+
+		<execute function="Type" locator1="CommerceEntry#MAXIMUM_DISCOUNT_AMOUNT_FIELD" value1="${discountLevelNumber}" />
+
+		<execute function="Type" locator1="CommerceEntry#DISCOUNT_LEVEL_1_FIELD" value1="${discountLevel}" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
+	</command>
+
+	<command name="addNewNotificationTemplate">
+		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+
+		<execute function="Type" locator1="CommerceEntry#SHORT_DESCRIPTION_FIELD" value1="${entryName}" />
+
+		<execute function="Click" locator1="Button#SELECT" />
+
+		<execute macro="CommerceItemSelector#selectEntry">
+			<var name="entryName" value="${userSegment}" />
+		</execute>
+
+		<execute function="Type" locator1="CommerceEntry#NOTIFICATION_TEMPLATE_FROM_ADDRESS_FIELD" value1="${fromAddress}" />
+
+		<execute function="Type" locator1="CommerceEntry#NOTIFICATION_TEMPLATE_FROM_NAME_FIELD" value1="${fromName}" />
+
+		<execute function="Select" locator1="Select#TYPE" value1="${notificationType}" />
+	</command>
+
+	<command name="addNewPriceListsEntry">
+		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+
+		<execute function="Select" locator1="CommerceEntry#CURRENCY_SELECT" value1="${currencyCode}" />
+
+		<execute function="Click" locator1="Button#SELECT" />
+
+		<execute macro="CommerceItemSelector#selectEntry">
+			<var name="entryName" value="${userSegmentName}" />
+		</execute>
+	</command>
+
+	<command name="addNewRegionsEntry">
+		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+
+		<execute function="Type" locator1="CommerceEntry#CODE_FIELD" value1="${code}" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
+	</command>
+
+	<command name="addNewUserSegmentsEntry">
+		<execute function="Type" locator1="CommerceEntry#MODAL_NAME_FIELD_SMALL" value1="${entryName}" />
+
+		<execute macro="Button#clickSave" />
+
+		<execute macro="CommerceNavigator#gotoEntry">
+			<var name="entryName" value="${entryName}" />
+		</execute>
+
+		<execute macro="CommerceEntry#gotoNestedMenu">
+			<var name="nestedMenu" value="Criteria" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute function="Select" locator1="Select#TYPE" value1="${criteriaType}" />
+
+		<execute function="Click" locator1="Button#SELECT" />
+
+		<execute macro="CommerceItemSelector#selectEntry">
+			<var name="entryName" value="Commerce User" />
+		</execute>
+	</command>
+
+	<command name="addNewWeightUnit">
+		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+
+		<execute function="Type" locator1="CommerceEntry#KEY_FIELD" value1="${entryName}" />
+
+		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#PRIMARY_CHECKBOX" />
 	</command>
 
 	<command name="addOptionsEntry">
