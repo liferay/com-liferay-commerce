@@ -124,6 +124,10 @@
 	<td></td>
 </tr>
 <tr>
+	<td>CURRENCY_SELECT</td>
+	<td>//div[label[contains(.,'Store Currency')]]/select</td>
+	<td></td>
+</tr>
 	<td>ADD_BUTTON</td>
 	<td>//*[@data-qa-id='addButton'] | //a[contains(@class,'btn') and span[contains(@class,'icon-plus')]] | //button/span[contains(@class,'icon-plus')] | //button[@type='button']/*[contains(@class,'icon-plus')] | //h4[contains(@class,'section-header') and contains (.,'Options')]/button</td>
 	<td></td>
