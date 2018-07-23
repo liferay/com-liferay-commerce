@@ -20,12 +20,12 @@
 				<execute macro="PortalInstances#tearDownCP" />
 			</then>
 			<else>
-				<execute macro="CommerceConfiguration#commerceTearDown" />
+				<execute macro="CommerceConfiguration#commerceStoreFrontTearDown" />
 			</else>
 		</if>
 	</tear-down>
 
-	<command name="ViewFrontStoreSimpleProduct">
+	<command name="ViewStoreFrontSimpleProduct">
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="ProductMenu#gotoSitesCommerce">
