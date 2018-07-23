@@ -25,7 +25,7 @@
 		</for>
 	</command>
 
-	<command name="commerceTearDown">
+	<command name="commerceStoreFrontTearDown">
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesCommerce">
