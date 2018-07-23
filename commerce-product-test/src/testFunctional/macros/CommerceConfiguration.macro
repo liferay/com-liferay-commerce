@@ -26,6 +26,103 @@
 
 		<execute macro="User#logoutPG" />
 	</command>
+
+	<command name="commerceSettingsTearDown">
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="Settings" />
+		</execute>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Availability Estimates" />
+		</execute>
+
+		<if>
+			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
+			<then>
+				<execute macro="PortletEntry#deleteViaMenuItem">
+					<var name="rowEntries" value="New Availability Estimate" />
+				</execute>
+			</then>
+		</if>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Countries" />
+		</execute>
+
+		<if>
+			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
+			<then>
+				<execute macro="PortletEntry#deleteViaMenuItem">
+					<var name="rowEntry" value="New Country" />
+				</execute>
+			</then>
+		</if>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Currencies" />
+		</execute>
+
+		<if>
+			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
+			<then>
+				<execute macro="PortletEntry#deleteViaMenuItem">
+					<var name="rowEntries" value="New Currency" />
+				</execute>
+			</then>
+		</if>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Measurement Units" />
+		</execute>
+
+		<if>
+			<condition function="IsElementPresent" locator1="Icon#ROW_VERTICAL_ELLIPSIS">
+				<var name="key_rowEntry" value="New Dimension Unit" />
+			</condition>
+
+			<then>
+				<execute macro="PortletEntry#deleteViaMenuItem">
+					<var name="rowEntry" value="New Dimension Unit" />
+				</execute>
+			</then>
+		</if>
+
+		<execute macro="CommerceEntry#gotoMeasurementUnitsTab">
+			<var name="measurementUnitTab" value="Weight" />
+		</execute>
+
+		<if>
+			<condition function="IsElementPresent" locator1="Icon#ROW_VERTICAL_ELLIPSIS">
+				<var name="key_rowEntry" value="New Weight Unit" />
+			</condition>
+
+			<then>
+				<execute macro="PortletEntry#deleteViaMenuItem">
+					<var name="rowEntry" value="New Weight Unit" />
+				</execute>
+			</then>
+		</if>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Notifications" />
+		</execute>
+
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="Notification Templates" />
+		</execute>
+
+		<if>
+			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
+			<then>
+				<execute macro="PortletEntry#deleteViaMenuItem">
+					<var name="rowEntries" value="New Notification Template" />
+				</execute>
+			</then>
+		</if>
+	</command>
+
 	<command name="commerceSetUp">
 		<execute macro="ProductMenu#gotoSitesCommerce">
 			<var name="portlet" value="Settings" />
