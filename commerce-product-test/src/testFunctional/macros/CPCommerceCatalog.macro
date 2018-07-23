@@ -71,7 +71,7 @@
 		<if>
 			<or>
 				<equals arg1="${optionFieldType}" arg2="checkbox-multiple" />
-				<equals arg1="${optionFieldType}" arg2="Select" />
+				<equals arg1="${optionFieldType}" arg2="Select from List" />
 				<equals arg1="${optionFieldType}" arg2="Radio" />
 			</or>
 			<then>
