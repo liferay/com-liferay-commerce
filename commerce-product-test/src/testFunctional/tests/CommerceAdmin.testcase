@@ -1,0 +1,282 @@
+<definition component-name="portal-commerce">
+	<property name="portal.upstream" value="true" />
+	<property name="test.run.environment" value="EE" />
+	<property name="testray.main.component.name" value="Commerce" />
+
+	<set-up>
+		<execute macro="TestCase#setUpPortalInstance" />
+
+		<execute macro="User#firstLoginPG" />
+
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
+			<var name="portlet" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="User#addCP">
+			<var name="userEmailAddress" value="commerceuser@liferay.com" />
+			<var name="userFirstName" value="Commerce" />
+			<var name="userLastName" value="User" />
+			<var name="userScreenName" value="commerce" />
+		</execute>
+	</set-up>
+
+	<tear-down>
+		<var method="TestPropsUtil#get('test.portal.instance')" name="testPortalInstance" />
+
+		<if>
+			<equals arg1="${testPortalInstance}" arg2="true" />
+			<then>
+				<execute macro="PortalInstances#tearDownCP" />
+			</then>
+			<else>
+				<execute macro="ProductMenu#gotoPortlet">
+					<var name="category" value="Users" />
+					<var name="panel" value="Control Panel" />
+					<var name="portlet" value="Users and Organizations" />
+				</execute>
+
+				<execute macro="User#deactivateCP">
+					<var name="deactivateType" value="Actions" />
+					<var name="userFirstName" value="Commerce" />
+				</execute>
+
+				<execute macro="User#deleteCP">
+					<var name="userFirstName" value="Commerce" />
+				</execute>
+
+				<execute macro="CommerceConfiguration#commerceSettingsTearDown" />
+
+				<execute macro="CommerceConfiguration#commerceAdminTearDown" />
+			</else>
+		</if>
+	</tear-down>
+
+	<command name="CreateNewAvailabilityEstimate">
+		<property name="portal.acceptance" value="true" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="Settings" />
+		</execute>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Availability Estimates" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewAvailabilityEstimatesEntry">
+			<var name="entryName" value="New Availability Estimate" />
+		</execute>
+
+		<execute macro="Button#clickSave" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+	</command>
+
+	<command name="CreateNewCatalogRule">
+		<property name="portal.acceptance" value="true" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="Catalog Rules" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewCatalogRule">
+			<var name="catalogRuleType" value="All products" />
+			<var name="entryName" value="New Catalog Rule" />
+			<var name="userSegment" value="User Segment" />
+		</execute>
+	</command>
+
+	<command name="CreateNewCountry">
+		<property name="portal.acceptance" value="true" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="Settings" />
+		</execute>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Countries" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewCountriesEntry">
+			<var name="entryName" value="New Country" />
+		</execute>
+
+		<execute macro="Button#clickSave" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="Regions" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewRegionsEntry">
+			<var name="code" value="NRE" />
+			<var name="entryName" value="New Region" />
+		</execute>
+
+		<execute macro="Button#clickSave" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+	</command>
+
+	<command name="CreateNewCurrency">
+		<property name="portal.acceptance" value="true" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="Settings" />
+		</execute>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Currencies" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewCurrenciesEntry">
+			<var name="code" value="NCU" />
+			<var name="entryName" value="New Currency" />
+		</execute>
+
+		<execute macro="Button#clickSave" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+	</command>
+
+	<command name="CreateNewDiscount">
+		<property name="portal.acceptance" value="true" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="Discounts" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewDiscuntsEntry">
+			<var name="discountLevel" value="15" />
+			<var name="discountTarget" value="Apply to Product" />
+			<var name="entryName" value="New Discount" />
+			<var name="maximumDiscountAmount" value="10" />
+			<var name="userSegment" value="User Segment" />
+		</execute>
+
+		<execute macro="Button#clickPublish" />
+	</command>
+
+	<command name="CreateNewMeasurementUnits">
+		<property name="portal.acceptance" value="true" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="Settings" />
+		</execute>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Measurement Units" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewDimensionUnit">
+			<var name="entryName" value="New Dimension Unit" />
+		</execute>
+
+		<execute macro="Button#clickSave" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+
+		<execute macro="CommerceEntry#gotoMeasurementUnitsTab">
+			<var name="measurementUnitTab" value="Weight" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewWeightUnit">
+			<var name="entryName" value="New Weight Unit" />
+		</execute>
+
+		<execute macro="Button#clickSave" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+	</command>
+
+	<command name="CreateNewNotificationTemplate">
+		<property name="portal.acceptance" value="true" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="Settings" />
+		</execute>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Notifications" />
+		</execute>
+
+		<execute macro="CommerceEntry#gotoNotificationsTab">
+			<var name="notificationsTab" value="Notification Templates" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewNotificationTemplate">
+			<var name="entryName" value="New Notification Template" />
+			<var name="fromAddress" value="test@liferay.com" />
+			<var name="fromName" value="Test Test" />
+			<var name="notificationType" value="Order Placed" />
+			<var name="userSegment" value="User Segment" />
+		</execute>
+
+		<execute macro="Button#clickSave" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+	</command>
+
+	<command name="CreateNewPriceList">
+		<property name="portal.acceptance" value="true" />
+
+		<execute test-case="CommerceAdmin#CreateNewCurrency" />
+
+		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="Price Lists" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewPriceListsEntry">
+			<var name="currencyCode" value="NCU" />
+			<var name="entryName" value="New Price List" />
+			<var name="userSegmentName" value="User Segment" />
+		</execute>
+
+		<execute macro="Button#clickPublish" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+	</command>
+
+	<command name="CreateNewUserSegmentByUser">
+		<property name="portal.acceptance" value="true" />
+
+		<execute macro="ProductMenu#gotoSitesCommerce">
+			<var name="portlet" value="User Segments" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewUserSegmentsEntry">
+			<var name="criteriaType" value="Users" />
+			<var name="entryName" value="User Segment" />
+		</execute>
+
+		<execute macro="Button#clickSave" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+	</command>
+</definition>
