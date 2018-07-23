@@ -1,3 +1,5 @@
+import com.liferay.gradle.util.GradleUtil
+
 apply plugin: "com.liferay.lang.merger"
 
 buildService {
@@ -36,7 +38,7 @@ if (System.getenv("JENKINS_HOME")) {
 		}
 
 		from "configs"
-		into new File(liferay.liferayHome, "osgi/configs")
+		into GradleUtil.getProperty(project, "forced.configs.deploy.dir", new File(liferay.liferayHome, "osgi/configs"))
 	}
 
 }
