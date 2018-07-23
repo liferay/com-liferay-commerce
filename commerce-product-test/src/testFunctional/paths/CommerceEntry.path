@@ -134,6 +134,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>PRIMARY_CHECKBOX</td>
+	<td>//input[contains(@id,'primary') and (@type='checkbox')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>PRIORITY_FIELD</td>
 	<td>//div/label[contains (@for,'priority')]/../input</td>
 	<td></td>
