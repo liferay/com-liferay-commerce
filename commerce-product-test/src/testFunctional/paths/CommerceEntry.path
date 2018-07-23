@@ -113,6 +113,11 @@
 	<td>//input[contains(@id,'billingAllowed') and (@type='checkbox')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>SHIPPING_ALLOWED_CHECKBOX</td>
+	<td>//input[contains(@id,'shippingAllowed') and (@type='checkbox')]</td>
+	<td></td>
+</tr>
 	<td>OPTION_VALUE</td>
 	<td>//div[contains (@class, '${key_optionType}')]//span [contains (., '${key_optionValue}')]/../input | //div[contains (@class, '${key_optionType}')]//label[contains (., '${key_optionValue}')]//input</td>
 	<td></td>
