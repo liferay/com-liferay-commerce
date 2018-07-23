@@ -132,10 +132,10 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	configurationPid = "com.liferay.commerce.initializer.breccia.internal.configuration.BrecciaInitializerConfiguration",
 	immediate = true,
-	property = "site.initializer.key=" + BrecciaGroupInitializer.KEY,
+	property = "site.initializer.key=" + BrecciaSiteInitializer.KEY,
 	service = SiteInitializer.class
 )
-public class BrecciaGroupInitializer implements SiteInitializer {
+public class BrecciaSiteInitializer implements SiteInitializer {
 
 	public static final String KEY = "breccia-initializer";
 
@@ -1431,7 +1431,7 @@ public class BrecciaGroupInitializer implements SiteInitializer {
 		_DEPENDENCY_PATH + "templates/";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		BrecciaGroupInitializer.class);
+		BrecciaSiteInitializer.class);
 
 	@Reference
 	private AddressLocalService _addressLocalService;
