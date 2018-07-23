@@ -9,6 +9,11 @@
 </thead>
 <tbody>
 <tr>
+	<td>ACTIVE_CHECKBOX</td>
+	<td>//input[contains(@id,'active') and (@type='checkbox')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ADD_TAG_BUTTON</td>
 	<td>//div/button[@title='Add Tags']</td>
 	<td></td>
