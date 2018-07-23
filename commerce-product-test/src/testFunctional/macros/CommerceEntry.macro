@@ -69,6 +69,12 @@
 		</execute>
 	</command>
 
+	<command name="gotoMeasurementUnitsTab">
+		<execute function="AssertClick" locator1="CommerceEntry#MEASUREMENT_UNITS_TAB" value1="${measurementUnitTab}">
+			<var name="key_measurementUnitTab" value="${measurementUnitTab}" />
+		</execute>
+	</command>
+
 	<command name="gotoMenuTab">
 		<execute function="AssertClick" locator1="CommerceEntry#MENU_TAB" value1="${menuTab}">
 			<var name="key_menuTab" value="${menuTab}" />
@@ -78,6 +84,12 @@
 	<command name="gotoNestedMenu">
 		<execute function="AssertClick" locator1="CommerceEntry#NESTED_MENU" value1="${nestedMenu}">
 			<var name="key_nestedMenu" value="${nestedMenu}" />
+		</execute>
+	</command>
+
+	<command name="gotoNotificationsTab">
+		<execute function="AssertClick" locator1="CommerceEntry#NOTIFICATIONS_TAB" value1="${notificationsTab}">
+			<var name="key_notificationsTab" value="${notificationsTab}" />
 		</execute>
 	</command>
 
