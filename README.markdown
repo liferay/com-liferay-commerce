@@ -71,7 +71,6 @@ Do you have questions? Ask them on our
 
 Join the conversation in [`#emporio` channel](https://liferay-community.slack.com/messages/CBJBV8H8U) on Liferay's Community Chat.
 
-
 ## License
 
 This project, *Emporio*, is free software ("Licensed Software"); you can

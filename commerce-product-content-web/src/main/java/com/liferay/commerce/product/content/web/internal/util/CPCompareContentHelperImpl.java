@@ -259,7 +259,7 @@ public class CPCompareContentHelperImpl implements CPCompareContentHelper {
 				productsLimit();
 		}
 		else if (CPPortletKeys.CP_COMPARE_CONTENT_WEB.equals(
-					portletDisplay.getPortletName())) {
+					 portletDisplay.getPortletName())) {
 
 			CPCompareContentPortletInstanceConfiguration
 				cpCompareContentPortletInstanceConfiguration =
