@@ -93,6 +93,12 @@
 	<td>//div/input[contains(@id,'maximumDiscountAmount')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>DISCOUNT_LEVEL_1_FIELD</td>
+	<td>//div/input[contains(@id,'level1')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>NAME_FIELD</td>
 	<td>//div/input[contains(@id,'name')]</td>
 	<td></td>
