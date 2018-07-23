@@ -1,8 +1,0 @@
-Bundle-Name: Liferay Commerce Initializer Office Supply
-Bundle-SymbolicName: com.liferay.commerce.initializer.office.supply
-Bundle-Version: 1.0.0
-Import-Package:\
-	com.liferay.portal.kernel.portlet;version="[7.0.0,8.1)",\
-	\
-	*
-Web-ContextPath: /commerce-initializer-office-supply
