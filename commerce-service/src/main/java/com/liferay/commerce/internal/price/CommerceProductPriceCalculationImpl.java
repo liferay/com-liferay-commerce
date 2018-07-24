@@ -245,7 +245,7 @@ public class CommerceProductPriceCalculationImpl
 				price = commercePriceEntry.getPrice();
 			}
 
-			if (commercePriceEntry.getHasTierPrice()) {
+			if (commercePriceEntry.isHasTierPrice()) {
 				CommerceTierPriceEntry commerceTierPriceEntry =
 					_commerceTierPriceEntryLocalService.
 						findClosestCommerceTierPriceEntry(

@@ -213,8 +213,8 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 		document.addText(FIELD_SKU, cpInstance.getSku());
 		document.addKeyword(
 			FIELD_CP_DEFINITION_ID, cpInstance.getCPDefinitionId());
-		document.addKeyword(FIELD_PUBLISHED, cpInstance.getPublished());
-		document.addKeyword(FIELD_PURCHASABLE, cpInstance.getPurchasable());
+		document.addKeyword(FIELD_PUBLISHED, cpInstance.isPublished());
+		document.addKeyword(FIELD_PURCHASABLE, cpInstance.isPurchasable());
 		document.addKeyword(
 			FIELD_EXTERNAL_REFERENCE_CODE,
 			cpInstance.getExternalReferenceCode());

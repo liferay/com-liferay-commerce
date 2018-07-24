@@ -226,7 +226,7 @@ public class CPDefinitionInventoryEngineImpl
 			return false;
 		}
 
-		return cpDefinitionInventory.getDisplayStockQuantity();
+		return cpDefinitionInventory.isDisplayStockQuantity();
 	}
 
 	@Override

@@ -73,8 +73,8 @@ public class CPDefinitionOptionRelLocalServiceImpl
 		return cpDefinitionOptionRelLocalService.addCPDefinitionOptionRel(
 			cpDefinitionId, cpOptionId, cpOption.getNameMap(),
 			cpOption.getDescriptionMap(), cpOption.getDDMFormFieldTypeName(), 0,
-			cpOption.getFacetable(), cpOption.isRequired(),
-			cpOption.getSkuContributor(), importOptionValue, serviceContext);
+			cpOption.isFacetable(), cpOption.isRequired(),
+			cpOption.isSkuContributor(), importOptionValue, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -361,7 +361,7 @@ public class CPDefinitionOptionRelLocalServiceImpl
 	protected void checkCPInstances(CPDefinitionOptionRel cpDefinitionOptionRel)
 		throws PortalException {
 
-		if (!cpDefinitionOptionRel.getSkuContributor()) {
+		if (!cpDefinitionOptionRel.isSkuContributor()) {
 			return;
 		}
 

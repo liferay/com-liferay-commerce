@@ -58,11 +58,11 @@ CommerceWarehouse commerceWarehouse = (CommerceWarehouse)row.getObject();
 			<portlet:param name="<%= Constants.CMD %>" value="setActive" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceWarehouseId()) %>" />
-			<portlet:param name="active" value="<%= String.valueOf(!commerceWarehouse.getActive()) %>" />
+			<portlet:param name="active" value="<%= String.valueOf(!commerceWarehouse.isActive()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon
-			message='<%= commerceWarehouse.getActive() ? "deactivate" : "activate" %>'
+			message='<%= commerceWarehouse.isActive() ? "deactivate" : "activate" %>'
 			url="<%= setActiveURL %>"
 		/>
 

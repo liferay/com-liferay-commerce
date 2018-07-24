@@ -63,7 +63,7 @@ public class TierPriceTag extends IncludeTag {
 						commercePriceList.getCommercePriceListId());
 
 				if ((commercePriceEntry != null) &&
-					commercePriceEntry.getHasTierPrice()) {
+					commercePriceEntry.isHasTierPrice()) {
 
 					_commerceTierPriceEntries =
 						CommerceTierPriceEntryLocalServiceUtil.

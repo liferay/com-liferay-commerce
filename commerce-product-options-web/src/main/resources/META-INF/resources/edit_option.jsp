@@ -67,11 +67,11 @@ boolean hasCustomAttributesAvailable = CustomAttributesUtil.hasCustomAttributes(
 
 			</aui:select>
 
-			<aui:input checked="<%= (cpOption == null) ? false : cpOption.getFacetable() %>" label="use-in-faceted-navigation" name="facetable" type="toggle-switch" />
+			<aui:input checked="<%= (cpOption == null) ? false : cpOption.isFacetable() %>" label="use-in-faceted-navigation" name="facetable" type="toggle-switch" />
 
 			<aui:input checked="<%= (cpOption == null) ? false : cpOption.getRequired() %>" name="required" type="toggle-switch" />
 
-			<aui:input checked="<%= (cpOption == null) ? false : cpOption.getSkuContributor() %>" name="skuContributor" type="toggle-switch" />
+			<aui:input checked="<%= (cpOption == null) ? false : cpOption.isSkuContributor() %>" name="skuContributor" type="toggle-switch" />
 
 			<aui:input helpMessage="key-help" name="key" />
 		</aui:fieldset>

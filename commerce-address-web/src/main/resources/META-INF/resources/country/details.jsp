@@ -57,7 +57,7 @@ long commerceCountryId = commerceCountriesDisplayContext.getCommerceCountryId();
 
 				<aui:input name="priority" />
 
-				<aui:input checked="<%= (commerceCountry == null) ? false : commerceCountry.getActive() %>" name="active" type="toggle-switch" />
+				<aui:input checked="<%= (commerceCountry == null) ? false : commerceCountry.isActive() %>" name="active" type="toggle-switch" />
 			</aui:fieldset>
 		</aui:fieldset>
 	</aui:fieldset-group>

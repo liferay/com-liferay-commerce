@@ -50,12 +50,12 @@ long commercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodId(
 			<portlet:param name="<%= Constants.CMD %>" value="setActive" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="commercePaymentMethodId" value="<%= String.valueOf(commercePaymentMethodId) %>" />
-			<portlet:param name="active" value="<%= String.valueOf(!commercePaymentMethod.getActive()) %>" />
+			<portlet:param name="active" value="<%= String.valueOf(!commercePaymentMethod.isActive()) %>" />
 			<portlet:param name="engineKey" value="<%= commercePaymentMethod.getEngineKey() %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon
-			message='<%= commercePaymentMethod.getActive() ? "deactivate" : "activate" %>'
+			message='<%= commercePaymentMethod.isActive() ? "deactivate" : "activate" %>'
 			url="<%= setActiveURL %>"
 		/>
 	</c:if>

@@ -422,7 +422,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		document.addKeyword(
 			FIELD_PRODUCT_TYPE_NAME, cpDefinition.getProductTypeName());
-		document.addKeyword(FIELD_PUBLISHED, cpDefinition.getPublished());
+		document.addKeyword(FIELD_PUBLISHED, cpDefinition.isPublished());
 		document.addDateSortable(
 			FIELD_DISPLAY_DATE, cpDefinition.getDisplayDate());
 

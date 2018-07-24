@@ -737,13 +737,13 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		if (publicStore) {
 			if (cpDefinitionOptionRel.getRequired() ||
-				cpDefinitionOptionRel.getSkuContributor()) {
+				cpDefinitionOptionRel.isSkuContributor()) {
 
 				return true;
 			}
 		}
 		else {
-			return cpDefinitionOptionRel.getSkuContributor();
+			return cpDefinitionOptionRel.isSkuContributor();
 		}
 
 		return false;

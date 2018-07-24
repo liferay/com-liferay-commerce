@@ -48,12 +48,12 @@ CommerceShippingMethod commerceShippingMethod = (CommerceShippingMethod)row.getO
 			<portlet:param name="<%= Constants.CMD %>" value="setActive" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="commerceShippingMethodId" value="<%= String.valueOf(commerceShippingMethod.getCommerceShippingMethodId()) %>" />
-			<portlet:param name="active" value="<%= String.valueOf(!commerceShippingMethod.getActive()) %>" />
+			<portlet:param name="active" value="<%= String.valueOf(!commerceShippingMethod.isActive()) %>" />
 			<portlet:param name="engineKey" value="<%= commerceShippingMethod.getEngineKey() %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon
-			message='<%= commerceShippingMethod.getActive() ? "deactivate" : "activate" %>'
+			message='<%= commerceShippingMethod.isActive() ? "deactivate" : "activate" %>'
 			url="<%= setActiveURL %>"
 		/>
 	</c:if>
