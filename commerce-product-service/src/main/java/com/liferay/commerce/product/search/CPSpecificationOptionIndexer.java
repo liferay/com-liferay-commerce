@@ -182,7 +182,7 @@ public class CPSpecificationOptionIndexer
 			}
 
 			document.addKeyword(
-				FIELD_FACETABLE, cpSpecificationOption.getFacetable());
+				FIELD_FACETABLE, cpSpecificationOption.isFacetable());
 			document.addText(FIELD_KEY, cpSpecificationOption.getKey());
 			document.addText(Field.CONTENT, title);
 		}

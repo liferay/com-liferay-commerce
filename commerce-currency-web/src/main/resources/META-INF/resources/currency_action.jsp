@@ -61,11 +61,11 @@ CommerceCurrency commerceCurrency = (CommerceCurrency)row.getObject();
 			<portlet:param name="<%= Constants.CMD %>" value="setActive" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="commerceCurrencyId" value="<%= String.valueOf(commerceCurrency.getCommerceCurrencyId()) %>" />
-			<portlet:param name="active" value="<%= String.valueOf(!commerceCurrency.getActive()) %>" />
+			<portlet:param name="active" value="<%= String.valueOf(!commerceCurrency.isActive()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon
-			message='<%= commerceCurrency.getActive() ? "deactivate" : "activate" %>'
+			message='<%= commerceCurrency.isActive() ? "deactivate" : "activate" %>'
 			url="<%= setActiveURL %>"
 		/>
 

@@ -1202,7 +1202,7 @@ public class CPDefinitionLocalServiceImpl
 			cpDefinition.getShippingExtraPrice(), cpDefinition.getWidth(),
 			cpDefinition.getHeight(), cpDefinition.getDepth(),
 			cpDefinition.getWeight(), cpDefinition.getCPTaxCategoryId(),
-			cpDefinition.getTaxExempt(), cpDefinition.getTelcoOrElectronics(),
+			cpDefinition.isTaxExempt(), cpDefinition.isTelcoOrElectronics(),
 			ddmStructureKey, published, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -1263,9 +1263,8 @@ public class CPDefinitionLocalServiceImpl
 
 		for (CPDefinition cpDefinition : cpDefinitions) {
 			updateTaxCategoryInfo(
-				cpDefinition.getCPDefinitionId(), 0,
-				cpDefinition.getTaxExempt(),
-				cpDefinition.getTelcoOrElectronics());
+				cpDefinition.getCPDefinitionId(), 0, cpDefinition.isTaxExempt(),
+				cpDefinition.isTelcoOrElectronics());
 		}
 	}
 

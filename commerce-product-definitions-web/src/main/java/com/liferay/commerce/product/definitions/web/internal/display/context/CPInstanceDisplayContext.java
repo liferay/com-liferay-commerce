@@ -327,7 +327,7 @@ public class CPInstanceDisplayContext
 		CPDefinition cpDefinition = getCPDefinition();
 
 		return _cpInstanceHelper.renderCPInstanceOptions(
-			getCPDefinitionId(), null, cpDefinition.getIgnoreSKUCombinations(),
+			getCPDefinitionId(), null, cpDefinition.isIgnoreSKUCombinations(),
 			true, renderRequest, renderResponse);
 	}
 

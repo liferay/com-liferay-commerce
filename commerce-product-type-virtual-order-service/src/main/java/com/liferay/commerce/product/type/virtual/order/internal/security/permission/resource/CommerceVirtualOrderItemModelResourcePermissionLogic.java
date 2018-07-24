@@ -75,7 +75,7 @@ public class CommerceVirtualOrderItemModelResourcePermissionLogic
 	private boolean _containsDownloadPermission(
 		CommerceVirtualOrderItem commerceVirtualOrderItem) {
 
-		if (!commerceVirtualOrderItem.getActive()) {
+		if (!commerceVirtualOrderItem.isActive()) {
 			return false;
 		}
 

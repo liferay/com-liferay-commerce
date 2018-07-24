@@ -40,7 +40,7 @@ List<CPOptionCategory> cpOptionCategories = cpSpecificationOptionDisplayContext.
 
 	<aui:input name="description" />
 
-	<aui:input checked="<%= (cpSpecificationOption == null) ? false : cpSpecificationOption.getFacetable() %>" label="use-in-faceted-navigation" name="facetable" type="toggle-switch" />
+	<aui:input checked="<%= (cpSpecificationOption == null) ? false : cpSpecificationOption.isFacetable() %>" label="use-in-faceted-navigation" name="facetable" type="toggle-switch" />
 
 	<aui:select label="default-specification-group" name="CPOptionCategoryId" showEmptyOption="<%= true %>">
 

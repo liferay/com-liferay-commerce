@@ -123,7 +123,7 @@ public class CommerceCountryIndexer extends BaseIndexer<CommerceCountry> {
 				document.addText("defaultLanguageId", languageId);
 			}
 
-			document.addKeyword(FIELD_ACTIVE, commerceCountry.getActive());
+			document.addKeyword(FIELD_ACTIVE, commerceCountry.isActive());
 			document.addText(
 				LocalizationUtil.getLocalizedName(Field.NAME, languageId),
 				name);

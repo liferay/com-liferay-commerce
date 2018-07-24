@@ -69,10 +69,10 @@ productSkusURL.setParameter("screenNavigationCategoryKey", cpInstanceDisplayCont
 
 				<aui:input name="manufacturerPartNumber" />
 
-				<aui:input checked="<%= (cpInstance == null) ? false : cpInstance.getPurchasable() %>" name="purchasable" type="toggle-switch" />
+				<aui:input checked="<%= (cpInstance == null) ? false : cpInstance.isPurchasable() %>" name="purchasable" type="toggle-switch" />
 			</aui:fieldset>
 
-			<c:if test="<%= !cpDefinition.getIgnoreSKUCombinations() %>">
+			<c:if test="<%= !cpDefinition.isIgnoreSKUCombinations() %>">
 				<aui:fieldset collapsible="<%= true %>" label="options">
 					<c:choose>
 						<c:when test="<%= cpInstance != null %>">

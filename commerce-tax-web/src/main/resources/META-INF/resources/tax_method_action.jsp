@@ -48,12 +48,12 @@ CommerceTaxMethod commerceTaxMethod = (CommerceTaxMethod)row.getObject();
 			<portlet:param name="<%= Constants.CMD %>" value="setActive" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="commerceTaxMethodId" value="<%= String.valueOf(commerceTaxMethod.getCommerceTaxMethodId()) %>" />
-			<portlet:param name="active" value="<%= String.valueOf(!commerceTaxMethod.getActive()) %>" />
+			<portlet:param name="active" value="<%= String.valueOf(!commerceTaxMethod.isActive()) %>" />
 			<portlet:param name="engineKey" value="<%= commerceTaxMethod.getEngineKey() %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon
-			message='<%= commerceTaxMethod.getActive() ? "deactivate" : "activate" %>'
+			message='<%= commerceTaxMethod.isActive() ? "deactivate" : "activate" %>'
 			url="<%= setActiveURL %>"
 		/>
 	</c:if>

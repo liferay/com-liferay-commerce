@@ -277,11 +277,11 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 		document.addText(
 			FIELD_TARGET_TYPE, commerceDiscountTargetType.toString());
 		document.addText(Field.USER_NAME, commerceDiscount.getUserName());
-		document.addKeyword(FIELD_ACTIVE, commerceDiscount.getActive());
+		document.addKeyword(FIELD_ACTIVE, commerceDiscount.isActive());
 		document.addKeyword(
 			FIELD_COUPON_CODE, commerceDiscount.getCouponCode());
 		document.addKeyword(
-			FIELD_USE_COUPON_CODE, commerceDiscount.getUseCouponCode());
+			FIELD_USE_COUPON_CODE, commerceDiscount.isUseCouponCode());
 
 		List<CommerceDiscountUserSegmentRel> commerceDiscountUserSegmentRels =
 			_commerceDiscountUserSegmentRelLocalService.

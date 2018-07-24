@@ -50,7 +50,7 @@ List<CPTaxCategory> cpTaxCategories = cpDefinitionTaxCategoryDisplayContext.getC
 
 				</aui:select>
 
-				<aui:input checked="<%= (cpDefinition == null) ? false : cpDefinition.getTaxExempt() %>" name="taxExempt" type="toggle-switch" />
+				<aui:input checked="<%= (cpDefinition == null) ? false : cpDefinition.isTaxExempt() %>" name="taxExempt" type="toggle-switch" />
 			</aui:fieldset>
 		</aui:fieldset-group>
 

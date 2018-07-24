@@ -47,7 +47,7 @@ public class CommerceLowStockActivityImpl implements CommerceLowStockActivity {
 
 		CPInstance cpInstance = commerceWarehouseItem.getCPInstance();
 
-		if (cpInstance.getPublished()) {
+		if (cpInstance.isPublished()) {
 			cpInstance.setPublished(false);
 
 			_cpInstanceLocalService.updateCPInstance(cpInstance);
