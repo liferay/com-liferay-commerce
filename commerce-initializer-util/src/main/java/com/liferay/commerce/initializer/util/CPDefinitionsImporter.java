@@ -354,7 +354,7 @@ public class CPDefinitionsImporter {
 
 		_cpInstanceLocalService.updateCPInstance(cpInstance);
 
-		// Commerce warehouse item
+		// Commerce warehouse items
 
 		for (int i = 0; i < commerceWarehouseIds.length; i++) {
 			long commerceWarehouseId = commerceWarehouseIds[i];
