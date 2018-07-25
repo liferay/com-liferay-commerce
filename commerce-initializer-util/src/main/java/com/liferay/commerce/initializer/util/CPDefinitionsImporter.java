@@ -133,8 +133,8 @@ public class CPDefinitionsImporter {
 	}
 
 	private CPDefinition _addCPDefinition(
-			String name, String description, String sku,
-			long[] assetCategoryIds, ServiceContext serviceContext)
+			String name, String shortDescription, String description,
+			String sku, long[] assetCategoryIds, ServiceContext serviceContext)
 		throws PortalException {
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
@@ -174,16 +174,19 @@ public class CPDefinitionsImporter {
 		Locale locale = serviceContext.getLocale();
 
 		Map<Locale, String> nameMap = Collections.singletonMap(locale, name);
+		Map<Locale, String> shortDescriptionMap = Collections.singletonMap(
+			locale, shortDescription);
 		Map<Locale, String> descriptionMap = Collections.singletonMap(
 			locale, description);
 
 		return _cpDefinitionLocalService.addCPDefinition(
-			nameMap, null, descriptionMap, nameMap, null, null, null, "simple",
-			true, true, false, false, 0, 10, 10, 10, 10, 0, false, false, null,
-			true, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, true, sku, StringPool.BLANK, serviceContext);
+			nameMap, shortDescriptionMap, descriptionMap, nameMap, null, null,
+			null, "simple", true, true, false, false, 0, 10, 10, 10, 10, 0,
+			false, false, null, true, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, true, sku,
+			StringPool.BLANK, serviceContext);
 	}
 
 	private CPAttachmentFileEntry _addCPDefinitionAttachmentFileEntry(
@@ -335,11 +338,13 @@ public class CPDefinitionsImporter {
 		// Commerce product definition
 
 		String name = jsonObject.getString("Name");
+		String shortDescription = jsonObject.getString("ShortDescription");
 		String description = jsonObject.getString("Description");
 		String sku = jsonObject.getString("Sku");
 
 		CPDefinition cpDefinition = _addCPDefinition(
-			name, description, sku, assetCategoryIds, serviceContext);
+			name, shortDescription, description, sku, assetCategoryIds,
+			serviceContext);
 
 		// Commerce product instance
 
