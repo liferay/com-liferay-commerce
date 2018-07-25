@@ -23,12 +23,26 @@ import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPDefinitionOptionRel;
+import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
+import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPOption;
+import com.liferay.commerce.product.model.CPOptionCategory;
+import com.liferay.commerce.product.model.CPOptionValue;
+import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
+import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
+import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
+import com.liferay.commerce.product.service.CPOptionLocalService;
+import com.liferay.commerce.product.service.CPOptionValueLocalService;
+import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceWarehouseItemLocalService;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
@@ -359,6 +373,35 @@ public class CPDefinitionsImporter {
 
 		_cpInstanceLocalService.updateCPInstance(cpInstance);
 
+		// Commerce product definition specification option values
+
+		JSONArray specificationOptionsJSONArray = jsonObject.getJSONArray(
+			"SpecificationOptions");
+
+		if (specificationOptionsJSONArray != null) {
+			for (int i = 0; i < specificationOptionsJSONArray.length(); i++) {
+				JSONObject specificationOptionJSONObject =
+					specificationOptionsJSONArray.getJSONObject(i);
+
+				_importCPDefinitionSpecificationOptionValue(
+					specificationOptionJSONObject, cpDefinition, i,
+					serviceContext);
+			}
+		}
+
+		// Commerce product definition option rels
+
+		JSONArray optionsJSONArray = jsonObject.getJSONArray("Options");
+
+		if (optionsJSONArray != null) {
+			for (int i = 0; i < optionsJSONArray.length(); i++) {
+				JSONObject optionJSONObject = optionsJSONArray.getJSONObject(i);
+
+				_importCPDefinitionOptionRel(
+					optionJSONObject, cpDefinition, serviceContext);
+			}
+		}
+
 		// Commerce warehouse items
 
 		for (int i = 0; i < commerceWarehouseIds.length; i++) {
@@ -407,6 +450,94 @@ public class CPDefinitionsImporter {
 		return cpDefinition;
 	}
 
+	private CPDefinitionOptionRel _importCPDefinitionOptionRel(
+			JSONObject jsonObject, CPDefinition cpDefinition,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		// Commerce product definition option rel
+
+		CPOption cpOption = _cpOptionLocalService.getCPOption(
+			cpDefinition.getGroupId(), jsonObject.getString("Key"));
+
+		boolean importOptionValue = true;
+
+		JSONArray valuesJSONArray = jsonObject.getJSONArray("values");
+
+		if ((valuesJSONArray != null) && (valuesJSONArray.length() > 0)) {
+			importOptionValue = false;
+		}
+
+		CPDefinitionOptionRel cpDefinitionOptionRel =
+			_cpDefinitionOptionRelLocalService.addCPDefinitionOptionRel(
+				cpDefinition.getCPDefinitionId(), cpOption.getCPOptionId(),
+				importOptionValue, serviceContext);
+
+		// Commerce product definition option value rels
+
+		if (!importOptionValue) {
+			for (int i = 0; i < valuesJSONArray.length(); i++) {
+				String key = valuesJSONArray.getString(i);
+
+				_importCPDefinitionOptionValueRel(
+					key, cpDefinitionOptionRel, serviceContext);
+			}
+		}
+
+		return cpDefinitionOptionRel;
+	}
+
+	private CPDefinitionOptionValueRel _importCPDefinitionOptionValueRel(
+			String key, CPDefinitionOptionRel cpDefinitionOptionRel,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CPOptionValue cpOptionValue =
+			_cpOptionValueLocalService.getCPOptionValue(
+				cpDefinitionOptionRel.getCPOptionId(), key);
+
+		return _cpDefinitionOptionValueRelLocalService.
+			addCPDefinitionOptionValueRel(
+				cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+				cpOptionValue, serviceContext);
+	}
+
+	private CPDefinitionSpecificationOptionValue
+		_importCPDefinitionSpecificationOptionValue(
+			JSONObject jsonObject, CPDefinition cpDefinition,
+			double defaultPriority, ServiceContext serviceContext)
+		throws PortalException {
+
+		CPSpecificationOption cpSpecificationOption =
+			_cpSpecificationOptionLocalService.getCPSpecificationOption(
+				cpDefinition.getGroupId(), jsonObject.getString("Key"));
+
+		long cpOptionCategoryId = 0;
+
+		String categoryKey = jsonObject.getString("CategoryKey");
+
+		if (Validator.isNotNull(categoryKey)) {
+			CPOptionCategory cpOptionCategory =
+				_cpOptionCategoryLocalService.getCPOptionCategory(
+					cpSpecificationOption.getGroupId(), categoryKey);
+
+			cpOptionCategoryId = cpOptionCategory.getCPOptionCategoryId();
+		}
+		else {
+			cpOptionCategoryId = cpSpecificationOption.getCPOptionCategoryId();
+		}
+
+		Map<Locale, String> valueMap = Collections.singletonMap(
+			serviceContext.getLocale(), jsonObject.getString("Value"));
+		double priority = jsonObject.getDouble("Priority", defaultPriority);
+
+		return _cpDefinitionSpecificationOptionValueLocalService.
+			addCPDefinitionSpecificationOptionValue(
+				cpDefinition.getCPDefinitionId(),
+				cpSpecificationOption.getCPSpecificationOptionId(),
+				cpOptionCategoryId, valueMap, priority, serviceContext);
+	}
+
 	@Reference
 	private AssetCategoryLocalService _assetCategoryLocalService;
 
@@ -429,10 +560,35 @@ public class CPDefinitionsImporter {
 	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Reference
+	private CPDefinitionOptionRelLocalService
+		_cpDefinitionOptionRelLocalService;
+
+	@Reference
+	private CPDefinitionOptionValueRelLocalService
+		_cpDefinitionOptionValueRelLocalService;
+
+	@Reference
+	private CPDefinitionSpecificationOptionValueLocalService
+		_cpDefinitionSpecificationOptionValueLocalService;
+
+	@Reference
 	private CPFriendlyURLEntryLocalService _cpFriendlyURLEntryLocalService;
 
 	@Reference
 	private CPInstanceLocalService _cpInstanceLocalService;
+
+	@Reference
+	private CPOptionCategoryLocalService _cpOptionCategoryLocalService;
+
+	@Reference
+	private CPOptionLocalService _cpOptionLocalService;
+
+	@Reference
+	private CPOptionValueLocalService _cpOptionValueLocalService;
+
+	@Reference
+	private CPSpecificationOptionLocalService
+		_cpSpecificationOptionLocalService;
 
 	@Reference
 	private DLAppService _dlAppService;
