@@ -104,7 +104,7 @@ public class CPDefinitionsImporter {
 
 		if (assetCategory == null) {
 			Map<Locale, String> titleMap = Collections.singletonMap(
-				LocaleUtil.getSiteDefault(), title);
+				serviceContext.getLocale(), title);
 
 			assetCategory = _assetCategoryLocalService.addCategory(
 				serviceContext.getUserId(), serviceContext.getScopeGroupId(),
