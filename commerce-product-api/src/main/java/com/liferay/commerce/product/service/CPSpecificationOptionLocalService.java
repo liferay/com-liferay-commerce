@@ -224,6 +224,10 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 	public CPSpecificationOption getCPSpecificationOption(
 		long CPSpecificationOptionId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPSpecificationOption getCPSpecificationOption(long groupId,
+		String key) throws PortalException;
+
 	/**
 	* Returns the cp specification option matching the UUID and group.
 	*

@@ -275,6 +275,10 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	public CPOptionCategory getCPOptionCategory(long CPOptionCategoryId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPOptionCategory getCPOptionCategory(long groupId, String key)
+		throws PortalException;
+
 	/**
 	* Returns the cp option category matching the UUID and group.
 	*

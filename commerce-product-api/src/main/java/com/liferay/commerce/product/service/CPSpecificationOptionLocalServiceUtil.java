@@ -235,6 +235,12 @@ public class CPSpecificationOptionLocalServiceUtil {
 		return getService().getCPSpecificationOption(CPSpecificationOptionId);
 	}
 
+	public static com.liferay.commerce.product.model.CPSpecificationOption getCPSpecificationOption(
+		long groupId, String key)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPSpecificationOption(groupId, key);
+	}
+
 	/**
 	* Returns the cp specification option matching the UUID and group.
 	*

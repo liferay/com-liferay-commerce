@@ -246,6 +246,14 @@ public class CPSpecificationOptionLocalServiceWrapper
 		return _cpSpecificationOptionLocalService.getCPSpecificationOption(CPSpecificationOptionId);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CPSpecificationOption getCPSpecificationOption(
+		long groupId, String key)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpSpecificationOptionLocalService.getCPSpecificationOption(groupId,
+			key);
+	}
+
 	/**
 	* Returns the cp specification option matching the UUID and group.
 	*
