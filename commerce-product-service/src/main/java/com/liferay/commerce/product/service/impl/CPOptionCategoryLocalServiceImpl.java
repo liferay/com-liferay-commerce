@@ -167,6 +167,13 @@ public class CPOptionCategoryLocalServiceImpl
 	}
 
 	@Override
+	public CPOptionCategory getCPOptionCategory(long groupId, String key)
+		throws PortalException {
+
+		return cpOptionCategoryPersistence.findByG_K(groupId, key);
+	}
+
+	@Override
 	public CPOptionCategory updateCPOptionCategory(
 			long cpOptionCategoryId, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, double priority, String key,

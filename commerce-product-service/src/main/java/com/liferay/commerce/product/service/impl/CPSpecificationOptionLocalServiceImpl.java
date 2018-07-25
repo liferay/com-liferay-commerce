@@ -157,6 +157,14 @@ public class CPSpecificationOptionLocalServiceImpl
 	}
 
 	@Override
+	public CPSpecificationOption getCPSpecificationOption(
+			long groupId, String key)
+		throws PortalException {
+
+		return cpSpecificationOptionPersistence.findByG_K(groupId, key);
+	}
+
+	@Override
 	public List<CPSpecificationOption> getCPSpecificationOptions(
 		long groupId, int start, int end,
 		OrderByComparator<CPSpecificationOption> orderByComparator) {
