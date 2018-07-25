@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.initializer.util;
 
+import com.liferay.commerce.initializer.util.internal.CommerceInitializerUtil;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.CPOptionLocalService;
@@ -61,10 +62,13 @@ public class CPOptionsImporter {
 
 		// Commerce product option
 
+		String key = jsonObject.getString("Key");
+
 		Locale locale = serviceContext.getLocale();
 
 		Map<Locale, String> nameMap = Collections.singletonMap(
-			locale, jsonObject.getString("Name"));
+			locale, CommerceInitializerUtil.getValue(jsonObject, "Name", key));
+
 		Map<Locale, String> descriptionMap = Collections.singletonMap(
 			locale, jsonObject.getString("Description"));
 
@@ -73,7 +77,6 @@ public class CPOptionsImporter {
 		boolean facetable = jsonObject.getBoolean("Facetable");
 		boolean required = jsonObject.getBoolean("Required");
 		boolean skuContributor = jsonObject.getBoolean("SkuContributor");
-		String key = jsonObject.getString("Key");
 
 		CPOption cpOption = _cpOptionLocalService.addCPOption(
 			nameMap, descriptionMap, ddmFormFieldTypeName, facetable, required,
@@ -100,11 +103,13 @@ public class CPOptionsImporter {
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		String key = jsonObject.getString("Key");
+
 		Map<Locale, String> nameMap = Collections.singletonMap(
-			serviceContext.getLocale(), jsonObject.getString("Name"));
+			serviceContext.getLocale(),
+			CommerceInitializerUtil.getValue(jsonObject, "Name", key));
 
 		double priority = jsonObject.getDouble("Priority", defaultPriority);
-		String key = jsonObject.getString("Key");
 
 		return _cpOptionValueLocalService.addCPOptionValue(
 			cpOption.getCPOptionId(), nameMap, priority, key, serviceContext);
