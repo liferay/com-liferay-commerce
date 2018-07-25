@@ -171,10 +171,11 @@ public class CPDefinitionsImporter {
 			expirationDateHour += 12;
 		}
 
-		Map<Locale, String> nameMap = Collections.singletonMap(
-			serviceContext.getLocale(), name);
+		Locale locale = serviceContext.getLocale();
+
+		Map<Locale, String> nameMap = Collections.singletonMap(locale, name);
 		Map<Locale, String> descriptionMap = Collections.singletonMap(
-			serviceContext.getLocale(), description);
+			locale, description);
 
 		return _cpDefinitionLocalService.addCPDefinition(
 			nameMap, null, descriptionMap, nameMap, null, null, null, "simple",
