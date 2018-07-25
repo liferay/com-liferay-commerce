@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.initializer.util;
 
+import com.liferay.commerce.initializer.util.internal.CommerceInitializerUtil;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
@@ -74,15 +75,17 @@ public class CPSpecificationOptionsImporter {
 			cpOptionCategoryId = cpOptionCategory.getCPOptionCategoryId();
 		}
 
+		String key = jsonObject.getString("Key");
+
 		Locale locale = serviceContext.getLocale();
 
 		Map<Locale, String> titleMap = Collections.singletonMap(
-			locale, jsonObject.getString("Title"));
+			locale, CommerceInitializerUtil.getValue(jsonObject, "Title", key));
+
 		Map<Locale, String> descriptionMap = Collections.singletonMap(
 			locale, jsonObject.getString("Description"));
 
 		boolean facetable = jsonObject.getBoolean("Facetable");
-		String key = jsonObject.getString("Key");
 
 		return _cpSpecificationOptionLocalService.addCPSpecificationOption(
 			cpOptionCategoryId, titleMap, descriptionMap, facetable, key,
