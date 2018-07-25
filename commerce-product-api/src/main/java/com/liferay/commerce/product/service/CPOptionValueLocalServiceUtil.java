@@ -258,6 +258,12 @@ public class CPOptionValueLocalServiceUtil {
 		return getService().getCPOptionValue(CPOptionValueId);
 	}
 
+	public static com.liferay.commerce.product.model.CPOptionValue getCPOptionValue(
+		long cpOptionId, String key)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPOptionValue(cpOptionId, key);
+	}
+
 	/**
 	* Returns the cp option value matching the UUID and group.
 	*

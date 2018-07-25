@@ -236,6 +236,10 @@ public interface CPOptionValueLocalService extends BaseLocalService,
 	public CPOptionValue getCPOptionValue(long CPOptionValueId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPOptionValue getCPOptionValue(long cpOptionId, String key)
+		throws PortalException;
+
 	/**
 	* Returns the cp option value matching the UUID and group.
 	*

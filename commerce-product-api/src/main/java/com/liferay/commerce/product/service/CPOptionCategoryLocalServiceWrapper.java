@@ -323,6 +323,13 @@ public class CPOptionCategoryLocalServiceWrapper
 		return _cpOptionCategoryLocalService.getCPOptionCategory(CPOptionCategoryId);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CPOptionCategory getCPOptionCategory(
+		long groupId, String key)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpOptionCategoryLocalService.getCPOptionCategory(groupId, key);
+	}
+
 	/**
 	* Returns the cp option category matching the UUID and group.
 	*

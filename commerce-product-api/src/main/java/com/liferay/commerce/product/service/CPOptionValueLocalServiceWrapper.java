@@ -267,6 +267,13 @@ public class CPOptionValueLocalServiceWrapper
 		return _cpOptionValueLocalService.getCPOptionValue(CPOptionValueId);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CPOptionValue getCPOptionValue(
+		long cpOptionId, String key)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpOptionValueLocalService.getCPOptionValue(cpOptionId, key);
+	}
+
 	/**
 	* Returns the cp option value matching the UUID and group.
 	*
