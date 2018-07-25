@@ -159,6 +159,13 @@ public class CPOptionValueLocalServiceImpl
 	}
 
 	@Override
+	public CPOptionValue getCPOptionValue(long cpOptionId, String key)
+		throws PortalException {
+
+		return cpOptionValuePersistence.findByC_K(cpOptionId, key);
+	}
+
+	@Override
 	public List<CPOptionValue> getCPOptionValues(
 		long cpOptionId, int start, int end) {
 
