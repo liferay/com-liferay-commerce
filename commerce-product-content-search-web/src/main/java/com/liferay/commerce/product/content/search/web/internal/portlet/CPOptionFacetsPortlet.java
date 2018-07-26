@@ -74,7 +74,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.use-default-template=true",
 		"javax.portlet.display-name=Option Facets",
 		"javax.portlet.expiration-cache=0",
-		"javax.portlet.init-param.template-path=/",
+		"javax.portlet.init-param.template-path=/META-INF/resources/",
 		"javax.portlet.init-param.view-template=/option_facets/view.jsp",
 		"javax.portlet.name=" + CPPortletKeys.CP_OPTION_FACETS,
 		"javax.portlet.resource-bundle=content.Language",
