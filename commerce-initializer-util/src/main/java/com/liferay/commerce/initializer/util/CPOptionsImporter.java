@@ -73,7 +73,7 @@ public class CPOptionsImporter {
 			locale, jsonObject.getString("Description"));
 
 		String ddmFormFieldTypeName = jsonObject.getString(
-			"DDMFormFieldTypeName");
+			"DDMFormFieldTypeName", "select");
 		boolean facetable = jsonObject.getBoolean("Facetable");
 		boolean required = jsonObject.getBoolean("Required");
 		boolean skuContributor = jsonObject.getBoolean("SkuContributor");
