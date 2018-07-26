@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.initializer.util;
 
+import com.liferay.commerce.initializer.util.internal.CommerceInitializerUtil;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -62,13 +63,15 @@ public class CPOptionCategoriesImporter {
 
 		Locale locale = serviceContext.getLocale();
 
+		String key = jsonObject.getString("Key");
+
 		Map<Locale, String> titleMap = Collections.singletonMap(
-			locale, jsonObject.getString("Title"));
+			locale, CommerceInitializerUtil.getValue(jsonObject, "Title", key));
+
 		Map<Locale, String> descriptionMap = Collections.singletonMap(
 			locale, jsonObject.getString("Description"));
 
 		double priority = jsonObject.getDouble("Priority", defaultPriority);
-		String key = jsonObject.getString("Key");
 
 		return _cpOptionCategoryLocalService.addCPOptionCategory(
 			titleMap, descriptionMap, priority, key, serviceContext);
