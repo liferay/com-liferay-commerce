@@ -15,24 +15,17 @@
 package com.liferay.commerce.initializer.util;
 
 import com.liferay.asset.kernel.model.AssetCategory;
-import com.liferay.asset.kernel.model.AssetCategoryConstants;
-import com.liferay.asset.kernel.model.AssetVocabulary;
-import com.liferay.asset.kernel.service.AssetCategoryLocalService;
-import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
-import com.liferay.commerce.product.model.CPAttachmentFileEntry;
-import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
+import com.liferay.commerce.initializer.util.internal.CPAttachmentFileEntryCreator;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
-import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.model.CPSpecificationOption;
-import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
@@ -45,30 +38,20 @@ import com.liferay.commerce.product.service.CPOptionValueLocalService;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceWarehouseItemLocalService;
-import com.liferay.document.library.kernel.model.DLFolderConstants;
-import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.MimeTypes;
-import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
-
-import java.io.File;
-import java.io.InputStream;
 
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -90,60 +73,17 @@ public class CPDefinitionsImporter {
 
 		List<CPDefinition> cpDefinitions = new ArrayList<>(jsonArray.length());
 
-		AssetVocabulary assetVocabulary = _addAssetVocabulary(
-			assetVocabularyName, serviceContext);
-
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 			CPDefinition cpDefinition = _importCPDefinition(
-				jsonObject, assetVocabulary.getVocabularyId(),
-				commerceWarehouseIds, classLoader, imagesDependencyPath,
-				serviceContext);
+				jsonObject, assetVocabularyName, commerceWarehouseIds,
+				classLoader, imagesDependencyPath, serviceContext);
 
 			cpDefinitions.add(cpDefinition);
 		}
 
 		return cpDefinitions;
-	}
-
-	private AssetCategory _addAssetCategory(
-			long assetVocabularyId, String title, ServiceContext serviceContext)
-		throws PortalException {
-
-		AssetCategory assetCategory = _assetCategoryLocalService.fetchCategory(
-			serviceContext.getScopeGroupId(),
-			AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, title,
-			assetVocabularyId);
-
-		if (assetCategory == null) {
-			Map<Locale, String> titleMap = Collections.singletonMap(
-				serviceContext.getLocale(), title);
-
-			assetCategory = _assetCategoryLocalService.addCategory(
-				serviceContext.getUserId(), serviceContext.getScopeGroupId(),
-				AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, titleMap,
-				null, assetVocabularyId, new String[0], serviceContext);
-		}
-
-		return assetCategory;
-	}
-
-	private AssetVocabulary _addAssetVocabulary(
-			String name, ServiceContext serviceContext)
-		throws PortalException {
-
-		AssetVocabulary assetVocabulary =
-			_assetVocabularyLocalService.fetchGroupVocabulary(
-				serviceContext.getScopeGroupId(), name);
-
-		if (assetVocabulary == null) {
-			assetVocabulary = _assetVocabularyLocalService.addVocabulary(
-				serviceContext.getUserId(), serviceContext.getScopeGroupId(),
-				name, serviceContext);
-		}
-
-		return assetVocabulary;
 	}
 
 	private CPDefinition _addCPDefinition(
@@ -203,141 +143,8 @@ public class CPDefinitionsImporter {
 			StringPool.BLANK, serviceContext);
 	}
 
-	private CPAttachmentFileEntry _addCPDefinitionAttachmentFileEntry(
-			long cpDefinitionId, ClassLoader classLoader, String dependencyPath,
-			String fileName, double priority, ServiceContext serviceContext)
-		throws Exception {
-
-		long classNameId = _portal.getClassNameId(CPDefinition.class);
-
-		Map<Locale, String> titleMap = Collections.singletonMap(
-			serviceContext.getLocale(), fileName);
-
-		InputStream inputStream = classLoader.getResourceAsStream(
-			dependencyPath + fileName);
-
-		if (inputStream == null) {
-			return null;
-		}
-
-		File file = null;
-		FileEntry fileEntry = null;
-
-		try {
-			file = FileUtil.createTempFile(inputStream);
-
-			fileEntry = _dlAppService.addFileEntry(
-				serviceContext.getScopeGroupId(),
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, fileName,
-				_mimeTypes.getContentType(file), fileName, StringPool.BLANK,
-				StringPool.BLANK, file, serviceContext);
-		}
-		finally {
-			FileUtil.delete(file);
-		}
-
-		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
-
-		displayCalendar.add(Calendar.YEAR, -1);
-
-		int displayDateMonth = displayCalendar.get(Calendar.MONTH);
-		int displayDateDay = displayCalendar.get(Calendar.DAY_OF_MONTH);
-		int displayDateYear = displayCalendar.get(Calendar.YEAR);
-		int displayDateHour = displayCalendar.get(Calendar.HOUR);
-		int displayDateMinute = displayCalendar.get(Calendar.MINUTE);
-		int displayDateAmPm = displayCalendar.get(Calendar.AM_PM);
-
-		if (displayDateAmPm == Calendar.PM) {
-			displayDateHour += 12;
-		}
-
-		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
-
-		expirationCalendar.add(Calendar.MONTH, 1);
-
-		int expirationDateMonth = expirationCalendar.get(Calendar.MONTH);
-		int expirationDateDay = expirationCalendar.get(Calendar.DAY_OF_MONTH);
-		int expirationDateYear = expirationCalendar.get(Calendar.YEAR);
-		int expirationDateHour = expirationCalendar.get(Calendar.HOUR);
-		int expirationDateMinute = expirationCalendar.get(Calendar.MINUTE);
-		int expirationDateAmPm = expirationCalendar.get(Calendar.AM_PM);
-
-		if (expirationDateAmPm == Calendar.PM) {
-			expirationDateHour += 12;
-		}
-
-		return _cpAttachmentFileEntryLocalService.addCPAttachmentFileEntry(
-			classNameId, cpDefinitionId, fileEntry.getFileEntryId(),
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute, true,
-			titleMap, null, priority, CPAttachmentFileEntryConstants.TYPE_IMAGE,
-			serviceContext);
-	}
-
-	private Map<Locale, String> _getUniqueUrlTitles(
-		AssetCategory assetCategory) {
-
-		Map<Locale, String> urlTitleMap = new HashMap<>();
-
-		Map<Locale, String> titleMap = assetCategory.getTitleMap();
-
-		long classNameId = _portal.getClassNameId(AssetCategory.class);
-
-		for (Map.Entry<Locale, String> titleEntry : titleMap.entrySet()) {
-			String languageId = LocaleUtil.toLanguageId(titleEntry.getKey());
-
-			String urlTitle = _cpFriendlyURLEntryLocalService.buildUrlTitle(
-				assetCategory.getGroupId(), classNameId,
-				assetCategory.getCategoryId(), languageId,
-				titleEntry.getValue());
-
-			urlTitleMap.put(titleEntry.getKey(), urlTitle);
-		}
-
-		return urlTitleMap;
-	}
-
-	private long[] _importAssetCategories(
-			JSONArray jsonArray, long assetVocabularyId,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		long[] assetCategoryIds = new long[jsonArray.length()];
-
-		long classNameId = _portal.getClassNameId(AssetCategory.class);
-
-		for (int i = 0; i < jsonArray.length(); i++) {
-			String title = jsonArray.getString(i);
-
-			AssetCategory assetCategory = _addAssetCategory(
-				assetVocabularyId, title, serviceContext);
-
-			assetCategoryIds[i] = assetCategory.getCategoryId();
-
-			List<CPFriendlyURLEntry> cpFriendlyURLEntries =
-				_cpFriendlyURLEntryLocalService.getCPFriendlyURLEntries(
-					serviceContext.getScopeGroupId(), classNameId,
-					assetCategory.getCategoryId());
-
-			if (cpFriendlyURLEntries.isEmpty()) {
-				Map<Locale, String> urlTitleMap = _getUniqueUrlTitles(
-					assetCategory);
-
-				_cpFriendlyURLEntryLocalService.addCPFriendlyURLEntries(
-					serviceContext.getScopeGroupId(),
-					serviceContext.getCompanyId(), AssetCategory.class,
-					assetCategory.getCategoryId(), urlTitleMap);
-			}
-		}
-
-		return assetCategoryIds;
-	}
-
 	private CPDefinition _importCPDefinition(
-			JSONObject jsonObject, long assetVocabularyId,
+			JSONObject jsonObject, String assetVocabularyName,
 			long[] commerceWarehouseIds, ClassLoader classLoader,
 			String imagesDependencyPath, ServiceContext serviceContext)
 		throws Exception {
@@ -346,8 +153,10 @@ public class CPDefinitionsImporter {
 
 		JSONArray categoriesJSONArray = jsonObject.getJSONArray("Categories");
 
-		long[] assetCategoryIds = _importAssetCategories(
-			categoriesJSONArray, assetVocabularyId, serviceContext);
+		List<AssetCategory> assetCategories =
+			_assetCategoriesImporter.importAssetCategories(
+				categoriesJSONArray, assetVocabularyName, classLoader,
+				imagesDependencyPath, serviceContext);
 
 		// Commerce product definition
 
@@ -355,6 +164,9 @@ public class CPDefinitionsImporter {
 		String shortDescription = jsonObject.getString("ShortDescription");
 		String description = jsonObject.getString("Description");
 		String sku = jsonObject.getString("Sku");
+
+		long[] assetCategoryIds = ListUtil.toLongArray(
+			assetCategories, AssetCategory.CATEGORY_ID_ACCESSOR);
 
 		CPDefinition cpDefinition = _addCPDefinition(
 			name, shortDescription, description, sku, assetCategoryIds,
@@ -431,19 +243,18 @@ public class CPDefinitionsImporter {
 		String image = jsonObject.getString("Image");
 
 		if (Validator.isNotNull(image)) {
-			_addCPDefinitionAttachmentFileEntry(
-				cpDefinition.getCPDefinitionId(), classLoader,
-				imagesDependencyPath, image, 0, serviceContext);
+			_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
+				cpDefinition, classLoader, imagesDependencyPath, image, 0,
+				serviceContext);
 		}
 
 		JSONArray imagesJSONArray = jsonObject.getJSONArray("Images");
 
 		if (imagesJSONArray != null) {
 			for (int i = 0; i < imagesJSONArray.length(); i++) {
-				_addCPDefinitionAttachmentFileEntry(
-					cpDefinition.getCPDefinitionId(), classLoader,
-					imagesDependencyPath, imagesJSONArray.getString(i), i,
-					serviceContext);
+				_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
+					cpDefinition, classLoader, imagesDependencyPath,
+					imagesJSONArray.getString(i), i, serviceContext);
 			}
 		}
 
@@ -539,18 +350,14 @@ public class CPDefinitionsImporter {
 	}
 
 	@Reference
-	private AssetCategoryLocalService _assetCategoryLocalService;
-
-	@Reference
-	private AssetVocabularyLocalService _assetVocabularyLocalService;
+	private AssetCategoriesImporter _assetCategoriesImporter;
 
 	@Reference
 	private CommerceWarehouseItemLocalService
 		_commerceWarehouseItemLocalService;
 
 	@Reference
-	private CPAttachmentFileEntryLocalService
-		_cpAttachmentFileEntryLocalService;
+	private CPAttachmentFileEntryCreator _cpAttachmentFileEntryCreator;
 
 	@Reference
 	private CPDefinitionInventoryLocalService
@@ -589,14 +396,5 @@ public class CPDefinitionsImporter {
 	@Reference
 	private CPSpecificationOptionLocalService
 		_cpSpecificationOptionLocalService;
-
-	@Reference
-	private DLAppService _dlAppService;
-
-	@Reference
-	private MimeTypes _mimeTypes;
-
-	@Reference
-	private Portal _portal;
 
 }
