@@ -503,9 +503,9 @@ public class CPDefinitionsImporter {
 	}
 
 	private CPDefinitionSpecificationOptionValue
-		_importCPDefinitionSpecificationOptionValue(
-			JSONObject jsonObject, CPDefinition cpDefinition,
-			double defaultPriority, ServiceContext serviceContext)
+			_importCPDefinitionSpecificationOptionValue(
+				JSONObject jsonObject, CPDefinition cpDefinition,
+				double defaultPriority, ServiceContext serviceContext)
 		throws PortalException {
 
 		CPSpecificationOption cpSpecificationOption =
