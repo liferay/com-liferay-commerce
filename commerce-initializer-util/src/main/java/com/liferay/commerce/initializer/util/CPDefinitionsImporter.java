@@ -68,7 +68,7 @@ public class CPDefinitionsImporter {
 	public List<CPDefinition> importCPDefinitions(
 			JSONArray jsonArray, String assetVocabularyName,
 			long[] commerceWarehouseIds, ClassLoader classLoader,
-			String imagesDependencyPath, ServiceContext serviceContext)
+			String imageDependenciesPath, ServiceContext serviceContext)
 		throws Exception {
 
 		List<CPDefinition> cpDefinitions = new ArrayList<>(jsonArray.length());
@@ -78,7 +78,7 @@ public class CPDefinitionsImporter {
 
 			CPDefinition cpDefinition = _importCPDefinition(
 				jsonObject, assetVocabularyName, commerceWarehouseIds,
-				classLoader, imagesDependencyPath, serviceContext);
+				classLoader, imageDependenciesPath, serviceContext);
 
 			cpDefinitions.add(cpDefinition);
 		}
@@ -146,7 +146,7 @@ public class CPDefinitionsImporter {
 	private CPDefinition _importCPDefinition(
 			JSONObject jsonObject, String assetVocabularyName,
 			long[] commerceWarehouseIds, ClassLoader classLoader,
-			String imagesDependencyPath, ServiceContext serviceContext)
+			String imageDependenciesPath, ServiceContext serviceContext)
 		throws Exception {
 
 		// Categories
@@ -156,7 +156,7 @@ public class CPDefinitionsImporter {
 		List<AssetCategory> assetCategories =
 			_assetCategoriesImporter.importAssetCategories(
 				categoriesJSONArray, assetVocabularyName, classLoader,
-				imagesDependencyPath, serviceContext);
+				imageDependenciesPath, serviceContext);
 
 		// Commerce product definition
 
@@ -244,7 +244,7 @@ public class CPDefinitionsImporter {
 
 		if (Validator.isNotNull(image)) {
 			_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
-				cpDefinition, classLoader, imagesDependencyPath, image, 0,
+				cpDefinition, classLoader, imageDependenciesPath, image, 0,
 				serviceContext);
 		}
 
@@ -253,7 +253,7 @@ public class CPDefinitionsImporter {
 		if (imagesJSONArray != null) {
 			for (int i = 0; i < imagesJSONArray.length(); i++) {
 				_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
-					cpDefinition, classLoader, imagesDependencyPath,
+					cpDefinition, classLoader, imageDependenciesPath,
 					imagesJSONArray.getString(i), i, serviceContext);
 			}
 		}
