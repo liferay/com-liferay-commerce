@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.TextFormatter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,6 +55,19 @@ public class CPOptionsImporter {
 		}
 
 		return cpOptions;
+	}
+
+	private CPOptionValue _addCPOptionValue(
+			CPOption cpOption, double priority, String key,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		Map<Locale, String> nameMap = Collections.singletonMap(
+			serviceContext.getLocale(),
+			TextFormatter.format(key, TextFormatter.J));
+
+		return _cpOptionValueLocalService.addCPOptionValue(
+			cpOption.getCPOptionId(), nameMap, priority, key, serviceContext);
 	}
 
 	private CPOption _importCPOption(
@@ -90,8 +104,15 @@ public class CPOptionsImporter {
 			for (int i = 0; i < valuesJSONArray.length(); i++) {
 				JSONObject valueJSONObject = valuesJSONArray.getJSONObject(i);
 
-				_importCPOptionValue(
-					valueJSONObject, cpOption, i, serviceContext);
+				if (valueJSONObject != null) {
+					_importCPOptionValue(
+						valueJSONObject, cpOption, i, serviceContext);
+				}
+				else {
+					_addCPOptionValue(
+						cpOption, i, valuesJSONArray.getString(i),
+						serviceContext);
+				}
 			}
 		}
 
