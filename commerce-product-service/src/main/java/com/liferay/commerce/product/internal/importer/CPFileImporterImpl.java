@@ -272,7 +272,6 @@ public class CPFileImporterImpl implements CPFileImporter {
 		throws Exception {
 
 		String articleId = jsonObject.getString("articleId");
-		String content = jsonObject.getString("content");
 		String ddmStructureKey = jsonObject.getString("ddmStructureKey");
 		String ddmTemplateKey = jsonObject.getString("ddmTemplateKey");
 		String description = jsonObject.getString("description");
@@ -309,6 +308,9 @@ public class CPFileImporterImpl implements CPFileImporter {
 
 		titleMap.put(locale, title);
 		descriptionMap.put(locale, description);
+
+		String content = StringUtil.read(
+			classLoader, dependenciesFilePath + articleId + ".xml");
 
 		content = getNormalizedContent(
 			content, classLoader, dependenciesFilePath, serviceContext);
