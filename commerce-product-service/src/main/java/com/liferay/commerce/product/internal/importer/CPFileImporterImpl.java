@@ -33,10 +33,12 @@ import com.liferay.dynamic.data.mapping.util.DDM;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleConstants;
 import com.liferay.journal.service.JournalArticleLocalService;
+import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -85,7 +87,6 @@ import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
@@ -575,31 +576,34 @@ public class CPFileImporterImpl implements CPFileImporter {
 			String dependenciesFilePath, ServiceContext serviceContext)
 		throws Exception {
 
-		Set<String> placeHolders = new HashSet<>();
+		content = _replaceJournalArticleImages(
+			content, _journalArticleHTMLImagePattern,
+			fileEntry -> {
+				String previewURL = DLUtil.getDownloadURL(
+					fileEntry, fileEntry.getLatestFileVersion(), null,
+					StringPool.BLANK, false, false);
 
-		Matcher matcher = _placeholderPattern.matcher(content);
+				return String.format(
+					IMG_TAG, previewURL,
+					String.valueOf(fileEntry.getFileEntryId()));
+			},
+			classLoader, dependenciesFilePath, serviceContext);
 
-		while (matcher.find()) {
-			placeHolders.add(matcher.group());
-		}
+		content = _replaceJournalArticleImages(
+			content, _journalArticleJSONImagePattern,
+			fileEntry -> {
+				JSONObject jsonObject = _jsonFactory.createJSONObject();
 
-		for (String placeHolder : placeHolders) {
-			String fileName = placeHolder.substring(
-				2, placeHolder.length() - 2);
+				jsonObject.put("alt", fileEntry.getTitle());
+				jsonObject.put("groupId", fileEntry.getGroupId());
+				jsonObject.put("name", fileEntry.getFileName());
+				jsonObject.put("title", fileEntry.getTitle());
+				jsonObject.put("type", "document");
+				jsonObject.put("uuid", fileEntry.getUuid());
 
-			FileEntry fileEntry = fetchOrAddFileEntry(
-				classLoader, dependenciesFilePath, fileName, serviceContext);
-
-			String previewURL = DLUtil.getDownloadURL(
-				fileEntry, fileEntry.getLatestFileVersion(), null,
-				StringPool.BLANK, false, false);
-
-			String imgHtmlTag = String.format(
-				IMG_TAG, previewURL,
-				String.valueOf(fileEntry.getFileEntryId()));
-
-			content = content.replace(placeHolder, imgHtmlTag);
-		}
+				return jsonObject.toJSONString();
+			},
+			classLoader, dependenciesFilePath, serviceContext);
 
 		content = content.replace(
 			LOCALE_PLACEHOLDER, String.valueOf(serviceContext.getLocale()));
@@ -798,11 +802,40 @@ public class CPFileImporterImpl implements CPFileImporter {
 		}
 	}
 
+	private String _replaceJournalArticleImages(
+			String content, Pattern pattern,
+			UnsafeFunction<FileEntry, String, Exception> replacementFunction,
+			ClassLoader classLoader, String dependenciesFilePath,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		StringBuffer sb = new StringBuffer();
+
+		Matcher matcher = pattern.matcher(content);
+
+		while (matcher.find()) {
+			String fileName = matcher.group(1);
+
+			FileEntry fileEntry = fetchOrAddFileEntry(
+				classLoader, dependenciesFilePath, fileName, serviceContext);
+
+			String replacement = replacementFunction.apply(fileEntry);
+
+			matcher.appendReplacement(sb, replacement);
+		}
+
+		matcher.appendTail(sb);
+
+		return sb.toString();
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPFileImporterImpl.class);
 
-	private static final Pattern _placeholderPattern = Pattern.compile(
-		"\\[%[^\\[%]+%\\]", Pattern.CASE_INSENSITIVE);
+	private static final Pattern _journalArticleHTMLImagePattern =
+		Pattern.compile("\\[%([^\\[%]+)%\\]");
+	private static final Pattern _journalArticleJSONImagePattern =
+		Pattern.compile("\\[\\$([^\\[%]+)\\$\\]");
 
 	@Reference
 	private AssetEntryLocalService _assetEntryLocalService;
@@ -824,6 +857,9 @@ public class CPFileImporterImpl implements CPFileImporter {
 
 	@Reference
 	private JournalArticleLocalService _journalArticleLocalService;
+
+	@Reference
+	private JSONFactory _jsonFactory;
 
 	@Reference
 	private LayoutLocalService _layoutLocalService;
