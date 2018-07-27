@@ -113,30 +113,29 @@ public class PortletSettingsImporter {
 
 		String portletId = PortletIdCodec.encode(portletName, instanceId);
 
-		PortletPreferences portletSetup = null;
+		Layout layout = null;
 
 		if (Validator.isNotNull(layoutFriendlyURL)) {
-			Layout layout = _layoutLocalService.fetchLayoutByFriendlyURL(
+			layout = _layoutLocalService.fetchLayoutByFriendlyURL(
 				groupId, false, layoutFriendlyURL);
 
 			if (layout == null) {
 				layout = _layoutLocalService.fetchLayoutByFriendlyURL(
 					groupId, true, layoutFriendlyURL);
 			}
+		}
 
-			if (layout != null) {
-				portletSetup =
-					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-						layout, portletId);
-			}
-			else {
-				portletSetup =
-					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-						serviceContext.getCompanyId(), groupId,
-						PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
-						LayoutConstants.DEFAULT_PLID, portletId,
-						StringPool.BLANK);
-			}
+		PortletPreferences portletSetup = null;
+
+		if (layout != null) {
+			portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+				layout, portletId);
+		}
+		else {
+			portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+				serviceContext.getCompanyId(), groupId,
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
+				LayoutConstants.DEFAULT_PLID, portletId, StringPool.BLANK);
 		}
 
 		Iterator<String> iterator = portletPreferencesJSONObject.keys();
