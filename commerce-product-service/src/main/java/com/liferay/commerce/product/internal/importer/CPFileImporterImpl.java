@@ -26,6 +26,7 @@ import com.liferay.dynamic.data.mapping.model.DDMFormLayout;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMStructureConstants;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
+import com.liferay.dynamic.data.mapping.model.DDMTemplateConstants;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalService;
 import com.liferay.dynamic.data.mapping.util.DDM;
@@ -179,28 +180,9 @@ public class CPFileImporterImpl implements CPFileImporter {
 
 		String script = StringUtil.read(bufferedInputStream);
 
-		Map<Locale, String> nameMap = new HashMap<>();
-
-		nameMap.put(serviceContext.getLocale(), name);
-
-		DDMTemplate ddmTemplate = _ddmTemplateLocalService.fetchTemplate(
-			serviceContext.getScopeGroupId(), classNameId, getKey(name));
-
-		if (ddmTemplate == null) {
-			ddmTemplate = _ddmTemplateLocalService.addTemplate(
-				serviceContext.getUserId(), serviceContext.getScopeGroupId(),
-				classNameId, classPK, resourceClassNameId, getKey(name),
-				nameMap, null, type, mode, language, script, true, false,
-				StringPool.BLANK, null, serviceContext);
-		}
-		else {
-			ddmTemplate = _ddmTemplateLocalService.updateTemplate(
-				serviceContext.getUserId(), ddmTemplate.getTemplateId(),
-				classPK, nameMap, null, type, mode, language, script, true,
-				serviceContext);
-		}
-
-		return ddmTemplate;
+		return fetchOrAddDDMTemplate(
+			classNameId, classPK, resourceClassNameId, name, type, mode,
+			language, script, serviceContext);
 	}
 
 	@Override
@@ -306,11 +288,19 @@ public class CPFileImporterImpl implements CPFileImporter {
 			return journalArticle;
 		}
 
-		String ddmStructureFileName =
-			dependenciesFilePath + ddmStructureKey + ".json";
+		DDMStructure ddmStructure = fetchOrAddDDMStructure(
+			ddmStructureKey, classLoader,
+			dependenciesFilePath + ddmStructureKey + ".json", serviceContext);
 
-		fetchOrAddDDMStructure(
-			ddmStructureKey, classLoader, ddmStructureFileName, serviceContext);
+		String script = StringUtil.read(
+			classLoader, dependenciesFilePath + ddmTemplateKey + ".ftl");
+
+		fetchOrAddDDMTemplate(
+			_portal.getClassNameId(DDMStructure.class),
+			ddmStructure.getStructureId(),
+			_portal.getClassNameId(JournalArticle.class), ddmTemplateKey,
+			DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY, null, "ftl", script,
+			serviceContext);
 
 		Locale locale = serviceContext.getLocale();
 
@@ -474,6 +464,36 @@ public class CPFileImporterImpl implements CPFileImporter {
 			serviceContext.getUserId(), serviceContext.getScopeGroupId(), 0,
 			classNameId, ddmStructureKey, nameMap, null, ddmForm, ddmFormLayout,
 			"json", DDMStructureConstants.TYPE_DEFAULT, serviceContext);
+	}
+
+	protected DDMTemplate fetchOrAddDDMTemplate(
+			long classNameId, long classPK, long resourceClassNameId,
+			String name, String type, String mode, String language,
+			String script, ServiceContext serviceContext)
+		throws PortalException {
+
+		Map<Locale, String> nameMap = new HashMap<>();
+
+		nameMap.put(serviceContext.getLocale(), name);
+
+		DDMTemplate ddmTemplate = _ddmTemplateLocalService.fetchTemplate(
+			serviceContext.getScopeGroupId(), classNameId, getKey(name));
+
+		if (ddmTemplate == null) {
+			ddmTemplate = _ddmTemplateLocalService.addTemplate(
+				serviceContext.getUserId(), serviceContext.getScopeGroupId(),
+				classNameId, classPK, resourceClassNameId, getKey(name),
+				nameMap, null, type, mode, language, script, true, false,
+				StringPool.BLANK, null, serviceContext);
+		}
+		else {
+			ddmTemplate = _ddmTemplateLocalService.updateTemplate(
+				serviceContext.getUserId(), ddmTemplate.getTemplateId(),
+				classPK, nameMap, null, type, mode, language, script, true,
+				serviceContext);
+		}
+
+		return ddmTemplate;
 	}
 
 	protected FileEntry fetchOrAddFileEntry(
