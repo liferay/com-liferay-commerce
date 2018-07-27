@@ -20,11 +20,15 @@ import com.liferay.commerce.product.importer.CPFileImporter;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.util.DLUtil;
+import com.liferay.dynamic.data.mapping.io.DDMFormJSONDeserializer;
+import com.liferay.dynamic.data.mapping.model.DDMForm;
+import com.liferay.dynamic.data.mapping.model.DDMFormLayout;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.model.DDMStructureConstants;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalService;
-import com.liferay.dynamic.data.mapping.util.DefaultDDMStructureHelper;
+import com.liferay.dynamic.data.mapping.util.DDM;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleConstants;
 import com.liferay.journal.service.JournalArticleLocalService;
@@ -67,6 +71,7 @@ import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleLoaderUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.ThemeSettingImpl;
@@ -77,6 +82,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -301,7 +307,7 @@ public class CPFileImporterImpl implements CPFileImporter {
 		}
 
 		String ddmStructureFileName =
-			dependenciesFilePath + ddmStructureKey + ".xml";
+			dependenciesFilePath + ddmStructureKey + ".json";
 
 		fetchOrAddDDMStructure(
 			ddmStructureKey, classLoader, ddmStructureFileName, serviceContext);
@@ -454,13 +460,20 @@ public class CPFileImporterImpl implements CPFileImporter {
 			return ddmStructure;
 		}
 
-		_defaultDDMStructureHelper.addDDMStructures(
-			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
-			classNameId, classLoader, ddmStructureFileName, serviceContext);
+		Map<Locale, String> nameMap = Collections.singletonMap(
+			serviceContext.getLocale(),
+			TextFormatter.format(ddmStructureKey, TextFormatter.J));
 
-		return _ddmStructureLocalService.fetchStructure(
-			serviceContext.getScopeGroupId(), classNameId, ddmStructureKey,
-			true);
+		String json = StringUtil.read(classLoader, ddmStructureFileName);
+
+		DDMForm ddmForm = _ddmFormJSONDeserializer.deserialize(json);
+
+		DDMFormLayout ddmFormLayout = _ddm.getDefaultDDMFormLayout(ddmForm);
+
+		return _ddmStructureLocalService.addStructure(
+			serviceContext.getUserId(), serviceContext.getScopeGroupId(), 0,
+			classNameId, ddmStructureKey, nameMap, null, ddmForm, ddmFormLayout,
+			"json", DDMStructureConstants.TYPE_DEFAULT, serviceContext);
 	}
 
 	protected FileEntry fetchOrAddFileEntry(
@@ -773,13 +786,16 @@ public class CPFileImporterImpl implements CPFileImporter {
 	private AssetEntryLocalService _assetEntryLocalService;
 
 	@Reference
+	private DDM _ddm;
+
+	@Reference
+	private DDMFormJSONDeserializer _ddmFormJSONDeserializer;
+
+	@Reference
 	private DDMStructureLocalService _ddmStructureLocalService;
 
 	@Reference
 	private DDMTemplateLocalService _ddmTemplateLocalService;
-
-	@Reference
-	private DefaultDDMStructureHelper _defaultDDMStructureHelper;
 
 	@Reference
 	private DLAppLocalService _dlAppLocalService;
