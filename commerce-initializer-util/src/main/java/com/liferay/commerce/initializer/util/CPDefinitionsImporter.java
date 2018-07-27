@@ -174,8 +174,12 @@ public class CPDefinitionsImporter {
 
 		// Commerce product instance
 
-		BigDecimal cost = BigDecimal.valueOf(jsonObject.getDouble("Cost"));
-		BigDecimal price = BigDecimal.valueOf(jsonObject.getDouble("Price"));
+		double priceDouble = jsonObject.getDouble("Price");
+
+		BigDecimal price = BigDecimal.valueOf(priceDouble);
+
+		BigDecimal cost = BigDecimal.valueOf(
+			jsonObject.getDouble("Cost", priceDouble));
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpDefinition.getCPDefinitionId(), sku);
