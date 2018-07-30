@@ -84,6 +84,42 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 	}
 
 	@Override
+	public CPDefinitionSpecificationOptionValue
+		deleteCPDefinitionSpecificationOptionValue(
+			CPDefinitionSpecificationOptionValue
+				cpDefinitionSpecificationOptionValue) {
+
+		// Commerce product definition specification option value
+
+		cpDefinitionSpecificationOptionValuePersistence.remove(
+			cpDefinitionSpecificationOptionValue);
+
+		// Expando
+
+		expandoRowLocalService.deleteRows(
+			cpDefinitionSpecificationOptionValue.
+				getCPDefinitionSpecificationOptionValueId());
+
+		return cpDefinitionSpecificationOptionValue;
+	}
+
+	@Override
+	public CPDefinitionSpecificationOptionValue
+			deleteCPDefinitionSpecificationOptionValue(
+				long cpDefinitionSpecificationOptionValueId)
+		throws PortalException {
+
+		CPDefinitionSpecificationOptionValue
+			cpDefinitionSpecificationOptionValue =
+				cpDefinitionSpecificationOptionValuePersistence.
+					findByPrimaryKey(cpDefinitionSpecificationOptionValueId);
+
+		return cpDefinitionSpecificationOptionValueLocalService.
+			deleteCPDefinitionSpecificationOptionValue(
+				cpDefinitionSpecificationOptionValue);
+	}
+
+	@Override
 	public void deleteCPDefinitionSpecificationOptionValues(long cpDefinitionId)
 		throws PortalException {
 

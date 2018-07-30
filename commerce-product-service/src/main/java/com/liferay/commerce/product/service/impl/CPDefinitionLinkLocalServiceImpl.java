@@ -69,9 +69,49 @@ public class CPDefinitionLinkLocalServiceImpl
 	}
 
 	@Override
+	public CPDefinitionLink deleteCPDefinitionLink(
+		CPDefinitionLink cpDefinitionLink) {
+
+		// Commerce product definition link
+
+		cpDefinitionLinkPersistence.remove(cpDefinitionLink);
+
+		// Expando
+
+		expandoRowLocalService.deleteRows(
+			cpDefinitionLink.getCPDefinitionLinkId());
+
+		return cpDefinitionLink;
+	}
+
+	@Override
+	public CPDefinitionLink deleteCPDefinitionLink(long cpDefinitionLinkId)
+		throws PortalException {
+
+		CPDefinitionLink cpDefinitionLink =
+			cpDefinitionLinkPersistence.findByPrimaryKey(cpDefinitionLinkId);
+
+		return cpDefinitionLinkLocalService.deleteCPDefinitionLink(
+			cpDefinitionLink);
+	}
+
+	@Override
 	public void deleteCPDefinitionLinks(long cpDefinitionId) {
-		cpDefinitionLinkPersistence.removeByCPDefinitionId1(cpDefinitionId);
-		cpDefinitionLinkPersistence.removeByCPDefinitionId2(cpDefinitionId);
+		List<CPDefinitionLink> cpDefinitionLinks =
+			cpDefinitionLinkPersistence.findByCPDefinitionId1(cpDefinitionId);
+
+		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks) {
+			cpDefinitionLinkLocalService.deleteCPDefinitionLink(
+				cpDefinitionLink);
+		}
+
+		cpDefinitionLinks = cpDefinitionLinkPersistence.findByCPDefinitionId2(
+			cpDefinitionId);
+
+		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks) {
+			cpDefinitionLinkLocalService.deleteCPDefinitionLink(
+				cpDefinitionLink);
+		}
 	}
 
 	@Override

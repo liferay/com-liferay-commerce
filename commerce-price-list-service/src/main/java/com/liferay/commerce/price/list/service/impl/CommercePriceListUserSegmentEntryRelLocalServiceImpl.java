@@ -90,6 +90,12 @@ public class CommercePriceListUserSegmentEntryRelLocalServiceImpl
 		reindexCommerceUserSegmentEntry(
 			commercePriceListUserSegmentEntryRel.getCommercePriceListId());
 
+		// Expando
+
+		expandoRowLocalService.deleteRows(
+			commercePriceListUserSegmentEntryRel.
+				getCommercePriceListUserSegmentEntryRelId());
+
 		//Cache
 
 		commercePriceListLocalService.cleanPriceListCache(
