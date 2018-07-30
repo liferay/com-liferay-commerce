@@ -136,7 +136,9 @@ public class CommerceAddressIndexer extends BaseIndexer<CommerceAddress> {
 
 		CommerceRegion commerceRegion = commerceAddress.getCommerceRegion();
 
-		document.addText(FIELD_REGION_NAME, commerceRegion.getName());
+		if (commerceRegion != null) {
+			document.addText(FIELD_REGION_NAME, commerceRegion.getName());
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Document " + commerceAddress + " indexed successfully");
