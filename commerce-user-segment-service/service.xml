@@ -40,6 +40,9 @@
 		<finder name="CommerceUserSegmentEntryId" return-type="Collection">
 			<finder-column name="commerceUserSegmentEntryId" />
 		</finder>
+
+		<!-- References -->
+
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
 	<entity local-service="true" name="CommerceUserSegmentEntry" remote-service="true">
