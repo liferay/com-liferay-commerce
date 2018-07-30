@@ -48,11 +48,11 @@ public class CommerceDiscountTestUtil {
 		CommerceDiscount commerceDiscount = addFixedCommerceDiscount(
 			groupId, amount, target, targetIds);
 
+		commerceDiscount.setUseCouponCode(true);
 		commerceDiscount.setCouponCode(couponCode);
-		commerceDiscount.setLimitationTimes(1);
 		commerceDiscount.setLimitationType(
 			CommerceDiscountConstants.LIMITATION_TYPE_LIMITED);
-		commerceDiscount.setUseCouponCode(true);
+		commerceDiscount.setLimitationTimes(1);
 
 		commerceDiscount =
 			CommerceDiscountLocalServiceUtil.updateCommerceDiscount(

@@ -730,8 +730,8 @@ public class CommerceOrderLocalServiceImpl
 		CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
 		CommerceMoney total = commerceOrderPrice.getTotal();
 
-		commerceOrder.setShippingAmount(shippingValue.getPrice());
 		commerceOrder.setSubtotal(subtotal.getPrice());
+		commerceOrder.setShippingAmount(shippingValue.getPrice());
 		commerceOrder.setTaxAmount(taxValue.getPrice());
 		commerceOrder.setTotal(total.getPrice());
 

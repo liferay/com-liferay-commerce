@@ -194,9 +194,9 @@ public class CommerceShippingHelperTest {
 	private static void _addDimensions(
 		CPInstance cpInstance, double dimension) {
 
-		cpInstance.setDepth(dimension);
-		cpInstance.setHeight(dimension);
 		cpInstance.setWidth(dimension);
+		cpInstance.setHeight(dimension);
+		cpInstance.setDepth(dimension);
 
 		_cpInstanceLocalService.updateCPInstance(cpInstance);
 	}
