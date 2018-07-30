@@ -732,11 +732,11 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		}
 
 		if (ignoreSKUCombinations) {
-			return cpDefinitionOptionRel.getRequired();
+			return cpDefinitionOptionRel.isRequired();
 		}
 
 		if (publicStore) {
-			if (cpDefinitionOptionRel.getRequired() ||
+			if (cpDefinitionOptionRel.isRequired() ||
 				cpDefinitionOptionRel.isSkuContributor()) {
 
 				return true;
