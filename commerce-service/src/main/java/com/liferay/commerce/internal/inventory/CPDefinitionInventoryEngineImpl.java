@@ -194,7 +194,7 @@ public class CPDefinitionInventoryEngineImpl
 			return false;
 		}
 
-		return cpDefinitionInventory.getBackOrders();
+		return cpDefinitionInventory.isBackOrders();
 	}
 
 	@Override
@@ -210,7 +210,7 @@ public class CPDefinitionInventoryEngineImpl
 			return false;
 		}
 
-		return cpDefinitionInventory.getDisplayAvailability();
+		return cpDefinitionInventory.isDisplayAvailability();
 	}
 
 	@Override
