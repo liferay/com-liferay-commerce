@@ -20,6 +20,7 @@ import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.CPType;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
@@ -149,6 +150,10 @@ public abstract class BaseCPDefinitionsDisplayContext {
 
 	public String getSku(CPDefinition cpDefinition, Locale locale) {
 		List<CPInstance> cpInstances = cpDefinition.getCPInstances();
+
+		if (cpInstances.isEmpty()) {
+			return StringPool.BLANK;
+		}
 
 		if (cpInstances.size() > 1) {
 			return LanguageUtil.get(locale, "multiple-skus");
