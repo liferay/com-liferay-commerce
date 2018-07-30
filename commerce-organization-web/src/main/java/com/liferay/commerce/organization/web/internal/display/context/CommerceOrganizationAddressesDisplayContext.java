@@ -260,7 +260,7 @@ public class CommerceOrganizationAddressesDisplayContext
 			commerceAddressBaseModelSearchResult =
 				_commerceAddressService.searchCommerceAddresses(
 					commerceOrganizationRequestHelper.getCompanyId(),
-					organization.getGroupId(), Organization.class.getName(),
+					organization.getGroupId(), organization.getModelClassName(),
 					organization.getOrganizationId(), getKeywords(),
 					_searchContainer.getStart(), _searchContainer.getEnd(),
 					sort);
