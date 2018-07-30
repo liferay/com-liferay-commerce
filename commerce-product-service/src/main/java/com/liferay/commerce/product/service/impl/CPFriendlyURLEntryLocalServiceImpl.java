@@ -231,8 +231,8 @@ public class CPFriendlyURLEntryLocalServiceImpl
 		CPFriendlyURLEntry cpFriendlyURLEntry = createCPFriendlyURLEntry(
 			cpFriendlyURLEntryId);
 
-		cpFriendlyURLEntry.setCompanyId(companyId);
 		cpFriendlyURLEntry.setGroupId(groupId);
+		cpFriendlyURLEntry.setCompanyId(companyId);
 		cpFriendlyURLEntry.setClassNameId(classNameId);
 		cpFriendlyURLEntry.setClassPK(classPK);
 		cpFriendlyURLEntry.setLanguageId(languageId);

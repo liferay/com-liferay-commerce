@@ -45,8 +45,8 @@ public class CPDisplayLayoutLocalServiceImpl
 		CPDisplayLayout cpDisplayLayout = createCPDisplayLayout(
 			cpDisplayLayoutId);
 
-		cpDisplayLayout.setCompanyId(serviceContext.getCompanyId());
 		cpDisplayLayout.setGroupId(serviceContext.getScopeGroupId());
+		cpDisplayLayout.setCompanyId(serviceContext.getCompanyId());
 		cpDisplayLayout.setClassNameId(classNameId);
 		cpDisplayLayout.setClassPK(classPK);
 		cpDisplayLayout.setLayoutUuid(layoutUuid);
