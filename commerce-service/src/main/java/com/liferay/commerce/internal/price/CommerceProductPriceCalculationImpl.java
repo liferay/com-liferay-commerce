@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import java.util.List;
 import java.util.Optional;
@@ -267,7 +268,9 @@ public class CommerceProductPriceCalculationImpl
 					commercePriceList.getCommerceCurrencyId());
 
 			if (!priceListCurrency.isPrimary()) {
-				price = price.divide(priceListCurrency.getRate());
+				price = price.divide(
+					priceListCurrency.getRate(),
+					RoundingMode.valueOf(priceListCurrency.getRoundingMode()));
 			}
 		}
 
