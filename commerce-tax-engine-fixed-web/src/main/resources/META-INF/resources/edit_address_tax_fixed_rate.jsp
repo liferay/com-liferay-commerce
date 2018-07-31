@@ -75,7 +75,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 			<aui:fieldset>
 				<div class="row">
 					<div class="col-md-6">
-						<aui:select disabled="<%= commerceTaxFixedRateAddressRel != null %>" label="tax-category" name="cpTaxCategoryId">
+						<aui:select disabled="<%= commerceTaxFixedRateAddressRel != null %>" label="tax-category" name="CPTaxCategoryId">
 
 							<%
 							List<CPTaxCategory> cpTaxCategories = commerceTaxFixedRateAddressRelsDisplayContext.getAvailableCPTaxCategories();
