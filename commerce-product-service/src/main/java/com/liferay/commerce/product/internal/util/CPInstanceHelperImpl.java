@@ -482,9 +482,15 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			boolean skuContributor)
 		throws PortalException {
 
-		return _getDDMForm(
+		DDMForm ddmForm = _getDDMForm(
 			cpDefinitionId, locale, ignoreSKUCombinations, skuContributor,
 			false, true);
+
+		if (!ignoreSKUCombinations) {
+			ddmForm.addDDMFormRule(createDDMFormRule(ddmForm, cpDefinitionId));
+		}
+
+		return ddmForm;
 	}
 
 	@Override
@@ -711,10 +717,6 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			ddmFormField.setRequired(required);
 
 			ddmForm.addDDMFormField(ddmFormField);
-		}
-
-		if (!ignoreSKUCombinations) {
-			ddmForm.addDDMFormRule(createDDMFormRule(ddmForm, cpDefinitionId));
 		}
 
 		ddmForm.addAvailableLocale(locale);
