@@ -85,9 +85,18 @@ public class PriceTag extends IncludeTag {
 			setPriceInfo(commerceContext, themeDisplay.getLocale());
 		}
 		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(e, e);
-			}
+			_log.error(e, e);
+
+			_commerceDiscountValue = null;
+			_discountLabel = null;
+			_displayDiscountLevels = false;
+			_formattedPrice = null;
+			_formattedPromoPrice = null;
+			_promoPriceLabel = null;
+			_showDiscount = false;
+			_showDiscountAmount = false;
+			_showPercentage = false;
+			_showPriceRange = false;
 
 			return SKIP_BODY;
 		}
