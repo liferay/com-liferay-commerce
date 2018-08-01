@@ -65,6 +65,7 @@ import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ThemeLocalService;
 import com.liferay.portal.kernel.util.AggregateResourceBundleLoader;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
@@ -354,11 +355,11 @@ public class CPFileImporterImpl implements CPFileImporter {
 		throws Exception {
 
 		boolean hidden = jsonObject.getBoolean("hidden");
+		String icon = jsonObject.getString("icon");
 		String layoutTemplateId = jsonObject.getString("layoutTemplateId");
 		String layoutType = jsonObject.getString(
 			"layoutType", LayoutConstants.TYPE_PORTLET);
 		String name = jsonObject.getString("name");
-		String icon = jsonObject.getString("icon");
 		boolean privateLayout = jsonObject.getBoolean("privateLayout");
 
 		long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
@@ -402,6 +403,16 @@ public class CPFileImporterImpl implements CPFileImporter {
 		layout = _layoutLocalService.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
+
+		JSONArray permissionsJSONArray = jsonObject.getJSONArray("permissions");
+
+		if ((permissionsJSONArray != null) &&
+			(permissionsJSONArray.length() > 0)) {
+
+			updatePermissions(
+				layout.getCompanyId(), layout.getModelClassName(),
+				String.valueOf(layout.getPlid()), permissionsJSONArray);
+		}
 
 		JSONArray sublayoutsJSONArray = jsonObject.getJSONArray("subLayouts");
 
@@ -811,6 +822,7 @@ public class CPFileImporterImpl implements CPFileImporter {
 		}
 	}
 
+
 	private String _replaceJournalArticleImages(
 			String content, Pattern pattern,
 			UnsafeFunction<FileEntry, String, Exception> replacementFunction,
@@ -836,6 +848,34 @@ public class CPFileImporterImpl implements CPFileImporter {
 		matcher.appendTail(sb);
 
 		return sb.toString();
+	}
+
+	protected void updatePermissions(
+			long companyId, String name, String primKey, JSONArray jsonArray)
+		throws PortalException {
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+			int scope = jsonObject.getInt("scope");
+			String roleName = jsonObject.getString("roleName");
+
+			Role role = _roleLocalService.getRole(companyId, roleName);
+
+			String[] actionIds = new String[0];
+
+			JSONArray actionIdsJSONArray = jsonObject.getJSONArray("actionIds");
+
+			if (actionIdsJSONArray != null) {
+				for (int j = 0; j < actionIdsJSONArray.length(); j++) {
+					actionIds = ArrayUtil.append(
+						actionIds, actionIdsJSONArray.getString(j));
+				}
+			}
+
+			_resourcePermissionLocalService.setResourcePermissions(
+				companyId, name, scope, primKey, role.getRoleId(), actionIds);
+		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

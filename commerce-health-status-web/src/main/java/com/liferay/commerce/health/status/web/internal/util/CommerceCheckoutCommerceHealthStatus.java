@@ -23,7 +23,11 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutConstants;
 import com.liferay.portal.kernel.model.LayoutTypePortlet;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.service.LayoutService;
+import com.liferay.portal.kernel.service.ResourcePermissionService;
+import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.Portal;
@@ -94,6 +98,16 @@ public class CommerceCheckoutCommerceHealthStatus
 		_layoutService.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
+
+		Role role = _roleLocalService.fetchRole(
+			layout.getCompanyId(), RoleConstants.GUEST);
+
+		if (role != null) {
+			_resourcePermissionService.setIndividualResourcePermissions(
+				layout.getGroupId(), layout.getCompanyId(),
+				layout.getModelClassName(), String.valueOf(layout.getPlid()),
+				role.getRoleId(), new String[0]);
+		}
 	}
 
 	@Override
@@ -141,5 +155,11 @@ public class CommerceCheckoutCommerceHealthStatus
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private ResourcePermissionService _resourcePermissionService;
+
+	@Reference
+	private RoleLocalService _roleLocalService;
 
 }
