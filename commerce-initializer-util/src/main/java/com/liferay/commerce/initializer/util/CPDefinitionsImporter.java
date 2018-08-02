@@ -17,6 +17,7 @@ package com.liferay.commerce.initializer.util;
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.initializer.util.internal.CPAttachmentFileEntryCreator;
+import com.liferay.commerce.product.exception.NoSuchSkuContributorCPDefinitionOptionRelException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
@@ -42,6 +43,8 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -216,6 +219,21 @@ public class CPDefinitionsImporter {
 				_importCPDefinitionOptionRel(
 					optionJSONObject, cpDefinition, serviceContext);
 			}
+
+			try {
+				_cpInstanceLocalService.buildCPInstances(
+					cpDefinition.getCPDefinitionId(), serviceContext);
+			}
+			catch (
+				NoSuchSkuContributorCPDefinitionOptionRelException nssccpdore) {
+
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"No options defined has sku contributor for" +
+							"CPDefinition: " +
+								cpDefinition.getCPDefinitionId());
+				}
+			}
 		}
 
 		// Commerce warehouse items
@@ -352,6 +370,9 @@ public class CPDefinitionsImporter {
 				cpSpecificationOption.getCPSpecificationOptionId(),
 				cpOptionCategoryId, valueMap, priority, serviceContext);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPDefinitionsImporter.class);
 
 	@Reference
 	private AssetCategoriesImporter _assetCategoriesImporter;
