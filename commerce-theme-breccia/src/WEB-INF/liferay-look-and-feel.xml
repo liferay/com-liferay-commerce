@@ -5,7 +5,7 @@
 	<compatibility>
 		<version>7.1.0+</version>
 	</compatibility>
-	<theme id="commerce-theme-breccia" name="Breccia">
+	<theme id="breccia" name="Breccia">
 		<template-extension>ftl</template-extension>
 		<settings>
 			<setting configurable="true" key="demo-mode" type="checkbox" value="false" />
