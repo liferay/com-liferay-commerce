@@ -15,6 +15,7 @@
 package com.liferay.commerce.initializer.breccia.internal;
 
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
+import com.liferay.commerce.initializer.util.AssetCategoriesImporter;
 import com.liferay.commerce.initializer.util.CPDefinitionsImporter;
 import com.liferay.commerce.initializer.util.CPOptionCategoriesImporter;
 import com.liferay.commerce.initializer.util.CPOptionsImporter;
@@ -162,6 +163,21 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		return serviceContext;
 	}
 
+	private void _importAssetCategories(ServiceContext serviceContext)
+		throws Exception {
+
+		ClassLoader classLoader = BrecciaSiteInitializer.class.getClassLoader();
+
+		String json = StringUtil.read(
+			classLoader, _DEPENDENCIES_PATH + "categories.json");
+
+		JSONArray jsonArray = _jsonFactory.createJSONArray(json);
+
+		_assetCategoriesImporter.importAssetCategories(
+			jsonArray, _COMMERCE_VOCABULARY, classLoader,
+			_DEPENDENCIES_PATH + "images/", serviceContext);
+	}
+
 	private List<CommerceWarehouse> _importCommerceWarehouses(
 			ServiceContext serviceContext)
 		throws Exception {
@@ -264,6 +280,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		_importLayouts(serviceContext);
 
+		_importAssetCategories(serviceContext);
+
 		_importCPOptionCategories(serviceContext);
 
 		_importCPOptions(serviceContext);
@@ -301,6 +319,9 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		BrecciaSiteInitializer.class);
+
+	@Reference
+	private AssetCategoriesImporter _assetCategoriesImporter;
 
 	@Reference
 	private CommerceCountryLocalService _commerceCountryLocalService;
