@@ -327,7 +327,7 @@ String brandName = "";
 								</c:if>
 
 				<c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
-					<div class="fade tab-pane" id="<@portlet.namespace />specification">
+					<div class="fade tab-pane" id="<portlet:namespace />specifications">
 						<c:if test="<%= !cpDefinitionSpecificationOptionValues.isEmpty() %>">
 							<dl class="autofit-float autofit-row autofit-row-center specification-list">
 
