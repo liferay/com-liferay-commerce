@@ -274,7 +274,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		_commerceCurrencyLocalService.importDefaultValues(serviceContext);
 
 		_cpFileImporter.updateLookAndFeel(
-			_BRECCIA_THEME_ID, true, serviceContext);
+			_BRECCIA_THEME_ID, false, serviceContext);
 
 		_cpFileImporter.cleanLayouts(serviceContext);
 
