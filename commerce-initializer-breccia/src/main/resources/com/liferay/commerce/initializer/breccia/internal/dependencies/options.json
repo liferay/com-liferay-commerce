@@ -1,5 +1,6 @@
 [
 	{
+		"Facetable": true,
 		"Key": "binding-capacity",
 		"Required": true,
 		"SkuContributor": true,
@@ -19,6 +20,7 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "color-of-product",
 		"Values": [
 			"black",
@@ -37,6 +39,7 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "format",
 		"SkuContributor": true,
 		"Values": [
@@ -50,12 +53,14 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "hole-punch-capacity",
 		"Required": true,
 		"SkuContributor": true,
 		"Values": ["10"]
 	},
 	{
+		"Facetable": true,
 		"Key": "material",
 		"SkuContributor": true,
 		"Values": [
@@ -64,6 +69,7 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "maximum-paper-width",
 		"Required": true,
 		"SkuContributor": true,
@@ -76,6 +82,7 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "method-of-control",
 		"Required": true,
 		"SkuContributor": true,
@@ -86,6 +93,7 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "permanent-stapling",
 		"Required": true,
 		"SkuContributor": true,
@@ -95,6 +103,7 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "pinning",
 		"Required": true,
 		"SkuContributor": true,
@@ -104,12 +113,14 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "power-source",
 		"Required": true,
 		"SkuContributor": true,
 		"Values": ["battery"]
 	},
 	{
+		"Facetable": true,
 		"Key": "product-type",
 		"Required": true,
 		"SkuContributor": true,
@@ -120,6 +131,7 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "punch-capacity",
 		"Required": true,
 		"SkuContributor": true,
@@ -136,6 +148,7 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "punch-distance",
 		"SkuContributor": true,
 		"Values": [
@@ -144,17 +157,20 @@
 		]
 	},
 	{
+		"Facetable": true,
 		"Key": "stapler-punch-capacity",
 		"Required": true,
 		"SkuContributor": true,
 		"Values": ["10"]
 	},
 	{
+		"Facetable": true,
 		"Key": "staples-included",
 		"SkuContributor": true,
 		"Values": ["y"]
 	},
 	{
+		"Facetable": true,
 		"Key": "stapling-capacity",
 		"Required": true,
 		"SkuContributor": true,
