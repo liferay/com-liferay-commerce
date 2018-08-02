@@ -146,6 +146,16 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 				searchContainer="<%= commerceOrderItemSearchContainer %>"
 			/>
 		</liferay-ui:search-container>
+
+		<c:if test="<%= commerceCartContentMiniDisplayContext.getCommerceOrderItemsQuantity() > commerceOrderItemSearchContainer.getDelta() %>">
+			<ul class="commerce-order-items-header">
+				<li class="autofit-row">
+					<c:if test="<%= commerceCartContentMiniDisplayContext.hasPermission(ActionKeys.VIEW) %>">
+						<a class="btn btn-link commerce-link" href="<%= commerceCartContentMiniDisplayContext.getCommerceCartPortletURL() %>"><liferay-ui:message key="view-more" /></a>
+					</c:if>
+				</li>
+			</ul>
+		</c:if>
 	</div>
 
 	<ul class="commerce-order-items-footer">
