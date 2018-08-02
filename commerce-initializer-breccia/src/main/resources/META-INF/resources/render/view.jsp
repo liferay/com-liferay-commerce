@@ -113,17 +113,17 @@ String brandName = "";
 					<ul class="nav">
 						<li class="nav-item">
 							<a href="#1">
-																<aui:icon image="social-facebook" markupView="lexicon" />
+								<aui:icon image="social-facebook" markupView="lexicon" />
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#1">
-																<aui:icon image="twitter" markupView="lexicon" />
+								<aui:icon image="twitter" markupView="lexicon" />
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#1">
-																<aui:icon image="social-linkedin" markupView="lexicon" />
+								<aui:icon image="social-linkedin" markupView="lexicon" />
 							</a>
 						</li>
 						<li class="nav-item">
@@ -150,17 +150,17 @@ String brandName = "";
 					</div>
 
 					<c:if test="<%= cpSku != null %>">
-					<div class="autofit-col autofit-col-expand">
-						<div class="autofit-section">
-							<strong data-text-cp-instance-price>
-								<liferay-commerce:price
-									CPDefinitionId="<%= cpDefinitionId %>"
-									CPInstanceId="<%= cpSku.getCPInstanceId() %>"
-								/>
-							</strong>
+						<div class="autofit-col autofit-col-expand">
+							<div class="autofit-section">
+								<strong data-text-cp-instance-price>
+									<liferay-commerce:price
+										CPDefinitionId="<%= cpDefinitionId %>"
+										CPInstanceId="<%= cpSku.getCPInstanceId() %>"
+									/>
+								</strong>
+							</div>
 						</div>
-					</div>
-										</c:if>
+					</c:if>
 
 					<c:if test="<%= cpSku != null %>">
 						<div class="autofit-col autofit-col-expand">
@@ -175,24 +175,22 @@ String brandName = "";
 							<div class="autofit-section">
 								<a href="#placeholder">
 									more discount info
-																		<aui:icon image="info-circle" markupView="lexicon" />
+									<aui:icon image="info-circle" markupView="lexicon" />
 								</a>
 							</div>
 						</div>
 					</c:if>
 				</div>
 
-				<c:if test="<%= cpContentHelper.renderOptions(renderRequest, renderResponse) != null %>">
-					<div class="product-detail-options">
-						<%= cpContentHelper.renderOptions(renderRequest, renderResponse) %>
-					</div>
-				</c:if>
+				<div class="product-detail-options">
+					<%= cpContentHelper.renderOptions(renderRequest, renderResponse) %>
+				</div>
 
 				<c:if test="<%= cpSku != null %>">
 					<liferay-commerce:tier-price
-					CPInstanceId="<%= cpSku.getCPInstanceId() %>"
-					taglibQuantityInputId='<%= renderResponse.getNamespace() + cpDefinitionId + "Quantity" %>'
-				/>
+						CPInstanceId="<%= cpSku.getCPInstanceId() %>"
+						taglibQuantityInputId='<%= renderResponse.getNamespace() + cpDefinitionId + "Quantity" %>'
+					/>
 				</c:if>
 
 				<div class="product-detail-info-selections">
@@ -207,12 +205,12 @@ String brandName = "";
 
 						<div class="autofit-col">
 							<liferay-commerce-cart:add-to-cart
-						CPDefinitionId="<%= cpDefinitionId %>"
-						CPInstanceId="<%= (cpSku == null) ? 0 : cpSku.getCPInstanceId() %>"
-						elementClasses="btn-primary text-truncate"
-						productContentId='<%= renderResponse.getNamespace() + cpDefinitionId + "ProductContent" %>'
-						taglibQuantityInputId='<%= renderResponse.getNamespace() + cpDefinitionId + "Quantity" %>'
-					/>
+								CPDefinitionId="<%= cpDefinitionId %>"
+								CPInstanceId="<%= (cpSku == null) ? 0 : cpSku.getCPInstanceId() %>"
+								elementClasses="btn-primary text-truncate"
+								productContentId='<%= renderResponse.getNamespace() + cpDefinitionId + "ProductContent" %>'
+								taglibQuantityInputId='<%= renderResponse.getNamespace() + cpDefinitionId + "Quantity" %>'
+							/>
 						</div>
 
 						<div class="autofit-col autofit-col-expand">
@@ -304,37 +302,37 @@ String brandName = "";
 
 				<c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
 					<li class="nav-item" role="presentation">
-					<a aria-controls="<portlet:namespace />specification" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />specification" role="tab">
-						<%= LanguageUtil.get(resourceBundle, "specifications") %>
-					</a>
-										</li>
+						<a aria-controls="<portlet:namespace />specifications" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />specifications" role="tab">
+							<%= LanguageUtil.get(resourceBundle, "specifications") %>
+						</a>
+					</li>
 				</c:if>
 
 				<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
 					<li class="nav-item" role="presentation">
-					<a aria-controls="<portlet:namespace />attachments" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />attachments" role="tab">
-						<%= LanguageUtil.get(resourceBundle, "attachments") %>
-					</a>
-				</li>
-								</c:if>
+						<a aria-controls="<portlet:namespace />attachments" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />attachments" role="tab">
+							<%= LanguageUtil.get(resourceBundle, "attachments") %>
+						</a>
+					</li>
+				</c:if>
 			</ul>
 
 			<div class="tab-content">
 				<c:if test="<%= Validator.isNotNull(cpCatalogEntry.getDescription()) %>">
-				<div class="active fade show tab-pane" id="<portlet:namespace />description">
-					<p><%= cpCatalogEntry.getDescription() %></p>
-				</div>
-								</c:if>
+					<div class="active fade show tab-pane" id="<portlet:namespace />description">
+						<p><%= cpCatalogEntry.getDescription() %></p>
+					</div>
+				</c:if>
 
 				<c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
 					<div class="fade tab-pane" id="<portlet:namespace />specifications">
 						<c:if test="<%= !cpDefinitionSpecificationOptionValues.isEmpty() %>">
 							<dl class="autofit-float autofit-row autofit-row-center specification-list">
 
-									<%
-										for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : cpDefinitionSpecificationOptionValues) {
-											CPSpecificationOption cpSpecificationOption = cpDefinitionSpecificationOptionValue.getCPSpecificationOption();
-										%>
+								<%
+								for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : cpDefinitionSpecificationOptionValues) {
+									CPSpecificationOption cpSpecificationOption = cpDefinitionSpecificationOptionValue.getCPSpecificationOption();
+								%>
 
 									<dt class="autofit-col specification-term">
 										<%= cpSpecificationOption.getTitle(languageId) %>
@@ -343,19 +341,19 @@ String brandName = "";
 										<%= cpDefinitionSpecificationOptionValue.getValue(languageId) %>
 									</dd>
 
-									<%
-									}
-									%>
+								<%
+								}
+								%>
 
 							</dl>
 						</c:if>
 
 						<%
-					for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
-						List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
-					%>
+						for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
+							List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
+						%>
 
-						<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">
+							<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">
 								<dl class="autofit-float autofit-row autofit-row-center specification-list">
 
 									<%
@@ -378,8 +376,8 @@ String brandName = "";
 							</c:if>
 
 						<%
-												}
-												%>
+						}
+						%>
 
 					</div>
 				</c:if>
