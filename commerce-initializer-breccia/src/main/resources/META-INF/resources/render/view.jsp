@@ -23,31 +23,27 @@ CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
 CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 
 long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
-String brandName = "";
 %>
 
 <div class="container-fluid container-fluid-max-xl">
 	<div class="product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
 		<div class="commerce-component-header product-detail-header">
 			<h2 class="component-title"><%= cpCatalogEntry.getName() %></h2>
-			<div class="autofit-float autofit-padded-no-gutters autofit-row autofit-row-center product-detail-subheader">
-				<c:if test="<%= brandName != null %>">
-					<div class="autofit-col">
-						<div class="commerce-brand-name"> <%= brandName %></div>
-					</div>
-				</c:if>
 
+			<div class="autofit-float autofit-padded-no-gutters autofit-row autofit-row-center product-detail-subheader">
 				<div class="autofit-col">
 					<div class="commerce-model-number">
-					<span class='<%= (cpSku == null) ? "hide" : StringPool.BLANK %>' data-text-cp-instance-manufacturer-part-number-show><%= LanguageUtil.format(request, "manufacturer-part-number-x", StringPool.BLANK) %></span>
-					<span data-text-cp-instance-manufacturer-part-number><%= (cpSku == null) ? StringPool.BLANK : cpSku.getManufacturerPartNumber() %></span>
+						<span class='<%= (cpSku == null) ? "hide" : StringPool.BLANK %>' data-text-cp-instance-manufacturer-part-number-show><%= LanguageUtil.format(request, "manufacturer-part-number-x", StringPool.BLANK) %></span>
+
+						<span data-text-cp-instance-manufacturer-part-number><%= (cpSku == null) ? StringPool.BLANK : cpSku.getManufacturerPartNumber() %></span>
 					</div>
 				</div>
 
 				<div class="autofit-col">
 					<div class="commerce-sku">
-										<span class='<%= (cpSku == null) ? "hide" : StringPool.BLANK %>' data-text-cp-instance-sku-show><%= LanguageUtil.format(request, "sku-x", StringPool.BLANK) %></span>
-										<span data-text-cp-instance-sku><%= (cpSku == null) ? StringPool.BLANK : cpSku.getSku() %></span>
+						<span class='<%= (cpSku == null) ? "hide" : StringPool.BLANK %>' data-text-cp-instance-sku-show><%= LanguageUtil.format(request, "sku-x", StringPool.BLANK) %></span>
+
+						<span data-text-cp-instance-sku><%= (cpSku == null) ? StringPool.BLANK : cpSku.getSku() %></span>
 					</div>
 				</div>
 			</div>
@@ -58,7 +54,7 @@ String brandName = "";
 				<div class="product-detail-image-widget">
 					<div class="product-detail-thumbnail-column">
 
-									<%
+					<%
 					List<CPAttachmentFileEntry> imagesCPAttachmentFileEntries = cpContentHelper.getImages(cpDefinitionId);
 
 					String[] imageOverflowUrls = new String[imagesCPAttachmentFileEntries.size()];
@@ -71,7 +67,7 @@ String brandName = "";
 						imageOverflowUrls = ArrayUtil.append(imageOverflowUrls, url);
 					%>
 
-											<c:choose>
+						<c:choose>
 							<c:when test="<%= i > 3 %>">
 								<c:if test="<%= i == 4 %>">
 									<div class="product-detail-thumbnail-container product-detail-thumbnail-text-container" id="<portlet:namespace />thumbs-container">
@@ -83,9 +79,9 @@ String brandName = "";
 							</c:when>
 							<c:otherwise>
 								<div class="product-detail-thumbnail-container" id="<portlet:namespace />thumbs-container">
-									<a class="thumb thumb-image" data-standard="<%= url %>" href="<%= url %>">
+									<div class="thumb thumb-image" data-standard="<%= url %>">
 										<img class="img-fluid" src="<%= url %>">
-									</a>
+									</div>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -96,90 +92,38 @@ String brandName = "";
 
 					</div>
 
-				<c:if test="<%= Validator.isNotNull(cpCatalogEntry.getDefaultImageFileUrl()) %>">
-					<div class="product-detail-image-column">
-						<div class="full-image product-detail-image-container">
-							<div class="easyzoom easyzoom--adjacent product-detail-image">
-								<a href="<%= cpCatalogEntry.getDefaultImageFileUrl() %>" tabindex="-1">
-									<img class="img-fluid" id="<portlet:namespace />full-image" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>">
-								</a>
+					<c:if test="<%= Validator.isNotNull(cpCatalogEntry.getDefaultImageFileUrl()) %>">
+						<div class="product-detail-image-column">
+							<div class="full-image product-detail-image-container">
+								<div class="liferayzoom liferayzoom--adjacent product-detail-image">
+									<a href="<%= cpCatalogEntry.getDefaultImageFileUrl() %>" tabindex="-1">
+										<img class="img-fluid" id="<portlet:namespace />full-image" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>">
+									</a>
+
+									<div class="liferayzoom-flyout">
+										<img id="<portlet:namespace />zoom-image" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>" style="position: absolute">
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</c:if>
-				</div>
-
-				<div class="product-detail-social-navigation">
-					<ul class="nav">
-						<li class="nav-item">
-							<a href="#1">
-								<aui:icon image="social-facebook" markupView="lexicon" />
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#1">
-								<aui:icon image="twitter" markupView="lexicon" />
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#1">
-								<aui:icon image="social-linkedin" markupView="lexicon" />
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#1">
-								<span class="icon-instagram"></span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#1">
-								<span class="icon-youtube-play"></span>
-							</a>
-						</li>
-					</ul>
+					</c:if>
 				</div>
 			</div>
 
 			<div class="product-detail-info">
 				<div class="autofit-float autofit-row product-detail-info-header">
 					<div class="autofit-col autofit-col-expand">
-						<h2 class="commerce-price" data-text-cp-instance-price><c:if test="<%= cpSku != null %>">
-							<liferay-commerce:price CPDefinitionId="<%= cpDefinitionId %>" CPInstanceId="<%= cpSku.getCPInstanceId() %>" />
-						</c:if>
-												</h2>
+						<h2 class="commerce-price" data-text-cp-instance-price>
+							<c:if test="<%= cpSku != null %>">
+								<liferay-commerce:price
+									CPDefinitionId="<%= cpDefinitionId %>"
+									CPInstanceId="<%= cpSku.getCPInstanceId() %>"
+									discountLabel="<%= LanguageUtil.get(request, "you-save") %>"
+									promoPriceLabel="<%= LanguageUtil.get(request, "was") %>"
+								/>
+							</c:if>
+						</h2>
 					</div>
-
-					<c:if test="<%= cpSku != null %>">
-						<div class="autofit-col autofit-col-expand">
-							<div class="autofit-section">
-								<strong data-text-cp-instance-price>
-									<liferay-commerce:price
-										CPDefinitionId="<%= cpDefinitionId %>"
-										CPInstanceId="<%= cpSku.getCPInstanceId() %>"
-									/>
-								</strong>
-							</div>
-						</div>
-					</c:if>
-
-					<c:if test="<%= cpSku != null %>">
-						<div class="autofit-col autofit-col-expand">
-							<div class="autofit-section">
-								<strong>You save <span data-text-placeholder>0%</span></strong>
-							</div>
-						</div>
-					</c:if>
-
-					<c:if test="<%= cpSku != null %>">
-						<div class="autofit-col">
-							<div class="autofit-section">
-								<a href="#placeholder">
-									more discount info
-									<aui:icon image="info-circle" markupView="lexicon" />
-								</a>
-							</div>
-						</div>
-					</c:if>
 				</div>
 
 				<div class="product-detail-options">
@@ -197,9 +141,8 @@ String brandName = "";
 					<div class="autofit-float autofit-padded-no-gutters autofit-row autofit-row-center">
 						<div class="autofit-col commerce-quantity-input">
 							<liferay-commerce:quantity-input
-						CPDefinitionId="<%= cpDefinitionId %>"
-						useSelect="<%= false %>"
-
+								CPDefinitionId="<%= cpDefinitionId %>"
+								useSelect="<%= false %>"
 							/>
 						</div>
 
@@ -213,11 +156,8 @@ String brandName = "";
 							/>
 						</div>
 
-						<div class="autofit-col autofit-col-expand">
-							<div class="autofit-section">
-								<#-- discount % and $ saved goes here -->
-
-							</div>
+						<div class="autofit-float autofit-row">
+							<liferay-commerce:compare-product CPDefinitionId="<%= cpDefinitionId %>" />
 						</div>
 					</div>
 				</div>
@@ -424,6 +364,26 @@ String brandName = "";
 			</div>
 		</div>
 	</div>
+
+<aui:script>
+	var zoomImage = document.getElementById('<portlet:namespace />zoom-image');
+
+	function detectMousePosition(event) {
+		const cursorPos = {
+			x: event.offsetX / event.target.clientWidth,
+			y: event.offsetY / event.target.clientHeight
+		};
+
+		const translate = {
+			x: (zoomImage.width - zoomImage.parentElement.offsetWidth) * cursorPos.x * -1,
+			y: (zoomImage.height - zoomImage.parentElement.offsetHeight) * cursorPos.y * -1
+		};
+
+		zoomImage.style.transform = 'translate(' + translate.x + 'px, ' + translate.y + 'px)';
+	}
+
+	document.getElementById('<portlet:namespace />full-image').addEventListener('mousemove', detectMousePosition);
+</aui:script>
 
 <aui:script use="liferay-commerce-product-content">
 	var productContent = new Liferay.Portlet.ProductContent(
