@@ -289,7 +289,8 @@ public abstract class CPDefinitionLocalServiceBaseImpl
 	@Override
 	public CPDefinition fetchCPDefinitionByReferenceCode(long companyId,
 		String externalReferenceCode) {
-		return cpDefinitionPersistence.fetchByC_ERC(companyId, null);
+		return cpDefinitionPersistence.fetchByC_ERC(companyId,
+			externalReferenceCode);
 	}
 
 	/**

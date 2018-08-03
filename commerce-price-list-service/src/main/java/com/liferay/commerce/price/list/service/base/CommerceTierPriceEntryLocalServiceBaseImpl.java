@@ -256,7 +256,8 @@ public abstract class CommerceTierPriceEntryLocalServiceBaseImpl
 	@Override
 	public CommerceTierPriceEntry fetchCommerceTierPriceEntryByReferenceCode(
 		long companyId, String externalReferenceCode) {
-		return commerceTierPriceEntryPersistence.fetchByC_ERC(companyId, null);
+		return commerceTierPriceEntryPersistence.fetchByC_ERC(companyId,
+			externalReferenceCode);
 	}
 
 	/**
