@@ -175,23 +175,6 @@ public class CPDefinitionsImporter {
 			name, shortDescription, description, sku, assetCategoryIds,
 			serviceContext);
 
-		// Commerce product instance
-
-		double priceDouble = jsonObject.getDouble("Price");
-
-		BigDecimal price = BigDecimal.valueOf(priceDouble);
-
-		BigDecimal cost = BigDecimal.valueOf(
-			jsonObject.getDouble("Cost", priceDouble));
-
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-			cpDefinition.getCPDefinitionId(), sku);
-
-		cpInstance.setPrice(price);
-		cpInstance.setCost(cost);
-
-		_cpInstanceLocalService.updateCPInstance(cpInstance);
-
 		// Commerce product definition specification option values
 
 		JSONArray specificationOptionsJSONArray = jsonObject.getJSONArray(
@@ -219,35 +202,53 @@ public class CPDefinitionsImporter {
 				_importCPDefinitionOptionRel(
 					optionJSONObject, cpDefinition, serviceContext);
 			}
+		}
 
-			try {
-				_cpInstanceLocalService.buildCPInstances(
-					cpDefinition.getCPDefinitionId(), serviceContext);
-			}
-			catch (
-				NoSuchSkuContributorCPDefinitionOptionRelException nssccpdore) {
+		// Commerce product instances
 
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"No options defined has sku contributor for" +
-							"CPDefinition: " +
-								cpDefinition.getCPDefinitionId());
-				}
+		try {
+			_cpInstanceLocalService.buildCPInstances(
+				cpDefinition.getCPDefinitionId(), serviceContext);
+		}
+		catch (NoSuchSkuContributorCPDefinitionOptionRelException nssccpdore) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"No options defined has sku contributor for " +
+						"CPDefinition: " + cpDefinition.getCPDefinitionId());
 			}
 		}
 
-		// Commerce warehouse items
+		List<CPInstance> cpInstances = cpDefinition.getCPInstances();
 
-		for (int i = 0; i < commerceWarehouseIds.length; i++) {
-			long commerceWarehouseId = commerceWarehouseIds[i];
+		for (CPInstance cpInstance : cpInstances) {
 
-			int quantity = jsonObject.getInt(
-				"Warehouse" + String.valueOf(i + 1));
+			// Commerce product instance
 
-			if (quantity > 0) {
-				_commerceWarehouseItemLocalService.addCommerceWarehouseItem(
-					commerceWarehouseId, cpInstance.getCPInstanceId(), quantity,
-					serviceContext);
+			double priceDouble = jsonObject.getDouble("Price");
+
+			BigDecimal price = BigDecimal.valueOf(priceDouble);
+
+			BigDecimal cost = BigDecimal.valueOf(
+				jsonObject.getDouble("Cost", priceDouble));
+
+			cpInstance.setPrice(price);
+			cpInstance.setCost(cost);
+
+			_cpInstanceLocalService.updateCPInstance(cpInstance);
+
+			// Commerce warehouse items
+
+			for (int i = 0; i < commerceWarehouseIds.length; i++) {
+				long commerceWarehouseId = commerceWarehouseIds[i];
+
+				int quantity = jsonObject.getInt(
+					"Warehouse" + String.valueOf(i + 1));
+
+				if (quantity > 0) {
+					_commerceWarehouseItemLocalService.addCommerceWarehouseItem(
+						commerceWarehouseId, cpInstance.getCPInstanceId(),
+						quantity, serviceContext);
+				}
 			}
 		}
 

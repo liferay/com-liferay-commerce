@@ -84,15 +84,23 @@ public class PortletSettingsImporter {
 		long resourceClassNameId = _portal.getClassNameId(
 			PortletDisplayTemplate.class);
 
-		InputStream inputStream = classLoader.getResourceAsStream(
-			displayTemplateDependenciesPath + fileName);
+		File file = null;
 
-		File file = FileUtil.createTempFile(inputStream);
+		if (Validator.isNotNull(fileName)) {
+			InputStream inputStream = classLoader.getResourceAsStream(
+				displayTemplateDependenciesPath + fileName);
+
+			file = FileUtil.createTempFile(inputStream);
+		}
 
 		DDMTemplate ddmTemplate = _cpFileImporter.getDDMTemplate(
 			file, classNameId, 0L, resourceClassNameId, name,
 			DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY, null,
 			TemplateConstants.LANG_TYPE_FTL, serviceContext);
+
+		if (ddmTemplate == null) {
+			return StringPool.BLANK;
+		}
 
 		return "ddmTemplate_" + ddmTemplate.getTemplateKey();
 	}

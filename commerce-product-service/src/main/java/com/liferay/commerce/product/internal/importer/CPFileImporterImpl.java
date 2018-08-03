@@ -68,6 +68,7 @@ import com.liferay.portal.kernel.util.AggregateResourceBundleLoader;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
@@ -110,7 +111,7 @@ public class CPFileImporterImpl implements CPFileImporter {
 	public static final String IMG_TAG =
 		"<img alt='' src='%s' data-fileentryid='%s' />";
 
-	public static final String LOCALE_PLACEHOLDER = "[$LOCALE$]";
+	public static final String LOCALE_PLACEHOLDER = "[£LOCALE£]";
 
 	@Override
 	public void cleanLayouts(ServiceContext serviceContext)
@@ -173,6 +174,11 @@ public class CPFileImporterImpl implements CPFileImporter {
 			String name, String type, String mode, String language,
 			ServiceContext serviceContext)
 		throws Exception {
+
+		if (file == null) {
+			return _ddmTemplateLocalService.fetchTemplate(
+				serviceContext.getScopeGroupId(), classNameId, getKey(name));
+		}
 
 		FileInputStream fileInputStream = new FileInputStream(file);
 
@@ -292,15 +298,17 @@ public class CPFileImporterImpl implements CPFileImporter {
 			ddmStructureKey, classLoader,
 			dependenciesFilePath + ddmStructureKey + ".json", serviceContext);
 
-		String script = StringUtil.read(
-			classLoader, dependenciesFilePath + ddmTemplateKey + ".ftl");
+		InputStream inputStream = classLoader.getResourceAsStream(
+			dependenciesFilePath + ddmTemplateKey + ".ftl");
 
-		fetchOrAddDDMTemplate(
-			_portal.getClassNameId(DDMStructure.class),
-			ddmStructure.getStructureId(),
-			_portal.getClassNameId(JournalArticle.class), ddmTemplateKey,
-			DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY, null, "ftl", script,
-			serviceContext);
+		if (inputStream != null) {
+			fetchOrAddDDMTemplate(
+				_portal.getClassNameId(DDMStructure.class),
+				ddmStructure.getStructureId(),
+				_portal.getClassNameId(JournalArticle.class), ddmTemplateKey,
+				DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY, null, "ftl",
+				StringUtil.read(inputStream), serviceContext);
+		}
 
 		Locale locale = serviceContext.getLocale();
 
@@ -606,7 +614,8 @@ public class CPFileImporterImpl implements CPFileImporter {
 			classLoader, dependenciesFilePath, serviceContext);
 
 		content = content.replace(
-			LOCALE_PLACEHOLDER, String.valueOf(serviceContext.getLocale()));
+			LOCALE_PLACEHOLDER,
+			LocaleUtil.toLanguageId(serviceContext.getLocale()));
 
 		return content;
 	}

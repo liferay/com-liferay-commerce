@@ -1,8 +1,8 @@
 {
 	"availableLanguageIds": [
-		"en_US"
+		"[£LOCALE£]"
 	],
-	"defaultLanguageId": "en_US",
+	"defaultLanguageId": "[£LOCALE£]",
 	"fields": [
 		{
 			"dataType": "image",
