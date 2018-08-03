@@ -264,7 +264,7 @@ public abstract class CPOptionLocalServiceBaseImpl extends BaseLocalServiceImpl
 	@Override
 	public CPOption fetchCPOptionByReferenceCode(long companyId,
 		String externalReferenceCode) {
-		return cpOptionPersistence.fetchByC_ERC(companyId, null);
+		return cpOptionPersistence.fetchByC_ERC(companyId, externalReferenceCode);
 	}
 
 	/**

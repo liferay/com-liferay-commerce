@@ -264,7 +264,8 @@ public abstract class CommercePriceListLocalServiceBaseImpl
 	@Override
 	public CommercePriceList fetchCommercePriceListByReferenceCode(
 		long companyId, String externalReferenceCode) {
-		return commercePriceListPersistence.fetchByC_ERC(companyId, null);
+		return commercePriceListPersistence.fetchByC_ERC(companyId,
+			externalReferenceCode);
 	}
 
 	/**
