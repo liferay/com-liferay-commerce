@@ -40,18 +40,18 @@ Organization organization = commerceContext.getOrganization();
 			</div>
 		</c:when>
 		<c:otherwise>
-				<table class="table table-sm">
-					<tr>
-						<th class="table-cell-content"><liferay-ui:message key="id" /></th>
-						<th class="table-cell-content"><liferay-ui:message key="name" /></th>
-						<th class="table-cell-content"><liferay-ui:message key="type" /></th>
-					</tr>
-					<tr>
-						<td class="table-cell-content"><%= organization.getOrganizationId() %></td>
-						<td class="table-cell-content"><%= organization.getName() %></td>
-						<td class="table-cell-content"><%= organization.getType() %></td>
-					</tr>
-				</table>
+			<table class="table table-sm">
+				<tr>
+					<th class="table-cell-content"><liferay-ui:message key="id" /></th>
+					<th class="table-cell-content"><liferay-ui:message key="name" /></th>
+					<th class="table-cell-content"><liferay-ui:message key="type" /></th>
+				</tr>
+				<tr>
+					<td class="table-cell-content"><%= organization.getOrganizationId() %></td>
+					<td class="table-cell-content"><%= organization.getName() %></td>
+					<td class="table-cell-content"><%= organization.getType() %></td>
+				</tr>
+			</table>
 		</c:otherwise>
 	</c:choose>
 </div>
@@ -117,34 +117,34 @@ Organization organization = commerceContext.getOrganization();
 		</c:when>
 		<c:otherwise>
 
-				<%
-				CommercePriceList commercePriceList = optionalCommercePriceList.get();
+			<%
+			CommercePriceList commercePriceList = optionalCommercePriceList.get();
 
-				CommerceCurrency commercePriceListCurrency = commercePriceList.getCommerceCurrency();
-				%>
+			CommerceCurrency commercePriceListCurrency = commercePriceList.getCommerceCurrency();
+			%>
 
-				<table class="table table-sm">
-					<tr>
-						<th class="table-cell-content"><liferay-ui:message key="id" /></th>
-						<th class="table-cell-content"><liferay-ui:message key="name" /></th>
+			<table class="table table-sm">
+				<tr>
+					<th class="table-cell-content"><liferay-ui:message key="id" /></th>
+					<th class="table-cell-content"><liferay-ui:message key="name" /></th>
 
-						<c:if test="<%= commercePriceListCurrency != null %>">
-							<th class="table-cell-content"><liferay-ui:message key="currency-id" /></th>
-							<th class="table-cell-content"><liferay-ui:message key="currency-name" /></th>
-							<th class="table-cell-content"><liferay-ui:message key="currency-code" /></th>
-						</c:if>
-					</tr>
-					<tr>
-						<td class="table-cell-content"><%= commercePriceList.getCommercePriceListId() %></td>
-						<td class="table-cell-content"><%= commercePriceList.getName() %></td>
+					<c:if test="<%= commercePriceListCurrency != null %>">
+						<th class="table-cell-content"><liferay-ui:message key="currency-id" /></th>
+						<th class="table-cell-content"><liferay-ui:message key="currency-name" /></th>
+						<th class="table-cell-content"><liferay-ui:message key="currency-code" /></th>
+					</c:if>
+				</tr>
+				<tr>
+					<td class="table-cell-content"><%= commercePriceList.getCommercePriceListId() %></td>
+					<td class="table-cell-content"><%= commercePriceList.getName() %></td>
 
-						<c:if test="<%= commercePriceListCurrency != null %>">
-							<td class="table-cell-content"><%= commercePriceListCurrency.getCommerceCurrencyId() %></td>
-							<td class="table-cell-content"><%= commercePriceListCurrency.getName(locale) %></td>
-							<td class="table-cell-content"><%= commercePriceListCurrency.getCode() %></td>
-						</c:if>
-					</tr>
-				</table>
+					<c:if test="<%= commercePriceListCurrency != null %>">
+						<td class="table-cell-content"><%= commercePriceListCurrency.getCommerceCurrencyId() %></td>
+						<td class="table-cell-content"><%= commercePriceListCurrency.getName(locale) %></td>
+						<td class="table-cell-content"><%= commercePriceListCurrency.getCode() %></td>
+					</c:if>
+				</tr>
+			</table>
 		</c:otherwise>
 	</c:choose>
 </div>
@@ -159,26 +159,26 @@ Organization organization = commerceContext.getOrganization();
 			</div>
 		</c:when>
 		<c:otherwise>
-				<table class="table table-sm">
+			<table class="table table-sm">
+				<tr>
+					<th class="table-cell-content"><liferay-ui:message key="id" /></th>
+					<th class="table-cell-content"><liferay-ui:message key="name" /></th>
+				</tr>
+
+				<%
+				for (CommerceUserSegmentEntry commerceUserSegmentEntry : commerceUserSegmentEntries) {
+				%>
+
 					<tr>
-						<th class="table-cell-content"><liferay-ui:message key="id" /></th>
-						<th class="table-cell-content"><liferay-ui:message key="name" /></th>
+						<td class="table-cell-content"><%= commerceUserSegmentEntry.getCommerceUserSegmentEntryId() %></td>
+						<td class="table-cell-content"><%= commerceUserSegmentEntry.getName(locale) %></td>
 					</tr>
 
-					<%
-					for (CommerceUserSegmentEntry commerceUserSegmentEntry : commerceUserSegmentEntries) {
-					%>
+				<%
+				}
+				%>
 
-						<tr>
-							<td class="table-cell-content"><%= commerceUserSegmentEntry.getCommerceUserSegmentEntryId() %></td>
-							<td class="table-cell-content"><%= commerceUserSegmentEntry.getName(locale) %></td>
-						</tr>
-
-					<%
-					}
-					%>
-
-				</table>
+			</table>
 		</c:otherwise>
 	</c:choose>
 </div>
