@@ -131,5 +131,55 @@
 				"portletName": "com_liferay_commerce_cart_content_web_internal_portlet_CommerceCartContentTotalPortlet"
 			}
 		]
+	},
+	{
+		"layoutTemplateId": "1_column",
+		"name": "My Account",
+		"subLayouts": [
+			{
+				"layoutTemplateId": "1_column",
+				"name": "User Management",
+				"portlets": [
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 0,
+						"portletName": "com_liferay_commerce_user_web_internal_portlet_CommerceUserPortlet"
+					}
+				]
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Addresses",
+				"portlets": [
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 0,
+						"portletName": "com_liferay_commerce_address_content_web_internal_portlet_CommerceAddressContentPortlet"
+					}
+				]
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Orders",
+				"portlets": [
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 0,
+						"portletName": "com_liferay_commerce_order_content_web_internal_portlet_CommerceOrderContentPortlet"
+					}
+				]
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "My Downloads",
+				"portlets": [
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 0,
+						"portletName": "com_liferay_commerce_product_type_virtual_order_content_web_internal_portlet_CommerceVirtualOrderItemContentPortlet"
+					}
+				]
+			}
+		]
 	}
 ]
