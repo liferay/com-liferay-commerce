@@ -29,8 +29,6 @@ CommerceUserDetailDisplayContext commerceUserDetailDisplayContext = (CommerceUse
 User curUser = commerceUserDetailDisplayContext.getSelectedUser();
 %>
 
-<h1><%= HtmlUtil.escape(LanguageUtil.get(request, "manage-account")) %></h1>
-
 <liferay-frontend:screen-navigation
 	containerCssClass="col-md-10"
 	context="<%= curUser %>"
