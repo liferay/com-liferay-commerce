@@ -1,4 +1,5 @@
 @import "components/navbars";
+@import "components/product-detail";
 @import "components/widget";
 @import "portlet/portlet_decorators";
 @import "portlet/portlet_hello_world";
@@ -892,9 +893,14 @@
 }
 
 .catalog-card-page {
+	align-self: stretch;
+	margin-bottom: 1.25rem;
+
 	.card {
 		display: flex;
-		padding: 1.25rem;
+		flex-direction: column;
+		height: 100%;
+		padding: 1rem;
 		width: 100%;
 	}
 
@@ -917,6 +923,15 @@
 
 	.product-description {
 		margin-bottom: 3rem;
+	}
+
+	.product-expand {
+		flex-grow: 1;
+	}
+
+	.product-list-info-compare {
+		line-height: 1.5rem;
+		padding: 1px 0;
 	}
 
 	.product-actions {
@@ -1676,6 +1691,32 @@
 
 // Commerce Product Detail
 
+// Product Detail
+
+.product-detail-info-header {
+	.commerce-price {
+		text-align: center;
+
+		.commerce-discount {
+			float: right;
+			font-size: 1rem;
+		}
+
+		.product-price {
+			float: left;
+		}
+
+		.product-promo-price{
+			font-size: 1rem;
+			vertical-align: super;
+
+			& > del {
+				text-decoration: none;
+			}
+		}
+	}
+}
+
 .product-detail-header {
 	font-size: 0.875rem;
 	margin-bottom: 3rem;
@@ -2212,7 +2253,7 @@
 	text-align: center;
 
 	.product-image {
-		max-width: 40%;
+		max-width: 100%;
 	}
 }
 
