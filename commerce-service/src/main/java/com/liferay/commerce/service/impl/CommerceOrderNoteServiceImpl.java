@@ -76,6 +76,24 @@ public class CommerceOrderNoteServiceImpl
 	}
 
 	@Override
+	public CommerceOrderNote fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommerceOrderNote commerceOrderNote =
+			commerceOrderNoteLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		if (commerceOrderNote != null) {
+			_commerceOrderModelResourcePermission.check(
+				getPermissionChecker(), commerceOrderNote.getCommerceOrderId(),
+				CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES);
+		}
+
+		return commerceOrderNote;
+	}
+
+	@Override
 	public CommerceOrderNote getCommerceOrderNote(long commerceOrderNoteId)
 		throws PortalException {
 
@@ -182,6 +200,27 @@ public class CommerceOrderNoteServiceImpl
 
 		return commerceOrderNoteLocalService.updateCommerceOrderNote(
 			commerceOrderNote.getCommerceOrderNoteId(), content, restricted);
+	}
+
+	public CommerceOrderNote upsertCommerceOrderNote(
+			long commerceOrderNoteId, long commerceOrderId, String content,
+			boolean restricted, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		String actionId = CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_NOTES;
+
+		if (restricted) {
+			actionId =
+				CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES;
+		}
+
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderId, actionId);
+
+		return commerceOrderNoteLocalService.upsertCommerceOrderNote(
+			commerceOrderNoteId, commerceOrderId, content, restricted,
+			externalReferenceCode, serviceContext);
 	}
 
 	private static volatile ModelResourcePermission<CommerceOrder>
