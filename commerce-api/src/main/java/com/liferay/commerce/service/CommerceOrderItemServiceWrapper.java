@@ -52,6 +52,14 @@ public class CommerceOrderItemServiceWrapper implements CommerceOrderItemService
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrderItem fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderItemService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrderItem fetchCommerceOrderItem(
 		long commerceOrderItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {

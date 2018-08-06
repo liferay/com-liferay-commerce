@@ -130,6 +130,8 @@ public class CommerceOrderPersistenceTest {
 
 		newCommerceOrder.setUuid(RandomTestUtil.randomString());
 
+		newCommerceOrder.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		newCommerceOrder.setGroupId(RandomTestUtil.nextLong());
 
 		newCommerceOrder.setCompanyId(RandomTestUtil.nextLong());
@@ -237,6 +239,8 @@ public class CommerceOrderPersistenceTest {
 
 		Assert.assertEquals(existingCommerceOrder.getUuid(),
 			newCommerceOrder.getUuid());
+		Assert.assertEquals(existingCommerceOrder.getExternalReferenceCode(),
+			newCommerceOrder.getExternalReferenceCode());
 		Assert.assertEquals(existingCommerceOrder.getCommerceOrderId(),
 			newCommerceOrder.getCommerceOrderId());
 		Assert.assertEquals(existingCommerceOrder.getGroupId(),
@@ -408,6 +412,15 @@ public class CommerceOrderPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceOrder newCommerceOrder = addCommerceOrder();
 
@@ -431,16 +444,16 @@ public class CommerceOrderPersistenceTest {
 
 	protected OrderByComparator<CommerceOrder> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CommerceOrder", "uuid",
-			true, "commerceOrderId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "siteGroupId", true, "orderOrganizationId",
-			true, "orderUserId", true, "commerceCurrencyId", true,
-			"billingAddressId", true, "shippingAddressId", true,
-			"commercePaymentMethodId", true, "commerceShippingMethodId", true,
-			"shippingOptionName", true, "purchaseOrderNumber", true,
-			"subtotal", true, "subtotalDiscountAmount", true,
-			"subtotalDiscountPercentageLevel1", true,
-			"subtotalDiscountPercentageLevel2", true,
+			true, "externalReferenceCode", true, "commerceOrderId", true,
+			"groupId", true, "companyId", true, "userId", true, "userName",
+			true, "createDate", true, "modifiedDate", true, "siteGroupId",
+			true, "orderOrganizationId", true, "orderUserId", true,
+			"commerceCurrencyId", true, "billingAddressId", true,
+			"shippingAddressId", true, "commercePaymentMethodId", true,
+			"commerceShippingMethodId", true, "shippingOptionName", true,
+			"purchaseOrderNumber", true, "subtotal", true,
+			"subtotalDiscountAmount", true, "subtotalDiscountPercentageLevel1",
+			true, "subtotalDiscountPercentageLevel2", true,
 			"subtotalDiscountPercentageLevel3", true,
 			"subtotalDiscountPercentageLevel4", true, "shippingAmount", true,
 			"shippingDiscountAmount", true, "shippingDiscountPercentageLevel1",
@@ -664,6 +677,14 @@ public class CommerceOrderPersistenceTest {
 		Assert.assertEquals(Long.valueOf(existingCommerceOrder.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCommerceOrder,
 				"getOriginalGroupId", new Class<?>[0]));
+
+		Assert.assertEquals(Long.valueOf(existingCommerceOrder.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceOrder,
+				"getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCommerceOrder.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(existingCommerceOrder,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
 	}
 
 	protected CommerceOrder addCommerceOrder() throws Exception {
@@ -672,6 +693,8 @@ public class CommerceOrderPersistenceTest {
 		CommerceOrder commerceOrder = _persistence.create(pk);
 
 		commerceOrder.setUuid(RandomTestUtil.randomString());
+
+		commerceOrder.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		commerceOrder.setGroupId(RandomTestUtil.nextLong());
 

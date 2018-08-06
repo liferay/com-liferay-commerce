@@ -199,9 +199,30 @@ public class CommerceOrderItemLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderItem fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItem fetchCommerceOrderItem(
 		long commerceOrderItemId) {
 		return getService().fetchCommerceOrderItem(commerceOrderItemId);
+	}
+
+	/**
+	* Returns the commerce order item with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce order item's external reference code
+	* @return the matching commerce order item, or <code>null</code> if a matching commerce order item could not be found
+	*/
+	public static com.liferay.commerce.model.CommerceOrderItem fetchCommerceOrderItemByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return getService()
+				   .fetchCommerceOrderItemByReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {

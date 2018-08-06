@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
@@ -52,6 +53,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -1163,6 +1165,269 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 
 	private static final String _FINDER_COLUMN_C_R_COMMERCEORDERID_2 = "commerceOrderNote.commerceOrderId = ? AND ";
 	private static final String _FINDER_COLUMN_C_R_RESTRICTED_2 = "commerceOrderNote.restricted = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_ERC = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderNoteImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_ERC",
+			new String[] { Long.class.getName(), String.class.getName() },
+			CommerceOrderNoteModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceOrderNoteModelImpl.EXTERNALREFERENCECODE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_ERC = new FinderPath(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderNoteModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the commerce order note where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchOrderNoteException} if it could not be found.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce order note
+	 * @throws NoSuchOrderNoteException if a matching commerce order note could not be found
+	 */
+	@Override
+	public CommerceOrderNote findByC_ERC(long companyId,
+		String externalReferenceCode) throws NoSuchOrderNoteException {
+		CommerceOrderNote commerceOrderNote = fetchByC_ERC(companyId,
+				externalReferenceCode);
+
+		if (commerceOrderNote == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", externalReferenceCode=");
+			msg.append(externalReferenceCode);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchOrderNoteException(msg.toString());
+		}
+
+		return commerceOrderNote;
+	}
+
+	/**
+	 * Returns the commerce order note where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
+	 */
+	@Override
+	public CommerceOrderNote fetchByC_ERC(long companyId,
+		String externalReferenceCode) {
+		return fetchByC_ERC(companyId, externalReferenceCode, true);
+	}
+
+	/**
+	 * Returns the commerce order note where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
+	 */
+	@Override
+	public CommerceOrderNote fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { companyId, externalReferenceCode };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_ERC,
+					finderArgs, this);
+		}
+
+		if (result instanceof CommerceOrderNote) {
+			CommerceOrderNote commerceOrderNote = (CommerceOrderNote)result;
+
+			if ((companyId != commerceOrderNote.getCompanyId()) ||
+					!Objects.equals(externalReferenceCode,
+						commerceOrderNote.getExternalReferenceCode())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_COMMERCEORDERNOTE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_ERC_COMPANYID_2);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode == null) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1);
+			}
+			else if (externalReferenceCode.equals("")) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				List<CommerceOrderNote> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"CommerceOrderNotePersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					CommerceOrderNote commerceOrderNote = list.get(0);
+
+					result = commerceOrderNote;
+
+					cacheResult(commerceOrderNote);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceOrderNote)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce order note where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the commerce order note that was removed
+	 */
+	@Override
+	public CommerceOrderNote removeByC_ERC(long companyId,
+		String externalReferenceCode) throws NoSuchOrderNoteException {
+		CommerceOrderNote commerceOrderNote = findByC_ERC(companyId,
+				externalReferenceCode);
+
+		return remove(commerceOrderNote);
+	}
+
+	/**
+	 * Returns the number of commerce order notes where companyId = &#63; and externalReferenceCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the number of matching commerce order notes
+	 */
+	@Override
+	public int countByC_ERC(long companyId, String externalReferenceCode) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_ERC;
+
+		Object[] finderArgs = new Object[] { companyId, externalReferenceCode };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCEORDERNOTE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_ERC_COMPANYID_2);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode == null) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1);
+			}
+			else if (externalReferenceCode.equals("")) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_ERC_COMPANYID_2 = "commerceOrderNote.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1 = "commerceOrderNote.externalReferenceCode IS NULL";
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2 = "commerceOrderNote.externalReferenceCode = ?";
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3 = "(commerceOrderNote.externalReferenceCode IS NULL OR commerceOrderNote.externalReferenceCode = '')";
 
 	public CommerceOrderNotePersistenceImpl() {
 		setModelClass(CommerceOrderNote.class);
@@ -1178,6 +1443,12 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		entityCache.putResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceOrderNoteImpl.class, commerceOrderNote.getPrimaryKey(),
 			commerceOrderNote);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC,
+			new Object[] {
+				commerceOrderNote.getCompanyId(),
+				commerceOrderNote.getExternalReferenceCode()
+			}, commerceOrderNote);
 
 		commerceOrderNote.resetOriginalValues();
 	}
@@ -1232,6 +1503,9 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((CommerceOrderNoteModelImpl)commerceOrderNote,
+			true);
 	}
 
 	@Override
@@ -1242,6 +1516,47 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		for (CommerceOrderNote commerceOrderNote : commerceOrderNotes) {
 			entityCache.removeResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceOrderNoteImpl.class, commerceOrderNote.getPrimaryKey());
+
+			clearUniqueFindersCache((CommerceOrderNoteModelImpl)commerceOrderNote,
+				true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		CommerceOrderNoteModelImpl commerceOrderNoteModelImpl) {
+		Object[] args = new Object[] {
+				commerceOrderNoteModelImpl.getCompanyId(),
+				commerceOrderNoteModelImpl.getExternalReferenceCode()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_C_ERC, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC, args,
+			commerceOrderNoteModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		CommerceOrderNoteModelImpl commerceOrderNoteModelImpl,
+		boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					commerceOrderNoteModelImpl.getCompanyId(),
+					commerceOrderNoteModelImpl.getExternalReferenceCode()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_ERC, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, args);
+		}
+
+		if ((commerceOrderNoteModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_ERC.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					commerceOrderNoteModelImpl.getOriginalCompanyId(),
+					commerceOrderNoteModelImpl.getOriginalExternalReferenceCode()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_ERC, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, args);
 		}
 	}
 
@@ -1489,6 +1804,9 @@ public class CommerceOrderNotePersistenceImpl extends BasePersistenceImpl<Commer
 		entityCache.putResult(CommerceOrderNoteModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceOrderNoteImpl.class, commerceOrderNote.getPrimaryKey(),
 			commerceOrderNote, false);
+
+		clearUniqueFindersCache(commerceOrderNoteModelImpl, false);
+		cacheUniqueFindersCache(commerceOrderNoteModelImpl);
 
 		commerceOrderNote.resetOriginalValues();
 

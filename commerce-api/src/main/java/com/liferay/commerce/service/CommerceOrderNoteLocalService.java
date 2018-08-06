@@ -76,6 +76,10 @@ public interface CommerceOrderNoteLocalService extends BaseLocalService,
 		String content, boolean restricted, ServiceContext serviceContext)
 		throws PortalException;
 
+	public CommerceOrderNote addCommerceOrderNote(long commerceOrderId,
+		String content, boolean restricted, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
+
 	/**
 	* Creates a new commerce order note with the primary key. Does not add the commerce order note to the database.
 	*
@@ -175,7 +179,22 @@ public interface CommerceOrderNoteLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceOrderNote fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderNote fetchCommerceOrderNote(long commerceOrderNoteId);
+
+	/**
+	* Returns the commerce order note with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce order note's external reference code
+	* @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceOrderNote fetchCommerceOrderNoteByReferenceCode(
+		long companyId, String externalReferenceCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -255,4 +274,13 @@ public interface CommerceOrderNoteLocalService extends BaseLocalService,
 
 	public CommerceOrderNote updateCommerceOrderNote(long commerceOrderNoteId,
 		String content, boolean restricted) throws PortalException;
+
+	public CommerceOrderNote updateCommerceOrderNote(long commerceOrderNoteId,
+		String content, boolean restricted, String externalReferenceCode)
+		throws PortalException;
+
+	public CommerceOrderNote upsertCommerceOrderNote(long commerceOrderNoteId,
+		long commerceOrderId, String content, boolean restricted,
+		String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 }

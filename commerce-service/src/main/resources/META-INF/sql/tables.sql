@@ -110,6 +110,7 @@ create table CommerceCountry (
 
 create table CommerceOrder (
 	uuid_ VARCHAR(75) null,
+	externalReferenceCode VARCHAR(75) null,
 	commerceOrderId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -156,6 +157,7 @@ create table CommerceOrder (
 );
 
 create table CommerceOrderItem (
+	externalReferenceCode VARCHAR(75) null,
 	commerceOrderItemId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -180,6 +182,7 @@ create table CommerceOrderItem (
 );
 
 create table CommerceOrderNote (
+	externalReferenceCode VARCHAR(75) null,
 	commerceOrderNoteId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,

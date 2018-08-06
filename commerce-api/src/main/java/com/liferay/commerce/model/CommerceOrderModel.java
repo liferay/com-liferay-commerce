@@ -87,6 +87,21 @@ public interface CommerceOrderModel extends BaseModel<CommerceOrder>,
 	public void setUuid(String uuid);
 
 	/**
+	 * Returns the external reference code of this commerce order.
+	 *
+	 * @return the external reference code of this commerce order
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this commerce order.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce order
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the commerce order ID of this commerce order.
 	 *
 	 * @return the commerce order ID of this commerce order

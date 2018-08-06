@@ -242,6 +242,19 @@ public abstract class CommerceOrderItemLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the commerce order item with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce order item's external reference code
+	 * @return the matching commerce order item, or <code>null</code> if a matching commerce order item could not be found
+	 */
+	@Override
+	public CommerceOrderItem fetchCommerceOrderItemByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return commerceOrderItemPersistence.fetchByC_ERC(companyId, null);
+	}
+
+	/**
 	 * Returns the commerce order item with the primary key.
 	 *
 	 * @param commerceOrderItemId the primary key of the commerce order item
