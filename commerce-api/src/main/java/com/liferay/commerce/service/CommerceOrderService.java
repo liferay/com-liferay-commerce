@@ -89,6 +89,10 @@ public interface CommerceOrderService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceOrder fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrder fetchCommerceOrder(long commerceOrderId)
 		throws PortalException;
 
@@ -165,8 +169,8 @@ public interface CommerceOrderService extends BaseService {
 		long commercePaymentMethodId, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
-		String advanceStatus, CommerceContext commerceContext)
-		throws PortalException;
+		String advanceStatus, String externalReferenceCode,
+		CommerceContext commerceContext) throws PortalException;
 
 	public CommerceOrder updateOrderStatus(long commerceOrderId, int orderStatus)
 		throws PortalException;

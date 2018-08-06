@@ -72,6 +72,21 @@ public interface CommerceOrderItemModel extends BaseModel<CommerceOrderItem>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the external reference code of this commerce order item.
+	 *
+	 * @return the external reference code of this commerce order item
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this commerce order item.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce order item
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the commerce order item ID of this commerce order item.
 	 *
 	 * @return the commerce order item ID of this commerce order item

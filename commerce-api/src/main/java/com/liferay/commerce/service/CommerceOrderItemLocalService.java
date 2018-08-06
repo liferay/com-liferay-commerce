@@ -185,7 +185,22 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceOrderItem fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderItem fetchCommerceOrderItem(long commerceOrderItemId);
+
+	/**
+	* Returns the commerce order item with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce order item's external reference code
+	* @return the matching commerce order item, or <code>null</code> if a matching commerce order item could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceOrderItem fetchCommerceOrderItemByReferenceCode(
+		long companyId, String externalReferenceCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();

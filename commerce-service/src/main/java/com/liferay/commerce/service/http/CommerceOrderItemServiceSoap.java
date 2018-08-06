@@ -97,6 +97,21 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderItemSoap fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue = CommerceOrderItemServiceUtil.fetchByExternalReferenceCode(companyId,
+					externalReferenceCode);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItemSoap fetchCommerceOrderItem(
 		long commerceOrderItemId) throws RemoteException {
 		try {

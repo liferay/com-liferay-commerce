@@ -67,10 +67,12 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(89);
+		StringBundler sb = new StringBundler(91);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
+		sb.append(", externalReferenceCode=");
+		sb.append(externalReferenceCode);
 		sb.append(", commerceOrderId=");
 		sb.append(commerceOrderId);
 		sb.append(", groupId=");
@@ -171,6 +173,13 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		}
 		else {
 			commerceOrderImpl.setUuid(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			commerceOrderImpl.setExternalReferenceCode("");
+		}
+		else {
+			commerceOrderImpl.setExternalReferenceCode(externalReferenceCode);
 		}
 
 		commerceOrderImpl.setCommerceOrderId(commerceOrderId);
@@ -277,6 +286,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
 		uuid = objectInput.readUTF();
+		externalReferenceCode = objectInput.readUTF();
 
 		commerceOrderId = objectInput.readLong();
 
@@ -346,6 +356,13 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		}
 		else {
 			objectOutput.writeUTF(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
 		}
 
 		objectOutput.writeLong(commerceOrderId);
@@ -442,6 +459,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 	}
 
 	public String uuid;
+	public String externalReferenceCode;
 	public long commerceOrderId;
 	public long groupId;
 	public long companyId;

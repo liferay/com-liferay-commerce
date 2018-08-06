@@ -239,6 +239,19 @@ public abstract class CommerceOrderNoteLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the commerce order note with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce order note's external reference code
+	 * @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
+	 */
+	@Override
+	public CommerceOrderNote fetchCommerceOrderNoteByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return commerceOrderNotePersistence.fetchByC_ERC(companyId, null);
+	}
+
+	/**
 	 * Returns the commerce order note with the primary key.
 	 *
 	 * @param commerceOrderNoteId the primary key of the commerce order note

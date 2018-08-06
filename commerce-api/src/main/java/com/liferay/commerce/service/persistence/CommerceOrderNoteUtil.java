@@ -472,6 +472,71 @@ public class CommerceOrderNoteUtil {
 	}
 
 	/**
+	* Returns the commerce order note where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchOrderNoteException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce order note
+	* @throws NoSuchOrderNoteException if a matching commerce order note could not be found
+	*/
+	public static CommerceOrderNote findByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.exception.NoSuchOrderNoteException {
+		return getPersistence().findByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the commerce order note where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
+	*/
+	public static CommerceOrderNote fetchByC_ERC(long companyId,
+		String externalReferenceCode) {
+		return getPersistence().fetchByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the commerce order note where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
+	*/
+	public static CommerceOrderNote fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByC_ERC(companyId, externalReferenceCode,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the commerce order note where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the commerce order note that was removed
+	*/
+	public static CommerceOrderNote removeByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.exception.NoSuchOrderNoteException {
+		return getPersistence().removeByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the number of commerce order notes where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching commerce order notes
+	*/
+	public static int countByC_ERC(long companyId, String externalReferenceCode) {
+		return getPersistence().countByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
 	* Caches the commerce order note in the entity cache if it is enabled.
 	*
 	* @param commerceOrderNote the commerce order note

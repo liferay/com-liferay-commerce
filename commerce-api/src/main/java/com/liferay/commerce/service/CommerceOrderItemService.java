@@ -67,6 +67,10 @@ public interface CommerceOrderItemService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceOrderItem fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderItem fetchCommerceOrderItem(long commerceOrderItemId)
 		throws PortalException;
 
