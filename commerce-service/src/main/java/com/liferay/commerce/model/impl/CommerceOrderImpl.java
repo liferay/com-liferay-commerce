@@ -49,6 +49,7 @@ import java.util.List;
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  * @author Andrea Di Giorgi
+ * @author Ethan Bustad
  */
 @ProviderType
 public class CommerceOrderImpl extends CommerceOrderBaseImpl {
@@ -106,6 +107,13 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 	public List<CommerceOrderItem> getCommerceOrderItems() {
 		return CommerceOrderItemLocalServiceUtil.getCommerceOrderItems(
 			getCommerceOrderId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	@Override
+	public List<CommerceOrderItem> getCommerceOrderItems(long cpInstanceId) {
+		return CommerceOrderItemLocalServiceUtil.getCommerceOrderItems(
+			getCommerceOrderId(), cpInstanceId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
 	}
 
 	@Override
