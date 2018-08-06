@@ -576,6 +576,14 @@ public class CommerceOrderLocalServiceImpl
 	}
 
 	@Override
+	public CommerceOrder fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return commerceOrderPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+	}
+
+	@Override
 	public CommerceOrder fetchCommerceOrder(
 		long groupId, long userId, int orderStatus) {
 
@@ -994,6 +1002,24 @@ public class CommerceOrderLocalServiceImpl
 			String advanceStatus, CommerceContext commerceContext)
 		throws PortalException {
 
+		return updateCommerceOrder(
+			commerceOrderId, billingAddressId, shippingAddressId,
+			commercePaymentMethodId, commerceShippingMethodId,
+			shippingOptionName, purchaseOrderNumber, subtotal, shippingAmount,
+			total, advanceStatus, null, commerceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrder updateCommerceOrder(
+			long commerceOrderId, long billingAddressId, long shippingAddressId,
+			long commercePaymentMethodId, long commerceShippingMethodId,
+			String shippingOptionName, String purchaseOrderNumber,
+			BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
+			String advanceStatus, String externalReferenceCode,
+			CommerceContext commerceContext)
+		throws PortalException {
+
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
 			commerceOrderId);
 
@@ -1025,6 +1051,7 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setShippingAmount(shippingAmount);
 		commerceOrder.setTotal(total);
 		commerceOrder.setAdvanceStatus(advanceStatus);
+		commerceOrder.setExternalReferenceCode(externalReferenceCode);
 
 		commerceOrderPersistence.update(commerceOrder);
 

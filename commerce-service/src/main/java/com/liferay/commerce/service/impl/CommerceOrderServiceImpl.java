@@ -160,6 +160,23 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
+	public CommerceOrder fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommerceOrder commerceOrder =
+			commerceOrderLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		if (commerceOrder != null) {
+			_commerceOrderModelResourcePermission.check(
+				getPermissionChecker(), commerceOrder, ActionKeys.VIEW);
+		}
+
+		return commerceOrder;
+	}
+
+	@Override
 	public CommerceOrder fetchCommerceOrder(long commerceOrderId)
 		throws PortalException {
 
@@ -396,7 +413,8 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			long commercePaymentMethodId, long commerceShippingMethodId,
 			String shippingOptionName, String purchaseOrderNumber,
 			BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
-			String advanceStatus, CommerceContext commerceContext)
+			String advanceStatus, String externalReferenceCode,
+			CommerceContext commerceContext)
 		throws PortalException {
 
 		_commerceOrderModelResourcePermission.check(
@@ -406,7 +424,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			commerceOrderId, billingAddressId, shippingAddressId,
 			commercePaymentMethodId, commerceShippingMethodId,
 			shippingOptionName, purchaseOrderNumber, subtotal, shippingAmount,
-			total, advanceStatus, commerceContext);
+			total, advanceStatus, externalReferenceCode, commerceContext);
 	}
 
 	@Override
