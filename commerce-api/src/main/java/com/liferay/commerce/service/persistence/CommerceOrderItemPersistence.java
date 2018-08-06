@@ -457,6 +457,57 @@ public interface CommerceOrderItemPersistence extends BasePersistence<CommerceOr
 	public int countByC_I(long commerceOrderId, long CPInstanceId);
 
 	/**
+	* Returns the commerce order item where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchOrderItemException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce order item
+	* @throws NoSuchOrderItemException if a matching commerce order item could not be found
+	*/
+	public CommerceOrderItem findByC_ERC(long companyId,
+		String externalReferenceCode) throws NoSuchOrderItemException;
+
+	/**
+	* Returns the commerce order item where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce order item, or <code>null</code> if a matching commerce order item could not be found
+	*/
+	public CommerceOrderItem fetchByC_ERC(long companyId,
+		String externalReferenceCode);
+
+	/**
+	* Returns the commerce order item where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce order item, or <code>null</code> if a matching commerce order item could not be found
+	*/
+	public CommerceOrderItem fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache);
+
+	/**
+	* Removes the commerce order item where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the commerce order item that was removed
+	*/
+	public CommerceOrderItem removeByC_ERC(long companyId,
+		String externalReferenceCode) throws NoSuchOrderItemException;
+
+	/**
+	* Returns the number of commerce order items where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching commerce order items
+	*/
+	public int countByC_ERC(long companyId, String externalReferenceCode);
+
+	/**
 	* Caches the commerce order item in the entity cache if it is enabled.
 	*
 	* @param commerceOrderItem the commerce order item

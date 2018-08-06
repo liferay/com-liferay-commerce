@@ -34,6 +34,7 @@ public class CommerceOrderNoteSoap implements Serializable {
 	public static CommerceOrderNoteSoap toSoapModel(CommerceOrderNote model) {
 		CommerceOrderNoteSoap soapModel = new CommerceOrderNoteSoap();
 
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCommerceOrderNoteId(model.getCommerceOrderNoteId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -97,6 +98,14 @@ public class CommerceOrderNoteSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setCommerceOrderNoteId(pk);
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public long getCommerceOrderNoteId() {
@@ -183,6 +192,7 @@ public class CommerceOrderNoteSoap implements Serializable {
 		_restricted = restricted;
 	}
 
+	private String _externalReferenceCode;
 	private long _commerceOrderNoteId;
 	private long _groupId;
 	private long _companyId;

@@ -67,9 +67,11 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(45);
 
-		sb.append("{commerceOrderItemId=");
+		sb.append("{externalReferenceCode=");
+		sb.append(externalReferenceCode);
+		sb.append(", commerceOrderItemId=");
 		sb.append(commerceOrderItemId);
 		sb.append(", groupId=");
 		sb.append(groupId);
@@ -119,6 +121,13 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 	@Override
 	public CommerceOrderItem toEntityModel() {
 		CommerceOrderItemImpl commerceOrderItemImpl = new CommerceOrderItemImpl();
+
+		if (externalReferenceCode == null) {
+			commerceOrderItemImpl.setExternalReferenceCode("");
+		}
+		else {
+			commerceOrderItemImpl.setExternalReferenceCode(externalReferenceCode);
+		}
 
 		commerceOrderItemImpl.setCommerceOrderItemId(commerceOrderItemId);
 		commerceOrderItemImpl.setGroupId(groupId);
@@ -188,6 +197,8 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+		externalReferenceCode = objectInput.readUTF();
+
 		commerceOrderItemId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
@@ -221,6 +232,13 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
+		}
+
 		objectOutput.writeLong(commerceOrderItemId);
 
 		objectOutput.writeLong(groupId);
@@ -277,6 +295,7 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 		objectOutput.writeObject(discountPercentageLevel4);
 	}
 
+	public String externalReferenceCode;
 	public long commerceOrderItemId;
 	public long groupId;
 	public long companyId;

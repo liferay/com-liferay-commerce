@@ -66,6 +66,21 @@ public interface CommerceOrderNoteModel extends BaseModel<CommerceOrderNote>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the external reference code of this commerce order note.
+	 *
+	 * @return the external reference code of this commerce order note
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this commerce order note.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce order note
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the commerce order note ID of this commerce order note.
 	 *
 	 * @return the commerce order note ID of this commerce order note

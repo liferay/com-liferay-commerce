@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -58,6 +59,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -126,6 +128,8 @@ public class CommerceOrderItemPersistenceTest {
 
 		CommerceOrderItem newCommerceOrderItem = _persistence.create(pk);
 
+		newCommerceOrderItem.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		newCommerceOrderItem.setGroupId(RandomTestUtil.nextLong());
 
 		newCommerceOrderItem.setCompanyId(RandomTestUtil.nextLong());
@@ -177,6 +181,8 @@ public class CommerceOrderItemPersistenceTest {
 
 		CommerceOrderItem existingCommerceOrderItem = _persistence.findByPrimaryKey(newCommerceOrderItem.getPrimaryKey());
 
+		Assert.assertEquals(existingCommerceOrderItem.getExternalReferenceCode(),
+			newCommerceOrderItem.getExternalReferenceCode());
 		Assert.assertEquals(existingCommerceOrderItem.getCommerceOrderItemId(),
 			newCommerceOrderItem.getCommerceOrderItemId());
 		Assert.assertEquals(existingCommerceOrderItem.getGroupId(),
@@ -246,6 +252,15 @@ public class CommerceOrderItemPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceOrderItem newCommerceOrderItem = addCommerceOrderItem();
 
@@ -269,14 +284,14 @@ public class CommerceOrderItemPersistenceTest {
 
 	protected OrderByComparator<CommerceOrderItem> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CommerceOrderItem",
-			"commerceOrderItemId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceOrderId", true, "CPInstanceId",
-			true, "quantity", true, "shippedQuantity", true, "name", true,
-			"sku", true, "unitPrice", true, "discountAmount", true,
-			"finalPrice", true, "discountPercentageLevel1", true,
-			"discountPercentageLevel2", true, "discountPercentageLevel3", true,
-			"discountPercentageLevel4", true);
+			"externalReferenceCode", true, "commerceOrderItemId", true,
+			"groupId", true, "companyId", true, "userId", true, "userName",
+			true, "createDate", true, "modifiedDate", true, "commerceOrderId",
+			true, "CPInstanceId", true, "quantity", true, "shippedQuantity",
+			true, "name", true, "sku", true, "unitPrice", true,
+			"discountAmount", true, "finalPrice", true,
+			"discountPercentageLevel1", true, "discountPercentageLevel2", true,
+			"discountPercentageLevel3", true, "discountPercentageLevel4", true);
 	}
 
 	@Test
@@ -473,11 +488,31 @@ public class CommerceOrderItemPersistenceTest {
 		Assert.assertEquals(0, result.size());
 	}
 
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		CommerceOrderItem newCommerceOrderItem = addCommerceOrderItem();
+
+		_persistence.clearCache();
+
+		CommerceOrderItem existingCommerceOrderItem = _persistence.findByPrimaryKey(newCommerceOrderItem.getPrimaryKey());
+
+		Assert.assertEquals(Long.valueOf(
+				existingCommerceOrderItem.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceOrderItem,
+				"getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCommerceOrderItem.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(existingCommerceOrderItem,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
+	}
+
 	protected CommerceOrderItem addCommerceOrderItem()
 		throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceOrderItem commerceOrderItem = _persistence.create(pk);
+
+		commerceOrderItem.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		commerceOrderItem.setGroupId(RandomTestUtil.nextLong());
 

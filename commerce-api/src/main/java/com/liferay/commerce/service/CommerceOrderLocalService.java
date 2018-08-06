@@ -235,11 +235,26 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 		String comment) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceOrder fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrder fetchCommerceOrder(long commerceOrderId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrder fetchCommerceOrder(long groupId, long userId,
 		int orderStatus);
+
+	/**
+	* Returns the commerce order with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce order's external reference code
+	* @return the matching commerce order, or <code>null</code> if a matching commerce order could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceOrder fetchCommerceOrderByReferenceCode(long companyId,
+		String externalReferenceCode);
 
 	/**
 	* Returns the commerce order matching the UUID and group.
@@ -431,6 +446,15 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 		String advanceStatus, CommerceContext commerceContext)
 		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder updateCommerceOrder(long commerceOrderId,
+		long billingAddressId, long shippingAddressId,
+		long commercePaymentMethodId, long commerceShippingMethodId,
+		String shippingOptionName, String purchaseOrderNumber,
+		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
+		String advanceStatus, String externalReferenceCode,
+		CommerceContext commerceContext) throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder updateOrderStatus(long commerceOrderId, int orderStatus)

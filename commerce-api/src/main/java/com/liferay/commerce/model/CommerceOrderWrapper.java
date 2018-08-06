@@ -63,6 +63,7 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceOrderId", getCommerceOrderId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -128,6 +129,13 @@ public class CommerceOrderWrapper implements CommerceOrder,
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long commerceOrderId = (Long)attributes.get("commerceOrderId");
@@ -558,6 +566,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceOrder.getExpandoBridge();
+	}
+
+	/**
+	* Returns the external reference code of this commerce order.
+	*
+	* @return the external reference code of this commerce order
+	*/
+	@Override
+	public String getExternalReferenceCode() {
+		return _commerceOrder.getExternalReferenceCode();
 	}
 
 	/**
@@ -1227,6 +1245,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceOrder.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets the external reference code of this commerce order.
+	*
+	* @param externalReferenceCode the external reference code of this commerce order
+	*/
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_commerceOrder.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**

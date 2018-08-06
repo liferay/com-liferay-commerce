@@ -1725,6 +1725,71 @@ public class CommerceOrderUtil {
 	}
 
 	/**
+	* Returns the commerce order where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchOrderException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce order
+	* @throws NoSuchOrderException if a matching commerce order could not be found
+	*/
+	public static CommerceOrder findByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.exception.NoSuchOrderException {
+		return getPersistence().findByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the commerce order where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce order, or <code>null</code> if a matching commerce order could not be found
+	*/
+	public static CommerceOrder fetchByC_ERC(long companyId,
+		String externalReferenceCode) {
+		return getPersistence().fetchByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the commerce order where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce order, or <code>null</code> if a matching commerce order could not be found
+	*/
+	public static CommerceOrder fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByC_ERC(companyId, externalReferenceCode,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the commerce order where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the commerce order that was removed
+	*/
+	public static CommerceOrder removeByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.exception.NoSuchOrderException {
+		return getPersistence().removeByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the number of commerce orders where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching commerce orders
+	*/
+	public static int countByC_ERC(long companyId, String externalReferenceCode) {
+		return getPersistence().countByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
 	* Caches the commerce order in the entity cache if it is enabled.
 	*
 	* @param commerceOrder the commerce order

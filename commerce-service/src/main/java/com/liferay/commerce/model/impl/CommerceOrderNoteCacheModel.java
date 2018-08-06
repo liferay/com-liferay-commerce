@@ -65,9 +65,11 @@ public class CommerceOrderNoteCacheModel implements CacheModel<CommerceOrderNote
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
-		sb.append("{commerceOrderNoteId=");
+		sb.append("{externalReferenceCode=");
+		sb.append(externalReferenceCode);
+		sb.append(", commerceOrderNoteId=");
 		sb.append(commerceOrderNoteId);
 		sb.append(", groupId=");
 		sb.append(groupId);
@@ -95,6 +97,13 @@ public class CommerceOrderNoteCacheModel implements CacheModel<CommerceOrderNote
 	@Override
 	public CommerceOrderNote toEntityModel() {
 		CommerceOrderNoteImpl commerceOrderNoteImpl = new CommerceOrderNoteImpl();
+
+		if (externalReferenceCode == null) {
+			commerceOrderNoteImpl.setExternalReferenceCode("");
+		}
+		else {
+			commerceOrderNoteImpl.setExternalReferenceCode(externalReferenceCode);
+		}
 
 		commerceOrderNoteImpl.setCommerceOrderNoteId(commerceOrderNoteId);
 		commerceOrderNoteImpl.setGroupId(groupId);
@@ -140,6 +149,8 @@ public class CommerceOrderNoteCacheModel implements CacheModel<CommerceOrderNote
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		externalReferenceCode = objectInput.readUTF();
+
 		commerceOrderNoteId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
@@ -160,6 +171,13 @@ public class CommerceOrderNoteCacheModel implements CacheModel<CommerceOrderNote
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
+		}
+
 		objectOutput.writeLong(commerceOrderNoteId);
 
 		objectOutput.writeLong(groupId);
@@ -190,6 +208,7 @@ public class CommerceOrderNoteCacheModel implements CacheModel<CommerceOrderNote
 		objectOutput.writeBoolean(restricted);
 	}
 
+	public String externalReferenceCode;
 	public long commerceOrderNoteId;
 	public long groupId;
 	public long companyId;
