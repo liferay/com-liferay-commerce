@@ -185,6 +185,14 @@ public class CommerceOrderItemLocalServiceImpl
 	}
 
 	@Override
+	public CommerceOrderItem fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return commerceOrderItemPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+	}
+
+	@Override
 	public List<CommerceOrderItem> getAvailableForShipmentCommerceOrderItems(
 		long commerceOrderId) {
 

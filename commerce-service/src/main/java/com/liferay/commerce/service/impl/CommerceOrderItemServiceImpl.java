@@ -66,6 +66,24 @@ public class CommerceOrderItemServiceImpl
 	}
 
 	@Override
+	public CommerceOrderItem fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommerceOrderItem commerceOrderItem =
+			commerceOrderItemLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		if (commerceOrderItem != null) {
+			_commerceOrderModelResourcePermission.check(
+				getPermissionChecker(), commerceOrderItem.getCommerceOrderId(),
+				ActionKeys.VIEW);
+		}
+
+		return commerceOrderItem;
+	}
+
+	@Override
 	public CommerceOrderItem fetchCommerceOrderItem(long commerceOrderItemId)
 		throws PortalException {
 
