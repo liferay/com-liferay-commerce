@@ -256,6 +256,21 @@ public class CommerceOrderItemLocalServiceUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceOrderItem> getCommerceOrderItems(
+		long commerceOrderId, long cpInstanceId, int start, int end) {
+		return getService()
+				   .getCommerceOrderItems(commerceOrderId, cpInstanceId, start,
+			end);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceOrderItem> getCommerceOrderItems(
+		long commerceOrderId, long cpInstanceId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceOrderItem> orderByComparator) {
+		return getService()
+				   .getCommerceOrderItems(commerceOrderId, cpInstanceId, start,
+			end, orderByComparator);
+	}
+
 	/**
 	* Returns the number of commerce order items.
 	*
@@ -364,6 +379,17 @@ public class CommerceOrderItemLocalServiceUtil {
 		return getService()
 				   .updateCommerceOrderItemPrice(commerceOrderItemId,
 			commerceContext);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderItem upsertCommerceOrderItem(
+		long commerceOrderId, long cpInstanceId, int quantity,
+		int shippedQuantity, String json,
+		com.liferay.commerce.context.CommerceContext commerceContext,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .upsertCommerceOrderItem(commerceOrderId, cpInstanceId,
+			quantity, shippedQuantity, json, commerceContext, serviceContext);
 	}
 
 	public static CommerceOrderItemLocalService getService() {

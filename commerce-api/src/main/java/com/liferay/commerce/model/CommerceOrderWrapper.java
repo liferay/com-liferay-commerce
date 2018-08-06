@@ -487,6 +487,12 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	@Override
+	public java.util.List<CommerceOrderItem> getCommerceOrderItems(
+		long cpInstanceId) {
+		return _commerceOrder.getCommerceOrderItems(cpInstanceId);
+	}
+
+	@Override
 	public CommercePaymentMethod getCommercePaymentMethod()
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrder.getCommercePaymentMethod();
