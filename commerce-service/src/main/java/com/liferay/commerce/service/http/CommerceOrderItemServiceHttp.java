@@ -487,6 +487,43 @@ public class CommerceOrderItemServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderItem upsertCommerceOrderItem(
+		HttpPrincipal httpPrincipal, long commerceOrderId, long cpInstanceId,
+		int quantity, int shippedQuantity, String json,
+		com.liferay.commerce.context.CommerceContext commerceContext,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceOrderItemServiceUtil.class,
+					"upsertCommerceOrderItem",
+					_upsertCommerceOrderItemParameterTypes13);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceOrderId, cpInstanceId, quantity, shippedQuantity,
+					json, commerceContext, serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.model.CommerceOrderItem)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CommerceOrderItemServiceHttp.class);
 	private static final Class<?>[] _addCommerceOrderItemParameterTypes0 = new Class[] {
 			long.class, long.class, int.class, int.class, String.class,
@@ -529,5 +566,10 @@ public class CommerceOrderItemServiceHttp {
 	private static final Class<?>[] _updateCommerceOrderItemParameterTypes12 = new Class[] {
 			long.class, int.class, String.class,
 			com.liferay.commerce.context.CommerceContext.class
+		};
+	private static final Class<?>[] _upsertCommerceOrderItemParameterTypes13 = new Class[] {
+			long.class, long.class, int.class, int.class, String.class,
+			com.liferay.commerce.context.CommerceContext.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 }
