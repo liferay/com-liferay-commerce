@@ -5,12 +5,6 @@
 		"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPContentPortlet",
 		"portletPreferences": {
 			"cpType": "simple",
-			"displayStyle": {
-				"FileName": "product_display_template.ftl",
-				"Name": "COMMERCE PRODUCT DETAIL",
-				"PortletClassName": "com.liferay.commerce.product.type.simple.internal.SimpleCPType"
-			},
-			"displayStyleGroupId": "",
 			"grouped--cpTypeRendererKey": "breccia",
 			"simple--cpTypeRendererKey": "breccia",
 			"virtual--cpTypeRendererKey": "breccia"
@@ -22,12 +16,6 @@
 		"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet",
 		"portletPreferences": {
 			"cpContentListRendererKey": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet",
-			"displayStyle": {
-				"FileName": "catalog_display_template.ftl",
-				"Name": "COMMERCE CATALOG OFFICE SUPPLY",
-				"PortletClassName": "com.liferay.commerce.product.content.search.web.internal.portlet.CPSearchResultsPortlet"
-			},
-			"displayStyleGroupId": "",
 			"grouped--cpTypeListEntryRendererKey": "search-result-breccia",
 			"simple--cpTypeListEntryRendererKey": "search-result-breccia",
 			"virtual--cpTypeListEntryRendererKey": "search-result-breccia"
