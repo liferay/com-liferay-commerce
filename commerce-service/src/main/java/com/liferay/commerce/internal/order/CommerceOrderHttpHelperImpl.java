@@ -121,17 +121,9 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
 
 		long plid = _portal.getPlidFromPortletId(
-			groupId, CommercePortletKeys.COMMERCE_CART_CONTENT);
-
-		if (plid > 0) {
-			return _getPortletURL(
-				httpServletRequest, CommercePortletKeys.COMMERCE_CART_CONTENT);
-		}
-
-		plid = _portal.getPlidFromPortletId(
 			groupId, CommercePortletKeys.COMMERCE_ORDER_CONTENT);
 
-		if (plid > 0) {
+		if ((plid > 0) && (commerceOrder != null) && !commerceOrder.isOpen()) {
 			PortletURL portletURL = _getPortletURL(
 				httpServletRequest, CommercePortletKeys.COMMERCE_ORDER_CONTENT);
 
@@ -144,6 +136,14 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			}
 
 			return portletURL;
+		}
+
+		plid = _portal.getPlidFromPortletId(
+			groupId, CommercePortletKeys.COMMERCE_CART_CONTENT);
+
+		if (plid > 0) {
+			return _getPortletURL(
+				httpServletRequest, CommercePortletKeys.COMMERCE_CART_CONTENT);
 		}
 
 		plid = _portal.getPlidFromPortletId(
