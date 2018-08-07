@@ -6,15 +6,15 @@
 		"title": "HOME_PAGE_CAROUSEL"
 	},
 	{
-		"articleId": "SPECIAL_SAVINGS_MESSAGE",
-		"ddmStructureKey": "BRECCIA_BANNER",
-		"ddmTemplateKey": "BRECCIA_BANNER",
-		"title": "SPECIAL_SAVINGS_MESSAGE"
-	},
-	{
 		"articleId": "SALES_PROMO_CARDS",
 		"ddmStructureKey": "BRECCIA_BANNER",
 		"ddmTemplateKey": "BRECCIA_BANNER",
 		"title": "SALES_PROMO_CARDS"
+	},
+	{
+		"articleId": "SPECIAL_SAVINGS_MESSAGE",
+		"ddmStructureKey": "BRECCIA_BANNER",
+		"ddmTemplateKey": "BRECCIA_BANNER",
+		"title": "SPECIAL_SAVINGS_MESSAGE"
 	}
 ]

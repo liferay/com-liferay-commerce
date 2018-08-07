@@ -1,6 +1,9 @@
 <#if cpAssetCategoriesNavigationDisplayContext.getAssetCategories()?has_content>
 	<div class="card-page-nowrap commerce-category-navigation-inline">
-		<div class="commerce-component-header product-detail-header"> <h2 class="component-title">Explore Categories</h2> </div>
+		<div class="commerce-component-header product-detail-header">
+			<h2 class="component-title">Explore Categories</h2>
+		</div>
+
 		<ul class="card-page commerce-category-navigation-card-page commerce-simple-card">
 			<#list cpAssetCategoriesNavigationDisplayContext.getAssetCategories() as curAssetCategory>
 				<li class="card-page-item">
@@ -8,6 +11,7 @@
 						<#if cpAssetCategoriesNavigationDisplayContext.getDefaultImageSrc(curAssetCategory.getCategoryId(), themeDisplay)??>
 							<img class="card-image" src="${cpAssetCategoriesNavigationDisplayContext.getDefaultImageSrc(curAssetCategory.getCategoryId(), themeDisplay)}">
 						</#if>
+
 						<span class="card-title">${curAssetCategory.name}</span>
 					</a>
 				</li>

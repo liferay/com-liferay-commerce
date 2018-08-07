@@ -1,10 +1,12 @@
+<#assign
+	orderId = '${commerceCartContentDisplayContext.getCommerceOrderId()}'
+/>
+
 <div class="minette-commerce-cart-content">
 	<div class="commerce-component-header">
 		<h2 class="component-title">
-			${languageUtil.get(request, "cart")}
-
 			<#if commerceCartContentDisplayContext.getCommerceOrderId() != 0>
-				#${commerceCartContentDisplayContext.getCommerceOrderId()}
+				${languageUtil.format(request, "order-x", orderId, false)}
 			</#if>
 		</h2>
 	</div>
@@ -26,13 +28,15 @@
 						<#assign
 							cpDefinition = curCommerceOrderItem.getCPDefinition()
 
+							deleteURL = commerceCartContentDisplayContext.getDeleteURL(curCommerceOrderItem)
+
+							finalPriceMoney = curCommerceOrderItem.getFinalPriceMoney()
+
 							image = ''
 
 							productURL = commerceCartContentDisplayContext.getCPDefinitionURL(cpDefinition.getCPDefinitionId(), themeDisplay)
 
 							title = cpDefinition.getName()
-
-							deleteURL = commerceCartContentDisplayContext.getDeleteURL(curCommerceOrderItem)
 						/>
 
 						<#if commerceCartContentDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem, themeDisplay)??>
@@ -59,7 +63,7 @@
 							</td>
 							<td class="subtotal-column table-cell-expand">
 								<div class="commerce-cart-content-value subtotal-value">
-									${curCommerceOrderItem.getQuantity()} x ${curCommerceOrderItem.getUnitPriceMoney().getPrice()}
+									${curCommerceOrderItem.getQuantity()} x ${finalPriceMoney.format(locale)}
 								</div>
 
 								<@liferay_ui["icon-delete"]
