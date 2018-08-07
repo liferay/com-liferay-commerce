@@ -29,34 +29,49 @@ import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.service.CommerceCountryLocalService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Layout;
+import com.liferay.portal.kernel.model.LayoutConstants;
 import com.liferay.portal.kernel.model.Theme;
+import com.liferay.portal.kernel.model.ThemeSetting;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.portlet.PortletIdCodec;
+import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ThemeLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.site.exception.InitializationException;
 import com.liferay.site.initializer.SiteInitializer;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.portlet.PortletPreferences;
 
 import javax.servlet.ServletContext;
 
@@ -134,29 +149,44 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		return true;
 	}
 
-	private JSONArray _getJSONArray(String name) throws Exception {
-		String json = StringUtil.read(
+	private String _getJSON(String name) throws IOException {
+		return StringUtil.read(
 			BrecciaSiteInitializer.class.getClassLoader(),
 			_DEPENDENCIES_PATH + name);
+	}
+
+	private JSONArray _getJSONArray(String name) throws Exception {
+		String json = _getJSON(name);
 
 		return _jsonFactory.createJSONArray(json);
+	}
+
+	private JSONObject _getJSONObject(String name) throws Exception {
+		String json = _getJSON(name);
+
+		return _jsonFactory.createJSONObject(json);
 	}
 
 	private ServiceContext _getServiceContext(long groupId)
 		throws PortalException {
 
-		User user = _userLocalService.getUser(PrincipalThreadLocal.getUserId());
-		Group group = _groupLocalService.getGroup(groupId);
-
-		Locale locale = LocaleUtil.getSiteDefault();
-
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+
+		Group group = _groupLocalService.getGroup(groupId);
+
 		serviceContext.setCompanyId(group.getCompanyId());
+
+		Locale locale = LocaleUtil.getSiteDefault();
+
 		serviceContext.setLanguageId(LanguageUtil.getLanguageId(locale));
+
 		serviceContext.setScopeGroupId(groupId);
+
+		User user = _userLocalService.getUser(PrincipalThreadLocal.getUserId());
+
 		serviceContext.setTimeZone(user.getTimeZone());
 		serviceContext.setUserId(user.getUserId());
 
@@ -267,6 +297,111 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 			_DEPENDENCIES_PATH + "display_templates/", serviceContext);
 	}
 
+	private void _importSiteNavigationMenuPortletSettings(
+			JSONObject jsonObject, String portletName,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		if (portletName.equals(_SITE_NAVIGATION_MENU_PORTLET_NAME)) {
+			String instanceId = jsonObject.getString("instanceId");
+			String layoutFriendlyURL = jsonObject.getString(
+				"layoutFriendlyURL");
+			String rootLayoutFriendlyURL = jsonObject.getString(
+				"rootLayoutFriendlyURL");
+
+			JSONObject portletPreferencesJSONObject = jsonObject.getJSONObject(
+				"portletPreferences");
+
+			Layout rootLayout = null;
+
+			if (Validator.isNotNull(rootLayoutFriendlyURL)) {
+				rootLayout = _layoutLocalService.fetchLayoutByFriendlyURL(
+					serviceContext.getScopeGroupId(), false,
+					rootLayoutFriendlyURL);
+			}
+
+			String portletId = PortletIdCodec.encode(portletName, instanceId);
+
+			PortletPreferences portletSetup =
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+					serviceContext.getCompanyId(),
+					serviceContext.getScopeGroupId(),
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
+					LayoutConstants.DEFAULT_PLID, portletId, StringPool.BLANK);
+
+			Iterator<String> iterator = portletPreferencesJSONObject.keys();
+
+			while (iterator.hasNext()) {
+				String key = iterator.next();
+
+				String value = portletPreferencesJSONObject.getString(key);
+
+				if (key.equals("displayStyleGroupId")) {
+					value = String.valueOf(serviceContext.getScopeGroupId());
+				}
+				else if (key.equals("rootLayoutUuid")) {
+					if (rootLayout == null) {
+						value = StringPool.BLANK;
+					}
+					else {
+						value = rootLayout.getUuid();
+					}
+				}
+
+				portletSetup.setValue(key, value);
+			}
+
+			portletSetup.store();
+
+			long plid = LayoutConstants.DEFAULT_PLID;
+
+			if (Validator.isNotNull(layoutFriendlyURL)) {
+				Layout layout = _layoutLocalService.fetchLayoutByFriendlyURL(
+					serviceContext.getScopeGroupId(), false, layoutFriendlyURL);
+
+				if (layout != null) {
+					plid = layout.getPlid();
+				}
+			}
+
+			if (plid > LayoutConstants.DEFAULT_PLID) {
+				_setPlidPortletPreferences(plid, portletId, serviceContext);
+			}
+		}
+	}
+
+	private void _importThemePortletSettings(ServiceContext serviceContext)
+		throws Exception {
+
+		JSONArray jsonArray = _getJSONArray("theme-portlet-settings.json");
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+			String portletName = jsonObject.getString("portletName");
+
+			_importSiteNavigationMenuPortletSettings(
+				jsonObject, portletName, serviceContext);
+		}
+	}
+
+	private void _importThemeSettings(ServiceContext serviceContext)
+		throws Exception {
+
+		JSONObject themeSettingsJSONObject = _getJSONObject(
+			"theme-settings.json");
+
+		Iterator<String> iterator = themeSettingsJSONObject.keys();
+
+		while (iterator.hasNext()) {
+			String key = iterator.next();
+
+			String value = themeSettingsJSONObject.getString(key);
+
+			_updateThemeSetting(key, value, serviceContext);
+		}
+	}
+
 	private void _initialize(long groupId) throws Exception {
 		ServiceContext serviceContext = _getServiceContext(groupId);
 
@@ -294,8 +429,24 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		_importJournalArticles(serviceContext);
 		_importPortletSettings(serviceContext);
+		_importThemePortletSettings(serviceContext);
+		_importThemeSettings(serviceContext);
 
 		_updateLogo(serviceContext);
+	}
+
+	private void _setPlidPortletPreferences(
+			long plid, String portletId, ServiceContext serviceContext)
+		throws Exception {
+
+		PortletPreferences portletSetup =
+			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+				serviceContext.getCompanyId(),
+				PortletKeys.PREFS_OWNER_ID_DEFAULT,
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid, portletId,
+				StringPool.BLANK);
+
+		portletSetup.store();
 	}
 
 	private void _updateLogo(ServiceContext serviceContext) throws Exception {
@@ -309,6 +460,24 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		_cpFileImporter.updateLogo(file, false, true, serviceContext);
 	}
 
+	private void _updateThemeSetting(
+		String key, String value, ServiceContext serviceContext) {
+
+		Theme theme = _themeLocalService.fetchTheme(
+			serviceContext.getCompanyId(), _BRECCIA_THEME_ID);
+
+		if (theme == null) {
+			return;
+		}
+
+		Map<String, ThemeSetting> configurableSettings =
+			theme.getConfigurableSettings();
+
+		ThemeSetting themeSetting = configurableSettings.get(key);
+
+		themeSetting.setValue(value);
+	}
+
 	private static final String _BRECCIA_THEME_ID =
 		"breccia_WAR_commercethemebreccia";
 
@@ -316,6 +485,10 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 	private static final String _DEPENDENCIES_PATH =
 		"com/liferay/commerce/initializer/breccia/internal/dependencies/";
+
+	private static final String _SITE_NAVIGATION_MENU_PORTLET_NAME =
+		"com_liferay_site_navigation_menu_web_portlet_" +
+			"SiteNavigationMenuPortlet";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		BrecciaSiteInitializer.class);
@@ -352,6 +525,9 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private JSONFactory _jsonFactory;
+
+	@Reference
+	private LayoutLocalService _layoutLocalService;
 
 	@Reference
 	private PortletSettingsImporter _portletSettingsImporter;
