@@ -8,35 +8,22 @@
 	display: inline-block;
 	*display: inline;
 	*zoom: 1;
-}
 
-.liferayzoom img {
-	vertical-align: bottom;
-}
+	.is-error img {
+		cursor: not-allowed;
+	}
 
-.liferayzoom.is-loading img {
-	cursor: progress;
-}
+	.is-loading img {
+		cursor: progress;
+	}
 
-.liferayzoom.is-ready img {
-	cursor: crosshair;
-}
+	.is-ready img {
+		cursor: crosshair;
+	}
 
-.liferayzoom.is-error img {
-	cursor: not-allowed;
-}
-
-.liferayzoom-notice {
-	background: #FFF;
-	box-shadow: 0 0 10px #888;
-	left: 50%;
-	line-height: 2em;
-	margin: -1em 0 0 -5em;
-	position: absolute;
-	text-align: center;
-	top: 50%;
-	width: 10em;
-	z-index: 150;
+	& > img {
+		vertical-align: bottom;
+	}
 }
 
 .liferayzoom-flyout {
@@ -56,14 +43,20 @@
 	}
 }
 
-// liferayzoom layout variations
-
-.liferayzoom--overlay .liferayzoom-flyout {
-	height: 100%;
-	left: 0;
-	top: 0;
-	width: 100%;
+.liferayzoom-notice {
+	background: #FFF;
+	box-shadow: 0 0 10px #888;
+	left: 50%;
+	line-height: 2em;
+	margin: -1em 0 0 -5em;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	width: 10em;
+	z-index: 150;
 }
+
+// liferayzoom layout variations
 
 .liferayzoom--adjacent .liferayzoom-flyout {
 	height: 100%;
@@ -73,16 +66,16 @@
 	width: 100%;
 }
 
+.liferayzoom--overlay .liferayzoom-flyout {
+	height: 100%;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+
 // Breccia Product Detail
 
 .product-detail-image-widget {
-	.product-detail-image {
-		align-items: center;
-		display: flex;
-		justify-content: center;
-		width: 100%;
-	}
-
 	.liferayzoom--adjacent {
 		.liferayzoom-flyout {
 			margin-left: 0;
@@ -98,5 +91,12 @@
 				width: 150%;
 			}
 		}
+	}
+
+	.product-detail-image {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		width: 100%;
 	}
 }

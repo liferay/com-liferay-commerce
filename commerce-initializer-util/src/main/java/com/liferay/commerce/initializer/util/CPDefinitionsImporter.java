@@ -213,8 +213,8 @@ public class CPDefinitionsImporter {
 		catch (NoSuchSkuContributorCPDefinitionOptionRelException nssccpdore) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"No options defined has sku contributor for " +
-						"CPDefinition: " + cpDefinition.getCPDefinitionId());
+					"No options defined as sku contributor for CPDefinition " +
+						cpDefinition.getCPDefinitionId());
 			}
 		}
 

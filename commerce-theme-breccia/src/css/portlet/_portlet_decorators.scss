@@ -1,9 +1,25 @@
 // This file is named _portlet_decorators, but stuffing all portlet related
 // things in here because too many partials can get confusing
 
+.portlet {
+	margin-bottom: 0;
+}
+
+.portlet-content-editable {
+	border-width: 0;
+	padding: 0;
+}
+
 .portlet-decorate {
 	.portlet {
 		margin-bottom: 24px;
+	}
+
+	.portlet-content {
+		background-color: $portlet-decorate-bg;
+		border: $portlet-decorate-border;
+		border-radius: 0.5rem;
+		padding: 24px;
 	}
 
 	.portlet-title-text {
@@ -13,22 +29,6 @@
 		letter-spacing: 0.5px;
 		line-height: 1.5;
 	}
-
-	.portlet-content {
-		background-color: $portlet-decorate-bg;
-		border: $portlet-decorate-border;
-		border-radius: 0.5rem;
-		padding: 24px;
-	}
-}
-
-.portlet {
-	margin-bottom: 0;
-}
-
-.portlet-content-editable {
-	border-width: 0;
-	padding: 0;
 }
 
 .portlet-title-text {
@@ -51,21 +51,6 @@
 		border-width: 0;
 	}
 
-	&.portlet-search, .portlet-search, &.portlet-search-bar, .portlet-search-bar {
-		.form-group, .lfr-ddm-field-group {
-			margin-bottom: 0;
-		}
-	}
-
-	&.dropdown-menu {
-		overflow: visible;
-		padding: 0;
-
-		.portlet-body {
-			padding: 1.5rem;
-		}
-	}
-
 	.portlet-forms {
 		.container-fluid-1280 {
 			max-width: none;
@@ -75,6 +60,14 @@
 
 		.ddm-form-basic-info .ddm-form-name {
 			padding: 0;
+		}
+
+		.lfr-ddm-form-container .lfr-ddm-form-pagination-controls {
+			padding-top: 0;
+
+			button {
+				margin-bottom: 0;
+			}
 		}
 
 		.lfr-ddm-form-page {
@@ -90,18 +83,25 @@
 				}
 			}
 		}
-
-		.lfr-ddm-form-container .lfr-ddm-form-pagination-controls {
-			padding-top: 0;
-
-			button {
-				margin-bottom: 0;
-			}
-		}
 	}
 
 	.portlet-forms-display .lfr-meta-actions {
 		padding-top: 0;
+	}
+
+	&.dropdown-menu {
+		overflow: visible;
+		padding: 0;
+
+		.portlet-body {
+			padding: 1.5rem;
+		}
+	}
+
+	&.portlet-search, .portlet-search, &.portlet-search-bar, .portlet-search-bar {
+		.form-group, .lfr-ddm-field-group {
+			margin-bottom: 0;
+		}
 	}
 }
 

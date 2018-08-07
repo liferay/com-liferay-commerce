@@ -14,18 +14,18 @@ $portlet-decorate-border: 1px solid $light-color;
 
 $commerce-subnavigation-size: () !default;
 $commerce-subnavigation-size: map-merge((
-	scaling-navbar: true,
-	height: 4rem,
-	height-mobile: 3rem,
-	font-size: 0.875rem,
+	brand-font-size: 1.25rem,
+	brand-font-size-mobile: 1rem,
 	container-padding-x: $grid-gutter-width / 2,
 	container-padding-x-mobile: 0,
+	font-size: 0.875rem,
+	height: 4rem,
+	height-mobile: 3rem,
 	link-margin-x: 0,
 	link-margin-x-mobile: -12px,
 	link-padding-x: 1rem,
 	link-padding-x-mobile: 1.25rem,
-	brand-font-size: 1.25rem,
-	brand-font-size-mobile: 1rem,
+	scaling-navbar: true,
 	toggler-link-font-size: 1rem
 ), $commerce-subnavigation-size);
 

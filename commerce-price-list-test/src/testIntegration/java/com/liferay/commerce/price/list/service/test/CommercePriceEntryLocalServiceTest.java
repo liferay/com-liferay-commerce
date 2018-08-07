@@ -398,7 +398,7 @@ public class CommercePriceEntryLocalServiceTest {
 	public void testUpsertCommercePriceEntry5() throws Exception {
 		frutillaRule.scenario(
 			"Adding a new Price Entry on a Price List where the referred SKU " +
-				"doesn't exist"
+				"does not exist"
 		).given(
 			"A Price List"
 		).and(

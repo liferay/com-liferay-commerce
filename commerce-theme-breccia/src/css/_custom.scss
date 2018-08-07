@@ -14,22 +14,29 @@
 	display: inline-block;
 	*display: inline;
 	*zoom: 1;
+
+	.is-error img {
+		cursor: not-allowed;
+	}
+
+	.is-loading img {
+		cursor: progress;
+	}
+
+	.is-ready img {
+		cursor: crosshair;
+	}
+
+	& > img {
+		vertical-align: bottom;
+	}
 }
 
-.easyzoom img {
-	vertical-align: bottom;
-}
-
-.easyzoom.is-loading img {
-	cursor: progress;
-}
-
-.easyzoom.is-ready img {
-	cursor: crosshair;
-}
-
-.easyzoom.is-error img {
-	cursor: not-allowed;
+.easyzoom-flyout {
+	position:absolute;
+	background: #FFF;
+	overflow: hidden;
+	z-index: 100;
 }
 
 .easyzoom-notice {
@@ -45,21 +52,7 @@
 	z-index: 150;
 }
 
-.easyzoom-flyout {
-	position:absolute;
-	background: #FFF;
-	overflow: hidden;
-	z-index: 100;
-}
-
 // EasyZoom layout variations
-
-.easyzoom--overlay .easyzoom-flyout {
-	height: 100%;
-	left: 0;
-	top: 0;
-	width: 100%;
-}
 
 .easyzoom--adjacent .easyzoom-flyout {
 	height: 100%;
@@ -69,16 +62,16 @@
 	width: 100%;
 }
 
-// breccia
+.easyzoom--overlay .easyzoom-flyout {
+	height: 100%;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+
+// Breccia
 
 .product-detail-image-widget {
-	.product-detail-image {
-		align-items: center;
-		display: flex;
-		justify-content: center;
-		width: 100%;
-	}
-
 	.easyzoom--adjacent {
 		.easyzoom-flyout {
 			margin-left: 0;
@@ -94,6 +87,13 @@
 				width: 150%;
 			}
 		}
+	}
+
+	.product-detail-image {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		width: 100%;
 	}
 }
 
@@ -1286,31 +1286,8 @@
 
 // Commerce Checkout
 
-.form-group-autofit {
-	.commerce-form-group-item-row.form-group-item {
-		margin-bottom: 0;
-		margin-right: 0;
-
-		@include media-breakpoint-up(md) {
-			flex-direction: row;
-			margin-bottom: $form-group-margin-bottom;
-		}
-
-		> label {
-			font-weight: $font-weight-bold;
-
-			@include media-breakpoint-up(md) {
-				align-self: center;
-				margin-bottom: 0;
-				margin-right: $grid-gutter-width;
-				white-space: nowrap;
-			}
-		}
-	}
-}
-
-.form-group-item.form-group {
-	margin-bottom: 0;
+.commerce-checkout-confirmation {
+	text-align: center;
 }
 
 .portlet-commerce-checkout {
@@ -1338,8 +1315,31 @@
 	}
 }
 
-.commerce-checkout-confirmation {
-	text-align: center;
+.form-group-autofit {
+	.commerce-form-group-item-row.form-group-item {
+		margin-bottom: 0;
+		margin-right: 0;
+
+		@include media-breakpoint-up(md) {
+			flex-direction: row;
+			margin-bottom: $form-group-margin-bottom;
+		}
+
+		> label {
+			font-weight: $font-weight-bold;
+
+			@include media-breakpoint-up(md) {
+				align-self: center;
+				margin-bottom: 0;
+				margin-right: $grid-gutter-width;
+				white-space: nowrap;
+			}
+		}
+	}
+}
+
+.form-group-item.form-group {
+	margin-bottom: 0;
 }
 
 // Commerce Component
