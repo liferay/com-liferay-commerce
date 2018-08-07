@@ -1,0 +1,66 @@
+[
+	{
+		"instanceId": "siteNavigationMenuPortlet_0",
+		"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
+		"portletPreferences": {
+			"displayDepth": "0",
+			"displayStyle": "ddmTemplate_NAVBAR-DEFAULT-FTL",
+			"displayStyleGroupId": "",
+			"includedLayouts": "auto",
+			"portletSetupCss": "",
+			"portletSetupUseCustomTitle": "false",
+			"rootLayoutLevel": "0",
+			"rootLayoutType": "select",
+			"rootLayoutUuid": ""
+		},
+		"rootLayoutFriendlyURL": "/footer-1"
+	},
+	{
+		"instanceId": "siteNavigationMenuPortlet_1",
+		"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
+		"portletPreferences": {
+			"displayDepth": "0",
+			"displayStyle": "ddmTemplate_NAVBAR-DEFAULT-FTL",
+			"displayStyleGroupId": "",
+			"includedLayouts": "auto",
+			"portletSetupCss": "",
+			"portletSetupUseCustomTitle": "false",
+			"rootLayoutLevel": "0",
+			"rootLayoutType": "select",
+			"rootLayoutUuid": ""
+		},
+		"rootLayoutFriendlyURL": "/footer-1"
+	},
+	{
+		"instanceId": "siteNavigationMenuPortlet_2",
+		"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
+		"portletPreferences": {
+			"displayDepth": "0",
+			"displayStyle": "ddmTemplate_NAVBAR-DEFAULT-FTL",
+			"displayStyleGroupId": "",
+			"includedLayouts": "auto",
+			"portletSetupCss": "",
+			"portletSetupUseCustomTitle": "false",
+			"rootLayoutLevel": "0",
+			"rootLayoutType": "select",
+			"rootLayoutUuid": ""
+		},
+		"rootLayoutFriendlyURL": "/footer-1"
+	},
+	{
+		"instanceId": "siteNavigationMenuPortlet_3",
+		"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
+		"portletPreferences": {
+			"displayDepth": "0",
+			"displayStyle": "ddmTemplate_NAVBAR-BLANK-FTL",
+			"displayStyleGroupId": "",
+			"includedLayouts": "auto",
+			"portletSetupCss": "",
+			"portletSetupUseCustomTitle": "false",
+			"rootLayoutLevel": "0",
+			"rootLayoutType": "select",
+			"rootLayoutUuid": ""
+		},
+		"rootLayoutFriendlyURL": "/footer-2"
+	}
+]

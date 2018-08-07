@@ -5,7 +5,7 @@
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
-				"layoutColumnPos": "2",
+				"layoutColumnPos": 2,
 				"portletName": "com_liferay_commerce_product_asset_categories_navigation_web_internal_portlet_CPAssetCategoriesNavigationPortlet_INSTANCE_cpAssetCategoriesNavigationPortlet_page_menu"
 			},
 			{
@@ -49,27 +49,27 @@
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
-				"layoutColumnPos": "0",
+				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCategoryContentPortlet_INSTANCE_catalog_category_content"
 			},
 			{
 				"layoutColumnId": "column-1",
-				"layoutColumnPos": "0",
+				"layoutColumnPos": 0,
 				"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet_INSTANCE_catalog_bread_crumb"
 			},
 			{
 				"layoutColumnId": "column-2",
-				"layoutColumnPos": "0",
+				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPOptionFacetsPortlet"
 			},
 			{
 				"layoutColumnId": "column-3",
-				"layoutColumnPos": "0",
+				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet_INSTANCE_breccia_cp_list"
 			},
 			{
 				"layoutColumnId": "column-3",
-				"layoutColumnPos": "1",
+				"layoutColumnPos": 1,
 				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet"
 			}
 		]
@@ -81,12 +81,12 @@
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
-				"layoutColumnPos": "0",
+				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPContentPortlet_INSTANCE_breccia_cp_detail"
 			},
 			{
 				"layoutColumnId": "column-1",
-				"layoutColumnPos": "1",
+				"layoutColumnPos": 1,
 				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet"
 			}
 		]
@@ -98,7 +98,7 @@
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
-				"layoutColumnPos": "0",
+				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_checkout_web_internal_portlet_CommerceCheckoutPortlet"
 			}
 		]
@@ -110,7 +110,7 @@
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
-				"layoutColumnPos": "0",
+				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentPortlet"
 			}
 		]
@@ -122,12 +122,12 @@
 		"portlets": [
 			{
 				"layoutColumnId": "column-2",
-				"layoutColumnPos": "0",
+				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_cart_content_web_internal_portlet_CommerceCartContentPortlet"
 			},
 			{
 				"layoutColumnId": "column-3",
-				"layoutColumnPos": "0",
+				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_cart_content_web_internal_portlet_CommerceCartContentTotalPortlet"
 			}
 		]
@@ -179,6 +179,48 @@
 						"portletName": "com_liferay_commerce_product_type_virtual_order_content_web_internal_portlet_CommerceVirtualOrderItemContentPortlet"
 					}
 				]
+			}
+		]
+	},
+	{
+		"hidden": true,
+		"layoutTemplateId": "1_column",
+		"name": "Footer 1",
+		"subLayouts": [
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 1"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 2"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 3"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 4"
+			}
+		]
+	},
+	{
+		"hidden": true,
+		"layoutTemplateId": "1_column",
+		"name": "Footer 2",
+		"subLayouts": [
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Sitemap"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Privacy"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Terms"
 			}
 		]
 	}
