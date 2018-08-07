@@ -8,7 +8,12 @@
 	<theme id="breccia" name="Breccia">
 		<template-extension>ftl</template-extension>
 		<settings>
+			<setting configurable="true" key="company-phone-number" type="textarea" />
+			<setting configurable="true" key="copyright" type="textarea" />
 			<setting configurable="true" key="demo-mode" type="checkbox" value="false" />
+			<setting configurable="true" key="header-column-1" type="textarea" />
+			<setting configurable="true" key="header-column-2" type="textarea" />
+			<setting configurable="true" key="header-column-3" type="textarea" />
 			<setting configurable="false" key="show-maximize-minimize-application-links" type="checkbox" value="false" />
 			<setting configurable="false" key="show-site-name-default" value="false" />
 		</settings>
