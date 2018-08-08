@@ -105,7 +105,7 @@
 	},
 	{
 		"hidden": true,
-		"layoutTemplateId": "1_column",
+		"layoutTemplateId": "commerce_max_width_1_column",
 		"name": "Compare",
 		"portlets": [
 			{
@@ -138,7 +138,7 @@
 		"subLayouts": [
 			{
 				"layoutTemplateId": "1_column",
-				"name": "User Management",
+				"name": "Account",
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -148,7 +148,7 @@
 				]
 			},
 			{
-				"layoutTemplateId": "1_column",
+				"layoutTemplateId": "commerce_max_width_1_column",
 				"name": "Addresses",
 				"portlets": [
 					{
@@ -159,7 +159,7 @@
 				]
 			},
 			{
-				"layoutTemplateId": "1_column",
+				"layoutTemplateId": "commerce_max_width_1_column",
 				"name": "Orders",
 				"portlets": [
 					{
@@ -170,7 +170,7 @@
 				]
 			},
 			{
-				"layoutTemplateId": "1_column",
+				"layoutTemplateId": "commerce_max_width_1_column",
 				"name": "My Downloads",
 				"portlets": [
 					{
