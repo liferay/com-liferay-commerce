@@ -132,9 +132,11 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 				CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
 				%>
 
-				<liferay-ui:search-container-column-text
-					value="<%= finalPriceMoney.format(locale) %>"
-				/>
+				<liferay-ui:search-container-column-text>
+					<div class="mt-3">
+						<%= finalPriceMoney.format(locale) %>
+					</div>
+				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
 
 			<liferay-ui:search-iterator
