@@ -2350,6 +2350,10 @@
 		padding: 12px;
 		width: 250px;
 
+		.card-subtitle {
+			padding: 10px 0;
+		}
+
 		.compare-remove-item {
 			align-self: flex-end;
 			margin-right: -0.5rem;
