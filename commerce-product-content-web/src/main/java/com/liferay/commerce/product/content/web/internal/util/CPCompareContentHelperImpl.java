@@ -161,7 +161,8 @@ public class CPCompareContentHelperImpl implements CPCompareContentHelper {
 				return StringUtil.merge(
 					getCPDefinitionOptionValueRels(
 						cpDefinitionOptionRel.getCPDefinitionOptionValueRels(),
-						locale));
+						locale),
+					StringPool.COMMA_AND_SPACE);
 			}
 		}
 

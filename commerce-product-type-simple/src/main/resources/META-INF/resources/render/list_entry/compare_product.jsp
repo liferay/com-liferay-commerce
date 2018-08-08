@@ -92,9 +92,5 @@ CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 				</div>
 			</div>
 		</c:if>
-
-		<div class="product-subactions">
-			<a href="#placeholder">Add to list +</a>
-		</div>
 	</div>
 </div>
