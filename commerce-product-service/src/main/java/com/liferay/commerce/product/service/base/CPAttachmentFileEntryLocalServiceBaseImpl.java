@@ -281,8 +281,7 @@ public abstract class CPAttachmentFileEntryLocalServiceBaseImpl
 	@Override
 	public CPAttachmentFileEntry fetchCPAttachmentFileEntryByReferenceCode(
 		long companyId, String externalReferenceCode) {
-		return cpAttachmentFileEntryPersistence.fetchByC_ERC(companyId,
-			externalReferenceCode);
+		return cpAttachmentFileEntryPersistence.fetchByC_ERC(companyId, null);
 	}
 
 	/**

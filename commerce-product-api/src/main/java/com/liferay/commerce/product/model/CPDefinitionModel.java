@@ -733,7 +733,7 @@ public interface CPDefinitionModel extends BaseModel<CPDefinition>, ShardedModel
 	 * Returns the trash handler for this cp definition.
 	 *
 	 * @return the trash handler for this cp definition
-	 * @deprecated As of Judson (7.1.x), with no direct replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	@Override

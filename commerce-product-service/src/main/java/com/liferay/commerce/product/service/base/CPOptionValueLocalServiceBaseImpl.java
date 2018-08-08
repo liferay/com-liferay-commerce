@@ -269,8 +269,7 @@ public abstract class CPOptionValueLocalServiceBaseImpl
 	@Override
 	public CPOptionValue fetchCPOptionValueByReferenceCode(long companyId,
 		String externalReferenceCode) {
-		return cpOptionValuePersistence.fetchByC_ERC(companyId,
-			externalReferenceCode);
+		return cpOptionValuePersistence.fetchByC_ERC(companyId, null);
 	}
 
 	/**

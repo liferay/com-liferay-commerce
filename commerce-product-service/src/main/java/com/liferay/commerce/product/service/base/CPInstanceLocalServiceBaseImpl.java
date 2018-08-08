@@ -278,8 +278,7 @@ public abstract class CPInstanceLocalServiceBaseImpl
 	@Override
 	public CPInstance fetchCPInstanceByReferenceCode(long companyId,
 		String externalReferenceCode) {
-		return cpInstancePersistence.fetchByC_ERC(companyId,
-			externalReferenceCode);
+		return cpInstancePersistence.fetchByC_ERC(companyId, null);
 	}
 
 	/**
