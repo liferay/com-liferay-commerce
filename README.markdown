@@ -22,22 +22,28 @@ it can support millions of products in challenging B2B industries.
 
 Requirements: [Liferay Portal 7.1 GA1](https://github.com/liferay/liferay-portal)
 
-1. Clone the Emporio repository (this [repository](https://github.com/liferay/com-liferay-commerce))
-to the same level of your directory tree as your Liferay Home folder (Liferay
-Home is the folder that contains the Tomcat folder for Liferay 7.1).
+1.  Clone the Emporio repository (this
+    [repository](https://github.com/liferay/com-liferay-commerce)) to the same
+    level of your directory tree as your Liferay Home folder (Liferay Home is
+    the folder that contains the Tomcat folder for Liferay 7.1).
 
-2. Start Liferay Portal 7.1.
+2.  Start Liferay Portal 7.1.
 
-In the terminal, navigate to the source code folder
-(`com-liferay-commerce`).
+    In the terminal, navigate to the source code folder
+    (`com-liferay-commerce`).
 
-Windows Users: enter `gradlew.bat deploy -Dbuild.profile=portal`
+    Windows Users: enter `gradlew.bat deploy -Dbuild.profile=portal`
 
-MacOS/Linux: enter `./gradlew deploy -Dbuild.profile=portal`
+    MacOS/Linux: enter `./gradlew deploy -Dbuild.profile=portal`
 
-This takes a few minutes. When the build is complete, go to--or refresh--
-http://localhost:8080 in your browser. Emporio's features are now available in
-your Portal instance.
+   This takes a few minutes.
+
+3.  When the build is complete, run a full reindex of all search indexes. Go
+    to--or refresh-- http://localhost:8080 in your browser. In the left-hand
+    menu, go to *Control Panel* &rarr; *Configuration* &rarr; *Search* and
+    click *Execute* next to *Reindex all search indexes*.
+
+Emporio's features are now available in your Portal instance.
 
 ## Bug Reporting
 
