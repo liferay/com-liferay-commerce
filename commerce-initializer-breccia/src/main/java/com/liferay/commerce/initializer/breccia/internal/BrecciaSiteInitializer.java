@@ -118,7 +118,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 	@Override
 	public String getThumbnailSrc() {
 		return _servletContext.getContextPath() +
-			"/images/Breccia-Logo-Square.png";
+			"/images/Breccia-Logo-Square.jpg";
 	}
 
 	@Override
@@ -453,7 +453,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		ClassLoader classLoader = BrecciaSiteInitializer.class.getClassLoader();
 
 		InputStream inputStream = classLoader.getResourceAsStream(
-			_DEPENDENCIES_PATH + "images/breccia-logo-square.png");
+			_DEPENDENCIES_PATH + "images/Breccia-Logo.png");
 
 		File file = FileUtil.createTempFile(inputStream);
 
