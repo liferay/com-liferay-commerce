@@ -36,11 +36,9 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/util/CPDefinitionHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-content-api/src/main/java/com/liferay/commerce/product/content/util/CPCompareContentHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-content-api/src/main/java/com/liferay/commerce/product/content/util/CPContentHelper\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-product-content-api/src/main/java/com/liferay/commerce/product/content/util/CPContentHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-type-virtual-api/src/main/java/com/liferay/commerce/product/type/virtual/util/VirtualCPTypeHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-user-segment-api/src/main/java/com/liferay/commerce/user/segment/criterion/CommerceUserSegmentCriterionType\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-user-segment-api/src/main/java/com/liferay/commerce/user/segment/util/CommerceUserSegmentHelper\.java" />
-		<suppress checks="JavaConfigurationCategoryCheck" files="commerce-cart-content-web/src/main/java/com/liferay/commerce/cart/content/web/internal/portlet/configuration/CommerceCartContentMiniPortletInstanceConfiguration\.java" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-currency-service/service\.xml" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-discount-service/service\.xml" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-organization-service/service\.xml" />
