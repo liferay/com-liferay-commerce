@@ -237,12 +237,12 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 
 		Details details = new Details();
 
-		details.setShipping(String.valueOf(commerceOrder.getShippingAmount()));
-		details.setSubtotal(String.valueOf(commerceOrder.getSubtotal()));
+		details.setShipping(String.valueOf(commerceCurrency.round(commerceOrder.getShippingAmount())));
+		details.setSubtotal(String.valueOf(commerceCurrency.round(commerceOrder.getSubtotal())));
 
 		amount.setDetails(details);
 
-		amount.setTotal(String.valueOf(commerceOrder.getTotal()));
+		amount.setTotal(String.valueOf(commerceCurrency.round(commerceOrder.getTotal())));
 
 		return amount;
 	}
@@ -311,7 +311,7 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 			item.setDescription(cpDefinition.getShortDescription(languageId));
 			item.setName(commerceOrderItem.getName(languageId));
 			item.setPrice(
-				String.valueOf(commerceOrderItem.getUnitPrice()));
+				String.valueOf(commerceCurrency.round(commerceOrderItem.getUnitPrice())));
 			item.setQuantity(String.valueOf(commerceOrderItem.getQuantity()));
 			item.setSku(commerceOrderItem.getSku());
 
