@@ -311,7 +311,7 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 			item.setDescription(cpDefinition.getShortDescription(languageId));
 			item.setName(commerceOrderItem.getName(languageId));
 			item.setPrice(
-				String.valueOf(commerceOrderItem.getUnitPriceMoney()));
+				String.valueOf(commerceOrderItem.getUnitPrice()));
 			item.setQuantity(String.valueOf(commerceOrderItem.getQuantity()));
 			item.setSku(commerceOrderItem.getSku());
 
