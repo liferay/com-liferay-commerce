@@ -2,10 +2,14 @@
 
 <#if entries?has_content>
 	<div class="row">
-		<#assign subTotal = commerceCartContentMiniDisplayContext.getCommerceOrderSubtotal() />
+		<#assign
+		orderPrice = commerceCartContentMiniDisplayContext.getCommerceOrderPrice()
+
+		subTotal = orderPrice.getSubtotal()
+		/>
 
 		<div class="col-md-12">
-			<strong>Total: ${subTotal}</strong>
+			<strong>Total: ${subTotal.format(themeDisplay.getLocale())}</strong>
 		</div>
 
 		<#list entries as curCommerceOrderItem>
@@ -32,7 +36,7 @@
 
 				<div class="row">
 					<@liferay_commerce["format-price"]
-						price=curCommerceOrderItem.getPrice()
+						price=curCommerceOrderItem.getFinalPrice()
 						quantity=1
 					/>
 				</div>
