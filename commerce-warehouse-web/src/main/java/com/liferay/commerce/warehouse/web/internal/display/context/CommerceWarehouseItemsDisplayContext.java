@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.warehouse.web.internal.display.context;
 
+import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
 import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.product.constants.CPPortletKeys;
@@ -28,14 +30,15 @@ import com.liferay.commerce.util.comparator.CommerceWarehouseNameComparator;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.WebKeys;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletURL;
@@ -54,12 +57,14 @@ public class CommerceWarehouseItemsDisplayContext {
 	public CommerceWarehouseItemsDisplayContext(
 		CommerceWarehouseItemService commerceWarehouseItemService,
 		CommerceWarehouseService commerceWarehouseService,
+		ConfigurationProvider configurationProvider,
 		CPInstanceService cpInstanceService,
 		HttpServletRequest httpServletRequest, Portal portal,
 		PortletResourcePermission portletResourcePermission) {
 
 		_commerceWarehouseItemService = commerceWarehouseItemService;
 		_commerceWarehouseService = commerceWarehouseService;
+		_configurationProvider = configurationProvider;
 		_cpInstanceService = cpInstanceService;
 		_portal = portal;
 		_portletResourcePermission = portletResourcePermission;
@@ -150,18 +155,49 @@ public class CommerceWarehouseItemsDisplayContext {
 	private List<CommerceWarehouse> _getCommerceWarehouses()
 		throws PortalException {
 
-		RenderRequest renderRequest = _cpRequestHelper.getRenderRequest();
+		if (_commerceWarehouses != null) {
+			return _commerceWarehouses;
+		}
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		CommerceShippingGroupServiceConfiguration
+			commerceShippingGroupServiceConfiguration =
+				_configurationProvider.getConfiguration(
+					CommerceShippingGroupServiceConfiguration.class,
+					new GroupServiceSettingsLocator(
+						_cpRequestHelper.getScopeGroupId(),
+						CommerceConstants.SHIPPING_SERVICE_NAME));
 
-		return _commerceWarehouseService.getCommerceWarehouses(
-			themeDisplay.getScopeGroupId(), true, QueryUtil.ALL_POS,
+		String commerceShippingOriginLocatorKey =
+			commerceShippingGroupServiceConfiguration.
+				commerceShippingOriginLocatorKey();
+
+		if (commerceShippingOriginLocatorKey.equals("address")) {
+			CommerceWarehouse commerceWarehouse =
+				_commerceWarehouseService.fetchDefaultCommerceWarehouse(
+					_cpRequestHelper.getScopeGroupId());
+
+			if (commerceWarehouse == null) {
+				_commerceWarehouses = Collections.emptyList();
+			}
+			else {
+				_commerceWarehouses = Collections.singletonList(
+					commerceWarehouse);
+			}
+
+			return _commerceWarehouses;
+		}
+
+		_commerceWarehouses = _commerceWarehouseService.getCommerceWarehouses(
+			_cpRequestHelper.getScopeGroupId(), true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, new CommerceWarehouseNameComparator(true));
+
+		return _commerceWarehouses;
 	}
 
 	private final CommerceWarehouseItemService _commerceWarehouseItemService;
+	private List<CommerceWarehouse> _commerceWarehouses;
 	private final CommerceWarehouseService _commerceWarehouseService;
+	private final ConfigurationProvider _configurationProvider;
 	private CPInstance _cpInstance;
 	private final CPInstanceService _cpInstanceService;
 	private final CPRequestHelper _cpRequestHelper;

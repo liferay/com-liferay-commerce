@@ -35,7 +35,7 @@ if (Validator.isNotNull(backURL)) {
 	<c:choose>
 		<c:when test="<%= commerceWarehouses.isEmpty() %>">
 			<div class="alert alert-info">
-				<liferay-ui:message key="there-are-no-warehouses" />
+				<liferay-ui:message key="there-are-no-active-warehouses" />
 			</div>
 		</c:when>
 		<c:otherwise>
