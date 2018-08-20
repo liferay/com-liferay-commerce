@@ -62,6 +62,8 @@ import com.paypal.api.payments.ShippingAddress;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 
+import java.text.DecimalFormat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -238,16 +240,14 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 		Details details = new Details();
 
 		details.setShipping(
-			String.valueOf(
-				commerceCurrency.round(commerceOrder.getShippingAmount())));
+			_PAY_PAL_DECIMAL_FORMAT.format(commerceOrder.getShippingAmount()));
 		details.setSubtotal(
-			String.valueOf(
-				commerceCurrency.round(commerceOrder.getSubtotal())));
+			_PAY_PAL_DECIMAL_FORMAT.format(commerceOrder.getSubtotal()));
 
 		amount.setDetails(details);
 
 		amount.setTotal(
-			String.valueOf(commerceCurrency.round(commerceOrder.getTotal())));
+			_PAY_PAL_DECIMAL_FORMAT.format(commerceOrder.getTotal()));
 
 		return amount;
 	}
@@ -316,8 +316,8 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 			item.setDescription(cpDefinition.getShortDescription(languageId));
 			item.setName(commerceOrderItem.getName(languageId));
 			item.setPrice(
-				String.valueOf(
-					commerceCurrency.round(commerceOrderItem.getUnitPrice())));
+				_PAY_PAL_DECIMAL_FORMAT.format(
+					commerceOrderItem.getUnitPrice()));
 			item.setQuantity(String.valueOf(commerceOrderItem.getQuantity()));
 			item.setSku(commerceOrderItem.getSku());
 
@@ -429,6 +429,9 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 		return new CommercePaymentEngineResult.StartPayment(
 			payment.toJSON(), url);
 	}
+
+	private static final DecimalFormat _PAY_PAL_DECIMAL_FORMAT =
+		new DecimalFormat("#,###.00");
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
