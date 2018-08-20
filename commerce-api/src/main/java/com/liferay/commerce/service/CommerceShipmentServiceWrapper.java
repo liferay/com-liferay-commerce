@@ -143,6 +143,26 @@ public class CommerceShipmentServiceWrapper implements CommerceShipmentService,
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceShipment updateCommerceShipment(
+		long commerceShipmentId, String name, String description,
+		String street1, String street2, String street3, String city,
+		String zip, long commerceRegionId, long commerceCountryId,
+		String phoneNumber, String carrier, String trackingNumber, int status,
+		int shippingDateMonth, int shippingDateDay, int shippingDateYear,
+		int shippingDateHour, int shippingDateMinute, int expectedDateMonth,
+		int expectedDateDay, int expectedDateYear, int expectedDateHour,
+		int expectedDateMinute)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceShipmentService.updateCommerceShipment(commerceShipmentId,
+			name, description, street1, street2, street3, city, zip,
+			commerceRegionId, commerceCountryId, phoneNumber, carrier,
+			trackingNumber, status, shippingDateMonth, shippingDateDay,
+			shippingDateYear, shippingDateHour, shippingDateMinute,
+			expectedDateMonth, expectedDateDay, expectedDateYear,
+			expectedDateHour, expectedDateMinute);
+	}
+
+	@Override
 	public CommerceShipmentService getWrappedService() {
 		return _commerceShipmentService;
 	}
