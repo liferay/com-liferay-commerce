@@ -21,6 +21,16 @@ CommerceShipmentItemDisplayContext commerceShipmentItemDisplayContext = (Commerc
 
 CommerceShipment commerceShipment = commerceShipmentItemDisplayContext.getCommerceShipment();
 long commerceShipmentId = commerceShipmentItemDisplayContext.getCommerceShipmentId();
+
+CommerceAddress commerceAddress = commerceShipment.fetchCommerceAddress();
+
+long commerceCountryId = 0;
+long commerceRegionId = 0;
+
+if (commerceAddress != null) {
+	commerceCountryId = commerceAddress.getCommerceCountryId();
+	commerceRegionId = commerceAddress.getCommerceRegionId();
+}
 %>
 
 <portlet:actionURL name="editCommerceShipment" var="editCommerceShipmentActionURL" />
@@ -30,11 +40,72 @@ long commerceShipmentId = commerceShipmentItemDisplayContext.getCommerceShipment
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="commerceShipmentId" type="hidden" value="<%= String.valueOf(commerceShipmentId) %>" />
 
+	<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
+
+	<liferay-ui:error exception="<%= CommerceAddressCityException.class %>" message="please-enter-a-valid-city" />
+	<liferay-ui:error exception="<%= CommerceAddressCountryException.class %>" message="please-select-a-country" />
+	<liferay-ui:error exception="<%= CommerceAddressStreetException.class %>" message="please-enter-a-valid-street" />
 	<liferay-ui:error exception="<%= CommerceShipmentStatusException.class %>" message="please-select-a-valid-status" />
 
-	<aui:model-context bean="<%= commerceShipment %>" model="<%= CommerceShipment.class %>" />
-
 	<aui:fieldset-group markupView="lexicon">
+		<aui:fieldset>
+			<aui:row>
+				<aui:col width="<%= 50 %>">
+					<aui:input name="name" />
+
+					<aui:input name="description"  />
+
+					<aui:input name="street1" />
+
+					<aui:input name="street2" />
+
+					<aui:input name="street3" />
+				</aui:col>
+
+				<aui:col width="<%= 50 %>">
+					<aui:input name="city" />
+
+					<aui:input label="postal-code" name="zip" />
+
+					<aui:select label="country" name="commerceCountryId" showEmptyOption="<%= true %>">
+
+						<%
+						List<CommerceCountry> commerceCountries = commerceShipmentItemDisplayContext.getCommerceCountries();
+
+						for (CommerceCountry commerceCountry : commerceCountries) {
+						%>
+
+							<aui:option label="<%= commerceCountry.getName(locale) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceCountryId() == commerceCountry.getCommerceCountryId()) %>" value="<%= commerceCountry.getCommerceCountryId() %>" />
+
+						<%
+						}
+						%>
+
+					</aui:select>
+
+					<aui:select label="region" name="commerceRegionId" showEmptyOption="<%= true %>">
+
+						<%
+						List<CommerceRegion> commerceRegions = commerceShipmentItemDisplayContext.getCommerceRegions();
+
+						for (CommerceRegion commerceRegion : commerceRegions) {
+						%>
+
+							<aui:option label="<%= commerceRegion.getName() %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceRegionId() == commerceRegion.getCommerceRegionId()) %>" value="<%= commerceRegion.getCommerceRegionId() %>" />
+
+						<%
+						}
+						%>
+
+					</aui:select>
+
+					<aui:input name="phoneNumber" />
+				</aui:col>
+			</aui:row>
+		</aui:fieldset>
+
+		<aui:model-context bean="<%= commerceShipment %>" model="<%= CommerceShipment.class %>" />
+
 		<aui:fieldset>
 			<aui:input name="carrier" />
 
@@ -66,3 +137,44 @@ long commerceShipmentId = commerceShipmentItemDisplayContext.getCommerceShipment
 		<aui:button cssClass="btn-lg" href="<%= shipmentsURL %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script use="aui-base,liferay-dynamic-select">
+	new Liferay.DynamicSelect(
+		[
+			{
+				select: '<portlet:namespace />commerceCountryId',
+				selectData: function(callback) {
+					Liferay.Service(
+						'/commerce.commercecountry/get-shipping-commerce-countries',
+						{
+							groupId: <%= scopeGroupId %>,
+							shippingAllowed: true,
+							active: true
+						},
+						callback
+					);
+				},
+				selectDesc: 'nameCurrentValue',
+				selectId: 'commerceCountryId',
+				selectSort: '<%= true %>',
+				selectVal: '<%= commerceCountryId %>'
+			},
+				{
+					select: '<portlet:namespace />commerceRegionId',
+					selectData: function(callback, selectKey) {
+						Liferay.Service(
+							'/commerce.commerceregion/get-commerce-regions',
+							{
+								commerceCountryId: Number(selectKey),
+								active: true
+							},
+							callback
+						);
+				},
+				selectDesc: 'name',
+				selectId: 'commerceRegionId',
+				selectVal: '<%= commerceRegionId %>'
+			}
+		]
+	);
+</aui:script>

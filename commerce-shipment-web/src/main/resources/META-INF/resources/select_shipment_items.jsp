@@ -51,6 +51,11 @@ portletDisplay.setURLBack(shipmentsURL);
 					<liferay-ui:message key="there-are-no-available-items-to-ship-in-the-selected-order" />
 				</div>
 			</c:when>
+			<c:when test="<%= commerceWarehouses.isEmpty() %>">
+				<div class="alert alert-info">
+					<liferay-ui:message key="there-are-no-active-warehouses" />
+				</div>
+			</c:when>
 			<c:otherwise>
 				<table class="table table-autofit table-sm">
 					<thead>
@@ -128,7 +133,7 @@ portletDisplay.setURLBack(shipmentsURL);
 		</c:choose>
 
 		<aui:button-row>
-			<aui:button cssClass="btn-lg" disabled="<%= commerceOrderItems.isEmpty() %>" name="saveButton" type="submit" value="save" />
+			<aui:button cssClass="btn-lg" disabled="<%= commerceOrderItems.isEmpty() || commerceWarehouses.isEmpty() %>" name="saveButton" type="submit" value="save" />
 
 			<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
 		</aui:button-row>

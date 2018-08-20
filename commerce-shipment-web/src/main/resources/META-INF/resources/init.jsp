@@ -25,11 +25,15 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.commerce.constants.CommercePortletKeys" %><%@
 page import="com.liferay.commerce.constants.CommerceShipmentConstants" %><%@
+page import="com.liferay.commerce.exception.CommerceAddressCityException" %><%@
+page import="com.liferay.commerce.exception.CommerceAddressCountryException" %><%@
+page import="com.liferay.commerce.exception.CommerceAddressStreetException" %><%@
 page import="com.liferay.commerce.exception.CommerceShipmentItemQuantityException" %><%@
 page import="com.liferay.commerce.exception.CommerceShipmentStatusException" %><%@
 page import="com.liferay.commerce.exception.NoSuchShipmentException" %><%@
 page import="com.liferay.commerce.exception.NoSuchShipmentItemException" %><%@
 page import="com.liferay.commerce.model.CommerceAddress" %><%@
+page import="com.liferay.commerce.model.CommerceCountry" %><%@
 page import="com.liferay.commerce.model.CommerceOrder" %><%@
 page import="com.liferay.commerce.model.CommerceOrderItem" %><%@
 page import="com.liferay.commerce.model.CommerceRegion" %><%@
