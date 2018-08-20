@@ -212,6 +212,9 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 			ServiceContext serviceContext)
 		throws Exception {
 
+		_commerceWarehousesImporter.importDefaultCommerceWarehouse(
+			serviceContext);
+
 		JSONArray jsonArray = _getJSONArray("warehouses.json");
 
 		return _commerceWarehousesImporter.importCommerceWarehouses(
