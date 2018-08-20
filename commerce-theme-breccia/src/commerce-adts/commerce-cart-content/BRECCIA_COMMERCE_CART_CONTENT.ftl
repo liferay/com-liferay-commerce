@@ -59,7 +59,7 @@
 							</td>
 							<td class="subtotal-column table-cell-expand">
 								<div class="commerce-cart-content-value subtotal-value">
-									${curCommerceOrderItem.getQuantity()} x ${curCommerceOrderItem.getFinalPrice()}
+									${curCommerceOrderItem.getQuantity()} x ${curCommerceOrderItem.getUnitPrice()}
 								</div>
 
 								<@liferay_ui["icon-delete"]

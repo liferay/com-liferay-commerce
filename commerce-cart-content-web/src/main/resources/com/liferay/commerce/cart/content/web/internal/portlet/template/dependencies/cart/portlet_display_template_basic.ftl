@@ -35,7 +35,7 @@
 					</td>
 					<td>
 						<@liferay_commerce["format-price"]
-							price=curCommerceOrderItem.getFinalPrice()
+							price=curCommerceOrderItem.getUnitPrice()
 							quantity=curCommerceOrderItem.getQuantity()
 						/>
 					</td>
