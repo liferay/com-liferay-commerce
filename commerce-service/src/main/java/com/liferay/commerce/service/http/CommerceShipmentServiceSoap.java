@@ -260,5 +260,32 @@ public class CommerceShipmentServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceShipmentSoap updateCommerceShipment(
+		long commerceShipmentId, String name, String description,
+		String street1, String street2, String street3, String city,
+		String zip, long commerceRegionId, long commerceCountryId,
+		String phoneNumber, String carrier, String trackingNumber, int status,
+		int shippingDateMonth, int shippingDateDay, int shippingDateYear,
+		int shippingDateHour, int shippingDateMinute, int expectedDateMonth,
+		int expectedDateDay, int expectedDateYear, int expectedDateHour,
+		int expectedDateMinute) throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceShipment returnValue = CommerceShipmentServiceUtil.updateCommerceShipment(commerceShipmentId,
+					name, description, street1, street2, street3, city, zip,
+					commerceRegionId, commerceCountryId, phoneNumber, carrier,
+					trackingNumber, status, shippingDateMonth, shippingDateDay,
+					shippingDateYear, shippingDateHour, shippingDateMinute,
+					expectedDateMonth, expectedDateDay, expectedDateYear,
+					expectedDateHour, expectedDateMinute);
+
+			return com.liferay.commerce.model.CommerceShipmentSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CommerceShipmentServiceSoap.class);
 }

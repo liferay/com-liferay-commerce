@@ -459,6 +459,52 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceShipment updateCommerceShipment(
+		HttpPrincipal httpPrincipal, long commerceShipmentId, String name,
+		String description, String street1, String street2, String street3,
+		String city, String zip, long commerceRegionId, long commerceCountryId,
+		String phoneNumber, String carrier, String trackingNumber, int status,
+		int shippingDateMonth, int shippingDateDay, int shippingDateYear,
+		int shippingDateHour, int shippingDateMinute, int expectedDateMonth,
+		int expectedDateDay, int expectedDateYear, int expectedDateHour,
+		int expectedDateMinute)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceShipmentServiceUtil.class,
+					"updateCommerceShipment",
+					_updateCommerceShipmentParameterTypes12);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceShipmentId, name, description, street1, street2,
+					street3, city, zip, commerceRegionId, commerceCountryId,
+					phoneNumber, carrier, trackingNumber, status,
+					shippingDateMonth, shippingDateDay, shippingDateYear,
+					shippingDateHour, shippingDateMinute, expectedDateMonth,
+					expectedDateDay, expectedDateYear, expectedDateHour,
+					expectedDateMinute);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.model.CommerceShipment)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CommerceShipmentServiceHttp.class);
 	private static final Class<?>[] _addCommerceShipmentParameterTypes0 = new Class[] {
 			long.class, com.liferay.portal.kernel.service.ServiceContext.class
@@ -497,6 +543,13 @@ public class CommerceShipmentServiceHttp {
 		new Class[] { long.class };
 	private static final Class<?>[] _updateCommerceShipmentParameterTypes11 = new Class[] {
 			long.class, String.class, String.class, int.class, int.class,
+			int.class, int.class, int.class, int.class, int.class, int.class,
+			int.class, int.class, int.class
+		};
+	private static final Class<?>[] _updateCommerceShipmentParameterTypes12 = new Class[] {
+			long.class, String.class, String.class, String.class, String.class,
+			String.class, String.class, String.class, long.class, long.class,
+			String.class, String.class, String.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class
 		};

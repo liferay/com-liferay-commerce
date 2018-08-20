@@ -271,11 +271,21 @@ public interface CommerceShipmentLocalService extends BaseLocalService,
 	public CommerceShipment updateCommerceShipment(
 		CommerceShipment commerceShipment);
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceShipment updateCommerceShipment(long commerceShipmentId,
 		String carrier, String trackingNumber, int status,
 		int shippingDateMonth, int shippingDateDay, int shippingDateYear,
 		int shippingDateHour, int shippingDateMinute, int expectedDateMonth,
 		int expectedDateDay, int expectedDateYear, int expectedDateHour,
 		int expectedDateMinute) throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceShipment updateCommerceShipment(long commerceShipmentId,
+		String name, String description, String street1, String street2,
+		String street3, String city, String zip, long commerceRegionId,
+		long commerceCountryId, String phoneNumber, String carrier,
+		String trackingNumber, int status, int shippingDateMonth,
+		int shippingDateDay, int shippingDateYear, int shippingDateHour,
+		int shippingDateMinute, int expectedDateMonth, int expectedDateDay,
+		int expectedDateYear, int expectedDateHour, int expectedDateMinute)
+		throws PortalException;
 }
