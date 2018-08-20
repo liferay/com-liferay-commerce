@@ -49,7 +49,8 @@
 				"Key": "weight",
 				"Value": "9.88 oz (280 g)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -82,7 +83,8 @@
 				"Key": "type-of-staple",
 				"Value": "6/4 - 21/4"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -134,7 +136,8 @@
 				"Key": "weight",
 				"Value": "8.47 oz (240 g)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -186,7 +189,8 @@
 				"Key": "weight",
 				"Value": "1.06 oz (30 g)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -230,7 +234,8 @@
 				"Key": "weight",
 				"Value": "6.61 lbs (3 kg)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -282,7 +287,8 @@
 				"Key": "weight",
 				"Value": "6.61 lbs (3 kg)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -327,7 +333,8 @@
 				"Key": "soft-grip",
 				"Value": "N"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -398,7 +405,8 @@
 				"Key": "width",
 				"Value": "14.8\" (375 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -485,7 +493,8 @@
 				"Key": "width",
 				"Value": "18\" (457 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -549,7 +558,8 @@
 				"Key": "punch-capacity",
 				"Value": "9 sheets"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -614,7 +624,8 @@
 				"Key": "punch-holes-quantity",
 				"Value": "21"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -678,7 +689,8 @@
 				"Key": "punch-capacity",
 				"Value": "20 sheets"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -759,7 +771,8 @@
 				"Key": "punch-capacity",
 				"Value": "12 sheets"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -864,7 +877,8 @@
 				"Key": "punch-holes-quantity",
 				"Value": "21"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -953,7 +967,8 @@
 				"Key": "punch-capacity",
 				"Value": "20 sheets"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -1010,7 +1025,8 @@
 				"Key": "width",
 				"Value": "16.7\" (425 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -1087,7 +1103,8 @@
 				"Key": "punch-holes-quantity",
 				"Value": "21"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -1168,7 +1185,8 @@
 				"Key": "width",
 				"Value": "15.7\" (400 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -1253,7 +1271,8 @@
 				"Key": "punch-holes-quantity",
 				"Value": "10"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -1346,7 +1365,8 @@
 				"Key": "width",
 				"Value": "19.5\" (495 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -1375,7 +1395,8 @@
 				"Key": "package-width",
 				"Value": "4.33\" (110 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -1404,7 +1425,8 @@
 				"Key": "package-width",
 				"Value": "43.7\" (1110 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -1439,7 +1461,8 @@
 				"Key": "package-width",
 				"Value": "4.33\" (110 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -1468,7 +1491,8 @@
 				"Key": "package-width",
 				"Value": "11\" (280 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -1505,7 +1529,8 @@
 				"Key": "weight",
 				"Value": "1.06 oz (30 g)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -1534,7 +1559,8 @@
 				"Key": "weight",
 				"Value": "33.2 oz (940 g)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -1583,7 +1609,8 @@
 				"Key": "weight",
 				"Value": "5.64 oz (160 g)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -1636,7 +1663,8 @@
 				"Key": "weight",
 				"Value": "2.2 lbs (1 kg)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -1693,7 +1721,8 @@
 				"Key": "weight",
 				"Value": "8.47 oz (240 g)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Stapler & Hole Punch Sets"],
@@ -1781,7 +1810,8 @@
 				"Key": "staples-loading-system",
 				"Value": "Top"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -1837,7 +1867,8 @@
 				"Key": "width",
 				"Value": "22\" (560 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -1906,7 +1937,8 @@
 				"Key": "width",
 				"Value": "9.09\" (231 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -1947,7 +1979,8 @@
 				"Key": "weight",
 				"Value": "17.4 lbs (7.87 kg)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -2008,7 +2041,8 @@
 				"Key": "width",
 				"Value": "21.7\" (550 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -2077,7 +2111,8 @@
 				"Key": "width",
 				"Value": "4.21\" (107 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -2142,7 +2177,8 @@
 				"Key": "width",
 				"Value": "5.31\" (135 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -2178,7 +2214,8 @@
 				"Key": "weight",
 				"Value": "7.76 oz (220 g)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Electric Staplers"],
@@ -2226,7 +2263,8 @@
 				"Key": "width",
 				"Value": "1.97\" (50 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -2270,7 +2308,8 @@
 				"Key": "weight",
 				"Value": "5.51 lbs (2.5 kg)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Hole Punches"],
@@ -2310,7 +2349,8 @@
 				"Key": "weight",
 				"Value": "10.6 oz (300 g)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -2374,7 +2414,8 @@
 				"Key": "width",
 				"Value": "0.945\" (24 mm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -2424,7 +2465,8 @@
 				"Key": "weight",
 				"Value": "3.75 lbs (1.7 kg)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -2465,7 +2507,8 @@
 				"Key": "throat-depth",
 				"Value": "0.559\" (1.42 cm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -2494,7 +2537,8 @@
 				"Key": "capacity",
 				"Value": "23 staples"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -2559,7 +2603,8 @@
 				"Key": "throat-depth",
 				"Value": "1.97\" (5 cm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -2608,7 +2653,8 @@
 				"Key": "weight",
 				"Value": "10.3 oz (292 g)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Binding Machines"],
@@ -2635,7 +2681,8 @@
 		"Price": 1.58,
 		"ShortDescription": "Rexel Multi Functional Binder",
 		"Sku": "2101436",
-		"SpecificationOptions": []
+		"SpecificationOptions": [],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -2675,7 +2722,8 @@
 				"Key": "throat-depth",
 				"Value": "2.76\" (7 cm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	},
 	{
 		"Categories": ["Staplers"],
@@ -2710,6 +2758,7 @@
 				"Key": "throat-depth",
 				"Value": "1.77\" (4.5 cm)"
 			}
-		]
+		],
+		"Warehouse1" : 50
 	}
 ]
