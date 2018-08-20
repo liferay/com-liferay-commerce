@@ -37,7 +37,6 @@ page import="com.liferay.commerce.shipping.web.admin.ShippingMethodsCommerceAdmi
 page import="com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingMethodRestrictionsDisplayContext" %><%@
 page import="com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingMethodsDisplayContext" %><%@
 page import="com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingSettingsDisplayContext" %><%@
-page import="com.liferay.commerce.shipping.web.internal.servlet.taglib.ui.CommerceShippingFormNavigatorConstants" %><%@
 page import="com.liferay.commerce.shipping.web.servlet.taglib.ui.CommerceShippingScreenNavigationConstants" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
