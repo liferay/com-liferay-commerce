@@ -36,7 +36,7 @@
 
 				<div class="row">
 					<@liferay_commerce["format-price"]
-						price=curCommerceOrderItem.getFinalPrice()
+						price=curCommerceOrderItem.getUnitPrice()
 						quantity=1
 					/>
 				</div>
