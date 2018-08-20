@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -98,8 +99,8 @@ public class CPInstanceWarehouseItemsScreenNavigationEntry
 				commerceWarehouseItemsDisplayContext =
 					new CommerceWarehouseItemsDisplayContext(
 						_commerceWarehouseItemService,
-						_commerceWarehouseService, _cpInstanceService,
-						httpServletRequest, _portal,
+						_commerceWarehouseService, _configurationProvider,
+						_cpInstanceService, httpServletRequest, _portal,
 						_portletResourcePermission);
 
 			httpServletRequest.setAttribute(
@@ -123,6 +124,9 @@ public class CPInstanceWarehouseItemsScreenNavigationEntry
 
 	@Reference
 	private CommerceWarehouseService _commerceWarehouseService;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
