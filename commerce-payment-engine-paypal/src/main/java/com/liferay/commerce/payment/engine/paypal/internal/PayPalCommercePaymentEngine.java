@@ -15,7 +15,6 @@
 package com.liferay.commerce.payment.engine.paypal.internal;
 
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.exception.CommercePaymentEngineException;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
@@ -376,14 +375,6 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		CommerceCurrency commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				commerceOrder.getSiteGroupId());
-
-		if (commerceCurrency == null) {
-			throw new CommercePaymentEngineException.MustSetPrimaryCurrency();
-		}
-
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
 		Payment payment = new Payment();
@@ -405,7 +396,8 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 
 		payment.setTransactions(
 			_getTransactions(
-				commerceOrder, commerceCurrency, serviceContext.getLocale()));
+				commerceOrder, commerceOrder.getCommerceCurrency(),
+				serviceContext.getLocale()));
 
 		payment = payment.create(apiContext);
 
@@ -432,9 +424,6 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 
 	private static final DecimalFormat _PAY_PAL_DECIMAL_FORMAT =
 		new DecimalFormat("#,###.00");
-
-	@Reference
-	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;
