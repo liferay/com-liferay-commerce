@@ -251,6 +251,18 @@ public class EditCommerceShipmentMVCActionCommand extends BaseMVCActionCommand {
 		long commerceShipmentId = ParamUtil.getLong(
 			actionRequest, "commerceShipmentId");
 
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
+		String street1 = ParamUtil.getString(actionRequest, "street1");
+		String street2 = ParamUtil.getString(actionRequest, "street2");
+		String street3 = ParamUtil.getString(actionRequest, "street3");
+		String city = ParamUtil.getString(actionRequest, "city");
+		String zip = ParamUtil.getString(actionRequest, "zip");
+		long commerceRegionId = ParamUtil.getLong(
+			actionRequest, "commerceRegionId");
+		long commerceCountryId = ParamUtil.getLong(
+			actionRequest, "commerceCountryId");
+		String phoneNumber = ParamUtil.getString(actionRequest, "phoneNumber");
 		String carrier = ParamUtil.getString(actionRequest, "carrier");
 		String trackingNumber = ParamUtil.getString(
 			actionRequest, "trackingNumber");
@@ -294,11 +306,12 @@ public class EditCommerceShipmentMVCActionCommand extends BaseMVCActionCommand {
 
 		if (commerceShipmentId > 0) {
 			commerceShipment = _commerceShipmentService.updateCommerceShipment(
-				commerceShipmentId, carrier, trackingNumber, status,
-				shippingDateMonth, shippingDateDay, shippingDateYear,
-				shippingDateHour, shippingDateMinute, expectedDateMonth,
-				expectedDateDay, expectedDateYear, expectedDateHour,
-				expectedDateMinute);
+				commerceShipmentId, name, description, street1, street2,
+				street3, city, zip, commerceRegionId, commerceCountryId,
+				phoneNumber, carrier, trackingNumber, status, shippingDateMonth,
+				shippingDateDay, shippingDateYear, shippingDateHour,
+				shippingDateMinute, expectedDateMonth, expectedDateDay,
+				expectedDateYear, expectedDateHour, expectedDateMinute);
 		}
 		else {
 			long commerceOrderId = ParamUtil.getLong(

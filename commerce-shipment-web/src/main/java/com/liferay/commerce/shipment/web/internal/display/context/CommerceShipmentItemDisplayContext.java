@@ -14,9 +14,15 @@
 
 package com.liferay.commerce.shipment.web.internal.display.context;
 
+import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.model.CommerceShipmentItem;
+import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceOrderItemService;
+import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.commerce.service.CommerceShipmentItemService;
 import com.liferay.commerce.shipment.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.shipment.web.internal.util.CommerceShipmentPortletUtil;
@@ -40,7 +46,9 @@ public class CommerceShipmentItemDisplayContext
 
 	public CommerceShipmentItemDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+		CommerceCountryService commerceCountryService,
 		CommerceOrderItemService commerceOrderItemService,
+		CommerceRegionService commerceRegionService,
 		CommerceShipmentItemService commerceShipmentItemService,
 		PortletResourcePermission portletResourcePermission) {
 
@@ -49,7 +57,9 @@ public class CommerceShipmentItemDisplayContext
 			CommerceShipmentItem.class.getSimpleName(),
 			portletResourcePermission);
 
+		_commerceCountryService = commerceCountryService;
 		_commerceOrderItemService = commerceOrderItemService;
+		_commerceRegionService = commerceRegionService;
 		_commerceShipmentItemService = commerceShipmentItemService;
 	}
 
@@ -91,6 +101,27 @@ public class CommerceShipmentItemDisplayContext
 		}
 
 		return portletURL.toString();
+	}
+
+	public List<CommerceCountry> getCommerceCountries() {
+		return _commerceCountryService.getShippingCommerceCountries(
+			cpRequestHelper.getScopeGroupId(), true, true);
+	}
+
+	public List<CommerceRegion> getCommerceRegions() throws PortalException {
+		long commerceCountryId = 0;
+
+		CommerceShipment commerceShipment = getCommerceShipment();
+
+		CommerceAddress commerceAddress =
+			commerceShipment.fetchCommerceAddress();
+
+		if (commerceAddress != null) {
+			commerceCountryId = commerceAddress.getCommerceCountryId();
+		}
+
+		return _commerceRegionService.getCommerceRegions(
+			commerceCountryId, true);
 	}
 
 	public CommerceShipmentItem getCommerceShipmentItem()
@@ -162,7 +193,9 @@ public class CommerceShipmentItemDisplayContext
 		return searchContainer;
 	}
 
+	private final CommerceCountryService _commerceCountryService;
 	private final CommerceOrderItemService _commerceOrderItemService;
+	private final CommerceRegionService _commerceRegionService;
 	private CommerceShipmentItem _commerceShipmentItem;
 	private final CommerceShipmentItemService _commerceShipmentItemService;
 
