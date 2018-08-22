@@ -81,7 +81,7 @@ public class CPDefinitionIndexerTest {
 		Document document = HitsAssert.assertOnlyOne(hits);
 
 		Assert.assertEquals(
-			cpDefinition.getCPDefinitionId(),
+			String.valueOf(cpDefinition.getCPDefinitionId()),
 			document.get(Field.ENTRY_CLASS_PK));
 	}
 
