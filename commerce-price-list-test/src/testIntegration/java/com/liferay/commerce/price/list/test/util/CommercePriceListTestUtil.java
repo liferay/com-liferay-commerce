@@ -34,7 +34,7 @@ import java.util.Date;
 public class CommercePriceListTestUtil {
 
 	public static CommercePriceList addCommercePriceList(
-			Long groupId, String currency, String name, Double priority,
+			long groupId, String currency, String name, Double priority,
 			Boolean neverExpire, Date displayDate, Date expirationDate,
 			String externalReferenceCode)
 		throws PortalException {
