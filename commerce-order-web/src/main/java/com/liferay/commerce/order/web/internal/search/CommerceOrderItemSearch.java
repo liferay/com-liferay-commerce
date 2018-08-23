@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,20 +100,16 @@ public class CommerceOrderItemSearch
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceOrderItemSearch.class);
 
-	private static final List<String> _headerNames = new ArrayList<>();
+	private static final List<String> _headerNames = Arrays.asList(
+		"sku", "name", "quantity", "price");
 	private static final Map<String, String> _orderableHeaders =
-		new LinkedHashMap<>();
-
-	static {
-		_headerNames.add("sku");
-		_headerNames.add("name");
-		_headerNames.add("quantity");
-		_headerNames.add("price");
-
-		_orderableHeaders.put("sku", "sku");
-		_orderableHeaders.put("name", "name");
-		_orderableHeaders.put("quantity", "quantity");
-		_orderableHeaders.put("price", "price");
-	}
+		new LinkedHashMap<String, String>() {
+			{
+				put("sku", "sku");
+				put("name", "name");
+				put("quantity", "quantity");
+				put("price", "price");
+			}
+		};
 
 }

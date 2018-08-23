@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,22 +121,16 @@ public class CommerceOrderSearch extends SearchContainer<CommerceOrder> {
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceOrderSearch.class);
 
-	private static final List<String> _headerNames = new ArrayList<>();
+	private static final List<String> _headerNames = Arrays.asList(
+		"order-date", "status", "customer-name", "customer-id", "order-id",
+		"order-value", "notes");
 	private static final Map<String, String> _orderableHeaders =
-		new LinkedHashMap<>();
-
-	static {
-		_headerNames.add("order-date");
-		_headerNames.add("status");
-		_headerNames.add("customer-name");
-		_headerNames.add("customer-id");
-		_headerNames.add("order-id");
-		_headerNames.add("order-value");
-		_headerNames.add("notes");
-
-		_orderableHeaders.put("create-date", "order-date");
-		_orderableHeaders.put("order-id", "order-id");
-		_orderableHeaders.put("total", "order-value");
-	}
+		new LinkedHashMap<String, String>() {
+			{
+				put("create-date", "order-date");
+				put("order-id", "order-id");
+				put("total", "order-value");
+			}
+		};
 
 }
