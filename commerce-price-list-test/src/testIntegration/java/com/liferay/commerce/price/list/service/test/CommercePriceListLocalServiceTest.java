@@ -39,6 +39,7 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,6 +60,7 @@ public class CommercePriceListLocalServiceTest {
 		_group = GroupTestUtil.addGroup();
 	}
 
+	@Ignore
 	@Test
 	public void testAddCommercePriceList1() throws Exception {
 		frutillaRule.scenario(
@@ -88,6 +90,7 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, commercePriceList);
 	}
 
+	@Ignore
 	@Test
 	public void testAddCommercePriceList2() throws Exception {
 		frutillaRule.scenario(
@@ -126,6 +129,7 @@ public class CommercePriceListLocalServiceTest {
 			equalTo(commercePriceList.getExternalReferenceCode()));
 	}
 
+	@Ignore
 	@Test
 	public void testUpsertCommercePriceList1() throws Exception {
 		frutillaRule.scenario(
@@ -155,6 +159,7 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, commercePriceList);
 	}
 
+	@Ignore
 	@Test
 	public void testUpsertCommercePriceList2() throws Exception {
 		frutillaRule.scenario(
@@ -199,6 +204,7 @@ public class CommercePriceListLocalServiceTest {
 			updatedCurrency, updatedName, commercePriceList);
 	}
 
+	@Ignore
 	@Test
 	public void testUpsertCommercePriceList3() throws Exception {
 		frutillaRule.scenario(
@@ -270,6 +276,7 @@ public class CommercePriceListLocalServiceTest {
 			RandomTestUtil.randomDouble(), true, null, null, null);
 	}
 
+	@Ignore
 	@Test
 	public void testUpsertCommercePriceList5() throws Exception {
 		frutillaRule.scenario(
