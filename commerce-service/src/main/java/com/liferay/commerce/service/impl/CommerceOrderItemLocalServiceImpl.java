@@ -65,6 +65,7 @@ import java.util.List;
 /**
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
+ * @author Ethan Bustad
  */
 public class CommerceOrderItemLocalServiceImpl
 	extends CommerceOrderItemLocalServiceBaseImpl {
@@ -205,6 +206,23 @@ public class CommerceOrderItemLocalServiceImpl
 
 		return commerceOrderItemPersistence.findByCommerceOrderId(
 			commerceOrderId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommerceOrderItem> getCommerceOrderItems(
+		long commerceOrderId, long cpInstanceId, int start, int end) {
+
+		return commerceOrderItemPersistence.findByC_I(
+			commerceOrderId, cpInstanceId, start, end);
+	}
+
+	@Override
+	public List<CommerceOrderItem> getCommerceOrderItems(
+		long commerceOrderId, long cpInstanceId, int start, int end,
+		OrderByComparator<CommerceOrderItem> orderByComparator) {
+
+		return commerceOrderItemPersistence.findByC_I(
+			commerceOrderId, cpInstanceId, start, end, orderByComparator);
 	}
 
 	@Override

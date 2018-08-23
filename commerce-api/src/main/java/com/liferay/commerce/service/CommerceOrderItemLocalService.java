@@ -228,6 +228,15 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 		int start, int end,
 		OrderByComparator<CommerceOrderItem> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrderItem> getCommerceOrderItems(long commerceOrderId,
+		long cpInstanceId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrderItem> getCommerceOrderItems(long commerceOrderId,
+		long cpInstanceId, int start, int end,
+		OrderByComparator<CommerceOrderItem> orderByComparator);
+
 	/**
 	* Returns the number of commerce order items.
 	*

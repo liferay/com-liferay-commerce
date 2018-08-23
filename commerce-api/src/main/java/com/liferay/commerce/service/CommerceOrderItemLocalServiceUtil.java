@@ -256,6 +256,21 @@ public class CommerceOrderItemLocalServiceUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceOrderItem> getCommerceOrderItems(
+		long commerceOrderId, long cpInstanceId, int start, int end) {
+		return getService()
+				   .getCommerceOrderItems(commerceOrderId, cpInstanceId, start,
+			end);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceOrderItem> getCommerceOrderItems(
+		long commerceOrderId, long cpInstanceId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceOrderItem> orderByComparator) {
+		return getService()
+				   .getCommerceOrderItems(commerceOrderId, cpInstanceId, start,
+			end, orderByComparator);
+	}
+
 	/**
 	* Returns the number of commerce order items.
 	*
