@@ -110,7 +110,7 @@
 	},
 	{
 		"instanceId": "addresses_navigation_menu",
-		"layoutFriendlyURL": "/addresses",
+		"layoutFriendlyURL": "/your-addresses",
 		"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 		"portletPreferences": {
 			"displayDepth": "0",
@@ -128,7 +128,7 @@
 	},
 	{
 		"instanceId": "orders_navigation_menu",
-		"layoutFriendlyURL": "/orders",
+		"layoutFriendlyURL": "/your-orders",
 		"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 		"portletPreferences": {
 			"displayDepth": "0",
@@ -146,7 +146,7 @@
 	},
 	{
 		"instanceId": "my_downloads_navigation_menu",
-		"layoutFriendlyURL": "/my-downloads",
+		"layoutFriendlyURL": "/your-downloads",
 		"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 		"portletPreferences": {
 			"displayDepth": "0",
