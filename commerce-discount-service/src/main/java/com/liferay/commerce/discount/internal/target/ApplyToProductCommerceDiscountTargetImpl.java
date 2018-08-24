@@ -65,10 +65,10 @@ public class ApplyToProductCommerceDiscountTargetImpl
 
 		Stream<CommerceDiscountRel> stream = commerceDiscountRels.stream();
 
-		long[] assetCategoryIds = stream.mapToLong(
+		long[] cpDefinitionIds = stream.mapToLong(
 			CommerceDiscountRel::getClassPK).toArray();
 
-		document.addKeyword("target_product_ids", assetCategoryIds);
+		document.addKeyword("target_product_ids", cpDefinitionIds);
 	}
 
 	@Override

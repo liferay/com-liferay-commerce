@@ -156,9 +156,6 @@ public class AssetCategoryCPRuleTypeImpl implements CPRuleType {
 		"cpRuleAssetCategoryIds";
 
 	@Reference
-	private AssetCategoryLocalService _assetCategoryLocalService;
-
-	@Reference
 	private AssetEntryLocalService _assetEntryLocalService;
 
 	@Reference
