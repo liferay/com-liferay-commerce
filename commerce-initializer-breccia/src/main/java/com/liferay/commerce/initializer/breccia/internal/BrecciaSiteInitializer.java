@@ -28,6 +28,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPSpecificationOption;
+import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -407,6 +408,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		_commerceCountryLocalService.importDefaultCountries(serviceContext);
 		_commerceCurrencyLocalService.importDefaultValues(serviceContext);
+		_cpMeasurementUnitLocalService.importDefaultValues(serviceContext);
 
 		_cpFileImporter.updateLookAndFeel(
 			_BRECCIA_THEME_ID, false, serviceContext);
@@ -510,6 +512,9 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CPFileImporter _cpFileImporter;
+
+	@Reference
+	private CPMeasurementUnitLocalService _cpMeasurementUnitLocalService;
 
 	@Reference
 	private CPOptionCategoriesImporter _cpOptionCategoriesImporter;
