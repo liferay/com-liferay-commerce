@@ -82,7 +82,7 @@ public class PriceCPContentContributor implements CPContentContributor {
 				commerceContext);
 
 		jsonObject.put(
-			"price",
+			CPContentContributorConstants.PRICE,
 			commerceMoney.format(_portal.getLocale(httpServletRequest)));
 
 		return jsonObject;
@@ -90,9 +90,6 @@ public class PriceCPContentContributor implements CPContentContributor {
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
-
-	@Reference
-	private CPContentContributorRegistry _cpContentContributorRegistry;
 
 	@Reference
 	private CPDefinitionInventoryEngineRegistry

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Alessio Antonio Rendina
@@ -176,9 +177,6 @@ public class CommerceShipmentLocalServiceImpl
 			int expectedDateHour, int expectedDateMinute)
 		throws PortalException {
 
-		CommerceShipment commerceShipment =
-			commerceShipmentPersistence.findByPrimaryKey(commerceShipmentId);
-
 		String name = null;
 		String description = null;
 		String street1 = null;
@@ -189,6 +187,9 @@ public class CommerceShipmentLocalServiceImpl
 		long commerceRegionId = 0;
 		long commerceCountryId = 0;
 		String phoneNumber = null;
+
+		CommerceShipment commerceShipment =
+			commerceShipmentPersistence.findByPrimaryKey(commerceShipmentId);
 
 		CommerceAddress commerceAddress =
 			commerceShipment.fetchCommerceAddress();
@@ -344,17 +345,18 @@ public class CommerceShipmentLocalServiceImpl
 		CommerceAddress commerceAddress =
 			commerceShipment.fetchCommerceAddress();
 
-		if ((commerceAddress != null) &&
-			name.equals(commerceAddress.getName()) &&
-			description.equals(commerceAddress.getDescription()) &&
-			street1.equals(commerceAddress.getStreet1()) &&
-			street2.equals(commerceAddress.getStreet2()) &&
-			street3.equals(commerceAddress.getStreet3()) &&
-			city.equals(commerceAddress.getCity()) &&
-			zip.equals(commerceAddress.getZip()) &&
-			(commerceRegionId == commerceAddress.getCommerceRegionId()) &&
-			(commerceCountryId == commerceAddress.getCommerceCountryId()) &&
-			phoneNumber.equals(commerceAddress.getPhoneNumber())) {
+		if (Objects.equals(name, commerceAddress.getName()) &&
+			Objects.equals(description, commerceAddress.getDescription()) &&
+			Objects.equals(street1, commerceAddress.getStreet1()) &&
+			Objects.equals(street2, commerceAddress.getStreet2()) &&
+			Objects.equals(street3, commerceAddress.getStreet3()) &&
+			Objects.equals(city, commerceAddress.getCity()) &&
+			Objects.equals(zip, commerceAddress.getZip()) &&
+			Objects.equals(
+				commerceRegionId, commerceAddress.getCommerceRegionId()) &&
+			Objects.equals(
+				commerceCountryId, commerceAddress.getCommerceCountryId()) &&
+			Objects.equals(phoneNumber, commerceAddress.getPhoneNumber())) {
 
 			return commerceAddress;
 		}

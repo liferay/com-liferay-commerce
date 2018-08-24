@@ -22,10 +22,10 @@ CommerceShipmentItemDisplayContext commerceShipmentItemDisplayContext = (Commerc
 CommerceShipment commerceShipment = commerceShipmentItemDisplayContext.getCommerceShipment();
 long commerceShipmentId = commerceShipmentItemDisplayContext.getCommerceShipmentId();
 
-CommerceAddress commerceAddress = commerceShipment.fetchCommerceAddress();
-
 long commerceCountryId = 0;
 long commerceRegionId = 0;
+
+CommerceAddress commerceAddress = commerceShipment.fetchCommerceAddress();
 
 if (commerceAddress != null) {
 	commerceCountryId = commerceAddress.getCommerceCountryId();
@@ -159,17 +159,17 @@ if (commerceAddress != null) {
 				selectSort: '<%= true %>',
 				selectVal: '<%= commerceCountryId %>'
 			},
-				{
-					select: '<portlet:namespace />commerceRegionId',
-					selectData: function(callback, selectKey) {
-						Liferay.Service(
-							'/commerce.commerceregion/get-commerce-regions',
-							{
-								commerceCountryId: Number(selectKey),
-								active: true
-							},
-							callback
-						);
+			{
+				select: '<portlet:namespace />commerceRegionId',
+				selectData: function(callback, selectKey) {
+					Liferay.Service(
+						'/commerce.commerceregion/get-commerce-regions',
+						{
+							commerceCountryId: Number(selectKey),
+							active: true
+						},
+						callback
+					);
 				},
 				selectDesc: 'name',
 				selectId: 'commerceRegionId',
