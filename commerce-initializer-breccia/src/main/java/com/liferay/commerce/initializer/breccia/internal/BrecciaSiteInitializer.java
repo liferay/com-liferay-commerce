@@ -19,6 +19,7 @@ import com.liferay.commerce.initializer.util.AssetCategoriesImporter;
 import com.liferay.commerce.initializer.util.CPDefinitionsImporter;
 import com.liferay.commerce.initializer.util.CPOptionCategoriesImporter;
 import com.liferay.commerce.initializer.util.CPOptionsImporter;
+import com.liferay.commerce.initializer.util.CPRulesImporter;
 import com.liferay.commerce.initializer.util.CPSpecificationOptionsImporter;
 import com.liferay.commerce.initializer.util.CommerceWarehousesImporter;
 import com.liferay.commerce.initializer.util.PortletSettingsImporter;
@@ -27,8 +28,10 @@ import com.liferay.commerce.product.importer.CPFileImporter;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionCategory;
+import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.service.CommerceCountryLocalService;
+import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -256,6 +259,14 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		return _cpOptionsImporter.importCPOptions(jsonArray, serviceContext);
 	}
 
+	private List<CPRule> _importCPRules(ServiceContext serviceContext)
+		throws Exception {
+
+		JSONArray jsonArray = _getJSONArray("catalog-rules.json");
+
+		return _cpRulesImporter.importCPRules(jsonArray, serviceContext);
+	}
+
 	private List<CPSpecificationOption> _importCPSpecificationOptions(
 			ServiceContext serviceContext)
 		throws Exception {
@@ -410,6 +421,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		_commerceCountryLocalService.importDefaultCountries(serviceContext);
 		_commerceCurrencyLocalService.importDefaultValues(serviceContext);
+		_commerceUserSegmentEntryLocalService.
+			importSystemCommerceUserSegmentEntries(serviceContext);
 
 		_cpFileImporter.updateLookAndFeel(
 			_BRECCIA_THEME_ID, false, serviceContext);
@@ -429,6 +442,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 			serviceContext);
 
 		_importCPDefinitions(commerceWarehouses, serviceContext);
+
+		_importCPRules(serviceContext);
 
 		_importJournalArticles(serviceContext);
 		_importPortletSettings(serviceContext);
@@ -506,6 +521,10 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
 	@Reference
+	private CommerceUserSegmentEntryLocalService
+		_commerceUserSegmentEntryLocalService;
+
+	@Reference
 	private CommerceWarehousesImporter _commerceWarehousesImporter;
 
 	@Reference
@@ -519,6 +538,9 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CPOptionsImporter _cpOptionsImporter;
+
+	@Reference
+	private CPRulesImporter _cpRulesImporter;
 
 	@Reference
 	private CPSpecificationOptionsImporter _cpSpecificationOptionsImporter;
