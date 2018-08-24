@@ -1,0 +1,16 @@
+[
+	{
+		"name": "Guests",
+		"type": "all-products",
+		"userSegments": [
+			"guest"
+		]
+	},
+	{
+		"name": "Users",
+		"type": "all-products",
+		"userSegments": [
+			"user"
+		]
+	}
+]
