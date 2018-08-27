@@ -63,8 +63,14 @@ public class CPNavigationItemRegistryImpl implements CPNavigationItemRegistry {
 			CPNavigationItem cpNavigationItem =
 				cpNavigationItemServiceWrapper.getService();
 
-			navigationItems.add(
-				cpNavigationItem.getNavigationItem(portletRequest));
+			NavigationItem navigationItem = cpNavigationItem.getNavigationItem(
+				portletRequest);
+
+			if (navigationItem == null) {
+				continue;
+			}
+
+			navigationItems.add(navigationItem);
 		}
 
 		return navigationItems;
