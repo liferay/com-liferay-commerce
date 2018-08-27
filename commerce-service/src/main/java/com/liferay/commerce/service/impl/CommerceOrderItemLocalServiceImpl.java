@@ -385,6 +385,31 @@ public class CommerceOrderItemLocalServiceImpl
 		return commerceOrderItem;
 	}
 
+	@Override
+	public CommerceOrderItem upsertCommerceOrderItem(
+			long commerceOrderId, long cpInstanceId, int quantity,
+			int shippedQuantity, String json, CommerceContext commerceContext,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		List<CommerceOrderItem> commerceOrderItems = getCommerceOrderItems(
+			commerceOrderId, cpInstanceId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
+
+		if (!commerceOrderItems.isEmpty()) {
+			CommerceOrderItem commerceOrderItem = commerceOrderItems.get(0);
+
+			return updateCommerceOrderItem(
+				commerceOrderItem.getCommerceOrderItemId(),
+				commerceOrderItem.getQuantity() + quantity,
+				commerceOrderItem.getJson(), commerceContext);
+		}
+
+		return addCommerceOrderItem(
+			commerceOrderId, cpInstanceId, quantity, 0, json, commerceContext,
+			serviceContext);
+	}
+
 	protected SearchContext buildSearchContext(
 			long commerceOrderId, int start, int end, Sort sort)
 		throws PortalException {
