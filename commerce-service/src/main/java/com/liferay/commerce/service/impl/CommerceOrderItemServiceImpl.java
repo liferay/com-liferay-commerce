@@ -223,6 +223,21 @@ public class CommerceOrderItemServiceImpl
 			commerceContext);
 	}
 
+	@Override
+	public CommerceOrderItem upsertCommerceOrderItem(
+			long commerceOrderId, long cpInstanceId, int quantity,
+			int shippedQuantity, String json, CommerceContext commerceContext,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderId, ActionKeys.UPDATE);
+
+		return commerceOrderItemLocalService.upsertCommerceOrderItem(
+			commerceOrderId, cpInstanceId, quantity, shippedQuantity, json,
+			commerceContext, serviceContext);
+	}
+
 	private static volatile ModelResourcePermission<CommerceOrder>
 		_commerceOrderModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
