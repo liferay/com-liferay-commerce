@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -52,12 +53,14 @@ public class CPDefinitionLinkDisplayContext
 
 	public CPDefinitionLinkDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+		PortletResourcePermission portletResourcePermission,
 		CPDefinitionLinkService cpDefinitionLinkService,
 		ItemSelector itemSelector, String type) {
 
 		super(
 			actionHelper, httpServletRequest,
-			CPDefinitionOptionRel.class.getSimpleName());
+			CPDefinitionOptionRel.class.getSimpleName(),
+			portletResourcePermission);
 
 		setDefaultOrderByCol("priority");
 

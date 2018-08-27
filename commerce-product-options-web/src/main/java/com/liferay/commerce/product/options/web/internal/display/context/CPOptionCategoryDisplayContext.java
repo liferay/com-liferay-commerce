@@ -20,6 +20,7 @@ import com.liferay.commerce.product.options.web.internal.util.CPOptionsPortletUt
 import com.liferay.commerce.product.service.CPOptionCategoryService;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
@@ -34,12 +35,13 @@ public class CPOptionCategoryDisplayContext
 
 	public CPOptionCategoryDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+			PortletResourcePermission portletResourcePermission,
 			CPOptionCategoryService cpOptionCategoryService)
 		throws PortalException {
 
 		super(
 			actionHelper, httpServletRequest,
-			CPOptionCategory.class.getSimpleName());
+			CPOptionCategory.class.getSimpleName(), portletResourcePermission);
 
 		setDefaultOrderByCol("priority");
 

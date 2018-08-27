@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPAttachmentFileEntriesDisplayContext;
@@ -27,6 +28,7 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
@@ -76,7 +78,7 @@ public class EditCPAttachmentFileEntryMVCRenderCommand
 						_cpAttachmentFileEntryService,
 						_cpDefinitionOptionRelService, _cpInstanceHelper,
 						_dlMimeTypeDisplayContext, httpServletRequest,
-						_itemSelector, _portal,
+						_itemSelector, _portal, _portletResourcePermission,
 						_workflowDefinitionLinkLocalService);
 
 			renderRequest.setAttribute(
@@ -127,6 +129,9 @@ public class EditCPAttachmentFileEntryMVCRenderCommand
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference
 	private WorkflowDefinitionLinkLocalService

@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
 
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionOptionRelDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
@@ -24,11 +25,17 @@ import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -83,7 +90,21 @@ public class CPDefinitionOptionsScreenNavigationEntry
 			return false;
 		}
 
-		return true;
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		boolean hasViewCPDefinitionPermission = false;
+
+		try {
+			hasViewCPDefinitionPermission =
+				_cpDefinitionModelResourcePermission.contains(
+					permissionChecker, cpDefinition, ActionKeys.VIEW);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
+
+		return hasViewCPDefinitionPermission;
 	}
 
 	@Override
@@ -97,7 +118,9 @@ public class CPDefinitionOptionsScreenNavigationEntry
 				cpDefinitionOptionRelDisplayContext =
 					new CPDefinitionOptionRelDisplayContext(
 						_actionHelper, httpServletRequest,
-						_configurationProvider, _cpDefinitionOptionRelService,
+						_portletResourcePermission, _configurationProvider,
+						_cpDefinitionOptionRelService,
+						_cpDefinitionModelResourcePermission,
 						_ddmFormFieldTypeServicesTracker, _itemSelector);
 
 			httpServletRequest.setAttribute(
@@ -122,6 +145,12 @@ public class CPDefinitionOptionsScreenNavigationEntry
 	@Reference
 	private ConfigurationProvider _configurationProvider;
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
+	)
+	private ModelResourcePermission<CPDefinition>
+		_cpDefinitionModelResourcePermission;
+
 	@Reference
 	private CPDefinitionOptionRelService _cpDefinitionOptionRelService;
 
@@ -133,6 +162,9 @@ public class CPDefinitionOptionsScreenNavigationEntry
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.product.definitions.web)"

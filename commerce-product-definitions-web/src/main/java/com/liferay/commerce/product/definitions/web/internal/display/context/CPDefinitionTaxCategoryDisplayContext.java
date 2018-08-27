@@ -21,6 +21,7 @@ import com.liferay.commerce.product.service.CPTaxCategoryService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -38,12 +39,13 @@ public class CPDefinitionTaxCategoryDisplayContext
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 			CPDefinitionHelper cpDefinitionHelper,
 			CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
+			PortletResourcePermission portletResourcePermission,
 			CPTaxCategoryService cpTaxCategoryService)
 		throws PortalException {
 
 		super(
 			actionHelper, httpServletRequest, cpDefinitionHelper,
-			cpDefinitionService, itemSelector);
+			cpDefinitionService, itemSelector, portletResourcePermission);
 
 		_cpTaxCategoryService = cpTaxCategoryService;
 	}

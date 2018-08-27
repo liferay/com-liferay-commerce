@@ -14,12 +14,14 @@
 
 package com.liferay.commerce.product.options.web.internal.portlet;
 
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.options.web.internal.display.context.CPOptionCategoryDisplayContext;
 import com.liferay.commerce.product.options.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.product.service.CPOptionCategoryService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -77,7 +79,7 @@ public class CPOptionCategoriesPortlet extends MVCPortlet {
 			CPOptionCategoryDisplayContext cpOptionCategoryDisplayContext =
 				new CPOptionCategoryDisplayContext(
 					_actionHelper, httpServletRequest,
-					_cpOptionCategoryService);
+					_portletResourcePermission, _cpOptionCategoryService);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -98,5 +100,8 @@ public class CPOptionCategoriesPortlet extends MVCPortlet {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 }

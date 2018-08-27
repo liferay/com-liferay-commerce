@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -45,12 +46,14 @@ public class CPDefinitionOptionValueRelDisplayContext
 
 	public CPDefinitionOptionValueRelDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+			PortletResourcePermission portletResourcePermission,
 			CPDefinitionOptionValueRelService cpDefinitionOptionValueRelService)
 		throws PortalException {
 
 		super(
 			actionHelper, httpServletRequest,
-			CPDefinitionOptionValueRel.class.getSimpleName());
+			CPDefinitionOptionValueRel.class.getSimpleName(),
+			portletResourcePermission);
 
 		setDefaultOrderByCol("priority");
 

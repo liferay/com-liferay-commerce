@@ -23,6 +23,7 @@ import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -38,6 +39,7 @@ public class CPInstancePricingInfoDisplayContext
 
 	public CPInstancePricingInfoDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+			PortletResourcePermission portletResourcePermission,
 			CommercePriceFormatter commercePriceFormatter,
 			CPDefinitionOptionRelService cpDefinitionOptionRelService,
 			CPInstanceService cpInstanceService,
@@ -46,8 +48,9 @@ public class CPInstancePricingInfoDisplayContext
 		throws PortalException {
 
 		super(
-			actionHelper, httpServletRequest, commercePriceFormatter,
-			cpDefinitionOptionRelService, cpInstanceService, cpInstanceHelper);
+			actionHelper, httpServletRequest, portletResourcePermission,
+			commercePriceFormatter, cpDefinitionOptionRelService,
+			cpInstanceService, cpInstanceHelper);
 
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 	}
