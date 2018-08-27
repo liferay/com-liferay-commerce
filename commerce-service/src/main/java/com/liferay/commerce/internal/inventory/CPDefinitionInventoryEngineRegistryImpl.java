@@ -90,10 +90,11 @@ public class CPDefinitionInventoryEngineRegistryImpl
 		List<CPDefinitionInventoryEngine> cpDefinitionInventoryEngines =
 			new ArrayList<>();
 
-		List<ServiceTrackerCustomizerFactory.
-			ServiceWrapper<CPDefinitionInventoryEngine>>
-				cpDefinitionInventoryEngineServiceWrappers =
-					ListUtil.fromCollection(_serviceTrackerMap.values());
+		List
+			<ServiceTrackerCustomizerFactory.
+				ServiceWrapper<CPDefinitionInventoryEngine>>
+					cpDefinitionInventoryEngineServiceWrappers =
+						ListUtil.fromCollection(_serviceTrackerMap.values());
 
 		Collections.sort(
 			cpDefinitionInventoryEngineServiceWrappers,
@@ -128,14 +129,14 @@ public class CPDefinitionInventoryEngineRegistryImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPDefinitionInventoryEngineRegistryImpl.class);
 
-	private static final
-		Comparator<ServiceTrackerCustomizerFactory.
+	private static final Comparator
+		<ServiceTrackerCustomizerFactory.
 			ServiceWrapper<CPDefinitionInventoryEngine>>
 				_cpDefinitionInventoryEngineServiceWrapperPriorityComparator =
 					new CPDefinitionInventoryEngineServiceWrapperPriorityComparator();
 
-	private
-		ServiceTrackerMap<String, ServiceTrackerCustomizerFactory.
+	private ServiceTrackerMap
+		<String, ServiceTrackerCustomizerFactory.
 			ServiceWrapper<CPDefinitionInventoryEngine>> _serviceTrackerMap;
 
 }

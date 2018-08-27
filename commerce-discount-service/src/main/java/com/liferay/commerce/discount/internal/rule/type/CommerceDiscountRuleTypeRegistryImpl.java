@@ -104,7 +104,7 @@ public class CommerceDiscountRuleTypeRegistryImpl
 	private final Comparator<ServiceWrapper<CommerceDiscountRuleType>>
 		_commerceDiscountRuleTypeServiceWrapperOrderComparator =
 			new CommerceDiscountRuleTypeOrderComparator();
-	private ServiceTrackerMap<String,
-		ServiceWrapper<CommerceDiscountRuleType>> _serviceTrackerMap;
+	private ServiceTrackerMap
+		<String, ServiceWrapper<CommerceDiscountRuleType>> _serviceTrackerMap;
 
 }

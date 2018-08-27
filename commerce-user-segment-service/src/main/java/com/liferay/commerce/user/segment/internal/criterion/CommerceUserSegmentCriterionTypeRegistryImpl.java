@@ -110,7 +110,8 @@ public class CommerceUserSegmentCriterionTypeRegistryImpl
 	private final Comparator<ServiceWrapper<CommerceUserSegmentCriterionType>>
 		_commerceUserSegmentCriterionTypeServiceWrapperOrderComparator =
 			new CommerceUserSegmentCriterionTypeOrderComparator();
-	private ServiceTrackerMap<String,
-		ServiceWrapper<CommerceUserSegmentCriterionType>> _serviceTrackerMap;
+	private ServiceTrackerMap
+		<String, ServiceWrapper<CommerceUserSegmentCriterionType>>
+			_serviceTrackerMap;
 
 }

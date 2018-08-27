@@ -39,8 +39,9 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Marco Leo
  */
-public class CPDefinitionOptionValueRelDisplayContext extends
-	BaseCPDefinitionsSearchContainerDisplayContext<CPDefinitionOptionValueRel> {
+public class CPDefinitionOptionValueRelDisplayContext
+	extends BaseCPDefinitionsSearchContainerDisplayContext
+		<CPDefinitionOptionValueRel> {
 
 	public CPDefinitionOptionValueRelDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,

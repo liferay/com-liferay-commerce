@@ -48,10 +48,11 @@ public class CommerceLowStockActivityRegistryImpl
 		List<CommerceLowStockActivity> commerceLowStockActivities =
 			new ArrayList<>();
 
-		List<ServiceTrackerCustomizerFactory.
-			ServiceWrapper<CommerceLowStockActivity>>
-				commerceLowStockActivityServiceWrappers =
-					ListUtil.fromCollection(_serviceTrackerMap.values());
+		List
+			<ServiceTrackerCustomizerFactory.
+				ServiceWrapper<CommerceLowStockActivity>>
+					commerceLowStockActivityServiceWrappers =
+						ListUtil.fromCollection(_serviceTrackerMap.values());
 
 		Collections.sort(
 			commerceLowStockActivityServiceWrappers,
@@ -121,14 +122,14 @@ public class CommerceLowStockActivityRegistryImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceLowStockActivityRegistryImpl.class);
 
-	private static final
-		Comparator<ServiceTrackerCustomizerFactory.
+	private static final Comparator
+		<ServiceTrackerCustomizerFactory.
 			ServiceWrapper<CommerceLowStockActivity>>
 				_commerceLowStockActivityServiceWrapperPriorityComparator =
 					new CommerceLowStockActivityServiceWrapperPriorityComparator();
 
-	private
-		ServiceTrackerMap<String, ServiceTrackerCustomizerFactory.
+	private ServiceTrackerMap
+		<String, ServiceTrackerCustomizerFactory.
 			ServiceWrapper<CommerceLowStockActivity>> _serviceTrackerMap;
 
 }

@@ -62,8 +62,9 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Marco Leo
  */
-public class CPAttachmentFileEntriesDisplayContext extends
-	BaseCPDefinitionsSearchContainerDisplayContext<CPAttachmentFileEntry> {
+public class CPAttachmentFileEntriesDisplayContext
+	extends BaseCPDefinitionsSearchContainerDisplayContext
+		<CPAttachmentFileEntry> {
 
 	public CPAttachmentFileEntriesDisplayContext(
 			ActionHelper actionHelper,

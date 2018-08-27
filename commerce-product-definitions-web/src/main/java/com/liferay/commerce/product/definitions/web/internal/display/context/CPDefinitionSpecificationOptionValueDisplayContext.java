@@ -48,8 +48,8 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Andrea Di Giorgi
  */
-public class CPDefinitionSpecificationOptionValueDisplayContext extends
-	BaseCPDefinitionsSearchContainerDisplayContext
+public class CPDefinitionSpecificationOptionValueDisplayContext
+	extends BaseCPDefinitionsSearchContainerDisplayContext
 		<CPDefinitionSpecificationOptionValue> {
 
 	public CPDefinitionSpecificationOptionValueDisplayContext(

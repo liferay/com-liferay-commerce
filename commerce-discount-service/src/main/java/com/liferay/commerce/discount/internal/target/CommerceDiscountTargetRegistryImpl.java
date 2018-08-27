@@ -104,7 +104,7 @@ public class CommerceDiscountTargetRegistryImpl
 	private final Comparator<ServiceWrapper<CommerceDiscountTarget>>
 		_commerceDiscountTargetServiceWrapperOrderComparator =
 			new CommerceDiscountTargetOrderComparator();
-	private ServiceTrackerMap<String,
-		ServiceWrapper<CommerceDiscountTarget>> _serviceTrackerMap;
+	private ServiceTrackerMap
+		<String, ServiceWrapper<CommerceDiscountTarget>> _serviceTrackerMap;
 
 }
