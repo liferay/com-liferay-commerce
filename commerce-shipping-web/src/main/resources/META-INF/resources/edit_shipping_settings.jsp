@@ -28,10 +28,10 @@ Map<String, CommerceShippingOriginLocator> commerceShippingOriginLocators = comm
 
 	<%
 	for (Map.Entry<String, CommerceShippingOriginLocator> entry : commerceShippingOriginLocators.entrySet()) {
-        boolean checked = false;
+		boolean checked = false;
 
-        String key = entry.getKey();
-        CommerceShippingOriginLocator commerceShippingOriginLocator = entry.getValue();
+		String key = entry.getKey();
+		CommerceShippingOriginLocator commerceShippingOriginLocator = entry.getValue();
 
 		if (key.equals(commerceShippingGroupServiceConfiguration.commerceShippingOriginLocatorKey())) {
 			checked = true;
