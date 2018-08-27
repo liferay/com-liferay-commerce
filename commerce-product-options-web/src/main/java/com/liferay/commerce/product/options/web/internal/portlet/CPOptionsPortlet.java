@@ -14,12 +14,24 @@
 
 package com.liferay.commerce.product.options.web.internal.portlet;
 
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.options.web.internal.display.context.CPOptionDisplayContext;
+import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeServicesTracker;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.util.WebKeys;
+
+import java.io.IOException;
 
 import javax.portlet.Portlet;
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
@@ -49,4 +61,36 @@ import org.osgi.service.component.annotations.Component;
 	service = {CPOptionsPortlet.class, Portlet.class}
 )
 public class CPOptionsPortlet extends MVCPortlet {
+
+	@Override
+	public void render(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException, PortletException {
+
+		try {
+			CPOptionDisplayContext cpOptionDisplayContext =
+				new CPOptionDisplayContext(
+					_configurationProvider, null,
+					_ddmFormFieldTypeServicesTracker,
+					_portletResourcePermission, renderRequest);
+
+			renderRequest.setAttribute(
+				WebKeys.PORTLET_DISPLAY_CONTEXT, cpOptionDisplayContext);
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
+		}
+
+		super.render(renderRequest, renderResponse);
+	}
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
+
+	@Reference
+	private DDMFormFieldTypeServicesTracker _ddmFormFieldTypeServicesTracker;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
+
 }

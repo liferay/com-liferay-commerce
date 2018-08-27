@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionOptionValueRelDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
@@ -21,6 +22,7 @@ import com.liferay.commerce.product.exception.NoSuchCPDefinitionOptionRelExcepti
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -61,6 +63,7 @@ public class EditCPDefinitionOptionValueRelMVCRenderCommand
 				cpDefinitionOptionValueRelDisplayContext =
 					new CPDefinitionOptionValueRelDisplayContext(
 						_actionHelper, httpServletRequest,
+						_portletResourcePermission,
 						_cpDefinitionOptionValueRelService);
 
 			renderRequest.setAttribute(
@@ -92,5 +95,8 @@ public class EditCPDefinitionOptionValueRelMVCRenderCommand
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 }

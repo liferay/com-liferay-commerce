@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.kernel.servlet.taglib.DynamicIncludeUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -65,6 +66,7 @@ public class CPInstanceDisplayContext
 
 	public CPInstanceDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+			PortletResourcePermission portletResourcePermission,
 			CommercePriceFormatter commercePriceFormatter,
 			CPDefinitionOptionRelService cpDefinitionOptionRelService,
 			CPInstanceService cpInstanceService,
@@ -72,7 +74,8 @@ public class CPInstanceDisplayContext
 		throws PortalException {
 
 		super(
-			actionHelper, httpServletRequest, CPInstance.class.getSimpleName());
+			actionHelper, httpServletRequest, CPInstance.class.getSimpleName(),
+			portletResourcePermission);
 
 		setDefaultOrderByCol("sku");
 

@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
 
+import com.liferay.commerce.product.constants.CPActionKeys;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPAttachmentFileEntriesDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
@@ -33,6 +35,9 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -94,7 +99,12 @@ public class CPDefinitionImagesScreenNavigationEntry
 			return false;
 		}
 
-		return true;
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		return _portletResourcePermission.contains(
+			permissionChecker, cpDefinition.getGroupId(),
+			CPActionKeys.MANAGE_COMMERCE_PRODUCT_IMAGES);
 	}
 
 	@Override
@@ -114,7 +124,7 @@ public class CPDefinitionImagesScreenNavigationEntry
 						_cpAttachmentFileEntryService,
 						_cpDefinitionOptionRelService, _cpInstanceHelper,
 						_dlMimeTypeDisplayContext, httpServletRequest,
-						_itemSelector, _portal,
+						_itemSelector, _portal, _portletResourcePermission,
 						_workflowDefinitionLinkLocalService);
 
 			httpServletRequest.setAttribute(
@@ -164,6 +174,9 @@ public class CPDefinitionImagesScreenNavigationEntry
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.product.definitions.web)"

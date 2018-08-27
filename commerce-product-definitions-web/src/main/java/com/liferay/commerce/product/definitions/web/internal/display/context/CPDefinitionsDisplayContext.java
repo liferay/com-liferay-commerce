@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -71,12 +72,13 @@ public class CPDefinitionsDisplayContext
 	public CPDefinitionsDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 			CPDefinitionHelper cpDefinitionHelper,
-			CPDefinitionService cpDefinitionService, ItemSelector itemSelector)
+			CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
+			PortletResourcePermission portletResourcePermission)
 		throws PortalException {
 
 		super(
 			actionHelper, httpServletRequest,
-			CPDefinition.class.getSimpleName());
+			CPDefinition.class.getSimpleName(), portletResourcePermission);
 
 		setDefaultOrderByType("desc");
 

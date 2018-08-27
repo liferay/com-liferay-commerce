@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionLinkDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
@@ -23,6 +24,7 @@ import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -63,7 +65,8 @@ public class EditCPDefinitionLinkMVCRenderCommand implements MVCRenderCommand {
 
 			CPDefinitionLinkDisplayContext cpDefinitionLinkDisplayContext =
 				new CPDefinitionLinkDisplayContext(
-					_actionHelper, httpServletRequest, _cpDefinitionLinkService,
+					_actionHelper, httpServletRequest,
+					_portletResourcePermission, _cpDefinitionLinkService,
 					_itemSelector, cpDefinitionLink.getType());
 
 			renderRequest.setAttribute(
@@ -97,5 +100,8 @@ public class EditCPDefinitionLinkMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 }

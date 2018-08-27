@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -54,6 +55,7 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 
 	public CPDefinitionSpecificationOptionValueDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+			PortletResourcePermission portletResourcePermission,
 			CPDefinitionSpecificationOptionValueService
 				cpDefinitionSpecificationOptionValueService,
 			CPOptionCategoryService cpOptionCategoryService,
@@ -62,7 +64,8 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 
 		super(
 			actionHelper, httpServletRequest,
-			CPDefinitionSpecificationOptionValue.class.getSimpleName());
+			CPDefinitionSpecificationOptionValue.class.getSimpleName(),
+			portletResourcePermission);
 
 		setDefaultOrderByCol("priority");
 

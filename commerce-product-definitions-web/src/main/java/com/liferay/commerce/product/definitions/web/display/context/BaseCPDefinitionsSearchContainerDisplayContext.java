@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletURLUtil;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -44,9 +45,10 @@ public abstract class BaseCPDefinitionsSearchContainerDisplayContext<T>
 
 	public BaseCPDefinitionsSearchContainerDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-		String portalPreferenceNamespace) {
+		String portalPreferenceNamespace,
+		PortletResourcePermission portletResourcePermission) {
 
-		super(actionHelper, httpServletRequest);
+		super(actionHelper, httpServletRequest, portletResourcePermission);
 
 		_portalPreferenceNamespace = portalPreferenceNamespace;
 
