@@ -5,6 +5,7 @@
  *
  */
 {template .render}
+	{@param? hasEditPermission: bool}
 	{@param? id: string}
 	{@param? namespace: string}
 	{@param? optionURL: string}
@@ -33,6 +34,7 @@
 							{call CPDefinitionOptionList.render}
 								{param currentCPDefinitionOptionId: $_currentOption /}
 								{param cpDefinitionOptions: $_cpDefinitionOptions /}
+								{param hasEditPermission: $hasEditPermission /}
 								{param pathThemeImages: $pathThemeImages /}
 								{param events: ['addOption': $_handleAddOption , 'editValues' : $_handleEditValues , 'optionSelected': $_handleOptionSelected] /}
 							{/call}
@@ -48,6 +50,7 @@
 							{if $_currentOption}
 								{call CPDefinitionOptionDetail.render}
 									{param cpDefinitionOptionRelId : $_currentOption /}
+									{param hasEditPermission: $hasEditPermission /}
 									{param namespace: $namespace /}
 									{param optionURL: $optionURL /}
 									{param pathThemeImages: $pathThemeImages /}

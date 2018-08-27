@@ -6,6 +6,7 @@
  */
 {template .render}
 	{@param? currentCPOptionId: string}
+	{@param? hasEditPermission: bool}
 	{@param? id: string}
 	{@param? newOptionName: string}
 	{@param? options: ?}
@@ -18,11 +19,13 @@
 
 		{msg desc=""}option-templates{/msg}
 
-		<button class="btn btn-primary nav-btn nav-btn-monospaced navbar-breakpoint-down-d-none" onClick="{$_handleAddOptionClick}" type="button">
-			<svg aria-hidden="true" class="lexicon-icon lexicon-icon-plus">
-				<use xlink:href="{$pathThemeImages}/lexicon/icons.svg#plus"></use>
-			</svg>
-		</button>
+		{if $hasEditPermission}
+			<button class="btn btn-primary nav-btn nav-btn-monospaced navbar-breakpoint-down-d-none" onClick="{$_handleAddOptionClick}" type="button">
+				<svg aria-hidden="true" class="lexicon-icon lexicon-icon-plus">
+					<use xlink:href="{$pathThemeImages}/lexicon/icons.svg#plus"></use>
+				</svg>
+			</button>
+		{/if}
 	</h4>
 
 	<div id="{$id}">

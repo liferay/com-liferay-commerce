@@ -6,6 +6,7 @@
  */
 {template .render}
 	{@param? cpDefinitionOptionRelId: string}
+	{@param? hasEditPermission: bool}
 	{@param? id: string}
 	{@param? _handleCancel: any }
 	{@param? _handleDeleteOption: any }
@@ -16,14 +17,16 @@
 
 		<div class="option-detail" ref="option-detail"></div>
 
-		<div class="button-holder product-definition-option-rel-button-row">
-			<button class="btn btn-primary" onclick="{$_handleSaveOption}" type="button">{msg desc=""}save{/msg}</button>
+		{if $hasEditPermission}
+			<div class="button-holder product-definition-option-rel-button-row">
+				<button class="btn btn-primary" onclick="{$_handleSaveOption}" type="button">{msg desc=""}save{/msg}</button>
 
-			{if $cpDefinitionOptionRelId != '0'}
-				<button class="btn btn-secondary" onclick="{$_handleDeleteOption}" type="button">{msg desc=""}delete{/msg}</button>
-			{/if}
+				{if $cpDefinitionOptionRelId != '0'}
+					<button class="btn btn-secondary" onclick="{$_handleDeleteOption}" type="button">{msg desc=""}delete{/msg}</button>
+				{/if}
 
-			<button class="btn btn-link" onclick="{$_handleCancel}" type="button">{msg desc=""}cancel{/msg}</button>
-		</div>
+				<button class="btn btn-link" onclick="{$_handleCancel}" type="button">{msg desc=""}cancel{/msg}</button>
+			</div>
+		{/if}
 	</div>
 {/template}
