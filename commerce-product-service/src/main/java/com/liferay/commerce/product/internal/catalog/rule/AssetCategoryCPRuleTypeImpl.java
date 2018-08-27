@@ -16,7 +16,6 @@ package com.liferay.commerce.product.internal.catalog.rule;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
-import com.liferay.asset.kernel.service.AssetCategoryLocalService;
 import com.liferay.asset.kernel.service.AssetEntryLocalService;
 import com.liferay.commerce.product.catalog.rule.CPRuleType;
 import com.liferay.commerce.product.constants.CPRuleConstants;

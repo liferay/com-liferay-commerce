@@ -53,7 +53,7 @@ if (commerceAddress != null) {
 				<aui:col width="<%= 50 %>">
 					<aui:input name="name" />
 
-					<aui:input name="description"  />
+					<aui:input name="description" />
 
 					<aui:input name="street1" />
 
