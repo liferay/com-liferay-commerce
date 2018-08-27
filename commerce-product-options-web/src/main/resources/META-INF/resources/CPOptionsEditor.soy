@@ -5,6 +5,7 @@
  *
  */
 {template .render}
+	{@param? hasEditPermission: bool}
 	{@param? id: string}
 	{@param? namespace: string}
 	{@param? optionURL: string}
@@ -33,6 +34,7 @@
 						<div class="form-container">
 							{call CPOptionList.render}
 								{param currentCPOptionId: $_currentOption /}
+								{param hasEditPermission: $hasEditPermission /}
 								{param newOptionName: $_newOptionName /}
 								{param options: $_options /}
 								{param pathThemeImages: $pathThemeImages /}
@@ -50,6 +52,7 @@
 							{if $_currentOption}
 								{call CPOptionDetail.render}
 									{param cpOptionId : $_currentOption /}
+									{param hasEditPermission: $hasEditPermission /}
 									{param namespace: $namespace /}
 									{param optionURL: $optionURL /}
 									{param pathThemeImages: $pathThemeImages /}

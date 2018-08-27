@@ -41,31 +41,33 @@ CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayC
 				selectedDisplayStyle="<%= cpDefinitionsDisplayContext.getDisplayStyle() %>"
 			/>
 
-			<liferay-frontend:add-menu
-				inline="<%= true %>"
-			>
+			<c:if test="<%= cpDefinitionsDisplayContext.hasPermission(CPActionKeys.ADD_COMMERCE_PRODUCT_DEFINITION) %>">
+				<liferay-frontend:add-menu
+					inline="<%= true %>"
+				>
 
-				<%
-				for (CPType curCPType : cpDefinitionsDisplayContext.getCPTypes()) {
-				%>
+					<%
+					for (CPType curCPType : cpDefinitionsDisplayContext.getCPTypes()) {
+					%>
 
-					<liferay-portlet:renderURL var="addProductDefinitionURL">
-						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
-						<portlet:param name="mvcRenderCommandName" value="editProductDefinition" />
-						<portlet:param name="backURL" value="<%= PortalUtil.getCurrentCompleteURL(request) %>" />
-						<portlet:param name="productTypeName" value="<%= curCPType.getName() %>" />
-					</liferay-portlet:renderURL>
+						<liferay-portlet:renderURL var="addProductDefinitionURL">
+							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
+							<portlet:param name="mvcRenderCommandName" value="editProductDefinition" />
+							<portlet:param name="backURL" value="<%= PortalUtil.getCurrentCompleteURL(request) %>" />
+							<portlet:param name="productTypeName" value="<%= curCPType.getName() %>" />
+						</liferay-portlet:renderURL>
 
-					<liferay-frontend:add-menu-item
-						title="<%= curCPType.getLabel(locale) %>"
-						url="<%= addProductDefinitionURL.toString() %>"
-					/>
+						<liferay-frontend:add-menu-item
+							title="<%= curCPType.getLabel(locale) %>"
+							url="<%= addProductDefinitionURL.toString() %>"
+						/>
 
-				<%
-				}
-				%>
+					<%
+					}
+					%>
 
-			</liferay-frontend:add-menu>
+				</liferay-frontend:add-menu>
+			</c:if>
 		</liferay-frontend:management-bar-buttons>
 
 		<liferay-frontend:management-bar-filters>

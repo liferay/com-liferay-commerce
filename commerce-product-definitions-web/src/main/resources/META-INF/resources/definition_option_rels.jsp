@@ -48,6 +48,7 @@ context.put("cpDefinitionOptionsURL", cpDefinitionOptionsURL);
 context.put("cpDefinitionOptionValueRelsURL", cpDefinitionOptionValueRelsURL);
 context.put("cpDefinitionOptionValueRelURL", cpDefinitionOptionValueRelURL);
 context.put("editProductDefinitionOptionRelURL", editProductDefinitionOptionRelURL);
+context.put("hasEditPermission", cpDefinitionOptionRelDisplayContext.hasEditPermission(ActionKeys.UPDATE));
 context.put("id", "CPDefinitionOptionsEditor");
 context.put("namespace", liferayPortletResponse.getNamespace());
 context.put("optionsItemSelectorURL", cpDefinitionOptionRelDisplayContext.getItemSelectorUrl());

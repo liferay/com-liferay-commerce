@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CPOptionDisplayContext cpOptionDisplayContext = (CPOptionDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 renderResponse.setTitle(LanguageUtil.get(request, "catalog"));
 %>
 
@@ -58,6 +60,7 @@ navigationItem.setLabel(LanguageUtil.get(request, "option-templates"));
 <aui:script require="commerce-product-options-web/CPOptionsEditor.es">
 	var cpOptionsEditor = new commerceProductOptionsWebCPOptionsEditorEs.default(
 		{
+			hasEditPermission : <%= cpOptionDisplayContext.hasPermission(CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION) %>,
 			namespace : '<portlet:namespace />',
 			optionURL : '<%= cpOptionURL %>',
 			optionValueURL : '<%= cpOptionValueURL %>',
