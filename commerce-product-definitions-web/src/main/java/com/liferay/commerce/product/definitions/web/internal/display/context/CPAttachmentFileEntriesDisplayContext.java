@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.definitions.web.internal.display.context;
 
+import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
 import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsPortletUtil;
@@ -40,6 +41,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -74,14 +76,15 @@ public class CPAttachmentFileEntriesDisplayContext
 			CPInstanceHelper cpInstanceHelper,
 			DLMimeTypeDisplayContext dlMimeTypeDisplayContext,
 			HttpServletRequest httpServletRequest, ItemSelector itemSelector,
-			Portal portal,
+			Portal portal, PortletResourcePermission portletResourcePermission,
 			WorkflowDefinitionLinkLocalService
 				workflowDefinitionLinkLocalService)
 		throws PortalException {
 
 		super(
 			actionHelper, httpServletRequest,
-			CPAttachmentFileEntry.class.getSimpleName());
+			CPAttachmentFileEntry.class.getSimpleName(),
+			portletResourcePermission);
 
 		setDefaultOrderByCol("priority");
 		setDefaultOrderByType("asc");
@@ -331,6 +334,16 @@ public class CPAttachmentFileEntriesDisplayContext
 		}
 
 		return type;
+	}
+
+	public boolean hasManagePermission(int type) {
+		String actionId = CPActionKeys.MANAGE_COMMERCE_PRODUCT_ATTACHMENTS;
+
+		if (type == CPAttachmentFileEntryConstants.TYPE_IMAGE) {
+			actionId = CPActionKeys.MANAGE_COMMERCE_PRODUCT_IMAGES;
+		}
+
+		return hasPermission(actionId);
 	}
 
 	public boolean hasOptions() throws PortalException {

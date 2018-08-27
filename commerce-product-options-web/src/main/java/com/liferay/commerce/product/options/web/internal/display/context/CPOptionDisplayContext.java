@@ -25,16 +25,21 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.settings.SystemSettingsLocator;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import javax.portlet.RenderRequest;
 
 /**
  * @author Marco Leo
@@ -43,12 +48,16 @@ public class CPOptionDisplayContext {
 
 	public CPOptionDisplayContext(
 			ConfigurationProvider configurationProvider, CPOption cpOption,
-			DDMFormFieldTypeServicesTracker ddmFormFieldTypeServicesTracker)
+			DDMFormFieldTypeServicesTracker ddmFormFieldTypeServicesTracker,
+			PortletResourcePermission portletResourcePermission,
+			RenderRequest renderRequest)
 		throws PortalException {
 
 		_configurationProvider = configurationProvider;
 		_cpOption = cpOption;
 		_ddmFormFieldTypeServicesTracker = ddmFormFieldTypeServicesTracker;
+		_portletResourcePermission = portletResourcePermission;
+		_renderRequest = renderRequest;
 	}
 
 	public CPOption getCPOption() {
@@ -108,6 +117,15 @@ public class CPOptionDisplayContext {
 			ddmFormFieldTypes, ddmFormFieldTypesAllowed);
 	}
 
+	public boolean hasPermission(String actionId) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return _portletResourcePermission.contains(
+			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+			actionId);
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPOptionDisplayContext.class);
 
@@ -115,5 +133,7 @@ public class CPOptionDisplayContext {
 	private CPOption _cpOption;
 	private final DDMFormFieldTypeServicesTracker
 		_ddmFormFieldTypeServicesTracker;
+	private final PortletResourcePermission _portletResourcePermission;
+	private final RenderRequest _renderRequest;
 
 }

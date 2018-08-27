@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -46,10 +47,12 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class BaseCPDefinitionsDisplayContext {
 
 	public BaseCPDefinitionsDisplayContext(
-		ActionHelper actionHelper, HttpServletRequest httpServletRequest) {
+		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+		PortletResourcePermission portletResourcePermission) {
 
 		this.actionHelper = actionHelper;
 		this.httpServletRequest = httpServletRequest;
+		this.portletResourcePermission = portletResourcePermission;
 
 		portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			this.httpServletRequest);
@@ -164,12 +167,19 @@ public abstract class BaseCPDefinitionsDisplayContext {
 		return cpInstance.getSku();
 	}
 
+	public boolean hasPermission(String actionId) {
+		return portletResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(),
+			cpRequestHelper.getScopeGroupId(), actionId);
+	}
+
 	protected final ActionHelper actionHelper;
 	protected final CPRequestHelper cpRequestHelper;
 	protected final HttpServletRequest httpServletRequest;
 	protected final LiferayPortletRequest liferayPortletRequest;
 	protected final LiferayPortletResponse liferayPortletResponse;
 	protected final PortalPreferences portalPreferences;
+	protected final PortletResourcePermission portletResourcePermission;
 
 	private CPDefinition _cpDefinition;
 
