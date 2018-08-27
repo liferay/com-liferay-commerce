@@ -822,34 +822,6 @@ public class CPFileImporterImpl implements CPFileImporter {
 		}
 	}
 
-
-	private String _replaceJournalArticleImages(
-			String content, Pattern pattern,
-			UnsafeFunction<FileEntry, String, Exception> replacementFunction,
-			ClassLoader classLoader, String dependenciesFilePath,
-			ServiceContext serviceContext)
-		throws Exception {
-
-		StringBuffer sb = new StringBuffer();
-
-		Matcher matcher = pattern.matcher(content);
-
-		while (matcher.find()) {
-			String fileName = matcher.group(1);
-
-			FileEntry fileEntry = fetchOrAddFileEntry(
-				classLoader, dependenciesFilePath, fileName, serviceContext);
-
-			String replacement = replacementFunction.apply(fileEntry);
-
-			matcher.appendReplacement(sb, replacement);
-		}
-
-		matcher.appendTail(sb);
-
-		return sb.toString();
-	}
-
 	protected void updatePermissions(
 			long companyId, String name, String primKey, JSONArray jsonArray)
 		throws PortalException {
@@ -876,6 +848,33 @@ public class CPFileImporterImpl implements CPFileImporter {
 			_resourcePermissionLocalService.setResourcePermissions(
 				companyId, name, scope, primKey, role.getRoleId(), actionIds);
 		}
+	}
+
+	private String _replaceJournalArticleImages(
+			String content, Pattern pattern,
+			UnsafeFunction<FileEntry, String, Exception> replacementFunction,
+			ClassLoader classLoader, String dependenciesFilePath,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		StringBuffer sb = new StringBuffer();
+
+		Matcher matcher = pattern.matcher(content);
+
+		while (matcher.find()) {
+			String fileName = matcher.group(1);
+
+			FileEntry fileEntry = fetchOrAddFileEntry(
+				classLoader, dependenciesFilePath, fileName, serviceContext);
+
+			String replacement = replacementFunction.apply(fileEntry);
+
+			matcher.appendReplacement(sb, replacement);
+		}
+
+		matcher.appendTail(sb);
+
+		return sb.toString();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
