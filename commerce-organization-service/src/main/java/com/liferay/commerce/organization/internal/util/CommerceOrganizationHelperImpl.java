@@ -14,15 +14,20 @@
 
 package com.liferay.commerce.organization.internal.util;
 
+import com.liferay.commerce.organization.constants.CommerceOrganizationConstants;
 import com.liferay.commerce.organization.service.CommerceOrganizationLocalService;
 import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.SessionParamUtil;
+
+import java.util.List;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -67,20 +72,23 @@ public class CommerceOrganizationHelperImpl
 		throws PortalException {
 
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
+		long userId = _portal.getUserId(httpServletRequest);
 
 		httpServletRequest = _portal.getOriginalServletRequest(
 			httpServletRequest);
+
+		Organization organization = null;
 
 		long currentOrganizationId = SessionParamUtil.getLong(
 			httpServletRequest, _CURRENT_ORGANIZATION_ID_KEY);
 
 		if (currentOrganizationId <= 0) {
-			return null;
+			organization = _getSingleAccountOrganization(groupId, userId);
 		}
-
-		Organization organization =
-			_commerceOrganizationService.fetchOrganization(
+		else {
+			organization = _commerceOrganizationService.fetchOrganization(
 				currentOrganizationId);
+		}
 
 		if ((organization != null) &&
 			!_commerceOrganizationLocalService.hasGroupOrganization(
@@ -102,6 +110,25 @@ public class CommerceOrganizationHelperImpl
 		HttpSession httpSession = httpServletRequest.getSession();
 
 		httpSession.setAttribute(_CURRENT_ORGANIZATION_ID_KEY, organizationId);
+	}
+
+	private Organization _getSingleAccountOrganization(
+			long groupId, long userId)
+		throws PortalException {
+
+		BaseModelSearchResult<Organization> baseModelSearchResult =
+			_commerceOrganizationService.searchOrganizationsByGroup(
+				groupId, userId, CommerceOrganizationConstants.TYPE_ACCOUNT,
+				StringPool.BLANK, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		if (baseModelSearchResult.getLength() == 1) {
+			List<Organization> organizations =
+				baseModelSearchResult.getBaseModels();
+
+			return organizations.get(0);
+		}
+
+		return null;
 	}
 
 	private static final String _COMMERCE_USER_PORTLET_ID =
