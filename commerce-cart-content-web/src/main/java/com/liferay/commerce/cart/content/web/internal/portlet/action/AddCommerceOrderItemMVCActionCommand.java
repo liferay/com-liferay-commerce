@@ -113,28 +113,10 @@ public class AddCommerceOrderItemMVCActionCommand extends BaseMVCActionCommand {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				CommerceOrderItem.class.getName(), httpServletRequest);
 
-			CommerceOrderItem commerceOrderItem = null;
-
-			List<CommerceOrderItem> cpInstanceCommerceOrderItems =
-				commerceOrder.getCommerceOrderItems(cpInstanceId);
-
-			if (!cpInstanceCommerceOrderItems.isEmpty()) {
-				CommerceOrderItem existingCommerceOrderItem =
-					cpInstanceCommerceOrderItems.get(0);
-
-				commerceOrderItem =
-					_commerceOrderItemService.updateCommerceOrderItem(
-						existingCommerceOrderItem.getCommerceOrderItemId(),
-						existingCommerceOrderItem.getQuantity() + quantity,
-						existingCommerceOrderItem.getJson(), commerceContext);
-			}
-			else {
-				commerceOrderItem =
-					_commerceOrderItemService.addCommerceOrderItem(
-						commerceOrder.getCommerceOrderId(), cpInstanceId,
-						quantity, 0, ddmFormValues, commerceContext,
-						serviceContext);
-			}
+			CommerceOrderItem commerceOrderItem =
+				_commerceOrderItemService.upsertCommerceOrderItem(
+					commerceOrder.getCommerceOrderId(), cpInstanceId, quantity,
+					0, ddmFormValues, commerceContext, serviceContext);
 
 			int commerceOrderItemsQuantity =
 				_commerceOrderItemService.getCommerceOrderItemsQuantity(
