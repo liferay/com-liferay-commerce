@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.definitions.web.internal.util;
 
+import com.liferay.commerce.product.constants.CPActionKeys;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.util.CPNavigationItem;
@@ -22,6 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -56,6 +59,15 @@ public class CPDefinitionNavigationItem implements CPNavigationItem {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		boolean hasManageCatalogPermission =
+			_portletResourcePermission.contains(
+				themeDisplay.getPermissionChecker(),
+				themeDisplay.getScopeGroupId(), CPActionKeys.MANAGE_CATALOG);
+
+		if (!hasManageCatalogPermission) {
+			return null;
+		}
+
 		NavigationItem navigationItem = new NavigationItem();
 
 		String portletId = _portal.getPortletId(portletRequest);
@@ -79,5 +91,8 @@ public class CPDefinitionNavigationItem implements CPNavigationItem {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 }
