@@ -57,6 +57,10 @@ public class CPSpecificationOptionNavigationItem implements CPNavigationItem {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		boolean hasManageCatalogPermission =
+			_portletResourcePermission.contains(
+				themeDisplay.getPermissionChecker(),
+				themeDisplay.getScopeGroupId(), CPActionKeys.MANAGE_CATALOG);
 		boolean hasManageCPOptionCategoriesPermission =
 			_portletResourcePermission.contains(
 				themeDisplay.getPermissionChecker(),
@@ -68,8 +72,9 @@ public class CPSpecificationOptionNavigationItem implements CPNavigationItem {
 				themeDisplay.getScopeGroupId(),
 				CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
 
-		if (!hasManageCPOptionCategoriesPermission &&
-			!hasManageCPSpecificationOptionsPermission) {
+		if (!hasManageCatalogPermission ||
+			(!hasManageCPOptionCategoriesPermission &&
+			 !hasManageCPSpecificationOptionsPermission)) {
 
 			return null;
 		}
