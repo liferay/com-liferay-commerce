@@ -20,6 +20,7 @@ import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsP
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.item.selector.criterion.CPSpecificationOptionItemSelectorCriterion;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
@@ -34,7 +35,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -55,7 +57,8 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 
 	public CPDefinitionSpecificationOptionValueDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-			PortletResourcePermission portletResourcePermission,
+			ModelResourcePermission<CPDefinition>
+				cpDefinitionModelResourcePermission,
 			CPDefinitionSpecificationOptionValueService
 				cpDefinitionSpecificationOptionValueService,
 			CPOptionCategoryService cpOptionCategoryService,
@@ -64,11 +67,12 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 
 		super(
 			actionHelper, httpServletRequest,
-			CPDefinitionSpecificationOptionValue.class.getSimpleName(),
-			portletResourcePermission);
+			CPDefinitionSpecificationOptionValue.class.getSimpleName());
 
 		setDefaultOrderByCol("priority");
 
+		_cpDefinitionModelResourcePermission =
+			cpDefinitionModelResourcePermission;
 		_cpDefinitionSpecificationOptionValueService =
 			cpDefinitionSpecificationOptionValueService;
 		_cpOptionCategoryService = cpOptionCategoryService;
@@ -219,6 +223,20 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 		return searchContainer;
 	}
 
+	public boolean hasEditPermission() throws PortalException {
+		return _cpDefinitionModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			ActionKeys.UPDATE);
+	}
+
+	public boolean hasViewPermission() throws PortalException {
+		return _cpDefinitionModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			ActionKeys.VIEW);
+	}
+
+	private final ModelResourcePermission<CPDefinition>
+		_cpDefinitionModelResourcePermission;
 	private CPDefinitionSpecificationOptionValue
 		_cpDefinitionSpecificationOptionValue;
 	private final CPDefinitionSpecificationOptionValueService
