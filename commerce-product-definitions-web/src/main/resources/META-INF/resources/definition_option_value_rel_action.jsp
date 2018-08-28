@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CPDefinitionSpecificationOptionValueDisplayContext cpDefinitionSpecificationOptionValueDisplayContext = (CPDefinitionSpecificationOptionValueDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CPDefinitionOptionValueRel cpDefinitionOptionValueRel = null;
@@ -29,30 +31,32 @@ else {
 }
 %>
 
-<liferay-ui:icon-menu
-	direction="left-side"
-	icon="<%= StringPool.BLANK %>"
-	markupView="lexicon"
-	message="<%= StringPool.BLANK %>"
-	showWhenSingleIcon="<%= true %>"
->
-	<portlet:renderURL var="editProductDefinitionOptionValueRelURL">
-		<portlet:param name="mvcRenderCommandName" value="editProductDefinitionOptionValueRel" />
-		<portlet:param name="cpDefinitionOptionValueRelId" value="<%= String.valueOf(cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId()) %>" />
-	</portlet:renderURL>
+<c:if test="<%= cpDefinitionSpecificationOptionValueDisplayContext.hasEditPermission() %>">
+	<liferay-ui:icon-menu
+		direction="left-side"
+		icon="<%= StringPool.BLANK %>"
+		markupView="lexicon"
+		message="<%= StringPool.BLANK %>"
+		showWhenSingleIcon="<%= true %>"
+	>
+		<portlet:renderURL var="editProductDefinitionOptionValueRelURL">
+			<portlet:param name="mvcRenderCommandName" value="editProductDefinitionOptionValueRel" />
+			<portlet:param name="cpDefinitionOptionValueRelId" value="<%= String.valueOf(cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon
-		message="edit"
-		url="<%= editProductDefinitionOptionValueRelURL %>"
-	/>
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editProductDefinitionOptionValueRelURL %>"
+		/>
 
-	<portlet:actionURL name="editProductDefinitionOptionValueRel" var="deleteProductDefinitionOptionValueRelURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="cpDefinitionOptionValueRelId" value="<%= String.valueOf(cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId()) %>" />
-	</portlet:actionURL>
+		<portlet:actionURL name="editProductDefinitionOptionValueRel" var="deleteProductDefinitionOptionValueRelURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="cpDefinitionOptionValueRelId" value="<%= String.valueOf(cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		url="<%= deleteProductDefinitionOptionValueRelURL %>"
-	/>
-</liferay-ui:icon-menu>
+		<liferay-ui:icon-delete
+			url="<%= deleteProductDefinitionOptionValueRelURL %>"
+		/>
+	</liferay-ui:icon-menu>
+</c:if>
