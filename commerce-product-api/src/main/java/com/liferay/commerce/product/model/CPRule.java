@@ -53,4 +53,9 @@ public interface CPRule extends CPRuleModel, PersistedModel {
 				return CPRule.class;
 			}
 		};
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
+
+	public void setTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
 }
