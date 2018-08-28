@@ -234,5 +234,25 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderItemSoap upsertCommerceOrderItem(
+		long commerceOrderId, long cpInstanceId, int quantity,
+		int shippedQuantity, String json,
+		com.liferay.commerce.context.CommerceContext commerceContext,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue = CommerceOrderItemServiceUtil.upsertCommerceOrderItem(commerceOrderId,
+					cpInstanceId, quantity, shippedQuantity, json,
+					commerceContext, serviceContext);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CommerceOrderItemServiceSoap.class);
 }

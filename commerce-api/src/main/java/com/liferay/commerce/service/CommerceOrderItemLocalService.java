@@ -228,6 +228,15 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 		int start, int end,
 		OrderByComparator<CommerceOrderItem> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrderItem> getCommerceOrderItems(long commerceOrderId,
+		long cpInstanceId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrderItem> getCommerceOrderItems(long commerceOrderId,
+		long cpInstanceId, int start, int end,
+		OrderByComparator<CommerceOrderItem> orderByComparator);
+
 	/**
 	* Returns the number of commerce order items.
 	*
@@ -300,5 +309,10 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem updateCommerceOrderItemPrice(
 		long commerceOrderItemId, CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceOrderItem upsertCommerceOrderItem(long commerceOrderId,
+		long cpInstanceId, int quantity, int shippedQuantity, String json,
+		CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
 }

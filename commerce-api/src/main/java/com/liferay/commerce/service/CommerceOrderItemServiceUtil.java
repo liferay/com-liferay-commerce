@@ -144,6 +144,17 @@ public class CommerceOrderItemServiceUtil {
 			json, commerceContext);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderItem upsertCommerceOrderItem(
+		long commerceOrderId, long cpInstanceId, int quantity,
+		int shippedQuantity, String json,
+		com.liferay.commerce.context.CommerceContext commerceContext,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .upsertCommerceOrderItem(commerceOrderId, cpInstanceId,
+			quantity, shippedQuantity, json, commerceContext, serviceContext);
+	}
+
 	public static CommerceOrderItemService getService() {
 		return _serviceTracker.getService();
 	}

@@ -65,6 +65,7 @@ import java.util.List;
 /**
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
+ * @author Ethan Bustad
  */
 public class CommerceOrderItemLocalServiceImpl
 	extends CommerceOrderItemLocalServiceBaseImpl {
@@ -205,6 +206,23 @@ public class CommerceOrderItemLocalServiceImpl
 
 		return commerceOrderItemPersistence.findByCommerceOrderId(
 			commerceOrderId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommerceOrderItem> getCommerceOrderItems(
+		long commerceOrderId, long cpInstanceId, int start, int end) {
+
+		return commerceOrderItemPersistence.findByC_I(
+			commerceOrderId, cpInstanceId, start, end);
+	}
+
+	@Override
+	public List<CommerceOrderItem> getCommerceOrderItems(
+		long commerceOrderId, long cpInstanceId, int start, int end,
+		OrderByComparator<CommerceOrderItem> orderByComparator) {
+
+		return commerceOrderItemPersistence.findByC_I(
+			commerceOrderId, cpInstanceId, start, end, orderByComparator);
 	}
 
 	@Override
@@ -365,6 +383,31 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItemPersistence.update(commerceOrderItem);
 
 		return commerceOrderItem;
+	}
+
+	@Override
+	public CommerceOrderItem upsertCommerceOrderItem(
+			long commerceOrderId, long cpInstanceId, int quantity,
+			int shippedQuantity, String json, CommerceContext commerceContext,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		List<CommerceOrderItem> commerceOrderItems = getCommerceOrderItems(
+			commerceOrderId, cpInstanceId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
+
+		if (!commerceOrderItems.isEmpty()) {
+			CommerceOrderItem commerceOrderItem = commerceOrderItems.get(0);
+
+			return updateCommerceOrderItem(
+				commerceOrderItem.getCommerceOrderItemId(),
+				commerceOrderItem.getQuantity() + quantity,
+				commerceOrderItem.getJson(), commerceContext);
+		}
+
+		return addCommerceOrderItem(
+			commerceOrderId, cpInstanceId, quantity, 0, json, commerceContext,
+			serviceContext);
 	}
 
 	protected SearchContext buildSearchContext(
