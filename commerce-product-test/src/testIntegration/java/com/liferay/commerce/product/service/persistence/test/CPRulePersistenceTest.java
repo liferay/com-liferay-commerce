@@ -43,6 +43,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -60,6 +61,7 @@ import java.util.Set;
 /**
  * @generated
  */
+@Ignore
 @RunWith(Arquillian.class)
 public class CPRulePersistenceTest {
 	@ClassRule
@@ -140,8 +142,6 @@ public class CPRulePersistenceTest {
 
 		newCPRule.setType(RandomTestUtil.randomString());
 
-		newCPRule.setTypeSettings(RandomTestUtil.randomString());
-
 		_cpRules.add(_persistence.update(newCPRule));
 
 		CPRule existingCPRule = _persistence.findByPrimaryKey(newCPRule.getPrimaryKey());
@@ -163,8 +163,6 @@ public class CPRulePersistenceTest {
 		Assert.assertEquals(existingCPRule.getName(), newCPRule.getName());
 		Assert.assertEquals(existingCPRule.isActive(), newCPRule.isActive());
 		Assert.assertEquals(existingCPRule.getType(), newCPRule.getType());
-		Assert.assertEquals(existingCPRule.getTypeSettings(),
-			newCPRule.getTypeSettings());
 	}
 
 	@Test
@@ -419,8 +417,6 @@ public class CPRulePersistenceTest {
 		cpRule.setActive(RandomTestUtil.randomBoolean());
 
 		cpRule.setType(RandomTestUtil.randomString());
-
-		cpRule.setTypeSettings(RandomTestUtil.randomString());
 
 		_cpRules.add(_persistence.update(cpRule));
 
