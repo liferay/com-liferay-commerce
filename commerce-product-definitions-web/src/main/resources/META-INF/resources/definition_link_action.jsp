@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CPDefinitionLinkDisplayContext cpDefinitionLinkDisplayContext = (CPDefinitionLinkDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CPDefinitionLink cpDefinitionLink = null;
@@ -29,34 +31,36 @@ else {
 }
 %>
 
-<liferay-ui:icon-menu
-	direction="left-side"
-	icon="<%= StringPool.BLANK %>"
-	markupView="lexicon"
-	message="<%= StringPool.BLANK %>"
-	showWhenSingleIcon="<%= true %>"
->
-	<portlet:renderURL var="editURL">
-		<portlet:param name="mvcRenderCommandName" value="editCPDefinitionLink" />
-		<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionId1()) %>" />
-		<portlet:param name="cpDefinitionLinkId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionLinkId()) %>" />
-		<portlet:param name="type" value="<%= String.valueOf(cpDefinitionLink.getType()) %>" />
-	</portlet:renderURL>
+<c:if test="<%= cpDefinitionLinkDisplayContext.hasEditPermission() %>">
+	<liferay-ui:icon-menu
+		direction="left-side"
+		icon="<%= StringPool.BLANK %>"
+		markupView="lexicon"
+		message="<%= StringPool.BLANK %>"
+		showWhenSingleIcon="<%= true %>"
+	>
+		<portlet:renderURL var="editURL">
+			<portlet:param name="mvcRenderCommandName" value="editCPDefinitionLink" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionId1()) %>" />
+			<portlet:param name="cpDefinitionLinkId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionLinkId()) %>" />
+			<portlet:param name="type" value="<%= String.valueOf(cpDefinitionLink.getType()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon
-		message="edit"
-		url="<%= editURL %>"
-	/>
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editURL %>"
+		/>
 
-	<portlet:actionURL name="editCPDefinitionLink" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionId1()) %>" />
-		<portlet:param name="cpDefinitionLinkId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionLinkId()) %>" />
-		<portlet:param name="type" value="<%= String.valueOf(cpDefinitionLink.getType()) %>" />
-	</portlet:actionURL>
+		<portlet:actionURL name="editCPDefinitionLink" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionId1()) %>" />
+			<portlet:param name="cpDefinitionLinkId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionLinkId()) %>" />
+			<portlet:param name="type" value="<%= String.valueOf(cpDefinitionLink.getType()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		url="<%= deleteURL %>"
-	/>
-</liferay-ui:icon-menu>
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
+	</liferay-ui:icon-menu>
+</c:if>
