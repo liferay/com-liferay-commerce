@@ -80,7 +80,8 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
 			{ "active_", Types.BOOLEAN },
-			{ "type_", Types.VARCHAR }
+			{ "type_", Types.VARCHAR },
+			{ "typeSettings", Types.CLOB }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -95,9 +96,10 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("active_", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("type_", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("typeSettings", Types.CLOB);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPRule (CPRuleId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,active_ BOOLEAN,type_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CPRule (CPRuleId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,active_ BOOLEAN,type_ VARCHAR(75) null,typeSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table CPRule";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpRule.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPRule.createDate DESC";
@@ -139,6 +141,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		model.setName(soapModel.getName());
 		model.setActive(soapModel.isActive());
 		model.setType(soapModel.getType());
+		model.setTypeSettings(soapModel.getTypeSettings());
 
 		return model;
 	}
@@ -213,6 +216,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		attributes.put("name", getName());
 		attributes.put("active", isActive());
 		attributes.put("type", getType());
+		attributes.put("typeSettings", getTypeSettings());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -280,6 +284,12 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 
 		if (type != null) {
 			setType(type);
+		}
+
+		String typeSettings = (String)attributes.get("typeSettings");
+
+		if (typeSettings != null) {
+			setTypeSettings(typeSettings);
 		}
 	}
 
@@ -450,6 +460,22 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		_type = type;
 	}
 
+	@JSON
+	@Override
+	public String getTypeSettings() {
+		if (_typeSettings == null) {
+			return "";
+		}
+		else {
+			return _typeSettings;
+		}
+	}
+
+	@Override
+	public void setTypeSettings(String typeSettings) {
+		_typeSettings = typeSettings;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -491,6 +517,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		cpRuleImpl.setName(getName());
 		cpRuleImpl.setActive(isActive());
 		cpRuleImpl.setType(getType());
+		cpRuleImpl.setTypeSettings(getTypeSettings());
 
 		cpRuleImpl.resetOriginalValues();
 
@@ -618,12 +645,20 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 			cpRuleCacheModel.type = null;
 		}
 
+		cpRuleCacheModel.typeSettings = getTypeSettings();
+
+		String typeSettings = cpRuleCacheModel.typeSettings;
+
+		if ((typeSettings != null) && (typeSettings.length() == 0)) {
+			cpRuleCacheModel.typeSettings = null;
+		}
+
 		return cpRuleCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{CPRuleId=");
 		sb.append(getCPRuleId());
@@ -645,6 +680,8 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 		sb.append(isActive());
 		sb.append(", type=");
 		sb.append(getType());
+		sb.append(", typeSettings=");
+		sb.append(getTypeSettings());
 		sb.append("}");
 
 		return sb.toString();
@@ -652,7 +689,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPRule");
@@ -698,6 +735,10 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>typeSettings</column-name><column-value><![CDATA[");
+		sb.append(getTypeSettings());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -721,6 +762,7 @@ public class CPRuleModelImpl extends BaseModelImpl<CPRule>
 	private String _name;
 	private boolean _active;
 	private String _type;
+	private String _typeSettings;
 	private long _columnBitmask;
 	private CPRule _escapedModel;
 }
