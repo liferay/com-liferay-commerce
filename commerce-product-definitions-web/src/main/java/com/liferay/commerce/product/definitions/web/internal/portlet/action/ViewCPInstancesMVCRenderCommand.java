@@ -15,16 +15,16 @@
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPInstanceDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -62,8 +62,8 @@ public class ViewCPInstancesMVCRenderCommand implements MVCRenderCommand {
 
 			CPInstanceDisplayContext cpInstanceDisplayContext =
 				new CPInstanceDisplayContext(
-					_actionHelper, httpServletRequest,
-					_portletResourcePermission, _commercePriceFormatter,
+					_actionHelper, httpServletRequest, _commercePriceFormatter,
+					_cpDefinitionModelResourcePermission,
 					_cpDefinitionOptionRelService, _cpInstanceService,
 					_cpInstanceHelper);
 
@@ -83,6 +83,12 @@ public class ViewCPInstancesMVCRenderCommand implements MVCRenderCommand {
 	@Reference
 	private CommercePriceFormatter _commercePriceFormatter;
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
+	)
+	private ModelResourcePermission<CPDefinition>
+		_cpDefinitionModelResourcePermission;
+
 	@Reference
 	private CPDefinitionOptionRelService _cpDefinitionOptionRelService;
 
@@ -94,8 +100,5 @@ public class ViewCPInstancesMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
-	private PortletResourcePermission _portletResourcePermission;
 
 }
