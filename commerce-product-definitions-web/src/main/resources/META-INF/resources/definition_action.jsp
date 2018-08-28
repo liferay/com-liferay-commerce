@@ -38,18 +38,20 @@ else {
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<portlet:renderURL var="editURL">
-		<portlet:param name="mvcRenderCommandName" value="editProductDefinition" />
-		<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>" />
-		<portlet:param name="screenNavigationCategoryKey" value="<%= CPDefinitionScreenNavigationConstants.CATEGORY_KEY_DETAILS %>" />
-	</portlet:renderURL>
+	<c:if test="<%= cpDefinitionsDisplayContext.hasEditPermission() %>">
+		<portlet:renderURL var="editURL">
+			<portlet:param name="mvcRenderCommandName" value="editProductDefinition" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>" />
+			<portlet:param name="screenNavigationCategoryKey" value="<%= CPDefinitionScreenNavigationConstants.CATEGORY_KEY_DETAILS %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon
-		message="edit"
-		url="<%= editURL %>"
-	/>
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editURL %>"
+		/>
+	</c:if>
 
-	<c:if test="<%= cpDefinition.isApproved() %>">
+	<c:if test="<%= cpDefinition.isApproved() && cpDefinitionsDisplayContext.hasViewPermission() %>">
 
 		<%
 		String productURL = cpDefinitionsDisplayContext.getProductURL(cpDefinition);
@@ -63,15 +65,17 @@ else {
 		/>
 	</c:if>
 
-	<portlet:actionURL name="editProductDefinition" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= TrashUtil.isTrashEnabled(scopeGroupId) ? Constants.MOVE_TO_TRASH : Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>" />
-	</portlet:actionURL>
+	<c:if test="<%= cpDefinitionsDisplayContext.hasDeletePermission() %>">
+		<portlet:actionURL name="editProductDefinition" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= TrashUtil.isTrashEnabled(scopeGroupId) ? Constants.MOVE_TO_TRASH : Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		label="<%= true %>"
-		trash="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>"
-		url="<%= deleteURL %>"
-	/>
+		<liferay-ui:icon-delete
+			label="<%= true %>"
+			trash="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>"
+			url="<%= deleteURL %>"
+		/>
+	</c:if>
 </liferay-ui:icon-menu>

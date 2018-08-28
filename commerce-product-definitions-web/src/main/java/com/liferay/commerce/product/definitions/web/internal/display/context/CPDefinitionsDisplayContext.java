@@ -40,6 +40,8 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -72,19 +74,24 @@ public class CPDefinitionsDisplayContext
 	public CPDefinitionsDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 			CPDefinitionHelper cpDefinitionHelper,
+			ModelResourcePermission<CPDefinition>
+				cpDefinitionModelResourcePermission,
 			CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
 			PortletResourcePermission portletResourcePermission)
 		throws PortalException {
 
 		super(
 			actionHelper, httpServletRequest,
-			CPDefinition.class.getSimpleName(), portletResourcePermission);
+			CPDefinition.class.getSimpleName());
 
 		setDefaultOrderByType("desc");
 
 		_cpDefinitionHelper = cpDefinitionHelper;
+		_cpDefinitionModelResourcePermission =
+			cpDefinitionModelResourcePermission;
 		_cpDefinitionService = cpDefinitionService;
 		_itemSelector = itemSelector;
+		_portletResourcePermission = portletResourcePermission;
 	}
 
 	public String getCategorySelectorURL(String eventName) throws Exception {
@@ -347,8 +354,35 @@ public class CPDefinitionsDisplayContext
 			getCPDefinitionId(), null);
 	}
 
+	public boolean hasDeletePermission() throws PortalException {
+		return _cpDefinitionModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			ActionKeys.DELETE);
+	}
+
+	public boolean hasEditPermission() throws PortalException {
+		return _cpDefinitionModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			ActionKeys.UPDATE);
+	}
+
+	public boolean hasPermission(String actionId) {
+		return _portletResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(),
+			cpRequestHelper.getScopeGroupId(), actionId);
+	}
+
+	public boolean hasViewPermission() throws PortalException {
+		return _cpDefinitionModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			ActionKeys.VIEW);
+	}
+
 	private final CPDefinitionHelper _cpDefinitionHelper;
+	private final ModelResourcePermission<CPDefinition>
+		_cpDefinitionModelResourcePermission;
 	private final CPDefinitionService _cpDefinitionService;
 	private final ItemSelector _itemSelector;
+	private final PortletResourcePermission _portletResourcePermission;
 
 }

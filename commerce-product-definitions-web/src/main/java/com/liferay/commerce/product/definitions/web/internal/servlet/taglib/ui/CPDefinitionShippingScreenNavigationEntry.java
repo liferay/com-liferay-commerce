@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -97,6 +98,7 @@ public class CPDefinitionShippingScreenNavigationEntry
 					new CPDefinitionShippingInfoDisplayContext(
 						_actionHelper, httpServletRequest,
 						_commerceCurrencyLocalService, _cpDefinitionHelper,
+						_cpDefinitionModelResourcePermission,
 						_cpDefinitionService, _itemSelector,
 						_portletResourcePermission,
 						_cpMeasurementUnitLocalService);
@@ -125,6 +127,12 @@ public class CPDefinitionShippingScreenNavigationEntry
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
+	)
+	private ModelResourcePermission<CPDefinition>
+		_cpDefinitionModelResourcePermission;
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
