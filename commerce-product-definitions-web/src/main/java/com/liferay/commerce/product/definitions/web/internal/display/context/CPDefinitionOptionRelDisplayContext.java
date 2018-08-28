@@ -40,8 +40,8 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.settings.SystemSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -72,26 +72,24 @@ public class CPDefinitionOptionRelDisplayContext
 
 	public CPDefinitionOptionRelDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-			PortletResourcePermission portletResourcePermission,
 			ConfigurationProvider configurationProvider,
-			CPDefinitionOptionRelService cpDefinitionOptionRelService,
 			ModelResourcePermission<CPDefinition>
 				cpDefinitionModelResourcePermission,
+			CPDefinitionOptionRelService cpDefinitionOptionRelService,
 			DDMFormFieldTypeServicesTracker ddmFormFieldTypeServicesTracker,
 			ItemSelector itemSelector)
 		throws PortalException {
 
 		super(
 			actionHelper, httpServletRequest,
-			CPDefinitionOptionRel.class.getSimpleName(),
-			portletResourcePermission);
+			CPDefinitionOptionRel.class.getSimpleName());
 
 		setDefaultOrderByCol("priority");
 
 		_configurationProvider = configurationProvider;
-		_cpDefinitionOptionRelService = cpDefinitionOptionRelService;
 		_cpDefinitionModelResourcePermission =
 			cpDefinitionModelResourcePermission;
+		_cpDefinitionOptionRelService = cpDefinitionOptionRelService;
 		_ddmFormFieldTypeServicesTracker = ddmFormFieldTypeServicesTracker;
 		_itemSelector = itemSelector;
 	}
@@ -272,10 +270,16 @@ public class CPDefinitionOptionRelDisplayContext
 			getCPDefinitionOptionRelId(), null);
 	}
 
-	public boolean hasEditPermission(String actionId) throws PortalException {
+	public boolean hasEditPermission() throws PortalException {
 		return _cpDefinitionModelResourcePermission.contains(
 			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
-			actionId);
+			ActionKeys.UPDATE);
+	}
+
+	public boolean hasViewPermission() throws PortalException {
+		return _cpDefinitionModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			ActionKeys.VIEW);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
