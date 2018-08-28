@@ -19,6 +19,7 @@ import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsP
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.item.selector.criterion.CPDefinitionItemSelectorCriterion;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
@@ -29,7 +30,8 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -53,18 +55,20 @@ public class CPDefinitionLinkDisplayContext
 
 	public CPDefinitionLinkDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-		PortletResourcePermission portletResourcePermission,
 		CPDefinitionLinkService cpDefinitionLinkService,
+		ModelResourcePermission<CPDefinition>
+			cpDefinitionModelResourcePermission,
 		ItemSelector itemSelector, String type) {
 
 		super(
 			actionHelper, httpServletRequest,
-			CPDefinitionOptionRel.class.getSimpleName(),
-			portletResourcePermission);
+			CPDefinitionOptionRel.class.getSimpleName());
 
 		setDefaultOrderByCol("priority");
 
 		_cpDefinitionLinkService = cpDefinitionLinkService;
+		_cpDefinitionModelResourcePermission =
+			cpDefinitionModelResourcePermission;
 		_itemSelector = itemSelector;
 		_type = type;
 	}
@@ -198,6 +202,18 @@ public class CPDefinitionLinkDisplayContext
 			getCPDefinitionLinkId(), null);
 	}
 
+	public boolean hasEditPermission() throws PortalException {
+		return _cpDefinitionModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			ActionKeys.UPDATE);
+	}
+
+	public boolean hasViewPermission() throws PortalException {
+		return _cpDefinitionModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			ActionKeys.VIEW);
+	}
+
 	protected long[] getCheckedCPDefinitionIds(long cpDefinitionId, String type)
 		throws PortalException {
 
@@ -247,6 +263,8 @@ public class CPDefinitionLinkDisplayContext
 
 	private CPDefinitionLink _cpDefinitionLink;
 	private final CPDefinitionLinkService _cpDefinitionLinkService;
+	private final ModelResourcePermission<CPDefinition>
+		_cpDefinitionModelResourcePermission;
 	private final ItemSelector _itemSelector;
 	private final String _type;
 
