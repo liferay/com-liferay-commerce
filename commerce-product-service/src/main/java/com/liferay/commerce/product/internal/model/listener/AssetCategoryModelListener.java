@@ -19,6 +19,7 @@ import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.commerce.product.service.CPDisplayLayoutLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService;
+import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,6 +35,23 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = ModelListener.class)
 public class AssetCategoryModelListener
 	extends BaseModelListener<AssetCategory> {
+
+	@Override
+	public void onAfterCreate(AssetCategory assetCategory)
+		throws ModelListenerException {
+
+		try {
+			_cpFriendlyURLEntryLocalService.addCPFriendlyURLEntries(
+				assetCategory.getGroupId(), assetCategory.getCompanyId(),
+				AssetCategory.class, assetCategory.getCategoryId(),
+				assetCategory.getTitleMap());
+		}
+		catch (PortalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(pe, pe);
+			}
+		}
+	}
 
 	@Override
 	public void onBeforeRemove(AssetCategory assetCategory) {
