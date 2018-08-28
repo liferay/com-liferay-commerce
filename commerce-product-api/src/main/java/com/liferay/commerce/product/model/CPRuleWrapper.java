@@ -67,6 +67,7 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 		attributes.put("name", getName());
 		attributes.put("active", isActive());
 		attributes.put("type", getType());
+		attributes.put("typeSettings", getTypeSettings());
 
 		return attributes;
 	}
@@ -131,6 +132,12 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 
 		if (type != null) {
 			setType(type);
+		}
+
+		String typeSettings = (String)attributes.get("typeSettings");
+
+		if (typeSettings != null) {
+			setTypeSettings(typeSettings);
 		}
 	}
 
@@ -242,6 +249,21 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	@Override
 	public String getType() {
 		return _cpRule.getType();
+	}
+
+	/**
+	* Returns the type settings of this cp rule.
+	*
+	* @return the type settings of this cp rule
+	*/
+	@Override
+	public String getTypeSettings() {
+		return _cpRule.getTypeSettings();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
+		return _cpRule.getTypeSettingsProperties();
 	}
 
 	/**
@@ -428,6 +450,22 @@ public class CPRuleWrapper implements CPRule, ModelWrapper<CPRule> {
 	@Override
 	public void setType(String type) {
 		_cpRule.setType(type);
+	}
+
+	/**
+	* Sets the type settings of this cp rule.
+	*
+	* @param typeSettings the type settings of this cp rule
+	*/
+	@Override
+	public void setTypeSettings(String typeSettings) {
+		_cpRule.setTypeSettings(typeSettings);
+	}
+
+	@Override
+	public void setTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
+		_cpRule.setTypeSettingsProperties(typeSettingsProperties);
 	}
 
 	/**
