@@ -83,8 +83,7 @@ public class CPAttachmentFileEntriesDisplayContext
 
 		super(
 			actionHelper, httpServletRequest,
-			CPAttachmentFileEntry.class.getSimpleName(),
-			portletResourcePermission);
+			CPAttachmentFileEntry.class.getSimpleName());
 
 		setDefaultOrderByCol("priority");
 		setDefaultOrderByType("asc");
@@ -96,6 +95,7 @@ public class CPAttachmentFileEntriesDisplayContext
 		_dlMimeTypeDisplayContext = dlMimeTypeDisplayContext;
 		_itemSelector = itemSelector;
 		_portal = portal;
+		_portletResourcePermission = portletResourcePermission;
 		_workflowDefinitionLinkLocalService =
 			workflowDefinitionLinkLocalService;
 
@@ -343,7 +343,9 @@ public class CPAttachmentFileEntriesDisplayContext
 			actionId = CPActionKeys.MANAGE_COMMERCE_PRODUCT_IMAGES;
 		}
 
-		return hasPermission(actionId);
+		return _portletResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(),
+			cpRequestHelper.getScopeGroupId(), actionId);
 	}
 
 	public boolean hasOptions() throws PortalException {
@@ -403,6 +405,7 @@ public class CPAttachmentFileEntriesDisplayContext
 	private final DLMimeTypeDisplayContext _dlMimeTypeDisplayContext;
 	private final ItemSelector _itemSelector;
 	private final Portal _portal;
+	private final PortletResourcePermission _portletResourcePermission;
 	private final int _type;
 	private final WorkflowDefinitionLinkLocalService
 		_workflowDefinitionLinkLocalService;
