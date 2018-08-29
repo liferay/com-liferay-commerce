@@ -71,6 +71,7 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 	 */
 	public static final String TABLE_NAME = "CommerceOrderNote";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "externalReferenceCode", Types.VARCHAR },
 			{ "commerceOrderNoteId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -85,6 +86,7 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceOrderNoteId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
@@ -97,7 +99,7 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 		TABLE_COLUMNS_MAP.put("restricted", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceOrderNote (commerceOrderNoteId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,content STRING null,restricted BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceOrderNote (externalReferenceCode VARCHAR(75) null,commerceOrderNoteId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,content STRING null,restricted BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrderNote";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceOrderNote.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceOrderNote.createDate DESC";
@@ -114,8 +116,10 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 				"value.object.column.bitmask.enabled.com.liferay.commerce.model.CommerceOrderNote"),
 			true);
 	public static final long COMMERCEORDERID_COLUMN_BITMASK = 1L;
-	public static final long RESTRICTED_COLUMN_BITMASK = 2L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 4L;
+	public static final long COMPANYID_COLUMN_BITMASK = 2L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 4L;
+	public static final long RESTRICTED_COLUMN_BITMASK = 8L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -130,6 +134,7 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 
 		CommerceOrderNote model = new CommerceOrderNoteImpl();
 
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCommerceOrderNoteId(soapModel.getCommerceOrderNoteId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -205,6 +210,7 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceOrderNoteId", getCommerceOrderNoteId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -224,6 +230,13 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
+		}
+
 		Long commerceOrderNoteId = (Long)attributes.get("commerceOrderNoteId");
 
 		if (commerceOrderNoteId != null) {
@@ -287,6 +300,32 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 
 	@JSON
 	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
+	}
+
+	@JSON
+	@Override
 	public long getCommerceOrderNoteId() {
 		return _commerceOrderNoteId;
 	}
@@ -315,7 +354,19 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -490,6 +541,7 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 	public Object clone() {
 		CommerceOrderNoteImpl commerceOrderNoteImpl = new CommerceOrderNoteImpl();
 
+		commerceOrderNoteImpl.setExternalReferenceCode(getExternalReferenceCode());
 		commerceOrderNoteImpl.setCommerceOrderNoteId(getCommerceOrderNoteId());
 		commerceOrderNoteImpl.setGroupId(getGroupId());
 		commerceOrderNoteImpl.setCompanyId(getCompanyId());
@@ -563,6 +615,12 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 	public void resetOriginalValues() {
 		CommerceOrderNoteModelImpl commerceOrderNoteModelImpl = this;
 
+		commerceOrderNoteModelImpl._originalExternalReferenceCode = commerceOrderNoteModelImpl._externalReferenceCode;
+
+		commerceOrderNoteModelImpl._originalCompanyId = commerceOrderNoteModelImpl._companyId;
+
+		commerceOrderNoteModelImpl._setOriginalCompanyId = false;
+
 		commerceOrderNoteModelImpl._setModifiedDate = false;
 
 		commerceOrderNoteModelImpl._originalCommerceOrderId = commerceOrderNoteModelImpl._commerceOrderId;
@@ -579,6 +637,15 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 	@Override
 	public CacheModel<CommerceOrderNote> toCacheModel() {
 		CommerceOrderNoteCacheModel commerceOrderNoteCacheModel = new CommerceOrderNoteCacheModel();
+
+		commerceOrderNoteCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = commerceOrderNoteCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			commerceOrderNoteCacheModel.externalReferenceCode = null;
+		}
 
 		commerceOrderNoteCacheModel.commerceOrderNoteId = getCommerceOrderNoteId();
 
@@ -631,9 +698,11 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
-		sb.append("{commerceOrderNoteId=");
+		sb.append("{externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
+		sb.append(", commerceOrderNoteId=");
 		sb.append(getCommerceOrderNoteId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
@@ -660,12 +729,16 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceOrderNote");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>commerceOrderNoteId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceOrderNoteId());
@@ -716,9 +789,13 @@ public class CommerceOrderNoteModelImpl extends BaseModelImpl<CommerceOrderNote>
 	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
 			CommerceOrderNote.class, ModelWrapper.class
 		};
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _commerceOrderNoteId;
 	private long _groupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

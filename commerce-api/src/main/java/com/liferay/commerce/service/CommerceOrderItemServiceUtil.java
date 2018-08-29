@@ -58,6 +58,14 @@ public class CommerceOrderItemServiceUtil {
 		getService().deleteCommerceOrderItem(commerceOrderItemId);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderItem fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItem fetchCommerceOrderItem(
 		long commerceOrderItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {

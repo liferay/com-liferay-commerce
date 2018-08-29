@@ -80,6 +80,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	 */
 	public static final String TABLE_NAME = "CommerceOrderItem";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "externalReferenceCode", Types.VARCHAR },
 			{ "commerceOrderItemId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -105,6 +106,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceOrderItemId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
@@ -128,7 +130,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		TABLE_COLUMNS_MAP.put("discountPercentageLevel4", Types.DECIMAL);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceOrderItem (commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrderItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceOrderItem.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceOrderItem.createDate ASC";
@@ -146,7 +148,9 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 			true);
 	public static final long CPINSTANCEID_COLUMN_BITMASK = 1L;
 	public static final long COMMERCEORDERID_COLUMN_BITMASK = 2L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 4L;
+	public static final long COMPANYID_COLUMN_BITMASK = 4L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 8L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -161,6 +165,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 		CommerceOrderItem model = new CommerceOrderItemImpl();
 
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCommerceOrderItemId(soapModel.getCommerceOrderItemId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -247,6 +252,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -277,6 +283,13 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
+		}
+
 		Long commerceOrderItemId = (Long)attributes.get("commerceOrderItemId");
 
 		if (commerceOrderItemId != null) {
@@ -410,6 +423,32 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	@JSON
 	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
+	}
+
+	@JSON
+	@Override
 	public long getCommerceOrderItemId() {
 		return _commerceOrderItemId;
 	}
@@ -438,7 +477,19 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -882,6 +933,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	public Object clone() {
 		CommerceOrderItemImpl commerceOrderItemImpl = new CommerceOrderItemImpl();
 
+		commerceOrderItemImpl.setExternalReferenceCode(getExternalReferenceCode());
 		commerceOrderItemImpl.setCommerceOrderItemId(getCommerceOrderItemId());
 		commerceOrderItemImpl.setGroupId(getGroupId());
 		commerceOrderItemImpl.setCompanyId(getCompanyId());
@@ -964,6 +1016,12 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	public void resetOriginalValues() {
 		CommerceOrderItemModelImpl commerceOrderItemModelImpl = this;
 
+		commerceOrderItemModelImpl._originalExternalReferenceCode = commerceOrderItemModelImpl._externalReferenceCode;
+
+		commerceOrderItemModelImpl._originalCompanyId = commerceOrderItemModelImpl._companyId;
+
+		commerceOrderItemModelImpl._setOriginalCompanyId = false;
+
 		commerceOrderItemModelImpl._setModifiedDate = false;
 
 		commerceOrderItemModelImpl._originalCommerceOrderId = commerceOrderItemModelImpl._commerceOrderId;
@@ -980,6 +1038,15 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	@Override
 	public CacheModel<CommerceOrderItem> toCacheModel() {
 		CommerceOrderItemCacheModel commerceOrderItemCacheModel = new CommerceOrderItemCacheModel();
+
+		commerceOrderItemCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = commerceOrderItemCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			commerceOrderItemCacheModel.externalReferenceCode = null;
+		}
 
 		commerceOrderItemCacheModel.commerceOrderItemId = getCommerceOrderItemId();
 
@@ -1066,9 +1133,11 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(45);
 
-		sb.append("{commerceOrderItemId=");
+		sb.append("{externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
+		sb.append(", commerceOrderItemId=");
 		sb.append(getCommerceOrderItemId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
@@ -1117,12 +1186,16 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(70);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceOrderItem");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>commerceOrderItemId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceOrderItemId());
@@ -1217,9 +1290,13 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
 			CommerceOrderItem.class, ModelWrapper.class
 		};
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _commerceOrderItemId;
 	private long _groupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

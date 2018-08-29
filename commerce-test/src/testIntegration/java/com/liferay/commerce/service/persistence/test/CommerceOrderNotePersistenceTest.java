@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -56,6 +57,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -124,6 +126,8 @@ public class CommerceOrderNotePersistenceTest {
 
 		CommerceOrderNote newCommerceOrderNote = _persistence.create(pk);
 
+		newCommerceOrderNote.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		newCommerceOrderNote.setGroupId(RandomTestUtil.nextLong());
 
 		newCommerceOrderNote.setCompanyId(RandomTestUtil.nextLong());
@@ -146,6 +150,8 @@ public class CommerceOrderNotePersistenceTest {
 
 		CommerceOrderNote existingCommerceOrderNote = _persistence.findByPrimaryKey(newCommerceOrderNote.getPrimaryKey());
 
+		Assert.assertEquals(existingCommerceOrderNote.getExternalReferenceCode(),
+			newCommerceOrderNote.getExternalReferenceCode());
 		Assert.assertEquals(existingCommerceOrderNote.getCommerceOrderNoteId(),
 			newCommerceOrderNote.getCommerceOrderNoteId());
 		Assert.assertEquals(existingCommerceOrderNote.getGroupId(),
@@ -186,6 +192,15 @@ public class CommerceOrderNotePersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceOrderNote newCommerceOrderNote = addCommerceOrderNote();
 
@@ -209,10 +224,10 @@ public class CommerceOrderNotePersistenceTest {
 
 	protected OrderByComparator<CommerceOrderNote> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CommerceOrderNote",
-			"commerceOrderNoteId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceOrderId", true, "content", true,
-			"restricted", true);
+			"externalReferenceCode", true, "commerceOrderNoteId", true,
+			"groupId", true, "companyId", true, "userId", true, "userName",
+			true, "createDate", true, "modifiedDate", true, "commerceOrderId",
+			true, "content", true, "restricted", true);
 	}
 
 	@Test
@@ -409,11 +424,31 @@ public class CommerceOrderNotePersistenceTest {
 		Assert.assertEquals(0, result.size());
 	}
 
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		CommerceOrderNote newCommerceOrderNote = addCommerceOrderNote();
+
+		_persistence.clearCache();
+
+		CommerceOrderNote existingCommerceOrderNote = _persistence.findByPrimaryKey(newCommerceOrderNote.getPrimaryKey());
+
+		Assert.assertEquals(Long.valueOf(
+				existingCommerceOrderNote.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceOrderNote,
+				"getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCommerceOrderNote.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(existingCommerceOrderNote,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
+	}
+
 	protected CommerceOrderNote addCommerceOrderNote()
 		throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceOrderNote commerceOrderNote = _persistence.create(pk);
+
+		commerceOrderNote.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		commerceOrderNote.setGroupId(RandomTestUtil.nextLong());
 

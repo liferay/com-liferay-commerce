@@ -49,6 +49,14 @@ public class CommerceOrderNoteServiceWrapper implements CommerceOrderNoteService
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrderNote fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderNoteService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrderNote getCommerceOrderNote(
 		long commerceOrderNoteId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -101,6 +109,17 @@ public class CommerceOrderNoteServiceWrapper implements CommerceOrderNoteService
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderNoteService.updateCommerceOrderNote(commerceOrderNoteId,
 			content, restricted);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrderNote upsertCommerceOrderNote(
+		long commerceOrderNoteId, long commerceOrderId, String content,
+		boolean restricted, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderNoteService.upsertCommerceOrderNote(commerceOrderNoteId,
+			commerceOrderId, content, restricted, externalReferenceCode,
+			serviceContext);
 	}
 
 	@Override

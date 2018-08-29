@@ -60,6 +60,7 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -87,6 +88,13 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
+		}
+
 		Long commerceOrderItemId = (Long)attributes.get("commerceOrderItemId");
 
 		if (commerceOrderItemId != null) {
@@ -365,6 +373,16 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceOrderItem.getExpandoBridge();
+	}
+
+	/**
+	* Returns the external reference code of this commerce order item.
+	*
+	* @return the external reference code of this commerce order item
+	*/
+	@Override
+	public String getExternalReferenceCode() {
+		return _commerceOrderItem.getExternalReferenceCode();
 	}
 
 	/**
@@ -737,6 +755,16 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceOrderItem.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets the external reference code of this commerce order item.
+	*
+	* @param externalReferenceCode the external reference code of this commerce order item
+	*/
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_commerceOrderItem.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**

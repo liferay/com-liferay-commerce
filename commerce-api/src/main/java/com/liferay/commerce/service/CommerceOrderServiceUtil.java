@@ -108,6 +108,14 @@ public class CommerceOrderServiceUtil {
 			transitionName, comment);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrder fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrder fetchCommerceOrder(
 		long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -234,13 +242,15 @@ public class CommerceOrderServiceUtil {
 		String shippingOptionName, String purchaseOrderNumber,
 		java.math.BigDecimal subtotal, java.math.BigDecimal shippingAmount,
 		java.math.BigDecimal total, String advanceStatus,
+		String externalReferenceCode,
 		com.liferay.commerce.context.CommerceContext commerceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateCommerceOrder(commerceOrderId, billingAddressId,
 			shippingAddressId, commercePaymentMethodId,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
-			subtotal, shippingAmount, total, advanceStatus, commerceContext);
+			subtotal, shippingAmount, total, advanceStatus,
+			externalReferenceCode, commerceContext);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder updateOrderStatus(

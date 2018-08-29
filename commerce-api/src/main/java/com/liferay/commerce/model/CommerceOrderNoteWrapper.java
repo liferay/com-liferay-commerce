@@ -58,6 +58,7 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceOrderNoteId", getCommerceOrderNoteId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -74,6 +75,13 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
+		}
+
 		Long commerceOrderNoteId = (Long)attributes.get("commerceOrderNoteId");
 
 		if (commerceOrderNoteId != null) {
@@ -198,6 +206,16 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceOrderNote.getExpandoBridge();
+	}
+
+	/**
+	* Returns the external reference code of this commerce order note.
+	*
+	* @return the external reference code of this commerce order note
+	*/
+	@Override
+	public String getExternalReferenceCode() {
+		return _commerceOrderNote.getExternalReferenceCode();
 	}
 
 	/**
@@ -384,6 +402,16 @@ public class CommerceOrderNoteWrapper implements CommerceOrderNote,
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceOrderNote.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets the external reference code of this commerce order note.
+	*
+	* @param externalReferenceCode the external reference code of this commerce order note
+	*/
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_commerceOrderNote.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**

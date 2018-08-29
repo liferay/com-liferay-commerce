@@ -207,9 +207,30 @@ public class CommerceOrderItemLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrderItem fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _commerceOrderItemLocalService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrderItem fetchCommerceOrderItem(
 		long commerceOrderItemId) {
 		return _commerceOrderItemLocalService.fetchCommerceOrderItem(commerceOrderItemId);
+	}
+
+	/**
+	* Returns the commerce order item with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce order item's external reference code
+	* @return the matching commerce order item, or <code>null</code> if a matching commerce order item could not be found
+	*/
+	@Override
+	public com.liferay.commerce.model.CommerceOrderItem fetchCommerceOrderItemByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _commerceOrderItemLocalService.fetchCommerceOrderItemByReferenceCode(companyId,
+			externalReferenceCode);
 	}
 
 	@Override

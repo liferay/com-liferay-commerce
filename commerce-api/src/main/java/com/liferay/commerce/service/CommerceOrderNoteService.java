@@ -63,6 +63,10 @@ public interface CommerceOrderNoteService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceOrderNote fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderNote getCommerceOrderNote(long commerceOrderNoteId)
 		throws PortalException;
 
@@ -91,4 +95,9 @@ public interface CommerceOrderNoteService extends BaseService {
 
 	public CommerceOrderNote updateCommerceOrderNote(long commerceOrderNoteId,
 		String content, boolean restricted) throws PortalException;
+
+	public CommerceOrderNote upsertCommerceOrderNote(long commerceOrderNoteId,
+		long commerceOrderId, String content, boolean restricted,
+		String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 }

@@ -91,6 +91,7 @@
 	</model>
 	<model name="com.liferay.commerce.model.CommerceOrder">
 		<field name="uuid" type="String" />
+		<field name="externalReferenceCode" type="String" />
 		<field name="commerceOrderId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -138,6 +139,7 @@
 		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceOrderItem">
+		<field name="externalReferenceCode" type="String" />
 		<field name="commerceOrderItemId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -163,6 +165,7 @@
 		<field name="discountPercentageLevel4" type="BigDecimal" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceOrderNote">
+		<field name="externalReferenceCode" type="String" />
 		<field name="commerceOrderNoteId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />

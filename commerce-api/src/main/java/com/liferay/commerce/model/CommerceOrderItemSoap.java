@@ -36,6 +36,7 @@ public class CommerceOrderItemSoap implements Serializable {
 	public static CommerceOrderItemSoap toSoapModel(CommerceOrderItem model) {
 		CommerceOrderItemSoap soapModel = new CommerceOrderItemSoap();
 
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCommerceOrderItemId(model.getCommerceOrderItemId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -110,6 +111,14 @@ public class CommerceOrderItemSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setCommerceOrderItemId(pk);
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public long getCommerceOrderItemId() {
@@ -280,6 +289,7 @@ public class CommerceOrderItemSoap implements Serializable {
 		_discountPercentageLevel4 = discountPercentageLevel4;
 	}
 
+	private String _externalReferenceCode;
 	private long _commerceOrderItemId;
 	private long _groupId;
 	private long _companyId;
