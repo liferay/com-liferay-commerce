@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.internal.upgrade;
 
-import com.liferay.commerce.internal.upgrade.schema.SchemaAddColumnUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v1_1_0.SchemaAddColumnUpgradeProcess;
 import com.liferay.commerce.model.impl.CommerceOrderItemModelImpl;
 import com.liferay.commerce.model.impl.CommerceOrderModelImpl;
 import com.liferay.commerce.model.impl.CommerceOrderNoteModelImpl;

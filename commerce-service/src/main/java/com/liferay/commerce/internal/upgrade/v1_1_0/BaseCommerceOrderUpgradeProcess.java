@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.internal.upgrade.schema;
+package com.liferay.commerce.internal.upgrade.v1_1_0;
 
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
@@ -22,9 +22,9 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 /**
  * @author Rodrigo Guedes de Souza
  */
-public class SchemaAddColumnUpgradeProcess extends UpgradeProcess {
+public class CommerceOrderUpgradeProcess extends UpgradeProcess {
 
-	public SchemaAddColumnUpgradeProcess(
+	public CommerceOrderUpgradeProcess(
 		Class entityClass, String tableName, String columnName,
 		String columnType) {
 
@@ -63,7 +63,7 @@ public class SchemaAddColumnUpgradeProcess extends UpgradeProcess {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		SchemaAddColumnUpgradeProcess.class);
+		CommerceOrderUpgradeProcess.class);
 
 	private final String _columnName;
 	private final String _columnType;
