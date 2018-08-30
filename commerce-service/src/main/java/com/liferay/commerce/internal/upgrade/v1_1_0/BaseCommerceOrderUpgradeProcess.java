@@ -22,9 +22,9 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 /**
  * @author Rodrigo Guedes de Souza
  */
-public class CommerceOrderUpgradeProcess extends UpgradeProcess {
+public class BaseCommerceOrderUpgradeProcess extends UpgradeProcess {
 
-	public CommerceOrderUpgradeProcess(
+	public BaseCommerceOrderUpgradeProcess(
 		Class entityClass, String tableName, String columnName,
 		String columnType) {
 
@@ -63,7 +63,7 @@ public class CommerceOrderUpgradeProcess extends UpgradeProcess {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceOrderUpgradeProcess.class);
+		BaseCommerceOrderUpgradeProcess.class);
 
 	private final String _columnName;
 	private final String _columnType;
