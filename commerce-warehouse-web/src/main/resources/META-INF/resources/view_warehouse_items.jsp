@@ -19,10 +19,6 @@
 <%
 CommerceWarehouseItemsDisplayContext commerceWarehouseItemsDisplayContext = (CommerceWarehouseItemsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CPInstance cpInstance = commerceWarehouseItemsDisplayContext.getCPInstance();
-
-List<CommerceWarehouse> commerceWarehouses = commerceWarehouseItemsDisplayContext.getCommerceWarehouses();
-
 String backURL = commerceWarehouseItemsDisplayContext.getBackURL();
 
 if (Validator.isNotNull(backURL)) {
@@ -31,109 +27,117 @@ if (Validator.isNotNull(backURL)) {
 }
 %>
 
-<div class="container-fluid-1280">
-	<c:choose>
-		<c:when test="<%= commerceWarehouses.isEmpty() %>">
-			<div class="alert alert-info">
-				<liferay-ui:message key="there-are-no-active-warehouses" />
-			</div>
-		</c:when>
-		<c:otherwise>
-			<portlet:actionURL name="editCommerceWarehouseItem" var="updateCommerceWarehouseItemURL" />
+<c:if test="<%= commerceWarehouseItemsDisplayContext.hasManageCommerceWarehousePermission() %>">
 
-			<aui:form action="<%= updateCommerceWarehouseItemURL %>" method="post" name="fm">
-				<aui:input name="<%= Constants.CMD %>" type="hidden" />
-				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-				<aui:input name="commerceWarehouseId" type="hidden" />
-				<aui:input name="commerceWarehouseItemId" type="hidden" />
-				<aui:input name="cpInstanceId" type="hidden" value="<%= cpInstance.getCPInstanceId() %>" />
+	<%
+	List<CommerceWarehouse> commerceWarehouses = commerceWarehouseItemsDisplayContext.getCommerceWarehouses();
+	CPInstance cpInstance = commerceWarehouseItemsDisplayContext.getCPInstance();
+	%>
 
-				<table class="show-quick-actions-on-hover table table-autofit table-list table-responsive-lg">
-					<thead>
-						<tr>
-							<th class="table-cell-content"><liferay-ui:message key="warehouse" /></th>
-							<th><liferay-ui:message key="quantity" /></th>
-							<th></th>
-						</tr>
-					</thead>
+	<div class="container-fluid-1280">
+		<c:choose>
+			<c:when test="<%= commerceWarehouses.isEmpty() %>">
+				<div class="alert alert-info">
+					<liferay-ui:message key="there-are-no-active-warehouses" />
+				</div>
+			</c:when>
+			<c:otherwise>
+				<portlet:actionURL name="editCommerceWarehouseItem" var="updateCommerceWarehouseItemURL" />
 
-					<tbody>
+				<aui:form action="<%= updateCommerceWarehouseItemURL %>" method="post" name="fm">
+					<aui:input name="<%= Constants.CMD %>" type="hidden" />
+					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+					<aui:input name="commerceWarehouseId" type="hidden" />
+					<aui:input name="commerceWarehouseItemId" type="hidden" />
+					<aui:input name="cpInstanceId" type="hidden" value="<%= cpInstance.getCPInstanceId() %>" />
 
-						<%
-						for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
-							CommerceWarehouseItem commerceWarehouseItem = commerceWarehouseItemsDisplayContext.getCommerceWarehouseItem(commerceWarehouse);
-
-							long commerceWarehouseItemId = 0;
-
-							if (commerceWarehouseItem != null) {
-								commerceWarehouseItemId = commerceWarehouseItem.getCommerceWarehouseItemId();
-							}
-
-							int curIndex = commerceWarehouses.indexOf(commerceWarehouse);
-						%>
-
-							<aui:model-context bean="<%= commerceWarehouseItem %>" model="<%= CommerceWarehouseItem.class %>" />
-
+					<table class="show-quick-actions-on-hover table table-autofit table-list table-responsive-lg">
+						<thead>
 							<tr>
-								<td>
-									<%= commerceWarehouse.getName() %>
-								</td>
-								<td>
-									<aui:input id='<%= "commerceWarehouseItemQuantity" + curIndex %>' label="" name="quantity" wrapperCssClass="m-0" />
-								</td>
-								<td class="text-center">
-									<aui:button cssClass="btn btn-primary" name='<%= "saveButton" + curIndex %>' onClick="<%= commerceWarehouseItemsDisplayContext.getUpdateCommerceWarehouseItemTaglibOnClick(commerceWarehouse.getCommerceWarehouseId(), commerceWarehouseItemId, curIndex) %>" primary="<%= true %>" value="save" />
-								</td>
+								<th class="table-cell-content"><liferay-ui:message key="warehouse" /></th>
+								<th><liferay-ui:message key="quantity" /></th>
+								<th></th>
 							</tr>
+						</thead>
 
-						<%
-						}
-						%>
+						<tbody>
 
-					</tbody>
-				</table>
-			</aui:form>
-		</c:otherwise>
-	</c:choose>
-</div>
+							<%
+							for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
+								CommerceWarehouseItem commerceWarehouseItem = commerceWarehouseItemsDisplayContext.getCommerceWarehouseItem(commerceWarehouse);
 
-<aui:script>
-	function <portlet:namespace/>updateCommerceWarehouseItem(commerceWarehouseId, commerceWarehouseItemId, index) {
-		var form = $(document.<portlet:namespace />fm);
+								long commerceWarehouseItemId = 0;
 
-		if (commerceWarehouseItemId > 0) {
-			form.fm('<%= Constants.CMD %>').val('<%= Constants.UPDATE %>');
-		}
-		else {
-			form.fm('<%= Constants.CMD %>').val('<%= Constants.ADD %>');
-		}
+								if (commerceWarehouseItem != null) {
+									commerceWarehouseItemId = commerceWarehouseItem.getCommerceWarehouseItemId();
+								}
 
-		form.fm('commerceWarehouseId').val(commerceWarehouseId);
-		form.fm('commerceWarehouseItemId').val(commerceWarehouseItemId);
+								int curIndex = commerceWarehouses.indexOf(commerceWarehouse);
+								%>
 
-		var quantityInputId = '#<portlet:namespace />commerceWarehouseItemQuantity' + index;
+									<aui:model-context bean="<%= commerceWarehouseItem %>" model="<%= CommerceWarehouseItem.class %>" />
 
-		var quantityInput = $(quantityInputId);
+									<tr>
+										<td>
+											<%= commerceWarehouse.getName() %>
+										</td>
+										<td>
+											<aui:input id='<%= "commerceWarehouseItemQuantity" + curIndex %>' label="" name="quantity" wrapperCssClass="m-0" />
+										</td>
+										<td class="text-center">
+											<aui:button cssClass="btn btn-primary" name='<%= "saveButton" + curIndex %>' onClick="<%= commerceWarehouseItemsDisplayContext.getUpdateCommerceWarehouseItemTaglibOnClick(commerceWarehouse.getCommerceWarehouseId(), commerceWarehouseItemId, curIndex) %>" primary="<%= true %>" value="save" />
+										</td>
+									</tr>
 
-		form.fm('quantity').val(quantityInput.val());
+								<%
+								}
+								%>
 
-		submitForm(form);
-	}
-</aui:script>
+						</tbody>
+					</table>
+				</aui:form>
+			</c:otherwise>
+		</c:choose>
+	</div>
 
-<aui:script>
-	var quantityPrefix = "<portlet:namespace />commerceWarehouseItemQuantity";
-	var enterKeyCode = 13;
+	<aui:script>
+		function <portlet:namespace/>updateCommerceWarehouseItem(commerceWarehouseId, commerceWarehouseItemId, index) {
+			var form = $(document.<portlet:namespace />fm);
 
-	$('input[id^=' + quantityPrefix + ']').on(
-		'keypress',
-		function(event) {
-			if (event.keyCode == enterKeyCode) {
-				event.preventDefault();
-
-				var curIndex = $(this).attr('id').split(quantityPrefix)[1];
-				$("#<portlet:namespace/>saveButton" + curIndex).click();
+			if (commerceWarehouseItemId > 0) {
+				form.fm('<%= Constants.CMD %>').val('<%= Constants.UPDATE %>');
 			}
+			else {
+				form.fm('<%= Constants.CMD %>').val('<%= Constants.ADD %>');
+			}
+
+			form.fm('commerceWarehouseId').val(commerceWarehouseId);
+			form.fm('commerceWarehouseItemId').val(commerceWarehouseItemId);
+
+			var quantityInputId = '#<portlet:namespace />commerceWarehouseItemQuantity' + index;
+
+			var quantityInput = $(quantityInputId);
+
+			form.fm('quantity').val(quantityInput.val());
+
+			submitForm(form);
 		}
-	);
-</aui:script>
+	</aui:script>
+
+	<aui:script>
+		var quantityPrefix = "<portlet:namespace />commerceWarehouseItemQuantity";
+		var enterKeyCode = 13;
+
+		$('input[id^=' + quantityPrefix + ']').on(
+			'keypress',
+			function(event) {
+				if (event.keyCode == enterKeyCode) {
+					event.preventDefault();
+
+					var curIndex = $(this).attr('id').split(quantityPrefix)[1];
+					$("#<portlet:namespace/>saveButton" + curIndex).click();
+				}
+			}
+		);
+	</aui:script>
+</c:if>

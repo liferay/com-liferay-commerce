@@ -182,7 +182,7 @@ public class CommerceWarehousesDisplayContext {
 			_cpRequestHelper.getRenderRequest(), getPortletURL(), null,
 			emptyResultsMessage);
 
-		if (!search && isShowAddButton()) {
+		if (!search && hasManageCommerceWarehousePermission()) {
 			_searchContainer.setEmptyResultsMessageCssClass(
 				"taglib-empty-result-message-header-has-plus-btn");
 		}
@@ -242,10 +242,6 @@ public class CommerceWarehousesDisplayContext {
 			_cpRequestHelper.getPermissionChecker(),
 			_cpRequestHelper.getScopeGroupId(),
 			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
-	}
-
-	public boolean isShowAddButton() {
-		return hasManageCommerceWarehousePermission();
 	}
 
 	protected String getKeywords() {
