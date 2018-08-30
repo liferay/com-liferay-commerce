@@ -14,12 +14,14 @@
 
 package com.liferay.commerce.order.web.internal.display.context;
 
+import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrderRequestHelper;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.WorkflowDefinitionLink;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
@@ -34,10 +36,12 @@ import javax.portlet.RenderRequest;
 public class CommerceOrderSettingsDisplayContext {
 
 	public CommerceOrderSettingsDisplayContext(
+		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest,
 		WorkflowDefinitionLinkLocalService workflowDefinitionLinkLocalService,
 		WorkflowDefinitionManager workflowDefinitionManager) {
 
+		_portletResourcePermission = portletResourcePermission;
 		_workflowDefinitionLinkLocalService =
 			workflowDefinitionLinkLocalService;
 		_workflowDefinitionManager = workflowDefinitionManager;
@@ -72,7 +76,15 @@ public class CommerceOrderSettingsDisplayContext {
 		return workflowDefinitionLink;
 	}
 
+	public boolean hasManageCommerceOrderWorkflowsPermission() {
+		return _portletResourcePermission.contains(
+			_commerceOrderRequestHelper.getPermissionChecker(),
+			_commerceOrderRequestHelper.getScopeGroupId(),
+			CommerceActionKeys.MANAGE_COMMERCE_ORDER_WORKFLOWS);
+	}
+
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
+	private final PortletResourcePermission _portletResourcePermission;
 	private final WorkflowDefinitionLinkLocalService
 		_workflowDefinitionLinkLocalService;
 	private final WorkflowDefinitionManager _workflowDefinitionManager;

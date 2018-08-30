@@ -16,25 +16,31 @@
 
 <%@ include file="/init.jsp" %>
 
-<portlet:actionURL name="editCommerceOrderSettings" var="editCommerceOrderSettingsActionURL" />
+<%
+CommerceOrderSettingsDisplayContext commerceOrderSettingsDisplayContext = (CommerceOrderSettingsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+%>
 
-<aui:form action="<%= editCommerceOrderSettingsActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCommerceOrderSettings();" %>'>
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+<c:if test="<%= commerceOrderSettingsDisplayContext.hasManageCommerceOrderWorkflowsPermission() %>">
+	<portlet:actionURL name="editCommerceOrderSettings" var="editCommerceOrderSettingsActionURL" />
 
-	<liferay-ui:form-navigator
-		formModelBean="<%= themeDisplay.getScopeGroup() %>"
-		id="<%= CommerceOrderFormNavigatorConstants.FORM_NAVIGATOR_ID_COMMERCE_ORDER_SETTINGS %>"
-		markupView="lexicon"
-		showButtons="<%= false %>"
-	/>
+	<aui:form action="<%= editCommerceOrderSettingsActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCommerceOrderSettings();" %>'>
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
-	<aui:button-row>
-		<aui:button cssClass="btn-lg" type="submit" value="save" />
-	</aui:button-row>
-</aui:form>
+		<liferay-ui:form-navigator
+			formModelBean="<%= themeDisplay.getScopeGroup() %>"
+			id="<%= CommerceOrderFormNavigatorConstants.FORM_NAVIGATOR_ID_COMMERCE_ORDER_SETTINGS %>"
+			markupView="lexicon"
+			showButtons="<%= false %>"
+		/>
 
-<aui:script>
-	function <portlet:namespace />saveCommerceOrderSettings() {
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
+		<aui:button-row>
+			<aui:button cssClass="btn-lg" type="submit" value="save" />
+		</aui:button-row>
+	</aui:form>
+
+	<aui:script>
+		function <portlet:namespace />saveCommerceOrderSettings() {
+			submitForm(document.<portlet:namespace />fm);
+		}
+	</aui:script>
+</c:if>
