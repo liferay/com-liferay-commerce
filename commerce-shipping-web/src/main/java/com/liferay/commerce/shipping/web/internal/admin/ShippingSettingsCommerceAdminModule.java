@@ -15,12 +15,17 @@
 package com.liferay.commerce.shipping.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
+import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingSettingsDisplayContext;
 import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -65,7 +70,12 @@ public class ShippingSettingsCommerceAdminModule
 
 	@Override
 	public boolean isVisible(long groupId) throws PortalException {
-		return true;
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		return _portletResourcePermission.contains(
+			permissionChecker, groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
 	}
 
 	@Override
@@ -77,7 +87,8 @@ public class ShippingSettingsCommerceAdminModule
 			commerceShippingSettingsDisplayContext =
 				new CommerceShippingSettingsDisplayContext(
 					_commerceShippingOriginLocatorRegistry,
-					_configurationProvider, renderRequest, renderResponse);
+					_configurationProvider, _portletResourcePermission,
+					renderRequest, renderResponse);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -105,6 +116,11 @@ public class ShippingSettingsCommerceAdminModule
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(
+		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.shipping.web)"

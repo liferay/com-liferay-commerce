@@ -31,7 +31,7 @@ CommerceShippingMethod commerceShippingMethod = (CommerceShippingMethod)row.getO
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= commerceShippingMethodsDisplayContext.hasManageCommerceShipmentsPermission() %>">
+	<c:if test="<%= commerceShippingMethodsDisplayContext.hasManageCommerceShippingMethodsPermission() %>">
 		<portlet:actionURL name="editCommerceShippingMethod" var="editURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EDIT %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

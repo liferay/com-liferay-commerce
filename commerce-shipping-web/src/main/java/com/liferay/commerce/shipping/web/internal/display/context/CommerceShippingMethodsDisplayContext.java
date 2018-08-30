@@ -166,7 +166,7 @@ public class CommerceShippingMethodsDisplayContext {
 			getScreenNavigationCategoryKey());
 	}
 
-	public boolean hasManageCommerceShipmentsPermission() {
+	public boolean hasManageCommerceShippingMethodsPermission() {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 

@@ -198,7 +198,7 @@ public class CommerceShippingMethodRestrictionsDisplayContext {
 		return _searchContainer;
 	}
 
-	public boolean hasManageCommerceShipmentsPermission() {
+	public boolean hasManageCommerceShippingMethodsPermission() {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
