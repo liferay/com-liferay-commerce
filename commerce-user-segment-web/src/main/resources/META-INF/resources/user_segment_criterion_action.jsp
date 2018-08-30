@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CommerceUserSegmentDisplayContext commerceUserSegmentDisplayContext = (CommerceUserSegmentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceUserSegmentCriterion commerceUserSegmentCriterion = (CommerceUserSegmentCriterion)row.getObject();
@@ -29,25 +31,29 @@ CommerceUserSegmentCriterion commerceUserSegmentCriterion = (CommerceUserSegment
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<portlet:renderURL var="editURL">
-		<portlet:param name="mvcRenderCommandName" value="editCommerceUserSegmentCriterion" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="commerceUserSegmentCriterionId" value="<%= String.valueOf(commerceUserSegmentCriterion.getCommerceUserSegmentCriterionId()) %>" />
-		<portlet:param name="commerceUserSegmentEntryId" value="<%= String.valueOf(commerceUserSegmentCriterion.getCommerceUserSegmentEntryId()) %>" />
-	</portlet:renderURL>
+	<c:if test="<%= commerceUserSegmentDisplayContext.hasPermission(commerceUserSegmentCriterion.getCommerceUserSegmentEntryId(), CommerceUserSegmentActionKeys.ADD_COMMERCE_USER_SEGMENTATION_CRITERION) %>">
+		<portlet:renderURL var="editURL">
+			<portlet:param name="mvcRenderCommandName" value="editCommerceUserSegmentCriterion" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="commerceUserSegmentCriterionId" value="<%= String.valueOf(commerceUserSegmentCriterion.getCommerceUserSegmentCriterionId()) %>" />
+			<portlet:param name="commerceUserSegmentEntryId" value="<%= String.valueOf(commerceUserSegmentCriterion.getCommerceUserSegmentEntryId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon
-		message="edit"
-		url="<%= editURL %>"
-	/>
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editURL %>"
+		/>
+	</c:if>
 
-	<portlet:actionURL name="editCommerceUserSegmentCriterion" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="commerceUserSegmentCriterionId" value="<%= String.valueOf(commerceUserSegmentCriterion.getCommerceUserSegmentCriterionId()) %>" />
-	</portlet:actionURL>
+	<c:if test="<%= commerceUserSegmentDisplayContext.hasPermission(commerceUserSegmentCriterion.getCommerceUserSegmentEntryId(), CommerceUserSegmentActionKeys.DELETE_COMMERCE_USER_SEGMENTATION_CRITERION) %>">
+		<portlet:actionURL name="editCommerceUserSegmentCriterion" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="commerceUserSegmentCriterionId" value="<%= String.valueOf(commerceUserSegmentCriterion.getCommerceUserSegmentCriterionId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		url="<%= deleteURL %>"
-	/>
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
+	</c:if>
 </liferay-ui:icon-menu>

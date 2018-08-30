@@ -14,15 +14,19 @@
 
 package com.liferay.commerce.user.segment.web.internal.criterion;
 
+import com.liferay.commerce.user.segment.constants.CommerceUserSegmentConstants;
 import com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeJSPContributor;
 import com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeJSPContributorRegistry;
 import com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeRegistry;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterionConstants;
+import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.commerce.user.segment.web.internal.display.context.OrganizationCommerceUserSegmentCriterionTypeDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 
 import javax.servlet.ServletContext;
@@ -57,8 +61,10 @@ public class OrganizationCommerceUserSegmentCriterionTypeJSPContributor
 					_commerceUserSegmentCriterionService,
 					_commerceUserSegmentCriterionTypeJSPContributorRegistry,
 					_commerceUserSegmentCriterionTypeRegistry,
+					_commerceUserSegmentEntryModelResourcePermission,
 					_commerceUserSegmentEntryService, httpServletRequest,
-					_itemSelector, _organizationLocalService);
+					_portletResourcePermission, _itemSelector,
+					_organizationLocalService);
 
 		httpServletRequest.setAttribute(
 			"organization.jsp-portletDisplayContext",
@@ -81,6 +87,12 @@ public class OrganizationCommerceUserSegmentCriterionTypeJSPContributor
 	private CommerceUserSegmentCriterionTypeRegistry
 		_commerceUserSegmentCriterionTypeRegistry;
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry)"
+	)
+	private ModelResourcePermission<CommerceUserSegmentEntry>
+		_commerceUserSegmentEntryModelResourcePermission;
+
 	@Reference
 	private CommerceUserSegmentEntryService _commerceUserSegmentEntryService;
 
@@ -92,6 +104,11 @@ public class OrganizationCommerceUserSegmentCriterionTypeJSPContributor
 
 	@Reference
 	private OrganizationLocalService _organizationLocalService;
+
+	@Reference(
+		target = "(resource.name=" + CommerceUserSegmentConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.user.segment.web)"

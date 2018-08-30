@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CommerceUserSegmentDisplayContext commerceUserSegmentDisplayContext = (CommerceUserSegmentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceUserSegmentEntry commerceUserSegmentEntry = (CommerceUserSegmentEntry)row.getObject();
@@ -29,18 +31,20 @@ CommerceUserSegmentEntry commerceUserSegmentEntry = (CommerceUserSegmentEntry)ro
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<portlet:renderURL var="editURL">
-		<portlet:param name="mvcRenderCommandName" value="editCommerceUserSegmentEntry" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="commerceUserSegmentEntryId" value="<%= String.valueOf(commerceUserSegmentEntry.getCommerceUserSegmentEntryId()) %>" />
-	</portlet:renderURL>
+	<c:if test="<%= commerceUserSegmentDisplayContext.hasPermission(commerceUserSegmentEntry.getCommerceUserSegmentEntryId(), ActionKeys.UPDATE) %>">
+		<portlet:renderURL var="editURL">
+			<portlet:param name="mvcRenderCommandName" value="editCommerceUserSegmentEntry" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="commerceUserSegmentEntryId" value="<%= String.valueOf(commerceUserSegmentEntry.getCommerceUserSegmentEntryId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon
-		message="edit"
-		url="<%= editURL %>"
-	/>
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editURL %>"
+		/>
+	</c:if>
 
-	<c:if test="<%= !commerceUserSegmentEntry.isSystem() %>">
+	<c:if test="<%= !commerceUserSegmentEntry.isSystem() && commerceUserSegmentDisplayContext.hasPermission(commerceUserSegmentEntry.getCommerceUserSegmentEntryId(), ActionKeys.DELETE) %>">
 		<portlet:actionURL name="editCommerceUserSegmentEntry" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

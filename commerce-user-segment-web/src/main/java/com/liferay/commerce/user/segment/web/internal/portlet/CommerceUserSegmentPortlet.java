@@ -14,13 +14,17 @@
 
 package com.liferay.commerce.user.segment.web.internal.portlet;
 
+import com.liferay.commerce.user.segment.constants.CommerceUserSegmentConstants;
 import com.liferay.commerce.user.segment.constants.CommerceUserSegmentPortletKeys;
 import com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeJSPContributorRegistry;
 import com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeRegistry;
+import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.commerce.user.segment.web.internal.display.context.CommerceUserSegmentDisplayContext;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -78,7 +82,9 @@ public class CommerceUserSegmentPortlet extends MVCPortlet {
 				_commerceUserSegmentCriterionService,
 				_commerceUserSegmentCriterionTypeJSPContributorRegistry,
 				_commerceUserSegmentCriterionTypeRegistry,
-				_commerceUserSegmentEntryService, httpServletRequest);
+				_commerceUserSegmentEntryModelResourcePermission,
+				_commerceUserSegmentEntryService, httpServletRequest,
+				_portletResourcePermission);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceUserSegmentDisplayContext);
@@ -98,10 +104,21 @@ public class CommerceUserSegmentPortlet extends MVCPortlet {
 	private CommerceUserSegmentCriterionTypeRegistry
 		_commerceUserSegmentCriterionTypeRegistry;
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry)"
+	)
+	private ModelResourcePermission<CommerceUserSegmentEntry>
+		_commerceUserSegmentEntryModelResourcePermission;
+
 	@Reference
 	private CommerceUserSegmentEntryService _commerceUserSegmentEntryService;
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(
+		target = "(resource.name=" + CommerceUserSegmentConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 }

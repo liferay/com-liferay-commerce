@@ -25,7 +25,8 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="com.liferay.commerce.user.segment.constants.CommerceUserSegmentScreenNavigationConstants" %><%@
+<%@ page import="com.liferay.commerce.user.segment.constants.CommerceUserSegmentActionKeys" %><%@
+page import="com.liferay.commerce.user.segment.constants.CommerceUserSegmentScreenNavigationConstants" %><%@
 page import="com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionType" %><%@
 page import="com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeJSPContributor" %><%@
 page import="com.liferay.commerce.user.segment.exception.CommerceUserSegmentCriterionTypeException" %><%@
@@ -49,6 +50,7 @@ page import="com.liferay.portal.kernel.model.Role" %><%@
 page import="com.liferay.portal.kernel.model.RoleConstants" %><%@
 page import="com.liferay.portal.kernel.model.User" %><%@
 page import="com.liferay.portal.kernel.model.UserGroup" %><%@
+page import="com.liferay.portal.kernel.security.permission.ActionKeys" %><%@
 page import="com.liferay.portal.kernel.util.Constants" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
