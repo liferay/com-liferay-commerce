@@ -42,6 +42,8 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -51,6 +53,7 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
@@ -64,18 +67,22 @@ public class CPCatalogRuleDisplayContext {
 
 	public CPCatalogRuleDisplayContext(
 		CPRuleAssetCategoryRelService cpRuleAssetCategoryRelService,
+		ModelResourcePermission<CPRule> cpRuleModelResourcePermission,
 		CPRuleService cpRuleService,
 		CPRuleTypeJSPContributorRegistry cpRuleTypeJSPContributorRegistry,
 		CPRuleTypeRegistry cpRuleTypeRegistry,
 		CPRuleUserSegmentRelService cpRuleUserSegmentRelService,
-		HttpServletRequest httpServletRequest, ItemSelector itemSelector) {
+		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
+		PortletResourcePermission portletResourcePermission) {
 
 		_cpRuleAssetCategoryRelService = cpRuleAssetCategoryRelService;
+		_cpRuleModelResourcePermission = cpRuleModelResourcePermission;
 		_cpRuleService = cpRuleService;
 		_cpRuleTypeJSPContributorRegistry = cpRuleTypeJSPContributorRegistry;
 		_cpRuleTypeRegistry = cpRuleTypeRegistry;
 		_cpRuleUserSegmentRelService = cpRuleUserSegmentRelService;
 		_itemSelector = itemSelector;
+		_portletResourcePermission = portletResourcePermission;
 
 		_cpCatalogRuleRequestHelper = new CPCatalogRuleRequestHelper(
 			httpServletRequest);
@@ -321,6 +328,20 @@ public class CPCatalogRuleDisplayContext {
 		return _searchContainer;
 	}
 
+	public boolean hasPermission(long cpRuleId, String actionId)
+		throws PortalException {
+
+		return _cpRuleModelResourcePermission.contains(
+			_cpCatalogRuleRequestHelper.getPermissionChecker(), cpRuleId,
+			actionId);
+	}
+
+	public boolean hasPermission(String actionId) {
+		return _portletResourcePermission.contains(
+			_cpCatalogRuleRequestHelper.getPermissionChecker(),
+			_cpCatalogRuleRequestHelper.getScopeGroupId(), actionId);
+	}
+
 	protected long[] getCheckedCommerceUserSegmentEntryIds()
 		throws PortalException {
 
@@ -342,9 +363,9 @@ public class CPCatalogRuleDisplayContext {
 
 		Stream<Long> stream = commerceUserSegmentEntryIdsList.stream();
 
-		return stream.mapToLong(
-			l -> l
-		).toArray();
+		LongStream longStream = stream.mapToLong(l -> l);
+
+		return longStream.toArray();
 	}
 
 	protected List<CPRuleUserSegmentRel> getCPRuleUserSegmentRels()
@@ -421,6 +442,8 @@ public class CPCatalogRuleDisplayContext {
 	private final CPCatalogRuleRequestHelper _cpCatalogRuleRequestHelper;
 	private CPRule _cpRule;
 	private final CPRuleAssetCategoryRelService _cpRuleAssetCategoryRelService;
+	private final ModelResourcePermission<CPRule>
+		_cpRuleModelResourcePermission;
 	private final CPRuleService _cpRuleService;
 	private final CPRuleTypeJSPContributorRegistry
 		_cpRuleTypeJSPContributorRegistry;
@@ -431,6 +454,7 @@ public class CPCatalogRuleDisplayContext {
 	private final ItemSelector _itemSelector;
 	private String _keywords;
 	private final PortalPreferences _portalPreferences;
+	private final PortletResourcePermission _portletResourcePermission;
 	private SearchContainer<CPRule> _searchContainer;
 
 }

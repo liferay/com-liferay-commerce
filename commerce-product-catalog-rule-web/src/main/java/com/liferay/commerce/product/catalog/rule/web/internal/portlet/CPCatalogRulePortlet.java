@@ -17,12 +17,16 @@ package com.liferay.commerce.product.catalog.rule.web.internal.portlet;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeJSPContributorRegistry;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.catalog.rule.web.internal.display.context.CPCatalogRuleDisplayContext;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelService;
 import com.liferay.commerce.product.service.CPRuleService;
 import com.liferay.commerce.product.service.CPRuleUserSegmentRelService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -76,10 +80,10 @@ public class CPCatalogRulePortlet extends MVCPortlet {
 
 		CPCatalogRuleDisplayContext cpCatalogRuleDisplayContext =
 			new CPCatalogRuleDisplayContext(
-				_cpRuleAssetCategoryRelService, _cpRuleService,
-				_cpRuleTypeJSPContributorRegistry, _cpRuleTypeRegistry,
-				_cpRuleUserSegmentRelService, httpServletRequest,
-				_itemSelector);
+				_cpRuleAssetCategoryRelService, _cpRuleModelResourcePermission,
+				_cpRuleService, _cpRuleTypeJSPContributorRegistry,
+				_cpRuleTypeRegistry, _cpRuleUserSegmentRelService,
+				httpServletRequest, _itemSelector, _portletResourcePermission);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, cpCatalogRuleDisplayContext);
@@ -89,6 +93,11 @@ public class CPCatalogRulePortlet extends MVCPortlet {
 
 	@Reference
 	private CPRuleAssetCategoryRelService _cpRuleAssetCategoryRelService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CPRule)"
+	)
+	private ModelResourcePermission<CPRule> _cpRuleModelResourcePermission;
 
 	@Reference
 	private CPRuleService _cpRuleService;
@@ -107,5 +116,8 @@ public class CPCatalogRulePortlet extends MVCPortlet {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 }
