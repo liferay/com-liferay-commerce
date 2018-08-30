@@ -73,25 +73,25 @@ if (Validator.isNotNull(backURL)) {
 								}
 
 								int curIndex = commerceWarehouses.indexOf(commerceWarehouse);
-								%>
+							%>
 
-									<aui:model-context bean="<%= commerceWarehouseItem %>" model="<%= CommerceWarehouseItem.class %>" />
+								<aui:model-context bean="<%= commerceWarehouseItem %>" model="<%= CommerceWarehouseItem.class %>" />
 
-									<tr>
-										<td>
-											<%= commerceWarehouse.getName() %>
-										</td>
-										<td>
-											<aui:input id='<%= "commerceWarehouseItemQuantity" + curIndex %>' label="" name="quantity" wrapperCssClass="m-0" />
-										</td>
-										<td class="text-center">
-											<aui:button cssClass="btn btn-primary" name='<%= "saveButton" + curIndex %>' onClick="<%= commerceWarehouseItemsDisplayContext.getUpdateCommerceWarehouseItemTaglibOnClick(commerceWarehouse.getCommerceWarehouseId(), commerceWarehouseItemId, curIndex) %>" primary="<%= true %>" value="save" />
-										</td>
-									</tr>
+								<tr>
+									<td>
+										<%= commerceWarehouse.getName() %>
+									</td>
+									<td>
+										<aui:input id='<%= "commerceWarehouseItemQuantity" + curIndex %>' label="" name="quantity" wrapperCssClass="m-0" />
+									</td>
+									<td class="text-center">
+										<aui:button cssClass="btn btn-primary" name='<%= "saveButton" + curIndex %>' onClick="<%= commerceWarehouseItemsDisplayContext.getUpdateCommerceWarehouseItemTaglibOnClick(commerceWarehouse.getCommerceWarehouseId(), commerceWarehouseItemId, curIndex) %>" primary="<%= true %>" value="save" />
+									</td>
+								</tr>
 
-								<%
-								}
-								%>
+							<%
+							}
+							%>
 
 						</tbody>
 					</table>
