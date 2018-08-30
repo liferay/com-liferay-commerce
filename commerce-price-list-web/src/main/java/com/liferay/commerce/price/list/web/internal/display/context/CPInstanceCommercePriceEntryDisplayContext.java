@@ -17,6 +17,7 @@ package com.liferay.commerce.price.list.web.internal.display.context;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.item.selector.criterion.CommercePriceListItemSelectorCriterion;
+import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
@@ -35,6 +36,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -60,7 +62,8 @@ public class CPInstanceCommercePriceEntryDisplayContext
 		CommercePriceEntryService commercePriceEntryService,
 		CommercePriceFormatter commercePriceFormatter,
 		CommercePriceListActionHelper commercePriceListActionHelper,
-		HttpServletRequest httpServletRequest, ItemSelector itemSelector) {
+		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
+		PortletResourcePermission portletResourcePermission) {
 
 		super(
 			actionHelper, httpServletRequest,
@@ -70,6 +73,7 @@ public class CPInstanceCommercePriceEntryDisplayContext
 		_commercePriceFormatter = commercePriceFormatter;
 		_commercePriceListActionHelper = commercePriceListActionHelper;
 		_itemSelector = itemSelector;
+		_portletResourcePermission = portletResourcePermission;
 
 		setDefaultOrderByCol("create-date");
 		setDefaultOrderByType("desc");
@@ -250,6 +254,13 @@ public class CPInstanceCommercePriceEntryDisplayContext
 		return searchContainer;
 	}
 
+	public boolean hasManageCommercePriceListPermission() {
+		return _portletResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(),
+			cpRequestHelper.getScopeGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+	}
+
 	protected long[] getCheckedCommercePriceListIds() throws PortalException {
 		List<Long> commercePriceListIds = new ArrayList<>();
 
@@ -280,5 +291,6 @@ public class CPInstanceCommercePriceEntryDisplayContext
 	private final CommercePriceListActionHelper _commercePriceListActionHelper;
 	private CPInstance _cpInstance;
 	private final ItemSelector _itemSelector;
+	private final PortletResourcePermission _portletResourcePermission;
 
 }

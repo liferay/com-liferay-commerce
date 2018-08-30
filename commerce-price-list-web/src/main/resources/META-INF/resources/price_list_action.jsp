@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CommercePriceListDisplayContext commercePriceListDisplayContext = (CommercePriceListDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommercePriceList commercePriceList = null;
@@ -36,24 +38,26 @@ else {
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<portlet:renderURL var="editURL">
-		<portlet:param name="mvcRenderCommandName" value="editCommercePriceList" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="commercePriceListId" value="<%= String.valueOf(commercePriceList.getCommercePriceListId()) %>" />
-	</portlet:renderURL>
+	<c:if test="<%= commercePriceListDisplayContext.hasManageCommercePriceListPermission() %>">
+		<portlet:renderURL var="editURL">
+			<portlet:param name="mvcRenderCommandName" value="editCommercePriceList" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="commercePriceListId" value="<%= String.valueOf(commercePriceList.getCommercePriceListId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon
-		message="edit"
-		url="<%= editURL %>"
-	/>
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editURL %>"
+		/>
 
-	<portlet:actionURL name="editCommercePriceList" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="commercePriceListId" value="<%= String.valueOf(commercePriceList.getCommercePriceListId()) %>" />
-	</portlet:actionURL>
+		<portlet:actionURL name="editCommercePriceList" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="commercePriceListId" value="<%= String.valueOf(commercePriceList.getCommercePriceListId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		url="<%= deleteURL %>"
-	/>
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
+	</c:if>
 </liferay-ui:icon-menu>

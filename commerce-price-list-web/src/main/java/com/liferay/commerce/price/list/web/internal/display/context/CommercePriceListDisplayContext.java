@@ -17,6 +17,7 @@ package com.liferay.commerce.price.list.web.internal.display.context;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.currency.util.comparator.CommerceCurrencyPriorityComparator;
+import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
@@ -37,6 +38,7 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -65,7 +67,8 @@ public class CommercePriceListDisplayContext
 		CommercePriceListUserSegmentEntryRelService
 			commercePriceListUserSegmentEntryRelService,
 		CommercePriceListService commercePriceListService,
-		HttpServletRequest httpServletRequest, ItemSelector itemSelector) {
+		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
+		PortletResourcePermission portletResourcePermission) {
 
 		super(commercePriceListActionHelper, httpServletRequest);
 
@@ -75,6 +78,7 @@ public class CommercePriceListDisplayContext
 			commercePriceListUserSegmentEntryRelService;
 		_commercePriceListService = commercePriceListService;
 		_itemSelector = itemSelector;
+		_portletResourcePermission = portletResourcePermission;
 
 		setDefaultOrderByCol("priority");
 		setDefaultOrderByType("asc");
@@ -218,6 +222,16 @@ public class CommercePriceListDisplayContext
 		return _status;
 	}
 
+	public boolean hasManageCommercePriceListPermission() {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return _portletResourcePermission.contains(
+			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+	}
+
 	protected long[] getCheckedCommerceUserSegmentEntryIds()
 		throws PortalException {
 
@@ -244,6 +258,7 @@ public class CommercePriceListDisplayContext
 	private final CommerceUserSegmentEntryService
 		_commerceUserSegmentEntryService;
 	private final ItemSelector _itemSelector;
+	private final PortletResourcePermission _portletResourcePermission;
 	private Integer _status;
 
 }

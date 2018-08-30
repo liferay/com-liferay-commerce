@@ -15,6 +15,7 @@
 package com.liferay.commerce.price.list.web.internal.display.context;
 
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
@@ -30,6 +31,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -54,7 +56,8 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 		ActionHelper actionHelper,
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommerceTierPriceEntryService commercePriceEntryService,
-		HttpServletRequest httpServletRequest) {
+		HttpServletRequest httpServletRequest,
+		PortletResourcePermission portletResourcePermission) {
 
 		super(
 			actionHelper, httpServletRequest,
@@ -62,6 +65,7 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 
 		_commercePriceListActionHelper = commercePriceListActionHelper;
 		_commerceTierPriceEntryService = commercePriceEntryService;
+		_portletResourcePermission = portletResourcePermission;
 
 		setDefaultOrderByCol("create-date");
 		setDefaultOrderByType("desc");
@@ -317,9 +321,17 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 			getCommerceTierPriceEntryId(), null);
 	}
 
+	public boolean hasManageCommercePriceListPermission() {
+		return _portletResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(),
+			cpRequestHelper.getScopeGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+	}
+
 	private final CommercePriceListActionHelper _commercePriceListActionHelper;
 	private CommerceTierPriceEntry _commerceTierPriceEntry;
 	private final CommerceTierPriceEntryService _commerceTierPriceEntryService;
 	private CPInstance _cpInstance;
+	private final PortletResourcePermission _portletResourcePermission;
 
 }
