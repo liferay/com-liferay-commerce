@@ -15,6 +15,7 @@
 package com.liferay.commerce.price.list.web.internal.display.context;
 
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
@@ -34,6 +35,7 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -58,12 +60,14 @@ public class CommercePriceEntryDisplayContext
 	public CommercePriceEntryDisplayContext(
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommercePriceEntryService commercePriceEntryService,
-		ItemSelector itemSelector, HttpServletRequest httpServletRequest) {
+		ItemSelector itemSelector, HttpServletRequest httpServletRequest,
+		PortletResourcePermission portletResourcePermission) {
 
 		super(commercePriceListActionHelper, httpServletRequest);
 
 		_commercePriceEntryService = commercePriceEntryService;
 		_itemSelector = itemSelector;
+		_portletResourcePermission = portletResourcePermission;
 	}
 
 	public CommercePriceEntry getCommercePriceEntry() throws PortalException {
@@ -206,6 +210,16 @@ public class CommercePriceEntryDisplayContext
 		return searchContainer;
 	}
 
+	public boolean hasManageCommercePriceListPermission() {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return _portletResourcePermission.contains(
+			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+	}
+
 	protected long[] getCheckedCPInstanceIds() throws PortalException {
 		List<Long> cpInstanceIdsList = new ArrayList<>();
 
@@ -233,5 +247,6 @@ public class CommercePriceEntryDisplayContext
 	private CommercePriceEntry _commercePriceEntry;
 	private final CommercePriceEntryService _commercePriceEntryService;
 	private final ItemSelector _itemSelector;
+	private final PortletResourcePermission _portletResourcePermission;
 
 }

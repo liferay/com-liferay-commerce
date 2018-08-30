@@ -15,6 +15,7 @@
 package com.liferay.commerce.price.list.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
+import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelService;
@@ -28,6 +29,7 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -91,7 +93,7 @@ public class CommercePriceListDetailsScreenNavigationEntry
 					_commerceUserSegmentEntryService,
 					_commercePriceListUserSegmentEntryRelService,
 					_commercePriceListService, httpServletRequest,
-					_itemSelector);
+					_itemSelector, _portletResourcePermission);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -130,6 +132,11 @@ public class CommercePriceListDetailsScreenNavigationEntry
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference(
+		target = "(resource.name=" + CommercePriceListConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.price.list.web)"

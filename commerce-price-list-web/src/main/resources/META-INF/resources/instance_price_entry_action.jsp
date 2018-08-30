@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CPInstanceCommercePriceEntryDisplayContext cpInstanceCommercePriceEntryDisplayContext = (CPInstanceCommercePriceEntryDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommercePriceEntry commercePriceEntry = null;
@@ -38,27 +40,29 @@ CPInstance cpInstance = commercePriceEntry.getCPInstance();
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<portlet:renderURL var="editURL">
-		<portlet:param name="mvcRenderCommandName" value="editCPInstanceCommercePriceEntry" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="commercePriceEntryId" value="<%= String.valueOf(commercePriceEntry.getCommercePriceEntryId()) %>" />
-		<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpInstance.getCPDefinitionId()) %>" />
-		<portlet:param name="cpInstanceId" value="<%= String.valueOf(commercePriceEntry.getCPInstanceId()) %>" />
-	</portlet:renderURL>
+	<c:if test="<%= cpInstanceCommercePriceEntryDisplayContext.hasManageCommercePriceListPermission() %>">
+		<portlet:renderURL var="editURL">
+			<portlet:param name="mvcRenderCommandName" value="editCPInstanceCommercePriceEntry" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="commercePriceEntryId" value="<%= String.valueOf(commercePriceEntry.getCommercePriceEntryId()) %>" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpInstance.getCPDefinitionId()) %>" />
+			<portlet:param name="cpInstanceId" value="<%= String.valueOf(commercePriceEntry.getCPInstanceId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon
-		message="edit"
-		url="<%= editURL %>"
-	/>
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editURL %>"
+		/>
 
-	<portlet:actionURL name="editCPInstanceCommercePriceEntry" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="commercePriceEntryId" value="<%= String.valueOf(commercePriceEntry.getCommercePriceEntryId()) %>" />
-		<portlet:param name="cpInstanceId" value="<%= String.valueOf(commercePriceEntry.getCPInstanceId()) %>" />
-	</portlet:actionURL>
+		<portlet:actionURL name="editCPInstanceCommercePriceEntry" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="commercePriceEntryId" value="<%= String.valueOf(commercePriceEntry.getCommercePriceEntryId()) %>" />
+			<portlet:param name="cpInstanceId" value="<%= String.valueOf(commercePriceEntry.getCPInstanceId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		url="<%= deleteURL %>"
-	/>
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
+	</c:if>
 </liferay-ui:icon-menu>
