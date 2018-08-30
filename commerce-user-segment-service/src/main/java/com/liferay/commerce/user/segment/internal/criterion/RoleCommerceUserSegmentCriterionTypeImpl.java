@@ -41,6 +41,7 @@ import com.liferay.portal.search.filter.TermsSetFilterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -208,9 +209,9 @@ public class RoleCommerceUserSegmentCriterionTypeImpl
 
 		Stream<UserGroupRole> stream = userGroupRoles.stream();
 
-		long[] roleIds = stream.mapToLong(
-			UserGroupRole::getRoleId
-		).toArray();
+		LongStream longStream = stream.mapToLong(UserGroupRole::getRoleId);
+
+		long[] roleIds = longStream.toArray();
 
 		return ArrayUtil.append(roleIds, user.getRoleIds());
 	}

@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -65,9 +66,10 @@ public class ApplyToProductCommerceDiscountTargetImpl
 
 		Stream<CommerceDiscountRel> stream = commerceDiscountRels.stream();
 
-		long[] cpDefinitionIds = stream.mapToLong(
-			CommerceDiscountRel::getClassPK
-		).toArray();
+		LongStream longStream = stream.mapToLong(
+			CommerceDiscountRel::getClassPK);
+
+		long[] cpDefinitionIds = longStream.toArray();
 
 		document.addKeyword("target_product_ids", cpDefinitionIds);
 	}

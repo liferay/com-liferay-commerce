@@ -93,6 +93,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
@@ -837,9 +838,10 @@ public class CPDefinitionLocalServiceImpl
 				if (fieldName.equals("assetCategoryIds")) {
 					Stream<String> stream = Arrays.stream(facetValuesArray);
 
-					long[] assetCategoryIds = stream.mapToLong(
-						GetterUtil::getLong
-					).toArray();
+					LongStream longStream = stream.mapToLong(
+						GetterUtil::getLong);
+
+					long[] assetCategoryIds = longStream.toArray();
 
 					searchContext.setAssetCategoryIds(assetCategoryIds);
 				}

@@ -38,6 +38,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -125,9 +126,10 @@ public class CommerceUserSegmentHelperImpl
 
 		Stream<Document> stream = documents.stream();
 
-		return stream.mapToLong(
-			field -> GetterUtil.getLong(field.get(Field.ENTRY_CLASS_PK))
-		).toArray();
+		LongStream longStream = stream.mapToLong(
+			field -> GetterUtil.getLong(field.get(Field.ENTRY_CLASS_PK)));
+
+		return longStream.toArray();
 	}
 
 	@Reference

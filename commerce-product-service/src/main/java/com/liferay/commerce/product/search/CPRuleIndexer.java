@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import javax.portlet.PortletRequest;
@@ -149,9 +150,10 @@ public class CPRuleIndexer extends BaseIndexer<CPRule> {
 
 		Stream<CPRuleUserSegmentRel> stream = cpRuleUserSegmentRels.stream();
 
-		long[] commerceUserSegmentEntryIds = stream.mapToLong(
-			CPRuleUserSegmentRel::getCommerceUserSegmentEntryId
-		).toArray();
+		LongStream longStream = stream.mapToLong(
+			CPRuleUserSegmentRel::getCommerceUserSegmentEntryId);
+
+		long[] commerceUserSegmentEntryIds = longStream.toArray();
 
 		document.addNumber(
 			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);

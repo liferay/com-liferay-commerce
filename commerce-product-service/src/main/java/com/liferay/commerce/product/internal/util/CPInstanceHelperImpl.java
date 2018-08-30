@@ -636,14 +636,14 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		Stream<DDMFormField> stream = ddmFormFields.stream();
 
-		return stream.map(
+		Stream<String> stringStream = stream.map(
 			field -> {
 				return String.format(
 					outputMappingStatement, field.getName(), field.getName());
-			}
-		).collect(
-			Collectors.joining(StringPool.SEMICOLON)
-		);
+
+			});
+
+		return stringStream.collect(Collectors.joining(StringPool.SEMICOLON));
 	}
 
 	private DDMForm _getDDMForm(

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -185,9 +186,9 @@ public class OrganizationCommerceUserSegmentCriterionTypeImpl
 
 		Stream<Long> stream = userClassPKsList.stream();
 
-		return stream.mapToLong(
-			field -> field.longValue()
-		).toArray();
+		LongStream longStream = stream.mapToLong(field -> field.longValue());
+
+		return longStream.toArray();
 	}
 
 	protected void organizationPostProcessContextBooleanFilter(

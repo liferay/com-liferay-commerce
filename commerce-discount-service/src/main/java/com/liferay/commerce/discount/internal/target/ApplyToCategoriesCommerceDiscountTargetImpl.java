@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -75,9 +76,10 @@ public class ApplyToCategoriesCommerceDiscountTargetImpl
 
 		Stream<CommerceDiscountRel> stream = commerceDiscountRels.stream();
 
-		long[] assetCategoryIds = stream.mapToLong(
-			CommerceDiscountRel::getClassPK
-		).toArray();
+		LongStream longStream = stream.mapToLong(
+			CommerceDiscountRel::getClassPK);
+
+		long[] assetCategoryIds = longStream.toArray();
 
 		document.addKeyword("target_asset_category_ids", assetCategoryIds);
 	}
@@ -138,9 +140,10 @@ public class ApplyToCategoriesCommerceDiscountTargetImpl
 
 			Stream<AssetCategory> stream = assetCategories.stream();
 
-			return stream.mapToLong(
-				AssetCategory::getCategoryId
-			).toArray();
+			LongStream longStream = stream.mapToLong(
+				AssetCategory::getCategoryId);
+
+			return longStream.toArray();
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
