@@ -16,7 +16,7 @@ package com.liferay.commerce.currency.util.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
+import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
@@ -32,7 +32,6 @@ import java.util.Locale;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,31 +64,12 @@ public class CommercePriceFormatterTest {
 		Assert.assertTrue(formattedPrice.matches(regex));
 	}
 
-	@Ignore
-	@Test
-	public void testFormatCurrencyBigDecimalDefaultFormatter()
-		throws Exception {
-
-		String regex = "^[" + _SYMBOLS + "]\\d{1,3}(\\,\\d{3})*\\.\\d\\d$";
-
-		CommerceCurrency commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
-
-		String formattedPrice = _commercePriceFormatter.format(
-			commerceCurrency, _price, Locale.US);
-
-		Assert.assertTrue(formattedPrice.matches(regex));
-	}
-
-	@Ignore
 	@Test
 	public void testFormatCurrencyBigDecimalLocaleFR() throws Exception {
 		String regexFR = "^\\d{1,3}(.\\d{3})*,\\d\\d\\s[" + _SYMBOLS + "]$";
 
 		CommerceCurrency commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		commerceCurrency.setFormatPattern("###,##0.00 $", Locale.FRANCE);
 
@@ -101,14 +81,12 @@ public class CommercePriceFormatterTest {
 		Assert.assertTrue(formattedPrice.matches(regexFR));
 	}
 
-	@Ignore
 	@Test
 	public void testFormatCurrencyBigDecimalLocaleIT() throws Exception {
 		String regexIT = "^[" + _SYMBOLS + "]\\s\\d{1,3}(\\.\\d{3})*,\\d\\d$";
 
 		CommerceCurrency commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		commerceCurrency.setFormatPattern("$ ###,##0.00", Locale.ITALY);
 
@@ -120,14 +98,12 @@ public class CommercePriceFormatterTest {
 		Assert.assertTrue(formattedPrice.matches(regexIT));
 	}
 
-	@Ignore
 	@Test
 	public void testFormatCurrencyBigDecimalLocaleUS() throws Exception {
 		String regexUS = "^[" + _SYMBOLS + "]\\d{1,3}(\\,\\d{3})*\\.\\d\\d$";
 
 		CommerceCurrency commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		commerceCurrency.setFormatPattern("$###,##0.00", Locale.US);
 
@@ -140,9 +116,6 @@ public class CommercePriceFormatterTest {
 	}
 
 	private static final String _SYMBOLS = "€$¥£R$₹";
-
-	@Inject
-	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
 	@Inject
 	private CommercePriceFormatter _commercePriceFormatter;
