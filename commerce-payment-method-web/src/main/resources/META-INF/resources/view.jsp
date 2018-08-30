@@ -18,114 +18,114 @@
 
 <%
 CommercePaymentMethodsDisplayContext commercePaymentMethodsDisplayContext = (CommercePaymentMethodsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
-SearchContainer<CommercePaymentMethod> commercePaymentMethodSearchContainer = commercePaymentMethodsDisplayContext.getSearchContainer();
 %>
 
-<liferay-frontend:management-bar
-	searchContainerId="commercePaymentMethods"
->
-	<liferay-frontend:management-bar-filters>
-		<liferay-frontend:management-bar-navigation
-			navigationKeys='<%= new String[] {"all", "active", "inactive"} %>'
-			portletURL="<%= commercePaymentMethodsDisplayContext.getPortletURL() %>"
-		/>
-	</liferay-frontend:management-bar-filters>
-
-	<liferay-frontend:management-bar-buttons>
-		<liferay-frontend:management-bar-display-buttons
-			displayViews='<%= new String[] {"list"} %>'
-			portletURL="<%= commercePaymentMethodsDisplayContext.getPortletURL() %>"
-			selectedDisplayStyle="list"
-		/>
-	</liferay-frontend:management-bar-buttons>
-</liferay-frontend:management-bar>
-
-<div class="container-fluid-1280">
-	<liferay-ui:search-container
-		id="commercePaymentMethods"
-		searchContainer="<%= commercePaymentMethodSearchContainer %>"
+<c:if test="<%= commercePaymentMethodsDisplayContext.hasManageCommercePaymentMethodsPermission() %>">
+	<liferay-frontend:management-bar
+		searchContainerId="commercePaymentMethods"
 	>
-		<liferay-ui:search-container-row
-			className="com.liferay.commerce.model.CommercePaymentMethod"
-			keyProperty="commercePaymentMethodId"
-			modelVar="commercePaymentMethod"
+		<liferay-frontend:management-bar-filters>
+			<liferay-frontend:management-bar-navigation
+				navigationKeys='<%= new String[] {"all", "active", "inactive"} %>'
+				portletURL="<%= commercePaymentMethodsDisplayContext.getPortletURL() %>"
+			/>
+		</liferay-frontend:management-bar-filters>
+
+		<liferay-frontend:management-bar-buttons>
+			<liferay-frontend:management-bar-display-buttons
+				displayViews='<%= new String[] {"list"} %>'
+				portletURL="<%= commercePaymentMethodsDisplayContext.getPortletURL() %>"
+				selectedDisplayStyle="list"
+			/>
+		</liferay-frontend:management-bar-buttons>
+	</liferay-frontend:management-bar>
+
+	<div class="container-fluid-1280">
+		<liferay-ui:search-container
+			id="commercePaymentMethods"
+			searchContainer="<%= commercePaymentMethodsDisplayContext.getSearchContainer() %>"
 		>
-
-			<%
-			String thumbnailSrc = commercePaymentMethod.getImageURL(themeDisplay);
-			%>
-
-			<c:choose>
-				<c:when test="<%= Validator.isNotNull(thumbnailSrc) %>">
-					<liferay-ui:search-container-column-image
-						cssClass="table-cell-content"
-						name="icon"
-						src="<%= thumbnailSrc %>"
-					/>
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:search-container-column-icon
-						icon="documents-and-media"
-						name="icon"
-					/>
-				</c:otherwise>
-			</c:choose>
-
-			<%
-			PortletURL rowURL = renderResponse.createActionURL();
-
-			rowURL.setParameter(Constants.CMD, Constants.EDIT);
-			rowURL.setParameter(ActionRequest.ACTION_NAME, "editCommercePaymentMethod");
-			rowURL.setParameter("redirect", currentURL);
-			rowURL.setParameter("commercePaymentMethodId", String.valueOf(commercePaymentMethod.getCommercePaymentMethodId()));
-			rowURL.setParameter("engineKey", commercePaymentMethod.getEngineKey());
-			%>
-
-			<liferay-ui:search-container-column-text
-				cssClass="important table-cell-content"
-				href="<%= rowURL %>"
-				property="name"
-			/>
-
-			<liferay-ui:search-container-column-text
-				cssClass="table-cell-content"
-				property="description"
-			/>
-
-			<liferay-ui:search-container-column-text
-				name="active"
+			<liferay-ui:search-container-row
+				className="com.liferay.commerce.model.CommercePaymentMethod"
+				keyProperty="commercePaymentMethodId"
+				modelVar="commercePaymentMethod"
 			>
+
+				<%
+				String thumbnailSrc = commercePaymentMethod.getImageURL(themeDisplay);
+				%>
+
 				<c:choose>
-					<c:when test="<%= commercePaymentMethod.isActive() %>">
-						<liferay-ui:icon
-							cssClass="commerce-admin-icon-check"
-							icon="check"
-							markupView="lexicon"
+					<c:when test="<%= Validator.isNotNull(thumbnailSrc) %>">
+						<liferay-ui:search-container-column-image
+							cssClass="table-cell-content"
+							name="icon"
+							src="<%= thumbnailSrc %>"
 						/>
 					</c:when>
 					<c:otherwise>
-						<liferay-ui:icon
-							cssClass="commerce-admin-icon-times"
-							icon="times"
-							markupView="lexicon"
+						<liferay-ui:search-container-column-icon
+							icon="documents-and-media"
+							name="icon"
 						/>
 					</c:otherwise>
 				</c:choose>
-			</liferay-ui:search-container-column-text>
 
-			<liferay-ui:search-container-column-text
-				property="priority"
+				<%
+				PortletURL rowURL = renderResponse.createActionURL();
+
+				rowURL.setParameter(Constants.CMD, Constants.EDIT);
+				rowURL.setParameter(ActionRequest.ACTION_NAME, "editCommercePaymentMethod");
+				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("commercePaymentMethodId", String.valueOf(commercePaymentMethod.getCommercePaymentMethodId()));
+				rowURL.setParameter("engineKey", commercePaymentMethod.getEngineKey());
+				%>
+
+				<liferay-ui:search-container-column-text
+					cssClass="important table-cell-content"
+					href="<%= rowURL %>"
+					property="name"
+				/>
+
+				<liferay-ui:search-container-column-text
+					cssClass="table-cell-content"
+					property="description"
+				/>
+
+				<liferay-ui:search-container-column-text
+					name="active"
+				>
+					<c:choose>
+						<c:when test="<%= commercePaymentMethod.isActive() %>">
+							<liferay-ui:icon
+								cssClass="commerce-admin-icon-check"
+								icon="check"
+								markupView="lexicon"
+							/>
+						</c:when>
+						<c:otherwise>
+							<liferay-ui:icon
+								cssClass="commerce-admin-icon-times"
+								icon="times"
+								markupView="lexicon"
+							/>
+						</c:otherwise>
+					</c:choose>
+				</liferay-ui:search-container-column-text>
+
+				<liferay-ui:search-container-column-text
+					property="priority"
+				/>
+
+				<liferay-ui:search-container-column-jsp
+					cssClass="entry-action-column"
+					path="/payment_method_action.jsp"
+				/>
+			</liferay-ui:search-container-row>
+
+			<liferay-ui:search-iterator
+				markupView="lexicon"
 			/>
-
-			<liferay-ui:search-container-column-jsp
-				cssClass="entry-action-column"
-				path="/payment_method_action.jsp"
-			/>
-		</liferay-ui:search-container-row>
-
-		<liferay-ui:search-iterator
-			markupView="lexicon"
-		/>
-	</liferay-ui:search-container>
-</div>
+		</liferay-ui:search-container>
+	</div>
+</c:if>
