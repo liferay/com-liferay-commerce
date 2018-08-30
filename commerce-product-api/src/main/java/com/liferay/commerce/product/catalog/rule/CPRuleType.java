@@ -21,6 +21,7 @@ import com.liferay.commerce.product.model.CPRule;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
+import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.Locale;
 
@@ -42,6 +43,9 @@ public interface CPRuleType {
 
 	public void postProcessContextBooleanFilter(
 			BooleanFilter contextBooleanFilter, CPRule cpRule)
+		throws PortalException;
+
+	public void update(CPRule cpRule, ServiceContext serviceContext)
 		throws PortalException;
 
 }
