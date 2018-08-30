@@ -30,7 +30,7 @@ portletURL.setParameter("searchContainerId", "cpInstances");
 request.setAttribute("view.jsp-portletURL", portletURL);
 %>
 
-<c:if test="<%= cpDefinitionsDisplayContext.hasPermission(CPActionKeys.MANAGE_CATALOG) %>">
+<c:if test="<%= cpInstanceDisplayContext.hasPermission(CPActionKeys.MANAGE_CATALOG) %>">
 	<clay:navigation-bar
 		inverted="<%= true %>"
 		navigationItems="<%= CPNavigationItemRegistryUtil.getNavigationItems(renderRequest) %>"

@@ -18,6 +18,10 @@
 
 <%
 CPOptionCategory cpOptionCategory = (CPOptionCategory)request.getAttribute(CPWebKeys.CP_OPTION_CATEGORY);
+CPOptionCategoryDisplayContext cpOptionCategoryDisplayContext = (CPOptionCategoryDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+boolean manageCPOptionCategoriesPermission = cpOptionCategoryDisplayContext.hasPermission(CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
+boolean manageCPSpecificationOptionsPermission = cpOptionCategoryDisplayContext.hasPermission(CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
 
 long cpOptionCategoryId = BeanParamUtil.getLong(cpOptionCategory, request, "CPOptionCategoryId");
 

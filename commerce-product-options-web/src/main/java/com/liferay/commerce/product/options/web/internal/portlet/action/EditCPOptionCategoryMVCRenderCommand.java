@@ -14,20 +14,27 @@
 
 package com.liferay.commerce.product.options.web.internal.portlet.action;
 
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.exception.NoSuchCPOptionCategoryException;
 import com.liferay.commerce.product.model.CPOptionCategory;
+import com.liferay.commerce.product.options.web.internal.display.context.CPOptionCategoryDisplayContext;
 import com.liferay.commerce.product.service.CPOptionCategoryService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -51,6 +58,18 @@ public class EditCPOptionCategoryMVCRenderCommand implements MVCRenderCommand {
 		throws PortletException {
 
 		try {
+			HttpServletRequest httpServletRequest =
+				_portal.getHttpServletRequest(renderRequest);
+
+			CPOptionCategoryDisplayContext cpOptionCategoryDisplayContext =
+				new CPOptionCategoryDisplayContext(
+					_actionHelper, httpServletRequest,
+					_portletResourcePermission, _cpOptionCategoryService);
+
+			renderRequest.setAttribute(
+				WebKeys.PORTLET_DISPLAY_CONTEXT,
+				cpOptionCategoryDisplayContext);
+
 			setCPOptionCategoryRequestAttribute(renderRequest);
 		}
 		catch (Exception e) {
@@ -88,6 +107,15 @@ public class EditCPOptionCategoryMVCRenderCommand implements MVCRenderCommand {
 	}
 
 	@Reference
+	private ActionHelper _actionHelper;
+
+	@Reference
 	private CPOptionCategoryService _cpOptionCategoryService;
+
+	@Reference
+	private Portal _portal;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 }
