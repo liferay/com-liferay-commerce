@@ -19,8 +19,14 @@
 <%
 CPCatalogRuleDisplayContext cpCatalogRuleDisplayContext = (CPCatalogRuleDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
+boolean orSearch = GetterUtil.getBoolean(cpCatalogRuleDisplayContext.getCPRuleTypeSettingsProperty("orSearch"));
+
+orSearch = ParamUtil.getBoolean(request, "orSearch", orSearch);
+
 String assetCategoryIds = cpCatalogRuleDisplayContext.getAssetCategoryIds();
 %>
+
+<aui:input checked="<%= orSearch %>" label="search-type" labelOff="match-all" labelOn="match-any" name="orSearch" type="toggle-switch" />
 
 <liferay-ui:asset-categories-error />
 
