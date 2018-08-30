@@ -18,127 +18,105 @@
 
 <%
 CommerceWishListDisplayContext commerceWishListDisplayContext = (CommerceWishListDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
-SearchContainer<CommerceWishList> commerceWishListSearchContainer = commerceWishListDisplayContext.getSearchContainer();
 %>
 
-<c:choose>
-	<c:when test="<%= portletName.equals(CommerceWishListPortletKeys.COMMERCE_WISH_LIST) %>">
-		<liferay-frontend:management-bar
-			includeCheckBox="<%= true %>"
-			searchContainerId="commerceWishLists"
-		>
-			<liferay-frontend:management-bar-buttons>
-				<liferay-frontend:management-bar-display-buttons
-					disabled="<%= true %>"
-					displayViews='<%= new String[] {"list"} %>'
-					portletURL="<%= commerceWishListDisplayContext.getPortletURL() %>"
-					selectedDisplayStyle="list"
-				/>
+<c:if test="<%= commerceWishListDisplayContext.hasManageCommerceWishListsPermission() %>">
 
-				<liferay-portlet:renderURL var="addCommerceWishListURL">
-					<portlet:param name="mvcRenderCommandName" value="editCommerceWishList" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-				</liferay-portlet:renderURL>
+	<%
+	SearchContainer<CommerceWishList> commerceWishListSearchContainer = commerceWishListDisplayContext.getSearchContainer();
+	%>
 
-				<liferay-frontend:add-menu
-					inline="<%= true %>"
-				>
-					<liferay-frontend:add-menu-item
-						title='<%= LanguageUtil.get(request, "add-wish-list") %>'
-						url="<%= addCommerceWishListURL %>"
-					/>
-				</liferay-frontend:add-menu>
-			</liferay-frontend:management-bar-buttons>
-
-			<liferay-frontend:management-bar-filters>
-				<liferay-frontend:management-bar-sort
-					orderByCol="<%= commerceWishListSearchContainer.getOrderByCol() %>"
-					orderByType="<%= commerceWishListSearchContainer.getOrderByType() %>"
-					orderColumns='<%= new String[] {"create-date", "name"} %>'
-					portletURL="<%= commerceWishListDisplayContext.getPortletURL() %>"
-				/>
-			</liferay-frontend:management-bar-filters>
-
-			<liferay-frontend:management-bar-action-buttons>
-				<liferay-frontend:management-bar-button
-					href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceWishLists();" %>'
-					icon="times"
-					label="delete"
-				/>
-			</liferay-frontend:management-bar-action-buttons>
-		</liferay-frontend:management-bar>
-
-		<aui:script>
-			function <portlet:namespace />deleteCommerceWishLists() {
-				if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-wish-lists" />')) {
-					var form = AUI.$(document.<portlet:namespace />fm);
-
-					form.fm('<%= Constants.CMD %>').val('<%= Constants.DELETE %>');
-					form.fm('deleteCommerceWishListIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-
-					submitForm(form);
-				}
-			}
-		</aui:script>
-	</c:when>
-	<c:when test="<%= portletName.equals(CommerceWishListPortletKeys.MY_COMMERCE_WISH_LISTS) %>">
-		<div class="container-fluid-1280 py-3">
-			<h3 class="align-middle d-inline"><liferay-ui:message key="wish-lists" /></h3>
-
-			<div class="d-inline float-right">
-				<portlet:actionURL name="editCommerceWishList" var="addCommerceWishListActionURL">
-					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-				</portlet:actionURL>
-
-				<liferay-frontend:add-menu
-					inline="<%= true %>"
-				>
-					<liferay-frontend:add-menu-item
-						title='<%= LanguageUtil.get(request, "add-wish-list") %>'
-						url="<%= addCommerceWishListActionURL %>"
-					/>
-				</liferay-frontend:add-menu>
-			</div>
-		</div>
-	</c:when>
-	<c:otherwise>
-	</c:otherwise>
-</c:choose>
-
-<div class="container-fluid-1280">
-	<portlet:actionURL name="editCommerceWishList" var="editCommerceWishListActionURL" />
-
-	<aui:form action="<%= editCommerceWishListActionURL %>" method="post" name="fm">
-		<aui:input name="<%= Constants.CMD %>" type="hidden" />
-		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-		<aui:input name="deleteCommerceWishListIds" type="hidden" />
-
-		<liferay-ui:search-container
-			id="commerceWishLists"
-			searchContainer="<%= commerceWishListSearchContainer %>"
-		>
-			<liferay-ui:search-container-row
-				className="com.liferay.commerce.wish.list.model.CommerceWishList"
-				keyProperty="commerceWishListId"
-				modelVar="commerceWishList"
-			>
-				<liferay-ui:search-container-column-text
-					cssClass="important table-cell-content"
-					href="<%= commerceWishListDisplayContext.getRowURL(commerceWishList.getCommerceWishListId()) %>"
-					property="name"
-				/>
-
-				<liferay-ui:search-container-column-jsp
-					cssClass="entry-action-column"
-					path="/wish_list_action.jsp"
-				/>
-			</liferay-ui:search-container-row>
-
-			<liferay-ui:search-iterator
-				markupView="lexicon"
+	<liferay-frontend:management-bar
+		includeCheckBox="<%= true %>"
+		searchContainerId="commerceWishLists"
+	>
+		<liferay-frontend:management-bar-buttons>
+			<liferay-frontend:management-bar-display-buttons
+				disabled="<%= true %>"
+				displayViews='<%= new String[] {"list"} %>'
+				portletURL="<%= commerceWishListDisplayContext.getPortletURL() %>"
+				selectedDisplayStyle="list"
 			/>
-		</liferay-ui:search-container>
-	</aui:form>
-</div>
+
+			<liferay-portlet:renderURL var="addCommerceWishListURL">
+				<portlet:param name="mvcRenderCommandName" value="editCommerceWishList" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+			</liferay-portlet:renderURL>
+
+			<liferay-frontend:add-menu
+				inline="<%= true %>"
+			>
+				<liferay-frontend:add-menu-item
+					title='<%= LanguageUtil.get(request, "add-wish-list") %>'
+					url="<%= addCommerceWishListURL %>"
+				/>
+			</liferay-frontend:add-menu>
+		</liferay-frontend:management-bar-buttons>
+
+		<liferay-frontend:management-bar-filters>
+			<liferay-frontend:management-bar-sort
+				orderByCol="<%= commerceWishListSearchContainer.getOrderByCol() %>"
+				orderByType="<%= commerceWishListSearchContainer.getOrderByType() %>"
+				orderColumns='<%= new String[] {"create-date", "name"} %>'
+				portletURL="<%= commerceWishListDisplayContext.getPortletURL() %>"
+			/>
+		</liferay-frontend:management-bar-filters>
+
+		<liferay-frontend:management-bar-action-buttons>
+			<liferay-frontend:management-bar-button
+				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceWishLists();" %>'
+				icon="times"
+				label="delete"
+			/>
+		</liferay-frontend:management-bar-action-buttons>
+	</liferay-frontend:management-bar>
+
+	<aui:script>
+		function <portlet:namespace />deleteCommerceWishLists() {
+			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-wish-lists" />')) {
+				var form = AUI.$(document.<portlet:namespace />fm);
+
+				form.fm('<%= Constants.CMD %>').val('<%= Constants.DELETE %>');
+				form.fm('deleteCommerceWishListIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+
+				submitForm(form);
+			}
+		}
+	</aui:script>
+
+	<div class="container-fluid-1280">
+		<portlet:actionURL name="editCommerceWishList" var="editCommerceWishListActionURL" />
+
+		<aui:form action="<%= editCommerceWishListActionURL %>" method="post" name="fm">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" />
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="deleteCommerceWishListIds" type="hidden" />
+
+			<liferay-ui:search-container
+				id="commerceWishLists"
+				searchContainer="<%= commerceWishListSearchContainer %>"
+			>
+				<liferay-ui:search-container-row
+					className="com.liferay.commerce.wish.list.model.CommerceWishList"
+					keyProperty="commerceWishListId"
+					modelVar="commerceWishList"
+				>
+					<liferay-ui:search-container-column-text
+						cssClass="important table-cell-content"
+						href="<%= commerceWishListDisplayContext.getRowURL(commerceWishList.getCommerceWishListId()) %>"
+						property="name"
+					/>
+
+					<liferay-ui:search-container-column-jsp
+						cssClass="entry-action-column"
+						path="/wish_list_action.jsp"
+					/>
+				</liferay-ui:search-container-row>
+
+				<liferay-ui:search-iterator
+					markupView="lexicon"
+				/>
+			</liferay-ui:search-container>
+		</aui:form>
+	</div>
+</c:if>

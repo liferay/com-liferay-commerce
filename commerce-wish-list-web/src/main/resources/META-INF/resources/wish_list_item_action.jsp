@@ -33,15 +33,17 @@ CommerceWishListItem commerceWishListItem = (CommerceWishListItem)row.getObject(
 			message="<%= StringPool.BLANK %>"
 			showWhenSingleIcon="<%= true %>"
 		>
-			<portlet:actionURL name="editCommerceWishListItem" var="deleteURL">
-				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="commerceWishListItemId" value="<%= String.valueOf(commerceWishListItem.getCommerceWishListItemId()) %>" />
-			</portlet:actionURL>
+			<c:if test="<%= commerceWishListDisplayContext.hasManageCommerceWishListsPermission() %>">
+				<portlet:actionURL name="editCommerceWishListItem" var="deleteURL">
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="commerceWishListItemId" value="<%= String.valueOf(commerceWishListItem.getCommerceWishListItemId()) %>" />
+				</portlet:actionURL>
 
-			<liferay-ui:icon-delete
-				url="<%= deleteURL %>"
-			/>
+				<liferay-ui:icon-delete
+					url="<%= deleteURL %>"
+				/>
+			</c:if>
 		</liferay-ui:icon-menu>
 	</c:when>
 	<c:otherwise>

@@ -17,12 +17,14 @@ package com.liferay.commerce.wish.list.web.internal.portlet;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.commerce.wish.list.constants.CommerceWishListConstants;
 import com.liferay.commerce.wish.list.constants.CommerceWishListPortletKeys;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemService;
 import com.liferay.commerce.wish.list.service.CommerceWishListService;
 import com.liferay.commerce.wish.list.util.CommerceWishListHttpHelper;
 import com.liferay.commerce.wish.list.web.internal.display.context.CommerceWishListDisplayContext;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -79,7 +81,8 @@ public class CommerceWishListPortlet extends MVCPortlet {
 			new CommerceWishListDisplayContext(
 				commerceProductPriceCalculation, commerceWishListHttpHelper,
 				commerceWishListItemService, commerceWishListService,
-				cpDefinitionHelper, cpInstanceHelper, httpServletRequest);
+				cpDefinitionHelper, cpInstanceHelper, httpServletRequest,
+				_portletResourcePermission);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceWishListDisplayContext);
@@ -107,5 +110,10 @@ public class CommerceWishListPortlet extends MVCPortlet {
 
 	@Reference
 	protected Portal portal;
+
+	@Reference(
+		target = "(resource.name=" + CommerceWishListConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 }
