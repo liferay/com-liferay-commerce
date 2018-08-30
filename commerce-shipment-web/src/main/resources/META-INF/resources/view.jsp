@@ -19,8 +19,6 @@
 <%
 CommerceShipmentDisplayContext commerceShipmentDisplayContext = (CommerceShipmentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-SearchContainer<CommerceShipment> commerceShipmentSearchContainer = commerceShipmentDisplayContext.getSearchContainer();
-
 PortletURL portletURL = commerceShipmentDisplayContext.getPortletURL();
 
 portletURL.setParameter("searchContainerId", "commerceShipments");
@@ -28,18 +26,18 @@ portletURL.setParameter("searchContainerId", "commerceShipments");
 request.setAttribute("view.jsp-portletURL", portletURL);
 %>
 
-<div class="container-fluid-1280">
-	<liferay-frontend:management-bar
-		searchContainerId="commerceShipments"
-	>
-		<liferay-frontend:management-bar-buttons>
-			<liferay-frontend:management-bar-display-buttons
-				displayViews='<%= new String[] {"list"} %>'
-				portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
-				selectedDisplayStyle="list"
-			/>
+<c:if test="<%= commerceShipmentDisplayContext.hasManageCommerceShipmentsPermission() %>">
+	<div class="container-fluid-1280">
+		<liferay-frontend:management-bar
+			searchContainerId="commerceShipments"
+		>
+			<liferay-frontend:management-bar-buttons>
+				<liferay-frontend:management-bar-display-buttons
+					displayViews='<%= new String[] {"list"} %>'
+					portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+					selectedDisplayStyle="list"
+				/>
 
-			<c:if test="<%= commerceShipmentDisplayContext.hasManageCommerceShipmentsPermission() %>">
 				<portlet:renderURL var="addCommerceShipmentURL">
 					<portlet:param name="mvcRenderCommandName" value="editCommerceShipment" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -53,133 +51,132 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 						url="<%= addCommerceShipmentURL %>"
 					/>
 				</liferay-frontend:add-menu>
-			</c:if>
-		</liferay-frontend:management-bar-buttons>
+			</liferay-frontend:management-bar-buttons>
 
-		<liferay-frontend:management-bar-filters>
-			<liferay-frontend:management-bar-navigation
-				navigationKeys="<%= commerceShipmentDisplayContext.getNavigationKeys() %>"
-				portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
-			/>
+			<liferay-frontend:management-bar-filters>
+				<liferay-frontend:management-bar-navigation
+					navigationKeys="<%= commerceShipmentDisplayContext.getNavigationKeys() %>"
+					portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+				/>
 
-			<liferay-frontend:management-bar-sort
-				orderByCol="<%= commerceShipmentDisplayContext.getOrderByCol() %>"
-				orderByType="<%= commerceShipmentDisplayContext.getOrderByType() %>"
-				orderColumns='<%= new String[] {"create-date", "expected-delivery-date", "shipment-number", "shipping-date"} %>'
-				portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
-			/>
-		</liferay-frontend:management-bar-filters>
-	</liferay-frontend:management-bar>
+				<liferay-frontend:management-bar-sort
+					orderByCol="<%= commerceShipmentDisplayContext.getOrderByCol() %>"
+					orderByType="<%= commerceShipmentDisplayContext.getOrderByType() %>"
+					orderColumns='<%= new String[] {"create-date", "expected-delivery-date", "shipment-number", "shipping-date"} %>'
+					portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+				/>
+			</liferay-frontend:management-bar-filters>
+		</liferay-frontend:management-bar>
 
-	<div id="<portlet:namespace />shipmentsContainer">
-		<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" />
-			<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
-			<aui:input name="deleteCommerceShipmentIds" type="hidden" />
+		<div id="<portlet:namespace />shipmentsContainer">
+			<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+				<aui:input name="<%= Constants.CMD %>" type="hidden" />
+				<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
+				<aui:input name="deleteCommerceShipmentIds" type="hidden" />
 
-			<div class="orders-container" id="<portlet:namespace />entriesContainer">
-				<liferay-ui:search-container
-					id="commerceShipments"
-					iteratorURL="<%= portletURL %>"
-					searchContainer="<%= commerceShipmentSearchContainer %>"
-				>
-					<liferay-ui:search-container-row
-						className="com.liferay.commerce.model.CommerceShipment"
-						cssClass="entry-display-style"
-						keyProperty="commerceShipmentId"
-						modelVar="commerceShipment"
+				<div class="orders-container" id="<portlet:namespace />entriesContainer">
+					<liferay-ui:search-container
+						id="commerceShipments"
+						iteratorURL="<%= portletURL %>"
+						searchContainer="<%= commerceShipmentDisplayContext.getSearchContainer() %>"
 					>
-
-						<%
-						PortletURL rowURL = renderResponse.createRenderURL();
-
-						rowURL.setParameter("mvcRenderCommandName", "viewCommerceShipmentDetail");
-						rowURL.setParameter("commerceShipmentId", String.valueOf(commerceShipment.getCommerceShipmentId()));
-						%>
-
-						<liferay-ui:search-container-column-text
-							cssClass="important table-cell-content"
-							href="<%= rowURL %>"
-							name="shipment-number"
-							property="commerceShipmentId"
-						/>
-
-						<liferay-ui:search-container-column-text
-							cssClass="table-cell-content"
-							name="shipping-address"
+						<liferay-ui:search-container-row
+							className="com.liferay.commerce.model.CommerceShipment"
+							cssClass="entry-display-style"
+							keyProperty="commerceShipmentId"
+							modelVar="commerceShipment"
 						>
 
 							<%
-							CommerceAddress commerceAddress = commerceShipment.fetchCommerceAddress();
+							PortletURL rowURL = renderResponse.createRenderURL();
+
+							rowURL.setParameter("mvcRenderCommandName", "viewCommerceShipmentDetail");
+							rowURL.setParameter("commerceShipmentId", String.valueOf(commerceShipment.getCommerceShipmentId()));
 							%>
 
-							<c:if test="<%= commerceAddress != null %>">
+							<liferay-ui:search-container-column-text
+								cssClass="important table-cell-content"
+								href="<%= rowURL %>"
+								name="shipment-number"
+								property="commerceShipmentId"
+							/>
+
+							<liferay-ui:search-container-column-text
+								cssClass="table-cell-content"
+								name="shipping-address"
+							>
 
 								<%
-								CommerceRegion commerceRegion = commerceAddress.getCommerceRegion();
-
-								String commerceRegionCode = StringPool.BLANK;
-
-								if (commerceRegion != null) {
-									commerceRegionCode = commerceRegion.getCode() + StringPool.SPACE;
-								}
+								CommerceAddress commerceAddress = commerceShipment.fetchCommerceAddress();
 								%>
 
-								<p><%= HtmlUtil.escape(commerceAddress.getStreet1()) %></p>
-								<p><%= HtmlUtil.escape(commerceAddress.getCity() + StringPool.COMMA_AND_SPACE + commerceRegionCode + commerceAddress.getZip()) %></p>
-							</c:if>
-						</liferay-ui:search-container-column-text>
+								<c:if test="<%= commerceAddress != null %>">
 
-						<liferay-ui:search-container-column-text
-							cssClass="table-cell-content"
-							name="carrier-and-tracking-number"
-						>
-							<p><%= HtmlUtil.escape(commerceShipment.getCarrier()) %></p>
-							<p><%= HtmlUtil.escape(commerceShipment.getTrackingNumber()) %></p>
-						</liferay-ui:search-container-column-text>
+									<%
+									CommerceRegion commerceRegion = commerceAddress.getCommerceRegion();
 
-						<liferay-ui:search-container-column-date
-							cssClass="table-cell-content"
-							name="shipping-date"
-							property="shippingDate"
+									String commerceRegionCode = StringPool.BLANK;
+
+									if (commerceRegion != null) {
+										commerceRegionCode = commerceRegion.getCode() + StringPool.SPACE;
+									}
+									%>
+
+									<p><%= HtmlUtil.escape(commerceAddress.getStreet1()) %></p>
+									<p><%= HtmlUtil.escape(commerceAddress.getCity() + StringPool.COMMA_AND_SPACE + commerceRegionCode + commerceAddress.getZip()) %></p>
+								</c:if>
+							</liferay-ui:search-container-column-text>
+
+							<liferay-ui:search-container-column-text
+								cssClass="table-cell-content"
+								name="carrier-and-tracking-number"
+							>
+								<p><%= HtmlUtil.escape(commerceShipment.getCarrier()) %></p>
+								<p><%= HtmlUtil.escape(commerceShipment.getTrackingNumber()) %></p>
+							</liferay-ui:search-container-column-text>
+
+							<liferay-ui:search-container-column-date
+								cssClass="table-cell-content"
+								name="shipping-date"
+								property="shippingDate"
+							/>
+
+							<liferay-ui:search-container-column-date
+								cssClass="table-cell-content"
+								name="expected-delivery-date"
+								property="expectedDate"
+							/>
+
+							<liferay-ui:search-container-column-text
+								name="status"
+								value="<%= commerceShipmentDisplayContext.getCommerceShipmentStatusLabel(commerceShipment.getStatus()) %>"
+							/>
+
+							<liferay-ui:search-container-column-jsp
+								cssClass="entry-action-column"
+								path="/shipment_action.jsp"
+							/>
+						</liferay-ui:search-container-row>
+
+						<liferay-ui:search-iterator
+							displayStyle="<%= commerceShipmentDisplayContext.getDisplayStyle() %>"
+							markupView="lexicon"
 						/>
-
-						<liferay-ui:search-container-column-date
-							cssClass="table-cell-content"
-							name="expected-delivery-date"
-							property="expectedDate"
-						/>
-
-						<liferay-ui:search-container-column-text
-							name="status"
-							value="<%= commerceShipmentDisplayContext.getCommerceShipmentStatusLabel(commerceShipment.getStatus()) %>"
-						/>
-
-						<liferay-ui:search-container-column-jsp
-							cssClass="entry-action-column"
-							path="/shipment_action.jsp"
-						/>
-					</liferay-ui:search-container-row>
-
-					<liferay-ui:search-iterator
-						displayStyle="<%= commerceShipmentDisplayContext.getDisplayStyle() %>"
-						markupView="lexicon"
-						searchContainer="<%= commerceShipmentSearchContainer %>"
-					/>
-				</liferay-ui:search-container>
-			</div>
-		</aui:form>
+					</liferay-ui:search-container>
+				</div>
+			</aui:form>
+		</div>
 	</div>
-</div>
 
-<aui:script>
-	function <portlet:namespace />deleteCommerceShipments() {
-		if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-shipments" />')) {
-			var form = AUI.$(document.<portlet:namespace />fm);
+	<aui:script>
+		function <portlet:namespace />deleteCommerceShipments() {
+			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-shipments" />')) {
+				var form = AUI.$(document.<portlet:namespace />fm);
 
-			form.fm('deleteCommerceShipmentIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+				form.fm('deleteCommerceShipmentIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
 
-			submitForm(form);
+				submitForm(form);
+			}
 		}
-	}
-</aui:script>
+	</aui:script>
+</c:if>
