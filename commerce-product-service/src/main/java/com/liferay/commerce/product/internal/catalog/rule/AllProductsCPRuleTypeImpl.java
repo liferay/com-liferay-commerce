@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.Locale;
@@ -70,6 +71,11 @@ public class AllProductsCPRuleTypeImpl implements CPRuleType {
 	@Override
 	public void postProcessContextBooleanFilter(
 			BooleanFilter booleanFilter, CPRule cpRule)
+		throws PortalException {
+	}
+
+	@Override
+	public void update(CPRule cpRule, ServiceContext serviceContext)
 		throws PortalException {
 	}
 

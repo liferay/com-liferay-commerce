@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
+import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.HashSet;
 import java.util.List;
@@ -121,6 +122,11 @@ public class AssetCategoryCPRuleTypeImpl implements CPRuleType {
 				String.valueOf(cpRuleAssetCategoryRel.getAssetCategoryId()),
 				BooleanClauseOccur.MUST);
 		}
+	}
+
+	@Override
+	public void update(CPRule cpRule, ServiceContext serviceContext)
+		throws PortalException {
 	}
 
 	private Set<AssetCategory> _getAssetCategories(CPDefinition cpDefinition)
