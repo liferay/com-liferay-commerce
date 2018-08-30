@@ -48,6 +48,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -135,6 +136,21 @@ public class CPCatalogRuleDisplayContext {
 
 	public List<CPRuleType> getCPRuleTypes() {
 		return _cpRuleTypeRegistry.getCPRuleTypes();
+	}
+
+	public String getCPRuleTypeSettingsProperty(String property)
+		throws PortalException {
+
+		CPRule cpRule = getCPRule();
+
+		if (cpRule == null) {
+			return null;
+		}
+
+		UnicodeProperties typeSettingsProperties =
+			cpRule.getTypeSettingsProperties();
+
+		return typeSettingsProperties.get(property);
 	}
 
 	public SearchContainer<CPRuleUserSegmentRel>

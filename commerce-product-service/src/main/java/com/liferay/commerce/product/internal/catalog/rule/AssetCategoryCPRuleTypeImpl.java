@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.HashSet;
 import java.util.List;
@@ -116,6 +117,20 @@ public class AssetCategoryCPRuleTypeImpl implements CPRuleType {
 			BooleanFilter booleanFilter, CPRule cpRule)
 		throws PortalException {
 
+		BooleanFilter assetCategoryBooleanFilter = new BooleanFilter();
+
+		BooleanClauseOccur booleanClauseOccur = BooleanClauseOccur.MUST;
+
+		UnicodeProperties typeSettingsProperties =
+			cpRule.getTypeSettingsProperties();
+
+		boolean orSearch = GetterUtil.getBoolean(
+			typeSettingsProperties.get("orSearch"));
+
+		if (orSearch) {
+			booleanClauseOccur = BooleanClauseOccur.SHOULD;
+		}
+
 		List<CPRuleAssetCategoryRel> cpRuleAssetCategoryRels =
 			_cpRuleAssetCategoryRelLocalService.getCPRuleAssetCategoryRels(
 				cpRule.getCPRuleId());
@@ -123,16 +138,28 @@ public class AssetCategoryCPRuleTypeImpl implements CPRuleType {
 		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel :
 				cpRuleAssetCategoryRels) {
 
-			booleanFilter.addTerm(
+			assetCategoryBooleanFilter.addTerm(
 				_FIELD_CP_RULE_ASSET_CATEGORY_IDS,
 				String.valueOf(cpRuleAssetCategoryRel.getAssetCategoryId()),
-				BooleanClauseOccur.MUST);
+				booleanClauseOccur);
 		}
+
+		booleanFilter.add(assetCategoryBooleanFilter, BooleanClauseOccur.MUST);
 	}
 
 	@Override
 	public void update(CPRule cpRule, ServiceContext serviceContext)
 		throws PortalException {
+
+		UnicodeProperties typeSettingsProperties =
+			cpRule.getTypeSettingsProperties();
+
+		boolean orSearch = ParamUtil.getBoolean(
+			serviceContext.getRequest(), "orSearch");
+
+		typeSettingsProperties.put("orSearch", String.valueOf(orSearch));
+
+		cpRule.setTypeSettingsProperties(typeSettingsProperties);
 
 		updateCPRuleAssetCategoryRels(cpRule, serviceContext);
 	}
