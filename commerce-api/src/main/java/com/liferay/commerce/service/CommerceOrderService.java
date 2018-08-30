@@ -169,6 +169,14 @@ public interface CommerceOrderService extends BaseService {
 		long commercePaymentMethodId, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
+		String advanceStatus, CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceOrder updateCommerceOrder(long commerceOrderId,
+		long billingAddressId, long shippingAddressId,
+		long commercePaymentMethodId, long commerceShippingMethodId,
+		String shippingOptionName, String purchaseOrderNumber,
+		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 		String advanceStatus, String externalReferenceCode,
 		CommerceContext commerceContext) throws PortalException;
 
