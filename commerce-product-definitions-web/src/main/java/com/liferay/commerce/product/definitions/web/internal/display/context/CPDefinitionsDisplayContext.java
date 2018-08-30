@@ -354,15 +354,19 @@ public class CPDefinitionsDisplayContext
 			getCPDefinitionId(), null);
 	}
 
-	public boolean hasDeletePermission() throws PortalException {
+	public boolean hasDeletePermission(long cpDefinitionId)
+		throws PortalException {
+
 		return _cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			cpRequestHelper.getPermissionChecker(), cpDefinitionId,
 			ActionKeys.DELETE);
 	}
 
-	public boolean hasEditPermission() throws PortalException {
+	public boolean hasEditPermission(long cpDefinitionId)
+		throws PortalException {
+
 		return _cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			cpRequestHelper.getPermissionChecker(), cpDefinitionId,
 			ActionKeys.UPDATE);
 	}
 
@@ -372,9 +376,11 @@ public class CPDefinitionsDisplayContext
 			cpRequestHelper.getScopeGroupId(), actionId);
 	}
 
-	public boolean hasViewPermission() throws PortalException {
+	public boolean hasViewPermission(long cpDefinitionId)
+		throws PortalException {
+
 		return _cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			cpRequestHelper.getPermissionChecker(), cpDefinitionId,
 			ActionKeys.VIEW);
 	}
 
