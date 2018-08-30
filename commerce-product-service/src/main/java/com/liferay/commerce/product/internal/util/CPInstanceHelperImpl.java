@@ -640,7 +640,10 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			field -> {
 				return String.format(
 					outputMappingStatement, field.getName(), field.getName());
-			}).collect(Collectors.joining(StringPool.SEMICOLON));
+			}
+		).collect(
+			Collectors.joining(StringPool.SEMICOLON)
+		);
 	}
 
 	private DDMForm _getDDMForm(

@@ -68,7 +68,8 @@ public class AddedAnyCommerceDiscountRuleTypeImpl
 		Stream<CommerceOrderItem> stream = commerceOrderItems.stream();
 
 		long[] orderItemDefinitionIds = stream.mapToLong(
-			_getOrderItemToLongFunction()).toArray();
+			_getOrderItemToLongFunction()
+		).toArray();
 
 		String settingsProperty = commerceDiscountRule.getSettingsProperty(
 			commerceDiscountRule.getType());

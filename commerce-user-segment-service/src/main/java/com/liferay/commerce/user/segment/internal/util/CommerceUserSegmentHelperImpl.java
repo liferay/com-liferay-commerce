@@ -126,8 +126,8 @@ public class CommerceUserSegmentHelperImpl
 		Stream<Document> stream = documents.stream();
 
 		return stream.mapToLong(
-			field -> GetterUtil.getLong(field.get(Field.ENTRY_CLASS_PK))).
-				toArray();
+			field -> GetterUtil.getLong(field.get(Field.ENTRY_CLASS_PK))
+		).toArray();
 	}
 
 	@Reference

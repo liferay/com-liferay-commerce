@@ -424,7 +424,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		_commerceCurrencyLocalService.importDefaultValues(serviceContext);
 		_commerceUserSegmentEntryLocalService.
 			importSystemCommerceUserSegmentEntries(serviceContext);
-		
+
 		_cpMeasurementUnitLocalService.importDefaultValues(serviceContext);
 
 		_cpFileImporter.updateLookAndFeel(

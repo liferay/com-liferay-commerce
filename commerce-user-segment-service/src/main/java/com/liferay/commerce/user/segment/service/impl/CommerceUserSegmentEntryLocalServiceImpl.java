@@ -249,8 +249,8 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 		Stream<Document> stream = documents.stream();
 
 		commerceUserSegmentEntryIds = stream.mapToLong(
-			field -> GetterUtil.getLong(field.get(Field.ENTRY_CLASS_PK))).
-				toArray();
+			field -> GetterUtil.getLong(field.get(Field.ENTRY_CLASS_PK))
+		).toArray();
 
 		portalCache.put(cacheKey + "_calculated", true);
 		portalCache.put(cacheKey, commerceUserSegmentEntryIds);

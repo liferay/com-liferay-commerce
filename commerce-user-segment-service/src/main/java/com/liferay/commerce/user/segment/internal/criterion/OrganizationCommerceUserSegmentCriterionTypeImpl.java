@@ -185,7 +185,9 @@ public class OrganizationCommerceUserSegmentCriterionTypeImpl
 
 		Stream<Long> stream = userClassPKsList.stream();
 
-		return stream.mapToLong(field -> field.longValue()).toArray();
+		return stream.mapToLong(
+			field -> field.longValue()
+		).toArray();
 	}
 
 	protected void organizationPostProcessContextBooleanFilter(

@@ -76,7 +76,8 @@ public class ApplyToCategoriesCommerceDiscountTargetImpl
 		Stream<CommerceDiscountRel> stream = commerceDiscountRels.stream();
 
 		long[] assetCategoryIds = stream.mapToLong(
-			CommerceDiscountRel::getClassPK).toArray();
+			CommerceDiscountRel::getClassPK
+		).toArray();
 
 		document.addKeyword("target_asset_category_ids", assetCategoryIds);
 	}
@@ -137,7 +138,9 @@ public class ApplyToCategoriesCommerceDiscountTargetImpl
 
 			Stream<AssetCategory> stream = assetCategories.stream();
 
-			return stream.mapToLong(AssetCategory::getCategoryId).toArray();
+			return stream.mapToLong(
+				AssetCategory::getCategoryId
+			).toArray();
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
