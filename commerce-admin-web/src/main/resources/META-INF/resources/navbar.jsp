@@ -19,7 +19,7 @@
 <%
 CommerceAdminModuleRegistry commerceAdminModuleRegistry = (CommerceAdminModuleRegistry)request.getAttribute(CommerceAdminWebKeys.COMMERCE_ADMIN_MODULE_REGISTRY);
 
-NavigableMap<String, CommerceAdminModule> commerceAdminModules = commerceAdminModuleRegistry.getCommerceAdminModules();
+NavigableMap<String, CommerceAdminModule> commerceAdminModules = commerceAdminModuleRegistry.getCommerceAdminModules(scopeGroupId);
 
 String selectedCommerceAdminModuleKey = ParamUtil.getString(request, "commerceAdminModuleKey", commerceAdminModules.firstKey());
 
@@ -28,10 +28,6 @@ List<NavigationItem> navigationItems = new ArrayList<>();
 for (Map.Entry<String, CommerceAdminModule> entry : commerceAdminModules.entrySet()) {
 	String commerceAdminModuleKey = entry.getKey();
 	CommerceAdminModule commerceAdminModule = entry.getValue();
-
-	if (!commerceAdminModule.isVisible(scopeGroupId)) {
-		continue;
-	}
 
 	PortletURL commerceAdminModuleURL = renderResponse.createRenderURL();
 
