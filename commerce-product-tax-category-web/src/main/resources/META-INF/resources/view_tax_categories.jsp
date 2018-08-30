@@ -18,36 +18,34 @@
 
 <%
 CPTaxCategoryDisplayContext cpTaxCategoryDisplayContext = (CPTaxCategoryDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
-boolean hasManageCPTaxCategoriesPermission = cpTaxCategoryDisplayContext.hasManageCPTaxCategoriesPermission();
 %>
 
-<liferay-frontend:management-bar
-	includeCheckBox="<%= true %>"
-	searchContainerId="cpTaxCategories"
->
-	<liferay-frontend:management-bar-filters>
-		<liferay-frontend:management-bar-navigation
-			navigationKeys='<%= new String[] {"all"} %>'
-			portletURL="<%= cpTaxCategoryDisplayContext.getPortletURL() %>"
-		/>
+<c:if test="<%= cpTaxCategoryDisplayContext.hasManageCPTaxCategoriesPermission() %>">
+	<liferay-frontend:management-bar
+		includeCheckBox="<%= true %>"
+		searchContainerId="cpTaxCategories"
+	>
+		<liferay-frontend:management-bar-filters>
+			<liferay-frontend:management-bar-navigation
+				navigationKeys='<%= new String[] {"all"} %>'
+				portletURL="<%= cpTaxCategoryDisplayContext.getPortletURL() %>"
+			/>
 
-		<liferay-frontend:management-bar-sort
-			orderByCol="<%= cpTaxCategoryDisplayContext.getOrderByCol() %>"
-			orderByType="<%= cpTaxCategoryDisplayContext.getOrderByType() %>"
-			orderColumns='<%= new String[] {"create-date"} %>'
-			portletURL="<%= cpTaxCategoryDisplayContext.getPortletURL() %>"
-		/>
-	</liferay-frontend:management-bar-filters>
+			<liferay-frontend:management-bar-sort
+				orderByCol="<%= cpTaxCategoryDisplayContext.getOrderByCol() %>"
+				orderByType="<%= cpTaxCategoryDisplayContext.getOrderByType() %>"
+				orderColumns='<%= new String[] {"create-date"} %>'
+				portletURL="<%= cpTaxCategoryDisplayContext.getPortletURL() %>"
+			/>
+		</liferay-frontend:management-bar-filters>
 
-	<liferay-frontend:management-bar-buttons>
-		<liferay-frontend:management-bar-display-buttons
-			displayViews='<%= new String[] {"list"} %>'
-			portletURL="<%= cpTaxCategoryDisplayContext.getPortletURL() %>"
-			selectedDisplayStyle="list"
-		/>
+		<liferay-frontend:management-bar-buttons>
+			<liferay-frontend:management-bar-display-buttons
+				displayViews='<%= new String[] {"list"} %>'
+				portletURL="<%= cpTaxCategoryDisplayContext.getPortletURL() %>"
+				selectedDisplayStyle="list"
+			/>
 
-		<c:if test="<%= hasManageCPTaxCategoriesPermission %>">
 			<portlet:renderURL var="addCPTaxCategoryURL">
 				<portlet:param name="mvcRenderCommandName" value="editCPTaxCategory" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -61,10 +59,8 @@ boolean hasManageCPTaxCategoriesPermission = cpTaxCategoryDisplayContext.hasMana
 					url="<%= addCPTaxCategoryURL.toString() %>"
 				/>
 			</liferay-frontend:add-menu>
-		</c:if>
-	</liferay-frontend:management-bar-buttons>
+		</liferay-frontend:management-bar-buttons>
 
-	<c:if test="<%= hasManageCPTaxCategoriesPermission %>">
 		<liferay-frontend:management-bar-action-buttons>
 			<liferay-frontend:management-bar-button
 				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCPTaxCategories();" %>'
@@ -72,75 +68,75 @@ boolean hasManageCPTaxCategoriesPermission = cpTaxCategoryDisplayContext.hasMana
 				label="delete"
 			/>
 		</liferay-frontend:management-bar-action-buttons>
-	</c:if>
-</liferay-frontend:management-bar>
+	</liferay-frontend:management-bar>
 
-<div class="container-fluid-1280">
-	<portlet:actionURL name="editCPTaxCategory" var="editCPTaxCategoryActionURL" />
+	<div class="container-fluid-1280">
+		<portlet:actionURL name="editCPTaxCategory" var="editCPTaxCategoryActionURL" />
 
-	<aui:form action="<%= editCPTaxCategoryActionURL %>" method="post" name="fm">
-		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.DELETE %>" />
-		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-		<aui:input name="deleteCPTaxCategoryIds" type="hidden" />
+		<aui:form action="<%= editCPTaxCategoryActionURL %>" method="post" name="fm">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.DELETE %>" />
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="deleteCPTaxCategoryIds" type="hidden" />
 
-		<liferay-ui:search-container
-			id="cpTaxCategories"
-			searchContainer="<%= cpTaxCategoryDisplayContext.getSearchContainer() %>"
-		>
-			<liferay-ui:search-container-row
-				className="com.liferay.commerce.product.model.CPTaxCategory"
-				keyProperty="CPTaxCategoryId"
-				modelVar="cpTaxCategory"
+			<liferay-ui:search-container
+				id="cpTaxCategories"
+				searchContainer="<%= cpTaxCategoryDisplayContext.getSearchContainer() %>"
 			>
+				<liferay-ui:search-container-row
+					className="com.liferay.commerce.product.model.CPTaxCategory"
+					keyProperty="CPTaxCategoryId"
+					modelVar="cpTaxCategory"
+				>
 
-				<%
-				PortletURL rowURL = renderResponse.createRenderURL();
+					<%
+					PortletURL rowURL = renderResponse.createRenderURL();
 
-				rowURL.setParameter("mvcRenderCommandName", "editCPTaxCategory");
-				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("cpTaxCategoryId", String.valueOf(cpTaxCategory.getCPTaxCategoryId()));
-				%>
+					rowURL.setParameter("mvcRenderCommandName", "editCPTaxCategory");
+					rowURL.setParameter("redirect", currentURL);
+					rowURL.setParameter("cpTaxCategoryId", String.valueOf(cpTaxCategory.getCPTaxCategoryId()));
+					%>
 
-				<liferay-ui:search-container-column-text
-					cssClass="important table-cell-content"
-					href="<%= rowURL %>"
-					name="name"
-					value="<%= HtmlUtil.escape(cpTaxCategory.getName(languageId)) %>"
+					<liferay-ui:search-container-column-text
+						cssClass="important table-cell-content"
+						href="<%= rowURL %>"
+						name="name"
+						value="<%= HtmlUtil.escape(cpTaxCategory.getName(languageId)) %>"
+					/>
+
+					<liferay-ui:search-container-column-text
+						cssClass="table-cell-content"
+						name="description"
+						value="<%= HtmlUtil.escape(cpTaxCategory.getDescription(languageId)) %>"
+					/>
+
+					<liferay-ui:search-container-column-date
+						cssClass="table-cell-content"
+						name="create-date"
+						property="createDate"
+					/>
+
+					<liferay-ui:search-container-column-jsp
+						cssClass="entry-action-column"
+						path="/tax_category_action.jsp"
+					/>
+				</liferay-ui:search-container-row>
+
+				<liferay-ui:search-iterator
+					markupView="lexicon"
 				/>
+			</liferay-ui:search-container>
+		</aui:form>
+	</div>
 
-				<liferay-ui:search-container-column-text
-					cssClass="table-cell-content"
-					name="description"
-					value="<%= HtmlUtil.escape(cpTaxCategory.getDescription(languageId)) %>"
-				/>
+	<aui:script>
+		function <portlet:namespace />deleteCPTaxCategories() {
+			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-tax-categories" />')) {
+				var form = AUI.$(document.<portlet:namespace />fm);
 
-				<liferay-ui:search-container-column-date
-					cssClass="table-cell-content"
-					name="create-date"
-					property="createDate"
-				/>
+				form.fm('deleteCPTaxCategoryIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
 
-				<liferay-ui:search-container-column-jsp
-					cssClass="entry-action-column"
-					path="/tax_category_action.jsp"
-				/>
-			</liferay-ui:search-container-row>
-
-			<liferay-ui:search-iterator
-				markupView="lexicon"
-			/>
-		</liferay-ui:search-container>
-	</aui:form>
-</div>
-
-<aui:script>
-	function <portlet:namespace />deleteCPTaxCategories() {
-		if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-tax-categories" />')) {
-			var form = AUI.$(document.<portlet:namespace />fm);
-
-			form.fm('deleteCPTaxCategoryIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-
-			submitForm(form);
+				submitForm(form);
+			}
 		}
-	}
-</aui:script>
+	</aui:script>
+</c:if>
