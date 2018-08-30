@@ -24,34 +24,36 @@ ExchangeRateProviderGroupServiceConfiguration exchangeRateProviderGroupServiceCo
 boolean autoUpdate = exchangeRateProviderGroupServiceConfiguration.autoUpdate();
 %>
 
-<div class="container-fluid-1280" id="<portlet:namespace />exchangeRateContainer">
-	<portlet:actionURL name="editExchangeRate" var="editExchangeRateActionURL" />
+<c:if test="<%= commerceCurrenciesDisplayContext.hasManageCommerceCurrencyPermission() %>">
+	<div class="container-fluid-1280" id="<portlet:namespace />exchangeRateContainer">
+		<portlet:actionURL name="editExchangeRate" var="editExchangeRateActionURL" />
 
-	<aui:form action="<%= editExchangeRateActionURL %>" method="post" name="fm">
-		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-		<aui:input name="exchangeRateConfiguration--groupId--" type="hidden" value="<%= scopeGroupId %>" />
+		<aui:form action="<%= editExchangeRateActionURL %>" method="post" name="fm">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="exchangeRateConfiguration--groupId--" type="hidden" value="<%= scopeGroupId %>" />
 
-		<aui:fieldset-group markupView="lexicon">
-			<aui:fieldset>
-				<aui:select id="exchangeRateConfiguration--defaultExchangeRateProviderKey--" label="exchange-rate-provider" name="exchangeRateConfiguration--defaultExchangeRateProviderKey--" showEmptyOption="<%= true %>">
+			<aui:fieldset-group markupView="lexicon">
+				<aui:fieldset>
+					<aui:select id="exchangeRateConfiguration--defaultExchangeRateProviderKey--" label="exchange-rate-provider" name="exchangeRateConfiguration--defaultExchangeRateProviderKey--" showEmptyOption="<%= true %>">
 
-					<%
-					for (String exchangeRateProviderKey : commerceCurrenciesDisplayContext.getExchangeRateProviderKeys()) {
-					%>
+						<%
+						for (String exchangeRateProviderKey : commerceCurrenciesDisplayContext.getExchangeRateProviderKeys()) {
+						%>
 
-						<aui:option label="<%= LanguageUtil.get(request, exchangeRateProviderKey) %>" selected="<%= exchangeRateProviderKey.equals(exchangeRateProviderGroupServiceConfiguration.defaultExchangeRateProviderKey()) %>" value="<%= exchangeRateProviderKey %>" />
+							<aui:option label="<%= LanguageUtil.get(request, exchangeRateProviderKey) %>" selected="<%= exchangeRateProviderKey.equals(exchangeRateProviderGroupServiceConfiguration.defaultExchangeRateProviderKey()) %>" value="<%= exchangeRateProviderKey %>" />
 
-					<%
-					}
-					%>
+						<%
+						}
+						%>
 
-				</aui:select>
+					</aui:select>
 
-				<aui:input id="exchangeRateConfiguration--autoUpdate--" name="exchangeRateConfiguration--autoUpdate--" type="toggle-switch" value="<%= autoUpdate %>" />
-			</aui:fieldset>
-		</aui:fieldset-group>
+					<aui:input id="exchangeRateConfiguration--autoUpdate--" name="exchangeRateConfiguration--autoUpdate--" type="toggle-switch" value="<%= autoUpdate %>" />
+				</aui:fieldset>
+			</aui:fieldset-group>
 
-		<aui:button name="saveButton" type="submit" value="save" />
-	</aui:form>
-</div>
+			<aui:button name="saveButton" type="submit" value="save" />
+		</aui:form>
+	</div>
+</c:if>
