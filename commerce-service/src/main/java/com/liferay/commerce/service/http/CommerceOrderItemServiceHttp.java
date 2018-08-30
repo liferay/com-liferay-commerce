@@ -530,7 +530,7 @@ public class CommerceOrderItemServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderItemServiceUtil.class,
 					"upsertCommerceOrderItem",
-					_upsertCommerceOrderItemParameterTypes13);
+					_upsertCommerceOrderItemParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceOrderId, cpInstanceId, quantity, shippedQuantity,
@@ -603,7 +603,7 @@ public class CommerceOrderItemServiceHttp {
 			long.class, int.class, String.class,
 			com.liferay.commerce.context.CommerceContext.class
 		};
-	private static final Class<?>[] _upsertCommerceOrderItemParameterTypes13 = new Class[] {
+	private static final Class<?>[] _upsertCommerceOrderItemParameterTypes14 = new Class[] {
 			long.class, long.class, int.class, int.class, String.class,
 			com.liferay.commerce.context.CommerceContext.class,
 			com.liferay.portal.kernel.service.ServiceContext.class

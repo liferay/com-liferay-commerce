@@ -468,6 +468,30 @@ public class CommerceOrderServiceSoap {
 		String shippingOptionName, String purchaseOrderNumber,
 		java.math.BigDecimal subtotal, java.math.BigDecimal shippingAmount,
 		java.math.BigDecimal total, String advanceStatus,
+		com.liferay.commerce.context.CommerceContext commerceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.updateCommerceOrder(commerceOrderId,
+					billingAddressId, shippingAddressId,
+					commercePaymentMethodId, commerceShippingMethodId,
+					shippingOptionName, purchaseOrderNumber, subtotal,
+					shippingAmount, total, advanceStatus, commerceContext);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderSoap updateCommerceOrder(
+		long commerceOrderId, long billingAddressId, long shippingAddressId,
+		long commercePaymentMethodId, long commerceShippingMethodId,
+		String shippingOptionName, String purchaseOrderNumber,
+		java.math.BigDecimal subtotal, java.math.BigDecimal shippingAmount,
+		java.math.BigDecimal total, String advanceStatus,
 		String externalReferenceCode,
 		com.liferay.commerce.context.CommerceContext commerceContext)
 		throws RemoteException {
