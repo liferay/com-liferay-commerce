@@ -14,15 +14,19 @@
 
 package com.liferay.commerce.user.segment.web.internal.criterion;
 
+import com.liferay.commerce.user.segment.constants.CommerceUserSegmentConstants;
 import com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeJSPContributor;
 import com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeJSPContributorRegistry;
 import com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeRegistry;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterionConstants;
+import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.commerce.user.segment.web.internal.display.context.RoleCommerceUserSegmentCriterionTypeDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.RoleLocalService;
 
 import javax.servlet.ServletContext;
@@ -56,8 +60,10 @@ public class RoleCommerceUserSegmentCriterionTypeJSPContributor
 					_commerceUserSegmentCriterionService,
 					_commerceUserSegmentCriterionTypeJSPContributorRegistry,
 					_commerceUserSegmentCriterionTypeRegistry,
+					_commerceUserSegmentEntryModelResourcePermission,
 					_commerceUserSegmentEntryService, httpServletRequest,
-					_itemSelector, _roleLocalService);
+					_portletResourcePermission, _itemSelector,
+					_roleLocalService);
 
 		httpServletRequest.setAttribute(
 			"role.jsp-portletDisplayContext",
@@ -80,6 +86,12 @@ public class RoleCommerceUserSegmentCriterionTypeJSPContributor
 	private CommerceUserSegmentCriterionTypeRegistry
 		_commerceUserSegmentCriterionTypeRegistry;
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry)"
+	)
+	private ModelResourcePermission<CommerceUserSegmentEntry>
+		_commerceUserSegmentEntryModelResourcePermission;
+
 	@Reference
 	private CommerceUserSegmentEntryService _commerceUserSegmentEntryService;
 
@@ -88,6 +100,11 @@ public class RoleCommerceUserSegmentCriterionTypeJSPContributor
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference(
+		target = "(resource.name=" + CommerceUserSegmentConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference
 	private RoleLocalService _roleLocalService;

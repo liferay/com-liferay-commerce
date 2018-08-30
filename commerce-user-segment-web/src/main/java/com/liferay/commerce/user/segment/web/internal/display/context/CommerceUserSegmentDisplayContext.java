@@ -32,6 +32,8 @@ import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
@@ -54,8 +56,11 @@ public class CommerceUserSegmentDisplayContext {
 			commerceUserSegmentCriterionTypeJSPContributorRegistry,
 		CommerceUserSegmentCriterionTypeRegistry
 			commerceUserSegmentCriterionTypeRegistry,
+		ModelResourcePermission<CommerceUserSegmentEntry>
+			commerceUserSegmentEntryModelResourcePermission,
 		CommerceUserSegmentEntryService commerceUserSegmentEntryService,
-		HttpServletRequest httpServletRequest) {
+		HttpServletRequest httpServletRequest,
+		PortletResourcePermission portletResourcePermission) {
 
 		_commerceUserSegmentCriterionService =
 			commerceUserSegmentCriterionService;
@@ -63,7 +68,10 @@ public class CommerceUserSegmentDisplayContext {
 			commerceUserSegmentCriterionTypeJSPContributorRegistry;
 		_commerceUserSegmentCriterionTypeRegistry =
 			commerceUserSegmentCriterionTypeRegistry;
+		_commerceUserSegmentEntryModelResourcePermission =
+			commerceUserSegmentEntryModelResourcePermission;
 		_commerceUserSegmentEntryService = commerceUserSegmentEntryService;
+		_portletResourcePermission = portletResourcePermission;
 
 		commerceUserSegmentRequestHelper = new CommerceUserSegmentRequestHelper(
 			httpServletRequest);
@@ -333,6 +341,21 @@ public class CommerceUserSegmentDisplayContext {
 		return _searchContainer;
 	}
 
+	public boolean hasPermission(
+			long commerceUserSegmentEntryId, String actionId)
+		throws PortalException {
+
+		return _commerceUserSegmentEntryModelResourcePermission.contains(
+			commerceUserSegmentRequestHelper.getPermissionChecker(),
+			commerceUserSegmentEntryId, actionId);
+	}
+
+	public boolean hasPermission(String actionId) {
+		return _portletResourcePermission.contains(
+			commerceUserSegmentRequestHelper.getPermissionChecker(),
+			commerceUserSegmentRequestHelper.getScopeGroupId(), actionId);
+	}
+
 	protected String getKeywords() {
 		if (Validator.isNotNull(_keywords)) {
 			return _keywords;
@@ -400,10 +423,13 @@ public class CommerceUserSegmentDisplayContext {
 	private final CommerceUserSegmentCriterionTypeRegistry
 		_commerceUserSegmentCriterionTypeRegistry;
 	private CommerceUserSegmentEntry _commerceUserSegmentEntry;
+	private final ModelResourcePermission<CommerceUserSegmentEntry>
+		_commerceUserSegmentEntryModelResourcePermission;
 	private final CommerceUserSegmentEntryService
 		_commerceUserSegmentEntryService;
 	private String _keywords;
 	private final PortalPreferences _portalPreferences;
+	private final PortletResourcePermission _portletResourcePermission;
 	private SearchContainer<CommerceUserSegmentEntry> _searchContainer;
 
 }

@@ -34,50 +34,52 @@ SearchContainer<CommerceUserSegmentEntry> commerceUserSegmentEntrySearchContaine
 			selectedDisplayStyle="list"
 		/>
 
-		<liferay-portlet:actionURL name="editCommerceUserSegmentEntry" var="addCommerceUserSegmentEntryURL">
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-		</liferay-portlet:actionURL>
+		<c:if test="<%= commerceUserSegmentDisplayContext.hasPermission(CommerceUserSegmentActionKeys.ADD_COMMERCE_USER_SEGMENTATION_ENTRY) %>">
+			<liferay-portlet:actionURL name="editCommerceUserSegmentEntry" var="addCommerceUserSegmentEntryURL">
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+			</liferay-portlet:actionURL>
 
-		<liferay-frontend:add-menu
-			inline="<%= true %>"
-		>
-			<liferay-frontend:add-menu-item
-				id="addCommerceUserSegmentEntryMenuItem"
-				title='<%= LanguageUtil.get(request, "add-entry") %>'
-				url="<%= addCommerceUserSegmentEntryURL.toString() %>"
-			/>
-		</liferay-frontend:add-menu>
+			<liferay-frontend:add-menu
+				inline="<%= true %>"
+			>
+				<liferay-frontend:add-menu-item
+					id="addCommerceUserSegmentEntryMenuItem"
+					title='<%= LanguageUtil.get(request, "add-entry") %>'
+					url="<%= addCommerceUserSegmentEntryURL.toString() %>"
+				/>
+			</liferay-frontend:add-menu>
 
-		<aui:script require="metal-dom/src/all/dom as dom,frontend-js-web/liferay/modal/commands/OpenSimpleInputModal.es as modalCommands">
-			function handleAddCommerceUserSegmentEntryMenuItemClick(event) {
-				event.preventDefault();
+			<aui:script require="metal-dom/src/all/dom as dom,frontend-js-web/liferay/modal/commands/OpenSimpleInputModal.es as modalCommands">
+				function handleAddCommerceUserSegmentEntryMenuItemClick(event) {
+					event.preventDefault();
 
-				modalCommands.openSimpleInputModal(
-					{
-						dialogTitle: '<liferay-ui:message key="add-entry" />',
-						formSubmitURL: '<%= addCommerceUserSegmentEntryURL %>',
-						mainFieldLabel: '<liferay-ui:message key="name" />',
-						mainFieldName: 'name',
-						mainFieldPlaceholder: '<liferay-ui:message key="name" />',
-						namespace: '<portlet:namespace />',
-						spritemap: '<%= themeDisplay.getPathThemeImages() %>/lexicon/icons.svg'
-					}
-				);
-			}
+					modalCommands.openSimpleInputModal(
+						{
+							dialogTitle: '<liferay-ui:message key="add-entry" />',
+							formSubmitURL: '<%= addCommerceUserSegmentEntryURL %>',
+							mainFieldLabel: '<liferay-ui:message key="name" />',
+							mainFieldName: 'name',
+							mainFieldPlaceholder: '<liferay-ui:message key="name" />',
+							namespace: '<portlet:namespace />',
+							spritemap: '<%= themeDisplay.getPathThemeImages() %>/lexicon/icons.svg'
+						}
+					);
+				}
 
-			function handleDestroyPortlet () {
-				addCommerceUserSegmentEntryMenuItem.removeEventListener('click', handleAddCommerceUserSegmentEntryMenuItemClick);
+				function handleDestroyPortlet () {
+					addCommerceUserSegmentEntryMenuItem.removeEventListener('click', handleAddCommerceUserSegmentEntryMenuItemClick);
 
-				Liferay.detach('destroyPortlet', handleDestroyPortlet);
-			}
+					Liferay.detach('destroyPortlet', handleDestroyPortlet);
+				}
 
-			var addCommerceUserSegmentEntryMenuItem = document.getElementById('<portlet:namespace />addCommerceUserSegmentEntryMenuItem');
+				var addCommerceUserSegmentEntryMenuItem = document.getElementById('<portlet:namespace />addCommerceUserSegmentEntryMenuItem');
 
-			addCommerceUserSegmentEntryMenuItem.addEventListener('click', handleAddCommerceUserSegmentEntryMenuItemClick);
+				addCommerceUserSegmentEntryMenuItem.addEventListener('click', handleAddCommerceUserSegmentEntryMenuItemClick);
 
-			Liferay.on('destroyPortlet', handleDestroyPortlet);
-		</aui:script>
+				Liferay.on('destroyPortlet', handleDestroyPortlet);
+			</aui:script>
+		</c:if>
 	</liferay-frontend:management-bar-buttons>
 
 	<liferay-frontend:management-bar-filters>

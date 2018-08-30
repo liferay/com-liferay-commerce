@@ -17,6 +17,7 @@ package com.liferay.commerce.user.segment.web.internal.display.context;
 import com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeJSPContributorRegistry;
 import com.liferay.commerce.user.segment.criterion.CommerceUserSegmentCriterionTypeRegistry;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion;
+import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionService;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.item.selector.ItemSelector;
@@ -26,6 +27,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.UserGroupLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -52,15 +55,21 @@ public class UserGroupCommerceUserSegmentCriterionTypeDisplayContext
 			commerceUserSegmentCriterionTypeJSPContributorRegistry,
 		CommerceUserSegmentCriterionTypeRegistry
 			commerceUserSegmentCriterionTypeRegistry,
+		ModelResourcePermission<CommerceUserSegmentEntry>
+			commerceUserSegmentEntryModelResourcePermission,
 		CommerceUserSegmentEntryService commerceUserSegmentEntryService,
-		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
+		HttpServletRequest httpServletRequest,
+		PortletResourcePermission portletResourcePermission,
+		ItemSelector itemSelector,
 		UserGroupLocalService userGroupLocalService) {
 
 		super(
 			commerceUserSegmentCriterionService,
 			commerceUserSegmentCriterionTypeJSPContributorRegistry,
 			commerceUserSegmentCriterionTypeRegistry,
-			commerceUserSegmentEntryService, httpServletRequest);
+			commerceUserSegmentEntryModelResourcePermission,
+			commerceUserSegmentEntryService, httpServletRequest,
+			portletResourcePermission);
 
 		_itemSelector = itemSelector;
 		_userGroupLocalService = userGroupLocalService;
