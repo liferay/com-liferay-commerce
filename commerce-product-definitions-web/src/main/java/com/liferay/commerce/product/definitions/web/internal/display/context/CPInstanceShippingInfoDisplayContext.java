@@ -25,6 +25,7 @@ import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -44,13 +45,14 @@ public class CPInstanceShippingInfoDisplayContext
 			CPDefinitionOptionRelService cpDefinitionOptionRelService,
 			CPInstanceService cpInstanceService,
 			CPInstanceHelper cpInstanceHelper,
+			PortletResourcePermission portletResourcePermission,
 			CPMeasurementUnitLocalService cpMeasurementUnitLocalService)
 		throws PortalException {
 
 		super(
 			actionHelper, httpServletRequest, commercePriceFormatter,
 			cpDefinitionModelResourcePermission, cpDefinitionOptionRelService,
-			cpInstanceService, cpInstanceHelper);
+			cpInstanceService, cpInstanceHelper, portletResourcePermission);
 
 		_cpMeasurementUnitLocalService = cpMeasurementUnitLocalService;
 	}

@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.kernel.servlet.taglib.DynamicIncludeUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -72,7 +73,8 @@ public class CPInstanceDisplayContext
 				cpDefinitionModelResourcePermission,
 			CPDefinitionOptionRelService cpDefinitionOptionRelService,
 			CPInstanceService cpInstanceService,
-			CPInstanceHelper cpInstanceHelper)
+			CPInstanceHelper cpInstanceHelper,
+			PortletResourcePermission portletResourcePermission)
 		throws PortalException {
 
 		super(
@@ -86,6 +88,7 @@ public class CPInstanceDisplayContext
 		_cpDefinitionOptionRelService = cpDefinitionOptionRelService;
 		_cpInstanceService = cpInstanceService;
 		_cpInstanceHelper = cpInstanceHelper;
+		_portletResourcePermission = portletResourcePermission;
 	}
 
 	public Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
@@ -332,6 +335,12 @@ public class CPInstanceDisplayContext
 			ActionKeys.UPDATE);
 	}
 
+	public boolean hasPermission(String actionId) {
+		return _portletResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(),
+			cpRequestHelper.getScopeGroupId(), actionId);
+	}
+
 	public boolean hasViewPermission() throws PortalException {
 		return cpDefinitionModelResourcePermission.contains(
 			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
@@ -357,5 +366,6 @@ public class CPInstanceDisplayContext
 	private CPInstance _cpInstance;
 	private final CPInstanceHelper _cpInstanceHelper;
 	private final CPInstanceService _cpInstanceService;
+	private final PortletResourcePermission _portletResourcePermission;
 
 }

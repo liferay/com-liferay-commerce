@@ -51,7 +51,7 @@ else {
 		/>
 	</c:if>
 
-	<c:if test="<%= cpDefinition.isApproved() && cpDefinitionsDisplayContext.hasViewPermission() %>">
+	<c:if test="<%= cpDefinition.isApproved() && cpDefinitionsDisplayContext.hasViewPermission(cpDefinition.getCPDefinitionId()) %>">
 
 		<%
 		String productURL = cpDefinitionsDisplayContext.getProductURL(cpDefinition);
@@ -65,7 +65,7 @@ else {
 		/>
 	</c:if>
 
-	<c:if test="<%= cpDefinitionsDisplayContext.hasDeletePermission() %>">
+	<c:if test="<%= cpDefinitionsDisplayContext.hasDeletePermission(cpDefinition.getCPDefinitionId()) %>">
 		<portlet:actionURL name="editProductDefinition" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= TrashUtil.isTrashEnabled(scopeGroupId) ? Constants.MOVE_TO_TRASH : Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
