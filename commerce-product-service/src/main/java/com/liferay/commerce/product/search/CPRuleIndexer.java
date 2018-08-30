@@ -150,7 +150,8 @@ public class CPRuleIndexer extends BaseIndexer<CPRule> {
 		Stream<CPRuleUserSegmentRel> stream = cpRuleUserSegmentRels.stream();
 
 		long[] commerceUserSegmentEntryIds = stream.mapToLong(
-			CPRuleUserSegmentRel::getCommerceUserSegmentEntryId).toArray();
+			CPRuleUserSegmentRel::getCommerceUserSegmentEntryId
+		).toArray();
 
 		document.addNumber(
 			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);

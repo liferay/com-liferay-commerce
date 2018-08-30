@@ -342,7 +342,9 @@ public class CPCatalogRuleDisplayContext {
 
 		Stream<Long> stream = commerceUserSegmentEntryIdsList.stream();
 
-		return stream.mapToLong(l -> l).toArray();
+		return stream.mapToLong(
+			l -> l
+		).toArray();
 	}
 
 	protected List<CPRuleUserSegmentRel> getCPRuleUserSegmentRels()

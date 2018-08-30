@@ -293,8 +293,8 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 			commerceDiscountUserSegmentRels.stream();
 
 		long[] commerceUserSegmentEntryIds = stream.mapToLong(
-			CommerceDiscountUserSegmentRel::getCommerceUserSegmentEntryId).
-				toArray();
+			CommerceDiscountUserSegmentRel::getCommerceUserSegmentEntryId
+		).toArray();
 
 		document.addNumber(
 			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);

@@ -66,7 +66,8 @@ public class ApplyToProductCommerceDiscountTargetImpl
 		Stream<CommerceDiscountRel> stream = commerceDiscountRels.stream();
 
 		long[] cpDefinitionIds = stream.mapToLong(
-			CommerceDiscountRel::getClassPK).toArray();
+			CommerceDiscountRel::getClassPK
+		).toArray();
 
 		document.addKeyword("target_product_ids", cpDefinitionIds);
 	}

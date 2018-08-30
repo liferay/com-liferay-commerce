@@ -180,7 +180,9 @@ public class CommerceDiscountRelDisplayContext
 
 		Stream<Long> stream = cpDefinitionIdsList.stream();
 
-		return stream.mapToLong(l -> l).toArray();
+		return stream.mapToLong(
+			l -> l
+		).toArray();
 	}
 
 	protected List<CommerceDiscountRel> getCommerceDiscountRels()

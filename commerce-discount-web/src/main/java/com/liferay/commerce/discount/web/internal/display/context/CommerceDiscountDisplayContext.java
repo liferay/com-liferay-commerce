@@ -339,7 +339,9 @@ public class CommerceDiscountDisplayContext {
 
 		Stream<Long> stream = commerceUserSegmentEntryIdsList.stream();
 
-		return stream.mapToLong(l -> l).toArray();
+		return stream.mapToLong(
+			l -> l
+		).toArray();
 	}
 
 	protected String getKeywords() {

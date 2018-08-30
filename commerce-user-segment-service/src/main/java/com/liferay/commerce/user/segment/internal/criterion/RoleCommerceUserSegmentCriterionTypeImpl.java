@@ -208,7 +208,9 @@ public class RoleCommerceUserSegmentCriterionTypeImpl
 
 		Stream<UserGroupRole> stream = userGroupRoles.stream();
 
-		long[] roleIds = stream.mapToLong(UserGroupRole::getRoleId).toArray();
+		long[] roleIds = stream.mapToLong(
+			UserGroupRole::getRoleId
+		).toArray();
 
 		return ArrayUtil.append(roleIds, user.getRoleIds());
 	}

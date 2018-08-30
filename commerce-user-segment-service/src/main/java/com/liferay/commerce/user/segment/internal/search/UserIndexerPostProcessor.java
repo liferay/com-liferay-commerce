@@ -103,7 +103,8 @@ public class UserIndexerPostProcessor extends BaseIndexerPostProcessor {
 			Stream<UserGroupRole> stream = userGroupRoles.stream();
 
 			long[] roleIds = stream.mapToLong(
-				UserGroupRole::getRoleId).toArray();
+				UserGroupRole::getRoleId
+			).toArray();
 
 			document.addNumber(
 				"organization_" + organization.getOrganizationId() + "_roleIds",
