@@ -28,6 +28,12 @@ public class CommerceActionKeys {
 	public static final String MANAGE_COMMERCE_COUNTRIES =
 		"MANAGE_COMMERCE_COUNTRIES";
 
+	public static final String MANAGE_COMMERCE_HEALTH_STATUS =
+		"MANAGE_COMMERCE_HEALTH_STATUS";
+
+	public static final String MANAGE_COMMERCE_ORDER_WORKFLOWS =
+		"MANAGE_COMMERCE_ORDER_WORKFLOWS";
+
 	public static final String MANAGE_COMMERCE_PAYMENT_METHODS =
 		"MANAGE_COMMERCE_PAYMENT_METHODS";
 
