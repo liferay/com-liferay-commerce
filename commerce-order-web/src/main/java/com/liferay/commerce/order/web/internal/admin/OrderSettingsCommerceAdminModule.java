@@ -15,11 +15,16 @@
 package com.liferay.commerce.order.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
+import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderSettingsDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -76,7 +81,12 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 			(WorkflowHandlerRegistryUtil.getWorkflowHandler(
 				CommerceOrder.class.getName()) != null)) {
 
-			return true;
+			PermissionChecker permissionChecker =
+				PermissionThreadLocal.getPermissionChecker();
+
+			return _portletResourcePermission.contains(
+				permissionChecker, groupId,
+				CommerceActionKeys.MANAGE_COMMERCE_ORDER_WORKFLOWS);
 		}
 
 		return false;
@@ -90,7 +100,8 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 		CommerceOrderSettingsDisplayContext
 			commerceOrderSettingsDisplayContext =
 				new CommerceOrderSettingsDisplayContext(
-					renderRequest, _workflowDefinitionLinkLocalService,
+					_portletResourcePermission, renderRequest,
+					_workflowDefinitionLinkLocalService,
 					_workflowDefinitionManager);
 
 		renderRequest.setAttribute(
@@ -112,6 +123,11 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(
+		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.order.web)"

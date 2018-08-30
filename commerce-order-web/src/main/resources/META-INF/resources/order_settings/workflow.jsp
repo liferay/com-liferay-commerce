@@ -22,19 +22,21 @@ CommerceOrderSettingsDisplayContext commerceOrderSettingsDisplayContext = (Comme
 List<WorkflowDefinition> workflowDefinitions = commerceOrderSettingsDisplayContext.getActiveWorkflowDefinitions();
 %>
 
-<aui:fieldset>
+<c:if test="<%= commerceOrderSettingsDisplayContext.hasManageCommerceOrderWorkflowsPermission() %>">
+	<aui:fieldset>
 
-	<%
-	long typePK = CommerceOrderConstants.TYPE_PK_APPROVAL;
-	String typePrefix = "approval";
-	%>
+		<%
+		long typePK = CommerceOrderConstants.TYPE_PK_APPROVAL;
+		String typePrefix = "approval";
+		%>
 
-	<%@ include file="/order_settings/workflow_definition.jspf" %>
+		<%@ include file="/order_settings/workflow_definition.jspf" %>
 
-	<%
-	typePK = CommerceOrderConstants.TYPE_PK_TRANSMISSION;
-	typePrefix = "transmission";
-	%>
+		<%
+		typePK = CommerceOrderConstants.TYPE_PK_TRANSMISSION;
+		typePrefix = "transmission";
+		%>
 
-	<%@ include file="/order_settings/workflow_definition.jspf" %>
-</aui:fieldset>
+		<%@ include file="/order_settings/workflow_definition.jspf" %>
+	</aui:fieldset>
+</c:if>
