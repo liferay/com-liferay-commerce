@@ -15,12 +15,15 @@
 package com.liferay.commerce.product.measurement.unit.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
+import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.measurement.unit.web.internal.display.context.CPMeasurementUnitsDisplayContext;
 import com.liferay.commerce.product.service.CPMeasurementUnitService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -71,7 +74,12 @@ public class MeasurementUnitsCommerceAdminModule
 
 	@Override
 	public boolean isVisible(long groupId) throws PortalException {
-		return true;
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		return _portletResourcePermission.contains(
+			permissionChecker, groupId,
+			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 	}
 
 	@Override
