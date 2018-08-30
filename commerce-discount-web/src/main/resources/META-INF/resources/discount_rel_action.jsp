@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CommerceDiscountRelDisplayContext commerceDiscountRelDisplayContext = (CommerceDiscountRelDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceDiscountRel commerceDiscountRel = (CommerceDiscountRel)row.getObject();
@@ -29,13 +31,15 @@ CommerceDiscountRel commerceDiscountRel = (CommerceDiscountRel)row.getObject();
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<portlet:actionURL name="editCommerceDiscountRel" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="commerceDiscountRelId" value="<%= String.valueOf(commerceDiscountRel.getCommerceDiscountRelId()) %>" />
-	</portlet:actionURL>
+	<c:if test="<%= commerceDiscountRelDisplayContext.hasPermission(commerceDiscountRel.getCommerceDiscountId(), ActionKeys.UPDATE) %>">
+		<portlet:actionURL name="editCommerceDiscountRel" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="commerceDiscountRelId" value="<%= String.valueOf(commerceDiscountRel.getCommerceDiscountRelId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		url="<%= deleteURL %>"
-	/>
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
+	</c:if>
 </liferay-ui:icon-menu>
