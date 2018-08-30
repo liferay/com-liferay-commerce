@@ -19,6 +19,7 @@ import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.commerce.wish.list.constants.CommerceWishListActionKeys;
 import com.liferay.commerce.wish.list.constants.CommerceWishListPortletKeys;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
@@ -38,6 +39,7 @@ import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -65,7 +67,8 @@ public class CommerceWishListDisplayContext {
 		CommerceWishListService commerceWishListService,
 		CPDefinitionHelper cpDefinitionHelper,
 		CPInstanceHelper cpInstanceHelper,
-		HttpServletRequest httpServletRequest) {
+		HttpServletRequest httpServletRequest,
+		PortletResourcePermission portletResourcePermission) {
 
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_commerceWishListHttpHelper = commerceWishListHttpHelper;
@@ -73,6 +76,7 @@ public class CommerceWishListDisplayContext {
 		_commerceWishListService = commerceWishListService;
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpInstanceHelper = cpInstanceHelper;
+		_portletResourcePermission = portletResourcePermission;
 
 		_commerceWishListRequestHelper = new CommerceWishListRequestHelper(
 			httpServletRequest);
@@ -321,6 +325,13 @@ public class CommerceWishListDisplayContext {
 		return _searchContainer;
 	}
 
+	public boolean hasManageCommerceWishListsPermission() {
+		return _portletResourcePermission.contains(
+			_commerceWishListRequestHelper.getPermissionChecker(),
+			_commerceWishListRequestHelper.getScopeGroupId(),
+			CommerceWishListActionKeys.MANAGE_COMMERCE_WISH_LISTS);
+	}
+
 	protected long getDefaultCommerceWishListId() throws PortalException {
 		long defaultCommerceWishListId = 0;
 
@@ -415,6 +426,7 @@ public class CommerceWishListDisplayContext {
 	private final CPDefinitionHelper _cpDefinitionHelper;
 	private final CPInstanceHelper _cpInstanceHelper;
 	private final PortalPreferences _portalPreferences;
+	private final PortletResourcePermission _portletResourcePermission;
 	private SearchContainer<CommerceWishList> _searchContainer;
 
 }
