@@ -38,7 +38,7 @@ else {
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= cpDefinitionsDisplayContext.hasEditPermission() %>">
+	<c:if test="<%= cpDefinitionsDisplayContext.hasEditPermission(cpDefinition.getCPDefinitionId()) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductDefinition" />
 			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>" />
