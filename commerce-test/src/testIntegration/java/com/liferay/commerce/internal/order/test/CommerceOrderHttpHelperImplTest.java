@@ -30,6 +30,7 @@ import com.liferay.commerce.test.util.TestCommerceContext;
 import com.liferay.petra.lang.CentralizedThreadLocal;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
@@ -50,7 +51,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,7 +60,6 @@ import org.springframework.mock.web.MockHttpServletRequest;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceOrderHttpHelperImplTest {
 
@@ -76,6 +75,8 @@ public class CommerceOrderHttpHelperImplTest {
 		_group = GroupTestUtil.addGroup();
 
 		_user = UserTestUtil.addUser();
+
+		PrincipalThreadLocal.setName(_user.getUserId());
 
 		_httpServletRequest = new MockHttpServletRequest();
 
