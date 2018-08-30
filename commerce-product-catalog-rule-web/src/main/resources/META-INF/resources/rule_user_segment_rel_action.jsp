@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CPCatalogRuleDisplayContext cpCatalogRuleDisplayContext = (CPCatalogRuleDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CPRuleUserSegmentRel cpRuleUserSegmentRel = (CPRuleUserSegmentRel)row.getObject();
@@ -29,13 +31,15 @@ CPRuleUserSegmentRel cpRuleUserSegmentRel = (CPRuleUserSegmentRel)row.getObject(
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<portlet:actionURL name="editCPRuleUserSegmentRel" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="cpRuleUserSegmentRelId" value="<%= String.valueOf(cpRuleUserSegmentRel.getCPRuleUserSegmentRelId()) %>" />
-	</portlet:actionURL>
+	<c:if test="<%= cpCatalogRuleDisplayContext.hasPermission(cpRuleUserSegmentRel.getCPRuleId(), CPActionKeys.DELETE_COMMERCE_PRODUCT_RULE_USER_SEGMENT) %>">
+		<portlet:actionURL name="editCPRuleUserSegmentRel" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="cpRuleUserSegmentRelId" value="<%= String.valueOf(cpRuleUserSegmentRel.getCPRuleUserSegmentRelId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		url="<%= deleteURL %>"
-	/>
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
+	</c:if>
 </liferay-ui:icon-menu>

@@ -39,24 +39,26 @@ portletURL.setParameter("mvcRenderCommandName", "editCPRule");
 			selectedDisplayStyle="list"
 		/>
 
-		<portlet:actionURL name="editCPRuleUserSegmentRel" var="addCPRuleUserSegmentRelURL" />
+		<c:if test="<%= cpCatalogRuleDisplayContext.hasPermission(cpRuleId, CPActionKeys.ADD_COMMERCE_PRODUCT_RULE_USER_SEGMENT) %>">
+			<portlet:actionURL name="editCPRuleUserSegmentRel" var="addCPRuleUserSegmentRelURL" />
 
-		<aui:form action="<%= addCPRuleUserSegmentRelURL %>" cssClass="hide" name="addCPRuleUserSegmentRelFm">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="cpRuleId" type="hidden" value="<%= cpRuleId %>" />
-			<aui:input name="commerceUserSegmentEntryIds" type="hidden" value="" />
-		</aui:form>
+			<aui:form action="<%= addCPRuleUserSegmentRelURL %>" cssClass="hide" name="addCPRuleUserSegmentRelFm">
+				<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+				<aui:input name="cpRuleId" type="hidden" value="<%= cpRuleId %>" />
+				<aui:input name="commerceUserSegmentEntryIds" type="hidden" value="" />
+			</aui:form>
 
-		<liferay-frontend:add-menu
-			inline="<%= true %>"
-		>
-			<liferay-frontend:add-menu-item
-				id="addCPRuleUserSegmentRelMenuItem"
-				title='<%= LanguageUtil.get(request, "add-user-segment-catalog-rule") %>'
-				url="javascript:;"
-			/>
-		</liferay-frontend:add-menu>
+			<liferay-frontend:add-menu
+				inline="<%= true %>"
+			>
+				<liferay-frontend:add-menu-item
+					id="addCPRuleUserSegmentRelMenuItem"
+					title='<%= LanguageUtil.get(request, "add-user-segment-catalog-rule") %>'
+					url="javascript:;"
+				/>
+			</liferay-frontend:add-menu>
+		</c:if>
 	</liferay-frontend:management-bar-buttons>
 
 	<liferay-frontend:management-bar-filters>
