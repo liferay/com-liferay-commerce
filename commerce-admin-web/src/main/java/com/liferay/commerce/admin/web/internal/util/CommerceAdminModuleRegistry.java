@@ -17,6 +17,9 @@ package com.liferay.commerce.admin.web.internal.util;
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.Collections;
 import java.util.NavigableMap;
@@ -37,11 +40,32 @@ public class CommerceAdminModuleRegistry {
 		NavigableMap<String, CommerceAdminModule> commerceAdminModules =
 			new TreeMap<>();
 
+		try {
+			commerceAdminModules = getCommerceAdminModules(-1);
+		}
+		catch (PortalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
+		}
+
+		return commerceAdminModules;
+	}
+
+	public NavigableMap<String, CommerceAdminModule> getCommerceAdminModules(
+			long groupId)
+		throws PortalException {
+
+		NavigableMap<String, CommerceAdminModule> commerceAdminModules =
+			new TreeMap<>();
+
 		for (String key : _commerceAdminModuleServiceTrackerMap.keySet()) {
 			CommerceAdminModule commerceAdminModule =
 				_commerceAdminModuleServiceTrackerMap.getService(key);
 
-			commerceAdminModules.put(key, commerceAdminModule);
+			if ((groupId < 0) || commerceAdminModule.isVisible(groupId)) {
+				commerceAdminModules.put(key, commerceAdminModule);
+			}
 		}
 
 		return Collections.unmodifiableNavigableMap(commerceAdminModules);
@@ -59,6 +83,9 @@ public class CommerceAdminModuleRegistry {
 	protected void deactivate() {
 		_commerceAdminModuleServiceTrackerMap.close();
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAdminModuleRegistry.class);
 
 	private ServiceTrackerMap<String, CommerceAdminModule>
 		_commerceAdminModuleServiceTrackerMap;
