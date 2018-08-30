@@ -16,7 +16,7 @@ package com.liferay.commerce.internal.search.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
+import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.internal.search.CommerceOrderItemIndexer;
 import com.liferay.commerce.internal.test.util.CommerceTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
@@ -51,7 +51,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,7 +58,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Andrea Di Giorgi
  */
-@Ignore
 @RunWith(Arquillian.class)
 @Sync
 public class CommerceOrderItemIndexerTest {
@@ -94,8 +92,7 @@ public class CommerceOrderItemIndexerTest {
 		CommerceOrderItem[] commerceOrderItems = new CommerceOrderItem[count];
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyLocalServiceUtil.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
 			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());

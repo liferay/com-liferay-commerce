@@ -16,7 +16,7 @@ package com.liferay.commerce.order.stock.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
+import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.internal.test.util.CommerceTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
@@ -42,7 +42,6 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,7 +49,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class OrderStockManagementTest {
 
@@ -79,8 +77,7 @@ public class OrderStockManagementTest {
 			"The product will be added even if no stock is available"
 		);
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyLocalServiceUtil.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
 			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
@@ -118,8 +115,7 @@ public class OrderStockManagementTest {
 			"The product's stock availability is updated"
 		);
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyLocalServiceUtil.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
 			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
@@ -178,8 +174,7 @@ public class OrderStockManagementTest {
 			"The product will be successfully added to the order"
 		);
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyLocalServiceUtil.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
 			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
@@ -216,8 +211,7 @@ public class OrderStockManagementTest {
 			"The action will fail due to stock unavailability"
 		);
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyLocalServiceUtil.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
 			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
@@ -245,8 +239,7 @@ public class OrderStockManagementTest {
 			"The action will fail due to stock unavailability"
 		);
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyLocalServiceUtil.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
 			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
@@ -280,8 +273,7 @@ public class OrderStockManagementTest {
 			"The action will fail due to stock unavailability"
 		);
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyLocalServiceUtil.fetchPrimaryCommerceCurrency(
-				_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder1 = CommerceTestUtil.addUserCommerceOrder(
 			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
