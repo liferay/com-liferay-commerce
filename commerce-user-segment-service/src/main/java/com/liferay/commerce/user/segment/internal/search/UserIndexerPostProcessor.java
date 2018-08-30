@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.util.List;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -102,9 +103,9 @@ public class UserIndexerPostProcessor extends BaseIndexerPostProcessor {
 
 			Stream<UserGroupRole> stream = userGroupRoles.stream();
 
-			long[] roleIds = stream.mapToLong(
-				UserGroupRole::getRoleId
-			).toArray();
+			LongStream longStream = stream.mapToLong(UserGroupRole::getRoleId);
+
+			long[] roleIds = longStream.toArray();
 
 			document.addNumber(
 				"organization_" + organization.getOrganizationId() + "_roleIds",

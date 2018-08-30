@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.ToLongFunction;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -67,9 +68,9 @@ public class AddedAllCommerceDiscountRuleTypeImpl
 
 		Stream<CommerceOrderItem> stream = commerceOrderItems.stream();
 
-		long[] orderItemDefinitionIds = stream.mapToLong(
-			_getOrderItemToLongFunction()
-		).toArray();
+		LongStream longStream = stream.mapToLong(_getOrderItemToLongFunction());
+
+		long[] orderItemDefinitionIds = longStream.toArray();
 
 		String settingsProperty = commerceDiscountRule.getSettingsProperty(
 			commerceDiscountRule.getType());

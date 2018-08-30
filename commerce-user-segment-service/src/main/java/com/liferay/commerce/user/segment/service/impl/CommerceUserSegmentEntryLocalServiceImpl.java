@@ -56,6 +56,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
@@ -248,9 +249,10 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 
 		Stream<Document> stream = documents.stream();
 
-		commerceUserSegmentEntryIds = stream.mapToLong(
-			field -> GetterUtil.getLong(field.get(Field.ENTRY_CLASS_PK))
-		).toArray();
+		LongStream longStream = stream.mapToLong(
+			field -> GetterUtil.getLong(field.get(Field.ENTRY_CLASS_PK)));
+
+		commerceUserSegmentEntryIds = longStream.toArray();
 
 		portalCache.put(cacheKey + "_calculated", true);
 		portalCache.put(cacheKey, commerceUserSegmentEntryIds);
