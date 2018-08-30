@@ -15,6 +15,7 @@
 package com.liferay.commerce.discount.web.internal.display.context;
 
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
+import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.model.CommerceDiscountRule;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleType;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeJSPContributor;
@@ -38,6 +39,8 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -60,6 +63,8 @@ public class CommerceDiscountRuleDisplayContext
 
 	public CommerceDiscountRuleDisplayContext(
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
+		ModelResourcePermission<CommerceDiscount>
+			commerceDiscountModelResourcePermission,
 		CommerceDiscountRuleService commerceDiscountRuleService,
 		CommerceDiscountRuleTypeJSPContributorRegistry
 			commerceDiscountRuleTypeJSPContributorRegistry,
@@ -69,13 +74,15 @@ public class CommerceDiscountRuleDisplayContext
 		CommerceDiscountUserSegmentRelService
 			commerceDiscountUserSegmentRelService,
 		CPDefinitionService cpDefinitionService,
-		HttpServletRequest httpServletRequest, ItemSelector itemSelector) {
+		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
+		PortletResourcePermission portletResourcePermission) {
 
 		super(
-			commerceCurrencyLocalService, commerceDiscountService,
+			commerceCurrencyLocalService,
+			commerceDiscountModelResourcePermission, commerceDiscountService,
 			commerceDiscountTargetRegistry,
 			commerceDiscountUserSegmentRelService, httpServletRequest,
-			itemSelector);
+			itemSelector, portletResourcePermission);
 
 		_commerceDiscountRuleService = commerceDiscountRuleService;
 		_commerceDiscountRuleTypeJSPContributorRegistry =

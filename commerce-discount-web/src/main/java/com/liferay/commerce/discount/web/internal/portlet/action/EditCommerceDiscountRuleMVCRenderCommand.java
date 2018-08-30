@@ -15,7 +15,9 @@
 package com.liferay.commerce.discount.web.internal.portlet.action;
 
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
+import com.liferay.commerce.discount.constants.CommerceDiscountConstants;
 import com.liferay.commerce.discount.constants.CommerceDiscountPortletKeys;
+import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeJSPContributorRegistry;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeRegistry;
 import com.liferay.commerce.discount.service.CommerceDiscountRuleService;
@@ -26,6 +28,8 @@ import com.liferay.commerce.discount.web.internal.display.context.CommerceDiscou
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -62,12 +66,14 @@ public class EditCommerceDiscountRuleMVCRenderCommand
 
 		CommerceDiscountRuleDisplayContext commerceDiscountRuleDisplayContext =
 			new CommerceDiscountRuleDisplayContext(
-				_commerceCurrencyLocalService, _commerceDiscountRuleService,
+				_commerceCurrencyLocalService,
+				_commerceDiscountModelResourcePermission,
+				_commerceDiscountRuleService,
 				_commerceDiscountRuleTypeJSPContributorRegistry,
 				_commerceDiscountRuleTypeRegistry, _commerceDiscountService,
 				_commerceDiscountTargetRegistry,
 				_commerceDiscountUserSegmentRelService, _cpDefinitionService,
-				httpServletRequest, _itemSelector);
+				httpServletRequest, _itemSelector, _portletResourcePermission);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -78,6 +84,12 @@ public class EditCommerceDiscountRuleMVCRenderCommand
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.discount.model.CommerceDiscount)"
+	)
+	private ModelResourcePermission<CommerceDiscount>
+		_commerceDiscountModelResourcePermission;
 
 	@Reference
 	private CommerceDiscountRuleService _commerceDiscountRuleService;
@@ -107,5 +119,10 @@ public class EditCommerceDiscountRuleMVCRenderCommand
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(
+		target = "(resource.name=" + CommerceDiscountConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 }
