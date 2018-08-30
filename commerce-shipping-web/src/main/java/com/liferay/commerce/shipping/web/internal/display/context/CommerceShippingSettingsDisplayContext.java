@@ -15,12 +15,14 @@
 package com.liferay.commerce.shipping.web.internal.display.context;
 
 import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
+import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceShippingOriginLocator;
 import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ParameterMapSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -41,11 +43,13 @@ public class CommerceShippingSettingsDisplayContext {
 		CommerceShippingOriginLocatorRegistry
 			commerceShippingOriginLocatorRegistry,
 		ConfigurationProvider configurationProvider,
+		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		_commerceShippingOriginLocatorRegistry =
 			commerceShippingOriginLocatorRegistry;
 		_configurationProvider = configurationProvider;
+		_portletResourcePermission = portletResourcePermission;
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
 	}
@@ -108,9 +112,19 @@ public class CommerceShippingSettingsDisplayContext {
 			getCommerceShippingOriginLocators();
 	}
 
+	public boolean hasManageCommerceWarehousesPermission() {
+		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return _portletResourcePermission.contains(
+			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
+	}
+
 	private final CommerceShippingOriginLocatorRegistry
 		_commerceShippingOriginLocatorRegistry;
 	private final ConfigurationProvider _configurationProvider;
+	private final PortletResourcePermission _portletResourcePermission;
 	private final RenderRequest _renderRequest;
 	private final RenderResponse _renderResponse;
 
