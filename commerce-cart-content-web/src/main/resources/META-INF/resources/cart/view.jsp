@@ -158,10 +158,13 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 						</liferay-ui:search-container-column-text>
 					</c:if>
 
-					<liferay-ui:search-container-column-jsp
+					<liferay-ui:search-container-column-text
 						name="quantity"
-						path="/cart/cart_item_quantity_select.jsp"
-					/>
+					>
+						<liferay-commerce-cart:quantity-control
+							commerceOrderItemId="<%= commerceOrderItem.getCommerceOrderItemId() %>"
+						/>
+					</liferay-ui:search-container-column-text>
 				</liferay-ui:search-container-row>
 
 				<liferay-ui:search-iterator
