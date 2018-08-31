@@ -61,7 +61,7 @@ String couponCode = commerceDiscountCouponCodeHelper.getCommerceDiscountCouponCo
 		<c:otherwise>
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 
-			<aui:input name="couponCode" placeholder="enter-promo-code" type="text" />
+			<aui:input label="" name="couponCode" placeholder="enter-promo-code" type="text" />
 
 			<aui:button type="submit" value="apply" />
 		</c:otherwise>
