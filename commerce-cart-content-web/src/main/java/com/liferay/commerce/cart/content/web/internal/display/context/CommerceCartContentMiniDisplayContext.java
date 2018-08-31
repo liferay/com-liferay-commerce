@@ -20,6 +20,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
@@ -48,6 +49,7 @@ public class CommerceCartContentMiniDisplayContext
 			CommerceOrderItemService commerceOrderItemService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
+			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			CPDefinitionHelper cpDefinitionHelper,
 			CPInstanceHelper cpInstanceHelper,
 			ModelResourcePermission<CommerceOrder>
@@ -57,8 +59,8 @@ public class CommerceCartContentMiniDisplayContext
 		super(
 			httpServletRequest, commerceOrderItemService,
 			commerceOrderPriceCalculation, commerceOrderValidatorRegistry,
-			cpDefinitionHelper, cpInstanceHelper,
-			commerceOrderModelResourcePermission);
+			commerceProductPriceCalculation, cpDefinitionHelper,
+			cpInstanceHelper, commerceOrderModelResourcePermission);
 
 		PortletDisplay portletDisplay =
 			commerceCartContentRequestHelper.getPortletDisplay();
