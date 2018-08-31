@@ -100,3 +100,12 @@
 		</div>
 	</div>
 </div>
+
+<@liferay_aui["script"]>
+	Liferay.after(
+		'commerce:productAddedToCart',
+		function(event) {
+			Liferay.Portlet.refresh('#p_p_id<@portlet.namespace />');
+		}
+	);
+</@>
