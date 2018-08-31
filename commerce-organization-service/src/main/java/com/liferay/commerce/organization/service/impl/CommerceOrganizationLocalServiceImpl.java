@@ -303,7 +303,12 @@ public class CommerceOrganizationLocalServiceImpl
 			int end, Sort[] sorts)
 		throws PortalException {
 
-		Group group = groupLocalService.getGroup(groupId);
+		Group group = groupLocalService.fetchGroup(groupId);
+
+		if (group == null) {
+			return new BaseModelSearchResult<>(
+				Collections.<Organization>emptyList(), 0);
+		}
 
 		long parentOrganizationId = group.getOrganizationId();
 

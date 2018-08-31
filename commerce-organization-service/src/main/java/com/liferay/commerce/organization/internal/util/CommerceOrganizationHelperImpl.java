@@ -82,10 +82,17 @@ public class CommerceOrganizationHelperImpl
 		long currentOrganizationId = SessionParamUtil.getLong(
 			httpServletRequest, _CURRENT_ORGANIZATION_ID_KEY);
 
-		if (currentOrganizationId <= 0) {
-			organization = _getSingleAccountOrganization(groupId, userId);
+		if (currentOrganizationId == -1) {
+			return null;
 		}
-		else {
+		else if (currentOrganizationId == 0) {
+			organization = _getSingleAccountOrganization(groupId, userId);
+
+			if (organization == null) {
+				setCurrentOrganization(httpServletRequest, -1);
+			}
+		}
+		else if (currentOrganizationId > 0) {
 			organization = _commerceOrganizationService.fetchOrganization(
 				currentOrganizationId);
 		}
