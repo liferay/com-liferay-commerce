@@ -19,6 +19,7 @@ import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
@@ -53,11 +54,10 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.display-category=commerce",
 		"com.liferay.portlet.layout-cacheable=true",
 		"com.liferay.portlet.preferences-owned-by-group=true",
-		"com.liferay.portlet.preferences-unique-per-layout=false",
 		"com.liferay.portlet.private-request-attributes=false",
 		"com.liferay.portlet.private-session-attributes=false",
 		"com.liferay.portlet.render-weight=50",
-		"com.liferay.portlet.scopeable=true",
+		"com.liferay.portlet.scopeable=false",
 		"javax.portlet.display-name=Commerce Cart Content Total",
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.view-template=/cart_total/view.jsp",
@@ -84,7 +84,8 @@ public class CommerceCartContentTotalPortlet extends MVCPortlet {
 					new CommerceCartContentTotalDisplayContext(
 						httpServletRequest, _commerceOrderItemService,
 						_commerceOrderPriceCalculation,
-						_commerceOrderValidatorRegistry, _cpDefinitionHelper,
+						_commerceOrderValidatorRegistry,
+						_commerceProductPriceCalculation, _cpDefinitionHelper,
 						_cpInstanceHelper,
 						_commerceOrderModelResourcePermission, _portal);
 
@@ -116,6 +117,9 @@ public class CommerceCartContentTotalPortlet extends MVCPortlet {
 
 	@Reference
 	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
+
+	@Reference
+	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;

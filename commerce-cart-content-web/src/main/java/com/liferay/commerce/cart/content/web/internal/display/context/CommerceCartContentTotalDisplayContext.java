@@ -19,6 +19,7 @@ import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
@@ -46,6 +47,7 @@ public class CommerceCartContentTotalDisplayContext
 			CommerceOrderItemService commerceOrderItemService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
+			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			CPDefinitionHelper cpDefinitionHelper,
 			CPInstanceHelper cpInstanceHelper,
 			ModelResourcePermission<CommerceOrder>
@@ -56,8 +58,8 @@ public class CommerceCartContentTotalDisplayContext
 		super(
 			httpServletRequest, commerceOrderItemService,
 			commerceOrderPriceCalculation, commerceOrderValidatorRegistry,
-			cpDefinitionHelper, cpInstanceHelper,
-			commerceOrderModelResourcePermission);
+			commerceProductPriceCalculation, cpDefinitionHelper,
+			cpInstanceHelper, commerceOrderModelResourcePermission);
 
 		_portal = portal;
 
