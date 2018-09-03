@@ -97,18 +97,15 @@ public class CPDefinitionProductLinksScreenNavigationEntry
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		boolean hasViewCPDefinitionPermission = false;
-
 		try {
-			hasViewCPDefinitionPermission =
-				_cpDefinitionModelResourcePermission.contains(
-					permissionChecker, cpDefinition, ActionKeys.VIEW);
+			return _cpDefinitionModelResourcePermission.contains(
+				permissionChecker, cpDefinition, ActionKeys.VIEW);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
 		}
 
-		return hasViewCPDefinitionPermission;
+		return false;
 	}
 
 	@Override
