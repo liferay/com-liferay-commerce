@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.text.DateFormat;
 import java.text.Format;
@@ -154,6 +155,13 @@ public class CommerceOrderEditDisplayContext {
 			"screenNavigationCategoryKey",
 			CommerceOrderScreenNavigationConstants.
 				CATEGORY_KEY_COMMERCE_ORDER_ITEMS);
+
+		String redirect = ParamUtil.getString(
+			_commerceOrderRequestHelper.getRequest(), "redirect");
+
+		if (Validator.isNotNull(redirect)) {
+			portletURL.setParameter("redirect", redirect);
+		}
 
 		return portletURL;
 	}
