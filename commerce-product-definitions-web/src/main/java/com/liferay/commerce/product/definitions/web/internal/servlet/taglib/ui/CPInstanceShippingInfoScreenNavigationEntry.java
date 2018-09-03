@@ -98,19 +98,16 @@ public class CPInstanceShippingInfoScreenNavigationEntry
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		boolean hasViewCPDefinitionPermission = false;
-
 		try {
-			hasViewCPDefinitionPermission =
-				_cpDefinitionModelResourcePermission.contains(
-					permissionChecker, cpInstance.getCPDefinitionId(),
-					ActionKeys.VIEW);
+			return _cpDefinitionModelResourcePermission.contains(
+				permissionChecker, cpInstance.getCPDefinitionId(),
+				ActionKeys.VIEW);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
 		}
 
-		return hasViewCPDefinitionPermission;
+		return false;
 	}
 
 	@Override
