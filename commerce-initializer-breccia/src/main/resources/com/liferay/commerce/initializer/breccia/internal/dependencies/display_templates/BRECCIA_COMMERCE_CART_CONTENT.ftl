@@ -78,7 +78,7 @@
 			</table>
 		</div>
 	<#else>
-		<h3>${languageUtil.get(request, "there-are-no-items-in-your-cart")}.</h3>
+		<h3>${languageUtil.get(request, "there-are-no-items-in-your-cart")}</h3>
 	</#if>
 </div>
 

@@ -130,9 +130,7 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 
 	@Override
 	public String getName(Locale locale) {
-		ResourceBundle resourceBundle = _getResourceBundle(locale);
-
-		return LanguageUtil.get(resourceBundle, "paypal");
+		return LanguageUtil.get(locale, "paypal");
 	}
 
 	@Override
