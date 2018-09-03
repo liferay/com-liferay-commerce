@@ -125,12 +125,12 @@ public class RoleCommerceUserSegmentCriterionTypeImpl
 
 		termsSetFilterBuilder.setValues(values);
 
-		Filter existFilter = new TermFilter(
+		Filter termFilter = new TermFilter(
 			getIndexerFieldName() + "_required_matches", "0");
 
 		BooleanFilter fieldBooleanFilter = new BooleanFilter();
 
-		fieldBooleanFilter.add(existFilter, BooleanClauseOccur.SHOULD);
+		fieldBooleanFilter.add(termFilter, BooleanClauseOccur.SHOULD);
 		fieldBooleanFilter.add(
 			termsSetFilterBuilder.build(), BooleanClauseOccur.SHOULD);
 
