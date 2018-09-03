@@ -36,11 +36,11 @@ cpOptionCategoriesNavigationItem.setActive(portletName.equals(CPPortletKeys.CP_O
 cpOptionCategoriesNavigationItem.setHref(viewProductOptionCategoriesURL.toString());
 cpOptionCategoriesNavigationItem.setLabel(LanguageUtil.get(request, "specification-groups"));
 
-if (hasManageCPSpecificationOptionsPermission) {
+if (manageCPSpecificationOptionsPermission) {
 	navigationItems.add(cpSpecificationOptionsNavigationItem);
 }
 
-if (hasManageCPOptionCategoriesPermission) {
+if (manageCPOptionCategoriesPermission) {
 	navigationItems.add(cpOptionCategoriesNavigationItem);
 }
 %>

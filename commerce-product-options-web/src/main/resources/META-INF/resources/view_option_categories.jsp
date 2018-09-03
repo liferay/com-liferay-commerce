@@ -19,8 +19,8 @@
 <%
 CPOptionCategoryDisplayContext cpOptionCategoryDisplayContext = (CPOptionCategoryDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-boolean hasManageCPOptionCategoriesPermission = cpOptionCategoryDisplayContext.hasPermission(CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
-boolean hasManageCPSpecificationOptionsPermission = cpOptionCategoryDisplayContext.hasPermission(CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
+boolean manageCPOptionCategoriesPermission = cpOptionCategoryDisplayContext.hasPermission(CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
+boolean manageCPSpecificationOptionsPermission = cpOptionCategoryDisplayContext.hasPermission(CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
 
 String displayStyle = cpOptionCategoryDisplayContext.getDisplayStyle();
 
@@ -33,7 +33,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 renderResponse.setTitle(LanguageUtil.get(request, "catalog"));
 %>
 
-<c:if test="<%= cpOptionDisplayContext.hasPermission(CPActionKeys.MANAGE_CATALOG) %>">
+<c:if test="<%= cpOptionCategoryDisplayContext.hasPermission(CPActionKeys.MANAGE_CATALOG) %>">
 	<clay:navigation-bar
 		inverted="<%= true %>"
 		navigationItems="<%= CPNavigationItemRegistryUtil.getNavigationItems(renderRequest) %>"
@@ -41,7 +41,7 @@ renderResponse.setTitle(LanguageUtil.get(request, "catalog"));
 
 	<%@ include file="/navbar_specifications.jspf" %>
 
-	<c:if test="<%= hasManageCPOptionCategoriesPermission %>">
+	<c:if test="<%= manageCPOptionCategoriesPermission %>">
 		<liferay-frontend:management-bar
 			includeCheckBox="<%= true %>"
 			searchContainerId="cpOptionCategories"

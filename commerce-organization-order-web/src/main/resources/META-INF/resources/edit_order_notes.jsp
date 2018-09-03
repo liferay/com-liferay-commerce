@@ -21,8 +21,8 @@ CommerceOrganizationOrderDisplayContext commerceOrganizationOrderDisplayContext 
 
 CommerceOrder commerceOrder = commerceOrganizationOrderDisplayContext.getCommerceOrder();
 
-boolean hasManageNotesPermission = commerceOrganizationOrderDisplayContext.hasPermission(commerceOrder, CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_NOTES);
-boolean hasManageRestrictedNotesPermission = commerceOrganizationOrderDisplayContext.hasPermission(commerceOrder, CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES);
+boolean manageNotesPermission = commerceOrganizationOrderDisplayContext.hasPermission(commerceOrder, CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_NOTES);
+boolean manageRestrictedNotesPermission = commerceOrganizationOrderDisplayContext.hasPermission(commerceOrder, CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES);
 %>
 
 <portlet:actionURL name="editCommerceOrderNote" var="editCommerceOrderNoteURL">
@@ -66,7 +66,7 @@ boolean hasManageRestrictedNotesPermission = commerceOrganizationOrderDisplayCon
 
 	<aui:fieldset-group markupView="lexicon">
 		<div class="taglib-discussion">
-			<c:if test="<%= hasManageNotesPermission || hasManageRestrictedNotesPermission %>">
+			<c:if test="<%= manageNotesPermission || manageRestrictedNotesPermission %>">
 				<aui:fieldset cssClass="add-comment">
 					<div class="panel">
 						<div class="panel-body">
@@ -80,7 +80,7 @@ boolean hasManageRestrictedNotesPermission = commerceOrganizationOrderDisplayCon
 							<div class="lfr-discussion-body">
 								<aui:input autoFocus="<%= true %>" label="" name="content" placeholder="type-your-note-here" />
 
-								<c:if test="<%= hasManageRestrictedNotesPermission %>">
+								<c:if test="<%= manageRestrictedNotesPermission %>">
 									<aui:input helpMessage="restricted-help" label="private" name="restricted" />
 								</c:if>
 

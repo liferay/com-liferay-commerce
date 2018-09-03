@@ -57,24 +57,23 @@ public class CPSpecificationOptionNavigationItem implements CPNavigationItem {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		boolean hasManageCatalogPermission =
-			_portletResourcePermission.contains(
-				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), CPActionKeys.MANAGE_CATALOG);
-		boolean hasManageCPOptionCategoriesPermission =
+		boolean manageCatalogPermission = _portletResourcePermission.contains(
+			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+			CPActionKeys.MANAGE_CATALOG);
+		boolean manageCPOptionCategoriesPermission =
 			_portletResourcePermission.contains(
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(),
 				CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
-		boolean hasManageCPSpecificationOptionsPermission =
+		boolean manageCPSpecificationOptionsPermission =
 			_portletResourcePermission.contains(
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(),
 				CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
 
-		if (!hasManageCatalogPermission ||
-			(!hasManageCPOptionCategoriesPermission &&
-			 !hasManageCPSpecificationOptionsPermission)) {
+		if (!manageCatalogPermission ||
+			(!manageCPOptionCategoriesPermission &&
+			 !manageCPSpecificationOptionsPermission)) {
 
 			return null;
 		}
