@@ -20,8 +20,11 @@ import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -47,6 +50,13 @@ public class SaveStepMVCActionCommand extends BaseMVCActionCommand {
 			ActionRequest actionRequest, ActionResponse actionResponse,
 			String checkoutStepName)
 		throws Exception {
+
+		String redirect = GetterUtil.getString(
+			actionRequest.getAttribute(WebKeys.REDIRECT));
+
+		if (Validator.isNotNull(redirect)) {
+			return redirect;
+		}
 
 		CommerceCheckoutStep commerceCheckoutStep =
 			_commerceCheckoutStepServicesTracker.getNextCommerceCheckoutStep(
