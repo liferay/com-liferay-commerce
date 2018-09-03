@@ -21,7 +21,7 @@ CommerceTaxFixedRateAddressRelsDisplayContext commerceTaxFixedRateAddressRelsDis
 
 SearchContainer<CommerceTaxFixedRateAddressRel> commerceTaxFixedRateAddressRelSearchContainer = commerceTaxFixedRateAddressRelsDisplayContext.getSearchContainer();
 
-boolean hasManageCommerceTaxMethodsPermission = commerceTaxFixedRateAddressRelsDisplayContext.hasManageCommerceTaxMethodsPermission();
+boolean manageCommerceTaxMethodsPermission = commerceTaxFixedRateAddressRelsDisplayContext.hasManageCommerceTaxMethodsPermission();
 %>
 
 <liferay-frontend:management-bar
@@ -49,7 +49,7 @@ boolean hasManageCommerceTaxMethodsPermission = commerceTaxFixedRateAddressRelsD
 			selectedDisplayStyle="list"
 		/>
 
-		<c:if test="<%= hasManageCommerceTaxMethodsPermission %>">
+		<c:if test="<%= manageCommerceTaxMethodsPermission %>">
 			<portlet:renderURL var="addCommerceTaxFixedRateAddressRelURL">
 				<portlet:param name="mvcRenderCommandName" value="editCommerceTaxFixedRateAddressRel" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -67,7 +67,7 @@ boolean hasManageCommerceTaxMethodsPermission = commerceTaxFixedRateAddressRelsD
 		</c:if>
 	</liferay-frontend:management-bar-buttons>
 
-	<c:if test="<%= hasManageCommerceTaxMethodsPermission %>">
+	<c:if test="<%= manageCommerceTaxMethodsPermission %>">
 		<liferay-frontend:management-bar-action-buttons>
 			<liferay-frontend:management-bar-button
 				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceTaxFixedRateAddressRels();" %>'

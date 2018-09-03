@@ -57,12 +57,11 @@ public class CPOptionNavigationItem implements CPNavigationItem {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		boolean hasManageCatalogPermission =
-			_portletResourcePermission.contains(
-				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), CPActionKeys.MANAGE_CATALOG);
+		boolean manageCatalogPermission = _portletResourcePermission.contains(
+			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+			CPActionKeys.MANAGE_CATALOG);
 
-		if (!hasManageCatalogPermission) {
+		if (!manageCatalogPermission) {
 			return null;
 		}
 

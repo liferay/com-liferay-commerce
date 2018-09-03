@@ -21,7 +21,7 @@ CommerceShippingFixedOptionRelsDisplayContext commerceShippingFixedOptionRelsDis
 
 SearchContainer<CommerceShippingFixedOptionRel> commerceShippingFixedOptionRelSearchContainer = commerceShippingFixedOptionRelsDisplayContext.getSearchContainer();
 
-boolean hasManageCommerceShippingMethodsPermission = commerceShippingFixedOptionRelsDisplayContext.hasManageCommerceShipmentsPermission();
+boolean manageCommerceShippingMethodsPermission = commerceShippingFixedOptionRelsDisplayContext.hasManageCommerceShipmentsPermission();
 %>
 
 <c:choose>
@@ -51,7 +51,7 @@ boolean hasManageCommerceShippingMethodsPermission = commerceShippingFixedOption
 					selectedDisplayStyle="list"
 				/>
 
-				<c:if test="<%= hasManageCommerceShippingMethodsPermission %>">
+				<c:if test="<%= manageCommerceShippingMethodsPermission %>">
 					<portlet:renderURL var="addCommerceShippingFixedOptionRelURL">
 						<portlet:param name="mvcRenderCommandName" value="editCommerceShippingFixedOptionRel" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -69,7 +69,7 @@ boolean hasManageCommerceShippingMethodsPermission = commerceShippingFixedOption
 				</c:if>
 			</liferay-frontend:management-bar-buttons>
 
-			<c:if test="<%= hasManageCommerceShippingMethodsPermission %>">
+			<c:if test="<%= manageCommerceShippingMethodsPermission %>">
 				<liferay-frontend:management-bar-action-buttons>
 					<liferay-frontend:management-bar-button
 						href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceShippingFixedOptionRels();" %>'
