@@ -43,6 +43,8 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
+import com.liferay.portal.kernel.search.filter.Filter;
+import com.liferay.portal.kernel.search.filter.TermFilter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -152,8 +154,17 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 
 			termsSetFilterBuilder.setValues(values);
 
+			Filter termFilter = new TermFilter(
+				"commerceUserSegmentEntryIds_required_matches", "0");
+
+			BooleanFilter fieldBooleanFilter = new BooleanFilter();
+
+			fieldBooleanFilter.add(termFilter, BooleanClauseOccur.SHOULD);
+			fieldBooleanFilter.add(
+				termsSetFilterBuilder.build(), BooleanClauseOccur.SHOULD);
+
 			contextBooleanFilter.add(
-				termsSetFilterBuilder.build(), BooleanClauseOccur.MUST);
+				fieldBooleanFilter, BooleanClauseOccur.MUST);
 		}
 
 		boolean active = GetterUtil.getBoolean(
