@@ -33,13 +33,14 @@ import com.liferay.portal.search.test.util.HitsAssert;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
+import java.util.Locale;
+
 import org.frutilla.FrutillaRule;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +48,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceUserSegmentEntryIndexerTest {
 
@@ -88,10 +88,16 @@ public class CommerceUserSegmentEntryIndexerTest {
 		Document document = HitsAssert.assertOnlyOne(hits);
 
 		Assert.assertEquals(
-			commerceUserSegmentEntry.getCommerceUserSegmentEntryId(),
+			String.valueOf(
+				commerceUserSegmentEntry.getCommerceUserSegmentEntryId()),
 			document.get(Field.ENTRY_CLASS_PK));
+
+		String name = document.get(Field.NAME);
+
+		String cleanName = name.replace("[", "").replace("]", "");
+
 		Assert.assertEquals(
-			commerceUserSegmentEntry.getName(), document.get(Field.NAME));
+			commerceUserSegmentEntry.getName(Locale.ENGLISH), cleanName);
 	}
 
 	@Test

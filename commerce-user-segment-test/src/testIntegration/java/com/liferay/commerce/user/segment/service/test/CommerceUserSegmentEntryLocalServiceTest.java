@@ -45,7 +45,6 @@ import org.junit.runner.RunWith;
  * @author Andrea Di Giorgi
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceUserSegmentEntryLocalServiceTest {
 
@@ -79,6 +78,7 @@ public class CommerceUserSegmentEntryLocalServiceTest {
 			commerceUserSegmentEntry.getCommerceUserSegmentEntryId());
 	}
 
+	@Ignore
 	@Test
 	public void testGetGuestUserCommerceUserSegmentEntry() throws Exception {
 		frutillaRule.scenario(
