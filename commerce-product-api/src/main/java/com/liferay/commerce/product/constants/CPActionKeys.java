@@ -32,13 +32,6 @@ public class CPActionKeys {
 	public static final String ADD_COMMERCE_PRODUCT_OPTION_CATEGORY =
 		"ADD_COMMERCE_PRODUCT_OPTION_CATEGORY";
 
-	/**
-	 * @deprecated As of Judson (7.1.x), with no direct replacement
-	 */
-	@Deprecated
-	public static final String ADD_COMMERCE_PRODUCT_OPTION_VALUE =
-		"ADD_COMMERCE_PRODUCT_OPTION_VALUE";
-
 	public static final String ADD_COMMERCE_PRODUCT_RULE =
 		"ADD_COMMERCE_PRODUCT_RULE";
 
@@ -47,20 +40,6 @@ public class CPActionKeys {
 
 	public static final String ADD_COMMERCE_PRODUCT_RULE_USER_SEGMENT =
 		"ADD_COMMERCE_PRODUCT_RULE_USER_SEGMENT";
-
-	/**
-	 * @deprecated As of Judson (7.1.x), with no direct replacement
-	 */
-	@Deprecated
-	public static final String ADD_COMMERCE_PRODUCT_SPECIFICATION_OPTION =
-		"ADD_COMMERCE_PRODUCT_SPECIFICATION_OPTION";
-
-	/**
-	 * @deprecated As of Judson (7.1.x), with no direct replacement
-	 */
-	@Deprecated
-	public static final String DELETE_COMMERCE_PRODUCT_INSTANCE =
-		"DELETE_COMMERCE_PRODUCT_INSTANCE";
 
 	public static final String DELETE_COMMERCE_PRODUCT_RULE_CATEGORY_REL =
 		"DELETE_COMMERCE_PRODUCT_RULE_CATEGORY_REL";
@@ -90,13 +69,6 @@ public class CPActionKeys {
 
 	public static final String UPDATE_COMMERCE_PRODUCT_INSTANCE =
 		"UPDATE_COMMERCE_PRODUCT_INSTANCE";
-
-	/**
-	 * @deprecated As of Judson (7.1.x), with no direct replacement
-	 */
-	@Deprecated
-	public static final String UPDATE_COMMERCE_PRODUCT_OPTION_VALUE =
-		"UPDATE_COMMERCE_PRODUCT_OPTION_VALUE";
 
 	public static final String VIEW_COMMERCE_PRODUCT_RULES =
 		"VIEW_COMMERCE_PRODUCT_RULES";
