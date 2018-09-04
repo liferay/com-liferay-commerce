@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.List;
 
@@ -61,6 +62,10 @@ public interface CPRuleService extends BaseService {
 	public CPRule addCPRule(String name, boolean active, String type,
 		ServiceContext serviceContext) throws PortalException;
 
+	public CPRule addCPRule(String name, boolean active, String type,
+		UnicodeProperties typeSettingsProperties, ServiceContext serviceContext)
+		throws PortalException;
+
 	public void deleteCPRule(long cpRuleId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -87,4 +92,8 @@ public interface CPRuleService extends BaseService {
 
 	public CPRule updateCPRule(long cpRuleId, String name, boolean active,
 		String type, ServiceContext serviceContext) throws PortalException;
+
+	public CPRule updateCPRule(long cpRuleId, String name, boolean active,
+		String type, UnicodeProperties typeSettingsProperties,
+		ServiceContext serviceContext) throws PortalException;
 }
