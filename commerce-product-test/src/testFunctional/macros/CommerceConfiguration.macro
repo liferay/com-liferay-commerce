@@ -42,7 +42,7 @@
 			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
 			<then>
 				<execute macro="PortletEntry#deleteViaMenuItem">
-					<var name="rowEntries" value="New Availability Estimate" />
+					<var name="rowEntry" value="New Availability Estimate" />
 				</execute>
 			</then>
 		</if>
@@ -68,7 +68,7 @@
 			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
 			<then>
 				<execute macro="PortletEntry#deleteViaMenuItem">
-					<var name="rowEntries" value="New Currency" />
+					<var name="rowEntry" value="New Currency" />
 				</execute>
 			</then>
 		</if>
@@ -89,8 +89,8 @@
 			</then>
 		</if>
 
-		<execute macro="CommerceEntry#gotoMeasurementUnitsTab">
-			<var name="measurementUnitTab" value="Weight" />
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="Weight" />
 		</execute>
 
 		<if>
@@ -117,7 +117,7 @@
 			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
 			<then>
 				<execute macro="PortletEntry#deleteViaMenuItem">
-					<var name="rowEntries" value="New Notification Template" />
+					<var name="rowEntry" value="New Notification Template" />
 				</execute>
 			</then>
 		</if>
