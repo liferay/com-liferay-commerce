@@ -285,7 +285,8 @@ create table CPRule (
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
 	active_ BOOLEAN,
-	type_ VARCHAR(75) null
+	type_ VARCHAR(75) null,
+	typeSettings TEXT null
 );
 
 create table CPRuleAssetCategoryRel (
