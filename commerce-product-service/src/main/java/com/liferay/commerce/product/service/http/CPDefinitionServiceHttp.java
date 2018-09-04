@@ -167,7 +167,8 @@ public class CPDefinitionServiceHttp {
 	}
 
 	public static void deleteAssetCategoryCPDefinition(
-		HttpPrincipal httpPrincipal, long cpDefinitionId, long categoryId)
+		HttpPrincipal httpPrincipal, long cpDefinitionId, long categoryId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
@@ -175,7 +176,7 @@ public class CPDefinitionServiceHttp {
 					_deleteAssetCategoryCPDefinitionParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId, categoryId);
+					cpDefinitionId, categoryId, serviceContext);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -951,7 +952,10 @@ public class CPDefinitionServiceHttp {
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteAssetCategoryCPDefinitionParameterTypes2 =
-		new Class[] { long.class, long.class };
+		new Class[] {
+			long.class, long.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
+		};
 	private static final Class<?>[] _deleteCPDefinitionParameterTypes3 = new Class[] {
 			long.class
 		};

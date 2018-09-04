@@ -222,10 +222,11 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 
 	@Override
 	public void deleteAssetCategoryCPDefinition(long cpDefinitionId,
-		long categoryId)
+		long categoryId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_cpDefinitionLocalService.deleteAssetCategoryCPDefinition(cpDefinitionId,
-			categoryId);
+			categoryId, serviceContext);
 	}
 
 	/**
@@ -525,7 +526,8 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitionsByCategoryId(
-		long categoryId, int start, int end) {
+		long categoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionLocalService.getCPDefinitionsByCategoryId(categoryId,
 			start, end);
 	}
@@ -585,7 +587,8 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 	}
 
 	@Override
-	public int getCPDefinitionsCountByCategoryId(long categoryId) {
+	public int getCPDefinitionsCountByCategoryId(long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionLocalService.getCPDefinitionsCountByCategoryId(categoryId);
 	}
 

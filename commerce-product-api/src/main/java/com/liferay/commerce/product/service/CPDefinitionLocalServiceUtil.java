@@ -228,9 +228,12 @@ public class CPDefinitionLocalServiceUtil {
 	}
 
 	public static void deleteAssetCategoryCPDefinition(long cpDefinitionId,
-		long categoryId)
+		long categoryId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteAssetCategoryCPDefinition(cpDefinitionId, categoryId);
+		getService()
+			.deleteAssetCategoryCPDefinition(cpDefinitionId, categoryId,
+			serviceContext);
 	}
 
 	/**
@@ -500,7 +503,8 @@ public class CPDefinitionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitionsByCategoryId(
-		long categoryId, int start, int end) {
+		long categoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCPDefinitionsByCategoryId(categoryId, start, end);
 	}
 
@@ -554,7 +558,8 @@ public class CPDefinitionLocalServiceUtil {
 			status);
 	}
 
-	public static int getCPDefinitionsCountByCategoryId(long categoryId) {
+	public static int getCPDefinitionsCountByCategoryId(long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCPDefinitionsCountByCategoryId(categoryId);
 	}
 
