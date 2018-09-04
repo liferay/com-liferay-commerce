@@ -31,8 +31,12 @@
 				<action-key>VIEW_COMMERCE_PRODUCT_RULES</action-key>
 				<action-key>VIEW_PRICE</action-key>
 			</supports>
-			<site-member-defaults />
-			<guest-defaults />
+			<site-member-defaults>
+				<action-key>VIEW_PRICE</action-key>
+			</site-member-defaults>
+			<guest-defaults>
+				<action-key>VIEW_PRICE</action-key>
+			</guest-defaults>
 			<guest-unsupported>
 				<action-key>ADD_COMMERCE_PRODUCT_DEFINITION</action-key>
 				<action-key>ADD_COMMERCE_PRODUCT_OPTION</action-key>
