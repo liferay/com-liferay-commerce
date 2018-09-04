@@ -42,6 +42,8 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.function.ToLongFunction;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -88,6 +90,19 @@ public class AssetCategoryCPRuleTypeImpl implements CPRuleType {
 	@Override
 	public String getLabel(Locale locale) {
 		return LanguageUtil.get(locale, "categories");
+	}
+
+	@Override
+	public UnicodeProperties getTypeSettingsProperties(
+		HttpServletRequest httpServletRequest) {
+
+		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
+
+		boolean orSearch = ParamUtil.getBoolean(httpServletRequest, "orSearch");
+
+		typeSettingsProperties.put("orSearch", String.valueOf(orSearch));
+
+		return typeSettingsProperties;
 	}
 
 	@Override
