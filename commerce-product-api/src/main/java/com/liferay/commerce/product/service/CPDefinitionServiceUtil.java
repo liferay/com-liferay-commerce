@@ -102,9 +102,12 @@ public class CPDefinitionServiceUtil {
 	}
 
 	public static void deleteAssetCategoryCPDefinition(long cpDefinitionId,
-		long categoryId)
+		long categoryId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteAssetCategoryCPDefinition(cpDefinitionId, categoryId);
+		getService()
+			.deleteAssetCategoryCPDefinition(cpDefinitionId, categoryId,
+			serviceContext);
 	}
 
 	public static void deleteCPDefinition(long cpDefinitionId)
