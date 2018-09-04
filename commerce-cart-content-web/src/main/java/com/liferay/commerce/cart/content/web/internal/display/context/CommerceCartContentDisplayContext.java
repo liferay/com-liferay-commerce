@@ -23,6 +23,8 @@ import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.price.CommerceProductPrice;
+import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -62,6 +64,7 @@ public class CommerceCartContentDisplayContext {
 			CommerceOrderItemService commerceOrderItemService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
+			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			CPDefinitionHelper cpDefinitionHelper,
 			CPInstanceHelper cpInstanceHelper,
 			ModelResourcePermission<CommerceOrder>
@@ -71,6 +74,7 @@ public class CommerceCartContentDisplayContext {
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_commerceOrderValidatorRegistry = commerceOrderValidatorRegistry;
+		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 
 		this.cpDefinitionHelper = cpDefinitionHelper;
 		this.cpInstanceHelper = cpInstanceHelper;
@@ -149,6 +153,15 @@ public class CommerceCartContentDisplayContext {
 
 		return _commerceOrderValidatorRegistry.getCommerceOrderValidatorResults(
 			getCommerceOrder());
+	}
+
+	public CommerceProductPrice getCommerceProductPrice(
+			CommerceOrderItem commerceOrderItem)
+		throws PortalException {
+
+		return _commerceProductPriceCalculation.getCommerceProductPrice(
+			commerceOrderItem.getCPInstanceId(),
+			commerceOrderItem.getQuantity(), commerceContext);
 	}
 
 	public String getCPDefinitionURL(
@@ -313,6 +326,8 @@ public class CommerceCartContentDisplayContext {
 	private final CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 	private final CommerceOrderValidatorRegistry
 		_commerceOrderValidatorRegistry;
+	private final CommerceProductPriceCalculation
+		_commerceProductPriceCalculation;
 	private long _displayStyleGroupId;
 	private SearchContainer<CommerceOrderItem> _searchContainer;
 

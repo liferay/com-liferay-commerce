@@ -126,6 +126,11 @@
 				"portletName": "com_liferay_commerce_cart_content_web_internal_portlet_CommerceCartContentPortlet"
 			},
 			{
+				"layoutColumnId": "column-2",
+				"layoutColumnPos": 1,
+				"portletName": "com_liferay_commerce_discount_content_web_internal_portlet_CommerceDiscountContentPortlet"
+			},
+			{
 				"layoutColumnId": "column-3",
 				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_cart_content_web_internal_portlet_CommerceCartContentTotalPortlet"

@@ -23,6 +23,7 @@ int maxOrderQuantity = (int)request.getAttribute("liferay-commerce:quantity-inpu
 int minOrderQuantity = (int)request.getAttribute("liferay-commerce:quantity-input:minOrderQuantity");
 int multipleOrderQuantity = (int)request.getAttribute("liferay-commerce:quantity-input:multipleOrderQuantity");
 String name = (String)request.getAttribute("liferay-commerce:quantity-input:name");
+boolean showLabel = (boolean)request.getAttribute("liferay-commerce:quantity-input:showLabel");
 boolean useSelect = (boolean)request.getAttribute("liferay-commerce:quantity-input:useSelect");
 int value = (int)request.getAttribute("liferay-commerce:quantity-input:value");
 
