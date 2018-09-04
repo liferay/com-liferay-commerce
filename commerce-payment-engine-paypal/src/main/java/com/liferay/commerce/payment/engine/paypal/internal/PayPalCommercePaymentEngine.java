@@ -256,8 +256,7 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 
 		amount.setDetails(details);
 
-		amount.setTotal(
-			_payPalDecimalFormat.format(commerceOrder.getTotal()));
+		amount.setTotal(_payPalDecimalFormat.format(commerceOrder.getTotal()));
 
 		return amount;
 	}
@@ -326,8 +325,7 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 			item.setDescription(cpDefinition.getShortDescription(languageId));
 			item.setName(commerceOrderItem.getName(languageId));
 			item.setPrice(
-				_payPalDecimalFormat.format(
-					commerceOrderItem.getUnitPrice()));
+				_payPalDecimalFormat.format(commerceOrderItem.getUnitPrice()));
 			item.setQuantity(String.valueOf(commerceOrderItem.getQuantity()));
 			item.setSku(commerceOrderItem.getSku());
 
@@ -433,8 +431,6 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 			payment.toJSON(), url);
 	}
 
-	private DecimalFormat _payPalDecimalFormat;
-
 	@Reference
 	private ConfigurationProvider _configurationProvider;
 
@@ -446,6 +442,8 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+	private final DecimalFormat _payPalDecimalFormat;
 
 	@Reference
 	private Portal _portal;
