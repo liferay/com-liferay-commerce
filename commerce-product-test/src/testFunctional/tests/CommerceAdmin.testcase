@@ -59,8 +59,8 @@
 			<var name="portlet" value="Settings" />
 		</execute>
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Availability Estimates" />
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="Availability Estimates" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -97,8 +97,8 @@
 			<var name="portlet" value="Settings" />
 		</execute>
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Countries" />
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="Countries" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -134,8 +134,8 @@
 			<var name="portlet" value="Settings" />
 		</execute>
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Currencies" />
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="Currencies" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -177,8 +177,8 @@
 			<var name="portlet" value="Settings" />
 		</execute>
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Measurement Units" />
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="Measurement Units" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -191,8 +191,8 @@
 
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 
-		<execute macro="CommerceEntry#gotoMeasurementUnitsTab">
-			<var name="measurementUnitTab" value="Weight" />
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="Weight" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -213,12 +213,12 @@
 			<var name="portlet" value="Settings" />
 		</execute>
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Notifications" />
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="notifications" />
 		</execute>
 
-		<execute macro="CommerceEntry#gotoNotificationsTab">
-			<var name="notificationsTab" value="Notification Templates" />
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="Notification Templates" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
