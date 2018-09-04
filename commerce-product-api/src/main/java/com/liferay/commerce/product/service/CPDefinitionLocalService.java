@@ -179,7 +179,8 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	public CPDefinition createCPDefinition(long CPDefinitionId);
 
 	public void deleteAssetCategoryCPDefinition(long cpDefinitionId,
-		long categoryId) throws PortalException;
+		long categoryId, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	* Deletes the cp definition from the database. Also notifies the appropriate model listeners.
@@ -386,7 +387,7 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinition> getCPDefinitionsByCategoryId(long categoryId,
-		int start, int end);
+		int start, int end) throws PortalException;
 
 	/**
 	* Returns all the cp definitions matching the UUID and company.
@@ -430,7 +431,8 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 		String languageId, int status);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPDefinitionsCountByCategoryId(long categoryId);
+	public int getCPDefinitionsCountByCategoryId(long categoryId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Map<Locale, String> getCPDefinitionShortDescriptionMap(

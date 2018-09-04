@@ -90,7 +90,8 @@ public interface CPDefinitionService extends BaseService {
 		ServiceContext serviceContext) throws PortalException;
 
 	public void deleteAssetCategoryCPDefinition(long cpDefinitionId,
-		long categoryId) throws PortalException;
+		long categoryId, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void deleteCPDefinition(long cpDefinitionId)
 		throws PortalException;
