@@ -62,6 +62,7 @@ import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,6 +89,18 @@ import org.osgi.service.component.annotations.Reference;
 	service = CommercePaymentEngine.class
 )
 public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
+
+	public PayPalCommercePaymentEngine() {
+		_PAY_PAL_DECIMAL_FORMAT = new DecimalFormat("#,###.##");
+
+		DecimalFormatSymbols decimalFormatSymbols =
+			_PAY_PAL_DECIMAL_FORMAT.getDecimalFormatSymbols();
+
+		decimalFormatSymbols.setDecimalSeparator('.');
+		decimalFormatSymbols.setGroupingSeparator(',');
+
+		_PAY_PAL_DECIMAL_FORMAT.setDecimalFormatSymbols(decimalFormatSymbols);
+	}
 
 	@Override
 	public CommercePaymentEngineResult cancelPayment(
@@ -420,8 +433,7 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 			payment.toJSON(), url);
 	}
 
-	private static final DecimalFormat _PAY_PAL_DECIMAL_FORMAT =
-		new DecimalFormat("#,###.00");
+	private static final DecimalFormat _PAY_PAL_DECIMAL_FORMAT;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;
