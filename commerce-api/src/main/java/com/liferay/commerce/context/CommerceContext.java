@@ -46,6 +46,8 @@ public interface CommerceContext extends Serializable {
 
 	public Organization getOrganization() throws PortalException;
 
+	public long getSiteGroupId() throws PortalException;
+
 	public long getUserId();
 
 }
