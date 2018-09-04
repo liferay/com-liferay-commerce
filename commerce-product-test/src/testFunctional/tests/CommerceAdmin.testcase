@@ -77,6 +77,8 @@
 	<command name="CreateNewCatalogRule">
 		<property name="portal.acceptance" value="true" />
 
+		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
+
 		<execute macro="ProductMenu#gotoSitesCommerce">
 			<var name="portlet" value="Catalog Rules" />
 		</execute>
@@ -152,6 +154,8 @@
 
 	<command name="CreateNewDiscount">
 		<property name="portal.acceptance" value="true" />
+
+		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
 
 		<execute macro="ProductMenu#gotoSitesCommerce">
 			<var name="portlet" value="Discounts" />
