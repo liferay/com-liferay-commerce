@@ -26,7 +26,6 @@ import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
-import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionServiceUtil;
@@ -39,7 +38,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.settings.SystemSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -69,16 +67,6 @@ public class PriceTag extends IncludeTag {
 					CommerceWebKeys.COMMERCE_CONTEXT);
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
-
-			PortletResourcePermission cpPortletResourcePermission =
-				ServletContextUtil.getCPPortletResourcePermission();
-
-			if (!cpPortletResourcePermission.contains(
-					themeDisplay.getPermissionChecker(),
-					themeDisplay.getScopeGroupId(), CPActionKeys.VIEW_PRICE)) {
-
-				return SKIP_BODY;
-			}
 
 			setProductInfo();
 
@@ -158,6 +146,8 @@ public class PriceTag extends IncludeTag {
 		_cpInstanceId = 0;
 		_decimalFormat = null;
 		_discountLabel = null;
+		_formattedPrice = null;
+		_formattedPromoPrice = null;
 		_promoPriceLabel = null;
 		_quantity = 0;
 		_showDiscount = true;
@@ -266,6 +256,10 @@ public class PriceTag extends IncludeTag {
 			CommerceProductPrice commerceProductPrice =
 				commerceProductPriceCalculation.getCommerceProductPrice(
 					_cpInstance.getCPInstanceId(), _quantity, commerceContext);
+
+			if (commerceProductPrice == null) {
+				return;
+			}
 
 			CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 
