@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.security.permission.resource.PortletResourcePer
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.List;
 
@@ -48,6 +49,21 @@ public class CPRuleServiceImpl extends CPRuleServiceBaseImpl {
 			CPActionKeys.ADD_COMMERCE_PRODUCT_RULE);
 
 		return cpRuleLocalService.addCPRule(name, active, type, serviceContext);
+	}
+
+	@Override
+	public CPRule addCPRule(
+			String name, boolean active, String type,
+			UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			CPActionKeys.ADD_COMMERCE_PRODUCT_RULE);
+
+		return cpRuleLocalService.addCPRule(name, active, type,
+			typeSettingsProperties, serviceContext);
 	}
 
 	@Override
@@ -114,6 +130,21 @@ public class CPRuleServiceImpl extends CPRuleServiceBaseImpl {
 
 		return cpRuleLocalService.updateCPRule(
 			cpRuleId, name, active, type, serviceContext);
+	}
+
+	@Override
+	public CPRule updateCPRule(
+			long cpRuleId, String name, boolean active, String type,
+			UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_cpRuleModelResourcePermission.check(
+			getPermissionChecker(), cpRuleId, ActionKeys.UPDATE);
+
+		return cpRuleLocalService.updateCPRule(
+			cpRuleId, name, active, type, typeSettingsProperties,
+			serviceContext);
 	}
 
 	private static volatile ModelResourcePermission<CPRule>
