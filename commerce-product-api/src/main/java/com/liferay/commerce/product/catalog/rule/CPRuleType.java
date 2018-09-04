@@ -21,8 +21,11 @@ import com.liferay.commerce.product.model.CPRule;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Marco Leo
@@ -37,11 +40,17 @@ public interface CPRuleType {
 
 	public String getLabel(Locale locale);
 
+	public UnicodeProperties getTypeSettingsProperties(
+		HttpServletRequest httpServletRequest);
+
 	public boolean isSatisfied(CPDefinition cpDefinition, CPRule cpRule)
 		throws PortalException;
 
 	public void postProcessContextBooleanFilter(
 			BooleanFilter contextBooleanFilter, CPRule cpRule)
+		throws PortalException;
+
+	public void update(CPRule cpRule, HttpServletRequest httpServletRequest)
 		throws PortalException;
 
 }

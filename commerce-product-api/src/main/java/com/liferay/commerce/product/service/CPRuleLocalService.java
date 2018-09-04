@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.io.Serializable;
 
@@ -79,6 +80,11 @@ public interface CPRuleLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CPRule addCPRule(String name, boolean active, String type,
 		ServiceContext serviceContext) throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CPRule addCPRule(String name, boolean active, String type,
+		UnicodeProperties typeSettingsProperties, ServiceContext serviceContext)
+		throws PortalException;
 
 	public void cleanCPRulesCache(long groupId);
 
@@ -265,4 +271,9 @@ public interface CPRuleLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CPRule updateCPRule(long cpRuleId, String name, boolean active,
 		String type, ServiceContext serviceContext) throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CPRule updateCPRule(long cpRuleId, String name, boolean active,
+		String type, UnicodeProperties typeSettingsProperties,
+		ServiceContext serviceContext) throws PortalException;
 }

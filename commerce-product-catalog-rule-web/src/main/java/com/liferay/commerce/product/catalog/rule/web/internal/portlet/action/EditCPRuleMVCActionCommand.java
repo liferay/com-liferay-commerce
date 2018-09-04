@@ -14,14 +14,14 @@
 
 package com.liferay.commerce.product.catalog.rule.web.internal.portlet.action;
 
+import com.liferay.commerce.product.catalog.rule.CPRuleType;
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.exception.CPRuleTypeException;
 import com.liferay.commerce.product.exception.NoSuchCPRuleException;
 import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.product.model.CPRuleAssetCategoryRel;
 import com.liferay.commerce.product.service.CPRuleAssetCategoryRelService;
 import com.liferay.commerce.product.service.CPRuleService;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,20 +34,20 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
-import java.util.List;
 import java.util.concurrent.Callable;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -163,72 +163,29 @@ public class EditCPRuleMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CPRule.class.getName(), actionRequest);
 
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			actionRequest);
+
+		CPRuleType cpRuleType = _cpRuleTypeRegistry.getCPRuleType(type);
+
+		UnicodeProperties typeSettingsProperties =
+			cpRuleType.getTypeSettingsProperties(httpServletRequest);
+
 		CPRule cpRule = null;
 
 		if (cpRuleId <= 0) {
 			cpRule = _cpRuleService.addCPRule(
-				name, active, type, serviceContext);
+				name, active, type, typeSettingsProperties, serviceContext);
 		}
 		else {
 			cpRule = _cpRuleService.updateCPRule(
-				cpRuleId, name, active, type, serviceContext);
+				cpRuleId, name, active, type, typeSettingsProperties,
+				serviceContext);
 		}
 
-		if (cpRule != null) {
-			updateCPRuleAssetCategoryRels(actionRequest, cpRule);
-		}
+		cpRuleType.update(cpRule, httpServletRequest);
 
 		return cpRule;
-	}
-
-	protected void updateCPRuleAssetCategoryRels(
-			ActionRequest actionRequest, CPRule cpRule)
-		throws PortalException {
-
-		String assetCategoryIds = ParamUtil.getString(
-			actionRequest, "assetCategoryIds");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CPRuleAssetCategoryRel.class.getName(), actionRequest);
-
-		String[] assetCategoryIdsArray = StringUtil.split(
-			assetCategoryIds, StringPool.COMMA);
-
-		List<CPRuleAssetCategoryRel> cpRuleAssetCategoryRels =
-			_cpRuleAssetCategoryRelService.getCPRuleAssetCategoryRels(
-				cpRule.getCPRuleId());
-
-		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel :
-				cpRuleAssetCategoryRels) {
-
-			if (ArrayUtil.contains(
-					assetCategoryIdsArray,
-					String.valueOf(
-						cpRuleAssetCategoryRel.getAssetCategoryId()))) {
-
-				continue;
-			}
-
-			_cpRuleAssetCategoryRelService.deleteCPRuleAssetCategoryRel(
-				cpRuleAssetCategoryRel.getCPRuleAssetCategoryRelId());
-		}
-
-		long[] cpRuleAssetCategoryIds =
-			_cpRuleAssetCategoryRelService.getAssetCategoryIds(
-				cpRule.getCPRuleId());
-
-		for (String newAssetCategoryId : assetCategoryIdsArray) {
-			long assetCategoryId = GetterUtil.getLong(newAssetCategoryId);
-
-			if (ArrayUtil.contains(cpRuleAssetCategoryIds, assetCategoryId)) {
-				continue;
-			}
-
-			if (assetCategoryId > 0) {
-				_cpRuleAssetCategoryRelService.addCPRuleAssetCategoryRel(
-					cpRule.getCPRuleId(), assetCategoryId, serviceContext);
-			}
-		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -243,6 +200,9 @@ public class EditCPRuleMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	private CPRuleService _cpRuleService;
+
+	@Reference
+	private CPRuleTypeRegistry _cpRuleTypeRegistry;
 
 	@Reference
 	private Portal _portal;
