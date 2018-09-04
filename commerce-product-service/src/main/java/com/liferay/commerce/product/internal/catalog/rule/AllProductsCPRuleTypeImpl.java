@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -59,6 +60,13 @@ public class AllProductsCPRuleTypeImpl implements CPRuleType {
 			"content.Language", locale, getClass());
 
 		return LanguageUtil.get(resourceBundle, "all-products");
+	}
+
+	@Override
+	public UnicodeProperties getTypeSettingsProperties(
+		HttpServletRequest httpServletRequest) {
+
+		return null;
 	}
 
 	@Override

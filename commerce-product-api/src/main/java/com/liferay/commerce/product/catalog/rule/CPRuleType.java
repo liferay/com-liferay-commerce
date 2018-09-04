@@ -22,8 +22,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Marco Leo
@@ -37,6 +40,9 @@ public interface CPRuleType {
 	public String getKey();
 
 	public String getLabel(Locale locale);
+
+	public UnicodeProperties getTypeSettingsProperties(
+		HttpServletRequest httpServletRequest);
 
 	public boolean isSatisfied(CPDefinition cpDefinition, CPRule cpRule)
 		throws PortalException;
