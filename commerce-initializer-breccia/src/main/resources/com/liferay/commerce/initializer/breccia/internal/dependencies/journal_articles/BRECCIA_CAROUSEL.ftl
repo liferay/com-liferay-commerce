@@ -6,7 +6,7 @@
 <@liferay_theme["defineObjects"] />
 
 <div class="row">
-	<div class="carousel commerce-carousel slide" data-ride="carousel" id="minetteCarousel${namespace}">
+	<div class="carousel commerce-carousel slide" data-ride="carousel" id="brecciaCarousel${namespace}">
 		<div class="carousel-inner">
 			<#if CAROUSELIMAGE.getSiblings()?has_content>
 				<#assign listSize = CAROUSELIMAGE.getSiblings()?size />
@@ -77,12 +77,12 @@
 			</#if>
 		</div>
 
-		<a class="carousel-control-prev commerce-carousel-control" data-slide="prev" href="#minetteCarousel${namespace}" role="button">
+		<a class="carousel-control-prev commerce-carousel-control" data-slide="prev" href="#brecciaCarousel${namespace}" role="button">
 			<svg aria-hidden="true" class="lexicon-icon lexicon-icon-angle-left" focusable="false"><use xlink:href="${themeDisplay.getPathThemeImages()}/lexicon/icons.svg#angle-left" /></svg>
 			<span class="sr-only">Previous</span>
 		</a>
 
-		<a class="carousel-control-next commerce-carousel-control" data-slide="next" href="#minetteCarousel${namespace}" role="button">
+		<a class="carousel-control-next commerce-carousel-control" data-slide="next" href="#brecciaCarousel${namespace}" role="button">
 			<svg aria-hidden="true" class="lexicon-icon lexicon-icon-angle-right" focusable="false"><use xlink:href="${themeDisplay.getPathThemeImages()}/lexicon/icons.svg#angle-right" /></svg>
 			<span class="sr-only">Next</span>
 		</a>

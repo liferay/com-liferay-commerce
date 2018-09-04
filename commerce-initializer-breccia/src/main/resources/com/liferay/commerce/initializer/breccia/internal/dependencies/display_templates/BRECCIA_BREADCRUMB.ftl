@@ -1,5 +1,5 @@
 <#if entries?has_content>
-	<ul class="breadcrumb minette-breadcrumb">
+	<ul class="breadcrumb breccia-breadcrumb">
 		<#assign cssClass = "" />
 
 		<#list entries as entry>

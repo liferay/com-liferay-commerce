@@ -1,16 +1,4 @@
-<#assign
-	orderId = '${commerceCartContentDisplayContext.getCommerceOrderId()}'
-/>
-
-<div class="minette-commerce-cart-content">
-	<div class="commerce-component-header">
-		<h2 class="component-title">
-			<#if commerceCartContentDisplayContext.getCommerceOrderId() != 0>
-				${languageUtil.format(request, "order-x", orderId, false)}
-			</#if>
-		</h2>
-	</div>
-
+<div class="breccia-commerce-cart-content">
 	<#if entries?has_content>
 		<div class="table-responsive">
 			<table class="table table-autofit table-list">
@@ -19,24 +7,31 @@
 						<th class="image-column"></th>
 						<th class="product-column table-cell-expand">${languageUtil.get(request, "product")}</th>
 						<th class="quantity-column table-cell-expand">${languageUtil.get(request, "quantity")}</th>
-						<th class="subtotal-column table-cell-expand">${languageUtil.get(request, "subtotal")}</th>
+						<th class="subtotal-column table-cell-expand">${languageUtil.get(request, "price")}</th>
+						<th class="subtotal-column table-cell-expand">${languageUtil.get(request, "discount")}</th>
+						<th class="subtotal-column table-cell-expand">${languageUtil.get(request, "final-price")}</th>
+						<th class="subtotal-column table-cell-expand"></th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<#list entries as curCommerceOrderItem>
 						<#assign
+							commerceProductPrice = commerceCartContentDisplayContext.getCommerceProductPrice(curCommerceOrderItem)
+
 							cpDefinition = curCommerceOrderItem.getCPDefinition()
 
 							deleteURL = commerceCartContentDisplayContext.getDeleteURL(curCommerceOrderItem)
 
-							finalPriceMoney = curCommerceOrderItem.getFinalPriceMoney()
+							finalPriceMoney = commerceProductPrice.getFinalPrice()
 
 							image = ''
 
 							productURL = commerceCartContentDisplayContext.getCPDefinitionURL(cpDefinition.getCPDefinitionId(), themeDisplay)
 
 							title = cpDefinition.getName()
+
+							unitPriceMoney = commerceProductPrice.getUnitPrice()
 						/>
 
 						<#if commerceCartContentDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem, themeDisplay)??>
@@ -59,15 +54,33 @@
 								<div class="table-text">${languageUtil.get(request, "sku")} ${curCommerceOrderItem.getSku()}</div>
 							</td>
 							<td class="quantity-column table-cell-expand">
-								<input class="custom-number custom-number-monospaced form-control" type="number" value="${curCommerceOrderItem.getQuantity()}">
+								<@liferay_commerce_cart["quantity-control"] commerceOrderItemId=curCommerceOrderItem.getCommerceOrderItemId() />
 							</td>
 							<td class="subtotal-column table-cell-expand">
-								<div class="commerce-cart-content-value subtotal-value">
-									${curCommerceOrderItem.getQuantity()} x ${finalPriceMoney.format(locale)}
+								<div class="commerce-cart-content-value unit-price-value">
+									${unitPriceMoney.format(locale)}
 								</div>
+							</td>
+							<td class="subtotal-column table-cell-expand">
+								<div class="commerce-cart-content-value discount-value">
+									<#if commerceProductPrice.getDiscountValue()??>
+										<#assign
+											discountValue = commerceProductPrice.getDiscountValue()
 
+											discountAmount = discountValue.getDiscountAmount()
+										/>
+
+										${discountAmount.format(locale)}
+									</#if>
+								</div>
+							</td>
+							<td class="subtotal-column table-cell-expand">
+								<div class="commerce-cart-content-value final-price-value">
+									${finalPriceMoney.format(locale)}
+								</div>
+							</td>
+							<td class="subtotal-column table-cell-expand">
 								<@liferay_ui["icon-delete"]
-									cssClass="commerce-cart-content-remove"
 									label=true
 									url=deleteURL
 								/>
@@ -78,7 +91,7 @@
 			</table>
 		</div>
 	<#else>
-		<h3>${languageUtil.get(request, "there-are-no-items-in-your-cart")}.</h3>
+		<h3>${languageUtil.get(resourceBundle, "there-are-no-items-in-your-cart")}.</h3>
 	</#if>
 </div>
 
@@ -89,3 +102,12 @@
 		</div>
 	</div>
 </div>
+
+<@liferay_aui["script"]>
+	Liferay.after(
+		'commerce:productAddedToCart',
+		function(event) {
+			Liferay.Portlet.refresh('#p_p_id<@portlet.namespace />');
+		}
+	);
+</@>

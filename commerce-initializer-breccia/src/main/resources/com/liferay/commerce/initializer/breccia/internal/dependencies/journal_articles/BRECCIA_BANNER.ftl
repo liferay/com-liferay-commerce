@@ -17,7 +17,7 @@
 	/>
 </#if>
 
-<div class="minette-banner row${bannerClasses}" style="${bannerStyles}">
+<div class="breccia-banner row${bannerClasses}" style="${bannerStyles}">
 	<div class="col-md-12">
 		<div class="container-fluid container-fluid-max-xl">
 			${CONTENT.getData()}

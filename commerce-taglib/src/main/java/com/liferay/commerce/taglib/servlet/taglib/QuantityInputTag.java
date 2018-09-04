@@ -92,6 +92,10 @@ public class QuantityInputTag extends IncludeTag {
 		servletContext = ServletContextUtil.getServletContext();
 	}
 
+	public void setShowLabel(boolean showLabel) {
+		_showLabel = showLabel;
+	}
+
 	public void setUseSelect(boolean useSelect) {
 		_useSelect = useSelect;
 	}
@@ -111,6 +115,7 @@ public class QuantityInputTag extends IncludeTag {
 		_minOrderQuantity = 0;
 		_multipleOrderQuantity = 0;
 		_name = null;
+		_showLabel = false;
 		_useSelect = true;
 		_value = 0;
 	}
@@ -138,6 +143,8 @@ public class QuantityInputTag extends IncludeTag {
 			_multipleOrderQuantity);
 		request.setAttribute("liferay-commerce:quantity-input:name", _name);
 		request.setAttribute(
+			"liferay-commerce:quantity-input:showLabel", _showLabel);
+		request.setAttribute(
 			"liferay-commerce:quantity-input:useSelect", _useSelect);
 		request.setAttribute("liferay-commerce:quantity-input:value", _value);
 	}
@@ -154,6 +161,7 @@ public class QuantityInputTag extends IncludeTag {
 	private int _minOrderQuantity;
 	private int _multipleOrderQuantity;
 	private String _name;
+	private boolean _showLabel;
 	private boolean _useSelect = true;
 	private int _value;
 
