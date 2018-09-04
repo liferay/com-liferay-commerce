@@ -27,12 +27,17 @@ import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommercePriceEntryLocalService;
-import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalService;
+import com.liferay.commerce.product.constants.CPActionKeys;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.math.BigDecimal;
@@ -53,8 +58,13 @@ public class CommerceProductPriceCalculationImpl
 
 	@Override
 	public CommerceProductPrice getCommerceProductPrice(
-			long cpInstanceId, int quantity, CommerceContext commerceContext)
+			long cpInstanceId, int quantity, boolean secure,
+			CommerceContext commerceContext)
 		throws PortalException {
+
+		if (secure && !_hasViewPricePermission(commerceContext)) {
+			return null;
+		}
 
 		CommerceMoney unitPrice = getUnitPrice(
 			cpInstanceId, quantity, commerceContext.getCommercePriceList(),
@@ -103,12 +113,25 @@ public class CommerceProductPriceCalculationImpl
 	}
 
 	@Override
+	public CommerceProductPrice getCommerceProductPrice(
+			long cpInstanceId, int quantity, CommerceContext commerceContext)
+		throws PortalException {
+
+		return getCommerceProductPrice(
+			cpInstanceId, quantity, true, commerceContext);
+	}
+
+	@Override
 	public CommerceMoney getFinalPrice(
 			long cpInstanceId, int quantity, CommerceContext commerceContext)
 		throws PortalException {
 
 		CommerceProductPrice commerceProductPrice = getCommerceProductPrice(
 			cpInstanceId, quantity, commerceContext);
+
+		if (commerceProductPrice == null) {
+			return null;
+		}
 
 		return commerceProductPrice.getFinalPrice();
 	}
@@ -277,6 +300,25 @@ public class CommerceProductPriceCalculationImpl
 		return price;
 	}
 
+	private boolean _hasViewPricePermission(CommerceContext commerceContext)
+		throws PortalException {
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		Organization organization = commerceContext.getOrganization();
+
+		if (organization != null) {
+			return _portletResourcePermission.contains(
+				permissionChecker, organization.getGroupId(),
+				CPActionKeys.VIEW_PRICE);
+		}
+
+		return _portletResourcePermission.contains(
+			permissionChecker, commerceContext.getSiteGroupId(),
+			CPActionKeys.VIEW_PRICE);
+	}
+
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
@@ -290,13 +332,13 @@ public class CommerceProductPriceCalculationImpl
 	private CommercePriceEntryLocalService _commercePriceEntryLocalService;
 
 	@Reference
-	private CommercePriceListLocalService _commercePriceListLocalService;
-
-	@Reference
 	private CommerceTierPriceEntryLocalService
 		_commerceTierPriceEntryLocalService;
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 }
