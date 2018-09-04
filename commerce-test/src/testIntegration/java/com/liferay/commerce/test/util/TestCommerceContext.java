@@ -22,6 +22,7 @@ import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 
@@ -35,12 +36,13 @@ import java.util.Optional;
 public class TestCommerceContext implements CommerceContext {
 
 	public TestCommerceContext(
-		CommerceCurrency commerceCurrency, User contextUser,
+		CommerceCurrency commerceCurrency, User contextUser, Group contextGroup,
 		Organization organization, CommerceOrder commerceOrder,
 		String couponCode) {
 
 		_commerceCurrency = commerceCurrency;
 		_contextUser = contextUser;
+		_contextGroup = contextGroup;
 		_organization = organization;
 		_commerceOrder = commerceOrder;
 		_couponCode = couponCode;
@@ -99,12 +101,18 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	@Override
+	public long getSiteGroupId() throws PortalException {
+		return _contextGroup.getGroupId();
+	}
+
+	@Override
 	public long getUserId() {
 		return _contextUser.getUserId();
 	}
 
 	private final CommerceCurrency _commerceCurrency;
 	private final CommerceOrder _commerceOrder;
+	private final Group _contextGroup;
 	private final User _contextUser;
 	private final String _couponCode;
 	private final Organization _organization;

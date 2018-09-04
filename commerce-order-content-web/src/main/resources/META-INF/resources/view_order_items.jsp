@@ -138,48 +138,63 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 						<%
 						CommerceProductPrice commerceProductPrice = commerceOrderItemContentDisplayContext.getCommerceProductPrice(commerceOrderItem);
-
-						CommerceDiscountValue discountValue = commerceProductPrice.getDiscountValue();
-						CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
-						CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 						%>
 
 						<liferay-ui:search-container-column-text
 							name="price"
 						>
-							<div class="value-section">
-								<span class="commerce-value">
-									<%= unitPrice.format(locale) %>
-								</span>
-							</div>
+							<c:if test="<%= commerceProductPrice != null %>">
+
+								<%
+								CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+								%>
+
+								<div class="value-section">
+									<span class="commerce-value">
+										<%= unitPrice.format(locale) %>
+									</span>
+								</div>
+							</c:if>
 						</liferay-ui:search-container-column-text>
-
-						<%
-						CommerceMoney discountAmount = null;
-
-						if (discountValue != null) {
-							discountAmount = discountValue.getDiscountAmount();
-						}
-						%>
 
 						<liferay-ui:search-container-column-text
 							name="discount"
 						>
-							<div class="value-section">
-								<span class="commerce-value">
-									<%= (discountAmount == null) ? StringPool.BLANK : discountAmount.format(locale) %>
-								</span>
-							</div>
+							<c:if test="<%= commerceProductPrice != null %>">
+
+								<%
+								CommerceDiscountValue discountValue = commerceProductPrice.getDiscountValue();
+
+								CommerceMoney discountAmount = null;
+
+								if (discountValue != null) {
+									discountAmount = discountValue.getDiscountAmount();
+								}
+								%>
+
+								<div class="value-section">
+									<span class="commerce-value">
+										<%= (discountAmount == null) ? StringPool.BLANK : discountAmount.format(locale) %>
+									</span>
+								</div>
+							</c:if>
 						</liferay-ui:search-container-column-text>
 
 						<liferay-ui:search-container-column-text
 							name="final-price"
 						>
-							<div class="value-section">
-								<span class="commerce-value">
-									<%= finalPrice.format(locale) %>
-								</span>
-							</div>
+							<c:if test="<%= commerceProductPrice != null %>">
+
+								<%
+								CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+								%>
+
+								<div class="value-section">
+									<span class="commerce-value">
+										<%= finalPrice.format(locale) %>
+									</span>
+								</div>
+							</c:if>
 						</liferay-ui:search-container-column-text>
 					</liferay-ui:search-container-row>
 

@@ -102,7 +102,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, null, null, null);
+			commerceCurrency, _user, _group, null, null, null);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -111,9 +111,13 @@ public class CommerceDiscountTest {
 		BigDecimal expectedPrice = cpInstance.getPrice().subtract(
 			commerceDiscount.getLevel1());
 
-		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+		BigDecimal actualPrice = BigDecimal.ZERO;
 
-		BigDecimal actualPrice = finalPrice.getPrice();
+		if (commerceProductPrice != null) {
+			CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+
+			actualPrice = finalPrice.getPrice();
+		}
 
 		Assert.assertEquals(
 			expectedPrice.stripTrailingZeros(),
@@ -196,7 +200,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, null, null, null);
+			commerceCurrency, _user, _group, null, null, null);
 
 		CommerceProductPrice commerceProductPrice1 =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -229,16 +233,31 @@ public class CommerceDiscountTest {
 		BigDecimal expectedPrice5 =
 			cpInstance5.getPrice().subtract(commerceDiscount3.getLevel1());
 
-		BigDecimal actualPrice1 =
-			commerceProductPrice1.getFinalPrice().getPrice();
-		BigDecimal actualPrice2 =
-			commerceProductPrice2.getFinalPrice().getPrice();
-		BigDecimal actualPrice3 =
-			commerceProductPrice3.getFinalPrice().getPrice();
-		BigDecimal actualPrice4 =
-			commerceProductPrice4.getFinalPrice().getPrice();
-		BigDecimal actualPrice5 =
-			commerceProductPrice5.getFinalPrice().getPrice();
+		BigDecimal actualPrice1 = BigDecimal.ZERO;
+		BigDecimal actualPrice2 = BigDecimal.ZERO;
+		BigDecimal actualPrice3 = BigDecimal.ZERO;
+		BigDecimal actualPrice4 = BigDecimal.ZERO;
+		BigDecimal actualPrice5 = BigDecimal.ZERO;
+
+		if (commerceProductPrice1 != null) {
+			actualPrice1 = commerceProductPrice1.getFinalPrice().getPrice();
+		}
+
+		if (commerceProductPrice2 != null) {
+			actualPrice2 = commerceProductPrice2.getFinalPrice().getPrice();
+		}
+
+		if (commerceProductPrice3 != null) {
+			actualPrice3 = commerceProductPrice3.getFinalPrice().getPrice();
+		}
+
+		if (commerceProductPrice4 != null) {
+			actualPrice4 = commerceProductPrice4.getFinalPrice().getPrice();
+		}
+
+		if (commerceProductPrice5 != null) {
+			actualPrice5 = commerceProductPrice5.getFinalPrice().getPrice();
+		}
 
 		Assert.assertEquals(
 			expectedPrice1.stripTrailingZeros(),
@@ -335,7 +354,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, null, null, null);
+			commerceCurrency, _user, _group, null, null, null);
 
 		CommerceProductPrice commerceProductPrice1 =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -375,17 +394,31 @@ public class CommerceDiscountTest {
 		BigDecimal expectedPrice5 = _subtractPercentage(
 			cpInstance5.getPrice(), commerceDiscount3.getLevel1());
 
-		CommerceMoney finalPrice1 = commerceProductPrice1.getFinalPrice();
-		CommerceMoney finalPrice2 = commerceProductPrice2.getFinalPrice();
-		CommerceMoney finalPrice3 = commerceProductPrice3.getFinalPrice();
-		CommerceMoney finalPrice4 = commerceProductPrice4.getFinalPrice();
-		CommerceMoney finalPrice5 = commerceProductPrice5.getFinalPrice();
+		BigDecimal actualPrice1 = BigDecimal.ZERO;
+		BigDecimal actualPrice2 = BigDecimal.ZERO;
+		BigDecimal actualPrice3 = BigDecimal.ZERO;
+		BigDecimal actualPrice4 = BigDecimal.ZERO;
+		BigDecimal actualPrice5 = BigDecimal.ZERO;
 
-		BigDecimal actualPrice1 = finalPrice1.getPrice();
-		BigDecimal actualPrice2 = finalPrice2.getPrice();
-		BigDecimal actualPrice3 = finalPrice3.getPrice();
-		BigDecimal actualPrice4 = finalPrice4.getPrice();
-		BigDecimal actualPrice5 = finalPrice5.getPrice();
+		if (commerceProductPrice1 != null) {
+			actualPrice1 = commerceProductPrice1.getFinalPrice().getPrice();
+		}
+
+		if (commerceProductPrice2 != null) {
+			actualPrice2 = commerceProductPrice2.getFinalPrice().getPrice();
+		}
+
+		if (commerceProductPrice3 != null) {
+			actualPrice3 = commerceProductPrice3.getFinalPrice().getPrice();
+		}
+
+		if (commerceProductPrice4 != null) {
+			actualPrice4 = commerceProductPrice4.getFinalPrice().getPrice();
+		}
+
+		if (commerceProductPrice5 != null) {
+			actualPrice5 = commerceProductPrice5.getFinalPrice().getPrice();
+		}
 
 		Assert.assertEquals(
 			expectedPrice1_level3.stripTrailingZeros(),
@@ -439,26 +472,32 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, null, null, couponCode);
+			commerceCurrency, _user, _group, null, null, couponCode);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
 				cpInstance.getCPInstanceId(), 1, commerceContext);
 
-		CommerceDiscountValue discountValue =
-			commerceProductPrice.getDiscountValue();
+		BigDecimal actualPrice = BigDecimal.ZERO;
+		BigDecimal discountPrice = BigDecimal.ZERO;
 
-		CommerceMoney discountAmount = discountValue.getDiscountAmount();
+		if (commerceProductPrice != null) {
+			CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
-		Assert.assertEquals(
-			commerceDiscount.getLevel1(), discountAmount.getPrice());
+			actualPrice = finalPrice.getPrice();
+
+			CommerceDiscountValue discountValue =
+				commerceProductPrice.getDiscountValue();
+
+			CommerceMoney discountAmount = discountValue.getDiscountAmount();
+
+			discountPrice = discountAmount.getPrice();
+		}
+
+		Assert.assertEquals(commerceDiscount.getLevel1(), discountPrice);
 
 		BigDecimal expectedPrice = cpInstance.getPrice().subtract(
 			commerceDiscount.getLevel1());
-
-		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
-
-		BigDecimal actualPrice = finalPrice.getPrice();
 
 		Assert.assertEquals(
 			expectedPrice.stripTrailingZeros(),
@@ -504,7 +543,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, null, null, null);
+			commerceCurrency, _user, _group, null, null, null);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(

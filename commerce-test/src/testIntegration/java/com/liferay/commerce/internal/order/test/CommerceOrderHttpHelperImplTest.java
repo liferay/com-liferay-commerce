@@ -92,7 +92,7 @@ public class CommerceOrderHttpHelperImplTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, null, null, null);
+			commerceCurrency, _user, _group, null, null, null);
 
 		_httpServletRequest.setAttribute(WebKeys.THEME_DISPLAY, _themeDisplay);
 		_httpServletRequest.setAttribute(
