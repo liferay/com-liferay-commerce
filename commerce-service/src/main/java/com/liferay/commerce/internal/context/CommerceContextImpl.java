@@ -150,6 +150,11 @@ public class CommerceContextImpl implements CommerceContext {
 	}
 
 	@Override
+	public long getSiteGroupId() throws PortalException {
+		return _portal.getScopeGroupId(_httpServletRequest);
+	}
+
+	@Override
 	public long getUserId() {
 		return _portal.getUserId(_httpServletRequest);
 	}

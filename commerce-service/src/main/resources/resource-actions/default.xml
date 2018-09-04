@@ -64,10 +64,13 @@
 				<action-key>VIEW_COMMERCE_ORDERS</action-key>
 				<action-key>VIEW_OPEN_COMMERCE_ORDERS</action-key>
 			</supports>
-			<site-member-defaults />
-			<guest-defaults />
-			<guest-unsupported>
+			<site-member-defaults>
 				<action-key>ADD_COMMERCE_ORDER</action-key>
+			</site-member-defaults>
+			<guest-defaults>
+				<action-key>ADD_COMMERCE_ORDER</action-key>
+			</guest-defaults>
+			<guest-unsupported>
 				<action-key>APPROVE_OPEN_COMMERCE_ORDERS</action-key>
 				<action-key>CHECKOUT_OPEN_COMMERCE_ORDERS</action-key>
 				<action-key>DELETE_COMMERCE_ORDERS</action-key>

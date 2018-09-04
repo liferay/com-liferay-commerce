@@ -21,7 +21,6 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
-import com.liferay.commerce.organization.service.CommerceOrganizationLocalService;
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
@@ -92,7 +91,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 				organization.getOrganizationId(), commerceCurrencyId, 0, null);
 		}
 		else {
-			commerceOrder = _commerceOrderLocalService.addUserCommerceOrder(
+			commerceOrder = _commerceOrderService.addUserCommerceOrder(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
 				themeDisplay.getUserId(), commerceCurrencyId);
 		}
@@ -482,9 +481,6 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 	@Reference
 	private CommerceOrganizationHelper _commerceOrganizationHelper;
-
-	@Reference
-	private CommerceOrganizationLocalService _commerceOrganizationLocalService;
 
 	@Reference
 	private Portal _portal;

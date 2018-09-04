@@ -31,6 +31,11 @@ import java.util.Optional;
 public interface CommerceProductPriceCalculation {
 
 	public CommerceProductPrice getCommerceProductPrice(
+			long cpInstanceId, int quantity, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceProductPrice getCommerceProductPrice(
 			long cpInstanceId, int quantity, CommerceContext commerceContext)
 		throws PortalException;
 

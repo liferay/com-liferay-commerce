@@ -20,11 +20,9 @@ import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHelper;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 
 import javax.servlet.ServletContext;
 
@@ -66,12 +64,6 @@ public class ServletContextUtil {
 
 	public static final CPInstanceHelper getCPInstanceHelper() {
 		return _instance._getCPInstanceHelper();
-	}
-
-	public static final PortletResourcePermission
-		getCPPortletResourcePermission() {
-
-		return _instance._getCPPortletResourcePermission();
 	}
 
 	public static final PanelAppRegistry getPanelAppRegistry() {
@@ -141,16 +133,6 @@ public class ServletContextUtil {
 		_cpInstanceHelper = cpInstanceHelper;
 	}
 
-	@Reference(
-		target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")",
-		unbind = "-"
-	)
-	protected void setCPPortletResourcePermission(
-		PortletResourcePermission cpPortletResourcePermission) {
-
-		_cpPortletResourcePermission = cpPortletResourcePermission;
-	}
-
 	@Reference(unbind = "-")
 	protected void setPanelAppRegistry(PanelAppRegistry panelAppRegistry) {
 		_panelAppRegistry = panelAppRegistry;
@@ -197,10 +179,6 @@ public class ServletContextUtil {
 		return _cpInstanceHelper;
 	}
 
-	private PortletResourcePermission _getCPPortletResourcePermission() {
-		return _cpPortletResourcePermission;
-	}
-
 	private PanelAppRegistry _getPanelAppRegistry() {
 		return _panelAppRegistry;
 	}
@@ -222,7 +200,6 @@ public class ServletContextUtil {
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 	private ConfigurationProvider _configurationProvider;
 	private CPInstanceHelper _cpInstanceHelper;
-	private PortletResourcePermission _cpPortletResourcePermission;
 	private PanelAppRegistry _panelAppRegistry;
 	private PanelCategoryRegistry _panelCategoryRegistry;
 	private ServletContext _servletContext;
