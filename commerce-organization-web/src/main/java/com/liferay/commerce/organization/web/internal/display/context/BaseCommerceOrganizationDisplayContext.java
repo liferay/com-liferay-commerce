@@ -213,9 +213,15 @@ public abstract class BaseCommerceOrganizationDisplayContext {
 				organization.getName(), portletURL.toString(), data);
 		}
 
+		String currentOrganizationName = StringPool.BLANK;
+
+		if (currentOrganization != null) {
+			currentOrganizationName = currentOrganization.getName();
+		}
+
 		portal.addPortletBreadcrumbEntry(
 			commerceOrganizationRequestHelper.getRequest(),
-			currentOrganization.getName(), portletURL.toString(), data);
+			currentOrganizationName, portletURL.toString(), data);
 	}
 
 	protected void setDefaultOrderByCol(String defaultOrderByCol) {
