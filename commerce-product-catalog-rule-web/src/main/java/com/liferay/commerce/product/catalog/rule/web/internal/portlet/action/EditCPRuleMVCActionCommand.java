@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.catalog.rule.web.internal.portlet.action;
 
+import com.liferay.commerce.product.catalog.rule.CPRuleType;
+import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.exception.CPRuleTypeException;
 import com.liferay.commerce.product.exception.NoSuchCPRuleException;
@@ -36,6 +38,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.concurrent.Callable;
 
@@ -43,6 +46,8 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -158,16 +163,27 @@ public class EditCPRuleMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CPRule.class.getName(), actionRequest);
 
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			actionRequest);
+
+		CPRuleType cpRuleType = _cpRuleTypeRegistry.getCPRuleType(type);
+
+		UnicodeProperties typeSettingsProperties =
+			cpRuleType.getTypeSettingsProperties(httpServletRequest);
+
 		CPRule cpRule = null;
 
 		if (cpRuleId <= 0) {
 			cpRule = _cpRuleService.addCPRule(
-				name, active, type, serviceContext);
+				name, active, type, typeSettingsProperties, serviceContext);
 		}
 		else {
 			cpRule = _cpRuleService.updateCPRule(
-				cpRuleId, name, active, type, serviceContext);
+				cpRuleId, name, active, type, typeSettingsProperties,
+				serviceContext);
 		}
+
+		cpRuleType.update(cpRule, httpServletRequest);
 
 		return cpRule;
 	}
@@ -184,6 +200,9 @@ public class EditCPRuleMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	private CPRuleService _cpRuleService;
+
+	@Reference
+	private CPRuleTypeRegistry _cpRuleTypeRegistry;
 
 	@Reference
 	private Portal _portal;

@@ -104,10 +104,6 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 		cpRule.setTypeSettingsProperties(typeSettingsProperties);
 		cpRule.setExpandoBridgeAttributes(serviceContext);
 
-		CPRuleType cpRuleType = _cpRuleTypeRegistry.getCPRuleType(type);
-
-		cpRuleType.update(cpRule, serviceContext);
-
 		cpRulePersistence.update(cpRule);
 
 		// Resources
@@ -305,10 +301,6 @@ public class CPRuleLocalServiceImpl extends CPRuleLocalServiceBaseImpl {
 		cpRule.setType(type);
 		cpRule.setTypeSettingsProperties(typeSettingsProperties);
 		cpRule.setExpandoBridgeAttributes(serviceContext);
-
-		CPRuleType cpRuleType = _cpRuleTypeRegistry.getCPRuleType(type);
-
-		cpRuleType.update(cpRule, serviceContext);
 
 		cpRule = cpRulePersistence.update(cpRule);
 
