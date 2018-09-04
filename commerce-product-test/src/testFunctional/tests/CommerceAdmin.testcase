@@ -162,7 +162,7 @@
 		<execute macro="CommerceEntry#addNewDiscuntsEntry">
 			<var name="discountLevel" value="15" />
 			<var name="discountTarget" value="Apply to Product" />
-			<var name="entryName" value="New Discount" />
+			<var name="entryTitle" value="New Discount" />
 			<var name="maximumDiscountAmount" value="10" />
 			<var name="userSegment" value="User Segment" />
 		</execute>
