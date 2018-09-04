@@ -22,12 +22,13 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -83,8 +84,7 @@ public class AllProductsCPRuleTypeImpl implements CPRuleType {
 	}
 
 	@Override
-	public void update(CPRule cpRule, ServiceContext serviceContext)
-		throws PortalException {
+	public void update(CPRule cpRule, HttpServletRequest httpServletRequest) {
 	}
 
 }

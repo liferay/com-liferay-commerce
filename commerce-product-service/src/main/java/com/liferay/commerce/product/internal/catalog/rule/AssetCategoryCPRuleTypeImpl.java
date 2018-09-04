@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -163,28 +164,14 @@ public class AssetCategoryCPRuleTypeImpl implements CPRuleType {
 	}
 
 	@Override
-	public void update(CPRule cpRule, ServiceContext serviceContext)
+	public void update(CPRule cpRule, HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		UnicodeProperties typeSettingsProperties =
-			cpRule.getTypeSettingsProperties();
-
-		boolean orSearch = ParamUtil.getBoolean(
-			serviceContext.getRequest(), "orSearch");
-
-		typeSettingsProperties.put("orSearch", String.valueOf(orSearch));
-
-		cpRule.setTypeSettingsProperties(typeSettingsProperties);
-
-		updateCPRuleAssetCategoryRels(cpRule, serviceContext);
-	}
-
-	protected void updateCPRuleAssetCategoryRels(
-			CPRule cpRule, ServiceContext serviceContext)
-		throws PortalException {
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			httpServletRequest);
 
 		String assetCategoryIds = ParamUtil.getString(
-			serviceContext.getRequest(), "assetCategoryIds");
+			httpServletRequest, "assetCategoryIds");
 
 		String[] assetCategoryIdsArray = StringUtil.split(
 			assetCategoryIds, StringPool.COMMA);
