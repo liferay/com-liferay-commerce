@@ -77,7 +77,7 @@
 			<var name="entryName" value="${userSegment}" />
 		</execute>
 
-		<execute function="Type" locator1="CommerceEntry#MAXIMUM_DISCOUNT_AMOUNT_FIELD" value1="${discountLevelNumber}" />
+		<execute function="Type" locator1="CommerceEntry#MAXIMUM_DISCOUNT_AMOUNT_FIELD" value1="${maximumDiscountAmount}" />
 
 		<execute function="Type" locator1="CommerceEntry#DISCOUNT_LEVEL_1_FIELD" value1="${discountLevel}" />
 
