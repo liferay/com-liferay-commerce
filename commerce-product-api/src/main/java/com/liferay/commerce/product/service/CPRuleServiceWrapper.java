@@ -41,6 +41,16 @@ public class CPRuleServiceWrapper implements CPRuleService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPRule addCPRule(String name,
+		boolean active, String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpRuleService.addCPRule(name, active, type,
+			typeSettingsProperties, serviceContext);
+	}
+
+	@Override
 	public void deleteCPRule(long cpRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_cpRuleService.deleteCPRule(cpRuleId);
@@ -92,6 +102,16 @@ public class CPRuleServiceWrapper implements CPRuleService,
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpRuleService.updateCPRule(cpRuleId, name, active, type,
 			serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPRule updateCPRule(
+		long cpRuleId, String name, boolean active, String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpRuleService.updateCPRule(cpRuleId, name, active, type,
+			typeSettingsProperties, serviceContext);
 	}
 
 	@Override
