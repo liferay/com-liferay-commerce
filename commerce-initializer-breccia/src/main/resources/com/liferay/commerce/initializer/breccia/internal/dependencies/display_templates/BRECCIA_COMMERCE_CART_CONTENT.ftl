@@ -26,18 +26,28 @@
 				<tbody>
 					<#list entries as curCommerceOrderItem>
 						<#assign
+							commerceProductPrice = ''
+
 							cpDefinition = curCommerceOrderItem.getCPDefinition()
 
 							deleteURL = commerceCartContentDisplayContext.getDeleteURL(curCommerceOrderItem)
 
-							finalPriceMoney = curCommerceOrderItem.getFinalPriceMoney()
+							finalPriceMoney = ''
 
 							image = ''
 
 							productURL = commerceCartContentDisplayContext.getCPDefinitionURL(cpDefinition.getCPDefinitionId(), themeDisplay)
 
 							title = cpDefinition.getName()
+
+							unitPriceMoney = ''
 						/>
+
+						<#if commerceCartContentDisplayContext.getCommerceProductPrice(curCommerceOrderItem)??>
+							<#assign
+								commerceProductPrice = commerceCartContentDisplayContext.getCommerceProductPrice(curCommerceOrderItem)
+							/>
+						</#if>
 
 						<#if commerceCartContentDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem, themeDisplay)??>
 							<#assign
@@ -62,10 +72,41 @@
 								<input class="custom-number custom-number-monospaced form-control" type="number" value="${curCommerceOrderItem.getQuantity()}">
 							</td>
 							<td class="subtotal-column table-cell-expand">
-								<div class="commerce-cart-content-value subtotal-value">
-									${curCommerceOrderItem.getQuantity()} x ${finalPriceMoney.format(locale)}
-								</div>
+								<div class="commerce-cart-content-value unit-price-value">
+									<#if commerceProductPrice?has_content>
+										<#assign
+											unitPriceMoney = commerceProductPrice.getUnitPrice()
+										/>
 
+										${unitPriceMoney.format(locale)}
+									</#if>
+								</div>
+							</td>
+							<td class="subtotal-column table-cell-expand">
+								<div class="commerce-cart-content-value discount-value">
+									<#if commerceProductPrice?has_content && commerceProductPrice.getDiscountValue()??>
+										<#assign
+											discountValue = commerceProductPrice.getDiscountValue()
+
+											discountAmount = discountValue.getDiscountAmount()
+										/>
+
+										${discountAmount.format(locale)}
+									</#if>
+								</div>
+							</td>
+							<td class="subtotal-column table-cell-expand">
+								<div class="commerce-cart-content-value final-price-value">
+									<#if commerceProductPrice?has_content>
+										<#assign
+											finalPriceMoney = commerceProductPrice.getFinalPrice()
+										/>
+
+										${finalPriceMoney.format(locale)}
+									</#if>
+								</div>
+							</td>
+							<td class="subtotal-column table-cell-expand">
 								<@liferay_ui["icon-delete"]
 									cssClass="commerce-cart-content-remove"
 									label=true
