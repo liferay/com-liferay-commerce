@@ -36,6 +36,7 @@ public interface CommerceOrganizationHelper {
 		throws PortalException;
 
 	public void setCurrentOrganization(
-		HttpServletRequest httpServletRequest, long organizationId);
+			HttpServletRequest httpServletRequest, long organizationId)
+		throws PortalException;
 
 }
