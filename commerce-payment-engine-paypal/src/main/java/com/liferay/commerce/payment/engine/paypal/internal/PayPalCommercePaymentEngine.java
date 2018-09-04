@@ -91,15 +91,15 @@ import org.osgi.service.component.annotations.Reference;
 public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 
 	public PayPalCommercePaymentEngine() {
-		_PAY_PAL_DECIMAL_FORMAT = new DecimalFormat("#,###.##");
+		_payPalDecimalFormat = new DecimalFormat("#,###.##");
 
 		DecimalFormatSymbols decimalFormatSymbols =
-			_PAY_PAL_DECIMAL_FORMAT.getDecimalFormatSymbols();
+			_payPalDecimalFormat.getDecimalFormatSymbols();
 
 		decimalFormatSymbols.setDecimalSeparator('.');
 		decimalFormatSymbols.setGroupingSeparator(',');
 
-		_PAY_PAL_DECIMAL_FORMAT.setDecimalFormatSymbols(decimalFormatSymbols);
+		_payPalDecimalFormat.setDecimalFormatSymbols(decimalFormatSymbols);
 	}
 
 	@Override
@@ -250,14 +250,14 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 		Details details = new Details();
 
 		details.setShipping(
-			_PAY_PAL_DECIMAL_FORMAT.format(commerceOrder.getShippingAmount()));
+			_payPalDecimalFormat.format(commerceOrder.getShippingAmount()));
 		details.setSubtotal(
-			_PAY_PAL_DECIMAL_FORMAT.format(commerceOrder.getSubtotal()));
+			_payPalDecimalFormat.format(commerceOrder.getSubtotal()));
 
 		amount.setDetails(details);
 
 		amount.setTotal(
-			_PAY_PAL_DECIMAL_FORMAT.format(commerceOrder.getTotal()));
+			_payPalDecimalFormat.format(commerceOrder.getTotal()));
 
 		return amount;
 	}
@@ -326,7 +326,7 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 			item.setDescription(cpDefinition.getShortDescription(languageId));
 			item.setName(commerceOrderItem.getName(languageId));
 			item.setPrice(
-				_PAY_PAL_DECIMAL_FORMAT.format(
+				_payPalDecimalFormat.format(
 					commerceOrderItem.getUnitPrice()));
 			item.setQuantity(String.valueOf(commerceOrderItem.getQuantity()));
 			item.setSku(commerceOrderItem.getSku());
@@ -433,7 +433,7 @@ public class PayPalCommercePaymentEngine implements CommercePaymentEngine {
 			payment.toJSON(), url);
 	}
 
-	private static final DecimalFormat _PAY_PAL_DECIMAL_FORMAT;
+	private DecimalFormat _payPalDecimalFormat;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;
