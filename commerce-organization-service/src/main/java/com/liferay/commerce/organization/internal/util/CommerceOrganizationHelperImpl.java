@@ -79,8 +79,11 @@ public class CommerceOrganizationHelperImpl
 
 		Organization organization = null;
 
+		String curGroupOrganizationIdKey =
+			_CURRENT_ORGANIZATION_ID_KEY + groupId;
+
 		long currentOrganizationId = SessionParamUtil.getLong(
-			httpServletRequest, _CURRENT_ORGANIZATION_ID_KEY);
+			httpServletRequest, curGroupOrganizationIdKey);
 
 		if (currentOrganizationId == -1) {
 			return null;
@@ -99,7 +102,7 @@ public class CommerceOrganizationHelperImpl
 
 		if ((organization != null) &&
 			!_commerceOrganizationLocalService.hasGroupOrganization(
-				groupId, currentOrganizationId)) {
+				groupId, organization.getOrganizationId())) {
 
 			return null;
 		}
@@ -109,14 +112,20 @@ public class CommerceOrganizationHelperImpl
 
 	@Override
 	public void setCurrentOrganization(
-		HttpServletRequest httpServletRequest, long organizationId) {
+			HttpServletRequest httpServletRequest, long organizationId)
+		throws PortalException {
+
+		long groupId = _portal.getScopeGroupId(httpServletRequest);
+
+		String curGroupOrganizationIdKey =
+			_CURRENT_ORGANIZATION_ID_KEY + groupId;
 
 		httpServletRequest = _portal.getOriginalServletRequest(
 			httpServletRequest);
 
 		HttpSession httpSession = httpServletRequest.getSession();
 
-		httpSession.setAttribute(_CURRENT_ORGANIZATION_ID_KEY, organizationId);
+		httpSession.setAttribute(curGroupOrganizationIdKey, organizationId);
 	}
 
 	private Organization _getSingleAccountOrganization(
@@ -142,7 +151,7 @@ public class CommerceOrganizationHelperImpl
 		"com_liferay_commerce_user_web_internal_portlet_CommerceUserPortlet";
 
 	private static final String _CURRENT_ORGANIZATION_ID_KEY =
-		"LIFERAY_SHARED_CURRENT_ORGANIZATION_ID";
+		"LIFERAY_SHARED_CURRENT_ORGANIZATION_ID_";
 
 	@Reference
 	private CommerceOrganizationLocalService _commerceOrganizationLocalService;
