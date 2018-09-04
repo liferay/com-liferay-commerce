@@ -94,7 +94,7 @@ public class CommerceOrderItemLocalServiceImpl
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
-				cpInstanceId, quantity, commerceContext);
+				cpInstanceId, quantity, false, commerceContext);
 
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
@@ -342,7 +342,8 @@ public class CommerceOrderItemLocalServiceImpl
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
-				commerceOrderItem.getCPInstanceId(), quantity, commerceContext);
+				commerceOrderItem.getCPInstanceId(), quantity, false,
+				commerceContext);
 
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
@@ -377,7 +378,7 @@ public class CommerceOrderItemLocalServiceImpl
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
 				commerceOrderItem.getCPInstanceId(),
-				commerceOrderItem.getQuantity(), commerceContext);
+				commerceOrderItem.getQuantity(), false, commerceContext);
 
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
