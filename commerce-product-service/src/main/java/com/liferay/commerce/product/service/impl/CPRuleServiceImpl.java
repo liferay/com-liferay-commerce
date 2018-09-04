@@ -62,8 +62,8 @@ public class CPRuleServiceImpl extends CPRuleServiceBaseImpl {
 			getPermissionChecker(), serviceContext.getScopeGroupId(),
 			CPActionKeys.ADD_COMMERCE_PRODUCT_RULE);
 
-		return cpRuleLocalService.addCPRule(name, active, type,
-			typeSettingsProperties, serviceContext);
+		return cpRuleLocalService.addCPRule(
+			name, active, type, typeSettingsProperties, serviceContext);
 	}
 
 	@Override
