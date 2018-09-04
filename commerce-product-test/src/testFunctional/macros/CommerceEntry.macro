@@ -228,12 +228,6 @@
 		</execute>
 	</command>
 
-	<command name="gotoNotificationsTab">
-		<execute function="AssertClick" locator1="CommerceEntry#NOTIFICATIONS_TAB" value1="${notificationsTab}">
-			<var name="key_notificationsTab" value="${notificationsTab}" />
-		</execute>
-	</command>
-
 	<command name="publishEntry">
 		<execute macro="Button#clickPublish" />
 
