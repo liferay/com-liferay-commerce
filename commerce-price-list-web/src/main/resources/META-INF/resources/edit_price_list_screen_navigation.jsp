@@ -37,7 +37,7 @@ String selectedScreenNavigationCategoryKey = commercePriceListDisplayContext.get
 
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "price-lists"), priceListsURL, data);
 PortalUtil.addPortletBreadcrumbEntry(request, title, portletURL.toString(), data);
-PortalUtil.addPortletBreadcrumbEntry(request, selectedScreenNavigationCategoryKey, StringPool.BLANK, data);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, selectedScreenNavigationCategoryKey), StringPool.BLANK, data);
 
 renderResponse.setTitle(LanguageUtil.get(request, "price-lists"));
 %>
