@@ -32,7 +32,7 @@
 		<execute function="Pause" locator1="30000" />
 
 		<execute macro="TestCase#getSiteName">
-			<return name="siteName" />
+			<return from="siteName" name="siteName" />
 			<var name="siteName" value="${siteName}" />
 		</execute>
 
