@@ -14,9 +14,9 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetLinkConstants;
-import com.liferay.asset.kernel.service.persistence.AssetEntryQuery;
 import com.liferay.commerce.product.exception.CPDefinitionDisplayDateException;
 import com.liferay.commerce.product.exception.CPDefinitionExpirationDateException;
 import com.liferay.commerce.product.exception.CPDefinitionIgnoreSKUCombinationsException;
@@ -381,14 +381,21 @@ public class CPDefinitionLocalServiceImpl
 
 	@Override
 	public void deleteAssetCategoryCPDefinition(
-			long cpDefinitionId, long categoryId)
+			long cpDefinitionId, long categoryId, ServiceContext serviceContext)
 		throws PortalException {
 
 		AssetEntry assetEntry = assetEntryLocalService.getEntry(
 			CPDefinition.class.getName(), cpDefinitionId);
 
-		assetEntryLocalService.deleteAssetCategoryAssetEntry(
-			categoryId, assetEntry.getEntryId());
+		long[] categoryIds = ArrayUtil.remove(
+			assetEntry.getCategoryIds(), categoryId);
+
+		serviceContext.setAssetCategoryIds(categoryIds);
+
+		serviceContext.setAssetTagNames(assetEntry.getTagNames());
+
+		cpDefinitionLocalService.updateCPDefinitionCategorization(
+			cpDefinitionId, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.DELETE)
@@ -666,33 +673,22 @@ public class CPDefinitionLocalServiceImpl
 
 	@Override
 	public List<CPDefinition> getCPDefinitionsByCategoryId(
-		long categoryId, int start, int end) {
+			long categoryId, int start, int end)
+		throws PortalException {
 
-		List<CPDefinition> cpDefinitions = new ArrayList<>();
+		AssetCategory assetCategory =
+			assetCategoryLocalService.getAssetCategory(categoryId);
 
-		long[] categoryIds = {categoryId};
+		SearchContext searchContext = buildSearchContext(
+			assetCategory.getCompanyId(), assetCategory.getGroupId(), null,
+			WorkflowConstants.STATUS_ANY, start, end, null);
 
-		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
+		searchContext.setAssetCategoryIds(new long[] {categoryId});
 
-		assetEntryQuery.setClassName(CPDefinition.class.getName());
-		assetEntryQuery.setAllCategoryIds(categoryIds);
-		assetEntryQuery.setStart(start);
-		assetEntryQuery.setEnd(end);
+		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
+			searchCPDefinitions(searchContext);
 
-		List<AssetEntry> assetEntries = assetEntryLocalService.getEntries(
-			assetEntryQuery);
-
-		for (AssetEntry assetEntry : assetEntries) {
-			long classPK = assetEntry.getClassPK();
-
-			CPDefinition cpDefinition = fetchCPDefinition(classPK);
-
-			if (cpDefinition != null) {
-				cpDefinitions.add(cpDefinition);
-			}
-		}
-
-		return cpDefinitions;
+		return cpDefinitionBaseModelSearchResult.getBaseModels();
 	}
 
 	@Override
@@ -722,15 +718,23 @@ public class CPDefinitionLocalServiceImpl
 	}
 
 	@Override
-	public int getCPDefinitionsCountByCategoryId(long categoryId) {
-		long[] categoryIds = {categoryId};
+	public int getCPDefinitionsCountByCategoryId(long categoryId)
+		throws PortalException {
 
-		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
+		AssetCategory assetCategory =
+			assetCategoryLocalService.getAssetCategory(categoryId);
 
-		assetEntryQuery.setClassName(CPDefinition.class.getName());
-		assetEntryQuery.setAllCategoryIds(categoryIds);
+		SearchContext searchContext = buildSearchContext(
+			assetCategory.getCompanyId(), assetCategory.getGroupId(), null,
+			WorkflowConstants.STATUS_ANY, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 
-		return assetEntryLocalService.getEntriesCount(assetEntryQuery);
+		searchContext.setAssetCategoryIds(new long[] {categoryId});
+
+		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
+			searchCPDefinitions(searchContext);
+
+		return cpDefinitionBaseModelSearchResult.getLength();
 	}
 
 	@Override
