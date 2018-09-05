@@ -58,16 +58,9 @@ public class ActionHelper {
 			return;
 		}
 
-		String redirect = null;
-
 		if (Validator.isUrl(output)) {
-			redirect = output;
+			actionRequest.setAttribute(WebKeys.REDIRECT, output);
 		}
-		else {
-			redirect = ParamUtil.getString(serviceContext, "redirect");
-		}
-
-		actionRequest.setAttribute(WebKeys.REDIRECT, redirect);
 	}
 
 	@Reference
