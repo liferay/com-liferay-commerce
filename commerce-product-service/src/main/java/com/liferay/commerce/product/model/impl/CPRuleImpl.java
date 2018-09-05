@@ -52,7 +52,7 @@ public class CPRuleImpl extends CPRuleBaseImpl {
 
 		_typeSettingsProperties = typeSettingsProperties;
 
-		if(_typeSettingsProperties == null){
+		if (_typeSettingsProperties == null) {
 			_typeSettingsProperties = new UnicodeProperties();
 		}
 
