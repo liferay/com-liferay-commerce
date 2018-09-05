@@ -52,6 +52,10 @@ public class CPRuleImpl extends CPRuleBaseImpl {
 
 		_typeSettingsProperties = typeSettingsProperties;
 
+		if(_typeSettingsProperties == null){
+			_typeSettingsProperties = new UnicodeProperties();
+		}
+
 		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
