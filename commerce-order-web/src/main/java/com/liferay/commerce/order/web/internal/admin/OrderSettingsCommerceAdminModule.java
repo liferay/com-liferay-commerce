@@ -22,9 +22,11 @@ import com.liferay.commerce.order.web.internal.display.context.CommerceOrderSett
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -77,6 +79,12 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 
 	@Override
 	public boolean isVisible(long groupId) throws PortalException {
+		Group group = _groupLocalService.getGroup(groupId);
+
+		if (!group.isOrganization()) {
+			return false;
+		}
+
 		if (_workflowEngineManager.isDeployed() &&
 			(WorkflowHandlerRegistryUtil.getWorkflowHandler(
 				CommerceOrder.class.getName()) != null)) {
@@ -117,6 +125,9 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 			_servletContext, httpServletRequest, httpServletResponse,
 			"/edit_order_settings.jsp");
 	}
+
+	@Reference
+	private GroupLocalService _groupLocalService;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
