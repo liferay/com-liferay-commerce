@@ -32,6 +32,8 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
+import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -244,6 +246,7 @@ public class CommerceNotificationTemplatesDisplayContext {
 		_searchContainer.setOrderByCol(orderByCol);
 		_searchContainer.setOrderByComparator(orderByComparator);
 		_searchContainer.setOrderByType(orderByType);
+		_searchContainer.setRowChecker(getRowChecker());
 
 		int total;
 		List<CommerceNotificationTemplate> results;
@@ -313,6 +316,15 @@ public class CommerceNotificationTemplatesDisplayContext {
 			_commerceNotificationsRequestHelper.getRequest(), "navigation");
 	}
 
+	protected RowChecker getRowChecker() {
+		if (_rowChecker == null) {
+			_rowChecker = new EmptyOnClickRowChecker(
+				_commerceNotificationsRequestHelper.getLiferayPortletResponse());
+		}
+
+		return _rowChecker;
+	}
+
 	private final CommerceNotificationsRequestHelper
 		_commerceNotificationsRequestHelper;
 	private CommerceNotificationTemplate _commerceNotificationTemplate;
@@ -326,6 +338,7 @@ public class CommerceNotificationTemplatesDisplayContext {
 		_commerceUserSegmentEntryService;
 	private final ItemSelector _itemSelector;
 	private final PortletResourcePermission _portletResourcePermission;
+	private RowChecker _rowChecker;
 	private SearchContainer<CommerceNotificationTemplate> _searchContainer;
 
 }
