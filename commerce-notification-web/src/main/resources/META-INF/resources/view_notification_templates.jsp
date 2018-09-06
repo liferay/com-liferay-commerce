@@ -28,6 +28,8 @@ PortletURL portletURL = commerceNotificationTemplatesDisplayContext.getPortletUR
 portletURL.setParameter("notificationNavigationItem", notificationNavigationItem);
 %>
 
+<portlet:actionURL name="editCommerceNotificationTemplate" var="editCommerceNotificationTemplateURL" />
+
 <liferay-util:include page="/navbar.jsp" servletContext="<%= commerceAdminServletContext %>">
 	<liferay-util:param name="commerceAdminModuleKey" value="<%= commerceAdminModuleKey %>" />
 </liferay-util:include>
@@ -35,6 +37,7 @@ portletURL.setParameter("notificationNavigationItem", notificationNavigationItem
 <%@ include file="/navbar.jspf" %>
 
 <liferay-frontend:management-bar
+	includeCheckBox="<%= true %>"
 	searchContainerId="commerceNotificationTemplates"
 >
 	<liferay-frontend:management-bar-filters>
@@ -74,9 +77,21 @@ portletURL.setParameter("notificationNavigationItem", notificationNavigationItem
 			</liferay-frontend:add-menu>
 		</c:if>
 	</liferay-frontend:management-bar-buttons>
+
+	<liferay-frontend:management-bar-action-buttons>
+		<liferay-frontend:management-bar-button
+			href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceNotificationTemplates();" %>'
+			icon="times"
+			label="delete"
+		/>
+	</liferay-frontend:management-bar-action-buttons>
 </liferay-frontend:management-bar>
 
-<div class="container-fluid-1280">
+<aui:form action="<%= editCommerceNotificationTemplateURL %>" cssClass="container-fluid-1280" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="deleteCommerceNotificationTemplateIds" type="hidden" />
+
 	<liferay-ui:search-container
 		id="commerceNotificationTemplates"
 		searchContainer="<%= commerceNotificationTemplatesDisplayContext.getSearchContainer() %>"
@@ -159,4 +174,17 @@ portletURL.setParameter("notificationNavigationItem", notificationNavigationItem
 			markupView="lexicon"
 		/>
 	</liferay-ui:search-container>
-</div>
+</aui:form>
+
+<aui:script>
+	function <portlet:namespace />deleteCommerceNotificationTemplates() {
+		if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-notification-templates" />')) {
+			var form = AUI.$(document.<portlet:namespace />fm);
+
+			form.fm('<%= Constants.CMD %>').val('<%= Constants.DELETE %>');
+			form.fm('deleteCommerceNotificationTemplateIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+
+			submitForm(form);
+		}
+	}
+</aui:script>
