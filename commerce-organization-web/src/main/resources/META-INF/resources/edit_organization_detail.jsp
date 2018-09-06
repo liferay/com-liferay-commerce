@@ -130,15 +130,15 @@ EmailAddress emailAddress = commerceOrganizationDetailDisplayContext.getOrganiza
 
 			<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
 
-			<aui:select label="country" name="addressCountryId" required="<%= true %>" width="150px" />
+			<aui:select label="country" name="countryId" required="<%= true %>" width="150px" />
 
 			<liferay-ui:error exception="<%= NoSuchRegionException.class %>" message="please-select-a-region" />
 
-			<aui:select label="region" name="addressRegionId" width="150px" />
+			<aui:select label="region" name="regionId" width="150px" />
 
 			<liferay-ui:error exception="<%= AddressZipException.class %>" message="please-enter-a-valid-postal-code" />
 
-			<aui:input label="postal-code" name="zip" width="150px" />
+			<aui:input label="postal-code" name="zip" required="<%= true %>" width="150px" />
 
 			<liferay-ui:error exception="<%= AddressCityException.class %>" message="please-enter-a-valid-city" />
 
@@ -177,7 +177,7 @@ EmailAddress emailAddress = commerceOrganizationDetailDisplayContext.getOrganiza
 	new Liferay.DynamicSelect(
 		[
 			{
-				select: '<portlet:namespace />addressCountryId',
+				select: '<portlet:namespace />countryId',
 				selectData: Liferay.Address.getCountries,
 				selectDesc: 'nameCurrentValue',
 				selectId: 'countryId',
@@ -185,7 +185,7 @@ EmailAddress emailAddress = commerceOrganizationDetailDisplayContext.getOrganiza
 				selectVal: '<%= countryId %>'
 			},
 			{
-				select: '<portlet:namespace />addressRegionId',
+				select: '<portlet:namespace />regionId',
 				selectData: Liferay.Address.getRegions,
 				selectDesc: 'name',
 				selectId: 'regionId',
