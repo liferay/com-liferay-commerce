@@ -29,7 +29,7 @@
 			"rootLayoutType": "select",
 			"rootLayoutUuid": ""
 		},
-		"rootLayoutFriendlyURL": "/footer-1"
+		"rootLayoutFriendlyURL": "/footer-2"
 	},
 	{
 		"instanceId": "siteNavigationMenuPortlet_2",
@@ -45,7 +45,7 @@
 			"rootLayoutType": "select",
 			"rootLayoutUuid": ""
 		},
-		"rootLayoutFriendlyURL": "/footer-1"
+		"rootLayoutFriendlyURL": "/footer-3"
 	},
 	{
 		"instanceId": "siteNavigationMenuPortlet_3",
@@ -61,6 +61,6 @@
 			"rootLayoutType": "select",
 			"rootLayoutUuid": ""
 		},
-		"rootLayoutFriendlyURL": "/footer-2"
+		"rootLayoutFriendlyURL": "/footer-4"
 	}
 ]

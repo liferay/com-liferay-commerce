@@ -217,6 +217,52 @@
 		"subLayouts": [
 			{
 				"layoutTemplateId": "1_column",
+				"name": "Page 5"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 6"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 7"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 8"
+			}
+		]
+	},
+	{
+		"hidden": true,
+		"layoutTemplateId": "1_column",
+		"name": "Footer 3",
+		"subLayouts": [
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 9"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 10"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 11"
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Page 12"
+			}
+		]
+	},
+	{
+		"hidden": true,
+		"layoutTemplateId": "1_column",
+		"name": "Footer 4",
+		"subLayouts": [
+			{
+				"layoutTemplateId": "1_column",
 				"name": "Sitemap"
 			},
 			{
