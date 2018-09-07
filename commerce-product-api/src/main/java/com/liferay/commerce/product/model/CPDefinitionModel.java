@@ -650,6 +650,70 @@ public interface CPDefinitionModel extends BaseModel<CPDefinition>, ShardedModel
 	@Override
 	public void setStatusDate(Date statusDate);
 
+	/**
+	 * Returns the subscription enabled of this cp definition.
+	 *
+	 * @return the subscription enabled of this cp definition
+	 */
+	public boolean getSubscriptionEnabled();
+
+	/**
+	 * Returns <code>true</code> if this cp definition is subscription enabled.
+	 *
+	 * @return <code>true</code> if this cp definition is subscription enabled; <code>false</code> otherwise
+	 */
+	public boolean isSubscriptionEnabled();
+
+	/**
+	 * Sets whether this cp definition is subscription enabled.
+	 *
+	 * @param subscriptionEnabled the subscription enabled of this cp definition
+	 */
+	public void setSubscriptionEnabled(boolean subscriptionEnabled);
+
+	/**
+	 * Returns the subscription cycle length of this cp definition.
+	 *
+	 * @return the subscription cycle length of this cp definition
+	 */
+	public long getSubscriptionCycleLength();
+
+	/**
+	 * Sets the subscription cycle length of this cp definition.
+	 *
+	 * @param subscriptionCycleLength the subscription cycle length of this cp definition
+	 */
+	public void setSubscriptionCycleLength(long subscriptionCycleLength);
+
+	/**
+	 * Returns the subscription cycle period of this cp definition.
+	 *
+	 * @return the subscription cycle period of this cp definition
+	 */
+	@AutoEscape
+	public String getSubscriptionCyclePeriod();
+
+	/**
+	 * Sets the subscription cycle period of this cp definition.
+	 *
+	 * @param subscriptionCyclePeriod the subscription cycle period of this cp definition
+	 */
+	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod);
+
+	/**
+	 * Returns the max subscription cycles number of this cp definition.
+	 *
+	 * @return the max subscription cycles number of this cp definition
+	 */
+	public long getMaxSubscriptionCyclesNumber();
+
+	/**
+	 * Sets the max subscription cycles number of this cp definition.
+	 *
+	 * @param maxSubscriptionCyclesNumber the max subscription cycles number of this cp definition
+	 */
+	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber);
+
 	public String[] getAvailableLanguageIds();
 
 	public String getName();

@@ -84,6 +84,10 @@
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="statusDate" type="org.hibernate.type.TimestampType" />
+		<property name="subscriptionEnabled" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="subscriptionCycleLength" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="subscriptionCyclePeriod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="maxSubscriptionCyclesNumber" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.commerce.product.model.impl.CPDefinitionLinkImpl" table="CPDefinitionLink">
 		<id name="CPDefinitionLinkId" type="long">
@@ -236,6 +240,10 @@
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="statusDate" type="org.hibernate.type.TimestampType" />
+		<property name="subscriptionEnabled" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="subscriptionCycleLength" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="subscriptionCyclePeriod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="maxSubscriptionCyclesNumber" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.commerce.product.model.impl.CPMeasurementUnitImpl" table="CPMeasurementUnit">
 		<id name="CPMeasurementUnitId" type="long">

@@ -74,7 +74,11 @@ create table CPDefinition (
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null
+	statusDate DATE null,
+	subscriptionEnabled BOOLEAN,
+	subscriptionCycleLength LONG,
+	subscriptionCyclePeriod VARCHAR(75) null,
+	maxSubscriptionCyclesNumber LONG
 );
 
 create table CPDefinitionLink (
@@ -201,7 +205,11 @@ create table CPInstance (
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null
+	statusDate DATE null,
+	subscriptionEnabled BOOLEAN,
+	subscriptionCycleLength LONG,
+	subscriptionCyclePeriod VARCHAR(75) null,
+	maxSubscriptionCyclesNumber LONG
 );
 
 create table CPMeasurementUnit (
