@@ -305,15 +305,17 @@ public class CPDefinitionsDisplayContext
 		}
 		else {
 			int total = _cpDefinitionService.getCPDefinitionsCount(
-				themeDisplay.getScopeGroupId(), WorkflowConstants.STATUS_ANY);
+				themeDisplay.getScopeGroupId(), null,
+				themeDisplay.getLanguageId(), WorkflowConstants.STATUS_ANY);
 
 			searchContainer.setTotal(total);
 
 			List<CPDefinition> cpDefinitions =
 				_cpDefinitionService.getCPDefinitions(
-					themeDisplay.getScopeGroupId(),
-					WorkflowConstants.STATUS_ANY, searchContainer.getStart(),
-					searchContainer.getEnd());
+					themeDisplay.getScopeGroupId(), null,
+					themeDisplay.getLanguageId(), WorkflowConstants.STATUS_ANY,
+					searchContainer.getStart(), searchContainer.getEnd(),
+					orderByComparator);
 
 			searchContainer.setResults(cpDefinitions);
 		}

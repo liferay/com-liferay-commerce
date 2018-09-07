@@ -277,7 +277,7 @@ public class CPDefinitionsPortletUtil {
 			sort = SortFactoryUtil.create(
 				Field.MODIFIED_DATE + "_sortable", reverse);
 		}
-		else if (orderByCol.equals("title")) {
+		else if (orderByCol.equals("name")) {
 			sort = SortFactoryUtil.create(
 				Field.NAME, Sort.STRING_TYPE, reverse);
 		}
