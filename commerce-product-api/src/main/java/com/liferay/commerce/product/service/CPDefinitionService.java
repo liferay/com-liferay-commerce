@@ -184,6 +184,11 @@ public interface CPDefinitionService extends BaseService {
 		double shippingExtraPrice, double width, double height, double depth,
 		double weight, ServiceContext serviceContext) throws PortalException;
 
+	public CPDefinition updateSubscriptionInfo(long cpDefinitionId,
+		boolean subscriptionEnabled, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		ServiceContext serviceContext) throws PortalException;
+
 	public CPDefinition updateTaxCategoryInfo(long cpDefinitionId,
 		long cpTaxCategoryId, boolean taxExempt, boolean telcoOrElectronics)
 		throws PortalException;
