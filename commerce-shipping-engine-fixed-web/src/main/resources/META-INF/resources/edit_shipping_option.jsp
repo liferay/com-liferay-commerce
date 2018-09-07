@@ -53,9 +53,9 @@ if (commerceShippingFixedOption != null) {
 		</div>
 
 		<aui:button-row>
-			<aui:button cssClass="btn-lg" name="saveButton" primary="<%= true %>" type="submit" value="save" />
+			<aui:button name="saveButton" primary="<%= true %>" type="submit" value="save" />
 
-			<aui:button cssClass="btn-lg" name="cancelButton" type="cancel" />
+			<aui:button name="cancelButton" type="cancel" />
 		</aui:button-row>
 	</aui:form>
 </div>
