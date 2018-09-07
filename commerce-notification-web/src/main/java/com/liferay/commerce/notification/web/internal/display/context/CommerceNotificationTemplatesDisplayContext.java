@@ -319,7 +319,8 @@ public class CommerceNotificationTemplatesDisplayContext {
 	protected RowChecker getRowChecker() {
 		if (_rowChecker == null) {
 			_rowChecker = new EmptyOnClickRowChecker(
-				_commerceNotificationsRequestHelper.getLiferayPortletResponse());
+				_commerceNotificationsRequestHelper.
+					getLiferayPortletResponse());
 		}
 
 		return _rowChecker;
