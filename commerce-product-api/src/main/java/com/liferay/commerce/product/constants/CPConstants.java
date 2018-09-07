@@ -31,4 +31,12 @@ public class CPConstants {
 
 	public static final String SERVICE_NAME = "com.liferay.commerce.product";
 
+	public static final String SUBSCRIPTION_DAYS = "day";
+
+	public static final String SUBSCRIPTION_MONTH = "month";
+
+	public static final String SUBSCRIPTION_WEEK = "week";
+
+	public static final String SUBSCRIPTION_YEAR = "year";
+
 }

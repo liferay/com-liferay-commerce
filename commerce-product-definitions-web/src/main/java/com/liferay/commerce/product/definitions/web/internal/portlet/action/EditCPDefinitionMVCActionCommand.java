@@ -151,6 +151,9 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 			else if (cmd.equals("updateShippingInfo")) {
 				updateShippingInfo(actionRequest);
 			}
+			else if (cmd.equals("updateSubscriptionInfo")) {
+				updateSubscriptionInfo(actionRequest);
+			}
 			else if (cmd.equals("updateTaxCategoryInfo")) {
 				updateTaxCategoryInfo(actionRequest);
 			}
@@ -435,6 +438,30 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 		_cpDefinitionService.updateShippingInfo(
 			cpDefinitionId, shippable, freeShipping, shipSeparately,
 			shippingExtraPrice, width, height, depth, weight, serviceContext);
+	}
+
+	protected void updateSubscriptionInfo(ActionRequest actionRequest)
+		throws PortalException {
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CPDefinition.class.getName(), actionRequest);
+
+		long cpDefinitionId = ParamUtil.getLong(
+			actionRequest, "cpDefinitionId");
+
+		boolean subscriptionEnabled = ParamUtil.getBoolean(
+			actionRequest, "subscriptionEnabled");
+		long subscriptionCycleLength = ParamUtil.getLong(
+			actionRequest, "subscriptionCycleLength");
+		String subscriptionCyclePeriod = ParamUtil.getString(
+			actionRequest, "subscriptionCyclePeriod");
+		long maxSubscriptionCyclesNumber = ParamUtil.getLong(
+			actionRequest, "maxSubscriptionCyclesNumber");
+
+		_cpDefinitionService.updateSubscriptionInfo(
+			cpDefinitionId, subscriptionEnabled, subscriptionCycleLength,
+			subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
+			serviceContext);
 	}
 
 	protected void updateTaxCategoryInfo(ActionRequest actionRequest)
