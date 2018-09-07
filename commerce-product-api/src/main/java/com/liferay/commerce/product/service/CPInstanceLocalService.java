@@ -427,6 +427,12 @@ public interface CPInstanceLocalService extends BaseLocalService,
 		ServiceContext serviceContext, Map<String, Serializable> workflowContext)
 		throws PortalException;
 
+	@Indexable(type = IndexableType.REINDEX)
+	public CPInstance updateSubscriptionInfo(long cpInstanceId,
+		boolean subscriptionEnabled, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		ServiceContext serviceContext) throws PortalException;
+
 	public CPInstance upsertCPInstance(long cpDefinitionId, String sku,
 		String gtin, String manufacturerPartNumber, boolean purchasable,
 		String json, double width, double height, double depth, double weight,
