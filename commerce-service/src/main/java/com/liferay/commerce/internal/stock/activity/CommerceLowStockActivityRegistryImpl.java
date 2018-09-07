@@ -129,7 +129,8 @@ public class CommerceLowStockActivityRegistryImpl
 					new CommerceLowStockActivityServiceWrapperPriorityComparator();
 
 	private ServiceTrackerMap
-		<String, ServiceTrackerCustomizerFactory.
+		<String,
+		ServiceTrackerCustomizerFactory.
 			ServiceWrapper<CommerceLowStockActivity>> _serviceTrackerMap;
 
 }
