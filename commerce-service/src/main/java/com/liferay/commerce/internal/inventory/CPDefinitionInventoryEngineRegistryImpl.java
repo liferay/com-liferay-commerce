@@ -136,7 +136,8 @@ public class CPDefinitionInventoryEngineRegistryImpl
 					new CPDefinitionInventoryEngineServiceWrapperPriorityComparator();
 
 	private ServiceTrackerMap
-		<String, ServiceTrackerCustomizerFactory.
+		<String,
+		ServiceTrackerCustomizerFactory.
 			ServiceWrapper<CPDefinitionInventoryEngine>> _serviceTrackerMap;
 
 }
