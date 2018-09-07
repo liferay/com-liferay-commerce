@@ -885,6 +885,18 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPDefinition updateSubscriptionInfo(
+		long cpDefinitionId, boolean subscriptionEnabled,
+		long subscriptionCycleLength, String subscriptionCyclePeriod,
+		long maxSubscriptionCyclesNumber,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionLocalService.updateSubscriptionInfo(cpDefinitionId,
+			subscriptionEnabled, subscriptionCycleLength,
+			subscriptionCyclePeriod, maxSubscriptionCyclesNumber, serviceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPDefinition updateTaxCategoryInfo(
 		long cpDefinitionId, long cpTaxCategoryId, boolean taxExempt,
 		boolean telcoOrElectronics)
