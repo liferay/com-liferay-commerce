@@ -185,6 +185,14 @@ public class CPInstancePersistenceTest {
 
 		newCPInstance.setStatusDate(RandomTestUtil.nextDate());
 
+		newCPInstance.setSubscriptionEnabled(RandomTestUtil.randomBoolean());
+
+		newCPInstance.setSubscriptionCycleLength(RandomTestUtil.nextLong());
+
+		newCPInstance.setSubscriptionCyclePeriod(RandomTestUtil.randomString());
+
+		newCPInstance.setMaxSubscriptionCyclesNumber(RandomTestUtil.nextLong());
+
 		_cpInstances.add(_persistence.update(newCPInstance));
 
 		CPInstance existingCPInstance = _persistence.findByPrimaryKey(newCPInstance.getPrimaryKey());
@@ -254,6 +262,14 @@ public class CPInstancePersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPInstance.getStatusDate()),
 			Time.getShortTimestamp(newCPInstance.getStatusDate()));
+		Assert.assertEquals(existingCPInstance.isSubscriptionEnabled(),
+			newCPInstance.isSubscriptionEnabled());
+		Assert.assertEquals(existingCPInstance.getSubscriptionCycleLength(),
+			newCPInstance.getSubscriptionCycleLength());
+		Assert.assertEquals(existingCPInstance.getSubscriptionCyclePeriod(),
+			newCPInstance.getSubscriptionCyclePeriod());
+		Assert.assertEquals(existingCPInstance.getMaxSubscriptionCyclesNumber(),
+			newCPInstance.getMaxSubscriptionCyclesNumber());
 	}
 
 	@Test
@@ -402,7 +418,9 @@ public class CPInstancePersistenceTest {
 			"weight", true, "price", true, "promoPrice", true, "cost", true,
 			"published", true, "displayDate", true, "expirationDate", true,
 			"lastPublishDate", true, "status", true, "statusByUserId", true,
-			"statusByUserName", true, "statusDate", true);
+			"statusByUserName", true, "statusDate", true,
+			"subscriptionEnabled", true, "subscriptionCycleLength", true,
+			"subscriptionCyclePeriod", true, "maxSubscriptionCyclesNumber", true);
 	}
 
 	@Test
@@ -692,6 +710,14 @@ public class CPInstancePersistenceTest {
 		cpInstance.setStatusByUserName(RandomTestUtil.randomString());
 
 		cpInstance.setStatusDate(RandomTestUtil.nextDate());
+
+		cpInstance.setSubscriptionEnabled(RandomTestUtil.randomBoolean());
+
+		cpInstance.setSubscriptionCycleLength(RandomTestUtil.nextLong());
+
+		cpInstance.setSubscriptionCyclePeriod(RandomTestUtil.randomString());
+
+		cpInstance.setMaxSubscriptionCyclesNumber(RandomTestUtil.nextLong());
 
 		_cpInstances.add(_persistence.update(cpInstance));
 

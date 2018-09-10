@@ -66,6 +66,10 @@ public class CPInstanceSoap implements Serializable {
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
 		soapModel.setStatusDate(model.getStatusDate());
+		soapModel.setSubscriptionEnabled(model.isSubscriptionEnabled());
+		soapModel.setSubscriptionCycleLength(model.getSubscriptionCycleLength());
+		soapModel.setSubscriptionCyclePeriod(model.getSubscriptionCyclePeriod());
+		soapModel.setMaxSubscriptionCyclesNumber(model.getMaxSubscriptionCyclesNumber());
 
 		return soapModel;
 	}
@@ -366,6 +370,42 @@ public class CPInstanceSoap implements Serializable {
 		_statusDate = statusDate;
 	}
 
+	public boolean getSubscriptionEnabled() {
+		return _subscriptionEnabled;
+	}
+
+	public boolean isSubscriptionEnabled() {
+		return _subscriptionEnabled;
+	}
+
+	public void setSubscriptionEnabled(boolean subscriptionEnabled) {
+		_subscriptionEnabled = subscriptionEnabled;
+	}
+
+	public long getSubscriptionCycleLength() {
+		return _subscriptionCycleLength;
+	}
+
+	public void setSubscriptionCycleLength(long subscriptionCycleLength) {
+		_subscriptionCycleLength = subscriptionCycleLength;
+	}
+
+	public String getSubscriptionCyclePeriod() {
+		return _subscriptionCyclePeriod;
+	}
+
+	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod) {
+		_subscriptionCyclePeriod = subscriptionCyclePeriod;
+	}
+
+	public long getMaxSubscriptionCyclesNumber() {
+		return _maxSubscriptionCyclesNumber;
+	}
+
+	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber) {
+		_maxSubscriptionCyclesNumber = maxSubscriptionCyclesNumber;
+	}
+
 	private String _uuid;
 	private String _externalReferenceCode;
 	private long _CPInstanceId;
@@ -396,4 +436,8 @@ public class CPInstanceSoap implements Serializable {
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
+	private boolean _subscriptionEnabled;
+	private long _subscriptionCycleLength;
+	private String _subscriptionCyclePeriod;
+	private long _maxSubscriptionCyclesNumber;
 }

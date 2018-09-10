@@ -122,6 +122,10 @@
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
 		<column name="statusDate" type="Date" />
+		<column name="subscriptionEnabled" type="boolean" />
+		<column name="subscriptionCycleLength" type="long" />
+		<column name="subscriptionCyclePeriod" type="String" />
+		<column name="maxSubscriptionCyclesNumber" type="long" />
 
 		<!-- Localized entity -->
 
@@ -546,6 +550,10 @@
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
 		<column name="statusDate" type="Date" />
+		<column name="subscriptionEnabled" type="boolean" />
+		<column name="subscriptionCycleLength" type="long" />
+		<column name="subscriptionCyclePeriod" type="String" />
+		<column name="maxSubscriptionCyclesNumber" type="long" />
 
 		<!-- Order -->
 

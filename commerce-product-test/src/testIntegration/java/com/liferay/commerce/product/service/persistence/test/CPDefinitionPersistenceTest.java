@@ -189,6 +189,14 @@ public class CPDefinitionPersistenceTest {
 
 		newCPDefinition.setStatusDate(RandomTestUtil.nextDate());
 
+		newCPDefinition.setSubscriptionEnabled(RandomTestUtil.randomBoolean());
+
+		newCPDefinition.setSubscriptionCycleLength(RandomTestUtil.nextLong());
+
+		newCPDefinition.setSubscriptionCyclePeriod(RandomTestUtil.randomString());
+
+		newCPDefinition.setMaxSubscriptionCyclesNumber(RandomTestUtil.nextLong());
+
 		_cpDefinitions.add(_persistence.update(newCPDefinition));
 
 		CPDefinition existingCPDefinition = _persistence.findByPrimaryKey(newCPDefinition.getPrimaryKey());
@@ -265,6 +273,14 @@ public class CPDefinitionPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPDefinition.getStatusDate()),
 			Time.getShortTimestamp(newCPDefinition.getStatusDate()));
+		Assert.assertEquals(existingCPDefinition.isSubscriptionEnabled(),
+			newCPDefinition.isSubscriptionEnabled());
+		Assert.assertEquals(existingCPDefinition.getSubscriptionCycleLength(),
+			newCPDefinition.getSubscriptionCycleLength());
+		Assert.assertEquals(existingCPDefinition.getSubscriptionCyclePeriod(),
+			newCPDefinition.getSubscriptionCyclePeriod());
+		Assert.assertEquals(existingCPDefinition.getMaxSubscriptionCyclesNumber(),
+			newCPDefinition.getMaxSubscriptionCyclesNumber());
 	}
 
 	@Test
@@ -383,7 +399,9 @@ public class CPDefinitionPersistenceTest {
 			"telcoOrElectronics", true, "DDMStructureKey", true, "published",
 			true, "displayDate", true, "expirationDate", true,
 			"lastPublishDate", true, "status", true, "statusByUserId", true,
-			"statusByUserName", true, "statusDate", true);
+			"statusByUserName", true, "statusDate", true,
+			"subscriptionEnabled", true, "subscriptionCycleLength", true,
+			"subscriptionCyclePeriod", true, "maxSubscriptionCyclesNumber", true);
 	}
 
 	@Test
@@ -672,6 +690,14 @@ public class CPDefinitionPersistenceTest {
 		cpDefinition.setStatusByUserName(RandomTestUtil.randomString());
 
 		cpDefinition.setStatusDate(RandomTestUtil.nextDate());
+
+		cpDefinition.setSubscriptionEnabled(RandomTestUtil.randomBoolean());
+
+		cpDefinition.setSubscriptionCycleLength(RandomTestUtil.nextLong());
+
+		cpDefinition.setSubscriptionCyclePeriod(RandomTestUtil.randomString());
+
+		cpDefinition.setMaxSubscriptionCyclesNumber(RandomTestUtil.nextLong());
 
 		_cpDefinitions.add(_persistence.update(cpDefinition));
 
