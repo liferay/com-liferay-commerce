@@ -425,6 +425,35 @@
 		</field>
 		<field name="lastPublishDate" type="Date" />
 	</model>
+	<model name="com.liferay.commerce.product.model.CPSubscriptionCycleEntry">
+		<field name="uuid" type="String" />
+		<field name="CPSubscriptionCycleEntryId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="CPSubscriptionEntryId" type="long" />
+		<field name="commerceOrderItemId" type="long" />
+	</model>
+	<model name="com.liferay.commerce.product.model.CPSubscriptionEntry">
+		<field name="uuid" type="String" />
+		<field name="CPSubscriptionEntryId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="CPInstanceId" type="long" />
+		<field name="commerceOrderItemId" type="long" />
+		<field name="subscriptionCycleLength" type="long" />
+		<field name="subscriptionCyclePeriod" type="String" />
+		<field name="maxSubscriptionCyclesNumber" type="long" />
+		<field name="active" type="boolean" />
+		<field name="nextIterationDate" type="Date" />
+	</model>
 	<model name="com.liferay.commerce.product.model.CPTaxCategory">
 		<field name="CPTaxCategoryId" type="long" />
 		<field name="groupId" type="long" />
