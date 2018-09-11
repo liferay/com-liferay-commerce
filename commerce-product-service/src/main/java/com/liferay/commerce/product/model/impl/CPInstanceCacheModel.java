@@ -67,7 +67,7 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(69);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -121,6 +121,14 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		sb.append(expirationDate);
 		sb.append(", lastPublishDate=");
 		sb.append(lastPublishDate);
+		sb.append(", subscriptionEnabled=");
+		sb.append(subscriptionEnabled);
+		sb.append(", subscriptionCycleLength=");
+		sb.append(subscriptionCycleLength);
+		sb.append(", subscriptionCyclePeriod=");
+		sb.append(subscriptionCyclePeriod);
+		sb.append(", maxSubscriptionCyclesNumber=");
+		sb.append(maxSubscriptionCyclesNumber);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", statusByUserId=");
@@ -240,6 +248,17 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 			cpInstanceImpl.setLastPublishDate(new Date(lastPublishDate));
 		}
 
+		cpInstanceImpl.setSubscriptionEnabled(subscriptionEnabled);
+		cpInstanceImpl.setSubscriptionCycleLength(subscriptionCycleLength);
+
+		if (subscriptionCyclePeriod == null) {
+			cpInstanceImpl.setSubscriptionCyclePeriod("");
+		}
+		else {
+			cpInstanceImpl.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+		}
+
+		cpInstanceImpl.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
 		cpInstanceImpl.setStatus(status);
 		cpInstanceImpl.setStatusByUserId(statusByUserId);
 
@@ -302,6 +321,13 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		displayDate = objectInput.readLong();
 		expirationDate = objectInput.readLong();
 		lastPublishDate = objectInput.readLong();
+
+		subscriptionEnabled = objectInput.readBoolean();
+
+		subscriptionCycleLength = objectInput.readLong();
+		subscriptionCyclePeriod = objectInput.readUTF();
+
+		maxSubscriptionCyclesNumber = objectInput.readLong();
 
 		status = objectInput.readInt();
 
@@ -393,6 +419,19 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		objectOutput.writeLong(expirationDate);
 		objectOutput.writeLong(lastPublishDate);
 
+		objectOutput.writeBoolean(subscriptionEnabled);
+
+		objectOutput.writeLong(subscriptionCycleLength);
+
+		if (subscriptionCyclePeriod == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(subscriptionCyclePeriod);
+		}
+
+		objectOutput.writeLong(maxSubscriptionCyclesNumber);
+
 		objectOutput.writeInt(status);
 
 		objectOutput.writeLong(statusByUserId);
@@ -433,6 +472,10 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 	public long displayDate;
 	public long expirationDate;
 	public long lastPublishDate;
+	public boolean subscriptionEnabled;
+	public long subscriptionCycleLength;
+	public String subscriptionCyclePeriod;
+	public long maxSubscriptionCyclesNumber;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;
