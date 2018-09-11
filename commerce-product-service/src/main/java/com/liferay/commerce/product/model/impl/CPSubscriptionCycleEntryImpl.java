@@ -22,7 +22,8 @@ import aQute.bnd.annotation.ProviderType;
 @ProviderType
 public class CPSubscriptionCycleEntryImpl
 	extends CPSubscriptionCycleEntryBaseImpl {
-	
+
 	public CPSubscriptionCycleEntryImpl() {
 	}
+
 }

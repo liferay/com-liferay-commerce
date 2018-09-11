@@ -24,4 +24,5 @@ public class CPSubscriptionEntryImpl extends CPSubscriptionEntryBaseImpl {
 
 	public CPSubscriptionEntryImpl() {
 	}
+
 }
