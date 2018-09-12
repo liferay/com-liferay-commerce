@@ -85,10 +85,10 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", parentCommercePriceListId=");
-		sb.append(parentCommercePriceListId);
 		sb.append(", commerceCurrencyId=");
 		sb.append(commerceCurrencyId);
+		sb.append(", parentCommercePriceListId=");
+		sb.append(parentCommercePriceListId);
 		sb.append(", name=");
 		sb.append(name);
 		sb.append(", priority=");
@@ -156,8 +156,8 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 			commercePriceListImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		commercePriceListImpl.setParentCommercePriceListId(parentCommercePriceListId);
 		commercePriceListImpl.setCommerceCurrencyId(commerceCurrencyId);
+		commercePriceListImpl.setParentCommercePriceListId(parentCommercePriceListId);
 
 		if (name == null) {
 			commercePriceListImpl.setName("");
@@ -227,9 +227,9 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		parentCommercePriceListId = objectInput.readLong();
-
 		commerceCurrencyId = objectInput.readLong();
+
+		parentCommercePriceListId = objectInput.readLong();
 		name = objectInput.readUTF();
 
 		priority = objectInput.readDouble();
@@ -279,9 +279,9 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(parentCommercePriceListId);
-
 		objectOutput.writeLong(commerceCurrencyId);
+
+		objectOutput.writeLong(parentCommercePriceListId);
 
 		if (name == null) {
 			objectOutput.writeUTF("");
@@ -318,8 +318,8 @@ public class CommercePriceListCacheModel implements CacheModel<CommercePriceList
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long parentCommercePriceListId;
 	public long commerceCurrencyId;
+	public long parentCommercePriceListId;
 	public String name;
 	public double priority;
 	public long displayDate;
