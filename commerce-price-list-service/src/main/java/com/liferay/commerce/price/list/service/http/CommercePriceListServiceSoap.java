@@ -66,6 +66,58 @@ import java.rmi.RemoteException;
 @ProviderType
 public class CommercePriceListServiceSoap {
 	public static com.liferay.commerce.price.list.model.CommercePriceListSoap addCommercePriceList(
+		long commerceCurrencyId, long parentCommercePriceListId, String name,
+		double priority, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.price.list.model.CommercePriceList returnValue = CommercePriceListServiceUtil.addCommercePriceList(commerceCurrencyId,
+					parentCommercePriceListId, name, priority,
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, serviceContext);
+
+			return com.liferay.commerce.price.list.model.CommercePriceListSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.price.list.model.CommercePriceListSoap addCommercePriceList(
+		long commerceCurrencyId, long parentCommercePriceListId, String name,
+		double priority, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute,
+		String externalReferenceCode, boolean neverExpire,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.price.list.model.CommercePriceList returnValue = CommercePriceListServiceUtil.addCommercePriceList(commerceCurrencyId,
+					parentCommercePriceListId, name, priority,
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, externalReferenceCode, neverExpire,
+					serviceContext);
+
+			return com.liferay.commerce.price.list.model.CommercePriceListSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.price.list.model.CommercePriceListSoap addCommercePriceList(
 		long commerceCurrencyId, String name, double priority,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, int expirationDateMonth,
@@ -207,6 +259,33 @@ public class CommercePriceListServiceSoap {
 	}
 
 	public static com.liferay.commerce.price.list.model.CommercePriceListSoap updateCommercePriceList(
+		long commercePriceListId, long commerceCurrencyId,
+		long parentCommercePriceListId, String name, double priority,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.price.list.model.CommercePriceList returnValue = CommercePriceListServiceUtil.updateCommercePriceList(commercePriceListId,
+					commerceCurrencyId, parentCommercePriceListId, name,
+					priority, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					expirationDateMonth, expirationDateDay, expirationDateYear,
+					expirationDateHour, expirationDateMinute, neverExpire,
+					serviceContext);
+
+			return com.liferay.commerce.price.list.model.CommercePriceListSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.price.list.model.CommercePriceListSoap updateCommercePriceList(
 		long commercePriceListId, long commerceCurrencyId, String name,
 		double priority, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -237,6 +316,34 @@ public class CommercePriceListServiceSoap {
 		try {
 			com.liferay.commerce.price.list.model.CommercePriceList returnValue = CommercePriceListServiceUtil.updateExternalReferenceCode(com.liferay.commerce.price.list.model.impl.CommercePriceListModelImpl.toModel(
 						commercePriceList), groupId, externalReferenceCode);
+
+			return com.liferay.commerce.price.list.model.CommercePriceListSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.price.list.model.CommercePriceListSoap upsertCommercePriceList(
+		long commercePriceListId, long commerceCurrencyId,
+		long parentCommercePriceListId, String name, double priority,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, String externalReferenceCode,
+		boolean neverExpire,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.price.list.model.CommercePriceList returnValue = CommercePriceListServiceUtil.upsertCommercePriceList(commercePriceListId,
+					commerceCurrencyId, parentCommercePriceListId, name,
+					priority, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					expirationDateMonth, expirationDateDay, expirationDateYear,
+					expirationDateHour, expirationDateMinute,
+					externalReferenceCode, neverExpire, serviceContext);
 
 			return com.liferay.commerce.price.list.model.CommercePriceListSoap.toSoapModel(returnValue);
 		}

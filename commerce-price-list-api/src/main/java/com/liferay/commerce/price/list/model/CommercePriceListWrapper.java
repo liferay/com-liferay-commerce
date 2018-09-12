@@ -69,9 +69,9 @@ public class CommercePriceListWrapper implements CommercePriceList,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("commerceCurrencyId", getCommerceCurrencyId());
 		attributes.put("parentCommercePriceListId",
 			getParentCommercePriceListId());
-		attributes.put("commerceCurrencyId", getCommerceCurrencyId());
 		attributes.put("name", getName());
 		attributes.put("priority", getPriority());
 		attributes.put("displayDate", getDisplayDate());
@@ -142,17 +142,17 @@ public class CommercePriceListWrapper implements CommercePriceList,
 			setModifiedDate(modifiedDate);
 		}
 
+		Long commerceCurrencyId = (Long)attributes.get("commerceCurrencyId");
+
+		if (commerceCurrencyId != null) {
+			setCommerceCurrencyId(commerceCurrencyId);
+		}
+
 		Long parentCommercePriceListId = (Long)attributes.get(
 				"parentCommercePriceListId");
 
 		if (parentCommercePriceListId != null) {
 			setParentCommercePriceListId(parentCommercePriceListId);
-		}
-
-		Long commerceCurrencyId = (Long)attributes.get("commerceCurrencyId");
-
-		if (commerceCurrencyId != null) {
-			setCommerceCurrencyId(commerceCurrencyId);
 		}
 
 		String name = (String)attributes.get("name");
