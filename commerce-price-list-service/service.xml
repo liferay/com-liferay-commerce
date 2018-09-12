@@ -80,8 +80,8 @@
 
 		<!-- Other fields -->
 
-		<column name="parentCommercePriceListId" type="long" />
 		<column name="commerceCurrencyId" type="long" />
+		<column name="parentCommercePriceListId" type="long" />
 		<column name="name" type="String" />
 		<column name="priority" type="double" />
 		<column name="displayDate" type="Date" />
@@ -108,11 +108,11 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="ParentCommercePriceListId" return-type="CommercePriceList">
-			<finder-column name="parentCommercePriceListId" />
-		</finder>
 		<finder name="CommerceCurrencyId" return-type="Collection">
 			<finder-column name="commerceCurrencyId" />
+		</finder>
+		<finder name="ParentCommercePriceListId" return-type="CommercePriceList">
+			<finder-column name="parentCommercePriceListId" />
 		</finder>
 		<finder name="G_S" return-type="Collection">
 			<finder-column name="groupId" />
