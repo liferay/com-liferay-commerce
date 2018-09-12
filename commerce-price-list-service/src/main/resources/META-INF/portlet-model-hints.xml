@@ -30,10 +30,10 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="parentCommercePriceListId" type="long" />
 		<field name="commerceCurrencyId" type="long">
 			<validator name="required" />
 		</field>
+		<field name="parentCommercePriceListId" type="long" />
 		<field name="name" type="String">
 			<validator name="required" />
 		</field>

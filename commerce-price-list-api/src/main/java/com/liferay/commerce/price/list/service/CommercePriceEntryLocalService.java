@@ -209,6 +209,10 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 	public CommercePriceEntry fetchCommercePriceEntry(long cpInstanceId,
 		long commercePriceListId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommercePriceEntry fetchCommercePriceEntry(long cpInstanceId,
+		long commercePriceListId, boolean useAncestor);
+
 	/**
 	* Returns the commerce price entry with the matching external reference code and company.
 	*
