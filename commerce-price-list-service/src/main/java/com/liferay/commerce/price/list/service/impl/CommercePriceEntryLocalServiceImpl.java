@@ -17,6 +17,7 @@ package com.liferay.commerce.price.list.service.impl;
 import com.liferay.commerce.price.list.exception.DuplicateCommercePriceEntryException;
 import com.liferay.commerce.price.list.exception.NoSuchPriceEntryException;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
+import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.base.CommercePriceEntryLocalServiceBaseImpl;
 import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
 import com.liferay.commerce.product.model.CPInstance;
@@ -187,8 +188,26 @@ public class CommercePriceEntryLocalServiceImpl
 	public CommercePriceEntry fetchCommercePriceEntry(
 		long cpInstanceId, long commercePriceListId) {
 
-		return commercePriceEntryPersistence.fetchByC_C(
-			cpInstanceId, commercePriceListId);
+		CommercePriceEntry commercePriceEntry =
+			commercePriceEntryPersistence.fetchByC_C(
+				cpInstanceId, commercePriceListId);
+
+		if (commercePriceEntry != null) {
+			return commercePriceEntry;
+		}
+
+		CommercePriceList commercePriceList =
+			commercePriceListLocalService.fetchCommercePriceList(
+				commercePriceListId);
+
+		if ((commercePriceList == null) ||
+			(commercePriceList.getParentCommercePriceListId() == 0)) {
+
+			return null;
+		}
+
+		return fetchCommercePriceEntry(
+			cpInstanceId, commercePriceList.getParentCommercePriceListId());
 	}
 
 	@Override
