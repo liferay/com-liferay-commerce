@@ -207,19 +207,20 @@ public class EditCommercePriceListMVCActionCommand
 
 		if (commercePriceListId <= 0) {
 			commercePriceList = _commercePriceListService.addCommercePriceList(
-				commerceCurrencyId, parentCommercePriceListId, name, priority, displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, serviceContext);
+				commerceCurrencyId, parentCommercePriceListId, name, priority,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, serviceContext);
 		}
 		else {
 			commercePriceList =
 				_commercePriceListService.updateCommercePriceList(
-					commercePriceListId, commerceCurrencyId, parentCommercePriceListId, name, priority,
-					displayDateMonth, displayDateDay, displayDateYear,
-					displayDateHour, displayDateMinute, expirationDateMonth,
-					expirationDateDay, expirationDateYear, expirationDateHour,
+					commercePriceListId, commerceCurrencyId,
+					parentCommercePriceListId, name, priority, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
 					expirationDateMinute, neverExpire, serviceContext);
 		}
 
