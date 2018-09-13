@@ -42,6 +42,19 @@ public class CPSubscriptionEntryServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPSubscriptionEntryServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> getCPSubscriptionEntries(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSubscriptionEntry> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCPSubscriptionEntries(groupId, userId, start, end,
+			orderByComparator);
+	}
+
+	public static int getCPSubscriptionEntriesCount(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPSubscriptionEntriesCount(groupId, userId);
+	}
 
 	/**
 	* Returns the OSGi service identifier.

@@ -16,9 +16,16 @@ package com.liferay.commerce.product.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.product.service.CPSubscriptionEntryServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.commerce.product.service.CPSubscriptionEntryServiceUtil} service utility. The
+ * {@link CPSubscriptionEntryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +60,43 @@ import aQute.bnd.annotation.ProviderType;
  * @author Marco Leo
  * @see CPSubscriptionEntryServiceHttp
  * @see com.liferay.commerce.product.model.CPSubscriptionEntrySoap
- * @see com.liferay.commerce.product.service.CPSubscriptionEntryServiceUtil
+ * @see CPSubscriptionEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class CPSubscriptionEntryServiceSoap {
+	public static com.liferay.commerce.product.model.CPSubscriptionEntrySoap[] getCPSubscriptionEntries(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSubscriptionEntry> orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> returnValue =
+				CPSubscriptionEntryServiceUtil.getCPSubscriptionEntries(groupId,
+					userId, start, end, orderByComparator);
+
+			return com.liferay.commerce.product.model.CPSubscriptionEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCPSubscriptionEntriesCount(long groupId, long userId)
+		throws RemoteException {
+		try {
+			int returnValue = CPSubscriptionEntryServiceUtil.getCPSubscriptionEntriesCount(groupId,
+					userId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CPSubscriptionEntryServiceSoap.class);
 }

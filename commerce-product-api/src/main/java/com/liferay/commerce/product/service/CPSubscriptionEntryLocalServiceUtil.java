@@ -54,6 +54,15 @@ public class CPSubscriptionEntryLocalServiceUtil {
 		return getService().addCPSubscriptionEntry(cpSubscriptionEntry);
 	}
 
+	public static com.liferay.commerce.product.model.CPSubscriptionEntry addCPSubscriptionEntry(
+		long cpInstanceId, long commerceOrderItemId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCPSubscriptionEntry(cpInstanceId, commerceOrderItemId,
+			serviceContext);
+	}
+
 	/**
 	* Creates a new cp subscription entry with the primary key. Does not add the cp subscription entry to the database.
 	*
@@ -214,6 +223,14 @@ public class CPSubscriptionEntryLocalServiceUtil {
 		return getService().getCPSubscriptionEntries(start, end);
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> getCPSubscriptionEntries(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSubscriptionEntry> orderByComparator) {
+		return getService()
+				   .getCPSubscriptionEntries(groupId, userId, start, end,
+			orderByComparator);
+	}
+
 	/**
 	* Returns all the cp subscription entries matching the UUID and company.
 	*
@@ -252,6 +269,10 @@ public class CPSubscriptionEntryLocalServiceUtil {
 	*/
 	public static int getCPSubscriptionEntriesCount() {
 		return getService().getCPSubscriptionEntriesCount();
+	}
+
+	public static int getCPSubscriptionEntriesCount(long groupId, long userId) {
+		return getService().getCPSubscriptionEntriesCount(groupId, userId);
 	}
 
 	/**

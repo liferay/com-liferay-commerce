@@ -217,6 +217,24 @@ public class CPSubscriptionEntryWrapper implements CPSubscriptionEntry,
 		return _cpSubscriptionEntry.getCompanyId();
 	}
 
+	@Override
+	public CPDefinition getCPDefinition()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpSubscriptionEntry.getCPDefinition();
+	}
+
+	@Override
+	public long getCPDefinitionId()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpSubscriptionEntry.getCPDefinitionId();
+	}
+
+	@Override
+	public CPInstance getCPInstance()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpSubscriptionEntry.getCPInstance();
+	}
+
 	/**
 	* Returns the cp instance ID of this cp subscription entry.
 	*

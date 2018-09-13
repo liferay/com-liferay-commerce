@@ -16,12 +16,21 @@ package com.liferay.commerce.product.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.product.service.CPSubscriptionEntryServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.HttpPrincipal;
+import com.liferay.portal.kernel.service.http.TunnelUtil;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
+
 /**
  * Provides the HTTP utility for the
- * {@link com.liferay.commerce.product.service.CPSubscriptionEntryServiceUtil} service utility. The
+ * {@link CPSubscriptionEntryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link com.liferay.portal.kernel.security.auth.HttpPrincipal} parameter.
+ * {@link HttpPrincipal} parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -40,10 +49,85 @@ import aQute.bnd.annotation.ProviderType;
  *
  * @author Marco Leo
  * @see CPSubscriptionEntryServiceSoap
- * @see com.liferay.portal.kernel.security.auth.HttpPrincipal
- * @see com.liferay.commerce.product.service.CPSubscriptionEntryServiceUtil
+ * @see HttpPrincipal
+ * @see CPSubscriptionEntryServiceUtil
  * @generated
  */
 @ProviderType
 public class CPSubscriptionEntryServiceHttp {
+	public static java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> getCPSubscriptionEntries(
+		HttpPrincipal httpPrincipal, long groupId, long userId, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSubscriptionEntry> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPSubscriptionEntryServiceUtil.class,
+					"getCPSubscriptionEntries",
+					_getCPSubscriptionEntriesParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					userId, start, end, orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getCPSubscriptionEntriesCount(
+		HttpPrincipal httpPrincipal, long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPSubscriptionEntryServiceUtil.class,
+					"getCPSubscriptionEntriesCount",
+					_getCPSubscriptionEntriesCountParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					userId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CPSubscriptionEntryServiceHttp.class);
+	private static final Class<?>[] _getCPSubscriptionEntriesParameterTypes0 = new Class[] {
+			long.class, long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _getCPSubscriptionEntriesCountParameterTypes1 =
+		new Class[] { long.class, long.class };
 }
