@@ -91,10 +91,10 @@ public class CommercePriceEntryLocalServiceTest {
 			"The result should be a new Price Entry on the Price List"
 		);
 
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+
 		Currency currency = Currency.getInstance(Locale.US);
 		String name = RandomTestUtil.randomString();
-
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -140,10 +140,10 @@ public class CommercePriceEntryLocalServiceTest {
 			"The result should be a new Price Entry on the Price List"
 		);
 
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+
 		Currency currency = Currency.getInstance(Locale.US);
 		String name = RandomTestUtil.randomString();
-
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -196,10 +196,10 @@ public class CommercePriceEntryLocalServiceTest {
 			"The result should be a new Price Entry on the Price List"
 		);
 
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+
 		Currency currency = Currency.getInstance(Locale.US);
 		String name = RandomTestUtil.randomString();
-
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -249,10 +249,10 @@ public class CommercePriceEntryLocalServiceTest {
 			"The result should be the updated Price Entry on the Price List"
 		);
 
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+
 		Currency currency = Currency.getInstance(Locale.US);
 		String name = RandomTestUtil.randomString();
-
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -306,10 +306,10 @@ public class CommercePriceEntryLocalServiceTest {
 			"The result should be the updated Price Entry on the Price List"
 		);
 
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+
 		Currency currency = Currency.getInstance(Locale.US);
 		String name = RandomTestUtil.randomString();
-
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -372,10 +372,10 @@ public class CommercePriceEntryLocalServiceTest {
 			"The result should be a DuplicateCommercePriceEntryException"
 		);
 
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+
 		Currency currency = Currency.getInstance(Locale.US);
 		String name = RandomTestUtil.randomString();
-
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
@@ -423,10 +423,10 @@ public class CommercePriceEntryLocalServiceTest {
 			"The result should be a NoSuchCPInstanceException"
 		);
 
+		long cpInstanceId = RandomTestUtil.randomInt();
+
 		Currency currency = Currency.getInstance(Locale.US);
 		String name = RandomTestUtil.randomString();
-
-		long cpInstanceId = RandomTestUtil.randomInt();
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
