@@ -41,12 +41,12 @@ public class CommercePriceListTestUtil {
 
 		long commerceCurrencyId = _getCommerceCurrencyId(groupId, currency);
 
-		if (neverExpire == null) {
-			neverExpire = Boolean.TRUE;
-		}
-
 		if (priority == null) {
 			priority = 0D;
+		}
+
+		if (neverExpire == null) {
+			neverExpire = Boolean.TRUE;
 		}
 
 		ServiceContext serviceContext =
@@ -102,7 +102,7 @@ public class CommercePriceListTestUtil {
 	}
 
 	public static CommercePriceList upsertCommercePriceList(
-			Long groupId, Long commercePriceListId, String currency,
+			long groupId, long commercePriceListId, String currency,
 			String name, Double priority, Boolean neverExpire, Date displayDate,
 			Date expirationDate, String externalReferenceCode)
 		throws PortalException {
