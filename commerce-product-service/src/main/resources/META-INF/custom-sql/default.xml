@@ -75,4 +75,16 @@
 				([$OWNER_USER_ID$] [$OWNER_USER_ID_AND_OR_CONNECTOR$] ([$STATUS$]))
 		]]>
 	</sql>
+	<sql id="com.liferay.commerce.product.service.persistence.CPSubscriptionEntryFinder.findByNextIterationDate">
+		<![CDATA[
+			SELECT
+				CPSubscriptionEntry.*
+			FROM
+				CPSubscriptionEntry
+			WHERE
+				(CPSubscriptionEntry.nextIterationDate < ?) AND
+				(CPSubscriptionEntry.active = TRUE) AND
+				([$OWNER_USER_ID$] [$OWNER_USER_ID_AND_OR_CONNECTOR$])
+		]]>
+	</sql>
 </custom-sql>
