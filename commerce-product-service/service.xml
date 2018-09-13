@@ -118,6 +118,10 @@
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
 		<column name="lastPublishDate" type="Date" />
+		<column name="subscriptionEnabled" type="boolean" />
+		<column name="subscriptionCycleLength" type="long" />
+		<column name="subscriptionCyclePeriod" type="String" />
+		<column name="maxSubscriptionCyclesNumber" type="long" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
@@ -542,6 +546,10 @@
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
 		<column name="lastPublishDate" type="Date" />
+		<column name="subscriptionEnabled" type="boolean" />
+		<column name="subscriptionCycleLength" type="long" />
+		<column name="subscriptionCyclePeriod" type="String" />
+		<column name="maxSubscriptionCyclesNumber" type="long" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
@@ -970,6 +978,91 @@
 
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
+	<entity local-service="true" name="CPSubscriptionCycleEntry" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="CPSubscriptionCycleEntryId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="CPSubscriptionEntryId" type="long" />
+		<column name="commerceOrderItemId" type="long" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="CPSubscriptionEntryId" return-type="Collection">
+			<finder-column name="CPSubscriptionEntryId" />
+		</finder>
+	</entity>
+	<entity local-service="true" name="CPSubscriptionEntry" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="CPSubscriptionEntryId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="CPInstanceId" type="long" />
+		<column name="commerceOrderItemId" type="long" />
+		<column name="subscriptionCycleLength" type="long" />
+		<column name="subscriptionCyclePeriod" type="String" />
+		<column name="maxSubscriptionCyclesNumber" type="long" />
+		<column name="active" type="boolean" />
+		<column name="nextIterationDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="CPInstanceId" return-type="Collection">
+			<finder-column name="CPInstanceId" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
+	</entity>
 	<entity local-service="true" name="CPTaxCategory" remote-service="true">
 
 		<!-- PK fields -->
@@ -1030,6 +1123,7 @@
 		<exception>CPRuleType</exception>
 		<exception>CPSpecificationOptionKey</exception>
 		<exception>CPSpecificationOptionTitle</exception>
+		<exception>CPSubscriptionCPInstanceId</exception>
 		<exception>CPTaxCategoryName</exception>
 		<exception>DuplicateCPFriendlyURLEntry</exception>
 		<exception>NoSuchSkuContributorCPDefinitionOptionRel</exception>

@@ -1,0 +1,87 @@
+<%--
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+--%>
+
+<%@ include file="/init.jsp" %>
+
+<%
+CPSubscriptionContentDisplayContext cpSubscriptionContentDisplayContext = (CPSubscriptionContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+SearchContainer<CPSubscriptionEntry> cpSubscriptionEntrySearchContainer = cpSubscriptionContentDisplayContext.getSearchContainer();
+%>
+
+<div class="container-fluid-1280" id="<portlet:namespace />subscriptionEntriesContainer">
+	<div class="commerce-product-subscription-entries-container" id="<portlet:namespace />entriesContainer">
+		<liferay-ui:search-container
+			id="cpSubscriptionEntries"
+			iteratorURL="<%= cpSubscriptionContentDisplayContext.getPortletURL() %>"
+			searchContainer="<%= cpSubscriptionEntrySearchContainer %>"
+		>
+			<liferay-ui:search-container-row
+				className="com.liferay.commerce.product.model.CPSubscriptionEntry"
+				cssClass="entry-display-style"
+				keyProperty="CPSubscriptionEntryId"
+				modelVar="cpSubscriptionEntry"
+			>
+
+				<%
+				CPDefinition cpDefinition = cpSubscriptionEntry.getCPDefinition();
+
+				String thumbnailSrc = cpSubscriptionContentDisplayContext.getCPSubscriptionEntryThumbnailSrc(cpSubscriptionEntry, themeDisplay);
+
+				List<KeyValuePair> keyValuePairs = cpSubscriptionContentDisplayContext.getKeyValuePairs(cpSubscriptionEntry);
+
+				StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
+
+				for (KeyValuePair keyValuePair : keyValuePairs) {
+					stringJoiner.add(keyValuePair.getValue());
+				}
+				%>
+
+				<liferay-ui:search-container-column-image
+					name="product"
+					src="<%= thumbnailSrc %>"
+				/>
+
+				<liferay-ui:search-container-column-text
+					name="description"
+				>
+					<a class="font-weight-bold" href="<%= cpSubscriptionContentDisplayContext.getCPDefinitionURL(cpSubscriptionEntry, themeDisplay) %>">
+						<%= HtmlUtil.escape(cpDefinition.getName(languageId)) %>
+					</a>
+
+					<h6 class="text-default">
+						<%= HtmlUtil.escape(stringJoiner.toString()) %>
+					</h6>
+				</liferay-ui:search-container-column-text>
+
+				<liferay-ui:search-container-column-date
+					name="create-date"
+					property="createDate"
+				/>
+
+				<liferay-ui:search-container-column-date
+					name="next-iteration-date"
+					property="nextIterationDate"
+				/>
+			</liferay-ui:search-container-row>
+
+			<liferay-ui:search-iterator
+				displayStyle="list"
+				markupView="lexicon"
+			/>
+		</liferay-ui:search-container>
+	</div>
+</div>
