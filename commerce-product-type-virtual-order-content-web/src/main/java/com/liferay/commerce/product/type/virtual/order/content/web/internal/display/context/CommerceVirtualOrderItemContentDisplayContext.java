@@ -348,6 +348,13 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		return _searchContainer;
 	}
 
+	public boolean hasActiveSubscription(
+			CommerceVirtualOrderItem commerceVirtualOrderItem)
+		throws PortalException {
+
+		return true;
+	}
+
 	private JournalArticleDisplay _articleDisplay;
 	private final CommerceOrganizationHelper _commerceOrganizationHelper;
 	private final CommerceVirtualOrderItemContentPortletInstanceConfiguration
