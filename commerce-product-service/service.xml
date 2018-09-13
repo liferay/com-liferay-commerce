@@ -1122,6 +1122,7 @@
 		<exception>CPRuleType</exception>
 		<exception>CPSpecificationOptionKey</exception>
 		<exception>CPSpecificationOptionTitle</exception>
+		<exception>CPSubscriptionCPInstanceId</exception>
 		<exception>CPTaxCategoryName</exception>
 		<exception>DuplicateCPFriendlyURLEntry</exception>
 		<exception>NoSuchSkuContributorCPDefinitionOptionRel</exception>
