@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -73,6 +74,11 @@ public interface CPSubscriptionEntryLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CPSubscriptionEntry addCPSubscriptionEntry(
 		CPSubscriptionEntry cpSubscriptionEntry);
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CPSubscriptionEntry addCPSubscriptionEntry(long cpInstanceId,
+		long commerceOrderItemId, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	* Creates a new cp subscription entry with the primary key. Does not add the cp subscription entry to the database.
@@ -203,6 +209,11 @@ public interface CPSubscriptionEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPSubscriptionEntry> getCPSubscriptionEntries(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPSubscriptionEntry> getCPSubscriptionEntries(long groupId,
+		long userId, int start, int end,
+		OrderByComparator<CPSubscriptionEntry> orderByComparator);
+
 	/**
 	* Returns all the cp subscription entries matching the UUID and company.
 	*
@@ -236,6 +247,9 @@ public interface CPSubscriptionEntryLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPSubscriptionEntriesCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPSubscriptionEntriesCount(long groupId, long userId);
 
 	/**
 	* Returns the cp subscription entry with the primary key.

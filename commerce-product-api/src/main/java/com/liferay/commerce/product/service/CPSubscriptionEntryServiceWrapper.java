@@ -34,6 +34,22 @@ public class CPSubscriptionEntryServiceWrapper
 		_cpSubscriptionEntryService = cpSubscriptionEntryService;
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> getCPSubscriptionEntries(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSubscriptionEntry> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpSubscriptionEntryService.getCPSubscriptionEntries(groupId,
+			userId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCPSubscriptionEntriesCount(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpSubscriptionEntryService.getCPSubscriptionEntriesCount(groupId,
+			userId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

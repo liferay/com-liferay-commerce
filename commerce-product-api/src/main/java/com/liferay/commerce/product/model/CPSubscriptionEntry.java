@@ -55,4 +55,13 @@ public interface CPSubscriptionEntry extends CPSubscriptionEntryModel,
 				return CPSubscriptionEntry.class;
 			}
 		};
+
+	public CPDefinition getCPDefinition()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public long getCPDefinitionId()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public CPInstance getCPInstance()
+		throws com.liferay.portal.kernel.exception.PortalException;
 }
