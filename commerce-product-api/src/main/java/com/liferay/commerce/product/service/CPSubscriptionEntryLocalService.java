@@ -28,8 +28,10 @@ import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -251,6 +253,9 @@ public interface CPSubscriptionEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPSubscriptionEntriesCount(long groupId, long userId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPSubscriptionEntry> getCPSubscriptionEntriesToRenew();
+
 	/**
 	* Returns the cp subscription entry with the primary key.
 	*
@@ -293,6 +298,11 @@ public interface CPSubscriptionEntryLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CPSubscriptionEntry> searchCPSubscriptionEntries(
+		long companyId, long groupId, Boolean active, String keywords,
+		int start, int end, Sort sort) throws PortalException;
+
 	/**
 	* Updates the cp subscription entry in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -302,4 +312,10 @@ public interface CPSubscriptionEntryLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CPSubscriptionEntry updateCPSubscriptionEntry(
 		CPSubscriptionEntry cpSubscriptionEntry);
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CPSubscriptionEntry updateCPSubscriptionEntry(
+		long cpSubscriptionEntryId, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		boolean active);
 }

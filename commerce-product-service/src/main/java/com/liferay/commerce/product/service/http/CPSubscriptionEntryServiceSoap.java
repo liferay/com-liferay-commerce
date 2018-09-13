@@ -83,6 +83,32 @@ public class CPSubscriptionEntryServiceSoap {
 		}
 	}
 
+	public static void deleteCPSubscriptionEntry(long cpSubscriptionEntryId)
+		throws RemoteException {
+		try {
+			CPSubscriptionEntryServiceUtil.deleteCPSubscriptionEntry(cpSubscriptionEntryId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPSubscriptionEntrySoap fetchCPSubscriptionEntry(
+		long cpSubscriptionEntryId) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CPSubscriptionEntry returnValue = CPSubscriptionEntryServiceUtil.fetchCPSubscriptionEntry(cpSubscriptionEntryId);
+
+			return com.liferay.commerce.product.model.CPSubscriptionEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCPSubscriptionEntriesCount(long groupId, long userId)
 		throws RemoteException {
 		try {
@@ -90,6 +116,26 @@ public class CPSubscriptionEntryServiceSoap {
 					userId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPSubscriptionEntrySoap updateCommercePriceEntry(
+		long cpSubscriptionEntryId, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		boolean active,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CPSubscriptionEntry returnValue = CPSubscriptionEntryServiceUtil.updateCommercePriceEntry(cpSubscriptionEntryId,
+					subscriptionCycleLength, subscriptionCyclePeriod,
+					maxSubscriptionCyclesNumber, active, serviceContext);
+
+			return com.liferay.commerce.product.model.CPSubscriptionEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

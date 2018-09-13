@@ -40,6 +40,7 @@ import com.liferay.commerce.product.service.persistence.CPRulePersistence;
 import com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPSubscriptionCycleEntryPersistence;
+import com.liferay.commerce.product.service.persistence.CPSubscriptionEntryFinder;
 import com.liferay.commerce.product.service.persistence.CPSubscriptionEntryPersistence;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
 
@@ -1131,6 +1132,25 @@ public abstract class CPRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the cp subscription entry finder.
+	 *
+	 * @return the cp subscription entry finder
+	 */
+	public CPSubscriptionEntryFinder getCPSubscriptionEntryFinder() {
+		return cpSubscriptionEntryFinder;
+	}
+
+	/**
+	 * Sets the cp subscription entry finder.
+	 *
+	 * @param cpSubscriptionEntryFinder the cp subscription entry finder
+	 */
+	public void setCPSubscriptionEntryFinder(
+		CPSubscriptionEntryFinder cpSubscriptionEntryFinder) {
+		this.cpSubscriptionEntryFinder = cpSubscriptionEntryFinder;
+	}
+
+	/**
 	 * Returns the cp tax category local service.
 	 *
 	 * @return the cp tax category local service
@@ -1492,6 +1512,8 @@ public abstract class CPRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.liferay.commerce.product.service.CPSubscriptionEntryLocalService cpSubscriptionEntryLocalService;
 	@BeanReference(type = CPSubscriptionEntryPersistence.class)
 	protected CPSubscriptionEntryPersistence cpSubscriptionEntryPersistence;
+	@BeanReference(type = CPSubscriptionEntryFinder.class)
+	protected CPSubscriptionEntryFinder cpSubscriptionEntryFinder;
 	@BeanReference(type = com.liferay.commerce.product.service.CPTaxCategoryLocalService.class)
 	protected com.liferay.commerce.product.service.CPTaxCategoryLocalService cpTaxCategoryLocalService;
 	@BeanReference(type = CPTaxCategoryPersistence.class)

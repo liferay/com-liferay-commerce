@@ -90,13 +90,110 @@ public class CPSubscriptionEntryServiceHttp {
 		}
 	}
 
+	public static void deleteCPSubscriptionEntry(HttpPrincipal httpPrincipal,
+		long cpSubscriptionEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPSubscriptionEntryServiceUtil.class,
+					"deleteCPSubscriptionEntry",
+					_deleteCPSubscriptionEntryParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					cpSubscriptionEntryId);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPSubscriptionEntry fetchCPSubscriptionEntry(
+		HttpPrincipal httpPrincipal, long cpSubscriptionEntryId)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPSubscriptionEntryServiceUtil.class,
+					"fetchCPSubscriptionEntry",
+					_fetchCPSubscriptionEntryParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					cpSubscriptionEntryId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.security.auth.PrincipalException) {
+					throw (com.liferay.portal.kernel.security.auth.PrincipalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.product.model.CPSubscriptionEntry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPSubscriptionEntry> searchCPSubscriptionEntries(
+		HttpPrincipal httpPrincipal, long companyId, long groupId,
+		Boolean active, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPSubscriptionEntryServiceUtil.class,
+					"searchCPSubscriptionEntries",
+					_searchCPSubscriptionEntriesParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, groupId, active, keywords, start, end, sort);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.security.auth.PrincipalException) {
+					throw (com.liferay.portal.kernel.security.auth.PrincipalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPSubscriptionEntry>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static int getCPSubscriptionEntriesCount(
 		HttpPrincipal httpPrincipal, long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPSubscriptionEntryServiceUtil.class,
 					"getCPSubscriptionEntriesCount",
-					_getCPSubscriptionEntriesCountParameterTypes1);
+					_getCPSubscriptionEntriesCountParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId);
@@ -123,11 +220,63 @@ public class CPSubscriptionEntryServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPSubscriptionEntry updateCommercePriceEntry(
+		HttpPrincipal httpPrincipal, long cpSubscriptionEntryId,
+		long subscriptionCycleLength, String subscriptionCyclePeriod,
+		long maxSubscriptionCyclesNumber, boolean active,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPSubscriptionEntryServiceUtil.class,
+					"updateCommercePriceEntry",
+					_updateCommercePriceEntryParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					cpSubscriptionEntryId, subscriptionCycleLength,
+					subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
+					active, serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.security.auth.PrincipalException) {
+					throw (com.liferay.portal.kernel.security.auth.PrincipalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.product.model.CPSubscriptionEntry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CPSubscriptionEntryServiceHttp.class);
 	private static final Class<?>[] _getCPSubscriptionEntriesParameterTypes0 = new Class[] {
 			long.class, long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCPSubscriptionEntriesCountParameterTypes1 =
+	private static final Class<?>[] _deleteCPSubscriptionEntryParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _fetchCPSubscriptionEntryParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _searchCPSubscriptionEntriesParameterTypes3 = new Class[] {
+			long.class, long.class, Boolean.class, String.class, int.class,
+			int.class, com.liferay.portal.kernel.search.Sort.class
+		};
+	private static final Class<?>[] _getCPSubscriptionEntriesCountParameterTypes4 =
 		new Class[] { long.class, long.class };
+	private static final Class<?>[] _updateCommercePriceEntryParameterTypes5 = new Class[] {
+			long.class, long.class, String.class, long.class, boolean.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
+		};
 }

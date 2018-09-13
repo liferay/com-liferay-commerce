@@ -21,8 +21,12 @@ import com.liferay.commerce.product.model.CPSubscriptionEntry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.BaseService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -55,6 +59,13 @@ public interface CPSubscriptionEntryService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPSubscriptionEntryServiceUtil} to access the cp subscription entry remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPSubscriptionEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public void deleteCPSubscriptionEntry(long cpSubscriptionEntryId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPSubscriptionEntry fetchCPSubscriptionEntry(
+		long cpSubscriptionEntryId) throws PrincipalException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPSubscriptionEntry> getCPSubscriptionEntries(long groupId,
 		long userId, int start, int end,
@@ -71,4 +82,15 @@ public interface CPSubscriptionEntryService extends BaseService {
 	* @return the OSGi service identifier
 	*/
 	public String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CPSubscriptionEntry> searchCPSubscriptionEntries(
+		long companyId, long groupId, Boolean active, String keywords,
+		int start, int end, Sort sort) throws PrincipalException;
+
+	public CPSubscriptionEntry updateCommercePriceEntry(
+		long cpSubscriptionEntryId, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		boolean active, ServiceContext serviceContext)
+		throws PrincipalException;
 }

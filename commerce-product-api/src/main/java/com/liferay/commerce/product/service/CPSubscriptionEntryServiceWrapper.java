@@ -35,6 +35,19 @@ public class CPSubscriptionEntryServiceWrapper
 	}
 
 	@Override
+	public void deleteCPSubscriptionEntry(long cpSubscriptionEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_cpSubscriptionEntryService.deleteCPSubscriptionEntry(cpSubscriptionEntryId);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPSubscriptionEntry fetchCPSubscriptionEntry(
+		long cpSubscriptionEntryId)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		return _cpSubscriptionEntryService.fetchCPSubscriptionEntry(cpSubscriptionEntryId);
+	}
+
+	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> getCPSubscriptionEntries(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSubscriptionEntry> orderByComparator)
@@ -58,6 +71,27 @@ public class CPSubscriptionEntryServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _cpSubscriptionEntryService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPSubscriptionEntry> searchCPSubscriptionEntries(
+		long companyId, long groupId, Boolean active, String keywords,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		return _cpSubscriptionEntryService.searchCPSubscriptionEntries(companyId,
+			groupId, active, keywords, start, end, sort);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPSubscriptionEntry updateCommercePriceEntry(
+		long cpSubscriptionEntryId, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		boolean active,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		return _cpSubscriptionEntryService.updateCommercePriceEntry(cpSubscriptionEntryId,
+			subscriptionCycleLength, subscriptionCyclePeriod,
+			maxSubscriptionCyclesNumber, active, serviceContext);
 	}
 
 	@Override

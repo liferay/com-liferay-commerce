@@ -275,6 +275,10 @@ public class CPSubscriptionEntryLocalServiceUtil {
 		return getService().getCPSubscriptionEntriesCount(groupId, userId);
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> getCPSubscriptionEntriesToRenew() {
+		return getService().getCPSubscriptionEntriesToRenew();
+	}
+
 	/**
 	* Returns the cp subscription entry with the primary key.
 	*
@@ -326,6 +330,15 @@ public class CPSubscriptionEntryLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPSubscriptionEntry> searchCPSubscriptionEntries(
+		long companyId, long groupId, Boolean active, String keywords,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCPSubscriptionEntries(companyId, groupId, active,
+			keywords, start, end, sort);
+	}
+
 	/**
 	* Updates the cp subscription entry in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -335,6 +348,16 @@ public class CPSubscriptionEntryLocalServiceUtil {
 	public static com.liferay.commerce.product.model.CPSubscriptionEntry updateCPSubscriptionEntry(
 		com.liferay.commerce.product.model.CPSubscriptionEntry cpSubscriptionEntry) {
 		return getService().updateCPSubscriptionEntry(cpSubscriptionEntry);
+	}
+
+	public static com.liferay.commerce.product.model.CPSubscriptionEntry updateCPSubscriptionEntry(
+		long cpSubscriptionEntryId, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		boolean active) {
+		return getService()
+				   .updateCPSubscriptionEntry(cpSubscriptionEntryId,
+			subscriptionCycleLength, subscriptionCyclePeriod,
+			maxSubscriptionCyclesNumber, active);
 	}
 
 	public static CPSubscriptionEntryLocalService getService() {
