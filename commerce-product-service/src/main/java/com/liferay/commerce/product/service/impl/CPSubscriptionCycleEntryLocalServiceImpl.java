@@ -14,11 +14,61 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.model.CPSubscriptionCycleEntry;
+import com.liferay.commerce.product.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.service.base.CPSubscriptionCycleEntryLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 
 /**
  * @author Alessio Antonio Rendina
  */
 public class CPSubscriptionCycleEntryLocalServiceImpl
 	extends CPSubscriptionCycleEntryLocalServiceBaseImpl {
+
+	@Override
+	public CPSubscriptionCycleEntry addCPSubscriptionCycleEntry(
+			long cpSubscriptionEntryId, long commerceOrderItemId, boolean renew)
+		throws PortalException {
+
+		CPSubscriptionEntry cpSubscriptionEntry =
+			cpSubscriptionEntryLocalService.getCPSubscriptionEntry(
+				cpSubscriptionEntryId);
+
+		long cpSubscriptionCycleEntryId = counterLocalService.increment();
+
+		CPSubscriptionCycleEntry cpSubscriptionCycleEntry =
+			cpSubscriptionCycleEntryPersistence.create(
+				cpSubscriptionCycleEntryId);
+
+		cpSubscriptionCycleEntry.setGroupId(cpSubscriptionEntry.getGroupId());
+		cpSubscriptionCycleEntry.setCompanyId(
+			cpSubscriptionEntry.getCompanyId());
+		cpSubscriptionCycleEntry.setUserId(cpSubscriptionEntry.getUserId());
+		cpSubscriptionCycleEntry.setUserName(cpSubscriptionEntry.getUserName());
+		cpSubscriptionCycleEntry.setCPSubscriptionEntryId(
+			cpSubscriptionEntryId);
+		cpSubscriptionCycleEntry.setCommerceOrderItemId(commerceOrderItemId);
+		cpSubscriptionCycleEntry.setRenew(renew);
+
+		cpSubscriptionCycleEntryPersistence.update(cpSubscriptionCycleEntry);
+
+		// reindex CPSubscriptionEntry
+
+		reindexCPSubscriptionEntry(cpSubscriptionEntryId);
+
+		return cpSubscriptionCycleEntry;
+	}
+
+	protected void reindexCPSubscriptionEntry(long cpSubscriptionEntryId)
+		throws PortalException {
+
+		Indexer<CPSubscriptionEntry> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(CPSubscriptionEntry.class);
+
+		indexer.reindex(
+			CPSubscriptionEntry.class.getName(), cpSubscriptionEntryId);
+	}
+
 }
