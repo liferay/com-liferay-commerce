@@ -61,6 +61,21 @@ public class CPSubscriptionCycleEntryLocalServiceImpl
 		return cpSubscriptionCycleEntry;
 	}
 
+	@Override
+	public CPSubscriptionCycleEntry
+		fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+			long commerceOrderItemId) {
+
+		return cpSubscriptionCycleEntryPersistence.fetchByCommerceOrderItemId(
+			commerceOrderItemId);
+	}
+
+	@Override
+	public int getCPSubscriptionCycleEntriesCount(long cpSubscriptionEntryId) {
+		return cpSubscriptionCycleEntryPersistence.countByCPSubscriptionEntryId(
+			cpSubscriptionEntryId);
+	}
+
 	protected void reindexCPSubscriptionEntry(long cpSubscriptionEntryId)
 		throws PortalException {
 
