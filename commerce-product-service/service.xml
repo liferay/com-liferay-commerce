@@ -1061,6 +1061,9 @@
 		<finder name="CPInstanceId" return-type="Collection">
 			<finder-column name="CPInstanceId" />
 		</finder>
+        <finder name="active" return-type="Collection">
+            <finder-column name="active"></finder-column>
+        </finder>
 		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
