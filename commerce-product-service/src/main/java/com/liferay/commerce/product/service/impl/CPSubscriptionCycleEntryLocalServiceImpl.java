@@ -20,6 +20,9 @@ import com.liferay.commerce.product.service.base.CPSubscriptionCycleEntryLocalSe
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
+import java.util.List;
 
 /**
  * @author Alessio Antonio Rendina
@@ -68,6 +71,15 @@ public class CPSubscriptionCycleEntryLocalServiceImpl
 
 		return cpSubscriptionCycleEntryPersistence.fetchByCommerceOrderItemId(
 			commerceOrderItemId);
+	}
+
+	@Override
+	public List<CPSubscriptionCycleEntry> getCPSubscriptionCycleEntries(
+		long cpSubscriptionEntryId, int start, int end,
+		OrderByComparator<CPSubscriptionCycleEntry> orderByComparator) {
+
+		return cpSubscriptionCycleEntryPersistence.findByCPSubscriptionEntryId(
+			cpSubscriptionEntryId, start, end, orderByComparator);
 	}
 
 	@Override
