@@ -21,14 +21,14 @@ taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%@ page import="com.liferay.commerce.product.constants.CPPortletKeys" %><%@
+<%@ page import="com.liferay.commerce.product.exception.NoSuchCPSubscriptionEntryException" %><%@
 page import="com.liferay.commerce.product.model.CPSubscriptionEntry" %><%@
 page import="com.liferay.commerce.product.subscription.web.internal.display.context.CPSubscriptionEntryDisplayContext" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
 page import="com.liferay.portal.kernel.dao.search.SearchContainer" %><%@
 page import="com.liferay.portal.kernel.util.Constants" %><%@
-page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
+page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
@@ -38,13 +38,3 @@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
-
-<%
-	String lifecycle = (String)request.getAttribute(liferayPortletRequest.LIFECYCLE_PHASE);
-
-	PortletURL catalogURLObj = PortalUtil.getControlPanelPortletURL(request, CPPortletKeys.CP_DEFINITIONS, lifecycle);
-	PortletURL priceListsURLObj = PortalUtil.getControlPanelPortletURL(request, CPPortletKeys.CP_SUBSCRIPTION_ENTRY, lifecycle);
-
-	String catalogURL = catalogURLObj.toString();
-	String priceListsURL = priceListsURLObj.toString();
-%>

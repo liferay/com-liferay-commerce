@@ -14,10 +14,12 @@
 
 package com.liferay.commerce.product.subscription.web.internal.portlet.action;
 
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.service.CPSubscriptionEntryService;
 import com.liferay.commerce.product.subscription.web.internal.display.context.CPSubscriptionEntryDisplayContext;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -53,7 +55,8 @@ public class EditCPSubscriptionEntryRenderCommand implements MVCRenderCommand {
 
 		CPSubscriptionEntryDisplayContext cpSubscriptionEntryDisplayContext =
 			new CPSubscriptionEntryDisplayContext(
-				httpServletRequest, _cpSubscriptionEntryService);
+				_cpSubscriptionEntryService, httpServletRequest,
+				_portletResourcePermission);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, cpSubscriptionEntryDisplayContext);
@@ -66,5 +69,8 @@ public class EditCPSubscriptionEntryRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 }

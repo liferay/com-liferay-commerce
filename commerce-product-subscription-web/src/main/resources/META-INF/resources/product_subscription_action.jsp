@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -17,16 +19,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CPSubscriptionEntryDisplayContext commerceSubscriptionEntryDisplayContext = (CPSubscriptionEntryDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-CPSubscriptionEntry cpSubscriptionEntry = null;
-
-if (row != null) {
-	cpSubscriptionEntry = (CPSubscriptionEntry)row.getObject();
-}
-else {
-	cpSubscriptionEntry = (CPSubscriptionEntry)request.getAttribute("info_panel.jsp-entry");
-}
+CPSubscriptionEntry cpSubscriptionEntry = (CPSubscriptionEntry)row.getObject();
 %>
 
 <liferay-ui:icon-menu
@@ -36,24 +33,26 @@ else {
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<portlet:renderURL var="editURL">
-		<portlet:param name="mvcRenderCommandName" value="editCPSubscriptionEntry" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="cpSubscriptionEntryId" value="<%= String.valueOf(cpSubscriptionEntry.getCPSubscriptionEntryId()) %>" />
-	</portlet:renderURL>
+	<c:if test="<%= commerceSubscriptionEntryDisplayContext.hasManageCPSubscriptionEntryPermission() %>">
+		<portlet:renderURL var="editURL">
+			<portlet:param name="mvcRenderCommandName" value="editCPSubscriptionEntry" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="cpSubscriptionEntryId" value="<%= String.valueOf(cpSubscriptionEntry.getCPSubscriptionEntryId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon
-		message="edit"
-		url="<%= editURL %>"
-	/>
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editURL %>"
+		/>
 
-	<portlet:actionURL name="editCPSubscriptionEntry" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="cpSubscriptionEntryId" value="<%= String.valueOf(cpSubscriptionEntry.getCPSubscriptionEntryId()) %>" />
-	</portlet:actionURL>
+		<portlet:actionURL name="editCPSubscriptionEntry" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="cpSubscriptionEntryId" value="<%= String.valueOf(cpSubscriptionEntry.getCPSubscriptionEntryId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		url="<%= deleteURL %>"
-	/>
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
+	</c:if>
 </liferay-ui:icon-menu>
