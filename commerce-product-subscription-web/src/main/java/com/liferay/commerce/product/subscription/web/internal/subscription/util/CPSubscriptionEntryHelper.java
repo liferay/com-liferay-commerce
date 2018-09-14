@@ -107,10 +107,10 @@ public class CPSubscriptionEntryHelper {
 		}
 
 		newOrder.setBillingAddressId(oldOrder.getBillingAddressId());
-		newOrder.setCommerceShippingMethodId(
-			oldOrder.getCommerceShippingMethodId());
 		newOrder.setCommercePaymentMethodId(
 			oldOrder.getCommercePaymentMethodId());
+		newOrder.setCommerceShippingMethodId(
+			oldOrder.getCommerceShippingMethodId());
 
 		long newCommerceOrderItemId = _counterLocalService.increment();
 
