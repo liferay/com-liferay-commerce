@@ -31,7 +31,15 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 public interface CPSubscriptionConfiguration {
 
-	@Meta.AD(deflt = "10", name = "check-interval", required = false)
-	public int checkInterval();
+	@Meta.AD(deflt = "10", name = "check-renew-interval", required = false)
+	public int checkRenewInterval();
+
+	@Meta.AD(
+		deflt = "10", name = "check-payed-order-interval", required = false
+	)
+	public int checkPayedOrderInterval();
+
+	@Meta.AD(deflt = "1440", name = "payed-order-interval", required = false)
+	public int payedOrderInterval();
 
 }
