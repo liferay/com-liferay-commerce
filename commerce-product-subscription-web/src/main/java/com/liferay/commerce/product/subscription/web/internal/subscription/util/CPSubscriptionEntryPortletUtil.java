@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.product.subscription.web.subscription.util;
+package com.liferay.commerce.product.subscription.web.internal.subscription.util;
 
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Sort;
