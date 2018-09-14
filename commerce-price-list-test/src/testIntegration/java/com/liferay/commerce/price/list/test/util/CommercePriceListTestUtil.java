@@ -35,9 +35,9 @@ import java.util.Date;
 public class CommercePriceListTestUtil {
 
 	public static CommercePriceList addCommercePriceList(
-			long groupId, String currency, long parentCommercePriceListId, String name, Double priority,
-			Boolean neverExpire, Date displayDate, Date expirationDate,
-			String externalReferenceCode)
+			long groupId, String currency, long parentCommercePriceListId,
+			String name, Double priority, Boolean neverExpire, Date displayDate,
+			Date expirationDate, String externalReferenceCode)
 		throws PortalException {
 
 		long commerceCurrencyId = _getCommerceCurrencyId(groupId, currency);
@@ -68,11 +68,12 @@ public class CommercePriceListTestUtil {
 			expirationDate, defaultExpirationCalendar);
 
 		return CommercePriceListLocalServiceUtil.addCommercePriceList(
-			commerceCurrencyId, parentCommercePriceListId, name, priority, displayDateElements.getMonth(),
-			displayDateElements.getDay(), displayDateElements.getYear(),
-			displayDateElements.getHour(), displayDateElements.getMinute(),
-			expirationDateElements.getMonth(), expirationDateElements.getDay(),
-			expirationDateElements.getYear(), expirationDateElements.getHour(),
+			commerceCurrencyId, parentCommercePriceListId, name, priority,
+			displayDateElements.getMonth(), displayDateElements.getDay(),
+			displayDateElements.getYear(), displayDateElements.getHour(),
+			displayDateElements.getMinute(), expirationDateElements.getMonth(),
+			expirationDateElements.getDay(), expirationDateElements.getYear(),
+			expirationDateElements.getHour(),
 			expirationDateElements.getMinute(), externalReferenceCode,
 			neverExpire, serviceContext);
 	}
@@ -89,9 +90,10 @@ public class CommercePriceListTestUtil {
 	}
 
 	public static CommercePriceList upsertCommercePriceList(
-			long groupId, long commercePriceListId, String currency, long parentCommercePriceListId,
-			String name, Double priority, Boolean neverExpire, Date displayDate,
-			Date expirationDate, String externalReferenceCode)
+			long groupId, long commercePriceListId, String currency,
+			long parentCommercePriceListId, String name, Double priority,
+			Boolean neverExpire, Date displayDate, Date expirationDate,
+			String externalReferenceCode)
 		throws PortalException {
 
 		long commerceCurrencyId = _getCommerceCurrencyId(groupId, currency);
