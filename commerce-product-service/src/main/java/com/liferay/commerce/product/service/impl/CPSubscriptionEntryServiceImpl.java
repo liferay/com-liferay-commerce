@@ -54,7 +54,7 @@ public class CPSubscriptionEntryServiceImpl
 	@Override
 	public CPSubscriptionEntry fetchCPSubscriptionEntry(
 			long cpSubscriptionEntryId)
-		throws PrincipalException {
+		throws PortalException {
 
 		CPSubscriptionEntry cpSubscriptionEntry =
 			cpSubscriptionEntryLocalService.fetchCPSubscriptionEntry(
@@ -100,7 +100,7 @@ public class CPSubscriptionEntryServiceImpl
 			searchCPSubscriptionEntries(
 				long companyId, long groupId, Boolean active, String keywords,
 				int start, int end, Sort sort)
-		throws PrincipalException {
+		throws PortalException {
 
 		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
