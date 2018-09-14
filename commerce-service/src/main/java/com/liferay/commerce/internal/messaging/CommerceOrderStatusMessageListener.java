@@ -22,6 +22,8 @@ import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.notification.util.CommerceNotificationHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPSubscriptionCycleEntry;
+import com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService;
 import com.liferay.commerce.product.service.CPSubscriptionEntryLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -82,8 +84,9 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 			CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
 			CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
-			if (cpDefinition.isSubscriptionEnabled() ||
-				cpInstance.isSubscriptionEnabled()) {
+			if (!_isSubscriptionCycleRenew(commerceOrderItem) &&
+				(cpDefinition.isSubscriptionEnabled() ||
+				 cpInstance.isSubscriptionEnabled())) {
 
 				_cpSubscriptionEntryLocalService.addCPSubscriptionEntry(
 					cpInstance.getCPInstanceId(),
@@ -92,11 +95,32 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		}
 	}
 
+	private boolean _isSubscriptionCycleRenew(
+		CommerceOrderItem commerceOrderItem) {
+
+		CPSubscriptionCycleEntry cpSubscriptionCycleEntry =
+			_cpSubscriptionCycleEntryLocalService.
+				fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+					commerceOrderItem.getCommerceOrderItemId());
+
+		if ((cpSubscriptionCycleEntry != null) &&
+			cpSubscriptionCycleEntry.isRenew()) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	@Reference
 	private CommerceNotificationHelper _commerceNotificationHelper;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
+
+	@Reference
+	private CPSubscriptionCycleEntryLocalService
+		_cpSubscriptionCycleEntryLocalService;
 
 	@Reference
 	private CPSubscriptionEntryLocalService _cpSubscriptionEntryLocalService;
