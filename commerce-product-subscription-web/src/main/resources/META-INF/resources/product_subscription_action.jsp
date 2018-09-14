@@ -1,5 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -39,6 +37,23 @@ CPSubscriptionEntry cpSubscriptionEntry = (CPSubscriptionEntry)row.getObject();
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="cpSubscriptionEntryId" value="<%= String.valueOf(cpSubscriptionEntry.getCPSubscriptionEntryId()) %>" />
 		</portlet:renderURL>
+
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editURL %>"
+		/>
+
+		<portlet:actionURL name="editCPSubscriptionEntry" var="setActiveURL">
+			<portlet:param name="<%= Constants.CMD %>" value="setActive" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="cpSubscriptionEntryId" value="<%= String.valueOf(cpSubscriptionEntry.getCPSubscriptionEntryId()) %>" />
+			<portlet:param name="active" value="<%= String.valueOf(!cpSubscriptionEntry.isActive()) %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon
+			message='<%= cpSubscriptionEntry.isActive() ? "deactivate" : "activate" %>'
+			url="<%= setActiveURL %>"
+		/>
 
 		<liferay-ui:icon
 			message="edit"

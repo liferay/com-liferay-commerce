@@ -18,7 +18,7 @@ import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.service.CPSubscriptionEntryService;
-import com.liferay.commerce.product.subscription.web.subscription.util.CPSubscriptionEntryPortletUtil;
+import com.liferay.commerce.product.subscription.web.internal.subscription.util.CPSubscriptionEntryPortletUtil;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
