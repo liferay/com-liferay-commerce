@@ -14,10 +14,12 @@
 
 package com.liferay.commerce.product.subscription.web.internal.portlet;
 
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.service.CPSubscriptionEntryService;
 import com.liferay.commerce.product.subscription.web.internal.display.context.CPSubscriptionEntryDisplayContext;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -40,7 +42,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"com.liferay.portlet.add-default-resource=true",
-		"com.liferay.portlet.css-class-wrapper=portlet-commerce-price-list",
+		"com.liferay.portlet.css-class-wrapper=portlet-commerce-product-subscription",
 		"com.liferay.portlet.display-category=category.hidden",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.layout-cacheable=true",
@@ -72,7 +74,8 @@ public class CPSubscriptionEntryPortlet extends MVCPortlet {
 
 		CPSubscriptionEntryDisplayContext cpSubscriptionEntryDisplayContext =
 			new CPSubscriptionEntryDisplayContext(
-				httpServletRequest, _cpSubscriptionEntryService);
+				_cpSubscriptionEntryService, httpServletRequest,
+				_portletResourcePermission);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, cpSubscriptionEntryDisplayContext);
@@ -85,5 +88,8 @@ public class CPSubscriptionEntryPortlet extends MVCPortlet {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 }

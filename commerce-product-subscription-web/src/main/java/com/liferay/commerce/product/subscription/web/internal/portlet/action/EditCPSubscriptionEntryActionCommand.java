@@ -15,7 +15,7 @@
 package com.liferay.commerce.product.subscription.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
+import com.liferay.commerce.product.exception.NoSuchCPSubscriptionEntryException;
 import com.liferay.commerce.product.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.service.CPSubscriptionEntryService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
@@ -89,7 +89,7 @@ public class EditCPSubscriptionEntryActionCommand extends BaseMVCActionCommand {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchCPInstanceException ||
+			if (e instanceof NoSuchCPSubscriptionEntryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass());

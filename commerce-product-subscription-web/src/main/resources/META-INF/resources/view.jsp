@@ -21,12 +21,52 @@ CPSubscriptionEntryDisplayContext commerceSubscriptionEntryDisplayContext = (CPS
 
 SearchContainer<CPSubscriptionEntry> cpSubscriptionEntrySearchContainer = commerceSubscriptionEntryDisplayContext.getSearchContainer();
 
+boolean hasManageCPSubscriptionEntryPermission = commerceSubscriptionEntryDisplayContext.hasManageCPSubscriptionEntryPermission();
+
 PortletURL portletURL = commerceSubscriptionEntryDisplayContext.getPortletURL();
 
 portletURL.setParameter("searchContainerId", "cpSubscriptionEntries");
 
 request.setAttribute("view.jsp-portletURL", portletURL);
 %>
+
+<liferay-frontend:management-bar
+	includeCheckBox="<%= true %>"
+	searchContainerId="cpSubscriptionEntries"
+>
+	<liferay-frontend:management-bar-filters>
+		<liferay-frontend:management-bar-navigation
+			navigationKeys='<%= new String[] {"all", "active", "inactive"} %>'
+			portletURL="<%= portletURL %>"
+		/>
+
+		<li>
+			<aui:form action="<%= String.valueOf(portletURL) %>" name="searchFm">
+				<liferay-ui:input-search
+					markupView="lexicon"
+				/>
+			</aui:form>
+		</li>
+	</liferay-frontend:management-bar-filters>
+
+	<liferay-frontend:management-bar-buttons>
+		<liferay-frontend:management-bar-display-buttons
+			displayViews='<%= new String[] {"list"} %>'
+			portletURL="<%= portletURL %>"
+			selectedDisplayStyle="list"
+		/>
+	</liferay-frontend:management-bar-buttons>
+
+	<c:if test="<%= hasManageCPSubscriptionEntryPermission %>">
+		<liferay-frontend:management-bar-action-buttons>
+			<liferay-frontend:management-bar-button
+				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCPSubscriptionEntries();" %>'
+				icon="times"
+				label="delete"
+			/>
+		</liferay-frontend:management-bar-action-buttons>
+	</c:if>
+</liferay-frontend:management-bar>
 
 <div class="container-fluid-1280" id="<portlet:namespace />subscriptionContainer">
 	<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
@@ -117,3 +157,15 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 		</div>
 	</aui:form>
 </div>
+
+<aui:script>
+	function <portlet:namespace />deleteCPSubscriptionEntries() {
+	if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-subscription-entries" />')) {
+	var form = AUI.$(document.<portlet:namespace />fm);
+
+	form.fm('deleteCPSubscriptionEntryIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+
+	submitForm(form);
+	}
+	}
+</aui:script>

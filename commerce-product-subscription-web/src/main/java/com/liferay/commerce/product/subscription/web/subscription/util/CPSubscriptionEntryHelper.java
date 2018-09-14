@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.subscription.web.subscription.util;
 
-import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPSubscriptionEntry;
@@ -55,77 +54,84 @@ public class CPSubscriptionEntryHelper {
 		Date nextIterationDate = cpSubscriptionEntry.getNextIterationDate();
 
 		if (cpSubscriptionEntry.isActive() && nextIterationDate.before(now)) {
-			CommerceOrderItem oldCommerceOrderItem =
-				_commerceOrderItemLocalService.getCommerceOrderItem(
-					cpSubscriptionEntry.getCommerceOrderItemId());
+			ServiceContext serviceContext = new ServiceContext();
 
-			CommerceOrder oldOrder = oldCommerceOrderItem.getCommerceOrder();
+			CommerceOrder commerceOrder = _addCommerceOrder(
+				cpSubscriptionEntry, serviceContext);
 
-			CommerceOrder newOrder;
+			_commerceOrderLocalService.checkoutCommerceOrder(
+				commerceOrder.getCommerceOrderId(), null, serviceContext);
+		}
+	}
 
-			if (oldOrder.getOrderOrganization() != null) {
-				newOrder =
-					_commerceOrderLocalService.addOrganizationCommerceOrder(
-						oldOrder.getGroupId(), oldOrder.getUserId(),
-						oldOrder.getSiteGroupId(),
-						oldOrder.getOrderOrganizationId(),
-						oldOrder.getCommerceCurrencyId(),
-						oldOrder.getShippingAddressId(),
-						oldOrder.getPurchaseOrderNumber());
-			}
-			else {
-				newOrder = _commerceOrderLocalService.addUserCommerceOrder(
-					oldOrder.getGroupId(), oldOrder.getUserId(),
-					oldOrder.getOrderUserId(),
-					oldOrder.getCommerceCurrencyId());
-			}
+	private CommerceOrder _addCommerceOrder(
+			CPSubscriptionEntry cpSubscriptionEntry,
+			ServiceContext serviceContext)
+		throws PortalException {
 
-			newOrder.setBillingAddressId(oldOrder.getBillingAddressId());
-			newOrder.setCommerceShippingMethodId(
-				oldOrder.getCommerceShippingMethodId());
-			newOrder.setCommercePaymentMethodId(
-				oldOrder.getCommercePaymentMethodId());
+		CommerceOrderItem oldCommerceOrderItem =
+			_commerceOrderItemLocalService.getCommerceOrderItem(
+				cpSubscriptionEntry.getCommerceOrderItemId());
 
-			long newCommerceOrderItemId = _counterLocalService.increment();
+		CommerceOrder oldOrder = oldCommerceOrderItem.getCommerceOrder();
 
-			CommerceOrderItem newCommerceOrderItem =
-				(CommerceOrderItem)oldCommerceOrderItem.clone();
+		CommerceOrder newOrder;
 
-			newCommerceOrderItem.setCommerceOrderItemId(newCommerceOrderItemId);
-			newCommerceOrderItem.setCommerceOrderId(
-				newOrder.getCommerceOrderId());
+		if (oldOrder.getOrderOrganization() != null) {
+			newOrder = _commerceOrderLocalService.addOrganizationCommerceOrder(
+				oldOrder.getGroupId(), oldOrder.getUserId(),
+				oldOrder.getSiteGroupId(), oldOrder.getOrderOrganizationId(),
+				oldOrder.getCommerceCurrencyId(),
+				oldOrder.getShippingAddressId(),
+				oldOrder.getPurchaseOrderNumber());
+		}
+		else {
+			newOrder = _commerceOrderLocalService.addUserCommerceOrder(
+				oldOrder.getGroupId(), oldOrder.getUserId(),
+				oldOrder.getOrderUserId(), oldOrder.getCommerceCurrencyId());
+		}
 
+		newOrder.setBillingAddressId(oldOrder.getBillingAddressId());
+		newOrder.setCommerceShippingMethodId(
+			oldOrder.getCommerceShippingMethodId());
+		newOrder.setCommercePaymentMethodId(
+			oldOrder.getCommercePaymentMethodId());
+
+		long newCommerceOrderItemId = _counterLocalService.increment();
+
+		CommerceOrderItem newCommerceOrderItem =
+			(CommerceOrderItem)oldCommerceOrderItem.clone();
+
+		newCommerceOrderItem.setCommerceOrderItemId(newCommerceOrderItemId);
+		newCommerceOrderItem.setCommerceOrderId(newOrder.getCommerceOrderId());
+
+		newCommerceOrderItem =
 			_commerceOrderItemLocalService.addCommerceOrderItem(
 				newCommerceOrderItem);
 
-			newOrder.setSubtotal(newCommerceOrderItem.getFinalPrice());
-			newOrder.setTotal(newCommerceOrderItem.getFinalPrice());
+		newOrder.setSubtotal(newCommerceOrderItem.getFinalPrice());
+		newOrder.setTotal(newCommerceOrderItem.getFinalPrice());
 
-			_commerceOrderLocalService.updateCommerceOrder(newOrder);
+		newOrder = _commerceOrderLocalService.updateCommerceOrder(newOrder);
 
-			//TODO identificatore OrderItem precedente
+		// ServiceContext
 
-			// ......................................
+		ExpandoBridge expandoBridge = oldOrder.getExpandoBridge();
 
-			ServiceContext serviceContext = new ServiceContext();
+		serviceContext.setExpandoBridgeAttributes(
+			expandoBridge.getAttributes());
 
-			ExpandoBridge expandoBridge = oldOrder.getExpandoBridge();
+		serviceContext.setCompanyId(oldOrder.getCompanyId());
+		serviceContext.setScopeGroupId(oldOrder.getGroupId());
+		serviceContext.setUserId(oldOrder.getUserId());
 
-			serviceContext.setExpandoBridgeAttributes(
-				expandoBridge.getAttributes());
+		// Add CPSubscriptionCycleEntry
 
-			serviceContext.setCompanyId(oldOrder.getCompanyId());
-			serviceContext.setScopeGroupId(oldOrder.getGroupId());
-			serviceContext.setUserId(oldOrder.getUserId());
+		_cpSubscriptionCycleEntryLocalService.addCPSubscriptionCycleEntry(
+			cpSubscriptionEntry.getCPSubscriptionEntryId(),
+			newCommerceOrderItemId, true);
 
-			CommerceContext commerceContext = null;
-
-			_commerceOrderLocalService.checkoutCommerceOrder(
-				newOrder.getCommerceOrderId(), commerceContext, serviceContext);
-
-			_commerceOrderLocalService.startCommerceOrderPayment(
-				newOrder.getCommerceOrderId(), serviceContext);
-		}
+		return newOrder;
 	}
 
 	@Reference
