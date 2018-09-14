@@ -188,6 +188,12 @@ public class CPSubscriptionCycleEntryWrapper implements CPSubscriptionCycleEntry
 		return _cpSubscriptionCycleEntry.getCPSubscriptionCycleEntryId();
 	}
 
+	@Override
+	public CPSubscriptionEntry getCPSubscriptionEntry()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpSubscriptionCycleEntry.getCPSubscriptionEntry();
+	}
+
 	/**
 	* Returns the cp subscription entry ID of this cp subscription cycle entry.
 	*

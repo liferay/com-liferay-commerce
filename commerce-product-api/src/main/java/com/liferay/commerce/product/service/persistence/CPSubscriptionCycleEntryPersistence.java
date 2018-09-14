@@ -641,6 +641,54 @@ public interface CPSubscriptionCycleEntryPersistence extends BasePersistence<CPS
 	public int countByCPSubscriptionEntryId(long CPSubscriptionEntryId);
 
 	/**
+	* Returns the cp subscription cycle entry where commerceOrderItemId = &#63; or throws a {@link NoSuchCPSubscriptionCycleEntryException} if it could not be found.
+	*
+	* @param commerceOrderItemId the commerce order item ID
+	* @return the matching cp subscription cycle entry
+	* @throws NoSuchCPSubscriptionCycleEntryException if a matching cp subscription cycle entry could not be found
+	*/
+	public CPSubscriptionCycleEntry findByCommerceOrderItemId(
+		long commerceOrderItemId)
+		throws NoSuchCPSubscriptionCycleEntryException;
+
+	/**
+	* Returns the cp subscription cycle entry where commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param commerceOrderItemId the commerce order item ID
+	* @return the matching cp subscription cycle entry, or <code>null</code> if a matching cp subscription cycle entry could not be found
+	*/
+	public CPSubscriptionCycleEntry fetchByCommerceOrderItemId(
+		long commerceOrderItemId);
+
+	/**
+	* Returns the cp subscription cycle entry where commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param commerceOrderItemId the commerce order item ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp subscription cycle entry, or <code>null</code> if a matching cp subscription cycle entry could not be found
+	*/
+	public CPSubscriptionCycleEntry fetchByCommerceOrderItemId(
+		long commerceOrderItemId, boolean retrieveFromCache);
+
+	/**
+	* Removes the cp subscription cycle entry where commerceOrderItemId = &#63; from the database.
+	*
+	* @param commerceOrderItemId the commerce order item ID
+	* @return the cp subscription cycle entry that was removed
+	*/
+	public CPSubscriptionCycleEntry removeByCommerceOrderItemId(
+		long commerceOrderItemId)
+		throws NoSuchCPSubscriptionCycleEntryException;
+
+	/**
+	* Returns the number of cp subscription cycle entries where commerceOrderItemId = &#63;.
+	*
+	* @param commerceOrderItemId the commerce order item ID
+	* @return the number of matching cp subscription cycle entries
+	*/
+	public int countByCommerceOrderItemId(long commerceOrderItemId);
+
+	/**
 	* Caches the cp subscription cycle entry in the entity cache if it is enabled.
 	*
 	* @param cpSubscriptionCycleEntry the cp subscription cycle entry

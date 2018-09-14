@@ -218,6 +218,13 @@ public class CPSubscriptionCycleEntryPersistenceTest {
 	}
 
 	@Test
+	public void testCountByCommerceOrderItemId() throws Exception {
+		_persistence.countByCommerceOrderItemId(RandomTestUtil.nextLong());
+
+		_persistence.countByCommerceOrderItemId(0L);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPSubscriptionCycleEntry newCPSubscriptionCycleEntry = addCPSubscriptionCycleEntry();
 
@@ -469,6 +476,11 @@ public class CPSubscriptionCycleEntryPersistenceTest {
 				existingCPSubscriptionCycleEntry.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCPSubscriptionCycleEntry,
 				"getOriginalGroupId", new Class<?>[0]));
+
+		Assert.assertEquals(Long.valueOf(
+				existingCPSubscriptionCycleEntry.getCommerceOrderItemId()),
+			ReflectionTestUtil.<Long>invoke(existingCPSubscriptionCycleEntry,
+				"getOriginalCommerceOrderItemId", new Class<?>[0]));
 	}
 
 	protected CPSubscriptionCycleEntry addCPSubscriptionCycleEntry()

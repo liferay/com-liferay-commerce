@@ -2541,6 +2541,210 @@ public class CPSubscriptionCycleEntryPersistenceImpl extends BasePersistenceImpl
 
 	private static final String _FINDER_COLUMN_CPSUBSCRIPTIONENTRYID_CPSUBSCRIPTIONENTRYID_2 =
 		"cpSubscriptionCycleEntry.CPSubscriptionEntryId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_COMMERCEORDERITEMID = new FinderPath(CPSubscriptionCycleEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CPSubscriptionCycleEntryModelImpl.FINDER_CACHE_ENABLED,
+			CPSubscriptionCycleEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByCommerceOrderItemId",
+			new String[] { Long.class.getName() },
+			CPSubscriptionCycleEntryModelImpl.COMMERCEORDERITEMID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEORDERITEMID = new FinderPath(CPSubscriptionCycleEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CPSubscriptionCycleEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceOrderItemId", new String[] { Long.class.getName() });
+
+	/**
+	 * Returns the cp subscription cycle entry where commerceOrderItemId = &#63; or throws a {@link NoSuchCPSubscriptionCycleEntryException} if it could not be found.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the matching cp subscription cycle entry
+	 * @throws NoSuchCPSubscriptionCycleEntryException if a matching cp subscription cycle entry could not be found
+	 */
+	@Override
+	public CPSubscriptionCycleEntry findByCommerceOrderItemId(
+		long commerceOrderItemId)
+		throws NoSuchCPSubscriptionCycleEntryException {
+		CPSubscriptionCycleEntry cpSubscriptionCycleEntry = fetchByCommerceOrderItemId(commerceOrderItemId);
+
+		if (cpSubscriptionCycleEntry == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("commerceOrderItemId=");
+			msg.append(commerceOrderItemId);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchCPSubscriptionCycleEntryException(msg.toString());
+		}
+
+		return cpSubscriptionCycleEntry;
+	}
+
+	/**
+	 * Returns the cp subscription cycle entry where commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the matching cp subscription cycle entry, or <code>null</code> if a matching cp subscription cycle entry could not be found
+	 */
+	@Override
+	public CPSubscriptionCycleEntry fetchByCommerceOrderItemId(
+		long commerceOrderItemId) {
+		return fetchByCommerceOrderItemId(commerceOrderItemId, true);
+	}
+
+	/**
+	 * Returns the cp subscription cycle entry where commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching cp subscription cycle entry, or <code>null</code> if a matching cp subscription cycle entry could not be found
+	 */
+	@Override
+	public CPSubscriptionCycleEntry fetchByCommerceOrderItemId(
+		long commerceOrderItemId, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { commerceOrderItemId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_COMMERCEORDERITEMID,
+					finderArgs, this);
+		}
+
+		if (result instanceof CPSubscriptionCycleEntry) {
+			CPSubscriptionCycleEntry cpSubscriptionCycleEntry = (CPSubscriptionCycleEntry)result;
+
+			if ((commerceOrderItemId != cpSubscriptionCycleEntry.getCommerceOrderItemId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_CPSUBSCRIPTIONCYCLEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_COMMERCEORDERITEMID_COMMERCEORDERITEMID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceOrderItemId);
+
+				List<CPSubscriptionCycleEntry> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_COMMERCEORDERITEMID,
+						finderArgs, list);
+				}
+				else {
+					CPSubscriptionCycleEntry cpSubscriptionCycleEntry = list.get(0);
+
+					result = cpSubscriptionCycleEntry;
+
+					cacheResult(cpSubscriptionCycleEntry);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_COMMERCEORDERITEMID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CPSubscriptionCycleEntry)result;
+		}
+	}
+
+	/**
+	 * Removes the cp subscription cycle entry where commerceOrderItemId = &#63; from the database.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the cp subscription cycle entry that was removed
+	 */
+	@Override
+	public CPSubscriptionCycleEntry removeByCommerceOrderItemId(
+		long commerceOrderItemId)
+		throws NoSuchCPSubscriptionCycleEntryException {
+		CPSubscriptionCycleEntry cpSubscriptionCycleEntry = findByCommerceOrderItemId(commerceOrderItemId);
+
+		return remove(cpSubscriptionCycleEntry);
+	}
+
+	/**
+	 * Returns the number of cp subscription cycle entries where commerceOrderItemId = &#63;.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the number of matching cp subscription cycle entries
+	 */
+	@Override
+	public int countByCommerceOrderItemId(long commerceOrderItemId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEORDERITEMID;
+
+		Object[] finderArgs = new Object[] { commerceOrderItemId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_CPSUBSCRIPTIONCYCLEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_COMMERCEORDERITEMID_COMMERCEORDERITEMID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceOrderItemId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_COMMERCEORDERITEMID_COMMERCEORDERITEMID_2 =
+		"cpSubscriptionCycleEntry.commerceOrderItemId = ?";
 
 	public CPSubscriptionCycleEntryPersistenceImpl() {
 		setModelClass(CPSubscriptionCycleEntry.class);
@@ -2580,6 +2784,10 @@ public class CPSubscriptionCycleEntryPersistenceImpl extends BasePersistenceImpl
 				cpSubscriptionCycleEntry.getUuid(),
 				cpSubscriptionCycleEntry.getGroupId()
 			}, cpSubscriptionCycleEntry);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_COMMERCEORDERITEMID,
+			new Object[] { cpSubscriptionCycleEntry.getCommerceOrderItemId() },
+			cpSubscriptionCycleEntry);
 
 		cpSubscriptionCycleEntry.resetOriginalValues();
 	}
@@ -2668,6 +2876,15 @@ public class CPSubscriptionCycleEntryPersistenceImpl extends BasePersistenceImpl
 			Long.valueOf(1), false);
 		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
 			cpSubscriptionCycleEntryModelImpl, false);
+
+		args = new Object[] {
+				cpSubscriptionCycleEntryModelImpl.getCommerceOrderItemId()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_COMMERCEORDERITEMID, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_COMMERCEORDERITEMID, args,
+			cpSubscriptionCycleEntryModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
@@ -2692,6 +2909,29 @@ public class CPSubscriptionCycleEntryPersistenceImpl extends BasePersistenceImpl
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					cpSubscriptionCycleEntryModelImpl.getCommerceOrderItemId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEORDERITEMID,
+				args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_COMMERCEORDERITEMID,
+				args);
+		}
+
+		if ((cpSubscriptionCycleEntryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_COMMERCEORDERITEMID.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					cpSubscriptionCycleEntryModelImpl.getOriginalCommerceOrderItemId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEORDERITEMID,
+				args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_COMMERCEORDERITEMID,
+				args);
 		}
 	}
 

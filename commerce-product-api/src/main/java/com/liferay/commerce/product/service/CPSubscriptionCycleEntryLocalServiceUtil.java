@@ -187,6 +187,12 @@ public class CPSubscriptionCycleEntryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
+	public static com.liferay.commerce.product.model.CPSubscriptionCycleEntry fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+		long commerceOrderItemId) {
+		return getService()
+				   .fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(commerceOrderItemId);
+	}
+
 	public static com.liferay.commerce.product.model.CPSubscriptionCycleEntry fetchCPSubscriptionCycleEntry(
 		long CPSubscriptionCycleEntryId) {
 		return getService()
@@ -265,6 +271,12 @@ public class CPSubscriptionCycleEntryLocalServiceUtil {
 	*/
 	public static int getCPSubscriptionCycleEntriesCount() {
 		return getService().getCPSubscriptionCycleEntriesCount();
+	}
+
+	public static int getCPSubscriptionCycleEntriesCount(
+		long cpSubscriptionEntryId) {
+		return getService()
+				   .getCPSubscriptionCycleEntriesCount(cpSubscriptionEntryId);
 	}
 
 	/**

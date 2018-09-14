@@ -24,9 +24,7 @@ import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.BaseService;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -88,9 +86,11 @@ public interface CPSubscriptionEntryService extends BaseService {
 		long companyId, long groupId, Boolean active, String keywords,
 		int start, int end, Sort sort) throws PortalException;
 
+	public CPSubscriptionEntry setActive(long cpSubscriptionEntryId,
+		boolean active) throws PortalException;
+
 	public CPSubscriptionEntry updateCommercePriceEntry(
 		long cpSubscriptionEntryId, long subscriptionCycleLength,
 		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-		boolean active, ServiceContext serviceContext)
-		throws PrincipalException;
+		boolean active) throws PortalException;
 }

@@ -303,6 +303,10 @@ public interface CPSubscriptionEntryLocalService extends BaseLocalService,
 		long companyId, long groupId, Boolean active, String keywords,
 		int start, int end, Sort sort) throws PortalException;
 
+	@Indexable(type = IndexableType.REINDEX)
+	public CPSubscriptionEntry setActive(long cpSubscriptionEntryId,
+		boolean active) throws PortalException;
+
 	/**
 	* Updates the cp subscription entry in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -317,5 +321,5 @@ public interface CPSubscriptionEntryLocalService extends BaseLocalService,
 	public CPSubscriptionEntry updateCPSubscriptionEntry(
 		long cpSubscriptionEntryId, long subscriptionCycleLength,
 		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-		boolean active);
+		boolean active) throws PortalException;
 }

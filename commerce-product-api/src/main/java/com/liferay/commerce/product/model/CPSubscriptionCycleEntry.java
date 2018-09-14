@@ -55,4 +55,7 @@ public interface CPSubscriptionCycleEntry extends CPSubscriptionCycleEntryModel,
 				return CPSubscriptionCycleEntry.class;
 			}
 		};
+
+	public CPSubscriptionEntry getCPSubscriptionEntry()
+		throws com.liferay.portal.kernel.exception.PortalException;
 }

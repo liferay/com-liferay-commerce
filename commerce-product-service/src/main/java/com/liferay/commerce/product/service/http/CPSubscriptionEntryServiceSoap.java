@@ -124,16 +124,29 @@ public class CPSubscriptionEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPSubscriptionEntrySoap setActive(
+		long cpSubscriptionEntryId, boolean active) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CPSubscriptionEntry returnValue = CPSubscriptionEntryServiceUtil.setActive(cpSubscriptionEntryId,
+					active);
+
+			return com.liferay.commerce.product.model.CPSubscriptionEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CPSubscriptionEntrySoap updateCommercePriceEntry(
 		long cpSubscriptionEntryId, long subscriptionCycleLength,
 		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-		boolean active,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
+		boolean active) throws RemoteException {
 		try {
 			com.liferay.commerce.product.model.CPSubscriptionEntry returnValue = CPSubscriptionEntryServiceUtil.updateCommercePriceEntry(cpSubscriptionEntryId,
 					subscriptionCycleLength, subscriptionCyclePeriod,
-					maxSubscriptionCyclesNumber, active, serviceContext);
+					maxSubscriptionCyclesNumber, active);
 
 			return com.liferay.commerce.product.model.CPSubscriptionEntrySoap.toSoapModel(returnValue);
 		}

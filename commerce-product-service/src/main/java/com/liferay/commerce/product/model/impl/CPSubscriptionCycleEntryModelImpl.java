@@ -119,10 +119,11 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CPSubscriptionCycleEntry"),
 			true);
 	public static final long CPSUBSCRIPTIONENTRYID_COLUMN_BITMASK = 1L;
-	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long GROUPID_COLUMN_BITMASK = 4L;
-	public static final long UUID_COLUMN_BITMASK = 8L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 16L;
+	public static final long COMMERCEORDERITEMID_COLUMN_BITMASK = 2L;
+	public static final long COMPANYID_COLUMN_BITMASK = 4L;
+	public static final long GROUPID_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 16L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -489,7 +490,19 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 
 	@Override
 	public void setCommerceOrderItemId(long commerceOrderItemId) {
+		_columnBitmask |= COMMERCEORDERITEMID_COLUMN_BITMASK;
+
+		if (!_setOriginalCommerceOrderItemId) {
+			_setOriginalCommerceOrderItemId = true;
+
+			_originalCommerceOrderItemId = _commerceOrderItemId;
+		}
+
 		_commerceOrderItemId = commerceOrderItemId;
+	}
+
+	public long getOriginalCommerceOrderItemId() {
+		return _originalCommerceOrderItemId;
 	}
 
 	@JSON
@@ -635,6 +648,10 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 		cpSubscriptionCycleEntryModelImpl._originalCPSubscriptionEntryId = cpSubscriptionCycleEntryModelImpl._CPSubscriptionEntryId;
 
 		cpSubscriptionCycleEntryModelImpl._setOriginalCPSubscriptionEntryId = false;
+
+		cpSubscriptionCycleEntryModelImpl._originalCommerceOrderItemId = cpSubscriptionCycleEntryModelImpl._commerceOrderItemId;
+
+		cpSubscriptionCycleEntryModelImpl._setOriginalCommerceOrderItemId = false;
 
 		cpSubscriptionCycleEntryModelImpl._columnBitmask = 0;
 	}
@@ -805,6 +822,8 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 	private long _originalCPSubscriptionEntryId;
 	private boolean _setOriginalCPSubscriptionEntryId;
 	private long _commerceOrderItemId;
+	private long _originalCommerceOrderItemId;
+	private boolean _setOriginalCommerceOrderItemId;
 	private boolean _renew;
 	private long _columnBitmask;
 	private CPSubscriptionCycleEntry _escapedModel;

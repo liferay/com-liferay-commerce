@@ -220,21 +220,15 @@ public class CPSubscriptionEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPSubscriptionEntry updateCommercePriceEntry(
-		HttpPrincipal httpPrincipal, long cpSubscriptionEntryId,
-		long subscriptionCycleLength, String subscriptionCyclePeriod,
-		long maxSubscriptionCyclesNumber, boolean active,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+	public static com.liferay.commerce.product.model.CPSubscriptionEntry setActive(
+		HttpPrincipal httpPrincipal, long cpSubscriptionEntryId, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPSubscriptionEntryServiceUtil.class,
-					"updateCommercePriceEntry",
-					_updateCommercePriceEntryParameterTypes5);
+					"setActive", _setActiveParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpSubscriptionEntryId, subscriptionCycleLength,
-					subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
-					active, serviceContext);
+					cpSubscriptionEntryId, active);
 
 			Object returnObj = null;
 
@@ -242,8 +236,44 @@ public class CPSubscriptionEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.security.auth.PrincipalException) {
-					throw (com.liferay.portal.kernel.security.auth.PrincipalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.product.model.CPSubscriptionEntry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPSubscriptionEntry updateCommercePriceEntry(
+		HttpPrincipal httpPrincipal, long cpSubscriptionEntryId,
+		long subscriptionCycleLength, String subscriptionCyclePeriod,
+		long maxSubscriptionCyclesNumber, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPSubscriptionEntryServiceUtil.class,
+					"updateCommercePriceEntry",
+					_updateCommercePriceEntryParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					cpSubscriptionEntryId, subscriptionCycleLength,
+					subscriptionCyclePeriod, maxSubscriptionCyclesNumber, active);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
@@ -275,8 +305,10 @@ public class CPSubscriptionEntryServiceHttp {
 			long.class, long.class, Boolean.class, String.class, int.class,
 			int.class, com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _updateCommercePriceEntryParameterTypes5 = new Class[] {
-			long.class, long.class, String.class, long.class, boolean.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
+	private static final Class<?>[] _setActiveParameterTypes5 = new Class[] {
+			long.class, boolean.class
+		};
+	private static final Class<?>[] _updateCommercePriceEntryParameterTypes6 = new Class[] {
+			long.class, long.class, String.class, long.class, boolean.class
 		};
 }

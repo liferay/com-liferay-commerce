@@ -339,6 +339,12 @@ public class CPSubscriptionEntryLocalServiceUtil {
 			keywords, start, end, sort);
 	}
 
+	public static com.liferay.commerce.product.model.CPSubscriptionEntry setActive(
+		long cpSubscriptionEntryId, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().setActive(cpSubscriptionEntryId, active);
+	}
+
 	/**
 	* Updates the cp subscription entry in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -353,7 +359,8 @@ public class CPSubscriptionEntryLocalServiceUtil {
 	public static com.liferay.commerce.product.model.CPSubscriptionEntry updateCPSubscriptionEntry(
 		long cpSubscriptionEntryId, long subscriptionCycleLength,
 		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-		boolean active) {
+		boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateCPSubscriptionEntry(cpSubscriptionEntryId,
 			subscriptionCycleLength, subscriptionCyclePeriod,

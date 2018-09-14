@@ -98,6 +98,7 @@ create index IX_5B218A65 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], co
 create unique index IX_FFE36627 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_275B2AD7 on CPSubscriptionCycleEntry (CPSubscriptionEntryId);
+create unique index IX_DBBA76D5 on CPSubscriptionCycleEntry (commerceOrderItemId);
 create index IX_3D29F0EE on CPSubscriptionCycleEntry (groupId);
 create index IX_94A39230 on CPSubscriptionCycleEntry (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_F54AE4B2 on CPSubscriptionCycleEntry (uuid_[$COLUMN_LENGTH:75$], groupId);

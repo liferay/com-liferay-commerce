@@ -176,6 +176,10 @@ public interface CPSubscriptionCycleEntryLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPSubscriptionCycleEntry fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+		long commerceOrderItemId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPSubscriptionCycleEntry fetchCPSubscriptionCycleEntry(
 		long CPSubscriptionCycleEntryId);
 
@@ -241,6 +245,9 @@ public interface CPSubscriptionCycleEntryLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPSubscriptionCycleEntriesCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPSubscriptionCycleEntriesCount(long cpSubscriptionEntryId);
 
 	/**
 	* Returns the cp subscription cycle entry with the primary key.

@@ -189,6 +189,12 @@ public class CPSubscriptionCycleEntryLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPSubscriptionCycleEntry fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+		long commerceOrderItemId) {
+		return _cpSubscriptionCycleEntryLocalService.fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(commerceOrderItemId);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPSubscriptionCycleEntry fetchCPSubscriptionCycleEntry(
 		long CPSubscriptionCycleEntryId) {
 		return _cpSubscriptionCycleEntryLocalService.fetchCPSubscriptionCycleEntry(CPSubscriptionCycleEntryId);
@@ -271,6 +277,11 @@ public class CPSubscriptionCycleEntryLocalServiceWrapper
 	@Override
 	public int getCPSubscriptionCycleEntriesCount() {
 		return _cpSubscriptionCycleEntryLocalService.getCPSubscriptionCycleEntriesCount();
+	}
+
+	@Override
+	public int getCPSubscriptionCycleEntriesCount(long cpSubscriptionEntryId) {
+		return _cpSubscriptionCycleEntryLocalService.getCPSubscriptionCycleEntriesCount(cpSubscriptionEntryId);
 	}
 
 	/**

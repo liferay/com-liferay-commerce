@@ -83,15 +83,22 @@ public class CPSubscriptionEntryServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPSubscriptionEntry setActive(
+		long cpSubscriptionEntryId, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpSubscriptionEntryService.setActive(cpSubscriptionEntryId,
+			active);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPSubscriptionEntry updateCommercePriceEntry(
 		long cpSubscriptionEntryId, long subscriptionCycleLength,
 		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-		boolean active,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpSubscriptionEntryService.updateCommercePriceEntry(cpSubscriptionEntryId,
 			subscriptionCycleLength, subscriptionCyclePeriod,
-			maxSubscriptionCyclesNumber, active, serviceContext);
+			maxSubscriptionCyclesNumber, active);
 	}
 
 	@Override
