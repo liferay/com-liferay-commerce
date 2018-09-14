@@ -264,25 +264,27 @@ public class CommerceOrganizationLocalServiceImpl
 	}
 
 	@Override
+	public long searchOrganizationCount(
+			long userId, long parentOrganizationId, String type,
+			String keywords, int start, int end, Sort[] sorts)
+		throws PortalException {
+
+		Hits hits = _getOrganizationHits(
+			userId, parentOrganizationId, type, keywords, start, end, sorts);
+
+		return hits.getLength();
+	}
+
+	@Override
 	public BaseModelSearchResult<Organization> searchOrganizations(
 			long userId, long parentOrganizationId, String type,
 			String keywords, int start, int end, Sort[] sorts)
 		throws PortalException {
 
-		User user = userLocalService.getUser(userId);
-
 		List<Organization> organizations = new ArrayList<>();
 
-		Organization parentOrganization =
-			organizationLocalService.getOrganization(parentOrganizationId);
-
-		Indexer<Organization> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-			Organization.class);
-
-		SearchContext searchContext = buildSearchContext(
-			user, parentOrganization, type, keywords, start, end, sorts);
-
-		Hits hits = indexer.search(searchContext);
+		Hits hits = _getOrganizationHits(
+			userId, parentOrganizationId, type, keywords, start, end, sorts);
 
 		Document[] documents = hits.getDocs();
 
@@ -303,14 +305,7 @@ public class CommerceOrganizationLocalServiceImpl
 			int end, Sort[] sorts)
 		throws PortalException {
 
-		Group group = groupLocalService.fetchGroup(groupId);
-
-		if (group == null) {
-			return new BaseModelSearchResult<>(
-				Collections.<Organization>emptyList(), 0);
-		}
-
-		long parentOrganizationId = group.getOrganizationId();
+		long parentOrganizationId = _getParentOrganizationId(groupId);
 
 		if (parentOrganizationId == 0) {
 			return new BaseModelSearchResult<>(
@@ -318,6 +313,22 @@ public class CommerceOrganizationLocalServiceImpl
 		}
 
 		return searchOrganizations(
+			userId, parentOrganizationId, type, keywords, start, end, sorts);
+	}
+
+	@Override
+	public long searchOrganizationsByGroupCount(
+			long groupId, long userId, String type, String keywords, int start,
+			int end, Sort[] sorts)
+		throws PortalException {
+
+		long parentOrganizationId = _getParentOrganizationId(groupId);
+
+		if (parentOrganizationId == 0) {
+			return 0;
+		}
+
+		return searchOrganizationCount(
 			userId, parentOrganizationId, type, keywords, start, end, sorts);
 	}
 
@@ -538,6 +549,35 @@ public class CommerceOrganizationLocalServiceImpl
 		emailAddressLocalService.addEmailAddress(
 			serviceContext.getUserId(), className, classPK, address,
 			listType.getListTypeId(), true, serviceContext);
+	}
+
+	private Hits _getOrganizationHits(
+			long userId, long parentOrganizationId, String type,
+			String keywords, int start, int end, Sort[] sorts)
+		throws PortalException {
+
+		User user = userLocalService.getUser(userId);
+
+		Organization parentOrganization =
+			organizationLocalService.getOrganization(parentOrganizationId);
+
+		Indexer<Organization> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			Organization.class);
+
+		SearchContext searchContext = buildSearchContext(
+			user, parentOrganization, type, keywords, start, end, sorts);
+
+		return indexer.search(searchContext);
+	}
+
+	private long _getParentOrganizationId(long groupId) {
+		Group group = groupLocalService.fetchGroup(groupId);
+
+		if (group == null) {
+			return 0;
+		}
+
+		return group.getOrganizationId();
 	}
 
 	private String _getUniqueName(long companyId, String name, int count) {
