@@ -12,12 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.product.subscription.web.subscription.util;
+package com.liferay.commerce.product.subscription.web.internal.subscription.util;
 
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService;
+import com.liferay.commerce.product.service.CPSubscriptionEntryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.counter.kernel.service.CounterLocalService;
@@ -61,6 +62,20 @@ public class CPSubscriptionEntryHelper {
 
 			_commerceOrderLocalService.checkoutCommerceOrder(
 				commerceOrder.getCommerceOrderId(), null, serviceContext);
+		}
+
+		if (cpSubscriptionEntry.getMaxSubscriptionCyclesNumber() > 0) {
+			int cpSubscriptionCycleEntriesCount =
+				_cpSubscriptionCycleEntryLocalService.
+					getCPSubscriptionCycleEntriesCount(
+						cpSubscriptionEntry.getCPSubscriptionEntryId());
+
+			if (cpSubscriptionCycleEntriesCount >=
+					cpSubscriptionEntry.getMaxSubscriptionCyclesNumber()) {
+
+				_cpSubscriptionEntryLocalService.setActive(
+					cpSubscriptionEntry.getCPSubscriptionEntryId(), false);
+			}
 		}
 	}
 
@@ -146,5 +161,8 @@ public class CPSubscriptionEntryHelper {
 	@Reference
 	private CPSubscriptionCycleEntryLocalService
 		_cpSubscriptionCycleEntryLocalService;
+
+	@Reference
+	private CPSubscriptionEntryLocalService _cpSubscriptionEntryLocalService;
 
 }
