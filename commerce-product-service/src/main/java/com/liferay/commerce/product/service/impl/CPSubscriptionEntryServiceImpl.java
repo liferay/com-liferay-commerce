@@ -21,10 +21,8 @@ import com.liferay.commerce.product.service.base.CPSubscriptionEntryServiceBaseI
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
@@ -111,14 +109,35 @@ public class CPSubscriptionEntryServiceImpl
 	}
 
 	@Override
+	public CPSubscriptionEntry setActive(
+			long cpSubscriptionEntryId, boolean active)
+		throws PortalException {
+
+		CPSubscriptionEntry cpSubscriptionEntry =
+			cpSubscriptionEntryLocalService.getCPSubscriptionEntry(
+				cpSubscriptionEntryId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), cpSubscriptionEntry.getGroupId(),
+			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SUBSCRIPTIONS);
+
+		return cpSubscriptionEntryLocalService.setActive(
+			cpSubscriptionEntryId, active);
+	}
+
+	@Override
 	public CPSubscriptionEntry updateCommercePriceEntry(
 			long cpSubscriptionEntryId, long subscriptionCycleLength,
 			String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-			boolean active, ServiceContext serviceContext)
-		throws PrincipalException {
+			boolean active)
+		throws PortalException {
+
+		CPSubscriptionEntry cpSubscriptionEntry =
+			cpSubscriptionEntryLocalService.getCPSubscriptionEntry(
+				cpSubscriptionEntryId);
 
 		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			getPermissionChecker(), cpSubscriptionEntry.getGroupId(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SUBSCRIPTIONS);
 
 		return cpSubscriptionEntryLocalService.updateCPSubscriptionEntry(

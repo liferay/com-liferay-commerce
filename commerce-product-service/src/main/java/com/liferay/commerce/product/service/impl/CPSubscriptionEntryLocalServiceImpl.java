@@ -121,6 +121,11 @@ public class CPSubscriptionEntryLocalServiceImpl
 
 		cpSubscriptionEntryPersistence.update(cpSubscriptionEntry);
 
+		// Add CPSubscriptionCycleEntry
+
+		cpSubscriptionCycleEntryLocalService.addCPSubscriptionCycleEntry(
+			cpSubscriptionEntryId, commerceOrderItemId, false);
+
 		return cpSubscriptionEntry;
 	}
 
@@ -158,21 +163,42 @@ public class CPSubscriptionEntryLocalServiceImpl
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public CPSubscriptionEntry updateCPSubscriptionEntry(
-		long cpSubscriptionEntryId, long subscriptionCycleLength,
-		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-		boolean active) {
+	public CPSubscriptionEntry setActive(
+			long cpSubscriptionEntryId, boolean active)
+		throws PortalException {
 
-		CPSubscriptionEntry cpSubscriptionEntry = fetchCPSubscriptionEntry(
-			cpSubscriptionEntryId);
+		CPSubscriptionEntry cpSubscriptionEntry =
+			cpSubscriptionEntryPersistence.findByPrimaryKey(
+				cpSubscriptionEntryId);
+
+		cpSubscriptionEntry.setActive(active);
+
+		cpSubscriptionEntryPersistence.update(cpSubscriptionEntry);
+
+		return cpSubscriptionEntry;
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CPSubscriptionEntry updateCPSubscriptionEntry(
+			long cpSubscriptionEntryId, long subscriptionCycleLength,
+			String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+			boolean active)
+		throws PortalException {
+
+		CPSubscriptionEntry cpSubscriptionEntry =
+			cpSubscriptionEntryPersistence.findByPrimaryKey(
+				cpSubscriptionEntryId);
 
 		cpSubscriptionEntry.setSubscriptionCycleLength(subscriptionCycleLength);
 		cpSubscriptionEntry.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
 		cpSubscriptionEntry.setMaxSubscriptionCyclesNumber(
 			maxSubscriptionCyclesNumber);
-		cpSubscriptionEntry.setActive(true);
+		cpSubscriptionEntry.setActive(active);
 
-		return updateCPSubscriptionEntry(cpSubscriptionEntry);
+		cpSubscriptionEntryPersistence.update(cpSubscriptionEntry);
+
+		return cpSubscriptionEntry;
 	}
 
 	protected SearchContext buildSearchContext(
