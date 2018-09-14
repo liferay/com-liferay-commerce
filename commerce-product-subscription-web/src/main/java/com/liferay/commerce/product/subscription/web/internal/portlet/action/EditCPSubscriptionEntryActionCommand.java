@@ -18,11 +18,10 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.exception.NoSuchCPSubscriptionEntryException;
 import com.liferay.commerce.product.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.service.CPSubscriptionEntryService;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -87,6 +86,9 @@ public class EditCPSubscriptionEntryActionCommand extends BaseMVCActionCommand {
 			else if (cmd.equals(Constants.UPDATE)) {
 				updateCPSubscriptionEntry(cpSubscriptionEntryId, actionRequest);
 			}
+			else if (cmd.equals("setActive")) {
+				setActive(cpSubscriptionEntryId, actionRequest);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchCPSubscriptionEntryException ||
@@ -102,6 +104,15 @@ public class EditCPSubscriptionEntryActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
+	protected void setActive(
+			long cpSubscriptionEntryId, ActionRequest actionRequest)
+		throws PortalException {
+
+		boolean active = ParamUtil.getBoolean(actionRequest, "active");
+
+		_cpSubscriptionEntryService.setActive(cpSubscriptionEntryId, active);
+	}
+
 	protected CPSubscriptionEntry updateCPSubscriptionEntry(
 			long cpSubscriptionEntryId, ActionRequest actionRequest)
 		throws Exception {
@@ -114,14 +125,10 @@ public class EditCPSubscriptionEntryActionCommand extends BaseMVCActionCommand {
 			actionRequest, "maxSubscriptionCyclesNumber");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CPSubscriptionEntry.class.getName(), actionRequest);
-
 		CPSubscriptionEntry cpSubscriptionEntry =
 			_cpSubscriptionEntryService.updateCommercePriceEntry(
 				cpSubscriptionEntryId, subscriptionCycleLength,
-				subscriptionCyclePeriod, maxSubscriptionCyclesNumber, active,
-				serviceContext);
+				subscriptionCyclePeriod, maxSubscriptionCyclesNumber, active);
 
 		return cpSubscriptionEntry;
 	}
