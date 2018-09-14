@@ -60,7 +60,7 @@ public class CheckCPSubscriptionEntryMessageListener
 
 		Trigger trigger = _triggerFactory.createTrigger(
 			className, className, null, null,
-			cpSubscriptionConfiguration.checkInterval(), TimeUnit.MINUTE);
+			cpSubscriptionConfiguration.checkRenewInterval(), TimeUnit.MINUTE);
 
 		SchedulerEntry schedulerEntry = new SchedulerEntryImpl(
 			className, trigger);
