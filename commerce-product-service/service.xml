@@ -1000,6 +1000,7 @@
 
 		<column name="CPSubscriptionEntryId" type="long" />
 		<column name="commerceOrderItemId" type="long" />
+		<column name="renew" type="boolean" />
 
 		<!-- Order -->
 
