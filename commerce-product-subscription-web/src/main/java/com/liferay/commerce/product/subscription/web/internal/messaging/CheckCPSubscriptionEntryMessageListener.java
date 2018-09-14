@@ -17,7 +17,7 @@ package com.liferay.commerce.product.subscription.web.internal.messaging;
 import com.liferay.commerce.product.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.service.CPSubscriptionEntryLocalService;
 import com.liferay.commerce.product.subscription.web.internal.configuration.subscription.CPSubscriptionConfiguration;
-import com.liferay.commerce.product.subscription.web.subscription.util.CPSubscriptionEntryHelper;
+import com.liferay.commerce.product.subscription.web.internal.subscription.util.CPSubscriptionEntryHelper;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -43,9 +43,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	configurationPid = "com.liferay.commerce.product.definitions.web.internal.configuration.CPDefinitionConfiguration",
-	immediate = true,
-	service =
-		CheckCPSubscriptionEntryMessageListener.class
+	immediate = true, service = CheckCPSubscriptionEntryMessageListener.class
 )
 public class CheckCPSubscriptionEntryMessageListener
 	extends BaseMessageListener {
