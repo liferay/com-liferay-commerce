@@ -242,6 +242,13 @@ public class CPSubscriptionEntryPersistenceTest {
 	}
 
 	@Test
+	public void testCountByactive() throws Exception {
+		_persistence.countByactive(RandomTestUtil.randomBoolean());
+
+		_persistence.countByactive(RandomTestUtil.randomBoolean());
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPSubscriptionEntry newCPSubscriptionEntry = addCPSubscriptionEntry();
 

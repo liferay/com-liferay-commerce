@@ -197,6 +197,9 @@ public interface CPSubscriptionEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPSubscriptionEntry> getActiveCPSubscriptionEntries();
+
 	/**
 	* Returns a range of all the cp subscription entries.
 	*

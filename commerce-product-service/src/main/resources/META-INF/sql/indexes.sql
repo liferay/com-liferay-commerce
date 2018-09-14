@@ -104,6 +104,7 @@ create index IX_94A39230 on CPSubscriptionCycleEntry (uuid_[$COLUMN_LENGTH:75$],
 create unique index IX_F54AE4B2 on CPSubscriptionCycleEntry (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_A9AAFD3F on CPSubscriptionEntry (CPInstanceId);
+create index IX_4472109B on CPSubscriptionEntry (active_);
 create index IX_53297276 on CPSubscriptionEntry (groupId, userId);
 create index IX_216F84A2 on CPSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_C4F4CBA4 on CPSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], groupId);

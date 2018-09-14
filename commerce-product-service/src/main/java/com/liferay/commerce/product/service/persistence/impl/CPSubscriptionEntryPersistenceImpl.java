@@ -3061,6 +3061,515 @@ public class CPSubscriptionEntryPersistenceImpl extends BasePersistenceImpl<CPSu
 
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "cpSubscriptionEntry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "cpSubscriptionEntry.userId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ACTIVE = new FinderPath(CPSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CPSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
+			CPSubscriptionEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByactive",
+			new String[] {
+				Boolean.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE =
+		new FinderPath(CPSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CPSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
+			CPSubscriptionEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByactive",
+			new String[] { Boolean.class.getName() },
+			CPSubscriptionEntryModelImpl.ACTIVE_COLUMN_BITMASK |
+			CPSubscriptionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ACTIVE = new FinderPath(CPSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CPSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByactive",
+			new String[] { Boolean.class.getName() });
+
+	/**
+	 * Returns all the cp subscription entries where active = &#63;.
+	 *
+	 * @param active the active
+	 * @return the matching cp subscription entries
+	 */
+	@Override
+	public List<CPSubscriptionEntry> findByactive(boolean active) {
+		return findByactive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the cp subscription entries where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPSubscriptionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param active the active
+	 * @param start the lower bound of the range of cp subscription entries
+	 * @param end the upper bound of the range of cp subscription entries (not inclusive)
+	 * @return the range of matching cp subscription entries
+	 */
+	@Override
+	public List<CPSubscriptionEntry> findByactive(boolean active, int start,
+		int end) {
+		return findByactive(active, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp subscription entries where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPSubscriptionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param active the active
+	 * @param start the lower bound of the range of cp subscription entries
+	 * @param end the upper bound of the range of cp subscription entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp subscription entries
+	 */
+	@Override
+	public List<CPSubscriptionEntry> findByactive(boolean active, int start,
+		int end, OrderByComparator<CPSubscriptionEntry> orderByComparator) {
+		return findByactive(active, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp subscription entries where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPSubscriptionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param active the active
+	 * @param start the lower bound of the range of cp subscription entries
+	 * @param end the upper bound of the range of cp subscription entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching cp subscription entries
+	 */
+	@Override
+	public List<CPSubscriptionEntry> findByactive(boolean active, int start,
+		int end, OrderByComparator<CPSubscriptionEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE;
+			finderArgs = new Object[] { active };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ACTIVE;
+			finderArgs = new Object[] { active, start, end, orderByComparator };
+		}
+
+		List<CPSubscriptionEntry> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CPSubscriptionEntry>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CPSubscriptionEntry cpSubscriptionEntry : list) {
+					if ((active != cpSubscriptionEntry.isActive())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_CPSUBSCRIPTIONENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CPSubscriptionEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(active);
+
+				if (!pagination) {
+					list = (List<CPSubscriptionEntry>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CPSubscriptionEntry>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first cp subscription entry in the ordered set where active = &#63;.
+	 *
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp subscription entry
+	 * @throws NoSuchCPSubscriptionEntryException if a matching cp subscription entry could not be found
+	 */
+	@Override
+	public CPSubscriptionEntry findByactive_First(boolean active,
+		OrderByComparator<CPSubscriptionEntry> orderByComparator)
+		throws NoSuchCPSubscriptionEntryException {
+		CPSubscriptionEntry cpSubscriptionEntry = fetchByactive_First(active,
+				orderByComparator);
+
+		if (cpSubscriptionEntry != null) {
+			return cpSubscriptionEntry;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("active=");
+		msg.append(active);
+
+		msg.append("}");
+
+		throw new NoSuchCPSubscriptionEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first cp subscription entry in the ordered set where active = &#63;.
+	 *
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp subscription entry, or <code>null</code> if a matching cp subscription entry could not be found
+	 */
+	@Override
+	public CPSubscriptionEntry fetchByactive_First(boolean active,
+		OrderByComparator<CPSubscriptionEntry> orderByComparator) {
+		List<CPSubscriptionEntry> list = findByactive(active, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last cp subscription entry in the ordered set where active = &#63;.
+	 *
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp subscription entry
+	 * @throws NoSuchCPSubscriptionEntryException if a matching cp subscription entry could not be found
+	 */
+	@Override
+	public CPSubscriptionEntry findByactive_Last(boolean active,
+		OrderByComparator<CPSubscriptionEntry> orderByComparator)
+		throws NoSuchCPSubscriptionEntryException {
+		CPSubscriptionEntry cpSubscriptionEntry = fetchByactive_Last(active,
+				orderByComparator);
+
+		if (cpSubscriptionEntry != null) {
+			return cpSubscriptionEntry;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("active=");
+		msg.append(active);
+
+		msg.append("}");
+
+		throw new NoSuchCPSubscriptionEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last cp subscription entry in the ordered set where active = &#63;.
+	 *
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp subscription entry, or <code>null</code> if a matching cp subscription entry could not be found
+	 */
+	@Override
+	public CPSubscriptionEntry fetchByactive_Last(boolean active,
+		OrderByComparator<CPSubscriptionEntry> orderByComparator) {
+		int count = countByactive(active);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CPSubscriptionEntry> list = findByactive(active, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the cp subscription entries before and after the current cp subscription entry in the ordered set where active = &#63;.
+	 *
+	 * @param CPSubscriptionEntryId the primary key of the current cp subscription entry
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp subscription entry
+	 * @throws NoSuchCPSubscriptionEntryException if a cp subscription entry with the primary key could not be found
+	 */
+	@Override
+	public CPSubscriptionEntry[] findByactive_PrevAndNext(
+		long CPSubscriptionEntryId, boolean active,
+		OrderByComparator<CPSubscriptionEntry> orderByComparator)
+		throws NoSuchCPSubscriptionEntryException {
+		CPSubscriptionEntry cpSubscriptionEntry = findByPrimaryKey(CPSubscriptionEntryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CPSubscriptionEntry[] array = new CPSubscriptionEntryImpl[3];
+
+			array[0] = getByactive_PrevAndNext(session, cpSubscriptionEntry,
+					active, orderByComparator, true);
+
+			array[1] = cpSubscriptionEntry;
+
+			array[2] = getByactive_PrevAndNext(session, cpSubscriptionEntry,
+					active, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CPSubscriptionEntry getByactive_PrevAndNext(Session session,
+		CPSubscriptionEntry cpSubscriptionEntry, boolean active,
+		OrderByComparator<CPSubscriptionEntry> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CPSUBSCRIPTIONENTRY_WHERE);
+
+		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CPSubscriptionEntryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(active);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(cpSubscriptionEntry);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CPSubscriptionEntry> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the cp subscription entries where active = &#63; from the database.
+	 *
+	 * @param active the active
+	 */
+	@Override
+	public void removeByactive(boolean active) {
+		for (CPSubscriptionEntry cpSubscriptionEntry : findByactive(active,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(cpSubscriptionEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of cp subscription entries where active = &#63;.
+	 *
+	 * @param active the active
+	 * @return the number of matching cp subscription entries
+	 */
+	@Override
+	public int countByactive(boolean active) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ACTIVE;
+
+		Object[] finderArgs = new Object[] { active };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_CPSUBSCRIPTIONENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(active);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ACTIVE_ACTIVE_2 = "cpSubscriptionEntry.active = ?";
 
 	public CPSubscriptionEntryPersistenceImpl() {
 		setModelClass(CPSubscriptionEntry.class);
@@ -3435,6 +3944,12 @@ public class CPSubscriptionEntryPersistenceImpl extends BasePersistenceImpl<CPSu
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U,
 				args);
 
+			args = new Object[] { cpSubscriptionEntryModelImpl.isActive() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_ACTIVE, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE,
+				args);
+
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
@@ -3533,6 +4048,23 @@ public class CPSubscriptionEntryPersistenceImpl extends BasePersistenceImpl<CPSu
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U,
+					args);
+			}
+
+			if ((cpSubscriptionEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						cpSubscriptionEntryModelImpl.getOriginalActive()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_ACTIVE, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE,
+					args);
+
+				args = new Object[] { cpSubscriptionEntryModelImpl.isActive() };
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_ACTIVE, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE,
 					args);
 			}
 		}

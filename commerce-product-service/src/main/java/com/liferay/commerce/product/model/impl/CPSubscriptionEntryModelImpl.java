@@ -127,11 +127,12 @@ public class CPSubscriptionEntryModelImpl extends BaseModelImpl<CPSubscriptionEn
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CPSubscriptionEntry"),
 			true);
 	public static final long CPINSTANCEID_COLUMN_BITMASK = 1L;
-	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long GROUPID_COLUMN_BITMASK = 4L;
-	public static final long USERID_COLUMN_BITMASK = 8L;
-	public static final long UUID_COLUMN_BITMASK = 16L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 32L;
+	public static final long ACTIVE_COLUMN_BITMASK = 2L;
+	public static final long COMPANYID_COLUMN_BITMASK = 4L;
+	public static final long GROUPID_COLUMN_BITMASK = 8L;
+	public static final long USERID_COLUMN_BITMASK = 16L;
+	public static final long UUID_COLUMN_BITMASK = 32L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -598,7 +599,19 @@ public class CPSubscriptionEntryModelImpl extends BaseModelImpl<CPSubscriptionEn
 
 	@Override
 	public void setActive(boolean active) {
+		_columnBitmask |= ACTIVE_COLUMN_BITMASK;
+
+		if (!_setOriginalActive) {
+			_setOriginalActive = true;
+
+			_originalActive = _active;
+		}
+
 		_active = active;
+	}
+
+	public boolean getOriginalActive() {
+		return _originalActive;
 	}
 
 	@JSON
@@ -746,6 +759,10 @@ public class CPSubscriptionEntryModelImpl extends BaseModelImpl<CPSubscriptionEn
 		cpSubscriptionEntryModelImpl._originalCPInstanceId = cpSubscriptionEntryModelImpl._CPInstanceId;
 
 		cpSubscriptionEntryModelImpl._setOriginalCPInstanceId = false;
+
+		cpSubscriptionEntryModelImpl._originalActive = cpSubscriptionEntryModelImpl._active;
+
+		cpSubscriptionEntryModelImpl._setOriginalActive = false;
 
 		cpSubscriptionEntryModelImpl._columnBitmask = 0;
 	}
@@ -968,6 +985,8 @@ public class CPSubscriptionEntryModelImpl extends BaseModelImpl<CPSubscriptionEn
 	private String _subscriptionCyclePeriod;
 	private long _maxSubscriptionCyclesNumber;
 	private boolean _active;
+	private boolean _originalActive;
+	private boolean _setOriginalActive;
 	private Date _nextIterationDate;
 	private long _columnBitmask;
 	private CPSubscriptionEntry _escapedModel;

@@ -214,6 +214,11 @@ public class CPSubscriptionEntryLocalServiceWrapper
 		return _cpSubscriptionEntryLocalService.getActionableDynamicQuery();
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> getActiveCPSubscriptionEntries() {
+		return _cpSubscriptionEntryLocalService.getActiveCPSubscriptionEntries();
+	}
+
 	/**
 	* Returns a range of all the cp subscription entries.
 	*

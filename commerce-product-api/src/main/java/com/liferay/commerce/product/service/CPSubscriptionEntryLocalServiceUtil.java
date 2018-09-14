@@ -207,6 +207,10 @@ public class CPSubscriptionEntryLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> getActiveCPSubscriptionEntries() {
+		return getService().getActiveCPSubscriptionEntries();
+	}
+
 	/**
 	* Returns a range of all the cp subscription entries.
 	*

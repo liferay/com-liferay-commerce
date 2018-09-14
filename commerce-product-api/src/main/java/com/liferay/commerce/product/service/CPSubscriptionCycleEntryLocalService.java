@@ -212,6 +212,11 @@ public interface CPSubscriptionCycleEntryLocalService extends BaseLocalService,
 	public List<CPSubscriptionCycleEntry> getCPSubscriptionCycleEntries(
 		int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPSubscriptionCycleEntry> getCPSubscriptionCycleEntries(
+		long cpSubscriptionEntryId, int start, int end,
+		OrderByComparator<CPSubscriptionCycleEntry> orderByComparator);
+
 	/**
 	* Returns all the cp subscription cycle entries matching the UUID and company.
 	*

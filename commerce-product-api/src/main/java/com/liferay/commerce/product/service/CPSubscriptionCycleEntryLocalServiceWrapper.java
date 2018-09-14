@@ -237,6 +237,14 @@ public class CPSubscriptionCycleEntryLocalServiceWrapper
 			end);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPSubscriptionCycleEntry> getCPSubscriptionCycleEntries(
+		long cpSubscriptionEntryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSubscriptionCycleEntry> orderByComparator) {
+		return _cpSubscriptionCycleEntryLocalService.getCPSubscriptionCycleEntries(cpSubscriptionEntryId,
+			start, end, orderByComparator);
+	}
+
 	/**
 	* Returns all the cp subscription cycle entries matching the UUID and company.
 	*
