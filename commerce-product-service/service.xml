@@ -1016,6 +1016,9 @@
 		<finder name="CPSubscriptionEntryId" return-type="Collection">
 			<finder-column name="CPSubscriptionEntryId" />
 		</finder>
+		<finder name="CommerceOrderItemId" return-type="CPSubscriptionCycleEntry" unique="true">
+			<finder-column name="commerceOrderItemId" />
+		</finder>
 	</entity>
 	<entity local-service="true" name="CPSubscriptionEntry" remote-service="true" uuid="true">
 
