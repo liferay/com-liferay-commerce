@@ -88,6 +88,11 @@ public interface CommerceOrganizationLocalService extends BaseLocalService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long searchOrganizationCount(long userId, long parentOrganizationId,
+		String type, String keywords, int start, int end, Sort[] sorts)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<Organization> searchOrganizations(
 		long userId, long parentOrganizationId, String type, String keywords,
 		int start, int end, Sort[] sorts) throws PortalException;
@@ -96,6 +101,11 @@ public interface CommerceOrganizationLocalService extends BaseLocalService {
 	public BaseModelSearchResult<Organization> searchOrganizationsByGroup(
 		long groupId, long userId, String type, String keywords, int start,
 		int end, Sort[] sorts) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long searchOrganizationsByGroupCount(long groupId, long userId,
+		String type, String keywords, int start, int end, Sort[] sorts)
+		throws PortalException;
 
 	public void unsetOrganizationUsers(long organizationId, long[] userIds)
 		throws PortalException;
