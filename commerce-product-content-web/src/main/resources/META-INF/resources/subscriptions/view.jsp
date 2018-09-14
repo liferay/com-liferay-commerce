@@ -67,6 +67,14 @@ SearchContainer<CPSubscriptionEntry> cpSubscriptionEntrySearchContainer = cpSubs
 					</h6>
 				</liferay-ui:search-container-column-text>
 
+				<liferay-ui:search-container-column-text
+					name="status"
+				>
+					<h6 class="text-default">
+						<%= HtmlUtil.escape(LanguageUtil.get(request, (cpSubscriptionEntry.isActive() ? "active" : "inactive"))) %>
+					</h6>
+				</liferay-ui:search-container-column-text>
+
 				<liferay-ui:search-container-column-date
 					name="create-date"
 					property="createDate"
@@ -76,6 +84,18 @@ SearchContainer<CPSubscriptionEntry> cpSubscriptionEntrySearchContainer = cpSubs
 					name="next-iteration-date"
 					property="nextIterationDate"
 				/>
+
+				<liferay-ui:search-container-column-text>
+					<portlet:actionURL name="cancelCPSubscriptionEntry" var="cancelURL">
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="cpSubscriptionEntryId" value="<%= String.valueOf(cpSubscriptionEntry.getCPSubscriptionEntryId()) %>" />
+					</portlet:actionURL>
+
+					<liferay-ui:icon
+						message="cancel-subscription"
+						url="<%= cancelURL %>"
+					/>
+				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
 
 			<liferay-ui:search-iterator
