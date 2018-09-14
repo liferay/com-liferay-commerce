@@ -347,7 +347,8 @@ create table CPSubscriptionCycleEntry (
 	createDate DATE null,
 	modifiedDate DATE null,
 	CPSubscriptionEntryId LONG,
-	commerceOrderItemId LONG
+	commerceOrderItemId LONG,
+	renew BOOLEAN
 );
 
 create table CPSubscriptionEntry (

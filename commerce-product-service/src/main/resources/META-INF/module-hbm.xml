@@ -393,6 +393,7 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="CPSubscriptionEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceOrderItemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="renew" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.commerce.product.model.impl.CPSubscriptionEntryImpl" table="CPSubscriptionEntry">
 		<id name="CPSubscriptionEntryId" type="long">

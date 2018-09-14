@@ -54,6 +54,14 @@ public class CPSubscriptionCycleEntryLocalServiceUtil {
 		return getService().addCPSubscriptionCycleEntry(cpSubscriptionCycleEntry);
 	}
 
+	public static com.liferay.commerce.product.model.CPSubscriptionCycleEntry addCPSubscriptionCycleEntry(
+		long cpSubscriptionEntryId, long commerceOrderItemId, boolean renew)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCPSubscriptionCycleEntry(cpSubscriptionEntryId,
+			commerceOrderItemId, renew);
+	}
+
 	/**
 	* Creates a new cp subscription cycle entry with the primary key. Does not add the cp subscription cycle entry to the database.
 	*

@@ -83,7 +83,8 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "CPSubscriptionEntryId", Types.BIGINT },
-			{ "commerceOrderItemId", Types.BIGINT }
+			{ "commerceOrderItemId", Types.BIGINT },
+			{ "renew", Types.BOOLEAN }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -98,9 +99,10 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("CPSubscriptionEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceOrderItemId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("renew", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPSubscriptionCycleEntry (uuid_ VARCHAR(75) null,CPSubscriptionCycleEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPSubscriptionEntryId LONG,commerceOrderItemId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table CPSubscriptionCycleEntry (uuid_ VARCHAR(75) null,CPSubscriptionCycleEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPSubscriptionEntryId LONG,commerceOrderItemId LONG,renew BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table CPSubscriptionCycleEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpSubscriptionCycleEntry.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPSubscriptionCycleEntry.createDate DESC";
@@ -146,6 +148,7 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setCPSubscriptionEntryId(soapModel.getCPSubscriptionEntryId());
 		model.setCommerceOrderItemId(soapModel.getCommerceOrderItemId());
+		model.setRenew(soapModel.isRenew());
 
 		return model;
 	}
@@ -222,6 +225,7 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("CPSubscriptionEntryId", getCPSubscriptionEntryId());
 		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
+		attributes.put("renew", isRenew());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -291,6 +295,12 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 
 		if (commerceOrderItemId != null) {
 			setCommerceOrderItemId(commerceOrderItemId);
+		}
+
+		Boolean renew = (Boolean)attributes.get("renew");
+
+		if (renew != null) {
+			setRenew(renew);
 		}
 	}
 
@@ -482,6 +492,23 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 		_commerceOrderItemId = commerceOrderItemId;
 	}
 
+	@JSON
+	@Override
+	public boolean getRenew() {
+		return _renew;
+	}
+
+	@JSON
+	@Override
+	public boolean isRenew() {
+		return _renew;
+	}
+
+	@Override
+	public void setRenew(boolean renew) {
+		_renew = renew;
+	}
+
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
@@ -529,6 +556,7 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 		cpSubscriptionCycleEntryImpl.setModifiedDate(getModifiedDate());
 		cpSubscriptionCycleEntryImpl.setCPSubscriptionEntryId(getCPSubscriptionEntryId());
 		cpSubscriptionCycleEntryImpl.setCommerceOrderItemId(getCommerceOrderItemId());
+		cpSubscriptionCycleEntryImpl.setRenew(isRenew());
 
 		cpSubscriptionCycleEntryImpl.resetOriginalValues();
 
@@ -661,12 +689,14 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 
 		cpSubscriptionCycleEntryCacheModel.commerceOrderItemId = getCommerceOrderItemId();
 
+		cpSubscriptionCycleEntryCacheModel.renew = isRenew();
+
 		return cpSubscriptionCycleEntryCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -688,6 +718,8 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 		sb.append(getCPSubscriptionEntryId());
 		sb.append(", commerceOrderItemId=");
 		sb.append(getCommerceOrderItemId());
+		sb.append(", renew=");
+		sb.append(isRenew());
 		sb.append("}");
 
 		return sb.toString();
@@ -695,7 +727,7 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPSubscriptionCycleEntry");
@@ -741,6 +773,10 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 			"<column><column-name>commerceOrderItemId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceOrderItemId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>renew</column-name><column-value><![CDATA[");
+		sb.append(isRenew());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -769,6 +805,7 @@ public class CPSubscriptionCycleEntryModelImpl extends BaseModelImpl<CPSubscript
 	private long _originalCPSubscriptionEntryId;
 	private boolean _setOriginalCPSubscriptionEntryId;
 	private long _commerceOrderItemId;
+	private boolean _renew;
 	private long _columnBitmask;
 	private CPSubscriptionCycleEntry _escapedModel;
 }

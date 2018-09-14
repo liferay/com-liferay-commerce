@@ -74,6 +74,10 @@ public interface CPSubscriptionCycleEntryLocalService extends BaseLocalService,
 	public CPSubscriptionCycleEntry addCPSubscriptionCycleEntry(
 		CPSubscriptionCycleEntry cpSubscriptionCycleEntry);
 
+	public CPSubscriptionCycleEntry addCPSubscriptionCycleEntry(
+		long cpSubscriptionEntryId, long commerceOrderItemId, boolean renew)
+		throws PortalException;
+
 	/**
 	* Creates a new cp subscription cycle entry with the primary key. Does not add the cp subscription cycle entry to the database.
 	*

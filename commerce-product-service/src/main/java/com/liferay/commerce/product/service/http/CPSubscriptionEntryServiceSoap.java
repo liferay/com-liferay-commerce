@@ -65,24 +65,6 @@ import java.rmi.RemoteException;
  */
 @ProviderType
 public class CPSubscriptionEntryServiceSoap {
-	public static com.liferay.commerce.product.model.CPSubscriptionEntrySoap[] getCPSubscriptionEntries(
-		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSubscriptionEntry> orderByComparator)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> returnValue =
-				CPSubscriptionEntryServiceUtil.getCPSubscriptionEntries(groupId,
-					userId, start, end, orderByComparator);
-
-			return com.liferay.commerce.product.model.CPSubscriptionEntrySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void deleteCPSubscriptionEntry(long cpSubscriptionEntryId)
 		throws RemoteException {
 		try {
@@ -101,6 +83,24 @@ public class CPSubscriptionEntryServiceSoap {
 			com.liferay.commerce.product.model.CPSubscriptionEntry returnValue = CPSubscriptionEntryServiceUtil.fetchCPSubscriptionEntry(cpSubscriptionEntryId);
 
 			return com.liferay.commerce.product.model.CPSubscriptionEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPSubscriptionEntrySoap[] getCPSubscriptionEntries(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSubscriptionEntry> orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPSubscriptionEntry> returnValue =
+				CPSubscriptionEntryServiceUtil.getCPSubscriptionEntries(groupId,
+					userId, start, end, orderByComparator);
+
+			return com.liferay.commerce.product.model.CPSubscriptionEntrySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

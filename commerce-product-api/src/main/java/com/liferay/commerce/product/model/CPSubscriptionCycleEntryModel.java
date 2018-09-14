@@ -238,6 +238,27 @@ public interface CPSubscriptionCycleEntryModel extends BaseModel<CPSubscriptionC
 	 */
 	public void setCommerceOrderItemId(long commerceOrderItemId);
 
+	/**
+	 * Returns the renew of this cp subscription cycle entry.
+	 *
+	 * @return the renew of this cp subscription cycle entry
+	 */
+	public boolean getRenew();
+
+	/**
+	 * Returns <code>true</code> if this cp subscription cycle entry is renew.
+	 *
+	 * @return <code>true</code> if this cp subscription cycle entry is renew; <code>false</code> otherwise
+	 */
+	public boolean isRenew();
+
+	/**
+	 * Sets whether this cp subscription cycle entry is renew.
+	 *
+	 * @param renew the renew of this cp subscription cycle entry
+	 */
+	public void setRenew(boolean renew);
+
 	@Override
 	public boolean isNew();
 

@@ -142,6 +142,8 @@ public class CPSubscriptionCycleEntryPersistenceTest {
 
 		newCPSubscriptionCycleEntry.setCommerceOrderItemId(RandomTestUtil.nextLong());
 
+		newCPSubscriptionCycleEntry.setRenew(RandomTestUtil.randomBoolean());
+
 		_cpSubscriptionCycleEntries.add(_persistence.update(
 				newCPSubscriptionCycleEntry));
 
@@ -170,6 +172,8 @@ public class CPSubscriptionCycleEntryPersistenceTest {
 			newCPSubscriptionCycleEntry.getCPSubscriptionEntryId());
 		Assert.assertEquals(existingCPSubscriptionCycleEntry.getCommerceOrderItemId(),
 			newCPSubscriptionCycleEntry.getCommerceOrderItemId());
+		Assert.assertEquals(existingCPSubscriptionCycleEntry.isRenew(),
+			newCPSubscriptionCycleEntry.isRenew());
 	}
 
 	@Test
@@ -241,7 +245,7 @@ public class CPSubscriptionCycleEntryPersistenceTest {
 			"uuid", true, "CPSubscriptionCycleEntryId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "CPSubscriptionEntryId", true,
-			"commerceOrderItemId", true);
+			"commerceOrderItemId", true, "renew", true);
 	}
 
 	@Test
@@ -490,6 +494,8 @@ public class CPSubscriptionCycleEntryPersistenceTest {
 		cpSubscriptionCycleEntry.setCPSubscriptionEntryId(RandomTestUtil.nextLong());
 
 		cpSubscriptionCycleEntry.setCommerceOrderItemId(RandomTestUtil.nextLong());
+
+		cpSubscriptionCycleEntry.setRenew(RandomTestUtil.randomBoolean());
 
 		_cpSubscriptionCycleEntries.add(_persistence.update(
 				cpSubscriptionCycleEntry));

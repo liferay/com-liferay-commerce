@@ -72,6 +72,7 @@ public class CPSubscriptionCycleEntryWrapper implements CPSubscriptionCycleEntry
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("CPSubscriptionEntryId", getCPSubscriptionEntryId());
 		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
+		attributes.put("renew", isRenew());
 
 		return attributes;
 	}
@@ -138,6 +139,12 @@ public class CPSubscriptionCycleEntryWrapper implements CPSubscriptionCycleEntry
 
 		if (commerceOrderItemId != null) {
 			setCommerceOrderItemId(commerceOrderItemId);
+		}
+
+		Boolean renew = (Boolean)attributes.get("renew");
+
+		if (renew != null) {
+			setRenew(renew);
 		}
 	}
 
@@ -242,6 +249,16 @@ public class CPSubscriptionCycleEntryWrapper implements CPSubscriptionCycleEntry
 	}
 
 	/**
+	* Returns the renew of this cp subscription cycle entry.
+	*
+	* @return the renew of this cp subscription cycle entry
+	*/
+	@Override
+	public boolean getRenew() {
+		return _cpSubscriptionCycleEntry.getRenew();
+	}
+
+	/**
 	* Returns the user ID of this cp subscription cycle entry.
 	*
 	* @return the user ID of this cp subscription cycle entry
@@ -299,6 +316,16 @@ public class CPSubscriptionCycleEntryWrapper implements CPSubscriptionCycleEntry
 	@Override
 	public boolean isNew() {
 		return _cpSubscriptionCycleEntry.isNew();
+	}
+
+	/**
+	* Returns <code>true</code> if this cp subscription cycle entry is renew.
+	*
+	* @return <code>true</code> if this cp subscription cycle entry is renew; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isRenew() {
+		return _cpSubscriptionCycleEntry.isRenew();
 	}
 
 	@Override
@@ -415,6 +442,16 @@ public class CPSubscriptionCycleEntryWrapper implements CPSubscriptionCycleEntry
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_cpSubscriptionCycleEntry.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets whether this cp subscription cycle entry is renew.
+	*
+	* @param renew the renew of this cp subscription cycle entry
+	*/
+	@Override
+	public void setRenew(boolean renew) {
+		_cpSubscriptionCycleEntry.setRenew(renew);
 	}
 
 	/**

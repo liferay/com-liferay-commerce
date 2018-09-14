@@ -49,7 +49,7 @@ public class CPSubscriptionEntryServiceUtil {
 
 	public static com.liferay.commerce.product.model.CPSubscriptionEntry fetchCPSubscriptionEntry(
 		long cpSubscriptionEntryId)
-		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().fetchCPSubscriptionEntry(cpSubscriptionEntryId);
 	}
 
@@ -79,7 +79,7 @@ public class CPSubscriptionEntryServiceUtil {
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPSubscriptionEntry> searchCPSubscriptionEntries(
 		long companyId, long groupId, Boolean active, String keywords,
 		int start, int end, com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .searchCPSubscriptionEntries(companyId, groupId, active,
 			keywords, start, end, sort);

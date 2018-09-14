@@ -64,7 +64,7 @@ public interface CPSubscriptionEntryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPSubscriptionEntry fetchCPSubscriptionEntry(
-		long cpSubscriptionEntryId) throws PrincipalException;
+		long cpSubscriptionEntryId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPSubscriptionEntry> getCPSubscriptionEntries(long groupId,
@@ -86,7 +86,7 @@ public interface CPSubscriptionEntryService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPSubscriptionEntry> searchCPSubscriptionEntries(
 		long companyId, long groupId, Boolean active, String keywords,
-		int start, int end, Sort sort) throws PrincipalException;
+		int start, int end, Sort sort) throws PortalException;
 
 	public CPSubscriptionEntry updateCommercePriceEntry(
 		long cpSubscriptionEntryId, long subscriptionCycleLength,

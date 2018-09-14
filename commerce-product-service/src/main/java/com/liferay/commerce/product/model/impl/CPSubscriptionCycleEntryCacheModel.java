@@ -65,7 +65,7 @@ public class CPSubscriptionCycleEntryCacheModel implements CacheModel<CPSubscrip
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -87,6 +87,8 @@ public class CPSubscriptionCycleEntryCacheModel implements CacheModel<CPSubscrip
 		sb.append(CPSubscriptionEntryId);
 		sb.append(", commerceOrderItemId=");
 		sb.append(commerceOrderItemId);
+		sb.append(", renew=");
+		sb.append(renew);
 		sb.append("}");
 
 		return sb.toString();
@@ -131,6 +133,7 @@ public class CPSubscriptionCycleEntryCacheModel implements CacheModel<CPSubscrip
 
 		cpSubscriptionCycleEntryImpl.setCPSubscriptionEntryId(CPSubscriptionEntryId);
 		cpSubscriptionCycleEntryImpl.setCommerceOrderItemId(commerceOrderItemId);
+		cpSubscriptionCycleEntryImpl.setRenew(renew);
 
 		cpSubscriptionCycleEntryImpl.resetOriginalValues();
 
@@ -155,6 +158,8 @@ public class CPSubscriptionCycleEntryCacheModel implements CacheModel<CPSubscrip
 		CPSubscriptionEntryId = objectInput.readLong();
 
 		commerceOrderItemId = objectInput.readLong();
+
+		renew = objectInput.readBoolean();
 	}
 
 	@Override
@@ -188,6 +193,8 @@ public class CPSubscriptionCycleEntryCacheModel implements CacheModel<CPSubscrip
 		objectOutput.writeLong(CPSubscriptionEntryId);
 
 		objectOutput.writeLong(commerceOrderItemId);
+
+		objectOutput.writeBoolean(renew);
 	}
 
 	public String uuid;
@@ -200,4 +207,5 @@ public class CPSubscriptionCycleEntryCacheModel implements CacheModel<CPSubscrip
 	public long modifiedDate;
 	public long CPSubscriptionEntryId;
 	public long commerceOrderItemId;
+	public boolean renew;
 }

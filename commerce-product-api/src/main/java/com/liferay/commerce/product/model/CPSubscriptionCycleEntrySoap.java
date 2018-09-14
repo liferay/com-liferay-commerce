@@ -45,6 +45,7 @@ public class CPSubscriptionCycleEntrySoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCPSubscriptionEntryId(model.getCPSubscriptionEntryId());
 		soapModel.setCommerceOrderItemId(model.getCommerceOrderItemId());
+		soapModel.setRenew(model.isRenew());
 
 		return soapModel;
 	}
@@ -180,6 +181,18 @@ public class CPSubscriptionCycleEntrySoap implements Serializable {
 		_commerceOrderItemId = commerceOrderItemId;
 	}
 
+	public boolean getRenew() {
+		return _renew;
+	}
+
+	public boolean isRenew() {
+		return _renew;
+	}
+
+	public void setRenew(boolean renew) {
+		_renew = renew;
+	}
+
 	private String _uuid;
 	private long _CPSubscriptionCycleEntryId;
 	private long _groupId;
@@ -190,4 +203,5 @@ public class CPSubscriptionCycleEntrySoap implements Serializable {
 	private Date _modifiedDate;
 	private long _CPSubscriptionEntryId;
 	private long _commerceOrderItemId;
+	private boolean _renew;
 }
