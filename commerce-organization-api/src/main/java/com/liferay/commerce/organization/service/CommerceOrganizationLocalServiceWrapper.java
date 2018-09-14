@@ -105,6 +105,15 @@ public class CommerceOrganizationLocalServiceWrapper
 	}
 
 	@Override
+	public long searchOrganizationCount(long userId, long parentOrganizationId,
+		String type, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort[] sorts)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrganizationLocalService.searchOrganizationCount(userId,
+			parentOrganizationId, type, keywords, start, end, sorts);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.portal.kernel.model.Organization> searchOrganizations(
 		long userId, long parentOrganizationId, String type, String keywords,
 		int start, int end, com.liferay.portal.kernel.search.Sort[] sorts)
@@ -119,6 +128,15 @@ public class CommerceOrganizationLocalServiceWrapper
 		int end, com.liferay.portal.kernel.search.Sort[] sorts)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrganizationLocalService.searchOrganizationsByGroup(groupId,
+			userId, type, keywords, start, end, sorts);
+	}
+
+	@Override
+	public long searchOrganizationsByGroupCount(long groupId, long userId,
+		String type, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort[] sorts)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrganizationLocalService.searchOrganizationsByGroupCount(groupId,
 			userId, type, keywords, start, end, sorts);
 	}
 

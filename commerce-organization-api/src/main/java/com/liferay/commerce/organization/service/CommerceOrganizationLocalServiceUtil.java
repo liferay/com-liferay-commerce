@@ -103,6 +103,15 @@ public class CommerceOrganizationLocalServiceUtil {
 		return getService().isB2BOrganization(organizationId);
 	}
 
+	public static long searchOrganizationCount(long userId,
+		long parentOrganizationId, String type, String keywords, int start,
+		int end, com.liferay.portal.kernel.search.Sort[] sorts)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchOrganizationCount(userId, parentOrganizationId, type,
+			keywords, start, end, sorts);
+	}
+
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.portal.kernel.model.Organization> searchOrganizations(
 		long userId, long parentOrganizationId, String type, String keywords,
 		int start, int end, com.liferay.portal.kernel.search.Sort[] sorts)
@@ -119,6 +128,15 @@ public class CommerceOrganizationLocalServiceUtil {
 		return getService()
 				   .searchOrganizationsByGroup(groupId, userId, type, keywords,
 			start, end, sorts);
+	}
+
+	public static long searchOrganizationsByGroupCount(long groupId,
+		long userId, String type, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort[] sorts)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchOrganizationsByGroupCount(groupId, userId, type,
+			keywords, start, end, sorts);
 	}
 
 	public static void unsetOrganizationUsers(long organizationId,
