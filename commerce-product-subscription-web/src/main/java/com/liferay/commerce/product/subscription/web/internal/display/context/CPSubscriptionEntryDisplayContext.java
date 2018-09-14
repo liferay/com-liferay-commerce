@@ -45,13 +45,11 @@ public class CPSubscriptionEntryDisplayContext {
 		HttpServletRequest httpServletRequest,
 		PortletResourcePermission portletResourcePermission) {
 
+		_cpSubscriptionEntryService = cpSubscriptionEntryService;
 		_httpServletRequest = httpServletRequest;
+		_portletResourcePermission = portletResourcePermission;
 
 		_cpRequestHelper = new CPRequestHelper(_httpServletRequest);
-
-		_cpSubscriptionEntryService = cpSubscriptionEntryService;
-
-		_portletResourcePermission = portletResourcePermission;
 
 		_portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			_httpServletRequest);
