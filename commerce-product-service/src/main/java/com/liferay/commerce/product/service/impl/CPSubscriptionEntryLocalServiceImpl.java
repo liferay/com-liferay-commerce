@@ -130,6 +130,11 @@ public class CPSubscriptionEntryLocalServiceImpl
 	}
 
 	@Override
+	public List<CPSubscriptionEntry> getActiveCPSubscriptionEntries() {
+		return cpSubscriptionEntryPersistence.findByactive(true);
+	}
+
+	@Override
 	public List<CPSubscriptionEntry> getCPSubscriptionEntries(
 		long groupId, long userId, int start, int end,
 		OrderByComparator<CPSubscriptionEntry> orderByComparator) {
