@@ -42,7 +42,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Luca Pellizzon
  */
 @Component(
-	configurationPid = "com.liferay.commerce.product.definitions.web.internal.configuration.CPDefinitionConfiguration",
+	configurationPid = "com.liferay.commerce.product.subscription.web.internal.configuration.subscription.CPSubscriptionConfiguration",
 	immediate = true, service = CheckCPSubscriptionEntryMessageListener.class
 )
 public class CheckCPSubscriptionEntryMessageListener
