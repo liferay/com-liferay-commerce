@@ -39,6 +39,9 @@ import com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelPe
 import com.liferay.commerce.product.service.persistence.CPRulePersistence;
 import com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence;
+import com.liferay.commerce.product.service.persistence.CPSubscriptionCycleEntryPersistence;
+import com.liferay.commerce.product.service.persistence.CPSubscriptionEntryFinder;
+import com.liferay.commerce.product.service.persistence.CPSubscriptionEntryPersistence;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -1058,6 +1061,101 @@ public abstract class CPTaxCategoryLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the cp subscription cycle entry local service.
+	 *
+	 * @return the cp subscription cycle entry local service
+	 */
+	public com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService getCPSubscriptionCycleEntryLocalService() {
+		return cpSubscriptionCycleEntryLocalService;
+	}
+
+	/**
+	 * Sets the cp subscription cycle entry local service.
+	 *
+	 * @param cpSubscriptionCycleEntryLocalService the cp subscription cycle entry local service
+	 */
+	public void setCPSubscriptionCycleEntryLocalService(
+		com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService cpSubscriptionCycleEntryLocalService) {
+		this.cpSubscriptionCycleEntryLocalService = cpSubscriptionCycleEntryLocalService;
+	}
+
+	/**
+	 * Returns the cp subscription cycle entry persistence.
+	 *
+	 * @return the cp subscription cycle entry persistence
+	 */
+	public CPSubscriptionCycleEntryPersistence getCPSubscriptionCycleEntryPersistence() {
+		return cpSubscriptionCycleEntryPersistence;
+	}
+
+	/**
+	 * Sets the cp subscription cycle entry persistence.
+	 *
+	 * @param cpSubscriptionCycleEntryPersistence the cp subscription cycle entry persistence
+	 */
+	public void setCPSubscriptionCycleEntryPersistence(
+		CPSubscriptionCycleEntryPersistence cpSubscriptionCycleEntryPersistence) {
+		this.cpSubscriptionCycleEntryPersistence = cpSubscriptionCycleEntryPersistence;
+	}
+
+	/**
+	 * Returns the cp subscription entry local service.
+	 *
+	 * @return the cp subscription entry local service
+	 */
+	public com.liferay.commerce.product.service.CPSubscriptionEntryLocalService getCPSubscriptionEntryLocalService() {
+		return cpSubscriptionEntryLocalService;
+	}
+
+	/**
+	 * Sets the cp subscription entry local service.
+	 *
+	 * @param cpSubscriptionEntryLocalService the cp subscription entry local service
+	 */
+	public void setCPSubscriptionEntryLocalService(
+		com.liferay.commerce.product.service.CPSubscriptionEntryLocalService cpSubscriptionEntryLocalService) {
+		this.cpSubscriptionEntryLocalService = cpSubscriptionEntryLocalService;
+	}
+
+	/**
+	 * Returns the cp subscription entry persistence.
+	 *
+	 * @return the cp subscription entry persistence
+	 */
+	public CPSubscriptionEntryPersistence getCPSubscriptionEntryPersistence() {
+		return cpSubscriptionEntryPersistence;
+	}
+
+	/**
+	 * Sets the cp subscription entry persistence.
+	 *
+	 * @param cpSubscriptionEntryPersistence the cp subscription entry persistence
+	 */
+	public void setCPSubscriptionEntryPersistence(
+		CPSubscriptionEntryPersistence cpSubscriptionEntryPersistence) {
+		this.cpSubscriptionEntryPersistence = cpSubscriptionEntryPersistence;
+	}
+
+	/**
+	 * Returns the cp subscription entry finder.
+	 *
+	 * @return the cp subscription entry finder
+	 */
+	public CPSubscriptionEntryFinder getCPSubscriptionEntryFinder() {
+		return cpSubscriptionEntryFinder;
+	}
+
+	/**
+	 * Sets the cp subscription entry finder.
+	 *
+	 * @param cpSubscriptionEntryFinder the cp subscription entry finder
+	 */
+	public void setCPSubscriptionEntryFinder(
+		CPSubscriptionEntryFinder cpSubscriptionEntryFinder) {
+		this.cpSubscriptionEntryFinder = cpSubscriptionEntryFinder;
+	}
+
+	/**
 	 * Returns the cp tax category local service.
 	 *
 	 * @return the cp tax category local service
@@ -1336,6 +1434,16 @@ public abstract class CPTaxCategoryLocalServiceBaseImpl
 	protected com.liferay.commerce.product.service.CPSpecificationOptionLocalService cpSpecificationOptionLocalService;
 	@BeanReference(type = CPSpecificationOptionPersistence.class)
 	protected CPSpecificationOptionPersistence cpSpecificationOptionPersistence;
+	@BeanReference(type = com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService.class)
+	protected com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService cpSubscriptionCycleEntryLocalService;
+	@BeanReference(type = CPSubscriptionCycleEntryPersistence.class)
+	protected CPSubscriptionCycleEntryPersistence cpSubscriptionCycleEntryPersistence;
+	@BeanReference(type = com.liferay.commerce.product.service.CPSubscriptionEntryLocalService.class)
+	protected com.liferay.commerce.product.service.CPSubscriptionEntryLocalService cpSubscriptionEntryLocalService;
+	@BeanReference(type = CPSubscriptionEntryPersistence.class)
+	protected CPSubscriptionEntryPersistence cpSubscriptionEntryPersistence;
+	@BeanReference(type = CPSubscriptionEntryFinder.class)
+	protected CPSubscriptionEntryFinder cpSubscriptionEntryFinder;
 	@BeanReference(type = CPTaxCategoryLocalService.class)
 	protected CPTaxCategoryLocalService cpTaxCategoryLocalService;
 	@BeanReference(type = CPTaxCategoryPersistence.class)

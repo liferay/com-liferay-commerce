@@ -77,4 +77,6 @@ public class CPWebKeys {
 	public static final String CP_SPECIFICATION_OPTIONS =
 		"CP_SPECIFICATION_OPTIONS";
 
+	public static final String CP_SUBSCRIPTION_ENTRY = "CP_SUBSCRIPTION_ENTRY";
+
 }

@@ -16,7 +16,6 @@ create unique index IX_551F2ECC on CPDSpecificationOptionValue (uuid_[$COLUMN_LE
 create index IX_3D5A0021 on CPDefinition (CPTaxCategoryId);
 create index IX_573E33FB on CPDefinition (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_A465D100 on CPDefinition (displayDate, status);
-create unique index IX_44D56917 on CPDefinition (externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_419350EA on CPDefinition (groupId, status);
 create index IX_8EA585DA on CPDefinition (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_BA9BADC on CPDefinition (uuid_[$COLUMN_LENGTH:75$], groupId);
@@ -59,7 +58,6 @@ create unique index IX_7E830576 on CPInstance (CPDefinitionId, sku[$COLUMN_LENGT
 create index IX_F4C9CDD on CPInstance (CPDefinitionId, status);
 create index IX_E2C3A97D on CPInstance (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_7C65903E on CPInstance (displayDate, status);
-create unique index IX_1BE250D5 on CPInstance (externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_FF605F28 on CPInstance (groupId, status);
 create index IX_8A7A3F5C on CPInstance (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_F902ECDE on CPInstance (uuid_[$COLUMN_LENGTH:75$], groupId);
@@ -98,5 +96,17 @@ create index IX_421ED80 on CPSpecificationOption (CPOptionCategoryId);
 create unique index IX_1E01842D on CPSpecificationOption (groupId, key_[$COLUMN_LENGTH:75$]);
 create index IX_5B218A65 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_FFE36627 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], groupId);
+
+create index IX_275B2AD7 on CPSubscriptionCycleEntry (CPSubscriptionEntryId);
+create unique index IX_DBBA76D5 on CPSubscriptionCycleEntry (commerceOrderItemId);
+create index IX_3D29F0EE on CPSubscriptionCycleEntry (groupId);
+create index IX_94A39230 on CPSubscriptionCycleEntry (uuid_[$COLUMN_LENGTH:75$], companyId);
+create unique index IX_F54AE4B2 on CPSubscriptionCycleEntry (uuid_[$COLUMN_LENGTH:75$], groupId);
+
+create index IX_A9AAFD3F on CPSubscriptionEntry (CPInstanceId);
+create index IX_4472109B on CPSubscriptionEntry (active_);
+create index IX_53297276 on CPSubscriptionEntry (groupId, userId);
+create index IX_216F84A2 on CPSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], companyId);
+create unique index IX_C4F4CBA4 on CPSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_DB66F708 on CPTaxCategory (groupId);

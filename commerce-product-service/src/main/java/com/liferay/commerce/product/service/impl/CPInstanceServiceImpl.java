@@ -255,6 +255,26 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 	}
 
 	@Override
+	public CPInstance updateSubscriptionInfo(
+			long cpInstanceId, boolean subscriptionEnabled,
+			long subscriptionCycleLength, String subscriptionCyclePeriod,
+			long maxSubscriptionCyclesNumber, ServiceContext serviceContext)
+		throws PortalException {
+
+		CPInstance cpInstance = cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
+		_cpDefinitionModelResourcePermission.check(
+			getPermissionChecker(), cpInstance.getCPDefinitionId(),
+			ActionKeys.UPDATE);
+
+		return cpInstanceLocalService.updateSubscriptionInfo(
+			cpInstanceId, subscriptionEnabled, subscriptionCycleLength,
+			subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
+			serviceContext);
+	}
+
+	@Override
 	public CPInstance upsertCPInstance(
 			long cpDefinitionId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,

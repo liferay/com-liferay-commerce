@@ -99,9 +99,11 @@ List<CommerceVirtualOrderItem> results = commerceVirtualOrderContentDisplayConte
 
 							useDialog = true;
 						}
+
+						boolean hasDownloadCommerceVirtualOrderItemPermission = CommerceVirtualOrderItemPermission.contains(permissionChecker, commerceVirtualOrderItem, CommerceVirtualOrderActionKeys.DOWNLOAD_COMMERCE_VIRTUAL_ORDER_ITEM);
 						%>
 
-						<c:if test="<%= CommerceVirtualOrderItemPermission.contains(permissionChecker, commerceVirtualOrderItem, CommerceVirtualOrderActionKeys.DOWNLOAD_COMMERCE_VIRTUAL_ORDER_ITEM) %>">
+						<c:if test="<%= hasDownloadCommerceVirtualOrderItemPermission && commerceVirtualOrderItemContentDisplayContext.hasActiveSubscription(commerceVirtualOrderItem) %>">
 							<aui:form action="<%= String.valueOf(commerceVirtualOrderItemContentDisplayContext.getDownloadResourceURL(commerceVirtualOrderItem.getCommerceVirtualOrderItemId())) %>" method="post" name='<%= commerceVirtualOrderItem.getCommerceVirtualOrderItemId() + "Fm" %>' />
 
 							<liferay-ui:icon

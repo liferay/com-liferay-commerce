@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.portlet.action;
 
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
+import com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService;
 import com.liferay.commerce.product.type.virtual.order.constants.CommerceVirtualOrderPortletKeys;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.CommerceVirtualOrderItemContentDisplayContext;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
@@ -25,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.portlet.PortletConfig;
@@ -66,7 +66,9 @@ public class CommerceVirtualOrderItemContentConfigurationAction
 						_commerceOrganizationHelper,
 						_commerceVirtualOrderItemLocalService,
 						_cpDefinitionHelper, _cpDefinitionVirtualSettingService,
-						_cpInstanceHelper, httpServletRequest);
+						_cpInstanceHelper,
+						_cpSubscriptionCycleEntryLocalService,
+						httpServletRequest);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -109,6 +111,7 @@ public class CommerceVirtualOrderItemContentConfigurationAction
 	private CPInstanceHelper _cpInstanceHelper;
 
 	@Reference
-	private Portal _portal;
+	private CPSubscriptionCycleEntryLocalService
+		_cpSubscriptionCycleEntryLocalService;
 
 }

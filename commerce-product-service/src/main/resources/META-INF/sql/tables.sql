@@ -71,6 +71,10 @@ create table CPDefinition (
 	displayDate DATE null,
 	expirationDate DATE null,
 	lastPublishDate DATE null,
+	subscriptionEnabled BOOLEAN,
+	subscriptionCycleLength LONG,
+	subscriptionCyclePeriod VARCHAR(75) null,
+	maxSubscriptionCyclesNumber LONG,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
@@ -198,6 +202,10 @@ create table CPInstance (
 	displayDate DATE null,
 	expirationDate DATE null,
 	lastPublishDate DATE null,
+	subscriptionEnabled BOOLEAN,
+	subscriptionCycleLength LONG,
+	subscriptionCyclePeriod VARCHAR(75) null,
+	maxSubscriptionCyclesNumber LONG,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
@@ -327,6 +335,38 @@ create table CPSpecificationOption (
 	facetable BOOLEAN,
 	key_ VARCHAR(75) null,
 	lastPublishDate DATE null
+);
+
+create table CPSubscriptionCycleEntry (
+	uuid_ VARCHAR(75) null,
+	CPSubscriptionCycleEntryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	CPSubscriptionEntryId LONG,
+	commerceOrderItemId LONG,
+	renew BOOLEAN
+);
+
+create table CPSubscriptionEntry (
+	uuid_ VARCHAR(75) null,
+	CPSubscriptionEntryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	CPInstanceId LONG,
+	commerceOrderItemId LONG,
+	subscriptionCycleLength LONG,
+	subscriptionCyclePeriod VARCHAR(75) null,
+	maxSubscriptionCyclesNumber LONG,
+	active_ BOOLEAN,
+	nextIterationDate DATE null
 );
 
 create table CPTaxCategory (

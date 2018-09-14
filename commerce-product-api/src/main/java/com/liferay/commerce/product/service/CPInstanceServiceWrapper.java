@@ -176,6 +176,18 @@ public class CPInstanceServiceWrapper implements CPInstanceService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPInstance updateSubscriptionInfo(
+		long cpInstanceId, boolean subscriptionEnabled,
+		long subscriptionCycleLength, String subscriptionCyclePeriod,
+		long maxSubscriptionCyclesNumber,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpInstanceService.updateSubscriptionInfo(cpInstanceId,
+			subscriptionEnabled, subscriptionCycleLength,
+			subscriptionCyclePeriod, maxSubscriptionCyclesNumber, serviceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPInstance upsertCPInstance(
 		long cpDefinitionId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,

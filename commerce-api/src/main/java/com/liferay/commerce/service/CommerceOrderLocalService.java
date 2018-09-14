@@ -123,6 +123,10 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder checkoutCommerceOrder(long commerceOrderId,
+		boolean recalculate, CommerceContext commerceContext,
+		ServiceContext serviceContext) throws PortalException;
+
+	public CommerceOrder checkoutCommerceOrder(long commerceOrderId,
 		CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
 

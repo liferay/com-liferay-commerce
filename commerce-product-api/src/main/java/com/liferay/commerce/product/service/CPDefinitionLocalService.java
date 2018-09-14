@@ -603,6 +603,12 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 		int status, ServiceContext serviceContext,
 		Map<String, Serializable> workflowContext) throws PortalException;
 
+	@Indexable(type = IndexableType.REINDEX)
+	public CPDefinition updateSubscriptionInfo(long cpDefinitionId,
+		boolean subscriptionEnabled, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		ServiceContext serviceContext) throws PortalException;
+
 	public CPDefinition updateTaxCategoryInfo(long cpDefinitionId,
 		long cpTaxCategoryId, boolean taxExempt, boolean telcoOrElectronics)
 		throws PortalException;

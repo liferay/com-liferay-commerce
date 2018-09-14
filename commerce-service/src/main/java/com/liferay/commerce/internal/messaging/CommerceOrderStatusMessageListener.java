@@ -18,11 +18,21 @@ import com.liferay.commerce.constants.CommerceDestinationNames;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.internal.notification.type.OrderPlacedCommerceNotificationTypeImpl;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.notification.util.CommerceNotificationHelper;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPSubscriptionCycleEntry;
+import com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService;
+import com.liferay.commerce.product.service.CPSubscriptionEntryLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -47,10 +57,59 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 			CommerceOrder commerceOrder =
 				_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
+			// Commerce notifications
+
 			_commerceNotificationHelper.sendNotifications(
 				commerceOrder.getSiteGroupId(),
 				OrderPlacedCommerceNotificationTypeImpl.KEY, commerceOrder);
+
+			// Commerce product subscriptions
+
+			_checkCPSubscriptions(commerceOrder);
 		}
+	}
+
+	private void _checkCPSubscriptions(CommerceOrder commerceOrder)
+		throws PortalException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(commerceOrder.getSiteGroupId());
+		serviceContext.setUserId(commerceOrder.getOrderUserId());
+
+		List<CommerceOrderItem> commerceOrderItems =
+			commerceOrder.getCommerceOrderItems();
+
+		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
+			CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
+			CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+			if (!_isSubscriptionCycleRenew(commerceOrderItem) &&
+				(cpDefinition.isSubscriptionEnabled() ||
+				 cpInstance.isSubscriptionEnabled())) {
+
+				_cpSubscriptionEntryLocalService.addCPSubscriptionEntry(
+					cpInstance.getCPInstanceId(),
+					commerceOrderItem.getCommerceOrderItemId(), serviceContext);
+			}
+		}
+	}
+
+	private boolean _isSubscriptionCycleRenew(
+		CommerceOrderItem commerceOrderItem) {
+
+		CPSubscriptionCycleEntry cpSubscriptionCycleEntry =
+			_cpSubscriptionCycleEntryLocalService.
+				fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+					commerceOrderItem.getCommerceOrderItemId());
+
+		if ((cpSubscriptionCycleEntry != null) &&
+			cpSubscriptionCycleEntry.isRenew()) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	@Reference
@@ -58,5 +117,12 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
+
+	@Reference
+	private CPSubscriptionCycleEntryLocalService
+		_cpSubscriptionCycleEntryLocalService;
+
+	@Reference
+	private CPSubscriptionEntryLocalService _cpSubscriptionEntryLocalService;
 
 }
