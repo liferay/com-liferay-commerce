@@ -395,6 +395,80 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, commercePriceList);
 	}
 
+	@Ignore
+	@Test
+	public void testUpsertCommercePriceList6() throws Exception {
+		frutillaRule.scenario(
+			"Adding a new Price List"
+		).given(
+			"A site (group)"
+		).and(
+			"A currency code expressed with 3-letter ISO 4217 format"
+		).and(
+			"A parent price list ID"
+		).and(
+			"The name of the new list"
+		).when(
+			"The external reference code (externalReferenceCode)"
+		).and(
+			"(commercePriceListId) is not used in the method invocation"
+		).then(
+			"The result should be a new Price List with the given " +
+				"(parentCommercePriceListId) on the given site"
+		);
+
+		Currency currency = Currency.getInstance(Locale.US);
+		String name = RandomTestUtil.randomString();
+		long parentCommercePriceListId = RandomTestUtil.randomLong();
+
+		CommercePriceList commercePriceList =
+			CommercePriceListTestUtil.upsertCommercePriceList(
+				_group.getGroupId(), 1, currency.getCurrencyCode(),
+				parentCommercePriceListId, name, RandomTestUtil.randomDouble(),
+				true, null, null, null);
+
+		Assert.assertThat(
+			parentCommercePriceListId,
+			equalTo(commercePriceList.getParentCommercePriceListId()));
+	}
+
+	@Ignore
+	@Test
+	public void testUpsertCommercePriceList7() throws Exception {
+		frutillaRule.scenario(
+			"Update an existing Price List"
+		).given(
+			"A site (group)"
+		).and(
+			"A currency code expressed with 3-letter ISO 4217 format"
+		).and(
+			"A parent price list ID"
+		).and(
+			"The name of the list"
+		).when(
+			"The external reference code (externalReferenceCode) is used"
+		).and(
+			"(commercePriceListId) is not used in the method invocation"
+		).then(
+			"The result should be the updated Price List with the given " +
+				"(parentCommercePriceListId) on the given site"
+		);
+
+		Currency currency = Currency.getInstance(Locale.US);
+		String name = RandomTestUtil.randomString();
+		long parentCommercePriceListId = RandomTestUtil.randomLong();
+
+		CommercePriceList commercePriceList =
+			CommercePriceListTestUtil.upsertCommercePriceList(
+				_group.getGroupId(), 1, currency.getCurrencyCode(),
+				parentCommercePriceListId, name, RandomTestUtil.randomDouble(),
+				true, null, null, null);
+
+		Assert.assertThat(
+			parentCommercePriceListId,
+			equalTo(commercePriceList.getParentCommercePriceListId()));
+	}
+
 	@Rule
 	public final FrutillaRule frutillaRule = new FrutillaRule();
 
