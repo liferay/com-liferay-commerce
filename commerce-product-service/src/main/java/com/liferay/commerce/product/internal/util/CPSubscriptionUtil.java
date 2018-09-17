@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 /**
  * @author Alessio Antonio Rendina
@@ -29,40 +30,38 @@ import java.util.GregorianCalendar;
 public class CPSubscriptionUtil {
 
 	public static Date getSubscriptionNextIterationDate(
-			long userId, long subscriptionCycleLength,
-			String subscriptionCyclePeriod)
-		throws PortalException {
+			TimeZone timeZone, long subscriptionCycleLength,
+			String subscriptionCyclePeriod) {
 
-		User user = UserLocalServiceUtil.getUser(userId);
-
-		GregorianCalendar gregorianCalendar = new GregorianCalendar(
-			user.getTimeZone());
+		GregorianCalendar gregorianCalendar = new GregorianCalendar(timeZone);
 
 		gregorianCalendar.setTime(new Date());
 
 		int amount = (int)subscriptionCycleLength;
 
-		if (subscriptionCyclePeriod.equals(CPConstants.SUBSCRIPTION_DAY)) {
+		if (subscriptionCyclePeriod.equals(
+				CPConstants.SUBSCRIPTION_CYCLE_DAY)) {
+
 			gregorianCalendar.add(Calendar.DAY_OF_MONTH, amount);
 
 			return gregorianCalendar.getTime();
 		}
 		else if (subscriptionCyclePeriod.equals(
-					 CPConstants.SUBSCRIPTION_WEEK)) {
+					 CPConstants.SUBSCRIPTION_CYCLE_WEEK)) {
 
 			gregorianCalendar.add(Calendar.WEEK_OF_MONTH, amount);
 
 			return gregorianCalendar.getTime();
 		}
 		else if (subscriptionCyclePeriod.equals(
-					 CPConstants.SUBSCRIPTION_MONTH)) {
+					 CPConstants.SUBSCRIPTION_CYCLE_MONTH)) {
 
 			gregorianCalendar.add(Calendar.MONTH, amount);
 
 			return gregorianCalendar.getTime();
 		}
 		else if (subscriptionCyclePeriod.equals(
-					 CPConstants.SUBSCRIPTION_YEAR)) {
+					 CPConstants.SUBSCRIPTION_CYCLE_YEAR)) {
 
 			gregorianCalendar.add(Calendar.YEAR, amount);
 
