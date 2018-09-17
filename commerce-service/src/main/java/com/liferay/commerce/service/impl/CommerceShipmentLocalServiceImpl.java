@@ -325,7 +325,7 @@ public class CommerceShipmentLocalServiceImpl
 			}
 		}
 		else if (status ==
-					 CommerceShipmentConstants.SHIPMENT_STATUS_DELIVERED) {
+					CommerceShipmentConstants.SHIPMENT_STATUS_DELIVERED) {
 
 			if (commerceOrderItems.isEmpty()) {
 				commerceOrderLocalService.updateOrderStatus(
