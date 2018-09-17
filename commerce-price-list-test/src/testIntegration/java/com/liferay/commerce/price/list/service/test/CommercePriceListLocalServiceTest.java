@@ -313,6 +313,46 @@ public class CommercePriceListLocalServiceTest {
 
 	@Ignore
 	@Test
+	public void testUpdateCommercePriceList3() throws Exception {
+		frutillaRule.scenario(
+			"Update an existing Price List"
+		).given(
+			"An existing Price List"
+		).and(
+			"A new parent price list ID (parentCommercePriceListId)"
+		).when(
+			"The new value is used in the method invocation"
+		).then(
+			"The result should be the new (parentCommercePriceListId) set on " +
+				"the Price List"
+		);
+
+		Currency currency = Currency.getInstance(Locale.US);
+		String name = RandomTestUtil.randomString();
+
+		CommercePriceList commercePriceList =
+			CommercePriceListTestUtil.addCommercePriceList(
+				_group.getGroupId(), currency.getCurrencyCode(), 0, name,
+				RandomTestUtil.randomDouble(), true, null, null, null);
+
+		long parentCommercePriceListId = RandomTestUtil.randomLong();
+
+		CommercePriceList updatedCommercePriceList =
+			CommercePriceListTestUtil.updateCommercePriceList(
+				commercePriceList.getGroupId(),
+				commercePriceList.getCommercePriceListId(),
+				currency.getCurrencyCode(), parentCommercePriceListId, name,
+				commercePriceList.getPriority(), false,
+				commercePriceList.getDisplayDate(),
+				commercePriceList.getExpirationDate());
+
+		Assert.assertThat(
+			parentCommercePriceListId,
+			equalTo(updatedCommercePriceList.getParentCommercePriceListId()));
+	}
+
+	@Ignore
+	@Test
 	public void testUpsertCommercePriceList1() throws Exception {
 		frutillaRule.scenario(
 			"Adding a new Price List"
