@@ -22,6 +22,7 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelService;
+import com.liferay.commerce.price.list.util.comparator.CommercePriceListPriorityComparator;
 import com.liferay.commerce.price.list.web.display.context.BaseCommercePriceListDisplayContext;
 import com.liferay.commerce.price.list.web.internal.util.CommercePriceListPortletUtil;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
@@ -40,6 +41,7 @@ import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -94,6 +96,24 @@ public class CommercePriceListDisplayContext
 		return _commerceCurrencyService.getCommerceCurrencies(
 			themeDisplay.getScopeGroupId(), true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, new CommerceCurrencyPriorityComparator(true));
+	}
+
+	public List<CommercePriceList> getCommercePriceLists()
+		throws PortalException {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		List<CommercePriceList> commercePriceLists = ListUtil.copy(
+			_commercePriceListService.getCommercePriceLists(
+				themeDisplay.getScopeGroupId(), WorkflowConstants.STATUS_ANY,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				new CommercePriceListPriorityComparator(true)));
+
+		commercePriceLists.remove(getCommercePriceList());
+
+		return commercePriceLists;
 	}
 
 	public List<CommercePriceListUserSegmentEntryRel>

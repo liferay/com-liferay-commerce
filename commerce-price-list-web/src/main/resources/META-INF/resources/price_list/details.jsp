@@ -63,6 +63,22 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 	</aui:select>
 
 	<aui:input name="priority" />
+
+	<aui:select label="parent-price-list" name="parentCommercePriceListId" showEmptyOption="<%= true %>">
+
+		<%
+		List<CommercePriceList> commercePriceLists = commercePriceListDisplayContext.getCommercePriceLists();
+
+		for (CommercePriceList curCommercePriceList : commercePriceLists) {
+		%>
+
+			<aui:option label="<%= curCommercePriceList.getName() %>" selected="<%= (commercePriceList != null) && (commercePriceList.getParentCommercePriceListId() == curCommercePriceList.getCommercePriceListId()) %>" value="<%= curCommercePriceList.getCommercePriceListId() %>" />
+
+		<%
+		}
+		%>
+
+	</aui:select>
 </aui:fieldset>
 
 <h5 class="text-default"><liferay-ui:message key="user-segments" /></h5>

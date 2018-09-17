@@ -43,8 +43,8 @@ public class CommercePriceListSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setParentCommercePriceListId(model.getParentCommercePriceListId());
 		soapModel.setCommerceCurrencyId(model.getCommerceCurrencyId());
+		soapModel.setParentCommercePriceListId(model.getParentCommercePriceListId());
 		soapModel.setName(model.getName());
 		soapModel.setPriority(model.getPriority());
 		soapModel.setDisplayDate(model.getDisplayDate());
@@ -181,20 +181,20 @@ public class CommercePriceListSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getParentCommercePriceListId() {
-		return _parentCommercePriceListId;
-	}
-
-	public void setParentCommercePriceListId(long parentCommercePriceListId) {
-		_parentCommercePriceListId = parentCommercePriceListId;
-	}
-
 	public long getCommerceCurrencyId() {
 		return _commerceCurrencyId;
 	}
 
 	public void setCommerceCurrencyId(long commerceCurrencyId) {
 		_commerceCurrencyId = commerceCurrencyId;
+	}
+
+	public long getParentCommercePriceListId() {
+		return _parentCommercePriceListId;
+	}
+
+	public void setParentCommercePriceListId(long parentCommercePriceListId) {
+		_parentCommercePriceListId = parentCommercePriceListId;
 	}
 
 	public String getName() {
@@ -278,8 +278,8 @@ public class CommercePriceListSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _parentCommercePriceListId;
 	private long _commerceCurrencyId;
+	private long _parentCommercePriceListId;
 	private String _name;
 	private double _priority;
 	private Date _displayDate;

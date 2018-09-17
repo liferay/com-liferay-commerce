@@ -141,9 +141,9 @@ public class CommercePriceListPersistenceTest {
 
 		newCommercePriceList.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommercePriceList.setParentCommercePriceListId(RandomTestUtil.nextLong());
-
 		newCommercePriceList.setCommerceCurrencyId(RandomTestUtil.nextLong());
+
+		newCommercePriceList.setParentCommercePriceListId(RandomTestUtil.nextLong());
 
 		newCommercePriceList.setName(RandomTestUtil.randomString());
 
@@ -187,10 +187,10 @@ public class CommercePriceListPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCommercePriceList.getModifiedDate()),
 			Time.getShortTimestamp(newCommercePriceList.getModifiedDate()));
-		Assert.assertEquals(existingCommercePriceList.getParentCommercePriceListId(),
-			newCommercePriceList.getParentCommercePriceListId());
 		Assert.assertEquals(existingCommercePriceList.getCommerceCurrencyId(),
 			newCommercePriceList.getCommerceCurrencyId());
+		Assert.assertEquals(existingCommercePriceList.getParentCommercePriceListId(),
+			newCommercePriceList.getParentCommercePriceListId());
 		Assert.assertEquals(existingCommercePriceList.getName(),
 			newCommercePriceList.getName());
 		AssertUtils.assertEquals(existingCommercePriceList.getPriority(),
@@ -257,18 +257,18 @@ public class CommercePriceListPersistenceTest {
 	}
 
 	@Test
+	public void testCountByCommerceCurrencyId() throws Exception {
+		_persistence.countByCommerceCurrencyId(RandomTestUtil.nextLong());
+
+		_persistence.countByCommerceCurrencyId(0L);
+	}
+
+	@Test
 	public void testCountByParentCommercePriceListId()
 		throws Exception {
 		_persistence.countByParentCommercePriceListId(RandomTestUtil.nextLong());
 
 		_persistence.countByParentCommercePriceListId(0L);
-	}
-
-	@Test
-	public void testCountByCommerceCurrencyId() throws Exception {
-		_persistence.countByCommerceCurrencyId(RandomTestUtil.nextLong());
-
-		_persistence.countByCommerceCurrencyId(0L);
 	}
 
 	@Test
@@ -331,7 +331,7 @@ public class CommercePriceListPersistenceTest {
 			true, "externalReferenceCode", true, "commercePriceListId", true,
 			"groupId", true, "companyId", true, "userId", true, "userName",
 			true, "createDate", true, "modifiedDate", true,
-			"parentCommercePriceListId", true, "commerceCurrencyId", true,
+			"commerceCurrencyId", true, "parentCommercePriceListId", true,
 			"name", true, "priority", true, "displayDate", true,
 			"expirationDate", true, "lastPublishDate", true, "status", true,
 			"statusByUserId", true, "statusByUserName", true, "statusDate", true);
@@ -583,9 +583,9 @@ public class CommercePriceListPersistenceTest {
 
 		commercePriceList.setModifiedDate(RandomTestUtil.nextDate());
 
-		commercePriceList.setParentCommercePriceListId(RandomTestUtil.nextLong());
-
 		commercePriceList.setCommerceCurrencyId(RandomTestUtil.nextLong());
+
+		commercePriceList.setParentCommercePriceListId(RandomTestUtil.nextLong());
 
 		commercePriceList.setName(RandomTestUtil.randomString());
 
