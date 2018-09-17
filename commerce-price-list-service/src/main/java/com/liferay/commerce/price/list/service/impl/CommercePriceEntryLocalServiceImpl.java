@@ -206,7 +206,7 @@ public class CommercePriceEntryLocalServiceImpl
 			return null;
 		}
 
-		return fetchCommercePriceEntry(
+		return commercePriceEntryLocalService.fetchCommercePriceEntry(
 			cpInstanceId, commercePriceList.getParentCommercePriceListId());
 	}
 
