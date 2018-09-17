@@ -46,6 +46,7 @@ import org.junit.runner.RunWith;
 
 /**
  * @author Zoltán Takács
+ * @author Ethan Bustad
  */
 @RunWith(Arquillian.class)
 public class CommercePriceListLocalServiceTest {
@@ -128,6 +129,94 @@ public class CommercePriceListLocalServiceTest {
 		Assert.assertThat(
 			externalReferenceCode,
 			equalTo(commercePriceList.getExternalReferenceCode()));
+	}
+
+	@Ignore
+	@Test
+	public void testAddCommercePriceList3() throws Exception {
+		frutillaRule.scenario(
+			"Adding a new Price List"
+		).given(
+			"A site (group)"
+		).and(
+			"A currency code expressed with 3-letter ISO 4217 format"
+		).and(
+			"A parent price list ID"
+		).and(
+			"The name of the new list"
+		).when(
+			"The name of the Price List"
+		).and(
+			"The parent price list ID (parentCommercePriceListId)"
+		).and(
+			"The currency code are checked against the input data"
+		).then(
+			"The result should be a new Price List on the given site"
+		);
+
+		Currency currency = Currency.getInstance(Locale.US);
+		String name = RandomTestUtil.randomString();
+		long parentCommercePriceListId = RandomTestUtil.randomLong();
+
+		CommercePriceList commercePriceList =
+			CommercePriceListTestUtil.addCommercePriceList(
+				_group.getGroupId(), currency.getCurrencyCode(),
+				parentCommercePriceListId, name, RandomTestUtil.randomDouble(),
+				true, null, null, null);
+
+		_assertPriceListAttributes(currency, name, commercePriceList);
+
+		Assert.assertThat(
+			parentCommercePriceListId,
+			equalTo(commercePriceList.getParentCommercePriceListId()));
+	}
+
+	@Ignore
+	@Test
+	public void testAddCommercePriceList4() throws Exception {
+		frutillaRule.scenario(
+			"Adding a new Price List with an external reference code"
+		).given(
+			"A site (group)"
+		).and(
+			"A currency code expressed with 3-letter ISO 4217 format"
+		).and(
+			"A parent price list ID"
+		).and(
+			"The name of the new list"
+		).and(
+			"The external reference code (externalReferenceCode)"
+		).when(
+			"The name of the Price List"
+		).and(
+			"The parent price list ID (parentCommercePriceListId)"
+		).and(
+			"The currency code"
+		).and(
+			"The external reference code are checked against the input data"
+		).then(
+			"The result should be a new Price List on the given site"
+		);
+
+		Currency currency = Currency.getInstance(Locale.US);
+		String externalReferenceCode = RandomTestUtil.randomString();
+		String name = RandomTestUtil.randomString();
+		long parentCommercePriceListId = RandomTestUtil.randomLong();
+
+		CommercePriceList commercePriceList =
+			CommercePriceListTestUtil.addCommercePriceList(
+				_group.getGroupId(), currency.getCurrencyCode(), name,
+				RandomTestUtil.randomDouble(), true, null, null,
+				externalReferenceCode);
+
+		_assertPriceListAttributes(currency, name, commercePriceList);
+
+		Assert.assertThat(
+			externalReferenceCode,
+			equalTo(commercePriceList.getExternalReferenceCode()));
+		Assert.assertThat(
+			parentCommercePriceListId,
+			equalTo(commercePriceList.getParentCommercePriceListId()));
 	}
 
 	@Ignore
