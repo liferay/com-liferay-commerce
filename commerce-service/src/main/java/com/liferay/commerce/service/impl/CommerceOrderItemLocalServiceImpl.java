@@ -125,6 +125,8 @@ public class CommerceOrderItemLocalServiceImpl
 		_setCommerceOrderItemDiscountValue(
 			commerceOrderItem, commerceProductPrice.getDiscountValue());
 
+		commerceOrderItem.setSubscription(cpDefinition.isSubscriptionEnabled() || cpInstance.isSubscriptionEnabled());
+
 		commerceOrderItemPersistence.update(commerceOrderItem);
 
 		return commerceOrderItem;
