@@ -179,7 +179,7 @@ public class CPDefinitionsFacetsMVCResourceCommand
 					WorkflowConstants.getStatusLabel(status));
 			}
 			else if (fieldName.equals(
-						 CPDefinitionIndexer.FIELD_PRODUCT_TYPE_NAME)) {
+						CPDefinitionIndexer.FIELD_PRODUCT_TYPE_NAME)) {
 
 				String productTypeName = termCollector.getTerm();
 
