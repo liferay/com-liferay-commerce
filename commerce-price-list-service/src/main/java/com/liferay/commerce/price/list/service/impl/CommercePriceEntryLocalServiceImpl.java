@@ -188,6 +188,19 @@ public class CommercePriceEntryLocalServiceImpl
 	public CommercePriceEntry fetchCommercePriceEntry(
 		long cpInstanceId, long commercePriceListId) {
 
+		return commercePriceEntryLocalService.fetchCommercePriceEntry(
+			cpInstanceId, commercePriceListId, false);
+	}
+
+	@Override
+	public CommercePriceEntry fetchCommercePriceEntry(
+		long cpInstanceId, long commercePriceListId, boolean useAncestor) {
+
+		if (!useAncestor) {
+			return commercePriceEntryPersistence.fetchByC_C(
+				cpInstanceId, commercePriceListId);
+		}
+
 		CommercePriceEntry commercePriceEntry =
 			commercePriceEntryPersistence.fetchByC_C(
 				cpInstanceId, commercePriceListId);
@@ -207,7 +220,8 @@ public class CommercePriceEntryLocalServiceImpl
 		}
 
 		return commercePriceEntryLocalService.fetchCommercePriceEntry(
-			cpInstanceId, commercePriceList.getParentCommercePriceListId());
+			cpInstanceId, commercePriceList.getParentCommercePriceListId(),
+			useAncestor);
 	}
 
 	@Override
