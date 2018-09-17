@@ -19,6 +19,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.currency.exception.NoSuchCurrencyException;
 import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.test.util.CommercePriceListTestUtil;
@@ -32,6 +33,7 @@ import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.util.Currency;
+import java.util.Date;
 import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
@@ -217,6 +219,96 @@ public class CommercePriceListLocalServiceTest {
 		Assert.assertThat(
 			parentCommercePriceListId,
 			equalTo(commercePriceList.getParentCommercePriceListId()));
+	}
+
+	@Ignore
+	@Test
+	public void testUpdateCommercePriceList1() throws Exception {
+		frutillaRule.scenario(
+			"Update an existing Price List"
+		).given(
+			"An existing Price List"
+		).and(
+			"A new currency code expressed with 3-letter ISO 4217 format"
+		).and(
+			"A new name for the list"
+		).and(
+			"A new display date"
+		).and(
+			"A new expiration date"
+		).when(
+			"The new values are used in the method invocation"
+		).and(
+			"Model getters are used for all other method invocation parameters"
+		).then(
+			"The result should be an updated Price List with only the " +
+				"currency code, name, display date, and expiration date changed"
+		);
+
+		Currency currency = Currency.getInstance(Locale.US);
+		String name = RandomTestUtil.randomString();
+
+		CommercePriceList commercePriceList =
+			CommercePriceListTestUtil.addCommercePriceList(
+				_group.getGroupId(), currency.getCurrencyCode(), name,
+				RandomTestUtil.randomDouble(), true, null, null, null);
+
+		currency = Currency.getInstance(Locale.UK);
+		name = RandomTestUtil.randomString();
+		Date displayDate = new Date();
+		Date expirationDate = new Date(Long.MAX_VALUE);
+
+		CommercePriceList updatedCommercePriceList =
+			CommercePriceListTestUtil.updateCommercePriceList(
+				commercePriceList.getGroupId(),
+				commercePriceList.getCommercePriceListId(),
+				currency.getCurrencyCode(),
+				commercePriceList.getParentCommercePriceListId(), name,
+				commercePriceList.getPriority(), false, displayDate,
+				expirationDate);
+
+		_assertPriceListAttributes(currency, name, updatedCommercePriceList);
+
+		Assert.assertThat(
+			displayDate, equalTo(updatedCommercePriceList.getDisplayDate()));
+		Assert.assertThat(
+			expirationDate,
+			equalTo(updatedCommercePriceList.getExpirationDate()));
+
+		Assert.assertThat(
+			commercePriceList.getGroupId(),
+			equalTo(updatedCommercePriceList.getGroupId()));
+		Assert.assertThat(
+			commercePriceList.getCommercePriceListId(),
+			equalTo(updatedCommercePriceList.getCommercePriceListId()));
+		Assert.assertThat(
+			commercePriceList.getParentCommercePriceListId(),
+			equalTo(updatedCommercePriceList.getParentCommercePriceListId()));
+		Assert.assertThat(
+			commercePriceList.getPriority(),
+			equalTo(updatedCommercePriceList.getPriority()));
+	}
+
+	@Ignore
+	@Test(expected = NoSuchPriceListException.class)
+	public void testUpdateCommercePriceList2() throws Exception {
+		frutillaRule.scenario(
+			"Update a nonexisting Price List"
+		).given(
+			"A nonexisting Price List ID"
+		).when(
+			"The value is used in the method invocation"
+		).then(
+			"NoSuchPriceListException should be thrown"
+		);
+
+		long commercePriceListId = RandomTestUtil.randomLong();
+		Currency currency = Currency.getInstance(Locale.US);
+
+		CommercePriceListTestUtil.updateCommercePriceList(
+			_group.getGroupId(), commercePriceListId,
+			currency.getCurrencyCode(), 0, RandomTestUtil.randomString(),
+			RandomTestUtil.randomDouble(), true, null, null);
 	}
 
 	@Ignore
