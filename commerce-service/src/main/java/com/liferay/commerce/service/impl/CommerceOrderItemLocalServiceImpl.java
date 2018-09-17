@@ -210,6 +210,14 @@ public class CommerceOrderItemLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceOrderItem> getSubscriptionCommerceOrderItems(
+		long commerceOrderId) {
+
+		return commerceOrderItemPersistence.findByC_S(
+			commerceOrderId, true);
+	}
+
+	@Override
 	public List<CommerceOrderItem> getCommerceOrderItems(
 		long commerceOrderId, int start, int end,
 		OrderByComparator<CommerceOrderItem> orderByComparator) {

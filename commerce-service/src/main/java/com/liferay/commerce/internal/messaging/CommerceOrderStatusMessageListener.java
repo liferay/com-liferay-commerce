@@ -25,6 +25,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionCycleEntry;
 import com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService;
 import com.liferay.commerce.product.service.CPSubscriptionEntryLocalService;
+import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -78,24 +79,21 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		serviceContext.setUserId(commerceOrder.getOrderUserId());
 
 		List<CommerceOrderItem> commerceOrderItems =
-			commerceOrder.getCommerceOrderItems();
+			_commerceOrderItemLocalService.getSubscriptionCommerceOrderItems(
+				commerceOrder.getCommerceOrderId());
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
-			CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
-			if (!_isSubscriptionCycleRenew(commerceOrderItem) &&
-				(cpDefinition.isSubscriptionEnabled() ||
-				 cpInstance.isSubscriptionEnabled())) {
-
+			if (_isNewSubscription(commerceOrderItem)) {
 				_cpSubscriptionEntryLocalService.addCPSubscriptionEntry(
-					cpInstance.getCPInstanceId(),
-					commerceOrderItem.getCommerceOrderItemId(), serviceContext);
+					commerceOrderItem.getCPInstanceId(),
+					commerceOrderItem.getCommerceOrderItemId(),
+					serviceContext);
 			}
 		}
 	}
 
-	private boolean _isSubscriptionCycleRenew(
+	private boolean _isNewSubscription(
 		CommerceOrderItem commerceOrderItem) {
 
 		CPSubscriptionCycleEntry cpSubscriptionCycleEntry =
@@ -106,10 +104,10 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		if ((cpSubscriptionCycleEntry != null) &&
 			cpSubscriptionCycleEntry.isRenew()) {
 
-			return true;
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 	@Reference
@@ -117,6 +115,9 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
+
+	@Reference
+	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
 
 	@Reference
 	private CPSubscriptionCycleEntryLocalService
