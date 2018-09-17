@@ -32,9 +32,13 @@ import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.product.service.CPOptionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPOptionValueLocalServiceUtil;
 import com.liferay.commerce.product.type.simple.constants.SimpleCPTypeConstants;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.settings.SystemSettingsLocator;
@@ -42,14 +46,20 @@ import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
+
+import java.io.Serializable;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 public class CPTestUtil {
 
@@ -138,8 +148,7 @@ public class CPTestUtil {
 			ServiceContextTestUtil.getServiceContext(groupId);
 
 		CPDefinition cpDefinition = _addCPDefinition(
-			SimpleCPTypeConstants.NAME, RandomTestUtil.randomBoolean(), true,
-			serviceContext);
+			SimpleCPTypeConstants.NAME, true, true, serviceContext);
 
 		return CPInstanceLocalServiceUtil.getCPInstance(
 			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
@@ -188,6 +197,41 @@ public class CPTestUtil {
 			cpDefinition.getCPDefinitionId(), serviceContext);
 	}
 
+	public static SearchContext getSearchContext(
+		String keywords, int status, Group group) {
+
+		SearchContext searchContext = new SearchContext();
+
+		Map<String, Serializable> attributes = new HashMap<>();
+
+		attributes.put(Field.STATUS, status);
+
+		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
+
+		if (Validator.isNotNull(keywords)) {
+			params.put("keywords", keywords);
+		}
+		else {
+			params.put("keywords", StringPool.STAR);
+		}
+
+		attributes.put("params", params);
+
+		searchContext.setAttributes(attributes);
+
+		searchContext.setCompanyId(group.getCompanyId());
+		searchContext.setGroupIds(new long[] {group.getGroupId()});
+
+		if (Validator.isNotNull(keywords)) {
+			searchContext.setKeywords(keywords);
+		}
+		else {
+			searchContext.setKeywords(StringPool.STAR);
+		}
+
+		return searchContext;
+	}
+
 	private static CPDefinition _addCPDefinition(
 			String productTypeName, boolean ignoreSKUCombinations,
 			boolean hasDefaultInstance, ServiceContext serviceContext)
@@ -222,7 +266,7 @@ public class CPTestUtil {
 		boolean taxExempt = RandomTestUtil.randomBoolean();
 		boolean telcoOrElectronics = RandomTestUtil.randomBoolean();
 		String ddmStructureKey = null;
-		boolean published = RandomTestUtil.randomBoolean();
+		boolean published = true;
 
 		Date displayDate = new Date(now - Time.HOUR);
 		Date expirationDate = new Date(now + Time.DAY);

@@ -1,4 +1,5 @@
 dependencies {
+	compileOnly group: "com.liferay", name: "com.liferay.petra.string", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.type.simple", version: "1.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.5.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.test", version: "1.0.0"
