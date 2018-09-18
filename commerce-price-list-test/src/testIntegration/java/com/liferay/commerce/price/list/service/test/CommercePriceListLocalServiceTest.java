@@ -41,7 +41,6 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,7 +62,6 @@ public class CommercePriceListLocalServiceTest {
 		_group = GroupTestUtil.addGroup();
 	}
 
-	@Ignore
 	@Test
 	public void testAddCommercePriceList1() throws Exception {
 		frutillaRule.scenario(
@@ -93,7 +91,6 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, commercePriceList);
 	}
 
-	@Ignore
 	@Test
 	public void testAddCommercePriceList2() throws Exception {
 		frutillaRule.scenario(
@@ -133,7 +130,6 @@ public class CommercePriceListLocalServiceTest {
 			equalTo(commercePriceList.getExternalReferenceCode()));
 	}
 
-	@Ignore
 	@Test
 	public void testAddCommercePriceList3() throws Exception {
 		frutillaRule.scenario(
@@ -173,7 +169,6 @@ public class CommercePriceListLocalServiceTest {
 			equalTo(commercePriceList.getParentCommercePriceListId()));
 	}
 
-	@Ignore
 	@Test
 	public void testAddCommercePriceList4() throws Exception {
 		frutillaRule.scenario(
@@ -221,7 +216,6 @@ public class CommercePriceListLocalServiceTest {
 			equalTo(commercePriceList.getParentCommercePriceListId()));
 	}
 
-	@Ignore
 	@Test
 	public void testUpdateCommercePriceList1() throws Exception {
 		frutillaRule.scenario(
@@ -289,7 +283,6 @@ public class CommercePriceListLocalServiceTest {
 			equalTo(updatedCommercePriceList.getPriority()));
 	}
 
-	@Ignore
 	@Test(expected = NoSuchPriceListException.class)
 	public void testUpdateCommercePriceList2() throws Exception {
 		frutillaRule.scenario(
@@ -311,7 +304,6 @@ public class CommercePriceListLocalServiceTest {
 			RandomTestUtil.randomDouble(), true, null, null);
 	}
 
-	@Ignore
 	@Test
 	public void testUpdateCommercePriceList3() throws Exception {
 		frutillaRule.scenario(
@@ -351,7 +343,6 @@ public class CommercePriceListLocalServiceTest {
 			equalTo(updatedCommercePriceList.getParentCommercePriceListId()));
 	}
 
-	@Ignore
 	@Test
 	public void testUpsertCommercePriceList1() throws Exception {
 		frutillaRule.scenario(
@@ -381,7 +372,6 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, commercePriceList);
 	}
 
-	@Ignore
 	@Test
 	public void testUpsertCommercePriceList2() throws Exception {
 		frutillaRule.scenario(
@@ -426,7 +416,6 @@ public class CommercePriceListLocalServiceTest {
 			updatedCurrency, updatedName, commercePriceList);
 	}
 
-	@Ignore
 	@Test
 	public void testUpsertCommercePriceList3() throws Exception {
 		frutillaRule.scenario(
@@ -496,7 +485,6 @@ public class CommercePriceListLocalServiceTest {
 			RandomTestUtil.randomDouble(), true, null, null, null);
 	}
 
-	@Ignore
 	@Test
 	public void testUpsertCommercePriceList5() throws Exception {
 		frutillaRule.scenario(
@@ -527,7 +515,6 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, commercePriceList);
 	}
 
-	@Ignore
 	@Test
 	public void testUpsertCommercePriceList6() throws Exception {
 		frutillaRule.scenario(
@@ -564,7 +551,6 @@ public class CommercePriceListLocalServiceTest {
 			equalTo(commercePriceList.getParentCommercePriceListId()));
 	}
 
-	@Ignore
 	@Test
 	public void testUpsertCommercePriceList7() throws Exception {
 		frutillaRule.scenario(
