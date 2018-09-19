@@ -31,7 +31,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Andrea Di Giorgi
  */
-@Component(immediate = true)
+@Component(immediate = true, service = CommerceOrderHelper.class)
 public class CommerceOrderHelperImpl implements CommerceOrderHelper {
 
 	@Override

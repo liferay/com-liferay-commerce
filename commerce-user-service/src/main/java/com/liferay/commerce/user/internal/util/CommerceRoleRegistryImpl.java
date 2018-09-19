@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true)
+@Component(immediate = true, service = CommerceRoleRegistry.class)
 public class CommerceRoleRegistryImpl implements CommerceRoleRegistry {
 
 	@Override

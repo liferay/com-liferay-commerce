@@ -44,7 +44,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Marco Leo
  */
-@Component(immediate = true)
+@Component(immediate = true, service = DDMFormValuesHelper.class)
 public class DDMFormValuesHelperImpl implements DDMFormValuesHelper {
 
 	@Override

@@ -31,7 +31,7 @@ import org.osgi.service.component.annotations.Deactivate;
 /**
  * @author Andrea Di Giorgi
  */
-@Component(immediate = true)
+@Component(immediate = true, service = CommercePaymentEngineRegistry.class)
 public class CommercePaymentEngineRegistryImpl
 	implements CommercePaymentEngineRegistry {
 

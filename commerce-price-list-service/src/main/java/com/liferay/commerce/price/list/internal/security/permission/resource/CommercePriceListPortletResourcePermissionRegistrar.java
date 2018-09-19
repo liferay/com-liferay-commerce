@@ -34,7 +34,10 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true)
+@Component(
+	immediate = true,
+	service = CommercePriceListPortletResourcePermissionRegistrar.class
+)
 public class CommercePriceListPortletResourcePermissionRegistrar {
 
 	@Activate

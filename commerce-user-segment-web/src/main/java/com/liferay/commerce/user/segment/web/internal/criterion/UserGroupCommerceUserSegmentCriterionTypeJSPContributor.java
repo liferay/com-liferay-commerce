@@ -41,7 +41,8 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.user.segment.criterion.type.jsp.contributor.key=" + CommerceUserSegmentCriterionConstants.TYPE_USER_GROUP
+	property = "commerce.user.segment.criterion.type.jsp.contributor.key=" + CommerceUserSegmentCriterionConstants.TYPE_USER_GROUP,
+	service = CommerceUserSegmentCriterionTypeJSPContributor.class
 )
 public class UserGroupCommerceUserSegmentCriterionTypeJSPContributor
 	implements CommerceUserSegmentCriterionTypeJSPContributor {

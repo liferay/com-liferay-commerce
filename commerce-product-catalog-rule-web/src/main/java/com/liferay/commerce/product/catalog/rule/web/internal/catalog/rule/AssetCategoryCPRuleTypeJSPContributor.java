@@ -30,7 +30,8 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.product.rule.type.jsp.contributor.key=" + CPRuleConstants.TYPE_ASSET_CATEGORY
+	property = "commerce.product.rule.type.jsp.contributor.key=" + CPRuleConstants.TYPE_ASSET_CATEGORY,
+	service = CPRuleTypeJSPContributor.class
 )
 public class AssetCategoryCPRuleTypeJSPContributor
 	implements CPRuleTypeJSPContributor {

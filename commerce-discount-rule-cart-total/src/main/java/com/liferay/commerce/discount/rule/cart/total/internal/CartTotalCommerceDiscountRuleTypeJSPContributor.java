@@ -33,7 +33,8 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.discount.rule.type.jsp.contributor.key=" + CommerceDiscountRuleConstants.TYPE_CART_TOTAL
+	property = "commerce.discount.rule.type.jsp.contributor.key=" + CommerceDiscountRuleConstants.TYPE_CART_TOTAL,
+	service = CommerceDiscountRuleTypeJSPContributor.class
 )
 public class CartTotalCommerceDiscountRuleTypeJSPContributor
 	implements CommerceDiscountRuleTypeJSPContributor {

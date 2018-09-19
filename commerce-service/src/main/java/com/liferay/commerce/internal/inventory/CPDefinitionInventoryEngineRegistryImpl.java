@@ -39,7 +39,9 @@ import org.osgi.service.component.annotations.Deactivate;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true)
+@Component(
+	immediate = true, service = CPDefinitionInventoryEngineRegistry.class
+)
 public class CPDefinitionInventoryEngineRegistryImpl
 	implements CPDefinitionInventoryEngineRegistry {
 
