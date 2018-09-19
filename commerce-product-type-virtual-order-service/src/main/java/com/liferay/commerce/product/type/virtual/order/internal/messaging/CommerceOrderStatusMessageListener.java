@@ -15,14 +15,14 @@
 package com.liferay.commerce.product.type.virtual.order.internal.messaging;
 
 import com.liferay.commerce.constants.CommerceDestinationNames;
+import com.liferay.commerce.model.CPSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CPSubscriptionCycleEntry;
-import com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
+import com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;

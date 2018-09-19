@@ -14,14 +14,13 @@
 
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context;
 
+import com.liferay.commerce.model.CPSubscriptionCycleEntry;
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CPSubscriptionCycleEntry;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.util.CommerceVirtualOrderItemContentRequestHelper;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.portlet.configuration.CommerceVirtualOrderItemContentPortletInstanceConfiguration;
@@ -31,6 +30,7 @@ import com.liferay.commerce.product.type.virtual.order.util.comparator.CommerceV
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleDisplay;

@@ -14,12 +14,12 @@
 
 package com.liferay.commerce.product.subscription.web.internal.messaging;
 
-import com.liferay.commerce.product.model.CPSubscriptionCycleEntry;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService;
-import com.liferay.commerce.product.service.CPSubscriptionEntryLocalService;
+import com.liferay.commerce.model.CPSubscriptionCycleEntry;
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.subscription.web.internal.configuration.subscription.CPSubscriptionConfiguration;
-import com.liferay.commerce.product.util.comparator.CPSubscriptionCycleEntryCreateDateComparator;
+import com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService;
+import com.liferay.commerce.service.CPSubscriptionEntryLocalService;
+import com.liferay.commerce.util.comparator.CPSubscriptionCycleEntryCreateDateComparator;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;

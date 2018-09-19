@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.internal.notification.type;
 
+import com.liferay.commerce.model.CPSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.notification.type.CommerceNotificationType;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CPSubscriptionCycleEntry;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;

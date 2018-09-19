@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.product.subscription.web.internal.subscription.util;
 
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService;
-import com.liferay.commerce.product.service.CPSubscriptionEntryLocalService;
+import com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService;
+import com.liferay.commerce.service.CPSubscriptionEntryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.counter.kernel.service.CounterLocalService;
