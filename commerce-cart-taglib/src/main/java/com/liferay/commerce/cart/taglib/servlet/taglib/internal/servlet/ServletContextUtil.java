@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true)
+@Component(immediate = true, service = ServletContextUtil.class)
 public class ServletContextUtil {
 
 	public static final CommerceOrderItemService getCommerceOrderItemService() {

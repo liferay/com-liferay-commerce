@@ -82,7 +82,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Marco Leo
  */
-@Component(immediate = true)
+@Component(immediate = true, service = CPInstanceHelper.class)
 public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 	@Override

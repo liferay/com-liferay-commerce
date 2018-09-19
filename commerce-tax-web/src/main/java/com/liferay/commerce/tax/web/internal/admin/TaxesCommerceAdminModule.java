@@ -51,7 +51,8 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.admin.module.key=" + CommerceConstants.TAXES_COMMERCE_ADMIN_MODULE_KEY
+	property = "commerce.admin.module.key=" + CommerceConstants.TAXES_COMMERCE_ADMIN_MODULE_KEY,
+	service = CommerceAdminModule.class
 )
 public class TaxesCommerceAdminModule implements CommerceAdminModule {
 

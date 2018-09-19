@@ -34,7 +34,10 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Marco Leo
  */
-@Component(immediate = true)
+@Component(
+	immediate = true,
+	service = CommerceUserSegmentPortletResourcePermissionRegistrar.class
+)
 public class CommerceUserSegmentPortletResourcePermissionRegistrar {
 
 	@Activate
