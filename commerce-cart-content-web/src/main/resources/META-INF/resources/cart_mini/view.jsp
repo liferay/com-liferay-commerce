@@ -99,8 +99,6 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 					cssClass="autofit-col-expand"
 				>
 					<div class="description-section">
-						<div class="list-group-text">Brand</div>
-
 						<div class="list-group-title">
 							<a href="<%= commerceCartContentMiniDisplayContext.getCPDefinitionURL(cpDefinition.getCPDefinitionId(), themeDisplay) %>">
 								<%= HtmlUtil.escape(cpDefinition.getName(languageId)) %>
