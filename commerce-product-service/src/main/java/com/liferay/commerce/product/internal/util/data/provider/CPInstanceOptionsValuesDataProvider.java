@@ -48,7 +48,8 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "ddm.data.provider.instance.id=getCPInstanceOptionsValues"
+	property = "ddm.data.provider.instance.id=getCPInstanceOptionsValues",
+	service = DDMDataProvider.class
 )
 public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 

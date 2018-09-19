@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Marco Leo
  */
-@Component
+@Component(service = CommerceContextFactory.class)
 public class CommerceContextFactoryImpl implements CommerceContextFactory {
 
 	@Override

@@ -41,7 +41,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Andrea Di Giorgi
  */
-@Component(immediate = true)
+@Component(immediate = true, service = CommerceWishListHttpHelper.class)
 public class CommerceWishListHttpHelperImpl
 	implements CommerceWishListHttpHelper {
 

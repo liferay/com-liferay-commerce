@@ -1,0 +1,1109 @@
+
+     [echo] 1: > 80: ./commerce-service/src/main/java/com/liferay/commerce/internal/inventory/CPDefinitionInventoryEngineRegistryImpl.java 138 (SourceCheck:JavaLongLinesCheck)
+     [echo] 2: ./commerce-address-content-web/src/main/java/com/liferay/commerce/address/content/web/internal/portlet/configuration/definition/CommerceAddressContentPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 3: ./commerce-address-web/src/main/java/com/liferay/commerce/address/web/internal/admin/CountriesCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Coun...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Coun...>
+     [echo] 4: ./commerce-availability-estimate-web/src/main/java/com/liferay/commerce/availability/estimate/web/internal/admin/AvailabilityEstimatesCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Avai...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Avai...>
+     [echo] 5: ./commerce-cart-content-web/src/main/java/com/liferay/commerce/cart/content/web/internal/portlet/configuration/definition/CommerceCartContentPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 6: ./commerce-cart-content-web/src/main/java/com/liferay/commerce/cart/content/web/internal/portlet/configuration/definition/CommerceCartContentMiniPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 7: ./commerce-cart-content-web/src/main/java/com/liferay/commerce/cart/content/web/internal/portlet/configuration/definition/CommerceCartContentTotalPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 8: ./commerce-cart-taglib/src/main/java/com/liferay/commerce/cart/taglib/servlet/taglib/internal/servlet/ServletContextUtil.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Servl...> but was:<...ent(immediate = true[])
+     [echo] public class Servl...>
+     [echo] 9: ./commerce-checkout-web/src/main/java/com/liferay/commerce/checkout/web/internal/util/CommerceCheckoutStepServicesTrackerImpl.java expected:<... Leo
+     [echo]  */
+     [echo] @Component([
+     [echo] 	immediate = true, service = CommerceCheckoutStepServicesTracker.class
+     [echo] ])
+     [echo] public class Comme...> but was:<... Leo
+     [echo]  */
+     [echo] @Component([immediate = true])
+     [echo] public class Comme...>
+     [echo] 10: ./commerce-currency-service/src/main/java/com/liferay/commerce/currency/internal/configuration/definition/RoundingTypeConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Roundi...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Roundi...>
+     [echo] 11: ./commerce-currency-service/src/main/java/com/liferay/commerce/currency/internal/configuration/definition/ExchangeRateProviderGroupServiceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Exchan...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Exchan...>
+     [echo] 12: ./commerce-currency-service/src/main/java/com/liferay/commerce/currency/internal/configuration/category/PricingConfigurationCategory.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationCategory.class)]
+     [echo] public class Pricin...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Pricin...>
+     [echo] 13: ./commerce-currency-service/src/main/java/com/liferay/commerce/currency/internal/configuration/definition/ExchangeRateProviderGroupServiceConfigurationPidMapping.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationPidMapping.class)]
+     [echo] public class Exchan...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Exchan...>
+     [echo] 14: ./commerce-currency-service/src/main/java/com/liferay/commerce/currency/internal/configuration/definition/RoundingTypeConfigurationPidMapping.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationPidMapping.class)]
+     [echo] public class Roundi...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Roundi...>
+     [echo] 15: ./commerce-currency-service/src/main/java/com/liferay/commerce/currency/internal/model/CommerceMoneyFactoryImpl.java expected:<...o Leo
+     [echo]  */
+     [echo] @Component[(service = CommerceMoneyFactory.class)]
+     [echo] public class Commer...> but was:<...o Leo
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 16: ./commerce-currency-service/src/main/java/com/liferay/commerce/currency/internal/util/ExchangeRateProviderRegistryImpl.java expected:<...ent(immediate = true[, service = ExchangeRateProviderRegistry.class])
+     [echo] public class Excha...> but was:<...ent(immediate = true[])
+     [echo] public class Excha...>
+     [echo] 17: ./commerce-currency-web/src/main/java/com/liferay/commerce/currency/web/internal/admin/CurrenciesCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Curr...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Curr...>
+     [echo] 18: ./commerce-discount-rule-added-all/src/main/java/com/liferay/commerce/discount/rule/added/all/internal/AddedAllCommerceDiscountRuleTypeJSPContributor.java expected:<...tants.TYPE_ADDED_ALL[,
+     [echo] 	service = CommerceDiscountRuleTypeJSPContributor.class]
+     [echo] )
+     [echo] public class Adde...> but was:<...tants.TYPE_ADDED_ALL[]
+     [echo] )
+     [echo] public class Adde...>
+     [echo] 19: ./commerce-discount-rule-added-any/src/main/java/com/liferay/commerce/discount/rule/added/any/internal/AddedAnyCommerceDiscountRuleTypeJSPContributor.java expected:<...tants.TYPE_ADDED_ANY[,
+     [echo] 	service = CommerceDiscountRuleTypeJSPContributor.class]
+     [echo] )
+     [echo] public class Adde...> but was:<...tants.TYPE_ADDED_ANY[]
+     [echo] )
+     [echo] public class Adde...>
+     [echo] 20: ./commerce-discount-rule-cart-total/src/main/java/com/liferay/commerce/discount/rule/cart/total/internal/CartTotalCommerceDiscountRuleTypeJSPContributor.java expected:<...ants.TYPE_CART_TOTAL[,
+     [echo] 	service = CommerceDiscountRuleTypeJSPContributor.class]
+     [echo] )
+     [echo] public class Cart...> but was:<...ants.TYPE_CART_TOTAL[]
+     [echo] )
+     [echo] public class Cart...>
+     [echo] 21: ./commerce-discount-service/src/main/java/com/liferay/commerce/discount/internal/security/permission/resource/CommerceDiscountPortletResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 22: ./commerce-discount-service/src/main/java/com/liferay/commerce/discount/internal/security/permission/resource/CommerceDiscountModelResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 23: ./commerce-discount-service/src/main/java/com/liferay/commerce/discount/internal/rule/type/CommerceDiscountRuleTypeRegistryImpl.java expected:<...ent(immediate = true[, service = CommerceDiscountRuleTypeRegistry.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 24: ./commerce-discount-service/src/main/java/com/liferay/commerce/discount/internal/target/CommerceDiscountTargetRegistryImpl.java expected:<...ent(immediate = true[, service = CommerceDiscountTargetRegistry.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 25: ./commerce-discount-web/src/main/java/com/liferay/commerce/discount/web/internal/portlet/CommerceDiscountPortletProvider.java expected:<...el.CommerceDiscount"[,
+     [echo] 	service = ViewPortletProvider.class]
+     [echo] )
+     [echo] public class Comm...> but was:<...el.CommerceDiscount"[]
+     [echo] )
+     [echo] public class Comm...>
+     [echo] 26: ./commerce-discount-web/src/main/java/com/liferay/commerce/discount/web/internal/security/permission/resource/CommerceDiscountPermission.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 27: ./commerce-elasticsearch6/src/main/java/com/liferay/commerce/elasticsearch6/internal/index/settings/contributor/CommerceIndexSettingsContributor.java expected:<...ent(immediate = true[, service = IndexSettingsContributor.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 28: ./commerce-health-status-web/src/main/java/com/liferay/commerce/health/status/web/internal/admin/HealthCheckCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Heal...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Heal...>
+     [echo] 29: ./commerce-geocoder-bing/src/main/java/com/liferay/commerce/geocoder/bing/internal/BingCommerceGeocoder.java expected:<...",
+     [echo] 	immediate = true[, service = CommerceGeocoder.class]
+     [echo] )
+     [echo] public class Bing...> but was:<...",
+     [echo] 	immediate = true[]
+     [echo] )
+     [echo] public class Bing...>
+     [echo] 30: ./commerce-item-selector-web/src/main/java/com/liferay/commerce/item/selector/web/internal/CommerceCountryItemSelectorView.java expected:<...ent(immediate = true[, service = ItemSelectorView.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 31: ./commerce-item-selector-web/src/main/java/com/liferay/commerce/item/selector/web/internal/CommercePriceListItemSelectorView.java expected:<...ent(immediate = true[, service = ItemSelectorView.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 32: ./commerce-item-selector-web/src/main/java/com/liferay/commerce/item/selector/web/internal/CommerceWarehouseItemSelectorView.java expected:<...ent(immediate = true[, service = ItemSelectorView.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 33: ./commerce-notification-service/src/main/java/com/liferay/commerce/notification/internal/configuration/definition/CommerceNotificationQueueEntryConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 34: ./commerce-notification-service/src/main/java/com/liferay/commerce/notification/internal/security/permission/resource/CommerceNotificationTemplateModelResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 35: ./commerce-notification-service/src/main/java/com/liferay/commerce/notification/internal/security/permission/resource/CommerceNotificationPortletResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 36: ./commerce-notification-service/src/main/java/com/liferay/commerce/notification/internal/type/CommerceNotificationTypeRegistryImpl.java expected:<...ent(immediate = true[, service = CommerceNotificationTypeRegistry.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 37: ./commerce-notification-service/src/main/java/com/liferay/commerce/notification/internal/util/CommerceNotificationHelperImpl.java expected:<...ent(immediate = true[, service = CommerceNotificationHelper.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 38: ./commerce-notification-web/src/main/java/com/liferay/commerce/notification/web/internal/admin/NotificationsCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Noti...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Noti...>
+     [echo] 39: ./commerce-notification-web/src/main/java/com/liferay/commerce/notification/web/internal/security/permission/resource/CommerceNotificationTemplatePermission.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 40: ./commerce-order-content-web/src/main/java/com/liferay/commerce/order/content/web/internal/portlet/configuration/definition/CommerceOrderContentPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 41: ./commerce-order-web/src/main/java/com/liferay/commerce/order/web/internal/admin/OrderSettingsCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Orde...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Orde...>
+     [echo] 42: ./commerce-order-web/src/main/java/com/liferay/commerce/order/web/internal/portlet/CommerceOrderPortletProvider.java expected:<...model.CommerceOrder"[,
+     [echo] 	service = ViewPortletProvider.class]
+     [echo] )
+     [echo] public class Comm...> but was:<...model.CommerceOrder"[]
+     [echo] )
+     [echo] public class Comm...>
+     [echo] 43: ./commerce-organization-order-web/src/main/java/com/liferay/commerce/organization/order/web/internal/configuration/definition/CommerceOrganizationOpenOrderPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class
+     [echo] 	Comme...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class
+     [echo] 	Comme...>
+     [echo] 44: ./commerce-order-web/src/main/java/com/liferay/commerce/order/web/security/permission/resource/CommerceOrderPermission.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 45: ./commerce-organization-service/src/main/java/com/liferay/commerce/organization/internal/util/CommerceOrganizationHelperImpl.java expected:<...ent(immediate = true[, service = CommerceOrganizationHelper.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 46: ./commerce-payment-engine-money-order/src/main/java/com/liferay/commerce/payment/engine/money/order/internal/configuration/definition/MoneyOrderCommercePaymentEngineGroupServiceConfigurationBeanDeclaration.java expected:<...iorgi
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class
+     [echo] 	Money...> but was:<...iorgi
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class
+     [echo] 	Money...>
+     [echo] 47: ./commerce-payment-engine-money-order/src/main/java/com/liferay/commerce/payment/engine/money/order/internal/configuration/definition/MoneyOrderCommercePaymentEngineGroupServiceConfigurationPidMapping.java expected:<...iorgi
+     [echo]  */
+     [echo] @Component[(service = ConfigurationPidMapping.class)]
+     [echo] public class MoneyO...> but was:<...iorgi
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class MoneyO...>
+     [echo] 48: ./commerce-payment-engine-paypal/src/main/java/com/liferay/commerce/payment/engine/paypal/internal/configuration/definition/PayPalCommercePaymentEngineGroupServiceConfigurationBeanDeclaration.java expected:<...iorgi
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class
+     [echo] 	PayPa...> but was:<...iorgi
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class
+     [echo] 	PayPa...>
+     [echo] 49: ./commerce-payment-engine-paypal/src/main/java/com/liferay/commerce/payment/engine/paypal/internal/configuration/definition/PayPalCommercePaymentEngineGroupServiceConfigurationPidMapping.java expected:<...iorgi
+     [echo]  */
+     [echo] @Component[(service = ConfigurationPidMapping.class)]
+     [echo] public class PayPal...> but was:<...iorgi
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class PayPal...>
+     [echo] 50: ./commerce-payment-method-web/src/main/java/com/liferay/commerce/payment/method/web/internal/admin/PaymentMethodsCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Paym...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Paym...>
+     [echo] 51: ./commerce-price-list-service/src/main/java/com/liferay/commerce/price/list/internal/security/permission/resource/CommercePriceListPortletResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 52: ./commerce-product-asset-categories-navigation-web/src/main/java/com/liferay/commerce/product/asset/categories/navigation/web/internal/configuration/definition/CPAssetCategoriesNavigationPortletInstanceConfigurationBeanDeclaration.java expected:<...o Leo
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class
+     [echo] 	CPAss...> but was:<...o Leo
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class
+     [echo] 	CPAss...>
+     [echo] 53: ./commerce-product-catalog-rule-web/src/main/java/com/liferay/commerce/product/catalog/rule/web/internal/catalog/rule/AssetCategoryCPRuleTypeJSPContributor.java expected:<....TYPE_ASSET_CATEGORY[,
+     [echo] 	service = CPRuleTypeJSPContributor.class]
+     [echo] )
+     [echo] public class Asse...> but was:<....TYPE_ASSET_CATEGORY[]
+     [echo] )
+     [echo] public class Asse...>
+     [echo] 54: ./commerce-product-content-category-web/src/main/java/com/liferay/commerce/product/content/category/web/internal/configuration/definition/CPCategoryContentPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class CPCate...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class CPCate...>
+     [echo] 55: ./commerce-product-content-search-web/src/main/java/com/liferay/commerce/product/content/search/web/internal/configuration/definition/CPSearchResultsPortletInstanceConfigurationBeanDeclaration.java expected:<...o Leo
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class
+     [echo] 	CPSea...> but was:<...o Leo
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class
+     [echo] 	CPSea...>
+     [echo] 56: ./commerce-product-content-web/src/main/java/com/liferay/commerce/product/content/web/internal/configuration/definition/CPCompareContentPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class CPComp...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class CPComp...>
+     [echo] 57: ./commerce-product-content-web/src/main/java/com/liferay/commerce/product/content/web/internal/configuration/definition/CPContentPortletInstanceConfigurationBeanDeclaration.java expected:<...o Leo
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class CPCont...> but was:<...o Leo
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class CPCont...>
+     [echo] 58: ./commerce-product-content-web/src/main/java/com/liferay/commerce/product/content/web/internal/configuration/definition/CPPublisherPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class CPPubl...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class CPPubl...>
+     [echo] 59: ./commerce-product-content-web/src/main/java/com/liferay/commerce/product/content/web/internal/configuration/definition/CPCompareContentMiniPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class CPComp...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class CPComp...>
+     [echo] 60: ./commerce-product-item-selector-web/src/main/java/com/liferay/commerce/product/item/selector/web/internal/CPInstanceItemSelectorView.java expected:<...ent(immediate = true[, service = ItemSelectorView.class])
+     [echo] public class CPIns...> but was:<...ent(immediate = true[])
+     [echo] public class CPIns...>
+     [echo] 61: ./commerce-product-item-selector-web/src/main/java/com/liferay/commerce/product/item/selector/web/internal/CPDefinitionItemSelectorView.java expected:<...ent(immediate = true[, service = ItemSelectorView.class])
+     [echo] public class CPDef...> but was:<...ent(immediate = true[])
+     [echo] public class CPDef...>
+     [echo] 62: ./commerce-product-item-selector-web/src/main/java/com/liferay/commerce/product/item/selector/web/internal/CPOptionItemSelectorView.java expected:<...ent(immediate = true[, service = ItemSelectorView.class])
+     [echo] public class CPOpt...> but was:<...ent(immediate = true[])
+     [echo] public class CPOpt...>
+     [echo] 63: ./commerce-product-item-selector-web/src/main/java/com/liferay/commerce/product/item/selector/web/internal/CPSpecificationOptionItemSelectorView.java expected:<...ent(immediate = true[, service = ItemSelectorView.class])
+     [echo] public class CPSpe...> but was:<...ent(immediate = true[])
+     [echo] public class CPSpe...>
+     [echo] 64: ./commerce-product-measurement-unit-web/src/main/java/com/liferay/commerce/product/measurement/unit/web/internal/admin/MeasurementUnitsCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Meas...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Meas...>
+     [echo] 65: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/configuration/category/CatalogConfigurationCategory.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationCategory.class)]
+     [echo] public class Catalo...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Catalo...>
+     [echo] 66: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/configuration/definition/CPOptionConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class CPOpti...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class CPOpti...>
+     [echo] 67: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/catalog/rule/CPRuleTypeRegistryImpl.java expected:<...ent(immediate = true[, service = CPRuleTypeRegistry.class])
+     [echo] public class CPRul...> but was:<...ent(immediate = true[])
+     [echo] public class CPRul...>
+     [echo] 68: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/configuration/definition/CPOptionConfigurationPidMapping.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationPidMapping.class)]
+     [echo] public class CPOpti...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class CPOpti...>
+     [echo] 69: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/data/source/CPDataSourceRegistryImpl.java expected:<...ent(immediate = true[, service = CPDataSourceRegistry.class])
+     [echo] public class CPDat...> but was:<...ent(immediate = true[])
+     [echo] public class CPDat...>
+     [echo] 70: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/data/source/CPDataSourceDefinitionLinkTypeImpl.java expected:<...itionLinkDataSource"[,
+     [echo] 	service = CPDataSource.class]
+     [echo] )
+     [echo] public class CPDa...> but was:<...itionLinkDataSource"[]
+     [echo] )
+     [echo] public class CPDa...>
+     [echo] 71: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/links/CPDefinitionLinkTypeImpl.java expected:<...",
+     [echo] 	immediate = true[, service = CPDefinitionLinkType.class]
+     [echo] )
+     [echo] public class CPDe...> but was:<...",
+     [echo] 	immediate = true[]
+     [echo] )
+     [echo] public class CPDe...>
+     [echo] 72: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/links/CPDefinitionLinkTypeRegistryImpl.java expected:<...ent(immediate = true[, service = CPDefinitionLinkTypeRegistry.class])
+     [echo] public class CPDef...> but was:<...ent(immediate = true[])
+     [echo] public class CPDef...>
+     [echo] 73: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/type/CPTypeServicesTrackerImpl.java expected:<...ent(immediate = true[, service = CPTypeServicesTracker.class])
+     [echo] public class CPTyp...> but was:<...ent(immediate = true[])
+     [echo] public class CPTyp...>
+     [echo] 74: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/util/CPContentContributorRegistryImpl.java expected:<...ent(immediate = true[, service = CPContentContributorRegistry.class])
+     [echo] public class CPCon...> but was:<...ent(immediate = true[])
+     [echo] public class CPCon...>
+     [echo] 75: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/util/CPDefinitionHelperImpl.java expected:<...ent(immediate = true[, service = CPDefinitionHelper.class])
+     [echo] public class CPDef...> but was:<...ent(immediate = true[])
+     [echo] public class CPDef...>
+     [echo] 76: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/util/data/provider/CPInstanceOptionsValuesDataProvider.java expected:<...stanceOptionsValues"[,
+     [echo] 	service = DDMDataProvider.class]
+     [echo] )
+     [echo] public class CPIn...> but was:<...stanceOptionsValues"[]
+     [echo] )
+     [echo] public class CPIn...>
+     [echo] 77: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/util/DDMFormValuesHelperImpl.java expected:<...ent(immediate = true[, service = DDMFormValuesHelper.class])
+     [echo] public class DDMFo...> but was:<...ent(immediate = true[])
+     [echo] public class DDMFo...>
+     [echo] 78: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/importer/CPFileImporterImpl.java expected:<...ent(immediate = true[, service = CPFileImporter.class])
+     [echo] public class CPFil...> but was:<...ent(immediate = true[])
+     [echo] public class CPFil...>
+     [echo] 79: ./commerce-product-service/src/main/java/com/liferay/commerce/product/internal/util/CPInstanceHelperImpl.java expected:<...ent(immediate = true[, service = CPInstanceHelper.class])
+     [echo] public class CPIns...> but was:<...ent(immediate = true[])
+     [echo] public class CPIns...>
+     [echo] 80: ./commerce-product-taglib/src/main/java/com/liferay/commerce/product/taglib/servlet/taglib/internal/servlet/ServletContextUtil.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Servl...> but was:<...ent(immediate = true[])
+     [echo] public class Servl...>
+     [echo] 81: ./commerce-product-type-virtual-order-content-web/src/main/java/com/liferay/commerce/product/type/virtual/order/content/web/internal/portlet/configuration/definition/CommerceVirtualOrderItemContentPortletInstanceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class
+     [echo] 	Comme...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class
+     [echo] 	Comme...>
+     [echo] 82: ./commerce-product-type-virtual-order-content-web/src/main/java/com/liferay/commerce/product/type/virtual/order/content/web/internal/security/resource/permission/CommerceVirtualOrderItemPermission.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 83: ./commerce-product-type-virtual-order-service/src/main/java/com/liferay/commerce/product/type/virtual/order/internal/security/permission/resource/CommerceVirtualOrderItemModelResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 84: ./commerce-product-type-virtual-order-service/src/main/java/com/liferay/commerce/product/type/virtual/order/internal/security/permission/resource/CommerceVirtualOrderItemPortletResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 85: ./commerce-service/src/main/java/com/liferay/commerce/configuration/definition/CommerceOrderConfigurationBeanDeclaration.java expected:<...o Leo
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...o Leo
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 86: ./commerce-service/src/main/java/com/liferay/commerce/configuration/definition/CommerceOrderConfigurationPidMapping.java expected:<...o Leo
+     [echo]  */
+     [echo] @Component[(service = ConfigurationPidMapping.class)]
+     [echo] public class Commer...> but was:<...o Leo
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 87: ./commerce-service/src/main/java/com/liferay/commerce/configuration/definition/CommercePriceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 88: ./commerce-service/src/main/java/com/liferay/commerce/configuration/definition/CommercePriceConfigurationPidMapping.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationPidMapping.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 89: ./commerce-service/src/main/java/com/liferay/commerce/configuration/definition/CommerceShippingGroupServiceConfigurationBeanDeclaration.java expected:<...iorgi
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...iorgi
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 90: ./commerce-service/src/main/java/com/liferay/commerce/configuration/definition/CommerceShippingGroupServiceConfigurationPidMapping.java expected:<...iorgi
+     [echo]  */
+     [echo] @Component[(service = ConfigurationPidMapping.class)]
+     [echo] public class Commer...> but was:<...iorgi
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 91: ./commerce-service/src/main/java/com/liferay/commerce/internal/configuration/category/OrdersConfigurationCategory.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationCategory.class)]
+     [echo] public class Orders...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Orders...>
+     [echo] 92: ./commerce-service/src/main/java/com/liferay/commerce/internal/configuration/category/PaymentConfigurationCategory.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationCategory.class)]
+     [echo] public class Paymen...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Paymen...>
+     [echo] 93: ./commerce-service/src/main/java/com/liferay/commerce/internal/configuration/category/ShippingConfigurationCategory.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationCategory.class)]
+     [echo] public class Shippi...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Shippi...>
+     [echo] 94: ./commerce-service/src/main/java/com/liferay/commerce/internal/configuration/category/UsersConfigurationCategory.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationCategory.class)]
+     [echo] public class UsersC...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class UsersC...>
+     [echo] 95: ./commerce-service/src/main/java/com/liferay/commerce/internal/context/CommerceContextFactoryImpl.java expected:<...o Leo
+     [echo]  */
+     [echo] @Component[(service = CommerceContextFactory.class)]
+     [echo] public class Commer...> but was:<...o Leo
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 96: ./commerce-service/src/main/java/com/liferay/commerce/internal/messaging/CommerceMessagingConfigurator.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 97: ./commerce-service/src/main/java/com/liferay/commerce/internal/order/CommerceOrderHelperImpl.java expected:<...ent(immediate = true[, service = CommerceOrderHelper.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 98: ./commerce-service/src/main/java/com/liferay/commerce/internal/inventory/CPDefinitionInventoryEngineRegistryImpl.java expected:<...dina
+     [echo]  */
+     [echo] @Component([
+     [echo] 	immediate = true, service = CPDefinitionInventoryEngineRegistry.class
+     [echo] )
+     [echo] public class CPDefinitionInventoryEngineRegistryImpl
+     [echo] 	implements CPDefinitionInventoryEngineRegistry {
+     [echo]
+     [echo] 	@Override
+     [echo] 	public CPDefinitionInventoryEngine getCPDefinitionInventoryEngine(
+     [echo] 		CPDefinitionInventory cpDefinitionInventory) {
+     [echo]
+     [echo] 		if ((cpDefinitionInventory == null) ||
+     [echo] 			Validator.isNull(cpDefinitionInventory.
+     [echo] 				getCPDefinitionInventoryEngine())) {
+     [echo]
+     [echo] 			return getCPDefinitionInventoryEngine(
+     [echo] 				CPDefinitionInventoryEngineImpl.KEY);
+     [echo] 		}
+     [echo]
+     [echo] 		return getCPDefinitionInventoryEngine(
+     [echo] 			cpDefinitionInventory.getCPDefinitionInventoryEngine());
+     [echo] 	}
+     [echo]
+     [echo] 	@Override
+     [echo] 	public CPDefinitionInventoryEngine getCPDefinitionInventoryEngine(
+     [echo] 		String key) {
+     [echo]
+     [echo] 		if (Validator.isNull(key)) {
+     [echo] 			return null;
+     [echo] 		}
+     [echo]
+     [echo] 		ServiceTrackerCustomizerFactory.
+     [echo] 			ServiceWrapper<CPDefinitionInventoryEngine>
+     [echo] 				cpDefinitionInventoryEngineServiceWrapper =
+     [echo] 					_serviceTrackerMap.getService(key);
+     [echo]
+     [echo] 		if (cpDefinitionInventoryEngineServiceWrapper == null) {
+     [echo] 			if (_log.isDebugEnabled()) {
+     [echo] 				_log.debug(
+     [echo] 					"No commerce product definition inventory registered " +
+     [echo] 						"with key " + key);
+     [echo] 			}
+     [echo]
+     [echo] 			return null;
+     [echo] 		}
+     [echo]
+     [echo] 		return cpDefinitionInventoryEngineServiceWrapper.getService();
+     [echo] 	}
+     [echo]
+     [echo] 	@Override
+     [echo] 	public List<CPDefinitionInventoryEngine> getCPDefinitionInventoryEngines() {
+     [echo] 		List<CPDefinitionInventoryEngine> cpDefinitionInventoryEngines =
+     [echo] 			new ArrayList<>();
+     [echo]
+     [echo] 		List
+     [echo] 			<ServiceTrackerCustomizerFactory.
+     [echo] 				ServiceWrapper<CPDefinitionInventoryEngine>>
+     [echo] 					cpDefinitionInventoryEngineServiceWrappers =
+     [echo] 						ListUtil.fromCollection(_serviceTrackerMap.values());
+     [echo]
+     [echo] 		Collections.sort(
+     [echo] 			cpDefinitionInventoryEngineServiceWrappers,
+     [echo] 			_cpDefinitionInventoryEngineServiceWrapperPriorityComparator);
+     [echo]
+     [echo] 		for (ServiceTrackerCustomizerFactory.
+     [echo] 				ServiceWrapper<CPDefinitionInventoryEngine>
+     [echo] 					cpDefinitionInventoryEngineServiceWrapper :
+     [echo] 						cpDefinitionInventoryEngineServiceWrappers) {
+     [echo]
+     [echo] 			cpDefinitionInventoryEngines.add(
+     [echo] 				cpDefinitionInventoryEngineServiceWrapper.getService());
+     [echo] 		}
+     [echo]
+     [echo] 		return Collections.unmodifiableList(cpDefinitionInventoryEngines);
+     [echo] 	}
+     [echo]
+     [echo] 	@Activate
+     [echo] 	protected void activate(BundleContext bundleContext) {
+     [echo] 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
+     [echo] 			bundleContext, CPDefinitionInventoryEngine.class,
+     [echo] 			"cp.definition.inventory.engine.key",
+     [echo] 			ServiceTrackerCustomizerFactory.
+     [echo] 				<CPDefinitionInventoryEngine>serviceWrapper(bundleContext));
+     [echo] 	}
+     [echo]
+     [echo] 	@Deactivate
+     [echo] 	protected void deactivate() {
+     [echo] 		_serviceTrackerMap.close();
+     [echo] 	}
+     [echo]
+     [echo] 	private static final Log _log = LogFactoryUtil.getLog(
+     [echo] 		CPDefinitionInventoryEngineRegistryImpl.class);
+     [echo]
+     [echo] 	private static final Comparator
+     [echo] 		<ServiceTrackerCustomizerFactory.
+     [echo] 			ServiceWrapper<CPDefinitionInventoryEngine>>
+     [echo] 				_cpDefinitionInventoryEngineServiceWrapperPriorityComparator =
+     [echo] 					new CPDefinitionInventoryEngineServiceWrapperPriorityComparator();
+     [echo]
+     [echo] 	private ServiceTrackerMap
+     [echo] 		<String,
+     [echo] 		 ]ServiceTrackerCustom...> but was:<...dina
+     [echo]  */
+     [echo] @Component([immediate = true)
+     [echo] public class CPDefinitionInventoryEngineRegistryImpl
+     [echo] 	implements CPDefinitionInventoryEngineRegistry {
+     [echo]
+     [echo] 	@Override
+     [echo] 	public CPDefinitionInventoryEngine getCPDefinitionInventoryEngine(
+     [echo] 		CPDefinitionInventory cpDefinitionInventory) {
+     [echo]
+     [echo] 		if ((cpDefinitionInventory == null) ||
+     [echo] 			Validator.isNull(cpDefinitionInventory.
+     [echo] 				getCPDefinitionInventoryEngine())) {
+     [echo]
+     [echo] 			return getCPDefinitionInventoryEngine(
+     [echo] 				CPDefinitionInventoryEngineImpl.KEY);
+     [echo] 		}
+     [echo]
+     [echo] 		return getCPDefinitionInventoryEngine(
+     [echo] 			cpDefinitionInventory.getCPDefinitionInventoryEngine());
+     [echo] 	}
+     [echo]
+     [echo] 	@Override
+     [echo] 	public CPDefinitionInventoryEngine getCPDefinitionInventoryEngine(
+     [echo] 		String key) {
+     [echo]
+     [echo] 		if (Validator.isNull(key)) {
+     [echo] 			return null;
+     [echo] 		}
+     [echo]
+     [echo] 		ServiceTrackerCustomizerFactory.
+     [echo] 			ServiceWrapper<CPDefinitionInventoryEngine>
+     [echo] 				cpDefinitionInventoryEngineServiceWrapper =
+     [echo] 					_serviceTrackerMap.getService(key);
+     [echo]
+     [echo] 		if (cpDefinitionInventoryEngineServiceWrapper == null) {
+     [echo] 			if (_log.isDebugEnabled()) {
+     [echo] 				_log.debug(
+     [echo] 					"No commerce product definition inventory registered " +
+     [echo] 						"with key " + key);
+     [echo] 			}
+     [echo]
+     [echo] 			return null;
+     [echo] 		}
+     [echo]
+     [echo] 		return cpDefinitionInventoryEngineServiceWrapper.getService();
+     [echo] 	}
+     [echo]
+     [echo] 	@Override
+     [echo] 	public List<CPDefinitionInventoryEngine> getCPDefinitionInventoryEngines() {
+     [echo] 		List<CPDefinitionInventoryEngine> cpDefinitionInventoryEngines =
+     [echo] 			new ArrayList<>();
+     [echo]
+     [echo] 		List
+     [echo] 			<ServiceTrackerCustomizerFactory.
+     [echo] 				ServiceWrapper<CPDefinitionInventoryEngine>>
+     [echo] 					cpDefinitionInventoryEngineServiceWrappers =
+     [echo] 						ListUtil.fromCollection(_serviceTrackerMap.values());
+     [echo]
+     [echo] 		Collections.sort(
+     [echo] 			cpDefinitionInventoryEngineServiceWrappers,
+     [echo] 			_cpDefinitionInventoryEngineServiceWrapperPriorityComparator);
+     [echo]
+     [echo] 		for (ServiceTrackerCustomizerFactory.
+     [echo] 				ServiceWrapper<CPDefinitionInventoryEngine>
+     [echo] 					cpDefinitionInventoryEngineServiceWrapper :
+     [echo] 						cpDefinitionInventoryEngineServiceWrappers) {
+     [echo]
+     [echo] 			cpDefinitionInventoryEngines.add(
+     [echo] 				cpDefinitionInventoryEngineServiceWrapper.getService());
+     [echo] 		}
+     [echo]
+     [echo] 		return Collections.unmodifiableList(cpDefinitionInventoryEngines);
+     [echo] 	}
+     [echo]
+     [echo] 	@Activate
+     [echo] 	protected void activate(BundleContext bundleContext) {
+     [echo] 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
+     [echo] 			bundleContext, CPDefinitionInventoryEngine.class,
+     [echo] 			"cp.definition.inventory.engine.key",
+     [echo] 			ServiceTrackerCustomizerFactory.
+     [echo] 				<CPDefinitionInventoryEngine>serviceWrapper(bundleContext));
+     [echo] 	}
+     [echo]
+     [echo] 	@Deactivate
+     [echo] 	protected void deactivate() {
+     [echo] 		_serviceTrackerMap.close();
+     [echo] 	}
+     [echo]
+     [echo] 	private static final Log _log = LogFactoryUtil.getLog(
+     [echo] 		CPDefinitionInventoryEngineRegistryImpl.class);
+     [echo]
+     [echo] 	private static final Comparator
+     [echo] 		<ServiceTrackerCustomizerFactory.
+     [echo] 			ServiceWrapper<CPDefinitionInventoryEngine>>
+     [echo] 				_cpDefinitionInventoryEngineServiceWrapperPriorityComparator =
+     [echo] 					new CPDefinitionInventoryEngineServiceWrapperPriorityComparator();
+     [echo]
+     [echo] 	private ServiceTrackerMap
+     [echo] 		<String,
+     [echo] 		]ServiceTrackerCustom...>
+     [echo] 99: ./commerce-service/src/main/java/com/liferay/commerce/internal/order/CommerceOrderValidatorRegistryImpl.java expected:<...ent(immediate = true[, service = CommerceOrderValidatorRegistry.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 100: ./commerce-service/src/main/java/com/liferay/commerce/internal/price/CommerceOrderPriceCalculationImpl.java expected:<...o Leo
+     [echo]  */
+     [echo] @Component[(service = CommerceOrderPriceCalculation.class)]
+     [echo] public class Commer...> but was:<...o Leo
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 101: ./commerce-service/src/main/java/com/liferay/commerce/internal/order/CommerceOrderHttpHelperImpl.java expected:<...ent(immediate = true[, service = CommerceOrderHttpHelper.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 102: ./commerce-service/src/main/java/com/liferay/commerce/internal/price/CommerceProductPriceCalculationImpl.java expected:<...o Leo
+     [echo]  */
+     [echo] @Component[(service = CommerceProductPriceCalculation.class)]
+     [echo] public class Commer...> but was:<...o Leo
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 103: ./commerce-service/src/main/java/com/liferay/commerce/internal/security/permission/resource/CommerceOrderPortletResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 104: ./commerce-service/src/main/java/com/liferay/commerce/internal/security/permission/resource/CommerceOrderModelResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 105: ./commerce-service/src/main/java/com/liferay/commerce/internal/starter/CommerceRegionsStarterRegistryImpl.java expected:<...ent(immediate = true[, service = CommerceRegionsStarterRegistry.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 106: ./commerce-service/src/main/java/com/liferay/commerce/internal/starter/ItalyCommerceRegionsStarter.java expected:<...ALY_NUMERIC_ISO_CODE[,
+     [echo] 	service = CommerceRegionsStarter.class]
+     [echo] )
+     [echo] public class Ital...> but was:<...ALY_NUMERIC_ISO_CODE[]
+     [echo] )
+     [echo] public class Ital...>
+     [echo] 107: ./commerce-service/src/main/java/com/liferay/commerce/internal/starter/USACommerceRegionsStarter.java expected:<...USA_NUMERIC_ISO_CODE[,
+     [echo] 	service = CommerceRegionsStarter.class]
+     [echo] )
+     [echo] public class USAC...> but was:<...USA_NUMERIC_ISO_CODE[]
+     [echo] )
+     [echo] public class USAC...>
+     [echo] 108: ./commerce-service/src/main/java/com/liferay/commerce/internal/util/CommercePaymentEngineRegistryImpl.java expected:<...ent(immediate = true[, service = CommercePaymentEngineRegistry.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 109: ./commerce-service/src/main/java/com/liferay/commerce/internal/util/CommerceShippingEngineRegistryImpl.java expected:<...ent(immediate = true[, service = CommerceShippingEngineRegistry.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 110: ./commerce-service/src/main/java/com/liferay/commerce/internal/stock/activity/CommerceLowStockActivityRegistryImpl.java expected:<...ent(immediate = true[, service = CommerceLowStockActivityRegistry.class)
+     [echo] public class CommerceLowStockActivityRegistryImpl
+     [echo] 	implements CommerceLowStockActivityRegistry {
+     [echo]
+     [echo] 	@Override
+     [echo] 	public List<CommerceLowStockActivity> getCommerceLowStockActivities() {
+     [echo] 		List<CommerceLowStockActivity> commerceLowStockActivities =
+     [echo] 			new ArrayList<>();
+     [echo]
+     [echo] 		List
+     [echo] 			<ServiceTrackerCustomizerFactory.
+     [echo] 				ServiceWrapper<CommerceLowStockActivity>>
+     [echo] 					commerceLowStockActivityServiceWrappers =
+     [echo] 						ListUtil.fromCollection(_serviceTrackerMap.values());
+     [echo]
+     [echo] 		Collections.sort(
+     [echo] 			commerceLowStockActivityServiceWrappers,
+     [echo] 			_commerceLowStockActivityServiceWrapperPriorityComparator);
+     [echo]
+     [echo] 		for (ServiceTrackerCustomizerFactory.
+     [echo] 				ServiceWrapper<CommerceLowStockActivity>
+     [echo] 					commerceLowStockActivityServiceWrapper :
+     [echo] 						commerceLowStockActivityServiceWrappers) {
+     [echo]
+     [echo] 			commerceLowStockActivities.add(
+     [echo] 				commerceLowStockActivityServiceWrapper.getService());
+     [echo] 		}
+     [echo]
+     [echo] 		return Collections.unmodifiableList(commerceLowStockActivities);
+     [echo] 	}
+     [echo]
+     [echo] 	@Override
+     [echo] 	public CommerceLowStockActivity getCommerceLowStockActivity(
+     [echo] 		CPDefinitionInventory cpDefinitionInventory) {
+     [echo]
+     [echo] 		if (cpDefinitionInventory == null) {
+     [echo] 			return null;
+     [echo] 		}
+     [echo]
+     [echo] 		return getCommerceLowStockActivity(
+     [echo] 			cpDefinitionInventory.getLowStockActivity());
+     [echo] 	}
+     [echo]
+     [echo] 	@Override
+     [echo] 	public CommerceLowStockActivity getCommerceLowStockActivity(String key) {
+     [echo] 		if (Validator.isNull(key)) {
+     [echo] 			return null;
+     [echo] 		}
+     [echo]
+     [echo] 		ServiceTrackerCustomizerFactory.ServiceWrapper<CommerceLowStockActivity>
+     [echo] 			commerceLowStockActivityServiceWrapper =
+     [echo] 				_serviceTrackerMap.getService(key);
+     [echo]
+     [echo] 		if (commerceLowStockActivityServiceWrapper == null) {
+     [echo] 			if (_log.isDebugEnabled()) {
+     [echo] 				_log.debug(
+     [echo] 					"No commerce low stock activity registered with key " +
+     [echo] 						key);
+     [echo] 			}
+     [echo]
+     [echo] 			return null;
+     [echo] 		}
+     [echo]
+     [echo] 		return commerceLowStockActivityServiceWrapper.getService();
+     [echo] 	}
+     [echo]
+     [echo] 	@Activate
+     [echo] 	protected void activate(BundleContext bundleContext) {
+     [echo] 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
+     [echo] 			bundleContext, CommerceLowStockActivity.class,
+     [echo] 			"commerce.low.stock.activity.key",
+     [echo] 			ServiceTrackerCustomizerFactory.
+     [echo] 				<CommerceLowStockActivity>serviceWrapper(bundleContext));
+     [echo] 	}
+     [echo]
+     [echo] 	@Deactivate
+     [echo] 	protected void deactivate() {
+     [echo] 		_serviceTrackerMap.close();
+     [echo] 	}
+     [echo]
+     [echo] 	private static final Log _log = LogFactoryUtil.getLog(
+     [echo] 		CommerceLowStockActivityRegistryImpl.class);
+     [echo]
+     [echo] 	private static final Comparator
+     [echo] 		<ServiceTrackerCustomizerFactory.
+     [echo] 			ServiceWrapper<CommerceLowStockActivity>>
+     [echo] 				_commerceLowStockActivityServiceWrapperPriorityComparator =
+     [echo] 					new CommerceLowStockActivityServiceWrapperPriorityComparator();
+     [echo]
+     [echo] 	private ServiceTrackerMap
+     [echo] 		<String,
+     [echo] 		 ]ServiceTrackerCustom...> but was:<...ent(immediate = true[)
+     [echo] public class CommerceLowStockActivityRegistryImpl
+     [echo] 	implements CommerceLowStockActivityRegistry {
+     [echo]
+     [echo] 	@Override
+     [echo] 	public List<CommerceLowStockActivity> getCommerceLowStockActivities() {
+     [echo] 		List<CommerceLowStockActivity> commerceLowStockActivities =
+     [echo] 			new ArrayList<>();
+     [echo]
+     [echo] 		List
+     [echo] 			<ServiceTrackerCustomizerFactory.
+     [echo] 				ServiceWrapper<CommerceLowStockActivity>>
+     [echo] 					commerceLowStockActivityServiceWrappers =
+     [echo] 						ListUtil.fromCollection(_serviceTrackerMap.values());
+     [echo]
+     [echo] 		Collections.sort(
+     [echo] 			commerceLowStockActivityServiceWrappers,
+     [echo] 			_commerceLowStockActivityServiceWrapperPriorityComparator);
+     [echo]
+     [echo] 		for (ServiceTrackerCustomizerFactory.
+     [echo] 				ServiceWrapper<CommerceLowStockActivity>
+     [echo] 					commerceLowStockActivityServiceWrapper :
+     [echo] 						commerceLowStockActivityServiceWrappers) {
+     [echo]
+     [echo] 			commerceLowStockActivities.add(
+     [echo] 				commerceLowStockActivityServiceWrapper.getService());
+     [echo] 		}
+     [echo]
+     [echo] 		return Collections.unmodifiableList(commerceLowStockActivities);
+     [echo] 	}
+     [echo]
+     [echo] 	@Override
+     [echo] 	public CommerceLowStockActivity getCommerceLowStockActivity(
+     [echo] 		CPDefinitionInventory cpDefinitionInventory) {
+     [echo]
+     [echo] 		if (cpDefinitionInventory == null) {
+     [echo] 			return null;
+     [echo] 		}
+     [echo]
+     [echo] 		return getCommerceLowStockActivity(
+     [echo] 			cpDefinitionInventory.getLowStockActivity());
+     [echo] 	}
+     [echo]
+     [echo] 	@Override
+     [echo] 	public CommerceLowStockActivity getCommerceLowStockActivity(String key) {
+     [echo] 		if (Validator.isNull(key)) {
+     [echo] 			return null;
+     [echo] 		}
+     [echo]
+     [echo] 		ServiceTrackerCustomizerFactory.ServiceWrapper<CommerceLowStockActivity>
+     [echo] 			commerceLowStockActivityServiceWrapper =
+     [echo] 				_serviceTrackerMap.getService(key);
+     [echo]
+     [echo] 		if (commerceLowStockActivityServiceWrapper == null) {
+     [echo] 			if (_log.isDebugEnabled()) {
+     [echo] 				_log.debug(
+     [echo] 					"No commerce low stock activity registered with key " +
+     [echo] 						key);
+     [echo] 			}
+     [echo]
+     [echo] 			return null;
+     [echo] 		}
+     [echo]
+     [echo] 		return commerceLowStockActivityServiceWrapper.getService();
+     [echo] 	}
+     [echo]
+     [echo] 	@Activate
+     [echo] 	protected void activate(BundleContext bundleContext) {
+     [echo] 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
+     [echo] 			bundleContext, CommerceLowStockActivity.class,
+     [echo] 			"commerce.low.stock.activity.key",
+     [echo] 			ServiceTrackerCustomizerFactory.
+     [echo] 				<CommerceLowStockActivity>serviceWrapper(bundleContext));
+     [echo] 	}
+     [echo]
+     [echo] 	@Deactivate
+     [echo] 	protected void deactivate() {
+     [echo] 		_serviceTrackerMap.close();
+     [echo] 	}
+     [echo]
+     [echo] 	private static final Log _log = LogFactoryUtil.getLog(
+     [echo] 		CommerceLowStockActivityRegistryImpl.class);
+     [echo]
+     [echo] 	private static final Comparator
+     [echo] 		<ServiceTrackerCustomizerFactory.
+     [echo] 			ServiceWrapper<CommerceLowStockActivity>>
+     [echo] 				_commerceLowStockActivityServiceWrapperPriorityComparator =
+     [echo] 					new CommerceLowStockActivityServiceWrapperPriorityComparator();
+     [echo]
+     [echo] 	private ServiceTrackerMap
+     [echo] 		<String,
+     [echo] 		]ServiceTrackerCustom...>
+     [echo] 111: ./commerce-service/src/main/java/com/liferay/commerce/internal/util/CommerceTaxEngineRegistryImpl.java expected:<...ent(immediate = true[, service = CommerceTaxEngineRegistry.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 112: ./commerce-service/src/main/java/com/liferay/commerce/internal/util/CommerceShippingOriginLocatorRegistryImpl.java expected:<...orgi
+     [echo]  */
+     [echo] @Component([
+     [echo] 	immediate = true, service = CommerceShippingOriginLocatorRegistry.class
+     [echo] ])
+     [echo] public class Comme...> but was:<...orgi
+     [echo]  */
+     [echo] @Component([immediate = true])
+     [echo] public class Comme...>
+     [echo] 113: ./commerce-service/src/main/java/com/liferay/commerce/internal/util/CommerceShippingHelperImpl.java expected:<...ent(immediate = true[, service = CommerceShippingHelper.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 114: ./commerce-shipping-origin-locator-address/src/main/java/com/liferay/commerce/shipping/origin/locator/address/internal/configuration/definition/AddressCommerceShippingOriginLocatorGroupServiceConfigurationBeanDeclaration.java expected:<...iorgi
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class
+     [echo] 	Addre...> but was:<...iorgi
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class
+     [echo] 	Addre...>
+     [echo] 115: ./commerce-shipping-origin-locator-address/src/main/java/com/liferay/commerce/shipping/origin/locator/address/internal/configuration/definition/AddressCommerceShippingOriginLocatorGroupServiceConfigurationPidMapping.java expected:<...iorgi
+     [echo]  */
+     [echo] @Component[(service = ConfigurationPidMapping.class)]
+     [echo] public class
+     [echo] 	Addre...> but was:<...iorgi
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class
+     [echo] 	Addre...>
+     [echo] 116: ./commerce-shipping-web/src/main/java/com/liferay/commerce/shipping/web/admin/ShippingMethodsCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Ship...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Ship...>
+     [echo] 117: ./commerce-shipping-web/src/main/java/com/liferay/commerce/shipping/web/internal/admin/ShippingSettingsCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Ship...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Ship...>
+     [echo] 118: ./commerce-taglib/src/main/java/com/liferay/commerce/taglib/servlet/taglib/internal/servlet/ServletContextUtil.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Servl...> but was:<...ent(immediate = true[])
+     [echo] public class Servl...>
+     [echo] 119: ./commerce-tax-web/src/main/java/com/liferay/commerce/tax/web/internal/admin/TaxesCommerceAdminModule.java expected:<...RCE_ADMIN_MODULE_KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Taxe...> but was:<...RCE_ADMIN_MODULE_KEY[]
+     [echo] )
+     [echo] public class Taxe...>
+     [echo] 120: ./commerce-user-segment-item-selector-web/src/main/java/com/liferay/commerce/user/segment/item/selector/web/internal/CommerceUserSegmentEntryItemSelectorView.java expected:<...ent(immediate = true[, service = ItemSelectorView.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 121: ./commerce-user-segment-service/src/main/java/com/liferay/commerce/user/segment/internal/criterion/CommerceUserSegmentCriterionTypeRegistryImpl.java expected:<...dina
+     [echo]  */
+     [echo] @Component([
+     [echo] 	immediate = true, service = CommerceUserSegmentCriterionTypeRegistry.class
+     [echo] ])
+     [echo] public class Comme...> but was:<...dina
+     [echo]  */
+     [echo] @Component([immediate = true])
+     [echo] public class Comme...>
+     [echo] 122: ./commerce-user-segment-service/src/main/java/com/liferay/commerce/user/segment/internal/security/permission/resource/CommerceUserSegmentPortletResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 123: ./commerce-user-segment-service/src/main/java/com/liferay/commerce/user/segment/internal/security/permission/resource/CommerceUserSegmentEntryModelResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 124: ./commerce-user-segment-service/src/main/java/com/liferay/commerce/user/segment/internal/util/CommerceUserSegmentHelperImpl.java expected:<...o Leo
+     [echo]  */
+     [echo] @Component[(service = CommerceUserSegmentHelper.class)]
+     [echo] public class Commer...> but was:<...o Leo
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 125: ./commerce-user-segment-web/src/main/java/com/liferay/commerce/user/segment/web/internal/criterion/OrganizationCommerceUserSegmentCriterionTypeJSPContributor.java expected:<...ts.TYPE_ORGANIZATION[,
+     [echo] 	service = CommerceUserSegmentCriterionTypeJSPContributor.class]
+     [echo] )
+     [echo] public class Orga...> but was:<...ts.TYPE_ORGANIZATION[]
+     [echo] )
+     [echo] public class Orga...>
+     [echo] 126: ./commerce-user-segment-web/src/main/java/com/liferay/commerce/user/segment/web/internal/criterion/UserCommerceUserSegmentCriterionTypeJSPContributor.java expected:<...nConstants.TYPE_USER[,
+     [echo] 	service = CommerceUserSegmentCriterionTypeJSPContributor.class]
+     [echo] )
+     [echo] public class User...> but was:<...nConstants.TYPE_USER[]
+     [echo] )
+     [echo] public class User...>
+     [echo] 127: ./commerce-user-segment-web/src/main/java/com/liferay/commerce/user/segment/web/internal/criterion/RoleCommerceUserSegmentCriterionTypeJSPContributor.java expected:<...nConstants.TYPE_ROLE[,
+     [echo] 	service = CommerceUserSegmentCriterionTypeJSPContributor.class]
+     [echo] )
+     [echo] public class Role...> but was:<...nConstants.TYPE_ROLE[]
+     [echo] )
+     [echo] public class Role...>
+     [echo] 128: ./commerce-user-segment-web/src/main/java/com/liferay/commerce/user/segment/web/internal/criterion/UserGroupCommerceUserSegmentCriterionTypeJSPContributor.java expected:<...ants.TYPE_USER_GROUP[,
+     [echo] 	service = CommerceUserSegmentCriterionTypeJSPContributor.class]
+     [echo] )
+     [echo] public class User...> but was:<...ants.TYPE_USER_GROUP[]
+     [echo] )
+     [echo] public class User...>
+     [echo] 129: ./commerce-user-service/src/main/java/com/liferay/commerce/user/internal/util/CommerceRoleRegistryImpl.java expected:<...ent(immediate = true[, service = CommerceRoleRegistry.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 130: ./commerce-user-web/src/main/java/com/liferay/commerce/user/web/internal/configuration/definition/CommerceRoleGroupServiceConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 131: ./commerce-user-web/src/main/java/com/liferay/commerce/user/web/internal/util/CommerceRoleImpl.java expected:<...",
+     [echo] 	immediate = true[, service = CommerceRole.class]
+     [echo] )
+     [echo] public class Comm...> but was:<...",
+     [echo] 	immediate = true[]
+     [echo] )
+     [echo] public class Comm...>
+     [echo] 132: ./commerce-warehouse-web/src/main/java/com/liferay/commerce/warehouse/web/internal/admin/WarehousesCommerceAdminModule.java expected:<...merceAdminModule.KEY[,
+     [echo] 	service = CommerceAdminModule.class]
+     [echo] )
+     [echo] public class Ware...> but was:<...merceAdminModule.KEY[]
+     [echo] )
+     [echo] public class Ware...>
+     [echo] 133: ./commerce-wish-list-service/src/main/java/com/liferay/commerce/wish/list/internal/configuration/category/WishListsConfigurationCategory.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationCategory.class)]
+     [echo] public class WishLi...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class WishLi...>
+     [echo] 134: ./commerce-wish-list-service/src/main/java/com/liferay/commerce/wish/list/internal/configuration/definition/CommerceWishListConfigurationBeanDeclaration.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationBeanDeclaration.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 135: ./commerce-wish-list-service/src/main/java/com/liferay/commerce/wish/list/internal/configuration/definition/CommerceWishListConfigurationPidMapping.java expected:<...ndina
+     [echo]  */
+     [echo] @Component[(service = ConfigurationPidMapping.class)]
+     [echo] public class Commer...> but was:<...ndina
+     [echo]  */
+     [echo] @Component[]
+     [echo] public class Commer...>
+     [echo] 136: ./commerce-wish-list-service/src/main/java/com/liferay/commerce/wish/list/internal/security/permission/resource/CommerceWishListModelResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 137: ./commerce-wish-list-service/src/main/java/com/liferay/commerce/wish/list/internal/security/permission/resource/CommerceWishListPortletResourcePermissionRegistrar.java expected:<...ent(immediate = true[, service = {}])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>
+     [echo] 138: ./commerce-wish-list-service/src/main/java/com/liferay/commerce/wish/list/internal/util/CommerceWishListHttpHelperImpl.java expected:<...ent(immediate = true[, service = CommerceWishListHttpHelper.class])
+     [echo] public class Comme...> but was:<...ent(immediate = true[])
+     [echo] public class Comme...>

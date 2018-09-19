@@ -34,7 +34,10 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true)
+@Component(
+	immediate = true,
+	service = CommerceVirtualOrderItemPortletResourcePermissionRegistrar.class
+)
 public class CommerceVirtualOrderItemPortletResourcePermissionRegistrar {
 
 	@Activate
