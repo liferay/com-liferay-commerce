@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.commerce.product.content.web.internal.display.context;
+package com.liferay.commerce.product.subscription.web.internal.display.context;
 
-import com.liferay.commerce.product.content.util.CPSubscriptionContentHelper;
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
-import com.liferay.commerce.product.util.comparator.CPSubscriptionEntryCreateDateComparator;
+import com.liferay.commerce.service.CPSubscriptionEntryService;
+import com.liferay.commerce.util.comparator.CPSubscriptionEntryCreateDateComparator;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -49,13 +49,13 @@ public class CPSubscriptionContentDisplayContext {
 	public CPSubscriptionContentDisplayContext(
 			CPDefinitionHelper cpDefinitionHelper,
 			CPInstanceHelper cpInstanceHelper,
-			CPSubscriptionContentHelper cpSubscriptionContentHelper,
+			CPSubscriptionEntryService cpSubscriptionEntryService,
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpInstanceHelper = cpInstanceHelper;
-		_cpSubscriptionContentHelper = cpSubscriptionContentHelper;
+		_cpSubscriptionEntryService = cpSubscriptionEntryService;
 
 		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
 	}
@@ -151,11 +151,11 @@ public class CPSubscriptionContentDisplayContext {
 		OrderByComparator<CPSubscriptionEntry> orderByComparator =
 			new CPSubscriptionEntryCreateDateComparator();
 
-		int total = _cpSubscriptionContentHelper.getCPSubscriptionEntriesCount(
+		int total = _cpSubscriptionEntryService.getCPSubscriptionEntriesCount(
 			_cpRequestHelper.getScopeGroupId(), _cpRequestHelper.getUserId());
 
 		List<CPSubscriptionEntry> results =
-			_cpSubscriptionContentHelper.getCPSubscriptionEntries(
+			_cpSubscriptionEntryService.getCPSubscriptionEntries(
 				_cpRequestHelper.getScopeGroupId(),
 				_cpRequestHelper.getUserId(), _searchContainer.getStart(),
 				_searchContainer.getEnd(), orderByComparator);
@@ -169,7 +169,7 @@ public class CPSubscriptionContentDisplayContext {
 	private final CPDefinitionHelper _cpDefinitionHelper;
 	private final CPInstanceHelper _cpInstanceHelper;
 	private final CPRequestHelper _cpRequestHelper;
-	private final CPSubscriptionContentHelper _cpSubscriptionContentHelper;
+	private final CPSubscriptionEntryService _cpSubscriptionEntryService;
 	private SearchContainer<CPSubscriptionEntry> _searchContainer;
 
 }

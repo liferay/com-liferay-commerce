@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.product.content.web.internal.portlet.action;
+package com.liferay.commerce.product.subscription.web.internal.portlet.action;
 
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.service.CPSubscriptionEntryLocalService;
+import com.liferay.commerce.service.CPSubscriptionEntryLocalService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;

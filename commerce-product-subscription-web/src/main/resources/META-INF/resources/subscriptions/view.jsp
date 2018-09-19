@@ -30,7 +30,7 @@ SearchContainer<CPSubscriptionEntry> cpSubscriptionEntrySearchContainer = cpSubs
 			searchContainer="<%= cpSubscriptionEntrySearchContainer %>"
 		>
 			<liferay-ui:search-container-row
-				className="com.liferay.commerce.product.model.CPSubscriptionEntry"
+				className="com.liferay.commerce.model.CPSubscriptionEntry"
 				cssClass="entry-display-style"
 				keyProperty="CPSubscriptionEntryId"
 				modelVar="cpSubscriptionEntry"

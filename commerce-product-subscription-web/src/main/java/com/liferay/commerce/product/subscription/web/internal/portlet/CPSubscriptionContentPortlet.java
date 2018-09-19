@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.product.content.web.internal.portlet;
+package com.liferay.commerce.product.subscription.web.internal.portlet;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.content.util.CPSubscriptionContentHelper;
-import com.liferay.commerce.product.content.web.internal.display.context.CPSubscriptionContentDisplayContext;
+import com.liferay.commerce.product.subscription.web.internal.display.context.CPSubscriptionContentDisplayContext;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.commerce.service.CPSubscriptionEntryService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -78,7 +78,7 @@ public class CPSubscriptionContentPortlet extends MVCPortlet {
 				cpSubscriptionContentDisplayContext =
 					new CPSubscriptionContentDisplayContext(
 						_cpDefinitionHelper, _cpInstanceHelper,
-						_cpSubscriptionContentHelper, httpServletRequest);
+						_cpSubscriptionEntryService, httpServletRequest);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -101,7 +101,7 @@ public class CPSubscriptionContentPortlet extends MVCPortlet {
 	private CPInstanceHelper _cpInstanceHelper;
 
 	@Reference
-	private CPSubscriptionContentHelper _cpSubscriptionContentHelper;
+	private CPSubscriptionEntryService _cpSubscriptionEntryService;
 
 	@Reference
 	private Portal _portal;
