@@ -15,7 +15,8 @@
 package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
-import com.liferay.commerce.product.definitions.web.internal.display.context.CPInstanceSubscriptionInfoDisplayContext;
+import com.liferay.commerce.product.constants.CPConstants;
+import com.liferay.commerce.product.definitions.web.internal.display.context.CPInstanceDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -34,6 +35,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -115,16 +117,15 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 		throws IOException {
 
 		try {
-			CPInstanceSubscriptionInfoDisplayContext
-				cpInstanceSubscriptionInfoDisplayContext =
-					new CPInstanceSubscriptionInfoDisplayContext(
-						_actionHelper, httpServletRequest,
-						_commercePriceFormatter, _cpDefinitionOptionRelService,
-						_cpInstanceService, _cpInstanceHelper);
+			CPInstanceDisplayContext cpInstanceDisplayContext =
+				new CPInstanceDisplayContext(
+					_actionHelper, httpServletRequest, _commercePriceFormatter,
+					_cpDefinitionModelResourcePermission,
+					_cpDefinitionOptionRelService, _cpInstanceService,
+					_cpInstanceHelper, _portletResourcePermission);
 
 			httpServletRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				cpInstanceSubscriptionInfoDisplayContext);
+				WebKeys.PORTLET_DISPLAY_CONTEXT, cpInstanceDisplayContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -161,6 +162,9 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.product.definitions.web)"

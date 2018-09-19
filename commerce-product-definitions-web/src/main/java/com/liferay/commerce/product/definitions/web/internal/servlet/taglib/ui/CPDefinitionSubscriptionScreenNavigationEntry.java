@@ -14,7 +14,8 @@
 
 package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionSubscriptionInfoDisplayContext;
+import com.liferay.commerce.product.constants.CPConstants;
+import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionsDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -32,6 +33,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -105,15 +107,14 @@ public class CPDefinitionSubscriptionScreenNavigationEntry
 		throws IOException {
 
 		try {
-			CPDefinitionSubscriptionInfoDisplayContext
-				cpDefinitionSubscriptionInfoDisplayContext =
-					new CPDefinitionSubscriptionInfoDisplayContext(
-						_actionHelper, httpServletRequest, _cpDefinitionHelper,
-						_cpDefinitionService, _itemSelector);
+			CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
+				new CPDefinitionsDisplayContext(
+					_actionHelper, httpServletRequest, _cpDefinitionHelper,
+					_cpDefinitionModelResourcePermission, _cpDefinitionService,
+					_itemSelector, _portletResourcePermission);
 
 			httpServletRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				cpDefinitionSubscriptionInfoDisplayContext);
+				WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -147,6 +148,9 @@ public class CPDefinitionSubscriptionScreenNavigationEntry
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.product.definitions.web)"

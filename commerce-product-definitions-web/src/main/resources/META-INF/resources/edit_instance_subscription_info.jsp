@@ -17,19 +17,19 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPInstanceSubscriptionInfoDisplayContext cpInstanceSubscriptionInfoDisplayContext = (CPInstanceSubscriptionInfoDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CPInstanceDisplayContext cpInstanceDisplayContext = (CPInstanceDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CPDefinition cpDefinition = cpInstanceSubscriptionInfoDisplayContext.getCPDefinition();
+CPDefinition cpDefinition = cpInstanceDisplayContext.getCPDefinition();
 
-CPInstance cpInstance = cpInstanceSubscriptionInfoDisplayContext.getCPInstance();
+CPInstance cpInstance = cpInstanceDisplayContext.getCPInstance();
 
-long cpInstanceId = cpInstanceSubscriptionInfoDisplayContext.getCPInstanceId();
+long cpInstanceId = cpInstanceDisplayContext.getCPInstanceId();
 
 PortletURL productSkusURL = renderResponse.createRenderURL();
 
 productSkusURL.setParameter("mvcRenderCommandName", "editProductDefinition");
 productSkusURL.setParameter("cpDefinitionId", String.valueOf(cpDefinition.getCPDefinitionId()));
-productSkusURL.setParameter("screenNavigationCategoryKey", cpInstanceSubscriptionInfoDisplayContext.getScreenNavigationCategoryKey());
+productSkusURL.setParameter("screenNavigationCategoryKey", cpInstanceDisplayContext.getScreenNavigationCategoryKey());
 
 boolean subscriptionEnabled = BeanParamUtil.getBoolean(cpInstance, request, "subscriptionEnabled", false);
 long subscriptionCycleLength = BeanParamUtil.getLong(cpInstance, request, "subscriptionCycleLength");
@@ -56,10 +56,10 @@ long maxSubscriptionCyclesNumber = BeanParamUtil.getLong(cpInstance, request, "m
 				<aui:select label="subscription-cycle-period" name="subscriptionCyclePeriod" showEmptyOption="<%= true %>">
 
 					<%
-					for (String subscriptionPeriod : cpInstanceSubscriptionInfoDisplayContext.getSubscriptionCyclePeriods()) {
+					for (String subscriptionPeriod : CPConstants.SUBSCRIPTION_CYCLES) {
 					%>
 
-						<aui:option label="<%= subscriptionPeriod %>" selected="" value="<%= subscriptionPeriod %>" />
+						<aui:option label="<%= subscriptionPeriod %>" selected="<%= subscriptionPeriod.equals(subscriptionCyclePeriod) %>" value="<%= subscriptionPeriod %>" />
 
 					<%
 					}

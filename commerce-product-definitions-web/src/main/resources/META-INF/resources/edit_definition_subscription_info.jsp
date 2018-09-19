@@ -17,11 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPDefinitionSubscriptionInfoDisplayContext cpDefinitionSubscriptionInfoDisplayContext = (CPDefinitionSubscriptionInfoDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CPDefinition cpDefinition = cpDefinitionSubscriptionInfoDisplayContext.getCPDefinition();
+CPDefinition cpDefinition = cpDefinitionsDisplayContext.getCPDefinition();
 
-long cpDefinitionId = cpDefinitionSubscriptionInfoDisplayContext.getCPDefinitionId();
+long cpDefinitionId = cpDefinitionsDisplayContext.getCPDefinitionId();
 
 boolean subscriptionEnabled = BeanParamUtil.getBoolean(cpDefinition, request, "subscriptionEnabled", false);
 long subscriptionCycleLength = BeanParamUtil.getLong(cpDefinition, request, "subscriptionCycleLength");
@@ -48,10 +48,10 @@ long maxSubscriptionCyclesNumber = BeanParamUtil.getLong(cpDefinition, request, 
 				<aui:select label="subscription-cycle-period" name="subscriptionCyclePeriod" showEmptyOption="<%= true %>">
 
 					<%
-					for (String subscriptionPeriod : cpDefinitionSubscriptionInfoDisplayContext.getSubscriptionCyclePeriods()) {
+					for (String subscriptionPeriod : CPConstants.SUBSCRIPTION_CYCLES) {
 					%>
 
-						<aui:option label="<%= subscriptionPeriod %>" selected="" value="<%= subscriptionPeriod %>" />
+						<aui:option label="<%= subscriptionPeriod %>" selected="<%= subscriptionPeriod.equals(subscriptionCyclePeriod) %>" value="<%= subscriptionPeriod %>" />
 
 					<%
 					}
