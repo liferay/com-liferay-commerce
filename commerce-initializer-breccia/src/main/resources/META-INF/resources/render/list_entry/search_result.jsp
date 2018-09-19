@@ -61,6 +61,14 @@ String quantityInputId = renderResponse.getNamespace() + cpDefinitionId + "Quant
 					</span>
 				</div>
 
+				<c:if test="<%= cpSku != null %>">
+					<div class="product-subscription-info">
+						<span class="commerce-subscription-info">
+							<liferay-commerce:subscription-info CPInstanceId="<%= cpSku.getCPInstanceId() %>" />
+						</span>
+					</div>
+				</c:if>
+
 				<c:if test="<%= cpCatalogEntry.isIgnoreSKUCombinations() %>">
 					<div class="autofit-row">
 						<div class="autofit-col">

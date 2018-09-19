@@ -11,8 +11,6 @@
 
 	defaultImage = (simpleCPTypeDisplayContext.getDefaultImage())!""
 
-	brandName = ""
-
 	gtin = ""
 
 	modelNumber = ""
@@ -42,12 +40,6 @@
 		<div class="commerce-component-header product-detail-header">
 			<h2 class="component-title">${cpDefinition.getName()}</h2>
 			<div class="autofit-float autofit-padded-no-gutters autofit-row autofit-row-center product-detail-subheader">
-				<#if brandName?has_content>
-					<div class="autofit-col">
-						<div class="commerce-brand-name">${brandName}</div>
-					</div>
-				</#if>
-
 				<div class="autofit-col">
 					<div class="commerce-model-number">
 						Model #<span data-text-cp-instance-manufacturer-part-number>${modelNumber}</span>
