@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.product.service.impl;
+package com.liferay.commerce.service.impl;
 
-import com.liferay.commerce.product.service.base.CPSubscriptionCycleEntryServiceBaseImpl;
+import com.liferay.commerce.service.base.CPSubscriptionCycleEntryServiceBaseImpl;
 
 /**
  * @author Alessio Antonio Rendina

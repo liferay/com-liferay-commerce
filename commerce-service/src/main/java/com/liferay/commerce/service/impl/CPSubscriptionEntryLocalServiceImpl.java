@@ -12,15 +12,16 @@
  * details.
  */
 
-package com.liferay.commerce.product.service.impl;
+package com.liferay.commerce.service.impl;
 
-import com.liferay.commerce.product.exception.CPSubscriptionCPInstanceIdException;
+import com.liferay.commerce.exception.CPSubscriptionCPInstanceIdException;
+import com.liferay.commerce.internal.search.CPSubscriptionEntryIndexer;
+import com.liferay.commerce.internal.util.CPSubscriptionUtil;
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.search.CPSubscriptionEntryIndexer;
-import com.liferay.commerce.product.service.base.CPSubscriptionEntryLocalServiceBaseImpl;
-import com.liferay.commerce.product.util.CPSubscriptionUtil;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.service.base.CPSubscriptionEntryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -39,6 +40,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
@@ -69,30 +71,32 @@ public class CPSubscriptionEntryLocalServiceImpl
 		String subscriptionCyclePeriod;
 		long maxSubscriptionCyclesNumber;
 
-		CPInstance cpInstance = cpInstanceLocalService.getCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
-		if (!cpInstance.isSubscriptionEnabled()) {
-			CPDefinition cpDefinition = cpInstance.getCPDefinition();
-
-			if (!cpDefinition.isSubscriptionEnabled()) {
-				throw new CPSubscriptionCPInstanceIdException();
-			}
-			else {
-				subscriptionCycleLength =
-					cpDefinition.getSubscriptionCycleLength();
-				subscriptionCyclePeriod =
-					cpDefinition.getSubscriptionCyclePeriod();
-				maxSubscriptionCyclesNumber =
-					cpDefinition.getMaxSubscriptionCyclesNumber();
-			}
-		}
-		else {
+		if (cpInstance.isSubscriptionEnabled()) {
 			subscriptionCycleLength = cpInstance.getSubscriptionCycleLength();
 			subscriptionCyclePeriod = cpInstance.getSubscriptionCyclePeriod();
 			maxSubscriptionCyclesNumber =
 				cpInstance.getMaxSubscriptionCyclesNumber();
 		}
+		else {
+			CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+			if (!cpDefinition.isSubscriptionEnabled()) {
+				throw new CPSubscriptionCPInstanceIdException();
+			}
+
+			subscriptionCycleLength = cpDefinition.getSubscriptionCycleLength();
+			subscriptionCyclePeriod = cpDefinition.getSubscriptionCyclePeriod();
+			maxSubscriptionCyclesNumber =
+				cpDefinition.getMaxSubscriptionCyclesNumber();
+		}
+
+		Date subscriptionNextIterationDate =
+			CPSubscriptionUtil.getSubscriptionNextIterationDate(
+				user.getTimeZone(), subscriptionCycleLength,
+				subscriptionCyclePeriod);
 
 		long cpSubscriptionEntryId = counterLocalService.increment();
 
@@ -104,19 +108,12 @@ public class CPSubscriptionEntryLocalServiceImpl
 		cpSubscriptionEntry.setCompanyId(user.getCompanyId());
 		cpSubscriptionEntry.setUserId(user.getUserId());
 		cpSubscriptionEntry.setUserName(user.getFullName());
-		cpSubscriptionEntry.setCPInstanceId(cpInstanceId);
 		cpSubscriptionEntry.setCommerceOrderItemId(commerceOrderItemId);
 		cpSubscriptionEntry.setSubscriptionCycleLength(subscriptionCycleLength);
 		cpSubscriptionEntry.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
 		cpSubscriptionEntry.setMaxSubscriptionCyclesNumber(
 			maxSubscriptionCyclesNumber);
 		cpSubscriptionEntry.setActive(true);
-
-		Date subscriptionNextIterationDate =
-			CPSubscriptionUtil.getSubscriptionNextIterationDate(
-				user.getUserId(), subscriptionCycleLength,
-				subscriptionCyclePeriod);
-
 		cpSubscriptionEntry.setNextIterationDate(subscriptionNextIterationDate);
 
 		cpSubscriptionEntryPersistence.update(cpSubscriptionEntry);
@@ -311,5 +308,8 @@ public class CPSubscriptionEntryLocalServiceImpl
 
 	private static final String[] _SELECTED_FIELD_NAMES =
 		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
+
+	@ServiceReference(type = CPInstanceLocalService.class)
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 }

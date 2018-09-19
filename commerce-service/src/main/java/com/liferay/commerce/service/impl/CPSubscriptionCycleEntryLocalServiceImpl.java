@@ -12,15 +12,18 @@
  * details.
  */
 
-package com.liferay.commerce.product.service.impl;
+package com.liferay.commerce.service.impl;
 
-import com.liferay.commerce.product.model.CPSubscriptionCycleEntry;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.service.base.CPSubscriptionCycleEntryLocalServiceBaseImpl;
+import com.liferay.commerce.internal.notification.type.SubscriptionRenewedCommerceNotificationTypeImpl;
+import com.liferay.commerce.model.CPSubscriptionCycleEntry;
+import com.liferay.commerce.model.CPSubscriptionEntry;
+import com.liferay.commerce.notification.util.CommerceNotificationHelper;
+import com.liferay.commerce.service.base.CPSubscriptionCycleEntryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.List;
 
@@ -57,7 +60,14 @@ public class CPSubscriptionCycleEntryLocalServiceImpl
 
 		cpSubscriptionCycleEntryPersistence.update(cpSubscriptionCycleEntry);
 
-		// reindex CPSubscriptionEntry
+		// Send commerce notifications
+
+		_commerceNotificationHelper.sendNotifications(
+			cpSubscriptionCycleEntry.getGroupId(),
+			SubscriptionRenewedCommerceNotificationTypeImpl.KEY,
+			cpSubscriptionCycleEntry);
+
+		// Commerce product subscription entry
 
 		reindexCPSubscriptionEntry(cpSubscriptionEntryId);
 
@@ -97,5 +107,8 @@ public class CPSubscriptionCycleEntryLocalServiceImpl
 		indexer.reindex(
 			CPSubscriptionEntry.class.getName(), cpSubscriptionEntryId);
 	}
+
+	@ServiceReference(type = CommerceNotificationHelper.class)
+	private CommerceNotificationHelper _commerceNotificationHelper;
 
 }

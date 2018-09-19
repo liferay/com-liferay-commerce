@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.product.search;
+package com.liferay.commerce.internal.search;
 
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.service.CPSubscriptionEntryLocalService;
+import com.liferay.commerce.service.CPSubscriptionEntryLocalService;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;

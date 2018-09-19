@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.product.service.persistence.impl;
+package com.liferay.commerce.service.persistence.impl;
 
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.model.impl.CPSubscriptionEntryImpl;
-import com.liferay.commerce.product.service.persistence.CPSubscriptionEntryFinder;
+import com.liferay.commerce.model.CPSubscriptionEntry;
+import com.liferay.commerce.model.impl.CPSubscriptionEntryImpl;
+import com.liferay.commerce.service.persistence.CPSubscriptionEntryFinder;
 import com.liferay.portal.dao.orm.custom.sql.CustomSQL;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;

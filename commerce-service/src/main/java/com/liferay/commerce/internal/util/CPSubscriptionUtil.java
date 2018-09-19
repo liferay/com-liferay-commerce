@@ -12,12 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.product.util;
+package com.liferay.commerce.internal.util;
 
 import com.liferay.commerce.product.constants.CPConstants;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -30,8 +27,8 @@ import java.util.TimeZone;
 public class CPSubscriptionUtil {
 
 	public static Date getSubscriptionNextIterationDate(
-			TimeZone timeZone, long subscriptionCycleLength,
-			String subscriptionCyclePeriod) {
+		TimeZone timeZone, long subscriptionCycleLength,
+		String subscriptionCyclePeriod) {
 
 		GregorianCalendar gregorianCalendar = new GregorianCalendar(timeZone);
 
@@ -47,21 +44,21 @@ public class CPSubscriptionUtil {
 			return gregorianCalendar.getTime();
 		}
 		else if (subscriptionCyclePeriod.equals(
-					 CPConstants.SUBSCRIPTION_CYCLE_WEEK)) {
+					CPConstants.SUBSCRIPTION_CYCLE_WEEK)) {
 
-			gregorianCalendar.add(Calendar.WEEK_OF_MONTH, amount);
+			gregorianCalendar.add(Calendar.WEEK_OF_YEAR, amount);
 
 			return gregorianCalendar.getTime();
 		}
 		else if (subscriptionCyclePeriod.equals(
-					 CPConstants.SUBSCRIPTION_CYCLE_MONTH)) {
+					CPConstants.SUBSCRIPTION_CYCLE_MONTH)) {
 
 			gregorianCalendar.add(Calendar.MONTH, amount);
 
 			return gregorianCalendar.getTime();
 		}
 		else if (subscriptionCyclePeriod.equals(
-					 CPConstants.SUBSCRIPTION_CYCLE_YEAR)) {
+					CPConstants.SUBSCRIPTION_CYCLE_YEAR)) {
 
 			gregorianCalendar.add(Calendar.YEAR, amount);
 

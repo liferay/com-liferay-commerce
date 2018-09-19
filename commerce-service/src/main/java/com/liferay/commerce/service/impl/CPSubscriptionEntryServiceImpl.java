@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.commerce.product.service.impl;
+package com.liferay.commerce.service.impl;
 
-import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.service.base.CPSubscriptionEntryServiceBaseImpl;
+import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.model.CPSubscriptionEntry;
+import com.liferay.commerce.service.base.CPSubscriptionEntryServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
@@ -43,7 +43,7 @@ public class CPSubscriptionEntryServiceImpl
 
 		_portletResourcePermission.check(
 			getPermissionChecker(), cpSubscriptionEntry.getGroupId(),
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SUBSCRIPTIONS);
+			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
 
 		cpSubscriptionEntryLocalService.deleteCPSubscriptionEntry(
 			cpSubscriptionEntryId);
@@ -61,7 +61,7 @@ public class CPSubscriptionEntryServiceImpl
 		if (cpSubscriptionEntry != null) {
 			_portletResourcePermission.check(
 				getPermissionChecker(), cpSubscriptionEntry.getGroupId(),
-				CPActionKeys.MANAGE_COMMERCE_PRODUCT_SUBSCRIPTIONS);
+				CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
 		}
 
 		return cpSubscriptionEntry;
@@ -73,10 +73,6 @@ public class CPSubscriptionEntryServiceImpl
 			OrderByComparator<CPSubscriptionEntry> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SUBSCRIPTIONS);
-
 		return cpSubscriptionEntryLocalService.getCPSubscriptionEntries(
 			groupId, userId, start, end, orderByComparator);
 	}
@@ -84,10 +80,6 @@ public class CPSubscriptionEntryServiceImpl
 	@Override
 	public int getCPSubscriptionEntriesCount(long groupId, long userId)
 		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SUBSCRIPTIONS);
 
 		return cpSubscriptionEntryLocalService.getCPSubscriptionEntriesCount(
 			groupId, userId);
@@ -102,7 +94,7 @@ public class CPSubscriptionEntryServiceImpl
 
 		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SUBSCRIPTIONS);
+			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
 
 		return cpSubscriptionEntryLocalService.searchCPSubscriptionEntries(
 			companyId, groupId, active, keywords, start, end, sort);
@@ -119,7 +111,7 @@ public class CPSubscriptionEntryServiceImpl
 
 		_portletResourcePermission.check(
 			getPermissionChecker(), cpSubscriptionEntry.getGroupId(),
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SUBSCRIPTIONS);
+			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
 
 		return cpSubscriptionEntryLocalService.setActive(
 			cpSubscriptionEntryId, active);
@@ -138,7 +130,7 @@ public class CPSubscriptionEntryServiceImpl
 
 		_portletResourcePermission.check(
 			getPermissionChecker(), cpSubscriptionEntry.getGroupId(),
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SUBSCRIPTIONS);
+			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
 
 		return cpSubscriptionEntryLocalService.updateCPSubscriptionEntry(
 			cpSubscriptionEntryId, subscriptionCycleLength,
@@ -149,6 +141,6 @@ public class CPSubscriptionEntryServiceImpl
 		_portletResourcePermission =
 			PortletResourcePermissionFactory.getInstance(
 				CPSubscriptionEntryServiceImpl.class,
-				"_portletResourcePermission", CPConstants.RESOURCE_NAME);
+				"_portletResourcePermission", CommerceConstants.RESOURCE_NAME);
 
 }

@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.product.util.comparator;
+package com.liferay.commerce.util.comparator;
 
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
