@@ -22,7 +22,6 @@ import com.liferay.commerce.product.exception.NoSuchSkuContributorCPDefinitionOp
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
-import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
@@ -310,9 +309,6 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 			subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
 			serviceContext);
 	}
-
-	@Reference
-	private CPInstanceHelper _cpInstanceHelper;
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
