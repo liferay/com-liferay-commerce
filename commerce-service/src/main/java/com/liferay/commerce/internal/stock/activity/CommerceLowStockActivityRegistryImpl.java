@@ -130,7 +130,7 @@ public class CommerceLowStockActivityRegistryImpl
 
 	private ServiceTrackerMap
 		<String,
-		ServiceTrackerCustomizerFactory.
+		 ServiceTrackerCustomizerFactory.
 			ServiceWrapper<CommerceLowStockActivity>> _serviceTrackerMap;
 
 }

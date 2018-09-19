@@ -137,7 +137,7 @@ public class CPDefinitionInventoryEngineRegistryImpl
 
 	private ServiceTrackerMap
 		<String,
-		ServiceTrackerCustomizerFactory.
+		 ServiceTrackerCustomizerFactory.
 			ServiceWrapper<CPDefinitionInventoryEngine>> _serviceTrackerMap;
 
 }
