@@ -125,7 +125,9 @@ public class CommerceOrderItemLocalServiceImpl
 		_setCommerceOrderItemDiscountValue(
 			commerceOrderItem, commerceProductPrice.getDiscountValue());
 
-		commerceOrderItem.setSubscription(cpDefinition.isSubscriptionEnabled() || cpInstance.isSubscriptionEnabled());
+		commerceOrderItem.setSubscription(
+			cpDefinition.isSubscriptionEnabled() ||
+			 cpInstance.isSubscriptionEnabled());
 
 		commerceOrderItemPersistence.update(commerceOrderItem);
 
@@ -210,14 +212,6 @@ public class CommerceOrderItemLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceOrderItem> getSubscriptionCommerceOrderItems(
-		long commerceOrderId) {
-
-		return commerceOrderItemPersistence.findByC_S(
-			commerceOrderId, true);
-	}
-
-	@Override
 	public List<CommerceOrderItem> getCommerceOrderItems(
 		long commerceOrderId, int start, int end,
 		OrderByComparator<CommerceOrderItem> orderByComparator) {
@@ -278,6 +272,13 @@ public class CommerceOrderItemLocalServiceImpl
 	public int getCPInstanceQuantity(long cpInstanceId, int orderStatus) {
 		return commerceOrderItemFinder.getCPInstanceQuantity(
 			cpInstanceId, orderStatus);
+	}
+
+	@Override
+	public List<CommerceOrderItem> getSubscriptionCommerceOrderItems(
+		long commerceOrderId) {
+
+		return commerceOrderItemPersistence.findByC_S(commerceOrderId, true);
 	}
 
 	@Override
