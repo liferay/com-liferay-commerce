@@ -19,9 +19,13 @@
 <%
 CPSubscriptionEntryDisplayContext commerceSubscriptionEntryDisplayContext = (CPSubscriptionEntryDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CPSubscriptionEntry cpSubscriptionEntry = commerceSubscriptionEntryDisplayContext.getCpSubscriptionEntry();
+CPSubscriptionEntry cpSubscriptionEntry = commerceSubscriptionEntryDisplayContext.getCPSubscriptionEntry();
 
 String redirect = ParamUtil.getString(request, "redirect");
+
+long subscriptionCycleLength = BeanParamUtil.getLong(cpSubscriptionEntry, request, "subscriptionCycleLength");
+String subscriptionCyclePeriod = BeanParamUtil.getString(cpSubscriptionEntry, request, "subscriptionCyclePeriod");
+long maxSubscriptionCyclesNumber = BeanParamUtil.getLong(cpSubscriptionEntry, request, "maxSubscriptionCyclesNumber");
 %>
 
 <portlet:actionURL name="editCPSubscriptionEntry" var="editCPSubscriptionEntryActionURL" />
@@ -35,11 +39,28 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<aui:fieldset>
 			<aui:model-context bean="<%= cpSubscriptionEntry %>" model="<%= CPSubscriptionEntry.class %>" />
 
-			<aui:input autoFocus="<%= true %>" name="subscriptionCycleLength" />
+			<aui:input autoFocus="<%= true %>" name="subscriptionCycleLength" value="<%= String.valueOf(subscriptionCycleLength) %>">
+				<aui:validator name="digits" />
+				<aui:validator name="min">1</aui:validator>
+			</aui:input>
 
-			<aui:input name="subscriptionCyclePeriod" />
+			<aui:select name="subscriptionCyclePeriod" showEmptyOption="<%= true %>">
 
-			<aui:input name="maxSubscriptionCyclesNumber" />
+				<%
+				for (String subscriptionPeriod : CPConstants.SUBSCRIPTION_CYCLES) {
+				%>
+
+					<aui:option label="<%= subscriptionPeriod %>" selected="<%= subscriptionPeriod.equals(subscriptionCyclePeriod) %>" value="<%= subscriptionPeriod %>" />
+
+				<%
+				}
+				%>
+
+			</aui:select>
+
+			<aui:input helpMessage="max-subscription-cycles-help" name="maxSubscriptionCyclesNumber" value="<%= String.valueOf(maxSubscriptionCyclesNumber) %>">
+				<aui:validator name="digits" />
+			</aui:input>
 
 			<aui:input name="active" type="toggle-switch" />
 		</aui:fieldset>

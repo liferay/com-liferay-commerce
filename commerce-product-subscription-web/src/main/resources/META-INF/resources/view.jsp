@@ -22,13 +22,9 @@ CPSubscriptionEntryDisplayContext commerceSubscriptionEntryDisplayContext = (CPS
 SearchContainer<CPSubscriptionEntry> cpSubscriptionEntrySearchContainer = commerceSubscriptionEntryDisplayContext.getSearchContainer();
 
 boolean hasManageCPSubscriptionEntryPermission = commerceSubscriptionEntryDisplayContext.hasManageCPSubscriptionEntryPermission();
-
-PortletURL portletURL = commerceSubscriptionEntryDisplayContext.getPortletURL();
-
-portletURL.setParameter("searchContainerId", "cpSubscriptionEntries");
-
-request.setAttribute("view.jsp-portletURL", portletURL);
 %>
+
+<portlet:actionURL name="editCPSubscriptionEntry" var="editCPSubscriptionEntryActionURL" />
 
 <liferay-frontend:management-bar
 	includeCheckBox="<%= true %>"
@@ -37,11 +33,18 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-navigation
 			navigationKeys='<%= new String[] {"all", "active", "inactive"} %>'
-			portletURL="<%= portletURL %>"
+			portletURL="<%= commerceSubscriptionEntryDisplayContext.getPortletURL() %>"
+		/>
+
+		<liferay-frontend:management-bar-sort
+			orderByCol="<%= commerceSubscriptionEntryDisplayContext.getOrderByCol() %>"
+			orderByType="<%= commerceSubscriptionEntryDisplayContext.getOrderByType() %>"
+			orderColumns='<%= new String[] {"create-date"} %>'
+			portletURL="<%= commerceSubscriptionEntryDisplayContext.getPortletURL() %>"
 		/>
 
 		<li>
-			<aui:form action="<%= String.valueOf(portletURL) %>" name="searchFm">
+			<aui:form action="<%= String.valueOf(commerceSubscriptionEntryDisplayContext.getPortletURL()) %>" name="searchFm">
 				<liferay-ui:input-search
 					markupView="lexicon"
 				/>
@@ -52,7 +55,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 	<liferay-frontend:management-bar-buttons>
 		<liferay-frontend:management-bar-display-buttons
 			displayViews='<%= new String[] {"list"} %>'
-			portletURL="<%= portletURL %>"
+			portletURL="<%= commerceSubscriptionEntryDisplayContext.getPortletURL() %>"
 			selectedDisplayStyle="list"
 		/>
 	</liferay-frontend:management-bar-buttons>
@@ -69,9 +72,9 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 </liferay-frontend:management-bar>
 
 <div class="container-fluid-1280" id="<portlet:namespace />subscriptionContainer">
-	<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+	<aui:form action="<%= editCPSubscriptionEntryActionURL %>" method="post" name="fm">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" />
-		<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 		<aui:input name="deleteCPSubscriptionEntryIds" type="hidden" />
 
 		<div class="product-subscriptions-container" id="<portlet:namespace />entriesContainer">
@@ -80,13 +83,15 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 				searchContainer="<%= cpSubscriptionEntrySearchContainer %>"
 			>
 				<liferay-ui:search-container-row
-					className="com.liferay.commerce.product.model.CPSubscriptionEntry"
+					className="com.liferay.commerce.model.CPSubscriptionEntry"
 					cssClass="entry-display-style"
 					keyProperty="cpSubscriptionEntryId"
 					modelVar="cpSubscriptionEntry"
 				>
 
 					<%
+					CommerceOrderItem commerceOrderItem = cpSubscriptionEntry.getCommerceOrderItem();
+
 					PortletURL rowURL = renderResponse.createRenderURL();
 
 					rowURL.setParameter("mvcRenderCommandName", "editCPSubscriptionEntry");
@@ -95,21 +100,16 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 					%>
 
 					<liferay-ui:search-container-column-text
+						cssClass="table-cell-content"
+						name="order-id"
+						value="<%= String.valueOf(commerceOrderItem.getCommerceOrderId()) %>"
+					/>
+
+					<liferay-ui:search-container-column-text
 						cssClass="important table-cell-content"
 						href="<%= rowURL %>"
-						property="name"
-					/>
-
-					<liferay-ui:search-container-column-text
-						cssClass="table-cell-content"
 						name="product"
-						property="CPInstanceId"
-					/>
-
-					<liferay-ui:search-container-column-text
-						cssClass="table-cell-content"
-						name="order"
-						property="commerceOrderItemId"
+						value="<%= commerceOrderItem.getName(languageId) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
@@ -160,12 +160,12 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 
 <aui:script>
 	function <portlet:namespace />deleteCPSubscriptionEntries() {
-	if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-subscription-entries" />')) {
-	var form = AUI.$(document.<portlet:namespace />fm);
+		if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-subscription-entries" />')) {
+			var form = AUI.$(document.<portlet:namespace />fm);
 
-	form.fm('deleteCPSubscriptionEntryIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+			form.fm('deleteCPSubscriptionEntryIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
 
-	submitForm(form);
-	}
+			submitForm(form);
+		}
 	}
 </aui:script>

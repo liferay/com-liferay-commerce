@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.product.subscription.web.internal.portlet;
 
-import com.liferay.commerce.product.constants.CPConstants;
+import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.service.CPSubscriptionEntryService;
 import com.liferay.commerce.product.subscription.web.internal.display.context.CPSubscriptionEntryDisplayContext;
+import com.liferay.commerce.service.CPSubscriptionEntryService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
@@ -89,7 +89,9 @@ public class CPSubscriptionEntryPortlet extends MVCPortlet {
 	@Reference
 	private Portal _portal;
 
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	@Reference(
+		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
+	)
 	private PortletResourcePermission _portletResourcePermission;
 
 }

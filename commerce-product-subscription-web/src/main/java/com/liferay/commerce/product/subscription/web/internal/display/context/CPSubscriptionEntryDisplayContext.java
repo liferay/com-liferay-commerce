@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.product.subscription.web.internal.display.context;
 
-import com.liferay.commerce.product.constants.CPActionKeys;
+import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.service.CPSubscriptionEntryService;
 import com.liferay.commerce.product.subscription.web.internal.subscription.util.CPSubscriptionEntryPortletUtil;
+import com.liferay.commerce.service.CPSubscriptionEntryService;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -59,7 +59,7 @@ public class CPSubscriptionEntryDisplayContext {
 		_rowChecker = getRowChecker();
 	}
 
-	public CPSubscriptionEntry getCpSubscriptionEntry() throws PortalException {
+	public CPSubscriptionEntry getCPSubscriptionEntry() throws PortalException {
 		if (_cpSubscriptionEntry != null) {
 			return _cpSubscriptionEntry;
 		}
@@ -73,15 +73,11 @@ public class CPSubscriptionEntryDisplayContext {
 					cpSubscriptionEntryId);
 		}
 
-		if (_cpSubscriptionEntry != null) {
-			return _cpSubscriptionEntry;
-		}
-
-		return null;
+		return _cpSubscriptionEntry;
 	}
 
 	public long getCPSubscriptionEntryId() throws PortalException {
-		CPSubscriptionEntry cpSubscriptionEntry = getCpSubscriptionEntry();
+		CPSubscriptionEntry cpSubscriptionEntry = getCPSubscriptionEntry();
 
 		if (cpSubscriptionEntry != null) {
 			return cpSubscriptionEntry.getCPSubscriptionEntryId();
@@ -179,6 +175,8 @@ public class CPSubscriptionEntryDisplayContext {
 			portletURL.setParameter("keywords", keywords);
 		}
 
+		portletURL.setParameter("navigation", getNavigation());
+
 		String orderByCol = getOrderByCol();
 
 		if (Validator.isNotNull(orderByCol)) {
@@ -261,27 +259,11 @@ public class CPSubscriptionEntryDisplayContext {
 		return _portletResourcePermission.contains(
 			_cpRequestHelper.getPermissionChecker(),
 			_cpRequestHelper.getScopeGroupId(),
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SUBSCRIPTIONS);
-	}
-
-	public boolean isSearch() {
-		if (Validator.isNotNull(getKeywords())) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean isShowInfoPanel() {
-		if (isSearch()) {
-			return false;
-		}
-
-		return true;
+			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
 	}
 
 	protected String getNavigation() {
-		return ParamUtil.getString(_httpServletRequest, "navigation");
+		return ParamUtil.getString(_httpServletRequest, "navigation", "all");
 	}
 
 	private final CPRequestHelper _cpRequestHelper;

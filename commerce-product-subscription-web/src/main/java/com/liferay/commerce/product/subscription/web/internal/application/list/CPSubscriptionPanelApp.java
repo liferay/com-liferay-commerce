@@ -43,7 +43,7 @@ public class CPSubscriptionPanelApp extends BasePanelApp {
 
 	@Override
 	@Reference(
-		target = "(javax.portlet.name=" + CPPortletKeys.CP_DEFINITIONS + ")",
+		target = "(javax.portlet.name=" + CPPortletKeys.CP_SUBSCRIPTION_ENTRY + ")",
 		unbind = "-"
 	)
 	public void setPortlet(Portlet portlet) {

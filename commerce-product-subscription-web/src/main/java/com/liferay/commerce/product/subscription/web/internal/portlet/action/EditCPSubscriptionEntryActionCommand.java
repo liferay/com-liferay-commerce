@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.product.subscription.web.internal.portlet.action;
 
+import com.liferay.commerce.exception.NoSuchCPSubscriptionEntryException;
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.exception.NoSuchCPSubscriptionEntryException;
-import com.liferay.commerce.product.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.service.CPSubscriptionEntryService;
+import com.liferay.commerce.service.CPSubscriptionEntryService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -117,20 +117,17 @@ public class EditCPSubscriptionEntryActionCommand extends BaseMVCActionCommand {
 			long cpSubscriptionEntryId, ActionRequest actionRequest)
 		throws Exception {
 
-		long subscriptionCycleLength = (long)ParamUtil.getNumber(
+		long subscriptionCycleLength = ParamUtil.getLong(
 			actionRequest, "subscriptionCycleLength");
 		String subscriptionCyclePeriod = ParamUtil.getString(
 			actionRequest, "subscriptionCyclePeriod");
-		long maxSubscriptionCyclesNumber = (long)ParamUtil.getNumber(
+		long maxSubscriptionCyclesNumber = ParamUtil.getLong(
 			actionRequest, "maxSubscriptionCyclesNumber");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
-		CPSubscriptionEntry cpSubscriptionEntry =
-			_cpSubscriptionEntryService.updateCommercePriceEntry(
-				cpSubscriptionEntryId, subscriptionCycleLength,
-				subscriptionCyclePeriod, maxSubscriptionCyclesNumber, active);
-
-		return cpSubscriptionEntry;
+		return _cpSubscriptionEntryService.updateCommercePriceEntry(
+			cpSubscriptionEntryId, subscriptionCycleLength,
+			subscriptionCyclePeriod, maxSubscriptionCyclesNumber, active);
 	}
 
 	@Reference
