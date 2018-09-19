@@ -17,14 +17,12 @@ package com.liferay.commerce.internal.messaging;
 import com.liferay.commerce.constants.CommerceDestinationNames;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.internal.notification.type.OrderPlacedCommerceNotificationTypeImpl;
+import com.liferay.commerce.model.CPSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.notification.util.CommerceNotificationHelper;
-import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.model.CPSubscriptionCycleEntry;
-import com.liferay.commerce.product.service.CPSubscriptionCycleEntryLocalService;
-import com.liferay.commerce.product.service.CPSubscriptionEntryLocalService;
+import com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService;
+import com.liferay.commerce.service.CPSubscriptionEntryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -83,19 +81,15 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 				commerceOrder.getCommerceOrderId());
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-
 			if (_isNewSubscription(commerceOrderItem)) {
 				_cpSubscriptionEntryLocalService.addCPSubscriptionEntry(
 					commerceOrderItem.getCPInstanceId(),
-					commerceOrderItem.getCommerceOrderItemId(),
-					serviceContext);
+					commerceOrderItem.getCommerceOrderItemId(), serviceContext);
 			}
 		}
 	}
 
-	private boolean _isNewSubscription(
-		CommerceOrderItem commerceOrderItem) {
-
+	private boolean _isNewSubscription(CommerceOrderItem commerceOrderItem) {
 		CPSubscriptionCycleEntry cpSubscriptionCycleEntry =
 			_cpSubscriptionCycleEntryLocalService.
 				fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
@@ -114,10 +108,10 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 	private CommerceNotificationHelper _commerceNotificationHelper;
 
 	@Reference
-	private CommerceOrderLocalService _commerceOrderLocalService;
+	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
 
 	@Reference
-	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
+	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Reference
 	private CPSubscriptionCycleEntryLocalService

@@ -69,7 +69,7 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 						commerceOrderItem.getCommerceOrderItemId());
 
 			if ((commerceVirtualOrderItem == null) &&
-				!_isSubscriptionCycleRenew(commerceOrderItem)) {
+				_isNewSubscription(commerceOrderItem)) {
 
 				CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
 
@@ -107,9 +107,7 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		}
 	}
 
-	private boolean _isSubscriptionCycleRenew(
-		CommerceOrderItem commerceOrderItem) {
-
+	private boolean _isNewSubscription(CommerceOrderItem commerceOrderItem) {
 		CPSubscriptionCycleEntry cpSubscriptionCycleEntry =
 			_cpSubscriptionCycleEntryLocalService.
 				fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
@@ -118,10 +116,10 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		if ((cpSubscriptionCycleEntry != null) &&
 			cpSubscriptionCycleEntry.isRenew()) {
 
-			return true;
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 	@Reference
