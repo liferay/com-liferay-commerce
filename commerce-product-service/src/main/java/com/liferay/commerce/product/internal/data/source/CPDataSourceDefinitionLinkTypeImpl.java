@@ -50,7 +50,8 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	configurationPid = "com.liferay.commerce.product.configuration.CPDefinitionLinkTypeConfiguration",
 	immediate = true,
-	property = "commerce.product.data.source.name=definitionLinkDataSource"
+	property = "commerce.product.data.source.name=definitionLinkDataSource",
+	service = CPDataSource.class
 )
 public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 

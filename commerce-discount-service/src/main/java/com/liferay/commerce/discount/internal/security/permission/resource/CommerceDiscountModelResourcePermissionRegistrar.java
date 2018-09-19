@@ -40,7 +40,10 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true)
+@Component(
+	immediate = true,
+	service = CommerceDiscountModelResourcePermissionRegistrar.class
+)
 public class CommerceDiscountModelResourcePermissionRegistrar {
 
 	@Activate

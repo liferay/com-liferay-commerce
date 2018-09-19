@@ -22,7 +22,7 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component
+@Component(service = ConfigurationBeanDeclaration.class)
 public class CPCompareContentPortletInstanceConfigurationBeanDeclaration
 	implements ConfigurationBeanDeclaration {
 

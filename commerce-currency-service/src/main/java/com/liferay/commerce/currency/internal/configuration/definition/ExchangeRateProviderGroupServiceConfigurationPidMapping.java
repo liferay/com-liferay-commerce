@@ -23,7 +23,7 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component
+@Component(service = ConfigurationPidMapping.class)
 public class ExchangeRateProviderGroupServiceConfigurationPidMapping
 	implements ConfigurationPidMapping {
 

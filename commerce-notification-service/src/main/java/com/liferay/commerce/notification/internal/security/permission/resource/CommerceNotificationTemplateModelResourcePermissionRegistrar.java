@@ -38,7 +38,10 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true)
+@Component(
+	immediate = true,
+	service = CommerceNotificationTemplateModelResourcePermissionRegistrar.class
+)
 public class CommerceNotificationTemplateModelResourcePermissionRegistrar {
 
 	@Activate

@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Deactivate;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true)
+@Component(immediate = true, service = CPRuleTypeRegistry.class)
 public class CPRuleTypeRegistryImpl implements CPRuleTypeRegistry {
 
 	@Override

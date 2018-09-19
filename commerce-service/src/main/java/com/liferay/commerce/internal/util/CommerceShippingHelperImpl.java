@@ -29,7 +29,7 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Andrea Di Giorgi
  */
-@Component(immediate = true)
+@Component(immediate = true, service = CommerceShippingHelper.class)
 public class CommerceShippingHelperImpl implements CommerceShippingHelper {
 
 	@Override

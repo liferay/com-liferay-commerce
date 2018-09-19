@@ -49,7 +49,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Marco Leo
  */
-@Component
+@Component(service = CommerceUserSegmentHelper.class)
 public class CommerceUserSegmentHelperImpl
 	implements CommerceUserSegmentHelper {
 

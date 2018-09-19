@@ -31,7 +31,9 @@ import org.osgi.service.component.annotations.Deactivate;
 /**
  * @author Andrea Di Giorgi
  */
-@Component(immediate = true)
+@Component(
+	immediate = true, service = CommerceShippingOriginLocatorRegistry.class
+)
 public class CommerceShippingOriginLocatorRegistryImpl
 	implements CommerceShippingOriginLocatorRegistry {
 
