@@ -873,6 +873,95 @@
 			<finder-column name="CPDefinitionId" />
 		</finder>
 	</entity>
+	<entity local-service="true" name="CPSubscriptionCycleEntry" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="CPSubscriptionCycleEntryId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="CPSubscriptionEntryId" type="long" />
+		<column name="commerceOrderItemId" type="long" />
+		<column name="renew" type="boolean" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="CPSubscriptionEntryId" return-type="Collection">
+			<finder-column name="CPSubscriptionEntryId" />
+		</finder>
+		<finder name="CommerceOrderItemId" return-type="CPSubscriptionCycleEntry" unique="true">
+			<finder-column name="commerceOrderItemId" />
+		</finder>
+	</entity>
+	<entity local-service="true" name="CPSubscriptionEntry" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="CPSubscriptionEntryId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="CPInstanceId" type="long" />
+		<column name="commerceOrderItemId" type="long" />
+		<column name="subscriptionCycleLength" type="long" />
+		<column name="subscriptionCyclePeriod" type="String" />
+		<column name="maxSubscriptionCyclesNumber" type="long" />
+		<column name="active" type="boolean" />
+		<column name="nextIterationDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="active" return-type="Collection">
+			<finder-column name="active" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
+	</entity>
 	<exceptions>
 		<exception>CommerceAddressCity</exception>
 		<exception>CommerceAddressCountry</exception>
@@ -905,6 +994,7 @@
 		<exception>CommerceWarehouseActive</exception>
 		<exception>CommerceWarehouseCommerceRegionId</exception>
 		<exception>CommerceWarehouseName</exception>
+		<exception>CPSubscriptionCPInstanceId</exception>
 		<exception>GuestCartItemMaxAllowed</exception>
 		<exception>GuestCartMaxAllowed</exception>
 	</exceptions>
