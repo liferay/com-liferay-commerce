@@ -66,8 +66,8 @@
 		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#PRIMARY_CHECKBOX" />
 	</command>
 
-	<command name="addNewDiscuntsEntry">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+	<command name="addNewDiscountsEntry">
+		<execute function="Type" locator1="CommerceEntry#TITLE_FIELD" value1="${entryTitle}" />
 
 		<execute function="Select" locator1="CommerceEntry#DISCOUNT_TARGET_SELECT" value1="${discountTarget}" />
 
