@@ -24,10 +24,12 @@
 		</if>
 	</tear-down>
 
-	<command name="ViewStoreFrontSimpleProduct">
+	<command ignore="true" name="ViewStoreFrontSimpleProduct">
 		<property name="portal.acceptance" value="true" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Catalog" />
 		</execute>
 
