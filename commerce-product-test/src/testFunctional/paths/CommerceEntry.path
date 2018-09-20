@@ -45,17 +45,8 @@
 </tr>
 <tr>
 	<td>MENU_TAB</td>
-	<td>xpath=(//div | //li)[contains(@class,'page-header') or contains(@class,'show')]//ul[contains(@class,'nav-underline')]//*[normalize-space(text())='${key_menuTab}']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>MEASUREMENT_UNITS_TAB</td>
-	<td>//ul[contains(@class,'navbar-nav')]/li/a/span[contains(text(),'${key_measurementUnitTab}')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>NOTIFICATIONS_TAB</td>
-	<td>//ul[contains(@class,'navbar-nav')]/li/a/span[contains(text(),'${key_notificationsTab}')]</td>
+	<td>//ul[contains(@class,'navbar-nav')]/li/a/span[contains(text(),'${key_menuTab}')] |
+	 //ul[contains(@class,'nav-underline')]/li/a[contains(text(),'${key_menuTab}')] | //a[contains(@class,'nav-link')]//span[contains(text(),'${key_menuTab}')]/../../a</td>
 	<td></td>
 </tr>
 <tr>
