@@ -24,7 +24,7 @@
 		</if>
 	</tear-down>
 
-	<command name="ViewStoreFrontSimpleProduct">
+	<command ignore="true" name="ViewStoreFrontSimpleProduct">
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="ProductMenu#gotoPortlet">
