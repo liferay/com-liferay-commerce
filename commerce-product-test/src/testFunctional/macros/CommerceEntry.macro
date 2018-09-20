@@ -87,7 +87,7 @@
 	<command name="addNewNotificationTemplate">
 		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
 
-		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${entryName}" />
+		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${entryName} Description" />
 
 		<execute function="Click" locator1="Button#SELECT" />
 
