@@ -144,6 +144,12 @@
 			<rtexprvalue>true</rtexprvalue>
 			<type>long</type>
 		</attribute>
+		<attribute>
+			<name>showDuration</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
 	</tag>
 	<tag>
 		<name>tier-price</name>

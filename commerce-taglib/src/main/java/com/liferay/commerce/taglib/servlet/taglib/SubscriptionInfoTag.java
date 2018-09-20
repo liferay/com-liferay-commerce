@@ -76,7 +76,7 @@ public class SubscriptionInfoTag extends IncludeTag {
 
 			_periodSuffix = _getSuffix(_length, period);
 
-			if (maxSubscriptionCyclesNumber > 0) {
+			if (_showDuration && (maxSubscriptionCyclesNumber > 0)) {
 				ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 					"content.Language", themeDisplay.getLocale(), getClass());
 
@@ -110,6 +110,10 @@ public class SubscriptionInfoTag extends IncludeTag {
 		servletContext = ServletContextUtil.getServletContext();
 	}
 
+	public void setShowDuration(boolean showDuration) {
+		_showDuration = showDuration;
+	}
+
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();
@@ -119,6 +123,7 @@ public class SubscriptionInfoTag extends IncludeTag {
 		_durationSuffix = null;
 		_length = 0;
 		_periodSuffix = null;
+		_showDuration = true;
 	}
 
 	@Override
@@ -158,5 +163,6 @@ public class SubscriptionInfoTag extends IncludeTag {
 	private String _durationSuffix;
 	private long _length;
 	private String _periodSuffix;
+	private boolean _showDuration = true;
 
 }

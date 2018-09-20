@@ -23,9 +23,11 @@ long length = (long)request.getAttribute("liferay-commerce:subscription-info:len
 String periodSuffix = (String)request.getAttribute("liferay-commerce:subscription-info:periodSuffix");
 %>
 
-<span class="product-subscription-period">
-	(<liferay-ui:message key="every" /> <%= length %> <%= periodSuffix %>)
-</span>
+<c:if test="<%= (length > 0) && Validator.isNotNull(periodSuffix) %>">
+	<span class="product-subscription-period">
+		(<liferay-ui:message key="every" /> <%= length %> <%= periodSuffix %>)
+	</span>
+</c:if>
 
 <c:if test="<%= Validator.isNotNull(duration) %>">
 	<span class="product-subscription-duration"><%= duration %> <%= durationSuffix %></span>
