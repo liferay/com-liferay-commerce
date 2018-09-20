@@ -13,7 +13,7 @@
 
 			<execute macro="CommerceEntry#publishEntry" />
 
-			<execute macro="Alert#waitForSuccessMessageHide" />
+			<execute function="AssertNotVisible" locator1="Message#SUCCESS" />
 		</for>
 	</command>
 </definition>
