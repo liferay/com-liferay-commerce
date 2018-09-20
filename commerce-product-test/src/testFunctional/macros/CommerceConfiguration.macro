@@ -3,7 +3,7 @@
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Recycle Bin" />
+			<var name="category" value="Commerce" />
 			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="User Segments" />
 		</execute>
@@ -33,7 +33,7 @@
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Recycle Bin" />
+			<var name="category" value="Commerce" />
 			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Settings" />
 		</execute>
@@ -129,7 +129,7 @@
 
 	<command name="commerceSetUp">
 		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Recycle Bin" />
+			<var name="category" value="Commerce" />
 			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Settings" />
 		</execute>
@@ -159,7 +159,7 @@
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Recycle Bin" />
+			<var name="category" value="Commerce" />
 			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Catalog" />
 		</execute>
