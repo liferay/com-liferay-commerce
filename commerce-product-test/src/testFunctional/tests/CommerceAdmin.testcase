@@ -232,7 +232,7 @@
 		</execute>
 
 		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="notifications" />
+			<var name="menuTab" value="Notifications" />
 		</execute>
 
 		<execute macro="CommerceEntry#gotoMenuTab">
