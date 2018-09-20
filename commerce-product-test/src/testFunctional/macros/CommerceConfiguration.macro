@@ -2,7 +2,9 @@
 	<command name="commerceAdminTearDown">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Recycle Bin" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="User Segments" />
 		</execute>
 
@@ -30,7 +32,9 @@
 	<command name="commerceSettingsTearDown">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Recycle Bin" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Settings" />
 		</execute>
 
@@ -124,7 +128,9 @@
 	</command>
 
 	<command name="commerceSetUp">
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Recycle Bin" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Settings" />
 		</execute>
 
@@ -152,7 +158,9 @@
 	<command name="commerceStoreFrontTearDown">
 		<execute macro="Navigator#openURL" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Recycle Bin" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Catalog" />
 		</execute>
 
