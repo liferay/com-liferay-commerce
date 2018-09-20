@@ -19,6 +19,14 @@
 		<execute function="Click" locator1="Button#RECYCLE_BIN" />
 	</command>
 
+	<command name="deleteEntries">
+		<execute function="Click" locator1="CommerceNavigation#SELECT_ALL_CHECKBOX" />
+
+		<execute function="Click" locator1="Button#DELETE" />
+
+		<execute function="AssertConfirm#waitForConfirmation" value1="${deleteMessage}" />
+	</command>
+
 	<command name="moveCatalogEntryToRecycleBinViaCheckbox">
 		<execute function="Click" locator1="CommerceNavigation#SINGLE_ENTRY_CHECKBOX">
 			<var name="key_entryName" value="${productName}" />

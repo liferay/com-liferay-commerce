@@ -11,18 +11,52 @@
 		<if>
 			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
 			<then>
-				<execute macro="CommerceProducts#moveCatalogEntriesToRecycleBin" />
+				<execute macro="CommerceProducts#deleteEntries">
+					<var name="deleteMessage" value="Are you sure you want to delete the selected entries? They will be deleted immediately." />
+				</execute>
 			</then>
 		</if>
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Price Lists" />
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
+			<var name="portlet" value="Price Lists" />
 		</execute>
 
 		<if>
 			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
 			<then>
-				<execute macro="CommerceProducts#moveCatalogEntriesToRecycleBin" />
+				<execute macro="CommerceProducts#deleteEntries">
+					<var name="deleteMessage" value="Are you sure you want to delete the selected price lists?" />
+				</execute>
+			</then>
+		</if>
+
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
+			<var name="portlet" value="Discounts" />
+		</execute>
+
+		<if>
+			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
+			<then>
+				<execute macro="CommerceProducts#deleteEntries" />
+			</then>
+		</if>
+
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
+			<var name="portlet" value="Catalog Rules" />
+		</execute>
+
+		<if>
+			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
+			<then>
+				<execute macro="CommerceProducts#deleteEntries">
+					<var name="deleteMessage" value="Are you sure you want to delete the selected catalog rules?" />
+				</execute>
 			</then>
 		</if>
 
