@@ -14,24 +14,15 @@
 
 package com.liferay.commerce.product.type.grouped.web.internal;
 
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.grouped.constants.GroupedCPTypeConstants;
 import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import javax.portlet.PortletURL;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -54,27 +45,6 @@ public class GroupedCPType implements CPType {
 	public void deleteCPDefinition(long cpDefinitionId) throws PortalException {
 		_cpDefinitionGroupedEntryLocalService.deleteCPDefinitionGroupedEntries(
 			cpDefinitionId);
-	}
-
-	@Override
-	public String getCPDefinitionEditUrl(
-			long cpDefinitionId, HttpServletRequest httpServletRequest)
-		throws PortalException {
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		PortletURL portletURL = PortletProviderUtil.getPortletURL(
-			httpServletRequest, themeDisplay.getScopeGroup(),
-			CPDefinition.class.getName(), PortletProvider.Action.EDIT);
-
-		portletURL.setParameter(
-			"mvcRenderCommandName", "viewCPDefinitionGroupedEntries");
-		portletURL.setParameter(
-			"cpDefinitionId", String.valueOf(cpDefinitionId));
-
-		return portletURL.toString();
 	}
 
 	@Override

@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 
 /**
@@ -40,14 +38,6 @@ public class SimpleCPType implements CPType {
 
 	@Override
 	public void deleteCPDefinition(long cpDefinitionId) throws PortalException {
-	}
-
-	@Override
-	public String getCPDefinitionEditUrl(
-			long cpDefinitionId, HttpServletRequest httpServletRequest)
-		throws PortalException {
-
-		return null;
 	}
 
 	@Override

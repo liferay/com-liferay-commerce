@@ -14,26 +14,15 @@
 
 package com.liferay.commerce.product.type.virtual.web.internal;
 
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import javax.portlet.PortletURL;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -55,39 +44,6 @@ public class VirtualCPType implements CPType {
 	public void deleteCPDefinition(long cpDefinitionId) throws PortalException {
 		_cpDefinitionVirtualSettingLocalService.
 			deleteCPDefinitionVirtualSettingByCPDefinitionId(cpDefinitionId);
-	}
-
-	@Override
-	public String getCPDefinitionEditUrl(
-			long cpDefinitionId, HttpServletRequest httpServletRequest)
-		throws PortalException {
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		PortletURL portletURL = PortletProviderUtil.getPortletURL(
-			httpServletRequest, themeDisplay.getScopeGroup(),
-			CPDefinition.class.getName(), PortletProvider.Action.EDIT);
-
-		portletURL.setParameter(
-			"mvcRenderCommandName", "editProductDefinitionVirtualSetting");
-		portletURL.setParameter(
-			"cpDefinitionId", String.valueOf(cpDefinitionId));
-
-		String redirect = ParamUtil.getString(httpServletRequest, "redirect");
-
-		if (Validator.isNotNull(redirect)) {
-			portletURL.setParameter("redirect", redirect);
-		}
-
-		String backURL = ParamUtil.getString(httpServletRequest, "backURL");
-
-		if (Validator.isNotNull(backURL)) {
-			portletURL.setParameter("backURL", backURL);
-		}
-
-		return portletURL.toString();
 	}
 
 	@Override

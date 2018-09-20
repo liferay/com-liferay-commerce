@@ -18,18 +18,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Marco Leo
  */
 public interface CPType {
 
 	public void deleteCPDefinition(long cpDefinitionId) throws PortalException;
-
-	public String getCPDefinitionEditUrl(
-			long cpDefinitionId, HttpServletRequest httpServletRequest)
-		throws PortalException;
 
 	public String getLabel(Locale locale);
 
