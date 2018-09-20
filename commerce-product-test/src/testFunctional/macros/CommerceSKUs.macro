@@ -10,7 +10,7 @@
 
 		<execute macro="CommerceEntry#saveEntry" />
 
-		<execute macro="Alert#waitForSuccessMessageHide" />
+		<execute function="AssertNotVisible" locator1="Message#SUCCESS" />
 	</command>
 
 	<command name="addSKU">
@@ -34,7 +34,7 @@
 
 			<execute macro="CommerceEntry#publishEntry" />
 
-			<execute macro="Alert#waitForSuccessMessageHide" />
+			<execute function="AssertNotVisible" locator1="Message#SUCCESS" />
 
 			<execute macro="CommerceSKUs#addPriceToSKU">
 				<var name="price" value="${price}" />
