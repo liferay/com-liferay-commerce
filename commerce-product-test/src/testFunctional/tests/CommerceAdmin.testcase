@@ -55,7 +55,9 @@
 	<command name="CreateNewAvailabilityEstimate">
 		<property name="portal.acceptance" value="true" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Settings" />
 		</execute>
 
@@ -77,9 +79,9 @@
 	<command name="CreateNewCatalogRule">
 		<property name="portal.acceptance" value="true" />
 
-		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
-
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Catalog Rules" />
 		</execute>
 
@@ -95,7 +97,9 @@
 	<command name="CreateNewCountry">
 		<property name="portal.acceptance" value="true" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Settings" />
 		</execute>
 
@@ -132,12 +136,14 @@
 	<command name="CreateNewCurrency">
 		<property name="portal.acceptance" value="true" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Settings" />
 		</execute>
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Currencies" />
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Currencies" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -155,9 +161,9 @@
 	<command name="CreateNewDiscount">
 		<property name="portal.acceptance" value="true" />
 
-		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
-
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Discounts" />
 		</execute>
 
@@ -177,12 +183,14 @@
 	<command name="CreateNewMeasurementUnits">
 		<property name="portal.acceptance" value="true" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Settings" />
 		</execute>
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Measurement Units" />
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Measurement Units" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -213,7 +221,9 @@
 	<command name="CreateNewNotificationTemplate">
 		<property name="portal.acceptance" value="true" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Settings" />
 		</execute>
 
@@ -247,7 +257,9 @@
 
 		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="Price Lists" />
 		</execute>
 
@@ -267,7 +279,9 @@
 	<command name="CreateNewUserSegmentByUser">
 		<property name="portal.acceptance" value="true" />
 
-		<execute macro="ProductMenu#gotoSitesCommerce">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="User Segments" />
 		</execute>
 
