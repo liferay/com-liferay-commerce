@@ -173,7 +173,7 @@
 
 		<execute function="Click" locator1="Button#PLUS" />
 
-		<execute macro="CommerceEntry#addNewDiscuntsEntry">
+		<execute macro="CommerceEntry#addNewDiscountsEntry">
 			<var name="discountLevel" value="15" />
 			<var name="discountTarget" value="Apply to Product" />
 			<var name="entryTitle" value="New Discount" />
