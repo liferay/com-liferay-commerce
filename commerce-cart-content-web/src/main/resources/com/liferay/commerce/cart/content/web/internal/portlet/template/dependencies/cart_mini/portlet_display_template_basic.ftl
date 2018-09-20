@@ -3,9 +3,9 @@
 <#if entries?has_content>
 	<div class="row">
 		<#assign
-		orderPrice = commerceCartContentMiniDisplayContext.getCommerceOrderPrice()
+			orderPrice = commerceCartContentMiniDisplayContext.getCommerceOrderPrice()
 
-		subTotal = orderPrice.getSubtotal()
+			subTotal = orderPrice.getSubtotal()
 		/>
 
 		<div class="col-md-12">
@@ -16,12 +16,18 @@
 			<#assign
 				cpDefinition = curCommerceOrderItem.getCPDefinition()
 
-				image = cpDefinition.getDefaultImageThumbnailSrc(themeDisplay)
+				image = ''
 
 				productURL = commerceCartContentMiniDisplayContext.getCPDefinitionURL(cpDefinition.getCPDefinitionId(), themeDisplay)
 
 				name = cpDefinition.getName(themeDisplay.getLanguageId())
 			/>
+
+			<#if commerceCartContentMiniDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem, themeDisplay)??>
+				<#assign
+					image = commerceCartContentMiniDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem, themeDisplay)
+				/>
+			</#if>
 
 			<div class="col-md-6">
 				<div class="row">
@@ -35,9 +41,9 @@
 				</div>
 
 				<div class="row">
-					<@liferay_commerce["format-price"]
-						price=curCommerceOrderItem.getUnitPrice()
-						quantity=1
+					<@liferay_commerce["price"]
+						CPDefinitionId=cpDefinition.getCPDefinitionId()
+						CPInstanceId=curCommerceOrderItem.getCPInstanceId()
 					/>
 				</div>
 			</div>

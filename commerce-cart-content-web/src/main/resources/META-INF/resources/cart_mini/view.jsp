@@ -115,8 +115,16 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 						}
 						%>
 
-						<div class="list-group-subtitle">SKU: <%= HtmlUtil.escape(commerceOrderItem.getSku()) %></div>
+						<div class="list-group-subtitle"><liferay-ui:message arguments="<%= HtmlUtil.escape(commerceOrderItem.getSku()) %>" key="sku-x" translateArguments="<%= false %>" /></div>
 						<div class="list-group-subtitle"><%= HtmlUtil.escape(stringJoiner.toString()) %></div>
+
+						<%
+						String subscriptionInfo = commerceCartContentMiniDisplayContext.getSubscriptionInfo(commerceOrderItem);
+						%>
+
+						<c:if test="<%= Validator.isNotNull(subscriptionInfo) %>">
+							<div class="list-group-subtitle"><%= subscriptionInfo %></div>
+						</c:if>
 					</div>
 				</liferay-ui:search-container-column-text>
 

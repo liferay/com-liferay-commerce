@@ -90,7 +90,8 @@ boolean hasManageCPSubscriptionEntryPermission = commerceSubscriptionEntryDispla
 				>
 
 					<%
-					CommerceOrderItem commerceOrderItem = cpSubscriptionEntry.getCommerceOrderItem();
+					CommerceOrderItem commerceOrderItem = cpSubscriptionEntry.fetchCommerceOrderItem();
+					CPDefinition cpDefinition = cpSubscriptionEntry.getCPDefinition();
 
 					PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -102,14 +103,14 @@ boolean hasManageCPSubscriptionEntryPermission = commerceSubscriptionEntryDispla
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
 						name="order-id"
-						value="<%= String.valueOf(commerceOrderItem.getCommerceOrderId()) %>"
+						value="<%= (commerceOrderItem == null) ? StringPool.BLANK : String.valueOf(commerceOrderItem.getCommerceOrderId()) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
 						cssClass="important table-cell-content"
 						href="<%= rowURL %>"
 						name="product"
-						value="<%= commerceOrderItem.getName(languageId) %>"
+						value="<%= cpDefinition.getName(languageId) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
