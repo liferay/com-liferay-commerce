@@ -56,6 +56,7 @@
 
 	<command name="CreateNewAvailabilityEstimate">
 		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewAvailabilityEstimate" />
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
@@ -80,6 +81,7 @@
 
 	<command name="CreateNewCatalogRule">
 		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewCatalogRule" />
 
 		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
 
@@ -100,6 +102,7 @@
 
 	<command name="CreateNewCountry">
 		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewCountry" />
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
@@ -139,6 +142,7 @@
 
 	<command name="CreateNewCurrency">
 		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewCurrency" />
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
@@ -164,6 +168,7 @@
 
 	<command name="CreateNewDiscount">
 		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewDiscount" />
 
 		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
 
@@ -188,6 +193,7 @@
 
 	<command name="CreateNewMeasurementUnits">
 		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewMeasurementUnits" />
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
@@ -226,6 +232,7 @@
 
 	<command ignore="true" name="CreateNewNotificationTemplate">
 		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewNotificationTemplate" />
 
 		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
 
@@ -260,6 +267,7 @@
 
 	<command name="CreateNewPriceList">
 		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewPriceList" />
 
 		<execute test-case="CommerceAdmin#CreateNewCurrency" />
 
@@ -286,6 +294,7 @@
 
 	<command name="CreateNewUserSegmentByUser">
 		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByUser" />
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
