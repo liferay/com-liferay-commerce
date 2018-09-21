@@ -292,6 +292,8 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 		throws PortalException {
 
 		long cpInstanceId = ParamUtil.getLong(actionRequest, "cpInstanceId");
+		boolean overrideSubscriptionInfo = ParamUtil.getBoolean(
+			actionRequest, "overrideSubscriptionInfo");
 		boolean subscriptionEnabled = ParamUtil.getBoolean(
 			actionRequest, "subscriptionEnabled");
 		long subscriptionCycleLength = ParamUtil.getLong(
@@ -305,9 +307,9 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 			CPInstance.class.getName(), actionRequest);
 
 		_cpInstanceService.updateSubscriptionInfo(
-			cpInstanceId, subscriptionEnabled, subscriptionCycleLength,
-			subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
-			serviceContext);
+			cpInstanceId, overrideSubscriptionInfo, subscriptionEnabled,
+			subscriptionCycleLength, subscriptionCyclePeriod,
+			maxSubscriptionCyclesNumber, serviceContext);
 	}
 
 	@Reference
