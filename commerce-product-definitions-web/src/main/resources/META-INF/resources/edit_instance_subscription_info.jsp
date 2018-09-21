@@ -31,6 +31,7 @@ productSkusURL.setParameter("mvcRenderCommandName", "editProductDefinition");
 productSkusURL.setParameter("cpDefinitionId", String.valueOf(cpDefinition.getCPDefinitionId()));
 productSkusURL.setParameter("screenNavigationCategoryKey", cpInstanceDisplayContext.getScreenNavigationCategoryKey());
 
+boolean overrideSubscriptionInfo = BeanParamUtil.getBoolean(cpInstance, request, "overrideSubscriptionInfo", false);
 boolean subscriptionEnabled = BeanParamUtil.getBoolean(cpInstance, request, "subscriptionEnabled", false);
 long subscriptionCycleLength = BeanParamUtil.getLong(cpInstance, request, "subscriptionCycleLength");
 String subscriptionCyclePeriod = BeanParamUtil.getString(cpInstance, request, "subscriptionCyclePeriod");
@@ -48,26 +49,30 @@ long maxSubscriptionCyclesNumber = BeanParamUtil.getLong(cpInstance, request, "m
 
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>
-			<aui:input checked="<%= subscriptionEnabled %>" name="subscriptionEnabled" type="toggle-switch" value="<%= subscriptionEnabled %>" />
+			<aui:input checked="<%= overrideSubscriptionInfo %>" name="overrideSubscriptionInfo" type="toggle-switch" value="<%= overrideSubscriptionInfo %>" />
 
-			<div class="<%= subscriptionEnabled ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />subscriptionOptions">
-				<aui:input label="subscription-cycle-length" name="subscriptionCycleLength" value="<%= String.valueOf(subscriptionCycleLength) %>" />
+			<div class="<%= overrideSubscriptionInfo ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />subscriptionInfo">
+				<aui:input checked="<%= subscriptionEnabled %>" name="subscriptionEnabled" type="toggle-switch" value="<%= subscriptionEnabled %>" />
 
-				<aui:select label="subscription-cycle-period" name="subscriptionCyclePeriod" showEmptyOption="<%= true %>">
+				<div class="<%= subscriptionEnabled ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />subscriptionOptions">
+					<aui:input label="subscription-cycle-length" name="subscriptionCycleLength" value="<%= String.valueOf(subscriptionCycleLength) %>" />
 
-					<%
-					for (String subscriptionPeriod : CPConstants.SUBSCRIPTION_CYCLES) {
-					%>
+					<aui:select label="subscription-cycle-period" name="subscriptionCyclePeriod" showEmptyOption="<%= true %>">
 
-						<aui:option label="<%= subscriptionPeriod %>" selected="<%= subscriptionPeriod.equals(subscriptionCyclePeriod) %>" value="<%= subscriptionPeriod %>" />
+						<%
+						for (String subscriptionPeriod : CPConstants.SUBSCRIPTION_CYCLES) {
+						%>
 
-					<%
-					}
-					%>
+							<aui:option label="<%= subscriptionPeriod %>" selected="<%= subscriptionPeriod.equals(subscriptionCyclePeriod) %>" value="<%= subscriptionPeriod %>" />
 
-				</aui:select>
+						<%
+						}
+						%>
 
-				<aui:input label="max-subscription-cycles-number" name="maxSubscriptionCyclesNumber" value="<%= String.valueOf(maxSubscriptionCyclesNumber) %>" />
+					</aui:select>
+
+					<aui:input label="max-subscription-cycles-number" name="maxSubscriptionCyclesNumber" value="<%= String.valueOf(maxSubscriptionCyclesNumber) %>" />
+				</div>
 			</div>
 		</aui:fieldset>
 	</aui:fieldset-group>
@@ -80,5 +85,7 @@ long maxSubscriptionCyclesNumber = BeanParamUtil.getLong(cpInstance, request, "m
 </aui:form>
 
 <aui:script>
+	Liferay.Util.toggleBoxes('<portlet:namespace />overrideSubscriptionInfo', '<portlet:namespace />subscriptionInfo');
+
 	Liferay.Util.toggleBoxes('<portlet:namespace />subscriptionEnabled', '<portlet:namespace />subscriptionOptions');
 </aui:script>
