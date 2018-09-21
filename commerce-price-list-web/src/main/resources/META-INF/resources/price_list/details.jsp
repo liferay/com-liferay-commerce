@@ -34,7 +34,7 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 <aui:model-context bean="<%= commercePriceList %>" model="<%= CommercePriceList.class %>" />
 
 <liferay-util:buffer
-	var="removeCommercePriceListUserSegmentEntryRelIcon"
+	var="removeItemIcon"
 >
 	<liferay-ui:icon
 		icon="times"
@@ -110,7 +110,7 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a class="modify-link" data-rowId="<%= commercePriceListUserSegmentEntryRel.getCommercePriceListUserSegmentEntryRelId() %>" href="javascript:;"><%= removeCommercePriceListUserSegmentEntryRelIcon %></a>
+			<a class="remove-rel-link" data-rowId="<%= commercePriceListUserSegmentEntryRel.getCommercePriceListUserSegmentEntryRelId() %>" href="javascript:;"><%= removeItemIcon %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -168,7 +168,7 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 		var rowColumns = [];
 
 		rowColumns.push(item.name);
-		rowColumns.push('<a class="modify-link" data-rowId="' + item.commerceUserSegmentEntryId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeCommercePriceListUserSegmentEntryRelIcon) %></a>');
+		rowColumns.push('<a class="remove-rel-link" data-rowId="' + item.commerceUserSegmentEntryId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeItemIcon) %></a>');
 
 		A.Array.removeItem(<portlet:namespace />deleteCommercePriceListUserSegmentEntryRelIds, item.commerceUserSegmentEntryId);
 
@@ -197,11 +197,11 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 <aui:script use="liferay-search-container">
 	var Util = Liferay.Util;
 
-	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />commercePriceListUserSegmentEntryRelSearchContainer');
+	var relSearchContainer = Liferay.SearchContainer.get('<portlet:namespace />commercePriceListUserSegmentEntryRelSearchContainer');
 
-	var searchContainerContentBox = searchContainer.get('contentBox');
+	var relSearchContainerContentBox = relSearchContainer.get('contentBox');
 
-	searchContainerContentBox.delegate(
+	relSearchContainerContentBox.delegate(
 		'click',
 		function(event) {
 			var link = event.currentTarget;
@@ -210,10 +210,10 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 
 			var tr = link.ancestor('tr');
 
-			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
+			relSearchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
 
 			<portlet:namespace />deleteCommercePriceListUserSegmentEntryRel(rowId);
 		},
-		'.modify-link'
+		'.remove-rel-link'
 	);
 </aui:script>
