@@ -80,7 +80,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 						<div class="price" data-text-cp-instance-price=""></div>
 
-						<div class="subscription-info" data-text-cp-instance-subscription-info=""></div>
+						<div class="subscription-info" data-text-cp-instance-subscription-info="" data-text-cp-instance-subscription-info-show></div>
 
 						<div class="availability" data-text-cp-instance-availability=""></div>
 
