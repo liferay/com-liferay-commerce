@@ -63,23 +63,52 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 	</aui:select>
 
 	<aui:input name="priority" />
-
-	<aui:select label="parent-price-list" name="parentCommercePriceListId" showEmptyOption="<%= true %>">
-
-		<%
-		List<CommercePriceList> commercePriceLists = commercePriceListDisplayContext.getCommercePriceLists();
-
-		for (CommercePriceList curCommercePriceList : commercePriceLists) {
-		%>
-
-			<aui:option label="<%= curCommercePriceList.getName() %>" selected="<%= (commercePriceList != null) && (commercePriceList.getParentCommercePriceListId() == curCommercePriceList.getCommercePriceListId()) %>" value="<%= curCommercePriceList.getCommercePriceListId() %>" />
-
-		<%
-		}
-		%>
-
-	</aui:select>
 </aui:fieldset>
+
+<h5 class="text-default"><liferay-ui:message key="parent-price-list" /></h5>
+
+<%
+List<CommercePriceList> parentCommercePriceLists = Collections.emptyList();
+
+CommercePriceList parentCommercePriceList = commercePriceListDisplayContext.getParentCommercePriceList();
+
+if (parentCommercePriceList != null) {
+	parentCommercePriceLists = Collections.singletonList(parentCommercePriceList);
+}
+%>
+
+<liferay-ui:search-container
+	curParam="parentCommercePriceList"
+	headerNames="null,null"
+	id="parentCommercePriceListSearchContainer"
+	iteratorURL="<%= currentURLObj %>"
+	total="<%= parentCommercePriceLists.size() %>"
+>
+	<liferay-ui:search-container-results
+		results="<%= parentCommercePriceLists %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.commerce.price.list.model.CommercePriceList"
+		keyProperty="commercePriceListId"
+		modelVar="curCommercePriceList"
+	>
+		<liferay-ui:search-container-column-text
+			cssClass="table-cell-content"
+			value="<%= HtmlUtil.escape(curCommercePriceList.getName()) %>"
+		/>
+
+		<liferay-ui:search-container-column-text>
+			<a class="remove-parent-link" data-rowId="<%= curCommercePriceList.getCommercePriceListId() %>" href="javascript:;"><%= removeItemIcon %></a>
+		</liferay-ui:search-container-column-text>
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator
+		markupView="lexicon"
+	/>
+</liferay-ui:search-container>
+
+<aui:button name="setParentCommercePriceList" value="select" />
 
 <h5 class="text-default"><liferay-ui:message key="user-segments" /></h5>
 
@@ -154,6 +183,34 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 			itemSelectorDialog.open();
 		}
 	);
+
+	$('#<portlet:namespace />setParentCommercePriceList').on(
+		'click',
+		function(event) {
+			event.preventDefault();
+
+			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
+				{
+					eventName: 'priceListsSelectItem',
+					on: {
+						selectedItemChange: function(event) {
+							var selectedItems = event.newVal;
+
+							if (selectedItems) {
+								var parentCommercePriceListId = selectedItems.replace(/(\d+).*/, '$1');
+
+								<portlet:namespace />setParentCommercePriceList(parentCommercePriceListId);
+							}
+						}
+					},
+					title: '<liferay-ui:message key="set-parent-price-list" />',
+					url: '<%= commercePriceListDisplayContext.getPriceListItemSelectorUrl() %>'
+				}
+			);
+
+			itemSelectorDialog.open();
+		}
+	);
 </aui:script>
 
 <aui:script>
@@ -192,10 +249,54 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 		document.<portlet:namespace />fm.<portlet:namespace />addCommerceUserSegmentEntryIds.value = <portlet:namespace />addCommerceUserSegmentEntryIds.join(',');
 		document.<portlet:namespace />fm.<portlet:namespace />deleteCommercePriceListUserSegmentEntryRelIds.value = <portlet:namespace />deleteCommercePriceListUserSegmentEntryRelIds.join(',');
 	}
+
+	function <portlet:namespace />setParentCommercePriceList(parentCommercePriceListId) {
+		var A = AUI();
+
+		Liferay.Service(
+			'/commerce.commercepricelist/fetch-commerce-price-list',
+			{
+				commercePriceListId: parentCommercePriceListId
+			},
+			function(commercePriceList) {
+				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentCommercePriceListSearchContainer');
+
+				var rowColumns = [];
+
+				rowColumns.push(commercePriceList.name);
+				rowColumns.push('<a class="remove-parent-link" data-rowId="' + parentCommercePriceListId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeItemIcon) %></a>');
+
+				searchContainer.addRow(rowColumns, parentCommercePriceListId);
+
+				searchContainer.updateDataStore();
+
+				document.<portlet:namespace />fm.<portlet:namespace />parentCommercePriceListId.value = parentCommercePriceListId;
+			}
+		);
+	}
 </aui:script>
 
 <aui:script use="liferay-search-container">
 	var Util = Liferay.Util;
+
+	var parentSearchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentCommercePriceListSearchContainer');
+
+	var parentSearchContainerContentBox = parentSearchContainer.get('contentBox');
+
+	parentSearchContainerContentBox.delegate(
+		'click',
+		function(event) {
+			var link = event.currentTarget;
+
+			var tr = link.ancestor('tr');
+			var rowId = link.attr('data-rowId');
+
+			parentSearchContainer.deleteRow(tr, rowId);
+
+			document.<portlet:namespace />fm.<portlet:namespace />parentCommercePriceListId.value = 0;
+		},
+		'.remove-parent-link'
+	);
 
 	var relSearchContainer = Liferay.SearchContainer.get('<portlet:namespace />commercePriceListUserSegmentEntryRelSearchContainer');
 
@@ -206,11 +307,10 @@ List<CommercePriceListUserSegmentEntryRel> commercePriceListUserSegmentEntryRels
 		function(event) {
 			var link = event.currentTarget;
 
+			var tr = link.ancestor('tr');
 			var rowId = link.attr('data-rowId');
 
-			var tr = link.ancestor('tr');
-
-			relSearchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
+			relSearchContainer.deleteRow(tr, rowId);
 
 			<portlet:namespace />deleteCommercePriceListUserSegmentEntryRel(rowId);
 		},
