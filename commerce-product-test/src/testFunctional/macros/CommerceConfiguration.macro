@@ -1,4 +1,16 @@
 <definition>
+	<command name="commerceAdminSetUp">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Configuration" />
+			<var name="panel" value="Control Panel" />
+			<var name="portlet" value="Search" />
+		</execute>
+
+		<execute macro="SearchAdministration#executeSearchActions">
+			<var name="actionsDescription" value="Reindex all search indexes." />
+		</execute>
+	</command>
+
 	<command name="commerceAdminTearDown">
 		<execute macro="Navigator#openURL" />
 
@@ -61,18 +73,6 @@
 		</if>
 
 		<execute macro="User#logoutPG" />
-	</command>
-
-	<command name="commerceAdminSetUp">
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Configuration" />
-			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="Search" />
-		</execute>
-
-		<execute macro="SearchAdministration#executeSearchActions">
-			<var name="actionsDescription" value="Reindex all search indexes." />
-		</execute>
 	</command>
 
 	<command name="commerceSettingsTearDown">
