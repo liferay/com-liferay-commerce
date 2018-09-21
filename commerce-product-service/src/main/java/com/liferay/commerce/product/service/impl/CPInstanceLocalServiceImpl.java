@@ -757,9 +757,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPInstance updateSubscriptionInfo(
-			long cpInstanceId, boolean subscriptionEnabled,
-			long subscriptionCycleLength, String subscriptionCyclePeriod,
-			long maxSubscriptionCyclesNumber, ServiceContext serviceContext)
+			long cpInstanceId, boolean overrideSubscriptionInfo,
+			boolean subscriptionEnabled, long subscriptionCycleLength,
+			String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		CPInstance cpInstance = cpInstancePersistence.findByPrimaryKey(
@@ -769,6 +770,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		cpInstance.setModifiedDate(serviceContext.getModifiedDate(now));
 
+		cpInstance.setOverrideSubscriptionInfo(overrideSubscriptionInfo);
 		cpInstance.setSubscriptionEnabled(subscriptionEnabled);
 		cpInstance.setSubscriptionCycleLength(subscriptionCycleLength);
 		cpInstance.setSubscriptionCyclePeriod(subscriptionCyclePeriod);

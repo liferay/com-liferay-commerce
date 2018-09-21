@@ -256,9 +256,10 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 
 	@Override
 	public CPInstance updateSubscriptionInfo(
-			long cpInstanceId, boolean subscriptionEnabled,
-			long subscriptionCycleLength, String subscriptionCyclePeriod,
-			long maxSubscriptionCyclesNumber, ServiceContext serviceContext)
+			long cpInstanceId, boolean overrideSubscriptionInfo,
+			boolean subscriptionEnabled, long subscriptionCycleLength,
+			String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		CPInstance cpInstance = cpInstanceLocalService.getCPInstance(
@@ -269,9 +270,9 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 			ActionKeys.UPDATE);
 
 		return cpInstanceLocalService.updateSubscriptionInfo(
-			cpInstanceId, subscriptionEnabled, subscriptionCycleLength,
-			subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
-			serviceContext);
+			cpInstanceId, overrideSubscriptionInfo, subscriptionEnabled,
+			subscriptionCycleLength, subscriptionCyclePeriod,
+			maxSubscriptionCyclesNumber, serviceContext);
 	}
 
 	@Override

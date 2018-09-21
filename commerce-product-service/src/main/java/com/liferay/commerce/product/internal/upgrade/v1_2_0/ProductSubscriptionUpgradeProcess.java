@@ -43,6 +43,9 @@ public class ProductSubscriptionUpgradeProcess extends UpgradeProcess {
 
 		_addColumn(
 			CPInstanceImpl.class, CPInstanceImpl.TABLE_NAME,
+			"overrideSubscriptionInfo", "BOOLEAN");
+		_addColumn(
+			CPInstanceImpl.class, CPInstanceImpl.TABLE_NAME,
 			"subscriptionEnabled", "BOOLEAN");
 		_addColumn(
 			CPInstanceImpl.class, CPInstanceImpl.TABLE_NAME,
