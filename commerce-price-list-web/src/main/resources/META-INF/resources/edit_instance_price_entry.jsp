@@ -28,7 +28,6 @@ CPDefinition cpDefinition = cpInstanceCommercePriceEntryDisplayContext.getCPDefi
 CPInstance cpInstance = cpInstanceCommercePriceEntryDisplayContext.getCPInstance();
 
 long commercePriceEntryId = commercePriceEntry.getCommercePriceEntryId();
-long cpDefinitionId = cpInstanceCommercePriceEntryDisplayContext.getCPDefinitionId();
 long cpInstanceId = cpInstanceCommercePriceEntryDisplayContext.getCPInstanceId();
 
 String instancePriceEntryToolbarItem = ParamUtil.getString(request, "instancePriceEntryToolbarItem", "view-price-entry-details");

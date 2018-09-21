@@ -22,6 +22,7 @@ CommercePriceListDisplayContext commercePriceListDisplayContext = (CommercePrice
 CommercePriceList commercePriceList = commercePriceListDisplayContext.getCommercePriceList();
 
 long commercePriceListId = commercePriceListDisplayContext.getCommercePriceListId();
+long parentCommercePriceListId = commercePriceListDisplayContext.getParentCommercePriceListId();
 %>
 
 <portlet:actionURL name="editCommercePriceList" var="editCommercePriceListActionURL" />
@@ -32,6 +33,7 @@ long commercePriceListId = commercePriceListDisplayContext.getCommercePriceListI
 	<aui:input name="addCommerceUserSegmentEntryIds" type="hidden" value="" />
 	<aui:input name="commercePriceListId" type="hidden" value="<%= commercePriceListId %>" />
 	<aui:input name="deleteCommercePriceListUserSegmentEntryRelIds" type="hidden" value="" />
+	<aui:input name="parentCommercePriceListId" type="hidden" value="<%= parentCommercePriceListId %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
 
 	<c:if test="<%= (commercePriceList != null) && !commercePriceList.isNew() %>">

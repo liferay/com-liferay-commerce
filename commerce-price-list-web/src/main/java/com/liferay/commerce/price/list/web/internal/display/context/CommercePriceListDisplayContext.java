@@ -17,6 +17,7 @@ package com.liferay.commerce.price.list.web.internal.display.context;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.currency.util.comparator.CommerceCurrencyPriorityComparator;
+import com.liferay.commerce.item.selector.criterion.CommercePriceListItemSelectorCriterion;
 import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
@@ -161,6 +162,45 @@ public class CommercePriceListDisplayContext
 		itemSelectorURL.setParameter(
 			"checkedCommerceUserSegmentEntryIds",
 			checkedCommerceUserSegmentEntryIds);
+
+		return itemSelectorURL.toString();
+	}
+
+	public CommercePriceList getParentCommercePriceList()
+		throws PortalException {
+
+		return _commercePriceListService.fetchCommercePriceList(
+			getParentCommercePriceListId());
+	}
+
+	public long getParentCommercePriceListId() throws PortalException {
+		CommercePriceList commercePriceList = getCommercePriceList();
+
+		return commercePriceList.getParentCommercePriceListId();
+	}
+
+	public String getPriceListItemSelectorUrl() throws PortalException {
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
+			RequestBackedPortletURLFactoryUtil.create(httpServletRequest);
+
+		CommercePriceListItemSelectorCriterion
+			commercePriceListItemSelectorCriterion =
+				new CommercePriceListItemSelectorCriterion();
+
+		commercePriceListItemSelectorCriterion.
+			setDesiredItemSelectorReturnTypes(
+				Collections.<ItemSelectorReturnType>singletonList(
+					new UUIDItemSelectorReturnType()));
+
+		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
+			requestBackedPortletURLFactory, "priceListsSelectItem",
+			commercePriceListItemSelectorCriterion);
+
+		String checkedCommercePriceListIds = String.valueOf(
+			getParentCommercePriceListId());
+
+		itemSelectorURL.setParameter(
+			"checkedCommercePriceListIds", checkedCommercePriceListIds);
 
 		return itemSelectorURL.toString();
 	}
