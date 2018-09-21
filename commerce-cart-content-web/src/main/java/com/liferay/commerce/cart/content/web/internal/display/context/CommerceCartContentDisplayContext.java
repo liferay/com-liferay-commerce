@@ -29,6 +29,7 @@ import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
@@ -285,6 +286,15 @@ public class CommerceCartContentDisplayContext {
 			return StringPool.BLANK;
 		}
 
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+		CPSubscriptionInfo cpSubscriptionInfo =
+			cpInstance.getCPSubscriptionInfo();
+
+		if (cpSubscriptionInfo == null) {
+			return StringPool.BLANK;
+		}
+
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(
@@ -292,23 +302,26 @@ public class CommerceCartContentDisplayContext {
 				commerceCartContentRequestHelper.getLocale(), "every"));
 		sb.append(StringPool.SPACE);
 
-		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+		long subscriptionCycleLength =
+			cpSubscriptionInfo.getSubscriptionCycleLength();
 
-		if (cpInstance.isSubscriptionEnabled()) {
-			return _getSubscriptionInfo(
-				cpInstance.getSubscriptionCycleLength(),
-				cpInstance.getSubscriptionCyclePeriod(), sb);
+		String subscriptionCyclePeriod =
+			cpSubscriptionInfo.getSubscriptionCyclePeriod();
+
+		sb.append(subscriptionCycleLength);
+
+		sb.append(StringPool.SPACE);
+
+		if (subscriptionCycleLength > 0) {
+			subscriptionCyclePeriod += CharPool.LOWER_CASE_S;
 		}
 
-		CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
+		sb.append(
+			LanguageUtil.get(
+				commerceCartContentRequestHelper.getRequest(),
+				subscriptionCyclePeriod));
 
-		if (cpDefinition.isSubscriptionEnabled()) {
-			return _getSubscriptionInfo(
-				cpDefinition.getSubscriptionCycleLength(),
-				cpDefinition.getSubscriptionCyclePeriod(), sb);
-		}
-
-		return StringPool.BLANK;
+		return sb.toString();
 	}
 
 	public boolean hasPermission(String actionId)throws PortalException {
@@ -356,25 +369,6 @@ public class CommerceCartContentDisplayContext {
 		commerceOrderModelResourcePermission;
 	protected final CPDefinitionHelper cpDefinitionHelper;
 	protected final CPInstanceHelper cpInstanceHelper;
-
-	private String _getSubscriptionInfo(
-		long subscriptionCycleLength, String subscriptionCyclePeriod,
-		StringBundler sb) {
-
-		sb.append(subscriptionCycleLength);
-		sb.append(StringPool.SPACE);
-
-		if (subscriptionCycleLength > 0) {
-			subscriptionCyclePeriod += CharPool.LOWER_CASE_S;
-		}
-
-		sb.append(
-			LanguageUtil.get(
-				commerceCartContentRequestHelper.getRequest(),
-				subscriptionCyclePeriod));
-
-		return sb.toString();
-	}
 
 	private final CommerceCartContentPortletInstanceConfiguration
 		_commerceCartContentPortletInstanceConfiguration;

@@ -31,6 +31,7 @@ import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.petra.string.CharPool;
@@ -172,35 +173,28 @@ public class OrderSummaryCheckoutStepDisplayContext {
 			return StringPool.BLANK;
 		}
 
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+		CPSubscriptionInfo cpSubscriptionInfo =
+			cpInstance.getCPSubscriptionInfo();
+
+		if (cpSubscriptionInfo == null) {
+			return StringPool.BLANK;
+		}
+
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(LanguageUtil.get(_httpServletRequest, "every"));
 		sb.append(StringPool.SPACE);
 
-		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+		long subscriptionCycleLength =
+			cpSubscriptionInfo.getSubscriptionCycleLength();
 
-		if (cpInstance.isSubscriptionEnabled()) {
-			return _getSubscriptionInfo(
-				cpInstance.getSubscriptionCycleLength(),
-				cpInstance.getSubscriptionCyclePeriod(), sb);
-		}
-
-		CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
-
-		if (cpDefinition.isSubscriptionEnabled()) {
-			return _getSubscriptionInfo(
-				cpDefinition.getSubscriptionCycleLength(),
-				cpDefinition.getSubscriptionCyclePeriod(), sb);
-		}
-
-		return StringPool.BLANK;
-	}
-
-	private String _getSubscriptionInfo(
-		long subscriptionCycleLength, String subscriptionCyclePeriod,
-		StringBundler sb) {
+		String subscriptionCyclePeriod =
+			cpSubscriptionInfo.getSubscriptionCyclePeriod();
 
 		sb.append(subscriptionCycleLength);
+
 		sb.append(StringPool.SPACE);
 
 		if (subscriptionCycleLength > 0) {

@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.taglib.servlet.taglib;
 
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.service.CPInstanceServiceUtil;
 import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.petra.string.CharPool;
@@ -48,33 +48,21 @@ public class SubscriptionInfoTag extends IncludeTag {
 			CPInstance cpInstance = CPInstanceServiceUtil.getCPInstance(
 				_cpInstanceId);
 
-			CPDefinition cpDefinition = cpInstance.getCPDefinition();
+			CPSubscriptionInfo cpSubscriptionInfo =
+				cpInstance.getCPSubscriptionInfo();
 
-			if (!cpDefinition.isSubscriptionEnabled() &&
-				!cpInstance.isSubscriptionEnabled()) {
-
+			if (cpSubscriptionInfo == null) {
 				return SKIP_BODY;
 			}
 
-			String period;
-			long maxSubscriptionCyclesNumber;
+			_length = cpSubscriptionInfo.getSubscriptionCycleLength();
 
-			if (cpInstance.isSubscriptionEnabled()) {
-				_length = cpInstance.getSubscriptionCycleLength();
-				period = cpInstance.getSubscriptionCyclePeriod();
+			long maxSubscriptionCyclesNumber =
+				cpSubscriptionInfo.getMaxSubscriptionCyclesNumber();
+			String subscriptionCyclePeriod =
+				cpSubscriptionInfo.getSubscriptionCyclePeriod();
 
-				maxSubscriptionCyclesNumber =
-					cpInstance.getMaxSubscriptionCyclesNumber();
-			}
-			else {
-				_length = cpDefinition.getSubscriptionCycleLength();
-				period = cpDefinition.getSubscriptionCyclePeriod();
-
-				maxSubscriptionCyclesNumber =
-					cpDefinition.getMaxSubscriptionCyclesNumber();
-			}
-
-			_periodSuffix = _getSuffix(_length, period);
+			_periodSuffix = _getSuffix(_length, subscriptionCyclePeriod);
 
 			if (_showDuration && (maxSubscriptionCyclesNumber > 0)) {
 				ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
@@ -85,7 +73,8 @@ public class SubscriptionInfoTag extends IncludeTag {
 				_duration = LanguageUtil.format(
 					resourceBundle, "duration-x", totalLength, false);
 
-				_durationSuffix = _getSuffix(totalLength, period);
+				_durationSuffix = _getSuffix(
+					totalLength, subscriptionCyclePeriod);
 			}
 		}
 		catch (PortalException pe) {
