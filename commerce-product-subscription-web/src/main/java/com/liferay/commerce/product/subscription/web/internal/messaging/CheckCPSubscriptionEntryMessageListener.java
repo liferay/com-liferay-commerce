@@ -16,8 +16,8 @@ package com.liferay.commerce.product.subscription.web.internal.messaging;
 
 import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.product.subscription.web.internal.configuration.subscription.CPSubscriptionConfiguration;
-import com.liferay.commerce.product.subscription.web.internal.subscription.util.CPSubscriptionEntryHelper;
 import com.liferay.commerce.service.CPSubscriptionEntryLocalService;
+import com.liferay.commerce.util.CPSubscriptionEntryHelper;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -79,10 +79,7 @@ public class CheckCPSubscriptionEntryMessageListener
 		List<CPSubscriptionEntry> cpSubscriptionEntriesToRenew =
 			_cpSubscriptionEntryLocalService.getCPSubscriptionEntriesToRenew();
 
-		CPSubscriptionEntryHelper cpSubscriptionEntryHelper =
-			new CPSubscriptionEntryHelper();
-
-		cpSubscriptionEntryHelper.renewSubscriptionEntries(
+		_cpSubscriptionEntryHelper.renewSubscriptionEntries(
 			cpSubscriptionEntriesToRenew);
 	}
 
@@ -90,6 +87,9 @@ public class CheckCPSubscriptionEntryMessageListener
 	protected void setModuleServiceLifecycle(
 		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
+
+	@Reference
+	private CPSubscriptionEntryHelper _cpSubscriptionEntryHelper;
 
 	@Reference
 	private CPSubscriptionEntryLocalService _cpSubscriptionEntryLocalService;

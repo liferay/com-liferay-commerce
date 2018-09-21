@@ -21,6 +21,7 @@ import com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService;
 import com.liferay.commerce.service.CPSubscriptionEntryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.util.CPSubscriptionEntryHelper;
 import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -34,9 +35,11 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
-@Component(immediate = true)
-public class CPSubscriptionEntryHelper {
+@Component(immediate = true, service = CPSubscriptionEntryHelper.class)
+public class CPSubscriptionEntryHelperImpl
+	implements CPSubscriptionEntryHelper {
 
 	public void renewSubscriptionEntries(
 			List<CPSubscriptionEntry> cpSubscriptionEntries)
