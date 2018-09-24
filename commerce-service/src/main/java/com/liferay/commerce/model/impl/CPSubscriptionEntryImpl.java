@@ -12,9 +12,16 @@
  * details.
  */
 
-package com.liferay.commerce.product.model.impl;
+package com.liferay.commerce.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
+import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Alessio Antonio Rendina
@@ -24,4 +31,30 @@ public class CPSubscriptionEntryImpl extends CPSubscriptionEntryBaseImpl {
 
 	public CPSubscriptionEntryImpl() {
 	}
+
+	@Override
+	public CommerceOrderItem fetchCommerceOrderItem() {
+		return CommerceOrderItemLocalServiceUtil.fetchCommerceOrderItem(
+			getCommerceOrderItemId());
+	}
+
+	@Override
+	public CPDefinition getCPDefinition() throws PortalException {
+		CPInstance cpInstance = getCPInstance();
+
+		return cpInstance.getCPDefinition();
+	}
+
+	@Override
+	public long getCPDefinitionId() throws PortalException {
+		CPInstance cpInstance = getCPInstance();
+
+		return cpInstance.getCPDefinitionId();
+	}
+
+	@Override
+	public CPInstance getCPInstance() throws PortalException {
+		return CPInstanceLocalServiceUtil.getCPInstance(getCPInstanceId());
+	}
+
 }

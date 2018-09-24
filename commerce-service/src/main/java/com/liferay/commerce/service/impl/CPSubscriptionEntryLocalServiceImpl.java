@@ -18,8 +18,8 @@ import com.liferay.commerce.exception.CPSubscriptionCPInstanceIdException;
 import com.liferay.commerce.internal.search.CPSubscriptionEntryIndexer;
 import com.liferay.commerce.internal.util.CPSubscriptionUtil;
 import com.liferay.commerce.model.CPSubscriptionEntry;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.service.base.CPSubscriptionEntryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -67,36 +67,21 @@ public class CPSubscriptionEntryLocalServiceImpl
 		User user = userLocalService.getUser(serviceContext.getUserId());
 		long groupId = serviceContext.getScopeGroupId();
 
-		long subscriptionCycleLength;
-		String subscriptionCyclePeriod;
-		long maxSubscriptionCyclesNumber;
-
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
-		if (cpInstance.isSubscriptionEnabled()) {
-			subscriptionCycleLength = cpInstance.getSubscriptionCycleLength();
-			subscriptionCyclePeriod = cpInstance.getSubscriptionCyclePeriod();
-			maxSubscriptionCyclesNumber =
-				cpInstance.getMaxSubscriptionCyclesNumber();
-		}
-		else {
-			CPDefinition cpDefinition = cpInstance.getCPDefinition();
+		CPSubscriptionInfo cpSubscriptionInfo =
+			cpInstance.getCPSubscriptionInfo();
 
-			if (!cpDefinition.isSubscriptionEnabled()) {
-				throw new CPSubscriptionCPInstanceIdException();
-			}
-
-			subscriptionCycleLength = cpDefinition.getSubscriptionCycleLength();
-			subscriptionCyclePeriod = cpDefinition.getSubscriptionCyclePeriod();
-			maxSubscriptionCyclesNumber =
-				cpDefinition.getMaxSubscriptionCyclesNumber();
+		if (cpSubscriptionInfo == null) {
+			throw new CPSubscriptionCPInstanceIdException();
 		}
 
 		Date subscriptionNextIterationDate =
 			CPSubscriptionUtil.getSubscriptionNextIterationDate(
-				user.getTimeZone(), subscriptionCycleLength,
-				subscriptionCyclePeriod);
+				user.getTimeZone(),
+				cpSubscriptionInfo.getSubscriptionCycleLength(),
+				cpSubscriptionInfo.getSubscriptionCyclePeriod());
 
 		long cpSubscriptionEntryId = counterLocalService.increment();
 
@@ -108,11 +93,14 @@ public class CPSubscriptionEntryLocalServiceImpl
 		cpSubscriptionEntry.setCompanyId(user.getCompanyId());
 		cpSubscriptionEntry.setUserId(user.getUserId());
 		cpSubscriptionEntry.setUserName(user.getFullName());
+		cpSubscriptionEntry.setCPInstanceId(cpInstanceId);
 		cpSubscriptionEntry.setCommerceOrderItemId(commerceOrderItemId);
-		cpSubscriptionEntry.setSubscriptionCycleLength(subscriptionCycleLength);
-		cpSubscriptionEntry.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+		cpSubscriptionEntry.setSubscriptionCycleLength(
+			cpSubscriptionInfo.getSubscriptionCycleLength());
+		cpSubscriptionEntry.setSubscriptionCyclePeriod(
+			cpSubscriptionInfo.getSubscriptionCyclePeriod());
 		cpSubscriptionEntry.setMaxSubscriptionCyclesNumber(
-			maxSubscriptionCyclesNumber);
+			cpSubscriptionInfo.getMaxSubscriptionCyclesNumber());
 		cpSubscriptionEntry.setActive(true);
 		cpSubscriptionEntry.setNextIterationDate(subscriptionNextIterationDate);
 

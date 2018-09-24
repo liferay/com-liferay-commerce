@@ -12,9 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.product.model.impl;
+package com.liferay.commerce.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.commerce.model.CPSubscriptionEntry;
+import com.liferay.commerce.service.CPSubscriptionEntryLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Alessio Antonio Rendina
@@ -22,7 +26,13 @@ import aQute.bnd.annotation.ProviderType;
 @ProviderType
 public class CPSubscriptionCycleEntryImpl
 	extends CPSubscriptionCycleEntryBaseImpl {
-	
+
 	public CPSubscriptionCycleEntryImpl() {
 	}
+
+	public CPSubscriptionEntry getCPSubscriptionEntry() throws PortalException {
+		return CPSubscriptionEntryLocalServiceUtil.getCPSubscriptionEntry(
+			getCPSubscriptionEntryId());
+	}
+
 }
