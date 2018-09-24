@@ -119,6 +119,10 @@
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
 		<column name="lastPublishDate" type="Date" />
+		<column name="subscriptionEnabled" type="boolean" />
+		<column name="subscriptionCycleLength" type="long" />
+		<column name="subscriptionCyclePeriod" type="String" />
+		<column name="maxSubscriptionCyclesNumber" type="long" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
@@ -543,6 +547,11 @@
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
 		<column name="lastPublishDate" type="Date" />
+		<column name="overrideSubscriptionInfo" type="boolean" />
+		<column name="subscriptionEnabled" type="boolean" />
+		<column name="subscriptionCycleLength" type="long" />
+		<column name="subscriptionCyclePeriod" type="String" />
+		<column name="maxSubscriptionCyclesNumber" type="long" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
