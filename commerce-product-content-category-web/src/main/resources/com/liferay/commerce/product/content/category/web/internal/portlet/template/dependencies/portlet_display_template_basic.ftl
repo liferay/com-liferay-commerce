@@ -1,11 +1,25 @@
 <div class="row">
 	<#assign
-		image = cpCategoryContentDisplayContext.getDefaultImageSrc(themeDisplay)
+		image = ''
 
-		title = assetCategory.getTitle(locale)
+		title = ''
 
-		description = assetCategory.getDescription(locale)
+		description = ''
 	/>
+
+	<#if cpCategoryContentDisplayContext.getDefaultImageSrc(themeDisplay)??>
+		<#assign
+			image = cpCategoryContentDisplayContext.getDefaultImageSrc(themeDisplay)
+		/>
+	</#if>
+
+	<#if assetCategory??>
+		<#assign
+			title = assetCategory.getTitle(locale)
+
+			description = assetCategory.getTitle(locale)
+		/>
+	</#if>
 
 	<div>
 		<img src="${image}">
