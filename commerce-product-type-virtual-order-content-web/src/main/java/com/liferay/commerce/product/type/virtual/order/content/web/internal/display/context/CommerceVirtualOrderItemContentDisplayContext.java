@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context;
 
+import com.liferay.commerce.model.CPSubscriptionCycleEntry;
+import com.liferay.commerce.model.CPSubscriptionEntry;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
@@ -28,6 +30,7 @@ import com.liferay.commerce.product.type.virtual.order.util.comparator.CommerceV
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleDisplay;
@@ -65,6 +68,8 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			CPDefinitionHelper cpDefinitionHelper,
 			CPDefinitionVirtualSettingService cpDefinitionVirtualSettingService,
 			CPInstanceHelper cpInstanceHelper,
+			CPSubscriptionCycleEntryLocalService
+				cpSubscriptionCycleEntryLocalService,
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
@@ -74,6 +79,8 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpDefinitionVirtualSettingService = cpDefinitionVirtualSettingService;
 		_cpInstanceHelper = cpInstanceHelper;
+		_cpSubscriptionCycleEntryLocalService =
+			cpSubscriptionCycleEntryLocalService;
 
 		_commerceVirtualOrderItemContentRequestHelper =
 			new CommerceVirtualOrderItemContentRequestHelper(
@@ -348,6 +355,25 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		return _searchContainer;
 	}
 
+	public boolean hasActiveSubscription(
+			CommerceVirtualOrderItem commerceVirtualOrderItem)
+		throws PortalException {
+
+		CPSubscriptionCycleEntry cpSubscriptionCycleEntry =
+			_cpSubscriptionCycleEntryLocalService.
+				fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+					commerceVirtualOrderItem.getCommerceOrderItemId());
+
+		if (cpSubscriptionCycleEntry == null) {
+			return true;
+		}
+
+		CPSubscriptionEntry cpSubscriptionEntry =
+			cpSubscriptionCycleEntry.getCPSubscriptionEntry();
+
+		return cpSubscriptionEntry.isActive();
+	}
+
 	private JournalArticleDisplay _articleDisplay;
 	private final CommerceOrganizationHelper _commerceOrganizationHelper;
 	private final CommerceVirtualOrderItemContentPortletInstanceConfiguration
@@ -360,6 +386,8 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 	private final CPDefinitionVirtualSettingService
 		_cpDefinitionVirtualSettingService;
 	private final CPInstanceHelper _cpInstanceHelper;
+	private final CPSubscriptionCycleEntryLocalService
+		_cpSubscriptionCycleEntryLocalService;
 	private long _displayStyleGroupId;
 	private SearchContainer<CommerceVirtualOrderItem> _searchContainer;
 

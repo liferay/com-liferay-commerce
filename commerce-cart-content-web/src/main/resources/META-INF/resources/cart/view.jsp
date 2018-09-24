@@ -142,12 +142,19 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 					<%
 					CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
+
+					String subscriptionInfo = commerceCartContentDisplayContext.getSubscriptionInfo(commerceOrderItem);
 					%>
 
 					<liferay-ui:search-container-column-text
 						name="price"
-						value="<%= finalPriceMoney.format(locale) %>"
-					/>
+					>
+						<%= finalPriceMoney.format(locale) %>
+
+						<c:if test="<%= Validator.isNotNull(subscriptionInfo) %>">
+							(<%= subscriptionInfo %>)
+						</c:if>
+					</liferay-ui:search-container-column-text>
 
 					<c:if test="<%= commerceCartContentDisplayContext.hasPermission(ActionKeys.UPDATE) %>">
 						<liferay-ui:search-container-column-text>

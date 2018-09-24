@@ -76,4 +76,12 @@ public class CPPortletKeys {
 		"com_liferay_commerce_product_options_web_internal_portlet_" +
 			"CPSpecificationOptionsPortlet";
 
+	public static final String CP_SUBSCRIPTION_CONTENT_WEB =
+		"com_liferay_commerce_product_internal_portlet_" +
+			"CPSubscriptionContentPortlet";
+
+	public static final String CP_SUBSCRIPTION_ENTRY =
+		"com_liferay_commerce_product_internal_portlet_" +
+			"CPSubscriptionEntryPortlet";
+
 }

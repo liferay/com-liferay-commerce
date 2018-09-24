@@ -30,10 +30,15 @@ import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.document.library.kernel.util.DLUtil;
+import com.liferay.petra.string.CharPool;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -159,6 +164,47 @@ public class OrderSummaryCheckoutStepDisplayContext {
 		throws PortalException {
 
 		return _cpInstanceHelper.getKeyValuePairs(json, locale);
+	}
+
+	public String getSubscriptionInfo(CommerceOrderItem commerceOrderItem)
+		throws PortalException {
+
+		if (!commerceOrderItem.isSubscription()) {
+			return StringPool.BLANK;
+		}
+
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+		CPSubscriptionInfo cpSubscriptionInfo =
+			cpInstance.getCPSubscriptionInfo();
+
+		if (cpSubscriptionInfo == null) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(LanguageUtil.get(_httpServletRequest, "every"));
+		sb.append(StringPool.SPACE);
+
+		long subscriptionCycleLength =
+			cpSubscriptionInfo.getSubscriptionCycleLength();
+
+		String subscriptionCyclePeriod =
+			cpSubscriptionInfo.getSubscriptionCyclePeriod();
+
+		sb.append(subscriptionCycleLength);
+
+		sb.append(StringPool.SPACE);
+
+		if (subscriptionCycleLength > 0) {
+			subscriptionCyclePeriod += CharPool.LOWER_CASE_S;
+		}
+
+		sb.append(
+			LanguageUtil.get(_httpServletRequest, subscriptionCyclePeriod));
+
+		return sb.toString();
 	}
 
 	private final CommerceContext _commerceContext;

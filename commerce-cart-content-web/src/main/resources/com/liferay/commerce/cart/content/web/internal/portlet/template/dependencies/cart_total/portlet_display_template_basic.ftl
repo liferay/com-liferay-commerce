@@ -1,3 +1,9 @@
+<#assign
+	commerceOrderPrice = commerceCartContentTotalDisplayContext.getCommerceOrderPrice()
+
+	commerceOrderTotal = commerceOrderPrice.getTotal()
+/>
+
 <h4>
-	<strong><@liferay_ui["message"] key="total" /> ${commerceCartContentTotalDisplayContext.getCommerceOrderTotal()}</strong>
+	<strong><@liferay_ui["message"] key="total" /> ${commerceOrderTotal.format(locale)}</strong>
 </h4>

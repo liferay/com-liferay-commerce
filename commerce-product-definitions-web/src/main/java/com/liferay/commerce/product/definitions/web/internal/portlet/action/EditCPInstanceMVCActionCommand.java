@@ -22,7 +22,6 @@ import com.liferay.commerce.product.exception.NoSuchSkuContributorCPDefinitionOp
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
-import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
@@ -121,6 +120,9 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 			}
 			else if (cmd.equals("updateShippingInfo")) {
 				updateShippingInfo(actionRequest);
+			}
+			else if (cmd.equals("updateSubscriptionInfo")) {
+				updateSubscriptionInfo(actionRequest);
 			}
 		}
 		catch (Exception e) {
@@ -286,8 +288,29 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 			cpInstanceId, width, height, depth, weight, serviceContext);
 	}
 
-	@Reference
-	private CPInstanceHelper _cpInstanceHelper;
+	protected void updateSubscriptionInfo(ActionRequest actionRequest)
+		throws PortalException {
+
+		long cpInstanceId = ParamUtil.getLong(actionRequest, "cpInstanceId");
+		boolean overrideSubscriptionInfo = ParamUtil.getBoolean(
+			actionRequest, "overrideSubscriptionInfo");
+		boolean subscriptionEnabled = ParamUtil.getBoolean(
+			actionRequest, "subscriptionEnabled");
+		long subscriptionCycleLength = ParamUtil.getLong(
+			actionRequest, "subscriptionCycleLength");
+		String subscriptionCyclePeriod = ParamUtil.getString(
+			actionRequest, "subscriptionCyclePeriod");
+		long maxSubscriptionCyclesNumber = ParamUtil.getLong(
+			actionRequest, "maxSubscriptionCyclesNumber");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CPInstance.class.getName(), actionRequest);
+
+		_cpInstanceService.updateSubscriptionInfo(
+			cpInstanceId, overrideSubscriptionInfo, subscriptionEnabled,
+			subscriptionCycleLength, subscriptionCyclePeriod,
+			maxSubscriptionCyclesNumber, serviceContext);
+	}
 
 	@Reference
 	private CPInstanceService _cpInstanceService;

@@ -356,17 +356,19 @@ public class CommerceOrderLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
-	@Override
 	public CommerceOrder checkoutCommerceOrder(
-			long commerceOrderId, CommerceContext commerceContext,
-			ServiceContext serviceContext)
+			long commerceOrderId, boolean recalculate,
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		// Commerce order
 
-		CommerceOrder commerceOrder =
-			commerceOrderLocalService.recalculatePrice(
+		CommerceOrder commerceOrder;
+
+		if (recalculate) {
+			commerceOrder = commerceOrderLocalService.recalculatePrice(
 				commerceOrderId, commerceContext);
+		}
 
 		commerceOrder = commerceOrderLocalService.approveCommerceOrder(
 			serviceContext.getUserId(), commerceOrderId);
@@ -375,30 +377,33 @@ public class CommerceOrderLocalServiceImpl
 
 		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
 
-		CommerceOrderPrice commerceOrderPrice =
-			_commerceOrderPriceCalculation.getCommerceOrderPrice(
-				commerceOrder, commerceContext);
+		if (recalculate) {
+			CommerceOrderPrice commerceOrderPrice =
+				_commerceOrderPriceCalculation.getCommerceOrderPrice(
+					commerceOrder, commerceContext);
 
-		CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
-		CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
-		CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
-		CommerceMoney total = commerceOrderPrice.getTotal();
+			CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
+			CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
+			CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
+			CommerceMoney total = commerceOrderPrice.getTotal();
 
-		BigDecimal subtotalAmount = subtotal.getPrice();
-		BigDecimal shippingAmount = shippingValue.getPrice();
-		BigDecimal taxAmount = taxValue.getPrice();
-		BigDecimal totalAmount = total.getPrice();
+			BigDecimal subtotalAmount = subtotal.getPrice();
+			BigDecimal shippingAmount = shippingValue.getPrice();
+			BigDecimal taxAmount = taxValue.getPrice();
+			BigDecimal totalAmount = total.getPrice();
 
-		commerceOrder.setSubtotal(subtotalAmount);
-		commerceOrder.setSubtotalDiscounts(
-			commerceOrderPrice.getSubtotalDiscountValue());
-		commerceOrder.setShippingAmount(shippingAmount);
-		commerceOrder.setShippingDiscounts(
-			commerceOrderPrice.getShippingDiscountValue());
-		commerceOrder.setTaxAmount(taxAmount);
-		commerceOrder.setTotal(totalAmount);
-		commerceOrder.setTotalDiscounts(
-			commerceOrderPrice.getTotalDiscountValue());
+			commerceOrder.setSubtotal(subtotalAmount);
+			commerceOrder.setSubtotalDiscounts(
+				commerceOrderPrice.getSubtotalDiscountValue());
+			commerceOrder.setShippingAmount(shippingAmount);
+			commerceOrder.setShippingDiscounts(
+				commerceOrderPrice.getShippingDiscountValue());
+			commerceOrder.setTaxAmount(taxAmount);
+			commerceOrder.setTotal(totalAmount);
+			commerceOrder.setTotalDiscounts(
+				commerceOrderPrice.getTotalDiscountValue());
+		}
+
 		commerceOrder.setOrderStatus(
 			CommerceOrderConstants.ORDER_STATUS_IN_PROGRESS);
 
@@ -432,6 +437,16 @@ public class CommerceOrderLocalServiceImpl
 		}
 
 		return commerceOrderPersistence.update(commerceOrder);
+	}
+
+	@Override
+	public CommerceOrder checkoutCommerceOrder(
+			long commerceOrderId, CommerceContext commerceContext,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return checkoutCommerceOrder(
+			commerceOrderId, true, commerceContext, serviceContext);
 	}
 
 	@Override

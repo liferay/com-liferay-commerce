@@ -20,6 +20,9 @@ import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalService;
 import com.liferay.commerce.service.persistence.CPDAvailabilityEstimatePersistence;
 import com.liferay.commerce.service.persistence.CPDefinitionInventoryPersistence;
+import com.liferay.commerce.service.persistence.CPSubscriptionCycleEntryPersistence;
+import com.liferay.commerce.service.persistence.CPSubscriptionEntryFinder;
+import com.liferay.commerce.service.persistence.CPSubscriptionEntryPersistence;
 import com.liferay.commerce.service.persistence.CommerceAddressPersistence;
 import com.liferay.commerce.service.persistence.CommerceAddressRestrictionPersistence;
 import com.liferay.commerce.service.persistence.CommerceAvailabilityEstimatePersistence;
@@ -1232,6 +1235,101 @@ public abstract class CommerceAvailabilityEstimateLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the cp subscription cycle entry local service.
+	 *
+	 * @return the cp subscription cycle entry local service
+	 */
+	public com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService getCPSubscriptionCycleEntryLocalService() {
+		return cpSubscriptionCycleEntryLocalService;
+	}
+
+	/**
+	 * Sets the cp subscription cycle entry local service.
+	 *
+	 * @param cpSubscriptionCycleEntryLocalService the cp subscription cycle entry local service
+	 */
+	public void setCPSubscriptionCycleEntryLocalService(
+		com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService cpSubscriptionCycleEntryLocalService) {
+		this.cpSubscriptionCycleEntryLocalService = cpSubscriptionCycleEntryLocalService;
+	}
+
+	/**
+	 * Returns the cp subscription cycle entry persistence.
+	 *
+	 * @return the cp subscription cycle entry persistence
+	 */
+	public CPSubscriptionCycleEntryPersistence getCPSubscriptionCycleEntryPersistence() {
+		return cpSubscriptionCycleEntryPersistence;
+	}
+
+	/**
+	 * Sets the cp subscription cycle entry persistence.
+	 *
+	 * @param cpSubscriptionCycleEntryPersistence the cp subscription cycle entry persistence
+	 */
+	public void setCPSubscriptionCycleEntryPersistence(
+		CPSubscriptionCycleEntryPersistence cpSubscriptionCycleEntryPersistence) {
+		this.cpSubscriptionCycleEntryPersistence = cpSubscriptionCycleEntryPersistence;
+	}
+
+	/**
+	 * Returns the cp subscription entry local service.
+	 *
+	 * @return the cp subscription entry local service
+	 */
+	public com.liferay.commerce.service.CPSubscriptionEntryLocalService getCPSubscriptionEntryLocalService() {
+		return cpSubscriptionEntryLocalService;
+	}
+
+	/**
+	 * Sets the cp subscription entry local service.
+	 *
+	 * @param cpSubscriptionEntryLocalService the cp subscription entry local service
+	 */
+	public void setCPSubscriptionEntryLocalService(
+		com.liferay.commerce.service.CPSubscriptionEntryLocalService cpSubscriptionEntryLocalService) {
+		this.cpSubscriptionEntryLocalService = cpSubscriptionEntryLocalService;
+	}
+
+	/**
+	 * Returns the cp subscription entry persistence.
+	 *
+	 * @return the cp subscription entry persistence
+	 */
+	public CPSubscriptionEntryPersistence getCPSubscriptionEntryPersistence() {
+		return cpSubscriptionEntryPersistence;
+	}
+
+	/**
+	 * Sets the cp subscription entry persistence.
+	 *
+	 * @param cpSubscriptionEntryPersistence the cp subscription entry persistence
+	 */
+	public void setCPSubscriptionEntryPersistence(
+		CPSubscriptionEntryPersistence cpSubscriptionEntryPersistence) {
+		this.cpSubscriptionEntryPersistence = cpSubscriptionEntryPersistence;
+	}
+
+	/**
+	 * Returns the cp subscription entry finder.
+	 *
+	 * @return the cp subscription entry finder
+	 */
+	public CPSubscriptionEntryFinder getCPSubscriptionEntryFinder() {
+		return cpSubscriptionEntryFinder;
+	}
+
+	/**
+	 * Sets the cp subscription entry finder.
+	 *
+	 * @param cpSubscriptionEntryFinder the cp subscription entry finder
+	 */
+	public void setCPSubscriptionEntryFinder(
+		CPSubscriptionEntryFinder cpSubscriptionEntryFinder) {
+		this.cpSubscriptionEntryFinder = cpSubscriptionEntryFinder;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -1476,6 +1574,16 @@ public abstract class CommerceAvailabilityEstimateLocalServiceBaseImpl
 	protected com.liferay.commerce.service.CPDefinitionInventoryLocalService cpDefinitionInventoryLocalService;
 	@BeanReference(type = CPDefinitionInventoryPersistence.class)
 	protected CPDefinitionInventoryPersistence cpDefinitionInventoryPersistence;
+	@BeanReference(type = com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService.class)
+	protected com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService cpSubscriptionCycleEntryLocalService;
+	@BeanReference(type = CPSubscriptionCycleEntryPersistence.class)
+	protected CPSubscriptionCycleEntryPersistence cpSubscriptionCycleEntryPersistence;
+	@BeanReference(type = com.liferay.commerce.service.CPSubscriptionEntryLocalService.class)
+	protected com.liferay.commerce.service.CPSubscriptionEntryLocalService cpSubscriptionEntryLocalService;
+	@BeanReference(type = CPSubscriptionEntryPersistence.class)
+	protected CPSubscriptionEntryPersistence cpSubscriptionEntryPersistence;
+	@BeanReference(type = CPSubscriptionEntryFinder.class)
+	protected CPSubscriptionEntryFinder cpSubscriptionEntryFinder;
 	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
 	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
 	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)

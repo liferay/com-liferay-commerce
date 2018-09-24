@@ -28,12 +28,18 @@ import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.document.library.kernel.util.DLUtil;
+import com.liferay.petra.string.CharPool;
+import com.liferay.petra.string.StringBundler;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -271,6 +277,51 @@ public class CommerceCartContentDisplayContext {
 		_searchContainer.setResults(results);
 
 		return _searchContainer;
+	}
+
+	public String getSubscriptionInfo(CommerceOrderItem commerceOrderItem)
+		throws PortalException {
+
+		if (!commerceOrderItem.isSubscription()) {
+			return StringPool.BLANK;
+		}
+
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+		CPSubscriptionInfo cpSubscriptionInfo =
+			cpInstance.getCPSubscriptionInfo();
+
+		if (cpSubscriptionInfo == null) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(
+			LanguageUtil.get(
+				commerceCartContentRequestHelper.getLocale(), "every"));
+		sb.append(StringPool.SPACE);
+
+		long subscriptionCycleLength =
+			cpSubscriptionInfo.getSubscriptionCycleLength();
+
+		String subscriptionCyclePeriod =
+			cpSubscriptionInfo.getSubscriptionCyclePeriod();
+
+		sb.append(subscriptionCycleLength);
+
+		sb.append(StringPool.SPACE);
+
+		if (subscriptionCycleLength > 0) {
+			subscriptionCyclePeriod += CharPool.LOWER_CASE_S;
+		}
+
+		sb.append(
+			LanguageUtil.get(
+				commerceCartContentRequestHelper.getRequest(),
+				subscriptionCyclePeriod));
+
+		return sb.toString();
 	}
 
 	public boolean hasPermission(String actionId)throws PortalException {

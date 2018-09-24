@@ -552,6 +552,19 @@ public class CPInstanceLocalServiceUtil {
 			workflowContext);
 	}
 
+	public static com.liferay.commerce.product.model.CPInstance updateSubscriptionInfo(
+		long cpInstanceId, boolean overrideSubscriptionInfo,
+		boolean subscriptionEnabled, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateSubscriptionInfo(cpInstanceId,
+			overrideSubscriptionInfo, subscriptionEnabled,
+			subscriptionCycleLength, subscriptionCyclePeriod,
+			maxSubscriptionCyclesNumber, serviceContext);
+	}
+
 	public static com.liferay.commerce.product.model.CPInstance upsertCPInstance(
 		long cpDefinitionId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,
