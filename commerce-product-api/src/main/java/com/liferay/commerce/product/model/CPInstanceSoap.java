@@ -62,6 +62,11 @@ public class CPInstanceSoap implements Serializable {
 		soapModel.setDisplayDate(model.getDisplayDate());
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
+		soapModel.setOverrideSubscriptionInfo(model.isOverrideSubscriptionInfo());
+		soapModel.setSubscriptionEnabled(model.isSubscriptionEnabled());
+		soapModel.setSubscriptionCycleLength(model.getSubscriptionCycleLength());
+		soapModel.setSubscriptionCyclePeriod(model.getSubscriptionCyclePeriod());
+		soapModel.setMaxSubscriptionCyclesNumber(model.getMaxSubscriptionCyclesNumber());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
@@ -334,6 +339,54 @@ public class CPInstanceSoap implements Serializable {
 		_lastPublishDate = lastPublishDate;
 	}
 
+	public boolean getOverrideSubscriptionInfo() {
+		return _overrideSubscriptionInfo;
+	}
+
+	public boolean isOverrideSubscriptionInfo() {
+		return _overrideSubscriptionInfo;
+	}
+
+	public void setOverrideSubscriptionInfo(boolean overrideSubscriptionInfo) {
+		_overrideSubscriptionInfo = overrideSubscriptionInfo;
+	}
+
+	public boolean getSubscriptionEnabled() {
+		return _subscriptionEnabled;
+	}
+
+	public boolean isSubscriptionEnabled() {
+		return _subscriptionEnabled;
+	}
+
+	public void setSubscriptionEnabled(boolean subscriptionEnabled) {
+		_subscriptionEnabled = subscriptionEnabled;
+	}
+
+	public long getSubscriptionCycleLength() {
+		return _subscriptionCycleLength;
+	}
+
+	public void setSubscriptionCycleLength(long subscriptionCycleLength) {
+		_subscriptionCycleLength = subscriptionCycleLength;
+	}
+
+	public String getSubscriptionCyclePeriod() {
+		return _subscriptionCyclePeriod;
+	}
+
+	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod) {
+		_subscriptionCyclePeriod = subscriptionCyclePeriod;
+	}
+
+	public long getMaxSubscriptionCyclesNumber() {
+		return _maxSubscriptionCyclesNumber;
+	}
+
+	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber) {
+		_maxSubscriptionCyclesNumber = maxSubscriptionCyclesNumber;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -392,6 +445,11 @@ public class CPInstanceSoap implements Serializable {
 	private Date _displayDate;
 	private Date _expirationDate;
 	private Date _lastPublishDate;
+	private boolean _overrideSubscriptionInfo;
+	private boolean _subscriptionEnabled;
+	private long _subscriptionCycleLength;
+	private String _subscriptionCyclePeriod;
+	private long _maxSubscriptionCyclesNumber;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;
