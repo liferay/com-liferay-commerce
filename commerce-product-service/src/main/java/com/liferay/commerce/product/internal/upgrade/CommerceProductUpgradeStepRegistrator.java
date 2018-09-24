@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.internal.upgrade;
 
 import com.liferay.commerce.product.internal.upgrade.v1_1_0.CPRuleUpgradeProcess;
+import com.liferay.commerce.product.internal.upgrade.v1_2_0.ProductSubscriptionUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
@@ -38,6 +39,10 @@ public class CommerceProductUpgradeStepRegistrator
 			_SCHEMA_VERSION_1_0_0, _SCHEMA_VERSION_1_1_0,
 			new CPRuleUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_1_2_0,
+			new ProductSubscriptionUpgradeProcess());
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRODUCT UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -46,6 +51,8 @@ public class CommerceProductUpgradeStepRegistrator
 	private static final String _SCHEMA_VERSION_1_0_0 = "1.0.0";
 
 	private static final String _SCHEMA_VERSION_1_1_0 = "1.1.0";
+
+	private static final String _SCHEMA_VERSION_1_2_0 = "1.2.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceProductUpgradeStepRegistrator.class);
