@@ -63,4 +63,11 @@
 	<bean class="com.liferay.commerce.service.impl.CPDefinitionInventoryLocalServiceImpl" id="com.liferay.commerce.service.CPDefinitionInventoryLocalService" />
 	<bean class="com.liferay.commerce.service.impl.CPDefinitionInventoryServiceImpl" id="com.liferay.commerce.service.CPDefinitionInventoryService" />
 	<bean class="com.liferay.commerce.service.persistence.impl.CPDefinitionInventoryPersistenceImpl" id="com.liferay.commerce.service.persistence.CPDefinitionInventoryPersistence" parent="basePersistence" />
+	<bean class="com.liferay.commerce.service.impl.CPSubscriptionCycleEntryLocalServiceImpl" id="com.liferay.commerce.service.CPSubscriptionCycleEntryLocalService" />
+	<bean class="com.liferay.commerce.service.impl.CPSubscriptionCycleEntryServiceImpl" id="com.liferay.commerce.service.CPSubscriptionCycleEntryService" />
+	<bean class="com.liferay.commerce.service.persistence.impl.CPSubscriptionCycleEntryPersistenceImpl" id="com.liferay.commerce.service.persistence.CPSubscriptionCycleEntryPersistence" parent="basePersistence" />
+	<bean class="com.liferay.commerce.service.impl.CPSubscriptionEntryLocalServiceImpl" id="com.liferay.commerce.service.CPSubscriptionEntryLocalService" />
+	<bean class="com.liferay.commerce.service.impl.CPSubscriptionEntryServiceImpl" id="com.liferay.commerce.service.CPSubscriptionEntryService" />
+	<bean class="com.liferay.commerce.service.persistence.impl.CPSubscriptionEntryPersistenceImpl" id="com.liferay.commerce.service.persistence.CPSubscriptionEntryPersistence" parent="basePersistence" />
+	<bean class="com.liferay.commerce.service.persistence.impl.CPSubscriptionEntryFinderImpl" id="com.liferay.commerce.service.persistence.CPSubscriptionEntryFinder" parent="basePersistence" />
 </beans>

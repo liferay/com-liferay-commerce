@@ -34,6 +34,38 @@ create table CPDefinitionInventory (
 	multipleOrderQuantity INTEGER
 );
 
+create table CPSubscriptionCycleEntry (
+	uuid_ VARCHAR(75) null,
+	CPSubscriptionCycleEntryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	CPSubscriptionEntryId LONG,
+	commerceOrderItemId LONG,
+	renew BOOLEAN
+);
+
+create table CPSubscriptionEntry (
+	uuid_ VARCHAR(75) null,
+	CPSubscriptionEntryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	CPInstanceId LONG,
+	commerceOrderItemId LONG,
+	subscriptionCycleLength LONG,
+	subscriptionCyclePeriod VARCHAR(75) null,
+	maxSubscriptionCyclesNumber LONG,
+	active_ BOOLEAN,
+	nextIterationDate DATE null
+);
+
 create table CommerceAddress (
 	commerceAddressId LONG not null primary key,
 	groupId LONG,
@@ -178,7 +210,8 @@ create table CommerceOrderItem (
 	discountPercentageLevel1 DECIMAL(30, 16) null,
 	discountPercentageLevel2 DECIMAL(30, 16) null,
 	discountPercentageLevel3 DECIMAL(30, 16) null,
-	discountPercentageLevel4 DECIMAL(30, 16) null
+	discountPercentageLevel4 DECIMAL(30, 16) null,
+	subscription BOOLEAN
 );
 
 create table CommerceOrderNote (

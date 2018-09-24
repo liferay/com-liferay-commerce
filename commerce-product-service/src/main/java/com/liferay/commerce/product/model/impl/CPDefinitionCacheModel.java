@@ -65,7 +65,7 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(75);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -125,6 +125,14 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		sb.append(expirationDate);
 		sb.append(", lastPublishDate=");
 		sb.append(lastPublishDate);
+		sb.append(", subscriptionEnabled=");
+		sb.append(subscriptionEnabled);
+		sb.append(", subscriptionCycleLength=");
+		sb.append(subscriptionCycleLength);
+		sb.append(", subscriptionCyclePeriod=");
+		sb.append(subscriptionCyclePeriod);
+		sb.append(", maxSubscriptionCyclesNumber=");
+		sb.append(maxSubscriptionCyclesNumber);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", statusByUserId=");
@@ -240,6 +248,17 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 			cpDefinitionImpl.setLastPublishDate(new Date(lastPublishDate));
 		}
 
+		cpDefinitionImpl.setSubscriptionEnabled(subscriptionEnabled);
+		cpDefinitionImpl.setSubscriptionCycleLength(subscriptionCycleLength);
+
+		if (subscriptionCyclePeriod == null) {
+			cpDefinitionImpl.setSubscriptionCyclePeriod("");
+		}
+		else {
+			cpDefinitionImpl.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+		}
+
+		cpDefinitionImpl.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
 		cpDefinitionImpl.setStatus(status);
 		cpDefinitionImpl.setStatusByUserId(statusByUserId);
 
@@ -311,6 +330,13 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		displayDate = objectInput.readLong();
 		expirationDate = objectInput.readLong();
 		lastPublishDate = objectInput.readLong();
+
+		subscriptionEnabled = objectInput.readBoolean();
+
+		subscriptionCycleLength = objectInput.readLong();
+		subscriptionCyclePeriod = objectInput.readUTF();
+
+		maxSubscriptionCyclesNumber = objectInput.readLong();
 
 		status = objectInput.readInt();
 
@@ -406,6 +432,19 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		objectOutput.writeLong(expirationDate);
 		objectOutput.writeLong(lastPublishDate);
 
+		objectOutput.writeBoolean(subscriptionEnabled);
+
+		objectOutput.writeLong(subscriptionCycleLength);
+
+		if (subscriptionCyclePeriod == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(subscriptionCyclePeriod);
+		}
+
+		objectOutput.writeLong(maxSubscriptionCyclesNumber);
+
 		objectOutput.writeInt(status);
 
 		objectOutput.writeLong(statusByUserId);
@@ -449,6 +488,10 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 	public long displayDate;
 	public long expirationDate;
 	public long lastPublishDate;
+	public boolean subscriptionEnabled;
+	public long subscriptionCycleLength;
+	public String subscriptionCyclePeriod;
+	public long maxSubscriptionCyclesNumber;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;
