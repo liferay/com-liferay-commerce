@@ -488,6 +488,91 @@ public interface CPInstanceModel extends BaseModel<CPInstance>, ShardedModel,
 	public void setLastPublishDate(Date lastPublishDate);
 
 	/**
+	 * Returns the override subscription info of this cp instance.
+	 *
+	 * @return the override subscription info of this cp instance
+	 */
+	public boolean getOverrideSubscriptionInfo();
+
+	/**
+	 * Returns <code>true</code> if this cp instance is override subscription info.
+	 *
+	 * @return <code>true</code> if this cp instance is override subscription info; <code>false</code> otherwise
+	 */
+	public boolean isOverrideSubscriptionInfo();
+
+	/**
+	 * Sets whether this cp instance is override subscription info.
+	 *
+	 * @param overrideSubscriptionInfo the override subscription info of this cp instance
+	 */
+	public void setOverrideSubscriptionInfo(boolean overrideSubscriptionInfo);
+
+	/**
+	 * Returns the subscription enabled of this cp instance.
+	 *
+	 * @return the subscription enabled of this cp instance
+	 */
+	public boolean getSubscriptionEnabled();
+
+	/**
+	 * Returns <code>true</code> if this cp instance is subscription enabled.
+	 *
+	 * @return <code>true</code> if this cp instance is subscription enabled; <code>false</code> otherwise
+	 */
+	public boolean isSubscriptionEnabled();
+
+	/**
+	 * Sets whether this cp instance is subscription enabled.
+	 *
+	 * @param subscriptionEnabled the subscription enabled of this cp instance
+	 */
+	public void setSubscriptionEnabled(boolean subscriptionEnabled);
+
+	/**
+	 * Returns the subscription cycle length of this cp instance.
+	 *
+	 * @return the subscription cycle length of this cp instance
+	 */
+	public long getSubscriptionCycleLength();
+
+	/**
+	 * Sets the subscription cycle length of this cp instance.
+	 *
+	 * @param subscriptionCycleLength the subscription cycle length of this cp instance
+	 */
+	public void setSubscriptionCycleLength(long subscriptionCycleLength);
+
+	/**
+	 * Returns the subscription cycle period of this cp instance.
+	 *
+	 * @return the subscription cycle period of this cp instance
+	 */
+	@AutoEscape
+	public String getSubscriptionCyclePeriod();
+
+	/**
+	 * Sets the subscription cycle period of this cp instance.
+	 *
+	 * @param subscriptionCyclePeriod the subscription cycle period of this cp instance
+	 */
+	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod);
+
+	/**
+	 * Returns the max subscription cycles number of this cp instance.
+	 *
+	 * @return the max subscription cycles number of this cp instance
+	 */
+	public long getMaxSubscriptionCyclesNumber();
+
+	/**
+	 * Sets the max subscription cycles number of this cp instance.
+	 *
+	 * @param maxSubscriptionCyclesNumber the max subscription cycles number of this cp instance
+	 */
+	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber);
+
+	/**
 	 * Returns the status of this cp instance.
 	 *
 	 * @return the status of this cp instance
