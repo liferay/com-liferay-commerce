@@ -339,6 +339,16 @@
 	<td>//div/label[contains (@for,'ignoreSKUCombinations')]//span[contains (@class,'switch-bar')]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>USER_SEGMENTS_RELS_SELECT</td>
+	<td>//button[contains(@id,'selectCommercePriceListUserSegmentEntryRel')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PARENT_PRICE_LIST_SELECT</td>
+	<td>//button[contains(@id,'setParentCommercePriceList')]</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>
