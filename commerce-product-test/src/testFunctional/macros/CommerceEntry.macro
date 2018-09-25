@@ -107,7 +107,7 @@
 
 		<execute function="Select" locator1="CommerceEntry#CURRENCY_SELECT" value1="${currencyCode}" />
 
-		<execute function="Click" locator1="Button#SELECT" />
+		<execute function="Click" locator1="CommerceEntry#USER_SEGMENTS_RELS_SELECT" />
 
 		<execute macro="CommerceItemSelector#selectEntry">
 			<var name="entryName" value="${userSegmentName}" />
