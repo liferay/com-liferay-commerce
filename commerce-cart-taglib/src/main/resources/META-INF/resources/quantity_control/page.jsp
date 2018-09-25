@@ -22,12 +22,13 @@ boolean showInputLabel = (boolean)request.getAttribute("liferay-commerce-cart:qu
 boolean updateOnChange = (boolean)request.getAttribute("liferay-commerce-cart:quantity-control:updateOnChange");
 boolean useSelect = (boolean)request.getAttribute("liferay-commerce-cart:quantity-control:useSelect");
 
+String portletNamespace = PortalUtil.getPortletNamespace(CommercePortletKeys.COMMERCE_CART_CONTENT);
 String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_commerce_cart_quantity_control_page") + StringPool.UNDERLINE;
 %>
 
 <liferay-portlet:actionURL name="editCommerceOrderItem" portletName="<%= CommercePortletKeys.COMMERCE_CART_CONTENT %>" var="editCommerceOrderItemURL" />
 
-<aui:form action="<%= editCommerceOrderItemURL %>" method="post" name='<%= randomNamespace + "Fm" %>' portletNamespace="<%= PortalUtil.getPortletNamespace(CommercePortletKeys.COMMERCE_CART_CONTENT) %>">
+<aui:form action="<%= editCommerceOrderItemURL %>" method="post" name='<%= randomNamespace + "Fm" %>' portletNamespace="<%= portletNamespace %>">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= PortalUtil.getCurrentURL(request) %>" />
 	<aui:input name="commerceOrderItemId" type="hidden" value="<%= commerceOrderItem.getCommerceOrderItemId() %>" />
@@ -50,16 +51,16 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_commerce_
 
 <c:if test="<%= updateOnChange %>">
 	<aui:script use="aui-base">
-		var form = A.one('#<portlet:namespace /><%= randomNamespace + "Fm" %>');
+		var form = A.one('#<%= portletNamespace + randomNamespace + "Fm" %>');
 
 		form.delegate(
 			'change',
 			function() {
-				var quantity = form.one('#<portlet:namespace /><%= randomNamespace + "Quantity" %>')
+				var quantity = form.one('#<%= portletNamespace + randomNamespace + "Quantity" %>')
 
-				form.one('#<portlet:namespace />quantity').val(quantity.val());
+				form.one('#<%= portletNamespace + "quantity" %>').val(quantity.val());
 
-				submitForm(document.<portlet:namespace /><%= randomNamespace + "Fm" %>);
+				submitForm(document.<%= portletNamespace + randomNamespace + "Fm" %>);
 			},
 			'select'
 		);
