@@ -176,6 +176,10 @@ public class CommercePriceListDisplayContext
 	public long getParentCommercePriceListId() throws PortalException {
 		CommercePriceList commercePriceList = getCommercePriceList();
 
+		if (commercePriceList == null) {
+			return 0;
+		}
+
 		return commercePriceList.getParentCommercePriceListId();
 	}
 
