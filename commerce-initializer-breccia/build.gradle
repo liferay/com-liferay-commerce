@@ -22,6 +22,7 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-price-list-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
 	compileOnly project(":apps:commerce:commerce-product-content-api")
+	compileOnly project(":apps:commerce:commerce-product-taglib")
 	compileOnly project(":apps:commerce:commerce-product-type-grouped-api")
 	compileOnly project(":apps:commerce:commerce-product-type-virtual-api")
 	compileOnly project(":apps:commerce:commerce-taglib")
