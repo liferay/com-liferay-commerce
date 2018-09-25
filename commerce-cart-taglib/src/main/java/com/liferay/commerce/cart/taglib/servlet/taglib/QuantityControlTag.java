@@ -99,6 +99,9 @@ public class QuantityControlTag extends IncludeTag {
 			"liferay-commerce-cart:quantity-control:commerceOrderItem",
 			_commerceOrderItem);
 		request.setAttribute(
+			"liferay-commerce-cart:quantity-control:showInputLabel",
+			_showInputLabel);
+		request.setAttribute(
 			"liferay-commerce-cart:quantity-control:updateOnChange",
 			_updateOnChange);
 		request.setAttribute(
