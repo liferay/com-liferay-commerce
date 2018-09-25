@@ -11,20 +11,26 @@
 
 			<#list entries as curCommerceOrderItem>
 				<#assign
-				cpDefinition = curCommerceOrderItem.getCPDefinition()
+					cpDefinition = curCommerceOrderItem.getCPDefinition()
 
-				image = commerceCartContentDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem, themeDisplay)
+					image = ''
 
-				productURL = commerceCartContentDisplayContext.getCPDefinitionURL(cpDefinition.getCPDefinitionId(), themeDisplay)
+					productURL = commerceCartContentDisplayContext.getCPDefinitionURL(cpDefinition.getCPDefinitionId(), themeDisplay)
 
-				name = cpDefinition.getName(themeDisplay.getLanguageId())
+					name = cpDefinition.getName(themeDisplay.getLanguageId())
 
-				deleteURL = commerceCartContentDisplayContext.getDeleteURL(curCommerceOrderItem)
+					deleteURL = commerceCartContentDisplayContext.getDeleteURL(curCommerceOrderItem)
 				/>
+
+				<#if commerceCartContentDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem, themeDisplay)??>
+					<#assign
+						image = commerceCartContentDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem, themeDisplay)
+					/>
+				</#if>
 
 				<tr>
 					<td>
-						<#if image??>
+						<#if image?has_content>
 							<img class="aspect-ratio-bg-cover sticker sticker-lg sticker-static" src="${image}">
 						</#if>
 					</td>
@@ -34,9 +40,9 @@
 						</a>
 					</td>
 					<td>
-						<@liferay_commerce["format-price"]
-							price=curCommerceOrderItem.getUnitPrice()
-							quantity=curCommerceOrderItem.getQuantity()
+						<@liferay_commerce["price"]
+							CPDefinitionId=cpDefinition.getCPDefinitionId()
+							CPInstanceId=curCommerceOrderItem.getCPInstanceId()
 						/>
 					</td>
 					<td>${curCommerceOrderItem.getQuantity()}</td>
