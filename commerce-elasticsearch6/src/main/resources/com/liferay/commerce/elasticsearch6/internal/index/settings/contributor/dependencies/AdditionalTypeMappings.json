@@ -36,6 +36,10 @@
 			"store": true,
 			"type": "keyword"
 		},
+		"commerceUserSegmentEntryIds_required_matches": {
+			"store": true,
+			"type": "integer"
+		},
 		"couponCode": {
 			"store": true,
 			"type": "keyword"
