@@ -115,7 +115,7 @@ public class QuantityInputTag extends IncludeTag {
 		_minOrderQuantity = 0;
 		_multipleOrderQuantity = 0;
 		_name = null;
-		_showLabel = false;
+		_showLabel = true;
 		_useSelect = true;
 		_value = 0;
 	}
@@ -161,7 +161,7 @@ public class QuantityInputTag extends IncludeTag {
 	private int _minOrderQuantity;
 	private int _multipleOrderQuantity;
 	private String _name;
-	private boolean _showLabel;
+	private boolean _showLabel = true;
 	private boolean _useSelect = true;
 	private int _value;
 
