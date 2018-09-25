@@ -100,8 +100,6 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 							name="product"
 						>
 							<div class="description-section">
-								<div class="list-group-text">Brand</div>
-
 								<div class="list-group-title">
 									<%= HtmlUtil.escape(cpDefinition.getName(themeDisplay.getLanguageId())) %>
 								</div>
@@ -155,6 +153,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 						<%
 						CommerceProductPrice commerceProductPrice = orderSummaryCheckoutStepDisplayContext.getCommerceProductPrice(commerceOrderItem);
+						CPInstance cpInstance = commerceOrderItem.getCPInstance();
 						%>
 
 						<liferay-ui:search-container-column-text
@@ -170,6 +169,15 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 									<span class="commerce-value">
 										<%= unitPrice.format(locale) %>
 									</span>
+
+									<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">
+										<span class="commerce-subscription-info">
+											<liferay-commerce-product:subscription-info
+												CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+												showDuration="<%= false %>"
+											/>
+										</span>
+									</c:if>
 								</div>
 							</c:if>
 						</liferay-ui:search-container-column-text>
