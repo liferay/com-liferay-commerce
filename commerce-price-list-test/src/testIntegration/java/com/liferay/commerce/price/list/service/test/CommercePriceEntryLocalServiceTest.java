@@ -52,6 +52,7 @@ import org.junit.runner.RunWith;
 
 /**
  * @author Zoltán Takács
+ * @author Ethan Bustad
  */
 @Ignore
 @RunWith(Arquillian.class)
@@ -165,6 +166,78 @@ public class CommercePriceEntryLocalServiceTest {
 		Assert.assertThat(
 			externalReferenceCode,
 			equalTo(commercePriceEntry.getExternalReferenceCode()));
+	}
+
+	@Test
+	public void testFetchCommercePriceEntry1() throws Exception {
+		frutillaRule.scenario(
+			"Fetching a Price Entry"
+		).given(
+			"A Price List"
+		).and(
+			"A Price Entry on that Price List"
+		).when(
+			"The SKU (cpInstance) of the Price Entry"
+		).and(
+			"The ID of the Price List are used to fetch a Price Entry"
+		).then(
+			"The result should be the given Price Entry"
+		);
+
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+
+		Currency currency = Currency.getInstance(Locale.US);
+
+		CommercePriceList commercePriceList =
+			CommercePriceListTestUtil.addCommercePriceList(
+				_group.getGroupId(), currency.getCurrencyCode(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomDouble(),
+				true, null, null, null);
+
+		CommercePriceEntry commercePriceEntry =
+			CommercePriceEntryTestUtil.addCommercePriceEntry(
+				cpInstance.getCPInstanceId(),
+				commercePriceList.getCommercePriceListId(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomDouble(),
+				RandomTestUtil.randomDouble());
+
+		CommercePriceEntry fetchedCommercePriceEntry =
+			_commercePriceEntryLocalService.fetchCommercePriceEntry(
+				cpInstance.getCPInstanceId(),
+				commercePriceList.getCommercePriceListId());
+
+		Assert.assertThat(
+			commercePriceEntry.getCommercePriceEntryId(),
+			equalTo(fetchedCommercePriceEntry.getCommercePriceEntryId()));
+	}
+
+	@Test
+	public void testFetchCommercePriceEntry2() throws Exception {
+		frutillaRule.scenario(
+			"Fetching a Price Entry"
+		).given(
+			"A Price List"
+		).when(
+			"A random SKU (cpInstance) is used to fetch a Price Entry"
+		).then(
+			"The result should be null"
+		);
+
+		long cpInstanceId = RandomTestUtil.randomInt();
+
+		Currency currency = Currency.getInstance(Locale.US);
+
+		CommercePriceList commercePriceList =
+			CommercePriceListTestUtil.addCommercePriceList(
+				_group.getGroupId(), currency.getCurrencyCode(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomDouble(),
+				true, null, null, null);
+
+		CommercePriceEntry commercePriceEntry =
+			_commercePriceEntryLocalService.fetchCommercePriceEntry(
+				cpInstanceId, commercePriceList.getCommercePriceListId());
+
+		Assert.assertNull(commercePriceEntry);
 	}
 
 	@Test
