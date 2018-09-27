@@ -17,7 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPDefinitionOptionValueRelDisplayContext cpDefinitionOptionValueRelDisplayContext = (CPDefinitionOptionValueRelDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CPDefinitionSpecificationOptionValueDisplayContext cpDefinitionSpecificationOptionValueDisplayContext = (CPDefinitionSpecificationOptionValueDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
@@ -31,14 +31,14 @@ else {
 }
 %>
 
-<c:if test="<%= cpDefinitionOptionValueRelDisplayContext.hasEditPermission() %>">
-	<liferay-ui:icon-menu
-		direction="left-side"
-		icon="<%= StringPool.BLANK %>"
-		markupView="lexicon"
-		message="<%= StringPool.BLANK %>"
-		showWhenSingleIcon="<%= true %>"
-	>
+<liferay-ui:icon-menu
+	direction="left-side"
+	icon="<%= StringPool.BLANK %>"
+	markupView="lexicon"
+	message="<%= StringPool.BLANK %>"
+	showWhenSingleIcon="<%= true %>"
+>
+	<c:if test="<%= cpDefinitionSpecificationOptionValueDisplayContext.hasEditPermission() %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductDefinitionSpecificationOptionValue" />
 			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionSpecificationOptionValue.getCPDefinitionId()) %>" />
@@ -59,5 +59,5 @@ else {
 		<liferay-ui:icon-delete
 			url="<%= deleteURL %>"
 		/>
-	</liferay-ui:icon-menu>
-</c:if>
+	</c:if>
+</liferay-ui:icon-menu>
