@@ -21,7 +21,6 @@ import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocal
 import com.liferay.commerce.discount.target.CommerceDiscountOrderTarget;
 import com.liferay.commerce.discount.target.CommerceDiscountProductTarget;
 import com.liferay.commerce.discount.target.CommerceDiscountTarget;
-import com.liferay.commerce.discount.target.CommerceDiscountTarget.Type;
 import com.liferay.commerce.discount.target.CommerceDiscountTargetRegistry;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -280,7 +279,8 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 			_commerceDiscountTargetRegistry.getCommerceDiscountTarget(
 				commerceDiscount.getTarget());
 
-		Type commerceDiscountTargetType = commerceDiscountTarget.getType();
+		CommerceDiscountTarget.Type commerceDiscountTargetType =
+			commerceDiscountTarget.getType();
 
 		Document document = getBaseModelDocument(CLASS_NAME, commerceDiscount);
 

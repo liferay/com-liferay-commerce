@@ -65,10 +65,9 @@ public class TestCommerceContext implements CommerceContext {
 		if (_organization == null) {
 			return Optional.empty();
 		}
-		else {
-			return CommercePriceListLocalServiceUtil.getCommercePriceList(
-				_organization.getGroupId(), getCommerceUserSegmentEntryIds());
-		}
+
+		return CommercePriceListLocalServiceUtil.getCommercePriceList(
+			_organization.getGroupId(), getCommerceUserSegmentEntryIds());
 	}
 
 	@Override
@@ -76,13 +75,11 @@ public class TestCommerceContext implements CommerceContext {
 		if ((_organization == null) || (_contextUser == null)) {
 			return new long[0];
 		}
-		else {
-			return CommerceUserSegmentEntryLocalServiceUtil.
-				getCommerceUserSegmentEntryIds(
-					_organization.getGroupId(),
-					_organization.getOrganizationId(),
-					_contextUser.getUserId());
-		}
+
+		return CommerceUserSegmentEntryLocalServiceUtil.
+			getCommerceUserSegmentEntryIds(
+				_organization.getGroupId(), _organization.getOrganizationId(),
+				_contextUser.getUserId());
 	}
 
 	@Override

@@ -54,9 +54,8 @@ public class CommerceNotificationTypeOrderComparator
 		if (_ascending) {
 			return value;
 		}
-		else {
-			return Math.negateExact(value);
-		}
+
+		return Math.negateExact(value);
 	}
 
 	public boolean isAscending() {

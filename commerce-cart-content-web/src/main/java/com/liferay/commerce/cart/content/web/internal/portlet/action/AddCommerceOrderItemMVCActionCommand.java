@@ -178,10 +178,9 @@ public class AddCommerceOrderItemMVCActionCommand extends BaseMVCActionCommand {
 				httpServletRequest, commerceOrderValidatorResult.getMessage(),
 				commerceOrderValidatorResult.getArgument());
 		}
-		else {
-			return LanguageUtil.get(
-				httpServletRequest, commerceOrderValidatorResult.getMessage());
-		}
+
+		return LanguageUtil.get(
+			httpServletRequest, commerceOrderValidatorResult.getMessage());
 	}
 
 	protected void writeJSON(ActionResponse actionResponse, Object jsonObj)

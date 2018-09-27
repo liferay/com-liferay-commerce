@@ -27,7 +27,7 @@ import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleType;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeRegistry;
 import com.liferay.commerce.discount.service.CommerceDiscountLocalService;
 import com.liferay.commerce.discount.service.CommerceDiscountRuleLocalService;
-import com.liferay.commerce.discount.target.CommerceDiscountTarget.Type;
+import com.liferay.commerce.discount.target.CommerceDiscountTarget;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
@@ -73,7 +73,8 @@ public class CommerceDiscountCalculationImpl
 			commerceOrder.getCompanyId(), commerceOrder.getSiteGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceUserSegmentEntryIds(),
-			commerceContext.getCouponCode(), Type.APPLY_TO_SHIPPING);
+			commerceContext.getCouponCode(),
+			CommerceDiscountTarget.Type.APPLY_TO_SHIPPING);
 
 		return _getCommerceDiscountValue(
 			shippingAmount, commerceContext, searchContext);
@@ -93,7 +94,8 @@ public class CommerceDiscountCalculationImpl
 			commerceOrder.getCompanyId(), commerceOrder.getSiteGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceUserSegmentEntryIds(),
-			commerceContext.getCouponCode(), Type.APPLY_TO_SUBTOTAL);
+			commerceContext.getCouponCode(),
+			CommerceDiscountTarget.Type.APPLY_TO_SUBTOTAL);
 
 		return _getCommerceDiscountValue(
 			subtotalAmount, commerceContext, searchContext);
@@ -113,7 +115,8 @@ public class CommerceDiscountCalculationImpl
 			commerceOrder.getCompanyId(), commerceOrder.getSiteGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceUserSegmentEntryIds(),
-			commerceContext.getCouponCode(), Type.APPLY_TO_TOTAL);
+			commerceContext.getCouponCode(),
+			CommerceDiscountTarget.Type.APPLY_TO_TOTAL);
 
 		return _getCommerceDiscountValue(
 			totalAmount, commerceContext, searchContext);
@@ -132,7 +135,8 @@ public class CommerceDiscountCalculationImpl
 			cpInstance.getCompanyId(), cpInstance.getGroupId(),
 			cpInstance.getCPDefinitionId(), cpInstanceId, 0,
 			commerceContext.getCommerceUserSegmentEntryIds(),
-			commerceContext.getCouponCode(), Type.APPLY_TO_PRODUCT);
+			commerceContext.getCouponCode(),
+			CommerceDiscountTarget.Type.APPLY_TO_PRODUCT);
 
 		return _getCommerceDiscountValue(
 			productUnitPrice, commerceContext, searchContext);
@@ -141,7 +145,8 @@ public class CommerceDiscountCalculationImpl
 	protected SearchContext buildSearchContext(
 		long companyId, long groupId, long cpDefinitionId, long cpInstanceId,
 		long commerceOrderId, long[] commerceUserSegmentEntryIds,
-		String couponCode, Type commerceDiscountTargetType) {
+		String couponCode,
+		CommerceDiscountTarget.Type commerceDiscountTargetType) {
 
 		SearchContext searchContext = new SearchContext();
 

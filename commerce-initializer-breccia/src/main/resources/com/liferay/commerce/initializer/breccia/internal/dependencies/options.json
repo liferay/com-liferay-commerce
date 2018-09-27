@@ -57,7 +57,9 @@
 		"Key": "hole-punch-capacity",
 		"Required": true,
 		"SkuContributor": true,
-		"Values": ["10"]
+		"Values": [
+			"10"
+		]
 	},
 	{
 		"Facetable": true,
@@ -117,7 +119,9 @@
 		"Key": "power-source",
 		"Required": true,
 		"SkuContributor": true,
-		"Values": ["battery"]
+		"Values": [
+			"battery"
+		]
 	},
 	{
 		"Facetable": true,
@@ -161,13 +165,17 @@
 		"Key": "stapler-punch-capacity",
 		"Required": true,
 		"SkuContributor": true,
-		"Values": ["10"]
+		"Values": [
+			"10"
+		]
 	},
 	{
 		"Facetable": true,
 		"Key": "staples-included",
 		"SkuContributor": true,
-		"Values": ["y"]
+		"Values": [
+			"y"
+		]
 	},
 	{
 		"Facetable": true,

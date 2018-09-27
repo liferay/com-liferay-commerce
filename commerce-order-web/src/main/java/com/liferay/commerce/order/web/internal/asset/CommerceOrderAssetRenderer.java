@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.portlet.PortletProvider.Action;
+import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -107,7 +107,7 @@ public class CommerceOrderAssetRenderer
 
 		PortletURL portletURL = PortletProviderUtil.getPortletURL(
 			liferayPortletRequest, group, CommerceOrder.class.getName(),
-			Action.VIEW);
+			PortletProvider.Action.VIEW);
 
 		portletURL.setParameter(
 			"mvcRenderCommandName", "viewCommerceOrderDetail");

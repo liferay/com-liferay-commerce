@@ -55,9 +55,8 @@ public class CPQuery {
 
 			return "DESC";
 		}
-		else {
-			return "ASC";
-		}
+
+		return "ASC";
 	}
 
 	public void addAllTagIdsArray(long[] allTagsIds) {
