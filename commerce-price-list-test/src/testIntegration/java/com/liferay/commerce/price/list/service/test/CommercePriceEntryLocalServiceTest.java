@@ -17,6 +17,8 @@ package com.liferay.commerce.price.list.service.test;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.price.list.exception.DuplicateCommercePriceEntryException;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
@@ -64,6 +66,11 @@ public class CommercePriceEntryLocalServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
+
+		Currency currency = Currency.getInstance(Locale.US);
+
+		_commerceCurrency = CommerceCurrencyTestUtil.addCommerceCurrency(
+			_group.getGroupId(), currency.getCurrencyCode());
 	}
 
 	@Test
@@ -699,6 +706,9 @@ public class CommercePriceEntryLocalServiceTest {
 		Assert.assertThat(price, equalTo(actualPrice.doubleValue()));
 		Assert.assertThat(promoPrice, equalTo(actualPromoPrice.doubleValue()));
 	}
+
+	@DeleteAfterTestRun
+	private CommerceCurrency _commerceCurrency;
 
 	@Inject
 	private CommercePriceEntryLocalService _commercePriceEntryLocalService;
