@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import java.io.Serializable;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 import java.util.ArrayList;
@@ -283,17 +284,16 @@ public class CommerceDiscountCalculationImpl
 			discountedAmount = discountedAmount.subtract(currentDiscountAmount);
 		}
 
-		BigDecimal discountPercentage = discountedAmount.divide(
-			amount, RoundingMode.valueOf(commerceCurrency.getRoundingMode()));
-
-		discountPercentage = discountPercentage.multiply(_ONE_HUNDRED);
-
 		CommerceMoney discountAmount = _commerceMoneyFactory.create(
 			commerceCurrency, currentDiscountAmount);
 
+		RoundingMode roundingMode = RoundingMode.valueOf(
+			commerceCurrency.getRoundingMode());
+
 		return new CommerceDiscountValue(
 			commerceDiscount.getCommerceDiscountId(), discountAmount,
-			_ONE_HUNDRED.subtract(discountPercentage), values);
+			_getDiscountPercentage(discountedAmount, amount, roundingMode),
+			values);
 	}
 
 	private BigDecimal _getDiscountAmount(
@@ -306,6 +306,25 @@ public class CommerceDiscountCalculationImpl
 		BigDecimal discountedAmount = amount.multiply(percentage);
 
 		return discountedAmount.divide(_ONE_HUNDRED);
+	}
+
+	private BigDecimal _getDiscountPercentage(
+		BigDecimal discountedAmount, BigDecimal amount,
+		RoundingMode roundingMode) {
+
+		double actualPrice = discountedAmount.doubleValue();
+		double originalPrice = amount.doubleValue();
+
+		double percentage = actualPrice / originalPrice;
+
+		BigDecimal discountPercentage = new BigDecimal(percentage);
+
+		discountPercentage = discountPercentage.multiply(_ONE_HUNDRED);
+
+		MathContext mathContext = new MathContext(
+			discountPercentage.precision(), roundingMode);
+
+		return _ONE_HUNDRED.subtract(discountPercentage, mathContext);
 	}
 
 	private boolean _isValidDiscount(

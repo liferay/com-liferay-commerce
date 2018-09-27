@@ -207,18 +207,19 @@ public class CommerceOrderPriceCalculationImpl
 				});
 		}
 
-		BigDecimal[] shippingDiscountPercentageValues =
+		BigDecimal[] discountPercentageValues =
 			{level1, level2, level3, level4};
 
 		BigDecimal discountPercentage = discountAmount.divide(
-			amount, RoundingMode.valueOf(commerceCurrency.getRoundingMode()));
+			amount.add(discountAmount),
+			RoundingMode.valueOf(commerceCurrency.getRoundingMode()));
 
 		discountPercentage = discountPercentage.multiply(
 			BigDecimal.valueOf(100));
 
 		return new CommerceDiscountValue(
 			0, _commerceMoneyFactory.create(commerceCurrency, discountAmount),
-			discountPercentage, shippingDiscountPercentageValues);
+			discountPercentage, discountPercentageValues);
 	}
 
 	private CommerceOrderPrice _getCommerceOrderPriceFromOrder(
