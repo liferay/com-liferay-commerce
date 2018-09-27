@@ -1,10 +1,26 @@
 [
-	{"Key": "design"},
-	{"Key": "features"},
-	{"Key": "other-features"},
-	{"Key": "packaging-content"},
-	{"Key": "packaging-data"},
-	{"Key": "power"},
-	{"Key": "technical-details"},
-	{"Key": "weight-dimensions"}
+	{
+		"Key": "design"
+	},
+	{
+		"Key": "features"
+	},
+	{
+		"Key": "other-features"
+	},
+	{
+		"Key": "packaging-content"
+	},
+	{
+		"Key": "packaging-data"
+	},
+	{
+		"Key": "power"
+	},
+	{
+		"Key": "technical-details"
+	},
+	{
+		"Key": "weight-dimensions"
+	}
 ]

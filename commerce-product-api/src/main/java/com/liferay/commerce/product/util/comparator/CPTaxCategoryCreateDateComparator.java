@@ -48,9 +48,8 @@ public class CPTaxCategoryCreateDateComparator
 		if (_ascending) {
 			return value;
 		}
-		else {
-			return Math.negateExact(value);
-		}
+
+		return Math.negateExact(value);
 	}
 
 	@Override
@@ -58,9 +57,8 @@ public class CPTaxCategoryCreateDateComparator
 		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
-		else {
-			return ORDER_BY_DESC;
-		}
+
+		return ORDER_BY_DESC;
 	}
 
 	@Override

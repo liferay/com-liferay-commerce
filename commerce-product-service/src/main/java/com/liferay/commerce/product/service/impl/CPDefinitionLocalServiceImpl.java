@@ -649,10 +649,8 @@ public class CPDefinitionLocalServiceImpl
 			return cpDefinitionPersistence.findByG_NotS(
 				groupId, WorkflowConstants.STATUS_IN_TRASH, start, end);
 		}
-		else {
-			return cpDefinitionPersistence.findByG_S(
-				groupId, status, start, end);
-		}
+
+		return cpDefinitionPersistence.findByG_S(groupId, status, start, end);
 	}
 
 	@Override
@@ -697,9 +695,8 @@ public class CPDefinitionLocalServiceImpl
 			return cpDefinitionPersistence.countByG_NotS(
 				groupId, WorkflowConstants.STATUS_IN_TRASH);
 		}
-		else {
-			return cpDefinitionPersistence.countByG_S(groupId, status);
-		}
+
+		return cpDefinitionPersistence.countByG_S(groupId, status);
 	}
 
 	@Override

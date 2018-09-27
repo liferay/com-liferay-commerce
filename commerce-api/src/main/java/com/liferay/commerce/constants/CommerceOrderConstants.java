@@ -122,9 +122,8 @@ public class CommerceOrderConstants {
 		else if (orderStatus == ORDER_STATUS_TRANSMITTED) {
 			return "transmitted";
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	public static String getPaymentStatusLabel(int paymentStatus) {
@@ -137,9 +136,8 @@ public class CommerceOrderConstants {
 		else if (paymentStatus == PAYMENT_STATUS_PENDING) {
 			return WorkflowConstants.LABEL_PENDING;
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 }

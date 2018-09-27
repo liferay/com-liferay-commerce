@@ -69,10 +69,9 @@ public class CommerceOrderPortletProvider
 				request, group, getPortletName(), 0, 0,
 				PortletRequest.RENDER_PHASE);
 		}
-		else {
-			return PortletURLFactoryUtil.create(
-				request, getPortletName(), plid, PortletRequest.RENDER_PHASE);
-		}
+
+		return PortletURLFactoryUtil.create(
+			request, getPortletName(), plid, PortletRequest.RENDER_PHASE);
 	}
 
 	@Reference

@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.portlet.PortletProvider.Action;
+import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -97,7 +97,7 @@ public class CommerceDiscountAssetRenderer
 
 		PortletURL portletURL = PortletProviderUtil.getPortletURL(
 			liferayPortletRequest, group, CommerceDiscount.class.getName(),
-			Action.VIEW);
+			PortletProvider.Action.VIEW);
 
 		portletURL.setParameter("mvcRenderCommandName", "editCommerceDiscount");
 		portletURL.setParameter(

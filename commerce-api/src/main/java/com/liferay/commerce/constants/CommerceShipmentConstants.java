@@ -51,9 +51,8 @@ public class CommerceShipmentConstants {
 		else if (label.equals("shipped")) {
 			return SHIPMENT_STATUS_SHIPPED;
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	public static String getShipmentStatusLabel(int shipmentStatus) {
@@ -69,9 +68,8 @@ public class CommerceShipmentConstants {
 		else if (shipmentStatus == SHIPMENT_STATUS_SHIPPED) {
 			return "shipped";
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 }

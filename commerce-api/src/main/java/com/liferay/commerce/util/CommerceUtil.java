@@ -179,9 +179,8 @@ public class CommerceUtil {
 				SortFactoryUtil.create(null, Sort.SCORE_TYPE, false)
 			};
 		}
-		else {
-			return SortFactoryUtil.getDefaultSorts();
-		}
+
+		return SortFactoryUtil.getDefaultSorts();
 	}
 
 	public static OrderByComparator<CommerceRegion>

@@ -96,9 +96,8 @@ public class CPDefinitionAssetRenderer
 
 			return "/asset/" + template + ".jsp";
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	@Override
