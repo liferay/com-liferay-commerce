@@ -121,8 +121,23 @@ public class AssetCategoryCPRuleTypeImpl implements CPRuleType {
 			cpRuleAssetCategoryRels,
 			CPRuleAssetCategoryRel::getAssetCategoryId);
 
-		if (assetCategoryIds.containsAll(cpRuleAssetCategoryIds)) {
-			return true;
+		UnicodeProperties typeSettingsProperties =
+			cpRule.getTypeSettingsProperties();
+
+		boolean orSearch = GetterUtil.getBoolean(
+			typeSettingsProperties.get("orSearch"));
+
+		if (orSearch) {
+			for (long assetCategoryId : assetCategoryIds) {
+				if (cpRuleAssetCategoryIds.contains(assetCategoryId)) {
+					return true;
+				}
+			}
+		}
+		else {
+			if (cpRuleAssetCategoryIds.containsAll(assetCategoryIds)) {
+				return true;
+			}
 		}
 
 		return false;
