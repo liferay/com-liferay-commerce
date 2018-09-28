@@ -113,12 +113,13 @@ public class EditCPOptionValueMVCActionCommand extends BaseMVCActionCommand {
 			jsonObject.put("success", true);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
-
 			String key = "your-request-failed-to-complete";
 
 			if (e instanceof CPOptionValueKeyException) {
 				key = "that-key-is-already-being-used";
+			}
+			else {
+				_log.error(e, e);
 			}
 
 			jsonObject.put(
