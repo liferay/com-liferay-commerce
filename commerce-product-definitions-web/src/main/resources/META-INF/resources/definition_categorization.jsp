@@ -33,15 +33,25 @@ long cpDefinitionId = cpDefinitionsDisplayContext.getCPDefinitionId();
 
 	<aui:model-context bean="<%= cpDefinition %>" model="<%= CPDefinition.class %>" />
 
-	<liferay-ui:asset-categories-error />
+	<liferay-asset:asset-categories-error />
 
-	<liferay-ui:asset-tags-error />
+	<liferay-asset:asset-tags-error />
 
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>
-			<aui:input name="categories" type="assetCategories" />
+			<aui:field-wrapper>
+				<liferay-asset:asset-categories-selector
+					className="<%= CPDefinition.class.getName() %>"
+					classPK="<%= cpDefinitionId %>"
+				/>
+			</aui:field-wrapper>
 
-			<aui:input name="tags" type="assetTags" />
+			<aui:field-wrapper>
+				<liferay-asset:asset-tags-selector
+					className="<%= CPDefinition.class.getName() %>"
+					classPK="<%= cpDefinitionId %>"
+				/>
+			</aui:field-wrapper>
 		</aui:fieldset>
 	</aui:fieldset-group>
 
