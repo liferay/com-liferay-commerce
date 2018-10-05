@@ -48,7 +48,7 @@ commerceOrganizationDetailDisplayContext.setBreadcrumbs(organization);
 				</svg>
 			</span>
 
-			<liferay-ui:message key="organization-not-configured-for-this-site" />
+			<liferay-ui:message key="account-not-selected-for-this-site" />
 		</div>
 	</c:when>
 	<c:otherwise>
