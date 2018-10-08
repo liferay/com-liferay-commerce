@@ -115,6 +115,15 @@ public class CommerceOrganizationServiceUtil {
 			start, end, sorts);
 	}
 
+	public static long searchOrganizationsByGroupCount(long groupId,
+		long userId, String type, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort[] sorts)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchOrganizationsByGroupCount(groupId, userId, type,
+			keywords, start, end, sorts);
+	}
+
 	public static void unsetOrganizationUsers(long organizationId,
 		long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
