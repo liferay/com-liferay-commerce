@@ -24,8 +24,10 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -38,16 +40,102 @@ public class CPInstanceFinderImpl
 	public static final String FIND_BY_EXPIRATION_DATE =
 		CPInstanceFinder.class.getName() + ".findByExpirationDate";
 
+	public static final String FIND_BY_C_NOT_CST_NOT_ST =
+		CPInstanceFinder.class.getName() + ".findByC_NotCST_NotST";
+
+	public static final String FIND_BY_C_NOT_CST_ST =
+		CPInstanceFinder.class.getName() + ".findByC_NotCST_ST";
+
+	@Override
+	public int countByC_NotCST_NotST(
+		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus) {
+
+		List<CPInstance> cpInstances = doFindByCPDefinitionIdAndStatuses(
+			FIND_BY_C_NOT_CST_NOT_ST, cpDefinitionId, cpDefinitionStatus,
+			cpInstanceStatus, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		return cpInstances.size();
+	}
+
+	@Override
+	public int countByC_NotCST_ST(
+		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus) {
+
+		List<CPInstance> cpInstances = doFindByCPDefinitionIdAndStatuses(
+			FIND_BY_C_NOT_CST_ST, cpDefinitionId, cpDefinitionStatus,
+			cpInstanceStatus, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		return cpInstances.size();
+	}
+
 	@Override
 	public List<CPInstance> findByExpirationDate(
 		Date expirationDate, QueryDefinition<CPInstance> queryDefinition) {
 
-		return doFindByExpirationDate(expirationDate, queryDefinition, false);
+		return doFindByExpirationDate(expirationDate, queryDefinition);
+	}
+
+	@Override
+	public List<CPInstance> findByC_NotCST_NotST(
+		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus,
+		int start, int end, OrderByComparator<CPInstance> orderByComparator) {
+
+		return doFindByCPDefinitionIdAndStatuses(
+			FIND_BY_C_NOT_CST_NOT_ST, cpDefinitionId, cpDefinitionStatus,
+			cpInstanceStatus, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CPInstance> findByC_NotCST_ST(
+		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus,
+		int start, int end, OrderByComparator<CPInstance> orderByComparator) {
+
+		return doFindByCPDefinitionIdAndStatuses(
+			FIND_BY_C_NOT_CST_ST, cpDefinitionId, cpDefinitionStatus,
+			cpInstanceStatus, start, end, orderByComparator);
+	}
+
+	protected List<CPInstance> doFindByCPDefinitionIdAndStatuses(
+		String id, long cpDefinitionId, int cpDefinitionStatus,
+		int cpInstanceStatus, int start, int end,
+		OrderByComparator<CPInstance> orderByComparator) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), id);
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity(CPInstanceImpl.TABLE_NAME, CPInstanceImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(cpDefinitionId);
+			qPos.add(cpDefinitionStatus);
+			qPos.add(cpInstanceStatus);
+
+			List<CPInstance> list = (List<CPInstance>)QueryUtil.list(
+				q, getDialect(), start, end);
+
+			if (orderByComparator != null) {
+				Collections.sort(list, orderByComparator);
+			}
+
+			return list;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	protected List<CPInstance> doFindByExpirationDate(
-		Date expirationDate, QueryDefinition<CPInstance> queryDefinition,
-		boolean inlineSQLHelper) {
+		Date expirationDate, QueryDefinition<CPInstance> queryDefinition) {
 
 		Session session = null;
 
