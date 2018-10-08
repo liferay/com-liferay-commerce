@@ -49,7 +49,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceAddressNestedCollectionResource
 	implements NestedCollectionResource
 		<CommerceAddress, Long, CommerceAddressIdentifier,
-		ClassPKExternalReferenceCode, CommerceAccountIdentifier> {
+		 ClassPKExternalReferenceCode, CommerceAccountIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes

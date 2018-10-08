@@ -55,7 +55,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceAccountNestedCollectionResource
 	implements NestedCollectionResource
 		<Organization, ClassPKExternalReferenceCode, CommerceAccountIdentifier,
-		Long, WebSiteIdentifier> {
+		 Long, WebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes

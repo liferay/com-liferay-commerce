@@ -42,7 +42,7 @@ import org.osgi.service.component.annotations.Reference;
 public class WebSiteTierPriceEntryNestedCollectionRouter
 	implements NestedCollectionRouter
 		<CommerceTierPriceEntry, Long, CommerceTierPriceEntryIdentifier, Long,
-		WebSiteIdentifier> {
+		 WebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes<CommerceTierPriceEntry, Long, Long>
