@@ -149,6 +149,16 @@ public class CommerceOrganizationServiceImpl
 	}
 
 	@Override
+	public long searchOrganizationsByGroupCount(
+			long groupId, long userId, String type, String keywords, int start,
+			int end, Sort[] sorts)
+		throws PortalException {
+
+		return commerceOrganizationLocalService.searchOrganizationsByGroupCount(
+			groupId, userId, type, keywords, start, end, sorts);
+	}
+
+	@Override
 	public void unsetOrganizationUsers(long organizationId, long[] userIds)
 		throws PortalException {
 
