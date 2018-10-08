@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Zoltán Takács
  * @review
  */
-@Component(immediate = true)
+@Component(immediate = true, service = NestedCollectionRouter.class)
 public class WebSiteTierPriceEntryNestedCollectionRouter
 	implements NestedCollectionRouter
 		<CommerceTierPriceEntry, Long, CommerceTierPriceEntryIdentifier, Long,

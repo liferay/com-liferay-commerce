@@ -52,7 +52,7 @@ import org.osgi.service.component.annotations.Reference;
  *
  * @author Zoltán Takács
  */
-@Component(immediate = true)
+@Component(immediate = true, service = NestedCollectionResource.class)
 public class CPDefinitionNestedCollectionResource
 	implements NestedCollectionResource
 		<CPDefinition, ClassPKExternalReferenceCode, CPDefinitionIdentifier,

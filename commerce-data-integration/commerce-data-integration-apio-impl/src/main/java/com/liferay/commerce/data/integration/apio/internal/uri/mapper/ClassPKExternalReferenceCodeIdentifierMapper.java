@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Rodrigo Guedes de Souza
  */
-@Component(immediate = true)
+@Component(immediate = true, service = PathIdentifierMapper.class)
 public class ClassPKExternalReferenceCodeIdentifierMapper
 	implements PathIdentifierMapper<ClassPKExternalReferenceCode> {
 

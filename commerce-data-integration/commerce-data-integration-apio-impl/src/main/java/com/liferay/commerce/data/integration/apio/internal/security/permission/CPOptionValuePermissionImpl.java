@@ -40,7 +40,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alessio Antonio Rendina
  */
 @Component(
-	property = "model.class.name=com.liferay.commerce.product.model.CPOptionValue"
+	property = "model.class.name=com.liferay.commerce.product.model.CPOptionValue",
+	service = HasPermission.class
 )
 public class CPOptionValuePermissionImpl implements HasPermission<Long> {
 

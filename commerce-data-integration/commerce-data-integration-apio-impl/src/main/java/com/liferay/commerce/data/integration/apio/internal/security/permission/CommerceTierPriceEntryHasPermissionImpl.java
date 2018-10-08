@@ -39,7 +39,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Zoltán Takács
  */
 @Component(
-	property = "model.class.name=com.liferay.commerce.price.list.model.CommerceTierPriceEntry"
+	property = "model.class.name=com.liferay.commerce.price.list.model.CommerceTierPriceEntry",
+	service = HasPermission.class
 )
 public class CommerceTierPriceEntryHasPermissionImpl
 	implements HasPermission<Long> {

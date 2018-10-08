@@ -49,7 +49,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Eduardo V. Bruno
  * @author Zoltán Takács
  */
-@Component(immediate = true)
+@Component(immediate = true, service = CollectionResource.class)
 public class CommerceUserCollectionResource
 	implements CollectionResource
 		<UserWrapper, ClassPKExternalReferenceCode, CommerceUserIdentifier> {

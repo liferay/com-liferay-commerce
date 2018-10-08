@@ -39,7 +39,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Rodrigo Guedes de Souza
  */
-@Component(immediate = true)
+@Component(immediate = true, service = NestedCollectionRouter.class)
 public class WebSiteCPInstanceNestedCollectionRouter
 	implements NestedCollectionRouter
 		<CPInstance, ClassPKExternalReferenceCode, CPInstanceIdentifier, Long,
