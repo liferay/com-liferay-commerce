@@ -1386,6 +1386,10 @@ public class CPDefinitionLocalServiceImpl
 			}
 		}
 
+		// Commerce product instances
+
+		reindexCPInstances(cpDefinition);
+
 		return cpDefinition;
 	}
 
@@ -1633,6 +1637,15 @@ public class CPDefinitionLocalServiceImpl
 		}
 
 		return cpDefinitions;
+	}
+
+	protected void reindexCPInstances(CPDefinition cpDefinition)
+		throws PortalException {
+
+		Indexer<CPInstance> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			CPInstance.class);
+
+		indexer.reindex(cpDefinition.getCPInstances());
 	}
 
 	protected BaseModelSearchResult<CPDefinition> searchCPDefinitions(
