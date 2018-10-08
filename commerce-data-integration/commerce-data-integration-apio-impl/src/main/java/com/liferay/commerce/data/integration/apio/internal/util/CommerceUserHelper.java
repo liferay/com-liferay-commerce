@@ -54,10 +54,11 @@ public class CommerceUserHelper {
 		if (user == null) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"User does not exist, entry " +
-						classPKExternalReferenceCode.getClassPK() + ":" +
-							classPKExternalReferenceCode.
-								getExternalReferenceCode());
+					String.format(
+						"User does not exist with identifier %d : %s",
+						classPKExternalReferenceCode.getClassPK(),
+						classPKExternalReferenceCode.
+							getExternalReferenceCode()));
 			}
 		}
 		else {

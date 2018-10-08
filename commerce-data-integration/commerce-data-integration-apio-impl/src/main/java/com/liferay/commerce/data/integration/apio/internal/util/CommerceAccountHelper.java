@@ -53,10 +53,11 @@ public class CommerceAccountHelper {
 		if (organization == null) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Account does not exist, entry " +
-						classPKExternalReferenceCode.getClassPK() + ":" +
-							classPKExternalReferenceCode.
-								getExternalReferenceCode());
+					String.format(
+						"Account does not exist with identifier %d : %s",
+						classPKExternalReferenceCode.getClassPK(),
+						classPKExternalReferenceCode.
+							getExternalReferenceCode()));
 			}
 		}
 		else {
