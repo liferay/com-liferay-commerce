@@ -24,6 +24,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.search.CPInstanceIndexer;
 import com.liferay.commerce.product.service.base.CPInstanceLocalServiceBaseImpl;
 import com.liferay.commerce.product.util.DDMFormValuesUtil;
 import com.liferay.petra.string.StringPool;
@@ -420,23 +421,27 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		OrderByComparator<CPInstance> orderByComparator) {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return cpInstancePersistence.findByC_NotST(
-				cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH, start, end,
+			return cpInstanceFinder.findByC_NotCST_NotST(
+				cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH,
+				WorkflowConstants.STATUS_IN_TRASH, start, end,
 				orderByComparator);
 		}
 
-		return cpInstancePersistence.findByC_ST(
-			cpDefinitionId, status, start, end, orderByComparator);
+		return cpInstanceFinder.findByC_NotCST_ST(
+			cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH, status, start,
+			end, orderByComparator);
 	}
 
 	@Override
 	public int getCPDefinitionInstancesCount(long cpDefinitionId, int status) {
 		if (status == WorkflowConstants.STATUS_ANY) {
-			cpInstancePersistence.countByC_NotST(
-				cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH);
+			cpInstanceFinder.countByC_NotCST_NotST(
+				cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH,
+				WorkflowConstants.STATUS_IN_TRASH);
 		}
 
-		return cpInstancePersistence.countByC_ST(cpDefinitionId, status);
+		return cpInstanceFinder.countByC_NotCST_ST(
+			cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH, status);
 	}
 
 	@Override
@@ -857,7 +862,11 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		attributes.put(Field.CONTENT, keywords);
 		attributes.put(Field.STATUS, status);
-		attributes.put("CPDefinitionId", cpDefinitionId);
+		attributes.put(
+			CPInstanceIndexer.FIELD_CP_DEFINITION_ID, cpDefinitionId);
+		attributes.put(
+			CPInstanceIndexer.FIELD_CP_DEFINITION_STATUS,
+			WorkflowConstants.STATUS_ANY);
 		attributes.put("params", params);
 
 		searchContext.setAttributes(attributes);
