@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Component;
  *
  * @author Zoltán Takács
  */
-@Component(immediate = true)
+@Component(immediate = true, service = ExceptionMapper.class)
 public class ConflictExceptionMapper
 	implements ExceptionMapper<ConflictException> {
 

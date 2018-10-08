@@ -46,7 +46,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Rodrigo Guedes de Souza
  */
-@Component(immediate = true)
+@Component(immediate = true, service = NestedCollectionResource.class)
 public class CPInstanceNestedCollectionResource
 	implements NestedCollectionResource
 		<CPInstance, ClassPKExternalReferenceCode, CPInstanceIdentifier,

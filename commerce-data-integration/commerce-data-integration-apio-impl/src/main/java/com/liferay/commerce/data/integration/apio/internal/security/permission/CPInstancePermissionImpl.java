@@ -41,7 +41,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alessio Antonio Rendina
  */
 @Component(
-	property = "model.class.name=com.liferay.commerce.product.model.CPInstance"
+	property = "model.class.name=com.liferay.commerce.product.model.CPInstance",
+	service = HasPermission.class
 )
 public class CPInstancePermissionImpl
 	implements HasPermission<ClassPKExternalReferenceCode> {

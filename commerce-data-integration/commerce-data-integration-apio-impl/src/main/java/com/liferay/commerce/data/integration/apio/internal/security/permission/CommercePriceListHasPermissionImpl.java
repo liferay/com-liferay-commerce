@@ -37,7 +37,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Zoltán Takács
  */
 @Component(
-	property = "model.class.name=com.liferay.commerce.price.list.model.CommercePriceList"
+	property = "model.class.name=com.liferay.commerce.price.list.model.CommercePriceList",
+	service = HasPermission.class
 )
 public class CommercePriceListHasPermissionImpl
 	implements HasPermission<ClassPKExternalReferenceCode> {

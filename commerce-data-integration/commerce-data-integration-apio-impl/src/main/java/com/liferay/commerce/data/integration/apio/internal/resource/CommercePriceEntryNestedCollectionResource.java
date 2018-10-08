@@ -56,7 +56,7 @@ import org.osgi.service.component.annotations.Reference;
  *
  * @author Zoltán Takács
  */
-@Component(immediate = true)
+@Component(immediate = true, service = NestedCollectionResource.class)
 public class CommercePriceEntryNestedCollectionResource
 	implements NestedCollectionResource
 		<CommercePriceEntry, ClassPKExternalReferenceCode,
