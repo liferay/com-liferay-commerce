@@ -2,14 +2,13 @@ sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
 dependencies {
-	compileInclude group: "com.liferay", name: "com.liferay.person.apio.api", version: "1.0.0"
-	compileInclude group: "com.liferay", name: "com.liferay.portal.apio.api", version: "1.0.0"
-	compileInclude group: "com.liferay", name: "com.liferay.site.apio.api", version: "1.0.0"
-
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
 	compileOnly group: "com.liferay", name: "com.liferay.apio.architect.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.external.reference.api", version: "1.0.0"
+	compileOnly group: "com.liferay", name: "com.liferay.person.apio.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.petra.string", version: "2.0.0"
+	compileOnly group: "com.liferay", name: "com.liferay.portal.apio.api", version: "1.0.0"
+	compileOnly group: "com.liferay", name: "com.liferay.site.apio.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "2.0.0-20180905.075600-1"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.organization.api", version: "1.0.0"
