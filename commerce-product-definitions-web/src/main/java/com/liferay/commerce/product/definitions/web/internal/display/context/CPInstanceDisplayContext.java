@@ -329,9 +329,11 @@ public class CPInstanceDisplayContext
 		return DynamicIncludeUtil.hasDynamicInclude(key);
 	}
 
-	public boolean hasEditPermission() throws PortalException {
+	public boolean hasEditPermission(long cpDefinitionId)
+		throws PortalException {
+
 		return cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
+			cpRequestHelper.getPermissionChecker(), cpDefinitionId,
 			ActionKeys.UPDATE);
 	}
 

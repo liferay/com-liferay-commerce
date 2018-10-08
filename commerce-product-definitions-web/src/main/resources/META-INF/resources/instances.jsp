@@ -51,7 +51,7 @@ String displayStyle = cpInstanceDisplayContext.getDisplayStyle();
 				<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionId) %>" />
 			</liferay-portlet:renderURL>
 
-			<c:if test="<%= cpInstanceDisplayContext.hasEditPermission() %>">
+			<c:if test="<%= cpInstanceDisplayContext.hasEditPermission(cpDefinitionId) %>">
 				<liferay-frontend:add-menu
 					inline="<%= true %>"
 				>
