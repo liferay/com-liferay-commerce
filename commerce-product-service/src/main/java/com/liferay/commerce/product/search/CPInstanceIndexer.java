@@ -64,6 +64,9 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 
 	public static final String FIELD_CP_DEFINITION_ID = "CPDefinitionId";
 
+	public static final String FIELD_CP_DEFINITION_STATUS =
+		"CPDefinitionStatus";
+
 	public static final String FIELD_DISPLAY_DATE = "displayDate";
 
 	public static final String FIELD_EXTERNAL_REFERENCE_CODE =
@@ -109,6 +112,22 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 		}
 
 		Map<String, Serializable> attributes = searchContext.getAttributes();
+
+		if (attributes.containsKey(FIELD_CP_DEFINITION_STATUS)) {
+			int cpDefinitionStatus = GetterUtil.getInteger(
+				attributes.get(FIELD_CP_DEFINITION_STATUS));
+
+			if (cpDefinitionStatus == WorkflowConstants.STATUS_ANY) {
+				contextBooleanFilter.addRangeTerm(
+					FIELD_CP_DEFINITION_STATUS,
+					WorkflowConstants.STATUS_APPROVED,
+					WorkflowConstants.STATUS_SCHEDULED);
+			}
+			else {
+				contextBooleanFilter.addRequiredTerm(
+					FIELD_CP_DEFINITION_STATUS, cpDefinitionStatus);
+			}
+		}
 
 		if (attributes.containsKey(FIELD_PUBLISHED)) {
 			boolean published = GetterUtil.getBoolean(
@@ -213,6 +232,8 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 		document.addText(FIELD_SKU, cpInstance.getSku());
 		document.addKeyword(
 			FIELD_CP_DEFINITION_ID, cpInstance.getCPDefinitionId());
+		document.addKeyword(
+			FIELD_CP_DEFINITION_STATUS, cpDefinition.getStatus());
 		document.addKeyword(FIELD_PUBLISHED, cpInstance.isPublished());
 		document.addKeyword(FIELD_PURCHASABLE, cpInstance.isPurchasable());
 		document.addKeyword(
