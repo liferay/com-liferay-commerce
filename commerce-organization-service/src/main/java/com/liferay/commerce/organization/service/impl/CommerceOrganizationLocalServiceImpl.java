@@ -393,7 +393,11 @@ public class CommerceOrganizationLocalServiceImpl
 
 		List<String> treePaths = new ArrayList<>();
 
-		List<Organization> organizations = user.getOrganizations();
+		List<Organization> organizations = new ArrayList<>();
+
+		if (user != null) {
+			organizations = user.getOrganizations();
+		}
 
 		for (Organization organization : organizations) {
 			treePaths.add(organization.getTreePath());
@@ -556,7 +560,7 @@ public class CommerceOrganizationLocalServiceImpl
 			String keywords, int start, int end, Sort[] sorts)
 		throws PortalException {
 
-		User user = userLocalService.getUser(userId);
+		User user = userLocalService.fetchUser(userId);
 
 		Organization parentOrganization =
 			organizationLocalService.getOrganization(parentOrganizationId);
