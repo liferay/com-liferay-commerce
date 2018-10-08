@@ -16,6 +16,7 @@ package com.liferay.commerce.user.segment.web.internal.portlet.action;
 
 import com.liferay.commerce.user.segment.constants.CommerceUserSegmentPortletKeys;
 import com.liferay.commerce.user.segment.exception.CommerceUserSegmentEntryKeyException;
+import com.liferay.commerce.user.segment.exception.CommerceUserSegmentEntryNameException;
 import com.liferay.commerce.user.segment.exception.CommerceUserSegmentEntrySystemException;
 import com.liferay.commerce.user.segment.exception.NoSuchUserSegmentEntryException;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
@@ -95,14 +96,20 @@ public class EditCommerceUserSegmentEntryMVCActionCommand
 				nameMap, key, active, false, priority, serviceContext);
 		}
 		catch (Exception e) {
+			Locale locale = _portal.getLocale(actionRequest);
+
 			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-				"content.Language", _portal.getLocale(actionRequest),
-				getClass());
+				"content.Language", locale, getClass());
 
 			if (e instanceof CommerceUserSegmentEntryKeyException) {
 				jsonObject.put(
 					"error",
 					LanguageUtil.get(resourceBundle, "key-is-already-used"));
+			}
+			else if (e instanceof CommerceUserSegmentEntryNameException) {
+				jsonObject.put(
+					"error",
+					LanguageUtil.get(locale, "please-enter-a-valid-name"));
 			}
 			else {
 				_log.error(e, e);
