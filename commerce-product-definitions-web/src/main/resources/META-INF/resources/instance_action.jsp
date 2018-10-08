@@ -31,7 +31,7 @@ else {
 }
 %>
 
-<c:if test="<%= cpInstanceDisplayContext.hasEditPermission() %>">
+<c:if test="<%= cpInstanceDisplayContext.hasEditPermission(cpInstance.getCPDefinitionId()) %>">
 	<liferay-ui:icon-menu
 		direction="left-side"
 		icon="<%= StringPool.BLANK %>"
