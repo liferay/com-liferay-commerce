@@ -60,7 +60,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceTierPriceEntryNestedCollectionResource
 	implements NestedCollectionResource
 		<CommerceTierPriceEntry, Long, CommerceTierPriceEntryIdentifier,
-		ClassPKExternalReferenceCode, CommercePriceEntryIdentifier> {
+		 ClassPKExternalReferenceCode, CommercePriceEntryIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes

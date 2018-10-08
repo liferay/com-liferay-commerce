@@ -48,17 +48,17 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceOrderItemNestedCollectionResource
 	implements NestedCollectionResource
 		<CommerceOrderItem, ClassPKExternalReferenceCode,
-		CommerceOrderItemIdentifier, ClassPKExternalReferenceCode,
-		CommerceOrderIdentifier> {
+		 CommerceOrderItemIdentifier, ClassPKExternalReferenceCode,
+		 CommerceOrderIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes
 		<CommerceOrderItem, ClassPKExternalReferenceCode,
-		ClassPKExternalReferenceCode>
+		 ClassPKExternalReferenceCode>
 			collectionRoutes(
 				NestedCollectionRoutes.Builder
 					<CommerceOrderItem, ClassPKExternalReferenceCode,
-					ClassPKExternalReferenceCode>
+					 ClassPKExternalReferenceCode>
 						builder) {
 
 		return builder.addGetter(

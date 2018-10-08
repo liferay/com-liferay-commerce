@@ -46,7 +46,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CPOptionValueNestedCollectionResource
 	implements NestedCollectionResource
 		<CPOptionValue, Long, CPOptionValueIdentifier, Long,
-		CPOptionIdentifier> {
+		 CPOptionIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes<CPOptionValue, Long, Long> collectionRoutes(

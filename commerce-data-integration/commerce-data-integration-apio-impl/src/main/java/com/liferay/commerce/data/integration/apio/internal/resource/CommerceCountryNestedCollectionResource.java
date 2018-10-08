@@ -39,7 +39,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceCountryNestedCollectionResource
 	implements NestedCollectionResource
 		<CommerceCountry, Long, CommerceCountryIdentifier, Long,
-		WebSiteIdentifier> {
+		 WebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes<CommerceCountry, Long, Long> collectionRoutes(

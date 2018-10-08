@@ -50,7 +50,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CPInstanceNestedCollectionResource
 	implements NestedCollectionResource
 		<CPInstance, ClassPKExternalReferenceCode, CPInstanceIdentifier,
-		ClassPKExternalReferenceCode, CPDefinitionIdentifier> {
+		 ClassPKExternalReferenceCode, CPDefinitionIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes
@@ -58,7 +58,7 @@ public class CPInstanceNestedCollectionResource
 			collectionRoutes(
 				NestedCollectionRoutes.Builder
 					<CPInstance, ClassPKExternalReferenceCode,
-					ClassPKExternalReferenceCode>
+					 ClassPKExternalReferenceCode>
 						builder) {
 
 		return builder.addGetter(
