@@ -115,6 +115,15 @@ public class CommerceOrganizationServiceWrapper
 	}
 
 	@Override
+	public long searchOrganizationsByGroupCount(long groupId, long userId,
+		String type, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort[] sorts)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrganizationService.searchOrganizationsByGroupCount(groupId,
+			userId, type, keywords, start, end, sorts);
+	}
+
+	@Override
 	public void unsetOrganizationUsers(long organizationId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_commerceOrganizationService.unsetOrganizationUsers(organizationId,
