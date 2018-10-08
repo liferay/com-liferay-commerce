@@ -99,6 +99,11 @@ public interface CommerceOrganizationService extends BaseService {
 		long groupId, long userId, String type, String keywords, int start,
 		int end, Sort[] sorts) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long searchOrganizationsByGroupCount(long groupId, long userId,
+		String type, String keywords, int start, int end, Sort[] sorts)
+		throws PortalException;
+
 	public void unsetOrganizationUsers(long organizationId, long[] userIds)
 		throws PortalException;
 
