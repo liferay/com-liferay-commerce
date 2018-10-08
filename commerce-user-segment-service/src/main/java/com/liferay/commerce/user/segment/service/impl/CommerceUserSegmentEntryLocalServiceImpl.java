@@ -15,6 +15,7 @@
 package com.liferay.commerce.user.segment.service.impl;
 
 import com.liferay.commerce.user.segment.exception.CommerceUserSegmentEntryKeyException;
+import com.liferay.commerce.user.segment.exception.CommerceUserSegmentEntryNameException;
 import com.liferay.commerce.user.segment.exception.CommerceUserSegmentEntrySystemException;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterionConstants;
 import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
@@ -45,6 +46,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -80,7 +82,7 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 
 		key = FriendlyURLNormalizerUtil.normalize(key);
 
-		validate(0, groupId, key);
+		validate(0, groupId, key, nameMap);
 
 		long commerceUserSegmentEntryId = counterLocalService.increment();
 
@@ -328,7 +330,7 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 
 		validate(
 			commerceUserSegmentEntryId, commerceUserSegmentEntry.getGroupId(),
-			key);
+			key, nameMap);
 
 		commerceUserSegmentEntry.setNameMap(nameMap);
 
@@ -454,7 +456,8 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 	}
 
 	protected void validate(
-			long commerceUserSegmentEntryId, long groupId, String key)
+			long commerceUserSegmentEntryId, long groupId, String key,
+			Map<Locale, String> nameMap)
 		throws PortalException {
 
 		CommerceUserSegmentEntry commerceUserSegmentEntry =
@@ -465,6 +468,14 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 				commerceUserSegmentEntryId)) {
 
 			throw new CommerceUserSegmentEntryKeyException();
+		}
+
+		Locale locale = LocaleUtil.getSiteDefault();
+
+		String name = nameMap.get(locale);
+
+		if (Validator.isNull(name)) {
+			throw new CommerceUserSegmentEntryNameException();
 		}
 	}
 
