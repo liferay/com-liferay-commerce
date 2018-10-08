@@ -64,8 +64,8 @@ public class CPOptionHelper {
 
 		return _cpOptionLocalService.updateCPOption(
 			cpOptionId, cpOption.getNameMap(), cpOption.getDescriptionMap(),
-			cpOption.getDDMFormFieldTypeName(), cpOption.getFacetable(),
-			cpOption.getRequired(), cpOption.getSkuContributor(),
+			cpOption.getDDMFormFieldTypeName(), cpOption.isFacetable(),
+			cpOption.isRequired(), cpOption.isSkuContributor(),
 			cpOption.getKey(), serviceContext);
 	}
 
