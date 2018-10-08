@@ -99,6 +99,7 @@
 	<exceptions>
 		<exception>CommerceUserSegmentCriterionType</exception>
 		<exception>CommerceUserSegmentEntryKey</exception>
+		<exception>CommerceUserSegmentEntryName</exception>
 		<exception>CommerceUserSegmentEntrySystem</exception>
 	</exceptions>
 </service-builder>
