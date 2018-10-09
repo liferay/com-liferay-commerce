@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.organization.service.impl.test.util;
+package com.liferay.commerce.organization.test.util;
 
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
