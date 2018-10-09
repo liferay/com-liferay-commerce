@@ -23,11 +23,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.ListTypeConstants;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 
 import java.util.List;
@@ -38,6 +39,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Rodrigo Guedes de Souza
  * @author Eduardo V. Bruno
+ * @author Zoltán Takács
  */
 @Component(immediate = true, service = CommerceAccountHelper.class)
 public class CommerceAccountHelper {
@@ -53,11 +55,7 @@ public class CommerceAccountHelper {
 		if (organization == null) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					String.format(
-						"Account does not exist with identifier %d : %s",
-						classPKExternalReferenceCode.getClassPK(),
-						classPKExternalReferenceCode.
-							getExternalReferenceCode()));
+					"Account does not exist: " + classPKExternalReferenceCode);
 			}
 		}
 		else {
@@ -95,6 +93,24 @@ public class CommerceAccountHelper {
 			companyId, externalReferenceCode);
 	}
 
+	public long getParentOrganizationId(Long groupId) {
+		Group group = _groupLocalService.fetchGroup(groupId);
+
+		long parentOrganizationId = 0;
+
+		if (group == null) {
+			return parentOrganizationId;
+		}
+
+		parentOrganizationId = group.getOrganizationId();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Parent Organization ID: " + parentOrganizationId);
+		}
+
+		return parentOrganizationId;
+	}
+
 	public ClassPKExternalReferenceCode
 		organizationIdToClassPKExternalReferenceCode(long organizationId) {
 
@@ -116,63 +132,76 @@ public class CommerceAccountHelper {
 			organization.getExternalReferenceCode());
 	}
 
-	public Organization upsert(
+	public Organization updateOrganization(
+			ClassPKExternalReferenceCode classPKExternalReferenceCode,
+			String name, long regionId, long countryId, List<Long> userIds,
+			User currentUser)
+		throws PortalException {
+
+		Organization organization = getOrganization(
+			classPKExternalReferenceCode, currentUser.getCompanyId());
+
+		organization = _organizationLocalService.updateOrganization(
+			currentUser.getCompanyId(), organization.getOrganizationId(),
+			organization.getParentOrganizationId(), name,
+			CommerceOrganizationConstants.TYPE_ACCOUNT, regionId, countryId,
+			ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
+			false, null, false,
+			_serviceContextHelper.getServiceContext(currentUser));
+
+		_setMembers(organization, userIds);
+
+		return organization;
+	}
+
+	public Organization upsertOrganization(
 			String externalReferenceCode, long parentOrganizationId,
 			String name, long regionId, long countryId, List<Long> userIds,
 			User currentUser)
 		throws PortalException {
 
-		ServiceContext serviceContext = _getServiceContext(currentUser);
-
 		Organization organization =
 			_erOrganizationLocalService.addOrUpdateOrganization(
-				externalReferenceCode, serviceContext.getUserId(),
+				externalReferenceCode, currentUser.getUserId(),
 				parentOrganizationId, name,
 				CommerceOrganizationConstants.TYPE_ACCOUNT, regionId, countryId,
 				ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
-				false, false, null, serviceContext);
+				false, false, null,
+				_serviceContextHelper.getServiceContext(currentUser));
 
-		_addMembers(organization, userIds);
+		_setMembers(organization, userIds);
 
 		return organization;
 	}
 
-	private void _addMembers(Organization organization, List<Long> userIds) {
+	private void _removeAllMembers(long organizationId) {
+		_userService.clearOrganizationUsers(organizationId);
+	}
+
+	private void _setMembers(Organization organization, List<Long> userIds) {
 		if (userIds != null) {
 			_removeAllMembers(organization.getOrganizationId());
 
 			for (Long userId : userIds) {
 				try {
-					User userMember = _userLocalService.getUser(userId);
+					User userMember = _userService.getUser(userId);
 
 					if (userMember != null) {
-						_userLocalService.addOrganizationUser(
+						_userService.addOrganizationUser(
 							organization.getOrganizationId(), userId);
 					}
 				}
 				catch (PortalException pe) {
-					_log.error("Error on add member", pe);
+					_log.error(
+						"Unable to add member to organization with ID: " +
+							organization.getOrganizationId());
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(pe, pe);
+					}
 				}
 			}
 		}
-	}
-
-	private ServiceContext _getServiceContext(User curreUser)
-		throws PortalException {
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setCompanyId(curreUser.getCompanyId());
-		serviceContext.setTimeZone(curreUser.getTimeZone());
-		serviceContext.setUserId(curreUser.getUserId());
-
-		return serviceContext;
-	}
-
-	private void _removeAllMembers(long organizationId) {
-		_userLocalService.clearOrganizationUsers(organizationId);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -185,9 +214,15 @@ public class CommerceAccountHelper {
 	private EROrganizationLocalService _erOrganizationLocalService;
 
 	@Reference
+	private GroupLocalService _groupLocalService;
+
+	@Reference
 	private OrganizationLocalService _organizationLocalService;
 
 	@Reference
-	private UserLocalService _userLocalService;
+	private ServiceContextHelper _serviceContextHelper;
+
+	@Reference
+	private UserLocalService _userService;
 
 }
