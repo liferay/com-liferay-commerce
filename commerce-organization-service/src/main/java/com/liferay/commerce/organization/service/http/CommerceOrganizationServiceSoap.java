@@ -154,6 +154,23 @@ public class CommerceOrganizationServiceSoap {
 		}
 	}
 
+	public static long searchOrganizationsByGroupCount(long groupId,
+		long userId, String type, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort[] sorts)
+		throws RemoteException {
+		try {
+			long returnValue = CommerceOrganizationServiceUtil.searchOrganizationsByGroupCount(groupId,
+					userId, type, keywords, start, end, sorts);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void unsetOrganizationUsers(long organizationId,
 		long[] userIds) throws RemoteException {
 		try {

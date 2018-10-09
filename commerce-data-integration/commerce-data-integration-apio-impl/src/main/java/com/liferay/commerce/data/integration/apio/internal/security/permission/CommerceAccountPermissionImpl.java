@@ -25,12 +25,13 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.OrganizationConstants;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.CompanyService;
 import com.liferay.portal.kernel.service.permission.OrganizationPermissionUtil;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import org.osgi.service.component.annotations.Component;
@@ -39,6 +40,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Rodrigo Guedes de Souza
  * @author Alessio Antonio Rendina
+ * @author Zoltán Takács
  */
 @Component(
 	property = "model.class.name=com.liferay.portal.kernel.model.Organization",
@@ -52,57 +54,72 @@ public class CommerceAccountPermissionImpl
 		Class<? extends Identifier<S>> identifierClass) {
 
 		if (identifierClass.equals(WebSiteIdentifier.class)) {
-			return (credentials, groupId) ->
-				_portletResourcePermission.contains(
-					(PermissionChecker)credentials.get(), (Long)groupId,
+			return (credentials, groupId) -> {
+				long parentOrganizationId =
+					_commerceAccountHelper.getParentOrganizationId(
+						(Long)groupId);
+
+				if (parentOrganizationId ==
+						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+
+					return PortalPermissionUtil.contains(
+						(PermissionChecker)credentials.get(),
+						ActionKeys.ADD_ORGANIZATION);
+				}
+
+				return OrganizationPermissionUtil.contains(
+					(PermissionChecker)credentials.get(), parentOrganizationId,
 					ActionKeys.ADD_ORGANIZATION);
+			};
 		}
 
-		return (credentials, s) -> false;
+		return (credentials, groupId) -> false;
 	}
 
 	@Override
 	public Boolean forDeleting(
-			Credentials credentials, ClassPKExternalReferenceCode entryId)
+			Credentials credentials,
+			ClassPKExternalReferenceCode organizationCPKERC)
 		throws Exception {
 
 		return _forItemRoutesOperations().apply(
-			credentials, entryId, ActionKeys.DELETE);
+			credentials, organizationCPKERC, ActionKeys.DELETE);
 	}
 
 	@Override
 	public Boolean forUpdating(
-			Credentials credentials, ClassPKExternalReferenceCode entryId)
+			Credentials credentials,
+			ClassPKExternalReferenceCode organizationCPKERC)
 		throws Exception {
 
 		return _forItemRoutesOperations().apply(
-			credentials, entryId, ActionKeys.UPDATE);
+			credentials, organizationCPKERC, ActionKeys.UPDATE);
 	}
 
 	private ThrowableTriFunction
 		<Credentials, ClassPKExternalReferenceCode, String, Boolean>
 			_forItemRoutesOperations() {
 
-		return (credentials, classPKExternalReferenceCode, actionId) -> {
+		return (credentials, organizationCPKERC, actionId) -> {
 			Company company = _companyService.getCompanyById(
 				CompanyThreadLocal.getCompanyId());
 
 			Organization organization = _commerceAccountHelper.getOrganization(
-				classPKExternalReferenceCode, company);
+				organizationCPKERC, company);
 
 			if (organization == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"No Organization exists with identifier: " +
-							classPKExternalReferenceCode);
+							organizationCPKERC);
 				}
 
 				return false;
 			}
 
 			return OrganizationPermissionUtil.contains(
-				(PermissionChecker)credentials.get(), organization.getGroupId(),
-				actionId);
+				(PermissionChecker)credentials.get(),
+				organization.getOrganizationId(), actionId);
 		};
 	}
 
@@ -114,8 +131,5 @@ public class CommerceAccountPermissionImpl
 
 	@Reference
 	private CompanyService _companyService;
-
-	@Reference
-	private PortletResourcePermission _portletResourcePermission;
 
 }

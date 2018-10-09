@@ -1,0 +1,37 @@
+Bundle-Name: Liferay Commerce Data Integration Apio End-To-End Test
+Bundle-SymbolicName: com.liferay.commerce.data.integration.apio.end.to.end.test
+Bundle-Version: 1.0.0
+Import-Package:\
+	!com.sun.jdi.*,\
+	!com.sun.tools.*,\
+	\
+	!javax.validation.*,\
+	\
+	!org.apache.*,\
+	!org.apache.aries.blueprint,\
+	!org.apache.aries.blueprint.*,\
+	\
+	!org.hibernate.validator.*,\
+	\
+	!org.osgi.service.blueprint.*,\
+	\
+	*
+-includeresource:\
+	test-classes/integration,\
+	@lib/aopalliance-repackaged.jar,\
+	@lib/com.liferay.commerce.apio.jsonld.representation.util.jar,\
+	@lib/commons-lang.jar,\
+	@lib/hk2-api.jar,\
+	@lib/hk2-locator.jar,\
+	@lib/hk2-utils.jar,\
+	@lib/jackson-annotations.jar,\
+	@lib/jackson-core.jar,\
+	@lib/jackson-databind.jar,\
+	@lib/javassist.jar,\
+	@lib/javax.annotation-api.jar,\
+	@lib/javax.inject.jar,\
+	@lib/javax.ws.rs-api.jar,\
+	@lib/jersey-client.jar,\
+	@lib/jersey-common.jar,\
+	@lib/jersey-hk2.jar,\
+	@lib/osgi-resource-locator.jar
