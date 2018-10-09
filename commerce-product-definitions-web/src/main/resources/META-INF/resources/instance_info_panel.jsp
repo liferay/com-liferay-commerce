@@ -34,12 +34,6 @@ if (cpInstances == null) {
 		%>
 
 		<div class="sidebar-header">
-			<ul class="sidebar-header-actions">
-				<li>
-					<liferay-util:include page="/instance_action.jsp" servletContext="<%= application %>" />
-				</li>
-			</ul>
-
 			<h4><%= HtmlUtil.escape(cpInstance.getSku()) %></h4>
 		</div>
 
