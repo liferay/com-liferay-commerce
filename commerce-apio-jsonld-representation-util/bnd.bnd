@@ -1,15 +1,3 @@
 Bundle-Name: Liferay Commerce Apio JsonLD Representation Utilities
 Bundle-SymbolicName: com.liferay.commerce.apio.jsonld.representation.util
 Bundle-Version: 1.0.0
-Export-Package:\
-	com.liferay.commerce.apio.jsonld.representation.util,\
-	com.liferay.commerce.apio.jsonld.representation.util.constants,\
-	com.liferay.commerce.apio.jsonld.representation.util.form,\
-	com.liferay.commerce.apio.jsonld.representation.util.operation,\
-	com.liferay.commerce.apio.jsonld.representation.util.result
--includeresource:\
-	@lib/jackson-annotations.jar,\
-	@lib/jackson-core.jar,\
-	@lib/jackson-databind.jar,\
-	@lib/slf4j-api.jar,\
-	@lib/slf4j-nop.jar
