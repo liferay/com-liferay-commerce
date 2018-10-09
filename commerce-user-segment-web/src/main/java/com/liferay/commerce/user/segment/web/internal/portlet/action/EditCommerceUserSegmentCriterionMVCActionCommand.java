@@ -149,6 +149,7 @@ public class EditCommerceUserSegmentCriterionMVCActionCommand
 
 		String[] addTypeSettings = ParamUtil.getStringValues(
 			actionRequest, "addTypeSettings");
+
 		String[] deleteTypeSettings = ParamUtil.getStringValues(
 			actionRequest, "deleteTypeSettings");
 

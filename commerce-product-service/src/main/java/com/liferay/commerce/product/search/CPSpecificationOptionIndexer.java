@@ -157,13 +157,14 @@ public class CPSpecificationOptionIndexer
 			cpSpecificationOption.getTitle());
 
 		for (String languageId : languageIds) {
-			String description = cpSpecificationOption.getDescription(
-				languageId);
 			String title = cpSpecificationOption.getTitle(languageId);
 
 			document.addText(
 				LocalizationUtil.getLocalizedName(Field.TITLE, languageId),
 				title);
+
+			String description = cpSpecificationOption.getDescription(
+				languageId);
 
 			document.addText(
 				LocalizationUtil.getLocalizedName(

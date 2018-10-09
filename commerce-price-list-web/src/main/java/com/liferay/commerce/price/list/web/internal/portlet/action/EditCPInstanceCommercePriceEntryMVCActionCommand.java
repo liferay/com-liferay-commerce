@@ -62,6 +62,7 @@ public class EditCPInstanceCommercePriceEntryMVCActionCommand
 
 		long commercePriceListId = ParamUtil.getLong(
 			actionRequest, "commercePriceListId");
+
 		long cpInstanceId = ParamUtil.getLong(actionRequest, "cpInstanceId");
 
 		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);

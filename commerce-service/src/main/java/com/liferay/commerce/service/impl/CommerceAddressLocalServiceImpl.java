@@ -68,6 +68,7 @@ public class CommerceAddressLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
+
 		long groupId = serviceContext.getScopeGroupId();
 
 		validate(

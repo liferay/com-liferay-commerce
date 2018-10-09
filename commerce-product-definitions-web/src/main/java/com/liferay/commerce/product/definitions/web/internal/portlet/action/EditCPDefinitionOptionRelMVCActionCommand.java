@@ -63,6 +63,7 @@ public class EditCPDefinitionOptionRelMVCActionCommand
 
 		long cpDefinitionId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionId");
+
 		long cpOptionId = ParamUtil.getLong(actionRequest, "cpOptionId");
 
 		if (cpOptionId > 0) {

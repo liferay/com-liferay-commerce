@@ -56,6 +56,7 @@ public class EditCommerceShippingMethodAddressRestrictionMVCActionCommand
 
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
+
 		long commerceCountryId = ParamUtil.getLong(
 			actionRequest, "commerceCountryId");
 

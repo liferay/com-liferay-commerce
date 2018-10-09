@@ -62,6 +62,7 @@ public class EditCPDefinitionSpecificationOptionValueMVCActionCommand
 
 		long cpDefinitionId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionId");
+
 		long cpSpecificationOptionId = ParamUtil.getLong(
 			actionRequest, "cpSpecificationOptionId");
 

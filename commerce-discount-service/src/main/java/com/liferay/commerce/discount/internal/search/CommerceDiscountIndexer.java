@@ -187,6 +187,7 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 
 		if (Validator.isNotNull(couponCode)) {
 			BooleanFilter booleanFilter = new BooleanFilter();
+
 			BooleanFilter booleanFilterCoupon = new BooleanFilter();
 
 			booleanFilterCoupon.addRequiredTerm(FIELD_COUPON_CODE, couponCode);

@@ -765,6 +765,7 @@ public class CPFileImporterImpl implements CPFileImporter {
 
 		for (Map.Entry<String, ThemeSetting> entry : themeSettings.entrySet()) {
 			String key = entry.getKey();
+
 			ThemeSetting themeSetting = entry.getValue();
 
 			String value = themeSetting.getValue();
@@ -830,6 +831,7 @@ public class CPFileImporterImpl implements CPFileImporter {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 			int scope = jsonObject.getInt("scope");
+
 			String roleName = jsonObject.getString("roleName");
 
 			Role role = _roleLocalService.getRole(companyId, roleName);

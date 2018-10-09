@@ -187,6 +187,7 @@ public class EditCommerceNotificationTemplateMVCActionCommand
 
 		long[] addCommerceUserSegmentEntryIds = ParamUtil.getLongValues(
 			actionRequest, "addCommerceUserSegmentEntryIds");
+
 		long[] deleteCommerceNotificationTemplateUserSegmentRelIds =
 			ParamUtil.getLongValues(
 				actionRequest,
