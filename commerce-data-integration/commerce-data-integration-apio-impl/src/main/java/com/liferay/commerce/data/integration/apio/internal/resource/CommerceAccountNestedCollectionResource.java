@@ -32,6 +32,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.OrganizationParentException;
+import com.liferay.portal.kernel.exception.OrganizationTypeException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -220,6 +221,11 @@ public class CommerceAccountNestedCollectionResource
 					"Problem with the actual web site with ID: %d, %s",
 					webSiteId, ope.getMessage()),
 				Response.Status.CONFLICT.getStatusCode(), ope);
+		}
+		catch (OrganizationTypeException ote) {
+			throw new ConflictException(
+				ote.getMessage(), Response.Status.CONFLICT.getStatusCode(),
+				ote);
 		}
 	}
 
