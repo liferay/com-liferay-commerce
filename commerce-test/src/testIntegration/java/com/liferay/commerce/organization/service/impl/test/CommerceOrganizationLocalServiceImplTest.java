@@ -16,8 +16,8 @@ package com.liferay.commerce.organization.service.impl.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.organization.service.CommerceOrganizationLocalService;
-import com.liferay.commerce.organization.service.impl.test.util.CommerceOrganizationTestUtil;
-import com.liferay.commerce.organization.service.impl.test.util.OrganizationTypeSetUp;
+import com.liferay.commerce.organization.test.util.CommerceOrganizationTestUtil;
+import com.liferay.commerce.organization.test.util.OrganizationTypeSetUp;
 import com.liferay.portal.kernel.model.Address;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
