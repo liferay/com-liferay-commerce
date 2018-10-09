@@ -1,0 +1,13 @@
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+copyLibs {
+	enabled = true
+}
+
+dependencies {
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.6"
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.6"
+	compileOnly group: "org.slf4j", name: "slf4j-api", version: "1.7.25"
+	compileOnly group: "org.slf4j", name: "slf4j-nop", version: "1.7.25"
+}
