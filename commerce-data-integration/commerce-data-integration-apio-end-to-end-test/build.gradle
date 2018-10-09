@@ -22,6 +22,7 @@ dependencies {
 	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.organization.api", version: "1.0.0"
 	testIntegrationCompile group: "junit", name: "junit", version: "4.12"
 	testIntegrationCompile project(":apps:commerce:commerce-data-integration:commerce-data-integration-apio-api")
+	testIntegrationCompile project(":apps:commerce:commerce-organization-test-util")
 
 	testIntegrationRuntime group: "com.liferay", name: "com.liferay.apio.architect.api", version: "1.0.0"
 	testIntegrationRuntime group: "com.liferay", name: "com.liferay.person.apio.api", version: "1.0.0"
