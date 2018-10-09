@@ -118,13 +118,13 @@ public class CPInstanceFinderImpl
 			qPos.add(cpInstanceStatus);
 
 			List<CPInstance> list = (List<CPInstance>)QueryUtil.list(
-				q, getDialect(), start, end);
+				q, getDialect(), start, end, false);
 
 			if (orderByComparator != null) {
 				Collections.sort(list, orderByComparator);
 			}
 
-			return list;
+			return Collections.unmodifiableList(list);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
