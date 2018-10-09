@@ -137,6 +137,7 @@ public class CommerceOrderDiscountTest {
 
 		BigDecimal prod1Price = cpInstanceDiscount.getPrice();
 		BigDecimal prod2Price = cpInstancePlain.getPrice();
+
 		BigDecimal prod1TotalPrice = prod1Price.multiply(
 			BigDecimal.valueOf(orderedQuantity));
 		BigDecimal prod2TotalPrice = prod2Price.multiply(
@@ -236,6 +237,7 @@ public class CommerceOrderDiscountTest {
 
 		BigDecimal prod1Price = cpInstanceDiscount.getPrice();
 		BigDecimal prod2Price = cpInstancePlain.getPrice();
+
 		BigDecimal prod1TotalPrice = prod1Price.multiply(
 			BigDecimal.valueOf(orderedQuantity));
 		BigDecimal prod2TotalPrice = prod2Price.multiply(

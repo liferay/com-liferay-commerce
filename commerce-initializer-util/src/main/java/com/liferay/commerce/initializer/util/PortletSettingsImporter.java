@@ -77,6 +77,7 @@ public class PortletSettingsImporter {
 
 		String fileName = jsonObject.getString("FileName");
 		String name = jsonObject.getString("Name");
+
 		String portletClassName = jsonObject.getString("PortletClassName");
 
 		long classNameId = _portal.getClassNameId(portletClassName);

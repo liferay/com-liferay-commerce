@@ -62,6 +62,7 @@ public class EditCommercePriceEntryMVCActionCommand
 
 		long commercePriceListId = ParamUtil.getLong(
 			actionRequest, "commercePriceListId");
+
 		long cpInstanceId = ParamUtil.getLong(actionRequest, "cpInstanceId");
 
 		if (cpInstanceId > 0) {

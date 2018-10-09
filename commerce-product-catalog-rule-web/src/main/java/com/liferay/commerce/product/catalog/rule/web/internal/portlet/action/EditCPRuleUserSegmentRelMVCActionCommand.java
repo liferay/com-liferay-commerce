@@ -56,6 +56,7 @@ public class EditCPRuleUserSegmentRelMVCActionCommand
 		long[] addCommerceUserSegmentEntryIds = null;
 
 		long cpRuleId = ParamUtil.getLong(actionRequest, "cpRuleId");
+
 		long commerceUserSegmentEntryId = ParamUtil.getLong(
 			actionRequest, "commerceUserSegmentEntryId");
 

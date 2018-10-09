@@ -127,6 +127,7 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 		for (String languageId : languageIds) {
 			String description = cpOption.getDescription(languageId);
 			String name = cpOption.getName(languageId);
+
 			List<String> cpOptionValueNamesList = new ArrayList<>();
 
 			for (CPOptionValue cpOptionValue : cpOptionValues) {

@@ -260,6 +260,7 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 
 		long[] addCommerceUserSegmentEntryIds = ParamUtil.getLongValues(
 			actionRequest, "addCommerceUserSegmentEntryIds");
+
 		long[] deleteCommerceDiscountUserSegmentRelIds =
 			ParamUtil.getLongValues(
 				actionRequest, "deleteCommerceDiscountUserSegmentRelIds");

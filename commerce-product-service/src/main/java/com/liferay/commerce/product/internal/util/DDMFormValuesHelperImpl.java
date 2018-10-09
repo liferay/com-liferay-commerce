@@ -54,6 +54,7 @@ public class DDMFormValuesHelperImpl implements DDMFormValuesHelper {
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject newJSONObject = _jsonFactory.createJSONObject();
+
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 			long cpDefinitionOptionRelId = jsonObject.getLong("key");

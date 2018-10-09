@@ -612,6 +612,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		// Commerce product instance
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
+
 		CPInstance cpInstance = cpInstancePersistence.findByPrimaryKey(
 			cpInstanceId);
 

@@ -34,6 +34,7 @@ public class CommerceDiscountUsageEntryLocalServiceImpl
 		throws PortalException {
 
 		long groupId = serviceContext.getScopeGroupId();
+
 		long userId = serviceContext.getUserId();
 
 		User user = userLocalService.getUser(userId);

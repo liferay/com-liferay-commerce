@@ -238,6 +238,7 @@ public class EditCommercePriceListMVCActionCommand
 
 		long[] addCommerceUserSegmentEntryIds = ParamUtil.getLongValues(
 			actionRequest, "addCommerceUserSegmentEntryIds");
+
 		long[] deleteCommercePriceListUserSegmentEntryRelIds =
 			ParamUtil.getLongValues(
 				actionRequest, "deleteCommercePriceListUserSegmentEntryRelIds");

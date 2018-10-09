@@ -155,6 +155,7 @@ public class CPDefinitionOptionRelIndexer
 			String description = cpDefinitionOptionRel.getDescription(
 				languageId);
 			String name = cpDefinitionOptionRel.getName(languageId);
+
 			List<String> cpDefinitionOptionValueRelNamesList =
 				new ArrayList<>();
 

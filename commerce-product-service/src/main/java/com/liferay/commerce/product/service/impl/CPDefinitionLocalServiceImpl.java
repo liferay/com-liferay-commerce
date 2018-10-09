@@ -822,6 +822,7 @@ public class CPDefinitionLocalServiceImpl
 
 			for (Map.Entry<String, List<String>> entry : facetMap.entrySet()) {
 				String fieldName = entry.getKey();
+
 				List<String> facetValues = entry.getValue();
 
 				String[] facetValuesArray = ArrayUtil.toStringArray(

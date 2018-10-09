@@ -89,6 +89,7 @@ public class CommerceDiscountLocalServiceImpl
 		// Commerce discount
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
+
 		long groupId = serviceContext.getScopeGroupId();
 
 		validate(
@@ -327,6 +328,7 @@ public class CommerceDiscountLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
+
 		CommerceDiscount commerceDiscount =
 			commerceDiscountPersistence.findByPrimaryKey(commerceDiscountId);
 
