@@ -30,6 +30,7 @@ import com.liferay.commerce.apio.jsonld.representation.util.operation.Method;
 import com.liferay.commerce.apio.jsonld.representation.util.operation.Operation;
 import com.liferay.commerce.data.integration.apio.end.to.end.client.RESTClient;
 import com.liferay.commerce.organization.constants.CommerceOrganizationConstants;
+import com.liferay.commerce.organization.test.util.OrganizationTypeSetUp;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.ListTypeConstants;
@@ -41,6 +42,7 @@ import com.liferay.portal.kernel.test.util.OrganizationTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
+import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
@@ -49,12 +51,16 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import org.osgi.service.cm.ConfigurationAdmin;
 
 /**
  * @author Zoltán Takács
@@ -72,6 +78,18 @@ public class CommerceAccountNestedCollectionResourceTest
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
 			PermissionCheckerTestRule.INSTANCE);
+
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+		_organizationTypeSetUp = new OrganizationTypeSetUp(_configurationAdmin);
+
+		_organizationTypeSetUp.setUpEnvironment();
+	}
+
+	@AfterClass
+	public static void tearDownClass() throws Exception {
+		_organizationTypeSetUp.tearDownEnvironment();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -323,6 +341,10 @@ public class CommerceAccountNestedCollectionResourceTest
 	private static final String _TEST_PARENT_ORGANIZATION_NAME =
 		RandomTestUtil.randomString();
 
+	@Inject
+	private static ConfigurationAdmin _configurationAdmin;
+
+	private static OrganizationTypeSetUp _organizationTypeSetUp;
 	private static Organization _parentOrganization;
 
 }
