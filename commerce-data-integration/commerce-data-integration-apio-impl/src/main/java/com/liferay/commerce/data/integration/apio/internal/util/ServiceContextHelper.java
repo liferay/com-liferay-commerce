@@ -31,26 +31,17 @@ import org.osgi.service.component.annotations.Reference;
 public class ServiceContextHelper {
 
 	public ServiceContext getServiceContext() throws PortalException {
-		return getServiceContext(0, new long[0]);
+		return getServiceContext(0, new long[0], null);
 	}
 
 	public ServiceContext getServiceContext(long groupId)
 		throws PortalException {
 
-		return getServiceContext(groupId, new long[0]);
+		return getServiceContext(groupId, new long[0], null);
 	}
 
-	/**
-	 * Compose the ServiceContext object which needed for operation on Product
-	 * related resources.
-	 *
-	 * @param  groupId
-	 * @param  assetCategoryIds
-	 * @return ServiceContext
-	 * @throws PortalException
-	 */
 	public ServiceContext getServiceContext(
-			long groupId, long[] assetCategoryIds)
+			long groupId, long[] assetCategoryIds, User user)
 		throws PortalException {
 
 		ServiceContext serviceContext =
@@ -60,7 +51,9 @@ public class ServiceContextHelper {
 			serviceContext = new ServiceContext();
 		}
 
-		User user = _userService.getUserById(PrincipalThreadLocal.getUserId());
+		if (user == null) {
+			user = _userService.getUserById(PrincipalThreadLocal.getUserId());
+		}
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
@@ -71,6 +64,10 @@ public class ServiceContextHelper {
 		serviceContext.setUserId(user.getUserId());
 
 		return serviceContext;
+	}
+
+	public ServiceContext getServiceContext(User user) throws PortalException {
+		return getServiceContext(0, new long[0], user);
 	}
 
 	@Reference

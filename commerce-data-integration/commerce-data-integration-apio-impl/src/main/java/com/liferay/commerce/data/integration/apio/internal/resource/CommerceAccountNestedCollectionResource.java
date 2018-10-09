@@ -23,6 +23,7 @@ import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
 import com.liferay.commerce.data.integration.apio.identifiers.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.identifiers.CommerceAccountIdentifier;
+import com.liferay.commerce.data.integration.apio.internal.exceptions.ConflictException;
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceAccountUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
 import com.liferay.commerce.organization.constants.CommerceOrganizationConstants;
@@ -30,6 +31,7 @@ import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.apio.user.CurrentUser;
+import com.liferay.portal.kernel.exception.OrganizationParentException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -38,18 +40,22 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.GroupService;
 import com.liferay.portal.kernel.service.UserService;
 import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.core.Response;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 @Component(immediate = true, service = NestedCollectionResource.class)
 public class CommerceAccountNestedCollectionResource
@@ -68,7 +74,7 @@ public class CommerceAccountNestedCollectionResource
 		return builder.addGetter(
 			this::_getPageItems, CurrentUser.class
 		).addCreator(
-			this::_addAccount, CurrentUser.class,
+			this::_upsertAccount, CurrentUser.class,
 			_hasPermission.forAddingIn(WebSiteIdentifier.class),
 			CommerceAccountUpserterForm::buildForm
 		).build();
@@ -86,6 +92,9 @@ public class CommerceAccountNestedCollectionResource
 
 		return builder.addGetter(
 			_commerceAccountHelper::getOrganization, Company.class
+		).addUpdater(
+			this::_updateAccount, CurrentUser.class,
+			_hasPermission::forUpdating, CommerceAccountUpserterForm::buildForm
 		).addRemover(
 			_commerceAccountHelper::deleteOrganization, Company.class,
 			_hasPermission::forDeleting
@@ -102,10 +111,8 @@ public class CommerceAccountNestedCollectionResource
 		).identifier(
 			_commerceAccountHelper::organizationToClassPKExternalReferenceCode
 		).addBidirectionalModel(
-			"website", "commerceAccounts", WebSiteIdentifier.class,
+			"webSite", "commerceAccounts", WebSiteIdentifier.class,
 			this::_getSiteId
-		).addLinkedModel(
-			"website", WebSiteIdentifier.class, this::_getSiteId
 		).addNumberList(
 			"members", this::_getUserIds
 		).addString(
@@ -115,22 +122,6 @@ public class CommerceAccountNestedCollectionResource
 		).addNumber(
 			"id", Organization::getOrganizationId
 		).build();
-	}
-
-	private Organization _addAccount(
-			Long webSiteId,
-			CommerceAccountUpserterForm commerceAccountUpserterForm,
-			User currentUser)
-		throws Exception {
-
-		Group group = _groupLocalService.getGroup(webSiteId);
-
-		return _commerceAccountHelper.upsert(
-			commerceAccountUpserterForm.getExternalReferenceCode(),
-			group.getClassPK(), commerceAccountUpserterForm.getName(),
-			commerceAccountUpserterForm.getRegionId(),
-			commerceAccountUpserterForm.getCountryId(),
-			commerceAccountUpserterForm.getCommerceUserIds(), currentUser);
 	}
 
 	private PageItems<Organization> _getPageItems(
@@ -144,14 +135,22 @@ public class CommerceAccountNestedCollectionResource
 				pagination.getStartPosition(), pagination.getEndPosition(),
 				null);
 
-		return new PageItems<>(result.getBaseModels(), result.getLength());
+		long totalCount =
+			_commerceOrganizationService.searchOrganizationsByGroupCount(
+				webSiteId, currentUser.getUserId(),
+				CommerceOrganizationConstants.TYPE_ACCOUNT, StringPool.BLANK,
+				pagination.getStartPosition(), pagination.getEndPosition(),
+				null);
+
+		return new PageItems<>(
+			result.getBaseModels(), Math.toIntExact(totalCount));
 	}
 
 	private Long _getSiteId(Organization organization) {
 		return Try.success(
 			organization.getGroupId()
 		).map(
-			_groupLocalService::getGroup
+			_groupService::getGroup
 		).map(
 			Group::getGroupId
 		).orElse(
@@ -177,6 +176,53 @@ public class CommerceAccountNestedCollectionResource
 		return userIds;
 	}
 
+	private Organization _updateAccount(
+			ClassPKExternalReferenceCode classPKExternalReferenceCode,
+			CommerceAccountUpserterForm commerceAccountUpserterForm,
+			CurrentUser currentUser)
+		throws PortalException {
+
+		return _commerceAccountHelper.updateOrganization(
+			classPKExternalReferenceCode, commerceAccountUpserterForm.getName(),
+			commerceAccountUpserterForm.getRegionId(),
+			commerceAccountUpserterForm.getCountryId(),
+			commerceAccountUpserterForm.getCommerceUserIds(), currentUser);
+	}
+
+	private Organization _upsertAccount(
+			Long webSiteId,
+			CommerceAccountUpserterForm commerceAccountUpserterForm,
+			User currentUser)
+		throws Exception {
+
+		long parentOrganizationId =
+			_commerceAccountHelper.getParentOrganizationId(webSiteId);
+
+		if (parentOrganizationId == 0) {
+			throw new NotFoundException(
+				String.format(
+					"Unable to add new account to the website with ID: %s " +
+						"because it is not a parent organization site",
+					webSiteId));
+		}
+
+		try {
+			return _commerceAccountHelper.upsertOrganization(
+				commerceAccountUpserterForm.getExternalReferenceCode(),
+				parentOrganizationId, commerceAccountUpserterForm.getName(),
+				commerceAccountUpserterForm.getRegionId(),
+				commerceAccountUpserterForm.getCountryId(),
+				commerceAccountUpserterForm.getCommerceUserIds(), currentUser);
+		}
+		catch (OrganizationParentException ope) {
+			throw new ConflictException(
+				String.format(
+					"Problem with the actual web site with ID: %d, %s",
+					webSiteId, ope.getMessage()),
+				Response.Status.CONFLICT.getStatusCode(), ope);
+		}
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceAccountNestedCollectionResource.class);
 
@@ -187,7 +233,7 @@ public class CommerceAccountNestedCollectionResource
 	private CommerceOrganizationService _commerceOrganizationService;
 
 	@Reference
-	private GroupLocalService _groupLocalService;
+	private GroupService _groupService;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.portal.kernel.model.Organization)"
