@@ -31,14 +31,14 @@ else {
 }
 %>
 
-<c:if test="<%= cpInstanceDisplayContext.hasEditPermission(cpInstance.getCPDefinitionId()) %>">
-	<liferay-ui:icon-menu
-		direction="left-side"
-		icon="<%= StringPool.BLANK %>"
-		markupView="lexicon"
-		message="<%= StringPool.BLANK %>"
-		showWhenSingleIcon="<%= true %>"
-	>
+<liferay-ui:icon-menu
+	direction="left-side"
+	icon="<%= StringPool.BLANK %>"
+	markupView="lexicon"
+	message="<%= StringPool.BLANK %>"
+	showWhenSingleIcon="<%= true %>"
+>
+	<c:if test="<%= cpInstanceDisplayContext.hasEditPermission(cpInstance.getCPDefinitionId()) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductInstance" />
 			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpInstance.getCPDefinitionId()) %>" />
@@ -60,5 +60,5 @@ else {
 			message="delete"
 			url="<%= deleteURL %>"
 		/>
-	</liferay-ui:icon-menu>
-</c:if>
+	</c:if>
+</liferay-ui:icon-menu>
