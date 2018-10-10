@@ -294,6 +294,10 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrderItem> getSubscriptionCommerceOrderItems(
+		long commerceOrderId);
+
 	public CommerceOrderItem incrementShippedQuantity(
 		long commerceOrderItemId, int shippedQuantity)
 		throws PortalException;
