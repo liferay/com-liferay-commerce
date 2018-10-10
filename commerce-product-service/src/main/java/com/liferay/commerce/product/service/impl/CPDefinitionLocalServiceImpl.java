@@ -660,6 +660,21 @@ public class CPDefinitionLocalServiceImpl
 
 	@Override
 	public List<CPDefinition> getCPDefinitions(
+		long groupId, int status, int start, int end,
+		OrderByComparator<CPDefinition> orderByComparator) {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return cpDefinitionPersistence.findByG_NotS(
+				groupId, WorkflowConstants.STATUS_IN_TRASH, start, end,
+				orderByComparator);
+		}
+
+		return cpDefinitionPersistence.findByG_S(
+			groupId, status, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CPDefinition> getCPDefinitions(
 		long groupId, String productTypeName, String languageId, int status,
 		int start, int end, OrderByComparator<CPDefinition> orderByComparator) {
 
