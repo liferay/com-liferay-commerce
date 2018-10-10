@@ -21,6 +21,7 @@ import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
 import com.liferay.commerce.exception.CommerceOrderBillingAddressException;
 import com.liferay.commerce.exception.CommerceOrderPaymentMethodException;
 import com.liferay.commerce.exception.CommerceOrderShippingAddressException;
@@ -39,8 +40,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -165,6 +166,9 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 		_actionHelper.startPayment(
 			commerceOrder.getCommerceOrderId(), actionRequest, actionResponse,
 			serviceContext);
+
+		_commerceDiscountCouponCodeHelper.removeCommerceDiscountCouponCode(
+			_portal.getHttpServletRequest(actionRequest));
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -172,6 +176,9 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 	@Reference
 	private ActionHelper _actionHelper;
+
+	@Reference
+	private CommerceDiscountCouponCodeHelper _commerceDiscountCouponCodeHelper;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
@@ -192,9 +199,9 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 	private CPInstanceHelper _cpInstanceHelper;
 
 	@Reference
-	private Http _http;
+	private JSPRenderer _jspRenderer;
 
 	@Reference
-	private JSPRenderer _jspRenderer;
+	private Portal _portal;
 
 }

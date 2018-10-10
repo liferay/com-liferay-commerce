@@ -62,9 +62,11 @@ public class CommerceDiscountCouponCodeHelperImpl
 			_commerceOrderHttpHelper.getCurrentCommerceOrder(
 				httpServletRequest);
 
-		_commerceOrderLocalService.recalculatePrice(
-			currentCommerceOrder.getCommerceOrderId(),
-			_getCommerceContext(httpServletRequest));
+		if (currentCommerceOrder != null) {
+			_commerceOrderLocalService.recalculatePrice(
+				currentCommerceOrder.getCommerceOrderId(),
+				_getCommerceContext(httpServletRequest));
+		}
 	}
 
 	@Override
@@ -98,9 +100,11 @@ public class CommerceDiscountCouponCodeHelperImpl
 			_commerceOrderHttpHelper.getCurrentCommerceOrder(
 				httpServletRequest);
 
-		_commerceOrderLocalService.recalculatePrice(
-			currentCommerceOrder.getCommerceOrderId(),
-			_getCommerceContext(httpServletRequest));
+		if (currentCommerceOrder != null) {
+			_commerceOrderLocalService.recalculatePrice(
+				currentCommerceOrder.getCommerceOrderId(),
+				_getCommerceContext(httpServletRequest));
+		}
 	}
 
 	private CommerceContext _getCommerceContext(
