@@ -727,6 +727,14 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		CPInstance cpInstance = cpInstancePersistence.findByPrimaryKey(
 			cpInstanceId);
 
+		CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+		if (!cpDefinition.isIgnoreSKUCombinations() &&
+			Validator.isNull(cpInstance.getJson())) {
+
+			status = WorkflowConstants.STATUS_INACTIVE;
+		}
+
 		if ((status == WorkflowConstants.STATUS_APPROVED) &&
 			(cpInstance.getDisplayDate() != null) &&
 			now.before(cpInstance.getDisplayDate())) {
@@ -1057,6 +1065,8 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 							curCPInstance.getCPInstanceId(),
 							WorkflowConstants.STATUS_EXPIRED, serviceContext,
 							new HashMap<String, Serializable>());
+
+						serviceContext.setWorkflowAction(0);
 					}
 				}
 			}
@@ -1071,6 +1081,8 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 							curCPInstance.getCPInstanceId(),
 							WorkflowConstants.STATUS_INACTIVE, serviceContext,
 							new HashMap<String, Serializable>());
+
+						serviceContext.setWorkflowAction(0);
 					}
 
 					if ((cpInstanceId <= 0) &&
@@ -1083,6 +1095,8 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 							curCPInstance.getCPInstanceId(),
 							WorkflowConstants.STATUS_EXPIRED, serviceContext,
 							new HashMap<String, Serializable>());
+
+						serviceContext.setWorkflowAction(0);
 					}
 				}
 
@@ -1091,6 +1105,8 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 						serviceContext.getUserId(), cpInstanceId,
 						WorkflowConstants.STATUS_INACTIVE, serviceContext,
 						new HashMap<String, Serializable>());
+
+					serviceContext.setWorkflowAction(0);
 				}
 			}
 		}
