@@ -34,7 +34,7 @@
 				"PortletClassName": "com.liferay.commerce.product.asset.categories.navigation.web.internal.portlet.CPAssetCategoriesNavigationPortlet"
 			},
 			"portletSetupPortletDecoratorId" : "borderless",
-			"portletSetupTitle_en_US" : "Explore Categories",
+			"portletSetupTitle" : "Explore Categories",
 			"portletSetupUseCustomTitle" : true
 		}
 	},
