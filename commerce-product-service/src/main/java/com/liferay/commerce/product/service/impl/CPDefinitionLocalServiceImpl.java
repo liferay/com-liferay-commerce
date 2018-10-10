@@ -126,6 +126,12 @@ public class CPDefinitionLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		String defaultSku = null;
+
+		if (hasDefaultInstance) {
+			defaultSku = CPInstanceConstants.DEFAULT_SKU;
+		}
+
 		return cpDefinitionLocalService.addCPDefinition(
 			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
 			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
@@ -135,8 +141,7 @@ public class CPDefinitionLocalServiceImpl
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, CPInstanceConstants.DEFAULT_SKU, StringPool.BLANK,
-			serviceContext);
+			neverExpire, defaultSku, StringPool.BLANK, serviceContext);
 	}
 
 	@Override
@@ -1316,6 +1321,18 @@ public class CPDefinitionLocalServiceImpl
 
 		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
 			cpDefinitionId);
+
+		List<CPInstance> cpInstances =
+			cpInstanceLocalService.getCPDefinitionInstances(
+				cpDefinition.getCPDefinitionId(),
+				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
+
+		if ((status == WorkflowConstants.STATUS_APPROVED) &&
+			cpInstances.isEmpty()) {
+
+			status = WorkflowConstants.STATUS_DRAFT;
+		}
 
 		int oldStatus = cpDefinition.getStatus();
 
