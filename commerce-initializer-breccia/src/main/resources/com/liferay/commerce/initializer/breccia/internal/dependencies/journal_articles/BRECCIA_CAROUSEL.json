@@ -9,7 +9,7 @@
 			"fieldNamespace": "ddm",
 			"indexType": "text",
 			"label": {
-				"en_US": "CAROUSEL IMAGE"
+				"[£LOCALE£]": "CAROUSEL IMAGE"
 			},
 			"localizable": true,
 			"name": "CAROUSELIMAGE",
@@ -18,22 +18,22 @@
 					"dataType": "string",
 					"indexType": "keyword",
 					"label": {
-						"en_US": "CAROUSEL IMAGE COLUMN CSS CLASSES"
+						"[£LOCALE£]": "CAROUSEL IMAGE COLUMN CSS CLASSES"
 					},
 					"localizable": true,
 					"name": "CAROUSELIMAGECOLUMNCSSCLASSES",
 					"predefinedValue": {
-						"en_US": ""
+						"[£LOCALE£]": ""
 					},
 					"readOnly": false,
 					"repeatable": false,
 					"required": false,
 					"showLabel": true,
 					"style": {
-						"en_US": ""
+						"[£LOCALE£]": ""
 					},
 					"tip": {
-						"en_US": ""
+						"[£LOCALE£]": ""
 					},
 					"type": "text"
 				},
@@ -41,22 +41,22 @@
 					"dataType": "string",
 					"indexType": "keyword",
 					"label": {
-						"en_US": "TEXT COLUMN CSS CLASSES"
+						"[£LOCALE£]": "TEXT COLUMN CSS CLASSES"
 					},
 					"localizable": true,
 					"name": "TEXTCOLUMNCSSCLASSES",
 					"predefinedValue": {
-						"en_US": ""
+						"[£LOCALE£]": ""
 					},
 					"readOnly": false,
 					"repeatable": false,
 					"required": false,
 					"showLabel": true,
 					"style": {
-						"en_US": ""
+						"[£LOCALE£]": ""
 					},
 					"tip": {
-						"en_US": ""
+						"[£LOCALE£]": ""
 					},
 					"type": "text"
 				},
@@ -65,38 +65,38 @@
 					"fieldNamespace": "ddm",
 					"indexType": "text",
 					"label": {
-						"en_US": "TEXT COLUMN HTML CONTENT"
+						"[£LOCALE£]": "TEXT COLUMN HTML CONTENT"
 					},
 					"localizable": true,
 					"name": "TEXTCOLUMNHTMLCONTENT",
 					"predefinedValue": {
-						"en_US": ""
+						"[£LOCALE£]": ""
 					},
 					"readOnly": false,
 					"repeatable": false,
 					"required": false,
 					"showLabel": true,
 					"style": {
-						"en_US": ""
+						"[£LOCALE£]": ""
 					},
 					"tip": {
-						"en_US": ""
+						"[£LOCALE£]": ""
 					},
 					"type": "ddm-text-html"
 				}
 			],
 			"predefinedValue": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"readOnly": false,
 			"repeatable": true,
 			"required": false,
 			"showLabel": true,
 			"style": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"tip": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"type": "ddm-image"
 		}
