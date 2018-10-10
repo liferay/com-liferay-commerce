@@ -167,6 +167,19 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 
 	@Override
 	public List<CPDefinition> getCPDefinitions(
+			long groupId, int status, int start, int end,
+			OrderByComparator<CPDefinition> orderByComparator)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
+
+		return cpDefinitionLocalService.getCPDefinitions(
+			groupId, status, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CPDefinition> getCPDefinitions(
 			long groupId, String productTypeName, String languageId, int status,
 			int start, int end,
 			OrderByComparator<CPDefinition> orderByComparator)
