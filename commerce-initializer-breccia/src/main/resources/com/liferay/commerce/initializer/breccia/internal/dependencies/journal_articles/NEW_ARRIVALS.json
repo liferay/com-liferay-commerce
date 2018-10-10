@@ -1,29 +1,29 @@
 {
 	"availableLanguageIds": [
-		"en_US"
+		"[£LOCALE£]"
 	],
-	"defaultLanguageId": "en_US",
+	"defaultLanguageId": "[£LOCALE£]",
 	"fields": [
 		{
 			"dataType": "string",
 			"indexType": "keyword",
 			"label": {
-				"en_US": "Title Newest"
+				"[£LOCALE£]": "Title Newest"
 			},
 			"localizable": true,
 			"name": "TitleNewest",
 			"predefinedValue": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"readOnly": false,
 			"repeatable": false,
 			"required": false,
 			"showLabel": true,
 			"style": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"tip": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"type": "text"
 		},
@@ -32,22 +32,22 @@
 			"fieldNamespace": "ddm",
 			"indexType": "keyword",
 			"label": {
-				"en_US": "Date"
+				"[£LOCALE£]": "Date"
 			},
 			"localizable": true,
 			"name": "DateNewest",
 			"predefinedValue": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"readOnly": false,
 			"repeatable": false,
 			"required": false,
 			"showLabel": true,
 			"style": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"tip": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"type": "ddm-date"
 		},
@@ -56,22 +56,22 @@
 			"fieldNamespace": "ddm",
 			"indexType": "text",
 			"label": {
-				"en_US": "Image"
+				"[£LOCALE£]": "Image"
 			},
 			"localizable": true,
 			"name": "ImageNewest",
 			"predefinedValue": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"readOnly": false,
 			"repeatable": false,
 			"required": false,
 			"showLabel": true,
 			"style": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"tip": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"type": "ddm-image"
 		},
@@ -80,22 +80,22 @@
 			"fieldNamespace": "ddm",
 			"indexType": "text",
 			"label": {
-				"en_US": "HTML"
+				"[£LOCALE£]": "HTML"
 			},
 			"localizable": true,
 			"name": "HTMLNewest",
 			"predefinedValue": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"readOnly": false,
 			"repeatable": false,
 			"required": false,
 			"showLabel": true,
 			"style": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"tip": {
-				"en_US": ""
+				"[£LOCALE£]": ""
 			},
 			"type": "ddm-text-html"
 		}
