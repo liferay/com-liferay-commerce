@@ -238,10 +238,19 @@ public abstract class PortalContextProvider {
 		}
 	}
 
+	public Company getCompany() {
+		try {
+			return companyLocalService.getCompanyByWebId("liferay.com");
+		}
+		catch (Exception e) {
+			throw new RuntimeException(
+				"Unexpected error: " + e.getMessage(), e);
+		}
+	}
+
 	public String getPortalURL() {
 		try {
-			Company company = companyLocalService.getCompanyByWebId(
-				"liferay.com");
+			Company company = getCompany();
 
 			Group companyGroup = groupLocalService.getCompanyGroup(
 				company.getCompanyId());
@@ -331,6 +340,9 @@ public abstract class PortalContextProvider {
 				"Unable to find website with name: " + siteName)
 		);
 	}
+
+	protected static final String ERROR_UTIL_FQN =
+		"com.liferay.apio.architect.impl.internal.jaxrs.json.util.ErrorUtil";
 
 	@Inject
 	protected CompanyLocalService companyLocalService;
