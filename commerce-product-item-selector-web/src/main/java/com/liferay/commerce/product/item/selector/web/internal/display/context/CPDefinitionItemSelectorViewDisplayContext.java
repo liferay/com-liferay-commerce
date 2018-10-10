@@ -22,17 +22,14 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.List;
@@ -91,10 +88,6 @@ public class CPDefinitionItemSelectorViewDisplayContext
 			return searchContainer;
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		searchContainer = new SearchContainer<>(
 			liferayPortletRequest, getPortletURL(), null, null);
 
@@ -113,6 +106,9 @@ public class CPDefinitionItemSelectorViewDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(rowChecker);
 
+		int total;
+		List<CPDefinition> results;
+
 		if (isSearch()) {
 			Sort sort = CPItemSelectorViewUtil.getCPDefinitionSort(
 				getOrderByCol(), getOrderByType());
@@ -120,33 +116,25 @@ public class CPDefinitionItemSelectorViewDisplayContext
 			BaseModelSearchResult<CPDefinition>
 				cpDefinitionBaseModelSearchResult =
 					_cpDefinitionService.searchCPDefinitions(
-						themeDisplay.getCompanyId(),
-						themeDisplay.getScopeGroupId(), getKeywords(),
-						WorkflowConstants.STATUS_APPROVED,
+						cpRequestHelper.getCompanyId(), getScopeGroupId(),
+						getKeywords(), WorkflowConstants.STATUS_APPROVED,
 						searchContainer.getStart(), searchContainer.getEnd(),
 						sort);
 
-			searchContainer.setTotal(
-				cpDefinitionBaseModelSearchResult.getLength());
-			searchContainer.setResults(
-				cpDefinitionBaseModelSearchResult.getBaseModels());
+			total = cpDefinitionBaseModelSearchResult.getLength();
+			results = cpDefinitionBaseModelSearchResult.getBaseModels();
 		}
 		else {
-			int total = _cpDefinitionService.getCPDefinitionsCount(
-				getScopeGroupId(), StringPool.BLANK,
-				themeDisplay.getLanguageId(),
-				WorkflowConstants.STATUS_APPROVED);
-
-			searchContainer.setTotal(total);
-
-			List<CPDefinition> results = _cpDefinitionService.getCPDefinitions(
-				getScopeGroupId(), StringPool.BLANK,
-				themeDisplay.getLanguageId(), WorkflowConstants.STATUS_APPROVED,
+			total = _cpDefinitionService.getCPDefinitionsCount(
+				getScopeGroupId(), WorkflowConstants.STATUS_APPROVED);
+			results = _cpDefinitionService.getCPDefinitions(
+				getScopeGroupId(), WorkflowConstants.STATUS_APPROVED,
 				searchContainer.getStart(), searchContainer.getEnd(),
 				orderByComparator);
-
-			searchContainer.setResults(results);
 		}
+
+		searchContainer.setTotal(total);
+		searchContainer.setResults(results);
 
 		return searchContainer;
 	}
