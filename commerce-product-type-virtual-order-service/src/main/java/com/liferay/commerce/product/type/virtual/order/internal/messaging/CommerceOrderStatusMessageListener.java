@@ -17,11 +17,13 @@ package com.liferay.commerce.product.type.virtual.order.internal.messaging;
 import com.liferay.commerce.constants.CommerceDestinationNames;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
@@ -66,7 +68,9 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 					fetchCommerceVirtualOrderItemByCommerceOrderItemId(
 						commerceOrderItem.getCommerceOrderItemId());
 
-			if (commerceVirtualOrderItem == null) {
+			if ((commerceVirtualOrderItem == null) &&
+				_isNewSubscription(commerceOrderItem)) {
+
 				CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
 
 				if (!VirtualCPTypeConstants.NAME.equals(
@@ -92,7 +96,10 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 							serviceContext);
 			}
 
-			if (orderStatus == commerceVirtualOrderItem.getActivationStatus()) {
+			if ((commerceVirtualOrderItem != null) &&
+				(orderStatus ==
+					commerceVirtualOrderItem.getActivationStatus())) {
+
 				_commerceVirtualOrderItemLocalService.setActive(
 					commerceVirtualOrderItem.getCommerceVirtualOrderItemId(),
 					true);
@@ -100,8 +107,27 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		}
 	}
 
+	private boolean _isNewSubscription(CommerceOrderItem commerceOrderItem) {
+		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
+			_commerceSubscriptionCycleEntryLocalService.
+				fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+					commerceOrderItem.getCommerceOrderItemId());
+
+		if ((commerceSubscriptionCycleEntry != null) &&
+			commerceSubscriptionCycleEntry.isRenew()) {
+
+			return false;
+		}
+
+		return true;
+	}
+
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
+
+	@Reference
+	private CommerceSubscriptionCycleEntryLocalService
+		_commerceSubscriptionCycleEntryLocalService;
 
 	@Reference
 	private CommerceVirtualOrderItemLocalService
