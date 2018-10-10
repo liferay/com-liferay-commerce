@@ -19,6 +19,7 @@ import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.product.importer.CPFileImporter;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.model.DDMTemplateConstants;
+import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -171,6 +172,11 @@ public class PortletSettingsImporter {
 			}
 			else if (key.equals("displayStyleGroupId")) {
 				value = String.valueOf(groupId);
+			}
+			else if (key.equals("portletSetupTitle")) {
+				key = key + CharPool.UNDERLINE + serviceContext.getLanguageId();
+
+				value = portletPreferencesJSONObject.getString(key);
 			}
 			else {
 				value = portletPreferencesJSONObject.getString(key);
