@@ -163,8 +163,12 @@ public class CommerceOrderModelResourcePermissionLogic
 		throws PortalException {
 
 		if (commerceOrder.isOpen()) {
+			if (_hasOwnerPermission(permissionChecker, commerceOrder)) {
+				return true;
+			}
+
 			if (commerceOrder.isDraft()) {
-				return _hasOwnerPermission(permissionChecker, commerceOrder);
+				return false;
 			}
 
 			if (_workflowDefinitionLinkLocalService.hasWorkflowDefinitionLink(
@@ -176,10 +180,6 @@ public class CommerceOrderModelResourcePermissionLogic
 				return _hasPermission(
 					permissionChecker, commerceOrder.getGroupId(),
 					CommerceOrderActionKeys.APPROVE_OPEN_COMMERCE_ORDERS);
-			}
-
-			if (_hasOwnerPermission(permissionChecker, commerceOrder)) {
-				return true;
 			}
 		}
 
