@@ -24,10 +24,8 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.List;
@@ -63,10 +61,6 @@ public class CPInstanceItemSelectorViewDisplayContext
 			return searchContainer;
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		searchContainer = new SearchContainer<>(
 			liferayPortletRequest, getPortletURL(), null, null);
 
@@ -84,34 +78,33 @@ public class CPInstanceItemSelectorViewDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(rowChecker);
 
+		int total;
+		List<CPInstance> results;
+
 		if (isSearch()) {
 			Sort sort = CPItemSelectorViewUtil.getCPInstanceSort(
 				getOrderByCol(), getOrderByType());
 
 			BaseModelSearchResult<CPInstance> cpInstanceBaseModelSearchResult =
 				_cpInstanceService.searchCPInstances(
-					themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+					cpRequestHelper.getCompanyId(), getScopeGroupId(),
 					getKeywords(), WorkflowConstants.STATUS_APPROVED,
 					searchContainer.getStart(), searchContainer.getEnd(), sort);
 
-			searchContainer.setTotal(
-				cpInstanceBaseModelSearchResult.getLength());
-			searchContainer.setResults(
-				cpInstanceBaseModelSearchResult.getBaseModels());
+			total = cpInstanceBaseModelSearchResult.getLength();
+			results = cpInstanceBaseModelSearchResult.getBaseModels();
 		}
 		else {
-			int total = _cpInstanceService.getCPInstancesCount(
+			total = _cpInstanceService.getCPInstancesCount(
 				getScopeGroupId(), WorkflowConstants.STATUS_APPROVED);
-
-			searchContainer.setTotal(total);
-
-			List<CPInstance> results = _cpInstanceService.getCPInstances(
+			results = _cpInstanceService.getCPInstances(
 				getScopeGroupId(), WorkflowConstants.STATUS_APPROVED,
 				searchContainer.getStart(), searchContainer.getEnd(),
 				orderByComparator);
-
-			searchContainer.setResults(results);
 		}
+
+		searchContainer.setTotal(total);
+		searchContainer.setResults(results);
 
 		return searchContainer;
 	}
