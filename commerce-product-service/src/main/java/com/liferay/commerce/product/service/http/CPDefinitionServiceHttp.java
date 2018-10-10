@@ -290,10 +290,44 @@ public class CPDefinitionServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitions(
 		HttpPrincipal httpPrincipal, long groupId, int status, int start,
-		int end) throws com.liferay.portal.kernel.exception.PortalException {
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinition> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"getCPDefinitions", _getCPDefinitionsParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					status, start, end, orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.product.model.CPDefinition>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitions(
+		HttpPrincipal httpPrincipal, long groupId, int status, int start,
+		int end) throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
+					"getCPDefinitions", _getCPDefinitionsParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					status, start, end);
@@ -327,7 +361,7 @@ public class CPDefinitionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
-					"getCPDefinitions", _getCPDefinitionsParameterTypes7);
+					"getCPDefinitions", _getCPDefinitionsParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					productTypeName, languageId, status, start, end,
@@ -361,7 +395,7 @@ public class CPDefinitionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"getCPDefinitionsByCategoryId",
-					_getCPDefinitionsByCategoryIdParameterTypes8);
+					_getCPDefinitionsByCategoryIdParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryId, start, end);
@@ -394,7 +428,7 @@ public class CPDefinitionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"getCPDefinitionsCount",
-					_getCPDefinitionsCountParameterTypes9);
+					_getCPDefinitionsCountParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					status);
@@ -427,7 +461,7 @@ public class CPDefinitionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"getCPDefinitionsCount",
-					_getCPDefinitionsCountParameterTypes10);
+					_getCPDefinitionsCountParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					productTypeName, languageId, status);
@@ -460,7 +494,7 @@ public class CPDefinitionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"getCPDefinitionsCountByCategoryId",
-					_getCPDefinitionsCountByCategoryIdParameterTypes11);
+					_getCPDefinitionsCountByCategoryIdParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryId);
@@ -492,7 +526,7 @@ public class CPDefinitionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
-					"getLayoutUuid", _getLayoutUuidParameterTypes12);
+					"getLayoutUuid", _getLayoutUuidParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId);
@@ -524,7 +558,7 @@ public class CPDefinitionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
-					"getUrlTitleMapAsXML", _getUrlTitleMapAsXMLParameterTypes13);
+					"getUrlTitleMapAsXML", _getUrlTitleMapAsXMLParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId);
@@ -557,7 +591,7 @@ public class CPDefinitionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"moveCPDefinitionToTrash",
-					_moveCPDefinitionToTrashParameterTypes14);
+					_moveCPDefinitionToTrashParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId);
@@ -590,7 +624,7 @@ public class CPDefinitionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"restoreCPDefinitionFromTrash",
-					_restoreCPDefinitionFromTrashParameterTypes15);
+					_restoreCPDefinitionFromTrashParameterTypes16);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId);
@@ -620,7 +654,7 @@ public class CPDefinitionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
-					"searchCPDefinitions", _searchCPDefinitionsParameterTypes16);
+					"searchCPDefinitions", _searchCPDefinitionsParameterTypes17);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, groupId, keywords, status, start, end, sort);
@@ -654,7 +688,7 @@ public class CPDefinitionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
-					"searchCPDefinitions", _searchCPDefinitionsParameterTypes17);
+					"searchCPDefinitions", _searchCPDefinitionsParameterTypes18);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, groupId, keywords, filterFields, filterValues,
@@ -700,7 +734,7 @@ public class CPDefinitionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
-					"updateCPDefinition", _updateCPDefinitionParameterTypes18);
+					"updateCPDefinition", _updateCPDefinitionParameterTypes19);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId, nameMap, shortDescriptionMap,
@@ -741,7 +775,7 @@ public class CPDefinitionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"updateCPDefinitionCategorization",
-					_updateCPDefinitionCategorizationParameterTypes19);
+					_updateCPDefinitionCategorizationParameterTypes20);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId, serviceContext);
@@ -775,7 +809,7 @@ public class CPDefinitionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"updateCPDisplayLayout",
-					_updateCPDisplayLayoutParameterTypes20);
+					_updateCPDisplayLayoutParameterTypes21);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId, layoutUuid, serviceContext);
@@ -807,7 +841,7 @@ public class CPDefinitionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
-					"updateShippingInfo", _updateShippingInfoParameterTypes21);
+					"updateShippingInfo", _updateShippingInfoParameterTypes22);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId, shippable, freeShipping, shipSeparately,
@@ -843,7 +877,7 @@ public class CPDefinitionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"updateTaxCategoryInfo",
-					_updateTaxCategoryInfoParameterTypes22);
+					_updateTaxCategoryInfoParameterTypes23);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId, cpTaxCategoryId, taxExempt,
@@ -894,7 +928,7 @@ public class CPDefinitionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
-					"upsertCPDefinition", _upsertCPDefinitionParameterTypes23);
+					"upsertCPDefinition", _upsertCPDefinitionParameterTypes24);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, nameMap,
 					shortDescriptionMap, descriptionMap, urlTitleMap,
@@ -966,42 +1000,46 @@ public class CPDefinitionServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _getCPDefinitionsParameterTypes6 = new Class[] {
-			long.class, int.class, int.class, int.class
+			long.class, int.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getCPDefinitionsParameterTypes7 = new Class[] {
+			long.class, int.class, int.class, int.class
+		};
+	private static final Class<?>[] _getCPDefinitionsParameterTypes8 = new Class[] {
 			long.class, String.class, String.class, int.class, int.class,
 			int.class, com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCPDefinitionsByCategoryIdParameterTypes8 =
+	private static final Class<?>[] _getCPDefinitionsByCategoryIdParameterTypes9 =
 		new Class[] { long.class, int.class, int.class };
-	private static final Class<?>[] _getCPDefinitionsCountParameterTypes9 = new Class[] {
+	private static final Class<?>[] _getCPDefinitionsCountParameterTypes10 = new Class[] {
 			long.class, int.class
 		};
-	private static final Class<?>[] _getCPDefinitionsCountParameterTypes10 = new Class[] {
+	private static final Class<?>[] _getCPDefinitionsCountParameterTypes11 = new Class[] {
 			long.class, String.class, String.class, int.class
 		};
-	private static final Class<?>[] _getCPDefinitionsCountByCategoryIdParameterTypes11 =
+	private static final Class<?>[] _getCPDefinitionsCountByCategoryIdParameterTypes12 =
 		new Class[] { long.class };
-	private static final Class<?>[] _getLayoutUuidParameterTypes12 = new Class[] {
+	private static final Class<?>[] _getLayoutUuidParameterTypes13 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getUrlTitleMapAsXMLParameterTypes13 = new Class[] {
+	private static final Class<?>[] _getUrlTitleMapAsXMLParameterTypes14 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _moveCPDefinitionToTrashParameterTypes14 = new Class[] {
+	private static final Class<?>[] _moveCPDefinitionToTrashParameterTypes15 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _restoreCPDefinitionFromTrashParameterTypes15 =
+	private static final Class<?>[] _restoreCPDefinitionFromTrashParameterTypes16 =
 		new Class[] { long.class };
-	private static final Class<?>[] _searchCPDefinitionsParameterTypes16 = new Class[] {
+	private static final Class<?>[] _searchCPDefinitionsParameterTypes17 = new Class[] {
 			long.class, long.class, String.class, int.class, int.class,
 			int.class, com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _searchCPDefinitionsParameterTypes17 = new Class[] {
+	private static final Class<?>[] _searchCPDefinitionsParameterTypes18 = new Class[] {
 			long.class, long.class, String.class, String.class, String.class,
 			int.class, int.class, com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _updateCPDefinitionParameterTypes18 = new Class[] {
+	private static final Class<?>[] _updateCPDefinitionParameterTypes19 = new Class[] {
 			long.class, java.util.Map.class, java.util.Map.class,
 			java.util.Map.class, java.util.Map.class, java.util.Map.class,
 			java.util.Map.class, java.util.Map.class, boolean.class,
@@ -1010,23 +1048,23 @@ public class CPDefinitionServiceHttp {
 			int.class, boolean.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateCPDefinitionCategorizationParameterTypes19 =
+	private static final Class<?>[] _updateCPDefinitionCategorizationParameterTypes20 =
 		new Class[] {
 			long.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateCPDisplayLayoutParameterTypes20 = new Class[] {
+	private static final Class<?>[] _updateCPDisplayLayoutParameterTypes21 = new Class[] {
 			long.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateShippingInfoParameterTypes21 = new Class[] {
+	private static final Class<?>[] _updateShippingInfoParameterTypes22 = new Class[] {
 			long.class, boolean.class, boolean.class, boolean.class,
 			double.class, double.class, double.class, double.class, double.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateTaxCategoryInfoParameterTypes22 = new Class[] {
+	private static final Class<?>[] _updateTaxCategoryInfoParameterTypes23 = new Class[] {
 			long.class, long.class, boolean.class, boolean.class
 		};
-	private static final Class<?>[] _upsertCPDefinitionParameterTypes23 = new Class[] {
+	private static final Class<?>[] _upsertCPDefinitionParameterTypes24 = new Class[] {
 			java.util.Map.class, java.util.Map.class, java.util.Map.class,
 			java.util.Map.class, java.util.Map.class, java.util.Map.class,
 			java.util.Map.class, String.class, boolean.class, boolean.class,

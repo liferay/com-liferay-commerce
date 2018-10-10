@@ -381,6 +381,10 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 		int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDefinition> getCPDefinitions(long groupId, int status,
+		int start, int end, OrderByComparator<CPDefinition> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinition> getCPDefinitions(long groupId,
 		String productTypeName, String languageId, int status, int start,
 		int end, OrderByComparator<CPDefinition> orderByComparator);
