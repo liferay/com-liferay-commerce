@@ -21,9 +21,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.List;
 
@@ -56,10 +54,6 @@ public class CPOptionItemSelectorViewDisplayContext
 			return searchContainer;
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		searchContainer = new SearchContainer<>(
 			liferayPortletRequest, getPortletURL(), null, null);
 
@@ -74,31 +68,31 @@ public class CPOptionItemSelectorViewDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(getRowChecker());
 
+		int total;
+		List<CPOption> results;
+
 		if (isSearch()) {
 			Sort sort = CPItemSelectorViewUtil.getCPOptionSort(
 				getOrderByCol(), getOrderByType());
 
 			BaseModelSearchResult<CPOption> cpOptionBaseModelSearchResult =
 				_cpOptionService.searchCPOptions(
-					themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+					cpRequestHelper.getCompanyId(), getScopeGroupId(),
 					getKeywords(), searchContainer.getStart(),
 					searchContainer.getEnd(), sort);
 
-			searchContainer.setTotal(cpOptionBaseModelSearchResult.getLength());
-			searchContainer.setResults(
-				cpOptionBaseModelSearchResult.getBaseModels());
+			total = cpOptionBaseModelSearchResult.getLength();
+			results = cpOptionBaseModelSearchResult.getBaseModels();
 		}
 		else {
-			int total = _cpOptionService.getCPOptionsCount(getScopeGroupId());
-
-			searchContainer.setTotal(total);
-
-			List<CPOption> results = _cpOptionService.getCPOptions(
+			total = _cpOptionService.getCPOptionsCount(getScopeGroupId());
+			results = _cpOptionService.getCPOptions(
 				getScopeGroupId(), searchContainer.getStart(),
 				searchContainer.getEnd(), orderByComparator);
-
-			searchContainer.setResults(results);
 		}
+
+		searchContainer.setTotal(total);
+		searchContainer.setResults(results);
 
 		return searchContainer;
 	}
