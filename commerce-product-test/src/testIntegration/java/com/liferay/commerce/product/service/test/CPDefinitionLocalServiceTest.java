@@ -19,14 +19,14 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.model.CPOption;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
-import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CPOptionLocalService;
-import com.liferay.commerce.product.service.CPOptionValueLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.type.simple.constants.SimpleCPTypeConstants;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
@@ -34,6 +34,9 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
+import java.io.Serializable;
+
+import java.util.HashMap;
 import java.util.List;
 
 import org.frutilla.FrutillaRule;
@@ -41,7 +44,6 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,7 +51,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CPDefinitionLocalServiceTest {
 
@@ -119,6 +120,67 @@ public class CPDefinitionLocalServiceTest {
 	}
 
 	@Test
+	public void testAddCPDefinitionWithDefaultInstanceAndNoSKUs()
+		throws Exception {
+
+		frutillaRule.scenario(
+			"Add product definition"
+		).given(
+			"I add a product definition"
+		).when(
+			"ignoreSKUCombinations is true"
+		).and(
+			"hasDefaultInstance is true"
+		).and(
+			"no product instances are added to the definition"
+		).then(
+			"product definition should be DRAFT"
+		).and(
+			"default product instance should be INACTIVE"
+		);
+
+		int cpOptionsCount = 2;
+		int cpOptionValuesCount = 2;
+
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+			_group.getGroupId(), SimpleCPTypeConstants.NAME, true, true);
+
+		for (int i = 0; i < cpOptionsCount; i++) {
+			CPOption cpOption = CPTestUtil.addCPOption(
+				_group.getGroupId(), true);
+
+			for (int j = 0; j < cpOptionValuesCount; j++) {
+				CPTestUtil.addCPOptionValue(cpOption);
+			}
+
+			CPTestUtil.addCPDefinitionOptionRel(
+				_group.getGroupId(), cpDefinition.getCPDefinitionId(),
+				cpOption.getCPOptionId());
+		}
+
+		Assert.assertEquals(
+			cpOptionsCount,
+			_cpOptionLocalService.getCPOptionsCount(_group.getGroupId()));
+
+		cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpDefinition.getCPDefinitionId());
+
+		Assert.assertEquals(
+			cpOptionsCount,
+			_cpDefinitionOptionRelLocalService.getCPDefinitionOptionRelsCount(
+				cpDefinition.getCPDefinitionId()));
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_DRAFT, cpDefinition.getStatus());
+
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_INACTIVE, cpInstance.getStatus());
+	}
+
+	@Test
 	public void testAddCPDefinitionWithDefaultInstanceAndSKUs()
 		throws Exception {
 
@@ -132,6 +194,8 @@ public class CPDefinitionLocalServiceTest {
 			"hasDefaultInstance is true"
 		).and(
 			"some product instances are added to the definition"
+		).and(
+			"the definition is re-published"
 		).then(
 			"product definition should be APPROVED"
 		).and(
@@ -148,7 +212,7 @@ public class CPDefinitionLocalServiceTest {
 			CPOption cpOption = CPTestUtil.addCPOption(
 				_group.getGroupId(), true);
 
-			for (int j = 0; j < cpOptionValuesCount; i++) {
+			for (int j = 0; j < cpOptionValuesCount; j++) {
 				CPTestUtil.addCPOptionValue(cpOption);
 			}
 
@@ -167,6 +231,14 @@ public class CPDefinitionLocalServiceTest {
 				cpDefinition.getCPDefinitionId()));
 
 		CPTestUtil.buildCPInstances(cpDefinition);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_DRAFT, cpDefinition.getStatus());
+
+		cpDefinition = _cpDefinitionLocalService.updateStatus(
+			cpDefinition.getUserId(), cpDefinition.getCPDefinitionId(),
+			WorkflowConstants.STATUS_APPROVED, new ServiceContext(),
+			new HashMap<String, Serializable>());
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
@@ -251,21 +323,17 @@ public class CPDefinitionLocalServiceTest {
 	public final FrutillaRule frutillaRule = new FrutillaRule();
 
 	@Inject
-	private static CPDefinitionOptionRelLocalService
-		_cpDefinitionOptionRelLocalService;
+	private static CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Inject
-	private static CPDefinitionOptionValueRelLocalService
-		_cpDefinitionOptionValueRelLocalService;
+	private static CPDefinitionOptionRelLocalService
+		_cpDefinitionOptionRelLocalService;
 
 	@Inject
 	private static CPInstanceLocalService _cpInstanceLocalService;
 
 	@Inject
 	private static CPOptionLocalService _cpOptionLocalService;
-
-	@Inject
-	private static CPOptionValueLocalService _cpOptionValueLocalService;
 
 	@DeleteAfterTestRun
 	private Group _group;
