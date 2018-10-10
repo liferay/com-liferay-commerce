@@ -998,6 +998,7 @@
 		<exception>CommerceWarehouseActive</exception>
 		<exception>CommerceWarehouseCommerceRegionId</exception>
 		<exception>CommerceWarehouseName</exception>
+		<exception>CPSubscriptionCPInstanceId</exception>
 		<exception>GuestCartItemMaxAllowed</exception>
 		<exception>GuestCartMaxAllowed</exception>
 	</exceptions>
