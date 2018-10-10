@@ -296,8 +296,8 @@ public class CPFileImporterImpl implements CPFileImporter {
 		}
 
 		DDMStructure ddmStructure = fetchOrAddDDMStructure(
-			ddmStructureKey, classLoader,
-			dependenciesFilePath + ddmStructureKey + ".json", serviceContext);
+			ddmStructureKey, classLoader, dependenciesFilePath,
+			ddmStructureKey + ".json", serviceContext);
 
 		InputStream inputStream = classLoader.getResourceAsStream(
 			dependenciesFilePath + ddmTemplateKey + ".ftl");
@@ -459,7 +459,8 @@ public class CPFileImporterImpl implements CPFileImporter {
 
 	protected DDMStructure fetchOrAddDDMStructure(
 			String ddmStructureKey, ClassLoader classLoader,
-			String ddmStructureFileName, ServiceContext serviceContext)
+			String dependencyFilePath, String ddmStructureFileName,
+			ServiceContext serviceContext)
 		throws Exception {
 
 		long classNameId = _portal.getClassNameId(JournalArticle.class);
@@ -476,9 +477,16 @@ public class CPFileImporterImpl implements CPFileImporter {
 			serviceContext.getLocale(),
 			TextFormatter.format(ddmStructureKey, TextFormatter.J));
 
-		String json = StringUtil.read(classLoader, ddmStructureFileName);
+		String json = StringUtil.read(
+			classLoader, dependencyFilePath + ddmStructureFileName);
+
+		json = getNormalizedContent(
+			json, classLoader, dependencyFilePath, serviceContext);
 
 		DDMForm ddmForm = _ddmFormJSONDeserializer.deserialize(json);
+
+		ddmForm = _updateDDMFormAvailableLocales(
+			ddmForm, serviceContext.getLocale());
 
 		DDMFormLayout ddmFormLayout = _ddm.getDefaultDDMFormLayout(ddmForm);
 
@@ -877,6 +885,20 @@ public class CPFileImporterImpl implements CPFileImporter {
 		matcher.appendTail(sb);
 
 		return sb.toString();
+	}
+
+	private DDMForm _updateDDMFormAvailableLocales(
+		DDMForm ddmForm, Locale locale) {
+
+		Set<Locale> availableLocales = ddmForm.getAvailableLocales();
+
+		availableLocales.add(locale);
+
+		ddmForm.setAvailableLocales(availableLocales);
+
+		ddmForm.setDefaultLocale(locale);
+
+		return ddmForm;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
