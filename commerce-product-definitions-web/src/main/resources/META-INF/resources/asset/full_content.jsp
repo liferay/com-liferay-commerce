@@ -30,26 +30,105 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 
 <div class="portlet-commerce-product-definitions">
 	<div class="entry-body">
+		<h1><%= HtmlUtil.escape(cpDefinition.getName(languageId)) %></h1>
 
-		<%
-		String description = cpDefinition.getDescription(languageId);
-		%>
-
-		<c:if test="<%= Validator.isNotNull(description) %>">
-			<div class="entry-subtitle">
-				<p><%= HtmlUtil.escape(description) %></p>
-			</div>
-		</c:if>
-
-		<liferay-expando:custom-attributes-available
-			className="<%= CPDefinition.class.getName() %>"
-		>
-			<liferay-expando:custom-attribute-list
-				className="<%= CPDefinition.class.getName() %>"
-				classPK="<%= (cpDefinition != null) ? cpDefinition.getCPDefinitionId() : 0 %>"
-				editable="<%= false %>"
-				label="<%= true %>"
+		<div class="lfr-asset-categories">
+			<liferay-asset:asset-categories-summary
+				className="<%= cpDefinition.getModelClassName() %>"
+				classPK="<%= cpDefinition.getCPDefinitionId() %>"
 			/>
-		</liferay-expando:custom-attributes-available>
+		</div>
+
+		<liferay-ui:tabs
+			names="details,specs,skus"
+			param="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>"
+			refresh="<%= false %>"
+			type="tabs nav-tabs-default"
+		>
+			<liferay-ui:section>
+				<dl>
+
+					<%
+					String defaultImageThumbnailSrc = cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
+					%>
+
+					<c:if test="<%= Validator.isNotNull(defaultImageThumbnailSrc) %>">
+						<div class="default-image">
+							<img src="<%= defaultImageThumbnailSrc %>">
+						</div>
+					</c:if>
+
+					<%
+					String description = cpDefinition.getDescription(languageId);
+					%>
+
+					<c:if test="<%= Validator.isNotNull(description) %>">
+						<dt class="h5 uppercase">
+							<liferay-ui:message key="description" />
+						</dt>
+						<dd class="h6">
+							<%= HtmlUtil.escape(description) %>
+						</dd>
+					</c:if>
+
+					<dt class="h5 uppercase">
+						<liferay-ui:message key="created" />
+					</dt>
+					<dd class="h6">
+						<%= HtmlUtil.escape(cpDefinition.getUserName()) %>
+					</dd>
+				</dl>
+
+				<div class="lfr-asset-tags">
+					<liferay-asset:asset-tags-summary
+						className="<%= cpDefinition.getModelClassName() %>"
+						classPK="<%= cpDefinition.getCPDefinitionId() %>"
+						message="tags"
+					/>
+				</div>
+			</liferay-ui:section>
+
+			<liferay-ui:section>
+				<dl>
+
+					<%
+					List<CPDefinitionSpecificationOptionValue> cpDefinitionSpecificationOptionValues = cpDefinition.getCPDefinitionSpecificationOptionValues();
+
+					for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : cpDefinitionSpecificationOptionValues) {
+						CPSpecificationOption cpSpecificationOption = cpDefinitionSpecificationOptionValue.getCPSpecificationOption();
+					%>
+
+						<dt class="h5 uppercase">
+							<%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %>
+						</dt>
+						<dd class="h6 sidebar-caption">
+							<%= HtmlUtil.escape(cpDefinitionSpecificationOptionValue.getValue(languageId)) %>
+						</dd>
+
+					<%
+					}
+					%>
+
+				</dl>
+			</liferay-ui:section>
+
+			<liferay-ui:section>
+
+				<%
+				List<CPInstance> cpInstances = cpDefinition.getCPInstances();
+
+				for (CPInstance cpInstance : cpInstances) {
+				%>
+
+					<dt class="h5">
+						<%= HtmlUtil.escape(cpInstance.getSku()) %>
+					</dt>
+
+				<%
+				}
+				%>
+
+			</liferay-ui:section>
+		</liferay-ui:tabs>
 	</div>
 </div>
