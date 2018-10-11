@@ -88,7 +88,7 @@ public class SpecificationOptionFacetsTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, true);
+			_group.getGroupId(), SimpleCPTypeConstants.NAME, true, true);
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
