@@ -101,7 +101,14 @@ boolean showPriceRange = (boolean)request.getAttribute("liferay-commerce:price:s
 				</c:if>
 			</c:when>
 			<c:otherwise>
-				<span class="product-price"><%= formattedPrice %></span>
+				<c:choose>
+					<c:when test="<%= Validator.isNotNull(formattedPromoPrice) %>">
+						<span class="product-price"><%= formattedPromoPrice %></span>
+					</c:when>
+					<c:otherwise>
+						<span class="product-price"><%= formattedPrice %></span>
+					</c:otherwise>
+				</c:choose>
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
