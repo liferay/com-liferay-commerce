@@ -105,7 +105,7 @@ public class CommerceOrderItemIndexerTest {
 
 			_cpInstanceLocalService.updateCPInstance(cpInstance);
 
-			CommerceTestUtil.addBackorderCPDefinitionInventory(
+			CommerceTestUtil.addBackOrderCPDefinitionInventory(
 				cpInstance.getCPDefinition());
 
 			commerceOrderItems[i] = CommerceTestUtil.addCommerceOrderItem(

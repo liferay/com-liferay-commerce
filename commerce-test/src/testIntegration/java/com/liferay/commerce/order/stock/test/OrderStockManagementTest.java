@@ -86,7 +86,7 @@ public class OrderStockManagementTest {
 
 		CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
-		CommerceTestUtil.addBackorderCPDefinitionInventory(cpDefinition);
+		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
 
 		int orderedQuantity = 4;
 
