@@ -51,7 +51,7 @@ if ((cpDefinitionVirtualSetting != null) && (cpDefinitionVirtualSetting.getDurat
 	</aui:select>
 
 	<aui:input helpMessage="duration-help" label="duration" name="durationDays" suffix="days" type="long" value="<%= durationDays %>">
-		<aui:validator name="number" />
+		<aui:validator name="digits" />
 	</aui:input>
 
 	<aui:input label="max-number-of-downloads" name="maxUsages" />
