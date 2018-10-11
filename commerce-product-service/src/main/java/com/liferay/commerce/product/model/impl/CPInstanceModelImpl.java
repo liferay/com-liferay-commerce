@@ -107,6 +107,11 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 			{ "displayDate", Types.TIMESTAMP },
 			{ "expirationDate", Types.TIMESTAMP },
 			{ "lastPublishDate", Types.TIMESTAMP },
+			{ "overrideSubscriptionInfo", Types.BOOLEAN },
+			{ "subscriptionEnabled", Types.BOOLEAN },
+			{ "subscriptionCycleLength", Types.BIGINT },
+			{ "subscriptionCyclePeriod", Types.VARCHAR },
+			{ "maxSubscriptionCyclesNumber", Types.BIGINT },
 			{ "status", Types.INTEGER },
 			{ "statusByUserId", Types.BIGINT },
 			{ "statusByUserName", Types.VARCHAR },
@@ -141,13 +146,18 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		TABLE_COLUMNS_MAP.put("displayDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("expirationDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("overrideSubscriptionInfo", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("subscriptionEnabled", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("subscriptionCycleLength", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("subscriptionCyclePeriod", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("maxSubscriptionCyclesNumber", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("statusByUserName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPInstance (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPInstanceId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,sku VARCHAR(75) null,gtin VARCHAR(75) null,manufacturerPartNumber VARCHAR(75) null,purchasable BOOLEAN,json TEXT null,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,cost DECIMAL(30, 16) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPInstance (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPInstanceId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,sku VARCHAR(75) null,gtin VARCHAR(75) null,manufacturerPartNumber VARCHAR(75) null,purchasable BOOLEAN,json TEXT null,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,cost DECIMAL(30, 16) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,overrideSubscriptionInfo BOOLEAN,subscriptionEnabled BOOLEAN,subscriptionCycleLength LONG,subscriptionCyclePeriod VARCHAR(75) null,maxSubscriptionCyclesNumber LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPInstance";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpInstance.displayDate DESC, cpInstance.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPInstance.displayDate DESC, CPInstance.createDate DESC";
@@ -212,6 +222,11 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		model.setDisplayDate(soapModel.getDisplayDate());
 		model.setExpirationDate(soapModel.getExpirationDate());
 		model.setLastPublishDate(soapModel.getLastPublishDate());
+		model.setOverrideSubscriptionInfo(soapModel.isOverrideSubscriptionInfo());
+		model.setSubscriptionEnabled(soapModel.isSubscriptionEnabled());
+		model.setSubscriptionCycleLength(soapModel.getSubscriptionCycleLength());
+		model.setSubscriptionCyclePeriod(soapModel.getSubscriptionCyclePeriod());
+		model.setMaxSubscriptionCyclesNumber(soapModel.getMaxSubscriptionCyclesNumber());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
@@ -306,6 +321,12 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		attributes.put("displayDate", getDisplayDate());
 		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
+		attributes.put("overrideSubscriptionInfo", isOverrideSubscriptionInfo());
+		attributes.put("subscriptionEnabled", isSubscriptionEnabled());
+		attributes.put("subscriptionCycleLength", getSubscriptionCycleLength());
+		attributes.put("subscriptionCyclePeriod", getSubscriptionCyclePeriod());
+		attributes.put("maxSubscriptionCyclesNumber",
+			getMaxSubscriptionCyclesNumber());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
@@ -475,6 +496,41 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 		if (lastPublishDate != null) {
 			setLastPublishDate(lastPublishDate);
+		}
+
+		Boolean overrideSubscriptionInfo = (Boolean)attributes.get(
+				"overrideSubscriptionInfo");
+
+		if (overrideSubscriptionInfo != null) {
+			setOverrideSubscriptionInfo(overrideSubscriptionInfo);
+		}
+
+		Boolean subscriptionEnabled = (Boolean)attributes.get(
+				"subscriptionEnabled");
+
+		if (subscriptionEnabled != null) {
+			setSubscriptionEnabled(subscriptionEnabled);
+		}
+
+		Long subscriptionCycleLength = (Long)attributes.get(
+				"subscriptionCycleLength");
+
+		if (subscriptionCycleLength != null) {
+			setSubscriptionCycleLength(subscriptionCycleLength);
+		}
+
+		String subscriptionCyclePeriod = (String)attributes.get(
+				"subscriptionCyclePeriod");
+
+		if (subscriptionCyclePeriod != null) {
+			setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+		}
+
+		Long maxSubscriptionCyclesNumber = (Long)attributes.get(
+				"maxSubscriptionCyclesNumber");
+
+		if (maxSubscriptionCyclesNumber != null) {
+			setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
 		}
 
 		Integer status = (Integer)attributes.get("status");
@@ -935,6 +991,78 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 	@JSON
 	@Override
+	public boolean getOverrideSubscriptionInfo() {
+		return _overrideSubscriptionInfo;
+	}
+
+	@JSON
+	@Override
+	public boolean isOverrideSubscriptionInfo() {
+		return _overrideSubscriptionInfo;
+	}
+
+	@Override
+	public void setOverrideSubscriptionInfo(boolean overrideSubscriptionInfo) {
+		_overrideSubscriptionInfo = overrideSubscriptionInfo;
+	}
+
+	@JSON
+	@Override
+	public boolean getSubscriptionEnabled() {
+		return _subscriptionEnabled;
+	}
+
+	@JSON
+	@Override
+	public boolean isSubscriptionEnabled() {
+		return _subscriptionEnabled;
+	}
+
+	@Override
+	public void setSubscriptionEnabled(boolean subscriptionEnabled) {
+		_subscriptionEnabled = subscriptionEnabled;
+	}
+
+	@JSON
+	@Override
+	public long getSubscriptionCycleLength() {
+		return _subscriptionCycleLength;
+	}
+
+	@Override
+	public void setSubscriptionCycleLength(long subscriptionCycleLength) {
+		_subscriptionCycleLength = subscriptionCycleLength;
+	}
+
+	@JSON
+	@Override
+	public String getSubscriptionCyclePeriod() {
+		if (_subscriptionCyclePeriod == null) {
+			return "";
+		}
+		else {
+			return _subscriptionCyclePeriod;
+		}
+	}
+
+	@Override
+	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod) {
+		_subscriptionCyclePeriod = subscriptionCyclePeriod;
+	}
+
+	@JSON
+	@Override
+	public long getMaxSubscriptionCyclesNumber() {
+		return _maxSubscriptionCyclesNumber;
+	}
+
+	@Override
+	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber) {
+		_maxSubscriptionCyclesNumber = maxSubscriptionCyclesNumber;
+	}
+
+	@JSON
+	@Override
 	public int getStatus() {
 		return _status;
 	}
@@ -1284,6 +1412,11 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		cpInstanceImpl.setDisplayDate(getDisplayDate());
 		cpInstanceImpl.setExpirationDate(getExpirationDate());
 		cpInstanceImpl.setLastPublishDate(getLastPublishDate());
+		cpInstanceImpl.setOverrideSubscriptionInfo(isOverrideSubscriptionInfo());
+		cpInstanceImpl.setSubscriptionEnabled(isSubscriptionEnabled());
+		cpInstanceImpl.setSubscriptionCycleLength(getSubscriptionCycleLength());
+		cpInstanceImpl.setSubscriptionCyclePeriod(getSubscriptionCyclePeriod());
+		cpInstanceImpl.setMaxSubscriptionCyclesNumber(getMaxSubscriptionCyclesNumber());
 		cpInstanceImpl.setStatus(getStatus());
 		cpInstanceImpl.setStatusByUserId(getStatusByUserId());
 		cpInstanceImpl.setStatusByUserName(getStatusByUserName());
@@ -1522,6 +1655,23 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 			cpInstanceCacheModel.lastPublishDate = Long.MIN_VALUE;
 		}
 
+		cpInstanceCacheModel.overrideSubscriptionInfo = isOverrideSubscriptionInfo();
+
+		cpInstanceCacheModel.subscriptionEnabled = isSubscriptionEnabled();
+
+		cpInstanceCacheModel.subscriptionCycleLength = getSubscriptionCycleLength();
+
+		cpInstanceCacheModel.subscriptionCyclePeriod = getSubscriptionCyclePeriod();
+
+		String subscriptionCyclePeriod = cpInstanceCacheModel.subscriptionCyclePeriod;
+
+		if ((subscriptionCyclePeriod != null) &&
+				(subscriptionCyclePeriod.length() == 0)) {
+			cpInstanceCacheModel.subscriptionCyclePeriod = null;
+		}
+
+		cpInstanceCacheModel.maxSubscriptionCyclesNumber = getMaxSubscriptionCyclesNumber();
+
 		cpInstanceCacheModel.status = getStatus();
 
 		cpInstanceCacheModel.statusByUserId = getStatusByUserId();
@@ -1548,7 +1698,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(71);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1602,6 +1752,16 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		sb.append(getExpirationDate());
 		sb.append(", lastPublishDate=");
 		sb.append(getLastPublishDate());
+		sb.append(", overrideSubscriptionInfo=");
+		sb.append(isOverrideSubscriptionInfo());
+		sb.append(", subscriptionEnabled=");
+		sb.append(isSubscriptionEnabled());
+		sb.append(", subscriptionCycleLength=");
+		sb.append(getSubscriptionCycleLength());
+		sb.append(", subscriptionCyclePeriod=");
+		sb.append(getSubscriptionCyclePeriod());
+		sb.append(", maxSubscriptionCyclesNumber=");
+		sb.append(getMaxSubscriptionCyclesNumber());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", statusByUserId=");
@@ -1617,7 +1777,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(94);
+		StringBundler sb = new StringBundler(109);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPInstance");
@@ -1728,6 +1888,26 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		sb.append(getLastPublishDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>overrideSubscriptionInfo</column-name><column-value><![CDATA[");
+		sb.append(isOverrideSubscriptionInfo());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>subscriptionEnabled</column-name><column-value><![CDATA[");
+		sb.append(isSubscriptionEnabled());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>subscriptionCycleLength</column-name><column-value><![CDATA[");
+		sb.append(getSubscriptionCycleLength());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>subscriptionCyclePeriod</column-name><column-value><![CDATA[");
+		sb.append(getSubscriptionCyclePeriod());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>maxSubscriptionCyclesNumber</column-name><column-value><![CDATA[");
+		sb.append(getMaxSubscriptionCyclesNumber());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
@@ -1790,6 +1970,11 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 	private Date _originalDisplayDate;
 	private Date _expirationDate;
 	private Date _lastPublishDate;
+	private boolean _overrideSubscriptionInfo;
+	private boolean _subscriptionEnabled;
+	private long _subscriptionCycleLength;
+	private String _subscriptionCyclePeriod;
+	private long _maxSubscriptionCyclesNumber;
 	private int _status;
 	private int _originalStatus;
 	private boolean _setOriginalStatus;

@@ -57,7 +57,6 @@ import com.liferay.portal.kernel.util.MethodKey;
 public class CPRuleServiceHttp {
 	public static com.liferay.commerce.product.model.CPRule addCPRule(
 		HttpPrincipal httpPrincipal, String name, boolean active, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -65,7 +64,7 @@ public class CPRuleServiceHttp {
 					"addCPRule", _addCPRuleParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					active, type, typeSettingsProperties, serviceContext);
+					active, type, serviceContext);
 
 			Object returnObj = null;
 
@@ -91,6 +90,7 @@ public class CPRuleServiceHttp {
 
 	public static com.liferay.commerce.product.model.CPRule addCPRule(
 		HttpPrincipal httpPrincipal, String name, boolean active, String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -98,7 +98,7 @@ public class CPRuleServiceHttp {
 					"addCPRule", _addCPRuleParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					active, type, serviceContext);
+					active, type, typeSettingsProperties, serviceContext);
 
 			Object returnObj = null;
 
@@ -349,11 +349,11 @@ public class CPRuleServiceHttp {
 	private static Log _log = LogFactoryUtil.getLog(CPRuleServiceHttp.class);
 	private static final Class<?>[] _addCPRuleParameterTypes0 = new Class[] {
 			String.class, boolean.class, String.class,
-			com.liferay.portal.kernel.util.UnicodeProperties.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addCPRuleParameterTypes1 = new Class[] {
 			String.class, boolean.class, String.class,
+			com.liferay.portal.kernel.util.UnicodeProperties.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteCPRuleParameterTypes2 = new Class[] {
