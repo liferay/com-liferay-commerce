@@ -30,21 +30,22 @@
 			</#if>
 
 			<div class="col-md-6">
-				<div class="row">
-					<img src="${image}">
+				<div class="row-fluid">
+					<img class="w-100" src="${image}">
 				</div>
 
-				<div class="row">
+				<div class="row-fluid">
 					<a href="${productURL}">
 						<strong>${name}</strong>
 					</a>
-				</div>
 
-				<div class="row">
-					<@liferay_commerce["price"]
-						CPDefinitionId=cpDefinition.getCPDefinitionId()
-						CPInstanceId=curCommerceOrderItem.getCPInstanceId()
-					/>
+					<div class="commerce-price-section d-inline float-right">
+						<@liferay_commerce["price"]
+							CPDefinitionId=cpDefinition.getCPDefinitionId()
+							CPInstanceId=curCommerceOrderItem.getCPInstanceId()
+							showDiscount=false
+						/>
+					</div>
 				</div>
 			</div>
 
