@@ -91,13 +91,17 @@ public class CheckCommerceSubscriptionOrderPayedMessageListener
 		for (CommerceSubscriptionEntry commerceSubscriptionEntry :
 				activeCPSubscriptionEntries) {
 
+			CommerceSubscriptionCycleEntryCreateDateComparator
+				commerceSubscriptionCycleEntryCreateDateComparator =
+					new CommerceSubscriptionCycleEntryCreateDateComparator();
+
 			List<CommerceSubscriptionCycleEntry> cpSubscriptionCycleEntries =
 				_commerceSubscriptionCycleEntryLocalService.
 					getCPSubscriptionCycleEntries(
 						commerceSubscriptionEntry.
 							getCommerceSubscriptionEntryId(),
 						QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-						new CommerceSubscriptionCycleEntryCreateDateComparator());
+						commerceSubscriptionCycleEntryCreateDateComparator);
 
 			CommerceSubscriptionCycleEntry firstCommerceSubscriptionCycleEntry =
 				cpSubscriptionCycleEntries.get(0);

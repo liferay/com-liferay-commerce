@@ -110,8 +110,9 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		// Add CommerceSubscriptionCycleEntry
 
-		commerceSubscriptionCycleEntryLocalService.addCommerceSubscriptionCycleEntry(
-			commerceSubscriptionEntryId, commerceOrderItemId, false);
+		commerceSubscriptionCycleEntryLocalService.
+			addCommerceSubscriptionCycleEntry(
+				commerceSubscriptionEntryId, commerceOrderItemId, false);
 
 		return commerceSubscriptionEntry;
 	}
