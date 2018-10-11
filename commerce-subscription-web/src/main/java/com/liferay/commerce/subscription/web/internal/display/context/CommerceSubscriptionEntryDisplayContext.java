@@ -241,19 +241,21 @@ public class CommerceSubscriptionEntryDisplayContext {
 		_searchContainer.setOrderByType(orderByType);
 
 		BaseModelSearchResult<CommerceSubscriptionEntry>
-			cpSubscriptionBaseModelSearchResult =
-				_commerceSubscriptionEntryService.searchCPSubscriptionEntries(
-					_cpRequestHelper.getCompanyId(),
-					_cpRequestHelper.getScopeGroupId(), active, getKeywords(),
-					_searchContainer.getStart(), _searchContainer.getEnd(),
-					CommerceSubscriptionEntryPortletUtil.
-						getCommerceSubscriptionEntrySort(
-							orderByCol, orderByType));
+			commerceSubscriptionBaseModelSearchResult =
+				_commerceSubscriptionEntryService.
+					getCommerceSubscriptionEntries(
+						_cpRequestHelper.getCompanyId(),
+						_cpRequestHelper.getScopeGroupId(), active,
+						getKeywords(), _searchContainer.getStart(),
+						_searchContainer.getEnd(),
+						CommerceSubscriptionEntryPortletUtil.
+							getCommerceSubscriptionEntrySort(
+								orderByCol, orderByType));
 
 		_searchContainer.setTotal(
-			cpSubscriptionBaseModelSearchResult.getLength());
+			commerceSubscriptionBaseModelSearchResult.getLength());
 		_searchContainer.setResults(
-			cpSubscriptionBaseModelSearchResult.getBaseModels());
+			commerceSubscriptionBaseModelSearchResult.getBaseModels());
 
 		_searchContainer.setRowChecker(_rowChecker);
 
