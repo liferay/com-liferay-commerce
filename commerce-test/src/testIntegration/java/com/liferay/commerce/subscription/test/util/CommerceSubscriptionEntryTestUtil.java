@@ -14,9 +14,6 @@
 
 package com.liferay.commerce.subscription.test.util;
 
-import com.liferay.commerce.constants.CommerceOrderConstants;
-import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.internal.test.util.CommerceTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.constants.CPConstants;
@@ -24,7 +21,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
-import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
+import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 
 /**
  * @author Alessio Antonio Rendina
@@ -32,11 +29,13 @@ import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 public class CommerceSubscriptionEntryTestUtil {
 
 	public static void setUpCommerceSubscriptionEntry(
-			long groupId, long userId, long maxSubscriptionCyclesNumber)
+			long groupId, long userId, long maxSubscriptionCyclesNumber,
+			CommerceSubscriptionEntryHelper commerceSubscriptionEntryHelper)
 		throws Exception {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(groupId);
 
+		cpInstance.setOverrideSubscriptionInfo(true);
 		cpInstance.setSubscriptionEnabled(true);
 		cpInstance.setSubscriptionCycleLength(1);
 		cpInstance.setSubscriptionCyclePeriod(
@@ -49,20 +48,15 @@ public class CommerceSubscriptionEntryTestUtil {
 
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
 
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(groupId);
-
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
-			groupId, userId, commerceCurrency.getCommerceCurrencyId());
+			groupId, userId, 0);
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
 			1);
 
-		commerceOrder.setOrderStatus(
-			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT);
-
-		CommerceOrderLocalServiceUtil.updateCommerceOrder(commerceOrder);
+		commerceSubscriptionEntryHelper.checkCommerceSubscriptions(
+			commerceOrder);
 	}
 
 }
