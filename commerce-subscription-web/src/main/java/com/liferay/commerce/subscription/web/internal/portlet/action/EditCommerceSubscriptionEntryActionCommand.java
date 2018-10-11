@@ -47,7 +47,7 @@ import org.osgi.service.component.annotations.Reference;
 public class EditCommerceSubscriptionEntryActionCommand
 	extends BaseMVCActionCommand {
 
-	protected void deleteCPSubscriptionEntries(
+	protected void deleteCommerceSubscriptionEntries(
 			long commerceSubscriptionEntryId, ActionRequest actionRequest)
 		throws Exception {
 
@@ -84,7 +84,7 @@ public class EditCommerceSubscriptionEntryActionCommand
 
 		try {
 			if (cmd.equals(Constants.DELETE)) {
-				deleteCPSubscriptionEntries(
+				deleteCommerceSubscriptionEntries(
 					commerceSubscriptionEntryId, actionRequest);
 			}
 			else if (cmd.equals(Constants.UPDATE)) {
