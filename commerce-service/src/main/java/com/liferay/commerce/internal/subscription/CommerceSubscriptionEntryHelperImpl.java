@@ -16,6 +16,7 @@ package com.liferay.commerce.internal.subscription;
 
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
@@ -41,12 +42,36 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceSubscriptionEntryHelperImpl
 	implements CommerceSubscriptionEntryHelper {
 
+	@Override
+	public void checkCommerceSubscriptions(CommerceOrder commerceOrder)
+		throws PortalException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(commerceOrder.getSiteGroupId());
+		serviceContext.setUserId(commerceOrder.getOrderUserId());
+
+		List<CommerceOrderItem> commerceOrderItems =
+			_commerceOrderItemLocalService.getSubscriptionCommerceOrderItems(
+				commerceOrder.getCommerceOrderId());
+
+		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
+			if (_isNewSubscription(commerceOrderItem)) {
+				_commerceSubscriptionEntryLocalService.
+					addCommerceSubscriptionEntry(
+						commerceOrderItem.getCPInstanceId(),
+						commerceOrderItem.getCommerceOrderItemId(),
+						serviceContext);
+			}
+		}
+	}
+
 	public void renewSubscriptionEntries(
-			List<CommerceSubscriptionEntry> cpSubscriptionEntries)
+			List<CommerceSubscriptionEntry> commerceSubscriptionEntries)
 		throws PortalException {
 
 		for (CommerceSubscriptionEntry commerceSubscriptionEntry :
-				cpSubscriptionEntries) {
+				commerceSubscriptionEntries) {
 
 			renewSubscriptionEntry(commerceSubscriptionEntry);
 		}
@@ -74,13 +99,13 @@ public class CommerceSubscriptionEntryHelperImpl
 		}
 
 		if (commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber() > 0) {
-			int cpSubscriptionCycleEntriesCount =
+			int commerceSubscriptionCycleEntriesCount =
 				_commerceSubscriptionCycleEntryLocalService.
-					getCPSubscriptionCycleEntriesCount(
+					getCommerceSubscriptionCycleEntriesCount(
 						commerceSubscriptionEntry.
 							getCommerceSubscriptionEntryId());
 
-			if (cpSubscriptionCycleEntriesCount >=
+			if (commerceSubscriptionCycleEntriesCount >=
 					commerceSubscriptionEntry.
 						getMaxSubscriptionCyclesNumber()) {
 
@@ -160,6 +185,21 @@ public class CommerceSubscriptionEntryHelperImpl
 				newCommerceOrderItemId, true);
 
 		return newOrder;
+	}
+
+	private boolean _isNewSubscription(CommerceOrderItem commerceOrderItem) {
+		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
+			_commerceSubscriptionCycleEntryLocalService.
+				fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
+					commerceOrderItem.getCommerceOrderItemId());
+
+		if ((commerceSubscriptionCycleEntry != null) &&
+			commerceSubscriptionCycleEntry.isRenew()) {
+
+			return false;
+		}
+
+		return true;
 	}
 
 	@Reference
