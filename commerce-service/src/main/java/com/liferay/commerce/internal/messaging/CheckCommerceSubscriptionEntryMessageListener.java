@@ -78,12 +78,12 @@ public class CheckCommerceSubscriptionEntryMessageListener
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		List<CommerceSubscriptionEntry> cpSubscriptionEntriesToRenew =
+		List<CommerceSubscriptionEntry> commerceSubscriptionEntriesToRenew =
 			_commerceSubscriptionEntryLocalService.
-				getCPSubscriptionEntriesToRenew();
+				getCommerceSubscriptionEntriesToRenew();
 
 		_commerceSubscriptionEntryHelper.renewSubscriptionEntries(
-			cpSubscriptionEntriesToRenew);
+			commerceSubscriptionEntriesToRenew);
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
