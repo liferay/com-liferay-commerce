@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
@@ -305,10 +306,11 @@ public class CommerceNotificationTemplatesDisplayContext {
 		Stream<CommerceNotificationTemplateUserSegmentRel> stream =
 			commerceNotificationTemplateUserSegmentRels.stream();
 
-		return stream.mapToLong(
+		LongStream longStream = stream.mapToLong(
 			CommerceNotificationTemplateUserSegmentRel::
-				getCommerceNotificationTemplateUserSegmentRelId
-		).toArray();
+				getCommerceNotificationTemplateUserSegmentRelId);
+
+		return longStream.toArray();
 	}
 
 	protected String getNavigation() {
