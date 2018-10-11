@@ -43,6 +43,7 @@
 						<@liferay_commerce["price"]
 							CPDefinitionId=cpDefinition.getCPDefinitionId()
 							CPInstanceId=curCommerceOrderItem.getCPInstanceId()
+							showDiscount=false
 						/>
 					</td>
 					<td>${curCommerceOrderItem.getQuantity()}</td>
