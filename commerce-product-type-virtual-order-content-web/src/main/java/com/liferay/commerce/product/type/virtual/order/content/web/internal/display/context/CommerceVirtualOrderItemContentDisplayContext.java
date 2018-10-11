@@ -15,6 +15,8 @@
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context;
 
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
+import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
@@ -28,6 +30,7 @@ import com.liferay.commerce.product.type.virtual.order.util.comparator.CommerceV
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleDisplay;
@@ -65,6 +68,8 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			CPDefinitionHelper cpDefinitionHelper,
 			CPDefinitionVirtualSettingService cpDefinitionVirtualSettingService,
 			CPInstanceHelper cpInstanceHelper,
+			CommerceSubscriptionCycleEntryLocalService
+				commerceSubscriptionCycleEntryLocalService,
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
@@ -74,6 +79,8 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpDefinitionVirtualSettingService = cpDefinitionVirtualSettingService;
 		_cpInstanceHelper = cpInstanceHelper;
+		_commerceSubscriptionCycleEntryLocalService =
+			commerceSubscriptionCycleEntryLocalService;
 
 		_commerceVirtualOrderItemContentRequestHelper =
 			new CommerceVirtualOrderItemContentRequestHelper(
@@ -348,8 +355,29 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		return _searchContainer;
 	}
 
+	public boolean hasActiveSubscription(
+			CommerceVirtualOrderItem commerceVirtualOrderItem)
+		throws PortalException {
+
+		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
+			_commerceSubscriptionCycleEntryLocalService.
+				fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+					commerceVirtualOrderItem.getCommerceOrderItemId());
+
+		if (commerceSubscriptionCycleEntry == null) {
+			return true;
+		}
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			commerceSubscriptionCycleEntry.getCommerceSubscriptionEntry();
+
+		return commerceSubscriptionEntry.isActive();
+	}
+
 	private JournalArticleDisplay _articleDisplay;
 	private final CommerceOrganizationHelper _commerceOrganizationHelper;
+	private final CommerceSubscriptionCycleEntryLocalService
+		_commerceSubscriptionCycleEntryLocalService;
 	private final CommerceVirtualOrderItemContentPortletInstanceConfiguration
 		_commerceVirtualOrderItemContentPortletInstanceConfiguration;
 	private final CommerceVirtualOrderItemContentRequestHelper
