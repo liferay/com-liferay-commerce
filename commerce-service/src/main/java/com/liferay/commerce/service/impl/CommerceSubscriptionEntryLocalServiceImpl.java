@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.service.impl;
 
-import com.liferay.commerce.exception.CPSubscriptionCPInstanceIdException;
+import com.liferay.commerce.exception.CommerceSubscriptionCPInstanceIdException;
 import com.liferay.commerce.internal.search.CommerceSubscriptionEntryIndexer;
 import com.liferay.commerce.internal.util.CommerceSubscriptionUtil;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
@@ -74,7 +74,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			cpInstance.getCPSubscriptionInfo();
 
 		if (cpSubscriptionInfo == null) {
-			throw new CPSubscriptionCPInstanceIdException();
+			throw new CommerceSubscriptionCPInstanceIdException();
 		}
 
 		Date subscriptionNextIterationDate =
@@ -118,12 +118,27 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceSubscriptionEntry> getActiveCPSubscriptionEntries() {
+	public List<CommerceSubscriptionEntry>
+		getActiveCommerceSubscriptionEntries() {
+
 		return commerceSubscriptionEntryPersistence.findByactive(true);
 	}
 
 	@Override
-	public List<CommerceSubscriptionEntry> getCPSubscriptionEntries(
+	public BaseModelSearchResult<CommerceSubscriptionEntry>
+			getCommerceSubscriptionEntries(
+				long companyId, long groupId, Boolean active, String keywords,
+				int start, int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, groupId, active, keywords, start, end, sort);
+
+		return getCommerceSubscriptionEntries(searchContext);
+	}
+
+	@Override
+	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
 		long groupId, long userId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 
@@ -132,27 +147,16 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	}
 
 	@Override
-	public int getCPSubscriptionEntriesCount(long groupId, long userId) {
+	public int getCommerceSubscriptionEntriesCount(long groupId, long userId) {
 		return commerceSubscriptionEntryPersistence.countByG_U(groupId, userId);
 	}
 
 	@Override
-	public List<CommerceSubscriptionEntry> getCPSubscriptionEntriesToRenew() {
+	public List<CommerceSubscriptionEntry>
+		getCommerceSubscriptionEntriesToRenew() {
+
 		return commerceSubscriptionEntryFinder.findByNextIterationDate(
 			new Date());
-	}
-
-	@Override
-	public BaseModelSearchResult<CommerceSubscriptionEntry>
-			searchCPSubscriptionEntries(
-				long companyId, long groupId, Boolean active, String keywords,
-				int start, int end, Sort sort)
-		throws PortalException {
-
-		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, active, keywords, start, end, sort);
-
-		return searchCPSubscriptionEntries(searchContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -244,14 +248,14 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		return searchContext;
 	}
 
-	protected List<CommerceSubscriptionEntry> getCPSubscriptionEntries(
+	protected List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
 			Hits hits)
 		throws PortalException {
 
 		List<Document> documents = hits.toList();
 
-		List<CommerceSubscriptionEntry> cpSubscriptionEntries = new ArrayList<>(
-			documents.size());
+		List<CommerceSubscriptionEntry> commerceSubscriptionEntries =
+			new ArrayList<>(documents.size());
 
 		for (Document document : documents) {
 			long commerceSubscriptionEntryId = GetterUtil.getLong(
@@ -261,7 +265,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 				fetchCommerceSubscriptionEntry(commerceSubscriptionEntryId);
 
 			if (commerceSubscriptionEntry == null) {
-				cpSubscriptionEntries = null;
+				commerceSubscriptionEntries = null;
 
 				Indexer<CommerceSubscriptionEntry> indexer =
 					IndexerRegistryUtil.getIndexer(
@@ -272,16 +276,16 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 				indexer.delete(companyId, document.getUID());
 			}
-			else if (cpSubscriptionEntries != null) {
-				cpSubscriptionEntries.add(commerceSubscriptionEntry);
+			else if (commerceSubscriptionEntries != null) {
+				commerceSubscriptionEntries.add(commerceSubscriptionEntry);
 			}
 		}
 
-		return cpSubscriptionEntries;
+		return commerceSubscriptionEntries;
 	}
 
 	protected BaseModelSearchResult<CommerceSubscriptionEntry>
-			searchCPSubscriptionEntries(SearchContext searchContext)
+			getCommerceSubscriptionEntries(SearchContext searchContext)
 		throws PortalException {
 
 		Indexer<CommerceSubscriptionEntry> indexer =
@@ -291,12 +295,12 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		for (int i = 0; i < 10; i++) {
 			Hits hits = indexer.search(searchContext, _SELECTED_FIELD_NAMES);
 
-			List<CommerceSubscriptionEntry> cpSubscriptionEntries =
-				getCPSubscriptionEntries(hits);
+			List<CommerceSubscriptionEntry> commerceSubscriptionEntries =
+				getCommerceSubscriptionEntries(hits);
 
-			if (cpSubscriptionEntries != null) {
+			if (commerceSubscriptionEntries != null) {
 				return new BaseModelSearchResult<>(
-					cpSubscriptionEntries, hits.getLength());
+					commerceSubscriptionEntries, hits.getLength());
 			}
 		}
 
