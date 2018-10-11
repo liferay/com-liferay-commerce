@@ -85,6 +85,7 @@ public class PriceTag extends IncludeTag {
 			_showDiscountAmount = false;
 			_showPercentage = false;
 			_showPriceRange = false;
+			_showPromo = false;
 
 			return SKIP_BODY;
 		}
@@ -138,6 +139,10 @@ public class PriceTag extends IncludeTag {
 		_showPriceRange = showPriceRange;
 	}
 
+	public void setShowPromo(boolean showPromo) {
+		_showPromo = showPromo;
+	}
+
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();
@@ -154,6 +159,7 @@ public class PriceTag extends IncludeTag {
 		_showDiscountAmount = false;
 		_showPercentage = true;
 		_showPriceRange = false;
+		_showPromo = true;
 	}
 
 	protected String getFormattedPrice(
@@ -263,7 +269,11 @@ public class PriceTag extends IncludeTag {
 
 			CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 
-			if (_showDiscount) {
+			_formattedPrice = unitPrice.format(locale);
+
+			_formattedPromoPrice = StringPool.BLANK;
+
+			if (_showPromo) {
 				CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
 				BigDecimal promoPrice = finalPrice.getPrice();
@@ -271,11 +281,11 @@ public class PriceTag extends IncludeTag {
 				if (promoPrice.compareTo(unitPrice.getPrice()) < 0) {
 					_formattedPromoPrice = finalPrice.format(locale);
 				}
-
-				setDiscountInfo(commerceProductPrice);
 			}
 
-			_formattedPrice = unitPrice.format(locale);
+			if (_showDiscount) {
+				setDiscountInfo(commerceProductPrice);
+			}
 		}
 	}
 
@@ -334,5 +344,6 @@ public class PriceTag extends IncludeTag {
 	private boolean _showDiscountAmount;
 	private boolean _showPercentage = true;
 	private boolean _showPriceRange;
+	private boolean _showPromo = true;
 
 }
