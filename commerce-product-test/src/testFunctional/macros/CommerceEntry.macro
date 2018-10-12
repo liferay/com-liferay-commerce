@@ -196,6 +196,25 @@
 		</execute>
 	</command>
 
+	<command name="createNewUserSegmentByUser">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
+			<var name="portlet" value="User Segments" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewUserSegmentsEntry">
+			<var name="criteriaType" value="${criteriaType}" />
+			<var name="entryName" value="${entryName}" />
+		</execute>
+
+		<execute macro="Button#clickSave" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+	</command>
+
 	<command name="editEntryFullDescription">
 		<execute macro="CommerceEntry#addFullDescriptionViaAlloyEditor">
 			<var name="entryFullDescription" value="${newEntryFullDescription}" />
