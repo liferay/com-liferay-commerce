@@ -15,7 +15,6 @@
 package com.liferay.commerce.data.integration.apio.internal.form;
 
 import com.liferay.apio.architect.form.Form;
-import com.liferay.apio.architect.form.Form.Builder;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class CPDefinitionUpserterForm {
 	 * @review
 	 */
 	public static Form<CPDefinitionUpserterForm> buildForm(
-		Builder<CPDefinitionUpserterForm> formBuilder) {
+		Form.Builder<CPDefinitionUpserterForm> formBuilder) {
 
 		return formBuilder.title(
 			__ -> "The product upserter form"
