@@ -39,7 +39,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.StatusType;
 
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
@@ -178,7 +177,7 @@ public class RESTClient implements AutoCloseable {
 	protected static final String HTTPS = "https://";
 
 	private Response _follow3Redirects(Response currentResponse) {
-		StatusType statusType = currentResponse.getStatusInfo();
+		Response.StatusType statusType = currentResponse.getStatusInfo();
 
 		if (statusType.getFamily() != Response.Status.Family.REDIRECTION) {
 			return currentResponse;
@@ -275,7 +274,7 @@ public class RESTClient implements AutoCloseable {
 
 		String messageEntity = response.readEntity(String.class);
 		int statusCode = response.getStatus();
-		StatusType statusType = response.getStatusInfo();
+		Response.StatusType statusType = response.getStatusInfo();
 
 		if (statusType.getFamily() == Response.Status.Family.SUCCESSFUL) {
 			return messageEntity;
