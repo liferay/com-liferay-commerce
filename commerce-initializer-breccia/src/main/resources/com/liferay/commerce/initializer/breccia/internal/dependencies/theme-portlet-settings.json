@@ -10,8 +10,8 @@
 			"portletSetupCss": "",
 			"portletSetupUseCustomTitle": "false",
 			"rootLayoutLevel": "0",
-			"rootLayoutType": "select",
-			"rootLayoutUuid": ""
+			"rootLayoutUuid": "",
+			"rootMenuItemType": "select"
 		},
 		"rootLayoutFriendlyURL": "/footer-1"
 	},
@@ -26,8 +26,8 @@
 			"portletSetupCss": "",
 			"portletSetupUseCustomTitle": "false",
 			"rootLayoutLevel": "0",
-			"rootLayoutType": "select",
-			"rootLayoutUuid": ""
+			"rootLayoutUuid": "",
+			"rootMenuItemType": "select"
 		},
 		"rootLayoutFriendlyURL": "/footer-2"
 	},
@@ -42,8 +42,8 @@
 			"portletSetupCss": "",
 			"portletSetupUseCustomTitle": "false",
 			"rootLayoutLevel": "0",
-			"rootLayoutType": "select",
-			"rootLayoutUuid": ""
+			"rootLayoutUuid": "",
+			"rootMenuItemType": "select"
 		},
 		"rootLayoutFriendlyURL": "/footer-3"
 	},
@@ -58,8 +58,8 @@
 			"portletSetupCss": "",
 			"portletSetupUseCustomTitle": "false",
 			"rootLayoutLevel": "0",
-			"rootLayoutType": "select",
-			"rootLayoutUuid": ""
+			"rootLayoutUuid": "",
+			"rootMenuItemType": "select"
 		},
 		"rootLayoutFriendlyURL": "/footer-4"
 	}
