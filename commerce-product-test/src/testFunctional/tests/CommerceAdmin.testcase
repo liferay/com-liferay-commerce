@@ -83,7 +83,10 @@
 		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewCatalogRule" />
 
-		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
+		<execute macro="CommerceEntry#createNewUserSegmentByUser">
+			<var name="criteriaType" value="Users" />
+			<var name="entryName" value="User Segment" />
+		</execute>
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
@@ -170,7 +173,10 @@
 		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewDiscount" />
 
-		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
+		<execute macro="CommerceEntry#createNewUserSegmentByUser">
+			<var name="criteriaType" value="Users" />
+			<var name="entryName" value="User Segment" />
+		</execute>
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
@@ -234,7 +240,10 @@
 		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewNotificationTemplate" />
 
-		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
+		<execute macro="CommerceEntry#createNewUserSegmentByUser">
+			<var name="criteriaType" value="Users" />
+			<var name="entryName" value="User Segment" />
+		</execute>
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
@@ -271,7 +280,10 @@
 
 		<execute test-case="CommerceAdmin#CreateNewCurrency" />
 
-		<execute test-case="CommerceAdmin#CreateNewUserSegmentByUser" />
+		<execute macro="CommerceEntry#createNewUserSegmentByUser">
+			<var name="criteriaType" value="Users" />
+			<var name="entryName" value="User Segment" />
+		</execute>
 
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
@@ -296,21 +308,9 @@
 		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByUser" />
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="User Segments" />
-		</execute>
-
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute macro="CommerceEntry#addNewUserSegmentsEntry">
+		<execute macro="CommerceEntry#createNewUserSegmentByUser">
 			<var name="criteriaType" value="Users" />
 			<var name="entryName" value="User Segment" />
 		</execute>
-
-		<execute macro="Button#clickSave" />
-
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 	</command>
 </definition>
