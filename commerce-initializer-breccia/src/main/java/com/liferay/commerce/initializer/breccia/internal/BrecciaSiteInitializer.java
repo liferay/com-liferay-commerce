@@ -25,11 +25,6 @@ import com.liferay.commerce.initializer.util.CommerceWarehousesImporter;
 import com.liferay.commerce.initializer.util.PortletSettingsImporter;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.product.importer.CPFileImporter;
-import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CPOption;
-import com.liferay.commerce.product.model.CPOptionCategory;
-import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
@@ -153,6 +148,20 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		return true;
 	}
 
+	private void _cleanLayouts(ServiceContext serviceContext)
+		throws PortalException {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Cleaning layouts...");
+		}
+
+		_cpFileImporter.cleanLayouts(serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Layouts successfully cleaned");
+		}
+	}
+
 	private String _getJSON(String name) throws IOException {
 		return StringUtil.read(
 			BrecciaSiteInitializer.class.getClassLoader(),
@@ -200,6 +209,10 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 	private void _importAssetCategories(ServiceContext serviceContext)
 		throws Exception {
 
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing asset categories...");
+		}
+
 		ClassLoader classLoader = BrecciaSiteInitializer.class.getClassLoader();
 
 		String json = StringUtil.read(
@@ -210,25 +223,44 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		_assetCategoriesImporter.importAssetCategories(
 			jsonArray, _COMMERCE_VOCABULARY, classLoader,
 			_DEPENDENCIES_PATH + "images/", serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Asset categories successfully imported");
+		}
 	}
 
 	private List<CommerceWarehouse> _importCommerceWarehouses(
 			ServiceContext serviceContext)
 		throws Exception {
 
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing commerce warehouses...");
+		}
+
 		_commerceWarehousesImporter.importDefaultCommerceWarehouse(
 			serviceContext);
 
 		JSONArray jsonArray = _getJSONArray("warehouses.json");
 
-		return _commerceWarehousesImporter.importCommerceWarehouses(
-			jsonArray, serviceContext);
+		List<CommerceWarehouse> commerceWarehouses =
+			_commerceWarehousesImporter.importCommerceWarehouses(
+				jsonArray, serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Commerce warehouses successfully imported");
+		}
+
+		return commerceWarehouses;
 	}
 
-	private List<CPDefinition> _importCPDefinitions(
+	private void _importCPDefinitions(
 			List<CommerceWarehouse> commerceWarehouses,
 			ServiceContext serviceContext)
 		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing commerce product definitions...");
+		}
 
 		JSONArray jsonArray = _getJSONArray("products.json");
 
@@ -236,60 +268,151 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 			commerceWarehouses,
 			CommerceWarehouse.COMMERCE_WAREHOUSE_ID_ACCESSOR);
 
-		return _cpDefinitionsImporter.importCPDefinitions(
+		_cpDefinitionsImporter.importCPDefinitions(
 			jsonArray, _COMMERCE_VOCABULARY, commerceWarehouseIds,
 			BrecciaSiteInitializer.class.getClassLoader(),
 			_DEPENDENCIES_PATH + "images/", serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Commerce product definitions successfully imported");
+		}
 	}
 
-	private List<CPOptionCategory> _importCPOptionCategories(
-			ServiceContext serviceContext)
+	private void _importCPOptionCategories(ServiceContext serviceContext)
 		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing commerce product option categories...");
+		}
 
 		JSONArray jsonArray = _getJSONArray("option-categories.json");
 
-		return _cpOptionCategoriesImporter.importCPOptionCategories(
+		_cpOptionCategoriesImporter.importCPOptionCategories(
 			jsonArray, serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Commerce product option categories successfully imported");
+		}
 	}
 
-	private List<CPOption> _importCPOptions(ServiceContext serviceContext)
+	private void _importCPOptions(ServiceContext serviceContext)
 		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing commerce product options...");
+		}
 
 		JSONArray jsonArray = _getJSONArray("options.json");
 
-		return _cpOptionsImporter.importCPOptions(jsonArray, serviceContext);
+		_cpOptionsImporter.importCPOptions(jsonArray, serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Commerce product options successfully imported");
+		}
 	}
 
-	private List<CPRule> _importCPRules(ServiceContext serviceContext)
+	private void _importCPRules(ServiceContext serviceContext)
 		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing catalog rules...");
+		}
 
 		JSONArray jsonArray = _getJSONArray("catalog-rules.json");
 
-		return _cpRulesImporter.importCPRules(jsonArray, serviceContext);
+		_cpRulesImporter.importCPRules(jsonArray, serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Catalog rules successfully imported");
+		}
 	}
 
-	private List<CPSpecificationOption> _importCPSpecificationOptions(
-			ServiceContext serviceContext)
+	private void _importCPSpecificationOptions(ServiceContext serviceContext)
 		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing commerce product specification options...");
+		}
 
 		JSONArray jsonArray = _getJSONArray("specification-options.json");
 
-		return _cpSpecificationOptionsImporter.importCPSpecificationOptions(
+		_cpSpecificationOptionsImporter.importCPSpecificationOptions(
 			jsonArray, serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Commerce product specification options successfully imported");
+		}
+	}
+
+	private void _importDefaultCommerceCountries(ServiceContext serviceContext)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing default commerce countries...");
+		}
+
+		_commerceCountryLocalService.importDefaultCountries(serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Commerce countries successfully imported");
+		}
+	}
+
+	private void _importDefaultCommerceCurrencies(ServiceContext serviceContext)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing default commerce currencies...");
+		}
+
+		_commerceCurrencyLocalService.importDefaultValues(serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Commerce currencies successfully imported");
+		}
+	}
+
+	private void _importDefaultCPMeasurementUnits(ServiceContext serviceContext)
+		throws PortalException {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing commerce product measurement units...");
+		}
+
+		_cpMeasurementUnitLocalService.importDefaultValues(serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Commerce product measurement units successfully imported");
+		}
 	}
 
 	private void _importJournalArticles(ServiceContext serviceContext)
 		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing journal articles...");
+		}
 
 		JSONArray jsonArray = _getJSONArray("journal-articles.json");
 
 		_cpFileImporter.createJournalArticles(
 			jsonArray, BrecciaSiteInitializer.class.getClassLoader(),
 			_DEPENDENCIES_PATH + "journal_articles/", serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Journal articles successfully imported");
+		}
 	}
 
 	private void _importLayouts(ServiceContext serviceContext)
 		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing layouts...");
+		}
 
 		ClassLoader classLoader = BrecciaSiteInitializer.class.getClassLoader();
 
@@ -300,16 +423,28 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		_cpFileImporter.createLayouts(
 			jsonArray, classLoader, _DEPENDENCIES_PATH, serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Layouts successfully imported");
+		}
 	}
 
 	private void _importPortletSettings(ServiceContext serviceContext)
 		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing portlet settings...");
+		}
 
 		JSONArray jsonArray = _getJSONArray("portlet-settings.json");
 
 		_portletSettingsImporter.importPortletSettings(
 			jsonArray, BrecciaSiteInitializer.class.getClassLoader(),
 			_DEPENDENCIES_PATH + "display_templates/", serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Portlet settings successfully imported");
+		}
 	}
 
 	private void _importSiteNavigationMenuPortletSettings(
@@ -385,8 +520,29 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		}
 	}
 
+	private void _importSystemCommerceUserSegmentEntries(
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing system commerce user segment entries...");
+		}
+
+		_commerceUserSegmentEntryLocalService.
+			importSystemCommerceUserSegmentEntries(serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"System commerce user segment entries successfully imported");
+		}
+	}
+
 	private void _importThemePortletSettings(ServiceContext serviceContext)
 		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing theme portlet settings...");
+		}
 
 		JSONArray jsonArray = _getJSONArray("theme-portlet-settings.json");
 
@@ -398,10 +554,18 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 			_importSiteNavigationMenuPortletSettings(
 				jsonObject, portletName, serviceContext);
 		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Theme portlet settings successfully imported");
+		}
 	}
 
 	private void _importThemeSettings(ServiceContext serviceContext)
 		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing theme settings...");
+		}
 
 		JSONObject themeSettingsJSONObject = _getJSONObject(
 			"theme-settings.json");
@@ -415,22 +579,23 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 			_updateThemeSetting(key, value, serviceContext);
 		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Theme settings successfully imported");
+		}
 	}
 
 	private void _initialize(long groupId) throws Exception {
 		ServiceContext serviceContext = _getServiceContext(groupId);
 
-		_commerceCountryLocalService.importDefaultCountries(serviceContext);
-		_commerceCurrencyLocalService.importDefaultValues(serviceContext);
-		_commerceUserSegmentEntryLocalService.
-			importSystemCommerceUserSegmentEntries(serviceContext);
+		_importDefaultCommerceCountries(serviceContext);
+		_importDefaultCommerceCurrencies(serviceContext);
+		_importSystemCommerceUserSegmentEntries(serviceContext);
+		_importDefaultCPMeasurementUnits(serviceContext);
 
-		_cpMeasurementUnitLocalService.importDefaultValues(serviceContext);
+		_updateThemeLookAndFeel(serviceContext);
 
-		_cpFileImporter.updateLookAndFeel(
-			_BRECCIA_THEME_ID, false, serviceContext);
-
-		_cpFileImporter.cleanLayouts(serviceContext);
+		_cleanLayouts(serviceContext);
 
 		_importLayouts(serviceContext);
 
@@ -471,6 +636,10 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 	}
 
 	private void _updateLogo(ServiceContext serviceContext) throws Exception {
+		if (_log.isInfoEnabled()) {
+			_log.info("Updating logo...");
+		}
+
 		ClassLoader classLoader = BrecciaSiteInitializer.class.getClassLoader();
 
 		InputStream inputStream = classLoader.getResourceAsStream(
@@ -479,6 +648,25 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		File file = FileUtil.createTempFile(inputStream);
 
 		_cpFileImporter.updateLogo(file, false, true, serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Logo successfully updated");
+		}
+	}
+
+	private void _updateThemeLookAndFeel(ServiceContext serviceContext)
+		throws PortalException {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Updating theme look and feel...");
+		}
+
+		_cpFileImporter.updateLookAndFeel(
+			_BRECCIA_THEME_ID, false, serviceContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Theme look and feel successfully updated");
+		}
 	}
 
 	private void _updateThemeSetting(
