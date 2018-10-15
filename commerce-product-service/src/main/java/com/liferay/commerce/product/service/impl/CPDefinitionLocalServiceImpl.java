@@ -1337,18 +1337,6 @@ public class CPDefinitionLocalServiceImpl
 		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
 			cpDefinitionId);
 
-		List<CPInstance> cpInstances =
-			cpInstanceLocalService.getCPDefinitionInstances(
-				cpDefinition.getCPDefinitionId(),
-				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null);
-
-		if ((status == WorkflowConstants.STATUS_APPROVED) &&
-			cpInstances.isEmpty()) {
-
-			status = WorkflowConstants.STATUS_DRAFT;
-		}
-
 		int oldStatus = cpDefinition.getStatus();
 
 		if ((status == WorkflowConstants.STATUS_APPROVED) &&
