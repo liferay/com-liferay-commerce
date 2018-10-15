@@ -21,6 +21,7 @@ import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefini
 import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsPortletUtil;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
@@ -344,6 +345,20 @@ public class CPDefinitionsDisplayContext
 
 		return ListUtil.toString(
 			vocabularies, AssetVocabulary.VOCABULARY_ID_ACCESSOR);
+	}
+
+	public boolean hasApprovedCPInstance(CPDefinition cpDefinition) {
+		if (cpDefinition == null) {
+			return true;
+		}
+
+		for (CPInstance cpInstance : cpDefinition.getCPInstances()) {
+			if (cpInstance.isApproved()) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public boolean hasCustomAttributesAvailable() throws Exception {
