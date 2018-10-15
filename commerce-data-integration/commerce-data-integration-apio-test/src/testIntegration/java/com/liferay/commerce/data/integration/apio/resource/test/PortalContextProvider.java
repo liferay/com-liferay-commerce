@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.data.integration.apio.end.to.end.resource.test;
+package com.liferay.commerce.data.integration.apio.resource.test;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,7 +30,7 @@ import com.liferay.commerce.apio.jsonld.representation.util.constants.SchemaOrgC
 import com.liferay.commerce.apio.jsonld.representation.util.form.Property;
 import com.liferay.commerce.apio.jsonld.representation.util.operation.Method;
 import com.liferay.commerce.apio.jsonld.representation.util.operation.Operation;
-import com.liferay.commerce.data.integration.apio.end.to.end.client.RESTClient;
+import com.liferay.commerce.data.integration.apio.client.RESTClient;
 import com.liferay.external.reference.service.EROrganizationLocalService;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
