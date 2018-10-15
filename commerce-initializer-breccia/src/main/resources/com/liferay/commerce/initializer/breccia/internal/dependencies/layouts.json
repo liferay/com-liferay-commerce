@@ -95,6 +95,13 @@
 		"hidden": true,
 		"layoutTemplateId": "commerce_cart_1_2_columns",
 		"name": "Checkout",
+		"permissions": [
+			{
+				"actionIds": [],
+				"roleName": "Guest",
+				"scope": 4
+			}
+		],
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
