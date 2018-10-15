@@ -62,10 +62,15 @@ public class CommercePriceListLocalServiceTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		Currency currency = Currency.getInstance(Locale.US);
+		Currency currencyGBP = Currency.getInstance(Locale.UK);
 
-		_commerceCurrency = CommerceCurrencyTestUtil.addCommerceCurrency(
-			_group.getGroupId(), currency.getCurrencyCode());
+		_commerceCurrencyGBP = CommerceCurrencyTestUtil.addCommerceCurrency(
+			_group.getGroupId(), currencyGBP.getCurrencyCode());
+
+		Currency currencyUSD = Currency.getInstance(Locale.US);
+
+		_commerceCurrencyUSD = CommerceCurrencyTestUtil.addCommerceCurrency(
+			_group.getGroupId(), currencyUSD.getCurrencyCode());
 	}
 
 	@Test
@@ -611,7 +616,10 @@ public class CommercePriceListLocalServiceTest {
 	}
 
 	@DeleteAfterTestRun
-	private CommerceCurrency _commerceCurrency;
+	private CommerceCurrency _commerceCurrencyGBP;
+
+	@DeleteAfterTestRun
+	private CommerceCurrency _commerceCurrencyUSD;
 
 	@Inject
 	private CommercePriceListLocalService _commercePriceListLocalService;
