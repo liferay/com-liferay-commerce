@@ -41,6 +41,19 @@
 					</span>
 				</c:if>
 			</div>
+
+			<c:if test="<%= !approvedCPInstance %>">
+				<div class="alert alert-warning mt-3" role="alert">
+					<span class="alert-indicator">
+						<svg aria-hidden="true" class="lexicon-icon lexicon-icon-warning-full">
+							<use xlink:href="<%= themeDisplay.getPathThemeImages() %>/lexicon/icons.svg#warning-full"></use>
+						</svg>
+					</span>
+
+					<liferay-ui:message key="product-is-not-configured-correctly" />
+					<liferay-ui:message key="please-add-one-or-more-sku" />
+				</div>
+			</c:if>
 		</div>
 	</div>
 </div>

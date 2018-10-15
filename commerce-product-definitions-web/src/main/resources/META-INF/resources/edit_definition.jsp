@@ -20,10 +20,9 @@
 CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CPDefinition cpDefinition = cpDefinitionsDisplayContext.getCPDefinition();
-
-String productURL = cpDefinitionsDisplayContext.getProductURL(cpDefinition);
-
 PortletURL portletURL = cpDefinitionsDisplayContext.getEditProductDefinitionURL();
+String productURL = cpDefinitionsDisplayContext.getProductURL(cpDefinition);
+boolean approvedCPInstance = cpDefinitionsDisplayContext.hasApprovedCPInstance(cpDefinition);
 
 String title = LanguageUtil.get(request, "add-product");
 
