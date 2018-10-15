@@ -57,12 +57,12 @@ for (Facet facet : cpSpecificationOptionFacetsDisplayContext.getFacets()) {
 					%>
 
 						<li class="facet-value">
-							<label class="facet-checkbox-label" for="<portlet:namespace />term_<%= i %>">
+							<label class="facet-checkbox-label" for="<portlet:namespace />term_<%= facet.getFieldName() + i %>">
 								<input
 									class="facet-term"
 									data-term-id="<%= termCollector.getTerm() %>"
-									id="<portlet:namespace />term_<%= i %>"
-									name="<portlet:namespace />term_<%= i %>"
+									id="<portlet:namespace />term_<%= facet.getFieldName() + i %>"
+									name="<portlet:namespace />term_<%= facet.getFieldName() + i %>"
 									onChange="Liferay.Search.FacetUtil.changeSelection(event);"
 									type="checkbox"
 									<%= cpSpecificationOptionFacetsDisplayContext.isCPDefinitionSpecificationOptionValueSelected(facet.getFieldName(), termCollector.getTerm()) ? "checked" : "" %>
