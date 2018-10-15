@@ -122,23 +122,11 @@ public class CPTestUtil {
 			long groupId, long cpDefinitionId, long cpOptionId)
 		throws PortalException {
 
-		CPOptionConfiguration cpOptionConfiguration =
-			ConfigurationProviderUtil.getConfiguration(
-				CPOptionConfiguration.class,
-				new SystemSettingsLocator(CPConstants.CP_OPTION_SERVICE_NAME));
-
-		String[] ddmFormFieldTypesAllowed =
-			cpOptionConfiguration.ddmFormFieldTypesAllowed();
-
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return CPDefinitionOptionRelLocalServiceUtil.addCPDefinitionOptionRel(
-			cpDefinitionId, cpOptionId, RandomTestUtil.randomLocaleStringMap(),
-			RandomTestUtil.randomLocaleStringMap(), ddmFormFieldTypesAllowed[0],
-			RandomTestUtil.randomDouble(), RandomTestUtil.randomBoolean(),
-			RandomTestUtil.randomBoolean(), RandomTestUtil.randomBoolean(),
-			true, serviceContext);
+			cpDefinitionId, cpOptionId, true, serviceContext);
 	}
 
 	public static CPInstance addCPInstance(long groupId)
