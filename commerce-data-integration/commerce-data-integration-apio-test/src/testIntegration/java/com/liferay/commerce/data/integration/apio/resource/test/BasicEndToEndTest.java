@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.data.integration.apio.end.to.end.resource.test;
+package com.liferay.commerce.data.integration.apio.resource.test;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
@@ -20,7 +20,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.apio.jsonld.representation.util.ApioEntryPoint;
-import com.liferay.commerce.data.integration.apio.end.to.end.client.RESTClient;
+import com.liferay.commerce.data.integration.apio.client.RESTClient;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 

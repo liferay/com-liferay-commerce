@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.data.integration.apio.end.to.end.resource.test;
+package com.liferay.commerce.data.integration.apio.resource.test;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -28,7 +28,7 @@ import com.liferay.commerce.apio.jsonld.representation.util.ApioUtils;
 import com.liferay.commerce.apio.jsonld.representation.util.constants.SchemaOrgConstants;
 import com.liferay.commerce.apio.jsonld.representation.util.operation.Method;
 import com.liferay.commerce.apio.jsonld.representation.util.operation.Operation;
-import com.liferay.commerce.data.integration.apio.end.to.end.client.RESTClient;
+import com.liferay.commerce.data.integration.apio.client.RESTClient;
 import com.liferay.commerce.organization.constants.CommerceOrganizationConstants;
 import com.liferay.commerce.organization.test.util.OrganizationTypeSetUp;
 import com.liferay.petra.string.StringPool;

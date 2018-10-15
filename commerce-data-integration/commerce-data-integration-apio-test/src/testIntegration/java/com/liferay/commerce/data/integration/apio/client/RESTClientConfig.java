@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.data.integration.apio.end.to.end.client;
+package com.liferay.commerce.data.integration.apio.client;
 
 /**
  * @author Zoltán Takács

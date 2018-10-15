@@ -1,5 +1,5 @@
-Bundle-Name: Liferay Commerce Data Integration Apio End-To-End Test
-Bundle-SymbolicName: com.liferay.commerce.data.integration.apio.end.to.end.test
+Bundle-Name: Liferay Commerce Data Integration Apio Test
+Bundle-SymbolicName: com.liferay.commerce.data.integration.apio.test
 Bundle-Version: 1.0.0
 Import-Package:\
 	!com.sun.jdi.*,\

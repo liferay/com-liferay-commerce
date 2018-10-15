@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.data.integration.apio.end.to.end.client;
+package com.liferay.commerce.data.integration.apio.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
