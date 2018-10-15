@@ -37,7 +37,7 @@ cpDefinitionSearchContainer.setTotal(cpDefinitionsCount);
 cpDefinitionSearchContainer.setResults(cpDefinitions);
 %>
 
-<div id="<portlet:namespace />productsContainer">
+<div class="pt-4" id="<portlet:namespace />productsContainer">
 	<div class="products-container" id="<portlet:namespace />entriesContainer">
 		<liferay-ui:search-container
 			emptyResultsMessage="no-products-were-found"
@@ -58,7 +58,6 @@ cpDefinitionSearchContainer.setResults(cpDefinitions);
 				%>
 
 				<liferay-ui:search-container-column-text
-					cssClass="table-cell-content"
 					name="id"
 					value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>"
 				/>
@@ -66,7 +65,6 @@ cpDefinitionSearchContainer.setResults(cpDefinitions);
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(thumbnailSrc) %>">
 						<liferay-ui:search-container-column-image
-							cssClass="table-cell-content"
 							name="image"
 							src="<%= thumbnailSrc %>"
 						/>
@@ -80,39 +78,23 @@ cpDefinitionSearchContainer.setResults(cpDefinitions);
 				</c:choose>
 
 				<liferay-ui:search-container-column-text
-					cssClass="table-cell-content"
 					name="name"
 					value="<%= HtmlUtil.escape(cpDefinition.getName(languageId)) %>"
 				/>
 
 				<liferay-ui:search-container-column-text
-					cssClass="table-cell-content"
 					name="type"
 					value="<%= cpType.getLabel(locale) %>"
 				/>
 
 				<liferay-ui:search-container-column-text
-					cssClass="table-cell-content"
 					name="author"
 					property="userName"
 				/>
 
 				<liferay-ui:search-container-column-status
-					cssClass="table-cell-content"
 					name="status"
 					status="<%= cpDefinition.getStatus() %>"
-				/>
-
-				<liferay-ui:search-container-column-date
-					cssClass="table-cell-content"
-					name="modified-date"
-					property="modifiedDate"
-				/>
-
-				<liferay-ui:search-container-column-date
-					cssClass="table-cell-content"
-					name="display-date"
-					property="displayDate"
 				/>
 
 				<liferay-ui:search-container-column-jsp
