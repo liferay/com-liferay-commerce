@@ -439,13 +439,6 @@ public class CPDefinitionOptionRelLocalServiceImpl
 				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
-		if (cpInstances.isEmpty()) {
-			cpDefinitionLocalService.updateStatus(
-				serviceContext.getUserId(), cpDefinition.getCPDefinitionId(),
-				WorkflowConstants.STATUS_DRAFT, serviceContext,
-				new HashMap<String, Serializable>());
-		}
-
 		for (CPInstance cpInstance : cpInstances) {
 			if (Validator.isNull(cpInstance.getJson())) {
 				cpInstanceLocalService.updateStatus(
