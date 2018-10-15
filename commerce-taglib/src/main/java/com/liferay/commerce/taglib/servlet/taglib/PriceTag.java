@@ -148,6 +148,7 @@ public class PriceTag extends IncludeTag {
 		super.cleanUp();
 
 		_cpDefinitionId = 0;
+		_cpInstance = null;
 		_cpInstanceId = 0;
 		_decimalFormat = null;
 		_discountLabel = null;
