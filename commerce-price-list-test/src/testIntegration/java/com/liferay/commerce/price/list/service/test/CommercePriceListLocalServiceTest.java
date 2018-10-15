@@ -213,9 +213,9 @@ public class CommercePriceListLocalServiceTest {
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
-				_group.getGroupId(), currency.getCurrencyCode(), name,
-				RandomTestUtil.randomDouble(), true, null, null,
-				externalReferenceCode);
+				_group.getGroupId(), currency.getCurrencyCode(),
+				parentCommercePriceListId, name, RandomTestUtil.randomDouble(),
+				true, null, null, externalReferenceCode);
 
 		_assertPriceListAttributes(currency, name, commercePriceList);
 
