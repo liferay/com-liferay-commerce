@@ -15,7 +15,7 @@
 package com.liferay.commerce.price.list.test.util;
 
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyServiceUtil;
+import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -193,7 +193,7 @@ public class CommercePriceListTestUtil {
 		throws PortalException {
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyServiceUtil.getCommerceCurrency(
+			CommerceCurrencyLocalServiceUtil.getCommerceCurrency(
 				groupId, currencyCode);
 
 		return commerceCurrency.getCommerceCurrencyId();
