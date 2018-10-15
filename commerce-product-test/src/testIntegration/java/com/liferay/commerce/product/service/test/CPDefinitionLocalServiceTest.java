@@ -26,7 +26,6 @@ import com.liferay.commerce.product.service.CPOptionLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.type.simple.constants.SimpleCPTypeConstants;
 import com.liferay.portal.kernel.model.Group;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
@@ -34,9 +33,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
-import java.io.Serializable;
-
-import java.util.HashMap;
 import java.util.List;
 
 import org.frutilla.FrutillaRule;
@@ -50,6 +46,7 @@ import org.junit.runner.RunWith;
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 @RunWith(Arquillian.class)
 public class CPDefinitionLocalServiceTest {
@@ -75,14 +72,14 @@ public class CPDefinitionLocalServiceTest {
 		).and(
 			"hasDefaultInstance is false"
 		).then(
-			"product definition should be DRAFT"
+			"product definition should be APPROVED"
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
 			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, false);
 
 		Assert.assertEquals(
-			WorkflowConstants.STATUS_DRAFT, cpDefinition.getStatus());
+			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
 	}
 
 	@Test
@@ -96,7 +93,7 @@ public class CPDefinitionLocalServiceTest {
 		).and(
 			"hasDefaultInstance is true"
 		).then(
-			"product definition should be DRAFT"
+			"product definition should be APPROVED"
 		).and(
 			"default product instance should be INACTIVE"
 		);
@@ -105,7 +102,7 @@ public class CPDefinitionLocalServiceTest {
 			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, true);
 
 		Assert.assertEquals(
-			WorkflowConstants.STATUS_DRAFT, cpDefinition.getStatus());
+			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
 
 		List<CPInstance> cpInstances =
 			_cpInstanceLocalService.getCPDefinitionInstances(
@@ -134,7 +131,7 @@ public class CPDefinitionLocalServiceTest {
 		).and(
 			"no product instances are added to the definition"
 		).then(
-			"product definition should be DRAFT"
+			"product definition should be APPROVED"
 		).and(
 			"default product instance should be INACTIVE"
 		);
@@ -171,7 +168,7 @@ public class CPDefinitionLocalServiceTest {
 				cpDefinition.getCPDefinitionId()));
 
 		Assert.assertEquals(
-			WorkflowConstants.STATUS_DRAFT, cpDefinition.getStatus());
+			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
@@ -233,14 +230,6 @@ public class CPDefinitionLocalServiceTest {
 		CPTestUtil.buildCPInstances(cpDefinition);
 
 		Assert.assertEquals(
-			WorkflowConstants.STATUS_DRAFT, cpDefinition.getStatus());
-
-		cpDefinition = _cpDefinitionLocalService.updateStatus(
-			cpDefinition.getUserId(), cpDefinition.getCPDefinitionId(),
-			WorkflowConstants.STATUS_APPROVED, new ServiceContext(),
-			new HashMap<String, Serializable>());
-
-		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
@@ -263,7 +252,7 @@ public class CPDefinitionLocalServiceTest {
 		).and(
 			"hasDefaultInstance is false"
 		).then(
-			"product definition should be DRAFT"
+			"product definition should be APPROVED"
 		).and(
 			"product definition should have no instances"
 		);
@@ -272,7 +261,7 @@ public class CPDefinitionLocalServiceTest {
 			_group.getGroupId(), SimpleCPTypeConstants.NAME, true, false);
 
 		Assert.assertEquals(
-			WorkflowConstants.STATUS_DRAFT, cpDefinition.getStatus());
+			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
 
 		int count = _cpInstanceLocalService.getCPDefinitionInstancesCount(
 			cpDefinition.getCPDefinitionId(), WorkflowConstants.STATUS_ANY);
@@ -317,6 +306,45 @@ public class CPDefinitionLocalServiceTest {
 		}
 
 		Assert.assertEquals(1, approvedCPInstances);
+	}
+
+	@Test
+	public void testDeleteCPDefinitionWithIgnoreSKUCombinationsAndDefaultInstance()
+		throws Exception {
+
+		frutillaRule.scenario(
+			"Delete default product instance"
+		).given(
+			"A product definition"
+		).when(
+			"ignoreSKUCombinations set to true"
+		).and(
+			"hasDefaultInstance set true"
+		).and(
+			"delete default product instance"
+		).then(
+			"product definition should be APPROVED"
+		);
+
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+			_group.getGroupId(), SimpleCPTypeConstants.NAME, true, true);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
+
+		List<CPInstance> cpInstances =
+			_cpInstanceLocalService.getCPDefinitionInstances(
+				cpDefinition.getCPDefinitionId());
+
+		Assert.assertEquals(cpInstances.toString(), 1, cpInstances.size());
+
+		_cpInstanceLocalService.deleteCPInstance(cpInstances.get(0));
+
+		cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpDefinition.getCPDefinitionId());
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
 	}
 
 	@Rule
