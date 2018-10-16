@@ -261,7 +261,8 @@ public class CommercePriceListLocalServiceTest {
 		currency = Currency.getInstance(Locale.UK);
 		name = RandomTestUtil.randomString();
 		Date displayDate = new Date();
-		Date expirationDate = new Date(Long.MAX_VALUE);
+		Date expirationDate = new Date(
+			System.currentTimeMillis() + Integer.MAX_VALUE);
 
 		CommercePriceList updatedCommercePriceList =
 			CommercePriceListTestUtil.updateCommercePriceList(
