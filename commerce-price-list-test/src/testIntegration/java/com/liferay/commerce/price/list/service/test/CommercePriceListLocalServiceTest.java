@@ -139,8 +139,8 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, commercePriceList);
 
 		Assert.assertThat(
-			externalReferenceCode,
-			equalTo(commercePriceList.getExternalReferenceCode()));
+			commercePriceList.getExternalReferenceCode(),
+			equalTo(externalReferenceCode));
 	}
 
 	@Test
@@ -178,8 +178,8 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, commercePriceList);
 
 		Assert.assertThat(
-			parentCommercePriceListId,
-			equalTo(commercePriceList.getParentCommercePriceListId()));
+			commercePriceList.getParentCommercePriceListId(),
+			equalTo(parentCommercePriceListId));
 	}
 
 	@Test
@@ -222,11 +222,11 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, commercePriceList);
 
 		Assert.assertThat(
-			externalReferenceCode,
-			equalTo(commercePriceList.getExternalReferenceCode()));
+			commercePriceList.getExternalReferenceCode(),
+			equalTo(externalReferenceCode));
 		Assert.assertThat(
-			parentCommercePriceListId,
-			equalTo(commercePriceList.getParentCommercePriceListId()));
+			commercePriceList.getParentCommercePriceListId(),
+			equalTo(parentCommercePriceListId));
 	}
 
 	@Test
@@ -278,24 +278,24 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, updatedCommercePriceList);
 
 		Assert.assertThat(
-			_truncateSeconds(displayDate),
-			equalTo(updatedCommercePriceList.getDisplayDate()));
+			updatedCommercePriceList.getDisplayDate(),
+			equalTo(_truncateSeconds(displayDate)));
 		Assert.assertThat(
-			_truncateSeconds(expirationDate),
-			equalTo(updatedCommercePriceList.getExpirationDate()));
+			updatedCommercePriceList.getExpirationDate(),
+			equalTo(_truncateSeconds(expirationDate)));
 
 		Assert.assertThat(
-			commercePriceList.getGroupId(),
-			equalTo(updatedCommercePriceList.getGroupId()));
+			updatedCommercePriceList.getGroupId(),
+			equalTo(commercePriceList.getGroupId()));
 		Assert.assertThat(
-			commercePriceList.getCommercePriceListId(),
-			equalTo(updatedCommercePriceList.getCommercePriceListId()));
+			updatedCommercePriceList.getCommercePriceListId(),
+			equalTo(commercePriceList.getCommercePriceListId()));
 		Assert.assertThat(
-			commercePriceList.getParentCommercePriceListId(),
-			equalTo(updatedCommercePriceList.getParentCommercePriceListId()));
+			updatedCommercePriceList.getParentCommercePriceListId(),
+			equalTo(commercePriceList.getParentCommercePriceListId()));
 		Assert.assertThat(
-			commercePriceList.getPriority(),
-			equalTo(updatedCommercePriceList.getPriority()));
+			updatedCommercePriceList.getPriority(),
+			equalTo(commercePriceList.getPriority()));
 	}
 
 	@Test(expected = NoSuchPriceListException.class)
@@ -354,8 +354,8 @@ public class CommercePriceListLocalServiceTest {
 				commercePriceList.getExpirationDate());
 
 		Assert.assertThat(
-			parentCommercePriceListId,
-			equalTo(updatedCommercePriceList.getParentCommercePriceListId()));
+			updatedCommercePriceList.getParentCommercePriceListId(),
+			equalTo(parentCommercePriceListId));
 	}
 
 	@Test
@@ -562,8 +562,8 @@ public class CommercePriceListLocalServiceTest {
 				true, null, null, null);
 
 		Assert.assertThat(
-			parentCommercePriceListId,
-			equalTo(commercePriceList.getParentCommercePriceListId()));
+			commercePriceList.getParentCommercePriceListId(),
+			equalTo(parentCommercePriceListId));
 	}
 
 	@Test
@@ -598,8 +598,8 @@ public class CommercePriceListLocalServiceTest {
 				true, null, null, null);
 
 		Assert.assertThat(
-			parentCommercePriceListId,
-			equalTo(commercePriceList.getParentCommercePriceListId()));
+			commercePriceList.getParentCommercePriceListId(),
+			equalTo(parentCommercePriceListId));
 	}
 
 	@Rule
@@ -613,10 +613,10 @@ public class CommercePriceListLocalServiceTest {
 			commercePriceList.getCommerceCurrency();
 
 		Assert.assertThat(
-			currency,
-			equalTo(Currency.getInstance(commerceCurrency.getCode())));
+			Currency.getInstance(commerceCurrency.getCode()),
+			equalTo(currency));
 
-		Assert.assertThat(name, equalTo(commercePriceList.getName()));
+		Assert.assertThat(commercePriceList.getName(), equalTo(name));
 	}
 
 	private static Date _truncateSeconds(Date date) {
