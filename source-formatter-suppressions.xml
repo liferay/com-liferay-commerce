@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 
 <suppressions>
+	<checkstyle>
+		<suppress checks="VariableDeclarationAsUsedCheck" files=".*" />
+	</checkstyle>
 	<source-check>
 		<suppress checks="BNDExportsCheck" files="commerce-application-list/bnd\.bnd" />
 		<suppress checks="BNDExportsCheck" files="commerce-checkout-web/bnd\.bnd" />
