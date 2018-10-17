@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.internal.subscription;
 
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
@@ -163,6 +164,9 @@ public class CommerceSubscriptionEntryHelperImpl
 
 		newOrder.setSubtotal(newCommerceOrderItem.getFinalPrice());
 		newOrder.setTotal(newCommerceOrderItem.getFinalPrice());
+
+		newOrder.setOrderStatus(
+			CommerceOrderConstants.ORDER_STATUS_SUBSCRIPTION);
 
 		newOrder = _commerceOrderLocalService.updateCommerceOrder(newOrder);
 
