@@ -269,6 +269,17 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 	}
 
 	@Override
+	public boolean isSubscription() {
+		if (getOrderStatus() ==
+				CommerceOrderConstants.ORDER_STATUS_SUBSCRIPTION) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
 	public void setShippingDiscounts(
 		CommerceDiscountValue commerceDiscountValue) {
 
