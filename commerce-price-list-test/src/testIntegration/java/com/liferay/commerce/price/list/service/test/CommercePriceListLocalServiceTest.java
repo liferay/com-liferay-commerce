@@ -30,9 +30,11 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
+import java.util.Calendar;
 import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
@@ -276,9 +278,10 @@ public class CommercePriceListLocalServiceTest {
 		_assertPriceListAttributes(currency, name, updatedCommercePriceList);
 
 		Assert.assertThat(
-			displayDate, equalTo(updatedCommercePriceList.getDisplayDate()));
+			_truncateSeconds(displayDate),
+			equalTo(updatedCommercePriceList.getDisplayDate()));
 		Assert.assertThat(
-			expirationDate,
+			_truncateSeconds(expirationDate),
 			equalTo(updatedCommercePriceList.getExpirationDate()));
 
 		Assert.assertThat(
@@ -614,6 +617,17 @@ public class CommercePriceListLocalServiceTest {
 			equalTo(Currency.getInstance(commerceCurrency.getCode())));
 
 		Assert.assertThat(name, equalTo(commercePriceList.getName()));
+	}
+
+	private static Date _truncateSeconds(Date date) {
+		Calendar calendar = CalendarFactoryUtil.getCalendar();
+
+		calendar.setTime(date);
+
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+
+		return calendar.getTime();
 	}
 
 	@DeleteAfterTestRun
