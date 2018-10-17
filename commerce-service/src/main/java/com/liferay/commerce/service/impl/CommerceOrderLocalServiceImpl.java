@@ -372,11 +372,11 @@ public class CommerceOrderLocalServiceImpl
 				CommerceOrderConstants.ORDER_STATUS_OPEN) {
 
 			commerceOrder = commerceOrderLocalService.recalculatePrice(
-				commerceOrderId, commerceContext);
+				commerceOrder.getCommerceOrderId(), commerceContext);
 		}
 
 		commerceOrder = commerceOrderLocalService.approveCommerceOrder(
-			serviceContext.getUserId(), commerceOrderId);
+			serviceContext.getUserId(), commerceOrder.getCommerceOrderId());
 
 		validateCheckout(commerceOrder);
 
@@ -739,7 +739,7 @@ public class CommerceOrderLocalServiceImpl
 			commerceOrder, subtotalDiscountValue);
 		_setCommerceOrderTotalDiscountValue(commerceOrder, totalDiscountValue);
 
-		return commerceOrder;
+		return commerceOrderPersistence.update(commerceOrder);
 	}
 
 	@Override
@@ -1391,7 +1391,9 @@ public class CommerceOrderLocalServiceImpl
 	protected void validateCheckout(CommerceOrder commerceOrder)
 		throws PortalException {
 
-		if (commerceOrder.isDraft() || !commerceOrder.isOpen()) {
+		if (commerceOrder.isDraft() ||
+			(!commerceOrder.isOpen() && !commerceOrder.isSubscription())) {
+
 			throw new CommerceOrderStatusException();
 		}
 
