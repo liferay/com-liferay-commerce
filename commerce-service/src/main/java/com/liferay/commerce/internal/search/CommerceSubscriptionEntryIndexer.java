@@ -17,7 +17,6 @@ package com.liferay.commerce.internal.search;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -175,30 +174,21 @@ public class CommerceSubscriptionEntryIndexer
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.
-				PerformActionMethod<CommerceSubscriptionEntry>() {
+			(CommerceSubscriptionEntry commerceSubscriptionEntry) -> {
+				try {
+					Document document = getDocument(commerceSubscriptionEntry);
 
-				@Override
-				public void performAction(
-					CommerceSubscriptionEntry commerceSubscriptionEntry) {
-
-					try {
-						Document document = getDocument(
-							commerceSubscriptionEntry);
-
-						indexableActionableDynamicQuery.addDocuments(document);
-					}
-					catch (PortalException pe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to index subscription entry " +
-									commerceSubscriptionEntry.
-										getCommerceSubscriptionEntryId(),
-								pe);
-						}
+					indexableActionableDynamicQuery.addDocuments(document);
+				}
+				catch (PortalException pe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to index subscription entry " +
+								commerceSubscriptionEntry.
+									getCommerceSubscriptionEntryId(),
+							pe);
 					}
 				}
-
 			});
 		indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 
