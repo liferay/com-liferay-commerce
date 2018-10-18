@@ -21,7 +21,6 @@ import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -330,30 +329,22 @@ public class CPAttachmentFileEntryIndexer
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.
-				PerformActionMethod<CPAttachmentFileEntry>() {
+			(CPAttachmentFileEntry cpAttachmentFileEntry) -> {
+				try {
+					Document document = getDocument(cpAttachmentFileEntry);
 
-				@Override
-				public void performAction(
-					CPAttachmentFileEntry cpAttachmentFileEntry) {
-
-					try {
-						Document document = getDocument(cpAttachmentFileEntry);
-
-						indexableActionableDynamicQuery.addDocuments(document);
-					}
-					catch (PortalException pe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to index commerce product attachment" +
-									"file entry " +
-										cpAttachmentFileEntry.
-											getCPAttachmentFileEntryId(),
-								pe);
-						}
+					indexableActionableDynamicQuery.addDocuments(document);
+				}
+				catch (PortalException pe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to index commerce product attachment" +
+								"file entry " +
+									cpAttachmentFileEntry.
+										getCPAttachmentFileEntryId(),
+							pe);
 					}
 				}
-
 			});
 		indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 

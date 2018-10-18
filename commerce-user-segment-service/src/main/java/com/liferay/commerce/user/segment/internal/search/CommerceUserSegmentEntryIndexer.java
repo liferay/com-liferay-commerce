@@ -21,7 +21,6 @@ import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentCriterionLocalService;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
 import com.liferay.commerce.user.segment.util.comparator.CommerceUserSegmentCriterionPriorityComparator;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -280,30 +279,21 @@ public class CommerceUserSegmentEntryIndexer
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.
-				PerformActionMethod<CommerceUserSegmentEntry>() {
+			(CommerceUserSegmentEntry commerceUserSegmentEntry) -> {
+				try {
+					Document document = getDocument(commerceUserSegmentEntry);
 
-				@Override
-				public void performAction(
-					CommerceUserSegmentEntry commerceUserSegmentEntry) {
-
-					try {
-						Document document = getDocument(
-							commerceUserSegmentEntry);
-
-						indexableActionableDynamicQuery.addDocuments(document);
-					}
-					catch (PortalException pe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to index commerce user segment " +
-									commerceUserSegmentEntry.
-										getCommerceUserSegmentEntryId(),
-								pe);
-						}
+					indexableActionableDynamicQuery.addDocuments(document);
+				}
+				catch (PortalException pe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to index commerce user segment " +
+								commerceUserSegmentEntry.
+									getCommerceUserSegmentEntryId(),
+							pe);
 					}
 				}
-
 			});
 		indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 

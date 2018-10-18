@@ -16,7 +16,6 @@ package com.liferay.commerce.product.search;
 
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -219,30 +218,21 @@ public class CPDefinitionOptionValueRelIndexer
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.
-				PerformActionMethod<CPDefinitionOptionValueRel>() {
+			(CPDefinitionOptionValueRel cpDefinitionOptionValueRel) -> {
+				try {
+					Document document = getDocument(cpDefinitionOptionValueRel);
 
-				@Override
-				public void performAction(
-					CPDefinitionOptionValueRel cpDefinitionOptionValueRel) {
-
-					try {
-						Document document = getDocument(
-							cpDefinitionOptionValueRel);
-
-						indexableActionableDynamicQuery.addDocuments(document);
-					}
-					catch (PortalException pe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to index definition option rel " +
-									cpDefinitionOptionValueRel.
-										getCPDefinitionOptionValueRelId(),
-								pe);
-						}
+					indexableActionableDynamicQuery.addDocuments(document);
+				}
+				catch (PortalException pe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to index definition option rel " +
+								cpDefinitionOptionValueRel.
+									getCPDefinitionOptionValueRelId(),
+							pe);
 					}
 				}
-
 			});
 		indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 

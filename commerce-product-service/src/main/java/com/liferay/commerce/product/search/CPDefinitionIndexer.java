@@ -34,7 +34,6 @@ import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.util.CPRulesThreadLocal;
 import com.liferay.document.library.kernel.util.DLUtil;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -608,25 +607,20 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod<CPDefinition>() {
+			(CPDefinition cpDefinition) -> {
+				try {
+					Document document = getDocument(cpDefinition);
 
-				@Override
-				public void performAction(CPDefinition cpDefinition) {
-					try {
-						Document document = getDocument(cpDefinition);
-
-						indexableActionableDynamicQuery.addDocuments(document);
-					}
-					catch (PortalException pe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to index commerce product definition " +
-									cpDefinition.getCPDefinitionId(),
-								pe);
-						}
+					indexableActionableDynamicQuery.addDocuments(document);
+				}
+				catch (PortalException pe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to index commerce product definition " +
+								cpDefinition.getCPDefinitionId(),
+							pe);
 					}
 				}
-
 			});
 		indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 
