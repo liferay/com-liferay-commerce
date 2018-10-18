@@ -253,8 +253,8 @@ public class CPSpecificationOptionIndexer
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Unable to index commerce product " +
-								"specification option " +
+							"Unable to index commerce product specification " +
+								"option " +
 									cpSpecificationOption.
 										getCPSpecificationOptionId(),
 							pe);
