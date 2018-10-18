@@ -122,6 +122,29 @@
 		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
 	</command>
 
+	<command name="createNewCurrenciesEntry">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Commerce" />
+			<var name="panel" value="Site Administration" />
+			<var name="portlet" value="Settings" />
+		</execute>
+
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="${navItem}" />
+		</execute>
+
+		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute macro="CommerceEntry#addNewCurrenciesEntry">
+			<var name="code" value="${code}" />
+			<var name="entryName" value="${entryName}" />
+		</execute>
+
+		<execute macro="Button#clickSave" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+	</command>
+
 	<command name="addNewUserSegmentsEntry">
 		<execute function="Type" locator1="CommerceEntry#MODAL_NAME_FIELD_SMALL" value1="${entryName}" />
 
