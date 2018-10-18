@@ -144,29 +144,10 @@
 	</command>
 
 	<command name="CreateNewCurrency">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewCurrency" />
-
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Settings" />
-		</execute>
-
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Currencies" />
-		</execute>
-
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute macro="CommerceEntry#addNewCurrenciesEntry">
+		<execute macro="CommerceEntry#createNewCurrenciesEntry">
 			<var name="code" value="NCU" />
 			<var name="entryName" value="New Currency" />
 		</execute>
-
-		<execute macro="Button#clickSave" />
-
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 	</command>
 
 	<command name="CreateNewDiscount">
@@ -278,7 +259,10 @@
 		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewPriceList" />
 
-		<execute test-case="CommerceAdmin#CreateNewCurrency" />
+		<execute macro="CommerceEntry#createNewCurrenciesEntry">
+			<var name="code" value="NCU" />
+			<var name="entryName" value="New Currency" />
+		</execute>
 
 		<execute macro="CommerceEntry#createNewUserSegmentByUser">
 			<var name="criteriaType" value="Users" />
