@@ -15,7 +15,6 @@
 package com.liferay.commerce.data.integration.apio.internal.form;
 
 import com.liferay.apio.architect.form.Form;
-import com.liferay.apio.architect.form.Form.Builder;
 
 /**
  * @author Alessio Antonio Rendina
@@ -23,7 +22,7 @@ import com.liferay.apio.architect.form.Form.Builder;
 public class CommerceOrderUpserterForm {
 
 	public static Form<CommerceOrderUpserterForm> buildForm(
-		Builder<CommerceOrderUpserterForm> formBuilder) {
+		Form.Builder<CommerceOrderUpserterForm> formBuilder) {
 
 		return formBuilder.title(
 			__ -> "The order creator form"

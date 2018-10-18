@@ -15,7 +15,6 @@
 package com.liferay.commerce.data.integration.apio.internal.form;
 
 import com.liferay.apio.architect.form.Form;
-import com.liferay.apio.architect.form.Form.Builder;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ import java.util.List;
 public class CommerceAccountUpserterForm {
 
 	public static Form<CommerceAccountUpserterForm> buildForm(
-		Builder<CommerceAccountUpserterForm> formBuilder) {
+		Form.Builder<CommerceAccountUpserterForm> formBuilder) {
 
 		return formBuilder.title(
 			__ -> "The account creator form"

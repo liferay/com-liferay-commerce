@@ -135,11 +135,10 @@ public class CommercePriceListHelper {
 			return _commercePriceListService.fetchCommercePriceList(
 				commercePriceListId);
 		}
-		else {
-			return _commercePriceListService.fetchByExternalReferenceCode(
-				company.getCompanyId(),
-				classPKExternalReferenceCode.getExternalReferenceCode());
-		}
+
+		return _commercePriceListService.fetchByExternalReferenceCode(
+			company.getCompanyId(),
+			classPKExternalReferenceCode.getExternalReferenceCode());
 	}
 
 	public CommercePriceList updateCommercePriceList(
