@@ -129,9 +129,8 @@ public class SubscriptionInfoCPContentContributor
 			return LanguageUtil.get(
 				httpServletRequest, period + CharPool.LOWER_CASE_S);
 		}
-		else {
-			return LanguageUtil.get(httpServletRequest, period);
-		}
+
+		return LanguageUtil.get(httpServletRequest, period);
 	}
 
 	@Reference
