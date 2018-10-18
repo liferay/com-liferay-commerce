@@ -481,7 +481,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		throws PortalException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			cpInstancePersistence.countByG_NotST(
+			return cpInstancePersistence.countByG_NotST(
 				groupId, WorkflowConstants.STATUS_IN_TRASH);
 		}
 
