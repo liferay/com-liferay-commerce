@@ -16,7 +16,6 @@ package com.liferay.commerce.internal.search;
 
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.CommerceCountryLocalService;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -191,25 +190,20 @@ public class CommerceCountryIndexer extends BaseIndexer<CommerceCountry> {
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod<CommerceCountry>() {
+			(CommerceCountry commerceCountry) -> {
+				try {
+					Document document = getDocument(commerceCountry);
 
-				@Override
-				public void performAction(CommerceCountry commerceCountry) {
-					try {
-						Document document = getDocument(commerceCountry);
-
-						indexableActionableDynamicQuery.addDocuments(document);
-					}
-					catch (PortalException pe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to index commerce country " +
-									commerceCountry.getCommerceCountryId(),
-								pe);
-						}
+					indexableActionableDynamicQuery.addDocuments(document);
+				}
+				catch (PortalException pe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to index commerce country " +
+								commerceCountry.getCommerceCountryId(),
+							pe);
 					}
 				}
-
 			});
 		indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 

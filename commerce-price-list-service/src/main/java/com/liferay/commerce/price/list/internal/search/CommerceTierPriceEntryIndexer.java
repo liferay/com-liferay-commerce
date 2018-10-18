@@ -16,7 +16,6 @@ package com.liferay.commerce.price.list.internal.search;
 
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalService;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -193,29 +192,21 @@ public class CommerceTierPriceEntryIndexer
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.
-				PerformActionMethod<CommerceTierPriceEntry>() {
+			(CommerceTierPriceEntry commerceTierPriceEntry) -> {
+				try {
+					Document document = getDocument(commerceTierPriceEntry);
 
-				@Override
-				public void performAction(
-					CommerceTierPriceEntry commerceTierPriceEntry) {
-
-					try {
-						Document document = getDocument(commerceTierPriceEntry);
-
-						indexableActionableDynamicQuery.addDocuments(document);
-					}
-					catch (PortalException pe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to index commerce tier price entry " +
-									commerceTierPriceEntry.
-										getCommerceTierPriceEntryId(),
-								pe);
-						}
+					indexableActionableDynamicQuery.addDocuments(document);
+				}
+				catch (PortalException pe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to index commerce tier price entry " +
+								commerceTierPriceEntry.
+									getCommerceTierPriceEntryId(),
+							pe);
 					}
 				}
-
 			});
 		indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 

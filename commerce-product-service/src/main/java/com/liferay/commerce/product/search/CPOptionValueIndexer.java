@@ -16,7 +16,6 @@ package com.liferay.commerce.product.search;
 
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.CPOptionValueLocalService;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -170,25 +169,20 @@ public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod<CPOptionValue>() {
+			(CPOptionValue cpOptionValue) -> {
+				try {
+					Document document = getDocument(cpOptionValue);
 
-				@Override
-				public void performAction(CPOptionValue cpOptionValue) {
-					try {
-						Document document = getDocument(cpOptionValue);
-
-						indexableActionableDynamicQuery.addDocuments(document);
-					}
-					catch (PortalException pe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to index commerce product option " +
-									cpOptionValue.getCPOptionValueId(),
-								pe);
-						}
+					indexableActionableDynamicQuery.addDocuments(document);
+				}
+				catch (PortalException pe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to index commerce product option " +
+								cpOptionValue.getCPOptionValueId(),
+							pe);
 					}
 				}
-
 			});
 		indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 

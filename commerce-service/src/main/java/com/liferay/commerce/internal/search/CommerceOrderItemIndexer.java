@@ -17,7 +17,6 @@ package com.liferay.commerce.internal.search;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.search.CPInstanceIndexer;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -154,26 +153,20 @@ public class CommerceOrderItemIndexer extends BaseIndexer<CommerceOrderItem> {
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.
-				PerformActionMethod<CommerceOrderItem>() {
+			(CommerceOrderItem commerceOrderItem) -> {
+				try {
+					Document document = getDocument(commerceOrderItem);
 
-				@Override
-				public void performAction(CommerceOrderItem commerceOrderItem) {
-					try {
-						Document document = getDocument(commerceOrderItem);
-
-						indexableActionableDynamicQuery.addDocuments(document);
-					}
-					catch (PortalException pe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to index commerce order item " +
-									commerceOrderItem.getCommerceOrderItemId(),
-								pe);
-						}
+					indexableActionableDynamicQuery.addDocuments(document);
+				}
+				catch (PortalException pe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to index commerce order item " +
+								commerceOrderItem.getCommerceOrderItemId(),
+							pe);
 					}
 				}
-
 			});
 		indexableActionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 
