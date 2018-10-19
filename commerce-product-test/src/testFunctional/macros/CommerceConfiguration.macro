@@ -139,8 +139,8 @@
 			</then>
 		</if>
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Weight" />
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Weight" />
 		</execute>
 
 		<if>
@@ -159,8 +159,8 @@
 			<var name="navItem" value="Notifications" />
 		</execute>
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Notification Templates" />
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Notification Templates" />
 		</execute>
 
 		<if>
