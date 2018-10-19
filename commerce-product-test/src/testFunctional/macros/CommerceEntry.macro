@@ -204,7 +204,7 @@
 		</execute>
 
 		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="${navItem}" />
+			<var name="navItem" value="Currencies" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
