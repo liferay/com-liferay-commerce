@@ -1,8 +1,5 @@
 apply plugin: "com.liferay.lang.merger"
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
-
 buildService {
 	apiDir = "../commerce-product-api/src/main/java"
 	testDir = "../commerce-product-test/src/testIntegration/java"
