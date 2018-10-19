@@ -64,8 +64,8 @@
 			<var name="portlet" value="Settings" />
 		</execute>
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Availability Estimates" />
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Availability Estimates" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -113,8 +113,8 @@
 			<var name="portlet" value="Settings" />
 		</execute>
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Countries" />
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Countries" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -202,8 +202,8 @@
 
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Weight" />
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Weight" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -236,8 +236,8 @@
 			<var name="menuTab" value="Notifications" />
 		</execute>
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Notification Templates" />
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Notification Templates" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
