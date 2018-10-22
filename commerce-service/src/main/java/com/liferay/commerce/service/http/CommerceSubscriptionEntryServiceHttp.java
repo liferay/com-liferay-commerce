@@ -119,8 +119,8 @@ public class CommerceSubscriptionEntryServiceHttp {
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
 		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		Boolean active, String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
+		Long maxSubscriptionCyclesNumber, Boolean active, String keywords,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
@@ -128,7 +128,8 @@ public class CommerceSubscriptionEntryServiceHttp {
 					_getCommerceSubscriptionEntriesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, active, keywords, start, end, sort);
+					companyId, groupId, maxSubscriptionCyclesNumber, active,
+					keywords, start, end, sort);
 
 			Object returnObj = null;
 
@@ -296,8 +297,8 @@ public class CommerceSubscriptionEntryServiceHttp {
 		new Class[] { long.class };
 	private static final Class<?>[] _getCommerceSubscriptionEntriesParameterTypes2 =
 		new Class[] {
-			long.class, long.class, Boolean.class, String.class, int.class,
-			int.class, com.liferay.portal.kernel.search.Sort.class
+			long.class, long.class, Long.class, Boolean.class, String.class,
+			int.class, int.class, com.liferay.portal.kernel.search.Sort.class
 		};
 	private static final Class<?>[] _getCommerceSubscriptionEntriesParameterTypes3 =
 		new Class[] {

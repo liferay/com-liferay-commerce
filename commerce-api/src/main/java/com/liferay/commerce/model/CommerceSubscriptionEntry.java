@@ -59,6 +59,10 @@ public interface CommerceSubscriptionEntry
 	public CommerceOrderItem getCommerceOrderItem()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
+	public java.util.List<CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries();
+
+	public int getCommerceSubscriptionCycleEntriesCount();
+
 	public com.liferay.commerce.product.model.CPDefinition getCPDefinition()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
