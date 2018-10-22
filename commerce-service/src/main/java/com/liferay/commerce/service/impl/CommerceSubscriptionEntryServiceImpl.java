@@ -69,22 +69,6 @@ public class CommerceSubscriptionEntryServiceImpl
 	}
 
 	@Override
-	public BaseModelSearchResult<CommerceSubscriptionEntry>
-			getCommerceSubscriptionEntries(
-				long companyId, long groupId, Boolean active, String keywords,
-				int start, int end, Sort sort)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
-
-		return commerceSubscriptionEntryLocalService.
-			getCommerceSubscriptionEntries(
-				companyId, groupId, active, keywords, start, end, sort);
-	}
-
-	@Override
 	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
 			long groupId, long userId, int start, int end,
 			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
@@ -93,6 +77,23 @@ public class CommerceSubscriptionEntryServiceImpl
 		return commerceSubscriptionEntryLocalService.
 			getCommerceSubscriptionEntries(
 				groupId, userId, start, end, orderByComparator);
+	}
+
+	@Override
+	public BaseModelSearchResult<CommerceSubscriptionEntry>
+			getCommerceSubscriptionEntries(
+				long companyId, long groupId, Long maxSubscriptionCyclesNumber,
+				Boolean active, String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
+
+		return commerceSubscriptionEntryLocalService.
+			getCommerceSubscriptionEntries(
+				companyId, groupId, maxSubscriptionCyclesNumber, active,
+				keywords, start, end, sort);
 	}
 
 	@Override
