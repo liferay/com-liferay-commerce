@@ -240,6 +240,12 @@ public class CommerceSubscriptionCycleEntryLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
+		long commerceSubscriptionEntryId) {
+		return _commerceSubscriptionCycleEntryLocalService.getCommerceSubscriptionCycleEntries(commerceSubscriptionEntryId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
 		long commerceSubscriptionEntryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> orderByComparator) {
 		return _commerceSubscriptionCycleEntryLocalService.getCommerceSubscriptionCycleEntries(commerceSubscriptionEntryId,
