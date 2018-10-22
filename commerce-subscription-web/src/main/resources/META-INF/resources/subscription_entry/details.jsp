@@ -71,7 +71,7 @@ boolean ending = maxSubscriptionCyclesNumber > 0;
 				<%
 				String cssClass = "never-ends-content hide";
 
-				if (maxSubscriptionCyclesNumber > 0) {
+				if (ending) {
 					cssClass = "never-ends-content";
 				}
 				%>
