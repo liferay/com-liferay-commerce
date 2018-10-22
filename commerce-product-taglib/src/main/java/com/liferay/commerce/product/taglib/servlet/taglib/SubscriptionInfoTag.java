@@ -37,8 +37,12 @@ public class SubscriptionInfoTag extends IncludeTag {
 	@Override
 	public int doStartTag() throws JspException {
 		try {
-			CPInstance cpInstance = CPInstanceServiceUtil.getCPInstance(
+			CPInstance cpInstance = CPInstanceServiceUtil.fetchCPInstance(
 				_cpInstanceId);
+
+			if (cpInstance == null) {
+				return SKIP_BODY;
+			}
 
 			CPSubscriptionInfo cpSubscriptionInfo =
 				cpInstance.getCPSubscriptionInfo();
