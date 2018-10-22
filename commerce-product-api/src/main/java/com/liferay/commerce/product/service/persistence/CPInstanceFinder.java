@@ -16,30 +16,28 @@ package com.liferay.commerce.product.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import java.util.List;
-
 /**
  * @author Marco Leo
  * @generated
  */
 @ProviderType
 public interface CPInstanceFinder {
-	public int countByC_NotCST_NotST(
-		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus);
+	public int countByC_NotCST_NotST(long cpDefinitionId,
+		int cpDefinitionStatus, int cpInstanceStatus);
 
-	public int countByC_NotCST_ST(
-		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus);
+	public int countByC_NotCST_ST(long cpDefinitionId, int cpDefinitionStatus,
+		int cpInstanceStatus);
 
 	public java.util.List<com.liferay.commerce.product.model.CPInstance> findByExpirationDate(
 		java.util.Date expirationDate,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.product.model.CPInstance> queryDefinition);
 
-	public List<com.liferay.commerce.product.model.CPInstance> findByC_NotCST_NotST(
+	public java.util.List<com.liferay.commerce.product.model.CPInstance> findByC_NotCST_NotST(
 		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPInstance> orderByComparator);
 
-	public List<com.liferay.commerce.product.model.CPInstance> findByC_NotCST_ST(
+	public java.util.List<com.liferay.commerce.product.model.CPInstance> findByC_NotCST_ST(
 		long cpDefinitionId, int cpDefinitionStatus, int cpInstanceStatus,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPInstance> orderByComparator);

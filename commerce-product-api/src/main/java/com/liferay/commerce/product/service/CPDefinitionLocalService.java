@@ -133,10 +133,29 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		String defaultSku, boolean subscriptionEnabled,
+		long subscriptionCycleLength, String subscriptionCyclePeriod,
+		long maxSubscriptionCyclesNumber, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CPDefinition addCPDefinition(Map<Locale, String> nameMap,
+		Map<Locale, String> shortDescriptionMap,
+		Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
+		Map<Locale, String> metaTitleMap,
+		Map<Locale, String> metaDescriptionMap,
+		Map<Locale, String> metaKeywordsMap, String productTypeName,
+		boolean ignoreSKUCombinations, boolean shippable, boolean freeShipping,
+		boolean shipSeparately, double shippingExtraPrice, double width,
+		double height, double depth, double weight, long cpTaxCategoryId,
+		boolean taxExempt, boolean telcoOrElectronics, String ddmStructureKey,
+		boolean published, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		String defaultSku, ServiceContext serviceContext)
 		throws PortalException;
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CPDefinition addCPDefinition(Map<Locale, String> nameMap,
 		Map<Locale, String> shortDescriptionMap,
 		Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
@@ -214,6 +233,7 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public DynamicQuery dynamicQuery();
 
 	/**
@@ -222,6 +242,7 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
 
 	/**
@@ -236,6 +257,7 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end);
 
@@ -252,6 +274,7 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
 
@@ -261,6 +284,7 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	* @param dynamicQuery the dynamic query
 	* @return the number of rows matching the dynamic query
 	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long dynamicQueryCount(DynamicQuery dynamicQuery);
 
 	/**
@@ -270,6 +294,7 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	* @param projection the projection to apply to the query
 	* @return the number of rows matching the dynamic query
 	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
 
