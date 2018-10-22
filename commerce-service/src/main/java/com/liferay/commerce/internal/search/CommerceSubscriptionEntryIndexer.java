@@ -55,6 +55,9 @@ public class CommerceSubscriptionEntryIndexer
 
 	public static final String FIELD_CP_INSTANCE_ID = "CPInstanceId";
 
+	public static final String FIELD_MAX_SUBSCRIPTION_CYCLES_NUMBER =
+		"maxSubscriptionCyclesNumber";
+
 	public static final String FIELD_SKU = "sku";
 
 	@Override
@@ -72,6 +75,16 @@ public class CommerceSubscriptionEntryIndexer
 		if (active != null) {
 			contextBooleanFilter.addTerm(
 				FIELD_ACTIVE, String.valueOf(active), BooleanClauseOccur.MUST);
+		}
+
+		Long maxSubscriptionCyclesNumber = (Long)searchContext.getAttribute(
+			FIELD_MAX_SUBSCRIPTION_CYCLES_NUMBER);
+
+		if (maxSubscriptionCyclesNumber != null) {
+			contextBooleanFilter.addTerm(
+				FIELD_MAX_SUBSCRIPTION_CYCLES_NUMBER,
+				String.valueOf(maxSubscriptionCyclesNumber),
+				BooleanClauseOccur.MUST);
 		}
 	}
 
@@ -115,6 +128,9 @@ public class CommerceSubscriptionEntryIndexer
 		document.addKeyword(FIELD_ACTIVE, commerceSubscriptionEntry.isActive());
 		document.addNumber(
 			FIELD_CP_INSTANCE_ID, commerceSubscriptionEntry.getCPInstanceId());
+		document.addNumber(
+			FIELD_MAX_SUBSCRIPTION_CYCLES_NUMBER,
+			commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber());
 		document.addText(FIELD_SKU, commerceOrderItem.getSku());
 
 		if (_log.isDebugEnabled()) {
@@ -164,10 +180,10 @@ public class CommerceSubscriptionEntryIndexer
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		reindexCommerceCountries(companyId);
+		reindexCommerceSubscriptionEntries(companyId);
 	}
 
-	protected void reindexCommerceCountries(long companyId)
+	protected void reindexCommerceSubscriptionEntries(long companyId)
 		throws PortalException {
 
 		final IndexableActionableDynamicQuery indexableActionableDynamicQuery =
