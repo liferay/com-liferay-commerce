@@ -72,7 +72,9 @@
 		<field name="lastPublishDate" type="Date" />
 		<field name="subscriptionEnabled" type="boolean" />
 		<field name="subscriptionCycleLength" type="long" />
-		<field name="subscriptionCyclePeriod" type="String" />
+		<field name="subscriptionCyclePeriod" type="String">
+			<validator name="required" />
+		</field>
 		<field name="maxSubscriptionCyclesNumber" type="long" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
@@ -265,7 +267,9 @@
 		<field name="overrideSubscriptionInfo" type="boolean" />
 		<field name="subscriptionEnabled" type="boolean" />
 		<field name="subscriptionCycleLength" type="long" />
-		<field name="subscriptionCyclePeriod" type="String" />
+		<field name="subscriptionCyclePeriod" type="String">
+			<validator name="required" />
+		</field>
 		<field name="maxSubscriptionCyclesNumber" type="long" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
