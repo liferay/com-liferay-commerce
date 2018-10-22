@@ -283,16 +283,29 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 		CommerceDiscountValue discountValue = commerceProductPrice.getDiscountValue();
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
 		%>
 
 		<liferay-ui:search-container-column-text
 			name="price"
 		>
-			<div class="value-section">
-				<span class="commerce-value">
-					<%= unitPrice.format(locale) %>
-				</span>
-			</div>
+			<c:if test="<%= commerceProductPrice != null %>">
+				<div class="value-section">
+					<span class="commerce-value">
+						<%= unitPrice.format(locale) %>
+					</span>
+
+					<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">
+						<span class="commerce-subscription-info">
+							<liferay-commerce-product:subscription-info
+								CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+								showDuration="<%= false %>"
+							/>
+						</span>
+					</c:if>
+				</div>
+			</c:if>
 		</liferay-ui:search-container-column-text>
 
 		<%
