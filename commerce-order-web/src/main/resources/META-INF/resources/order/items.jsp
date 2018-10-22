@@ -117,14 +117,36 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 			/>
 
 			<%
-			CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
+			CommerceProductPrice commerceProductPrice = commerceOrderEditDisplayContext.getCommerceProductPrice(commerceOrderItem);
+			CPInstance cpInstance = commerceOrderItem.getCPInstance();
 			%>
 
 			<liferay-ui:search-container-column-text
 				cssClass="table-cell-content"
 				name="price"
-				value="<%= finalPriceMoney.format(locale) %>"
-			/>
+			>
+				<c:if test="<%= commerceProductPrice != null %>">
+
+					<%
+					CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+					%>
+
+					<div class="value-section">
+						<span class="commerce-value">
+							<%= unitPrice.format(locale) %>
+						</span>
+
+						<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">
+							<span class="commerce-subscription-info">
+								<liferay-commerce-product:subscription-info
+									CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+									showDuration="<%= false %>"
+								/>
+							</span>
+						</c:if>
+					</div>
+				</c:if>
+			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-jsp
 				cssClass="entry-action-column"
