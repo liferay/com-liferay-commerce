@@ -23,7 +23,7 @@
 
 			<execute function="Click" locator1="Button#PLUS" />
 
-			<execute function="AssertClick" locator1="MenuItem#ANY_MENU_ITEM" value1="${key_menuItem}">
+			<execute function="AssertClick" locator1="MenuItem#DROPDOWN_MENU_ITEM" value1="${key_menuItem}">
 				<var name="key_menuItem" value="Add SKU" />
 			</execute>
 
