@@ -2,7 +2,7 @@
 	<command name="addEntry">
 		<execute function="Click" locator1="Button#PLUS" />
 
-		<execute function="Click" locator1="MenuItem#ANY_MENU_ITEM" value1="${key_menuItem}">
+		<execute function="Click" locator1="MenuItem#DROPDOWN_MENU_ITEM" value1="${key_menuItem}">
 			<var name="key_menuItem" value="${productType}" />
 		</execute>
 
