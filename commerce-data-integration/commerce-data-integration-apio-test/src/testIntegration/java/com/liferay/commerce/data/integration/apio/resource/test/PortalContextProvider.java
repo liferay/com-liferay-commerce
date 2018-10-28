@@ -341,28 +341,28 @@ public abstract class PortalContextProvider {
 		);
 	}
 
-	protected static final String ERROR_UTIL_FQN =
+	protected static final String ERROR_UTIL_FCQN =
 		"com.liferay.apio.architect.impl.internal.jaxrs.json.util.ErrorUtil";
 
 	@Inject
-	protected CompanyLocalService companyLocalService;
+	protected static CompanyLocalService companyLocalService;
 
 	@Inject
-	protected EROrganizationLocalService erOrganizationLocalService;
+	protected static EROrganizationLocalService erOrganizationLocalService;
 
 	@Inject
-	protected GroupLocalService groupLocalService;
+	protected static GroupLocalService groupLocalService;
+
+	@Inject
+	protected static OrganizationLocalService organizationLocalService;
+
+	@Inject
+	protected static RoleLocalService roleLocalService;
+
+	@Inject
+	protected static UserLocalService userLocalService;
 
 	protected final ObjectMapper objectMapper = new ObjectMapper();
-
-	@Inject
-	protected OrganizationLocalService organizationLocalService;
-
-	@Inject
-	protected RoleLocalService roleLocalService;
-
-	@Inject
-	protected UserLocalService userLocalService;
 
 	private static final String _ROOT_END_POINT_SUFFIX = "/o/api";
 

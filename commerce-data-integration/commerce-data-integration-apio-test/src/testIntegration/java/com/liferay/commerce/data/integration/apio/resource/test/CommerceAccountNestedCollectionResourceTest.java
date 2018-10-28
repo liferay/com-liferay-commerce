@@ -150,7 +150,8 @@ public class CommerceAccountNestedCollectionResourceTest
 			commerceAccountApioResourceCollection.getIdJsonNode();
 
 		try (CaptureHandler captureHandler =
-				JDKLoggerTestUtil.configureJDKLogger(ERROR_UTIL_FQN, Level.OFF);
+				JDKLoggerTestUtil.configureJDKLogger(
+					ERROR_UTIL_FCQN, Level.OFF);
 			RESTClient restClient = new RESTClient()) {
 
 			restClient.executePostRequest(
