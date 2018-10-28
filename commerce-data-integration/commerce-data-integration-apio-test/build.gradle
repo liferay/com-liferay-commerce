@@ -16,7 +16,11 @@ dependencies {
 
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.10"
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.external.reference.api", version: "1.0.0"
+	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "1.0.0"
+	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
 	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.organization.api", version: "1.0.0"
+	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "1.0.0"
+	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "1.0.0"
 	testIntegrationCompile group: "junit", name: "junit", version: "4.12"
 	testIntegrationCompile project(":apps:commerce:commerce-data-integration:commerce-data-integration-apio-api")
 	testIntegrationCompile project(":apps:commerce:commerce-organization-test-util")
