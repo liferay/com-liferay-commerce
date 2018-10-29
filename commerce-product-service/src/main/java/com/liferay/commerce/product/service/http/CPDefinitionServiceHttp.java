@@ -838,8 +838,10 @@ public class CPDefinitionServiceHttp {
 
 	public static com.liferay.commerce.product.model.CPDefinition updateSubscriptionInfo(
 		HttpPrincipal httpPrincipal, long cpDefinitionId,
-		boolean subscriptionEnabled, long subscriptionCycleLength,
-		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		boolean subscriptionEnabled, int subscriptionLength,
+		String subscriptionType,
+		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
+		long maxSubscriptionCycles,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -848,9 +850,9 @@ public class CPDefinitionServiceHttp {
 					_updateSubscriptionInfoParameterTypes22);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId, subscriptionEnabled,
-					subscriptionCycleLength, subscriptionCyclePeriod,
-					maxSubscriptionCyclesNumber, serviceContext);
+					cpDefinitionId, subscriptionEnabled, subscriptionLength,
+					subscriptionType, subscriptionTypeSettingsProperties,
+					maxSubscriptionCycles, serviceContext);
 
 			Object returnObj = null;
 
@@ -1062,7 +1064,8 @@ public class CPDefinitionServiceHttp {
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateSubscriptionInfoParameterTypes22 = new Class[] {
-			long.class, boolean.class, long.class, String.class, long.class,
+			long.class, boolean.class, int.class, String.class,
+			com.liferay.portal.kernel.util.UnicodeProperties.class, long.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateTaxCategoryInfoParameterTypes23 = new Class[] {

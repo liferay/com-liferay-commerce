@@ -113,9 +113,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			{ "expirationDate", Types.TIMESTAMP },
 			{ "lastPublishDate", Types.TIMESTAMP },
 			{ "subscriptionEnabled", Types.BOOLEAN },
-			{ "subscriptionCycleLength", Types.BIGINT },
-			{ "subscriptionCyclePeriod", Types.VARCHAR },
-			{ "maxSubscriptionCyclesNumber", Types.BIGINT },
+			{ "subscriptionLength", Types.INTEGER },
+			{ "subscriptionType", Types.VARCHAR },
+			{ "subscriptionTypeSettings", Types.CLOB },
+			{ "maxSubscriptionCycles", Types.BIGINT },
 			{ "status", Types.INTEGER },
 			{ "statusByUserId", Types.BIGINT },
 			{ "statusByUserName", Types.VARCHAR },
@@ -154,16 +155,17 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		TABLE_COLUMNS_MAP.put("expirationDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("subscriptionEnabled", Types.BOOLEAN);
-		TABLE_COLUMNS_MAP.put("subscriptionCycleLength", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("subscriptionCyclePeriod", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("maxSubscriptionCyclesNumber", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("subscriptionLength", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("subscriptionType", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("subscriptionTypeSettings", Types.CLOB);
+		TABLE_COLUMNS_MAP.put("maxSubscriptionCycles", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("statusByUserName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPDefinition (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,defaultLanguageId VARCHAR(75) null,CPDefinitionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productTypeName VARCHAR(75) null,availableIndividually BOOLEAN,ignoreSKUCombinations BOOLEAN,shippable BOOLEAN,freeShipping BOOLEAN,shipSeparately BOOLEAN,shippingExtraPrice DOUBLE,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,CPTaxCategoryId LONG,taxExempt BOOLEAN,telcoOrElectronics BOOLEAN,DDMStructureKey VARCHAR(75) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,subscriptionEnabled BOOLEAN,subscriptionCycleLength LONG,subscriptionCyclePeriod VARCHAR(75) null,maxSubscriptionCyclesNumber LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPDefinition (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,defaultLanguageId VARCHAR(75) null,CPDefinitionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productTypeName VARCHAR(75) null,availableIndividually BOOLEAN,ignoreSKUCombinations BOOLEAN,shippable BOOLEAN,freeShipping BOOLEAN,shipSeparately BOOLEAN,shippingExtraPrice DOUBLE,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,CPTaxCategoryId LONG,taxExempt BOOLEAN,telcoOrElectronics BOOLEAN,DDMStructureKey VARCHAR(75) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,subscriptionEnabled BOOLEAN,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPDefinition";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpDefinition.displayDate DESC, cpDefinition.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPDefinition.displayDate DESC, CPDefinition.createDate DESC";
@@ -231,9 +233,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		model.setExpirationDate(soapModel.getExpirationDate());
 		model.setLastPublishDate(soapModel.getLastPublishDate());
 		model.setSubscriptionEnabled(soapModel.isSubscriptionEnabled());
-		model.setSubscriptionCycleLength(soapModel.getSubscriptionCycleLength());
-		model.setSubscriptionCyclePeriod(soapModel.getSubscriptionCyclePeriod());
-		model.setMaxSubscriptionCyclesNumber(soapModel.getMaxSubscriptionCyclesNumber());
+		model.setSubscriptionLength(soapModel.getSubscriptionLength());
+		model.setSubscriptionType(soapModel.getSubscriptionType());
+		model.setSubscriptionTypeSettings(soapModel.getSubscriptionTypeSettings());
+		model.setMaxSubscriptionCycles(soapModel.getMaxSubscriptionCycles());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
@@ -332,10 +335,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
 		attributes.put("subscriptionEnabled", isSubscriptionEnabled());
-		attributes.put("subscriptionCycleLength", getSubscriptionCycleLength());
-		attributes.put("subscriptionCyclePeriod", getSubscriptionCyclePeriod());
-		attributes.put("maxSubscriptionCyclesNumber",
-			getMaxSubscriptionCyclesNumber());
+		attributes.put("subscriptionLength", getSubscriptionLength());
+		attributes.put("subscriptionType", getSubscriptionType());
+		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
+		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
@@ -534,25 +537,31 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			setSubscriptionEnabled(subscriptionEnabled);
 		}
 
-		Long subscriptionCycleLength = (Long)attributes.get(
-				"subscriptionCycleLength");
+		Integer subscriptionLength = (Integer)attributes.get(
+				"subscriptionLength");
 
-		if (subscriptionCycleLength != null) {
-			setSubscriptionCycleLength(subscriptionCycleLength);
+		if (subscriptionLength != null) {
+			setSubscriptionLength(subscriptionLength);
 		}
 
-		String subscriptionCyclePeriod = (String)attributes.get(
-				"subscriptionCyclePeriod");
+		String subscriptionType = (String)attributes.get("subscriptionType");
 
-		if (subscriptionCyclePeriod != null) {
-			setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+		if (subscriptionType != null) {
+			setSubscriptionType(subscriptionType);
 		}
 
-		Long maxSubscriptionCyclesNumber = (Long)attributes.get(
-				"maxSubscriptionCyclesNumber");
+		String subscriptionTypeSettings = (String)attributes.get(
+				"subscriptionTypeSettings");
 
-		if (maxSubscriptionCyclesNumber != null) {
-			setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
+		if (subscriptionTypeSettings != null) {
+			setSubscriptionTypeSettings(subscriptionTypeSettings);
+		}
+
+		Long maxSubscriptionCycles = (Long)attributes.get(
+				"maxSubscriptionCycles");
+
+		if (maxSubscriptionCycles != null) {
+			setMaxSubscriptionCycles(maxSubscriptionCycles);
 		}
 
 		Integer status = (Integer)attributes.get("status");
@@ -1429,40 +1438,56 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@JSON
 	@Override
-	public long getSubscriptionCycleLength() {
-		return _subscriptionCycleLength;
+	public int getSubscriptionLength() {
+		return _subscriptionLength;
 	}
 
 	@Override
-	public void setSubscriptionCycleLength(long subscriptionCycleLength) {
-		_subscriptionCycleLength = subscriptionCycleLength;
+	public void setSubscriptionLength(int subscriptionLength) {
+		_subscriptionLength = subscriptionLength;
 	}
 
 	@JSON
 	@Override
-	public String getSubscriptionCyclePeriod() {
-		if (_subscriptionCyclePeriod == null) {
+	public String getSubscriptionType() {
+		if (_subscriptionType == null) {
 			return "";
 		}
 		else {
-			return _subscriptionCyclePeriod;
+			return _subscriptionType;
 		}
 	}
 
 	@Override
-	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod) {
-		_subscriptionCyclePeriod = subscriptionCyclePeriod;
+	public void setSubscriptionType(String subscriptionType) {
+		_subscriptionType = subscriptionType;
 	}
 
 	@JSON
 	@Override
-	public long getMaxSubscriptionCyclesNumber() {
-		return _maxSubscriptionCyclesNumber;
+	public String getSubscriptionTypeSettings() {
+		if (_subscriptionTypeSettings == null) {
+			return "";
+		}
+		else {
+			return _subscriptionTypeSettings;
+		}
 	}
 
 	@Override
-	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber) {
-		_maxSubscriptionCyclesNumber = maxSubscriptionCyclesNumber;
+	public void setSubscriptionTypeSettings(String subscriptionTypeSettings) {
+		_subscriptionTypeSettings = subscriptionTypeSettings;
+	}
+
+	@JSON
+	@Override
+	public long getMaxSubscriptionCycles() {
+		return _maxSubscriptionCycles;
+	}
+
+	@Override
+	public void setMaxSubscriptionCycles(long maxSubscriptionCycles) {
+		_maxSubscriptionCycles = maxSubscriptionCycles;
 	}
 
 	@JSON
@@ -1820,9 +1845,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		cpDefinitionImpl.setExpirationDate(getExpirationDate());
 		cpDefinitionImpl.setLastPublishDate(getLastPublishDate());
 		cpDefinitionImpl.setSubscriptionEnabled(isSubscriptionEnabled());
-		cpDefinitionImpl.setSubscriptionCycleLength(getSubscriptionCycleLength());
-		cpDefinitionImpl.setSubscriptionCyclePeriod(getSubscriptionCyclePeriod());
-		cpDefinitionImpl.setMaxSubscriptionCyclesNumber(getMaxSubscriptionCyclesNumber());
+		cpDefinitionImpl.setSubscriptionLength(getSubscriptionLength());
+		cpDefinitionImpl.setSubscriptionType(getSubscriptionType());
+		cpDefinitionImpl.setSubscriptionTypeSettings(getSubscriptionTypeSettings());
+		cpDefinitionImpl.setMaxSubscriptionCycles(getMaxSubscriptionCycles());
 		cpDefinitionImpl.setStatus(getStatus());
 		cpDefinitionImpl.setStatusByUserId(getStatusByUserId());
 		cpDefinitionImpl.setStatusByUserName(getStatusByUserName());
@@ -2061,18 +2087,26 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 		cpDefinitionCacheModel.subscriptionEnabled = isSubscriptionEnabled();
 
-		cpDefinitionCacheModel.subscriptionCycleLength = getSubscriptionCycleLength();
+		cpDefinitionCacheModel.subscriptionLength = getSubscriptionLength();
 
-		cpDefinitionCacheModel.subscriptionCyclePeriod = getSubscriptionCyclePeriod();
+		cpDefinitionCacheModel.subscriptionType = getSubscriptionType();
 
-		String subscriptionCyclePeriod = cpDefinitionCacheModel.subscriptionCyclePeriod;
+		String subscriptionType = cpDefinitionCacheModel.subscriptionType;
 
-		if ((subscriptionCyclePeriod != null) &&
-				(subscriptionCyclePeriod.length() == 0)) {
-			cpDefinitionCacheModel.subscriptionCyclePeriod = null;
+		if ((subscriptionType != null) && (subscriptionType.length() == 0)) {
+			cpDefinitionCacheModel.subscriptionType = null;
 		}
 
-		cpDefinitionCacheModel.maxSubscriptionCyclesNumber = getMaxSubscriptionCyclesNumber();
+		cpDefinitionCacheModel.subscriptionTypeSettings = getSubscriptionTypeSettings();
+
+		String subscriptionTypeSettings = cpDefinitionCacheModel.subscriptionTypeSettings;
+
+		if ((subscriptionTypeSettings != null) &&
+				(subscriptionTypeSettings.length() == 0)) {
+			cpDefinitionCacheModel.subscriptionTypeSettings = null;
+		}
+
+		cpDefinitionCacheModel.maxSubscriptionCycles = getMaxSubscriptionCycles();
 
 		cpDefinitionCacheModel.status = getStatus();
 
@@ -2100,7 +2134,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(75);
+		StringBundler sb = new StringBundler(77);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -2162,12 +2196,14 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		sb.append(getLastPublishDate());
 		sb.append(", subscriptionEnabled=");
 		sb.append(isSubscriptionEnabled());
-		sb.append(", subscriptionCycleLength=");
-		sb.append(getSubscriptionCycleLength());
-		sb.append(", subscriptionCyclePeriod=");
-		sb.append(getSubscriptionCyclePeriod());
-		sb.append(", maxSubscriptionCyclesNumber=");
-		sb.append(getMaxSubscriptionCyclesNumber());
+		sb.append(", subscriptionLength=");
+		sb.append(getSubscriptionLength());
+		sb.append(", subscriptionType=");
+		sb.append(getSubscriptionType());
+		sb.append(", subscriptionTypeSettings=");
+		sb.append(getSubscriptionTypeSettings());
+		sb.append(", maxSubscriptionCycles=");
+		sb.append(getMaxSubscriptionCycles());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", statusByUserId=");
@@ -2183,7 +2219,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(115);
+		StringBundler sb = new StringBundler(118);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPDefinition");
@@ -2310,16 +2346,20 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		sb.append(isSubscriptionEnabled());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>subscriptionCycleLength</column-name><column-value><![CDATA[");
-		sb.append(getSubscriptionCycleLength());
+			"<column><column-name>subscriptionLength</column-name><column-value><![CDATA[");
+		sb.append(getSubscriptionLength());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>subscriptionCyclePeriod</column-name><column-value><![CDATA[");
-		sb.append(getSubscriptionCyclePeriod());
+			"<column><column-name>subscriptionType</column-name><column-value><![CDATA[");
+		sb.append(getSubscriptionType());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>maxSubscriptionCyclesNumber</column-name><column-value><![CDATA[");
-		sb.append(getMaxSubscriptionCyclesNumber());
+			"<column><column-name>subscriptionTypeSettings</column-name><column-value><![CDATA[");
+		sb.append(getSubscriptionTypeSettings());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>maxSubscriptionCycles</column-name><column-value><![CDATA[");
+		sb.append(getMaxSubscriptionCycles());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
@@ -2387,9 +2427,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 	private Date _expirationDate;
 	private Date _lastPublishDate;
 	private boolean _subscriptionEnabled;
-	private long _subscriptionCycleLength;
-	private String _subscriptionCyclePeriod;
-	private long _maxSubscriptionCyclesNumber;
+	private int _subscriptionLength;
+	private String _subscriptionType;
+	private String _subscriptionTypeSettings;
+	private long _maxSubscriptionCycles;
 	private int _status;
 	private int _originalStatus;
 	private boolean _setOriginalStatus;

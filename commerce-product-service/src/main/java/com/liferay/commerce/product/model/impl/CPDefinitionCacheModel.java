@@ -65,7 +65,7 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(75);
+		StringBundler sb = new StringBundler(77);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -127,12 +127,14 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		sb.append(lastPublishDate);
 		sb.append(", subscriptionEnabled=");
 		sb.append(subscriptionEnabled);
-		sb.append(", subscriptionCycleLength=");
-		sb.append(subscriptionCycleLength);
-		sb.append(", subscriptionCyclePeriod=");
-		sb.append(subscriptionCyclePeriod);
-		sb.append(", maxSubscriptionCyclesNumber=");
-		sb.append(maxSubscriptionCyclesNumber);
+		sb.append(", subscriptionLength=");
+		sb.append(subscriptionLength);
+		sb.append(", subscriptionType=");
+		sb.append(subscriptionType);
+		sb.append(", subscriptionTypeSettings=");
+		sb.append(subscriptionTypeSettings);
+		sb.append(", maxSubscriptionCycles=");
+		sb.append(maxSubscriptionCycles);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", statusByUserId=");
@@ -249,16 +251,23 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		}
 
 		cpDefinitionImpl.setSubscriptionEnabled(subscriptionEnabled);
-		cpDefinitionImpl.setSubscriptionCycleLength(subscriptionCycleLength);
+		cpDefinitionImpl.setSubscriptionLength(subscriptionLength);
 
-		if (subscriptionCyclePeriod == null) {
-			cpDefinitionImpl.setSubscriptionCyclePeriod("");
+		if (subscriptionType == null) {
+			cpDefinitionImpl.setSubscriptionType("");
 		}
 		else {
-			cpDefinitionImpl.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+			cpDefinitionImpl.setSubscriptionType(subscriptionType);
 		}
 
-		cpDefinitionImpl.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
+		if (subscriptionTypeSettings == null) {
+			cpDefinitionImpl.setSubscriptionTypeSettings("");
+		}
+		else {
+			cpDefinitionImpl.setSubscriptionTypeSettings(subscriptionTypeSettings);
+		}
+
+		cpDefinitionImpl.setMaxSubscriptionCycles(maxSubscriptionCycles);
 		cpDefinitionImpl.setStatus(status);
 		cpDefinitionImpl.setStatusByUserId(statusByUserId);
 
@@ -333,10 +342,11 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 
 		subscriptionEnabled = objectInput.readBoolean();
 
-		subscriptionCycleLength = objectInput.readLong();
-		subscriptionCyclePeriod = objectInput.readUTF();
+		subscriptionLength = objectInput.readInt();
+		subscriptionType = objectInput.readUTF();
+		subscriptionTypeSettings = objectInput.readUTF();
 
-		maxSubscriptionCyclesNumber = objectInput.readLong();
+		maxSubscriptionCycles = objectInput.readLong();
 
 		status = objectInput.readInt();
 
@@ -434,16 +444,23 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 
 		objectOutput.writeBoolean(subscriptionEnabled);
 
-		objectOutput.writeLong(subscriptionCycleLength);
+		objectOutput.writeInt(subscriptionLength);
 
-		if (subscriptionCyclePeriod == null) {
+		if (subscriptionType == null) {
 			objectOutput.writeUTF("");
 		}
 		else {
-			objectOutput.writeUTF(subscriptionCyclePeriod);
+			objectOutput.writeUTF(subscriptionType);
 		}
 
-		objectOutput.writeLong(maxSubscriptionCyclesNumber);
+		if (subscriptionTypeSettings == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(subscriptionTypeSettings);
+		}
+
+		objectOutput.writeLong(maxSubscriptionCycles);
 
 		objectOutput.writeInt(status);
 
@@ -489,9 +506,10 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 	public long expirationDate;
 	public long lastPublishDate;
 	public boolean subscriptionEnabled;
-	public long subscriptionCycleLength;
-	public String subscriptionCyclePeriod;
-	public long maxSubscriptionCyclesNumber;
+	public int subscriptionLength;
+	public String subscriptionType;
+	public String subscriptionTypeSettings;
+	public long maxSubscriptionCycles;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;

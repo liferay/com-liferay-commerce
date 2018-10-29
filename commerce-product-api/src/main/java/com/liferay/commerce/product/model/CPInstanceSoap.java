@@ -64,9 +64,10 @@ public class CPInstanceSoap implements Serializable {
 		soapModel.setLastPublishDate(model.getLastPublishDate());
 		soapModel.setOverrideSubscriptionInfo(model.isOverrideSubscriptionInfo());
 		soapModel.setSubscriptionEnabled(model.isSubscriptionEnabled());
-		soapModel.setSubscriptionCycleLength(model.getSubscriptionCycleLength());
-		soapModel.setSubscriptionCyclePeriod(model.getSubscriptionCyclePeriod());
-		soapModel.setMaxSubscriptionCyclesNumber(model.getMaxSubscriptionCyclesNumber());
+		soapModel.setSubscriptionLength(model.getSubscriptionLength());
+		soapModel.setSubscriptionType(model.getSubscriptionType());
+		soapModel.setSubscriptionTypeSettings(model.getSubscriptionTypeSettings());
+		soapModel.setMaxSubscriptionCycles(model.getMaxSubscriptionCycles());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
@@ -363,28 +364,36 @@ public class CPInstanceSoap implements Serializable {
 		_subscriptionEnabled = subscriptionEnabled;
 	}
 
-	public long getSubscriptionCycleLength() {
-		return _subscriptionCycleLength;
+	public int getSubscriptionLength() {
+		return _subscriptionLength;
 	}
 
-	public void setSubscriptionCycleLength(long subscriptionCycleLength) {
-		_subscriptionCycleLength = subscriptionCycleLength;
+	public void setSubscriptionLength(int subscriptionLength) {
+		_subscriptionLength = subscriptionLength;
 	}
 
-	public String getSubscriptionCyclePeriod() {
-		return _subscriptionCyclePeriod;
+	public String getSubscriptionType() {
+		return _subscriptionType;
 	}
 
-	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod) {
-		_subscriptionCyclePeriod = subscriptionCyclePeriod;
+	public void setSubscriptionType(String subscriptionType) {
+		_subscriptionType = subscriptionType;
 	}
 
-	public long getMaxSubscriptionCyclesNumber() {
-		return _maxSubscriptionCyclesNumber;
+	public String getSubscriptionTypeSettings() {
+		return _subscriptionTypeSettings;
 	}
 
-	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber) {
-		_maxSubscriptionCyclesNumber = maxSubscriptionCyclesNumber;
+	public void setSubscriptionTypeSettings(String subscriptionTypeSettings) {
+		_subscriptionTypeSettings = subscriptionTypeSettings;
+	}
+
+	public long getMaxSubscriptionCycles() {
+		return _maxSubscriptionCycles;
+	}
+
+	public void setMaxSubscriptionCycles(long maxSubscriptionCycles) {
+		_maxSubscriptionCycles = maxSubscriptionCycles;
 	}
 
 	public int getStatus() {
@@ -447,9 +456,10 @@ public class CPInstanceSoap implements Serializable {
 	private Date _lastPublishDate;
 	private boolean _overrideSubscriptionInfo;
 	private boolean _subscriptionEnabled;
-	private long _subscriptionCycleLength;
-	private String _subscriptionCyclePeriod;
-	private long _maxSubscriptionCyclesNumber;
+	private int _subscriptionLength;
+	private String _subscriptionType;
+	private String _subscriptionTypeSettings;
+	private long _maxSubscriptionCycles;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;

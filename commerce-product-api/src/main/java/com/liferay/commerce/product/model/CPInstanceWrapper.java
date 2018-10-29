@@ -89,10 +89,10 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 		attributes.put("lastPublishDate", getLastPublishDate());
 		attributes.put("overrideSubscriptionInfo", isOverrideSubscriptionInfo());
 		attributes.put("subscriptionEnabled", isSubscriptionEnabled());
-		attributes.put("subscriptionCycleLength", getSubscriptionCycleLength());
-		attributes.put("subscriptionCyclePeriod", getSubscriptionCyclePeriod());
-		attributes.put("maxSubscriptionCyclesNumber",
-			getMaxSubscriptionCyclesNumber());
+		attributes.put("subscriptionLength", getSubscriptionLength());
+		attributes.put("subscriptionType", getSubscriptionType());
+		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
+		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
@@ -275,25 +275,31 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 			setSubscriptionEnabled(subscriptionEnabled);
 		}
 
-		Long subscriptionCycleLength = (Long)attributes.get(
-				"subscriptionCycleLength");
+		Integer subscriptionLength = (Integer)attributes.get(
+				"subscriptionLength");
 
-		if (subscriptionCycleLength != null) {
-			setSubscriptionCycleLength(subscriptionCycleLength);
+		if (subscriptionLength != null) {
+			setSubscriptionLength(subscriptionLength);
 		}
 
-		String subscriptionCyclePeriod = (String)attributes.get(
-				"subscriptionCyclePeriod");
+		String subscriptionType = (String)attributes.get("subscriptionType");
 
-		if (subscriptionCyclePeriod != null) {
-			setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+		if (subscriptionType != null) {
+			setSubscriptionType(subscriptionType);
 		}
 
-		Long maxSubscriptionCyclesNumber = (Long)attributes.get(
-				"maxSubscriptionCyclesNumber");
+		String subscriptionTypeSettings = (String)attributes.get(
+				"subscriptionTypeSettings");
 
-		if (maxSubscriptionCyclesNumber != null) {
-			setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
+		if (subscriptionTypeSettings != null) {
+			setSubscriptionTypeSettings(subscriptionTypeSettings);
+		}
+
+		Long maxSubscriptionCycles = (Long)attributes.get(
+				"maxSubscriptionCycles");
+
+		if (maxSubscriptionCycles != null) {
+			setMaxSubscriptionCycles(maxSubscriptionCycles);
 		}
 
 		Integer status = (Integer)attributes.get("status");
@@ -499,13 +505,13 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 	}
 
 	/**
-	* Returns the max subscription cycles number of this cp instance.
+	* Returns the max subscription cycles of this cp instance.
 	*
-	* @return the max subscription cycles number of this cp instance
+	* @return the max subscription cycles of this cp instance
 	*/
 	@Override
-	public long getMaxSubscriptionCyclesNumber() {
-		return _cpInstance.getMaxSubscriptionCyclesNumber();
+	public long getMaxSubscriptionCycles() {
+		return _cpInstance.getMaxSubscriptionCycles();
 	}
 
 	/**
@@ -644,26 +650,6 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 	}
 
 	/**
-	* Returns the subscription cycle length of this cp instance.
-	*
-	* @return the subscription cycle length of this cp instance
-	*/
-	@Override
-	public long getSubscriptionCycleLength() {
-		return _cpInstance.getSubscriptionCycleLength();
-	}
-
-	/**
-	* Returns the subscription cycle period of this cp instance.
-	*
-	* @return the subscription cycle period of this cp instance
-	*/
-	@Override
-	public String getSubscriptionCyclePeriod() {
-		return _cpInstance.getSubscriptionCyclePeriod();
-	}
-
-	/**
 	* Returns the subscription enabled of this cp instance.
 	*
 	* @return the subscription enabled of this cp instance
@@ -671,6 +657,41 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 	@Override
 	public boolean getSubscriptionEnabled() {
 		return _cpInstance.getSubscriptionEnabled();
+	}
+
+	/**
+	* Returns the subscription length of this cp instance.
+	*
+	* @return the subscription length of this cp instance
+	*/
+	@Override
+	public int getSubscriptionLength() {
+		return _cpInstance.getSubscriptionLength();
+	}
+
+	/**
+	* Returns the subscription type of this cp instance.
+	*
+	* @return the subscription type of this cp instance
+	*/
+	@Override
+	public String getSubscriptionType() {
+		return _cpInstance.getSubscriptionType();
+	}
+
+	/**
+	* Returns the subscription type settings of this cp instance.
+	*
+	* @return the subscription type settings of this cp instance
+	*/
+	@Override
+	public String getSubscriptionTypeSettings() {
+		return _cpInstance.getSubscriptionTypeSettings();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties() {
+		return _cpInstance.getSubscriptionTypeSettingsProperties();
 	}
 
 	/**
@@ -1113,13 +1134,13 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 	}
 
 	/**
-	* Sets the max subscription cycles number of this cp instance.
+	* Sets the max subscription cycles of this cp instance.
 	*
-	* @param maxSubscriptionCyclesNumber the max subscription cycles number of this cp instance
+	* @param maxSubscriptionCycles the max subscription cycles of this cp instance
 	*/
 	@Override
-	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber) {
-		_cpInstance.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
+	public void setMaxSubscriptionCycles(long maxSubscriptionCycles) {
+		_cpInstance.setMaxSubscriptionCycles(maxSubscriptionCycles);
 	}
 
 	/**
@@ -1263,26 +1284,6 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 	}
 
 	/**
-	* Sets the subscription cycle length of this cp instance.
-	*
-	* @param subscriptionCycleLength the subscription cycle length of this cp instance
-	*/
-	@Override
-	public void setSubscriptionCycleLength(long subscriptionCycleLength) {
-		_cpInstance.setSubscriptionCycleLength(subscriptionCycleLength);
-	}
-
-	/**
-	* Sets the subscription cycle period of this cp instance.
-	*
-	* @param subscriptionCyclePeriod the subscription cycle period of this cp instance
-	*/
-	@Override
-	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod) {
-		_cpInstance.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
-	}
-
-	/**
 	* Sets whether this cp instance is subscription enabled.
 	*
 	* @param subscriptionEnabled the subscription enabled of this cp instance
@@ -1290,6 +1291,42 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 	@Override
 	public void setSubscriptionEnabled(boolean subscriptionEnabled) {
 		_cpInstance.setSubscriptionEnabled(subscriptionEnabled);
+	}
+
+	/**
+	* Sets the subscription length of this cp instance.
+	*
+	* @param subscriptionLength the subscription length of this cp instance
+	*/
+	@Override
+	public void setSubscriptionLength(int subscriptionLength) {
+		_cpInstance.setSubscriptionLength(subscriptionLength);
+	}
+
+	/**
+	* Sets the subscription type of this cp instance.
+	*
+	* @param subscriptionType the subscription type of this cp instance
+	*/
+	@Override
+	public void setSubscriptionType(String subscriptionType) {
+		_cpInstance.setSubscriptionType(subscriptionType);
+	}
+
+	/**
+	* Sets the subscription type settings of this cp instance.
+	*
+	* @param subscriptionTypeSettings the subscription type settings of this cp instance
+	*/
+	@Override
+	public void setSubscriptionTypeSettings(String subscriptionTypeSettings) {
+		_cpInstance.setSubscriptionTypeSettings(subscriptionTypeSettings);
+	}
+
+	@Override
+	public void setSubscriptionTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties) {
+		_cpInstance.setSubscriptionTypeSettingsProperties(subscriptionTypeSettingsProperties);
 	}
 
 	/**

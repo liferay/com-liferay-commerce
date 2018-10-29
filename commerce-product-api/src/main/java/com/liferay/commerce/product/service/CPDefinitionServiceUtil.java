@@ -273,14 +273,16 @@ public class CPDefinitionServiceUtil {
 
 	public static com.liferay.commerce.product.model.CPDefinition updateSubscriptionInfo(
 		long cpDefinitionId, boolean subscriptionEnabled,
-		long subscriptionCycleLength, String subscriptionCyclePeriod,
-		long maxSubscriptionCyclesNumber,
+		int subscriptionLength, String subscriptionType,
+		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
+		long maxSubscriptionCycles,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateSubscriptionInfo(cpDefinitionId, subscriptionEnabled,
-			subscriptionCycleLength, subscriptionCyclePeriod,
-			maxSubscriptionCyclesNumber, serviceContext);
+			subscriptionLength, subscriptionType,
+			subscriptionTypeSettingsProperties, maxSubscriptionCycles,
+			serviceContext);
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinition updateTaxCategoryInfo(
