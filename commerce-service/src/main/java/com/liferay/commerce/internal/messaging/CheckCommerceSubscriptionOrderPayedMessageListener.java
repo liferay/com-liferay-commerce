@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.internal.messaging;
 
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.internal.configuration.subscription.CommerceSubscriptionConfiguration;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
@@ -120,7 +122,13 @@ public class CheckCommerceSubscriptionOrderPayedMessageListener
 				Calendar.MINUTE,
 				_commerceSubscriptionConfiguration.payedOrderInterval());
 
-			if (!(DateUtil.compareTo(calendar.getTime(), now) < 0)) {
+			CommerceOrder commerceOrder =
+				firstCommerceSubscriptionCycleEntry.getCommerceOrder();
+
+			if (!(commerceOrder.getPaymentStatus() ==
+					CommerceOrderConstants.PAYMENT_STATUS_PAID) &&
+				!(DateUtil.compareTo(calendar.getTime(), now) < 0)) {
+
 				_commerceSubscriptionEntryLocalService.setActive(
 					commerceSubscriptionEntry.getCommerceSubscriptionEntryId(),
 					false);
