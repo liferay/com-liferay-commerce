@@ -23,7 +23,6 @@ import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -34,7 +33,6 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
@@ -101,9 +99,6 @@ public class CPContentContributorRegistryImpl
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPContentContributorRegistryImpl.class);
-
-	@Reference
-	private Portal _portal;
 
 	private ServiceTrackerMap<String, ServiceWrapper<CPContentContributor>>
 		_serviceTrackerMap;
