@@ -105,6 +105,15 @@ public abstract class PortalContextProvider {
 	}
 
 	public ObjectNode constructExpectedObjectNode(
+			ApioResponse apioResponse, Method method,
+			Map<String, String> formProperties)
+		throws IOException {
+
+		return constructExpectedObjectNode(
+			apioResponse, method, null, null, formProperties);
+	}
+
+	public ObjectNode constructExpectedObjectNode(
 			ApioResponse apioResponse, Method method, String fieldName,
 			String fieldValue)
 		throws IOException {
