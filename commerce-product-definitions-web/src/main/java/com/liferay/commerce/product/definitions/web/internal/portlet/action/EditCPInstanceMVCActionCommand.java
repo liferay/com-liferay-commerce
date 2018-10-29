@@ -33,7 +33,9 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.math.BigDecimal;
@@ -292,24 +294,29 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 		throws PortalException {
 
 		long cpInstanceId = ParamUtil.getLong(actionRequest, "cpInstanceId");
+
 		boolean overrideSubscriptionInfo = ParamUtil.getBoolean(
 			actionRequest, "overrideSubscriptionInfo");
 		boolean subscriptionEnabled = ParamUtil.getBoolean(
 			actionRequest, "subscriptionEnabled");
-		long subscriptionCycleLength = ParamUtil.getLong(
-			actionRequest, "subscriptionCycleLength");
-		String subscriptionCyclePeriod = ParamUtil.getString(
-			actionRequest, "subscriptionCyclePeriod");
-		long maxSubscriptionCyclesNumber = ParamUtil.getLong(
-			actionRequest, "maxSubscriptionCyclesNumber");
+		int subscriptionLength = ParamUtil.getInteger(
+			actionRequest, "subscriptionLength");
+		String subscriptionType = ParamUtil.getString(
+			actionRequest, "subscriptionType");
+		UnicodeProperties subscriptionTypeSettingsProperties =
+			PropertiesParamUtil.getProperties(
+				actionRequest, "subscriptionTypeSettings--");
+		long maxSubscriptionCycles = ParamUtil.getLong(
+			actionRequest, "maxSubscriptionCycles");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CPInstance.class.getName(), actionRequest);
 
 		_cpInstanceService.updateSubscriptionInfo(
 			cpInstanceId, overrideSubscriptionInfo, subscriptionEnabled,
-			subscriptionCycleLength, subscriptionCyclePeriod,
-			maxSubscriptionCyclesNumber, serviceContext);
+			subscriptionLength, subscriptionType,
+			subscriptionTypeSettingsProperties, maxSubscriptionCycles,
+			serviceContext);
 	}
 
 	@Reference
