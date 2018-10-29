@@ -9,11 +9,14 @@ create table CommerceSubscriptionEntry (
 	modifiedDate DATE null,
 	CPInstanceId LONG,
 	commerceOrderItemId LONG,
-	subscriptionCycleLength LONG,
-	subscriptionCyclePeriod VARCHAR(75) null,
-	maxSubscriptionCyclesNumber LONG,
+	subscriptionLength INTEGER,
+	subscriptionType VARCHAR(75) null,
+	subscriptionTypeSettings TEXT null,
+	maxSubscriptionCycles LONG,
 	active_ BOOLEAN,
-	nextIterationDate DATE null
+	lastIterationDate DATE null,
+	nextIterationDate DATE null,
+	startDate DATE null
 );
 
 create index IX_68301629 on CommerceSubscriptionEntry (active_);
