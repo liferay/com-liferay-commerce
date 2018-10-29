@@ -100,12 +100,22 @@ public abstract class PortalContextProvider {
 			ApioResponse apioResponse, Method method)
 		throws IOException {
 
-		return constructExpectedObjectNode(apioResponse, method, null, null);
+		return constructExpectedObjectNode(
+			apioResponse, method, null, null, null);
 	}
 
 	public ObjectNode constructExpectedObjectNode(
 			ApioResponse apioResponse, Method method, String fieldName,
 			String fieldValue)
+		throws IOException {
+
+		return constructExpectedObjectNode(
+			apioResponse, method, fieldName, fieldValue, null);
+	}
+
+	public ObjectNode constructExpectedObjectNode(
+			ApioResponse apioResponse, Method method, String fieldName,
+			String fieldValue, Map<String, String> formProperties)
 		throws IOException {
 
 		Operation resourceOperation = ApioUtils.getResourceOperationByMethod(
@@ -137,15 +147,9 @@ public abstract class PortalContextProvider {
 			Collectors.toList()
 		).forEach(
 			property -> {
-				String actualFieldName = property.getName();
-
-				if ((fieldName != null) && fieldName.equals(actualFieldName)) {
-					expectedObjectNode.put(actualFieldName, fieldValue);
-				}
-				else {
-					expectedObjectNode.put(
-						actualFieldName, RandomTestUtil.randomString());
-				}
+				_constructProperties(
+					property, expectedObjectNode, formProperties, fieldName,
+					fieldValue);
 			}
 		);
 
@@ -389,6 +393,40 @@ public abstract class PortalContextProvider {
 	protected static UserLocalService userLocalService;
 
 	protected final ObjectMapper objectMapper = new ObjectMapper();
+
+	private void _addValues(
+		ObjectNode expectedObjectNode, String fieldName, String fieldValue,
+		String actualFieldName) {
+
+		if ((fieldName != null) && fieldName.equals(actualFieldName)) {
+			expectedObjectNode.put(actualFieldName, fieldValue);
+		}
+		else {
+			expectedObjectNode.put(
+				actualFieldName, RandomTestUtil.randomString());
+		}
+	}
+
+	private void _constructProperties(
+		Property property, ObjectNode expectedObjectNode,
+		Map<String, String> formProperties, String fieldName,
+		String fieldValue) {
+
+		String actualFieldName = property.getName();
+
+		if (formProperties != null) {
+			formProperties.forEach(
+				(mapFieldName, mapFieldValue) -> {
+					_addValues(
+						expectedObjectNode, mapFieldName, mapFieldValue,
+						actualFieldName);
+				});
+		}
+		else {
+			_addValues(
+				expectedObjectNode, fieldName, fieldValue, actualFieldName);
+		}
+	}
 
 	private static final String _ROOT_END_POINT_SUFFIX = "/o/api";
 
