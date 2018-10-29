@@ -36,6 +36,9 @@ import org.junit.runner.RunWith;
 public class CommercePriceListNestedCollectionResourceTest
 	extends PortalContextProvider {
 
+	public static final String COMMERCE_PRICE_LIST_RESOURCE_NAME =
+		"commercePriceLists";
+
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =

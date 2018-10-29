@@ -319,6 +319,32 @@ public abstract class PortalContextProvider {
 		return getPortalURL().concat(_ROOT_END_POINT_SUFFIX);
 	}
 
+	public ApioResourceCollection getSiteRelatedApioResourceCollection(
+			String resourceName, String webSiteName)
+		throws IOException {
+
+		Map.Entry<String, String> webSiteEntry = getWebSiteByName(webSiteName);
+
+		String siteIdURL = webSiteEntry.getKey();
+
+		String messageEntity = null;
+
+		try (RESTClient restClient = new RESTClient()) {
+			messageEntity = restClient.executeGetRequest(siteIdURL);
+
+			JsonNode webSiteJsonNode = objectMapper.readTree(messageEntity);
+
+			JsonNode resourceIdJsonNode = webSiteJsonNode.path(resourceName);
+
+			messageEntity = restClient.executeGetRequest(
+				resourceIdJsonNode.asText());
+		}
+
+		JsonNode resourceJsonNode = objectMapper.readTree(messageEntity);
+
+		return new ApioResourceCollection(resourceJsonNode);
+	}
+
 	public Map.Entry<String, String> getWebSiteByName(String siteName)
 		throws IOException {
 

@@ -50,7 +50,6 @@ import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.io.IOException;
 
-import java.util.Map;
 import java.util.logging.Level;
 
 import org.junit.After;
@@ -118,8 +117,8 @@ public class CommerceAccountNestedCollectionResourceTest
 	@Test
 	public void testAddAccountWithAPI() throws IOException, PortalException {
 		ApioResourceCollection commerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
-				_TEST_PARENT_ORGANIZATION_NAME);
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
 		int numberOfItems =
 			commerceAccountApioResourceCollection.getNumberOfItems();
@@ -127,8 +126,8 @@ public class CommerceAccountNestedCollectionResourceTest
 		_setupCommerceAccount();
 
 		ApioResourceCollection actualCommerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
-				_TEST_PARENT_ORGANIZATION_NAME);
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
 		int actualNumberOfItems =
 			actualCommerceAccountApioResourceCollection.getNumberOfItems();
@@ -140,7 +139,8 @@ public class CommerceAccountNestedCollectionResourceTest
 	@Test
 	public void testAddCollectionItem1() throws IOException {
 		ApioResourceCollection commerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME,
 				BasicEndToEndTest.DEFAULT_SITE_NAME);
 
 		ObjectNode expectedObjectNode = constructExpectedObjectNode(
@@ -172,7 +172,8 @@ public class CommerceAccountNestedCollectionResourceTest
 	@Test
 	public void testCollectionPostOperationPresent() throws IOException {
 		ApioResourceCollection commerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME,
 				BasicEndToEndTest.DEFAULT_SITE_NAME);
 
 		Operation resourceOperation = ApioUtils.getResourceOperationByMethod(
@@ -184,8 +185,8 @@ public class CommerceAccountNestedCollectionResourceTest
 	@Test
 	public void testDeleteCollectionItem() throws IOException, PortalException {
 		ApioResourceCollection commerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
-				_TEST_PARENT_ORGANIZATION_NAME);
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
 		int numberOfItems1 =
 			commerceAccountApioResourceCollection.getNumberOfItems();
@@ -193,8 +194,8 @@ public class CommerceAccountNestedCollectionResourceTest
 		String accountId = _addAccount(RandomTestUtil.randomString());
 
 		commerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
-				_TEST_PARENT_ORGANIZATION_NAME);
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
 		int numberOfItems2 =
 			commerceAccountApioResourceCollection.getNumberOfItems();
@@ -206,8 +207,8 @@ public class CommerceAccountNestedCollectionResourceTest
 		}
 
 		commerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
-				_TEST_PARENT_ORGANIZATION_NAME);
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
 		int numberOfItems3 =
 			commerceAccountApioResourceCollection.getNumberOfItems();
@@ -222,8 +223,8 @@ public class CommerceAccountNestedCollectionResourceTest
 		_addAccount(accountName);
 
 		ApioResourceCollection commerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
-				_TEST_PARENT_ORGANIZATION_NAME);
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
 		ApioSingleModel actualAccountApioSingleModel =
 			getResourceJsonNodeByField(
@@ -244,8 +245,8 @@ public class CommerceAccountNestedCollectionResourceTest
 		}
 
 		commerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
-				_TEST_PARENT_ORGANIZATION_NAME);
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
 		ApioSingleModel updatedAccountApioSingleModel =
 			getResourceJsonNodeByField(
@@ -264,8 +265,8 @@ public class CommerceAccountNestedCollectionResourceTest
 		throws IOException, PortalException {
 
 		ApioResourceCollection commerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
-				_TEST_PARENT_ORGANIZATION_NAME);
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
 		int numberOfItems =
 			commerceAccountApioResourceCollection.getNumberOfItems();
@@ -291,8 +292,8 @@ public class CommerceAccountNestedCollectionResourceTest
 		JsonNode apioSingleModelIdJsonNode = apioSingleModel.getIdJsonNode();
 
 		ApioResourceCollection actualCommerceAccountApioResourceCollection =
-			_getCommerceAccountApioResourceCollection(
-				_TEST_PARENT_ORGANIZATION_NAME);
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
 		int actualNumberOfItems =
 			actualCommerceAccountApioResourceCollection.getNumberOfItems();
@@ -300,33 +301,6 @@ public class CommerceAccountNestedCollectionResourceTest
 		Assert.assertThat(numberOfItems + 1, equalTo(actualNumberOfItems));
 
 		return apioSingleModelIdJsonNode.asText();
-	}
-
-	private ApioResourceCollection _getCommerceAccountApioResourceCollection(
-			String webSiteName)
-		throws IOException {
-
-		Map.Entry<String, String> webSiteEntry = getWebSiteByName(webSiteName);
-
-		String guestSiteIdURL = webSiteEntry.getKey();
-
-		String messageEntity = null;
-
-		try (RESTClient restClient = new RESTClient()) {
-			messageEntity = restClient.executeGetRequest(guestSiteIdURL);
-
-			JsonNode webSiteJsonNode = objectMapper.readTree(messageEntity);
-
-			JsonNode commerceAccountsIdJsonNode = webSiteJsonNode.path(
-				COMMERCE_ACCOUNT_RESOURCE_NAME);
-
-			messageEntity = restClient.executeGetRequest(
-				commerceAccountsIdJsonNode.asText());
-		}
-
-		JsonNode commerceAccountJsonNode = objectMapper.readTree(messageEntity);
-
-		return new ApioResourceCollection(commerceAccountJsonNode);
 	}
 
 	private Organization _setupCommerceAccount() throws PortalException {
