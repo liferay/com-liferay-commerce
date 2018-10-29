@@ -162,14 +162,13 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 												<%= unitPrice.format(locale) %>
 											</span>
 
-											<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">
-												<span class="commerce-subscription-info">
-													<liferay-commerce-product:subscription-info
-														CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
-														showDuration="<%= false %>"
-													/>
-												</span>
-											</c:if>
+											<span class="commerce-subscription-info">
+												<liferay-commerce:subscription-info
+													commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
+													CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+													showDuration="<%= false %>"
+												/>
+											</span>
 										</div>
 									</c:if>
 								</liferay-ui:search-container-column-text>
