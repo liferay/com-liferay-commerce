@@ -43,21 +43,4 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
-	<tag>
-		<name>subscription-info</name>
-		<tag-class>com.liferay.commerce.product.taglib.servlet.taglib.SubscriptionInfoTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>CPInstanceId</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>long</type>
-		</attribute>
-		<attribute>
-			<name>showDuration</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>boolean</type>
-		</attribute>
-	</tag>
 </taglib>
