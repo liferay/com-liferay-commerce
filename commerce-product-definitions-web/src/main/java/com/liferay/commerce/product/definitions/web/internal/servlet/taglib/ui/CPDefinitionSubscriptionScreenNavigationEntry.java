@@ -15,12 +15,14 @@
 package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.product.constants.CPConstants;
-import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionsDisplayContext;
+import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionSubscriptionInfoDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
+import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
@@ -107,14 +109,19 @@ public class CPDefinitionSubscriptionScreenNavigationEntry
 		throws IOException {
 
 		try {
-			CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
-				new CPDefinitionsDisplayContext(
-					_actionHelper, httpServletRequest, _cpDefinitionHelper,
-					_cpDefinitionModelResourcePermission, _cpDefinitionService,
-					_itemSelector, _portletResourcePermission);
+			CPDefinitionSubscriptionInfoDisplayContext
+				cpDefinitionSubscriptionInfoDisplayContext =
+					new CPDefinitionSubscriptionInfoDisplayContext(
+						_actionHelper, httpServletRequest, _cpDefinitionHelper,
+						_cpDefinitionModelResourcePermission,
+						_cpDefinitionService, _itemSelector,
+						_portletResourcePermission,
+						_cpSubscriptionTypeJSPContributorRegistry,
+						_cpSubscriptionTypeRegistry);
 
 			httpServletRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
+				WebKeys.PORTLET_DISPLAY_CONTEXT,
+				cpDefinitionSubscriptionInfoDisplayContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -142,6 +149,13 @@ public class CPDefinitionSubscriptionScreenNavigationEntry
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private CPSubscriptionTypeJSPContributorRegistry
+		_cpSubscriptionTypeJSPContributorRegistry;
+
+	@Reference
+	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 
 	@Reference
 	private ItemSelector _itemSelector;
