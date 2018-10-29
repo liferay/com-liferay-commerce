@@ -54,7 +54,7 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 				commerceOrder.getSiteGroupId(),
 				OrderPlacedCommerceNotificationTypeImpl.KEY, commerceOrder);
 
-			// Commerce product subscriptions
+			// Commerce subscriptions
 
 			_commerceSubscriptionEntryHelper.checkCommerceSubscriptions(
 				commerceOrder);
