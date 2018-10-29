@@ -14,13 +14,30 @@
 
 package com.liferay.commerce.data.integration.apio.resource.test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.apio.jsonld.representation.util.ApioResourceCollection;
+import com.liferay.commerce.apio.jsonld.representation.util.ApioSingleModel;
+import com.liferay.commerce.apio.jsonld.representation.util.constants.SchemaOrgConstants;
+import com.liferay.commerce.apio.jsonld.representation.util.operation.Method;
+import com.liferay.commerce.data.integration.apio.client.RESTClient;
 import com.liferay.commerce.data.integration.apio.resource.test.utils.CommerceTestSiteActivator;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+
+import java.io.IOException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -52,9 +69,68 @@ public class CommercePriceListNestedCollectionResourceTest
 	}
 
 	@Test
-	public void testA() {
-		Assert.assertTrue(true);
+	public void testAddCollectionItem() throws IOException, PortalException {
+		_addPriceList(RandomTestUtil.randomString());
 	}
+
+	private String _addPriceList(String name)
+		throws IOException, PortalException {
+
+		ApioResourceCollection commercePriceListApioResourceCollection =
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
+
+		int numberOfItems =
+			commercePriceListApioResourceCollection.getNumberOfItems();
+
+		Map<String, String> priceListPropertiesMap = new HashMap<>(
+			_propertiesMap);
+		_propertiesMap.put(SchemaOrgConstants.Property.NAME, name);
+
+		ObjectNode expectedObjectNode = constructExpectedObjectNode(
+			commercePriceListApioResourceCollection, Method.POST,
+			priceListPropertiesMap);
+
+		JsonNode commercePriceListIdJsonNode =
+			commercePriceListApioResourceCollection.getIdJsonNode();
+
+		String messageEntity = null;
+
+		try (RESTClient restClient = new RESTClient()) {
+			messageEntity = restClient.executePostRequest(
+				commercePriceListIdJsonNode.asText(), expectedObjectNode);
+		}
+
+		JsonNode jsonNode = objectMapper.readTree(messageEntity);
+
+		ApioSingleModel apioSingleModel = new ApioSingleModel(jsonNode);
+
+		JsonNode apioSingleModelIdJsonNode = apioSingleModel.getIdJsonNode();
+
+		ApioResourceCollection actualCommercePriceListApioResourceCollection =
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
+
+		int actualNumberOfItems =
+			actualCommercePriceListApioResourceCollection.getNumberOfItems();
+
+		Assert.assertThat(numberOfItems + 1, equalTo(actualNumberOfItems));
+
+		return apioSingleModelIdJsonNode.asText();
+	}
+
+	private static final Map<String, String> _propertiesMap =
+		new HashMap<String, String>() {
+			{
+				put(
+					SchemaOrgConstants.Property.NAME,
+					RandomTestUtil.randomString());
+				put("active", Boolean.TRUE.toString());
+				put("currency", "USD");
+				put("neverExpire", Boolean.TRUE.toString());
+				put("priority", "0.0");
+			}
+		};
 
 	@DeleteAfterTestRun
 	private Group _group;

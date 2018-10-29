@@ -100,31 +100,23 @@ public abstract class PortalContextProvider {
 			ApioResponse apioResponse, Method method)
 		throws IOException {
 
-		return constructExpectedObjectNode(
-			apioResponse, method, null, null, null);
+		return constructExpectedObjectNode(apioResponse, method, null);
 	}
 
+	/**
+	 * Constructs the expected JSON object which is needed for creating /
+	 * updating the resource.
+	 *
+	 * @param  apioResponse
+	 * @param  method POST, PUT
+	 * @param  formProperties To be able to specify data for the properties in
+	 *         the expected form
+	 * @return
+	 * @throws IOException
+	 */
 	public ObjectNode constructExpectedObjectNode(
 			ApioResponse apioResponse, Method method,
 			Map<String, String> formProperties)
-		throws IOException {
-
-		return constructExpectedObjectNode(
-			apioResponse, method, null, null, formProperties);
-	}
-
-	public ObjectNode constructExpectedObjectNode(
-			ApioResponse apioResponse, Method method, String fieldName,
-			String fieldValue)
-		throws IOException {
-
-		return constructExpectedObjectNode(
-			apioResponse, method, fieldName, fieldValue, null);
-	}
-
-	public ObjectNode constructExpectedObjectNode(
-			ApioResponse apioResponse, Method method, String fieldName,
-			String fieldValue, Map<String, String> formProperties)
 		throws IOException {
 
 		Operation resourceOperation = ApioUtils.getResourceOperationByMethod(
@@ -155,11 +147,8 @@ public abstract class PortalContextProvider {
 		).collect(
 			Collectors.toList()
 		).forEach(
-			property -> {
-				_constructProperties(
-					property, expectedObjectNode, formProperties, fieldName,
-					fieldValue);
-			}
+			property -> _constructProperties(
+				property, expectedObjectNode, formProperties)
 		);
 
 		return expectedObjectNode;
@@ -403,37 +392,40 @@ public abstract class PortalContextProvider {
 
 	protected final ObjectMapper objectMapper = new ObjectMapper();
 
-	private void _addValues(
-		ObjectNode expectedObjectNode, String fieldName, String fieldValue,
-		String actualFieldName) {
+	private void _addValue(
+		ObjectNode expectedObjectNode, String fieldName, String fieldValue) {
 
-		if ((fieldName != null) && fieldName.equals(actualFieldName)) {
-			expectedObjectNode.put(actualFieldName, fieldValue);
+		if (fieldValue != null) {
+			expectedObjectNode.put(fieldName, fieldValue);
 		}
 		else {
-			expectedObjectNode.put(
-				actualFieldName, RandomTestUtil.randomString());
+			expectedObjectNode.put(fieldName, RandomTestUtil.randomString());
 		}
 	}
 
 	private void _constructProperties(
 		Property property, ObjectNode expectedObjectNode,
-		Map<String, String> formProperties, String fieldName,
-		String fieldValue) {
+		Map<String, String> formProperties) {
 
 		String actualFieldName = property.getName();
 
 		if (formProperties != null) {
-			formProperties.forEach(
-				(mapFieldName, mapFieldValue) -> {
-					_addValues(
-						expectedObjectNode, mapFieldName, mapFieldValue,
-						actualFieldName);
-				});
+			String formValue = formProperties.get(actualFieldName);
+
+			if (formValue != null) {
+				_addValue(expectedObjectNode, actualFieldName, formValue);
+
+				return;
+			}
+
+			_addValue(
+				expectedObjectNode, actualFieldName,
+				RandomTestUtil.randomString());
 		}
 		else {
-			_addValues(
-				expectedObjectNode, fieldName, fieldValue, actualFieldName);
+			_addValue(
+				expectedObjectNode, actualFieldName,
+				RandomTestUtil.randomString());
 		}
 	}
 

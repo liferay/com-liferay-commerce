@@ -50,6 +50,8 @@ import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.io.IOException;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 import org.junit.After;
@@ -235,9 +237,15 @@ public class CommerceAccountNestedCollectionResourceTest
 		JsonNode actualAccountIdJsonNode =
 			actualAccountApioSingleModel.getIdJsonNode();
 
+		Map<String, String> accountPropertiesMap =
+			new HashMap<String, String>() {
+				{
+					put(SchemaOrgConstants.Property.NAME, newAccountName);
+				}
+			};
+
 		ObjectNode expectedObjectNode = constructExpectedObjectNode(
-			actualAccountApioSingleModel, Method.PUT,
-			SchemaOrgConstants.Property.NAME, newAccountName);
+			actualAccountApioSingleModel, Method.PUT, accountPropertiesMap);
 
 		try (RESTClient restClient = new RESTClient()) {
 			restClient.executePutRequest(
@@ -271,9 +279,16 @@ public class CommerceAccountNestedCollectionResourceTest
 		int numberOfItems =
 			commerceAccountApioResourceCollection.getNumberOfItems();
 
+		Map<String, String> accountPropertiesMap =
+			new HashMap<String, String>() {
+				{
+					put(SchemaOrgConstants.Property.NAME, name);
+				}
+			};
+
 		ObjectNode expectedObjectNode = constructExpectedObjectNode(
 			commerceAccountApioResourceCollection, Method.POST,
-			SchemaOrgConstants.Property.NAME, name);
+			accountPropertiesMap);
 
 		JsonNode commerceAccountIdJsonNode =
 			commerceAccountApioResourceCollection.getIdJsonNode();
