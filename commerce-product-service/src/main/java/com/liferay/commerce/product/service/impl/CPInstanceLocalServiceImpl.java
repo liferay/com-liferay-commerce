@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.service.impl;
 
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.exception.CPInstanceDisplayDateException;
 import com.liferay.commerce.product.exception.CPInstanceExpirationDateException;
 import com.liferay.commerce.product.exception.CPInstanceJsonException;
@@ -61,6 +60,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -122,9 +122,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, boolean overrideSubscriptionInfo,
-			boolean subscriptionEnabled, long subscriptionCycleLength,
-			String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-			ServiceContext serviceContext)
+			boolean subscriptionEnabled, int subscriptionLength,
+			String subscriptionType,
+			UnicodeProperties subscriptionTypeSettingsProperties,
+			long maxSubscriptionCycles, ServiceContext serviceContext)
 		throws PortalException {
 
 		// Commerce product instance
@@ -184,9 +185,11 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		cpInstance.setExpirationDate(expirationDate);
 		cpInstance.setOverrideSubscriptionInfo(overrideSubscriptionInfo);
 		cpInstance.setSubscriptionEnabled(subscriptionEnabled);
-		cpInstance.setSubscriptionCycleLength(subscriptionCycleLength);
-		cpInstance.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
-		cpInstance.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
+		cpInstance.setSubscriptionLength(subscriptionLength);
+		cpInstance.setSubscriptionType(subscriptionType);
+		cpInstance.setSubscriptionTypeSettingsProperties(
+			subscriptionTypeSettingsProperties);
+		cpInstance.setMaxSubscriptionCycles(maxSubscriptionCycles);
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
 			cpInstance.setStatus(WorkflowConstants.STATUS_DRAFT);
@@ -230,7 +233,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire, false, false,
-			0, CPConstants.SUBSCRIPTION_CYCLE_DAY, 0, serviceContext);
+			0, StringPool.BLANK, null, 0, serviceContext);
 	}
 
 	@Override
@@ -805,9 +808,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	@Override
 	public CPInstance updateSubscriptionInfo(
 			long cpInstanceId, boolean overrideSubscriptionInfo,
-			boolean subscriptionEnabled, long subscriptionCycleLength,
-			String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-			ServiceContext serviceContext)
+			boolean subscriptionEnabled, int subscriptionLength,
+			String subscriptionType,
+			UnicodeProperties subscriptionTypeSettingsProperties,
+			long maxSubscriptionCycles, ServiceContext serviceContext)
 		throws PortalException {
 
 		CPInstance cpInstance = cpInstancePersistence.findByPrimaryKey(
@@ -819,9 +823,11 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		cpInstance.setOverrideSubscriptionInfo(overrideSubscriptionInfo);
 		cpInstance.setSubscriptionEnabled(subscriptionEnabled);
-		cpInstance.setSubscriptionCycleLength(subscriptionCycleLength);
-		cpInstance.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
-		cpInstance.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
+		cpInstance.setSubscriptionLength(subscriptionLength);
+		cpInstance.setSubscriptionType(subscriptionType);
+		cpInstance.setSubscriptionTypeSettingsProperties(
+			subscriptionTypeSettingsProperties);
+		cpInstance.setMaxSubscriptionCycles(maxSubscriptionCycles);
 
 		return cpInstancePersistence.update(cpInstance);
 	}
