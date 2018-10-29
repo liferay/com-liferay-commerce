@@ -16,6 +16,8 @@ package com.liferay.commerce.subscription.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
+import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
 import com.liferay.commerce.subscription.web.internal.display.context.CommerceSubscriptionEntryDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
@@ -85,7 +87,9 @@ public class CommerceSubscriptionEntryDetailsScreenNavigationEntry
 		CommerceSubscriptionEntryDisplayContext
 			commerceSubscriptionEntryDisplayContext =
 				new CommerceSubscriptionEntryDisplayContext(
-					_commerceSubscriptionEntryService, httpServletRequest,
+					_commerceSubscriptionEntryService,
+					_cpSubscriptionTypeJSPContributorRegistry,
+					_cpSubscriptionTypeRegistry, httpServletRequest,
 					_portletResourcePermission);
 
 		httpServletRequest.setAttribute(
@@ -99,6 +103,13 @@ public class CommerceSubscriptionEntryDetailsScreenNavigationEntry
 
 	@Reference
 	private CommerceSubscriptionEntryService _commerceSubscriptionEntryService;
+
+	@Reference
+	private CPSubscriptionTypeJSPContributorRegistry
+		_cpSubscriptionTypeJSPContributorRegistry;
+
+	@Reference
+	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
