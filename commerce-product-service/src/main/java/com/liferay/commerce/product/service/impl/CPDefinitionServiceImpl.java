@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.security.permission.resource.PortletResourcePer
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.List;
 import java.util.Locale;
@@ -386,17 +387,18 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 	@Override
 	public CPDefinition updateSubscriptionInfo(
 			long cpDefinitionId, boolean subscriptionEnabled,
-			long subscriptionCycleLength, String subscriptionCyclePeriod,
-			long maxSubscriptionCyclesNumber, ServiceContext serviceContext)
+			int subscriptionLength, String subscriptionType,
+			UnicodeProperties subscriptionTypeSettingsProperties,
+			long maxSubscriptionCycles, ServiceContext serviceContext)
 		throws PortalException {
 
 		_cpDefinitionModelResourcePermission.check(
 			getPermissionChecker(), cpDefinitionId, ActionKeys.UPDATE);
 
 		return cpDefinitionLocalService.updateSubscriptionInfo(
-			cpDefinitionId, subscriptionEnabled, subscriptionCycleLength,
-			subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
-			serviceContext);
+			cpDefinitionId, subscriptionEnabled, subscriptionLength,
+			subscriptionType, subscriptionTypeSettingsProperties,
+			maxSubscriptionCycles, serviceContext);
 	}
 
 	@Override
