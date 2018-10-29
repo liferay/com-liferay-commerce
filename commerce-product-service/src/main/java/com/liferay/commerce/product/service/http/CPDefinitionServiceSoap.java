@@ -485,27 +485,6 @@ public class CPDefinitionServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPDefinitionSoap updateSubscriptionInfo(
-		long cpDefinitionId, boolean subscriptionEnabled,
-		long subscriptionCycleLength, String subscriptionCyclePeriod,
-		long maxSubscriptionCyclesNumber,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPDefinition returnValue = CPDefinitionServiceUtil.updateSubscriptionInfo(cpDefinitionId,
-					subscriptionEnabled, subscriptionCycleLength,
-					subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
-					serviceContext);
-
-			return com.liferay.commerce.product.model.CPDefinitionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.commerce.product.model.CPDefinitionSoap updateTaxCategoryInfo(
 		long cpDefinitionId, long cpTaxCategoryId, boolean taxExempt,
 		boolean telcoOrElectronics) throws RemoteException {

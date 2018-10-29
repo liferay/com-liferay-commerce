@@ -67,7 +67,7 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(71);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -125,12 +125,14 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		sb.append(overrideSubscriptionInfo);
 		sb.append(", subscriptionEnabled=");
 		sb.append(subscriptionEnabled);
-		sb.append(", subscriptionCycleLength=");
-		sb.append(subscriptionCycleLength);
-		sb.append(", subscriptionCyclePeriod=");
-		sb.append(subscriptionCyclePeriod);
-		sb.append(", maxSubscriptionCyclesNumber=");
-		sb.append(maxSubscriptionCyclesNumber);
+		sb.append(", subscriptionLength=");
+		sb.append(subscriptionLength);
+		sb.append(", subscriptionType=");
+		sb.append(subscriptionType);
+		sb.append(", subscriptionTypeSettings=");
+		sb.append(subscriptionTypeSettings);
+		sb.append(", maxSubscriptionCycles=");
+		sb.append(maxSubscriptionCycles);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", statusByUserId=");
@@ -252,16 +254,23 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 
 		cpInstanceImpl.setOverrideSubscriptionInfo(overrideSubscriptionInfo);
 		cpInstanceImpl.setSubscriptionEnabled(subscriptionEnabled);
-		cpInstanceImpl.setSubscriptionCycleLength(subscriptionCycleLength);
+		cpInstanceImpl.setSubscriptionLength(subscriptionLength);
 
-		if (subscriptionCyclePeriod == null) {
-			cpInstanceImpl.setSubscriptionCyclePeriod("");
+		if (subscriptionType == null) {
+			cpInstanceImpl.setSubscriptionType("");
 		}
 		else {
-			cpInstanceImpl.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+			cpInstanceImpl.setSubscriptionType(subscriptionType);
 		}
 
-		cpInstanceImpl.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
+		if (subscriptionTypeSettings == null) {
+			cpInstanceImpl.setSubscriptionTypeSettings("");
+		}
+		else {
+			cpInstanceImpl.setSubscriptionTypeSettings(subscriptionTypeSettings);
+		}
+
+		cpInstanceImpl.setMaxSubscriptionCycles(maxSubscriptionCycles);
 		cpInstanceImpl.setStatus(status);
 		cpInstanceImpl.setStatusByUserId(statusByUserId);
 
@@ -329,10 +338,11 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 
 		subscriptionEnabled = objectInput.readBoolean();
 
-		subscriptionCycleLength = objectInput.readLong();
-		subscriptionCyclePeriod = objectInput.readUTF();
+		subscriptionLength = objectInput.readInt();
+		subscriptionType = objectInput.readUTF();
+		subscriptionTypeSettings = objectInput.readUTF();
 
-		maxSubscriptionCyclesNumber = objectInput.readLong();
+		maxSubscriptionCycles = objectInput.readLong();
 
 		status = objectInput.readInt();
 
@@ -428,16 +438,23 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 
 		objectOutput.writeBoolean(subscriptionEnabled);
 
-		objectOutput.writeLong(subscriptionCycleLength);
+		objectOutput.writeInt(subscriptionLength);
 
-		if (subscriptionCyclePeriod == null) {
+		if (subscriptionType == null) {
 			objectOutput.writeUTF("");
 		}
 		else {
-			objectOutput.writeUTF(subscriptionCyclePeriod);
+			objectOutput.writeUTF(subscriptionType);
 		}
 
-		objectOutput.writeLong(maxSubscriptionCyclesNumber);
+		if (subscriptionTypeSettings == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(subscriptionTypeSettings);
+		}
+
+		objectOutput.writeLong(maxSubscriptionCycles);
 
 		objectOutput.writeInt(status);
 
@@ -481,9 +498,10 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 	public long lastPublishDate;
 	public boolean overrideSubscriptionInfo;
 	public boolean subscriptionEnabled;
-	public long subscriptionCycleLength;
-	public String subscriptionCyclePeriod;
-	public long maxSubscriptionCyclesNumber;
+	public int subscriptionLength;
+	public String subscriptionType;
+	public String subscriptionTypeSettings;
+	public long maxSubscriptionCycles;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;

@@ -591,47 +591,62 @@ public interface CPDefinitionModel extends BaseModel<CPDefinition>, ShardedModel
 	public void setSubscriptionEnabled(boolean subscriptionEnabled);
 
 	/**
-	 * Returns the subscription cycle length of this cp definition.
+	 * Returns the subscription length of this cp definition.
 	 *
-	 * @return the subscription cycle length of this cp definition
+	 * @return the subscription length of this cp definition
 	 */
-	public long getSubscriptionCycleLength();
+	public int getSubscriptionLength();
 
 	/**
-	 * Sets the subscription cycle length of this cp definition.
+	 * Sets the subscription length of this cp definition.
 	 *
-	 * @param subscriptionCycleLength the subscription cycle length of this cp definition
+	 * @param subscriptionLength the subscription length of this cp definition
 	 */
-	public void setSubscriptionCycleLength(long subscriptionCycleLength);
+	public void setSubscriptionLength(int subscriptionLength);
 
 	/**
-	 * Returns the subscription cycle period of this cp definition.
+	 * Returns the subscription type of this cp definition.
 	 *
-	 * @return the subscription cycle period of this cp definition
+	 * @return the subscription type of this cp definition
 	 */
 	@AutoEscape
-	public String getSubscriptionCyclePeriod();
+	public String getSubscriptionType();
 
 	/**
-	 * Sets the subscription cycle period of this cp definition.
+	 * Sets the subscription type of this cp definition.
 	 *
-	 * @param subscriptionCyclePeriod the subscription cycle period of this cp definition
+	 * @param subscriptionType the subscription type of this cp definition
 	 */
-	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod);
+	public void setSubscriptionType(String subscriptionType);
 
 	/**
-	 * Returns the max subscription cycles number of this cp definition.
+	 * Returns the subscription type settings of this cp definition.
 	 *
-	 * @return the max subscription cycles number of this cp definition
+	 * @return the subscription type settings of this cp definition
 	 */
-	public long getMaxSubscriptionCyclesNumber();
+	@AutoEscape
+	public String getSubscriptionTypeSettings();
 
 	/**
-	 * Sets the max subscription cycles number of this cp definition.
+	 * Sets the subscription type settings of this cp definition.
 	 *
-	 * @param maxSubscriptionCyclesNumber the max subscription cycles number of this cp definition
+	 * @param subscriptionTypeSettings the subscription type settings of this cp definition
 	 */
-	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber);
+	public void setSubscriptionTypeSettings(String subscriptionTypeSettings);
+
+	/**
+	 * Returns the max subscription cycles of this cp definition.
+	 *
+	 * @return the max subscription cycles of this cp definition
+	 */
+	public long getMaxSubscriptionCycles();
+
+	/**
+	 * Sets the max subscription cycles of this cp definition.
+	 *
+	 * @param maxSubscriptionCycles the max subscription cycles of this cp definition
+	 */
+	public void setMaxSubscriptionCycles(long maxSubscriptionCycles);
 
 	/**
 	 * Returns the status of this cp definition.

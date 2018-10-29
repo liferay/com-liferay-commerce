@@ -530,47 +530,62 @@ public interface CPInstanceModel extends BaseModel<CPInstance>, ShardedModel,
 	public void setSubscriptionEnabled(boolean subscriptionEnabled);
 
 	/**
-	 * Returns the subscription cycle length of this cp instance.
+	 * Returns the subscription length of this cp instance.
 	 *
-	 * @return the subscription cycle length of this cp instance
+	 * @return the subscription length of this cp instance
 	 */
-	public long getSubscriptionCycleLength();
+	public int getSubscriptionLength();
 
 	/**
-	 * Sets the subscription cycle length of this cp instance.
+	 * Sets the subscription length of this cp instance.
 	 *
-	 * @param subscriptionCycleLength the subscription cycle length of this cp instance
+	 * @param subscriptionLength the subscription length of this cp instance
 	 */
-	public void setSubscriptionCycleLength(long subscriptionCycleLength);
+	public void setSubscriptionLength(int subscriptionLength);
 
 	/**
-	 * Returns the subscription cycle period of this cp instance.
+	 * Returns the subscription type of this cp instance.
 	 *
-	 * @return the subscription cycle period of this cp instance
+	 * @return the subscription type of this cp instance
 	 */
 	@AutoEscape
-	public String getSubscriptionCyclePeriod();
+	public String getSubscriptionType();
 
 	/**
-	 * Sets the subscription cycle period of this cp instance.
+	 * Sets the subscription type of this cp instance.
 	 *
-	 * @param subscriptionCyclePeriod the subscription cycle period of this cp instance
+	 * @param subscriptionType the subscription type of this cp instance
 	 */
-	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod);
+	public void setSubscriptionType(String subscriptionType);
 
 	/**
-	 * Returns the max subscription cycles number of this cp instance.
+	 * Returns the subscription type settings of this cp instance.
 	 *
-	 * @return the max subscription cycles number of this cp instance
+	 * @return the subscription type settings of this cp instance
 	 */
-	public long getMaxSubscriptionCyclesNumber();
+	@AutoEscape
+	public String getSubscriptionTypeSettings();
 
 	/**
-	 * Sets the max subscription cycles number of this cp instance.
+	 * Sets the subscription type settings of this cp instance.
 	 *
-	 * @param maxSubscriptionCyclesNumber the max subscription cycles number of this cp instance
+	 * @param subscriptionTypeSettings the subscription type settings of this cp instance
 	 */
-	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber);
+	public void setSubscriptionTypeSettings(String subscriptionTypeSettings);
+
+	/**
+	 * Returns the max subscription cycles of this cp instance.
+	 *
+	 * @return the max subscription cycles of this cp instance
+	 */
+	public long getMaxSubscriptionCycles();
+
+	/**
+	 * Sets the max subscription cycles of this cp instance.
+	 *
+	 * @param maxSubscriptionCycles the max subscription cycles of this cp instance
+	 */
+	public void setMaxSubscriptionCycles(long maxSubscriptionCycles);
 
 	/**
 	 * Returns the status of this cp instance.

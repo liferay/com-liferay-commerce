@@ -179,15 +179,17 @@ public class CPInstanceServiceUtil {
 
 	public static com.liferay.commerce.product.model.CPInstance updateSubscriptionInfo(
 		long cpInstanceId, boolean overrideSubscriptionInfo,
-		boolean subscriptionEnabled, long subscriptionCycleLength,
-		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		boolean subscriptionEnabled, int subscriptionLength,
+		String subscriptionType,
+		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
+		long maxSubscriptionCycles,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateSubscriptionInfo(cpInstanceId,
-			overrideSubscriptionInfo, subscriptionEnabled,
-			subscriptionCycleLength, subscriptionCyclePeriod,
-			maxSubscriptionCyclesNumber, serviceContext);
+			overrideSubscriptionInfo, subscriptionEnabled, subscriptionLength,
+			subscriptionType, subscriptionTypeSettingsProperties,
+			maxSubscriptionCycles, serviceContext);
 	}
 
 	public static com.liferay.commerce.product.model.CPInstance upsertCPInstance(

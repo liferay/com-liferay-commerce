@@ -539,8 +539,9 @@ public class CPInstanceServiceHttp {
 	public static com.liferay.commerce.product.model.CPInstance updateSubscriptionInfo(
 		HttpPrincipal httpPrincipal, long cpInstanceId,
 		boolean overrideSubscriptionInfo, boolean subscriptionEnabled,
-		long subscriptionCycleLength, String subscriptionCyclePeriod,
-		long maxSubscriptionCyclesNumber,
+		int subscriptionLength, String subscriptionType,
+		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
+		long maxSubscriptionCycles,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -550,8 +551,8 @@ public class CPInstanceServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpInstanceId, overrideSubscriptionInfo,
-					subscriptionEnabled, subscriptionCycleLength,
-					subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
+					subscriptionEnabled, subscriptionLength, subscriptionType,
+					subscriptionTypeSettingsProperties, maxSubscriptionCycles,
 					serviceContext);
 
 			Object returnObj = null;
@@ -680,8 +681,9 @@ public class CPInstanceServiceHttp {
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateSubscriptionInfoParameterTypes14 = new Class[] {
-			long.class, boolean.class, boolean.class, long.class, String.class,
-			long.class, com.liferay.portal.kernel.service.ServiceContext.class
+			long.class, boolean.class, boolean.class, int.class, String.class,
+			com.liferay.portal.kernel.util.UnicodeProperties.class, long.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _upsertCPInstanceParameterTypes15 = new Class[] {
 			long.class, String.class, String.class, String.class, boolean.class,

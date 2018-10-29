@@ -274,27 +274,6 @@ public class CPInstanceServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPInstanceSoap updateSubscriptionInfo(
-		long cpInstanceId, boolean overrideSubscriptionInfo,
-		boolean subscriptionEnabled, long subscriptionCycleLength,
-		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPInstance returnValue = CPInstanceServiceUtil.updateSubscriptionInfo(cpInstanceId,
-					overrideSubscriptionInfo, subscriptionEnabled,
-					subscriptionCycleLength, subscriptionCyclePeriod,
-					maxSubscriptionCyclesNumber, serviceContext);
-
-			return com.liferay.commerce.product.model.CPInstanceSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.commerce.product.model.CPInstanceSoap upsertCPInstance(
 		long cpDefinitionId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,
