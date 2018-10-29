@@ -20,6 +20,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 /**
  * @author Marco Leo
@@ -42,21 +43,59 @@ public class CPInstanceImpl extends CPInstanceBaseImpl {
 	public CPSubscriptionInfo getCPSubscriptionInfo() throws PortalException {
 		if (isOverrideSubscriptionInfo() && isSubscriptionEnabled()) {
 			return new CPSubscriptionInfo(
-				getSubscriptionCycleLength(), getSubscriptionCyclePeriod(),
-				getMaxSubscriptionCyclesNumber());
+				getSubscriptionLength(), getSubscriptionType(),
+				getSubscriptionTypeSettingsProperties(),
+				getMaxSubscriptionCycles());
 		}
 		else if (!isOverrideSubscriptionInfo()) {
 			CPDefinition cpDefinition = getCPDefinition();
 
 			if (cpDefinition.isSubscriptionEnabled()) {
 				return new CPSubscriptionInfo(
-					cpDefinition.getSubscriptionCycleLength(),
-					cpDefinition.getSubscriptionCyclePeriod(),
-					cpDefinition.getMaxSubscriptionCyclesNumber());
+					cpDefinition.getSubscriptionLength(),
+					cpDefinition.getSubscriptionType(),
+					cpDefinition.getSubscriptionTypeSettingsProperties(),
+					cpDefinition.getMaxSubscriptionCycles());
 			}
 		}
 
 		return null;
 	}
+
+	@Override
+	public UnicodeProperties getSubscriptionTypeSettingsProperties() {
+		if (_subscriptionTypeSettingsProperties == null) {
+			_subscriptionTypeSettingsProperties = new UnicodeProperties(true);
+
+			_subscriptionTypeSettingsProperties.fastLoad(
+				getSubscriptionTypeSettings());
+		}
+
+		return _subscriptionTypeSettingsProperties;
+	}
+
+	@Override
+	public void setSubscriptionTypeSettings(String subscriptionTypeSettings) {
+		super.setSubscriptionTypeSettings(subscriptionTypeSettings);
+
+		_subscriptionTypeSettingsProperties = null;
+	}
+
+	@Override
+	public void setSubscriptionTypeSettingsProperties(
+		UnicodeProperties subscriptionTypeSettingsProperties) {
+
+		_subscriptionTypeSettingsProperties =
+			subscriptionTypeSettingsProperties;
+
+		if (_subscriptionTypeSettingsProperties == null) {
+			_subscriptionTypeSettingsProperties = new UnicodeProperties();
+		}
+
+		super.setSubscriptionTypeSettings(
+			_subscriptionTypeSettingsProperties.toString());
+	}
+
+	private UnicodeProperties _subscriptionTypeSettingsProperties;
 
 }
