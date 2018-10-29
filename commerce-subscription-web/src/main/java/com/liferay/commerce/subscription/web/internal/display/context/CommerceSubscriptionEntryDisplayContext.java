@@ -19,6 +19,10 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.product.util.CPSubscriptionType;
+import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributor;
+import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
+import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
 import com.liferay.commerce.subscription.web.internal.subscription.util.CommerceSubscriptionEntryPortletUtil;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
@@ -56,10 +60,16 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 	public CommerceSubscriptionEntryDisplayContext(
 		CommerceSubscriptionEntryService commerceSubscriptionEntryService,
+		CPSubscriptionTypeJSPContributorRegistry
+			cpSubscriptionTypeJSPContributorRegistry,
+		CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry,
 		HttpServletRequest httpServletRequest,
 		PortletResourcePermission portletResourcePermission) {
 
 		_commerceSubscriptionEntryService = commerceSubscriptionEntryService;
+		_cpSubscriptionTypeJSPContributorRegistry =
+			cpSubscriptionTypeJSPContributorRegistry;
+		_cpSubscriptionTypeRegistry = cpSubscriptionTypeRegistry;
 		_httpServletRequest = httpServletRequest;
 		_portletResourcePermission = portletResourcePermission;
 
@@ -160,10 +170,10 @@ public class CommerceSubscriptionEntryDisplayContext {
 	public String getCommerceSubscriptionEntryRemainingCycles(
 		CommerceSubscriptionEntry commerceSubscriptionEntry) {
 
-		long maxSubscriptionCyclesNumber =
-			commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber();
+		long maxSubscriptionCycles =
+			commerceSubscriptionEntry.getMaxSubscriptionCycles();
 
-		if (maxSubscriptionCyclesNumber == 0) {
+		if (maxSubscriptionCycles == 0) {
 			return LanguageUtil.get(_httpServletRequest, "unlimited");
 		}
 
@@ -172,9 +182,25 @@ public class CommerceSubscriptionEntryDisplayContext {
 				getCommerceSubscriptionCycleEntriesCount();
 
 		long remainingCycles =
-			maxSubscriptionCyclesNumber - commerceSubscriptionCycleEntriesCount;
+			maxSubscriptionCycles - commerceSubscriptionCycleEntriesCount;
 
 		return String.valueOf(remainingCycles);
+	}
+
+	public CPSubscriptionType getCPSubscriptionType(String subscriptionType) {
+		return _cpSubscriptionTypeRegistry.getCPSubscriptionType(
+			subscriptionType);
+	}
+
+	public CPSubscriptionTypeJSPContributor getCPSubscriptionTypeJSPContributor(
+		String subscriptionType) {
+
+		return _cpSubscriptionTypeJSPContributorRegistry.
+			getCPSubscriptionTypeJSPContributor(subscriptionType);
+	}
+
+	public List<CPSubscriptionType> getCPSubscriptionTypes() {
+		return _cpSubscriptionTypeRegistry.getCPSubscriptionTypes();
 	}
 
 	public String getEditCommerceOrderURL(long commerceOrderId)
@@ -321,7 +347,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 		Boolean active = null;
 		String emptyResultsMessage = "there-are-no-subscriptions";
-		Long maxSubscriptionCyclesNumber = null;
+		Long maxSubscriptionCycles = null;
 
 		String navigation = getNavigation();
 
@@ -335,7 +361,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 		}
 		else if (navigation.equals("never-ends")) {
 			emptyResultsMessage = "there-are-no-unlimited-subscriptions";
-			maxSubscriptionCyclesNumber = 0L;
+			maxSubscriptionCycles = 0L;
 		}
 
 		_searchContainer = new SearchContainer<>(
@@ -354,7 +380,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 					getCommerceSubscriptionEntries(
 						_cpRequestHelper.getCompanyId(),
 						_cpRequestHelper.getScopeGroupId(),
-						maxSubscriptionCyclesNumber, active, getKeywords(),
+						maxSubscriptionCycles, active, getKeywords(),
 						_searchContainer.getStart(), _searchContainer.getEnd(),
 						CommerceSubscriptionEntryPortletUtil.
 							getCommerceSubscriptionEntrySort(
@@ -388,6 +414,9 @@ public class CommerceSubscriptionEntryDisplayContext {
 	private final CommerceSubscriptionEntryService
 		_commerceSubscriptionEntryService;
 	private final CPRequestHelper _cpRequestHelper;
+	private final CPSubscriptionTypeJSPContributorRegistry
+		_cpSubscriptionTypeJSPContributorRegistry;
+	private final CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 	private final HttpServletRequest _httpServletRequest;
 	private String _keywords;
 	private String _orderByCol;
