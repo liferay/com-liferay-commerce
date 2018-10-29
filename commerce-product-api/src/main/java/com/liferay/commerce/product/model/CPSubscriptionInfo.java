@@ -14,34 +14,44 @@
 
 package com.liferay.commerce.product.model;
 
+import com.liferay.portal.kernel.util.UnicodeProperties;
+
 /**
  * @author Alessio Antonio Rendina
  */
 public class CPSubscriptionInfo {
 
 	public CPSubscriptionInfo(
-		long subscriptionCycleLength, String subscriptionCyclePeriod,
+		int subscriptionLength, String subscriptionType,
+		UnicodeProperties subscriptionTypeSettingsProperties,
 		long maxSubscriptionCycleNumber) {
 
-		_subscriptionCycleLength = subscriptionCycleLength;
-		_subscriptionCyclePeriod = subscriptionCyclePeriod;
-		_maxSubscriptionCyclesNumber = maxSubscriptionCycleNumber;
+		_subscriptionLength = subscriptionLength;
+		_subscriptionType = subscriptionType;
+		_subscriptionTypeSettingsProperties =
+			subscriptionTypeSettingsProperties;
+		_maxSubscriptionCycles = maxSubscriptionCycleNumber;
 	}
 
-	public long getMaxSubscriptionCyclesNumber() {
-		return _maxSubscriptionCyclesNumber;
+	public long getMaxSubscriptionCycles() {
+		return _maxSubscriptionCycles;
 	}
 
-	public long getSubscriptionCycleLength() {
-		return _subscriptionCycleLength;
+	public int getSubscriptionLength() {
+		return _subscriptionLength;
 	}
 
-	public String getSubscriptionCyclePeriod() {
-		return _subscriptionCyclePeriod;
+	public String getSubscriptionType() {
+		return _subscriptionType;
 	}
 
-	private final long _maxSubscriptionCyclesNumber;
-	private final long _subscriptionCycleLength;
-	private final String _subscriptionCyclePeriod;
+	public UnicodeProperties getSubscriptionTypeSettingsProperties() {
+		return _subscriptionTypeSettingsProperties;
+	}
+
+	private final long _maxSubscriptionCycles;
+	private final int _subscriptionLength;
+	private final String _subscriptionType;
+	private final UnicodeProperties _subscriptionTypeSettingsProperties;
 
 }
