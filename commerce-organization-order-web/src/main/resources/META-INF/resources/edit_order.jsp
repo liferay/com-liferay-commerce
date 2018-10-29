@@ -302,6 +302,8 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 		CommerceDiscountValue discountValue = commerceProductPrice.getDiscountValue();
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
 		%>
 
 		<liferay-ui:search-container-column-text
@@ -312,6 +314,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 					<span class="commerce-value">
 						<%= unitPrice.format(locale) %>
 					</span>
+
 					<span class="commerce-subscription-info">
 						<liferay-commerce:subscription-info
 							commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"

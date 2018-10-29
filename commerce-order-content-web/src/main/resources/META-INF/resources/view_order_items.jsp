@@ -157,21 +157,21 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 										CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 										%>
 
-										<div class="value-section">
-											<span class="commerce-value">
-												<%= unitPrice.format(locale) %>
-											</span>
+                                        <div class="value-section">
+                                            <span class="commerce-value">
+                                                <%= unitPrice.format(locale) %>
+                                            </span>
 
-											<span class="commerce-subscription-info">
-												<liferay-commerce:subscription-info
-													commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
-													CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
-													showDuration="<%= false %>"
-												/>
-											</span>
-										</div>
-									</c:if>
-								</liferay-ui:search-container-column-text>
+                                            <span class="commerce-subscription-info">
+                                                <liferay-commerce:subscription-info
+                                                    commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
+                                                    CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+                                                    showDuration="<%= false %>"
+                                                />
+                                            </span>
+                                        </div>
+                                    </c:if>
+                                </liferay-ui:search-container-column-text>
 
 								<liferay-ui:search-container-column-text
 									name="discount"
