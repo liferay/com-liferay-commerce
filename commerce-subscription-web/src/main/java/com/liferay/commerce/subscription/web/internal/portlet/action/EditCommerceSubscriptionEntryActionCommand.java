@@ -25,7 +25,11 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+
+import java.util.Calendar;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -123,17 +127,59 @@ public class EditCommerceSubscriptionEntryActionCommand
 			long commerceSubscriptionEntryId, ActionRequest actionRequest)
 		throws Exception {
 
-		long subscriptionCycleLength = ParamUtil.getLong(
-			actionRequest, "subscriptionCycleLength");
-		String subscriptionCyclePeriod = ParamUtil.getString(
-			actionRequest, "subscriptionCyclePeriod");
-		long maxSubscriptionCyclesNumber = ParamUtil.getLong(
-			actionRequest, "maxSubscriptionCyclesNumber");
+		int subscriptionLength = ParamUtil.getInteger(
+			actionRequest, "subscriptionLength");
+		String subscriptionType = ParamUtil.getString(
+			actionRequest, "subscriptionType");
+		UnicodeProperties subscriptionTypeSettingsProperties =
+			PropertiesParamUtil.getProperties(
+				actionRequest, "subscriptionTypeSettings--");
+		long maxSubscriptionCycles = ParamUtil.getLong(
+			actionRequest, "maxSubscriptionCycles");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
-		return _commerceSubscriptionEntryService.updateCommercePriceEntry(
-			commerceSubscriptionEntryId, subscriptionCycleLength,
-			subscriptionCyclePeriod, maxSubscriptionCyclesNumber, active);
+		int startDateMonth = ParamUtil.getInteger(
+			actionRequest, "startDateMonth");
+		int startDateDay = ParamUtil.getInteger(actionRequest, "startDateDay");
+		int startDateYear = ParamUtil.getInteger(
+			actionRequest, "startDateYear");
+		int startDateHour = ParamUtil.getInteger(
+			actionRequest, "startDateHour");
+		int startDateMinute = ParamUtil.getInteger(
+			actionRequest, "startDateMinute");
+		int startDateAmPm = ParamUtil.getInteger(
+			actionRequest, "startDateAmPm");
+
+		if (startDateAmPm == Calendar.PM) {
+			startDateHour += 12;
+		}
+
+		int nextIterationDateMonth = ParamUtil.getInteger(
+			actionRequest, "nextIterationDateMonth");
+		int nextIterationDateDay = ParamUtil.getInteger(
+			actionRequest, "nextIterationDateDay");
+		int nextIterationDateYear = ParamUtil.getInteger(
+			actionRequest, "nextIterationDateYear");
+		int nextIterationDateHour = ParamUtil.getInteger(
+			actionRequest, "nextIterationDateHour");
+		int nextIterationDateMinute = ParamUtil.getInteger(
+			actionRequest, "nextIterationDateMinute");
+		int nextIterationDateAmPm = ParamUtil.getInteger(
+			actionRequest, "nextIterationDateAmPm");
+
+		if (nextIterationDateAmPm == Calendar.PM) {
+			nextIterationDateHour += 12;
+		}
+
+		return
+			_commerceSubscriptionEntryService.updateCommerceSubscriptionEntry(
+				commerceSubscriptionEntryId, subscriptionLength,
+				subscriptionType, subscriptionTypeSettingsProperties,
+				maxSubscriptionCycles, active, startDateMonth, startDateDay,
+				startDateYear, startDateHour, startDateMinute,
+				nextIterationDateMonth, nextIterationDateDay,
+				nextIterationDateYear, nextIterationDateHour,
+				nextIterationDateMinute);
 	}
 
 	@Reference

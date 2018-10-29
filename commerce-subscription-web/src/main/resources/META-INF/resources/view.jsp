@@ -115,14 +115,14 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 					/>
 
 					<liferay-ui:search-container-column-text
-						name="cycle-length"
-						property="subscriptionCycleLength"
-					/>
-
-					<liferay-ui:search-container-column-text
-						name="cycle-period"
-						value="<%= LanguageUtil.get(request, commerceSubscriptionEntry.getSubscriptionCyclePeriod()) %>"
-					/>
+						name="subscription-info"
+					>
+						<liferay-commerce:subscription-info
+							commerceOrderItemId="<%= commerceOrderItem.getCommerceOrderItemId() %>"
+							CPInstanceId="<%= commerceSubscriptionEntry.getCPInstanceId() %>"
+							showDuration="<%= false %>"
+						/>
+					</liferay-ui:search-container-column-text>
 
 					<liferay-ui:search-container-column-text
 						name="remaining-cycles"
@@ -133,11 +133,11 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 						name="ends"
 					>
 						<c:choose>
-							<c:when test="<%= commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber() == 0 %>">
+							<c:when test="<%= commerceSubscriptionEntry.getMaxSubscriptionCycles() == 0 %>">
 								<%= LanguageUtil.get(request, "never-ends") %>
 							</c:when>
 							<c:otherwise>
-								<%= LanguageUtil.format(request, "after-x-cycles", commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber()) %>
+								<%= LanguageUtil.format(request, "after-x-cycles", commerceSubscriptionEntry.getMaxSubscriptionCycles()) %>
 							</c:otherwise>
 						</c:choose>
 					</liferay-ui:search-container-column-text>
