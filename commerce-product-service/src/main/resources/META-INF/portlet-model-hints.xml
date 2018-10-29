@@ -71,11 +71,12 @@
 		<field name="expirationDate" type="Date" />
 		<field name="lastPublishDate" type="Date" />
 		<field name="subscriptionEnabled" type="boolean" />
-		<field name="subscriptionCycleLength" type="long" />
-		<field name="subscriptionCyclePeriod" type="String">
-			<validator name="required" />
+		<field name="subscriptionLength" type="int" />
+		<field name="subscriptionType" type="String" />
+		<field name="subscriptionTypeSettings" type="String">
+			<hint-collection name="CLOB" />
 		</field>
-		<field name="maxSubscriptionCyclesNumber" type="long" />
+		<field name="maxSubscriptionCycles" type="long" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />
@@ -266,11 +267,12 @@
 		<field name="lastPublishDate" type="Date" />
 		<field name="overrideSubscriptionInfo" type="boolean" />
 		<field name="subscriptionEnabled" type="boolean" />
-		<field name="subscriptionCycleLength" type="long" />
-		<field name="subscriptionCyclePeriod" type="String">
-			<validator name="required" />
+		<field name="subscriptionLength" type="int" />
+		<field name="subscriptionType" type="String" />
+		<field name="subscriptionTypeSettings" type="String">
+			<hint-collection name="CLOB" />
 		</field>
-		<field name="maxSubscriptionCyclesNumber" type="long" />
+		<field name="maxSubscriptionCycles" type="long" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />
