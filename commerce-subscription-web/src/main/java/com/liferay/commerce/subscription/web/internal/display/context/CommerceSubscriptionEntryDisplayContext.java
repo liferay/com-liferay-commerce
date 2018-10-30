@@ -386,7 +386,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 		BaseModelSearchResult<CommerceSubscriptionEntry>
 			commerceSubscriptionBaseModelSearchResult =
 				_commerceSubscriptionEntryService.
-					getCommerceSubscriptionEntries(
+					searchCommerceSubscriptionEntries(
 						_cpRequestHelper.getCompanyId(),
 						_cpRequestHelper.getScopeGroupId(),
 						maxSubscriptionCycles, active, getKeywords(),
