@@ -15,6 +15,7 @@
 package com.liferay.commerce.data.integration.apio.resource.test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -22,8 +23,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.apio.jsonld.representation.util.ApioResourceCollection;
 import com.liferay.commerce.apio.jsonld.representation.util.ApioSingleModel;
+import com.liferay.commerce.apio.jsonld.representation.util.ApioUtils;
 import com.liferay.commerce.apio.jsonld.representation.util.constants.SchemaOrgConstants;
 import com.liferay.commerce.apio.jsonld.representation.util.operation.Method;
+import com.liferay.commerce.apio.jsonld.representation.util.operation.Operation;
 import com.liferay.commerce.data.integration.apio.client.RESTClient;
 import com.liferay.commerce.data.integration.apio.resource.test.utils.CommerceTestSiteActivator;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -71,6 +74,54 @@ public class CommercePriceListNestedCollectionResourceTest
 	@Test
 	public void testAddCollectionItem() throws IOException, PortalException {
 		_addPriceList(RandomTestUtil.randomString());
+	}
+
+	@Test
+	public void testCollectionPostOperationPresent()
+		throws IOException, PortalException {
+
+		ApioResourceCollection commerceAccountApioResourceCollection =
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
+
+		Operation resourceOperation = ApioUtils.getResourceOperationByMethod(
+			commerceAccountApioResourceCollection, Method.POST);
+
+		Assert.assertThat(resourceOperation, notNullValue());
+	}
+
+	@Test
+	public void testDeleteCollectionItem() throws IOException, PortalException {
+		ApioResourceCollection commercePriceListApioResourceCollection =
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
+
+		int numberOfItems1 =
+			commercePriceListApioResourceCollection.getNumberOfItems();
+
+		String priceListId = _addPriceList(RandomTestUtil.randomString());
+
+		commercePriceListApioResourceCollection =
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
+
+		int numberOfItems2 =
+			commercePriceListApioResourceCollection.getNumberOfItems();
+
+		Assert.assertThat(numberOfItems1 + 1, equalTo(numberOfItems2));
+
+		try (RESTClient restClient = new RESTClient()) {
+			restClient.executeDeleteRequest(priceListId);
+		}
+
+		commercePriceListApioResourceCollection =
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
+
+		int numberOfItems3 =
+			commercePriceListApioResourceCollection.getNumberOfItems();
+
+		Assert.assertThat(numberOfItems1, equalTo(numberOfItems3));
 	}
 
 	@Test
