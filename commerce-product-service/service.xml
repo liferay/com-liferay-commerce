@@ -100,6 +100,8 @@
 
 		<!-- Other fields -->
 
+		<column name="CProductId" type="long" />
+		<column name="CPTaxCategoryId" type="long" />
 		<column name="productTypeName" type="String" />
 		<column name="availableIndividually" type="boolean" />
 		<column name="ignoreSKUCombinations" type="boolean" />
@@ -111,7 +113,6 @@
 		<column name="height" type="double" />
 		<column name="depth" type="double" />
 		<column name="weight" type="double" />
-		<column name="CPTaxCategoryId" type="long" />
 		<column name="taxExempt" type="boolean" />
 		<column name="telcoOrElectronics" type="boolean" />
 		<column name="DDMStructureKey" type="String" />
@@ -124,6 +125,7 @@
 		<column name="subscriptionType" type="String" />
 		<column name="subscriptionTypeSettings" type="String" />
 		<column name="maxSubscriptionCycles" type="long" />
+		<column name="version" type="int" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
@@ -474,6 +476,10 @@
 
 		<!-- Finder methods -->
 
+		<finder name="C_C" return-type="Collection">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+		</finder>
 		<finder name="G_C_C" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="classNameId" />
@@ -813,6 +819,41 @@
 		<!-- References -->
 
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
+	</entity>
+	<entity local-service="true" name="CProduct" remote-service="false" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="CProductId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="draftDefinitionId" type="long" />
+		<column name="publishedDefinitionId" type="long" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 	</entity>
 	<entity local-service="true" name="CPRule" remote-service="true">
 
