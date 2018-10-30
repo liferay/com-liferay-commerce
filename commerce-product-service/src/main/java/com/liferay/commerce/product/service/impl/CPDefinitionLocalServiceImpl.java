@@ -314,12 +314,17 @@ public class CPDefinitionLocalServiceImpl
 		// Commerce product instance
 
 		if (Validator.isNotNull(defaultSku)) {
+			ServiceContext newServiceContext = new ServiceContext();
+
+			newServiceContext.setScopeGroupId(serviceContext.getScopeGroupId());
+			newServiceContext.setUserId(serviceContext.getUserId());
+
 			cpInstanceLocalService.addCPInstance(
 				cpDefinitionId, defaultSku, null, null, true, null, true,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, serviceContext);
+				expirationDateMinute, neverExpire, newServiceContext);
 		}
 
 		// Commerce product friendly URL
