@@ -136,7 +136,6 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 						<%
 						CommerceProductPrice commerceProductPrice = commerceOrderItemContentDisplayContext.getCommerceProductPrice(commerceOrderItem);
-						CPInstance cpInstance = commerceOrderItem.getCPInstance();
 						%>
 
 						<liferay-ui:search-container-column-text
@@ -152,7 +151,6 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 									<span class="commerce-value">
 										<%= unitPrice.format(locale) %>
 									</span>
-
 									<span class="commerce-subscription-info">
 										<liferay-commerce:subscription-info
 											commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
