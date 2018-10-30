@@ -81,8 +81,16 @@ public class CommerceSubscriptionEntryServiceImpl
 	}
 
 	@Override
+	public int getCommerceSubscriptionEntriesCount(long groupId, long userId)
+		throws PortalException {
+
+		return commerceSubscriptionEntryLocalService.
+			getCommerceSubscriptionEntriesCount(groupId, userId);
+	}
+
+	@Override
 	public BaseModelSearchResult<CommerceSubscriptionEntry>
-			getCommerceSubscriptionEntries(
+			searchCommerceSubscriptionEntries(
 				long companyId, long groupId, Long maxSubscriptionCycles,
 				Boolean active, String keywords, int start, int end, Sort sort)
 		throws PortalException {
@@ -92,17 +100,9 @@ public class CommerceSubscriptionEntryServiceImpl
 			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
 
 		return commerceSubscriptionEntryLocalService.
-			getCommerceSubscriptionEntries(
+			searchCommerceSubscriptionEntries(
 				companyId, groupId, maxSubscriptionCycles, active, keywords,
 				start, end, sort);
-	}
-
-	@Override
-	public int getCommerceSubscriptionEntriesCount(long groupId, long userId)
-		throws PortalException {
-
-		return commerceSubscriptionEntryLocalService.
-			getCommerceSubscriptionEntriesCount(groupId, userId);
 	}
 
 	@Override
@@ -129,9 +129,9 @@ public class CommerceSubscriptionEntryServiceImpl
 			UnicodeProperties subscriptionTypeSettingsProperties,
 			long maxSubscriptionCycles, boolean active, int startDateMonth,
 			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int nextInterationDateMonth,
-			int nextInterationDateDay, int nextInterationDateYear,
-			int nextInterationDateHour, int nextInterationDateMinute)
+			int startDateMinute, int nextIterationDateMonth,
+			int nextIterationDateDay, int nextIterationDateYear,
+			int nextIterationDateHour, int nextIterationDateMinute)
 		throws PortalException {
 
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
@@ -148,9 +148,9 @@ public class CommerceSubscriptionEntryServiceImpl
 				subscriptionType, subscriptionTypeSettingsProperties,
 				maxSubscriptionCycles, active, startDateMonth, startDateDay,
 				startDateYear, startDateHour, startDateMinute,
-				nextInterationDateMonth, nextInterationDateDay,
-				nextInterationDateYear, nextInterationDateHour,
-				nextInterationDateMinute);
+				nextIterationDateMonth, nextIterationDateDay,
+				nextIterationDateYear, nextIterationDateHour,
+				nextIterationDateMinute);
 	}
 
 	private static volatile PortletResourcePermission

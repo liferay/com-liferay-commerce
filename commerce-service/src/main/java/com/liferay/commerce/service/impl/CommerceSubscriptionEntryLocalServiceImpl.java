@@ -157,20 +157,6 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	}
 
 	@Override
-	public BaseModelSearchResult<CommerceSubscriptionEntry>
-			getCommerceSubscriptionEntries(
-				long companyId, long groupId, Long maxSubscriptionCycles,
-				Boolean active, String keywords, int start, int end, Sort sort)
-		throws PortalException {
-
-		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, maxSubscriptionCycles, active, keywords, start,
-			end, sort);
-
-		return getCommerceSubscriptionEntries(searchContext);
-	}
-
-	@Override
 	public int getCommerceSubscriptionEntriesCount(long groupId, long userId) {
 		return commerceSubscriptionEntryPersistence.countByG_U(groupId, userId);
 	}
@@ -181,6 +167,20 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		return commerceSubscriptionEntryFinder.findByNextIterationDate(
 			new Date());
+	}
+
+	@Override
+	public BaseModelSearchResult<CommerceSubscriptionEntry>
+			searchCommerceSubscriptionEntries(
+				long companyId, long groupId, Long maxSubscriptionCycles,
+				Boolean active, String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, groupId, maxSubscriptionCycles, active, keywords, start,
+			end, sort);
+
+		return searchCommerceSubscriptionEntries(searchContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -208,9 +208,9 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			UnicodeProperties subscriptionTypeSettingsProperties,
 			long maxSubscriptionCycles, boolean active, int startDateMonth,
 			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int nextInterationDateMonth,
-			int nextInterationDateDay, int nextInterationDateYear,
-			int nextInterationDateHour, int nextInterationDateMinute)
+			int startDateMinute, int nextIterationDateMonth,
+			int nextIterationDateDay, int nextIterationDateYear,
+			int nextIterationDateHour, int nextIterationDateMinute)
 		throws PortalException {
 
 		CPSubscriptionType cpSubscriptionType =
@@ -225,13 +225,12 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		User user = userLocalService.getUser(
 			commerceSubscriptionEntry.getUserId());
 
-		Date nextInterationDate = null;
+		Date nextIterationDate = null;
 		Date startDate = null;
 
-		nextInterationDate = PortalUtil.getDate(
-			nextInterationDateMonth, nextInterationDateDay,
-			nextInterationDateYear, nextInterationDateHour,
-			nextInterationDateDay, user.getTimeZone(),
+		nextIterationDate = PortalUtil.getDate(
+			nextIterationDateMonth, nextIterationDateDay, nextIterationDateYear,
+			nextIterationDateHour, nextIterationDateDay, user.getTimeZone(),
 			CommerceSubscriptionEntryNextIterationDateException.class);
 
 		startDate = PortalUtil.getDate(
@@ -246,7 +245,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		commerceSubscriptionEntry.setMaxSubscriptionCycles(
 			maxSubscriptionCycles);
 		commerceSubscriptionEntry.setActive(active);
-		commerceSubscriptionEntry.setNextIterationDate(nextInterationDate);
+		commerceSubscriptionEntry.setNextIterationDate(nextIterationDate);
 		commerceSubscriptionEntry.setStartDate(startDate);
 
 		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
@@ -381,7 +380,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	}
 
 	protected BaseModelSearchResult<CommerceSubscriptionEntry>
-			getCommerceSubscriptionEntries(SearchContext searchContext)
+			searchCommerceSubscriptionEntries(SearchContext searchContext)
 		throws PortalException {
 
 		Indexer<CommerceSubscriptionEntry> indexer =
