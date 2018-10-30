@@ -161,7 +161,6 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 											<span class="commerce-value">
 												<%= unitPrice.format(locale) %>
 											</span>
-
 											<span class="commerce-subscription-info">
 												<liferay-commerce:subscription-info
 													commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
