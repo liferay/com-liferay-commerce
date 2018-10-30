@@ -228,12 +228,6 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 		long groupId, long userId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long companyId, long groupId, Long maxSubscriptionCycles,
-		Boolean active, String keywords, int start, int end, Sort sort)
-		throws PortalException;
-
 	/**
 	* Returns all the commerce subscription entries matching the UUID and company.
 	*
@@ -316,6 +310,12 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(
+		long companyId, long groupId, Long maxSubscriptionCycles,
+		Boolean active, String keywords, int start, int end, Sort sort)
+		throws PortalException;
+
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceSubscriptionEntry setActive(
 		long commerceSubscriptionEntryId, boolean active)
@@ -338,9 +338,9 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 		UnicodeProperties subscriptionTypeSettingsProperties,
 		long maxSubscriptionCycles, boolean active, int startDateMonth,
 		int startDateDay, int startDateYear, int startDateHour,
-		int startDateMinute, int nextInterationDateMonth,
-		int nextInterationDateDay, int nextInterationDateYear,
-		int nextInterationDateHour, int nextInterationDateMinute)
+		int startDateMinute, int nextIterationDateMonth,
+		int nextIterationDateDay, int nextIterationDateYear,
+		int nextIterationDateHour, int nextIterationDateMinute)
 		throws PortalException;
 
 	public CommerceSubscriptionEntry updateCommerceSubscriptionEntryIterationDates(
