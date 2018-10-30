@@ -162,15 +162,15 @@ public class CommerceSubscriptionCycleEntryWrapper
 	}
 
 	@Override
-	public CommerceOrder getCommerceOrder()
+	public CommerceOrder fetchCommerceOrder()
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceSubscriptionCycleEntry.getCommerceOrder();
+		return _commerceSubscriptionCycleEntry.fetchCommerceOrder();
 	}
 
 	@Override
-	public CommerceOrderItem getCommerceOrderItem()
+	public CommerceOrderItem fetchCommerceOrderItem()
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceSubscriptionCycleEntry.getCommerceOrderItem();
+		return _commerceSubscriptionCycleEntry.fetchCommerceOrderItem();
 	}
 
 	/**

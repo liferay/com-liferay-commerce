@@ -56,20 +56,20 @@ public interface CommerceSubscriptionEntry
 			}
 		};
 
-	public CommerceOrderItem getCommerceOrderItem()
+	public CommerceOrderItem fetchCommerceOrderItem()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public java.util.List<CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries();
 
 	public int getCommerceSubscriptionCycleEntriesCount();
 
-	public com.liferay.commerce.product.model.CPDefinition getCPDefinition()
+	public com.liferay.commerce.product.model.CPDefinition fetchCPDefinition()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public long getCPDefinitionId()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.commerce.product.model.CPInstance getCPInstance()
+	public com.liferay.commerce.product.model.CPInstance fetchCPInstance()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties();
