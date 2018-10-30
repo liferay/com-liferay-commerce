@@ -210,6 +210,23 @@ public class CommerceSubscriptionEntryWrapper
 		return _commerceSubscriptionEntry.compareTo(commerceSubscriptionEntry);
 	}
 
+	@Override
+	public CommerceOrderItem fetchCommerceOrderItem()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceSubscriptionEntry.fetchCommerceOrderItem();
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPDefinition fetchCPDefinition()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceSubscriptionEntry.fetchCPDefinition();
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPInstance fetchCPInstance() {
+		return _commerceSubscriptionEntry.fetchCPInstance();
+	}
+
 	/**
 	* Returns the active of this commerce subscription entry.
 	*
@@ -218,12 +235,6 @@ public class CommerceSubscriptionEntryWrapper
 	@Override
 	public boolean getActive() {
 		return _commerceSubscriptionEntry.getActive();
-	}
-
-	@Override
-	public CommerceOrderItem getCommerceOrderItem()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceSubscriptionEntry.getCommerceOrderItem();
 	}
 
 	/**
@@ -267,21 +278,8 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CPDefinition getCPDefinition()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceSubscriptionEntry.getCPDefinition();
-	}
-
-	@Override
-	public long getCPDefinitionId()
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public long getCPDefinitionId() {
 		return _commerceSubscriptionEntry.getCPDefinitionId();
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CPInstance getCPInstance()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceSubscriptionEntry.getCPInstance();
 	}
 
 	/**
