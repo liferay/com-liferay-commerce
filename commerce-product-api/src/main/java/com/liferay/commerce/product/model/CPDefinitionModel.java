@@ -244,6 +244,34 @@ public interface CPDefinitionModel extends BaseModel<CPDefinition>, ShardedModel
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Returns the c product ID of this cp definition.
+	 *
+	 * @return the c product ID of this cp definition
+	 */
+	public long getCProductId();
+
+	/**
+	 * Sets the c product ID of this cp definition.
+	 *
+	 * @param CProductId the c product ID of this cp definition
+	 */
+	public void setCProductId(long CProductId);
+
+	/**
+	 * Returns the cp tax category ID of this cp definition.
+	 *
+	 * @return the cp tax category ID of this cp definition
+	 */
+	public long getCPTaxCategoryId();
+
+	/**
+	 * Sets the cp tax category ID of this cp definition.
+	 *
+	 * @param CPTaxCategoryId the cp tax category ID of this cp definition
+	 */
+	public void setCPTaxCategoryId(long CPTaxCategoryId);
+
+	/**
 	 * Returns the product type name of this cp definition.
 	 *
 	 * @return the product type name of this cp definition
@@ -432,20 +460,6 @@ public interface CPDefinitionModel extends BaseModel<CPDefinition>, ShardedModel
 	 * @param weight the weight of this cp definition
 	 */
 	public void setWeight(double weight);
-
-	/**
-	 * Returns the cp tax category ID of this cp definition.
-	 *
-	 * @return the cp tax category ID of this cp definition
-	 */
-	public long getCPTaxCategoryId();
-
-	/**
-	 * Sets the cp tax category ID of this cp definition.
-	 *
-	 * @param CPTaxCategoryId the cp tax category ID of this cp definition
-	 */
-	public void setCPTaxCategoryId(long CPTaxCategoryId);
 
 	/**
 	 * Returns the tax exempt of this cp definition.
@@ -647,6 +661,20 @@ public interface CPDefinitionModel extends BaseModel<CPDefinition>, ShardedModel
 	 * @param maxSubscriptionCycles the max subscription cycles of this cp definition
 	 */
 	public void setMaxSubscriptionCycles(long maxSubscriptionCycles);
+
+	/**
+	 * Returns the version of this cp definition.
+	 *
+	 * @return the version of this cp definition
+	 */
+	public int getVersion();
+
+	/**
+	 * Sets the version of this cp definition.
+	 *
+	 * @param version the version of this cp definition
+	 */
+	public void setVersion(int version);
 
 	/**
 	 * Returns the status of this cp definition.

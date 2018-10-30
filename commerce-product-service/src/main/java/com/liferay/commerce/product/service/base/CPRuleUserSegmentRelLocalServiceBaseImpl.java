@@ -40,6 +40,7 @@ import com.liferay.commerce.product.service.persistence.CPRulePersistence;
 import com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
+import com.liferay.commerce.product.service.persistence.CProductPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -914,6 +915,43 @@ public abstract class CPRuleUserSegmentRelLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the c product local service.
+	 *
+	 * @return the c product local service
+	 */
+	public com.liferay.commerce.product.service.CProductLocalService getCProductLocalService() {
+		return cProductLocalService;
+	}
+
+	/**
+	 * Sets the c product local service.
+	 *
+	 * @param cProductLocalService the c product local service
+	 */
+	public void setCProductLocalService(
+		com.liferay.commerce.product.service.CProductLocalService cProductLocalService) {
+		this.cProductLocalService = cProductLocalService;
+	}
+
+	/**
+	 * Returns the c product persistence.
+	 *
+	 * @return the c product persistence
+	 */
+	public CProductPersistence getCProductPersistence() {
+		return cProductPersistence;
+	}
+
+	/**
+	 * Sets the c product persistence.
+	 *
+	 * @param cProductPersistence the c product persistence
+	 */
+	public void setCProductPersistence(CProductPersistence cProductPersistence) {
+		this.cProductPersistence = cProductPersistence;
+	}
+
+	/**
 	 * Returns the cp rule local service.
 	 *
 	 * @return the cp rule local service
@@ -1327,6 +1365,10 @@ public abstract class CPRuleUserSegmentRelLocalServiceBaseImpl
 	protected com.liferay.commerce.product.service.CPOptionValueLocalService cpOptionValueLocalService;
 	@BeanReference(type = CPOptionValuePersistence.class)
 	protected CPOptionValuePersistence cpOptionValuePersistence;
+	@BeanReference(type = com.liferay.commerce.product.service.CProductLocalService.class)
+	protected com.liferay.commerce.product.service.CProductLocalService cProductLocalService;
+	@BeanReference(type = CProductPersistence.class)
+	protected CProductPersistence cProductPersistence;
 	@BeanReference(type = com.liferay.commerce.product.service.CPRuleLocalService.class)
 	protected com.liferay.commerce.product.service.CPRuleLocalService cpRuleLocalService;
 	@BeanReference(type = CPRulePersistence.class)

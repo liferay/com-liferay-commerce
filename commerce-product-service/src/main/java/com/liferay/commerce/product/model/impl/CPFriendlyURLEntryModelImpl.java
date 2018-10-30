@@ -101,7 +101,7 @@ public class CPFriendlyURLEntryModelImpl extends BaseModelImpl<CPFriendlyURLEntr
 		TABLE_COLUMNS_MAP.put("main", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPFriendlyURLEntry (uuid_ VARCHAR(75) null,CPFriendlyURLEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,languageId VARCHAR(75) null,urlTitle VARCHAR(255) null,main BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table CPFriendlyURLEntry (uuid_ VARCHAR(75) null,CPFriendlyURLEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,languageId VARCHAR(75) null,urlTitle VARCHAR(75) null,main BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table CPFriendlyURLEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpFriendlyURLEntry.classNameId ASC, cpFriendlyURLEntry.classPK ASC, cpFriendlyURLEntry.urlTitle ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPFriendlyURLEntry.classNameId ASC, CPFriendlyURLEntry.classPK ASC, CPFriendlyURLEntry.urlTitle ASC";
