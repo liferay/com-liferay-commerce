@@ -18,6 +18,7 @@ import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetLinkConstants;
 import com.liferay.commerce.model.CPDefinitionInventory;
+import com.liferay.commerce.product.configuration.CProductVersionConfiguration;
 import com.liferay.commerce.product.exception.CPDefinitionDisplayDateException;
 import com.liferay.commerce.product.exception.CPDefinitionExpirationDateException;
 import com.liferay.commerce.product.exception.CPDefinitionIgnoreSKUCombinationsException;
@@ -59,6 +60,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
@@ -74,6 +76,7 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.settings.SystemSettingsLocator;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
@@ -1368,6 +1371,50 @@ public class CPDefinitionLocalServiceImpl
 		}
 
 		return isPublishedCPDefinition(cpDefinition);
+	}
+
+	@Override
+	public boolean isVersionable(CPDefinition cpDefinition) {
+		CProductVersionConfiguration cProductVersionConfiguration = null;
+
+		try {
+			cProductVersionConfiguration =
+				ConfigurationProviderUtil.getConfiguration(
+					CProductVersionConfiguration.class,
+					new SystemSettingsLocator(
+						CProductVersionConfiguration.class.getName()));
+		}
+		catch (PortalException pe) {
+			return false;
+		}
+
+		if (!cProductVersionConfiguration.enabled()) {
+			return false;
+		}
+
+		return isPublishedCPDefinition(cpDefinition);
+	}
+
+	@Override
+	public boolean isVersionable(long cpDefinitionId) {
+		CProductVersionConfiguration cProductVersionConfiguration = null;
+
+		try {
+			cProductVersionConfiguration =
+				ConfigurationProviderUtil.getConfiguration(
+					CProductVersionConfiguration.class,
+					new SystemSettingsLocator(
+						CProductVersionConfiguration.class.getName()));
+		}
+		catch (PortalException pe) {
+			return false;
+		}
+
+		if (!cProductVersionConfiguration.enabled()) {
+			return false;
+		}
+
+		return isPublishedCPDefinition(cpDefinitionId);
 	}
 
 	@Override
