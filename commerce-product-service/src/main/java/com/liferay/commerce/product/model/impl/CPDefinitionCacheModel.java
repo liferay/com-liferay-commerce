@@ -65,7 +65,7 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(77);
+		StringBundler sb = new StringBundler(81);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -87,6 +87,10 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", CProductId=");
+		sb.append(CProductId);
+		sb.append(", CPTaxCategoryId=");
+		sb.append(CPTaxCategoryId);
 		sb.append(", productTypeName=");
 		sb.append(productTypeName);
 		sb.append(", availableIndividually=");
@@ -109,8 +113,6 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		sb.append(depth);
 		sb.append(", weight=");
 		sb.append(weight);
-		sb.append(", CPTaxCategoryId=");
-		sb.append(CPTaxCategoryId);
 		sb.append(", taxExempt=");
 		sb.append(taxExempt);
 		sb.append(", telcoOrElectronics=");
@@ -135,6 +137,8 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		sb.append(subscriptionTypeSettings);
 		sb.append(", maxSubscriptionCycles=");
 		sb.append(maxSubscriptionCycles);
+		sb.append(", version=");
+		sb.append(version);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", statusByUserId=");
@@ -199,6 +203,9 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 			cpDefinitionImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		cpDefinitionImpl.setCProductId(CProductId);
+		cpDefinitionImpl.setCPTaxCategoryId(CPTaxCategoryId);
+
 		if (productTypeName == null) {
 			cpDefinitionImpl.setProductTypeName("");
 		}
@@ -216,7 +223,6 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		cpDefinitionImpl.setHeight(height);
 		cpDefinitionImpl.setDepth(depth);
 		cpDefinitionImpl.setWeight(weight);
-		cpDefinitionImpl.setCPTaxCategoryId(CPTaxCategoryId);
 		cpDefinitionImpl.setTaxExempt(taxExempt);
 		cpDefinitionImpl.setTelcoOrElectronics(telcoOrElectronics);
 
@@ -268,6 +274,7 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		}
 
 		cpDefinitionImpl.setMaxSubscriptionCycles(maxSubscriptionCycles);
+		cpDefinitionImpl.setVersion(version);
 		cpDefinitionImpl.setStatus(status);
 		cpDefinitionImpl.setStatusByUserId(statusByUserId);
 
@@ -306,6 +313,10 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
+
+		CProductId = objectInput.readLong();
+
+		CPTaxCategoryId = objectInput.readLong();
 		productTypeName = objectInput.readUTF();
 
 		availableIndividually = objectInput.readBoolean();
@@ -328,8 +339,6 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 
 		weight = objectInput.readDouble();
 
-		CPTaxCategoryId = objectInput.readLong();
-
 		taxExempt = objectInput.readBoolean();
 
 		telcoOrElectronics = objectInput.readBoolean();
@@ -347,6 +356,8 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		subscriptionTypeSettings = objectInput.readUTF();
 
 		maxSubscriptionCycles = objectInput.readLong();
+
+		version = objectInput.readInt();
 
 		status = objectInput.readInt();
 
@@ -397,6 +408,10 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
+		objectOutput.writeLong(CProductId);
+
+		objectOutput.writeLong(CPTaxCategoryId);
+
 		if (productTypeName == null) {
 			objectOutput.writeUTF("");
 		}
@@ -423,8 +438,6 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		objectOutput.writeDouble(depth);
 
 		objectOutput.writeDouble(weight);
-
-		objectOutput.writeLong(CPTaxCategoryId);
 
 		objectOutput.writeBoolean(taxExempt);
 
@@ -462,6 +475,8 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 
 		objectOutput.writeLong(maxSubscriptionCycles);
 
+		objectOutput.writeInt(version);
+
 		objectOutput.writeInt(status);
 
 		objectOutput.writeLong(statusByUserId);
@@ -486,6 +501,8 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public long CProductId;
+	public long CPTaxCategoryId;
 	public String productTypeName;
 	public boolean availableIndividually;
 	public boolean ignoreSKUCombinations;
@@ -497,7 +514,6 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 	public double height;
 	public double depth;
 	public double weight;
-	public long CPTaxCategoryId;
 	public boolean taxExempt;
 	public boolean telcoOrElectronics;
 	public String DDMStructureKey;
@@ -510,6 +526,7 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 	public String subscriptionType;
 	public String subscriptionTypeSettings;
 	public long maxSubscriptionCycles;
+	public int version;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;
