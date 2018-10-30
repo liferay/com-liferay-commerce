@@ -73,6 +73,56 @@ public class CommercePriceListNestedCollectionResourceTest
 		_addPriceList(RandomTestUtil.randomString());
 	}
 
+	@Test
+	public void testUpdateCollectionItem() throws IOException, PortalException {
+		String priceListName = RandomTestUtil.randomString();
+
+		_addPriceList(priceListName);
+
+		ApioResourceCollection commercePriceListApioResourceCollection =
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
+
+		ApioSingleModel actualPriceListApioSingleModel =
+			getResourceJsonNodeByField(
+				commercePriceListApioResourceCollection,
+				SchemaOrgConstants.Property.NAME, priceListName);
+
+		String newPriceListName = RandomTestUtil.randomString();
+		JsonNode actualPriceListIdJsonNode =
+			actualPriceListApioSingleModel.getIdJsonNode();
+
+		Map<String, String> priceListPropertiesMap = new HashMap<>(
+			_propertiesMap);
+
+		priceListPropertiesMap.put(
+			SchemaOrgConstants.Property.NAME, newPriceListName);
+
+		ObjectNode expectedObjectNode = constructExpectedObjectNode(
+			actualPriceListApioSingleModel, Method.PUT, priceListPropertiesMap);
+
+		try (RESTClient restClient = new RESTClient()) {
+			restClient.executePutRequest(
+				actualPriceListIdJsonNode.asText(), expectedObjectNode);
+		}
+
+		commercePriceListApioResourceCollection =
+			getSiteRelatedApioResourceCollection(
+				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
+
+		ApioSingleModel updatedPriceListApioSingleModel =
+			getResourceJsonNodeByField(
+				commercePriceListApioResourceCollection,
+				SchemaOrgConstants.Property.NAME, newPriceListName);
+
+		JsonNode updatedPriceListIdJsonNode =
+			updatedPriceListApioSingleModel.getIdJsonNode();
+
+		Assert.assertThat(
+			actualPriceListIdJsonNode.asText(),
+			equalTo(updatedPriceListIdJsonNode.asText()));
+	}
+
 	private String _addPriceList(String name)
 		throws IOException, PortalException {
 
@@ -85,7 +135,8 @@ public class CommercePriceListNestedCollectionResourceTest
 
 		Map<String, String> priceListPropertiesMap = new HashMap<>(
 			_propertiesMap);
-		_propertiesMap.put(SchemaOrgConstants.Property.NAME, name);
+
+		priceListPropertiesMap.put(SchemaOrgConstants.Property.NAME, name);
 
 		ObjectNode expectedObjectNode = constructExpectedObjectNode(
 			commercePriceListApioResourceCollection, Method.POST,
@@ -128,7 +179,7 @@ public class CommercePriceListNestedCollectionResourceTest
 				put("active", Boolean.TRUE.toString());
 				put("currency", "USD");
 				put("neverExpire", Boolean.TRUE.toString());
-				put("priority", "0.0");
+				put("priority", "0");
 			}
 		};
 
