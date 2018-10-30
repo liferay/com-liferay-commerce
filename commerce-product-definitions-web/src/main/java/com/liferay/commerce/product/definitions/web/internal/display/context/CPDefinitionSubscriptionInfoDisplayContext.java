@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.definitions.web.internal.display.context;
 
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -28,6 +29,8 @@ import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermi
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 
 import java.util.List;
+
+import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -73,6 +76,22 @@ public class CPDefinitionSubscriptionInfoDisplayContext
 
 	public List<CPSubscriptionType> getCPSubscriptionTypes() {
 		return _cpSubscriptionTypeRegistry.getCPSubscriptionTypes();
+	}
+
+	@Override
+	public PortletURL getPortletURL() throws PortalException {
+		PortletURL portletURL = super.getPortletURL();
+
+		portletURL.setParameter(
+			"mvcRenderCommandName", "editProductDefinition");
+		portletURL.setParameter(
+			"screenNavigationCategoryKey",
+			getSelectedScreenNavigationCategoryKey());
+		portletURL.setParameter(
+			"screenNavigationEntryKey",
+			CPDefinitionScreenNavigationConstants.ENTRY_KEY_SUBSCRIPTION);
+
+		return portletURL;
 	}
 
 	private final CPSubscriptionTypeJSPContributorRegistry
