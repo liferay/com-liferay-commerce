@@ -72,12 +72,6 @@ public interface CommerceSubscriptionEntryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long companyId, long groupId, Long maxSubscriptionCycles,
-		Boolean active, String keywords, int start, int end, Sort sort)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceSubscriptionEntriesCount(long groupId, long userId)
 		throws PortalException;
 
@@ -87,6 +81,12 @@ public interface CommerceSubscriptionEntryService extends BaseService {
 	* @return the OSGi service identifier
 	*/
 	public String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(
+		long companyId, long groupId, Long maxSubscriptionCycles,
+		Boolean active, String keywords, int start, int end, Sort sort)
+		throws PortalException;
 
 	public CommerceSubscriptionEntry setActive(
 		long commerceSubscriptionEntryId, boolean active)
@@ -98,8 +98,8 @@ public interface CommerceSubscriptionEntryService extends BaseService {
 		UnicodeProperties subscriptionTypeSettingsProperties,
 		long maxSubscriptionCycles, boolean active, int startDateMonth,
 		int startDateDay, int startDateYear, int startDateHour,
-		int startDateMinute, int nextInterationDateMonth,
-		int nextInterationDateDay, int nextInterationDateYear,
-		int nextInterationDateHour, int nextInterationDateMinute)
+		int startDateMinute, int nextIterationDateMonth,
+		int nextIterationDateDay, int nextIterationDateYear,
+		int nextIterationDateHour, int nextIterationDateMinute)
 		throws PortalException;
 }
