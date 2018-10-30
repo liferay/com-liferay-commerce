@@ -240,16 +240,6 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 			orderByComparator);
 	}
 
-	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long companyId, long groupId, Long maxSubscriptionCycles,
-		Boolean active, String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceSubscriptionEntries(companyId, groupId,
-			maxSubscriptionCycles, active, keywords, start, end, sort);
-	}
-
 	/**
 	* Returns all the commerce subscription entries matching the UUID and company.
 	*
@@ -353,6 +343,16 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(
+		long companyId, long groupId, Long maxSubscriptionCycles,
+		Boolean active, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceSubscriptionEntries(companyId, groupId,
+			maxSubscriptionCycles, active, keywords, start, end, sort);
+	}
+
 	public static com.liferay.commerce.model.CommerceSubscriptionEntry setActive(
 		long commerceSubscriptionEntryId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -377,18 +377,18 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
 		long maxSubscriptionCycles, boolean active, int startDateMonth,
 		int startDateDay, int startDateYear, int startDateHour,
-		int startDateMinute, int nextInterationDateMonth,
-		int nextInterationDateDay, int nextInterationDateYear,
-		int nextInterationDateHour, int nextInterationDateMinute)
+		int startDateMinute, int nextIterationDateMonth,
+		int nextIterationDateDay, int nextIterationDateYear,
+		int nextIterationDateHour, int nextIterationDateMinute)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateCommerceSubscriptionEntry(commerceSubscriptionEntryId,
 			subscriptionLength, subscriptionType,
 			subscriptionTypeSettingsProperties, maxSubscriptionCycles, active,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, nextInterationDateMonth, nextInterationDateDay,
-			nextInterationDateYear, nextInterationDateHour,
-			nextInterationDateMinute);
+			startDateMinute, nextIterationDateMonth, nextIterationDateDay,
+			nextIterationDateYear, nextIterationDateHour,
+			nextIterationDateMinute);
 	}
 
 	public static com.liferay.commerce.model.CommerceSubscriptionEntry updateCommerceSubscriptionEntryIterationDates(
