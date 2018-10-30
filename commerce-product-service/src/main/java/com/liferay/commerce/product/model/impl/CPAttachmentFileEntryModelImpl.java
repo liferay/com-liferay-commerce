@@ -96,7 +96,7 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 			{ "displayDate", Types.TIMESTAMP },
 			{ "expirationDate", Types.TIMESTAMP },
 			{ "title", Types.VARCHAR },
-			{ "json", Types.CLOB },
+			{ "json", Types.VARCHAR },
 			{ "priority", Types.DOUBLE },
 			{ "type_", Types.INTEGER },
 			{ "lastPublishDate", Types.TIMESTAMP },
@@ -123,7 +123,7 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 		TABLE_COLUMNS_MAP.put("displayDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("expirationDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("title", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("json", Types.CLOB);
+		TABLE_COLUMNS_MAP.put("json", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("priority", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("type_", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
@@ -133,7 +133,7 @@ public class CPAttachmentFileEntryModelImpl extends BaseModelImpl<CPAttachmentFi
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPAttachmentFileEntry (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPAttachmentFileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,fileEntryId LONG,displayDate DATE null,expirationDate DATE null,title STRING null,json TEXT null,priority DOUBLE,type_ INTEGER,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPAttachmentFileEntry (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPAttachmentFileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,fileEntryId LONG,displayDate DATE null,expirationDate DATE null,title STRING null,json VARCHAR(75) null,priority DOUBLE,type_ INTEGER,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPAttachmentFileEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpAttachmentFileEntry.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPAttachmentFileEntry.priority ASC";
