@@ -14,7 +14,7 @@ create table CPAttachmentFileEntry (
 	displayDate DATE null,
 	expirationDate DATE null,
 	title STRING null,
-	json TEXT null,
+	json VARCHAR(75) null,
 	priority DOUBLE,
 	type_ INTEGER,
 	lastPublishDate DATE null,
@@ -52,6 +52,8 @@ create table CPDefinition (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	CProductId LONG,
+	CPTaxCategoryId LONG,
 	productTypeName VARCHAR(75) null,
 	availableIndividually BOOLEAN,
 	ignoreSKUCombinations BOOLEAN,
@@ -63,7 +65,6 @@ create table CPDefinition (
 	height DOUBLE,
 	depth DOUBLE,
 	weight DOUBLE,
-	CPTaxCategoryId LONG,
 	taxExempt BOOLEAN,
 	telcoOrElectronics BOOLEAN,
 	DDMStructureKey VARCHAR(75) null,
@@ -74,8 +75,9 @@ create table CPDefinition (
 	subscriptionEnabled BOOLEAN,
 	subscriptionLength INTEGER,
 	subscriptionType VARCHAR(75) null,
-	subscriptionTypeSettings TEXT null,
+	subscriptionTypeSettings VARCHAR(75) null,
 	maxSubscriptionCycles LONG,
+	version INTEGER,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
@@ -103,12 +105,12 @@ create table CPDefinitionLocalization (
 	companyId LONG,
 	CPDefinitionId LONG,
 	languageId VARCHAR(75) null,
-	name STRING null,
-	shortDescription STRING null,
-	description TEXT null,
-	metaTitle VARCHAR(255) null,
-	metaDescription VARCHAR(255) null,
-	metaKeywords VARCHAR(255) null
+	name VARCHAR(75) null,
+	shortDescription VARCHAR(75) null,
+	description VARCHAR(75) null,
+	metaTitle VARCHAR(75) null,
+	metaDescription VARCHAR(75) null,
+	metaKeywords VARCHAR(75) null
 );
 
 create table CPDefinitionOptionRel (
@@ -172,7 +174,7 @@ create table CPFriendlyURLEntry (
 	classNameId LONG,
 	classPK LONG,
 	languageId VARCHAR(75) null,
-	urlTitle VARCHAR(255) null,
+	urlTitle VARCHAR(75) null,
 	main BOOLEAN
 );
 
@@ -191,7 +193,7 @@ create table CPInstance (
 	gtin VARCHAR(75) null,
 	manufacturerPartNumber VARCHAR(75) null,
 	purchasable BOOLEAN,
-	json TEXT null,
+	json VARCHAR(75) null,
 	width DOUBLE,
 	height DOUBLE,
 	depth DOUBLE,
@@ -207,7 +209,7 @@ create table CPInstance (
 	subscriptionEnabled BOOLEAN,
 	subscriptionLength INTEGER,
 	subscriptionType VARCHAR(75) null,
-	subscriptionTypeSettings TEXT null,
+	subscriptionTypeSettings VARCHAR(75) null,
 	maxSubscriptionCycles LONG,
 	status INTEGER,
 	statusByUserId LONG,
@@ -297,7 +299,7 @@ create table CPRule (
 	name VARCHAR(75) null,
 	active_ BOOLEAN,
 	type_ VARCHAR(75) null,
-	typeSettings TEXT null
+	typeSettings VARCHAR(75) null
 );
 
 create table CPRuleAssetCategoryRel (
@@ -351,4 +353,17 @@ create table CPTaxCategory (
 	modifiedDate DATE null,
 	name STRING null,
 	description STRING null
+);
+
+create table CProduct (
+	uuid_ VARCHAR(75) null,
+	CProductId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	draftDefinitionId LONG,
+	publishedDefinitionId LONG
 );

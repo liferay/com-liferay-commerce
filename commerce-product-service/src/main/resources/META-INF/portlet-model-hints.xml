@@ -41,6 +41,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="CProductId" type="long" />
+		<field name="CPTaxCategoryId" type="long" />
 		<field name="productTypeName" type="String" />
 		<field name="availableIndividually" type="boolean" />
 		<field name="ignoreSKUCombinations" type="boolean" />
@@ -60,7 +62,6 @@
 		<field name="weight" type="double">
 			<validator name="number" />
 		</field>
-		<field name="CPTaxCategoryId" type="long" />
 		<field name="taxExempt" type="boolean" />
 		<field name="telcoOrElectronics" type="boolean" />
 		<field name="DDMStructureKey" type="String" />
@@ -79,6 +80,7 @@
 			<hint-collection name="CLOB" />
 		</field>
 		<field name="maxSubscriptionCycles" type="long" />
+		<field name="version" type="int" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />
@@ -93,8 +95,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="CPDefinitionId1" type="long" />
-		<field name="CPDefinitionId2" type="long" />
+		<field name="CPDefinitionId" type="long" />
+		<field name="CProductId" type="long" />
 		<field name="priority" type="double">
 			<validator name="number" />
 		</field>
@@ -374,6 +376,18 @@
 			<validator name="required" />
 		</field>
 		<field name="lastPublishDate" type="Date" />
+	</model>
+	<model name="com.liferay.commerce.product.model.CProduct">
+		<field name="uuid" type="String" />
+		<field name="CProductId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="draftDefinitionId" type="long" />
+		<field name="publishedDefinitionId" type="long" />
 	</model>
 	<model name="com.liferay.commerce.product.model.CPRule">
 		<field name="CPRuleId" type="long" />

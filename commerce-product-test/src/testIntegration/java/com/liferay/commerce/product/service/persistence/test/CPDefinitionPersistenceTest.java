@@ -143,6 +143,10 @@ public class CPDefinitionPersistenceTest {
 
 		newCPDefinition.setModifiedDate(RandomTestUtil.nextDate());
 
+		newCPDefinition.setCProductId(RandomTestUtil.nextLong());
+
+		newCPDefinition.setCPTaxCategoryId(RandomTestUtil.nextLong());
+
 		newCPDefinition.setProductTypeName(RandomTestUtil.randomString());
 
 		newCPDefinition.setAvailableIndividually(RandomTestUtil.randomBoolean());
@@ -164,8 +168,6 @@ public class CPDefinitionPersistenceTest {
 		newCPDefinition.setDepth(RandomTestUtil.nextDouble());
 
 		newCPDefinition.setWeight(RandomTestUtil.nextDouble());
-
-		newCPDefinition.setCPTaxCategoryId(RandomTestUtil.nextLong());
 
 		newCPDefinition.setTaxExempt(RandomTestUtil.randomBoolean());
 
@@ -190,6 +192,8 @@ public class CPDefinitionPersistenceTest {
 		newCPDefinition.setSubscriptionTypeSettings(RandomTestUtil.randomString());
 
 		newCPDefinition.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
+
+		newCPDefinition.setVersion(RandomTestUtil.nextInt());
 
 		newCPDefinition.setStatus(RandomTestUtil.nextInt());
 
@@ -225,6 +229,10 @@ public class CPDefinitionPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPDefinition.getModifiedDate()),
 			Time.getShortTimestamp(newCPDefinition.getModifiedDate()));
+		Assert.assertEquals(existingCPDefinition.getCProductId(),
+			newCPDefinition.getCProductId());
+		Assert.assertEquals(existingCPDefinition.getCPTaxCategoryId(),
+			newCPDefinition.getCPTaxCategoryId());
 		Assert.assertEquals(existingCPDefinition.getProductTypeName(),
 			newCPDefinition.getProductTypeName());
 		Assert.assertEquals(existingCPDefinition.isAvailableIndividually(),
@@ -247,8 +255,6 @@ public class CPDefinitionPersistenceTest {
 			newCPDefinition.getDepth());
 		AssertUtils.assertEquals(existingCPDefinition.getWeight(),
 			newCPDefinition.getWeight());
-		Assert.assertEquals(existingCPDefinition.getCPTaxCategoryId(),
-			newCPDefinition.getCPTaxCategoryId());
 		Assert.assertEquals(existingCPDefinition.isTaxExempt(),
 			newCPDefinition.isTaxExempt());
 		Assert.assertEquals(existingCPDefinition.isTelcoOrElectronics(),
@@ -276,6 +282,8 @@ public class CPDefinitionPersistenceTest {
 			newCPDefinition.getSubscriptionTypeSettings());
 		Assert.assertEquals(existingCPDefinition.getMaxSubscriptionCycles(),
 			newCPDefinition.getMaxSubscriptionCycles());
+		Assert.assertEquals(existingCPDefinition.getVersion(),
+			newCPDefinition.getVersion());
 		Assert.assertEquals(existingCPDefinition.getStatus(),
 			newCPDefinition.getStatus());
 		Assert.assertEquals(existingCPDefinition.getStatusByUserId(),
@@ -395,17 +403,18 @@ public class CPDefinitionPersistenceTest {
 			true, "externalReferenceCode", true, "defaultLanguageId", true,
 			"CPDefinitionId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "productTypeName", true,
-			"availableIndividually", true, "ignoreSKUCombinations", true,
-			"shippable", true, "freeShipping", true, "shipSeparately", true,
-			"shippingExtraPrice", true, "width", true, "height", true, "depth",
-			true, "weight", true, "CPTaxCategoryId", true, "taxExempt", true,
-			"telcoOrElectronics", true, "DDMStructureKey", true, "published",
-			true, "displayDate", true, "expirationDate", true,
+			"modifiedDate", true, "CProductId", true, "CPTaxCategoryId", true,
+			"productTypeName", true, "availableIndividually", true,
+			"ignoreSKUCombinations", true, "shippable", true, "freeShipping",
+			true, "shipSeparately", true, "shippingExtraPrice", true, "width",
+			true, "height", true, "depth", true, "weight", true, "taxExempt",
+			true, "telcoOrElectronics", true, "DDMStructureKey", true,
+			"published", true, "displayDate", true, "expirationDate", true,
 			"lastPublishDate", true, "subscriptionEnabled", true,
 			"subscriptionLength", true, "subscriptionType", true,
-			"maxSubscriptionCycles", true, "status", true, "statusByUserId",
-			true, "statusByUserName", true, "statusDate", true);
+			"subscriptionTypeSettings", true, "maxSubscriptionCycles", true,
+			"version", true, "status", true, "statusByUserId", true,
+			"statusByUserName", true, "statusDate", true);
 	}
 
 	@Test
@@ -649,6 +658,10 @@ public class CPDefinitionPersistenceTest {
 
 		cpDefinition.setModifiedDate(RandomTestUtil.nextDate());
 
+		cpDefinition.setCProductId(RandomTestUtil.nextLong());
+
+		cpDefinition.setCPTaxCategoryId(RandomTestUtil.nextLong());
+
 		cpDefinition.setProductTypeName(RandomTestUtil.randomString());
 
 		cpDefinition.setAvailableIndividually(RandomTestUtil.randomBoolean());
@@ -670,8 +683,6 @@ public class CPDefinitionPersistenceTest {
 		cpDefinition.setDepth(RandomTestUtil.nextDouble());
 
 		cpDefinition.setWeight(RandomTestUtil.nextDouble());
-
-		cpDefinition.setCPTaxCategoryId(RandomTestUtil.nextLong());
 
 		cpDefinition.setTaxExempt(RandomTestUtil.randomBoolean());
 
@@ -696,6 +707,8 @@ public class CPDefinitionPersistenceTest {
 		cpDefinition.setSubscriptionTypeSettings(RandomTestUtil.randomString());
 
 		cpDefinition.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
+
+		cpDefinition.setVersion(RandomTestUtil.nextInt());
 
 		cpDefinition.setStatus(RandomTestUtil.nextInt());
 
