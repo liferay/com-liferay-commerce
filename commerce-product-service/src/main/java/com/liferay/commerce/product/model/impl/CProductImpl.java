@@ -17,21 +17,12 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 /**
- * The extended model implementation for the CProduct service. Represents a row in the &quot;CProduct&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.product.model.CProduct} interface.
- * </p>
- *
- * @author Marco Leo
+ * @author Ethan Bustad
  */
 @ProviderType
 public class CProductImpl extends CProductBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a c product model instance should use the {@link com.liferay.commerce.product.model.CProduct} interface instead.
-	 */
+
 	public CProductImpl() {
 	}
+
 }
