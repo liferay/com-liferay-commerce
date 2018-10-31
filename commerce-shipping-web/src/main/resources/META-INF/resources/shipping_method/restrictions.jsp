@@ -143,7 +143,7 @@ CommerceShippingMethodRestrictionsDisplayContext commerceShippingMethodRestricti
 
 				<liferay-ui:search-container-column-text
 					cssClass="table-cell-content"
-					name="two-letters-iso-code"
+					name="two-letter-iso-code"
 				>
 					<%= HtmlUtil.escape(commerceCountry.getTwoLettersISOCode()) %>
 				</liferay-ui:search-container-column-text>
