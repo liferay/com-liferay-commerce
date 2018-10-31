@@ -16,7 +16,7 @@ dependencies {
 
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.10"
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.external.reference.api", version: "1.0.0"
-	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "1.0.0"
+	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "2.0.0"
 	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
 	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.organization.api", version: "1.0.0"
 	testIntegrationCompile group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "2.0.0"
