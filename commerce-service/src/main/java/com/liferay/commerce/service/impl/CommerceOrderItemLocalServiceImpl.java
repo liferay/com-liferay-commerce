@@ -180,7 +180,8 @@ public class CommerceOrderItemLocalServiceImpl
 				commerceOrderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			deleteCommerceOrderItem(commerceOrderItem);
+			commerceOrderItemLocalService.deleteCommerceOrderItem(
+				commerceOrderItem);
 		}
 	}
 
