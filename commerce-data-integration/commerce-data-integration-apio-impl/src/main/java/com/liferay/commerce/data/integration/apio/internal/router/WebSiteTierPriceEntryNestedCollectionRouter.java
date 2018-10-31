@@ -18,7 +18,7 @@ import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
 import com.liferay.apio.architect.router.NestedCollectionRouter;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
-import com.liferay.commerce.data.integration.apio.identifiers.CommerceTierPriceEntryIdentifier;
+import com.liferay.commerce.data.integration.apio.identifier.CommerceTierPriceEntryIdentifier;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryService;
 import com.liferay.portal.kernel.exception.PortalException;

@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.util;
 
-import com.liferay.commerce.data.integration.apio.identifiers.ClassPKExternalReferenceCode;
+import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionService;

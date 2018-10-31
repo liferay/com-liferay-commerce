@@ -15,7 +15,7 @@
 package com.liferay.commerce.data.integration.apio.internal.util;
 
 import com.liferay.apio.architect.functional.Try;
-import com.liferay.commerce.data.integration.apio.identifiers.ClassPKExternalReferenceCode;
+import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;

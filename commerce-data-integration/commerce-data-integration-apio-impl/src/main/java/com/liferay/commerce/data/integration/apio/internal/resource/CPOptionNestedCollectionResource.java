@@ -22,7 +22,7 @@ import com.liferay.apio.architect.representor.Representor;
 import com.liferay.apio.architect.resource.NestedCollectionResource;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
-import com.liferay.commerce.data.integration.apio.identifiers.CPOptionIdentifier;
+import com.liferay.commerce.data.integration.apio.identifier.CPOptionIdentifier;
 import com.liferay.commerce.data.integration.apio.internal.form.CPOptionCreatorForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CPOptionHelper;
 import com.liferay.commerce.product.exception.CPOptionKeyException;

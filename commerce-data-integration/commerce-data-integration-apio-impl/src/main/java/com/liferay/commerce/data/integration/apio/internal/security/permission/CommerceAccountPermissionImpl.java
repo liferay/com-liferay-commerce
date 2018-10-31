@@ -18,7 +18,7 @@ import com.liferay.apio.architect.alias.routes.permission.HasNestedAddingPermiss
 import com.liferay.apio.architect.credentials.Credentials;
 import com.liferay.apio.architect.function.throwable.ThrowableTriFunction;
 import com.liferay.apio.architect.identifier.Identifier;
-import com.liferay.commerce.data.integration.apio.identifiers.ClassPKExternalReferenceCode;
+import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
 import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.log.Log;

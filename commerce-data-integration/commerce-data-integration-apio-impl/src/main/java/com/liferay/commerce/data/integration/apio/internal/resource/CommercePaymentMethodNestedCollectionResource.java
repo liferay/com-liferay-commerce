@@ -20,7 +20,7 @@ import com.liferay.apio.architect.representor.Representor;
 import com.liferay.apio.architect.resource.NestedCollectionResource;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
-import com.liferay.commerce.data.integration.apio.identifiers.CommercePaymentMethodIdentifier;
+import com.liferay.commerce.data.integration.apio.identifier.CommercePaymentMethodIdentifier;
 import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.service.CommercePaymentMethodService;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;

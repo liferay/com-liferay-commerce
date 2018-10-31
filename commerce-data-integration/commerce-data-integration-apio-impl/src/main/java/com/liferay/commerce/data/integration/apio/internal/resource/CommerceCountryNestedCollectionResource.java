@@ -20,7 +20,7 @@ import com.liferay.apio.architect.representor.Representor;
 import com.liferay.apio.architect.resource.NestedCollectionResource;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
-import com.liferay.commerce.data.integration.apio.identifiers.CommerceCountryIdentifier;
+import com.liferay.commerce.data.integration.apio.identifier.CommerceCountryIdentifier;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.portal.kernel.exception.PortalException;
