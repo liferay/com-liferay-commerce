@@ -39,9 +39,25 @@ public class CommerceSubscriptionEntryImpl
 	}
 
 	@Override
-	public CommerceOrderItem getCommerceOrderItem() throws PortalException {
+	public CommerceOrderItem fetchCommerceOrderItem() throws PortalException {
 		return CommerceOrderItemLocalServiceUtil.getCommerceOrderItem(
 			getCommerceOrderItemId());
+	}
+
+	@Override
+	public CPDefinition fetchCPDefinition() throws PortalException {
+		CPInstance cpInstance = fetchCPInstance();
+
+		if (cpInstance == null) {
+			return null;
+		}
+
+		return cpInstance.getCPDefinition();
+	}
+
+	@Override
+	public CPInstance fetchCPInstance() {
+		return CPInstanceLocalServiceUtil.fetchCPInstance(getCPInstanceId());
 	}
 
 	@Override
@@ -61,22 +77,14 @@ public class CommerceSubscriptionEntryImpl
 	}
 
 	@Override
-	public CPDefinition getCPDefinition() throws PortalException {
-		CPInstance cpInstance = getCPInstance();
+	public long getCPDefinitionId() {
+		CPInstance cpInstance = fetchCPInstance();
 
-		return cpInstance.getCPDefinition();
-	}
-
-	@Override
-	public long getCPDefinitionId() throws PortalException {
-		CPInstance cpInstance = getCPInstance();
+		if (cpInstance == null) {
+			return 0;
+		}
 
 		return cpInstance.getCPDefinitionId();
-	}
-
-	@Override
-	public CPInstance getCPInstance() throws PortalException {
-		return CPInstanceLocalServiceUtil.getCPInstance(getCPInstanceId());
 	}
 
 	@Override
