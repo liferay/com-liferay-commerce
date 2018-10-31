@@ -34,15 +34,19 @@ public class CommerceSubscriptionCycleEntryImpl
 	}
 
 	@Override
-	public CommerceOrder getCommerceOrder() throws PortalException {
-		CommerceOrderItem commerceOrderItem = getCommerceOrderItem();
+	public CommerceOrder fetchCommerceOrder() throws PortalException {
+		CommerceOrderItem commerceOrderItem = fetchCommerceOrderItem();
+
+		if (commerceOrderItem == null) {
+			return null;
+		}
 
 		return commerceOrderItem.getCommerceOrder();
 	}
 
 	@Override
-	public CommerceOrderItem getCommerceOrderItem() throws PortalException {
-		return CommerceOrderItemLocalServiceUtil.getCommerceOrderItem(
+	public CommerceOrderItem fetchCommerceOrderItem() {
+		return CommerceOrderItemLocalServiceUtil.fetchCommerceOrderItem(
 			getCommerceOrderItemId());
 	}
 
