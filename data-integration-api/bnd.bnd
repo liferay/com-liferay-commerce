@@ -1,0 +1,11 @@
+Bundle-Name: data-integration-api
+Bundle-SymbolicName: com.liferay.data.integration.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.data.integration.constants,\
+	com.liferay.data.integration.exception,\
+	com.liferay.data.integration.model,\
+	com.liferay.data.integration.service,\
+	com.liferay.data.integration.service.persistence,\
+	com.liferay.data.integration.service.util
+-includeresource: META-INF/service.xml=../data-integration-service/service.xml

@@ -1,0 +1,4 @@
+Bundle-Name: data-integration-web
+Bundle-SymbolicName: com.liferay.data.integration.web.internal.portlet
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.data.integration.web.internal.portlet.constants
