@@ -6,7 +6,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.petra.string", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.apio.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.site.apio.api", version: "1.0.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "2.0.0-20180905.075600-1"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.organization.api", version: "1.1.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.price.list.api", version: "1.0.0"
