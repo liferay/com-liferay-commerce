@@ -8,7 +8,7 @@ dependencies {
 	compileOnly group: "junit", name: "junit", version: "4.12"
 	compileOnly group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 	compileOnly group: "org.osgi", name: "org.osgi.service.cm", version: "1.5.0"
-	compileOnly project(":apps:commerce:commerce-product-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "2.0.0"
 }
 
 liferay {
