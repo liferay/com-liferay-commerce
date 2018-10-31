@@ -1,0 +1,3 @@
+Bundle-Name: data-integration-talend
+Bundle-SymbolicName: com.liferay.data.integration.talend
+Bundle-Version: 1.0.0
