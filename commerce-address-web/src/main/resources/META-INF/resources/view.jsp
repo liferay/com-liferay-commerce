@@ -156,7 +156,7 @@ CommerceCountriesDisplayContext commerceCountriesDisplayContext = (CommerceCount
 
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
-						name="two-letters-iso-code"
+						name="two-letter-iso-code"
 						property="twoLettersISOCode"
 					/>
 
