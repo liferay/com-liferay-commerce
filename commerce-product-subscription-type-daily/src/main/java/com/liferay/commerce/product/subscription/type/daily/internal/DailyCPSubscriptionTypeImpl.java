@@ -59,6 +59,11 @@ public class DailyCPSubscriptionTypeImpl implements CPSubscriptionType {
 
 		Calendar calendar = CalendarFactoryUtil.getCalendar(timeZone);
 
+		if (lastIterationDate == null) {
+			lastIterationDate = getSubscriptionStartDate(
+				timeZone, subscriptionTypeSettingsProperties);
+		}
+
 		calendar.setTime(lastIterationDate);
 
 		calendar.add(Calendar.DAY_OF_MONTH, subscriptionLength);
