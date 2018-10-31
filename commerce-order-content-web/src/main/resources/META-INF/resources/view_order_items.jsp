@@ -57,7 +57,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 	<c:choose>
 		<c:when test="<%= commerceOrder == null %>">
 			<div class="alert alert-info mx-auto">
-				<liferay-ui:message key="order-is-no-longer-available" />
+				<liferay-ui:message key="the-order-is-no-longer-available" />
 			</div>
 		</c:when>
 		<c:otherwise>
