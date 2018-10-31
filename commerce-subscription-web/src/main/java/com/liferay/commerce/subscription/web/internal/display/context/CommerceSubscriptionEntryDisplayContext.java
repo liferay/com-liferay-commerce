@@ -144,8 +144,12 @@ public class CommerceSubscriptionEntryDisplayContext {
 		for (CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry :
 				commerceSubscriptionCycleEntries) {
 
-			commerceOrders.add(
-				commerceSubscriptionCycleEntry.getCommerceOrder());
+			CommerceOrder commerceOrder =
+				commerceSubscriptionCycleEntry.fetchCommerceOrder();
+
+			if (commerceOrder != null) {
+				commerceOrders.add(commerceOrder);
+			}
 		}
 
 		int total = commerceOrders.size();
