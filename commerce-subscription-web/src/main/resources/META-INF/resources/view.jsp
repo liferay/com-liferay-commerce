@@ -96,9 +96,13 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 					rowURL.setParameter("redirect", currentURL);
 					rowURL.setParameter("commerceSubscriptionEntryId", String.valueOf(commerceSubscriptionEntry.getCommerceSubscriptionEntryId()));
 
-					CommerceOrderItem commerceOrderItem = commerceSubscriptionEntry.getCommerceOrderItem();
+					CommerceOrderItem commerceOrderItem = commerceSubscriptionEntry.fetchCommerceOrderItem();
 
-					CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
+					CommerceOrder commerceOrder = null;
+
+					if (commerceOrderItem != null) {
+						commerceOrder = commerceOrderItem.getCommerceOrder();
+					}
 					%>
 
 					<liferay-ui:search-container-column-text

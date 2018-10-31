@@ -37,7 +37,7 @@ SearchContainer<CommerceSubscriptionEntry> commerceSubscriptionEntrySearchContai
 			>
 
 				<%
-				CommerceOrderItem commerceOrderItem = commerceSubscriptionEntry.getCommerceOrderItem();
+				CommerceOrderItem commerceOrderItem = commerceSubscriptionEntry.fetchCommerceOrderItem();
 
 				String thumbnailSrc = commerceSubscriptionContentDisplayContext.getCommerceSubscriptionEntryThumbnailSrc(commerceSubscriptionEntry, themeDisplay);
 
@@ -59,7 +59,7 @@ SearchContainer<CommerceSubscriptionEntry> commerceSubscriptionEntrySearchContai
 					name="description"
 				>
 					<a class="font-weight-bold" href="<%= commerceSubscriptionContentDisplayContext.getCPDefinitionURL(commerceSubscriptionEntry, themeDisplay) %>">
-						<%= HtmlUtil.escape(commerceOrderItem.getName(languageId)) %>
+						<%= (commerceOrderItem == null) ? StringPool.BLANK : HtmlUtil.escape(commerceOrderItem.getName(languageId)) %>
 					</a>
 
 					<h6 class="text-default">

@@ -25,6 +25,7 @@ import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
 import com.liferay.commerce.util.comparator.CommerceSubscriptionEntryCreateDateComparator;
 import com.liferay.document.library.kernel.util.DLUtil;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -35,6 +36,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletURL;
@@ -65,7 +67,11 @@ public class CommerceSubscriptionContentDisplayContext {
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		CPInstance cpInstance = commerceSubscriptionEntry.getCPInstance();
+		CPInstance cpInstance = commerceSubscriptionEntry.fetchCPInstance();
+
+		if (cpInstance == null) {
+			return StringPool.BLANK;
+		}
 
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
 			_cpInstanceHelper.getCPAttachmentFileEntries(
@@ -103,7 +109,11 @@ public class CommerceSubscriptionContentDisplayContext {
 			CommerceSubscriptionEntry commerceSubscriptionEntry)
 		throws PortalException {
 
-		CPInstance cpInstance = commerceSubscriptionEntry.getCPInstance();
+		CPInstance cpInstance = commerceSubscriptionEntry.fetchCPInstance();
+
+		if (cpInstance == null) {
+			return Collections.emptyList();
+		}
 
 		return _cpInstanceHelper.getKeyValuePairs(
 			cpInstance.getJson(), _cpRequestHelper.getLocale());

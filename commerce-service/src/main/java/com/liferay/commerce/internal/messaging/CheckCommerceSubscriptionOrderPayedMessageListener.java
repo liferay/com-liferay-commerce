@@ -123,9 +123,10 @@ public class CheckCommerceSubscriptionOrderPayedMessageListener
 				_commerceSubscriptionConfiguration.payedOrderInterval());
 
 			CommerceOrder commerceOrder =
-				firstCommerceSubscriptionCycleEntry.getCommerceOrder();
+				firstCommerceSubscriptionCycleEntry.fetchCommerceOrder();
 
-			if (!(commerceOrder.getPaymentStatus() ==
+			if ((commerceOrder != null) &&
+				!(commerceOrder.getPaymentStatus() ==
 					CommerceOrderConstants.PAYMENT_STATUS_PAID) &&
 				!(DateUtil.compareTo(calendar.getTime(), now) < 0)) {
 

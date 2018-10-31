@@ -17,6 +17,7 @@ package com.liferay.commerce.internal.search;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -126,19 +127,26 @@ public class CommerceSubscriptionEntryIndexer
 		Document document = getBaseModelDocument(
 			CLASS_NAME, commerceSubscriptionEntry);
 
-		CommerceOrderItem commerceOrderItem =
-			commerceSubscriptionEntry.getCommerceOrderItem();
-
 		document.addKeyword(FIELD_ACTIVE, commerceSubscriptionEntry.isActive());
 		document.addNumber(
 			FIELD_COMMERCE_ORDER_ITEM_ID,
-			commerceOrderItem.getCommerceOrderItemId());
+			commerceSubscriptionEntry.getCommerceOrderItemId());
 		document.addNumber(
 			FIELD_CP_INSTANCE_ID, commerceSubscriptionEntry.getCPInstanceId());
 		document.addNumber(
 			FIELD_MAX_SUBSCRIPTION_CYCLES,
 			commerceSubscriptionEntry.getMaxSubscriptionCycles());
-		document.addText(FIELD_SKU, commerceOrderItem.getSku());
+
+		String sku = StringPool.BLANK;
+
+		CommerceOrderItem commerceOrderItem =
+			commerceSubscriptionEntry.fetchCommerceOrderItem();
+
+		if (commerceOrderItem != null) {
+			sku = commerceOrderItem.getSku();
+		}
+
+		document.addText(FIELD_SKU, sku);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
