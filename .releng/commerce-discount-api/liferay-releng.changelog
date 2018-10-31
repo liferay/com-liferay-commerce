@@ -7,3 +7,8 @@
 # Bundle Version 1.0.2
 #
 69e448bd659b7f025b1ab9fce089208378d21869^..89e3e7cd760585cfcb8dcc871aeef73e77bfeadd=COMMERCE-530
+
+#
+# Bundle Version 1.0.3
+#
+89e3e7cd760585cfcb8dcc871aeef73e77bfeadd^..475f7748b54dac9b4fde10d0f1a5850c7a1b1c3b=COMMERCE-314 COMMERCE-427 COMMERCE-437 LPS-86408
