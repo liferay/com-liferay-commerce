@@ -47,9 +47,9 @@ long commerceCountryId = commerceCountriesDisplayContext.getCommerceCountryId();
 
 				<aui:input checked="<%= (commerceCountry == null) ? false : commerceCountry.getShippingAllowed() %>" name="shippingAllowed" type="toggle-switch" />
 
-				<aui:input name="twoLettersISOCode" />
+				<aui:input label="two-letter-iso-code" name="twoLettersISOCode" />
 
-				<aui:input name="threeLettersISOCode" />
+				<aui:input label="three-letter-iso-code" name="threeLettersISOCode" />
 
 				<aui:input name="numericISOCode" />
 
