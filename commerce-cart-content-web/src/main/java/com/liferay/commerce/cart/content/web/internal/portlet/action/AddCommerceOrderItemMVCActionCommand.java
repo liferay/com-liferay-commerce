@@ -131,7 +131,8 @@ public class AddCommerceOrderItemMVCActionCommand extends BaseMVCActionCommand {
 			jsonObject.put(
 				"successMessage",
 				LanguageUtil.get(
-					httpServletRequest, "product-successfully-added-to-cart"));
+					httpServletRequest,
+					"the-product-was-successfully-added-to-the-cart"));
 		}
 		catch (CommerceOrderValidatorException cove) {
 			List<CommerceOrderValidatorResult> commerceOrderValidatorResults =

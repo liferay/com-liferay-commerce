@@ -81,7 +81,7 @@ public class DefaultCommerceOrderValidatorImpl
 
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				"minimum-quantity-is-x", String.valueOf(minOrderQuantity));
+				"the-minimum-quantity-is-x", String.valueOf(minOrderQuantity));
 		}
 
 		if ((maxOrderQuantity > 0) &&
@@ -89,7 +89,7 @@ public class DefaultCommerceOrderValidatorImpl
 
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				"maximum-quantity-is-x", String.valueOf(maxOrderQuantity));
+				"the-maximum-quantity-is-x", String.valueOf(maxOrderQuantity));
 		}
 
 		if ((allowedOrderQuantities.length > 0) &&
@@ -99,7 +99,7 @@ public class DefaultCommerceOrderValidatorImpl
 
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				"quantity-is-not-allowed");
+				"that-quantity-is-not-allowed");
 		}
 
 		return new CommerceOrderValidatorResult(true);
@@ -153,7 +153,7 @@ public class DefaultCommerceOrderValidatorImpl
 				allowedOrderQuantities, String.valueOf(quantity))) {
 
 			return new CommerceOrderValidatorResult(
-				false, "quantity-is-not-allowed");
+				false, "that-quantity-is-not-allowed");
 		}
 
 		return new CommerceOrderValidatorResult(true);
