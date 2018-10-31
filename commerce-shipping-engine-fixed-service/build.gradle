@@ -10,7 +10,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.portal.dao.orm.custom.sql.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.spring.extender", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.registry.api", version: "2.0.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "2.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.service", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.shipping.engine.fixed.api", version: "1.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "3.3.0"

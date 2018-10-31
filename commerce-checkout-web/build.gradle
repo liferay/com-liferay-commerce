@@ -7,7 +7,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.osgi.util", version: "4.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.petra.lang", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.petra.string", version: "2.0.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "2.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.order.web", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.organization.api", version: "1.0.0"
