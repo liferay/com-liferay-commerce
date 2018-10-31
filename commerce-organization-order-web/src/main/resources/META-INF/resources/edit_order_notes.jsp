@@ -60,7 +60,7 @@ boolean manageRestrictedNotesPermission = commerceOrganizationOrderDisplayContex
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
 
-	<liferay-ui:error exception="<%= CommerceOrderNoteContentException.class %>" message="please-enter-a-valid-content" />
+	<liferay-ui:error exception="<%= CommerceOrderNoteContentException.class %>" message="please-enter-valid-content" />
 
 	<aui:model-context model="<%= CommerceOrderNote.class %>" />
 
