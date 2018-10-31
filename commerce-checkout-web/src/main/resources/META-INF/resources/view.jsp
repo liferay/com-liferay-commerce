@@ -25,7 +25,7 @@ CheckoutDisplayContext checkoutDisplayContext = (CheckoutDisplayContext)request.
 		<c:choose>
 			<c:when test="<%= checkoutDisplayContext.isEmptyCommerceOrder() %>">
 				<div class="alert alert-info mx-auto">
-					<liferay-ui:message key="cart-is-empty" />
+					<liferay-ui:message key="the-cart-is-empty" />
 					<liferay-ui:message key="please-add-products-to-proceed-with-the-checkout" />
 				</div>
 			</c:when>

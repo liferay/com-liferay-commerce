@@ -47,7 +47,7 @@ request.setAttribute("cpInstance", cpInstance);
 			<c:when test="<%= cpCatalogEntry == null %>">
 				<c:if test="<%= permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId) %>">
 					<div class="alert alert-info">
-						<liferay-ui:message key="no-product-to-display" />
+						<liferay-ui:message key="there-is-no-product-to-display" />
 					</div>
 				</c:if>
 			</c:when>

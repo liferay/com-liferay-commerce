@@ -104,7 +104,8 @@ public class EditCommerceUserSegmentEntryMVCActionCommand
 			if (e instanceof CommerceUserSegmentEntryKeyException) {
 				jsonObject.put(
 					"error",
-					LanguageUtil.get(resourceBundle, "key-is-already-used"));
+					LanguageUtil.get(
+						resourceBundle, "that-key-is-already-used"));
 			}
 			else if (e instanceof CommerceUserSegmentEntryNameException) {
 				jsonObject.put(

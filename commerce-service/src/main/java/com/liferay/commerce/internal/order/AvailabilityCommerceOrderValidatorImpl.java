@@ -65,7 +65,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				"product-is-no-longer-available");
+				"the-product-is-no-longer-available");
 		}
 
 		CPDefinitionInventory cpDefinitionInventory =
@@ -92,7 +92,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 		if (orderQuantity > availableQuantity) {
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				"quantity-unavailable");
+				"that-quantity-is-unavailable");
 		}
 
 		return new CommerceOrderValidatorResult(true);
@@ -114,7 +114,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 			!cpInstance.isPublished() || !cpInstance.isPurchasable()) {
 
 			return new CommerceOrderValidatorResult(
-				false, "product-is-no-longer-available");
+				false, "the-product-is-no-longer-available");
 		}
 
 		CPDefinitionInventory cpDefinitionInventory =
@@ -142,7 +142,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 
 		if (orderQuantity > availableQuantity) {
 			return new CommerceOrderValidatorResult(
-				false, "quantity-unavailable");
+				false, "that-quantity-is-unavailable");
 		}
 
 		return new CommerceOrderValidatorResult(true);
