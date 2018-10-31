@@ -50,8 +50,8 @@
 						</svg>
 					</span>
 
-					<liferay-ui:message key="product-is-not-configured-correctly" />
-					<liferay-ui:message key="please-add-one-or-more-sku" />
+					<liferay-ui:message key="the-product-is-not-configured-correctly" />
+					<liferay-ui:message key="please-add-one-or-more-skus" />
 				</div>
 			</c:if>
 		</div>
