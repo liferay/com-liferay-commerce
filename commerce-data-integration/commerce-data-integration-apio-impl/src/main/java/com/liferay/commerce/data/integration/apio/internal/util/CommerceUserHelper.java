@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.util;
 
-import com.liferay.commerce.data.integration.apio.identifiers.ClassPKExternalReferenceCode;
+import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceUserUpserterForm;
 import com.liferay.external.reference.service.ERUserLocalService;
 import com.liferay.portal.kernel.exception.PortalException;

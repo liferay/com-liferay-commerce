@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.data.integration.apio.identifiers;
+package com.liferay.commerce.data.integration.apio.identifier;
 
 import com.liferay.apio.architect.identifier.Identifier;
 

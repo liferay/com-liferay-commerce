@@ -17,7 +17,7 @@ package com.liferay.commerce.data.integration.apio.internal.uri.mapper;
 import com.liferay.apio.architect.functional.Try;
 import com.liferay.apio.architect.uri.Path;
 import com.liferay.apio.architect.uri.mapper.PathIdentifierMapper;
-import com.liferay.commerce.data.integration.apio.identifiers.ClassPKExternalReferenceCode;
+import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import javax.ws.rs.BadRequestException;

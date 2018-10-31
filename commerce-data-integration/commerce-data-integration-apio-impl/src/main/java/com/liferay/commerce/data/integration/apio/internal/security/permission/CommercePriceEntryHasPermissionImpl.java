@@ -18,8 +18,8 @@ import com.liferay.apio.architect.alias.routes.permission.HasNestedAddingPermiss
 import com.liferay.apio.architect.credentials.Credentials;
 import com.liferay.apio.architect.function.throwable.ThrowableBiFunction;
 import com.liferay.apio.architect.identifier.Identifier;
-import com.liferay.commerce.data.integration.apio.identifiers.ClassPKExternalReferenceCode;
-import com.liferay.commerce.data.integration.apio.identifiers.CommercePriceListIdentifier;
+import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
+import com.liferay.commerce.data.integration.apio.identifier.CommercePriceListIdentifier;
 import com.liferay.commerce.data.integration.apio.internal.util.CommercePriceEntryHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommercePriceListHelper;
 import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
