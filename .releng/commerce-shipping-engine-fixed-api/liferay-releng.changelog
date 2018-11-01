@@ -7,3 +7,8 @@
 # Bundle Version 1.0.2
 #
 a87b31d01d90e0c5807876cfd864db298d8f52c0^..5c02a2175e71fd51dcc3dd0ca784a110c1e42d8a=COMMERCE-530
+
+#
+# Bundle Version 1.0.3
+#
+5c02a2175e71fd51dcc3dd0ca784a110c1e42d8a^..bbbb1abc7c53d7a169df9c062bb82c2a96d9778f=COMMERCE-427 COMMERCE-437
