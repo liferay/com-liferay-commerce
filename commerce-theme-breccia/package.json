@@ -17,6 +17,6 @@
 		"version": "7.1"
 	},
 	"main": "package.json",
-	"name": "commerce-theme-breccia",
+	"name": "commerce-breccia-theme",
 	"version": "1.0.2"
 }
