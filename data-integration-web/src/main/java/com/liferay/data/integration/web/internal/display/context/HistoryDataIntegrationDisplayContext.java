@@ -295,14 +295,13 @@ public class HistoryDataIntegrationDisplayContext {
 	}
 
 	private final ActionHelper _actionHelper;
+	private final DataIntegrationRequestHelper _dataIntegrationRequestHelper;
 	private String _datePattern = "yyyy-dd-MM HH:mm:ss";
 	private final String _defaultOrderByCol;
 	private final String _defaultOrderByType;
 	private final DLFileEntryService _dlFileEntryService;
 	private final HistoryLocalService _historyLocalService;
 	private String _keywords;
-	private final DataIntegrationRequestHelper
-		_dataIntegrationRequestHelper;
 	private final Portal _portal;
 	private final PortletResourcePermission _portletResourcePermission;
 	private RowChecker _rowChecker;

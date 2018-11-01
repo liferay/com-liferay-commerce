@@ -165,8 +165,7 @@ public class EditScheduledTaskActionCommand extends BaseMVCActionCommand {
 		JSONObject payLoad = JSONFactoryUtil.createJSONObject();
 
 		payLoad.put(
-			"executionType",
-			DataIntegrationWebPortletKeys.LR_MANUAL_EXECUTION);
+			"executionType", DataIntegrationWebPortletKeys.LR_MANUAL_EXECUTION);
 		payLoad.put("scheduledTaskId", scheduledTaskId);
 		payLoad.put("userId", userId);
 

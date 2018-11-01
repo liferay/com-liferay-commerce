@@ -79,6 +79,7 @@ public class DataIntegrationMessageListener implements MessageListener {
 				if (_log.isDebugEnabled()) {
 					_log.debug(e);
 				}
+
 				_stopJob(userId, scheduledTaskId);
 			}
 		}
@@ -135,9 +136,9 @@ public class DataIntegrationMessageListener implements MessageListener {
 		}
 	}
 
-	private Log _log = 
-		LogFactoryUtil.getLog(DataIntegrationMessageListener.class);
-	
+	private static final Log _log = LogFactoryUtil.getLog(
+		DataIntegrationMessageListener.class);
+
 	@Reference
 	private ProcessLocalService _processLocalService;
 

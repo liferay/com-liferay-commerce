@@ -14,13 +14,6 @@
 
 package com.liferay.data.integration.web.internal.admin.panel.app;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-
 import com.liferay.application.list.BasePanelApp;
 import com.liferay.application.list.PanelApp;
 import com.liferay.application.list.constants.PanelCategoryKeys;
@@ -33,6 +26,13 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Portlet;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
+
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author guywandji

@@ -234,11 +234,10 @@ public class DataIntegrationProcessListDisplayContext {
 	protected LiferayPortletResponse liferayPortletResponse;
 
 	private final ActionHelper _actionHelper;
+	private final DataIntegrationRequestHelper _dataIntegrationRequestHelper;
 	private final String _defaultOrderByCol;
 	private final String _defaultOrderByType;
 	private String _keywords;
-	private final DataIntegrationRequestHelper
-		_dataIntegrationRequestHelper;
 	private final Portal _portal;
 	private final PortletResourcePermission _portletResourcePermission;
 	private final ProcessService _processService;

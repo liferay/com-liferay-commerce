@@ -450,12 +450,12 @@ public class ScheduledTaskLocalServiceImpl
 		return cronExpressionSB.toString();
 	}
 
+	private static final Log _log = LogFactoryUtil.getLog(
+		ScheduledTaskLocalServiceImpl.class);
+
 	@ServiceReference(type = GroupLocalService.class)
 	private GroupLocalService _groupLocalService;
-	
-	private Log _log = 
-		LogFactoryUtil.getLog(ScheduledTaskLocalServiceImpl.class);
-	
+
 	@ServiceReference(type = SchedulerEngineHelper.class)
 	private SchedulerEngineHelper _schedulerEngineHelper;
 

@@ -14,6 +14,13 @@
 
 package com.liferay.data.integration.web.internal.util;
 
+import com.liferay.data.integration.web.internal.admin.api.DataIntegrationAdminModule;
+import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
+import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.util.Collections;
 import java.util.NavigableMap;
 import java.util.TreeMap;
@@ -23,19 +30,10 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 
-import com.liferay.data.integration.web.internal.admin.api.DataIntegrationAdminModule;
-import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
-import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 /**
  * @author guywandji
  */
-@Component(
-	immediate = true, service = DataIntegrationAdminModuleRegistry.class
-)
+@Component(immediate = true, service = DataIntegrationAdminModuleRegistry.class)
 public class DataIntegrationAdminModuleRegistry {
 
 	public NavigableMap<String, DataIntegrationAdminModule>
@@ -70,8 +68,7 @@ public class DataIntegrationAdminModuleRegistry {
 			dataIntegrationAdminModules = new TreeMap<>();
 
 		try {
-			dataIntegrationAdminModules = getDataIntegrationAdminModules(
-				-1);
+			dataIntegrationAdminModules = getDataIntegrationAdminModules(-1);
 		}
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {

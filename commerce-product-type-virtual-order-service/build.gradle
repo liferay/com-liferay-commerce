@@ -1,6 +1,3 @@
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
-
 buildService {
 	apiDir = "../commerce-product-type-virtual-order-api/src/main/java"
 	testDir = "../commerce-product-type-virtual-order-test/src/testIntegration/java"

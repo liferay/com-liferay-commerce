@@ -1,6 +1,7 @@
 buildService {
 	apiDir = "../data-integration-api/src/main/java"
 }
+
 dependencies {
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.5.0"
 	compileOnly group: "com.liferay", name: "com.liferay.osgi.service.tracker.collections", version: "3.0.0"
