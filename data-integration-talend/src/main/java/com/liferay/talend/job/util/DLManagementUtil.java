@@ -85,9 +85,7 @@ public class DLManagementUtil {
 
 				File newFile = new File(
 					uncompressedDirectory + File.separator + fileName);
-
-				System.out.println("Unzipping to " + newFile.getAbsolutePath());
-
+	
 				new File(newFile.getParent()).mkdirs();
 
 				if (!ze.isDirectory()) {
