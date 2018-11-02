@@ -688,7 +688,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 	}
 
 	private static final String _BRECCIA_THEME_ID =
-		"breccia_WAR_commercethemebreccia";
+		"breccia_WAR_commercebrecciatheme";
 
 	private static final String _COMMERCE_VOCABULARY = "Commerce";
 
