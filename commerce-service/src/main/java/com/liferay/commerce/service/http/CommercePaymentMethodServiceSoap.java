@@ -136,6 +136,23 @@ public class CommercePaymentMethodServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommercePaymentMethodSoap[] getCommercePaymentMethods(
+		long groupId, long commerceCountryId, boolean active)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommercePaymentMethod> returnValue =
+				CommercePaymentMethodServiceUtil.getCommercePaymentMethods(groupId,
+					commerceCountryId, active);
+
+			return com.liferay.commerce.model.CommercePaymentMethodSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCommercePaymentMethodsCount(long groupId,
 		boolean active) throws RemoteException {
 		try {

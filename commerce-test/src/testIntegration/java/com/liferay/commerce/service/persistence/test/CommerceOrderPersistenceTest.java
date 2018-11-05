@@ -156,6 +156,8 @@ public class CommerceOrderPersistenceTest {
 
 		newCommerceOrder.setCommercePaymentMethodId(RandomTestUtil.nextLong());
 
+		newCommerceOrder.setTransactionId(RandomTestUtil.randomString());
+
 		newCommerceOrder.setCommerceShippingMethodId(RandomTestUtil.nextLong());
 
 		newCommerceOrder.setShippingOptionName(RandomTestUtil.randomString());
@@ -269,6 +271,8 @@ public class CommerceOrderPersistenceTest {
 			newCommerceOrder.getShippingAddressId());
 		Assert.assertEquals(existingCommerceOrder.getCommercePaymentMethodId(),
 			newCommerceOrder.getCommercePaymentMethodId());
+		Assert.assertEquals(existingCommerceOrder.getTransactionId(),
+			newCommerceOrder.getTransactionId());
 		Assert.assertEquals(existingCommerceOrder.getCommerceShippingMethodId(),
 			newCommerceOrder.getCommerceShippingMethodId());
 		Assert.assertEquals(existingCommerceOrder.getShippingOptionName(),
@@ -448,10 +452,11 @@ public class CommerceOrderPersistenceTest {
 			true, "orderOrganizationId", true, "orderUserId", true,
 			"commerceCurrencyId", true, "billingAddressId", true,
 			"shippingAddressId", true, "commercePaymentMethodId", true,
-			"commerceShippingMethodId", true, "shippingOptionName", true,
-			"purchaseOrderNumber", true, "subtotal", true,
-			"subtotalDiscountAmount", true, "subtotalDiscountPercentageLevel1",
-			true, "subtotalDiscountPercentageLevel2", true,
+			"transactionId", true, "commerceShippingMethodId", true,
+			"shippingOptionName", true, "purchaseOrderNumber", true,
+			"subtotal", true, "subtotalDiscountAmount", true,
+			"subtotalDiscountPercentageLevel1", true,
+			"subtotalDiscountPercentageLevel2", true,
 			"subtotalDiscountPercentageLevel3", true,
 			"subtotalDiscountPercentageLevel4", true, "shippingAmount", true,
 			"shippingDiscountAmount", true, "shippingDiscountPercentageLevel1",
@@ -719,6 +724,8 @@ public class CommerceOrderPersistenceTest {
 		commerceOrder.setShippingAddressId(RandomTestUtil.nextLong());
 
 		commerceOrder.setCommercePaymentMethodId(RandomTestUtil.nextLong());
+
+		commerceOrder.setTransactionId(RandomTestUtil.randomString());
 
 		commerceOrder.setCommerceShippingMethodId(RandomTestUtil.nextLong());
 

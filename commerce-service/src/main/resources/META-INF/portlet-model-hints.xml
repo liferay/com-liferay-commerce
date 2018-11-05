@@ -106,6 +106,7 @@
 		<field name="billingAddressId" type="long" />
 		<field name="shippingAddressId" type="long" />
 		<field name="commercePaymentMethodId" type="long" />
+		<field name="transactionId" type="String" />
 		<field name="commerceShippingMethodId" type="long" />
 		<field name="shippingOptionName" type="String">
 			<hint name="max-length">255</hint>

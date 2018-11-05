@@ -48,6 +48,14 @@ public class CommerceOrderPaymentLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrderPayment addCommerceOrderPayment(
+		long commerceOrderId, int status, String result)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderPaymentLocalService.addCommerceOrderPayment(commerceOrderId,
+			status, result);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrderPayment addCommerceOrderPayment(
 		long commerceOrderId, int status, String content,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {

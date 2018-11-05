@@ -55,6 +55,13 @@ public class CommerceOrderPaymentLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderPayment addCommerceOrderPayment(
+		long commerceOrderId, int status, String result)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceOrderPayment(commerceOrderId, status, result);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderPayment addCommerceOrderPayment(
 		long commerceOrderId, int status, String content,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {

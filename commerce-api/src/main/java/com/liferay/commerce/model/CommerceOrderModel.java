@@ -341,6 +341,21 @@ public interface CommerceOrderModel extends BaseModel<CommerceOrder>,
 	public void setCommercePaymentMethodId(long commercePaymentMethodId);
 
 	/**
+	 * Returns the transaction ID of this commerce order.
+	 *
+	 * @return the transaction ID of this commerce order
+	 */
+	@AutoEscape
+	public String getTransactionId();
+
+	/**
+	 * Sets the transaction ID of this commerce order.
+	 *
+	 * @param transactionId the transaction ID of this commerce order
+	 */
+	public void setTransactionId(String transactionId);
+
+	/**
 	 * Returns the commerce shipping method ID of this commerce order.
 	 *
 	 * @return the commerce shipping method ID of this commerce order

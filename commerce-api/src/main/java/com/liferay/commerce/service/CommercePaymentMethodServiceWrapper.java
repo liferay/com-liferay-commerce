@@ -84,6 +84,14 @@ public class CommercePaymentMethodServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.commerce.model.CommercePaymentMethod> getCommercePaymentMethods(
+		long groupId, long commerceCountryId, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commercePaymentMethodService.getCommercePaymentMethods(groupId,
+			commerceCountryId, active);
+	}
+
+	@Override
 	public int getCommercePaymentMethodsCount(long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commercePaymentMethodService.getCommercePaymentMethodsCount(groupId,

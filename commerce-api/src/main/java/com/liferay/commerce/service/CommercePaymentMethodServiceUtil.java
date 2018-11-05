@@ -85,6 +85,13 @@ public class CommercePaymentMethodServiceUtil {
 		return getService().getCommercePaymentMethods(groupId, active);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommercePaymentMethod> getCommercePaymentMethods(
+		long groupId, long commerceCountryId, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommercePaymentMethods(groupId, commerceCountryId, active);
+	}
+
 	public static int getCommercePaymentMethodsCount(long groupId,
 		boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {

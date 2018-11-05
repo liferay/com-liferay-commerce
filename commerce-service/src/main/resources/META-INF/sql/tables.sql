@@ -139,6 +139,7 @@ create table CommerceOrder (
 	billingAddressId LONG,
 	shippingAddressId LONG,
 	commercePaymentMethodId LONG,
+	transactionId VARCHAR(75) null,
 	commerceShippingMethodId LONG,
 	shippingOptionName VARCHAR(255) null,
 	purchaseOrderNumber VARCHAR(75) null,

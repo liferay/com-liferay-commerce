@@ -74,15 +74,9 @@ public interface CommerceOrderService extends BaseService {
 	public CommerceOrder approveCommerceOrder(long commerceOrderId)
 		throws PortalException;
 
-	public CommerceOrder cancelCommerceOrderPayment(long commerceOrderId,
-		ServiceContext serviceContext) throws PortalException;
-
 	public CommerceOrder checkoutCommerceOrder(long commerceOrderId,
 		CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
-
-	public CommerceOrder completeCommerceOrderPayment(long commerceOrderId,
-		ServiceContext serviceContext) throws PortalException;
 
 	public void deleteCommerceOrder(long commerceOrderId)
 		throws PortalException;
@@ -155,9 +149,6 @@ public interface CommerceOrderService extends BaseService {
 	public CommerceOrder reorderCommerceOrder(long commerceOrderId,
 		CommerceContext commerceContext) throws PortalException;
 
-	public String startCommerceOrderPayment(long commerceOrderId,
-		ServiceContext serviceContext) throws PortalException;
-
 	public CommerceOrder submitCommerceOrder(long commerceOrderId)
 		throws PortalException;
 
@@ -187,7 +178,10 @@ public interface CommerceOrderService extends BaseService {
 		throws PortalException;
 
 	public CommerceOrder updatePaymentStatus(long commerceOrderId,
-		int paymentStatus, ServiceContext serviceContext)
+		int paymentStatus) throws PortalException;
+
+	public CommerceOrder updatePaymentStatusAndTransactionId(
+		long commerceOrderId, int paymentStatus, String transactionId)
 		throws PortalException;
 
 	public CommerceOrder updatePurchaseOrderNumber(long commerceOrderId,
@@ -198,6 +192,9 @@ public interface CommerceOrderService extends BaseService {
 		String street3, String city, String zip, long commerceRegionId,
 		long commerceCountryId, String phoneNumber,
 		ServiceContext serviceContext) throws PortalException;
+
+	public CommerceOrder updateTransactionId(long commerceOrderId,
+		String transactionId) throws PortalException;
 
 	public CommerceOrder updateUser(long commerceOrderId, long userId)
 		throws PortalException;

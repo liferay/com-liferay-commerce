@@ -78,6 +78,7 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		attributes.put("billingAddressId", getBillingAddressId());
 		attributes.put("shippingAddressId", getShippingAddressId());
 		attributes.put("commercePaymentMethodId", getCommercePaymentMethodId());
+		attributes.put("transactionId", getTransactionId());
 		attributes.put("commerceShippingMethodId", getCommerceShippingMethodId());
 		attributes.put("shippingOptionName", getShippingOptionName());
 		attributes.put("purchaseOrderNumber", getPurchaseOrderNumber());
@@ -221,6 +222,12 @@ public class CommerceOrderWrapper implements CommerceOrder,
 
 		if (commercePaymentMethodId != null) {
 			setCommercePaymentMethodId(commercePaymentMethodId);
+		}
+
+		String transactionId = (String)attributes.get("transactionId");
+
+		if (transactionId != null) {
+			setTransactionId(transactionId);
 		}
 
 		Long commerceShippingMethodId = (Long)attributes.get(
@@ -980,6 +987,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	/**
+	* Returns the transaction ID of this commerce order.
+	*
+	* @return the transaction ID of this commerce order
+	*/
+	@Override
+	public String getTransactionId() {
+		return _commerceOrder.getTransactionId();
+	}
+
+	/**
 	* Returns the user ID of this commerce order.
 	*
 	* @return the user ID of this commerce order
@@ -1660,6 +1677,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	public void setTotalDiscounts(
 		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue) {
 		_commerceOrder.setTotalDiscounts(commerceDiscountValue);
+	}
+
+	/**
+	* Sets the transaction ID of this commerce order.
+	*
+	* @param transactionId the transaction ID of this commerce order
+	*/
+	@Override
+	public void setTransactionId(String transactionId) {
+		_commerceOrder.setTransactionId(transactionId);
 	}
 
 	/**
