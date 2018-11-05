@@ -67,7 +67,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(91);
+		StringBundler sb = new StringBundler(93);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -101,6 +101,8 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		sb.append(shippingAddressId);
 		sb.append(", commercePaymentMethodId=");
 		sb.append(commercePaymentMethodId);
+		sb.append(", transactionId=");
+		sb.append(transactionId);
 		sb.append(", commerceShippingMethodId=");
 		sb.append(commerceShippingMethodId);
 		sb.append(", shippingOptionName=");
@@ -215,6 +217,14 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		commerceOrderImpl.setBillingAddressId(billingAddressId);
 		commerceOrderImpl.setShippingAddressId(shippingAddressId);
 		commerceOrderImpl.setCommercePaymentMethodId(commercePaymentMethodId);
+
+		if (transactionId == null) {
+			commerceOrderImpl.setTransactionId("");
+		}
+		else {
+			commerceOrderImpl.setTransactionId(transactionId);
+		}
+
 		commerceOrderImpl.setCommerceShippingMethodId(commerceShippingMethodId);
 
 		if (shippingOptionName == null) {
@@ -312,6 +322,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		shippingAddressId = objectInput.readLong();
 
 		commercePaymentMethodId = objectInput.readLong();
+		transactionId = objectInput.readUTF();
 
 		commerceShippingMethodId = objectInput.readLong();
 		shippingOptionName = objectInput.readUTF();
@@ -397,6 +408,13 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 
 		objectOutput.writeLong(commercePaymentMethodId);
 
+		if (transactionId == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(transactionId);
+		}
+
 		objectOutput.writeLong(commerceShippingMethodId);
 
 		if (shippingOptionName == null) {
@@ -474,6 +492,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 	public long billingAddressId;
 	public long shippingAddressId;
 	public long commercePaymentMethodId;
+	public String transactionId;
 	public long commerceShippingMethodId;
 	public String shippingOptionName;
 	public String purchaseOrderNumber;
