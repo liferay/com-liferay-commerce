@@ -17,9 +17,9 @@ package com.liferay.commerce.payment.method.web.internal.portlet.action;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.exception.NoSuchPaymentMethodException;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethodRegistry;
 import com.liferay.commerce.payment.method.web.internal.display.context.CommercePaymentMethodsDisplayContext;
 import com.liferay.commerce.service.CommercePaymentMethodService;
-import com.liferay.commerce.util.CommercePaymentEngineRegistry;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -65,7 +65,7 @@ public class EditCommercePaymentMethodMVCRenderCommand
 			CommercePaymentMethodsDisplayContext
 				commercePaymentMethodsDisplayContext =
 					new CommercePaymentMethodsDisplayContext(
-						_commercePaymentEngineRegistry,
+						_commercePaymentEngineMethodRegistry,
 						_commercePaymentMethodService,
 						_portletResourcePermission, renderRequest,
 						renderResponse);
@@ -99,7 +99,8 @@ public class EditCommercePaymentMethodMVCRenderCommand
 	}
 
 	@Reference
-	private CommercePaymentEngineRegistry _commercePaymentEngineRegistry;
+	private CommercePaymentEngineMethodRegistry
+		_commercePaymentEngineMethodRegistry;
 
 	@Reference
 	private CommercePaymentMethodService _commercePaymentMethodService;

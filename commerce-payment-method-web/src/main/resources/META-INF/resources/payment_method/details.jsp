@@ -69,16 +69,6 @@ long commercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodId(
 
 			<aui:input checked="<%= (commercePaymentMethod == null) ? false : commercePaymentMethod.isActive() %>" name="active" type="toggle-switch" />
 		</aui:fieldset>
-
-		<aui:fieldset>
-
-			<%
-			CommercePaymentEngine commercePaymentEngine = commercePaymentMethodsDisplayContext.getCommercePaymentEngine();
-
-			commercePaymentEngine.renderConfiguration(renderRequest, renderResponse);
-			%>
-
-		</aui:fieldset>
 	</aui:fieldset-group>
 
 	<aui:button-row>

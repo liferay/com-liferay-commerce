@@ -16,9 +16,10 @@ package com.liferay.commerce.payment.method.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommercePaymentMethod;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethodRegistry;
+import com.liferay.commerce.payment.method.CommercePaymentScreenNavigationConstants;
 import com.liferay.commerce.payment.method.web.internal.display.context.CommercePaymentMethodsDisplayContext;
 import com.liferay.commerce.service.CommercePaymentMethodService;
-import com.liferay.commerce.util.CommercePaymentEngineRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -100,7 +101,7 @@ public class CommercePaymentMethodDetailsScreenNavigationEntry
 			CommercePaymentMethodsDisplayContext
 				commercePaymentMethodsDisplayContext =
 					new CommercePaymentMethodsDisplayContext(
-						_commercePaymentEngineRegistry,
+						_commercePaymentEngineMethodRegistry,
 						_commercePaymentMethodService,
 						_portletResourcePermission, renderRequest,
 						renderResponse);
@@ -122,7 +123,8 @@ public class CommercePaymentMethodDetailsScreenNavigationEntry
 		CommercePaymentMethodDetailsScreenNavigationEntry.class);
 
 	@Reference
-	private CommercePaymentEngineRegistry _commercePaymentEngineRegistry;
+	private CommercePaymentEngineMethodRegistry
+		_commercePaymentEngineMethodRegistry;
 
 	@Reference
 	private CommercePaymentMethodService _commercePaymentMethodService;
