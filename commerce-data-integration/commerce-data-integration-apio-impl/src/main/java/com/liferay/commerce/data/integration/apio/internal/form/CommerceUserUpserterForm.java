@@ -100,6 +100,15 @@ public class CommerceUserUpserterForm {
 	}
 
 	/**
+	 * Returns the person's birth day.
+	 *
+	 * @return the person's birth day
+	 */
+	public Optional<Integer> getBirthdayDayOptional() {
+		return Optional.ofNullable(_birthdayDay);
+	}
+
+	/**
 	 * Returns the person's birth month.
 	 *
 	 * @return the person's birth month
@@ -113,6 +122,15 @@ public class CommerceUserUpserterForm {
 	}
 
 	/**
+	 * Returns the person's birth month.
+	 *
+	 * @return the person's birth month
+	 */
+	public Optional<Integer> getBirthdayMonthOptional() {
+		return Optional.ofNullable(_birthdayMonth);
+	}
+
+	/**
 	 * Returns the person's birth year.
 	 *
 	 * @return the person's birth year
@@ -123,6 +141,15 @@ public class CommerceUserUpserterForm {
 		}
 
 		return 1970;
+	}
+
+	/**
+	 * Returns the person's birth year.
+	 *
+	 * @return the person's birth year
+	 */
+	public Optional<Integer> getBirthdayYearOptional() {
+		return Optional.ofNullable(_birthdayYear);
 	}
 
 	public long[] getCommerceAccountIds() {
@@ -183,6 +210,15 @@ public class CommerceUserUpserterForm {
 		).orElse(
 			""
 		);
+	}
+
+	/**
+	 * Returns the person's password.
+	 *
+	 * @return the person's password
+	 */
+	public String getPassword() {
+		return _password;
 	}
 
 	public String[] getRoleNames() {
@@ -282,6 +318,10 @@ public class CommerceUserUpserterForm {
 		_jobTitle = jobTitle;
 	}
 
+	public void setPassword(String password) {
+		_password = password;
+	}
+
 	public void setRoleNames(String roleNames) {
 		_roleNames = roleNames;
 	}
@@ -300,6 +340,7 @@ public class CommerceUserUpserterForm {
 	private String _honorificSuffix;
 	private String _jobTitle;
 	private Boolean _male;
+	private String _password;
 	private String _roleNames;
 
 }
