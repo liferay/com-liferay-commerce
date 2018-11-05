@@ -30,6 +30,7 @@ page import="com.liferay.commerce.checkout.web.internal.display.context.Checkout
 page import="com.liferay.commerce.checkout.web.internal.display.context.OrderConfirmationCheckoutStepDisplayContext" %><%@
 page import="com.liferay.commerce.checkout.web.internal.display.context.OrderSummaryCheckoutStepDisplayContext" %><%@
 page import="com.liferay.commerce.checkout.web.internal.display.context.PaymentMethodCheckoutStepDisplayContext" %><%@
+page import="com.liferay.commerce.checkout.web.internal.display.context.PaymentProcessCheckoutStepDisplayContext" %><%@
 page import="com.liferay.commerce.checkout.web.internal.display.context.ShippingMethodCheckoutStepDisplayContext" %><%@
 page import="com.liferay.commerce.checkout.web.util.CommerceCheckoutStep" %><%@
 page import="com.liferay.commerce.constants.CommerceOrderPaymentConstants" %><%@
