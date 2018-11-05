@@ -60,38 +60,38 @@ public class CommercePriceListHasPermissionImpl
 	@Override
 	public Boolean forDeleting(
 			Credentials credentials,
-			ClassPKExternalReferenceCode classPKExternalReferenceCode)
+			ClassPKExternalReferenceCode commercePriceListCPKERC)
 		throws Exception {
 
 		return _forItemRoutesOperations().apply(
-			credentials, classPKExternalReferenceCode);
+			credentials, commercePriceListCPKERC);
 	}
 
 	@Override
 	public Boolean forUpdating(
 			Credentials credentials,
-			ClassPKExternalReferenceCode classPKExternalReferenceCode)
+			ClassPKExternalReferenceCode commercePriceListCPKERC)
 		throws Exception {
 
 		return _forItemRoutesOperations().apply(
-			credentials, classPKExternalReferenceCode);
+			credentials, commercePriceListCPKERC);
 	}
 
 	private ThrowableBiFunction
 		<Credentials, ClassPKExternalReferenceCode, Boolean>
 			_forItemRoutesOperations() {
 
-		return (credentials, classPKExternalReferenceCode) -> {
+		return (credentials, commercePriceListCPKERC) -> {
 			CommercePriceList commercePriceEntry =
 				_commercePriceListHelper.
 					getCommercePriceListByClassPKExternalReferenceCode(
-						classPKExternalReferenceCode);
+						commercePriceListCPKERC);
 
 			if (commercePriceEntry == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"No CommercePriceEntry exists with external " +
-							"reference code " + classPKExternalReferenceCode);
+							"reference code " + commercePriceListCPKERC);
 				}
 
 				return false;
