@@ -16,13 +16,13 @@ package com.liferay.commerce.internal.servlet;
 
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
+import com.liferay.commerce.payment.method.CommercePaymentRequest;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -84,16 +84,22 @@ public class CommercePaymentServlet extends HttpServlet {
 				_commerceOrderService.getCommerceOrderByUuidAndGroupId(
 					uuid, groupId);
 
-			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				httpServletRequest);
+			String payerId = ParamUtil.getString(httpServletRequest, "PayerID");
+			String paymentId = ParamUtil.getString(
+				httpServletRequest, "paymentId");
+
+			CommercePaymentRequest commercePaymentRequest =
+				new CommercePaymentRequest(
+					commerceOrder.getTotal(), null,
+					commerceOrder.getCommerceOrderId(),
+					_portal.getLocale(httpServletRequest), payerId, null,
+					paymentId);
 
 			if (cancel) {
-				_commerceOrderService.cancelCommerceOrderPayment(
-					commerceOrder.getCommerceOrderId(), serviceContext);
+				_commercePaymentEngine.cancelPayment(commercePaymentRequest);
 			}
 			else {
-				_commerceOrderService.completeCommerceOrderPayment(
-					commerceOrder.getCommerceOrderId(), serviceContext);
+				_commercePaymentEngine.completePayment(commercePaymentRequest);
 			}
 
 			httpServletResponse.sendRedirect(redirect);
@@ -105,6 +111,9 @@ public class CommercePaymentServlet extends HttpServlet {
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
+
+	@Reference
+	private CommercePaymentEngine _commercePaymentEngine;
 
 	@Reference
 	private Portal _portal;
