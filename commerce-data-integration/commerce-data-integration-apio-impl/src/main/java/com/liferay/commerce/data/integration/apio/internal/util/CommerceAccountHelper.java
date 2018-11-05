@@ -45,17 +45,15 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceAccountHelper {
 
 	public void deleteOrganization(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode,
-			Company company)
+			ClassPKExternalReferenceCode commerceAccountCPKERC, Company company)
 		throws PortalException {
 
 		Organization organization = getOrganization(
-			classPKExternalReferenceCode, company);
+			commerceAccountCPKERC, company);
 
 		if (organization == null) {
 			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Account does not exist: " + classPKExternalReferenceCode);
+				_log.info("Account does not exist: " + commerceAccountCPKERC);
 			}
 		}
 		else {
@@ -67,27 +65,24 @@ public class CommerceAccountHelper {
 	}
 
 	public Organization getOrganization(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode,
-			Company company)
+			ClassPKExternalReferenceCode commerceAccountCPKERC, Company company)
 		throws PortalException {
 
-		return getOrganization(
-			classPKExternalReferenceCode, company.getCompanyId());
+		return getOrganization(commerceAccountCPKERC, company.getCompanyId());
 	}
 
 	public Organization getOrganization(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode,
-			long companyId)
+			ClassPKExternalReferenceCode commerceAccountCPKERC, long companyId)
 		throws PortalException {
 
-		long organizationId = classPKExternalReferenceCode.getClassPK();
+		long organizationId = commerceAccountCPKERC.getClassPK();
 
 		if (organizationId > 0) {
 			return _commerceOrganizationService.getOrganization(organizationId);
 		}
 
 		String externalReferenceCode =
-			classPKExternalReferenceCode.getExternalReferenceCode();
+			commerceAccountCPKERC.getExternalReferenceCode();
 
 		return _organizationLocalService.fetchOrganizationByReferenceCode(
 			companyId, externalReferenceCode);
@@ -133,13 +128,12 @@ public class CommerceAccountHelper {
 	}
 
 	public Organization updateOrganization(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode,
-			String name, long regionId, long countryId, List<Long> userIds,
-			User currentUser)
+			ClassPKExternalReferenceCode commerceAccountCPKERC, String name,
+			long regionId, long countryId, List<Long> userIds, User currentUser)
 		throws PortalException {
 
 		Organization organization = getOrganization(
-			classPKExternalReferenceCode, currentUser.getCompanyId());
+			commerceAccountCPKERC, currentUser.getCompanyId());
 
 		organization = _organizationLocalService.updateOrganization(
 			currentUser.getCompanyId(), organization.getOrganizationId(),
