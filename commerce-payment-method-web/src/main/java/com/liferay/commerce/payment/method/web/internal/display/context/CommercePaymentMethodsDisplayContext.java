@@ -15,12 +15,12 @@
 package com.liferay.commerce.payment.method.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
-import com.liferay.commerce.model.CommercePaymentEngine;
 import com.liferay.commerce.model.CommercePaymentMethod;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethod;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethodRegistry;
+import com.liferay.commerce.payment.method.CommercePaymentScreenNavigationConstants;
 import com.liferay.commerce.payment.method.web.internal.admin.PaymentMethodsCommerceAdminModule;
-import com.liferay.commerce.payment.method.web.internal.servlet.taglib.ui.CommercePaymentScreenNavigationConstants;
 import com.liferay.commerce.service.CommercePaymentMethodService;
-import com.liferay.commerce.util.CommercePaymentEngineRegistry;
 import com.liferay.commerce.util.comparator.CommercePaymentMethodNameComparator;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -48,19 +48,20 @@ import javax.portlet.RenderResponse;
 public class CommercePaymentMethodsDisplayContext {
 
 	public CommercePaymentMethodsDisplayContext(
-		CommercePaymentEngineRegistry commercePaymentEngineRegistry,
+		CommercePaymentEngineMethodRegistry commercePaymentEngineMethodRegistry,
 		CommercePaymentMethodService commercePaymentMethodService,
 		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		_commercePaymentEngineRegistry = commercePaymentEngineRegistry;
+		_commercePaymentEngineMethodRegistry =
+			commercePaymentEngineMethodRegistry;
 		_commercePaymentMethodService = commercePaymentMethodService;
 		_portletResourcePermission = portletResourcePermission;
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
 	}
 
-	public CommercePaymentEngine getCommercePaymentEngine()
+	public CommercePaymentEngineMethod getCommercePaymentEngineMethod()
 		throws PortalException {
 
 		String key = null;
@@ -79,7 +80,8 @@ public class CommercePaymentMethodsDisplayContext {
 			}
 		}
 
-		return _commercePaymentEngineRegistry.getCommercePaymentEngine(key);
+		return _commercePaymentEngineMethodRegistry.getCommercePaymentMethod(
+			key);
 	}
 
 	public CommercePaymentMethod getCommercePaymentMethod()
@@ -195,8 +197,9 @@ public class CommercePaymentMethodsDisplayContext {
 
 		commercePaymentMethods = ListUtil.copy(commercePaymentMethods);
 
-		Map<String, CommercePaymentEngine> commercePaymentEngines =
-			_commercePaymentEngineRegistry.getCommercePaymentEngines();
+		Map<String, CommercePaymentEngineMethod> commercePaymentEngines =
+			_commercePaymentEngineMethodRegistry.
+				getCommercePaymentEngineMethods();
 
 		Set<String> commerceEngineKeys = new TreeSet<>(
 			commercePaymentEngines.keySet());
@@ -221,8 +224,9 @@ public class CommercePaymentMethodsDisplayContext {
 			String engineKey)
 		throws PortalException {
 
-		CommercePaymentEngine commercePaymentEngine =
-			_commercePaymentEngineRegistry.getCommercePaymentEngine(engineKey);
+		CommercePaymentEngineMethod commercePaymentEngineMethod =
+			_commercePaymentEngineMethodRegistry.getCommercePaymentMethod(
+				engineKey);
 
 		CommercePaymentMethod commercePaymentMethod =
 			_commercePaymentMethodService.createCommercePaymentMethod(0L);
@@ -230,9 +234,9 @@ public class CommercePaymentMethodsDisplayContext {
 		Locale locale = LocaleUtil.getSiteDefault();
 
 		commercePaymentMethod.setName(
-			commercePaymentEngine.getName(locale), locale);
+			commercePaymentEngineMethod.getName(locale), locale);
 		commercePaymentMethod.setDescription(
-			commercePaymentEngine.getDescription(locale), locale);
+			commercePaymentEngineMethod.getDescription(locale), locale);
 
 		commercePaymentMethod.setEngineKey(engineKey);
 
@@ -243,7 +247,8 @@ public class CommercePaymentMethodsDisplayContext {
 		return ParamUtil.getString(_renderRequest, "navigation");
 	}
 
-	private final CommercePaymentEngineRegistry _commercePaymentEngineRegistry;
+	private final CommercePaymentEngineMethodRegistry
+		_commercePaymentEngineMethodRegistry;
 	private CommercePaymentMethod _commercePaymentMethod;
 	private final CommercePaymentMethodService _commercePaymentMethodService;
 	private final PortletResourcePermission _portletResourcePermission;

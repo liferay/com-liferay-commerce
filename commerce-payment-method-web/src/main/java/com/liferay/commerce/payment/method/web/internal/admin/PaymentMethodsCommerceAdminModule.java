@@ -17,10 +17,10 @@ package com.liferay.commerce.payment.method.web.internal.admin;
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethodRegistry;
 import com.liferay.commerce.payment.method.web.internal.display.context.CommercePaymentMethodsDisplayContext;
 import com.liferay.commerce.service.CommercePaymentMethodLocalService;
 import com.liferay.commerce.service.CommercePaymentMethodService;
-import com.liferay.commerce.util.CommercePaymentEngineRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -91,8 +91,9 @@ public class PaymentMethodsCommerceAdminModule implements CommerceAdminModule {
 
 		CommercePaymentMethodsDisplayContext commerceCurrenciesDisplayContext =
 			new CommercePaymentMethodsDisplayContext(
-				_commercePaymentEngineRegistry, _commercePaymentMethodService,
-				_portletResourcePermission, renderRequest, renderResponse);
+				_commercePaymentEngineMethodRegistry,
+				_commercePaymentMethodService, _portletResourcePermission,
+				renderRequest, renderResponse);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCurrenciesDisplayContext);
@@ -108,7 +109,8 @@ public class PaymentMethodsCommerceAdminModule implements CommerceAdminModule {
 	}
 
 	@Reference
-	private CommercePaymentEngineRegistry _commercePaymentEngineRegistry;
+	private CommercePaymentEngineMethodRegistry
+		_commercePaymentEngineMethodRegistry;
 
 	@Reference
 	private CommercePaymentMethodLocalService

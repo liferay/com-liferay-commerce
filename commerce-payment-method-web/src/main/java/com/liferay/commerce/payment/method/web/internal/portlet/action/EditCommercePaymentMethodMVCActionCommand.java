@@ -17,10 +17,10 @@ package com.liferay.commerce.payment.method.web.internal.portlet.action;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.exception.CommercePaymentMethodNameException;
 import com.liferay.commerce.exception.NoSuchPaymentMethodException;
-import com.liferay.commerce.model.CommercePaymentEngine;
 import com.liferay.commerce.model.CommercePaymentMethod;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethod;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethodRegistry;
 import com.liferay.commerce.service.CommercePaymentMethodService;
-import com.liferay.commerce.util.CommercePaymentEngineRegistry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -86,18 +86,19 @@ public class EditCommercePaymentMethodMVCActionCommand
 
 		String engineKey = ParamUtil.getString(actionRequest, "engineKey");
 
-		CommercePaymentEngine commercePaymentEngine =
-			_commercePaymentEngineRegistry.getCommercePaymentEngine(engineKey);
+		CommercePaymentEngineMethod commercePaymentEngineMethod =
+			_commercePaymentEngineMethodRegistry.getCommercePaymentMethod(
+				engineKey);
 
 		Map<Locale, String> nameMap = new HashMap<>();
 		Map<Locale, String> descriptionMap = new HashMap<>();
 
 		nameMap.put(
 			siteDefaultLocale,
-			commercePaymentEngine.getName(siteDefaultLocale));
+			commercePaymentEngineMethod.getName(siteDefaultLocale));
 		descriptionMap.put(
 			siteDefaultLocale,
-			commercePaymentEngine.getDescription(siteDefaultLocale));
+			commercePaymentEngineMethod.getDescription(siteDefaultLocale));
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommercePaymentMethod.class.getName(), actionRequest);
@@ -311,7 +312,8 @@ public class EditCommercePaymentMethodMVCActionCommand
 	}
 
 	@Reference
-	private CommercePaymentEngineRegistry _commercePaymentEngineRegistry;
+	private CommercePaymentEngineMethodRegistry
+		_commercePaymentEngineMethodRegistry;
 
 	@Reference
 	private CommercePaymentMethodService _commercePaymentMethodService;
