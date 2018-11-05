@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
+import com.liferay.apio.architect.credentials.Credentials;
+import com.liferay.apio.architect.functional.Try;
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
 import com.liferay.apio.architect.representor.Representor;
@@ -23,21 +25,33 @@ import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceUserIdentifier;
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceUserUpserterForm;
+import com.liferay.commerce.data.integration.apio.internal.model.UserWrapper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceUserHelper;
 import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.ListTypeModel;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.model.UserWrapper;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.service.ListTypeService;
 import com.liferay.portal.kernel.service.RoleService;
-import com.liferay.portal.kernel.service.UserService;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.ws.rs.NotFoundException;
 
@@ -45,6 +59,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
+ * @author Alejandro Hernández
  * @author Rodrigo Guedes de Souza
  * @author Eduardo V. Bruno
  * @author Zoltán Takács
@@ -61,16 +76,16 @@ public class CommerceUserCollectionResource
 				builder) {
 
 		return builder.addGetter(
-			this::_getPageItems, Company.class
+			this::_getPageItems, Credentials.class, ThemeDisplay.class
 		).addCreator(
-			this::_addUser, ThemeDisplay.class, _hasPermission::forAdding,
+			this::_upsertUser, ThemeDisplay.class, _hasPermission::forAdding,
 			CommerceUserUpserterForm::buildForm
 		).build();
 	}
 
 	@Override
 	public String getName() {
-		return "commerce-person";
+		return "commerce-user-account";
 	}
 
 	@Override
@@ -78,7 +93,7 @@ public class CommerceUserCollectionResource
 		ItemRoutes.Builder<UserWrapper, ClassPKExternalReferenceCode> builder) {
 
 		return builder.addGetter(
-			this::_getUserWrapper, Company.class
+			this::_getUserWrapper, ThemeDisplay.class
 		).addRemover(
 			_commerceUserHelper::deleteUser, Company.class,
 			_hasPermission::forDeleting
@@ -116,14 +131,14 @@ public class CommerceUserCollectionResource
 		).build();
 	}
 
-	private UserWrapper _addUser(
-			CommerceUserUpserterForm commerceUserUpserterForm,
-			ThemeDisplay themeDisplay)
-		throws PortalException {
+	private String _getAlternateName(
+		CommerceUserUpserterForm commerceUserUpserterForm, User user) {
 
-		return _commerceUserHelper.upsert(
-			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-			commerceUserUpserterForm);
+		if (commerceUserUpserterForm.getAlternateName() == null) {
+			return user.getScreenName();
+		}
+
+		return commerceUserUpserterForm.getAlternateName();
 	}
 
 	private List<Number> _getCommerceAccountIds(UserWrapper userWrapper) {
@@ -141,23 +156,48 @@ public class CommerceUserCollectionResource
 		return commerceAccountIds;
 	}
 
+	private Integer _getDefaultValue(
+		Optional<Integer> optional, int defaultValue) {
+
+		return optional.orElse(defaultValue);
+	}
+
 	private PageItems<UserWrapper> _getPageItems(
-			Pagination pagination, Company company)
+			Pagination pagination, Credentials credentials,
+			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		List<User> users = _userService.getCompanyUsers(
-			company.getCompanyId(), pagination.getStartPosition(),
-			pagination.getEndPosition());
+		PermissionChecker permissionChecker =
+			(PermissionChecker)credentials.get();
 
-		List<UserWrapper> userWrappers = new ArrayList<>(users.size());
-
-		for (User user : users) {
-			userWrappers.add(new UserWrapper(user));
+		if (!permissionChecker.isCompanyAdmin(themeDisplay.getCompanyId())) {
+			throw new PrincipalException.MustBeCompanyAdmin(permissionChecker);
 		}
 
-		int total = _userService.getCompanyUsersCount(company.getCompanyId());
+		List<User> users = _userLocalService.getUsers(
+			themeDisplay.getCompanyId(), false,
+			WorkflowConstants.STATUS_APPROVED, pagination.getStartPosition(),
+			pagination.getEndPosition(), null);
 
-		return new PageItems<>(userWrappers, total);
+		List<UserWrapper> userWrappers = _toUserWrappers(users, themeDisplay);
+
+		int count = _userLocalService.getUsersCount(
+			themeDisplay.getCompanyId(), false,
+			WorkflowConstants.STATUS_APPROVED);
+
+		return new PageItems<>(userWrappers, count);
+	}
+
+	private long _getPrefixId(
+		String honorificTitle, String className, long defaultTitle) {
+
+		return Try.fromFallible(
+			() -> _listTypeService.getListType(honorificTitle, className)
+		).map(
+			ListTypeModel::getListTypeId
+		).orElse(
+			defaultTitle
+		);
 	}
 
 	private List<String> _getRoleNames(UserWrapper userWrapper) {
@@ -178,16 +218,70 @@ public class CommerceUserCollectionResource
 	}
 
 	private UserWrapper _getUserWrapper(
-			ClassPKExternalReferenceCode userId, Company company)
+			ClassPKExternalReferenceCode commerceUserCPKERC,
+			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		User user = _commerceUserHelper.getUser(userId, company);
+		User user = _commerceUserHelper.getUser(
+			commerceUserCPKERC, themeDisplay.getCompanyId());
 
-		if (user == null) {
+		if ((user == null) ||
+			(themeDisplay.getDefaultUserId() == user.getUserId())) {
+
 			throw new NotFoundException();
 		}
 
-		return new UserWrapper(user);
+		return new UserWrapper(user, themeDisplay);
+	}
+
+	private Boolean _isMale(
+			CommerceUserUpserterForm commerceUserUpserterForm, User user)
+		throws PortalException {
+
+		Optional<Boolean> optional = commerceUserUpserterForm.isMaleOptional();
+
+		return optional.orElse(user.isMale());
+	}
+
+	private byte[] _readInputStream(InputStream inputStream)
+		throws IOException {
+
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
+
+		byte[] bytes = new byte[1024];
+		int value = -1;
+
+		while ((value = inputStream.read(bytes)) != -1) {
+			byteArrayOutputStream.write(bytes, 0, value);
+		}
+
+		byteArrayOutputStream.flush();
+
+		return byteArrayOutputStream.toByteArray();
+	}
+
+	private List<UserWrapper> _toUserWrappers(
+		List<User> users, ThemeDisplay themeDisplay) {
+
+		return Stream.of(
+			users
+		).flatMap(
+			List::stream
+		).map(
+			user -> new UserWrapper(user, themeDisplay)
+		).collect(
+			Collectors.toList()
+		);
+	}
+
+	private UserWrapper _upsertUser(
+			CommerceUserUpserterForm commerceUserUpserterForm,
+			ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		return _commerceUserHelper.upsert(
+			themeDisplay, commerceUserUpserterForm);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -202,9 +296,12 @@ public class CommerceUserCollectionResource
 	private HasPermission<ClassPKExternalReferenceCode> _hasPermission;
 
 	@Reference
+	private ListTypeService _listTypeService;
+
+	@Reference
 	private RoleService _roleService;
 
 	@Reference
-	private UserService _userService;
+	private UserLocalService _userLocalService;
 
 }
