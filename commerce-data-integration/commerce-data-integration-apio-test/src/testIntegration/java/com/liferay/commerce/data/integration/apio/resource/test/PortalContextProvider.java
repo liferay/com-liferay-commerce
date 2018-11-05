@@ -267,7 +267,30 @@ public abstract class PortalContextProvider {
 		}
 	}
 
-	public ApioSingleModel getResourceJsonNodeByField(
+	public ApioResourceCollection getRootApioResourceCollection(
+			String resourceName)
+		throws IOException {
+
+		String rootResourceEndpointURL = getRootResourceEndpointURL(
+			getApioEntryPoint(), resourceName);
+
+		String messageEntity = null;
+
+		try (RESTClient restClient = new RESTClient()) {
+			messageEntity = restClient.executeGetRequest(
+				rootResourceEndpointURL);
+		}
+
+		JsonNode resourceJsonNode = objectMapper.readTree(messageEntity);
+
+		return new ApioResourceCollection(resourceJsonNode);
+	}
+
+	public String getRootEndpointURL() {
+		return getPortalURL().concat(_ROOT_END_POINT_SUFFIX);
+	}
+
+	public ApioSingleModel getSingleResourceByField(
 			ApioResourceCollection apioResourceCollection, String fieldName,
 			String fieldValue)
 		throws IOException {
@@ -317,29 +340,6 @@ public abstract class PortalContextProvider {
 						"value: \"%s\"",
 					fieldName, fieldValue));
 		}
-	}
-
-	public ApioResourceCollection getRootApioResourceCollection(
-			String resourceName)
-		throws IOException {
-
-		String rootResourceEndpointURL = getRootResourceEndpointURL(
-			getApioEntryPoint(), resourceName);
-
-		String messageEntity = null;
-
-		try (RESTClient restClient = new RESTClient()) {
-			messageEntity = restClient.executeGetRequest(
-				rootResourceEndpointURL);
-		}
-
-		JsonNode resourceJsonNode = objectMapper.readTree(messageEntity);
-
-		return new ApioResourceCollection(resourceJsonNode);
-	}
-
-	public String getRootEndpointURL() {
-		return getPortalURL().concat(_ROOT_END_POINT_SUFFIX);
 	}
 
 	public ApioResourceCollection getSiteRelatedApioResourceCollection(
