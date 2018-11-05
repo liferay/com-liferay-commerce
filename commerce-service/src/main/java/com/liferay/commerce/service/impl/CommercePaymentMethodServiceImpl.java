@@ -130,6 +130,19 @@ public class CommercePaymentMethodServiceImpl
 	}
 
 	@Override
+	public List<CommercePaymentMethod> getCommercePaymentMethods(
+			long groupId, long commerceCountryId, boolean active)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_PAYMENT_METHODS);
+
+		return commercePaymentMethodLocalService.getCommercePaymentMethods(
+			groupId, commerceCountryId, active);
+	}
+
+	@Override
 	public int getCommercePaymentMethodsCount(long groupId, boolean active)
 		throws PortalException {
 
