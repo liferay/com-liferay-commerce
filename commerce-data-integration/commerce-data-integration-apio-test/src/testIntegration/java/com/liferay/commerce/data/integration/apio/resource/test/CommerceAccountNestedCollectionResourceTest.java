@@ -228,10 +228,9 @@ public class CommerceAccountNestedCollectionResourceTest
 			getSiteRelatedApioResourceCollection(
 				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
-		ApioSingleModel actualAccountApioSingleModel =
-			getResourceJsonNodeByField(
-				commerceAccountApioResourceCollection,
-				SchemaOrgConstants.Property.NAME, accountName);
+		ApioSingleModel actualAccountApioSingleModel = getSingleResourceByField(
+			commerceAccountApioResourceCollection,
+			SchemaOrgConstants.Property.NAME, accountName);
 
 		String newAccountName = RandomTestUtil.randomString();
 		JsonNode actualAccountIdJsonNode =
@@ -257,7 +256,7 @@ public class CommerceAccountNestedCollectionResourceTest
 				COMMERCE_ACCOUNT_RESOURCE_NAME, _TEST_PARENT_ORGANIZATION_NAME);
 
 		ApioSingleModel updatedAccountApioSingleModel =
-			getResourceJsonNodeByField(
+			getSingleResourceByField(
 				commerceAccountApioResourceCollection,
 				SchemaOrgConstants.Property.NAME, newAccountName);
 
