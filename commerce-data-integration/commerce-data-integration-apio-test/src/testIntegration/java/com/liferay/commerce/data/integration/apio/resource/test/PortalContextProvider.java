@@ -73,7 +73,9 @@ public abstract class PortalContextProvider {
 	public static final AggregateTestRule aggregateTestRule =
 		new LiferayIntegrationTestRule();
 
-	public static String getWebSiteEndpointURL(ApioEntryPoint apioEntryPoint) {
+	public static String getRootResourceEndpointURL(
+		ApioEntryPoint apioEntryPoint, String resourceType) {
+
 		Map<String, String> rootEndpointMap =
 			apioEntryPoint.getRootEndpointMap();
 
@@ -83,16 +85,16 @@ public abstract class PortalContextProvider {
 
 		return stream.filter(
 			mapEntry -> {
-				String resourceType = mapEntry.getValue();
+				String actualResourceType = mapEntry.getValue();
 
-				return resourceType.equals(WEBSITE);
+				return actualResourceType.equals(resourceType);
 			}
 		).findFirst(
 		).map(
 			Map.Entry::getKey
 		).orElseThrow(
 			() -> new NoSuchElementException(
-				"Unable to fetch web site endpoint URL")
+				"Unable to fetch endpoint URL for resource: " + resourceType)
 		);
 	}
 
@@ -183,8 +185,8 @@ public abstract class PortalContextProvider {
 			Map<String, String> webSiteURLWithNameMap = new TreeMap<>();
 
 			try {
-				webSitesEndpointURL = getWebSiteEndpointURL(
-					getApioEntryPoint());
+				webSitesEndpointURL = getRootResourceEndpointURL(
+					getApioEntryPoint(), WEBSITE);
 			}
 			catch (NoSuchElementException nsee) {
 				return webSiteURLWithNameMap;
@@ -315,6 +317,25 @@ public abstract class PortalContextProvider {
 						"value: \"%s\"",
 					fieldName, fieldValue));
 		}
+	}
+
+	public ApioResourceCollection getRootApioResourceCollection(
+			String resourceName)
+		throws IOException {
+
+		String rootResourceEndpointURL = getRootResourceEndpointURL(
+			getApioEntryPoint(), resourceName);
+
+		String messageEntity = null;
+
+		try (RESTClient restClient = new RESTClient()) {
+			messageEntity = restClient.executeGetRequest(
+				rootResourceEndpointURL);
+		}
+
+		JsonNode resourceJsonNode = objectMapper.readTree(messageEntity);
+
+		return new ApioResourceCollection(resourceJsonNode);
 	}
 
 	public String getRootEndpointURL() {
