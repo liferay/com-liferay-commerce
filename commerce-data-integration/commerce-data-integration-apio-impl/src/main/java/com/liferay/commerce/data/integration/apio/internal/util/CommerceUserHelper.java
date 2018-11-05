@@ -16,6 +16,7 @@ package com.liferay.commerce.data.integration.apio.internal.util;
 
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceUserUpserterForm;
+import com.liferay.commerce.data.integration.apio.internal.model.UserWrapper;
 import com.liferay.external.reference.service.ERUserLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -24,11 +25,11 @@ import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.model.UserWrapper;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -49,7 +50,8 @@ public class CommerceUserHelper {
 			Company company)
 		throws PortalException {
 
-		User user = getUser(classPKExternalReferenceCode, company);
+		User user = getUser(
+			classPKExternalReferenceCode, company.getCompanyId());
 
 		if (user == null) {
 			if (_log.isInfoEnabled()) {
@@ -68,7 +70,7 @@ public class CommerceUserHelper {
 
 	public User getUser(
 			ClassPKExternalReferenceCode classPKExternalReferenceCode,
-			Company company)
+			long companyId)
 		throws PortalException {
 
 		long classPK = classPKExternalReferenceCode.getClassPK();
@@ -78,32 +80,34 @@ public class CommerceUserHelper {
 		}
 
 		return _userLocalService.fetchUserByReferenceCode(
-			company.getCompanyId(),
-			classPKExternalReferenceCode.getExternalReferenceCode());
+			companyId, classPKExternalReferenceCode.getExternalReferenceCode());
 	}
 
 	public UserWrapper upsert(
-			long companyId, long userId,
+			ThemeDisplay themeDisplay,
 			CommerceUserUpserterForm commerceUserUpserterForm)
 		throws PortalException {
 
 		long[] commerceAccountIds = _extractCommerceAccountIds(
-			commerceUserUpserterForm, companyId);
+			commerceUserUpserterForm, themeDisplay.getCompanyId());
 
-		long[] roleIds = _getRoleNames(commerceUserUpserterForm, companyId);
+		long[] roleIds = _getRoleNames(
+			commerceUserUpserterForm, themeDisplay.getCompanyId());
 
-		String screenName = _getScreenName(companyId, commerceUserUpserterForm);
+		String screenName = _getScreenName(
+			themeDisplay.getCompanyId(), commerceUserUpserterForm);
 
 		User user = _erUserLocalService.addOrUpdateUser(
-			commerceUserUpserterForm.getExternalReferenceCode(), userId,
-			companyId, true, null, null, screenName == null, screenName,
+			commerceUserUpserterForm.getExternalReferenceCode(),
+			themeDisplay.getUserId(), themeDisplay.getCompanyId(), true, null,
+			null, screenName == null, screenName,
 			commerceUserUpserterForm.getEmail(), LocaleUtil.getDefault(),
 			commerceUserUpserterForm.getGivenName(), null,
 			commerceUserUpserterForm.getFamilyName(), 0, 0, true, 1, 1, 1970,
 			commerceUserUpserterForm.getJobTitle(), null, commerceAccountIds,
 			roleIds, null, null, true, new ServiceContext());
 
-		return new UserWrapper(user);
+		return new UserWrapper(user, themeDisplay);
 	}
 
 	public ClassPKExternalReferenceCode userToClassPKExternalReferenceCode(
