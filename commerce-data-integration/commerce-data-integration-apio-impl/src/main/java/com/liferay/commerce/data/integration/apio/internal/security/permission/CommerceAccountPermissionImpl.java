@@ -79,39 +79,39 @@ public class CommerceAccountPermissionImpl
 	@Override
 	public Boolean forDeleting(
 			Credentials credentials,
-			ClassPKExternalReferenceCode organizationCPKERC)
+			ClassPKExternalReferenceCode commerceAccountCPKERC)
 		throws Exception {
 
 		return _forItemRoutesOperations().apply(
-			credentials, organizationCPKERC, ActionKeys.DELETE);
+			credentials, commerceAccountCPKERC, ActionKeys.DELETE);
 	}
 
 	@Override
 	public Boolean forUpdating(
 			Credentials credentials,
-			ClassPKExternalReferenceCode organizationCPKERC)
+			ClassPKExternalReferenceCode commerceAccountCPKERC)
 		throws Exception {
 
 		return _forItemRoutesOperations().apply(
-			credentials, organizationCPKERC, ActionKeys.UPDATE);
+			credentials, commerceAccountCPKERC, ActionKeys.UPDATE);
 	}
 
 	private ThrowableTriFunction
 		<Credentials, ClassPKExternalReferenceCode, String, Boolean>
 			_forItemRoutesOperations() {
 
-		return (credentials, organizationCPKERC, actionId) -> {
+		return (credentials, commerceAccountCPKERC, actionId) -> {
 			Company company = _companyService.getCompanyById(
 				CompanyThreadLocal.getCompanyId());
 
 			Organization organization = _commerceAccountHelper.getOrganization(
-				organizationCPKERC, company);
+				commerceAccountCPKERC, company);
 
 			if (organization == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"No Organization exists with identifier: " +
-							organizationCPKERC);
+							commerceAccountCPKERC);
 				}
 
 				return false;
