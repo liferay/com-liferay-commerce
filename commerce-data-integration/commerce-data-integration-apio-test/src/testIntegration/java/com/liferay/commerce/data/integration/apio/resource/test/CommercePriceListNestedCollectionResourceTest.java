@@ -135,7 +135,7 @@ public class CommercePriceListNestedCollectionResourceTest
 				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
 
 		ApioSingleModel actualPriceListApioSingleModel =
-			getResourceJsonNodeByField(
+			getSingleResourceByField(
 				commercePriceListApioResourceCollection,
 				SchemaOrgConstants.Property.NAME, priceListName);
 
@@ -162,7 +162,7 @@ public class CommercePriceListNestedCollectionResourceTest
 				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
 
 		ApioSingleModel updatedPriceListApioSingleModel =
-			getResourceJsonNodeByField(
+			getSingleResourceByField(
 				commercePriceListApioResourceCollection,
 				SchemaOrgConstants.Property.NAME, newPriceListName);
 
