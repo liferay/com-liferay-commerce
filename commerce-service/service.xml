@@ -246,6 +246,7 @@
 		<column name="billingAddressId" type="long" />
 		<column name="shippingAddressId" type="long" />
 		<column name="commercePaymentMethodId" type="long" />
+		<column name="transactionId" type="String" />
 		<column name="commerceShippingMethodId" type="long" />
 		<column name="shippingOptionName" type="String" />
 		<column name="purchaseOrderNumber" type="String" />
