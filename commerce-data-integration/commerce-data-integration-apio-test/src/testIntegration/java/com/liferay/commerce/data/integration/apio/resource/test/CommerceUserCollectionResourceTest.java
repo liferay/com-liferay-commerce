@@ -38,6 +38,7 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import java.io.IOException;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -61,7 +62,7 @@ public class CommerceUserCollectionResourceTest extends PortalContextProvider {
 
 	@Test
 	public void testAddCollectionItem() throws IOException, PortalException {
-		String emailAddress = RandomTestUtil.randomString() + "@liferay.com";
+		String emailAddress = RandomTestUtil.randomString() + _EMAIL_DOMAIN;
 
 		_addCommerceUser(emailAddress);
 
@@ -72,9 +73,7 @@ public class CommerceUserCollectionResourceTest extends PortalContextProvider {
 	}
 
 	@Test
-	public void testCollectionPostOperationPresent()
-		throws IOException, PortalException {
-
+	public void testCollectionPostOperationPresent() throws IOException {
 		ApioResourceCollection commerceUserResourceCollection =
 			getRootApioResourceCollection(COMMERCE_USER_RESOURCE_TYPE);
 
@@ -82,6 +81,91 @@ public class CommerceUserCollectionResourceTest extends PortalContextProvider {
 			commerceUserResourceCollection, Method.POST);
 
 		Assert.assertThat(resourceOperation, notNullValue());
+	}
+
+	@Test
+	public void testDeleteCollectionItem() throws IOException, PortalException {
+		String emailAddress = RandomTestUtil.randomString() + _EMAIL_DOMAIN;
+
+		ApioResourceCollection commerceUserResourceCollection =
+			getRootApioResourceCollection(COMMERCE_USER_RESOURCE_TYPE);
+
+		int numberOfItems1 = commerceUserResourceCollection.getNumberOfItems();
+
+		String commerceUserId = _addCommerceUser(emailAddress);
+
+		commerceUserResourceCollection = getRootApioResourceCollection(
+			COMMERCE_USER_RESOURCE_TYPE);
+
+		int numberOfItems2 = commerceUserResourceCollection.getNumberOfItems();
+
+		Assert.assertThat(numberOfItems1 + 1, equalTo(numberOfItems2));
+
+		try (RESTClient restClient = new RESTClient()) {
+			restClient.executeDeleteRequest(commerceUserId);
+		}
+
+		commerceUserResourceCollection = getRootApioResourceCollection(
+			COMMERCE_USER_RESOURCE_TYPE);
+
+		int numberOfItems3 = commerceUserResourceCollection.getNumberOfItems();
+
+		Assert.assertThat(numberOfItems1, equalTo(numberOfItems3));
+	}
+
+	@Test
+	public void testUpdateCollectionItem() throws IOException, PortalException {
+		String emailAddress = RandomTestUtil.randomString() + _EMAIL_DOMAIN;
+
+		_addCommerceUser(emailAddress);
+
+		ApioResourceCollection commerceUserApioResourceCollection =
+			getRootApioResourceCollection(COMMERCE_USER_RESOURCE_TYPE);
+
+		ApioSingleModel actualCommerceUserApioSingleModel =
+			getSingleResourceByField(
+				commerceUserApioResourceCollection, _EMAIL,
+				emailAddress.toLowerCase(Locale.getDefault()));
+
+		String newEmailAddress = RandomTestUtil.randomString() + _EMAIL_DOMAIN;
+		JsonNode actualCommerceUserIdJsonNode =
+			actualCommerceUserApioSingleModel.getIdJsonNode();
+
+		Map<String, String> commerceUserPropertiesMap =
+			new HashMap<String, String>() {
+				{
+					put(_EMAIL, newEmailAddress);
+				}
+			};
+
+		ObjectNode expectedObjectNode = constructExpectedObjectNode(
+			actualCommerceUserApioSingleModel, Method.PUT,
+			commerceUserPropertiesMap);
+
+		try (RESTClient restClient = new RESTClient()) {
+			restClient.executePutRequest(
+				actualCommerceUserIdJsonNode.asText(), expectedObjectNode);
+		}
+
+		commerceUserApioResourceCollection = getRootApioResourceCollection(
+			COMMERCE_USER_RESOURCE_TYPE);
+
+		ApioSingleModel updatedCommerceUserApioSingleModel =
+			getSingleResourceByField(
+				commerceUserApioResourceCollection, _EMAIL,
+				newEmailAddress.toLowerCase(Locale.getDefault()));
+
+		JsonNode updatedCommerceUserIdJsonNode =
+			updatedCommerceUserApioSingleModel.getIdJsonNode();
+
+		Assert.assertThat(
+			actualCommerceUserIdJsonNode.asText(),
+			equalTo(updatedCommerceUserIdJsonNode.asText()));
+
+		User user = _userLocalService.getUserByEmailAddress(
+			getCompany().getCompanyId(), newEmailAddress);
+
+		_userLocalService.deleteUser(user);
 	}
 
 	private String _addCommerceUser(String emailAddress)
@@ -95,7 +179,7 @@ public class CommerceUserCollectionResourceTest extends PortalContextProvider {
 		Map<String, String> commerceUserPropertiesMap =
 			new HashMap<String, String>() {
 				{
-					put("email", emailAddress);
+					put(_EMAIL, emailAddress);
 				}
 			};
 
@@ -129,6 +213,10 @@ public class CommerceUserCollectionResourceTest extends PortalContextProvider {
 
 		return apioSingleModelIdJsonNode.asText();
 	}
+
+	private static final String _EMAIL = "email";
+
+	private static final String _EMAIL_DOMAIN = "@liferay.com";
 
 	@Inject
 	private UserLocalService _userLocalService;
