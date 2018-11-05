@@ -300,9 +300,7 @@ public class CommerceUserCollectionResource
 	@Reference
 	private CommerceUserHelper _commerceUserHelper;
 
-	@Reference(
-		target = "(model.class.name=com.liferay.portal.kernel.model.User)"
-	)
+	@Reference(target = "(name=com.liferay.commerce.user)")
 	private HasPermission<ClassPKExternalReferenceCode> _hasPermission;
 
 	@Reference
