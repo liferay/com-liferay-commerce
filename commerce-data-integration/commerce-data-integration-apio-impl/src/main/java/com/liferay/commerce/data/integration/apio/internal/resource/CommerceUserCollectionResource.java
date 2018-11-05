@@ -29,10 +29,12 @@ import com.liferay.commerce.data.integration.apio.internal.model.UserWrapper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceUserHelper;
 import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.ListTypeModel;
+import com.liferay.portal.kernel.model.Contact;
+import com.liferay.portal.kernel.model.ListType;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -43,13 +45,12 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+import java.util.Locale;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -97,6 +98,9 @@ public class CommerceUserCollectionResource
 		).addRemover(
 			_commerceUserHelper::deleteUser, Company.class,
 			_hasPermission::forDeleting
+		).addUpdater(
+			this::_updateUser, ThemeDisplay.class, _hasPermission::forUpdating,
+			CommerceUserUpserterForm::buildForm
 		).build();
 	}
 
@@ -257,33 +261,6 @@ public class CommerceUserCollectionResource
 		return new UserWrapper(user, themeDisplay);
 	}
 
-	private Boolean _isMale(
-			CommerceUserUpserterForm commerceUserUpserterForm, User user)
-		throws PortalException {
-
-		Optional<Boolean> optional = commerceUserUpserterForm.isMaleOptional();
-
-		return optional.orElse(user.isMale());
-	}
-
-	private byte[] _readInputStream(InputStream inputStream)
-		throws IOException {
-
-		ByteArrayOutputStream byteArrayOutputStream =
-			new ByteArrayOutputStream();
-
-		byte[] bytes = new byte[1024];
-		int value = -1;
-
-		while ((value = inputStream.read(bytes)) != -1) {
-			byteArrayOutputStream.write(bytes, 0, value);
-		}
-
-		byteArrayOutputStream.flush();
-
-		return byteArrayOutputStream.toByteArray();
-	}
-
 	private List<UserWrapper> _toUserWrappers(
 		List<User> users, ThemeDisplay themeDisplay) {
 
@@ -298,13 +275,23 @@ public class CommerceUserCollectionResource
 		);
 	}
 
+	private UserWrapper _updateUser(
+			ClassPKExternalReferenceCode commerceUserCPKERC,
+			CommerceUserUpserterForm commerceUserUpserterForm,
+			ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		return _commerceUserHelper.updateUser(
+			commerceUserCPKERC, commerceUserUpserterForm, themeDisplay);
+	}
+
 	private UserWrapper _upsertUser(
 			CommerceUserUpserterForm commerceUserUpserterForm,
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
 		return _commerceUserHelper.upsert(
-			themeDisplay, commerceUserUpserterForm);
+			commerceUserUpserterForm, themeDisplay);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
