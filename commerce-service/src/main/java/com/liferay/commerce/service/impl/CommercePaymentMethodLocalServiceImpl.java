@@ -16,17 +16,13 @@ package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.exception.CommercePaymentMethodEngineKeyException;
 import com.liferay.commerce.exception.CommercePaymentMethodNameException;
-import com.liferay.commerce.model.CommercePaymentEngine;
 import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.service.base.CommercePaymentMethodLocalServiceBaseImpl;
-import com.liferay.commerce.util.CommercePaymentEngineRegistry;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.File;
 
@@ -89,11 +85,6 @@ public class CommercePaymentMethodLocalServiceImpl
 			imageLocalService.updateImage(
 				commercePaymentMethod.getImageId(), imageFile);
 		}
-
-		// Commerce payment engine
-
-		updateCommercePaymentEngineConfiguration(
-			engineKey, engineParameterMap, serviceContext);
 
 		return commercePaymentMethod;
 	}
@@ -248,33 +239,7 @@ public class CommercePaymentMethodLocalServiceImpl
 				commercePaymentMethod.getImageId(), imageFile);
 		}
 
-		// Commerce payment engine
-
-		updateCommercePaymentEngineConfiguration(
-			commercePaymentMethod.getEngineKey(), engineParameterMap,
-			serviceContext);
-
 		return commercePaymentMethod;
-	}
-
-	protected void updateCommercePaymentEngineConfiguration(
-			String key, Map<String, String> parameterMap,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		CommercePaymentEngine commercePaymentEngine =
-			_commercePaymentEngineRegistry.getCommercePaymentEngine(key);
-
-		try {
-			commercePaymentEngine.updateConfiguration(
-				parameterMap, serviceContext);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
 	}
 
 	protected void validate(Map<Locale, String> nameMap, String engineKey)
@@ -292,8 +257,5 @@ public class CommercePaymentMethodLocalServiceImpl
 			throw new CommercePaymentMethodEngineKeyException();
 		}
 	}
-
-	@ServiceReference(type = CommercePaymentEngineRegistry.class)
-	private CommercePaymentEngineRegistry _commercePaymentEngineRegistry;
 
 }
