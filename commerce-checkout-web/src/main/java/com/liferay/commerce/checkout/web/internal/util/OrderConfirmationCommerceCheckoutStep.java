@@ -16,17 +16,15 @@ package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.checkout.web.internal.display.context.OrderConfirmationCheckoutStepDisplayContext;
-import com.liferay.commerce.checkout.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
-import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -77,15 +75,9 @@ public class OrderConfirmationCommerceCheckoutStep
 		long commerceOrderId = ParamUtil.getLong(
 			actionRequest, "commerceOrderId");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceOrder.class.getName(), actionRequest);
-
 		actionResponse.setRenderParameter(
 			"order_confirmation.jsp-commerceOrderId",
 			String.valueOf(commerceOrderId));
-
-		_actionHelper.startPayment(
-			commerceOrderId, actionRequest, actionResponse, serviceContext);
 	}
 
 	@Override
@@ -118,9 +110,6 @@ public class OrderConfirmationCommerceCheckoutStep
 	}
 
 	@Reference
-	private ActionHelper _actionHelper;
-
-	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 
 	@Reference
@@ -130,6 +119,12 @@ public class OrderConfirmationCommerceCheckoutStep
 	private CommerceOrderService _commerceOrderService;
 
 	@Reference
+	private CommercePaymentEngine _commercePaymentEngine;
+
+	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference
+	private Portal _portal;
 
 }

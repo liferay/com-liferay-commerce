@@ -24,9 +24,9 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.exception.CommerceOrderPaymentMethodException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.commerce.service.CommercePaymentMethodLocalService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -74,7 +74,7 @@ public class PaymentMethodCommerceCheckoutStep
 			(CommerceOrder)httpServletRequest.getAttribute(
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
-		if (_commercePaymentMethodLocalService.getCommercePaymentMethodsCount(
+		if (_commercePaymentEngine.getCommercePaymentMethodsCount(
 				commerceOrder.getSiteGroupId(), true) > 0) {
 
 			return true;
@@ -111,7 +111,7 @@ public class PaymentMethodCommerceCheckoutStep
 		PaymentMethodCheckoutStepDisplayContext
 			paymentMethodCheckoutStepDisplayContext =
 				new PaymentMethodCheckoutStepDisplayContext(
-					_commercePaymentMethodLocalService, httpServletRequest);
+					_commercePaymentEngine, httpServletRequest);
 
 		httpServletRequest.setAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
@@ -172,8 +172,7 @@ public class PaymentMethodCommerceCheckoutStep
 	private CommerceOrderService _commerceOrderService;
 
 	@Reference
-	private CommercePaymentMethodLocalService
-		_commercePaymentMethodLocalService;
+	private CommercePaymentEngine _commercePaymentEngine;
 
 	@Reference
 	private JSPRenderer _jspRenderer;

@@ -16,15 +16,8 @@ package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.checkout.web.internal.display.context.OrderSummaryCheckoutStepDisplayContext;
-import com.liferay.commerce.checkout.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.exception.CommerceOrderBillingAddressException;
-import com.liferay.commerce.exception.CommerceOrderPaymentMethodException;
-import com.liferay.commerce.exception.CommerceOrderShippingAddressException;
-import com.liferay.commerce.exception.CommerceOrderShippingMethodException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
@@ -36,11 +29,8 @@ import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
-import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -59,7 +49,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"commerce.checkout.step.name=" + OrderSummaryCommerceCheckoutStep.NAME,
-		"commerce.checkout.step.order:Integer=" + (Integer.MAX_VALUE - 100)
+		"commerce.checkout.step.order:Integer=" + (Integer.MAX_VALUE - 150)
 	},
 	service = CommerceCheckoutStep.class
 )
@@ -81,25 +71,6 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
-
-		try {
-			startPayment(actionRequest, actionResponse);
-		}
-		catch (Exception e) {
-			if (e instanceof CommerceOrderBillingAddressException ||
-				e instanceof CommerceOrderPaymentMethodException ||
-				e instanceof CommerceOrderShippingAddressException ||
-				e instanceof CommerceOrderShippingMethodException) {
-
-				SessionErrors.add(actionRequest, e.getClass());
-
-				return;
-			}
-
-			_log.error(e, e);
-
-			throw e;
-		}
 	}
 
 	@Override
@@ -144,34 +115,8 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 		}
 	}
 
-	protected void startPayment(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		long commerceOrderId = ParamUtil.getLong(
-			actionRequest, "commerceOrderId");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceOrder.class.getName(), actionRequest);
-
-		CommerceContext commerceContext =
-			(CommerceContext)actionRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
-
-		CommerceOrder commerceOrder =
-			_commerceOrderService.checkoutCommerceOrder(
-				commerceOrderId, commerceContext, serviceContext);
-
-		_actionHelper.startPayment(
-			commerceOrder.getCommerceOrderId(), actionRequest, actionResponse,
-			serviceContext);
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		OrderSummaryCommerceCheckoutStep.class);
-
-	@Reference
-	private ActionHelper _actionHelper;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
@@ -196,5 +141,8 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference
+	private Portal _portal;
 
 }
