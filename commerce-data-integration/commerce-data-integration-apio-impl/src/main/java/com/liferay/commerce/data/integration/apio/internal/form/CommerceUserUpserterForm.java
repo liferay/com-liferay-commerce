@@ -47,10 +47,10 @@ public class CommerceUserUpserterForm {
 			"commerceAccountIds",
 			CommerceUserUpserterForm::setCommerceAccountIds
 		).addOptionalString(
-			"accountExternalReferenceCode",
-			CommerceUserUpserterForm::setAccountIdExternalReferenceCode
-		).addOptionalString(
 			"alternateName", CommerceUserUpserterForm::setAlternateName
+		).addOptionalString(
+			"externalReferenceCode",
+			CommerceUserUpserterForm::setExternalReferenceCode
 		).addOptionalString(
 			"gender", CommerceUserUpserterForm::setGender
 		).addOptionalString(
@@ -64,17 +64,10 @@ public class CommerceUserUpserterForm {
 		).addRequiredString(
 			"email", CommerceUserUpserterForm::setEmail
 		).addRequiredString(
-			"externalReferenceCode",
-			CommerceUserUpserterForm::setExternalReferenceCode
-		).addRequiredString(
 			"familyName", CommerceUserUpserterForm::setFamilyName
 		).addRequiredString(
 			"givenName", CommerceUserUpserterForm::setGivenName
 		).build();
-	}
-
-	public String getAccountExternalReferenceCode() {
-		return _accountExternalReferenceCode;
 	}
 
 	/**
@@ -262,12 +255,6 @@ public class CommerceUserUpserterForm {
 		return Validator.isNull(_alternateName);
 	}
 
-	public void setAccountIdExternalReferenceCode(
-		String accountExternalReferenceCode) {
-
-		_accountExternalReferenceCode = accountExternalReferenceCode;
-	}
-
 	public void setAlternateName(String alternateName) {
 		_alternateName = alternateName;
 	}
@@ -326,7 +313,6 @@ public class CommerceUserUpserterForm {
 		_roleNames = roleNames;
 	}
 
-	private String _accountExternalReferenceCode;
 	private String _alternateName;
 	private Integer _birthdayDay;
 	private Integer _birthdayMonth;
