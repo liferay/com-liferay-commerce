@@ -17,11 +17,11 @@ package com.liferay.commerce.order.web.internal.portlet.action;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderEditDisplayContext;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.commerce.service.CommercePaymentMethodService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -56,7 +56,7 @@ public class EditCommerceOrderItemMVCRenderCommand implements MVCRenderCommand {
 			CommerceOrderEditDisplayContext commerceOrderEditDisplayContext =
 				new CommerceOrderEditDisplayContext(
 					_commerceOrderService, _commerceOrderItemService,
-					_commerceOrderNoteService, _commercePaymentMethodService,
+					_commerceOrderNoteService, _commercePaymentEngine,
 					_commerceProductPriceCalculation, _itemSelector,
 					renderRequest);
 
@@ -90,7 +90,7 @@ public class EditCommerceOrderItemMVCRenderCommand implements MVCRenderCommand {
 	private CommerceOrderService _commerceOrderService;
 
 	@Reference
-	private CommercePaymentMethodService _commercePaymentMethodService;
+	private CommercePaymentEngine _commercePaymentEngine;
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;

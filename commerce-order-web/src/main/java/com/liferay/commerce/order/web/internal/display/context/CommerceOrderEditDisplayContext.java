@@ -22,13 +22,13 @@ import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrde
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearch;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearchTerms;
 import com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderScreenNavigationConstants;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelectorCriterion;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.commerce.service.CommercePaymentMethodService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -69,7 +69,7 @@ public class CommerceOrderEditDisplayContext {
 			CommerceOrderService commerceOrderService,
 			CommerceOrderItemService commerceOrderItemService,
 			CommerceOrderNoteService commerceOrderNoteService,
-			CommercePaymentMethodService commercePaymentMethodService,
+			CommercePaymentEngine commercePaymentEngine,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			ItemSelector itemSelector, RenderRequest renderRequest)
 		throws PortalException {
@@ -77,7 +77,7 @@ public class CommerceOrderEditDisplayContext {
 		_commerceOrderService = commerceOrderService;
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceOrderNoteService = commerceOrderNoteService;
-		_commercePaymentMethodService = commercePaymentMethodService;
+		_commercePaymentEngine = commercePaymentEngine;
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_itemSelector = itemSelector;
 
@@ -254,7 +254,7 @@ public class CommerceOrderEditDisplayContext {
 	public List<CommercePaymentMethod> getCommercePaymentMethods()
 		throws PortalException {
 
-		return _commercePaymentMethodService.getCommercePaymentMethods(
+		return _commercePaymentEngine.getCommercePaymentMethods(
 			_commerceOrderRequestHelper.getScopeGroupId());
 	}
 
@@ -294,7 +294,7 @@ public class CommerceOrderEditDisplayContext {
 	private final CommerceOrderNoteService _commerceOrderNoteService;
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
 	private final CommerceOrderService _commerceOrderService;
-	private final CommercePaymentMethodService _commercePaymentMethodService;
+	private final CommercePaymentEngine _commercePaymentEngine;
 	private final CommerceProductPriceCalculation
 		_commerceProductPriceCalculation;
 	private SearchContainer<CommerceOrderItem> _itemSearchContainer;

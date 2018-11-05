@@ -219,9 +219,6 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		String purchaseOrderNumber = ParamUtil.getString(
 			actionRequest, "purchaseOrderNumber");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceOrder.class.getName(), actionRequest);
-
 		invokeTransaction(
 			new Callable<Void>() {
 
@@ -240,8 +237,7 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 						commerceContext);
 
 					_commerceOrderService.updatePaymentStatus(
-						commerceOrder.getCommerceOrderId(), paymentStatus,
-						serviceContext);
+						commerceOrder.getCommerceOrderId(), paymentStatus);
 
 					return null;
 				}
