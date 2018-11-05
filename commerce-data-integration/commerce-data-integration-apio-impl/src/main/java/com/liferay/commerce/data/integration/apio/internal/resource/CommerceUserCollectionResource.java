@@ -109,36 +109,59 @@ public class CommerceUserCollectionResource
 			"Person"
 		).identifier(
 			_commerceUserHelper::userToClassPKExternalReferenceCode
+		).addDate(
+			"birthDate", CommerceUserCollectionResource::_getBirthday
+		).addLocalizedStringByLocale(
+			"honorificPrefix", _getContactField(Contact::getPrefixId)
+		).addLocalizedStringByLocale(
+			"honorificSuffix", _getContactField(Contact::getSuffixId)
+		).addNumberList(
+			"commerceAccountIds", this::_getCommerceAccountIds
+		).addRelativeURL(
+			"image", UserWrapper::getPortraitURL
+		).addString(
+			"additionalName", User::getMiddleName
+		).addString(
+			"alternateName", User::getScreenName
+		).addString(
+			"dashboardURL", UserWrapper::getDashboardURL
 		).addString(
 			"email", User::getEmailAddress
 		).addString(
-			"accountExternalReferenceCode",
-			UserWrapper::getExternalReferenceCode
+			"externalReferenceCode", UserWrapper::getExternalReferenceCode
 		).addString(
 			"familyName", User::getLastName
+		).addString(
+			"gender", CommerceUserCollectionResource::_getGender
 		).addString(
 			"givenName", User::getFirstName
 		).addString(
 			"jobTitle", User::getJobTitle
 		).addString(
 			"name", User::getFullName
-		).addNumberList(
-			"commerceAccountIds", this::_getCommerceAccountIds
+		).addString(
+			"profileURL", UserWrapper::getProfileURL
 		).addStringList(
 			"roleNames", this::_getRoleNames
-		).addString(
-			"jobTitle", UserWrapper::getJobTitle
 		).build();
 	}
 
-	private String _getAlternateName(
-		CommerceUserUpserterForm commerceUserUpserterForm, User user) {
+	private static Date _getBirthday(User user) {
+		return Try.fromFallible(
+			user::getBirthday
+		).orElse(
+			null
+		);
+	}
 
-		if (commerceUserUpserterForm.getAlternateName() == null) {
-			return user.getScreenName();
-		}
-
-		return commerceUserUpserterForm.getAlternateName();
+	private static String _getGender(User user) {
+		return Try.fromFallible(
+			user::isMale
+		).map(
+			male -> male ? "male" : "female"
+		).orElse(
+			null
+		);
 	}
 
 	private List<Number> _getCommerceAccountIds(UserWrapper userWrapper) {
@@ -156,10 +179,22 @@ public class CommerceUserCollectionResource
 		return commerceAccountIds;
 	}
 
-	private Integer _getDefaultValue(
-		Optional<Integer> optional, int defaultValue) {
+	private BiFunction<UserWrapper, Locale, String> _getContactField(
+		Function<Contact, Long> function) {
 
-		return optional.orElse(defaultValue);
+		return (user, locale) -> Try.fromFallible(
+			user::getContact
+		).map(
+			function::apply
+		).map(
+			_listTypeService::getListType
+		).map(
+			ListType::getName
+		).map(
+			name -> LanguageUtil.get(locale, name)
+		).orElse(
+			null
+		);
 	}
 
 	private PageItems<UserWrapper> _getPageItems(
@@ -186,18 +221,6 @@ public class CommerceUserCollectionResource
 			WorkflowConstants.STATUS_APPROVED);
 
 		return new PageItems<>(userWrappers, count);
-	}
-
-	private long _getPrefixId(
-		String honorificTitle, String className, long defaultTitle) {
-
-		return Try.fromFallible(
-			() -> _listTypeService.getListType(honorificTitle, className)
-		).map(
-			ListTypeModel::getListTypeId
-		).orElse(
-			defaultTitle
-		);
 	}
 
 	private List<String> _getRoleNames(UserWrapper userWrapper) {
