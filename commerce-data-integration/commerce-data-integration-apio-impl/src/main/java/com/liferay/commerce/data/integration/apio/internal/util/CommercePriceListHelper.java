@@ -92,12 +92,12 @@ public class CommercePriceListHelper {
 	}
 
 	public void deletePriceList(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode)
+			ClassPKExternalReferenceCode commercePriceListCPKERC)
 		throws PortalException {
 
 		CommercePriceList commercePriceList =
 			getCommercePriceListByClassPKExternalReferenceCode(
-				classPKExternalReferenceCode);
+				commercePriceListCPKERC);
 
 		if (commercePriceList != null) {
 			_commercePriceListService.deleteCommercePriceList(
@@ -113,7 +113,7 @@ public class CommercePriceListHelper {
 	}
 
 	public CommercePriceList getCommercePriceListByClassPKExternalReferenceCode(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode)
+			ClassPKExternalReferenceCode commercePriceListCPKERC)
 		throws PortalException {
 
 		long companyId = CompanyThreadLocal.getCompanyId();
@@ -121,15 +121,15 @@ public class CommercePriceListHelper {
 		Company company = _companyLocalService.getCompany(companyId);
 
 		return getCommercePriceListByClassPKExternalReferenceCode(
-			classPKExternalReferenceCode, company);
+			commercePriceListCPKERC, company);
 	}
 
 	public CommercePriceList getCommercePriceListByClassPKExternalReferenceCode(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode,
+			ClassPKExternalReferenceCode commercePriceListCPKERC,
 			Company company)
 		throws PortalException {
 
-		long commercePriceListId = classPKExternalReferenceCode.getClassPK();
+		long commercePriceListId = commercePriceListCPKERC.getClassPK();
 
 		if (commercePriceListId > 0) {
 			return _commercePriceListService.fetchCommercePriceList(
@@ -138,18 +138,18 @@ public class CommercePriceListHelper {
 
 		return _commercePriceListService.fetchByExternalReferenceCode(
 			company.getCompanyId(),
-			classPKExternalReferenceCode.getExternalReferenceCode());
+			commercePriceListCPKERC.getExternalReferenceCode());
 	}
 
 	public CommercePriceList updateCommercePriceList(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode,
+			ClassPKExternalReferenceCode commercePriceListCPKERC,
 			String currency, String name, Double priority, Boolean neverExpire,
 			Date displayDate, Date expirationDate)
 		throws PortalException {
 
 		CommercePriceList commercePriceList =
 			getCommercePriceListByClassPKExternalReferenceCode(
-				classPKExternalReferenceCode);
+				commercePriceListCPKERC);
 
 		long groupId = commercePriceList.getGroupId();
 
