@@ -16,13 +16,19 @@ package com.liferay.commerce.data.integration.apio.internal.form;
 
 import com.liferay.apio.architect.form.Form;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
+ * @author Alejandro Hernández
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 public class CommerceUserUpserterForm {
 
@@ -30,35 +36,93 @@ public class CommerceUserUpserterForm {
 		Form.Builder<CommerceUserUpserterForm> formBuilder) {
 
 		return formBuilder.title(
-			__ -> "The user creator form"
+			__ -> "The commerce user upserter form"
 		).description(
-			__ -> "This form can be used to create a user"
+			__ -> "This form can be used to create or update a commerce user"
 		).constructor(
 			CommerceUserUpserterForm::new
-		).addRequiredString(
-			"externalReferenceCode",
-			CommerceUserUpserterForm::_setExternalReferenceCode
-		).addRequiredString(
-			"email", CommerceUserUpserterForm::_setEmail
-		).addOptionalString(
-			"familyName", CommerceUserUpserterForm::_setFamilyName
-		).addOptionalString(
-			"givenName", CommerceUserUpserterForm::_setGivenName
-		).addRequiredString(
-			"jobTitle", CommerceUserUpserterForm::_setJobTitle
+		).addOptionalDate(
+			"birthDate", CommerceUserUpserterForm::setBirthDate
 		).addOptionalLongList(
 			"commerceAccountIds",
-			CommerceUserUpserterForm::_setCommerceAccountIds
-		).addOptionalString(
-			"roleNames", CommerceUserUpserterForm::_setRoleNames
+			CommerceUserUpserterForm::setCommerceAccountIds
 		).addOptionalString(
 			"accountExternalReferenceCode",
-			CommerceUserUpserterForm::_setAccountIdExternalReferenceCode
+			CommerceUserUpserterForm::setAccountIdExternalReferenceCode
+		).addOptionalString(
+			"alternateName", CommerceUserUpserterForm::setAlternateName
+		).addOptionalString(
+			"gender", CommerceUserUpserterForm::setGender
+		).addOptionalString(
+			"honorificPrefix", CommerceUserUpserterForm::setHonorificPrefix
+		).addOptionalString(
+			"honorificSuffix", CommerceUserUpserterForm::setHonorificSuffix
+		).addOptionalString(
+			"jobTitle", CommerceUserUpserterForm::setJobTitle
+		).addOptionalString(
+			"roleNames", CommerceUserUpserterForm::setRoleNames
+		).addRequiredString(
+			"email", CommerceUserUpserterForm::setEmail
+		).addRequiredString(
+			"externalReferenceCode",
+			CommerceUserUpserterForm::setExternalReferenceCode
+		).addRequiredString(
+			"familyName", CommerceUserUpserterForm::setFamilyName
+		).addRequiredString(
+			"givenName", CommerceUserUpserterForm::setGivenName
 		).build();
 	}
 
 	public String getAccountExternalReferenceCode() {
 		return _accountExternalReferenceCode;
+	}
+
+	/**
+	 * Returns the person's alternate name.
+	 *
+	 * @return the person's alternate name
+	 */
+	public String getAlternateName() {
+		return _alternateName;
+	}
+
+	/**
+	 * Returns the person's birth day.
+	 *
+	 * @return the person's birth day
+	 */
+	public int getBirthdayDay() {
+		if (_birthdayDay != null) {
+			return _birthdayDay;
+		}
+
+		return 1;
+	}
+
+	/**
+	 * Returns the person's birth month.
+	 *
+	 * @return the person's birth month
+	 */
+	public int getBirthdayMonth() {
+		if (_birthdayMonth != null) {
+			return _birthdayMonth;
+		}
+
+		return 0;
+	}
+
+	/**
+	 * Returns the person's birth year.
+	 *
+	 * @return the person's birth year
+	 */
+	public int getBirthdayYear() {
+		if (_birthdayYear != null) {
+			return _birthdayYear;
+		}
+
+		return 1970;
 	}
 
 	public long[] getCommerceAccountIds() {
@@ -69,6 +133,11 @@ public class CommerceUserUpserterForm {
 		return ArrayUtil.toLongArray(_commerceAccountIds);
 	}
 
+	/**
+	 * Returns the person's email address.
+	 *
+	 * @return the person's email address
+	 */
 	public String getEmail() {
 		return _email;
 	}
@@ -77,16 +146,43 @@ public class CommerceUserUpserterForm {
 		return _externalReferenceCode;
 	}
 
+	/**
+	 * Returns the person's family name.
+	 *
+	 * @return the person's family name
+	 */
 	public String getFamilyName() {
 		return _familyName;
 	}
 
+	/**
+	 * Returns the person's given name.
+	 *
+	 * @return the person's given name
+	 */
 	public String getGivenName() {
 		return _givenName;
 	}
 
+	public String getHonorificPrefix() {
+		return _honorificPrefix;
+	}
+
+	public String getHonorificSuffix() {
+		return _honorificSuffix;
+	}
+
+	/**
+	 * Returns the person's job title.
+	 *
+	 * @return the person's job title
+	 */
 	public String getJobTitle() {
-		return _jobTitle;
+		return Optional.ofNullable(
+			_jobTitle
+		).orElse(
+			""
+		);
 	}
 
 	public String[] getRoleNames() {
@@ -103,47 +199,107 @@ public class CommerceUserUpserterForm {
 		);
 	}
 
-	private void _setAccountIdExternalReferenceCode(
+	/**
+	 * Returns {@code true} if the person is male.
+	 *
+	 * @return {@code true} if the person is a male; {@code false} otherwise
+	 */
+	public boolean isMale() {
+		return Optional.ofNullable(
+			_male
+		).orElse(
+			true
+		);
+	}
+
+	public Optional<Boolean> isMaleOptional() {
+		return Optional.ofNullable(_male);
+	}
+
+	/**
+	 * Returns {@code true} if the person has an alternate name.
+	 *
+	 * @return {@code true} if the person has an alternate name; {@code false}
+	 *         otherwise
+	 */
+	public boolean needsAlternateName() {
+		return Validator.isNull(_alternateName);
+	}
+
+	public void setAccountIdExternalReferenceCode(
 		String accountExternalReferenceCode) {
 
 		_accountExternalReferenceCode = accountExternalReferenceCode;
 	}
 
-	private void _setCommerceAccountIds(List<Long> commerceAccountIds) {
+	public void setAlternateName(String alternateName) {
+		_alternateName = alternateName;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		Calendar calendar = Calendar.getInstance();
+
+		calendar.setTime(birthDate);
+
+		_birthdayMonth = calendar.get(Calendar.MONTH);
+		_birthdayDay = calendar.get(Calendar.DATE);
+		_birthdayYear = calendar.get(Calendar.YEAR);
+	}
+
+	public void setCommerceAccountIds(List<Long> commerceAccountIds) {
 		_commerceAccountIds = commerceAccountIds;
 	}
 
-	private void _setEmail(String emailAddress) {
+	public void setEmail(String emailAddress) {
 		_email = emailAddress;
 	}
 
-	private void _setExternalReferenceCode(String externalReferenceCode) {
+	public void setExternalReferenceCode(String externalReferenceCode) {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	private void _setFamilyName(String familyName) {
-		_familyName = familyName;
+	public void setFamilyName(String lastName) {
+		_familyName = lastName;
 	}
 
-	private void _setGivenName(String givenName) {
+	public void setGender(String gender) {
+		_male = "male".equals(gender);
+	}
+
+	public void setGivenName(String givenName) {
 		_givenName = givenName;
 	}
 
-	private void _setJobTitle(String jobTitle) {
+	public void setHonorificPrefix(String honorificPrefix) {
+		_honorificPrefix = honorificPrefix;
+	}
+
+	public void setHonorificSuffix(String honorificSuffix) {
+		_honorificSuffix = honorificSuffix;
+	}
+
+	public void setJobTitle(String jobTitle) {
 		_jobTitle = jobTitle;
 	}
 
-	private void _setRoleNames(String roleNames) {
+	public void setRoleNames(String roleNames) {
 		_roleNames = roleNames;
 	}
 
 	private String _accountExternalReferenceCode;
+	private String _alternateName;
+	private Integer _birthdayDay;
+	private Integer _birthdayMonth;
+	private Integer _birthdayYear;
 	private List<Long> _commerceAccountIds;
 	private String _email;
 	private String _externalReferenceCode;
 	private String _familyName;
 	private String _givenName;
+	private String _honorificPrefix;
+	private String _honorificSuffix;
 	private String _jobTitle;
+	private Boolean _male;
 	private String _roleNames;
 
 }
