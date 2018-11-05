@@ -307,8 +307,7 @@ public abstract class PortalContextProvider {
 					JsonNode fieldJsonNode = jsonNode.path(fieldName);
 
 					if (fieldValue.equals(fieldJsonNode.asText())) {
-						JsonNode idJsonNode = new ApioSingleModel(
-							jsonNode).getIdJsonNode();
+						JsonNode idJsonNode = jsonNode.path(JSONLDConstants.ID);
 
 						String messageEntity = restClient.executeGetRequest(
 							idJsonNode.asText());
@@ -336,8 +335,8 @@ public abstract class PortalContextProvider {
 
 			throw new NoSuchElementException(
 				String.format(
-					"Unable to find resource with field name: \"%s\"," +
-						"value: \"%s\"",
+					"Unable to find resource with field name: \"%s\", value: " +
+						"\"%s\"",
 					fieldName, fieldValue));
 		}
 	}
