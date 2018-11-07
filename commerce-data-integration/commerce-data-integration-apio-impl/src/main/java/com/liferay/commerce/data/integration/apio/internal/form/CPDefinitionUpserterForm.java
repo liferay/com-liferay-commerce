@@ -45,26 +45,27 @@ public class CPDefinitionUpserterForm {
 		return formBuilder.title(
 			__ -> "The product upserter form"
 		).description(
-			__ -> "This form can be used to upsert a product"
+			__ ->
+				"This form can be used to create or update a product definition"
 		).constructor(
 			CPDefinitionUpserterForm::new
 		).addOptionalLongList(
 			"assetCategoryIds", CPDefinitionUpserterForm::_setAssetCategoryIds
 		).addOptionalString(
+			"defaultSku", CPDefinitionUpserterForm::_setDefaultSku
+		).addOptionalString(
 			"description", CPDefinitionUpserterForm::_setDescription
 		).addOptionalString(
 			"shortDescription", CPDefinitionUpserterForm::_setShortDescription
+		).addRequiredBoolean(
+			"active", CPDefinitionUpserterForm::_setActive
+		).addRequiredString(
+			"externalReferenceCode",
+			CPDefinitionUpserterForm::_setExternalReferenceCode
 		).addRequiredString(
 			"productTypeName", CPDefinitionUpserterForm::_setProductTypeName
 		).addRequiredString(
 			"title", CPDefinitionUpserterForm::_setTitle
-		).addRequiredString(
-			"externalReferenceCode",
-			CPDefinitionUpserterForm::_setExternalReferenceCode
-		).addOptionalString(
-			"defaultSku", CPDefinitionUpserterForm::_setDefaultSku
-		).addRequiredBoolean(
-			"active", CPDefinitionUpserterForm::_setActive
 		).build();
 	}
 
