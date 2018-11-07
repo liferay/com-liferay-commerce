@@ -32,6 +32,7 @@ import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;
 import com.liferay.portal.apio.permission.HasPermission;
+import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -68,7 +69,7 @@ public class CPDefinitionNestedCollectionResource
 		return builder.addGetter(
 			this::_getPageItems
 		).addCreator(
-			this::_upsertCPDefinition,
+			this::_upsertCPDefinition, CurrentUser.class,
 			_hasPermission.forAddingIn(WebSiteIdentifier.class),
 			CPDefinitionUpserterForm::buildForm
 		).build();
@@ -89,6 +90,9 @@ public class CPDefinitionNestedCollectionResource
 		).addRemover(
 			idempotent(_cpDefinitionHelper::deleteCPDefinition),
 			_hasPermission::forDeleting
+		).addUpdater(
+			this::_updateCPDefinition, CurrentUser.class,
+			_hasPermission::forUpdating, CPDefinitionUpserterForm::buildForm
 		).build();
 	}
 
@@ -144,8 +148,25 @@ public class CPDefinitionNestedCollectionResource
 			_cpInstanceLocalService.getSKUs(cpDefinition.getCPDefinitionId()));
 	}
 
+	private CPDefinition _updateCPDefinition(
+			ClassPKExternalReferenceCode cpDefinitionCPKERC,
+			CPDefinitionUpserterForm cpDefinitionUpserterForm,
+			CurrentUser currentUser)
+		throws PortalException {
+
+		return _cpDefinitionHelper.updateCPDefinition(
+			cpDefinitionCPKERC, cpDefinitionUpserterForm.getTitleMap(),
+			cpDefinitionUpserterForm.getDescriptionMap(),
+			cpDefinitionUpserterForm.getShortDescriptionMap(),
+			ArrayUtil.toLongArray(
+				cpDefinitionUpserterForm.getAssetCategoryIds()),
+			cpDefinitionUpserterForm.getExternalReferenceCode(),
+			cpDefinitionUpserterForm.getActive(), currentUser);
+	}
+
 	private CPDefinition _upsertCPDefinition(
-			Long webSiteId, CPDefinitionUpserterForm cpDefinitionUpserterForm)
+			Long webSiteId, CPDefinitionUpserterForm cpDefinitionUpserterForm,
+			CurrentUser currentUser)
 		throws PortalException {
 
 		try {
@@ -158,11 +179,11 @@ public class CPDefinitionNestedCollectionResource
 					cpDefinitionUpserterForm.getAssetCategoryIds()),
 				cpDefinitionUpserterForm.getExternalReferenceCode(),
 				cpDefinitionUpserterForm.getDefaultSku(),
-				cpDefinitionUpserterForm.getActive());
+				cpDefinitionUpserterForm.getActive(), 0, currentUser);
 		}
 		catch (CPDefinitionProductTypeNameException cpdptne) {
 			throw new NotFoundException(
-				"Product type not available: " +
+				"Product type is not available: " +
 					cpDefinitionUpserterForm.getProductTypeName(),
 				cpdptne);
 		}
