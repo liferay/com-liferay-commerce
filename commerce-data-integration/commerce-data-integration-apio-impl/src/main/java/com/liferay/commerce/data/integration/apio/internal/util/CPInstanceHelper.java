@@ -153,7 +153,7 @@ public class CPInstanceHelper {
 			CPDefinition cpDefinition = _cpDefinitionHelper.upsertCPDefinition(
 				groupId, titleMap, descriptionMap, shortDescriptionMap,
 				productTypeName, null, productExternalReferenceCode, null,
-				active);
+				active, 0, currentUser);
 
 			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
