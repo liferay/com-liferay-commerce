@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
-import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -75,12 +74,11 @@ public class CPDefinitionHelper {
 	}
 
 	public void deleteCPDefinition(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode)
+			ClassPKExternalReferenceCode cpDefinitionCPKERC)
 		throws PortalException {
 
 		CPDefinition cpDefinition =
-			getCPDefinitionByClassPKExternalReferenceCode(
-				classPKExternalReferenceCode);
+			getCPDefinitionByClassPKExternalReferenceCode(cpDefinitionCPKERC);
 
 		if (cpDefinition != null) {
 			_cpDefinitionLocalService.deleteCPDefinition(cpDefinition);
@@ -106,12 +104,29 @@ public class CPDefinitionHelper {
 		}
 	}
 
+	public CPDefinition updateCPDefinition(
+			ClassPKExternalReferenceCode cpDefinitionCPKERC,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			Map<Locale, String> shortDescriptionMap, long[] assetCategoryIds,
+			String externalReferenceCode, Boolean active, User currentUser)
+		throws PortalException {
+
+		CPDefinition cpDefinition =
+			getCPDefinitionByClassPKExternalReferenceCode(cpDefinitionCPKERC);
+
+		return upsertCPDefinition(
+			cpDefinition.getGroupId(), titleMap, descriptionMap,
+			shortDescriptionMap, null, assetCategoryIds, externalReferenceCode,
+			null, active, cpDefinition.getCPDefinitionId(), currentUser);
+	}
+
 	public CPDefinition upsertCPDefinition(
-			long groupId, Map<Locale, String> titleMap,
+			long groupId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap,
 			Map<Locale, String> shortDescriptionMap, String productTypeName,
 			long[] assetCategoryIds, String externalReferenceCode,
-			String defaultSku, Boolean active)
+			String defaultSku, Boolean active, long cpDefinitionId,
+			User currentUser)
 		throws PortalException {
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
@@ -149,18 +164,35 @@ public class CPDefinitionHelper {
 			expirationDateHour += 12;
 		}
 
-		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
-			titleMap, shortDescriptionMap, descriptionMap, titleMap, null, null,
-			null, productTypeName, true, true, false, false, 0, 10, 10, 10, 10,
-			0, false, false, null, true, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, true, defaultSku,
-			externalReferenceCode, serviceContext);
+		CPDefinition cpDefinition = null;
+
+		// Update
+
+		if (cpDefinitionId > 0) {
+			cpDefinition = _cpDefinitionService.updateCPDefinition(
+				cpDefinitionId, nameMap, shortDescriptionMap, descriptionMap,
+				null, nameMap, null, null, true, null, true, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
+				true, serviceContext);
+		}
+		else {
+
+			// Upsert
+
+			cpDefinition = _cpDefinitionService.upsertCPDefinition(
+				nameMap, shortDescriptionMap, descriptionMap, null, nameMap,
+				null, null, productTypeName, true, true, false, false, 0, 10,
+				10, 10, 10, 0, false, false, null, true, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
+				true, defaultSku, externalReferenceCode, serviceContext);
+		}
 
 		if (!active) {
-			User user = _userLocalService.getUserById(
-				PrincipalThreadLocal.getUserId());
+			User user = _userLocalService.getUserById(currentUser.getUserId());
 
 			Map<String, Serializable> workflowContext = new HashMap<>();
 
