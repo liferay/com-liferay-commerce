@@ -28,8 +28,8 @@ import java.util.Date;
 public class CommercePriceListUpserterForm {
 
 	/**
-	 * Builds a {@code Form} that generates {@code CommercePriceListUpserterForm}
-	 * depending on the HTTP body.
+	 * Builds a {@code Form} that generates {@code
+	 * CommercePriceListUpserterForm} depending on the HTTP body.
 	 *
 	 * @param  formBuilder the {@code Form} builder
 	 * @return a product upserter form
