@@ -88,11 +88,9 @@ public class CPDefinitionHelper {
 	}
 
 	public CPDefinition getCPDefinitionByClassPKExternalReferenceCode(
-			ClassPKExternalReferenceCode
-				cpDefinitionClassPKExternalReferenceCode)
-		throws PortalException {
+		ClassPKExternalReferenceCode cpDefinitionClassPKExternalReferenceCode) {
 
-		Long cpDefinitionId =
+		long cpDefinitionId =
 			cpDefinitionClassPKExternalReferenceCode.getClassPK();
 
 		if (cpDefinitionId > 0) {
