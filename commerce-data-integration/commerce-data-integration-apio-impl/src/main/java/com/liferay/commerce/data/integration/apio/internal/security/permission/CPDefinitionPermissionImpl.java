@@ -36,6 +36,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Rodrigo Guedes de Souza
  * @author Alessio Antonio Rendina
+ * @author Zoltán Takács
  */
 @Component(
 	property = "model.class.name=com.liferay.commerce.product.model.CPDefinition",
@@ -55,43 +56,37 @@ public class CPDefinitionPermissionImpl
 					CPActionKeys.ADD_COMMERCE_PRODUCT_DEFINITION);
 		}
 
-		return (credentials, s) -> false;
+		return (credentials, groupId) -> false;
 	}
 
 	@Override
 	public Boolean forDeleting(
 			Credentials credentials,
-			ClassPKExternalReferenceCode classPKExternalReferenceCode)
+			ClassPKExternalReferenceCode cpDefinitionCPKERC)
 		throws Exception {
 
 		return _forItemRoutesOperations().apply(
-			credentials, classPKExternalReferenceCode, ActionKeys.DELETE);
+			credentials, cpDefinitionCPKERC, ActionKeys.DELETE);
 	}
 
 	@Override
 	public Boolean forUpdating(
 			Credentials credentials,
-			ClassPKExternalReferenceCode classPKExternalReferenceCode)
+			ClassPKExternalReferenceCode cpDefinitionCPKERC)
 		throws Exception {
 
 		return _forItemRoutesOperations().apply(
-			credentials, classPKExternalReferenceCode, ActionKeys.UPDATE);
+			credentials, cpDefinitionCPKERC, ActionKeys.UPDATE);
 	}
 
 	private ThrowableTriFunction
 		<Credentials, ClassPKExternalReferenceCode, String, Boolean>
 			_forItemRoutesOperations() {
 
-		return (credentials, classPKExternalReferenceCode, actionId) -> {
-			CPDefinition cpDefinition =
-				_cpDefinitionHelper.
-					getCPDefinitionByClassPKExternalReferenceCode(
-						classPKExternalReferenceCode);
-
-			return _cpDefinitionModelResourcePermission.contains(
-				(PermissionChecker)credentials.get(), cpDefinition.getGroupId(),
-				actionId);
-		};
+		return (credentials, cpDefinitionCPKERC, actionId) ->
+			_cpDefinitionModelResourcePermission.contains(
+				(PermissionChecker)credentials.get(),
+				cpDefinitionCPKERC.getClassPK(), actionId);
 	}
 
 	@Reference
