@@ -39,25 +39,25 @@ public class CommerceTierPriceEntryUpserterForm {
 		return formBuilder.title(
 			__ -> "The tier price entry upserter form"
 		).description(
-			__ -> "This form can be used to upsert a tier price entry"
+			__ -> "This form can be used to create or update a tier price entry"
 		).constructor(
 			CommerceTierPriceEntryUpserterForm::new
 		).addOptionalLong(
 			"commerceTierPriceEntryId",
-			CommerceTierPriceEntryUpserterForm::_setCommerceTierPriceEntryId
-		).addOptionalString(
-			"externalReferenceCode",
-			CommerceTierPriceEntryUpserterForm::_setExternalReferenceCode
+			CommerceTierPriceEntryUpserterForm::setCommerceTierPriceEntryId
 		).addOptionalString(
 			"priceEntryExternalReferenceCode",
 			CommerceTierPriceEntryUpserterForm::
-				_setPriceEntryExternalReferenceCode
+				setPriceEntryExternalReferenceCode
+		).addRequiredDouble(
+			"price", CommerceTierPriceEntryUpserterForm::setPrice
+		).addRequiredDouble(
+			"promoPrice", CommerceTierPriceEntryUpserterForm::setPromoPrice
 		).addRequiredLong(
-			"minQuantity", CommerceTierPriceEntryUpserterForm::_setMinQuantity
-		).addRequiredDouble(
-			"price", CommerceTierPriceEntryUpserterForm::_setPrice
-		).addRequiredDouble(
-			"promoPrice", CommerceTierPriceEntryUpserterForm::_setPromoPrice
+			"minQuantity", CommerceTierPriceEntryUpserterForm::setMinQuantity
+		).addRequiredString(
+			"externalReferenceCode",
+			CommerceTierPriceEntryUpserterForm::setExternalReferenceCode
 		).build();
 	}
 
@@ -85,29 +85,29 @@ public class CommerceTierPriceEntryUpserterForm {
 		return _promoPrice;
 	}
 
-	private void _setCommerceTierPriceEntryId(Long commerceTierPriceEntryId) {
+	public void setCommerceTierPriceEntryId(Long commerceTierPriceEntryId) {
 		_commerceTierPriceEntryId = commerceTierPriceEntryId;
 	}
 
-	private void _setExternalReferenceCode(String externalReferenceCode) {
+	public void setExternalReferenceCode(String externalReferenceCode) {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	private void _setMinQuantity(Long minQuantity) {
+	public void setMinQuantity(Long minQuantity) {
 		_minQuantity = minQuantity;
 	}
 
-	private void _setPrice(Double price) {
+	public void setPrice(Double price) {
 		_price = price;
 	}
 
-	private void _setPriceEntryExternalReferenceCode(
+	public void setPriceEntryExternalReferenceCode(
 		String priceEntryExternalReferenceCode) {
 
 		_priceEntryExternalReferenceCode = priceEntryExternalReferenceCode;
 	}
 
-	private void _setPromoPrice(Double promoPrice) {
+	public void setPromoPrice(Double promoPrice) {
 		_promoPrice = promoPrice;
 	}
 

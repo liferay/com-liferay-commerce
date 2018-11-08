@@ -24,7 +24,7 @@ import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
 import com.liferay.commerce.data.integration.apio.identifier.CPOptionIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.CPOptionValueIdentifier;
-import com.liferay.commerce.data.integration.apio.internal.form.CPOptionValueCreatorForm;
+import com.liferay.commerce.data.integration.apio.internal.form.CPOptionValueUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CPOptionValueHelper;
 import com.liferay.commerce.product.exception.CPOptionValueKeyException;
 import com.liferay.commerce.product.model.CPOptionValue;
@@ -57,7 +57,7 @@ public class CPOptionValueNestedCollectionResource
 		).addCreator(
 			this::_addCPOptionValue,
 			_hasPermission.forAddingIn(CPOptionIdentifier.class),
-			CPOptionValueCreatorForm::buildForm
+			CPOptionValueUpserterForm::buildForm
 		).build();
 	}
 
@@ -77,7 +77,7 @@ public class CPOptionValueNestedCollectionResource
 			_hasPermission::forDeleting
 		).addUpdater(
 			this::_updateCPOptionValue, _hasPermission::forUpdating,
-			CPOptionValueCreatorForm::buildForm
+			CPOptionValueUpserterForm::buildForm
 		).build();
 	}
 
@@ -100,19 +100,20 @@ public class CPOptionValueNestedCollectionResource
 	}
 
 	private CPOptionValue _addCPOptionValue(
-			Long cpOptionId, CPOptionValueCreatorForm cpOptionValueCreatorForm)
+			Long cpOptionId,
+			CPOptionValueUpserterForm cpOptionValueUpserterForm)
 		throws PortalException {
 
 		try {
 			return _cpOptionValueHelper.createCPOptionValue(
-				cpOptionId, cpOptionValueCreatorForm.getNameMap(),
-				cpOptionValueCreatorForm.getKey());
+				cpOptionId, cpOptionValueUpserterForm.getNameMap(),
+				cpOptionValueUpserterForm.getKey());
 		}
 		catch (CPOptionValueKeyException cpovke) {
 			throw new BadRequestException(
 				String.format(
 					"An option value with key '%s' already exists",
-					cpOptionValueCreatorForm.getKey()),
+					cpOptionValueUpserterForm.getKey()),
 				cpovke);
 		}
 	}
@@ -133,12 +134,12 @@ public class CPOptionValueNestedCollectionResource
 
 	private CPOptionValue _updateCPOptionValue(
 			Long cpOptionValueId,
-			CPOptionValueCreatorForm cpOptionValueCreatorForm)
+			CPOptionValueUpserterForm cpOptionValueUpserterForm)
 		throws PortalException {
 
 		return _cpOptionValueHelper.updateCPOptionValue(
-			cpOptionValueId, cpOptionValueCreatorForm.getNameMap(),
-			cpOptionValueCreatorForm.getKey());
+			cpOptionValueId, cpOptionValueUpserterForm.getNameMap(),
+			cpOptionValueUpserterForm.getKey());
 	}
 
 	@Reference

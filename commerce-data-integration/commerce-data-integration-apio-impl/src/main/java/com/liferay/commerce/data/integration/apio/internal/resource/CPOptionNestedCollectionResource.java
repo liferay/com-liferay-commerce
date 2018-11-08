@@ -23,7 +23,7 @@ import com.liferay.apio.architect.resource.NestedCollectionResource;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
 import com.liferay.commerce.data.integration.apio.identifier.CPOptionIdentifier;
-import com.liferay.commerce.data.integration.apio.internal.form.CPOptionCreatorForm;
+import com.liferay.commerce.data.integration.apio.internal.form.CPOptionUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CPOptionHelper;
 import com.liferay.commerce.product.exception.CPOptionKeyException;
 import com.liferay.commerce.product.model.CPOption;
@@ -58,7 +58,7 @@ public class CPOptionNestedCollectionResource
 		).addCreator(
 			this::_addCPOption, CurrentUser.class,
 			_hasPermission.forAddingIn(WebSiteIdentifier.class),
-			CPOptionCreatorForm::buildForm
+			CPOptionUpserterForm::buildForm
 		).build();
 	}
 
@@ -78,7 +78,7 @@ public class CPOptionNestedCollectionResource
 			_hasPermission::forDeleting
 		).addUpdater(
 			this::_updateCPOption, CurrentUser.class,
-			_hasPermission::forUpdating, CPOptionCreatorForm::buildForm
+			_hasPermission::forUpdating, CPOptionUpserterForm::buildForm
 		).build();
 	}
 
@@ -103,22 +103,22 @@ public class CPOptionNestedCollectionResource
 	}
 
 	private CPOption _addCPOption(
-			Long webSiteId, CPOptionCreatorForm cpOptionCreatorForm,
+			Long webSiteId, CPOptionUpserterForm cpOptionUpserterForm,
 			User currentUser)
 		throws PortalException {
 
 		try {
 			return _cpOptionHelper.createCPOption(
-				webSiteId, cpOptionCreatorForm.getNameMap(),
-				cpOptionCreatorForm.getDescriptionMap(),
-				cpOptionCreatorForm.getFieldType(),
-				cpOptionCreatorForm.getKey(), currentUser);
+				webSiteId, cpOptionUpserterForm.getNameMap(),
+				cpOptionUpserterForm.getDescriptionMap(),
+				cpOptionUpserterForm.getFieldType(),
+				cpOptionUpserterForm.getKey(), currentUser);
 		}
 		catch (CPOptionKeyException cpoke) {
 			throw new BadRequestException(
 				String.format(
 					"An option with key '%s' already exists",
-					cpOptionCreatorForm.getKey()),
+					cpOptionUpserterForm.getKey()),
 				cpoke);
 		}
 	}
@@ -137,14 +137,14 @@ public class CPOptionNestedCollectionResource
 	}
 
 	private CPOption _updateCPOption(
-			Long cpOptionId, CPOptionCreatorForm cpOptionCreatorForm,
+			Long cpOptionId, CPOptionUpserterForm cpOptionUpserterForm,
 			User currentUser)
 		throws PortalException {
 
 		return _cpOptionHelper.updateCPOption(
-			cpOptionId, cpOptionCreatorForm.getNameMap(),
-			cpOptionCreatorForm.getDescriptionMap(),
-			cpOptionCreatorForm.getFieldType(), cpOptionCreatorForm.getKey(),
+			cpOptionId, cpOptionUpserterForm.getNameMap(),
+			cpOptionUpserterForm.getDescriptionMap(),
+			cpOptionUpserterForm.getFieldType(), cpOptionUpserterForm.getKey(),
 			currentUser);
 	}
 

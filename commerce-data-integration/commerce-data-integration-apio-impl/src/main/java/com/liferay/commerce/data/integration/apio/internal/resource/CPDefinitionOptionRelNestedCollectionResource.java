@@ -25,7 +25,7 @@ import com.liferay.apio.architect.routes.NestedCollectionRoutes;
 import com.liferay.commerce.data.integration.apio.identifier.CPDefinitionIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.CPDefinitionOptionRelIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
-import com.liferay.commerce.data.integration.apio.internal.form.CPDefinitionOptionRelCreatorForm;
+import com.liferay.commerce.data.integration.apio.internal.form.CPDefinitionOptionRelUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CPDefinitionHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
@@ -64,7 +64,7 @@ public class CPDefinitionOptionRelNestedCollectionResource
 		).addCreator(
 			this::_addCPDefinitionOptionRel, CurrentUser.class,
 			_hasPermission.forAddingIn(CPDefinitionIdentifier.class),
-			CPDefinitionOptionRelCreatorForm::buildForm
+			CPDefinitionOptionRelUpserterForm::buildForm
 		).build();
 	}
 
@@ -114,7 +114,7 @@ public class CPDefinitionOptionRelNestedCollectionResource
 	private CPDefinitionOptionRel _addCPDefinitionOptionRel(
 			ClassPKExternalReferenceCode
 				cpDefinitionClassPKExternalReferenceCode,
-			CPDefinitionOptionRelCreatorForm cpDefinitionOptionRelCreatorForm,
+			CPDefinitionOptionRelUpserterForm cpDefinitionOptionRelUpserterForm,
 			User currentUser)
 		throws PortalException {
 
@@ -133,7 +133,7 @@ public class CPDefinitionOptionRelNestedCollectionResource
 
 		return _cpDefinitionOptionRelService.addCPDefinitionOptionRel(
 			cpDefinition.getCPDefinitionId(),
-			cpDefinitionOptionRelCreatorForm.getCommerceProductOptionId(),
+			cpDefinitionOptionRelUpserterForm.getCommerceProductOptionId(),
 			serviceContext);
 	}
 
