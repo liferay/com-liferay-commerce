@@ -56,12 +56,12 @@ public class CPDefinitionUpserterForm {
 		).addOptionalString(
 			"description", CPDefinitionUpserterForm::_setDescription
 		).addOptionalString(
+			"externalReferenceCode",
+			CPDefinitionUpserterForm::_setExternalReferenceCode
+		).addOptionalString(
 			"shortDescription", CPDefinitionUpserterForm::_setShortDescription
 		).addRequiredBoolean(
 			"active", CPDefinitionUpserterForm::_setActive
-		).addRequiredString(
-			"externalReferenceCode",
-			CPDefinitionUpserterForm::_setExternalReferenceCode
 		).addRequiredString(
 			"productTypeName", CPDefinitionUpserterForm::_setProductTypeName
 		).addRequiredString(
