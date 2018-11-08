@@ -41,31 +41,29 @@ public class CommercePriceListUpserterForm {
 		return formBuilder.title(
 			__ -> "The price list upserter form"
 		).description(
-			__ -> "This form can be used to upsert a price list"
+			__ -> "This form can be used to create or update a price list"
 		).constructor(
 			CommercePriceListUpserterForm::new
 		).addOptionalDate(
-			"displayDate", CommercePriceListUpserterForm::_setDisplayDate
+			"displayDate", CommercePriceListUpserterForm::setDisplayDate
 		).addOptionalDate(
-			"expirationDate", CommercePriceListUpserterForm::_setExpirationDate
+			"expirationDate", CommercePriceListUpserterForm::setExpirationDate
 		).addOptionalLong(
 			"commercePriceListId",
-			CommercePriceListUpserterForm::_setCommercePriceListId
-		).addOptionalString(
-			"externalReferenceCode",
-			CommercePriceListUpserterForm::_setExternalReferenceCode
+			CommercePriceListUpserterForm::setCommercePriceListId
 		).addRequiredBoolean(
-			"active", CommercePriceListUpserterForm::_setActive
+			"active", CommercePriceListUpserterForm::setActive
 		).addRequiredBoolean(
-			"neverExpire", CommercePriceListUpserterForm::_setNeverExpire
+			"neverExpire", CommercePriceListUpserterForm::setNeverExpire
 		).addRequiredDouble(
-			"priority", CommercePriceListUpserterForm::_setPriority
+			"priority", CommercePriceListUpserterForm::setPriority
 		).addRequiredString(
-			"currency", CommercePriceListUpserterForm::_setCurrency
+			"currency", CommercePriceListUpserterForm::setCurrency
 		).addRequiredString(
-			"name", CommercePriceListUpserterForm::_setName
-		).addRequiredBoolean(
-			"active", CommercePriceListUpserterForm::_setActive
+			"externalReferenceCode",
+			CommercePriceListUpserterForm::setExternalReferenceCode
+		).addRequiredString(
+			"name", CommercePriceListUpserterForm::setName
 		).build();
 	}
 
@@ -113,39 +111,39 @@ public class CommercePriceListUpserterForm {
 		return _neverExpire;
 	}
 
-	private void _setActive(Boolean active) {
+	public void setActive(Boolean active) {
 		_active = active;
 	}
 
-	private void _setCommercePriceListId(Long commercePriceListId) {
+	public void setCommercePriceListId(Long commercePriceListId) {
 		_commercePriceListId = commercePriceListId;
 	}
 
-	private void _setCurrency(String currency) {
+	public void setCurrency(String currency) {
 		_currency = currency;
 	}
 
-	private void _setDisplayDate(Date display) {
+	public void setDisplayDate(Date display) {
 		_displayDate = display;
 	}
 
-	private void _setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(Date expirationDate) {
 		_expirationDate = expirationDate;
 	}
 
-	private void _setExternalReferenceCode(String externalReferenceCode) {
+	public void setExternalReferenceCode(String externalReferenceCode) {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	private void _setName(String name) {
+	public void setName(String name) {
 		_name = name;
 	}
 
-	private void _setNeverExpire(Boolean neverExpire) {
+	public void setNeverExpire(Boolean neverExpire) {
 		_neverExpire = neverExpire;
 	}
 
-	private void _setPriority(Double priority) {
+	public void setPriority(Double priority) {
 		_priority = priority;
 	}
 

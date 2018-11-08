@@ -45,17 +45,17 @@ public class CommercePriceListUpdaterForm {
 		).constructor(
 			CommercePriceListUpdaterForm::new
 		).addOptionalDate(
-			"displayDate", CommercePriceListUpdaterForm::_setDisplayDate
+			"displayDate", CommercePriceListUpdaterForm::setDisplayDate
 		).addOptionalDate(
-			"expirationDate", CommercePriceListUpdaterForm::_setExpirationDate
+			"expirationDate", CommercePriceListUpdaterForm::setExpirationDate
 		).addRequiredBoolean(
-			"neverExpire", CommercePriceListUpdaterForm::_setNeverExpire
+			"neverExpire", CommercePriceListUpdaterForm::setNeverExpire
 		).addRequiredDouble(
-			"priority", CommercePriceListUpdaterForm::_setPriority
+			"priority", CommercePriceListUpdaterForm::setPriority
 		).addRequiredString(
-			"currency", CommercePriceListUpdaterForm::_setCurrency
+			"currency", CommercePriceListUpdaterForm::setCurrency
 		).addRequiredString(
-			"name", CommercePriceListUpdaterForm::_setName
+			"name", CommercePriceListUpdaterForm::setName
 		).build();
 	}
 
@@ -91,27 +91,27 @@ public class CommercePriceListUpdaterForm {
 		return _neverExpire;
 	}
 
-	private void _setCurrency(String currency) {
+	public void setCurrency(String currency) {
 		_currency = currency;
 	}
 
-	private void _setDisplayDate(Date display) {
+	public void setDisplayDate(Date display) {
 		_displayDate = display;
 	}
 
-	private void _setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(Date expirationDate) {
 		_expirationDate = expirationDate;
 	}
 
-	private void _setName(String name) {
+	public void setName(String name) {
 		_name = name;
 	}
 
-	private void _setNeverExpire(Boolean neverExpire) {
+	public void setNeverExpire(Boolean neverExpire) {
 		_neverExpire = neverExpire;
 	}
 
-	private void _setPriority(Double priority) {
+	public void setPriority(Double priority) {
 		_priority = priority;
 	}
 

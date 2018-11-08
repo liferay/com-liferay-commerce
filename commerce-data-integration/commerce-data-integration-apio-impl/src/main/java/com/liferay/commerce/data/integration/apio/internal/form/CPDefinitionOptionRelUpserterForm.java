@@ -18,21 +18,22 @@ import com.liferay.apio.architect.form.Form;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
-public class CPDefinitionOptionRelCreatorForm {
+public class CPDefinitionOptionRelUpserterForm {
 
-	public static Form<CPDefinitionOptionRelCreatorForm> buildForm(
-		Form.Builder<CPDefinitionOptionRelCreatorForm> formBuilder) {
+	public static Form<CPDefinitionOptionRelUpserterForm> buildForm(
+		Form.Builder<CPDefinitionOptionRelUpserterForm> formBuilder) {
 
 		return formBuilder.title(
-			__ -> "The product option creator form"
+			__ -> "The product option upserter form"
 		).description(
-			__ -> "This form can be used to create a product option"
+			__ -> "This form can be used to create a product option relation"
 		).constructor(
-			CPDefinitionOptionRelCreatorForm::new
+			CPDefinitionOptionRelUpserterForm::new
 		).addRequiredLong(
 			"commerceProductOptionId",
-			CPDefinitionOptionRelCreatorForm::_setCommerceProductOptionId
+			CPDefinitionOptionRelUpserterForm::setCommerceProductOptionId
 		).build();
 	}
 
@@ -40,7 +41,7 @@ public class CPDefinitionOptionRelCreatorForm {
 		return _commerceProductOptionId;
 	}
 
-	private void _setCommerceProductOptionId(long commerceProductOptionId) {
+	public void setCommerceProductOptionId(long commerceProductOptionId) {
 		_commerceProductOptionId = commerceProductOptionId;
 	}
 
