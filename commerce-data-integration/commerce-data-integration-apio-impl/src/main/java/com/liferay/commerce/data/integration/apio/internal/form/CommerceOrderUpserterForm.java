@@ -18,6 +18,7 @@ import com.liferay.apio.architect.form.Form;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Zoltán Takács
  */
 public class CommerceOrderUpserterForm {
 
@@ -25,24 +26,23 @@ public class CommerceOrderUpserterForm {
 		Form.Builder<CommerceOrderUpserterForm> formBuilder) {
 
 		return formBuilder.title(
-			__ -> "The order creator form"
+			__ -> "The order upserter form"
 		).description(
-			__ -> "This form can be used to create an order"
+			__ -> "This form can be used to create or update an order"
 		).constructor(
 			CommerceOrderUpserterForm::new
-		).addRequiredLong(
-			"orderOrganizationId",
-			CommerceOrderUpserterForm::_setOrderOrganizationId
-		).addRequiredLong(
-			"orderUserId", CommerceOrderUpserterForm::_setOrderUserId
-		).addRequiredString(
-			"currency", CommerceOrderUpserterForm::_setCurrency
 		).addOptionalLong(
-			"shippingAddressId",
-			CommerceOrderUpserterForm::_setShippingAddressId
+			"shippingAddressId", CommerceOrderUpserterForm::setShippingAddressId
 		).addOptionalString(
 			"purchaseOrderNumber",
-			CommerceOrderUpserterForm::_setPurchaseOrderNumber
+			CommerceOrderUpserterForm::setPurchaseOrderNumber
+		).addRequiredLong(
+			"orderOrganizationId",
+			CommerceOrderUpserterForm::setOrderOrganizationId
+		).addRequiredLong(
+			"orderUserId", CommerceOrderUpserterForm::setOrderUserId
+		).addRequiredString(
+			"currency", CommerceOrderUpserterForm::setCurrency
 		).build();
 	}
 
@@ -66,23 +66,23 @@ public class CommerceOrderUpserterForm {
 		return _shippingAddressId;
 	}
 
-	private void _setCurrency(String currency) {
+	public void setCurrency(String currency) {
 		_currency = currency;
 	}
 
-	private void _setOrderOrganizationId(long orderOrganizationId) {
+	public void setOrderOrganizationId(long orderOrganizationId) {
 		_orderOrganizationId = orderOrganizationId;
 	}
 
-	private void _setOrderUserId(long orderUserId) {
+	public void setOrderUserId(long orderUserId) {
 		_orderUserId = orderUserId;
 	}
 
-	private void _setPurchaseOrderNumber(String purchaseOrderNumber) {
+	public void setPurchaseOrderNumber(String purchaseOrderNumber) {
 		_purchaseOrderNumber = purchaseOrderNumber;
 	}
 
-	private void _setShippingAddressId(long shippingAddressId) {
+	public void setShippingAddressId(long shippingAddressId) {
 		_shippingAddressId = shippingAddressId;
 	}
 

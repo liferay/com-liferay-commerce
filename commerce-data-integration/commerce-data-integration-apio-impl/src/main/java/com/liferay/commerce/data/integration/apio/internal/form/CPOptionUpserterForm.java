@@ -23,23 +23,40 @@ import java.util.Map;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
-public class CPOptionValueCreatorForm {
+public class CPOptionUpserterForm {
 
-	public static Form<CPOptionValueCreatorForm> buildForm(
-		Form.Builder<CPOptionValueCreatorForm> formBuilder) {
+	public static Form<CPOptionUpserterForm> buildForm(
+		Form.Builder<CPOptionUpserterForm> formBuilder) {
 
 		return formBuilder.title(
-			__ -> "The option value form"
+			__ -> "The product option upserter form"
 		).description(
-			__ -> "This form can be used to create an option value"
+			__ -> "This form can be used to create or update a product option"
 		).constructor(
-			CPOptionValueCreatorForm::new
+			CPOptionUpserterForm::new
+		).addOptionalString(
+			"description", CPOptionUpserterForm::setDescription
 		).addRequiredString(
-			"name", CPOptionValueCreatorForm::_setName
+			"fieldType", CPOptionUpserterForm::setFieldType
 		).addRequiredString(
-			"key", CPOptionValueCreatorForm::_setKey
+			"key", CPOptionUpserterForm::setKey
+		).addRequiredString(
+			"name", CPOptionUpserterForm::setName
 		).build();
+	}
+
+	public String getDescription() {
+		return _description;
+	}
+
+	public Map<Locale, String> getDescriptionMap() {
+		return Collections.singletonMap(LocaleUtil.getDefault(), _description);
+	}
+
+	public String getFieldType() {
+		return _fieldType;
 	}
 
 	public String getKey() {
@@ -54,14 +71,24 @@ public class CPOptionValueCreatorForm {
 		return Collections.singletonMap(LocaleUtil.getDefault(), _name);
 	}
 
-	private void _setKey(String key) {
+	public void setDescription(String description) {
+		_description = description;
+	}
+
+	public void setFieldType(String fieldType) {
+		_fieldType = fieldType;
+	}
+
+	public void setKey(String key) {
 		_key = key;
 	}
 
-	private void _setName(String name) {
+	public void setName(String name) {
 		_name = name;
 	}
 
+	private String _description;
+	private String _fieldType;
 	private String _key;
 	private String _name;
 

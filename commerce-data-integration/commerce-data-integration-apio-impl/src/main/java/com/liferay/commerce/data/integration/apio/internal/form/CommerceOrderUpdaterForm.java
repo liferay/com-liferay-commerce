@@ -18,6 +18,7 @@ import com.liferay.apio.architect.form.Form;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 public class CommerceOrderUpdaterForm {
 
@@ -32,11 +33,11 @@ public class CommerceOrderUpdaterForm {
 			CommerceOrderUpdaterForm::new
 		).addOptionalString(
 			"externalReferenceCode",
-			CommerceOrderUpdaterForm::_setExternalReferenceCode
+			CommerceOrderUpdaterForm::setExternalReferenceCode
 		).addOptionalLong(
-			"orderStatus", CommerceOrderUpdaterForm::_setOrderStatus
+			"orderStatus", CommerceOrderUpdaterForm::setOrderStatus
 		).addOptionalLong(
-			"paymentStatus", CommerceOrderUpdaterForm::_setPaymentStatus
+			"paymentStatus", CommerceOrderUpdaterForm::setPaymentStatus
 		).build();
 	}
 
@@ -52,15 +53,15 @@ public class CommerceOrderUpdaterForm {
 		return _paymentStatus;
 	}
 
-	private void _setExternalReferenceCode(String externalReferenceCode) {
+	public void setExternalReferenceCode(String externalReferenceCode) {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	private void _setOrderStatus(Long orderStatus) {
+	public void setOrderStatus(Long orderStatus) {
 		_orderStatus = orderStatus;
 	}
 
-	private void _setPaymentStatus(Long paymentStatus) {
+	public void setPaymentStatus(Long paymentStatus) {
 		_paymentStatus = paymentStatus;
 	}
 

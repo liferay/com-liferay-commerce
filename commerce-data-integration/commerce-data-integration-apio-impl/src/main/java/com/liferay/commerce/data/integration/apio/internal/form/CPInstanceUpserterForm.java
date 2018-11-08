@@ -24,6 +24,7 @@ import java.util.Map;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 public class CPInstanceUpserterForm {
 
@@ -33,53 +34,53 @@ public class CPInstanceUpserterForm {
 		return formBuilder.title(
 			__ -> "The product instance upserter form"
 		).description(
-			__ -> "This form can be used to upsert a product instance"
+			__ -> "This form can be used to create or update a product instance"
 		).constructor(
 			CPInstanceUpserterForm::new
-		).addRequiredString(
-			"sku", CPInstanceUpserterForm::_setSku
+		).addOptionalBoolean(
+			"neverExpire", CPInstanceUpserterForm::setNeverExpire
+		).addOptionalBoolean(
+			"published", CPInstanceUpserterForm::setPublished
+		).addOptionalBoolean(
+			"purchasable", CPInstanceUpserterForm::setPurchasable
+		).addOptionalDouble(
+			"cost", CPInstanceUpserterForm::setCost
+		).addOptionalDouble(
+			"depth", CPInstanceUpserterForm::setDepth
+		).addOptionalDouble(
+			"height", CPInstanceUpserterForm::setHeight
+		).addOptionalDouble(
+			"price", CPInstanceUpserterForm::setPrice
+		).addOptionalDouble(
+			"promoPrice", CPInstanceUpserterForm::setPromoPrice
+		).addOptionalDouble(
+			"weight", CPInstanceUpserterForm::setWeight
+		).addOptionalDouble(
+			"width", CPInstanceUpserterForm::setWidth
+		).addOptionalDate(
+			"displayDate", CPInstanceUpserterForm::setDisplayDate
+		).addOptionalDate(
+			"expirationDate", CPInstanceUpserterForm::setExpirationDate
 		).addOptionalString(
-			"gtin", CPInstanceUpserterForm::_setGtin
+			"description", CPInstanceUpserterForm::setDescription
+		).addOptionalString(
+			"gtin", CPInstanceUpserterForm::setGtin
 		).addOptionalString(
 			"manufacturerPartNumber",
-			CPInstanceUpserterForm::_setManufacturerPartNumber
-		).addOptionalBoolean(
-			"purchasable", CPInstanceUpserterForm::_setPurchasable
-		).addOptionalDouble(
-			"width", CPInstanceUpserterForm::_setWidth
-		).addOptionalDouble(
-			"height", CPInstanceUpserterForm::_setHeight
-		).addOptionalDouble(
-			"depth", CPInstanceUpserterForm::_setDepth
-		).addOptionalDouble(
-			"weight", CPInstanceUpserterForm::_setWeight
-		).addOptionalDouble(
-			"cost", CPInstanceUpserterForm::_setCost
-		).addOptionalDouble(
-			"price", CPInstanceUpserterForm::_setPrice
-		).addOptionalDouble(
-			"promoPrice", CPInstanceUpserterForm::_setPromoPrice
-		).addOptionalBoolean(
-			"published", CPInstanceUpserterForm::_setPublished
-		).addOptionalDate(
-			"displayDate", CPInstanceUpserterForm::_setDisplayDate
-		).addOptionalDate(
-			"expirationDate", CPInstanceUpserterForm::_setExpirationDate
-		).addOptionalBoolean(
-			"neverExpire", CPInstanceUpserterForm::_setNeverExpire
+			CPInstanceUpserterForm::setManufacturerPartNumber
+		).addOptionalString(
+			"productTypeName", CPInstanceUpserterForm::setProductTypeName
+		).addOptionalString(
+			"shortDescription", CPInstanceUpserterForm::setShortDescription
+		).addRequiredBoolean(
+			"active", CPInstanceUpserterForm::setActive
 		).addRequiredString(
 			"externalReferenceCode",
-			CPInstanceUpserterForm::_setExternalReferenceCode
-		).addOptionalString(
-			"description", CPInstanceUpserterForm::_setDescription
-		).addOptionalString(
-			"shortDescription", CPInstanceUpserterForm::_setShortDescription
-		).addOptionalString(
-			"productTypeName", CPInstanceUpserterForm::_setProductTypeName
+			CPInstanceUpserterForm::setExternalReferenceCode
 		).addRequiredString(
-			"title", CPInstanceUpserterForm::_setTitle
-		).addRequiredBoolean(
-			"active", CPInstanceUpserterForm::_setActive
+			"sku", CPInstanceUpserterForm::setSku
+		).addRequiredString(
+			"title", CPInstanceUpserterForm::setTitle
 		).build();
 	}
 
@@ -176,87 +177,87 @@ public class CPInstanceUpserterForm {
 		return _width;
 	}
 
-	private void _setActive(Boolean active) {
+	public void setActive(Boolean active) {
 		_active = active;
 	}
 
-	private void _setCost(double cost) {
+	public void setCost(double cost) {
 		_cost = cost;
 	}
 
-	private void _setDepth(double depth) {
+	public void setDepth(double depth) {
 		_depth = depth;
 	}
 
-	private void _setDescription(String description) {
+	public void setDescription(String description) {
 		_description = description;
 	}
 
-	private void _setDisplayDate(Date displayDate) {
+	public void setDisplayDate(Date displayDate) {
 		_displayDate = displayDate;
 	}
 
-	private void _setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(Date expirationDate) {
 		_expirationDate = expirationDate;
 	}
 
-	private void _setExternalReferenceCode(String externalReferenceCode) {
+	public void setExternalReferenceCode(String externalReferenceCode) {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	private void _setGtin(String gtin) {
+	public void setGtin(String gtin) {
 		_gtin = gtin;
 	}
 
-	private void _setHeight(double height) {
+	public void setHeight(double height) {
 		_height = height;
 	}
 
-	private void _setManufacturerPartNumber(String manufacturerPartNumber) {
+	public void setManufacturerPartNumber(String manufacturerPartNumber) {
 		_manufacturerPartNumber = manufacturerPartNumber;
 	}
 
-	private void _setNeverExpire(boolean neverExpire) {
+	public void setNeverExpire(boolean neverExpire) {
 		_neverExpire = neverExpire;
 	}
 
-	private void _setPrice(double price) {
+	public void setPrice(double price) {
 		_price = price;
 	}
 
-	private void _setProductTypeName(String productTypeName) {
+	public void setProductTypeName(String productTypeName) {
 		_productTypeName = productTypeName;
 	}
 
-	private void _setPromoPrice(double promoPrice) {
+	public void setPromoPrice(double promoPrice) {
 		_promoPrice = promoPrice;
 	}
 
-	private void _setPublished(boolean published) {
+	public void setPublished(boolean published) {
 		_published = published;
 	}
 
-	private void _setPurchasable(boolean purchasable) {
+	public void setPurchasable(boolean purchasable) {
 		_purchasable = purchasable;
 	}
 
-	private void _setShortDescription(String shortDescription) {
+	public void setShortDescription(String shortDescription) {
 		_shortDescription = shortDescription;
 	}
 
-	private void _setSku(String sku) {
+	public void setSku(String sku) {
 		_sku = sku;
 	}
 
-	private void _setTitle(String title) {
+	public void setTitle(String title) {
 		_title = title;
 	}
 
-	private void _setWeight(double weight) {
+	public void setWeight(double weight) {
 		_weight = weight;
 	}
 
-	private void _setWidth(double width) {
+	public void setWidth(double width) {
 		_width = width;
 	}
 
