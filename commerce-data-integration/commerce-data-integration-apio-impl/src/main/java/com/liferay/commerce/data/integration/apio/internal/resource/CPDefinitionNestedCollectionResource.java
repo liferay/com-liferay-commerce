@@ -117,13 +117,13 @@ public class CPDefinitionNestedCollectionResource
 		).addString(
 			"description", CPDefinition::getDescription
 		).addString(
-			"productType", CPDefinition::getProductTypeName
-		).addString(
-			"name", CPDefinition::getName
-		).addString(
 			"externalReferenceCode", CPDefinition::getExternalReferenceCode
+		).addString(
+			"productType", CPDefinition::getProductTypeName
 		).addStringList(
 			"skus", this::_getSKUs
+		).addString(
+			"title", CPDefinition::getName
 		).build();
 	}
 
