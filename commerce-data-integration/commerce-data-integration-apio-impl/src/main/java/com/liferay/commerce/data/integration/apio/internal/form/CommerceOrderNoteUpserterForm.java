@@ -18,6 +18,7 @@ import com.liferay.apio.architect.form.Form;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 public class CommerceOrderNoteUpserterForm {
 
@@ -27,19 +28,19 @@ public class CommerceOrderNoteUpserterForm {
 		return formBuilder.title(
 			__ -> "The order note upserter form"
 		).description(
-			__ -> "This form can be used to update an order"
+			__ -> "This form can be used to create or update an order note"
 		).constructor(
 			CommerceOrderNoteUpserterForm::new
 		).addOptionalLong(
 			"commerceOrderNoteId",
-			CommerceOrderNoteUpserterForm::_setCommerceOrderNoteId
+			CommerceOrderNoteUpserterForm::setCommerceOrderNoteId
+		).addRequiredString(
+			"content", CommerceOrderNoteUpserterForm::setContent
 		).addRequiredString(
 			"externalReferenceCode",
-			CommerceOrderNoteUpserterForm::_setExternalReferenceCode
-		).addRequiredString(
-			"content", CommerceOrderNoteUpserterForm::_setContent
+			CommerceOrderNoteUpserterForm::setExternalReferenceCode
 		).addRequiredBoolean(
-			"restricted", CommerceOrderNoteUpserterForm::_setRestricted
+			"restricted", CommerceOrderNoteUpserterForm::setRestricted
 		).build();
 	}
 
@@ -59,19 +60,19 @@ public class CommerceOrderNoteUpserterForm {
 		return _restricted;
 	}
 
-	private void _setCommerceOrderNoteId(Long commerceOrderNoteId) {
+	public void setCommerceOrderNoteId(Long commerceOrderNoteId) {
 		_commerceOrderNoteId = commerceOrderNoteId;
 	}
 
-	private void _setContent(String content) {
+	public void setContent(String content) {
 		_content = content;
 	}
 
-	private void _setExternalReferenceCode(String externalReferenceCode) {
+	public void setExternalReferenceCode(String externalReferenceCode) {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	private void _setRestricted(Boolean restricted) {
+	public void setRestricted(Boolean restricted) {
 		_restricted = restricted;
 	}
 

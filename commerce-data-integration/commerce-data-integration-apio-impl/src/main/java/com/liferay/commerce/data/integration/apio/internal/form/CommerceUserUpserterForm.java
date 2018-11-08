@@ -52,9 +52,6 @@ public class CommerceUserUpserterForm {
 		).addOptionalString(
 			"alternateName", CommerceUserUpserterForm::setAlternateName
 		).addOptionalString(
-			"externalReferenceCode",
-			CommerceUserUpserterForm::setExternalReferenceCode
-		).addOptionalString(
 			"gender", CommerceUserUpserterForm::setGender
 		).addOptionalString(
 			"honorificPrefix", CommerceUserUpserterForm::setHonorificPrefix
@@ -66,6 +63,9 @@ public class CommerceUserUpserterForm {
 			"roleNames", CommerceUserUpserterForm::setRoleNames
 		).addRequiredString(
 			"email", CommerceUserUpserterForm::setEmail
+		).addRequiredString(
+			"externalReferenceCode",
+			CommerceUserUpserterForm::setExternalReferenceCode
 		).addRequiredString(
 			"familyName", CommerceUserUpserterForm::setFamilyName
 		).addRequiredString(

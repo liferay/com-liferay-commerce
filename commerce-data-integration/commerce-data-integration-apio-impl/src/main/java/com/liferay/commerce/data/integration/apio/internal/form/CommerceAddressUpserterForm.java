@@ -18,46 +18,47 @@ import com.liferay.apio.architect.form.Form;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
-public class CommerceAddressCreatorForm {
+public class CommerceAddressUpserterForm {
 
-	public static Form<CommerceAddressCreatorForm> buildForm(
-		Form.Builder<CommerceAddressCreatorForm> formBuilder) {
+	public static Form<CommerceAddressUpserterForm> buildForm(
+		Form.Builder<CommerceAddressUpserterForm> formBuilder) {
 
 		return formBuilder.title(
-			__ -> "The address creator form"
+			__ -> "The address upserter form"
 		).description(
-			__ -> "This form can be used to create an address"
+			__ -> "This form can be used to create or update an address"
 		).constructor(
-			CommerceAddressCreatorForm::new
-		).addRequiredString(
-			"name", CommerceAddressCreatorForm::_setName
-		).addOptionalString(
-			"description", CommerceAddressCreatorForm::_setDescription
-		).addRequiredString(
-			"street1", CommerceAddressCreatorForm::_setStreet1
-		).addOptionalString(
-			"street2", CommerceAddressCreatorForm::_setStreet2
-		).addOptionalString(
-			"street3", CommerceAddressCreatorForm::_setStreet3
-		).addRequiredString(
-			"city", CommerceAddressCreatorForm::_setCity
-		).addOptionalString(
-			"zip", CommerceAddressCreatorForm::_setZip
-		).addOptionalString(
-			"phoneNumber", CommerceAddressCreatorForm::_setPhoneNumber
-		).addRequiredLong(
-			"countryId", CommerceAddressCreatorForm::_setCountryId
+			CommerceAddressUpserterForm::new
+		).addOptionalBoolean(
+			"defaultBilling", CommerceAddressUpserterForm::setDefaultBilling
+		).addOptionalBoolean(
+			"defaultShipping", CommerceAddressUpserterForm::setDefaultShipping
+		).addOptionalDouble(
+			"longitude", CommerceAddressUpserterForm::setLongitude
+		).addOptionalDouble(
+			"latitude", CommerceAddressUpserterForm::setLatitude
 		).addOptionalLong(
-			"regionId", CommerceAddressCreatorForm::_setRegionId
-		).addOptionalDouble(
-			"latitude", CommerceAddressCreatorForm::_setLatitude
-		).addOptionalDouble(
-			"longitude", CommerceAddressCreatorForm::_setLongitude
-		).addOptionalBoolean(
-			"_defaultBilling", CommerceAddressCreatorForm::_setDefaultBilling
-		).addOptionalBoolean(
-			"defaultShipping", CommerceAddressCreatorForm::_setDefaultShipping
+			"regionId", CommerceAddressUpserterForm::setRegionId
+		).addOptionalString(
+			"description", CommerceAddressUpserterForm::setDescription
+		).addOptionalString(
+			"phoneNumber", CommerceAddressUpserterForm::setPhoneNumber
+		).addOptionalString(
+			"street2", CommerceAddressUpserterForm::setStreet2
+		).addOptionalString(
+			"street3", CommerceAddressUpserterForm::setStreet3
+		).addOptionalString(
+			"zip", CommerceAddressUpserterForm::setZip
+		).addRequiredLong(
+			"countryId", CommerceAddressUpserterForm::setCountryId
+		).addRequiredString(
+			"city", CommerceAddressUpserterForm::setCity
+		).addRequiredString(
+			"name", CommerceAddressUpserterForm::setName
+		).addRequiredString(
+			"street1", CommerceAddressUpserterForm::setStreet1
 		).build();
 	}
 
@@ -117,59 +118,59 @@ public class CommerceAddressCreatorForm {
 		return _zip;
 	}
 
-	private void _setCity(String city) {
+	public void setCity(String city) {
 		_city = city;
 	}
 
-	private void _setCountryId(long countryId) {
+	public void setCountryId(long countryId) {
 		_countryId = countryId;
 	}
 
-	private void _setDefaultBilling(boolean defaultBilling) {
+	public void setDefaultBilling(boolean defaultBilling) {
 		_defaultBilling = defaultBilling;
 	}
 
-	private void _setDefaultShipping(boolean defaultShipping) {
+	public void setDefaultShipping(boolean defaultShipping) {
 		_defaultShipping = defaultShipping;
 	}
 
-	private void _setDescription(String description) {
+	public void setDescription(String description) {
 		_description = description;
 	}
 
-	private void _setLatitude(double latitude) {
+	public void setLatitude(double latitude) {
 		_latitude = latitude;
 	}
 
-	private void _setLongitude(double longitude) {
+	public void setLongitude(double longitude) {
 		_longitude = longitude;
 	}
 
-	private void _setName(String name) {
+	public void setName(String name) {
 		_name = name;
 	}
 
-	private void _setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		_phoneNumber = phoneNumber;
 	}
 
-	private void _setRegionId(long regionId) {
+	public void setRegionId(long regionId) {
 		_regionId = regionId;
 	}
 
-	private void _setStreet1(String street1) {
+	public void setStreet1(String street1) {
 		_street1 = street1;
 	}
 
-	private void _setStreet2(String street2) {
+	public void setStreet2(String street2) {
 		_street2 = street2;
 	}
 
-	private void _setStreet3(String street3) {
+	public void setStreet3(String street3) {
 		_street3 = street3;
 	}
 
-	private void _setZip(String zip) {
+	public void setZip(String zip) {
 		_zip = zip;
 	}
 

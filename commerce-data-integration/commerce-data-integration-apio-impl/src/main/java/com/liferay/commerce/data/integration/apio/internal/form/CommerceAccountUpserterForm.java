@@ -20,6 +20,7 @@ import java.util.List;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 public class CommerceAccountUpserterForm {
 
@@ -27,22 +28,22 @@ public class CommerceAccountUpserterForm {
 		Form.Builder<CommerceAccountUpserterForm> formBuilder) {
 
 		return formBuilder.title(
-			__ -> "The account creator form"
+			__ -> "The account upserter form"
 		).description(
-			__ -> "This form can be used to create an account"
+			__ -> "This form can be used to create or update an account"
 		).constructor(
 			CommerceAccountUpserterForm::new
+		).addOptionalLong(
+			"countryId", CommerceAccountUpserterForm::setCountryId
+		).addOptionalLong(
+			"regionId", CommerceAccountUpserterForm::setRegionId
+		).addOptionalLongList(
+			"commerceUserIds", CommerceAccountUpserterForm::setCommerceUserIds
 		).addRequiredString(
 			"externalReferenceCode",
-			CommerceAccountUpserterForm::_setExternalReferenceCode
-		).addOptionalLong(
-			"countryId", CommerceAccountUpserterForm::_setCountryId
-		).addOptionalLong(
-			"regionId", CommerceAccountUpserterForm::_setRegionId
+			CommerceAccountUpserterForm::setExternalReferenceCode
 		).addRequiredString(
-			"name", CommerceAccountUpserterForm::_setName
-		).addOptionalLongList(
-			"commerceUserIds", CommerceAccountUpserterForm::_setCommerceUserIds
+			"name", CommerceAccountUpserterForm::setName
 		).build();
 	}
 
@@ -66,23 +67,23 @@ public class CommerceAccountUpserterForm {
 		return _regionId;
 	}
 
-	private void _setCommerceUserIds(List<Long> commerceUserIds) {
+	public void setCommerceUserIds(List<Long> commerceUserIds) {
 		_commerceUserIds = commerceUserIds;
 	}
 
-	private void _setCountryId(long countryId) {
+	public void setCountryId(long countryId) {
 		_countryId = countryId;
 	}
 
-	private void _setExternalReferenceCode(String externalReferenceCode) {
+	public void setExternalReferenceCode(String externalReferenceCode) {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	private void _setName(String name) {
+	public void setName(String name) {
 		_name = name;
 	}
 
-	private void _setRegionId(long regionId) {
+	public void setRegionId(long regionId) {
 		_regionId = regionId;
 	}
 

@@ -43,9 +43,9 @@ public class CommercePriceEntryUpdaterForm {
 		).constructor(
 			CommercePriceEntryUpdaterForm::new
 		).addRequiredDouble(
-			"price", CommercePriceEntryUpdaterForm::_setPrice
+			"price", CommercePriceEntryUpdaterForm::setPrice
 		).addRequiredDouble(
-			"promoPrice", CommercePriceEntryUpdaterForm::_setPromoPrice
+			"promoPrice", CommercePriceEntryUpdaterForm::setPromoPrice
 		).build();
 	}
 
@@ -57,11 +57,11 @@ public class CommercePriceEntryUpdaterForm {
 		return _promoPrice;
 	}
 
-	private void _setPrice(Double price) {
+	public void setPrice(Double price) {
 		_price = price;
 	}
 
-	private void _setPromoPrice(Double promoPrice) {
+	public void setPromoPrice(Double promoPrice) {
 		_promoPrice = promoPrice;
 	}
 

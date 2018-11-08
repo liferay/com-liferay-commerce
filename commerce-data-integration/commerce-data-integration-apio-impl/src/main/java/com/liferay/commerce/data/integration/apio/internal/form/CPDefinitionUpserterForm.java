@@ -50,22 +50,22 @@ public class CPDefinitionUpserterForm {
 		).constructor(
 			CPDefinitionUpserterForm::new
 		).addOptionalLongList(
-			"assetCategoryIds", CPDefinitionUpserterForm::_setAssetCategoryIds
+			"assetCategoryIds", CPDefinitionUpserterForm::setAssetCategoryIds
 		).addOptionalString(
-			"defaultSku", CPDefinitionUpserterForm::_setDefaultSku
+			"defaultSku", CPDefinitionUpserterForm::setDefaultSku
 		).addOptionalString(
-			"description", CPDefinitionUpserterForm::_setDescription
+			"description", CPDefinitionUpserterForm::setDescription
 		).addOptionalString(
-			"externalReferenceCode",
-			CPDefinitionUpserterForm::_setExternalReferenceCode
-		).addOptionalString(
-			"shortDescription", CPDefinitionUpserterForm::_setShortDescription
+			"shortDescription", CPDefinitionUpserterForm::setShortDescription
 		).addRequiredBoolean(
-			"active", CPDefinitionUpserterForm::_setActive
+			"active", CPDefinitionUpserterForm::setActive
 		).addRequiredString(
-			"productTypeName", CPDefinitionUpserterForm::_setProductTypeName
+			"externalReferenceCode",
+			CPDefinitionUpserterForm::setExternalReferenceCode
 		).addRequiredString(
-			"title", CPDefinitionUpserterForm::_setTitle
+			"productTypeName", CPDefinitionUpserterForm::setProductTypeName
+		).addRequiredString(
+			"title", CPDefinitionUpserterForm::setTitle
 		).build();
 	}
 
@@ -106,35 +106,35 @@ public class CPDefinitionUpserterForm {
 		return Collections.singletonMap(LocaleUtil.getDefault(), _title);
 	}
 
-	private void _setActive(Boolean active) {
+	public void setActive(Boolean active) {
 		_active = active;
 	}
 
-	private void _setAssetCategoryIds(List<Long> assetCategoryIds) {
+	public void setAssetCategoryIds(List<Long> assetCategoryIds) {
 		_assetCategoryIds = assetCategoryIds;
 	}
 
-	private void _setDefaultSku(String defaultSku) {
+	public void setDefaultSku(String defaultSku) {
 		_defaultSku = defaultSku;
 	}
 
-	private void _setDescription(String description) {
+	public void setDescription(String description) {
 		_description = description;
 	}
 
-	private void _setExternalReferenceCode(String externalReferenceCode) {
+	public void setExternalReferenceCode(String externalReferenceCode) {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	private void _setProductTypeName(String productTypeName) {
+	public void setProductTypeName(String productTypeName) {
 		_productTypeName = productTypeName;
 	}
 
-	private void _setShortDescription(String shortDescription) {
+	public void setShortDescription(String shortDescription) {
 		_shortDescription = shortDescription;
 	}
 
-	private void _setTitle(String title) {
+	public void setTitle(String title) {
 		_title = title;
 	}
 
