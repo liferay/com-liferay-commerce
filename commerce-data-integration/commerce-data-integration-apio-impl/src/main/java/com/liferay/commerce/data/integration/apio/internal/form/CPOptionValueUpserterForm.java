@@ -23,39 +23,26 @@ import java.util.Map;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
-public class CPOptionCreatorForm {
+public class CPOptionValueUpserterForm {
 
-	public static Form<CPOptionCreatorForm> buildForm(
-		Form.Builder<CPOptionCreatorForm> formBuilder) {
+	public static Form<CPOptionValueUpserterForm> buildForm(
+		Form.Builder<CPOptionValueUpserterForm> formBuilder) {
 
 		return formBuilder.title(
-			__ -> "The option creator form"
+			__ -> "The product option value upserter form"
 		).description(
-			__ -> "This form can be used to create an option"
+			__ ->
+				"This form can be used to create or update a product option " +
+					"value"
 		).constructor(
-			CPOptionCreatorForm::new
+			CPOptionValueUpserterForm::new
 		).addRequiredString(
-			"name", CPOptionCreatorForm::_setName
-		).addOptionalString(
-			"description", CPOptionCreatorForm::_setDescription
+			"key", CPOptionValueUpserterForm::setKey
 		).addRequiredString(
-			"fieldType", CPOptionCreatorForm::_setFieldType
-		).addRequiredString(
-			"key", CPOptionCreatorForm::_setKey
+			"name", CPOptionValueUpserterForm::setName
 		).build();
-	}
-
-	public String getDescription() {
-		return _description;
-	}
-
-	public Map<Locale, String> getDescriptionMap() {
-		return Collections.singletonMap(LocaleUtil.getDefault(), _description);
-	}
-
-	public String getFieldType() {
-		return _fieldType;
 	}
 
 	public String getKey() {
@@ -70,24 +57,14 @@ public class CPOptionCreatorForm {
 		return Collections.singletonMap(LocaleUtil.getDefault(), _name);
 	}
 
-	private void _setDescription(String description) {
-		_description = description;
-	}
-
-	private void _setFieldType(String fieldType) {
-		_fieldType = fieldType;
-	}
-
-	private void _setKey(String key) {
+	public void setKey(String key) {
 		_key = key;
 	}
 
-	private void _setName(String name) {
+	public void setName(String name) {
 		_name = name;
 	}
 
-	private String _description;
-	private String _fieldType;
 	private String _key;
 	private String _name;
 

@@ -39,29 +39,29 @@ public class CommercePriceEntryUpserterForm {
 		return formBuilder.title(
 			__ -> "The price entry upserter form"
 		).description(
-			__ -> "This form can be used to upsert a price entry"
+			__ -> "This form can be used to create or update a price entry"
 		).constructor(
 			CommercePriceEntryUpserterForm::new
 		).addOptionalBoolean(
-			"standardPrice", CommercePriceEntryUpserterForm::_setStandardPrice
+			"standardPrice", CommercePriceEntryUpserterForm::setStandardPrice
 		).addOptionalLong(
 			"commercePriceEntryId",
-			CommercePriceEntryUpserterForm::_setCommercePriceEntryId
+			CommercePriceEntryUpserterForm::setCommercePriceEntryId
 		).addOptionalLong(
 			"commerceProductInstanceId",
-			CommercePriceEntryUpserterForm::_setCommerceProductInstanceId
-		).addOptionalString(
-			"externalReferenceCode",
-			CommercePriceEntryUpserterForm::_setExternalReferenceCode
+			CommercePriceEntryUpserterForm::setCommerceProductInstanceId
 		).addOptionalString(
 			"skuExternalReferenceCode",
-			CommercePriceEntryUpserterForm::_setSkuExternalReferenceCode
-		).addRequiredDouble(
-			"price", CommercePriceEntryUpserterForm::_setPrice
-		).addRequiredDouble(
-			"promoPrice", CommercePriceEntryUpserterForm::_setPromoPrice
+			CommercePriceEntryUpserterForm::setSkuExternalReferenceCode
 		).addRequiredBoolean(
-			"standardPrice", CommercePriceEntryUpserterForm::_setStandardPrice
+			"standardPrice", CommercePriceEntryUpserterForm::setStandardPrice
+		).addRequiredDouble(
+			"price", CommercePriceEntryUpserterForm::setPrice
+		).addRequiredDouble(
+			"promoPrice", CommercePriceEntryUpserterForm::setPromoPrice
+		).addRequiredString(
+			"externalReferenceCode",
+			CommercePriceEntryUpserterForm::setExternalReferenceCode
 		).build();
 	}
 
@@ -93,31 +93,31 @@ public class CommercePriceEntryUpserterForm {
 		return _standardPrice;
 	}
 
-	private void _setCommercePriceEntryId(Long commercePriceEntryId) {
+	public void setCommercePriceEntryId(Long commercePriceEntryId) {
 		_commercePriceEntryId = commercePriceEntryId;
 	}
 
-	private void _setCommerceProductInstanceId(Long commerceProductInstanceId) {
+	public void setCommerceProductInstanceId(Long commerceProductInstanceId) {
 		_commerceProductInstanceId = commerceProductInstanceId;
 	}
 
-	private void _setExternalReferenceCode(String externalReferenceCode) {
+	public void setExternalReferenceCode(String externalReferenceCode) {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	private void _setPrice(Double price) {
+	public void setPrice(Double price) {
 		_price = price;
 	}
 
-	private void _setPromoPrice(Double promoPrice) {
+	public void setPromoPrice(Double promoPrice) {
 		_promoPrice = promoPrice;
 	}
 
-	private void _setSkuExternalReferenceCode(String skuExternalReferenceCode) {
+	public void setSkuExternalReferenceCode(String skuExternalReferenceCode) {
 		_skuExternalReferenceCode = skuExternalReferenceCode;
 	}
 
-	private void _setStandardPrice(Boolean standardPrice) {
+	public void setStandardPrice(Boolean standardPrice) {
 		_standardPrice = standardPrice;
 	}
 

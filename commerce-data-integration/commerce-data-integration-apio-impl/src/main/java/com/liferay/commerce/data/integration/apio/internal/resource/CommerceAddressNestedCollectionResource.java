@@ -25,7 +25,7 @@ import com.liferay.commerce.data.integration.apio.identifier.CommerceAccountIden
 import com.liferay.commerce.data.integration.apio.identifier.CommerceAddressIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceCountryIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceRegionIdentifier;
-import com.liferay.commerce.data.integration.apio.internal.form.CommerceAddressCreatorForm;
+import com.liferay.commerce.data.integration.apio.internal.form.CommerceAddressUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.ServiceContextHelper;
 import com.liferay.commerce.model.CommerceAddress;
@@ -63,7 +63,7 @@ public class CommerceAddressNestedCollectionResource
 		).addCreator(
 			this::_addCommerceAddress,
 			_hasPermission.forAddingIn(CommerceAccountIdentifier.class),
-			CommerceAddressCreatorForm::buildForm
+			CommerceAddressUpserterForm::buildForm
 		).build();
 	}
 
@@ -83,7 +83,7 @@ public class CommerceAddressNestedCollectionResource
 			_hasPermission::forDeleting
 		).addUpdater(
 			this::_updateCommerceAddress, _hasPermission::forUpdating,
-			CommerceAddressCreatorForm::buildForm
+			CommerceAddressUpserterForm::buildForm
 		).build();
 	}
 
@@ -136,7 +136,7 @@ public class CommerceAddressNestedCollectionResource
 
 	private CommerceAddress _addCommerceAddress(
 			ClassPKExternalReferenceCode classPKExternalReferenceCode,
-			CommerceAddressCreatorForm commerceAddressCreatorForm)
+			CommerceAddressUpserterForm commerceAddressUpserterForm)
 		throws PortalException {
 
 		Organization organization =
@@ -150,18 +150,18 @@ public class CommerceAddressNestedCollectionResource
 
 		return _commerceAddressService.addCommerceAddress(
 			group.getClassName(), group.getClassPK(),
-			commerceAddressCreatorForm.getName(),
-			commerceAddressCreatorForm.getDescription(),
-			commerceAddressCreatorForm.getStreet1(),
-			commerceAddressCreatorForm.getStreet2(),
-			commerceAddressCreatorForm.getStreet3(),
-			commerceAddressCreatorForm.getCity(),
-			commerceAddressCreatorForm.getZip(),
-			commerceAddressCreatorForm.getRegionId(),
-			commerceAddressCreatorForm.getCountryId(),
-			commerceAddressCreatorForm.getPhoneNumber(),
-			commerceAddressCreatorForm.getDefaultBilling(),
-			commerceAddressCreatorForm.getDefaultShipping(), serviceContext);
+			commerceAddressUpserterForm.getName(),
+			commerceAddressUpserterForm.getDescription(),
+			commerceAddressUpserterForm.getStreet1(),
+			commerceAddressUpserterForm.getStreet2(),
+			commerceAddressUpserterForm.getStreet3(),
+			commerceAddressUpserterForm.getCity(),
+			commerceAddressUpserterForm.getZip(),
+			commerceAddressUpserterForm.getRegionId(),
+			commerceAddressUpserterForm.getCountryId(),
+			commerceAddressUpserterForm.getPhoneNumber(),
+			commerceAddressUpserterForm.getDefaultBilling(),
+			commerceAddressUpserterForm.getDefaultShipping(), serviceContext);
 	}
 
 	private PageItems<CommerceAddress> _getPageItems(
@@ -187,22 +187,22 @@ public class CommerceAddressNestedCollectionResource
 
 	private CommerceAddress _updateCommerceAddress(
 			Long commerceAddressId,
-			CommerceAddressCreatorForm commerceAddressCreatorForm)
+			CommerceAddressUpserterForm commerceAddressUpserterForm)
 		throws PortalException {
 
 		return _commerceAddressService.updateCommerceAddress(
-			commerceAddressId, commerceAddressCreatorForm.getName(),
-			commerceAddressCreatorForm.getDescription(),
-			commerceAddressCreatorForm.getStreet1(),
-			commerceAddressCreatorForm.getStreet2(),
-			commerceAddressCreatorForm.getStreet3(),
-			commerceAddressCreatorForm.getCity(),
-			commerceAddressCreatorForm.getZip(),
-			commerceAddressCreatorForm.getRegionId(),
-			commerceAddressCreatorForm.getCountryId(),
-			commerceAddressCreatorForm.getPhoneNumber(),
-			commerceAddressCreatorForm.getDefaultBilling(),
-			commerceAddressCreatorForm.getDefaultShipping(),
+			commerceAddressId, commerceAddressUpserterForm.getName(),
+			commerceAddressUpserterForm.getDescription(),
+			commerceAddressUpserterForm.getStreet1(),
+			commerceAddressUpserterForm.getStreet2(),
+			commerceAddressUpserterForm.getStreet3(),
+			commerceAddressUpserterForm.getCity(),
+			commerceAddressUpserterForm.getZip(),
+			commerceAddressUpserterForm.getRegionId(),
+			commerceAddressUpserterForm.getCountryId(),
+			commerceAddressUpserterForm.getPhoneNumber(),
+			commerceAddressUpserterForm.getDefaultBilling(),
+			commerceAddressUpserterForm.getDefaultShipping(),
 			new ServiceContext());
 	}
 

@@ -42,12 +42,12 @@ public class CommerceTierPriceEntryUpdaterForm {
 			__ -> "This form can be used to update a tier price entry"
 		).constructor(
 			CommerceTierPriceEntryUpdaterForm::new
+		).addRequiredDouble(
+			"price", CommerceTierPriceEntryUpdaterForm::setPrice
+		).addRequiredDouble(
+			"promoPrice", CommerceTierPriceEntryUpdaterForm::setPromoPrice
 		).addRequiredLong(
-			"minQuantity", CommerceTierPriceEntryUpdaterForm::_setMinQuantity
-		).addRequiredDouble(
-			"price", CommerceTierPriceEntryUpdaterForm::_setPrice
-		).addRequiredDouble(
-			"promoPrice", CommerceTierPriceEntryUpdaterForm::_setPromoPrice
+			"minQuantity", CommerceTierPriceEntryUpdaterForm::setMinQuantity
 		).build();
 	}
 
@@ -63,15 +63,15 @@ public class CommerceTierPriceEntryUpdaterForm {
 		return _promoPrice;
 	}
 
-	private void _setMinQuantity(Long minQuantity) {
+	public void setMinQuantity(Long minQuantity) {
 		_minQuantity = minQuantity;
 	}
 
-	private void _setPrice(Double price) {
+	public void setPrice(Double price) {
 		_price = price;
 	}
 
-	private void _setPromoPrice(Double promoPrice) {
+	public void setPromoPrice(Double promoPrice) {
 		_promoPrice = promoPrice;
 	}
 
