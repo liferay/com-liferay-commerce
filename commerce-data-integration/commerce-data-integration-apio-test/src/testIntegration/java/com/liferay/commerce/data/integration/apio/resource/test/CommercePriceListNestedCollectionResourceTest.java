@@ -80,12 +80,12 @@ public class CommercePriceListNestedCollectionResourceTest
 	public void testCollectionPostOperationPresent()
 		throws IOException, PortalException {
 
-		ApioResourceCollection commerceAccountApioResourceCollection =
+		ApioResourceCollection commercePriceListApioResourceCollection =
 			getSiteRelatedApioResourceCollection(
 				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
 
 		Operation resourceOperation = ApioUtils.getResourceOperationByMethod(
-			commerceAccountApioResourceCollection, Method.POST);
+			commercePriceListApioResourceCollection, Method.POST);
 
 		Assert.assertThat(resourceOperation, notNullValue());
 	}
