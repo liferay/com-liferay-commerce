@@ -45,6 +45,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 @Component(immediate = true, service = NestedCollectionResource.class)
 public class CPInstanceNestedCollectionResource
@@ -84,6 +85,9 @@ public class CPInstanceNestedCollectionResource
 		).addRemover(
 			idempotent(_cpInstanceHelper::deleteCPInstance),
 			_hasPermission::forDeleting
+		).addUpdater(
+			this::_updateCPInstance, CurrentUser.class,
+			_hasPermission::forUpdating, CPInstanceUpserterForm::buildForm
 		).build();
 	}
 
@@ -138,15 +142,14 @@ public class CPInstanceNestedCollectionResource
 		return new PageItems<>(cpInstances, total);
 	}
 
-	private CPInstance _upsertCPInstance(
-			ClassPKExternalReferenceCode
-				cpDefinitionClassPKExternalReferenceCode,
+	private CPInstance _updateCPInstance(
+			ClassPKExternalReferenceCode cpInstanceCPKERC,
 			CPInstanceUpserterForm cpInstanceUpserterForm, User currentUser)
 		throws PortalException {
 
-		return _cpInstanceHelper.upsertCPInstance(
-			cpDefinitionClassPKExternalReferenceCode,
-			cpInstanceUpserterForm.getSku(), cpInstanceUpserterForm.getGtin(),
+		return _cpInstanceHelper.updateCPInstance(
+			cpInstanceCPKERC, cpInstanceUpserterForm.getSku(),
+			cpInstanceUpserterForm.getGtin(),
 			cpInstanceUpserterForm.getManufacturerPartNumber(),
 			cpInstanceUpserterForm.getPurchasable(),
 			cpInstanceUpserterForm.getWidth(),
@@ -160,6 +163,29 @@ public class CPInstanceNestedCollectionResource
 			cpInstanceUpserterForm.getExpirationDate(),
 			cpInstanceUpserterForm.getNeverExpire(),
 			cpInstanceUpserterForm.getExternalReferenceCode(), currentUser);
+	}
+
+	private CPInstance _upsertCPInstance(
+			ClassPKExternalReferenceCode cpDefinitionCPKERC,
+			CPInstanceUpserterForm cpInstanceUpserterForm, User currentUser)
+		throws PortalException {
+
+		return _cpInstanceHelper.upsertCPInstance(
+			cpDefinitionCPKERC, cpInstanceUpserterForm.getSku(),
+			cpInstanceUpserterForm.getGtin(),
+			cpInstanceUpserterForm.getManufacturerPartNumber(),
+			cpInstanceUpserterForm.getPurchasable(),
+			cpInstanceUpserterForm.getWidth(),
+			cpInstanceUpserterForm.getHeight(),
+			cpInstanceUpserterForm.getDepth(),
+			cpInstanceUpserterForm.getWeight(),
+			cpInstanceUpserterForm.getCost(), cpInstanceUpserterForm.getPrice(),
+			cpInstanceUpserterForm.getPromoPrice(),
+			cpInstanceUpserterForm.getPublished(),
+			cpInstanceUpserterForm.getDisplayDate(),
+			cpInstanceUpserterForm.getExpirationDate(),
+			cpInstanceUpserterForm.getNeverExpire(),
+			cpInstanceUpserterForm.getExternalReferenceCode(), 0, currentUser);
 	}
 
 	@Reference

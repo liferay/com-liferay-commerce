@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
@@ -42,6 +41,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 @Component(immediate = true, service = CPInstanceHelper.class)
 public class CPInstanceHelper {
@@ -75,12 +75,11 @@ public class CPInstanceHelper {
 		return null;
 	}
 
-	public void deleteCPInstance(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode)
+	public void deleteCPInstance(ClassPKExternalReferenceCode cpInstanceCPKERC)
 		throws PortalException {
 
 		CPInstance cpInstance = getCPInstanceByClassPKExternalReferenceCode(
-			classPKExternalReferenceCode);
+			cpInstanceCPKERC);
 
 		if (cpInstance != null) {
 			_cpInstanceService.deleteCPInstance(cpInstance.getCPInstanceId());
@@ -99,7 +98,7 @@ public class CPInstanceHelper {
 	public CPInstance getCPInstanceByClassPKExternalReferenceCode(
 		ClassPKExternalReferenceCode cpInstanceClassPKExternalReferenceCode) {
 
-		Long cpInstanceId = cpInstanceClassPKExternalReferenceCode.getClassPK();
+		long cpInstanceId = cpInstanceClassPKExternalReferenceCode.getClassPK();
 
 		if (cpInstanceId > 0) {
 			return _cpInstanceLocalService.fetchCPInstance(cpInstanceId);
@@ -114,26 +113,48 @@ public class CPInstanceHelper {
 		}
 	}
 
+	public CPInstance updateCPInstance(
+			ClassPKExternalReferenceCode cpInstanceCPKERC, String sku,
+			String gtin, String manufacturerPartNumber, boolean purchasable,
+			double width, double height, double depth, double weight,
+			double cost, double price, double promoPrice, boolean published,
+			Date displayDate, Date expirationDate, boolean neverExpire,
+			String externalReference, User currentUser)
+		throws PortalException {
+
+		CPInstance cpInstance = getCPInstanceByClassPKExternalReferenceCode(
+			cpInstanceCPKERC);
+
+		ClassPKExternalReferenceCode cpDefinitionCPKERC =
+			_cpDefinitionHelper.cpDefinitionIdToclassPKExternalReferenceCode(
+				cpInstance.getCPDefinitionId());
+
+		return upsertCPInstance(
+			cpDefinitionCPKERC, sku, gtin, manufacturerPartNumber, purchasable,
+			width, height, depth, weight, cost, price, promoPrice, published,
+			displayDate, expirationDate, neverExpire, externalReference,
+			cpInstance.getCPInstanceId(), currentUser);
+	}
+
 	public CPInstance upsertCPInstance(
-			ClassPKExternalReferenceCode
-				cpDefinitionClassPKExternalReferenceCode,
-			String sku, String gtin, String manufacturerPartNumber,
-			boolean purchasable, double width, double height, double depth,
-			double weight, double cost, double price, double promoPrice,
-			boolean published, Date displayDate, Date expirationDate,
-			boolean neverExpire, String externalReference, User currentUser)
+			ClassPKExternalReferenceCode cpDefinitionCPKERC, String sku,
+			String gtin, String manufacturerPartNumber, boolean purchasable,
+			double width, double height, double depth, double weight,
+			double cost, double price, double promoPrice, boolean published,
+			Date displayDate, Date expirationDate, boolean neverExpire,
+			String externalReference, long cpInstanceId, User currentUser)
 		throws PortalException {
 
 		CPDefinition cpDefinition =
 			_cpDefinitionHelper.getCPDefinitionByClassPKExternalReferenceCode(
-				cpDefinitionClassPKExternalReferenceCode);
+				cpDefinitionCPKERC);
 
 		return upsertCPInstance(
 			cpDefinition.getGroupId(), cpDefinition.getCPDefinitionId(), sku,
 			gtin, manufacturerPartNumber, purchasable, width, height, depth,
 			weight, cost, price, promoPrice, published, displayDate,
 			expirationDate, neverExpire, externalReference, null, null, null,
-			null, null, true, currentUser);
+			null, null, true, cpInstanceId, currentUser);
 	}
 
 	public CPInstance upsertCPInstance(
@@ -146,7 +167,7 @@ public class CPInstanceHelper {
 			Map<Locale, String> descriptionMap,
 			Map<Locale, String> shortDescriptionMap, String productTypeName,
 			String productExternalReferenceCode, boolean active,
-			User currentUser)
+			long cpInstanceId, User currentUser)
 		throws PortalException {
 
 		if (productExternalReferenceCode != null) {
@@ -158,14 +179,8 @@ public class CPInstanceHelper {
 			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setCompanyId(currentUser.getCompanyId());
-		serviceContext.setScopeGroupId(groupId);
-		serviceContext.setTimeZone(currentUser.getTimeZone());
-		serviceContext.setUserId(currentUser.getUserId());
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			groupId, new long[0], currentUser);
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
@@ -209,15 +224,34 @@ public class CPInstanceHelper {
 			expirationDateHour += 12;
 		}
 
-		return _cpInstanceService.upsertCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
-			null, width, height, depth, weight, new BigDecimal(price),
-			new BigDecimal(promoPrice), new BigDecimal(cost), published,
-			externalReference, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			serviceContext);
+		CPInstance cpInstance = null;
+
+		// Update
+
+		if (cpInstanceId > 0) {
+			cpInstance = _cpInstanceService.updateCPInstance(
+				cpInstanceId, sku, gtin, manufacturerPartNumber, purchasable,
+				published, displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, serviceContext);
+		}
+		else {
+
+			// Upsert
+
+			cpInstance = _cpInstanceService.upsertCPInstance(
+				cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
+				null, width, height, depth, weight, new BigDecimal(price),
+				new BigDecimal(promoPrice), new BigDecimal(cost), published,
+				externalReference, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, neverExpire,
+				serviceContext);
+		}
+
+		return cpInstance;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -236,6 +270,6 @@ public class CPInstanceHelper {
 	private CPInstanceService _cpInstanceService;
 
 	@Reference
-	private UserLocalService _userLocalService;
+	private ServiceContextHelper _serviceContextHelper;
 
 }
