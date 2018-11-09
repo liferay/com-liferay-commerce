@@ -136,8 +136,7 @@ public class CPInstanceNestedCollectionResource
 				null);
 
 		int total = _cpInstanceService.getCPDefinitionInstancesCount(
-			cpDefinition.getCPDefinitionId(),
-			WorkflowConstants.STATUS_APPROVED);
+			cpDefinition.getCPDefinitionId(), WorkflowConstants.STATUS_ANY);
 
 		return new PageItems<>(cpInstances, total);
 	}
