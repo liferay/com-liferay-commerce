@@ -68,7 +68,7 @@ public class CPInstanceHelper {
 
 		if (cpInstance != null) {
 			return ClassPKExternalReferenceCode.create(
-				cpInstance.getCPDefinitionId(),
+				cpInstance.getCPInstanceId(),
 				cpInstance.getExternalReferenceCode());
 		}
 
