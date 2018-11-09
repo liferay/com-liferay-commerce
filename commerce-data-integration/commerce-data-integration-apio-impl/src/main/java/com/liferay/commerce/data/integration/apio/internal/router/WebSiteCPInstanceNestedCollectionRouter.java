@@ -103,7 +103,7 @@ public class WebSiteCPInstanceNestedCollectionRouter
 			cpInstanceUpserterForm.getShortDescriptionMap(),
 			cpInstanceUpserterForm.getProductTypeName(),
 			cpInstanceUpserterForm.getExternalReferenceCode(),
-			cpInstanceUpserterForm.getActive(), currentUser);
+			cpInstanceUpserterForm.getActive(), 0, currentUser);
 	}
 
 	@Reference
