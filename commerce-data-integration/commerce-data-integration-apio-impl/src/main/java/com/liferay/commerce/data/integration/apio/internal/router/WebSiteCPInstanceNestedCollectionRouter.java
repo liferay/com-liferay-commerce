@@ -38,6 +38,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 @Component(immediate = true, service = NestedCollectionRouter.class)
 public class WebSiteCPInstanceNestedCollectionRouter
@@ -103,7 +104,8 @@ public class WebSiteCPInstanceNestedCollectionRouter
 			cpInstanceUpserterForm.getShortDescriptionMap(),
 			cpInstanceUpserterForm.getProductTypeName(),
 			cpInstanceUpserterForm.getExternalReferenceCode(),
-			cpInstanceUpserterForm.getActive(), 0, currentUser);
+			cpInstanceUpserterForm.getActive(),
+			cpInstanceUpserterForm.getCpInstanceId(), currentUser);
 	}
 
 	@Reference
