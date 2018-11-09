@@ -61,6 +61,8 @@ public class CPInstanceUpserterForm {
 			"displayDate", CPInstanceUpserterForm::setDisplayDate
 		).addOptionalDate(
 			"expirationDate", CPInstanceUpserterForm::setExpirationDate
+		).addOptionalLong(
+			"cpInstanceId", CPInstanceUpserterForm::setCpInstanceId
 		).addOptionalString(
 			"description", CPInstanceUpserterForm::setDescription
 		).addOptionalString(
@@ -90,6 +92,10 @@ public class CPInstanceUpserterForm {
 
 	public double getCost() {
 		return _cost;
+	}
+
+	public long getCpInstanceId() {
+		return _cpInstanceId;
 	}
 
 	public double getDepth() {
@@ -185,6 +191,10 @@ public class CPInstanceUpserterForm {
 		_cost = cost;
 	}
 
+	public void setCpInstanceId(long cpInstanceId) {
+		_cpInstanceId = cpInstanceId;
+	}
+
 	public void setDepth(double depth) {
 		_depth = depth;
 	}
@@ -263,6 +273,7 @@ public class CPInstanceUpserterForm {
 
 	private Boolean _active;
 	private double _cost;
+	private long _cpInstanceId;
 	private double _depth;
 	private String _description;
 	private Date _displayDate;
