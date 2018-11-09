@@ -22,10 +22,8 @@ import com.liferay.commerce.data.integration.apio.identifier.CPDefinitionIdentif
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.internal.util.CPDefinitionHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CPInstanceHelper;
-import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -39,6 +37,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Rodrigo Guedes de Souza
  * @author Alessio Antonio Rendina
+ * @author Zoltán Takács
  */
 @Component(
 	property = "model.class.name=com.liferay.commerce.product.model.CPInstance",
@@ -70,8 +69,8 @@ public class CPInstancePermissionImpl
 				}
 
 				return _cpDefinitionModelResourcePermission.contains(
-					(PermissionChecker)credentials.get(), cpDefinition,
-					ActionKeys.UPDATE);
+					(PermissionChecker)credentials.get(),
+					cpDefinition.getCPDefinitionId(), ActionKeys.UPDATE);
 			};
 		}
 
@@ -95,24 +94,21 @@ public class CPInstancePermissionImpl
 		throws Exception {
 
 		return _forItemRoutesOperations().apply(
-			credentials, classPKExternalReferenceCode,
-			CPActionKeys.UPDATE_COMMERCE_PRODUCT_INSTANCE);
+			credentials, classPKExternalReferenceCode, ActionKeys.UPDATE);
 	}
 
 	private ThrowableTriFunction
 		<Credentials, ClassPKExternalReferenceCode, String, Boolean>
 			_forItemRoutesOperations() {
 
-		return (
-				credentials, cpInstanceClassPKExternalReferenceCode,
-				actionId) -> {
+		return (credentials, cpInstanceCPKERC, actionId) -> {
 			CPInstance cpInstance =
 				_cpInstanceHelper.getCPInstanceByClassPKExternalReferenceCode(
-					cpInstanceClassPKExternalReferenceCode);
+					cpInstanceCPKERC);
 
 			return _cpDefinitionModelResourcePermission.contains(
 				(PermissionChecker)credentials.get(),
-				cpInstance.getCPDefinition(), actionId);
+				cpInstance.getCPDefinitionId(), actionId);
 		};
 	}
 
@@ -130,8 +126,5 @@ public class CPInstancePermissionImpl
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
-
-	@Reference
-	private CPInstanceService _cpInstanceService;
 
 }
