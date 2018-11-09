@@ -130,7 +130,7 @@ public class CPDefinitionHelper {
 		throws PortalException {
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			groupId, assetCategoryIds, null);
+			groupId, assetCategoryIds, currentUser);
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
