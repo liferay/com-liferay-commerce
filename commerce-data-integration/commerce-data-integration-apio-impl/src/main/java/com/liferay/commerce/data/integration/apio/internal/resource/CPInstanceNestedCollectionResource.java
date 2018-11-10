@@ -16,6 +16,7 @@ package com.liferay.commerce.data.integration.apio.internal.resource;
 
 import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
 
+import com.liferay.apio.architect.functional.Try;
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
 import com.liferay.apio.architect.representor.Representor;
@@ -108,15 +109,50 @@ public class CPInstanceNestedCollectionResource
 		).addBidirectionalModel(
 			"webSite", "commerceProductInstances", WebSiteIdentifier.class,
 			CPInstance::getGroupId
+		).addBoolean(
+			"purchasable", CPInstance::isPurchasable
 		).addDate(
 			"dateCreated", CPInstance::getCreateDate
 		).addDate(
 			"dateModified", CPInstance::getModifiedDate
+		).addNumber(
+			"cost", CPInstance::getCost
+		).addNumber(
+			"depth", CPInstance::getDepth
+		).addNumber(
+			"height", CPInstance::getHeight
+		).addNumber(
+			"price", CPInstance::getPrice
+		).addNumber(
+			"promoPrice", CPInstance::getPromoPrice
+		).addNumber(
+			"weight", CPInstance::getWeight
+		).addNumber(
+			"width", CPInstance::getWidth
 		).addString(
 			"externalReferenceCode", CPInstance::getExternalReferenceCode
 		).addString(
+			"gtin", CPInstance::getGtin
+		).addString(
+			"manufacturerPartNumber", CPInstance::getManufacturerPartNumber
+		).addString(
+			"productName",
+			CPInstanceNestedCollectionResource::_getProductDefinitionName
+		).addString(
 			"sku", CPInstance::getSku
 		).build();
+	}
+
+	private static String _getProductDefinitionName(CPInstance cpInstance) {
+		return Try.fromFallible(
+			() -> {
+				CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+				return cpDefinition.getName();
+			}
+		).orElse(
+			null
+		);
 	}
 
 	private PageItems<CPInstance> _getPageItems(
