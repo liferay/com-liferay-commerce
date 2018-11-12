@@ -102,6 +102,7 @@ public class WebSiteCPInstanceNestedCollectionRouter
 			cpInstanceWebSiteUpserterForm.getExpirationDate(),
 			cpInstanceWebSiteUpserterForm.getNeverExpire(),
 			cpInstanceWebSiteUpserterForm.getExternalReferenceCode(),
+			cpInstanceWebSiteUpserterForm.getUpsertProductIfNotExist(),
 			cpInstanceWebSiteUpserterForm.getTitleMap(),
 			cpInstanceWebSiteUpserterForm.getDescriptionMap(),
 			cpInstanceWebSiteUpserterForm.getShortDescriptionMap(),
