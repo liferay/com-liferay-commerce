@@ -15,61 +15,98 @@
 package com.liferay.commerce.data.integration.apio.internal.form;
 
 import com.liferay.apio.architect.form.Form;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
- * @author Rodrigo Guedes de Souza
  * @author Zoltán Takács
  */
-public class CPInstanceUpserterForm {
+public class CPInstanceWebSiteUpserterForm {
 
-	public static Form<CPInstanceUpserterForm> buildForm(
-		Form.Builder<CPInstanceUpserterForm> formBuilder) {
+	public static Form<CPInstanceWebSiteUpserterForm> buildForm(
+		Form.Builder<CPInstanceWebSiteUpserterForm> formBuilder) {
 
 		return formBuilder.title(
 			__ -> "The product instance upserter form"
 		).description(
 			__ -> "This form can be used to create or update a product instance"
 		).constructor(
-			CPInstanceUpserterForm::new
+			CPInstanceWebSiteUpserterForm::new
 		).addOptionalBoolean(
-			"neverExpire", CPInstanceUpserterForm::setNeverExpire
+			"neverExpire", CPInstanceWebSiteUpserterForm::setNeverExpire
 		).addOptionalBoolean(
-			"published", CPInstanceUpserterForm::setPublished
+			"published", CPInstanceWebSiteUpserterForm::setPublished
 		).addOptionalBoolean(
-			"purchasable", CPInstanceUpserterForm::setPurchasable
+			"purchasable", CPInstanceWebSiteUpserterForm::setPurchasable
 		).addOptionalDouble(
-			"cost", CPInstanceUpserterForm::setCost
+			"cost", CPInstanceWebSiteUpserterForm::setCost
 		).addOptionalDouble(
-			"depth", CPInstanceUpserterForm::setDepth
+			"depth", CPInstanceWebSiteUpserterForm::setDepth
 		).addOptionalDouble(
-			"height", CPInstanceUpserterForm::setHeight
+			"height", CPInstanceWebSiteUpserterForm::setHeight
 		).addOptionalDouble(
-			"price", CPInstanceUpserterForm::setPrice
+			"price", CPInstanceWebSiteUpserterForm::setPrice
 		).addOptionalDouble(
-			"promoPrice", CPInstanceUpserterForm::setPromoPrice
+			"promoPrice", CPInstanceWebSiteUpserterForm::setPromoPrice
 		).addOptionalDouble(
-			"weight", CPInstanceUpserterForm::setWeight
+			"weight", CPInstanceWebSiteUpserterForm::setWeight
 		).addOptionalDouble(
-			"width", CPInstanceUpserterForm::setWidth
+			"width", CPInstanceWebSiteUpserterForm::setWidth
 		).addOptionalDate(
-			"displayDate", CPInstanceUpserterForm::setDisplayDate
+			"displayDate", CPInstanceWebSiteUpserterForm::setDisplayDate
 		).addOptionalDate(
-			"expirationDate", CPInstanceUpserterForm::setExpirationDate
+			"expirationDate", CPInstanceWebSiteUpserterForm::setExpirationDate
 		).addOptionalLong(
-			"cpInstanceId", CPInstanceUpserterForm::setCpInstanceId
+			"cpInstanceId", CPInstanceWebSiteUpserterForm::setCpInstanceId
+		).addOptionalLongList(
+			"assetCategoryIds",
+			CPInstanceWebSiteUpserterForm::setAssetCategoryIds
 		).addOptionalString(
-			"gtin", CPInstanceUpserterForm::setGtin
+			"defaultSku", CPInstanceWebSiteUpserterForm::setDefaultSku
+		).addOptionalString(
+			"description", CPInstanceWebSiteUpserterForm::setDescription
+		).addOptionalString(
+			"gtin", CPInstanceWebSiteUpserterForm::setGtin
 		).addOptionalString(
 			"manufacturerPartNumber",
-			CPInstanceUpserterForm::setManufacturerPartNumber
+			CPInstanceWebSiteUpserterForm::setManufacturerPartNumber
+		).addOptionalString(
+			"shortDescription",
+			CPInstanceWebSiteUpserterForm::setShortDescription
+		).addRequiredBoolean(
+			"active", CPInstanceWebSiteUpserterForm::setActive
 		).addRequiredString(
 			"externalReferenceCode",
-			CPInstanceUpserterForm::setExternalReferenceCode
+			CPInstanceWebSiteUpserterForm::setExternalReferenceCode
 		).addRequiredString(
-			"sku", CPInstanceUpserterForm::setSku
+			"productDefinitionExternalReferenceCode",
+			CPInstanceWebSiteUpserterForm::
+				setProductDefinitionExternalReferenceCode
+		).addRequiredString(
+			"productTypeName", CPInstanceWebSiteUpserterForm::setProductTypeName
+		).addRequiredString(
+			"sku", CPInstanceWebSiteUpserterForm::setSku
+		).addRequiredString(
+			"title", CPInstanceWebSiteUpserterForm::setTitle
 		).build();
+	}
+
+	public Boolean getActive() {
+		return _active;
+	}
+
+	public List<Long> getAssetCategoryIds() {
+		if (_assetCategoryIds == null) {
+			return new ArrayList<>();
+		}
+
+		return _assetCategoryIds;
 	}
 
 	public double getCost() {
@@ -80,8 +117,16 @@ public class CPInstanceUpserterForm {
 		return _cpInstanceId;
 	}
 
+	public String getDefaultSku() {
+		return _defaultSku;
+	}
+
 	public double getDepth() {
 		return _depth;
+	}
+
+	public Map<Locale, String> getDescriptionMap() {
+		return Collections.singletonMap(LocaleUtil.getDefault(), _description);
 	}
 
 	public Date getDisplayDate() {
@@ -124,6 +169,14 @@ public class CPInstanceUpserterForm {
 		return _price;
 	}
 
+	public String getProductDefinitionExternalReferenceCode() {
+		return _productDefinitionExternalReferenceCode;
+	}
+
+	public String getProductTypeName() {
+		return _productTypeName;
+	}
+
 	public double getPromoPrice() {
 		return _promoPrice;
 	}
@@ -136,8 +189,17 @@ public class CPInstanceUpserterForm {
 		return _purchasable;
 	}
 
+	public Map<Locale, String> getShortDescriptionMap() {
+		return Collections.singletonMap(
+			LocaleUtil.getDefault(), _shortDescription);
+	}
+
 	public String getSku() {
 		return _sku;
+	}
+
+	public Map<Locale, String> getTitleMap() {
+		return Collections.singletonMap(LocaleUtil.getDefault(), _title);
 	}
 
 	public double getWeight() {
@@ -148,6 +210,14 @@ public class CPInstanceUpserterForm {
 		return _width;
 	}
 
+	public void setActive(Boolean active) {
+		_active = active;
+	}
+
+	public void setAssetCategoryIds(List<Long> assetCategoryIds) {
+		_assetCategoryIds = assetCategoryIds;
+	}
+
 	public void setCost(double cost) {
 		_cost = cost;
 	}
@@ -156,8 +226,16 @@ public class CPInstanceUpserterForm {
 		_cpInstanceId = cpInstanceId;
 	}
 
+	public void setDefaultSku(String defaultSku) {
+		_defaultSku = defaultSku;
+	}
+
 	public void setDepth(double depth) {
 		_depth = depth;
+	}
+
+	public void setDescription(String description) {
+		_description = description;
 	}
 
 	public void setDisplayDate(Date displayDate) {
@@ -192,6 +270,17 @@ public class CPInstanceUpserterForm {
 		_price = price;
 	}
 
+	public void setProductDefinitionExternalReferenceCode(
+		String productDefinitionExternalReferenceCode) {
+
+		_productDefinitionExternalReferenceCode =
+			productDefinitionExternalReferenceCode;
+	}
+
+	public void setProductTypeName(String productTypeName) {
+		_productTypeName = productTypeName;
+	}
+
 	public void setPromoPrice(double promoPrice) {
 		_promoPrice = promoPrice;
 	}
@@ -204,8 +293,16 @@ public class CPInstanceUpserterForm {
 		_purchasable = purchasable;
 	}
 
+	public void setShortDescription(String shortDescription) {
+		_shortDescription = shortDescription;
+	}
+
 	public void setSku(String sku) {
 		_sku = sku;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
 	}
 
 	public void setWeight(double weight) {
@@ -216,9 +313,13 @@ public class CPInstanceUpserterForm {
 		_width = width;
 	}
 
+	private Boolean _active;
+	private List<Long> _assetCategoryIds;
 	private double _cost;
 	private long _cpInstanceId;
+	private String _defaultSku;
 	private double _depth;
+	private String _description;
 	private Date _displayDate;
 	private Date _expirationDate;
 	private String _externalReferenceCode;
@@ -227,10 +328,14 @@ public class CPInstanceUpserterForm {
 	private String _manufacturerPartNumber;
 	private boolean _neverExpire;
 	private double _price;
+	private String _productDefinitionExternalReferenceCode;
+	private String _productTypeName;
 	private double _promoPrice;
 	private boolean _published;
 	private boolean _purchasable;
+	private String _shortDescription;
 	private String _sku;
+	private String _title;
 	private double _weight;
 	private double _width;
 
