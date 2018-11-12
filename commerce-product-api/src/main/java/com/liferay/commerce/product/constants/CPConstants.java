@@ -23,6 +23,10 @@ public class CPConstants {
 	public static final String CP_OPTION_SERVICE_NAME =
 		"com.liferay.commerce.product.option";
 
+	public static final String DAILY_SUBSCRIPTION_TYPE = "daily";
+
+	public static final String MONTHLY_SUBSCRIPTION_TYPE = "monthly";
+
 	public static final String RESOURCE_NAME = "com.liferay.commerce.product";
 
 	public static final String SEPARATOR_ASSET_CATEGORY_URL = "/g/";
@@ -30,5 +34,9 @@ public class CPConstants {
 	public static final String SEPARATOR_PRODUCT_URL = "/p/";
 
 	public static final String SERVICE_NAME = "com.liferay.commerce.product";
+
+	public static final String WEEKLY_SUBSCRIPTION_TYPE = "weekly";
+
+	public static final String YEARLY_SUBSCRIPTION_TYPE = "yearly";
 
 }
