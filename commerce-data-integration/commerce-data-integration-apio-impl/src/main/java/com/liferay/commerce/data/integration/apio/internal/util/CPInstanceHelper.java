@@ -154,7 +154,7 @@ public class CPInstanceHelper {
 			gtin, manufacturerPartNumber, purchasable, width, height, depth,
 			weight, cost, price, promoPrice, published, displayDate,
 			expirationDate, neverExpire, externalReference, null, null, null,
-			null, null, true, cpInstanceId, currentUser);
+			null, null, null, true, null, cpInstanceId, currentUser);
 	}
 
 	public CPInstance upsertCPInstance(
@@ -166,15 +166,16 @@ public class CPInstanceHelper {
 			String externalReference, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap,
 			Map<Locale, String> shortDescriptionMap, String productTypeName,
-			String productExternalReferenceCode, boolean active,
-			long cpInstanceId, User currentUser)
+			String productExternalReferenceCode, long[] assetCategoryIds,
+			boolean active, String defaultSku, long cpInstanceId,
+			User currentUser)
 		throws PortalException {
 
 		if (productExternalReferenceCode != null) {
 			CPDefinition cpDefinition = _cpDefinitionHelper.upsertCPDefinition(
 				groupId, titleMap, descriptionMap, shortDescriptionMap,
-				productTypeName, null, productExternalReferenceCode, null,
-				active, 0, currentUser);
+				productTypeName, assetCategoryIds, productExternalReferenceCode,
+				defaultSku, active, 0, currentUser);
 
 			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
