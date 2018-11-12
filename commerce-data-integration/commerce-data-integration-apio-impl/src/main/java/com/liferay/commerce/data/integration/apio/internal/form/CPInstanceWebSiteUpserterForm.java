@@ -81,6 +81,9 @@ public class CPInstanceWebSiteUpserterForm {
 			CPInstanceWebSiteUpserterForm::setShortDescription
 		).addRequiredBoolean(
 			"active", CPInstanceWebSiteUpserterForm::setActive
+		).addRequiredBoolean(
+			"upsertProductDefinitionIfNotExist",
+			CPInstanceWebSiteUpserterForm::setUpsertProductIfNotExist
 		).addRequiredString(
 			"externalReferenceCode",
 			CPInstanceWebSiteUpserterForm::setExternalReferenceCode
@@ -202,6 +205,10 @@ public class CPInstanceWebSiteUpserterForm {
 		return Collections.singletonMap(LocaleUtil.getDefault(), _title);
 	}
 
+	public Boolean getUpsertProductIfNotExist() {
+		return _upsertProductIfNotExist;
+	}
+
 	public double getWeight() {
 		return _weight;
 	}
@@ -305,6 +312,10 @@ public class CPInstanceWebSiteUpserterForm {
 		_title = title;
 	}
 
+	public void setUpsertProductIfNotExist(Boolean upsertProductIfNotExist) {
+		_upsertProductIfNotExist = upsertProductIfNotExist;
+	}
+
 	public void setWeight(double weight) {
 		_weight = weight;
 	}
@@ -336,6 +347,7 @@ public class CPInstanceWebSiteUpserterForm {
 	private String _shortDescription;
 	private String _sku;
 	private String _title;
+	private Boolean _upsertProductIfNotExist;
 	private double _weight;
 	private double _width;
 
