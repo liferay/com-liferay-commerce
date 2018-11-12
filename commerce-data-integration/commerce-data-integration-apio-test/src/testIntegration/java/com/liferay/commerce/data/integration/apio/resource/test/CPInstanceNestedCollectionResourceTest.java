@@ -229,6 +229,9 @@ public class CPInstanceNestedCollectionResourceTest
 			{
 				put("active", Boolean.TRUE.toString());
 				put("productTypeName", "simple");
+				put(
+					"upsertProductDefinitionIfNotExist",
+					Boolean.TRUE.toString());
 			}
 		};
 
