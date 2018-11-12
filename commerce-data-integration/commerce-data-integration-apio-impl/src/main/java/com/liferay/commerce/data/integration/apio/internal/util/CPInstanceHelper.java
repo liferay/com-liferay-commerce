@@ -15,8 +15,10 @@
 package com.liferay.commerce.data.integration.apio.internal.util;
 
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
+import com.liferay.commerce.data.integration.apio.internal.exceptions.ConflictException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CPInstanceService;
@@ -35,6 +37,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -153,8 +157,8 @@ public class CPInstanceHelper {
 			cpDefinition.getGroupId(), cpDefinition.getCPDefinitionId(), sku,
 			gtin, manufacturerPartNumber, purchasable, width, height, depth,
 			weight, cost, price, promoPrice, published, displayDate,
-			expirationDate, neverExpire, externalReference, null, null, null,
-			null, null, null, true, null, cpInstanceId, currentUser);
+			expirationDate, neverExpire, externalReference, false, null, null,
+			null, null, null, null, true, null, cpInstanceId, currentUser);
 	}
 
 	public CPInstance upsertCPInstance(
@@ -163,8 +167,8 @@ public class CPInstanceHelper {
 			double height, double depth, double weight, double cost,
 			double price, double promoPrice, boolean published,
 			Date displayDate, Date expirationDate, boolean neverExpire,
-			String externalReference, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap,
+			String externalReference, Boolean upsertProductIfNotExist,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
 			Map<Locale, String> shortDescriptionMap, String productTypeName,
 			String productExternalReferenceCode, long[] assetCategoryIds,
 			boolean active, String defaultSku, long cpInstanceId,
@@ -172,10 +176,28 @@ public class CPInstanceHelper {
 		throws PortalException {
 
 		if (productExternalReferenceCode != null) {
-			CPDefinition cpDefinition = _cpDefinitionHelper.upsertCPDefinition(
-				groupId, titleMap, descriptionMap, shortDescriptionMap,
-				productTypeName, assetCategoryIds, productExternalReferenceCode,
-				defaultSku, active, 0, currentUser);
+			CPDefinition cpDefinition = null;
+
+			if (upsertProductIfNotExist) {
+				cpDefinition = _cpDefinitionHelper.upsertCPDefinition(
+					groupId, titleMap, descriptionMap, shortDescriptionMap,
+					productTypeName, assetCategoryIds,
+					productExternalReferenceCode, defaultSku, active, 0,
+					currentUser);
+			}
+			else {
+				cpDefinition =
+					_cpDefinitionLocalService.fetchByExternalReferenceCode(
+						currentUser.getCompanyId(),
+						productExternalReferenceCode);
+			}
+
+			if (cpDefinition == null) {
+				throw new ConflictException(
+					"Product definition with external reference code: " +
+						productExternalReferenceCode + " not found",
+					Response.Status.CONFLICT);
+			}
 
 			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
@@ -260,6 +282,9 @@ public class CPInstanceHelper {
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;
+
+	@Reference
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
