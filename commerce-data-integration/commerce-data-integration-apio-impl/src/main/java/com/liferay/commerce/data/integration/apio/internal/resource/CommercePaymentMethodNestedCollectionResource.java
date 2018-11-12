@@ -34,6 +34,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 @Component(immediate = true, service = NestedCollectionResource.class)
 public class CommercePaymentMethodNestedCollectionResource
@@ -77,18 +78,20 @@ public class CommercePaymentMethodNestedCollectionResource
 		).addBidirectionalModel(
 			"webSite", "commercePaymentMethods", WebSiteIdentifier.class,
 			CommercePaymentMethod::getGroupId
-		).addLocalizedStringByLocale(
-			"name", CommercePaymentMethod::getName
-		).addLocalizedStringByLocale(
-			"description", CommercePaymentMethod::getDescription
 		).addBoolean(
 			"active", CommercePaymentMethod::getActive
 		).addDate(
 			"dateCreated", CommercePaymentMethod::getCreateDate
 		).addDate(
 			"dateModified", CommercePaymentMethod::getModifiedDate
+		).addLocalizedStringByLocale(
+			"description", CommercePaymentMethod::getDescription
+		).addLocalizedStringByLocale(
+			"name", CommercePaymentMethod::getName
 		).addLinkedModel(
 			"author", PersonIdentifier.class, CommercePaymentMethod::getUserId
+		).addString(
+			"engineKey", CommercePaymentMethod::getEngineKey
 		).build();
 	}
 
@@ -106,11 +109,11 @@ public class CommercePaymentMethodNestedCollectionResource
 
 		List<CommercePaymentMethod> commercePaymentMethods =
 			_commercePaymentMethodService.getCommercePaymentMethods(
-				webSiteId, false);
+				webSiteId, true);
 
 		int total =
 			_commercePaymentMethodService.getCommercePaymentMethodsCount(
-				webSiteId, false);
+				webSiteId, true);
 
 		return new PageItems<>(commercePaymentMethods, total);
 	}
