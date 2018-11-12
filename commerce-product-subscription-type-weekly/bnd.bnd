@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Commerce Product Subscription Type Weekly
-Bundle-SymbolicName: com.liferay.commerce.product.subscription.type.weekly
-Bundle-Version: 1.0.0
-Web-ContextPath: /commerce-product-subscription-type-weekly
