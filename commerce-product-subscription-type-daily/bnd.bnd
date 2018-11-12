@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Commerce Product Subscription Type Daily
-Bundle-SymbolicName: com.liferay.commerce.product.subscription.type.daily
-Bundle-Version: 1.0.0
-Web-ContextPath: /commerce-product-subscription-type-daily
