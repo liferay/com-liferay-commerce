@@ -16,10 +16,13 @@ package com.liferay.commerce.data.integration.apio.internal.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.SecureRandomUtil;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.UserService;
+
+import java.util.UUID;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -31,17 +34,25 @@ import org.osgi.service.component.annotations.Reference;
 public class ServiceContextHelper {
 
 	public ServiceContext getServiceContext() throws PortalException {
-		return getServiceContext(0, new long[0], null);
+		return getServiceContext(0, new long[0], null, false);
 	}
 
 	public ServiceContext getServiceContext(long groupId)
 		throws PortalException {
 
-		return getServiceContext(groupId, new long[0], null);
+		return getServiceContext(groupId, new long[0], null, false);
 	}
 
 	public ServiceContext getServiceContext(
 			long groupId, long[] assetCategoryIds, User user)
+		throws PortalException {
+
+		return getServiceContext(groupId, assetCategoryIds, user, false);
+	}
+
+	public ServiceContext getServiceContext(
+			long groupId, long[] assetCategoryIds, User user,
+			boolean generateUuid)
 		throws PortalException {
 
 		ServiceContext serviceContext =
@@ -53,6 +64,13 @@ public class ServiceContextHelper {
 
 		if (user == null) {
 			user = _userService.getUserById(PrincipalThreadLocal.getUserId());
+		}
+
+		if (generateUuid) {
+			UUID uuid = new UUID(
+				SecureRandomUtil.nextLong(), SecureRandomUtil.nextLong());
+
+			serviceContext.setUuid(uuid.toString());
 		}
 
 		serviceContext.setAddGroupPermissions(true);
@@ -67,7 +85,7 @@ public class ServiceContextHelper {
 	}
 
 	public ServiceContext getServiceContext(User user) throws PortalException {
-		return getServiceContext(0, new long[0], user);
+		return getServiceContext(0, new long[0], user, false);
 	}
 
 	@Reference
