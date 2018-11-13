@@ -96,8 +96,7 @@ public class CommerceCountryNestedCollectionResourceTest
 			getSiteRelatedApioResourceCollection(
 				COMMERCE_COUNTRY_RESOURCE_NAME, _group.getDescriptiveName());
 
-		int numberOfItems1 =
-			commerceCountryApioResourceCollection.getNumberOfItems();
+		int totalItems1 = commerceCountryApioResourceCollection.getTotalItems();
 
 		String countryId = _addCountry(RandomTestUtil.randomString());
 
@@ -105,10 +104,9 @@ public class CommerceCountryNestedCollectionResourceTest
 			getSiteRelatedApioResourceCollection(
 				COMMERCE_COUNTRY_RESOURCE_NAME, _group.getDescriptiveName());
 
-		int numberOfItems2 =
-			commerceCountryApioResourceCollection.getNumberOfItems();
+		int totalItems2 = commerceCountryApioResourceCollection.getTotalItems();
 
-		Assert.assertThat(numberOfItems1 + 1, equalTo(numberOfItems2));
+		Assert.assertThat(totalItems2, equalTo(totalItems1 + 1));
 
 		try (RESTClient restClient = new RESTClient()) {
 			restClient.executeDeleteRequest(countryId);
@@ -118,10 +116,9 @@ public class CommerceCountryNestedCollectionResourceTest
 			getSiteRelatedApioResourceCollection(
 				COMMERCE_COUNTRY_RESOURCE_NAME, _group.getDescriptiveName());
 
-		int numberOfItems3 =
-			commerceCountryApioResourceCollection.getNumberOfItems();
+		int totalItems3 = commerceCountryApioResourceCollection.getTotalItems();
 
-		Assert.assertThat(numberOfItems1, equalTo(numberOfItems3));
+		Assert.assertThat(totalItems1, equalTo(totalItems3));
 	}
 
 	@Test
@@ -180,8 +177,7 @@ public class CommerceCountryNestedCollectionResourceTest
 			getSiteRelatedApioResourceCollection(
 				COMMERCE_COUNTRY_RESOURCE_NAME, _group.getDescriptiveName());
 
-		int numberOfItems =
-			commerceCountryApioResourceCollection.getNumberOfItems();
+		int totalItems = commerceCountryApioResourceCollection.getTotalItems();
 
 		Map<String, String> countryPropertiesMap = new HashMap<>(
 			_propertiesMap);
@@ -212,10 +208,10 @@ public class CommerceCountryNestedCollectionResourceTest
 			getSiteRelatedApioResourceCollection(
 				COMMERCE_COUNTRY_RESOURCE_NAME, _group.getDescriptiveName());
 
-		int actualNumberOfItems =
-			actualCommerceCountryApioResourceCollection.getNumberOfItems();
+		int actualTotalItems =
+			actualCommerceCountryApioResourceCollection.getTotalItems();
 
-		Assert.assertThat(numberOfItems + 1, equalTo(actualNumberOfItems));
+		Assert.assertThat(actualTotalItems, equalTo(totalItems + 1));
 
 		return apioSingleModelIdJsonNode.asText();
 	}
