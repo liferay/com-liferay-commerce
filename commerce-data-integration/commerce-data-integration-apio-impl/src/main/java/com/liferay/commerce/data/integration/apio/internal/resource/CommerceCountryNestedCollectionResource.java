@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
+import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
+
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
 import com.liferay.apio.architect.representor.Representor;
@@ -21,19 +23,25 @@ import com.liferay.apio.architect.resource.NestedCollectionResource;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceCountryIdentifier;
+import com.liferay.commerce.data.integration.apio.internal.form.CommerceCountryUpserterForm;
+import com.liferay.commerce.data.integration.apio.internal.util.ServiceContextHelper;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.CommerceCountryService;
+import com.liferay.portal.apio.permission.HasPermission;
+import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Zoltán Takács
  */
 @Component(immediate = true, service = NestedCollectionResource.class)
 public class CommerceCountryNestedCollectionResource
@@ -47,6 +55,10 @@ public class CommerceCountryNestedCollectionResource
 
 		return builder.addGetter(
 			this::_getPageItems
+		).addCreator(
+			this::_addCommerceCountry, CurrentUser.class,
+			_hasPermission.forAddingIn(WebSiteIdentifier.class),
+			CommerceCountryUpserterForm::buildForm
 		).build();
 	}
 
@@ -61,6 +73,12 @@ public class CommerceCountryNestedCollectionResource
 
 		return builder.addGetter(
 			this::_getCommerceCountry
+		).addUpdater(
+			this::_updateCommerceCountry, CurrentUser.class,
+			_hasPermission::forUpdating, CommerceCountryUpserterForm::buildForm
+		).addRemover(
+			idempotent(_commerceCountryService::deleteCommerceCountry),
+			_hasPermission::forDeleting
 		).build();
 	}
 
@@ -75,16 +93,20 @@ public class CommerceCountryNestedCollectionResource
 		).addBidirectionalModel(
 			"webSite", "commerceCountries", WebSiteIdentifier.class,
 			CommerceCountry::getGroupId
+		).addBoolean(
+			"billingAllowed", CommerceCountry::isBillingAllowed
+		).addBoolean(
+			"shippingAllowed", CommerceCountry::isShippingAllowed
+		).addBoolean(
+			"subjectToVAT", CommerceCountry::isSubjectToVAT
 		).addLocalizedStringByLocale(
-			"name", this::_getName
-		).addString(
-			"threeLettersISOCode", CommerceCountry::getThreeLettersISOCode
+			"name", CommerceCountry::getName
 		).addNumber(
 			"numericISOCode", CommerceCountry::getNumericISOCode
-		).addBoolean(
-			"billingAllowed", CommerceCountry::getBillingAllowed
-		).addBoolean(
-			"shippingAllowed", CommerceCountry::getShippingAllowed
+		).addString(
+			"threeLettersISOCode", CommerceCountry::getThreeLettersISOCode
+		).addString(
+			"twoLettersISOCode", CommerceCountry::getTwoLettersISOCode
 		).build();
 	}
 
@@ -92,10 +114,6 @@ public class CommerceCountryNestedCollectionResource
 		throws PortalException {
 
 		return _commerceCountryService.getCommerceCountry(commerceCountryId);
-	}
-
-	private String _getName(CommerceCountry commerceCountry, Locale locale) {
-		return commerceCountry.getName(locale);
 	}
 
 	private PageItems<CommerceCountry> _getPageItems(
@@ -113,7 +131,58 @@ public class CommerceCountryNestedCollectionResource
 		return new PageItems<>(commerceCountries, total);
 	}
 
+	private CommerceCountry _updateCommerceCountry(
+			long commerceCountryId,
+			CommerceCountryUpserterForm commerceCountryUpserterForm,
+			User currentUser)
+		throws PortalException {
+
+		CommerceCountry commerceCountry =
+			_commerceCountryService.getCommerceCountry(commerceCountryId);
+
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			commerceCountry.getGroupId(), new long[0], currentUser, true);
+
+		return _commerceCountryService.updateCommerceCountry(
+			commerceCountryId, commerceCountryUpserterForm.getNameMap(),
+			commerceCountryUpserterForm.isBillingAllowed(),
+			commerceCountryUpserterForm.isShippingAllowed(),
+			commerceCountryUpserterForm.getTwoLettersISOCode(),
+			commerceCountryUpserterForm.getThreeLettersISOCode(),
+			commerceCountryUpserterForm.getNumericISOCode(),
+			commerceCountryUpserterForm.isSubjectToVAT(), 0D, true,
+			serviceContext);
+	}
+
+	private CommerceCountry _addCommerceCountry(
+			Long groupId,
+			CommerceCountryUpserterForm commerceCountryUpserterForm,
+			User currentUser)
+		throws PortalException {
+
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			groupId, new long[0], currentUser, true);
+
+		return _commerceCountryService.addCommerceCountry(
+			commerceCountryUpserterForm.getNameMap(),
+			commerceCountryUpserterForm.isBillingAllowed(),
+			commerceCountryUpserterForm.isShippingAllowed(),
+			commerceCountryUpserterForm.getTwoLettersISOCode(),
+			commerceCountryUpserterForm.getThreeLettersISOCode(),
+			commerceCountryUpserterForm.getNumericISOCode(),
+			commerceCountryUpserterForm.isSubjectToVAT(), 0D, true,
+			serviceContext);
+	}
+
 	@Reference
 	private CommerceCountryService _commerceCountryService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.model.CommerceCountry)"
+	)
+	private HasPermission<Long> _hasPermission;
+
+	@Reference
+	private ServiceContextHelper _serviceContextHelper;
 
 }
