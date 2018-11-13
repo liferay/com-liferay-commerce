@@ -76,9 +76,9 @@ public class CommerceRegionNestedCollectionResource
 			CommerceCountryIdentifier.class,
 			CommerceRegion::getCommerceCountryId
 		).addString(
-			"name", CommerceRegion::getName
-		).addString(
 			"code", CommerceRegion::getCode
+		).addString(
+			"name", CommerceRegion::getName
 		).build();
 	}
 
