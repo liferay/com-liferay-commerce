@@ -291,6 +291,10 @@ public interface CommerceCountryLocalService extends BaseLocalService,
 	public CommerceCountry getCommerceCountry(long commerceCountryId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceCountry getCommerceCountry(long groupId,
+		String twoLettersISOCode) throws PortalException;
+
 	/**
 	* Returns the commerce country matching the UUID and group.
 	*

@@ -255,6 +255,15 @@ public class CommerceCountryPersistenceTest {
 	}
 
 	@Test
+	public void testCountByG_Tw() throws Exception {
+		_persistence.countByG_Tw(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByG_Tw(0L, "null");
+
+		_persistence.countByG_Tw(0L, (String)null);
+	}
+
+	@Test
 	public void testCountByG_B_A() throws Exception {
 		_persistence.countByG_B_A(RandomTestUtil.nextLong(),
 			RandomTestUtil.randomBoolean(), RandomTestUtil.randomBoolean());
@@ -521,6 +530,14 @@ public class CommerceCountryPersistenceTest {
 				existingCommerceCountry.getNumericISOCode()),
 			ReflectionTestUtil.<Integer>invoke(existingCommerceCountry,
 				"getOriginalNumericISOCode", new Class<?>[0]));
+
+		Assert.assertEquals(Long.valueOf(existingCommerceCountry.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceCountry,
+				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCommerceCountry.getTwoLettersISOCode(),
+				ReflectionTestUtil.invoke(existingCommerceCountry,
+					"getOriginalTwoLettersISOCode", new Class<?>[0])));
 	}
 
 	protected CommerceCountry addCommerceCountry() throws Exception {
