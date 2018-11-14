@@ -24,7 +24,6 @@ import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalRefe
 import com.liferay.commerce.data.integration.apio.identifier.CommerceAccountIdentifier;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
 import com.liferay.commerce.model.CommerceAddress;
-import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.log.Log;
@@ -33,7 +32,6 @@ import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.service.CompanyService;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -54,18 +52,18 @@ public class CommerceAddressPermissionImpl implements HasPermission<Long> {
 		Class<? extends Identifier<S>> identifierClass) {
 
 		if (identifierClass.equals(CommerceAccountIdentifier.class)) {
-			return (credentials, classPKExternalReferenceCode) -> {
+			return (credentials, commerceAccountCPKERC) -> {
 				Organization organization =
 					(Organization)_commerceAccountHelper.getOrganization(
 						(ClassPKExternalReferenceCode)
-							classPKExternalReferenceCode,
+							commerceAccountCPKERC,
 						CompanyThreadLocal.getCompanyId());
 
 				if (organization == null) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"No Organization exists with primary key " +
-								organization.getOrganizationId());
+							"No Organization exists with identifier: " +
+								commerceAccountCPKERC);
 					}
 
 					return false;
@@ -78,21 +76,21 @@ public class CommerceAddressPermissionImpl implements HasPermission<Long> {
 			};
 		}
 
-		return (credentials, s) -> false;
+		return (credentials, commerceAccountCPKERC) -> false;
 	}
 
 	@Override
-	public Boolean forDeleting(Credentials credentials, Long entryId)
+	public Boolean forDeleting(Credentials credentials, Long commerceAddressId)
 		throws Exception {
 
-		return _forItemRoutesOperations().apply(credentials, entryId);
+		return _forItemRoutesOperations().apply(credentials, commerceAddressId);
 	}
 
 	@Override
-	public Boolean forUpdating(Credentials credentials, Long entryId)
+	public Boolean forUpdating(Credentials credentials, Long commerceAddressId)
 		throws Exception {
 
-		return _forItemRoutesOperations().apply(credentials, entryId);
+		return _forItemRoutesOperations().apply(credentials, commerceAddressId);
 	}
 
 	private ThrowableBiFunction<Credentials, Long, Boolean>
@@ -127,12 +125,6 @@ public class CommerceAddressPermissionImpl implements HasPermission<Long> {
 
 	@Reference
 	private CommerceAddressService _commerceAddressService;
-
-	@Reference
-	private CommerceOrganizationService _commerceOrganizationService;
-
-	@Reference
-	private CompanyService _companyService;
 
 	@Reference(
 		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
