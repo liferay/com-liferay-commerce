@@ -51,10 +51,11 @@ public class CommerceAddressUpserterForm {
 			"street3", CommerceAddressUpserterForm::setStreet3
 		).addOptionalString(
 			"zip", CommerceAddressUpserterForm::setZip
-		).addRequiredLong(
-			"countryId", CommerceAddressUpserterForm::setCountryId
 		).addRequiredString(
 			"city", CommerceAddressUpserterForm::setCity
+		).addRequiredString(
+			"countryTwoLettersISOCode",
+			CommerceAddressUpserterForm::setCountryTwoLettersISOCode
 		).addRequiredString(
 			"name", CommerceAddressUpserterForm::setName
 		).addRequiredString(
@@ -66,8 +67,8 @@ public class CommerceAddressUpserterForm {
 		return _city;
 	}
 
-	public long getCountryId() {
-		return _countryId;
+	public String getCountryTwoLettersISOCode() {
+		return _countryTwoLettersISOCode;
 	}
 
 	public boolean getDefaultBilling() {
@@ -122,8 +123,8 @@ public class CommerceAddressUpserterForm {
 		_city = city;
 	}
 
-	public void setCountryId(long countryId) {
-		_countryId = countryId;
+	public void setCountryTwoLettersISOCode(String countryTwoLettersISOCode) {
+		_countryTwoLettersISOCode = countryTwoLettersISOCode;
 	}
 
 	public void setDefaultBilling(boolean defaultBilling) {
@@ -175,7 +176,7 @@ public class CommerceAddressUpserterForm {
 	}
 
 	private String _city;
-	private long _countryId;
+	private String _countryTwoLettersISOCode;
 	private boolean _defaultBilling;
 	private boolean _defaultShipping;
 	private String _description;
