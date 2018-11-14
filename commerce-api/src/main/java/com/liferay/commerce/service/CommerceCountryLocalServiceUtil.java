@@ -327,6 +327,12 @@ public class CommerceCountryLocalServiceUtil {
 		return getService().getCommerceCountry(commerceCountryId);
 	}
 
+	public static com.liferay.commerce.model.CommerceCountry getCommerceCountry(
+		long groupId, String twoLettersISOCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceCountry(groupId, twoLettersISOCode);
+	}
+
 	/**
 	* Returns the commerce country matching the UUID and group.
 	*
