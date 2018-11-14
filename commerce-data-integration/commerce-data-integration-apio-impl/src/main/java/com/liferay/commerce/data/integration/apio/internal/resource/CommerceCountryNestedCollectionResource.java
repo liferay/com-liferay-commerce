@@ -110,6 +110,26 @@ public class CommerceCountryNestedCollectionResource
 		).build();
 	}
 
+	private CommerceCountry _addCommerceCountry(
+			Long groupId,
+			CommerceCountryUpserterForm commerceCountryUpserterForm,
+			User currentUser)
+		throws PortalException {
+
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			groupId, new long[0], currentUser, true);
+
+		return _commerceCountryService.addCommerceCountry(
+			commerceCountryUpserterForm.getNameMap(),
+			commerceCountryUpserterForm.isBillingAllowed(),
+			commerceCountryUpserterForm.isShippingAllowed(),
+			commerceCountryUpserterForm.getTwoLettersISOCode(),
+			commerceCountryUpserterForm.getThreeLettersISOCode(),
+			commerceCountryUpserterForm.getNumericISOCode(),
+			commerceCountryUpserterForm.isSubjectToVAT(), 0D, true,
+			serviceContext);
+	}
+
 	private CommerceCountry _getCommerceCountry(Long commerceCountryId)
 		throws PortalException {
 
@@ -145,26 +165,6 @@ public class CommerceCountryNestedCollectionResource
 
 		return _commerceCountryService.updateCommerceCountry(
 			commerceCountryId, commerceCountryUpserterForm.getNameMap(),
-			commerceCountryUpserterForm.isBillingAllowed(),
-			commerceCountryUpserterForm.isShippingAllowed(),
-			commerceCountryUpserterForm.getTwoLettersISOCode(),
-			commerceCountryUpserterForm.getThreeLettersISOCode(),
-			commerceCountryUpserterForm.getNumericISOCode(),
-			commerceCountryUpserterForm.isSubjectToVAT(), 0D, true,
-			serviceContext);
-	}
-
-	private CommerceCountry _addCommerceCountry(
-			Long groupId,
-			CommerceCountryUpserterForm commerceCountryUpserterForm,
-			User currentUser)
-		throws PortalException {
-
-		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			groupId, new long[0], currentUser, true);
-
-		return _commerceCountryService.addCommerceCountry(
-			commerceCountryUpserterForm.getNameMap(),
 			commerceCountryUpserterForm.isBillingAllowed(),
 			commerceCountryUpserterForm.isShippingAllowed(),
 			commerceCountryUpserterForm.getTwoLettersISOCode(),
