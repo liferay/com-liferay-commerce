@@ -349,6 +349,14 @@ public class CommerceCountryLocalServiceWrapper
 		return _commerceCountryLocalService.getCommerceCountry(commerceCountryId);
 	}
 
+	@Override
+	public com.liferay.commerce.model.CommerceCountry getCommerceCountry(
+		long groupId, String twoLettersISOCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCountryLocalService.getCommerceCountry(groupId,
+			twoLettersISOCode);
+	}
+
 	/**
 	* Returns the commerce country matching the UUID and group.
 	*

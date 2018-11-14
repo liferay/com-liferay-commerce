@@ -144,8 +144,9 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 	public static final long GROUPID_COLUMN_BITMASK = 8L;
 	public static final long NUMERICISOCODE_COLUMN_BITMASK = 16L;
 	public static final long SHIPPINGALLOWED_COLUMN_BITMASK = 32L;
-	public static final long UUID_COLUMN_BITMASK = 64L;
-	public static final long PRIORITY_COLUMN_BITMASK = 128L;
+	public static final long TWOLETTERSISOCODE_COLUMN_BITMASK = 64L;
+	public static final long UUID_COLUMN_BITMASK = 128L;
+	public static final long PRIORITY_COLUMN_BITMASK = 256L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -702,7 +703,17 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 	@Override
 	public void setTwoLettersISOCode(String twoLettersISOCode) {
+		_columnBitmask |= TWOLETTERSISOCODE_COLUMN_BITMASK;
+
+		if (_originalTwoLettersISOCode == null) {
+			_originalTwoLettersISOCode = _twoLettersISOCode;
+		}
+
 		_twoLettersISOCode = twoLettersISOCode;
+	}
+
+	public String getOriginalTwoLettersISOCode() {
+		return GetterUtil.getString(_originalTwoLettersISOCode);
 	}
 
 	@JSON
@@ -1018,6 +1029,8 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 		commerceCountryModelImpl._setOriginalShippingAllowed = false;
 
+		commerceCountryModelImpl._originalTwoLettersISOCode = commerceCountryModelImpl._twoLettersISOCode;
+
 		commerceCountryModelImpl._originalNumericISOCode = commerceCountryModelImpl._numericISOCode;
 
 		commerceCountryModelImpl._setOriginalNumericISOCode = false;
@@ -1282,6 +1295,7 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 	private boolean _originalShippingAllowed;
 	private boolean _setOriginalShippingAllowed;
 	private String _twoLettersISOCode;
+	private String _originalTwoLettersISOCode;
 	private String _threeLettersISOCode;
 	private int _numericISOCode;
 	private int _originalNumericISOCode;

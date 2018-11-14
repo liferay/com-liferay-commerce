@@ -204,6 +204,15 @@ public class CommerceCountryLocalServiceImpl
 	}
 
 	@Override
+	public CommerceCountry getCommerceCountry(
+			long groupId, String twoLettersISOCode)
+		throws PortalException {
+
+		return commerceCountryPersistence.findByG_Tw(
+			groupId, twoLettersISOCode);
+	}
+
+	@Override
 	public List<CommerceCountry> getShippingCommerceCountries(
 		long groupId, boolean shippingAllowed, boolean active) {
 
