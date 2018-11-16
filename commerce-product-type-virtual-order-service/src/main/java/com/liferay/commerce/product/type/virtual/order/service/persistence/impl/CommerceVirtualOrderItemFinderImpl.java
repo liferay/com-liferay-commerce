@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +36,9 @@ public class CommerceVirtualOrderItemFinderImpl
 	extends CommerceVirtualOrderItemFinderBaseImpl
 	implements CommerceVirtualOrderItemFinder {
 
+	public static final String FIND_BY_END_DATE =
+		CommerceVirtualOrderItemFinder.class.getName() + ".findByEndDate";
+
 	public static final String FIND_BY_G_O_A =
 		CommerceVirtualOrderItemFinder.class.getName() + ".findByG_O_A";
 
@@ -42,18 +46,13 @@ public class CommerceVirtualOrderItemFinderImpl
 		CommerceVirtualOrderItemFinder.class.getName() + ".findByG_U_A";
 
 	@Override
-	public List<CommerceVirtualOrderItem> findByG_O(
-		long groupId, long organizationId, int start, int end,
-		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
-
+	public List<CommerceVirtualOrderItem> findByEndDate(Date endDate) {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = _customSQL.get(getClass(), FIND_BY_G_O_A);
-
-			sql = _customSQL.replaceOrderBy(sql, orderByComparator);
+			String sql = _customSQL.get(getClass(), FIND_BY_END_DATE);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -62,11 +61,10 @@ public class CommerceVirtualOrderItemFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(groupId);
-			qPos.add(organizationId);
+			qPos.add(endDate);
 
 			return (List<CommerceVirtualOrderItem>)QueryUtil.list(
-				q, getDialect(), start, end);
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -77,8 +75,26 @@ public class CommerceVirtualOrderItemFinderImpl
 	}
 
 	@Override
+	public List<CommerceVirtualOrderItem> findByG_O(
+		long groupId, long organizationId, int start, int end,
+		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
+
+		return _doFindByGroupIdAndCustomerId(
+			FIND_BY_G_O_A, groupId, organizationId, start, end,
+			orderByComparator);
+	}
+
+	@Override
 	public List<CommerceVirtualOrderItem> findByG_U(
 		long groupId, long userId, int start, int end,
+		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
+
+		return _doFindByGroupIdAndCustomerId(
+			FIND_BY_G_U_A, groupId, userId, start, end, orderByComparator);
+	}
+
+	private List<CommerceVirtualOrderItem> _doFindByGroupIdAndCustomerId(
+		String customSQLId, long groupId, long customerId, int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
 
 		Session session = null;
@@ -86,7 +102,7 @@ public class CommerceVirtualOrderItemFinderImpl
 		try {
 			session = openSession();
 
-			String sql = _customSQL.get(getClass(), FIND_BY_G_U_A);
+			String sql = _customSQL.get(getClass(), customSQLId);
 
 			sql = _customSQL.replaceOrderBy(sql, orderByComparator);
 
@@ -98,7 +114,7 @@ public class CommerceVirtualOrderItemFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
-			qPos.add(userId);
+			qPos.add(customerId);
 
 			return (List<CommerceVirtualOrderItem>)QueryUtil.list(
 				q, getDialect(), start, end);

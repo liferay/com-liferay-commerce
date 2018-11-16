@@ -1,6 +1,17 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemFinder.findByEndDate">
+		<![CDATA[
+			SELECT
+				CommerceVirtualOrderItem.*
+			FROM
+				CommerceVirtualOrderItem
+			WHERE
+				(CommerceVirtualOrderItem.active_ = true) AND
+				(CommerceVirtualOrderItem.endDate < ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemFinder.findByG_O_A">
 		<![CDATA[
 			SELECT
