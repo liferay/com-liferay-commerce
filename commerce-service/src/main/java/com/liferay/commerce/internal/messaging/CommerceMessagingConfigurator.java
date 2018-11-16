@@ -31,6 +31,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = CommerceMessagingConfigurator.class)
 public class CommerceMessagingConfigurator {
@@ -39,6 +40,8 @@ public class CommerceMessagingConfigurator {
 	protected void activate(BundleContext bundleContext) {
 		_orderStatusServiceRegistration = _registerDestination(
 			bundleContext, CommerceDestinationNames.ORDER_STATUS);
+		_paymentStatusServiceRegistration = _registerDestination(
+			bundleContext, CommerceDestinationNames.PAYMENT_STATUS);
 		_stockQuantityServiceRegistration = _registerDestination(
 			bundleContext, CommerceDestinationNames.STOCK_QUANTITY);
 	}
@@ -47,6 +50,10 @@ public class CommerceMessagingConfigurator {
 	protected void deactivate() {
 		if (_orderStatusServiceRegistration != null) {
 			_orderStatusServiceRegistration.unregister();
+		}
+
+		if (_paymentStatusServiceRegistration != null) {
+			_paymentStatusServiceRegistration.unregister();
 		}
 
 		if (_stockQuantityServiceRegistration != null) {
@@ -77,6 +84,8 @@ public class CommerceMessagingConfigurator {
 
 	private volatile ServiceRegistration<Destination>
 		_orderStatusServiceRegistration;
+	private volatile ServiceRegistration<Destination>
+		_paymentStatusServiceRegistration;
 	private volatile ServiceRegistration<Destination>
 		_stockQuantityServiceRegistration;
 
