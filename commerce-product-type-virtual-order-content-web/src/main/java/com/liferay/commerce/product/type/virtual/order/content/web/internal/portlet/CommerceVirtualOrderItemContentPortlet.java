@@ -21,7 +21,6 @@ import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOr
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
-import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -84,9 +83,7 @@ public class CommerceVirtualOrderItemContentPortlet extends MVCPortlet {
 						_commerceOrganizationHelper,
 						_commerceVirtualOrderItemLocalService,
 						_cpDefinitionHelper, _cpDefinitionVirtualSettingService,
-						_cpInstanceHelper,
-						_commerceSubscriptionCycleEntryLocalService,
-						httpServletRequest);
+						_cpInstanceHelper, httpServletRequest);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -104,10 +101,6 @@ public class CommerceVirtualOrderItemContentPortlet extends MVCPortlet {
 
 	@Reference
 	private CommerceOrganizationHelper _commerceOrganizationHelper;
-
-	@Reference
-	private CommerceSubscriptionCycleEntryLocalService
-		_commerceSubscriptionCycleEntryLocalService;
 
 	@Reference
 	private CommerceVirtualOrderItemLocalService

@@ -22,6 +22,7 @@ import com.liferay.commerce.subscription.web.internal.display.context.CommerceSu
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -78,7 +79,8 @@ public class CommerceSubscriptionContentPortlet extends MVCPortlet {
 				commerceSubscriptionContentDisplayContext =
 					new CommerceSubscriptionContentDisplayContext(
 						_cpDefinitionHelper, _cpInstanceHelper,
-						_commerceSubscriptionEntryService, httpServletRequest);
+						_commerceSubscriptionEntryService,
+						_configurationProvider, httpServletRequest);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -96,6 +98,9 @@ public class CommerceSubscriptionContentPortlet extends MVCPortlet {
 
 	@Reference
 	private CommerceSubscriptionEntryService _commerceSubscriptionEntryService;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;
