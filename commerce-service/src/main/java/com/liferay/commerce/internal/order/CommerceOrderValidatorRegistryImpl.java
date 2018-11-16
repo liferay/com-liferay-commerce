@@ -168,6 +168,34 @@ public class CommerceOrderValidatorRegistryImpl
 
 	@Override
 	public List<CommerceOrderValidatorResult> validate(
+			CommerceOrder commerceOrder, CPInstance cpInstance, int quantity)
+		throws PortalException {
+
+		List<CommerceOrderValidatorResult> commerceOrderValidatorResults =
+			new ArrayList<>();
+
+		List<CommerceOrderValidator> commerceOrderValidators =
+			getCommerceOrderValidators();
+
+		for (CommerceOrderValidator commerceOrderValidator :
+				commerceOrderValidators) {
+
+			CommerceOrderValidatorResult commerceOrderValidatorResult =
+				commerceOrderValidator.validate(
+					commerceOrder, cpInstance, quantity);
+
+			if (!commerceOrderValidatorResult.isValid() &&
+				commerceOrderValidatorResult.hasMessageResult()) {
+
+				commerceOrderValidatorResults.add(commerceOrderValidatorResult);
+			}
+		}
+
+		return commerceOrderValidatorResults;
+	}
+
+	@Override
+	public List<CommerceOrderValidatorResult> validate(
 			CommerceOrderItem commerceOrderItem)
 		throws PortalException {
 
@@ -184,33 +212,6 @@ public class CommerceOrderValidatorRegistryImpl
 				commerceOrderValidator.validate(commerceOrderItem);
 
 			if (!commerceOrderValidatorResult.isValid()) {
-				commerceOrderValidatorResults.add(commerceOrderValidatorResult);
-			}
-		}
-
-		return commerceOrderValidatorResults;
-	}
-
-	@Override
-	public List<CommerceOrderValidatorResult> validate(
-			CPInstance cpInstance, int quantity)
-		throws PortalException {
-
-		List<CommerceOrderValidatorResult> commerceOrderValidatorResults =
-			new ArrayList<>();
-
-		List<CommerceOrderValidator> commerceOrderValidators =
-			getCommerceOrderValidators();
-
-		for (CommerceOrderValidator commerceOrderValidator :
-				commerceOrderValidators) {
-
-			CommerceOrderValidatorResult commerceOrderValidatorResult =
-				commerceOrderValidator.validate(cpInstance, quantity);
-
-			if (!commerceOrderValidatorResult.isValid() &&
-				commerceOrderValidatorResult.hasMessageResult()) {
-
 				commerceOrderValidatorResults.add(commerceOrderValidatorResult);
 			}
 		}

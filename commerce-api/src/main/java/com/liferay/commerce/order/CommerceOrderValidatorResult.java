@@ -19,37 +19,46 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.util.ResourceBundle;
+
 /**
  * @author Alessio Antonio Rendina
  */
 public class CommerceOrderValidatorResult implements Serializable {
 
 	public CommerceOrderValidatorResult(boolean valid) {
-		this(0, valid, StringPool.BLANK, StringPool.BLANK);
-	}
-
-	public CommerceOrderValidatorResult(boolean valid, String messageKey) {
-		this(0, valid, messageKey, StringPool.BLANK);
+		this(0, valid, null, StringPool.BLANK, StringPool.BLANK);
 	}
 
 	public CommerceOrderValidatorResult(
-		boolean valid, String messageKey, String argument) {
+		boolean valid, ResourceBundle resourceBundle, String messageKey) {
 
-		this(0, valid, messageKey, argument);
+		this(0, valid, resourceBundle, messageKey, StringPool.BLANK);
 	}
 
 	public CommerceOrderValidatorResult(
-		long commerceOrderItemId, boolean valid, String messageKey) {
-
-		this(commerceOrderItemId, valid, messageKey, StringPool.BLANK);
-	}
-
-	public CommerceOrderValidatorResult(
-		long commerceOrderItemId, boolean valid, String messageKey,
+		boolean valid, ResourceBundle resourceBundle, String messageKey,
 		String argument) {
+
+		this(0, valid, resourceBundle, messageKey, argument);
+	}
+
+	public CommerceOrderValidatorResult(
+		long commerceOrderItemId, boolean valid, ResourceBundle resourceBundle,
+		String messageKey) {
+
+		this(
+			commerceOrderItemId, valid, resourceBundle, messageKey,
+			StringPool.BLANK);
+	}
+
+	public CommerceOrderValidatorResult(
+		long commerceOrderItemId, boolean valid, ResourceBundle resourceBundle,
+		String messageKey, String argument) {
 
 		_commerceOrderItemId = commerceOrderItemId;
 		_valid = valid;
+		_resourceBundle = resourceBundle;
 		_messageKey = messageKey;
 		_argument = argument;
 	}
@@ -64,6 +73,10 @@ public class CommerceOrderValidatorResult implements Serializable {
 
 	public String getMessage() {
 		return _messageKey;
+	}
+
+	public ResourceBundle getResourceBundle() {
+		return _resourceBundle;
 	}
 
 	public boolean hasArgument() {
@@ -89,6 +102,7 @@ public class CommerceOrderValidatorResult implements Serializable {
 	private String _argument;
 	private long _commerceOrderItemId;
 	private String _messageKey;
+	private ResourceBundle _resourceBundle;
 	private boolean _valid;
 
 }
