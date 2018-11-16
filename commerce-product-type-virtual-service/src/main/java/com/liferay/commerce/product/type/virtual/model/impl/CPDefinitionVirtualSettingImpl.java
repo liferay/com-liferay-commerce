@@ -16,8 +16,6 @@ package com.liferay.commerce.product.type.virtual.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
@@ -33,12 +31,6 @@ public class CPDefinitionVirtualSettingImpl
 	extends CPDefinitionVirtualSettingBaseImpl {
 
 	public CPDefinitionVirtualSettingImpl() {
-	}
-
-	@Override
-	public CPDefinition getCPDefinition() throws PortalException {
-		return CPDefinitionLocalServiceUtil.getCPDefinition(
-			getCPDefinitionId());
 	}
 
 	@Override
