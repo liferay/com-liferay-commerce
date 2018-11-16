@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
 
@@ -107,6 +108,9 @@ public class CommerceAddressNestedCollectionResource
 		).addBidirectionalModel(
 			"commerceAccount", "commerceAddresses",
 			CommerceAccountIdentifier.class, this::_getCommerceAccountCPKERC
+		).addBidirectionalModel(
+			"webSite", "commerceAddresses", WebSiteIdentifier.class,
+			CommerceAddress::getGroupId
 		).addBoolean(
 			"defaultBilling", CommerceAddress::getDefaultBilling
 		).addBoolean(
