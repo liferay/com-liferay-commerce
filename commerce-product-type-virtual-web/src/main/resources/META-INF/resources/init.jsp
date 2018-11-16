@@ -27,6 +27,7 @@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.model.CommerceOrder" %><%@
 page import="com.liferay.commerce.product.catalog.CPCatalogEntry" %><%@
+page import="com.liferay.commerce.product.catalog.CPSku" %><%@
 page import="com.liferay.commerce.product.constants.CPPortletKeys" %><%@
 page import="com.liferay.commerce.product.content.constants.CPContentWebKeys" %><%@
 page import="com.liferay.commerce.product.content.util.CPContentHelper" %><%@
@@ -36,6 +37,7 @@ page import="com.liferay.commerce.product.model.CPDefinitionSpecificationOptionV
 page import="com.liferay.commerce.product.model.CPInstance" %><%@
 page import="com.liferay.commerce.product.model.CPOptionCategory" %><%@
 page import="com.liferay.commerce.product.model.CPSpecificationOption" %><%@
+page import="com.liferay.commerce.product.model.CPSubscriptionInfo" %><%@
 page import="com.liferay.commerce.product.type.virtual.exception.CPDefinitionVirtualSettingException" %><%@
 page import="com.liferay.commerce.product.type.virtual.exception.CPDefinitionVirtualSettingFileEntryIdException" %><%@
 page import="com.liferay.commerce.product.type.virtual.exception.CPDefinitionVirtualSettingSampleException" %><%@
