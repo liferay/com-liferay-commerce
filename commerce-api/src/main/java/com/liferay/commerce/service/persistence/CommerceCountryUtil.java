@@ -660,6 +660,70 @@ public class CommerceCountryUtil {
 	}
 
 	/**
+	* Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or throws a {@link NoSuchCountryException} if it could not be found.
+	*
+	* @param groupId the group ID
+	* @param twoLettersISOCode the two letters iso code
+	* @return the matching commerce country
+	* @throws NoSuchCountryException if a matching commerce country could not be found
+	*/
+	public static CommerceCountry findByG_Tw(long groupId,
+		String twoLettersISOCode)
+		throws com.liferay.commerce.exception.NoSuchCountryException {
+		return getPersistence().findByG_Tw(groupId, twoLettersISOCode);
+	}
+
+	/**
+	* Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group ID
+	* @param twoLettersISOCode the two letters iso code
+	* @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
+	*/
+	public static CommerceCountry fetchByG_Tw(long groupId,
+		String twoLettersISOCode) {
+		return getPersistence().fetchByG_Tw(groupId, twoLettersISOCode);
+	}
+
+	/**
+	* Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group ID
+	* @param twoLettersISOCode the two letters iso code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
+	*/
+	public static CommerceCountry fetchByG_Tw(long groupId,
+		String twoLettersISOCode, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByG_Tw(groupId, twoLettersISOCode, retrieveFromCache);
+	}
+
+	/**
+	* Removes the commerce country where groupId = &#63; and twoLettersISOCode = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param twoLettersISOCode the two letters iso code
+	* @return the commerce country that was removed
+	*/
+	public static CommerceCountry removeByG_Tw(long groupId,
+		String twoLettersISOCode)
+		throws com.liferay.commerce.exception.NoSuchCountryException {
+		return getPersistence().removeByG_Tw(groupId, twoLettersISOCode);
+	}
+
+	/**
+	* Returns the number of commerce countries where groupId = &#63; and twoLettersISOCode = &#63;.
+	*
+	* @param groupId the group ID
+	* @param twoLettersISOCode the two letters iso code
+	* @return the number of matching commerce countries
+	*/
+	public static int countByG_Tw(long groupId, String twoLettersISOCode) {
+		return getPersistence().countByG_Tw(groupId, twoLettersISOCode);
+	}
+
+	/**
 	* Returns the commerce country where groupId = &#63; and numericISOCode = &#63; or throws a {@link NoSuchCountryException} if it could not be found.
 	*
 	* @param groupId the group ID
@@ -891,70 +955,6 @@ public class CommerceCountryUtil {
 	*/
 	public static int countByG_A(long groupId, boolean active) {
 		return getPersistence().countByG_A(groupId, active);
-	}
-
-	/**
-	* Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or throws a {@link NoSuchCountryException} if it could not be found.
-	*
-	* @param groupId the group ID
-	* @param twoLettersISOCode the two letters iso code
-	* @return the matching commerce country
-	* @throws NoSuchCountryException if a matching commerce country could not be found
-	*/
-	public static CommerceCountry findByG_Tw(long groupId,
-		String twoLettersISOCode)
-		throws com.liferay.commerce.exception.NoSuchCountryException {
-		return getPersistence().findByG_Tw(groupId, twoLettersISOCode);
-	}
-
-	/**
-	* Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param groupId the group ID
-	* @param twoLettersISOCode the two letters iso code
-	* @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
-	*/
-	public static CommerceCountry fetchByG_Tw(long groupId,
-		String twoLettersISOCode) {
-		return getPersistence().fetchByG_Tw(groupId, twoLettersISOCode);
-	}
-
-	/**
-	* Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param groupId the group ID
-	* @param twoLettersISOCode the two letters iso code
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
-	*/
-	public static CommerceCountry fetchByG_Tw(long groupId,
-		String twoLettersISOCode, boolean retrieveFromCache) {
-		return getPersistence()
-				   .fetchByG_Tw(groupId, twoLettersISOCode, retrieveFromCache);
-	}
-
-	/**
-	* Removes the commerce country where groupId = &#63; and twoLettersISOCode = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param twoLettersISOCode the two letters iso code
-	* @return the commerce country that was removed
-	*/
-	public static CommerceCountry removeByG_Tw(long groupId,
-		String twoLettersISOCode)
-		throws com.liferay.commerce.exception.NoSuchCountryException {
-		return getPersistence().removeByG_Tw(groupId, twoLettersISOCode);
-	}
-
-	/**
-	* Returns the number of commerce countries where groupId = &#63; and twoLettersISOCode = &#63;.
-	*
-	* @param groupId the group ID
-	* @param twoLettersISOCode the two letters iso code
-	* @return the number of matching commerce countries
-	*/
-	public static int countByG_Tw(long groupId, String twoLettersISOCode) {
-		return getPersistence().countByG_Tw(groupId, twoLettersISOCode);
 	}
 
 	/**
