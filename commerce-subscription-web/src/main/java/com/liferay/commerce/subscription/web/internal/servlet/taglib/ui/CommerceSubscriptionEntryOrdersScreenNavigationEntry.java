@@ -24,6 +24,7 @@ import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -87,7 +88,7 @@ public class CommerceSubscriptionEntryOrdersScreenNavigationEntry
 		CommerceSubscriptionEntryDisplayContext
 			commerceSubscriptionEntryDisplayContext =
 				new CommerceSubscriptionEntryDisplayContext(
-					_commerceSubscriptionEntryService,
+					_commerceSubscriptionEntryService, _configurationProvider,
 					_cpSubscriptionTypeJSPContributorRegistry,
 					_cpSubscriptionTypeRegistry, httpServletRequest,
 					_portletResourcePermission);
@@ -103,6 +104,9 @@ public class CommerceSubscriptionEntryOrdersScreenNavigationEntry
 
 	@Reference
 	private CommerceSubscriptionEntryService _commerceSubscriptionEntryService;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private CPSubscriptionTypeJSPContributorRegistry
