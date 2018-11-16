@@ -16,6 +16,7 @@ package com.liferay.commerce.order;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -29,11 +30,11 @@ public interface CommerceOrderValidator {
 	public String getKey();
 
 	public CommerceOrderValidatorResult validate(
-			CommerceOrderItem commerceOrderItem)
+			CommerceOrder commerceOrder, CPInstance cpInstance, int quantity)
 		throws PortalException;
 
 	public CommerceOrderValidatorResult validate(
-			CPInstance cpInstance, int quantity)
+			CommerceOrderItem commerceOrderItem)
 		throws PortalException;
 
 }
