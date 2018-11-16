@@ -70,7 +70,37 @@ import java.util.Map;
 @ProviderType
 public class CPDefinitionVirtualSettingServiceSoap {
 	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettingSoap addCPDefinitionVirtualSetting(
-		long cpDefinitionId, long fileEntryId, String url,
+		String className, long classPK, long fileEntryId, String url,
+		int activationStatus, long duration, int maxUsages, boolean useSample,
+		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
+		String[] termsOfUseContentMapLanguageIds,
+		String[] termsOfUseContentMapValues,
+		long termsOfUseJournalArticleResourcePrimKey, boolean override,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			Map<Locale, String> termsOfUseContentMap = LocalizationUtil.getLocalizationMap(termsOfUseContentMapLanguageIds,
+					termsOfUseContentMapValues);
+
+			com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting returnValue =
+				CPDefinitionVirtualSettingServiceUtil.addCPDefinitionVirtualSetting(className,
+					classPK, fileEntryId, url, activationStatus, duration,
+					maxUsages, useSample, sampleFileEntryId, sampleUrl,
+					termsOfUseRequired, termsOfUseContentMap,
+					termsOfUseJournalArticleResourcePrimKey, override,
+					serviceContext);
+
+			return com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettingSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettingSoap addCPDefinitionVirtualSetting(
+		String className, long classPK, long fileEntryId, String url,
 		int activationStatus, long duration, int maxUsages, boolean useSample,
 		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
 		String[] termsOfUseContentMapLanguageIds,
@@ -83,9 +113,9 @@ public class CPDefinitionVirtualSettingServiceSoap {
 					termsOfUseContentMapValues);
 
 			com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting returnValue =
-				CPDefinitionVirtualSettingServiceUtil.addCPDefinitionVirtualSetting(cpDefinitionId,
-					fileEntryId, url, activationStatus, duration, maxUsages,
-					useSample, sampleFileEntryId, sampleUrl,
+				CPDefinitionVirtualSettingServiceUtil.addCPDefinitionVirtualSetting(className,
+					classPK, fileEntryId, url, activationStatus, duration,
+					maxUsages, useSample, sampleFileEntryId, sampleUrl,
 					termsOfUseRequired, termsOfUseContentMap,
 					termsOfUseJournalArticleResourcePrimKey, serviceContext);
 
@@ -98,11 +128,42 @@ public class CPDefinitionVirtualSettingServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettingSoap fetchCPDefinitionVirtualSettingByCPDefinitionId(
-		long cpDefinitionId) throws RemoteException {
+	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettingSoap fetchCPDefinitionVirtualSetting(
+		String className, long classPK) throws RemoteException {
 		try {
 			com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting returnValue =
-				CPDefinitionVirtualSettingServiceUtil.fetchCPDefinitionVirtualSettingByCPDefinitionId(cpDefinitionId);
+				CPDefinitionVirtualSettingServiceUtil.fetchCPDefinitionVirtualSetting(className,
+					classPK);
+
+			return com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettingSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettingSoap updateCPDefinitionVirtualSetting(
+		long cpDefinitionVirtualSettingId, long fileEntryId, String url,
+		int activationStatus, long duration, int maxUsages, boolean useSample,
+		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
+		String[] termsOfUseContentMapLanguageIds,
+		String[] termsOfUseContentMapValues,
+		long termsOfUseJournalArticleResourcePrimKey, boolean override,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			Map<Locale, String> termsOfUseContentMap = LocalizationUtil.getLocalizationMap(termsOfUseContentMapLanguageIds,
+					termsOfUseContentMapValues);
+
+			com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting returnValue =
+				CPDefinitionVirtualSettingServiceUtil.updateCPDefinitionVirtualSetting(cpDefinitionVirtualSettingId,
+					fileEntryId, url, activationStatus, duration, maxUsages,
+					useSample, sampleFileEntryId, sampleUrl,
+					termsOfUseRequired, termsOfUseContentMap,
+					termsOfUseJournalArticleResourcePrimKey, override,
+					serviceContext);
 
 			return com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettingSoap.toSoapModel(returnValue);
 		}

@@ -74,6 +74,11 @@ public class CommerceVirtualOrderItemLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static void checkCommerceVirtualOrderItems()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().checkCommerceVirtualOrderItems();
+	}
+
 	/**
 	* Creates a new commerce virtual order item with the primary key. Does not add the commerce virtual order item to the database.
 	*
@@ -110,6 +115,12 @@ public class CommerceVirtualOrderItemLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .deleteCommerceVirtualOrderItem(commerceVirtualOrderItemId);
+	}
+
+	public static void deleteCommerceVirtualOrderItemByCommerceOrderItemId(
+		long commerceOrderItemId) {
+		getService()
+			.deleteCommerceVirtualOrderItemByCommerceOrderItemId(commerceOrderItemId);
 	}
 
 	/**
@@ -359,11 +370,11 @@ public class CommerceVirtualOrderItemLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> getUserCommerceVirtualOrderItems(
-		long groupId, long user, int start, int end,
+		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator) {
 		return getService()
-				   .getUserCommerceVirtualOrderItems(groupId, user, start, end,
-			orderByComparator);
+				   .getUserCommerceVirtualOrderItems(groupId, userId, start,
+			end, orderByComparator);
 	}
 
 	public static int getUserCommerceVirtualOrderItemsCount(long groupId,
@@ -405,6 +416,13 @@ public class CommerceVirtualOrderItemLocalServiceUtil {
 				   .updateCommerceVirtualOrderItem(commerceVirtualOrderItemId,
 			fileEntryId, url, activationStatus, duration, usages, maxUsages,
 			active);
+	}
+
+	public static com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem updateCommerceVirtualOrderItemDates(
+		long commerceVirtualOrderItemId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCommerceVirtualOrderItemDates(commerceVirtualOrderItemId);
 	}
 
 	public static CommerceVirtualOrderItemLocalService getService() {
