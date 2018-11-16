@@ -77,7 +77,7 @@ public class CommerceSubscriptionEntryWrapper
 		attributes.put("subscriptionType", getSubscriptionType());
 		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
 		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
-		attributes.put("active", isActive());
+		attributes.put("subscriptionStatus", getSubscriptionStatus());
 		attributes.put("lastIterationDate", getLastIterationDate());
 		attributes.put("nextIterationDate", getNextIterationDate());
 		attributes.put("startDate", getStartDate());
@@ -175,10 +175,11 @@ public class CommerceSubscriptionEntryWrapper
 			setMaxSubscriptionCycles(maxSubscriptionCycles);
 		}
 
-		Boolean active = (Boolean)attributes.get("active");
+		Integer subscriptionStatus = (Integer)attributes.get(
+				"subscriptionStatus");
 
-		if (active != null) {
-			setActive(active);
+		if (subscriptionStatus != null) {
+			setSubscriptionStatus(subscriptionStatus);
 		}
 
 		Date lastIterationDate = (Date)attributes.get("lastIterationDate");
@@ -225,16 +226,6 @@ public class CommerceSubscriptionEntryWrapper
 	@Override
 	public com.liferay.commerce.product.model.CPInstance fetchCPInstance() {
 		return _commerceSubscriptionEntry.fetchCPInstance();
-	}
-
-	/**
-	* Returns the active of this commerce subscription entry.
-	*
-	* @return the active of this commerce subscription entry
-	*/
-	@Override
-	public boolean getActive() {
-		return _commerceSubscriptionEntry.getActive();
 	}
 
 	/**
@@ -393,6 +384,16 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
+	* Returns the subscription status of this commerce subscription entry.
+	*
+	* @return the subscription status of this commerce subscription entry
+	*/
+	@Override
+	public int getSubscriptionStatus() {
+		return _commerceSubscriptionEntry.getSubscriptionStatus();
+	}
+
+	/**
 	* Returns the subscription type of this commerce subscription entry.
 	*
 	* @return the subscription type of this commerce subscription entry
@@ -462,16 +463,6 @@ public class CommerceSubscriptionEntryWrapper
 		return _commerceSubscriptionEntry.hashCode();
 	}
 
-	/**
-	* Returns <code>true</code> if this commerce subscription entry is active.
-	*
-	* @return <code>true</code> if this commerce subscription entry is active; <code>false</code> otherwise
-	*/
-	@Override
-	public boolean isActive() {
-		return _commerceSubscriptionEntry.isActive();
-	}
-
 	@Override
 	public boolean isCachedModel() {
 		return _commerceSubscriptionEntry.isCachedModel();
@@ -490,16 +481,6 @@ public class CommerceSubscriptionEntryWrapper
 	@Override
 	public void persist() {
 		_commerceSubscriptionEntry.persist();
-	}
-
-	/**
-	* Sets whether this commerce subscription entry is active.
-	*
-	* @param active the active of this commerce subscription entry
-	*/
-	@Override
-	public void setActive(boolean active) {
-		_commerceSubscriptionEntry.setActive(active);
 	}
 
 	@Override
@@ -661,6 +642,16 @@ public class CommerceSubscriptionEntryWrapper
 	@Override
 	public void setSubscriptionLength(int subscriptionLength) {
 		_commerceSubscriptionEntry.setSubscriptionLength(subscriptionLength);
+	}
+
+	/**
+	* Sets the subscription status of this commerce subscription entry.
+	*
+	* @param subscriptionStatus the subscription status of this commerce subscription entry
+	*/
+	@Override
+	public void setSubscriptionStatus(int subscriptionStatus) {
+		_commerceSubscriptionEntry.setSubscriptionStatus(subscriptionStatus);
 	}
 
 	/**

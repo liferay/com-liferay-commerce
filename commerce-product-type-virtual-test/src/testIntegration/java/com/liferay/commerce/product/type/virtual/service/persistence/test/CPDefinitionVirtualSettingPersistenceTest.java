@@ -138,7 +138,9 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 		newCPDefinitionVirtualSetting.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCPDefinitionVirtualSetting.setCPDefinitionId(RandomTestUtil.nextLong());
+		newCPDefinitionVirtualSetting.setClassNameId(RandomTestUtil.nextLong());
+
+		newCPDefinitionVirtualSetting.setClassPK(RandomTestUtil.nextLong());
 
 		newCPDefinitionVirtualSetting.setFileEntryId(RandomTestUtil.nextLong());
 
@@ -161,6 +163,8 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 		newCPDefinitionVirtualSetting.setTermsOfUseContent(RandomTestUtil.randomString());
 
 		newCPDefinitionVirtualSetting.setTermsOfUseJournalArticleResourcePrimKey(RandomTestUtil.nextLong());
+
+		newCPDefinitionVirtualSetting.setOverride(RandomTestUtil.randomBoolean());
 
 		newCPDefinitionVirtualSetting.setLastPublishDate(RandomTestUtil.nextDate());
 
@@ -189,8 +193,10 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 				existingCPDefinitionVirtualSetting.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCPDefinitionVirtualSetting.getModifiedDate()));
-		Assert.assertEquals(existingCPDefinitionVirtualSetting.getCPDefinitionId(),
-			newCPDefinitionVirtualSetting.getCPDefinitionId());
+		Assert.assertEquals(existingCPDefinitionVirtualSetting.getClassNameId(),
+			newCPDefinitionVirtualSetting.getClassNameId());
+		Assert.assertEquals(existingCPDefinitionVirtualSetting.getClassPK(),
+			newCPDefinitionVirtualSetting.getClassPK());
 		Assert.assertEquals(existingCPDefinitionVirtualSetting.getFileEntryId(),
 			newCPDefinitionVirtualSetting.getFileEntryId());
 		Assert.assertEquals(existingCPDefinitionVirtualSetting.getUrl(),
@@ -213,6 +219,8 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 			newCPDefinitionVirtualSetting.getTermsOfUseContent());
 		Assert.assertEquals(existingCPDefinitionVirtualSetting.getTermsOfUseJournalArticleResourcePrimKey(),
 			newCPDefinitionVirtualSetting.getTermsOfUseJournalArticleResourcePrimKey());
+		Assert.assertEquals(existingCPDefinitionVirtualSetting.isOverride(),
+			newCPDefinitionVirtualSetting.isOverride());
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPDefinitionVirtualSetting.getLastPublishDate()),
 			Time.getShortTimestamp(
@@ -247,10 +255,11 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCPDefinitionId() throws Exception {
-		_persistence.countByCPDefinitionId(RandomTestUtil.nextLong());
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
 
-		_persistence.countByCPDefinitionId(0L);
+		_persistence.countByC_C(0L, 0L);
 	}
 
 	@Test
@@ -280,13 +289,13 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CPDefinitionVirtualSetting",
 			"uuid", true, "CPDefinitionVirtualSettingId", true, "groupId",
 			true, "companyId", true, "userId", true, "userName", true,
-			"createDate", true, "modifiedDate", true, "CPDefinitionId", true,
-			"fileEntryId", true, "url", true, "activationStatus", true,
-			"duration", true, "maxUsages", true, "useSample", true,
-			"sampleFileEntryId", true, "sampleUrl", true, "termsOfUseRequired",
-			true, "termsOfUseContent", true,
-			"termsOfUseJournalArticleResourcePrimKey", true, "lastPublishDate",
-			true);
+			"createDate", true, "modifiedDate", true, "classNameId", true,
+			"classPK", true, "fileEntryId", true, "url", true,
+			"activationStatus", true, "duration", true, "maxUsages", true,
+			"useSample", true, "sampleFileEntryId", true, "sampleUrl", true,
+			"termsOfUseRequired", true, "termsOfUseContent", true,
+			"termsOfUseJournalArticleResourcePrimKey", true, "override", true,
+			"lastPublishDate", true);
 	}
 
 	@Test
@@ -518,10 +527,15 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 				new Class<?>[0]));
 
 		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionVirtualSetting.getCPDefinitionId()),
+				existingCPDefinitionVirtualSetting.getClassNameId()),
 			ReflectionTestUtil.<Long>invoke(
-				existingCPDefinitionVirtualSetting,
-				"getOriginalCPDefinitionId", new Class<?>[0]));
+				existingCPDefinitionVirtualSetting, "getOriginalClassNameId",
+				new Class<?>[0]));
+		Assert.assertEquals(Long.valueOf(
+				existingCPDefinitionVirtualSetting.getClassPK()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionVirtualSetting, "getOriginalClassPK",
+				new Class<?>[0]));
 	}
 
 	protected CPDefinitionVirtualSetting addCPDefinitionVirtualSetting()
@@ -544,7 +558,9 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 
 		cpDefinitionVirtualSetting.setModifiedDate(RandomTestUtil.nextDate());
 
-		cpDefinitionVirtualSetting.setCPDefinitionId(RandomTestUtil.nextLong());
+		cpDefinitionVirtualSetting.setClassNameId(RandomTestUtil.nextLong());
+
+		cpDefinitionVirtualSetting.setClassPK(RandomTestUtil.nextLong());
 
 		cpDefinitionVirtualSetting.setFileEntryId(RandomTestUtil.nextLong());
 
@@ -567,6 +583,8 @@ public class CPDefinitionVirtualSettingPersistenceTest {
 		cpDefinitionVirtualSetting.setTermsOfUseContent(RandomTestUtil.randomString());
 
 		cpDefinitionVirtualSetting.setTermsOfUseJournalArticleResourcePrimKey(RandomTestUtil.nextLong());
+
+		cpDefinitionVirtualSetting.setOverride(RandomTestUtil.randomBoolean());
 
 		cpDefinitionVirtualSetting.setLastPublishDate(RandomTestUtil.nextDate());
 

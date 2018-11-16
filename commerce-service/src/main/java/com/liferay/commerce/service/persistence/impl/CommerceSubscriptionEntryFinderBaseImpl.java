@@ -45,7 +45,6 @@ public class CommerceSubscriptionEntryFinderBaseImpl extends BasePersistenceImpl
 			Map<String, String> dbColumnNames = new HashMap<String, String>();
 
 			dbColumnNames.put("uuid", "uuid_");
-			dbColumnNames.put("active", "active_");
 
 			field.set(this, dbColumnNames);
 		}

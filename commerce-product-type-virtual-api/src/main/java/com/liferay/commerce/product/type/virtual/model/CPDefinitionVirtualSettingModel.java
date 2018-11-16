@@ -20,6 +20,7 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.LocaleException;
+import com.liferay.portal.kernel.model.AttachedModel;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.LocalizedModel;
@@ -47,8 +48,9 @@ import java.util.Map;
  * @generated
  */
 @ProviderType
-public interface CPDefinitionVirtualSettingModel extends BaseModel<CPDefinitionVirtualSetting>,
-	LocalizedModel, ShardedModel, StagedGroupedModel {
+public interface CPDefinitionVirtualSettingModel extends AttachedModel,
+	BaseModel<CPDefinitionVirtualSetting>, LocalizedModel, ShardedModel,
+	StagedGroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -215,18 +217,46 @@ public interface CPDefinitionVirtualSettingModel extends BaseModel<CPDefinitionV
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the cp definition ID of this cp definition virtual setting.
+	 * Returns the fully qualified class name of this cp definition virtual setting.
 	 *
-	 * @return the cp definition ID of this cp definition virtual setting
+	 * @return the fully qualified class name of this cp definition virtual setting
 	 */
-	public long getCPDefinitionId();
+	@Override
+	public String getClassName();
+
+	public void setClassName(String className);
 
 	/**
-	 * Sets the cp definition ID of this cp definition virtual setting.
+	 * Returns the class name ID of this cp definition virtual setting.
 	 *
-	 * @param CPDefinitionId the cp definition ID of this cp definition virtual setting
+	 * @return the class name ID of this cp definition virtual setting
 	 */
-	public void setCPDefinitionId(long CPDefinitionId);
+	@Override
+	public long getClassNameId();
+
+	/**
+	 * Sets the class name ID of this cp definition virtual setting.
+	 *
+	 * @param classNameId the class name ID of this cp definition virtual setting
+	 */
+	@Override
+	public void setClassNameId(long classNameId);
+
+	/**
+	 * Returns the class pk of this cp definition virtual setting.
+	 *
+	 * @return the class pk of this cp definition virtual setting
+	 */
+	@Override
+	public long getClassPK();
+
+	/**
+	 * Sets the class pk of this cp definition virtual setting.
+	 *
+	 * @param classPK the class pk of this cp definition virtual setting
+	 */
+	@Override
+	public void setClassPK(long classPK);
 
 	/**
 	 * Returns the file entry ID of this cp definition virtual setting.
@@ -486,6 +516,27 @@ public interface CPDefinitionVirtualSettingModel extends BaseModel<CPDefinitionV
 	 */
 	public void setTermsOfUseJournalArticleResourcePrimKey(
 		long termsOfUseJournalArticleResourcePrimKey);
+
+	/**
+	 * Returns the override of this cp definition virtual setting.
+	 *
+	 * @return the override of this cp definition virtual setting
+	 */
+	public boolean getOverride();
+
+	/**
+	 * Returns <code>true</code> if this cp definition virtual setting is override.
+	 *
+	 * @return <code>true</code> if this cp definition virtual setting is override; <code>false</code> otherwise
+	 */
+	public boolean isOverride();
+
+	/**
+	 * Sets whether this cp definition virtual setting is override.
+	 *
+	 * @param override the override of this cp definition virtual setting
+	 */
+	public void setOverride(boolean override);
 
 	/**
 	 * Returns the last publish date of this cp definition virtual setting.
