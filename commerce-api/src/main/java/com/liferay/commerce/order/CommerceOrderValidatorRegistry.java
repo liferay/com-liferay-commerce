@@ -41,11 +41,11 @@ public interface CommerceOrderValidatorRegistry {
 	public boolean isValid(CommerceOrder commerceOrder) throws PortalException;
 
 	public List<CommerceOrderValidatorResult> validate(
-			CommerceOrderItem commerceOrderItem)
+			CommerceOrder commerceOrder, CPInstance cpInstance, int quantity)
 		throws PortalException;
 
 	public List<CommerceOrderValidatorResult> validate(
-			CPInstance cpInstance, int quantity)
+			CommerceOrderItem commerceOrderItem)
 		throws PortalException;
 
 }
