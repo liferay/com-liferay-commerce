@@ -16,10 +16,13 @@ package com.liferay.commerce.constants;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class CommerceDestinationNames {
 
 	public static final String ORDER_STATUS = "liferay/order_status";
+
+	public static final String PAYMENT_STATUS = "liferay/payment_status";
 
 	public static final String STOCK_QUANTITY = "liferay/stock_quantity";
 
