@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.internal.configuration.subscription;
+package com.liferay.commerce.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
@@ -20,12 +20,13 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 @ExtendedObjectClassDefinition(
 	category = "catalog", scope = ExtendedObjectClassDefinition.Scope.SYSTEM
 )
 @Meta.OCD(
-	id = "com.liferay.commerce.internal.configuration.subscription.CommerceSubscriptionConfiguration",
+	id = "com.liferay.commerce.configuration.CommerceSubscriptionConfiguration",
 	localization = "content/Language",
 	name = "commerce-subscription-configuration-name"
 )
@@ -41,5 +42,11 @@ public interface CommerceSubscriptionConfiguration {
 
 	@Meta.AD(deflt = "1440", name = "payed-order-interval", required = false)
 	public int payedOrderInterval();
+
+	@Meta.AD(deflt = "false", name = "cancel-subscription", required = false)
+	public boolean cancelSubscription();
+
+	@Meta.AD(deflt = "false", name = "suspend-subscription", required = false)
+	public boolean suspendSubscription();
 
 }
