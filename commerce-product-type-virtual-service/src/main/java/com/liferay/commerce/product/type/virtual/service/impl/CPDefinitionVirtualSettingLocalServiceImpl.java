@@ -46,12 +46,12 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 
 	@Override
 	public CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
-			long cpDefinitionId, long fileEntryId, String url,
+			String className, long classPK, long fileEntryId, String url,
 			int activationStatus, long duration, int maxUsages,
 			boolean useSample, long sampleFileEntryId, String sampleUrl,
 			boolean termsOfUseRequired,
 			Map<Locale, String> termsOfUseContentMap,
-			long termsOfUseJournalArticleResourcePrimKey,
+			long termsOfUseJournalArticleResourcePrimKey, boolean override,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -107,7 +107,8 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 		cpDefinitionVirtualSetting.setCompanyId(user.getCompanyId());
 		cpDefinitionVirtualSetting.setUserId(user.getUserId());
 		cpDefinitionVirtualSetting.setUserName(user.getFullName());
-		cpDefinitionVirtualSetting.setCPDefinitionId(cpDefinitionId);
+		cpDefinitionVirtualSetting.setClassName(className);
+		cpDefinitionVirtualSetting.setClassPK(classPK);
 		cpDefinitionVirtualSetting.setFileEntryId(fileEntryId);
 		cpDefinitionVirtualSetting.setUrl(url);
 		cpDefinitionVirtualSetting.setActivationStatus(activationStatus);
@@ -121,6 +122,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			termsOfUseContentMap);
 		cpDefinitionVirtualSetting.setTermsOfUseJournalArticleResourcePrimKey(
 			termsOfUseJournalArticleResourcePrimKey);
+		cpDefinitionVirtualSetting.setOverride(override);
 		cpDefinitionVirtualSetting.setExpandoBridgeAttributes(serviceContext);
 
 		cpDefinitionVirtualSettingPersistence.update(
@@ -130,12 +132,33 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 	}
 
 	@Override
-	public CPDefinitionVirtualSetting
-		deleteCPDefinitionVirtualSettingByCPDefinitionId(long cpDefinitionId) {
+	public CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
+			String className, long classPK, long fileEntryId, String url,
+			int activationStatus, long duration, int maxUsages,
+			boolean useSample, long sampleFileEntryId, String sampleUrl,
+			boolean termsOfUseRequired,
+			Map<Locale, String> termsOfUseContentMap,
+			long termsOfUseJournalArticleResourcePrimKey,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return cpDefinitionVirtualSettingLocalService.
+			addCPDefinitionVirtualSetting(
+				className, classPK, fileEntryId, url, activationStatus,
+				duration, maxUsages, useSample, sampleFileEntryId, sampleUrl,
+				termsOfUseRequired, termsOfUseContentMap,
+				termsOfUseJournalArticleResourcePrimKey, false, serviceContext);
+	}
+
+	@Override
+	public CPDefinitionVirtualSetting deleteCPDefinitionVirtualSetting(
+		String className, long classPK) {
+
+		long classNameId = classNameLocalService.getClassNameId(className);
 
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
-			cpDefinitionVirtualSettingPersistence.fetchByCPDefinitionId(
-				cpDefinitionId);
+			cpDefinitionVirtualSettingPersistence.fetchByC_C(
+				classNameId, classPK);
 
 		if (cpDefinitionVirtualSetting != null) {
 			cpDefinitionVirtualSettingLocalService.
@@ -146,20 +169,24 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 	}
 
 	@Override
-	public CPDefinitionVirtualSetting
-		fetchCPDefinitionVirtualSettingByCPDefinitionId(long cpDefinitionId) {
+	public CPDefinitionVirtualSetting fetchCPDefinitionVirtualSetting(
+		String className, long classPK) {
 
-		return cpDefinitionVirtualSettingPersistence.fetchByCPDefinitionId(
-			cpDefinitionId);
+		long classNameId = classNameLocalService.getClassNameId(className);
+
+		return cpDefinitionVirtualSettingPersistence.fetchByC_C(
+			classNameId, classPK);
 	}
 
 	@Override
-	public CPDefinitionVirtualSetting
-			getCPDefinitionVirtualSettingByCPDefinitionId(long cpDefinitionId)
+	public CPDefinitionVirtualSetting getCPDefinitionVirtualSetting(
+			String className, long classPK)
 		throws PortalException {
 
-		return cpDefinitionVirtualSettingPersistence.findByCPDefinitionId(
-			cpDefinitionId);
+		long classNameId = classNameLocalService.getClassNameId(className);
+
+		return cpDefinitionVirtualSettingPersistence.fetchByC_C(
+			classNameId, classPK);
 	}
 
 	@Override
@@ -169,7 +196,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			boolean useSample, long sampleFileEntryId, String sampleUrl,
 			boolean termsOfUseRequired,
 			Map<Locale, String> termsOfUseContentMap,
-			long termsOfUseJournalArticleResourcePrimKey,
+			long termsOfUseJournalArticleResourcePrimKey, boolean override,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -228,12 +255,33 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			termsOfUseContentMap);
 		cpDefinitionVirtualSetting.setTermsOfUseJournalArticleResourcePrimKey(
 			termsOfUseJournalArticleResourcePrimKey);
+		cpDefinitionVirtualSetting.setOverride(override);
 		cpDefinitionVirtualSetting.setExpandoBridgeAttributes(serviceContext);
 
 		cpDefinitionVirtualSettingPersistence.update(
 			cpDefinitionVirtualSetting);
 
 		return cpDefinitionVirtualSetting;
+	}
+
+	@Override
+	public CPDefinitionVirtualSetting updateCPDefinitionVirtualSetting(
+			long cpDefinitionVirtualSettingId, long fileEntryId, String url,
+			int activationStatus, long duration, int maxUsages,
+			boolean useSample, long sampleFileEntryId, String sampleUrl,
+			boolean termsOfUseRequired,
+			Map<Locale, String> termsOfUseContentMap,
+			long termsOfUseJournalArticleResourcePrimKey,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return cpDefinitionVirtualSettingLocalService.
+			updateCPDefinitionVirtualSetting(
+				cpDefinitionVirtualSettingId, fileEntryId, url,
+				activationStatus, duration, maxUsages, useSample,
+				sampleFileEntryId, sampleUrl, termsOfUseRequired,
+				termsOfUseContentMap, termsOfUseJournalArticleResourcePrimKey,
+				false, serviceContext);
 	}
 
 	protected void validate(
