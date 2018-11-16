@@ -17,6 +17,7 @@ package com.liferay.commerce.product.type.virtual.web.internal.display.context;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
@@ -58,13 +59,11 @@ public class CPDefinitionVirtualSettingDisplayContext
 	extends BaseCPDefinitionsDisplayContext {
 
 	public CPDefinitionVirtualSettingDisplayContext(
-			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-			DLAppService dlAppService,
-			JournalArticleService journalArticleService,
-			CPDefinitionVirtualSettingActionHelper
-				cpDefinitionVirtualSettingActionHelper,
-			ItemSelector itemSelector)
-		throws PortalException {
+		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+		DLAppService dlAppService, JournalArticleService journalArticleService,
+		CPDefinitionVirtualSettingActionHelper
+			cpDefinitionVirtualSettingActionHelper,
+		ItemSelector itemSelector) {
 
 		super(actionHelper, httpServletRequest);
 
@@ -96,6 +95,29 @@ public class CPDefinitionVirtualSettingDisplayContext
 					cpRequestHelper.getRenderRequest());
 
 		return _cpDefinitionVirtualSetting;
+	}
+
+	public CPInstance getCPInstance() throws PortalException {
+		if (_cpInstance != null) {
+			return _cpInstance;
+		}
+
+		_cpInstance = actionHelper.getCPInstance(
+			cpRequestHelper.getRenderRequest());
+
+		return _cpInstance;
+	}
+
+	public long getCPInstanceId() throws PortalException {
+		long cpInstanceId = 0;
+
+		CPInstance cpInstance = getCPInstance();
+
+		if (cpInstance != null) {
+			cpInstanceId = cpInstance.getCPInstanceId();
+		}
+
+		return cpInstanceId;
 	}
 
 	public String getDownloadFileEntryURL() throws PortalException {
@@ -267,6 +289,7 @@ public class CPDefinitionVirtualSettingDisplayContext
 	private CPDefinitionVirtualSetting _cpDefinitionVirtualSetting;
 	private final CPDefinitionVirtualSettingActionHelper
 		_cpDefinitionVirtualSettingActionHelper;
+	private CPInstance _cpInstance;
 	private final DLAppService _dlAppService;
 	private final ItemSelector _itemSelector;
 	private final JournalArticleService _journalArticleService;
