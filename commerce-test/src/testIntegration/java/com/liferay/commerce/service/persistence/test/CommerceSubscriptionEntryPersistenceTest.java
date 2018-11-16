@@ -150,7 +150,7 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 		newCommerceSubscriptionEntry.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
 
-		newCommerceSubscriptionEntry.setActive(RandomTestUtil.randomBoolean());
+		newCommerceSubscriptionEntry.setSubscriptionStatus(RandomTestUtil.nextInt());
 
 		newCommerceSubscriptionEntry.setLastIterationDate(RandomTestUtil.nextDate());
 
@@ -194,8 +194,8 @@ public class CommerceSubscriptionEntryPersistenceTest {
 			newCommerceSubscriptionEntry.getSubscriptionTypeSettings());
 		Assert.assertEquals(existingCommerceSubscriptionEntry.getMaxSubscriptionCycles(),
 			newCommerceSubscriptionEntry.getMaxSubscriptionCycles());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.isActive(),
-			newCommerceSubscriptionEntry.isActive());
+		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionStatus(),
+			newCommerceSubscriptionEntry.getSubscriptionStatus());
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCommerceSubscriptionEntry.getLastIterationDate()),
 			Time.getShortTimestamp(
@@ -244,10 +244,10 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByactive() throws Exception {
-		_persistence.countByactive(RandomTestUtil.randomBoolean());
+	public void testCountBysubscriptionStatus() throws Exception {
+		_persistence.countBysubscriptionStatus(RandomTestUtil.nextInt());
 
-		_persistence.countByactive(RandomTestUtil.randomBoolean());
+		_persistence.countBysubscriptionStatus(0);
 	}
 
 	@Test
@@ -287,9 +287,9 @@ public class CommerceSubscriptionEntryPersistenceTest {
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "CPInstanceId", true,
 			"commerceOrderItemId", true, "subscriptionLength", true,
-			"subscriptionType", true, "maxSubscriptionCycles", true, "active",
-			true, "lastIterationDate", true, "nextIterationDate", true,
-			"startDate", true);
+			"subscriptionType", true, "maxSubscriptionCycles", true,
+			"subscriptionStatus", true, "lastIterationDate", true,
+			"nextIterationDate", true, "startDate", true);
 	}
 
 	@Test
@@ -552,7 +552,7 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 		commerceSubscriptionEntry.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
 
-		commerceSubscriptionEntry.setActive(RandomTestUtil.randomBoolean());
+		commerceSubscriptionEntry.setSubscriptionStatus(RandomTestUtil.nextInt());
 
 		commerceSubscriptionEntry.setLastIterationDate(RandomTestUtil.nextDate());
 

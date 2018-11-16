@@ -43,7 +43,23 @@ public class CPDefinitionVirtualSettingServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.product.type.virtual.service.impl.CPDefinitionVirtualSettingServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
-		long cpDefinitionId, long fileEntryId, String url,
+		String className, long classPK, long fileEntryId, String url,
+		int activationStatus, long duration, int maxUsages, boolean useSample,
+		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
+		java.util.Map<java.util.Locale, String> termsOfUseContentMap,
+		long termsOfUseJournalArticleResourcePrimKey, boolean override,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCPDefinitionVirtualSetting(className, classPK,
+			fileEntryId, url, activationStatus, duration, maxUsages, useSample,
+			sampleFileEntryId, sampleUrl, termsOfUseRequired,
+			termsOfUseContentMap, termsOfUseJournalArticleResourcePrimKey,
+			override, serviceContext);
+	}
+
+	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
+		String className, long classPK, long fileEntryId, String url,
 		int activationStatus, long duration, int maxUsages, boolean useSample,
 		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
 		java.util.Map<java.util.Locale, String> termsOfUseContentMap,
@@ -51,18 +67,17 @@ public class CPDefinitionVirtualSettingServiceUtil {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCPDefinitionVirtualSetting(cpDefinitionId, fileEntryId,
-			url, activationStatus, duration, maxUsages, useSample,
+				   .addCPDefinitionVirtualSetting(className, classPK,
+			fileEntryId, url, activationStatus, duration, maxUsages, useSample,
 			sampleFileEntryId, sampleUrl, termsOfUseRequired,
 			termsOfUseContentMap, termsOfUseJournalArticleResourcePrimKey,
 			serviceContext);
 	}
 
-	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting fetchCPDefinitionVirtualSettingByCPDefinitionId(
-		long cpDefinitionId)
+	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting fetchCPDefinitionVirtualSetting(
+		String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .fetchCPDefinitionVirtualSettingByCPDefinitionId(cpDefinitionId);
+		return getService().fetchCPDefinitionVirtualSetting(className, classPK);
 	}
 
 	/**
@@ -72,6 +87,22 @@ public class CPDefinitionVirtualSettingServiceUtil {
 	*/
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting updateCPDefinitionVirtualSetting(
+		long cpDefinitionVirtualSettingId, long fileEntryId, String url,
+		int activationStatus, long duration, int maxUsages, boolean useSample,
+		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
+		java.util.Map<java.util.Locale, String> termsOfUseContentMap,
+		long termsOfUseJournalArticleResourcePrimKey, boolean override,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCPDefinitionVirtualSetting(cpDefinitionVirtualSettingId,
+			fileEntryId, url, activationStatus, duration, maxUsages, useSample,
+			sampleFileEntryId, sampleUrl, termsOfUseRequired,
+			termsOfUseContentMap, termsOfUseJournalArticleResourcePrimKey,
+			override, serviceContext);
 	}
 
 	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting updateCPDefinitionVirtualSetting(

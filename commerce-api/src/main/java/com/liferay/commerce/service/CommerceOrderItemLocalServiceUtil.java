@@ -382,20 +382,22 @@ public class CommerceOrderItemLocalServiceUtil {
 
 	public static com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
 		long commerceOrderItemId, int quantity,
-		com.liferay.commerce.context.CommerceContext commerceContext)
+		com.liferay.commerce.context.CommerceContext commerceContext,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateCommerceOrderItem(commerceOrderItemId, quantity,
-			commerceContext);
+			commerceContext, serviceContext);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
 		long commerceOrderItemId, int quantity, String json,
-		com.liferay.commerce.context.CommerceContext commerceContext)
+		com.liferay.commerce.context.CommerceContext commerceContext,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateCommerceOrderItem(commerceOrderItemId, quantity,
-			json, commerceContext);
+			json, commerceContext, serviceContext);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItemPrice(

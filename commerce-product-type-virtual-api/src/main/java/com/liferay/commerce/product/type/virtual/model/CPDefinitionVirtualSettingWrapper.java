@@ -71,7 +71,8 @@ public class CPDefinitionVirtualSettingWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CPDefinitionId", getCPDefinitionId());
+		attributes.put("classNameId", getClassNameId());
+		attributes.put("classPK", getClassPK());
 		attributes.put("fileEntryId", getFileEntryId());
 		attributes.put("url", getUrl());
 		attributes.put("activationStatus", getActivationStatus());
@@ -84,6 +85,7 @@ public class CPDefinitionVirtualSettingWrapper
 		attributes.put("termsOfUseContent", getTermsOfUseContent());
 		attributes.put("termsOfUseJournalArticleResourcePrimKey",
 			getTermsOfUseJournalArticleResourcePrimKey());
+		attributes.put("override", isOverride());
 		attributes.put("lastPublishDate", getLastPublishDate());
 
 		return attributes;
@@ -140,10 +142,16 @@ public class CPDefinitionVirtualSettingWrapper
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CPDefinitionId = (Long)attributes.get("CPDefinitionId");
+		Long classNameId = (Long)attributes.get("classNameId");
 
-		if (CPDefinitionId != null) {
-			setCPDefinitionId(CPDefinitionId);
+		if (classNameId != null) {
+			setClassNameId(classNameId);
+		}
+
+		Long classPK = (Long)attributes.get("classPK");
+
+		if (classPK != null) {
+			setClassPK(classPK);
 		}
 
 		Long fileEntryId = (Long)attributes.get("fileEntryId");
@@ -214,6 +222,12 @@ public class CPDefinitionVirtualSettingWrapper
 			setTermsOfUseJournalArticleResourcePrimKey(termsOfUseJournalArticleResourcePrimKey);
 		}
 
+		Boolean override = (Boolean)attributes.get("override");
+
+		if (override != null) {
+			setOverride(override);
+		}
+
 		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
 
 		if (lastPublishDate != null) {
@@ -247,6 +261,36 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	/**
+	* Returns the fully qualified class name of this cp definition virtual setting.
+	*
+	* @return the fully qualified class name of this cp definition virtual setting
+	*/
+	@Override
+	public String getClassName() {
+		return _cpDefinitionVirtualSetting.getClassName();
+	}
+
+	/**
+	* Returns the class name ID of this cp definition virtual setting.
+	*
+	* @return the class name ID of this cp definition virtual setting
+	*/
+	@Override
+	public long getClassNameId() {
+		return _cpDefinitionVirtualSetting.getClassNameId();
+	}
+
+	/**
+	* Returns the class pk of this cp definition virtual setting.
+	*
+	* @return the class pk of this cp definition virtual setting
+	*/
+	@Override
+	public long getClassPK() {
+		return _cpDefinitionVirtualSetting.getClassPK();
+	}
+
+	/**
 	* Returns the company ID of this cp definition virtual setting.
 	*
 	* @return the company ID of this cp definition virtual setting
@@ -254,22 +298,6 @@ public class CPDefinitionVirtualSettingWrapper
 	@Override
 	public long getCompanyId() {
 		return _cpDefinitionVirtualSetting.getCompanyId();
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CPDefinition getCPDefinition()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionVirtualSetting.getCPDefinition();
-	}
-
-	/**
-	* Returns the cp definition ID of this cp definition virtual setting.
-	*
-	* @return the cp definition ID of this cp definition virtual setting
-	*/
-	@Override
-	public long getCPDefinitionId() {
-		return _cpDefinitionVirtualSetting.getCPDefinitionId();
 	}
 
 	/**
@@ -366,6 +394,16 @@ public class CPDefinitionVirtualSettingWrapper
 	@Override
 	public Date getModifiedDate() {
 		return _cpDefinitionVirtualSetting.getModifiedDate();
+	}
+
+	/**
+	* Returns the override of this cp definition virtual setting.
+	*
+	* @return the override of this cp definition virtual setting
+	*/
+	@Override
+	public boolean getOverride() {
+		return _cpDefinitionVirtualSetting.getOverride();
 	}
 
 	/**
@@ -595,6 +633,16 @@ public class CPDefinitionVirtualSettingWrapper
 	}
 
 	/**
+	* Returns <code>true</code> if this cp definition virtual setting is override.
+	*
+	* @return <code>true</code> if this cp definition virtual setting is override; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isOverride() {
+		return _cpDefinitionVirtualSetting.isOverride();
+	}
+
+	/**
 	* Returns <code>true</code> if this cp definition virtual setting is terms of use required.
 	*
 	* @return <code>true</code> if this cp definition virtual setting is terms of use required; <code>false</code> otherwise
@@ -662,6 +710,31 @@ public class CPDefinitionVirtualSettingWrapper
 		_cpDefinitionVirtualSetting.setCachedModel(cachedModel);
 	}
 
+	@Override
+	public void setClassName(String className) {
+		_cpDefinitionVirtualSetting.setClassName(className);
+	}
+
+	/**
+	* Sets the class name ID of this cp definition virtual setting.
+	*
+	* @param classNameId the class name ID of this cp definition virtual setting
+	*/
+	@Override
+	public void setClassNameId(long classNameId) {
+		_cpDefinitionVirtualSetting.setClassNameId(classNameId);
+	}
+
+	/**
+	* Sets the class pk of this cp definition virtual setting.
+	*
+	* @param classPK the class pk of this cp definition virtual setting
+	*/
+	@Override
+	public void setClassPK(long classPK) {
+		_cpDefinitionVirtualSetting.setClassPK(classPK);
+	}
+
 	/**
 	* Sets the company ID of this cp definition virtual setting.
 	*
@@ -670,16 +743,6 @@ public class CPDefinitionVirtualSettingWrapper
 	@Override
 	public void setCompanyId(long companyId) {
 		_cpDefinitionVirtualSetting.setCompanyId(companyId);
-	}
-
-	/**
-	* Sets the cp definition ID of this cp definition virtual setting.
-	*
-	* @param CPDefinitionId the cp definition ID of this cp definition virtual setting
-	*/
-	@Override
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_cpDefinitionVirtualSetting.setCPDefinitionId(CPDefinitionId);
 	}
 
 	/**
@@ -782,6 +845,16 @@ public class CPDefinitionVirtualSettingWrapper
 	@Override
 	public void setNew(boolean n) {
 		_cpDefinitionVirtualSetting.setNew(n);
+	}
+
+	/**
+	* Sets whether this cp definition virtual setting is override.
+	*
+	* @param override the override of this cp definition virtual setting
+	*/
+	@Override
+	public void setOverride(boolean override) {
+		_cpDefinitionVirtualSetting.setOverride(override);
 	}
 
 	/**

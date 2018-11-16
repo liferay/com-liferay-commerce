@@ -323,7 +323,7 @@ create table CommerceSubscriptionEntry (
 	subscriptionType VARCHAR(75) null,
 	subscriptionTypeSettings TEXT null,
 	maxSubscriptionCycles LONG,
-	active_ BOOLEAN,
+	subscriptionStatus INTEGER,
 	lastIterationDate DATE null,
 	nextIterationDate DATE null,
 	startDate DATE null
