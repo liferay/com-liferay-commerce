@@ -1987,6 +1987,254 @@ public class CommerceCountryPersistenceImpl extends BasePersistenceImpl<Commerce
 	}
 
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "commerceCountry.groupId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_TW = new FinderPath(CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceCountryImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByG_Tw",
+			new String[] { Long.class.getName(), String.class.getName() },
+			CommerceCountryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCountryModelImpl.TWOLETTERSISOCODE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_TW = new FinderPath(CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCountryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_Tw",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or throws a {@link NoSuchCountryException} if it could not be found.
+	 *
+	 * @param groupId the group ID
+	 * @param twoLettersISOCode the two letters iso code
+	 * @return the matching commerce country
+	 * @throws NoSuchCountryException if a matching commerce country could not be found
+	 */
+	@Override
+	public CommerceCountry findByG_Tw(long groupId, String twoLettersISOCode)
+		throws NoSuchCountryException {
+		CommerceCountry commerceCountry = fetchByG_Tw(groupId, twoLettersISOCode);
+
+		if (commerceCountry == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", twoLettersISOCode=");
+			msg.append(twoLettersISOCode);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchCountryException(msg.toString());
+		}
+
+		return commerceCountry;
+	}
+
+	/**
+	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param twoLettersISOCode the two letters iso code
+	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
+	 */
+	@Override
+	public CommerceCountry fetchByG_Tw(long groupId, String twoLettersISOCode) {
+		return fetchByG_Tw(groupId, twoLettersISOCode, true);
+	}
+
+	/**
+	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param twoLettersISOCode the two letters iso code
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
+	 */
+	@Override
+	public CommerceCountry fetchByG_Tw(long groupId, String twoLettersISOCode,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { groupId, twoLettersISOCode };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_G_TW,
+					finderArgs, this);
+		}
+
+		if (result instanceof CommerceCountry) {
+			CommerceCountry commerceCountry = (CommerceCountry)result;
+
+			if ((groupId != commerceCountry.getGroupId()) ||
+					!Objects.equals(twoLettersISOCode,
+						commerceCountry.getTwoLettersISOCode())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_TW_GROUPID_2);
+
+			boolean bindTwoLettersISOCode = false;
+
+			if (twoLettersISOCode == null) {
+				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_1);
+			}
+			else if (twoLettersISOCode.equals("")) {
+				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_3);
+			}
+			else {
+				bindTwoLettersISOCode = true;
+
+				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (bindTwoLettersISOCode) {
+					qPos.add(twoLettersISOCode);
+				}
+
+				List<CommerceCountry> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_G_TW,
+						finderArgs, list);
+				}
+				else {
+					CommerceCountry commerceCountry = list.get(0);
+
+					result = commerceCountry;
+
+					cacheResult(commerceCountry);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_G_TW, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceCountry)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce country where groupId = &#63; and twoLettersISOCode = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param twoLettersISOCode the two letters iso code
+	 * @return the commerce country that was removed
+	 */
+	@Override
+	public CommerceCountry removeByG_Tw(long groupId, String twoLettersISOCode)
+		throws NoSuchCountryException {
+		CommerceCountry commerceCountry = findByG_Tw(groupId, twoLettersISOCode);
+
+		return remove(commerceCountry);
+	}
+
+	/**
+	 * Returns the number of commerce countries where groupId = &#63; and twoLettersISOCode = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param twoLettersISOCode the two letters iso code
+	 * @return the number of matching commerce countries
+	 */
+	@Override
+	public int countByG_Tw(long groupId, String twoLettersISOCode) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_TW;
+
+		Object[] finderArgs = new Object[] { groupId, twoLettersISOCode };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCECOUNTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_TW_GROUPID_2);
+
+			boolean bindTwoLettersISOCode = false;
+
+			if (twoLettersISOCode == null) {
+				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_1);
+			}
+			else if (twoLettersISOCode.equals("")) {
+				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_3);
+			}
+			else {
+				bindTwoLettersISOCode = true;
+
+				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (bindTwoLettersISOCode) {
+					qPos.add(twoLettersISOCode);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_G_TW_GROUPID_2 = "commerceCountry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_1 = "commerceCountry.twoLettersISOCode IS NULL";
+	private static final String _FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_2 = "commerceCountry.twoLettersISOCode = ?";
+	private static final String _FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_3 = "(commerceCountry.twoLettersISOCode IS NULL OR commerceCountry.twoLettersISOCode = '')";
 	public static final FinderPath FINDER_PATH_FETCH_BY_G_N = new FinderPath(CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCountryImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByG_N",
@@ -2749,254 +2997,6 @@ public class CommerceCountryPersistenceImpl extends BasePersistenceImpl<Commerce
 
 	private static final String _FINDER_COLUMN_G_A_GROUPID_2 = "commerceCountry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 = "commerceCountry.active = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_TW = new FinderPath(CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceCountryImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByG_Tw",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceCountryModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceCountryModelImpl.TWOLETTERSISOCODE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_TW = new FinderPath(CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCountryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_Tw",
-			new String[] { Long.class.getName(), String.class.getName() });
-
-	/**
-	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or throws a {@link NoSuchCountryException} if it could not be found.
-	 *
-	 * @param groupId the group ID
-	 * @param twoLettersISOCode the two letters iso code
-	 * @return the matching commerce country
-	 * @throws NoSuchCountryException if a matching commerce country could not be found
-	 */
-	@Override
-	public CommerceCountry findByG_Tw(long groupId, String twoLettersISOCode)
-		throws NoSuchCountryException {
-		CommerceCountry commerceCountry = fetchByG_Tw(groupId, twoLettersISOCode);
-
-		if (commerceCountry == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", twoLettersISOCode=");
-			msg.append(twoLettersISOCode);
-
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchCountryException(msg.toString());
-		}
-
-		return commerceCountry;
-	}
-
-	/**
-	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param groupId the group ID
-	 * @param twoLettersISOCode the two letters iso code
-	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
-	 */
-	@Override
-	public CommerceCountry fetchByG_Tw(long groupId, String twoLettersISOCode) {
-		return fetchByG_Tw(groupId, twoLettersISOCode, true);
-	}
-
-	/**
-	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param groupId the group ID
-	 * @param twoLettersISOCode the two letters iso code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
-	 */
-	@Override
-	public CommerceCountry fetchByG_Tw(long groupId, String twoLettersISOCode,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { groupId, twoLettersISOCode };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_G_TW,
-					finderArgs, this);
-		}
-
-		if (result instanceof CommerceCountry) {
-			CommerceCountry commerceCountry = (CommerceCountry)result;
-
-			if ((groupId != commerceCountry.getGroupId()) ||
-					!Objects.equals(twoLettersISOCode,
-						commerceCountry.getTwoLettersISOCode())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_G_TW_GROUPID_2);
-
-			boolean bindTwoLettersISOCode = false;
-
-			if (twoLettersISOCode == null) {
-				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_1);
-			}
-			else if (twoLettersISOCode.equals("")) {
-				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_3);
-			}
-			else {
-				bindTwoLettersISOCode = true;
-
-				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (bindTwoLettersISOCode) {
-					qPos.add(twoLettersISOCode);
-				}
-
-				List<CommerceCountry> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_G_TW,
-						finderArgs, list);
-				}
-				else {
-					CommerceCountry commerceCountry = list.get(0);
-
-					result = commerceCountry;
-
-					cacheResult(commerceCountry);
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_G_TW, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CommerceCountry)result;
-		}
-	}
-
-	/**
-	 * Removes the commerce country where groupId = &#63; and twoLettersISOCode = &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 * @param twoLettersISOCode the two letters iso code
-	 * @return the commerce country that was removed
-	 */
-	@Override
-	public CommerceCountry removeByG_Tw(long groupId, String twoLettersISOCode)
-		throws NoSuchCountryException {
-		CommerceCountry commerceCountry = findByG_Tw(groupId, twoLettersISOCode);
-
-		return remove(commerceCountry);
-	}
-
-	/**
-	 * Returns the number of commerce countries where groupId = &#63; and twoLettersISOCode = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param twoLettersISOCode the two letters iso code
-	 * @return the number of matching commerce countries
-	 */
-	@Override
-	public int countByG_Tw(long groupId, String twoLettersISOCode) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_TW;
-
-		Object[] finderArgs = new Object[] { groupId, twoLettersISOCode };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_COMMERCECOUNTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_G_TW_GROUPID_2);
-
-			boolean bindTwoLettersISOCode = false;
-
-			if (twoLettersISOCode == null) {
-				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_1);
-			}
-			else if (twoLettersISOCode.equals("")) {
-				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_3);
-			}
-			else {
-				bindTwoLettersISOCode = true;
-
-				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (bindTwoLettersISOCode) {
-					qPos.add(twoLettersISOCode);
-				}
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_G_TW_GROUPID_2 = "commerceCountry.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_1 = "commerceCountry.twoLettersISOCode IS NULL";
-	private static final String _FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_2 = "commerceCountry.twoLettersISOCode = ?";
-	private static final String _FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_3 = "(commerceCountry.twoLettersISOCode IS NULL OR commerceCountry.twoLettersISOCode = '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_B_A = new FinderPath(CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCountryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -4225,16 +4225,16 @@ public class CommerceCountryPersistenceImpl extends BasePersistenceImpl<Commerce
 			new Object[] { commerceCountry.getUuid(), commerceCountry.getGroupId() },
 			commerceCountry);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_N,
-			new Object[] {
-				commerceCountry.getGroupId(),
-				commerceCountry.getNumericISOCode()
-			}, commerceCountry);
-
 		finderCache.putResult(FINDER_PATH_FETCH_BY_G_TW,
 			new Object[] {
 				commerceCountry.getGroupId(),
 				commerceCountry.getTwoLettersISOCode()
+			}, commerceCountry);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_G_N,
+			new Object[] {
+				commerceCountry.getGroupId(),
+				commerceCountry.getNumericISOCode()
 			}, commerceCountry);
 
 		commerceCountry.resetOriginalValues();
@@ -4322,22 +4322,22 @@ public class CommerceCountryPersistenceImpl extends BasePersistenceImpl<Commerce
 
 		args = new Object[] {
 				commerceCountryModelImpl.getGroupId(),
-				commerceCountryModelImpl.getNumericISOCode()
-			};
-
-		finderCache.putResult(FINDER_PATH_COUNT_BY_G_N, args, Long.valueOf(1),
-			false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_N, args,
-			commerceCountryModelImpl, false);
-
-		args = new Object[] {
-				commerceCountryModelImpl.getGroupId(),
 				commerceCountryModelImpl.getTwoLettersISOCode()
 			};
 
 		finderCache.putResult(FINDER_PATH_COUNT_BY_G_TW, args, Long.valueOf(1),
 			false);
 		finderCache.putResult(FINDER_PATH_FETCH_BY_G_TW, args,
+			commerceCountryModelImpl, false);
+
+		args = new Object[] {
+				commerceCountryModelImpl.getGroupId(),
+				commerceCountryModelImpl.getNumericISOCode()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_G_N, args, Long.valueOf(1),
+			false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_G_N, args,
 			commerceCountryModelImpl, false);
 	}
 
@@ -4367,27 +4367,6 @@ public class CommerceCountryPersistenceImpl extends BasePersistenceImpl<Commerce
 		if (clearCurrent) {
 			Object[] args = new Object[] {
 					commerceCountryModelImpl.getGroupId(),
-					commerceCountryModelImpl.getNumericISOCode()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
-		}
-
-		if ((commerceCountryModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceCountryModelImpl.getOriginalGroupId(),
-					commerceCountryModelImpl.getOriginalNumericISOCode()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
-		}
-
-		if (clearCurrent) {
-			Object[] args = new Object[] {
-					commerceCountryModelImpl.getGroupId(),
 					commerceCountryModelImpl.getTwoLettersISOCode()
 				};
 
@@ -4404,6 +4383,27 @@ public class CommerceCountryPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_TW, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_TW, args);
+		}
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					commerceCountryModelImpl.getGroupId(),
+					commerceCountryModelImpl.getNumericISOCode()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
+		}
+
+		if ((commerceCountryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					commerceCountryModelImpl.getOriginalGroupId(),
+					commerceCountryModelImpl.getOriginalNumericISOCode()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
 		}
 	}
 
