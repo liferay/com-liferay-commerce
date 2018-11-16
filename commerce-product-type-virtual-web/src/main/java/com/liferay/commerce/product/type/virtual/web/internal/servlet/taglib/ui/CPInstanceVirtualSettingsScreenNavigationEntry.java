@@ -15,17 +15,21 @@
 package com.liferay.commerce.product.type.virtual.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
 import com.liferay.commerce.product.type.virtual.web.internal.display.context.CPDefinitionVirtualSettingDisplayContext;
 import com.liferay.commerce.product.type.virtual.web.internal.portlet.action.CPDefinitionVirtualSettingActionHelper;
 import com.liferay.document.library.kernel.service.DLAppService;
-import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.journal.service.JournalArticleService;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -46,23 +50,20 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alessio Antonio Rendina
  */
 @Component(
-	property = {
-		"screen.navigation.category.order:Integer=20",
-		"screen.navigation.entry.order:Integer=20"
-	},
-	service = {ScreenNavigationCategory.class, ScreenNavigationEntry.class}
+	property = "screen.navigation.entry.order:Integer=50",
+	service = ScreenNavigationEntry.class
 )
-public class CPDefinitionCPTypeVirtualScreenNavigationEntry
-	implements ScreenNavigationCategory, ScreenNavigationEntry<CPDefinition> {
+public class CPInstanceVirtualSettingsScreenNavigationEntry
+	implements ScreenNavigationEntry<CPInstance> {
 
 	@Override
 	public String getCategoryKey() {
-		return VirtualCPTypeConstants.NAME;
+		return CPInstanceScreenNavigationConstants.CATEGORY_KEY_DETAILS;
 	}
 
 	@Override
 	public String getEntryKey() {
-		return VirtualCPTypeConstants.NAME;
+		return "virtual-settings";
 	}
 
 	@Override
@@ -70,24 +71,32 @@ public class CPDefinitionCPTypeVirtualScreenNavigationEntry
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, getClass());
 
-		return LanguageUtil.get(resourceBundle, "virtual");
+		return LanguageUtil.get(resourceBundle, "virtual-settings-override");
 	}
 
 	@Override
 	public String getScreenNavigationKey() {
-		return "cp.definition.general";
+		return CPInstanceScreenNavigationConstants.
+			SCREEN_NAVIGATION_KEY_CP_INSTANCE_GENERAL;
 	}
 
 	@Override
-	public boolean isVisible(User user, CPDefinition cpDefinition) {
-		if (cpDefinition == null) {
+	public boolean isVisible(User user, CPInstance cpInstance) {
+		if (cpInstance == null) {
 			return false;
 		}
 
-		String productTypeName = cpDefinition.getProductTypeName();
+		try {
+			CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
-		if (productTypeName.equals(VirtualCPTypeConstants.NAME)) {
-			return true;
+			String productTypeName = cpDefinition.getProductTypeName();
+
+			if (productTypeName.equals(VirtualCPTypeConstants.NAME)) {
+				return true;
+			}
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
 		}
 
 		return false;
@@ -112,8 +121,11 @@ public class CPDefinitionCPTypeVirtualScreenNavigationEntry
 
 		_jspRenderer.renderJSP(
 			_servletContext, httpServletRequest, httpServletResponse,
-			"/edit_definition_virtual_setting.jsp");
+			"/edit_instance_virtual_setting.jsp");
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPInstanceVirtualSettingsScreenNavigationEntry.class);
 
 	@Reference
 	private ActionHelper _actionHelper;

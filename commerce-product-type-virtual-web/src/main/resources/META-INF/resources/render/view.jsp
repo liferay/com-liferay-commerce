@@ -22,9 +22,17 @@ VirtualCPTypeHelper virtualCPTypeHelper = (VirtualCPTypeHelper)request.getAttrib
 CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
 CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
-CPInstance cpInstance = cpContentHelper.getDefaultCPInstance(request);
+CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 
 long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
+
+long cpInstanceId = 0;
+
+if (cpSku != null) {
+	cpInstanceId = cpSku.getCPInstanceId();
+}
+
+String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId, themeDisplay);
 %>
 
 <div class="container-fluid product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
@@ -63,10 +71,12 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 				<h1><%= cpCatalogEntry.getName() %></h1>
 
 				<c:choose>
-					<c:when test="<%= cpInstance != null %>">
-						<h4 class="sku"><%= cpInstance.getSku() %></h4>
+					<c:when test="<%= cpSku != null %>">
+						<h4 class="sku"><%= cpSku.getSku() %></h4>
 
-						<div class="price"><%= cpInstance.getPrice() %></div>
+						<div class="price"><liferay-commerce:price CPDefinitionId="<%= cpDefinitionId %>" CPInstanceId="<%= cpSku.getCPInstanceId() %>" /></div>
+
+						<div class="subscription-info"><liferay-commerce:subscription-info CPInstanceId="<%= cpSku.getCPInstanceId() %>" /></div>
 
 						<div class="availability"><%= cpContentHelper.getAvailabilityLabel(request) %></div>
 
@@ -79,9 +89,11 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 						<div class="price" data-text-cp-instance-price=""></div>
 
+						<div class="subscription-info" data-text-cp-instance-subscription-info="" data-text-cp-instance-subscription-info-show></div>
+
 						<div class="availability" data-text-cp-instance-availability=""></div>
 
-						<div class="AvailabilityEstimate" data-text-cp-instance-availability-estimate=""></div>
+						<div class="availabilityEstimate" data-text-cp-instance-availability-estimate=""></div>
 
 						<div class="stockQuantity" data-text-cp-instance-stock-quantity=""></div>
 					</c:otherwise>
@@ -89,11 +101,16 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 				<div class="row">
 					<div class="col-md-12">
-						<c:if test="<%= Validator.isNotNull(virtualCPTypeHelper.getSampleURL(cpDefinitionId, themeDisplay)) %>">
-							<a class="btn btn-primary" href="<%= virtualCPTypeHelper.getSampleURL(cpDefinitionId, themeDisplay) %>" style="margin: 50px 0;">
-								<liferay-ui:message key="download-sample-file" />
-							</a>
-						</c:if>
+						<c:choose>
+							<c:when test="<%= Validator.isNotNull(sampleURL) %>">
+								<a class="btn btn-primary" href="<%= sampleURL %>">
+									<liferay-ui:message key="download-sample-file" />
+								</a>
+							</c:when>
+							<c:otherwise>
+								<div class="sampleFile" data-text-cp-instance-sample-file="" data-text-cp-instance-sample-file-show></div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 
