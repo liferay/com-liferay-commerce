@@ -22,6 +22,9 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CommerceVirtualOrderItemFinder {
+	public java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> findByEndDate(
+		java.util.Date endDate);
+
 	public java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> findByG_O(
 		long groupId, long organizationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator);

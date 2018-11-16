@@ -78,7 +78,15 @@ public interface CPDefinitionVirtualSettingLocalService extends BaseLocalService
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting);
 
 	public CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
-		long cpDefinitionId, long fileEntryId, String url,
+		String className, long classPK, long fileEntryId, String url,
+		int activationStatus, long duration, int maxUsages, boolean useSample,
+		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
+		Map<Locale, String> termsOfUseContentMap,
+		long termsOfUseJournalArticleResourcePrimKey, boolean override,
+		ServiceContext serviceContext) throws PortalException;
+
+	public CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
+		String className, long classPK, long fileEntryId, String url,
 		int activationStatus, long duration, int maxUsages, boolean useSample,
 		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
 		Map<Locale, String> termsOfUseContentMap,
@@ -116,8 +124,8 @@ public interface CPDefinitionVirtualSettingLocalService extends BaseLocalService
 	public CPDefinitionVirtualSetting deleteCPDefinitionVirtualSetting(
 		long CPDefinitionVirtualSettingId) throws PortalException;
 
-	public CPDefinitionVirtualSetting deleteCPDefinitionVirtualSettingByCPDefinitionId(
-		long cpDefinitionId);
+	public CPDefinitionVirtualSetting deleteCPDefinitionVirtualSetting(
+		String className, long classPK);
 
 	/**
 	* @throws PortalException
@@ -196,8 +204,8 @@ public interface CPDefinitionVirtualSettingLocalService extends BaseLocalService
 		long CPDefinitionVirtualSettingId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDefinitionVirtualSetting fetchCPDefinitionVirtualSettingByCPDefinitionId(
-		long cpDefinitionId);
+	public CPDefinitionVirtualSetting fetchCPDefinitionVirtualSetting(
+		String className, long classPK);
 
 	/**
 	* Returns the cp definition virtual setting matching the UUID and group.
@@ -225,8 +233,8 @@ public interface CPDefinitionVirtualSettingLocalService extends BaseLocalService
 		long CPDefinitionVirtualSettingId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDefinitionVirtualSetting getCPDefinitionVirtualSettingByCPDefinitionId(
-		long cpDefinitionId) throws PortalException;
+	public CPDefinitionVirtualSetting getCPDefinitionVirtualSetting(
+		String className, long classPK) throws PortalException;
 
 	/**
 	* Returns the cp definition virtual setting matching the UUID and group.
@@ -317,6 +325,14 @@ public interface CPDefinitionVirtualSettingLocalService extends BaseLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CPDefinitionVirtualSetting updateCPDefinitionVirtualSetting(
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting);
+
+	public CPDefinitionVirtualSetting updateCPDefinitionVirtualSetting(
+		long cpDefinitionVirtualSettingId, long fileEntryId, String url,
+		int activationStatus, long duration, int maxUsages, boolean useSample,
+		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
+		Map<Locale, String> termsOfUseContentMap,
+		long termsOfUseJournalArticleResourcePrimKey, boolean override,
+		ServiceContext serviceContext) throws PortalException;
 
 	public CPDefinitionVirtualSetting updateCPDefinitionVirtualSetting(
 		long cpDefinitionVirtualSettingId, long fileEntryId, String url,

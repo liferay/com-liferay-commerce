@@ -297,25 +297,18 @@ public interface CommerceSubscriptionEntryModel extends BaseModel<CommerceSubscr
 	public void setMaxSubscriptionCycles(long maxSubscriptionCycles);
 
 	/**
-	 * Returns the active of this commerce subscription entry.
+	 * Returns the subscription status of this commerce subscription entry.
 	 *
-	 * @return the active of this commerce subscription entry
+	 * @return the subscription status of this commerce subscription entry
 	 */
-	public boolean getActive();
+	public int getSubscriptionStatus();
 
 	/**
-	 * Returns <code>true</code> if this commerce subscription entry is active.
+	 * Sets the subscription status of this commerce subscription entry.
 	 *
-	 * @return <code>true</code> if this commerce subscription entry is active; <code>false</code> otherwise
+	 * @param subscriptionStatus the subscription status of this commerce subscription entry
 	 */
-	public boolean isActive();
-
-	/**
-	 * Sets whether this commerce subscription entry is active.
-	 *
-	 * @param active the active of this commerce subscription entry
-	 */
-	public void setActive(boolean active);
+	public void setSubscriptionStatus(int subscriptionStatus);
 
 	/**
 	 * Returns the last iteration date of this commerce subscription entry.

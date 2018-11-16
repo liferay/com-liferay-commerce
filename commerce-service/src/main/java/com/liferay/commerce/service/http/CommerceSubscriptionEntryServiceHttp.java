@@ -187,8 +187,9 @@ public class CommerceSubscriptionEntryServiceHttp {
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(
 		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		Long maxSubscriptionCycles, Boolean active, String keywords, int start,
-		int end, com.liferay.portal.kernel.search.Sort sort)
+		Long maxSubscriptionCycles, Integer subscriptionStatus,
+		String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
@@ -196,8 +197,8 @@ public class CommerceSubscriptionEntryServiceHttp {
 					_searchCommerceSubscriptionEntriesParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, maxSubscriptionCycles, active,
-					keywords, start, end, sort);
+					companyId, groupId, maxSubscriptionCycles,
+					subscriptionStatus, keywords, start, end, sort);
 
 			Object returnObj = null;
 
@@ -221,16 +222,29 @@ public class CommerceSubscriptionEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceSubscriptionEntry setActive(
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry updateCommerceSubscriptionEntry(
 		HttpPrincipal httpPrincipal, long commerceSubscriptionEntryId,
-		boolean active)
+		int subscriptionLength, String subscriptionType,
+		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
+		long maxSubscriptionCycles, int subscriptionStatus, int startDateMonth,
+		int startDateDay, int startDateYear, int startDateHour,
+		int startDateMinute, int nextIterationDateMonth,
+		int nextIterationDateDay, int nextIterationDateYear,
+		int nextIterationDateHour, int nextIterationDateMinute)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
-					"setActive", _setActiveParameterTypes5);
+					"updateCommerceSubscriptionEntry",
+					_updateCommerceSubscriptionEntryParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceSubscriptionEntryId, active);
+					commerceSubscriptionEntryId, subscriptionLength,
+					subscriptionType, subscriptionTypeSettingsProperties,
+					maxSubscriptionCycles, subscriptionStatus, startDateMonth,
+					startDateDay, startDateYear, startDateHour,
+					startDateMinute, nextIterationDateMonth,
+					nextIterationDateDay, nextIterationDateYear,
+					nextIterationDateHour, nextIterationDateMinute);
 
 			Object returnObj = null;
 
@@ -254,29 +268,17 @@ public class CommerceSubscriptionEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceSubscriptionEntry updateCommerceSubscriptionEntry(
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry updateSubscriptionStatus(
 		HttpPrincipal httpPrincipal, long commerceSubscriptionEntryId,
-		int subscriptionLength, String subscriptionType,
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, boolean active, int startDateMonth,
-		int startDateDay, int startDateYear, int startDateHour,
-		int startDateMinute, int nextIterationDateMonth,
-		int nextIterationDateDay, int nextIterationDateYear,
-		int nextIterationDateHour, int nextIterationDateMinute)
+		int subscriptionStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
-					"updateCommerceSubscriptionEntry",
-					_updateCommerceSubscriptionEntryParameterTypes6);
+					"updateSubscriptionStatus",
+					_updateSubscriptionStatusParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceSubscriptionEntryId, subscriptionLength,
-					subscriptionType, subscriptionTypeSettingsProperties,
-					maxSubscriptionCycles, active, startDateMonth,
-					startDateDay, startDateYear, startDateHour,
-					startDateMinute, nextIterationDateMonth,
-					nextIterationDateDay, nextIterationDateYear,
-					nextIterationDateHour, nextIterationDateMinute);
+					commerceSubscriptionEntryId, subscriptionStatus);
 
 			Object returnObj = null;
 
@@ -314,17 +316,17 @@ public class CommerceSubscriptionEntryServiceHttp {
 		new Class[] { long.class, long.class };
 	private static final Class<?>[] _searchCommerceSubscriptionEntriesParameterTypes4 =
 		new Class[] {
-			long.class, long.class, Long.class, Boolean.class, String.class,
+			long.class, long.class, Long.class, Integer.class, String.class,
 			int.class, int.class, com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _setActiveParameterTypes5 = new Class[] {
-			long.class, boolean.class
-		};
-	private static final Class<?>[] _updateCommerceSubscriptionEntryParameterTypes6 =
+	private static final Class<?>[] _updateCommerceSubscriptionEntryParameterTypes5 =
 		new Class[] {
 			long.class, int.class, String.class,
 			com.liferay.portal.kernel.util.UnicodeProperties.class, long.class,
-			boolean.class, int.class, int.class, int.class, int.class, int.class,
+			int.class, int.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class
+		};
+	private static final Class<?>[] _updateSubscriptionStatusParameterTypes6 = new Class[] {
+			long.class, int.class
 		};
 }

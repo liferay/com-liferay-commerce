@@ -313,13 +313,8 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(
 		long companyId, long groupId, Long maxSubscriptionCycles,
-		Boolean active, String keywords, int start, int end, Sort sort)
-		throws PortalException;
-
-	@Indexable(type = IndexableType.REINDEX)
-	public CommerceSubscriptionEntry setActive(
-		long commerceSubscriptionEntryId, boolean active)
-		throws PortalException;
+		Integer subscriptionStatus, String keywords, int start, int end,
+		Sort sort) throws PortalException;
 
 	/**
 	* Updates the commerce subscription entry in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
@@ -336,7 +331,7 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 		long commerceSubscriptionEntryId, int subscriptionLength,
 		String subscriptionType,
 		UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, boolean active, int startDateMonth,
+		long maxSubscriptionCycles, int subscriptionStatus, int startDateMonth,
 		int startDateDay, int startDateYear, int startDateHour,
 		int startDateMinute, int nextIterationDateMonth,
 		int nextIterationDateDay, int nextIterationDateYear,
@@ -345,5 +340,10 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 
 	public CommerceSubscriptionEntry updateCommerceSubscriptionEntryIterationDates(
 		long commerceSubscriptionEntryId, Date lastIterationDate)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceSubscriptionEntry updateSubscriptionStatus(
+		long commerceSubscriptionEntryId, int subscriptionStatus)
 		throws PortalException;
 }

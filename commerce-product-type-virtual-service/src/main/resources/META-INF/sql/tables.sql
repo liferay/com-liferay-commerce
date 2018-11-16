@@ -7,7 +7,8 @@ create table CPDefinitionVirtualSetting (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	CPDefinitionId LONG,
+	classNameId LONG,
+	classPK LONG,
 	fileEntryId LONG,
 	url VARCHAR(75) null,
 	activationStatus INTEGER,
@@ -19,5 +20,6 @@ create table CPDefinitionVirtualSetting (
 	termsOfUseRequired BOOLEAN,
 	termsOfUseContent STRING null,
 	termsOfUseArticleResourcePK LONG,
+	override BOOLEAN,
 	lastPublishDate DATE null
 );
