@@ -1,5 +1,17 @@
+copyLibs {
+	enabled = true
+}
+
 dependencies {
+	compileOnly group: "com.github.ignaciotcrespo", name: "frutilla", version: "0.7.1"
+
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.7"
 	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.5.0"
+	testIntegrationCompile project(":apps:commerce:commerce-api")
+	testIntegrationCompile project(":apps:commerce:commerce-product-api")
+	testIntegrationCompile project(":apps:commerce:commerce-product-test-util")
+	testIntegrationCompile project(":apps:commerce:commerce-product-type-virtual-api")
 	testIntegrationCompile project(":apps:commerce:commerce-product-type-virtual-order-api")
+	testIntegrationCompile project(":apps:commerce:commerce-product-type-virtual-test-util")
+	testIntegrationCompile project(":apps:commerce:commerce-test-util")
 }
