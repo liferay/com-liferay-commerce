@@ -57,7 +57,15 @@ public interface CPDefinitionVirtualSettingService extends BaseService {
 	 * Never modify or reference this interface directly. Always use {@link CPDefinitionVirtualSettingServiceUtil} to access the cp definition virtual setting remote service. Add custom service methods to {@link com.liferay.commerce.product.type.virtual.service.impl.CPDefinitionVirtualSettingServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
-		long cpDefinitionId, long fileEntryId, String url,
+		String className, long classPK, long fileEntryId, String url,
+		int activationStatus, long duration, int maxUsages, boolean useSample,
+		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
+		Map<Locale, String> termsOfUseContentMap,
+		long termsOfUseJournalArticleResourcePrimKey, boolean override,
+		ServiceContext serviceContext) throws PortalException;
+
+	public CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
+		String className, long classPK, long fileEntryId, String url,
 		int activationStatus, long duration, int maxUsages, boolean useSample,
 		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
 		Map<Locale, String> termsOfUseContentMap,
@@ -65,8 +73,8 @@ public interface CPDefinitionVirtualSettingService extends BaseService {
 		ServiceContext serviceContext) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDefinitionVirtualSetting fetchCPDefinitionVirtualSettingByCPDefinitionId(
-		long cpDefinitionId) throws PortalException;
+	public CPDefinitionVirtualSetting fetchCPDefinitionVirtualSetting(
+		String className, long classPK) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -74,6 +82,14 @@ public interface CPDefinitionVirtualSettingService extends BaseService {
 	* @return the OSGi service identifier
 	*/
 	public String getOSGiServiceIdentifier();
+
+	public CPDefinitionVirtualSetting updateCPDefinitionVirtualSetting(
+		long cpDefinitionVirtualSettingId, long fileEntryId, String url,
+		int activationStatus, long duration, int maxUsages, boolean useSample,
+		long sampleFileEntryId, String sampleUrl, boolean termsOfUseRequired,
+		Map<Locale, String> termsOfUseContentMap,
+		long termsOfUseJournalArticleResourcePrimKey, boolean override,
+		ServiceContext serviceContext) throws PortalException;
 
 	public CPDefinitionVirtualSetting updateCPDefinitionVirtualSetting(
 		long cpDefinitionVirtualSettingId, long fileEntryId, String url,

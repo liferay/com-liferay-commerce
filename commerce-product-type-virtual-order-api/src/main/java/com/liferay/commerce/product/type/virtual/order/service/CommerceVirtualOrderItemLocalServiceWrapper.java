@@ -66,6 +66,12 @@ public class CommerceVirtualOrderItemLocalServiceWrapper
 			serviceContext);
 	}
 
+	@Override
+	public void checkCommerceVirtualOrderItems()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceVirtualOrderItemLocalService.checkCommerceVirtualOrderItems();
+	}
+
 	/**
 	* Creates a new commerce virtual order item with the primary key. Does not add the commerce virtual order item to the database.
 	*
@@ -102,6 +108,12 @@ public class CommerceVirtualOrderItemLocalServiceWrapper
 		long commerceVirtualOrderItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceVirtualOrderItemLocalService.deleteCommerceVirtualOrderItem(commerceVirtualOrderItemId);
+	}
+
+	@Override
+	public void deleteCommerceVirtualOrderItemByCommerceOrderItemId(
+		long commerceOrderItemId) {
+		_commerceVirtualOrderItemLocalService.deleteCommerceVirtualOrderItemByCommerceOrderItemId(commerceOrderItemId);
 	}
 
 	/**
@@ -372,10 +384,10 @@ public class CommerceVirtualOrderItemLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> getUserCommerceVirtualOrderItems(
-		long groupId, long user, int start, int end,
+		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator) {
 		return _commerceVirtualOrderItemLocalService.getUserCommerceVirtualOrderItems(groupId,
-			user, start, end, orderByComparator);
+			userId, start, end, orderByComparator);
 	}
 
 	@Override
@@ -419,6 +431,13 @@ public class CommerceVirtualOrderItemLocalServiceWrapper
 		return _commerceVirtualOrderItemLocalService.updateCommerceVirtualOrderItem(commerceVirtualOrderItemId,
 			fileEntryId, url, activationStatus, duration, usages, maxUsages,
 			active);
+	}
+
+	@Override
+	public com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem updateCommerceVirtualOrderItemDates(
+		long commerceVirtualOrderItemId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceVirtualOrderItemLocalService.updateCommerceVirtualOrderItemDates(commerceVirtualOrderItemId);
 	}
 
 	@Override

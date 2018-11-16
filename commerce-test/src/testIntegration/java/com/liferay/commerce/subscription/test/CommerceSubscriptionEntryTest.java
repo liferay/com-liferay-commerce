@@ -216,7 +216,9 @@ public class CommerceSubscriptionEntryTest {
 
 		Assert.assertEquals(1, commerceSubscriptionCycleEntriesCount);
 
-		Assert.assertEquals(true, commerceSubscriptionEntry.isActive());
+		Assert.assertEquals(
+			CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE,
+			commerceSubscriptionEntry.getSubscriptionStatus());
 
 		// Renew with the actual date
 
@@ -235,7 +237,9 @@ public class CommerceSubscriptionEntryTest {
 				commerceSubscriptionEntry.getCommerceSubscriptionEntryId());
 
 		Assert.assertEquals(2, commerceSubscriptionCycleEntriesCount);
-		Assert.assertEquals(false, commerceSubscriptionEntry.isActive());
+		Assert.assertEquals(
+			CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_COMPLETED,
+			commerceSubscriptionEntry.getSubscriptionStatus());
 	}
 
 	@Rule

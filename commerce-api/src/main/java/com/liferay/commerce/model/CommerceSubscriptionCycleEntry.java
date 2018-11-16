@@ -60,8 +60,7 @@ public interface CommerceSubscriptionCycleEntry
 	public CommerceOrder fetchCommerceOrder()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public CommerceOrderItem fetchCommerceOrderItem()
-		throws com.liferay.portal.kernel.exception.PortalException;
+	public CommerceOrderItem fetchCommerceOrderItem();
 
 	public CommerceSubscriptionEntry getCommerceSubscriptionEntry()
 		throws com.liferay.portal.kernel.exception.PortalException;

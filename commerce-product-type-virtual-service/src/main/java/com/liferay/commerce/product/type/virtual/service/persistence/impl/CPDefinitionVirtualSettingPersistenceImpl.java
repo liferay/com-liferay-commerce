@@ -1503,35 +1503,43 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "cpDefinitionVirtualSetting.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(cpDefinitionVirtualSetting.uuid IS NULL OR cpDefinitionVirtualSetting.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "cpDefinitionVirtualSetting.companyId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_CPDEFINITIONID = new FinderPath(CPDefinitionVirtualSettingModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(CPDefinitionVirtualSettingModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionVirtualSettingModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionVirtualSettingImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByCPDefinitionId", new String[] { Long.class.getName() },
-			CPDefinitionVirtualSettingModelImpl.CPDEFINITIONID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CPDEFINITIONID = new FinderPath(CPDefinitionVirtualSettingModelImpl.ENTITY_CACHE_ENABLED,
+			"fetchByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			CPDefinitionVirtualSettingModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CPDefinitionVirtualSettingModelImpl.CLASSPK_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(CPDefinitionVirtualSettingModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionVirtualSettingModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCPDefinitionId", new String[] { Long.class.getName() });
+			"countByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns the cp definition virtual setting where CPDefinitionId = &#63; or throws a {@link NoSuchCPDefinitionVirtualSettingException} if it could not be found.
+	 * Returns the cp definition virtual setting where classNameId = &#63; and classPK = &#63; or throws a {@link NoSuchCPDefinitionVirtualSettingException} if it could not be found.
 	 *
-	 * @param CPDefinitionId the cp definition ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
 	 * @return the matching cp definition virtual setting
 	 * @throws NoSuchCPDefinitionVirtualSettingException if a matching cp definition virtual setting could not be found
 	 */
 	@Override
-	public CPDefinitionVirtualSetting findByCPDefinitionId(long CPDefinitionId)
+	public CPDefinitionVirtualSetting findByC_C(long classNameId, long classPK)
 		throws NoSuchCPDefinitionVirtualSettingException {
-		CPDefinitionVirtualSetting cpDefinitionVirtualSetting = fetchByCPDefinitionId(CPDefinitionId);
+		CPDefinitionVirtualSetting cpDefinitionVirtualSetting = fetchByC_C(classNameId,
+				classPK);
 
 		if (cpDefinitionVirtualSetting == null) {
-			StringBundler msg = new StringBundler(4);
+			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("CPDefinitionId=");
-			msg.append(CPDefinitionId);
+			msg.append("classNameId=");
+			msg.append(classNameId);
+
+			msg.append(", classPK=");
+			msg.append(classPK);
 
 			msg.append("}");
 
@@ -1546,49 +1554,54 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 	}
 
 	/**
-	 * Returns the cp definition virtual setting where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cp definition virtual setting where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param CPDefinitionId the cp definition ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
 	 * @return the matching cp definition virtual setting, or <code>null</code> if a matching cp definition virtual setting could not be found
 	 */
 	@Override
-	public CPDefinitionVirtualSetting fetchByCPDefinitionId(long CPDefinitionId) {
-		return fetchByCPDefinitionId(CPDefinitionId, true);
+	public CPDefinitionVirtualSetting fetchByC_C(long classNameId, long classPK) {
+		return fetchByC_C(classNameId, classPK, true);
 	}
 
 	/**
-	 * Returns the cp definition virtual setting where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the cp definition virtual setting where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param CPDefinitionId the cp definition ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching cp definition virtual setting, or <code>null</code> if a matching cp definition virtual setting could not be found
 	 */
 	@Override
-	public CPDefinitionVirtualSetting fetchByCPDefinitionId(
-		long CPDefinitionId, boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { CPDefinitionId };
+	public CPDefinitionVirtualSetting fetchByC_C(long classNameId,
+		long classPK, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_C,
 					finderArgs, this);
 		}
 
 		if (result instanceof CPDefinitionVirtualSetting) {
 			CPDefinitionVirtualSetting cpDefinitionVirtualSetting = (CPDefinitionVirtualSetting)result;
 
-			if ((CPDefinitionId != cpDefinitionVirtualSetting.getCPDefinitionId())) {
+			if ((classNameId != cpDefinitionVirtualSetting.getClassNameId()) ||
+					(classPK != cpDefinitionVirtualSetting.getClassPK())) {
 				result = null;
 			}
 		}
 
 		if (result == null) {
-			StringBundler query = new StringBundler(3);
+			StringBundler query = new StringBundler(4);
 
 			query.append(_SQL_SELECT_CPDEFINITIONVIRTUALSETTING_WHERE);
 
-			query.append(_FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2);
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 			String sql = query.toString();
 
@@ -1601,13 +1614,15 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId);
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
 
 				List<CPDefinitionVirtualSetting> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
-						finderArgs, list);
+					finderCache.putResult(FINDER_PATH_FETCH_BY_C_C, finderArgs,
+						list);
 				}
 				else {
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting = list.get(0);
@@ -1618,8 +1633,7 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
-					finderArgs);
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, finderArgs);
 
 				throw processException(e);
 			}
@@ -1637,39 +1651,44 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 	}
 
 	/**
-	 * Removes the cp definition virtual setting where CPDefinitionId = &#63; from the database.
+	 * Removes the cp definition virtual setting where classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param CPDefinitionId the cp definition ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
 	 * @return the cp definition virtual setting that was removed
 	 */
 	@Override
-	public CPDefinitionVirtualSetting removeByCPDefinitionId(
-		long CPDefinitionId) throws NoSuchCPDefinitionVirtualSettingException {
-		CPDefinitionVirtualSetting cpDefinitionVirtualSetting = findByCPDefinitionId(CPDefinitionId);
+	public CPDefinitionVirtualSetting removeByC_C(long classNameId, long classPK)
+		throws NoSuchCPDefinitionVirtualSettingException {
+		CPDefinitionVirtualSetting cpDefinitionVirtualSetting = findByC_C(classNameId,
+				classPK);
 
 		return remove(cpDefinitionVirtualSetting);
 	}
 
 	/**
-	 * Returns the number of cp definition virtual settings where CPDefinitionId = &#63;.
+	 * Returns the number of cp definition virtual settings where classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param CPDefinitionId the cp definition ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
 	 * @return the number of matching cp definition virtual settings
 	 */
 	@Override
-	public int countByCPDefinitionId(long CPDefinitionId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPDEFINITIONID;
+	public int countByC_C(long classNameId, long classPK) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
 
-		Object[] finderArgs = new Object[] { CPDefinitionId };
+		Object[] finderArgs = new Object[] { classNameId, classPK };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(2);
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_COUNT_CPDEFINITIONVIRTUALSETTING_WHERE);
 
-			query.append(_FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2);
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 			String sql = query.toString();
 
@@ -1682,7 +1701,9 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId);
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
 
 				count = (Long)q.uniqueResult();
 
@@ -1701,7 +1722,8 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2 = "cpDefinitionVirtualSetting.CPDefinitionId = ?";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "cpDefinitionVirtualSetting.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "cpDefinitionVirtualSetting.classPK = ?";
 
 	public CPDefinitionVirtualSettingPersistenceImpl() {
 		setModelClass(CPDefinitionVirtualSetting.class);
@@ -1746,9 +1768,11 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 				cpDefinitionVirtualSetting.getGroupId()
 			}, cpDefinitionVirtualSetting);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID,
-			new Object[] { cpDefinitionVirtualSetting.getCPDefinitionId() },
-			cpDefinitionVirtualSetting);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C,
+			new Object[] {
+				cpDefinitionVirtualSetting.getClassNameId(),
+				cpDefinitionVirtualSetting.getClassPK()
+			}, cpDefinitionVirtualSetting);
 
 		cpDefinitionVirtualSetting.resetOriginalValues();
 	}
@@ -1840,12 +1864,13 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 			cpDefinitionVirtualSettingModelImpl, false);
 
 		args = new Object[] {
-				cpDefinitionVirtualSettingModelImpl.getCPDefinitionId()
+				cpDefinitionVirtualSettingModelImpl.getClassNameId(),
+				cpDefinitionVirtualSettingModelImpl.getClassPK()
 			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID, args,
-			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID, args,
+		finderCache.putResult(FINDER_PATH_COUNT_BY_C_C, args, Long.valueOf(1),
+			false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C, args,
 			cpDefinitionVirtualSettingModelImpl, false);
 	}
 
@@ -1875,21 +1900,23 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					cpDefinitionVirtualSettingModelImpl.getCPDefinitionId()
+					cpDefinitionVirtualSettingModelImpl.getClassNameId(),
+					cpDefinitionVirtualSettingModelImpl.getClassPK()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
 		}
 
 		if ((cpDefinitionVirtualSettingModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_CPDEFINITIONID.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
 			Object[] args = new Object[] {
-					cpDefinitionVirtualSettingModelImpl.getOriginalCPDefinitionId()
+					cpDefinitionVirtualSettingModelImpl.getOriginalClassNameId(),
+					cpDefinitionVirtualSettingModelImpl.getOriginalClassPK()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_CPDEFINITIONID, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
 		}
 	}
 

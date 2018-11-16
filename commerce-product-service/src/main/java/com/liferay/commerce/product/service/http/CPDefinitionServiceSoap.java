@@ -248,6 +248,24 @@ public class CPDefinitionServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinitionSoap[] getCPDefinitions(
+		long groupId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinition> orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CPDefinition> returnValue =
+				CPDefinitionServiceUtil.getCPDefinitions(groupId, status,
+					start, end, orderByComparator);
+
+			return com.liferay.commerce.product.model.CPDefinitionSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPDefinitionSoap[] getCPDefinitions(
 		long groupId, String productTypeName, String languageId, int status,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinition> orderByComparator)

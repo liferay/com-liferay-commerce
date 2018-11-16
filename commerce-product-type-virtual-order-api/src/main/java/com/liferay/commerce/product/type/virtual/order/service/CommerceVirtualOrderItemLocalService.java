@@ -85,6 +85,8 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 		long commerceOrderItemId, ServiceContext serviceContext)
 		throws PortalException;
 
+	public void checkCommerceVirtualOrderItems() throws PortalException;
+
 	/**
 	* Creates a new commerce virtual order item with the primary key. Does not add the commerce virtual order item to the database.
 	*
@@ -116,6 +118,9 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	public CommerceVirtualOrderItem deleteCommerceVirtualOrderItem(
 		long commerceVirtualOrderItemId) throws PortalException;
 
+	public void deleteCommerceVirtualOrderItemByCommerceOrderItemId(
+		long commerceOrderItemId);
+
 	/**
 	* @throws PortalException
 	*/
@@ -123,6 +128,7 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public DynamicQuery dynamicQuery();
 
 	/**
@@ -131,6 +137,7 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	* @param dynamicQuery the dynamic query
 	* @return the matching rows
 	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery);
 
 	/**
@@ -145,6 +152,7 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
 	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end);
 
@@ -161,6 +169,7 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
 
@@ -170,6 +179,7 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	* @param dynamicQuery the dynamic query
 	* @return the number of rows matching the dynamic query
 	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long dynamicQueryCount(DynamicQuery dynamicQuery);
 
 	/**
@@ -179,6 +189,7 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	* @param projection the projection to apply to the query
 	* @return the number of rows matching the dynamic query
 	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
 
@@ -310,7 +321,7 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceVirtualOrderItem> getUserCommerceVirtualOrderItems(
-		long groupId, long user, int start, int end,
+		long groupId, long userId, int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -336,4 +347,7 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 		long commerceVirtualOrderItemId, long fileEntryId, String url,
 		int activationStatus, long duration, int usages, int maxUsages,
 		boolean active) throws PortalException;
+
+	public CommerceVirtualOrderItem updateCommerceVirtualOrderItemDates(
+		long commerceVirtualOrderItemId) throws PortalException;
 }

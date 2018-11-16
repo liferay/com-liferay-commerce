@@ -57,9 +57,6 @@ public interface CPDefinitionVirtualSetting
 			}
 		};
 
-	public com.liferay.commerce.product.model.CPDefinition getCPDefinition()
-		throws com.liferay.portal.kernel.exception.PortalException;
-
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException;
 

@@ -88,7 +88,7 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 			{ "subscriptionType", Types.VARCHAR },
 			{ "subscriptionTypeSettings", Types.CLOB },
 			{ "maxSubscriptionCycles", Types.BIGINT },
-			{ "active_", Types.BOOLEAN },
+			{ "subscriptionStatus", Types.INTEGER },
 			{ "lastIterationDate", Types.TIMESTAMP },
 			{ "nextIterationDate", Types.TIMESTAMP },
 			{ "startDate", Types.TIMESTAMP }
@@ -110,13 +110,13 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		TABLE_COLUMNS_MAP.put("subscriptionType", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("subscriptionTypeSettings", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("maxSubscriptionCycles", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("active_", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("subscriptionStatus", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("lastIterationDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("nextIterationDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("startDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceSubscriptionEntry (uuid_ VARCHAR(75) null,commerceSubscriptionEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPInstanceId LONG,commerceOrderItemId LONG,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,active_ BOOLEAN,lastIterationDate DATE null,nextIterationDate DATE null,startDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceSubscriptionEntry (uuid_ VARCHAR(75) null,commerceSubscriptionEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPInstanceId LONG,commerceOrderItemId LONG,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,subscriptionStatus INTEGER,lastIterationDate DATE null,nextIterationDate DATE null,startDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceSubscriptionEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceSubscriptionEntry.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceSubscriptionEntry.createDate DESC";
@@ -132,9 +132,9 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.model.CommerceSubscriptionEntry"),
 			true);
-	public static final long ACTIVE_COLUMN_BITMASK = 1L;
-	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long GROUPID_COLUMN_BITMASK = 4L;
+	public static final long COMPANYID_COLUMN_BITMASK = 1L;
+	public static final long GROUPID_COLUMN_BITMASK = 2L;
+	public static final long SUBSCRIPTIONSTATUS_COLUMN_BITMASK = 4L;
 	public static final long USERID_COLUMN_BITMASK = 8L;
 	public static final long UUID_COLUMN_BITMASK = 16L;
 	public static final long CREATEDATE_COLUMN_BITMASK = 32L;
@@ -167,7 +167,7 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		model.setSubscriptionType(soapModel.getSubscriptionType());
 		model.setSubscriptionTypeSettings(soapModel.getSubscriptionTypeSettings());
 		model.setMaxSubscriptionCycles(soapModel.getMaxSubscriptionCycles());
-		model.setActive(soapModel.isActive());
+		model.setSubscriptionStatus(soapModel.getSubscriptionStatus());
 		model.setLastIterationDate(soapModel.getLastIterationDate());
 		model.setNextIterationDate(soapModel.getNextIterationDate());
 		model.setStartDate(soapModel.getStartDate());
@@ -251,7 +251,7 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		attributes.put("subscriptionType", getSubscriptionType());
 		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
 		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
-		attributes.put("active", isActive());
+		attributes.put("subscriptionStatus", getSubscriptionStatus());
 		attributes.put("lastIterationDate", getLastIterationDate());
 		attributes.put("nextIterationDate", getNextIterationDate());
 		attributes.put("startDate", getStartDate());
@@ -352,10 +352,11 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 			setMaxSubscriptionCycles(maxSubscriptionCycles);
 		}
 
-		Boolean active = (Boolean)attributes.get("active");
+		Integer subscriptionStatus = (Integer)attributes.get(
+				"subscriptionStatus");
 
-		if (active != null) {
-			setActive(active);
+		if (subscriptionStatus != null) {
+			setSubscriptionStatus(subscriptionStatus);
 		}
 
 		Date lastIterationDate = (Date)attributes.get("lastIterationDate");
@@ -621,31 +622,25 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 
 	@JSON
 	@Override
-	public boolean getActive() {
-		return _active;
-	}
-
-	@JSON
-	@Override
-	public boolean isActive() {
-		return _active;
+	public int getSubscriptionStatus() {
+		return _subscriptionStatus;
 	}
 
 	@Override
-	public void setActive(boolean active) {
-		_columnBitmask |= ACTIVE_COLUMN_BITMASK;
+	public void setSubscriptionStatus(int subscriptionStatus) {
+		_columnBitmask |= SUBSCRIPTIONSTATUS_COLUMN_BITMASK;
 
-		if (!_setOriginalActive) {
-			_setOriginalActive = true;
+		if (!_setOriginalSubscriptionStatus) {
+			_setOriginalSubscriptionStatus = true;
 
-			_originalActive = _active;
+			_originalSubscriptionStatus = _subscriptionStatus;
 		}
 
-		_active = active;
+		_subscriptionStatus = subscriptionStatus;
 	}
 
-	public boolean getOriginalActive() {
-		return _originalActive;
+	public int getOriginalSubscriptionStatus() {
+		return _originalSubscriptionStatus;
 	}
 
 	@JSON
@@ -732,7 +727,7 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		commerceSubscriptionEntryImpl.setSubscriptionType(getSubscriptionType());
 		commerceSubscriptionEntryImpl.setSubscriptionTypeSettings(getSubscriptionTypeSettings());
 		commerceSubscriptionEntryImpl.setMaxSubscriptionCycles(getMaxSubscriptionCycles());
-		commerceSubscriptionEntryImpl.setActive(isActive());
+		commerceSubscriptionEntryImpl.setSubscriptionStatus(getSubscriptionStatus());
 		commerceSubscriptionEntryImpl.setLastIterationDate(getLastIterationDate());
 		commerceSubscriptionEntryImpl.setNextIterationDate(getNextIterationDate());
 		commerceSubscriptionEntryImpl.setStartDate(getStartDate());
@@ -815,9 +810,9 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 
 		commerceSubscriptionEntryModelImpl._setModifiedDate = false;
 
-		commerceSubscriptionEntryModelImpl._originalActive = commerceSubscriptionEntryModelImpl._active;
+		commerceSubscriptionEntryModelImpl._originalSubscriptionStatus = commerceSubscriptionEntryModelImpl._subscriptionStatus;
 
-		commerceSubscriptionEntryModelImpl._setOriginalActive = false;
+		commerceSubscriptionEntryModelImpl._setOriginalSubscriptionStatus = false;
 
 		commerceSubscriptionEntryModelImpl._columnBitmask = 0;
 	}
@@ -893,7 +888,7 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 
 		commerceSubscriptionEntryCacheModel.maxSubscriptionCycles = getMaxSubscriptionCycles();
 
-		commerceSubscriptionEntryCacheModel.active = isActive();
+		commerceSubscriptionEntryCacheModel.subscriptionStatus = getSubscriptionStatus();
 
 		Date lastIterationDate = getLastIterationDate();
 
@@ -957,8 +952,8 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		sb.append(getSubscriptionTypeSettings());
 		sb.append(", maxSubscriptionCycles=");
 		sb.append(getMaxSubscriptionCycles());
-		sb.append(", active=");
-		sb.append(isActive());
+		sb.append(", subscriptionStatus=");
+		sb.append(getSubscriptionStatus());
 		sb.append(", lastIterationDate=");
 		sb.append(getLastIterationDate());
 		sb.append(", nextIterationDate=");
@@ -1035,8 +1030,8 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		sb.append(getMaxSubscriptionCycles());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>active</column-name><column-value><![CDATA[");
-		sb.append(isActive());
+			"<column><column-name>subscriptionStatus</column-name><column-value><![CDATA[");
+		sb.append(getSubscriptionStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>lastIterationDate</column-name><column-value><![CDATA[");
@@ -1082,9 +1077,9 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 	private String _subscriptionType;
 	private String _subscriptionTypeSettings;
 	private long _maxSubscriptionCycles;
-	private boolean _active;
-	private boolean _originalActive;
-	private boolean _setOriginalActive;
+	private int _subscriptionStatus;
+	private int _originalSubscriptionStatus;
+	private boolean _setOriginalSubscriptionStatus;
 	private Date _lastIterationDate;
 	private Date _nextIterationDate;
 	private Date _startDate;

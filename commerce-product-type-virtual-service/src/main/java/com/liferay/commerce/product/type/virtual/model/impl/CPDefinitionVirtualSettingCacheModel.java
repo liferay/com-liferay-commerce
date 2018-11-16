@@ -66,7 +66,7 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -84,8 +84,10 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", CPDefinitionId=");
-		sb.append(CPDefinitionId);
+		sb.append(", classNameId=");
+		sb.append(classNameId);
+		sb.append(", classPK=");
+		sb.append(classPK);
 		sb.append(", fileEntryId=");
 		sb.append(fileEntryId);
 		sb.append(", url=");
@@ -108,6 +110,8 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 		sb.append(termsOfUseContent);
 		sb.append(", termsOfUseJournalArticleResourcePrimKey=");
 		sb.append(termsOfUseJournalArticleResourcePrimKey);
+		sb.append(", override=");
+		sb.append(override);
 		sb.append(", lastPublishDate=");
 		sb.append(lastPublishDate);
 		sb.append("}");
@@ -153,7 +157,8 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 					modifiedDate));
 		}
 
-		cpDefinitionVirtualSettingImpl.setCPDefinitionId(CPDefinitionId);
+		cpDefinitionVirtualSettingImpl.setClassNameId(classNameId);
+		cpDefinitionVirtualSettingImpl.setClassPK(classPK);
 		cpDefinitionVirtualSettingImpl.setFileEntryId(fileEntryId);
 
 		if (url == null) {
@@ -186,6 +191,7 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 		}
 
 		cpDefinitionVirtualSettingImpl.setTermsOfUseJournalArticleResourcePrimKey(termsOfUseJournalArticleResourcePrimKey);
+		cpDefinitionVirtualSettingImpl.setOverride(override);
 
 		if (lastPublishDate == Long.MIN_VALUE) {
 			cpDefinitionVirtualSettingImpl.setLastPublishDate(null);
@@ -215,7 +221,9 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		CPDefinitionId = objectInput.readLong();
+		classNameId = objectInput.readLong();
+
+		classPK = objectInput.readLong();
 
 		fileEntryId = objectInput.readLong();
 		url = objectInput.readUTF();
@@ -235,6 +243,8 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 		termsOfUseContent = objectInput.readUTF();
 
 		termsOfUseJournalArticleResourcePrimKey = objectInput.readLong();
+
+		override = objectInput.readBoolean();
 		lastPublishDate = objectInput.readLong();
 	}
 
@@ -266,7 +276,9 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(CPDefinitionId);
+		objectOutput.writeLong(classNameId);
+
+		objectOutput.writeLong(classPK);
 
 		objectOutput.writeLong(fileEntryId);
 
@@ -304,6 +316,8 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 		}
 
 		objectOutput.writeLong(termsOfUseJournalArticleResourcePrimKey);
+
+		objectOutput.writeBoolean(override);
 		objectOutput.writeLong(lastPublishDate);
 	}
 
@@ -315,7 +329,8 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long CPDefinitionId;
+	public long classNameId;
+	public long classPK;
 	public long fileEntryId;
 	public String url;
 	public int activationStatus;
@@ -327,5 +342,6 @@ public class CPDefinitionVirtualSettingCacheModel implements CacheModel<CPDefini
 	public boolean termsOfUseRequired;
 	public String termsOfUseContent;
 	public long termsOfUseJournalArticleResourcePrimKey;
+	public boolean override;
 	public long lastPublishDate;
 }

@@ -95,8 +95,8 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 		sb.append(subscriptionTypeSettings);
 		sb.append(", maxSubscriptionCycles=");
 		sb.append(maxSubscriptionCycles);
-		sb.append(", active=");
-		sb.append(active);
+		sb.append(", subscriptionStatus=");
+		sb.append(subscriptionStatus);
 		sb.append(", lastIterationDate=");
 		sb.append(lastIterationDate);
 		sb.append(", nextIterationDate=");
@@ -164,7 +164,7 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 		}
 
 		commerceSubscriptionEntryImpl.setMaxSubscriptionCycles(maxSubscriptionCycles);
-		commerceSubscriptionEntryImpl.setActive(active);
+		commerceSubscriptionEntryImpl.setSubscriptionStatus(subscriptionStatus);
 
 		if (lastIterationDate == Long.MIN_VALUE) {
 			commerceSubscriptionEntryImpl.setLastIterationDate(null);
@@ -219,7 +219,7 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 
 		maxSubscriptionCycles = objectInput.readLong();
 
-		active = objectInput.readBoolean();
+		subscriptionStatus = objectInput.readInt();
 		lastIterationDate = objectInput.readLong();
 		nextIterationDate = objectInput.readLong();
 		startDate = objectInput.readLong();
@@ -275,7 +275,7 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 
 		objectOutput.writeLong(maxSubscriptionCycles);
 
-		objectOutput.writeBoolean(active);
+		objectOutput.writeInt(subscriptionStatus);
 		objectOutput.writeLong(lastIterationDate);
 		objectOutput.writeLong(nextIterationDate);
 		objectOutput.writeLong(startDate);
@@ -295,7 +295,7 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 	public String subscriptionType;
 	public String subscriptionTypeSettings;
 	public long maxSubscriptionCycles;
-	public boolean active;
+	public int subscriptionStatus;
 	public long lastIterationDate;
 	public long nextIterationDate;
 	public long startDate;

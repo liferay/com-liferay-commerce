@@ -359,19 +359,12 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(
 		long companyId, long groupId, Long maxSubscriptionCycles,
-		Boolean active, String keywords, int start, int end,
+		Integer subscriptionStatus, String keywords, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceSubscriptionEntryLocalService.searchCommerceSubscriptionEntries(companyId,
-			groupId, maxSubscriptionCycles, active, keywords, start, end, sort);
-	}
-
-	@Override
-	public com.liferay.commerce.model.CommerceSubscriptionEntry setActive(
-		long commerceSubscriptionEntryId, boolean active)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceSubscriptionEntryLocalService.setActive(commerceSubscriptionEntryId,
-			active);
+			groupId, maxSubscriptionCycles, subscriptionStatus, keywords,
+			start, end, sort);
 	}
 
 	/**
@@ -391,7 +384,7 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 		long commerceSubscriptionEntryId, int subscriptionLength,
 		String subscriptionType,
 		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, boolean active, int startDateMonth,
+		long maxSubscriptionCycles, int subscriptionStatus, int startDateMonth,
 		int startDateDay, int startDateYear, int startDateHour,
 		int startDateMinute, int nextIterationDateMonth,
 		int nextIterationDateDay, int nextIterationDateYear,
@@ -399,10 +392,10 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceSubscriptionEntryLocalService.updateCommerceSubscriptionEntry(commerceSubscriptionEntryId,
 			subscriptionLength, subscriptionType,
-			subscriptionTypeSettingsProperties, maxSubscriptionCycles, active,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, nextIterationDateMonth, nextIterationDateDay,
-			nextIterationDateYear, nextIterationDateHour,
+			subscriptionTypeSettingsProperties, maxSubscriptionCycles,
+			subscriptionStatus, startDateMonth, startDateDay, startDateYear,
+			startDateHour, startDateMinute, nextIterationDateMonth,
+			nextIterationDateDay, nextIterationDateYear, nextIterationDateHour,
 			nextIterationDateMinute);
 	}
 
@@ -412,6 +405,14 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceSubscriptionEntryLocalService.updateCommerceSubscriptionEntryIterationDates(commerceSubscriptionEntryId,
 			lastIterationDate);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceSubscriptionEntry updateSubscriptionStatus(
+		long commerceSubscriptionEntryId, int subscriptionStatus)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceSubscriptionEntryLocalService.updateSubscriptionStatus(commerceSubscriptionEntryId,
+			subscriptionStatus);
 	}
 
 	@Override

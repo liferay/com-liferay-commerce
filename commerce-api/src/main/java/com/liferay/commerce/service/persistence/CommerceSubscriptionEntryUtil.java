@@ -675,163 +675,177 @@ public class CommerceSubscriptionEntryUtil {
 	}
 
 	/**
-	* Returns all the commerce subscription entries where active = &#63;.
+	* Returns all the commerce subscription entries where subscriptionStatus = &#63;.
 	*
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	* @return the matching commerce subscription entries
 	*/
-	public static List<CommerceSubscriptionEntry> findByactive(boolean active) {
-		return getPersistence().findByactive(active);
+	public static List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+		int subscriptionStatus) {
+		return getPersistence().findBysubscriptionStatus(subscriptionStatus);
 	}
 
 	/**
-	* Returns a range of all the commerce subscription entries where active = &#63;.
+	* Returns a range of all the commerce subscription entries where subscriptionStatus = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	* @param start the lower bound of the range of commerce subscription entries
 	* @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	* @return the range of matching commerce subscription entries
 	*/
-	public static List<CommerceSubscriptionEntry> findByactive(boolean active,
-		int start, int end) {
-		return getPersistence().findByactive(active, start, end);
+	public static List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+		int subscriptionStatus, int start, int end) {
+		return getPersistence()
+				   .findBysubscriptionStatus(subscriptionStatus, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce subscription entries where active = &#63;.
+	* Returns an ordered range of all the commerce subscription entries where subscriptionStatus = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	* @param start the lower bound of the range of commerce subscription entries
 	* @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce subscription entries
 	*/
-	public static List<CommerceSubscriptionEntry> findByactive(boolean active,
-		int start, int end,
+	public static List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+		int subscriptionStatus, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 		return getPersistence()
-				   .findByactive(active, start, end, orderByComparator);
+				   .findBysubscriptionStatus(subscriptionStatus, start, end,
+			orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce subscription entries where active = &#63;.
+	* Returns an ordered range of all the commerce subscription entries where subscriptionStatus = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	* @param start the lower bound of the range of commerce subscription entries
 	* @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce subscription entries
 	*/
-	public static List<CommerceSubscriptionEntry> findByactive(boolean active,
-		int start, int end,
+	public static List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+		int subscriptionStatus, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByactive(active, start, end, orderByComparator,
-			retrieveFromCache);
+				   .findBysubscriptionStatus(subscriptionStatus, start, end,
+			orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce subscription entry in the ordered set where active = &#63;.
+	* Returns the first commerce subscription entry in the ordered set where subscriptionStatus = &#63;.
 	*
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce subscription entry
 	* @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	*/
-	public static CommerceSubscriptionEntry findByactive_First(boolean active,
+	public static CommerceSubscriptionEntry findBysubscriptionStatus_First(
+		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
-		return getPersistence().findByactive_First(active, orderByComparator);
+		return getPersistence()
+				   .findBysubscriptionStatus_First(subscriptionStatus,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce subscription entry in the ordered set where active = &#63;.
+	* Returns the first commerce subscription entry in the ordered set where subscriptionStatus = &#63;.
 	*
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	*/
-	public static CommerceSubscriptionEntry fetchByactive_First(
-		boolean active,
+	public static CommerceSubscriptionEntry fetchBysubscriptionStatus_First(
+		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
-		return getPersistence().fetchByactive_First(active, orderByComparator);
+		return getPersistence()
+				   .fetchBysubscriptionStatus_First(subscriptionStatus,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce subscription entry in the ordered set where active = &#63;.
+	* Returns the last commerce subscription entry in the ordered set where subscriptionStatus = &#63;.
 	*
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce subscription entry
 	* @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	*/
-	public static CommerceSubscriptionEntry findByactive_Last(boolean active,
+	public static CommerceSubscriptionEntry findBysubscriptionStatus_Last(
+		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
-		return getPersistence().findByactive_Last(active, orderByComparator);
+		return getPersistence()
+				   .findBysubscriptionStatus_Last(subscriptionStatus,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce subscription entry in the ordered set where active = &#63;.
+	* Returns the last commerce subscription entry in the ordered set where subscriptionStatus = &#63;.
 	*
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	*/
-	public static CommerceSubscriptionEntry fetchByactive_Last(boolean active,
+	public static CommerceSubscriptionEntry fetchBysubscriptionStatus_Last(
+		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
-		return getPersistence().fetchByactive_Last(active, orderByComparator);
+		return getPersistence()
+				   .fetchBysubscriptionStatus_Last(subscriptionStatus,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where active = &#63;.
+	* Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where subscriptionStatus = &#63;.
 	*
 	* @param commerceSubscriptionEntryId the primary key of the current commerce subscription entry
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce subscription entry
 	* @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
 	*/
-	public static CommerceSubscriptionEntry[] findByactive_PrevAndNext(
-		long commerceSubscriptionEntryId, boolean active,
+	public static CommerceSubscriptionEntry[] findBysubscriptionStatus_PrevAndNext(
+		long commerceSubscriptionEntryId, int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
 		return getPersistence()
-				   .findByactive_PrevAndNext(commerceSubscriptionEntryId,
-			active, orderByComparator);
+				   .findBysubscriptionStatus_PrevAndNext(commerceSubscriptionEntryId,
+			subscriptionStatus, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce subscription entries where active = &#63; from the database.
+	* Removes all the commerce subscription entries where subscriptionStatus = &#63; from the database.
 	*
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	*/
-	public static void removeByactive(boolean active) {
-		getPersistence().removeByactive(active);
+	public static void removeBysubscriptionStatus(int subscriptionStatus) {
+		getPersistence().removeBysubscriptionStatus(subscriptionStatus);
 	}
 
 	/**
-	* Returns the number of commerce subscription entries where active = &#63;.
+	* Returns the number of commerce subscription entries where subscriptionStatus = &#63;.
 	*
-	* @param active the active
+	* @param subscriptionStatus the subscription status
 	* @return the number of matching commerce subscription entries
 	*/
-	public static int countByactive(boolean active) {
-		return getPersistence().countByactive(active);
+	public static int countBysubscriptionStatus(int subscriptionStatus) {
+		return getPersistence().countBysubscriptionStatus(subscriptionStatus);
 	}
 
 	/**

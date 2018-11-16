@@ -88,7 +88,8 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "CPDefinitionId", Types.BIGINT },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
 			{ "fileEntryId", Types.BIGINT },
 			{ "url", Types.VARCHAR },
 			{ "activationStatus", Types.INTEGER },
@@ -100,6 +101,7 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 			{ "termsOfUseRequired", Types.BOOLEAN },
 			{ "termsOfUseContent", Types.VARCHAR },
 			{ "termsOfUseArticleResourcePK", Types.BIGINT },
+			{ "override", Types.BOOLEAN },
 			{ "lastPublishDate", Types.TIMESTAMP }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
@@ -113,7 +115,8 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("CPDefinitionId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("classNameId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("classPK", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("fileEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("url", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("activationStatus", Types.INTEGER);
@@ -125,10 +128,11 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		TABLE_COLUMNS_MAP.put("termsOfUseRequired", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("termsOfUseContent", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("termsOfUseArticleResourcePK", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("override", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPDefinitionVirtualSetting (uuid_ VARCHAR(75) null,CPDefinitionVirtualSettingId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,fileEntryId LONG,url VARCHAR(75) null,activationStatus INTEGER,duration LONG,maxUsages INTEGER,useSample BOOLEAN,sampleFileEntryId LONG,sampleUrl VARCHAR(75) null,termsOfUseRequired BOOLEAN,termsOfUseContent STRING null,termsOfUseArticleResourcePK LONG,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPDefinitionVirtualSetting (uuid_ VARCHAR(75) null,CPDefinitionVirtualSettingId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,fileEntryId LONG,url VARCHAR(75) null,activationStatus INTEGER,duration LONG,maxUsages INTEGER,useSample BOOLEAN,sampleFileEntryId LONG,sampleUrl VARCHAR(75) null,termsOfUseRequired BOOLEAN,termsOfUseContent STRING null,termsOfUseArticleResourcePK LONG,override BOOLEAN,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPDefinitionVirtualSetting";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpDefinitionVirtualSetting.CPDefinitionVirtualSettingId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPDefinitionVirtualSetting.CPDefinitionVirtualSettingId ASC";
@@ -144,11 +148,12 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.product.type.virtual.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting"),
 			true);
-	public static final long CPDEFINITIONID_COLUMN_BITMASK = 1L;
-	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long GROUPID_COLUMN_BITMASK = 4L;
-	public static final long UUID_COLUMN_BITMASK = 8L;
-	public static final long CPDEFINITIONVIRTUALSETTINGID_COLUMN_BITMASK = 16L;
+	public static final long CLASSNAMEID_COLUMN_BITMASK = 1L;
+	public static final long CLASSPK_COLUMN_BITMASK = 2L;
+	public static final long COMPANYID_COLUMN_BITMASK = 4L;
+	public static final long GROUPID_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 16L;
+	public static final long CPDEFINITIONVIRTUALSETTINGID_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -172,7 +177,8 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setCPDefinitionId(soapModel.getCPDefinitionId());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
 		model.setFileEntryId(soapModel.getFileEntryId());
 		model.setUrl(soapModel.getUrl());
 		model.setActivationStatus(soapModel.getActivationStatus());
@@ -184,6 +190,7 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		model.setTermsOfUseRequired(soapModel.isTermsOfUseRequired());
 		model.setTermsOfUseContent(soapModel.getTermsOfUseContent());
 		model.setTermsOfUseJournalArticleResourcePrimKey(soapModel.getTermsOfUseJournalArticleResourcePrimKey());
+		model.setOverride(soapModel.isOverride());
 		model.setLastPublishDate(soapModel.getLastPublishDate());
 
 		return model;
@@ -259,7 +266,8 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CPDefinitionId", getCPDefinitionId());
+		attributes.put("classNameId", getClassNameId());
+		attributes.put("classPK", getClassPK());
 		attributes.put("fileEntryId", getFileEntryId());
 		attributes.put("url", getUrl());
 		attributes.put("activationStatus", getActivationStatus());
@@ -272,6 +280,7 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		attributes.put("termsOfUseContent", getTermsOfUseContent());
 		attributes.put("termsOfUseJournalArticleResourcePrimKey",
 			getTermsOfUseJournalArticleResourcePrimKey());
+		attributes.put("override", isOverride());
 		attributes.put("lastPublishDate", getLastPublishDate());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
@@ -331,10 +340,16 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CPDefinitionId = (Long)attributes.get("CPDefinitionId");
+		Long classNameId = (Long)attributes.get("classNameId");
 
-		if (CPDefinitionId != null) {
-			setCPDefinitionId(CPDefinitionId);
+		if (classNameId != null) {
+			setClassNameId(classNameId);
+		}
+
+		Long classPK = (Long)attributes.get("classPK");
+
+		if (classPK != null) {
+			setClassPK(classPK);
 		}
 
 		Long fileEntryId = (Long)attributes.get("fileEntryId");
@@ -403,6 +418,12 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 
 		if (termsOfUseJournalArticleResourcePrimKey != null) {
 			setTermsOfUseJournalArticleResourcePrimKey(termsOfUseJournalArticleResourcePrimKey);
+		}
+
+		Boolean override = (Boolean)attributes.get("override");
+
+		if (override != null) {
+			setOverride(override);
 		}
 
 		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
@@ -565,27 +586,70 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		_modifiedDate = modifiedDate;
 	}
 
-	@JSON
 	@Override
-	public long getCPDefinitionId() {
-		return _CPDefinitionId;
-	}
-
-	@Override
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_columnBitmask |= CPDEFINITIONID_COLUMN_BITMASK;
-
-		if (!_setOriginalCPDefinitionId) {
-			_setOriginalCPDefinitionId = true;
-
-			_originalCPDefinitionId = _CPDefinitionId;
+	public String getClassName() {
+		if (getClassNameId() <= 0) {
+			return "";
 		}
 
-		_CPDefinitionId = CPDefinitionId;
+		return PortalUtil.getClassName(getClassNameId());
 	}
 
-	public long getOriginalCPDefinitionId() {
-		return _originalCPDefinitionId;
+	@Override
+	public void setClassName(String className) {
+		long classNameId = 0;
+
+		if (Validator.isNotNull(className)) {
+			classNameId = PortalUtil.getClassNameId(className);
+		}
+
+		setClassNameId(classNameId);
+	}
+
+	@JSON
+	@Override
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	@Override
+	public void setClassNameId(long classNameId) {
+		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
+
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = _classNameId;
+		}
+
+		_classNameId = classNameId;
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
+	}
+
+	@JSON
+	@Override
+	public long getClassPK() {
+		return _classPK;
+	}
+
+	@Override
+	public void setClassPK(long classPK) {
+		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
+
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
+
+			_originalClassPK = _classPK;
+		}
+
+		_classPK = classPK;
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	@JSON
@@ -830,6 +894,23 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 
 	@JSON
 	@Override
+	public boolean getOverride() {
+		return _override;
+	}
+
+	@JSON
+	@Override
+	public boolean isOverride() {
+		return _override;
+	}
+
+	@Override
+	public void setOverride(boolean override) {
+		_override = override;
+	}
+
+	@JSON
+	@Override
 	public Date getLastPublishDate() {
 		return _lastPublishDate;
 	}
@@ -842,7 +923,7 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
-				CPDefinitionVirtualSetting.class.getName()));
+				CPDefinitionVirtualSetting.class.getName()), getClassNameId());
 	}
 
 	public long getColumnBitmask() {
@@ -947,7 +1028,8 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		cpDefinitionVirtualSettingImpl.setUserName(getUserName());
 		cpDefinitionVirtualSettingImpl.setCreateDate(getCreateDate());
 		cpDefinitionVirtualSettingImpl.setModifiedDate(getModifiedDate());
-		cpDefinitionVirtualSettingImpl.setCPDefinitionId(getCPDefinitionId());
+		cpDefinitionVirtualSettingImpl.setClassNameId(getClassNameId());
+		cpDefinitionVirtualSettingImpl.setClassPK(getClassPK());
 		cpDefinitionVirtualSettingImpl.setFileEntryId(getFileEntryId());
 		cpDefinitionVirtualSettingImpl.setUrl(getUrl());
 		cpDefinitionVirtualSettingImpl.setActivationStatus(getActivationStatus());
@@ -959,6 +1041,7 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		cpDefinitionVirtualSettingImpl.setTermsOfUseRequired(isTermsOfUseRequired());
 		cpDefinitionVirtualSettingImpl.setTermsOfUseContent(getTermsOfUseContent());
 		cpDefinitionVirtualSettingImpl.setTermsOfUseJournalArticleResourcePrimKey(getTermsOfUseJournalArticleResourcePrimKey());
+		cpDefinitionVirtualSettingImpl.setOverride(isOverride());
 		cpDefinitionVirtualSettingImpl.setLastPublishDate(getLastPublishDate());
 
 		cpDefinitionVirtualSettingImpl.resetOriginalValues();
@@ -1034,9 +1117,13 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 
 		cpDefinitionVirtualSettingModelImpl._setModifiedDate = false;
 
-		cpDefinitionVirtualSettingModelImpl._originalCPDefinitionId = cpDefinitionVirtualSettingModelImpl._CPDefinitionId;
+		cpDefinitionVirtualSettingModelImpl._originalClassNameId = cpDefinitionVirtualSettingModelImpl._classNameId;
 
-		cpDefinitionVirtualSettingModelImpl._setOriginalCPDefinitionId = false;
+		cpDefinitionVirtualSettingModelImpl._setOriginalClassNameId = false;
+
+		cpDefinitionVirtualSettingModelImpl._originalClassPK = cpDefinitionVirtualSettingModelImpl._classPK;
+
+		cpDefinitionVirtualSettingModelImpl._setOriginalClassPK = false;
 
 		cpDefinitionVirtualSettingModelImpl._columnBitmask = 0;
 	}
@@ -1088,7 +1175,9 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 			cpDefinitionVirtualSettingCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		cpDefinitionVirtualSettingCacheModel.CPDefinitionId = getCPDefinitionId();
+		cpDefinitionVirtualSettingCacheModel.classNameId = getClassNameId();
+
+		cpDefinitionVirtualSettingCacheModel.classPK = getClassPK();
 
 		cpDefinitionVirtualSettingCacheModel.fileEntryId = getFileEntryId();
 
@@ -1130,6 +1219,8 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 
 		cpDefinitionVirtualSettingCacheModel.termsOfUseJournalArticleResourcePrimKey = getTermsOfUseJournalArticleResourcePrimKey();
 
+		cpDefinitionVirtualSettingCacheModel.override = isOverride();
+
 		Date lastPublishDate = getLastPublishDate();
 
 		if (lastPublishDate != null) {
@@ -1144,7 +1235,7 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1162,8 +1253,10 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", CPDefinitionId=");
-		sb.append(getCPDefinitionId());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
 		sb.append(", fileEntryId=");
 		sb.append(getFileEntryId());
 		sb.append(", url=");
@@ -1186,6 +1279,8 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		sb.append(getTermsOfUseContent());
 		sb.append(", termsOfUseJournalArticleResourcePrimKey=");
 		sb.append(getTermsOfUseJournalArticleResourcePrimKey());
+		sb.append(", override=");
+		sb.append(isOverride());
 		sb.append(", lastPublishDate=");
 		sb.append(getLastPublishDate());
 		sb.append("}");
@@ -1195,7 +1290,7 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -1235,8 +1330,12 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>CPDefinitionId</column-name><column-value><![CDATA[");
-		sb.append(getCPDefinitionId());
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append(getClassNameId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>fileEntryId</column-name><column-value><![CDATA[");
@@ -1283,6 +1382,10 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 		sb.append(getTermsOfUseJournalArticleResourcePrimKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>override</column-name><column-value><![CDATA[");
+		sb.append(isOverride());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>lastPublishDate</column-name><column-value><![CDATA[");
 		sb.append(getLastPublishDate());
 		sb.append("]]></column-value></column>");
@@ -1310,9 +1413,12 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _CPDefinitionId;
-	private long _originalCPDefinitionId;
-	private boolean _setOriginalCPDefinitionId;
+	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
+	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private long _fileEntryId;
 	private String _url;
 	private int _activationStatus;
@@ -1325,6 +1431,7 @@ public class CPDefinitionVirtualSettingModelImpl extends BaseModelImpl<CPDefinit
 	private String _termsOfUseContent;
 	private String _termsOfUseContentCurrentLanguageId;
 	private long _termsOfUseJournalArticleResourcePrimKey;
+	private boolean _override;
 	private Date _lastPublishDate;
 	private long _columnBitmask;
 	private CPDefinitionVirtualSetting _escapedModel;

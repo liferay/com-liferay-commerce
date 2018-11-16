@@ -49,7 +49,7 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		soapModel.setSubscriptionType(model.getSubscriptionType());
 		soapModel.setSubscriptionTypeSettings(model.getSubscriptionTypeSettings());
 		soapModel.setMaxSubscriptionCycles(model.getMaxSubscriptionCycles());
-		soapModel.setActive(model.isActive());
+		soapModel.setSubscriptionStatus(model.getSubscriptionStatus());
 		soapModel.setLastIterationDate(model.getLastIterationDate());
 		soapModel.setNextIterationDate(model.getNextIterationDate());
 		soapModel.setStartDate(model.getStartDate());
@@ -220,16 +220,12 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		_maxSubscriptionCycles = maxSubscriptionCycles;
 	}
 
-	public boolean getActive() {
-		return _active;
+	public int getSubscriptionStatus() {
+		return _subscriptionStatus;
 	}
 
-	public boolean isActive() {
-		return _active;
-	}
-
-	public void setActive(boolean active) {
-		_active = active;
+	public void setSubscriptionStatus(int subscriptionStatus) {
+		_subscriptionStatus = subscriptionStatus;
 	}
 
 	public Date getLastIterationDate() {
@@ -270,7 +266,7 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 	private String _subscriptionType;
 	private String _subscriptionTypeSettings;
 	private long _maxSubscriptionCycles;
-	private boolean _active;
+	private int _subscriptionStatus;
 	private Date _lastIterationDate;
 	private Date _nextIterationDate;
 	private Date _startDate;
