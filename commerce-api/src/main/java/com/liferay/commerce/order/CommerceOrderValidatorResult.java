@@ -27,11 +27,7 @@ import java.util.ResourceBundle;
 public class CommerceOrderValidatorResult implements Serializable {
 
 	public CommerceOrderValidatorResult(boolean valid) {
-		this(0, valid, StringPool.BLANK, StringPool.BLANK);
-	}
-
-	public CommerceOrderValidatorResult(boolean valid, String messageKey) {
-		this(0, valid, messageKey, StringPool.BLANK);
+		this(0, valid, null, StringPool.BLANK, null);
 	}
 
 	public CommerceOrderValidatorResult(
@@ -41,22 +37,10 @@ public class CommerceOrderValidatorResult implements Serializable {
 	}
 
 	public CommerceOrderValidatorResult(
-		boolean valid, String messageKey, String argument) {
-
-		this(0, valid, messageKey, argument);
-	}
-
-	public CommerceOrderValidatorResult(
 		boolean valid, String messageKey, String argument,
 		ResourceBundle resourceBundle) {
 
 		this(0, valid, messageKey, argument, resourceBundle);
-	}
-
-	public CommerceOrderValidatorResult(
-		long commerceOrderItemId, boolean valid, String messageKey) {
-
-		this(commerceOrderItemId, valid, messageKey, StringPool.BLANK);
 	}
 
 	public CommerceOrderValidatorResult(
@@ -81,6 +65,7 @@ public class CommerceOrderValidatorResult implements Serializable {
 
 		_commerceOrderItemId = commerceOrderItemId;
 		_valid = valid;
+		_resourceBundle = resourceBundle;
 		_messageKey = messageKey;
 		_argument = argument;
 		_resourceBundle = resourceBundle;
