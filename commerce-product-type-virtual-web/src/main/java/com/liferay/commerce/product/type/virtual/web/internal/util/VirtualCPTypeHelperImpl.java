@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.type.virtual.web.internal.util;
 
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
 import com.liferay.commerce.product.type.virtual.util.VirtualCPTypeHelper;
@@ -35,18 +37,36 @@ public class VirtualCPTypeHelperImpl implements VirtualCPTypeHelper {
 
 	@Override
 	public CPDefinitionVirtualSetting getCPDefinitionVirtualSetting(
-		long cpDefinitionId) {
+		long cpDefinitionId, long cpInstanceId) {
 
-		return _cpDefinitionVirtualSettingLocalService.
-			fetchCPDefinitionVirtualSettingByCPDefinitionId(cpDefinitionId);
+		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
+			_cpDefinitionVirtualSettingLocalService.
+				fetchCPDefinitionVirtualSetting(
+					CPInstance.class.getName(), cpInstanceId);
+
+		if ((cpDefinitionVirtualSetting == null) ||
+			!cpDefinitionVirtualSetting.isOverride()) {
+
+			cpDefinitionVirtualSetting =
+				_cpDefinitionVirtualSettingLocalService.
+					fetchCPDefinitionVirtualSetting(
+						CPDefinition.class.getName(), cpDefinitionId);
+		}
+
+		return cpDefinitionVirtualSetting;
 	}
 
 	@Override
-	public String getSampleURL(long cpDefinitionId, ThemeDisplay themeDisplay)
+	public String getSampleURL(
+			long cpDefinitionId, long cpInstanceId, ThemeDisplay themeDisplay)
 		throws PortalException {
 
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
-			getCPDefinitionVirtualSetting(cpDefinitionId);
+			getCPDefinitionVirtualSetting(cpDefinitionId, cpInstanceId);
+
+		if (cpDefinitionVirtualSetting == null) {
+			return StringPool.BLANK;
+		}
 
 		if (cpDefinitionVirtualSetting == null) {
 			return StringPool.BLANK;
