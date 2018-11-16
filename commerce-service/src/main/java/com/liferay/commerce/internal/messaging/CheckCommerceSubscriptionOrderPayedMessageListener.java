@@ -14,8 +14,9 @@
 
 package com.liferay.commerce.internal.messaging;
 
+import com.liferay.commerce.configuration.CommerceSubscriptionConfiguration;
 import com.liferay.commerce.constants.CommerceOrderConstants;
-import com.liferay.commerce.internal.configuration.subscription.CommerceSubscriptionConfiguration;
+import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
@@ -50,7 +51,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Luca Pellizzon
  */
 @Component(
-	configurationPid = "com.liferay.commerce.internal.configuration.subscription.CommerceSubscriptionConfiguration",
+	configurationPid = "com.liferay.commerce.configuration.CommerceSubscriptionConfiguration",
 	immediate = true,
 	service = CheckCommerceSubscriptionOrderPayedMessageListener.class
 )
@@ -130,9 +131,10 @@ public class CheckCommerceSubscriptionOrderPayedMessageListener
 					CommerceOrderConstants.PAYMENT_STATUS_PAID) &&
 				!(DateUtil.compareTo(calendar.getTime(), now) < 0)) {
 
-				_commerceSubscriptionEntryLocalService.setActive(
+				_commerceSubscriptionEntryLocalService.updateSubscriptionStatus(
 					commerceSubscriptionEntry.getCommerceSubscriptionEntryId(),
-					false);
+					CommerceSubscriptionEntryConstants.
+						SUBSCRIPTION_STATUS_SUSPENDED);
 			}
 		}
 	}
