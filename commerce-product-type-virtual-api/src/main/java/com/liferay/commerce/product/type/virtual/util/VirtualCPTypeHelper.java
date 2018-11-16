@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.type.virtual.util;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -21,13 +23,15 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 /**
  * @author Alessio Antonio Rendina
  */
+@ProviderType
 public interface VirtualCPTypeHelper {
 
 	public CPDefinitionVirtualSetting getCPDefinitionVirtualSetting(
-			long cpDefinitionId)
+			long cpDefinitionId, long cpInstanceId)
 		throws PortalException;
 
-	public String getSampleURL(long cpDefinitionId, ThemeDisplay themeDisplay)
+	public String getSampleURL(
+			long cpDefinitionId, long cpInstanceId, ThemeDisplay themeDisplay)
 		throws PortalException;
 
 }
