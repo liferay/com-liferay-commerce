@@ -85,6 +85,8 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 		long commerceOrderItemId, ServiceContext serviceContext)
 		throws PortalException;
 
+	public void checkCommerceVirtualOrderItems() throws PortalException;
+
 	/**
 	* Creates a new commerce virtual order item with the primary key. Does not add the commerce virtual order item to the database.
 	*
@@ -115,6 +117,9 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.DELETE)
 	public CommerceVirtualOrderItem deleteCommerceVirtualOrderItem(
 		long commerceVirtualOrderItemId) throws PortalException;
+
+	public void deleteCommerceVirtualOrderItemByCommerceOrderItemId(
+		long commerceOrderItemId);
 
 	/**
 	* @throws PortalException
@@ -316,7 +321,7 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceVirtualOrderItem> getUserCommerceVirtualOrderItems(
-		long groupId, long user, int start, int end,
+		long groupId, long userId, int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -342,4 +347,7 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 		long commerceVirtualOrderItemId, long fileEntryId, String url,
 		int activationStatus, long duration, int usages, int maxUsages,
 		boolean active) throws PortalException;
+
+	public CommerceVirtualOrderItem updateCommerceVirtualOrderItemDates(
+		long commerceVirtualOrderItemId) throws PortalException;
 }

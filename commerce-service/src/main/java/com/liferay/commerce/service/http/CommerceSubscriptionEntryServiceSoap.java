@@ -124,12 +124,12 @@ public class CommerceSubscriptionEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap setActive(
-		long commerceSubscriptionEntryId, boolean active)
+	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap updateSubscriptionStatus(
+		long commerceSubscriptionEntryId, int subscriptionStatus)
 		throws RemoteException {
 		try {
-			com.liferay.commerce.model.CommerceSubscriptionEntry returnValue = CommerceSubscriptionEntryServiceUtil.setActive(commerceSubscriptionEntryId,
-					active);
+			com.liferay.commerce.model.CommerceSubscriptionEntry returnValue = CommerceSubscriptionEntryServiceUtil.updateSubscriptionStatus(commerceSubscriptionEntryId,
+					subscriptionStatus);
 
 			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.toSoapModel(returnValue);
 		}

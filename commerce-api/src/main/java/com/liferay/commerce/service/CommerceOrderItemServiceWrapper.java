@@ -139,19 +139,21 @@ public class CommerceOrderItemServiceWrapper implements CommerceOrderItemService
 	@Override
 	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
 		long commerceOrderItemId, int quantity,
-		com.liferay.commerce.context.CommerceContext commerceContext)
+		com.liferay.commerce.context.CommerceContext commerceContext,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderItemService.updateCommerceOrderItem(commerceOrderItemId,
-			quantity, commerceContext);
+			quantity, commerceContext, serviceContext);
 	}
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
 		long commerceOrderItemId, int quantity, String json,
-		com.liferay.commerce.context.CommerceContext commerceContext)
+		com.liferay.commerce.context.CommerceContext commerceContext,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderItemService.updateCommerceOrderItem(commerceOrderItemId,
-			quantity, json, commerceContext);
+			quantity, json, commerceContext, serviceContext);
 	}
 
 	@Override

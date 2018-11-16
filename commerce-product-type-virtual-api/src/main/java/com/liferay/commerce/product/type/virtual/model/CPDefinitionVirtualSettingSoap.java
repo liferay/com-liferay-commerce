@@ -43,7 +43,8 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCPDefinitionId(model.getCPDefinitionId());
+		soapModel.setClassNameId(model.getClassNameId());
+		soapModel.setClassPK(model.getClassPK());
 		soapModel.setFileEntryId(model.getFileEntryId());
 		soapModel.setUrl(model.getUrl());
 		soapModel.setActivationStatus(model.getActivationStatus());
@@ -55,6 +56,7 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 		soapModel.setTermsOfUseRequired(model.isTermsOfUseRequired());
 		soapModel.setTermsOfUseContent(model.getTermsOfUseContent());
 		soapModel.setTermsOfUseJournalArticleResourcePrimKey(model.getTermsOfUseJournalArticleResourcePrimKey());
+		soapModel.setOverride(model.isOverride());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
 
 		return soapModel;
@@ -176,12 +178,20 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCPDefinitionId() {
-		return _CPDefinitionId;
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_CPDefinitionId = CPDefinitionId;
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
+	}
+
+	public long getClassPK() {
+		return _classPK;
+	}
+
+	public void setClassPK(long classPK) {
+		_classPK = classPK;
 	}
 
 	public long getFileEntryId() {
@@ -281,6 +291,18 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 		_termsOfUseJournalArticleResourcePrimKey = termsOfUseJournalArticleResourcePrimKey;
 	}
 
+	public boolean getOverride() {
+		return _override;
+	}
+
+	public boolean isOverride() {
+		return _override;
+	}
+
+	public void setOverride(boolean override) {
+		_override = override;
+	}
+
 	public Date getLastPublishDate() {
 		return _lastPublishDate;
 	}
@@ -297,7 +319,8 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _CPDefinitionId;
+	private long _classNameId;
+	private long _classPK;
 	private long _fileEntryId;
 	private String _url;
 	private int _activationStatus;
@@ -309,5 +332,6 @@ public class CPDefinitionVirtualSettingSoap implements Serializable {
 	private boolean _termsOfUseRequired;
 	private String _termsOfUseContent;
 	private long _termsOfUseJournalArticleResourcePrimKey;
+	private boolean _override;
 	private Date _lastPublishDate;
 }

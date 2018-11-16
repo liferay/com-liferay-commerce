@@ -323,13 +323,13 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 		CommerceOrderItem commerceOrderItem);
 
 	public CommerceOrderItem updateCommerceOrderItem(long commerceOrderItemId,
-		int quantity, CommerceContext commerceContext)
-		throws PortalException;
+		int quantity, CommerceContext commerceContext,
+		ServiceContext serviceContext) throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem updateCommerceOrderItem(long commerceOrderItemId,
-		int quantity, String json, CommerceContext commerceContext)
-		throws PortalException;
+		int quantity, String json, CommerceContext commerceContext,
+		ServiceContext serviceContext) throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem updateCommerceOrderItemPrice(

@@ -517,62 +517,67 @@ public class CPDefinitionVirtualSettingUtil {
 	}
 
 	/**
-	* Returns the cp definition virtual setting where CPDefinitionId = &#63; or throws a {@link NoSuchCPDefinitionVirtualSettingException} if it could not be found.
+	* Returns the cp definition virtual setting where classNameId = &#63; and classPK = &#63; or throws a {@link NoSuchCPDefinitionVirtualSettingException} if it could not be found.
 	*
-	* @param CPDefinitionId the cp definition ID
+	* @param classNameId the class name ID
+	* @param classPK the class pk
 	* @return the matching cp definition virtual setting
 	* @throws NoSuchCPDefinitionVirtualSettingException if a matching cp definition virtual setting could not be found
 	*/
-	public static CPDefinitionVirtualSetting findByCPDefinitionId(
-		long CPDefinitionId)
+	public static CPDefinitionVirtualSetting findByC_C(long classNameId,
+		long classPK)
 		throws com.liferay.commerce.product.type.virtual.exception.NoSuchCPDefinitionVirtualSettingException {
-		return getPersistence().findByCPDefinitionId(CPDefinitionId);
+		return getPersistence().findByC_C(classNameId, classPK);
 	}
 
 	/**
-	* Returns the cp definition virtual setting where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the cp definition virtual setting where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param CPDefinitionId the cp definition ID
+	* @param classNameId the class name ID
+	* @param classPK the class pk
 	* @return the matching cp definition virtual setting, or <code>null</code> if a matching cp definition virtual setting could not be found
 	*/
-	public static CPDefinitionVirtualSetting fetchByCPDefinitionId(
-		long CPDefinitionId) {
-		return getPersistence().fetchByCPDefinitionId(CPDefinitionId);
+	public static CPDefinitionVirtualSetting fetchByC_C(long classNameId,
+		long classPK) {
+		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
 	/**
-	* Returns the cp definition virtual setting where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the cp definition virtual setting where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param CPDefinitionId the cp definition ID
+	* @param classNameId the class name ID
+	* @param classPK the class pk
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching cp definition virtual setting, or <code>null</code> if a matching cp definition virtual setting could not be found
 	*/
-	public static CPDefinitionVirtualSetting fetchByCPDefinitionId(
-		long CPDefinitionId, boolean retrieveFromCache) {
+	public static CPDefinitionVirtualSetting fetchByC_C(long classNameId,
+		long classPK, boolean retrieveFromCache) {
 		return getPersistence()
-				   .fetchByCPDefinitionId(CPDefinitionId, retrieveFromCache);
+				   .fetchByC_C(classNameId, classPK, retrieveFromCache);
 	}
 
 	/**
-	* Removes the cp definition virtual setting where CPDefinitionId = &#63; from the database.
+	* Removes the cp definition virtual setting where classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param CPDefinitionId the cp definition ID
+	* @param classNameId the class name ID
+	* @param classPK the class pk
 	* @return the cp definition virtual setting that was removed
 	*/
-	public static CPDefinitionVirtualSetting removeByCPDefinitionId(
-		long CPDefinitionId)
+	public static CPDefinitionVirtualSetting removeByC_C(long classNameId,
+		long classPK)
 		throws com.liferay.commerce.product.type.virtual.exception.NoSuchCPDefinitionVirtualSettingException {
-		return getPersistence().removeByCPDefinitionId(CPDefinitionId);
+		return getPersistence().removeByC_C(classNameId, classPK);
 	}
 
 	/**
-	* Returns the number of cp definition virtual settings where CPDefinitionId = &#63;.
+	* Returns the number of cp definition virtual settings where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param CPDefinitionId the cp definition ID
+	* @param classNameId the class name ID
+	* @param classPK the class pk
 	* @return the number of matching cp definition virtual settings
 	*/
-	public static int countByCPDefinitionId(long CPDefinitionId) {
-		return getPersistence().countByCPDefinitionId(CPDefinitionId);
+	public static int countByC_C(long classNameId, long classPK) {
+		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
 	/**
