@@ -15,6 +15,8 @@
 package com.liferay.commerce.product.type.virtual.service.impl;
 
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.base.CPDefinitionVirtualSettingServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -22,6 +24,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.Locale;
 import java.util.Map;
@@ -36,7 +39,29 @@ public class CPDefinitionVirtualSettingServiceImpl
 
 	@Override
 	public CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
-			long cpDefinitionId, long fileEntryId, String url,
+			String className, long classPK, long fileEntryId, String url,
+			int activationStatus, long duration, int maxUsages,
+			boolean useSample, long sampleFileEntryId, String sampleUrl,
+			boolean termsOfUseRequired,
+			Map<Locale, String> termsOfUseContentMap,
+			long termsOfUseJournalArticleResourcePrimKey, boolean override,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		checkPermission(className, classPK, ActionKeys.UPDATE);
+
+		return cpDefinitionVirtualSettingLocalService.
+			addCPDefinitionVirtualSetting(
+				className, classPK, fileEntryId, url, activationStatus,
+				duration, maxUsages, useSample, sampleFileEntryId, sampleUrl,
+				termsOfUseRequired, termsOfUseContentMap,
+				termsOfUseJournalArticleResourcePrimKey, override,
+				serviceContext);
+	}
+
+	@Override
+	public CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
+			String className, long classPK, long fileEntryId, String url,
 			int activationStatus, long duration, int maxUsages,
 			boolean useSample, long sampleFileEntryId, String sampleUrl,
 			boolean termsOfUseRequired,
@@ -45,34 +70,58 @@ public class CPDefinitionVirtualSettingServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId, ActionKeys.UPDATE);
+		checkPermission(className, classPK, ActionKeys.UPDATE);
 
 		return cpDefinitionVirtualSettingLocalService.
 			addCPDefinitionVirtualSetting(
-				cpDefinitionId, fileEntryId, url, activationStatus, duration,
-				maxUsages, useSample, sampleFileEntryId, sampleUrl,
+				className, classPK, fileEntryId, url, activationStatus,
+				duration, maxUsages, useSample, sampleFileEntryId, sampleUrl,
 				termsOfUseRequired, termsOfUseContentMap,
 				termsOfUseJournalArticleResourcePrimKey, serviceContext);
 	}
 
 	@Override
-	public CPDefinitionVirtualSetting
-			fetchCPDefinitionVirtualSettingByCPDefinitionId(long cpDefinitionId)
+	public CPDefinitionVirtualSetting fetchCPDefinitionVirtualSetting(
+			String className, long classPK)
 		throws PortalException {
 
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
 			cpDefinitionVirtualSettingLocalService.
-				fetchCPDefinitionVirtualSettingByCPDefinitionId(cpDefinitionId);
+				fetchCPDefinitionVirtualSetting(className, classPK);
 
 		if (cpDefinitionVirtualSetting != null) {
-			_cpDefinitionModelResourcePermission.check(
-				getPermissionChecker(),
-				cpDefinitionVirtualSetting.getCPDefinitionId(),
-				ActionKeys.VIEW);
+			checkPermission(className, classPK, ActionKeys.VIEW);
 		}
 
 		return cpDefinitionVirtualSetting;
+	}
+
+	@Override
+	public CPDefinitionVirtualSetting updateCPDefinitionVirtualSetting(
+			long cpDefinitionVirtualSettingId, long fileEntryId, String url,
+			int activationStatus, long duration, int maxUsages,
+			boolean useSample, long sampleFileEntryId, String sampleUrl,
+			boolean termsOfUseRequired,
+			Map<Locale, String> termsOfUseContentMap,
+			long termsOfUseJournalArticleResourcePrimKey, boolean override,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
+			cpDefinitionVirtualSettingLocalService.
+				getCPDefinitionVirtualSetting(cpDefinitionVirtualSettingId);
+
+		checkPermission(
+			cpDefinitionVirtualSetting.getClassName(),
+			cpDefinitionVirtualSetting.getClassPK(), ActionKeys.UPDATE);
+
+		return cpDefinitionVirtualSettingLocalService.
+			updateCPDefinitionVirtualSetting(
+				cpDefinitionVirtualSettingId, fileEntryId, url,
+				activationStatus, duration, maxUsages, useSample,
+				sampleFileEntryId, sampleUrl, termsOfUseRequired,
+				termsOfUseContentMap, termsOfUseJournalArticleResourcePrimKey,
+				override, serviceContext);
 	}
 
 	@Override
@@ -90,9 +139,9 @@ public class CPDefinitionVirtualSettingServiceImpl
 			cpDefinitionVirtualSettingLocalService.
 				getCPDefinitionVirtualSetting(cpDefinitionVirtualSettingId);
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(),
-			cpDefinitionVirtualSetting.getCPDefinitionId(), ActionKeys.VIEW);
+		checkPermission(
+			cpDefinitionVirtualSetting.getClassName(),
+			cpDefinitionVirtualSetting.getClassPK(), ActionKeys.UPDATE);
 
 		return cpDefinitionVirtualSettingLocalService.
 			updateCPDefinitionVirtualSetting(
@@ -103,10 +152,30 @@ public class CPDefinitionVirtualSettingServiceImpl
 				serviceContext);
 	}
 
+	protected void checkPermission(
+			String className, long classPK, String action)
+		throws PortalException {
+
+		if (className.equals(CPDefinition.class.getName())) {
+			_cpDefinitionModelResourcePermission.check(
+				getPermissionChecker(), classPK, action);
+		}
+		else if (className.equals(CPInstance.class.getName())) {
+			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+				classPK);
+
+			_cpDefinitionModelResourcePermission.check(
+				getPermissionChecker(), cpInstance.getCPDefinitionId(), action);
+		}
+	}
+
 	private static volatile ModelResourcePermission<CPDefinition>
 		_cpDefinitionModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
 				CPDefinitionVirtualSettingServiceImpl.class,
 				"_cpDefinitionModelResourcePermission", CPDefinition.class);
+
+	@ServiceReference(type = CPInstanceLocalService.class)
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 }
