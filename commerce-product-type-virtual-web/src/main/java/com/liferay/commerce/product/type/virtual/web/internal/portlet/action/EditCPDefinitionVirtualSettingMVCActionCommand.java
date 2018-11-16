@@ -112,8 +112,8 @@ public class EditCPDefinitionVirtualSettingMVCActionCommand
 		long cpDefinitionVirtualSettingId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionVirtualSettingId");
 
-		long cpDefinitionId = ParamUtil.getLong(
-			actionRequest, "cpDefinitionId");
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 		String url = ParamUtil.getString(actionRequest, "url");
@@ -132,6 +132,7 @@ public class EditCPDefinitionVirtualSettingMVCActionCommand
 				actionRequest, "termsOfUseContent");
 		long termsOfUseJournalArticleResourcePrimKey = ParamUtil.getLong(
 			actionRequest, "termsOfUseJournalArticleResourcePrimKey");
+		boolean override = ParamUtil.getBoolean(actionRequest, "override");
 
 		long duration = TimeUnit.DAYS.toMillis(durationDays);
 
@@ -147,10 +148,10 @@ public class EditCPDefinitionVirtualSettingMVCActionCommand
 			cpDefinitionVirtualSetting =
 				_cpDefinitionVirtualSettingService.
 					addCPDefinitionVirtualSetting(
-						cpDefinitionId, fileEntryId, url, activationStatus,
+						className, classPK, fileEntryId, url, activationStatus,
 						duration, maxUsages, useSample, sampleFileEntryId,
 						sampleUrl, termsOfUseRequired, termsOfUseContentMap,
-						termsOfUseJournalArticleResourcePrimKey,
+						termsOfUseJournalArticleResourcePrimKey, override,
 						serviceContext);
 		}
 		else {
@@ -164,7 +165,7 @@ public class EditCPDefinitionVirtualSettingMVCActionCommand
 						activationStatus, duration, maxUsages, useSample,
 						sampleFileEntryId, sampleUrl, termsOfUseRequired,
 						termsOfUseContentMap,
-						termsOfUseJournalArticleResourcePrimKey,
+						termsOfUseJournalArticleResourcePrimKey, override,
 						serviceContext);
 		}
 
