@@ -16,6 +16,10 @@ package com.liferay.commerce.product.type.virtual.order.service.impl;
 
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
+import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.order.exception.CommerceVirtualOrderItemException;
 import com.liferay.commerce.product.type.virtual.order.exception.CommerceVirtualOrderItemFileEntryIdException;
@@ -24,6 +28,7 @@ import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrde
 import com.liferay.commerce.product.type.virtual.order.service.base.CommerceVirtualOrderItemLocalServiceBaseImpl;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
+import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -33,6 +38,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -41,11 +47,14 @@ import java.io.File;
 import java.io.InputStream;
 
 import java.net.URL;
+import java.net.URLConnection;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Alessio Antonio Rendina
@@ -123,8 +132,19 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
 			_cpDefinitionVirtualSettingLocalService.
-				getCPDefinitionVirtualSettingByCPDefinitionId(
-					commerceOrderItem.getCPDefinitionId());
+				fetchCPDefinitionVirtualSetting(
+					CPInstance.class.getName(),
+					commerceOrderItem.getCPInstanceId());
+
+		if ((cpDefinitionVirtualSetting == null) ||
+			!cpDefinitionVirtualSetting.isOverride()) {
+
+			cpDefinitionVirtualSetting =
+				_cpDefinitionVirtualSettingLocalService.
+					getCPDefinitionVirtualSetting(
+						CPDefinition.class.getName(),
+						commerceOrderItem.getCPDefinitionId());
+		}
 
 		return commerceVirtualOrderItemLocalService.addCommerceVirtualOrderItem(
 			commerceOrderItemId, cpDefinitionVirtualSetting.getFileEntryId(),
@@ -132,6 +152,34 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 			cpDefinitionVirtualSetting.getActivationStatus(),
 			cpDefinitionVirtualSetting.getDuration(), 0,
 			cpDefinitionVirtualSetting.getMaxUsages(), serviceContext);
+	}
+
+	@Override
+	public void checkCommerceVirtualOrderItems() throws PortalException {
+		List<CommerceVirtualOrderItem> commerceVirtualOrderItems =
+			commerceVirtualOrderItemFinder.findByEndDate(new Date());
+
+		for (CommerceVirtualOrderItem commerceVirtualOrderItem :
+				commerceVirtualOrderItems) {
+
+			commerceVirtualOrderItemLocalService.setActive(
+				commerceVirtualOrderItem.getCommerceVirtualOrderItemId(),
+				false);
+		}
+	}
+
+	@Override
+	public void deleteCommerceVirtualOrderItemByCommerceOrderItemId(
+		long commerceOrderItemId) {
+
+		CommerceVirtualOrderItem commerceVirtualOrderItem =
+			commerceVirtualOrderItemPersistence.fetchByCommerceOrderItemId(
+				commerceOrderItemId);
+
+		if (commerceVirtualOrderItem != null) {
+			commerceVirtualOrderItemLocalService.deleteCommerceVirtualOrderItem(
+				commerceVirtualOrderItem);
+		}
 	}
 
 	@Override
@@ -149,10 +197,14 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 			commerceVirtualOrderItemPersistence.findByPrimaryKey(
 				commerceVirtualOrderItemId);
 
+		CommerceOrderItem commerceOrderItem =
+			commerceVirtualOrderItem.getCommerceOrderItem();
+
 		InputStream contentStream;
-		FileEntry fileEntry = commerceVirtualOrderItem.getFileEntry();
 
 		if (commerceVirtualOrderItem.getFileEntryId() > 0) {
+			FileEntry fileEntry = commerceVirtualOrderItem.getFileEntry();
+
 			contentStream = fileEntry.getContentStream();
 		}
 		else {
@@ -161,15 +213,25 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 			contentStream = url.openStream();
 		}
 
-		CommerceOrderItem commerceOrderItem =
-			commerceVirtualOrderItem.getCommerceOrderItem();
-
 		File tempFile = FileUtil.createTempFile(contentStream);
+
+		String mimeType = URLConnection.guessContentTypeFromStream(
+			contentStream);
+
+		Set<String> extensions = MimeTypesUtil.getExtensions(mimeType);
+
+		String extension = StringPool.BLANK;
+
+		if (!extensions.isEmpty()) {
+			Iterator<String> iterator = extensions.iterator();
+
+			extension = iterator.next();
+		}
 
 		File file = new File(
 			tempFile.getParent(),
 			commerceOrderItem.getNameCurrentValue() + StringPool.PERIOD +
-				fileEntry.getExtension());
+				extension);
 
 		if (file.exists()) {
 			file.delete();
@@ -206,11 +268,11 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 
 	@Override
 	public List<CommerceVirtualOrderItem> getUserCommerceVirtualOrderItems(
-		long groupId, long user, int start, int end,
+		long groupId, long userId, int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
 
 		return commerceVirtualOrderItemFinder.findByG_U(
-			groupId, user, start, end, orderByComparator);
+			groupId, userId, start, end, orderByComparator);
 	}
 
 	@Override
@@ -309,26 +371,86 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 		return commerceVirtualOrderItem;
 	}
 
-	protected CommerceVirtualOrderItem setDurationDates(
+	@Override
+	public CommerceVirtualOrderItem updateCommerceVirtualOrderItemDates(
+			long commerceVirtualOrderItemId)
+		throws PortalException {
+
+		CommerceVirtualOrderItem commerceVirtualOrderItem =
+			commerceVirtualOrderItemPersistence.fetchByPrimaryKey(
+				commerceVirtualOrderItemId);
+
+		commerceVirtualOrderItem = setDurationDates(commerceVirtualOrderItem);
+
+		commerceVirtualOrderItemPersistence.update(commerceVirtualOrderItem);
+
+		return commerceVirtualOrderItem;
+	}
+
+	protected Date calculateCommerceVirtualOrderItemEndDate(
 			CommerceVirtualOrderItem commerceVirtualOrderItem)
 		throws PortalException {
 
-		commerceVirtualOrderItem.setStartDate(new Date());
+		User defaultUser = userLocalService.getDefaultUser(
+			commerceVirtualOrderItem.getCompanyId());
+
+		Calendar calendar = CalendarFactoryUtil.getCalendar(
+			defaultUser.getTimeZone());
 
 		long duration = commerceVirtualOrderItem.getDuration();
 
 		if (duration > 0) {
-			User defaultUser = userLocalService.getDefaultUser(
-				commerceVirtualOrderItem.getCompanyId());
-
-			Calendar calendar = CalendarFactoryUtil.getCalendar(
-				defaultUser.getTimeZone());
-
 			duration = calendar.getTimeInMillis() + duration;
 
 			calendar.setTimeInMillis(duration);
+		}
 
-			commerceVirtualOrderItem.setEndDate(calendar.getTime());
+		return calendar.getTime();
+	}
+
+	protected CommerceSubscriptionEntry getCommerceSubscriptionEntry(
+			long commerceOrderItemId)
+		throws PortalException {
+
+		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
+			_commerceSubscriptionCycleEntryLocalService.
+				fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
+					commerceOrderItemId);
+
+		if (commerceSubscriptionCycleEntry == null) {
+			return null;
+		}
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			commerceSubscriptionCycleEntry.getCommerceSubscriptionEntry();
+
+		return commerceSubscriptionEntry;
+	}
+
+	protected CommerceVirtualOrderItem setDurationDates(
+			CommerceVirtualOrderItem commerceVirtualOrderItem)
+		throws PortalException {
+
+		Date startDate = new Date();
+		Date endDate;
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			getCommerceSubscriptionEntry(
+				commerceVirtualOrderItem.getCommerceOrderItemId());
+
+		if (commerceSubscriptionEntry == null) {
+			endDate = calculateCommerceVirtualOrderItemEndDate(
+				commerceVirtualOrderItem);
+		}
+		else {
+			startDate = commerceSubscriptionEntry.getStartDate();
+			endDate = commerceSubscriptionEntry.getNextIterationDate();
+		}
+
+		commerceVirtualOrderItem.setStartDate(startDate);
+
+		if (endDate.after(startDate)) {
+			commerceVirtualOrderItem.setEndDate(endDate);
 		}
 
 		return commerceVirtualOrderItem;
@@ -355,6 +477,10 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 
 	@ServiceReference(type = CommerceOrderItemLocalService.class)
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
+
+	@ServiceReference(type = CommerceSubscriptionCycleEntryLocalService.class)
+	private CommerceSubscriptionCycleEntryLocalService
+		_commerceSubscriptionCycleEntryLocalService;
 
 	@ServiceReference(type = CPDefinitionVirtualSettingLocalService.class)
 	private CPDefinitionVirtualSettingLocalService
