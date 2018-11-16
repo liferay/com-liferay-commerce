@@ -19,7 +19,10 @@
 <%
 CPDefinitionVirtualSettingDisplayContext cpDefinitionVirtualSettingDisplayContext = (CPDefinitionVirtualSettingDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
+CPDefinition cpDefinition = cpDefinitionVirtualSettingDisplayContext.getCPDefinition();
 CPDefinitionVirtualSetting cpDefinitionVirtualSetting = cpDefinitionVirtualSettingDisplayContext.getCPDefinitionVirtualSetting();
+
+boolean durationDisabled = cpDefinition.isSubscriptionEnabled();
 
 long durationDays = 0;
 
@@ -28,31 +31,4 @@ if ((cpDefinitionVirtualSetting != null) && (cpDefinitionVirtualSetting.getDurat
 }
 %>
 
-<liferay-ui:error-marker
-	key="<%= WebKeys.ERROR_SECTION %>"
-	value="base-information"
-/>
-
-<aui:model-context bean="<%= cpDefinitionVirtualSetting %>" model="<%= CPDefinitionVirtualSetting.class %>" />
-
-<aui:fieldset>
-	<aui:select name="activationStatus">
-
-		<%
-		for (int activationStatus : cpDefinitionVirtualSettingDisplayContext.getActivationStatuses()) {
-		%>
-
-			<aui:option label="<%= cpDefinitionVirtualSettingDisplayContext.getActivationStatusLabel(activationStatus) %>" selected="<%= (cpDefinitionVirtualSetting != null) && (activationStatus == cpDefinitionVirtualSetting.getActivationStatus()) %>" value="<%= activationStatus %>" />
-
-		<%
-		}
-		%>
-
-	</aui:select>
-
-	<aui:input helpMessage="duration-help" label="duration" name="durationDays" suffix="days" type="long" value="<%= durationDays %>">
-		<aui:validator name="digits" />
-	</aui:input>
-
-	<aui:input label="max-number-of-downloads" name="maxUsages" />
-</aui:fieldset>
+<%@ include file="/base_information.jspf" %>
