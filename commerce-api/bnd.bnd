@@ -2,6 +2,7 @@ Bundle-Name: Liferay Commerce API
 Bundle-SymbolicName: com.liferay.commerce.api
 Bundle-Version: 3.2.0
 Export-Package:\
+	com.liferay.commerce.configuration,\
 	com.liferay.commerce.constants,\
 	com.liferay.commerce.context,\
 	com.liferay.commerce.discount,\
