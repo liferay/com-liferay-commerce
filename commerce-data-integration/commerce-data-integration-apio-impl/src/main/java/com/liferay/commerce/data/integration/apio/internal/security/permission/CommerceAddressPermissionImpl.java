@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -75,8 +76,14 @@ public class CommerceAddressPermissionImpl implements HasPermission<Long> {
 					CommerceActionKeys.MANAGE_COMMERCE_ADDRESSES);
 			};
 		}
+		else if (identifierClass.equals(WebSiteIdentifier.class)) {
+			return (credentials, groupId) ->
+				_portletResourcePermission.contains(
+					(PermissionChecker)credentials.get(), (Long)groupId,
+					CommerceActionKeys.MANAGE_COMMERCE_ADDRESSES);
+		}
 
-		return (credentials, commerceAccountCPKERC) -> false;
+		return (credentials, s) -> false;
 	}
 
 	@Override
