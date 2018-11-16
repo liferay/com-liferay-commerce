@@ -553,7 +553,8 @@ public class CommerceOrderItemLocalServiceImpl
 
 		if (!ExportImportThreadLocal.isImportInProcess()) {
 			List<CommerceOrderValidatorResult> commerceCartValidatorResults =
-				_commerceOrderValidatorRegistry.validate(cpInstance, quantity);
+				_commerceOrderValidatorRegistry.validate(
+					commerceOrder, cpInstance, quantity);
 
 			if (!commerceCartValidatorResults.isEmpty()) {
 				throw new CommerceOrderValidatorException(

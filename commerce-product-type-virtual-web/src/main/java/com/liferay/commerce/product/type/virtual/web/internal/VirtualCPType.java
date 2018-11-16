@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.product.type.virtual.web.internal;
 
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
@@ -41,9 +41,10 @@ import org.osgi.service.component.annotations.Reference;
 public class VirtualCPType implements CPType {
 
 	@Override
-	public void deleteCPDefinition(long cpDefinitionId) throws PortalException {
+	public void deleteCPDefinition(long cpDefinitionId) {
 		_cpDefinitionVirtualSettingLocalService.
-			deleteCPDefinitionVirtualSettingByCPDefinitionId(cpDefinitionId);
+			deleteCPDefinitionVirtualSetting(
+				CPDefinition.class.getName(), cpDefinitionId);
 	}
 
 	@Override
