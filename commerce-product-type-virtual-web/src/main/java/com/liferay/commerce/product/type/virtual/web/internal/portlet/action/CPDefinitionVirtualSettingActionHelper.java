@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.type.virtual.web.internal.portlet.action;
 
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingService;
 import com.liferay.commerce.product.type.virtual.web.internal.constants.CPDefinitionVirtualSettingWebKeys;
@@ -46,12 +48,19 @@ public class CPDefinitionVirtualSettingActionHelper {
 
 		long cpDefinitionId = ParamUtil.getLong(
 			renderRequest, "cpDefinitionId");
+		long cpInstanceId = ParamUtil.getLong(renderRequest, "cpInstanceId");
 
-		if (cpDefinitionId > 0) {
+		if (cpInstanceId > 0) {
 			cpDefinitionVirtualSetting =
 				_cpDefinitionVirtualSettingService.
-					fetchCPDefinitionVirtualSettingByCPDefinitionId(
-						cpDefinitionId);
+					fetchCPDefinitionVirtualSetting(
+						CPInstance.class.getName(), cpInstanceId);
+		}
+		else if (cpDefinitionId > 0) {
+			cpDefinitionVirtualSetting =
+				_cpDefinitionVirtualSettingService.
+					fetchCPDefinitionVirtualSetting(
+						CPDefinition.class.getName(), cpDefinitionId);
 		}
 
 		if (cpDefinitionVirtualSetting != null) {
