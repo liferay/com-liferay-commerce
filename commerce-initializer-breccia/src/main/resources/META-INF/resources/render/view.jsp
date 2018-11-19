@@ -393,7 +393,11 @@ List<CPAttachmentFileEntry> cpAttachmentFileEntries = cpContentHelper.getCPAttac
 		zoomImage.style.transform = 'translate(' + translate.x + 'px, ' + translate.y + 'px)';
 	}
 
-	document.getElementById('<portlet:namespace />full-image').addEventListener('mousemove', detectMousePosition);
+	var fullImage = document.getElementById('<portlet:namespace />full-image');
+
+	if (fullImage) {
+		fullImage.addEventListener('mousemove', detectMousePosition);
+	}
 </aui:script>
 
 <aui:script use="liferay-commerce-product-content">
