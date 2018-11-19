@@ -14,10 +14,57 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.base.CProductLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.Date;
 
 /**
  * @author Ethan Bustad
  */
 public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
+
+	@Override
+	public CProduct addCProduct(ServiceContext serviceContext)
+		throws PortalException {
+
+		CProduct cProduct = cProductLocalService.createCProduct(
+			counterLocalService.increment());
+
+		cProduct.setUuid(serviceContext.getUuid());
+		cProduct.setGroupId(serviceContext.getScopeGroupId());
+		cProduct.setCompanyId(serviceContext.getCompanyId());
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+
+		cProduct.setUserId(user.getUserId());
+		cProduct.setUserName(user.getFullName());
+
+		Date now = new Date();
+
+		cProduct.setCreateDate(now);
+		cProduct.setModifiedDate(now);
+
+		return cProductPersistence.update(cProduct);
+	}
+
+	@Override
+	public CProduct updatePublishedDefinitionId(
+			long cProductId, long publishedDefinitionId)
+		throws PortalException {
+
+		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+
+		Date now = new Date();
+
+		cProduct.setModifiedDate(now);
+
+		cProduct.setPublishedDefinitionId(publishedDefinitionId);
+
+		return cProductPersistence.update(cProduct);
+	}
+
 }
