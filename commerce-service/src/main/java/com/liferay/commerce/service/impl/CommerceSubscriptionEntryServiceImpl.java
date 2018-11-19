@@ -92,7 +92,8 @@ public class CommerceSubscriptionEntryServiceImpl
 	public BaseModelSearchResult<CommerceSubscriptionEntry>
 			searchCommerceSubscriptionEntries(
 				long companyId, long groupId, Long maxSubscriptionCycles,
-				Boolean active, String keywords, int start, int end, Sort sort)
+				Integer subscriptionStatus, String keywords, int start, int end,
+				Sort sort)
 		throws PortalException {
 
 		_portletResourcePermission.check(
@@ -101,25 +102,8 @@ public class CommerceSubscriptionEntryServiceImpl
 
 		return commerceSubscriptionEntryLocalService.
 			searchCommerceSubscriptionEntries(
-				companyId, groupId, maxSubscriptionCycles, active, keywords,
-				start, end, sort);
-	}
-
-	@Override
-	public CommerceSubscriptionEntry setActive(
-			long commerceSubscriptionEntryId, boolean active)
-		throws PortalException {
-
-		CommerceSubscriptionEntry commerceSubscriptionEntry =
-			commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntry(
-				commerceSubscriptionEntryId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceSubscriptionEntry.getGroupId(),
-			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
-
-		return commerceSubscriptionEntryLocalService.setActive(
-			commerceSubscriptionEntryId, active);
+				companyId, groupId, maxSubscriptionCycles, subscriptionStatus,
+				keywords, start, end, sort);
 	}
 
 	@Override
@@ -127,9 +111,9 @@ public class CommerceSubscriptionEntryServiceImpl
 			long commerceSubscriptionEntryId, int subscriptionLength,
 			String subscriptionType,
 			UnicodeProperties subscriptionTypeSettingsProperties,
-			long maxSubscriptionCycles, boolean active, int startDateMonth,
-			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int nextIterationDateMonth,
+			long maxSubscriptionCycles, int subscriptionStatus,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int nextIterationDateMonth,
 			int nextIterationDateDay, int nextIterationDateYear,
 			int nextIterationDateHour, int nextIterationDateMinute)
 		throws PortalException {
@@ -146,11 +130,28 @@ public class CommerceSubscriptionEntryServiceImpl
 			updateCommerceSubscriptionEntry(
 				commerceSubscriptionEntryId, subscriptionLength,
 				subscriptionType, subscriptionTypeSettingsProperties,
-				maxSubscriptionCycles, active, startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute,
+				maxSubscriptionCycles, subscriptionStatus, startDateMonth,
+				startDateDay, startDateYear, startDateHour, startDateMinute,
 				nextIterationDateMonth, nextIterationDateDay,
 				nextIterationDateYear, nextIterationDateHour,
 				nextIterationDateMinute);
+	}
+
+	@Override
+	public CommerceSubscriptionEntry updateSubscriptionStatus(
+			long commerceSubscriptionEntryId, int subscriptionStatus)
+		throws PortalException {
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntry(
+				commerceSubscriptionEntryId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commerceSubscriptionEntry.getGroupId(),
+			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
+
+		return commerceSubscriptionEntryLocalService.updateSubscriptionStatus(
+			commerceSubscriptionEntryId, subscriptionStatus);
 	}
 
 	private static volatile PortletResourcePermission
