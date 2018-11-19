@@ -247,6 +247,7 @@ AUI.add(
 						var stockQuantities = productContent.all('[data-text-cp-instance-stock-quantity]');
 						var gtins = productContent.all('[data-text-cp-instance-gtin]');
 						var manufacturerPartNumbers = productContent.all('[data-text-cp-instance-manufacturer-part-number]');
+						var sampleFiles = productContent.all('[data-text-cp-instance-sample-file]');
 
 						var skusShow = productContent.all('[data-text-cp-instance-sku-show]').hide();
 						var pricesShow = productContent.all('[data-text-cp-instance-price-show]').hide();
@@ -256,6 +257,7 @@ AUI.add(
 						var stockQuantitiesShow = productContent.all('[data-text-cp-instance-stock-quantity-show]').hide();
 						var gtinsShow = productContent.all('[data-text-cp-instance-gtin-show]').hide();
 						var manufacturerPartNumbersShow = productContent.all('[data-text-cp-instance-manufacturer-part-number-show]').hide();
+						var sampleFilesShow = productContent.all('[data-text-cp-instance-sample-file-show]').hide();
 
 						if (cpInstance.sku) {
 							skus.setHTML(cpInstance.sku);
@@ -295,6 +297,11 @@ AUI.add(
 						if (cpInstance.stockQuantity) {
 							stockQuantities.setHTML(cpInstance.stockQuantity);
 							stockQuantitiesShow.show();
+						}
+
+						if (cpInstance.sampleFile) {
+							sampleFiles.setHTML(cpInstance.sampleFile);
+							sampleFilesShow.show();
 						}
 
 						productContent.all('[data-cp-instance-id]').each(
