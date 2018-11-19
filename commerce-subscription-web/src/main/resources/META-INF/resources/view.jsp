@@ -32,7 +32,7 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 >
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-navigation
-			navigationKeys='<%= new String[] {"all", "active", "inactive", "never-ends"} %>'
+			navigationKeys='<%= new String[] {"all", "active", "suspended", "cancelled", "completed", "never-ends"} %>'
 			portletURL="<%= commerceSubscriptionEntryDisplayContext.getPortletURL() %>"
 		/>
 
@@ -180,6 +180,8 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 		if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-subscription-entries" />')) {
 			var form = AUI.$(document.<portlet:namespace />fm);
 
+			form.attr('method', 'post');
+			form.fm('<%= Constants.CMD %>').val('<%= Constants.DELETE %>');
 			form.fm('deleteCommerceSubscriptionEntryIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
 
 			submitForm(form);
