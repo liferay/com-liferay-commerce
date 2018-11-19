@@ -15,6 +15,7 @@
 package com.liferay.commerce.subscription.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
@@ -24,12 +25,15 @@ import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributor;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
+import com.liferay.commerce.subscription.web.internal.display.context.util.CommerceSubscriptionDisplayContextHelper;
 import com.liferay.commerce.subscription.web.internal.subscription.util.CommerceSubscriptionEntryPortletUtil;
+import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItemList;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
@@ -48,6 +52,8 @@ import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +66,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 	public CommerceSubscriptionEntryDisplayContext(
 		CommerceSubscriptionEntryService commerceSubscriptionEntryService,
+		ConfigurationProvider configurationProvider,
 		CPSubscriptionTypeJSPContributorRegistry
 			cpSubscriptionTypeJSPContributorRegistry,
 		CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry,
@@ -67,6 +74,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 		PortletResourcePermission portletResourcePermission) {
 
 		_commerceSubscriptionEntryService = commerceSubscriptionEntryService;
+		_configurationProvider = configurationProvider;
 		_cpSubscriptionTypeJSPContributorRegistry =
 			cpSubscriptionTypeJSPContributorRegistry;
 		_cpSubscriptionTypeRegistry = cpSubscriptionTypeRegistry;
@@ -114,6 +122,21 @@ public class CommerceSubscriptionEntryDisplayContext {
 		return _commerceSubscriptionEntry;
 	}
 
+	public DropdownItemList getCommerceSubscriptionEntryActionItemList(
+			CommerceSubscriptionEntry commerceSubscriptionEntry,
+			PortletRequest portletRequest, PortletResponse portletResponse)
+		throws PortalException {
+
+		CommerceSubscriptionDisplayContextHelper
+			commerceSubscriptionDisplayContextHelper =
+				new CommerceSubscriptionDisplayContextHelper(
+					commerceSubscriptionEntry, _configurationProvider,
+					portletRequest, portletResponse);
+
+		return commerceSubscriptionDisplayContextHelper.
+			getCommerceSubscriptionEntryActionItemList();
+	}
+
 	public long getCommerceSubscriptionEntryId() throws PortalException {
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
 			getCommerceSubscriptionEntry();
@@ -129,7 +152,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 			getCommerceSubscriptionEntryOrderSearchContainer()
 		throws PortalException {
 
-		_commerceSubscripionentryOrderSearchContainer = new SearchContainer<>(
+		_commerceSubscriptionEntryOrderSearchContainer = new SearchContainer<>(
 			_cpRequestHelper.getLiferayPortletRequest(), getPortletURL(), null,
 			"there-are-no-orders");
 
@@ -154,21 +177,21 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 		int total = commerceOrders.size();
 
-		_commerceSubscripionentryOrderSearchContainer.setTotal(total);
+		_commerceSubscriptionEntryOrderSearchContainer.setTotal(total);
 
 		int fromIndex =
-			_commerceSubscripionentryOrderSearchContainer.getStart();
+			_commerceSubscriptionEntryOrderSearchContainer.getStart();
 
-		int toIndex = _commerceSubscripionentryOrderSearchContainer.getEnd();
+		int toIndex = _commerceSubscriptionEntryOrderSearchContainer.getEnd();
 
 		if (total < toIndex) {
 			toIndex = total;
 		}
 
-		_commerceSubscripionentryOrderSearchContainer.setResults(
+		_commerceSubscriptionEntryOrderSearchContainer.setResults(
 			commerceOrders.subList(fromIndex, toIndex));
 
-		return _commerceSubscripionentryOrderSearchContainer;
+		return _commerceSubscriptionEntryOrderSearchContainer;
 	}
 
 	public String getCommerceSubscriptionEntryRemainingCycles(
@@ -358,19 +381,34 @@ public class CommerceSubscriptionEntryDisplayContext {
 	public SearchContainer<CommerceSubscriptionEntry> getSearchContainer()
 		throws PortalException {
 
-		Boolean active = null;
 		String emptyResultsMessage = "there-are-no-subscriptions";
 		Long maxSubscriptionCycles = null;
+		Integer subscriptionStatus = null;
 
 		String navigation = getNavigation();
 
 		if (navigation.equals("active")) {
-			active = Boolean.TRUE;
 			emptyResultsMessage = "there-are-no-active-subscriptions";
+			subscriptionStatus =
+				CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE;
 		}
-		else if (navigation.equals("inactive")) {
-			active = Boolean.FALSE;
-			emptyResultsMessage = "there-are-no-inactive-subscriptions";
+		else if (navigation.equals("suspended")) {
+			emptyResultsMessage = "there-are-no-suspended-subscriptions";
+			subscriptionStatus =
+				CommerceSubscriptionEntryConstants.
+					SUBSCRIPTION_STATUS_SUSPENDED;
+		}
+		else if (navigation.equals("cancelled")) {
+			emptyResultsMessage = "there-are-no-cancelled-subscriptions";
+			subscriptionStatus =
+				CommerceSubscriptionEntryConstants.
+					SUBSCRIPTION_STATUS_CANCELLED;
+		}
+		else if (navigation.equals("completed")) {
+			emptyResultsMessage = "there-are-no-completed-subscriptions";
+			subscriptionStatus =
+				CommerceSubscriptionEntryConstants.
+					SUBSCRIPTION_STATUS_COMPLETED;
 		}
 		else if (navigation.equals("never-ends")) {
 			emptyResultsMessage = "there-are-no-unlimited-subscriptions";
@@ -393,8 +431,9 @@ public class CommerceSubscriptionEntryDisplayContext {
 					searchCommerceSubscriptionEntries(
 						_cpRequestHelper.getCompanyId(),
 						_cpRequestHelper.getScopeGroupId(),
-						maxSubscriptionCycles, active, getKeywords(),
-						_searchContainer.getStart(), _searchContainer.getEnd(),
+						maxSubscriptionCycles, subscriptionStatus,
+						getKeywords(), _searchContainer.getStart(),
+						_searchContainer.getEnd(),
 						CommerceSubscriptionEntryPortletUtil.
 							getCommerceSubscriptionEntrySort(
 								orderByCol, orderByType));
@@ -421,11 +460,12 @@ public class CommerceSubscriptionEntryDisplayContext {
 	}
 
 	private final Format _commerceOrderDateFormatDateTime;
-	private SearchContainer<CommerceOrder>
-		_commerceSubscripionentryOrderSearchContainer;
 	private CommerceSubscriptionEntry _commerceSubscriptionEntry;
+	private SearchContainer<CommerceOrder>
+		_commerceSubscriptionEntryOrderSearchContainer;
 	private final CommerceSubscriptionEntryService
 		_commerceSubscriptionEntryService;
+	private final ConfigurationProvider _configurationProvider;
 	private final CPRequestHelper _cpRequestHelper;
 	private final CPSubscriptionTypeJSPContributorRegistry
 		_cpSubscriptionTypeJSPContributorRegistry;

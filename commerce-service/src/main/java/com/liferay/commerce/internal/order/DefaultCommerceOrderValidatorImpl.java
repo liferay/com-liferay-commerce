@@ -143,7 +143,7 @@ public class DefaultCommerceOrderValidatorImpl
 
 		if ((minOrderQuantity > 0) &&
 			(commerceOrderItem.getQuantity() < minOrderQuantity)) {
-			
+
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
 				"the-minimum-quantity-is-x", String.valueOf(minOrderQuantity),
