@@ -774,7 +774,7 @@
 		<column name="subscriptionType" type="String" />
 		<column name="subscriptionTypeSettings" type="String" />
 		<column name="maxSubscriptionCycles" type="long" />
-		<column name="active" type="boolean" />
+		<column name="subscriptionStatus" type="int" />
 		<column name="lastIterationDate" type="Date" />
 		<column name="nextIterationDate" type="Date" />
 		<column name="startDate" type="Date" />
@@ -790,8 +790,8 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="active" return-type="Collection">
-			<finder-column name="active" />
+		<finder name="subscriptionStatus" return-type="Collection">
+			<finder-column name="subscriptionStatus" />
 		</finder>
 		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
@@ -1001,6 +1001,7 @@
 		<exception>CommerceSubscriptionCPInstanceId</exception>
 		<exception>CommerceSubscriptionEntryNextIterationDate</exception>
 		<exception>CommerceSubscriptionEntryStartDate</exception>
+		<exception>CommerceSubscriptionEntrySubscriptionStatus</exception>
 		<exception>CommerceSubscriptionType</exception>
 		<exception>CommerceWarehouseActive</exception>
 		<exception>CommerceWarehouseCommerceRegionId</exception>
