@@ -50,13 +50,11 @@ public class CPRuleUpgradeProcess extends UpgradeProcess {
 				new AlterTableAddColumn(
 					_columnName + StringPool.SPACE + _columnType));
 		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					String.format(
-						"Column %s already exists on table %s", _columnName,
-						_tableName));
-			}
+		else if (_log.isInfoEnabled()) {
+			_log.info(
+				String.format(
+					"Column %s already exists on table %s", _columnName,
+					_tableName));
 		}
 	}
 
