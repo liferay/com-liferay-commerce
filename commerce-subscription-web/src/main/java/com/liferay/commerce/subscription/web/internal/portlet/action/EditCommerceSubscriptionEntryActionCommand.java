@@ -14,11 +14,13 @@
 
 package com.liferay.commerce.subscription.web.internal.portlet.action;
 
+import com.liferay.commerce.exception.CommerceSubscriptionEntrySubscriptionStatusException;
+import com.liferay.commerce.exception.CommerceSubscriptionTypeException;
 import com.liferay.commerce.exception.NoSuchSubscriptionEntryException;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.commerce.subscription.CommerceSubscriptionEntryActionHelper;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -39,10 +41,12 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
 	property = {
+		"javax.portlet.name=" + CPPortletKeys.COMMERCE_SUBSCRIPTION_CONTENT_WEB,
 		"javax.portlet.name=" + CPPortletKeys.COMMERCE_SUBSCRIPTION_ENTRY,
 		"mvc.command.name=editCommerceSubscriptionEntry"
 	},
@@ -95,13 +99,36 @@ public class EditCommerceSubscriptionEntryActionCommand
 				updateCommerceSubscriptionEntry(
 					commerceSubscriptionEntryId, actionRequest);
 			}
-			else if (cmd.equals("setActive")) {
-				setActive(commerceSubscriptionEntryId, actionRequest);
+			else if (cmd.equals("activate")) {
+				_commerceSubscriptionEntryActionHelper.
+					activateCommerceSubscriptionEntry(
+						commerceSubscriptionEntryId);
+			}
+			else if (cmd.equals("cancel")) {
+				_commerceSubscriptionEntryActionHelper.
+					cancelCommerceSubscriptionEntry(
+						commerceSubscriptionEntryId);
+			}
+			else if (cmd.equals("suspend")) {
+				_commerceSubscriptionEntryActionHelper.
+					suspendCommerceSubscriptionEntry(
+						commerceSubscriptionEntryId);
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchSubscriptionEntryException ||
-				e instanceof PrincipalException) {
+			if (e instanceof
+					CommerceSubscriptionEntrySubscriptionStatusException ||
+				e instanceof CommerceSubscriptionTypeException) {
+
+				hideDefaultErrorMessage(actionRequest);
+
+				SessionErrors.add(actionRequest, e.getClass());
+
+				actionResponse.setRenderParameter(
+					"mvcRenderCommandName", "editCommerceSubscriptionEntry");
+			}
+			else if (e instanceof NoSuchSubscriptionEntryException ||
+					 e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
@@ -111,16 +138,6 @@ public class EditCommerceSubscriptionEntryActionCommand
 				throw e;
 			}
 		}
-	}
-
-	protected void setActive(
-			long commerceSubscriptionEntryId, ActionRequest actionRequest)
-		throws PortalException {
-
-		boolean active = ParamUtil.getBoolean(actionRequest, "active");
-
-		_commerceSubscriptionEntryService.setActive(
-			commerceSubscriptionEntryId, active);
 	}
 
 	protected CommerceSubscriptionEntry updateCommerceSubscriptionEntry(
@@ -136,7 +153,8 @@ public class EditCommerceSubscriptionEntryActionCommand
 				actionRequest, "subscriptionTypeSettings--");
 		long maxSubscriptionCycles = ParamUtil.getLong(
 			actionRequest, "maxSubscriptionCycles");
-		boolean active = ParamUtil.getBoolean(actionRequest, "active");
+		int subscriptionStatus = ParamUtil.getInteger(
+			actionRequest, "subscriptionStatus");
 
 		int startDateMonth = ParamUtil.getInteger(
 			actionRequest, "startDateMonth");
@@ -175,12 +193,16 @@ public class EditCommerceSubscriptionEntryActionCommand
 			_commerceSubscriptionEntryService.updateCommerceSubscriptionEntry(
 				commerceSubscriptionEntryId, subscriptionLength,
 				subscriptionType, subscriptionTypeSettingsProperties,
-				maxSubscriptionCycles, active, startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute,
+				maxSubscriptionCycles, subscriptionStatus, startDateMonth,
+				startDateDay, startDateYear, startDateHour, startDateMinute,
 				nextIterationDateMonth, nextIterationDateDay,
 				nextIterationDateYear, nextIterationDateHour,
 				nextIterationDateMinute);
 	}
+
+	@Reference
+	private CommerceSubscriptionEntryActionHelper
+		_commerceSubscriptionEntryActionHelper;
 
 	@Reference
 	private CommerceSubscriptionEntryService _commerceSubscriptionEntryService;
