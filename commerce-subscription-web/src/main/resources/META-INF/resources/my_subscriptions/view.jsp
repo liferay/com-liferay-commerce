@@ -71,19 +71,50 @@ SearchContainer<CommerceSubscriptionEntry> commerceSubscriptionEntrySearchContai
 					name="status"
 				>
 					<h6 class="text-default">
-						<%= HtmlUtil.escape(LanguageUtil.get(request, (commerceSubscriptionEntry.isActive() ? "active" : "inactive"))) %>
+						<%= HtmlUtil.escape(LanguageUtil.get(request, CommerceSubscriptionEntryConstants.getSubscriptionStatusLabel(commerceSubscriptionEntry.getSubscriptionStatus()))) %>
 					</h6>
 				</liferay-ui:search-container-column-text>
 
 				<liferay-ui:search-container-column-date
-					name="create-date"
-					property="createDate"
+					name="start-date"
+					property="startDate"
 				/>
 
 				<liferay-ui:search-container-column-date
 					name="next-iteration-date"
 					property="nextIterationDate"
 				/>
+
+				<liferay-ui:search-container-column-text>
+
+					<%
+					DropdownItemList commerceSubscriptionEntryActionItemList = commerceSubscriptionContentDisplayContext.getCommerceSubscriptionEntryActionItemList(commerceSubscriptionEntry, renderRequest, renderResponse);
+					%>
+
+					<c:if test="<%= commerceSubscriptionEntryActionItemList != null %>">
+						<c:choose>
+							<c:when test="<%= commerceSubscriptionEntryActionItemList.isEmpty() %>">
+							</c:when>
+							<c:when test="<%= commerceSubscriptionEntryActionItemList.size() > 1 %>">
+								<clay:dropdown-menu
+									dropdownItems="<%= commerceSubscriptionEntryActionItemList %>"
+								/>
+							</c:when>
+							<c:otherwise>
+
+								<%
+								DropdownItem dropdownItem = commerceSubscriptionEntryActionItemList.get(0);
+								%>
+
+								<clay:link
+									buttonStyle="secondary"
+									href='<%= String.valueOf(dropdownItem.get("href")) %>'
+									label='<%= String.valueOf(dropdownItem.get("label")) %>'
+								/>
+							</c:otherwise>
+						</c:choose>
+					</c:if>
+				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
 
 			<liferay-ui:search-iterator

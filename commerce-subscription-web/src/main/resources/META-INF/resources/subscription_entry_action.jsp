@@ -43,18 +43,6 @@ CommerceSubscriptionEntry commerceSubscriptionEntry = (CommerceSubscriptionEntry
 			url="<%= editURL %>"
 		/>
 
-		<portlet:actionURL name="editCommerceSubscriptionEntry" var="setActiveURL">
-			<portlet:param name="<%= Constants.CMD %>" value="setActive" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceSubscriptionEntryId" value="<%= String.valueOf(commerceSubscriptionEntry.getCommerceSubscriptionEntryId()) %>" />
-			<portlet:param name="active" value="<%= String.valueOf(!commerceSubscriptionEntry.isActive()) %>" />
-		</portlet:actionURL>
-
-		<liferay-ui:icon
-			message='<%= commerceSubscriptionEntry.isActive() ? "deactivate" : "activate" %>'
-			url="<%= setActiveURL %>"
-		/>
-
 		<portlet:actionURL name="editCommerceSubscriptionEntry" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
