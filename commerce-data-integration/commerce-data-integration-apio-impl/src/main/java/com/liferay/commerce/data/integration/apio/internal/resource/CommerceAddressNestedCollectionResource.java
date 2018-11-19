@@ -28,22 +28,19 @@ import com.liferay.commerce.data.integration.apio.identifier.CommerceAccountIden
 import com.liferay.commerce.data.integration.apio.identifier.CommerceAddressIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceCountryIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceRegionIdentifier;
-import com.liferay.commerce.data.integration.apio.internal.form.CommerceAddressUpserterForm;
+import com.liferay.commerce.data.integration.apio.internal.form.CommerceAddressUpdaterForm;
+import com.liferay.commerce.data.integration.apio.internal.form.CommerceAddressWebSiteCreatorForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
-import com.liferay.commerce.data.integration.apio.internal.util.ServiceContextHelper;
+import com.liferay.commerce.data.integration.apio.internal.util.CommerceAddressHelper;
 import com.liferay.commerce.model.CommerceAddress;
-import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.service.CommerceAddressService;
-import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.GroupLocalService;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
@@ -71,9 +68,9 @@ public class CommerceAddressNestedCollectionResource
 		return builder.addGetter(
 			this::_getPageItems
 		).addCreator(
-			this::_addCommerceAddress, CurrentUser.class,
+			_commerceAddressHelper::addCommerceAddress, CurrentUser.class,
 			_hasPermission.forAddingIn(CommerceAccountIdentifier.class),
-			CommerceAddressUpserterForm::buildForm
+			CommerceAddressWebSiteCreatorForm::buildForm
 		).build();
 	}
 
@@ -92,8 +89,8 @@ public class CommerceAddressNestedCollectionResource
 			idempotent(_commerceAddressService::deleteCommerceAddress),
 			_hasPermission::forDeleting
 		).addUpdater(
-			this::_updateCommerceAddress, CurrentUser.class,
-			_hasPermission::forUpdating, CommerceAddressUpserterForm::buildForm
+			_commerceAddressHelper::updateCommerceAddress, CurrentUser.class,
+			_hasPermission::forUpdating, CommerceAddressUpdaterForm::buildForm
 		).build();
 	}
 
@@ -144,42 +141,6 @@ public class CommerceAddressNestedCollectionResource
 		).build();
 	}
 
-	private CommerceAddress _addCommerceAddress(
-			ClassPKExternalReferenceCode classPKExternalReferenceCode,
-			CommerceAddressUpserterForm commerceAddressUpserterForm,
-			User currentUser)
-		throws PortalException {
-
-		Organization organization =
-			_commerceOrganizationService.getOrganization(
-				classPKExternalReferenceCode.getClassPK());
-
-		Group group = organization.getGroup();
-
-		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			group.getGroupId(), new long[0], currentUser);
-
-		CommerceCountry commerceCountry =
-			_commerceCountryLocalService.getCommerceCountry(
-				serviceContext.getScopeGroupId(),
-				commerceAddressUpserterForm.getCountryTwoLettersISOCode());
-
-		return _commerceAddressService.addCommerceAddress(
-			group.getClassName(), group.getClassPK(),
-			commerceAddressUpserterForm.getName(),
-			commerceAddressUpserterForm.getDescription(),
-			commerceAddressUpserterForm.getStreet1(),
-			commerceAddressUpserterForm.getStreet2(),
-			commerceAddressUpserterForm.getStreet3(),
-			commerceAddressUpserterForm.getCity(),
-			commerceAddressUpserterForm.getZip(),
-			commerceAddressUpserterForm.getRegionId(),
-			commerceCountry.getCommerceCountryId(),
-			commerceAddressUpserterForm.getPhoneNumber(),
-			commerceAddressUpserterForm.getDefaultBilling(),
-			commerceAddressUpserterForm.getDefaultShipping(), serviceContext);
-	}
-
 	private ClassPKExternalReferenceCode _getCommerceAccountCPKERC(
 		CommerceAddress commerceAddress) {
 
@@ -218,46 +179,14 @@ public class CommerceAddressNestedCollectionResource
 		return new PageItems<>(commerceAddresses, total);
 	}
 
-	private CommerceAddress _updateCommerceAddress(
-			Long commerceAddressId,
-			CommerceAddressUpserterForm commerceAddressUpserterForm,
-			User currentUser)
-		throws PortalException {
-
-		CommerceAddress commerceAddress =
-			_commerceAddressService.getCommerceAddress(commerceAddressId);
-
-		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			commerceAddress.getGroupId(), new long[0], currentUser);
-
-		CommerceCountry commerceCountry =
-			_commerceCountryLocalService.getCommerceCountry(
-				serviceContext.getScopeGroupId(),
-				commerceAddressUpserterForm.getCountryTwoLettersISOCode());
-
-		return _commerceAddressService.updateCommerceAddress(
-			commerceAddressId, commerceAddressUpserterForm.getName(),
-			commerceAddressUpserterForm.getDescription(),
-			commerceAddressUpserterForm.getStreet1(),
-			commerceAddressUpserterForm.getStreet2(),
-			commerceAddressUpserterForm.getStreet3(),
-			commerceAddressUpserterForm.getCity(),
-			commerceAddressUpserterForm.getZip(),
-			commerceAddressUpserterForm.getRegionId(),
-			commerceCountry.getCommerceCountryId(),
-			commerceAddressUpserterForm.getPhoneNumber(),
-			commerceAddressUpserterForm.getDefaultBilling(),
-			commerceAddressUpserterForm.getDefaultShipping(), serviceContext);
-	}
-
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
-	private CommerceAddressService _commerceAddressService;
+	private CommerceAddressHelper _commerceAddressHelper;
 
 	@Reference
-	private CommerceCountryLocalService _commerceCountryLocalService;
+	private CommerceAddressService _commerceAddressService;
 
 	@Reference
 	private CommerceOrganizationService _commerceOrganizationService;
@@ -269,8 +198,5 @@ public class CommerceAddressNestedCollectionResource
 		target = "(model.class.name=com.liferay.commerce.model.CommerceAddress)"
 	)
 	private HasPermission<Long> _hasPermission;
-
-	@Reference
-	private ServiceContextHelper _serviceContextHelper;
 
 }
