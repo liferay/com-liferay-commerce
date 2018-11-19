@@ -20,46 +20,46 @@ import com.liferay.apio.architect.form.Form;
  * @author Rodrigo Guedes de Souza
  * @author Zoltán Takács
  */
-public class CommerceAddressUpserterForm {
+public class CommerceAddressUpdaterForm {
 
-	public static Form<CommerceAddressUpserterForm> buildForm(
-		Form.Builder<CommerceAddressUpserterForm> formBuilder) {
+	public static Form<CommerceAddressUpdaterForm> buildForm(
+		Form.Builder<CommerceAddressUpdaterForm> formBuilder) {
 
 		return formBuilder.title(
-			__ -> "The address upserter form"
+			__ -> "The address updater form"
 		).description(
-			__ -> "This form can be used to create or update an address"
+			__ -> "This form can be used to update an address"
 		).constructor(
-			CommerceAddressUpserterForm::new
+			CommerceAddressUpdaterForm::new
 		).addOptionalBoolean(
-			"defaultBilling", CommerceAddressUpserterForm::setDefaultBilling
+			"defaultBilling", CommerceAddressUpdaterForm::setDefaultBilling
 		).addOptionalBoolean(
-			"defaultShipping", CommerceAddressUpserterForm::setDefaultShipping
+			"defaultShipping", CommerceAddressUpdaterForm::setDefaultShipping
 		).addOptionalDouble(
-			"longitude", CommerceAddressUpserterForm::setLongitude
+			"longitude", CommerceAddressUpdaterForm::setLongitude
 		).addOptionalDouble(
-			"latitude", CommerceAddressUpserterForm::setLatitude
+			"latitude", CommerceAddressUpdaterForm::setLatitude
 		).addOptionalLong(
-			"regionId", CommerceAddressUpserterForm::setRegionId
+			"regionId", CommerceAddressUpdaterForm::setRegionId
 		).addOptionalString(
-			"description", CommerceAddressUpserterForm::setDescription
+			"description", CommerceAddressUpdaterForm::setDescription
 		).addOptionalString(
-			"phoneNumber", CommerceAddressUpserterForm::setPhoneNumber
+			"phoneNumber", CommerceAddressUpdaterForm::setPhoneNumber
 		).addOptionalString(
-			"street2", CommerceAddressUpserterForm::setStreet2
+			"street2", CommerceAddressUpdaterForm::setStreet2
 		).addOptionalString(
-			"street3", CommerceAddressUpserterForm::setStreet3
+			"street3", CommerceAddressUpdaterForm::setStreet3
 		).addOptionalString(
-			"zip", CommerceAddressUpserterForm::setZip
+			"zip", CommerceAddressUpdaterForm::setZip
 		).addRequiredString(
-			"city", CommerceAddressUpserterForm::setCity
+			"city", CommerceAddressUpdaterForm::setCity
 		).addRequiredString(
 			"countryTwoLettersISOCode",
-			CommerceAddressUpserterForm::setCountryTwoLettersISOCode
+			CommerceAddressUpdaterForm::setCountryTwoLettersISOCode
 		).addRequiredString(
-			"name", CommerceAddressUpserterForm::setName
+			"name", CommerceAddressUpdaterForm::setName
 		).addRequiredString(
-			"street1", CommerceAddressUpserterForm::setStreet1
+			"street1", CommerceAddressUpdaterForm::setStreet1
 		).build();
 	}
 
