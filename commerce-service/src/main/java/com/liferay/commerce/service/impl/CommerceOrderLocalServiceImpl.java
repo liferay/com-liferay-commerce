@@ -1061,7 +1061,7 @@ public class CommerceOrderLocalServiceImpl
 
 		// Messaging
 
-		sendMessage(
+		sendOrderStatusMessage(
 			commerceOrder.getCommerceOrderId(), commerceOrder.getOrderStatus(),
 			previousOrderStatus);
 
@@ -1077,6 +1077,8 @@ public class CommerceOrderLocalServiceImpl
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
 			commerceOrderId);
 
+		int previousPaymentStatus = commerceOrder.getPaymentStatus();
+
 		commerceOrder.setPaymentStatus(paymentStatus);
 
 		commerceOrderPersistence.update(commerceOrder);
@@ -1089,6 +1091,12 @@ public class CommerceOrderLocalServiceImpl
 			commerceOrder = setCommerceOrderToTransmit(
 				commerceOrder, serviceContext);
 		}
+
+		// Messaging
+
+		sendPaymentStatusMessage(
+			commerceOrder.getCommerceOrderId(),
+			commerceOrder.getPaymentStatus(), previousPaymentStatus);
 
 		return commerceOrder;
 	}
@@ -1286,7 +1294,7 @@ public class CommerceOrderLocalServiceImpl
 			CommerceOrder.class.getName(), 0, typePK);
 	}
 
-	protected void sendMessage(
+	protected void sendOrderStatusMessage(
 		long commerceOrderId, int orderStatus, int previousOrderStatus) {
 
 		TransactionCommitCallbackUtil.registerCallback(
@@ -1302,6 +1310,29 @@ public class CommerceOrderLocalServiceImpl
 
 					MessageBusUtil.sendMessage(
 						CommerceDestinationNames.ORDER_STATUS, message);
+
+					return null;
+				}
+
+			});
+	}
+
+	protected void sendPaymentStatusMessage(
+		long commerceOrderId, int paymentStatus, int previousPaymentStatus) {
+
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
+
+				@Override
+				public Void call() throws Exception {
+					Message message = new Message();
+
+					message.put("commerceOrderId", commerceOrderId);
+					message.put("paymentStatus", paymentStatus);
+					message.put("previousPaymentStatus", previousPaymentStatus);
+
+					MessageBusUtil.sendMessage(
+						CommerceDestinationNames.PAYMENT_STATUS, message);
 
 					return null;
 				}
@@ -1325,7 +1356,7 @@ public class CommerceOrderLocalServiceImpl
 
 		// Messaging
 
-		sendMessage(
+		sendOrderStatusMessage(
 			commerceOrder.getCommerceOrderId(), commerceOrder.getOrderStatus(),
 			previousOrderStatus);
 
