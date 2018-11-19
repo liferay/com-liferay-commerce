@@ -52,8 +52,6 @@ public class CommerceSubscriptionEntryIndexer
 	public static final String CLASS_NAME =
 		CommerceSubscriptionEntry.class.getName();
 
-	public static final String FIELD_ACTIVE = "active";
-
 	public static final String FIELD_COMMERCE_ORDER_ITEM_ID =
 		"commerceOrderItemId";
 
@@ -63,6 +61,8 @@ public class CommerceSubscriptionEntryIndexer
 		"maxSubscriptionCycles";
 
 	public static final String FIELD_SKU = "sku";
+
+	public static final String FIELD_SUBSCRIPTION_STATUS = "subscriptionStatus";
 
 	@Override
 	public String getClassName() {
@@ -74,13 +74,6 @@ public class CommerceSubscriptionEntryIndexer
 			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
-		Boolean active = (Boolean)searchContext.getAttribute(FIELD_ACTIVE);
-
-		if (active != null) {
-			contextBooleanFilter.addTerm(
-				FIELD_ACTIVE, String.valueOf(active), BooleanClauseOccur.MUST);
-		}
-
 		Long maxSubscriptionCycles = (Long)searchContext.getAttribute(
 			FIELD_MAX_SUBSCRIPTION_CYCLES);
 
@@ -88,6 +81,15 @@ public class CommerceSubscriptionEntryIndexer
 			contextBooleanFilter.addTerm(
 				FIELD_MAX_SUBSCRIPTION_CYCLES,
 				String.valueOf(maxSubscriptionCycles), BooleanClauseOccur.MUST);
+		}
+
+		Integer subscriptionStatus = (Integer)searchContext.getAttribute(
+			FIELD_SUBSCRIPTION_STATUS);
+
+		if (subscriptionStatus != null) {
+			contextBooleanFilter.addTerm(
+				FIELD_SUBSCRIPTION_STATUS, String.valueOf(subscriptionStatus),
+				BooleanClauseOccur.MUST);
 		}
 	}
 
@@ -127,7 +129,6 @@ public class CommerceSubscriptionEntryIndexer
 		Document document = getBaseModelDocument(
 			CLASS_NAME, commerceSubscriptionEntry);
 
-		document.addKeyword(FIELD_ACTIVE, commerceSubscriptionEntry.isActive());
 		document.addNumber(
 			FIELD_COMMERCE_ORDER_ITEM_ID,
 			commerceSubscriptionEntry.getCommerceOrderItemId());
@@ -136,6 +137,9 @@ public class CommerceSubscriptionEntryIndexer
 		document.addNumber(
 			FIELD_MAX_SUBSCRIPTION_CYCLES,
 			commerceSubscriptionEntry.getMaxSubscriptionCycles());
+		document.addKeyword(
+			FIELD_SUBSCRIPTION_STATUS,
+			commerceSubscriptionEntry.getSubscriptionStatus());
 
 		String sku = StringPool.BLANK;
 
