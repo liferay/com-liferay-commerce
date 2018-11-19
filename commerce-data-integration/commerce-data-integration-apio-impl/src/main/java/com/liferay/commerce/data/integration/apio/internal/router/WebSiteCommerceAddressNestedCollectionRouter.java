@@ -86,7 +86,9 @@ public class WebSiteCommerceAddressNestedCollectionRouter
 			_organizationLocalService.fetchOrganizationByReferenceCode(
 				currentUser.getCompanyId(), accountExternalReferenceCode);
 
-		if (organization == null) {
+		if ((organization == null) ||
+			(organization.getParentOrganization() == null)) {
+
 			throw new ConflictException(
 				"Unable to fetch commerce account by reference code: " +
 					accountExternalReferenceCode + " not found",
@@ -95,14 +97,18 @@ public class WebSiteCommerceAddressNestedCollectionRouter
 
 		Group group = organization.getGroup();
 
-		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			group.getGroupId(), new long[0], currentUser);
+		Organization parentOrganization = organization.getParentOrganization();
+
+		Group parentGroup = parentOrganization.getGroup();
 
 		CommerceCountry commerceCountry =
 			_commerceCountryLocalService.getCommerceCountry(
-				group.getGroupId(),
+				parentGroup.getGroupId(),
 				commerceAddressWebSiteCreatorForm.
 					getCountryTwoLettersISOCode());
+
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			group.getGroupId(), new long[0], currentUser);
 
 		return _commerceAddressService.addCommerceAddress(
 			group.getClassName(), group.getClassPK(),
