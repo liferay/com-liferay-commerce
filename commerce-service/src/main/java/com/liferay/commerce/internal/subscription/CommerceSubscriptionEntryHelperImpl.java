@@ -15,6 +15,7 @@
 package com.liferay.commerce.internal.subscription;
 
 import com.liferay.commerce.constants.CommerceOrderConstants;
+import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
@@ -87,8 +88,10 @@ public class CommerceSubscriptionEntryHelperImpl
 		Date nextIterationDate =
 			commerceSubscriptionEntry.getNextIterationDate();
 
-		if (commerceSubscriptionEntry.isActive() &&
-			nextIterationDate.before(now)) {
+		if (nextIterationDate.before(now) &&
+			(commerceSubscriptionEntry.getSubscriptionStatus() ==
+				CommerceSubscriptionEntryConstants.
+					SUBSCRIPTION_STATUS_ACTIVE)) {
 
 			ServiceContext serviceContext = new ServiceContext();
 
@@ -109,9 +112,10 @@ public class CommerceSubscriptionEntryHelperImpl
 			if (commerceSubscriptionCycleEntriesCount >=
 					commerceSubscriptionEntry.getMaxSubscriptionCycles()) {
 
-				_commerceSubscriptionEntryLocalService.setActive(
+				_commerceSubscriptionEntryLocalService.updateSubscriptionStatus(
 					commerceSubscriptionEntry.getCommerceSubscriptionEntryId(),
-					false);
+					CommerceSubscriptionEntryConstants.
+						SUBSCRIPTION_STATUS_COMPLETED);
 			}
 		}
 	}
