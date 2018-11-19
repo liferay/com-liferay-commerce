@@ -35,7 +35,7 @@ if (!cpSubscriptionTypes.isEmpty()) {
 int subscriptionLength = BeanParamUtil.getInteger(commerceSubscriptionEntry, request, "subscriptionLength", 1);
 String subscriptionType = BeanParamUtil.getString(commerceSubscriptionEntry, request, "subscriptionType", defaultCPSubscriptionType);
 long maxSubscriptionCycles = BeanParamUtil.getLong(commerceSubscriptionEntry, request, "maxSubscriptionCycles");
-boolean active = BeanParamUtil.getBoolean(commerceSubscriptionEntry, request, "active");
+int subscriptionStatus = BeanParamUtil.getInteger(commerceSubscriptionEntry, request, "subscriptionStatus");
 
 String defaultCPSubscriptionTypeLabel = StringPool.BLANK;
 
@@ -57,10 +57,13 @@ boolean ending = maxSubscriptionCycles > 0;
 	<aui:input name="redirect" type="hidden" value="<%= String.valueOf(commerceSubscriptionEntryDisplayContext.getEditCommerceSubscriptionEntryURL()) %>" />
 	<aui:input name="commerceSubscriptionEntryId" type="hidden" value="<%= String.valueOf(commerceSubscriptionEntryDisplayContext.getCommerceSubscriptionEntryId()) %>" />
 
+	<liferay-ui:error exception="<%= CommerceSubscriptionEntrySubscriptionStatusException.class %>" message="please-select-a-valid-status" />
+	<liferay-ui:error exception="<%= CommerceSubscriptionTypeException.class %>" message="please-select-a-valid-type" />
+
+	<aui:model-context bean="<%= commerceSubscriptionEntry %>" model="<%= CommerceSubscriptionEntry.class %>" />
+
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>
-			<aui:model-context bean="<%= commerceSubscriptionEntry %>" model="<%= CommerceSubscriptionEntry.class %>" />
-
 			<aui:select name="subscriptionType" onChange='<%= renderResponse.getNamespace() + "selectSubscriptionType();" %>'>
 
 				<%
@@ -118,7 +121,19 @@ boolean ending = maxSubscriptionCycles > 0;
 				</div>
 			</div>
 
-			<aui:input checked="<%= active %>" name="active" type="toggle-switch" />
+			<aui:select name="subscriptionStatus">
+
+				<%
+				for (int curSubscriptionStatus : CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUSES) {
+				%>
+
+					<aui:option label="<%= CommerceSubscriptionEntryConstants.getSubscriptionStatusLabel(curSubscriptionStatus) %>" selected="<%= subscriptionStatus == curSubscriptionStatus %>" value="<%= curSubscriptionStatus %>" />
+
+				<%
+				}
+				%>
+
+			</aui:select>
 
 			<aui:input name="startDate" />
 
@@ -143,14 +158,14 @@ boolean ending = maxSubscriptionCycles > 0;
 			var subscriptionLength = A.one('#<portlet:namespace />subscriptionLength').val();
 			var subscriptionType = A.one('#<portlet:namespace />subscriptionType').val();
 			var maxSubscriptionCycles = A.one('#<portlet:namespace />maxSubscriptionCycles').val();
-			var active = A.one('#<portlet:namespace />active').attr('checked');
+			var subscriptionStatus = A.one('#<portlet:namespace />subscriptionStatus').val();
 
 			var portletURL = new Liferay.PortletURL.createURL('<%= currentURLObj %>');
 
 			portletURL.setParameter('subscriptionLength', subscriptionLength);
 			portletURL.setParameter('subscriptionType', subscriptionType);
 			portletURL.setParameter('maxSubscriptionCycles', maxSubscriptionCycles);
-			portletURL.setParameter('active', active);
+			portletURL.setParameter('subscriptionStatus', subscriptionStatus);
 
 			window.location.replace(portletURL.toString());
 		},
