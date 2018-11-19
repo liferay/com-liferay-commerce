@@ -52,8 +52,6 @@ List<CommerceVirtualOrderItem> results = commerceVirtualOrderContentDisplayConte
 					<%
 					CommerceOrderItem commerceOrderItem = commerceVirtualOrderItem.getCommerceOrderItem();
 
-					CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
-
 					String thumbnailSrc = commerceVirtualOrderItemContentDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem, themeDisplay);
 
 					List<KeyValuePair> keyValuePairs = commerceVirtualOrderItemContentDisplayContext.getKeyValuePairs(commerceOrderItem.getJson(), locale);
@@ -73,7 +71,7 @@ List<CommerceVirtualOrderItem> results = commerceVirtualOrderContentDisplayConte
 					<liferay-ui:search-container-column-text
 						name="description"
 					>
-						<%= HtmlUtil.escape(cpDefinition.getName(languageId)) %>
+						<%= HtmlUtil.escape(commerceOrderItem.getName(languageId)) %>
 
 						<h6 class="text-default">
 							<%= HtmlUtil.escape(stringJoiner.toString()) %>
@@ -87,7 +85,7 @@ List<CommerceVirtualOrderItem> results = commerceVirtualOrderContentDisplayConte
 						<%
 						String downloadURL = commerceVirtualOrderItemContentDisplayContext.getDownloadURL(commerceVirtualOrderItem);
 
-						CPDefinitionVirtualSetting cpDefinitionVirtualSetting = commerceVirtualOrderItemContentDisplayContext.getCPDefinitionVirtualSetting(cpDefinition.getCPDefinitionId());
+						CPDefinitionVirtualSetting cpDefinitionVirtualSetting = commerceVirtualOrderItemContentDisplayContext.getCPDefinitionVirtualSetting(commerceOrderItem);
 
 						Map<String, Object> data = new HashMap<>();
 						boolean useDialog = false;
@@ -103,7 +101,7 @@ List<CommerceVirtualOrderItem> results = commerceVirtualOrderContentDisplayConte
 						boolean hasDownloadCommerceVirtualOrderItemPermission = CommerceVirtualOrderItemPermission.contains(permissionChecker, commerceVirtualOrderItem, CommerceVirtualOrderActionKeys.DOWNLOAD_COMMERCE_VIRTUAL_ORDER_ITEM);
 						%>
 
-						<c:if test="<%= hasDownloadCommerceVirtualOrderItemPermission && commerceVirtualOrderItemContentDisplayContext.hasActiveSubscription(commerceVirtualOrderItem) %>">
+						<c:if test="<%= hasDownloadCommerceVirtualOrderItemPermission %>">
 							<aui:form action="<%= String.valueOf(commerceVirtualOrderItemContentDisplayContext.getDownloadResourceURL(commerceVirtualOrderItem.getCommerceVirtualOrderItemId())) %>" method="post" name='<%= commerceVirtualOrderItem.getCommerceVirtualOrderItemId() + "Fm" %>' />
 
 							<liferay-ui:icon
