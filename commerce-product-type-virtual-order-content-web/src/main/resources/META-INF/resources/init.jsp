@@ -26,7 +26,6 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.commerce.model.CommerceOrderItem" %><%@
-page import="com.liferay.commerce.product.model.CPDefinition" %><%@
 page import="com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting" %><%@
 page import="com.liferay.commerce.product.type.virtual.order.constants.CommerceVirtualOrderActionKeys" %><%@
 page import="com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.CommerceVirtualOrderItemContentDisplayContext" %><%@
