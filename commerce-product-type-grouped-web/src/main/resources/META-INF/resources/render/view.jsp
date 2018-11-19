@@ -22,7 +22,7 @@ GroupedCPTypeHelper groupedCPTypeHelper = (GroupedCPTypeHelper)request.getAttrib
 CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
 CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
-CPInstance cpInstance = cpContentHelper.getDefaultCPInstance(request);
+CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 
 long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 %>
@@ -63,10 +63,12 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 				<h1><%= cpCatalogEntry.getName() %></h1>
 
 				<c:choose>
-					<c:when test="<%= cpInstance != null %>">
-						<h4 class="sku"><%= cpInstance.getSku() %></h4>
+					<c:when test="<%= cpSku != null %>">
+						<h4 class="sku"><%= cpSku.getSku() %></h4>
 
-						<div class="price"><%= cpInstance.getPrice() %></div>
+						<div class="price"><liferay-commerce:price CPDefinitionId="<%= cpDefinitionId %>" CPInstanceId="<%= cpSku.getCPInstanceId() %>" /></div>
+
+						<div class="subscription-info"><liferay-commerce:subscription-info CPInstanceId="<%= cpSku.getCPInstanceId() %>" /></div>
 
 						<div class="availability"><%= cpContentHelper.getAvailabilityLabel(request) %></div>
 
@@ -78,6 +80,8 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						<h4 class="sku" data-text-cp-instance-sku=""></h4>
 
 						<div class="price" data-text-cp-instance-price=""></div>
+
+						<div class="subscription-info" data-text-cp-instance-subscription-info="" data-text-cp-instance-subscription-info-show></div>
 
 						<div class="availability" data-text-cp-instance-availability=""></div>
 

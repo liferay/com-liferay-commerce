@@ -20,7 +20,6 @@
 CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
 CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
-
 CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 
 long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
