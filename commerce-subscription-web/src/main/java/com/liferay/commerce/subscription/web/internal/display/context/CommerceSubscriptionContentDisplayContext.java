@@ -23,11 +23,14 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
+import com.liferay.commerce.subscription.web.internal.display.context.util.CommerceSubscriptionDisplayContextHelper;
 import com.liferay.commerce.util.comparator.CommerceSubscriptionEntryCreateDateComparator;
 import com.liferay.document.library.kernel.util.DLUtil;
+import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItemList;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -39,6 +42,8 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.Collections;
 import java.util.List;
 
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,14 +57,31 @@ public class CommerceSubscriptionContentDisplayContext {
 			CPDefinitionHelper cpDefinitionHelper,
 			CPInstanceHelper cpInstanceHelper,
 			CommerceSubscriptionEntryService commerceSubscriptionEntryService,
+			ConfigurationProvider configurationProvider,
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpInstanceHelper = cpInstanceHelper;
 		_commerceSubscriptionEntryService = commerceSubscriptionEntryService;
+		_configurationProvider = configurationProvider;
 
 		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
+	}
+
+	public DropdownItemList getCommerceSubscriptionEntryActionItemList(
+			CommerceSubscriptionEntry commerceSubscriptionEntry,
+			PortletRequest portletRequest, PortletResponse portletResponse)
+		throws PortalException {
+
+		CommerceSubscriptionDisplayContextHelper
+			commerceSubscriptionDisplayContextHelper =
+				new CommerceSubscriptionDisplayContextHelper(
+					commerceSubscriptionEntry, _configurationProvider,
+					portletRequest, portletResponse);
+
+		return commerceSubscriptionDisplayContextHelper.
+			getCommerceSubscriptionEntryActionItemList();
 	}
 
 	public String getCommerceSubscriptionEntryThumbnailSrc(
@@ -183,6 +205,7 @@ public class CommerceSubscriptionContentDisplayContext {
 
 	private final CommerceSubscriptionEntryService
 		_commerceSubscriptionEntryService;
+	private final ConfigurationProvider _configurationProvider;
 	private final CPDefinitionHelper _cpDefinitionHelper;
 	private final CPInstanceHelper _cpInstanceHelper;
 	private final CPRequestHelper _cpRequestHelper;
