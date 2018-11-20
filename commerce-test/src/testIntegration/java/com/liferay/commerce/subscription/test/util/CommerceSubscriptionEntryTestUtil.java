@@ -14,13 +14,13 @@
 
 package com.liferay.commerce.subscription.test.util;
 
-import com.liferay.commerce.internal.test.util.CommerceTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
+import com.liferay.commerce.test.util.CommerceTestUtil;
 
 /**
  * @author Alessio Antonio Rendina
