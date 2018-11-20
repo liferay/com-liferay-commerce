@@ -36,10 +36,10 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 		cProduct.setUuid(serviceContext.getUuid());
 		cProduct.setGroupId(serviceContext.getScopeGroupId());
-		cProduct.setCompanyId(serviceContext.getCompanyId());
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
+		cProduct.setCompanyId(user.getCompanyId());
 		cProduct.setUserId(user.getUserId());
 		cProduct.setUserName(user.getFullName());
 
