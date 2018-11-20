@@ -342,6 +342,7 @@
 		<!-- Other fields -->
 
 		<column name="commerceOrderId" type="long" />
+		<column name="CProductId" type="long" />
 		<column name="CPInstanceId" type="long" />
 		<column name="quantity" type="int" />
 		<column name="shippedQuantity" type="int" />
@@ -365,6 +366,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="CProductId" return-type="Collection">
+			<finder-column name="CProductId" />
+		</finder>
 		<finder name="CommerceOrderId" return-type="Collection">
 			<finder-column name="commerceOrderId" />
 		</finder>
@@ -821,7 +825,8 @@
 		<!-- Other fields -->
 
 		<column name="commerceWarehouseId" type="long" />
-		<column name="CPInstanceId" type="long" />
+		<column name="CProductId" type="long" />
+		<column name="CPInstanceUUID" type="String" />
 		<column name="quantity" type="int" />
 
 		<!-- Finder methods -->
@@ -829,12 +834,13 @@
 		<finder name="CommerceWarehouseId" return-type="Collection">
 			<finder-column name="commerceWarehouseId" />
 		</finder>
-		<finder name="CPInstanceId" return-type="Collection">
-			<finder-column name="CPInstanceId" />
+		<finder name="CPI_CPIU" return-type="Collection">
+			<finder-column name="CProductId" />
+			<finder-column name="CPInstanceUUID" />
 		</finder>
-		<finder name="C_C" return-type="CommerceWarehouseItem" unique="true">
+		<finder name="CWI_CPIU" return-type="CommerceWarehouseItem" unique="true">
 			<finder-column name="commerceWarehouseId" />
-			<finder-column name="CPInstanceId" />
+			<finder-column name="CPInstanceUUID" />
 		</finder>
 	</entity>
 	<entity local-service="true" name="CPDAvailabilityEstimate" remote-service="true" uuid="true">
@@ -857,14 +863,14 @@
 
 		<!-- Other fields -->
 
-		<column name="CPDefinitionId" type="long" />
 		<column name="commerceAvailabilityEstimateId" type="long" />
+		<column name="CProductId" type="long" />
 		<column name="lastPublishDate" type="Date" />
 
 		<!-- Finder methods -->
 
-		<finder name="CPDefinitionId" return-type="CPDAvailabilityEstimate" unique="true">
-			<finder-column name="CPDefinitionId" />
+		<finder name="CProductId" return-type="CPDAvailabilityEstimate" unique="true">
+			<finder-column name="CProductId" />
 		</finder>
 		<finder name="CommerceAvailabilityEstimateId" return-type="Collection">
 			<finder-column name="commerceAvailabilityEstimateId" />
@@ -890,7 +896,7 @@
 
 		<!-- Other fields -->
 
-		<column name="CPDefinitionId" type="long" />
+		<column name="CProductId" type="long" />
 		<column name="CPDefinitionInventoryEngine" type="String" />
 		<column name="lowStockActivity" type="String" />
 		<column name="displayAvailability" type="boolean" />
@@ -904,8 +910,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CPDefinitionId" return-type="CPDefinitionInventory" unique="true">
-			<finder-column name="CPDefinitionId" />
+		<finder name="CProductId" return-type="CPDefinitionInventory" unique="true">
+			<finder-column name="CProductId" />
 		</finder>
 	</entity>
 	<exceptions>
