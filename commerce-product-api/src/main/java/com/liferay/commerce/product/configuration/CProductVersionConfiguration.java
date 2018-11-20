@@ -20,6 +20,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 
 /**
  * @author Ethan Bustad
+ * @author Alec Sloan
  */
 @ExtendedObjectClassDefinition(
 	category = "catalog", scope = ExtendedObjectClassDefinition.Scope.SYSTEM
@@ -33,5 +34,8 @@ public interface CProductVersionConfiguration {
 
 	@Meta.AD(deflt = "true", name = "enabled", required = false)
 	public boolean enabled();
+
+	@Meta.AD(deflt = "5", name = "versions-to-retain", required = false)
+	public int versionThreshold();
 
 }
