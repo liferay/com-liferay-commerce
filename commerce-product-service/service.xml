@@ -583,6 +583,10 @@
 		<finder name="CPDefinitionId" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
 		</finder>
+		<finder name="U_C" return-type="CPInstance" unique="true">
+			<finder-column name="uuid" />
+			<finder-column name="CPDefinitionId" />
+		</finder>
 		<finder name="G_ST" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="status" />
