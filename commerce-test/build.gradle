@@ -22,7 +22,7 @@ dependencies {
 	testIntegrationCompile project(":apps:commerce:commerce-product-test-util")
 	testIntegrationCompile project(":apps:commerce:commerce-product-type-simple")
 	testIntegrationCompile project(":apps:commerce:commerce-service")
-	testIntegrationCompile project(":apps:commerce:commerce-shipping-engine-fixed-api")
+	testIntegrationCompile project(":apps:commerce:commerce-test-util")
 	testIntegrationCompile project(":apps:commerce:commerce-user-segment-api")
 	testIntegrationCompile project(":apps:commerce:commerce-user-segment-test-util")
 }
