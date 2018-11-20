@@ -9,7 +9,8 @@
 				CommerceVirtualOrderItem
 			WHERE
 				(CommerceVirtualOrderItem.active_ = true) AND
-				(CommerceVirtualOrderItem.endDate < ?)
+				(CommerceVirtualOrderItem.endDate < ?) AND
+				(CommerceVirtualOrderItem.endDate IS NOT NULL)
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemFinder.findByG_O_A">
@@ -23,7 +24,7 @@
 					CommerceOrderItem.commerceOrderItemId = CommerceVirtualOrderItem.commerceOrderItemId
 			INNER JOIN
 				CommerceOrder ON
-					CommerceOrder.CommerceOrderId = CommerceOrderItem.CommerceOrderId
+					CommerceOrder.commerceOrderId = CommerceOrderItem.commerceOrderId
 			WHERE
 				(CommerceOrder.siteGroupId = ?) AND
 				(CommerceOrder.orderOrganizationId = ?) AND
@@ -43,7 +44,7 @@
 					CommerceOrderItem.commerceOrderItemId = CommerceVirtualOrderItem.commerceOrderItemId
 			INNER JOIN
 				CommerceOrder ON
-					CommerceOrder.CommerceOrderId = CommerceOrderItem.CommerceOrderId
+					CommerceOrder.commerceOrderId = CommerceOrderItem.commerceOrderId
 			WHERE
 				(CommerceOrder.siteGroupId = ?) AND
 				(CommerceOrder.orderUserId = ?) AND
