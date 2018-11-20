@@ -290,15 +290,13 @@ public class CPDefinitionServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitions(
 		HttpPrincipal httpPrincipal, long groupId, int status, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinition> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		int end) throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"getCPDefinitions", _getCPDefinitionsParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status, start, end, orderByComparator);
+					status, start, end);
 
 			Object returnObj = null;
 
@@ -324,13 +322,15 @@ public class CPDefinitionServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitions(
 		HttpPrincipal httpPrincipal, long groupId, int status, int start,
-		int end) throws com.liferay.portal.kernel.exception.PortalException {
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinition> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"getCPDefinitions", _getCPDefinitionsParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status, start, end);
+					status, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -1000,11 +1000,11 @@ public class CPDefinitionServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _getCPDefinitionsParameterTypes6 = new Class[] {
-			long.class, int.class, int.class, int.class,
-			com.liferay.portal.kernel.util.OrderByComparator.class
+			long.class, int.class, int.class, int.class
 		};
 	private static final Class<?>[] _getCPDefinitionsParameterTypes7 = new Class[] {
-			long.class, int.class, int.class, int.class
+			long.class, int.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getCPDefinitionsParameterTypes8 = new Class[] {
 			long.class, String.class, String.class, int.class, int.class,
