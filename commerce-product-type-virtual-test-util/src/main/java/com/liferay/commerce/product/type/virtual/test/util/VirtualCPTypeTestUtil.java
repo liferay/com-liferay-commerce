@@ -37,12 +37,13 @@ import java.util.Set;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class VirtualCPTypeTestUtil {
 
 	public static CPDefinitionVirtualSetting addCPDefinitionVirtualSetting(
-			long groupId, long cpDefinitionId, long fileEntryId,
-			long sampleFileEntryId,
+			long groupId, String className, long classPK, long fileEntryId,
+			int activationStatus, long duration, long sampleFileEntryId,
 			long termsOfUseJournalArticleResourcePrimKey)
 		throws Exception {
 
@@ -69,9 +70,9 @@ public class VirtualCPTypeTestUtil {
 
 		return CPDefinitionVirtualSettingLocalServiceUtil.
 			addCPDefinitionVirtualSetting(
-				cpDefinitionId, fileEntryId, url, RandomTestUtil.randomInt(),
-				RandomTestUtil.randomInt(), RandomTestUtil.randomInt(), true,
-				sampleFileEntryId, sampleUrl, true, termsOfUseContentMap,
+				className, classPK, fileEntryId, url, activationStatus,
+				duration, RandomTestUtil.randomInt(), true, sampleFileEntryId,
+				sampleUrl, true, termsOfUseContentMap,
 				termsOfUseJournalArticleResourcePrimKey, serviceContext);
 	}
 
