@@ -1,11 +1,11 @@
-# Emporio
+# Liferay Commerce
 
-Emporio is an open source digital commerce platform written in Java. It was
+Liferay Commerce is an open source digital commerce platform written in Java. It was
 built from the ground up to work with Liferay Portal so that Liferay developers
 can leverage fully integrated web content management systems and best-in-breed
 portal capabilities in their commerce projects.
 
-Liferay designed Emporio for commerce projects that are very large or complex;
+Liferay designed it for commerce projects that are very large or complex;
 it can support millions of products in challenging B2B industries.
 
 ## Key Features
@@ -22,7 +22,7 @@ it can support millions of products in challenging B2B industries.
 
 Requirements: [Liferay Portal 7.1 GA1](https://github.com/liferay/liferay-portal)
 
-1.  Clone the Emporio repository (this
+1.  Clone the Liferay Commerce repository (this
     [repository](https://github.com/liferay/com-liferay-commerce)) to the same
     level of your directory tree as your Liferay Home folder (Liferay Home is
     the folder that contains the Tomcat folder for Liferay 7.1).
@@ -43,7 +43,7 @@ Requirements: [Liferay Portal 7.1 GA1](https://github.com/liferay/liferay-portal
     menu, go to *Control Panel* &rarr; *Configuration* &rarr; *Search* and
     click *Execute* next to *Reindex all search indexes*.
 
-Emporio's features are now available in your Portal instance.
+Liferay Commerce's features are now available in your Portal instance.
 
 ## Bug Reporting
 
@@ -51,7 +51,7 @@ Did you find a bug? Please open a ticket for it at [issues.liferay.com](https://
 
 ## Stay Connected
 
-There are many ways for you to learn what's new in Emporio, get answers to
+There are many ways for you to learn what's new in Liferay Commerce, get answers to
 questions and connect with other Liferay community members.
 
 ### Twitter
@@ -75,11 +75,11 @@ Do you have questions? Ask them on our
 
 ### Chat
 
-Join the conversation in [`#emporio` channel](https://liferay-community.slack.com/messages/CBJBV8H8U) on Liferay's Community Chat.
+Join the conversation in [`#commerce` channel](https://liferay-community.slack.com/messages/CBJBV8H8U) on Liferay's Community Chat.
 
 ## License
 
-This project, *Emporio*, is free software ("Licensed Software"); you can
+This project, *Liferay Commerce*, is free software ("Licensed Software"); you can
 redistribute it and/or modify it under the terms of the [GNU Lesser General Public License](./LICENSE.txt)
 as published by the Free Software Foundation; either version 2.1 of the License,
 or (at your option) any later version.
