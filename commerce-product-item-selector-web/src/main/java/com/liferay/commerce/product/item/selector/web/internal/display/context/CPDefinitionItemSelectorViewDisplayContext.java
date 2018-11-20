@@ -22,12 +22,14 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -125,10 +127,15 @@ public class CPDefinitionItemSelectorViewDisplayContext
 			results = cpDefinitionBaseModelSearchResult.getBaseModels();
 		}
 		else {
+			ThemeDisplay themeDisplay = cpRequestHelper.getThemeDisplay();
+
 			total = _cpDefinitionService.getCPDefinitionsCount(
-				getScopeGroupId(), WorkflowConstants.STATUS_APPROVED);
+				getScopeGroupId(), StringPool.BLANK,
+				themeDisplay.getLanguageId(),
+				WorkflowConstants.STATUS_APPROVED);
 			results = _cpDefinitionService.getCPDefinitions(
-				getScopeGroupId(), WorkflowConstants.STATUS_APPROVED,
+				getScopeGroupId(), StringPool.BLANK,
+				themeDisplay.getLanguageId(), WorkflowConstants.STATUS_APPROVED,
 				searchContainer.getStart(), searchContainer.getEnd(),
 				orderByComparator);
 		}
