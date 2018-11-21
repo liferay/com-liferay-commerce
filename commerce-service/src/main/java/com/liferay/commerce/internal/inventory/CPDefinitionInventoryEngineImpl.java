@@ -29,8 +29,10 @@ import com.liferay.commerce.service.CommerceWarehouseItemLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
@@ -65,8 +67,19 @@ public class CPDefinitionInventoryEngineImpl
 			return new String[0];
 		}
 
-		return StringUtil.split(
-			cpDefinitionInventory.getAllowedOrderQuantities());
+		String cpDefinitionInventoryAllowedOrderQuantities =
+			cpDefinitionInventory.getAllowedOrderQuantities();
+
+		String allowedOrderQuantitiesString =
+			cpDefinitionInventoryAllowedOrderQuantities.replaceAll(
+				" *(, *)|(\\. *)|( +)", StringPool.COMMA);
+
+		int[] allowedOrderQuantities = StringUtil.split(
+			allowedOrderQuantitiesString, 0);
+
+		Arrays.sort(allowedOrderQuantities);
+
+		return ArrayUtil.toStringArray(allowedOrderQuantities);
 	}
 
 	@Override
