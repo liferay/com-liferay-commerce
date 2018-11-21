@@ -19,9 +19,7 @@ import com.liferay.commerce.checkout.web.internal.display.context.BillingAddress
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Organization;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +29,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
@@ -56,15 +55,8 @@ public class BillingAddressCommerceCheckoutStep
 			HttpServletResponse httpServletResponse)
 		throws Exception {
 
-		Organization organization =
-			_commerceOrganizationHelper.getCurrentOrganization(
-				httpServletRequest);
-
-		if (organization != null) {
-			return false;
-		}
-
-		return true;
+		return _commerceCheckoutStepHelper.
+			isActiveBillingAddressCommerceCheckoutStep(httpServletRequest);
 	}
 
 	@Override
@@ -101,6 +93,6 @@ public class BillingAddressCommerceCheckoutStep
 	}
 
 	@Reference
-	private CommerceOrganizationHelper _commerceOrganizationHelper;
+	private CommerceCheckoutStepHelper _commerceCheckoutStepHelper;
 
 }

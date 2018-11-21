@@ -55,6 +55,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Marco Leo
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
@@ -159,6 +160,8 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			(CommerceContext)actionRequest.getAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT);
 
+		validateCommerceOrder(actionRequest, commerceOrderId);
+
 		CommerceOrder commerceOrder =
 			_commerceOrderService.checkoutCommerceOrder(
 				commerceOrderId, commerceContext, serviceContext);
@@ -171,11 +174,52 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			_portal.getHttpServletRequest(actionRequest));
 	}
 
+	protected void validateCommerceOrder(
+			ActionRequest actionRequest, long commerceOrderId)
+		throws PortalException {
+
+		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
+			commerceOrderId);
+
+		if (commerceOrder.getShippingAddressId() <= 0) {
+			throw new CommerceOrderShippingAddressException();
+		}
+
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			actionRequest);
+
+		if ((commerceOrder.getBillingAddressId() <= 0) &&
+			_commerceCheckoutStepHelper.
+				isActiveBillingAddressCommerceCheckoutStep(
+					httpServletRequest)) {
+
+			throw new CommerceOrderBillingAddressException();
+		}
+
+		if ((commerceOrder.getCommerceShippingMethodId() <= 0) &&
+			_commerceCheckoutStepHelper.
+				isActiveShippingMethodCommerceCheckoutStep(
+					httpServletRequest)) {
+
+			throw new CommerceOrderShippingMethodException();
+		}
+
+		if ((commerceOrder.getCommercePaymentMethodId() <= 0) &&
+			_commerceCheckoutStepHelper.
+				isActivePaymentMethodCommerceCheckoutStep(httpServletRequest)) {
+
+			throw new CommerceOrderPaymentMethodException();
+		}
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		OrderSummaryCommerceCheckoutStep.class);
 
 	@Reference
 	private ActionHelper _actionHelper;
+
+	@Reference
+	private CommerceCheckoutStepHelper _commerceCheckoutStepHelper;
 
 	@Reference
 	private CommerceDiscountCouponCodeHelper _commerceDiscountCouponCodeHelper;

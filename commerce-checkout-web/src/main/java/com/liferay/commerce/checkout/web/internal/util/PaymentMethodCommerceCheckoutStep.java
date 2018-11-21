@@ -45,6 +45,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
@@ -70,17 +71,8 @@ public class PaymentMethodCommerceCheckoutStep
 			HttpServletResponse httpServletResponse)
 		throws Exception {
 
-		CommerceOrder commerceOrder =
-			(CommerceOrder)httpServletRequest.getAttribute(
-				CommerceCheckoutWebKeys.COMMERCE_ORDER);
-
-		if (_commercePaymentMethodLocalService.getCommercePaymentMethodsCount(
-				commerceOrder.getSiteGroupId(), true) > 0) {
-
-			return true;
-		}
-
-		return false;
+		return _commerceCheckoutStepHelper.
+			isActivePaymentMethodCommerceCheckoutStep(httpServletRequest);
 	}
 
 	@Override
@@ -164,6 +156,9 @@ public class PaymentMethodCommerceCheckoutStep
 			commerceOrder.getShippingAmount(), commerceOrder.getTotal(),
 			commerceOrder.getAdvanceStatus(), commerceContext);
 	}
+
+	@Reference
+	private CommerceCheckoutStepHelper _commerceCheckoutStepHelper;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;

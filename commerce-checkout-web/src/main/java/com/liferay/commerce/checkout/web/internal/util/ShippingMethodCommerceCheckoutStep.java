@@ -31,7 +31,6 @@ import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
-import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
@@ -62,6 +61,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
@@ -90,23 +90,8 @@ public class ShippingMethodCommerceCheckoutStep
 			HttpServletResponse httpServletResponse)
 		throws Exception {
 
-		CommerceOrder commerceOrder =
-			(CommerceOrder)httpServletRequest.getAttribute(
-				CommerceCheckoutWebKeys.COMMERCE_ORDER);
-
-		if (!_commerceShippingHelper.isShippable(commerceOrder) ||
-			_commerceShippingHelper.isFreeShipping(commerceOrder)) {
-
-			return false;
-		}
-
-		if (_commerceShippingMethodLocalService.getCommerceShippingMethodsCount(
-				commerceOrder.getSiteGroupId(), true) > 0) {
-
-			return true;
-		}
-
-		return false;
+		return _commerceCheckoutStepHelper.
+			isActiveShippingMethodCommerceCheckoutStep(httpServletRequest);
 	}
 
 	@Override
@@ -239,6 +224,9 @@ public class ShippingMethodCommerceCheckoutStep
 	}
 
 	@Reference
+	private CommerceCheckoutStepHelper _commerceCheckoutStepHelper;
+
+	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Reference
@@ -249,9 +237,6 @@ public class ShippingMethodCommerceCheckoutStep
 
 	@Reference
 	private CommerceShippingEngineRegistry _commerceShippingEngineRegistry;
-
-	@Reference
-	private CommerceShippingHelper _commerceShippingHelper;
 
 	@Reference
 	private CommerceShippingMethodLocalService
