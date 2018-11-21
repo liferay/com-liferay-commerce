@@ -43,10 +43,10 @@ if (Validator.isNull(commerceShippingOptionKey)) {
 			</aui:row>
 
 			<aui:script use="aui-base">
-				var continue = A.one('#<portlet:namespace />continue');
+				var continueButton = A.one('#<portlet:namespace />continue');
 
-				if (continue) {
-					Liferay.Util.toggleDisabled(continue, true);
+				if (continueButton) {
+					Liferay.Util.toggleDisabled(continueButton, true);
 				}
 			</aui:script>
 		</c:when>
