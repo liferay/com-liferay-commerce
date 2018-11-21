@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.util.ResourceBundle;
+
 /**
  * @author Alessio Antonio Rendina
  */
@@ -33,9 +35,22 @@ public class CommerceOrderValidatorResult implements Serializable {
 	}
 
 	public CommerceOrderValidatorResult(
+		boolean valid, String messageKey, ResourceBundle resourceBundle) {
+
+		this(0, valid, messageKey, StringPool.BLANK, resourceBundle);
+	}
+
+	public CommerceOrderValidatorResult(
 		boolean valid, String messageKey, String argument) {
 
 		this(0, valid, messageKey, argument);
+	}
+
+	public CommerceOrderValidatorResult(
+		boolean valid, String messageKey, String argument,
+		ResourceBundle resourceBundle) {
+
+		this(0, valid, messageKey, argument, resourceBundle);
 	}
 
 	public CommerceOrderValidatorResult(
@@ -46,12 +61,29 @@ public class CommerceOrderValidatorResult implements Serializable {
 
 	public CommerceOrderValidatorResult(
 		long commerceOrderItemId, boolean valid, String messageKey,
+		ResourceBundle resourceBundle) {
+
+		this(
+			commerceOrderItemId, valid, messageKey, StringPool.BLANK,
+			resourceBundle);
+	}
+
+	public CommerceOrderValidatorResult(
+		long commerceOrderItemId, boolean valid, String messageKey,
 		String argument) {
+
+		this(commerceOrderItemId, valid, messageKey, argument, null);
+	}
+
+	public CommerceOrderValidatorResult(
+		long commerceOrderItemId, boolean valid, String messageKey,
+		String argument, ResourceBundle resourceBundle) {
 
 		_commerceOrderItemId = commerceOrderItemId;
 		_valid = valid;
 		_messageKey = messageKey;
 		_argument = argument;
+		_resourceBundle = resourceBundle;
 	}
 
 	public String getArgument() {
@@ -64,6 +96,10 @@ public class CommerceOrderValidatorResult implements Serializable {
 
 	public String getMessage() {
 		return _messageKey;
+	}
+
+	public ResourceBundle getResourceBundle() {
+		return _resourceBundle;
 	}
 
 	public boolean hasArgument() {
@@ -89,6 +125,7 @@ public class CommerceOrderValidatorResult implements Serializable {
 	private String _argument;
 	private long _commerceOrderItemId;
 	private String _messageKey;
+	private ResourceBundle _resourceBundle;
 	private boolean _valid;
 
 }
