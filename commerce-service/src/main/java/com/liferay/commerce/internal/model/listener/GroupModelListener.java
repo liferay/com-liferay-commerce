@@ -31,6 +31,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Andrea Di Giorgi
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = ModelListener.class)
 public class GroupModelListener extends BaseModelListener<Group> {
@@ -38,9 +39,13 @@ public class GroupModelListener extends BaseModelListener<Group> {
 	@Override
 	public void onBeforeRemove(Group group) {
 		try {
+			long groupId = group.getGroupId();
+
 			_commerceAvailabilityEstimateLocalService.
-				deleteCommerceAvailabilityEstimates(group.getGroupId());
-			_commerceOrderLocalService.deleteCommerceOrders(group.getGroupId());
+				deleteCommerceAvailabilityEstimates(groupId);
+			_commerceCountryLocalService.deleteCommerceCountries(groupId);
+			_commerceOrderLocalService.deleteCommerceOrders(groupId);
+			_commerceWarehouseLocalService.deleteCommerceWarehouse(groupId);
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
