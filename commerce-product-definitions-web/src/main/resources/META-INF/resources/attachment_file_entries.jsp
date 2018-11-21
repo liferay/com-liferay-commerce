@@ -148,6 +148,7 @@ PortletURL portletURL = cpAttachmentFileEntriesDisplayContext.getPortletURL();
 								rowURL.setParameter("mvcRenderCommandName", "editCPAttachmentFileEntry");
 								rowURL.setParameter("cpDefinitionId", String.valueOf(cpDefinitionId));
 								rowURL.setParameter("cpAttachmentFileEntryId", String.valueOf(cpAttachmentFileEntry.getCPAttachmentFileEntryId()));
+								rowURL.setParameter("type", String.valueOf(type));
 
 								FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
 
