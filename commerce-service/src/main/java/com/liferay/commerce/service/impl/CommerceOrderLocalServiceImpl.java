@@ -23,7 +23,6 @@ import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.exception.CommerceOrderBillingAddressException;
-import com.liferay.commerce.exception.CommerceOrderPaymentMethodException;
 import com.liferay.commerce.exception.CommerceOrderPurchaseOrderNumberException;
 import com.liferay.commerce.exception.CommerceOrderShippingAddressException;
 import com.liferay.commerce.exception.CommerceOrderShippingMethodException;
@@ -33,7 +32,6 @@ import com.liferay.commerce.exception.GuestCartMaxAllowedException;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
@@ -97,7 +95,7 @@ public class CommerceOrderLocalServiceImpl
 	public CommerceOrder addCommerceOrder(
 			long siteGroupId, long orderOrganizationId, long orderUserId,
 			long commerceCurrencyId, long billingAddressId,
-			long shippingAddressId, long commercePaymentMethodId,
+			long shippingAddressId, String commercePaymentMethodKey,
 			long commerceShippingMethodId, String shippingOptionName,
 			String purchaseOrderNumber, BigDecimal subtotal,
 			BigDecimal shippingAmount, BigDecimal total, int paymentStatus,
@@ -144,7 +142,7 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setCommerceCurrencyId(commerceCurrencyId);
 		commerceOrder.setBillingAddressId(billingAddressId);
 		commerceOrder.setShippingAddressId(shippingAddressId);
-		commerceOrder.setCommercePaymentMethodId(commercePaymentMethodId);
+		commerceOrder.setCommercePaymentMethodKey(commercePaymentMethodKey);
 		commerceOrder.setCommerceShippingMethodId(commerceShippingMethodId);
 		commerceOrder.setShippingOptionName(shippingOptionName);
 		commerceOrder.setPurchaseOrderNumber(purchaseOrderNumber);
@@ -189,8 +187,8 @@ public class CommerceOrderLocalServiceImpl
 
 		return addCommerceOrder(
 			siteGroupId, orderOrganizationId, userId, commerceCurrencyId, 0,
-			shippingAddressId, 0, 0, null, purchaseOrderNumber, BigDecimal.ZERO,
-			BigDecimal.ZERO, BigDecimal.ZERO,
+			shippingAddressId, null, 0, null, purchaseOrderNumber,
+			BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
 			CommerceOrderConstants.PAYMENT_STATUS_PENDING,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
 	}
@@ -217,8 +215,9 @@ public class CommerceOrderLocalServiceImpl
 
 		return addCommerceOrder(
 			siteGroupId, orderOrganizationId, userId, 0, 0, shippingAddressId,
-			0, 0, null, purchaseOrderNumber, BigDecimal.ZERO, BigDecimal.ZERO,
-			BigDecimal.ZERO, CommerceOrderConstants.PAYMENT_STATUS_PENDING,
+			null, 0, null, purchaseOrderNumber, BigDecimal.ZERO,
+			BigDecimal.ZERO, BigDecimal.ZERO,
+			CommerceOrderConstants.PAYMENT_STATUS_PENDING,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
 	}
 
@@ -250,8 +249,8 @@ public class CommerceOrderLocalServiceImpl
 		}
 
 		return addCommerceOrder(
-			groupId, 0, orderUserId, 0, 0, 0, 0, 0, null, null, BigDecimal.ZERO,
-			BigDecimal.ZERO, BigDecimal.ZERO,
+			groupId, 0, orderUserId, 0, 0, 0, null, 0, null, null,
+			BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
 			CommerceOrderConstants.PAYMENT_STATUS_PENDING,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
 	}
@@ -276,8 +275,8 @@ public class CommerceOrderLocalServiceImpl
 		}
 
 		return addCommerceOrder(
-			groupId, 0, orderUserId, commerceCurrencyId, 0, 0, 0, 0, null, null,
-			BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
+			groupId, 0, orderUserId, commerceCurrencyId, 0, 0, null, 0, null,
+			null, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
 			CommerceOrderConstants.PAYMENT_STATUS_PENDING,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
 	}
@@ -678,7 +677,7 @@ public class CommerceOrderLocalServiceImpl
 			commerceOrder.getOrderOrganizationId(),
 			commerceOrder.getOrderUserId(),
 			commerceOrder.getCommerceCurrencyId(), billingAddressId,
-			shippingAddressId, commerceOrder.getCommercePaymentMethodId(),
+			shippingAddressId, commerceOrder.getCommercePaymentMethodKey(),
 			commerceOrder.getCommerceShippingMethodId(),
 			commerceOrder.getShippingOptionName(), StringPool.BLANK,
 			commerceOrder.getSubtotal(), commerceOrder.getShippingAmount(),
@@ -794,7 +793,7 @@ public class CommerceOrderLocalServiceImpl
 	@Override
 	public CommerceOrder updateCommerceOrder(
 			long commerceOrderId, long billingAddressId, long shippingAddressId,
-			long commercePaymentMethodId, long commerceShippingMethodId,
+			String commercePaymentMethodKey, long commerceShippingMethodId,
 			String shippingOptionName, String purchaseOrderNumber,
 			BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 			String advanceStatus, CommerceContext commerceContext)
@@ -802,7 +801,7 @@ public class CommerceOrderLocalServiceImpl
 
 		return updateCommerceOrder(
 			commerceOrderId, billingAddressId, shippingAddressId,
-			commercePaymentMethodId, commerceShippingMethodId,
+			commercePaymentMethodKey, commerceShippingMethodId,
 			shippingOptionName, purchaseOrderNumber, subtotal, shippingAmount,
 			total, advanceStatus, null, commerceContext);
 	}
@@ -811,7 +810,7 @@ public class CommerceOrderLocalServiceImpl
 	@Override
 	public CommerceOrder updateCommerceOrder(
 			long commerceOrderId, long billingAddressId, long shippingAddressId,
-			long commercePaymentMethodId, long commerceShippingMethodId,
+			String commercePaymentMethodKey, long commerceShippingMethodId,
 			String shippingOptionName, String purchaseOrderNumber,
 			BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 			String advanceStatus, String externalReferenceCode,
@@ -823,7 +822,7 @@ public class CommerceOrderLocalServiceImpl
 
 		commerceOrder.setBillingAddressId(billingAddressId);
 		commerceOrder.setShippingAddressId(shippingAddressId);
-		commerceOrder.setCommercePaymentMethodId(commercePaymentMethodId);
+		commerceOrder.setCommercePaymentMethodKey(commercePaymentMethodKey);
 		commerceOrder.setCommerceShippingMethodId(commerceShippingMethodId);
 		commerceOrder.setShippingOptionName(shippingOptionName);
 		commerceOrder.setPurchaseOrderNumber(purchaseOrderNumber);
@@ -1235,31 +1234,10 @@ public class CommerceOrderLocalServiceImpl
 			throw new CommerceOrderStatusException();
 		}
 
-		CommercePaymentMethod commercePaymentMethod = null;
+		if (!commerceOrder.isB2B() &&
+			(commerceOrder.getBillingAddressId() <= 0)) {
 
-		long commercePaymentMethodId =
-			commerceOrder.getCommercePaymentMethodId();
-
-		if (commercePaymentMethodId > 0) {
-			commercePaymentMethod =
-				commercePaymentMethodLocalService.getCommercePaymentMethod(
-					commercePaymentMethodId);
-
-			if (!commercePaymentMethod.isActive()) {
-				commercePaymentMethod = null;
-			}
-			else if (!commerceOrder.isB2B() &&
-					 (commerceOrder.getBillingAddressId() <= 0)) {
-
-				throw new CommerceOrderBillingAddressException();
-			}
-		}
-
-		if ((commercePaymentMethod == null) &&
-			(commercePaymentMethodLocalService.getCommercePaymentMethodsCount(
-				commerceOrder.getGroupId(), true) > 0)) {
-
-			throw new CommerceOrderPaymentMethodException();
+			throw new CommerceOrderBillingAddressException();
 		}
 
 		CommerceShippingMethod commerceShippingMethod = null;

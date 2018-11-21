@@ -16,6 +16,7 @@ package com.liferay.commerce.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceShippingMethod;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.File;
 
@@ -59,6 +61,10 @@ public interface CommerceShippingMethodService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceShippingMethodServiceUtil} to access the commerce shipping method remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceShippingMethodServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CommerceAddressRestriction addCommerceAddressRestriction(
+		long commerceShippingMethodId, long commerceCountryId,
+		ServiceContext serviceContext) throws PortalException;
+
 	public CommerceShippingMethod addCommerceShippingMethod(
 		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 		File imageFile, String engineKey, double priority, boolean active,
@@ -67,8 +73,22 @@ public interface CommerceShippingMethodService extends BaseService {
 	public CommerceShippingMethod createCommerceShippingMethod(
 		long commerceShippingMethodId) throws PortalException;
 
+	public void deleteCommerceAddressRestriction(
+		long commerceAddressRestrictionId, long groupId)
+		throws PortalException;
+
 	public void deleteCommerceShippingMethod(long commerceShippingMethodId)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
+		long commerceShippingMethodId, int start, int end,
+		OrderByComparator<CommerceAddressRestriction> orderByComparator,
+		long groupId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAddressRestrictionsCount(
+		long commerceShippingMethodId, long groupId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceShippingMethod getCommerceShippingMethod(

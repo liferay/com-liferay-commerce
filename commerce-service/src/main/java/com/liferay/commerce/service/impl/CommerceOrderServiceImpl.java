@@ -385,7 +385,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	@Override
 	public CommerceOrder updateCommerceOrder(
 			long commerceOrderId, long billingAddressId, long shippingAddressId,
-			long commercePaymentMethodId, long commerceShippingMethodId,
+			String commercePaymentMethodKey, long commerceShippingMethodId,
 			String shippingOptionName, String purchaseOrderNumber,
 			BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 			String advanceStatus, CommerceContext commerceContext)
@@ -396,7 +396,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		return commerceOrderLocalService.updateCommerceOrder(
 			commerceOrderId, billingAddressId, shippingAddressId,
-			commercePaymentMethodId, commerceShippingMethodId,
+			commercePaymentMethodKey, commerceShippingMethodId,
 			shippingOptionName, purchaseOrderNumber, subtotal, shippingAmount,
 			total, advanceStatus, commerceContext);
 	}
@@ -404,7 +404,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	@Override
 	public CommerceOrder updateCommerceOrder(
 			long commerceOrderId, long billingAddressId, long shippingAddressId,
-			long commercePaymentMethodId, long commerceShippingMethodId,
+			String commercePaymentMethodKey, long commerceShippingMethodId,
 			String shippingOptionName, String purchaseOrderNumber,
 			BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 			String advanceStatus, String externalReferenceCode,
@@ -416,7 +416,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		return commerceOrderLocalService.updateCommerceOrder(
 			commerceOrderId, billingAddressId, shippingAddressId,
-			commercePaymentMethodId, commerceShippingMethodId,
+			commercePaymentMethodKey, commerceShippingMethodId,
 			shippingOptionName, purchaseOrderNumber, subtotal, shippingAmount,
 			total, advanceStatus, externalReferenceCode, commerceContext);
 	}

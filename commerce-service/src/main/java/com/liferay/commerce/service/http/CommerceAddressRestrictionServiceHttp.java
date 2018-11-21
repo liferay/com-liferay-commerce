@@ -16,21 +16,12 @@ package com.liferay.commerce.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.service.CommerceAddressRestrictionServiceUtil;
-
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.security.auth.HttpPrincipal;
-import com.liferay.portal.kernel.service.http.TunnelUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
-
 /**
  * Provides the HTTP utility for the
- * {@link CommerceAddressRestrictionServiceUtil} service utility. The
+ * {@link com.liferay.commerce.service.CommerceAddressRestrictionServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * {@link com.liferay.portal.kernel.security.auth.HttpPrincipal} parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,193 +40,10 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Alessio Antonio Rendina
  * @see CommerceAddressRestrictionServiceSoap
- * @see HttpPrincipal
- * @see CommerceAddressRestrictionServiceUtil
+ * @see com.liferay.portal.kernel.security.auth.HttpPrincipal
+ * @see com.liferay.commerce.service.CommerceAddressRestrictionServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceAddressRestrictionServiceHttp {
-	public static com.liferay.commerce.model.CommerceAddressRestriction addCommerceAddressRestriction(
-		HttpPrincipal httpPrincipal, String className, long classPK,
-		long commerceCountryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAddressRestrictionServiceUtil.class,
-					"addCommerceAddressRestriction",
-					_addCommerceAddressRestrictionParameterTypes0);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					className, classPK, commerceCountryId, serviceContext);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.commerce.model.CommerceAddressRestriction)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void deleteCommerceAddressRestriction(
-		HttpPrincipal httpPrincipal, long commerceAddressRestrictionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAddressRestrictionServiceUtil.class,
-					"deleteCommerceAddressRestriction",
-					_deleteCommerceAddressRestrictionParameterTypes1);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAddressRestrictionId);
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
-		HttpPrincipal httpPrincipal, String className, long classPK, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAddressRestrictionServiceUtil.class,
-					"getCommerceAddressRestrictions",
-					_getCommerceAddressRestrictionsParameterTypes2);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					className, classPK, start, end, orderByComparator);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.commerce.model.CommerceAddressRestriction>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static int getCommerceAddressRestrictionsCount(
-		HttpPrincipal httpPrincipal, String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAddressRestrictionServiceUtil.class,
-					"getCommerceAddressRestrictionsCount",
-					_getCommerceAddressRestrictionsCountParameterTypes3);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					className, classPK);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static boolean isCommerceShippingMethodRestricted(
-		HttpPrincipal httpPrincipal, long commerceShippingMethodId,
-		long commerceCountryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAddressRestrictionServiceUtil.class,
-					"isCommerceShippingMethodRestricted",
-					_isCommerceShippingMethodRestrictedParameterTypes4);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceShippingMethodId, commerceCountryId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return ((Boolean)returnObj).booleanValue();
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(CommerceAddressRestrictionServiceHttp.class);
-	private static final Class<?>[] _addCommerceAddressRestrictionParameterTypes0 =
-		new Class[] {
-			String.class, long.class, long.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
-		};
-	private static final Class<?>[] _deleteCommerceAddressRestrictionParameterTypes1 =
-		new Class[] { long.class };
-	private static final Class<?>[] _getCommerceAddressRestrictionsParameterTypes2 =
-		new Class[] {
-			String.class, long.class, int.class, int.class,
-			com.liferay.portal.kernel.util.OrderByComparator.class
-		};
-	private static final Class<?>[] _getCommerceAddressRestrictionsCountParameterTypes3 =
-		new Class[] { String.class, long.class };
-	private static final Class<?>[] _isCommerceShippingMethodRestrictedParameterTypes4 =
-		new Class[] { long.class, long.class };
 }

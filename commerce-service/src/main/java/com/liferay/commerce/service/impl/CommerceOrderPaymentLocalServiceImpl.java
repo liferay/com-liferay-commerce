@@ -90,8 +90,8 @@ public class CommerceOrderPaymentLocalServiceImpl
 		commerceOrderPayment.setUserName(user.getFullName());
 		commerceOrderPayment.setCommerceOrderId(
 			commerceOrder.getCommerceOrderId());
-		commerceOrderPayment.setCommercePaymentMethodId(
-			commerceOrder.getCommercePaymentMethodId());
+		commerceOrderPayment.setCommercePaymentMethodKey(
+			commerceOrder.getCommercePaymentMethodKey());
 		commerceOrderPayment.setStatus(status);
 		commerceOrderPayment.setContent(result);
 

@@ -17,10 +17,10 @@ package com.liferay.commerce.service.persistence.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 
 import com.liferay.commerce.exception.NoSuchPaymentMethodException;
-import com.liferay.commerce.model.CommercePaymentMethod;
-import com.liferay.commerce.service.CommercePaymentMethodLocalServiceUtil;
-import com.liferay.commerce.service.persistence.CommercePaymentMethodPersistence;
-import com.liferay.commerce.service.persistence.CommercePaymentMethodUtil;
+import com.liferay.commerce.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.service.CommercePaymentMethodGroupRelLocalServiceUtil;
+import com.liferay.commerce.service.persistence.CommercePaymentMethodGroupRelPersistence;
+import com.liferay.commerce.service.persistence.CommercePaymentMethodGroupRelUtil;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -64,7 +64,7 @@ import java.util.Set;
  * @generated
  */
 @RunWith(Arquillian.class)
-public class CommercePaymentMethodPersistenceTest {
+public class CommercePaymentMethodGroupRelPersistenceTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
@@ -74,7 +74,7 @@ public class CommercePaymentMethodPersistenceTest {
 
 	@Before
 	public void setUp() {
-		_persistence = CommercePaymentMethodUtil.getPersistence();
+		_persistence = CommercePaymentMethodGroupRelUtil.getPersistence();
 
 		Class<?> clazz = _persistence.getClass();
 
@@ -83,7 +83,7 @@ public class CommercePaymentMethodPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommercePaymentMethod> iterator = _commercePaymentMethods.iterator();
+		Iterator<CommercePaymentMethodGroupRel> iterator = _CommercePaymentMethodGroupRels.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -96,92 +96,92 @@ public class CommercePaymentMethodPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommercePaymentMethod commercePaymentMethod = _persistence.create(pk);
+		CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel = _persistence.create(pk);
 
-		Assert.assertNotNull(commercePaymentMethod);
+		Assert.assertNotNull(CommercePaymentMethodGroupRel);
 
-		Assert.assertEquals(commercePaymentMethod.getPrimaryKey(), pk);
+		Assert.assertEquals(CommercePaymentMethodGroupRel.getPrimaryKey(), pk);
 	}
 
 	@Test
 	public void testRemove() throws Exception {
-		CommercePaymentMethod newCommercePaymentMethod = addCommercePaymentMethod();
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel = addCommercePaymentMethodGroupRel();
 
-		_persistence.remove(newCommercePaymentMethod);
+		_persistence.remove(newCommercePaymentMethodGroupRel);
 
-		CommercePaymentMethod existingCommercePaymentMethod = _persistence.fetchByPrimaryKey(newCommercePaymentMethod.getPrimaryKey());
+		CommercePaymentMethodGroupRel existingCommercePaymentMethodGroupRel = _persistence.fetchByPrimaryKey(newCommercePaymentMethodGroupRel.getPrimaryKey());
 
-		Assert.assertNull(existingCommercePaymentMethod);
+		Assert.assertNull(existingCommercePaymentMethodGroupRel);
 	}
 
 	@Test
 	public void testUpdateNew() throws Exception {
-		addCommercePaymentMethod();
+		addCommercePaymentMethodGroupRel();
 	}
 
 	@Test
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommercePaymentMethod newCommercePaymentMethod = _persistence.create(pk);
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel = _persistence.create(pk);
 
-		newCommercePaymentMethod.setGroupId(RandomTestUtil.nextLong());
+		newCommercePaymentMethodGroupRel.setGroupId(RandomTestUtil.nextLong());
 
-		newCommercePaymentMethod.setCompanyId(RandomTestUtil.nextLong());
+		newCommercePaymentMethodGroupRel.setCompanyId(RandomTestUtil.nextLong());
 
-		newCommercePaymentMethod.setUserId(RandomTestUtil.nextLong());
+		newCommercePaymentMethodGroupRel.setUserId(RandomTestUtil.nextLong());
 
-		newCommercePaymentMethod.setUserName(RandomTestUtil.randomString());
+		newCommercePaymentMethodGroupRel.setUserName(RandomTestUtil.randomString());
 
-		newCommercePaymentMethod.setCreateDate(RandomTestUtil.nextDate());
+		newCommercePaymentMethodGroupRel.setCreateDate(RandomTestUtil.nextDate());
 
-		newCommercePaymentMethod.setModifiedDate(RandomTestUtil.nextDate());
+		newCommercePaymentMethodGroupRel.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommercePaymentMethod.setName(RandomTestUtil.randomString());
+		newCommercePaymentMethodGroupRel.setName(RandomTestUtil.randomString());
 
-		newCommercePaymentMethod.setDescription(RandomTestUtil.randomString());
+		newCommercePaymentMethodGroupRel.setDescription(RandomTestUtil.randomString());
 
-		newCommercePaymentMethod.setImageId(RandomTestUtil.nextLong());
+		newCommercePaymentMethodGroupRel.setImageId(RandomTestUtil.nextLong());
 
-		newCommercePaymentMethod.setEngineKey(RandomTestUtil.randomString());
+		newCommercePaymentMethodGroupRel.setEngineKey(RandomTestUtil.randomString());
 
-		newCommercePaymentMethod.setPriority(RandomTestUtil.nextDouble());
+		newCommercePaymentMethodGroupRel.setPriority(RandomTestUtil.nextDouble());
 
-		newCommercePaymentMethod.setActive(RandomTestUtil.randomBoolean());
+		newCommercePaymentMethodGroupRel.setActive(RandomTestUtil.randomBoolean());
 
-		_commercePaymentMethods.add(_persistence.update(
-				newCommercePaymentMethod));
+		_CommercePaymentMethodGroupRels.add(_persistence.update(
+				newCommercePaymentMethodGroupRel));
 
-		CommercePaymentMethod existingCommercePaymentMethod = _persistence.findByPrimaryKey(newCommercePaymentMethod.getPrimaryKey());
+		CommercePaymentMethodGroupRel existingCommercePaymentMethodGroupRel = _persistence.findByPrimaryKey(newCommercePaymentMethodGroupRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommercePaymentMethod.getCommercePaymentMethodId(),
-			newCommercePaymentMethod.getCommercePaymentMethodId());
-		Assert.assertEquals(existingCommercePaymentMethod.getGroupId(),
-			newCommercePaymentMethod.getGroupId());
-		Assert.assertEquals(existingCommercePaymentMethod.getCompanyId(),
-			newCommercePaymentMethod.getCompanyId());
-		Assert.assertEquals(existingCommercePaymentMethod.getUserId(),
-			newCommercePaymentMethod.getUserId());
-		Assert.assertEquals(existingCommercePaymentMethod.getUserName(),
-			newCommercePaymentMethod.getUserName());
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId(),
+			newCommercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId());
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel.getGroupId(),
+			newCommercePaymentMethodGroupRel.getGroupId());
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel.getCompanyId(),
+			newCommercePaymentMethodGroupRel.getCompanyId());
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel.getUserId(),
+			newCommercePaymentMethodGroupRel.getUserId());
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel.getUserName(),
+			newCommercePaymentMethodGroupRel.getUserName());
 		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommercePaymentMethod.getCreateDate()),
-			Time.getShortTimestamp(newCommercePaymentMethod.getCreateDate()));
+				existingCommercePaymentMethodGroupRel.getCreateDate()),
+			Time.getShortTimestamp(newCommercePaymentMethodGroupRel.getCreateDate()));
 		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommercePaymentMethod.getModifiedDate()),
-			Time.getShortTimestamp(newCommercePaymentMethod.getModifiedDate()));
-		Assert.assertEquals(existingCommercePaymentMethod.getName(),
-			newCommercePaymentMethod.getName());
-		Assert.assertEquals(existingCommercePaymentMethod.getDescription(),
-			newCommercePaymentMethod.getDescription());
-		Assert.assertEquals(existingCommercePaymentMethod.getImageId(),
-			newCommercePaymentMethod.getImageId());
-		Assert.assertEquals(existingCommercePaymentMethod.getEngineKey(),
-			newCommercePaymentMethod.getEngineKey());
-		AssertUtils.assertEquals(existingCommercePaymentMethod.getPriority(),
-			newCommercePaymentMethod.getPriority());
-		Assert.assertEquals(existingCommercePaymentMethod.isActive(),
-			newCommercePaymentMethod.isActive());
+				existingCommercePaymentMethodGroupRel.getModifiedDate()),
+			Time.getShortTimestamp(newCommercePaymentMethodGroupRel.getModifiedDate()));
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel.getName(),
+			newCommercePaymentMethodGroupRel.getName());
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel.getDescription(),
+			newCommercePaymentMethodGroupRel.getDescription());
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel.getImageId(),
+			newCommercePaymentMethodGroupRel.getImageId());
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel.getEngineKey(),
+			newCommercePaymentMethodGroupRel.getEngineKey());
+		AssertUtils.assertEquals(existingCommercePaymentMethodGroupRel.getPriority(),
+			newCommercePaymentMethodGroupRel.getPriority());
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel.isActive(),
+			newCommercePaymentMethodGroupRel.isActive());
 	}
 
 	@Test
@@ -210,12 +210,12 @@ public class CommercePaymentMethodPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommercePaymentMethod newCommercePaymentMethod = addCommercePaymentMethod();
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel = addCommercePaymentMethodGroupRel();
 
-		CommercePaymentMethod existingCommercePaymentMethod = _persistence.findByPrimaryKey(newCommercePaymentMethod.getPrimaryKey());
+		CommercePaymentMethodGroupRel existingCommercePaymentMethodGroupRel = _persistence.findByPrimaryKey(newCommercePaymentMethodGroupRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommercePaymentMethod,
-			newCommercePaymentMethod);
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel,
+			newCommercePaymentMethodGroupRel);
 	}
 
 	@Test(expected = NoSuchPaymentMethodException.class)
@@ -231,9 +231,9 @@ public class CommercePaymentMethodPersistenceTest {
 			getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommercePaymentMethod> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CommercePaymentMethod",
-			"commercePaymentMethodId", true, "groupId", true, "companyId",
+	protected OrderByComparator<CommercePaymentMethodGroupRel> getOrderByComparator() {
+		return OrderByComparatorFactoryUtil.create("CommercePaymentMethodGroupRel",
+			"CommercePaymentMethodGroupRelId", true, "groupId", true, "companyId",
 			true, "userId", true, "userName", true, "createDate", true,
 			"modifiedDate", true, "name", true, "description", true, "imageId",
 			true, "engineKey", true, "priority", true, "active", true);
@@ -241,43 +241,43 @@ public class CommercePaymentMethodPersistenceTest {
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommercePaymentMethod newCommercePaymentMethod = addCommercePaymentMethod();
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel = addCommercePaymentMethodGroupRel();
 
-		CommercePaymentMethod existingCommercePaymentMethod = _persistence.fetchByPrimaryKey(newCommercePaymentMethod.getPrimaryKey());
+		CommercePaymentMethodGroupRel existingCommercePaymentMethodGroupRel = _persistence.fetchByPrimaryKey(newCommercePaymentMethodGroupRel.getPrimaryKey());
 
-		Assert.assertEquals(existingCommercePaymentMethod,
-			newCommercePaymentMethod);
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel,
+			newCommercePaymentMethodGroupRel);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommercePaymentMethod missingCommercePaymentMethod = _persistence.fetchByPrimaryKey(pk);
+		CommercePaymentMethodGroupRel missingCommercePaymentMethodGroupRel = _persistence.fetchByPrimaryKey(pk);
 
-		Assert.assertNull(missingCommercePaymentMethod);
+		Assert.assertNull(missingCommercePaymentMethodGroupRel);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommercePaymentMethod newCommercePaymentMethod1 = addCommercePaymentMethod();
-		CommercePaymentMethod newCommercePaymentMethod2 = addCommercePaymentMethod();
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel1 = addCommercePaymentMethodGroupRel();
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel2 = addCommercePaymentMethodGroupRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(newCommercePaymentMethod1.getPrimaryKey());
-		primaryKeys.add(newCommercePaymentMethod2.getPrimaryKey());
+		primaryKeys.add(newCommercePaymentMethodGroupRel1.getPrimaryKey());
+		primaryKeys.add(newCommercePaymentMethodGroupRel2.getPrimaryKey());
 
-		Map<Serializable, CommercePaymentMethod> commercePaymentMethods = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommercePaymentMethodGroupRel> CommercePaymentMethodGroupRels = _persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertEquals(2, commercePaymentMethods.size());
-		Assert.assertEquals(newCommercePaymentMethod1,
-			commercePaymentMethods.get(
-				newCommercePaymentMethod1.getPrimaryKey()));
-		Assert.assertEquals(newCommercePaymentMethod2,
-			commercePaymentMethods.get(
-				newCommercePaymentMethod2.getPrimaryKey()));
+		Assert.assertEquals(2, CommercePaymentMethodGroupRels.size());
+		Assert.assertEquals(newCommercePaymentMethodGroupRel1,
+			CommercePaymentMethodGroupRels.get(
+				newCommercePaymentMethodGroupRel1.getPrimaryKey()));
+		Assert.assertEquals(newCommercePaymentMethodGroupRel2,
+			CommercePaymentMethodGroupRels.get(
+				newCommercePaymentMethodGroupRel2.getPrimaryKey()));
 	}
 
 	@Test
@@ -292,28 +292,28 @@ public class CommercePaymentMethodPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommercePaymentMethod> commercePaymentMethods = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommercePaymentMethodGroupRel> CommercePaymentMethodGroupRels = _persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertTrue(commercePaymentMethods.isEmpty());
+		Assert.assertTrue(CommercePaymentMethodGroupRels.isEmpty());
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommercePaymentMethod newCommercePaymentMethod = addCommercePaymentMethod();
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel = addCommercePaymentMethodGroupRel();
 
 		long pk = RandomTestUtil.nextLong();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(newCommercePaymentMethod.getPrimaryKey());
+		primaryKeys.add(newCommercePaymentMethodGroupRel.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommercePaymentMethod> commercePaymentMethods = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommercePaymentMethodGroupRel> CommercePaymentMethodGroupRels = _persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertEquals(1, commercePaymentMethods.size());
-		Assert.assertEquals(newCommercePaymentMethod,
-			commercePaymentMethods.get(newCommercePaymentMethod.getPrimaryKey()));
+		Assert.assertEquals(1, CommercePaymentMethodGroupRels.size());
+		Assert.assertEquals(newCommercePaymentMethodGroupRel,
+			CommercePaymentMethodGroupRels.get(newCommercePaymentMethodGroupRel.getPrimaryKey()));
 	}
 
 	@Test
@@ -321,38 +321,38 @@ public class CommercePaymentMethodPersistenceTest {
 		throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommercePaymentMethod> commercePaymentMethods = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommercePaymentMethodGroupRel> CommercePaymentMethodGroupRels = _persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertTrue(commercePaymentMethods.isEmpty());
+		Assert.assertTrue(CommercePaymentMethodGroupRels.isEmpty());
 	}
 
 	@Test
 	public void testFetchByPrimaryKeysWithOnePrimaryKey()
 		throws Exception {
-		CommercePaymentMethod newCommercePaymentMethod = addCommercePaymentMethod();
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel = addCommercePaymentMethodGroupRel();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(newCommercePaymentMethod.getPrimaryKey());
+		primaryKeys.add(newCommercePaymentMethodGroupRel.getPrimaryKey());
 
-		Map<Serializable, CommercePaymentMethod> commercePaymentMethods = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommercePaymentMethodGroupRel> CommercePaymentMethodGroupRels = _persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertEquals(1, commercePaymentMethods.size());
-		Assert.assertEquals(newCommercePaymentMethod,
-			commercePaymentMethods.get(newCommercePaymentMethod.getPrimaryKey()));
+		Assert.assertEquals(1, CommercePaymentMethodGroupRels.size());
+		Assert.assertEquals(newCommercePaymentMethodGroupRel,
+			CommercePaymentMethodGroupRels.get(newCommercePaymentMethodGroupRel.getPrimaryKey()));
 	}
 
 	@Test
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommercePaymentMethodLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery = CommercePaymentMethodGroupRelLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommercePaymentMethod>() {
+		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommercePaymentMethodGroupRel>() {
 				@Override
 				public void performAction(
-					CommercePaymentMethod commercePaymentMethod) {
-					Assert.assertNotNull(commercePaymentMethod);
+					CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel) {
+					Assert.assertNotNull(CommercePaymentMethodGroupRel);
 
 					count.increment();
 				}
@@ -366,33 +366,33 @@ public class CommercePaymentMethodPersistenceTest {
 	@Test
 	public void testDynamicQueryByPrimaryKeyExisting()
 		throws Exception {
-		CommercePaymentMethod newCommercePaymentMethod = addCommercePaymentMethod();
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel = addCommercePaymentMethodGroupRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePaymentMethod.class,
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePaymentMethodGroupRel.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commercePaymentMethodId",
-				newCommercePaymentMethod.getCommercePaymentMethodId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("CommercePaymentMethodGroupRelId",
+				newCommercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId()));
 
-		List<CommercePaymentMethod> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommercePaymentMethodGroupRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommercePaymentMethod existingCommercePaymentMethod = result.get(0);
+		CommercePaymentMethodGroupRel existingCommercePaymentMethodGroupRel = result.get(0);
 
-		Assert.assertEquals(existingCommercePaymentMethod,
-			newCommercePaymentMethod);
+		Assert.assertEquals(existingCommercePaymentMethodGroupRel,
+			newCommercePaymentMethodGroupRel);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePaymentMethod.class,
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePaymentMethodGroupRel.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("commercePaymentMethodId",
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("CommercePaymentMethodGroupRelId",
 				RandomTestUtil.nextLong()));
 
-		List<CommercePaymentMethod> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommercePaymentMethodGroupRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
@@ -400,38 +400,38 @@ public class CommercePaymentMethodPersistenceTest {
 	@Test
 	public void testDynamicQueryByProjectionExisting()
 		throws Exception {
-		CommercePaymentMethod newCommercePaymentMethod = addCommercePaymentMethod();
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel = addCommercePaymentMethodGroupRel();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePaymentMethod.class,
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePaymentMethodGroupRel.class,
 				_dynamicQueryClassLoader);
 
 		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commercePaymentMethodId"));
+				"CommercePaymentMethodGroupRelId"));
 
-		Object newCommercePaymentMethodId = newCommercePaymentMethod.getCommercePaymentMethodId();
+		Object newCommercePaymentMethodGroupRelId = newCommercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commercePaymentMethodId",
-				new Object[] { newCommercePaymentMethodId }));
+		dynamicQuery.add(RestrictionsFactoryUtil.in("CommercePaymentMethodGroupRelId",
+				new Object[] { newCommercePaymentMethodGroupRelId }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		Object existingCommercePaymentMethodId = result.get(0);
+		Object existingCommercePaymentMethodGroupRelId = result.get(0);
 
-		Assert.assertEquals(existingCommercePaymentMethodId,
-			newCommercePaymentMethodId);
+		Assert.assertEquals(existingCommercePaymentMethodGroupRelId,
+			newCommercePaymentMethodGroupRelId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePaymentMethod.class,
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommercePaymentMethodGroupRel.class,
 				_dynamicQueryClassLoader);
 
 		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commercePaymentMethodId"));
+				"CommercePaymentMethodGroupRelId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("commercePaymentMethodId",
+		dynamicQuery.add(RestrictionsFactoryUtil.in("CommercePaymentMethodGroupRelId",
 				new Object[] { RandomTestUtil.nextLong() }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
@@ -441,58 +441,58 @@ public class CommercePaymentMethodPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CommercePaymentMethod newCommercePaymentMethod = addCommercePaymentMethod();
+		CommercePaymentMethodGroupRel newCommercePaymentMethodGroupRel = addCommercePaymentMethodGroupRel();
 
 		_persistence.clearCache();
 
-		CommercePaymentMethod existingCommercePaymentMethod = _persistence.findByPrimaryKey(newCommercePaymentMethod.getPrimaryKey());
+		CommercePaymentMethodGroupRel existingCommercePaymentMethodGroupRel = _persistence.findByPrimaryKey(newCommercePaymentMethodGroupRel.getPrimaryKey());
 
 		Assert.assertEquals(Long.valueOf(
-				existingCommercePaymentMethod.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCommercePaymentMethod,
+				existingCommercePaymentMethodGroupRel.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(existingCommercePaymentMethodGroupRel,
 				"getOriginalGroupId", new Class<?>[0]));
 		Assert.assertTrue(Objects.equals(
-				existingCommercePaymentMethod.getEngineKey(),
-				ReflectionTestUtil.invoke(existingCommercePaymentMethod,
+				existingCommercePaymentMethodGroupRel.getEngineKey(),
+				ReflectionTestUtil.invoke(existingCommercePaymentMethodGroupRel,
 					"getOriginalEngineKey", new Class<?>[0])));
 	}
 
-	protected CommercePaymentMethod addCommercePaymentMethod()
+	protected CommercePaymentMethodGroupRel addCommercePaymentMethodGroupRel()
 		throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommercePaymentMethod commercePaymentMethod = _persistence.create(pk);
+		CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel = _persistence.create(pk);
 
-		commercePaymentMethod.setGroupId(RandomTestUtil.nextLong());
+		CommercePaymentMethodGroupRel.setGroupId(RandomTestUtil.nextLong());
 
-		commercePaymentMethod.setCompanyId(RandomTestUtil.nextLong());
+		CommercePaymentMethodGroupRel.setCompanyId(RandomTestUtil.nextLong());
 
-		commercePaymentMethod.setUserId(RandomTestUtil.nextLong());
+		CommercePaymentMethodGroupRel.setUserId(RandomTestUtil.nextLong());
 
-		commercePaymentMethod.setUserName(RandomTestUtil.randomString());
+		CommercePaymentMethodGroupRel.setUserName(RandomTestUtil.randomString());
 
-		commercePaymentMethod.setCreateDate(RandomTestUtil.nextDate());
+		CommercePaymentMethodGroupRel.setCreateDate(RandomTestUtil.nextDate());
 
-		commercePaymentMethod.setModifiedDate(RandomTestUtil.nextDate());
+		CommercePaymentMethodGroupRel.setModifiedDate(RandomTestUtil.nextDate());
 
-		commercePaymentMethod.setName(RandomTestUtil.randomString());
+		CommercePaymentMethodGroupRel.setName(RandomTestUtil.randomString());
 
-		commercePaymentMethod.setDescription(RandomTestUtil.randomString());
+		CommercePaymentMethodGroupRel.setDescription(RandomTestUtil.randomString());
 
-		commercePaymentMethod.setImageId(RandomTestUtil.nextLong());
+		CommercePaymentMethodGroupRel.setImageId(RandomTestUtil.nextLong());
 
-		commercePaymentMethod.setEngineKey(RandomTestUtil.randomString());
+		CommercePaymentMethodGroupRel.setEngineKey(RandomTestUtil.randomString());
 
-		commercePaymentMethod.setPriority(RandomTestUtil.nextDouble());
+		CommercePaymentMethodGroupRel.setPriority(RandomTestUtil.nextDouble());
 
-		commercePaymentMethod.setActive(RandomTestUtil.randomBoolean());
+		CommercePaymentMethodGroupRel.setActive(RandomTestUtil.randomBoolean());
 
-		_commercePaymentMethods.add(_persistence.update(commercePaymentMethod));
+		_CommercePaymentMethodGroupRels.add(_persistence.update(CommercePaymentMethodGroupRel));
 
-		return commercePaymentMethod;
+		return CommercePaymentMethodGroupRel;
 	}
 
-	private List<CommercePaymentMethod> _commercePaymentMethods = new ArrayList<CommercePaymentMethod>();
-	private CommercePaymentMethodPersistence _persistence;
+	private List<CommercePaymentMethodGroupRel> _CommercePaymentMethodGroupRels = new ArrayList<CommercePaymentMethodGroupRel>();
+	private CommercePaymentMethodGroupRelPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
 }

@@ -51,7 +51,7 @@ public class CommerceOrderSoap implements Serializable {
 		soapModel.setCommerceCurrencyId(model.getCommerceCurrencyId());
 		soapModel.setBillingAddressId(model.getBillingAddressId());
 		soapModel.setShippingAddressId(model.getShippingAddressId());
-		soapModel.setCommercePaymentMethodId(model.getCommercePaymentMethodId());
+		soapModel.setCommercePaymentMethodKey(model.getCommercePaymentMethodKey());
 		soapModel.setTransactionId(model.getTransactionId());
 		soapModel.setCommerceShippingMethodId(model.getCommerceShippingMethodId());
 		soapModel.setShippingOptionName(model.getShippingOptionName());
@@ -254,12 +254,12 @@ public class CommerceOrderSoap implements Serializable {
 		_shippingAddressId = shippingAddressId;
 	}
 
-	public long getCommercePaymentMethodId() {
-		return _commercePaymentMethodId;
+	public String getCommercePaymentMethodKey() {
+		return _commercePaymentMethodKey;
 	}
 
-	public void setCommercePaymentMethodId(long commercePaymentMethodId) {
-		_commercePaymentMethodId = commercePaymentMethodId;
+	public void setCommercePaymentMethodKey(String commercePaymentMethodKey) {
+		_commercePaymentMethodKey = commercePaymentMethodKey;
 	}
 
 	public String getTransactionId() {
@@ -529,7 +529,7 @@ public class CommerceOrderSoap implements Serializable {
 	private long _commerceCurrencyId;
 	private long _billingAddressId;
 	private long _shippingAddressId;
-	private long _commercePaymentMethodId;
+	private String _commercePaymentMethodKey;
 	private String _transactionId;
 	private long _commerceShippingMethodId;
 	private String _shippingOptionName;

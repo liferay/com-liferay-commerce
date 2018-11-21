@@ -305,13 +305,6 @@ public class CommerceAddressRestrictionLocalServiceWrapper
 	}
 
 	@Override
-	public boolean isCommercePaymentMethodRestricted(
-		long commercePaymentMethodId, long commerceCountryId) {
-		return _commerceAddressRestrictionLocalService.isCommercePaymentMethodRestricted(commercePaymentMethodId,
-			commerceCountryId);
-	}
-
-	@Override
 	public boolean isCommerceShippingMethodRestricted(
 		long commerceShippingMethodId, long commerceCountryId) {
 		return _commerceAddressRestrictionLocalService.isCommerceShippingMethodRestricted(commerceShippingMethodId,

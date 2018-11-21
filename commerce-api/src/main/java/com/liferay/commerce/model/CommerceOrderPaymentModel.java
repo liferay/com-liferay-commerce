@@ -207,18 +207,19 @@ public interface CommerceOrderPaymentModel extends BaseModel<CommerceOrderPaymen
 	public void setCommerceOrderId(long commerceOrderId);
 
 	/**
-	 * Returns the commerce payment method ID of this commerce order payment.
+	 * Returns the commerce payment method key of this commerce order payment.
 	 *
-	 * @return the commerce payment method ID of this commerce order payment
+	 * @return the commerce payment method key of this commerce order payment
 	 */
-	public long getCommercePaymentMethodId();
+	@AutoEscape
+	public String getCommercePaymentMethodKey();
 
 	/**
-	 * Sets the commerce payment method ID of this commerce order payment.
+	 * Sets the commerce payment method key of this commerce order payment.
 	 *
-	 * @param commercePaymentMethodId the commerce payment method ID of this commerce order payment
+	 * @param commercePaymentMethodKey the commerce payment method key of this commerce order payment
 	 */
-	public void setCommercePaymentMethodId(long commercePaymentMethodId);
+	public void setCommercePaymentMethodKey(String commercePaymentMethodKey);
 
 	/**
 	 * Returns the status of this commerce order payment.

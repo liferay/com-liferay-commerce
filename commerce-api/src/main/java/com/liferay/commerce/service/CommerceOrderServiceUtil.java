@@ -223,7 +223,7 @@ public class CommerceOrderServiceUtil {
 
 	public static com.liferay.commerce.model.CommerceOrder updateCommerceOrder(
 		long commerceOrderId, long billingAddressId, long shippingAddressId,
-		long commercePaymentMethodId, long commerceShippingMethodId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		java.math.BigDecimal subtotal, java.math.BigDecimal shippingAmount,
 		java.math.BigDecimal total, String advanceStatus,
@@ -231,14 +231,14 @@ public class CommerceOrderServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateCommerceOrder(commerceOrderId, billingAddressId,
-			shippingAddressId, commercePaymentMethodId,
+			shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, advanceStatus, commerceContext);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder updateCommerceOrder(
 		long commerceOrderId, long billingAddressId, long shippingAddressId,
-		long commercePaymentMethodId, long commerceShippingMethodId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		java.math.BigDecimal subtotal, java.math.BigDecimal shippingAmount,
 		java.math.BigDecimal total, String advanceStatus,
@@ -247,7 +247,7 @@ public class CommerceOrderServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateCommerceOrder(commerceOrderId, billingAddressId,
-			shippingAddressId, commercePaymentMethodId,
+			shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, advanceStatus,
 			externalReferenceCode, commerceContext);

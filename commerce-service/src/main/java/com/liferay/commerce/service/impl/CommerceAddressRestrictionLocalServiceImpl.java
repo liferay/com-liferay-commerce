@@ -15,7 +15,6 @@
 package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.model.CommerceAddressRestriction;
-import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.base.CommerceAddressRestrictionLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -119,15 +118,6 @@ public class CommerceAddressRestrictionLocalServiceImpl
 		}
 
 		return false;
-	}
-
-	@Override
-	public boolean isCommercePaymentMethodRestricted(
-		long commercePaymentMethodId, long commerceCountryId) {
-
-		return isCommerceAddressRestricted(
-			CommercePaymentMethod.class.getName(), commercePaymentMethodId,
-			commerceCountryId);
 	}
 
 	@Override

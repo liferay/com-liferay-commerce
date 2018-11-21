@@ -42,6 +42,15 @@ public class CommerceShippingMethodServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceShippingMethodServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.model.CommerceAddressRestriction addCommerceAddressRestriction(
+		long commerceShippingMethodId, long commerceCountryId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceAddressRestriction(commerceShippingMethodId,
+			commerceCountryId, serviceContext);
+	}
+
 	public static com.liferay.commerce.model.CommerceShippingMethod addCommerceShippingMethod(
 		java.util.Map<java.util.Locale, String> nameMap,
 		java.util.Map<java.util.Locale, String> descriptionMap,
@@ -61,10 +70,36 @@ public class CommerceShippingMethodServiceUtil {
 				   .createCommerceShippingMethod(commerceShippingMethodId);
 	}
 
+	public static void deleteCommerceAddressRestriction(
+		long commerceAddressRestrictionId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.deleteCommerceAddressRestriction(commerceAddressRestrictionId,
+			groupId);
+	}
+
 	public static void deleteCommerceShippingMethod(
 		long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().deleteCommerceShippingMethod(commerceShippingMethodId);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
+		long commerceShippingMethodId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceAddressRestrictions(commerceShippingMethodId,
+			start, end, orderByComparator, groupId);
+	}
+
+	public static int getCommerceAddressRestrictionsCount(
+		long commerceShippingMethodId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceAddressRestrictionsCount(commerceShippingMethodId,
+			groupId);
 	}
 
 	public static com.liferay.commerce.model.CommerceShippingMethod getCommerceShippingMethod(

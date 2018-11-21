@@ -233,14 +233,14 @@ public class CommerceOrderServiceWrapper implements CommerceOrderService,
 	@Override
 	public com.liferay.commerce.model.CommerceOrder updateCommerceOrder(
 		long commerceOrderId, long billingAddressId, long shippingAddressId,
-		long commercePaymentMethodId, long commerceShippingMethodId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		java.math.BigDecimal subtotal, java.math.BigDecimal shippingAmount,
 		java.math.BigDecimal total, String advanceStatus,
 		com.liferay.commerce.context.CommerceContext commerceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderService.updateCommerceOrder(commerceOrderId,
-			billingAddressId, shippingAddressId, commercePaymentMethodId,
+			billingAddressId, shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, advanceStatus, commerceContext);
 	}
@@ -248,7 +248,7 @@ public class CommerceOrderServiceWrapper implements CommerceOrderService,
 	@Override
 	public com.liferay.commerce.model.CommerceOrder updateCommerceOrder(
 		long commerceOrderId, long billingAddressId, long shippingAddressId,
-		long commercePaymentMethodId, long commerceShippingMethodId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		java.math.BigDecimal subtotal, java.math.BigDecimal shippingAmount,
 		java.math.BigDecimal total, String advanceStatus,
@@ -256,7 +256,7 @@ public class CommerceOrderServiceWrapper implements CommerceOrderService,
 		com.liferay.commerce.context.CommerceContext commerceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderService.updateCommerceOrder(commerceOrderId,
-			billingAddressId, shippingAddressId, commercePaymentMethodId,
+			billingAddressId, shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, advanceStatus,
 			externalReferenceCode, commerceContext);

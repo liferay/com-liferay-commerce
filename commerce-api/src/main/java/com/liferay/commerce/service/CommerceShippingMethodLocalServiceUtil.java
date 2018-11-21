@@ -42,6 +42,14 @@ public class CommerceShippingMethodLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceShippingMethodLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.model.CommerceAddressRestriction addCommerceAddressRestriction(
+		long commerceShippingMethodId, long commerceCountryId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceAddressRestriction(commerceShippingMethodId,
+			commerceCountryId, serviceContext);
+	}
 
 	/**
 	* Adds the commerce shipping method to the database. Also notifies the appropriate model listeners.
@@ -76,6 +84,13 @@ public class CommerceShippingMethodLocalServiceUtil {
 		long commerceShippingMethodId) {
 		return getService()
 				   .createCommerceShippingMethod(commerceShippingMethodId);
+	}
+
+	public static void deleteCommerceAddressRestriction(
+		long commerceAddressRestrictionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
 	}
 
 	/**
@@ -209,6 +224,20 @@ public class CommerceShippingMethodLocalServiceUtil {
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return getService().getActionableDynamicQuery();
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
+		long commerceShippingMethodId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator) {
+		return getService()
+				   .getCommerceAddressRestrictions(commerceShippingMethodId,
+			start, end, orderByComparator);
+	}
+
+	public static int getCommerceAddressRestrictionsCount(
+		long commerceShippingMethodId) {
+		return getService()
+				   .getCommerceAddressRestrictionsCount(commerceShippingMethodId);
 	}
 
 	/**

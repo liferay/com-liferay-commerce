@@ -160,7 +160,7 @@ public interface CommerceOrderService extends BaseService {
 
 	public CommerceOrder updateCommerceOrder(long commerceOrderId,
 		long billingAddressId, long shippingAddressId,
-		long commercePaymentMethodId, long commerceShippingMethodId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 		String advanceStatus, CommerceContext commerceContext)
@@ -168,7 +168,7 @@ public interface CommerceOrderService extends BaseService {
 
 	public CommerceOrder updateCommerceOrder(long commerceOrderId,
 		long billingAddressId, long shippingAddressId,
-		long commercePaymentMethodId, long commerceShippingMethodId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 		String advanceStatus, String externalReferenceCode,

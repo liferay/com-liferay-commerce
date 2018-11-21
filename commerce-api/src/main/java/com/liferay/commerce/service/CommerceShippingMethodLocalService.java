@@ -16,6 +16,7 @@ package com.liferay.commerce.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceShippingMethod;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -64,6 +65,9 @@ public interface CommerceShippingMethodLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceShippingMethodLocalServiceUtil} to access the commerce shipping method local service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceShippingMethodLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CommerceAddressRestriction addCommerceAddressRestriction(
+		long commerceShippingMethodId, long commerceCountryId,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Adds the commerce shipping method to the database. Also notifies the appropriate model listeners.
@@ -89,6 +93,9 @@ public interface CommerceShippingMethodLocalService extends BaseLocalService,
 	@Transactional(enabled = false)
 	public CommerceShippingMethod createCommerceShippingMethod(
 		long commerceShippingMethodId);
+
+	public void deleteCommerceAddressRestriction(
+		long commerceAddressRestrictionId) throws PortalException;
 
 	/**
 	* Deletes the commerce shipping method from the database. Also notifies the appropriate model listeners.
@@ -198,6 +205,15 @@ public interface CommerceShippingMethodLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
+		long commerceShippingMethodId, int start, int end,
+		OrderByComparator<CommerceAddressRestriction> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAddressRestrictionsCount(
+		long commerceShippingMethodId);
 
 	/**
 	* Returns the commerce shipping method with the primary key.

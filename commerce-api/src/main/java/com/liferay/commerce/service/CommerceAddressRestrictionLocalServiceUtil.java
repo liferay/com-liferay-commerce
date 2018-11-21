@@ -294,13 +294,6 @@ public class CommerceAddressRestrictionLocalServiceUtil {
 			commerceCountryId);
 	}
 
-	public static boolean isCommercePaymentMethodRestricted(
-		long commercePaymentMethodId, long commerceCountryId) {
-		return getService()
-				   .isCommercePaymentMethodRestricted(commercePaymentMethodId,
-			commerceCountryId);
-	}
-
 	public static boolean isCommerceShippingMethodRestricted(
 		long commerceShippingMethodId, long commerceCountryId) {
 		return getService()

@@ -83,8 +83,8 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 		sb.append(modifiedDate);
 		sb.append(", commerceOrderId=");
 		sb.append(commerceOrderId);
-		sb.append(", commercePaymentMethodId=");
-		sb.append(commercePaymentMethodId);
+		sb.append(", commercePaymentMethodKey=");
+		sb.append(commercePaymentMethodKey);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", content=");
@@ -125,7 +125,14 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 		}
 
 		commerceOrderPaymentImpl.setCommerceOrderId(commerceOrderId);
-		commerceOrderPaymentImpl.setCommercePaymentMethodId(commercePaymentMethodId);
+
+		if (commercePaymentMethodKey == null) {
+			commerceOrderPaymentImpl.setCommercePaymentMethodKey("");
+		}
+		else {
+			commerceOrderPaymentImpl.setCommercePaymentMethodKey(commercePaymentMethodKey);
+		}
+
 		commerceOrderPaymentImpl.setStatus(status);
 
 		if (content == null) {
@@ -154,8 +161,7 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 		modifiedDate = objectInput.readLong();
 
 		commerceOrderId = objectInput.readLong();
-
-		commercePaymentMethodId = objectInput.readLong();
+		commercePaymentMethodKey = objectInput.readUTF();
 
 		status = objectInput.readInt();
 		content = objectInput.readUTF();
@@ -184,7 +190,12 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 
 		objectOutput.writeLong(commerceOrderId);
 
-		objectOutput.writeLong(commercePaymentMethodId);
+		if (commercePaymentMethodKey == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(commercePaymentMethodKey);
+		}
 
 		objectOutput.writeInt(status);
 
@@ -204,7 +215,7 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 	public long createDate;
 	public long modifiedDate;
 	public long commerceOrderId;
-	public long commercePaymentMethodId;
+	public String commercePaymentMethodKey;
 	public int status;
 	public String content;
 }

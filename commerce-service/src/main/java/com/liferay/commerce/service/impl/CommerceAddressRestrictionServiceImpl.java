@@ -17,7 +17,6 @@ package com.liferay.commerce.service.impl;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceAddressRestriction;
-import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.base.CommerceAddressRestrictionServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -104,16 +103,17 @@ public class CommerceAddressRestrictionServiceImpl
 	protected void checkModel(String className, long classPK)
 		throws PortalException {
 
-		if (className.equals(CommercePaymentMethod.class.getName())) {
-			CommercePaymentMethod commercePaymentMethod =
-				commercePaymentMethodLocalService.getCommercePaymentMethod(
+		/*if (className.equals(CommercePaymentMethodGroupRel.class.getName())) {
+			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
+				CommercePaymentMethodGroupRelLocalService.getCommercePaymentEngineMethod(
 					classPK);
 
 			_portletResourcePermission.check(
-				getPermissionChecker(), commercePaymentMethod.getGroupId(),
+				getPermissionChecker(),
+				commercePaymentMethodGroupRel.getGroupId(),
 				CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
 		}
-		else if (className.equals(CommerceShippingMethod.class.getName())) {
+		else */if (className.equals(CommerceShippingMethod.class.getName())) {
 			CommerceShippingMethod commerceShippingMethod =
 				commerceShippingMethodLocalService.getCommerceShippingMethod(
 					classPK);
