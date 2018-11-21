@@ -38,6 +38,14 @@ long commercePaymentMethodId = BeanParamUtil.getLong(commerceOrder, request, "co
 					</aui:alert>
 				</aui:col>
 			</aui:row>
+
+			<aui:script use="aui-base">
+				var continueButton = A.one('#<portlet:namespace />continue');
+
+				if (continueButton) {
+					Liferay.Util.toggleDisabled(continueButton, true);
+				}
+			</aui:script>
 		</c:when>
 		<c:otherwise>
 			<ul class="list-group">
