@@ -118,7 +118,7 @@
 				CommerceWarehouse
 			INNER JOIN
 				CommerceWarehouseItem ON
-					CommerceWarehouse.commerceWarehouseId = CommerceWarehouseItem.commerceWarehouseId
+					CommerceWarehouseItem.commerceWarehouseId = CommerceWarehouse.commerceWarehouseId
 			WHERE
 				(CommerceWarehouse.active_ = true) AND
 				(CommerceWarehouseItem.CPInstanceId = ?)
@@ -156,8 +156,9 @@
 				CommerceWarehouseItem
 			INNER JOIN
 				CommerceWarehouse ON
-					CommerceWarehouseItem.commerceWarehouseId = CommerceWarehouse.commerceWarehouseId
+					CommerceWarehouse.commerceWarehouseId = CommerceWarehouseItem.commerceWarehouseId
 			WHERE
+				(CommerceWarehouse.active_ = true) AND
 				(CommerceWarehouseItem.CPInstanceId = ?)
 			ORDER BY
 				CommerceWarehouseItem.quantity
@@ -169,8 +170,12 @@
 				SUM(CommerceWarehouseItem.quantity) AS SUM_VALUE
 			FROM
 				CommerceWarehouseItem
+			INNER JOIN
+				CommerceWarehouse ON
+					CommerceWarehouse.commerceWarehouseId = CommerceWarehouseItem.commerceWarehouseId
 			WHERE
-				CommerceWarehouseItem.CPInstanceId = ?
+				(CommerceWarehouse.active_ = true) AND
+				(CommerceWarehouseItem.CPInstanceId = ?)
 		]]>
 	</sql>
 </custom-sql>
