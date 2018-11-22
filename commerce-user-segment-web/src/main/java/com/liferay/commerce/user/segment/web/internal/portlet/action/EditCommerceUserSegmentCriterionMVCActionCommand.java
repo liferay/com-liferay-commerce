@@ -30,11 +30,14 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -109,13 +112,49 @@ public class EditCommerceUserSegmentCriterionMVCActionCommand
 			else if (e instanceof CommerceUserSegmentCriterionTypeException) {
 				SessionErrors.add(actionRequest, e.getClass());
 
-				actionResponse.setRenderParameter(
-					"mvcPath", "/edit_user_segment_criterion.jsp");
+				String redirect = getRedirect(actionRequest);
+
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else {
 				throw e;
 			}
 		}
+	}
+
+	protected String getRedirect(ActionRequest actionRequest) {
+		PortletURL portletURL = _portal.getControlPanelPortletURL(
+			actionRequest, CommerceUserSegmentPortletKeys.COMMERCE_USER_SEGMENT,
+			PortletRequest.RENDER_PHASE);
+
+		portletURL.setParameter(
+			"mvcRenderCommandName", "editCommerceUserSegmentCriterion");
+
+		long commerceUserSegmentCriterionId = ParamUtil.getLong(
+			actionRequest, "commerceUserSegmentCriterionId");
+
+		if (commerceUserSegmentCriterionId > 0) {
+			portletURL.setParameter(
+				"commerceUserSegmentCriterionId",
+				String.valueOf(commerceUserSegmentCriterionId));
+		}
+
+		long commerceUserSegmentEntryId = ParamUtil.getLong(
+			actionRequest, "commerceUserSegmentEntryId");
+
+		if (commerceUserSegmentEntryId > 0) {
+			portletURL.setParameter(
+				"commerceUserSegmentEntryId",
+				String.valueOf(commerceUserSegmentEntryId));
+		}
+
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+		if (Validator.isNotNull(redirect)) {
+			portletURL.setParameter("redirect", redirect);
+		}
+
+		return portletURL.toString();
 	}
 
 	protected String getTypeSettings(
@@ -205,5 +244,8 @@ public class EditCommerceUserSegmentCriterionMVCActionCommand
 	@Reference
 	private CommerceUserSegmentCriterionService
 		_commerceUserSegmentCriterionService;
+
+	@Reference
+	private Portal _portal;
 
 }
