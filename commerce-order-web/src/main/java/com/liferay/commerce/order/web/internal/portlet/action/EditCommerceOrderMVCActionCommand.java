@@ -210,8 +210,8 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
 
-		long commercePaymentMethodId = ParamUtil.getLong(
-			actionRequest, "commercePaymentMethodId");
+		String commercePaymentMethodKey = ParamUtil.getString(
+			actionRequest, "CommercePaymentMethodKey");
 		String advanceStatus = ParamUtil.getString(
 			actionRequest, "advanceStatus");
 		int paymentStatus = ParamUtil.getInteger(
@@ -228,7 +228,7 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 						commerceOrder.getCommerceOrderId(),
 						commerceOrder.getBillingAddressId(),
 						commerceOrder.getShippingAddressId(),
-						commercePaymentMethodId,
+						commercePaymentMethodKey,
 						commerceOrder.getCommerceShippingMethodId(),
 						commerceOrder.getShippingOptionName(),
 						purchaseOrderNumber, commerceOrder.getSubtotal(),
@@ -293,7 +293,7 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			commerceOrder.getCommerceOrderId(),
 			commerceOrder.getBillingAddressId(),
 			commerceOrder.getShippingAddressId(),
-			commerceOrder.getCommercePaymentMethodId(),
+			commerceOrder.getCommercePaymentMethodKey(),
 			commerceOrder.getCommerceShippingMethodId(),
 			commerceOrder.getShippingOptionName(),
 			commerceOrder.getPurchaseOrderNumber(), new BigDecimal(subtotal),

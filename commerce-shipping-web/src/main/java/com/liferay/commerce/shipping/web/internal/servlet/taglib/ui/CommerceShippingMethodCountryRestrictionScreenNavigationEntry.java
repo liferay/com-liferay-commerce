@@ -101,7 +101,6 @@ public class CommerceShippingMethodCountryRestrictionScreenNavigationEntry
 		CommerceShippingMethodRestrictionsDisplayContext
 			commerceShippingMethodRestrictionsDisplayContext =
 				new CommerceShippingMethodRestrictionsDisplayContext(
-					_commerceAddressRestrictionService,
 					_commerceShippingMethodService, _itemSelector,
 					_portletResourcePermission, renderRequest, renderResponse);
 
@@ -113,10 +112,6 @@ public class CommerceShippingMethodCountryRestrictionScreenNavigationEntry
 			_servletContext, httpServletRequest, httpServletResponse,
 			"/shipping_method/restrictions.jsp");
 	}
-
-	@Reference
-	private CommerceAddressRestrictionService
-		_commerceAddressRestrictionService;
 
 	@Reference
 	private CommerceShippingMethodService _commerceShippingMethodService;

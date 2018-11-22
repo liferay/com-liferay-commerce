@@ -16,12 +16,14 @@ package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.exception.CommerceShippingMethodEngineKeyException;
 import com.liferay.commerce.exception.CommerceShippingMethodNameException;
+import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.base.CommerceShippingMethodLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
@@ -36,6 +38,18 @@ import java.util.Map;
  */
 public class CommerceShippingMethodLocalServiceImpl
 	extends CommerceShippingMethodLocalServiceBaseImpl {
+
+	@Override
+	public CommerceAddressRestriction addCommerceAddressRestriction(
+			long commerceShippingMethodId, long commerceCountryId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return commerceAddressRestrictionLocalService.
+			addCommerceAddressRestriction(
+				CommerceShippingMethod.class.getName(),
+				commerceShippingMethodId, commerceCountryId, serviceContext);
+	}
 
 	@Override
 	public CommerceShippingMethod addCommerceShippingMethod(
@@ -85,6 +99,15 @@ public class CommerceShippingMethodLocalServiceImpl
 		}
 
 		return commerceShippingMethod;
+	}
+
+	@Override
+	public void deleteCommerceAddressRestriction(
+			long commerceAddressRestrictionId)
+		throws PortalException {
+
+		commerceAddressRestrictionLocalService.deleteCommerceAddressRestriction(
+			commerceAddressRestrictionId);
 	}
 
 	@Override
@@ -145,6 +168,27 @@ public class CommerceShippingMethodLocalServiceImpl
 		long groupId, String engineKey) {
 
 		return commerceShippingMethodPersistence.fetchByG_E(groupId, engineKey);
+	}
+
+	@Override
+	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
+		long commerceShippingMethodId, int start, int end,
+		OrderByComparator<CommerceAddressRestriction> orderByComparator) {
+
+		return commerceAddressRestrictionLocalService.
+			getCommerceAddressRestrictions(
+				CommerceShippingMethod.class.getName(),
+				commerceShippingMethodId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceAddressRestrictionsCount(
+		long commerceShippingMethodId) {
+
+		return commerceAddressRestrictionLocalService.
+			getCommerceAddressRestrictionsCount(
+				CommerceShippingMethod.class.getName(),
+				commerceShippingMethodId);
 	}
 
 	@Override

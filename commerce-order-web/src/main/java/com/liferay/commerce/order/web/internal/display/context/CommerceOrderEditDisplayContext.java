@@ -14,15 +14,17 @@
 
 package com.liferay.commerce.order.web.internal.display.context;
 
+import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
-import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrderRequestHelper;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearch;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearchTerms;
 import com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderScreenNavigationConstants;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethod;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelectorCriterion;
@@ -32,13 +34,11 @@ import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
-import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
@@ -48,7 +48,6 @@ import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.text.DateFormat;
@@ -229,33 +228,16 @@ public class CommerceOrderEditDisplayContext {
 			commerceOrderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public String getCommercePaymentMethodLabel(
-		CommercePaymentMethod commercePaymentMethod) {
-
-		String label = commercePaymentMethod.getName(
-			_commerceOrderRequestHelper.getLocale());
-
-		if (!commercePaymentMethod.isActive()) {
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(label);
-			sb.append(" (");
-			sb.append(
-				LanguageUtil.get(
-					_commerceOrderRequestHelper.getRequest(), "inactive"));
-			sb.append(CharPool.CLOSE_PARENTHESIS);
-
-			label = sb.toString();
-		}
-
-		return label;
-	}
-
-	public List<CommercePaymentMethod> getCommercePaymentMethods()
+	public List<CommercePaymentEngineMethod> getCommercePaymentMethodGroupRels()
 		throws PortalException {
 
-		return _commercePaymentEngine.getCommercePaymentMethods(
-			_commerceOrderRequestHelper.getScopeGroupId());
+		CommerceAddress billingAddress = _commerceOrder.getBillingAddress();
+
+		CommerceCountry commerceCountry = billingAddress.getCommerceCountry();
+
+		return _commercePaymentEngine.getCommercePaymentEngineMethods(
+			_commerceOrder.getGroupId(),
+			commerceCountry.getCommerceCountryId());
 	}
 
 	public CommerceProductPrice getCommerceProductPrice(

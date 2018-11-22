@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.checkout.web.internal.display.context;
 
+import com.liferay.commerce.checkout.web.internal.display.context.util.CommerceCheckoutRequestHelper;
 import com.liferay.commerce.checkout.web.internal.util.PaymentProcessCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStepServicesTracker;
@@ -37,7 +38,6 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -47,7 +47,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.math.BigDecimal;
 
 import javax.portlet.PortletURL;
-import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -65,7 +64,6 @@ public class PaymentProcessCheckoutStepDisplayContext {
 			Portal portal)
 		throws Exception {
 
-		_httpServletRequest = httpServletRequest;
 		_commerceOrderService = commerceOrderService;
 		_commercePaymentEngine = commercePaymentEngine;
 		_commerceCheckoutStepServicesTracker =
@@ -73,20 +71,20 @@ public class PaymentProcessCheckoutStepDisplayContext {
 		_portal = portal;
 		_commerceOrderId = ParamUtil.getLong(
 			httpServletRequest, "commerceOrderId");
+
+		_commerceCheckoutRequestHelper = new CommerceCheckoutRequestHelper(
+			httpServletRequest);
 	}
 
 	public String getNextStepUrl() throws Exception {
-		RenderResponse renderResponse =
-			(RenderResponse)_httpServletRequest.getAttribute(
-				JavaConstants.JAVAX_PORTLET_RESPONSE);
+		LiferayPortletResponse liferayPortletResponse =
+			_commerceCheckoutRequestHelper.getLiferayPortletResponse();
 
 		CommerceCheckoutStep commerceCheckoutStep =
 			_commerceCheckoutStepServicesTracker.getNextCommerceCheckoutStep(
-				PaymentProcessCommerceCheckoutStep.NAME, _httpServletRequest,
-				_portal.getHttpServletResponse(renderResponse));
-
-		LiferayPortletResponse liferayPortletResponse =
-			_portal.getLiferayPortletResponse(renderResponse);
+				PaymentProcessCommerceCheckoutStep.NAME,
+				_commerceCheckoutRequestHelper.getRequest(),
+				_portal.getHttpServletResponse(liferayPortletResponse));
 
 		PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
@@ -113,18 +111,19 @@ public class PaymentProcessCheckoutStepDisplayContext {
 			_commercePaymentEngine.getCommercePaymentMethodType(
 				commercePaymentRequest);
 
-		if (CommercePaymentConstants.COMMERCE_PAYMENT_METHOD_TYPE_OFFLINE ==
-				commercePaymentMethodType) {
+		if (CommercePaymentConstants.
+				COMMERCE_PAYMENT_METHOD_TYPE_ONLINE_REDIRECT ==
+					commercePaymentMethodType) {
 
-			return false;
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	public void startPayment() throws Exception {
 		try {
-			startPayment(_httpServletRequest);
+			startPayment(_commerceCheckoutRequestHelper.getRequest());
 		}
 		catch (Exception e) {
 			if (e instanceof CommerceOrderBillingAddressException ||
@@ -132,7 +131,8 @@ public class PaymentProcessCheckoutStepDisplayContext {
 				e instanceof CommerceOrderShippingAddressException ||
 				e instanceof CommerceOrderShippingMethodException) {
 
-				SessionErrors.add(_httpServletRequest, e.getClass());
+				SessionErrors.add(
+					_commerceCheckoutRequestHelper.getRequest(), e.getClass());
 
 				return;
 			}
@@ -150,15 +150,10 @@ public class PaymentProcessCheckoutStepDisplayContext {
 		String cancelUrl = _getCancelUrl(httpServletRequest, commerceOrder);
 		String returnUrl = _getReturnUrl(httpServletRequest, commerceOrder);
 
-		CommercePaymentRequest commercePaymentRequest =
-			new CommercePaymentRequest(
-				commerceOrder.getTotal(), cancelUrl,
-				commerceOrder.getCommerceOrderId(),
-				_portal.getLocale(httpServletRequest), null, returnUrl,
-				commerceOrder.getTransactionId());
-
 		CommercePaymentResult commercePaymentResult =
-			_commercePaymentEngine.processPayment(commercePaymentRequest);
+			_commercePaymentEngine.processPayment(
+				commerceOrder.getCommerceOrderId(), nextStepUrl,
+				httpServletRequest);
 
 		if (Validator.isNotNull(commercePaymentResult) &&
 			Validator.isNotNull(commercePaymentResult.isOnlineRedirect()) &&
@@ -246,12 +241,12 @@ public class PaymentProcessCheckoutStepDisplayContext {
 		return sb.toString();
 	}
 
+	private final CommerceCheckoutRequestHelper _commerceCheckoutRequestHelper;
 	private final CommerceCheckoutStepServicesTracker
 		_commerceCheckoutStepServicesTracker;
 	private final long _commerceOrderId;
 	private final CommerceOrderService _commerceOrderService;
 	private final CommercePaymentEngine _commercePaymentEngine;
-	private final HttpServletRequest _httpServletRequest;
 	private final Portal _portal;
 	private String _url;
 

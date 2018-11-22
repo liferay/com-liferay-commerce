@@ -56,14 +56,15 @@ import javax.portlet.RenderResponse;
 public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 
 	public CommercePaymentMethodGroupRelRestrictionsDisplayContext(
-		CommerceAddressRestrictionService commerceAddressRestrictionService,
-		CommercePaymentMethodGroupRelService CommercePaymentMethodGroupRelService,
+		CommercePaymentMethodGroupRelService
+			commercePaymentMethodGroupRelService,
 		ItemSelector itemSelector,
 		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		_commerceAddressRestrictionService = commerceAddressRestrictionService;
-		_CommercePaymentMethodGroupRelService = CommercePaymentMethodGroupRelService;
+
+		_commercePaymentMethodGroupRelService =
+			commercePaymentMethodGroupRelService;
 		_itemSelector = itemSelector;
 		_portletResourcePermission = portletResourcePermission;
 		_renderRequest = renderRequest;
@@ -182,10 +183,10 @@ public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 		_searchContainer.setRowChecker(getRowChecker());
 
 		int total =
-			_commerceAddressRestrictionService.
+			_commercePaymentMethodGroupRelService.
 				getCommerceAddressRestrictionsCount(
-					CommercePaymentMethodGroupRel.class.getName(),
-					getCommercePaymentMethodGroupRelId());
+					getCommercePaymentMethodGroupRelId(),
+					_commercePaymentMethodGroupRel.getGroupId());
 
 		_searchContainer.setTotal(total);
 
@@ -241,15 +242,14 @@ public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 		throws PortalException {
 
 		return
-			_commerceAddressRestrictionService.getCommerceAddressRestrictions(
-				CommercePaymentMethodGroupRel.class.getName(),
-				getCommercePaymentMethodGroupRelId(), start, end, orderByComparator);
+			_commercePaymentMethodGroupRelService.getCommerceAddressRestrictions(
+				getCommercePaymentMethodGroupRelId(), start, end,
+				orderByComparator, _commercePaymentMethodGroupRel.getGroupId());
 	}
 
-	private final CommerceAddressRestrictionService
-		_commerceAddressRestrictionService;
-	private CommercePaymentMethodGroupRel _CommercePaymentMethodGroupRel;
-	private final CommercePaymentMethodGroupRelService _CommercePaymentMethodGroupRelService;
+	private CommercePaymentMethodGroupRel _commercePaymentMethodGroupRel;
+	private final CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
 	private final ItemSelector _itemSelector;
 	private final PortletResourcePermission _portletResourcePermission;
 	private final RenderRequest _renderRequest;

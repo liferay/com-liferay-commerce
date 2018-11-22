@@ -16,12 +16,13 @@ package com.liferay.commerce.payment.engine;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.model.CommercePaymentMethod;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethod;
 import com.liferay.commerce.payment.method.CommercePaymentRequest;
 import com.liferay.commerce.payment.method.CommercePaymentResult;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Luca Pellizzon
@@ -30,37 +31,36 @@ import java.util.List;
 public interface CommercePaymentEngine {
 
 	public CommercePaymentResult cancelPayment(
-			CommercePaymentRequest commercePaymentRequest)
+			long commerceOrderId, String transactionId,
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public CommercePaymentResult cancelRecurringPayment(
 		CommercePaymentRequest commercePaymentRequest);
 
 	public CommercePaymentResult capturePayment(
-			CommercePaymentRequest commercePaymentRequest)
+			long commerceOrderId, String transactionId,
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public CommercePaymentResult completePayment(
-			CommercePaymentRequest commercePaymentRequest)
+			long commerceOrderId, String transactionId,
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
-	public List<CommercePaymentMethod> getCommercePaymentMethods(long groupId)
+	public List<CommercePaymentEngineMethod> getCommercePaymentEngineMethods(
+			long groupId)
 		throws PortalException;
 
-	public List<CommercePaymentMethod> getCommercePaymentMethods(
-			long groupId, boolean active)
+	public List<CommercePaymentEngineMethod> getCommercePaymentEngineMethods(
+			long groupId, long commerceCountryId)
 		throws PortalException;
-
-	public List<CommercePaymentMethod> getCommercePaymentMethods(
-			long groupId, long commerceCountryId, boolean active)
-		throws PortalException;
-
-	public int getCommercePaymentMethodsCount(long groupId, boolean active)
-		throws Exception;
 
 	public int getCommercePaymentMethodType(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception;
+
+	public String getPaymentMethodName(String paymentMethodKey, Locale locale);
 
 	public CommercePaymentResult partiallyRefundPayment(
 		CommercePaymentRequest commercePaymentRequest);
@@ -70,18 +70,21 @@ public interface CommercePaymentEngine {
 		throws Exception;
 
 	public CommercePaymentResult processPayment(
-			CommercePaymentRequest commercePaymentRequest)
+			long commerceOrderId, String checkoutStepUrl,
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public CommercePaymentResult processRecurringPayment(
 		CommercePaymentRequest commercePaymentRequest);
 
 	public CommercePaymentResult refundPayment(
-			CommercePaymentRequest commercePaymentRequest)
+			long commerceOrderId, String transactionId,
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public CommercePaymentResult voidTransaction(
-			CommercePaymentRequest commercePaymentRequest)
+			long commerceOrderId, String transactionId,
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 }

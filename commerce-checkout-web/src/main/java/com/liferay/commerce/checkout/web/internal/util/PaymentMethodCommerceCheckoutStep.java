@@ -25,6 +25,7 @@ import com.liferay.commerce.exception.CommerceOrderPaymentMethodException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethod;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -33,6 +34,8 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -74,13 +77,15 @@ public class PaymentMethodCommerceCheckoutStep
 			(CommerceOrder)httpServletRequest.getAttribute(
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
-		if (_commercePaymentEngine.getCommercePaymentMethodsCount(
-				commerceOrder.getSiteGroupId(), true) > 0) {
+		List<CommercePaymentEngineMethod> commercePaymentEngineMethods =
+			_commercePaymentEngine.getCommercePaymentEngineMethods(
+				commerceOrder.getGroupId());
 
-			return true;
+		if (commercePaymentEngineMethods.isEmpty()) {
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 	@Override
@@ -125,10 +130,10 @@ public class PaymentMethodCommerceCheckoutStep
 	protected void updateCommerceOrderPaymentMethod(ActionRequest actionRequest)
 		throws Exception {
 
-		long commercePaymentMethodId = ParamUtil.getLong(
-			actionRequest, "commercePaymentMethodId");
+		String commercePaymentMethodKey = ParamUtil.getString(
+			actionRequest, "CommercePaymentMethodKey");
 
-		if (commercePaymentMethodId <= 0) {
+		if (commercePaymentMethodKey.isEmpty()) {
 			throw new CommerceOrderPaymentMethodException();
 		}
 
@@ -157,7 +162,7 @@ public class PaymentMethodCommerceCheckoutStep
 		_commerceOrderLocalService.updateCommerceOrder(
 			commerceOrder.getCommerceOrderId(),
 			commerceOrder.getBillingAddressId(),
-			commerceOrder.getShippingAddressId(), commercePaymentMethodId,
+			commerceOrder.getShippingAddressId(), commercePaymentMethodKey,
 			commerceOrder.getCommerceShippingMethodId(),
 			commerceOrder.getShippingOptionName(),
 			commerceOrder.getPurchaseOrderNumber(), commerceOrder.getSubtotal(),

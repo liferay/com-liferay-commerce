@@ -24,9 +24,10 @@ import java.util.Map;
 @ProviderType
 public interface CommercePaymentEngineMethodRegistry {
 
+	public CommercePaymentEngineMethod getCommercePaymentEngineMethod(
+		String key);
+
 	public Map<String, CommercePaymentEngineMethod>
 		getCommercePaymentEngineMethods();
-
-	public CommercePaymentEngineMethod getCommercePaymentMethod(String key);
 
 }

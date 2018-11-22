@@ -17,9 +17,9 @@ package com.liferay.commerce.checkout.web.internal.display.context;
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
-import com.liferay.commerce.util.comparator.CommercePaymentMethodNameComparator;
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethod;
+import com.liferay.commerce.util.comparator.CommercePaymentEngineMethodNameComparator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -48,7 +48,7 @@ public class PaymentMethodCheckoutStepDisplayContext {
 		return _commerceOrder;
 	}
 
-	public List<CommercePaymentMethod> getCommercePaymentMethods()
+	public List<CommercePaymentEngineMethod> getCommercePaymentEngineMethods()
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
@@ -61,14 +61,15 @@ public class PaymentMethodCheckoutStepDisplayContext {
 			commerceAddress = _commerceOrder.getShippingAddress();
 		}
 
-		List<CommercePaymentMethod> commercePaymentMethods =
-			_commercePaymentEngine.getCommercePaymentMethods(
+		List<CommercePaymentEngineMethod> commercePaymentEngineMethods =
+			_commercePaymentEngine.getCommercePaymentEngineMethods(
 				_commerceOrder.getSiteGroupId(),
-				commerceAddress.getCommerceCountryId(), true);
+				commerceAddress.getCommerceCountryId());
 
 		return ListUtil.sort(
-			commercePaymentMethods,
-			new CommercePaymentMethodNameComparator(themeDisplay.getLocale()));
+			commercePaymentEngineMethods,
+			new CommercePaymentEngineMethodNameComparator(
+				themeDisplay.getLocale()));
 	}
 
 	private final CommerceOrder _commerceOrder;

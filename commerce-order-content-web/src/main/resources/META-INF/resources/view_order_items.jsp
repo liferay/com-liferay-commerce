@@ -32,10 +32,10 @@ CommerceMoney totalOrder = commerceOrderPrice.getTotal();
 
 String commercePaymentMethodName = StringPool.BLANK;
 
-CommercePaymentMethod commercePaymentMethod = commerceOrder.getCommercePaymentMethod();
+String commercePaymentMethodKey = commerceOrder.getCommercePaymentMethodKey();
 
-if (commercePaymentMethod != null) {
-	commercePaymentMethodName = commercePaymentMethod.getName(locale);
+if (commercePaymentMethodKey != null) {
+	commercePaymentMethodName = commerceOrderItemContentDisplayContext.getPaymentMethodName(commercePaymentMethodKey, locale);
 }
 
 String commerceShippingOptionName = commerceOrder.getShippingOptionName();

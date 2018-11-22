@@ -25,7 +25,6 @@ import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.portlet.PortletURL;
 
@@ -58,16 +57,6 @@ public class OrderConfirmationCheckoutStepDisplayContext {
 
 		_commerceOrder = (CommerceOrder)_httpServletRequest.getAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_ORDER);
-
-		if (_commerceOrder != null) {
-			return _commerceOrder;
-		}
-
-		long commerceOrderId = ParamUtil.getLong(
-			_httpServletRequest, "order_confirmation.jsp-commerceOrderId");
-
-		_commerceOrder = _commerceOrderService.fetchCommerceOrder(
-			commerceOrderId);
 
 		return _commerceOrder;
 	}

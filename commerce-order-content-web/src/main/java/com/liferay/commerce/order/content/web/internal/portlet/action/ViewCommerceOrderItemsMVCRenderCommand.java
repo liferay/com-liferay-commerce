@@ -17,6 +17,7 @@ package com.liferay.commerce.order.content.web.internal.portlet.action;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.content.web.internal.display.context.CommerceOrderItemContentDisplayContext;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -66,7 +67,7 @@ public class ViewCommerceOrderItemsMVCRenderCommand
 					new CommerceOrderItemContentDisplayContext(
 						httpServletRequest, _commerceOrderLocalService,
 						_commerceOrderItemLocalService,
-						_commerceOrderPriceCalculation,
+						_commerceOrderPriceCalculation, _commercePaymentEngine,
 						_commerceOrderValidatorRegistry,
 						_commerceProductPriceCalculation, _cpInstanceHelper);
 
@@ -92,6 +93,9 @@ public class ViewCommerceOrderItemsMVCRenderCommand
 
 	@Reference
 	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
+
+	@Reference
+	private CommercePaymentEngine _commercePaymentEngine;
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;

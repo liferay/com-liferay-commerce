@@ -104,8 +104,7 @@ public class CommercePaymentMethodGroupRelCountryRestrictionScreenNavigationEntr
 		CommercePaymentMethodGroupRelRestrictionsDisplayContext
 			CommercePaymentMethodGroupRelRestrictionsDisplayContext =
 				new CommercePaymentMethodGroupRelRestrictionsDisplayContext(
-					_commerceAddressRestrictionService,
-					_CommercePaymentMethodGroupRelService, _itemSelector,
+					_commercePaymentMethodGroupRelService, _itemSelector,
 					_portletResourcePermission, renderRequest, renderResponse);
 
 		httpServletRequest.setAttribute(
@@ -118,11 +117,8 @@ public class CommercePaymentMethodGroupRelCountryRestrictionScreenNavigationEntr
 	}
 
 	@Reference
-	private CommerceAddressRestrictionService
-		_commerceAddressRestrictionService;
-
-	@Reference
-	private CommercePaymentMethodGroupRelService _CommercePaymentMethodGroupRelService;
+	private CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
 
 	@Reference
 	private ItemSelector _itemSelector;

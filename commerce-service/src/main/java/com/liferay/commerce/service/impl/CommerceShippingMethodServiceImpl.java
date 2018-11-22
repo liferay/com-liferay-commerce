@@ -16,12 +16,14 @@ package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.base.CommerceShippingMethodServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.File;
 
@@ -35,6 +37,20 @@ import java.util.Map;
  */
 public class CommerceShippingMethodServiceImpl
 	extends CommerceShippingMethodServiceBaseImpl {
+
+	@Override
+	public CommerceAddressRestriction addCommerceAddressRestriction(
+			long commerceShippingMethodId, long commerceCountryId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
+
+		return commerceShippingMethodLocalService.addCommerceAddressRestriction(
+			commerceShippingMethodId, commerceCountryId, serviceContext);
+	}
 
 	@Override
 	public CommerceShippingMethod addCommerceShippingMethod(
@@ -72,6 +88,19 @@ public class CommerceShippingMethodServiceImpl
 	}
 
 	@Override
+	public void deleteCommerceAddressRestriction(
+			long commerceAddressRestrictionId, long groupId)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
+
+		commerceShippingMethodLocalService.deleteCommerceAddressRestriction(
+			commerceAddressRestrictionId);
+	}
+
+	@Override
 	public void deleteCommerceShippingMethod(long commerceShippingMethodId)
 		throws PortalException {
 
@@ -85,6 +114,35 @@ public class CommerceShippingMethodServiceImpl
 
 		commerceShippingMethodLocalService.deleteCommerceShippingMethod(
 			commerceShippingMethod);
+	}
+
+	@Override
+	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
+			long commerceShippingMethodId, int start, int end,
+			OrderByComparator<CommerceAddressRestriction> orderByComparator,
+			long groupId)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
+
+		return commerceShippingMethodLocalService.
+			getCommerceAddressRestrictions(
+				commerceShippingMethodId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceAddressRestrictionsCount(
+			long commerceShippingMethodId, long groupId)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
+
+		return commerceShippingMethodLocalService.
+			getCommerceAddressRestrictionsCount(commerceShippingMethodId);
 	}
 
 	@Override

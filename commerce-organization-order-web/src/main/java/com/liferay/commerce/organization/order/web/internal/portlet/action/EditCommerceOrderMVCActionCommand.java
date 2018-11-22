@@ -297,7 +297,7 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 
 			_commerceOrderService.updateCommerceOrder(
 				commerceOrderId, commerceOrder.getBillingAddressId(),
-				shippingAddressId, commerceOrder.getCommercePaymentMethodId(),
+				shippingAddressId, commerceOrder.getCommercePaymentMethodKey(),
 				commerceOrder.getCommerceShippingMethodId(),
 				commerceOrder.getShippingOptionName(), purchaseOrderNumber,
 				commerceOrder.getSubtotal(), commerceOrder.getShippingAmount(),

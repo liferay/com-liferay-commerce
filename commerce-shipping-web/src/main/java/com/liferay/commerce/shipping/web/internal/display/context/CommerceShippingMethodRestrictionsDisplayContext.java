@@ -56,13 +56,11 @@ import javax.portlet.RenderResponse;
 public class CommerceShippingMethodRestrictionsDisplayContext {
 
 	public CommerceShippingMethodRestrictionsDisplayContext(
-		CommerceAddressRestrictionService commerceAddressRestrictionService,
 		CommerceShippingMethodService commerceShippingMethodService,
 		ItemSelector itemSelector,
 		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		_commerceAddressRestrictionService = commerceAddressRestrictionService;
 		_commerceShippingMethodService = commerceShippingMethodService;
 		_itemSelector = itemSelector;
 		_portletResourcePermission = portletResourcePermission;
@@ -181,10 +179,10 @@ public class CommerceShippingMethodRestrictionsDisplayContext {
 		_searchContainer.setRowChecker(getRowChecker());
 
 		int total =
-			_commerceAddressRestrictionService.
+			_commerceShippingMethodService.
 				getCommerceAddressRestrictionsCount(
-					CommerceShippingMethod.class.getName(),
-					getCommerceShippingMethodId());
+					getCommerceShippingMethodId(),
+					_commerceShippingMethod.getGroupId());
 
 		_searchContainer.setTotal(total);
 
@@ -240,13 +238,11 @@ public class CommerceShippingMethodRestrictionsDisplayContext {
 		throws PortalException {
 
 		return
-			_commerceAddressRestrictionService.getCommerceAddressRestrictions(
-				CommerceShippingMethod.class.getName(),
-				getCommerceShippingMethodId(), start, end, orderByComparator);
+			_commerceShippingMethodService.getCommerceAddressRestrictions(
+				getCommerceShippingMethodId(), start, end, orderByComparator,
+				_commerceShippingMethod.getGroupId());
 	}
 
-	private final CommerceAddressRestrictionService
-		_commerceAddressRestrictionService;
 	private CommerceShippingMethod _commerceShippingMethod;
 	private final CommerceShippingMethodService _commerceShippingMethodService;
 	private final ItemSelector _itemSelector;

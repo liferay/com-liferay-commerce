@@ -72,7 +72,7 @@ public class ShippingAddressCommerceCheckoutStep
 		commerceOrderLocalService.updateCommerceOrder(
 			commerceOrder.getCommerceOrderId(),
 			commerceOrder.getBillingAddressId(), commerceAddressId,
-			commerceOrder.getCommercePaymentMethodId(),
+			commerceOrder.getCommercePaymentMethodKey(),
 			commerceOrder.getCommerceShippingMethodId(),
 			commerceOrder.getShippingOptionName(),
 			commerceOrder.getPurchaseOrderNumber(), commerceOrder.getSubtotal(),

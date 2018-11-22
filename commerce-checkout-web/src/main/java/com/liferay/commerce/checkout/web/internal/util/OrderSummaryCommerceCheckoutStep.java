@@ -21,6 +21,7 @@ import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPInstanceHelper;
@@ -83,7 +84,7 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			orderSummaryCheckoutStepDisplayContext =
 				new OrderSummaryCheckoutStepDisplayContext(
 					_commerceOrderHttpHelper, _commerceOrderPriceCalculation,
-					_commerceOrderValidatorRegistry,
+					_commerceOrderValidatorRegistry, _commercePaymentEngine,
 					_commerceProductPriceCalculation, _cpInstanceHelper,
 					httpServletRequest);
 
@@ -129,6 +130,9 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 	@Reference
 	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
+
+	@Reference
+	private CommercePaymentEngine _commercePaymentEngine;
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;

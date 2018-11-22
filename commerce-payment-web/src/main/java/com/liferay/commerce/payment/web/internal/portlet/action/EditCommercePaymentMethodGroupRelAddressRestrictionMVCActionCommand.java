@@ -17,7 +17,7 @@ package com.liferay.commerce.payment.method.web.internal.portlet.action;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.exception.NoSuchAddressRestrictionException;
 import com.liferay.commerce.model.CommerceAddressRestriction;
-import com.liferay.commerce.service.CommerceAddressRestrictionService;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import javax.portlet.ActionRequest;
@@ -72,8 +73,8 @@ public class EditCommercePaymentMethodGroupRelAddressRestrictionMVCActionCommand
 			CommerceAddressRestriction.class.getName(), actionRequest);
 
 		for (long addCommerceCountryId : addCommerceCountryIds) {
-			_commerceAddressRestrictionService.addCommerceAddressRestriction(
-				className, classPK, addCommerceCountryId, serviceContext);
+			_commercePaymentMethodGroupRelService.addCommerceAddressRestriction(
+				classPK, addCommerceCountryId, serviceContext);
 		}
 	}
 
@@ -100,8 +101,9 @@ public class EditCommercePaymentMethodGroupRelAddressRestrictionMVCActionCommand
 		for (long deleteCommerceAddressRestrictionId :
 				deleteCommerceAddressRestrictionIds) {
 
-			_commerceAddressRestrictionService.deleteCommerceAddressRestriction(
-				deleteCommerceAddressRestrictionId);
+			_commercePaymentMethodGroupRelService.deleteCommerceAddressRestriction(
+				deleteCommerceAddressRestrictionId,
+				_portal.getScopeGroupId(actionRequest));
 		}
 	}
 
@@ -143,7 +145,10 @@ public class EditCommercePaymentMethodGroupRelAddressRestrictionMVCActionCommand
 	}
 
 	@Reference
-	private CommerceAddressRestrictionService
-		_commerceAddressRestrictionService;
+	private CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
+
+	@Reference
+	private Portal _portal;
 
 }

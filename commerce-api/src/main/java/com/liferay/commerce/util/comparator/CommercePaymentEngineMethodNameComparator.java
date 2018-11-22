@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.util.comparator;
 
+import com.liferay.commerce.payment.method.CommercePaymentEngineMethod;
 import com.liferay.portal.kernel.util.CollatorUtil;
 
 import java.io.Serializable;
@@ -26,17 +27,17 @@ import java.util.Locale;
 /**
  * @author Andrea Di Giorgi
  */
-public class CommercePaymentMethodNameComparator
-	implements Comparator<CommercePaymentMethod>, Serializable {
+public class CommercePaymentEngineMethodNameComparator
+	implements Comparator<CommercePaymentEngineMethod>, Serializable {
 
-	public CommercePaymentMethodNameComparator(Locale locale) {
+	public CommercePaymentEngineMethodNameComparator(Locale locale) {
 		_locale = locale;
 	}
 
 	@Override
 	public int compare(
-		CommercePaymentMethod commercePaymentMethod1,
-		CommercePaymentMethod commercePaymentMethod2) {
+		CommercePaymentEngineMethod commercePaymentMethod1,
+		CommercePaymentEngineMethod commercePaymentMethod2) {
 
 		Collator collator = CollatorUtil.getInstance(_locale);
 

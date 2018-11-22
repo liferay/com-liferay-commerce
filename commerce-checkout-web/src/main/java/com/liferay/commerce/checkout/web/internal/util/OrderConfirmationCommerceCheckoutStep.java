@@ -23,7 +23,6 @@ import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 
 import javax.portlet.ActionRequest;
@@ -71,13 +70,6 @@ public class OrderConfirmationCommerceCheckoutStep
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
-
-		long commerceOrderId = ParamUtil.getLong(
-			actionRequest, "commerceOrderId");
-
-		actionResponse.setRenderParameter(
-			"order_confirmation.jsp-commerceOrderId",
-			String.valueOf(commerceOrderId));
 	}
 
 	@Override

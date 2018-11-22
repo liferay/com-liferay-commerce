@@ -38,23 +38,25 @@ public class CommercePaymentEngineMethodRegistryImpl
 	implements CommercePaymentEngineMethodRegistry {
 
 	@Override
-	public Map<String, CommercePaymentEngineMethod>
-		getCommercePaymentEngineMethods() {
+	public CommercePaymentEngineMethod getCommercePaymentEngineMethod(
+		String key) {
 
-		Map<String, CommercePaymentEngineMethod> commercePaymentMethodMap =
-			new HashMap<>();
-
-		for (String key : _serviceTrackerMap.keySet()) {
-			commercePaymentMethodMap.put(
-				key, _serviceTrackerMap.getService(key));
-		}
-
-		return Collections.unmodifiableMap(commercePaymentMethodMap);
+		return _serviceTrackerMap.getService(key);
 	}
 
 	@Override
-	public CommercePaymentEngineMethod getCommercePaymentMethod(String key) {
-		return _serviceTrackerMap.getService(key);
+	public Map<String, CommercePaymentEngineMethod>
+		getCommercePaymentEngineMethods() {
+
+		Map<String, CommercePaymentEngineMethod>
+			commercePaymentMethodGroupRelMap = new HashMap<>();
+
+		for (String key : _serviceTrackerMap.keySet()) {
+			commercePaymentMethodGroupRelMap.put(
+				key, _serviceTrackerMap.getService(key));
+		}
+
+		return Collections.unmodifiableMap(commercePaymentMethodGroupRelMap);
 	}
 
 	@Activate

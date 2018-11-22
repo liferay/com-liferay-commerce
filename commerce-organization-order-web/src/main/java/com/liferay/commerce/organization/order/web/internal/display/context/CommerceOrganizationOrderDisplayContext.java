@@ -25,7 +25,6 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
-import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.organization.order.web.internal.configuration.CommerceOrganizationOpenOrderPortletInstanceConfiguration;
 import com.liferay.commerce.organization.order.web.internal.display.context.util.CommerceOrganizationOrderRequestHelper;
@@ -289,36 +288,6 @@ public class CommerceOrganizationOrderDisplayContext {
 
 		return _commerceOrderNoteService.getCommerceOrderNotesCount(
 			commerceOrder.getCommerceOrderId(), false);
-	}
-
-	public String getCommerceOrderPaymentMethodName(CommerceOrder commerceOrder)
-		throws PortalException {
-
-		CommercePaymentMethod commercePaymentMethod =
-			commerceOrder.getCommercePaymentMethod();
-
-		if (commercePaymentMethod == null) {
-			return StringPool.BLANK;
-		}
-
-		String name = commercePaymentMethod.getName(
-			_commerceOrganizationOrderRequestHelper.getLocale());
-
-		if (!commercePaymentMethod.isActive()) {
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(name);
-			sb.append(" (");
-			sb.append(
-				LanguageUtil.get(
-					_commerceOrganizationOrderRequestHelper.getRequest(),
-					"inactive"));
-			sb.append(CharPool.CLOSE_PARENTHESIS);
-
-			name = sb.toString();
-		}
-
-		return name;
 	}
 
 	public CommerceOrderPrice getCommerceOrderPrice() throws PortalException {
