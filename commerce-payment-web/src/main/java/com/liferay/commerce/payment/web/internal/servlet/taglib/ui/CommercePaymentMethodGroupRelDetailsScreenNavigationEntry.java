@@ -15,11 +15,11 @@
 package com.liferay.commerce.payment.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.constants.CommerceConstants;
-import com.liferay.commerce.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.constants.CommercePaymentScreenNavigationConstants;
 import com.liferay.commerce.payment.method.CommercePaymentEngineMethodRegistry;
-import com.liferay.commerce.payment.method.CommercePaymentScreenNavigationConstants;
+import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.payment.web.internal.display.context.CommercePaymentMethodGroupRelsDisplayContext;
-import com.liferay.commerce.service.CommercePaymentMethodGroupRelService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -99,16 +99,16 @@ public class CommercePaymentMethodGroupRelDetailsScreenNavigationEntry
 					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 			CommercePaymentMethodGroupRelsDisplayContext
-				CommercePaymentMethodGroupRelsDisplayContext =
+				commercePaymentMethodGroupRelsDisplayContext =
 					new CommercePaymentMethodGroupRelsDisplayContext(
 						_commercePaymentEngineMethodRegistry,
-						_CommercePaymentMethodGroupRelService,
+						_commercePaymentMethodGroupRelService,
 						_portletResourcePermission, renderRequest,
 						renderResponse);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				CommercePaymentMethodGroupRelsDisplayContext);
+				commercePaymentMethodGroupRelsDisplayContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -127,7 +127,8 @@ public class CommercePaymentMethodGroupRelDetailsScreenNavigationEntry
 		_commercePaymentEngineMethodRegistry;
 
 	@Reference
-	private CommercePaymentMethodGroupRelService _CommercePaymentMethodGroupRelService;
+	private CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
@@ -138,7 +139,7 @@ public class CommercePaymentMethodGroupRelDetailsScreenNavigationEntry
 	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.commerce.payment.method.web)"
+		target = "(osgi.web.symbolicname=com.liferay.commerce.payment.web)"
 	)
 	private ServletContext _servletContext;
 

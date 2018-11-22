@@ -12,16 +12,15 @@
  * details.
  */
 
-package com.liferay.commerce.payment.method.web.internal.display.context;
+package com.liferay.commerce.payment.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.item.selector.criterion.CommerceCountryItemSelectorCriterion;
 import com.liferay.commerce.model.CommerceAddressRestriction;
-import com.liferay.commerce.model.CommercePaymentMethodGroupRel;
-import com.liferay.commerce.payment.method.CommercePaymentScreenNavigationConstants;
-import com.liferay.commerce.payment.method.web.internal.admin.PaymentMethodsCommerceAdminModule;
-import com.liferay.commerce.service.CommerceAddressRestrictionService;
-import com.liferay.commerce.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.payment.constants.CommercePaymentScreenNavigationConstants;
+import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.payment.web.internal.admin.PaymentMethodsCommerceAdminModule;
 import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -62,7 +61,6 @@ public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-
 		_commercePaymentMethodGroupRelService =
 			commercePaymentMethodGroupRelService;
 		_itemSelector = itemSelector;
@@ -74,31 +72,33 @@ public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 	public CommercePaymentMethodGroupRel getCommercePaymentMethodGroupRel()
 		throws PortalException {
 
-		if (_CommercePaymentMethodGroupRel != null) {
-			return _CommercePaymentMethodGroupRel;
+		if (_commercePaymentMethodGroupRel != null) {
+			return _commercePaymentMethodGroupRel;
 		}
 
-		long CommercePaymentMethodGroupRelId = ParamUtil.getLong(
-			_renderRequest, "CommercePaymentMethodGroupRelId");
+		long commercePaymentMethodGroupRelId = ParamUtil.getLong(
+			_renderRequest, "commercePaymentMethodGroupRelId");
 
-		if (CommercePaymentMethodGroupRelId > 0) {
-			_CommercePaymentMethodGroupRel =
-				_CommercePaymentMethodGroupRelService.getCommercePaymentMethodGroupRel(
-					CommercePaymentMethodGroupRelId);
+		if (commercePaymentMethodGroupRelId > 0) {
+			_commercePaymentMethodGroupRel =
+				_commercePaymentMethodGroupRelService.
+					getCommercePaymentMethodGroupRel(
+						commercePaymentMethodGroupRelId);
 		}
 
-		return _CommercePaymentMethodGroupRel;
+		return _commercePaymentMethodGroupRel;
 	}
 
 	public long getCommercePaymentMethodGroupRelId() throws PortalException {
-		CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel =
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
 			getCommercePaymentMethodGroupRel();
 
-		if (CommercePaymentMethodGroupRel == null) {
+		if (commercePaymentMethodGroupRel == null) {
 			return 0;
 		}
 
-		return CommercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId();
+		return commercePaymentMethodGroupRel.
+			getCommercePaymentMethodGroupRelId();
 	}
 
 	public String getItemSelectorUrl() throws PortalException {
@@ -134,7 +134,7 @@ public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 		portletURL.setParameter(
 			"mvcRenderCommandName", "editCommercePaymentMethodGroupRel");
 		portletURL.setParameter(
-			"CommercePaymentMethodGroupRelId",
+			"commercePaymentMethodGroupRelId",
 			String.valueOf(getCommercePaymentMethodGroupRelId()));
 		portletURL.setParameter(
 			"screenNavigationEntryKey",
@@ -241,8 +241,8 @@ public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws PortalException {
 
-		return
-			_commercePaymentMethodGroupRelService.getCommerceAddressRestrictions(
+		return _commercePaymentMethodGroupRelService.
+			getCommerceAddressRestrictions(
 				getCommercePaymentMethodGroupRelId(), start, end,
 				orderByComparator, _commercePaymentMethodGroupRel.getGroupId());
 	}

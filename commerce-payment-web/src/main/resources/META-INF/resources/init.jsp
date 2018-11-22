@@ -25,14 +25,14 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.admin.constants.CommerceAdminWebKeys" %><%@
-page import="com.liferay.commerce.exception.CommercePaymentMethodNameException" %><%@
 page import="com.liferay.commerce.model.CommerceAddressRestriction" %><%@
 page import="com.liferay.commerce.model.CommerceCountry" %><%@
-page import="com.liferay.commerce.model.CommercePaymentMethod" %><%@
-page import="com.liferay.commerce.payment.method.CommercePaymentScreenNavigationConstants" %><%@
-page import="com.liferay.commerce.payment.method.web.internal.admin.PaymentMethodsCommerceAdminModule" %><%@
-page import="com.liferay.commerce.payment.method.web.internal.display.context.CommercePaymentMethodRestrictionsDisplayContext" %><%@
-page import="com.liferay.commerce.payment.method.web.internal.display.context.CommercePaymentMethodsDisplayContext" %><%@
+page import="com.liferay.commerce.payment.constants.CommercePaymentScreenNavigationConstants" %><%@
+page import="com.liferay.commerce.payment.exception.CommercePaymentMethodGroupRelNameException" %><%@
+page import="com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel" %><%@
+page import="com.liferay.commerce.payment.web.internal.admin.PaymentMethodsCommerceAdminModule" %><%@
+page import="com.liferay.commerce.payment.web.internal.display.context.CommercePaymentMethodGroupRelRestrictionsDisplayContext" %><%@
+page import="com.liferay.commerce.payment.web.internal.display.context.CommercePaymentMethodGroupRelsDisplayContext" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@

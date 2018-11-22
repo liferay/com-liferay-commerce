@@ -17,10 +17,10 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommercePaymentMethodRestrictionsDisplayContext commercePaymentMethodRestrictionsDisplayContext = (CommercePaymentMethodRestrictionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommercePaymentMethodGroupRelRestrictionsDisplayContext commercePaymentMethodGroupRelRestrictionsDisplayContext = (CommercePaymentMethodGroupRelRestrictionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
-<c:if test="<%= commercePaymentMethodRestrictionsDisplayContext.hasManageCommercePaymentMethodsPermission() %>">
+<c:if test="<%= commercePaymentMethodGroupRelRestrictionsDisplayContext.hasManageCommercePaymentMethodGroupRelsPermission() %>">
 	<div class="container-fluid-1280">
 		<liferay-frontend:management-bar
 			includeCheckBox="<%= true %>"
@@ -29,14 +29,14 @@ CommercePaymentMethodRestrictionsDisplayContext commercePaymentMethodRestriction
 			<liferay-frontend:management-bar-filters>
 				<liferay-frontend:management-bar-navigation
 					navigationKeys='<%= new String[] {"all"} %>'
-					portletURL="<%= commercePaymentMethodRestrictionsDisplayContext.getPortletURL() %>"
+					portletURL="<%= commercePaymentMethodGroupRelRestrictionsDisplayContext.getPortletURL() %>"
 				/>
 			</liferay-frontend:management-bar-filters>
 
 			<liferay-frontend:management-bar-buttons>
 				<liferay-frontend:management-bar-display-buttons
 					displayViews='<%= new String[] {"list"} %>'
-					portletURL="<%= commercePaymentMethodRestrictionsDisplayContext.getPortletURL() %>"
+					portletURL="<%= commercePaymentMethodGroupRelRestrictionsDisplayContext.getPortletURL() %>"
 					selectedDisplayStyle="list"
 				/>
 
@@ -45,8 +45,8 @@ CommercePaymentMethodRestrictionsDisplayContext commercePaymentMethodRestriction
 				<aui:form action="<%= addCommercePaymentMethodAddressRestrictionURL %>" cssClass="hide" name="addCommerceAddressRestrictionFm">
 					<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD_MULTIPLE %>" />
 					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-					<aui:input name="className" type="hidden" value="<%= CommercePaymentMethod.class.getName() %>" />
-					<aui:input name="classPK" type="hidden" value="<%= commercePaymentMethodRestrictionsDisplayContext.getCommercePaymentMethodId() %>" />
+					<aui:input name="className" type="hidden" value="<%= CommercePaymentMethodGroupRel.class.getName() %>" />
+					<aui:input name="classPK" type="hidden" value="<%= commercePaymentMethodGroupRelRestrictionsDisplayContext.getCommercePaymentMethodGroupRelId() %>" />
 					<aui:input name="commerceCountryIds" type="hidden" value="" />
 				</aui:form>
 
@@ -79,7 +79,7 @@ CommercePaymentMethodRestrictionsDisplayContext commercePaymentMethodRestriction
 
 			<liferay-ui:search-container
 				id="commerceAddressRestrictions"
-				searchContainer="<%= commercePaymentMethodRestrictionsDisplayContext.getSearchContainer() %>"
+				searchContainer="<%= commercePaymentMethodGroupRelRestrictionsDisplayContext.getSearchContainer() %>"
 			>
 				<liferay-ui:search-container-row
 					className="com.liferay.commerce.model.CommerceAddressRestriction"
@@ -197,7 +197,7 @@ CommercePaymentMethodRestrictionsDisplayContext commercePaymentMethodRestriction
 							}
 						},
 						title: '<liferay-ui:message key="add-restrictions" />',
-						url: '<%= commercePaymentMethodRestrictionsDisplayContext.getItemSelectorUrl() %>'
+						url: '<%= commercePaymentMethodGroupRelRestrictionsDisplayContext.getItemSelectorUrl() %>'
 					}
 				);
 

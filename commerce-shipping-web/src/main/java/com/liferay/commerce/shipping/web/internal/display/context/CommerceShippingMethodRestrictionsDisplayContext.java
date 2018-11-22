@@ -18,7 +18,6 @@ import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.item.selector.criterion.CommerceCountryItemSelectorCriterion;
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceShippingMethod;
-import com.liferay.commerce.service.CommerceAddressRestrictionService;
 import com.liferay.commerce.service.CommerceShippingMethodService;
 import com.liferay.commerce.shipping.web.admin.ShippingMethodsCommerceAdminModule;
 import com.liferay.commerce.shipping.web.servlet.taglib.ui.CommerceShippingScreenNavigationConstants;
@@ -179,10 +178,9 @@ public class CommerceShippingMethodRestrictionsDisplayContext {
 		_searchContainer.setRowChecker(getRowChecker());
 
 		int total =
-			_commerceShippingMethodService.
-				getCommerceAddressRestrictionsCount(
-					getCommerceShippingMethodId(),
-					_commerceShippingMethod.getGroupId());
+			_commerceShippingMethodService.getCommerceAddressRestrictionsCount(
+				getCommerceShippingMethodId(),
+				_commerceShippingMethod.getGroupId());
 
 		_searchContainer.setTotal(total);
 
@@ -237,10 +235,9 @@ public class CommerceShippingMethodRestrictionsDisplayContext {
 			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws PortalException {
 
-		return
-			_commerceShippingMethodService.getCommerceAddressRestrictions(
-				getCommerceShippingMethodId(), start, end, orderByComparator,
-				_commerceShippingMethod.getGroupId());
+		return _commerceShippingMethodService.getCommerceAddressRestrictions(
+			getCommerceShippingMethodId(), start, end, orderByComparator,
+			_commerceShippingMethod.getGroupId());
 	}
 
 	private CommerceShippingMethod _commerceShippingMethod;

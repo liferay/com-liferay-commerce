@@ -17,29 +17,29 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommercePaymentMethodsDisplayContext commercePaymentMethodsDisplayContext = (CommercePaymentMethodsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommercePaymentMethodGroupRelsDisplayContext commercePaymentMethodsDisplayContext = (CommercePaymentMethodGroupRelsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommercePaymentMethod commercePaymentMethod = commercePaymentMethodsDisplayContext.getCommercePaymentMethod();
+CommercePaymentMethodGroupRel commercePaymentMethodGroupRel = commercePaymentMethodsDisplayContext.getCommercePaymentMethodGroupRel();
 
-long commercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodId();
+long commercePaymentMethodId = commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId();
 %>
 
 <portlet:actionURL name="editCommercePaymentMethod" var="editCommercePaymentMethodActionURL" />
 
-<aui:form action="<%= editCommercePaymentMethodActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCommercePaymentMethod();" %>'>
+<aui:form action="<%= editCommercePaymentMethodActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCommercePaymentMethodGroupRel();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commercePaymentMethodId <= 0) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="commercePaymentMethodId" type="hidden" value="<%= commercePaymentMethodId %>" />
-	<aui:input name="engineKey" type="hidden" value="<%= commercePaymentMethod.getEngineKey() %>" />
+	<aui:input name="engineKey" type="hidden" value="<%= commercePaymentMethodGroupRel.getEngineKey() %>" />
 
 	<liferay-ui:error-marker
 		key="<%= WebKeys.ERROR_SECTION %>"
 		value="details"
 	/>
 
-	<liferay-ui:error exception="<%= CommercePaymentMethodNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= CommercePaymentMethodGroupRelNameException.class %>" message="please-enter-a-valid-name" />
 
-	<aui:model-context bean="<%= commercePaymentMethod %>" model="<%= CommercePaymentMethod.class %>" />
+	<aui:model-context bean="<%= commercePaymentMethodGroupRel %>" model="<%= CommercePaymentMethodGroupRel.class %>" />
 
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>
@@ -50,8 +50,8 @@ long commercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodId(
 			<%
 			String thumbnailSrc = StringPool.BLANK;
 
-			if (commercePaymentMethod != null) {
-				thumbnailSrc = commercePaymentMethod.getImageURL(themeDisplay);
+			if (commercePaymentMethodGroupRel != null) {
+				thumbnailSrc = commercePaymentMethodGroupRel.getImageURL(themeDisplay);
 			}
 			%>
 
@@ -67,7 +67,7 @@ long commercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodId(
 
 			<aui:input name="priority" />
 
-			<aui:input checked="<%= (commercePaymentMethod == null) ? false : commercePaymentMethod.isActive() %>" name="active" type="toggle-switch" />
+			<aui:input checked="<%= (commercePaymentMethodGroupRel == null) ? false : commercePaymentMethodGroupRel.isActive() %>" name="active" type="toggle-switch" />
 		</aui:fieldset>
 	</aui:fieldset-group>
 
@@ -79,7 +79,7 @@ long commercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodId(
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />saveCommercePaymentMethod() {
+	function <portlet:namespace />saveCommercePaymentMethodGroupRel() {
 		submitForm(document.<portlet:namespace />fm);
 	}
 </aui:script>

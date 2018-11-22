@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.payment.method.web.internal.portlet.action;
+package com.liferay.commerce.payment.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.exception.NoSuchPaymentMethodException;
@@ -87,7 +87,7 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 		String engineKey = ParamUtil.getString(actionRequest, "engineKey");
 
 		CommercePaymentEngineMethod commercePaymentEngineMethod =
-			_commercePaymentEngineMethodRegistry.getCommercePaymentMethodGroupRel(
+			_commercePaymentEngineMethodRegistry.getCommercePaymentEngineMethod(
 				engineKey);
 
 		Map<Locale, String> nameMap = new HashMap<>();
@@ -103,19 +103,22 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommercePaymentMethodGroupRel.class.getName(), actionRequest);
 
-		return _commercePaymentMethodGroupRelService.addCommercePaymentMethodGroupRel(
-			nameMap, descriptionMap, null, engineKey,
-			new HashMap<String, String>(), 0, active, serviceContext);
+		return _commercePaymentMethodGroupRelService.
+			addCommercePaymentMethodGroupRel(
+				nameMap, descriptionMap, null, engineKey,
+				new HashMap<String, String>(), 0, active, serviceContext);
 	}
 
-	protected void deleteCommercePaymentMethodGroupRel(ActionRequest actionRequest)
+	protected void deleteCommercePaymentMethodGroupRel(
+			ActionRequest actionRequest)
 		throws PortalException {
 
-		long CommercePaymentMethodGroupRelId = ParamUtil.getLong(
-			actionRequest, "CommercePaymentMethodGroupRelId");
+		long commercePaymentMethodGroupRelId = ParamUtil.getLong(
+			actionRequest, "commercePaymentMethodGroupRelId");
 
-		_commercePaymentMethodGroupRelService.deleteCommercePaymentMethodGroupRel(
-			CommercePaymentMethodGroupRelId);
+		_commercePaymentMethodGroupRelService.
+			deleteCommercePaymentMethodGroupRel(
+				commercePaymentMethodGroupRelId);
 	}
 
 	@Override
@@ -130,7 +133,8 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 				deleteCommercePaymentMethodGroupRel(actionRequest);
 			}
 			else if (cmd.equals(Constants.EDIT)) {
-				editCommercePaymentMethodGroupRel(actionRequest, actionResponse);
+				editCommercePaymentMethodGroupRel(
+					actionRequest, actionResponse);
 
 				hideDefaultErrorMessage(actionRequest);
 				hideDefaultSuccessMessage(actionRequest);
@@ -165,7 +169,8 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 				SessionErrors.add(actionRequest, e.getClass());
 
 				actionResponse.setRenderParameter(
-					"mvcRenderCommandName", "editCommercePaymentMethodGroupRel");
+					"mvcRenderCommandName",
+					"editCommercePaymentMethodGroupRel");
 			}
 			else {
 				throw e;
@@ -179,21 +184,22 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 
 		String redirect = null;
 
-		long CommercePaymentMethodGroupRelId = ParamUtil.getLong(
-			actionRequest, "CommercePaymentMethodGroupRelId");
+		long commercePaymentMethodGroupRelId = ParamUtil.getLong(
+			actionRequest, "commercePaymentMethodGroupRelId");
 
-		if (CommercePaymentMethodGroupRelId > 0) {
+		if (commercePaymentMethodGroupRelId > 0) {
 			redirect = getRedirectURL(
-				actionRequest, CommercePaymentMethodGroupRelId,
+				actionRequest, commercePaymentMethodGroupRelId,
 				"editCommercePaymentMethodGroupRel");
 		}
 		else {
-			CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel =
+			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
 				createCommercePaymentMethodGroupRel(actionRequest);
 
 			redirect = getRedirectURL(
 				actionRequest,
-				CommercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId(),
+				commercePaymentMethodGroupRel.
+					getCommercePaymentMethodGroupRelId(),
 				"editCommercePaymentMethodGroupRel");
 		}
 
@@ -201,7 +207,7 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 	}
 
 	protected String getRedirectURL(
-		ActionRequest actionRequest, long CommercePaymentMethodGroupRelId,
+		ActionRequest actionRequest, long commercePaymentMethodGroupRelId,
 		String mvcRenderCommandName) {
 
 		PortletURL portletURL = _portal.getControlPanelPortletURL(
@@ -210,7 +216,8 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 
 		portletURL.setParameter("mvcRenderCommandName", mvcRenderCommandName);
 		portletURL.setParameter(
-			"CommercePaymentMethodGroupRelId", String.valueOf(CommercePaymentMethodGroupRelId));
+			"commercePaymentMethodGroupRelId",
+			String.valueOf(commercePaymentMethodGroupRelId));
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
@@ -228,14 +235,14 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 	}
 
 	protected void setActive(ActionRequest actionRequest) throws Exception {
-		long CommercePaymentMethodGroupRelId = ParamUtil.getLong(
-			actionRequest, "CommercePaymentMethodGroupRelId");
+		long commercePaymentMethodGroupRelId = ParamUtil.getLong(
+			actionRequest, "commercePaymentMethodGroupRelId");
 
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
-		if (CommercePaymentMethodGroupRelId > 0) {
+		if (commercePaymentMethodGroupRelId > 0) {
 			_commercePaymentMethodGroupRelService.setActive(
-				CommercePaymentMethodGroupRelId, active);
+				commercePaymentMethodGroupRelId, active);
 		}
 		else {
 			createCommercePaymentMethodGroupRel(actionRequest, active);
@@ -249,8 +256,8 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 		UploadPortletRequest uploadPortletRequest =
 			_portal.getUploadPortletRequest(actionRequest);
 
-		long CommercePaymentMethodGroupRelId = ParamUtil.getLong(
-			actionRequest, "CommercePaymentMethodGroupRelId");
+		long commercePaymentMethodGroupRelId = ParamUtil.getLong(
+			actionRequest, "commercePaymentMethodGroupRelId");
 
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "name");
@@ -266,22 +273,25 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommercePaymentMethodGroupRel.class.getName(), actionRequest);
 
-		CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel = null;
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel = null;
 
-		if (CommercePaymentMethodGroupRelId <= 0) {
-			CommercePaymentMethodGroupRel =
-				_commercePaymentMethodGroupRelService.addCommercePaymentMethodGroupRel(
-					nameMap, descriptionMap, imageFile, engineKey,
-					engineParameterMap, priority, active, serviceContext);
+		if (commercePaymentMethodGroupRelId <= 0) {
+			commercePaymentMethodGroupRel =
+				_commercePaymentMethodGroupRelService.
+					addCommercePaymentMethodGroupRel(
+						nameMap, descriptionMap, imageFile, engineKey,
+						engineParameterMap, priority, active, serviceContext);
 		}
 		else {
-			CommercePaymentMethodGroupRel =
-				_commercePaymentMethodGroupRelService.updateCommercePaymentMethodGroupRel(
-					CommercePaymentMethodGroupRelId, nameMap, descriptionMap, imageFile,
-					engineParameterMap, priority, active, serviceContext);
+			commercePaymentMethodGroupRel =
+				_commercePaymentMethodGroupRelService.
+					updateCommercePaymentMethodGroupRel(
+						commercePaymentMethodGroupRelId, nameMap,
+						descriptionMap, imageFile, engineParameterMap, priority,
+						active, serviceContext);
 		}
 
-		return CommercePaymentMethodGroupRel;
+		return commercePaymentMethodGroupRel;
 	}
 
 	protected void viewRestrictions(
@@ -290,21 +300,22 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 
 		String redirect = null;
 
-		long CommercePaymentMethodGroupRelId = ParamUtil.getLong(
-			actionRequest, "CommercePaymentMethodGroupRelId");
+		long commercePaymentMethodGroupRelId = ParamUtil.getLong(
+			actionRequest, "commercePaymentMethodGroupRelId");
 
-		if (CommercePaymentMethodGroupRelId > 0) {
+		if (commercePaymentMethodGroupRelId > 0) {
 			redirect = getRedirectURL(
-				actionRequest, CommercePaymentMethodGroupRelId,
+				actionRequest, commercePaymentMethodGroupRelId,
 				"viewCommercePaymentMethodGroupRelAddressRestriction");
 		}
 		else {
-			CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel =
+			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
 				createCommercePaymentMethodGroupRel(actionRequest);
 
 			redirect = getRedirectURL(
 				actionRequest,
-				CommercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId(),
+				commercePaymentMethodGroupRel.
+					getCommercePaymentMethodGroupRelId(),
 				"viewCommercePaymentMethodGroupRelAddressRestriction");
 		}
 
@@ -316,7 +327,8 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 		_commercePaymentEngineMethodRegistry;
 
 	@Reference
-	private CommercePaymentMethodGroupRelService _commercePaymentMethodGroupRelService;
+	private CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
 
 	@Reference
 	private Portal _portal;

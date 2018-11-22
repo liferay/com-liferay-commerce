@@ -12,15 +12,16 @@
  * details.
  */
 
-package com.liferay.commerce.payment.method.web.internal.display.context;
+package com.liferay.commerce.payment.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.payment.constants.CommercePaymentScreenNavigationConstants;
 import com.liferay.commerce.payment.method.CommercePaymentEngineMethod;
 import com.liferay.commerce.payment.method.CommercePaymentEngineMethodRegistry;
-import com.liferay.commerce.payment.method.CommercePaymentScreenNavigationConstants;
-import com.liferay.commerce.payment.method.web.internal.admin.PaymentMethodsCommerceAdminModule;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.payment.util.comparator.CommercePaymentMethodGroupRelNameComparator;
+import com.liferay.commerce.payment.web.internal.admin.PaymentMethodsCommerceAdminModule;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -48,13 +49,15 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 
 	public CommercePaymentMethodGroupRelsDisplayContext(
 		CommercePaymentEngineMethodRegistry commercePaymentEngineMethodRegistry,
-		CommercePaymentMethodGroupRelService CommercePaymentMethodGroupRelService,
+		CommercePaymentMethodGroupRelService
+			commercePaymentMethodGroupRelService,
 		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		_commercePaymentEngineMethodRegistry =
 			commercePaymentEngineMethodRegistry;
-		_CommercePaymentMethodGroupRelService = CommercePaymentMethodGroupRelService;
+		_commercePaymentMethodGroupRelService =
+			commercePaymentMethodGroupRelService;
 		_portletResourcePermission = portletResourcePermission;
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
@@ -65,11 +68,11 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 
 		String key = null;
 
-		CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel =
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
 			getCommercePaymentMethodGroupRel();
 
-		if (CommercePaymentMethodGroupRel != null) {
-			key = CommercePaymentMethodGroupRel.getEngineKey();
+		if (commercePaymentMethodGroupRel != null) {
+			key = commercePaymentMethodGroupRel.getEngineKey();
 		}
 		else {
 			key = ParamUtil.getString(_renderRequest, "engineKey");
@@ -79,31 +82,33 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			}
 		}
 
-		return _commercePaymentEngineMethodRegistry.getCommercePaymentMethodGroupRel(
-			key);
+		return _commercePaymentEngineMethodRegistry.
+			getCommercePaymentEngineMethod(key);
 	}
 
 	public CommercePaymentMethodGroupRel getCommercePaymentMethodGroupRel()
 		throws PortalException {
 
-		if (_CommercePaymentMethodGroupRel != null) {
-			return _CommercePaymentMethodGroupRel;
+		if (_commercePaymentMethodGroupRel != null) {
+			return _commercePaymentMethodGroupRel;
 		}
 
-		long CommercePaymentMethodGroupRelId = ParamUtil.getLong(
-			_renderRequest, "CommercePaymentMethodGroupRelId");
+		long commercePaymentMethodGroupRelId = ParamUtil.getLong(
+			_renderRequest, "commercePaymentMethodGroupRelId");
 		String engineKey = ParamUtil.getString(_renderRequest, "engineKey");
 
-		if (CommercePaymentMethodGroupRelId > 0) {
-			_CommercePaymentMethodGroupRel =
-				_CommercePaymentMethodGroupRelService.getCommercePaymentMethodGroupRel(
-					CommercePaymentMethodGroupRelId);
+		if (commercePaymentMethodGroupRelId > 0) {
+			_commercePaymentMethodGroupRel =
+				_commercePaymentMethodGroupRelService.
+					getCommercePaymentMethodGroupRel(
+						commercePaymentMethodGroupRelId);
 		}
 		else if (Validator.isNotNull(engineKey)) {
-			_CommercePaymentMethodGroupRel = getDefaultCommercePaymentMethodGroupRel(engineKey);
+			_commercePaymentMethodGroupRel =
+				getDefaultCommercePaymentMethodGroupRel(engineKey);
 		}
 
-		return _CommercePaymentMethodGroupRel;
+		return _commercePaymentMethodGroupRel;
 	}
 
 	public PortletURL getPortletURL() {
@@ -153,12 +158,16 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		List<CommercePaymentMethodGroupRel> results;
 
 		if (active != null) {
-			results = _CommercePaymentMethodGroupRelService.getCommercePaymentMethodGroupRels(
-				themeDisplay.getScopeGroupId(), active);
+			results =
+				_commercePaymentMethodGroupRelService.
+					getCommercePaymentMethodGroupRels(
+						themeDisplay.getScopeGroupId(), active);
 		}
 		else {
-			results = _CommercePaymentMethodGroupRelService.getCommercePaymentMethodGroupRels(
-				themeDisplay.getScopeGroupId());
+			results =
+				_commercePaymentMethodGroupRelService.
+					getCommercePaymentMethodGroupRels(
+						themeDisplay.getScopeGroupId());
 		}
 
 		if ((active == null) || !active) {
@@ -166,7 +175,8 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		}
 
 		results.sort(
-			new CommercePaymentMethodGroupRelNameComparator(themeDisplay.getLocale()));
+			new CommercePaymentMethodGroupRelNameComparator(
+				themeDisplay.getLocale()));
 
 		_searchContainer.setTotal(results.size());
 		_searchContainer.setResults(results);
@@ -190,56 +200,61 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			CommerceActionKeys.MANAGE_COMMERCE_PAYMENT_METHODS);
 	}
 
-	protected List<CommercePaymentMethodGroupRel> addDefaultCommercePaymentMethodGroupRels(
-			List<CommercePaymentMethodGroupRel> CommercePaymentMethodGroupRels)
+	protected List<CommercePaymentMethodGroupRel>
+			addDefaultCommercePaymentMethodGroupRels(
+				List<CommercePaymentMethodGroupRel>
+					commercePaymentMethodGroupRels)
 		throws PortalException {
 
-		CommercePaymentMethodGroupRels = ListUtil.copy(CommercePaymentMethodGroupRels);
+		commercePaymentMethodGroupRels = ListUtil.copy(
+			commercePaymentMethodGroupRels);
 
-		Map<String, CommercePaymentEngineMethod> commercePaymentEngines =
+		Map<String, CommercePaymentEngineMethod> commercePaymentEngineMethods =
 			_commercePaymentEngineMethodRegistry.
 				getCommercePaymentEngineMethods();
 
 		Set<String> commerceEngineKeys = new TreeSet<>(
-			commercePaymentEngines.keySet());
+			commercePaymentEngineMethods.keySet());
 
-		for (CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel :
-				CommercePaymentMethodGroupRels) {
+		for (CommercePaymentMethodGroupRel commercePaymentMethodGroupRel :
+				commercePaymentMethodGroupRels) {
 
-			commerceEngineKeys.remove(CommercePaymentMethodGroupRel.getEngineKey());
+			commerceEngineKeys.remove(
+				commercePaymentMethodGroupRel.getEngineKey());
 		}
 
 		for (String name : commerceEngineKeys) {
-			CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel =
+			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
 				getDefaultCommercePaymentMethodGroupRel(name);
 
-			CommercePaymentMethodGroupRels.add(CommercePaymentMethodGroupRel);
+			commercePaymentMethodGroupRels.add(commercePaymentMethodGroupRel);
 		}
 
-		return CommercePaymentMethodGroupRels;
+		return commercePaymentMethodGroupRels;
 	}
 
-	protected CommercePaymentMethodGroupRel getDefaultCommercePaymentMethodGroupRel(
-			String engineKey)
+	protected CommercePaymentMethodGroupRel
+			getDefaultCommercePaymentMethodGroupRel(String engineKey)
 		throws PortalException {
 
 		CommercePaymentEngineMethod commercePaymentEngineMethod =
-			_commercePaymentEngineMethodRegistry.getCommercePaymentMethodGroupRel(
+			_commercePaymentEngineMethodRegistry.getCommercePaymentEngineMethod(
 				engineKey);
 
-		CommercePaymentMethodGroupRel CommercePaymentMethodGroupRel =
-			_CommercePaymentMethodGroupRelService.createCommercePaymentMethodGroupRel(0L);
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
+			_commercePaymentMethodGroupRelService.
+				createCommercePaymentMethodGroupRel(0L);
 
 		Locale locale = LocaleUtil.getSiteDefault();
 
-		CommercePaymentMethodGroupRel.setName(
+		commercePaymentMethodGroupRel.setName(
 			commercePaymentEngineMethod.getName(locale), locale);
-		CommercePaymentMethodGroupRel.setDescription(
+		commercePaymentMethodGroupRel.setDescription(
 			commercePaymentEngineMethod.getDescription(locale), locale);
 
-		CommercePaymentMethodGroupRel.setEngineKey(engineKey);
+		commercePaymentMethodGroupRel.setEngineKey(engineKey);
 
-		return CommercePaymentMethodGroupRel;
+		return commercePaymentMethodGroupRel;
 	}
 
 	protected String getNavigation() {
@@ -248,8 +263,9 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 
 	private final CommercePaymentEngineMethodRegistry
 		_commercePaymentEngineMethodRegistry;
-	private CommercePaymentMethodGroupRel _CommercePaymentMethodGroupRel;
-	private final CommercePaymentMethodGroupRelService _CommercePaymentMethodGroupRelService;
+	private CommercePaymentMethodGroupRel _commercePaymentMethodGroupRel;
+	private final CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
 	private final PortletResourcePermission _portletResourcePermission;
 	private final RenderRequest _renderRequest;
 	private final RenderResponse _renderResponse;

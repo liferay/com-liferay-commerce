@@ -55,7 +55,6 @@ public class EditCommerceShippingMethodAddressRestrictionMVCActionCommand
 
 		long[] addCommerceCountryIds = null;
 
-		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
 		long commerceCountryId = ParamUtil.getLong(
@@ -145,8 +144,7 @@ public class EditCommerceShippingMethodAddressRestrictionMVCActionCommand
 	}
 
 	@Reference
-	private CommerceShippingMethodService
-		_commerceShippingMethodService;
+	private CommerceShippingMethodService _commerceShippingMethodService;
 
 	@Reference
 	private Portal _portal;

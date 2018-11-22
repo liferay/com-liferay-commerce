@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.commerce.payment.method.web.internal.portlet.action;
+package com.liferay.commerce.payment.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.exception.NoSuchPaymentMethodException;
 import com.liferay.commerce.payment.method.CommercePaymentEngineMethodRegistry;
-import com.liferay.commerce.payment.method.web.internal.display.context.CommercePaymentMethodGroupRelsDisplayContext;
-import com.liferay.commerce.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.payment.web.internal.display.context.CommercePaymentMethodGroupRelsDisplayContext;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -63,16 +63,16 @@ public class EditCommercePaymentMethodGroupRelMVCRenderCommand
 
 		try {
 			CommercePaymentMethodGroupRelsDisplayContext
-				CommercePaymentMethodGroupRelsDisplayContext =
+				commercePaymentMethodGroupRelsDisplayContext =
 					new CommercePaymentMethodGroupRelsDisplayContext(
 						_commercePaymentEngineMethodRegistry,
-						_CommercePaymentMethodGroupRelService,
+						_commercePaymentMethodGroupRelService,
 						_portletResourcePermission, renderRequest,
 						renderResponse);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				CommercePaymentMethodGroupRelsDisplayContext);
+				commercePaymentMethodGroupRelsDisplayContext);
 
 			HttpServletRequest httpServletRequest =
 				_portal.getHttpServletRequest(renderRequest);
@@ -103,7 +103,8 @@ public class EditCommercePaymentMethodGroupRelMVCRenderCommand
 		_commercePaymentEngineMethodRegistry;
 
 	@Reference
-	private CommercePaymentMethodGroupRelService _CommercePaymentMethodGroupRelService;
+	private CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
 
 	@Reference
 	private Portal _portal;
@@ -114,7 +115,7 @@ public class EditCommercePaymentMethodGroupRelMVCRenderCommand
 	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.commerce.payment.method.web)"
+		target = "(osgi.web.symbolicname=com.liferay.commerce.payment.web)"
 	)
 	private ServletContext _servletContext;
 

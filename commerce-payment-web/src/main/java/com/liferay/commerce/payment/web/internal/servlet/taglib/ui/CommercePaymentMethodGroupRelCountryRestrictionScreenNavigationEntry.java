@@ -15,11 +15,10 @@
 package com.liferay.commerce.payment.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.constants.CommerceConstants;
-import com.liferay.commerce.model.CommercePaymentMethodGroupRel;
-import com.liferay.commerce.payment.method.CommercePaymentScreenNavigationConstants;
+import com.liferay.commerce.payment.constants.CommercePaymentScreenNavigationConstants;
+import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.payment.web.internal.display.context.CommercePaymentMethodGroupRelRestrictionsDisplayContext;
-import com.liferay.commerce.service.CommerceAddressRestrictionService;
-import com.liferay.commerce.service.CommercePaymentMethodGroupRelService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -55,9 +54,10 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = {ScreenNavigationCategory.class, ScreenNavigationEntry.class}
 )
-public class CommercePaymentMethodGroupRelCountryRestrictionScreenNavigationEntry
-	implements ScreenNavigationCategory,
-			   ScreenNavigationEntry<CommercePaymentMethodGroupRel> {
+public class
+	CommercePaymentMethodGroupRelCountryRestrictionScreenNavigationEntry
+		implements ScreenNavigationCategory,
+				   ScreenNavigationEntry<CommercePaymentMethodGroupRel> {
 
 	@Override
 	public String getCategoryKey() {
@@ -102,14 +102,14 @@ public class CommercePaymentMethodGroupRelCountryRestrictionScreenNavigationEntr
 				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		CommercePaymentMethodGroupRelRestrictionsDisplayContext
-			CommercePaymentMethodGroupRelRestrictionsDisplayContext =
+			commercePaymentMethodGroupRelRestrictionsDisplayContext =
 				new CommercePaymentMethodGroupRelRestrictionsDisplayContext(
 					_commercePaymentMethodGroupRelService, _itemSelector,
 					_portletResourcePermission, renderRequest, renderResponse);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
-			CommercePaymentMethodGroupRelRestrictionsDisplayContext);
+			commercePaymentMethodGroupRelRestrictionsDisplayContext);
 
 		_jspRenderer.renderJSP(
 			_servletContext, httpServletRequest, httpServletResponse,
@@ -132,7 +132,7 @@ public class CommercePaymentMethodGroupRelCountryRestrictionScreenNavigationEntr
 	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.commerce.payment.method.web)"
+		target = "(osgi.web.symbolicname=com.liferay.commerce.payment.web)"
 	)
 	private ServletContext _servletContext;
 

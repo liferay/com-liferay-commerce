@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.payment.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.payment.method.CommercePaymentScreenNavigationConstants;
+import com.liferay.commerce.payment.constants.CommercePaymentScreenNavigationConstants;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.portal.kernel.language.LanguageUtil;
 

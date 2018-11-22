@@ -12,15 +12,14 @@
  * details.
  */
 
-package com.liferay.commerce.payment.method.web.internal.admin;
+package com.liferay.commerce.payment.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.payment.method.CommercePaymentEngineMethodRegistry;
-import com.liferay.commerce.payment.method.web.internal.display.context.CommercePaymentMethodGroupRelsDisplayContext;
-import com.liferay.commerce.service.CommercePaymentMethodGroupRelLocalService;
-import com.liferay.commerce.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.payment.web.internal.display.context.CommercePaymentMethodGroupRelsDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -89,11 +88,12 @@ public class PaymentMethodsCommerceAdminModule implements CommerceAdminModule {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException {
 
-		CommercePaymentMethodGroupRelsDisplayContext commerceCurrenciesDisplayContext =
-			new CommercePaymentMethodGroupRelsDisplayContext(
-				_commercePaymentEngineMethodRegistry,
-				_CommercePaymentMethodGroupRelService, _portletResourcePermission,
-				renderRequest, renderResponse);
+		CommercePaymentMethodGroupRelsDisplayContext
+			commerceCurrenciesDisplayContext =
+				new CommercePaymentMethodGroupRelsDisplayContext(
+					_commercePaymentEngineMethodRegistry,
+					_commercePaymentMethodGroupRelService,
+					_portletResourcePermission, renderRequest, renderResponse);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCurrenciesDisplayContext);
@@ -113,11 +113,8 @@ public class PaymentMethodsCommerceAdminModule implements CommerceAdminModule {
 		_commercePaymentEngineMethodRegistry;
 
 	@Reference
-	private CommercePaymentMethodGroupRelLocalService
-		_CommercePaymentMethodGroupRelLocalService;
-
-	@Reference
-	private CommercePaymentMethodGroupRelService _CommercePaymentMethodGroupRelService;
+	private CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
@@ -131,7 +128,7 @@ public class PaymentMethodsCommerceAdminModule implements CommerceAdminModule {
 	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.commerce.payment.method.web)"
+		target = "(osgi.web.symbolicname=com.liferay.commerce.payment.web)"
 	)
 	private ServletContext _servletContext;
 

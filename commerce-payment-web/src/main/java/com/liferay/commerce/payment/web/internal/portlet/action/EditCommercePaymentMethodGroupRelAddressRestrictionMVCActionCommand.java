@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.payment.method.web.internal.portlet.action;
+package com.liferay.commerce.payment.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.exception.NoSuchAddressRestrictionException;
@@ -55,7 +55,6 @@ public class EditCommercePaymentMethodGroupRelAddressRestrictionMVCActionCommand
 
 		long[] addCommerceCountryIds = null;
 
-		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
 		long commerceCountryId = ParamUtil.getLong(
@@ -101,9 +100,10 @@ public class EditCommercePaymentMethodGroupRelAddressRestrictionMVCActionCommand
 		for (long deleteCommerceAddressRestrictionId :
 				deleteCommerceAddressRestrictionIds) {
 
-			_commercePaymentMethodGroupRelService.deleteCommerceAddressRestriction(
-				deleteCommerceAddressRestrictionId,
-				_portal.getScopeGroupId(actionRequest));
+			_commercePaymentMethodGroupRelService.
+				deleteCommerceAddressRestriction(
+					deleteCommerceAddressRestrictionId,
+					_portal.getScopeGroupId(actionRequest));
 		}
 	}
 

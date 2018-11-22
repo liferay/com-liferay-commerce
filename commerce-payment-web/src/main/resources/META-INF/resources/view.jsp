@@ -17,10 +17,10 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommercePaymentMethodsDisplayContext commercePaymentMethodsDisplayContext = (CommercePaymentMethodsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommercePaymentMethodGroupRelsDisplayContext commercePaymentMethodsDisplayContext = (CommercePaymentMethodGroupRelsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
-<c:if test="<%= commercePaymentMethodsDisplayContext.hasManageCommercePaymentMethodsPermission() %>">
+<c:if test="<%= commercePaymentMethodsDisplayContext.hasManageCommercePaymentMethodGroupRelsPermission() %>">
 	<liferay-frontend:management-bar
 		searchContainerId="commercePaymentMethods"
 	>
@@ -46,13 +46,13 @@ CommercePaymentMethodsDisplayContext commercePaymentMethodsDisplayContext = (Com
 			searchContainer="<%= commercePaymentMethodsDisplayContext.getSearchContainer() %>"
 		>
 			<liferay-ui:search-container-row
-				className="com.liferay.commerce.model.CommercePaymentMethod"
-				keyProperty="commercePaymentMethodId"
-				modelVar="commercePaymentMethod"
+				className="com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel"
+				keyProperty="commercePaymentMethodGroupRelId"
+				modelVar="commercePaymentMethodGroupRel"
 			>
 
 				<%
-				String thumbnailSrc = commercePaymentMethod.getImageURL(themeDisplay);
+				String thumbnailSrc = commercePaymentMethodGroupRel.getImageURL(themeDisplay);
 				%>
 
 				<c:choose>
@@ -77,8 +77,8 @@ CommercePaymentMethodsDisplayContext commercePaymentMethodsDisplayContext = (Com
 				rowURL.setParameter(Constants.CMD, Constants.EDIT);
 				rowURL.setParameter(ActionRequest.ACTION_NAME, "editCommercePaymentMethod");
 				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("commercePaymentMethodId", String.valueOf(commercePaymentMethod.getCommercePaymentMethodId()));
-				rowURL.setParameter("engineKey", commercePaymentMethod.getEngineKey());
+				rowURL.setParameter("commercePaymentMethodId", String.valueOf(commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId()));
+				rowURL.setParameter("engineKey", commercePaymentMethodGroupRel.getEngineKey());
 				%>
 
 				<liferay-ui:search-container-column-text
@@ -96,7 +96,7 @@ CommercePaymentMethodsDisplayContext commercePaymentMethodsDisplayContext = (Com
 					name="active"
 				>
 					<c:choose>
-						<c:when test="<%= commercePaymentMethod.isActive() %>">
+						<c:when test="<%= commercePaymentMethodGroupRel.isActive() %>">
 							<liferay-ui:icon
 								cssClass="commerce-admin-icon-check"
 								icon="check"

@@ -17,13 +17,13 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommercePaymentMethodsDisplayContext commercePaymentMethodsDisplayContext = (CommercePaymentMethodsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+	CommercePaymentMethodGroupRelsDisplayContext commercePaymentMethodsDisplayContext = (CommercePaymentMethodGroupRelsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-CommercePaymentMethod commercePaymentMethod = (CommercePaymentMethod)row.getObject();
+CommercePaymentMethodGroupRel commercePaymentMethod = (CommercePaymentMethodGroupRel)row.getObject();
 
-long commercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodId();
+long commercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodGroupRelId();
 %>
 
 <liferay-ui:icon-menu
@@ -33,7 +33,7 @@ long commercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodId(
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= commercePaymentMethodsDisplayContext.hasManageCommercePaymentMethodsPermission() %>">
+	<c:if test="<%= commercePaymentMethodsDisplayContext.hasManageCommercePaymentMethodGroupRelsPermission() %>">
 		<portlet:actionURL name="editCommercePaymentMethod" var="editURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EDIT %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

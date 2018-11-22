@@ -17,7 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommercePaymentMethodRestrictionsDisplayContext commercePaymentMethodRestrictionsDisplayContext = (CommercePaymentMethodRestrictionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommercePaymentMethodGroupRelRestrictionsDisplayContext commercePaymentMethodRestrictionsDisplayContext = (CommercePaymentMethodGroupRelRestrictionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
@@ -31,7 +31,7 @@ CommerceAddressRestriction commerceAddressRestriction = (CommerceAddressRestrict
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= commercePaymentMethodRestrictionsDisplayContext.hasManageCommercePaymentMethodsPermission() %>">
+	<c:if test="<%= commercePaymentMethodRestrictionsDisplayContext.hasManageCommercePaymentMethodGroupRelsPermission() %>">
 		<portlet:actionURL name="editCommercePaymentMethodAddressRestriction" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
