@@ -21,13 +21,15 @@ CPCompareContentHelper cpCompareContentHelper = (CPCompareContentHelper)request.
 CPDataSourceResult cpDataSourceResult = (CPDataSourceResult)request.getAttribute(CPWebKeys.CP_DATA_SOURCE_RESULT);
 
 List<CPCatalogEntry> cpCatalogEntries = cpDataSourceResult.getCPCatalogEntries();
+
+List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(request);
 %>
 
 <c:if test="<%= !cpCatalogEntries.isEmpty() %>">
 	<div id="<portlet:namespace />compareProductsMiniContainer">
 		<div class="compare-products-mini-header">
 			<a class="collapse-icon lfr-compare-products-mini-header" href="javascript:;">
-				<span class="component-title"><liferay-ui:message arguments="<%= new Object[] {cpCatalogEntries.size(), cpCompareContentHelper.getProductsLimit(portletDisplay)} %>" key="x-of-x-products-selected" translateArguments="<%= false %>" /></span>
+				<span class="component-title"><liferay-ui:message arguments="<%= new Object[] {cpCatalogEntries.size(), cpDefinitionIds.size()} %>" key="x-of-x-products-selected" translateArguments="<%= false %>" /></span>
 
 				<span class="collapse-icon-open">
 					<liferay-ui:icon
