@@ -100,6 +100,11 @@
 				"actionIds": [],
 				"roleName": "Guest",
 				"scope": 4
+			},
+			{
+				"actionIds": ["VIEW"],
+				"roleName": "User",
+				"scope": 4
 			}
 		],
 		"portlets": [
@@ -147,10 +152,34 @@
 	{
 		"layoutTemplateId": "1_column",
 		"name": "Account",
+		"permissions": [
+			{
+				"actionIds": [],
+				"roleName": "Guest",
+				"scope": 4
+			},
+			{
+				"actionIds": ["VIEW"],
+				"roleName": "User",
+				"scope": 4
+			}
+		],
 		"subLayouts": [
 			{
 				"layoutTemplateId": "1_column",
 				"name": "Your Account",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					},
+					{
+						"actionIds": ["VIEW"],
+						"roleName": "User",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -162,6 +191,18 @@
 			{
 				"layoutTemplateId": "commerce_max_width_1_column",
 				"name": "Your Addresses",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					},
+					{
+						"actionIds": ["VIEW"],
+						"roleName": "User",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -173,6 +214,18 @@
 			{
 				"layoutTemplateId": "commerce_max_width_1_column",
 				"name": "Your Orders",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					},
+					{
+						"actionIds": ["VIEW"],
+						"roleName": "User",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -184,6 +237,18 @@
 			{
 				"layoutTemplateId": "commerce_max_width_1_column",
 				"name": "Your Downloads",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					},
+					{
+						"actionIds": ["VIEW"],
+						"roleName": "User",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
