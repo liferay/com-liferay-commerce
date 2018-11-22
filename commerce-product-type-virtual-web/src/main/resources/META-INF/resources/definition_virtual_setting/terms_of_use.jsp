@@ -112,7 +112,7 @@ if (termsOfUseJournalArticleResourcePrimKey > 0) {
 				function(event) {
 					$('#<portlet:namespace />termsOfUseJournalArticleResourcePrimKey').val(event.assetclasspk);
 
-					$('#<portlet:namespace />termsOfUseContent').attr('disabled', true);
+					$('#<portlet:namespace />termsOfUseContentEditor').attr('disabled', true);
 
 					journalArticleRemove.removeClass('hide');
 
@@ -130,7 +130,7 @@ if (termsOfUseJournalArticleResourcePrimKey > 0) {
 			var contentCheckbox = $('#<portlet:namespace />termsOfUseRequired');
 
 			if (contentCheckbox.attr('checked')) {
-				$('#<portlet:namespace />termsOfUseContent').attr('disabled', false);
+				$('#<portlet:namespace />termsOfUseContentEditor').attr('disabled', false);
 			}
 
 			$('#<portlet:namespace />termsOfUseJournalArticleResourcePrimKey').val(0);
@@ -164,11 +164,11 @@ if (termsOfUseJournalArticleResourcePrimKey > 0) {
 
 		if (contentCheckbox.attr('checked')) {
 			A.one('#<portlet:namespace />selectArticle').attr('disabled', false);
-			A.one('#<portlet:namespace />termsOfUseContent').attr('disabled', !isContentSelected);
+			A.one('#<portlet:namespace />termsOfUseContentEditor').attr('disabled', !isContentSelected);
 		}
 		else {
 			A.one('#<portlet:namespace />selectArticle').attr('disabled', true);
-			A.one('#<portlet:namespace />termsOfUseContent').attr('disabled', true);
+			A.one('#<portlet:namespace />termsOfUseContentEditor').attr('disabled', true);
 		}
 	}
 </aui:script>
