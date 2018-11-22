@@ -138,13 +138,13 @@ public class DefaultCommerceOrderValidatorImpl
 
 		if ((minOrderQuantity > 0) && (quantity < minOrderQuantity)) {
 			return new CommerceOrderValidatorResult(
-				false, "minimum-quantity-is-x",
+				false, "the-minimum-quantity-is-x",
 				String.valueOf(minOrderQuantity));
 		}
 
 		if ((maxOrderQuantity > 0) && (quantity > maxOrderQuantity)) {
 			return new CommerceOrderValidatorResult(
-				false, "maximum-quantity-is-x",
+				false, "the-maximum-quantity-is-x",
 				String.valueOf(maxOrderQuantity));
 		}
 

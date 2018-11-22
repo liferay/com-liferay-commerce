@@ -82,15 +82,21 @@ public class CommerceOrderItemLocalServiceImpl
 			commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
 
-		if (Validator.isNull(json) || json.equals("[]")) {
-			json = cpInstance.getJson();
+		CPDefinition cpDefinition = null;
+
+		if (cpInstance != null) {
+			cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+				cpInstance.getCPDefinitionId());
+
+			if (Validator.isNull(json) || json.equals("[]")) {
+				json = cpInstance.getJson();
+			}
 		}
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
-			cpInstance.getCPDefinitionId());
+		validate(commerceOrder, cpDefinition, cpInstance, quantity);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -98,8 +104,6 @@ public class CommerceOrderItemLocalServiceImpl
 
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
-
-		validate(commerceOrder, cpDefinition, cpInstance, quantity);
 
 		long commerceOrderItemId = counterLocalService.increment();
 
@@ -520,8 +524,9 @@ public class CommerceOrderItemLocalServiceImpl
 			}
 		}
 
-		if (cpInstance.getCPDefinitionId() !=
-				cpDefinition.getCPDefinitionId()) {
+		if ((cpDefinition != null) && (cpInstance != null) &&
+			(cpDefinition.getCPDefinitionId() !=
+				cpInstance.getCPDefinitionId())) {
 
 			throw new NoSuchCPInstanceException(
 				StringBundler.concat(
