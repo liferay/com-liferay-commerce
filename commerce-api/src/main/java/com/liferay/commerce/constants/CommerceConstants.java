@@ -24,8 +24,6 @@ public class CommerceConstants {
 	public static final String ORDER_SERVICE_NAME =
 		"com.liferay.commerce.order";
 
-	public static final String PAYMENT_SERVLET_PATH = "commerce-payment";
-
 	public static final String PRICE_SERVICE_NAME =
 		"com.liferay.commerce.price";
 
