@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.payment.method;
+package com.liferay.commerce.payment.constants;
 
 /**
  * @author Alessio Antonio Rendina
