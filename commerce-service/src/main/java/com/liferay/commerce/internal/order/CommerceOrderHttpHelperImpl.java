@@ -28,9 +28,12 @@ import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.lang.CentralizedThreadLocal;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -215,6 +218,10 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			commerceOrder = _getUserCurrentCommerceOrder(themeDisplay);
 		}
 
+		if ((commerceOrder != null) && commerceOrder.isGuestOrder()) {
+			commerceOrder = _checkGuestOrder(themeDisplay, commerceOrder);
+		}
+
 		if (((commerceOrder != null) && !commerceOrder.isOpen()) ||
 			((commerceOrder != null) &&
 			 !_commerceOrderModelResourcePermission.contains(
@@ -224,7 +231,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			return null;
 		}
 
-		return _checkGuestOrder(themeDisplay, commerceOrder);
+		return commerceOrder;
 	}
 
 	@Override
@@ -291,7 +298,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 				themeDisplay.getRequest(), themeDisplay.getResponse(), domain,
 				commerceOrderUuidWebKey);
 
-			return _commerceOrderService.updateUser(
+			return _commerceOrderLocalService.updateUser(
 				commerceOrder.getCommerceOrderId(), user.getUserId());
 		}
 
@@ -422,8 +429,17 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			themeDisplay.getRequest(), cookieName, true);
 
 		if (Validator.isNotNull(commerceOrderUuid)) {
-			commerceOrder = _commerceOrderService.fetchCommerceOrder(
-				commerceOrderUuid, themeDisplay.getScopeGroupId());
+			try {
+				commerceOrder = _commerceOrderService.fetchCommerceOrder(
+					commerceOrderUuid, themeDisplay.getScopeGroupId());
+			}
+			catch (PrincipalException pe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(pe, pe);
+				}
+
+				return null;
+			}
 
 			if (commerceOrder != null) {
 				_commerceOrderUuidThreadLocal.set(commerceOrder);
@@ -463,6 +479,9 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		CookieKeys.addCookie(
 			themeDisplay.getRequest(), themeDisplay.getResponse(), cookie);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceOrderHttpHelperImpl.class);
 
 	private static ModelResourcePermission<CommerceOrder>
 		_commerceOrderModelResourcePermission;
