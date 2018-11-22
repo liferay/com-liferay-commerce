@@ -24,7 +24,7 @@ Map<String, CommerceShippingOriginLocator> commerceShippingOriginLocators = comm
 %>
 
 <c:if test="<%= commerceShippingSettingsDisplayContext.hasManageCommerceWarehousesPermission() %>">
-	<div class="container-fluid-1280">
+	<div class="container-fluid-1280 mt-4 sheet">
 		<portlet:actionURL name="editCommerceShippingSettings" var="editCommerceShippingSettingsActionURL" />
 
 		<%
