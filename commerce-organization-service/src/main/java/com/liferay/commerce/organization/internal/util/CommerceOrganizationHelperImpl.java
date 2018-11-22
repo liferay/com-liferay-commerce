@@ -40,6 +40,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = CommerceOrganizationHelper.class)
 public class CommerceOrganizationHelperImpl
@@ -71,7 +72,18 @@ public class CommerceOrganizationHelperImpl
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		long groupId = _portal.getScopeGroupId(httpServletRequest);
+		return getCurrentOrganization(0, httpServletRequest);
+	}
+
+	@Override
+	public Organization getCurrentOrganization(
+			long groupId, HttpServletRequest httpServletRequest)
+		throws PortalException {
+
+		if (groupId <= 0) {
+			groupId = _portal.getScopeGroupId(httpServletRequest);
+		}
+
 		long userId = _portal.getUserId(httpServletRequest);
 
 		httpServletRequest = _portal.getOriginalServletRequest(

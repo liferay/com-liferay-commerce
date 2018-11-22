@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public interface CommerceOrganizationHelper {
@@ -33,6 +34,10 @@ public interface CommerceOrganizationHelper {
 
 	public Organization getCurrentOrganization(
 			HttpServletRequest httpServletRequest)
+		throws PortalException;
+
+	public Organization getCurrentOrganization(
+			long groupId, HttpServletRequest httpServletRequest)
 		throws PortalException;
 
 	public void setCurrentOrganization(
