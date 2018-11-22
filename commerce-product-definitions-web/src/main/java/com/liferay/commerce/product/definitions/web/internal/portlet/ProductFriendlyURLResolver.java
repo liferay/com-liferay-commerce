@@ -57,6 +57,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @Component(service = FriendlyURLResolver.class)
 public class ProductFriendlyURLResolver implements FriendlyURLResolver {
@@ -266,9 +267,11 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 				_portal.getCompanyId(httpServletRequest));
 		}
 
+		// Passing the groupId is mandatory here. See COMMERCE-728.
+
 		Organization organization =
 			_commerceOrganizationHelper.getCurrentOrganization(
-				httpServletRequest);
+				groupId, httpServletRequest);
 
 		long organizationId = 0;
 
