@@ -12,11 +12,15 @@ import templates from './AddToCart.soy';
 
 class AddToCart extends PortletBase {
 
+	created() {
+		Liferay.on(this.cpDefinitionId + 'CPInstance:change', this._instanceChange.bind(this));
+	}
+
 	/**
-	 * Makes an ajax request to submit the data.
-	 * @param {Event} event
-	 * @protected
-	 */
+     * Makes an ajax request to submit the data.
+     * @param {Event} event
+     * @protected
+     */
 
 	_addToCart() {
 		var instance = this;
@@ -101,6 +105,12 @@ class AddToCart extends PortletBase {
 		}
 		else {
 			this._addToCart();
+		}
+	}
+
+	_instanceChange(event) {
+		if (event.cpInstanceExist) {
+			this.cpInstanceId = event.cpInstanceId;
 		}
 	}
 
