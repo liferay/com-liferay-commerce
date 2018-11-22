@@ -19,6 +19,11 @@
 		"
 		cp-definition-id="{$cpDefinitionId}"
 		cp-instance-id="{$cpInstanceId}"
+
+		{if $cpInstanceId == '0'}
+			disabled="true"
+		{/if}
+
 		id="{$id}"
 		onclick="{$_handleClick}"
 		title="{$label}"
