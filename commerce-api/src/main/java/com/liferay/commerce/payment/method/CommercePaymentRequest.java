@@ -23,55 +23,18 @@ import java.util.Locale;
 /**
  * @author Luca Pellizzon
  */
-public class CommercePaymentRequest implements Serializable {
+public interface CommercePaymentRequest extends Serializable {
 
-	public CommercePaymentRequest(
-		BigDecimal amount, String cancelUrl, long commerceOrderId,
-		Locale locale, String payerId, String returnUrl, String transactionId) {
+	public BigDecimal getAmount();
 
-		_amount = amount;
-		_cancelUrl = cancelUrl;
-		_commerceOrderId = commerceOrderId;
-		_locale = locale;
-		_payerId = payerId;
-		_returnUrl = returnUrl;
-		_transactionId = transactionId;
-	}
+	public String getCancelUrl();
 
-	public BigDecimal getAmount() {
-		return _amount;
-	}
+	public long getCommerceOrderId();
 
-	public String getCancelUrl() {
-		return _cancelUrl;
-	}
+	public Locale getLocale();
 
-	public long getCommerceOrderId() {
-		return _commerceOrderId;
-	}
+	public String getReturnUrl();
 
-	public Locale getLocale() {
-		return _locale;
-	}
-
-	public String getPayerId() {
-		return _payerId;
-	}
-
-	public String getReturnUrl() {
-		return _returnUrl;
-	}
-
-	public String getTransactionId() {
-		return _transactionId;
-	}
-
-	private final BigDecimal _amount;
-	private final String _cancelUrl;
-	private final long _commerceOrderId;
-	private final Locale _locale;
-	private final String _payerId;
-	private final String _returnUrl;
-	private final String _transactionId;
+	public String getTransactionId();
 
 }

@@ -16,7 +16,11 @@ package com.liferay.commerce.payment.method;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.model.CommerceOrder;
+
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Luca Pellizzon
@@ -51,6 +55,11 @@ public interface CommercePaymentEngineMethod {
 		throw new UnsupportedOperationException();
 	}
 
+	public CommercePaymentRequest enrichPaymentRequest(
+		CommerceOrder commerceOrder, Locale locale, String transactionId,
+		HttpServletRequest httpServletRequest, String returnUrl,
+		String cancelUrl);
+
 	public String getDescription(Locale locale);
 
 	public String getKey();
@@ -58,6 +67,8 @@ public interface CommercePaymentEngineMethod {
 	public String getName(Locale locale);
 
 	public int getPaymentType();
+
+	public String getServletPath();
 
 	public default boolean isCancelEnabled() {
 		return false;

@@ -17,12 +17,13 @@ package com.liferay.commerce.payment.engine;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.payment.method.CommercePaymentEngineMethod;
-import com.liferay.commerce.payment.method.CommercePaymentRequest;
 import com.liferay.commerce.payment.method.CommercePaymentResult;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Luca Pellizzon
@@ -35,8 +36,7 @@ public interface CommercePaymentEngine {
 			HttpServletRequest httpServletRequest)
 		throws Exception;
 
-	public CommercePaymentResult cancelRecurringPayment(
-		CommercePaymentRequest commercePaymentRequest);
+	public CommercePaymentResult cancelRecurringPayment(long commerceOrderId);
 
 	public CommercePaymentResult capturePayment(
 			long commerceOrderId, String transactionId,
@@ -56,17 +56,14 @@ public interface CommercePaymentEngine {
 			long groupId, long commerceCountryId)
 		throws PortalException;
 
-	public int getCommercePaymentMethodType(
-			CommercePaymentRequest commercePaymentRequest)
+	public int getCommercePaymentMethodType(long commerceOrderId)
 		throws Exception;
 
 	public String getPaymentMethodName(String paymentMethodKey, Locale locale);
 
-	public CommercePaymentResult partiallyRefundPayment(
-		CommercePaymentRequest commercePaymentRequest);
+	public CommercePaymentResult partiallyRefundPayment(long commerceOrderId);
 
-	public CommercePaymentResult postProcessPayment(
-			CommercePaymentRequest commercePaymentRequest)
+	public CommercePaymentResult postProcessPayment(long commerceOrderId)
 		throws Exception;
 
 	public CommercePaymentResult processPayment(
@@ -74,8 +71,7 @@ public interface CommercePaymentEngine {
 			HttpServletRequest httpServletRequest)
 		throws Exception;
 
-	public CommercePaymentResult processRecurringPayment(
-		CommercePaymentRequest commercePaymentRequest);
+	public CommercePaymentResult processRecurringPayment(long commerceOrderId);
 
 	public CommercePaymentResult refundPayment(
 			long commerceOrderId, String transactionId,

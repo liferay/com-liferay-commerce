@@ -16,6 +16,7 @@ package com.liferay.commerce.payment.engine.impl;
 
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommerceOrderPaymentConstants;
+import com.liferay.commerce.constants.CommercePaymentConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.method.CommercePaymentEngineMethod;
@@ -28,11 +29,19 @@ import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.URLCodec;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -48,8 +57,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			long commerceOrderId, String transactionId,
 			HttpServletRequest httpServletRequest)
 		throws Exception {
-
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
 
 		CommercePaymentEngineMethod commercePaymentEngineMethod =
 			_getCommercePaymentMethod(commerceOrderId);
@@ -106,11 +113,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	@Override
-	public CommercePaymentResult cancelRecurringPayment(
-		CommercePaymentRequest commercePaymentRequest) {
-
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
+	public CommercePaymentResult cancelRecurringPayment(long commerceOrderId) {
 		return new CommercePaymentResult(
 			null, commerceOrderId, -1, false, null, null,
 			Collections.emptyList(), false);
@@ -121,8 +124,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			long commerceOrderId, String transactionId,
 			HttpServletRequest httpServletRequest)
 		throws Exception {
-
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
 
 		CommercePaymentEngineMethod commercePaymentEngineMethod =
 			_getCommercePaymentMethod(commerceOrderId);
@@ -153,8 +154,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			long commerceOrderId, String transactionId,
 			HttpServletRequest httpServletRequest)
 		throws Exception {
-
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
 
 		CommercePaymentEngineMethod commercePaymentEngineMethod =
 			_getCommercePaymentMethod(commerceOrderId);
@@ -265,11 +264,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	@Override
-	public int getCommercePaymentMethodType(
-			CommercePaymentRequest commercePaymentRequest)
+	public int getCommercePaymentMethodType(long commerceOrderId)
 		throws PortalException {
-
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
@@ -298,22 +294,15 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	@Override
-	public CommercePaymentResult partiallyRefundPayment(
-		CommercePaymentRequest commercePaymentRequest) {
-
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
+	public CommercePaymentResult partiallyRefundPayment(long commerceOrderId) {
 		return new CommercePaymentResult(
 			null, commerceOrderId, -1, false, null, null,
 			Collections.emptyList(), false);
 	}
 
 	@Override
-	public CommercePaymentResult postProcessPayment(
-			CommercePaymentRequest commercePaymentRequest)
+	public CommercePaymentResult postProcessPayment(long commerceOrderId)
 		throws Exception {
-
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
 
 		return new CommercePaymentResult(
 			null, commerceOrderId, -1, false, null, null,
@@ -325,8 +314,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			long commerceOrderId, String checkoutStepUrl,
 			HttpServletRequest httpServletRequest)
 		throws Exception {
-
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
 
 		CommercePaymentEngineMethod commercePaymentEngineMethod =
 			_getCommercePaymentMethod(commerceOrderId);
@@ -388,11 +375,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	@Override
-	public CommercePaymentResult processRecurringPayment(
-		CommercePaymentRequest commercePaymentRequest) {
-
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
+	public CommercePaymentResult processRecurringPayment(long commerceOrderId) {
 		return new CommercePaymentResult(
 			null, commerceOrderId, -1, false, null, null,
 			Collections.emptyList(), false);
@@ -403,8 +386,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			long commerceOrderId, String transactionId,
 			HttpServletRequest httpServletRequest)
 		throws Exception {
-
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
 
 		CommercePaymentEngineMethod commercePaymentEngineMethod =
 			_getCommercePaymentMethod(commerceOrderId);
@@ -436,8 +417,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			HttpServletRequest httpServletRequest)
 		throws Exception {
 
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
 		CommercePaymentEngineMethod commercePaymentEngineMethod =
 			_getCommercePaymentMethod(commerceOrderId);
 
@@ -463,6 +442,46 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		return new CommercePaymentResult(
 			null, commerceOrderId, -1, false, null, null,
 			Collections.emptyList(), false);
+	}
+
+	private StringBundler _getBaseUrl(
+		HttpServletRequest httpServletRequest, CommerceOrder commerceOrder,
+		String redirect,
+		CommercePaymentEngineMethod commercePaymentEngineMethod) {
+
+		StringBundler sb = new StringBundler(11);
+
+		sb.append(_portal.getPortalURL(httpServletRequest));
+		sb.append(_portal.getPathModule());
+		sb.append(CharPool.SLASH);
+		sb.append(commercePaymentEngineMethod.getServletPath());
+		sb.append(CharPool.QUESTION);
+		sb.append("groupId=");
+		sb.append(commerceOrder.getGroupId());
+		sb.append("&uuid=");
+		sb.append(URLCodec.encodeURL(commerceOrder.getUuid()));
+
+		if (Validator.isNotNull(redirect)) {
+			sb.append("&redirect=");
+			sb.append(URLCodec.encodeURL(redirect));
+		}
+
+		return sb;
+	}
+
+	private String _getCancelUrl(
+		HttpServletRequest httpServletRequest, CommerceOrder commerceOrder,
+		String redirect,
+		CommercePaymentEngineMethod commercePaymentEngineMethod) {
+
+		StringBundler sb = _getBaseUrl(
+			httpServletRequest, commerceOrder, redirect,
+			commercePaymentEngineMethod);
+
+		sb.append("&cancel=");
+		sb.append(StringPool.TRUE);
+
+		return sb.toString();
 	}
 
 	private CommercePaymentEngineMethod _getCommercePaymentMethod(
@@ -495,6 +514,43 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		return null;
 	}
 
+	private CommercePaymentRequest _getCommercePaymentRequest(
+		CommerceOrder commerceOrder, Locale locale, String transactionId,
+		String checkoutStepUrl, HttpServletRequest httpServletRequest,
+		CommercePaymentEngineMethod commercePaymentEngineMethod) {
+
+		String returnUrl = "";
+		String cancelUrl = "";
+
+		if (CommercePaymentConstants.
+				COMMERCE_PAYMENT_METHOD_TYPE_ONLINE_REDIRECT ==
+					commercePaymentEngineMethod.getPaymentType()) {
+
+			returnUrl = _getReturnUrl(
+				httpServletRequest, commerceOrder, checkoutStepUrl,
+				commercePaymentEngineMethod);
+			cancelUrl = _getCancelUrl(
+				httpServletRequest, commerceOrder, checkoutStepUrl,
+				commercePaymentEngineMethod);
+		}
+
+		return commercePaymentEngineMethod.enrichPaymentRequest(
+			commerceOrder, locale, transactionId, httpServletRequest, returnUrl,
+			cancelUrl);
+	}
+
+	private String _getReturnUrl(
+		HttpServletRequest httpServletRequest, CommerceOrder commerceOrder,
+		String redirect,
+		CommercePaymentEngineMethod commercePaymentEngineMethod) {
+
+		StringBundler sb = _getBaseUrl(
+			httpServletRequest, commerceOrder, redirect,
+			commercePaymentEngineMethod);
+
+		return sb.toString();
+	}
+
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
 
@@ -511,5 +567,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	@Reference
 	private CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
+
+	@Reference
+	private Portal _portal;
 
 }
