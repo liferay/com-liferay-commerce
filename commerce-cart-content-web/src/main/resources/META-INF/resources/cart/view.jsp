@@ -149,20 +149,22 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 						value="<%= finalPriceMoney.format(locale) %>"
 					/>
 
-					<c:if test="<%= commerceCartContentDisplayContext.hasPermission(ActionKeys.UPDATE) %>">
-						<liferay-ui:search-container-column-text>
+					<liferay-ui:search-container-column-text>
+						<c:if test="<%= commerceCartContentDisplayContext.hasPermission(ActionKeys.UPDATE) %>">
 							<liferay-ui:icon-delete
 								label="<%= true %>"
 								url="<%= commerceCartContentDisplayContext.getDeleteURL(commerceOrderItem) %>"
 							/>
-						</liferay-ui:search-container-column-text>
-					</c:if>
+						</c:if>
+					</liferay-ui:search-container-column-text>
 
 					<liferay-ui:search-container-column-text
+						cssClass="quantity-control-column"
 						name="quantity"
 					>
 						<liferay-commerce-cart:quantity-control
 							commerceOrderItemId="<%= commerceOrderItem.getCommerceOrderItemId() %>"
+							useSelect="<%= false %>"
 						/>
 					</liferay-ui:search-container-column-text>
 				</liferay-ui:search-container-row>
