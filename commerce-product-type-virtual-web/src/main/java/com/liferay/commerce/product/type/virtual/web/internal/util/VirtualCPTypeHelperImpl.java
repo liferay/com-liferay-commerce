@@ -35,11 +35,10 @@ public class VirtualCPTypeHelperImpl implements VirtualCPTypeHelper {
 
 	@Override
 	public CPDefinitionVirtualSetting getCPDefinitionVirtualSetting(
-			long cpDefinitionId)
-		throws PortalException {
+		long cpDefinitionId) {
 
 		return _cpDefinitionVirtualSettingLocalService.
-			getCPDefinitionVirtualSettingByCPDefinitionId(cpDefinitionId);
+			fetchCPDefinitionVirtualSettingByCPDefinitionId(cpDefinitionId);
 	}
 
 	@Override
@@ -48,6 +47,10 @@ public class VirtualCPTypeHelperImpl implements VirtualCPTypeHelper {
 
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
 			getCPDefinitionVirtualSetting(cpDefinitionId);
+
+		if (cpDefinitionVirtualSetting == null) {
+			return StringPool.BLANK;
+		}
 
 		if (!cpDefinitionVirtualSetting.isUseSample()) {
 			return StringPool.BLANK;
