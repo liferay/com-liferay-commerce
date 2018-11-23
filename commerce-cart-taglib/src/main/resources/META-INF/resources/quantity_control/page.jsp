@@ -36,18 +36,49 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_commerce_
 
 	<aui:model-context bean="<%= commerceOrderItem %>" model="<%= CommerceOrderItem.class %>" />
 
-	<liferay-commerce:quantity-input
-		CPDefinitionId="<%= commerceOrderItem.getCPDefinitionId() %>"
-		name='<%= randomNamespace + "Quantity" %>'
-		showLabel="<%= showInputLabel %>"
-		useSelect="<%= useSelect %>"
-		value="<%= commerceOrderItem.getQuantity() %>"
-	/>
+	<c:if test="<%= !updateOnChange %>">
+		<div class="form-group m-0">
+			<div class="input-group">
+				<div class="input-group-item input-group-prepend">
+	</c:if>
+
+					<liferay-commerce:quantity-input
+						CPDefinitionId="<%= commerceOrderItem.getCPDefinitionId() %>"
+						name='<%= randomNamespace + "Quantity" %>'
+						showLabel="<%= showInputLabel %>"
+						useSelect="<%= useSelect %>"
+						value="<%= commerceOrderItem.getQuantity() %>"
+					/>
 
 	<c:if test="<%= !updateOnChange %>">
-		<aui:button type="submit" value="update" />
+				</div>
+
+				<div class="input-group-append input-group-item input-group-item-shrink">
+				<aui:button onClick='<%= portletNamespace + randomNamespace + "updateQuantity();" %>' primary="<%= true %>" value="update" />
+				</div>
+			</div>
+		</div>
 	</c:if>
 </aui:form>
+
+<aui:script>
+	Liferay.provide(
+		window,
+		'<%= portletNamespace +randomNamespace %>updateQuantity',
+		function() {
+			var A = AUI();
+
+			var form = A.one('#<%= portletNamespace + randomNamespace + "Fm" %>');
+
+			var quantity = form.one('#<%= portletNamespace + randomNamespace + "Quantity" %>');
+
+			form.one('#<%= portletNamespace + "quantity" %>').val(quantity.val());
+
+			submitForm(document.<%= portletNamespace + randomNamespace + "Fm" %>);
+		},
+		['aui-base']
+	);
+</aui:script>
 
 <c:if test="<%= updateOnChange %>">
 	<aui:script use="aui-base">
@@ -56,11 +87,7 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_commerce_
 		form.delegate(
 			'change',
 			function() {
-				var quantity = form.one('#<%= portletNamespace + randomNamespace + "Quantity" %>')
-
-				form.one('#<%= portletNamespace + "quantity" %>').val(quantity.val());
-
-				submitForm(document.<%= portletNamespace + randomNamespace + "Fm" %>);
+				<%= portletNamespace + randomNamespace %>updateQuantity();
 			},
 			'select'
 		);
