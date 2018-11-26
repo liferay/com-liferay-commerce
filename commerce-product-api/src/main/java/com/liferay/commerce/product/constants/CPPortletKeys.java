@@ -20,10 +20,6 @@ package com.liferay.commerce.product.constants;
  */
 public class CPPortletKeys {
 
-	public static final String COMMERCE_SUBSCRIPTION_CONTENT_WEB =
-		"com_liferay_commerce_product_internal_portlet_" +
-			"CommerceSubscriptionContentPortlet";
-
 	public static final String CP_ASSET_CATEGORIES_NAVIGATION =
 		"com_liferay_commerce_product_asset_categories_navigation_web" +
 			"_internal_portlet_CPAssetCategoriesNavigationPortlet";
