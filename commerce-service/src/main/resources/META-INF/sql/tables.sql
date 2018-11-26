@@ -319,14 +319,11 @@ create table CommerceSubscriptionEntry (
 	modifiedDate DATE null,
 	CPInstanceId LONG,
 	commerceOrderItemId LONG,
-	subscriptionLength INTEGER,
-	subscriptionType VARCHAR(75) null,
-	subscriptionTypeSettings TEXT null,
-	maxSubscriptionCycles LONG,
+	subscriptionCycleLength LONG,
+	subscriptionCyclePeriod VARCHAR(75) null,
+	maxSubscriptionCyclesNumber LONG,
 	active_ BOOLEAN,
-	lastIterationDate DATE null,
-	nextIterationDate DATE null,
-	startDate DATE null
+	nextIterationDate DATE null
 );
 
 create table CommerceWarehouse (

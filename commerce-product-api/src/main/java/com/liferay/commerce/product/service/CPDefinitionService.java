@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.List;
 import java.util.Locale;
@@ -190,13 +189,6 @@ public interface CPDefinitionService extends BaseService {
 		boolean shippable, boolean freeShipping, boolean shipSeparately,
 		double shippingExtraPrice, double width, double height, double depth,
 		double weight, ServiceContext serviceContext) throws PortalException;
-
-	public CPDefinition updateSubscriptionInfo(long cpDefinitionId,
-		boolean subscriptionEnabled, int subscriptionLength,
-		String subscriptionType,
-		UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, ServiceContext serviceContext)
-		throws PortalException;
 
 	public CPDefinition updateTaxCategoryInfo(long cpDefinitionId,
 		long cpTaxCategoryId, boolean taxExempt, boolean telcoOrElectronics)

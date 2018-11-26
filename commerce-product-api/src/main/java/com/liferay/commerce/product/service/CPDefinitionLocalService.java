@@ -45,7 +45,6 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.io.Serializable;
 
@@ -134,12 +133,12 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		String defaultSku, boolean subscriptionEnabled, int subscriptionLength,
-		String subscriptionType,
-		UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, String externalReferenceCode,
+		String defaultSku, boolean subscriptionEnabled,
+		long subscriptionCycleLength, String subscriptionCyclePeriod,
+		long maxSubscriptionCyclesNumber, String externalReferenceCode,
 		ServiceContext serviceContext) throws PortalException;
 
+	@Indexable(type = IndexableType.REINDEX)
 	public CPDefinition addCPDefinition(Map<Locale, String> nameMap,
 		Map<Locale, String> shortDescriptionMap,
 		Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
@@ -634,14 +633,6 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	public CPDefinition updateStatus(long userId, long cpDefinitionId,
 		int status, ServiceContext serviceContext,
 		Map<String, Serializable> workflowContext) throws PortalException;
-
-	@Indexable(type = IndexableType.REINDEX)
-	public CPDefinition updateSubscriptionInfo(long cpDefinitionId,
-		boolean subscriptionEnabled, int subscriptionLength,
-		String subscriptionType,
-		UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, ServiceContext serviceContext)
-		throws PortalException;
 
 	public CPDefinition updateTaxCategoryInfo(long cpDefinitionId,
 		long cpTaxCategoryId, boolean taxExempt, boolean telcoOrElectronics)

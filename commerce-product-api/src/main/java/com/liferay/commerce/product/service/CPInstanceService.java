@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.math.BigDecimal;
 
@@ -134,13 +133,6 @@ public interface CPInstanceService extends BaseService {
 	public CPInstance updateShippingInfo(long cpInstanceId, double width,
 		double height, double depth, double weight,
 		ServiceContext serviceContext) throws PortalException;
-
-	public CPInstance updateSubscriptionInfo(long cpInstanceId,
-		boolean overrideSubscriptionInfo, boolean subscriptionEnabled,
-		int subscriptionLength, String subscriptionType,
-		UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, ServiceContext serviceContext)
-		throws PortalException;
 
 	public CPInstance upsertCPInstance(long cpDefinitionId, String sku,
 		String gtin, String manufacturerPartNumber, boolean purchasable,

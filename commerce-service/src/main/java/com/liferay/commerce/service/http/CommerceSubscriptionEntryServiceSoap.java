@@ -140,5 +140,23 @@ public class CommerceSubscriptionEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap updateCommercePriceEntry(
+		long commerceSubscriptionEntryId, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		boolean active) throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceSubscriptionEntry returnValue = CommerceSubscriptionEntryServiceUtil.updateCommercePriceEntry(commerceSubscriptionEntryId,
+					subscriptionCycleLength, subscriptionCyclePeriod,
+					maxSubscriptionCyclesNumber, active);
+
+			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CommerceSubscriptionEntryServiceSoap.class);
 }

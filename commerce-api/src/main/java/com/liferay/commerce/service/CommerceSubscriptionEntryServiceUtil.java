@@ -65,13 +65,13 @@ public class CommerceSubscriptionEntryServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long companyId, long groupId, Long maxSubscriptionCycles,
+		long companyId, long groupId, Long maxSubscriptionCyclesNumber,
 		Boolean active, String keywords, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceSubscriptionEntries(companyId, groupId,
-			maxSubscriptionCycles, active, keywords, start, end, sort);
+			maxSubscriptionCyclesNumber, active, keywords, start, end, sort);
 	}
 
 	public static int getCommerceSubscriptionEntriesCount(long groupId,
@@ -94,24 +94,15 @@ public class CommerceSubscriptionEntryServiceUtil {
 		return getService().setActive(commerceSubscriptionEntryId, active);
 	}
 
-	public static com.liferay.commerce.model.CommerceSubscriptionEntry updateCommerceSubscriptionEntry(
-		long commerceSubscriptionEntryId, int subscriptionLength,
-		String subscriptionType,
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, boolean active, int startDateMonth,
-		int startDateDay, int startDateYear, int startDateHour,
-		int startDateMinute, int nextInterationDateMonth,
-		int nextInterationDateDay, int nextInterationDateYear,
-		int nextInterationDateHour, int nextInterationDateMinute)
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry updateCommercePriceEntry(
+		long commerceSubscriptionEntryId, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .updateCommerceSubscriptionEntry(commerceSubscriptionEntryId,
-			subscriptionLength, subscriptionType,
-			subscriptionTypeSettingsProperties, maxSubscriptionCycles, active,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, nextInterationDateMonth, nextInterationDateDay,
-			nextInterationDateYear, nextInterationDateHour,
-			nextInterationDateMinute);
+				   .updateCommercePriceEntry(commerceSubscriptionEntryId,
+			subscriptionCycleLength, subscriptionCyclePeriod,
+			maxSubscriptionCyclesNumber, active);
 	}
 
 	public static CommerceSubscriptionEntryService getService() {

@@ -870,46 +870,6 @@ public class CPDefinitionServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPDefinition updateSubscriptionInfo(
-		HttpPrincipal httpPrincipal, long cpDefinitionId,
-		boolean subscriptionEnabled, int subscriptionLength,
-		String subscriptionType,
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
-					"updateSubscriptionInfo",
-					_updateSubscriptionInfoParameterTypes23);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId, subscriptionEnabled, subscriptionLength,
-					subscriptionType, subscriptionTypeSettingsProperties,
-					maxSubscriptionCycles, serviceContext);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.commerce.product.model.CPDefinition)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.commerce.product.model.CPDefinition updateTaxCategoryInfo(
 		HttpPrincipal httpPrincipal, long cpDefinitionId, long cpTaxCategoryId,
 		boolean taxExempt, boolean telcoOrElectronics)
@@ -917,7 +877,7 @@ public class CPDefinitionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
 					"updateTaxCategoryInfo",
-					_updateTaxCategoryInfoParameterTypes24);
+					_updateTaxCategoryInfoParameterTypes23);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId, cpTaxCategoryId, taxExempt,
@@ -968,7 +928,7 @@ public class CPDefinitionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionServiceUtil.class,
-					"upsertCPDefinition", _upsertCPDefinitionParameterTypes25);
+					"upsertCPDefinition", _upsertCPDefinitionParameterTypes24);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, nameMap,
 					shortDescriptionMap, descriptionMap, urlTitleMap,
@@ -1101,15 +1061,10 @@ public class CPDefinitionServiceHttp {
 			double.class, double.class, double.class, double.class, double.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateSubscriptionInfoParameterTypes23 = new Class[] {
-			long.class, boolean.class, int.class, String.class,
-			com.liferay.portal.kernel.util.UnicodeProperties.class, long.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
-		};
-	private static final Class<?>[] _updateTaxCategoryInfoParameterTypes24 = new Class[] {
+	private static final Class<?>[] _updateTaxCategoryInfoParameterTypes23 = new Class[] {
 			long.class, long.class, boolean.class, boolean.class
 		};
-	private static final Class<?>[] _upsertCPDefinitionParameterTypes25 = new Class[] {
+	private static final Class<?>[] _upsertCPDefinitionParameterTypes24 = new Class[] {
 			java.util.Map.class, java.util.Map.class, java.util.Map.class,
 			java.util.Map.class, java.util.Map.class, java.util.Map.class,
 			java.util.Map.class, String.class, boolean.class, boolean.class,

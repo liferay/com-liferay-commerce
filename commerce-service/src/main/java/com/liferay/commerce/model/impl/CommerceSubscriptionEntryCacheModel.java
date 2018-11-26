@@ -65,7 +65,7 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -87,22 +87,16 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 		sb.append(CPInstanceId);
 		sb.append(", commerceOrderItemId=");
 		sb.append(commerceOrderItemId);
-		sb.append(", subscriptionLength=");
-		sb.append(subscriptionLength);
-		sb.append(", subscriptionType=");
-		sb.append(subscriptionType);
-		sb.append(", subscriptionTypeSettings=");
-		sb.append(subscriptionTypeSettings);
-		sb.append(", maxSubscriptionCycles=");
-		sb.append(maxSubscriptionCycles);
+		sb.append(", subscriptionCycleLength=");
+		sb.append(subscriptionCycleLength);
+		sb.append(", subscriptionCyclePeriod=");
+		sb.append(subscriptionCyclePeriod);
+		sb.append(", maxSubscriptionCyclesNumber=");
+		sb.append(maxSubscriptionCyclesNumber);
 		sb.append(", active=");
 		sb.append(active);
-		sb.append(", lastIterationDate=");
-		sb.append(lastIterationDate);
 		sb.append(", nextIterationDate=");
 		sb.append(nextIterationDate);
-		sb.append(", startDate=");
-		sb.append(startDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -147,32 +141,17 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 
 		commerceSubscriptionEntryImpl.setCPInstanceId(CPInstanceId);
 		commerceSubscriptionEntryImpl.setCommerceOrderItemId(commerceOrderItemId);
-		commerceSubscriptionEntryImpl.setSubscriptionLength(subscriptionLength);
+		commerceSubscriptionEntryImpl.setSubscriptionCycleLength(subscriptionCycleLength);
 
-		if (subscriptionType == null) {
-			commerceSubscriptionEntryImpl.setSubscriptionType("");
+		if (subscriptionCyclePeriod == null) {
+			commerceSubscriptionEntryImpl.setSubscriptionCyclePeriod("");
 		}
 		else {
-			commerceSubscriptionEntryImpl.setSubscriptionType(subscriptionType);
+			commerceSubscriptionEntryImpl.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
 		}
 
-		if (subscriptionTypeSettings == null) {
-			commerceSubscriptionEntryImpl.setSubscriptionTypeSettings("");
-		}
-		else {
-			commerceSubscriptionEntryImpl.setSubscriptionTypeSettings(subscriptionTypeSettings);
-		}
-
-		commerceSubscriptionEntryImpl.setMaxSubscriptionCycles(maxSubscriptionCycles);
+		commerceSubscriptionEntryImpl.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
 		commerceSubscriptionEntryImpl.setActive(active);
-
-		if (lastIterationDate == Long.MIN_VALUE) {
-			commerceSubscriptionEntryImpl.setLastIterationDate(null);
-		}
-		else {
-			commerceSubscriptionEntryImpl.setLastIterationDate(new Date(
-					lastIterationDate));
-		}
 
 		if (nextIterationDate == Long.MIN_VALUE) {
 			commerceSubscriptionEntryImpl.setNextIterationDate(null);
@@ -180,13 +159,6 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 		else {
 			commerceSubscriptionEntryImpl.setNextIterationDate(new Date(
 					nextIterationDate));
-		}
-
-		if (startDate == Long.MIN_VALUE) {
-			commerceSubscriptionEntryImpl.setStartDate(null);
-		}
-		else {
-			commerceSubscriptionEntryImpl.setStartDate(new Date(startDate));
 		}
 
 		commerceSubscriptionEntryImpl.resetOriginalValues();
@@ -213,16 +185,13 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 
 		commerceOrderItemId = objectInput.readLong();
 
-		subscriptionLength = objectInput.readInt();
-		subscriptionType = objectInput.readUTF();
-		subscriptionTypeSettings = objectInput.readUTF();
+		subscriptionCycleLength = objectInput.readLong();
+		subscriptionCyclePeriod = objectInput.readUTF();
 
-		maxSubscriptionCycles = objectInput.readLong();
+		maxSubscriptionCyclesNumber = objectInput.readLong();
 
 		active = objectInput.readBoolean();
-		lastIterationDate = objectInput.readLong();
 		nextIterationDate = objectInput.readLong();
-		startDate = objectInput.readLong();
 	}
 
 	@Override
@@ -257,28 +226,19 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 
 		objectOutput.writeLong(commerceOrderItemId);
 
-		objectOutput.writeInt(subscriptionLength);
+		objectOutput.writeLong(subscriptionCycleLength);
 
-		if (subscriptionType == null) {
+		if (subscriptionCyclePeriod == null) {
 			objectOutput.writeUTF("");
 		}
 		else {
-			objectOutput.writeUTF(subscriptionType);
+			objectOutput.writeUTF(subscriptionCyclePeriod);
 		}
 
-		if (subscriptionTypeSettings == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(subscriptionTypeSettings);
-		}
-
-		objectOutput.writeLong(maxSubscriptionCycles);
+		objectOutput.writeLong(maxSubscriptionCyclesNumber);
 
 		objectOutput.writeBoolean(active);
-		objectOutput.writeLong(lastIterationDate);
 		objectOutput.writeLong(nextIterationDate);
-		objectOutput.writeLong(startDate);
 	}
 
 	public String uuid;
@@ -291,12 +251,9 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 	public long modifiedDate;
 	public long CPInstanceId;
 	public long commerceOrderItemId;
-	public int subscriptionLength;
-	public String subscriptionType;
-	public String subscriptionTypeSettings;
-	public long maxSubscriptionCycles;
+	public long subscriptionCycleLength;
+	public String subscriptionCyclePeriod;
+	public long maxSubscriptionCyclesNumber;
 	public boolean active;
-	public long lastIterationDate;
 	public long nextIterationDate;
-	public long startDate;
 }

@@ -80,11 +80,6 @@
 		<property name="displayDate" type="org.hibernate.type.TimestampType" />
 		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
 		<property name="lastPublishDate" type="org.hibernate.type.TimestampType" />
-		<property name="subscriptionEnabled" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="subscriptionLength" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="subscriptionType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="subscriptionTypeSettings" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
-		<property name="maxSubscriptionCycles" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -237,12 +232,6 @@
 		<property name="displayDate" type="org.hibernate.type.TimestampType" />
 		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
 		<property name="lastPublishDate" type="org.hibernate.type.TimestampType" />
-		<property name="overrideSubscriptionInfo" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="subscriptionEnabled" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="subscriptionLength" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="subscriptionType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="subscriptionTypeSettings" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
-		<property name="maxSubscriptionCycles" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />

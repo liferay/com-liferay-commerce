@@ -75,9 +75,8 @@ public class CPInstanceLocalServiceWrapper implements CPInstanceLocalService,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		boolean overrideSubscriptionInfo, boolean subscriptionEnabled,
-		int subscriptionLength, String subscriptionType,
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles,
+		long subscriptionCycleLength, String subscriptionCyclePeriod,
+		long maxSubscriptionCyclesNumber,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpInstanceLocalService.addCPInstance(cpDefinitionId, sku, gtin,
@@ -87,9 +86,8 @@ public class CPInstanceLocalServiceWrapper implements CPInstanceLocalService,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, overrideSubscriptionInfo, subscriptionEnabled,
-			subscriptionLength, subscriptionType,
-			subscriptionTypeSettingsProperties, maxSubscriptionCycles,
-			serviceContext);
+			subscriptionCycleLength, subscriptionCyclePeriod,
+			maxSubscriptionCyclesNumber, serviceContext);
 	}
 
 	@Override
@@ -610,21 +608,6 @@ public class CPInstanceLocalServiceWrapper implements CPInstanceLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpInstanceLocalService.updateStatus(userId, cpInstanceId,
 			status, serviceContext, workflowContext);
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CPInstance updateSubscriptionInfo(
-		long cpInstanceId, boolean overrideSubscriptionInfo,
-		boolean subscriptionEnabled, int subscriptionLength,
-		String subscriptionType,
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpInstanceLocalService.updateSubscriptionInfo(cpInstanceId,
-			overrideSubscriptionInfo, subscriptionEnabled, subscriptionLength,
-			subscriptionType, subscriptionTypeSettingsProperties,
-			maxSubscriptionCycles, serviceContext);
 	}
 
 	@Override

@@ -322,14 +322,11 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="CPInstanceId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceOrderItemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="subscriptionLength" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="subscriptionType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="subscriptionTypeSettings" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
-		<property name="maxSubscriptionCycles" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="subscriptionCycleLength" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="subscriptionCyclePeriod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="maxSubscriptionCyclesNumber" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property column="active_" name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="lastIterationDate" type="org.hibernate.type.TimestampType" />
 		<property name="nextIterationDate" type="org.hibernate.type.TimestampType" />
-		<property name="startDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.commerce.model.impl.CommerceWarehouseImpl" table="CommerceWarehouse">
 		<id name="commerceWarehouseId" type="long">

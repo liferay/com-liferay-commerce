@@ -89,11 +89,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 		attributes.put("displayDate", getDisplayDate());
 		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
-		attributes.put("subscriptionEnabled", isSubscriptionEnabled());
-		attributes.put("subscriptionLength", getSubscriptionLength());
-		attributes.put("subscriptionType", getSubscriptionType());
-		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
-		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
@@ -280,40 +275,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 
 		if (lastPublishDate != null) {
 			setLastPublishDate(lastPublishDate);
-		}
-
-		Boolean subscriptionEnabled = (Boolean)attributes.get(
-				"subscriptionEnabled");
-
-		if (subscriptionEnabled != null) {
-			setSubscriptionEnabled(subscriptionEnabled);
-		}
-
-		Integer subscriptionLength = (Integer)attributes.get(
-				"subscriptionLength");
-
-		if (subscriptionLength != null) {
-			setSubscriptionLength(subscriptionLength);
-		}
-
-		String subscriptionType = (String)attributes.get("subscriptionType");
-
-		if (subscriptionType != null) {
-			setSubscriptionType(subscriptionType);
-		}
-
-		String subscriptionTypeSettings = (String)attributes.get(
-				"subscriptionTypeSettings");
-
-		if (subscriptionTypeSettings != null) {
-			setSubscriptionTypeSettings(subscriptionTypeSettings);
-		}
-
-		Long maxSubscriptionCycles = (Long)attributes.get(
-				"maxSubscriptionCycles");
-
-		if (maxSubscriptionCycles != null) {
-			setMaxSubscriptionCycles(maxSubscriptionCycles);
 		}
 
 		Integer status = (Integer)attributes.get("status");
@@ -609,16 +570,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 		return _cpDefinition.getLayoutUuid();
 	}
 
-	/**
-	* Returns the max subscription cycles of this cp definition.
-	*
-	* @return the max subscription cycles of this cp definition
-	*/
-	@Override
-	public long getMaxSubscriptionCycles() {
-		return _cpDefinition.getMaxSubscriptionCycles();
-	}
-
 	@Override
 	public String getMetaDescription() {
 		return _cpDefinition.getMetaDescription();
@@ -872,51 +823,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public Date getStatusDate() {
 		return _cpDefinition.getStatusDate();
-	}
-
-	/**
-	* Returns the subscription enabled of this cp definition.
-	*
-	* @return the subscription enabled of this cp definition
-	*/
-	@Override
-	public boolean getSubscriptionEnabled() {
-		return _cpDefinition.getSubscriptionEnabled();
-	}
-
-	/**
-	* Returns the subscription length of this cp definition.
-	*
-	* @return the subscription length of this cp definition
-	*/
-	@Override
-	public int getSubscriptionLength() {
-		return _cpDefinition.getSubscriptionLength();
-	}
-
-	/**
-	* Returns the subscription type of this cp definition.
-	*
-	* @return the subscription type of this cp definition
-	*/
-	@Override
-	public String getSubscriptionType() {
-		return _cpDefinition.getSubscriptionType();
-	}
-
-	/**
-	* Returns the subscription type settings of this cp definition.
-	*
-	* @return the subscription type settings of this cp definition
-	*/
-	@Override
-	public String getSubscriptionTypeSettings() {
-		return _cpDefinition.getSubscriptionTypeSettings();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties() {
-		return _cpDefinition.getSubscriptionTypeSettingsProperties();
 	}
 
 	/**
@@ -1233,16 +1139,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Returns <code>true</code> if this cp definition is subscription enabled.
-	*
-	* @return <code>true</code> if this cp definition is subscription enabled; <code>false</code> otherwise
-	*/
-	@Override
-	public boolean isSubscriptionEnabled() {
-		return _cpDefinition.isSubscriptionEnabled();
-	}
-
-	/**
 	* Returns <code>true</code> if this cp definition is tax exempt.
 	*
 	* @return <code>true</code> if this cp definition is tax exempt; <code>false</code> otherwise
@@ -1459,16 +1355,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
-	* Sets the max subscription cycles of this cp definition.
-	*
-	* @param maxSubscriptionCycles the max subscription cycles of this cp definition
-	*/
-	@Override
-	public void setMaxSubscriptionCycles(long maxSubscriptionCycles) {
-		_cpDefinition.setMaxSubscriptionCycles(maxSubscriptionCycles);
-	}
-
-	/**
 	* Sets the modified date of this cp definition.
 	*
 	* @param modifiedDate the modified date of this cp definition
@@ -1607,52 +1493,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public void setStatusDate(Date statusDate) {
 		_cpDefinition.setStatusDate(statusDate);
-	}
-
-	/**
-	* Sets whether this cp definition is subscription enabled.
-	*
-	* @param subscriptionEnabled the subscription enabled of this cp definition
-	*/
-	@Override
-	public void setSubscriptionEnabled(boolean subscriptionEnabled) {
-		_cpDefinition.setSubscriptionEnabled(subscriptionEnabled);
-	}
-
-	/**
-	* Sets the subscription length of this cp definition.
-	*
-	* @param subscriptionLength the subscription length of this cp definition
-	*/
-	@Override
-	public void setSubscriptionLength(int subscriptionLength) {
-		_cpDefinition.setSubscriptionLength(subscriptionLength);
-	}
-
-	/**
-	* Sets the subscription type of this cp definition.
-	*
-	* @param subscriptionType the subscription type of this cp definition
-	*/
-	@Override
-	public void setSubscriptionType(String subscriptionType) {
-		_cpDefinition.setSubscriptionType(subscriptionType);
-	}
-
-	/**
-	* Sets the subscription type settings of this cp definition.
-	*
-	* @param subscriptionTypeSettings the subscription type settings of this cp definition
-	*/
-	@Override
-	public void setSubscriptionTypeSettings(String subscriptionTypeSettings) {
-		_cpDefinition.setSubscriptionTypeSettings(subscriptionTypeSettings);
-	}
-
-	@Override
-	public void setSubscriptionTypeSettingsProperties(
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties) {
-		_cpDefinition.setSubscriptionTypeSettingsProperties(subscriptionTypeSettingsProperties);
 	}
 
 	/**

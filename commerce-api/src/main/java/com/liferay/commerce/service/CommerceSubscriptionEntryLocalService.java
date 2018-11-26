@@ -39,11 +39,9 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.io.Serializable;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -230,7 +228,7 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long companyId, long groupId, Long maxSubscriptionCycles,
+		long companyId, long groupId, Long maxSubscriptionCyclesNumber,
 		Boolean active, String keywords, int start, int end, Sort sort)
 		throws PortalException;
 
@@ -333,17 +331,7 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceSubscriptionEntry updateCommerceSubscriptionEntry(
-		long commerceSubscriptionEntryId, int subscriptionLength,
-		String subscriptionType,
-		UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, boolean active, int startDateMonth,
-		int startDateDay, int startDateYear, int startDateHour,
-		int startDateMinute, int nextInterationDateMonth,
-		int nextInterationDateDay, int nextInterationDateYear,
-		int nextInterationDateHour, int nextInterationDateMinute)
-		throws PortalException;
-
-	public CommerceSubscriptionEntry updateCommerceSubscriptionEntryIterationDates(
-		long commerceSubscriptionEntryId, Date lastIterationDate)
-		throws PortalException;
+		long commerceSubscriptionEntryId, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		boolean active) throws PortalException;
 }

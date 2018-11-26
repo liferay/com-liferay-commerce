@@ -136,10 +136,9 @@ public class CPDefinitionLocalServiceUtil {
 		int displayDateHour, int displayDateMinute, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, String defaultSku,
-		boolean subscriptionEnabled, int subscriptionLength,
-		String subscriptionType,
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles, String externalReferenceCode,
+		boolean subscriptionEnabled, long subscriptionCycleLength,
+		String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
@@ -152,8 +151,8 @@ public class CPDefinitionLocalServiceUtil {
 			displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire, defaultSku,
-			subscriptionEnabled, subscriptionLength, subscriptionType,
-			subscriptionTypeSettingsProperties, maxSubscriptionCycles,
+			subscriptionEnabled, subscriptionCycleLength,
+			subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
 			externalReferenceCode, serviceContext);
 	}
 
@@ -883,20 +882,6 @@ public class CPDefinitionLocalServiceUtil {
 		return getService()
 				   .updateStatus(userId, cpDefinitionId, status,
 			serviceContext, workflowContext);
-	}
-
-	public static com.liferay.commerce.product.model.CPDefinition updateSubscriptionInfo(
-		long cpDefinitionId, boolean subscriptionEnabled,
-		int subscriptionLength, String subscriptionType,
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .updateSubscriptionInfo(cpDefinitionId, subscriptionEnabled,
-			subscriptionLength, subscriptionType,
-			subscriptionTypeSettingsProperties, maxSubscriptionCycles,
-			serviceContext);
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinition updateTaxCategoryInfo(

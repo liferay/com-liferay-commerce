@@ -45,14 +45,11 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCPInstanceId(model.getCPInstanceId());
 		soapModel.setCommerceOrderItemId(model.getCommerceOrderItemId());
-		soapModel.setSubscriptionLength(model.getSubscriptionLength());
-		soapModel.setSubscriptionType(model.getSubscriptionType());
-		soapModel.setSubscriptionTypeSettings(model.getSubscriptionTypeSettings());
-		soapModel.setMaxSubscriptionCycles(model.getMaxSubscriptionCycles());
+		soapModel.setSubscriptionCycleLength(model.getSubscriptionCycleLength());
+		soapModel.setSubscriptionCyclePeriod(model.getSubscriptionCyclePeriod());
+		soapModel.setMaxSubscriptionCyclesNumber(model.getMaxSubscriptionCyclesNumber());
 		soapModel.setActive(model.isActive());
-		soapModel.setLastIterationDate(model.getLastIterationDate());
 		soapModel.setNextIterationDate(model.getNextIterationDate());
-		soapModel.setStartDate(model.getStartDate());
 
 		return soapModel;
 	}
@@ -188,36 +185,28 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		_commerceOrderItemId = commerceOrderItemId;
 	}
 
-	public int getSubscriptionLength() {
-		return _subscriptionLength;
+	public long getSubscriptionCycleLength() {
+		return _subscriptionCycleLength;
 	}
 
-	public void setSubscriptionLength(int subscriptionLength) {
-		_subscriptionLength = subscriptionLength;
+	public void setSubscriptionCycleLength(long subscriptionCycleLength) {
+		_subscriptionCycleLength = subscriptionCycleLength;
 	}
 
-	public String getSubscriptionType() {
-		return _subscriptionType;
+	public String getSubscriptionCyclePeriod() {
+		return _subscriptionCyclePeriod;
 	}
 
-	public void setSubscriptionType(String subscriptionType) {
-		_subscriptionType = subscriptionType;
+	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod) {
+		_subscriptionCyclePeriod = subscriptionCyclePeriod;
 	}
 
-	public String getSubscriptionTypeSettings() {
-		return _subscriptionTypeSettings;
+	public long getMaxSubscriptionCyclesNumber() {
+		return _maxSubscriptionCyclesNumber;
 	}
 
-	public void setSubscriptionTypeSettings(String subscriptionTypeSettings) {
-		_subscriptionTypeSettings = subscriptionTypeSettings;
-	}
-
-	public long getMaxSubscriptionCycles() {
-		return _maxSubscriptionCycles;
-	}
-
-	public void setMaxSubscriptionCycles(long maxSubscriptionCycles) {
-		_maxSubscriptionCycles = maxSubscriptionCycles;
+	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber) {
+		_maxSubscriptionCyclesNumber = maxSubscriptionCyclesNumber;
 	}
 
 	public boolean getActive() {
@@ -232,28 +221,12 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		_active = active;
 	}
 
-	public Date getLastIterationDate() {
-		return _lastIterationDate;
-	}
-
-	public void setLastIterationDate(Date lastIterationDate) {
-		_lastIterationDate = lastIterationDate;
-	}
-
 	public Date getNextIterationDate() {
 		return _nextIterationDate;
 	}
 
 	public void setNextIterationDate(Date nextIterationDate) {
 		_nextIterationDate = nextIterationDate;
-	}
-
-	public Date getStartDate() {
-		return _startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		_startDate = startDate;
 	}
 
 	private String _uuid;
@@ -266,12 +239,9 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 	private Date _modifiedDate;
 	private long _CPInstanceId;
 	private long _commerceOrderItemId;
-	private int _subscriptionLength;
-	private String _subscriptionType;
-	private String _subscriptionTypeSettings;
-	private long _maxSubscriptionCycles;
+	private long _subscriptionCycleLength;
+	private String _subscriptionCyclePeriod;
+	private long _maxSubscriptionCyclesNumber;
 	private boolean _active;
-	private Date _lastIterationDate;
 	private Date _nextIterationDate;
-	private Date _startDate;
 }

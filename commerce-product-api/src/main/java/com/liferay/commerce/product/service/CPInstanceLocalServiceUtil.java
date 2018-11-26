@@ -83,9 +83,8 @@ public class CPInstanceLocalServiceUtil {
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		boolean overrideSubscriptionInfo, boolean subscriptionEnabled,
-		int subscriptionLength, String subscriptionType,
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles,
+		long subscriptionCycleLength, String subscriptionCyclePeriod,
+		long maxSubscriptionCyclesNumber,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
@@ -96,9 +95,8 @@ public class CPInstanceLocalServiceUtil {
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, overrideSubscriptionInfo, subscriptionEnabled,
-			subscriptionLength, subscriptionType,
-			subscriptionTypeSettingsProperties, maxSubscriptionCycles,
-			serviceContext);
+			subscriptionCycleLength, subscriptionCyclePeriod,
+			maxSubscriptionCyclesNumber, serviceContext);
 	}
 
 	public static com.liferay.commerce.product.model.CPInstance addCPInstance(
@@ -579,21 +577,6 @@ public class CPInstanceLocalServiceUtil {
 		return getService()
 				   .updateStatus(userId, cpInstanceId, status, serviceContext,
 			workflowContext);
-	}
-
-	public static com.liferay.commerce.product.model.CPInstance updateSubscriptionInfo(
-		long cpInstanceId, boolean overrideSubscriptionInfo,
-		boolean subscriptionEnabled, int subscriptionLength,
-		String subscriptionType,
-		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
-		long maxSubscriptionCycles,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .updateSubscriptionInfo(cpInstanceId,
-			overrideSubscriptionInfo, subscriptionEnabled, subscriptionLength,
-			subscriptionType, subscriptionTypeSettingsProperties,
-			maxSubscriptionCycles, serviceContext);
 	}
 
 	public static com.liferay.commerce.product.model.CPInstance upsertCPInstance(
