@@ -102,20 +102,6 @@ public interface CPInstanceLocalService extends BaseLocalService,
 		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
 		int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire,
-		boolean overrideSubscriptionInfo, boolean subscriptionEnabled,
-		long subscriptionCycleLength, String subscriptionCyclePeriod,
-		long maxSubscriptionCyclesNumber, ServiceContext serviceContext)
-		throws PortalException;
-
-	public CPInstance addCPInstance(long cpDefinitionId, String sku,
-		String gtin, String manufacturerPartNumber, boolean purchasable,
-		String json, double width, double height, double depth, double weight,
-		BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
-		boolean published, String externalReferenceCode, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
 		ServiceContext serviceContext) throws PortalException;
 
 	public void buildCPInstances(long cpDefinitionId,

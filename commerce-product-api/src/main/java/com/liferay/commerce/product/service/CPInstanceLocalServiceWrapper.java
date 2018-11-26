@@ -74,33 +74,6 @@ public class CPInstanceLocalServiceWrapper implements CPInstanceLocalService,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		boolean overrideSubscriptionInfo, boolean subscriptionEnabled,
-		long subscriptionCycleLength, String subscriptionCyclePeriod,
-		long maxSubscriptionCyclesNumber,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpInstanceLocalService.addCPInstance(cpDefinitionId, sku, gtin,
-			manufacturerPartNumber, purchasable, json, width, height, depth,
-			weight, price, promoPrice, cost, published, externalReferenceCode,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, overrideSubscriptionInfo, subscriptionEnabled,
-			subscriptionCycleLength, subscriptionCyclePeriod,
-			maxSubscriptionCyclesNumber, serviceContext);
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CPInstance addCPInstance(
-		long cpDefinitionId, String sku, String gtin,
-		String manufacturerPartNumber, boolean purchasable, String json,
-		double width, double height, double depth, double weight,
-		java.math.BigDecimal price, java.math.BigDecimal promoPrice,
-		java.math.BigDecimal cost, boolean published,
-		String externalReferenceCode, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpInstanceLocalService.addCPInstance(cpDefinitionId, sku, gtin,
