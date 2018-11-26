@@ -82,7 +82,7 @@ public class CommerceSubscriptionCycleEntryLocalServiceImpl
 
 	@Override
 	public CommerceSubscriptionCycleEntry
-		fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
+		fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
 			long commerceOrderItemId) {
 
 		return commerceSubscriptionCycleEntryPersistence.
@@ -90,11 +90,9 @@ public class CommerceSubscriptionCycleEntryLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceSubscriptionCycleEntry>
-		getCommerceSubscriptionCycleEntries(
-			long commerceSubscriptionEntryId, int start, int end,
-			OrderByComparator<CommerceSubscriptionCycleEntry>
-				orderByComparator) {
+	public List<CommerceSubscriptionCycleEntry> getCPSubscriptionCycleEntries(
+		long commerceSubscriptionEntryId, int start, int end,
+		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator) {
 
 		return commerceSubscriptionCycleEntryPersistence.
 			findBycommerceSubscriptionEntryId(
@@ -102,7 +100,7 @@ public class CommerceSubscriptionCycleEntryLocalServiceImpl
 	}
 
 	@Override
-	public int getCommerceSubscriptionCycleEntriesCount(
+	public int getCPSubscriptionCycleEntriesCount(
 		long commerceSubscriptionEntryId) {
 
 		return commerceSubscriptionCycleEntryPersistence.

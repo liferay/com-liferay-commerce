@@ -69,8 +69,26 @@ public class CommerceSubscriptionEntryServiceImpl
 	}
 
 	@Override
+	public List<CommerceSubscriptionEntry> getCPSubscriptionEntries(
+			long groupId, long userId, int start, int end,
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
+		throws PortalException {
+
+		return commerceSubscriptionEntryLocalService.getCPSubscriptionEntries(
+			groupId, userId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCPSubscriptionEntriesCount(long groupId, long userId)
+		throws PortalException {
+
+		return commerceSubscriptionEntryLocalService.
+			getCPSubscriptionEntriesCount(groupId, userId);
+	}
+
+	@Override
 	public BaseModelSearchResult<CommerceSubscriptionEntry>
-			getCommerceSubscriptionEntries(
+			searchCPSubscriptionEntries(
 				long companyId, long groupId, Boolean active, String keywords,
 				int start, int end, Sort sort)
 		throws PortalException {
@@ -80,27 +98,8 @@ public class CommerceSubscriptionEntryServiceImpl
 			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
 
 		return commerceSubscriptionEntryLocalService.
-			getCommerceSubscriptionEntries(
+			searchCPSubscriptionEntries(
 				companyId, groupId, active, keywords, start, end, sort);
-	}
-
-	@Override
-	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-			long groupId, long userId, int start, int end,
-			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
-		throws PortalException {
-
-		return commerceSubscriptionEntryLocalService.
-			getCommerceSubscriptionEntries(
-				groupId, userId, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getCommerceSubscriptionEntriesCount(long groupId, long userId)
-		throws PortalException {
-
-		return commerceSubscriptionEntryLocalService.
-			getCommerceSubscriptionEntriesCount(groupId, userId);
 	}
 
 	@Override
