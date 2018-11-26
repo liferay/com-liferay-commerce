@@ -32,7 +32,7 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 >
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-navigation
-			navigationKeys='<%= new String[] {"all", "active", "inactive", "never-ends"} %>'
+			navigationKeys='<%= new String[] {"all", "active", "inactive"} %>'
 			portletURL="<%= commerceSubscriptionEntryDisplayContext.getPortletURL() %>"
 		/>
 
@@ -90,71 +90,57 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 				>
 
 					<%
+					CommerceOrderItem commerceOrderItem = commerceSubscriptionEntry.getCommerceOrderItem();
+					CPDefinition cpDefinition = commerceSubscriptionEntry.getCPDefinition();
+
 					PortletURL rowURL = renderResponse.createRenderURL();
 
 					rowURL.setParameter("mvcRenderCommandName", "editCommerceSubscriptionEntry");
 					rowURL.setParameter("redirect", currentURL);
 					rowURL.setParameter("commerceSubscriptionEntryId", String.valueOf(commerceSubscriptionEntry.getCommerceSubscriptionEntryId()));
-
-					CommerceOrderItem commerceOrderItem = commerceSubscriptionEntry.getCommerceOrderItem();
-
-					CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
 					%>
 
 					<liferay-ui:search-container-column-text
-						cssClass="important"
+						cssClass="table-cell-content"
+						name="order-id"
+						value="<%= (commerceOrderItem == null) ? StringPool.BLANK : String.valueOf(commerceOrderItem.getCommerceOrderId()) %>"
+					/>
+
+					<liferay-ui:search-container-column-text
+						cssClass="important table-cell-content"
 						href="<%= rowURL %>"
-						name="subscription-id"
-						property="commerceSubscriptionEntryId"
+						name="product"
+						value="<%= cpDefinition.getName(languageId) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
-						name="product"
-						value="<%= commerceOrderItem.getName(languageId) %>"
-					/>
-
-					<liferay-ui:search-container-column-text
-						name="cycle-length"
+						name="cycleLength"
 						property="subscriptionCycleLength"
 					/>
 
 					<liferay-ui:search-container-column-text
-						name="cycle-period"
-						value="<%= LanguageUtil.get(request, commerceSubscriptionEntry.getSubscriptionCyclePeriod()) %>"
+						cssClass="table-cell-content"
+						name="cyclePeriod"
+						property="subscriptionCyclePeriod"
 					/>
 
 					<liferay-ui:search-container-column-text
-						name="remaining-cycles"
-						value="<%= commerceSubscriptionEntryDisplayContext.getCommerceSubscriptionEntryRemainingCycles(commerceSubscriptionEntry) %>"
+						cssClass="table-cell-content"
+						name="maxCycles"
+						property="maxSubscriptionCyclesNumber"
 					/>
 
 					<liferay-ui:search-container-column-text
-						name="ends"
-					>
-						<c:choose>
-							<c:when test="<%= commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber() == 0 %>">
-								<%= LanguageUtil.get(request, "never-ends") %>
-							</c:when>
-							<c:otherwise>
-								<%= LanguageUtil.format(request, "after-x-cycles", commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber()) %>
-							</c:otherwise>
-						</c:choose>
-					</liferay-ui:search-container-column-text>
-
-					<liferay-ui:search-container-column-text
-						name="active"
-						value='<%= LanguageUtil.get(request, commerceSubscriptionEntry.isActive() ? "yes" : "no") %>'
+						cssClass="table-cell-content"
+						name="author"
+						property="userName"
 					/>
 
-					<liferay-ui:search-container-column-text
-						name="customer-name"
-						value="<%= commerceOrder.getCustomerName() %>"
-					/>
-
-					<liferay-ui:search-container-column-text
-						name="customer-id"
-						value="<%= String.valueOf(commerceOrder.getCustomerId()) %>"
+					<liferay-ui:search-container-column-date
+						cssClass="table-cell-content"
+						name="create-date"
+						property="createDate"
 					/>
 
 					<liferay-ui:search-container-column-jsp
@@ -164,7 +150,9 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 				</liferay-ui:search-container-row>
 
 				<liferay-ui:search-iterator
+					displayStyle="list"
 					markupView="lexicon"
+					searchContainer="<%= commerceSubscriptionEntrySearchContainer %>"
 				/>
 			</liferay-ui:search-container>
 		</div>

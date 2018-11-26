@@ -24,13 +24,12 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.commerce.exception.NoSuchSubscriptionEntryException" %><%@
-page import="com.liferay.commerce.model.CommerceOrder" %><%@
 page import="com.liferay.commerce.model.CommerceOrderItem" %><%@
 page import="com.liferay.commerce.model.CommerceSubscriptionEntry" %><%@
 page import="com.liferay.commerce.product.constants.CPConstants" %><%@
+page import="com.liferay.commerce.product.model.CPDefinition" %><%@
 page import="com.liferay.commerce.subscription.web.internal.display.context.CommerceSubscriptionContentDisplayContext" %><%@
 page import="com.liferay.commerce.subscription.web.internal.display.context.CommerceSubscriptionEntryDisplayContext" %><%@
-page import="com.liferay.commerce.subscription.web.internal.servlet.taglib.ui.CommerceSubscriptionEntryScreenNavigationConstants" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
@@ -40,7 +39,6 @@ page import="com.liferay.portal.kernel.util.Constants" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.KeyValuePair" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
-page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %>
 
 <%@ page import="java.util.List" %><%@
