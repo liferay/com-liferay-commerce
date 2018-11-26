@@ -17,11 +17,11 @@
 <%@ include file="/subscription_info/init.jsp" %>
 
 <%
-long duration = (long)request.getAttribute("liferay-commerce:subscription-info:duration");
-String durationSuffix = (String)request.getAttribute("liferay-commerce:subscription-info:durationSuffix");
-long length = (long)request.getAttribute("liferay-commerce:subscription-info:length");
-String periodSuffix = (String)request.getAttribute("liferay-commerce:subscription-info:periodSuffix");
-boolean showDuration = (boolean)request.getAttribute("liferay-commerce:subscription-info:showDuration");
+long duration = (long)request.getAttribute("liferay-commerce-product:subscription-info:duration");
+String durationSuffix = (String)request.getAttribute("liferay-commerce-product:subscription-info:durationSuffix");
+long length = (long)request.getAttribute("liferay-commerce-product:subscription-info:length");
+String periodSuffix = (String)request.getAttribute("liferay-commerce-product:subscription-info:periodSuffix");
+boolean showDuration = (boolean)request.getAttribute("liferay-commerce-product:subscription-info:showDuration");
 %>
 
 <c:if test="<%= (length > 0) && Validator.isNotNull(periodSuffix) %>">

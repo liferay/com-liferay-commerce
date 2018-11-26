@@ -21,7 +21,6 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHelper;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPInstanceHelper;
-import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 
@@ -65,12 +64,6 @@ public class ServletContextUtil {
 
 	public static final CPInstanceHelper getCPInstanceHelper() {
 		return _instance._getCPInstanceHelper();
-	}
-
-	public static final CPSubscriptionTypeRegistry
-		getCPSubscriptionTypeRegistry() {
-
-		return _instance._getCPSubscriptionTypeRegistry();
 	}
 
 	public static final PanelAppRegistry getPanelAppRegistry() {
@@ -141,13 +134,6 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
-	protected void setCPSubscriptionTypeRegistry(
-		CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry) {
-
-		_cpSubscriptionTypeRegistry = cpSubscriptionTypeRegistry;
-	}
-
-	@Reference(unbind = "-")
 	protected void setPanelAppRegistry(PanelAppRegistry panelAppRegistry) {
 		_panelAppRegistry = panelAppRegistry;
 	}
@@ -193,10 +179,6 @@ public class ServletContextUtil {
 		return _cpInstanceHelper;
 	}
 
-	private CPSubscriptionTypeRegistry _getCPSubscriptionTypeRegistry() {
-		return _cpSubscriptionTypeRegistry;
-	}
-
 	private PanelAppRegistry _getPanelAppRegistry() {
 		return _panelAppRegistry;
 	}
@@ -218,7 +200,6 @@ public class ServletContextUtil {
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 	private ConfigurationProvider _configurationProvider;
 	private CPInstanceHelper _cpInstanceHelper;
-	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 	private PanelAppRegistry _panelAppRegistry;
 	private PanelCategoryRegistry _panelCategoryRegistry;
 	private ServletContext _servletContext;
