@@ -16,7 +16,7 @@ package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.product.constants.CPConstants;
-import com.liferay.commerce.product.definitions.web.internal.display.context.CPInstanceSubscriptionInfoDisplayContext;
+import com.liferay.commerce.product.definitions.web.internal.display.context.CPInstanceDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -24,8 +24,6 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
-import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
-import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -119,20 +117,15 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 		throws IOException {
 
 		try {
-			CPInstanceSubscriptionInfoDisplayContext
-				cpInstanceSubscriptionInfoDisplayContext =
-					new CPInstanceSubscriptionInfoDisplayContext(
-						_actionHelper, httpServletRequest,
-						_commercePriceFormatter,
-						_cpDefinitionModelResourcePermission,
-						_cpDefinitionOptionRelService, _cpInstanceService,
-						_cpInstanceHelper, _portletResourcePermission,
-						_cpSubscriptionTypeJSPContributorRegistry,
-						_cpSubscriptionTypeRegistry);
+			CPInstanceDisplayContext cpInstanceDisplayContext =
+				new CPInstanceDisplayContext(
+					_actionHelper, httpServletRequest, _commercePriceFormatter,
+					_cpDefinitionModelResourcePermission,
+					_cpDefinitionOptionRelService, _cpInstanceService,
+					_cpInstanceHelper, _portletResourcePermission);
 
 			httpServletRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				cpInstanceSubscriptionInfoDisplayContext);
+				WebKeys.PORTLET_DISPLAY_CONTEXT, cpInstanceDisplayContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -166,13 +159,6 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
-
-	@Reference
-	private CPSubscriptionTypeJSPContributorRegistry
-		_cpSubscriptionTypeJSPContributorRegistry;
-
-	@Reference
-	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
