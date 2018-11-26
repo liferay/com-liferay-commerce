@@ -71,9 +71,7 @@
 		<field name="expirationDate" type="Date" />
 		<field name="lastPublishDate" type="Date" />
 		<field name="subscriptionEnabled" type="boolean" />
-		<field name="subscriptionLength" type="int">
-			<hint name="default-value">1</hint>
-		</field>
+		<field name="subscriptionLength" type="int" />
 		<field name="subscriptionType" type="String" />
 		<field name="subscriptionTypeSettings" type="String">
 			<hint-collection name="CLOB" />
@@ -269,9 +267,7 @@
 		<field name="lastPublishDate" type="Date" />
 		<field name="overrideSubscriptionInfo" type="boolean" />
 		<field name="subscriptionEnabled" type="boolean" />
-		<field name="subscriptionLength" type="int">
-			<hint name="default-value">1</hint>
-		</field>
+		<field name="subscriptionLength" type="int" />
 		<field name="subscriptionType" type="String" />
 		<field name="subscriptionTypeSettings" type="String">
 			<hint-collection name="CLOB" />

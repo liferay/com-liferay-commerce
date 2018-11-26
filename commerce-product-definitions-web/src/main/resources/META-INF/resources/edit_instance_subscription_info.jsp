@@ -40,7 +40,7 @@ productSkusURL.setParameter("screenNavigationCategoryKey", cpInstanceSubscriptio
 
 boolean overrideSubscriptionInfo = BeanParamUtil.getBoolean(cpInstance, request, "overrideSubscriptionInfo", false);
 boolean subscriptionEnabled = BeanParamUtil.getBoolean(cpInstance, request, "subscriptionEnabled", false);
-int subscriptionLength = BeanParamUtil.getInteger(cpInstance, request, "subscriptionLength", 1);
+int subscriptionLength = BeanParamUtil.getInteger(cpInstance, request, "subscriptionLength");
 String subscriptionType = BeanParamUtil.getString(cpInstance, request, "subscriptionType", defaultCPSubscriptionType);
 long maxSubscriptionCycles = BeanParamUtil.getLong(cpInstance, request, "maxSubscriptionCycles");
 

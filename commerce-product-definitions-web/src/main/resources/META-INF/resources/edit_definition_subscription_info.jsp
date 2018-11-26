@@ -32,7 +32,7 @@ if (!cpSubscriptionTypes.isEmpty()) {
 }
 
 boolean subscriptionEnabled = BeanParamUtil.getBoolean(cpDefinition, request, "subscriptionEnabled", false);
-int subscriptionLength = BeanParamUtil.getInteger(cpDefinition, request, "subscriptionLength", 1);
+int subscriptionLength = BeanParamUtil.getInteger(cpDefinition, request, "subscriptionLength");
 String subscriptionType = BeanParamUtil.getString(cpDefinition, request, "subscriptionType", defaultCPSubscriptionType);
 long maxSubscriptionCycles = BeanParamUtil.getLong(cpDefinition, request, "maxSubscriptionCycles");
 

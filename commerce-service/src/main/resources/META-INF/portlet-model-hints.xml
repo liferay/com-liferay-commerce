@@ -311,9 +311,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="CPInstanceId" type="long" />
 		<field name="commerceOrderItemId" type="long" />
-		<field name="subscriptionLength" type="int">
-			<hint name="default-value">1</hint>
-		</field>
+		<field name="subscriptionLength" type="int" />
 		<field name="subscriptionType" type="String">
 			<validator name="required" />
 		</field>

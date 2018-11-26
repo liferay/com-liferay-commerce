@@ -395,7 +395,7 @@ public class CPDefinitionLocalServiceImpl
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, defaultSku, false, 1, StringPool.BLANK, null, 0,
+			neverExpire, defaultSku, false, 0, StringPool.BLANK, null, 0,
 			externalReferenceCode, serviceContext);
 	}
 
