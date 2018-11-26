@@ -61,7 +61,7 @@ boolean ending = maxSubscriptionCycles > 0;
 
 <aui:form action="<%= editProductInstanceShippingInfoActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateSubscriptionInfo" />
-	<aui:input name="redirect" type="hidden" value="<%= String.valueOf(cpInstanceSubscriptionInfoDisplayContext.getPortletURL()) %>" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="cpInstanceId" type="hidden" value="<%= cpInstanceId %>" />
 
 	<aui:model-context bean="<%= cpInstance %>" model="<%= CPInstance.class %>" />

@@ -218,15 +218,6 @@ public class CommerceSubscriptionEntryDisplayContext {
 		return portletURL.toString();
 	}
 
-	public PortletURL getEditCommerceSubscriptionEntryURL() {
-		PortletURL portletURL = getPortletURL();
-
-		portletURL.setParameter(
-			"mvcRenderCommandName", "editCommerceSubscriptionEntry");
-
-		return portletURL;
-	}
-
 	public String getKeywords() {
 		if (_keywords != null) {
 			return _keywords;

@@ -54,7 +54,7 @@ boolean ending = maxSubscriptionCycles > 0;
 
 <aui:form action="<%= editCommerceSubscriptionEntryActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= String.valueOf(commerceSubscriptionEntryDisplayContext.getEditCommerceSubscriptionEntryURL()) %>" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="commerceSubscriptionEntryId" type="hidden" value="<%= String.valueOf(commerceSubscriptionEntryDisplayContext.getCommerceSubscriptionEntryId()) %>" />
 
 	<aui:fieldset-group markupView="lexicon">
