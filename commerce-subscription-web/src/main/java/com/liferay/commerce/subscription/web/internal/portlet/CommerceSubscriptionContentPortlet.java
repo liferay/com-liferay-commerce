@@ -55,7 +55,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.scopeable=true",
 		"javax.portlet.display-name=My Subscriptions",
 		"javax.portlet.expiration-cache=0",
-		"javax.portlet.init-param.view-template=/my_subscriptions/view.jsp",
+		"javax.portlet.init-param.view-template=/subscriptions/view.jsp",
 		"javax.portlet.name=" + CPPortletKeys.COMMERCE_SUBSCRIPTION_CONTENT_WEB,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user",
