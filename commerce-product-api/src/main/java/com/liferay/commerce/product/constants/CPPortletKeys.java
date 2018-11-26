@@ -24,10 +24,6 @@ public class CPPortletKeys {
 		"com_liferay_commerce_product_internal_portlet_" +
 			"CommerceSubscriptionContentPortlet";
 
-	public static final String COMMERCE_SUBSCRIPTION_ENTRY =
-		"com_liferay_commerce_product_internal_portlet_" +
-			"CommerceSubscriptionEntryPortlet";
-
 	public static final String CP_ASSET_CATEGORIES_NAVIGATION =
 		"com_liferay_commerce_product_asset_categories_navigation_web" +
 			"_internal_portlet_CPAssetCategoriesNavigationPortlet";
