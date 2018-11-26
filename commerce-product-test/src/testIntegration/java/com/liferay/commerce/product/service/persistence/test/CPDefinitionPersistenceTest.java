@@ -181,14 +181,6 @@ public class CPDefinitionPersistenceTest {
 
 		newCPDefinition.setLastPublishDate(RandomTestUtil.nextDate());
 
-		newCPDefinition.setSubscriptionEnabled(RandomTestUtil.randomBoolean());
-
-		newCPDefinition.setSubscriptionCycleLength(RandomTestUtil.nextLong());
-
-		newCPDefinition.setSubscriptionCyclePeriod(RandomTestUtil.randomString());
-
-		newCPDefinition.setMaxSubscriptionCyclesNumber(RandomTestUtil.nextLong());
-
 		newCPDefinition.setStatus(RandomTestUtil.nextInt());
 
 		newCPDefinition.setStatusByUserId(RandomTestUtil.nextLong());
@@ -264,14 +256,6 @@ public class CPDefinitionPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPDefinition.getLastPublishDate()),
 			Time.getShortTimestamp(newCPDefinition.getLastPublishDate()));
-		Assert.assertEquals(existingCPDefinition.isSubscriptionEnabled(),
-			newCPDefinition.isSubscriptionEnabled());
-		Assert.assertEquals(existingCPDefinition.getSubscriptionCycleLength(),
-			newCPDefinition.getSubscriptionCycleLength());
-		Assert.assertEquals(existingCPDefinition.getSubscriptionCyclePeriod(),
-			newCPDefinition.getSubscriptionCyclePeriod());
-		Assert.assertEquals(existingCPDefinition.getMaxSubscriptionCyclesNumber(),
-			newCPDefinition.getMaxSubscriptionCyclesNumber());
 		Assert.assertEquals(existingCPDefinition.getStatus(),
 			newCPDefinition.getStatus());
 		Assert.assertEquals(existingCPDefinition.getStatusByUserId(),
@@ -398,10 +382,8 @@ public class CPDefinitionPersistenceTest {
 			true, "weight", true, "CPTaxCategoryId", true, "taxExempt", true,
 			"telcoOrElectronics", true, "DDMStructureKey", true, "published",
 			true, "displayDate", true, "expirationDate", true,
-			"lastPublishDate", true, "subscriptionEnabled", true,
-			"subscriptionCycleLength", true, "subscriptionCyclePeriod", true,
-			"maxSubscriptionCyclesNumber", true, "status", true,
-			"statusByUserId", true, "statusByUserName", true, "statusDate", true);
+			"lastPublishDate", true, "status", true, "statusByUserId", true,
+			"statusByUserName", true, "statusDate", true);
 	}
 
 	@Test
@@ -682,14 +664,6 @@ public class CPDefinitionPersistenceTest {
 		cpDefinition.setExpirationDate(RandomTestUtil.nextDate());
 
 		cpDefinition.setLastPublishDate(RandomTestUtil.nextDate());
-
-		cpDefinition.setSubscriptionEnabled(RandomTestUtil.randomBoolean());
-
-		cpDefinition.setSubscriptionCycleLength(RandomTestUtil.nextLong());
-
-		cpDefinition.setSubscriptionCyclePeriod(RandomTestUtil.randomString());
-
-		cpDefinition.setMaxSubscriptionCyclesNumber(RandomTestUtil.nextLong());
 
 		cpDefinition.setStatus(RandomTestUtil.nextInt());
 

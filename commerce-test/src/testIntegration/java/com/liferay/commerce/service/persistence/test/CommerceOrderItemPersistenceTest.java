@@ -175,8 +175,6 @@ public class CommerceOrderItemPersistenceTest {
 		newCommerceOrderItem.setDiscountPercentageLevel4(new BigDecimal(
 				RandomTestUtil.nextDouble()));
 
-		newCommerceOrderItem.setSubscription(RandomTestUtil.randomBoolean());
-
 		_commerceOrderItems.add(_persistence.update(newCommerceOrderItem));
 
 		CommerceOrderItem existingCommerceOrderItem = _persistence.findByPrimaryKey(newCommerceOrderItem.getPrimaryKey());
@@ -227,8 +225,6 @@ public class CommerceOrderItemPersistenceTest {
 			newCommerceOrderItem.getDiscountPercentageLevel3());
 		Assert.assertEquals(existingCommerceOrderItem.getDiscountPercentageLevel4(),
 			newCommerceOrderItem.getDiscountPercentageLevel4());
-		Assert.assertEquals(existingCommerceOrderItem.isSubscription(),
-			newCommerceOrderItem.isSubscription());
 	}
 
 	@Test
@@ -251,14 +247,6 @@ public class CommerceOrderItemPersistenceTest {
 			RandomTestUtil.nextLong());
 
 		_persistence.countByC_I(0L, 0L);
-	}
-
-	@Test
-	public void testCountByC_S() throws Exception {
-		_persistence.countByC_S(RandomTestUtil.nextLong(),
-			RandomTestUtil.randomBoolean());
-
-		_persistence.countByC_S(0L, RandomTestUtil.randomBoolean());
 	}
 
 	@Test
@@ -301,8 +289,7 @@ public class CommerceOrderItemPersistenceTest {
 			true, "name", true, "sku", true, "unitPrice", true,
 			"discountAmount", true, "finalPrice", true,
 			"discountPercentageLevel1", true, "discountPercentageLevel2", true,
-			"discountPercentageLevel3", true, "discountPercentageLevel4", true,
-			"subscription", true);
+			"discountPercentageLevel3", true, "discountPercentageLevel4", true);
 	}
 
 	@Test
@@ -571,8 +558,6 @@ public class CommerceOrderItemPersistenceTest {
 
 		commerceOrderItem.setDiscountPercentageLevel4(new BigDecimal(
 				RandomTestUtil.nextDouble()));
-
-		commerceOrderItem.setSubscription(RandomTestUtil.randomBoolean());
 
 		_commerceOrderItems.add(_persistence.update(commerceOrderItem));
 
