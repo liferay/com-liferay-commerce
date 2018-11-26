@@ -24,7 +24,6 @@ import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
 import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.List;
 
@@ -78,41 +77,5 @@ public class CommerceSubscriptionEntryImpl
 	public CPInstance getCPInstance() throws PortalException {
 		return CPInstanceLocalServiceUtil.getCPInstance(getCPInstanceId());
 	}
-
-	@Override
-	public UnicodeProperties getSubscriptionTypeSettingsProperties() {
-		if (_subscriptionTypeSettingsProperties == null) {
-			_subscriptionTypeSettingsProperties = new UnicodeProperties(true);
-
-			_subscriptionTypeSettingsProperties.fastLoad(
-				getSubscriptionTypeSettings());
-		}
-
-		return _subscriptionTypeSettingsProperties;
-	}
-
-	@Override
-	public void setSubscriptionTypeSettings(String subscriptionTypeSettings) {
-		super.setSubscriptionTypeSettings(subscriptionTypeSettings);
-
-		_subscriptionTypeSettingsProperties = null;
-	}
-
-	@Override
-	public void setSubscriptionTypeSettingsProperties(
-		UnicodeProperties subscriptionTypeSettingsProperties) {
-
-		_subscriptionTypeSettingsProperties =
-			subscriptionTypeSettingsProperties;
-
-		if (_subscriptionTypeSettingsProperties == null) {
-			_subscriptionTypeSettingsProperties = new UnicodeProperties();
-		}
-
-		super.setSubscriptionTypeSettings(
-			_subscriptionTypeSettingsProperties.toString());
-	}
-
-	private UnicodeProperties _subscriptionTypeSettingsProperties;
 
 }
