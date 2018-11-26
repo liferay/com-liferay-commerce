@@ -279,13 +279,6 @@ public class CommerceOrderItemLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceOrderItem> getSubscriptionCommerceOrderItems(
-		long commerceOrderId) {
-
-		return commerceOrderItemPersistence.findByC_S(commerceOrderId, true);
-	}
-
-	@Override
 	public CommerceOrderItem incrementShippedQuantity(
 			long commerceOrderItemId, int shippedQuantity)
 		throws PortalException {
