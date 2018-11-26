@@ -22,22 +22,20 @@ import com.liferay.portal.kernel.exception.PortalException;
  * @author Alessio Antonio Rendina
  */
 @ProviderType
-public class CommerceSubscriptionCPInstanceIdException extends PortalException {
+public class CPSubscriptionCPInstanceIdException extends PortalException {
 
-	public CommerceSubscriptionCPInstanceIdException() {
+	public CPSubscriptionCPInstanceIdException() {
 	}
 
-	public CommerceSubscriptionCPInstanceIdException(String msg) {
+	public CPSubscriptionCPInstanceIdException(String msg) {
 		super(msg);
 	}
 
-	public CommerceSubscriptionCPInstanceIdException(
-		String msg, Throwable cause) {
-
+	public CPSubscriptionCPInstanceIdException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public CommerceSubscriptionCPInstanceIdException(Throwable cause) {
+	public CPSubscriptionCPInstanceIdException(Throwable cause) {
 		super(cause);
 	}
 
