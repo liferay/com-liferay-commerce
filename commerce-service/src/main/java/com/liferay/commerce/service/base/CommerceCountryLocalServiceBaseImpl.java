@@ -37,9 +37,6 @@ import com.liferay.commerce.service.persistence.CommerceShipmentItemFinder;
 import com.liferay.commerce.service.persistence.CommerceShipmentItemPersistence;
 import com.liferay.commerce.service.persistence.CommerceShipmentPersistence;
 import com.liferay.commerce.service.persistence.CommerceShippingMethodPersistence;
-import com.liferay.commerce.service.persistence.CommerceSubscriptionCycleEntryPersistence;
-import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryFinder;
-import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryPersistence;
 import com.liferay.commerce.service.persistence.CommerceWarehouseFinder;
 import com.liferay.commerce.service.persistence.CommerceWarehouseItemFinder;
 import com.liferay.commerce.service.persistence.CommerceWarehouseItemPersistence;
@@ -1032,101 +1029,6 @@ public abstract class CommerceCountryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce subscription cycle entry local service.
-	 *
-	 * @return the commerce subscription cycle entry local service
-	 */
-	public com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService getCommerceSubscriptionCycleEntryLocalService() {
-		return commerceSubscriptionCycleEntryLocalService;
-	}
-
-	/**
-	 * Sets the commerce subscription cycle entry local service.
-	 *
-	 * @param commerceSubscriptionCycleEntryLocalService the commerce subscription cycle entry local service
-	 */
-	public void setCommerceSubscriptionCycleEntryLocalService(
-		com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService commerceSubscriptionCycleEntryLocalService) {
-		this.commerceSubscriptionCycleEntryLocalService = commerceSubscriptionCycleEntryLocalService;
-	}
-
-	/**
-	 * Returns the commerce subscription cycle entry persistence.
-	 *
-	 * @return the commerce subscription cycle entry persistence
-	 */
-	public CommerceSubscriptionCycleEntryPersistence getCommerceSubscriptionCycleEntryPersistence() {
-		return commerceSubscriptionCycleEntryPersistence;
-	}
-
-	/**
-	 * Sets the commerce subscription cycle entry persistence.
-	 *
-	 * @param commerceSubscriptionCycleEntryPersistence the commerce subscription cycle entry persistence
-	 */
-	public void setCommerceSubscriptionCycleEntryPersistence(
-		CommerceSubscriptionCycleEntryPersistence commerceSubscriptionCycleEntryPersistence) {
-		this.commerceSubscriptionCycleEntryPersistence = commerceSubscriptionCycleEntryPersistence;
-	}
-
-	/**
-	 * Returns the commerce subscription entry local service.
-	 *
-	 * @return the commerce subscription entry local service
-	 */
-	public com.liferay.commerce.service.CommerceSubscriptionEntryLocalService getCommerceSubscriptionEntryLocalService() {
-		return commerceSubscriptionEntryLocalService;
-	}
-
-	/**
-	 * Sets the commerce subscription entry local service.
-	 *
-	 * @param commerceSubscriptionEntryLocalService the commerce subscription entry local service
-	 */
-	public void setCommerceSubscriptionEntryLocalService(
-		com.liferay.commerce.service.CommerceSubscriptionEntryLocalService commerceSubscriptionEntryLocalService) {
-		this.commerceSubscriptionEntryLocalService = commerceSubscriptionEntryLocalService;
-	}
-
-	/**
-	 * Returns the commerce subscription entry persistence.
-	 *
-	 * @return the commerce subscription entry persistence
-	 */
-	public CommerceSubscriptionEntryPersistence getCommerceSubscriptionEntryPersistence() {
-		return commerceSubscriptionEntryPersistence;
-	}
-
-	/**
-	 * Sets the commerce subscription entry persistence.
-	 *
-	 * @param commerceSubscriptionEntryPersistence the commerce subscription entry persistence
-	 */
-	public void setCommerceSubscriptionEntryPersistence(
-		CommerceSubscriptionEntryPersistence commerceSubscriptionEntryPersistence) {
-		this.commerceSubscriptionEntryPersistence = commerceSubscriptionEntryPersistence;
-	}
-
-	/**
-	 * Returns the commerce subscription entry finder.
-	 *
-	 * @return the commerce subscription entry finder
-	 */
-	public CommerceSubscriptionEntryFinder getCommerceSubscriptionEntryFinder() {
-		return commerceSubscriptionEntryFinder;
-	}
-
-	/**
-	 * Sets the commerce subscription entry finder.
-	 *
-	 * @param commerceSubscriptionEntryFinder the commerce subscription entry finder
-	 */
-	public void setCommerceSubscriptionEntryFinder(
-		CommerceSubscriptionEntryFinder commerceSubscriptionEntryFinder) {
-		this.commerceSubscriptionEntryFinder = commerceSubscriptionEntryFinder;
-	}
-
-	/**
 	 * Returns the commerce warehouse local service.
 	 *
 	 * @return the commerce warehouse local service
@@ -1541,16 +1443,6 @@ public abstract class CommerceCountryLocalServiceBaseImpl
 	protected com.liferay.commerce.service.CommerceShippingMethodLocalService commerceShippingMethodLocalService;
 	@BeanReference(type = CommerceShippingMethodPersistence.class)
 	protected CommerceShippingMethodPersistence commerceShippingMethodPersistence;
-	@BeanReference(type = com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService.class)
-	protected com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService commerceSubscriptionCycleEntryLocalService;
-	@BeanReference(type = CommerceSubscriptionCycleEntryPersistence.class)
-	protected CommerceSubscriptionCycleEntryPersistence commerceSubscriptionCycleEntryPersistence;
-	@BeanReference(type = com.liferay.commerce.service.CommerceSubscriptionEntryLocalService.class)
-	protected com.liferay.commerce.service.CommerceSubscriptionEntryLocalService commerceSubscriptionEntryLocalService;
-	@BeanReference(type = CommerceSubscriptionEntryPersistence.class)
-	protected CommerceSubscriptionEntryPersistence commerceSubscriptionEntryPersistence;
-	@BeanReference(type = CommerceSubscriptionEntryFinder.class)
-	protected CommerceSubscriptionEntryFinder commerceSubscriptionEntryFinder;
 	@BeanReference(type = com.liferay.commerce.service.CommerceWarehouseLocalService.class)
 	protected com.liferay.commerce.service.CommerceWarehouseLocalService commerceWarehouseLocalService;
 	@BeanReference(type = CommerceWarehousePersistence.class)

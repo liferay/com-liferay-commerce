@@ -362,12 +362,6 @@ public class CommerceOrderItemLocalServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceOrderItem> getSubscriptionCommerceOrderItems(
-		long commerceOrderId) {
-		return _commerceOrderItemLocalService.getSubscriptionCommerceOrderItems(commerceOrderId);
-	}
-
-	@Override
 	public com.liferay.commerce.model.CommerceOrderItem incrementShippedQuantity(
 		long commerceOrderItemId, int shippedQuantity)
 		throws com.liferay.portal.kernel.exception.PortalException {

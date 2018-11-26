@@ -67,7 +67,7 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -113,8 +113,6 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 		sb.append(discountPercentageLevel3);
 		sb.append(", discountPercentageLevel4=");
 		sb.append(discountPercentageLevel4);
-		sb.append(", subscription=");
-		sb.append(subscription);
 		sb.append("}");
 
 		return sb.toString();
@@ -190,7 +188,6 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 		commerceOrderItemImpl.setDiscountPercentageLevel2(discountPercentageLevel2);
 		commerceOrderItemImpl.setDiscountPercentageLevel3(discountPercentageLevel3);
 		commerceOrderItemImpl.setDiscountPercentageLevel4(discountPercentageLevel4);
-		commerceOrderItemImpl.setSubscription(subscription);
 
 		commerceOrderItemImpl.resetOriginalValues();
 
@@ -230,8 +227,6 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 		discountPercentageLevel2 = (BigDecimal)objectInput.readObject();
 		discountPercentageLevel3 = (BigDecimal)objectInput.readObject();
 		discountPercentageLevel4 = (BigDecimal)objectInput.readObject();
-
-		subscription = objectInput.readBoolean();
 	}
 
 	@Override
@@ -298,8 +293,6 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 		objectOutput.writeObject(discountPercentageLevel2);
 		objectOutput.writeObject(discountPercentageLevel3);
 		objectOutput.writeObject(discountPercentageLevel4);
-
-		objectOutput.writeBoolean(subscription);
 	}
 
 	public String externalReferenceCode;
@@ -324,5 +317,4 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 	public BigDecimal discountPercentageLevel2;
 	public BigDecimal discountPercentageLevel3;
 	public BigDecimal discountPercentageLevel4;
-	public boolean subscription;
 }

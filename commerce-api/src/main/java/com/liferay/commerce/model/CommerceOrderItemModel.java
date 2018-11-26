@@ -496,27 +496,6 @@ public interface CommerceOrderItemModel extends BaseModel<CommerceOrderItem>,
 	 */
 	public void setDiscountPercentageLevel4(BigDecimal discountPercentageLevel4);
 
-	/**
-	 * Returns the subscription of this commerce order item.
-	 *
-	 * @return the subscription of this commerce order item
-	 */
-	public boolean getSubscription();
-
-	/**
-	 * Returns <code>true</code> if this commerce order item is subscription.
-	 *
-	 * @return <code>true</code> if this commerce order item is subscription; <code>false</code> otherwise
-	 */
-	public boolean isSubscription();
-
-	/**
-	 * Sets whether this commerce order item is subscription.
-	 *
-	 * @param subscription the subscription of this commerce order item
-	 */
-	public void setSubscription(boolean subscription);
-
 	@Override
 	public boolean isNew();
 

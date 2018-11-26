@@ -34,52 +34,6 @@ create table CPDefinitionInventory (
 	multipleOrderQuantity INTEGER
 );
 
-create table CSubscriptionCycleEntry (
-	uuid_ VARCHAR(75) null,
-	CSubscriptionCycleEntryId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	commerceSubscriptionEntryId LONG,
-	commerceOrderItemId LONG,
-	renew BOOLEAN
-);
-
-create table CommerceSubscriptionCycleEntry (
-	uuid_ VARCHAR(75) null,
-	commerceSubscriptionCycleEntryId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	commerceSubscriptionEntryId LONG,
-	commerceOrderItemId LONG,
-	renew BOOLEAN
-);
-
-create table CommerceSubscriptionEntry (
-	uuid_ VARCHAR(75) null,
-	commerceSubscriptionEntryId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	CPInstanceId LONG,
-	commerceOrderItemId LONG,
-	subscriptionCycleLength LONG,
-	subscriptionCyclePeriod VARCHAR(75) null,
-	maxSubscriptionCyclesNumber LONG,
-	active_ BOOLEAN,
-	nextIterationDate DATE null
-);
-
 create table CommerceAddress (
 	commerceAddressId LONG not null primary key,
 	groupId LONG,
@@ -224,8 +178,7 @@ create table CommerceOrderItem (
 	discountPercentageLevel1 DECIMAL(30, 16) null,
 	discountPercentageLevel2 DECIMAL(30, 16) null,
 	discountPercentageLevel3 DECIMAL(30, 16) null,
-	discountPercentageLevel4 DECIMAL(30, 16) null,
-	subscription BOOLEAN
+	discountPercentageLevel4 DECIMAL(30, 16) null
 );
 
 create table CommerceOrderNote (

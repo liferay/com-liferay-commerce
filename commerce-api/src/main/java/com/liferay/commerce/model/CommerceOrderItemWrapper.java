@@ -82,7 +82,6 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 		attributes.put("discountPercentageLevel2", getDiscountPercentageLevel2());
 		attributes.put("discountPercentageLevel3", getDiscountPercentageLevel3());
 		attributes.put("discountPercentageLevel4", getDiscountPercentageLevel4());
-		attributes.put("subscription", isSubscription());
 
 		return attributes;
 	}
@@ -224,12 +223,6 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 
 		if (discountPercentageLevel4 != null) {
 			setDiscountPercentageLevel4(discountPercentageLevel4);
-		}
-
-		Boolean subscription = (Boolean)attributes.get("subscription");
-
-		if (subscription != null) {
-			setSubscription(subscription);
 		}
 	}
 
@@ -560,16 +553,6 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 	}
 
 	/**
-	* Returns the subscription of this commerce order item.
-	*
-	* @return the subscription of this commerce order item
-	*/
-	@Override
-	public boolean getSubscription() {
-		return _commerceOrderItem.getSubscription();
-	}
-
-	/**
 	* Returns the unit price of this commerce order item.
 	*
 	* @return the unit price of this commerce order item
@@ -633,16 +616,6 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 	@Override
 	public boolean isNew() {
 		return _commerceOrderItem.isNew();
-	}
-
-	/**
-	* Returns <code>true</code> if this commerce order item is subscription.
-	*
-	* @return <code>true</code> if this commerce order item is subscription; <code>false</code> otherwise
-	*/
-	@Override
-	public boolean isSubscription() {
-		return _commerceOrderItem.isSubscription();
 	}
 
 	@Override
@@ -943,16 +916,6 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 	@Override
 	public void setSku(String sku) {
 		_commerceOrderItem.setSku(sku);
-	}
-
-	/**
-	* Sets whether this commerce order item is subscription.
-	*
-	* @param subscription the subscription of this commerce order item
-	*/
-	@Override
-	public void setSubscription(boolean subscription) {
-		_commerceOrderItem.setSubscription(subscription);
 	}
 
 	/**

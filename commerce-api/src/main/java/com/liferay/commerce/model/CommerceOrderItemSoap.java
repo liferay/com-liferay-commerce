@@ -58,7 +58,6 @@ public class CommerceOrderItemSoap implements Serializable {
 		soapModel.setDiscountPercentageLevel2(model.getDiscountPercentageLevel2());
 		soapModel.setDiscountPercentageLevel3(model.getDiscountPercentageLevel3());
 		soapModel.setDiscountPercentageLevel4(model.getDiscountPercentageLevel4());
-		soapModel.setSubscription(model.isSubscription());
 
 		return soapModel;
 	}
@@ -290,18 +289,6 @@ public class CommerceOrderItemSoap implements Serializable {
 		_discountPercentageLevel4 = discountPercentageLevel4;
 	}
 
-	public boolean getSubscription() {
-		return _subscription;
-	}
-
-	public boolean isSubscription() {
-		return _subscription;
-	}
-
-	public void setSubscription(boolean subscription) {
-		_subscription = subscription;
-	}
-
 	private String _externalReferenceCode;
 	private long _commerceOrderItemId;
 	private long _groupId;
@@ -324,5 +311,4 @@ public class CommerceOrderItemSoap implements Serializable {
 	private BigDecimal _discountPercentageLevel2;
 	private BigDecimal _discountPercentageLevel3;
 	private BigDecimal _discountPercentageLevel4;
-	private boolean _subscription;
 }

@@ -340,11 +340,6 @@ public class CommerceOrderItemLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceOrderItem> getSubscriptionCommerceOrderItems(
-		long commerceOrderId) {
-		return getService().getSubscriptionCommerceOrderItems(commerceOrderId);
-	}
-
 	public static com.liferay.commerce.model.CommerceOrderItem incrementShippedQuantity(
 		long commerceOrderItemId, int shippedQuantity)
 		throws com.liferay.portal.kernel.exception.PortalException {

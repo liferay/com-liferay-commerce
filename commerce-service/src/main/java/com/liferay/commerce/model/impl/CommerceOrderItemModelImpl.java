@@ -101,8 +101,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 			{ "discountPercentageLevel1", Types.DECIMAL },
 			{ "discountPercentageLevel2", Types.DECIMAL },
 			{ "discountPercentageLevel3", Types.DECIMAL },
-			{ "discountPercentageLevel4", Types.DECIMAL },
-			{ "subscription", Types.BOOLEAN }
+			{ "discountPercentageLevel4", Types.DECIMAL }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -129,10 +128,9 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		TABLE_COLUMNS_MAP.put("discountPercentageLevel2", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("discountPercentageLevel3", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("discountPercentageLevel4", Types.DECIMAL);
-		TABLE_COLUMNS_MAP.put("subscription", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrderItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceOrderItem.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceOrderItem.createDate ASC";
@@ -152,8 +150,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	public static final long COMMERCEORDERID_COLUMN_BITMASK = 2L;
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
 	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 8L;
-	public static final long SUBSCRIPTION_COLUMN_BITMASK = 16L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 32L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -190,7 +187,6 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		model.setDiscountPercentageLevel2(soapModel.getDiscountPercentageLevel2());
 		model.setDiscountPercentageLevel3(soapModel.getDiscountPercentageLevel3());
 		model.setDiscountPercentageLevel4(soapModel.getDiscountPercentageLevel4());
-		model.setSubscription(soapModel.isSubscription());
 
 		return model;
 	}
@@ -278,7 +274,6 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		attributes.put("discountPercentageLevel2", getDiscountPercentageLevel2());
 		attributes.put("discountPercentageLevel3", getDiscountPercentageLevel3());
 		attributes.put("discountPercentageLevel4", getDiscountPercentageLevel4());
-		attributes.put("subscription", isSubscription());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -423,12 +418,6 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 		if (discountPercentageLevel4 != null) {
 			setDiscountPercentageLevel4(discountPercentageLevel4);
-		}
-
-		Boolean subscription = (Boolean)attributes.get("subscription");
-
-		if (subscription != null) {
-			setSubscription(subscription);
 		}
 	}
 
@@ -852,35 +841,6 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		_discountPercentageLevel4 = discountPercentageLevel4;
 	}
 
-	@JSON
-	@Override
-	public boolean getSubscription() {
-		return _subscription;
-	}
-
-	@JSON
-	@Override
-	public boolean isSubscription() {
-		return _subscription;
-	}
-
-	@Override
-	public void setSubscription(boolean subscription) {
-		_columnBitmask |= SUBSCRIPTION_COLUMN_BITMASK;
-
-		if (!_setOriginalSubscription) {
-			_setOriginalSubscription = true;
-
-			_originalSubscription = _subscription;
-		}
-
-		_subscription = subscription;
-	}
-
-	public boolean getOriginalSubscription() {
-		return _originalSubscription;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -995,7 +955,6 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		commerceOrderItemImpl.setDiscountPercentageLevel2(getDiscountPercentageLevel2());
 		commerceOrderItemImpl.setDiscountPercentageLevel3(getDiscountPercentageLevel3());
 		commerceOrderItemImpl.setDiscountPercentageLevel4(getDiscountPercentageLevel4());
-		commerceOrderItemImpl.setSubscription(isSubscription());
 
 		commerceOrderItemImpl.resetOriginalValues();
 
@@ -1072,10 +1031,6 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		commerceOrderItemModelImpl._originalCPInstanceId = commerceOrderItemModelImpl._CPInstanceId;
 
 		commerceOrderItemModelImpl._setOriginalCPInstanceId = false;
-
-		commerceOrderItemModelImpl._originalSubscription = commerceOrderItemModelImpl._subscription;
-
-		commerceOrderItemModelImpl._setOriginalSubscription = false;
 
 		commerceOrderItemModelImpl._columnBitmask = 0;
 	}
@@ -1173,14 +1128,12 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 		commerceOrderItemCacheModel.discountPercentageLevel4 = getDiscountPercentageLevel4();
 
-		commerceOrderItemCacheModel.subscription = isSubscription();
-
 		return commerceOrderItemCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(getExternalReferenceCode());
@@ -1226,8 +1179,6 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		sb.append(getDiscountPercentageLevel3());
 		sb.append(", discountPercentageLevel4=");
 		sb.append(getDiscountPercentageLevel4());
-		sb.append(", subscription=");
-		sb.append(isSubscription());
 		sb.append("}");
 
 		return sb.toString();
@@ -1235,7 +1186,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(70);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceOrderItem");
@@ -1329,10 +1280,6 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 			"<column><column-name>discountPercentageLevel4</column-name><column-value><![CDATA[");
 		sb.append(getDiscountPercentageLevel4());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>subscription</column-name><column-value><![CDATA[");
-		sb.append(isSubscription());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1374,9 +1321,6 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	private BigDecimal _discountPercentageLevel2;
 	private BigDecimal _discountPercentageLevel3;
 	private BigDecimal _discountPercentageLevel4;
-	private boolean _subscription;
-	private boolean _originalSubscription;
-	private boolean _setOriginalSubscription;
 	private long _columnBitmask;
 	private CommerceOrderItem _escapedModel;
 }
