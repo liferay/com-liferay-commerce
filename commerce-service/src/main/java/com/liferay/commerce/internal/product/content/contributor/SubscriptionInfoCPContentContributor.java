@@ -18,8 +18,6 @@ import com.liferay.commerce.product.constants.CPContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.util.CPContentContributor;
-import com.liferay.commerce.product.util.CPSubscriptionType;
-import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
@@ -27,8 +25,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -86,40 +82,36 @@ public class SubscriptionInfoCPContentContributor
 		CPSubscriptionInfo cpSubscriptionInfo,
 		HttpServletRequest httpServletRequest) {
 
-		long maxSubscriptionCycles =
-			cpSubscriptionInfo.getMaxSubscriptionCycles();
-		int subscriptionLength = cpSubscriptionInfo.getSubscriptionLength();
-
-		String period = StringPool.BLANK;
-
-		CPSubscriptionType cpSubscriptionType =
-			_cpSubscriptionTypeRegistry.getCPSubscriptionType(
-				cpSubscriptionInfo.getSubscriptionType());
-
-		if (cpSubscriptionType != null) {
-			period = cpSubscriptionType.getLabel(
-				_portal.getLocale(httpServletRequest));
-		}
+		long maxSubscriptionCyclesNumber =
+			cpSubscriptionInfo.getMaxSubscriptionCyclesNumber();
+		long subscriptionCycleLength =
+			cpSubscriptionInfo.getSubscriptionCycleLength();
+		String subscriptionCyclePeriod =
+			cpSubscriptionInfo.getSubscriptionCyclePeriod();
 
 		StringBundler sb = new StringBundler(
-			(maxSubscriptionCycles > 0) ? 11 : 7);
+			(maxSubscriptionCyclesNumber > 0) ? 11 : 7);
 
 		sb.append(StringPool.OPEN_PARENTHESIS);
 		sb.append(LanguageUtil.get(httpServletRequest, "every"));
 		sb.append(StringPool.SPACE);
-		sb.append(subscriptionLength);
+		sb.append(subscriptionCycleLength);
 		sb.append(StringPool.SPACE);
-		sb.append(_getSuffix(subscriptionLength, period, httpServletRequest));
+		sb.append(
+			_getSuffix(
+				subscriptionCycleLength, subscriptionCyclePeriod,
+				httpServletRequest));
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
-		if (maxSubscriptionCycles > 0) {
-			long totalLength = subscriptionLength * maxSubscriptionCycles;
+		if (maxSubscriptionCyclesNumber > 0) {
+			long totalLength =
+				subscriptionCycleLength * maxSubscriptionCyclesNumber;
 
 			String duration = LanguageUtil.format(
 				httpServletRequest, "duration-x", totalLength, false);
 
 			String durationSuffix = _getSuffix(
-				totalLength, period, httpServletRequest);
+				totalLength, subscriptionCyclePeriod, httpServletRequest);
 
 			sb.append(StringPool.SPACE);
 			sb.append(duration);
@@ -135,20 +127,13 @@ public class SubscriptionInfoCPContentContributor
 
 		if (count > 1) {
 			return LanguageUtil.get(
-				httpServletRequest,
-				StringUtil.toLowerCase(period) + CharPool.LOWER_CASE_S);
+				httpServletRequest, period + CharPool.LOWER_CASE_S);
 		}
 
-		return period;
+		return LanguageUtil.get(httpServletRequest, period);
 	}
 
 	@Reference
-	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
-
-	@Reference
 	private JSONFactory _jsonFactory;
-
-	@Reference
-	private Portal _portal;
 
 }
