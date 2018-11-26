@@ -312,9 +312,7 @@
 		<field name="CPInstanceId" type="long" />
 		<field name="commerceOrderItemId" type="long" />
 		<field name="subscriptionCycleLength" type="long" />
-		<field name="subscriptionCyclePeriod" type="String">
-			<validator name="required" />
-		</field>
+		<field name="subscriptionCyclePeriod" type="String" />
 		<field name="maxSubscriptionCyclesNumber" type="long" />
 		<field name="active" type="boolean" />
 		<field name="nextIterationDate" type="Date" />
