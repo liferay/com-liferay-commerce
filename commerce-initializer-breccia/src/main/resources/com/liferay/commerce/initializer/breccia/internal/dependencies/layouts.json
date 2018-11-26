@@ -191,17 +191,6 @@
 						"portletName": "com_liferay_commerce_product_type_virtual_order_content_web_internal_portlet_CommerceVirtualOrderItemContentPortlet"
 					}
 				]
-			},
-			{
-				"layoutTemplateId": "commerce_max_width_1_column",
-				"name": "My Subscriptions",
-				"portlets": [
-					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 0,
-						"portletName": "com_liferay_commerce_product_internal_portlet__CommerceSubscriptionContentPortlet"
-					}
-				]
 			}
 		]
 	},
