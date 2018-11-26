@@ -52,8 +52,9 @@ public class CommerceSubscriptionCycleEntryCreateDateComparator
 		if (_ascending) {
 			return value;
 		}
-
-		return Math.negateExact(value);
+		else {
+			return Math.negateExact(value);
+		}
 	}
 
 	@Override
@@ -61,8 +62,9 @@ public class CommerceSubscriptionCycleEntryCreateDateComparator
 		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
-
-		return ORDER_BY_DESC;
+		else {
+			return ORDER_BY_DESC;
+		}
 	}
 
 	@Override

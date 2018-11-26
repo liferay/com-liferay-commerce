@@ -122,8 +122,9 @@ public class SubscriptionInfoTag extends IncludeTag {
 		if (plural) {
 			return LanguageUtil.get(request, period + CharPool.LOWER_CASE_S);
 		}
-
-		return LanguageUtil.get(request, period);
+		else {
+			return LanguageUtil.get(request, period);
+		}
 	}
 
 	private static final String _PAGE = "/subscription_info/page.jsp";
