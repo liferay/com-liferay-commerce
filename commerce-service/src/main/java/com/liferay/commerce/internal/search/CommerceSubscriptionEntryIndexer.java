@@ -53,13 +53,10 @@ public class CommerceSubscriptionEntryIndexer
 
 	public static final String FIELD_ACTIVE = "active";
 
-	public static final String FIELD_COMMERCE_ORDER_ITEM_ID =
-		"commerceOrderItemId";
-
 	public static final String FIELD_CP_INSTANCE_ID = "CPInstanceId";
 
-	public static final String FIELD_MAX_SUBSCRIPTION_CYCLES =
-		"maxSubscriptionCycles";
+	public static final String FIELD_MAX_SUBSCRIPTION_CYCLES_NUMBER =
+		"maxSubscriptionCyclesNumber";
 
 	public static final String FIELD_SKU = "sku";
 
@@ -80,13 +77,14 @@ public class CommerceSubscriptionEntryIndexer
 				FIELD_ACTIVE, String.valueOf(active), BooleanClauseOccur.MUST);
 		}
 
-		Long maxSubscriptionCycles = (Long)searchContext.getAttribute(
-			FIELD_MAX_SUBSCRIPTION_CYCLES);
+		Long maxSubscriptionCyclesNumber = (Long)searchContext.getAttribute(
+			FIELD_MAX_SUBSCRIPTION_CYCLES_NUMBER);
 
-		if (maxSubscriptionCycles != null) {
+		if (maxSubscriptionCyclesNumber != null) {
 			contextBooleanFilter.addTerm(
-				FIELD_MAX_SUBSCRIPTION_CYCLES,
-				String.valueOf(maxSubscriptionCycles), BooleanClauseOccur.MUST);
+				FIELD_MAX_SUBSCRIPTION_CYCLES_NUMBER,
+				String.valueOf(maxSubscriptionCyclesNumber),
+				BooleanClauseOccur.MUST);
 		}
 	}
 
@@ -98,8 +96,6 @@ public class CommerceSubscriptionEntryIndexer
 
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
 		addSearchLocalizedTerm(searchQuery, searchContext, Field.NAME, false);
-		addSearchTerm(
-			searchQuery, searchContext, FIELD_COMMERCE_ORDER_ITEM_ID, false);
 		addSearchTerm(searchQuery, searchContext, FIELD_CP_INSTANCE_ID, false);
 		addSearchTerm(searchQuery, searchContext, FIELD_SKU, false);
 	}
@@ -131,13 +127,10 @@ public class CommerceSubscriptionEntryIndexer
 
 		document.addKeyword(FIELD_ACTIVE, commerceSubscriptionEntry.isActive());
 		document.addNumber(
-			FIELD_COMMERCE_ORDER_ITEM_ID,
-			commerceOrderItem.getCommerceOrderItemId());
-		document.addNumber(
 			FIELD_CP_INSTANCE_ID, commerceSubscriptionEntry.getCPInstanceId());
 		document.addNumber(
-			FIELD_MAX_SUBSCRIPTION_CYCLES,
-			commerceSubscriptionEntry.getMaxSubscriptionCycles());
+			FIELD_MAX_SUBSCRIPTION_CYCLES_NUMBER,
+			commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber());
 		document.addText(FIELD_SKU, commerceOrderItem.getSku());
 
 		if (_log.isDebugEnabled()) {
@@ -176,11 +169,11 @@ public class CommerceSubscriptionEntryIndexer
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CommerceSubscriptionEntry commerceSubscriptionEntry =
+		CommerceSubscriptionEntry commerceCountry =
 			_commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntry(
 				classPK);
 
-		doReindex(commerceSubscriptionEntry);
+		doReindex(commerceCountry);
 	}
 
 	@Override
