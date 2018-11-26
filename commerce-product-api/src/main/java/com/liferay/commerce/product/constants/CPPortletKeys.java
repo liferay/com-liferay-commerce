@@ -21,11 +21,11 @@ package com.liferay.commerce.product.constants;
 public class CPPortletKeys {
 
 	public static final String COMMERCE_SUBSCRIPTION_CONTENT_WEB =
-		"com_liferay_commerce_subscription_web_internal_portlet_" +
+		"com_liferay_commerce_product_internal_portlet_" +
 			"CommerceSubscriptionContentPortlet";
 
 	public static final String COMMERCE_SUBSCRIPTION_ENTRY =
-		"com_liferay_commerce_subscription_web_internal_portlet_" +
+		"com_liferay_commerce_product_internal_portlet_" +
 			"CommerceSubscriptionEntryPortlet";
 
 	public static final String CP_ASSET_CATEGORIES_NAVIGATION =

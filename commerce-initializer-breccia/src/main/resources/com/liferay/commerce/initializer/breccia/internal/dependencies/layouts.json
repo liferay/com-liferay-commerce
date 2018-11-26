@@ -199,7 +199,7 @@
 					{
 						"layoutColumnId": "column-1",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_commerce_subscription_web_internal_portlet_CommerceSubscriptionContentPortlet"
+						"portletName": "com_liferay_commerce_product_internal_portlet__CommerceSubscriptionContentPortlet"
 					}
 				]
 			}
