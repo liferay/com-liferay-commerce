@@ -33,16 +33,13 @@ public class ProductSubscriptionUpgradeProcess extends UpgradeProcess {
 			"subscriptionEnabled", "BOOLEAN");
 		_addColumn(
 			CPDefinitionImpl.class, CPDefinitionImpl.TABLE_NAME,
-			"subscriptionLength", "INTEGER");
+			"subscriptionCycleLength", "LONG");
 		_addColumn(
 			CPDefinitionImpl.class, CPDefinitionImpl.TABLE_NAME,
-			"subscriptionType", "VARCHAR(75)");
+			"subscriptionCyclePeriod", "VARCHAR(75)");
 		_addColumn(
 			CPDefinitionImpl.class, CPDefinitionImpl.TABLE_NAME,
-			"subscriptionTypeSettings", "TEXT");
-		_addColumn(
-			CPDefinitionImpl.class, CPDefinitionImpl.TABLE_NAME,
-			"maxSubscriptionCycles", "LONG");
+			"maxSubscriptionCyclesNumber", "LONG");
 
 		_addColumn(
 			CPInstanceImpl.class, CPInstanceImpl.TABLE_NAME,
@@ -52,16 +49,13 @@ public class ProductSubscriptionUpgradeProcess extends UpgradeProcess {
 			"subscriptionEnabled", "BOOLEAN");
 		_addColumn(
 			CPInstanceImpl.class, CPInstanceImpl.TABLE_NAME,
-			"subscriptionLength", "INTEGER");
-		_addColumn(
-			CPInstanceImpl.class, CPInstanceImpl.TABLE_NAME, "subscriptionType",
-			"VARCHAR(75)");
+			"subscriptionCycleLength", "LONG");
 		_addColumn(
 			CPInstanceImpl.class, CPInstanceImpl.TABLE_NAME,
-			"subscriptionTypeSettings", "TEXT");
+			"subscriptionCyclePeriod", "VARCHAR(75)");
 		_addColumn(
 			CPInstanceImpl.class, CPInstanceImpl.TABLE_NAME,
-			"maxSubscriptionCycles", "LONG");
+			"maxSubscriptionCyclesNumber", "LONG");
 	}
 
 	private void _addColumn(
