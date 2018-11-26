@@ -127,7 +127,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 							<h4 class="commerce-subscription-info w-100" data-text-cp-instance-subscription-info data-text-cp-instance-subscription-info-show>
 								<c:if test="<%= cpSku != null %>">
-									<liferay-commerce:subscription-info
+									<liferay-commerce-product:subscription-info
 										CPInstanceId="<%= cpSku.getCPInstanceId() %>"
 									/>
 								</c:if>

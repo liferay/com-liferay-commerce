@@ -62,7 +62,7 @@ String quantityInputId = renderResponse.getNamespace() + cpDefinitionId + "Quant
 
 					<c:if test="<%= cpSku != null %>">
 						<span class="commerce-subscription-info">
-							<liferay-commerce:subscription-info
+							<liferay-commerce-product:subscription-info
 								CPInstanceId="<%= cpSku.getCPInstanceId() %>"
 								showDuration="<%= false %>"
 							/>

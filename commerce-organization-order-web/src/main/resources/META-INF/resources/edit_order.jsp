@@ -315,13 +315,14 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 						<%= unitPrice.format(locale) %>
 					</span>
 
-					<span class="commerce-subscription-info">
-						<liferay-commerce:subscription-info
-							commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
-							CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
-							showDuration="<%= false %>"
-						/>
-					</span>
+					<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">
+						<span class="commerce-subscription-info">
+							<liferay-commerce-product:subscription-info
+								CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+								showDuration="<%= false %>"
+							/>
+						</span>
+					</c:if>
 				</div>
 			</c:if>
 		</liferay-ui:search-container-column-text>

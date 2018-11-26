@@ -97,8 +97,6 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 			rowURL.setParameter("redirect", currentURL);
 			rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrderItem.getCommerceOrderId()));
 			rowURL.setParameter("commerceOrderItemId", String.valueOf(commerceOrderItem.getCommerceOrderItemId()));
-
-			CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
 			%>
 
 			<liferay-ui:search-container-column-text
@@ -138,13 +136,14 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 							<%= unitPrice.format(locale) %>
 						</span>
 
-						<span class="commerce-subscription-info">
-							<liferay-commerce:subscription-info
-								commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
-								CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
-								showDuration="<%= false %>"
-							/>
-						</span>
+						<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">
+							<span class="commerce-subscription-info">
+								<liferay-commerce-product:subscription-info
+									CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+									showDuration="<%= false %>"
+								/>
+							</span>
+						</c:if>
 					</div>
 				</c:if>
 			</liferay-ui:search-container-column-text>
