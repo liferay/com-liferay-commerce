@@ -17,6 +17,7 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetLinkConstants;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.exception.CPDefinitionDisplayDateException;
 import com.liferay.commerce.product.exception.CPDefinitionExpirationDateException;
 import com.liferay.commerce.product.exception.CPDefinitionIgnoreSKUCombinationsException;
@@ -72,7 +73,6 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -198,9 +198,8 @@ public class CPDefinitionLocalServiceImpl
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, String defaultSku, boolean subscriptionEnabled,
-			int subscriptionLength, String subscriptionType,
-			UnicodeProperties subscriptionTypeSettingsProperties,
-			long maxSubscriptionCycles, String externalReferenceCode,
+			long subscriptionCycleLength, String subscriptionCyclePeriod,
+			long maxSubscriptionCyclesNumber, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -261,11 +260,10 @@ public class CPDefinitionLocalServiceImpl
 		cpDefinition.setDisplayDate(displayDate);
 		cpDefinition.setExpirationDate(expirationDate);
 		cpDefinition.setSubscriptionEnabled(subscriptionEnabled);
-		cpDefinition.setSubscriptionLength(subscriptionLength);
-		cpDefinition.setSubscriptionType(subscriptionType);
-		cpDefinition.setSubscriptionTypeSettingsProperties(
-			subscriptionTypeSettingsProperties);
-		cpDefinition.setMaxSubscriptionCycles(maxSubscriptionCycles);
+		cpDefinition.setSubscriptionCycleLength(subscriptionCycleLength);
+		cpDefinition.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+		cpDefinition.setMaxSubscriptionCyclesNumber(
+			maxSubscriptionCyclesNumber);
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
 			cpDefinition.setStatus(WorkflowConstants.STATUS_DRAFT);
@@ -330,6 +328,7 @@ public class CPDefinitionLocalServiceImpl
 			user.getUserId(), cpDefinition, serviceContext);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPDefinition addCPDefinition(
 			Map<Locale, String> nameMap,
@@ -395,8 +394,9 @@ public class CPDefinitionLocalServiceImpl
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, defaultSku, false, 0, StringPool.BLANK, null, 0,
-			externalReferenceCode, serviceContext);
+			neverExpire, defaultSku, false, 0,
+			CPConstants.SUBSCRIPTION_CYCLE_DAY, 0, externalReferenceCode,
+			serviceContext);
 	}
 
 	@Override
@@ -1467,9 +1467,8 @@ public class CPDefinitionLocalServiceImpl
 	@Override
 	public CPDefinition updateSubscriptionInfo(
 			long cpDefinitionId, boolean subscriptionEnabled,
-			int subscriptionLength, String subscriptionType,
-			UnicodeProperties subscriptionTypeSettingsProperties,
-			long maxSubscriptionCycles, ServiceContext serviceContext)
+			long subscriptionCycleLength, String subscriptionCyclePeriod,
+			long maxSubscriptionCyclesNumber, ServiceContext serviceContext)
 		throws PortalException {
 
 		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
@@ -1480,11 +1479,10 @@ public class CPDefinitionLocalServiceImpl
 		cpDefinition.setModifiedDate(serviceContext.getModifiedDate(now));
 
 		cpDefinition.setSubscriptionEnabled(subscriptionEnabled);
-		cpDefinition.setSubscriptionLength(subscriptionLength);
-		cpDefinition.setSubscriptionType(subscriptionType);
-		cpDefinition.setSubscriptionTypeSettingsProperties(
-			subscriptionTypeSettingsProperties);
-		cpDefinition.setMaxSubscriptionCycles(maxSubscriptionCycles);
+		cpDefinition.setSubscriptionCycleLength(subscriptionCycleLength);
+		cpDefinition.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+		cpDefinition.setMaxSubscriptionCyclesNumber(
+			maxSubscriptionCyclesNumber);
 
 		return cpDefinitionPersistence.update(cpDefinition);
 	}
