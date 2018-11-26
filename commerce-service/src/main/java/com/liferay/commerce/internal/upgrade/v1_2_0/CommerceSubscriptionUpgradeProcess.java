@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.internal.upgrade.v1_2_0;
 
-import com.liferay.commerce.model.impl.CommerceOrderItemImpl;
 import com.liferay.commerce.model.impl.CommerceSubscriptionCycleEntryImpl;
+import com.liferay.commerce.model.impl.CommerceOrderItemImpl;
 import com.liferay.commerce.model.impl.CommerceSubscriptionEntryImpl;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
@@ -41,7 +41,7 @@ public class CommerceSubscriptionUpgradeProcess extends UpgradeProcess {
 		if (!hasTable(CommerceSubscriptionCycleEntryImpl.TABLE_NAME)) {
 			String template = StringUtil.read(
 				CommerceSubscriptionUpgradeProcess.class.getResourceAsStream(
-					"dependencies/CSubscriptionCycleEntry.sql"));
+					"dependencies/CommerceSubscriptionCycleEntry.sql"));
 
 			runSQLTemplateString(template, false, false);
 		}
