@@ -1,4 +1,6 @@
 import 'clay-icon';
+
+import debounce from 'debounce';
 import Component from 'metal-component';
 import Soy from 'metal-soy';
 
@@ -21,25 +23,6 @@ class Cart extends Component {
 			});
 	}
 
-	debounce(func, wait, immediate) {
-		var timeout;
-		return function() {
-			var context = this, args = arguments;
-			var later = function() {
-				timeout = null;
-				if (!immediate) {
-					func.apply(context, args);
-				}
-			};
-			var callNow = immediate && !timeout;
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-			if (callNow) {
-				func.apply(context, args);
-			}
-		};
-	};
-
 	toggleCart() {
 		return (this.isOpen = !this.isOpen);
 	}
@@ -58,11 +41,11 @@ class Cart extends Component {
 		const normalizedProducts = rawProducts.map(productData => {
 			return Object.assign(
 				{
-					sendUpdateRequest: this.debounce(
+					sendUpdateRequest: debounce(
 						() => this.sendUpdateRequest(productData.id),
 						500
 					),
-					sendDeleteRequest: this.debounce(
+					sendDeleteRequest: debounce(
 						() => this.sendDeleteRequest(productData.id),
 						500
 					)
