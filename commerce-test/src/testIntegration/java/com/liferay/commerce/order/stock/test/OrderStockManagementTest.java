@@ -25,6 +25,7 @@ import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceWarehouseItemLocalService;
 import com.liferay.commerce.shipment.test.util.CommerceShipmentTestUtil;
@@ -64,7 +65,7 @@ public class OrderStockManagementTest {
 	}
 
 	@Test
-	public void testBackOrder() throws Exception {
+	public void testBackorder() throws Exception {
 		frutillaRule.scenario(
 			"A not available product can be added to an order if it is " +
 				"flagged as backorder enabled"
@@ -75,7 +76,6 @@ public class OrderStockManagementTest {
 		).then(
 			"The product will be added even if no stock is available"
 		);
-
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
@@ -304,6 +304,9 @@ public class OrderStockManagementTest {
 	@Inject
 	private CommerceWarehouseItemLocalService
 		_commerceWarehouseItemLocalService;
+
+	@Inject
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@DeleteAfterTestRun
 	private Group _group;
