@@ -924,11 +924,11 @@
 			<finder-column name="CPDefinitionId" />
 		</finder>
 	</entity>
-	<entity local-service="true" name="CommerceSubscriptionCycleEntry" remote-service="true" table="CSubscriptionCycleEntry" uuid="true">
+	<entity local-service="true" name="CommerceSubscriptionCycleEntry" table="CSubscriptionCycleEntry" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
-		<column db-name="CSubscriptionCycleEntryId" name="commerceSubscriptionCycleEntryId" primary="true" type="long" />
+		<column name="commerceSubscriptionCycleEntryId" db-name="CSubscriptionCycleEntryId" primary="true" type="long" />
 
 		<!-- Group instance -->
 
