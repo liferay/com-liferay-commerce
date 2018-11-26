@@ -48,6 +48,38 @@ create table CSubscriptionCycleEntry (
 	renew BOOLEAN
 );
 
+create table CommerceSubscriptionCycleEntry (
+	uuid_ VARCHAR(75) null,
+	commerceSubscriptionCycleEntryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	commerceSubscriptionEntryId LONG,
+	commerceOrderItemId LONG,
+	renew BOOLEAN
+);
+
+create table CommerceSubscriptionEntry (
+	uuid_ VARCHAR(75) null,
+	commerceSubscriptionEntryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	CPInstanceId LONG,
+	commerceOrderItemId LONG,
+	subscriptionCycleLength LONG,
+	subscriptionCyclePeriod VARCHAR(75) null,
+	maxSubscriptionCyclesNumber LONG,
+	active_ BOOLEAN,
+	nextIterationDate DATE null
+);
+
 create table CommerceAddress (
 	commerceAddressId LONG not null primary key,
 	groupId LONG,
@@ -306,24 +338,6 @@ create table CommerceShippingMethod (
 	engineKey VARCHAR(75) null,
 	priority DOUBLE,
 	active_ BOOLEAN
-);
-
-create table CommerceSubscriptionEntry (
-	uuid_ VARCHAR(75) null,
-	commerceSubscriptionEntryId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	CPInstanceId LONG,
-	commerceOrderItemId LONG,
-	subscriptionCycleLength LONG,
-	subscriptionCyclePeriod VARCHAR(75) null,
-	maxSubscriptionCyclesNumber LONG,
-	active_ BOOLEAN,
-	nextIterationDate DATE null
 );
 
 create table CommerceWarehouse (
