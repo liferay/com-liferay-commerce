@@ -71,18 +71,6 @@ CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 		</div>
 	</div>
 
-	<c:if test="<%= cpSku != null %>">
-		<div class="autofit-float autofit-row autofit-row-end product-subscription-info-section">
-			<div class="autofit-col">
-				<span class="product-subscription-info">
-					<liferay-commerce-product:subscription-info
-						CPInstanceId="<%= cpSku.getCPInstanceId() %>"
-					/>
-				</span>
-			</div>
-		</div>
-	</c:if>
-
 	<%
 	String quantityInputId = cpCatalogEntry.getCPDefinitionId() + "_quantity";
 	%>

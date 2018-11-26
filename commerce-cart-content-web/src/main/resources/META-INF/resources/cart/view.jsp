@@ -146,14 +146,8 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 					<liferay-ui:search-container-column-text
 						name="price"
-					>
-						<%= finalPriceMoney.format(locale) %>
-
-						<liferay-commerce-product:subscription-info
-							CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
-							showDuration="<%= false %>"
-						/>
-					</liferay-ui:search-container-column-text>
+						value="<%= finalPriceMoney.format(locale) %>"
+					/>
 
 					<c:if test="<%= commerceCartContentDisplayContext.hasPermission(ActionKeys.UPDATE) %>">
 						<liferay-ui:search-container-column-text>

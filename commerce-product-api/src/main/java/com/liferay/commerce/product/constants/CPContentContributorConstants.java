@@ -30,8 +30,6 @@ public class CPContentContributorConstants {
 
 	public static final String STOCK_QUANTITY_NAME = "stockQuantity";
 
-	public static final String SUBSCRIPTION_INFO = "subscriptionInfo";
-
 	public static final String UNAVAILABLE = "unavailable";
 
 }

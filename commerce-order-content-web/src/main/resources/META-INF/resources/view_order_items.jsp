@@ -93,6 +93,8 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 									name="product"
 								>
 									<div class="description-section">
+										<div class="list-group-text">Brand</div>
+
 										<div class="list-group-title">
 											<%= HtmlUtil.escape(cpDefinition.getName(themeDisplay.getLanguageId())) %>
 										</div>

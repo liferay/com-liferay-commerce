@@ -306,12 +306,6 @@
 	}
 }
 
-.commerce-quantity-container {
-	.form-group {
-		margin-bottom: 0;
-	}
-}
-
 .input-checkbox-wrapper label > .field {
 	margin-right: 0.5rem;
 }
@@ -2037,14 +2031,10 @@
 		padding-bottom: 1rem;
 	}
 
-	.product-detail-price {
+	.commerce-price {
 		border-bottom: 1px solid #CCC;
 		margin-bottom: 1.5rem;
 		padding-bottom: 1rem;
-
-		.commerce-subscription-info:empty {
-			margin-bottom: 0;
-		}
 
 		&:empty {
 			border-bottom-width: 0;
@@ -2660,12 +2650,6 @@ a[type="button"] {
 
 .pagination-results {
 	font-size: $pagination-font-size;
-}
-
-// Search Container
-
-.lfr-price-column {
-	min-width: 200px;
 }
 
 // Table

@@ -105,10 +105,6 @@ public interface CPContentHelper {
 	public String getStockQuantityLabel(HttpServletRequest httpServletRequest)
 		throws Exception;
 
-	public String getSubscriptionInfoLabel(
-			HttpServletRequest httpServletRequest)
-		throws Exception;
-
 	public ResourceURL getViewAttachmentURL(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse);

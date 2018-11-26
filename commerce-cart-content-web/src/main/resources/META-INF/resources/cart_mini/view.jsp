@@ -99,6 +99,8 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 					cssClass="autofit-col-expand"
 				>
 					<div class="description-section">
+						<div class="list-group-text">Brand</div>
+
 						<div class="list-group-title">
 							<a href="<%= commerceCartContentMiniDisplayContext.getCPDefinitionURL(cpDefinition.getCPDefinitionId(), themeDisplay) %>">
 								<%= HtmlUtil.escape(cpDefinition.getName(languageId)) %>
@@ -115,21 +117,8 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 						}
 						%>
 
-						<div class="list-group-subtitle"><liferay-ui:message arguments="<%= HtmlUtil.escape(commerceOrderItem.getSku()) %>" key="sku-x" translateArguments="<%= false %>" /></div>
+						<div class="list-group-subtitle">SKU: <%= HtmlUtil.escape(commerceOrderItem.getSku()) %></div>
 						<div class="list-group-subtitle"><%= HtmlUtil.escape(stringJoiner.toString()) %></div>
-
-						<%
-						CPInstance cpInstance = commerceOrderItem.getCPInstance();
-						%>
-
-						<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">
-							<div class="list-group-subtitle">
-								<liferay-commerce-product:subscription-info
-									CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
-									showDuration="<%= false %>"
-								/>
-							</div>
-						</c:if>
 					</div>
 				</liferay-ui:search-container-column-text>
 

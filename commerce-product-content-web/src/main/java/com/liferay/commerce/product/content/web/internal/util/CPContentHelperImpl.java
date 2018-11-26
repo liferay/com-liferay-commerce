@@ -296,23 +296,6 @@ public class CPContentHelperImpl implements CPContentHelper {
 	}
 
 	@Override
-	public String getSubscriptionInfoLabel(
-			HttpServletRequest httpServletRequest)
-		throws Exception {
-
-		JSONObject subscriptionInfo = (JSONObject)getCPContentContributorValue(
-			CPContentContributorConstants.SUBSCRIPTION_INFO,
-			httpServletRequest);
-
-		if (subscriptionInfo == null) {
-			return StringPool.BLANK;
-		}
-
-		return subscriptionInfo.getString(
-			CPContentContributorConstants.SUBSCRIPTION_INFO);
-	}
-
-	@Override
 	public ResourceURL getViewAttachmentURL(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {

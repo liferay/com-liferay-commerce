@@ -241,21 +241,19 @@ AUI.add(
 
 						var skus = productContent.all('[data-text-cp-instance-sku]');
 						var prices = productContent.all('[data-text-cp-instance-price]');
-						var subscriptionInfo = productContent.all('[data-text-cp-instance-subscription-info]');
 						var availabilities = productContent.all('[data-text-cp-instance-availability]');
 						var availabilityEstimates = productContent.all('[data-text-cp-instance-availability-estimate]');
 						var stockQuantities = productContent.all('[data-text-cp-instance-stock-quantity]');
 						var gtins = productContent.all('[data-text-cp-instance-gtin]');
 						var manufacturerPartNumbers = productContent.all('[data-text-cp-instance-manufacturer-part-number]');
 
-						var skusShow = productContent.all('[data-text-cp-instance-sku-show]').hide();
-						var pricesShow = productContent.all('[data-text-cp-instance-price-show]').hide();
-						var subscriptionInfoShow = productContent.all('[data-text-cp-instance-subscription-info-show]').hide();
-						var availabilitiesShow = productContent.all('[data-text-cp-instance-availability-show]').hide();
-						var availabilityEstimatesShow = productContent.all('[data-text-cp-instance-availability-estimate-show]').hide();
-						var stockQuantitiesShow = productContent.all('[data-text-cp-instance-stock-quantity-show]').hide();
-						var gtinsShow = productContent.all('[data-text-cp-instance-gtin-show]').hide();
-						var manufacturerPartNumbersShow = productContent.all('[data-text-cp-instance-manufacturer-part-number-show]').hide();
+						var skusShow = productContent.all('[data-text-cp-instance-sku-show]');
+						var pricesShow = productContent.all('[data-text-cp-instance-price-show]');
+						var availabilitiesShow = productContent.all('[data-text-cp-instance-availability-show]');
+						var availabilityEstimatesShow = productContent.all('[data-text-cp-instance-availability-estimate-show]');
+						var stockQuantitiesShow = productContent.all('[data-text-cp-instance-stock-quantity-show]');
+						var gtinsShow = productContent.all('[data-text-cp-instance-gtin-show]');
+						var manufacturerPartNumbersShow = productContent.all('[data-text-cp-instance-manufacturer-part-number-show]');
 
 						if (cpInstance.sku) {
 							skus.setHTML(cpInstance.sku);
@@ -265,11 +263,6 @@ AUI.add(
 						if (cpInstance.price) {
 							prices.setHTML(cpInstance.price);
 							pricesShow.show();
-						}
-
-						if (cpInstance.subscriptionInfo) {
-							subscriptionInfo.setHTML(cpInstance.subscriptionInfo);
-							subscriptionInfoShow.show();
 						}
 
 						if (cpInstance.gtin) {

@@ -113,26 +113,16 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 			<div class="product-detail-info">
 				<div class="autofit-float autofit-row product-detail-info-header">
 					<div class="autofit-col autofit-col-expand">
-						<div class="autofit-float autofit-row product-detail-price">
-							<h2 class="commerce-price w-100" data-text-cp-instance-price>
-								<c:if test="<%= cpSku != null %>">
-									<liferay-commerce:price
-										CPDefinitionId="<%= cpDefinitionId %>"
-										CPInstanceId="<%= cpSku.getCPInstanceId() %>"
-										discountLabel="<%= LanguageUtil.get(request, "you-save") %>"
-										promoPriceLabel="<%= LanguageUtil.get(request, "was") %>"
-									/>
-								</c:if>
-							</h2>
-
-							<h4 class="commerce-subscription-info w-100" data-text-cp-instance-subscription-info data-text-cp-instance-subscription-info-show>
-								<c:if test="<%= cpSku != null %>">
-									<liferay-commerce-product:subscription-info
-										CPInstanceId="<%= cpSku.getCPInstanceId() %>"
-									/>
-								</c:if>
-							</h4>
-						</div>
+						<h2 class="commerce-price" data-text-cp-instance-price>
+							<c:if test="<%= cpSku != null %>">
+								<liferay-commerce:price
+									CPDefinitionId="<%= cpDefinitionId %>"
+									CPInstanceId="<%= cpSku.getCPInstanceId() %>"
+									discountLabel="<%= LanguageUtil.get(request, "you-save") %>"
+									promoPriceLabel="<%= LanguageUtil.get(request, "was") %>"
+								/>
+							</c:if>
+						</h2>
 					</div>
 				</div>
 
@@ -239,75 +229,48 @@ List<CPOptionCategory> cpOptionCategories = cpContentHelper.getCPOptionCategorie
 List<CPAttachmentFileEntry> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntries(cpDefinitionId);
 %>
 
-<div class="product-detail-description">
-	<div class="container-fluid container-fluid-max-xl">
-		<ul class="nav nav-underline product-detail-description-tabs" role="tablist">
-			<c:if test="<%= Validator.isNotNull(cpCatalogEntry.getDescription()) %>">
-				<li class="nav-item" role="presentation">
-					<a aria-controls="<portlet:namespace />description" aria-expanded="true" class="active nav-link" data-toggle="tab" href="#<portlet:namespace />description" role="tab">
-						<%= LanguageUtil.get(resourceBundle, "description") %>
-					</a>
-				</li>
-			</c:if>
+	<div class="product-detail-description">
+		<div class="container-fluid container-fluid-max-xl">
+			<ul class="nav nav-underline product-detail-description-tabs" role="tablist">
+				<c:if test="<%= Validator.isNotNull(cpCatalogEntry.getDescription()) %>">
+					<li class="nav-item" role="presentation">
+						<a aria-controls="<portlet:namespace />description" aria-expanded="true" class="active nav-link" data-toggle="tab" href="#<portlet:namespace />description" role="tab">
+							<%= LanguageUtil.get(resourceBundle, "description") %>
+						</a>
+					</li>
+				</c:if>
 
-			<c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
-				<li class="nav-item" role="presentation">
-					<a aria-controls="<portlet:namespace />specifications" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />specifications" role="tab">
-						<%= LanguageUtil.get(resourceBundle, "specifications") %>
-					</a>
-				</li>
-			</c:if>
+				<c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
+					<li class="nav-item" role="presentation">
+						<a aria-controls="<portlet:namespace />specifications" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />specifications" role="tab">
+							<%= LanguageUtil.get(resourceBundle, "specifications") %>
+						</a>
+					</li>
+				</c:if>
 
-			<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
-				<li class="nav-item" role="presentation">
-					<a aria-controls="<portlet:namespace />attachments" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />attachments" role="tab">
-						<%= LanguageUtil.get(resourceBundle, "attachments") %>
-					</a>
-				</li>
-			</c:if>
-		</ul>
+				<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
+					<li class="nav-item" role="presentation">
+						<a aria-controls="<portlet:namespace />attachments" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />attachments" role="tab">
+							<%= LanguageUtil.get(resourceBundle, "attachments") %>
+						</a>
+					</li>
+				</c:if>
+			</ul>
 
-		<div class="tab-content">
-			<c:if test="<%= Validator.isNotNull(cpCatalogEntry.getDescription()) %>">
-				<div class="active fade show tab-pane" id="<portlet:namespace />description">
-					<p><%= cpCatalogEntry.getDescription() %></p>
-				</div>
-			</c:if>
+			<div class="tab-content">
+				<c:if test="<%= Validator.isNotNull(cpCatalogEntry.getDescription()) %>">
+					<div class="active fade show tab-pane" id="<portlet:namespace />description">
+						<p><%= cpCatalogEntry.getDescription() %></p>
+					</div>
+				</c:if>
 
-			<c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
-				<div class="fade tab-pane" id="<portlet:namespace />specifications">
-					<c:if test="<%= !cpDefinitionSpecificationOptionValues.isEmpty() %>">
-						<dl class="autofit-float autofit-row autofit-row-center specification-list">
-
-							<%
-							for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : cpDefinitionSpecificationOptionValues) {
-								CPSpecificationOption cpSpecificationOption = cpDefinitionSpecificationOptionValue.getCPSpecificationOption();
-							%>
-
-								<dt class="autofit-col specification-term">
-									<%= cpSpecificationOption.getTitle(languageId) %>
-								</dt>
-								<dd class="autofit-col specification-desc">
-									<%= cpDefinitionSpecificationOptionValue.getValue(languageId) %>
-								</dd>
-
-							<%
-							}
-							%>
-
-						</dl>
-					</c:if>
-
-					<%
-					for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
-						List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
-					%>
-
-						<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">
+				<c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
+					<div class="fade tab-pane" id="<portlet:namespace />specifications">
+						<c:if test="<%= !cpDefinitionSpecificationOptionValues.isEmpty() %>">
 							<dl class="autofit-float autofit-row autofit-row-center specification-list">
 
 								<%
-								for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : categorizedCPDefinitionSpecificationOptionValues) {
+								for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : cpDefinitionSpecificationOptionValues) {
 									CPSpecificationOption cpSpecificationOption = cpDefinitionSpecificationOptionValue.getCPSpecificationOption();
 								%>
 
@@ -325,55 +288,82 @@ List<CPAttachmentFileEntry> cpAttachmentFileEntries = cpContentHelper.getCPAttac
 							</dl>
 						</c:if>
 
-					<%
-					}
-					%>
-
-				</div>
-			</c:if>
-
-			<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
-				<div class="fade tab-pane" id="<portlet:namespace />attachments">
-					<dl class="autofit-float autofit-row autofit-row-center specification-list">
-
 						<%
-						int attachmentsCount = 0;
-
-						for (CPAttachmentFileEntry curCPAttachmentFileEntry : cpAttachmentFileEntries) {
-							FileEntry fileEntry = curCPAttachmentFileEntry.getFileEntry();
+						for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
+							List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
 						%>
 
-							<dt class="autofit-col specification-term">
-								<%= curCPAttachmentFileEntry.getTitle(themeDisplay.getLanguageId()) %>
-							</dt>
-							<dd class="autofit-col specification-desc">
-								<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" url="<%= cpContentHelper.getDownloadFileEntryURL(fileEntry, themeDisplay) %>" />
-							</dd>
+							<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">
+								<dl class="autofit-float autofit-row autofit-row-center specification-list">
 
-							<%
-							attachmentsCount = attachmentsCount + 1;
+									<%
+									for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : categorizedCPDefinitionSpecificationOptionValues) {
+										CPSpecificationOption cpSpecificationOption = cpDefinitionSpecificationOptionValue.getCPSpecificationOption();
+									%>
 
-							if (attachmentsCount >= 2) {
-							%>
+										<dt class="autofit-col specification-term">
+											<%= cpSpecificationOption.getTitle(languageId) %>
+										</dt>
+										<dd class="autofit-col specification-desc">
+											<%= cpDefinitionSpecificationOptionValue.getValue(languageId) %>
+										</dd>
 
-									<dt class="autofit-col specification-empty specification-term"></dt>
-									<dd class="autofit-col specification-desc specification-empty"></dd>
+									<%
+									}
+									%>
 
-								<%
-								attachmentsCount = 0;
-							}
-							%>
+								</dl>
+							</c:if>
 
 						<%
 						}
 						%>
 
-					</dl>
-				</div>
-			</c:if>
+					</div>
+				</c:if>
+
+				<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
+					<div class="fade tab-pane" id="<portlet:namespace />attachments">
+						<dl class="autofit-float autofit-row autofit-row-center specification-list">
+
+							<%
+							int attachmentsCount = 0;
+
+							for (CPAttachmentFileEntry curCPAttachmentFileEntry : cpAttachmentFileEntries) {
+								FileEntry fileEntry = curCPAttachmentFileEntry.getFileEntry();
+							%>
+
+								<dt class="autofit-col specification-term">
+									<%= curCPAttachmentFileEntry.getTitle(themeDisplay.getLanguageId()) %>
+								</dt>
+								<dd class="autofit-col specification-desc">
+									<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" url="<%= cpContentHelper.getDownloadFileEntryURL(fileEntry, themeDisplay) %>" />
+								</dd>
+
+								<%
+								attachmentsCount = attachmentsCount + 1;
+
+								if (attachmentsCount >= 2) {
+								%>
+
+										<dt class="autofit-col specification-empty specification-term"></dt>
+										<dd class="autofit-col specification-desc specification-empty"></dd>
+
+									<%
+									attachmentsCount = 0;
+								}
+								%>
+
+							<%
+							}
+							%>
+
+						</dl>
+					</div>
+				</c:if>
+			</div>
 		</div>
 	</div>
-</div>
 
 <aui:script>
 	var zoomImage = document.getElementById('<portlet:namespace />zoom-image');

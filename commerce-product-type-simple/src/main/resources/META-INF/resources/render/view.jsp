@@ -67,8 +67,6 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 						<div class="price"><liferay-commerce:price CPDefinitionId="<%= cpDefinitionId %>" CPInstanceId="<%= cpSku.getCPInstanceId() %>" /></div>
 
-						<div class="subscription-info"><liferay-commerce-product:subscription-info CPInstanceId="<%= cpSku.getCPInstanceId() %>" /></div>
-
 						<div class="availability"><%= cpContentHelper.getAvailabilityLabel(request) %></div>
 
 						<div class="availabilityEstimate"><%= cpContentHelper.getAvailabilityEstimateLabel(request) %></div>
@@ -79,8 +77,6 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						<h4 class="sku" data-text-cp-instance-sku=""></h4>
 
 						<div class="price" data-text-cp-instance-price=""></div>
-
-						<div class="subscription-info" data-text-cp-instance-subscription-info="" data-text-cp-instance-subscription-info-show></div>
 
 						<div class="availability" data-text-cp-instance-availability=""></div>
 

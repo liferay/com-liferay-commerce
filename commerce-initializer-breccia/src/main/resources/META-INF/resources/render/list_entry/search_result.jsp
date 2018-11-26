@@ -59,15 +59,6 @@ String quantityInputId = renderResponse.getNamespace() + cpDefinitionId + "Quant
 					<span class="commerce-price">
 						<liferay-commerce:price CPDefinitionId="<%= cpDefinitionId %>" discountLabel="<%= LanguageUtil.get(request, "you-save") %>" />
 					</span>
-
-					<c:if test="<%= cpSku != null %>">
-						<span class="commerce-subscription-info">
-							<liferay-commerce-product:subscription-info
-								CPInstanceId="<%= cpSku.getCPInstanceId() %>"
-								showDuration="<%= false %>"
-							/>
-						</span>
-					</c:if>
 				</div>
 
 				<c:if test="<%= cpCatalogEntry.isIgnoreSKUCombinations() %>">
