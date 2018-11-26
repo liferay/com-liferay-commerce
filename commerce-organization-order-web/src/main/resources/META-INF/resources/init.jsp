@@ -50,6 +50,7 @@ page import="com.liferay.commerce.organization.order.web.internal.portlet.Commer
 page import="com.liferay.commerce.organization.order.web.internal.search.CommerceOrderDisplayTerms" %><%@
 page import="com.liferay.commerce.price.CommerceOrderPrice" %><%@
 page import="com.liferay.commerce.price.CommerceProductPrice" %><%@
+page import="com.liferay.commerce.product.model.CPInstance" %><%@
 page import="com.liferay.frontend.taglib.servlet.taglib.util.AddMenuKeys" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
