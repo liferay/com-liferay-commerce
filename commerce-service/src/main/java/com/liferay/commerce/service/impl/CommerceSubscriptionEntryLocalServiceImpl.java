@@ -16,7 +16,7 @@ package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.exception.CPSubscriptionCPInstanceIdException;
 import com.liferay.commerce.internal.search.CommerceSubscriptionEntryIndexer;
-import com.liferay.commerce.internal.util.CommerceSubscriptionUtil;
+import com.liferay.commerce.internal.util.CPSubscriptionUtil;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
@@ -78,7 +78,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		}
 
 		Date subscriptionNextIterationDate =
-			CommerceSubscriptionUtil.getSubscriptionNextIterationDate(
+			CPSubscriptionUtil.getSubscriptionNextIterationDate(
 				user.getTimeZone(),
 				cpSubscriptionInfo.getSubscriptionCycleLength(),
 				cpSubscriptionInfo.getSubscriptionCyclePeriod());
