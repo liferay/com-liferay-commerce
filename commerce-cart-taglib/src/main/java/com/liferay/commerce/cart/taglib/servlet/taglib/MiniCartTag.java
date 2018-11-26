@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.cart.taglib.servlet.taglib;
 
-import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
@@ -22,9 +21,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.WebKeys;
-
-import java.util.ArrayList;
 
 /**
  * @author Marco Leo
