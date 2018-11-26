@@ -24,7 +24,7 @@ CommerceSubscriptionEntryDisplayContext commerceSubscriptionEntryDisplayContext 
 CommerceSubscriptionEntry commerceSubscriptionEntry = commerceSubscriptionEntryDisplayContext.getCommerceSubscriptionEntry();
 
 long subscriptionCycleLength = BeanParamUtil.getLong(commerceSubscriptionEntry, request, "subscriptionCycleLength");
-String subscriptionCyclePeriod = BeanParamUtil.getString(commerceSubscriptionEntry, request, "subscriptionCyclePeriod", CPConstants.SUBSCRIPTION_CYCLE_DAY);
+String subscriptionCyclePeriod = BeanParamUtil.getString(commerceSubscriptionEntry, request, "subscriptionCyclePeriod");
 long maxSubscriptionCyclesNumber = BeanParamUtil.getLong(commerceSubscriptionEntry, request, "maxSubscriptionCyclesNumber");
 boolean active = BeanParamUtil.getBoolean(commerceSubscriptionEntry, request, "active");
 
@@ -42,7 +42,7 @@ boolean ending = maxSubscriptionCyclesNumber > 0;
 		<aui:fieldset>
 			<aui:model-context bean="<%= commerceSubscriptionEntry %>" model="<%= CommerceSubscriptionEntry.class %>" />
 
-			<aui:select label="cycle-period" name="subscriptionCyclePeriod">
+			<aui:select label="cycle-period" name="subscriptionCyclePeriod" showEmptyOption="<%= true %>">
 
 				<%
 				for (String subscriptionPeriod : CPConstants.SUBSCRIPTION_CYCLES) {
