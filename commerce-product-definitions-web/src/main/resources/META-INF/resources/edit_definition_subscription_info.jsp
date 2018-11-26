@@ -25,10 +25,8 @@ long cpDefinitionId = cpDefinitionsDisplayContext.getCPDefinitionId();
 
 boolean subscriptionEnabled = BeanParamUtil.getBoolean(cpDefinition, request, "subscriptionEnabled", false);
 long subscriptionCycleLength = BeanParamUtil.getLong(cpDefinition, request, "subscriptionCycleLength");
-String subscriptionCyclePeriod = BeanParamUtil.getString(cpDefinition, request, "subscriptionCyclePeriod", CPConstants.SUBSCRIPTION_CYCLE_DAY);
+String subscriptionCyclePeriod = BeanParamUtil.getString(cpDefinition, request, "subscriptionCyclePeriod");
 long maxSubscriptionCyclesNumber = BeanParamUtil.getLong(cpDefinition, request, "maxSubscriptionCyclesNumber");
-
-boolean ending = maxSubscriptionCyclesNumber > 0;
 %>
 
 <portlet:actionURL name="editProductDefinition" var="editProductDefinitionSubscriptionInfoActionURL" />
@@ -45,13 +43,15 @@ boolean ending = maxSubscriptionCyclesNumber > 0;
 			<aui:input checked="<%= subscriptionEnabled %>" label="enable-subscription" name="subscriptionEnabled" type="toggle-switch" value="<%= subscriptionEnabled %>" />
 
 			<div class="<%= subscriptionEnabled ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />subscriptionOptions">
-				<aui:select name="subscriptionCyclePeriod">
+				<aui:input name="subscriptionCycleLength" value="<%= String.valueOf(subscriptionCycleLength) %>" />
+
+				<aui:select name="subscriptionCyclePeriod" showEmptyOption="<%= true %>">
 
 					<%
 					for (String subscriptionPeriod : CPConstants.SUBSCRIPTION_CYCLES) {
 					%>
 
-						<aui:option data-label="<%= LanguageUtil.get(request, subscriptionPeriod) %>" label="<%= subscriptionPeriod %>" selected="<%= subscriptionPeriod.equals(subscriptionCyclePeriod) %>" value="<%= subscriptionPeriod %>" />
+						<aui:option label="<%= subscriptionPeriod %>" selected="<%= subscriptionPeriod.equals(subscriptionCyclePeriod) %>" value="<%= subscriptionPeriod %>" />
 
 					<%
 					}
@@ -59,42 +59,7 @@ boolean ending = maxSubscriptionCyclesNumber > 0;
 
 				</aui:select>
 
-				<div id="<portlet:namespace />cycleLengthContainer">
-					<aui:input name="subscriptionCycleLength" suffix="<%= subscriptionCyclePeriod %>" value="<%= String.valueOf(subscriptionCycleLength) %>">
-						<aui:validator name="digits" />
-						<aui:validator name="min">1</aui:validator>
-					</aui:input>
-				</div>
-
-				<div id="<portlet:namespace />neverEndsContainer">
-					<div class="never-ends-header">
-						<aui:input checked="<%= ending ? false : true %>" name="neverEnds" type="toggle-switch" />
-					</div>
-
-					<%
-					String cssClass = "never-ends-content hide";
-
-					if (ending) {
-						cssClass = "never-ends-content";
-					}
-					%>
-
-					<div class="<%= cssClass %>">
-						<aui:input disabled="<%= ending ? false : true %>" helpMessage="max-subscription-cycles-number-help" label="end-after" name="maxSubscriptionCyclesNumber" suffix='<%= LanguageUtil.get(request, "cycles") %>' value="<%= String.valueOf(maxSubscriptionCyclesNumber) %>">
-							<aui:validator name="digits" />
-
-							<aui:validator errorMessage='<%= LanguageUtil.format(request, "please-enter-a-value-greater-than-or-equal-to-x", 1) %>' name="custom">
-								function(val, fieldNode, ruleValue) {
-									if (AUI.$('#<portlet:namespace />neverEnds')[0].checked) {
-										return true;
-									}
-
-									return (parseInt(val, 10) > 0);
-								}
-							</aui:validator>
-						</aui:input>
-					</div>
-				</div>
+				<aui:input helpMessage="max-subscription-cycles-number-help" name="maxSubscriptionCyclesNumber" value="<%= String.valueOf(maxSubscriptionCyclesNumber) %>" />
 			</div>
 		</aui:fieldset>
 	</aui:fieldset-group>
@@ -108,55 +73,4 @@ boolean ending = maxSubscriptionCyclesNumber > 0;
 
 <aui:script>
 	Liferay.Util.toggleBoxes('<portlet:namespace />subscriptionEnabled', '<portlet:namespace />subscriptionOptions');
-</aui:script>
-
-<aui:script use="aui-base">
-	A.one('#<portlet:namespace />subscriptionCyclePeriod').on(
-		'change',
-		function(event) {
-			var selectedOption = this.one('option:selected');
-
-			A.all('#<portlet:namespace />cycleLengthContainer .input-group-addon').html(selectedOption.getData('label'));
-		}
-	);
-</aui:script>
-
-<aui:script use="liferay-form">
-	A.one('#<portlet:namespace />neverEnds').on(
-	'change',
-		function(event) {
-			var formValidator = Liferay.Form.get('<portlet:namespace />fm').formValidator;
-
-			formValidator.validateField('<portlet:namespace />maxSubscriptionCyclesNumber');
-		}
-	);
-</aui:script>
-
-<aui:script use="aui-toggler">
-	new A.Toggler(
-		{
-			animated: true,
-			content: '#<portlet:namespace />neverEndsContainer .never-ends-content',
-			expanded: <%= ending %>,
-			header: '#<portlet:namespace />neverEndsContainer .never-ends-header',
-			on: {
-				animatingChange: function(event) {
-					var instance = this;
-
-					var expanded = !instance.get('expanded');
-
-					if (expanded) {
-						A.one('#<portlet:namespace />neverEndsContainer .never-ends-content').removeClass('hide');
-
-						A.one('#<portlet:namespace />maxSubscriptionCyclesNumber').attr('disabled', false);
-					}
-					else {
-						A.one('#<portlet:namespace />neverEndsContainer .never-ends-content').addClass('hide');
-
-						A.one('#<portlet:namespace />maxSubscriptionCyclesNumber').attr('disabled', true);
-					}
-				}
-			}
-		}
-	);
 </aui:script>
