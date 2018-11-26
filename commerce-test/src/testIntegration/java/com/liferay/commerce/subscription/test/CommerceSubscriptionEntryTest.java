@@ -273,24 +273,30 @@ public class CommerceSubscriptionEntryTest {
 			cpDefinition.getCPDefinitionId(), cpOption.getCPOptionId(), true,
 			ServiceContextTestUtil.getServiceContext(groupId));
 
-		int cpDefinitionSubscriptionLength = RandomTestUtil.randomInt();
-		String cpDefinitionSubscriptionType = "daily";
-		long cpDefinitionMaxSubscriptionCycles = RandomTestUtil.randomLong();
+		long cpDefinitionSubscriptionCycleLength = RandomTestUtil.randomLong();
+		String cpDefinitionSubscriptionCyclePeriod =
+			RandomTestUtil.randomString();
+		long cpDefinitionMaxSubscriptionCyclesNumber =
+			RandomTestUtil.randomLong();
 
 		if (cpDefinitionSubscriptionEnabled) {
 			cpDefinition.setSubscriptionEnabled(true);
-			cpDefinition.setSubscriptionLength(cpDefinitionSubscriptionLength);
-			cpDefinition.setSubscriptionType(cpDefinitionSubscriptionType);
-			cpDefinition.setMaxSubscriptionCycles(
-				cpDefinitionMaxSubscriptionCycles);
+			cpDefinition.setSubscriptionCycleLength(
+				cpDefinitionSubscriptionCycleLength);
+			cpDefinition.setSubscriptionCyclePeriod(
+				cpDefinitionSubscriptionCyclePeriod);
+			cpDefinition.setMaxSubscriptionCyclesNumber(
+				cpDefinitionMaxSubscriptionCyclesNumber);
 
 			cpDefinition = CPDefinitionLocalServiceUtil.updateCPDefinition(
 				cpDefinition);
 		}
 
-		int cpInstanceSubscriptionLength = RandomTestUtil.randomInt();
-		String cpInstanceSubscriptionType = "daily";
-		long cpInstanceMaxSubscriptionCycles = RandomTestUtil.randomLong();
+		long cpInstanceSubscriptionCycleLength = RandomTestUtil.randomLong();
+		String cpInstanceSubscriptionCyclePeriod =
+			RandomTestUtil.randomString();
+		long cpInstanceMaxSubscriptionCyclesNumber =
+			RandomTestUtil.randomLong();
 
 		CPTestUtil.buildCPInstances(cpDefinition);
 
@@ -308,10 +314,12 @@ public class CommerceSubscriptionEntryTest {
 				cpInstance.setOverrideSubscriptionInfo(true);
 				cpInstance.setSubscriptionEnabled(
 					cpInstanceSubscriptionEnabled);
-				cpInstance.setSubscriptionLength(cpInstanceSubscriptionLength);
-				cpInstance.setSubscriptionType(cpInstanceSubscriptionType);
-				cpInstance.setMaxSubscriptionCycles(
-					cpInstanceMaxSubscriptionCycles);
+				cpInstance.setSubscriptionCycleLength(
+					cpInstanceSubscriptionCycleLength);
+				cpInstance.setSubscriptionCyclePeriod(
+					cpInstanceSubscriptionCyclePeriod);
+				cpInstance.setMaxSubscriptionCyclesNumber(
+					cpInstanceMaxSubscriptionCyclesNumber);
 
 				cpInstance = CPInstanceLocalServiceUtil.updateCPInstance(
 					cpInstance);
@@ -343,24 +351,24 @@ public class CommerceSubscriptionEntryTest {
 				commerceSubscriptionEntries.get(1);
 
 			Assert.assertEquals(
-				cpInstanceSubscriptionLength,
-				commerceSubscriptionEntry1.getSubscriptionLength());
+				cpInstanceSubscriptionCycleLength,
+				commerceSubscriptionEntry1.getSubscriptionCycleLength());
 			Assert.assertEquals(
-				cpInstanceSubscriptionType,
-				commerceSubscriptionEntry1.getSubscriptionType());
+				cpInstanceSubscriptionCyclePeriod,
+				commerceSubscriptionEntry1.getSubscriptionCyclePeriod());
 			Assert.assertEquals(
-				cpInstanceMaxSubscriptionCycles,
-				commerceSubscriptionEntry1.getMaxSubscriptionCycles());
+				cpInstanceMaxSubscriptionCyclesNumber,
+				commerceSubscriptionEntry1.getMaxSubscriptionCyclesNumber());
 
 			Assert.assertEquals(
-				cpDefinitionSubscriptionLength,
-				commerceSubscriptionEntry2.getSubscriptionLength());
+				cpDefinitionSubscriptionCycleLength,
+				commerceSubscriptionEntry2.getSubscriptionCycleLength());
 			Assert.assertEquals(
-				cpDefinitionSubscriptionType,
-				commerceSubscriptionEntry2.getSubscriptionType());
+				cpDefinitionSubscriptionCyclePeriod,
+				commerceSubscriptionEntry2.getSubscriptionCyclePeriod());
 			Assert.assertEquals(
-				cpDefinitionMaxSubscriptionCycles,
-				commerceSubscriptionEntry2.getMaxSubscriptionCycles());
+				cpDefinitionMaxSubscriptionCyclesNumber,
+				commerceSubscriptionEntry2.getMaxSubscriptionCyclesNumber());
 		}
 		else if (!cpDefinitionSubscriptionEnabled &&
 				 !cpInstanceSubscriptionEnabled) {
@@ -379,25 +387,25 @@ public class CommerceSubscriptionEntryTest {
 
 			if (cpInstanceSubscriptionEnabled) {
 				Assert.assertEquals(
-					cpInstanceSubscriptionLength,
-					commerceSubscriptionEntry.getSubscriptionLength());
+					cpInstanceSubscriptionCycleLength,
+					commerceSubscriptionEntry.getSubscriptionCycleLength());
 				Assert.assertEquals(
-					cpInstanceSubscriptionType,
-					commerceSubscriptionEntry.getSubscriptionType());
+					cpInstanceSubscriptionCyclePeriod,
+					commerceSubscriptionEntry.getSubscriptionCyclePeriod());
 				Assert.assertEquals(
-					cpInstanceMaxSubscriptionCycles,
-					commerceSubscriptionEntry.getMaxSubscriptionCycles());
+					cpInstanceMaxSubscriptionCyclesNumber,
+					commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber());
 			}
 			else {
 				Assert.assertEquals(
-					cpDefinitionSubscriptionLength,
-					commerceSubscriptionEntry.getSubscriptionLength());
+					cpDefinitionSubscriptionCycleLength,
+					commerceSubscriptionEntry.getSubscriptionCycleLength());
 				Assert.assertEquals(
-					cpDefinitionSubscriptionType,
-					commerceSubscriptionEntry.getSubscriptionType());
+					cpDefinitionSubscriptionCyclePeriod,
+					commerceSubscriptionEntry.getSubscriptionCyclePeriod());
 				Assert.assertEquals(
-					cpDefinitionMaxSubscriptionCycles,
-					commerceSubscriptionEntry.getMaxSubscriptionCycles());
+					cpDefinitionMaxSubscriptionCyclesNumber,
+					commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber());
 			}
 		}
 	}

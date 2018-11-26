@@ -16,6 +16,7 @@ package com.liferay.commerce.subscription.test.util;
 
 import com.liferay.commerce.internal.test.util.CommerceTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
@@ -28,7 +29,7 @@ import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 public class CommerceSubscriptionEntryTestUtil {
 
 	public static void setUpCommerceSubscriptionEntry(
-			long groupId, long userId, long maxSubscriptionCycles,
+			long groupId, long userId, long maxSubscriptionCyclesNumber,
 			CommerceSubscriptionEntryHelper commerceSubscriptionEntryHelper)
 		throws Exception {
 
@@ -36,9 +37,10 @@ public class CommerceSubscriptionEntryTestUtil {
 
 		cpInstance.setOverrideSubscriptionInfo(true);
 		cpInstance.setSubscriptionEnabled(true);
-		cpInstance.setSubscriptionLength(1);
-		cpInstance.setSubscriptionType("daily");
-		cpInstance.setMaxSubscriptionCycles(maxSubscriptionCycles);
+		cpInstance.setSubscriptionCycleLength(1);
+		cpInstance.setSubscriptionCyclePeriod(
+			CPConstants.SUBSCRIPTION_CYCLE_DAY);
+		cpInstance.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
 
 		cpInstance = CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 
