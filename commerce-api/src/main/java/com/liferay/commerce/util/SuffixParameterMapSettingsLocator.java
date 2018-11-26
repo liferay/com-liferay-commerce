@@ -36,7 +36,7 @@ public class SuffixParameterMapSettingsLocator
 
 		_parameterMap = parameterMap;
 		_parameterNamePrefix = parameterNamePrefix;
-		_parameterNameSuffix = parameterNameSuffix;
+		_parameterNameSuffix = parameterNamePrefix;
 	}
 
 	@Override

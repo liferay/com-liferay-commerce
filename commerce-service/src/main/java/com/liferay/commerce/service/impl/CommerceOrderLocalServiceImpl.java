@@ -40,6 +40,7 @@ import com.liferay.commerce.model.CommercePaymentEngine;
 import com.liferay.commerce.model.CommercePaymentEngineResult;
 import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.model.CommerceShippingMethod;
+import com.liferay.commerce.organization.service.CommerceOrganizationLocalService;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
@@ -1642,6 +1643,9 @@ public class CommerceOrderLocalServiceImpl
 
 	@ServiceReference(type = CommerceOrderPriceCalculation.class)
 	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
+
+	@ServiceReference(type = CommerceOrganizationLocalService.class)
+	private CommerceOrganizationLocalService _commerceOrganizationLocalService;
 
 	@ServiceReference(type = CommercePaymentEngineRegistry.class)
 	private CommercePaymentEngineRegistry _commercePaymentEngineRegistry;
