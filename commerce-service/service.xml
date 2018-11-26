@@ -770,14 +770,11 @@
 
 		<column name="CPInstanceId" type="long" />
 		<column name="commerceOrderItemId" type="long" />
-		<column name="subscriptionLength" type="int" />
-		<column name="subscriptionType" type="String" />
-		<column name="subscriptionTypeSettings" type="String" />
-		<column name="maxSubscriptionCycles" type="long" />
+		<column name="subscriptionCycleLength" type="long" />
+		<column name="subscriptionCyclePeriod" type="String" />
+		<column name="maxSubscriptionCyclesNumber" type="long" />
 		<column name="active" type="boolean" />
-		<column name="lastIterationDate" type="Date" />
 		<column name="nextIterationDate" type="Date" />
-		<column name="startDate" type="Date" />
 
 		<!-- Order -->
 
@@ -999,9 +996,6 @@
 		<exception>CommerceShippingMethodEngineKey</exception>
 		<exception>CommerceShippingMethodName</exception>
 		<exception>CommerceSubscriptionCPInstanceId</exception>
-		<exception>CommerceSubscriptionEntryNextIterationDate</exception>
-		<exception>CommerceSubscriptionEntryStartDate</exception>
-		<exception>CommerceSubscriptionType</exception>
 		<exception>CommerceWarehouseActive</exception>
 		<exception>CommerceWarehouseCommerceRegionId</exception>
 		<exception>CommerceWarehouseName</exception>
