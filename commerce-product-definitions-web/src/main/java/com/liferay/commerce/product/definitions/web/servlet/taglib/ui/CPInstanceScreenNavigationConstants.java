@@ -26,9 +26,6 @@ public class CPInstanceScreenNavigationConstants {
 	public static final String ENTRY_KEY_SHIPPING_OVERRIDE =
 		"shipping-override";
 
-	public static final String ENTRY_KEY_SUBSCRIPTION_OVERRIDE =
-		"subscription-override";
-
 	public static final String SCREEN_NAVIGATION_KEY_CP_INSTANCE_GENERAL =
 		"cp.instance.general";
 
