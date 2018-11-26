@@ -183,11 +183,13 @@ public class CPDefinitionPersistenceTest {
 
 		newCPDefinition.setSubscriptionEnabled(RandomTestUtil.randomBoolean());
 
-		newCPDefinition.setSubscriptionCycleLength(RandomTestUtil.nextLong());
+		newCPDefinition.setSubscriptionLength(RandomTestUtil.nextInt());
 
-		newCPDefinition.setSubscriptionCyclePeriod(RandomTestUtil.randomString());
+		newCPDefinition.setSubscriptionType(RandomTestUtil.randomString());
 
-		newCPDefinition.setMaxSubscriptionCyclesNumber(RandomTestUtil.nextLong());
+		newCPDefinition.setSubscriptionTypeSettings(RandomTestUtil.randomString());
+
+		newCPDefinition.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
 
 		newCPDefinition.setStatus(RandomTestUtil.nextInt());
 
@@ -266,12 +268,14 @@ public class CPDefinitionPersistenceTest {
 			Time.getShortTimestamp(newCPDefinition.getLastPublishDate()));
 		Assert.assertEquals(existingCPDefinition.isSubscriptionEnabled(),
 			newCPDefinition.isSubscriptionEnabled());
-		Assert.assertEquals(existingCPDefinition.getSubscriptionCycleLength(),
-			newCPDefinition.getSubscriptionCycleLength());
-		Assert.assertEquals(existingCPDefinition.getSubscriptionCyclePeriod(),
-			newCPDefinition.getSubscriptionCyclePeriod());
-		Assert.assertEquals(existingCPDefinition.getMaxSubscriptionCyclesNumber(),
-			newCPDefinition.getMaxSubscriptionCyclesNumber());
+		Assert.assertEquals(existingCPDefinition.getSubscriptionLength(),
+			newCPDefinition.getSubscriptionLength());
+		Assert.assertEquals(existingCPDefinition.getSubscriptionType(),
+			newCPDefinition.getSubscriptionType());
+		Assert.assertEquals(existingCPDefinition.getSubscriptionTypeSettings(),
+			newCPDefinition.getSubscriptionTypeSettings());
+		Assert.assertEquals(existingCPDefinition.getMaxSubscriptionCycles(),
+			newCPDefinition.getMaxSubscriptionCycles());
 		Assert.assertEquals(existingCPDefinition.getStatus(),
 			newCPDefinition.getStatus());
 		Assert.assertEquals(existingCPDefinition.getStatusByUserId(),
@@ -399,9 +403,9 @@ public class CPDefinitionPersistenceTest {
 			"telcoOrElectronics", true, "DDMStructureKey", true, "published",
 			true, "displayDate", true, "expirationDate", true,
 			"lastPublishDate", true, "subscriptionEnabled", true,
-			"subscriptionCycleLength", true, "subscriptionCyclePeriod", true,
-			"maxSubscriptionCyclesNumber", true, "status", true,
-			"statusByUserId", true, "statusByUserName", true, "statusDate", true);
+			"subscriptionLength", true, "subscriptionType", true,
+			"maxSubscriptionCycles", true, "status", true, "statusByUserId",
+			true, "statusByUserName", true, "statusDate", true);
 	}
 
 	@Test
@@ -685,11 +689,13 @@ public class CPDefinitionPersistenceTest {
 
 		cpDefinition.setSubscriptionEnabled(RandomTestUtil.randomBoolean());
 
-		cpDefinition.setSubscriptionCycleLength(RandomTestUtil.nextLong());
+		cpDefinition.setSubscriptionLength(RandomTestUtil.nextInt());
 
-		cpDefinition.setSubscriptionCyclePeriod(RandomTestUtil.randomString());
+		cpDefinition.setSubscriptionType(RandomTestUtil.randomString());
 
-		cpDefinition.setMaxSubscriptionCyclesNumber(RandomTestUtil.nextLong());
+		cpDefinition.setSubscriptionTypeSettings(RandomTestUtil.randomString());
+
+		cpDefinition.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
 
 		cpDefinition.setStatus(RandomTestUtil.nextInt());
 
