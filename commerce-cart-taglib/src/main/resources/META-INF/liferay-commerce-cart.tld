@@ -50,6 +50,11 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>mini-cart</name>
+		<tag-class>com.liferay.commerce.cart.taglib.servlet.taglib.MiniCartTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
 		<name>quantity-control</name>
 		<tag-class>com.liferay.commerce.cart.taglib.servlet.taglib.QuantityControlTag</tag-class>
 		<body-content>JSP</body-content>

@@ -1,16 +1,10 @@
 import {Config} from 'metal-state';
-import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
+import Component from 'metal-component';
 import Soy from 'metal-soy';
 
 import templates from './AddToCart.soy';
 
-/**
- * It opens a dialog where the user can flag the page.
- * @abstract
- * @extends {PortletBase}
- */
-
-class AddToCart extends PortletBase {
+class AddToCart extends Component {
 
 	created() {
 		Liferay.on(this.cpDefinitionId + 'CPInstance:change', this._instanceChange.bind(this));
