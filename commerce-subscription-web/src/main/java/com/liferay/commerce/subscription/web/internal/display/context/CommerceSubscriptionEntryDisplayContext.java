@@ -15,8 +15,6 @@
 package com.liferay.commerce.subscription.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
-import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
@@ -25,24 +23,13 @@ import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-
-import java.text.DateFormat;
-import java.text.Format;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -50,7 +37,6 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Luca Pellizzon
- * @author Alessio Antonio Rendina
  */
 public class CommerceSubscriptionEntryDisplayContext {
 
@@ -65,24 +51,12 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 		_cpRequestHelper = new CPRequestHelper(_httpServletRequest);
 
-		_themeDisplay = _cpRequestHelper.getThemeDisplay();
-
-		_commerceOrderDateFormatDateTime =
-			FastDateFormatFactoryUtil.getDateTime(
-				DateFormat.MEDIUM, DateFormat.MEDIUM, _themeDisplay.getLocale(),
-				_themeDisplay.getTimeZone());
-
 		_portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			_httpServletRequest);
 
 		_portalPreferenceNamespace = CommerceSubscriptionEntry.class.getName();
 
 		_rowChecker = getRowChecker();
-	}
-
-	public String getCommerceOrderDateTime(CommerceOrder commerceOrder) {
-		return _commerceOrderDateFormatDateTime.format(
-			commerceOrder.getCreateDate());
 	}
 
 	public CommerceSubscriptionEntry getCommerceSubscriptionEntry()
@@ -113,83 +87,6 @@ public class CommerceSubscriptionEntryDisplayContext {
 		}
 
 		return 0;
-	}
-
-	public SearchContainer<CommerceOrder>
-			getCommerceSubscriptionEntryOrderSearchContainer()
-		throws PortalException {
-
-		_commerceSubscripionentryOrderSearchContainer = new SearchContainer<>(
-			_cpRequestHelper.getLiferayPortletRequest(), getPortletURL(), null,
-			"there-are-no-orders");
-
-		List<CommerceOrder> commerceOrders = new ArrayList<>();
-
-		CommerceSubscriptionEntry commerceSubscriptionEntry =
-			getCommerceSubscriptionEntry();
-
-		List<CommerceSubscriptionCycleEntry> commerceSubscriptionCycleEntries =
-			commerceSubscriptionEntry.getCommerceSubscriptionCycleEntries();
-
-		for (CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry :
-				commerceSubscriptionCycleEntries) {
-
-			commerceOrders.add(
-				commerceSubscriptionCycleEntry.getCommerceOrder());
-		}
-
-		int total = commerceOrders.size();
-
-		_commerceSubscripionentryOrderSearchContainer.setTotal(total);
-
-		int fromIndex =
-			_commerceSubscripionentryOrderSearchContainer.getStart();
-
-		int toIndex = _commerceSubscripionentryOrderSearchContainer.getEnd();
-
-		if (total < toIndex) {
-			toIndex = total;
-		}
-
-		_commerceSubscripionentryOrderSearchContainer.setResults(
-			commerceOrders.subList(fromIndex, toIndex));
-
-		return _commerceSubscripionentryOrderSearchContainer;
-	}
-
-	public String getCommerceSubscriptionEntryRemainingCycles(
-		CommerceSubscriptionEntry commerceSubscriptionEntry) {
-
-		long maxSubscriptionCyclesNumber =
-			commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber();
-
-		if (maxSubscriptionCyclesNumber == 0) {
-			return LanguageUtil.get(_httpServletRequest, "unlimited");
-		}
-
-		int commerceSubscriptionCycleEntriesCount =
-			commerceSubscriptionEntry.
-				getCommerceSubscriptionCycleEntriesCount();
-
-		long remainingCycles =
-			maxSubscriptionCyclesNumber - commerceSubscriptionCycleEntriesCount;
-
-		return String.valueOf(remainingCycles);
-	}
-
-	public String getEditCommerceOrderURL(long commerceOrderId)
-		throws PortalException {
-
-		PortletURL portletURL = PortletProviderUtil.getPortletURL(
-			_httpServletRequest, _themeDisplay.getScopeGroup(),
-			CommerceOrder.class.getName(), PortletProvider.Action.VIEW);
-
-		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
-		portletURL.setParameter("redirect", _themeDisplay.getURLCurrent());
-		portletURL.setParameter(
-			"commerceOrderId", String.valueOf(commerceOrderId));
-
-		return portletURL.toString();
 	}
 
 	public String getKeywords() {
@@ -321,7 +218,6 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 		Boolean active = null;
 		String emptyResultsMessage = "there-are-no-subscriptions";
-		Long maxSubscriptionCyclesNumber = null;
 
 		String navigation = getNavigation();
 
@@ -332,10 +228,6 @@ public class CommerceSubscriptionEntryDisplayContext {
 		else if (navigation.equals("inactive")) {
 			active = Boolean.FALSE;
 			emptyResultsMessage = "there-are-no-inactive-subscriptions";
-		}
-		else if (navigation.equals("never-ends")) {
-			emptyResultsMessage = "there-are-no-unlimited-subscriptions";
-			maxSubscriptionCyclesNumber = 0L;
 		}
 
 		_searchContainer = new SearchContainer<>(
@@ -353,9 +245,9 @@ public class CommerceSubscriptionEntryDisplayContext {
 				_commerceSubscriptionEntryService.
 					getCommerceSubscriptionEntries(
 						_cpRequestHelper.getCompanyId(),
-						_cpRequestHelper.getScopeGroupId(),
-						maxSubscriptionCyclesNumber, active, getKeywords(),
-						_searchContainer.getStart(), _searchContainer.getEnd(),
+						_cpRequestHelper.getScopeGroupId(), active,
+						getKeywords(), _searchContainer.getStart(),
+						_searchContainer.getEnd(),
 						CommerceSubscriptionEntryPortletUtil.
 							getCommerceSubscriptionEntrySort(
 								orderByCol, orderByType));
@@ -381,9 +273,6 @@ public class CommerceSubscriptionEntryDisplayContext {
 		return ParamUtil.getString(_httpServletRequest, "navigation", "all");
 	}
 
-	private final Format _commerceOrderDateFormatDateTime;
-	private SearchContainer<CommerceOrder>
-		_commerceSubscripionentryOrderSearchContainer;
 	private CommerceSubscriptionEntry _commerceSubscriptionEntry;
 	private final CommerceSubscriptionEntryService
 		_commerceSubscriptionEntryService;
@@ -397,6 +286,5 @@ public class CommerceSubscriptionEntryDisplayContext {
 	private final PortletResourcePermission _portletResourcePermission;
 	private RowChecker _rowChecker;
 	private SearchContainer<CommerceSubscriptionEntry> _searchContainer;
-	private final ThemeDisplay _themeDisplay;
 
 }
