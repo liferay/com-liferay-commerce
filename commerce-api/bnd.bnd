@@ -15,7 +15,6 @@ Export-Package:\
 	com.liferay.commerce.service.persistence,\
 	com.liferay.commerce.starter,\
 	com.liferay.commerce.stock.activity,\
-	com.liferay.commerce.subscription,\
 	com.liferay.commerce.tax,\
 	com.liferay.commerce.util,\
 	com.liferay.commerce.util.comparator
