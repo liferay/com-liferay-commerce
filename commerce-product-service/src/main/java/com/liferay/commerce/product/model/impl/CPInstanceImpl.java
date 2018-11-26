@@ -17,14 +17,12 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Marco Leo
  * @author Andrea Di Giorgi
- * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CPInstanceImpl extends CPInstanceBaseImpl {
@@ -36,27 +34,6 @@ public class CPInstanceImpl extends CPInstanceBaseImpl {
 	public CPDefinition getCPDefinition() throws PortalException {
 		return CPDefinitionLocalServiceUtil.getCPDefinition(
 			getCPDefinitionId());
-	}
-
-	@Override
-	public CPSubscriptionInfo getCPSubscriptionInfo() throws PortalException {
-		if (isOverrideSubscriptionInfo() && isSubscriptionEnabled()) {
-			return new CPSubscriptionInfo(
-				getSubscriptionCycleLength(), getSubscriptionCyclePeriod(),
-				getMaxSubscriptionCyclesNumber());
-		}
-		else if (!isOverrideSubscriptionInfo()) {
-			CPDefinition cpDefinition = getCPDefinition();
-
-			if (cpDefinition.isSubscriptionEnabled()) {
-				return new CPSubscriptionInfo(
-					cpDefinition.getSubscriptionCycleLength(),
-					cpDefinition.getSubscriptionCyclePeriod(),
-					cpDefinition.getMaxSubscriptionCyclesNumber());
-			}
-		}
-
-		return null;
 	}
 
 }
