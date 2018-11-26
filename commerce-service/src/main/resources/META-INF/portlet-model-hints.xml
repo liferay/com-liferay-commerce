@@ -311,18 +311,13 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="CPInstanceId" type="long" />
 		<field name="commerceOrderItemId" type="long" />
-		<field name="subscriptionLength" type="int" />
-		<field name="subscriptionType" type="String">
+		<field name="subscriptionCycleLength" type="long" />
+		<field name="subscriptionCyclePeriod" type="String">
 			<validator name="required" />
 		</field>
-		<field name="subscriptionTypeSettings" type="String">
-			<hint-collection name="CLOB" />
-		</field>
-		<field name="maxSubscriptionCycles" type="long" />
+		<field name="maxSubscriptionCyclesNumber" type="long" />
 		<field name="active" type="boolean" />
-		<field name="lastIterationDate" type="Date" />
 		<field name="nextIterationDate" type="Date" />
-		<field name="startDate" type="Date" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceWarehouse">
 		<field name="commerceWarehouseId" type="long" />
