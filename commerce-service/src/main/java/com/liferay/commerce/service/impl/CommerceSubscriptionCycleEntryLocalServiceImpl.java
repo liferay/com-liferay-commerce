@@ -85,8 +85,8 @@ public class CommerceSubscriptionCycleEntryLocalServiceImpl
 		fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
 			long commerceOrderItemId) {
 
-		return commerceSubscriptionCycleEntryPersistence.
-			fetchByCommerceOrderItemId(commerceOrderItemId);
+		return commerceSubscriptionCycleEntryPersistence.fetchByCommerceOrderItemId(
+			commerceOrderItemId);
 	}
 
 	@Override

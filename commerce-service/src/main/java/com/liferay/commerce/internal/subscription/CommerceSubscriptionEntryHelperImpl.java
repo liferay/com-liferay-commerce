@@ -154,10 +154,9 @@ public class CommerceSubscriptionEntryHelperImpl
 
 		// Add CommerceSubscriptionCycleEntry
 
-		_commerceSubscriptionCycleEntryLocalService.
-			addCommerceSubscriptionCycleEntry(
-				commerceSubscriptionEntry.getCommerceSubscriptionEntryId(),
-				newCommerceOrderItemId, true);
+		_commerceSubscriptionCycleEntryLocalService.addCommerceSubscriptionCycleEntry(
+			commerceSubscriptionEntry.getCommerceSubscriptionEntryId(),
+			newCommerceOrderItemId, true);
 
 		return newOrder;
 	}

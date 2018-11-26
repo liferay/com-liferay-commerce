@@ -45,7 +45,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import javax.portlet.PortletRequest;
@@ -197,11 +196,9 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 		Stream<CommercePriceListUserSegmentEntryRel> stream =
 			commercePriceListUserSegmentEntryRels.stream();
 
-		LongStream longStream = stream.mapToLong(
-			CommercePriceListUserSegmentEntryRel::
-				getCommerceUserSegmentEntryId);
-
-		long[] commerceUserSegmentEntryIds = longStream.toArray();
+		long[] commerceUserSegmentEntryIds = stream.mapToLong(
+			CommercePriceListUserSegmentEntryRel::getCommerceUserSegmentEntryId
+		).toArray();
 
 		document.addNumber(
 			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);

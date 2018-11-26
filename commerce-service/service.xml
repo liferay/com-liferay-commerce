@@ -706,48 +706,6 @@
 
 		<reference entity="Image" package-path="com.liferay.portal" />
 	</entity>
-	<entity local-service="true" name="CommerceSubscriptionCycleEntry" remote-service="true" table="CSubscriptionCycleEntry" uuid="true">
-
-		<!-- PK fields -->
-
-		<column db-name="CSubscriptionCycleEntryId" name="commerceSubscriptionCycleEntryId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="commerceSubscriptionEntryId" type="long" />
-		<column name="commerceOrderItemId" type="long" />
-		<column name="renew" type="boolean" />
-
-		<!-- Order -->
-
-		<order by="desc">
-			<order-column name="createDate" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
-		<finder name="commerceSubscriptionEntryId" return-type="Collection">
-			<finder-column name="commerceSubscriptionEntryId" />
-		</finder>
-		<finder name="CommerceOrderItemId" return-type="CommerceSubscriptionCycleEntry" unique="true">
-			<finder-column name="commerceOrderItemId" />
-		</finder>
-	</entity>
 	<entity local-service="true" name="CommerceSubscriptionEntry" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
@@ -964,6 +922,48 @@
 
 		<finder name="CPDefinitionId" return-type="CPDefinitionInventory" unique="true">
 			<finder-column name="CPDefinitionId" />
+		</finder>
+	</entity>
+	<entity local-service="true" name="CommerceSubscriptionCycleEntry" remote-service="true" table="CSubscriptionCycleEntry" uuid="true">
+
+		<!-- PK fields -->
+
+		<column db-name="CSubscriptionCycleEntryId" name="commerceSubscriptionCycleEntryId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="commerceSubscriptionEntryId" type="long" />
+		<column name="commerceOrderItemId" type="long" />
+		<column name="renew" type="boolean" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="commerceSubscriptionEntryId" return-type="Collection">
+			<finder-column name="commerceSubscriptionEntryId" />
+		</finder>
+		<finder name="CommerceOrderItemId" return-type="CommerceSubscriptionCycleEntry" unique="true">
+			<finder-column name="commerceOrderItemId" />
 		</finder>
 	</entity>
 	<exceptions>

@@ -59,7 +59,7 @@ import java.util.Collections;
  */
 public class CommerceTestUtil {
 
-	public static CPDefinitionInventory addBackOrderCPDefinitionInventory(
+	public static CPDefinitionInventory addBackorderCPDefinitionInventory(
 			CPDefinition cpDefinition)
 		throws PortalException {
 
