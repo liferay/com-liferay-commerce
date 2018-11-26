@@ -22,32 +22,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 CommerceSubscriptionEntryDisplayContext commerceSubscriptionEntryDisplayContext = (CommerceSubscriptionEntryDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceSubscriptionEntry commerceSubscriptionEntry = commerceSubscriptionEntryDisplayContext.getCommerceSubscriptionEntry();
-List<CPSubscriptionType> cpSubscriptionTypes = commerceSubscriptionEntryDisplayContext.getCPSubscriptionTypes();
 
-String defaultCPSubscriptionType = StringPool.BLANK;
-
-if (!cpSubscriptionTypes.isEmpty()) {
-	CPSubscriptionType firstCPSubscriptionType = cpSubscriptionTypes.get(0);
-
-	defaultCPSubscriptionType = firstCPSubscriptionType.getName();
-}
-
-int subscriptionLength = BeanParamUtil.getInteger(commerceSubscriptionEntry, request, "subscriptionLength");
-String subscriptionType = BeanParamUtil.getString(commerceSubscriptionEntry, request, "subscriptionType", defaultCPSubscriptionType);
-long maxSubscriptionCycles = BeanParamUtil.getLong(commerceSubscriptionEntry, request, "maxSubscriptionCycles");
+long subscriptionCycleLength = BeanParamUtil.getLong(commerceSubscriptionEntry, request, "subscriptionCycleLength");
+String subscriptionCyclePeriod = BeanParamUtil.getString(commerceSubscriptionEntry, request, "subscriptionCyclePeriod", CPConstants.SUBSCRIPTION_CYCLE_DAY);
+long maxSubscriptionCyclesNumber = BeanParamUtil.getLong(commerceSubscriptionEntry, request, "maxSubscriptionCyclesNumber");
 boolean active = BeanParamUtil.getBoolean(commerceSubscriptionEntry, request, "active");
 
-String defaultCPSubscriptionTypeLabel = StringPool.BLANK;
-
-CPSubscriptionType cpSubscriptionType = commerceSubscriptionEntryDisplayContext.getCPSubscriptionType(subscriptionType);
-
-if (cpSubscriptionType != null) {
-	defaultCPSubscriptionTypeLabel = cpSubscriptionType.getLabel(locale);
-}
-
-CPSubscriptionTypeJSPContributor cpSubscriptionTypeJSPContributor = commerceSubscriptionEntryDisplayContext.getCPSubscriptionTypeJSPContributor(subscriptionType);
-
-boolean ending = maxSubscriptionCycles > 0;
+boolean ending = maxSubscriptionCyclesNumber > 0;
 %>
 
 <portlet:actionURL name="editCommerceSubscriptionEntry" var="editCommerceSubscriptionEntryActionURL" />
@@ -61,13 +42,13 @@ boolean ending = maxSubscriptionCycles > 0;
 		<aui:fieldset>
 			<aui:model-context bean="<%= commerceSubscriptionEntry %>" model="<%= CommerceSubscriptionEntry.class %>" />
 
-			<aui:select name="subscriptionType" onChange='<%= renderResponse.getNamespace() + "selectSubscriptionType();" %>'>
+			<aui:select label="cycle-period" name="subscriptionCyclePeriod">
 
 				<%
-				for (CPSubscriptionType curCPSubscriptionType : cpSubscriptionTypes) {
+				for (String subscriptionPeriod : CPConstants.SUBSCRIPTION_CYCLES) {
 				%>
 
-					<aui:option data-label="<%= curCPSubscriptionType.getLabel(locale) %>" label="<%= curCPSubscriptionType.getLabel(locale) %>" selected="<%= subscriptionType.equals(curCPSubscriptionType.getName()) %>" value="<%= curCPSubscriptionType.getName() %>" />
+					<aui:option data-label="<%= LanguageUtil.get(request, subscriptionPeriod) %>" label="<%= subscriptionPeriod %>" selected="<%= subscriptionPeriod.equals(subscriptionCyclePeriod) %>" value="<%= subscriptionPeriod %>" />
 
 				<%
 				}
@@ -75,14 +56,8 @@ boolean ending = maxSubscriptionCycles > 0;
 
 			</aui:select>
 
-			<%
-			if (cpSubscriptionTypeJSPContributor != null) {
-				cpSubscriptionTypeJSPContributor.render(commerceSubscriptionEntry, request, response);
-			}
-			%>
-
 			<div id="<portlet:namespace />cycleLengthContainer">
-				<aui:input name="subscriptionLength" suffix="<%= defaultCPSubscriptionTypeLabel %>" value="<%= String.valueOf(subscriptionLength) %>">
+				<aui:input autoFocus="<%= true %>" label="cycle-length" name="subscriptionCycleLength" suffix="<%= subscriptionCyclePeriod %>" value="<%= String.valueOf(subscriptionCycleLength) %>">
 					<aui:validator name="digits" />
 					<aui:validator name="min">1</aui:validator>
 				</aui:input>
@@ -102,7 +77,7 @@ boolean ending = maxSubscriptionCycles > 0;
 				%>
 
 				<div class="<%= cssClass %>">
-					<aui:input disabled="<%= ending ? false : true %>" helpMessage="max-subscription-cycles-help" label="end-after" name="maxSubscriptionCycles" suffix='<%= LanguageUtil.get(request, "cycles") %>' value="<%= String.valueOf(maxSubscriptionCycles) %>">
+					<aui:input disabled="<%= ending ? false : true %>" helpMessage="max-subscription-cycles-number-help" label="end-after" name="maxSubscriptionCyclesNumber" suffix='<%= LanguageUtil.get(request, "cycles") %>' value="<%= String.valueOf(maxSubscriptionCyclesNumber) %>">
 						<aui:validator name="digits" />
 
 						<aui:validator errorMessage='<%= LanguageUtil.format(request, "please-enter-a-value-greater-than-or-equal-to-x", 1) %>' name="custom">
@@ -119,10 +94,6 @@ boolean ending = maxSubscriptionCycles > 0;
 			</div>
 
 			<aui:input checked="<%= active %>" name="active" type="toggle-switch" />
-
-			<aui:input name="startDate" />
-
-			<aui:input name="nextIterationDate" />
 		</aui:fieldset>
 	</aui:fieldset-group>
 
@@ -133,28 +104,14 @@ boolean ending = maxSubscriptionCycles > 0;
 	</aui:button-row>
 </aui:form>
 
-<aui:script>
-	Liferay.provide(
-		window,
-		'<portlet:namespace />selectSubscriptionType',
-		function() {
-			var A = AUI();
+<aui:script use="aui-base">
+	A.one('#<portlet:namespace />subscriptionCyclePeriod').on(
+		'change',
+		function(event) {
+			var selectedOption = this.one('option:selected');
 
-			var subscriptionLength = A.one('#<portlet:namespace />subscriptionLength').val();
-			var subscriptionType = A.one('#<portlet:namespace />subscriptionType').val();
-			var maxSubscriptionCycles = A.one('#<portlet:namespace />maxSubscriptionCycles').val();
-			var active = A.one('#<portlet:namespace />active').attr('checked');
-
-			var portletURL = new Liferay.PortletURL.createURL('<%= currentURLObj %>');
-
-			portletURL.setParameter('subscriptionLength', subscriptionLength);
-			portletURL.setParameter('subscriptionType', subscriptionType);
-			portletURL.setParameter('maxSubscriptionCycles', maxSubscriptionCycles);
-			portletURL.setParameter('active', active);
-
-			window.location.replace(portletURL.toString());
-		},
-		['liferay-portlet-url']
+			A.all('#<portlet:namespace />cycleLengthContainer .input-group-addon').html(selectedOption.getData('label'));
+		}
 	);
 </aui:script>
 
@@ -164,7 +121,7 @@ boolean ending = maxSubscriptionCycles > 0;
 		function(event) {
 			var formValidator = Liferay.Form.get('<portlet:namespace />fm').formValidator;
 
-			formValidator.validateField('<portlet:namespace />maxSubscriptionCycles');
+			formValidator.validateField('<portlet:namespace />maxSubscriptionCyclesNumber');
 		}
 	);
 </aui:script>
@@ -185,12 +142,12 @@ boolean ending = maxSubscriptionCycles > 0;
 					if (expanded) {
 						A.one('#<portlet:namespace />neverEndsContainer .never-ends-content').removeClass('hide');
 
-						A.one('#<portlet:namespace />maxSubscriptionCycles').attr('disabled', false);
+						A.one('#<portlet:namespace />maxSubscriptionCyclesNumber').attr('disabled', false);
 					}
 					else {
 						A.one('#<portlet:namespace />neverEndsContainer .never-ends-content').addClass('hide');
 
-						A.one('#<portlet:namespace />maxSubscriptionCycles').attr('disabled', true);
+						A.one('#<portlet:namespace />maxSubscriptionCyclesNumber').attr('disabled', true);
 					}
 				}
 			}
