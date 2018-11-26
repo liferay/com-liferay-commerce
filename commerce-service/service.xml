@@ -706,53 +706,6 @@
 
 		<reference entity="Image" package-path="com.liferay.portal" />
 	</entity>
-	<entity local-service="true" name="CommerceSubscriptionEntry" remote-service="true" uuid="true">
-
-		<!-- PK fields -->
-
-		<column name="commerceSubscriptionEntryId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="CPInstanceId" type="long" />
-		<column name="commerceOrderItemId" type="long" />
-		<column name="subscriptionCycleLength" type="long" />
-		<column name="subscriptionCyclePeriod" type="String" />
-		<column name="maxSubscriptionCyclesNumber" type="long" />
-		<column name="active" type="boolean" />
-		<column name="nextIterationDate" type="Date" />
-
-		<!-- Order -->
-
-		<order by="desc">
-			<order-column name="createDate" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
-		<finder name="active" return-type="Collection">
-			<finder-column name="active" />
-		</finder>
-		<finder name="G_U" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="userId" />
-		</finder>
-	</entity>
 	<entity local-service="true" name="CommerceWarehouse" remote-service="true">
 
 		<!-- PK fields -->
