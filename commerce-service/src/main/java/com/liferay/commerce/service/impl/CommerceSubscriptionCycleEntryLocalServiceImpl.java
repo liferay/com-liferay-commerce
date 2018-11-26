@@ -66,24 +66,16 @@ public class CommerceSubscriptionCycleEntryLocalServiceImpl
 		commerceSubscriptionCycleEntryPersistence.update(
 			commerceSubscriptionCycleEntry);
 
-		// Commerce subscription entry
-
-		if (renew) {
-			commerceSubscriptionEntryLocalService.
-				updateCommerceSubscriptionEntryIterationDates(
-					commerceSubscriptionEntryId,
-					commerceSubscriptionCycleEntry.getCreateDate());
-		}
-		else {
-			reindexCommerceSubscriptionEntry(commerceSubscriptionEntryId);
-		}
-
 		// Send commerce notifications
 
 		_commerceNotificationHelper.sendNotifications(
 			commerceSubscriptionCycleEntry.getGroupId(),
 			SubscriptionRenewedCommerceNotificationTypeImpl.KEY,
 			commerceSubscriptionCycleEntry);
+
+		// Commerce product subscription entry
+
+		reindexCommerceSubscriptionEntry(commerceSubscriptionEntryId);
 
 		return commerceSubscriptionCycleEntry;
 	}
