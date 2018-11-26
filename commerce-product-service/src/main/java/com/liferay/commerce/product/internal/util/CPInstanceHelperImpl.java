@@ -640,6 +640,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			field -> {
 				return String.format(
 					outputMappingStatement, field.getName(), field.getName());
+
 			});
 
 		return stringStream.collect(Collectors.joining(StringPool.SEMICOLON));
