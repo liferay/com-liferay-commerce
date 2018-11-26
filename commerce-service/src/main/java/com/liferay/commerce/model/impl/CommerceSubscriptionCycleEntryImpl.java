@@ -16,10 +16,7 @@ package com.liferay.commerce.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
-import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -33,20 +30,6 @@ public class CommerceSubscriptionCycleEntryImpl
 	public CommerceSubscriptionCycleEntryImpl() {
 	}
 
-	@Override
-	public CommerceOrder getCommerceOrder() throws PortalException {
-		CommerceOrderItem commerceOrderItem = getCommerceOrderItem();
-
-		return commerceOrderItem.getCommerceOrder();
-	}
-
-	@Override
-	public CommerceOrderItem getCommerceOrderItem() throws PortalException {
-		return CommerceOrderItemLocalServiceUtil.getCommerceOrderItem(
-			getCommerceOrderItemId());
-	}
-
-	@Override
 	public CommerceSubscriptionEntry getCommerceSubscriptionEntry()
 		throws PortalException {
 

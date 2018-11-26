@@ -17,15 +17,11 @@ package com.liferay.commerce.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
-import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-
-import java.util.List;
 
 /**
  * @author Alessio Antonio Rendina
@@ -41,22 +37,6 @@ public class CommerceSubscriptionEntryImpl
 	public CommerceOrderItem getCommerceOrderItem() throws PortalException {
 		return CommerceOrderItemLocalServiceUtil.getCommerceOrderItem(
 			getCommerceOrderItemId());
-	}
-
-	@Override
-	public List<CommerceSubscriptionCycleEntry>
-		getCommerceSubscriptionCycleEntries() {
-
-		return CommerceSubscriptionCycleEntryLocalServiceUtil.
-			getCommerceSubscriptionCycleEntries(
-				getCommerceSubscriptionEntryId());
-	}
-
-	@Override
-	public int getCommerceSubscriptionCycleEntriesCount() {
-		return CommerceSubscriptionCycleEntryLocalServiceUtil.
-			getCommerceSubscriptionCycleEntriesCount(
-				getCommerceSubscriptionEntryId());
 	}
 
 	@Override
