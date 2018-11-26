@@ -384,22 +384,6 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 	}
 
 	@Override
-	public CPDefinition updateSubscriptionInfo(
-			long cpDefinitionId, boolean subscriptionEnabled,
-			long subscriptionCycleLength, String subscriptionCyclePeriod,
-			long maxSubscriptionCyclesNumber, ServiceContext serviceContext)
-		throws PortalException {
-
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId, ActionKeys.UPDATE);
-
-		return cpDefinitionLocalService.updateSubscriptionInfo(
-			cpDefinitionId, subscriptionEnabled, subscriptionCycleLength,
-			subscriptionCyclePeriod, maxSubscriptionCyclesNumber,
-			serviceContext);
-	}
-
-	@Override
 	public CPDefinition updateTaxCategoryInfo(
 			long cpDefinitionId, long cpTaxCategoryId, boolean taxExempt,
 			boolean telcoOrElectronics)

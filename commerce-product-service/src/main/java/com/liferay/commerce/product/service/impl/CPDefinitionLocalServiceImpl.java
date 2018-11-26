@@ -1419,30 +1419,6 @@ public class CPDefinitionLocalServiceImpl
 		return cpDefinition;
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
-	@Override
-	public CPDefinition updateSubscriptionInfo(
-			long cpDefinitionId, boolean subscriptionEnabled,
-			long subscriptionCycleLength, String subscriptionCyclePeriod,
-			long maxSubscriptionCyclesNumber, ServiceContext serviceContext)
-		throws PortalException {
-
-		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-			cpDefinitionId);
-
-		Date now = new Date();
-
-		cpDefinition.setModifiedDate(serviceContext.getModifiedDate(now));
-
-		cpDefinition.setSubscriptionEnabled(subscriptionEnabled);
-		cpDefinition.setSubscriptionCycleLength(subscriptionCycleLength);
-		cpDefinition.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
-		cpDefinition.setMaxSubscriptionCyclesNumber(
-			maxSubscriptionCyclesNumber);
-
-		return cpDefinitionPersistence.update(cpDefinition);
-	}
-
 	@Override
 	public CPDefinition updateTaxCategoryInfo(
 			long cpDefinitionId, long cpTaxCategoryId, boolean taxExempt,
