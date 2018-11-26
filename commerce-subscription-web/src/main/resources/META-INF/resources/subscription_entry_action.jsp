@@ -55,6 +55,11 @@ CommerceSubscriptionEntry commerceSubscriptionEntry = (CommerceSubscriptionEntry
 			url="<%= setActiveURL %>"
 		/>
 
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editURL %>"
+		/>
+
 		<portlet:actionURL name="editCommerceSubscriptionEntry" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
