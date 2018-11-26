@@ -22,7 +22,6 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.portal.apio.api", version: "1.1.0"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.apio.impl", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.site.apio.api", version: "1.0.0"
-	compileOnly group: "com.liferay", name: "com.liferay.site.apio.impl", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-api")
 }
 
