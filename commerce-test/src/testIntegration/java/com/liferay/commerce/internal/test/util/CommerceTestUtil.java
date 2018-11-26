@@ -297,15 +297,23 @@ public class CommerceTestUtil {
 			userId = serviceContext.getUserId();
 		}
 
-		if (commerceCurrencyId == 0) {
+		CommerceOrder commerceOrder =
+			CommerceOrderLocalServiceUtil.addUserCommerceOrder(
+				groupId, userId, commerceCurrencyId);
+
+		long actualCommerceCurrencyId = commerceOrder.getCommerceCurrencyId();
+
+		if (actualCommerceCurrencyId == 0) {
 			CommerceCurrency commerceCurrency =
 				CommerceCurrencyTestUtil.addCommerceCurrency(groupId);
 
-			commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
+			commerceOrder.setCommerceCurrencyId(
+				commerceCurrency.getCommerceCurrencyId());
+
+			CommerceOrderLocalServiceUtil.updateCommerceOrder(commerceOrder);
 		}
 
-		return CommerceOrderLocalServiceUtil.addUserCommerceOrder(
-			groupId, userId, userId, commerceCurrencyId);
+		return commerceOrder;
 	}
 
 	public static CommerceOrder checkoutOrder(CommerceOrder commerceOrder)
