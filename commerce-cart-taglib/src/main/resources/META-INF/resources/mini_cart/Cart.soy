@@ -1,0 +1,109 @@
+{namespace Cart}
+
+/**
+ * This renders the component's whole content.
+ */
+{template .render}
+	{@param isOpen: bool}
+	{@param isDisabled: bool}
+	{@param products: ?}
+	{@param detailsUrl: string}
+	{@param productsAmount: int}
+	{@param spritemap: string }
+
+	{@param summary: ?}
+	{@param isLoading: ?}
+
+	{@param handleSubmitQuantity: ?}
+	{@param handleDeleteItem: ?}
+	{@param handleCancelItemDeletion: ?}
+
+	{let $openCartButtonModifiers kind="text"}
+		{if $isDisabled}
+			{sp}is-disabled
+		{/if}
+	{/let}
+
+	{let $cartModifiers kind="text"}
+		{if $isOpen}
+			{sp}is-open
+		{/if}
+	{/let}
+
+	<div>
+		<a
+			data-senna-off
+			href="#"
+			class="minium-topbar__button{$openCartButtonModifiers}"
+			data-onclick="toggleCart"
+		>
+			{call ClayIcon.render}
+				{param spritemap: $spritemap /}
+				{param symbol: 'cart' /}
+			{/call}
+		</a>
+
+		<div class="minium-cart{$cartModifiers}">
+			<a
+				data-senna-off
+				href="#"
+				class="minium-topbar__button minium-cart__close"
+				data-onclick="toggleCart"
+			>
+				{call ClayIcon.render}
+					{param spritemap: $spritemap /}
+					{param symbol: 'close' /}
+				{/call}
+			</a>
+
+			<div class="minium-cart__top">
+				<div>
+					<strong>{$productsAmount}</strong> {msg desc="Products"}products{/msg}
+				</div>
+
+				<a class="minium-link" href="{$detailsUrl}">{msg desc="View Details"}view-details{/msg}</a>
+			</div>
+
+			<div class="minium-cart__content">
+				{foreach $product in $products}
+					{call CartProduct.render}
+
+						{param events: [
+							'submitQuantity' : $handleSubmitQuantity,
+							'deleteItem' : $handleDeleteItem,
+							'cancelItemDeletion' : $handleCancelItemDeletion,
+						] /}
+
+						{param id: $product.id /}
+						{param name: $product.name /}
+						{param price: $product.price /}
+						{param sku: $product.sku /}
+						{param quantity: $product.quantity /}
+						{param thumbnail: $product.thumbnail /}
+						{param settings: $product.settings /}
+						{param error: $product.error /}
+
+						{param isDeleting: $product.isDeleting /}
+						{param isCollapsed: $product.isCollapsed /}
+						{param isUpdating: $product.isUpdating /}
+						{param isDeleteDisabled: $product.isDeleteDisabled /}
+					{/call}
+				{/foreach}
+			</div>
+
+			{if $summary}
+				{call Summary.render}
+					{param checkoutUrl: $summary.checkoutUrl /}
+					{param subtotal: $summary.subtotal /}
+					{param grandTotal: $summary.grandTotal /}
+					{param discount: $summary.discount /}
+					{param totalUnits: $summary.totalUnits /}
+					{param productsNumber: $productsAmount /}
+					{param isLoading: $isLoading /}
+					{param dats: $summary /}
+				{/call}
+			{/if}
+
+		</div>
+	</div>
+{/template}

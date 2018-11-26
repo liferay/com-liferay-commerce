@@ -1,0 +1,51 @@
+{namespace Summary}
+
+/**
+ * This renders the component's whole content.
+ */
+{template .render}
+	{@param checkoutUrl: string}
+	{@param subtotal: string}
+	{@param grandTotal: string}
+	{@param? discount: string}
+	{@param totalUnits: int}
+	{@param productsNumber: int}
+	{@param? isLoading: bool}
+
+	{let $submitModifiers kind="text"}
+		{if $isLoading or $productsNumber == 0 }
+			{sp}minium-button--disabled
+		{/if}
+	{/let}
+
+	<div class="minium-cart__footer">
+		<dl class="minium-cart__totals">
+			<dt> {msg desc="Units"}units{/msg}</dt>
+			<dd>{$totalUnits}{msg desc="Of"}of{/msg} {$productsNumber} {msg desc="Items"}items{/msg}</dd>
+			<dt>{msg desc="Subtotal"}subtotal{/msg}</dt>
+			<dd>
+				{call Loader.render}
+					{param isUpdating: $isLoading /}
+					{param content kind="html"}{$subtotal}{/param}
+					{param direction: 'right' /}
+					{param inverted: true /}
+				{/call}
+			</dd>
+			{if $discount}
+				<dt>{msg desc="Discount"}discount{/msg}</dt>
+				<dd>{$discount}</dd>
+			{/if}
+			<dt>{msg desc="Total"}total{/msg}</dt>
+			<dd>
+				{call Loader.render}
+					{param isUpdating: $isLoading /}
+					{param content kind="html"}<big>{$grandTotal}</big>{/param}
+					{param direction: 'right' /}
+					{param inverted: true /}
+				{/call}
+			</dd>
+		</dl>
+
+		<a class="minium-button minium-button--block{$submitModifiers}" href="{$checkoutUrl}">{msg desc="Submit"}submit{/msg}</a>
+	</div>
+{/template}
