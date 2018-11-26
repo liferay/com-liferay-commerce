@@ -356,7 +356,6 @@
 		<column name="discountPercentageLevel2" type="BigDecimal" />
 		<column name="discountPercentageLevel3" type="BigDecimal" />
 		<column name="discountPercentageLevel4" type="BigDecimal" />
-		<column name="subscription" type="boolean" />
 
 		<!-- Order -->
 
@@ -375,10 +374,6 @@
 		<finder name="C_I" return-type="Collection">
 			<finder-column name="commerceOrderId" />
 			<finder-column name="CPInstanceId" />
-		</finder>
-		<finder name="C_S" return-type="Collection">
-			<finder-column name="commerceOrderId" />
-			<finder-column name="subscription" />
 		</finder>
 
 		<!-- References -->
