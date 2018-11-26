@@ -16,8 +16,6 @@ package com.liferay.commerce.subscription.web.internal.portlet;
 
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
-import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
 import com.liferay.commerce.subscription.web.internal.display.context.CommerceSubscriptionEntryDisplayContext;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -76,9 +74,7 @@ public class CommerceSubscriptionEntryPortlet extends MVCPortlet {
 		CommerceSubscriptionEntryDisplayContext
 			commerceSubscriptionEntryDisplayContext =
 				new CommerceSubscriptionEntryDisplayContext(
-					_commerceSubscriptionEntryService,
-					_cpSubscriptionTypeJSPContributorRegistry,
-					_cpSubscriptionTypeRegistry, httpServletRequest,
+					_commerceSubscriptionEntryService, httpServletRequest,
 					_portletResourcePermission);
 
 		renderRequest.setAttribute(
@@ -90,13 +86,6 @@ public class CommerceSubscriptionEntryPortlet extends MVCPortlet {
 
 	@Reference
 	private CommerceSubscriptionEntryService _commerceSubscriptionEntryService;
-
-	@Reference
-	private CPSubscriptionTypeJSPContributorRegistry
-		_cpSubscriptionTypeJSPContributorRegistry;
-
-	@Reference
-	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 
 	@Reference
 	private Portal _portal;
