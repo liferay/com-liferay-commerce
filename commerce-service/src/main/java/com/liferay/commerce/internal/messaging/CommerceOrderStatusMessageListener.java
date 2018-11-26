@@ -18,12 +18,20 @@ import com.liferay.commerce.constants.CommerceDestinationNames;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.internal.notification.type.OrderPlacedCommerceNotificationTypeImpl;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.notification.util.CommerceNotificationHelper;
+import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
+import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
+import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -56,18 +64,63 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 
 			// Commerce product subscriptions
 
-			_commerceSubscriptionEntryHelper.checkCommerceSubscriptions(
-				commerceOrder);
+			_checkCPSubscriptions(commerceOrder);
 		}
+	}
+
+	private void _checkCPSubscriptions(CommerceOrder commerceOrder)
+		throws PortalException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(commerceOrder.getSiteGroupId());
+		serviceContext.setUserId(commerceOrder.getOrderUserId());
+
+		List<CommerceOrderItem> commerceOrderItems =
+			_commerceOrderItemLocalService.getSubscriptionCommerceOrderItems(
+				commerceOrder.getCommerceOrderId());
+
+		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
+			if (_isNewSubscription(commerceOrderItem)) {
+				_commerceSubscriptionEntryLocalService.
+					addCommerceSubscriptionEntry(
+						commerceOrderItem.getCPInstanceId(),
+						commerceOrderItem.getCommerceOrderItemId(),
+						serviceContext);
+			}
+		}
+	}
+
+	private boolean _isNewSubscription(CommerceOrderItem commerceOrderItem) {
+		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
+			_commerceSubscriptionCycleEntryLocalService.
+				fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+					commerceOrderItem.getCommerceOrderItemId());
+
+		if ((commerceSubscriptionCycleEntry != null) &&
+			commerceSubscriptionCycleEntry.isRenew()) {
+
+			return false;
+		}
+
+		return true;
 	}
 
 	@Reference
 	private CommerceNotificationHelper _commerceNotificationHelper;
 
 	@Reference
+	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
+
+	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Reference
-	private CommerceSubscriptionEntryHelper _commerceSubscriptionEntryHelper;
+	private CommerceSubscriptionCycleEntryLocalService
+		_commerceSubscriptionCycleEntryLocalService;
+
+	@Reference
+	private CommerceSubscriptionEntryLocalService
+		_commerceSubscriptionEntryLocalService;
 
 }

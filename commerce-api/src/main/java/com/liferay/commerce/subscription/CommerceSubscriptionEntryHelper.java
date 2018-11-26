@@ -16,7 +16,6 @@ package com.liferay.commerce.subscription;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -28,11 +27,8 @@ import java.util.List;
 @ProviderType
 public interface CommerceSubscriptionEntryHelper {
 
-	public void checkCommerceSubscriptions(CommerceOrder commerceOrder)
-		throws PortalException;
-
 	public void renewSubscriptionEntries(
-			List<CommerceSubscriptionEntry> commerceSubscriptionEntries)
+			List<CommerceSubscriptionEntry> cpSubscriptionEntries)
 		throws PortalException;
 
 	public void renewSubscriptionEntry(
