@@ -52,8 +52,6 @@ public class CommerceOrderConstants {
 
 	public static final int ORDER_STATUS_SHIPPED = 15;
 
-	public static final int ORDER_STATUS_SUBSCRIPTION = 9;
-
 	public static final int ORDER_STATUS_TO_TRANSMIT =
 		WorkflowConstants.STATUS_PENDING;
 
