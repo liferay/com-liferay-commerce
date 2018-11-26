@@ -51,7 +51,7 @@ boolean ending = maxSubscriptionCyclesNumber > 0;
 
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>
-			<aui:input checked="<%= overrideSubscriptionInfo %>" label="override-subscription-settings" name="overrideSubscriptionInfo" type="toggle-switch" value="<%= overrideSubscriptionInfo %>" />
+			<aui:input checked="<%= overrideSubscriptionInfo %>" name="overrideSubscriptionInfo" type="toggle-switch" value="<%= overrideSubscriptionInfo %>" />
 
 			<div class="<%= overrideSubscriptionInfo ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />subscriptionInfo">
 				<aui:input checked="<%= subscriptionEnabled %>" label="enable-subscription" name="subscriptionEnabled" type="toggle-switch" value="<%= subscriptionEnabled %>" />
