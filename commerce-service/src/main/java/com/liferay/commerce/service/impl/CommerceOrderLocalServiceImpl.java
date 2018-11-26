@@ -365,15 +365,9 @@ public class CommerceOrderLocalServiceImpl
 
 		// Commerce order
 
-		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
-			commerceOrderId);
-
-		if (commerceOrder.getOrderStatus() ==
-				CommerceOrderConstants.ORDER_STATUS_OPEN) {
-
-			commerceOrder = commerceOrderLocalService.recalculatePrice(
+		CommerceOrder commerceOrder =
+			commerceOrderLocalService.recalculatePrice(
 				commerceOrderId, commerceContext);
-		}
 
 		commerceOrder = commerceOrderLocalService.approveCommerceOrder(
 			serviceContext.getUserId(), commerceOrderId);
@@ -382,6 +376,30 @@ public class CommerceOrderLocalServiceImpl
 
 		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
 
+		CommerceOrderPrice commerceOrderPrice =
+			_commerceOrderPriceCalculation.getCommerceOrderPrice(
+				commerceOrder, commerceContext);
+
+		CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
+		CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
+		CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
+		CommerceMoney total = commerceOrderPrice.getTotal();
+
+		BigDecimal subtotalAmount = subtotal.getPrice();
+		BigDecimal shippingAmount = shippingValue.getPrice();
+		BigDecimal taxAmount = taxValue.getPrice();
+		BigDecimal totalAmount = total.getPrice();
+
+		commerceOrder.setSubtotal(subtotalAmount);
+		commerceOrder.setSubtotalDiscounts(
+			commerceOrderPrice.getSubtotalDiscountValue());
+		commerceOrder.setShippingAmount(shippingAmount);
+		commerceOrder.setShippingDiscounts(
+			commerceOrderPrice.getShippingDiscountValue());
+		commerceOrder.setTaxAmount(taxAmount);
+		commerceOrder.setTotal(totalAmount);
+		commerceOrder.setTotalDiscounts(
+			commerceOrderPrice.getTotalDiscountValue());
 		commerceOrder.setOrderStatus(
 			CommerceOrderConstants.ORDER_STATUS_IN_PROGRESS);
 
