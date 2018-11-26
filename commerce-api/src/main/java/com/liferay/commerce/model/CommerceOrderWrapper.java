@@ -1142,11 +1142,6 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	@Override
-	public boolean isSubscription() {
-		return _commerceOrder.isSubscription();
-	}
-
-	@Override
 	public void persist() {
 		_commerceOrder.persist();
 	}

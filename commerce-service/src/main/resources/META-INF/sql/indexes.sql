@@ -70,10 +70,16 @@ create index IX_DB0BB83C on CommerceShipmentItem (groupId);
 create index IX_42E5F6EF on CommerceShippingMethod (groupId, active_);
 create unique index IX_C4557F93 on CommerceShippingMethod (groupId, engineKey[$COLUMN_LENGTH:75$]);
 
+create unique index IX_DBBA76D5 on CommerceSubscriptionCycleEntry (commerceOrderItemId);
+create index IX_9EC41FA9 on CommerceSubscriptionCycleEntry (commerceSubscriptionEntryId);
+create index IX_3D29F0EE on CommerceSubscriptionCycleEntry (groupId);
+create index IX_94A39230 on CommerceSubscriptionCycleEntry (uuid_[$COLUMN_LENGTH:75$], companyId);
+create unique index IX_F54AE4B2 on CommerceSubscriptionCycleEntry (uuid_[$COLUMN_LENGTH:75$], groupId);
+
 create index IX_68301629 on CommerceSubscriptionEntry (active_);
 create index IX_6D080A04 on CommerceSubscriptionEntry (groupId, userId);
 create index IX_4363DED4 on CommerceSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], companyId);
-create unique index IX_943E0A56 on CommerceSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], groupId);
+create unique index IX_C4F4CBA4 on CommerceSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_81487FD9 on CommerceWarehouse (groupId, active_, commerceCountryId);
 create index IX_4500A0CA on CommerceWarehouse (groupId, commerceCountryId);

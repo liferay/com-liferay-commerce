@@ -111,8 +111,6 @@ public interface CommerceOrder extends CommerceOrderModel, PersistedModel {
 
 	public boolean isOpen();
 
-	public boolean isSubscription();
-
 	public void setShippingDiscounts(
 		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue);
 

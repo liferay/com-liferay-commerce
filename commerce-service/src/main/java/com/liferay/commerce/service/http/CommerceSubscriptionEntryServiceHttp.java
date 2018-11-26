@@ -117,41 +117,6 @@ public class CommerceSubscriptionEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		Boolean active, String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
-					"getCommerceSubscriptionEntries",
-					_getCommerceSubscriptionEntriesParameterTypes2);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, active, keywords, start, end, sort);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
 		HttpPrincipal httpPrincipal, long groupId, long userId, int start,
 		int end,
@@ -160,7 +125,7 @@ public class CommerceSubscriptionEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
 					"getCommerceSubscriptionEntries",
-					_getCommerceSubscriptionEntriesParameterTypes3);
+					_getCommerceSubscriptionEntriesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId, start, end, orderByComparator);
@@ -193,7 +158,7 @@ public class CommerceSubscriptionEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
 					"getCommerceSubscriptionEntriesCount",
-					_getCommerceSubscriptionEntriesCountParameterTypes4);
+					_getCommerceSubscriptionEntriesCountParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId);
@@ -212,6 +177,41 @@ public class CommerceSubscriptionEntryServiceHttp {
 			}
 
 			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
+		HttpPrincipal httpPrincipal, long companyId, long groupId,
+		Boolean active, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceSubscriptionEntryServiceUtil.class,
+					"getCommerceSubscriptionEntries",
+					_getCommerceSubscriptionEntriesParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, groupId, active, keywords, start, end, sort);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -296,16 +296,16 @@ public class CommerceSubscriptionEntryServiceHttp {
 		new Class[] { long.class };
 	private static final Class<?>[] _getCommerceSubscriptionEntriesParameterTypes2 =
 		new Class[] {
-			long.class, long.class, Boolean.class, String.class, int.class,
-			int.class, com.liferay.portal.kernel.search.Sort.class
-		};
-	private static final Class<?>[] _getCommerceSubscriptionEntriesParameterTypes3 =
-		new Class[] {
 			long.class, long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceSubscriptionEntriesCountParameterTypes4 =
+	private static final Class<?>[] _getCommerceSubscriptionEntriesCountParameterTypes3 =
 		new Class[] { long.class, long.class };
+	private static final Class<?>[] _getCommerceSubscriptionEntriesParameterTypes4 =
+		new Class[] {
+			long.class, long.class, Boolean.class, String.class, int.class,
+			int.class, com.liferay.portal.kernel.search.Sort.class
+		};
 	private static final Class<?>[] _setActiveParameterTypes5 = new Class[] {
 			long.class, boolean.class
 		};
