@@ -17,44 +17,27 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPInstanceSubscriptionInfoDisplayContext cpInstanceSubscriptionInfoDisplayContext = (CPInstanceSubscriptionInfoDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CPInstanceDisplayContext cpInstanceDisplayContext = (CPInstanceDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CPDefinition cpDefinition = cpInstanceSubscriptionInfoDisplayContext.getCPDefinition();
-CPInstance cpInstance = cpInstanceSubscriptionInfoDisplayContext.getCPInstance();
-long cpInstanceId = cpInstanceSubscriptionInfoDisplayContext.getCPInstanceId();
-List<CPSubscriptionType> cpSubscriptionTypes = cpInstanceSubscriptionInfoDisplayContext.getCPSubscriptionTypes();
+CPDefinition cpDefinition = cpInstanceDisplayContext.getCPDefinition();
 
-String defaultCPSubscriptionType = StringPool.BLANK;
+CPInstance cpInstance = cpInstanceDisplayContext.getCPInstance();
 
-if (!cpSubscriptionTypes.isEmpty()) {
-	CPSubscriptionType firstCPSubscriptionType = cpSubscriptionTypes.get(0);
-
-	defaultCPSubscriptionType = firstCPSubscriptionType.getName();
-}
+long cpInstanceId = cpInstanceDisplayContext.getCPInstanceId();
 
 PortletURL productSkusURL = renderResponse.createRenderURL();
 
 productSkusURL.setParameter("mvcRenderCommandName", "editProductDefinition");
 productSkusURL.setParameter("cpDefinitionId", String.valueOf(cpDefinition.getCPDefinitionId()));
-productSkusURL.setParameter("screenNavigationCategoryKey", cpInstanceSubscriptionInfoDisplayContext.getScreenNavigationCategoryKey());
+productSkusURL.setParameter("screenNavigationCategoryKey", cpInstanceDisplayContext.getScreenNavigationCategoryKey());
 
 boolean overrideSubscriptionInfo = BeanParamUtil.getBoolean(cpInstance, request, "overrideSubscriptionInfo", false);
 boolean subscriptionEnabled = BeanParamUtil.getBoolean(cpInstance, request, "subscriptionEnabled", false);
-int subscriptionLength = BeanParamUtil.getInteger(cpInstance, request, "subscriptionLength");
-String subscriptionType = BeanParamUtil.getString(cpInstance, request, "subscriptionType", defaultCPSubscriptionType);
-long maxSubscriptionCycles = BeanParamUtil.getLong(cpInstance, request, "maxSubscriptionCycles");
+long subscriptionCycleLength = BeanParamUtil.getLong(cpInstance, request, "subscriptionCycleLength");
+String subscriptionCyclePeriod = BeanParamUtil.getString(cpInstance, request, "subscriptionCyclePeriod", CPConstants.SUBSCRIPTION_CYCLE_DAY);
+long maxSubscriptionCyclesNumber = BeanParamUtil.getLong(cpInstance, request, "maxSubscriptionCyclesNumber");
 
-String defaultCPSubscriptionTypeLabel = StringPool.BLANK;
-
-CPSubscriptionType cpSubscriptionType = cpInstanceSubscriptionInfoDisplayContext.getCPSubscriptionType(subscriptionType);
-
-if (cpSubscriptionType != null) {
-	defaultCPSubscriptionTypeLabel = cpSubscriptionType.getLabel(locale);
-}
-
-CPSubscriptionTypeJSPContributor cpSubscriptionTypeJSPContributor = cpInstanceSubscriptionInfoDisplayContext.getCPSubscriptionTypeJSPContributor(subscriptionType);
-
-boolean ending = maxSubscriptionCycles > 0;
+boolean ending = maxSubscriptionCyclesNumber > 0;
 %>
 
 <portlet:actionURL name="editProductInstance" var="editProductInstanceShippingInfoActionURL" />
@@ -74,13 +57,13 @@ boolean ending = maxSubscriptionCycles > 0;
 				<aui:input checked="<%= subscriptionEnabled %>" label="enable-subscription" name="subscriptionEnabled" type="toggle-switch" value="<%= subscriptionEnabled %>" />
 
 				<div class="<%= subscriptionEnabled ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />subscriptionOptions">
-					<aui:select name="subscriptionType" onChange='<%= renderResponse.getNamespace() + "selectSubscriptionType();" %>'>
+					<aui:select name="subscriptionCyclePeriod" showEmptyOption="<%= true %>">
 
 						<%
-						for (CPSubscriptionType curCPSubscriptionType : cpSubscriptionTypes) {
+						for (String subscriptionPeriod : CPConstants.SUBSCRIPTION_CYCLES) {
 						%>
 
-							<aui:option data-label="<%= curCPSubscriptionType.getLabel(locale) %>" label="<%= curCPSubscriptionType.getLabel(locale) %>" selected="<%= subscriptionType.equals(curCPSubscriptionType.getName()) %>" value="<%= curCPSubscriptionType.getName() %>" />
+							<aui:option data-label="<%= LanguageUtil.get(request, subscriptionPeriod) %>" label="<%= subscriptionPeriod %>" selected="<%= subscriptionPeriod.equals(subscriptionCyclePeriod) %>" value="<%= subscriptionPeriod %>" />
 
 						<%
 						}
@@ -88,14 +71,8 @@ boolean ending = maxSubscriptionCycles > 0;
 
 					</aui:select>
 
-					<%
-					if (cpSubscriptionTypeJSPContributor != null) {
-						cpSubscriptionTypeJSPContributor.render(cpInstance, request, response);
-					}
-					%>
-
 					<div id="<portlet:namespace />cycleLengthContainer">
-						<aui:input name="subscriptionLength" suffix="<%= defaultCPSubscriptionTypeLabel %>" value="<%= String.valueOf(subscriptionLength) %>">
+						<aui:input name="subscriptionCycleLength" suffix="<%= subscriptionCyclePeriod %>" value="<%= String.valueOf(subscriptionCycleLength) %>">
 							<aui:validator name="digits" />
 							<aui:validator name="min">1</aui:validator>
 						</aui:input>
@@ -115,7 +92,7 @@ boolean ending = maxSubscriptionCycles > 0;
 						%>
 
 						<div class="<%= cssClass %>">
-							<aui:input disabled="<%= ending ? false : true %>" helpMessage="max-subscription-cycles-help" label="end-after" name="maxSubscriptionCycles" suffix='<%= LanguageUtil.get(request, "cycles") %>' value="<%= String.valueOf(maxSubscriptionCycles) %>">
+							<aui:input disabled="<%= ending ? false : true %>" helpMessage="max-subscription-cycles-number-help" label="end-after" name="maxSubscriptionCyclesNumber" suffix='<%= LanguageUtil.get(request, "cycles") %>' value="<%= String.valueOf(maxSubscriptionCyclesNumber) %>">
 								<aui:validator name="digits" />
 
 								<aui:validator errorMessage='<%= LanguageUtil.format(request, "please-enter-a-value-greater-than-or-equal-to-x", 1) %>' name="custom">
@@ -146,30 +123,16 @@ boolean ending = maxSubscriptionCycles > 0;
 	Liferay.Util.toggleBoxes('<portlet:namespace />overrideSubscriptionInfo', '<portlet:namespace />subscriptionInfo');
 
 	Liferay.Util.toggleBoxes('<portlet:namespace />subscriptionEnabled', '<portlet:namespace />subscriptionOptions');
+</aui:script>
 
-	Liferay.provide(
-		window,
-		'<portlet:namespace />selectSubscriptionType',
-			function() {
-			var A = AUI();
+<aui:script use="aui-base">
+	A.one('#<portlet:namespace />subscriptionCyclePeriod').on(
+		'change',
+		function(event) {
+			var selectedOption = this.one('option:selected');
 
-			var overrideSubscriptionInfo = A.one('#<portlet:namespace />overrideSubscriptionInfo').attr('checked');
-			var subscriptionEnabled = A.one('#<portlet:namespace />subscriptionEnabled').attr('checked');
-			var subscriptionLength = A.one('#<portlet:namespace />subscriptionLength').val();
-			var subscriptionType = A.one('#<portlet:namespace />subscriptionType').val();
-			var maxSubscriptionCycles = A.one('#<portlet:namespace />maxSubscriptionCycles').val();
-
-			var portletURL = new Liferay.PortletURL.createURL('<%= currentURLObj %>');
-
-			portletURL.setParameter('overrideSubscriptionInfo', overrideSubscriptionInfo);
-			portletURL.setParameter('subscriptionEnabled', subscriptionEnabled);
-			portletURL.setParameter('subscriptionLength', subscriptionLength);
-			portletURL.setParameter('subscriptionType', subscriptionType);
-			portletURL.setParameter('maxSubscriptionCycles', maxSubscriptionCycles);
-
-			window.location.replace(portletURL.toString());
-		},
-		['liferay-portlet-url']
+			A.all('#<portlet:namespace />cycleLengthContainer .input-group-addon').html(selectedOption.getData('label'));
+		}
 	);
 </aui:script>
 
@@ -179,7 +142,7 @@ boolean ending = maxSubscriptionCycles > 0;
 		function(event) {
 			var formValidator = Liferay.Form.get('<portlet:namespace />fm').formValidator;
 
-			formValidator.validateField('<portlet:namespace />maxSubscriptionCycles');
+			formValidator.validateField('<portlet:namespace />maxSubscriptionCyclesNumber');
 		}
 	);
 </aui:script>
@@ -200,12 +163,12 @@ boolean ending = maxSubscriptionCycles > 0;
 					if (expanded) {
 						A.one('#<portlet:namespace />neverEndsContainer .never-ends-content').removeClass('hide');
 
-						A.one('#<portlet:namespace />maxSubscriptionCycles').attr('disabled', false);
+						A.one('#<portlet:namespace />maxSubscriptionCyclesNumber').attr('disabled', false);
 					}
 					else {
 						A.one('#<portlet:namespace />neverEndsContainer .never-ends-content').addClass('hide');
 
-						A.one('#<portlet:namespace />maxSubscriptionCycles').attr('disabled', true);
+						A.one('#<portlet:namespace />maxSubscriptionCyclesNumber').attr('disabled', true);
 					}
 				}
 			}
