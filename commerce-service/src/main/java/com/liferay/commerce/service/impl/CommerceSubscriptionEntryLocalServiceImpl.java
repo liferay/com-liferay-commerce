@@ -125,26 +125,25 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	}
 
 	@Override
+	public BaseModelSearchResult<CommerceSubscriptionEntry>
+			getCommerceSubscriptionEntries(
+				long companyId, long groupId, Boolean active, String keywords,
+				int start, int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, groupId, active, keywords, start, end, sort);
+
+		return getCommerceSubscriptionEntries(searchContext);
+	}
+
+	@Override
 	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
 		long groupId, long userId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 
 		return commerceSubscriptionEntryPersistence.findByG_U(
 			groupId, userId, start, end, orderByComparator);
-	}
-
-	@Override
-	public BaseModelSearchResult<CommerceSubscriptionEntry>
-			getCommerceSubscriptionEntries(
-				long companyId, long groupId, Long maxSubscriptionCyclesNumber,
-				Boolean active, String keywords, int start, int end, Sort sort)
-		throws PortalException {
-
-		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, maxSubscriptionCyclesNumber, active, keywords,
-			start, end, sort);
-
-		return getCommerceSubscriptionEntries(searchContext);
 	}
 
 	@Override
@@ -203,8 +202,8 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, Long maxSubscriptionCyclesNumber,
-		Boolean active, String keywords, int start, int end, Sort sort) {
+		long companyId, long groupId, Boolean active, String keywords,
+		int start, int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -218,13 +217,6 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		attributes.put(
 			CommerceSubscriptionEntryIndexer.FIELD_CP_INSTANCE_ID, keywords);
 		attributes.put(CommerceSubscriptionEntryIndexer.FIELD_SKU, keywords);
-
-		if (maxSubscriptionCyclesNumber != null) {
-			attributes.put(
-				CommerceSubscriptionEntryIndexer.
-					FIELD_MAX_SUBSCRIPTION_CYCLES_NUMBER,
-				maxSubscriptionCyclesNumber);
-		}
 
 		if (active != null) {
 			attributes.put(
