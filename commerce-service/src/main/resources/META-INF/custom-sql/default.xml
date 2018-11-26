@@ -88,17 +88,6 @@
 				CommerceOrderItem.commerceOrderItemId = ?
 		]]>
 	</sql>
-	<sql id="com.liferay.commerce.service.persistence.CommerceSubscriptionEntryFinder.findByNextIterationDate">
-		<![CDATA[
-			SELECT
-				CommerceSubscriptionEntry.*
-			FROM
-				CommerceSubscriptionEntry
-			WHERE
-				(CommerceSubscriptionEntry.nextIterationDate < ?) AND
-				(CommerceSubscriptionEntry.active_ = true)
-		]]>
-	</sql>
 	<sql id="com.liferay.commerce.service.persistence.CommerceWarehouseFinder.countByG_N_D_S_C_Z_C">
 		<![CDATA[
 			SELECT
