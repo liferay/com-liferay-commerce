@@ -40,7 +40,7 @@ long maxSubscriptionCyclesNumber = BeanParamUtil.getLong(cpDefinition, request, 
 
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>
-			<aui:input checked="<%= subscriptionEnabled %>" label="enable-subscription" name="subscriptionEnabled" type="toggle-switch" value="<%= subscriptionEnabled %>" />
+			<aui:input checked="<%= subscriptionEnabled %>" name="subscriptionEnabled" type="toggle-switch" value="<%= subscriptionEnabled %>" />
 
 			<div class="<%= subscriptionEnabled ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />subscriptionOptions">
 				<aui:input name="subscriptionCycleLength" value="<%= String.valueOf(subscriptionCycleLength) %>" />
