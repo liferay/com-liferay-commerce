@@ -91,13 +91,13 @@ public class CommerceSubscriptionEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap[] getCommerceSubscriptionEntries(
+	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap[] getCPSubscriptionEntries(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> returnValue =
-				CommerceSubscriptionEntryServiceUtil.getCommerceSubscriptionEntries(groupId,
+				CommerceSubscriptionEntryServiceUtil.getCPSubscriptionEntries(groupId,
 					userId, start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.toSoapModels(returnValue);
@@ -109,10 +109,10 @@ public class CommerceSubscriptionEntryServiceSoap {
 		}
 	}
 
-	public static int getCommerceSubscriptionEntriesCount(long groupId,
-		long userId) throws RemoteException {
+	public static int getCPSubscriptionEntriesCount(long groupId, long userId)
+		throws RemoteException {
 		try {
-			int returnValue = CommerceSubscriptionEntryServiceUtil.getCommerceSubscriptionEntriesCount(groupId,
+			int returnValue = CommerceSubscriptionEntryServiceUtil.getCPSubscriptionEntriesCount(groupId,
 					userId);
 
 			return returnValue;

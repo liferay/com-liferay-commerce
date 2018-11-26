@@ -179,10 +179,6 @@ public interface CommerceSubscriptionCycleEntryLocalService
 	public CommerceSubscriptionCycleEntry fetchCommerceSubscriptionCycleEntry(
 		long commerceSubscriptionCycleEntryId);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceSubscriptionCycleEntry fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
-		long commerceOrderItemId);
-
 	/**
 	* Returns the commerce subscription cycle entry matching the UUID and group.
 	*
@@ -193,6 +189,10 @@ public interface CommerceSubscriptionCycleEntryLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceSubscriptionCycleEntry fetchCommerceSubscriptionCycleEntryByUuidAndGroupId(
 		String uuid, long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceSubscriptionCycleEntry fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+		long commerceOrderItemId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -211,11 +211,6 @@ public interface CommerceSubscriptionCycleEntryLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
 		int start, int end);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
-		long commerceSubscriptionEntryId, int start, int end,
-		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator);
 
 	/**
 	* Returns all the commerce subscription cycle entries matching the UUID and company.
@@ -251,10 +246,6 @@ public interface CommerceSubscriptionCycleEntryLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceSubscriptionCycleEntriesCount();
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceSubscriptionCycleEntriesCount(
-		long commerceSubscriptionEntryId);
-
 	/**
 	* Returns the commerce subscription cycle entry with the primary key.
 	*
@@ -277,6 +268,15 @@ public interface CommerceSubscriptionCycleEntryLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceSubscriptionCycleEntry getCommerceSubscriptionCycleEntryByUuidAndGroupId(
 		String uuid, long groupId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceSubscriptionCycleEntry> getCPSubscriptionCycleEntries(
+		long commerceSubscriptionEntryId, int start, int end,
+		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPSubscriptionCycleEntriesCount(
+		long commerceSubscriptionEntryId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(

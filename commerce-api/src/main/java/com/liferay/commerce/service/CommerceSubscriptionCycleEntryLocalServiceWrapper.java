@@ -195,12 +195,6 @@ public class CommerceSubscriptionCycleEntryLocalServiceWrapper
 		return _commerceSubscriptionCycleEntryLocalService.fetchCommerceSubscriptionCycleEntry(commerceSubscriptionCycleEntryId);
 	}
 
-	@Override
-	public com.liferay.commerce.model.CommerceSubscriptionCycleEntry fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
-		long commerceOrderItemId) {
-		return _commerceSubscriptionCycleEntryLocalService.fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(commerceOrderItemId);
-	}
-
 	/**
 	* Returns the commerce subscription cycle entry matching the UUID and group.
 	*
@@ -213,6 +207,12 @@ public class CommerceSubscriptionCycleEntryLocalServiceWrapper
 		String uuid, long groupId) {
 		return _commerceSubscriptionCycleEntryLocalService.fetchCommerceSubscriptionCycleEntryByUuidAndGroupId(uuid,
 			groupId);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceSubscriptionCycleEntry fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+		long commerceOrderItemId) {
+		return _commerceSubscriptionCycleEntryLocalService.fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(commerceOrderItemId);
 	}
 
 	@Override
@@ -236,14 +236,6 @@ public class CommerceSubscriptionCycleEntryLocalServiceWrapper
 		int start, int end) {
 		return _commerceSubscriptionCycleEntryLocalService.getCommerceSubscriptionCycleEntries(start,
 			end);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
-		long commerceSubscriptionEntryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> orderByComparator) {
-		return _commerceSubscriptionCycleEntryLocalService.getCommerceSubscriptionCycleEntries(commerceSubscriptionEntryId,
-			start, end, orderByComparator);
 	}
 
 	/**
@@ -288,12 +280,6 @@ public class CommerceSubscriptionCycleEntryLocalServiceWrapper
 		return _commerceSubscriptionCycleEntryLocalService.getCommerceSubscriptionCycleEntriesCount();
 	}
 
-	@Override
-	public int getCommerceSubscriptionCycleEntriesCount(
-		long commerceSubscriptionEntryId) {
-		return _commerceSubscriptionCycleEntryLocalService.getCommerceSubscriptionCycleEntriesCount(commerceSubscriptionEntryId);
-	}
-
 	/**
 	* Returns the commerce subscription cycle entry with the primary key.
 	*
@@ -322,6 +308,20 @@ public class CommerceSubscriptionCycleEntryLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceSubscriptionCycleEntryLocalService.getCommerceSubscriptionCycleEntryByUuidAndGroupId(uuid,
 			groupId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> getCPSubscriptionCycleEntries(
+		long commerceSubscriptionEntryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> orderByComparator) {
+		return _commerceSubscriptionCycleEntryLocalService.getCPSubscriptionCycleEntries(commerceSubscriptionEntryId,
+			start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCPSubscriptionCycleEntriesCount(
+		long commerceSubscriptionEntryId) {
+		return _commerceSubscriptionCycleEntryLocalService.getCPSubscriptionCycleEntriesCount(commerceSubscriptionEntryId);
 	}
 
 	@Override

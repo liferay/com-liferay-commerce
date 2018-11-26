@@ -195,12 +195,6 @@ public class CommerceSubscriptionCycleEntryLocalServiceUtil {
 				   .fetchCommerceSubscriptionCycleEntry(commerceSubscriptionCycleEntryId);
 	}
 
-	public static com.liferay.commerce.model.CommerceSubscriptionCycleEntry fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
-		long commerceOrderItemId) {
-		return getService()
-				   .fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(commerceOrderItemId);
-	}
-
 	/**
 	* Returns the commerce subscription cycle entry matching the UUID and group.
 	*
@@ -213,6 +207,12 @@ public class CommerceSubscriptionCycleEntryLocalServiceUtil {
 		return getService()
 				   .fetchCommerceSubscriptionCycleEntryByUuidAndGroupId(uuid,
 			groupId);
+	}
+
+	public static com.liferay.commerce.model.CommerceSubscriptionCycleEntry fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
+		long commerceOrderItemId) {
+		return getService()
+				   .fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(commerceOrderItemId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
@@ -233,14 +233,6 @@ public class CommerceSubscriptionCycleEntryLocalServiceUtil {
 	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
 		int start, int end) {
 		return getService().getCommerceSubscriptionCycleEntries(start, end);
-	}
-
-	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
-		long commerceSubscriptionEntryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> orderByComparator) {
-		return getService()
-				   .getCommerceSubscriptionCycleEntries(commerceSubscriptionEntryId,
-			start, end, orderByComparator);
 	}
 
 	/**
@@ -284,12 +276,6 @@ public class CommerceSubscriptionCycleEntryLocalServiceUtil {
 		return getService().getCommerceSubscriptionCycleEntriesCount();
 	}
 
-	public static int getCommerceSubscriptionCycleEntriesCount(
-		long commerceSubscriptionEntryId) {
-		return getService()
-				   .getCommerceSubscriptionCycleEntriesCount(commerceSubscriptionEntryId);
-	}
-
 	/**
 	* Returns the commerce subscription cycle entry with the primary key.
 	*
@@ -318,6 +304,20 @@ public class CommerceSubscriptionCycleEntryLocalServiceUtil {
 		return getService()
 				   .getCommerceSubscriptionCycleEntryByUuidAndGroupId(uuid,
 			groupId);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> getCPSubscriptionCycleEntries(
+		long commerceSubscriptionEntryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> orderByComparator) {
+		return getService()
+				   .getCPSubscriptionCycleEntries(commerceSubscriptionEntryId,
+			start, end, orderByComparator);
+	}
+
+	public static int getCPSubscriptionCycleEntriesCount(
+		long commerceSubscriptionEntryId) {
+		return getService()
+				   .getCPSubscriptionCycleEntriesCount(commerceSubscriptionEntryId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(

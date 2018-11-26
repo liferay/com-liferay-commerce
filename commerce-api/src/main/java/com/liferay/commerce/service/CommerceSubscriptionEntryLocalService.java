@@ -198,7 +198,7 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceSubscriptionEntry> getActiveCommerceSubscriptionEntries();
+	public List<CommerceSubscriptionEntry> getActiveCPSubscriptionEntries();
 
 	/**
 	* Returns a range of all the commerce subscription entries.
@@ -214,16 +214,6 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
 		int start, int end);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long companyId, long groupId, Boolean active, String keywords,
-		int start, int end, Sort sort) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long groupId, long userId, int start, int end,
-		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	* Returns all the commerce subscription entries matching the UUID and company.
@@ -259,12 +249,6 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceSubscriptionEntriesCount();
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceSubscriptionEntriesCount(long groupId, long userId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntriesToRenew();
-
 	/**
 	* Returns the commerce subscription entry with the primary key.
 	*
@@ -289,6 +273,17 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 		String uuid, long groupId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceSubscriptionEntry> getCPSubscriptionEntries(
+		long groupId, long userId, int start, int end,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPSubscriptionEntriesCount(long groupId, long userId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceSubscriptionEntry> getCPSubscriptionEntriesToRenew();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		PortletDataContext portletDataContext);
 
@@ -306,6 +301,11 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceSubscriptionEntry> searchCPSubscriptionEntries(
+		long companyId, long groupId, Boolean active, String keywords,
+		int start, int end, Sort sort) throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceSubscriptionEntry setActive(

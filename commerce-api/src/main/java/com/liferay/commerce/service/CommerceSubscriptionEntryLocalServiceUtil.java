@@ -212,8 +212,8 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getActiveCommerceSubscriptionEntries() {
-		return getService().getActiveCommerceSubscriptionEntries();
+	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getActiveCPSubscriptionEntries() {
+		return getService().getActiveCPSubscriptionEntries();
 	}
 
 	/**
@@ -230,23 +230,6 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
 		int start, int end) {
 		return getService().getCommerceSubscriptionEntries(start, end);
-	}
-
-	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long companyId, long groupId, Boolean active, String keywords,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceSubscriptionEntries(companyId, groupId, active,
-			keywords, start, end, sort);
-	}
-
-	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator) {
-		return getService()
-				   .getCommerceSubscriptionEntries(groupId, userId, start, end,
-			orderByComparator);
 	}
 
 	/**
@@ -290,15 +273,6 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 		return getService().getCommerceSubscriptionEntriesCount();
 	}
 
-	public static int getCommerceSubscriptionEntriesCount(long groupId,
-		long userId) {
-		return getService().getCommerceSubscriptionEntriesCount(groupId, userId);
-	}
-
-	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntriesToRenew() {
-		return getService().getCommerceSubscriptionEntriesToRenew();
-	}
-
 	/**
 	* Returns the commerce subscription entry with the primary key.
 	*
@@ -328,6 +302,22 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 				   .getCommerceSubscriptionEntryByUuidAndGroupId(uuid, groupId);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCPSubscriptionEntries(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator) {
+		return getService()
+				   .getCPSubscriptionEntries(groupId, userId, start, end,
+			orderByComparator);
+	}
+
+	public static int getCPSubscriptionEntriesCount(long groupId, long userId) {
+		return getService().getCPSubscriptionEntriesCount(groupId, userId);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCPSubscriptionEntriesToRenew() {
+		return getService().getCPSubscriptionEntriesToRenew();
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.exportimport.kernel.lar.PortletDataContext portletDataContext) {
 		return getService().getExportActionableDynamicQuery(portletDataContext);
@@ -350,6 +340,15 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> searchCPSubscriptionEntries(
+		long companyId, long groupId, Boolean active, String keywords,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCPSubscriptionEntries(companyId, groupId, active,
+			keywords, start, end, sort);
 	}
 
 	public static com.liferay.commerce.model.CommerceSubscriptionEntry setActive(

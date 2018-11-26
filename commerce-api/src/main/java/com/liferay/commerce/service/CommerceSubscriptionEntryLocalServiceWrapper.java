@@ -215,8 +215,8 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getActiveCommerceSubscriptionEntries() {
-		return _commerceSubscriptionEntryLocalService.getActiveCommerceSubscriptionEntries();
+	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getActiveCPSubscriptionEntries() {
+		return _commerceSubscriptionEntryLocalService.getActiveCPSubscriptionEntries();
 	}
 
 	/**
@@ -235,23 +235,6 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 		int start, int end) {
 		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntries(start,
 			end);
-	}
-
-	@Override
-	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long companyId, long groupId, Boolean active, String keywords,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntries(companyId,
-			groupId, active, keywords, start, end, sort);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator) {
-		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntries(groupId,
-			userId, start, end, orderByComparator);
 	}
 
 	/**
@@ -296,17 +279,6 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntriesCount();
 	}
 
-	@Override
-	public int getCommerceSubscriptionEntriesCount(long groupId, long userId) {
-		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntriesCount(groupId,
-			userId);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntriesToRenew() {
-		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntriesToRenew();
-	}
-
 	/**
 	* Returns the commerce subscription entry with the primary key.
 	*
@@ -338,6 +310,25 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCPSubscriptionEntries(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator) {
+		return _commerceSubscriptionEntryLocalService.getCPSubscriptionEntries(groupId,
+			userId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCPSubscriptionEntriesCount(long groupId, long userId) {
+		return _commerceSubscriptionEntryLocalService.getCPSubscriptionEntriesCount(groupId,
+			userId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCPSubscriptionEntriesToRenew() {
+		return _commerceSubscriptionEntryLocalService.getCPSubscriptionEntriesToRenew();
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.exportimport.kernel.lar.PortletDataContext portletDataContext) {
 		return _commerceSubscriptionEntryLocalService.getExportActionableDynamicQuery(portletDataContext);
@@ -363,6 +354,15 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceSubscriptionEntryLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> searchCPSubscriptionEntries(
+		long companyId, long groupId, Boolean active, String keywords,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceSubscriptionEntryLocalService.searchCPSubscriptionEntries(companyId,
+			groupId, active, keywords, start, end, sort);
 	}
 
 	@Override
