@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.internal.search;
 
-import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -109,13 +109,11 @@ public class CommerceSubscriptionEntryIndexer
 		Document document = getBaseModelDocument(
 			CLASS_NAME, commerceSubscriptionEntry);
 
-		CommerceOrderItem commerceOrderItem =
-			commerceSubscriptionEntry.getCommerceOrderItem();
+		CPInstance cpInstance = commerceSubscriptionEntry.getCPInstance();
 
 		document.addKeyword(FIELD_ACTIVE, commerceSubscriptionEntry.isActive());
-		document.addNumber(
-			FIELD_CP_INSTANCE_ID, commerceSubscriptionEntry.getCPInstanceId());
-		document.addText(FIELD_SKU, commerceOrderItem.getSku());
+		document.addNumber(FIELD_CP_INSTANCE_ID, cpInstance.getCPInstanceId());
+		document.addText(FIELD_SKU, cpInstance.getSku());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
