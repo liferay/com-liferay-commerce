@@ -161,18 +161,6 @@ public class CommerceSubscriptionCycleEntryWrapper
 		return _commerceSubscriptionCycleEntry.compareTo(commerceSubscriptionCycleEntry);
 	}
 
-	@Override
-	public CommerceOrder getCommerceOrder()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceSubscriptionCycleEntry.getCommerceOrder();
-	}
-
-	@Override
-	public CommerceOrderItem getCommerceOrderItem()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceSubscriptionCycleEntry.getCommerceOrderItem();
-	}
-
 	/**
 	* Returns the commerce order item ID of this commerce subscription cycle entry.
 	*

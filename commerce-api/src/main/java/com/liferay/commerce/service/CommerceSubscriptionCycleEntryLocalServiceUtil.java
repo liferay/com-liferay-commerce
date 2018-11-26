@@ -236,12 +236,6 @@ public class CommerceSubscriptionCycleEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
-		long commerceSubscriptionEntryId) {
-		return getService()
-				   .getCommerceSubscriptionCycleEntries(commerceSubscriptionEntryId);
-	}
-
-	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
 		long commerceSubscriptionEntryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionCycleEntry> orderByComparator) {
 		return getService()

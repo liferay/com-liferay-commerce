@@ -216,16 +216,6 @@ public class CommerceSubscriptionEntryWrapper
 		return _commerceSubscriptionEntry.getCommerceOrderItemId();
 	}
 
-	@Override
-	public java.util.List<CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries() {
-		return _commerceSubscriptionEntry.getCommerceSubscriptionCycleEntries();
-	}
-
-	@Override
-	public int getCommerceSubscriptionCycleEntriesCount() {
-		return _commerceSubscriptionEntry.getCommerceSubscriptionCycleEntriesCount();
-	}
-
 	/**
 	* Returns the commerce subscription entry ID of this commerce subscription entry.
 	*

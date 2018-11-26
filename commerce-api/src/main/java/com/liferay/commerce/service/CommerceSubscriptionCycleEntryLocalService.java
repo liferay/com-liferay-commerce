@@ -220,10 +220,6 @@ public interface CommerceSubscriptionCycleEntryLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
-		long commerceSubscriptionEntryId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries(
 		long commerceSubscriptionEntryId, int start, int end,
 		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator);
 

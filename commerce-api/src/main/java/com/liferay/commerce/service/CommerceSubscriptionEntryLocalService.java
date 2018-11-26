@@ -222,15 +222,14 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 		int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
+		long companyId, long groupId, Boolean active, String keywords,
+		int start, int end, Sort sort) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
 		long groupId, long userId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long companyId, long groupId, Long maxSubscriptionCyclesNumber,
-		Boolean active, String keywords, int start, int end, Sort sort)
-		throws PortalException;
 
 	/**
 	* Returns all the commerce subscription entries matching the UUID and company.

@@ -55,6 +55,15 @@ public class CommerceSubscriptionEntryServiceUtil {
 				   .fetchCommerceSubscriptionEntry(commerceSubscriptionEntryId);
 	}
 
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
+		long companyId, long groupId, Boolean active, String keywords,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceSubscriptionEntries(companyId, groupId, active,
+			keywords, start, end, sort);
+	}
+
 	public static java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator)
@@ -62,16 +71,6 @@ public class CommerceSubscriptionEntryServiceUtil {
 		return getService()
 				   .getCommerceSubscriptionEntries(groupId, userId, start, end,
 			orderByComparator);
-	}
-
-	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long companyId, long groupId, Long maxSubscriptionCyclesNumber,
-		Boolean active, String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceSubscriptionEntries(companyId, groupId,
-			maxSubscriptionCyclesNumber, active, keywords, start, end, sort);
 	}
 
 	public static int getCommerceSubscriptionEntriesCount(long groupId,
