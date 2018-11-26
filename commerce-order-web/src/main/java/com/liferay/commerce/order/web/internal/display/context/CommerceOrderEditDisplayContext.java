@@ -22,8 +22,6 @@ import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrde
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearch;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearchTerms;
 import com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderScreenNavigationConstants;
-import com.liferay.commerce.price.CommerceProductPrice;
-import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelectorCriterion;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
@@ -70,7 +68,6 @@ public class CommerceOrderEditDisplayContext {
 			CommerceOrderItemService commerceOrderItemService,
 			CommerceOrderNoteService commerceOrderNoteService,
 			CommercePaymentMethodService commercePaymentMethodService,
-			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			ItemSelector itemSelector, RenderRequest renderRequest)
 		throws PortalException {
 
@@ -78,7 +75,6 @@ public class CommerceOrderEditDisplayContext {
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commercePaymentMethodService = commercePaymentMethodService;
-		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_itemSelector = itemSelector;
 
 		long commerceOrderId = ParamUtil.getLong(
@@ -258,16 +254,6 @@ public class CommerceOrderEditDisplayContext {
 			_commerceOrderRequestHelper.getScopeGroupId());
 	}
 
-	public CommerceProductPrice getCommerceProductPrice(
-			CommerceOrderItem commerceOrderItem)
-		throws PortalException {
-
-		return _commerceProductPriceCalculation.getCommerceProductPrice(
-			commerceOrderItem.getCPInstanceId(),
-			commerceOrderItem.getQuantity(),
-			_commerceOrderRequestHelper.getCommerceContext());
-	}
-
 	public String getItemSelectorUrl() {
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(
@@ -295,8 +281,6 @@ public class CommerceOrderEditDisplayContext {
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
 	private final CommerceOrderService _commerceOrderService;
 	private final CommercePaymentMethodService _commercePaymentMethodService;
-	private final CommerceProductPriceCalculation
-		_commerceProductPriceCalculation;
 	private SearchContainer<CommerceOrderItem> _itemSearchContainer;
 	private final ItemSelector _itemSelector;
 
