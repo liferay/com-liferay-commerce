@@ -84,28 +84,27 @@ public class CheckCommerceSubscriptionOrderPayedMessageListener
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		List<CommerceSubscriptionEntry> activeCommerceSubscriptionEntries =
+		List<CommerceSubscriptionEntry> activeCPSubscriptionEntries =
 			_commerceSubscriptionEntryLocalService.
-				getActiveCommerceSubscriptionEntries();
+				getActiveCPSubscriptionEntries();
 
 		for (CommerceSubscriptionEntry commerceSubscriptionEntry :
-				activeCommerceSubscriptionEntries) {
+				activeCPSubscriptionEntries) {
 
 			CommerceSubscriptionCycleEntryCreateDateComparator
 				commerceSubscriptionCycleEntryCreateDateComparator =
 					new CommerceSubscriptionCycleEntryCreateDateComparator();
 
-			List<CommerceSubscriptionCycleEntry>
-				commerceSubscriptionCycleEntries =
-					_commerceSubscriptionCycleEntryLocalService.
-						getCommerceSubscriptionCycleEntries(
-							commerceSubscriptionEntry.
-								getCommerceSubscriptionEntryId(),
-							QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-							commerceSubscriptionCycleEntryCreateDateComparator);
+			List<CommerceSubscriptionCycleEntry> cpSubscriptionCycleEntries =
+				_commerceSubscriptionCycleEntryLocalService.
+					getCPSubscriptionCycleEntries(
+						commerceSubscriptionEntry.
+							getCommerceSubscriptionEntryId(),
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+						commerceSubscriptionCycleEntryCreateDateComparator);
 
 			CommerceSubscriptionCycleEntry firstCommerceSubscriptionCycleEntry =
-				commerceSubscriptionCycleEntries.get(0);
+				cpSubscriptionCycleEntries.get(0);
 
 			Date now = new Date();
 

@@ -110,7 +110,7 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 	private boolean _isNewSubscription(CommerceOrderItem commerceOrderItem) {
 		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
 			_commerceSubscriptionCycleEntryLocalService.
-				fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
+				fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
 					commerceOrderItem.getCommerceOrderItemId());
 
 		if ((commerceSubscriptionCycleEntry != null) &&

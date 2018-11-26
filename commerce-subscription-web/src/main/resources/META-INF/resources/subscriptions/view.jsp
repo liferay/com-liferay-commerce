@@ -25,7 +25,7 @@ SearchContainer<CommerceSubscriptionEntry> commerceSubscriptionEntrySearchContai
 <div class="container-fluid-1280" id="<portlet:namespace />subscriptionEntriesContainer">
 	<div class="commerce-product-subscription-entries-container" id="<portlet:namespace />entriesContainer">
 		<liferay-ui:search-container
-			id="commerceSubscriptionEntries"
+			id="cpSubscriptionEntries"
 			iteratorURL="<%= commerceSubscriptionContentDisplayContext.getPortletURL() %>"
 			searchContainer="<%= commerceSubscriptionEntrySearchContainer %>"
 		>

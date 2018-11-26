@@ -361,7 +361,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 
 		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
 			_commerceSubscriptionCycleEntryLocalService.
-				fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
+				fetchCPCpSubscriptionCycleEntryByCommerceOrderItemId(
 					commerceVirtualOrderItem.getCommerceOrderItemId());
 
 		if (commerceSubscriptionCycleEntry == null) {

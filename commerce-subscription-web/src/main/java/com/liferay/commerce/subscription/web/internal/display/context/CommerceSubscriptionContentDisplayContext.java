@@ -154,13 +154,12 @@ public class CommerceSubscriptionContentDisplayContext {
 			new CommerceSubscriptionEntryCreateDateComparator();
 
 		int total =
-			_commerceSubscriptionEntryService.
-				getCommerceSubscriptionEntriesCount(
-					_cpRequestHelper.getScopeGroupId(),
-					_cpRequestHelper.getUserId());
+			_commerceSubscriptionEntryService.getCPSubscriptionEntriesCount(
+				_cpRequestHelper.getScopeGroupId(),
+				_cpRequestHelper.getUserId());
 
 		List<CommerceSubscriptionEntry> results =
-			_commerceSubscriptionEntryService.getCommerceSubscriptionEntries(
+			_commerceSubscriptionEntryService.getCPSubscriptionEntries(
 				_cpRequestHelper.getScopeGroupId(),
 				_cpRequestHelper.getUserId(), _searchContainer.getStart(),
 				_searchContainer.getEnd(), orderByComparator);

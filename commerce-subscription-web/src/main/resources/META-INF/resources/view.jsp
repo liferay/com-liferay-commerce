@@ -28,7 +28,7 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 
 <liferay-frontend:management-bar
 	includeCheckBox="<%= true %>"
-	searchContainerId="commerceSubscriptionEntries"
+	searchContainerId="cpSubscriptionEntries"
 >
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-navigation
@@ -63,7 +63,7 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 	<c:if test="<%= hasManageCommerceSubscriptionEntryPermission %>">
 		<liferay-frontend:management-bar-action-buttons>
 			<liferay-frontend:management-bar-button
-				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceSubscriptionEntries();" %>'
+				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCPSubscriptionEntries();" %>'
 				icon="times"
 				label="delete"
 			/>
@@ -79,7 +79,7 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 
 		<div class="product-subscriptions-container" id="<portlet:namespace />entriesContainer">
 			<liferay-ui:search-container
-				id="commerceSubscriptionEntries"
+				id="cpSubscriptionEntries"
 				searchContainer="<%= commerceSubscriptionEntrySearchContainer %>"
 			>
 				<liferay-ui:search-container-row
@@ -160,7 +160,7 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 </div>
 
 <aui:script>
-	function <portlet:namespace />deleteCommerceSubscriptionEntries() {
+	function <portlet:namespace />deleteCPSubscriptionEntries() {
 		if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-subscription-entries" />')) {
 			var form = AUI.$(document.<portlet:namespace />fm);
 
