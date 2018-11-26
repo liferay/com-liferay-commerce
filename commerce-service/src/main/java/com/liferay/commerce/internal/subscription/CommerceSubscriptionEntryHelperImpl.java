@@ -99,7 +99,7 @@ public class CommerceSubscriptionEntryHelperImpl
 				commerceOrder.getCommerceOrderId(), null, serviceContext);
 		}
 
-		if (commerceSubscriptionEntry.getMaxSubscriptionCycles() > 0) {
+		if (commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber() > 0) {
 			int commerceSubscriptionCycleEntriesCount =
 				_commerceSubscriptionCycleEntryLocalService.
 					getCommerceSubscriptionCycleEntriesCount(
@@ -107,7 +107,8 @@ public class CommerceSubscriptionEntryHelperImpl
 							getCommerceSubscriptionEntryId());
 
 			if (commerceSubscriptionCycleEntriesCount >=
-					commerceSubscriptionEntry.getMaxSubscriptionCycles()) {
+					commerceSubscriptionEntry.
+						getMaxSubscriptionCyclesNumber()) {
 
 				_commerceSubscriptionEntryLocalService.setActive(
 					commerceSubscriptionEntry.getCommerceSubscriptionEntryId(),
@@ -166,8 +167,6 @@ public class CommerceSubscriptionEntryHelperImpl
 
 		newOrder.setOrderStatus(
 			CommerceOrderConstants.ORDER_STATUS_SUBSCRIPTION);
-		newOrder.setPaymentStatus(
-			CommerceOrderConstants.PAYMENT_STATUS_PENDING);
 
 		newOrder = _commerceOrderLocalService.updateCommerceOrder(newOrder);
 
