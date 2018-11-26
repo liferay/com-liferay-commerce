@@ -91,14 +91,6 @@ public class CommerceSubscriptionCycleEntryLocalServiceImpl
 
 	@Override
 	public List<CommerceSubscriptionCycleEntry>
-		getCommerceSubscriptionCycleEntries(long commerceSubscriptionEntryId) {
-
-		return commerceSubscriptionCycleEntryPersistence.
-			findBycommerceSubscriptionEntryId(commerceSubscriptionEntryId);
-	}
-
-	@Override
-	public List<CommerceSubscriptionCycleEntry>
 		getCommerceSubscriptionCycleEntries(
 			long commerceSubscriptionEntryId, int start, int end,
 			OrderByComparator<CommerceSubscriptionCycleEntry>
