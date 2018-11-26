@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.List;
 
@@ -83,7 +82,7 @@ public class CommerceSubscriptionEntryServiceImpl
 	@Override
 	public BaseModelSearchResult<CommerceSubscriptionEntry>
 			getCommerceSubscriptionEntries(
-				long companyId, long groupId, Long maxSubscriptionCycles,
+				long companyId, long groupId, Long maxSubscriptionCyclesNumber,
 				Boolean active, String keywords, int start, int end, Sort sort)
 		throws PortalException {
 
@@ -93,8 +92,8 @@ public class CommerceSubscriptionEntryServiceImpl
 
 		return commerceSubscriptionEntryLocalService.
 			getCommerceSubscriptionEntries(
-				companyId, groupId, maxSubscriptionCycles, active, keywords,
-				start, end, sort);
+				companyId, groupId, maxSubscriptionCyclesNumber, active,
+				keywords, start, end, sort);
 	}
 
 	@Override
@@ -123,15 +122,10 @@ public class CommerceSubscriptionEntryServiceImpl
 	}
 
 	@Override
-	public CommerceSubscriptionEntry updateCommerceSubscriptionEntry(
-			long commerceSubscriptionEntryId, int subscriptionLength,
-			String subscriptionType,
-			UnicodeProperties subscriptionTypeSettingsProperties,
-			long maxSubscriptionCycles, boolean active, int startDateMonth,
-			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int nextInterationDateMonth,
-			int nextInterationDateDay, int nextInterationDateYear,
-			int nextInterationDateHour, int nextInterationDateMinute)
+	public CommerceSubscriptionEntry updateCommercePriceEntry(
+			long commerceSubscriptionEntryId, long subscriptionCycleLength,
+			String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+			boolean active)
 		throws PortalException {
 
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
@@ -144,13 +138,8 @@ public class CommerceSubscriptionEntryServiceImpl
 
 		return commerceSubscriptionEntryLocalService.
 			updateCommerceSubscriptionEntry(
-				commerceSubscriptionEntryId, subscriptionLength,
-				subscriptionType, subscriptionTypeSettingsProperties,
-				maxSubscriptionCycles, active, startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute,
-				nextInterationDateMonth, nextInterationDateDay,
-				nextInterationDateYear, nextInterationDateHour,
-				nextInterationDateMinute);
+				commerceSubscriptionEntryId, subscriptionCycleLength,
+				subscriptionCyclePeriod, maxSubscriptionCyclesNumber, active);
 	}
 
 	private static volatile PortletResourcePermission

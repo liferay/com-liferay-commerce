@@ -15,16 +15,12 @@
 package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.exception.CommerceSubscriptionCPInstanceIdException;
-import com.liferay.commerce.exception.CommerceSubscriptionEntryNextIterationDateException;
-import com.liferay.commerce.exception.CommerceSubscriptionEntryStartDateException;
-import com.liferay.commerce.exception.CommerceSubscriptionTypeException;
 import com.liferay.commerce.internal.search.CommerceSubscriptionEntryIndexer;
+import com.liferay.commerce.internal.util.CommerceSubscriptionUtil;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
-import com.liferay.commerce.product.util.CPSubscriptionType;
-import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.base.CommerceSubscriptionEntryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
@@ -43,8 +39,6 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
@@ -83,11 +77,11 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			throw new CommerceSubscriptionCPInstanceIdException();
 		}
 
-		CPSubscriptionType cpSubscriptionType =
-			_cpSubscriptionTypeRegistry.getCPSubscriptionType(
-				cpSubscriptionInfo.getSubscriptionType());
-
-		validate(cpSubscriptionType);
+		Date subscriptionNextIterationDate =
+			CommerceSubscriptionUtil.getSubscriptionNextIterationDate(
+				user.getTimeZone(),
+				cpSubscriptionInfo.getSubscriptionCycleLength(),
+				cpSubscriptionInfo.getSubscriptionCyclePeriod());
 
 		long commerceSubscriptionEntryId = counterLocalService.increment();
 
@@ -102,32 +96,15 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		commerceSubscriptionEntry.setUserName(user.getFullName());
 		commerceSubscriptionEntry.setCPInstanceId(cpInstanceId);
 		commerceSubscriptionEntry.setCommerceOrderItemId(commerceOrderItemId);
-		commerceSubscriptionEntry.setSubscriptionLength(
-			cpSubscriptionInfo.getSubscriptionLength());
-		commerceSubscriptionEntry.setSubscriptionType(
-			cpSubscriptionInfo.getSubscriptionType());
-		commerceSubscriptionEntry.setMaxSubscriptionCycles(
-			cpSubscriptionInfo.getMaxSubscriptionCycles());
-		commerceSubscriptionEntry.setSubscriptionTypeSettingsProperties(
-			cpSubscriptionInfo.getSubscriptionTypeSettingsProperties());
+		commerceSubscriptionEntry.setSubscriptionCycleLength(
+			cpSubscriptionInfo.getSubscriptionCycleLength());
+		commerceSubscriptionEntry.setSubscriptionCyclePeriod(
+			cpSubscriptionInfo.getSubscriptionCyclePeriod());
+		commerceSubscriptionEntry.setMaxSubscriptionCyclesNumber(
+			cpSubscriptionInfo.getMaxSubscriptionCyclesNumber());
 		commerceSubscriptionEntry.setActive(true);
-		commerceSubscriptionEntry.setLastIterationDate(new Date());
-
-		Date subscriptionNextIterationDate =
-			cpSubscriptionType.getSubscriptionNextIterationDate(
-				user.getTimeZone(), cpSubscriptionInfo.getSubscriptionLength(),
-				cpSubscriptionInfo.getSubscriptionTypeSettingsProperties(),
-				null);
-
 		commerceSubscriptionEntry.setNextIterationDate(
 			subscriptionNextIterationDate);
-
-		Date subscriptionStartDate =
-			cpSubscriptionType.getSubscriptionStartDate(
-				user.getTimeZone(),
-				cpSubscriptionInfo.getSubscriptionTypeSettingsProperties());
-
-		commerceSubscriptionEntry.setStartDate(subscriptionStartDate);
 
 		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
 
@@ -159,13 +136,13 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	@Override
 	public BaseModelSearchResult<CommerceSubscriptionEntry>
 			getCommerceSubscriptionEntries(
-				long companyId, long groupId, Long maxSubscriptionCycles,
+				long companyId, long groupId, Long maxSubscriptionCyclesNumber,
 				Boolean active, String keywords, int start, int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, maxSubscriptionCycles, active, keywords, start,
-			end, sort);
+			companyId, groupId, maxSubscriptionCyclesNumber, active, keywords,
+			start, end, sort);
 
 		return getCommerceSubscriptionEntries(searchContext);
 	}
@@ -203,88 +180,22 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceSubscriptionEntry updateCommerceSubscriptionEntry(
-			long commerceSubscriptionEntryId, int subscriptionLength,
-			String subscriptionType,
-			UnicodeProperties subscriptionTypeSettingsProperties,
-			long maxSubscriptionCycles, boolean active, int startDateMonth,
-			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int nextInterationDateMonth,
-			int nextInterationDateDay, int nextInterationDateYear,
-			int nextInterationDateHour, int nextInterationDateMinute)
+			long commerceSubscriptionEntryId, long subscriptionCycleLength,
+			String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
+			boolean active)
 		throws PortalException {
-
-		CPSubscriptionType cpSubscriptionType =
-			_cpSubscriptionTypeRegistry.getCPSubscriptionType(subscriptionType);
-
-		validate(cpSubscriptionType);
 
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
 			commerceSubscriptionEntryPersistence.findByPrimaryKey(
 				commerceSubscriptionEntryId);
 
-		User user = userLocalService.getUser(
-			commerceSubscriptionEntry.getUserId());
-
-		Date startDate = null;
-		Date nextInterationDate = null;
-
-		startDate = PortalUtil.getDate(
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateDay, user.getTimeZone(),
-			CommerceSubscriptionEntryStartDateException.class);
-
-		nextInterationDate = PortalUtil.getDate(
-			nextInterationDateMonth, nextInterationDateDay,
-			nextInterationDateYear, nextInterationDateHour,
-			nextInterationDateDay, user.getTimeZone(),
-			CommerceSubscriptionEntryNextIterationDateException.class);
-
-		commerceSubscriptionEntry.setSubscriptionLength(subscriptionLength);
-		commerceSubscriptionEntry.setSubscriptionType(subscriptionType);
-		commerceSubscriptionEntry.setSubscriptionTypeSettingsProperties(
-			subscriptionTypeSettingsProperties);
-		commerceSubscriptionEntry.setMaxSubscriptionCycles(
-			maxSubscriptionCycles);
+		commerceSubscriptionEntry.setSubscriptionCycleLength(
+			subscriptionCycleLength);
+		commerceSubscriptionEntry.setSubscriptionCyclePeriod(
+			subscriptionCyclePeriod);
+		commerceSubscriptionEntry.setMaxSubscriptionCyclesNumber(
+			maxSubscriptionCyclesNumber);
 		commerceSubscriptionEntry.setActive(active);
-		commerceSubscriptionEntry.setStartDate(startDate);
-		commerceSubscriptionEntry.setNextIterationDate(nextInterationDate);
-
-		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
-
-		return commerceSubscriptionEntry;
-	}
-
-	@Override
-	public CommerceSubscriptionEntry
-			updateCommerceSubscriptionEntryIterationDates(
-				long commerceSubscriptionEntryId, Date lastIterationDate)
-		throws PortalException {
-
-		CommerceSubscriptionEntry commerceSubscriptionEntry =
-			commerceSubscriptionEntryPersistence.findByPrimaryKey(
-				commerceSubscriptionEntryId);
-
-		User user = userLocalService.getUser(
-			commerceSubscriptionEntry.getUserId());
-
-		CPSubscriptionType cpSubscriptionType =
-			_cpSubscriptionTypeRegistry.getCPSubscriptionType(
-				commerceSubscriptionEntry.getSubscriptionType());
-
-		validate(cpSubscriptionType);
-
-		commerceSubscriptionEntry.setLastIterationDate(lastIterationDate);
-
-		Date subscriptionNextIterationDate =
-			cpSubscriptionType.getSubscriptionNextIterationDate(
-				user.getTimeZone(),
-				commerceSubscriptionEntry.getSubscriptionLength(),
-				commerceSubscriptionEntry.
-					getSubscriptionTypeSettingsProperties(),
-				lastIterationDate);
-
-		commerceSubscriptionEntry.setNextIterationDate(
-			subscriptionNextIterationDate);
 
 		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
 
@@ -292,7 +203,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, Long maxSubscriptionCycles,
+		long companyId, long groupId, Long maxSubscriptionCyclesNumber,
 		Boolean active, String keywords, int start, int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
@@ -308,10 +219,11 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			CommerceSubscriptionEntryIndexer.FIELD_CP_INSTANCE_ID, keywords);
 		attributes.put(CommerceSubscriptionEntryIndexer.FIELD_SKU, keywords);
 
-		if (maxSubscriptionCycles != null) {
+		if (maxSubscriptionCyclesNumber != null) {
 			attributes.put(
-				CommerceSubscriptionEntryIndexer.FIELD_MAX_SUBSCRIPTION_CYCLES,
-				maxSubscriptionCycles);
+				CommerceSubscriptionEntryIndexer.
+					FIELD_MAX_SUBSCRIPTION_CYCLES_NUMBER,
+				maxSubscriptionCyclesNumber);
 		}
 
 		if (active != null) {
@@ -404,21 +316,10 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			"Unable to fix the search index after 10 attempts");
 	}
 
-	protected void validate(CPSubscriptionType cpSubscriptionType)
-		throws PortalException {
-
-		if (cpSubscriptionType == null) {
-			throw new CommerceSubscriptionTypeException();
-		}
-	}
-
 	private static final String[] _SELECTED_FIELD_NAMES =
 		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
 
 	@ServiceReference(type = CPInstanceLocalService.class)
 	private CPInstanceLocalService _cpInstanceLocalService;
-
-	@ServiceReference(type = CPSubscriptionTypeRegistry.class)
-	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 
 }
