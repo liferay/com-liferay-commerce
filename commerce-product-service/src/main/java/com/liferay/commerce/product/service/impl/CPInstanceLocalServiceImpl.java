@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.service.impl;
 
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.exception.CPInstanceDisplayDateException;
 import com.liferay.commerce.product.exception.CPInstanceExpirationDateException;
 import com.liferay.commerce.product.exception.CPInstanceJsonException;
@@ -121,10 +120,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, boolean overrideSubscriptionInfo,
-			boolean subscriptionEnabled, long subscriptionCycleLength,
-			String subscriptionCyclePeriod, long maxSubscriptionCyclesNumber,
-			ServiceContext serviceContext)
+			boolean neverExpire, ServiceContext serviceContext)
 		throws PortalException {
 
 		// Commerce product instance
@@ -182,11 +178,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		cpInstance.setExternalReferenceCode(externalReferenceCode);
 		cpInstance.setDisplayDate(displayDate);
 		cpInstance.setExpirationDate(expirationDate);
-		cpInstance.setOverrideSubscriptionInfo(overrideSubscriptionInfo);
-		cpInstance.setSubscriptionEnabled(subscriptionEnabled);
-		cpInstance.setSubscriptionCycleLength(subscriptionCycleLength);
-		cpInstance.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
-		cpInstance.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
 			cpInstance.setStatus(WorkflowConstants.STATUS_DRAFT);
@@ -207,30 +198,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		return startWorkflowInstance(
 			user.getUserId(), cpInstance, serviceContext);
-	}
-
-	@Override
-	public CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
-			String manufacturerPartNumber, boolean purchasable, String json,
-			double width, double height, double depth, double weight,
-			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
-			boolean published, String externalReferenceCode,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, ServiceContext serviceContext)
-		throws PortalException {
-
-		return cpInstanceLocalService.addCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
-			json, width, height, depth, weight, price, promoPrice, cost,
-			published, externalReferenceCode, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, false, false,
-			0, CPConstants.SUBSCRIPTION_CYCLE_DAY, 0, serviceContext);
 	}
 
 	@Override
