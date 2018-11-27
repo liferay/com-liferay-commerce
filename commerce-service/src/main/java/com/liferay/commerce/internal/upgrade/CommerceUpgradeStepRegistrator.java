@@ -18,14 +18,21 @@ import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderItemUpgradeProc
 import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderNoteUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v1_2_0.CommerceSubscriptionUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v1_3_0.CPDAvailabilityEstimateUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v1_3_0.CPDefinitionInventoryUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v1_3_0.CommerceWarehouseItemUpgradeProcess;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Alec Sloan
  */
 @Component(immediate = true, service = UpgradeStepRegistrator.class)
 public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
@@ -46,6 +53,16 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_1_2_0,
 			new CommerceSubscriptionUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_1_2_0, _SCHEMA_VERSION_1_3_0,
+			new CommerceWarehouseItemUpgradeProcess(
+				_cpDefinitionLocalService, _cpInstanceLocalService),
+			new com.liferay.commerce.internal.upgrade.v1_3_0.
+				CommerceOrderItemUpgradeProcess(
+					_cpDefinitionLocalService, _cpInstanceLocalService),
+			new CPDAvailabilityEstimateUpgradeProcess(),
+			new CPDefinitionInventoryUpgradeProcess());
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -57,7 +74,15 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 
 	private static final String _SCHEMA_VERSION_1_2_0 = "1.2.0";
 
+	private static final String _SCHEMA_VERSION_1_3_0 = "1.3.0";
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUpgradeStepRegistrator.class);
+
+	@Reference
+	private CPDefinitionLocalService _cpDefinitionLocalService;
+
+	@Reference
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 }
