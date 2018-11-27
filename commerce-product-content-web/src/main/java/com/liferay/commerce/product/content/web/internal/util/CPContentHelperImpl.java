@@ -28,7 +28,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOptionCategory;
-import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
+import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
 import com.liferay.commerce.product.type.CPType;
@@ -122,7 +122,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 
 		long classNameId = _portal.getClassNameId(CPDefinition.class);
 
-		return _cpAttachmentFileEntryLocalService.getCPAttachmentFileEntries(
+		return _cpAttachmentFileEntryService.getCPAttachmentFileEntries(
 			classNameId, cpDefinitionId,
 			CPAttachmentFileEntryConstants.TYPE_OTHER,
 			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
@@ -263,7 +263,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 
 		long classNameId = _portal.getClassNameId(CPDefinition.class);
 
-		return _cpAttachmentFileEntryLocalService.getCPAttachmentFileEntries(
+		return _cpAttachmentFileEntryService.getCPAttachmentFileEntries(
 			classNameId, cpDefinitionId,
 			CPAttachmentFileEntryConstants.TYPE_IMAGE,
 			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
@@ -376,8 +376,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 	}
 
 	@Reference
-	private CPAttachmentFileEntryLocalService
-		_cpAttachmentFileEntryLocalService;
+	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
 
 	@Reference
 	private CPDefinitionSpecificationOptionValueService
