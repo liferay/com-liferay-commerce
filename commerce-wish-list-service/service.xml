@@ -88,14 +88,14 @@
 
 		<!-- Finder methods -->
 
+		<finder name="CommerceWishListId" return-type="Collection">
+			<finder-column name="commerceWishListId" />
+		</finder>
 		<finder name="CPInstanceUuid" return-type="Collection">
 			<finder-column name="CPInstanceUuid" />
 		</finder>
 		<finder name="CProductId" return-type="Collection">
 			<finder-column name="CProductId" />
-		</finder>
-		<finder name="CommerceWishListId" return-type="Collection">
-			<finder-column name="commerceWishListId" />
 		</finder>
 	</entity>
 	<exceptions>
