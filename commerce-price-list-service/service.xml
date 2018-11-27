@@ -25,8 +25,8 @@
 		<!-- Other fields -->
 
 		<column name="commercePriceListId" type="long" />
-		<column name="CProductId" type="long" />
 		<column name="CPInstanceUuid" type="String" />
+		<column name="CProductId" type="long" />
 		<column name="price" type="BigDecimal" />
 		<column name="promoPrice" type="BigDecimal" />
 		<column name="hasTierPrice" type="boolean" />
@@ -40,9 +40,6 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CPInstanceUuid" return-type="Collection">
-			<finder-column name="CPInstanceUuid" />
-		</finder>
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
@@ -51,6 +48,9 @@
 		</finder>
 		<finder name="CommercePriceListId" return-type="Collection">
 			<finder-column name="commercePriceListId" />
+		</finder>
+		<finder name="CPInstanceUuid" return-type="Collection">
+			<finder-column name="CPInstanceUuid" />
 		</finder>
 		<finder name="C_C" return-type="CommercePriceEntry" unique="true">
 			<finder-column name="commercePriceListId" />
