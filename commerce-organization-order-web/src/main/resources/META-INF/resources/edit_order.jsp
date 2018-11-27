@@ -264,29 +264,10 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 					cssClass="order-item-quantity"
 					name="quantity"
 				>
-					<aui:form action="<%= editCommerceOrderItemURL %>" method="post" name='<%= commerceOrderItem.getCommerceOrderItemId() + "fm" %>'>
-						<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-						<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-						<aui:input name="commerceOrderItemId" type="hidden" value="<%= commerceOrderItem.getCommerceOrderItemId() %>" />
-
-						<aui:model-context bean="<%= commerceOrderItem %>" model="<%= CommerceOrderItem.class %>" />
-
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-item input-group-prepend">
-									<liferay-commerce:quantity-input name="quantity" CPDefinitionId="<%= commerceOrderItem.getCPDefinitionId() %>" value="<%= commerceOrderItem.getQuantity() %>" useSelect="<%= false %>" />
-								</div>
-
-								<div class="input-group-append input-group-item input-group-item-shrink">
-									<clay:button
-										label='<%= LanguageUtil.get(resourceBundle, "update") %>'
-										style="secondary"
-										type="submit"
-									/>
-								</div>
-							</div>
-						</div>
-					</aui:form>
+					<liferay-commerce-cart:quantity-control
+						commerceOrderItemId="<%= commerceOrderItem.getCommerceOrderItemId() %>"
+						useSelect="<%= false %>"
+					/>
 				</liferay-ui:search-container-column-text>
 			</c:when>
 			<c:otherwise>

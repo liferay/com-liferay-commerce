@@ -21,6 +21,7 @@
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
 taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
 taglib uri="http://liferay.com/tld/commerce" prefix="liferay-commerce" %><%@
+taglib uri="http://liferay.com/tld/commerce-cart" prefix="liferay-commerce-cart" %><%@
 taglib uri="http://liferay.com/tld/ddm" prefix="liferay-ddm" %><%@
 taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
 taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
@@ -39,7 +40,6 @@ page import="com.liferay.commerce.exception.NoSuchOrderNoteException" %><%@
 page import="com.liferay.commerce.model.CommerceAddress" %><%@
 page import="com.liferay.commerce.model.CommerceCountry" %><%@
 page import="com.liferay.commerce.model.CommerceOrder" %><%@
-page import="com.liferay.commerce.model.CommerceOrderItem" %><%@
 page import="com.liferay.commerce.model.CommerceOrderNote" %><%@
 page import="com.liferay.commerce.model.CommerceShipment" %><%@
 page import="com.liferay.commerce.model.CommerceShipmentItem" %><%@
