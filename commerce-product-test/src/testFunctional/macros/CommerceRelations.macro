@@ -1,0 +1,37 @@
+<definition>
+	<command name="assignAllRelationsToProductsEntry">
+		<execute function="Click" locator1="CommerceEntry#ADD_BUTTON" />
+
+		<execute function="WaitForSPARefresh" />
+
+		<execute macro="CommerceItemSelector#selectAlleEntries" />
+
+		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
+	</command>
+
+	<command name="assignMultipleRelationToProductsEntry">
+		<execute function="Click" locator1="CommerceEntry#ADD_BUTTON" />
+
+		<execute function="WaitForSPARefresh" />
+		
+		<for list="${entriesList}" param="entriesNames">
+			<execute macro="CommerceItemSelector#selectEntry">
+				<var name="entryName" value="${entriesNames}" />
+			</execute>
+		</for>
+
+		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
+	</command>
+
+	<command name="assignSingleRelationToProductsEntry">
+		<execute function="Click" locator1="CommerceEntry#ADD_BUTTON" />
+
+		<execute function="WaitForSPARefresh" />
+
+		<execute macro="CommerceItemSelector#selectEntry">
+			<var name="entryName" value="${entryName}" />
+		</execute>
+
+		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
+	</command>
+</definition>
