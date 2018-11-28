@@ -15,6 +15,50 @@
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
+			<var name="portlet" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="User#deactivateCP">
+			<var name="deactivateType" value="Actions" />
+			<var name="userFirstName" value="Commerce" />
+		</execute>
+
+		<execute macro="User#deleteCP">
+			<var name="userFirstName" value="Commerce" />
+		</execute>
+
+		<execute macro="UsersAndOrganizationsNavigator#gotoOrganizations" />
+
+		<if>
+			<condition function="IsElementPresent" locator1="UsersAndOrganizations#ORGANIZATION_TABLE_NAME">
+				<var name="key_orgName" value="Commerce Organization" />
+			</condition>
+
+			<then>
+				<execute macro="Organization#deleteCP">
+					<var name="orgName" value="Commerce Organization" />
+				</execute>
+			</then>
+		</if>
+
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
+			<var name="portlet" value="User Groups" />
+		</execute>
+
+		<if>
+			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
+			<then>
+				<execute macro="UserGroup#deleteCP">
+					<var name="userGroupName" value="Commerce UserGroup" />
+				</execute>
+			</then>
+		</if>
+
+		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
 			<var name="panel" value="Site Administration" />
 			<var name="portlet" value="User Segments" />
@@ -53,7 +97,9 @@
 		<if>
 			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
 			<then>
-				<execute macro="CommerceProducts#deleteEntries" />
+				<execute macro="CommerceProducts#deleteEntries">
+					<var name="deleteMessage" value="Are you sure you want to delete the selected discounts?" />
+				</execute>
 			</then>
 		</if>
 
