@@ -45,7 +45,12 @@
 </tr>
 <tr>
 	<td>SINGLE_ENTRY_CHECKBOX</td>
-	<td>//*[@data-qa-id='row' and contains(.,'${key_entryName}')]//input[@type='checkbox']</td>
+	<td>//*[@data-qa-id='row']//*[text()='${key_entryName}']//..//input[@type='checkbox'] | //tr[@data-name='${key_entryName}']//input[@type="checkbox"] | //*[@data-qa-id='row' and contains(.,'${key_entryName}')]//input[@type='checkbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATIONS_TABLE_CHECKBOX</td>
+	<td>//tr[@data-name="${key_orgName}"]//input[@type="checkbox"]</td>
 	<td></td>
 </tr>
 <tr>
