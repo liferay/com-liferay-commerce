@@ -256,6 +256,16 @@ long commerceRegionId = BeanParamUtil.getLong(defaultCommerceAddress, request, "
 			{
 				select: '<portlet:namespace />commerceCountryId',
 				selectData: function(callback) {
+					function injectCountryPlaceholder(list) {
+						callback([
+							{
+								commerceCountryId: '0',
+								nameCurrentValue: '- <liferay-ui:message key="select-country" />'
+							},
+							...list
+						]);
+					}
+
 					Liferay.Service(
 						'/commerce.commercecountry/<%= baseAddressCheckoutStepDisplayContext.getCommerceCountrySelectionMethodName() %>',
 						{
@@ -263,28 +273,40 @@ long commerceRegionId = BeanParamUtil.getLong(defaultCommerceAddress, request, "
 							<%= baseAddressCheckoutStepDisplayContext.getCommerceCountrySelectionColumnName() %>: true,
 							active: true
 						},
-						callback
+						injectCountryPlaceholder
 					);
 				},
 				selectDesc: 'nameCurrentValue',
 				selectId: 'commerceCountryId',
+				selectNullable: <%= false %>,
 				selectSort: '<%= true %>',
 				selectVal: '<%= commerceCountryId %>'
 			},
 			{
 				select: '<portlet:namespace />commerceRegionId',
 				selectData: function(callback, selectKey) {
+					function injectRegionPlaceholder(list) {
+						callback([
+							{
+								commerceRegionId: '0',
+								name: '- <liferay-ui:message key="select-region" />'
+							},
+							...list
+						]);
+					}
+
 					Liferay.Service(
 						'/commerce.commerceregion/get-commerce-regions',
 						{
 							commerceCountryId: Number(selectKey),
 							active: true
 						},
-						callback
+						injectRegionPlaceholder
 					);
 				},
 				selectDesc: 'name',
 				selectId: 'commerceRegionId',
+				selectNullable: <%= false %>,
 				selectVal: '<%= commerceRegionId %>'
 			}
 		]
