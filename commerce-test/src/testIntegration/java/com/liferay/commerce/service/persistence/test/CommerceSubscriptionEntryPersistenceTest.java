@@ -142,15 +142,21 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 		newCommerceSubscriptionEntry.setCommerceOrderItemId(RandomTestUtil.nextLong());
 
-		newCommerceSubscriptionEntry.setSubscriptionCycleLength(RandomTestUtil.nextLong());
+		newCommerceSubscriptionEntry.setSubscriptionLength(RandomTestUtil.nextInt());
 
-		newCommerceSubscriptionEntry.setSubscriptionCyclePeriod(RandomTestUtil.randomString());
+		newCommerceSubscriptionEntry.setSubscriptionType(RandomTestUtil.randomString());
 
-		newCommerceSubscriptionEntry.setMaxSubscriptionCyclesNumber(RandomTestUtil.nextLong());
+		newCommerceSubscriptionEntry.setSubscriptionTypeSettings(RandomTestUtil.randomString());
+
+		newCommerceSubscriptionEntry.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
 
 		newCommerceSubscriptionEntry.setActive(RandomTestUtil.randomBoolean());
 
+		newCommerceSubscriptionEntry.setLastIterationDate(RandomTestUtil.nextDate());
+
 		newCommerceSubscriptionEntry.setNextIterationDate(RandomTestUtil.nextDate());
+
+		newCommerceSubscriptionEntry.setStartDate(RandomTestUtil.nextDate());
 
 		_commerceSubscriptionEntries.add(_persistence.update(
 				newCommerceSubscriptionEntry));
@@ -180,18 +186,27 @@ public class CommerceSubscriptionEntryPersistenceTest {
 			newCommerceSubscriptionEntry.getCPInstanceId());
 		Assert.assertEquals(existingCommerceSubscriptionEntry.getCommerceOrderItemId(),
 			newCommerceSubscriptionEntry.getCommerceOrderItemId());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionCycleLength(),
-			newCommerceSubscriptionEntry.getSubscriptionCycleLength());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionCyclePeriod(),
-			newCommerceSubscriptionEntry.getSubscriptionCyclePeriod());
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getMaxSubscriptionCyclesNumber(),
-			newCommerceSubscriptionEntry.getMaxSubscriptionCyclesNumber());
+		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionLength(),
+			newCommerceSubscriptionEntry.getSubscriptionLength());
+		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionType(),
+			newCommerceSubscriptionEntry.getSubscriptionType());
+		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionTypeSettings(),
+			newCommerceSubscriptionEntry.getSubscriptionTypeSettings());
+		Assert.assertEquals(existingCommerceSubscriptionEntry.getMaxSubscriptionCycles(),
+			newCommerceSubscriptionEntry.getMaxSubscriptionCycles());
 		Assert.assertEquals(existingCommerceSubscriptionEntry.isActive(),
 			newCommerceSubscriptionEntry.isActive());
+		Assert.assertEquals(Time.getShortTimestamp(
+				existingCommerceSubscriptionEntry.getLastIterationDate()),
+			Time.getShortTimestamp(
+				newCommerceSubscriptionEntry.getLastIterationDate()));
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCommerceSubscriptionEntry.getNextIterationDate()),
 			Time.getShortTimestamp(
 				newCommerceSubscriptionEntry.getNextIterationDate()));
+		Assert.assertEquals(Time.getShortTimestamp(
+				existingCommerceSubscriptionEntry.getStartDate()),
+			Time.getShortTimestamp(newCommerceSubscriptionEntry.getStartDate()));
 	}
 
 	@Test
@@ -271,9 +286,10 @@ public class CommerceSubscriptionEntryPersistenceTest {
 			"uuid", true, "commerceSubscriptionEntryId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "CPInstanceId", true,
-			"commerceOrderItemId", true, "subscriptionCycleLength", true,
-			"subscriptionCyclePeriod", true, "maxSubscriptionCyclesNumber",
-			true, "active", true, "nextIterationDate", true);
+			"commerceOrderItemId", true, "subscriptionLength", true,
+			"subscriptionType", true, "maxSubscriptionCycles", true, "active",
+			true, "lastIterationDate", true, "nextIterationDate", true,
+			"startDate", true);
 	}
 
 	@Test
@@ -528,15 +544,21 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 		commerceSubscriptionEntry.setCommerceOrderItemId(RandomTestUtil.nextLong());
 
-		commerceSubscriptionEntry.setSubscriptionCycleLength(RandomTestUtil.nextLong());
+		commerceSubscriptionEntry.setSubscriptionLength(RandomTestUtil.nextInt());
 
-		commerceSubscriptionEntry.setSubscriptionCyclePeriod(RandomTestUtil.randomString());
+		commerceSubscriptionEntry.setSubscriptionType(RandomTestUtil.randomString());
 
-		commerceSubscriptionEntry.setMaxSubscriptionCyclesNumber(RandomTestUtil.nextLong());
+		commerceSubscriptionEntry.setSubscriptionTypeSettings(RandomTestUtil.randomString());
+
+		commerceSubscriptionEntry.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
 
 		commerceSubscriptionEntry.setActive(RandomTestUtil.randomBoolean());
 
+		commerceSubscriptionEntry.setLastIterationDate(RandomTestUtil.nextDate());
+
 		commerceSubscriptionEntry.setNextIterationDate(RandomTestUtil.nextDate());
+
+		commerceSubscriptionEntry.setStartDate(RandomTestUtil.nextDate());
 
 		_commerceSubscriptionEntries.add(_persistence.update(
 				commerceSubscriptionEntry));

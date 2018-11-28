@@ -86,6 +86,8 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 
 	public java.util.Map<java.util.Locale, String> getShortDescriptionMap();
 
+	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties();
+
 	public String getURL(String languageId);
 
 	public java.util.Map<java.util.Locale, String> getUrlTitleMap();
@@ -99,6 +101,9 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 
 	public void setShortDescriptionMap(
 		java.util.Map<java.util.Locale, String> shortDescriptionMap);
+
+	public void setSubscriptionTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties);
 
 	public void setUrlTitleMap(
 		java.util.Map<java.util.Locale, String> urlTitleMap);

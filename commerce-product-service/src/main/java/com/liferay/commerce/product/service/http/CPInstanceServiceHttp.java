@@ -536,6 +536,47 @@ public class CPInstanceServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPInstance updateSubscriptionInfo(
+		HttpPrincipal httpPrincipal, long cpInstanceId,
+		boolean overrideSubscriptionInfo, boolean subscriptionEnabled,
+		int subscriptionLength, String subscriptionType,
+		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties,
+		long maxSubscriptionCycles,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPInstanceServiceUtil.class,
+					"updateSubscriptionInfo",
+					_updateSubscriptionInfoParameterTypes14);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					cpInstanceId, overrideSubscriptionInfo,
+					subscriptionEnabled, subscriptionLength, subscriptionType,
+					subscriptionTypeSettingsProperties, maxSubscriptionCycles,
+					serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.product.model.CPInstance)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CPInstance upsertCPInstance(
 		HttpPrincipal httpPrincipal, long cpDefinitionId, String sku,
 		String gtin, String manufacturerPartNumber, boolean purchasable,
@@ -550,7 +591,7 @@ public class CPInstanceServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPInstanceServiceUtil.class,
-					"upsertCPInstance", _upsertCPInstanceParameterTypes14);
+					"upsertCPInstance", _upsertCPInstanceParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionId, sku, gtin, manufacturerPartNumber,
@@ -639,7 +680,12 @@ public class CPInstanceServiceHttp {
 			long.class, double.class, double.class, double.class, double.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _upsertCPInstanceParameterTypes14 = new Class[] {
+	private static final Class<?>[] _updateSubscriptionInfoParameterTypes14 = new Class[] {
+			long.class, boolean.class, boolean.class, int.class, String.class,
+			com.liferay.portal.kernel.util.UnicodeProperties.class, long.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
+		};
+	private static final Class<?>[] _upsertCPInstanceParameterTypes15 = new Class[] {
 			long.class, String.class, String.class, String.class, boolean.class,
 			String.class, double.class, double.class, double.class, double.class,
 			java.math.BigDecimal.class, java.math.BigDecimal.class,
