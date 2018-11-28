@@ -1,5 +1,9 @@
 <definition>
 	<command name="addEntry">
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Products" />
+		</execute>
+
 		<execute function="Click" locator1="Button#PLUS" />
 
 		<execute function="Click" locator1="MenuItem#DROPDOWN_MENU_ITEM" value1="${key_menuItem}">
