@@ -32,21 +32,6 @@
 				<execute macro="PortalInstances#tearDownCP" />
 			</then>
 			<else>
-				<execute macro="ProductMenu#gotoPortlet">
-					<var name="category" value="Users" />
-					<var name="panel" value="Control Panel" />
-					<var name="portlet" value="Users and Organizations" />
-				</execute>
-
-				<execute macro="User#deactivateCP">
-					<var name="deactivateType" value="Actions" />
-					<var name="userFirstName" value="Commerce" />
-				</execute>
-
-				<execute macro="User#deleteCP">
-					<var name="userFirstName" value="Commerce" />
-				</execute>
-
 				<execute macro="CommerceConfiguration#commerceSettingsTearDown" />
 
 				<execute macro="CommerceConfiguration#commerceAdminTearDown" />
@@ -83,8 +68,9 @@
 		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewCatalogRule" />
 
-		<execute macro="CommerceEntry#createNewUserSegmentByUser">
+		<execute macro="CommerceEntry#createNewUserSegment">
 			<var name="criteriaType" value="Users" />
+			<var name="criterionEntryName" value="Commerce User" />
 			<var name="entryName" value="User Segment" />
 		</execute>
 
@@ -154,8 +140,9 @@
 		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewDiscount" />
 
-		<execute macro="CommerceEntry#createNewUserSegmentByUser">
+		<execute macro="CommerceEntry#createNewUserSegment">
 			<var name="criteriaType" value="Users" />
+			<var name="criterionEntryName" value="Commerce User" />
 			<var name="entryName" value="User Segment" />
 		</execute>
 
@@ -176,6 +163,8 @@
 		</execute>
 
 		<execute macro="Button#clickPublish" />
+
+		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 	</command>
 
 	<command name="CreateNewMeasurementUnits">
@@ -221,8 +210,9 @@
 		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewNotificationTemplate" />
 
-		<execute macro="CommerceEntry#createNewUserSegmentByUser">
+		<execute macro="CommerceEntry#createNewUserSegment">
 			<var name="criteriaType" value="Users" />
+			<var name="criterionEntryName" value="Commerce User" />
 			<var name="entryName" value="User Segment" />
 		</execute>
 
@@ -232,12 +222,12 @@
 			<var name="portlet" value="Settings" />
 		</execute>
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Notifications" />
+		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
+			<var name="navItem" value="Notificatios" />
 		</execute>
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Notification Templates" />
+		<execute macro="CommerceEntry#gotoMenuTab">
+			<var name="menuTab" value="Notification Templates" />
 		</execute>
 
 		<execute function="Click" locator1="Button#PLUS" />
@@ -264,8 +254,9 @@
 			<var name="entryName" value="New Currency" />
 		</execute>
 
-		<execute macro="CommerceEntry#createNewUserSegmentByUser">
+		<execute macro="CommerceEntry#createNewUserSegment">
 			<var name="criteriaType" value="Users" />
+			<var name="criterionEntryName" value="Commerce User" />
 			<var name="entryName" value="User Segment" />
 		</execute>
 
@@ -288,12 +279,68 @@
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 	</command>
 
-	<command name="CreateNewUserSegmentByUser">
+	<command name="CreateNewUserSegmentByOrganizations">
 		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByUser" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByOrganizations" />
 
-		<execute macro="CommerceEntry#createNewUserSegmentByUser">
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
+			<var name="portlet" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="Organization#addCP">
+			<var name="orgName" value="Commerce Organization" />
+			<var name="orgType" value="Organization" />
+		</execute>
+
+		<execute macro="CommerceEntry#createNewUserSegment">
+			<var name="criteriaType" value="Organizations" />
+			<var name="criterionEntryName" value="Commerce Organization" />
+			<var name="entryName" value="User Segment" />
+		</execute>
+	</command>
+
+	<command name="CreateNewUserSegmentByRegularRole">
+		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByRegularRole" />
+
+		<execute macro="CommerceEntry#createNewUserSegment">
+			<var name="criteriaType" value="Roles" />
+			<var name="criterionEntryName" value="User" />
+			<var name="entryName" value="User Segment" />
+			<var name="roleType" value="Regular Role" />
+		</execute>
+	</command>
+
+	<command name="CreateNewUserSegmentByUserGroups">
+		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByUserGroups" />
+
+		<execute macro="ProductMenu#gotoPortlet">
+			<var name="category" value="Users" />
+			<var name="panel" value="Control Panel" />
+			<var name="portlet" value="User Groups" />
+		</execute>
+
+		<execute macro="UserGroup#addCP">
+			<var name="userGroupName" value="Commerce UserGroup" />
+		</execute>
+
+		<execute macro="CommerceEntry#createNewUserSegment">
+			<var name="criteriaType" value="User Groups" />
+			<var name="criterionEntryName" value="Commerce UserGroup" />
+			<var name="entryName" value="User Segment" />
+		</execute>
+	</command>
+
+	<command name="CreateNewUserSegmentByUsers">
+		<property name="portal.acceptance" value="true" />
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByUsers" />
+
+		<execute macro="CommerceEntry#createNewUserSegment">
 			<var name="criteriaType" value="Users" />
+			<var name="criterionEntryName" value="Commerce User" />
 			<var name="entryName" value="User Segment" />
 		</execute>
 	</command>
