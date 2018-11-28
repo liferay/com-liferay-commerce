@@ -66,8 +66,8 @@
 			<var name="menuTab" value="Options" />
 		</execute>
 
-		<execute macro="CommerceOptionsRel#assignOptionToProductsEntry">
-			<var name="optionName" value="Color" />
+		<execute macro="CommerceRelations#assignSingleRelationToProductsEntry">
+			<var name="entryName" value="Color" />
 		</execute>
 
 		<echo message="Creating SKUs..." />
