@@ -73,12 +73,14 @@ public class CommerceSubscriptionEntryWrapper
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("CPInstanceId", getCPInstanceId());
 		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
-		attributes.put("subscriptionCycleLength", getSubscriptionCycleLength());
-		attributes.put("subscriptionCyclePeriod", getSubscriptionCyclePeriod());
-		attributes.put("maxSubscriptionCyclesNumber",
-			getMaxSubscriptionCyclesNumber());
+		attributes.put("subscriptionLength", getSubscriptionLength());
+		attributes.put("subscriptionType", getSubscriptionType());
+		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
+		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
 		attributes.put("active", isActive());
+		attributes.put("lastIterationDate", getLastIterationDate());
 		attributes.put("nextIterationDate", getNextIterationDate());
+		attributes.put("startDate", getStartDate());
 
 		return attributes;
 	}
@@ -146,25 +148,31 @@ public class CommerceSubscriptionEntryWrapper
 			setCommerceOrderItemId(commerceOrderItemId);
 		}
 
-		Long subscriptionCycleLength = (Long)attributes.get(
-				"subscriptionCycleLength");
+		Integer subscriptionLength = (Integer)attributes.get(
+				"subscriptionLength");
 
-		if (subscriptionCycleLength != null) {
-			setSubscriptionCycleLength(subscriptionCycleLength);
+		if (subscriptionLength != null) {
+			setSubscriptionLength(subscriptionLength);
 		}
 
-		String subscriptionCyclePeriod = (String)attributes.get(
-				"subscriptionCyclePeriod");
+		String subscriptionType = (String)attributes.get("subscriptionType");
 
-		if (subscriptionCyclePeriod != null) {
-			setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+		if (subscriptionType != null) {
+			setSubscriptionType(subscriptionType);
 		}
 
-		Long maxSubscriptionCyclesNumber = (Long)attributes.get(
-				"maxSubscriptionCyclesNumber");
+		String subscriptionTypeSettings = (String)attributes.get(
+				"subscriptionTypeSettings");
 
-		if (maxSubscriptionCyclesNumber != null) {
-			setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
+		if (subscriptionTypeSettings != null) {
+			setSubscriptionTypeSettings(subscriptionTypeSettings);
+		}
+
+		Long maxSubscriptionCycles = (Long)attributes.get(
+				"maxSubscriptionCycles");
+
+		if (maxSubscriptionCycles != null) {
+			setMaxSubscriptionCycles(maxSubscriptionCycles);
 		}
 
 		Boolean active = (Boolean)attributes.get("active");
@@ -173,10 +181,22 @@ public class CommerceSubscriptionEntryWrapper
 			setActive(active);
 		}
 
+		Date lastIterationDate = (Date)attributes.get("lastIterationDate");
+
+		if (lastIterationDate != null) {
+			setLastIterationDate(lastIterationDate);
+		}
+
 		Date nextIterationDate = (Date)attributes.get("nextIterationDate");
 
 		if (nextIterationDate != null) {
 			setNextIterationDate(nextIterationDate);
+		}
+
+		Date startDate = (Date)attributes.get("startDate");
+
+		if (startDate != null) {
+			setStartDate(startDate);
 		}
 	}
 
@@ -300,13 +320,23 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Returns the max subscription cycles number of this commerce subscription entry.
+	* Returns the last iteration date of this commerce subscription entry.
 	*
-	* @return the max subscription cycles number of this commerce subscription entry
+	* @return the last iteration date of this commerce subscription entry
 	*/
 	@Override
-	public long getMaxSubscriptionCyclesNumber() {
-		return _commerceSubscriptionEntry.getMaxSubscriptionCyclesNumber();
+	public Date getLastIterationDate() {
+		return _commerceSubscriptionEntry.getLastIterationDate();
+	}
+
+	/**
+	* Returns the max subscription cycles of this commerce subscription entry.
+	*
+	* @return the max subscription cycles of this commerce subscription entry
+	*/
+	@Override
+	public long getMaxSubscriptionCycles() {
+		return _commerceSubscriptionEntry.getMaxSubscriptionCycles();
 	}
 
 	/**
@@ -345,23 +375,48 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Returns the subscription cycle length of this commerce subscription entry.
+	* Returns the start date of this commerce subscription entry.
 	*
-	* @return the subscription cycle length of this commerce subscription entry
+	* @return the start date of this commerce subscription entry
 	*/
 	@Override
-	public long getSubscriptionCycleLength() {
-		return _commerceSubscriptionEntry.getSubscriptionCycleLength();
+	public Date getStartDate() {
+		return _commerceSubscriptionEntry.getStartDate();
 	}
 
 	/**
-	* Returns the subscription cycle period of this commerce subscription entry.
+	* Returns the subscription length of this commerce subscription entry.
 	*
-	* @return the subscription cycle period of this commerce subscription entry
+	* @return the subscription length of this commerce subscription entry
 	*/
 	@Override
-	public String getSubscriptionCyclePeriod() {
-		return _commerceSubscriptionEntry.getSubscriptionCyclePeriod();
+	public int getSubscriptionLength() {
+		return _commerceSubscriptionEntry.getSubscriptionLength();
+	}
+
+	/**
+	* Returns the subscription type of this commerce subscription entry.
+	*
+	* @return the subscription type of this commerce subscription entry
+	*/
+	@Override
+	public String getSubscriptionType() {
+		return _commerceSubscriptionEntry.getSubscriptionType();
+	}
+
+	/**
+	* Returns the subscription type settings of this commerce subscription entry.
+	*
+	* @return the subscription type settings of this commerce subscription entry
+	*/
+	@Override
+	public String getSubscriptionTypeSettings() {
+		return _commerceSubscriptionEntry.getSubscriptionTypeSettings();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties() {
+		return _commerceSubscriptionEntry.getSubscriptionTypeSettingsProperties();
 	}
 
 	/**
@@ -531,13 +586,23 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Sets the max subscription cycles number of this commerce subscription entry.
+	* Sets the last iteration date of this commerce subscription entry.
 	*
-	* @param maxSubscriptionCyclesNumber the max subscription cycles number of this commerce subscription entry
+	* @param lastIterationDate the last iteration date of this commerce subscription entry
 	*/
 	@Override
-	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber) {
-		_commerceSubscriptionEntry.setMaxSubscriptionCyclesNumber(maxSubscriptionCyclesNumber);
+	public void setLastIterationDate(Date lastIterationDate) {
+		_commerceSubscriptionEntry.setLastIterationDate(lastIterationDate);
+	}
+
+	/**
+	* Sets the max subscription cycles of this commerce subscription entry.
+	*
+	* @param maxSubscriptionCycles the max subscription cycles of this commerce subscription entry
+	*/
+	@Override
+	public void setMaxSubscriptionCycles(long maxSubscriptionCycles) {
+		_commerceSubscriptionEntry.setMaxSubscriptionCycles(maxSubscriptionCycles);
 	}
 
 	/**
@@ -581,23 +646,49 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Sets the subscription cycle length of this commerce subscription entry.
+	* Sets the start date of this commerce subscription entry.
 	*
-	* @param subscriptionCycleLength the subscription cycle length of this commerce subscription entry
+	* @param startDate the start date of this commerce subscription entry
 	*/
 	@Override
-	public void setSubscriptionCycleLength(long subscriptionCycleLength) {
-		_commerceSubscriptionEntry.setSubscriptionCycleLength(subscriptionCycleLength);
+	public void setStartDate(Date startDate) {
+		_commerceSubscriptionEntry.setStartDate(startDate);
 	}
 
 	/**
-	* Sets the subscription cycle period of this commerce subscription entry.
+	* Sets the subscription length of this commerce subscription entry.
 	*
-	* @param subscriptionCyclePeriod the subscription cycle period of this commerce subscription entry
+	* @param subscriptionLength the subscription length of this commerce subscription entry
 	*/
 	@Override
-	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod) {
-		_commerceSubscriptionEntry.setSubscriptionCyclePeriod(subscriptionCyclePeriod);
+	public void setSubscriptionLength(int subscriptionLength) {
+		_commerceSubscriptionEntry.setSubscriptionLength(subscriptionLength);
+	}
+
+	/**
+	* Sets the subscription type of this commerce subscription entry.
+	*
+	* @param subscriptionType the subscription type of this commerce subscription entry
+	*/
+	@Override
+	public void setSubscriptionType(String subscriptionType) {
+		_commerceSubscriptionEntry.setSubscriptionType(subscriptionType);
+	}
+
+	/**
+	* Sets the subscription type settings of this commerce subscription entry.
+	*
+	* @param subscriptionTypeSettings the subscription type settings of this commerce subscription entry
+	*/
+	@Override
+	public void setSubscriptionTypeSettings(String subscriptionTypeSettings) {
+		_commerceSubscriptionEntry.setSubscriptionTypeSettings(subscriptionTypeSettings);
+	}
+
+	@Override
+	public void setSubscriptionTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties subscriptionTypeSettingsProperties) {
+		_commerceSubscriptionEntry.setSubscriptionTypeSettingsProperties(subscriptionTypeSettingsProperties);
 	}
 
 	/**

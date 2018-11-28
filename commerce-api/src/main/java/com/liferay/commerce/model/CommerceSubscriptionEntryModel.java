@@ -239,47 +239,62 @@ public interface CommerceSubscriptionEntryModel extends BaseModel<CommerceSubscr
 	public void setCommerceOrderItemId(long commerceOrderItemId);
 
 	/**
-	 * Returns the subscription cycle length of this commerce subscription entry.
+	 * Returns the subscription length of this commerce subscription entry.
 	 *
-	 * @return the subscription cycle length of this commerce subscription entry
+	 * @return the subscription length of this commerce subscription entry
 	 */
-	public long getSubscriptionCycleLength();
+	public int getSubscriptionLength();
 
 	/**
-	 * Sets the subscription cycle length of this commerce subscription entry.
+	 * Sets the subscription length of this commerce subscription entry.
 	 *
-	 * @param subscriptionCycleLength the subscription cycle length of this commerce subscription entry
+	 * @param subscriptionLength the subscription length of this commerce subscription entry
 	 */
-	public void setSubscriptionCycleLength(long subscriptionCycleLength);
+	public void setSubscriptionLength(int subscriptionLength);
 
 	/**
-	 * Returns the subscription cycle period of this commerce subscription entry.
+	 * Returns the subscription type of this commerce subscription entry.
 	 *
-	 * @return the subscription cycle period of this commerce subscription entry
+	 * @return the subscription type of this commerce subscription entry
 	 */
 	@AutoEscape
-	public String getSubscriptionCyclePeriod();
+	public String getSubscriptionType();
 
 	/**
-	 * Sets the subscription cycle period of this commerce subscription entry.
+	 * Sets the subscription type of this commerce subscription entry.
 	 *
-	 * @param subscriptionCyclePeriod the subscription cycle period of this commerce subscription entry
+	 * @param subscriptionType the subscription type of this commerce subscription entry
 	 */
-	public void setSubscriptionCyclePeriod(String subscriptionCyclePeriod);
+	public void setSubscriptionType(String subscriptionType);
 
 	/**
-	 * Returns the max subscription cycles number of this commerce subscription entry.
+	 * Returns the subscription type settings of this commerce subscription entry.
 	 *
-	 * @return the max subscription cycles number of this commerce subscription entry
+	 * @return the subscription type settings of this commerce subscription entry
 	 */
-	public long getMaxSubscriptionCyclesNumber();
+	@AutoEscape
+	public String getSubscriptionTypeSettings();
 
 	/**
-	 * Sets the max subscription cycles number of this commerce subscription entry.
+	 * Sets the subscription type settings of this commerce subscription entry.
 	 *
-	 * @param maxSubscriptionCyclesNumber the max subscription cycles number of this commerce subscription entry
+	 * @param subscriptionTypeSettings the subscription type settings of this commerce subscription entry
 	 */
-	public void setMaxSubscriptionCyclesNumber(long maxSubscriptionCyclesNumber);
+	public void setSubscriptionTypeSettings(String subscriptionTypeSettings);
+
+	/**
+	 * Returns the max subscription cycles of this commerce subscription entry.
+	 *
+	 * @return the max subscription cycles of this commerce subscription entry
+	 */
+	public long getMaxSubscriptionCycles();
+
+	/**
+	 * Sets the max subscription cycles of this commerce subscription entry.
+	 *
+	 * @param maxSubscriptionCycles the max subscription cycles of this commerce subscription entry
+	 */
+	public void setMaxSubscriptionCycles(long maxSubscriptionCycles);
 
 	/**
 	 * Returns the active of this commerce subscription entry.
@@ -303,6 +318,20 @@ public interface CommerceSubscriptionEntryModel extends BaseModel<CommerceSubscr
 	public void setActive(boolean active);
 
 	/**
+	 * Returns the last iteration date of this commerce subscription entry.
+	 *
+	 * @return the last iteration date of this commerce subscription entry
+	 */
+	public Date getLastIterationDate();
+
+	/**
+	 * Sets the last iteration date of this commerce subscription entry.
+	 *
+	 * @param lastIterationDate the last iteration date of this commerce subscription entry
+	 */
+	public void setLastIterationDate(Date lastIterationDate);
+
+	/**
 	 * Returns the next iteration date of this commerce subscription entry.
 	 *
 	 * @return the next iteration date of this commerce subscription entry
@@ -315,6 +344,20 @@ public interface CommerceSubscriptionEntryModel extends BaseModel<CommerceSubscr
 	 * @param nextIterationDate the next iteration date of this commerce subscription entry
 	 */
 	public void setNextIterationDate(Date nextIterationDate);
+
+	/**
+	 * Returns the start date of this commerce subscription entry.
+	 *
+	 * @return the start date of this commerce subscription entry
+	 */
+	public Date getStartDate();
+
+	/**
+	 * Sets the start date of this commerce subscription entry.
+	 *
+	 * @param startDate the start date of this commerce subscription entry
+	 */
+	public void setStartDate(Date startDate);
 
 	@Override
 	public boolean isNew();
