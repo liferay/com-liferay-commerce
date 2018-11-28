@@ -28,6 +28,8 @@
 		<execute macro="CommerceItemSelector#selectEntry">
 			<var name="entryName" value="${userSegment}" />
 		</execute>
+
+		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
 	</command>
 
 	<command name="addNewCountriesEntry">
@@ -77,6 +79,8 @@
 			<var name="entryName" value="${userSegment}" />
 		</execute>
 
+		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
+
 		<execute function="Type" locator1="CommerceEntry#MAXIMUM_DISCOUNT_AMOUNT_FIELD" value1="${maximumDiscountAmount}" />
 
 		<execute function="Type" locator1="CommerceEntry#DISCOUNT_LEVEL_1_FIELD" value1="${discountLevel}" />
@@ -95,6 +99,8 @@
 			<var name="entryName" value="${userSegment}" />
 		</execute>
 
+		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
+
 		<execute function="Type" locator1="CommerceEntry#NOTIFICATION_TEMPLATE_FROM_ADDRESS_FIELD" value1="${fromAddress}" />
 
 		<execute function="Type" locator1="CommerceEntry#NOTIFICATION_TEMPLATE_FROM_NAME_FIELD" value1="${fromName}" />
@@ -112,6 +118,8 @@
 		<execute macro="CommerceItemSelector#selectEntry">
 			<var name="entryName" value="${userSegmentName}" />
 		</execute>
+
+		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
 	</command>
 
 	<command name="addNewRegionsEntry">
@@ -139,11 +147,23 @@
 
 		<execute function="Select" locator1="Select#TYPE" value1="${criteriaType}" />
 
-		<execute function="Click" locator1="Button#SELECT" />
+		<if>
+			<equals arg1="${criteriaType}" arg2="Roles" />
+			<then>
+				<execute function="Click" locator1="CommerceEntry#ROLE_SELECT_BUTTON">
+					<var name="key_roleType" value="${roleType}" />
+				</execute>
+			</then>
+			<else>
+				<execute function="Click" locator1="Button#SELECT" />
+			</else>
+		</if>
 
 		<execute macro="CommerceItemSelector#selectEntry">
-			<var name="entryName" value="Commerce User" />
+			<var name="entryName" value="${criterionEntryName}" />
 		</execute>
+
+		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
 	</command>
 
 	<command name="addNewWeightUnit">
@@ -219,7 +239,7 @@
 		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
 	</command>
 
-	<command name="createNewUserSegmentByUser">
+	<command name="createNewUserSegment">
 		<execute macro="ProductMenu#gotoPortlet">
 			<var name="category" value="Commerce" />
 			<var name="panel" value="Site Administration" />
@@ -230,7 +250,9 @@
 
 		<execute macro="CommerceEntry#addNewUserSegmentsEntry">
 			<var name="criteriaType" value="${criteriaType}" />
+			<var name="criterionEntryName" value="${criterionEntryName}" />
 			<var name="entryName" value="${entryName}" />
+			<var name="roleType" value="${roleType}" />
 		</execute>
 
 		<execute macro="Button#clickSave" />
