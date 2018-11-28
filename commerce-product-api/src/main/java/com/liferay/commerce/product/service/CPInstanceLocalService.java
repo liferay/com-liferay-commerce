@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.io.Serializable;
 
@@ -103,8 +104,9 @@ public interface CPInstanceLocalService extends BaseLocalService,
 		int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire,
 		boolean overrideSubscriptionInfo, boolean subscriptionEnabled,
-		long subscriptionCycleLength, String subscriptionCyclePeriod,
-		long maxSubscriptionCyclesNumber, ServiceContext serviceContext)
+		int subscriptionLength, String subscriptionType,
+		UnicodeProperties subscriptionTypeSettingsProperties,
+		long maxSubscriptionCycles, ServiceContext serviceContext)
 		throws PortalException;
 
 	public CPInstance addCPInstance(long cpDefinitionId, String sku,
@@ -445,6 +447,14 @@ public interface CPInstanceLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CPInstance updateStatus(long userId, long cpInstanceId, int status,
 		ServiceContext serviceContext, Map<String, Serializable> workflowContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CPInstance updateSubscriptionInfo(long cpInstanceId,
+		boolean overrideSubscriptionInfo, boolean subscriptionEnabled,
+		int subscriptionLength, String subscriptionType,
+		UnicodeProperties subscriptionTypeSettingsProperties,
+		long maxSubscriptionCycles, ServiceContext serviceContext)
 		throws PortalException;
 
 	public CPInstance upsertCPInstance(long cpDefinitionId, String sku,
