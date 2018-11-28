@@ -14,15 +14,6 @@
 
 package com.liferay.data.integration.service.messaging;
 
-import java.io.IOException;
-
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.InvalidSyntaxException;
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-
-import com.liferay.data.integration.constants.DataIntegrationConstants;
 import com.liferay.data.integration.model.Process;
 import com.liferay.data.integration.model.ScheduledTask;
 import com.liferay.data.integration.service.ProcessLocalService;
@@ -37,6 +28,14 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.MessageListenerException;
+
+import java.io.IOException;
+
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author guywandji
