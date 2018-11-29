@@ -13,7 +13,7 @@
 		<execute function="Click" locator1="CommerceEntry#ADD_BUTTON" />
 
 		<execute function="WaitForSPARefresh" />
-		
+
 		<for list="${entriesList}" param="entriesNames">
 			<execute macro="CommerceItemSelector#selectEntry">
 				<var name="entryName" value="${entriesNames}" />
