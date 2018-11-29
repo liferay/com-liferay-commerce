@@ -27,14 +27,23 @@ import com.liferay.commerce.product.exception.CPDefinitionProductTypeNameExcepti
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.model.CPDefinitionLocalization;
+import com.liferay.commerce.product.model.CPDefinitionOptionRel;
+import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
+import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPDisplayLayout;
+import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.model.impl.CPDefinitionImpl;
 import com.liferay.commerce.product.service.base.CPDefinitionLocalServiceBaseImpl;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
+import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
+import com.liferay.commerce.product.type.grouped.service.persistence.CPDefinitionGroupedEntryPersistence;
+import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
+import com.liferay.commerce.product.type.virtual.service.persistence.CPDefinitionVirtualSettingPersistence;
 import com.liferay.dynamic.data.mapping.exception.NoSuchStructureException;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
@@ -96,6 +105,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
+
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
@@ -441,6 +452,293 @@ public class CPDefinitionLocalServiceImpl
 	public void checkCPDefinitions() throws PortalException {
 		checkCPDefinitionsByDisplayDate();
 		checkCPDefinitionsByExpirationDate();
+	}
+
+	@Override
+	public CPDefinition copyCPDefinition(long cpDefinitionId)
+		throws PortalException {
+
+		// CPDefinition
+
+		CPDefinition originalCPDefinition =
+			cpDefinitionLocalService.getCPDefinition(cpDefinitionId);
+
+		CPDefinition newCPDefinition =
+			(CPDefinition)originalCPDefinition.clone();
+
+		long newCPDefinitionId = counterLocalService.increment();
+
+		newCPDefinition.setCPDefinitionId(newCPDefinitionId);
+
+		newCPDefinition.setModifiedDate(new Date());
+
+		newCPDefinition.setVersion(originalCPDefinition.getVersion() + 1);
+
+		cpDefinitionPersistence.update(newCPDefinition);
+
+		// CPDefinitionLocalization
+
+		List<CPDefinitionLocalization> cpDefinitionLocalizations =
+			cpDefinitionLocalizationPersistence.findByCPDefinitionId(
+				cpDefinitionId);
+
+		for (CPDefinitionLocalization cpDefinitionLocalization :
+				cpDefinitionLocalizations) {
+
+			CPDefinitionLocalization newCPDefinitionLocalization =
+				(CPDefinitionLocalization)cpDefinitionLocalization.clone();
+
+			newCPDefinitionLocalization.setCpDefinitionLocalizationId(
+				counterLocalService.increment());
+			newCPDefinitionLocalization.setCPDefinitionId(newCPDefinitionId);
+
+			cpDefinitionLocalizationPersistence.update(
+				newCPDefinitionLocalization);
+		}
+
+		// CPAttachmentFileEntry
+
+		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
+			CPDefinition.class);
+
+		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
+			cpAttachmentFileEntryPersistence.findByC_C(
+				cpDefinitionClassNameId, cpDefinitionId);
+
+		for (CPAttachmentFileEntry cpAttachmentFileEntry :
+				cpAttachmentFileEntries) {
+
+			CPAttachmentFileEntry newCPAttachmentFileEntry =
+				(CPAttachmentFileEntry)cpAttachmentFileEntry.clone();
+
+			newCPAttachmentFileEntry.setCPAttachmentFileEntryId(
+				counterLocalService.increment());
+
+			newCPAttachmentFileEntry.setModifiedDate(new Date());
+			newCPAttachmentFileEntry.setClassPK(newCPDefinitionId);
+
+			cpAttachmentFileEntryPersistence.update(newCPAttachmentFileEntry);
+		}
+
+		// CPDefinitionGroupedEntry
+
+		List<CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
+			_cpDefinitionGroupedEntryPersistence.findByCPDefinitionId(
+				cpDefinitionId);
+
+		for (CPDefinitionGroupedEntry cpDefinitionGroupedEntry :
+				cpDefinitionGroupedEntries) {
+
+			CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+				(CPDefinitionGroupedEntry)cpDefinitionGroupedEntry.clone();
+
+			newCPDefinitionGroupedEntry.setCPDefinitionGroupedEntryId(
+				counterLocalService.increment());
+			newCPDefinitionGroupedEntry.setModifiedDate(new Date());
+			newCPDefinitionGroupedEntry.setCPDefinitionId(newCPDefinitionId);
+
+			_cpDefinitionGroupedEntryPersistence.update(
+				newCPDefinitionGroupedEntry);
+		}
+
+		// CPDefinitionInventory
+
+		List<CPDefinitionInventory> cpDefinitionInventories =
+			_cpDefinitionInventoryPersistence.findByCPDefinitionId(
+				cpDefinitionId);
+
+		for (CPDefinitionInventory cpDefinitionInventory :
+				cpDefinitionInventories) {
+
+			CPDefinitionInventory newCPDefinitionInventory =
+				(CPDefinitionInventory)cpDefinitionInventory.clone();
+
+			newCPDefinitionInventory.setCPDefinitionInventoryId(
+				counterLocalService.increment());
+			newCPDefinitionInventory.setModifiedDate(new Date());
+			newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
+
+			_cpDefinitionInventoryPersistence.update(newCPDefinitionInventory);
+		}
+
+		// CPDefinitionLink
+
+		List<CPDefinitionLink> cpDefinitionLinks1 =
+			cpDefinitionLinkPersistence.findByCPDefinitionId1(cpDefinitionId);
+
+		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks1) {
+			CPDefinitionLink newCPDefinitionLink =
+				(CPDefinitionLink)cpDefinitionLink.clone();
+
+			newCPDefinitionLink.setCPDefinitionLinkId(
+				counterLocalService.increment());
+			newCPDefinitionLink.setModifiedDate(new Date());
+			newCPDefinitionLink.setCPDefinitionId1(newCPDefinitionId);
+
+			cpDefinitionLinkPersistence.update(newCPDefinitionLink);
+		}
+
+		List<CPDefinitionLink> cpDefinitionLinks2 =
+			cpDefinitionLinkPersistence.findByCPDefinitionId2(cpDefinitionId);
+
+		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks2) {
+			CPDefinitionLink newCPDefinitionLink =
+				(CPDefinitionLink)cpDefinitionLink.clone();
+
+			newCPDefinitionLink.setCPDefinitionLinkId(
+				counterLocalService.increment());
+			newCPDefinitionLink.setModifiedDate(new Date());
+			newCPDefinitionLink.setCPDefinitionId2(newCPDefinitionId);
+
+			cpDefinitionLinkPersistence.update(newCPDefinitionLink);
+		}
+
+		// CPDefinitionOptionRel
+
+		List<CPDefinitionOptionRel> cpDefinitionOptionRels =
+			cpDefinitionOptionRelPersistence.findByCPDefinitionId(
+				cpDefinitionId);
+
+		for (CPDefinitionOptionRel cpDefinitionOptionRel :
+				cpDefinitionOptionRels) {
+
+			CPDefinitionOptionRel newCPDefinitionOptionRel =
+				(CPDefinitionOptionRel)cpDefinitionOptionRel.clone();
+
+			long newCPDefinitionOptionRelId = counterLocalService.increment();
+
+			newCPDefinitionOptionRel.setCPDefinitionOptionRelId(
+				newCPDefinitionOptionRelId);
+
+			newCPDefinitionOptionRel.setModifiedDate(new Date());
+			newCPDefinitionOptionRel.setCPDefinitionId(newCPDefinitionId);
+
+			cpDefinitionOptionRelPersistence.update(newCPDefinitionOptionRel);
+
+			// CPDefinitionOptionValueRel
+
+			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
+				cpDefinitionOptionValueRelPersistence.
+					findByCPDefinitionOptionRelId(
+						cpDefinitionOptionRel.getCPDefinitionOptionRelId());
+
+			for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
+					cpDefinitionOptionValueRels) {
+
+				CPDefinitionOptionValueRel newCPDefinitionOptionValueRel =
+					(CPDefinitionOptionValueRel)cpDefinitionOptionValueRel.
+						clone();
+
+				newCPDefinitionOptionValueRel.setCPDefinitionOptionValueRelId(
+					counterLocalService.increment());
+
+				newCPDefinitionOptionValueRel.setModifiedDate(new Date());
+				newCPDefinitionOptionValueRel.setCPDefinitionOptionRelId(
+					newCPDefinitionOptionRelId);
+
+				cpDefinitionOptionValueRelPersistence.update(
+					newCPDefinitionOptionValueRel);
+			}
+		}
+
+		// CPDefinitionSpecificationOptionValue
+
+		List<CPDefinitionSpecificationOptionValue>
+			cpDefinitionSpecificationOptionValues =
+				cpDefinitionSpecificationOptionValuePersistence.
+					findByCPDefinitionId(cpDefinitionId);
+
+		for (CPDefinitionSpecificationOptionValue
+				cpDefinitionSpecificationOptionValue :
+					cpDefinitionSpecificationOptionValues) {
+
+			CPDefinitionSpecificationOptionValue
+				newCPDefinitionSpecificationOptionValue =
+					(CPDefinitionSpecificationOptionValue)
+						cpDefinitionSpecificationOptionValue.clone();
+
+			newCPDefinitionSpecificationOptionValue.
+				setCPDefinitionSpecificationOptionValueId(
+					counterLocalService.increment());
+
+			newCPDefinitionSpecificationOptionValue.setModifiedDate(new Date());
+			newCPDefinitionSpecificationOptionValue.setCPDefinitionId(
+				newCPDefinitionId);
+
+			cpDefinitionSpecificationOptionValuePersistence.update(
+				newCPDefinitionSpecificationOptionValue);
+		}
+
+		// CPDefinitionVirtualSetting
+
+		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
+			_cpDefinitionVirtualSettingPersistence.fetchByCPDefinitionId(
+				cpDefinitionId);
+
+		if (cpDefinitionVirtualSetting != null) {
+			CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+				(CPDefinitionVirtualSetting)cpDefinitionVirtualSetting.clone();
+
+			newCPDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
+				counterLocalService.increment());
+			newCPDefinitionVirtualSetting.setModifiedDate(new Date());
+			newCPDefinitionVirtualSetting.setCPDefinitionId(newCPDefinitionId);
+
+			_cpDefinitionVirtualSettingPersistence.update(
+				newCPDefinitionVirtualSetting);
+		}
+
+		// CPDisplayLayout
+
+		CPDisplayLayout cpDisplayLayout = cpDisplayLayoutPersistence.fetchByC_C(
+			cpDefinitionClassNameId, cpDefinitionId);
+
+		if (cpDisplayLayout != null) {
+			CPDisplayLayout newCPDisplayLayout =
+				(CPDisplayLayout)cpDisplayLayout.clone();
+
+			newCPDisplayLayout.setCPDisplayLayoutId(
+				counterLocalService.increment());
+			newCPDisplayLayout.setModifiedDate(new Date());
+			newCPDisplayLayout.setClassPK(newCPDefinitionId);
+
+			cpDisplayLayoutPersistence.update(newCPDisplayLayout);
+		}
+
+		// CPFriendlyURLEntry
+
+		List<CPFriendlyURLEntry> cpFriendlyURLEntries =
+			cpFriendlyURLEntryPersistence.findByC_C(
+				cpDefinitionClassNameId, cpDefinitionId);
+
+		for (CPFriendlyURLEntry cpFriendlyURLEntry : cpFriendlyURLEntries) {
+			CPFriendlyURLEntry newCPFriendlyURLEntry =
+				(CPFriendlyURLEntry)cpFriendlyURLEntry.clone();
+
+			newCPFriendlyURLEntry.setCPFriendlyURLEntryId(
+				counterLocalService.increment());
+			newCPFriendlyURLEntry.setModifiedDate(new Date());
+			newCPFriendlyURLEntry.setClassPK(newCPDefinitionId);
+
+			cpFriendlyURLEntryPersistence.update(newCPFriendlyURLEntry);
+		}
+
+		// CPInstance
+
+		List<CPInstance> cpInstances =
+			cpInstancePersistence.findByCPDefinitionId(cpDefinitionId);
+
+		for (CPInstance cpInstance : cpInstances) {
+			CPInstance newCPInstance = (CPInstance)cpInstance.clone();
+
+			newCPInstance.setCPInstanceId(counterLocalService.increment());
+			newCPInstance.setModifiedDate(new Date());
+			newCPInstance.setCPDefinitionId(newCPDefinitionId);
+
+			cpInstancePersistence.update(newCPInstance);
+		}
+
+		return newCPDefinition;
 	}
 
 	@Override
@@ -2049,6 +2347,14 @@ public class CPDefinitionLocalServiceImpl
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPDefinitionLocalServiceImpl.class);
+
+	@Reference
+	private CPDefinitionGroupedEntryPersistence
+		_cpDefinitionGroupedEntryPersistence;
+
+	@Reference
+	private CPDefinitionVirtualSettingPersistence
+		_cpDefinitionVirtualSettingPersistence;
 
 	@ServiceReference(type = CPTypeServicesTracker.class)
 	private CPTypeServicesTracker _cpTypeServicesTracker;
