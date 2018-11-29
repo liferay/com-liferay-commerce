@@ -3,7 +3,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.apio.architect.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.external.reference.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.folder.apio.api", version: "1.0.0"
-	compileOnly group: "com.liferay", name: "com.liferay.person.apio.api", version: "1.0.0"
+	compileOnly group: "com.liferay", name: "com.liferay.person.apio.api", version: "1.1.0"
 	compileOnly group: "com.liferay", name: "com.liferay.petra.string", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.apio.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.apio.impl", version: "1.0.0"
