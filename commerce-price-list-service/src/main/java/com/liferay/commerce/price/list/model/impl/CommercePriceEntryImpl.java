@@ -41,7 +41,8 @@ public class CommercePriceEntryImpl extends CommercePriceEntryBaseImpl {
 
 	@Override
 	public CPInstance getCPInstance() throws PortalException {
-		return CPInstanceLocalServiceUtil.getCPInstance(getCPInstanceId());
+		return CPInstanceLocalServiceUtil.getCPInstanceByUuidAndGroupId(
+			getCPInstanceUuid(), getGroupId());
 	}
 
 	@Override
