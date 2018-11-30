@@ -26,6 +26,8 @@ import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.base.CommerceWishListItemLocalServiceBaseImpl;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -57,14 +59,21 @@ public class CommerceWishListItemLocalServiceImpl
 		CommerceWishListItem commerceWishListItem =
 			commerceWishListItemPersistence.create(commerceWishListItemId);
 
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
+			cpDefinitionId);
+
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
 		commerceWishListItem.setGroupId(commerceWishList.getGroupId());
 		commerceWishListItem.setCompanyId(user.getCompanyId());
 		commerceWishListItem.setUserId(user.getUserId());
 		commerceWishListItem.setUserName(user.getFullName());
 		commerceWishListItem.setCommerceWishListId(
 			commerceWishList.getCommerceWishListId());
-		commerceWishListItem.setCPDefinitionId(cpDefinitionId);
-		commerceWishListItem.setCPInstanceId(cpInstanceId);
+		commerceWishListItem.setCProductId(cpDefinition.getCProductId());
+		commerceWishListItem.setCPInstanceUuid(cpInstance.getUuid());
+
 		commerceWishListItem.setJson(json);
 
 		commerceWishListItemPersistence.update(commerceWishListItem);
@@ -78,16 +87,46 @@ public class CommerceWishListItemLocalServiceImpl
 			commerceWishListId);
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public void deleteCommerceWishListItemsByCPDefinitionId(
 		long cpDefinitionId) {
 
-		commerceWishListItemPersistence.removeByCPDefinitionId(cpDefinitionId);
+		try {
+			CPDefinition cpDefinition =
+				_cpDefinitionLocalService.getCPDefinition(cpDefinitionId);
+
+			commerceWishListItemPersistence.removeByCProductId(
+				cpDefinition.getCProductId());
+		}
+		catch (PortalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.error(pe, pe);
+			}
+		}
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public void deleteCommerceWishListItemsByCPInstanceId(long cpInstanceId) {
-		commerceWishListItemPersistence.removeByCPInstanceId(cpInstanceId);
+		try {
+			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+				cpInstanceId);
+
+			commerceWishListItemPersistence.removeByCPInstanceUuid(
+				cpInstance.getUuid());
+		}
+		catch (PortalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.error(pe, pe);
+			}
+		}
 	}
 
 	@Override
@@ -141,6 +180,9 @@ public class CommerceWishListItemLocalServiceImpl
 			}
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceWishListItemLocalServiceImpl.class);
 
 	@ServiceReference(type = CommerceWishListConfiguration.class)
 	private CommerceWishListConfiguration _commerceWishListConfiguration;
