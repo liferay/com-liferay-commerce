@@ -20,7 +20,9 @@ import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.base.CommercePriceEntryLocalServiceBaseImpl;
 import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
@@ -98,17 +100,24 @@ public class CommercePriceEntryLocalServiceImpl
 		CommercePriceEntry commercePriceEntry =
 			commercePriceEntryPersistence.create(commercePriceEntryId);
 
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpInstance.getCPDefinitionId());
+
 		commercePriceEntry.setUuid(serviceContext.getUuid());
 		commercePriceEntry.setGroupId(groupId);
 		commercePriceEntry.setCompanyId(user.getCompanyId());
 		commercePriceEntry.setUserId(user.getUserId());
 		commercePriceEntry.setUserName(user.getFullName());
-		commercePriceEntry.setCPInstanceId(cpInstanceId);
 		commercePriceEntry.setCommercePriceListId(commercePriceListId);
 		commercePriceEntry.setPrice(price);
 		commercePriceEntry.setPromoPrice(promoPrice);
 		commercePriceEntry.setExpandoBridgeAttributes(serviceContext);
 		commercePriceEntry.setExternalReferenceCode(externalReferenceCode);
+		commercePriceEntry.setCProductId(cpDefinition.getCProductId());
+		commercePriceEntry.setCPInstanceUuid(cpInstance.getUuid());
 
 		return commercePriceEntryPersistence.update(commercePriceEntry);
 	}
@@ -127,12 +136,20 @@ public class CommercePriceEntryLocalServiceImpl
 		}
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public void deleteCommercePriceEntriesByCPInstanceId(long cpInstanceId)
 		throws PortalException {
 
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
 		List<CommercePriceEntry> commercePriceEntries =
-			commercePriceEntryPersistence.findByCPInstanceId(cpInstanceId);
+			commercePriceEntryPersistence.findByUuid_C(
+				cpInstance.getUuid(), cpInstance.getCompanyId());
 
 		for (CommercePriceEntry commercePriceEntry : commercePriceEntries) {
 			deleteCommercePriceEntry(commercePriceEntry);
@@ -184,28 +201,35 @@ public class CommercePriceEntryLocalServiceImpl
 			companyId, externalReferenceCode);
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public CommercePriceEntry fetchCommercePriceEntry(
-		long cpInstanceId, long commercePriceListId) {
+			long cpInstanceId, long commercePriceListId)
+		throws PortalException {
 
-		return commercePriceEntryLocalService.fetchCommercePriceEntry(
-			cpInstanceId, commercePriceListId, false);
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
+		return commercePriceEntryPersistence.fetchByC_C(
+			commercePriceListId, cpInstance.getUuid());
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public CommercePriceEntry fetchCommercePriceEntry(
-		long cpInstanceId, long commercePriceListId, boolean useAncestor) {
+			long cpInstanceId, long commercePriceListId, boolean useAncestor)
+		throws PortalException {
 
-		if (!useAncestor) {
-			return commercePriceEntryPersistence.fetchByC_C(
-				cpInstanceId, commercePriceListId);
-		}
+		CommercePriceEntry commercePriceEntry = fetchCommercePriceEntry(
+			cpInstanceId, commercePriceListId);
 
-		CommercePriceEntry commercePriceEntry =
-			commercePriceEntryPersistence.fetchByC_C(
-				cpInstanceId, commercePriceListId);
-
-		if (commercePriceEntry != null) {
+		if (!useAncestor || (commercePriceEntry != null)) {
 			return commercePriceEntry;
 		}
 
@@ -259,26 +283,52 @@ public class CommercePriceEntryLocalServiceImpl
 		return commercePriceEntryPersistence.countByGroupId(groupId);
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-		long cpInstanceId, int start, int end) {
+			long cpInstanceId, int start, int end)
+		throws PortalException {
 
-		return commercePriceEntryPersistence.findByCPInstanceId(
-			cpInstanceId, start, end);
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
+		return commercePriceEntryPersistence.findByCPInstanceUuid(
+			cpInstance.getUuid(), start, end);
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-		long cpInstanceId, int start, int end,
-		OrderByComparator<CommercePriceEntry> orderByComparator) {
+			long cpInstanceId, int start, int end,
+			OrderByComparator<CommercePriceEntry> orderByComparator)
+		throws PortalException {
 
-		return commercePriceEntryPersistence.findByCPInstanceId(
-			cpInstanceId, start, end, orderByComparator);
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
+		return commercePriceEntryPersistence.findByCPInstanceUuid(
+			cpInstance.getUuid(), start, end, orderByComparator);
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
-	public int getInstanceCommercePriceEntriesCount(long cpInstanceId) {
-		return commercePriceEntryPersistence.countByCPInstanceId(cpInstanceId);
+	public int getInstanceCommercePriceEntriesCount(long cpInstanceId)
+		throws PortalException {
+
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
+		return commercePriceEntryPersistence.countByCPInstanceUuid(
+			cpInstance.getUuid());
 	}
 
 	@Override
@@ -555,7 +605,7 @@ public class CommercePriceEntryLocalServiceImpl
 
 		CommercePriceEntry commercePriceEntry =
 			commercePriceEntryPersistence.fetchByC_C(
-				cpInstance.getCPInstanceId(), commercePriceListId);
+				commercePriceListId, cpInstance.getUuid());
 
 		if (commercePriceEntry != null) {
 			throw new DuplicateCommercePriceEntryException();
@@ -567,6 +617,9 @@ public class CommercePriceEntryLocalServiceImpl
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommercePriceEntryLocalServiceImpl.class);
+
+	@ServiceReference(type = CPDefinitionLocalService.class)
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@ServiceReference(type = CPInstanceLocalService.class)
 	private CPInstanceLocalService _cpInstanceLocalService;
