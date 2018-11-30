@@ -22,7 +22,6 @@ import com.liferay.dynamic.data.mapping.model.DDMTemplateConstants;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutConstants;
@@ -193,9 +192,6 @@ public class PortletSettingsImporter {
 
 	@Reference
 	private CPFileImporter _cpFileImporter;
-
-	@Reference
-	private JSONFactory _jsonFactory;
 
 	@Reference
 	private LayoutLocalService _layoutLocalService;
