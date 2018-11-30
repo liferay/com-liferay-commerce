@@ -15,15 +15,21 @@
 package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.model.CPDefinitionInventory;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.service.base.CPDefinitionInventoryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Alec Sloan
  */
 public class CPDefinitionInventoryLocalServiceImpl
 	extends CPDefinitionInventoryLocalServiceBaseImpl {
@@ -41,6 +47,9 @@ public class CPDefinitionInventoryLocalServiceImpl
 		User user = userLocalService.getUser(serviceContext.getUserId());
 		long groupId = serviceContext.getScopeGroupId();
 
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpDefinitionId);
+
 		long cpDefinitionInventoryId = counterLocalService.increment();
 
 		CPDefinitionInventory cpDefinitionInventory =
@@ -51,7 +60,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 		cpDefinitionInventory.setCompanyId(user.getCompanyId());
 		cpDefinitionInventory.setUserId(user.getUserId());
 		cpDefinitionInventory.setUserName(user.getFullName());
-		cpDefinitionInventory.setCPDefinitionId(cpDefinitionId);
+		cpDefinitionInventory.setCProductId(cpDefinition.getCProductId());
 		cpDefinitionInventory.setCPDefinitionInventoryEngine(
 			cpDefinitionInventoryEngine);
 		cpDefinitionInventory.setLowStockActivity(lowStockActivity);
@@ -90,26 +99,43 @@ public class CPDefinitionInventoryLocalServiceImpl
 			cpDefinitionInventory);
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public void deleteCPDefinitionInventoryByCPDefinitionId(
 		long cpDefinitionId) {
 
-		CPDefinitionInventory cpDefinitionInventory =
-			cpDefinitionInventoryPersistence.fetchByCPDefinitionId(
-				cpDefinitionId);
+		try {
+			CPDefinitionInventory cpDefinitionInventory =
+				fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
 
-		if (cpDefinitionInventory != null) {
-			deleteCPDefinitionInventory(cpDefinitionInventory);
+			if (cpDefinitionInventory != null) {
+				deleteCPDefinitionInventory(cpDefinitionInventory);
+			}
+		}
+		catch (PortalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.error(pe, pe);
+			}
 		}
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
 			long cpDefinitionId)
 		throws PortalException {
 
-		return cpDefinitionInventoryPersistence.fetchByCPDefinitionId(
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
+
+		return cpDefinitionInventoryPersistence.findByCProductId(
+			cpDefinition.getCProductId());
 	}
 
 	@Override
@@ -142,5 +168,11 @@ public class CPDefinitionInventoryLocalServiceImpl
 
 		return cpDefinitionInventory;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPDefinitionInventoryLocalServiceImpl.class);
+
+	@ServiceReference(type = CPDefinitionLocalService.class)
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 }

@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alec Sloan
  */
 @ProviderType
 public class CommerceWarehouseItemImpl extends CommerceWarehouseItemBaseImpl {
@@ -39,7 +40,8 @@ public class CommerceWarehouseItemImpl extends CommerceWarehouseItemBaseImpl {
 
 	@Override
 	public CPInstance getCPInstance() throws PortalException {
-		return CPInstanceLocalServiceUtil.getCPInstance(getCPInstanceId());
+		return CPInstanceLocalServiceUtil.getCPInstanceByUuidAndGroupId(
+			getCPInstanceUuid(), getGroupId());
 	}
 
 }
