@@ -33,15 +33,14 @@ public class CommerceWishListItemImpl extends CommerceWishListItemBaseImpl {
 	public CommerceWishListItemImpl() {
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public CPInstance fetchCPInstance() throws PortalException {
-		long cpInstanceId = getCPInstanceId();
-
-		if (cpInstanceId > 0) {
-			return CPInstanceLocalServiceUtil.getCPInstance(cpInstanceId);
-		}
-
-		return null;
+		return CPInstanceLocalServiceUtil.getCPInstanceByUuidAndGroupId(
+			getCPInstanceUuid(), getGroupId());
 	}
 
 	@Override
@@ -50,10 +49,16 @@ public class CommerceWishListItemImpl extends CommerceWishListItemBaseImpl {
 			getCommerceWishListId());
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public CPDefinition getCPDefinition() throws PortalException {
+		CPInstance cpInstance = fetchCPInstance();
+
 		return CPDefinitionLocalServiceUtil.getCPDefinition(
-			getCPDefinitionId());
+			cpInstance.getCPDefinitionId());
 	}
 
 	@Override
