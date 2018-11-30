@@ -392,6 +392,13 @@ public class CPFileImporterImpl implements CPFileImporter {
 				layout.getPlid(), byteArray);
 		}
 
+		JSONObject lookAndFeelJSONObject = jsonObject.getJSONObject(
+			"lookAndFeel");
+
+		if (lookAndFeelJSONObject != null) {
+			layout = updateLayoutLookAndFeel(lookAndFeelJSONObject, layout);
+		}
+
 		JSONArray portletsJSONArray = jsonObject.getJSONArray("portlets");
 
 		if ((portletsJSONArray != null) && (portletsJSONArray.length() > 0)) {
@@ -829,6 +836,33 @@ public class CPFileImporterImpl implements CPFileImporter {
 
 			updateAction(role, resource, actionId, scope, serviceContext);
 		}
+	}
+
+	protected Layout updateLayoutLookAndFeel(
+		JSONObject jsonObject, Layout layout) {
+
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		Iterator<String> iterator = jsonObject.keys();
+
+		while (iterator.hasNext()) {
+			String key = iterator.next();
+
+			Set<String> typeSettingPropertiesKeys =
+				typeSettingsProperties.keySet();
+
+			if (typeSettingPropertiesKeys.contains(key)) {
+				typeSettingsProperties.replace(key, jsonObject.getString(key));
+			}
+			else {
+				typeSettingsProperties.put(key, jsonObject.getString(key));
+			}
+		}
+
+		layout.setTypeSettingsProperties(typeSettingsProperties);
+
+		return layout;
 	}
 
 	protected void updatePermissions(
