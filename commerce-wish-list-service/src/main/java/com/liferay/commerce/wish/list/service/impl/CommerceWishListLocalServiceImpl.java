@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.wish.list.service.impl;
 
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
 import com.liferay.commerce.wish.list.exception.CommerceWishListNameException;
 import com.liferay.commerce.wish.list.exception.GuestWishListMaxAllowedException;
@@ -275,8 +277,15 @@ public class CommerceWishListLocalServiceImpl
 		for (CommerceWishListItem fromCommerceWishListItem :
 				fromCommerceWishListItems) {
 
-			long cpDefinitionId = fromCommerceWishListItem.getCPDefinitionId();
-			long cpInstanceId = fromCommerceWishListItem.getCPInstanceId();
+			CPInstance fromCPInstance =
+				_cpInstanceLocalService.getCPInstanceByUuidAndGroupId(
+					fromCommerceWishListItem.getCPInstanceUuid(),
+					fromCommerceWishListItem.getGroupId());
+
+			long cpDefinitionId = fromCPInstance.getCPDefinitionId();
+
+			long cpInstanceId = fromCPInstance.getCPInstanceId();
+
 			String json = fromCommerceWishListItem.getJson();
 
 			boolean found = false;
@@ -284,10 +293,15 @@ public class CommerceWishListLocalServiceImpl
 			for (CommerceWishListItem toCommerceWishListItem :
 					toCommerceWishListItems) {
 
+				CPInstance toCPInstance =
+					_cpInstanceLocalService.getCPInstanceByUuidAndGroupId(
+						toCommerceWishListItem.getCPInstanceUuid(),
+						toCommerceWishListItem.getGroupId());
+
 				if ((cpDefinitionId ==
-						toCommerceWishListItem.getCPDefinitionId()) &&
+						toCPInstance.getCPDefinitionId()) &&
 					(cpInstanceId ==
-						toCommerceWishListItem.getCPInstanceId()) &&
+						toCPInstance.getCPInstanceId()) &&
 					_ddmFormValuesHelper.equals(
 						json, toCommerceWishListItem.getJson())) {
 
@@ -346,6 +360,9 @@ public class CommerceWishListLocalServiceImpl
 
 	@ServiceReference(type = CommerceWishListConfiguration.class)
 	private CommerceWishListConfiguration _commerceWishListConfiguration;
+
+	@ServiceReference(type = CPInstanceLocalService.class)
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@ServiceReference(type = DDMFormValuesHelper.class)
 	private DDMFormValuesHelper _ddmFormValuesHelper;
