@@ -17,15 +17,21 @@ package com.liferay.commerce.service.impl;
 import com.liferay.commerce.exception.NoSuchAvailabilityEstimateException;
 import com.liferay.commerce.model.CPDAvailabilityEstimate;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.service.base.CPDAvailabilityEstimateLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Alec Sloan
  */
 public class CPDAvailabilityEstimateLocalServiceImpl
 	extends CPDAvailabilityEstimateLocalServiceBaseImpl {
@@ -52,17 +58,27 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 			deleteCPDAvailabilityEstimate(cpdAvailabilityEstimate);
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public void deleteCPDAvailabilityEstimateByCPDefinitionId(
 		long cpDefinitionId) {
 
-		CPDAvailabilityEstimate cpdAvailabilityEstimate =
-			cpdAvailabilityEstimatePersistence.fetchByCPDefinitionId(
-				cpDefinitionId);
+		try {
+			CPDAvailabilityEstimate cpdAvailabilityEstimate =
+				fetchCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
 
-		if (cpdAvailabilityEstimate != null) {
-			cpdAvailabilityEstimateLocalService.deleteCPDAvailabilityEstimate(
-				cpdAvailabilityEstimate);
+			if (cpdAvailabilityEstimate != null) {
+				cpdAvailabilityEstimateLocalService.
+					deleteCPDAvailabilityEstimate(cpdAvailabilityEstimate);
+			}
+		}
+		catch (PortalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.error(pe, pe);
+			}
 		}
 	}
 
@@ -76,12 +92,20 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 				commerceAvailabilityEstimateId);
 	}
 
+	/**
+	 * @deprecated As of 1.1
+	 */
+	@Deprecated
 	@Override
 	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCPDefinitionId(
-		long cpDefinitionId) {
+			long cpDefinitionId)
+		throws PortalException {
 
-		return cpdAvailabilityEstimatePersistence.fetchByCPDefinitionId(
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
+
+		return cpdAvailabilityEstimatePersistence.fetchByCProductId(
+			cpDefinition.getCProductId());
 	}
 
 	@Override
@@ -127,6 +151,9 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 		User user = userLocalService.getUser(serviceContext.getUserId());
 		long groupId = serviceContext.getScopeGroupId();
 
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpDefinitionId);
+
 		long cpdAvailabilityEstimateId = counterLocalService.increment();
 
 		CPDAvailabilityEstimate cpdAvailabilityEstimate =
@@ -138,7 +165,7 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 		cpdAvailabilityEstimate.setCompanyId(user.getCompanyId());
 		cpdAvailabilityEstimate.setUserId(user.getUserId());
 		cpdAvailabilityEstimate.setUserName(user.getFullName());
-		cpdAvailabilityEstimate.setCPDefinitionId(cpDefinitionId);
+		cpdAvailabilityEstimate.setCProductId(cpDefinition.getCProductId());
 		cpdAvailabilityEstimate.setCommerceAvailabilityEstimateId(
 			commerceAvailabilityEstimateId);
 
@@ -161,5 +188,11 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 			}
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPDAvailabilityEstimateLocalServiceImpl.class);
+
+	@ServiceReference(type = CPDefinitionLocalService.class)
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 }
