@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException;
 import com.liferay.commerce.data.integration.manager.model.Process;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -31,7 +30,7 @@ import org.osgi.util.tracker.ServiceTracker;
 import java.util.List;
 
 /**
- * The persistence utility for the process service. This utility wraps {@link com.liferay.data.integration.service.persistence.impl.ProcessPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the process service. This utility wraps {@link com.liferay.commerce.data.integration.manager.service.persistence.impl.ProcessPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -39,7 +38,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see ProcessPersistence
- * @see com.liferay.data.integration.service.persistence.impl.ProcessPersistenceImpl
+ * @see com.liferay.commerce.data.integration.manager.service.persistence.impl.ProcessPersistenceImpl
  * @generated
  */
 @ProviderType
@@ -186,7 +185,7 @@ public class ProcessUtil {
 	*/
 	public static Process findByUuid_First(String uuid,
 		OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
@@ -212,7 +211,7 @@ public class ProcessUtil {
 	*/
 	public static Process findByUuid_Last(String uuid,
 		OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
@@ -239,7 +238,7 @@ public class ProcessUtil {
 	*/
 	public static Process[] findByUuid_PrevAndNext(long processId, String uuid,
 		OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence()
 				   .findByUuid_PrevAndNext(processId, uuid, orderByComparator);
 	}
@@ -272,7 +271,7 @@ public class ProcessUtil {
 	* @throws NoSuchProcessException if a matching process could not be found
 	*/
 	public static Process findByUUID_G(String uuid, long groupId)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence().findByUUID_G(uuid, groupId);
 	}
 
@@ -308,7 +307,7 @@ public class ProcessUtil {
 	* @return the process that was removed
 	*/
 	public static Process removeByUUID_G(String uuid, long groupId)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence().removeByUUID_G(uuid, groupId);
 	}
 
@@ -406,7 +405,7 @@ public class ProcessUtil {
 	*/
 	public static Process findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence()
 				   .findByUuid_C_First(uuid, companyId, orderByComparator);
 	}
@@ -436,7 +435,7 @@ public class ProcessUtil {
 	*/
 	public static Process findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence()
 				   .findByUuid_C_Last(uuid, companyId, orderByComparator);
 	}
@@ -468,7 +467,7 @@ public class ProcessUtil {
 	public static Process[] findByUuid_C_PrevAndNext(long processId,
 		String uuid, long companyId,
 		OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence()
 				   .findByUuid_C_PrevAndNext(processId, uuid, companyId,
 			orderByComparator);
@@ -571,7 +570,7 @@ public class ProcessUtil {
 	*/
 	public static Process findByGroupId_First(long groupId,
 		OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
@@ -597,7 +596,7 @@ public class ProcessUtil {
 	*/
 	public static Process findByGroupId_Last(long groupId,
 		OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
@@ -624,7 +623,7 @@ public class ProcessUtil {
 	*/
 	public static Process[] findByGroupId_PrevAndNext(long processId,
 		long groupId, OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence()
 				   .findByGroupId_PrevAndNext(processId, groupId,
 			orderByComparator);
@@ -687,7 +686,7 @@ public class ProcessUtil {
 	*/
 	public static Process[] filterFindByGroupId_PrevAndNext(long processId,
 		long groupId, OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence()
 				   .filterFindByGroupId_PrevAndNext(processId, groupId,
 			orderByComparator);
@@ -731,7 +730,7 @@ public class ProcessUtil {
 	* @throws NoSuchProcessException if a matching process could not be found
 	*/
 	public static Process findByCompanyId_Name(long companyId, String name)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence().findByCompanyId_Name(companyId, name);
 	}
 
@@ -768,7 +767,7 @@ public class ProcessUtil {
 	* @return the process that was removed
 	*/
 	public static Process removeByCompanyId_Name(long companyId, String name)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence().removeByCompanyId_Name(companyId, name);
 	}
 
@@ -872,7 +871,7 @@ public class ProcessUtil {
 	*/
 	public static Process findByProcessType_CompanyId_First(long companyId,
 		String processType, OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence()
 				   .findByProcessType_CompanyId_First(companyId, processType,
 			orderByComparator);
@@ -904,7 +903,7 @@ public class ProcessUtil {
 	*/
 	public static Process findByProcessType_CompanyId_Last(long companyId,
 		String processType, OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence()
 				   .findByProcessType_CompanyId_Last(companyId, processType,
 			orderByComparator);
@@ -938,7 +937,7 @@ public class ProcessUtil {
 	public static Process[] findByProcessType_CompanyId_PrevAndNext(
 		long processId, long companyId, String processType,
 		OrderByComparator<Process> orderByComparator)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence()
 				   .findByProcessType_CompanyId_PrevAndNext(processId,
 			companyId, processType, orderByComparator);
@@ -1004,7 +1003,7 @@ public class ProcessUtil {
 	* @throws NoSuchProcessException if a process with the primary key could not be found
 	*/
 	public static Process remove(long processId)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence().remove(processId);
 	}
 
@@ -1020,7 +1019,7 @@ public class ProcessUtil {
 	* @throws NoSuchProcessException if a process with the primary key could not be found
 	*/
 	public static Process findByPrimaryKey(long processId)
-		throws NoSuchProcessException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException {
 		return getPersistence().findByPrimaryKey(processId);
 	}
 

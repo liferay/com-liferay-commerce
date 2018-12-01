@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
 import com.liferay.commerce.data.integration.manager.service.ScheduledTaskServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
@@ -56,7 +55,7 @@ import com.liferay.portal.kernel.util.MethodKey;
  */
 @ProviderType
 public class ScheduledTaskServiceHttp {
-	public static ScheduledTask addScheduledTask(
+	public static com.liferay.commerce.data.integration.manager.model.ScheduledTask addScheduledTask(
 		HttpPrincipal httpPrincipal, long processId, String frequency,
 		java.util.Date startDate, String startHour, String name,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -82,7 +81,7 @@ public class ScheduledTaskServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (ScheduledTask)returnObj;
+			return (com.liferay.commerce.data.integration.manager.model.ScheduledTask)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -91,7 +90,7 @@ public class ScheduledTaskServiceHttp {
 		}
 	}
 
-	public static java.util.List<ScheduledTask> getScheduledTaskByGroupId(
+	public static java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> getScheduledTaskByGroupId(
 		HttpPrincipal httpPrincipal, long groupId, int start, int end)
 		throws com.liferay.portal.kernel.security.auth.PrincipalException {
 		try {
@@ -115,7 +114,7 @@ public class ScheduledTaskServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (java.util.List<ScheduledTask>)returnObj;
+			return (java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -156,7 +155,7 @@ public class ScheduledTaskServiceHttp {
 		}
 	}
 
-	public static ScheduledTask updateScheduledTask(
+	public static com.liferay.commerce.data.integration.manager.model.ScheduledTask updateScheduledTask(
 		HttpPrincipal httpPrincipal, long scheduledTaskId, long processId,
 		String frequency, java.util.Date startDate, String startHour,
 		String name,
@@ -183,7 +182,7 @@ public class ScheduledTaskServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (ScheduledTask)returnObj;
+			return (com.liferay.commerce.data.integration.manager.model.ScheduledTask)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);

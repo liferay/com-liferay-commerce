@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.Process;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
@@ -24,7 +23,7 @@ import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the remote service utility for Process. This utility wraps
- * {@link com.liferay.data.integration.service.impl.ProcessServiceImpl} and is the
+ * {@link com.liferay.commerce.data.integration.manager.service.impl.ProcessServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on a remote server. Methods of this service are expected to have security
  * checks based on the propagated JAAS credentials because this service can be
@@ -32,8 +31,8 @@ import org.osgi.util.tracker.ServiceTracker;
  *
  * @author Brian Wing Shun Chan
  * @see ProcessService
- * @see com.liferay.data.integration.service.base.ProcessServiceBaseImpl
- * @see com.liferay.data.integration.service.impl.ProcessServiceImpl
+ * @see com.liferay.commerce.data.integration.manager.service.base.ProcessServiceBaseImpl
+ * @see com.liferay.commerce.data.integration.manager.service.impl.ProcessServiceImpl
  * @generated
  */
 @ProviderType
@@ -41,7 +40,7 @@ public class ProcessServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.data.integration.service.impl.ProcessServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.data.integration.manager.service.impl.ProcessServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -51,7 +50,7 @@ public class ProcessServiceUtil {
 	*
 	* @throws PortalException
 	*/
-	public static Process addProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process addProcess(
 		String name, String className, String processType, String version,
 		long contextPropertiesFileEntryId, long srcArchiveFileEntryId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -61,7 +60,7 @@ public class ProcessServiceUtil {
 			contextPropertiesFileEntryId, srcArchiveFileEntryId, serviceContext);
 	}
 
-	public static Process deleteProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process deleteProcess(
 		long userId, long processId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -77,13 +76,13 @@ public class ProcessServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static Process getProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process getProcess(
 		long userId, long processId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getProcess(userId, processId);
 	}
 
-	public static java.util.List<Process> getProcessesByGroupId(
+	public static java.util.List<com.liferay.commerce.data.integration.manager.model.Process> getProcessesByGroupId(
 		long userId, long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getProcessesByGroupId(userId, groupId, start, end);
@@ -94,7 +93,7 @@ public class ProcessServiceUtil {
 		return getService().getProcessesByGroupIdCount(userId, groupId);
 	}
 
-	public static Process updateProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process updateProcess(
 		long processId, String name, String className, String processType,
 		String version, long contextPropertiesFileEntryId,
 		long srcArchiveFileEntryId,

@@ -119,14 +119,14 @@ public class HistoryModelImpl extends BaseModelImpl<History>
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"value.object.entity.cache.enabled.com.liferay.data.integration.model.History"),
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"value.object.entity.cache.enabled.com.liferay.commerce.data.integration.manager.model.History"),
 			true);
-	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"value.object.finder.cache.enabled.com.liferay.data.integration.model.History"),
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"value.object.finder.cache.enabled.com.liferay.commerce.data.integration.manager.model.History"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"value.object.column.bitmask.enabled.com.liferay.data.integration.model.History"),
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.commerce.data.integration.manager.model.History"),
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 	public static final long GROUPID_COLUMN_BITMASK = 2L;
@@ -188,8 +188,8 @@ public class HistoryModelImpl extends BaseModelImpl<History>
 		return models;
 	}
 
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"lock.expiration.time.com.liferay.data.integration.model.History"));
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"lock.expiration.time.com.liferay.commerce.data.integration.manager.model.History"));
 
 	public HistoryModelImpl() {
 	}
@@ -902,7 +902,7 @@ public class HistoryModelImpl extends BaseModelImpl<History>
 		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
-		sb.append("com.liferay.data.integration.model.History");
+		sb.append("com.liferay.commerce.data.integration.manager.model.History");
 		sb.append("</model-name>");
 
 		sb.append(

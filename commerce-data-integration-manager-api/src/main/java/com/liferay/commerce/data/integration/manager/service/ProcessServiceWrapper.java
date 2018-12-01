@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.Process;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -41,10 +40,10 @@ public class ProcessServiceWrapper implements ProcessService,
 	* @throws PortalException
 	*/
 	@Override
-	public Process addProcess(String name,
-							  String className, String processType, String version,
-							  long contextPropertiesFileEntryId, long srcArchiveFileEntryId,
-							  com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.data.integration.manager.model.Process addProcess(
+		String name, String className, String processType, String version,
+		long contextPropertiesFileEntryId, long srcArchiveFileEntryId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _processService.addProcess(name, className, processType,
 			version, contextPropertiesFileEntryId, srcArchiveFileEntryId,
@@ -52,7 +51,7 @@ public class ProcessServiceWrapper implements ProcessService,
 	}
 
 	@Override
-	public Process deleteProcess(
+	public com.liferay.commerce.data.integration.manager.model.Process deleteProcess(
 		long userId, long processId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -70,14 +69,14 @@ public class ProcessServiceWrapper implements ProcessService,
 	}
 
 	@Override
-	public Process getProcess(long userId,
-							  long processId)
+	public com.liferay.commerce.data.integration.manager.model.Process getProcess(
+		long userId, long processId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _processService.getProcess(userId, processId);
 	}
 
 	@Override
-	public java.util.List<Process> getProcessesByGroupId(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.Process> getProcessesByGroupId(
 		long userId, long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _processService.getProcessesByGroupId(userId, groupId, start, end);
@@ -90,7 +89,7 @@ public class ProcessServiceWrapper implements ProcessService,
 	}
 
 	@Override
-	public Process updateProcess(
+	public com.liferay.commerce.data.integration.manager.model.Process updateProcess(
 		long processId, String name, String className, String processType,
 		String version, long contextPropertiesFileEntryId,
 		long srcArchiveFileEntryId,

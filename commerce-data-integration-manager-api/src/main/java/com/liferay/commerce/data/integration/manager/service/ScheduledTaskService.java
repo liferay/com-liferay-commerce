@@ -40,8 +40,8 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see ScheduledTaskServiceUtil
- * @see com.liferay.data.integration.service.base.ScheduledTaskServiceBaseImpl
- * @see com.liferay.data.integration.service.impl.ScheduledTaskServiceImpl
+ * @see com.liferay.commerce.data.integration.manager.service.base.ScheduledTaskServiceBaseImpl
+ * @see com.liferay.commerce.data.integration.manager.service.impl.ScheduledTaskServiceImpl
  * @generated
  */
 @AccessControlled
@@ -55,7 +55,7 @@ public interface ScheduledTaskService extends BaseService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link ScheduledTaskServiceUtil} to access the scheduled task remote service. Add custom service methods to {@link com.liferay.data.integration.service.impl.ScheduledTaskServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link ScheduledTaskServiceUtil} to access the scheduled task remote service. Add custom service methods to {@link com.liferay.commerce.data.integration.manager.service.impl.ScheduledTaskServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
@@ -64,8 +64,8 @@ public interface ScheduledTaskService extends BaseService {
 	* Never reference this class directly. Always use {@link ScheduledTaskServiceUtil} to access the scheduled task remote service.
 	*/
 	public ScheduledTask addScheduledTask(long processId, String frequency,
-										  Date startDate, String startHour, String name,
-										  ServiceContext serviceContext) throws PortalException;
+		Date startDate, String startHour, String name,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.

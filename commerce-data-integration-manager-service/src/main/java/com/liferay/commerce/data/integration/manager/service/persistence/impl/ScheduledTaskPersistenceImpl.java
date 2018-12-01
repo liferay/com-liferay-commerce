@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service.persistence.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.service.persistence.ScheduledTaskUtil;
 import com.liferay.commerce.data.integration.manager.exception.NoSuchScheduledTaskException;
 import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
 import com.liferay.commerce.data.integration.manager.model.impl.ScheduledTaskImpl;
@@ -71,7 +70,7 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @see ScheduledTaskPersistence
- * @see ScheduledTaskUtil
+ * @see com.liferay.commerce.data.integration.manager.service.persistence.ScheduledTaskUtil
  * @generated
  */
 @ProviderType
@@ -1479,1015 +1478,6 @@ public class ScheduledTaskPersistenceImpl extends BasePersistenceImpl<ScheduledT
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "scheduledTask.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(scheduledTask.uuid IS NULL OR scheduledTask.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "scheduledTask.companyId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ENABLED = new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
-			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED,
-			ScheduledTaskImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByEnabled",
-			new String[] {
-				Boolean.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED =
-		new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
-			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED,
-			ScheduledTaskImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByEnabled", new String[] { Boolean.class.getName() },
-			ScheduledTaskModelImpl.ENABLED_COLUMN_BITMASK |
-			ScheduledTaskModelImpl.MODIFIEDDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_ENABLED = new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
-			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEnabled",
-			new String[] { Boolean.class.getName() });
-
-	/**
-	 * Returns all the scheduled tasks where enabled = &#63;.
-	 *
-	 * @param enabled the enabled
-	 * @return the matching scheduled tasks
-	 */
-	@Override
-	public List<ScheduledTask> findByEnabled(boolean enabled) {
-		return findByEnabled(enabled, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the scheduled tasks where enabled = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param enabled the enabled
-	 * @param start the lower bound of the range of scheduled tasks
-	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
-	 * @return the range of matching scheduled tasks
-	 */
-	@Override
-	public List<ScheduledTask> findByEnabled(boolean enabled, int start, int end) {
-		return findByEnabled(enabled, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the scheduled tasks where enabled = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param enabled the enabled
-	 * @param start the lower bound of the range of scheduled tasks
-	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching scheduled tasks
-	 */
-	@Override
-	public List<ScheduledTask> findByEnabled(boolean enabled, int start,
-		int end, OrderByComparator<ScheduledTask> orderByComparator) {
-		return findByEnabled(enabled, start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the scheduled tasks where enabled = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param enabled the enabled
-	 * @param start the lower bound of the range of scheduled tasks
-	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching scheduled tasks
-	 */
-	@Override
-	public List<ScheduledTask> findByEnabled(boolean enabled, int start,
-		int end, OrderByComparator<ScheduledTask> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED;
-			finderArgs = new Object[] { enabled };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ENABLED;
-			finderArgs = new Object[] { enabled, start, end, orderByComparator };
-		}
-
-		List<ScheduledTask> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<ScheduledTask>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (ScheduledTask scheduledTask : list) {
-					if ((enabled != scheduledTask.isEnabled())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_SCHEDULEDTASK_WHERE);
-
-			query.append(_FINDER_COLUMN_ENABLED_ENABLED_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(ScheduledTaskModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(enabled);
-
-				if (!pagination) {
-					list = (List<ScheduledTask>)QueryUtil.list(q, getDialect(),
-							start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<ScheduledTask>)QueryUtil.list(q, getDialect(),
-							start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first scheduled task in the ordered set where enabled = &#63;.
-	 *
-	 * @param enabled the enabled
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching scheduled task
-	 * @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
-	 */
-	@Override
-	public ScheduledTask findByEnabled_First(boolean enabled,
-		OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException {
-		ScheduledTask scheduledTask = fetchByEnabled_First(enabled,
-				orderByComparator);
-
-		if (scheduledTask != null) {
-			return scheduledTask;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("enabled=");
-		msg.append(enabled);
-
-		msg.append("}");
-
-		throw new NoSuchScheduledTaskException(msg.toString());
-	}
-
-	/**
-	 * Returns the first scheduled task in the ordered set where enabled = &#63;.
-	 *
-	 * @param enabled the enabled
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
-	 */
-	@Override
-	public ScheduledTask fetchByEnabled_First(boolean enabled,
-		OrderByComparator<ScheduledTask> orderByComparator) {
-		List<ScheduledTask> list = findByEnabled(enabled, 0, 1,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last scheduled task in the ordered set where enabled = &#63;.
-	 *
-	 * @param enabled the enabled
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching scheduled task
-	 * @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
-	 */
-	@Override
-	public ScheduledTask findByEnabled_Last(boolean enabled,
-		OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException {
-		ScheduledTask scheduledTask = fetchByEnabled_Last(enabled,
-				orderByComparator);
-
-		if (scheduledTask != null) {
-			return scheduledTask;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("enabled=");
-		msg.append(enabled);
-
-		msg.append("}");
-
-		throw new NoSuchScheduledTaskException(msg.toString());
-	}
-
-	/**
-	 * Returns the last scheduled task in the ordered set where enabled = &#63;.
-	 *
-	 * @param enabled the enabled
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
-	 */
-	@Override
-	public ScheduledTask fetchByEnabled_Last(boolean enabled,
-		OrderByComparator<ScheduledTask> orderByComparator) {
-		int count = countByEnabled(enabled);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<ScheduledTask> list = findByEnabled(enabled, count - 1, count,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the scheduled tasks before and after the current scheduled task in the ordered set where enabled = &#63;.
-	 *
-	 * @param scheduledTaskId the primary key of the current scheduled task
-	 * @param enabled the enabled
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next scheduled task
-	 * @throws NoSuchScheduledTaskException if a scheduled task with the primary key could not be found
-	 */
-	@Override
-	public ScheduledTask[] findByEnabled_PrevAndNext(long scheduledTaskId,
-		boolean enabled, OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException {
-		ScheduledTask scheduledTask = findByPrimaryKey(scheduledTaskId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			ScheduledTask[] array = new ScheduledTaskImpl[3];
-
-			array[0] = getByEnabled_PrevAndNext(session, scheduledTask,
-					enabled, orderByComparator, true);
-
-			array[1] = scheduledTask;
-
-			array[2] = getByEnabled_PrevAndNext(session, scheduledTask,
-					enabled, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected ScheduledTask getByEnabled_PrevAndNext(Session session,
-		ScheduledTask scheduledTask, boolean enabled,
-		OrderByComparator<ScheduledTask> orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_SCHEDULEDTASK_WHERE);
-
-		query.append(_FINDER_COLUMN_ENABLED_ENABLED_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(ScheduledTaskModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(enabled);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(scheduledTask);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<ScheduledTask> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the scheduled tasks where enabled = &#63; from the database.
-	 *
-	 * @param enabled the enabled
-	 */
-	@Override
-	public void removeByEnabled(boolean enabled) {
-		for (ScheduledTask scheduledTask : findByEnabled(enabled,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(scheduledTask);
-		}
-	}
-
-	/**
-	 * Returns the number of scheduled tasks where enabled = &#63;.
-	 *
-	 * @param enabled the enabled
-	 * @return the number of matching scheduled tasks
-	 */
-	@Override
-	public int countByEnabled(boolean enabled) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_ENABLED;
-
-		Object[] finderArgs = new Object[] { enabled };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_SCHEDULEDTASK_WHERE);
-
-			query.append(_FINDER_COLUMN_ENABLED_ENABLED_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(enabled);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_ENABLED_ENABLED_2 = "scheduledTask.enabled = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ACTIVE = new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
-			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED,
-			ScheduledTaskImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByActive",
-			new String[] {
-				Boolean.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE =
-		new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
-			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED,
-			ScheduledTaskImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByActive", new String[] { Boolean.class.getName() },
-			ScheduledTaskModelImpl.ACTIVE_COLUMN_BITMASK |
-			ScheduledTaskModelImpl.MODIFIEDDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_ACTIVE = new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
-			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByActive",
-			new String[] { Boolean.class.getName() });
-
-	/**
-	 * Returns all the scheduled tasks where active = &#63;.
-	 *
-	 * @param active the active
-	 * @return the matching scheduled tasks
-	 */
-	@Override
-	public List<ScheduledTask> findByActive(boolean active) {
-		return findByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the scheduled tasks where active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param active the active
-	 * @param start the lower bound of the range of scheduled tasks
-	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
-	 * @return the range of matching scheduled tasks
-	 */
-	@Override
-	public List<ScheduledTask> findByActive(boolean active, int start, int end) {
-		return findByActive(active, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the scheduled tasks where active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param active the active
-	 * @param start the lower bound of the range of scheduled tasks
-	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching scheduled tasks
-	 */
-	@Override
-	public List<ScheduledTask> findByActive(boolean active, int start, int end,
-		OrderByComparator<ScheduledTask> orderByComparator) {
-		return findByActive(active, start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the scheduled tasks where active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param active the active
-	 * @param start the lower bound of the range of scheduled tasks
-	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching scheduled tasks
-	 */
-	@Override
-	public List<ScheduledTask> findByActive(boolean active, int start, int end,
-		OrderByComparator<ScheduledTask> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE;
-			finderArgs = new Object[] { active };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ACTIVE;
-			finderArgs = new Object[] { active, start, end, orderByComparator };
-		}
-
-		List<ScheduledTask> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<ScheduledTask>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (ScheduledTask scheduledTask : list) {
-					if ((active != scheduledTask.isActive())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_SCHEDULEDTASK_WHERE);
-
-			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(ScheduledTaskModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(active);
-
-				if (!pagination) {
-					list = (List<ScheduledTask>)QueryUtil.list(q, getDialect(),
-							start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<ScheduledTask>)QueryUtil.list(q, getDialect(),
-							start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first scheduled task in the ordered set where active = &#63;.
-	 *
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching scheduled task
-	 * @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
-	 */
-	@Override
-	public ScheduledTask findByActive_First(boolean active,
-		OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException {
-		ScheduledTask scheduledTask = fetchByActive_First(active,
-				orderByComparator);
-
-		if (scheduledTask != null) {
-			return scheduledTask;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("active=");
-		msg.append(active);
-
-		msg.append("}");
-
-		throw new NoSuchScheduledTaskException(msg.toString());
-	}
-
-	/**
-	 * Returns the first scheduled task in the ordered set where active = &#63;.
-	 *
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
-	 */
-	@Override
-	public ScheduledTask fetchByActive_First(boolean active,
-		OrderByComparator<ScheduledTask> orderByComparator) {
-		List<ScheduledTask> list = findByActive(active, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last scheduled task in the ordered set where active = &#63;.
-	 *
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching scheduled task
-	 * @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
-	 */
-	@Override
-	public ScheduledTask findByActive_Last(boolean active,
-		OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException {
-		ScheduledTask scheduledTask = fetchByActive_Last(active,
-				orderByComparator);
-
-		if (scheduledTask != null) {
-			return scheduledTask;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("active=");
-		msg.append(active);
-
-		msg.append("}");
-
-		throw new NoSuchScheduledTaskException(msg.toString());
-	}
-
-	/**
-	 * Returns the last scheduled task in the ordered set where active = &#63;.
-	 *
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
-	 */
-	@Override
-	public ScheduledTask fetchByActive_Last(boolean active,
-		OrderByComparator<ScheduledTask> orderByComparator) {
-		int count = countByActive(active);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<ScheduledTask> list = findByActive(active, count - 1, count,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the scheduled tasks before and after the current scheduled task in the ordered set where active = &#63;.
-	 *
-	 * @param scheduledTaskId the primary key of the current scheduled task
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next scheduled task
-	 * @throws NoSuchScheduledTaskException if a scheduled task with the primary key could not be found
-	 */
-	@Override
-	public ScheduledTask[] findByActive_PrevAndNext(long scheduledTaskId,
-		boolean active, OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException {
-		ScheduledTask scheduledTask = findByPrimaryKey(scheduledTaskId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			ScheduledTask[] array = new ScheduledTaskImpl[3];
-
-			array[0] = getByActive_PrevAndNext(session, scheduledTask, active,
-					orderByComparator, true);
-
-			array[1] = scheduledTask;
-
-			array[2] = getByActive_PrevAndNext(session, scheduledTask, active,
-					orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected ScheduledTask getByActive_PrevAndNext(Session session,
-		ScheduledTask scheduledTask, boolean active,
-		OrderByComparator<ScheduledTask> orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_SCHEDULEDTASK_WHERE);
-
-		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(ScheduledTaskModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(active);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(scheduledTask);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<ScheduledTask> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the scheduled tasks where active = &#63; from the database.
-	 *
-	 * @param active the active
-	 */
-	@Override
-	public void removeByActive(boolean active) {
-		for (ScheduledTask scheduledTask : findByActive(active,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(scheduledTask);
-		}
-	}
-
-	/**
-	 * Returns the number of scheduled tasks where active = &#63;.
-	 *
-	 * @param active the active
-	 * @return the number of matching scheduled tasks
-	 */
-	@Override
-	public int countByActive(boolean active) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_ACTIVE;
-
-		Object[] finderArgs = new Object[] { active };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_SCHEDULEDTASK_WHERE);
-
-			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(active);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_ACTIVE_ACTIVE_2 = "scheduledTask.active = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
 			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED,
 			ScheduledTaskImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -3353,6 +2343,1015 @@ public class ScheduledTaskPersistenceImpl extends BasePersistenceImpl<ScheduledT
 	}
 
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "scheduledTask.groupId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ACTIVE = new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
+			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED,
+			ScheduledTaskImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByActive",
+			new String[] {
+				Boolean.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE =
+		new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
+			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED,
+			ScheduledTaskImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByActive", new String[] { Boolean.class.getName() },
+			ScheduledTaskModelImpl.ACTIVE_COLUMN_BITMASK |
+			ScheduledTaskModelImpl.MODIFIEDDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ACTIVE = new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
+			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByActive",
+			new String[] { Boolean.class.getName() });
+
+	/**
+	 * Returns all the scheduled tasks where active = &#63;.
+	 *
+	 * @param active the active
+	 * @return the matching scheduled tasks
+	 */
+	@Override
+	public List<ScheduledTask> findByActive(boolean active) {
+		return findByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the scheduled tasks where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param active the active
+	 * @param start the lower bound of the range of scheduled tasks
+	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
+	 * @return the range of matching scheduled tasks
+	 */
+	@Override
+	public List<ScheduledTask> findByActive(boolean active, int start, int end) {
+		return findByActive(active, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the scheduled tasks where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param active the active
+	 * @param start the lower bound of the range of scheduled tasks
+	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching scheduled tasks
+	 */
+	@Override
+	public List<ScheduledTask> findByActive(boolean active, int start, int end,
+		OrderByComparator<ScheduledTask> orderByComparator) {
+		return findByActive(active, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the scheduled tasks where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param active the active
+	 * @param start the lower bound of the range of scheduled tasks
+	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching scheduled tasks
+	 */
+	@Override
+	public List<ScheduledTask> findByActive(boolean active, int start, int end,
+		OrderByComparator<ScheduledTask> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE;
+			finderArgs = new Object[] { active };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ACTIVE;
+			finderArgs = new Object[] { active, start, end, orderByComparator };
+		}
+
+		List<ScheduledTask> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<ScheduledTask>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (ScheduledTask scheduledTask : list) {
+					if ((active != scheduledTask.isActive())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SCHEDULEDTASK_WHERE);
+
+			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(ScheduledTaskModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(active);
+
+				if (!pagination) {
+					list = (List<ScheduledTask>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<ScheduledTask>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first scheduled task in the ordered set where active = &#63;.
+	 *
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching scheduled task
+	 * @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
+	 */
+	@Override
+	public ScheduledTask findByActive_First(boolean active,
+		OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException {
+		ScheduledTask scheduledTask = fetchByActive_First(active,
+				orderByComparator);
+
+		if (scheduledTask != null) {
+			return scheduledTask;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("active=");
+		msg.append(active);
+
+		msg.append("}");
+
+		throw new NoSuchScheduledTaskException(msg.toString());
+	}
+
+	/**
+	 * Returns the first scheduled task in the ordered set where active = &#63;.
+	 *
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
+	 */
+	@Override
+	public ScheduledTask fetchByActive_First(boolean active,
+		OrderByComparator<ScheduledTask> orderByComparator) {
+		List<ScheduledTask> list = findByActive(active, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last scheduled task in the ordered set where active = &#63;.
+	 *
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching scheduled task
+	 * @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
+	 */
+	@Override
+	public ScheduledTask findByActive_Last(boolean active,
+		OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException {
+		ScheduledTask scheduledTask = fetchByActive_Last(active,
+				orderByComparator);
+
+		if (scheduledTask != null) {
+			return scheduledTask;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("active=");
+		msg.append(active);
+
+		msg.append("}");
+
+		throw new NoSuchScheduledTaskException(msg.toString());
+	}
+
+	/**
+	 * Returns the last scheduled task in the ordered set where active = &#63;.
+	 *
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
+	 */
+	@Override
+	public ScheduledTask fetchByActive_Last(boolean active,
+		OrderByComparator<ScheduledTask> orderByComparator) {
+		int count = countByActive(active);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<ScheduledTask> list = findByActive(active, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the scheduled tasks before and after the current scheduled task in the ordered set where active = &#63;.
+	 *
+	 * @param scheduledTaskId the primary key of the current scheduled task
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next scheduled task
+	 * @throws NoSuchScheduledTaskException if a scheduled task with the primary key could not be found
+	 */
+	@Override
+	public ScheduledTask[] findByActive_PrevAndNext(long scheduledTaskId,
+		boolean active, OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException {
+		ScheduledTask scheduledTask = findByPrimaryKey(scheduledTaskId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			ScheduledTask[] array = new ScheduledTaskImpl[3];
+
+			array[0] = getByActive_PrevAndNext(session, scheduledTask, active,
+					orderByComparator, true);
+
+			array[1] = scheduledTask;
+
+			array[2] = getByActive_PrevAndNext(session, scheduledTask, active,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected ScheduledTask getByActive_PrevAndNext(Session session,
+		ScheduledTask scheduledTask, boolean active,
+		OrderByComparator<ScheduledTask> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SCHEDULEDTASK_WHERE);
+
+		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(ScheduledTaskModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(active);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(scheduledTask);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ScheduledTask> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the scheduled tasks where active = &#63; from the database.
+	 *
+	 * @param active the active
+	 */
+	@Override
+	public void removeByActive(boolean active) {
+		for (ScheduledTask scheduledTask : findByActive(active,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(scheduledTask);
+		}
+	}
+
+	/**
+	 * Returns the number of scheduled tasks where active = &#63;.
+	 *
+	 * @param active the active
+	 * @return the number of matching scheduled tasks
+	 */
+	@Override
+	public int countByActive(boolean active) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ACTIVE;
+
+		Object[] finderArgs = new Object[] { active };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SCHEDULEDTASK_WHERE);
+
+			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(active);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ACTIVE_ACTIVE_2 = "scheduledTask.active = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ENABLED = new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
+			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED,
+			ScheduledTaskImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByEnabled",
+			new String[] {
+				Boolean.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED =
+		new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
+			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED,
+			ScheduledTaskImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByEnabled", new String[] { Boolean.class.getName() },
+			ScheduledTaskModelImpl.ENABLED_COLUMN_BITMASK |
+			ScheduledTaskModelImpl.MODIFIEDDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ENABLED = new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
+			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEnabled",
+			new String[] { Boolean.class.getName() });
+
+	/**
+	 * Returns all the scheduled tasks where enabled = &#63;.
+	 *
+	 * @param enabled the enabled
+	 * @return the matching scheduled tasks
+	 */
+	@Override
+	public List<ScheduledTask> findByEnabled(boolean enabled) {
+		return findByEnabled(enabled, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the scheduled tasks where enabled = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param enabled the enabled
+	 * @param start the lower bound of the range of scheduled tasks
+	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
+	 * @return the range of matching scheduled tasks
+	 */
+	@Override
+	public List<ScheduledTask> findByEnabled(boolean enabled, int start, int end) {
+		return findByEnabled(enabled, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the scheduled tasks where enabled = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param enabled the enabled
+	 * @param start the lower bound of the range of scheduled tasks
+	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching scheduled tasks
+	 */
+	@Override
+	public List<ScheduledTask> findByEnabled(boolean enabled, int start,
+		int end, OrderByComparator<ScheduledTask> orderByComparator) {
+		return findByEnabled(enabled, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the scheduled tasks where enabled = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param enabled the enabled
+	 * @param start the lower bound of the range of scheduled tasks
+	 * @param end the upper bound of the range of scheduled tasks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching scheduled tasks
+	 */
+	@Override
+	public List<ScheduledTask> findByEnabled(boolean enabled, int start,
+		int end, OrderByComparator<ScheduledTask> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED;
+			finderArgs = new Object[] { enabled };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ENABLED;
+			finderArgs = new Object[] { enabled, start, end, orderByComparator };
+		}
+
+		List<ScheduledTask> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<ScheduledTask>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (ScheduledTask scheduledTask : list) {
+					if ((enabled != scheduledTask.isEnabled())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SCHEDULEDTASK_WHERE);
+
+			query.append(_FINDER_COLUMN_ENABLED_ENABLED_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(ScheduledTaskModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(enabled);
+
+				if (!pagination) {
+					list = (List<ScheduledTask>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<ScheduledTask>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first scheduled task in the ordered set where enabled = &#63;.
+	 *
+	 * @param enabled the enabled
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching scheduled task
+	 * @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
+	 */
+	@Override
+	public ScheduledTask findByEnabled_First(boolean enabled,
+		OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException {
+		ScheduledTask scheduledTask = fetchByEnabled_First(enabled,
+				orderByComparator);
+
+		if (scheduledTask != null) {
+			return scheduledTask;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("enabled=");
+		msg.append(enabled);
+
+		msg.append("}");
+
+		throw new NoSuchScheduledTaskException(msg.toString());
+	}
+
+	/**
+	 * Returns the first scheduled task in the ordered set where enabled = &#63;.
+	 *
+	 * @param enabled the enabled
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
+	 */
+	@Override
+	public ScheduledTask fetchByEnabled_First(boolean enabled,
+		OrderByComparator<ScheduledTask> orderByComparator) {
+		List<ScheduledTask> list = findByEnabled(enabled, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last scheduled task in the ordered set where enabled = &#63;.
+	 *
+	 * @param enabled the enabled
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching scheduled task
+	 * @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
+	 */
+	@Override
+	public ScheduledTask findByEnabled_Last(boolean enabled,
+		OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException {
+		ScheduledTask scheduledTask = fetchByEnabled_Last(enabled,
+				orderByComparator);
+
+		if (scheduledTask != null) {
+			return scheduledTask;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("enabled=");
+		msg.append(enabled);
+
+		msg.append("}");
+
+		throw new NoSuchScheduledTaskException(msg.toString());
+	}
+
+	/**
+	 * Returns the last scheduled task in the ordered set where enabled = &#63;.
+	 *
+	 * @param enabled the enabled
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
+	 */
+	@Override
+	public ScheduledTask fetchByEnabled_Last(boolean enabled,
+		OrderByComparator<ScheduledTask> orderByComparator) {
+		int count = countByEnabled(enabled);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<ScheduledTask> list = findByEnabled(enabled, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the scheduled tasks before and after the current scheduled task in the ordered set where enabled = &#63;.
+	 *
+	 * @param scheduledTaskId the primary key of the current scheduled task
+	 * @param enabled the enabled
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next scheduled task
+	 * @throws NoSuchScheduledTaskException if a scheduled task with the primary key could not be found
+	 */
+	@Override
+	public ScheduledTask[] findByEnabled_PrevAndNext(long scheduledTaskId,
+		boolean enabled, OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException {
+		ScheduledTask scheduledTask = findByPrimaryKey(scheduledTaskId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			ScheduledTask[] array = new ScheduledTaskImpl[3];
+
+			array[0] = getByEnabled_PrevAndNext(session, scheduledTask,
+					enabled, orderByComparator, true);
+
+			array[1] = scheduledTask;
+
+			array[2] = getByEnabled_PrevAndNext(session, scheduledTask,
+					enabled, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected ScheduledTask getByEnabled_PrevAndNext(Session session,
+		ScheduledTask scheduledTask, boolean enabled,
+		OrderByComparator<ScheduledTask> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SCHEDULEDTASK_WHERE);
+
+		query.append(_FINDER_COLUMN_ENABLED_ENABLED_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(ScheduledTaskModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(enabled);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(scheduledTask);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ScheduledTask> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the scheduled tasks where enabled = &#63; from the database.
+	 *
+	 * @param enabled the enabled
+	 */
+	@Override
+	public void removeByEnabled(boolean enabled) {
+		for (ScheduledTask scheduledTask : findByEnabled(enabled,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(scheduledTask);
+		}
+	}
+
+	/**
+	 * Returns the number of scheduled tasks where enabled = &#63;.
+	 *
+	 * @param enabled the enabled
+	 * @return the number of matching scheduled tasks
+	 */
+	@Override
+	public int countByEnabled(boolean enabled) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ENABLED;
+
+		Object[] finderArgs = new Object[] { enabled };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SCHEDULEDTASK_WHERE);
+
+			query.append(_FINDER_COLUMN_ENABLED_ENABLED_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(enabled);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ENABLED_ENABLED_2 = "scheduledTask.enabled = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID_ACTIVE =
 		new FinderPath(ScheduledTaskModelImpl.ENTITY_CACHE_ENABLED,
 			ScheduledTaskModelImpl.FINDER_CACHE_ENABLED,
@@ -6148,10 +6147,10 @@ public class ScheduledTaskPersistenceImpl extends BasePersistenceImpl<ScheduledT
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
 				args);
 
-			args = new Object[] { scheduledTaskModelImpl.isEnabled() };
+			args = new Object[] { scheduledTaskModelImpl.getGroupId() };
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_ENABLED, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
 				args);
 
 			args = new Object[] { scheduledTaskModelImpl.isActive() };
@@ -6160,10 +6159,10 @@ public class ScheduledTaskPersistenceImpl extends BasePersistenceImpl<ScheduledT
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE,
 				args);
 
-			args = new Object[] { scheduledTaskModelImpl.getGroupId() };
+			args = new Object[] { scheduledTaskModelImpl.isEnabled() };
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_ENABLED, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED,
 				args);
 
 			args = new Object[] {
@@ -6238,19 +6237,19 @@ public class ScheduledTaskPersistenceImpl extends BasePersistenceImpl<ScheduledT
 			}
 
 			if ((scheduledTaskModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						scheduledTaskModelImpl.getOriginalEnabled()
+						scheduledTaskModelImpl.getOriginalGroupId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_ENABLED, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
 					args);
 
-				args = new Object[] { scheduledTaskModelImpl.isEnabled() };
+				args = new Object[] { scheduledTaskModelImpl.getGroupId() };
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_ENABLED, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
 					args);
 			}
 
@@ -6272,19 +6271,19 @@ public class ScheduledTaskPersistenceImpl extends BasePersistenceImpl<ScheduledT
 			}
 
 			if ((scheduledTaskModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						scheduledTaskModelImpl.getOriginalGroupId()
+						scheduledTaskModelImpl.getOriginalEnabled()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_ENABLED, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED,
 					args);
 
-				args = new Object[] { scheduledTaskModelImpl.getGroupId() };
+				args = new Object[] { scheduledTaskModelImpl.isEnabled() };
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_ENABLED, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENABLED,
 					args);
 			}
 

@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.Process;
 import com.liferay.commerce.data.integration.manager.service.ProcessServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
@@ -56,7 +55,7 @@ import com.liferay.portal.kernel.util.MethodKey;
  */
 @ProviderType
 public class ProcessServiceHttp {
-	public static Process addProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process addProcess(
 		HttpPrincipal httpPrincipal, String name, String className,
 		String processType, String version, long contextPropertiesFileEntryId,
 		long srcArchiveFileEntryId,
@@ -84,7 +83,7 @@ public class ProcessServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (Process)returnObj;
+			return (com.liferay.commerce.data.integration.manager.model.Process)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -93,7 +92,7 @@ public class ProcessServiceHttp {
 		}
 	}
 
-	public static Process deleteProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process deleteProcess(
 		HttpPrincipal httpPrincipal, long userId, long processId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -117,7 +116,7 @@ public class ProcessServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (Process)returnObj;
+			return (com.liferay.commerce.data.integration.manager.model.Process)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -126,7 +125,7 @@ public class ProcessServiceHttp {
 		}
 	}
 
-	public static Process getProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process getProcess(
 		HttpPrincipal httpPrincipal, long userId, long processId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -149,7 +148,7 @@ public class ProcessServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (Process)returnObj;
+			return (com.liferay.commerce.data.integration.manager.model.Process)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -158,7 +157,7 @@ public class ProcessServiceHttp {
 		}
 	}
 
-	public static java.util.List<Process> getProcessesByGroupId(
+	public static java.util.List<com.liferay.commerce.data.integration.manager.model.Process> getProcessesByGroupId(
 		HttpPrincipal httpPrincipal, long userId, long groupId, int start,
 		int end) throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -182,7 +181,7 @@ public class ProcessServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (java.util.List<Process>)returnObj;
+			return (java.util.List<com.liferay.commerce.data.integration.manager.model.Process>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -224,7 +223,7 @@ public class ProcessServiceHttp {
 		}
 	}
 
-	public static Process updateProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process updateProcess(
 		HttpPrincipal httpPrincipal, long processId, String name,
 		String className, String processType, String version,
 		long contextPropertiesFileEntryId, long srcArchiveFileEntryId,
@@ -252,7 +251,7 @@ public class ProcessServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (Process)returnObj;
+			return (com.liferay.commerce.data.integration.manager.model.Process)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);

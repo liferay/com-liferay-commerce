@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException;
 import com.liferay.commerce.data.integration.manager.model.History;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -31,7 +30,7 @@ import org.osgi.util.tracker.ServiceTracker;
 import java.util.List;
 
 /**
- * The persistence utility for the history service. This utility wraps {@link com.liferay.data.integration.service.persistence.impl.HistoryPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the history service. This utility wraps {@link com.liferay.commerce.data.integration.manager.service.persistence.impl.HistoryPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -39,7 +38,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see HistoryPersistence
- * @see com.liferay.data.integration.service.persistence.impl.HistoryPersistenceImpl
+ * @see com.liferay.commerce.data.integration.manager.service.persistence.impl.HistoryPersistenceImpl
  * @generated
  */
 @ProviderType
@@ -186,7 +185,7 @@ public class HistoryUtil {
 	*/
 	public static History findByUuid_First(String uuid,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
@@ -212,7 +211,7 @@ public class HistoryUtil {
 	*/
 	public static History findByUuid_Last(String uuid,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
@@ -239,7 +238,7 @@ public class HistoryUtil {
 	*/
 	public static History[] findByUuid_PrevAndNext(long historyId, String uuid,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByUuid_PrevAndNext(historyId, uuid, orderByComparator);
 	}
@@ -272,7 +271,7 @@ public class HistoryUtil {
 	* @throws NoSuchHistoryException if a matching history could not be found
 	*/
 	public static History findByUUID_G(String uuid, long groupId)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence().findByUUID_G(uuid, groupId);
 	}
 
@@ -308,7 +307,7 @@ public class HistoryUtil {
 	* @return the history that was removed
 	*/
 	public static History removeByUUID_G(String uuid, long groupId)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence().removeByUUID_G(uuid, groupId);
 	}
 
@@ -406,7 +405,7 @@ public class HistoryUtil {
 	*/
 	public static History findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByUuid_C_First(uuid, companyId, orderByComparator);
 	}
@@ -436,7 +435,7 @@ public class HistoryUtil {
 	*/
 	public static History findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByUuid_C_Last(uuid, companyId, orderByComparator);
 	}
@@ -468,7 +467,7 @@ public class HistoryUtil {
 	public static History[] findByUuid_C_PrevAndNext(long historyId,
 		String uuid, long companyId,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByUuid_C_PrevAndNext(historyId, uuid, companyId,
 			orderByComparator);
@@ -571,7 +570,7 @@ public class HistoryUtil {
 	*/
 	public static History findByGroupId_First(long groupId,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
@@ -597,7 +596,7 @@ public class HistoryUtil {
 	*/
 	public static History findByGroupId_Last(long groupId,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
@@ -624,7 +623,7 @@ public class HistoryUtil {
 	*/
 	public static History[] findByGroupId_PrevAndNext(long historyId,
 		long groupId, OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByGroupId_PrevAndNext(historyId, groupId,
 			orderByComparator);
@@ -687,7 +686,7 @@ public class HistoryUtil {
 	*/
 	public static History[] filterFindByGroupId_PrevAndNext(long historyId,
 		long groupId, OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .filterFindByGroupId_PrevAndNext(historyId, groupId,
 			orderByComparator);
@@ -806,7 +805,7 @@ public class HistoryUtil {
 	*/
 	public static History findByGroupId_Status_First(long groupId, int status,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByGroupId_Status_First(groupId, status,
 			orderByComparator);
@@ -838,7 +837,7 @@ public class HistoryUtil {
 	*/
 	public static History findByGroupId_Status_Last(long groupId, int status,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByGroupId_Status_Last(groupId, status, orderByComparator);
 	}
@@ -870,7 +869,7 @@ public class HistoryUtil {
 	*/
 	public static History[] findByGroupId_Status_PrevAndNext(long historyId,
 		long groupId, int status, OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByGroupId_Status_PrevAndNext(historyId, groupId,
 			status, orderByComparator);
@@ -942,7 +941,7 @@ public class HistoryUtil {
 	public static History[] filterFindByGroupId_Status_PrevAndNext(
 		long historyId, long groupId, int status,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .filterFindByGroupId_Status_PrevAndNext(historyId, groupId,
 			status, orderByComparator);
@@ -1067,7 +1066,7 @@ public class HistoryUtil {
 	*/
 	public static History findByScheduledTaskId_First(long companyId,
 		long scheduledTaskId, OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByScheduledTaskId_First(companyId, scheduledTaskId,
 			orderByComparator);
@@ -1099,7 +1098,7 @@ public class HistoryUtil {
 	*/
 	public static History findByScheduledTaskId_Last(long companyId,
 		long scheduledTaskId, OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByScheduledTaskId_Last(companyId, scheduledTaskId,
 			orderByComparator);
@@ -1133,7 +1132,7 @@ public class HistoryUtil {
 	public static History[] findByScheduledTaskId_PrevAndNext(long historyId,
 		long companyId, long scheduledTaskId,
 		OrderByComparator<History> orderByComparator)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence()
 				   .findByScheduledTaskId_PrevAndNext(historyId, companyId,
 			scheduledTaskId, orderByComparator);
@@ -1199,7 +1198,7 @@ public class HistoryUtil {
 	* @throws NoSuchHistoryException if a history with the primary key could not be found
 	*/
 	public static History remove(long historyId)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence().remove(historyId);
 	}
 
@@ -1215,7 +1214,7 @@ public class HistoryUtil {
 	* @throws NoSuchHistoryException if a history with the primary key could not be found
 	*/
 	public static History findByPrimaryKey(long historyId)
-		throws NoSuchHistoryException {
+		throws com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException {
 		return getPersistence().findByPrimaryKey(historyId);
 	}
 

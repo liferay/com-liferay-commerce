@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.service.persistence.BasePersistence;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see com.liferay.data.integration.service.persistence.impl.ScheduledTaskPersistenceImpl
+ * @see com.liferay.commerce.data.integration.manager.service.persistence.impl.ScheduledTaskPersistenceImpl
  * @see ScheduledTaskUtil
  * @generated
  */
@@ -368,270 +368,6 @@ public interface ScheduledTaskPersistence extends BasePersistence<ScheduledTask>
 	public int countByUuid_C(String uuid, long companyId);
 
 	/**
-	* Returns all the scheduled tasks where enabled = &#63;.
-	*
-	* @param enabled the enabled
-	* @return the matching scheduled tasks
-	*/
-	public java.util.List<ScheduledTask> findByEnabled(boolean enabled);
-
-	/**
-	* Returns a range of all the scheduled tasks where enabled = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param enabled the enabled
-	* @param start the lower bound of the range of scheduled tasks
-	* @param end the upper bound of the range of scheduled tasks (not inclusive)
-	* @return the range of matching scheduled tasks
-	*/
-	public java.util.List<ScheduledTask> findByEnabled(boolean enabled,
-		int start, int end);
-
-	/**
-	* Returns an ordered range of all the scheduled tasks where enabled = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param enabled the enabled
-	* @param start the lower bound of the range of scheduled tasks
-	* @param end the upper bound of the range of scheduled tasks (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching scheduled tasks
-	*/
-	public java.util.List<ScheduledTask> findByEnabled(boolean enabled,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the scheduled tasks where enabled = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param enabled the enabled
-	* @param start the lower bound of the range of scheduled tasks
-	* @param end the upper bound of the range of scheduled tasks (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching scheduled tasks
-	*/
-	public java.util.List<ScheduledTask> findByEnabled(boolean enabled,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first scheduled task in the ordered set where enabled = &#63;.
-	*
-	* @param enabled the enabled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching scheduled task
-	* @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
-	*/
-	public ScheduledTask findByEnabled_First(boolean enabled,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException;
-
-	/**
-	* Returns the first scheduled task in the ordered set where enabled = &#63;.
-	*
-	* @param enabled the enabled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
-	*/
-	public ScheduledTask fetchByEnabled_First(boolean enabled,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
-
-	/**
-	* Returns the last scheduled task in the ordered set where enabled = &#63;.
-	*
-	* @param enabled the enabled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching scheduled task
-	* @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
-	*/
-	public ScheduledTask findByEnabled_Last(boolean enabled,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException;
-
-	/**
-	* Returns the last scheduled task in the ordered set where enabled = &#63;.
-	*
-	* @param enabled the enabled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
-	*/
-	public ScheduledTask fetchByEnabled_Last(boolean enabled,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
-
-	/**
-	* Returns the scheduled tasks before and after the current scheduled task in the ordered set where enabled = &#63;.
-	*
-	* @param scheduledTaskId the primary key of the current scheduled task
-	* @param enabled the enabled
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next scheduled task
-	* @throws NoSuchScheduledTaskException if a scheduled task with the primary key could not be found
-	*/
-	public ScheduledTask[] findByEnabled_PrevAndNext(long scheduledTaskId,
-		boolean enabled,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException;
-
-	/**
-	* Removes all the scheduled tasks where enabled = &#63; from the database.
-	*
-	* @param enabled the enabled
-	*/
-	public void removeByEnabled(boolean enabled);
-
-	/**
-	* Returns the number of scheduled tasks where enabled = &#63;.
-	*
-	* @param enabled the enabled
-	* @return the number of matching scheduled tasks
-	*/
-	public int countByEnabled(boolean enabled);
-
-	/**
-	* Returns all the scheduled tasks where active = &#63;.
-	*
-	* @param active the active
-	* @return the matching scheduled tasks
-	*/
-	public java.util.List<ScheduledTask> findByActive(boolean active);
-
-	/**
-	* Returns a range of all the scheduled tasks where active = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param active the active
-	* @param start the lower bound of the range of scheduled tasks
-	* @param end the upper bound of the range of scheduled tasks (not inclusive)
-	* @return the range of matching scheduled tasks
-	*/
-	public java.util.List<ScheduledTask> findByActive(boolean active,
-		int start, int end);
-
-	/**
-	* Returns an ordered range of all the scheduled tasks where active = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param active the active
-	* @param start the lower bound of the range of scheduled tasks
-	* @param end the upper bound of the range of scheduled tasks (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching scheduled tasks
-	*/
-	public java.util.List<ScheduledTask> findByActive(boolean active,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the scheduled tasks where active = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param active the active
-	* @param start the lower bound of the range of scheduled tasks
-	* @param end the upper bound of the range of scheduled tasks (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching scheduled tasks
-	*/
-	public java.util.List<ScheduledTask> findByActive(boolean active,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first scheduled task in the ordered set where active = &#63;.
-	*
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching scheduled task
-	* @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
-	*/
-	public ScheduledTask findByActive_First(boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException;
-
-	/**
-	* Returns the first scheduled task in the ordered set where active = &#63;.
-	*
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
-	*/
-	public ScheduledTask fetchByActive_First(boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
-
-	/**
-	* Returns the last scheduled task in the ordered set where active = &#63;.
-	*
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching scheduled task
-	* @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
-	*/
-	public ScheduledTask findByActive_Last(boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException;
-
-	/**
-	* Returns the last scheduled task in the ordered set where active = &#63;.
-	*
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
-	*/
-	public ScheduledTask fetchByActive_Last(boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
-
-	/**
-	* Returns the scheduled tasks before and after the current scheduled task in the ordered set where active = &#63;.
-	*
-	* @param scheduledTaskId the primary key of the current scheduled task
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next scheduled task
-	* @throws NoSuchScheduledTaskException if a scheduled task with the primary key could not be found
-	*/
-	public ScheduledTask[] findByActive_PrevAndNext(long scheduledTaskId,
-		boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
-		throws NoSuchScheduledTaskException;
-
-	/**
-	* Removes all the scheduled tasks where active = &#63; from the database.
-	*
-	* @param active the active
-	*/
-	public void removeByActive(boolean active);
-
-	/**
-	* Returns the number of scheduled tasks where active = &#63;.
-	*
-	* @param active the active
-	* @return the number of matching scheduled tasks
-	*/
-	public int countByActive(boolean active);
-
-	/**
 	* Returns all the scheduled tasks where groupId = &#63;.
 	*
 	* @param groupId the group ID
@@ -824,6 +560,270 @@ public interface ScheduledTaskPersistence extends BasePersistence<ScheduledTask>
 	* @return the number of matching scheduled tasks that the user has permission to view
 	*/
 	public int filterCountByGroupId(long groupId);
+
+	/**
+	* Returns all the scheduled tasks where active = &#63;.
+	*
+	* @param active the active
+	* @return the matching scheduled tasks
+	*/
+	public java.util.List<ScheduledTask> findByActive(boolean active);
+
+	/**
+	* Returns a range of all the scheduled tasks where active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param active the active
+	* @param start the lower bound of the range of scheduled tasks
+	* @param end the upper bound of the range of scheduled tasks (not inclusive)
+	* @return the range of matching scheduled tasks
+	*/
+	public java.util.List<ScheduledTask> findByActive(boolean active,
+		int start, int end);
+
+	/**
+	* Returns an ordered range of all the scheduled tasks where active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param active the active
+	* @param start the lower bound of the range of scheduled tasks
+	* @param end the upper bound of the range of scheduled tasks (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching scheduled tasks
+	*/
+	public java.util.List<ScheduledTask> findByActive(boolean active,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the scheduled tasks where active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param active the active
+	* @param start the lower bound of the range of scheduled tasks
+	* @param end the upper bound of the range of scheduled tasks (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching scheduled tasks
+	*/
+	public java.util.List<ScheduledTask> findByActive(boolean active,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first scheduled task in the ordered set where active = &#63;.
+	*
+	* @param active the active
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching scheduled task
+	* @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
+	*/
+	public ScheduledTask findByActive_First(boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException;
+
+	/**
+	* Returns the first scheduled task in the ordered set where active = &#63;.
+	*
+	* @param active the active
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
+	*/
+	public ScheduledTask fetchByActive_First(boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
+
+	/**
+	* Returns the last scheduled task in the ordered set where active = &#63;.
+	*
+	* @param active the active
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching scheduled task
+	* @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
+	*/
+	public ScheduledTask findByActive_Last(boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException;
+
+	/**
+	* Returns the last scheduled task in the ordered set where active = &#63;.
+	*
+	* @param active the active
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
+	*/
+	public ScheduledTask fetchByActive_Last(boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
+
+	/**
+	* Returns the scheduled tasks before and after the current scheduled task in the ordered set where active = &#63;.
+	*
+	* @param scheduledTaskId the primary key of the current scheduled task
+	* @param active the active
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next scheduled task
+	* @throws NoSuchScheduledTaskException if a scheduled task with the primary key could not be found
+	*/
+	public ScheduledTask[] findByActive_PrevAndNext(long scheduledTaskId,
+		boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException;
+
+	/**
+	* Removes all the scheduled tasks where active = &#63; from the database.
+	*
+	* @param active the active
+	*/
+	public void removeByActive(boolean active);
+
+	/**
+	* Returns the number of scheduled tasks where active = &#63;.
+	*
+	* @param active the active
+	* @return the number of matching scheduled tasks
+	*/
+	public int countByActive(boolean active);
+
+	/**
+	* Returns all the scheduled tasks where enabled = &#63;.
+	*
+	* @param enabled the enabled
+	* @return the matching scheduled tasks
+	*/
+	public java.util.List<ScheduledTask> findByEnabled(boolean enabled);
+
+	/**
+	* Returns a range of all the scheduled tasks where enabled = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param enabled the enabled
+	* @param start the lower bound of the range of scheduled tasks
+	* @param end the upper bound of the range of scheduled tasks (not inclusive)
+	* @return the range of matching scheduled tasks
+	*/
+	public java.util.List<ScheduledTask> findByEnabled(boolean enabled,
+		int start, int end);
+
+	/**
+	* Returns an ordered range of all the scheduled tasks where enabled = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param enabled the enabled
+	* @param start the lower bound of the range of scheduled tasks
+	* @param end the upper bound of the range of scheduled tasks (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching scheduled tasks
+	*/
+	public java.util.List<ScheduledTask> findByEnabled(boolean enabled,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the scheduled tasks where enabled = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param enabled the enabled
+	* @param start the lower bound of the range of scheduled tasks
+	* @param end the upper bound of the range of scheduled tasks (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching scheduled tasks
+	*/
+	public java.util.List<ScheduledTask> findByEnabled(boolean enabled,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first scheduled task in the ordered set where enabled = &#63;.
+	*
+	* @param enabled the enabled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching scheduled task
+	* @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
+	*/
+	public ScheduledTask findByEnabled_First(boolean enabled,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException;
+
+	/**
+	* Returns the first scheduled task in the ordered set where enabled = &#63;.
+	*
+	* @param enabled the enabled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
+	*/
+	public ScheduledTask fetchByEnabled_First(boolean enabled,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
+
+	/**
+	* Returns the last scheduled task in the ordered set where enabled = &#63;.
+	*
+	* @param enabled the enabled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching scheduled task
+	* @throws NoSuchScheduledTaskException if a matching scheduled task could not be found
+	*/
+	public ScheduledTask findByEnabled_Last(boolean enabled,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException;
+
+	/**
+	* Returns the last scheduled task in the ordered set where enabled = &#63;.
+	*
+	* @param enabled the enabled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
+	*/
+	public ScheduledTask fetchByEnabled_Last(boolean enabled,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator);
+
+	/**
+	* Returns the scheduled tasks before and after the current scheduled task in the ordered set where enabled = &#63;.
+	*
+	* @param scheduledTaskId the primary key of the current scheduled task
+	* @param enabled the enabled
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next scheduled task
+	* @throws NoSuchScheduledTaskException if a scheduled task with the primary key could not be found
+	*/
+	public ScheduledTask[] findByEnabled_PrevAndNext(long scheduledTaskId,
+		boolean enabled,
+		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator)
+		throws NoSuchScheduledTaskException;
+
+	/**
+	* Removes all the scheduled tasks where enabled = &#63; from the database.
+	*
+	* @param enabled the enabled
+	*/
+	public void removeByEnabled(boolean enabled);
+
+	/**
+	* Returns the number of scheduled tasks where enabled = &#63;.
+	*
+	* @param enabled the enabled
+	* @return the number of matching scheduled tasks
+	*/
+	public int countByEnabled(boolean enabled);
 
 	/**
 	* Returns all the scheduled tasks where groupId = &#63; and active = &#63;.
