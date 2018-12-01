@@ -91,11 +91,12 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "CPDefinitionId", Types.BIGINT },
+			{ "CPInstanceUuid", Types.VARCHAR },
 			{ "sku", Types.VARCHAR },
 			{ "gtin", Types.VARCHAR },
 			{ "manufacturerPartNumber", Types.VARCHAR },
 			{ "purchasable", Types.BOOLEAN },
-			{ "json", Types.VARCHAR },
+			{ "json", Types.CLOB },
 			{ "width", Types.DOUBLE },
 			{ "height", Types.DOUBLE },
 			{ "depth", Types.DOUBLE },
@@ -111,7 +112,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 			{ "subscriptionEnabled", Types.BOOLEAN },
 			{ "subscriptionLength", Types.INTEGER },
 			{ "subscriptionType", Types.VARCHAR },
-			{ "subscriptionTypeSettings", Types.VARCHAR },
+			{ "subscriptionTypeSettings", Types.CLOB },
 			{ "maxSubscriptionCycles", Types.BIGINT },
 			{ "status", Types.INTEGER },
 			{ "statusByUserId", Types.BIGINT },
@@ -131,11 +132,12 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("CPDefinitionId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("CPInstanceUuid", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("sku", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("gtin", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("manufacturerPartNumber", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("purchasable", Types.BOOLEAN);
-		TABLE_COLUMNS_MAP.put("json", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("json", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("width", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("height", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("depth", Types.DOUBLE);
@@ -151,7 +153,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		TABLE_COLUMNS_MAP.put("subscriptionEnabled", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("subscriptionLength", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("subscriptionType", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("subscriptionTypeSettings", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("subscriptionTypeSettings", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("maxSubscriptionCycles", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
@@ -159,7 +161,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPInstance (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPInstanceId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,sku VARCHAR(75) null,gtin VARCHAR(75) null,manufacturerPartNumber VARCHAR(75) null,purchasable BOOLEAN,json VARCHAR(75) null,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,cost DECIMAL(30, 16) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,overrideSubscriptionInfo BOOLEAN,subscriptionEnabled BOOLEAN,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings VARCHAR(75) null,maxSubscriptionCycles LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPInstance (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPInstanceId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,CPInstanceUuid VARCHAR(75) null,sku VARCHAR(75) null,gtin VARCHAR(75) null,manufacturerPartNumber VARCHAR(75) null,purchasable BOOLEAN,json TEXT null,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,cost DECIMAL(30, 16) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,overrideSubscriptionInfo BOOLEAN,subscriptionEnabled BOOLEAN,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPInstance";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpInstance.displayDate DESC, cpInstance.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPInstance.displayDate DESC, CPInstance.createDate DESC";
@@ -176,14 +178,15 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CPInstance"),
 			true);
 	public static final long CPDEFINITIONID_COLUMN_BITMASK = 1L;
-	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long DISPLAYDATE_COLUMN_BITMASK = 4L;
-	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 8L;
-	public static final long GROUPID_COLUMN_BITMASK = 16L;
-	public static final long SKU_COLUMN_BITMASK = 32L;
-	public static final long STATUS_COLUMN_BITMASK = 64L;
-	public static final long UUID_COLUMN_BITMASK = 128L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 256L;
+	public static final long CPINSTANCEUUID_COLUMN_BITMASK = 2L;
+	public static final long COMPANYID_COLUMN_BITMASK = 4L;
+	public static final long DISPLAYDATE_COLUMN_BITMASK = 8L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 16L;
+	public static final long GROUPID_COLUMN_BITMASK = 32L;
+	public static final long SKU_COLUMN_BITMASK = 64L;
+	public static final long STATUS_COLUMN_BITMASK = 128L;
+	public static final long UUID_COLUMN_BITMASK = 256L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 512L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -208,6 +211,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setCPDefinitionId(soapModel.getCPDefinitionId());
+		model.setCPInstanceUuid(soapModel.getCPInstanceUuid());
 		model.setSku(soapModel.getSku());
 		model.setGtin(soapModel.getGtin());
 		model.setManufacturerPartNumber(soapModel.getManufacturerPartNumber());
@@ -308,6 +312,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("CPDefinitionId", getCPDefinitionId());
+		attributes.put("CPInstanceUuid", getCPInstanceUuid());
 		attributes.put("sku", getSku());
 		attributes.put("gtin", getGtin());
 		attributes.put("manufacturerPartNumber", getManufacturerPartNumber());
@@ -402,6 +407,12 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 		if (CPDefinitionId != null) {
 			setCPDefinitionId(CPDefinitionId);
+		}
+
+		String CPInstanceUuid = (String)attributes.get("CPInstanceUuid");
+
+		if (CPInstanceUuid != null) {
+			setCPInstanceUuid(CPInstanceUuid);
 		}
 
 		String sku = (String)attributes.get("sku");
@@ -768,6 +779,32 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 	public long getOriginalCPDefinitionId() {
 		return _originalCPDefinitionId;
+	}
+
+	@JSON
+	@Override
+	public String getCPInstanceUuid() {
+		if (_CPInstanceUuid == null) {
+			return "";
+		}
+		else {
+			return _CPInstanceUuid;
+		}
+	}
+
+	@Override
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_columnBitmask |= CPINSTANCEUUID_COLUMN_BITMASK;
+
+		if (_originalCPInstanceUuid == null) {
+			_originalCPInstanceUuid = _CPInstanceUuid;
+		}
+
+		_CPInstanceUuid = CPInstanceUuid;
+	}
+
+	public String getOriginalCPInstanceUuid() {
+		return GetterUtil.getString(_originalCPInstanceUuid);
 	}
 
 	@JSON
@@ -1421,6 +1458,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		cpInstanceImpl.setCreateDate(getCreateDate());
 		cpInstanceImpl.setModifiedDate(getModifiedDate());
 		cpInstanceImpl.setCPDefinitionId(getCPDefinitionId());
+		cpInstanceImpl.setCPInstanceUuid(getCPInstanceUuid());
 		cpInstanceImpl.setSku(getSku());
 		cpInstanceImpl.setGtin(getGtin());
 		cpInstanceImpl.setManufacturerPartNumber(getManufacturerPartNumber());
@@ -1535,6 +1573,8 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 		cpInstanceModelImpl._setOriginalCPDefinitionId = false;
 
+		cpInstanceModelImpl._originalCPInstanceUuid = cpInstanceModelImpl._CPInstanceUuid;
+
 		cpInstanceModelImpl._originalSku = cpInstanceModelImpl._sku;
 
 		cpInstanceModelImpl._originalDisplayDate = cpInstanceModelImpl._displayDate;
@@ -1602,6 +1642,14 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		}
 
 		cpInstanceCacheModel.CPDefinitionId = getCPDefinitionId();
+
+		cpInstanceCacheModel.CPInstanceUuid = getCPInstanceUuid();
+
+		String CPInstanceUuid = cpInstanceCacheModel.CPInstanceUuid;
+
+		if ((CPInstanceUuid != null) && (CPInstanceUuid.length() == 0)) {
+			cpInstanceCacheModel.CPInstanceUuid = null;
+		}
 
 		cpInstanceCacheModel.sku = getSku();
 
@@ -1732,7 +1780,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(75);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1754,6 +1802,8 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		sb.append(getModifiedDate());
 		sb.append(", CPDefinitionId=");
 		sb.append(getCPDefinitionId());
+		sb.append(", CPInstanceUuid=");
+		sb.append(getCPInstanceUuid());
 		sb.append(", sku=");
 		sb.append(getSku());
 		sb.append(", gtin=");
@@ -1813,7 +1863,7 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(112);
+		StringBundler sb = new StringBundler(115);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPInstance");
@@ -1858,6 +1908,10 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 		sb.append(
 			"<column><column-name>CPDefinitionId</column-name><column-value><![CDATA[");
 		sb.append(getCPDefinitionId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>CPInstanceUuid</column-name><column-value><![CDATA[");
+		sb.append(getCPInstanceUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sku</column-name><column-value><![CDATA[");
@@ -1992,6 +2046,8 @@ public class CPInstanceModelImpl extends BaseModelImpl<CPInstance>
 	private long _CPDefinitionId;
 	private long _originalCPDefinitionId;
 	private boolean _setOriginalCPDefinitionId;
+	private String _CPInstanceUuid;
+	private String _originalCPInstanceUuid;
 	private String _sku;
 	private String _originalSku;
 	private String _gtin;

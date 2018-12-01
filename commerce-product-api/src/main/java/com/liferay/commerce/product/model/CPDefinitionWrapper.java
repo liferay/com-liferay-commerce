@@ -415,6 +415,12 @@ public class CPDefinitionWrapper implements CPDefinition,
 		return _cpDefinition.getCPInstances();
 	}
 
+	@Override
+	public CProduct getCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinition.getCProduct();
+	}
+
 	/**
 	* Returns the c product ID of this cp definition.
 	*

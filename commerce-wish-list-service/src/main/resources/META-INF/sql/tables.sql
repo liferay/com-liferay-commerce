@@ -20,7 +20,7 @@ create table CommerceWishListItem (
 	createDate DATE null,
 	modifiedDate DATE null,
 	commerceWishListId LONG,
-	CPDefinitionId LONG,
-	CPInstanceId LONG,
+	CPInstanceUuid VARCHAR(75) null,
+	CProductId LONG,
 	json TEXT null
 );

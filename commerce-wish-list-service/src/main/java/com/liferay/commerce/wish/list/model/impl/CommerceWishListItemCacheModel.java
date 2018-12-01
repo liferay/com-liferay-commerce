@@ -83,10 +83,10 @@ public class CommerceWishListItemCacheModel implements CacheModel<CommerceWishLi
 		sb.append(modifiedDate);
 		sb.append(", commerceWishListId=");
 		sb.append(commerceWishListId);
-		sb.append(", CPDefinitionId=");
-		sb.append(CPDefinitionId);
-		sb.append(", CPInstanceId=");
-		sb.append(CPInstanceId);
+		sb.append(", CPInstanceUuid=");
+		sb.append(CPInstanceUuid);
+		sb.append(", CProductId=");
+		sb.append(CProductId);
 		sb.append(", json=");
 		sb.append(json);
 		sb.append("}");
@@ -125,8 +125,15 @@ public class CommerceWishListItemCacheModel implements CacheModel<CommerceWishLi
 		}
 
 		commerceWishListItemImpl.setCommerceWishListId(commerceWishListId);
-		commerceWishListItemImpl.setCPDefinitionId(CPDefinitionId);
-		commerceWishListItemImpl.setCPInstanceId(CPInstanceId);
+
+		if (CPInstanceUuid == null) {
+			commerceWishListItemImpl.setCPInstanceUuid("");
+		}
+		else {
+			commerceWishListItemImpl.setCPInstanceUuid(CPInstanceUuid);
+		}
+
+		commerceWishListItemImpl.setCProductId(CProductId);
 
 		if (json == null) {
 			commerceWishListItemImpl.setJson("");
@@ -154,10 +161,9 @@ public class CommerceWishListItemCacheModel implements CacheModel<CommerceWishLi
 		modifiedDate = objectInput.readLong();
 
 		commerceWishListId = objectInput.readLong();
+		CPInstanceUuid = objectInput.readUTF();
 
-		CPDefinitionId = objectInput.readLong();
-
-		CPInstanceId = objectInput.readLong();
+		CProductId = objectInput.readLong();
 		json = objectInput.readUTF();
 	}
 
@@ -184,9 +190,14 @@ public class CommerceWishListItemCacheModel implements CacheModel<CommerceWishLi
 
 		objectOutput.writeLong(commerceWishListId);
 
-		objectOutput.writeLong(CPDefinitionId);
+		if (CPInstanceUuid == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(CPInstanceUuid);
+		}
 
-		objectOutput.writeLong(CPInstanceId);
+		objectOutput.writeLong(CProductId);
 
 		if (json == null) {
 			objectOutput.writeUTF("");
@@ -204,7 +215,7 @@ public class CommerceWishListItemCacheModel implements CacheModel<CommerceWishLi
 	public long createDate;
 	public long modifiedDate;
 	public long commerceWishListId;
-	public long CPDefinitionId;
-	public long CPInstanceId;
+	public String CPInstanceUuid;
+	public long CProductId;
 	public String json;
 }

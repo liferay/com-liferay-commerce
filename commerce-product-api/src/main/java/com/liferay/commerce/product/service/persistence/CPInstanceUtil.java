@@ -1322,6 +1322,70 @@ public class CPInstanceUtil {
 	}
 
 	/**
+	* Returns the cp instance where CPDefinitionId = &#63; and CPInstanceUuid = &#63; or throws a {@link NoSuchCPInstanceException} if it could not be found.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the matching cp instance
+	* @throws NoSuchCPInstanceException if a matching cp instance could not be found
+	*/
+	public static CPInstance findByC_C(long CPDefinitionId,
+		String CPInstanceUuid)
+		throws com.liferay.commerce.product.exception.NoSuchCPInstanceException {
+		return getPersistence().findByC_C(CPDefinitionId, CPInstanceUuid);
+	}
+
+	/**
+	* Returns the cp instance where CPDefinitionId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	*/
+	public static CPInstance fetchByC_C(long CPDefinitionId,
+		String CPInstanceUuid) {
+		return getPersistence().fetchByC_C(CPDefinitionId, CPInstanceUuid);
+	}
+
+	/**
+	* Returns the cp instance where CPDefinitionId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	*/
+	public static CPInstance fetchByC_C(long CPDefinitionId,
+		String CPInstanceUuid, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByC_C(CPDefinitionId, CPInstanceUuid, retrieveFromCache);
+	}
+
+	/**
+	* Removes the cp instance where CPDefinitionId = &#63; and CPInstanceUuid = &#63; from the database.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the cp instance that was removed
+	*/
+	public static CPInstance removeByC_C(long CPDefinitionId,
+		String CPInstanceUuid)
+		throws com.liferay.commerce.product.exception.NoSuchCPInstanceException {
+		return getPersistence().removeByC_C(CPDefinitionId, CPInstanceUuid);
+	}
+
+	/**
+	* Returns the number of cp instances where CPDefinitionId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the number of matching cp instances
+	*/
+	public static int countByC_C(long CPDefinitionId, String CPInstanceUuid) {
+		return getPersistence().countByC_C(CPDefinitionId, CPInstanceUuid);
+	}
+
+	/**
 	* Returns the cp instance where CPDefinitionId = &#63; and sku = &#63; or throws a {@link NoSuchCPInstanceException} if it could not be found.
 	*
 	* @param CPDefinitionId the cp definition ID

@@ -63,6 +63,9 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 
 	public java.util.List<CPInstance> getCPInstances();
 
+	public CProduct getCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 	public String getDefaultImageFileURL()
 		throws com.liferay.portal.kernel.exception.PortalException;
 

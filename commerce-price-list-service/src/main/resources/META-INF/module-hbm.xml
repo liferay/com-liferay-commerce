@@ -18,8 +18,9 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="CPInstanceId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commercePriceListId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="CPInstanceUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="CProductId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="price" type="org.hibernate.type.BigDecimalType" />
 		<property name="promoPrice" type="org.hibernate.type.BigDecimalType" />
 		<property name="hasTierPrice" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />

@@ -54,6 +54,10 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		return getService().addCommerceWarehouseItem(commerceWarehouseItem);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static com.liferay.commerce.model.CommerceWarehouseItem addCommerceWarehouseItem(
 		long commerceWarehouseId, long cpInstanceId, int quantity,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -61,6 +65,16 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		return getService()
 				   .addCommerceWarehouseItem(commerceWarehouseId, cpInstanceId,
 			quantity, serviceContext);
+	}
+
+	public static com.liferay.commerce.model.CommerceWarehouseItem addCommerceWarehouseItem(
+		long commerceWarehouseId, long cProductId, String cpInstanceUuid,
+		int quantity,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceWarehouseItem(commerceWarehouseId, cProductId,
+			cpInstanceUuid, quantity, serviceContext);
 	}
 
 	/**
@@ -102,9 +116,26 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		getService().deleteCommerceWarehouseItems(commerceWarehouseId);
 	}
 
+	public static void deleteCommerceWarehouseItemsByCPI_CPIU(long cProductId,
+		String cpInstanceUuid) {
+		getService()
+			.deleteCommerceWarehouseItemsByCPI_CPIU(cProductId, cpInstanceUuid);
+	}
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static void deleteCommerceWarehouseItemsByCPInstanceId(
 		long cpInstanceId) {
 		getService().deleteCommerceWarehouseItemsByCPInstanceId(cpInstanceId);
+	}
+
+	public static void deleteCommerceWarehouseItemsByCWI_CPIU(
+		long commerceWarehouseId, String cpInstanceUuid) {
+		getService()
+			.deleteCommerceWarehouseItemsByCWI_CPIU(commerceWarehouseId,
+			cpInstanceUuid);
 	}
 
 	/**
@@ -199,10 +230,21 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		return getService().fetchCommerceWarehouseItem(commerceWarehouseItemId);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static com.liferay.commerce.model.CommerceWarehouseItem fetchCommerceWarehouseItem(
 		long commerceWarehouseId, long cpInstanceId) {
 		return getService()
 				   .fetchCommerceWarehouseItem(commerceWarehouseId, cpInstanceId);
+	}
+
+	public static com.liferay.commerce.model.CommerceWarehouseItem fetchCommerceWarehouseItemByCWI_CPIU(
+		long commerceWarehouseId, String cpInstanceUuid) {
+		return getService()
+				   .fetchCommerceWarehouseItemByCWI_CPIU(commerceWarehouseId,
+			cpInstanceUuid);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
@@ -238,11 +280,19 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		return getService().getCommerceWarehouseItems(start, end);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
 		long cpInstanceId) {
 		return getService().getCommerceWarehouseItems(cpInstanceId);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
 		long cpInstanceId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouseItem> orderByComparator) {
@@ -257,6 +307,21 @@ public class CommerceWarehouseItemLocalServiceUtil {
 				   .getCommerceWarehouseItemsByCommerceWarehouseId(commerceWarehouseId);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItemsByCPI_CPIU(
+		long cProductId, String cpInstanceUuid) {
+		return getService()
+				   .getCommerceWarehouseItemsByCPI_CPIU(cProductId,
+			cpInstanceUuid);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItemsByCPI_CPIU(
+		long cProductId, String cpInstanceUuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouseItem> orderByComparator) {
+		return getService()
+				   .getCommerceWarehouseItemsByCPI_CPIU(cProductId,
+			cpInstanceUuid, start, end, orderByComparator);
+	}
+
 	/**
 	* Returns the number of commerce warehouse items.
 	*
@@ -266,8 +331,22 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		return getService().getCommerceWarehouseItemsCount();
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static int getCommerceWarehouseItemsCount(long cpInstanceId) {
 		return getService().getCommerceWarehouseItemsCount(cpInstanceId);
+	}
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
+	public static int getCommerceWarehouseItemsCount(long cProductId,
+		String cpInstanceUuid) {
+		return getService()
+				   .getCommerceWarehouseItemsCount(cProductId, cpInstanceUuid);
 	}
 
 	public static int getCPInstanceQuantity(long cpInstanceId) {

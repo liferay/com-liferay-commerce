@@ -83,10 +83,10 @@ public class CPDefinitionLinkCacheModel implements CacheModel<CPDefinitionLink>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", CPDefinitionId1=");
-		sb.append(CPDefinitionId1);
-		sb.append(", CPDefinitionId2=");
-		sb.append(CPDefinitionId2);
+		sb.append(", CPDefinitionId=");
+		sb.append(CPDefinitionId);
+		sb.append(", CProductId=");
+		sb.append(CProductId);
 		sb.append(", priority=");
 		sb.append(priority);
 		sb.append(", type=");
@@ -133,8 +133,8 @@ public class CPDefinitionLinkCacheModel implements CacheModel<CPDefinitionLink>,
 			cpDefinitionLinkImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		cpDefinitionLinkImpl.setCPDefinitionId1(CPDefinitionId1);
-		cpDefinitionLinkImpl.setCPDefinitionId2(CPDefinitionId2);
+		cpDefinitionLinkImpl.setCPDefinitionId(CPDefinitionId);
+		cpDefinitionLinkImpl.setCProductId(CProductId);
 		cpDefinitionLinkImpl.setPriority(priority);
 
 		if (type == null) {
@@ -164,9 +164,9 @@ public class CPDefinitionLinkCacheModel implements CacheModel<CPDefinitionLink>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		CPDefinitionId1 = objectInput.readLong();
+		CPDefinitionId = objectInput.readLong();
 
-		CPDefinitionId2 = objectInput.readLong();
+		CProductId = objectInput.readLong();
 
 		priority = objectInput.readDouble();
 		type = objectInput.readUTF();
@@ -200,9 +200,9 @@ public class CPDefinitionLinkCacheModel implements CacheModel<CPDefinitionLink>,
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(CPDefinitionId1);
+		objectOutput.writeLong(CPDefinitionId);
 
-		objectOutput.writeLong(CPDefinitionId2);
+		objectOutput.writeLong(CProductId);
 
 		objectOutput.writeDouble(priority);
 
@@ -222,8 +222,8 @@ public class CPDefinitionLinkCacheModel implements CacheModel<CPDefinitionLink>,
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long CPDefinitionId1;
-	public long CPDefinitionId2;
+	public long CPDefinitionId;
+	public long CProductId;
 	public double priority;
 	public String type;
 }

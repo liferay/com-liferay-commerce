@@ -273,6 +273,16 @@ public class CPAttachmentFileEntryPersistenceTest {
 	}
 
 	@Test
+	public void testCountByU_C_C() throws Exception {
+		_persistence.countByU_C_C("", RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
+
+		_persistence.countByU_C_C("null", 0L, 0L);
+
+		_persistence.countByU_C_C((String)null, 0L, 0L);
+	}
+
+	@Test
 	public void testCountByC_C_LtD_S() throws Exception {
 		_persistence.countByC_C_LtD_S(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong(), RandomTestUtil.nextDate(),
@@ -338,9 +348,9 @@ public class CPAttachmentFileEntryPersistenceTest {
 			true, "userId", true, "userName", true, "createDate", true,
 			"modifiedDate", true, "classNameId", true, "classPK", true,
 			"fileEntryId", true, "displayDate", true, "expirationDate", true,
-			"title", true, "json", true, "priority", true, "type", true,
-			"lastPublishDate", true, "status", true, "statusByUserId", true,
-			"statusByUserName", true, "statusDate", true);
+			"title", true, "priority", true, "type", true, "lastPublishDate",
+			true, "status", true, "statusByUserId", true, "statusByUserName",
+			true, "statusDate", true);
 	}
 
 	@Test
@@ -561,6 +571,19 @@ public class CPAttachmentFileEntryPersistenceTest {
 				existingCPAttachmentFileEntry.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
 				"getOriginalGroupId", new Class<?>[0]));
+
+		Assert.assertTrue(Objects.equals(
+				existingCPAttachmentFileEntry.getUuid(),
+				ReflectionTestUtil.invoke(existingCPAttachmentFileEntry,
+					"getOriginalUuid", new Class<?>[0])));
+		Assert.assertEquals(Long.valueOf(
+				existingCPAttachmentFileEntry.getClassNameId()),
+			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
+				"getOriginalClassNameId", new Class<?>[0]));
+		Assert.assertEquals(Long.valueOf(
+				existingCPAttachmentFileEntry.getClassPK()),
+			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
+				"getOriginalClassPK", new Class<?>[0]));
 
 		Assert.assertEquals(Long.valueOf(
 				existingCPAttachmentFileEntry.getCompanyId()),

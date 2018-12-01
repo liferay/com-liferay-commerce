@@ -277,6 +277,10 @@ public class CommerceWarehouseLocalServiceWrapper
 			active, commerceCountryId, start, end, orderByComparator);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
 		long cpInstanceId, int start, int end) {

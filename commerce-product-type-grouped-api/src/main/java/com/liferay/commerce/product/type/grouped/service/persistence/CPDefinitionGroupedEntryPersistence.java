@@ -509,57 +509,55 @@ public interface CPDefinitionGroupedEntryPersistence extends BasePersistence<CPD
 	public int countByCPDefinitionId(long CPDefinitionId);
 
 	/**
-	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; or throws a {@link NoSuchCPDefinitionGroupedEntryException} if it could not be found.
+	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; or throws a {@link NoSuchCPDefinitionGroupedEntryException} if it could not be found.
 	*
 	* @param CPDefinitionId the cp definition ID
-	* @param entryCPDefinitionId the entry cp definition ID
+	* @param entryCProductId the entry c product ID
 	* @return the matching cp definition grouped entry
 	* @throws NoSuchCPDefinitionGroupedEntryException if a matching cp definition grouped entry could not be found
 	*/
 	public CPDefinitionGroupedEntry findByC_E(long CPDefinitionId,
-		long entryCPDefinitionId)
-		throws NoSuchCPDefinitionGroupedEntryException;
+		long entryCProductId) throws NoSuchCPDefinitionGroupedEntryException;
 
 	/**
-	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param CPDefinitionId the cp definition ID
-	* @param entryCPDefinitionId the entry cp definition ID
+	* @param entryCProductId the entry c product ID
 	* @return the matching cp definition grouped entry, or <code>null</code> if a matching cp definition grouped entry could not be found
 	*/
 	public CPDefinitionGroupedEntry fetchByC_E(long CPDefinitionId,
-		long entryCPDefinitionId);
+		long entryCProductId);
 
 	/**
-	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param CPDefinitionId the cp definition ID
-	* @param entryCPDefinitionId the entry cp definition ID
+	* @param entryCProductId the entry c product ID
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching cp definition grouped entry, or <code>null</code> if a matching cp definition grouped entry could not be found
 	*/
 	public CPDefinitionGroupedEntry fetchByC_E(long CPDefinitionId,
-		long entryCPDefinitionId, boolean retrieveFromCache);
+		long entryCProductId, boolean retrieveFromCache);
 
 	/**
-	* Removes the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; from the database.
+	* Removes the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; from the database.
 	*
 	* @param CPDefinitionId the cp definition ID
-	* @param entryCPDefinitionId the entry cp definition ID
+	* @param entryCProductId the entry c product ID
 	* @return the cp definition grouped entry that was removed
 	*/
 	public CPDefinitionGroupedEntry removeByC_E(long CPDefinitionId,
-		long entryCPDefinitionId)
-		throws NoSuchCPDefinitionGroupedEntryException;
+		long entryCProductId) throws NoSuchCPDefinitionGroupedEntryException;
 
 	/**
-	* Returns the number of cp definition grouped entries where CPDefinitionId = &#63; and entryCPDefinitionId = &#63;.
+	* Returns the number of cp definition grouped entries where CPDefinitionId = &#63; and entryCProductId = &#63;.
 	*
 	* @param CPDefinitionId the cp definition ID
-	* @param entryCPDefinitionId the entry cp definition ID
+	* @param entryCProductId the entry c product ID
 	* @return the number of matching cp definition grouped entries
 	*/
-	public int countByC_E(long CPDefinitionId, long entryCPDefinitionId);
+	public int countByC_E(long CPDefinitionId, long entryCProductId);
 
 	/**
 	* Caches the cp definition grouped entry in the entity cache if it is enabled.

@@ -137,11 +137,12 @@ public class CPDefinitionOptionRelModelImpl extends BaseModelImpl<CPDefinitionOp
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CPDefinitionOptionRel"),
 			true);
 	public static final long CPDEFINITIONID_COLUMN_BITMASK = 1L;
-	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long GROUPID_COLUMN_BITMASK = 4L;
-	public static final long SKUCONTRIBUTOR_COLUMN_BITMASK = 8L;
-	public static final long UUID_COLUMN_BITMASK = 16L;
-	public static final long PRIORITY_COLUMN_BITMASK = 32L;
+	public static final long CPOPTIONID_COLUMN_BITMASK = 2L;
+	public static final long COMPANYID_COLUMN_BITMASK = 4L;
+	public static final long GROUPID_COLUMN_BITMASK = 8L;
+	public static final long SKUCONTRIBUTOR_COLUMN_BITMASK = 16L;
+	public static final long UUID_COLUMN_BITMASK = 32L;
+	public static final long PRIORITY_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -553,7 +554,19 @@ public class CPDefinitionOptionRelModelImpl extends BaseModelImpl<CPDefinitionOp
 
 	@Override
 	public void setCPOptionId(long CPOptionId) {
+		_columnBitmask |= CPOPTIONID_COLUMN_BITMASK;
+
+		if (!_setOriginalCPOptionId) {
+			_setOriginalCPOptionId = true;
+
+			_originalCPOptionId = _CPOptionId;
+		}
+
 		_CPOptionId = CPOptionId;
+	}
+
+	public long getOriginalCPOptionId() {
+		return _originalCPOptionId;
 	}
 
 	@JSON
@@ -1070,6 +1083,10 @@ public class CPDefinitionOptionRelModelImpl extends BaseModelImpl<CPDefinitionOp
 
 		cpDefinitionOptionRelModelImpl._setOriginalCPDefinitionId = false;
 
+		cpDefinitionOptionRelModelImpl._originalCPOptionId = cpDefinitionOptionRelModelImpl._CPOptionId;
+
+		cpDefinitionOptionRelModelImpl._setOriginalCPOptionId = false;
+
 		cpDefinitionOptionRelModelImpl._originalSkuContributor = cpDefinitionOptionRelModelImpl._skuContributor;
 
 		cpDefinitionOptionRelModelImpl._setOriginalSkuContributor = false;
@@ -1310,6 +1327,8 @@ public class CPDefinitionOptionRelModelImpl extends BaseModelImpl<CPDefinitionOp
 	private long _originalCPDefinitionId;
 	private boolean _setOriginalCPDefinitionId;
 	private long _CPOptionId;
+	private long _originalCPOptionId;
+	private boolean _setOriginalCPOptionId;
 	private String _name;
 	private String _nameCurrentLanguageId;
 	private String _description;

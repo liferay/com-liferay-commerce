@@ -136,9 +136,9 @@ public class CommerceWishListItemPersistenceTest {
 
 		newCommerceWishListItem.setCommerceWishListId(RandomTestUtil.nextLong());
 
-		newCommerceWishListItem.setCPDefinitionId(RandomTestUtil.nextLong());
+		newCommerceWishListItem.setCPInstanceUuid(RandomTestUtil.randomString());
 
-		newCommerceWishListItem.setCPInstanceId(RandomTestUtil.nextLong());
+		newCommerceWishListItem.setCProductId(RandomTestUtil.nextLong());
 
 		newCommerceWishListItem.setJson(RandomTestUtil.randomString());
 
@@ -164,10 +164,10 @@ public class CommerceWishListItemPersistenceTest {
 			Time.getShortTimestamp(newCommerceWishListItem.getModifiedDate()));
 		Assert.assertEquals(existingCommerceWishListItem.getCommerceWishListId(),
 			newCommerceWishListItem.getCommerceWishListId());
-		Assert.assertEquals(existingCommerceWishListItem.getCPDefinitionId(),
-			newCommerceWishListItem.getCPDefinitionId());
-		Assert.assertEquals(existingCommerceWishListItem.getCPInstanceId(),
-			newCommerceWishListItem.getCPInstanceId());
+		Assert.assertEquals(existingCommerceWishListItem.getCPInstanceUuid(),
+			newCommerceWishListItem.getCPInstanceUuid());
+		Assert.assertEquals(existingCommerceWishListItem.getCProductId(),
+			newCommerceWishListItem.getCProductId());
 		Assert.assertEquals(existingCommerceWishListItem.getJson(),
 			newCommerceWishListItem.getJson());
 	}
@@ -180,17 +180,19 @@ public class CommerceWishListItemPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCPDefinitionId() throws Exception {
-		_persistence.countByCPDefinitionId(RandomTestUtil.nextLong());
+	public void testCountByCPInstanceUuid() throws Exception {
+		_persistence.countByCPInstanceUuid("");
 
-		_persistence.countByCPDefinitionId(0L);
+		_persistence.countByCPInstanceUuid("null");
+
+		_persistence.countByCPInstanceUuid((String)null);
 	}
 
 	@Test
-	public void testCountByCPInstanceId() throws Exception {
-		_persistence.countByCPInstanceId(RandomTestUtil.nextLong());
+	public void testCountByCProductId() throws Exception {
+		_persistence.countByCProductId(RandomTestUtil.nextLong());
 
-		_persistence.countByCPInstanceId(0L);
+		_persistence.countByCProductId(0L);
 	}
 
 	@Test
@@ -220,8 +222,8 @@ public class CommerceWishListItemPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CommerceWishListItem",
 			"commerceWishListItemId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceWishListId", true, "CPDefinitionId",
-			true, "CPInstanceId", true);
+			"modifiedDate", true, "commerceWishListId", true, "CPInstanceUuid",
+			true, "CProductId", true);
 	}
 
 	@Test
@@ -442,9 +444,9 @@ public class CommerceWishListItemPersistenceTest {
 
 		commerceWishListItem.setCommerceWishListId(RandomTestUtil.nextLong());
 
-		commerceWishListItem.setCPDefinitionId(RandomTestUtil.nextLong());
+		commerceWishListItem.setCPInstanceUuid(RandomTestUtil.randomString());
 
-		commerceWishListItem.setCPInstanceId(RandomTestUtil.nextLong());
+		commerceWishListItem.setCProductId(RandomTestUtil.nextLong());
 
 		commerceWishListItem.setJson(RandomTestUtil.randomString());
 

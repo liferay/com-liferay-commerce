@@ -116,7 +116,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			{ "subscriptionEnabled", Types.BOOLEAN },
 			{ "subscriptionLength", Types.INTEGER },
 			{ "subscriptionType", Types.VARCHAR },
-			{ "subscriptionTypeSettings", Types.VARCHAR },
+			{ "subscriptionTypeSettings", Types.CLOB },
 			{ "maxSubscriptionCycles", Types.BIGINT },
 			{ "version", Types.INTEGER },
 			{ "status", Types.INTEGER },
@@ -160,7 +160,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		TABLE_COLUMNS_MAP.put("subscriptionEnabled", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("subscriptionLength", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("subscriptionType", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("subscriptionTypeSettings", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("subscriptionTypeSettings", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("maxSubscriptionCycles", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("version", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
@@ -169,7 +169,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPDefinition (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,defaultLanguageId VARCHAR(75) null,CPDefinitionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CProductId LONG,CPTaxCategoryId LONG,productTypeName VARCHAR(75) null,availableIndividually BOOLEAN,ignoreSKUCombinations BOOLEAN,shippable BOOLEAN,freeShipping BOOLEAN,shipSeparately BOOLEAN,shippingExtraPrice DOUBLE,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,taxExempt BOOLEAN,telcoOrElectronics BOOLEAN,DDMStructureKey VARCHAR(75) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,subscriptionEnabled BOOLEAN,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings VARCHAR(75) null,maxSubscriptionCycles LONG,version INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPDefinition (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,defaultLanguageId VARCHAR(75) null,CPDefinitionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CProductId LONG,CPTaxCategoryId LONG,productTypeName VARCHAR(75) null,availableIndividually BOOLEAN,ignoreSKUCombinations BOOLEAN,shippable BOOLEAN,freeShipping BOOLEAN,shipSeparately BOOLEAN,shippingExtraPrice DOUBLE,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,taxExempt BOOLEAN,telcoOrElectronics BOOLEAN,DDMStructureKey VARCHAR(75) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,subscriptionEnabled BOOLEAN,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,version INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPDefinition";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpDefinition.displayDate DESC, cpDefinition.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPDefinition.displayDate DESC, CPDefinition.createDate DESC";
@@ -186,13 +186,14 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CPDefinition"),
 			true);
 	public static final long CPTAXCATEGORYID_COLUMN_BITMASK = 1L;
-	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long DISPLAYDATE_COLUMN_BITMASK = 4L;
-	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 8L;
-	public static final long GROUPID_COLUMN_BITMASK = 16L;
-	public static final long STATUS_COLUMN_BITMASK = 32L;
-	public static final long UUID_COLUMN_BITMASK = 64L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 128L;
+	public static final long CPRODUCTID_COLUMN_BITMASK = 2L;
+	public static final long COMPANYID_COLUMN_BITMASK = 4L;
+	public static final long DISPLAYDATE_COLUMN_BITMASK = 8L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 16L;
+	public static final long GROUPID_COLUMN_BITMASK = 32L;
+	public static final long STATUS_COLUMN_BITMASK = 64L;
+	public static final long UUID_COLUMN_BITMASK = 128L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 256L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -1158,7 +1159,19 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@Override
 	public void setCProductId(long CProductId) {
+		_columnBitmask |= CPRODUCTID_COLUMN_BITMASK;
+
+		if (!_setOriginalCProductId) {
+			_setOriginalCProductId = true;
+
+			_originalCProductId = _CProductId;
+		}
+
 		_CProductId = CProductId;
+	}
+
+	public long getOriginalCProductId() {
+		return _originalCProductId;
 	}
 
 	@JSON
@@ -1982,6 +1995,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 		cpDefinitionModelImpl._setModifiedDate = false;
 
+		cpDefinitionModelImpl._originalCProductId = cpDefinitionModelImpl._CProductId;
+
+		cpDefinitionModelImpl._setOriginalCProductId = false;
+
 		cpDefinitionModelImpl._originalCPTaxCategoryId = cpDefinitionModelImpl._CPTaxCategoryId;
 
 		cpDefinitionModelImpl._setOriginalCPTaxCategoryId = false;
@@ -2465,6 +2482,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
 	private long _CProductId;
+	private long _originalCProductId;
+	private boolean _setOriginalCProductId;
 	private long _CPTaxCategoryId;
 	private long _originalCPTaxCategoryId;
 	private boolean _setOriginalCPTaxCategoryId;

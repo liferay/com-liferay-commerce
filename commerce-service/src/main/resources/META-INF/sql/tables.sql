@@ -7,8 +7,8 @@ create table CPDAvailabilityEstimate (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	CPDefinitionId LONG,
 	commerceAvailabilityEstimateId LONG,
+	CProductId LONG,
 	lastPublishDate DATE null
 );
 
@@ -181,6 +181,7 @@ create table CommerceOrderItem (
 	createDate DATE null,
 	modifiedDate DATE null,
 	commerceOrderId LONG,
+	CProductId LONG,
 	CPInstanceId LONG,
 	quantity INTEGER,
 	shippedQuantity INTEGER,
@@ -318,7 +319,8 @@ create table CommerceSubscriptionEntry (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	CPInstanceId LONG,
+	CPInstanceUuid VARCHAR(75) null,
+	CProductId LONG,
 	commerceOrderItemId LONG,
 	subscriptionLength INTEGER,
 	subscriptionType VARCHAR(75) null,
@@ -362,6 +364,7 @@ create table CommerceWarehouseItem (
 	createDate DATE null,
 	modifiedDate DATE null,
 	commerceWarehouseId LONG,
-	CPInstanceId LONG,
+	CProductId LONG,
+	CPInstanceUuid VARCHAR(75) null,
 	quantity INTEGER
 );

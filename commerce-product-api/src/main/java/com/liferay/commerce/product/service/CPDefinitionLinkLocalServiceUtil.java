@@ -54,6 +54,10 @@ public class CPDefinitionLinkLocalServiceUtil {
 		return getService().addCPDefinitionLink(cpDefinitionLink);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static com.liferay.commerce.product.model.CPDefinitionLink addCPDefinitionLink(
 		long cpDefinitionId1, long cpDefinitionId2, double priority,
 		String type,
@@ -61,6 +65,15 @@ public class CPDefinitionLinkLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .addCPDefinitionLink(cpDefinitionId1, cpDefinitionId2,
+			priority, type, serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CPDefinitionLink addCPDefinitionLinkByCProductId(
+		long cpDefinitionId, long cProductId, double priority, String type,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCPDefinitionLinkByCProductId(cpDefinitionId, cProductId,
 			priority, type, serviceContext);
 	}
 
@@ -99,8 +112,21 @@ public class CPDefinitionLinkLocalServiceUtil {
 		return getService().deleteCPDefinitionLink(CPDefinitionLinkId);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static void deleteCPDefinitionLinks(long cpDefinitionId) {
 		getService().deleteCPDefinitionLinks(cpDefinitionId);
+	}
+
+	public static void deleteCPDefinitionLinksByCPDefinitionId(
+		long cpDefinitionId) {
+		getService().deleteCPDefinitionLinksByCPDefinitionId(cpDefinitionId);
+	}
+
+	public static void deleteCPDefinitionLinksByCProductId(long cProductId) {
+		getService().deleteCPDefinitionLinksByCProductId(cProductId);
 	}
 
 	/**
@@ -255,17 +281,17 @@ public class CPDefinitionLinkLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
-		long cpDefinitionId1, String type)
+		long cpDefinitionId, String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPDefinitionLinks(cpDefinitionId1, type);
+		return getService().getCPDefinitionLinks(cpDefinitionId, type);
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
-		long cpDefinitionId1, String type, int start, int end,
+		long cpDefinitionId, String type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionLink> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCPDefinitionLinks(cpDefinitionId1, type, start, end,
+				   .getCPDefinitionLinks(cpDefinitionId, type, start, end,
 			orderByComparator);
 	}
 
@@ -309,9 +335,9 @@ public class CPDefinitionLinkLocalServiceUtil {
 		return getService().getCPDefinitionLinksCount();
 	}
 
-	public static int getCPDefinitionLinksCount(long cpDefinitionId1,
-		String type) throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPDefinitionLinksCount(cpDefinitionId1, type);
+	public static int getCPDefinitionLinksCount(long cpDefinitionId, String type)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPDefinitionLinksCount(cpDefinitionId, type);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
@@ -363,6 +389,19 @@ public class CPDefinitionLinkLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static void updateCPDefinitionLinkCProductIds(long cpDefinitionId,
+		long[] cProductIds, String type,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.updateCPDefinitionLinkCProductIds(cpDefinitionId, cProductIds,
+			type, serviceContext);
+	}
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static void updateCPDefinitionLinks(long cpDefinitionId1,
 		long[] cpDefinitionIds2, String type,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)

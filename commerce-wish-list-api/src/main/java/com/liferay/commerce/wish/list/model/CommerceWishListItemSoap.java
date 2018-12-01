@@ -43,8 +43,8 @@ public class CommerceWishListItemSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCommerceWishListId(model.getCommerceWishListId());
-		soapModel.setCPDefinitionId(model.getCPDefinitionId());
-		soapModel.setCPInstanceId(model.getCPInstanceId());
+		soapModel.setCPInstanceUuid(model.getCPInstanceUuid());
+		soapModel.setCProductId(model.getCProductId());
 		soapModel.setJson(model.getJson());
 
 		return soapModel;
@@ -165,20 +165,20 @@ public class CommerceWishListItemSoap implements Serializable {
 		_commerceWishListId = commerceWishListId;
 	}
 
-	public long getCPDefinitionId() {
-		return _CPDefinitionId;
+	public String getCPInstanceUuid() {
+		return _CPInstanceUuid;
 	}
 
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_CPDefinitionId = CPDefinitionId;
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_CPInstanceUuid = CPInstanceUuid;
 	}
 
-	public long getCPInstanceId() {
-		return _CPInstanceId;
+	public long getCProductId() {
+		return _CProductId;
 	}
 
-	public void setCPInstanceId(long CPInstanceId) {
-		_CPInstanceId = CPInstanceId;
+	public void setCProductId(long CProductId) {
+		_CProductId = CProductId;
 	}
 
 	public String getJson() {
@@ -197,7 +197,7 @@ public class CommerceWishListItemSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _commerceWishListId;
-	private long _CPDefinitionId;
-	private long _CPInstanceId;
+	private String _CPInstanceUuid;
+	private long _CProductId;
 	private String _json;
 }

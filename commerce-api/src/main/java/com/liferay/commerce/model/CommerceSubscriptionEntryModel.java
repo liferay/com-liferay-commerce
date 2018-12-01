@@ -211,18 +211,33 @@ public interface CommerceSubscriptionEntryModel extends BaseModel<CommerceSubscr
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the cp instance ID of this commerce subscription entry.
+	 * Returns the cp instance uuid of this commerce subscription entry.
 	 *
-	 * @return the cp instance ID of this commerce subscription entry
+	 * @return the cp instance uuid of this commerce subscription entry
 	 */
-	public long getCPInstanceId();
+	@AutoEscape
+	public String getCPInstanceUuid();
 
 	/**
-	 * Sets the cp instance ID of this commerce subscription entry.
+	 * Sets the cp instance uuid of this commerce subscription entry.
 	 *
-	 * @param CPInstanceId the cp instance ID of this commerce subscription entry
+	 * @param CPInstanceUuid the cp instance uuid of this commerce subscription entry
 	 */
-	public void setCPInstanceId(long CPInstanceId);
+	public void setCPInstanceUuid(String CPInstanceUuid);
+
+	/**
+	 * Returns the c product ID of this commerce subscription entry.
+	 *
+	 * @return the c product ID of this commerce subscription entry
+	 */
+	public long getCProductId();
+
+	/**
+	 * Sets the c product ID of this commerce subscription entry.
+	 *
+	 * @param CProductId the c product ID of this commerce subscription entry
+	 */
+	public void setCProductId(long CProductId);
 
 	/**
 	 * Returns the commerce order item ID of this commerce subscription entry.

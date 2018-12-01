@@ -34,9 +34,6 @@ public interface CommerceWarehouseFinder {
 		String[] zips, Boolean active, long commerceCountryId,
 		boolean andOperator);
 
-	public java.util.List<com.liferay.commerce.model.CommerceWarehouse> findByCPInstanceId(
-		long cpInstanceId, int start, int end);
-
 	public java.util.List<com.liferay.commerce.model.CommerceWarehouse> findByKeywords(
 		long groupId, String keywords, Boolean active, long commerceCountryId,
 		int start, int end,

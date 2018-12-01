@@ -132,6 +132,21 @@ public class CPInstanceServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPInstanceSoap fetchCProductInstance(
+		long cProductId, String cpInstanceUuid) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CPInstance returnValue = CPInstanceServiceUtil.fetchCProductInstance(cProductId,
+					cpInstanceUuid);
+
+			return com.liferay.commerce.product.model.CPInstanceSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CPInstanceSoap[] getCPDefinitionInstances(
 		long cpDefinitionId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPInstance> orderByComparator)

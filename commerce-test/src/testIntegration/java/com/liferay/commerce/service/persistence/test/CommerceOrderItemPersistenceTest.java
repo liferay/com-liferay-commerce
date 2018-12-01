@@ -142,6 +142,8 @@ public class CommerceOrderItemPersistenceTest {
 
 		newCommerceOrderItem.setCommerceOrderId(RandomTestUtil.nextLong());
 
+		newCommerceOrderItem.setCProductId(RandomTestUtil.nextLong());
+
 		newCommerceOrderItem.setCPInstanceId(RandomTestUtil.nextLong());
 
 		newCommerceOrderItem.setQuantity(RandomTestUtil.nextInt());
@@ -201,6 +203,8 @@ public class CommerceOrderItemPersistenceTest {
 			Time.getShortTimestamp(newCommerceOrderItem.getModifiedDate()));
 		Assert.assertEquals(existingCommerceOrderItem.getCommerceOrderId(),
 			newCommerceOrderItem.getCommerceOrderId());
+		Assert.assertEquals(existingCommerceOrderItem.getCProductId(),
+			newCommerceOrderItem.getCProductId());
 		Assert.assertEquals(existingCommerceOrderItem.getCPInstanceId(),
 			newCommerceOrderItem.getCPInstanceId());
 		Assert.assertEquals(existingCommerceOrderItem.getQuantity(),
@@ -236,6 +240,13 @@ public class CommerceOrderItemPersistenceTest {
 		_persistence.countByCommerceOrderId(RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceOrderId(0L);
+	}
+
+	@Test
+	public void testCountByCProductId() throws Exception {
+		_persistence.countByCProductId(RandomTestUtil.nextLong());
+
+		_persistence.countByCProductId(0L);
 	}
 
 	@Test
@@ -297,9 +308,9 @@ public class CommerceOrderItemPersistenceTest {
 			"externalReferenceCode", true, "commerceOrderItemId", true,
 			"groupId", true, "companyId", true, "userId", true, "userName",
 			true, "createDate", true, "modifiedDate", true, "commerceOrderId",
-			true, "CPInstanceId", true, "quantity", true, "shippedQuantity",
-			true, "name", true, "sku", true, "unitPrice", true,
-			"discountAmount", true, "finalPrice", true,
+			true, "CProductId", true, "CPInstanceId", true, "quantity", true,
+			"shippedQuantity", true, "name", true, "sku", true, "unitPrice",
+			true, "discountAmount", true, "finalPrice", true,
 			"discountPercentageLevel1", true, "discountPercentageLevel2", true,
 			"discountPercentageLevel3", true, "discountPercentageLevel4", true,
 			"subscription", true);
@@ -538,6 +549,8 @@ public class CommerceOrderItemPersistenceTest {
 		commerceOrderItem.setModifiedDate(RandomTestUtil.nextDate());
 
 		commerceOrderItem.setCommerceOrderId(RandomTestUtil.nextLong());
+
+		commerceOrderItem.setCProductId(RandomTestUtil.nextLong());
 
 		commerceOrderItem.setCPInstanceId(RandomTestUtil.nextLong());
 

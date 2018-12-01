@@ -254,6 +254,12 @@ public class CPDefinitionLocalServiceUtil {
 		getService().checkCPDefinitions();
 	}
 
+	public static com.liferay.commerce.product.model.CPDefinition copyCPDefinition(
+		long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().copyCPDefinition(cpDefinitionId);
+	}
+
 	/**
 	* Creates a new cp definition with the primary key. Does not add the cp definition to the database.
 	*
@@ -662,6 +668,24 @@ public class CPDefinitionLocalServiceUtil {
 	public static String getUrlTitleMapAsXML(long cpDefinitionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getUrlTitleMapAsXML(cpDefinitionId);
+	}
+
+	public static boolean isPublishedCPDefinition(
+		com.liferay.commerce.product.model.CPDefinition cpDefinition) {
+		return getService().isPublishedCPDefinition(cpDefinition);
+	}
+
+	public static boolean isPublishedCPDefinition(long cpDefinitionId) {
+		return getService().isPublishedCPDefinition(cpDefinitionId);
+	}
+
+	public static boolean isVersionable(
+		com.liferay.commerce.product.model.CPDefinition cpDefinition) {
+		return getService().isVersionable(cpDefinition);
+	}
+
+	public static boolean isVersionable(long cpDefinitionId) {
+		return getService().isVersionable(cpDefinitionId);
 	}
 
 	public static void moveCPDefinitionsToTrash(long groupId, long userId)

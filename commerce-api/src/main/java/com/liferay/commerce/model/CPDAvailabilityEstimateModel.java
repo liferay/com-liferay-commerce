@@ -210,20 +210,6 @@ public interface CPDAvailabilityEstimateModel extends BaseModel<CPDAvailabilityE
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the cp definition ID of this cpd availability estimate.
-	 *
-	 * @return the cp definition ID of this cpd availability estimate
-	 */
-	public long getCPDefinitionId();
-
-	/**
-	 * Sets the cp definition ID of this cpd availability estimate.
-	 *
-	 * @param CPDefinitionId the cp definition ID of this cpd availability estimate
-	 */
-	public void setCPDefinitionId(long CPDefinitionId);
-
-	/**
 	 * Returns the commerce availability estimate ID of this cpd availability estimate.
 	 *
 	 * @return the commerce availability estimate ID of this cpd availability estimate
@@ -237,6 +223,20 @@ public interface CPDAvailabilityEstimateModel extends BaseModel<CPDAvailabilityE
 	 */
 	public void setCommerceAvailabilityEstimateId(
 		long commerceAvailabilityEstimateId);
+
+	/**
+	 * Returns the c product ID of this cpd availability estimate.
+	 *
+	 * @return the c product ID of this cpd availability estimate
+	 */
+	public long getCProductId();
+
+	/**
+	 * Sets the c product ID of this cpd availability estimate.
+	 *
+	 * @param CProductId the c product ID of this cpd availability estimate
+	 */
+	public void setCProductId(long CProductId);
 
 	/**
 	 * Returns the last publish date of this cpd availability estimate.

@@ -264,6 +264,10 @@ public interface CPInstanceLocalService extends BaseLocalService,
 	public CPInstance fetchCPInstanceByUuidAndGroupId(String uuid, long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPInstance fetchCProductInstance(long cProductId,
+		String cpInstanceUuid);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -367,6 +371,10 @@ public interface CPInstanceLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPInstancesCount(long groupId, int status)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPInstance getCProductInstance(long cProductId, String cpInstanceUuid)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

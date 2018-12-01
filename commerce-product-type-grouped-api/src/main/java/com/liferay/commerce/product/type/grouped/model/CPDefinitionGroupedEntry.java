@@ -61,4 +61,10 @@ public interface CPDefinitionGroupedEntry extends CPDefinitionGroupedEntryModel,
 
 	public com.liferay.commerce.product.model.CPDefinition getEntryCPDefinition()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public long getEntryCPDefinitionId()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public com.liferay.commerce.product.model.CProduct getEntryCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException;
 }

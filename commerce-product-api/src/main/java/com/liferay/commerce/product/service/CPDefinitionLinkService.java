@@ -68,17 +68,17 @@ public interface CPDefinitionLinkService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId1,
+	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
 		String type) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId1,
+	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
 		String type, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPDefinitionLinksCount(long cpDefinitionId1, String type)
+	public int getCPDefinitionLinksCount(long cpDefinitionId, String type)
 		throws PortalException;
 
 	/**
@@ -92,7 +92,7 @@ public interface CPDefinitionLinkService extends BaseService {
 		double priority, ServiceContext serviceContext)
 		throws PortalException;
 
-	public void updateCPDefinitionLinks(long cpDefinitionId1,
+	public void updateCPDefinitionLinks(long cpDefinitionId,
 		long[] cpDefinitionIds2, String type, ServiceContext serviceContext)
 		throws PortalException;
 }

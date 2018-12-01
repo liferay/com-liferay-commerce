@@ -46,6 +46,7 @@ public class CPInstanceSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCPDefinitionId(model.getCPDefinitionId());
+		soapModel.setCPInstanceUuid(model.getCPInstanceUuid());
 		soapModel.setSku(model.getSku());
 		soapModel.setGtin(model.getGtin());
 		soapModel.setManufacturerPartNumber(model.getManufacturerPartNumber());
@@ -202,6 +203,14 @@ public class CPInstanceSoap implements Serializable {
 
 	public void setCPDefinitionId(long CPDefinitionId) {
 		_CPDefinitionId = CPDefinitionId;
+	}
+
+	public String getCPInstanceUuid() {
+		return _CPInstanceUuid;
+	}
+
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_CPInstanceUuid = CPInstanceUuid;
 	}
 
 	public String getSku() {
@@ -438,6 +447,7 @@ public class CPInstanceSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _CPDefinitionId;
+	private String _CPInstanceUuid;
 	private String _sku;
 	private String _gtin;
 	private String _manufacturerPartNumber;

@@ -43,8 +43,8 @@ public class CPDAvailabilityEstimateSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCPDefinitionId(model.getCPDefinitionId());
 		soapModel.setCommerceAvailabilityEstimateId(model.getCommerceAvailabilityEstimateId());
+		soapModel.setCProductId(model.getCProductId());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
 
 		return soapModel;
@@ -165,14 +165,6 @@ public class CPDAvailabilityEstimateSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCPDefinitionId() {
-		return _CPDefinitionId;
-	}
-
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_CPDefinitionId = CPDefinitionId;
-	}
-
 	public long getCommerceAvailabilityEstimateId() {
 		return _commerceAvailabilityEstimateId;
 	}
@@ -180,6 +172,14 @@ public class CPDAvailabilityEstimateSoap implements Serializable {
 	public void setCommerceAvailabilityEstimateId(
 		long commerceAvailabilityEstimateId) {
 		_commerceAvailabilityEstimateId = commerceAvailabilityEstimateId;
+	}
+
+	public long getCProductId() {
+		return _CProductId;
+	}
+
+	public void setCProductId(long CProductId) {
+		_CProductId = CProductId;
 	}
 
 	public Date getLastPublishDate() {
@@ -198,7 +198,7 @@ public class CPDAvailabilityEstimateSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _CPDefinitionId;
 	private long _commerceAvailabilityEstimateId;
+	private long _CProductId;
 	private Date _lastPublishDate;
 }

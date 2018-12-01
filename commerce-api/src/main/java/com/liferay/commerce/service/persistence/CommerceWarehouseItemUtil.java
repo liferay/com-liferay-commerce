@@ -289,237 +289,259 @@ public class CommerceWarehouseItemUtil {
 	}
 
 	/**
-	* Returns all the commerce warehouse items where CPInstanceId = &#63;.
-	*
-	* @param CPInstanceId the cp instance ID
-	* @return the matching commerce warehouse items
-	*/
-	public static List<CommerceWarehouseItem> findByCPInstanceId(
-		long CPInstanceId) {
-		return getPersistence().findByCPInstanceId(CPInstanceId);
-	}
-
-	/**
-	* Returns a range of all the commerce warehouse items where CPInstanceId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param CPInstanceId the cp instance ID
-	* @param start the lower bound of the range of commerce warehouse items
-	* @param end the upper bound of the range of commerce warehouse items (not inclusive)
-	* @return the range of matching commerce warehouse items
-	*/
-	public static List<CommerceWarehouseItem> findByCPInstanceId(
-		long CPInstanceId, int start, int end) {
-		return getPersistence().findByCPInstanceId(CPInstanceId, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce warehouse items where CPInstanceId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param CPInstanceId the cp instance ID
-	* @param start the lower bound of the range of commerce warehouse items
-	* @param end the upper bound of the range of commerce warehouse items (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce warehouse items
-	*/
-	public static List<CommerceWarehouseItem> findByCPInstanceId(
-		long CPInstanceId, int start, int end,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
-		return getPersistence()
-				   .findByCPInstanceId(CPInstanceId, start, end,
-			orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce warehouse items where CPInstanceId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param CPInstanceId the cp instance ID
-	* @param start the lower bound of the range of commerce warehouse items
-	* @param end the upper bound of the range of commerce warehouse items (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce warehouse items
-	*/
-	public static List<CommerceWarehouseItem> findByCPInstanceId(
-		long CPInstanceId, int start, int end,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByCPInstanceId(CPInstanceId, start, end,
-			orderByComparator, retrieveFromCache);
-	}
-
-	/**
-	* Returns the first commerce warehouse item in the ordered set where CPInstanceId = &#63;.
-	*
-	* @param CPInstanceId the cp instance ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse item
-	* @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
-	*/
-	public static CommerceWarehouseItem findByCPInstanceId_First(
-		long CPInstanceId,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator)
-		throws com.liferay.commerce.exception.NoSuchWarehouseItemException {
-		return getPersistence()
-				   .findByCPInstanceId_First(CPInstanceId, orderByComparator);
-	}
-
-	/**
-	* Returns the first commerce warehouse item in the ordered set where CPInstanceId = &#63;.
-	*
-	* @param CPInstanceId the cp instance ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
-	*/
-	public static CommerceWarehouseItem fetchByCPInstanceId_First(
-		long CPInstanceId,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
-		return getPersistence()
-				   .fetchByCPInstanceId_First(CPInstanceId, orderByComparator);
-	}
-
-	/**
-	* Returns the last commerce warehouse item in the ordered set where CPInstanceId = &#63;.
-	*
-	* @param CPInstanceId the cp instance ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse item
-	* @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
-	*/
-	public static CommerceWarehouseItem findByCPInstanceId_Last(
-		long CPInstanceId,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator)
-		throws com.liferay.commerce.exception.NoSuchWarehouseItemException {
-		return getPersistence()
-				   .findByCPInstanceId_Last(CPInstanceId, orderByComparator);
-	}
-
-	/**
-	* Returns the last commerce warehouse item in the ordered set where CPInstanceId = &#63;.
-	*
-	* @param CPInstanceId the cp instance ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
-	*/
-	public static CommerceWarehouseItem fetchByCPInstanceId_Last(
-		long CPInstanceId,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
-		return getPersistence()
-				   .fetchByCPInstanceId_Last(CPInstanceId, orderByComparator);
-	}
-
-	/**
-	* Returns the commerce warehouse items before and after the current commerce warehouse item in the ordered set where CPInstanceId = &#63;.
-	*
-	* @param commerceWarehouseItemId the primary key of the current commerce warehouse item
-	* @param CPInstanceId the cp instance ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce warehouse item
-	* @throws NoSuchWarehouseItemException if a commerce warehouse item with the primary key could not be found
-	*/
-	public static CommerceWarehouseItem[] findByCPInstanceId_PrevAndNext(
-		long commerceWarehouseItemId, long CPInstanceId,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator)
-		throws com.liferay.commerce.exception.NoSuchWarehouseItemException {
-		return getPersistence()
-				   .findByCPInstanceId_PrevAndNext(commerceWarehouseItemId,
-			CPInstanceId, orderByComparator);
-	}
-
-	/**
-	* Removes all the commerce warehouse items where CPInstanceId = &#63; from the database.
-	*
-	* @param CPInstanceId the cp instance ID
-	*/
-	public static void removeByCPInstanceId(long CPInstanceId) {
-		getPersistence().removeByCPInstanceId(CPInstanceId);
-	}
-
-	/**
-	* Returns the number of commerce warehouse items where CPInstanceId = &#63;.
-	*
-	* @param CPInstanceId the cp instance ID
-	* @return the number of matching commerce warehouse items
-	*/
-	public static int countByCPInstanceId(long CPInstanceId) {
-		return getPersistence().countByCPInstanceId(CPInstanceId);
-	}
-
-	/**
-	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceId = &#63; or throws a {@link NoSuchWarehouseItemException} if it could not be found.
+	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or throws a {@link NoSuchWarehouseItemException} if it could not be found.
 	*
 	* @param commerceWarehouseId the commerce warehouse ID
-	* @param CPInstanceId the cp instance ID
+	* @param CPInstanceUuid the cp instance uuid
 	* @return the matching commerce warehouse item
 	* @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
 	*/
-	public static CommerceWarehouseItem findByC_C(long commerceWarehouseId,
-		long CPInstanceId)
+	public static CommerceWarehouseItem findByCWI_CPIU(
+		long commerceWarehouseId, String CPInstanceUuid)
 		throws com.liferay.commerce.exception.NoSuchWarehouseItemException {
-		return getPersistence().findByC_C(commerceWarehouseId, CPInstanceId);
+		return getPersistence()
+				   .findByCWI_CPIU(commerceWarehouseId, CPInstanceUuid);
 	}
 
 	/**
-	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param commerceWarehouseId the commerce warehouse ID
-	* @param CPInstanceId the cp instance ID
+	* @param CPInstanceUuid the cp instance uuid
 	* @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
 	*/
-	public static CommerceWarehouseItem fetchByC_C(long commerceWarehouseId,
-		long CPInstanceId) {
-		return getPersistence().fetchByC_C(commerceWarehouseId, CPInstanceId);
+	public static CommerceWarehouseItem fetchByCWI_CPIU(
+		long commerceWarehouseId, String CPInstanceUuid) {
+		return getPersistence()
+				   .fetchByCWI_CPIU(commerceWarehouseId, CPInstanceUuid);
 	}
 
 	/**
-	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param commerceWarehouseId the commerce warehouse ID
-	* @param CPInstanceId the cp instance ID
+	* @param CPInstanceUuid the cp instance uuid
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
 	*/
-	public static CommerceWarehouseItem fetchByC_C(long commerceWarehouseId,
-		long CPInstanceId, boolean retrieveFromCache) {
+	public static CommerceWarehouseItem fetchByCWI_CPIU(
+		long commerceWarehouseId, String CPInstanceUuid,
+		boolean retrieveFromCache) {
 		return getPersistence()
-				   .fetchByC_C(commerceWarehouseId, CPInstanceId,
+				   .fetchByCWI_CPIU(commerceWarehouseId, CPInstanceUuid,
 			retrieveFromCache);
 	}
 
 	/**
-	* Removes the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceId = &#63; from the database.
+	* Removes the commerce warehouse item where commerceWarehouseId = &#63; and CPInstanceUuid = &#63; from the database.
 	*
 	* @param commerceWarehouseId the commerce warehouse ID
-	* @param CPInstanceId the cp instance ID
+	* @param CPInstanceUuid the cp instance uuid
 	* @return the commerce warehouse item that was removed
 	*/
-	public static CommerceWarehouseItem removeByC_C(long commerceWarehouseId,
-		long CPInstanceId)
+	public static CommerceWarehouseItem removeByCWI_CPIU(
+		long commerceWarehouseId, String CPInstanceUuid)
 		throws com.liferay.commerce.exception.NoSuchWarehouseItemException {
-		return getPersistence().removeByC_C(commerceWarehouseId, CPInstanceId);
+		return getPersistence()
+				   .removeByCWI_CPIU(commerceWarehouseId, CPInstanceUuid);
 	}
 
 	/**
-	* Returns the number of commerce warehouse items where commerceWarehouseId = &#63; and CPInstanceId = &#63;.
+	* Returns the number of commerce warehouse items where commerceWarehouseId = &#63; and CPInstanceUuid = &#63;.
 	*
 	* @param commerceWarehouseId the commerce warehouse ID
-	* @param CPInstanceId the cp instance ID
+	* @param CPInstanceUuid the cp instance uuid
 	* @return the number of matching commerce warehouse items
 	*/
-	public static int countByC_C(long commerceWarehouseId, long CPInstanceId) {
-		return getPersistence().countByC_C(commerceWarehouseId, CPInstanceId);
+	public static int countByCWI_CPIU(long commerceWarehouseId,
+		String CPInstanceUuid) {
+		return getPersistence()
+				   .countByCWI_CPIU(commerceWarehouseId, CPInstanceUuid);
+	}
+
+	/**
+	* Returns all the commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the matching commerce warehouse items
+	*/
+	public static List<CommerceWarehouseItem> findByCPI_CPIU(long CProductId,
+		String CPInstanceUuid) {
+		return getPersistence().findByCPI_CPIU(CProductId, CPInstanceUuid);
+	}
+
+	/**
+	* Returns a range of all the commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param start the lower bound of the range of commerce warehouse items
+	* @param end the upper bound of the range of commerce warehouse items (not inclusive)
+	* @return the range of matching commerce warehouse items
+	*/
+	public static List<CommerceWarehouseItem> findByCPI_CPIU(long CProductId,
+		String CPInstanceUuid, int start, int end) {
+		return getPersistence()
+				   .findByCPI_CPIU(CProductId, CPInstanceUuid, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param start the lower bound of the range of commerce warehouse items
+	* @param end the upper bound of the range of commerce warehouse items (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce warehouse items
+	*/
+	public static List<CommerceWarehouseItem> findByCPI_CPIU(long CProductId,
+		String CPInstanceUuid, int start, int end,
+		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
+		return getPersistence()
+				   .findByCPI_CPIU(CProductId, CPInstanceUuid, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param start the lower bound of the range of commerce warehouse items
+	* @param end the upper bound of the range of commerce warehouse items (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce warehouse items
+	*/
+	public static List<CommerceWarehouseItem> findByCPI_CPIU(long CProductId,
+		String CPInstanceUuid, int start, int end,
+		OrderByComparator<CommerceWarehouseItem> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByCPI_CPIU(CProductId, CPInstanceUuid, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce warehouse item in the ordered set where CProductId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce warehouse item
+	* @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
+	*/
+	public static CommerceWarehouseItem findByCPI_CPIU_First(long CProductId,
+		String CPInstanceUuid,
+		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+		throws com.liferay.commerce.exception.NoSuchWarehouseItemException {
+		return getPersistence()
+				   .findByCPI_CPIU_First(CProductId, CPInstanceUuid,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first commerce warehouse item in the ordered set where CProductId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
+	*/
+	public static CommerceWarehouseItem fetchByCPI_CPIU_First(long CProductId,
+		String CPInstanceUuid,
+		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
+		return getPersistence()
+				   .fetchByCPI_CPIU_First(CProductId, CPInstanceUuid,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce warehouse item in the ordered set where CProductId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce warehouse item
+	* @throws NoSuchWarehouseItemException if a matching commerce warehouse item could not be found
+	*/
+	public static CommerceWarehouseItem findByCPI_CPIU_Last(long CProductId,
+		String CPInstanceUuid,
+		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+		throws com.liferay.commerce.exception.NoSuchWarehouseItemException {
+		return getPersistence()
+				   .findByCPI_CPIU_Last(CProductId, CPInstanceUuid,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce warehouse item in the ordered set where CProductId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce warehouse item, or <code>null</code> if a matching commerce warehouse item could not be found
+	*/
+	public static CommerceWarehouseItem fetchByCPI_CPIU_Last(long CProductId,
+		String CPInstanceUuid,
+		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
+		return getPersistence()
+				   .fetchByCPI_CPIU_Last(CProductId, CPInstanceUuid,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the commerce warehouse items before and after the current commerce warehouse item in the ordered set where CProductId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* @param commerceWarehouseItemId the primary key of the current commerce warehouse item
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce warehouse item
+	* @throws NoSuchWarehouseItemException if a commerce warehouse item with the primary key could not be found
+	*/
+	public static CommerceWarehouseItem[] findByCPI_CPIU_PrevAndNext(
+		long commerceWarehouseItemId, long CProductId, String CPInstanceUuid,
+		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+		throws com.liferay.commerce.exception.NoSuchWarehouseItemException {
+		return getPersistence()
+				   .findByCPI_CPIU_PrevAndNext(commerceWarehouseItemId,
+			CProductId, CPInstanceUuid, orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63; from the database.
+	*
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	*/
+	public static void removeByCPI_CPIU(long CProductId, String CPInstanceUuid) {
+		getPersistence().removeByCPI_CPIU(CProductId, CPInstanceUuid);
+	}
+
+	/**
+	* Returns the number of commerce warehouse items where CProductId = &#63; and CPInstanceUuid = &#63;.
+	*
+	* @param CProductId the c product ID
+	* @param CPInstanceUuid the cp instance uuid
+	* @return the number of matching commerce warehouse items
+	*/
+	public static int countByCPI_CPIU(long CProductId, String CPInstanceUuid) {
+		return getPersistence().countByCPI_CPIU(CProductId, CPInstanceUuid);
 	}
 
 	/**

@@ -71,6 +71,7 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("CPDefinitionId", getCPDefinitionId());
+		attributes.put("CPInstanceUuid", getCPInstanceUuid());
 		attributes.put("sku", getSku());
 		attributes.put("gtin", getGtin());
 		attributes.put("manufacturerPartNumber", getManufacturerPartNumber());
@@ -162,6 +163,12 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 
 		if (CPDefinitionId != null) {
 			setCPDefinitionId(CPDefinitionId);
+		}
+
+		String CPInstanceUuid = (String)attributes.get("CPInstanceUuid");
+
+		if (CPInstanceUuid != null) {
+			setCPInstanceUuid(CPInstanceUuid);
 		}
 
 		String sku = (String)attributes.get("sku");
@@ -381,6 +388,16 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 	@Override
 	public long getCPInstanceId() {
 		return _cpInstance.getCPInstanceId();
+	}
+
+	/**
+	* Returns the cp instance uuid of this cp instance.
+	*
+	* @return the cp instance uuid of this cp instance
+	*/
+	@Override
+	public String getCPInstanceUuid() {
+		return _cpInstance.getCPInstanceUuid();
 	}
 
 	@Override
@@ -1005,6 +1022,16 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 	@Override
 	public void setCPInstanceId(long CPInstanceId) {
 		_cpInstance.setCPInstanceId(CPInstanceId);
+	}
+
+	/**
+	* Sets the cp instance uuid of this cp instance.
+	*
+	* @param CPInstanceUuid the cp instance uuid of this cp instance
+	*/
+	@Override
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_cpInstance.setCPInstanceUuid(CPInstanceUuid);
 	}
 
 	/**
