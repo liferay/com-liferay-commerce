@@ -1,5 +1,5 @@
-Bundle-Name: data-integration-service
-Bundle-SymbolicName: com.liferay.data.integration.service
+Bundle-Name: Liferay Commerce Data Integration Manager Service
+Bundle-SymbolicName: com.liferay.commerce.data.integration.manager.service
 Bundle-Version: 1.0.0
 Liferay-Require-SchemaVersion: 1.0.0
 Liferay-Service: true
