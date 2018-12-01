@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.data.integration.manager.talend.launcher;
+package com.liferay.commerce.data.integration.manager.talend.util.launcher;
 
 import com.liferay.commerce.data.integration.manager.model.Process;
 import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
@@ -21,6 +21,7 @@ import com.liferay.commerce.data.integration.manager.service.ProcessService;
 import com.liferay.commerce.data.integration.manager.service.ScheduledTaskExectutorService;
 import com.liferay.commerce.data.integration.manager.service.ScheduledTaskLocalService;
 import com.liferay.commerce.data.integration.manager.talend.util.DLManagementUtil;
+import com.liferay.commerce.data.integration.manager.talend.util.launcher.configuration.TalendJobExecutorConfiguration;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
@@ -32,7 +33,6 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.commerce.data.integration.manager.talend.launcher.configuration.TalendJobExecutorConfiguration;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -175,7 +175,7 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 			_buildCommand();
 		}
 		catch (Exception ex) {
-			_log.error(ex);
+			_log.error(ex, ex);
 
 			return false;
 		}
@@ -214,7 +214,7 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 
 			e.printStackTrace();
 		}
@@ -267,7 +267,7 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(e);
+				_log.debug(e, e);
 			}
 
 			Date endDate = new Date();
