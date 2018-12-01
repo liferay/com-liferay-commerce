@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.talend.job.util;
+package com.liferay.commerce.data.integration.manager.talend.util;
 
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLAppLocalService;

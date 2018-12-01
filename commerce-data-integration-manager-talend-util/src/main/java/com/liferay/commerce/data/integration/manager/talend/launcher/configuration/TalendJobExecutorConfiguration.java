@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.talend.job.launcher.configuration;
+package com.liferay.commerce.data.integration.manager.talend.launcher.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
