@@ -197,7 +197,7 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
-		long cpDefinitionId) throws PortalException;
+		long cpDefinitionId);
 
 	/**
 	* Returns the cp definition inventory matching the UUID and group.

@@ -8,7 +8,7 @@ create table CPDefinitionGroupedEntry (
 	createDate DATE null,
 	modifiedDate DATE null,
 	CPDefinitionId LONG,
-	entryCPDefinitionId LONG,
+	entryCProductId LONG,
 	priority DOUBLE,
 	quantity INTEGER
 );

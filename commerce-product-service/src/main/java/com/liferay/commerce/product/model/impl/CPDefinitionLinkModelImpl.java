@@ -81,8 +81,8 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "CPDefinitionId1", Types.BIGINT },
-			{ "CPDefinitionId2", Types.BIGINT },
+			{ "CPDefinitionId", Types.BIGINT },
+			{ "CProductId", Types.BIGINT },
 			{ "priority", Types.DOUBLE },
 			{ "type_", Types.VARCHAR }
 		};
@@ -97,13 +97,13 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("CPDefinitionId1", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("CPDefinitionId2", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("CPDefinitionId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("CProductId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("priority", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("type_", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPDefinitionLink (uuid_ VARCHAR(75) null,CPDefinitionLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId1 LONG,CPDefinitionId2 LONG,priority DOUBLE,type_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CPDefinitionLink (uuid_ VARCHAR(75) null,CPDefinitionLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,CProductId LONG,priority DOUBLE,type_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table CPDefinitionLink";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpDefinitionLink.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPDefinitionLink.priority ASC";
@@ -119,8 +119,8 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.product.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CPDefinitionLink"),
 			true);
-	public static final long CPDEFINITIONID1_COLUMN_BITMASK = 1L;
-	public static final long CPDEFINITIONID2_COLUMN_BITMASK = 2L;
+	public static final long CPDEFINITIONID_COLUMN_BITMASK = 1L;
+	public static final long CPRODUCTID_COLUMN_BITMASK = 2L;
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
 	public static final long GROUPID_COLUMN_BITMASK = 8L;
 	public static final long TYPE_COLUMN_BITMASK = 16L;
@@ -148,8 +148,8 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setCPDefinitionId1(soapModel.getCPDefinitionId1());
-		model.setCPDefinitionId2(soapModel.getCPDefinitionId2());
+		model.setCPDefinitionId(soapModel.getCPDefinitionId());
+		model.setCProductId(soapModel.getCProductId());
 		model.setPriority(soapModel.getPriority());
 		model.setType(soapModel.getType());
 
@@ -225,8 +225,8 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CPDefinitionId1", getCPDefinitionId1());
-		attributes.put("CPDefinitionId2", getCPDefinitionId2());
+		attributes.put("CPDefinitionId", getCPDefinitionId());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("priority", getPriority());
 		attributes.put("type", getType());
 
@@ -286,16 +286,16 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CPDefinitionId1 = (Long)attributes.get("CPDefinitionId1");
+		Long CPDefinitionId = (Long)attributes.get("CPDefinitionId");
 
-		if (CPDefinitionId1 != null) {
-			setCPDefinitionId1(CPDefinitionId1);
+		if (CPDefinitionId != null) {
+			setCPDefinitionId(CPDefinitionId);
 		}
 
-		Long CPDefinitionId2 = (Long)attributes.get("CPDefinitionId2");
+		Long CProductId = (Long)attributes.get("CProductId");
 
-		if (CPDefinitionId2 != null) {
-			setCPDefinitionId2(CPDefinitionId2);
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		Double priority = (Double)attributes.get("priority");
@@ -465,48 +465,48 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 
 	@JSON
 	@Override
-	public long getCPDefinitionId1() {
-		return _CPDefinitionId1;
+	public long getCPDefinitionId() {
+		return _CPDefinitionId;
 	}
 
 	@Override
-	public void setCPDefinitionId1(long CPDefinitionId1) {
-		_columnBitmask |= CPDEFINITIONID1_COLUMN_BITMASK;
+	public void setCPDefinitionId(long CPDefinitionId) {
+		_columnBitmask |= CPDEFINITIONID_COLUMN_BITMASK;
 
-		if (!_setOriginalCPDefinitionId1) {
-			_setOriginalCPDefinitionId1 = true;
+		if (!_setOriginalCPDefinitionId) {
+			_setOriginalCPDefinitionId = true;
 
-			_originalCPDefinitionId1 = _CPDefinitionId1;
+			_originalCPDefinitionId = _CPDefinitionId;
 		}
 
-		_CPDefinitionId1 = CPDefinitionId1;
+		_CPDefinitionId = CPDefinitionId;
 	}
 
-	public long getOriginalCPDefinitionId1() {
-		return _originalCPDefinitionId1;
+	public long getOriginalCPDefinitionId() {
+		return _originalCPDefinitionId;
 	}
 
 	@JSON
 	@Override
-	public long getCPDefinitionId2() {
-		return _CPDefinitionId2;
+	public long getCProductId() {
+		return _CProductId;
 	}
 
 	@Override
-	public void setCPDefinitionId2(long CPDefinitionId2) {
-		_columnBitmask |= CPDEFINITIONID2_COLUMN_BITMASK;
+	public void setCProductId(long CProductId) {
+		_columnBitmask |= CPRODUCTID_COLUMN_BITMASK;
 
-		if (!_setOriginalCPDefinitionId2) {
-			_setOriginalCPDefinitionId2 = true;
+		if (!_setOriginalCProductId) {
+			_setOriginalCProductId = true;
 
-			_originalCPDefinitionId2 = _CPDefinitionId2;
+			_originalCProductId = _CProductId;
 		}
 
-		_CPDefinitionId2 = CPDefinitionId2;
+		_CProductId = CProductId;
 	}
 
-	public long getOriginalCPDefinitionId2() {
-		return _originalCPDefinitionId2;
+	public long getOriginalCProductId() {
+		return _originalCProductId;
 	}
 
 	@JSON
@@ -593,8 +593,8 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 		cpDefinitionLinkImpl.setUserName(getUserName());
 		cpDefinitionLinkImpl.setCreateDate(getCreateDate());
 		cpDefinitionLinkImpl.setModifiedDate(getModifiedDate());
-		cpDefinitionLinkImpl.setCPDefinitionId1(getCPDefinitionId1());
-		cpDefinitionLinkImpl.setCPDefinitionId2(getCPDefinitionId2());
+		cpDefinitionLinkImpl.setCPDefinitionId(getCPDefinitionId());
+		cpDefinitionLinkImpl.setCProductId(getCProductId());
 		cpDefinitionLinkImpl.setPriority(getPriority());
 		cpDefinitionLinkImpl.setType(getType());
 
@@ -677,13 +677,13 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 
 		cpDefinitionLinkModelImpl._setModifiedDate = false;
 
-		cpDefinitionLinkModelImpl._originalCPDefinitionId1 = cpDefinitionLinkModelImpl._CPDefinitionId1;
+		cpDefinitionLinkModelImpl._originalCPDefinitionId = cpDefinitionLinkModelImpl._CPDefinitionId;
 
-		cpDefinitionLinkModelImpl._setOriginalCPDefinitionId1 = false;
+		cpDefinitionLinkModelImpl._setOriginalCPDefinitionId = false;
 
-		cpDefinitionLinkModelImpl._originalCPDefinitionId2 = cpDefinitionLinkModelImpl._CPDefinitionId2;
+		cpDefinitionLinkModelImpl._originalCProductId = cpDefinitionLinkModelImpl._CProductId;
 
-		cpDefinitionLinkModelImpl._setOriginalCPDefinitionId2 = false;
+		cpDefinitionLinkModelImpl._setOriginalCProductId = false;
 
 		cpDefinitionLinkModelImpl._originalType = cpDefinitionLinkModelImpl._type;
 
@@ -736,9 +736,9 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 			cpDefinitionLinkCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		cpDefinitionLinkCacheModel.CPDefinitionId1 = getCPDefinitionId1();
+		cpDefinitionLinkCacheModel.CPDefinitionId = getCPDefinitionId();
 
-		cpDefinitionLinkCacheModel.CPDefinitionId2 = getCPDefinitionId2();
+		cpDefinitionLinkCacheModel.CProductId = getCProductId();
 
 		cpDefinitionLinkCacheModel.priority = getPriority();
 
@@ -773,10 +773,10 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", CPDefinitionId1=");
-		sb.append(getCPDefinitionId1());
-		sb.append(", CPDefinitionId2=");
-		sb.append(getCPDefinitionId2());
+		sb.append(", CPDefinitionId=");
+		sb.append(getCPDefinitionId());
+		sb.append(", CProductId=");
+		sb.append(getCProductId());
 		sb.append(", priority=");
 		sb.append(getPriority());
 		sb.append(", type=");
@@ -827,12 +827,12 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>CPDefinitionId1</column-name><column-value><![CDATA[");
-		sb.append(getCPDefinitionId1());
+			"<column><column-name>CPDefinitionId</column-name><column-value><![CDATA[");
+		sb.append(getCPDefinitionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>CPDefinitionId2</column-name><column-value><![CDATA[");
-		sb.append(getCPDefinitionId2());
+			"<column><column-name>CProductId</column-name><column-value><![CDATA[");
+		sb.append(getCProductId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>priority</column-name><column-value><![CDATA[");
@@ -866,12 +866,12 @@ public class CPDefinitionLinkModelImpl extends BaseModelImpl<CPDefinitionLink>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _CPDefinitionId1;
-	private long _originalCPDefinitionId1;
-	private boolean _setOriginalCPDefinitionId1;
-	private long _CPDefinitionId2;
-	private long _originalCPDefinitionId2;
-	private boolean _setOriginalCPDefinitionId2;
+	private long _CPDefinitionId;
+	private long _originalCPDefinitionId;
+	private boolean _setOriginalCPDefinitionId;
+	private long _CProductId;
+	private long _originalCProductId;
+	private boolean _setOriginalCProductId;
 	private double _priority;
 	private String _type;
 	private String _originalType;

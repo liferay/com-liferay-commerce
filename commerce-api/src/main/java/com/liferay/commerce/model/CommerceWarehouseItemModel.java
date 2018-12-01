@@ -207,18 +207,33 @@ public interface CommerceWarehouseItemModel extends BaseModel<CommerceWarehouseI
 	public void setCommerceWarehouseId(long commerceWarehouseId);
 
 	/**
-	 * Returns the cp instance ID of this commerce warehouse item.
+	 * Returns the c product ID of this commerce warehouse item.
 	 *
-	 * @return the cp instance ID of this commerce warehouse item
+	 * @return the c product ID of this commerce warehouse item
 	 */
-	public long getCPInstanceId();
+	public long getCProductId();
 
 	/**
-	 * Sets the cp instance ID of this commerce warehouse item.
+	 * Sets the c product ID of this commerce warehouse item.
 	 *
-	 * @param CPInstanceId the cp instance ID of this commerce warehouse item
+	 * @param CProductId the c product ID of this commerce warehouse item
 	 */
-	public void setCPInstanceId(long CPInstanceId);
+	public void setCProductId(long CProductId);
+
+	/**
+	 * Returns the cp instance uuid of this commerce warehouse item.
+	 *
+	 * @return the cp instance uuid of this commerce warehouse item
+	 */
+	@AutoEscape
+	public String getCPInstanceUuid();
+
+	/**
+	 * Sets the cp instance uuid of this commerce warehouse item.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid of this commerce warehouse item
+	 */
+	public void setCPInstanceUuid(String CPInstanceUuid);
 
 	/**
 	 * Returns the quantity of this commerce warehouse item.

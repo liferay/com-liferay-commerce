@@ -75,8 +75,16 @@ public interface CPDefinitionLinkLocalService extends BaseLocalService,
 	public CPDefinitionLink addCPDefinitionLink(
 		CPDefinitionLink cpDefinitionLink);
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public CPDefinitionLink addCPDefinitionLink(long cpDefinitionId1,
 		long cpDefinitionId2, double priority, String type,
+		ServiceContext serviceContext) throws PortalException;
+
+	public CPDefinitionLink addCPDefinitionLinkByCProductId(
+		long cpDefinitionId, long cProductId, double priority, String type,
 		ServiceContext serviceContext) throws PortalException;
 
 	/**
@@ -109,7 +117,15 @@ public interface CPDefinitionLinkLocalService extends BaseLocalService,
 	public CPDefinitionLink deleteCPDefinitionLink(long CPDefinitionLinkId)
 		throws PortalException;
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public void deleteCPDefinitionLinks(long cpDefinitionId);
+
+	public void deleteCPDefinitionLinksByCPDefinitionId(long cpDefinitionId);
+
+	public void deleteCPDefinitionLinksByCProductId(long cProductId);
 
 	/**
 	* @throws PortalException
@@ -238,11 +254,11 @@ public interface CPDefinitionLinkLocalService extends BaseLocalService,
 	public List<CPDefinitionLink> getCPDefinitionLinks(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId1,
+	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
 		String type) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId1,
+	public List<CPDefinitionLink> getCPDefinitionLinks(long cpDefinitionId,
 		String type, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws PortalException;
@@ -282,7 +298,7 @@ public interface CPDefinitionLinkLocalService extends BaseLocalService,
 	public int getCPDefinitionLinksCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPDefinitionLinksCount(long cpDefinitionId1, String type)
+	public int getCPDefinitionLinksCount(long cpDefinitionId, String type)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -322,6 +338,14 @@ public interface CPDefinitionLinkLocalService extends BaseLocalService,
 		double priority, ServiceContext serviceContext)
 		throws PortalException;
 
+	public void updateCPDefinitionLinkCProductIds(long cpDefinitionId,
+		long[] cProductIds, String type, ServiceContext serviceContext)
+		throws PortalException;
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public void updateCPDefinitionLinks(long cpDefinitionId1,
 		long[] cpDefinitionIds2, String type, ServiceContext serviceContext)
 		throws PortalException;

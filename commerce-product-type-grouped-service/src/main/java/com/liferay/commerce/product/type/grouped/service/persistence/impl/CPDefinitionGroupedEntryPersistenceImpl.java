@@ -2029,26 +2029,25 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 			"fetchByC_E",
 			new String[] { Long.class.getName(), Long.class.getName() },
 			CPDefinitionGroupedEntryModelImpl.CPDEFINITIONID_COLUMN_BITMASK |
-			CPDefinitionGroupedEntryModelImpl.ENTRYCPDEFINITIONID_COLUMN_BITMASK);
+			CPDefinitionGroupedEntryModelImpl.ENTRYCPRODUCTID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_C_E = new FinderPath(CPDefinitionGroupedEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionGroupedEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_E",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; or throws a {@link NoSuchCPDefinitionGroupedEntryException} if it could not be found.
+	 * Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; or throws a {@link NoSuchCPDefinitionGroupedEntryException} if it could not be found.
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param entryCPDefinitionId the entry cp definition ID
+	 * @param entryCProductId the entry c product ID
 	 * @return the matching cp definition grouped entry
 	 * @throws NoSuchCPDefinitionGroupedEntryException if a matching cp definition grouped entry could not be found
 	 */
 	@Override
 	public CPDefinitionGroupedEntry findByC_E(long CPDefinitionId,
-		long entryCPDefinitionId)
-		throws NoSuchCPDefinitionGroupedEntryException {
+		long entryCProductId) throws NoSuchCPDefinitionGroupedEntryException {
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry = fetchByC_E(CPDefinitionId,
-				entryCPDefinitionId);
+				entryCProductId);
 
 		if (cpDefinitionGroupedEntry == null) {
 			StringBundler msg = new StringBundler(6);
@@ -2058,8 +2057,8 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 			msg.append("CPDefinitionId=");
 			msg.append(CPDefinitionId);
 
-			msg.append(", entryCPDefinitionId=");
-			msg.append(entryCPDefinitionId);
+			msg.append(", entryCProductId=");
+			msg.append(entryCProductId);
 
 			msg.append("}");
 
@@ -2074,30 +2073,30 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	/**
-	 * Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param entryCPDefinitionId the entry cp definition ID
+	 * @param entryCProductId the entry c product ID
 	 * @return the matching cp definition grouped entry, or <code>null</code> if a matching cp definition grouped entry could not be found
 	 */
 	@Override
 	public CPDefinitionGroupedEntry fetchByC_E(long CPDefinitionId,
-		long entryCPDefinitionId) {
-		return fetchByC_E(CPDefinitionId, entryCPDefinitionId, true);
+		long entryCProductId) {
+		return fetchByC_E(CPDefinitionId, entryCProductId, true);
 	}
 
 	/**
-	 * Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param entryCPDefinitionId the entry cp definition ID
+	 * @param entryCProductId the entry c product ID
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching cp definition grouped entry, or <code>null</code> if a matching cp definition grouped entry could not be found
 	 */
 	@Override
 	public CPDefinitionGroupedEntry fetchByC_E(long CPDefinitionId,
-		long entryCPDefinitionId, boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { CPDefinitionId, entryCPDefinitionId };
+		long entryCProductId, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { CPDefinitionId, entryCProductId };
 
 		Object result = null;
 
@@ -2110,7 +2109,7 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 			CPDefinitionGroupedEntry cpDefinitionGroupedEntry = (CPDefinitionGroupedEntry)result;
 
 			if ((CPDefinitionId != cpDefinitionGroupedEntry.getCPDefinitionId()) ||
-					(entryCPDefinitionId != cpDefinitionGroupedEntry.getEntryCPDefinitionId())) {
+					(entryCProductId != cpDefinitionGroupedEntry.getEntryCProductId())) {
 				result = null;
 			}
 		}
@@ -2122,7 +2121,7 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 
 			query.append(_FINDER_COLUMN_C_E_CPDEFINITIONID_2);
 
-			query.append(_FINDER_COLUMN_C_E_ENTRYCPDEFINITIONID_2);
+			query.append(_FINDER_COLUMN_C_E_ENTRYCPRODUCTID_2);
 
 			String sql = query.toString();
 
@@ -2137,7 +2136,7 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(CPDefinitionId);
 
-				qPos.add(entryCPDefinitionId);
+				qPos.add(entryCProductId);
 
 				List<CPDefinitionGroupedEntry> list = q.list();
 
@@ -2172,34 +2171,33 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	/**
-	 * Removes the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; from the database.
+	 * Removes the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; from the database.
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param entryCPDefinitionId the entry cp definition ID
+	 * @param entryCProductId the entry c product ID
 	 * @return the cp definition grouped entry that was removed
 	 */
 	@Override
 	public CPDefinitionGroupedEntry removeByC_E(long CPDefinitionId,
-		long entryCPDefinitionId)
-		throws NoSuchCPDefinitionGroupedEntryException {
+		long entryCProductId) throws NoSuchCPDefinitionGroupedEntryException {
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry = findByC_E(CPDefinitionId,
-				entryCPDefinitionId);
+				entryCProductId);
 
 		return remove(cpDefinitionGroupedEntry);
 	}
 
 	/**
-	 * Returns the number of cp definition grouped entries where CPDefinitionId = &#63; and entryCPDefinitionId = &#63;.
+	 * Returns the number of cp definition grouped entries where CPDefinitionId = &#63; and entryCProductId = &#63;.
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param entryCPDefinitionId the entry cp definition ID
+	 * @param entryCProductId the entry c product ID
 	 * @return the number of matching cp definition grouped entries
 	 */
 	@Override
-	public int countByC_E(long CPDefinitionId, long entryCPDefinitionId) {
+	public int countByC_E(long CPDefinitionId, long entryCProductId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_E;
 
-		Object[] finderArgs = new Object[] { CPDefinitionId, entryCPDefinitionId };
+		Object[] finderArgs = new Object[] { CPDefinitionId, entryCProductId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2210,7 +2208,7 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 
 			query.append(_FINDER_COLUMN_C_E_CPDEFINITIONID_2);
 
-			query.append(_FINDER_COLUMN_C_E_ENTRYCPDEFINITIONID_2);
+			query.append(_FINDER_COLUMN_C_E_ENTRYCPRODUCTID_2);
 
 			String sql = query.toString();
 
@@ -2225,7 +2223,7 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(CPDefinitionId);
 
-				qPos.add(entryCPDefinitionId);
+				qPos.add(entryCProductId);
 
 				count = (Long)q.uniqueResult();
 
@@ -2245,7 +2243,7 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	private static final String _FINDER_COLUMN_C_E_CPDEFINITIONID_2 = "cpDefinitionGroupedEntry.CPDefinitionId = ? AND ";
-	private static final String _FINDER_COLUMN_C_E_ENTRYCPDEFINITIONID_2 = "cpDefinitionGroupedEntry.entryCPDefinitionId = ?";
+	private static final String _FINDER_COLUMN_C_E_ENTRYCPRODUCTID_2 = "cpDefinitionGroupedEntry.entryCProductId = ?";
 
 	public CPDefinitionGroupedEntryPersistenceImpl() {
 		setModelClass(CPDefinitionGroupedEntry.class);
@@ -2289,7 +2287,7 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 		finderCache.putResult(FINDER_PATH_FETCH_BY_C_E,
 			new Object[] {
 				cpDefinitionGroupedEntry.getCPDefinitionId(),
-				cpDefinitionGroupedEntry.getEntryCPDefinitionId()
+				cpDefinitionGroupedEntry.getEntryCProductId()
 			}, cpDefinitionGroupedEntry);
 
 		cpDefinitionGroupedEntry.resetOriginalValues();
@@ -2382,7 +2380,7 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 
 		args = new Object[] {
 				cpDefinitionGroupedEntryModelImpl.getCPDefinitionId(),
-				cpDefinitionGroupedEntryModelImpl.getEntryCPDefinitionId()
+				cpDefinitionGroupedEntryModelImpl.getEntryCProductId()
 			};
 
 		finderCache.putResult(FINDER_PATH_COUNT_BY_C_E, args, Long.valueOf(1),
@@ -2418,7 +2416,7 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 		if (clearCurrent) {
 			Object[] args = new Object[] {
 					cpDefinitionGroupedEntryModelImpl.getCPDefinitionId(),
-					cpDefinitionGroupedEntryModelImpl.getEntryCPDefinitionId()
+					cpDefinitionGroupedEntryModelImpl.getEntryCProductId()
 				};
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_E, args);
@@ -2429,7 +2427,7 @@ public class CPDefinitionGroupedEntryPersistenceImpl extends BasePersistenceImpl
 				FINDER_PATH_FETCH_BY_C_E.getColumnBitmask()) != 0) {
 			Object[] args = new Object[] {
 					cpDefinitionGroupedEntryModelImpl.getOriginalCPDefinitionId(),
-					cpDefinitionGroupedEntryModelImpl.getOriginalEntryCPDefinitionId()
+					cpDefinitionGroupedEntryModelImpl.getOriginalEntryCProductId()
 				};
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_E, args);

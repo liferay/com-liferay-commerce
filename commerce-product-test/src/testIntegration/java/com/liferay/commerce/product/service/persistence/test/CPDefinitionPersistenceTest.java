@@ -360,6 +360,14 @@ public class CPDefinitionPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_S() throws Exception {
+		_persistence.countByC_S(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextInt());
+
+		_persistence.countByC_S(0L, 0);
+	}
+
+	@Test
 	public void testCountByLtD_S() throws Exception {
 		_persistence.countByLtD_S(RandomTestUtil.nextDate(),
 			RandomTestUtil.nextInt());
@@ -412,9 +420,8 @@ public class CPDefinitionPersistenceTest {
 			"published", true, "displayDate", true, "expirationDate", true,
 			"lastPublishDate", true, "subscriptionEnabled", true,
 			"subscriptionLength", true, "subscriptionType", true,
-			"subscriptionTypeSettings", true, "maxSubscriptionCycles", true,
-			"version", true, "status", true, "statusByUserId", true,
-			"statusByUserName", true, "statusDate", true);
+			"maxSubscriptionCycles", true, "version", true, "status", true,
+			"statusByUserId", true, "statusByUserName", true, "statusDate", true);
 	}
 
 	@Test

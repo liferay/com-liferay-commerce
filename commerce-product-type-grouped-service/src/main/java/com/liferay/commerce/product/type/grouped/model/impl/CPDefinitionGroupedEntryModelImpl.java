@@ -82,7 +82,7 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "CPDefinitionId", Types.BIGINT },
-			{ "entryCPDefinitionId", Types.BIGINT },
+			{ "entryCProductId", Types.BIGINT },
 			{ "priority", Types.DOUBLE },
 			{ "quantity", Types.INTEGER }
 		};
@@ -98,12 +98,12 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("CPDefinitionId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("entryCPDefinitionId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("entryCProductId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("priority", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("quantity", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPDefinitionGroupedEntry (uuid_ VARCHAR(75) null,CPDefinitionGroupedEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,entryCPDefinitionId LONG,priority DOUBLE,quantity INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table CPDefinitionGroupedEntry (uuid_ VARCHAR(75) null,CPDefinitionGroupedEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,entryCProductId LONG,priority DOUBLE,quantity INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table CPDefinitionGroupedEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpDefinitionGroupedEntry.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPDefinitionGroupedEntry.priority ASC";
@@ -121,7 +121,7 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 			true);
 	public static final long CPDEFINITIONID_COLUMN_BITMASK = 1L;
 	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long ENTRYCPDEFINITIONID_COLUMN_BITMASK = 4L;
+	public static final long ENTRYCPRODUCTID_COLUMN_BITMASK = 4L;
 	public static final long GROUPID_COLUMN_BITMASK = 8L;
 	public static final long UUID_COLUMN_BITMASK = 16L;
 	public static final long PRIORITY_COLUMN_BITMASK = 32L;
@@ -149,7 +149,7 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setCPDefinitionId(soapModel.getCPDefinitionId());
-		model.setEntryCPDefinitionId(soapModel.getEntryCPDefinitionId());
+		model.setEntryCProductId(soapModel.getEntryCProductId());
 		model.setPriority(soapModel.getPriority());
 		model.setQuantity(soapModel.getQuantity());
 
@@ -227,7 +227,7 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("CPDefinitionId", getCPDefinitionId());
-		attributes.put("entryCPDefinitionId", getEntryCPDefinitionId());
+		attributes.put("entryCProductId", getEntryCProductId());
 		attributes.put("priority", getPriority());
 		attributes.put("quantity", getQuantity());
 
@@ -294,10 +294,10 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 			setCPDefinitionId(CPDefinitionId);
 		}
 
-		Long entryCPDefinitionId = (Long)attributes.get("entryCPDefinitionId");
+		Long entryCProductId = (Long)attributes.get("entryCProductId");
 
-		if (entryCPDefinitionId != null) {
-			setEntryCPDefinitionId(entryCPDefinitionId);
+		if (entryCProductId != null) {
+			setEntryCProductId(entryCProductId);
 		}
 
 		Double priority = (Double)attributes.get("priority");
@@ -490,25 +490,25 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 
 	@JSON
 	@Override
-	public long getEntryCPDefinitionId() {
-		return _entryCPDefinitionId;
+	public long getEntryCProductId() {
+		return _entryCProductId;
 	}
 
 	@Override
-	public void setEntryCPDefinitionId(long entryCPDefinitionId) {
-		_columnBitmask |= ENTRYCPDEFINITIONID_COLUMN_BITMASK;
+	public void setEntryCProductId(long entryCProductId) {
+		_columnBitmask |= ENTRYCPRODUCTID_COLUMN_BITMASK;
 
-		if (!_setOriginalEntryCPDefinitionId) {
-			_setOriginalEntryCPDefinitionId = true;
+		if (!_setOriginalEntryCProductId) {
+			_setOriginalEntryCProductId = true;
 
-			_originalEntryCPDefinitionId = _entryCPDefinitionId;
+			_originalEntryCProductId = _entryCProductId;
 		}
 
-		_entryCPDefinitionId = entryCPDefinitionId;
+		_entryCProductId = entryCProductId;
 	}
 
-	public long getOriginalEntryCPDefinitionId() {
-		return _originalEntryCPDefinitionId;
+	public long getOriginalEntryCProductId() {
+		return _originalEntryCProductId;
 	}
 
 	@JSON
@@ -581,7 +581,7 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 		cpDefinitionGroupedEntryImpl.setCreateDate(getCreateDate());
 		cpDefinitionGroupedEntryImpl.setModifiedDate(getModifiedDate());
 		cpDefinitionGroupedEntryImpl.setCPDefinitionId(getCPDefinitionId());
-		cpDefinitionGroupedEntryImpl.setEntryCPDefinitionId(getEntryCPDefinitionId());
+		cpDefinitionGroupedEntryImpl.setEntryCProductId(getEntryCProductId());
 		cpDefinitionGroupedEntryImpl.setPriority(getPriority());
 		cpDefinitionGroupedEntryImpl.setQuantity(getQuantity());
 
@@ -668,9 +668,9 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 
 		cpDefinitionGroupedEntryModelImpl._setOriginalCPDefinitionId = false;
 
-		cpDefinitionGroupedEntryModelImpl._originalEntryCPDefinitionId = cpDefinitionGroupedEntryModelImpl._entryCPDefinitionId;
+		cpDefinitionGroupedEntryModelImpl._originalEntryCProductId = cpDefinitionGroupedEntryModelImpl._entryCProductId;
 
-		cpDefinitionGroupedEntryModelImpl._setOriginalEntryCPDefinitionId = false;
+		cpDefinitionGroupedEntryModelImpl._setOriginalEntryCProductId = false;
 
 		cpDefinitionGroupedEntryModelImpl._columnBitmask = 0;
 	}
@@ -723,7 +723,7 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 
 		cpDefinitionGroupedEntryCacheModel.CPDefinitionId = getCPDefinitionId();
 
-		cpDefinitionGroupedEntryCacheModel.entryCPDefinitionId = getEntryCPDefinitionId();
+		cpDefinitionGroupedEntryCacheModel.entryCProductId = getEntryCProductId();
 
 		cpDefinitionGroupedEntryCacheModel.priority = getPriority();
 
@@ -754,8 +754,8 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 		sb.append(getModifiedDate());
 		sb.append(", CPDefinitionId=");
 		sb.append(getCPDefinitionId());
-		sb.append(", entryCPDefinitionId=");
-		sb.append(getEntryCPDefinitionId());
+		sb.append(", entryCProductId=");
+		sb.append(getEntryCProductId());
 		sb.append(", priority=");
 		sb.append(getPriority());
 		sb.append(", quantity=");
@@ -811,8 +811,8 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 		sb.append(getCPDefinitionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>entryCPDefinitionId</column-name><column-value><![CDATA[");
-		sb.append(getEntryCPDefinitionId());
+			"<column><column-name>entryCProductId</column-name><column-value><![CDATA[");
+		sb.append(getEntryCProductId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>priority</column-name><column-value><![CDATA[");
@@ -849,9 +849,9 @@ public class CPDefinitionGroupedEntryModelImpl extends BaseModelImpl<CPDefinitio
 	private long _CPDefinitionId;
 	private long _originalCPDefinitionId;
 	private boolean _setOriginalCPDefinitionId;
-	private long _entryCPDefinitionId;
-	private long _originalEntryCPDefinitionId;
-	private boolean _setOriginalEntryCPDefinitionId;
+	private long _entryCProductId;
+	private long _originalEntryCProductId;
+	private boolean _setOriginalEntryCProductId;
 	private double _priority;
 	private int _quantity;
 	private long _columnBitmask;

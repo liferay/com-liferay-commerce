@@ -273,6 +273,14 @@ public class CPAttachmentFileEntryPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_C_F() throws Exception {
+		_persistence.countByC_C_F(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
+
+		_persistence.countByC_C_F(0L, 0L, 0L);
+	}
+
+	@Test
 	public void testCountByC_C_LtD_S() throws Exception {
 		_persistence.countByC_C_LtD_S(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong(), RandomTestUtil.nextDate(),
@@ -338,9 +346,9 @@ public class CPAttachmentFileEntryPersistenceTest {
 			true, "userId", true, "userName", true, "createDate", true,
 			"modifiedDate", true, "classNameId", true, "classPK", true,
 			"fileEntryId", true, "displayDate", true, "expirationDate", true,
-			"title", true, "json", true, "priority", true, "type", true,
-			"lastPublishDate", true, "status", true, "statusByUserId", true,
-			"statusByUserName", true, "statusDate", true);
+			"title", true, "priority", true, "type", true, "lastPublishDate",
+			true, "status", true, "statusByUserId", true, "statusByUserName",
+			true, "statusDate", true);
 	}
 
 	@Test
@@ -561,6 +569,19 @@ public class CPAttachmentFileEntryPersistenceTest {
 				existingCPAttachmentFileEntry.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
 				"getOriginalGroupId", new Class<?>[0]));
+
+		Assert.assertEquals(Long.valueOf(
+				existingCPAttachmentFileEntry.getClassNameId()),
+			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
+				"getOriginalClassNameId", new Class<?>[0]));
+		Assert.assertEquals(Long.valueOf(
+				existingCPAttachmentFileEntry.getClassPK()),
+			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
+				"getOriginalClassPK", new Class<?>[0]));
+		Assert.assertEquals(Long.valueOf(
+				existingCPAttachmentFileEntry.getFileEntryId()),
+			ReflectionTestUtil.<Long>invoke(existingCPAttachmentFileEntry,
+				"getOriginalFileEntryId", new Class<?>[0]));
 
 		Assert.assertEquals(Long.valueOf(
 				existingCPAttachmentFileEntry.getCompanyId()),

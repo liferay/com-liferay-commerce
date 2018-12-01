@@ -150,14 +150,14 @@ public class CPDefinitionLinkServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
-		HttpPrincipal httpPrincipal, long cpDefinitionId1, String type)
+		HttpPrincipal httpPrincipal, long cpDefinitionId, String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionLinkServiceUtil.class,
 					"getCPDefinitionLinks", _getCPDefinitionLinksParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId1, type);
+					cpDefinitionId, type);
 
 			Object returnObj = null;
 
@@ -182,7 +182,7 @@ public class CPDefinitionLinkServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
-		HttpPrincipal httpPrincipal, long cpDefinitionId1, String type,
+		HttpPrincipal httpPrincipal, long cpDefinitionId, String type,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionLink> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -191,7 +191,7 @@ public class CPDefinitionLinkServiceHttp {
 					"getCPDefinitionLinks", _getCPDefinitionLinksParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId1, type, start, end, orderByComparator);
+					cpDefinitionId, type, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -216,7 +216,7 @@ public class CPDefinitionLinkServiceHttp {
 	}
 
 	public static int getCPDefinitionLinksCount(HttpPrincipal httpPrincipal,
-		long cpDefinitionId1, String type)
+		long cpDefinitionId, String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPDefinitionLinkServiceUtil.class,
@@ -224,7 +224,7 @@ public class CPDefinitionLinkServiceHttp {
 					_getCPDefinitionLinksCountParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId1, type);
+					cpDefinitionId, type);
 
 			Object returnObj = null;
 
@@ -283,7 +283,7 @@ public class CPDefinitionLinkServiceHttp {
 	}
 
 	public static void updateCPDefinitionLinks(HttpPrincipal httpPrincipal,
-		long cpDefinitionId1, long[] cpDefinitionIds2, String type,
+		long cpDefinitionId, long[] cpDefinitionIds2, String type,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -292,7 +292,7 @@ public class CPDefinitionLinkServiceHttp {
 					_updateCPDefinitionLinksParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpDefinitionId1, cpDefinitionIds2, type, serviceContext);
+					cpDefinitionId, cpDefinitionIds2, type, serviceContext);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);

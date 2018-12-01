@@ -81,8 +81,8 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "CPDefinitionId", Types.BIGINT },
 			{ "commerceAvailabilityEstimateId", Types.BIGINT },
+			{ "CProductId", Types.BIGINT },
 			{ "lastPublishDate", Types.TIMESTAMP }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
@@ -96,12 +96,12 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("CPDefinitionId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceAvailabilityEstimateId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("CProductId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPDAvailabilityEstimate (uuid_ VARCHAR(75) null,CPDAvailabilityEstimateId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,commerceAvailabilityEstimateId LONG,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPDAvailabilityEstimate (uuid_ VARCHAR(75) null,CPDAvailabilityEstimateId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAvailabilityEstimateId LONG,CProductId LONG,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPDAvailabilityEstimate";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpdAvailabilityEstimate.CPDAvailabilityEstimateId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPDAvailabilityEstimate.CPDAvailabilityEstimateId ASC";
@@ -117,7 +117,7 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.model.CPDAvailabilityEstimate"),
 			true);
-	public static final long CPDEFINITIONID_COLUMN_BITMASK = 1L;
+	public static final long CPRODUCTID_COLUMN_BITMASK = 1L;
 	public static final long COMMERCEAVAILABILITYESTIMATEID_COLUMN_BITMASK = 2L;
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
 	public static final long GROUPID_COLUMN_BITMASK = 8L;
@@ -146,8 +146,8 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setCPDefinitionId(soapModel.getCPDefinitionId());
 		model.setCommerceAvailabilityEstimateId(soapModel.getCommerceAvailabilityEstimateId());
+		model.setCProductId(soapModel.getCProductId());
 		model.setLastPublishDate(soapModel.getLastPublishDate());
 
 		return model;
@@ -223,9 +223,9 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CPDefinitionId", getCPDefinitionId());
 		attributes.put("commerceAvailabilityEstimateId",
 			getCommerceAvailabilityEstimateId());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("lastPublishDate", getLastPublishDate());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
@@ -285,17 +285,17 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CPDefinitionId = (Long)attributes.get("CPDefinitionId");
-
-		if (CPDefinitionId != null) {
-			setCPDefinitionId(CPDefinitionId);
-		}
-
 		Long commerceAvailabilityEstimateId = (Long)attributes.get(
 				"commerceAvailabilityEstimateId");
 
 		if (commerceAvailabilityEstimateId != null) {
 			setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
+		}
+
+		Long CProductId = (Long)attributes.get("CProductId");
+
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
@@ -459,29 +459,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 
 	@JSON
 	@Override
-	public long getCPDefinitionId() {
-		return _CPDefinitionId;
-	}
-
-	@Override
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_columnBitmask |= CPDEFINITIONID_COLUMN_BITMASK;
-
-		if (!_setOriginalCPDefinitionId) {
-			_setOriginalCPDefinitionId = true;
-
-			_originalCPDefinitionId = _CPDefinitionId;
-		}
-
-		_CPDefinitionId = CPDefinitionId;
-	}
-
-	public long getOriginalCPDefinitionId() {
-		return _originalCPDefinitionId;
-	}
-
-	@JSON
-	@Override
 	public long getCommerceAvailabilityEstimateId() {
 		return _commerceAvailabilityEstimateId;
 	}
@@ -502,6 +479,29 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 
 	public long getOriginalCommerceAvailabilityEstimateId() {
 		return _originalCommerceAvailabilityEstimateId;
+	}
+
+	@JSON
+	@Override
+	public long getCProductId() {
+		return _CProductId;
+	}
+
+	@Override
+	public void setCProductId(long CProductId) {
+		_columnBitmask |= CPRODUCTID_COLUMN_BITMASK;
+
+		if (!_setOriginalCProductId) {
+			_setOriginalCProductId = true;
+
+			_originalCProductId = _CProductId;
+		}
+
+		_CProductId = CProductId;
+	}
+
+	public long getOriginalCProductId() {
+		return _originalCProductId;
 	}
 
 	@JSON
@@ -560,8 +560,8 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 		cpdAvailabilityEstimateImpl.setUserName(getUserName());
 		cpdAvailabilityEstimateImpl.setCreateDate(getCreateDate());
 		cpdAvailabilityEstimateImpl.setModifiedDate(getModifiedDate());
-		cpdAvailabilityEstimateImpl.setCPDefinitionId(getCPDefinitionId());
 		cpdAvailabilityEstimateImpl.setCommerceAvailabilityEstimateId(getCommerceAvailabilityEstimateId());
+		cpdAvailabilityEstimateImpl.setCProductId(getCProductId());
 		cpdAvailabilityEstimateImpl.setLastPublishDate(getLastPublishDate());
 
 		cpdAvailabilityEstimateImpl.resetOriginalValues();
@@ -637,13 +637,13 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 
 		cpdAvailabilityEstimateModelImpl._setModifiedDate = false;
 
-		cpdAvailabilityEstimateModelImpl._originalCPDefinitionId = cpdAvailabilityEstimateModelImpl._CPDefinitionId;
-
-		cpdAvailabilityEstimateModelImpl._setOriginalCPDefinitionId = false;
-
 		cpdAvailabilityEstimateModelImpl._originalCommerceAvailabilityEstimateId = cpdAvailabilityEstimateModelImpl._commerceAvailabilityEstimateId;
 
 		cpdAvailabilityEstimateModelImpl._setOriginalCommerceAvailabilityEstimateId = false;
+
+		cpdAvailabilityEstimateModelImpl._originalCProductId = cpdAvailabilityEstimateModelImpl._CProductId;
+
+		cpdAvailabilityEstimateModelImpl._setOriginalCProductId = false;
 
 		cpdAvailabilityEstimateModelImpl._columnBitmask = 0;
 	}
@@ -694,9 +694,9 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 			cpdAvailabilityEstimateCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		cpdAvailabilityEstimateCacheModel.CPDefinitionId = getCPDefinitionId();
-
 		cpdAvailabilityEstimateCacheModel.commerceAvailabilityEstimateId = getCommerceAvailabilityEstimateId();
+
+		cpdAvailabilityEstimateCacheModel.CProductId = getCProductId();
 
 		Date lastPublishDate = getLastPublishDate();
 
@@ -730,10 +730,10 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", CPDefinitionId=");
-		sb.append(getCPDefinitionId());
 		sb.append(", commerceAvailabilityEstimateId=");
 		sb.append(getCommerceAvailabilityEstimateId());
+		sb.append(", CProductId=");
+		sb.append(getCProductId());
 		sb.append(", lastPublishDate=");
 		sb.append(getLastPublishDate());
 		sb.append("}");
@@ -782,12 +782,12 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>CPDefinitionId</column-name><column-value><![CDATA[");
-		sb.append(getCPDefinitionId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>commerceAvailabilityEstimateId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceAvailabilityEstimateId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>CProductId</column-name><column-value><![CDATA[");
+		sb.append(getCProductId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>lastPublishDate</column-name><column-value><![CDATA[");
@@ -817,12 +817,12 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _CPDefinitionId;
-	private long _originalCPDefinitionId;
-	private boolean _setOriginalCPDefinitionId;
 	private long _commerceAvailabilityEstimateId;
 	private long _originalCommerceAvailabilityEstimateId;
 	private boolean _setOriginalCommerceAvailabilityEstimateId;
+	private long _CProductId;
+	private long _originalCProductId;
+	private boolean _setOriginalCProductId;
 	private Date _lastPublishDate;
 	private long _columnBitmask;
 	private CPDAvailabilityEstimate _escapedModel;

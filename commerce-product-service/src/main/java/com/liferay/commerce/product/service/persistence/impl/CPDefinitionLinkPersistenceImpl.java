@@ -1482,89 +1482,89 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "cpDefinitionLink.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(cpDefinitionLink.uuid IS NULL OR cpDefinitionLink.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "cpDefinitionLink.companyId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPDEFINITIONID1 =
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPDEFINITIONID =
 		new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionLinkImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCPDefinitionId1",
+			"findByCPDefinitionId",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID1 =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID =
 		new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionLinkImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPDefinitionId1",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPDefinitionId",
 			new String[] { Long.class.getName() },
-			CPDefinitionLinkModelImpl.CPDEFINITIONID1_COLUMN_BITMASK |
+			CPDefinitionLinkModelImpl.CPDEFINITIONID_COLUMN_BITMASK |
 			CPDefinitionLinkModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CPDEFINITIONID1 = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_CPDEFINITIONID = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCPDefinitionId1", new String[] { Long.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPDefinitionId",
+			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the cp definition links where CPDefinitionId1 = &#63;.
+	 * Returns all the cp definition links where CPDefinitionId = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @return the matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByCPDefinitionId1(long CPDefinitionId1) {
-		return findByCPDefinitionId1(CPDefinitionId1, QueryUtil.ALL_POS,
+	public List<CPDefinitionLink> findByCPDefinitionId(long CPDefinitionId) {
+		return findByCPDefinitionId(CPDefinitionId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the cp definition links where CPDefinitionId1 = &#63;.
+	 * Returns a range of all the cp definition links where CPDefinitionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @return the range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByCPDefinitionId1(long CPDefinitionId1,
+	public List<CPDefinitionLink> findByCPDefinitionId(long CPDefinitionId,
 		int start, int end) {
-		return findByCPDefinitionId1(CPDefinitionId1, start, end, null);
+		return findByCPDefinitionId(CPDefinitionId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp definition links where CPDefinitionId1 = &#63;.
+	 * Returns an ordered range of all the cp definition links where CPDefinitionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByCPDefinitionId1(long CPDefinitionId1,
+	public List<CPDefinitionLink> findByCPDefinitionId(long CPDefinitionId,
 		int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator) {
-		return findByCPDefinitionId1(CPDefinitionId1, start, end,
+		return findByCPDefinitionId(CPDefinitionId, start, end,
 			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp definition links where CPDefinitionId1 = &#63;.
+	 * Returns an ordered range of all the cp definition links where CPDefinitionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1572,7 +1572,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByCPDefinitionId1(long CPDefinitionId1,
+	public List<CPDefinitionLink> findByCPDefinitionId(long CPDefinitionId,
 		int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
 		boolean retrieveFromCache) {
@@ -1583,13 +1583,13 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID1;
-			finderArgs = new Object[] { CPDefinitionId1 };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID;
+			finderArgs = new Object[] { CPDefinitionId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CPDEFINITIONID1;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CPDEFINITIONID;
 			finderArgs = new Object[] {
-					CPDefinitionId1,
+					CPDefinitionId,
 					
 					start, end, orderByComparator
 				};
@@ -1603,7 +1603,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionLink cpDefinitionLink : list) {
-					if ((CPDefinitionId1 != cpDefinitionLink.getCPDefinitionId1())) {
+					if ((CPDefinitionId != cpDefinitionLink.getCPDefinitionId())) {
 						list = null;
 
 						break;
@@ -1625,7 +1625,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			query.append(_SQL_SELECT_CPDEFINITIONLINK_WHERE);
 
-			query.append(_FINDER_COLUMN_CPDEFINITIONID1_CPDEFINITIONID1_2);
+			query.append(_FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1647,7 +1647,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId1);
+				qPos.add(CPDefinitionId);
 
 				if (!pagination) {
 					list = (List<CPDefinitionLink>)QueryUtil.list(q,
@@ -1680,18 +1680,18 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the first cp definition link in the ordered set where CPDefinitionId1 = &#63;.
+	 * Returns the first cp definition link in the ordered set where CPDefinitionId = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink findByCPDefinitionId1_First(long CPDefinitionId1,
+	public CPDefinitionLink findByCPDefinitionId_First(long CPDefinitionId,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
-		CPDefinitionLink cpDefinitionLink = fetchByCPDefinitionId1_First(CPDefinitionId1,
+		CPDefinitionLink cpDefinitionLink = fetchByCPDefinitionId_First(CPDefinitionId,
 				orderByComparator);
 
 		if (cpDefinitionLink != null) {
@@ -1702,8 +1702,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("CPDefinitionId1=");
-		msg.append(CPDefinitionId1);
+		msg.append("CPDefinitionId=");
+		msg.append(CPDefinitionId);
 
 		msg.append("}");
 
@@ -1711,16 +1711,16 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the first cp definition link in the ordered set where CPDefinitionId1 = &#63;.
+	 * Returns the first cp definition link in the ordered set where CPDefinitionId = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink fetchByCPDefinitionId1_First(long CPDefinitionId1,
+	public CPDefinitionLink fetchByCPDefinitionId_First(long CPDefinitionId,
 		OrderByComparator<CPDefinitionLink> orderByComparator) {
-		List<CPDefinitionLink> list = findByCPDefinitionId1(CPDefinitionId1, 0,
+		List<CPDefinitionLink> list = findByCPDefinitionId(CPDefinitionId, 0,
 				1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1731,18 +1731,18 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the last cp definition link in the ordered set where CPDefinitionId1 = &#63;.
+	 * Returns the last cp definition link in the ordered set where CPDefinitionId = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink findByCPDefinitionId1_Last(long CPDefinitionId1,
+	public CPDefinitionLink findByCPDefinitionId_Last(long CPDefinitionId,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
-		CPDefinitionLink cpDefinitionLink = fetchByCPDefinitionId1_Last(CPDefinitionId1,
+		CPDefinitionLink cpDefinitionLink = fetchByCPDefinitionId_Last(CPDefinitionId,
 				orderByComparator);
 
 		if (cpDefinitionLink != null) {
@@ -1753,8 +1753,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("CPDefinitionId1=");
-		msg.append(CPDefinitionId1);
+		msg.append("CPDefinitionId=");
+		msg.append(CPDefinitionId);
 
 		msg.append("}");
 
@@ -1762,22 +1762,22 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the last cp definition link in the ordered set where CPDefinitionId1 = &#63;.
+	 * Returns the last cp definition link in the ordered set where CPDefinitionId = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink fetchByCPDefinitionId1_Last(long CPDefinitionId1,
+	public CPDefinitionLink fetchByCPDefinitionId_Last(long CPDefinitionId,
 		OrderByComparator<CPDefinitionLink> orderByComparator) {
-		int count = countByCPDefinitionId1(CPDefinitionId1);
+		int count = countByCPDefinitionId(CPDefinitionId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPDefinitionLink> list = findByCPDefinitionId1(CPDefinitionId1,
+		List<CPDefinitionLink> list = findByCPDefinitionId(CPDefinitionId,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1788,17 +1788,17 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the cp definition links before and after the current cp definition link in the ordered set where CPDefinitionId1 = &#63;.
+	 * Returns the cp definition links before and after the current cp definition link in the ordered set where CPDefinitionId = &#63;.
 	 *
 	 * @param CPDefinitionLinkId the primary key of the current cp definition link
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a cp definition link with the primary key could not be found
 	 */
 	@Override
-	public CPDefinitionLink[] findByCPDefinitionId1_PrevAndNext(
-		long CPDefinitionLinkId, long CPDefinitionId1,
+	public CPDefinitionLink[] findByCPDefinitionId_PrevAndNext(
+		long CPDefinitionLinkId, long CPDefinitionId,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
 		CPDefinitionLink cpDefinitionLink = findByPrimaryKey(CPDefinitionLinkId);
@@ -1810,13 +1810,13 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			CPDefinitionLink[] array = new CPDefinitionLinkImpl[3];
 
-			array[0] = getByCPDefinitionId1_PrevAndNext(session,
-					cpDefinitionLink, CPDefinitionId1, orderByComparator, true);
+			array[0] = getByCPDefinitionId_PrevAndNext(session,
+					cpDefinitionLink, CPDefinitionId, orderByComparator, true);
 
 			array[1] = cpDefinitionLink;
 
-			array[2] = getByCPDefinitionId1_PrevAndNext(session,
-					cpDefinitionLink, CPDefinitionId1, orderByComparator, false);
+			array[2] = getByCPDefinitionId_PrevAndNext(session,
+					cpDefinitionLink, CPDefinitionId, orderByComparator, false);
 
 			return array;
 		}
@@ -1828,9 +1828,9 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		}
 	}
 
-	protected CPDefinitionLink getByCPDefinitionId1_PrevAndNext(
+	protected CPDefinitionLink getByCPDefinitionId_PrevAndNext(
 		Session session, CPDefinitionLink cpDefinitionLink,
-		long CPDefinitionId1,
+		long CPDefinitionId,
 		OrderByComparator<CPDefinitionLink> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1845,7 +1845,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		query.append(_SQL_SELECT_CPDEFINITIONLINK_WHERE);
 
-		query.append(_FINDER_COLUMN_CPDEFINITIONID1_CPDEFINITIONID1_2);
+		query.append(_FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1915,7 +1915,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(CPDefinitionId1);
+		qPos.add(CPDefinitionId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(cpDefinitionLink);
@@ -1936,29 +1936,29 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Removes all the cp definition links where CPDefinitionId1 = &#63; from the database.
+	 * Removes all the cp definition links where CPDefinitionId = &#63; from the database.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 */
 	@Override
-	public void removeByCPDefinitionId1(long CPDefinitionId1) {
-		for (CPDefinitionLink cpDefinitionLink : findByCPDefinitionId1(
-				CPDefinitionId1, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByCPDefinitionId(long CPDefinitionId) {
+		for (CPDefinitionLink cpDefinitionLink : findByCPDefinitionId(
+				CPDefinitionId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(cpDefinitionLink);
 		}
 	}
 
 	/**
-	 * Returns the number of cp definition links where CPDefinitionId1 = &#63;.
+	 * Returns the number of cp definition links where CPDefinitionId = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @return the number of matching cp definition links
 	 */
 	@Override
-	public int countByCPDefinitionId1(long CPDefinitionId1) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPDEFINITIONID1;
+	public int countByCPDefinitionId(long CPDefinitionId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPDEFINITIONID;
 
-		Object[] finderArgs = new Object[] { CPDefinitionId1 };
+		Object[] finderArgs = new Object[] { CPDefinitionId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1967,7 +1967,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			query.append(_SQL_COUNT_CPDEFINITIONLINK_WHERE);
 
-			query.append(_FINDER_COLUMN_CPDEFINITIONID1_CPDEFINITIONID1_2);
+			query.append(_FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2);
 
 			String sql = query.toString();
 
@@ -1980,7 +1980,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId1);
+				qPos.add(CPDefinitionId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1999,91 +1999,88 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CPDEFINITIONID1_CPDEFINITIONID1_2 =
-		"cpDefinitionLink.CPDefinitionId1 = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPDEFINITIONID2 =
+	private static final String _FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2 = "cpDefinitionLink.CPDefinitionId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPRODUCTID =
 		new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionLinkImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCPDefinitionId2",
+			"findByCProductId",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID2 =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID =
 		new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionLinkImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPDefinitionId2",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCProductId",
 			new String[] { Long.class.getName() },
-			CPDefinitionLinkModelImpl.CPDEFINITIONID2_COLUMN_BITMASK |
+			CPDefinitionLinkModelImpl.CPRODUCTID_COLUMN_BITMASK |
 			CPDefinitionLinkModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CPDEFINITIONID2 = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_CPRODUCTID = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCPDefinitionId2", new String[] { Long.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCProductId",
+			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the cp definition links where CPDefinitionId2 = &#63;.
+	 * Returns all the cp definition links where CProductId = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @return the matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByCPDefinitionId2(long CPDefinitionId2) {
-		return findByCPDefinitionId2(CPDefinitionId2, QueryUtil.ALL_POS,
+	public List<CPDefinitionLink> findByCProductId(long CProductId) {
+		return findByCProductId(CProductId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the cp definition links where CPDefinitionId2 = &#63;.
+	 * Returns a range of all the cp definition links where CProductId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @return the range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByCPDefinitionId2(long CPDefinitionId2,
-		int start, int end) {
-		return findByCPDefinitionId2(CPDefinitionId2, start, end, null);
+	public List<CPDefinitionLink> findByCProductId(long CProductId, int start,
+		int end) {
+		return findByCProductId(CProductId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp definition links where CPDefinitionId2 = &#63;.
+	 * Returns an ordered range of all the cp definition links where CProductId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByCPDefinitionId2(long CPDefinitionId2,
-		int start, int end,
-		OrderByComparator<CPDefinitionLink> orderByComparator) {
-		return findByCPDefinitionId2(CPDefinitionId2, start, end,
-			orderByComparator, true);
+	public List<CPDefinitionLink> findByCProductId(long CProductId, int start,
+		int end, OrderByComparator<CPDefinitionLink> orderByComparator) {
+		return findByCProductId(CProductId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp definition links where CPDefinitionId2 = &#63;.
+	 * Returns an ordered range of all the cp definition links where CProductId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -2091,9 +2088,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByCPDefinitionId2(long CPDefinitionId2,
-		int start, int end,
-		OrderByComparator<CPDefinitionLink> orderByComparator,
+	public List<CPDefinitionLink> findByCProductId(long CProductId, int start,
+		int end, OrderByComparator<CPDefinitionLink> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2102,16 +2098,12 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID2;
-			finderArgs = new Object[] { CPDefinitionId2 };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID;
+			finderArgs = new Object[] { CProductId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CPDEFINITIONID2;
-			finderArgs = new Object[] {
-					CPDefinitionId2,
-					
-					start, end, orderByComparator
-				};
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CPRODUCTID;
+			finderArgs = new Object[] { CProductId, start, end, orderByComparator };
 		}
 
 		List<CPDefinitionLink> list = null;
@@ -2122,7 +2114,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionLink cpDefinitionLink : list) {
-					if ((CPDefinitionId2 != cpDefinitionLink.getCPDefinitionId2())) {
+					if ((CProductId != cpDefinitionLink.getCProductId())) {
 						list = null;
 
 						break;
@@ -2144,7 +2136,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			query.append(_SQL_SELECT_CPDEFINITIONLINK_WHERE);
 
-			query.append(_FINDER_COLUMN_CPDEFINITIONID2_CPDEFINITIONID2_2);
+			query.append(_FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2166,7 +2158,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId2);
+				qPos.add(CProductId);
 
 				if (!pagination) {
 					list = (List<CPDefinitionLink>)QueryUtil.list(q,
@@ -2199,18 +2191,18 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the first cp definition link in the ordered set where CPDefinitionId2 = &#63;.
+	 * Returns the first cp definition link in the ordered set where CProductId = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink findByCPDefinitionId2_First(long CPDefinitionId2,
+	public CPDefinitionLink findByCProductId_First(long CProductId,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
-		CPDefinitionLink cpDefinitionLink = fetchByCPDefinitionId2_First(CPDefinitionId2,
+		CPDefinitionLink cpDefinitionLink = fetchByCProductId_First(CProductId,
 				orderByComparator);
 
 		if (cpDefinitionLink != null) {
@@ -2221,8 +2213,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("CPDefinitionId2=");
-		msg.append(CPDefinitionId2);
+		msg.append("CProductId=");
+		msg.append(CProductId);
 
 		msg.append("}");
 
@@ -2230,17 +2222,17 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the first cp definition link in the ordered set where CPDefinitionId2 = &#63;.
+	 * Returns the first cp definition link in the ordered set where CProductId = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink fetchByCPDefinitionId2_First(long CPDefinitionId2,
+	public CPDefinitionLink fetchByCProductId_First(long CProductId,
 		OrderByComparator<CPDefinitionLink> orderByComparator) {
-		List<CPDefinitionLink> list = findByCPDefinitionId2(CPDefinitionId2, 0,
-				1, orderByComparator);
+		List<CPDefinitionLink> list = findByCProductId(CProductId, 0, 1,
+				orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2250,18 +2242,18 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the last cp definition link in the ordered set where CPDefinitionId2 = &#63;.
+	 * Returns the last cp definition link in the ordered set where CProductId = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink findByCPDefinitionId2_Last(long CPDefinitionId2,
+	public CPDefinitionLink findByCProductId_Last(long CProductId,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
-		CPDefinitionLink cpDefinitionLink = fetchByCPDefinitionId2_Last(CPDefinitionId2,
+		CPDefinitionLink cpDefinitionLink = fetchByCProductId_Last(CProductId,
 				orderByComparator);
 
 		if (cpDefinitionLink != null) {
@@ -2272,8 +2264,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("CPDefinitionId2=");
-		msg.append(CPDefinitionId2);
+		msg.append("CProductId=");
+		msg.append(CProductId);
 
 		msg.append("}");
 
@@ -2281,23 +2273,23 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the last cp definition link in the ordered set where CPDefinitionId2 = &#63;.
+	 * Returns the last cp definition link in the ordered set where CProductId = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink fetchByCPDefinitionId2_Last(long CPDefinitionId2,
+	public CPDefinitionLink fetchByCProductId_Last(long CProductId,
 		OrderByComparator<CPDefinitionLink> orderByComparator) {
-		int count = countByCPDefinitionId2(CPDefinitionId2);
+		int count = countByCProductId(CProductId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPDefinitionLink> list = findByCPDefinitionId2(CPDefinitionId2,
-				count - 1, count, orderByComparator);
+		List<CPDefinitionLink> list = findByCProductId(CProductId, count - 1,
+				count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2307,17 +2299,17 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the cp definition links before and after the current cp definition link in the ordered set where CPDefinitionId2 = &#63;.
+	 * Returns the cp definition links before and after the current cp definition link in the ordered set where CProductId = &#63;.
 	 *
 	 * @param CPDefinitionLinkId the primary key of the current cp definition link
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a cp definition link with the primary key could not be found
 	 */
 	@Override
-	public CPDefinitionLink[] findByCPDefinitionId2_PrevAndNext(
-		long CPDefinitionLinkId, long CPDefinitionId2,
+	public CPDefinitionLink[] findByCProductId_PrevAndNext(
+		long CPDefinitionLinkId, long CProductId,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
 		CPDefinitionLink cpDefinitionLink = findByPrimaryKey(CPDefinitionLinkId);
@@ -2329,13 +2321,13 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			CPDefinitionLink[] array = new CPDefinitionLinkImpl[3];
 
-			array[0] = getByCPDefinitionId2_PrevAndNext(session,
-					cpDefinitionLink, CPDefinitionId2, orderByComparator, true);
+			array[0] = getByCProductId_PrevAndNext(session, cpDefinitionLink,
+					CProductId, orderByComparator, true);
 
 			array[1] = cpDefinitionLink;
 
-			array[2] = getByCPDefinitionId2_PrevAndNext(session,
-					cpDefinitionLink, CPDefinitionId2, orderByComparator, false);
+			array[2] = getByCProductId_PrevAndNext(session, cpDefinitionLink,
+					CProductId, orderByComparator, false);
 
 			return array;
 		}
@@ -2347,9 +2339,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		}
 	}
 
-	protected CPDefinitionLink getByCPDefinitionId2_PrevAndNext(
-		Session session, CPDefinitionLink cpDefinitionLink,
-		long CPDefinitionId2,
+	protected CPDefinitionLink getByCProductId_PrevAndNext(Session session,
+		CPDefinitionLink cpDefinitionLink, long CProductId,
 		OrderByComparator<CPDefinitionLink> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -2364,7 +2355,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		query.append(_SQL_SELECT_CPDEFINITIONLINK_WHERE);
 
-		query.append(_FINDER_COLUMN_CPDEFINITIONID2_CPDEFINITIONID2_2);
+		query.append(_FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -2434,7 +2425,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(CPDefinitionId2);
+		qPos.add(CProductId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(cpDefinitionLink);
@@ -2455,29 +2446,29 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Removes all the cp definition links where CPDefinitionId2 = &#63; from the database.
+	 * Removes all the cp definition links where CProductId = &#63; from the database.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 */
 	@Override
-	public void removeByCPDefinitionId2(long CPDefinitionId2) {
-		for (CPDefinitionLink cpDefinitionLink : findByCPDefinitionId2(
-				CPDefinitionId2, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByCProductId(long CProductId) {
+		for (CPDefinitionLink cpDefinitionLink : findByCProductId(CProductId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(cpDefinitionLink);
 		}
 	}
 
 	/**
-	 * Returns the number of cp definition links where CPDefinitionId2 = &#63;.
+	 * Returns the number of cp definition links where CProductId = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @return the number of matching cp definition links
 	 */
 	@Override
-	public int countByCPDefinitionId2(long CPDefinitionId2) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPDEFINITIONID2;
+	public int countByCProductId(long CProductId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPRODUCTID;
 
-		Object[] finderArgs = new Object[] { CPDefinitionId2 };
+		Object[] finderArgs = new Object[] { CProductId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2486,7 +2477,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			query.append(_SQL_COUNT_CPDEFINITIONLINK_WHERE);
 
-			query.append(_FINDER_COLUMN_CPDEFINITIONID2_CPDEFINITIONID2_2);
+			query.append(_FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2);
 
 			String sql = query.toString();
 
@@ -2499,7 +2490,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId2);
+				qPos.add(CProductId);
 
 				count = (Long)q.uniqueResult();
 
@@ -2518,71 +2509,70 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CPDEFINITIONID2_CPDEFINITIONID2_2 =
-		"cpDefinitionLink.CPDefinitionId2 = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C1_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_CPRODUCTID_CPRODUCTID_2 = "cpDefinitionLink.CProductId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CPD_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionLinkImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByC1_T",
+			"findByCPD_T",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C1_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPD_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionLinkImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC1_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPD_T",
 			new String[] { Long.class.getName(), String.class.getName() },
-			CPDefinitionLinkModelImpl.CPDEFINITIONID1_COLUMN_BITMASK |
+			CPDefinitionLinkModelImpl.CPDEFINITIONID_COLUMN_BITMASK |
 			CPDefinitionLinkModelImpl.TYPE_COLUMN_BITMASK |
 			CPDefinitionLinkModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C1_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_CPD_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC1_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPD_T",
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
-	 * Returns all the cp definition links where CPDefinitionId1 = &#63; and type = &#63;.
+	 * Returns all the cp definition links where CPDefinitionId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 * @return the matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByC1_T(long CPDefinitionId1, String type) {
-		return findByC1_T(CPDefinitionId1, type, QueryUtil.ALL_POS,
+	public List<CPDefinitionLink> findByCPD_T(long CPDefinitionId, String type) {
+		return findByCPD_T(CPDefinitionId, type, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the cp definition links where CPDefinitionId1 = &#63; and type = &#63;.
+	 * Returns a range of all the cp definition links where CPDefinitionId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @return the range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByC1_T(long CPDefinitionId1, String type,
+	public List<CPDefinitionLink> findByCPD_T(long CPDefinitionId, String type,
 		int start, int end) {
-		return findByC1_T(CPDefinitionId1, type, start, end, null);
+		return findByCPD_T(CPDefinitionId, type, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp definition links where CPDefinitionId1 = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp definition links where CPDefinitionId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
@@ -2590,21 +2580,21 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByC1_T(long CPDefinitionId1, String type,
+	public List<CPDefinitionLink> findByCPD_T(long CPDefinitionId, String type,
 		int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator) {
-		return findByC1_T(CPDefinitionId1, type, start, end, orderByComparator,
+		return findByCPD_T(CPDefinitionId, type, start, end, orderByComparator,
 			true);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp definition links where CPDefinitionId1 = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp definition links where CPDefinitionId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
@@ -2613,7 +2603,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByC1_T(long CPDefinitionId1, String type,
+	public List<CPDefinitionLink> findByCPD_T(long CPDefinitionId, String type,
 		int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
 		boolean retrieveFromCache) {
@@ -2624,13 +2614,13 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C1_T;
-			finderArgs = new Object[] { CPDefinitionId1, type };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPD_T;
+			finderArgs = new Object[] { CPDefinitionId, type };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C1_T;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CPD_T;
 			finderArgs = new Object[] {
-					CPDefinitionId1, type,
+					CPDefinitionId, type,
 					
 					start, end, orderByComparator
 				};
@@ -2644,7 +2634,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionLink cpDefinitionLink : list) {
-					if ((CPDefinitionId1 != cpDefinitionLink.getCPDefinitionId1()) ||
+					if ((CPDefinitionId != cpDefinitionLink.getCPDefinitionId()) ||
 							!Objects.equals(type, cpDefinitionLink.getType())) {
 						list = null;
 
@@ -2667,20 +2657,20 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			query.append(_SQL_SELECT_CPDEFINITIONLINK_WHERE);
 
-			query.append(_FINDER_COLUMN_C1_T_CPDEFINITIONID1_2);
+			query.append(_FINDER_COLUMN_CPD_T_CPDEFINITIONID_2);
 
 			boolean bindType = false;
 
 			if (type == null) {
-				query.append(_FINDER_COLUMN_C1_T_TYPE_1);
+				query.append(_FINDER_COLUMN_CPD_T_TYPE_1);
 			}
 			else if (type.equals("")) {
-				query.append(_FINDER_COLUMN_C1_T_TYPE_3);
+				query.append(_FINDER_COLUMN_CPD_T_TYPE_3);
 			}
 			else {
 				bindType = true;
 
-				query.append(_FINDER_COLUMN_C1_T_TYPE_2);
+				query.append(_FINDER_COLUMN_CPD_T_TYPE_2);
 			}
 
 			if (orderByComparator != null) {
@@ -2703,7 +2693,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId1);
+				qPos.add(CPDefinitionId);
 
 				if (bindType) {
 					qPos.add(type);
@@ -2740,19 +2730,19 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the first cp definition link in the ordered set where CPDefinitionId1 = &#63; and type = &#63;.
+	 * Returns the first cp definition link in the ordered set where CPDefinitionId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink findByC1_T_First(long CPDefinitionId1, String type,
+	public CPDefinitionLink findByCPD_T_First(long CPDefinitionId, String type,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
-		CPDefinitionLink cpDefinitionLink = fetchByC1_T_First(CPDefinitionId1,
+		CPDefinitionLink cpDefinitionLink = fetchByCPD_T_First(CPDefinitionId,
 				type, orderByComparator);
 
 		if (cpDefinitionLink != null) {
@@ -2763,8 +2753,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("CPDefinitionId1=");
-		msg.append(CPDefinitionId1);
+		msg.append("CPDefinitionId=");
+		msg.append(CPDefinitionId);
 
 		msg.append(", type=");
 		msg.append(type);
@@ -2775,17 +2765,17 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the first cp definition link in the ordered set where CPDefinitionId1 = &#63; and type = &#63;.
+	 * Returns the first cp definition link in the ordered set where CPDefinitionId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink fetchByC1_T_First(long CPDefinitionId1,
+	public CPDefinitionLink fetchByCPD_T_First(long CPDefinitionId,
 		String type, OrderByComparator<CPDefinitionLink> orderByComparator) {
-		List<CPDefinitionLink> list = findByC1_T(CPDefinitionId1, type, 0, 1,
+		List<CPDefinitionLink> list = findByCPD_T(CPDefinitionId, type, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2796,19 +2786,19 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the last cp definition link in the ordered set where CPDefinitionId1 = &#63; and type = &#63;.
+	 * Returns the last cp definition link in the ordered set where CPDefinitionId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink findByC1_T_Last(long CPDefinitionId1, String type,
+	public CPDefinitionLink findByCPD_T_Last(long CPDefinitionId, String type,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
-		CPDefinitionLink cpDefinitionLink = fetchByC1_T_Last(CPDefinitionId1,
+		CPDefinitionLink cpDefinitionLink = fetchByCPD_T_Last(CPDefinitionId,
 				type, orderByComparator);
 
 		if (cpDefinitionLink != null) {
@@ -2819,8 +2809,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("CPDefinitionId1=");
-		msg.append(CPDefinitionId1);
+		msg.append("CPDefinitionId=");
+		msg.append(CPDefinitionId);
 
 		msg.append(", type=");
 		msg.append(type);
@@ -2831,23 +2821,23 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the last cp definition link in the ordered set where CPDefinitionId1 = &#63; and type = &#63;.
+	 * Returns the last cp definition link in the ordered set where CPDefinitionId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink fetchByC1_T_Last(long CPDefinitionId1, String type,
+	public CPDefinitionLink fetchByCPD_T_Last(long CPDefinitionId, String type,
 		OrderByComparator<CPDefinitionLink> orderByComparator) {
-		int count = countByC1_T(CPDefinitionId1, type);
+		int count = countByCPD_T(CPDefinitionId, type);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPDefinitionLink> list = findByC1_T(CPDefinitionId1, type,
+		List<CPDefinitionLink> list = findByCPD_T(CPDefinitionId, type,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2858,18 +2848,18 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the cp definition links before and after the current cp definition link in the ordered set where CPDefinitionId1 = &#63; and type = &#63;.
+	 * Returns the cp definition links before and after the current cp definition link in the ordered set where CPDefinitionId = &#63; and type = &#63;.
 	 *
 	 * @param CPDefinitionLinkId the primary key of the current cp definition link
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a cp definition link with the primary key could not be found
 	 */
 	@Override
-	public CPDefinitionLink[] findByC1_T_PrevAndNext(long CPDefinitionLinkId,
-		long CPDefinitionId1, String type,
+	public CPDefinitionLink[] findByCPD_T_PrevAndNext(long CPDefinitionLinkId,
+		long CPDefinitionId, String type,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
 		CPDefinitionLink cpDefinitionLink = findByPrimaryKey(CPDefinitionLinkId);
@@ -2881,13 +2871,13 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			CPDefinitionLink[] array = new CPDefinitionLinkImpl[3];
 
-			array[0] = getByC1_T_PrevAndNext(session, cpDefinitionLink,
-					CPDefinitionId1, type, orderByComparator, true);
+			array[0] = getByCPD_T_PrevAndNext(session, cpDefinitionLink,
+					CPDefinitionId, type, orderByComparator, true);
 
 			array[1] = cpDefinitionLink;
 
-			array[2] = getByC1_T_PrevAndNext(session, cpDefinitionLink,
-					CPDefinitionId1, type, orderByComparator, false);
+			array[2] = getByCPD_T_PrevAndNext(session, cpDefinitionLink,
+					CPDefinitionId, type, orderByComparator, false);
 
 			return array;
 		}
@@ -2899,8 +2889,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		}
 	}
 
-	protected CPDefinitionLink getByC1_T_PrevAndNext(Session session,
-		CPDefinitionLink cpDefinitionLink, long CPDefinitionId1, String type,
+	protected CPDefinitionLink getByCPD_T_PrevAndNext(Session session,
+		CPDefinitionLink cpDefinitionLink, long CPDefinitionId, String type,
 		OrderByComparator<CPDefinitionLink> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -2915,20 +2905,20 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		query.append(_SQL_SELECT_CPDEFINITIONLINK_WHERE);
 
-		query.append(_FINDER_COLUMN_C1_T_CPDEFINITIONID1_2);
+		query.append(_FINDER_COLUMN_CPD_T_CPDEFINITIONID_2);
 
 		boolean bindType = false;
 
 		if (type == null) {
-			query.append(_FINDER_COLUMN_C1_T_TYPE_1);
+			query.append(_FINDER_COLUMN_CPD_T_TYPE_1);
 		}
 		else if (type.equals("")) {
-			query.append(_FINDER_COLUMN_C1_T_TYPE_3);
+			query.append(_FINDER_COLUMN_CPD_T_TYPE_3);
 		}
 		else {
 			bindType = true;
 
-			query.append(_FINDER_COLUMN_C1_T_TYPE_2);
+			query.append(_FINDER_COLUMN_CPD_T_TYPE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -2999,7 +2989,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(CPDefinitionId1);
+		qPos.add(CPDefinitionId);
 
 		if (bindType) {
 			qPos.add(type);
@@ -3024,31 +3014,31 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Removes all the cp definition links where CPDefinitionId1 = &#63; and type = &#63; from the database.
+	 * Removes all the cp definition links where CPDefinitionId = &#63; and type = &#63; from the database.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 */
 	@Override
-	public void removeByC1_T(long CPDefinitionId1, String type) {
-		for (CPDefinitionLink cpDefinitionLink : findByC1_T(CPDefinitionId1,
+	public void removeByCPD_T(long CPDefinitionId, String type) {
+		for (CPDefinitionLink cpDefinitionLink : findByCPD_T(CPDefinitionId,
 				type, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(cpDefinitionLink);
 		}
 	}
 
 	/**
-	 * Returns the number of cp definition links where CPDefinitionId1 = &#63; and type = &#63;.
+	 * Returns the number of cp definition links where CPDefinitionId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
+	 * @param CPDefinitionId the cp definition ID
 	 * @param type the type
 	 * @return the number of matching cp definition links
 	 */
 	@Override
-	public int countByC1_T(long CPDefinitionId1, String type) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C1_T;
+	public int countByCPD_T(long CPDefinitionId, String type) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CPD_T;
 
-		Object[] finderArgs = new Object[] { CPDefinitionId1, type };
+		Object[] finderArgs = new Object[] { CPDefinitionId, type };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3057,20 +3047,20 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			query.append(_SQL_COUNT_CPDEFINITIONLINK_WHERE);
 
-			query.append(_FINDER_COLUMN_C1_T_CPDEFINITIONID1_2);
+			query.append(_FINDER_COLUMN_CPD_T_CPDEFINITIONID_2);
 
 			boolean bindType = false;
 
 			if (type == null) {
-				query.append(_FINDER_COLUMN_C1_T_TYPE_1);
+				query.append(_FINDER_COLUMN_CPD_T_TYPE_1);
 			}
 			else if (type.equals("")) {
-				query.append(_FINDER_COLUMN_C1_T_TYPE_3);
+				query.append(_FINDER_COLUMN_CPD_T_TYPE_3);
 			}
 			else {
 				bindType = true;
 
-				query.append(_FINDER_COLUMN_C1_T_TYPE_2);
+				query.append(_FINDER_COLUMN_CPD_T_TYPE_2);
 			}
 
 			String sql = query.toString();
@@ -3084,7 +3074,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId1);
+				qPos.add(CPDefinitionId);
 
 				if (bindType) {
 					qPos.add(type);
@@ -3107,73 +3097,73 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C1_T_CPDEFINITIONID1_2 = "cpDefinitionLink.CPDefinitionId1 = ? AND ";
-	private static final String _FINDER_COLUMN_C1_T_TYPE_1 = "cpDefinitionLink.type IS NULL";
-	private static final String _FINDER_COLUMN_C1_T_TYPE_2 = "cpDefinitionLink.type = ?";
-	private static final String _FINDER_COLUMN_C1_T_TYPE_3 = "(cpDefinitionLink.type IS NULL OR cpDefinitionLink.type = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C2_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_CPD_T_CPDEFINITIONID_2 = "cpDefinitionLink.CPDefinitionId = ? AND ";
+	private static final String _FINDER_COLUMN_CPD_T_TYPE_1 = "cpDefinitionLink.type IS NULL";
+	private static final String _FINDER_COLUMN_CPD_T_TYPE_2 = "cpDefinitionLink.type = ?";
+	private static final String _FINDER_COLUMN_CPD_T_TYPE_3 = "(cpDefinitionLink.type IS NULL OR cpDefinitionLink.type = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CP_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionLinkImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByC2_T",
+			"findByCP_T",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C2_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CP_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionLinkImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC2_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCP_T",
 			new String[] { Long.class.getName(), String.class.getName() },
-			CPDefinitionLinkModelImpl.CPDEFINITIONID2_COLUMN_BITMASK |
+			CPDefinitionLinkModelImpl.CPRODUCTID_COLUMN_BITMASK |
 			CPDefinitionLinkModelImpl.TYPE_COLUMN_BITMASK |
 			CPDefinitionLinkModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C2_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_CP_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC2_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCP_T",
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
-	 * Returns all the cp definition links where CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns all the cp definition links where CProductId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @return the matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByC2_T(long CPDefinitionId2, String type) {
-		return findByC2_T(CPDefinitionId2, type, QueryUtil.ALL_POS,
+	public List<CPDefinitionLink> findByCP_T(long CProductId, String type) {
+		return findByCP_T(CProductId, type, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the cp definition links where CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns a range of all the cp definition links where CProductId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @return the range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByC2_T(long CPDefinitionId2, String type,
+	public List<CPDefinitionLink> findByCP_T(long CProductId, String type,
 		int start, int end) {
-		return findByC2_T(CPDefinitionId2, type, start, end, null);
+		return findByCP_T(CProductId, type, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp definition links where CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp definition links where CProductId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
@@ -3181,21 +3171,20 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByC2_T(long CPDefinitionId2, String type,
+	public List<CPDefinitionLink> findByCP_T(long CProductId, String type,
 		int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator) {
-		return findByC2_T(CPDefinitionId2, type, start, end, orderByComparator,
-			true);
+		return findByCP_T(CProductId, type, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp definition links where CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp definition links where CProductId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionLinkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
@@ -3204,7 +3193,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
-	public List<CPDefinitionLink> findByC2_T(long CPDefinitionId2, String type,
+	public List<CPDefinitionLink> findByCP_T(long CProductId, String type,
 		int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
 		boolean retrieveFromCache) {
@@ -3215,13 +3204,13 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C2_T;
-			finderArgs = new Object[] { CPDefinitionId2, type };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CP_T;
+			finderArgs = new Object[] { CProductId, type };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C2_T;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CP_T;
 			finderArgs = new Object[] {
-					CPDefinitionId2, type,
+					CProductId, type,
 					
 					start, end, orderByComparator
 				};
@@ -3235,7 +3224,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionLink cpDefinitionLink : list) {
-					if ((CPDefinitionId2 != cpDefinitionLink.getCPDefinitionId2()) ||
+					if ((CProductId != cpDefinitionLink.getCProductId()) ||
 							!Objects.equals(type, cpDefinitionLink.getType())) {
 						list = null;
 
@@ -3258,20 +3247,20 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			query.append(_SQL_SELECT_CPDEFINITIONLINK_WHERE);
 
-			query.append(_FINDER_COLUMN_C2_T_CPDEFINITIONID2_2);
+			query.append(_FINDER_COLUMN_CP_T_CPRODUCTID_2);
 
 			boolean bindType = false;
 
 			if (type == null) {
-				query.append(_FINDER_COLUMN_C2_T_TYPE_1);
+				query.append(_FINDER_COLUMN_CP_T_TYPE_1);
 			}
 			else if (type.equals("")) {
-				query.append(_FINDER_COLUMN_C2_T_TYPE_3);
+				query.append(_FINDER_COLUMN_CP_T_TYPE_3);
 			}
 			else {
 				bindType = true;
 
-				query.append(_FINDER_COLUMN_C2_T_TYPE_2);
+				query.append(_FINDER_COLUMN_CP_T_TYPE_2);
 			}
 
 			if (orderByComparator != null) {
@@ -3294,7 +3283,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId2);
+				qPos.add(CProductId);
 
 				if (bindType) {
 					qPos.add(type);
@@ -3331,20 +3320,20 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the first cp definition link in the ordered set where CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns the first cp definition link in the ordered set where CProductId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink findByC2_T_First(long CPDefinitionId2, String type,
+	public CPDefinitionLink findByCP_T_First(long CProductId, String type,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
-		CPDefinitionLink cpDefinitionLink = fetchByC2_T_First(CPDefinitionId2,
-				type, orderByComparator);
+		CPDefinitionLink cpDefinitionLink = fetchByCP_T_First(CProductId, type,
+				orderByComparator);
 
 		if (cpDefinitionLink != null) {
 			return cpDefinitionLink;
@@ -3354,8 +3343,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("CPDefinitionId2=");
-		msg.append(CPDefinitionId2);
+		msg.append("CProductId=");
+		msg.append(CProductId);
 
 		msg.append(", type=");
 		msg.append(type);
@@ -3366,17 +3355,17 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the first cp definition link in the ordered set where CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns the first cp definition link in the ordered set where CProductId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink fetchByC2_T_First(long CPDefinitionId2,
-		String type, OrderByComparator<CPDefinitionLink> orderByComparator) {
-		List<CPDefinitionLink> list = findByC2_T(CPDefinitionId2, type, 0, 1,
+	public CPDefinitionLink fetchByCP_T_First(long CProductId, String type,
+		OrderByComparator<CPDefinitionLink> orderByComparator) {
+		List<CPDefinitionLink> list = findByCP_T(CProductId, type, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3387,20 +3376,20 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the last cp definition link in the ordered set where CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns the last cp definition link in the ordered set where CProductId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink findByC2_T_Last(long CPDefinitionId2, String type,
+	public CPDefinitionLink findByCP_T_Last(long CProductId, String type,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
-		CPDefinitionLink cpDefinitionLink = fetchByC2_T_Last(CPDefinitionId2,
-				type, orderByComparator);
+		CPDefinitionLink cpDefinitionLink = fetchByCP_T_Last(CProductId, type,
+				orderByComparator);
 
 		if (cpDefinitionLink != null) {
 			return cpDefinitionLink;
@@ -3410,8 +3399,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("CPDefinitionId2=");
-		msg.append(CPDefinitionId2);
+		msg.append("CProductId=");
+		msg.append(CProductId);
 
 		msg.append(", type=");
 		msg.append(type);
@@ -3422,24 +3411,24 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the last cp definition link in the ordered set where CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns the last cp definition link in the ordered set where CProductId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink fetchByC2_T_Last(long CPDefinitionId2, String type,
+	public CPDefinitionLink fetchByCP_T_Last(long CProductId, String type,
 		OrderByComparator<CPDefinitionLink> orderByComparator) {
-		int count = countByC2_T(CPDefinitionId2, type);
+		int count = countByCP_T(CProductId, type);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPDefinitionLink> list = findByC2_T(CPDefinitionId2, type,
-				count - 1, count, orderByComparator);
+		List<CPDefinitionLink> list = findByCP_T(CProductId, type, count - 1,
+				count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3449,18 +3438,18 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the cp definition links before and after the current cp definition link in the ordered set where CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns the cp definition links before and after the current cp definition link in the ordered set where CProductId = &#63; and type = &#63;.
 	 *
 	 * @param CPDefinitionLinkId the primary key of the current cp definition link
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a cp definition link with the primary key could not be found
 	 */
 	@Override
-	public CPDefinitionLink[] findByC2_T_PrevAndNext(long CPDefinitionLinkId,
-		long CPDefinitionId2, String type,
+	public CPDefinitionLink[] findByCP_T_PrevAndNext(long CPDefinitionLinkId,
+		long CProductId, String type,
 		OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws NoSuchCPDefinitionLinkException {
 		CPDefinitionLink cpDefinitionLink = findByPrimaryKey(CPDefinitionLinkId);
@@ -3472,13 +3461,13 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			CPDefinitionLink[] array = new CPDefinitionLinkImpl[3];
 
-			array[0] = getByC2_T_PrevAndNext(session, cpDefinitionLink,
-					CPDefinitionId2, type, orderByComparator, true);
+			array[0] = getByCP_T_PrevAndNext(session, cpDefinitionLink,
+					CProductId, type, orderByComparator, true);
 
 			array[1] = cpDefinitionLink;
 
-			array[2] = getByC2_T_PrevAndNext(session, cpDefinitionLink,
-					CPDefinitionId2, type, orderByComparator, false);
+			array[2] = getByCP_T_PrevAndNext(session, cpDefinitionLink,
+					CProductId, type, orderByComparator, false);
 
 			return array;
 		}
@@ -3490,8 +3479,8 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		}
 	}
 
-	protected CPDefinitionLink getByC2_T_PrevAndNext(Session session,
-		CPDefinitionLink cpDefinitionLink, long CPDefinitionId2, String type,
+	protected CPDefinitionLink getByCP_T_PrevAndNext(Session session,
+		CPDefinitionLink cpDefinitionLink, long CProductId, String type,
 		OrderByComparator<CPDefinitionLink> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -3506,20 +3495,20 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		query.append(_SQL_SELECT_CPDEFINITIONLINK_WHERE);
 
-		query.append(_FINDER_COLUMN_C2_T_CPDEFINITIONID2_2);
+		query.append(_FINDER_COLUMN_CP_T_CPRODUCTID_2);
 
 		boolean bindType = false;
 
 		if (type == null) {
-			query.append(_FINDER_COLUMN_C2_T_TYPE_1);
+			query.append(_FINDER_COLUMN_CP_T_TYPE_1);
 		}
 		else if (type.equals("")) {
-			query.append(_FINDER_COLUMN_C2_T_TYPE_3);
+			query.append(_FINDER_COLUMN_CP_T_TYPE_3);
 		}
 		else {
 			bindType = true;
 
-			query.append(_FINDER_COLUMN_C2_T_TYPE_2);
+			query.append(_FINDER_COLUMN_CP_T_TYPE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -3590,7 +3579,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(CPDefinitionId2);
+		qPos.add(CProductId);
 
 		if (bindType) {
 			qPos.add(type);
@@ -3615,31 +3604,31 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Removes all the cp definition links where CPDefinitionId2 = &#63; and type = &#63; from the database.
+	 * Removes all the cp definition links where CProductId = &#63; and type = &#63; from the database.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 */
 	@Override
-	public void removeByC2_T(long CPDefinitionId2, String type) {
-		for (CPDefinitionLink cpDefinitionLink : findByC2_T(CPDefinitionId2,
-				type, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByCP_T(long CProductId, String type) {
+		for (CPDefinitionLink cpDefinitionLink : findByCP_T(CProductId, type,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(cpDefinitionLink);
 		}
 	}
 
 	/**
-	 * Returns the number of cp definition links where CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns the number of cp definition links where CProductId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @return the number of matching cp definition links
 	 */
 	@Override
-	public int countByC2_T(long CPDefinitionId2, String type) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C2_T;
+	public int countByCP_T(long CProductId, String type) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CP_T;
 
-		Object[] finderArgs = new Object[] { CPDefinitionId2, type };
+		Object[] finderArgs = new Object[] { CProductId, type };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3648,20 +3637,20 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			query.append(_SQL_COUNT_CPDEFINITIONLINK_WHERE);
 
-			query.append(_FINDER_COLUMN_C2_T_CPDEFINITIONID2_2);
+			query.append(_FINDER_COLUMN_CP_T_CPRODUCTID_2);
 
 			boolean bindType = false;
 
 			if (type == null) {
-				query.append(_FINDER_COLUMN_C2_T_TYPE_1);
+				query.append(_FINDER_COLUMN_CP_T_TYPE_1);
 			}
 			else if (type.equals("")) {
-				query.append(_FINDER_COLUMN_C2_T_TYPE_3);
+				query.append(_FINDER_COLUMN_CP_T_TYPE_3);
 			}
 			else {
 				bindType = true;
 
-				query.append(_FINDER_COLUMN_C2_T_TYPE_2);
+				query.append(_FINDER_COLUMN_CP_T_TYPE_2);
 			}
 
 			String sql = query.toString();
@@ -3675,7 +3664,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId2);
+				qPos.add(CProductId);
 
 				if (bindType) {
 					qPos.add(type);
@@ -3698,55 +3687,54 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C2_T_CPDEFINITIONID2_2 = "cpDefinitionLink.CPDefinitionId2 = ? AND ";
-	private static final String _FINDER_COLUMN_C2_T_TYPE_1 = "cpDefinitionLink.type IS NULL";
-	private static final String _FINDER_COLUMN_C2_T_TYPE_2 = "cpDefinitionLink.type = ?";
-	private static final String _FINDER_COLUMN_C2_T_TYPE_3 = "(cpDefinitionLink.type IS NULL OR cpDefinitionLink.type = '')";
-	public static final FinderPath FINDER_PATH_FETCH_BY_C1_C2_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_CP_T_CPRODUCTID_2 = "cpDefinitionLink.CProductId = ? AND ";
+	private static final String _FINDER_COLUMN_CP_T_TYPE_1 = "cpDefinitionLink.type IS NULL";
+	private static final String _FINDER_COLUMN_CP_T_TYPE_2 = "cpDefinitionLink.type = ?";
+	private static final String _FINDER_COLUMN_CP_T_TYPE_3 = "(cpDefinitionLink.type IS NULL OR cpDefinitionLink.type = '')";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_C_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionLinkImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByC1_C2_T",
+			"fetchByC_C_T",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
 			},
-			CPDefinitionLinkModelImpl.CPDEFINITIONID1_COLUMN_BITMASK |
-			CPDefinitionLinkModelImpl.CPDEFINITIONID2_COLUMN_BITMASK |
+			CPDefinitionLinkModelImpl.CPDEFINITIONID_COLUMN_BITMASK |
+			CPDefinitionLinkModelImpl.CPRODUCTID_COLUMN_BITMASK |
 			CPDefinitionLinkModelImpl.TYPE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C1_C2_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_T = new FinderPath(CPDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionLinkModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC1_C2_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C_T",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
 			});
 
 	/**
-	 * Returns the cp definition link where CPDefinitionId1 = &#63; and CPDefinitionId2 = &#63; and type = &#63; or throws a {@link NoSuchCPDefinitionLinkException} if it could not be found.
+	 * Returns the cp definition link where CPDefinitionId = &#63; and CProductId = &#63; and type = &#63; or throws a {@link NoSuchCPDefinitionLinkException} if it could not be found.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @return the matching cp definition link
 	 * @throws NoSuchCPDefinitionLinkException if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink findByC1_C2_T(long CPDefinitionId1,
-		long CPDefinitionId2, String type)
-		throws NoSuchCPDefinitionLinkException {
-		CPDefinitionLink cpDefinitionLink = fetchByC1_C2_T(CPDefinitionId1,
-				CPDefinitionId2, type);
+	public CPDefinitionLink findByC_C_T(long CPDefinitionId, long CProductId,
+		String type) throws NoSuchCPDefinitionLinkException {
+		CPDefinitionLink cpDefinitionLink = fetchByC_C_T(CPDefinitionId,
+				CProductId, type);
 
 		if (cpDefinitionLink == null) {
 			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("CPDefinitionId1=");
-			msg.append(CPDefinitionId1);
+			msg.append("CPDefinitionId=");
+			msg.append(CPDefinitionId);
 
-			msg.append(", CPDefinitionId2=");
-			msg.append(CPDefinitionId2);
+			msg.append(", CProductId=");
+			msg.append(CProductId);
 
 			msg.append(", type=");
 			msg.append(type);
@@ -3764,47 +3752,45 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Returns the cp definition link where CPDefinitionId1 = &#63; and CPDefinitionId2 = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cp definition link where CPDefinitionId = &#63; and CProductId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @return the matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink fetchByC1_C2_T(long CPDefinitionId1,
-		long CPDefinitionId2, String type) {
-		return fetchByC1_C2_T(CPDefinitionId1, CPDefinitionId2, type, true);
+	public CPDefinitionLink fetchByC_C_T(long CPDefinitionId, long CProductId,
+		String type) {
+		return fetchByC_C_T(CPDefinitionId, CProductId, type, true);
 	}
 
 	/**
-	 * Returns the cp definition link where CPDefinitionId1 = &#63; and CPDefinitionId2 = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the cp definition link where CPDefinitionId = &#63; and CProductId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
-	public CPDefinitionLink fetchByC1_C2_T(long CPDefinitionId1,
-		long CPDefinitionId2, String type, boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] {
-				CPDefinitionId1, CPDefinitionId2, type
-			};
+	public CPDefinitionLink fetchByC_C_T(long CPDefinitionId, long CProductId,
+		String type, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { CPDefinitionId, CProductId, type };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C1_C2_T,
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_C_T,
 					finderArgs, this);
 		}
 
 		if (result instanceof CPDefinitionLink) {
 			CPDefinitionLink cpDefinitionLink = (CPDefinitionLink)result;
 
-			if ((CPDefinitionId1 != cpDefinitionLink.getCPDefinitionId1()) ||
-					(CPDefinitionId2 != cpDefinitionLink.getCPDefinitionId2()) ||
+			if ((CPDefinitionId != cpDefinitionLink.getCPDefinitionId()) ||
+					(CProductId != cpDefinitionLink.getCProductId()) ||
 					!Objects.equals(type, cpDefinitionLink.getType())) {
 				result = null;
 			}
@@ -3815,22 +3801,22 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			query.append(_SQL_SELECT_CPDEFINITIONLINK_WHERE);
 
-			query.append(_FINDER_COLUMN_C1_C2_T_CPDEFINITIONID1_2);
+			query.append(_FINDER_COLUMN_C_C_T_CPDEFINITIONID_2);
 
-			query.append(_FINDER_COLUMN_C1_C2_T_CPDEFINITIONID2_2);
+			query.append(_FINDER_COLUMN_C_C_T_CPRODUCTID_2);
 
 			boolean bindType = false;
 
 			if (type == null) {
-				query.append(_FINDER_COLUMN_C1_C2_T_TYPE_1);
+				query.append(_FINDER_COLUMN_C_C_T_TYPE_1);
 			}
 			else if (type.equals("")) {
-				query.append(_FINDER_COLUMN_C1_C2_T_TYPE_3);
+				query.append(_FINDER_COLUMN_C_C_T_TYPE_3);
 			}
 			else {
 				bindType = true;
 
-				query.append(_FINDER_COLUMN_C1_C2_T_TYPE_2);
+				query.append(_FINDER_COLUMN_C_C_T_TYPE_2);
 			}
 
 			String sql = query.toString();
@@ -3844,9 +3830,9 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId1);
+				qPos.add(CPDefinitionId);
 
-				qPos.add(CPDefinitionId2);
+				qPos.add(CProductId);
 
 				if (bindType) {
 					qPos.add(type);
@@ -3855,7 +3841,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 				List<CPDefinitionLink> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_C1_C2_T,
+					finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_T,
 						finderArgs, list);
 				}
 				else {
@@ -3867,8 +3853,7 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_C1_C2_T,
-					finderArgs);
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_T, finderArgs);
 
 				throw processException(e);
 			}
@@ -3886,39 +3871,35 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 	}
 
 	/**
-	 * Removes the cp definition link where CPDefinitionId1 = &#63; and CPDefinitionId2 = &#63; and type = &#63; from the database.
+	 * Removes the cp definition link where CPDefinitionId = &#63; and CProductId = &#63; and type = &#63; from the database.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @return the cp definition link that was removed
 	 */
 	@Override
-	public CPDefinitionLink removeByC1_C2_T(long CPDefinitionId1,
-		long CPDefinitionId2, String type)
-		throws NoSuchCPDefinitionLinkException {
-		CPDefinitionLink cpDefinitionLink = findByC1_C2_T(CPDefinitionId1,
-				CPDefinitionId2, type);
+	public CPDefinitionLink removeByC_C_T(long CPDefinitionId, long CProductId,
+		String type) throws NoSuchCPDefinitionLinkException {
+		CPDefinitionLink cpDefinitionLink = findByC_C_T(CPDefinitionId,
+				CProductId, type);
 
 		return remove(cpDefinitionLink);
 	}
 
 	/**
-	 * Returns the number of cp definition links where CPDefinitionId1 = &#63; and CPDefinitionId2 = &#63; and type = &#63;.
+	 * Returns the number of cp definition links where CPDefinitionId = &#63; and CProductId = &#63; and type = &#63;.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1
-	 * @param CPDefinitionId2 the cp definition id2
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CProductId the c product ID
 	 * @param type the type
 	 * @return the number of matching cp definition links
 	 */
 	@Override
-	public int countByC1_C2_T(long CPDefinitionId1, long CPDefinitionId2,
-		String type) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C1_C2_T;
+	public int countByC_C_T(long CPDefinitionId, long CProductId, String type) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C_T;
 
-		Object[] finderArgs = new Object[] {
-				CPDefinitionId1, CPDefinitionId2, type
-			};
+		Object[] finderArgs = new Object[] { CPDefinitionId, CProductId, type };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3927,22 +3908,22 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 			query.append(_SQL_COUNT_CPDEFINITIONLINK_WHERE);
 
-			query.append(_FINDER_COLUMN_C1_C2_T_CPDEFINITIONID1_2);
+			query.append(_FINDER_COLUMN_C_C_T_CPDEFINITIONID_2);
 
-			query.append(_FINDER_COLUMN_C1_C2_T_CPDEFINITIONID2_2);
+			query.append(_FINDER_COLUMN_C_C_T_CPRODUCTID_2);
 
 			boolean bindType = false;
 
 			if (type == null) {
-				query.append(_FINDER_COLUMN_C1_C2_T_TYPE_1);
+				query.append(_FINDER_COLUMN_C_C_T_TYPE_1);
 			}
 			else if (type.equals("")) {
-				query.append(_FINDER_COLUMN_C1_C2_T_TYPE_3);
+				query.append(_FINDER_COLUMN_C_C_T_TYPE_3);
 			}
 			else {
 				bindType = true;
 
-				query.append(_FINDER_COLUMN_C1_C2_T_TYPE_2);
+				query.append(_FINDER_COLUMN_C_C_T_TYPE_2);
 			}
 
 			String sql = query.toString();
@@ -3956,9 +3937,9 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId1);
+				qPos.add(CPDefinitionId);
 
-				qPos.add(CPDefinitionId2);
+				qPos.add(CProductId);
 
 				if (bindType) {
 					qPos.add(type);
@@ -3981,11 +3962,11 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C1_C2_T_CPDEFINITIONID1_2 = "cpDefinitionLink.CPDefinitionId1 = ? AND ";
-	private static final String _FINDER_COLUMN_C1_C2_T_CPDEFINITIONID2_2 = "cpDefinitionLink.CPDefinitionId2 = ? AND ";
-	private static final String _FINDER_COLUMN_C1_C2_T_TYPE_1 = "cpDefinitionLink.type IS NULL";
-	private static final String _FINDER_COLUMN_C1_C2_T_TYPE_2 = "cpDefinitionLink.type = ?";
-	private static final String _FINDER_COLUMN_C1_C2_T_TYPE_3 = "(cpDefinitionLink.type IS NULL OR cpDefinitionLink.type = '')";
+	private static final String _FINDER_COLUMN_C_C_T_CPDEFINITIONID_2 = "cpDefinitionLink.CPDefinitionId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_T_CPRODUCTID_2 = "cpDefinitionLink.CProductId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_T_TYPE_1 = "cpDefinitionLink.type IS NULL";
+	private static final String _FINDER_COLUMN_C_C_T_TYPE_2 = "cpDefinitionLink.type = ?";
+	private static final String _FINDER_COLUMN_C_C_T_TYPE_3 = "(cpDefinitionLink.type IS NULL OR cpDefinitionLink.type = '')";
 
 	public CPDefinitionLinkPersistenceImpl() {
 		setModelClass(CPDefinitionLink.class);
@@ -4026,11 +4007,10 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 				cpDefinitionLink.getUuid(), cpDefinitionLink.getGroupId()
 			}, cpDefinitionLink);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C1_C2_T,
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_T,
 			new Object[] {
-				cpDefinitionLink.getCPDefinitionId1(),
-				cpDefinitionLink.getCPDefinitionId2(),
-				cpDefinitionLink.getType()
+				cpDefinitionLink.getCPDefinitionId(),
+				cpDefinitionLink.getCProductId(), cpDefinitionLink.getType()
 			}, cpDefinitionLink);
 
 		cpDefinitionLink.resetOriginalValues();
@@ -4118,14 +4098,14 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 			cpDefinitionLinkModelImpl, false);
 
 		args = new Object[] {
-				cpDefinitionLinkModelImpl.getCPDefinitionId1(),
-				cpDefinitionLinkModelImpl.getCPDefinitionId2(),
+				cpDefinitionLinkModelImpl.getCPDefinitionId(),
+				cpDefinitionLinkModelImpl.getCProductId(),
 				cpDefinitionLinkModelImpl.getType()
 			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_C1_C2_T, args,
+		finderCache.putResult(FINDER_PATH_COUNT_BY_C_C_T, args,
 			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C1_C2_T, args,
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_T, args,
 			cpDefinitionLinkModelImpl, false);
 	}
 
@@ -4155,25 +4135,25 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					cpDefinitionLinkModelImpl.getCPDefinitionId1(),
-					cpDefinitionLinkModelImpl.getCPDefinitionId2(),
+					cpDefinitionLinkModelImpl.getCPDefinitionId(),
+					cpDefinitionLinkModelImpl.getCProductId(),
 					cpDefinitionLinkModelImpl.getType()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C1_C2_T, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C1_C2_T, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C_T, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_T, args);
 		}
 
 		if ((cpDefinitionLinkModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_C1_C2_T.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_C_C_T.getColumnBitmask()) != 0) {
 			Object[] args = new Object[] {
-					cpDefinitionLinkModelImpl.getOriginalCPDefinitionId1(),
-					cpDefinitionLinkModelImpl.getOriginalCPDefinitionId2(),
+					cpDefinitionLinkModelImpl.getOriginalCPDefinitionId(),
+					cpDefinitionLinkModelImpl.getOriginalCProductId(),
 					cpDefinitionLinkModelImpl.getOriginalType()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C1_C2_T, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C1_C2_T, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C_T, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_T, args);
 		}
 	}
 
@@ -4376,34 +4356,34 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
 				args);
 
-			args = new Object[] { cpDefinitionLinkModelImpl.getCPDefinitionId1() };
+			args = new Object[] { cpDefinitionLinkModelImpl.getCPDefinitionId() };
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID1, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID1,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID,
 				args);
 
-			args = new Object[] { cpDefinitionLinkModelImpl.getCPDefinitionId2() };
+			args = new Object[] { cpDefinitionLinkModelImpl.getCProductId() };
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID2, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID2,
-				args);
-
-			args = new Object[] {
-					cpDefinitionLinkModelImpl.getCPDefinitionId1(),
-					cpDefinitionLinkModelImpl.getType()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C1_T, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C1_T,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID,
 				args);
 
 			args = new Object[] {
-					cpDefinitionLinkModelImpl.getCPDefinitionId2(),
+					cpDefinitionLinkModelImpl.getCPDefinitionId(),
 					cpDefinitionLinkModelImpl.getType()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C2_T, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C2_T,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_CPD_T, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPD_T,
+				args);
+
+			args = new Object[] {
+					cpDefinitionLinkModelImpl.getCProductId(),
+					cpDefinitionLinkModelImpl.getType()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_CP_T, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CP_T,
 				args);
 
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
@@ -4451,86 +4431,82 @@ public class CPDefinitionLinkPersistenceImpl extends BasePersistenceImpl<CPDefin
 			}
 
 			if ((cpDefinitionLinkModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID1.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						cpDefinitionLinkModelImpl.getOriginalCPDefinitionId1()
+						cpDefinitionLinkModelImpl.getOriginalCPDefinitionId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID1,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID,
 					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID1,
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID,
 					args);
 
 				args = new Object[] {
-						cpDefinitionLinkModelImpl.getCPDefinitionId1()
+						cpDefinitionLinkModelImpl.getCPDefinitionId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID1,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID,
 					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID1,
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID,
 					args);
 			}
 
 			if ((cpDefinitionLinkModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID2.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						cpDefinitionLinkModelImpl.getOriginalCPDefinitionId2()
+						cpDefinitionLinkModelImpl.getOriginalCProductId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID2,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID2,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID,
 					args);
 
-				args = new Object[] {
-						cpDefinitionLinkModelImpl.getCPDefinitionId2()
-					};
+				args = new Object[] { cpDefinitionLinkModelImpl.getCProductId() };
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPDEFINITIONID2,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPDEFINITIONID2,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPRODUCTID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPRODUCTID,
 					args);
 			}
 
 			if ((cpDefinitionLinkModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C1_T.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPD_T.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						cpDefinitionLinkModelImpl.getOriginalCPDefinitionId1(),
+						cpDefinitionLinkModelImpl.getOriginalCPDefinitionId(),
 						cpDefinitionLinkModelImpl.getOriginalType()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C1_T, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C1_T,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPD_T, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPD_T,
 					args);
 
 				args = new Object[] {
-						cpDefinitionLinkModelImpl.getCPDefinitionId1(),
+						cpDefinitionLinkModelImpl.getCPDefinitionId(),
 						cpDefinitionLinkModelImpl.getType()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C1_T, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C1_T,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_CPD_T, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CPD_T,
 					args);
 			}
 
 			if ((cpDefinitionLinkModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C2_T.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CP_T.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						cpDefinitionLinkModelImpl.getOriginalCPDefinitionId2(),
+						cpDefinitionLinkModelImpl.getOriginalCProductId(),
 						cpDefinitionLinkModelImpl.getOriginalType()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C2_T, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C2_T,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_CP_T, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CP_T,
 					args);
 
 				args = new Object[] {
-						cpDefinitionLinkModelImpl.getCPDefinitionId2(),
+						cpDefinitionLinkModelImpl.getCProductId(),
 						cpDefinitionLinkModelImpl.getType()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_C2_T, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C2_T,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_CP_T, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CP_T,
 					args);
 			}
 		}

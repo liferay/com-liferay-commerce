@@ -71,8 +71,9 @@ public class CommercePriceEntryWrapper implements CommercePriceEntry,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CPInstanceId", getCPInstanceId());
 		attributes.put("commercePriceListId", getCommercePriceListId());
+		attributes.put("CPInstanceUuid", getCPInstanceUuid());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("price", getPrice());
 		attributes.put("promoPrice", getPromoPrice());
 		attributes.put("hasTierPrice", isHasTierPrice());
@@ -138,16 +139,22 @@ public class CommercePriceEntryWrapper implements CommercePriceEntry,
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CPInstanceId = (Long)attributes.get("CPInstanceId");
-
-		if (CPInstanceId != null) {
-			setCPInstanceId(CPInstanceId);
-		}
-
 		Long commercePriceListId = (Long)attributes.get("commercePriceListId");
 
 		if (commercePriceListId != null) {
 			setCommercePriceListId(commercePriceListId);
+		}
+
+		String CPInstanceUuid = (String)attributes.get("CPInstanceUuid");
+
+		if (CPInstanceUuid != null) {
+			setCPInstanceUuid(CPInstanceUuid);
+		}
+
+		Long CProductId = (Long)attributes.get("CProductId");
+
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		BigDecimal price = (BigDecimal)attributes.get("price");
@@ -228,13 +235,23 @@ public class CommercePriceEntryWrapper implements CommercePriceEntry,
 	}
 
 	/**
-	* Returns the cp instance ID of this commerce price entry.
+	* Returns the cp instance uuid of this commerce price entry.
 	*
-	* @return the cp instance ID of this commerce price entry
+	* @return the cp instance uuid of this commerce price entry
 	*/
 	@Override
-	public long getCPInstanceId() {
-		return _commercePriceEntry.getCPInstanceId();
+	public String getCPInstanceUuid() {
+		return _commercePriceEntry.getCPInstanceUuid();
+	}
+
+	/**
+	* Returns the c product ID of this commerce price entry.
+	*
+	* @return the c product ID of this commerce price entry
+	*/
+	@Override
+	public long getCProductId() {
+		return _commercePriceEntry.getCProductId();
 	}
 
 	/**
@@ -462,13 +479,23 @@ public class CommercePriceEntryWrapper implements CommercePriceEntry,
 	}
 
 	/**
-	* Sets the cp instance ID of this commerce price entry.
+	* Sets the cp instance uuid of this commerce price entry.
 	*
-	* @param CPInstanceId the cp instance ID of this commerce price entry
+	* @param CPInstanceUuid the cp instance uuid of this commerce price entry
 	*/
 	@Override
-	public void setCPInstanceId(long CPInstanceId) {
-		_commercePriceEntry.setCPInstanceId(CPInstanceId);
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_commercePriceEntry.setCPInstanceUuid(CPInstanceUuid);
+	}
+
+	/**
+	* Sets the c product ID of this commerce price entry.
+	*
+	* @param CProductId the c product ID of this commerce price entry
+	*/
+	@Override
+	public void setCProductId(long CProductId) {
+		_commercePriceEntry.setCProductId(CProductId);
 	}
 
 	/**

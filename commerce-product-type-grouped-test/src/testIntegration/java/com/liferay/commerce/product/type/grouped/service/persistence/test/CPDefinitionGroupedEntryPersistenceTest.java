@@ -141,7 +141,7 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 
 		newCPDefinitionGroupedEntry.setCPDefinitionId(RandomTestUtil.nextLong());
 
-		newCPDefinitionGroupedEntry.setEntryCPDefinitionId(RandomTestUtil.nextLong());
+		newCPDefinitionGroupedEntry.setEntryCProductId(RandomTestUtil.nextLong());
 
 		newCPDefinitionGroupedEntry.setPriority(RandomTestUtil.nextDouble());
 
@@ -173,8 +173,8 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 				newCPDefinitionGroupedEntry.getModifiedDate()));
 		Assert.assertEquals(existingCPDefinitionGroupedEntry.getCPDefinitionId(),
 			newCPDefinitionGroupedEntry.getCPDefinitionId());
-		Assert.assertEquals(existingCPDefinitionGroupedEntry.getEntryCPDefinitionId(),
-			newCPDefinitionGroupedEntry.getEntryCPDefinitionId());
+		Assert.assertEquals(existingCPDefinitionGroupedEntry.getEntryCProductId(),
+			newCPDefinitionGroupedEntry.getEntryCProductId());
 		AssertUtils.assertEquals(existingCPDefinitionGroupedEntry.getPriority(),
 			newCPDefinitionGroupedEntry.getPriority());
 		Assert.assertEquals(existingCPDefinitionGroupedEntry.getQuantity(),
@@ -251,7 +251,7 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 			"uuid", true, "CPDefinitionGroupedEntryId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "CPDefinitionId", true,
-			"entryCPDefinitionId", true, "priority", true, "quantity", true);
+			"entryCProductId", true, "priority", true, "quantity", true);
 	}
 
 	@Test
@@ -481,9 +481,9 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 			ReflectionTestUtil.<Long>invoke(existingCPDefinitionGroupedEntry,
 				"getOriginalCPDefinitionId", new Class<?>[0]));
 		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionGroupedEntry.getEntryCPDefinitionId()),
+				existingCPDefinitionGroupedEntry.getEntryCProductId()),
 			ReflectionTestUtil.<Long>invoke(existingCPDefinitionGroupedEntry,
-				"getOriginalEntryCPDefinitionId", new Class<?>[0]));
+				"getOriginalEntryCProductId", new Class<?>[0]));
 	}
 
 	protected CPDefinitionGroupedEntry addCPDefinitionGroupedEntry()
@@ -508,7 +508,7 @@ public class CPDefinitionGroupedEntryPersistenceTest {
 
 		cpDefinitionGroupedEntry.setCPDefinitionId(RandomTestUtil.nextLong());
 
-		cpDefinitionGroupedEntry.setEntryCPDefinitionId(RandomTestUtil.nextLong());
+		cpDefinitionGroupedEntry.setEntryCProductId(RandomTestUtil.nextLong());
 
 		cpDefinitionGroupedEntry.setPriority(RandomTestUtil.nextDouble());
 

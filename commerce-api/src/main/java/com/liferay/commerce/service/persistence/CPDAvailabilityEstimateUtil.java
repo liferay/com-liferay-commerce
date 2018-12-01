@@ -515,65 +515,6 @@ public class CPDAvailabilityEstimateUtil {
 	}
 
 	/**
-	* Returns the cpd availability estimate where CPDefinitionId = &#63; or throws a {@link NoSuchCPDAvailabilityEstimateException} if it could not be found.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @return the matching cpd availability estimate
-	* @throws NoSuchCPDAvailabilityEstimateException if a matching cpd availability estimate could not be found
-	*/
-	public static CPDAvailabilityEstimate findByCPDefinitionId(
-		long CPDefinitionId)
-		throws com.liferay.commerce.exception.NoSuchCPDAvailabilityEstimateException {
-		return getPersistence().findByCPDefinitionId(CPDefinitionId);
-	}
-
-	/**
-	* Returns the cpd availability estimate where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
-	*/
-	public static CPDAvailabilityEstimate fetchByCPDefinitionId(
-		long CPDefinitionId) {
-		return getPersistence().fetchByCPDefinitionId(CPDefinitionId);
-	}
-
-	/**
-	* Returns the cpd availability estimate where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
-	*/
-	public static CPDAvailabilityEstimate fetchByCPDefinitionId(
-		long CPDefinitionId, boolean retrieveFromCache) {
-		return getPersistence()
-				   .fetchByCPDefinitionId(CPDefinitionId, retrieveFromCache);
-	}
-
-	/**
-	* Removes the cpd availability estimate where CPDefinitionId = &#63; from the database.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @return the cpd availability estimate that was removed
-	*/
-	public static CPDAvailabilityEstimate removeByCPDefinitionId(
-		long CPDefinitionId)
-		throws com.liferay.commerce.exception.NoSuchCPDAvailabilityEstimateException {
-		return getPersistence().removeByCPDefinitionId(CPDefinitionId);
-	}
-
-	/**
-	* Returns the number of cpd availability estimates where CPDefinitionId = &#63;.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @return the number of matching cpd availability estimates
-	*/
-	public static int countByCPDefinitionId(long CPDefinitionId) {
-		return getPersistence().countByCPDefinitionId(CPDefinitionId);
-	}
-
-	/**
 	* Returns all the cpd availability estimates where commerceAvailabilityEstimateId = &#63;.
 	*
 	* @param commerceAvailabilityEstimateId the commerce availability estimate ID
@@ -751,6 +692,61 @@ public class CPDAvailabilityEstimateUtil {
 		long commerceAvailabilityEstimateId) {
 		return getPersistence()
 				   .countByCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
+	}
+
+	/**
+	* Returns the cpd availability estimate where CProductId = &#63; or throws a {@link NoSuchCPDAvailabilityEstimateException} if it could not be found.
+	*
+	* @param CProductId the c product ID
+	* @return the matching cpd availability estimate
+	* @throws NoSuchCPDAvailabilityEstimateException if a matching cpd availability estimate could not be found
+	*/
+	public static CPDAvailabilityEstimate findByCProductId(long CProductId)
+		throws com.liferay.commerce.exception.NoSuchCPDAvailabilityEstimateException {
+		return getPersistence().findByCProductId(CProductId);
+	}
+
+	/**
+	* Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param CProductId the c product ID
+	* @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
+	*/
+	public static CPDAvailabilityEstimate fetchByCProductId(long CProductId) {
+		return getPersistence().fetchByCProductId(CProductId);
+	}
+
+	/**
+	* Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param CProductId the c product ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
+	*/
+	public static CPDAvailabilityEstimate fetchByCProductId(long CProductId,
+		boolean retrieveFromCache) {
+		return getPersistence().fetchByCProductId(CProductId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the cpd availability estimate where CProductId = &#63; from the database.
+	*
+	* @param CProductId the c product ID
+	* @return the cpd availability estimate that was removed
+	*/
+	public static CPDAvailabilityEstimate removeByCProductId(long CProductId)
+		throws com.liferay.commerce.exception.NoSuchCPDAvailabilityEstimateException {
+		return getPersistence().removeByCProductId(CProductId);
+	}
+
+	/**
+	* Returns the number of cpd availability estimates where CProductId = &#63;.
+	*
+	* @param CProductId the c product ID
+	* @return the number of matching cpd availability estimates
+	*/
+	public static int countByCProductId(long CProductId) {
+		return getPersistence().countByCProductId(CProductId);
 	}
 
 	/**

@@ -64,6 +64,15 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 			commerceOrderItemId, serviceContext);
 	}
 
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry addCommerceSubscriptionEntry(
+		String cpInstanceUuid, long cProductId, long commerceOrderItemId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceSubscriptionEntry(cpInstanceUuid, cProductId,
+			commerceOrderItemId, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce subscription entry with the primary key. Does not add the commerce subscription entry to the database.
 	*

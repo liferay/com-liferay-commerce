@@ -43,7 +43,8 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCPInstanceId(model.getCPInstanceId());
+		soapModel.setCPInstanceUuid(model.getCPInstanceUuid());
+		soapModel.setCProductId(model.getCProductId());
 		soapModel.setCommerceOrderItemId(model.getCommerceOrderItemId());
 		soapModel.setSubscriptionLength(model.getSubscriptionLength());
 		soapModel.setSubscriptionType(model.getSubscriptionType());
@@ -172,12 +173,20 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCPInstanceId() {
-		return _CPInstanceId;
+	public String getCPInstanceUuid() {
+		return _CPInstanceUuid;
 	}
 
-	public void setCPInstanceId(long CPInstanceId) {
-		_CPInstanceId = CPInstanceId;
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_CPInstanceUuid = CPInstanceUuid;
+	}
+
+	public long getCProductId() {
+		return _CProductId;
+	}
+
+	public void setCProductId(long CProductId) {
+		_CProductId = CProductId;
 	}
 
 	public long getCommerceOrderItemId() {
@@ -260,7 +269,8 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _CPInstanceId;
+	private String _CPInstanceUuid;
+	private long _CProductId;
 	private long _commerceOrderItemId;
 	private int _subscriptionLength;
 	private String _subscriptionType;

@@ -40,7 +40,6 @@ import com.liferay.commerce.service.persistence.CommerceSubscriptionCycleEntryPe
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryFinder;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryPersistence;
 import com.liferay.commerce.service.persistence.CommerceWarehouseFinder;
-import com.liferay.commerce.service.persistence.CommerceWarehouseItemFinder;
 import com.liferay.commerce.service.persistence.CommerceWarehouseItemPersistence;
 import com.liferay.commerce.service.persistence.CommerceWarehousePersistence;
 
@@ -1182,25 +1181,6 @@ public abstract class CommerceRegionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce warehouse item finder.
-	 *
-	 * @return the commerce warehouse item finder
-	 */
-	public CommerceWarehouseItemFinder getCommerceWarehouseItemFinder() {
-		return commerceWarehouseItemFinder;
-	}
-
-	/**
-	 * Sets the commerce warehouse item finder.
-	 *
-	 * @param commerceWarehouseItemFinder the commerce warehouse item finder
-	 */
-	public void setCommerceWarehouseItemFinder(
-		CommerceWarehouseItemFinder commerceWarehouseItemFinder) {
-		this.commerceWarehouseItemFinder = commerceWarehouseItemFinder;
-	}
-
-	/**
 	 * Returns the cpd availability estimate local service.
 	 *
 	 * @return the cpd availability estimate local service
@@ -1517,8 +1497,6 @@ public abstract class CommerceRegionLocalServiceBaseImpl
 	protected com.liferay.commerce.service.CommerceWarehouseItemLocalService commerceWarehouseItemLocalService;
 	@BeanReference(type = CommerceWarehouseItemPersistence.class)
 	protected CommerceWarehouseItemPersistence commerceWarehouseItemPersistence;
-	@BeanReference(type = CommerceWarehouseItemFinder.class)
-	protected CommerceWarehouseItemFinder commerceWarehouseItemFinder;
 	@BeanReference(type = com.liferay.commerce.service.CPDAvailabilityEstimateLocalService.class)
 	protected com.liferay.commerce.service.CPDAvailabilityEstimateLocalService cpdAvailabilityEstimateLocalService;
 	@BeanReference(type = CPDAvailabilityEstimatePersistence.class)

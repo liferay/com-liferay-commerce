@@ -139,9 +139,9 @@ public class CPDefinitionLinkPersistenceTest {
 
 		newCPDefinitionLink.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCPDefinitionLink.setCPDefinitionId1(RandomTestUtil.nextLong());
+		newCPDefinitionLink.setCPDefinitionId(RandomTestUtil.nextLong());
 
-		newCPDefinitionLink.setCPDefinitionId2(RandomTestUtil.nextLong());
+		newCPDefinitionLink.setCProductId(RandomTestUtil.nextLong());
 
 		newCPDefinitionLink.setPriority(RandomTestUtil.nextDouble());
 
@@ -169,10 +169,10 @@ public class CPDefinitionLinkPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPDefinitionLink.getModifiedDate()),
 			Time.getShortTimestamp(newCPDefinitionLink.getModifiedDate()));
-		Assert.assertEquals(existingCPDefinitionLink.getCPDefinitionId1(),
-			newCPDefinitionLink.getCPDefinitionId1());
-		Assert.assertEquals(existingCPDefinitionLink.getCPDefinitionId2(),
-			newCPDefinitionLink.getCPDefinitionId2());
+		Assert.assertEquals(existingCPDefinitionLink.getCPDefinitionId(),
+			newCPDefinitionLink.getCPDefinitionId());
+		Assert.assertEquals(existingCPDefinitionLink.getCProductId(),
+			newCPDefinitionLink.getCProductId());
 		AssertUtils.assertEquals(existingCPDefinitionLink.getPriority(),
 			newCPDefinitionLink.getPriority());
 		Assert.assertEquals(existingCPDefinitionLink.getType(),
@@ -207,45 +207,45 @@ public class CPDefinitionLinkPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCPDefinitionId1() throws Exception {
-		_persistence.countByCPDefinitionId1(RandomTestUtil.nextLong());
+	public void testCountByCPDefinitionId() throws Exception {
+		_persistence.countByCPDefinitionId(RandomTestUtil.nextLong());
 
-		_persistence.countByCPDefinitionId1(0L);
+		_persistence.countByCPDefinitionId(0L);
 	}
 
 	@Test
-	public void testCountByCPDefinitionId2() throws Exception {
-		_persistence.countByCPDefinitionId2(RandomTestUtil.nextLong());
+	public void testCountByCProductId() throws Exception {
+		_persistence.countByCProductId(RandomTestUtil.nextLong());
 
-		_persistence.countByCPDefinitionId2(0L);
+		_persistence.countByCProductId(0L);
 	}
 
 	@Test
-	public void testCountByC1_T() throws Exception {
-		_persistence.countByC1_T(RandomTestUtil.nextLong(), "");
+	public void testCountByCPD_T() throws Exception {
+		_persistence.countByCPD_T(RandomTestUtil.nextLong(), "");
 
-		_persistence.countByC1_T(0L, "null");
+		_persistence.countByCPD_T(0L, "null");
 
-		_persistence.countByC1_T(0L, (String)null);
+		_persistence.countByCPD_T(0L, (String)null);
 	}
 
 	@Test
-	public void testCountByC2_T() throws Exception {
-		_persistence.countByC2_T(RandomTestUtil.nextLong(), "");
+	public void testCountByCP_T() throws Exception {
+		_persistence.countByCP_T(RandomTestUtil.nextLong(), "");
 
-		_persistence.countByC2_T(0L, "null");
+		_persistence.countByCP_T(0L, "null");
 
-		_persistence.countByC2_T(0L, (String)null);
+		_persistence.countByCP_T(0L, (String)null);
 	}
 
 	@Test
-	public void testCountByC1_C2_T() throws Exception {
-		_persistence.countByC1_C2_T(RandomTestUtil.nextLong(),
+	public void testCountByC_C_T() throws Exception {
+		_persistence.countByC_C_T(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong(), "");
 
-		_persistence.countByC1_C2_T(0L, 0L, "null");
+		_persistence.countByC_C_T(0L, 0L, "null");
 
-		_persistence.countByC1_C2_T(0L, 0L, (String)null);
+		_persistence.countByC_C_T(0L, 0L, (String)null);
 	}
 
 	@Test
@@ -274,8 +274,8 @@ public class CPDefinitionLinkPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CPDefinitionLink", "uuid",
 			true, "CPDefinitionLinkId", true, "groupId", true, "companyId",
 			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "CPDefinitionId1", true, "CPDefinitionId2",
-			true, "priority", true, "type", true);
+			"modifiedDate", true, "CPDefinitionId", true, "CProductId", true,
+			"priority", true, "type", true);
 	}
 
 	@Test
@@ -488,13 +488,13 @@ public class CPDefinitionLinkPersistenceTest {
 				"getOriginalGroupId", new Class<?>[0]));
 
 		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionLink.getCPDefinitionId1()),
+				existingCPDefinitionLink.getCPDefinitionId()),
 			ReflectionTestUtil.<Long>invoke(existingCPDefinitionLink,
-				"getOriginalCPDefinitionId1", new Class<?>[0]));
+				"getOriginalCPDefinitionId", new Class<?>[0]));
 		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionLink.getCPDefinitionId2()),
+				existingCPDefinitionLink.getCProductId()),
 			ReflectionTestUtil.<Long>invoke(existingCPDefinitionLink,
-				"getOriginalCPDefinitionId2", new Class<?>[0]));
+				"getOriginalCProductId", new Class<?>[0]));
 		Assert.assertTrue(Objects.equals(existingCPDefinitionLink.getType(),
 				ReflectionTestUtil.invoke(existingCPDefinitionLink,
 					"getOriginalType", new Class<?>[0])));
@@ -519,9 +519,9 @@ public class CPDefinitionLinkPersistenceTest {
 
 		cpDefinitionLink.setModifiedDate(RandomTestUtil.nextDate());
 
-		cpDefinitionLink.setCPDefinitionId1(RandomTestUtil.nextLong());
+		cpDefinitionLink.setCPDefinitionId(RandomTestUtil.nextLong());
 
-		cpDefinitionLink.setCPDefinitionId2(RandomTestUtil.nextLong());
+		cpDefinitionLink.setCProductId(RandomTestUtil.nextLong());
 
 		cpDefinitionLink.setPriority(RandomTestUtil.nextDouble());
 

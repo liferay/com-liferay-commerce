@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -72,6 +73,9 @@ public interface CProductLocalService extends BaseLocalService,
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public CProduct addCProduct(CProduct cProduct);
+
+	public CProduct addCProduct(ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	* Creates a new c product with the primary key. Does not add the c product to the database.
@@ -286,4 +290,10 @@ public interface CProductLocalService extends BaseLocalService,
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public CProduct updateCProduct(CProduct cProduct);
+
+	public CProduct updateDraftDefinitionId(long cProductId,
+		long draftDefinitionId) throws PortalException;
+
+	public CProduct updatePublishedDefinitionId(long cProductId,
+		long publishedDefinitionId) throws PortalException;
 }

@@ -54,6 +54,10 @@ public class CommerceWishListItemLocalServiceUtil {
 		return getService().addCommerceWishListItem(commerceWishListItem);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static com.liferay.commerce.wish.list.model.CommerceWishListItem addCommerceWishListItem(
 		long commerceWishListId, long cpDefinitionId, long cpInstanceId,
 		String json,
@@ -62,6 +66,16 @@ public class CommerceWishListItemLocalServiceUtil {
 		return getService()
 				   .addCommerceWishListItem(commerceWishListId, cpDefinitionId,
 			cpInstanceId, json, serviceContext);
+	}
+
+	public static com.liferay.commerce.wish.list.model.CommerceWishListItem addCommerceWishListItem(
+		long commerceWishListId, long cProductId, String cpInstanceUuid,
+		String json,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceWishListItem(commerceWishListId, cProductId,
+			cpInstanceUuid, json, serviceContext);
 	}
 
 	/**
@@ -103,11 +117,19 @@ public class CommerceWishListItemLocalServiceUtil {
 		getService().deleteCommerceWishListItems(commerceWishListId);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static void deleteCommerceWishListItemsByCPDefinitionId(
 		long cpDefinitionId) {
 		getService().deleteCommerceWishListItemsByCPDefinitionId(cpDefinitionId);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static void deleteCommerceWishListItemsByCPInstanceId(
 		long cpInstanceId) {
 		getService().deleteCommerceWishListItemsByCPInstanceId(cpInstanceId);

@@ -11,7 +11,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="CPDefinitionId" type="long" />
-		<field name="entryCPDefinitionId" type="long" />
+		<field name="entryCProductId" type="long" />
 		<field name="priority" type="double">
 			<validator name="number" />
 		</field>

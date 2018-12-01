@@ -106,10 +106,10 @@ public class CPDefinitionLinkServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinitionLinkSoap[] getCPDefinitionLinks(
-		long cpDefinitionId1, String type) throws RemoteException {
+		long cpDefinitionId, String type) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> returnValue =
-				CPDefinitionLinkServiceUtil.getCPDefinitionLinks(cpDefinitionId1,
+				CPDefinitionLinkServiceUtil.getCPDefinitionLinks(cpDefinitionId,
 					type);
 
 			return com.liferay.commerce.product.model.CPDefinitionLinkSoap.toSoapModels(returnValue);
@@ -122,12 +122,12 @@ public class CPDefinitionLinkServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinitionLinkSoap[] getCPDefinitionLinks(
-		long cpDefinitionId1, String type, int start, int end,
+		long cpDefinitionId, String type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionLink> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> returnValue =
-				CPDefinitionLinkServiceUtil.getCPDefinitionLinks(cpDefinitionId1,
+				CPDefinitionLinkServiceUtil.getCPDefinitionLinks(cpDefinitionId,
 					type, start, end, orderByComparator);
 
 			return com.liferay.commerce.product.model.CPDefinitionLinkSoap.toSoapModels(returnValue);
@@ -139,10 +139,10 @@ public class CPDefinitionLinkServiceSoap {
 		}
 	}
 
-	public static int getCPDefinitionLinksCount(long cpDefinitionId1,
-		String type) throws RemoteException {
+	public static int getCPDefinitionLinksCount(long cpDefinitionId, String type)
+		throws RemoteException {
 		try {
-			int returnValue = CPDefinitionLinkServiceUtil.getCPDefinitionLinksCount(cpDefinitionId1,
+			int returnValue = CPDefinitionLinkServiceUtil.getCPDefinitionLinksCount(cpDefinitionId,
 					type);
 
 			return returnValue;
@@ -171,12 +171,12 @@ public class CPDefinitionLinkServiceSoap {
 		}
 	}
 
-	public static void updateCPDefinitionLinks(long cpDefinitionId1,
+	public static void updateCPDefinitionLinks(long cpDefinitionId,
 		long[] cpDefinitionIds2, String type,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			CPDefinitionLinkServiceUtil.updateCPDefinitionLinks(cpDefinitionId1,
+			CPDefinitionLinkServiceUtil.updateCPDefinitionLinks(cpDefinitionId,
 				cpDefinitionIds2, type, serviceContext);
 		}
 		catch (Exception e) {

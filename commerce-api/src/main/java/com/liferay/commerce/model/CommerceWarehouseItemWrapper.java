@@ -67,7 +67,8 @@ public class CommerceWarehouseItemWrapper implements CommerceWarehouseItem,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceWarehouseId", getCommerceWarehouseId());
-		attributes.put("CPInstanceId", getCPInstanceId());
+		attributes.put("CProductId", getCProductId());
+		attributes.put("CPInstanceUuid", getCPInstanceUuid());
 		attributes.put("quantity", getQuantity());
 
 		return attributes;
@@ -124,10 +125,16 @@ public class CommerceWarehouseItemWrapper implements CommerceWarehouseItem,
 			setCommerceWarehouseId(commerceWarehouseId);
 		}
 
-		Long CPInstanceId = (Long)attributes.get("CPInstanceId");
+		Long CProductId = (Long)attributes.get("CProductId");
 
-		if (CPInstanceId != null) {
-			setCPInstanceId(CPInstanceId);
+		if (CProductId != null) {
+			setCProductId(CProductId);
+		}
+
+		String CPInstanceUuid = (String)attributes.get("CPInstanceUuid");
+
+		if (CPInstanceUuid != null) {
+			setCPInstanceUuid(CPInstanceUuid);
 		}
 
 		Integer quantity = (Integer)attributes.get("quantity");
@@ -190,13 +197,23 @@ public class CommerceWarehouseItemWrapper implements CommerceWarehouseItem,
 	}
 
 	/**
-	* Returns the cp instance ID of this commerce warehouse item.
+	* Returns the cp instance uuid of this commerce warehouse item.
 	*
-	* @return the cp instance ID of this commerce warehouse item
+	* @return the cp instance uuid of this commerce warehouse item
 	*/
 	@Override
-	public long getCPInstanceId() {
-		return _commerceWarehouseItem.getCPInstanceId();
+	public String getCPInstanceUuid() {
+		return _commerceWarehouseItem.getCPInstanceUuid();
+	}
+
+	/**
+	* Returns the c product ID of this commerce warehouse item.
+	*
+	* @return the c product ID of this commerce warehouse item
+	*/
+	@Override
+	public long getCProductId() {
+		return _commerceWarehouseItem.getCProductId();
 	}
 
 	/**
@@ -350,13 +367,23 @@ public class CommerceWarehouseItemWrapper implements CommerceWarehouseItem,
 	}
 
 	/**
-	* Sets the cp instance ID of this commerce warehouse item.
+	* Sets the cp instance uuid of this commerce warehouse item.
 	*
-	* @param CPInstanceId the cp instance ID of this commerce warehouse item
+	* @param CPInstanceUuid the cp instance uuid of this commerce warehouse item
 	*/
 	@Override
-	public void setCPInstanceId(long CPInstanceId) {
-		_commerceWarehouseItem.setCPInstanceId(CPInstanceId);
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_commerceWarehouseItem.setCPInstanceUuid(CPInstanceUuid);
+	}
+
+	/**
+	* Sets the c product ID of this commerce warehouse item.
+	*
+	* @param CProductId the c product ID of this commerce warehouse item
+	*/
+	@Override
+	public void setCProductId(long CProductId) {
+		_commerceWarehouseItem.setCProductId(CProductId);
 	}
 
 	/**

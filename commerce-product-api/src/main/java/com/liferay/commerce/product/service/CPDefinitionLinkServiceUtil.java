@@ -60,23 +60,23 @@ public class CPDefinitionLinkServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
-		long cpDefinitionId1, String type)
+		long cpDefinitionId, String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPDefinitionLinks(cpDefinitionId1, type);
+		return getService().getCPDefinitionLinks(cpDefinitionId, type);
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
-		long cpDefinitionId1, String type, int start, int end,
+		long cpDefinitionId, String type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionLink> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCPDefinitionLinks(cpDefinitionId1, type, start, end,
+				   .getCPDefinitionLinks(cpDefinitionId, type, start, end,
 			orderByComparator);
 	}
 
-	public static int getCPDefinitionLinksCount(long cpDefinitionId1,
-		String type) throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPDefinitionLinksCount(cpDefinitionId1, type);
+	public static int getCPDefinitionLinksCount(long cpDefinitionId, String type)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPDefinitionLinksCount(cpDefinitionId, type);
 	}
 
 	/**
@@ -97,12 +97,12 @@ public class CPDefinitionLinkServiceUtil {
 			serviceContext);
 	}
 
-	public static void updateCPDefinitionLinks(long cpDefinitionId1,
+	public static void updateCPDefinitionLinks(long cpDefinitionId,
 		long[] cpDefinitionIds2, String type,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService()
-			.updateCPDefinitionLinks(cpDefinitionId1, cpDefinitionIds2, type,
+			.updateCPDefinitionLinks(cpDefinitionId, cpDefinitionIds2, type,
 			serviceContext);
 	}
 

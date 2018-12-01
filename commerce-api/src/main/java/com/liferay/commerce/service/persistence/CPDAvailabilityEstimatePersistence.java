@@ -372,51 +372,6 @@ public interface CPDAvailabilityEstimatePersistence extends BasePersistence<CPDA
 	public int countByUuid_C(String uuid, long companyId);
 
 	/**
-	* Returns the cpd availability estimate where CPDefinitionId = &#63; or throws a {@link NoSuchCPDAvailabilityEstimateException} if it could not be found.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @return the matching cpd availability estimate
-	* @throws NoSuchCPDAvailabilityEstimateException if a matching cpd availability estimate could not be found
-	*/
-	public CPDAvailabilityEstimate findByCPDefinitionId(long CPDefinitionId)
-		throws NoSuchCPDAvailabilityEstimateException;
-
-	/**
-	* Returns the cpd availability estimate where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
-	*/
-	public CPDAvailabilityEstimate fetchByCPDefinitionId(long CPDefinitionId);
-
-	/**
-	* Returns the cpd availability estimate where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
-	*/
-	public CPDAvailabilityEstimate fetchByCPDefinitionId(long CPDefinitionId,
-		boolean retrieveFromCache);
-
-	/**
-	* Removes the cpd availability estimate where CPDefinitionId = &#63; from the database.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @return the cpd availability estimate that was removed
-	*/
-	public CPDAvailabilityEstimate removeByCPDefinitionId(long CPDefinitionId)
-		throws NoSuchCPDAvailabilityEstimateException;
-
-	/**
-	* Returns the number of cpd availability estimates where CPDefinitionId = &#63;.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @return the number of matching cpd availability estimates
-	*/
-	public int countByCPDefinitionId(long CPDefinitionId);
-
-	/**
 	* Returns all the cpd availability estimates where commerceAvailabilityEstimateId = &#63;.
 	*
 	* @param commerceAvailabilityEstimateId the commerce availability estimate ID
@@ -554,6 +509,51 @@ public interface CPDAvailabilityEstimatePersistence extends BasePersistence<CPDA
 	*/
 	public int countByCommerceAvailabilityEstimateId(
 		long commerceAvailabilityEstimateId);
+
+	/**
+	* Returns the cpd availability estimate where CProductId = &#63; or throws a {@link NoSuchCPDAvailabilityEstimateException} if it could not be found.
+	*
+	* @param CProductId the c product ID
+	* @return the matching cpd availability estimate
+	* @throws NoSuchCPDAvailabilityEstimateException if a matching cpd availability estimate could not be found
+	*/
+	public CPDAvailabilityEstimate findByCProductId(long CProductId)
+		throws NoSuchCPDAvailabilityEstimateException;
+
+	/**
+	* Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param CProductId the c product ID
+	* @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
+	*/
+	public CPDAvailabilityEstimate fetchByCProductId(long CProductId);
+
+	/**
+	* Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param CProductId the c product ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
+	*/
+	public CPDAvailabilityEstimate fetchByCProductId(long CProductId,
+		boolean retrieveFromCache);
+
+	/**
+	* Removes the cpd availability estimate where CProductId = &#63; from the database.
+	*
+	* @param CProductId the c product ID
+	* @return the cpd availability estimate that was removed
+	*/
+	public CPDAvailabilityEstimate removeByCProductId(long CProductId)
+		throws NoSuchCPDAvailabilityEstimateException;
+
+	/**
+	* Returns the number of cpd availability estimates where CProductId = &#63;.
+	*
+	* @param CProductId the c product ID
+	* @return the number of matching cpd availability estimates
+	*/
+	public int countByCProductId(long CProductId);
 
 	/**
 	* Caches the cpd availability estimate in the entity cache if it is enabled.

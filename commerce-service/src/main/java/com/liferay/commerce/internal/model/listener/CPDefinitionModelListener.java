@@ -38,13 +38,8 @@ public class CPDefinitionModelListener extends BaseModelListener<CPDefinition> {
 		_cpdAvailabilityEstimateLocalService.
 			deleteCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
 
-		try {
-			_cpDefinitionInventoryLocalService.
-				deleteCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
-		}
-		catch (PortalException pe) {
-			pe.printStackTrace();
-		}
+		_cpDefinitionInventoryLocalService.
+			deleteCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
 	}
 
 	@Reference

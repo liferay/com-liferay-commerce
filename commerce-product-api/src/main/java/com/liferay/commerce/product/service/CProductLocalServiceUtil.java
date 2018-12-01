@@ -54,6 +54,12 @@ public class CProductLocalServiceUtil {
 		return getService().addCProduct(cProduct);
 	}
 
+	public static com.liferay.commerce.product.model.CProduct addCProduct(
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().addCProduct(serviceContext);
+	}
+
 	/**
 	* Creates a new c product with the primary key. Does not add the c product to the database.
 	*
@@ -312,6 +318,21 @@ public class CProductLocalServiceUtil {
 	public static com.liferay.commerce.product.model.CProduct updateCProduct(
 		com.liferay.commerce.product.model.CProduct cProduct) {
 		return getService().updateCProduct(cProduct);
+	}
+
+	public static com.liferay.commerce.product.model.CProduct updateDraftDefinitionId(
+		long cProductId, long draftDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateDraftDefinitionId(cProductId, draftDefinitionId);
+	}
+
+	public static com.liferay.commerce.product.model.CProduct updatePublishedDefinitionId(
+		long cProductId, long publishedDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updatePublishedDefinitionId(cProductId,
+			publishedDefinitionId);
 	}
 
 	public static CProductLocalService getService() {

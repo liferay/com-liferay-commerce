@@ -1028,6 +1028,83 @@ public class CommerceSubscriptionEntryUtil {
 	}
 
 	/**
+	* Returns the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; or throws a {@link NoSuchSubscriptionEntryException} if it could not be found.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param CProductId the c product ID
+	* @param commerceOrderItemId the commerce order item ID
+	* @return the matching commerce subscription entry
+	* @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
+	*/
+	public static CommerceSubscriptionEntry findByC_C_C(String CPInstanceUuid,
+		long CProductId, long commerceOrderItemId)
+		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
+		return getPersistence()
+				   .findByC_C_C(CPInstanceUuid, CProductId, commerceOrderItemId);
+	}
+
+	/**
+	* Returns the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param CProductId the c product ID
+	* @param commerceOrderItemId the commerce order item ID
+	* @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	*/
+	public static CommerceSubscriptionEntry fetchByC_C_C(
+		String CPInstanceUuid, long CProductId, long commerceOrderItemId) {
+		return getPersistence()
+				   .fetchByC_C_C(CPInstanceUuid, CProductId, commerceOrderItemId);
+	}
+
+	/**
+	* Returns the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param CProductId the c product ID
+	* @param commerceOrderItemId the commerce order item ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	*/
+	public static CommerceSubscriptionEntry fetchByC_C_C(
+		String CPInstanceUuid, long CProductId, long commerceOrderItemId,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByC_C_C(CPInstanceUuid, CProductId,
+			commerceOrderItemId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; from the database.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param CProductId the c product ID
+	* @param commerceOrderItemId the commerce order item ID
+	* @return the commerce subscription entry that was removed
+	*/
+	public static CommerceSubscriptionEntry removeByC_C_C(
+		String CPInstanceUuid, long CProductId, long commerceOrderItemId)
+		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
+		return getPersistence()
+				   .removeByC_C_C(CPInstanceUuid, CProductId,
+			commerceOrderItemId);
+	}
+
+	/**
+	* Returns the number of commerce subscription entries where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63;.
+	*
+	* @param CPInstanceUuid the cp instance uuid
+	* @param CProductId the c product ID
+	* @param commerceOrderItemId the commerce order item ID
+	* @return the number of matching commerce subscription entries
+	*/
+	public static int countByC_C_C(String CPInstanceUuid, long CProductId,
+		long commerceOrderItemId) {
+		return getPersistence()
+				   .countByC_C_C(CPInstanceUuid, CProductId, commerceOrderItemId);
+	}
+
+	/**
 	* Caches the commerce subscription entry in the entity cache if it is enabled.
 	*
 	* @param commerceSubscriptionEntry the commerce subscription entry

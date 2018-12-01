@@ -11,8 +11,9 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="CPInstanceId" type="long" />
 		<field name="commercePriceListId" type="long" />
+		<field name="CPInstanceUuid" type="String" />
+		<field name="CProductId" type="long" />
 		<field name="price" type="BigDecimal">
 			<validator name="number" />
 		</field>

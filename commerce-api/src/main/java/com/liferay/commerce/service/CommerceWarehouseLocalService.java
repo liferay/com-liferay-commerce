@@ -232,6 +232,10 @@ public interface CommerceWarehouseLocalService extends BaseLocalService,
 		boolean active, long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceWarehouse> orderByComparator);
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWarehouse> getCommerceWarehouses(long cpInstanceId,
 		int start, int end);

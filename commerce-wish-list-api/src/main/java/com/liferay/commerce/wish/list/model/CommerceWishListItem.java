@@ -65,6 +65,9 @@ public interface CommerceWishListItem extends CommerceWishListItemModel,
 	public com.liferay.commerce.product.model.CPDefinition getCPDefinition()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
+	public com.liferay.commerce.product.model.CProduct getCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 	public boolean isIgnoreSKUCombinations()
 		throws com.liferay.portal.kernel.exception.PortalException;
 }

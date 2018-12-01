@@ -207,32 +207,33 @@ public interface CommerceWishListItemModel extends BaseModel<CommerceWishListIte
 	public void setCommerceWishListId(long commerceWishListId);
 
 	/**
-	 * Returns the cp definition ID of this commerce wish list item.
+	 * Returns the cp instance uuid of this commerce wish list item.
 	 *
-	 * @return the cp definition ID of this commerce wish list item
+	 * @return the cp instance uuid of this commerce wish list item
 	 */
-	public long getCPDefinitionId();
+	@AutoEscape
+	public String getCPInstanceUuid();
 
 	/**
-	 * Sets the cp definition ID of this commerce wish list item.
+	 * Sets the cp instance uuid of this commerce wish list item.
 	 *
-	 * @param CPDefinitionId the cp definition ID of this commerce wish list item
+	 * @param CPInstanceUuid the cp instance uuid of this commerce wish list item
 	 */
-	public void setCPDefinitionId(long CPDefinitionId);
+	public void setCPInstanceUuid(String CPInstanceUuid);
 
 	/**
-	 * Returns the cp instance ID of this commerce wish list item.
+	 * Returns the c product ID of this commerce wish list item.
 	 *
-	 * @return the cp instance ID of this commerce wish list item
+	 * @return the c product ID of this commerce wish list item
 	 */
-	public long getCPInstanceId();
+	public long getCProductId();
 
 	/**
-	 * Sets the cp instance ID of this commerce wish list item.
+	 * Sets the c product ID of this commerce wish list item.
 	 *
-	 * @param CPInstanceId the cp instance ID of this commerce wish list item
+	 * @param CProductId the c product ID of this commerce wish list item
 	 */
-	public void setCPInstanceId(long CPInstanceId);
+	public void setCProductId(long CProductId);
 
 	/**
 	 * Returns the json of this commerce wish list item.
