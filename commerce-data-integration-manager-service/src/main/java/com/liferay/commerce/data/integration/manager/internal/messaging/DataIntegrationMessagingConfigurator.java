@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.data.integration.manager.service.messaging;
+package com.liferay.commerce.data.integration.manager.internal.messaging;
 
 import com.liferay.commerce.data.integration.manager.constants.DataIntegrationConstants;
 import com.liferay.portal.kernel.concurrent.CallerRunsPolicy;
