@@ -214,8 +214,8 @@ public class CPDefinitionLocalizationPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CPDefinitionLocalization",
 			"mvccVersion", true, "cpDefinitionLocalizationId", true,
 			"companyId", true, "CPDefinitionId", true, "languageId", true,
-			"name", true, "shortDescription", true, "description", true,
-			"metaTitle", true, "metaDescription", true, "metaKeywords", true);
+			"name", true, "shortDescription", true, "metaTitle", true,
+			"metaDescription", true, "metaKeywords", true);
 	}
 
 	@Test

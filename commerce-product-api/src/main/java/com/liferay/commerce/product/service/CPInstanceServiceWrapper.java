@@ -71,6 +71,14 @@ public class CPInstanceServiceWrapper implements CPInstanceService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPInstance fetchCProductInstance(
+		long cProductId, String cpInstanceUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpInstanceService.fetchCProductInstance(cProductId,
+			cpInstanceUuid);
+	}
+
+	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPInstance> getCPDefinitionInstances(
 		long cpDefinitionId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPInstance> orderByComparator)

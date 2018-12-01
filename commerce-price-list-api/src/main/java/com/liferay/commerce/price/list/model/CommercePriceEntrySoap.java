@@ -45,8 +45,9 @@ public class CommercePriceEntrySoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCPInstanceId(model.getCPInstanceId());
 		soapModel.setCommercePriceListId(model.getCommercePriceListId());
+		soapModel.setCPInstanceUuid(model.getCPInstanceUuid());
+		soapModel.setCProductId(model.getCProductId());
 		soapModel.setPrice(model.getPrice());
 		soapModel.setPromoPrice(model.getPromoPrice());
 		soapModel.setHasTierPrice(model.isHasTierPrice());
@@ -178,20 +179,28 @@ public class CommercePriceEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCPInstanceId() {
-		return _CPInstanceId;
-	}
-
-	public void setCPInstanceId(long CPInstanceId) {
-		_CPInstanceId = CPInstanceId;
-	}
-
 	public long getCommercePriceListId() {
 		return _commercePriceListId;
 	}
 
 	public void setCommercePriceListId(long commercePriceListId) {
 		_commercePriceListId = commercePriceListId;
+	}
+
+	public String getCPInstanceUuid() {
+		return _CPInstanceUuid;
+	}
+
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_CPInstanceUuid = CPInstanceUuid;
+	}
+
+	public long getCProductId() {
+		return _CProductId;
+	}
+
+	public void setCProductId(long CProductId) {
+		_CProductId = CProductId;
 	}
 
 	public BigDecimal getPrice() {
@@ -239,8 +248,9 @@ public class CommercePriceEntrySoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _CPInstanceId;
 	private long _commercePriceListId;
+	private String _CPInstanceUuid;
+	private long _CProductId;
 	private BigDecimal _price;
 	private BigDecimal _promoPrice;
 	private boolean _hasTierPrice;

@@ -68,8 +68,8 @@ public class CPDefinitionLinkWrapper implements CPDefinitionLink,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CPDefinitionId1", getCPDefinitionId1());
-		attributes.put("CPDefinitionId2", getCPDefinitionId2());
+		attributes.put("CPDefinitionId", getCPDefinitionId());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("priority", getPriority());
 		attributes.put("type", getType());
 
@@ -126,16 +126,16 @@ public class CPDefinitionLinkWrapper implements CPDefinitionLink,
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CPDefinitionId1 = (Long)attributes.get("CPDefinitionId1");
+		Long CPDefinitionId = (Long)attributes.get("CPDefinitionId");
 
-		if (CPDefinitionId1 != null) {
-			setCPDefinitionId1(CPDefinitionId1);
+		if (CPDefinitionId != null) {
+			setCPDefinitionId(CPDefinitionId);
 		}
 
-		Long CPDefinitionId2 = (Long)attributes.get("CPDefinitionId2");
+		Long CProductId = (Long)attributes.get("CProductId");
 
-		if (CPDefinitionId2 != null) {
-			setCPDefinitionId2(CPDefinitionId2);
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		Double priority = (Double)attributes.get("priority");
@@ -172,33 +172,36 @@ public class CPDefinitionLinkWrapper implements CPDefinitionLink,
 	}
 
 	@Override
+	public CPDefinition getCPDefinition() {
+		return _cpDefinitionLink.getCPDefinition();
+	}
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
+	@Override
 	public CPDefinition getCPDefinition1() {
 		return _cpDefinitionLink.getCPDefinition1();
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Override
 	public CPDefinition getCPDefinition2() {
 		return _cpDefinitionLink.getCPDefinition2();
 	}
 
 	/**
-	* Returns the cp definition id1 of this cp definition link.
+	* Returns the cp definition ID of this cp definition link.
 	*
-	* @return the cp definition id1 of this cp definition link
+	* @return the cp definition ID of this cp definition link
 	*/
 	@Override
-	public long getCPDefinitionId1() {
-		return _cpDefinitionLink.getCPDefinitionId1();
-	}
-
-	/**
-	* Returns the cp definition id2 of this cp definition link.
-	*
-	* @return the cp definition id2 of this cp definition link
-	*/
-	@Override
-	public long getCPDefinitionId2() {
-		return _cpDefinitionLink.getCPDefinitionId2();
+	public long getCPDefinitionId() {
+		return _cpDefinitionLink.getCPDefinitionId();
 	}
 
 	/**
@@ -209,6 +212,21 @@ public class CPDefinitionLinkWrapper implements CPDefinitionLink,
 	@Override
 	public long getCPDefinitionLinkId() {
 		return _cpDefinitionLink.getCPDefinitionLinkId();
+	}
+
+	@Override
+	public CProduct getCProduct() {
+		return _cpDefinitionLink.getCProduct();
+	}
+
+	/**
+	* Returns the c product ID of this cp definition link.
+	*
+	* @return the c product ID of this cp definition link
+	*/
+	@Override
+	public long getCProductId() {
+		return _cpDefinitionLink.getCProductId();
 	}
 
 	/**
@@ -362,23 +380,13 @@ public class CPDefinitionLinkWrapper implements CPDefinitionLink,
 	}
 
 	/**
-	* Sets the cp definition id1 of this cp definition link.
+	* Sets the cp definition ID of this cp definition link.
 	*
-	* @param CPDefinitionId1 the cp definition id1 of this cp definition link
+	* @param CPDefinitionId the cp definition ID of this cp definition link
 	*/
 	@Override
-	public void setCPDefinitionId1(long CPDefinitionId1) {
-		_cpDefinitionLink.setCPDefinitionId1(CPDefinitionId1);
-	}
-
-	/**
-	* Sets the cp definition id2 of this cp definition link.
-	*
-	* @param CPDefinitionId2 the cp definition id2 of this cp definition link
-	*/
-	@Override
-	public void setCPDefinitionId2(long CPDefinitionId2) {
-		_cpDefinitionLink.setCPDefinitionId2(CPDefinitionId2);
+	public void setCPDefinitionId(long CPDefinitionId) {
+		_cpDefinitionLink.setCPDefinitionId(CPDefinitionId);
 	}
 
 	/**
@@ -389,6 +397,16 @@ public class CPDefinitionLinkWrapper implements CPDefinitionLink,
 	@Override
 	public void setCPDefinitionLinkId(long CPDefinitionLinkId) {
 		_cpDefinitionLink.setCPDefinitionLinkId(CPDefinitionLinkId);
+	}
+
+	/**
+	* Sets the c product ID of this cp definition link.
+	*
+	* @param CProductId the c product ID of this cp definition link
+	*/
+	@Override
+	public void setCProductId(long CProductId) {
+		_cpDefinitionLink.setCProductId(CProductId);
 	}
 
 	/**

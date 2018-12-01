@@ -92,15 +92,23 @@ public class CPDAvailabilityEstimateLocalServiceUtil {
 				   .deleteCPDAvailabilityEstimate(CPDAvailabilityEstimateId);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static void deleteCPDAvailabilityEstimateByCPDefinitionId(
 		long cpDefinitionId) {
 		getService()
 			.deleteCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
 	}
 
+	public static void deleteCPDAvailabilityEstimateByCProductId(
+		long cProductId) {
+		getService().deleteCPDAvailabilityEstimateByCProductId(cProductId);
+	}
+
 	public static void deleteCPDAvailabilityEstimates(
-		long commerceAvailabilityEstimateId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long commerceAvailabilityEstimateId) {
 		getService()
 			.deleteCPDAvailabilityEstimates(commerceAvailabilityEstimateId);
 	}
@@ -198,10 +206,19 @@ public class CPDAvailabilityEstimateLocalServiceUtil {
 				   .fetchCPDAvailabilityEstimate(CPDAvailabilityEstimateId);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static com.liferay.commerce.model.CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCPDefinitionId(
 		long cpDefinitionId) {
 		return getService()
 				   .fetchCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
+	}
+
+	public static com.liferay.commerce.model.CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCProductId(
+		long cProductId) {
+		return getService().fetchCPDAvailabilityEstimateByCProductId(cProductId);
 	}
 
 	/**
@@ -342,6 +359,10 @@ public class CPDAvailabilityEstimateLocalServiceUtil {
 				   .updateCPDAvailabilityEstimate(cpdAvailabilityEstimate);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static com.liferay.commerce.model.CPDAvailabilityEstimate updateCPDAvailabilityEstimate(
 		long cpdAvailabilityEstimateId, long cpDefinitionId,
 		long commerceAvailabilityEstimateId,
@@ -350,6 +371,16 @@ public class CPDAvailabilityEstimateLocalServiceUtil {
 		return getService()
 				   .updateCPDAvailabilityEstimate(cpdAvailabilityEstimateId,
 			cpDefinitionId, commerceAvailabilityEstimateId, serviceContext);
+	}
+
+	public static com.liferay.commerce.model.CPDAvailabilityEstimate updateCPDAvailabilityEstimateByCProductId(
+		long cpdAvailabilityEstimateId, long cProductId,
+		long commerceAvailabilityEstimateId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCPDAvailabilityEstimateByCProductId(cpdAvailabilityEstimateId,
+			cProductId, commerceAvailabilityEstimateId, serviceContext);
 	}
 
 	public static CPDAvailabilityEstimateLocalService getService() {

@@ -65,7 +65,7 @@ public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWareh
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{commerceWarehouseItemId=");
 		sb.append(commerceWarehouseItemId);
@@ -83,8 +83,10 @@ public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWareh
 		sb.append(modifiedDate);
 		sb.append(", commerceWarehouseId=");
 		sb.append(commerceWarehouseId);
-		sb.append(", CPInstanceId=");
-		sb.append(CPInstanceId);
+		sb.append(", CProductId=");
+		sb.append(CProductId);
+		sb.append(", CPInstanceUuid=");
+		sb.append(CPInstanceUuid);
 		sb.append(", quantity=");
 		sb.append(quantity);
 		sb.append("}");
@@ -123,7 +125,15 @@ public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWareh
 		}
 
 		commerceWarehouseItemImpl.setCommerceWarehouseId(commerceWarehouseId);
-		commerceWarehouseItemImpl.setCPInstanceId(CPInstanceId);
+		commerceWarehouseItemImpl.setCProductId(CProductId);
+
+		if (CPInstanceUuid == null) {
+			commerceWarehouseItemImpl.setCPInstanceUuid("");
+		}
+		else {
+			commerceWarehouseItemImpl.setCPInstanceUuid(CPInstanceUuid);
+		}
+
 		commerceWarehouseItemImpl.setQuantity(quantity);
 
 		commerceWarehouseItemImpl.resetOriginalValues();
@@ -146,7 +156,8 @@ public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWareh
 
 		commerceWarehouseId = objectInput.readLong();
 
-		CPInstanceId = objectInput.readLong();
+		CProductId = objectInput.readLong();
+		CPInstanceUuid = objectInput.readUTF();
 
 		quantity = objectInput.readInt();
 	}
@@ -174,7 +185,14 @@ public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWareh
 
 		objectOutput.writeLong(commerceWarehouseId);
 
-		objectOutput.writeLong(CPInstanceId);
+		objectOutput.writeLong(CProductId);
+
+		if (CPInstanceUuid == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(CPInstanceUuid);
+		}
 
 		objectOutput.writeInt(quantity);
 	}
@@ -187,6 +205,7 @@ public class CommerceWarehouseItemCacheModel implements CacheModel<CommerceWareh
 	public long createDate;
 	public long modifiedDate;
 	public long commerceWarehouseId;
-	public long CPInstanceId;
+	public long CProductId;
+	public String CPInstanceUuid;
 	public int quantity;
 }

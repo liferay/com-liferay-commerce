@@ -209,8 +209,7 @@ public class CPDefinitionInventoryLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.model.CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
-		long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long cpDefinitionId) {
 		return _cpDefinitionInventoryLocalService.fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
 	}
 

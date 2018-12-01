@@ -2611,6 +2611,250 @@ public class CPAttachmentFileEntryPersistenceImpl extends BasePersistenceImpl<CP
 	private static final String _FINDER_COLUMN_LTD_S_DISPLAYDATE_1 = "cpAttachmentFileEntry.displayDate IS NULL AND ";
 	private static final String _FINDER_COLUMN_LTD_S_DISPLAYDATE_2 = "cpAttachmentFileEntry.displayDate < ? AND ";
 	private static final String _FINDER_COLUMN_LTD_S_STATUS_2 = "cpAttachmentFileEntry.status = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_C_F = new FinderPath(CPAttachmentFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CPAttachmentFileEntryModelImpl.FINDER_CACHE_ENABLED,
+			CPAttachmentFileEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_C_F",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			},
+			CPAttachmentFileEntryModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CPAttachmentFileEntryModelImpl.CLASSPK_COLUMN_BITMASK |
+			CPAttachmentFileEntryModelImpl.FILEENTRYID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_F = new FinderPath(CPAttachmentFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CPAttachmentFileEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C_F",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+
+	/**
+	 * Returns the cp attachment file entry where classNameId = &#63; and classPK = &#63; and fileEntryId = &#63; or throws a {@link NoSuchCPAttachmentFileEntryException} if it could not be found.
+	 *
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param fileEntryId the file entry ID
+	 * @return the matching cp attachment file entry
+	 * @throws NoSuchCPAttachmentFileEntryException if a matching cp attachment file entry could not be found
+	 */
+	@Override
+	public CPAttachmentFileEntry findByC_C_F(long classNameId, long classPK,
+		long fileEntryId) throws NoSuchCPAttachmentFileEntryException {
+		CPAttachmentFileEntry cpAttachmentFileEntry = fetchByC_C_F(classNameId,
+				classPK, fileEntryId);
+
+		if (cpAttachmentFileEntry == null) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("classNameId=");
+			msg.append(classNameId);
+
+			msg.append(", classPK=");
+			msg.append(classPK);
+
+			msg.append(", fileEntryId=");
+			msg.append(fileEntryId);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchCPAttachmentFileEntryException(msg.toString());
+		}
+
+		return cpAttachmentFileEntry;
+	}
+
+	/**
+	 * Returns the cp attachment file entry where classNameId = &#63; and classPK = &#63; and fileEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param fileEntryId the file entry ID
+	 * @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	 */
+	@Override
+	public CPAttachmentFileEntry fetchByC_C_F(long classNameId, long classPK,
+		long fileEntryId) {
+		return fetchByC_C_F(classNameId, classPK, fileEntryId, true);
+	}
+
+	/**
+	 * Returns the cp attachment file entry where classNameId = &#63; and classPK = &#63; and fileEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param fileEntryId the file entry ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	 */
+	@Override
+	public CPAttachmentFileEntry fetchByC_C_F(long classNameId, long classPK,
+		long fileEntryId, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { classNameId, classPK, fileEntryId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_C_F,
+					finderArgs, this);
+		}
+
+		if (result instanceof CPAttachmentFileEntry) {
+			CPAttachmentFileEntry cpAttachmentFileEntry = (CPAttachmentFileEntry)result;
+
+			if ((classNameId != cpAttachmentFileEntry.getClassNameId()) ||
+					(classPK != cpAttachmentFileEntry.getClassPK()) ||
+					(fileEntryId != cpAttachmentFileEntry.getFileEntryId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_SELECT_CPATTACHMENTFILEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_F_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_F_CLASSPK_2);
+
+			query.append(_FINDER_COLUMN_C_C_F_FILEENTRYID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				qPos.add(fileEntryId);
+
+				List<CPAttachmentFileEntry> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_F,
+						finderArgs, list);
+				}
+				else {
+					CPAttachmentFileEntry cpAttachmentFileEntry = list.get(0);
+
+					result = cpAttachmentFileEntry;
+
+					cacheResult(cpAttachmentFileEntry);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_F, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CPAttachmentFileEntry)result;
+		}
+	}
+
+	/**
+	 * Removes the cp attachment file entry where classNameId = &#63; and classPK = &#63; and fileEntryId = &#63; from the database.
+	 *
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param fileEntryId the file entry ID
+	 * @return the cp attachment file entry that was removed
+	 */
+	@Override
+	public CPAttachmentFileEntry removeByC_C_F(long classNameId, long classPK,
+		long fileEntryId) throws NoSuchCPAttachmentFileEntryException {
+		CPAttachmentFileEntry cpAttachmentFileEntry = findByC_C_F(classNameId,
+				classPK, fileEntryId);
+
+		return remove(cpAttachmentFileEntry);
+	}
+
+	/**
+	 * Returns the number of cp attachment file entries where classNameId = &#63; and classPK = &#63; and fileEntryId = &#63;.
+	 *
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param fileEntryId the file entry ID
+	 * @return the number of matching cp attachment file entries
+	 */
+	@Override
+	public int countByC_C_F(long classNameId, long classPK, long fileEntryId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C_F;
+
+		Object[] finderArgs = new Object[] { classNameId, classPK, fileEntryId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_CPATTACHMENTFILEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_F_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_F_CLASSPK_2);
+
+			query.append(_FINDER_COLUMN_C_C_F_FILEENTRYID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				qPos.add(fileEntryId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_C_F_CLASSNAMEID_2 = "cpAttachmentFileEntry.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_F_CLASSPK_2 = "cpAttachmentFileEntry.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_F_FILEENTRYID_2 = "cpAttachmentFileEntry.fileEntryId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_C_LTD_S =
 		new FinderPath(CPAttachmentFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CPAttachmentFileEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -4812,6 +5056,13 @@ public class CPAttachmentFileEntryPersistenceImpl extends BasePersistenceImpl<CP
 				cpAttachmentFileEntry.getGroupId()
 			}, cpAttachmentFileEntry);
 
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_F,
+			new Object[] {
+				cpAttachmentFileEntry.getClassNameId(),
+				cpAttachmentFileEntry.getClassPK(),
+				cpAttachmentFileEntry.getFileEntryId()
+			}, cpAttachmentFileEntry);
+
 		finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC,
 			new Object[] {
 				cpAttachmentFileEntry.getCompanyId(),
@@ -4905,6 +5156,17 @@ public class CPAttachmentFileEntryPersistenceImpl extends BasePersistenceImpl<CP
 			cpAttachmentFileEntryModelImpl, false);
 
 		args = new Object[] {
+				cpAttachmentFileEntryModelImpl.getClassNameId(),
+				cpAttachmentFileEntryModelImpl.getClassPK(),
+				cpAttachmentFileEntryModelImpl.getFileEntryId()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_C_C_F, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_F, args,
+			cpAttachmentFileEntryModelImpl, false);
+
+		args = new Object[] {
 				cpAttachmentFileEntryModelImpl.getCompanyId(),
 				cpAttachmentFileEntryModelImpl.getExternalReferenceCode()
 			};
@@ -4937,6 +5199,29 @@ public class CPAttachmentFileEntryPersistenceImpl extends BasePersistenceImpl<CP
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					cpAttachmentFileEntryModelImpl.getClassNameId(),
+					cpAttachmentFileEntryModelImpl.getClassPK(),
+					cpAttachmentFileEntryModelImpl.getFileEntryId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C_F, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_F, args);
+		}
+
+		if ((cpAttachmentFileEntryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_C_F.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					cpAttachmentFileEntryModelImpl.getOriginalClassNameId(),
+					cpAttachmentFileEntryModelImpl.getOriginalClassPK(),
+					cpAttachmentFileEntryModelImpl.getOriginalFileEntryId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C_F, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_F, args);
 		}
 
 		if (clearCurrent) {

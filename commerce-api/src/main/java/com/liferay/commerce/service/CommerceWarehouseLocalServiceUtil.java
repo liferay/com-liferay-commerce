@@ -264,6 +264,10 @@ public class CommerceWarehouseLocalServiceUtil {
 			start, end, orderByComparator);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public static java.util.List<com.liferay.commerce.model.CommerceWarehouse> getCommerceWarehouses(
 		long cpInstanceId, int start, int end) {
 		return getService().getCommerceWarehouses(cpInstanceId, start, end);
