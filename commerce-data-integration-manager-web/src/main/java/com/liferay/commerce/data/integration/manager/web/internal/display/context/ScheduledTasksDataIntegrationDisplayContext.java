@@ -14,13 +14,13 @@
 
 package com.liferay.commerce.data.integration.manager.web.internal.display.context;
 
-import com.liferay.commerce.data.integration.manager.web.internal.admin.ScheduledTasksAdminModule;
-import com.liferay.commerce.data.integration.manager.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.data.integration.manager.model.Process;
 import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
 import com.liferay.commerce.data.integration.manager.service.ProcessLocalService;
 import com.liferay.commerce.data.integration.manager.service.ScheduledTaskLocalService;
+import com.liferay.commerce.data.integration.manager.web.internal.admin.ScheduledTasksAdminModule;
 import com.liferay.commerce.data.integration.manager.web.internal.display.context.util.DataIntegrationRequestHelper;
+import com.liferay.commerce.data.integration.manager.web.internal.portlet.action.ActionHelper;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
@@ -161,6 +161,7 @@ public class ScheduledTasksDataIntegrationDisplayContext {
 	public String getLastExecutionDate(ScheduledTask scheduledTask) {
 		String lastExecutionDate = LanguageUtil.get(
 			httpServletRequest, "not-yet-executed");
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
@@ -192,6 +193,7 @@ public class ScheduledTasksDataIntegrationDisplayContext {
 	public String getNextExecutionDate(ScheduledTask scheduledTask) {
 		String nextDate = LanguageUtil.get(
 			httpServletRequest, "not-yet-scheduled");
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
