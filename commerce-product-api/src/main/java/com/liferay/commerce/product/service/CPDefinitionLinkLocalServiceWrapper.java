@@ -46,6 +46,10 @@ public class CPDefinitionLinkLocalServiceWrapper
 		return _cpDefinitionLinkLocalService.addCPDefinitionLink(cpDefinitionLink);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Override
 	public com.liferay.commerce.product.model.CPDefinitionLink addCPDefinitionLink(
 		long cpDefinitionId1, long cpDefinitionId2, double priority,
@@ -54,6 +58,15 @@ public class CPDefinitionLinkLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionLinkLocalService.addCPDefinitionLink(cpDefinitionId1,
 			cpDefinitionId2, priority, type, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPDefinitionLink addCPDefinitionLinkByCProductId(
+		long cpDefinitionId, long cProductId, double priority, String type,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionLinkLocalService.addCPDefinitionLinkByCProductId(cpDefinitionId,
+			cProductId, priority, type, serviceContext);
 	}
 
 	/**
@@ -94,9 +107,23 @@ public class CPDefinitionLinkLocalServiceWrapper
 		return _cpDefinitionLinkLocalService.deleteCPDefinitionLink(CPDefinitionLinkId);
 	}
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Override
 	public void deleteCPDefinitionLinks(long cpDefinitionId) {
 		_cpDefinitionLinkLocalService.deleteCPDefinitionLinks(cpDefinitionId);
+	}
+
+	@Override
+	public void deleteCPDefinitionLinksByCPDefinitionId(long cpDefinitionId) {
+		_cpDefinitionLinkLocalService.deleteCPDefinitionLinksByCPDefinitionId(cpDefinitionId);
+	}
+
+	@Override
+	public void deleteCPDefinitionLinksByCProductId(long cProductId) {
+		_cpDefinitionLinkLocalService.deleteCPDefinitionLinksByCProductId(cProductId);
 	}
 
 	/**
@@ -269,18 +296,18 @@ public class CPDefinitionLinkLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
-		long cpDefinitionId1, String type)
+		long cpDefinitionId, String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionLinkLocalService.getCPDefinitionLinks(cpDefinitionId1,
+		return _cpDefinitionLinkLocalService.getCPDefinitionLinks(cpDefinitionId,
 			type);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinitionLink> getCPDefinitionLinks(
-		long cpDefinitionId1, String type, int start, int end,
+		long cpDefinitionId, String type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinitionLink> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionLinkLocalService.getCPDefinitionLinks(cpDefinitionId1,
+		return _cpDefinitionLinkLocalService.getCPDefinitionLinks(cpDefinitionId,
 			type, start, end, orderByComparator);
 	}
 
@@ -327,9 +354,9 @@ public class CPDefinitionLinkLocalServiceWrapper
 	}
 
 	@Override
-	public int getCPDefinitionLinksCount(long cpDefinitionId1, String type)
+	public int getCPDefinitionLinksCount(long cpDefinitionId, String type)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionLinkLocalService.getCPDefinitionLinksCount(cpDefinitionId1,
+		return _cpDefinitionLinkLocalService.getCPDefinitionLinksCount(cpDefinitionId,
 			type);
 	}
 
@@ -389,6 +416,19 @@ public class CPDefinitionLinkLocalServiceWrapper
 			priority, serviceContext);
 	}
 
+	@Override
+	public void updateCPDefinitionLinkCProductIds(long cpDefinitionId,
+		long[] cProductIds, String type,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_cpDefinitionLinkLocalService.updateCPDefinitionLinkCProductIds(cpDefinitionId,
+			cProductIds, type, serviceContext);
+	}
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Override
 	public void updateCPDefinitionLinks(long cpDefinitionId1,
 		long[] cpDefinitionIds2, String type,

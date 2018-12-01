@@ -1,4 +1,4 @@
-create unique index IX_86A2368F on CPDAvailabilityEstimate (CPDefinitionId);
+create unique index IX_17D56F1B on CPDAvailabilityEstimate (CProductId);
 create index IX_E560850D on CPDAvailabilityEstimate (commerceAvailabilityEstimateId);
 create index IX_609B2AF4 on CPDAvailabilityEstimate (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_7919DE76 on CPDAvailabilityEstimate (uuid_[$COLUMN_LENGTH:75$], groupId);
@@ -44,6 +44,7 @@ create index IX_5AF685CD on CommerceOrder (uuid_[$COLUMN_LENGTH:75$], companyId)
 create unique index IX_58101B8F on CommerceOrder (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_2E1BB39D on CommerceOrderItem (CPInstanceId);
+create index IX_F9E8D927 on CommerceOrderItem (CProductId);
 create index IX_415AF3E3 on CommerceOrderItem (commerceOrderId, CPInstanceId);
 create index IX_15B37023 on CommerceOrderItem (commerceOrderId, subscription);
 create index IX_12257E21 on CommerceOrderItem (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
@@ -66,6 +67,7 @@ create index IX_DB0BB83C on CommerceShipmentItem (groupId);
 create index IX_42E5F6EF on CommerceShippingMethod (groupId, active_);
 create unique index IX_C4557F93 on CommerceShippingMethod (groupId, engineKey[$COLUMN_LENGTH:75$]);
 
+create unique index IX_BE881965 on CommerceSubscriptionEntry (CPInstanceUuid[$COLUMN_LENGTH:75$], CProductId, commerceOrderItemId);
 create index IX_6D080A04 on CommerceSubscriptionEntry (groupId, userId);
 create index IX_B496E103 on CommerceSubscriptionEntry (subscriptionStatus);
 create index IX_4363DED4 on CommerceSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], companyId);
@@ -75,5 +77,5 @@ create index IX_81487FD9 on CommerceWarehouse (groupId, active_, commerceCountry
 create index IX_4500A0CA on CommerceWarehouse (groupId, commerceCountryId);
 create index IX_5F7D8BED on CommerceWarehouse (groupId, primary_);
 
-create index IX_B905F012 on CommerceWarehouseItem (CPInstanceId);
-create unique index IX_8FBE7F43 on CommerceWarehouseItem (commerceWarehouseId, CPInstanceId);
+create index IX_BAE6B80D on CommerceWarehouseItem (CProductId, CPInstanceUuid[$COLUMN_LENGTH:75$]);
+create unique index IX_AFA32863 on CommerceWarehouseItem (commerceWarehouseId, CPInstanceUuid[$COLUMN_LENGTH:75$]);

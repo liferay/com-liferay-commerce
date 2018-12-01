@@ -84,6 +84,11 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 		long cpInstanceId, long commerceOrderItemId,
 		ServiceContext serviceContext) throws PortalException;
 
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
+		String cpInstanceUuid, long cProductId, long commerceOrderItemId,
+		ServiceContext serviceContext) throws PortalException;
+
 	/**
 	* Creates a new commerce subscription entry with the primary key. Does not add the commerce subscription entry to the database.
 	*

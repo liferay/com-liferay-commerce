@@ -667,6 +667,62 @@ public interface CPAttachmentFileEntryPersistence extends BasePersistence<CPAtta
 	public int countByLtD_S(Date displayDate, int status);
 
 	/**
+	* Returns the cp attachment file entry where classNameId = &#63; and classPK = &#63; and fileEntryId = &#63; or throws a {@link NoSuchCPAttachmentFileEntryException} if it could not be found.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param fileEntryId the file entry ID
+	* @return the matching cp attachment file entry
+	* @throws NoSuchCPAttachmentFileEntryException if a matching cp attachment file entry could not be found
+	*/
+	public CPAttachmentFileEntry findByC_C_F(long classNameId, long classPK,
+		long fileEntryId) throws NoSuchCPAttachmentFileEntryException;
+
+	/**
+	* Returns the cp attachment file entry where classNameId = &#63; and classPK = &#63; and fileEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param fileEntryId the file entry ID
+	* @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	*/
+	public CPAttachmentFileEntry fetchByC_C_F(long classNameId, long classPK,
+		long fileEntryId);
+
+	/**
+	* Returns the cp attachment file entry where classNameId = &#63; and classPK = &#63; and fileEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param fileEntryId the file entry ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
+	*/
+	public CPAttachmentFileEntry fetchByC_C_F(long classNameId, long classPK,
+		long fileEntryId, boolean retrieveFromCache);
+
+	/**
+	* Removes the cp attachment file entry where classNameId = &#63; and classPK = &#63; and fileEntryId = &#63; from the database.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param fileEntryId the file entry ID
+	* @return the cp attachment file entry that was removed
+	*/
+	public CPAttachmentFileEntry removeByC_C_F(long classNameId, long classPK,
+		long fileEntryId) throws NoSuchCPAttachmentFileEntryException;
+
+	/**
+	* Returns the number of cp attachment file entries where classNameId = &#63; and classPK = &#63; and fileEntryId = &#63;.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class pk
+	* @param fileEntryId the file entry ID
+	* @return the number of matching cp attachment file entries
+	*/
+	public int countByC_C_F(long classNameId, long classPK, long fileEntryId);
+
+	/**
 	* Returns all the cp attachment file entries where classNameId = &#63; and classPK = &#63; and displayDate &lt; &#63; and status = &#63;.
 	*
 	* @param classNameId the class name ID

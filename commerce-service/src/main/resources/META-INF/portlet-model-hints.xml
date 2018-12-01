@@ -147,6 +147,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="commerceOrderId" type="long" />
+		<field name="CProductId" type="long" />
 		<field name="CPInstanceId" type="long" />
 		<field name="quantity" type="int" />
 		<field name="shippedQuantity" type="int" />
@@ -289,7 +290,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="CPInstanceId" type="long" />
+		<field name="CPInstanceUuid" type="String" />
+		<field name="CProductId" type="long" />
 		<field name="commerceOrderItemId" type="long" />
 		<field name="subscriptionLength" type="int">
 			<hint name="default-value">1</hint>
@@ -341,7 +343,8 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="commerceWarehouseId" type="long" />
-		<field name="CPInstanceId" type="long" />
+		<field name="CProductId" type="long" />
+		<field name="CPInstanceUuid" type="String" />
 		<field name="quantity" type="int" />
 	</model>
 	<model name="com.liferay.commerce.model.CPDAvailabilityEstimate">
@@ -353,8 +356,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="CPDefinitionId" type="long" />
 		<field name="commerceAvailabilityEstimateId" type="long" />
+		<field name="CProductId" type="long" />
 		<field name="lastPublishDate" type="Date" />
 	</model>
 	<model name="com.liferay.commerce.model.CPDefinitionInventory">

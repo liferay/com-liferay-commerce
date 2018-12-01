@@ -67,8 +67,8 @@ public class CommerceWishListItemWrapper implements CommerceWishListItem,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceWishListId", getCommerceWishListId());
-		attributes.put("CPDefinitionId", getCPDefinitionId());
-		attributes.put("CPInstanceId", getCPInstanceId());
+		attributes.put("CPInstanceUuid", getCPInstanceUuid());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("json", getJson());
 
 		return attributes;
@@ -125,16 +125,16 @@ public class CommerceWishListItemWrapper implements CommerceWishListItem,
 			setCommerceWishListId(commerceWishListId);
 		}
 
-		Long CPDefinitionId = (Long)attributes.get("CPDefinitionId");
+		String CPInstanceUuid = (String)attributes.get("CPInstanceUuid");
 
-		if (CPDefinitionId != null) {
-			setCPDefinitionId(CPDefinitionId);
+		if (CPInstanceUuid != null) {
+			setCPInstanceUuid(CPInstanceUuid);
 		}
 
-		Long CPInstanceId = (Long)attributes.get("CPInstanceId");
+		Long CProductId = (Long)attributes.get("CProductId");
 
-		if (CPInstanceId != null) {
-			setCPInstanceId(CPInstanceId);
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		String json = (String)attributes.get("json");
@@ -203,23 +203,29 @@ public class CommerceWishListItemWrapper implements CommerceWishListItem,
 	}
 
 	/**
-	* Returns the cp definition ID of this commerce wish list item.
+	* Returns the cp instance uuid of this commerce wish list item.
 	*
-	* @return the cp definition ID of this commerce wish list item
+	* @return the cp instance uuid of this commerce wish list item
 	*/
 	@Override
-	public long getCPDefinitionId() {
-		return _commerceWishListItem.getCPDefinitionId();
+	public String getCPInstanceUuid() {
+		return _commerceWishListItem.getCPInstanceUuid();
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CProduct getCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceWishListItem.getCProduct();
 	}
 
 	/**
-	* Returns the cp instance ID of this commerce wish list item.
+	* Returns the c product ID of this commerce wish list item.
 	*
-	* @return the cp instance ID of this commerce wish list item
+	* @return the c product ID of this commerce wish list item
 	*/
 	@Override
-	public long getCPInstanceId() {
-		return _commerceWishListItem.getCPInstanceId();
+	public long getCProductId() {
+		return _commerceWishListItem.getCProductId();
 	}
 
 	/**
@@ -379,23 +385,23 @@ public class CommerceWishListItemWrapper implements CommerceWishListItem,
 	}
 
 	/**
-	* Sets the cp definition ID of this commerce wish list item.
+	* Sets the cp instance uuid of this commerce wish list item.
 	*
-	* @param CPDefinitionId the cp definition ID of this commerce wish list item
+	* @param CPInstanceUuid the cp instance uuid of this commerce wish list item
 	*/
 	@Override
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_commerceWishListItem.setCPDefinitionId(CPDefinitionId);
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_commerceWishListItem.setCPInstanceUuid(CPInstanceUuid);
 	}
 
 	/**
-	* Sets the cp instance ID of this commerce wish list item.
+	* Sets the c product ID of this commerce wish list item.
 	*
-	* @param CPInstanceId the cp instance ID of this commerce wish list item
+	* @param CProductId the c product ID of this commerce wish list item
 	*/
 	@Override
-	public void setCPInstanceId(long CPInstanceId) {
-		_commerceWishListItem.setCPInstanceId(CPInstanceId);
+	public void setCProductId(long CProductId) {
+		_commerceWishListItem.setCProductId(CProductId);
 	}
 
 	/**

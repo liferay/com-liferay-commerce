@@ -70,9 +70,9 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CPDefinitionId", getCPDefinitionId());
 		attributes.put("commerceAvailabilityEstimateId",
 			getCommerceAvailabilityEstimateId());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("lastPublishDate", getLastPublishDate());
 
 		return attributes;
@@ -129,17 +129,17 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CPDefinitionId = (Long)attributes.get("CPDefinitionId");
-
-		if (CPDefinitionId != null) {
-			setCPDefinitionId(CPDefinitionId);
-		}
-
 		Long commerceAvailabilityEstimateId = (Long)attributes.get(
 				"commerceAvailabilityEstimateId");
 
 		if (commerceAvailabilityEstimateId != null) {
 			setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
+		}
+
+		Long CProductId = (Long)attributes.get("CProductId");
+
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
@@ -196,13 +196,13 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	}
 
 	/**
-	* Returns the cp definition ID of this cpd availability estimate.
+	* Returns the c product ID of this cpd availability estimate.
 	*
-	* @return the cp definition ID of this cpd availability estimate
+	* @return the c product ID of this cpd availability estimate
 	*/
 	@Override
-	public long getCPDefinitionId() {
-		return _cpdAvailabilityEstimate.getCPDefinitionId();
+	public long getCProductId() {
+		return _cpdAvailabilityEstimate.getCProductId();
 	}
 
 	/**
@@ -367,13 +367,13 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	}
 
 	/**
-	* Sets the cp definition ID of this cpd availability estimate.
+	* Sets the c product ID of this cpd availability estimate.
 	*
-	* @param CPDefinitionId the cp definition ID of this cpd availability estimate
+	* @param CProductId the c product ID of this cpd availability estimate
 	*/
 	@Override
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_cpdAvailabilityEstimate.setCPDefinitionId(CPDefinitionId);
+	public void setCProductId(long CProductId) {
+		_cpdAvailabilityEstimate.setCProductId(CProductId);
 	}
 
 	/**

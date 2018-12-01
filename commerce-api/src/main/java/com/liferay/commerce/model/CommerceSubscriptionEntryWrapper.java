@@ -71,7 +71,8 @@ public class CommerceSubscriptionEntryWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CPInstanceId", getCPInstanceId());
+		attributes.put("CPInstanceUuid", getCPInstanceUuid());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
 		attributes.put("subscriptionLength", getSubscriptionLength());
 		attributes.put("subscriptionType", getSubscriptionType());
@@ -136,10 +137,16 @@ public class CommerceSubscriptionEntryWrapper
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CPInstanceId = (Long)attributes.get("CPInstanceId");
+		String CPInstanceUuid = (String)attributes.get("CPInstanceUuid");
 
-		if (CPInstanceId != null) {
-			setCPInstanceId(CPInstanceId);
+		if (CPInstanceUuid != null) {
+			setCPInstanceUuid(CPInstanceUuid);
+		}
+
+		Long CProductId = (Long)attributes.get("CProductId");
+
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		Long commerceOrderItemId = (Long)attributes.get("commerceOrderItemId");
@@ -273,14 +280,29 @@ public class CommerceSubscriptionEntryWrapper
 		return _commerceSubscriptionEntry.getCPDefinitionId();
 	}
 
-	/**
-	* Returns the cp instance ID of this commerce subscription entry.
-	*
-	* @return the cp instance ID of this commerce subscription entry
-	*/
 	@Override
 	public long getCPInstanceId() {
 		return _commerceSubscriptionEntry.getCPInstanceId();
+	}
+
+	/**
+	* Returns the cp instance uuid of this commerce subscription entry.
+	*
+	* @return the cp instance uuid of this commerce subscription entry
+	*/
+	@Override
+	public String getCPInstanceUuid() {
+		return _commerceSubscriptionEntry.getCPInstanceUuid();
+	}
+
+	/**
+	* Returns the c product ID of this commerce subscription entry.
+	*
+	* @return the c product ID of this commerce subscription entry
+	*/
+	@Override
+	public long getCProductId() {
+		return _commerceSubscriptionEntry.getCProductId();
 	}
 
 	/**
@@ -519,13 +541,23 @@ public class CommerceSubscriptionEntryWrapper
 	}
 
 	/**
-	* Sets the cp instance ID of this commerce subscription entry.
+	* Sets the cp instance uuid of this commerce subscription entry.
 	*
-	* @param CPInstanceId the cp instance ID of this commerce subscription entry
+	* @param CPInstanceUuid the cp instance uuid of this commerce subscription entry
 	*/
 	@Override
-	public void setCPInstanceId(long CPInstanceId) {
-		_commerceSubscriptionEntry.setCPInstanceId(CPInstanceId);
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_commerceSubscriptionEntry.setCPInstanceUuid(CPInstanceUuid);
+	}
+
+	/**
+	* Sets the c product ID of this commerce subscription entry.
+	*
+	* @param CProductId the c product ID of this commerce subscription entry
+	*/
+	@Override
+	public void setCProductId(long CProductId) {
+		_commerceSubscriptionEntry.setCProductId(CProductId);
 	}
 
 	/**

@@ -138,7 +138,9 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 		newCommerceSubscriptionEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceSubscriptionEntry.setCPInstanceId(RandomTestUtil.nextLong());
+		newCommerceSubscriptionEntry.setCPInstanceUuid(RandomTestUtil.randomString());
+
+		newCommerceSubscriptionEntry.setCProductId(RandomTestUtil.nextLong());
 
 		newCommerceSubscriptionEntry.setCommerceOrderItemId(RandomTestUtil.nextLong());
 
@@ -182,8 +184,10 @@ public class CommerceSubscriptionEntryPersistenceTest {
 				existingCommerceSubscriptionEntry.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceSubscriptionEntry.getModifiedDate()));
-		Assert.assertEquals(existingCommerceSubscriptionEntry.getCPInstanceId(),
-			newCommerceSubscriptionEntry.getCPInstanceId());
+		Assert.assertEquals(existingCommerceSubscriptionEntry.getCPInstanceUuid(),
+			newCommerceSubscriptionEntry.getCPInstanceUuid());
+		Assert.assertEquals(existingCommerceSubscriptionEntry.getCProductId(),
+			newCommerceSubscriptionEntry.getCProductId());
 		Assert.assertEquals(existingCommerceSubscriptionEntry.getCommerceOrderItemId(),
 			newCommerceSubscriptionEntry.getCommerceOrderItemId());
 		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionLength(),
@@ -259,6 +263,16 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_C_C() throws Exception {
+		_persistence.countByC_C_C("", RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
+
+		_persistence.countByC_C_C("null", 0L, 0L);
+
+		_persistence.countByC_C_C((String)null, 0L, 0L);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceSubscriptionEntry newCommerceSubscriptionEntry = addCommerceSubscriptionEntry();
 
@@ -285,8 +299,8 @@ public class CommerceSubscriptionEntryPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CommerceSubscriptionEntry",
 			"uuid", true, "commerceSubscriptionEntryId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "CPInstanceId", true,
-			"commerceOrderItemId", true, "subscriptionLength", true,
+			true, "modifiedDate", true, "CPInstanceUuid", true, "CProductId",
+			true, "commerceOrderItemId", true, "subscriptionLength", true,
 			"subscriptionType", true, "maxSubscriptionCycles", true,
 			"subscriptionStatus", true, "lastIterationDate", true,
 			"nextIterationDate", true, "startDate", true);
@@ -518,6 +532,19 @@ public class CommerceSubscriptionEntryPersistenceTest {
 				existingCommerceSubscriptionEntry.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCommerceSubscriptionEntry,
 				"getOriginalGroupId", new Class<?>[0]));
+
+		Assert.assertTrue(Objects.equals(
+				existingCommerceSubscriptionEntry.getCPInstanceUuid(),
+				ReflectionTestUtil.invoke(existingCommerceSubscriptionEntry,
+					"getOriginalCPInstanceUuid", new Class<?>[0])));
+		Assert.assertEquals(Long.valueOf(
+				existingCommerceSubscriptionEntry.getCProductId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceSubscriptionEntry,
+				"getOriginalCProductId", new Class<?>[0]));
+		Assert.assertEquals(Long.valueOf(
+				existingCommerceSubscriptionEntry.getCommerceOrderItemId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceSubscriptionEntry,
+				"getOriginalCommerceOrderItemId", new Class<?>[0]));
 	}
 
 	protected CommerceSubscriptionEntry addCommerceSubscriptionEntry()
@@ -540,7 +567,9 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 		commerceSubscriptionEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		commerceSubscriptionEntry.setCPInstanceId(RandomTestUtil.nextLong());
+		commerceSubscriptionEntry.setCPInstanceUuid(RandomTestUtil.randomString());
+
+		commerceSubscriptionEntry.setCProductId(RandomTestUtil.nextLong());
 
 		commerceSubscriptionEntry.setCommerceOrderItemId(RandomTestUtil.nextLong());
 

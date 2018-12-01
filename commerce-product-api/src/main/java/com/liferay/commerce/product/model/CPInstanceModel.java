@@ -244,6 +244,21 @@ public interface CPInstanceModel extends BaseModel<CPInstance>, ShardedModel,
 	public void setCPDefinitionId(long CPDefinitionId);
 
 	/**
+	 * Returns the cp instance uuid of this cp instance.
+	 *
+	 * @return the cp instance uuid of this cp instance
+	 */
+	@AutoEscape
+	public String getCPInstanceUuid();
+
+	/**
+	 * Sets the cp instance uuid of this cp instance.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid of this cp instance
+	 */
+	public void setCPInstanceUuid(String CPInstanceUuid);
+
+	/**
 	 * Returns the sku of this cp instance.
 	 *
 	 * @return the sku of this cp instance

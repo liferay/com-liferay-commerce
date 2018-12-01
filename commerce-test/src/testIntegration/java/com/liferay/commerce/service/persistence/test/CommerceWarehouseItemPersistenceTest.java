@@ -56,6 +56,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -137,7 +138,9 @@ public class CommerceWarehouseItemPersistenceTest {
 
 		newCommerceWarehouseItem.setCommerceWarehouseId(RandomTestUtil.nextLong());
 
-		newCommerceWarehouseItem.setCPInstanceId(RandomTestUtil.nextLong());
+		newCommerceWarehouseItem.setCProductId(RandomTestUtil.nextLong());
+
+		newCommerceWarehouseItem.setCPInstanceUuid(RandomTestUtil.randomString());
 
 		newCommerceWarehouseItem.setQuantity(RandomTestUtil.nextInt());
 
@@ -164,8 +167,10 @@ public class CommerceWarehouseItemPersistenceTest {
 			Time.getShortTimestamp(newCommerceWarehouseItem.getModifiedDate()));
 		Assert.assertEquals(existingCommerceWarehouseItem.getCommerceWarehouseId(),
 			newCommerceWarehouseItem.getCommerceWarehouseId());
-		Assert.assertEquals(existingCommerceWarehouseItem.getCPInstanceId(),
-			newCommerceWarehouseItem.getCPInstanceId());
+		Assert.assertEquals(existingCommerceWarehouseItem.getCProductId(),
+			newCommerceWarehouseItem.getCProductId());
+		Assert.assertEquals(existingCommerceWarehouseItem.getCPInstanceUuid(),
+			newCommerceWarehouseItem.getCPInstanceUuid());
 		Assert.assertEquals(existingCommerceWarehouseItem.getQuantity(),
 			newCommerceWarehouseItem.getQuantity());
 	}
@@ -178,18 +183,21 @@ public class CommerceWarehouseItemPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCPInstanceId() throws Exception {
-		_persistence.countByCPInstanceId(RandomTestUtil.nextLong());
+	public void testCountByCWI_CPIU() throws Exception {
+		_persistence.countByCWI_CPIU(RandomTestUtil.nextLong(), "");
 
-		_persistence.countByCPInstanceId(0L);
+		_persistence.countByCWI_CPIU(0L, "null");
+
+		_persistence.countByCWI_CPIU(0L, (String)null);
 	}
 
 	@Test
-	public void testCountByC_C() throws Exception {
-		_persistence.countByC_C(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+	public void testCountByCPI_CPIU() throws Exception {
+		_persistence.countByCPI_CPIU(RandomTestUtil.nextLong(), "");
 
-		_persistence.countByC_C(0L, 0L);
+		_persistence.countByCPI_CPIU(0L, "null");
+
+		_persistence.countByCPI_CPIU(0L, (String)null);
 	}
 
 	@Test
@@ -219,8 +227,8 @@ public class CommerceWarehouseItemPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CommerceWarehouseItem",
 			"commerceWarehouseItemId", true, "groupId", true, "companyId",
 			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceWarehouseId", true, "CPInstanceId",
-			true, "quantity", true);
+			"modifiedDate", true, "commerceWarehouseId", true, "CProductId",
+			true, "CPInstanceUuid", true, "quantity", true);
 	}
 
 	@Test
@@ -435,10 +443,10 @@ public class CommerceWarehouseItemPersistenceTest {
 				existingCommerceWarehouseItem.getCommerceWarehouseId()),
 			ReflectionTestUtil.<Long>invoke(existingCommerceWarehouseItem,
 				"getOriginalCommerceWarehouseId", new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceWarehouseItem.getCPInstanceId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceWarehouseItem,
-				"getOriginalCPInstanceId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCommerceWarehouseItem.getCPInstanceUuid(),
+				ReflectionTestUtil.invoke(existingCommerceWarehouseItem,
+					"getOriginalCPInstanceUuid", new Class<?>[0])));
 	}
 
 	protected CommerceWarehouseItem addCommerceWarehouseItem()
@@ -461,7 +469,9 @@ public class CommerceWarehouseItemPersistenceTest {
 
 		commerceWarehouseItem.setCommerceWarehouseId(RandomTestUtil.nextLong());
 
-		commerceWarehouseItem.setCPInstanceId(RandomTestUtil.nextLong());
+		commerceWarehouseItem.setCProductId(RandomTestUtil.nextLong());
+
+		commerceWarehouseItem.setCPInstanceUuid(RandomTestUtil.randomString());
 
 		commerceWarehouseItem.setQuantity(RandomTestUtil.nextInt());
 

@@ -70,6 +70,8 @@ public interface CommerceSubscriptionEntry
 
 	public long getCPDefinitionId();
 
+	public long getCPInstanceId();
+
 	public com.liferay.portal.kernel.util.UnicodeProperties getSubscriptionTypeSettingsProperties();
 
 	public void setSubscriptionTypeSettingsProperties(

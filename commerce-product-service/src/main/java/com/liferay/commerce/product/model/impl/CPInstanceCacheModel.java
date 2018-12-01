@@ -67,7 +67,7 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(75);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -89,6 +89,8 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		sb.append(modifiedDate);
 		sb.append(", CPDefinitionId=");
 		sb.append(CPDefinitionId);
+		sb.append(", CPInstanceUuid=");
+		sb.append(CPInstanceUuid);
 		sb.append(", sku=");
 		sb.append(sku);
 		sb.append(", gtin=");
@@ -191,6 +193,13 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		}
 
 		cpInstanceImpl.setCPDefinitionId(CPDefinitionId);
+
+		if (CPInstanceUuid == null) {
+			cpInstanceImpl.setCPInstanceUuid("");
+		}
+		else {
+			cpInstanceImpl.setCPInstanceUuid(CPInstanceUuid);
+		}
 
 		if (sku == null) {
 			cpInstanceImpl.setSku("");
@@ -311,6 +320,7 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		modifiedDate = objectInput.readLong();
 
 		CPDefinitionId = objectInput.readLong();
+		CPInstanceUuid = objectInput.readUTF();
 		sku = objectInput.readUTF();
 		gtin = objectInput.readUTF();
 		manufacturerPartNumber = objectInput.readUTF();
@@ -387,6 +397,13 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 		objectOutput.writeLong(modifiedDate);
 
 		objectOutput.writeLong(CPDefinitionId);
+
+		if (CPInstanceUuid == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(CPInstanceUuid);
+		}
 
 		if (sku == null) {
 			objectOutput.writeUTF("");
@@ -480,6 +497,7 @@ public class CPInstanceCacheModel implements CacheModel<CPInstance>,
 	public long createDate;
 	public long modifiedDate;
 	public long CPDefinitionId;
+	public String CPInstanceUuid;
 	public String sku;
 	public String gtin;
 	public String manufacturerPartNumber;

@@ -686,68 +686,68 @@ public class CPDefinitionGroupedEntryUtil {
 	}
 
 	/**
-	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; or throws a {@link NoSuchCPDefinitionGroupedEntryException} if it could not be found.
+	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; or throws a {@link NoSuchCPDefinitionGroupedEntryException} if it could not be found.
 	*
 	* @param CPDefinitionId the cp definition ID
-	* @param entryCPDefinitionId the entry cp definition ID
+	* @param entryCProductId the entry c product ID
 	* @return the matching cp definition grouped entry
 	* @throws NoSuchCPDefinitionGroupedEntryException if a matching cp definition grouped entry could not be found
 	*/
 	public static CPDefinitionGroupedEntry findByC_E(long CPDefinitionId,
-		long entryCPDefinitionId)
+		long entryCProductId)
 		throws com.liferay.commerce.product.type.grouped.exception.NoSuchCPDefinitionGroupedEntryException {
-		return getPersistence().findByC_E(CPDefinitionId, entryCPDefinitionId);
+		return getPersistence().findByC_E(CPDefinitionId, entryCProductId);
 	}
 
 	/**
-	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param CPDefinitionId the cp definition ID
-	* @param entryCPDefinitionId the entry cp definition ID
+	* @param entryCProductId the entry c product ID
 	* @return the matching cp definition grouped entry, or <code>null</code> if a matching cp definition grouped entry could not be found
 	*/
 	public static CPDefinitionGroupedEntry fetchByC_E(long CPDefinitionId,
-		long entryCPDefinitionId) {
-		return getPersistence().fetchByC_E(CPDefinitionId, entryCPDefinitionId);
+		long entryCProductId) {
+		return getPersistence().fetchByC_E(CPDefinitionId, entryCProductId);
 	}
 
 	/**
-	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param CPDefinitionId the cp definition ID
-	* @param entryCPDefinitionId the entry cp definition ID
+	* @param entryCProductId the entry c product ID
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching cp definition grouped entry, or <code>null</code> if a matching cp definition grouped entry could not be found
 	*/
 	public static CPDefinitionGroupedEntry fetchByC_E(long CPDefinitionId,
-		long entryCPDefinitionId, boolean retrieveFromCache) {
+		long entryCProductId, boolean retrieveFromCache) {
 		return getPersistence()
-				   .fetchByC_E(CPDefinitionId, entryCPDefinitionId,
+				   .fetchByC_E(CPDefinitionId, entryCProductId,
 			retrieveFromCache);
 	}
 
 	/**
-	* Removes the cp definition grouped entry where CPDefinitionId = &#63; and entryCPDefinitionId = &#63; from the database.
+	* Removes the cp definition grouped entry where CPDefinitionId = &#63; and entryCProductId = &#63; from the database.
 	*
 	* @param CPDefinitionId the cp definition ID
-	* @param entryCPDefinitionId the entry cp definition ID
+	* @param entryCProductId the entry c product ID
 	* @return the cp definition grouped entry that was removed
 	*/
 	public static CPDefinitionGroupedEntry removeByC_E(long CPDefinitionId,
-		long entryCPDefinitionId)
+		long entryCProductId)
 		throws com.liferay.commerce.product.type.grouped.exception.NoSuchCPDefinitionGroupedEntryException {
-		return getPersistence().removeByC_E(CPDefinitionId, entryCPDefinitionId);
+		return getPersistence().removeByC_E(CPDefinitionId, entryCProductId);
 	}
 
 	/**
-	* Returns the number of cp definition grouped entries where CPDefinitionId = &#63; and entryCPDefinitionId = &#63;.
+	* Returns the number of cp definition grouped entries where CPDefinitionId = &#63; and entryCProductId = &#63;.
 	*
 	* @param CPDefinitionId the cp definition ID
-	* @param entryCPDefinitionId the entry cp definition ID
+	* @param entryCProductId the entry c product ID
 	* @return the number of matching cp definition grouped entries
 	*/
-	public static int countByC_E(long CPDefinitionId, long entryCPDefinitionId) {
-		return getPersistence().countByC_E(CPDefinitionId, entryCPDefinitionId);
+	public static int countByC_E(long CPDefinitionId, long entryCProductId) {
+		return getPersistence().countByC_E(CPDefinitionId, entryCProductId);
 	}
 
 	/**

@@ -233,6 +233,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="CPDefinitionId" type="long" />
+		<field name="CPInstanceUuid" type="String" />
 		<field name="sku" type="String">
 			<validator name="required" />
 		</field>

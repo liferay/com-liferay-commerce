@@ -3095,6 +3095,292 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "commerceSubscriptionEntry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "commerceSubscriptionEntry.userId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_C_C = new FinderPath(CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceSubscriptionEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_C_C",
+			new String[] {
+				String.class.getName(), Long.class.getName(),
+				Long.class.getName()
+			},
+			CommerceSubscriptionEntryModelImpl.CPINSTANCEUUID_COLUMN_BITMASK |
+			CommerceSubscriptionEntryModelImpl.CPRODUCTID_COLUMN_BITMASK |
+			CommerceSubscriptionEntryModelImpl.COMMERCEORDERITEMID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_C = new FinderPath(CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByC_C_C",
+			new String[] {
+				String.class.getName(), Long.class.getName(),
+				Long.class.getName()
+			});
+
+	/**
+	 * Returns the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; or throws a {@link NoSuchSubscriptionEntryException} if it could not be found.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param CProductId the c product ID
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the matching commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionEntry findByC_C_C(String CPInstanceUuid,
+		long CProductId, long commerceOrderItemId)
+		throws NoSuchSubscriptionEntryException {
+		CommerceSubscriptionEntry commerceSubscriptionEntry = fetchByC_C_C(CPInstanceUuid,
+				CProductId, commerceOrderItemId);
+
+		if (commerceSubscriptionEntry == null) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("CPInstanceUuid=");
+			msg.append(CPInstanceUuid);
+
+			msg.append(", CProductId=");
+			msg.append(CProductId);
+
+			msg.append(", commerceOrderItemId=");
+			msg.append(commerceOrderItemId);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchSubscriptionEntryException(msg.toString());
+		}
+
+		return commerceSubscriptionEntry;
+	}
+
+	/**
+	 * Returns the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param CProductId the c product ID
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionEntry fetchByC_C_C(String CPInstanceUuid,
+		long CProductId, long commerceOrderItemId) {
+		return fetchByC_C_C(CPInstanceUuid, CProductId, commerceOrderItemId,
+			true);
+	}
+
+	/**
+	 * Returns the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param CProductId the c product ID
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionEntry fetchByC_C_C(String CPInstanceUuid,
+		long CProductId, long commerceOrderItemId, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] {
+				CPInstanceUuid, CProductId, commerceOrderItemId
+			};
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_C_C,
+					finderArgs, this);
+		}
+
+		if (result instanceof CommerceSubscriptionEntry) {
+			CommerceSubscriptionEntry commerceSubscriptionEntry = (CommerceSubscriptionEntry)result;
+
+			if (!Objects.equals(CPInstanceUuid,
+						commerceSubscriptionEntry.getCPInstanceUuid()) ||
+					(CProductId != commerceSubscriptionEntry.getCProductId()) ||
+					(commerceOrderItemId != commerceSubscriptionEntry.getCommerceOrderItemId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONENTRY_WHERE);
+
+			boolean bindCPInstanceUuid = false;
+
+			if (CPInstanceUuid == null) {
+				query.append(_FINDER_COLUMN_C_C_C_CPINSTANCEUUID_1);
+			}
+			else if (CPInstanceUuid.equals("")) {
+				query.append(_FINDER_COLUMN_C_C_C_CPINSTANCEUUID_3);
+			}
+			else {
+				bindCPInstanceUuid = true;
+
+				query.append(_FINDER_COLUMN_C_C_C_CPINSTANCEUUID_2);
+			}
+
+			query.append(_FINDER_COLUMN_C_C_C_CPRODUCTID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_COMMERCEORDERITEMID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCPInstanceUuid) {
+					qPos.add(CPInstanceUuid);
+				}
+
+				qPos.add(CProductId);
+
+				qPos.add(commerceOrderItemId);
+
+				List<CommerceSubscriptionEntry> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_C,
+						finderArgs, list);
+				}
+				else {
+					CommerceSubscriptionEntry commerceSubscriptionEntry = list.get(0);
+
+					result = commerceSubscriptionEntry;
+
+					cacheResult(commerceSubscriptionEntry);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_C, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceSubscriptionEntry)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; from the database.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param CProductId the c product ID
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the commerce subscription entry that was removed
+	 */
+	@Override
+	public CommerceSubscriptionEntry removeByC_C_C(String CPInstanceUuid,
+		long CProductId, long commerceOrderItemId)
+		throws NoSuchSubscriptionEntryException {
+		CommerceSubscriptionEntry commerceSubscriptionEntry = findByC_C_C(CPInstanceUuid,
+				CProductId, commerceOrderItemId);
+
+		return remove(commerceSubscriptionEntry);
+	}
+
+	/**
+	 * Returns the number of commerce subscription entries where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param CProductId the c product ID
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the number of matching commerce subscription entries
+	 */
+	@Override
+	public int countByC_C_C(String CPInstanceUuid, long CProductId,
+		long commerceOrderItemId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C_C;
+
+		Object[] finderArgs = new Object[] {
+				CPInstanceUuid, CProductId, commerceOrderItemId
+			};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_COMMERCESUBSCRIPTIONENTRY_WHERE);
+
+			boolean bindCPInstanceUuid = false;
+
+			if (CPInstanceUuid == null) {
+				query.append(_FINDER_COLUMN_C_C_C_CPINSTANCEUUID_1);
+			}
+			else if (CPInstanceUuid.equals("")) {
+				query.append(_FINDER_COLUMN_C_C_C_CPINSTANCEUUID_3);
+			}
+			else {
+				bindCPInstanceUuid = true;
+
+				query.append(_FINDER_COLUMN_C_C_C_CPINSTANCEUUID_2);
+			}
+
+			query.append(_FINDER_COLUMN_C_C_C_CPRODUCTID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_COMMERCEORDERITEMID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCPInstanceUuid) {
+					qPos.add(CPInstanceUuid);
+				}
+
+				qPos.add(CProductId);
+
+				qPos.add(commerceOrderItemId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_C_C_CPINSTANCEUUID_1 = "commerceSubscriptionEntry.CPInstanceUuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CPINSTANCEUUID_2 = "commerceSubscriptionEntry.CPInstanceUuid = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CPINSTANCEUUID_3 = "(commerceSubscriptionEntry.CPInstanceUuid IS NULL OR commerceSubscriptionEntry.CPInstanceUuid = '') AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CPRODUCTID_2 = "commerceSubscriptionEntry.CProductId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_COMMERCEORDERITEMID_2 = "commerceSubscriptionEntry.commerceOrderItemId = ?";
 
 	public CommerceSubscriptionEntryPersistenceImpl() {
 		setModelClass(CommerceSubscriptionEntry.class);
@@ -3133,6 +3419,13 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			new Object[] {
 				commerceSubscriptionEntry.getUuid(),
 				commerceSubscriptionEntry.getGroupId()
+			}, commerceSubscriptionEntry);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_C,
+			new Object[] {
+				commerceSubscriptionEntry.getCPInstanceUuid(),
+				commerceSubscriptionEntry.getCProductId(),
+				commerceSubscriptionEntry.getCommerceOrderItemId()
 			}, commerceSubscriptionEntry);
 
 		commerceSubscriptionEntry.resetOriginalValues();
@@ -3222,6 +3515,17 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			Long.valueOf(1), false);
 		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
 			commerceSubscriptionEntryModelImpl, false);
+
+		args = new Object[] {
+				commerceSubscriptionEntryModelImpl.getCPInstanceUuid(),
+				commerceSubscriptionEntryModelImpl.getCProductId(),
+				commerceSubscriptionEntryModelImpl.getCommerceOrderItemId()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_C_C_C, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C_C, args,
+			commerceSubscriptionEntryModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
@@ -3246,6 +3550,29 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					commerceSubscriptionEntryModelImpl.getCPInstanceUuid(),
+					commerceSubscriptionEntryModelImpl.getCProductId(),
+					commerceSubscriptionEntryModelImpl.getCommerceOrderItemId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C_C, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_C, args);
+		}
+
+		if ((commerceSubscriptionEntryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_C_C.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					commerceSubscriptionEntryModelImpl.getOriginalCPInstanceUuid(),
+					commerceSubscriptionEntryModelImpl.getOriginalCProductId(),
+					commerceSubscriptionEntryModelImpl.getOriginalCommerceOrderItemId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C_C, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C_C, args);
 		}
 	}
 

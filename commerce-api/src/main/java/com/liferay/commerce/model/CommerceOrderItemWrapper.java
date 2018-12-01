@@ -69,6 +69,7 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceOrderId", getCommerceOrderId());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("CPInstanceId", getCPInstanceId());
 		attributes.put("quantity", getQuantity());
 		attributes.put("shippedQuantity", getShippedQuantity());
@@ -142,6 +143,12 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 
 		if (commerceOrderId != null) {
 			setCommerceOrderId(commerceOrderId);
+		}
+
+		Long CProductId = (Long)attributes.get("CProductId");
+
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		Long CPInstanceId = (Long)attributes.get("CPInstanceId");
@@ -310,6 +317,22 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 	@Override
 	public long getCPInstanceId() {
 		return _commerceOrderItem.getCPInstanceId();
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CProduct getCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderItem.getCProduct();
+	}
+
+	/**
+	* Returns the c product ID of this commerce order item.
+	*
+	* @return the c product ID of this commerce order item
+	*/
+	@Override
+	public long getCProductId() {
+		return _commerceOrderItem.getCProductId();
 	}
 
 	/**
@@ -706,6 +729,16 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 	@Override
 	public void setCPInstanceId(long CPInstanceId) {
 		_commerceOrderItem.setCPInstanceId(CPInstanceId);
+	}
+
+	/**
+	* Sets the c product ID of this commerce order item.
+	*
+	* @param CProductId the c product ID of this commerce order item
+	*/
+	@Override
+	public void setCProductId(long CProductId) {
+		_commerceOrderItem.setCProductId(CProductId);
 	}
 
 	/**

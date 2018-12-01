@@ -225,18 +225,18 @@ public interface CPDefinitionGroupedEntryModel extends BaseModel<CPDefinitionGro
 	public void setCPDefinitionId(long CPDefinitionId);
 
 	/**
-	 * Returns the entry cp definition ID of this cp definition grouped entry.
+	 * Returns the entry c product ID of this cp definition grouped entry.
 	 *
-	 * @return the entry cp definition ID of this cp definition grouped entry
+	 * @return the entry c product ID of this cp definition grouped entry
 	 */
-	public long getEntryCPDefinitionId();
+	public long getEntryCProductId();
 
 	/**
-	 * Sets the entry cp definition ID of this cp definition grouped entry.
+	 * Sets the entry c product ID of this cp definition grouped entry.
 	 *
-	 * @param entryCPDefinitionId the entry cp definition ID of this cp definition grouped entry
+	 * @param entryCProductId the entry c product ID of this cp definition grouped entry
 	 */
-	public void setEntryCPDefinitionId(long entryCPDefinitionId);
+	public void setEntryCProductId(long entryCProductId);
 
 	/**
 	 * Returns the priority of this cp definition grouped entry.
