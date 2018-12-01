@@ -25,17 +25,17 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Brian Wing Shun Chan
  * @see ProcessModel
- * @see com.liferay.data.integration.model.impl.ProcessImpl
- * @see com.liferay.data.integration.model.impl.ProcessModelImpl
+ * @see com.liferay.commerce.data.integration.manager.model.impl.ProcessImpl
+ * @see com.liferay.commerce.data.integration.manager.model.impl.ProcessModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.data.integration.model.impl.ProcessImpl")
+@ImplementationClassName("com.liferay.commerce.data.integration.manager.model.impl.ProcessImpl")
 @ProviderType
 public interface Process extends ProcessModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.data.integration.model.impl.ProcessImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.data.integration.manager.model.impl.ProcessImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static final Accessor<Process, Long> PROCESS_ID_ACCESSOR = new Accessor<Process, Long>() {
 			@Override

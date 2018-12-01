@@ -17,8 +17,6 @@ package com.liferay.commerce.data.integration.manager.service.impl;
 import com.liferay.commerce.data.integration.manager.constants.ScheduledTaskActionKeys;
 import com.liferay.commerce.data.integration.manager.model.ProcessConstants;
 import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
-import com.liferay.commerce.data.integration.manager.service.ScheduledTaskService;
-import com.liferay.commerce.data.integration.manager.service.ScheduledTaskServiceUtil;
 import com.liferay.commerce.data.integration.manager.service.base.ScheduledTaskServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.auth.PrincipalException;

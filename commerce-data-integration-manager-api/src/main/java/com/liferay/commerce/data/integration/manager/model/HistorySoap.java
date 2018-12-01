@@ -23,10 +23,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.liferay.data.integration.service.http.HistoryServiceSoap}.
+ * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.data.integration.manager.service.http.HistoryServiceSoap}.
  *
  * @author Brian Wing Shun Chan
- * @see com.liferay.data.integration.service.http.HistoryServiceSoap
+ * @see com.liferay.commerce.data.integration.manager.service.http.HistoryServiceSoap
  * @generated
  */
 @ProviderType

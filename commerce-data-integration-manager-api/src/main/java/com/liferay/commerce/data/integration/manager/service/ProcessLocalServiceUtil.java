@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.Process;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
@@ -24,7 +23,7 @@ import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the local service utility for Process. This utility wraps
- * {@link com.liferay.data.integration.service.impl.ProcessLocalServiceImpl} and is the
+ * {@link com.liferay.commerce.data.integration.manager.service.impl.ProcessLocalServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on the local server. Methods of this service will not have security checks
  * based on the propagated JAAS credentials because this service can only be
@@ -32,8 +31,8 @@ import org.osgi.util.tracker.ServiceTracker;
  *
  * @author Brian Wing Shun Chan
  * @see ProcessLocalService
- * @see com.liferay.data.integration.service.base.ProcessLocalServiceBaseImpl
- * @see com.liferay.data.integration.service.impl.ProcessLocalServiceImpl
+ * @see com.liferay.commerce.data.integration.manager.service.base.ProcessLocalServiceBaseImpl
+ * @see com.liferay.commerce.data.integration.manager.service.impl.ProcessLocalServiceImpl
  * @generated
  */
 @ProviderType
@@ -41,7 +40,7 @@ public class ProcessLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.data.integration.service.impl.ProcessLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.data.integration.manager.service.impl.ProcessLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
@@ -50,8 +49,8 @@ public class ProcessLocalServiceUtil {
 	* @param process the process
 	* @return the process that was added
 	*/
-	public static Process addProcess(
-		Process process) {
+	public static com.liferay.commerce.data.integration.manager.model.Process addProcess(
+		com.liferay.commerce.data.integration.manager.model.Process process) {
 		return getService().addProcess(process);
 	}
 
@@ -60,7 +59,7 @@ public class ProcessLocalServiceUtil {
 	*
 	* Never reference this class directly. Always use {@link ProcessLocalServiceUtil} to access the process local service.
 	*/
-	public static Process addProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process addProcess(
 		String name, String className, String processType, String version,
 		long contextPropertiesFileEntryId, long srcArchiveFileEntryId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -76,7 +75,7 @@ public class ProcessLocalServiceUtil {
 	* @param processId the primary key for the new process
 	* @return the new process
 	*/
-	public static Process createProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process createProcess(
 		long processId) {
 		return getService().createProcess(processId);
 	}
@@ -97,7 +96,7 @@ public class ProcessLocalServiceUtil {
 	* @return the process that was removed
 	* @throws PortalException if a process with the primary key could not be found
 	*/
-	public static Process deleteProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process deleteProcess(
 		long processId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteProcess(processId);
@@ -109,8 +108,8 @@ public class ProcessLocalServiceUtil {
 	* @param process the process
 	* @return the process that was removed
 	*/
-	public static Process deleteProcess(
-		Process process) {
+	public static com.liferay.commerce.data.integration.manager.model.Process deleteProcess(
+		com.liferay.commerce.data.integration.manager.model.Process process) {
 		return getService().deleteProcess(process);
 	}
 
@@ -133,7 +132,7 @@ public class ProcessLocalServiceUtil {
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.data.integration.model.impl.ProcessModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.data.integration.manager.model.impl.ProcessModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -151,7 +150,7 @@ public class ProcessLocalServiceUtil {
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.data.integration.model.impl.ProcessModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.data.integration.manager.model.impl.ProcessModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -192,7 +191,7 @@ public class ProcessLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static Process fetchProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process fetchProcess(
 		long processId) {
 		return getService().fetchProcess(processId);
 	}
@@ -204,7 +203,7 @@ public class ProcessLocalServiceUtil {
 	* @param groupId the primary key of the group
 	* @return the matching process, or <code>null</code> if a matching process could not be found
 	*/
-	public static Process fetchProcessByUuidAndGroupId(
+	public static com.liferay.commerce.data.integration.manager.model.Process fetchProcessByUuidAndGroupId(
 		String uuid, long groupId) {
 		return getService().fetchProcessByUuidAndGroupId(uuid, groupId);
 	}
@@ -244,7 +243,7 @@ public class ProcessLocalServiceUtil {
 	* @return the process
 	* @throws PortalException if a process with the primary key could not be found
 	*/
-	public static Process getProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process getProcess(
 		long processId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getProcess(processId);
@@ -258,7 +257,7 @@ public class ProcessLocalServiceUtil {
 	* @return the matching process
 	* @throws PortalException if a matching process could not be found
 	*/
-	public static Process getProcessByUuidAndGroupId(
+	public static com.liferay.commerce.data.integration.manager.model.Process getProcessByUuidAndGroupId(
 		String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getProcessByUuidAndGroupId(uuid, groupId);
@@ -268,19 +267,19 @@ public class ProcessLocalServiceUtil {
 	* Returns a range of all the processes.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.data.integration.model.impl.ProcessModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.data.integration.manager.model.impl.ProcessModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of processes
 	* @param end the upper bound of the range of processes (not inclusive)
 	* @return the range of processes
 	*/
-	public static java.util.List<Process> getProcesses(
+	public static java.util.List<com.liferay.commerce.data.integration.manager.model.Process> getProcesses(
 		int start, int end) {
 		return getService().getProcesses(start, end);
 	}
 
-	public static java.util.List<Process> getProcessesByGroupId(
+	public static java.util.List<com.liferay.commerce.data.integration.manager.model.Process> getProcessesByGroupId(
 		long groupId, int start, int end) {
 		return getService().getProcessesByGroupId(groupId, start, end);
 	}
@@ -296,7 +295,7 @@ public class ProcessLocalServiceUtil {
 	* @param companyId the primary key of the company
 	* @return the matching processes, or an empty list if no matches were found
 	*/
-	public static java.util.List<Process> getProcessesByUuidAndCompanyId(
+	public static java.util.List<com.liferay.commerce.data.integration.manager.model.Process> getProcessesByUuidAndCompanyId(
 		String uuid, long companyId) {
 		return getService().getProcessesByUuidAndCompanyId(uuid, companyId);
 	}
@@ -311,9 +310,9 @@ public class ProcessLocalServiceUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the range of matching processes, or an empty list if no matches were found
 	*/
-	public static java.util.List<Process> getProcessesByUuidAndCompanyId(
+	public static java.util.List<com.liferay.commerce.data.integration.manager.model.Process> getProcessesByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<Process> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.data.integration.manager.model.Process> orderByComparator) {
 		return getService()
 				   .getProcessesByUuidAndCompanyId(uuid, companyId, start, end,
 			orderByComparator);
@@ -328,7 +327,7 @@ public class ProcessLocalServiceUtil {
 		return getService().getProcessesCount();
 	}
 
-	public static Process updateProcess(
+	public static com.liferay.commerce.data.integration.manager.model.Process updateProcess(
 		long processId, String name, String className, String processType,
 		String version, long contextPropertiesFileEntryId,
 		long srcArchiveFileEntryId,
@@ -346,8 +345,8 @@ public class ProcessLocalServiceUtil {
 	* @param process the process
 	* @return the process that was updated
 	*/
-	public static Process updateProcess(
-		Process process) {
+	public static com.liferay.commerce.data.integration.manager.model.Process updateProcess(
+		com.liferay.commerce.data.integration.manager.model.Process process) {
 		return getService().updateProcess(process);
 	}
 

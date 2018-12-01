@@ -15,13 +15,10 @@
 package com.liferay.commerce.data.integration.manager.service.http;
 
 import aQute.bnd.annotation.ProviderType;
-import com.liferay.commerce.data.integration.manager.model.History;
-import com.liferay.commerce.data.integration.manager.model.HistorySoap;
-import com.liferay.commerce.data.integration.manager.service.HistoryServiceUtil;
 
 /**
  * Provides the SOAP utility for the
- * {@link HistoryServiceUtil} service utility. The
+ * {@link com.liferay.commerce.data.integration.manager.service.HistoryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -29,10 +26,10 @@ import com.liferay.commerce.data.integration.manager.service.HistoryServiceUtil;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link HistorySoap}.
+ * is translated to an array of {@link com.liferay.commerce.data.integration.manager.model.HistorySoap}.
  * If the method in the service utility returns a
- * {@link History}, that is translated to a
- * {@link HistorySoap}. Methods that SOAP cannot
+ * {@link com.liferay.commerce.data.integration.manager.model.History}, that is translated to a
+ * {@link com.liferay.commerce.data.integration.manager.model.HistorySoap}. Methods that SOAP cannot
  * safely wire are skipped.
  * </p>
  *
@@ -55,8 +52,8 @@ import com.liferay.commerce.data.integration.manager.service.HistoryServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see HistoryServiceHttp
- * @see HistorySoap
- * @see HistoryServiceUtil
+ * @see com.liferay.commerce.data.integration.manager.model.HistorySoap
+ * @see com.liferay.commerce.data.integration.manager.service.HistoryServiceUtil
  * @generated
  */
 @ProviderType

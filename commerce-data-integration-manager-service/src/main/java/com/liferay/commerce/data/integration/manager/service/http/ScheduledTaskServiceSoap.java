@@ -16,8 +16,6 @@ package com.liferay.commerce.data.integration.manager.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
-import com.liferay.commerce.data.integration.manager.model.ScheduledTaskSoap;
 import com.liferay.commerce.data.integration.manager.service.ScheduledTaskServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
@@ -35,10 +33,10 @@ import java.rmi.RemoteException;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link ScheduledTaskSoap}.
+ * is translated to an array of {@link com.liferay.commerce.data.integration.manager.model.ScheduledTaskSoap}.
  * If the method in the service utility returns a
- * {@link ScheduledTask}, that is translated to a
- * {@link ScheduledTaskSoap}. Methods that SOAP cannot
+ * {@link com.liferay.commerce.data.integration.manager.model.ScheduledTask}, that is translated to a
+ * {@link com.liferay.commerce.data.integration.manager.model.ScheduledTaskSoap}. Methods that SOAP cannot
  * safely wire are skipped.
  * </p>
  *
@@ -61,7 +59,7 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  * @see ScheduledTaskServiceHttp
- * @see ScheduledTaskSoap
+ * @see com.liferay.commerce.data.integration.manager.model.ScheduledTaskSoap
  * @see ScheduledTaskServiceUtil
  * @generated
  */
@@ -72,16 +70,17 @@ public class ScheduledTaskServiceSoap {
 	*
 	* Never reference this class directly. Always use {@link ScheduledTaskServiceUtil} to access the scheduled task remote service.
 	*/
-	public static ScheduledTaskSoap addScheduledTask(
+	public static com.liferay.commerce.data.integration.manager.model.ScheduledTaskSoap addScheduledTask(
 		long processId, String frequency, java.util.Date startDate,
 		String startHour, String name,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			ScheduledTask returnValue = ScheduledTaskServiceUtil.addScheduledTask(processId,
-					frequency, startDate, startHour, name, serviceContext);
+			com.liferay.commerce.data.integration.manager.model.ScheduledTask returnValue =
+				ScheduledTaskServiceUtil.addScheduledTask(processId, frequency,
+					startDate, startHour, name, serviceContext);
 
-			return ScheduledTaskSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.data.integration.manager.model.ScheduledTaskSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -90,14 +89,14 @@ public class ScheduledTaskServiceSoap {
 		}
 	}
 
-	public static ScheduledTaskSoap[] getScheduledTaskByGroupId(
+	public static com.liferay.commerce.data.integration.manager.model.ScheduledTaskSoap[] getScheduledTaskByGroupId(
 		long groupId, int start, int end) throws RemoteException {
 		try {
-			java.util.List<ScheduledTask> returnValue =
+			java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> returnValue =
 				ScheduledTaskServiceUtil.getScheduledTaskByGroupId(groupId,
 					start, end);
 
-			return ScheduledTaskSoap.toSoapModels(returnValue);
+			return com.liferay.commerce.data.integration.manager.model.ScheduledTaskSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -120,17 +119,18 @@ public class ScheduledTaskServiceSoap {
 		}
 	}
 
-	public static ScheduledTaskSoap updateScheduledTask(
+	public static com.liferay.commerce.data.integration.manager.model.ScheduledTaskSoap updateScheduledTask(
 		long scheduledTaskId, long processId, String frequency,
 		java.util.Date startDate, String startHour, String name,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			ScheduledTask returnValue = ScheduledTaskServiceUtil.updateScheduledTask(scheduledTaskId,
+			com.liferay.commerce.data.integration.manager.model.ScheduledTask returnValue =
+				ScheduledTaskServiceUtil.updateScheduledTask(scheduledTaskId,
 					processId, frequency, startDate, startHour, name,
 					serviceContext);
 
-			return ScheduledTaskSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.data.integration.manager.model.ScheduledTaskSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
