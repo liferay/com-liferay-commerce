@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.data.integration.manager.talend.launcher.configuration;
+package com.liferay.commerce.data.integration.manager.talend.util.launcher.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
@@ -26,7 +26,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 	scope = ExtendedObjectClassDefinition.Scope.SYSTEM
 )
 @Meta.OCD(
-	id = "com.liferay.talend.job.launcher.configuration.TalendJobExecutorConfiguration",
+	id = "com.liferay.commerce.data.integration.manager.talend.util.launcher.configuration.TalendJobExecutorConfiguration",
 	localization = "content/Language",
 	name = "talend-job-launcher-configuration-name"
 )
