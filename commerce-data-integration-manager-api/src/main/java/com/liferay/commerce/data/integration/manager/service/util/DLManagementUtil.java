@@ -100,7 +100,7 @@ public class DLManagementUtil {
 		}
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(pe);
+				_log.debug(pe, pe);
 			}
 
 			folder = null;
