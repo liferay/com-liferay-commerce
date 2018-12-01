@@ -1,4 +1,4 @@
-Bundle-Name: data-integration-web
-Bundle-SymbolicName: com.liferay.data.integration.web.internal.portlet
+Bundle-Name: Liferay Commerce Data Integration Manager Talend Web
+Bundle-SymbolicName: com.liferay.commerce.data.integration.manager.web
 Bundle-Version: 1.0.0
-Export-Package: com.liferay.data.integration.web.internal.portlet.constants
+Web-ContextPath: /commerce-data-integration-manager-web

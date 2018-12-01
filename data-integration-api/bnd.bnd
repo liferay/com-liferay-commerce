@@ -1,11 +1,11 @@
-Bundle-Name: data-integration-api
-Bundle-SymbolicName: com.liferay.data.integration.api
+Bundle-Name: Liferay Commerce Data Integration Manager API
+Bundle-SymbolicName: com.liferay.commerce.data.integration.manager.api
 Bundle-Version: 1.0.0
 Export-Package:\
-	com.liferay.data.integration.constants,\
-	com.liferay.data.integration.exception,\
-	com.liferay.data.integration.model,\
-	com.liferay.data.integration.service,\
-	com.liferay.data.integration.service.persistence,\
-	com.liferay.data.integration.service.util
--includeresource: META-INF/service.xml=../data-integration-service/service.xml
+	com.liferay.commerce.data.integration.manager.constants,\
+	com.liferay.commerce.data.integration.manager.exception,\
+	com.liferay.commerce.data.integration.manager.model,\
+	com.liferay.commerce.data.integration.manager.service,\
+	com.liferay.commerce.data.integration.manager.service.persistence,\
+	com.liferay.commerce.data.integration.manager.service.util
+-includeresource: META-INF/service.xml=../commerce-data-integration-manager-service/service.xml
