@@ -43,7 +43,7 @@ public class CPDefinitionInventorySoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCPDefinitionId(model.getCPDefinitionId());
+		soapModel.setCProductId(model.getCProductId());
 		soapModel.setCPDefinitionInventoryEngine(model.getCPDefinitionInventoryEngine());
 		soapModel.setLowStockActivity(model.getLowStockActivity());
 		soapModel.setDisplayAvailability(model.isDisplayAvailability());
@@ -173,12 +173,12 @@ public class CPDefinitionInventorySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCPDefinitionId() {
-		return _CPDefinitionId;
+	public long getCProductId() {
+		return _CProductId;
 	}
 
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_CPDefinitionId = CPDefinitionId;
+	public void setCProductId(long CProductId) {
+		_CProductId = CProductId;
 	}
 
 	public String getCPDefinitionInventoryEngine() {
@@ -282,7 +282,7 @@ public class CPDefinitionInventorySoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _CPDefinitionId;
+	private long _CProductId;
 	private String _CPDefinitionInventoryEngine;
 	private String _lowStockActivity;
 	private boolean _displayAvailability;

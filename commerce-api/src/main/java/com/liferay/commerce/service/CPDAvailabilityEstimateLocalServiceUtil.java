@@ -92,6 +92,10 @@ public class CPDAvailabilityEstimateLocalServiceUtil {
 				   .deleteCPDAvailabilityEstimate(CPDAvailabilityEstimateId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static void deleteCPDAvailabilityEstimateByCPDefinitionId(
 		long cpDefinitionId) {
 		getService()
@@ -198,8 +202,13 @@ public class CPDAvailabilityEstimateLocalServiceUtil {
 				   .fetchCPDAvailabilityEstimate(CPDAvailabilityEstimateId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static com.liferay.commerce.model.CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCPDefinitionId(
-		long cpDefinitionId) {
+		long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .fetchCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
 	}

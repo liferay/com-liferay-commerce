@@ -102,8 +102,13 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		getService().deleteCommerceWarehouseItems(commerceWarehouseId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static void deleteCommerceWarehouseItemsByCPInstanceId(
-		long cpInstanceId) {
+		long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().deleteCommerceWarehouseItemsByCPInstanceId(cpInstanceId);
 	}
 
@@ -199,8 +204,13 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		return getService().fetchCommerceWarehouseItem(commerceWarehouseItemId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static com.liferay.commerce.model.CommerceWarehouseItem fetchCommerceWarehouseItem(
-		long commerceWarehouseId, long cpInstanceId) {
+		long commerceWarehouseId, long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .fetchCommerceWarehouseItem(commerceWarehouseId, cpInstanceId);
 	}
@@ -238,14 +248,24 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		return getService().getCommerceWarehouseItems(start, end);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
-		long cpInstanceId) {
+		long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCommerceWarehouseItems(cpInstanceId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static java.util.List<com.liferay.commerce.model.CommerceWarehouseItem> getCommerceWarehouseItems(
 		long cpInstanceId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouseItem> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceWarehouseItem> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceWarehouseItems(cpInstanceId, start, end,
 			orderByComparator);
@@ -266,7 +286,12 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		return getService().getCommerceWarehouseItemsCount();
 	}
 
-	public static int getCommerceWarehouseItemsCount(long cpInstanceId) {
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
+	public static int getCommerceWarehouseItemsCount(long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCommerceWarehouseItemsCount(cpInstanceId);
 	}
 

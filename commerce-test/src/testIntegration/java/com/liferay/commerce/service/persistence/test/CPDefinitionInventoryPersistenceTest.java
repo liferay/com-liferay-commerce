@@ -138,7 +138,7 @@ public class CPDefinitionInventoryPersistenceTest {
 
 		newCPDefinitionInventory.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCPDefinitionInventory.setCPDefinitionId(RandomTestUtil.nextLong());
+		newCPDefinitionInventory.setCProductId(RandomTestUtil.nextLong());
 
 		newCPDefinitionInventory.setCPDefinitionInventoryEngine(RandomTestUtil.randomString());
 
@@ -183,8 +183,8 @@ public class CPDefinitionInventoryPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCPDefinitionInventory.getModifiedDate()),
 			Time.getShortTimestamp(newCPDefinitionInventory.getModifiedDate()));
-		Assert.assertEquals(existingCPDefinitionInventory.getCPDefinitionId(),
-			newCPDefinitionInventory.getCPDefinitionId());
+		Assert.assertEquals(existingCPDefinitionInventory.getCProductId(),
+			newCPDefinitionInventory.getCProductId());
 		Assert.assertEquals(existingCPDefinitionInventory.getCPDefinitionInventoryEngine(),
 			newCPDefinitionInventory.getCPDefinitionInventoryEngine());
 		Assert.assertEquals(existingCPDefinitionInventory.getLowStockActivity(),
@@ -235,10 +235,10 @@ public class CPDefinitionInventoryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCPDefinitionId() throws Exception {
-		_persistence.countByCPDefinitionId(RandomTestUtil.nextLong());
+	public void testCountByCProductId() throws Exception {
+		_persistence.countByCProductId(RandomTestUtil.nextLong());
 
-		_persistence.countByCPDefinitionId(0L);
+		_persistence.countByCProductId(0L);
 	}
 
 	@Test
@@ -268,7 +268,7 @@ public class CPDefinitionInventoryPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CPDefinitionInventory",
 			"uuid", true, "CPDefinitionInventoryId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "CPDefinitionId", true,
+			true, "modifiedDate", true, "CProductId", true,
 			"CPDefinitionInventoryEngine", true, "lowStockActivity", true,
 			"displayAvailability", true, "displayStockQuantity", true,
 			"minStockQuantity", true, "backOrders", true, "minOrderQuantity",
@@ -496,9 +496,9 @@ public class CPDefinitionInventoryPersistenceTest {
 				"getOriginalGroupId", new Class<?>[0]));
 
 		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionInventory.getCPDefinitionId()),
+				existingCPDefinitionInventory.getCProductId()),
 			ReflectionTestUtil.<Long>invoke(existingCPDefinitionInventory,
-				"getOriginalCPDefinitionId", new Class<?>[0]));
+				"getOriginalCProductId", new Class<?>[0]));
 	}
 
 	protected CPDefinitionInventory addCPDefinitionInventory()
@@ -521,7 +521,7 @@ public class CPDefinitionInventoryPersistenceTest {
 
 		cpDefinitionInventory.setModifiedDate(RandomTestUtil.nextDate());
 
-		cpDefinitionInventory.setCPDefinitionId(RandomTestUtil.nextLong());
+		cpDefinitionInventory.setCProductId(RandomTestUtil.nextLong());
 
 		cpDefinitionInventory.setCPDefinitionInventoryEngine(RandomTestUtil.randomString());
 

@@ -91,6 +91,10 @@ public class CommercePriceEntryLocalServiceUtil {
 		getService().deleteCommercePriceEntries(commercePriceListId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static void deleteCommercePriceEntriesByCPInstanceId(
 		long cpInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -222,14 +226,24 @@ public class CommercePriceEntryLocalServiceUtil {
 		return getService().fetchCommercePriceEntry(commercePriceEntryId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static com.liferay.commerce.price.list.model.CommercePriceEntry fetchCommercePriceEntry(
-		long cpInstanceId, long commercePriceListId) {
+		long cpInstanceId, long commercePriceListId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .fetchCommercePriceEntry(cpInstanceId, commercePriceListId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static com.liferay.commerce.price.list.model.CommercePriceEntry fetchCommercePriceEntry(
-		long cpInstanceId, long commercePriceListId, boolean useAncestor) {
+		long cpInstanceId, long commercePriceListId, boolean useAncestor)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .fetchCommercePriceEntry(cpInstanceId, commercePriceListId,
 			useAncestor);
@@ -385,21 +399,36 @@ public class CommercePriceEntryLocalServiceUtil {
 		return getService().getIndexableActionableDynamicQuery();
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static java.util.List<com.liferay.commerce.price.list.model.CommercePriceEntry> getInstanceCommercePriceEntries(
-		long cpInstanceId, int start, int end) {
+		long cpInstanceId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getInstanceCommercePriceEntries(cpInstanceId, start, end);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public static java.util.List<com.liferay.commerce.price.list.model.CommercePriceEntry> getInstanceCommercePriceEntries(
 		long cpInstanceId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommercePriceEntry> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommercePriceEntry> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getInstanceCommercePriceEntries(cpInstanceId, start, end,
 			orderByComparator);
 	}
 
-	public static int getInstanceCommercePriceEntriesCount(long cpInstanceId) {
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
+	public static int getInstanceCommercePriceEntriesCount(long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getInstanceCommercePriceEntriesCount(cpInstanceId);
 	}
 

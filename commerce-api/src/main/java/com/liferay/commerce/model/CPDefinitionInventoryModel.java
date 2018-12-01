@@ -211,18 +211,18 @@ public interface CPDefinitionInventoryModel extends BaseModel<CPDefinitionInvent
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the cp definition ID of this cp definition inventory.
+	 * Returns the c product ID of this cp definition inventory.
 	 *
-	 * @return the cp definition ID of this cp definition inventory
+	 * @return the c product ID of this cp definition inventory
 	 */
-	public long getCPDefinitionId();
+	public long getCProductId();
 
 	/**
-	 * Sets the cp definition ID of this cp definition inventory.
+	 * Sets the c product ID of this cp definition inventory.
 	 *
-	 * @param CPDefinitionId the cp definition ID of this cp definition inventory
+	 * @param CProductId the c product ID of this cp definition inventory
 	 */
-	public void setCPDefinitionId(long CPDefinitionId);
+	public void setCProductId(long CProductId);
 
 	/**
 	 * Returns the cp definition inventory engine of this cp definition inventory.

@@ -69,7 +69,7 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CPDefinitionId", getCPDefinitionId());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("CPDefinitionInventoryEngine",
 			getCPDefinitionInventoryEngine());
 		attributes.put("lowStockActivity", getLowStockActivity());
@@ -136,10 +136,10 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CPDefinitionId = (Long)attributes.get("CPDefinitionId");
+		Long CProductId = (Long)attributes.get("CProductId");
 
-		if (CPDefinitionId != null) {
-			setCPDefinitionId(CPDefinitionId);
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		String CPDefinitionInventoryEngine = (String)attributes.get(
@@ -249,16 +249,6 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Returns the cp definition ID of this cp definition inventory.
-	*
-	* @return the cp definition ID of this cp definition inventory
-	*/
-	@Override
-	public long getCPDefinitionId() {
-		return _cpDefinitionInventory.getCPDefinitionId();
-	}
-
-	/**
 	* Returns the cp definition inventory engine of this cp definition inventory.
 	*
 	* @return the cp definition inventory engine of this cp definition inventory
@@ -276,6 +266,16 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	@Override
 	public long getCPDefinitionInventoryId() {
 		return _cpDefinitionInventory.getCPDefinitionInventoryId();
+	}
+
+	/**
+	* Returns the c product ID of this cp definition inventory.
+	*
+	* @return the c product ID of this cp definition inventory
+	*/
+	@Override
+	public long getCProductId() {
+		return _cpDefinitionInventory.getCProductId();
 	}
 
 	/**
@@ -529,16 +529,6 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	}
 
 	/**
-	* Sets the cp definition ID of this cp definition inventory.
-	*
-	* @param CPDefinitionId the cp definition ID of this cp definition inventory
-	*/
-	@Override
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_cpDefinitionInventory.setCPDefinitionId(CPDefinitionId);
-	}
-
-	/**
 	* Sets the cp definition inventory engine of this cp definition inventory.
 	*
 	* @param CPDefinitionInventoryEngine the cp definition inventory engine of this cp definition inventory
@@ -557,6 +547,16 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 	@Override
 	public void setCPDefinitionInventoryId(long CPDefinitionInventoryId) {
 		_cpDefinitionInventory.setCPDefinitionInventoryId(CPDefinitionInventoryId);
+	}
+
+	/**
+	* Sets the c product ID of this cp definition inventory.
+	*
+	* @param CProductId the c product ID of this cp definition inventory
+	*/
+	@Override
+	public void setCProductId(long CProductId) {
+		_cpDefinitionInventory.setCProductId(CProductId);
 	}
 
 	/**

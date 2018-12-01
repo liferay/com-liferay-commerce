@@ -329,6 +329,15 @@ public class CPInstancePersistenceTest {
 	}
 
 	@Test
+	public void testCountByU_C() throws Exception {
+		_persistence.countByU_C("", RandomTestUtil.nextLong());
+
+		_persistence.countByU_C("null", 0L);
+
+		_persistence.countByU_C((String)null, 0L);
+	}
+
+	@Test
 	public void testCountByG_ST() throws Exception {
 		_persistence.countByG_ST(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextInt());
@@ -641,6 +650,13 @@ public class CPInstancePersistenceTest {
 		Assert.assertEquals(Long.valueOf(existingCPInstance.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCPInstance,
 				"getOriginalGroupId", new Class<?>[0]));
+
+		Assert.assertTrue(Objects.equals(existingCPInstance.getUuid(),
+				ReflectionTestUtil.invoke(existingCPInstance,
+					"getOriginalUuid", new Class<?>[0])));
+		Assert.assertEquals(Long.valueOf(existingCPInstance.getCPDefinitionId()),
+			ReflectionTestUtil.<Long>invoke(existingCPInstance,
+				"getOriginalCPDefinitionId", new Class<?>[0]));
 
 		Assert.assertEquals(Long.valueOf(existingCPInstance.getCPDefinitionId()),
 			ReflectionTestUtil.<Long>invoke(existingCPInstance,

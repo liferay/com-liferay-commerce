@@ -100,6 +100,10 @@ public class CPDefinitionInventoryLocalServiceWrapper
 		return _cpDefinitionInventoryLocalService.deleteCPDefinitionInventory(CPDefinitionInventoryId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Override
 	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId) {
 		_cpDefinitionInventoryLocalService.deleteCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
@@ -207,6 +211,10 @@ public class CPDefinitionInventoryLocalServiceWrapper
 		return _cpDefinitionInventoryLocalService.fetchCPDefinitionInventory(CPDefinitionInventoryId);
 	}
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Override
 	public com.liferay.commerce.model.CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
 		long cpDefinitionId)

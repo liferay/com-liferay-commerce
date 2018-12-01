@@ -316,6 +316,13 @@ public class CPInstanceLocalServiceWrapper implements CPInstanceLocalService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPInstance fetchCProductInstance(
+		long cProductId, String cpInstanceUuid) {
+		return _cpInstanceLocalService.fetchCProductInstance(cProductId,
+			cpInstanceUuid);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _cpInstanceLocalService.getActionableDynamicQuery();
 	}

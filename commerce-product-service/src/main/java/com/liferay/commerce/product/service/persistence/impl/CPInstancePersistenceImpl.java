@@ -2998,6 +2998,253 @@ public class CPInstancePersistenceImpl extends BasePersistenceImpl<CPInstance>
 	}
 
 	private static final String _FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2 = "cpInstance.CPDefinitionId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_U_C = new FinderPath(CPInstanceModelImpl.ENTITY_CACHE_ENABLED,
+			CPInstanceModelImpl.FINDER_CACHE_ENABLED, CPInstanceImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByU_C",
+			new String[] { String.class.getName(), Long.class.getName() },
+			CPInstanceModelImpl.UUID_COLUMN_BITMASK |
+			CPInstanceModelImpl.CPDEFINITIONID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_C = new FinderPath(CPInstanceModelImpl.ENTITY_CACHE_ENABLED,
+			CPInstanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByU_C",
+			new String[] { String.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns the cp instance where uuid = &#63; and CPDefinitionId = &#63; or throws a {@link NoSuchCPInstanceException} if it could not be found.
+	 *
+	 * @param uuid the uuid
+	 * @param CPDefinitionId the cp definition ID
+	 * @return the matching cp instance
+	 * @throws NoSuchCPInstanceException if a matching cp instance could not be found
+	 */
+	@Override
+	public CPInstance findByU_C(String uuid, long CPDefinitionId)
+		throws NoSuchCPInstanceException {
+		CPInstance cpInstance = fetchByU_C(uuid, CPDefinitionId);
+
+		if (cpInstance == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("uuid=");
+			msg.append(uuid);
+
+			msg.append(", CPDefinitionId=");
+			msg.append(CPDefinitionId);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchCPInstanceException(msg.toString());
+		}
+
+		return cpInstance;
+	}
+
+	/**
+	 * Returns the cp instance where uuid = &#63; and CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid
+	 * @param CPDefinitionId the cp definition ID
+	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	 */
+	@Override
+	public CPInstance fetchByU_C(String uuid, long CPDefinitionId) {
+		return fetchByU_C(uuid, CPDefinitionId, true);
+	}
+
+	/**
+	 * Returns the cp instance where uuid = &#63; and CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid
+	 * @param CPDefinitionId the cp definition ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	 */
+	@Override
+	public CPInstance fetchByU_C(String uuid, long CPDefinitionId,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { uuid, CPDefinitionId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_U_C,
+					finderArgs, this);
+		}
+
+		if (result instanceof CPInstance) {
+			CPInstance cpInstance = (CPInstance)result;
+
+			if (!Objects.equals(uuid, cpInstance.getUuid()) ||
+					(CPDefinitionId != cpInstance.getCPDefinitionId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_CPINSTANCE_WHERE);
+
+			boolean bindUuid = false;
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_U_C_UUID_1);
+			}
+			else if (uuid.equals("")) {
+				query.append(_FINDER_COLUMN_U_C_UUID_3);
+			}
+			else {
+				bindUuid = true;
+
+				query.append(_FINDER_COLUMN_U_C_UUID_2);
+			}
+
+			query.append(_FINDER_COLUMN_U_C_CPDEFINITIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindUuid) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(CPDefinitionId);
+
+				List<CPInstance> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_U_C, finderArgs,
+						list);
+				}
+				else {
+					CPInstance cpInstance = list.get(0);
+
+					result = cpInstance;
+
+					cacheResult(cpInstance);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_U_C, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CPInstance)result;
+		}
+	}
+
+	/**
+	 * Removes the cp instance where uuid = &#63; and CPDefinitionId = &#63; from the database.
+	 *
+	 * @param uuid the uuid
+	 * @param CPDefinitionId the cp definition ID
+	 * @return the cp instance that was removed
+	 */
+	@Override
+	public CPInstance removeByU_C(String uuid, long CPDefinitionId)
+		throws NoSuchCPInstanceException {
+		CPInstance cpInstance = findByU_C(uuid, CPDefinitionId);
+
+		return remove(cpInstance);
+	}
+
+	/**
+	 * Returns the number of cp instances where uuid = &#63; and CPDefinitionId = &#63;.
+	 *
+	 * @param uuid the uuid
+	 * @param CPDefinitionId the cp definition ID
+	 * @return the number of matching cp instances
+	 */
+	@Override
+	public int countByU_C(String uuid, long CPDefinitionId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_C;
+
+		Object[] finderArgs = new Object[] { uuid, CPDefinitionId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_CPINSTANCE_WHERE);
+
+			boolean bindUuid = false;
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_U_C_UUID_1);
+			}
+			else if (uuid.equals("")) {
+				query.append(_FINDER_COLUMN_U_C_UUID_3);
+			}
+			else {
+				bindUuid = true;
+
+				query.append(_FINDER_COLUMN_U_C_UUID_2);
+			}
+
+			query.append(_FINDER_COLUMN_U_C_CPDEFINITIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindUuid) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(CPDefinitionId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_U_C_UUID_1 = "cpInstance.uuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_U_C_UUID_2 = "cpInstance.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_UUID_3 = "(cpInstance.uuid IS NULL OR cpInstance.uuid = '') AND ";
+	private static final String _FINDER_COLUMN_U_C_CPDEFINITIONID_2 = "cpInstance.CPDefinitionId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_ST = new FinderPath(CPInstanceModelImpl.ENTITY_CACHE_ENABLED,
 			CPInstanceModelImpl.FINDER_CACHE_ENABLED, CPInstanceImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_ST",
@@ -6852,6 +7099,10 @@ public class CPInstancePersistenceImpl extends BasePersistenceImpl<CPInstance>
 			new Object[] { cpInstance.getUuid(), cpInstance.getGroupId() },
 			cpInstance);
 
+		finderCache.putResult(FINDER_PATH_FETCH_BY_U_C,
+			new Object[] { cpInstance.getUuid(), cpInstance.getCPDefinitionId() },
+			cpInstance);
+
 		finderCache.putResult(FINDER_PATH_FETCH_BY_C_S,
 			new Object[] { cpInstance.getCPDefinitionId(), cpInstance.getSku() },
 			cpInstance);
@@ -6942,6 +7193,16 @@ public class CPInstancePersistenceImpl extends BasePersistenceImpl<CPInstance>
 			cpInstanceModelImpl, false);
 
 		args = new Object[] {
+				cpInstanceModelImpl.getUuid(),
+				cpInstanceModelImpl.getCPDefinitionId()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_U_C, args, Long.valueOf(1),
+			false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_U_C, args,
+			cpInstanceModelImpl, false);
+
+		args = new Object[] {
 				cpInstanceModelImpl.getCPDefinitionId(),
 				cpInstanceModelImpl.getSku()
 			};
@@ -6983,6 +7244,27 @@ public class CPInstancePersistenceImpl extends BasePersistenceImpl<CPInstance>
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					cpInstanceModelImpl.getUuid(),
+					cpInstanceModelImpl.getCPDefinitionId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_U_C, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_U_C, args);
+		}
+
+		if ((cpInstanceModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_U_C.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					cpInstanceModelImpl.getOriginalUuid(),
+					cpInstanceModelImpl.getOriginalCPDefinitionId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_U_C, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_U_C, args);
 		}
 
 		if (clearCurrent) {

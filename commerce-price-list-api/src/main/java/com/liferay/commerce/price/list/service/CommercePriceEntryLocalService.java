@@ -106,6 +106,10 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 	public void deleteCommercePriceEntries(long commercePriceListId)
 		throws PortalException;
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public void deleteCommercePriceEntriesByCPInstanceId(long cpInstanceId)
 		throws PortalException;
 
@@ -211,13 +215,22 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceEntry fetchCommercePriceEntry(long commercePriceEntryId);
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceEntry fetchCommercePriceEntry(long cpInstanceId,
-		long commercePriceListId);
+		long commercePriceListId) throws PortalException;
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceEntry fetchCommercePriceEntry(long cpInstanceId,
-		long commercePriceListId, boolean useAncestor);
+		long commercePriceListId, boolean useAncestor)
+		throws PortalException;
 
 	/**
 	* Returns the commerce price entry with the matching external reference code and company.
@@ -341,17 +354,31 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-		long cpInstanceId, int start, int end);
+		long cpInstanceId, int start, int end) throws PortalException;
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
 		long cpInstanceId, int start, int end,
-		OrderByComparator<CommercePriceEntry> orderByComparator);
+		OrderByComparator<CommercePriceEntry> orderByComparator)
+		throws PortalException;
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getInstanceCommercePriceEntriesCount(long cpInstanceId);
+	public int getInstanceCommercePriceEntriesCount(long cpInstanceId)
+		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.

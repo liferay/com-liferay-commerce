@@ -109,6 +109,10 @@ public interface CPDAvailabilityEstimateLocalService extends BaseLocalService,
 	public CPDAvailabilityEstimate deleteCPDAvailabilityEstimate(
 		long CPDAvailabilityEstimateId) throws PortalException;
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	public void deleteCPDAvailabilityEstimateByCPDefinitionId(
 		long cpDefinitionId);
 
@@ -191,9 +195,13 @@ public interface CPDAvailabilityEstimateLocalService extends BaseLocalService,
 	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimate(
 		long CPDAvailabilityEstimateId);
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCPDefinitionId(
-		long cpDefinitionId);
+		long cpDefinitionId) throws PortalException;
 
 	/**
 	* Returns the cpd availability estimate matching the UUID and group.

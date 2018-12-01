@@ -512,62 +512,58 @@ public class CPDefinitionInventoryUtil {
 	}
 
 	/**
-	* Returns the cp definition inventory where CPDefinitionId = &#63; or throws a {@link NoSuchCPDefinitionInventoryException} if it could not be found.
+	* Returns the cp definition inventory where CProductId = &#63; or throws a {@link NoSuchCPDefinitionInventoryException} if it could not be found.
 	*
-	* @param CPDefinitionId the cp definition ID
+	* @param CProductId the c product ID
 	* @return the matching cp definition inventory
 	* @throws NoSuchCPDefinitionInventoryException if a matching cp definition inventory could not be found
 	*/
-	public static CPDefinitionInventory findByCPDefinitionId(
-		long CPDefinitionId)
+	public static CPDefinitionInventory findByCProductId(long CProductId)
 		throws com.liferay.commerce.exception.NoSuchCPDefinitionInventoryException {
-		return getPersistence().findByCPDefinitionId(CPDefinitionId);
+		return getPersistence().findByCProductId(CProductId);
 	}
 
 	/**
-	* Returns the cp definition inventory where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the cp definition inventory where CProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param CPDefinitionId the cp definition ID
+	* @param CProductId the c product ID
 	* @return the matching cp definition inventory, or <code>null</code> if a matching cp definition inventory could not be found
 	*/
-	public static CPDefinitionInventory fetchByCPDefinitionId(
-		long CPDefinitionId) {
-		return getPersistence().fetchByCPDefinitionId(CPDefinitionId);
+	public static CPDefinitionInventory fetchByCProductId(long CProductId) {
+		return getPersistence().fetchByCProductId(CProductId);
 	}
 
 	/**
-	* Returns the cp definition inventory where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the cp definition inventory where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param CPDefinitionId the cp definition ID
+	* @param CProductId the c product ID
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching cp definition inventory, or <code>null</code> if a matching cp definition inventory could not be found
 	*/
-	public static CPDefinitionInventory fetchByCPDefinitionId(
-		long CPDefinitionId, boolean retrieveFromCache) {
-		return getPersistence()
-				   .fetchByCPDefinitionId(CPDefinitionId, retrieveFromCache);
+	public static CPDefinitionInventory fetchByCProductId(long CProductId,
+		boolean retrieveFromCache) {
+		return getPersistence().fetchByCProductId(CProductId, retrieveFromCache);
 	}
 
 	/**
-	* Removes the cp definition inventory where CPDefinitionId = &#63; from the database.
+	* Removes the cp definition inventory where CProductId = &#63; from the database.
 	*
-	* @param CPDefinitionId the cp definition ID
+	* @param CProductId the c product ID
 	* @return the cp definition inventory that was removed
 	*/
-	public static CPDefinitionInventory removeByCPDefinitionId(
-		long CPDefinitionId)
+	public static CPDefinitionInventory removeByCProductId(long CProductId)
 		throws com.liferay.commerce.exception.NoSuchCPDefinitionInventoryException {
-		return getPersistence().removeByCPDefinitionId(CPDefinitionId);
+		return getPersistence().removeByCProductId(CProductId);
 	}
 
 	/**
-	* Returns the number of cp definition inventories where CPDefinitionId = &#63;.
+	* Returns the number of cp definition inventories where CProductId = &#63;.
 	*
-	* @param CPDefinitionId the cp definition ID
+	* @param CProductId the c product ID
 	* @return the number of matching cp definition inventories
 	*/
-	public static int countByCPDefinitionId(long CPDefinitionId) {
-		return getPersistence().countByCPDefinitionId(CPDefinitionId);
+	public static int countByCProductId(long CProductId) {
+		return getPersistence().countByCProductId(CProductId);
 	}
 
 	/**

@@ -142,9 +142,11 @@ public class CommercePriceEntryPersistenceTest {
 
 		newCommercePriceEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommercePriceEntry.setCPInstanceId(RandomTestUtil.nextLong());
-
 		newCommercePriceEntry.setCommercePriceListId(RandomTestUtil.nextLong());
+
+		newCommercePriceEntry.setCPInstanceUuid(RandomTestUtil.randomString());
+
+		newCommercePriceEntry.setCProductId(RandomTestUtil.nextLong());
 
 		newCommercePriceEntry.setPrice(new BigDecimal(
 				RandomTestUtil.nextDouble()));
@@ -180,10 +182,12 @@ public class CommercePriceEntryPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCommercePriceEntry.getModifiedDate()),
 			Time.getShortTimestamp(newCommercePriceEntry.getModifiedDate()));
-		Assert.assertEquals(existingCommercePriceEntry.getCPInstanceId(),
-			newCommercePriceEntry.getCPInstanceId());
 		Assert.assertEquals(existingCommercePriceEntry.getCommercePriceListId(),
 			newCommercePriceEntry.getCommercePriceListId());
+		Assert.assertEquals(existingCommercePriceEntry.getCPInstanceUuid(),
+			newCommercePriceEntry.getCPInstanceUuid());
+		Assert.assertEquals(existingCommercePriceEntry.getCProductId(),
+			newCommercePriceEntry.getCProductId());
 		Assert.assertEquals(existingCommercePriceEntry.getPrice(),
 			newCommercePriceEntry.getPrice());
 		Assert.assertEquals(existingCommercePriceEntry.getPromoPrice(),
@@ -237,13 +241,6 @@ public class CommercePriceEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCPInstanceId() throws Exception {
-		_persistence.countByCPInstanceId(RandomTestUtil.nextLong());
-
-		_persistence.countByCPInstanceId(0L);
-	}
-
-	@Test
 	public void testCountByCommercePriceListId() throws Exception {
 		_persistence.countByCommercePriceListId(RandomTestUtil.nextLong());
 
@@ -251,11 +248,21 @@ public class CommercePriceEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByC_C() throws Exception {
-		_persistence.countByC_C(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
+	public void testCountByCPInstanceUuid() throws Exception {
+		_persistence.countByCPInstanceUuid("");
 
-		_persistence.countByC_C(0L, 0L);
+		_persistence.countByCPInstanceUuid("null");
+
+		_persistence.countByCPInstanceUuid((String)null);
+	}
+
+	@Test
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_C(0L, "null");
+
+		_persistence.countByC_C(0L, (String)null);
 	}
 
 	@Test
@@ -294,9 +301,9 @@ public class CommercePriceEntryPersistenceTest {
 			"uuid", true, "externalReferenceCode", true,
 			"commercePriceEntryId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "CPInstanceId", true, "commercePriceListId",
-			true, "price", true, "promoPrice", true, "hasTierPrice", true,
-			"lastPublishDate", true);
+			"modifiedDate", true, "commercePriceListId", true,
+			"CPInstanceUuid", true, "CProductId", true, "price", true,
+			"promoPrice", true, "hasTierPrice", true, "lastPublishDate", true);
 	}
 
 	@Test
@@ -511,13 +518,13 @@ public class CommercePriceEntryPersistenceTest {
 				"getOriginalGroupId", new Class<?>[0]));
 
 		Assert.assertEquals(Long.valueOf(
-				existingCommercePriceEntry.getCPInstanceId()),
-			ReflectionTestUtil.<Long>invoke(existingCommercePriceEntry,
-				"getOriginalCPInstanceId", new Class<?>[0]));
-		Assert.assertEquals(Long.valueOf(
 				existingCommercePriceEntry.getCommercePriceListId()),
 			ReflectionTestUtil.<Long>invoke(existingCommercePriceEntry,
 				"getOriginalCommercePriceListId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCommercePriceEntry.getCPInstanceUuid(),
+				ReflectionTestUtil.invoke(existingCommercePriceEntry,
+					"getOriginalCPInstanceUuid", new Class<?>[0])));
 
 		Assert.assertEquals(Long.valueOf(
 				existingCommercePriceEntry.getCompanyId()),
@@ -551,9 +558,11 @@ public class CommercePriceEntryPersistenceTest {
 
 		commercePriceEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		commercePriceEntry.setCPInstanceId(RandomTestUtil.nextLong());
-
 		commercePriceEntry.setCommercePriceListId(RandomTestUtil.nextLong());
+
+		commercePriceEntry.setCPInstanceUuid(RandomTestUtil.randomString());
+
+		commercePriceEntry.setCProductId(RandomTestUtil.nextLong());
 
 		commercePriceEntry.setPrice(new BigDecimal(RandomTestUtil.nextDouble()));
 

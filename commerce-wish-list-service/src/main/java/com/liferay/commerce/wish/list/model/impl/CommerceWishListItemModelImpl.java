@@ -79,8 +79,8 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "commerceWishListId", Types.BIGINT },
-			{ "CPDefinitionId", Types.BIGINT },
-			{ "CPInstanceId", Types.BIGINT },
+			{ "CPInstanceUuid", Types.VARCHAR },
+			{ "CProductId", Types.BIGINT },
 			{ "json", Types.CLOB }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
@@ -94,12 +94,12 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("commerceWishListId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("CPDefinitionId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("CPInstanceId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("CPInstanceUuid", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("CProductId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("json", Types.CLOB);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceWishListItem (commerceWishListItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceWishListId LONG,CPDefinitionId LONG,CPInstanceId LONG,json TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceWishListItem (commerceWishListItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceWishListId LONG,CPInstanceUuid VARCHAR(75) null,CProductId LONG,json TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceWishListItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceWishListItem.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceWishListItem.createDate DESC";
@@ -115,8 +115,8 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.wish.list.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.wish.list.model.CommerceWishListItem"),
 			true);
-	public static final long CPDEFINITIONID_COLUMN_BITMASK = 1L;
-	public static final long CPINSTANCEID_COLUMN_BITMASK = 2L;
+	public static final long CPINSTANCEUUID_COLUMN_BITMASK = 1L;
+	public static final long CPRODUCTID_COLUMN_BITMASK = 2L;
 	public static final long COMMERCEWISHLISTID_COLUMN_BITMASK = 4L;
 	public static final long CREATEDATE_COLUMN_BITMASK = 8L;
 
@@ -142,8 +142,8 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setCommerceWishListId(soapModel.getCommerceWishListId());
-		model.setCPDefinitionId(soapModel.getCPDefinitionId());
-		model.setCPInstanceId(soapModel.getCPInstanceId());
+		model.setCPInstanceUuid(soapModel.getCPInstanceUuid());
+		model.setCProductId(soapModel.getCProductId());
 		model.setJson(soapModel.getJson());
 
 		return model;
@@ -218,8 +218,8 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceWishListId", getCommerceWishListId());
-		attributes.put("CPDefinitionId", getCPDefinitionId());
-		attributes.put("CPInstanceId", getCPInstanceId());
+		attributes.put("CPInstanceUuid", getCPInstanceUuid());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("json", getJson());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
@@ -279,16 +279,16 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 			setCommerceWishListId(commerceWishListId);
 		}
 
-		Long CPDefinitionId = (Long)attributes.get("CPDefinitionId");
+		String CPInstanceUuid = (String)attributes.get("CPInstanceUuid");
 
-		if (CPDefinitionId != null) {
-			setCPDefinitionId(CPDefinitionId);
+		if (CPInstanceUuid != null) {
+			setCPInstanceUuid(CPInstanceUuid);
 		}
 
-		Long CPInstanceId = (Long)attributes.get("CPInstanceId");
+		Long CProductId = (Long)attributes.get("CProductId");
 
-		if (CPInstanceId != null) {
-			setCPInstanceId(CPInstanceId);
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		String json = (String)attributes.get("json");
@@ -429,48 +429,51 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 
 	@JSON
 	@Override
-	public long getCPDefinitionId() {
-		return _CPDefinitionId;
+	public String getCPInstanceUuid() {
+		if (_CPInstanceUuid == null) {
+			return "";
+		}
+		else {
+			return _CPInstanceUuid;
+		}
 	}
 
 	@Override
-	public void setCPDefinitionId(long CPDefinitionId) {
-		_columnBitmask |= CPDEFINITIONID_COLUMN_BITMASK;
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_columnBitmask |= CPINSTANCEUUID_COLUMN_BITMASK;
 
-		if (!_setOriginalCPDefinitionId) {
-			_setOriginalCPDefinitionId = true;
-
-			_originalCPDefinitionId = _CPDefinitionId;
+		if (_originalCPInstanceUuid == null) {
+			_originalCPInstanceUuid = _CPInstanceUuid;
 		}
 
-		_CPDefinitionId = CPDefinitionId;
+		_CPInstanceUuid = CPInstanceUuid;
 	}
 
-	public long getOriginalCPDefinitionId() {
-		return _originalCPDefinitionId;
+	public String getOriginalCPInstanceUuid() {
+		return GetterUtil.getString(_originalCPInstanceUuid);
 	}
 
 	@JSON
 	@Override
-	public long getCPInstanceId() {
-		return _CPInstanceId;
+	public long getCProductId() {
+		return _CProductId;
 	}
 
 	@Override
-	public void setCPInstanceId(long CPInstanceId) {
-		_columnBitmask |= CPINSTANCEID_COLUMN_BITMASK;
+	public void setCProductId(long CProductId) {
+		_columnBitmask |= CPRODUCTID_COLUMN_BITMASK;
 
-		if (!_setOriginalCPInstanceId) {
-			_setOriginalCPInstanceId = true;
+		if (!_setOriginalCProductId) {
+			_setOriginalCProductId = true;
 
-			_originalCPInstanceId = _CPInstanceId;
+			_originalCProductId = _CProductId;
 		}
 
-		_CPInstanceId = CPInstanceId;
+		_CProductId = CProductId;
 	}
 
-	public long getOriginalCPInstanceId() {
-		return _originalCPInstanceId;
+	public long getOriginalCProductId() {
+		return _originalCProductId;
 	}
 
 	@JSON
@@ -528,8 +531,8 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 		commerceWishListItemImpl.setCreateDate(getCreateDate());
 		commerceWishListItemImpl.setModifiedDate(getModifiedDate());
 		commerceWishListItemImpl.setCommerceWishListId(getCommerceWishListId());
-		commerceWishListItemImpl.setCPDefinitionId(getCPDefinitionId());
-		commerceWishListItemImpl.setCPInstanceId(getCPInstanceId());
+		commerceWishListItemImpl.setCPInstanceUuid(getCPInstanceUuid());
+		commerceWishListItemImpl.setCProductId(getCProductId());
 		commerceWishListItemImpl.setJson(getJson());
 
 		commerceWishListItemImpl.resetOriginalValues();
@@ -600,13 +603,11 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 
 		commerceWishListItemModelImpl._setOriginalCommerceWishListId = false;
 
-		commerceWishListItemModelImpl._originalCPDefinitionId = commerceWishListItemModelImpl._CPDefinitionId;
+		commerceWishListItemModelImpl._originalCPInstanceUuid = commerceWishListItemModelImpl._CPInstanceUuid;
 
-		commerceWishListItemModelImpl._setOriginalCPDefinitionId = false;
+		commerceWishListItemModelImpl._originalCProductId = commerceWishListItemModelImpl._CProductId;
 
-		commerceWishListItemModelImpl._originalCPInstanceId = commerceWishListItemModelImpl._CPInstanceId;
-
-		commerceWishListItemModelImpl._setOriginalCPInstanceId = false;
+		commerceWishListItemModelImpl._setOriginalCProductId = false;
 
 		commerceWishListItemModelImpl._columnBitmask = 0;
 	}
@@ -651,9 +652,15 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 
 		commerceWishListItemCacheModel.commerceWishListId = getCommerceWishListId();
 
-		commerceWishListItemCacheModel.CPDefinitionId = getCPDefinitionId();
+		commerceWishListItemCacheModel.CPInstanceUuid = getCPInstanceUuid();
 
-		commerceWishListItemCacheModel.CPInstanceId = getCPInstanceId();
+		String CPInstanceUuid = commerceWishListItemCacheModel.CPInstanceUuid;
+
+		if ((CPInstanceUuid != null) && (CPInstanceUuid.length() == 0)) {
+			commerceWishListItemCacheModel.CPInstanceUuid = null;
+		}
+
+		commerceWishListItemCacheModel.CProductId = getCProductId();
 
 		commerceWishListItemCacheModel.json = getJson();
 
@@ -686,10 +693,10 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 		sb.append(getModifiedDate());
 		sb.append(", commerceWishListId=");
 		sb.append(getCommerceWishListId());
-		sb.append(", CPDefinitionId=");
-		sb.append(getCPDefinitionId());
-		sb.append(", CPInstanceId=");
-		sb.append(getCPInstanceId());
+		sb.append(", CPInstanceUuid=");
+		sb.append(getCPInstanceUuid());
+		sb.append(", CProductId=");
+		sb.append(getCProductId());
 		sb.append(", json=");
 		sb.append(getJson());
 		sb.append("}");
@@ -738,12 +745,12 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 		sb.append(getCommerceWishListId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>CPDefinitionId</column-name><column-value><![CDATA[");
-		sb.append(getCPDefinitionId());
+			"<column><column-name>CPInstanceUuid</column-name><column-value><![CDATA[");
+		sb.append(getCPInstanceUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>CPInstanceId</column-name><column-value><![CDATA[");
-		sb.append(getCPInstanceId());
+			"<column><column-name>CProductId</column-name><column-value><![CDATA[");
+		sb.append(getCProductId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>json</column-name><column-value><![CDATA[");
@@ -770,12 +777,11 @@ public class CommerceWishListItemModelImpl extends BaseModelImpl<CommerceWishLis
 	private long _commerceWishListId;
 	private long _originalCommerceWishListId;
 	private boolean _setOriginalCommerceWishListId;
-	private long _CPDefinitionId;
-	private long _originalCPDefinitionId;
-	private boolean _setOriginalCPDefinitionId;
-	private long _CPInstanceId;
-	private long _originalCPInstanceId;
-	private boolean _setOriginalCPInstanceId;
+	private String _CPInstanceUuid;
+	private String _originalCPInstanceUuid;
+	private long _CProductId;
+	private long _originalCProductId;
+	private boolean _setOriginalCProductId;
 	private String _json;
 	private long _columnBitmask;
 	private CommerceWishListItem _escapedModel;

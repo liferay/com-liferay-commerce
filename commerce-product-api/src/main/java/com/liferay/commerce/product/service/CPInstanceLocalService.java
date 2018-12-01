@@ -264,6 +264,10 @@ public interface CPInstanceLocalService extends BaseLocalService,
 	public CPInstance fetchCPInstanceByUuidAndGroupId(String uuid, long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPInstance fetchCProductInstance(long cProductId,
+		String cpInstanceUuid);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

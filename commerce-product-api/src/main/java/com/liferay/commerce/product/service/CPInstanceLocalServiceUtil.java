@@ -306,6 +306,11 @@ public class CPInstanceLocalServiceUtil {
 		return getService().fetchCPInstanceByUuidAndGroupId(uuid, groupId);
 	}
 
+	public static com.liferay.commerce.product.model.CPInstance fetchCProductInstance(
+		long cProductId, String cpInstanceUuid) {
+		return getService().fetchCProductInstance(cProductId, cpInstanceUuid);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return getService().getActionableDynamicQuery();
 	}

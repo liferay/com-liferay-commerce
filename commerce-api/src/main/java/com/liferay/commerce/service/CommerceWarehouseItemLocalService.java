@@ -109,7 +109,12 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 
 	public void deleteCommerceWarehouseItems(long commerceWarehouseId);
 
-	public void deleteCommerceWarehouseItemsByCPInstanceId(long cpInstanceId);
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
+	public void deleteCommerceWarehouseItemsByCPInstanceId(long cpInstanceId)
+		throws PortalException;
 
 	/**
 	* @throws PortalException
@@ -187,9 +192,13 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 	public CommerceWarehouseItem fetchCommerceWarehouseItem(
 		long commerceWarehouseItemId);
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceWarehouseItem fetchCommerceWarehouseItem(
-		long commerceWarehouseId, long cpInstanceId);
+		long commerceWarehouseId, long cpInstanceId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -220,14 +229,23 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 	public List<CommerceWarehouseItem> getCommerceWarehouseItems(int start,
 		int end);
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWarehouseItem> getCommerceWarehouseItems(
-		long cpInstanceId);
+		long cpInstanceId) throws PortalException;
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWarehouseItem> getCommerceWarehouseItems(
 		long cpInstanceId, int start, int end,
-		OrderByComparator<CommerceWarehouseItem> orderByComparator);
+		OrderByComparator<CommerceWarehouseItem> orderByComparator)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceWarehouseItem> getCommerceWarehouseItemsByCommerceWarehouseId(
@@ -241,8 +259,13 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceWarehouseItemsCount();
 
+	/**
+	* @deprecated As of Judson (7.1.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceWarehouseItemsCount(long cpInstanceId);
+	public int getCommerceWarehouseItemsCount(long cpInstanceId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPInstanceQuantity(long cpInstanceId);

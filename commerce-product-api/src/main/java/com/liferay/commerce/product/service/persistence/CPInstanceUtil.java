@@ -978,6 +978,67 @@ public class CPInstanceUtil {
 	}
 
 	/**
+	* Returns the cp instance where uuid = &#63; and CPDefinitionId = &#63; or throws a {@link NoSuchCPInstanceException} if it could not be found.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @return the matching cp instance
+	* @throws NoSuchCPInstanceException if a matching cp instance could not be found
+	*/
+	public static CPInstance findByU_C(String uuid, long CPDefinitionId)
+		throws com.liferay.commerce.product.exception.NoSuchCPInstanceException {
+		return getPersistence().findByU_C(uuid, CPDefinitionId);
+	}
+
+	/**
+	* Returns the cp instance where uuid = &#63; and CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	*/
+	public static CPInstance fetchByU_C(String uuid, long CPDefinitionId) {
+		return getPersistence().fetchByU_C(uuid, CPDefinitionId);
+	}
+
+	/**
+	* Returns the cp instance where uuid = &#63; and CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	*/
+	public static CPInstance fetchByU_C(String uuid, long CPDefinitionId,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByU_C(uuid, CPDefinitionId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the cp instance where uuid = &#63; and CPDefinitionId = &#63; from the database.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @return the cp instance that was removed
+	*/
+	public static CPInstance removeByU_C(String uuid, long CPDefinitionId)
+		throws com.liferay.commerce.product.exception.NoSuchCPInstanceException {
+		return getPersistence().removeByU_C(uuid, CPDefinitionId);
+	}
+
+	/**
+	* Returns the number of cp instances where uuid = &#63; and CPDefinitionId = &#63;.
+	*
+	* @param uuid the uuid
+	* @param CPDefinitionId the cp definition ID
+	* @return the number of matching cp instances
+	*/
+	public static int countByU_C(String uuid, long CPDefinitionId) {
+		return getPersistence().countByU_C(uuid, CPDefinitionId);
+	}
+
+	/**
 	* Returns all the cp instances where groupId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
