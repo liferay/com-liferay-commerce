@@ -24,8 +24,8 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="commerceWishListId" type="long" />
-		<field name="CPDefinitionId" type="long" />
-		<field name="CPInstanceId" type="long" />
+		<field name="CPInstanceUuid" type="String" />
+		<field name="CProductId" type="long" />
 		<field name="json" type="String">
 			<hint-collection name="CLOB" />
 		</field>

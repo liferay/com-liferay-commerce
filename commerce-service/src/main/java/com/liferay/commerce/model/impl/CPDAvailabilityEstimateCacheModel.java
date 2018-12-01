@@ -83,10 +83,10 @@ public class CPDAvailabilityEstimateCacheModel implements CacheModel<CPDAvailabi
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", CPDefinitionId=");
-		sb.append(CPDefinitionId);
 		sb.append(", commerceAvailabilityEstimateId=");
 		sb.append(commerceAvailabilityEstimateId);
+		sb.append(", CProductId=");
+		sb.append(CProductId);
 		sb.append(", lastPublishDate=");
 		sb.append(lastPublishDate);
 		sb.append("}");
@@ -131,8 +131,8 @@ public class CPDAvailabilityEstimateCacheModel implements CacheModel<CPDAvailabi
 			cpdAvailabilityEstimateImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		cpdAvailabilityEstimateImpl.setCPDefinitionId(CPDefinitionId);
 		cpdAvailabilityEstimateImpl.setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
+		cpdAvailabilityEstimateImpl.setCProductId(CProductId);
 
 		if (lastPublishDate == Long.MIN_VALUE) {
 			cpdAvailabilityEstimateImpl.setLastPublishDate(null);
@@ -162,9 +162,9 @@ public class CPDAvailabilityEstimateCacheModel implements CacheModel<CPDAvailabi
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		CPDefinitionId = objectInput.readLong();
-
 		commerceAvailabilityEstimateId = objectInput.readLong();
+
+		CProductId = objectInput.readLong();
 		lastPublishDate = objectInput.readLong();
 	}
 
@@ -196,9 +196,9 @@ public class CPDAvailabilityEstimateCacheModel implements CacheModel<CPDAvailabi
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(CPDefinitionId);
-
 		objectOutput.writeLong(commerceAvailabilityEstimateId);
+
+		objectOutput.writeLong(CProductId);
 		objectOutput.writeLong(lastPublishDate);
 	}
 
@@ -210,7 +210,7 @@ public class CPDAvailabilityEstimateCacheModel implements CacheModel<CPDAvailabi
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long CPDefinitionId;
 	public long commerceAvailabilityEstimateId;
+	public long CProductId;
 	public long lastPublishDate;
 }

@@ -67,7 +67,7 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -87,10 +87,12 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", CPInstanceId=");
-		sb.append(CPInstanceId);
 		sb.append(", commercePriceListId=");
 		sb.append(commercePriceListId);
+		sb.append(", CPInstanceUuid=");
+		sb.append(CPInstanceUuid);
+		sb.append(", CProductId=");
+		sb.append(CProductId);
 		sb.append(", price=");
 		sb.append(price);
 		sb.append(", promoPrice=");
@@ -148,8 +150,16 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 			commercePriceEntryImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		commercePriceEntryImpl.setCPInstanceId(CPInstanceId);
 		commercePriceEntryImpl.setCommercePriceListId(commercePriceListId);
+
+		if (CPInstanceUuid == null) {
+			commercePriceEntryImpl.setCPInstanceUuid("");
+		}
+		else {
+			commercePriceEntryImpl.setCPInstanceUuid(CPInstanceUuid);
+		}
+
+		commercePriceEntryImpl.setCProductId(CProductId);
 		commercePriceEntryImpl.setPrice(price);
 		commercePriceEntryImpl.setPromoPrice(promoPrice);
 		commercePriceEntryImpl.setHasTierPrice(hasTierPrice);
@@ -183,9 +193,10 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		CPInstanceId = objectInput.readLong();
-
 		commercePriceListId = objectInput.readLong();
+		CPInstanceUuid = objectInput.readUTF();
+
+		CProductId = objectInput.readLong();
 		price = (BigDecimal)objectInput.readObject();
 		promoPrice = (BigDecimal)objectInput.readObject();
 
@@ -228,9 +239,16 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(CPInstanceId);
-
 		objectOutput.writeLong(commercePriceListId);
+
+		if (CPInstanceUuid == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(CPInstanceUuid);
+		}
+
+		objectOutput.writeLong(CProductId);
 		objectOutput.writeObject(price);
 		objectOutput.writeObject(promoPrice);
 
@@ -247,8 +265,9 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long CPInstanceId;
 	public long commercePriceListId;
+	public String CPInstanceUuid;
+	public long CProductId;
 	public BigDecimal price;
 	public BigDecimal promoPrice;
 	public boolean hasTierPrice;

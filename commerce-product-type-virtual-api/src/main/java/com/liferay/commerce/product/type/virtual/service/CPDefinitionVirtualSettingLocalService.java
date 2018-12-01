@@ -125,7 +125,7 @@ public interface CPDefinitionVirtualSettingLocalService extends BaseLocalService
 		long CPDefinitionVirtualSettingId) throws PortalException;
 
 	public CPDefinitionVirtualSetting deleteCPDefinitionVirtualSetting(
-		String className, long classPK);
+		String className, long classPK) throws PortalException;
 
 	/**
 	* @throws PortalException

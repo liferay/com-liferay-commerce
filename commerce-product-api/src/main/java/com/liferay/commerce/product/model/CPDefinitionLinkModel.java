@@ -211,32 +211,32 @@ public interface CPDefinitionLinkModel extends BaseModel<CPDefinitionLink>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the cp definition id1 of this cp definition link.
+	 * Returns the cp definition ID of this cp definition link.
 	 *
-	 * @return the cp definition id1 of this cp definition link
+	 * @return the cp definition ID of this cp definition link
 	 */
-	public long getCPDefinitionId1();
+	public long getCPDefinitionId();
 
 	/**
-	 * Sets the cp definition id1 of this cp definition link.
+	 * Sets the cp definition ID of this cp definition link.
 	 *
-	 * @param CPDefinitionId1 the cp definition id1 of this cp definition link
+	 * @param CPDefinitionId the cp definition ID of this cp definition link
 	 */
-	public void setCPDefinitionId1(long CPDefinitionId1);
+	public void setCPDefinitionId(long CPDefinitionId);
 
 	/**
-	 * Returns the cp definition id2 of this cp definition link.
+	 * Returns the c product ID of this cp definition link.
 	 *
-	 * @return the cp definition id2 of this cp definition link
+	 * @return the c product ID of this cp definition link
 	 */
-	public long getCPDefinitionId2();
+	public long getCProductId();
 
 	/**
-	 * Sets the cp definition id2 of this cp definition link.
+	 * Sets the c product ID of this cp definition link.
 	 *
-	 * @param CPDefinitionId2 the cp definition id2 of this cp definition link
+	 * @param CProductId the c product ID of this cp definition link
 	 */
-	public void setCPDefinitionId2(long CPDefinitionId2);
+	public void setCProductId(long CProductId);
 
 	/**
 	 * Returns the priority of this cp definition link.

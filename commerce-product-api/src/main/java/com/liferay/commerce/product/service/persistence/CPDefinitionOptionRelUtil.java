@@ -1004,6 +1004,70 @@ public class CPDefinitionOptionRelUtil {
 	}
 
 	/**
+	* Returns the cp definition option rel where CPDefinitionId = &#63; and CPOptionId = &#63; or throws a {@link NoSuchCPDefinitionOptionRelException} if it could not be found.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPOptionId the cp option ID
+	* @return the matching cp definition option rel
+	* @throws NoSuchCPDefinitionOptionRelException if a matching cp definition option rel could not be found
+	*/
+	public static CPDefinitionOptionRel findByC_C(long CPDefinitionId,
+		long CPOptionId)
+		throws com.liferay.commerce.product.exception.NoSuchCPDefinitionOptionRelException {
+		return getPersistence().findByC_C(CPDefinitionId, CPOptionId);
+	}
+
+	/**
+	* Returns the cp definition option rel where CPDefinitionId = &#63; and CPOptionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPOptionId the cp option ID
+	* @return the matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
+	*/
+	public static CPDefinitionOptionRel fetchByC_C(long CPDefinitionId,
+		long CPOptionId) {
+		return getPersistence().fetchByC_C(CPDefinitionId, CPOptionId);
+	}
+
+	/**
+	* Returns the cp definition option rel where CPDefinitionId = &#63; and CPOptionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPOptionId the cp option ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
+	*/
+	public static CPDefinitionOptionRel fetchByC_C(long CPDefinitionId,
+		long CPOptionId, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByC_C(CPDefinitionId, CPOptionId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the cp definition option rel where CPDefinitionId = &#63; and CPOptionId = &#63; from the database.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPOptionId the cp option ID
+	* @return the cp definition option rel that was removed
+	*/
+	public static CPDefinitionOptionRel removeByC_C(long CPDefinitionId,
+		long CPOptionId)
+		throws com.liferay.commerce.product.exception.NoSuchCPDefinitionOptionRelException {
+		return getPersistence().removeByC_C(CPDefinitionId, CPOptionId);
+	}
+
+	/**
+	* Returns the number of cp definition option rels where CPDefinitionId = &#63; and CPOptionId = &#63;.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPOptionId the cp option ID
+	* @return the number of matching cp definition option rels
+	*/
+	public static int countByC_C(long CPDefinitionId, long CPOptionId) {
+		return getPersistence().countByC_C(CPDefinitionId, CPOptionId);
+	}
+
+	/**
 	* Returns all the cp definition option rels where CPDefinitionId = &#63; and skuContributor = &#63;.
 	*
 	* @param CPDefinitionId the cp definition ID

@@ -82,7 +82,8 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "CPInstanceId", Types.BIGINT },
+			{ "CPInstanceUuid", Types.VARCHAR },
+			{ "CProductId", Types.BIGINT },
 			{ "commerceOrderItemId", Types.BIGINT },
 			{ "subscriptionLength", Types.INTEGER },
 			{ "subscriptionType", Types.VARCHAR },
@@ -104,7 +105,8 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("CPInstanceId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("CPInstanceUuid", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("CProductId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceOrderItemId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("subscriptionLength", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("subscriptionType", Types.VARCHAR);
@@ -116,7 +118,7 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		TABLE_COLUMNS_MAP.put("startDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceSubscriptionEntry (uuid_ VARCHAR(75) null,commerceSubscriptionEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPInstanceId LONG,commerceOrderItemId LONG,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,subscriptionStatus INTEGER,lastIterationDate DATE null,nextIterationDate DATE null,startDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceSubscriptionEntry (uuid_ VARCHAR(75) null,commerceSubscriptionEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPInstanceUuid VARCHAR(75) null,CProductId LONG,commerceOrderItemId LONG,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,subscriptionStatus INTEGER,lastIterationDate DATE null,nextIterationDate DATE null,startDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceSubscriptionEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceSubscriptionEntry.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceSubscriptionEntry.createDate DESC";
@@ -132,12 +134,15 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.model.CommerceSubscriptionEntry"),
 			true);
-	public static final long COMPANYID_COLUMN_BITMASK = 1L;
-	public static final long GROUPID_COLUMN_BITMASK = 2L;
-	public static final long SUBSCRIPTIONSTATUS_COLUMN_BITMASK = 4L;
-	public static final long USERID_COLUMN_BITMASK = 8L;
-	public static final long UUID_COLUMN_BITMASK = 16L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 32L;
+	public static final long CPINSTANCEUUID_COLUMN_BITMASK = 1L;
+	public static final long CPRODUCTID_COLUMN_BITMASK = 2L;
+	public static final long COMMERCEORDERITEMID_COLUMN_BITMASK = 4L;
+	public static final long COMPANYID_COLUMN_BITMASK = 8L;
+	public static final long GROUPID_COLUMN_BITMASK = 16L;
+	public static final long SUBSCRIPTIONSTATUS_COLUMN_BITMASK = 32L;
+	public static final long USERID_COLUMN_BITMASK = 64L;
+	public static final long UUID_COLUMN_BITMASK = 128L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 256L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -161,7 +166,8 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setCPInstanceId(soapModel.getCPInstanceId());
+		model.setCPInstanceUuid(soapModel.getCPInstanceUuid());
+		model.setCProductId(soapModel.getCProductId());
 		model.setCommerceOrderItemId(soapModel.getCommerceOrderItemId());
 		model.setSubscriptionLength(soapModel.getSubscriptionLength());
 		model.setSubscriptionType(soapModel.getSubscriptionType());
@@ -245,7 +251,8 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("CPInstanceId", getCPInstanceId());
+		attributes.put("CPInstanceUuid", getCPInstanceUuid());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
 		attributes.put("subscriptionLength", getSubscriptionLength());
 		attributes.put("subscriptionType", getSubscriptionType());
@@ -313,10 +320,16 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 			setModifiedDate(modifiedDate);
 		}
 
-		Long CPInstanceId = (Long)attributes.get("CPInstanceId");
+		String CPInstanceUuid = (String)attributes.get("CPInstanceUuid");
 
-		if (CPInstanceId != null) {
-			setCPInstanceId(CPInstanceId);
+		if (CPInstanceUuid != null) {
+			setCPInstanceUuid(CPInstanceUuid);
+		}
+
+		Long CProductId = (Long)attributes.get("CProductId");
+
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		Long commerceOrderItemId = (Long)attributes.get("commerceOrderItemId");
@@ -546,13 +559,51 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 
 	@JSON
 	@Override
-	public long getCPInstanceId() {
-		return _CPInstanceId;
+	public String getCPInstanceUuid() {
+		if (_CPInstanceUuid == null) {
+			return "";
+		}
+		else {
+			return _CPInstanceUuid;
+		}
 	}
 
 	@Override
-	public void setCPInstanceId(long CPInstanceId) {
-		_CPInstanceId = CPInstanceId;
+	public void setCPInstanceUuid(String CPInstanceUuid) {
+		_columnBitmask |= CPINSTANCEUUID_COLUMN_BITMASK;
+
+		if (_originalCPInstanceUuid == null) {
+			_originalCPInstanceUuid = _CPInstanceUuid;
+		}
+
+		_CPInstanceUuid = CPInstanceUuid;
+	}
+
+	public String getOriginalCPInstanceUuid() {
+		return GetterUtil.getString(_originalCPInstanceUuid);
+	}
+
+	@JSON
+	@Override
+	public long getCProductId() {
+		return _CProductId;
+	}
+
+	@Override
+	public void setCProductId(long CProductId) {
+		_columnBitmask |= CPRODUCTID_COLUMN_BITMASK;
+
+		if (!_setOriginalCProductId) {
+			_setOriginalCProductId = true;
+
+			_originalCProductId = _CProductId;
+		}
+
+		_CProductId = CProductId;
+	}
+
+	public long getOriginalCProductId() {
+		return _originalCProductId;
 	}
 
 	@JSON
@@ -563,7 +614,19 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 
 	@Override
 	public void setCommerceOrderItemId(long commerceOrderItemId) {
+		_columnBitmask |= COMMERCEORDERITEMID_COLUMN_BITMASK;
+
+		if (!_setOriginalCommerceOrderItemId) {
+			_setOriginalCommerceOrderItemId = true;
+
+			_originalCommerceOrderItemId = _commerceOrderItemId;
+		}
+
 		_commerceOrderItemId = commerceOrderItemId;
+	}
+
+	public long getOriginalCommerceOrderItemId() {
+		return _originalCommerceOrderItemId;
 	}
 
 	@JSON
@@ -721,7 +784,8 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		commerceSubscriptionEntryImpl.setUserName(getUserName());
 		commerceSubscriptionEntryImpl.setCreateDate(getCreateDate());
 		commerceSubscriptionEntryImpl.setModifiedDate(getModifiedDate());
-		commerceSubscriptionEntryImpl.setCPInstanceId(getCPInstanceId());
+		commerceSubscriptionEntryImpl.setCPInstanceUuid(getCPInstanceUuid());
+		commerceSubscriptionEntryImpl.setCProductId(getCProductId());
 		commerceSubscriptionEntryImpl.setCommerceOrderItemId(getCommerceOrderItemId());
 		commerceSubscriptionEntryImpl.setSubscriptionLength(getSubscriptionLength());
 		commerceSubscriptionEntryImpl.setSubscriptionType(getSubscriptionType());
@@ -810,6 +874,16 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 
 		commerceSubscriptionEntryModelImpl._setModifiedDate = false;
 
+		commerceSubscriptionEntryModelImpl._originalCPInstanceUuid = commerceSubscriptionEntryModelImpl._CPInstanceUuid;
+
+		commerceSubscriptionEntryModelImpl._originalCProductId = commerceSubscriptionEntryModelImpl._CProductId;
+
+		commerceSubscriptionEntryModelImpl._setOriginalCProductId = false;
+
+		commerceSubscriptionEntryModelImpl._originalCommerceOrderItemId = commerceSubscriptionEntryModelImpl._commerceOrderItemId;
+
+		commerceSubscriptionEntryModelImpl._setOriginalCommerceOrderItemId = false;
+
 		commerceSubscriptionEntryModelImpl._originalSubscriptionStatus = commerceSubscriptionEntryModelImpl._subscriptionStatus;
 
 		commerceSubscriptionEntryModelImpl._setOriginalSubscriptionStatus = false;
@@ -863,7 +937,15 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 			commerceSubscriptionEntryCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		commerceSubscriptionEntryCacheModel.CPInstanceId = getCPInstanceId();
+		commerceSubscriptionEntryCacheModel.CPInstanceUuid = getCPInstanceUuid();
+
+		String CPInstanceUuid = commerceSubscriptionEntryCacheModel.CPInstanceUuid;
+
+		if ((CPInstanceUuid != null) && (CPInstanceUuid.length() == 0)) {
+			commerceSubscriptionEntryCacheModel.CPInstanceUuid = null;
+		}
+
+		commerceSubscriptionEntryCacheModel.CProductId = getCProductId();
 
 		commerceSubscriptionEntryCacheModel.commerceOrderItemId = getCommerceOrderItemId();
 
@@ -922,7 +1004,7 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -940,8 +1022,10 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", CPInstanceId=");
-		sb.append(getCPInstanceId());
+		sb.append(", CPInstanceUuid=");
+		sb.append(getCPInstanceUuid());
+		sb.append(", CProductId=");
+		sb.append(getCProductId());
 		sb.append(", commerceOrderItemId=");
 		sb.append(getCommerceOrderItemId());
 		sb.append(", subscriptionLength=");
@@ -967,7 +1051,7 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceSubscriptionEntry");
@@ -1006,8 +1090,12 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>CPInstanceId</column-name><column-value><![CDATA[");
-		sb.append(getCPInstanceId());
+			"<column><column-name>CPInstanceUuid</column-name><column-value><![CDATA[");
+		sb.append(getCPInstanceUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>CProductId</column-name><column-value><![CDATA[");
+		sb.append(getCProductId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>commerceOrderItemId</column-name><column-value><![CDATA[");
@@ -1071,8 +1159,14 @@ public class CommerceSubscriptionEntryModelImpl extends BaseModelImpl<CommerceSu
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _CPInstanceId;
+	private String _CPInstanceUuid;
+	private String _originalCPInstanceUuid;
+	private long _CProductId;
+	private long _originalCProductId;
+	private boolean _setOriginalCProductId;
 	private long _commerceOrderItemId;
+	private long _originalCommerceOrderItemId;
+	private boolean _setOriginalCommerceOrderItemId;
 	private int _subscriptionLength;
 	private String _subscriptionType;
 	private String _subscriptionTypeSettings;

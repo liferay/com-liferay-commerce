@@ -126,7 +126,8 @@ public class CPDefinitionVirtualSettingLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting deleteCPDefinitionVirtualSetting(
-		String className, long classPK) {
+		String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteCPDefinitionVirtualSetting(className, classPK);
 	}
 

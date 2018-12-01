@@ -71,7 +71,7 @@ public class CPDefinitionGroupedEntryWrapper implements CPDefinitionGroupedEntry
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("CPDefinitionId", getCPDefinitionId());
-		attributes.put("entryCPDefinitionId", getEntryCPDefinitionId());
+		attributes.put("entryCProductId", getEntryCProductId());
 		attributes.put("priority", getPriority());
 		attributes.put("quantity", getQuantity());
 
@@ -135,10 +135,10 @@ public class CPDefinitionGroupedEntryWrapper implements CPDefinitionGroupedEntry
 			setCPDefinitionId(CPDefinitionId);
 		}
 
-		Long entryCPDefinitionId = (Long)attributes.get("entryCPDefinitionId");
+		Long entryCProductId = (Long)attributes.get("entryCProductId");
 
-		if (entryCPDefinitionId != null) {
-			setEntryCPDefinitionId(entryCPDefinitionId);
+		if (entryCProductId != null) {
+			setEntryCProductId(entryCProductId);
 		}
 
 		Double priority = (Double)attributes.get("priority");
@@ -216,14 +216,26 @@ public class CPDefinitionGroupedEntryWrapper implements CPDefinitionGroupedEntry
 		return _cpDefinitionGroupedEntry.getEntryCPDefinition();
 	}
 
+	@Override
+	public long getEntryCPDefinitionId()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionGroupedEntry.getEntryCPDefinitionId();
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CProduct getEntryCProduct()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionGroupedEntry.getEntryCProduct();
+	}
+
 	/**
-	* Returns the entry cp definition ID of this cp definition grouped entry.
+	* Returns the entry c product ID of this cp definition grouped entry.
 	*
-	* @return the entry cp definition ID of this cp definition grouped entry
+	* @return the entry c product ID of this cp definition grouped entry
 	*/
 	@Override
-	public long getEntryCPDefinitionId() {
-		return _cpDefinitionGroupedEntry.getEntryCPDefinitionId();
+	public long getEntryCProductId() {
+		return _cpDefinitionGroupedEntry.getEntryCProductId();
 	}
 
 	@Override
@@ -397,13 +409,13 @@ public class CPDefinitionGroupedEntryWrapper implements CPDefinitionGroupedEntry
 	}
 
 	/**
-	* Sets the entry cp definition ID of this cp definition grouped entry.
+	* Sets the entry c product ID of this cp definition grouped entry.
 	*
-	* @param entryCPDefinitionId the entry cp definition ID of this cp definition grouped entry
+	* @param entryCProductId the entry c product ID of this cp definition grouped entry
 	*/
 	@Override
-	public void setEntryCPDefinitionId(long entryCPDefinitionId) {
-		_cpDefinitionGroupedEntry.setEntryCPDefinitionId(entryCPDefinitionId);
+	public void setEntryCProductId(long entryCProductId) {
+		_cpDefinitionGroupedEntry.setEntryCProductId(entryCProductId);
 	}
 
 	@Override

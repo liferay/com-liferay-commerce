@@ -83,15 +83,33 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 	public CommercePriceEntry addCommercePriceEntry(
 		CommercePriceEntry commercePriceEntry);
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public CommercePriceEntry addCommercePriceEntry(long cpInstanceId,
 		long commercePriceListId, BigDecimal price, BigDecimal promoPrice,
 		ServiceContext serviceContext) throws PortalException;
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public CommercePriceEntry addCommercePriceEntry(long cpInstanceId,
 		long commercePriceListId, String externalReferenceCode,
 		BigDecimal price, BigDecimal promoPrice, ServiceContext serviceContext)
 		throws PortalException;
+
+	public CommercePriceEntry addCommercePriceEntry(long cProductId,
+		String cpInstanceUuid, long commercePriceListId, BigDecimal price,
+		BigDecimal promoPrice, ServiceContext serviceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommercePriceEntry addCommercePriceEntry(long cProductId,
+		String cpInstanceUuid, long commercePriceListId,
+		String externalReferenceCode, BigDecimal price, BigDecimal promoPrice,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new commerce price entry with the primary key. Does not add the commerce price entry to the database.
@@ -106,6 +124,13 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 	public void deleteCommercePriceEntries(long commercePriceListId)
 		throws PortalException;
 
+	public void deleteCommercePriceEntries(String cpInstanceUuid)
+		throws PortalException;
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public void deleteCommercePriceEntriesByCPInstanceId(long cpInstanceId)
 		throws PortalException;
 
@@ -211,13 +236,29 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceEntry fetchCommercePriceEntry(long commercePriceEntryId);
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceEntry fetchCommercePriceEntry(long cpInstanceId,
 		long commercePriceListId);
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceEntry fetchCommercePriceEntry(long cpInstanceId,
 		long commercePriceListId, boolean useAncestor);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommercePriceEntry fetchCommercePriceEntry(
+		long commercePriceListId, String cpInstanceUuid);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommercePriceEntry fetchCommercePriceEntry(
+		long commercePriceListId, String cpInstanceUuid, boolean useAncestor);
 
 	/**
 	* Returns the commerce price entry with the matching external reference code and company.
@@ -341,17 +382,41 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
 		long cpInstanceId, int start, int end);
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
 		long cpInstanceId, int start, int end,
 		OrderByComparator<CommercePriceEntry> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
+		String cpInstanceUuid, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
+		String cpInstanceUuid, int start, int end,
+		OrderByComparator<CommercePriceEntry> orderByComparator);
+
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getInstanceCommercePriceEntriesCount(long cpInstanceId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getInstanceCommercePriceEntriesCount(String cpInstanceUuid);
 
 	/**
 	* Returns the OSGi service identifier.
@@ -399,6 +464,16 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
+	public CommercePriceEntry upsertCommercePriceEntry(
+		long commercePriceEntryId, long cpInstanceId, long commercePriceListId,
+		String externalReferenceCode, BigDecimal price, BigDecimal promoPrice,
+		String skuExternalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
+
+	/**
 	* This method is used to insert a new CommercePriceEntry or update an
 	* existing one
 	*
@@ -425,8 +500,9 @@ public interface CommercePriceEntryLocalService extends BaseLocalService,
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public CommercePriceEntry upsertCommercePriceEntry(
-		long commercePriceEntryId, long cpInstanceId, long commercePriceListId,
-		String externalReferenceCode, BigDecimal price, BigDecimal promoPrice,
+		long commercePriceEntryId, long cProductId, String cpInstanceUuid,
+		long commercePriceListId, String externalReferenceCode,
+		BigDecimal price, BigDecimal promoPrice,
 		String skuExternalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
 }

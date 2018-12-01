@@ -227,20 +227,6 @@ public interface CommercePriceEntryModel extends BaseModel<CommercePriceEntry>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the cp instance ID of this commerce price entry.
-	 *
-	 * @return the cp instance ID of this commerce price entry
-	 */
-	public long getCPInstanceId();
-
-	/**
-	 * Sets the cp instance ID of this commerce price entry.
-	 *
-	 * @param CPInstanceId the cp instance ID of this commerce price entry
-	 */
-	public void setCPInstanceId(long CPInstanceId);
-
-	/**
 	 * Returns the commerce price list ID of this commerce price entry.
 	 *
 	 * @return the commerce price list ID of this commerce price entry
@@ -253,6 +239,35 @@ public interface CommercePriceEntryModel extends BaseModel<CommercePriceEntry>,
 	 * @param commercePriceListId the commerce price list ID of this commerce price entry
 	 */
 	public void setCommercePriceListId(long commercePriceListId);
+
+	/**
+	 * Returns the cp instance uuid of this commerce price entry.
+	 *
+	 * @return the cp instance uuid of this commerce price entry
+	 */
+	@AutoEscape
+	public String getCPInstanceUuid();
+
+	/**
+	 * Sets the cp instance uuid of this commerce price entry.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid of this commerce price entry
+	 */
+	public void setCPInstanceUuid(String CPInstanceUuid);
+
+	/**
+	 * Returns the c product ID of this commerce price entry.
+	 *
+	 * @return the c product ID of this commerce price entry
+	 */
+	public long getCProductId();
+
+	/**
+	 * Sets the c product ID of this commerce price entry.
+	 *
+	 * @param CProductId the c product ID of this commerce price entry
+	 */
+	public void setCProductId(long CProductId);
 
 	/**
 	 * Returns the price of this commerce price entry.

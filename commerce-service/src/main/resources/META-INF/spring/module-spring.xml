@@ -60,7 +60,6 @@
 	<bean class="com.liferay.commerce.service.impl.CommerceWarehouseItemLocalServiceImpl" id="com.liferay.commerce.service.CommerceWarehouseItemLocalService" />
 	<bean class="com.liferay.commerce.service.impl.CommerceWarehouseItemServiceImpl" id="com.liferay.commerce.service.CommerceWarehouseItemService" />
 	<bean class="com.liferay.commerce.service.persistence.impl.CommerceWarehouseItemPersistenceImpl" id="com.liferay.commerce.service.persistence.CommerceWarehouseItemPersistence" parent="basePersistence" />
-	<bean class="com.liferay.commerce.service.persistence.impl.CommerceWarehouseItemFinderImpl" id="com.liferay.commerce.service.persistence.CommerceWarehouseItemFinder" parent="basePersistence" />
 	<bean class="com.liferay.commerce.service.impl.CPDAvailabilityEstimateLocalServiceImpl" id="com.liferay.commerce.service.CPDAvailabilityEstimateLocalService" />
 	<bean class="com.liferay.commerce.service.impl.CPDAvailabilityEstimateServiceImpl" id="com.liferay.commerce.service.CPDAvailabilityEstimateService" />
 	<bean class="com.liferay.commerce.service.persistence.impl.CPDAvailabilityEstimatePersistenceImpl" id="com.liferay.commerce.service.persistence.CPDAvailabilityEstimatePersistence" parent="basePersistence" />

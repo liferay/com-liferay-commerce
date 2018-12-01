@@ -42,8 +42,8 @@ public class CPDefinitionLinkSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCPDefinitionId1(model.getCPDefinitionId1());
-		soapModel.setCPDefinitionId2(model.getCPDefinitionId2());
+		soapModel.setCPDefinitionId(model.getCPDefinitionId());
+		soapModel.setCProductId(model.getCProductId());
 		soapModel.setPriority(model.getPriority());
 		soapModel.setType(model.getType());
 
@@ -164,20 +164,20 @@ public class CPDefinitionLinkSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCPDefinitionId1() {
-		return _CPDefinitionId1;
+	public long getCPDefinitionId() {
+		return _CPDefinitionId;
 	}
 
-	public void setCPDefinitionId1(long CPDefinitionId1) {
-		_CPDefinitionId1 = CPDefinitionId1;
+	public void setCPDefinitionId(long CPDefinitionId) {
+		_CPDefinitionId = CPDefinitionId;
 	}
 
-	public long getCPDefinitionId2() {
-		return _CPDefinitionId2;
+	public long getCProductId() {
+		return _CProductId;
 	}
 
-	public void setCPDefinitionId2(long CPDefinitionId2) {
-		_CPDefinitionId2 = CPDefinitionId2;
+	public void setCProductId(long CProductId) {
+		_CProductId = CProductId;
 	}
 
 	public double getPriority() {
@@ -204,8 +204,8 @@ public class CPDefinitionLinkSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _CPDefinitionId1;
-	private long _CPDefinitionId2;
+	private long _CPDefinitionId;
+	private long _CProductId;
 	private double _priority;
 	private String _type;
 }

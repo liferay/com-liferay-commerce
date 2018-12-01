@@ -89,6 +89,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "commerceOrderId", Types.BIGINT },
+			{ "CProductId", Types.BIGINT },
 			{ "CPInstanceId", Types.BIGINT },
 			{ "quantity", Types.INTEGER },
 			{ "shippedQuantity", Types.INTEGER },
@@ -116,6 +117,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("commerceOrderId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("CProductId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("CPInstanceId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("quantity", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("shippedQuantity", Types.INTEGER);
@@ -132,7 +134,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		TABLE_COLUMNS_MAP.put("subscription", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrderItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceOrderItem.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceOrderItem.createDate ASC";
@@ -149,11 +151,12 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 				"value.object.column.bitmask.enabled.com.liferay.commerce.model.CommerceOrderItem"),
 			true);
 	public static final long CPINSTANCEID_COLUMN_BITMASK = 1L;
-	public static final long COMMERCEORDERID_COLUMN_BITMASK = 2L;
-	public static final long COMPANYID_COLUMN_BITMASK = 4L;
-	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 8L;
-	public static final long SUBSCRIPTION_COLUMN_BITMASK = 16L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 32L;
+	public static final long CPRODUCTID_COLUMN_BITMASK = 2L;
+	public static final long COMMERCEORDERID_COLUMN_BITMASK = 4L;
+	public static final long COMPANYID_COLUMN_BITMASK = 8L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 16L;
+	public static final long SUBSCRIPTION_COLUMN_BITMASK = 32L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -177,6 +180,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setCommerceOrderId(soapModel.getCommerceOrderId());
+		model.setCProductId(soapModel.getCProductId());
 		model.setCPInstanceId(soapModel.getCPInstanceId());
 		model.setQuantity(soapModel.getQuantity());
 		model.setShippedQuantity(soapModel.getShippedQuantity());
@@ -265,6 +269,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceOrderId", getCommerceOrderId());
+		attributes.put("CProductId", getCProductId());
 		attributes.put("CPInstanceId", getCPInstanceId());
 		attributes.put("quantity", getQuantity());
 		attributes.put("shippedQuantity", getShippedQuantity());
@@ -341,6 +346,12 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 		if (commerceOrderId != null) {
 			setCommerceOrderId(commerceOrderId);
+		}
+
+		Long CProductId = (Long)attributes.get("CProductId");
+
+		if (CProductId != null) {
+			setCProductId(CProductId);
 		}
 
 		Long CPInstanceId = (Long)attributes.get("CPInstanceId");
@@ -597,6 +608,29 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	public long getOriginalCommerceOrderId() {
 		return _originalCommerceOrderId;
+	}
+
+	@JSON
+	@Override
+	public long getCProductId() {
+		return _CProductId;
+	}
+
+	@Override
+	public void setCProductId(long CProductId) {
+		_columnBitmask |= CPRODUCTID_COLUMN_BITMASK;
+
+		if (!_setOriginalCProductId) {
+			_setOriginalCProductId = true;
+
+			_originalCProductId = _CProductId;
+		}
+
+		_CProductId = CProductId;
+	}
+
+	public long getOriginalCProductId() {
+		return _originalCProductId;
 	}
 
 	@JSON
@@ -982,6 +1016,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		commerceOrderItemImpl.setCreateDate(getCreateDate());
 		commerceOrderItemImpl.setModifiedDate(getModifiedDate());
 		commerceOrderItemImpl.setCommerceOrderId(getCommerceOrderId());
+		commerceOrderItemImpl.setCProductId(getCProductId());
 		commerceOrderItemImpl.setCPInstanceId(getCPInstanceId());
 		commerceOrderItemImpl.setQuantity(getQuantity());
 		commerceOrderItemImpl.setShippedQuantity(getShippedQuantity());
@@ -1069,6 +1104,10 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 		commerceOrderItemModelImpl._setOriginalCommerceOrderId = false;
 
+		commerceOrderItemModelImpl._originalCProductId = commerceOrderItemModelImpl._CProductId;
+
+		commerceOrderItemModelImpl._setOriginalCProductId = false;
+
 		commerceOrderItemModelImpl._originalCPInstanceId = commerceOrderItemModelImpl._CPInstanceId;
 
 		commerceOrderItemModelImpl._setOriginalCPInstanceId = false;
@@ -1129,6 +1168,8 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 		commerceOrderItemCacheModel.commerceOrderId = getCommerceOrderId();
 
+		commerceOrderItemCacheModel.CProductId = getCProductId();
+
 		commerceOrderItemCacheModel.CPInstanceId = getCPInstanceId();
 
 		commerceOrderItemCacheModel.quantity = getQuantity();
@@ -1180,7 +1221,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(getExternalReferenceCode());
@@ -1200,6 +1241,8 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		sb.append(getModifiedDate());
 		sb.append(", commerceOrderId=");
 		sb.append(getCommerceOrderId());
+		sb.append(", CProductId=");
+		sb.append(getCProductId());
 		sb.append(", CPInstanceId=");
 		sb.append(getCPInstanceId());
 		sb.append(", quantity=");
@@ -1235,7 +1278,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceOrderItem");
@@ -1276,6 +1319,10 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		sb.append(
 			"<column><column-name>commerceOrderId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceOrderId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>CProductId</column-name><column-value><![CDATA[");
+		sb.append(getCProductId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>CPInstanceId</column-name><column-value><![CDATA[");
@@ -1358,6 +1405,9 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	private long _commerceOrderId;
 	private long _originalCommerceOrderId;
 	private boolean _setOriginalCommerceOrderId;
+	private long _CProductId;
+	private long _originalCProductId;
+	private boolean _setOriginalCProductId;
 	private long _CPInstanceId;
 	private long _originalCPInstanceId;
 	private boolean _setOriginalCPInstanceId;

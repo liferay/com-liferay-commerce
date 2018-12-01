@@ -203,8 +203,7 @@ public class CPDefinitionInventoryLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.model.CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
-		long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long cpDefinitionId) {
 		return getService()
 				   .fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
 	}

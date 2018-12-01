@@ -65,7 +65,7 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -83,8 +83,10 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", CPInstanceId=");
-		sb.append(CPInstanceId);
+		sb.append(", CPInstanceUuid=");
+		sb.append(CPInstanceUuid);
+		sb.append(", CProductId=");
+		sb.append(CProductId);
 		sb.append(", commerceOrderItemId=");
 		sb.append(commerceOrderItemId);
 		sb.append(", subscriptionLength=");
@@ -145,7 +147,14 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 			commerceSubscriptionEntryImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		commerceSubscriptionEntryImpl.setCPInstanceId(CPInstanceId);
+		if (CPInstanceUuid == null) {
+			commerceSubscriptionEntryImpl.setCPInstanceUuid("");
+		}
+		else {
+			commerceSubscriptionEntryImpl.setCPInstanceUuid(CPInstanceUuid);
+		}
+
+		commerceSubscriptionEntryImpl.setCProductId(CProductId);
 		commerceSubscriptionEntryImpl.setCommerceOrderItemId(commerceOrderItemId);
 		commerceSubscriptionEntryImpl.setSubscriptionLength(subscriptionLength);
 
@@ -208,8 +217,9 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
+		CPInstanceUuid = objectInput.readUTF();
 
-		CPInstanceId = objectInput.readLong();
+		CProductId = objectInput.readLong();
 
 		commerceOrderItemId = objectInput.readLong();
 
@@ -253,7 +263,14 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(CPInstanceId);
+		if (CPInstanceUuid == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(CPInstanceUuid);
+		}
+
+		objectOutput.writeLong(CProductId);
 
 		objectOutput.writeLong(commerceOrderItemId);
 
@@ -289,7 +306,8 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long CPInstanceId;
+	public String CPInstanceUuid;
+	public long CProductId;
 	public long commerceOrderItemId;
 	public int subscriptionLength;
 	public String subscriptionType;

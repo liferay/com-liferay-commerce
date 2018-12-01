@@ -118,7 +118,8 @@ public class CPDefinitionVirtualSettingLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting deleteCPDefinitionVirtualSetting(
-		String className, long classPK) {
+		String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionVirtualSettingLocalService.deleteCPDefinitionVirtualSetting(className,
 			classPK);
 	}

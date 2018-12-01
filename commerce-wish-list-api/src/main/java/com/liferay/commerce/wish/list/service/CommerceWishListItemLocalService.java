@@ -72,8 +72,16 @@ public interface CommerceWishListItemLocalService extends BaseLocalService,
 	public CommerceWishListItem addCommerceWishListItem(
 		CommerceWishListItem commerceWishListItem);
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public CommerceWishListItem addCommerceWishListItem(
 		long commerceWishListId, long cpDefinitionId, long cpInstanceId,
+		String json, ServiceContext serviceContext) throws PortalException;
+
+	public CommerceWishListItem addCommerceWishListItem(
+		long commerceWishListId, long cProductId, String cpInstanceUuid,
 		String json, ServiceContext serviceContext) throws PortalException;
 
 	/**
@@ -109,8 +117,16 @@ public interface CommerceWishListItemLocalService extends BaseLocalService,
 
 	public void deleteCommerceWishListItems(long commerceWishListId);
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public void deleteCommerceWishListItemsByCPDefinitionId(long cpDefinitionId);
 
+	/**
+	* @deprecated As of Mueller (7.2.x)
+	*/
+	@Deprecated
 	public void deleteCommerceWishListItemsByCPInstanceId(long cpInstanceId);
 
 	/**

@@ -249,6 +249,14 @@ public class CPDefinitionOptionRelPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
+
+		_persistence.countByC_C(0L, 0L);
+	}
+
+	@Test
 	public void testCountByC_SC() throws Exception {
 		_persistence.countByC_SC(RandomTestUtil.nextLong(),
 			RandomTestUtil.randomBoolean());
@@ -505,6 +513,15 @@ public class CPDefinitionOptionRelPersistenceTest {
 				existingCPDefinitionOptionRel.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCPDefinitionOptionRel,
 				"getOriginalGroupId", new Class<?>[0]));
+
+		Assert.assertEquals(Long.valueOf(
+				existingCPDefinitionOptionRel.getCPDefinitionId()),
+			ReflectionTestUtil.<Long>invoke(existingCPDefinitionOptionRel,
+				"getOriginalCPDefinitionId", new Class<?>[0]));
+		Assert.assertEquals(Long.valueOf(
+				existingCPDefinitionOptionRel.getCPOptionId()),
+			ReflectionTestUtil.<Long>invoke(existingCPDefinitionOptionRel,
+				"getOriginalCPOptionId", new Class<?>[0]));
 	}
 
 	protected CPDefinitionOptionRel addCPDefinitionOptionRel()

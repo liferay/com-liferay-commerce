@@ -45,6 +45,13 @@ public class CProductLocalServiceWrapper implements CProductLocalService,
 		return _cProductLocalService.addCProduct(cProduct);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CProduct addCProduct(
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cProductLocalService.addCProduct(serviceContext);
+	}
+
 	/**
 	* Creates a new c product with the primary key. Does not add the c product to the database.
 	*
@@ -327,6 +334,22 @@ public class CProductLocalServiceWrapper implements CProductLocalService,
 	public com.liferay.commerce.product.model.CProduct updateCProduct(
 		com.liferay.commerce.product.model.CProduct cProduct) {
 		return _cProductLocalService.updateCProduct(cProduct);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CProduct updateDraftDefinitionId(
+		long cProductId, long draftDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cProductLocalService.updateDraftDefinitionId(cProductId,
+			draftDefinitionId);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CProduct updatePublishedDefinitionId(
+		long cProductId, long publishedDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cProductLocalService.updatePublishedDefinitionId(cProductId,
+			publishedDefinitionId);
 	}
 
 	@Override

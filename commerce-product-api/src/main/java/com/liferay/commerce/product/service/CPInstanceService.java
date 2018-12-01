@@ -80,6 +80,10 @@ public interface CPInstanceService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPInstance fetchCProductInstance(long cProductId,
+		String cpInstanceUuid) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPInstance> getCPDefinitionInstances(long cpDefinitionId,
 		int status, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator)
