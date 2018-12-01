@@ -45,7 +45,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 							searchContainer="<%= historyDataIntegrationDisplayContext.getSearchContainer() %>"
 						>
 							<liferay-ui:search-container-row
-								className="com.liferay.data.integration.model.History"
+								className="com.liferay.commerce.data.integration.manager.model.History"
 								cssClass="entry-display-style"
 								keyProperty="historyId"
 								modelVar="history"

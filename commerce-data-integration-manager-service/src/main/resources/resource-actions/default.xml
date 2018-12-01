@@ -3,7 +3,7 @@
 
 <resource-action-mapping>
 	<portlet-resource>
-		<portlet-name>com_liferay_data_integration_web_internal_portlet_LrDataIntegrationWebPortlet</portlet-name>
+		<portlet-name>com_liferay_commerce_data_integration_manager_web_internal_portlet_CommerceDataIntegrationManagerPortlet</portlet-name>
 		<permissions>
 			<supports>
 				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
@@ -23,9 +23,9 @@
 		</permissions>
 	</portlet-resource>
 	<model-resource>
-		<model-name>com.liferay.data.integration.model.History</model-name>
+		<model-name>com.liferay.commerce.data.integration.manager.model.History</model-name>
 		<portlet-ref>
-			<portlet-name>com_liferay_data_integration_web_internal_portlet_LrDataIntegrationWebPortlet</portlet-name>
+			<portlet-name>com_liferay_commerce_data_integration_manager_web_internal_portlet_CommerceDataIntegrationManagerPortlet</portlet-name>
 		</portlet-ref>
 		<weight>1</weight>
 		<permissions>
@@ -44,9 +44,9 @@
 		</permissions>
 	</model-resource>
 	<model-resource>
-		<model-name>com.liferay.data.integration.model.Process</model-name>
+		<model-name>com.liferay.commerce.data.integration.manager.model.Process</model-name>
 		<portlet-ref>
-			<portlet-name>com_liferay_data_integration_web_internal_portlet_LrDataIntegrationWebPortlet</portlet-name>
+			<portlet-name>com_liferay_commerce_data_integration_manager_web_internal_portlet_CommerceDataIntegrationManagerPortlet</portlet-name>
 		</portlet-ref>
 		<weight>1</weight>
 		<permissions>
@@ -65,9 +65,9 @@
 		</permissions>
 	</model-resource>
 	<model-resource>
-		<model-name>com.liferay.data.integration.model.ScheduledTask</model-name>
+		<model-name>com.liferay.commerce.data.integration.manager.model.ScheduledTask</model-name>
 		<portlet-ref>
-			<portlet-name>com_liferay_data_integration_web_internal_portlet_LrDataIntegrationWebPortlet</portlet-name>
+			<portlet-name>com_liferay_commerce_data_integration_manager_web_internal_portlet_CommerceDataIntegrationManagerPortlet</portlet-name>
 		</portlet-ref>
 		<weight>1</weight>
 		<permissions>
@@ -86,9 +86,9 @@
 		</permissions>
 	</model-resource>
 	<model-resource>
-		<model-name>com.liferay.data.integration.process</model-name>
+		<model-name>com.liferay.commerce.data.integration.manager</model-name>
 		<portlet-ref>
-			<portlet-name>com_liferay_data_integration_web_internal_portlet_LrDataIntegrationWebPortlet</portlet-name>
+			<portlet-name>com_liferay_commerce_data_integration_manager_web_internal_portlet_CommerceDataIntegrationManagerPortlet</portlet-name>
 		</portlet-ref>
 		<root>true</root>
 		<weight>1</weight>

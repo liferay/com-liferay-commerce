@@ -45,7 +45,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 							searchContainer="<%= dataIntegrationProcessListDisplayContext.getSearchContainer() %>"
 						>
 							<liferay-ui:search-container-row
-								className="com.liferay.data.integration.model.Process"
+								className="com.liferay.commerce.data.integration.manager.model.Process"
 								cssClass="entry-display-style"
 								keyProperty="processId"
 								modelVar="process"

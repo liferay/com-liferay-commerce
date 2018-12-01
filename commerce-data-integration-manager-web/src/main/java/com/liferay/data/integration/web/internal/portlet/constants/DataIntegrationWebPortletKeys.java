@@ -23,8 +23,8 @@ public class DataIntegrationWebPortletKeys {
 		"DATA_INTEGRATION_ADMIN_MODULE_REGISTRY";
 
 	public static final String LR_DATA_INTEGRATION_WEB =
-		"com_liferay_data_integration_web_internal_portlet_" +
-			"LrDataIntegrationWebPortlet";
+		"com_liferay_commerce_data_integration_manager_web_internal_portlet_" +
+			"CommerceDataIntegrationManagerPortlet";
 
 	public static final String LR_MANUAL_EXECUTION = "manual";
 
