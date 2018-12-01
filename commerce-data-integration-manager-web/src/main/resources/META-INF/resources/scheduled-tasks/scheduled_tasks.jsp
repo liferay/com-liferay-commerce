@@ -45,7 +45,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 							searchContainer="<%= scheduledTasksDataIntegrationDisplayContext.getSearchContainer() %>"
 						>
 							<liferay-ui:search-container-row
-								className="com.liferay.data.integration.model.ScheduledTask"
+								className="com.liferay.commerce.data.integration.manager.model.ScheduledTask"
 								cssClass="entry-display-style"
 								keyProperty="scheduledTaskId"
 								modelVar="scheduledTask"

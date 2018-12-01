@@ -129,7 +129,7 @@ public class ScheduledTasksAdminModule implements DataIntegrationAdminModule {
 	private SchedulerEngineHelper _schedulerEngineHelper;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.data.integration.web.internal.portlet)"
+		target = "(osgi.web.symbolicname=com.liferay.commerce.data.integration.manager.web.internal.portlet)"
 	)
 	private ServletContext _servletContext;
 
