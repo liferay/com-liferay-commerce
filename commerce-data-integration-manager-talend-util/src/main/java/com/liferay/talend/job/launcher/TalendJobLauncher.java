@@ -14,12 +14,12 @@
 
 package com.liferay.talend.job.launcher;
 
-import com.liferay.data.integration.model.Process;
-import com.liferay.data.integration.model.ScheduledTask;
-import com.liferay.data.integration.service.HistoryLocalService;
-import com.liferay.data.integration.service.ProcessService;
-import com.liferay.data.integration.service.ScheduledTaskExectutorService;
-import com.liferay.data.integration.service.ScheduledTaskLocalService;
+import com.liferay.commerce.data.integration.manager.model.Process;
+import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
+import com.liferay.commerce.data.integration.manager.service.HistoryLocalService;
+import com.liferay.commerce.data.integration.manager.service.ProcessService;
+import com.liferay.commerce.data.integration.manager.service.ScheduledTaskExectutorService;
+import com.liferay.commerce.data.integration.manager.service.ScheduledTaskLocalService;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
