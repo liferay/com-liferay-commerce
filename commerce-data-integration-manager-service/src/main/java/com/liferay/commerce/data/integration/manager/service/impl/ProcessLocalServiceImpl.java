@@ -15,8 +15,6 @@
 package com.liferay.commerce.data.integration.manager.service.impl;
 
 import com.liferay.commerce.data.integration.manager.model.Process;
-import com.liferay.commerce.data.integration.manager.service.ProcessLocalService;
-import com.liferay.commerce.data.integration.manager.service.ProcessLocalServiceUtil;
 import com.liferay.commerce.data.integration.manager.service.base.ProcessLocalServiceBaseImpl;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;

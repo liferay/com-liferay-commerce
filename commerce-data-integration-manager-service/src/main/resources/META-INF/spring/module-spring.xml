@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<beans
+	default-destroy-method="destroy"
+	default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+	<bean class="com.liferay.commerce.data.integration.manager.service.impl.HistoryLocalServiceImpl" id="com.liferay.commerce.data.integration.manager.service.HistoryLocalService" />
+	<bean class="com.liferay.commerce.data.integration.manager.service.impl.HistoryServiceImpl" id="com.liferay.commerce.data.integration.manager.service.HistoryService" />
+	<bean class="com.liferay.commerce.data.integration.manager.service.persistence.impl.HistoryPersistenceImpl" id="com.liferay.commerce.data.integration.manager.service.persistence.HistoryPersistence" parent="basePersistence" />
+	<bean class="com.liferay.commerce.data.integration.manager.service.impl.ProcessLocalServiceImpl" id="com.liferay.commerce.data.integration.manager.service.ProcessLocalService" />
+	<bean class="com.liferay.commerce.data.integration.manager.service.impl.ProcessServiceImpl" id="com.liferay.commerce.data.integration.manager.service.ProcessService" />
+	<bean class="com.liferay.commerce.data.integration.manager.service.persistence.impl.ProcessPersistenceImpl" id="com.liferay.commerce.data.integration.manager.service.persistence.ProcessPersistence" parent="basePersistence" />
+	<bean class="com.liferay.commerce.data.integration.manager.service.impl.ScheduledTaskLocalServiceImpl" id="com.liferay.commerce.data.integration.manager.service.ScheduledTaskLocalService" />
+	<bean class="com.liferay.commerce.data.integration.manager.service.impl.ScheduledTaskServiceImpl" id="com.liferay.commerce.data.integration.manager.service.ScheduledTaskService" />
+	<bean class="com.liferay.commerce.data.integration.manager.service.persistence.impl.ScheduledTaskPersistenceImpl" id="com.liferay.commerce.data.integration.manager.service.persistence.ScheduledTaskPersistence" parent="basePersistence" />
+</beans>

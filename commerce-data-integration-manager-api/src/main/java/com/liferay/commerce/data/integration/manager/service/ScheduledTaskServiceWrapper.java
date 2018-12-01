@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -40,7 +39,7 @@ public class ScheduledTaskServiceWrapper implements ScheduledTaskService,
 	* Never reference this class directly. Always use {@link ScheduledTaskServiceUtil} to access the scheduled task remote service.
 	*/
 	@Override
-	public ScheduledTask addScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask addScheduledTask(
 		long processId, String frequency, java.util.Date startDate,
 		String startHour, String name,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -60,7 +59,7 @@ public class ScheduledTaskServiceWrapper implements ScheduledTaskService,
 	}
 
 	@Override
-	public java.util.List<ScheduledTask> getScheduledTaskByGroupId(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> getScheduledTaskByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.security.auth.PrincipalException {
 		return _scheduledTaskService.getScheduledTaskByGroupId(groupId, start,
@@ -74,7 +73,7 @@ public class ScheduledTaskServiceWrapper implements ScheduledTaskService,
 	}
 
 	@Override
-	public ScheduledTask updateScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask updateScheduledTask(
 		long scheduledTaskId, long processId, String frequency,
 		java.util.Date startDate, String startHour, String name,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)

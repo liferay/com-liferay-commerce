@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.History;
 import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
 import com.liferay.commerce.data.integration.manager.service.ScheduledTaskLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;

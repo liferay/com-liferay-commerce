@@ -26,7 +26,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 	scope = ExtendedObjectClassDefinition.Scope.SYSTEM
 )
 @Meta.OCD(
-	id = "com.liferay.data.integration.configuration.DataIntegrationSchedulerConfiguration",
+	id = "com.liferay.commerce.data.integration.manager.configuration.DataIntegrationSchedulerConfiguration",
 	localization = "content/Language",
 	name = "data-integration-configuration-name"
 )

@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.data.integration.manager.internal.messaging;
 
+import com.liferay.commerce.data.integration.manager.constants.DataIntegrationConstants;
 import com.liferay.commerce.data.integration.manager.model.Process;
 import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
 import com.liferay.commerce.data.integration.manager.service.ProcessLocalService;
@@ -40,7 +41,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author guywandji
  */
-@Component (
+@Component(
 	immediate = true,
 	property = "destination.name=" + DataIntegrationConstants.DESTINATION_NAME,
 	service = MessageListener.class
@@ -65,7 +66,7 @@ public class DataIntegrationMessageListener implements MessageListener {
 		}
 		catch (InvalidSyntaxException | IOException | PortalException e) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(e);
+				_log.debug(e, e);
 			}
 		}
 
@@ -76,7 +77,7 @@ public class DataIntegrationMessageListener implements MessageListener {
 			}
 			catch (IOException | PortalException e) {
 				if (_log.isDebugEnabled()) {
-					_log.debug(e);
+					_log.debug(e, e);
 				}
 
 				_stopJob(userId, scheduledTaskId);
@@ -130,7 +131,7 @@ public class DataIntegrationMessageListener implements MessageListener {
 		}
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(pe);
+				_log.debug(pe, pe);
 			}
 		}
 	}

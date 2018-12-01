@@ -23,6 +23,24 @@
 		</permissions>
 	</portlet-resource>
 	<model-resource>
+		<model-name>com.liferay.commerce.data.integration.manager</model-name>
+		<portlet-ref>
+			<portlet-name>com_liferay_commerce_data_integration_manager_web_internal_portlet_CommerceDataIntegrationManagerPortlet</portlet-name>
+		</portlet-ref>
+		<root>true</root>
+		<weight>1</weight>
+		<permissions>
+			<supports>
+				<action-key>MANAGE_PROCESS</action-key>
+			</supports>
+			<site-member-defaults />
+			<guest-defaults />
+			<guest-unsupported>
+				<action-key>MANAGE_PROCESS</action-key>
+			</guest-unsupported>
+		</permissions>
+	</model-resource>
+	<model-resource>
 		<model-name>com.liferay.commerce.data.integration.manager.model.History</model-name>
 		<portlet-ref>
 			<portlet-name>com_liferay_commerce_data_integration_manager_web_internal_portlet_CommerceDataIntegrationManagerPortlet</portlet-name>
@@ -82,24 +100,6 @@
 				<action-key>DELETE</action-key>
 				<action-key>EDIT</action-key>
 				<action-key>VIEW</action-key>
-			</guest-unsupported>
-		</permissions>
-	</model-resource>
-	<model-resource>
-		<model-name>com.liferay.commerce.data.integration.manager</model-name>
-		<portlet-ref>
-			<portlet-name>com_liferay_commerce_data_integration_manager_web_internal_portlet_CommerceDataIntegrationManagerPortlet</portlet-name>
-		</portlet-ref>
-		<root>true</root>
-		<weight>1</weight>
-		<permissions>
-			<supports>
-				<action-key>MANAGE_PROCESS</action-key>
-			</supports>
-			<site-member-defaults />
-			<guest-defaults />
-			<guest-unsupported>
-				<action-key>MANAGE_PROCESS</action-key>
 			</guest-unsupported>
 		</permissions>
 	</model-resource>

@@ -38,8 +38,8 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see ProcessServiceUtil
- * @see com.liferay.data.integration.service.base.ProcessServiceBaseImpl
- * @see com.liferay.data.integration.service.impl.ProcessServiceImpl
+ * @see com.liferay.commerce.data.integration.manager.service.base.ProcessServiceBaseImpl
+ * @see com.liferay.commerce.data.integration.manager.service.impl.ProcessServiceImpl
  * @generated
  */
 @AccessControlled
@@ -53,7 +53,7 @@ public interface ProcessService extends BaseService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link ProcessServiceUtil} to access the process remote service. Add custom service methods to {@link com.liferay.data.integration.service.impl.ProcessServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link ProcessServiceUtil} to access the process remote service. Add custom service methods to {@link com.liferay.commerce.data.integration.manager.service.impl.ProcessServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
@@ -64,8 +64,8 @@ public interface ProcessService extends BaseService {
 	* @throws PortalException
 	*/
 	public Process addProcess(String name, String className,
-							  String processType, String version, long contextPropertiesFileEntryId,
-							  long srcArchiveFileEntryId, ServiceContext serviceContext)
+		String processType, String version, long contextPropertiesFileEntryId,
+		long srcArchiveFileEntryId, ServiceContext serviceContext)
 		throws PortalException;
 
 	public Process deleteProcess(long userId, long processId,
