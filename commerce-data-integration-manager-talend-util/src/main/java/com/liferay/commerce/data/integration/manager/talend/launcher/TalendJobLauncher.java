@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.talend.job.launcher;
+package com.liferay.commerce.data.integration.manager.talend.launcher;
 
 import com.liferay.commerce.data.integration.manager.model.Process;
 import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
@@ -20,6 +20,7 @@ import com.liferay.commerce.data.integration.manager.service.HistoryLocalService
 import com.liferay.commerce.data.integration.manager.service.ProcessService;
 import com.liferay.commerce.data.integration.manager.service.ScheduledTaskExectutorService;
 import com.liferay.commerce.data.integration.manager.service.ScheduledTaskLocalService;
+import com.liferay.commerce.data.integration.manager.talend.util.DLManagementUtil;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
@@ -31,8 +32,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.talend.job.launcher.configuration.TalendJobExecutorConfiguration;
-import com.liferay.talend.job.util.DLManagementUtil;
+import com.liferay.commerce.data.integration.manager.talend.launcher.configuration.TalendJobExecutorConfiguration;
 
 import java.io.File;
 import java.io.FileOutputStream;
