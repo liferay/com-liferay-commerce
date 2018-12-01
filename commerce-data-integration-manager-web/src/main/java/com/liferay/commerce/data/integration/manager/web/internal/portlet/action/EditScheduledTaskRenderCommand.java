@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.data.integration.manager.web.internal.portlet.action;
 
-import com.liferay.commerce.data.integration.manager.web.internal.util.DataIntegrationAdminModuleRegistry;
 import com.liferay.commerce.data.integration.manager.service.ProcessLocalService;
 import com.liferay.commerce.data.integration.manager.service.ScheduledTaskLocalService;
 import com.liferay.commerce.data.integration.manager.web.internal.display.context.ScheduledTasksDataIntegrationDisplayContext;
 import com.liferay.commerce.data.integration.manager.web.internal.portlet.constants.DataIntegrationWebPortletKeys;
+import com.liferay.commerce.data.integration.manager.web.internal.util.DataIntegrationAdminModuleRegistry;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineHelper;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -40,7 +40,8 @@ import org.osgi.service.component.annotations.Reference;
 	property = {
 		"javax.portlet.name=" + DataIntegrationWebPortletKeys.LR_DATA_INTEGRATION_WEB,
 		"mvc.command.name=editScheduledTask"
-	}
+	},
+	service = MVCRenderCommand.class
 )
 public class EditScheduledTaskRenderCommand implements MVCRenderCommand {
 
