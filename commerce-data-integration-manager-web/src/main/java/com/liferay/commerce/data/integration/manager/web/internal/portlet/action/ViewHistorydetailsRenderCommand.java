@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.data.integration.manager.web.internal.portlet.action;
 
-import com.liferay.commerce.data.integration.manager.web.internal.util.DataIntegrationAdminModuleRegistry;
 import com.liferay.commerce.data.integration.manager.service.HistoryLocalService;
 import com.liferay.commerce.data.integration.manager.service.ScheduledTaskExectutorService;
 import com.liferay.commerce.data.integration.manager.web.internal.display.context.HistoryDataIntegrationDisplayContext;
 import com.liferay.commerce.data.integration.manager.web.internal.portlet.constants.DataIntegrationWebPortletKeys;
+import com.liferay.commerce.data.integration.manager.web.internal.util.DataIntegrationAdminModuleRegistry;
 import com.liferay.document.library.kernel.service.DLFileEntryService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;

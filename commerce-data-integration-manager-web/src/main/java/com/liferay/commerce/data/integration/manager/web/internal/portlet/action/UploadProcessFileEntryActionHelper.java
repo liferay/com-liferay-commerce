@@ -75,7 +75,7 @@ public class UploadProcessFileEntryActionHelper {
 				_validateFile(fileName, size);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 
 				throw new PortalException(e.getMessage());
 			}
@@ -188,7 +188,7 @@ public class UploadProcessFileEntryActionHelper {
 		}
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(pe);
+				_log.debug(pe, pe);
 			}
 
 			folder = null;
