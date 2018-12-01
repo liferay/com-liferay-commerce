@@ -15,11 +15,10 @@
 package com.liferay.commerce.data.integration.manager.service.http;
 
 import aQute.bnd.annotation.ProviderType;
-import com.liferay.commerce.data.integration.manager.service.HistoryServiceUtil;
 
 /**
  * Provides the HTTP utility for the
- * {@link HistoryServiceUtil} service utility. The
+ * {@link com.liferay.commerce.data.integration.manager.service.HistoryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link com.liferay.portal.kernel.security.auth.HttpPrincipal} parameter.
@@ -42,7 +41,7 @@ import com.liferay.commerce.data.integration.manager.service.HistoryServiceUtil;
  * @author Brian Wing Shun Chan
  * @see HistoryServiceSoap
  * @see com.liferay.portal.kernel.security.auth.HttpPrincipal
- * @see HistoryServiceUtil
+ * @see com.liferay.commerce.data.integration.manager.service.HistoryServiceUtil
  * @generated
  */
 @ProviderType

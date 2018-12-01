@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.service.persistence.BasePersistence;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see com.liferay.data.integration.service.persistence.impl.HistoryPersistenceImpl
+ * @see com.liferay.commerce.data.integration.manager.service.persistence.impl.HistoryPersistenceImpl
  * @see HistoryUtil
  * @generated
  */

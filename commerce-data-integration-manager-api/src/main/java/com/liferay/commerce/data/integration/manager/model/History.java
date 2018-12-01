@@ -25,17 +25,17 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Brian Wing Shun Chan
  * @see HistoryModel
- * @see com.liferay.data.integration.model.impl.HistoryImpl
- * @see com.liferay.data.integration.model.impl.HistoryModelImpl
+ * @see com.liferay.commerce.data.integration.manager.model.impl.HistoryImpl
+ * @see com.liferay.commerce.data.integration.manager.model.impl.HistoryModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.data.integration.model.impl.HistoryImpl")
+@ImplementationClassName("com.liferay.commerce.data.integration.manager.model.impl.HistoryImpl")
 @ProviderType
 public interface History extends HistoryModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.data.integration.model.impl.HistoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.data.integration.manager.model.impl.HistoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static final Accessor<History, Long> HISTORY_ID_ACCESSOR = new Accessor<History, Long>() {
 			@Override

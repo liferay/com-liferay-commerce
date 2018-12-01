@@ -15,7 +15,6 @@
 package com.liferay.commerce.data.integration.manager.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
-import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
 
 /**
  * The extended model implementation for the ScheduledTask service. Represents a row in the &quot;ScheduledTask&quot; database table, with each column mapped to a property of this class.

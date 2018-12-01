@@ -16,8 +16,6 @@ package com.liferay.commerce.data.integration.manager.service.impl;
 
 import com.liferay.commerce.data.integration.manager.model.History;
 import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
-import com.liferay.commerce.data.integration.manager.service.HistoryLocalService;
-import com.liferay.commerce.data.integration.manager.service.HistoryLocalServiceUtil;
 import com.liferay.commerce.data.integration.manager.service.base.HistoryLocalServiceBaseImpl;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;

@@ -123,14 +123,14 @@ public class ScheduledTaskModelImpl extends BaseModelImpl<ScheduledTask>
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"value.object.entity.cache.enabled.com.liferay.data.integration.model.ScheduledTask"),
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"value.object.entity.cache.enabled.com.liferay.commerce.data.integration.manager.model.ScheduledTask"),
 			true);
-	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"value.object.finder.cache.enabled.com.liferay.data.integration.model.ScheduledTask"),
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"value.object.finder.cache.enabled.com.liferay.commerce.data.integration.manager.model.ScheduledTask"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"value.object.column.bitmask.enabled.com.liferay.data.integration.model.ScheduledTask"),
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.commerce.data.integration.manager.model.ScheduledTask"),
 			true);
 	public static final long ACTIVE_COLUMN_BITMASK = 1L;
 	public static final long COMPANYID_COLUMN_BITMASK = 2L;
@@ -195,8 +195,8 @@ public class ScheduledTaskModelImpl extends BaseModelImpl<ScheduledTask>
 		return models;
 	}
 
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"lock.expiration.time.com.liferay.data.integration.model.ScheduledTask"));
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"lock.expiration.time.com.liferay.commerce.data.integration.manager.model.ScheduledTask"));
 
 	public ScheduledTaskModelImpl() {
 	}
@@ -997,7 +997,8 @@ public class ScheduledTaskModelImpl extends BaseModelImpl<ScheduledTask>
 		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
-		sb.append("com.liferay.data.integration.model.ScheduledTask");
+		sb.append(
+			"com.liferay.commerce.data.integration.manager.model.ScheduledTask");
 		sb.append("</model-name>");
 
 		sb.append(

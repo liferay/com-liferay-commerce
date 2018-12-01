@@ -25,17 +25,17 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Brian Wing Shun Chan
  * @see ScheduledTaskModel
- * @see com.liferay.data.integration.model.impl.ScheduledTaskImpl
- * @see com.liferay.data.integration.model.impl.ScheduledTaskModelImpl
+ * @see com.liferay.commerce.data.integration.manager.model.impl.ScheduledTaskImpl
+ * @see com.liferay.commerce.data.integration.manager.model.impl.ScheduledTaskModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.data.integration.model.impl.ScheduledTaskImpl")
+@ImplementationClassName("com.liferay.commerce.data.integration.manager.model.impl.ScheduledTaskImpl")
 @ProviderType
 public interface ScheduledTask extends ScheduledTaskModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.data.integration.model.impl.ScheduledTaskImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.data.integration.manager.model.impl.ScheduledTaskImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static final Accessor<ScheduledTask, Long> SCHEDULED_TASK_ID_ACCESSOR =
 		new Accessor<ScheduledTask, Long>() {

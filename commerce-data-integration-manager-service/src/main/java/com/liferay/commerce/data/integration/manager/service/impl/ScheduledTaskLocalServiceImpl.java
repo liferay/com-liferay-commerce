@@ -16,11 +16,9 @@ package com.liferay.commerce.data.integration.manager.service.impl;
 
 import com.liferay.commerce.data.integration.manager.constants.DataIntegrationConstants;
 import com.liferay.commerce.data.integration.manager.constants.Frequency;
-import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
-import com.liferay.commerce.data.integration.manager.service.ScheduledTaskLocalService;
-import com.liferay.commerce.data.integration.manager.service.ScheduledTaskLocalServiceUtil;
-import com.liferay.commerce.data.integration.manager.service.base.ScheduledTaskLocalServiceBaseImpl;
 import com.liferay.commerce.data.integration.manager.internal.messaging.DataIntegrationMessageListener;
+import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
+import com.liferay.commerce.data.integration.manager.service.base.ScheduledTaskLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -116,7 +114,7 @@ public class ScheduledTaskLocalServiceImpl
 		}
 		catch (InvalidSyntaxException | IOException e) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(e);
+				_log.debug(e, e);
 			}
 		}
 
@@ -311,7 +309,7 @@ public class ScheduledTaskLocalServiceImpl
 		}
 		catch (InvalidSyntaxException | IOException e) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(e);
+				_log.debug(e, e);
 			}
 		}
 

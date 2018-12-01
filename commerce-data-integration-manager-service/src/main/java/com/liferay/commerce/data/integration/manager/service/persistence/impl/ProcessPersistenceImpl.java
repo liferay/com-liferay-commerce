@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service.persistence.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.service.persistence.ProcessUtil;
 import com.liferay.commerce.data.integration.manager.exception.NoSuchProcessException;
 import com.liferay.commerce.data.integration.manager.model.Process;
 import com.liferay.commerce.data.integration.manager.model.impl.ProcessImpl;
@@ -72,7 +71,7 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @see ProcessPersistence
- * @see ProcessUtil
+ * @see com.liferay.commerce.data.integration.manager.service.persistence.ProcessUtil
  * @generated
  */
 @ProviderType

@@ -84,7 +84,7 @@ public class ProcessModelImpl extends BaseModelImpl<Process>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
 			{ "version", Types.VARCHAR },
-			{ "className", Types.CLOB },
+			{ "className", Types.VARCHAR },
 			{ "processType", Types.VARCHAR },
 			{ "contextPropertiesFileEntryId", Types.BIGINT },
 			{ "srcArchiveFileEntryId", Types.BIGINT }
@@ -102,27 +102,27 @@ public class ProcessModelImpl extends BaseModelImpl<Process>
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("version", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("className", Types.CLOB);
+		TABLE_COLUMNS_MAP.put("className", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("processType", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("contextPropertiesFileEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("srcArchiveFileEntryId", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table Process (uuid_ VARCHAR(75) null,processId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,version VARCHAR(75) null,className TEXT null,processType VARCHAR(75) null,contextPropertiesFileEntryId LONG,srcArchiveFileEntryId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Process (uuid_ VARCHAR(75) null,processId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,version VARCHAR(75) null,className VARCHAR(75) null,processType VARCHAR(75) null,contextPropertiesFileEntryId LONG,srcArchiveFileEntryId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Process";
 	public static final String ORDER_BY_JPQL = " ORDER BY process.modifiedDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY Process.modifiedDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"value.object.entity.cache.enabled.com.liferay.data.integration.model.Process"),
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"value.object.entity.cache.enabled.com.liferay.commerce.data.integration.manager.model.Process"),
 			true);
-	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"value.object.finder.cache.enabled.com.liferay.data.integration.model.Process"),
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"value.object.finder.cache.enabled.com.liferay.commerce.data.integration.manager.model.Process"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"value.object.column.bitmask.enabled.com.liferay.data.integration.model.Process"),
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.commerce.data.integration.manager.model.Process"),
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 	public static final long GROUPID_COLUMN_BITMASK = 2L;
@@ -182,8 +182,8 @@ public class ProcessModelImpl extends BaseModelImpl<Process>
 		return models;
 	}
 
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.commerce.com.liferay.data.integration.service.util.ServiceProps.get(
-				"lock.expiration.time.com.liferay.data.integration.model.Process"));
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.commerce.data.integration.manager.service.util.ServiceProps.get(
+				"lock.expiration.time.com.liferay.commerce.data.integration.manager.model.Process"));
 
 	public ProcessModelImpl() {
 	}
@@ -853,7 +853,7 @@ public class ProcessModelImpl extends BaseModelImpl<Process>
 		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
-		sb.append("com.liferay.data.integration.model.Process");
+		sb.append("com.liferay.commerce.data.integration.manager.model.Process");
 		sb.append("</model-name>");
 
 		sb.append(
