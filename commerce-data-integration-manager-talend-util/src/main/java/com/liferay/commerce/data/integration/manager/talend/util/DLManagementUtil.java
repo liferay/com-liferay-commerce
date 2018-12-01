@@ -110,7 +110,7 @@ public class DLManagementUtil {
 			fis.close();
 		}
 		catch (IOException ioe) {
-			_log.error(ioe);
+			_log.error(ioe, ioe);
 		}
 
 		return uncompressedDirectory;
