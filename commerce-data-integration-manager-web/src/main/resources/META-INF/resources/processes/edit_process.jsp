@@ -42,7 +42,7 @@ Map<String, String> processTypes = (HashMap)request.getAttribute("processTypes")
 
 <portlet:actionURL name="editProcess" var="editProcessActionURL" />
 
-<div class="closed container-fluid-1280" id="<portlet:namespace />edditProcessId">
+<div class="closed container-fluid-1280" id="<portlet:namespace />editProcessId">
 	<div class="container main-content-body sheet">
 		<aui:form action="<%= editProcessActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
