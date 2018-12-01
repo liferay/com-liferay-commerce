@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.ScheduledTask;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -43,7 +42,7 @@ public class ScheduledTaskLocalServiceWrapper
 	* @throws PortalException
 	*/
 	@Override
-	public ScheduledTask addScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask addScheduledTask(
 		long processId, String frequency, java.util.Date startDate,
 		String startHour, String name,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -59,8 +58,8 @@ public class ScheduledTaskLocalServiceWrapper
 	* @return the scheduled task that was added
 	*/
 	@Override
-	public ScheduledTask addScheduledTask(
-		ScheduledTask scheduledTask) {
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask addScheduledTask(
+		com.liferay.commerce.data.integration.manager.model.ScheduledTask scheduledTask) {
 		return _scheduledTaskLocalService.addScheduledTask(scheduledTask);
 	}
 
@@ -94,7 +93,7 @@ public class ScheduledTaskLocalServiceWrapper
 	* @return the new scheduled task
 	*/
 	@Override
-	public ScheduledTask createScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask createScheduledTask(
 		long scheduledTaskId) {
 		return _scheduledTaskLocalService.createScheduledTask(scheduledTaskId);
 	}
@@ -117,7 +116,7 @@ public class ScheduledTaskLocalServiceWrapper
 	* @throws PortalException if a scheduled task with the primary key could not be found
 	*/
 	@Override
-	public ScheduledTask deleteScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask deleteScheduledTask(
 		long scheduledTaskId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _scheduledTaskLocalService.deleteScheduledTask(scheduledTaskId);
@@ -130,13 +129,13 @@ public class ScheduledTaskLocalServiceWrapper
 	* @return the scheduled task that was removed
 	*/
 	@Override
-	public ScheduledTask deleteScheduledTask(
-		ScheduledTask scheduledTask) {
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask deleteScheduledTask(
+		com.liferay.commerce.data.integration.manager.model.ScheduledTask scheduledTask) {
 		return _scheduledTaskLocalService.deleteScheduledTask(scheduledTask);
 	}
 
 	@Override
-	public ScheduledTask disableScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask disableScheduledTask(
 		long scheduledTaskId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _scheduledTaskLocalService.disableScheduledTask(scheduledTaskId,
@@ -164,7 +163,7 @@ public class ScheduledTaskLocalServiceWrapper
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.data.integration.model.impl.ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.data.integration.manager.model.impl.ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -183,7 +182,7 @@ public class ScheduledTaskLocalServiceWrapper
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.data.integration.model.impl.ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.data.integration.manager.model.impl.ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -229,7 +228,7 @@ public class ScheduledTaskLocalServiceWrapper
 	}
 
 	@Override
-	public ScheduledTask enableScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask enableScheduledTask(
 		long scheduledTaskId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _scheduledTaskLocalService.enableScheduledTask(scheduledTaskId,
@@ -237,7 +236,7 @@ public class ScheduledTaskLocalServiceWrapper
 	}
 
 	@Override
-	public ScheduledTask fetchScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask fetchScheduledTask(
 		long scheduledTaskId) {
 		return _scheduledTaskLocalService.fetchScheduledTask(scheduledTaskId);
 	}
@@ -250,7 +249,7 @@ public class ScheduledTaskLocalServiceWrapper
 	* @return the matching scheduled task, or <code>null</code> if a matching scheduled task could not be found
 	*/
 	@Override
-	public ScheduledTask fetchScheduledTaskByUuidAndGroupId(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask fetchScheduledTaskByUuidAndGroupId(
 		String uuid, long groupId) {
 		return _scheduledTaskLocalService.fetchScheduledTaskByUuidAndGroupId(uuid,
 			groupId);
@@ -297,14 +296,14 @@ public class ScheduledTaskLocalServiceWrapper
 	* @throws PortalException if a scheduled task with the primary key could not be found
 	*/
 	@Override
-	public ScheduledTask getScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask getScheduledTask(
 		long scheduledTaskId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _scheduledTaskLocalService.getScheduledTask(scheduledTaskId);
 	}
 
 	@Override
-	public java.util.List<ScheduledTask> getScheduledTaskByGroupId(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> getScheduledTaskByGroupId(
 		long groupId, int start, int end) {
 		return _scheduledTaskLocalService.getScheduledTaskByGroupId(groupId,
 			start, end);
@@ -324,7 +323,7 @@ public class ScheduledTaskLocalServiceWrapper
 	* @throws PortalException if a matching scheduled task could not be found
 	*/
 	@Override
-	public ScheduledTask getScheduledTaskByUuidAndGroupId(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask getScheduledTaskByUuidAndGroupId(
 		String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _scheduledTaskLocalService.getScheduledTaskByUuidAndGroupId(uuid,
@@ -335,7 +334,7 @@ public class ScheduledTaskLocalServiceWrapper
 	* Returns a range of all the scheduled tasks.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.data.integration.model.impl.ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.data.integration.manager.model.impl.ScheduledTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of scheduled tasks
@@ -343,34 +342,34 @@ public class ScheduledTaskLocalServiceWrapper
 	* @return the range of scheduled tasks
 	*/
 	@Override
-	public java.util.List<ScheduledTask> getScheduledTasks(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> getScheduledTasks(
 		int start, int end) {
 		return _scheduledTaskLocalService.getScheduledTasks(start, end);
 	}
 
 	@Override
-	public java.util.List<ScheduledTask> getScheduledTasksByActive(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> getScheduledTasksByActive(
 		boolean active, int start, int end) {
 		return _scheduledTaskLocalService.getScheduledTasksByActive(active,
 			start, end);
 	}
 
 	@Override
-	public java.util.List<ScheduledTask> getScheduledTasksByEnabled(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> getScheduledTasksByEnabled(
 		boolean enabled, int start, int end) {
 		return _scheduledTaskLocalService.getScheduledTasksByEnabled(enabled,
 			start, end);
 	}
 
 	@Override
-	public java.util.List<ScheduledTask> getScheduledTasksByGroupId_Active(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> getScheduledTasksByGroupId_Active(
 		long groupId, boolean active, int start, int end) {
 		return _scheduledTaskLocalService.getScheduledTasksByGroupId_Active(groupId,
 			active, start, end);
 	}
 
 	@Override
-	public java.util.List<ScheduledTask> getScheduledTasksByGroupId_Enabled(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> getScheduledTasksByGroupId_Enabled(
 		long groupId, boolean enabled, int start, int end) {
 		return _scheduledTaskLocalService.getScheduledTasksByGroupId_Enabled(groupId,
 			enabled, start, end);
@@ -384,7 +383,7 @@ public class ScheduledTaskLocalServiceWrapper
 	* @return the matching scheduled tasks, or an empty list if no matches were found
 	*/
 	@Override
-	public java.util.List<ScheduledTask> getScheduledTasksByUuidAndCompanyId(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> getScheduledTasksByUuidAndCompanyId(
 		String uuid, long companyId) {
 		return _scheduledTaskLocalService.getScheduledTasksByUuidAndCompanyId(uuid,
 			companyId);
@@ -401,9 +400,9 @@ public class ScheduledTaskLocalServiceWrapper
 	* @return the range of matching scheduled tasks, or an empty list if no matches were found
 	*/
 	@Override
-	public java.util.List<ScheduledTask> getScheduledTasksByUuidAndCompanyId(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.ScheduledTask> getScheduledTasksByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<ScheduledTask> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.data.integration.manager.model.ScheduledTask> orderByComparator) {
 		return _scheduledTaskLocalService.getScheduledTasksByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}
@@ -419,7 +418,7 @@ public class ScheduledTaskLocalServiceWrapper
 	}
 
 	@Override
-	public ScheduledTask startScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask startScheduledTask(
 		long userId, long scheduledTaskId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _scheduledTaskLocalService.startScheduledTask(userId,
@@ -427,7 +426,7 @@ public class ScheduledTaskLocalServiceWrapper
 	}
 
 	@Override
-	public ScheduledTask stopScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask stopScheduledTask(
 		long userId, long scheduledTaskId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _scheduledTaskLocalService.stopScheduledTask(userId,
@@ -435,7 +434,7 @@ public class ScheduledTaskLocalServiceWrapper
 	}
 
 	@Override
-	public ScheduledTask updateScheduledTask(
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask updateScheduledTask(
 		long scheduledTaskId, long processId, String frequency,
 		java.util.Date startDate, String startHour, String name,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -451,8 +450,8 @@ public class ScheduledTaskLocalServiceWrapper
 	* @return the scheduled task that was updated
 	*/
 	@Override
-	public ScheduledTask updateScheduledTask(
-		ScheduledTask scheduledTask) {
+	public com.liferay.commerce.data.integration.manager.model.ScheduledTask updateScheduledTask(
+		com.liferay.commerce.data.integration.manager.model.ScheduledTask scheduledTask) {
 		return _scheduledTaskLocalService.updateScheduledTask(scheduledTask);
 	}
 

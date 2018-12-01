@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.data.integration.manager.service.impl;
 
-import com.liferay.commerce.data.integration.manager.service.HistoryService;
-import com.liferay.commerce.data.integration.manager.service.HistoryServiceUtil;
 import com.liferay.commerce.data.integration.manager.service.base.HistoryServiceBaseImpl;
 
 /**

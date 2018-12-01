@@ -17,8 +17,6 @@ package com.liferay.commerce.data.integration.manager.service.impl;
 import com.liferay.commerce.data.integration.manager.constants.ProcessActionKeys;
 import com.liferay.commerce.data.integration.manager.model.Process;
 import com.liferay.commerce.data.integration.manager.model.ProcessConstants;
-import com.liferay.commerce.data.integration.manager.service.ProcessService;
-import com.liferay.commerce.data.integration.manager.service.ProcessServiceUtil;
 import com.liferay.commerce.data.integration.manager.service.base.ProcessServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;

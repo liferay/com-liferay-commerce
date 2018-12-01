@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service.persistence.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.service.persistence.HistoryUtil;
 import com.liferay.commerce.data.integration.manager.exception.NoSuchHistoryException;
 import com.liferay.commerce.data.integration.manager.model.History;
 import com.liferay.commerce.data.integration.manager.model.impl.HistoryImpl;
@@ -71,7 +70,7 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @see HistoryPersistence
- * @see HistoryUtil
+ * @see com.liferay.commerce.data.integration.manager.service.persistence.HistoryUtil
  * @generated
  */
 @ProviderType

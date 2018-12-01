@@ -16,8 +16,6 @@ package com.liferay.commerce.data.integration.manager.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.Process;
-import com.liferay.commerce.data.integration.manager.model.ProcessSoap;
 import com.liferay.commerce.data.integration.manager.service.ProcessServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
@@ -35,10 +33,10 @@ import java.rmi.RemoteException;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link ProcessSoap}.
+ * is translated to an array of {@link com.liferay.commerce.data.integration.manager.model.ProcessSoap}.
  * If the method in the service utility returns a
- * {@link Process}, that is translated to a
- * {@link ProcessSoap}. Methods that SOAP cannot
+ * {@link com.liferay.commerce.data.integration.manager.model.Process}, that is translated to a
+ * {@link com.liferay.commerce.data.integration.manager.model.ProcessSoap}. Methods that SOAP cannot
  * safely wire are skipped.
  * </p>
  *
@@ -61,7 +59,7 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  * @see ProcessServiceHttp
- * @see ProcessSoap
+ * @see com.liferay.commerce.data.integration.manager.model.ProcessSoap
  * @see ProcessServiceUtil
  * @generated
  */
@@ -74,18 +72,18 @@ public class ProcessServiceSoap {
 	*
 	* @throws PortalException
 	*/
-	public static ProcessSoap addProcess(
+	public static com.liferay.commerce.data.integration.manager.model.ProcessSoap addProcess(
 		String name, String className, String processType, String version,
 		long contextPropertiesFileEntryId, long srcArchiveFileEntryId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			Process returnValue = ProcessServiceUtil.addProcess(name,
-					className, processType, version,
-					contextPropertiesFileEntryId, srcArchiveFileEntryId,
-					serviceContext);
+			com.liferay.commerce.data.integration.manager.model.Process returnValue =
+				ProcessServiceUtil.addProcess(name, className, processType,
+					version, contextPropertiesFileEntryId,
+					srcArchiveFileEntryId, serviceContext);
 
-			return ProcessSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.data.integration.manager.model.ProcessSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -94,15 +92,16 @@ public class ProcessServiceSoap {
 		}
 	}
 
-	public static ProcessSoap deleteProcess(
+	public static com.liferay.commerce.data.integration.manager.model.ProcessSoap deleteProcess(
 		long userId, long processId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			Process returnValue = ProcessServiceUtil.deleteProcess(userId,
-					processId, serviceContext);
+			com.liferay.commerce.data.integration.manager.model.Process returnValue =
+				ProcessServiceUtil.deleteProcess(userId, processId,
+					serviceContext);
 
-			return ProcessSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.data.integration.manager.model.ProcessSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -111,13 +110,13 @@ public class ProcessServiceSoap {
 		}
 	}
 
-	public static ProcessSoap getProcess(
+	public static com.liferay.commerce.data.integration.manager.model.ProcessSoap getProcess(
 		long userId, long processId) throws RemoteException {
 		try {
-			Process returnValue = ProcessServiceUtil.getProcess(userId,
-					processId);
+			com.liferay.commerce.data.integration.manager.model.Process returnValue =
+				ProcessServiceUtil.getProcess(userId, processId);
 
-			return ProcessSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.data.integration.manager.model.ProcessSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -126,15 +125,15 @@ public class ProcessServiceSoap {
 		}
 	}
 
-	public static ProcessSoap[] getProcessesByGroupId(
+	public static com.liferay.commerce.data.integration.manager.model.ProcessSoap[] getProcessesByGroupId(
 		long userId, long groupId, int start, int end)
 		throws RemoteException {
 		try {
-			java.util.List<Process> returnValue =
+			java.util.List<com.liferay.commerce.data.integration.manager.model.Process> returnValue =
 				ProcessServiceUtil.getProcessesByGroupId(userId, groupId,
 					start, end);
 
-			return ProcessSoap.toSoapModels(returnValue);
+			return com.liferay.commerce.data.integration.manager.model.ProcessSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -158,19 +157,19 @@ public class ProcessServiceSoap {
 		}
 	}
 
-	public static ProcessSoap updateProcess(
+	public static com.liferay.commerce.data.integration.manager.model.ProcessSoap updateProcess(
 		long processId, String name, String className, String processType,
 		String version, long contextPropertiesFileEntryId,
 		long srcArchiveFileEntryId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			Process returnValue = ProcessServiceUtil.updateProcess(processId,
-					name, className, processType, version,
-					contextPropertiesFileEntryId, srcArchiveFileEntryId,
-					serviceContext);
+			com.liferay.commerce.data.integration.manager.model.Process returnValue =
+				ProcessServiceUtil.updateProcess(processId, name, className,
+					processType, version, contextPropertiesFileEntryId,
+					srcArchiveFileEntryId, serviceContext);
 
-			return ProcessSoap.toSoapModel(returnValue);
+			return com.liferay.commerce.data.integration.manager.model.ProcessSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -16,7 +16,6 @@ package com.liferay.commerce.data.integration.manager.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.data.integration.manager.model.History;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -40,8 +39,8 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @return the history that was added
 	*/
 	@Override
-	public History addHistory(
-		History history) {
+	public com.liferay.commerce.data.integration.manager.model.History addHistory(
+		com.liferay.commerce.data.integration.manager.model.History history) {
 		return _historyLocalService.addHistory(history);
 	}
 
@@ -53,10 +52,10 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @throws PortalException
 	*/
 	@Override
-	public History addHistory(long userId,
-							  long scheduledTaskId, String executionType, java.util.Date startDate,
-							  java.util.Date endDate, int status, long errorLogFileEntryId,
-							  long runtimeLogFileEntryId)
+	public com.liferay.commerce.data.integration.manager.model.History addHistory(
+		long userId, long scheduledTaskId, String executionType,
+		java.util.Date startDate, java.util.Date endDate, int status,
+		long errorLogFileEntryId, long runtimeLogFileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _historyLocalService.addHistory(userId, scheduledTaskId,
 			executionType, startDate, endDate, status, errorLogFileEntryId,
@@ -64,7 +63,7 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	}
 
 	@Override
-	public History addHistory(
+	public com.liferay.commerce.data.integration.manager.model.History addHistory(
 		long scheduledTaskId, String executionType, int status,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -79,13 +78,14 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @return the new history
 	*/
 	@Override
-	public History createHistory(
+	public com.liferay.commerce.data.integration.manager.model.History createHistory(
 		long historyId) {
 		return _historyLocalService.createHistory(historyId);
 	}
 
 	@Override
-	public History delete(long historyId)
+	public com.liferay.commerce.data.integration.manager.model.History delete(
+		long historyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _historyLocalService.delete(historyId);
 	}
@@ -97,8 +97,8 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @return the history that was removed
 	*/
 	@Override
-	public History deleteHistory(
-		History history) {
+	public com.liferay.commerce.data.integration.manager.model.History deleteHistory(
+		com.liferay.commerce.data.integration.manager.model.History history) {
 		return _historyLocalService.deleteHistory(history);
 	}
 
@@ -110,7 +110,7 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @throws PortalException if a history with the primary key could not be found
 	*/
 	@Override
-	public History deleteHistory(
+	public com.liferay.commerce.data.integration.manager.model.History deleteHistory(
 		long historyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _historyLocalService.deleteHistory(historyId);
@@ -147,7 +147,7 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.data.integration.model.impl.HistoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.data.integration.manager.model.impl.HistoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -166,7 +166,7 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.data.integration.model.impl.HistoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.data.integration.manager.model.impl.HistoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -211,7 +211,7 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	}
 
 	@Override
-	public History fetchHistory(
+	public com.liferay.commerce.data.integration.manager.model.History fetchHistory(
 		long historyId) {
 		return _historyLocalService.fetchHistory(historyId);
 	}
@@ -224,7 +224,7 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @return the matching history, or <code>null</code> if a matching history could not be found
 	*/
 	@Override
-	public History fetchHistoryByUuidAndGroupId(
+	public com.liferay.commerce.data.integration.manager.model.History fetchHistoryByUuidAndGroupId(
 		String uuid, long groupId) {
 		return _historyLocalService.fetchHistoryByUuidAndGroupId(uuid, groupId);
 	}
@@ -244,7 +244,7 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* Returns a range of all the histories.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.data.integration.model.impl.HistoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.data.integration.manager.model.impl.HistoryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of histories
@@ -252,13 +252,13 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @return the range of histories
 	*/
 	@Override
-	public java.util.List<History> getHistories(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.History> getHistories(
 		int start, int end) {
 		return _historyLocalService.getHistories(start, end);
 	}
 
 	@Override
-	public java.util.List<History> getHistoriesByGoupId(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.History> getHistoriesByGoupId(
 		long groupId, int start, int end) {
 		return _historyLocalService.getHistoriesByGoupId(groupId, start, end);
 	}
@@ -276,7 +276,7 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @return the matching histories, or an empty list if no matches were found
 	*/
 	@Override
-	public java.util.List<History> getHistoriesByUuidAndCompanyId(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.History> getHistoriesByUuidAndCompanyId(
 		String uuid, long companyId) {
 		return _historyLocalService.getHistoriesByUuidAndCompanyId(uuid,
 			companyId);
@@ -293,9 +293,9 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @return the range of matching histories, or an empty list if no matches were found
 	*/
 	@Override
-	public java.util.List<History> getHistoriesByUuidAndCompanyId(
+	public java.util.List<com.liferay.commerce.data.integration.manager.model.History> getHistoriesByUuidAndCompanyId(
 		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<History> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.data.integration.manager.model.History> orderByComparator) {
 		return _historyLocalService.getHistoriesByUuidAndCompanyId(uuid,
 			companyId, start, end, orderByComparator);
 	}
@@ -318,7 +318,8 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @throws PortalException if a history with the primary key could not be found
 	*/
 	@Override
-	public History getHistory(long historyId)
+	public com.liferay.commerce.data.integration.manager.model.History getHistory(
+		long historyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _historyLocalService.getHistory(historyId);
 	}
@@ -332,7 +333,7 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @throws PortalException if a matching history could not be found
 	*/
 	@Override
-	public History getHistoryByUuidAndGroupId(
+	public com.liferay.commerce.data.integration.manager.model.History getHistoryByUuidAndGroupId(
 		String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _historyLocalService.getHistoryByUuidAndGroupId(uuid, groupId);
@@ -367,13 +368,13 @@ public class HistoryLocalServiceWrapper implements HistoryLocalService,
 	* @return the history that was updated
 	*/
 	@Override
-	public History updateHistory(
-		History history) {
+	public com.liferay.commerce.data.integration.manager.model.History updateHistory(
+		com.liferay.commerce.data.integration.manager.model.History history) {
 		return _historyLocalService.updateHistory(history);
 	}
 
 	@Override
-	public History updateHistory(
+	public com.liferay.commerce.data.integration.manager.model.History updateHistory(
 		long historyId, long scheduledTaskId, String executionType, int status,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
