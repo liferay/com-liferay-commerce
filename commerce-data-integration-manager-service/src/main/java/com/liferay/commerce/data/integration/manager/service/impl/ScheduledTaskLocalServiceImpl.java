@@ -293,12 +293,12 @@ public class ScheduledTaskLocalServiceImpl
 			enabled = true;
 		}
 
-		scheduledTask.setModifiedDate(now);
-		scheduledTask.setName(name);
-		scheduledTask.setProcessId(processId);
 		scheduledTask.setUserId(user.getUserId());
 		scheduledTask.setUserName(user.getFullName());
+		scheduledTask.setModifiedDate(now);
+		scheduledTask.setName(name);
 		scheduledTask.setFrequency(frequency);
+		scheduledTask.setProcessId(processId);
 		scheduledTask.setStartDate(startDate);
 		scheduledTask.setStartHour(startHour);
 		scheduledTask.setEnabled(enabled);
