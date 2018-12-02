@@ -20,6 +20,6 @@ package com.liferay.commerce.data.integration.manager.model;
 public class ProcessConstants {
 
 	public static final String RESOURCE_NAME =
-		"com.liferay.data.integration.process";
+		"com.liferay.commerce.data.integration.manager.process";
 
 }
