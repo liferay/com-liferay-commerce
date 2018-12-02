@@ -20,6 +20,6 @@ package com.liferay.commerce.data.integration.manager.model;
 public class ScheduledTaskConstants {
 
 	public static final String RESOURCE_NAME =
-		"com.liferay.data.integration.scheduledtask";
+		"com.liferay.commerce.data.integration.manager.scheduledtask";
 
 }

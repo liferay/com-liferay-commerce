@@ -56,7 +56,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author guywandji
  */
 @Component(
-	configurationPid = "com.liferay.talend.job.launcher.TalendJobExecutorConfiguration",
+	configurationPid = "com.liferay.commerce.data.integration.manager.talend.util.launcher.configuration.TalendJobExecutorConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = {
 		"data.integration.service.executor.key=" + TalendJobLauncher.KEY,
