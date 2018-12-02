@@ -107,13 +107,13 @@ public class HistoryLocalServiceImpl extends HistoryLocalServiceBaseImpl {
 
 		History history = historyPersistence.create(historyId);
 
-		history.setCompanyId(serviceContext.getCompanyId());
 		history.setGroupId(serviceContext.getScopeGroupId());
-		history.setCreateDate(now);
-		history.setStatus(status);
-		history.setUserName(user.getFullName());
+		history.setCompanyId(serviceContext.getCompanyId());
 		history.setUserId(user.getUserId());
+		history.setUserName(user.getFullName());
+		history.setCreateDate(now);
 		history.setScheduledTaskId(scheduledTaskId);
+		history.setStatus(status);
 
 		resourceLocalService.addModelResources(history, serviceContext);
 
@@ -165,11 +165,11 @@ public class HistoryLocalServiceImpl extends HistoryLocalServiceBaseImpl {
 
 		History history = historyPersistence.fetchByPrimaryKey(historyId);
 
-		history.setStatus(status);
-		history.setUserName(user.getFullName());
 		history.setUserId(user.getUserId());
-		history.setScheduledTaskId(scheduledTaskId);
+		history.setUserName(user.getFullName());
 		history.setModifiedDate(now);
+		history.setScheduledTaskId(scheduledTaskId);
+		history.setStatus(status);
 
 		return historyPersistence.update(history);
 	}

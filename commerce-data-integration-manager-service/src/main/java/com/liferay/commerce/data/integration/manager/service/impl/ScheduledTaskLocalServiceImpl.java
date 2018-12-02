@@ -95,18 +95,17 @@ public class ScheduledTaskLocalServiceImpl
 
 		enabled = startDate.getTime() <= now.getTime();
 
-		scheduledTask.setCompanyId(serviceContext.getCompanyId());
 		scheduledTask.setGroupId(serviceContext.getScopeGroupId());
-		scheduledTask.setCreateDate(now);
-		scheduledTask.setStartDate(startDate);
-		scheduledTask.setStartHour(startHour);
-		scheduledTask.setModifiedDate(now);
-		scheduledTask.setName(name);
-		scheduledTask.setProcessId(processId);
+		scheduledTask.setCompanyId(serviceContext.getCompanyId());
 		scheduledTask.setUserId(user.getUserId());
 		scheduledTask.setUserName(user.getFullName());
+		scheduledTask.setCreateDate(now);
+		scheduledTask.setModifiedDate(now);
+		scheduledTask.setName(name);
 		scheduledTask.setFrequency(frequency);
-
+		scheduledTask.setProcessId(processId);
+		scheduledTask.setStartDate(startDate);
+		scheduledTask.setStartHour(startHour);
 		scheduledTask.setEnabled(enabled);
 
 		try {
@@ -165,10 +164,10 @@ public class ScheduledTaskLocalServiceImpl
 		ScheduledTask scheduledTask =
 			scheduledTaskPersistence.fetchByPrimaryKey(scheduledTaskId);
 
-		scheduledTask.setEnabled(false);
-		scheduledTask.setModifiedDate(now);
 		scheduledTask.setUserId(userId);
 		scheduledTask.setUserName(user.getFullName());
+		scheduledTask.setModifiedDate(now);
+		scheduledTask.setEnabled(false);
 
 		unRegisterScheduledTask(scheduledTask);
 
@@ -187,10 +186,10 @@ public class ScheduledTaskLocalServiceImpl
 		ScheduledTask scheduledTask =
 			scheduledTaskPersistence.fetchByPrimaryKey(scheduledTaskId);
 
-		scheduledTask.setEnabled(true);
-		scheduledTask.setModifiedDate(now);
 		scheduledTask.setUserId(userId);
 		scheduledTask.setUserName(user.getFullName());
+		scheduledTask.setModifiedDate(now);
+		scheduledTask.setEnabled(true);
 
 		return scheduledTaskPersistence.update(scheduledTask);
 	}

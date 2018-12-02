@@ -135,15 +135,15 @@ public class ProcessLocalServiceImpl extends ProcessLocalServiceBaseImpl {
 
 		Date now = new Date();
 
-		process.setClassName(className);
-		process.setModifiedDate(now);
-		process.setName(name);
-		process.setProcessType(processType);
 		process.setUserId(serviceContext.getUserId());
 		process.setUserName(user.getFullName());
+		process.setModifiedDate(now);
+		process.setName(name);
+		process.setVersion(version);
+		process.setClassName(className);
+		process.setProcessType(processType);
 		process.setContextPropertiesFileEntryId(contextPropertiesFileEntryId);
 		process.setSrcArchiveFileEntryId(srcArchiveFileEntryId);
-		process.setVersion(version);
 
 		return processPersistence.update(process);
 	}
