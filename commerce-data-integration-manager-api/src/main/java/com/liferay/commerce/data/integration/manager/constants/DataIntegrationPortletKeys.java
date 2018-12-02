@@ -20,7 +20,7 @@ package com.liferay.commerce.data.integration.manager.constants;
 public class DataIntegrationPortletKeys {
 
 	public static final String DATA_INTEGRATION =
-		"com_liferay_data_integration_web_internal_portlet_" +
-			"LrDataIntegrationWebPortlet";
+		"com_liferay_commerce_data_integration_manager_web_internal_portlet_" +
+			"CommerceDataIntegrationManagerPortlet";
 
 }
