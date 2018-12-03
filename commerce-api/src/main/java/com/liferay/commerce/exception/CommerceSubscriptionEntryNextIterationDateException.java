@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.commerce.exception;
 
 import aQute.bnd.annotation.ProviderType;
@@ -21,7 +22,8 @@ import com.liferay.portal.kernel.exception.PortalException;
  * @author Alessio Antonio Rendina
  */
 @ProviderType
-public class CommerceSubscriptionEntryNextIterationDateException extends PortalException {
+public class CommerceSubscriptionEntryNextIterationDateException
+	extends PortalException {
 
 	public CommerceSubscriptionEntryNextIterationDateException() {
 	}
@@ -30,11 +32,15 @@ public class CommerceSubscriptionEntryNextIterationDateException extends PortalE
 		super(msg);
 	}
 
-	public CommerceSubscriptionEntryNextIterationDateException(String msg, Throwable cause) {
+	public CommerceSubscriptionEntryNextIterationDateException(
+		String msg, Throwable cause) {
+
 		super(msg, cause);
 	}
 
-	public CommerceSubscriptionEntryNextIterationDateException(Throwable cause) {
+	public CommerceSubscriptionEntryNextIterationDateException(
+		Throwable cause) {
+
 		super(cause);
 	}
 
