@@ -1193,6 +1193,7 @@ public class CommerceOrderLocalServiceImpl
 
 		commerceOrder.setUserId(user.getUserId());
 		commerceOrder.setUserName(user.getFullName());
+		commerceOrder.setOrderUserId(user.getUserId());
 
 		return commerceOrderPersistence.update(commerceOrder);
 	}
