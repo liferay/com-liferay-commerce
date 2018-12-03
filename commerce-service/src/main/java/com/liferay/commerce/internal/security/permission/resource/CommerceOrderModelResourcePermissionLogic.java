@@ -19,6 +19,7 @@ import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionLogic;
@@ -193,6 +194,12 @@ public class CommerceOrderModelResourcePermissionLogic
 		throws PortalException {
 
 		if (_hasOwnerPermission(permissionChecker, commerceOrder)) {
+			return true;
+		}
+
+		User user = permissionChecker.getUser();
+
+		if (!user.isSetupComplete() && commerceOrder.isGuestOrder()) {
 			return true;
 		}
 
