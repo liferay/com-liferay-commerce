@@ -102,7 +102,9 @@
 				"scope": 4
 			},
 			{
-				"actionIds": ["VIEW"],
+				"actionIds": [
+					"VIEW"
+				],
 				"roleName": "User",
 				"scope": 4
 			}
@@ -159,7 +161,9 @@
 				"scope": 4
 			},
 			{
-				"actionIds": ["VIEW"],
+				"actionIds": [
+					"VIEW"
+				],
 				"roleName": "User",
 				"scope": 4
 			}
@@ -175,7 +179,9 @@
 						"scope": 4
 					},
 					{
-						"actionIds": ["VIEW"],
+						"actionIds": [
+							"VIEW"
+						],
 						"roleName": "User",
 						"scope": 4
 					}
@@ -198,7 +204,9 @@
 						"scope": 4
 					},
 					{
-						"actionIds": ["VIEW"],
+						"actionIds": [
+							"VIEW"
+						],
 						"roleName": "User",
 						"scope": 4
 					}
@@ -221,7 +229,9 @@
 						"scope": 4
 					},
 					{
-						"actionIds": ["VIEW"],
+						"actionIds": [
+							"VIEW"
+						],
 						"roleName": "User",
 						"scope": 4
 					}
@@ -244,7 +254,9 @@
 						"scope": 4
 					},
 					{
-						"actionIds": ["VIEW"],
+						"actionIds": [
+							"VIEW"
+						],
 						"roleName": "User",
 						"scope": 4
 					}
