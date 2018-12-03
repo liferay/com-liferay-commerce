@@ -225,19 +225,19 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		User user = userLocalService.getUser(
 			commerceSubscriptionEntry.getUserId());
 
-		Date startDate = null;
 		Date nextInterationDate = null;
-
-		startDate = PortalUtil.getDate(
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateDay, user.getTimeZone(),
-			CommerceSubscriptionEntryStartDateException.class);
+		Date startDate = null;
 
 		nextInterationDate = PortalUtil.getDate(
 			nextInterationDateMonth, nextInterationDateDay,
 			nextInterationDateYear, nextInterationDateHour,
 			nextInterationDateDay, user.getTimeZone(),
 			CommerceSubscriptionEntryNextIterationDateException.class);
+
+		startDate = PortalUtil.getDate(
+			startDateMonth, startDateDay, startDateYear, startDateHour,
+			startDateDay, user.getTimeZone(),
+			CommerceSubscriptionEntryStartDateException.class);
 
 		commerceSubscriptionEntry.setSubscriptionLength(subscriptionLength);
 		commerceSubscriptionEntry.setSubscriptionType(subscriptionType);
