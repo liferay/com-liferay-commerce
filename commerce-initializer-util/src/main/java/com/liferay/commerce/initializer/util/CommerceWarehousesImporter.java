@@ -14,18 +14,26 @@
 
 package com.liferay.commerce.initializer.util;
 
+import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.model.CommerceShippingOriginLocator;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.service.CommerceWarehouseLocalService;
+import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
+import com.liferay.portal.kernel.settings.ModifiableSettings;
+import com.liferay.portal.kernel.settings.Settings;
+import com.liferay.portal.kernel.settings.SettingsFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
@@ -33,13 +41,18 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(service = CommerceWarehousesImporter.class)
 public class CommerceWarehousesImporter {
 
 	public List<CommerceWarehouse> importCommerceWarehouses(
 			JSONArray jsonArray, ServiceContext serviceContext)
-		throws PortalException {
+		throws Exception {
+
+		if ((jsonArray == null) || (jsonArray.length() <= 0)) {
+			return Collections.emptyList();
+		}
 
 		List<CommerceWarehouse> commerceWarehouses = new ArrayList<>(
 			jsonArray.length());
@@ -52,6 +65,8 @@ public class CommerceWarehousesImporter {
 
 			commerceWarehouses.add(commerceWarehouse);
 		}
+
+		_updateCommerceShippingGroupServiceConfiguration(serviceContext);
 
 		return commerceWarehouses;
 	}
@@ -98,6 +113,32 @@ public class CommerceWarehousesImporter {
 			serviceContext);
 	}
 
+	private void _updateCommerceShippingGroupServiceConfiguration(
+			ServiceContext serviceContext)
+		throws Exception {
+
+		CommerceShippingOriginLocator commerceShippingOriginLocator =
+			_commerceShippingOriginLocatorRegistry.
+				getCommerceShippingOriginLocator("warehouse");
+
+		if (commerceShippingOriginLocator == null) {
+			return;
+		}
+
+		Settings settings = _settingsFactory.getSettings(
+			new GroupServiceSettingsLocator(
+				serviceContext.getScopeGroupId(),
+				CommerceConstants.SHIPPING_SERVICE_NAME));
+
+		ModifiableSettings modifiableSettings =
+			settings.getModifiableSettings();
+
+		modifiableSettings.setValue(
+			"commerceShippingOriginLocatorKey", "warehouse");
+
+		modifiableSettings.store();
+	}
+
 	@Reference
 	private CommerceCountryLocalService _commerceCountryLocalService;
 
@@ -105,6 +146,13 @@ public class CommerceWarehousesImporter {
 	private CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
+	private CommerceShippingOriginLocatorRegistry
+		_commerceShippingOriginLocatorRegistry;
+
+	@Reference
 	private CommerceWarehouseLocalService _commerceWarehouseLocalService;
+
+	@Reference
+	private SettingsFactory _settingsFactory;
 
 }
