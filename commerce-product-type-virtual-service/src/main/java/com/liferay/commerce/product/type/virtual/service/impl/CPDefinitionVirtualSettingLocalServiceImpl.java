@@ -294,9 +294,21 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 
 				throw new CPDefinitionVirtualSettingTermsOfUseException();
 			}
-			else if (MapUtil.isEmpty(termsOfUseContentMap)) {
-				throw new
-					CPDefinitionVirtualSettingTermsOfUseContentException();
+			else {
+				boolean empty = true;
+
+				for (Map.Entry<Locale, String> entry :
+						termsOfUseContentMap.entrySet()) {
+
+					if (Validator.isNotNull(entry.getValue())) {
+						empty = false;
+					}
+				}
+
+				if (empty) {
+					throw new
+						CPDefinitionVirtualSettingTermsOfUseContentException();
+				}
 			}
 		}
 	}
