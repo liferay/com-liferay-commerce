@@ -31,6 +31,7 @@ import com.liferay.commerce.data.integration.apio.client.RESTClient;
 import com.liferay.commerce.data.integration.apio.resource.test.utils.CommerceTestSiteActivator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.test.randomizerbumpers.UniqueStringRandomizerBumper;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
@@ -42,6 +43,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -69,11 +71,18 @@ public class CommerceCountryNestedCollectionResourceTest
 		_group = GroupTestUtil.addGroup();
 
 		CommerceTestSiteActivator.initialize(_group.getGroupId());
+
+		_randomizerBumper.reset();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		_randomizerBumper.reset();
 	}
 
 	@Test
 	public void testAddCollectionItem() throws IOException, PortalException {
-		_addCountry(RandomTestUtil.randomString());
+		_addCountry(_getCountryPropertiesMap(RandomTestUtil.randomString()));
 	}
 
 	@Test
@@ -98,7 +107,8 @@ public class CommerceCountryNestedCollectionResourceTest
 
 		int totalItems1 = commerceCountryApioResourceCollection.getTotalItems();
 
-		String countryId = _addCountry(RandomTestUtil.randomString());
+		String countryId = _addCountry(
+			_getCountryPropertiesMap(RandomTestUtil.randomString()));
 
 		commerceCountryApioResourceCollection =
 			getSiteRelatedApioResourceCollection(
@@ -125,7 +135,10 @@ public class CommerceCountryNestedCollectionResourceTest
 	public void testUpdateCollectionItem() throws IOException, PortalException {
 		String countryName = RandomTestUtil.randomString();
 
-		_addCountry(countryName);
+		Map<String, String> countryPropertiesMap = _getCountryPropertiesMap(
+			countryName);
+
+		_addCountry(countryPropertiesMap);
 
 		ApioResourceCollection commerceCountryApioResourceCollection =
 			getSiteRelatedApioResourceCollection(
@@ -138,9 +151,6 @@ public class CommerceCountryNestedCollectionResourceTest
 		String newCountryName = RandomTestUtil.randomString();
 		JsonNode actualCountryIdJsonNode =
 			actualCountryApioSingleModel.getIdJsonNode();
-
-		Map<String, String> countryPropertiesMap = new HashMap<>(
-			_propertiesMap);
 
 		countryPropertiesMap.put(
 			SchemaOrgConstants.Property.NAME, newCountryName);
@@ -170,7 +180,7 @@ public class CommerceCountryNestedCollectionResourceTest
 			equalTo(updatedCountryIdJsonNode.asText()));
 	}
 
-	private String _addCountry(String name)
+	private String _addCountry(Map<String, String> countryPropertiesMap)
 		throws IOException, PortalException {
 
 		ApioResourceCollection commerceCountryApioResourceCollection =
@@ -178,11 +188,6 @@ public class CommerceCountryNestedCollectionResourceTest
 				COMMERCE_COUNTRY_RESOURCE_NAME, _group.getDescriptiveName());
 
 		int totalItems = commerceCountryApioResourceCollection.getTotalItems();
-
-		Map<String, String> countryPropertiesMap = new HashMap<>(
-			_propertiesMap);
-
-		countryPropertiesMap.put(SchemaOrgConstants.Property.NAME, name);
 
 		ObjectNode expectedObjectNode = constructExpectedObjectNode(
 			commerceCountryApioResourceCollection, Method.POST,
@@ -216,20 +221,25 @@ public class CommerceCountryNestedCollectionResourceTest
 		return apioSingleModelIdJsonNode.asText();
 	}
 
-	private static final Map<String, String> _propertiesMap =
-		new HashMap<String, String>() {
-			{
-				long randomInt = RandomTestUtil.randomInt();
-				put(
-					SchemaOrgConstants.Property.NAME,
-					RandomTestUtil.randomString());
-				put("numericISOCode", Long.valueOf(randomInt).toString());
-				put("threeLettersISOCode", RandomTestUtil.randomString(3));
-				put("twoLettersISOCode", RandomTestUtil.randomString(2));
-			}
-		};
+	private Map<String, String> _getCountryPropertiesMap(String name) {
+		Map<String, String> countryPropertiesMap = new HashMap<>();
+
+		countryPropertiesMap.put(SchemaOrgConstants.Property.NAME, name);
+		countryPropertiesMap.put(
+			"numericISOCode", String.valueOf(RandomTestUtil.randomInt()));
+		countryPropertiesMap.put(
+			"threeLettersISOCode", RandomTestUtil.randomString(3));
+		countryPropertiesMap.put(
+			"twoLettersISOCode",
+			RandomTestUtil.randomString(2, _randomizerBumper));
+
+		return countryPropertiesMap;
+	}
 
 	@DeleteAfterTestRun
 	private Group _group;
+
+	private final UniqueStringRandomizerBumper _randomizerBumper =
+		new UniqueStringRandomizerBumper();
 
 }
