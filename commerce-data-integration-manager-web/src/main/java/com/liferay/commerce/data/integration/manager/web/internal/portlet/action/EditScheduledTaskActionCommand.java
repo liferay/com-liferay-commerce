@@ -53,7 +53,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + DataIntegrationWebPortletKeys.LR_DATA_INTEGRATION_WEB,
+		"javax.portlet.name=" + DataIntegrationWebPortletKeys.DATA_INTEGRATION_WEB,
 		"mvc.command.name=editScheduledTask"
 	},
 	service = MVCActionCommand.class
@@ -145,7 +145,7 @@ public class EditScheduledTaskActionCommand extends BaseMVCActionCommand {
 			_scheduledTaskLocalService.getScheduledTask(scheduledTaskId);
 
 		if (scheduledTask.isActive()) {
-			SessionMessages.add(actionRequest, "taskAlreadyRuning");
+			SessionMessages.add(actionRequest, "taskAlreadyRunning");
 
 			return;
 		}
@@ -165,7 +165,7 @@ public class EditScheduledTaskActionCommand extends BaseMVCActionCommand {
 		JSONObject payLoad = JSONFactoryUtil.createJSONObject();
 
 		payLoad.put(
-			"executionType", DataIntegrationWebPortletKeys.LR_MANUAL_EXECUTION);
+			"executionType", DataIntegrationWebPortletKeys.MANUAL_EXECUTION);
 		payLoad.put("scheduledTaskId", scheduledTaskId);
 		payLoad.put("userId", userId);
 

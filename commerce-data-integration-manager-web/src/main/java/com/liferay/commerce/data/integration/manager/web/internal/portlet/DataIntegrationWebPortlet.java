@@ -65,7 +65,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.display-name=Data Integration Admin",
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.view-template=/view.jsp",
-		"javax.portlet.name=" + DataIntegrationWebPortletKeys.LR_DATA_INTEGRATION_WEB,
+		"javax.portlet.name=" + DataIntegrationWebPortletKeys.DATA_INTEGRATION_WEB,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user",
 		"javax.portlet.supports.mime-type=text/html",
@@ -98,7 +98,7 @@ public class DataIntegrationWebPortlet extends MVCPortlet {
 				renderRequest.setAttribute("processTypes", processTypes);
 				renderRequest.setAttribute(
 					DataIntegrationWebPortletKeys.
-						LR_DATA_INTEGRATION_ADMIN_MODULE_REGISTRY,
+						DATA_INTEGRATION_ADMIN_MODULE_REGISTRY,
 					_dataIntegrationAdminModuleRegistry);
 			}
 		}

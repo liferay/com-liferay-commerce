@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + DataIntegrationWebPortletKeys.LR_DATA_INTEGRATION_WEB,
+		"javax.portlet.name=" + DataIntegrationWebPortletKeys.DATA_INTEGRATION_WEB,
 		"mvc.command.name=editScheduledTask"
 	},
 	service = MVCRenderCommand.class
@@ -63,7 +63,7 @@ public class EditScheduledTaskRenderCommand implements MVCRenderCommand {
 
 		renderRequest.setAttribute(
 			DataIntegrationWebPortletKeys.
-				LR_DATA_INTEGRATION_ADMIN_MODULE_REGISTRY,
+				DATA_INTEGRATION_ADMIN_MODULE_REGISTRY,
 			_lrDataIntegrationAdminModuleRegistry);
 
 		return "/scheduled-tasks/edit_scheduled_task.jsp";

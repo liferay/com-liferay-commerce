@@ -41,7 +41,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	property = {
-		"javax.portlet.name=" + DataIntegrationWebPortletKeys.LR_DATA_INTEGRATION_WEB,
+		"javax.portlet.name=" + DataIntegrationWebPortletKeys.DATA_INTEGRATION_WEB,
 		"mvc.command.name=editProcess"
 	},
 	service = MVCActionCommand.class
@@ -95,19 +95,14 @@ public class EditProcessActionCommand extends BaseMVCActionCommand {
 	}
 
 	protected void editProcess(ActionRequest actionRequest) {
-		long processId = ParamUtil.getLong(actionRequest, "processId", 0L);
-
 		String className = ParamUtil.getString(actionRequest, "className");
-
 		String name = ParamUtil.getString(actionRequest, "name");
-
+		long processId = ParamUtil.getLong(actionRequest, "processId", 0L);
+		String processType = ParamUtil.getString(actionRequest, "processType");
 		String version = ParamUtil.getString(actionRequest, "version");
 
-		String processType = ParamUtil.getString(actionRequest, "processType");
-
-		DLFileEntry contextFileEntry = null;
-
 		DLFileEntry archiveFileEntry = null;
+		DLFileEntry contextFileEntry = null;
 
 		try {
 			UploadPortletRequest uploadPortletRequest =

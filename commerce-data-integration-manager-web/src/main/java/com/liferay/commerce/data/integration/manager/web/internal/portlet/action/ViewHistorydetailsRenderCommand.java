@@ -46,7 +46,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	property = {
-		"javax.portlet.name=" + DataIntegrationWebPortletKeys.LR_DATA_INTEGRATION_WEB,
+		"javax.portlet.name=" + DataIntegrationWebPortletKeys.DATA_INTEGRATION_WEB,
 		"mvc.command.name=viewHistoryDetails"
 	},
 	service = MVCRenderCommand.class
@@ -70,7 +70,7 @@ public class ViewHistorydetailsRenderCommand implements MVCRenderCommand {
 
 		renderRequest.setAttribute(
 			DataIntegrationWebPortletKeys.
-				LR_DATA_INTEGRATION_ADMIN_MODULE_REGISTRY,
+				DATA_INTEGRATION_ADMIN_MODULE_REGISTRY,
 			_lrDataIntegrationAdminModuleRegistry);
 
 		return "/history/historical_task_details.jsp";
