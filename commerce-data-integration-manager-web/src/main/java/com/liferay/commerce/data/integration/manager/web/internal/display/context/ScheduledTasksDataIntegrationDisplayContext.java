@@ -68,12 +68,9 @@ public class ScheduledTasksDataIntegrationDisplayContext {
 		_portletResourcePermission = portletResourcePermission;
 		_scheduledTaskLocalService = scheduledTaskLocalService;
 		_processLocalService = processLocalService;
-
 		_dataIntegrationRequestHelper = new DataIntegrationRequestHelper(
 			renderRequest);
-
 		_portal = portal;
-
 		_actionHelper = actionHelper;
 		_schedulerEngineHelper = schedulerEngineHelper;
 
@@ -82,16 +79,12 @@ public class ScheduledTasksDataIntegrationDisplayContext {
 
 		liferayPortletRequest =
 			dataIntegrationRequestHelper.getLiferayPortletRequest();
-
 		liferayPortletResponse =
 			dataIntegrationRequestHelper.getLiferayPortletResponse();
 
 		httpServletRequest = _portal.getHttpServletRequest(renderRequest);
-
 		_defaultOrderByCol = "modified-date";
-
 		_defaultOrderByType = "desc";
-
 		_simpleDateFormat = new SimpleDateFormat(_datePattern);
 	}
 
@@ -345,11 +338,6 @@ public class ScheduledTasksDataIntegrationDisplayContext {
 	}
 
 	public boolean hasAdminPermission() {
-		/*return _portletResourcePermission.contains(
-		_lrDataIntegrationRequestHelper.getPermissionChecker(),
-		_lrDataIntegrationRequestHelper.getSiteGroupId(),
-		ActionKeys.ACCESS_IN_CONTROL_PANEL);*/
-
 		return true;
 	}
 
