@@ -50,12 +50,14 @@
 		<div class="minium-item__content">
 			{$sku}<br>
 			{$name}<br>
-			{call Loader.render}
-				{param isUpdating: $isUpdating /}
-				{param content: $price /}
-				{param direction: 'left' /}
-				{param type: 'price' /}
-			{/call}
+			{if $isUpdating}
+				{call Loader.render}
+					{param direction: 'right' /}
+					{param inverted: true /}
+				{/call}
+			{else}
+				{$price}
+			{/if}
 		</div>
 
 		<div class="minium-item__actions">
@@ -70,14 +72,16 @@
 				{param allowedOptions: $settings.allowedOptions /}
 			{/call}
 
-			<a class="minium-item__delete{$deleteButtonClasses}" data-onclick="deleteItem" href="#"></a>
+			<button data-onclick="deleteItem">
+				<span class="minium-item__delete{$deleteButtonClasses}" href="#"></span>
+			</button>
 		</div>
 
 		<div class="minium-item__cancel-delete">
 			{msg desc="The Element Has Been Removed"}the-element-has-been-removed{/msg}
-			<span class="minium-button minium-button--inline" data-onclick="cancelDeletion">
+			<button class="minium-button minium-button--inline" data-onclick="cancelDeletion">
 				{msg desc="Cancel"}cancel{/msg}
-			</span>
+			</button>
 		</div>
 		{if isNonnull($error)}
 			<div class="minium-item__error">
