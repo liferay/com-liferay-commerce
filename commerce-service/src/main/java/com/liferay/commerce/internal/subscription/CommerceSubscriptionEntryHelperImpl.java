@@ -164,10 +164,10 @@ public class CommerceSubscriptionEntryHelperImpl
 		newOrder.setSubtotal(newCommerceOrderItem.getFinalPrice());
 		newOrder.setTotal(newCommerceOrderItem.getFinalPrice());
 
-		newOrder.setOrderStatus(
-			CommerceOrderConstants.ORDER_STATUS_SUBSCRIPTION);
 		newOrder.setPaymentStatus(
 			CommerceOrderConstants.PAYMENT_STATUS_PENDING);
+		newOrder.setOrderStatus(
+			CommerceOrderConstants.ORDER_STATUS_SUBSCRIPTION);
 
 		newOrder = _commerceOrderLocalService.updateCommerceOrder(newOrder);
 
