@@ -304,8 +304,7 @@ public class PriceTag extends IncludeTag {
 			}
 			else {
 				_quantity =
-					CPDefinitionInventoryConstants.
-						DEFAULT_MULTIPLE_ORDER_QUANTITY;
+					CPDefinitionInventoryConstants.DEFAULT_MIN_ORDER_QUANTITY;
 			}
 		}
 
