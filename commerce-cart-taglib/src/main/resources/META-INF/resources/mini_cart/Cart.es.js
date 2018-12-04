@@ -2,12 +2,13 @@ import 'clay-icon';
 
 import debounce from 'debounce';
 import Component from 'metal-component';
-import Soy from 'metal-soy';
+import Soy, {Config} from 'metal-soy';
+import debounce from 'metal-debounce';
 
 import template from './Cart.soy';
 
 import './CartProduct.es';
-import './Summary.es';
+import './Summary.es'; x;
 
 class Cart extends Component {
 
@@ -28,13 +29,19 @@ class Cart extends Component {
 	}
 
 	attached() {
-		return (this.productsAmount = this.products.length);
+		window.Liferay.on('addProductsToCart', (evt) => {
+			const newProducts = evt.details[0];
+			this.products = [
+				...this.products,
+				...newProducts
+			];
+			this.productsCount = this.productsCount + newProducts.length;
+		});
+		return (this.productsCount = this.products.length);
 	}
 
-	willReceiveState(changes) {
-		if (changes.pendingOperations && changes.pendingOperations.newVal) {
-			this.isLoading = !!changes.pendingOperations.newVal.length;
-		}
+	syncPendingOperations(pendingOperations) {
+		this.isLoading = !!pendingOperations.length;
 	}
 
 	normalizeProducts(rawProducts) {
@@ -73,7 +80,7 @@ class Cart extends Component {
 	}
 
 	deleteProduct(productId) {
-		this.productsAmount = this.productsAmount - 1;
+		this.productsCount = this.productsCount - 1;
 	}
 
 	setProductProperties(productId, newProperties) {
@@ -101,25 +108,38 @@ class Cart extends Component {
 		}, false);
 	}
 
+	subtractProducts(orArray, subArray) {
+		const result = subArray.reduce((arrayToBeFiltered, elToRemove) => {
+			return arrayToBeFiltered.filter((elToCheck) => elToCheck.id !== elToRemove.id);
+		}, orArray);
+	}
+
 	handleDeleteItem(productId) {
 		const isDeleteDisabled = this.getProductProperty(
 			productId,
 			'isDeleteDisabled'
 		);
+
 		if (isDeleteDisabled) {
 			return false;
-		}
-		this.setProductProperties(productId, {
-			isDeleteDisabled: true,
-			isDeleting: true
-		});
+		};
+
+		this.setProductProperties(
+			productId, {
+				isDeleteDisabled: true,
+				isDeleting: true
+			}
+		);
 
 		setTimeout(() => {
 			const isDeleting = this.getProductProperty(productId, 'isDeleting');
 			if (isDeleting) {
-				this.setProductProperties(productId, {
-					isCollapsed: true
-				});
+				this.setProductProperties(
+					productId, 
+					{
+						isCollapsed: true
+					}
+				);
 				this.getProductProperty(productId, 'sendDeleteRequest')();
 			}
 		}, 2000);
@@ -170,20 +190,57 @@ class Cart extends Component {
 			});
 	}
 
-	sendDeleteRequest(productId) {
-		this.addPendingOperation(productId);
-		return fetch(this.cartAPI + '/' + productId, {
-			method: 'DELETE'
+	getProducts() {
+		return fetch(this.cartAPI + '/' + this.cartId + '/' + productId, {
+			body: JSON.stringify({
+				quantity: this.getProductProperty(productId, 'quantity')
+			}),
+			headers: new Headers({'Content-Type': 'application/json'}),
+			method: 'POST'
 		})
 			.then(response => response.json())
 			.then(updatedCartState => {
+				const updatedPrice = updatedCartState.products.reduce(
+					(acc, el) => (el.id === productId ? el.price : acc),
+					null
+				);
 				this.removePendingOperation(productId);
 				this.setProductProperties(productId, {
-					isDeleteDisabled: false
+					isDeleteDisabled: false,
+					isUpdating: false,
+					price: updatedPrice
 				});
 				this.updateSummary(updatedCartState.summary);
-				this.deleteProduct(productId);
 			});
+	}
+
+	sendDeleteRequest(productId) {
+		this.addPendingOperation(productId);
+		
+		return fetch(
+			this.cartAPI + '/' + productId, 
+			{
+				method: 'DELETE'
+			}
+		)
+		.then(response => response.json())
+		.then(
+			updatedCartState => {
+				this.removePendingOperation(productId);
+				this.setProductProperties(
+					productId, 
+					{
+						isDeleteDisabled: false
+					}
+				);
+
+				this.updateSummary(updatedCartState.summary);
+
+				const remainingProducts = this.subtractProducts(this.products, updatedCartState.products);
+
+				this.deleteProduct(productId);
+			}
+		);
 	}
 
 	updateSummary(summary) {
@@ -219,9 +276,9 @@ Cart.STATE = {
 	},
 	products: {
 		setter: 'normalizeProducts',
-		value: []
+		value: null
 	},
-	productsAmount: {
+	productsCount: {
 		value: 0
 	},
 	summary: {

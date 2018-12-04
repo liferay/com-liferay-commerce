@@ -1,0 +1,27 @@
+{namespace Loader}
+
+/**
+ * This renders the component's whole content.
+ */
+{template .render}
+	{@param? direction: string}
+	{@param? inverted: bool}
+
+	{let $loaderClasses kind="text"}
+	loader-dots
+		{if isNonnull($direction)}
+			{sp}loader-dots--{$direction}
+		{/if}
+		{if $inverted}
+			{sp}loader-dots--inverted
+		{/if}
+	{/let}
+
+	<span class="minium-loader-container__loader">
+		<div class="{$loaderClasses}">
+			<div class="loader-dots__dot"></div>
+			<div class="loader-dots__dot"></div>
+			<div class="loader-dots__dot"></div>
+		</div>
+	</span>
+{/template}
