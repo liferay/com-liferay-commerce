@@ -62,14 +62,10 @@ public class HistoryDataIntegrationDisplayContext {
 
 		_portletResourcePermission = portletResourcePermission;
 		_historyLocalService = historyLocalService;
-
 		_dataIntegrationRequestHelper = new DataIntegrationRequestHelper(
 			renderRequest);
-
 		_portal = portal;
-
 		_actionHelper = actionHelper;
-
 		_dlFileEntryService = dlFileEntryLocalService;
 
 		DataIntegrationRequestHelper dataIntegrationRequestHelper =
@@ -77,16 +73,12 @@ public class HistoryDataIntegrationDisplayContext {
 
 		liferayPortletRequest =
 			dataIntegrationRequestHelper.getLiferayPortletRequest();
-
 		liferayPortletResponse =
 			dataIntegrationRequestHelper.getLiferayPortletResponse();
 
 		httpServletRequest = _portal.getHttpServletRequest(renderRequest);
-
 		_defaultOrderByCol = "modified-date";
-
 		_defaultOrderByType = "desc";
-
 		_simpleDateFormat = new SimpleDateFormat(_datePattern);
 	}
 
@@ -269,29 +261,29 @@ public class HistoryDataIntegrationDisplayContext {
 		DLFileEntry fileEntry = _dlFileEntryService.getFileEntry(fileEntryId);
 
 		long folderId = fileEntry.getFolderId();
-		String title = fileEntry.getTitle();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		StringBundler urlSB = new StringBundler(8);
-
-		urlSB.append(themeDisplay.getPortalURL());
-		urlSB.append(themeDisplay.getPathContext());
-		urlSB.append("/documents/");
-		urlSB.append(themeDisplay.getScopeGroupId());
-		urlSB.append("/");
-		urlSB.append(folderId);
-		urlSB.append("/");
+		String title = fileEntry.getTitle();
 
 		String unescapeTitle = HtmlUtil.unescape(title);
 
 		String encodeTitle = HttpUtil.encodeURL(unescapeTitle);
 
-		urlSB.append(encodeTitle);
+		StringBundler sb = new StringBundler(8);
 
-		return urlSB.toString();
+		sb.append(themeDisplay.getPortalURL());
+		sb.append(themeDisplay.getPathContext());
+		sb.append("/documents/");
+		sb.append(themeDisplay.getScopeGroupId());
+		sb.append("/");
+		sb.append(folderId);
+		sb.append("/");
+		sb.append(encodeTitle);
+
+		return sb.toString();
 	}
 
 	private final ActionHelper _actionHelper;

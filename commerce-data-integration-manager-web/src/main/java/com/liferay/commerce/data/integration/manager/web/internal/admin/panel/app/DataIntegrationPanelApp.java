@@ -62,7 +62,7 @@ public class DataIntegrationPanelApp extends BasePanelApp {
 
 	@Override
 	public String getPortletId() {
-		return DataIntegrationWebPortletKeys.LR_DATA_INTEGRATION_WEB;
+		return DataIntegrationWebPortletKeys.DATA_INTEGRATION_WEB;
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class DataIntegrationPanelApp extends BasePanelApp {
 
 	@Override
 	@Reference(
-		target = "(javax.portlet.name=" + DataIntegrationWebPortletKeys.LR_DATA_INTEGRATION_WEB + ")",
+		target = "(javax.portlet.name=" + DataIntegrationWebPortletKeys.DATA_INTEGRATION_WEB + ")",
 		unbind = "-"
 	)
 	public void setPortlet(Portlet portlet) {

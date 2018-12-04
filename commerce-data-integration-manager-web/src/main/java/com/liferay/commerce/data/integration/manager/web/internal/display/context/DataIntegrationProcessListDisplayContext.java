@@ -54,12 +54,9 @@ public class DataIntegrationProcessListDisplayContext {
 
 		_portletResourcePermission = portletResourcePermission;
 		_processService = processService;
-
 		_dataIntegrationRequestHelper = new DataIntegrationRequestHelper(
 			renderRequest);
-
 		_portal = portal;
-
 		_actionHelper = actionHelper;
 
 		DataIntegrationRequestHelper dataIntegrationRequestHelper =
@@ -67,14 +64,11 @@ public class DataIntegrationProcessListDisplayContext {
 
 		liferayPortletRequest =
 			dataIntegrationRequestHelper.getLiferayPortletRequest();
-
 		liferayPortletResponse =
 			dataIntegrationRequestHelper.getLiferayPortletResponse();
 
 		httpServletRequest = _portal.getHttpServletRequest(renderRequest);
-
 		_defaultOrderByCol = "modified-date";
-
 		_defaultOrderByType = "desc";
 	}
 

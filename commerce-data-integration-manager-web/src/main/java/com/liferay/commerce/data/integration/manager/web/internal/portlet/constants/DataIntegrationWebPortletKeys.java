@@ -19,15 +19,15 @@ package com.liferay.commerce.data.integration.manager.web.internal.portlet.const
  */
 public class DataIntegrationWebPortletKeys {
 
-	public static final String LR_DATA_INTEGRATION_ADMIN_MODULE_REGISTRY =
+	public static final String DATA_INTEGRATION_ADMIN_MODULE_REGISTRY =
 		"DATA_INTEGRATION_ADMIN_MODULE_REGISTRY";
 
-	public static final String LR_DATA_INTEGRATION_WEB =
+	public static final String DATA_INTEGRATION_WEB =
 		"com_liferay_commerce_data_integration_manager_web_internal_portlet_" +
 			"CommerceDataIntegrationManagerPortlet";
 
-	public static final String LR_MANUAL_EXECUTION = "manual";
+	public static final String MANUAL_EXECUTION = "manual";
 
-	public static final String LR_SCHEDULED_EXECUTION = "scheduled";
+	public static final String SCHEDULED_EXECUTION = "scheduled";
 
 }
