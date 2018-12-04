@@ -246,8 +246,8 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		commerceSubscriptionEntry.setMaxSubscriptionCycles(
 			maxSubscriptionCycles);
 		commerceSubscriptionEntry.setActive(active);
-		commerceSubscriptionEntry.setStartDate(startDate);
 		commerceSubscriptionEntry.setNextIterationDate(nextInterationDate);
+		commerceSubscriptionEntry.setStartDate(startDate);
 
 		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
 
