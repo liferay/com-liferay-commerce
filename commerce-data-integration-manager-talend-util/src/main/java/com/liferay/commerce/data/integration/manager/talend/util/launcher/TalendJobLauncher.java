@@ -58,18 +58,13 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	configurationPid = "com.liferay.commerce.data.integration.manager.talend.util.launcher.configuration.TalendJobExecutorConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
-	property = {
-		"data.integration.service.executor.key=" + TalendJobLauncher.KEY,
-		"osgi.command.function=runJob", "osgi.command.function=runJob"
-	},
+	property = "data.integration.service.executor.key=" + TalendJobLauncher.KEY,
 	service = ScheduledTaskExectutorService.class
 )
 public class TalendJobLauncher implements ScheduledTaskExectutorService {
 
 	public static final String KEY = "talend";
 
-	/* The talend job is executed
-	 */
 	public boolean execute(
 			long userId, ScheduledTask scheduledTask, String executionType,
 			Date startDate, File error, File log)
@@ -183,43 +178,6 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 		return true;
 	}
 
-	public void runJob() {
-		try {
-			_libDirectoryName =
-				"/Users/guywandji/Documents/buildCatalog_1.0/lib";
-
-			_className = "product_mapping.buildcatalog_1_0.buildCatalog";
-
-			_jarName =
-				"/Users/guywandji/Documents/buildCatalog_1.0/buildCatalog" +
-					"/buildcatalog_1_0.jar";
-			boolean init = init(
-				_CONFIGURATION_FILE_ENTRY_ID, _ARCHIVE_FILE_ENTRY_ID, "1.0",
-				_className);
-
-			if (init) {
-				ProcessBuilder pb = new ProcessBuilder(
-					"java", _configuration.xms(), _configuration.xmx(), _CP,
-					_jarCommandArgs, _className, "--context=Default", "\"$@\"");
-
-				File log = FileUtil.createTempFile();
-
-				File error = FileUtil.createTempFile();
-				File jarNameFile = new File(_jarName);
-
-				pb.redirectError(error);
-				pb.redirectOutput(log);
-				pb.directory(new File(jarNameFile.getParent()));
-				pb.start();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public void runProcess(
 			long userId, long scheduledTaskId, String executionType)
@@ -243,12 +201,6 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 				userId, scheduledTask.getProcessId());
 
 			_className = process.getClassName();
-
-			/*
-
-			if (scheduledTask.isActive()) {
-				return;
-			}*/
 
 			boolean init = init(
 				process.getContextPropertiesFileEntryId(),
@@ -317,17 +269,17 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 		_command.add("--context=" + _configuration.context());
 
 		if (_props != null) {
-			StringBundler paramSB = new StringBundler();
+			StringBundler sb = new StringBundler();
 
 			for (Object key : _props.keySet()) {
-				paramSB.append("--context_param ");
-				paramSB.append(key);
-				paramSB.append("=");
-				paramSB.append(_props.get(key));
+				sb.append("--context_param ");
+				sb.append(key);
+				sb.append("=");
+				sb.append(_props.get(key));
 
-				_command.add(paramSB.toString());
+				_command.add(sb.toString());
 
-				paramSB = new StringBundler();
+				sb = new StringBundler();
 			}
 		}
 	}
@@ -365,17 +317,17 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 			jarName = className.substring(lastIndexOfDot + 1);
 		}
 
-		StringBuilder jarNameBuilder = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-		jarNameBuilder.append("/");
-		jarNameBuilder.append(jarName);
-		jarNameBuilder.append("/");
-		jarNameBuilder.append(jarName);
-		jarNameBuilder.append("_");
-		jarNameBuilder.append(version.replace(".", "_"));
-		jarNameBuilder.append(".jar");
+		sb.append("/");
+		sb.append(jarName);
+		sb.append("/");
+		sb.append(jarName);
+		sb.append("_");
+		sb.append(version.replace(".", "_"));
+		sb.append(".jar");
 
-		return jarNameBuilder.toString();
+		return sb.toString();
 	}
 
 	private void _evaluateEnvironment() {
@@ -388,10 +340,6 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 			}
 		}
 	}
-
-	private static final long _ARCHIVE_FILE_ENTRY_ID = 55332;
-
-	private static final long _CONFIGURATION_FILE_ENTRY_ID = 55341;
 
 	private static final String _CP = "-cp";
 
