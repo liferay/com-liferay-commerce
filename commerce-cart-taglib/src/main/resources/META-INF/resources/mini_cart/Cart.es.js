@@ -9,10 +9,17 @@ import './Summary.es';
 
 class Cart extends Component {
 
-	// Returns a function, that, as long as it continues to be invoked, will not
-// be triggered. The function will be called after it stops being called for
-// N milliseconds. If `immediate` is passed, trigger the function on the
-// leading edge, instead of the trailing.
+	created() {
+		fetch(this.cartAPI + '/' + this.cartId, {
+			method: 'GET'
+		})
+			.then(response => response.json())
+			.then(cartState => {
+				this.cartId = cartState.cartId;
+				this.products = cartState.products;
+				this.summary = cartState.summary;
+			});
+	}
 
 	debounce(func, wait, immediate) {
 		var timeout;
@@ -20,12 +27,16 @@ class Cart extends Component {
 			var context = this, args = arguments;
 			var later = function() {
 				timeout = null;
-				if (!immediate) {func.apply(context, args);}
+				if (!immediate) {
+					func.apply(context, args);
+				}
 			};
 			var callNow = immediate && !timeout;
 			clearTimeout(timeout);
 			timeout = setTimeout(later, wait);
-			if (callNow) {func.apply(context, args);}
+			if (callNow) {
+				func.apply(context, args);
+			}
 		};
 	};
 
@@ -153,7 +164,7 @@ class Cart extends Component {
 	}
 
 	sendUpdateRequest(productId) {
-		return fetch(this.cartAPI + '/' + this.cartId + '/' + productId, {
+		return fetch(this.cartAPI + '/' + productId, {
 			body: JSON.stringify({
 				quantity: this.getProductProperty(productId, 'quantity')
 			}),
@@ -178,7 +189,7 @@ class Cart extends Component {
 
 	sendDeleteRequest(productId) {
 		this.addPendingOperation(productId);
-		return fetch(this.cartAPI + '/' + this.cartId + '/' + productId, {
+		return fetch(this.cartAPI + '/' + productId, {
 			method: 'DELETE'
 		})
 			.then(response => response.json())
@@ -212,7 +223,7 @@ Cart.STATE = {
 		value: ''
 	},
 	cartAPI: {
-		value: '/api/cart'
+		value: 'http://localhost:8080/o/commerce-cart'
 	},
 	isOpen: {
 		value: true
