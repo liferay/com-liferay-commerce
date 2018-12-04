@@ -14,7 +14,13 @@
 
 package com.liferay.commerce.cart.taglib.servlet.taglib;
 
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -27,19 +33,37 @@ public class MiniCartTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
+		CommerceContext commerceContext = (CommerceContext)request.getAttribute(
+			CommerceWebKeys.COMMERCE_CONTEXT);
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		putValue("isOpen", false);
-		putValue("isDisabled", false);
-		putValue("detailsUrl", "");
-		putValue("productsAmount", 0);
-		putValue("products", new ArrayList<>());
-		putValue(
-			"spritemap",
-			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
+		try {
+			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
-		setTemplateNamespace("Cart.render");
+			putValue("isOpen", false);
+			putValue("isDisabled", false);
+			putValue("detailsUrl", "");
+			putValue("productsAmount", 0);
+
+			if (commerceOrder != null) {
+				putValue("cartId", commerceOrder.getCommerceOrderId());
+			}
+
+			putValue("products", new ArrayList<>());
+			putValue(
+				"spritemap",
+				themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
+
+			setTemplateNamespace("Cart.render");
+		}
+		catch (PortalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
+
+			return SKIP_BODY;
+		}
 
 		return super.doStartTag();
 	}
@@ -48,5 +72,7 @@ public class MiniCartTag extends ComponentRendererTag {
 	public String getModule() {
 		return "commerce-cart-taglib/mini_cart/Cart.es";
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(MiniCartTag.class);
 
 }
