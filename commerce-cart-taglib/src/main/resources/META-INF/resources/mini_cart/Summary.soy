@@ -4,16 +4,17 @@
  * This renders the component's whole content.
  */
 {template .render}
+	{@param isLoading: bool}
 	{@param checkoutUrl: string}
 	{@param subtotal: string}
 	{@param grandTotal: string}
 	{@param? discount: string}
+	{@param? taxes: string}
 	{@param totalUnits: int}
-	{@param productsNumber: int}
-	{@param? isLoading: bool}
+	{@param productsCount: int}
 
 	{let $submitModifiers kind="text"}
-		{if $isLoading or $productsNumber == 0 }
+		{if $isLoading or $productsCount == 0 }
 			{sp}minium-button--disabled
 		{/if}
 	{/let}
@@ -21,28 +22,36 @@
 	<div class="minium-cart__footer">
 		<dl class="minium-cart__totals">
 			<dt> {msg desc="Units"}units{/msg}</dt>
-			<dd>{$totalUnits}{msg desc="Of"}of{/msg} {$productsNumber} {msg desc="Items"}items{/msg}</dd>
+			<dd>{$totalUnits} {msg desc="Of"}of{/msg} {$productsCount} {msg desc="Items"}items{/msg}</dd>
 			<dt>{msg desc="Subtotal"}subtotal{/msg}</dt>
 			<dd>
-				{call Loader.render}
-					{param isUpdating: $isLoading /}
-					{param content kind="html"}{$subtotal}{/param}
-					{param direction: 'right' /}
-					{param inverted: true /}
-				{/call}
+				{if $isLoading}
+					{call Loader.render}
+						{param direction: 'right' /}
+						{param inverted: true /}
+					{/call}
+				{else}
+					{$subtotal}
+				{/if}
 			</dd>
 			{if $discount}
 				<dt>{msg desc="Discount"}discount{/msg}</dt>
 				<dd>{$discount}</dd>
 			{/if}
+			{if $taxes}
+				<dt>{msg desc="Taxes"}taxes{/msg}</dt>
+				<dd>{$taxes}</dd>
+			{/if}
 			<dt>{msg desc="Total"}total{/msg}</dt>
 			<dd>
-				{call Loader.render}
-					{param isUpdating: $isLoading /}
-					{param content kind="html"}<big>{$grandTotal}</big>{/param}
-					{param direction: 'right' /}
-					{param inverted: true /}
-				{/call}
+				{if $isLoading}
+					{call Loader.render}
+						{param direction: 'right' /}
+						{param inverted: true /}
+					{/call}
+				{else}
+					<big>{$grandTotal}</big>
+				{/if}
 			</dd>
 		</dl>
 
