@@ -4,50 +4,6 @@
  * This renders the component's whole content.
  */
 {template .render}
-	{@param content: ?}
-	{@param? isUpdating: bool}
-	{@param? direction: string}
-	{@param? inverted: bool}
-	{@param? loaderType: bool}
-	{@param? type: string}
-
-{let $pendingClasses kind="text"}
-		{if $isUpdating}
-			{sp}is-loading
-		{/if}
-	{/let}
-
-	<span class="minium-loader-container{$pendingClasses}">
-		{if not $loaderType or $loaderType == 'horizontal'}
-			{call .horizontalLoader}
-				{param direction: $direction /}
-				{param inverted: $inverted /}
-			{/call}
-		{/if}
-		<span class="minium-loader-container__content">
-			{delcall Loader.Content variant="$type"}
-				{param content: $content /}
-			{/delcall}
-		</span>
-	</span>
-{/template}
-
-{deltemplate Loader.Content variant="'default'"}
-	{@param content: ?}
-	{$content}
-{/deltemplate}
-
-{deltemplate Loader.Content variant="'price'"}
-	{@param content: ?}
-	{call Price.render}
-		{param price: $content /}
-	{/call}
-{/deltemplate}
-
-/**
- * This renders the horizontal loader
- */
-{template .horizontalLoader}
 	{@param? direction: string}
 	{@param? inverted: bool}
 

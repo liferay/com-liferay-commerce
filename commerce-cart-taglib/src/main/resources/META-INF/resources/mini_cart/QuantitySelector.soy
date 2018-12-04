@@ -1,5 +1,8 @@
 {namespace QuantitySelector}
 
+/**
+ * This renders the component's whole content.
+ */
 {template .render}
 	{@param quantity: int}
 	{@param? allowedOptions: ?}
@@ -20,8 +23,8 @@
 		{/if}
 	{/let}
 
-	<div class="quantity-selector">
-		{if isNonnull($allowedOptions)}
+	{if isNonnull($allowedOptions)}
+		<div class="quantity-selector">
 			<form data-onsubmit="handleFormSubmit">
 				<select
 					class="quantity-selector__select"
@@ -38,14 +41,15 @@
 					{/foreach}
 				</select>
 			</form>
-		{else}
-			<a
-				href="#"
+		</div>
+	{else}
+		<div class="quantity-selector">
+			<button
 				class="quantity-selector__btn{$prevClass}"
 				data-onclick="handlePrevQuantity"
 			>
 				-
-			</a>
+			</button>
 
 			<form data-onsubmit="handleFormSubmit">
 				<input
@@ -57,14 +61,13 @@
 				>
 			</form>
 
-			<a
-				href="#"
+			<button
 				class="quantity-selector__btn{$nextClass}"
 				data-onclick="handleNextQuantity"
 			>
 				+
-			</a>
-		{/if}
-	</div>
+			</button>
+		</div>
+	{/if}
 
 {/template}

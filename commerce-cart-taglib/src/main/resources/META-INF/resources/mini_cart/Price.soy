@@ -1,5 +1,8 @@
 {namespace Price}
 
+/**
+ * This renders the component's whole content.
+ */
 {template .render}
 	{@param price: ?}
 	{@param? additionalDiscountedClasses: string}
@@ -21,23 +24,26 @@
 
 {/template}
 
+/**
+ * This renders the price and the discount.
+ */
 {template .promoContent}
-	{@param price: [
-		formattedPromoPrice: string,
-		formattedPrice: string
-	]}
+	{@param price: ?}
 	{@param? additionalDiscountedClasses: string}
 	{@param? additionalOldPriceClasses: string}
-
-	<span class="price price--discounted{$additionalDiscountedClasses}">
-		{$price.formattedPromoPrice}
+	<span>
+		<span class="price price--discounted{$additionalDiscountedClasses}">
+			{$price.formattedPromoPrice}
+		</span>
+		<span class="price price--old{$additionalOldPriceClasses}">
+			{$price.formattedPrice}
+		</span>
 	</span>
-	<span class="price price--old{$additionalOldPriceClasses}">
-		{$price.formattedPrice}
-	</span>
-
 {/template}
 
+/**
+ * This renders the normal price
+ */
 {template .content}
 	{@param price: [
 		formattedPrice: string

@@ -10,6 +10,27 @@ class Summary extends Component {}
 Summary.STATE = {
 	isLoading: {
 		value: false
+	},
+	checkoutUrl: {
+		value: null
+	},
+	subtotal: {
+		value: null
+	},
+	grandTotal: {
+		value: null
+	},
+	discount: {
+		value: null
+	},
+	taxes: {
+		value: null
+	},
+	totalUnits: {
+		value: null
+	},
+	productsCount: {
+		value: null
 	}
 };
 
