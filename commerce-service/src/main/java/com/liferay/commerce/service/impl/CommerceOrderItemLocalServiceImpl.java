@@ -344,7 +344,7 @@ public class CommerceOrderItemLocalServiceImpl
 		CommerceOrderItem commerceOrderItem =
 			commerceOrderItemPersistence.findByPrimaryKey(commerceOrderItemId);
 
-		return updateCommerceOrderItem(
+		return commerceOrderItemLocalService.updateCommerceOrderItem(
 			commerceOrderItemId, quantity, commerceOrderItem.getJson(),
 			commerceContext);
 	}
