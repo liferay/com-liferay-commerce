@@ -148,8 +148,8 @@ public class CommerceSubscriptionEntryHelperImpl
 		}
 
 		newOrder.setBillingAddressId(oldOrder.getBillingAddressId());
-		newOrder.setCommercePaymentMethodId(
-			oldOrder.getCommercePaymentMethodId());
+		newOrder.setCommercePaymentMethodKey(
+			oldOrder.getCommercePaymentMethodKey());
 		newOrder.setCommerceShippingMethodId(
 			oldOrder.getCommerceShippingMethodId());
 

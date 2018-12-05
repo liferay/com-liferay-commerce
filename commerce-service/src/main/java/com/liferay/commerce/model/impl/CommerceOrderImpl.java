@@ -24,12 +24,10 @@ import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
 import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.organization.service.CommerceOrganizationLocalServiceUtil;
 import com.liferay.commerce.service.CommerceAddressLocalServiceUtil;
 import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
-import com.liferay.commerce.service.CommercePaymentMethodLocalServiceUtil;
 import com.liferay.commerce.service.CommerceShippingMethodLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -62,7 +60,7 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 		long billingAddressId = getBillingAddressId();
 
 		if (billingAddressId > 0) {
-			return CommerceAddressLocalServiceUtil.getCommerceAddress(
+			return CommerceAddressLocalServiceUtil.fetchCommerceAddress(
 				getBillingAddressId());
 		}
 
@@ -114,21 +112,6 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 		return CommerceOrderItemLocalServiceUtil.getCommerceOrderItems(
 			getCommerceOrderId(), cpInstanceId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
-	}
-
-	@Override
-	public CommercePaymentMethod getCommercePaymentMethod()
-		throws PortalException {
-
-		long commercePaymentMethodId = getCommercePaymentMethodId();
-
-		if (commercePaymentMethodId > 0) {
-			return
-				CommercePaymentMethodLocalServiceUtil.getCommercePaymentMethod(
-					commercePaymentMethodId);
-		}
-
-		return null;
 	}
 
 	@Override
@@ -201,7 +184,7 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 		long shippingAddressId = getShippingAddressId();
 
 		if (shippingAddressId > 0) {
-			return CommerceAddressLocalServiceUtil.getCommerceAddress(
+			return CommerceAddressLocalServiceUtil.fetchCommerceAddress(
 				getShippingAddressId());
 		}
 
@@ -273,6 +256,19 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 		if (getOrderStatus() ==
 				CommerceOrderConstants.ORDER_STATUS_SUBSCRIPTION) {
 
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean isSubscriptionOrder() {
+		List<CommerceOrderItem> commerceOrderItems = getCommerceOrderItems();
+
+		CommerceOrderItem commerceOrderItem = commerceOrderItems.get(0);
+
+		if (commerceOrderItem.isSubscription()) {
 			return true;
 		}
 
