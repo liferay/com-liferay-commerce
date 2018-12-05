@@ -419,7 +419,7 @@ public class CommerceAddressLocalServiceImpl
 
 			commerceOrderLocalService.updateCommerceOrder(
 				commerceOrder.getCommerceOrderId(), billingAddressId,
-				shippingAddressId, commerceOrder.getCommercePaymentMethodId(),
+				shippingAddressId, commerceOrder.getCommercePaymentMethodKey(),
 				commerceShippingMethodId, shippingOptionName,
 				commerceOrder.getPurchaseOrderNumber(),
 				commerceOrder.getSubtotal(), shippingPrice,

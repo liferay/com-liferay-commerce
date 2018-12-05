@@ -24,9 +24,26 @@ import com.liferay.portal.kernel.service.ServiceContext;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 public class CommerceOrderPaymentLocalServiceImpl
 	extends CommerceOrderPaymentLocalServiceBaseImpl {
+
+	@Override
+	public CommerceOrderPayment addCommerceOrderPayment(
+			long commerceOrderId, int status, String result)
+		throws PortalException {
+
+		CommerceOrder commerceOrder =
+			commerceOrderLocalService.getCommerceOrder(commerceOrderId);
+
+		User user = userLocalService.getUser(commerceOrder.getUserId());
+
+		CommerceOrderPayment commerceOrderPayment = _getCommerceOrderPayment(
+			status, result, commerceOrder, user);
+
+		return commerceOrderPayment;
+	}
 
 	@Override
 	public CommerceOrderPayment addCommerceOrderPayment(
@@ -38,23 +55,8 @@ public class CommerceOrderPaymentLocalServiceImpl
 			commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
-		long commerceOrderPaymentId = counterLocalService.increment();
-
-		CommerceOrderPayment commerceOrderPayment =
-			commerceOrderPaymentPersistence.create(commerceOrderPaymentId);
-
-		commerceOrderPayment.setGroupId(commerceOrder.getGroupId());
-		commerceOrderPayment.setCompanyId(user.getCompanyId());
-		commerceOrderPayment.setUserId(user.getUserId());
-		commerceOrderPayment.setUserName(user.getFullName());
-		commerceOrderPayment.setCommerceOrderId(
-			commerceOrder.getCommerceOrderId());
-		commerceOrderPayment.setCommercePaymentMethodId(
-			commerceOrder.getCommercePaymentMethodId());
-		commerceOrderPayment.setStatus(status);
-		commerceOrderPayment.setContent(content);
-
-		commerceOrderPaymentPersistence.update(commerceOrderPayment);
+		CommerceOrderPayment commerceOrderPayment = _getCommerceOrderPayment(
+			status, content, commerceOrder, user);
 
 		return commerceOrderPayment;
 	}
@@ -72,6 +74,30 @@ public class CommerceOrderPaymentLocalServiceImpl
 
 		return commerceOrderPaymentPersistence.fetchByCommerceOrderId_First(
 			commerceOrderId, new CommerceOrderPaymentCreateDateComparator());
+	}
+
+	private CommerceOrderPayment _getCommerceOrderPayment(
+		int status, String result, CommerceOrder commerceOrder, User user) {
+
+		long commerceOrderPaymentId = counterLocalService.increment();
+
+		CommerceOrderPayment commerceOrderPayment =
+			commerceOrderPaymentPersistence.create(commerceOrderPaymentId);
+
+		commerceOrderPayment.setGroupId(commerceOrder.getGroupId());
+		commerceOrderPayment.setCompanyId(user.getCompanyId());
+		commerceOrderPayment.setUserId(user.getUserId());
+		commerceOrderPayment.setUserName(user.getFullName());
+		commerceOrderPayment.setCommerceOrderId(
+			commerceOrder.getCommerceOrderId());
+		commerceOrderPayment.setCommercePaymentMethodKey(
+			commerceOrder.getCommercePaymentMethodKey());
+		commerceOrderPayment.setStatus(status);
+		commerceOrderPayment.setContent(result);
+
+		commerceOrderPaymentPersistence.update(commerceOrderPayment);
+
+		return commerceOrderPayment;
 	}
 
 }
