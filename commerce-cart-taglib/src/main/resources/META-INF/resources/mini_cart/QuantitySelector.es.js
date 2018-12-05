@@ -1,6 +1,6 @@
 import template from './QuantitySelector.soy';
 import Component from 'metal-component';
-import Soy from 'metal-soy';
+import Soy, {Config} from 'metal-soy';
 
 class QuantitySelector extends Component {
 
@@ -153,33 +153,15 @@ class QuantitySelector extends Component {
 }
 
 QuantitySelector.STATE = {
-	minQuantity: {
-		value: 1
-	},
-	maxQuantity: {
-		value: 99999999
-	},
-	multipleQuantities: {
-		value: null
-	},
-	allowedOptions: {
-		value: null
-	},
-	quantity: {
-		value: 0
-	},
-	isPrevAvailable: {
-		value: true
-	},
-	isNextAvailable: {
-		value: true
-	},
-	inputError: {
-		value: null
-	},
-	showError: {
-		value: false
-	}
+	minQuantity: Config.number().value(1),
+	maxQuantity: Config.number().value(99999999),
+	multipleQuantities: Config.number(),
+	allowedOptions: Config.array(),
+	quantity: Config.number().value(0),
+	isPrevAvailable: Config.bool().value(true),
+	isNextAvailable: Config.bool().value(true),
+	inputError: Config.string(),
+	showError: Config.bool().value(false)
 };
 
 Soy.register(QuantitySelector, template);

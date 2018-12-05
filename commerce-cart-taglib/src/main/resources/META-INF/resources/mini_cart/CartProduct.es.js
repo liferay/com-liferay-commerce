@@ -2,7 +2,7 @@
 
 import template from './CartProduct.soy';
 import Component from 'metal-component';
-import Soy from 'metal-soy';
+import Soy, { Config } from 'metal-soy';
 
 import './Loader.es';
 import './Price.es';
@@ -25,36 +25,20 @@ class CartProduct extends Component {
 Soy.register(CartProduct, template);
 
 CartProduct.STATE = {
-	id: {
-		value: null
-	},
-	inputChanged: {
-		value: false
-	},
-	isDeleting: {
-		value: false
-	},
-	isDeleteDisabled: {
-		value: false
-	},
-	isCollapsed: {
-		value: false
-	},
-	isUpdating: {
-		value: false
-	},
-	localization: {
-		value: {}
-	},
-	quantity: {
-		value: 0
-	},
-	error: {
-		value: null
-	},
-	settings: {
-		value: {}
-	}
+	id: Config.oneOfType(
+		[
+			Config.string(),
+			Config.number()
+		]
+	),
+	inputChanged: Config.bool().value(false),
+	isDeleting: Config.bool().value(false),
+	isDeleteDisabled: Config.bool().value(false),
+	isCollapsed: Config.bool().value(false),
+	isUpdating: Config.bool().value(false),
+	quantity: Config.number().value(0),
+	error: Config.string(),
+	settings: Config.object().value({})
 };
 
 export {CartProduct};
