@@ -23,6 +23,7 @@ import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPrice;
@@ -53,6 +54,7 @@ public class OrderSummaryCheckoutStepDisplayContext {
 		CommerceOrderHttpHelper commerceOrderHttpHelper,
 		CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 		CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
+		CommercePaymentEngine commercePaymentEngine,
 		CommerceProductPriceCalculation commerceProductPriceCalculation,
 		CPInstanceHelper cpInstanceHelper,
 		HttpServletRequest httpServletRequest) {
@@ -60,6 +62,7 @@ public class OrderSummaryCheckoutStepDisplayContext {
 		_commerceOrderHttpHelper = commerceOrderHttpHelper;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_commerceOrderValidatorRegistry = commerceOrderValidatorRegistry;
+		_commercePaymentEngine = commercePaymentEngine;
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_cpInstanceHelper = cpInstanceHelper;
 		_httpServletRequest = httpServletRequest;
@@ -141,12 +144,24 @@ public class OrderSummaryCheckoutStepDisplayContext {
 		return _cpInstanceHelper.getKeyValuePairs(json, locale);
 	}
 
+	public String getPaymentMethodName(String paymentMethodKey, Locale locale) {
+		String paymentMethodName = StringPool.BLANK;
+
+		if (!paymentMethodKey.isEmpty() && (locale != null)) {
+			paymentMethodName = _commercePaymentEngine.getPaymentMethodName(
+				paymentMethodKey, locale);
+		}
+
+		return paymentMethodName;
+	}
+
 	private final CommerceContext _commerceContext;
 	private final CommerceOrder _commerceOrder;
 	private final CommerceOrderHttpHelper _commerceOrderHttpHelper;
 	private final CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 	private final CommerceOrderValidatorRegistry
 		_commerceOrderValidatorRegistry;
+	private final CommercePaymentEngine _commercePaymentEngine;
 	private final CommerceProductPriceCalculation
 		_commerceProductPriceCalculation;
 	private final CPInstanceHelper _cpInstanceHelper;

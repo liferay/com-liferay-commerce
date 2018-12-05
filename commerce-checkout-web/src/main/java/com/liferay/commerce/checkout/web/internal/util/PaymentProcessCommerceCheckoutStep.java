@@ -15,13 +15,13 @@
 package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
-import com.liferay.commerce.checkout.web.internal.display.context.OrderConfirmationCheckoutStepDisplayContext;
+import com.liferay.commerce.checkout.web.internal.display.context.PaymentProcessCheckoutStepDisplayContext;
 import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
-import com.liferay.commerce.order.CommerceOrderHttpHelper;
-import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
-import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.checkout.web.util.CommerceCheckoutStepServicesTracker;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
+import com.liferay.portal.kernel.util.Portal;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -33,21 +33,20 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Marco Leo
- * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 @Component(
 	immediate = true,
 	property = {
-		"commerce.checkout.step.name=" + OrderConfirmationCommerceCheckoutStep.NAME,
-		"commerce.checkout.step.order:Integer=" + Integer.MAX_VALUE
+		"commerce.checkout.step.name=" + PaymentProcessCommerceCheckoutStep.NAME,
+		"commerce.checkout.step.order:Integer=" + (Integer.MAX_VALUE - 90)
 	},
 	service = CommerceCheckoutStep.class
 )
-public class OrderConfirmationCommerceCheckoutStep
+public class PaymentProcessCommerceCheckoutStep
 	extends BaseCommerceCheckoutStep {
 
-	public static final String NAME = "order-confirmation";
+	public static final String NAME = "payment-process";
 
 	@Override
 	public String getName() {
@@ -55,13 +54,12 @@ public class OrderConfirmationCommerceCheckoutStep
 	}
 
 	@Override
-	public boolean isOrder() {
-		return true;
-	}
+	public boolean isVisible(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
+		throws Exception {
 
-	@Override
-	public boolean isSennaDisabled() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -76,19 +74,23 @@ public class OrderConfirmationCommerceCheckoutStep
 			HttpServletResponse httpServletResponse)
 		throws Exception {
 
-		OrderConfirmationCheckoutStepDisplayContext
-			orderConfirmationCheckoutStepDisplayContext =
-				new OrderConfirmationCheckoutStepDisplayContext(
-					_commerceOrderHttpHelper, _commerceOrderPaymentLocalService,
-					_commerceOrderService, httpServletRequest);
+		CommerceOrder commerceOrder =
+			(CommerceOrder)httpServletRequest.getAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER);
+
+		PaymentProcessCheckoutStepDisplayContext
+			paymentProcessCheckoutStepDisplayContext =
+				new PaymentProcessCheckoutStepDisplayContext(
+					_commerceCheckoutStepServicesTracker, commerceOrder,
+					httpServletRequest, _portal);
 
 		httpServletRequest.setAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
-			orderConfirmationCheckoutStepDisplayContext);
+			paymentProcessCheckoutStepDisplayContext);
 
 		_jspRenderer.renderJSP(
 			httpServletRequest, httpServletResponse,
-			"/checkout_step/order_confirmation.jsp");
+			"/checkout_step/payment_process.jsp");
 	}
 
 	@Override
@@ -100,15 +102,13 @@ public class OrderConfirmationCommerceCheckoutStep
 	}
 
 	@Reference
-	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
-
-	@Reference
-	private CommerceOrderPaymentLocalService _commerceOrderPaymentLocalService;
-
-	@Reference
-	private CommerceOrderService _commerceOrderService;
+	private CommerceCheckoutStepServicesTracker
+		_commerceCheckoutStepServicesTracker;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference
+	private Portal _portal;
 
 }
