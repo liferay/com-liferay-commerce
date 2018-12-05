@@ -12,26 +12,20 @@
  * details.
  */
 
-package com.liferay.commerce.constants;
+package com.liferay.commerce.payment.method;
+
+import aQute.bnd.annotation.ProviderType;
+
+import java.util.Map;
 
 /**
- * @author Andrea Di Giorgi
- * @author Alessio Antonio Rendina
- * @author Marco Leo
+ * @author Luca Pellizzon
  */
-public class CommerceConstants {
+@ProviderType
+public interface CommercePaymentMethodRegistry {
 
-	public static final String ORDER_SERVICE_NAME =
-		"com.liferay.commerce.order";
+	public CommercePaymentMethod getCommercePaymentMethod(String key);
 
-	public static final String PRICE_SERVICE_NAME =
-		"com.liferay.commerce.price";
-
-	public static final String RESOURCE_NAME = "com.liferay.commerce";
-
-	public static final String SHIPPING_SERVICE_NAME =
-		"com.liferay.commerce.shipping";
-
-	public static final String TAXES_COMMERCE_ADMIN_MODULE_KEY = "taxes";
+	public Map<String, CommercePaymentMethod> getCommercePaymentMethods();
 
 }

@@ -15,23 +15,18 @@
 package com.liferay.commerce.constants;
 
 /**
- * @author Andrea Di Giorgi
- * @author Alessio Antonio Rendina
- * @author Marco Leo
+ * @author Luca Pellizzon
  */
-public class CommerceConstants {
+public class CommercePaymentConstants {
 
-	public static final String ORDER_SERVICE_NAME =
-		"com.liferay.commerce.order";
+	public static final int COMMERCE_PAYMENT_METHOD_TYPE_OFFLINE = 2;
 
-	public static final String PRICE_SERVICE_NAME =
-		"com.liferay.commerce.price";
+	public static final int COMMERCE_PAYMENT_METHOD_TYPE_ONLINE_REDIRECT = 1;
 
-	public static final String RESOURCE_NAME = "com.liferay.commerce";
+	public static final int COMMERCE_PAYMENT_METHOD_TYPE_ONLINE_STANDARD = 0;
 
-	public static final String SHIPPING_SERVICE_NAME =
-		"com.liferay.commerce.shipping";
+	public static final String DEFAULT_PAYMENT_REQUEST_PROVIDER_KEY = "default";
 
-	public static final String TAXES_COMMERCE_ADMIN_MODULE_KEY = "taxes";
+	public static final String SERVLET_PATH = "commerce-payment";
 
 }
