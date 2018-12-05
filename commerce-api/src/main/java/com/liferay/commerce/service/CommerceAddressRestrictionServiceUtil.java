@@ -42,37 +42,6 @@ public class CommerceAddressRestrictionServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceAddressRestrictionServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.commerce.model.CommerceAddressRestriction addCommerceAddressRestriction(
-		String className, long classPK, long commerceCountryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .addCommerceAddressRestriction(className, classPK,
-			commerceCountryId, serviceContext);
-	}
-
-	public static void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService()
-			.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
-	}
-
-	public static java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
-		String className, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceAddressRestrictions(className, classPK, start,
-			end, orderByComparator);
-	}
-
-	public static int getCommerceAddressRestrictionsCount(String className,
-		long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceAddressRestrictionsCount(className, classPK);
-	}
 
 	/**
 	* Returns the OSGi service identifier.
@@ -81,14 +50,6 @@ public class CommerceAddressRestrictionServiceUtil {
 	*/
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
-	}
-
-	public static boolean isCommerceShippingMethodRestricted(
-		long commerceShippingMethodId, long commerceCountryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .isCommerceShippingMethodRestricted(commerceShippingMethodId,
-			commerceCountryId);
 	}
 
 	public static CommerceAddressRestrictionService getService() {

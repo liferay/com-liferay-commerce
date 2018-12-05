@@ -84,7 +84,7 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	public CommerceOrder addCommerceOrder(long siteGroupId,
 		long orderOrganizationId, long orderUserId, long commerceCurrencyId,
 		long billingAddressId, long shippingAddressId,
-		long commercePaymentMethodId, long commerceShippingMethodId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 		int paymentStatus, int orderStatus, ServiceContext serviceContext)
@@ -118,16 +118,10 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	public CommerceOrder approveCommerceOrder(long userId, long commerceOrderId)
 		throws PortalException;
 
-	public CommerceOrder cancelCommerceOrderPayment(long commerceOrderId,
-		ServiceContext serviceContext) throws PortalException;
-
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder checkoutCommerceOrder(long commerceOrderId,
 		CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
-
-	public CommerceOrder completeCommerceOrderPayment(long commerceOrderId,
-		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new commerce order with the primary key. Does not add the commerce order to the database.
@@ -421,9 +415,6 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	public long searchCommerceOrdersCount(SearchContext searchContext)
 		throws PortalException;
 
-	public String startCommerceOrderPayment(long commerceOrderId,
-		ServiceContext serviceContext) throws PortalException;
-
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder submitCommerceOrder(long userId, long commerceOrderId)
 		throws PortalException;
@@ -447,7 +438,7 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder updateCommerceOrder(long commerceOrderId,
 		long billingAddressId, long shippingAddressId,
-		long commercePaymentMethodId, long commerceShippingMethodId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 		String advanceStatus, CommerceContext commerceContext)
@@ -456,7 +447,7 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder updateCommerceOrder(long commerceOrderId,
 		long billingAddressId, long shippingAddressId,
-		long commercePaymentMethodId, long commerceShippingMethodId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 		String advanceStatus, String externalReferenceCode,
@@ -466,8 +457,12 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	public CommerceOrder updateOrderStatus(long commerceOrderId, int orderStatus)
 		throws PortalException;
 
-	public CommerceOrder updatePaymentStatus(long commerceOrderId,
-		int paymentStatus, ServiceContext serviceContext)
+	public CommerceOrder updatePaymentStatus(long userId, long commerceOrderId,
+		int paymentStatus) throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder updatePaymentStatusAndTransactionId(long userId,
+		long commerceOrderId, int paymentStatus, String transactionId)
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -491,6 +486,10 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	public CommerceOrder updateStatus(long userId, long commerceOrderId,
 		int status, ServiceContext serviceContext,
 		Map<String, Serializable> workflowContext) throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder updateTransactionId(long commerceOrderId,
+		String transactionId) throws PortalException;
 
 	public CommerceOrder updateUser(long commerceOrderId, long userId)
 		throws PortalException;

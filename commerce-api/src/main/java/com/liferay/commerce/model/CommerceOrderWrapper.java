@@ -77,7 +77,8 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		attributes.put("commerceCurrencyId", getCommerceCurrencyId());
 		attributes.put("billingAddressId", getBillingAddressId());
 		attributes.put("shippingAddressId", getShippingAddressId());
-		attributes.put("commercePaymentMethodId", getCommercePaymentMethodId());
+		attributes.put("commercePaymentMethodKey", getCommercePaymentMethodKey());
+		attributes.put("transactionId", getTransactionId());
 		attributes.put("commerceShippingMethodId", getCommerceShippingMethodId());
 		attributes.put("shippingOptionName", getShippingOptionName());
 		attributes.put("purchaseOrderNumber", getPurchaseOrderNumber());
@@ -216,11 +217,17 @@ public class CommerceOrderWrapper implements CommerceOrder,
 			setShippingAddressId(shippingAddressId);
 		}
 
-		Long commercePaymentMethodId = (Long)attributes.get(
-				"commercePaymentMethodId");
+		String commercePaymentMethodKey = (String)attributes.get(
+				"commercePaymentMethodKey");
 
-		if (commercePaymentMethodId != null) {
-			setCommercePaymentMethodId(commercePaymentMethodId);
+		if (commercePaymentMethodKey != null) {
+			setCommercePaymentMethodKey(commercePaymentMethodKey);
+		}
+
+		String transactionId = (String)attributes.get("transactionId");
+
+		if (transactionId != null) {
+			setTransactionId(transactionId);
 		}
 
 		Long commerceShippingMethodId = (Long)attributes.get(
@@ -500,20 +507,14 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		return _commerceOrder.getCommerceOrderItems(cpInstanceId);
 	}
 
-	@Override
-	public CommercePaymentMethod getCommercePaymentMethod()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrder.getCommercePaymentMethod();
-	}
-
 	/**
-	* Returns the commerce payment method ID of this commerce order.
+	* Returns the commerce payment method key of this commerce order.
 	*
-	* @return the commerce payment method ID of this commerce order
+	* @return the commerce payment method key of this commerce order
 	*/
 	@Override
-	public long getCommercePaymentMethodId() {
-		return _commerceOrder.getCommercePaymentMethodId();
+	public String getCommercePaymentMethodKey() {
+		return _commerceOrder.getCommercePaymentMethodKey();
 	}
 
 	@Override
@@ -980,6 +981,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	/**
+	* Returns the transaction ID of this commerce order.
+	*
+	* @return the transaction ID of this commerce order
+	*/
+	@Override
+	public String getTransactionId() {
+		return _commerceOrder.getTransactionId();
+	}
+
+	/**
 	* Returns the user ID of this commerce order.
 	*
 	* @return the user ID of this commerce order
@@ -1147,6 +1158,11 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	@Override
+	public boolean isSubscriptionOrder() {
+		return _commerceOrder.isSubscriptionOrder();
+	}
+
+	@Override
 	public void persist() {
 		_commerceOrder.persist();
 	}
@@ -1197,13 +1213,13 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	/**
-	* Sets the commerce payment method ID of this commerce order.
+	* Sets the commerce payment method key of this commerce order.
 	*
-	* @param commercePaymentMethodId the commerce payment method ID of this commerce order
+	* @param commercePaymentMethodKey the commerce payment method key of this commerce order
 	*/
 	@Override
-	public void setCommercePaymentMethodId(long commercePaymentMethodId) {
-		_commerceOrder.setCommercePaymentMethodId(commercePaymentMethodId);
+	public void setCommercePaymentMethodKey(String commercePaymentMethodKey) {
+		_commerceOrder.setCommercePaymentMethodKey(commercePaymentMethodKey);
 	}
 
 	/**
@@ -1660,6 +1676,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	public void setTotalDiscounts(
 		com.liferay.commerce.discount.CommerceDiscountValue commerceDiscountValue) {
 		_commerceOrder.setTotalDiscounts(commerceDiscountValue);
+	}
+
+	/**
+	* Sets the transaction ID of this commerce order.
+	*
+	* @param transactionId the transaction ID of this commerce order
+	*/
+	@Override
+	public void setTransactionId(String transactionId) {
+		_commerceOrder.setTransactionId(transactionId);
 	}
 
 	/**

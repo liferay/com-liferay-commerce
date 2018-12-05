@@ -34,39 +34,6 @@ public class CommerceAddressRestrictionServiceWrapper
 		_commerceAddressRestrictionService = commerceAddressRestrictionService;
 	}
 
-	@Override
-	public com.liferay.commerce.model.CommerceAddressRestriction addCommerceAddressRestriction(
-		String className, long classPK, long commerceCountryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAddressRestrictionService.addCommerceAddressRestriction(className,
-			classPK, commerceCountryId, serviceContext);
-	}
-
-	@Override
-	public void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceAddressRestrictionService.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
-		String className, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAddressRestrictionService.getCommerceAddressRestrictions(className,
-			classPK, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getCommerceAddressRestrictionsCount(String className,
-		long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAddressRestrictionService.getCommerceAddressRestrictionsCount(className,
-			classPK);
-	}
-
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -75,14 +42,6 @@ public class CommerceAddressRestrictionServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceAddressRestrictionService.getOSGiServiceIdentifier();
-	}
-
-	@Override
-	public boolean isCommerceShippingMethodRestricted(
-		long commerceShippingMethodId, long commerceCountryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAddressRestrictionService.isCommerceShippingMethodRestricted(commerceShippingMethodId,
-			commerceCountryId);
 	}
 
 	@Override

@@ -65,6 +65,23 @@ import java.rmi.RemoteException;
  */
 @ProviderType
 public class CommerceShippingMethodServiceSoap {
+	public static com.liferay.commerce.model.CommerceAddressRestrictionSoap addCommerceAddressRestriction(
+		long commerceShippingMethodId, long commerceCountryId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceAddressRestriction returnValue = CommerceShippingMethodServiceUtil.addCommerceAddressRestriction(commerceShippingMethodId,
+					commerceCountryId, serviceContext);
+
+			return com.liferay.commerce.model.CommerceAddressRestrictionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceShippingMethodSoap createCommerceShippingMethod(
 		long commerceShippingMethodId) throws RemoteException {
 		try {
@@ -79,10 +96,57 @@ public class CommerceShippingMethodServiceSoap {
 		}
 	}
 
+	public static void deleteCommerceAddressRestriction(
+		long commerceAddressRestrictionId, long groupId)
+		throws RemoteException {
+		try {
+			CommerceShippingMethodServiceUtil.deleteCommerceAddressRestriction(commerceAddressRestrictionId,
+				groupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteCommerceShippingMethod(
 		long commerceShippingMethodId) throws RemoteException {
 		try {
 			CommerceShippingMethodServiceUtil.deleteCommerceShippingMethod(commerceShippingMethodId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceAddressRestrictionSoap[] getCommerceAddressRestrictions(
+		long commerceShippingMethodId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
+		long groupId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> returnValue =
+				CommerceShippingMethodServiceUtil.getCommerceAddressRestrictions(commerceShippingMethodId,
+					start, end, orderByComparator, groupId);
+
+			return com.liferay.commerce.model.CommerceAddressRestrictionSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceAddressRestrictionsCount(
+		long commerceShippingMethodId, long groupId) throws RemoteException {
+		try {
+			int returnValue = CommerceShippingMethodServiceUtil.getCommerceAddressRestrictionsCount(commerceShippingMethodId,
+					groupId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
