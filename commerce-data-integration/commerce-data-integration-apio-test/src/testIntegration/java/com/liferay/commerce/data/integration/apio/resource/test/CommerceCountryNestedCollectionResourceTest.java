@@ -47,6 +47,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,6 +81,7 @@ public class CommerceCountryNestedCollectionResourceTest
 		_randomizerBumper.reset();
 	}
 
+	@Ignore
 	@Test
 	public void testAddCollectionItem() throws IOException, PortalException {
 		_addCountry(_getCountryPropertiesMap(RandomTestUtil.randomString()));
@@ -99,6 +101,7 @@ public class CommerceCountryNestedCollectionResourceTest
 		Assert.assertThat(resourceOperation, notNullValue());
 	}
 
+	@Ignore
 	@Test
 	public void testDeleteCollectionItem() throws IOException, PortalException {
 		ApioResourceCollection commerceCountryApioResourceCollection =
@@ -131,6 +134,7 @@ public class CommerceCountryNestedCollectionResourceTest
 		Assert.assertThat(totalItems1, equalTo(totalItems3));
 	}
 
+	@Ignore
 	@Test
 	public void testUpdateCollectionItem() throws IOException, PortalException {
 		String countryName = RandomTestUtil.randomString();
