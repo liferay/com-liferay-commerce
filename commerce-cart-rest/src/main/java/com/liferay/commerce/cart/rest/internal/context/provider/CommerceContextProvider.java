@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.context.provider;
+package com.liferay.commerce.cart.rest.internal.context.provider;
 
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
