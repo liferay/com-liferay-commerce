@@ -65,8 +65,9 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 					_cpDefinitionLocalService, _cpInstanceLocalService),
 			new CommerceWarehouseItemUpgradeProcess(
 				_cpDefinitionLocalService, _cpInstanceLocalService),
-			new CPDAvailabilityEstimateUpgradeProcess(),
-			new CPDefinitionInventoryUpgradeProcess());
+			new CPDAvailabilityEstimateUpgradeProcess(
+				_cpDefinitionLocalService),
+			new CPDefinitionInventoryUpgradeProcess(_cpDefinitionLocalService));
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
