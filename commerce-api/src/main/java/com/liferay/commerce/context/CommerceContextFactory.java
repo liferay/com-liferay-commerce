@@ -26,4 +26,8 @@ public interface CommerceContextFactory {
 
 	public CommerceContext create(HttpServletRequest httpServletRequest);
 
+	public CommerceContext create(
+		long groupId, long userId, long orderId, long organizationId,
+		String couponCode);
+
 }

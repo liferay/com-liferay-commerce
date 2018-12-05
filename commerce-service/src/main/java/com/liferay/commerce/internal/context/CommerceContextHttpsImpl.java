@@ -17,47 +17,48 @@ package com.liferay.commerce.internal.context;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
+import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.organization.service.CommerceOrganizationService;
+import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleLocalService;
-import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.util.Portal;
 
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Marco Leo
  */
-public class CommerceContextImpl implements CommerceContext {
+public class CommerceContextHttpsImpl implements CommerceContext {
 
-	public CommerceContextImpl(
-		long groupId, long userId, long orderId, long organizationId,
-		String couponCode,
+	public CommerceContextHttpsImpl(
+		HttpServletRequest httpServletRequest,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
-		CommerceOrderService commerceOrderService,
-		CommerceOrganizationService commerceOrganizationService,
+		CommerceDiscountCouponCodeHelper commerceDiscountCouponCodeHelper,
+		CommerceOrderHttpHelper commerceOrderHttpHelper,
+		CommerceOrganizationHelper commerceOrganizationHelper,
 		CommercePriceListLocalService commercePriceListLocalService,
 		CommerceUserSegmentHelper commerceUserSegmentHelper,
-		CPRuleLocalService cpRuleLocalService) {
+		CPRuleLocalService cpRuleLocalService, Portal portal) {
 
-		_groupId = groupId;
-		_userId = userId;
-		_orderId = orderId;
-		_organizationId = organizationId;
-		//TODO save CouponCode into CommerceOrder!
-		_couponCode = couponCode;
+		_httpServletRequest = httpServletRequest;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
-		_commerceOrderService = commerceOrderService;
-		_commerceOrganizationService = commerceOrganizationService;
+		_commerceDiscountCouponCodeHelper = commerceDiscountCouponCodeHelper;
+		_commerceOrderHttpHelper = commerceOrderHttpHelper;
+		_commerceOrganizationHelper = commerceOrganizationHelper;
 		_commercePriceListLocalService = commercePriceListLocalService;
 		_commerceUserSegmentHelper = commerceUserSegmentHelper;
 		_cpRuleLocalService = cpRuleLocalService;
+		_portal = portal;
 	}
 
 	@Override
@@ -66,9 +67,10 @@ public class CommerceContextImpl implements CommerceContext {
 			return _commerceCurrency;
 		}
 
+		long groupId = _portal.getScopeGroupId(_httpServletRequest);
+
 		_commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_groupId);
+			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(groupId);
 
 		return _commerceCurrency;
 	}
@@ -79,7 +81,8 @@ public class CommerceContextImpl implements CommerceContext {
 			return _commerceOrder;
 		}
 
-		_commerceOrder = _commerceOrderService.getCommerceOrder(_orderId);
+		_commerceOrder = _commerceOrderHttpHelper.getCurrentCommerceOrder(
+			_httpServletRequest);
 
 		return _commerceOrder;
 	}
@@ -92,9 +95,11 @@ public class CommerceContextImpl implements CommerceContext {
 			return _commercePriceList;
 		}
 
+		long groupId = _portal.getScopeGroupId(_httpServletRequest);
+
 		_commercePriceList =
 			_commercePriceListLocalService.getCommercePriceList(
-				_groupId, getCommerceUserSegmentEntryIds());
+				groupId, getCommerceUserSegmentEntryIds());
 
 		return _commercePriceList;
 	}
@@ -107,14 +112,15 @@ public class CommerceContextImpl implements CommerceContext {
 
 		_commerceUserSegmentEntryIds =
 			_commerceUserSegmentHelper.getCommerceUserSegmentIds(
-				_groupId, _organizationId, _userId);
+				_httpServletRequest);
 
 		return _commerceUserSegmentEntryIds;
 	}
 
 	@Override
 	public String getCouponCode() throws PortalException {
-		return _couponCode;
+		return _commerceDiscountCouponCodeHelper.getCommerceDiscountCouponCode(
+			_httpServletRequest);
 	}
 
 	@Override
@@ -123,8 +129,10 @@ public class CommerceContextImpl implements CommerceContext {
 			return _cpRules;
 		}
 
+		long groupId = _portal.getScopeGroupId(_httpServletRequest);
+
 		_cpRules = _cpRuleLocalService.getCPRules(
-			_groupId, getCommerceUserSegmentEntryIds());
+			groupId, getCommerceUserSegmentEntryIds());
 
 		return null;
 	}
@@ -135,38 +143,37 @@ public class CommerceContextImpl implements CommerceContext {
 			return _organization;
 		}
 
-		_organization = _commerceOrganizationService.getOrganization(
-			_organizationId);
+		_organization = _commerceOrganizationHelper.getCurrentOrganization(
+			_httpServletRequest);
 
 		return _organization;
 	}
 
 	@Override
 	public long getSiteGroupId() throws PortalException {
-		return _groupId;
+		return _portal.getScopeGroupId(_httpServletRequest);
 	}
 
 	@Override
 	public long getUserId() {
-		return _userId;
+		return _portal.getUserId(_httpServletRequest);
 	}
 
 	private CommerceCurrency _commerceCurrency;
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;
+	private final CommerceDiscountCouponCodeHelper
+		_commerceDiscountCouponCodeHelper;
 	private CommerceOrder _commerceOrder;
-	private final CommerceOrderService _commerceOrderService;
-	private final CommerceOrganizationService _commerceOrganizationService;
+	private final CommerceOrderHttpHelper _commerceOrderHttpHelper;
+	private final CommerceOrganizationHelper _commerceOrganizationHelper;
 	private Optional<CommercePriceList> _commercePriceList;
 	private final CommercePriceListLocalService _commercePriceListLocalService;
 	private long[] _commerceUserSegmentEntryIds;
 	private final CommerceUserSegmentHelper _commerceUserSegmentHelper;
-	private final String _couponCode;
 	private final CPRuleLocalService _cpRuleLocalService;
 	private List<CPRule> _cpRules;
-	private final long _groupId;
-	private final long _orderId;
+	private final HttpServletRequest _httpServletRequest;
 	private Organization _organization;
-	private final long _organizationId;
-	private final long _userId;
+	private final Portal _portal;
 
 }
