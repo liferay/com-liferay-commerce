@@ -210,17 +210,14 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
 
-		long commercePaymentMethodId = ParamUtil.getLong(
-			actionRequest, "commercePaymentMethodId");
+		String commercePaymentMethodKey = ParamUtil.getString(
+			actionRequest, "commercePaymentMethodKey");
 		String advanceStatus = ParamUtil.getString(
 			actionRequest, "advanceStatus");
 		int paymentStatus = ParamUtil.getInteger(
 			actionRequest, "paymentStatus");
 		String purchaseOrderNumber = ParamUtil.getString(
 			actionRequest, "purchaseOrderNumber");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceOrder.class.getName(), actionRequest);
 
 		invokeTransaction(
 			new Callable<Void>() {
@@ -231,7 +228,7 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 						commerceOrder.getCommerceOrderId(),
 						commerceOrder.getBillingAddressId(),
 						commerceOrder.getShippingAddressId(),
-						commercePaymentMethodId,
+						commercePaymentMethodKey,
 						commerceOrder.getCommerceShippingMethodId(),
 						commerceOrder.getShippingOptionName(),
 						purchaseOrderNumber, commerceOrder.getSubtotal(),
@@ -240,8 +237,7 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 						commerceContext);
 
 					_commerceOrderService.updatePaymentStatus(
-						commerceOrder.getCommerceOrderId(), paymentStatus,
-						serviceContext);
+						commerceOrder.getCommerceOrderId(), paymentStatus);
 
 					return null;
 				}
@@ -297,7 +293,7 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			commerceOrder.getCommerceOrderId(),
 			commerceOrder.getBillingAddressId(),
 			commerceOrder.getShippingAddressId(),
-			commerceOrder.getCommercePaymentMethodId(),
+			commerceOrder.getCommercePaymentMethodKey(),
 			commerceOrder.getCommerceShippingMethodId(),
 			commerceOrder.getShippingOptionName(),
 			commerceOrder.getPurchaseOrderNumber(), new BigDecimal(subtotal),

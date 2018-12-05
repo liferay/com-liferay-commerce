@@ -17,18 +17,18 @@ package com.liferay.commerce.order.web.internal.display.context;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
-import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrderRequestHelper;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearch;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearchTerms;
 import com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderScreenNavigationConstants;
+import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelectorCriterion;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.commerce.service.CommercePaymentMethodService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -62,6 +62,7 @@ import javax.portlet.RenderRequest;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 public class CommerceOrderEditDisplayContext {
 
@@ -69,7 +70,8 @@ public class CommerceOrderEditDisplayContext {
 			CommerceOrderService commerceOrderService,
 			CommerceOrderItemService commerceOrderItemService,
 			CommerceOrderNoteService commerceOrderNoteService,
-			CommercePaymentMethodService commercePaymentMethodService,
+			CommercePaymentMethodGroupRelService
+				commercePaymentMethodGroupRelService,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			ItemSelector itemSelector, RenderRequest renderRequest)
 		throws PortalException {
@@ -77,7 +79,8 @@ public class CommerceOrderEditDisplayContext {
 		_commerceOrderService = commerceOrderService;
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceOrderNoteService = commerceOrderNoteService;
-		_commercePaymentMethodService = commercePaymentMethodService;
+		_commercePaymentMethodGroupRelService =
+			commercePaymentMethodGroupRelService;
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_itemSelector = itemSelector;
 
@@ -230,12 +233,12 @@ public class CommerceOrderEditDisplayContext {
 	}
 
 	public String getCommercePaymentMethodLabel(
-		CommercePaymentMethod commercePaymentMethod) {
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel) {
 
-		String label = commercePaymentMethod.getName(
+		String label = commercePaymentMethodGroupRel.getName(
 			_commerceOrderRequestHelper.getLocale());
 
-		if (!commercePaymentMethod.isActive()) {
+		if (!commercePaymentMethodGroupRel.isActive()) {
 			StringBundler sb = new StringBundler(4);
 
 			sb.append(label);
@@ -251,11 +254,12 @@ public class CommerceOrderEditDisplayContext {
 		return label;
 	}
 
-	public List<CommercePaymentMethod> getCommercePaymentMethods()
+	public List<CommercePaymentMethodGroupRel> getCommercePaymentMethods()
 		throws PortalException {
 
-		return _commercePaymentMethodService.getCommercePaymentMethods(
-			_commerceOrderRequestHelper.getScopeGroupId());
+		return _commercePaymentMethodGroupRelService.
+			getCommercePaymentMethodGroupRels(
+				_commerceOrderRequestHelper.getScopeGroupId());
 	}
 
 	public CommerceProductPrice getCommerceProductPrice(
@@ -294,7 +298,8 @@ public class CommerceOrderEditDisplayContext {
 	private final CommerceOrderNoteService _commerceOrderNoteService;
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
 	private final CommerceOrderService _commerceOrderService;
-	private final CommercePaymentMethodService _commercePaymentMethodService;
+	private final CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
 	private final CommerceProductPriceCalculation
 		_commerceProductPriceCalculation;
 	private SearchContainer<CommerceOrderItem> _itemSearchContainer;
