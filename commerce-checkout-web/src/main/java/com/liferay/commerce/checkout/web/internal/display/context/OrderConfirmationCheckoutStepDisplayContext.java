@@ -15,6 +15,8 @@
 package com.liferay.commerce.checkout.web.internal.display.context;
 
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
+import com.liferay.commerce.checkout.web.internal.display.context.util.CommerceCheckoutRequestHelper;
+import com.liferay.commerce.checkout.web.internal.util.PaymentProcessCommerceCheckoutStep;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderPayment;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
@@ -22,7 +24,7 @@ import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 
 import javax.portlet.PortletURL;
 
@@ -43,6 +45,9 @@ public class OrderConfirmationCheckoutStepDisplayContext {
 		_commerceOrderPaymentLocalService = commerceOrderPaymentLocalService;
 		_commerceOrderService = commerceOrderService;
 		_httpServletRequest = httpServletRequest;
+
+		_commerceCheckoutRequestHelper = new CommerceCheckoutRequestHelper(
+			_httpServletRequest);
 	}
 
 	public CommerceOrder getCommerceOrder() throws PortalException {
@@ -52,16 +57,6 @@ public class OrderConfirmationCheckoutStepDisplayContext {
 
 		_commerceOrder = (CommerceOrder)_httpServletRequest.getAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_ORDER);
-
-		if (_commerceOrder != null) {
-			return _commerceOrder;
-		}
-
-		long commerceOrderId = ParamUtil.getLong(
-			_httpServletRequest, "order_confirmation.jsp-commerceOrderId");
-
-		_commerceOrder = _commerceOrderService.fetchCommerceOrder(
-			commerceOrderId);
 
 		return _commerceOrder;
 	}
@@ -86,6 +81,21 @@ public class OrderConfirmationCheckoutStepDisplayContext {
 		return portletURL.toString();
 	}
 
+	public String getRetryPaymentURL(long commerceOrderId) {
+		LiferayPortletResponse liferayPortletResponse =
+			_commerceCheckoutRequestHelper.getLiferayPortletResponse();
+
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+		portletURL.setParameter(
+			"commerceOrderId", String.valueOf(commerceOrderId));
+
+		portletURL.setParameter(
+			"checkoutStepName", PaymentProcessCommerceCheckoutStep.NAME);
+
+		return portletURL.toString();
+	}
+
 	protected long getCommerceOrderId() throws PortalException {
 		CommerceOrder commerceOrder = getCommerceOrder();
 
@@ -96,6 +106,7 @@ public class OrderConfirmationCheckoutStepDisplayContext {
 		return commerceOrder.getCommerceOrderId();
 	}
 
+	private final CommerceCheckoutRequestHelper _commerceCheckoutRequestHelper;
 	private CommerceOrder _commerceOrder;
 	private final CommerceOrderHttpHelper _commerceOrderHttpHelper;
 	private final CommerceOrderPaymentLocalService

@@ -16,7 +16,6 @@ package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.checkout.web.internal.display.context.OrderSummaryCheckoutStepDisplayContext;
-import com.liferay.commerce.checkout.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
 import com.liferay.commerce.constants.CommerceWebKeys;
@@ -29,6 +28,7 @@ import com.liferay.commerce.exception.CommerceOrderShippingMethodException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPInstanceHelper;
@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
-import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -63,7 +62,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"commerce.checkout.step.name=" + OrderSummaryCommerceCheckoutStep.NAME,
-		"commerce.checkout.step.order:Integer=" + (Integer.MAX_VALUE - 100)
+		"commerce.checkout.step.order:Integer=" + (Integer.MAX_VALUE - 150)
 	},
 	service = CommerceCheckoutStep.class
 )
@@ -86,24 +85,18 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		try {
-			startPayment(actionRequest, actionResponse);
-		}
-		catch (Exception e) {
-			if (e instanceof CommerceOrderBillingAddressException ||
-				e instanceof CommerceOrderPaymentMethodException ||
-				e instanceof CommerceOrderShippingAddressException ||
-				e instanceof CommerceOrderShippingMethodException) {
+		long commerceOrderId = ParamUtil.getLong(
+			actionRequest, "commerceOrderId");
 
-				SessionErrors.add(actionRequest, e.getClass());
+		_validateCommerceOrder(actionRequest, commerceOrderId);
 
-				return;
-			}
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			actionRequest);
 
-			_log.error(e, e);
+		_checkoutCommerceOrder(httpServletRequest);
 
-			throw e;
-		}
+		_commerceDiscountCouponCodeHelper.removeCommerceDiscountCouponCode(
+			_portal.getHttpServletRequest(actionRequest));
 	}
 
 	@Override
@@ -116,7 +109,7 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			orderSummaryCheckoutStepDisplayContext =
 				new OrderSummaryCheckoutStepDisplayContext(
 					_commerceOrderHttpHelper, _commerceOrderPriceCalculation,
-					_commerceOrderValidatorRegistry,
+					_commerceOrderValidatorRegistry, _commercePaymentEngine,
 					_commerceProductPriceCalculation, _cpInstanceHelper,
 					httpServletRequest);
 
@@ -152,35 +145,28 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 		}
 	}
 
-	protected void startPayment(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		long commerceOrderId = ParamUtil.getLong(
-			actionRequest, "commerceOrderId");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceOrder.class.getName(), actionRequest);
-
-		CommerceContext commerceContext =
-			(CommerceContext)actionRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
-
-		validateCommerceOrder(actionRequest, commerceOrderId);
+	private void _checkoutCommerceOrder(HttpServletRequest httpServletRequest)
+		throws PortalException {
 
 		CommerceOrder commerceOrder =
+			(CommerceOrder)httpServletRequest.getAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER);
+
+		if (commerceOrder.isOpen()) {
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				CommerceOrder.class.getName(), httpServletRequest);
+
+			CommerceContext commerceContext =
+				(CommerceContext)httpServletRequest.getAttribute(
+					CommerceWebKeys.COMMERCE_CONTEXT);
+
 			_commerceOrderService.checkoutCommerceOrder(
-				commerceOrderId, commerceContext, serviceContext);
-
-		_actionHelper.startPayment(
-			commerceOrder.getCommerceOrderId(), actionRequest, actionResponse,
-			serviceContext);
-
-		_commerceDiscountCouponCodeHelper.removeCommerceDiscountCouponCode(
-			_portal.getHttpServletRequest(actionRequest));
+				commerceOrder.getCommerceOrderId(), commerceContext,
+				serviceContext);
+		}
 	}
 
-	protected void validateCommerceOrder(
+	private void _validateCommerceOrder(
 			ActionRequest actionRequest, long commerceOrderId)
 		throws PortalException {
 
@@ -210,7 +196,10 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			throw new CommerceOrderShippingMethodException();
 		}
 
-		if ((commerceOrder.getCommercePaymentMethodId() <= 0) &&
+		String commercePaymentMethodKey =
+			commerceOrder.getCommercePaymentMethodKey();
+
+		if (commercePaymentMethodKey.isEmpty() &&
 			_commerceCheckoutStepHelper.
 				isActivePaymentMethodCommerceCheckoutStep(httpServletRequest)) {
 
@@ -220,9 +209,6 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		OrderSummaryCommerceCheckoutStep.class);
-
-	@Reference
-	private ActionHelper _actionHelper;
 
 	@Reference
 	private CommerceCheckoutStepHelper _commerceCheckoutStepHelper;
@@ -241,6 +227,9 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 	@Reference
 	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
+
+	@Reference
+	private CommercePaymentEngine _commercePaymentEngine;
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
