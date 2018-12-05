@@ -154,7 +154,9 @@ public class CommerceOrderPersistenceTest {
 
 		newCommerceOrder.setShippingAddressId(RandomTestUtil.nextLong());
 
-		newCommerceOrder.setCommercePaymentMethodId(RandomTestUtil.nextLong());
+		newCommerceOrder.setCommercePaymentMethodKey(RandomTestUtil.randomString());
+
+		newCommerceOrder.setTransactionId(RandomTestUtil.randomString());
 
 		newCommerceOrder.setCommerceShippingMethodId(RandomTestUtil.nextLong());
 
@@ -267,8 +269,10 @@ public class CommerceOrderPersistenceTest {
 			newCommerceOrder.getBillingAddressId());
 		Assert.assertEquals(existingCommerceOrder.getShippingAddressId(),
 			newCommerceOrder.getShippingAddressId());
-		Assert.assertEquals(existingCommerceOrder.getCommercePaymentMethodId(),
-			newCommerceOrder.getCommercePaymentMethodId());
+		Assert.assertEquals(existingCommerceOrder.getCommercePaymentMethodKey(),
+			newCommerceOrder.getCommercePaymentMethodKey());
+		Assert.assertEquals(existingCommerceOrder.getTransactionId(),
+			newCommerceOrder.getTransactionId());
 		Assert.assertEquals(existingCommerceOrder.getCommerceShippingMethodId(),
 			newCommerceOrder.getCommerceShippingMethodId());
 		Assert.assertEquals(existingCommerceOrder.getShippingOptionName(),
@@ -447,11 +451,12 @@ public class CommerceOrderPersistenceTest {
 			true, "createDate", true, "modifiedDate", true, "siteGroupId",
 			true, "orderOrganizationId", true, "orderUserId", true,
 			"commerceCurrencyId", true, "billingAddressId", true,
-			"shippingAddressId", true, "commercePaymentMethodId", true,
-			"commerceShippingMethodId", true, "shippingOptionName", true,
-			"purchaseOrderNumber", true, "subtotal", true,
-			"subtotalDiscountAmount", true, "subtotalDiscountPercentageLevel1",
-			true, "subtotalDiscountPercentageLevel2", true,
+			"shippingAddressId", true, "commercePaymentMethodKey", true,
+			"transactionId", true, "commerceShippingMethodId", true,
+			"shippingOptionName", true, "purchaseOrderNumber", true,
+			"subtotal", true, "subtotalDiscountAmount", true,
+			"subtotalDiscountPercentageLevel1", true,
+			"subtotalDiscountPercentageLevel2", true,
 			"subtotalDiscountPercentageLevel3", true,
 			"subtotalDiscountPercentageLevel4", true, "shippingAmount", true,
 			"shippingDiscountAmount", true, "shippingDiscountPercentageLevel1",
@@ -718,7 +723,9 @@ public class CommerceOrderPersistenceTest {
 
 		commerceOrder.setShippingAddressId(RandomTestUtil.nextLong());
 
-		commerceOrder.setCommercePaymentMethodId(RandomTestUtil.nextLong());
+		commerceOrder.setCommercePaymentMethodKey(RandomTestUtil.randomString());
+
+		commerceOrder.setTransactionId(RandomTestUtil.randomString());
 
 		commerceOrder.setCommerceShippingMethodId(RandomTestUtil.nextLong());
 
