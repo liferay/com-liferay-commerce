@@ -23,7 +23,7 @@ List<CommercePaymentMethod> commercePaymentMethods = paymentMethodCheckoutStepDi
 
 CommerceOrder commerceOrder = paymentMethodCheckoutStepDisplayContext.getCommerceOrder();
 
-long commercePaymentMethodId = BeanParamUtil.getLong(commerceOrder, request, "commercePaymentMethodId");
+String commercePaymentMethodKey = BeanParamUtil.getString(commerceOrder, request, "commercePaymentMethodKey");
 %>
 
 <div id="commercePaymentMethodsContainer">
@@ -56,10 +56,10 @@ long commercePaymentMethodId = BeanParamUtil.getLong(commerceOrder, request, "co
 
 					<li class="commerce-payment-types list-group-item list-group-item-flex">
 						<div class="autofit-col autofit-col-expand">
-							<aui:input checked="<%= commercePaymentMethod.getCommercePaymentMethodId() == commercePaymentMethodId %>" label="<%= commercePaymentMethod.getName(locale) %>" name="commercePaymentMethodId" type="radio" value="<%= commercePaymentMethod.getCommercePaymentMethodId() %>" />
+							<aui:input checked="<%= commercePaymentMethod.getKey() == commercePaymentMethodKey %>" label="<%= commercePaymentMethod.getName(locale) %>" name="commercePaymentMethodKey" type="radio" value="<%= commercePaymentMethod.getKey() %>" />
 						</div>
 
-						<%
+						<%--<%
 						String thumbnailSrc = commercePaymentMethod.getImageURL(themeDisplay);
 						%>
 
@@ -67,7 +67,7 @@ long commercePaymentMethodId = BeanParamUtil.getLong(commerceOrder, request, "co
 							<div class="autofit-col">
 								<img alt="<%= commercePaymentMethod.getName(locale) %>" src="<%= thumbnailSrc %>" />
 							</div>
-						</c:if>
+						</c:if>--%>
 					</li>
 
 				<%

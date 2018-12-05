@@ -17,7 +17,7 @@ package com.liferay.commerce.checkout.web.internal.util;
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
-import com.liferay.commerce.service.CommercePaymentMethodLocalService;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -57,8 +57,8 @@ public class CommerceCheckoutStepHelper {
 			(CommerceOrder)httpServletRequest.getAttribute(
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
-		if (_commercePaymentMethodLocalService.getCommercePaymentMethodsCount(
-				commerceOrder.getSiteGroupId(), true) > 0) {
+		if (_commercePaymentEngine.getCommercePaymentMethodGroupRelsCount(
+				commerceOrder.getSiteGroupId()) > 0) {
 
 			return true;
 		}
@@ -93,8 +93,7 @@ public class CommerceCheckoutStepHelper {
 	private CommerceOrganizationHelper _commerceOrganizationHelper;
 
 	@Reference
-	private CommercePaymentMethodLocalService
-		_commercePaymentMethodLocalService;
+	private CommercePaymentEngine _commercePaymentEngine;
 
 	@Reference
 	private CommerceShippingHelper _commerceShippingHelper;

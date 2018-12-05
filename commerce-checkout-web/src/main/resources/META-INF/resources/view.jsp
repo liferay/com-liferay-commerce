@@ -37,7 +37,12 @@ CheckoutDisplayContext checkoutDisplayContext = (CheckoutDisplayContext)request.
 					boolean complete = true;
 					int step = 1;
 
-					for (CommerceCheckoutStep commerceCheckoutStep : checkoutDisplayContext.getCommerceCheckoutSteps()) {
+					List<CommerceCheckoutStep> commerceCheckoutSteps = checkoutDisplayContext.getCommerceCheckoutSteps();
+					Iterator<CommerceCheckoutStep> commerceCheckoutStepIterator = commerceCheckoutSteps.iterator();
+
+					while (commerceCheckoutStepIterator.hasNext()) {
+						CommerceCheckoutStep commerceCheckoutStep = commerceCheckoutStepIterator.next();
+
 						String name = commerceCheckoutStep.getName();
 
 						if (!currentCheckoutStepName.equals(name) && !commerceCheckoutStep.isVisible(request, response)) {
@@ -46,7 +51,7 @@ CheckoutDisplayContext checkoutDisplayContext = (CheckoutDisplayContext)request.
 
 						String cssClass = "multi-step-item";
 
-						if (checkoutDisplayContext.getCommerceCheckoutSteps().size() != step) {
+						if (commerceCheckoutStepIterator.hasNext()) {
 							cssClass += " multi-step-item-expand";
 						}
 

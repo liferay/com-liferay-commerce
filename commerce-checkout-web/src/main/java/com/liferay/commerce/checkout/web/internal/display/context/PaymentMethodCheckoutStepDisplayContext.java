@@ -15,12 +15,10 @@
 package com.liferay.commerce.checkout.web.internal.display.context;
 
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
-import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommercePaymentMethod;
-import com.liferay.commerce.service.CommercePaymentMethodLocalService;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
+import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.util.comparator.CommercePaymentMethodNameComparator;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -35,10 +33,10 @@ import javax.servlet.http.HttpServletRequest;
 public class PaymentMethodCheckoutStepDisplayContext {
 
 	public PaymentMethodCheckoutStepDisplayContext(
-		CommercePaymentMethodLocalService commercePaymentMethodLocalService,
+		CommercePaymentEngine commercePaymentEngine,
 		HttpServletRequest httpServletRequest) {
 
-		_commercePaymentMethodLocalService = commercePaymentMethodLocalService;
+		_commercePaymentEngine = commercePaymentEngine;
 		_httpServletRequest = httpServletRequest;
 
 		_commerceOrder = (CommerceOrder)httpServletRequest.getAttribute(
@@ -50,22 +48,15 @@ public class PaymentMethodCheckoutStepDisplayContext {
 	}
 
 	public List<CommercePaymentMethod> getCommercePaymentMethods()
-		throws PortalException {
+		throws Exception {
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)_httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		CommerceAddress commerceAddress = _commerceOrder.getBillingAddress();
-
-		if (commerceAddress == null) {
-			commerceAddress = _commerceOrder.getShippingAddress();
-		}
-
 		List<CommercePaymentMethod> commercePaymentMethods =
-			_commercePaymentMethodLocalService.getCommercePaymentMethods(
-				_commerceOrder.getSiteGroupId(),
-				commerceAddress.getCommerceCountryId(), true);
+			_commercePaymentEngine.getCommercePaymentMethods(
+				_commerceOrder.getCommerceOrderId());
 
 		return ListUtil.sort(
 			commercePaymentMethods,
@@ -73,8 +64,7 @@ public class PaymentMethodCheckoutStepDisplayContext {
 	}
 
 	private final CommerceOrder _commerceOrder;
-	private final CommercePaymentMethodLocalService
-		_commercePaymentMethodLocalService;
+	private final CommercePaymentEngine _commercePaymentEngine;
 	private final HttpServletRequest _httpServletRequest;
 
 }
