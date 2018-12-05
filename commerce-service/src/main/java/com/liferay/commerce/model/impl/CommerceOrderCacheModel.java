@@ -67,7 +67,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(91);
+		StringBundler sb = new StringBundler(93);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -99,8 +99,10 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		sb.append(billingAddressId);
 		sb.append(", shippingAddressId=");
 		sb.append(shippingAddressId);
-		sb.append(", commercePaymentMethodId=");
-		sb.append(commercePaymentMethodId);
+		sb.append(", commercePaymentMethodKey=");
+		sb.append(commercePaymentMethodKey);
+		sb.append(", transactionId=");
+		sb.append(transactionId);
 		sb.append(", commerceShippingMethodId=");
 		sb.append(commerceShippingMethodId);
 		sb.append(", shippingOptionName=");
@@ -214,7 +216,21 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		commerceOrderImpl.setCommerceCurrencyId(commerceCurrencyId);
 		commerceOrderImpl.setBillingAddressId(billingAddressId);
 		commerceOrderImpl.setShippingAddressId(shippingAddressId);
-		commerceOrderImpl.setCommercePaymentMethodId(commercePaymentMethodId);
+
+		if (commercePaymentMethodKey == null) {
+			commerceOrderImpl.setCommercePaymentMethodKey("");
+		}
+		else {
+			commerceOrderImpl.setCommercePaymentMethodKey(commercePaymentMethodKey);
+		}
+
+		if (transactionId == null) {
+			commerceOrderImpl.setTransactionId("");
+		}
+		else {
+			commerceOrderImpl.setTransactionId(transactionId);
+		}
+
 		commerceOrderImpl.setCommerceShippingMethodId(commerceShippingMethodId);
 
 		if (shippingOptionName == null) {
@@ -310,8 +326,8 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		billingAddressId = objectInput.readLong();
 
 		shippingAddressId = objectInput.readLong();
-
-		commercePaymentMethodId = objectInput.readLong();
+		commercePaymentMethodKey = objectInput.readUTF();
+		transactionId = objectInput.readUTF();
 
 		commerceShippingMethodId = objectInput.readLong();
 		shippingOptionName = objectInput.readUTF();
@@ -395,7 +411,19 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 
 		objectOutput.writeLong(shippingAddressId);
 
-		objectOutput.writeLong(commercePaymentMethodId);
+		if (commercePaymentMethodKey == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(commercePaymentMethodKey);
+		}
+
+		if (transactionId == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(transactionId);
+		}
 
 		objectOutput.writeLong(commerceShippingMethodId);
 
@@ -473,7 +501,8 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 	public long commerceCurrencyId;
 	public long billingAddressId;
 	public long shippingAddressId;
-	public long commercePaymentMethodId;
+	public String commercePaymentMethodKey;
+	public String transactionId;
 	public long commerceShippingMethodId;
 	public String shippingOptionName;
 	public String purchaseOrderNumber;

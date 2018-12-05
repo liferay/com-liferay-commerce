@@ -73,6 +73,9 @@ public interface CommerceOrderPaymentLocalService extends BaseLocalService,
 		CommerceOrderPayment commerceOrderPayment);
 
 	public CommerceOrderPayment addCommerceOrderPayment(long commerceOrderId,
+		int status, String result) throws PortalException;
+
+	public CommerceOrderPayment addCommerceOrderPayment(long commerceOrderId,
 		int status, String content, ServiceContext serviceContext)
 		throws PortalException;
 

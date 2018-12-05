@@ -67,7 +67,7 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceOrderId", getCommerceOrderId());
-		attributes.put("commercePaymentMethodId", getCommercePaymentMethodId());
+		attributes.put("commercePaymentMethodKey", getCommercePaymentMethodKey());
 		attributes.put("status", getStatus());
 		attributes.put("content", getContent());
 
@@ -125,11 +125,11 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 			setCommerceOrderId(commerceOrderId);
 		}
 
-		Long commercePaymentMethodId = (Long)attributes.get(
-				"commercePaymentMethodId");
+		String commercePaymentMethodKey = (String)attributes.get(
+				"commercePaymentMethodKey");
 
-		if (commercePaymentMethodId != null) {
-			setCommercePaymentMethodId(commercePaymentMethodId);
+		if (commercePaymentMethodKey != null) {
+			setCommercePaymentMethodKey(commercePaymentMethodKey);
 		}
 
 		Integer status = (Integer)attributes.get("status");
@@ -176,13 +176,13 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	}
 
 	/**
-	* Returns the commerce payment method ID of this commerce order payment.
+	* Returns the commerce payment method key of this commerce order payment.
 	*
-	* @return the commerce payment method ID of this commerce order payment
+	* @return the commerce payment method key of this commerce order payment
 	*/
 	@Override
-	public long getCommercePaymentMethodId() {
-		return _commerceOrderPayment.getCommercePaymentMethodId();
+	public String getCommercePaymentMethodKey() {
+		return _commerceOrderPayment.getCommercePaymentMethodKey();
 	}
 
 	/**
@@ -346,13 +346,13 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 	}
 
 	/**
-	* Sets the commerce payment method ID of this commerce order payment.
+	* Sets the commerce payment method key of this commerce order payment.
 	*
-	* @param commercePaymentMethodId the commerce payment method ID of this commerce order payment
+	* @param commercePaymentMethodKey the commerce payment method key of this commerce order payment
 	*/
 	@Override
-	public void setCommercePaymentMethodId(long commercePaymentMethodId) {
-		_commerceOrderPayment.setCommercePaymentMethodId(commercePaymentMethodId);
+	public void setCommercePaymentMethodKey(String commercePaymentMethodKey) {
+		_commerceOrderPayment.setCommercePaymentMethodKey(commercePaymentMethodKey);
 	}
 
 	/**

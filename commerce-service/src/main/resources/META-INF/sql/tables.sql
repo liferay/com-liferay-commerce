@@ -138,7 +138,8 @@ create table CommerceOrder (
 	commerceCurrencyId LONG,
 	billingAddressId LONG,
 	shippingAddressId LONG,
-	commercePaymentMethodId LONG,
+	commercePaymentMethodKey VARCHAR(75) null,
+	transactionId VARCHAR(75) null,
 	commerceShippingMethodId LONG,
 	shippingOptionName VARCHAR(255) null,
 	purchaseOrderNumber VARCHAR(75) null,
@@ -219,7 +220,7 @@ create table CommerceOrderPayment (
 	createDate DATE null,
 	modifiedDate DATE null,
 	commerceOrderId LONG,
-	commercePaymentMethodId LONG,
+	commercePaymentMethodKey VARCHAR(75) null,
 	status INTEGER,
 	content TEXT null
 );

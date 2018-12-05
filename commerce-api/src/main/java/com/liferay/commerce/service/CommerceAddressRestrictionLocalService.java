@@ -257,10 +257,6 @@ public interface CommerceAddressRestrictionLocalService extends BaseLocalService
 		long commerceCountryId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean isCommercePaymentMethodRestricted(
-		long commercePaymentMethodId, long commerceCountryId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isCommerceShippingMethodRestricted(
 		long commerceShippingMethodId, long commerceCountryId);
 

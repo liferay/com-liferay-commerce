@@ -105,7 +105,8 @@
 		<field name="commerceCurrencyId" type="long" />
 		<field name="billingAddressId" type="long" />
 		<field name="shippingAddressId" type="long" />
-		<field name="commercePaymentMethodId" type="long" />
+		<field name="commercePaymentMethodKey" type="String" />
+		<field name="transactionId" type="String" />
 		<field name="commerceShippingMethodId" type="long" />
 		<field name="shippingOptionName" type="String">
 			<hint name="max-length">255</hint>
@@ -190,28 +191,11 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="commerceOrderId" type="long" />
-		<field name="commercePaymentMethodId" type="long" />
+		<field name="commercePaymentMethodKey" type="String" />
 		<field name="status" type="int" />
 		<field name="content" type="String">
 			<hint-collection name="CLOB" />
 		</field>
-	</model>
-	<model name="com.liferay.commerce.model.CommercePaymentMethod">
-		<field name="commercePaymentMethodId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field localized="true" name="name" type="String" />
-		<field localized="true" name="description" type="String" />
-		<field name="imageId" type="long" />
-		<field name="engineKey" type="String" />
-		<field name="priority" type="double">
-			<validator name="number" />
-		</field>
-		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceRegion">
 		<field name="uuid" type="String" />
