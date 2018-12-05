@@ -17,7 +17,7 @@ package com.liferay.commerce.shipping.web.internal.portlet.action;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.exception.NoSuchAddressRestrictionException;
 import com.liferay.commerce.model.CommerceAddressRestriction;
-import com.liferay.commerce.service.CommerceAddressRestrictionService;
+import com.liferay.commerce.service.CommerceShippingMethodService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import javax.portlet.ActionRequest;
@@ -54,7 +55,6 @@ public class EditCommerceShippingMethodAddressRestrictionMVCActionCommand
 
 		long[] addCommerceCountryIds = null;
 
-		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
 		long commerceCountryId = ParamUtil.getLong(
@@ -72,8 +72,8 @@ public class EditCommerceShippingMethodAddressRestrictionMVCActionCommand
 			CommerceAddressRestriction.class.getName(), actionRequest);
 
 		for (long addCommerceCountryId : addCommerceCountryIds) {
-			_commerceAddressRestrictionService.addCommerceAddressRestriction(
-				className, classPK, addCommerceCountryId, serviceContext);
+			_commerceShippingMethodService.addCommerceAddressRestriction(
+				classPK, addCommerceCountryId, serviceContext);
 		}
 	}
 
@@ -100,8 +100,9 @@ public class EditCommerceShippingMethodAddressRestrictionMVCActionCommand
 		for (long deleteCommerceAddressRestrictionId :
 				deleteCommerceAddressRestrictionIds) {
 
-			_commerceAddressRestrictionService.deleteCommerceAddressRestriction(
-				deleteCommerceAddressRestrictionId);
+			_commerceShippingMethodService.deleteCommerceAddressRestriction(
+				deleteCommerceAddressRestrictionId,
+				_portal.getScopeGroupId(actionRequest));
 		}
 	}
 
@@ -143,7 +144,9 @@ public class EditCommerceShippingMethodAddressRestrictionMVCActionCommand
 	}
 
 	@Reference
-	private CommerceAddressRestrictionService
-		_commerceAddressRestrictionService;
+	private CommerceShippingMethodService _commerceShippingMethodService;
+
+	@Reference
+	private Portal _portal;
 
 }
