@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.provider;
+package com.liferay.commerce.cart.rest.internal.provider;
 
-import com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.domain.model.CommerceCart;
-import com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.domain.model.CommerceCartProduct;
-import com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.domain.model.CommerceCartProductPrice;
-import com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.domain.model.CommerceCartProductSettings;
-import com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.domain.model.CommerceCartSummary;
+import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCart;
+import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCartProduct;
+import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCartProductPrice;
+import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCartProductSettings;
+import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCartSummary;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
