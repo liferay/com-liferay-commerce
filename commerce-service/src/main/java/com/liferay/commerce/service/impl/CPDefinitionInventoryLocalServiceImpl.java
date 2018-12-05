@@ -100,7 +100,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 1.1
+	 * @deprecated As of Judson (7.1.x)
 	 */
 	@Deprecated
 	@Override
@@ -123,7 +123,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 1.1
+	 * @deprecated As of Judson (7.1.x)
 	 */
 	@Deprecated
 	@Override
