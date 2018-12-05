@@ -31,7 +31,6 @@ page import="com.liferay.commerce.discount.CommerceDiscountValue" %><%@
 page import="com.liferay.commerce.model.CommerceAddress" %><%@
 page import="com.liferay.commerce.model.CommerceCountry" %><%@
 page import="com.liferay.commerce.model.CommerceOrder" %><%@
-page import="com.liferay.commerce.model.CommercePaymentMethod" %><%@
 page import="com.liferay.commerce.order.CommerceOrderValidatorResult" %><%@
 page import="com.liferay.commerce.order.content.web.internal.display.context.CommerceOrderContentDisplayContext" %><%@
 page import="com.liferay.commerce.order.content.web.internal.display.context.CommerceOrderItemContentDisplayContext" %><%@

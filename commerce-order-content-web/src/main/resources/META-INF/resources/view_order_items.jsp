@@ -33,15 +33,13 @@ CommerceMoney totalOrder = commerceOrderPrice.getTotal();
 String commercePaymentMethodName = StringPool.BLANK;
 String commerceShippingOptionName = StringPool.BLANK;
 
-if (commerceOrder != null) {
-	CommercePaymentMethod commercePaymentMethod = commerceOrder.getCommercePaymentMethod();
+String commercePaymentMethodKey = commerceOrder.getCommercePaymentMethodKey();
 
-	if (commercePaymentMethod != null) {
-		commercePaymentMethodName = commercePaymentMethod.getName(locale);
-	}
-
-	commerceShippingOptionName = commerceOrder.getShippingOptionName();
+if (commercePaymentMethodKey != null) {
+	commercePaymentMethodName = commerceOrderItemContentDisplayContext.getPaymentMethodName(commercePaymentMethodKey, locale);
 }
+
+commerceShippingOptionName = commerceOrder.getShippingOptionName();
 
 Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = commerceOrderItemContentDisplayContext.getCommerceOrderValidatorResults();
 %>
