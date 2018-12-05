@@ -22,11 +22,12 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
+import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalServiceUtil;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
@@ -36,7 +37,6 @@ import com.liferay.commerce.service.CommerceAddressLocalServiceUtil;
 import com.liferay.commerce.service.CommerceCountryLocalServiceUtil;
 import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
 import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
-import com.liferay.commerce.service.CommercePaymentMethodLocalServiceUtil;
 import com.liferay.commerce.service.CommerceRegionLocalServiceUtil;
 import com.liferay.commerce.service.CommerceShippingMethodLocalServiceUtil;
 import com.liferay.commerce.service.CommerceWarehouseItemLocalServiceUtil;
@@ -103,11 +103,11 @@ public class CommerceTestUtil {
 		commerceOrder.setShippingAddressId(
 			shippingCommerceAddress.getCommerceAddressId());
 
-		CommercePaymentMethod commercePaymentMethod = addCommercePaymentMethod(
-			groupId);
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
+			addCommercePaymentMethodGroupRel(groupId);
 
-		commerceOrder.setCommercePaymentMethodId(
-			commercePaymentMethod.getCommercePaymentMethodId());
+		commerceOrder.setCommercePaymentMethodKey(
+			commercePaymentMethodGroupRel.getEngineKey());
 
 		CommerceShippingMethod commerceShippingMethod =
 			addCommerceShippingMethod(groupId);
@@ -170,16 +170,19 @@ public class CommerceTestUtil {
 			serviceContext);
 	}
 
-	public static CommercePaymentMethod addCommercePaymentMethod(long groupId)
+	public static CommercePaymentMethodGroupRel
+			addCommercePaymentMethodGroupRel(long groupId)
 		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
 
-		return CommercePaymentMethodLocalServiceUtil.addCommercePaymentMethod(
-			RandomTestUtil.randomLocaleStringMap(),
-			RandomTestUtil.randomLocaleStringMap(), null, "money-order",
-			Collections.<String, String>emptyMap(), 1, true, serviceContext);
+		return CommercePaymentMethodGroupRelLocalServiceUtil.
+			addCommercePaymentMethodGroupRel(
+				RandomTestUtil.randomLocaleStringMap(),
+				RandomTestUtil.randomLocaleStringMap(), null, "money-order",
+				Collections.<String, String>emptyMap(), 1, true,
+				serviceContext);
 	}
 
 	public static CommerceShippingFixedOption addCommerceShippingFixedOption(
