@@ -299,19 +299,15 @@ Cart.STATE = {
 		value: null
 	},
 	productsCount: Config.number().value(0),
-	summary: {
-		value: {
-			checkoutUrl: '',
-			subtotal: '',
-			grandTotal: '',
-			discount: '',
-			totalUnits: 0
-		}
-	},
+	summary: Config.shapeOf({
+		checkoutUrl: Config.string().value(''),
+		subtotal: Config.string().value(''),
+		grandTotal: Config.string().value(''),
+		discount: Config.string().value(''),
+		totalUnits: Config.number().value(0)
+	}),
 	isLoading: Config.bool().value(false),
-	pendingOperations: {
-		value: []
-	},
+	pendingOperations: Config.array().value([]),
 	detailsUrl: Config.string().required(),
 	checkoutUrl: Config.string().required()
 };
