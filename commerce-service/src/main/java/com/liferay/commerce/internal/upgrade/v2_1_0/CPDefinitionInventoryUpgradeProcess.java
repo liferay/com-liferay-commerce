@@ -15,6 +15,8 @@
 package com.liferay.commerce.internal.upgrade.v2_1_0;
 
 import com.liferay.commerce.model.impl.CPDefinitionInventoryModelImpl;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.db.IndexMetadata;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
@@ -35,6 +37,12 @@ import java.util.Objects;
  * @author Alec Sloan
  */
 public class CPDefinitionInventoryUpgradeProcess extends UpgradeProcess {
+
+	public CPDefinitionInventoryUpgradeProcess(
+		CPDefinitionLocalService cpDefinitionLocalService) {
+
+		_cpDefinitionLocalService = cpDefinitionLocalService;
+	}
 
 	@Override
 	protected void doUpgrade() throws Exception {
@@ -58,8 +66,14 @@ public class CPDefinitionInventoryUpgradeProcess extends UpgradeProcess {
 			rs = s.executeQuery("select * from CPDefinitionInventory");
 
 			while (rs.next()) {
-				ps.setLong(1, rs.getLong("CPDefinitionId"));
-				ps.setLong(2, rs.getLong("CPDefinitionId"));
+				long cpDefinitionId = rs.getLong("CPDefinitionId");
+
+				CPDefinition cpDefinition =
+					_cpDefinitionLocalService.getCPDefinition(cpDefinitionId);
+
+				ps.setLong(1, cpDefinition.getCProductId());
+
+				ps.setLong(2, cpDefinitionId);
 
 				ps.execute();
 			}
@@ -156,5 +170,7 @@ public class CPDefinitionInventoryUpgradeProcess extends UpgradeProcess {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPDefinitionInventoryUpgradeProcess.class);
+
+	private final CPDefinitionLocalService _cpDefinitionLocalService;
 
 }
