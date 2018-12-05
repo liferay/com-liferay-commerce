@@ -52,12 +52,11 @@ public class CommerceWishListItemUpgradeProcess extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		_addColumn(
 			CommerceWishListItemModelImpl.class,
-			CommerceWishListItemModelImpl.TABLE_NAME, "CProductId", "LONG");
-
-		_addColumn(
-			CommerceWishListItemModelImpl.class,
 			CommerceWishListItemModelImpl.TABLE_NAME, "CPInstanceUuid",
 			"VARCHAR(75)");
+		_addColumn(
+			CommerceWishListItemModelImpl.class,
+			CommerceWishListItemModelImpl.TABLE_NAME, "CProductId", "LONG");
 
 		_addIndexes(CommerceWishListItemModelImpl.TABLE_NAME);
 
@@ -75,10 +74,10 @@ public class CommerceWishListItemUpgradeProcess extends UpgradeProcess {
 			rs = s.executeQuery("select * from CommerceWishListItem");
 
 			while (rs.next()) {
-				long instanceId = rs.getLong("CPInstanceId");
+				long cpInstanceId = rs.getLong("CPInstanceId");
 
 				CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-					instanceId);
+					cpInstanceId);
 
 				CPDefinition cpDefinition =
 					_cpDefinitionLocalService.getCPDefinition(
@@ -87,7 +86,7 @@ public class CommerceWishListItemUpgradeProcess extends UpgradeProcess {
 				ps.setLong(1, cpDefinition.getCProductId());
 
 				ps.setString(2, cpInstance.getUuid());
-				ps.setLong(3, instanceId);
+				ps.setLong(3, cpInstanceId);
 
 				ps.execute();
 			}
@@ -97,9 +96,8 @@ public class CommerceWishListItemUpgradeProcess extends UpgradeProcess {
 			DataAccess.cleanUp(s, rs);
 		}
 
-		runSQL("drop index IX_6FB8DFC8 on CommerceWishListItem");
-
 		runSQL("drop index IX_622C400A on CommerceWishListItem");
+		runSQL("drop index IX_6FB8DFC8 on CommerceWishListItem");
 
 		runSQL("alter table CommerceWishListItem drop column CPDefinitionId");
 		runSQL("alter table CommerceWishListItem drop column CPInstanceId");
