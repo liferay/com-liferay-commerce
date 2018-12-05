@@ -25,12 +25,13 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
-import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.organization.order.web.internal.configuration.CommerceOrganizationOpenOrderPortletInstanceConfiguration;
 import com.liferay.commerce.organization.order.web.internal.display.context.util.CommerceOrganizationOrderRequestHelper;
 import com.liferay.commerce.organization.order.web.internal.search.CommerceOrderDisplayTerms;
 import com.liferay.commerce.organization.order.web.internal.search.CommerceOrderSearch;
+import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPrice;
@@ -118,6 +119,8 @@ public class CommerceOrganizationOrderDisplayContext {
 			CommerceOrderNoteService commerceOrderNoteService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderService commerceOrderService,
+			CommercePaymentMethodGroupRelService
+				commercePaymentMethodGroupRelService,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			CommerceShipmentItemService commerceShipmentItemService,
 			CPInstanceHelper cpInstanceHelper, JSONFactory jsonFactory,
@@ -131,6 +134,8 @@ public class CommerceOrganizationOrderDisplayContext {
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_commerceOrderService = commerceOrderService;
+		_commercePaymentMethodGroupRelService =
+			commercePaymentMethodGroupRelService;
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_commerceShipmentItemService = commerceShipmentItemService;
 		_cpInstanceHelper = cpInstanceHelper;
@@ -294,8 +299,13 @@ public class CommerceOrganizationOrderDisplayContext {
 	public String getCommerceOrderPaymentMethodName(CommerceOrder commerceOrder)
 		throws PortalException {
 
-		CommercePaymentMethod commercePaymentMethod =
-			commerceOrder.getCommercePaymentMethod();
+		String commercePaymentMethodKey =
+			commerceOrder.getCommercePaymentMethodKey();
+
+		CommercePaymentMethodGroupRel commercePaymentMethod =
+			_commercePaymentMethodGroupRelService.
+				getCommercePaymentMethodGroupRel(
+					commerceOrder.getSiteGroupId(), commercePaymentMethodKey);
 
 		if (commercePaymentMethod == null) {
 			return StringPool.BLANK;
@@ -888,6 +898,8 @@ public class CommerceOrganizationOrderDisplayContext {
 		_commerceOrganizationOpenOrderPortletInstanceConfiguration;
 	private final CommerceOrganizationOrderRequestHelper
 		_commerceOrganizationOrderRequestHelper;
+	private final CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
 	private final CommerceProductPriceCalculation
 		_commerceProductPriceCalculation;
 	private final CommerceShipmentItemService _commerceShipmentItemService;
