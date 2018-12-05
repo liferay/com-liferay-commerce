@@ -19,8 +19,6 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.service.base.CPDefinitionInventoryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -47,9 +45,6 @@ public class CPDefinitionInventoryLocalServiceImpl
 		User user = userLocalService.getUser(serviceContext.getUserId());
 		long groupId = serviceContext.getScopeGroupId();
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
-			cpDefinitionId);
-
 		long cpDefinitionInventoryId = counterLocalService.increment();
 
 		CPDefinitionInventory cpDefinitionInventory =
@@ -60,7 +55,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 		cpDefinitionInventory.setCompanyId(user.getCompanyId());
 		cpDefinitionInventory.setUserId(user.getUserId());
 		cpDefinitionInventory.setUserName(user.getFullName());
-		cpDefinitionInventory.setCProductId(cpDefinition.getCProductId());
+		cpDefinitionInventory.setCPDefinitionId(cpDefinitionId);
 		cpDefinitionInventory.setCPDefinitionInventoryEngine(
 			cpDefinitionInventoryEngine);
 		cpDefinitionInventory.setLowStockActivity(lowStockActivity);
@@ -99,43 +94,27 @@ public class CPDefinitionInventoryLocalServiceImpl
 			cpDefinitionInventory);
 	}
 
-	/**
-	 * @deprecated As of Judson (7.1.x)
-	 */
-	@Deprecated
 	@Override
-	public void deleteCPDefinitionInventoryByCPDefinitionId(
-		long cpDefinitionId) {
+	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId)
+		throws PortalException {
 
-		try {
-			CPDefinitionInventory cpDefinitionInventory =
+		CPDefinitionInventory cpDefinitionInventory =
+			cpDefinitionInventoryLocalService.
 				fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
 
-			if (cpDefinitionInventory != null) {
-				deleteCPDefinitionInventory(cpDefinitionInventory);
-			}
-		}
-		catch (PortalException pe) {
-			if (_log.isWarnEnabled()) {
-				_log.error(pe, pe);
-			}
+		if (cpDefinitionInventory != null) {
+			cpDefinitionInventoryLocalService.deleteCPDefinitionInventory(
+				cpDefinitionInventory);
 		}
 	}
 
-	/**
-	 * @deprecated As of Judson (7.1.x)
-	 */
-	@Deprecated
 	@Override
 	public CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
 			long cpDefinitionId)
 		throws PortalException {
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+		return cpDefinitionInventoryPersistence.fetchByCPDefinitionId(
 			cpDefinitionId);
-
-		return cpDefinitionInventoryPersistence.findByCProductId(
-			cpDefinition.getCProductId());
 	}
 
 	@Override
@@ -168,11 +147,4 @@ public class CPDefinitionInventoryLocalServiceImpl
 
 		return cpDefinitionInventory;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CPDefinitionInventoryLocalServiceImpl.class);
-
-	@ServiceReference(type = CPDefinitionLocalService.class)
-	private CPDefinitionLocalService _cpDefinitionLocalService;
-
 }
