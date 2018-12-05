@@ -3,17 +3,26 @@ import Component from 'metal-component';
 import Soy from 'metal-soy';
 
 class QuantitySelector extends Component {
+
 	handleSelectOption(evt) {
 		const quantity = parseInt(evt.target.value);
-		this.emit('updateQuantity', quantity);
+		return this.emit('updateQuantity', quantity);
 	}
 
 	prepareStateForRender(states) {
-		this.isPrevAvailable = this.checkWhetherIsPrevButtonAvailable(
+		const isPrevAvailable = this.checkWhetherIsPrevButtonAvailable(
 			states.quantity
 		);
-		this.isNextAvailable = this.checkWhetherIsNextButtonAvailable(
+		const isNextAvailable = this.checkWhetherIsNextButtonAvailable(
 			states.quantity
+		);
+		return Object.assign(
+			{}, 
+			states, 
+			{	
+				isPrevAvailable,
+				isNextAvailable
+			}
 		);
 	}
 
@@ -71,7 +80,7 @@ class QuantitySelector extends Component {
 			return (this.inputError = 'MinAvailableReached');
 		}
 
-		this.updateQuantity(tempQuantity);
+		return this.updateQuantity(tempQuantity);
 	}
 
 	handleNextQuantity(event) {
@@ -102,7 +111,7 @@ class QuantitySelector extends Component {
 			return (this.inputError = 'MaxAvailableReached');
 		}
 
-		this.updateQuantity(tempQuantity);
+		return this.updateQuantity(tempQuantity);
 	}
 
 	handleInputKeyUp(evt) {
@@ -111,12 +120,12 @@ class QuantitySelector extends Component {
 		}
 
 		const quantity = parseInt(evt.target.value);
-		this.submitQuantity(quantity);
+		return this.submitQuantity(quantity);
 	}
 
 	handleFormSubmit(evt) {
 		evt.preventDefault();
-		this.showError = true;
+		return this.showError = true;
 	}
 
 	submitQuantity(quantity) {
@@ -134,12 +143,12 @@ class QuantitySelector extends Component {
 			return (this.inputError = 'MaxAvailableReached');
 		}
 
-		this.updateQuantity(quantity);
+		return this.updateQuantity(quantity);
 	}
 
 	updateQuantity(quantity) {
 		this.showError = false;
-		this.emit('updateQuantity', quantity);
+		return this.emit('updateQuantity', quantity);
 	}
 }
 
@@ -157,7 +166,7 @@ QuantitySelector.STATE = {
 		value: null
 	},
 	quantity: {
-		value: null
+		value: 0
 	},
 	isPrevAvailable: {
 		value: true
