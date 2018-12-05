@@ -52,12 +52,11 @@ public class CommercePriceEntryUpgradeProcess extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		_addColumn(
 			CommercePriceEntryModelImpl.class,
-			CommercePriceEntryModelImpl.TABLE_NAME, "CProductId", "LONG");
-
-		_addColumn(
-			CommercePriceEntryModelImpl.class,
 			CommercePriceEntryModelImpl.TABLE_NAME, "CPInstanceUuid",
 			"VARCHAR(75)");
+		_addColumn(
+			CommercePriceEntryModelImpl.class,
+			CommercePriceEntryModelImpl.TABLE_NAME, "CProductId", "LONG");
 
 		_addIndexes(CommercePriceEntryModelImpl.TABLE_NAME);
 
@@ -75,10 +74,10 @@ public class CommercePriceEntryUpgradeProcess extends UpgradeProcess {
 			rs = s.executeQuery("select * from CommercePriceEntry");
 
 			while (rs.next()) {
-				long instanceId = rs.getLong("CPInstanceId");
+				long cpInstanceId = rs.getLong("CPInstanceId");
 
 				CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-					instanceId);
+					cpInstanceId);
 
 				CPDefinition cpDefinition =
 					_cpDefinitionLocalService.getCPDefinition(
@@ -87,7 +86,7 @@ public class CommercePriceEntryUpgradeProcess extends UpgradeProcess {
 				ps.setLong(1, cpDefinition.getCProductId());
 
 				ps.setString(2, cpInstance.getUuid());
-				ps.setLong(3, instanceId);
+				ps.setLong(3, cpInstanceId);
 
 				ps.execute();
 			}

@@ -28,13 +28,13 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alec Sloan
  */
 @Component(immediate = true, service = UpgradeStepRegistrator.class)
-public class CommercePriceEntryUpgradeStepRegistrator
+public class CommercePriceListUpgradeStepRegistrator
 	implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
 		if (_log.isInfoEnabled()) {
-			_log.info("COMMERCE UPGRADE STEP REGISTRATOR STARTED");
+			_log.info("COMMERCE PRICE LIST UPGRADE STEP REGISTRATOR STARTED");
 		}
 
 		registry.register(
@@ -43,7 +43,7 @@ public class CommercePriceEntryUpgradeStepRegistrator
 				_cpDefinitionLocalService, _cpInstanceLocalService));
 
 		if (_log.isInfoEnabled()) {
-			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
+			_log.info("COMMERCE PRICE LIST UPGRADE STEP REGISTRATOR FINISHED");
 		}
 	}
 
@@ -52,7 +52,7 @@ public class CommercePriceEntryUpgradeStepRegistrator
 	private static final String _SCHEMA_VERSION_1_1_0 = "1.1.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommercePriceEntryUpgradeStepRegistrator.class);
+		CommercePriceListUpgradeStepRegistrator.class);
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
