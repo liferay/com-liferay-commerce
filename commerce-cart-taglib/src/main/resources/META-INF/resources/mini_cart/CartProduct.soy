@@ -53,10 +53,12 @@
 			{if $isUpdating}
 				{call Loader.render}
 					{param direction: 'right' /}
-					{param inverted: true /}
+					{param inverted: false /}
 				{/call}
 			{else}
-				{$price}
+				{call Price.render}
+					{param price: $price /}
+				{/call}
 			{/if}
 		</div>
 
@@ -71,10 +73,8 @@
 				{param multipleQuantities: $settings.multipleQuantities /}
 				{param allowedOptions: $settings.allowedOptions /}
 			{/call}
-
-			<button data-onclick="deleteItem">
-				<span class="minium-item__delete{$deleteButtonClasses}" href="#"></span>
-			</button>
+			
+			<button class="minium-item__delete{$deleteButtonClasses}" data-onclick="deleteItem"></button>
 		</div>
 
 		<div class="minium-item__cancel-delete">
