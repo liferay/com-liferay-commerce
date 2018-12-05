@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.util.comparator;
 
-import com.liferay.commerce.model.CommercePaymentMethod;
+import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.portal.kernel.util.CollatorUtil;
 
 import java.io.Serializable;
