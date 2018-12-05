@@ -47,7 +47,7 @@ CartProduct.STATE = {
 		value: {}
 	},
 	quantity: {
-		value: null
+		value: 0
 	},
 	error: {
 		value: null

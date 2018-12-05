@@ -8,6 +8,7 @@
 	{@param isDisabled: bool}
 	{@param products: ?}
 	{@param detailsUrl: string}
+	{@param checkoutUrl: string}
 	{@param productsCount: int}
 	{@param spritemap: string }
 
@@ -31,9 +32,7 @@
 	{/let}
 
 	<div>
-		<a
-			data-senna-off
-			href="#"
+		<button
 			class="minium-topbar__button{$openCartButtonModifiers}"
 			data-onclick="toggleCart"
 		>
@@ -41,12 +40,10 @@
 				{param spritemap: $spritemap /}
 				{param symbol: 'cart' /}
 			{/call}
-		</a>
+		</button>
 
 		<div class="minium-cart{$cartModifiers}">
-			<a
-				data-senna-off
-				href="#"
+			<button
 				class="minium-topbar__button minium-cart__close"
 				data-onclick="toggleCart"
 			>
@@ -54,7 +51,7 @@
 					{param spritemap: $spritemap /}
 					{param symbol: 'close' /}
 				{/call}
-			</a>
+			</button>
 
 			<div class="minium-cart__top">
 				<div>
@@ -93,18 +90,18 @@
 				{/if}
 			</div>
 
-			{if $summary}
+			{if isNonnull($summary)}
 				{call Summary.render}
-					{param checkoutUrl: $summary.checkoutUrl /}
+					{param checkoutUrl: $checkoutUrl /}
 					{param subtotal: $summary.subtotal /}
 					{param grandTotal: $summary.grandTotal /}
 					{param discount: $summary.discount /}
 					{param totalUnits: $summary.totalUnits /}
 					{param productsCount: $productsCount /}
 					{param isLoading: $isLoading /}
-					{param dats: $summary /}
 				{/call}
 			{/if}
+
 		</div>
 	</div>
 {/template}

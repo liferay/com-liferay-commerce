@@ -5,13 +5,13 @@
  */
 {template .render}
 	{@param isLoading: bool}
-	{@param checkoutUrl: string}
 	{@param subtotal: string}
 	{@param grandTotal: string}
-	{@param? discount: string}
-	{@param? taxes: string}
 	{@param totalUnits: int}
 	{@param productsCount: int}
+	{@param? checkoutUrl: string}
+	{@param? discount: string}
+	{@param? taxes: string}
 
 	{let $submitModifiers kind="text"}
 		{if $isLoading or $productsCount == 0 }
@@ -54,7 +54,8 @@
 				{/if}
 			</dd>
 		</dl>
-
-		<a class="minium-button minium-button--block{$submitModifiers}" href="{$checkoutUrl}">{msg desc="Submit"}submit{/msg}</a>
+		{if isNonnull($checkoutUrl)}
+			<a class="minium-button minium-button--block{$submitModifiers}" href="{$checkoutUrl}">{msg desc="Submit"}submit{/msg}</a>
+		{/if}
 	</div>
 {/template}

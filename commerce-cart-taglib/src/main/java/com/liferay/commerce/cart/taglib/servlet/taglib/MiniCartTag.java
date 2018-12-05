@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.cart.taglib.servlet.taglib;
 
+import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
@@ -21,6 +22,9 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
+
+import java.util.ArrayList;
 
 /**
  * @author Marco Leo
@@ -40,7 +44,9 @@ public class MiniCartTag extends ComponentRendererTag {
 			putValue("isOpen", false);
 			putValue("isDisabled", false);
 			putValue("detailsUrl", "");
-			putValue("productsAmount", 0);
+			putValue("checkoutUrl", "");
+			putValue("productsCount", 0);
+			putValue("cartAPI", "http://localhost:8080/o/commerce-cart");
 
 			if (commerceOrder != null) {
 				putValue("cartId", commerceOrder.getCommerceOrderId());
