@@ -16,16 +16,9 @@ package com.liferay.commerce.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.service.CommerceAddressRestrictionServiceUtil;
-
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import java.rmi.RemoteException;
-
 /**
  * Provides the SOAP utility for the
- * {@link CommerceAddressRestrictionServiceUtil} service utility. The
+ * {@link com.liferay.commerce.service.CommerceAddressRestrictionServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -60,88 +53,9 @@ import java.rmi.RemoteException;
  * @author Alessio Antonio Rendina
  * @see CommerceAddressRestrictionServiceHttp
  * @see com.liferay.commerce.model.CommerceAddressRestrictionSoap
- * @see CommerceAddressRestrictionServiceUtil
+ * @see com.liferay.commerce.service.CommerceAddressRestrictionServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceAddressRestrictionServiceSoap {
-	public static com.liferay.commerce.model.CommerceAddressRestrictionSoap addCommerceAddressRestriction(
-		String className, long classPK, long commerceCountryId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.model.CommerceAddressRestriction returnValue = CommerceAddressRestrictionServiceUtil.addCommerceAddressRestriction(className,
-					classPK, commerceCountryId, serviceContext);
-
-			return com.liferay.commerce.model.CommerceAddressRestrictionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId) throws RemoteException {
-		try {
-			CommerceAddressRestrictionServiceUtil.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.model.CommerceAddressRestrictionSoap[] getCommerceAddressRestrictions(
-		String className, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> returnValue =
-				CommerceAddressRestrictionServiceUtil.getCommerceAddressRestrictions(className,
-					classPK, start, end, orderByComparator);
-
-			return com.liferay.commerce.model.CommerceAddressRestrictionSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getCommerceAddressRestrictionsCount(String className,
-		long classPK) throws RemoteException {
-		try {
-			int returnValue = CommerceAddressRestrictionServiceUtil.getCommerceAddressRestrictionsCount(className,
-					classPK);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static boolean isCommerceShippingMethodRestricted(
-		long commerceShippingMethodId, long commerceCountryId)
-		throws RemoteException {
-		try {
-			boolean returnValue = CommerceAddressRestrictionServiceUtil.isCommerceShippingMethodRestricted(commerceShippingMethodId,
-					commerceCountryId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(CommerceAddressRestrictionServiceSoap.class);
 }

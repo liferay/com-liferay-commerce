@@ -10,7 +10,6 @@
 	<import class="com.liferay.commerce.model.CommerceOrderItem" />
 	<import class="com.liferay.commerce.model.CommerceOrderNote" />
 	<import class="com.liferay.commerce.model.CommerceOrderPayment" />
-	<import class="com.liferay.commerce.model.CommercePaymentMethod" />
 	<import class="com.liferay.commerce.model.CommerceRegion" />
 	<import class="com.liferay.commerce.model.CommerceShipment" />
 	<import class="com.liferay.commerce.model.CommerceShipmentItem" />
@@ -117,7 +116,8 @@
 		<property name="commerceCurrencyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="billingAddressId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="shippingAddressId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="commercePaymentMethodId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commercePaymentMethodKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="transactionId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="commerceShippingMethodId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="shippingOptionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="purchaseOrderNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -201,26 +201,9 @@
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="commerceOrderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="commercePaymentMethodId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commercePaymentMethodKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
-	</class>
-	<class name="com.liferay.commerce.model.impl.CommercePaymentMethodImpl" table="CommercePaymentMethod">
-		<id name="commercePaymentMethodId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="imageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="engineKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property column="active_" name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.commerce.model.impl.CommerceRegionImpl" table="CommerceRegion">
 		<id name="commerceRegionId" type="long">

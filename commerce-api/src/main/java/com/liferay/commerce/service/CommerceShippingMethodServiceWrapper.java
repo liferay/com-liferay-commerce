@@ -35,6 +35,15 @@ public class CommerceShippingMethodServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceAddressRestriction addCommerceAddressRestriction(
+		long commerceShippingMethodId, long commerceCountryId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceShippingMethodService.addCommerceAddressRestriction(commerceShippingMethodId,
+			commerceCountryId, serviceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceShippingMethod addCommerceShippingMethod(
 		java.util.Map<java.util.Locale, String> nameMap,
 		java.util.Map<java.util.Locale, String> descriptionMap,
@@ -55,9 +64,35 @@ public class CommerceShippingMethodServiceWrapper
 	}
 
 	@Override
+	public void deleteCommerceAddressRestriction(
+		long commerceAddressRestrictionId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceShippingMethodService.deleteCommerceAddressRestriction(commerceAddressRestrictionId,
+			groupId);
+	}
+
+	@Override
 	public void deleteCommerceShippingMethod(long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_commerceShippingMethodService.deleteCommerceShippingMethod(commerceShippingMethodId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
+		long commerceShippingMethodId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceShippingMethodService.getCommerceAddressRestrictions(commerceShippingMethodId,
+			start, end, orderByComparator, groupId);
+	}
+
+	@Override
+	public int getCommerceAddressRestrictionsCount(
+		long commerceShippingMethodId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceShippingMethodService.getCommerceAddressRestrictionsCount(commerceShippingMethodId,
+			groupId);
 	}
 
 	@Override

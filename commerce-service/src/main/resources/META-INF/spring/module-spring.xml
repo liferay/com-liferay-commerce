@@ -33,9 +33,6 @@
 	<bean class="com.liferay.commerce.service.persistence.impl.CommerceOrderNotePersistenceImpl" id="com.liferay.commerce.service.persistence.CommerceOrderNotePersistence" parent="basePersistence" />
 	<bean class="com.liferay.commerce.service.impl.CommerceOrderPaymentLocalServiceImpl" id="com.liferay.commerce.service.CommerceOrderPaymentLocalService" />
 	<bean class="com.liferay.commerce.service.persistence.impl.CommerceOrderPaymentPersistenceImpl" id="com.liferay.commerce.service.persistence.CommerceOrderPaymentPersistence" parent="basePersistence" />
-	<bean class="com.liferay.commerce.service.impl.CommercePaymentMethodLocalServiceImpl" id="com.liferay.commerce.service.CommercePaymentMethodLocalService" />
-	<bean class="com.liferay.commerce.service.impl.CommercePaymentMethodServiceImpl" id="com.liferay.commerce.service.CommercePaymentMethodService" />
-	<bean class="com.liferay.commerce.service.persistence.impl.CommercePaymentMethodPersistenceImpl" id="com.liferay.commerce.service.persistence.CommercePaymentMethodPersistence" parent="basePersistence" />
 	<bean class="com.liferay.commerce.service.impl.CommerceRegionLocalServiceImpl" id="com.liferay.commerce.service.CommerceRegionLocalService" />
 	<bean class="com.liferay.commerce.service.impl.CommerceRegionServiceImpl" id="com.liferay.commerce.service.CommerceRegionService" />
 	<bean class="com.liferay.commerce.service.persistence.impl.CommerceRegionPersistenceImpl" id="com.liferay.commerce.service.persistence.CommerceRegionPersistence" parent="basePersistence" />

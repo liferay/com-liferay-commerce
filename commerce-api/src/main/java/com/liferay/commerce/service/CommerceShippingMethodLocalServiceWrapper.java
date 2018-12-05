@@ -34,6 +34,15 @@ public class CommerceShippingMethodLocalServiceWrapper
 		_commerceShippingMethodLocalService = commerceShippingMethodLocalService;
 	}
 
+	@Override
+	public com.liferay.commerce.model.CommerceAddressRestriction addCommerceAddressRestriction(
+		long commerceShippingMethodId, long commerceCountryId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceShippingMethodLocalService.addCommerceAddressRestriction(commerceShippingMethodId,
+			commerceCountryId, serviceContext);
+	}
+
 	/**
 	* Adds the commerce shipping method to the database. Also notifies the appropriate model listeners.
 	*
@@ -69,6 +78,13 @@ public class CommerceShippingMethodLocalServiceWrapper
 	public com.liferay.commerce.model.CommerceShippingMethod createCommerceShippingMethod(
 		long commerceShippingMethodId) {
 		return _commerceShippingMethodLocalService.createCommerceShippingMethod(commerceShippingMethodId);
+	}
+
+	@Override
+	public void deleteCommerceAddressRestriction(
+		long commerceAddressRestrictionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceShippingMethodLocalService.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
 	}
 
 	/**
@@ -217,6 +233,20 @@ public class CommerceShippingMethodLocalServiceWrapper
 	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _commerceShippingMethodLocalService.getActionableDynamicQuery();
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
+		long commerceShippingMethodId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator) {
+		return _commerceShippingMethodLocalService.getCommerceAddressRestrictions(commerceShippingMethodId,
+			start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceAddressRestrictionsCount(
+		long commerceShippingMethodId) {
+		return _commerceShippingMethodLocalService.getCommerceAddressRestrictionsCount(commerceShippingMethodId);
 	}
 
 	/**
