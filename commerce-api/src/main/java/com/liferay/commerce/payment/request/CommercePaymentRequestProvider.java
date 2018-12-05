@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletRequest;
 
 /**
  * @author Luca Pellizzon
@@ -27,8 +27,8 @@ public interface CommercePaymentRequestProvider {
 
 	public CommercePaymentRequest getCommercePaymentRequest(
 			String cancelUrl, long commerceOrderId,
-			HttpServletRequest httpServletRequest, Locale locale,
-			String returnUrl, String transactionId)
+			ServletRequest servletRequest, Locale locale, String returnUrl,
+			String transactionId)
 		throws PortalException;
 
 }
