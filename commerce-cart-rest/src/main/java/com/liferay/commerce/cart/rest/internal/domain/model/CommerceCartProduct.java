@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.domain.model;
+package com.liferay.commerce.cart.rest.internal.domain.model;
 
 /**
  * @author Alessio Antonio Rendina

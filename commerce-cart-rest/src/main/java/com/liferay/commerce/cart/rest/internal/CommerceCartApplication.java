@@ -12,16 +12,16 @@
  * details.
  */
 
-package com.liferay.commerce.cart.taglib.servlet.taglib.internal.application;
+package com.liferay.commerce.cart.rest.internal;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.context.provider.CommerceContextProvider;
-import com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.domain.model.CommerceCart;
-import com.liferay.commerce.cart.taglib.servlet.taglib.internal.application.provider.CommerceCartDataProvider;
+import com.liferay.commerce.cart.rest.internal.context.provider.CommerceContextProvider;
+import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCart;
+import com.liferay.commerce.cart.rest.internal.provider.CommerceCartDataProvider;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.model.CommerceOrderItem;
