@@ -1,43 +1,33 @@
 import 'clay-icon';
 
-import debounce from 'debounce';
+import debounce from 'metal-debounce';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
-import debounce from 'metal-debounce';
 
 import template from './Cart.soy';
 
 import './CartProduct.es';
-import './Summary.es'; x;
+import './Summary.es';
 
 class Cart extends Component {
 
-	created() {
-		fetch(this.cartAPI + '/' + this.cartId, {
-			method: 'GET'
-		})
-			.then(response => response.json())
-			.then(cartState => {
-				this.cartId = cartState.cartId;
-				this.products = cartState.products;
-				this.summary = cartState.summary;
-			});
-	}
-
 	toggleCart() {
-		return (this.isOpen = !this.isOpen);
+		return this.cartId && (this.isOpen = !this.isOpen);
 	}
 
 	attached() {
-		window.Liferay.on('addProductsToCart', (evt) => {
-			const newProducts = evt.details[0];
-			this.products = [
-				...this.products,
-				...newProducts
-			];
-			this.productsCount = this.productsCount + newProducts.length;
-		});
-		return (this.productsCount = this.products.length);
+		window.Liferay.on(
+			'addProductsToCart', 
+			(evt) => {
+				const newProducts = evt.details[0];
+				this.products = [
+					...this.products,
+					...newProducts
+				];
+				return this.productsCount = this.productsCount + newProducts.length;
+			}
+		);
+		return this.cartId && this.getProducts();
 	}
 
 	syncPendingOperations(pendingOperations) {
@@ -45,46 +35,55 @@ class Cart extends Component {
 	}
 
 	normalizeProducts(rawProducts) {
-		const normalizedProducts = rawProducts.map(productData => {
-			return Object.assign(
-				{
-					sendUpdateRequest: debounce(
-						() => this.sendUpdateRequest(productData.id),
-						500
-					),
-					sendDeleteRequest: debounce(
-						() => this.sendDeleteRequest(productData.id),
-						500
-					)
-				},
-				productStateSchema,
-				productData
-			);
-		});
+		const normalizedProducts = rawProducts.map(
+			productData => {
+				return Object.assign(
+					{
+						sendUpdateRequest: debounce(
+							() => this.sendUpdateRequest(productData.id),
+							500
+						),
+						sendDeleteRequest: debounce(
+							() => this.sendDeleteRequest(productData.id),
+							500
+						)
+					},
+					productStateSchema,
+					productData
+				);
+			}
+		);
 		return normalizedProducts;
 	}
 
 	updateProductQuantity(productId, quantity) {
 		this.addPendingOperation(productId);
-		this.setProductProperties(productId, {
-			isDeleteDisabled: true,
-			quantity: quantity,
-			isUpdating: true
-		});
-		this.getProductProperty(productId, 'sendUpdateRequest')();
+		this.setProductProperties(
+			productId, {
+				isDeleteDisabled: true,
+				quantity: quantity,
+				isUpdating: true
+			}
+		);
+		return this.getProductProperty(productId, 'sendUpdateRequest')();
 	}
 
 	handleSubmitQuantity(productId, quantity) {
-		this.setProductProperties(productId, {inputChanged: false});
-		this.updateProductQuantity(productId, quantity);
+		this.setProductProperties(
+			productId, 
+			{
+				inputChanged: false
+			}
+		);
+		return this.updateProductQuantity(productId, quantity);
 	}
 
 	deleteProduct(productId) {
-		this.productsCount = this.productsCount - 1;
+		return this.productsCount = this.productsCount - 1;
 	}
 
 	setProductProperties(productId, newProperties) {
-		this.products = this.products.map(product =>
+		return this.products = this.products.map(product =>
 			product.id === productId ?
 				Object.assign({}, product, newProperties) :
 				product
@@ -92,26 +91,33 @@ class Cart extends Component {
 	}
 
 	getProductProperty(productId, key) {
-		return this.products.reduce((property, product) => {
-			if (property) {
-				return property;
-			}
-			if (product.id === productId) {
-				try {
-					return product[key];
+		return this.products.reduce(
+			(property, product) => {
+				if (property) {
+					return property;
 				}
-				catch (error) {
-					console.warn(`Property ${key} not found!`);
-					return undefined;
+				if (product.id === productId) {
+					try {
+						return product[key];
+					}
+					catch (error) {
+						console.warn(`Property ${key} not found!`);
+						return undefined;
+					}
 				}
-			}
-		}, false);
+			}, 
+			false
+		);
 	}
 
 	subtractProducts(orArray, subArray) {
-		const result = subArray.reduce((arrayToBeFiltered, elToRemove) => {
-			return arrayToBeFiltered.filter((elToCheck) => elToCheck.id !== elToRemove.id);
-		}, orArray);
+		const result = subArray.reduce(
+			(arrayToBeFiltered, elToRemove) => {
+				return arrayToBeFiltered.filter((elToCheck) => elToCheck.id !== elToRemove.id);
+			}, 
+			orArray
+		);
+		return result;
 	}
 
 	handleDeleteItem(productId) {
@@ -131,7 +137,7 @@ class Cart extends Component {
 			}
 		);
 
-		setTimeout(() => {
+		return setTimeout(() => {
 			const isDeleting = this.getProductProperty(productId, 'isDeleting');
 			if (isDeleting) {
 				this.setProductProperties(
@@ -146,11 +152,14 @@ class Cart extends Component {
 	}
 
 	handleCancelItemDeletion(productId) {
-		this.setProductProperties(productId, {
-			isDeleting: false,
-			isDeleteDisabled: false
-		});
-		this.removePendingOperation();
+		this.setProductProperties(
+			productId,
+			{
+				isDeleting: false,
+				isDeleteDisabled: false
+			}
+		);
+		return this.removePendingOperation();
 	}
 
 	addPendingOperation(productId) {
@@ -167,15 +176,21 @@ class Cart extends Component {
 	}
 
 	sendUpdateRequest(productId) {
-		return fetch(this.cartAPI + '/' + productId, {
-			body: JSON.stringify({
-				quantity: this.getProductProperty(productId, 'quantity')
-			}),
-			headers: new Headers({'Content-Type': 'application/json'}),
-			method: 'POST'
-		})
-			.then(response => response.json())
-			.then(updatedCartState => {
+		return fetch(
+			this.cartAPI + '/' + productId, 
+			{
+				body: JSON.stringify(
+					{
+						quantity: this.getProductProperty(productId, 'quantity')
+					}
+				),
+				headers: new Headers({'Content-Type': 'application/json'}),
+				method: 'POST'
+			}
+		)
+		.then(response => response.json())
+		.then(
+			updatedCartState => {
 				const updatedPrice = updatedCartState.products.reduce(
 					(acc, el) => (el.id === productId ? el.price : acc),
 					null
@@ -186,32 +201,42 @@ class Cart extends Component {
 					isUpdating: false,
 					price: updatedPrice
 				});
-				this.updateSummary(updatedCartState.summary);
-			});
+				return this.summary = updatedCartState.summary;
+			}
+		)
+		.catch(
+			err => {
+				this.removePendingOperation(productId);
+				this.setProductProperties(productId, {
+					isDeleteDisabled: false,
+					isUpdating: false
+				});
+				console.log(err)	
+			}
+		);
 	}
 
 	getProducts() {
-		return fetch(this.cartAPI + '/' + this.cartId + '/' + productId, {
-			body: JSON.stringify({
-				quantity: this.getProductProperty(productId, 'quantity')
-			}),
-			headers: new Headers({'Content-Type': 'application/json'}),
-			method: 'POST'
-		})
-			.then(response => response.json())
-			.then(updatedCartState => {
-				const updatedPrice = updatedCartState.products.reduce(
-					(acc, el) => (el.id === productId ? el.price : acc),
-					null
-				);
-				this.removePendingOperation(productId);
-				this.setProductProperties(productId, {
-					isDeleteDisabled: false,
-					isUpdating: false,
-					price: updatedPrice
-				});
-				this.updateSummary(updatedCartState.summary);
-			});
+		return fetch(
+			this.cartAPI + '/' + this.cartId,
+			{
+				method: 'GET'
+			}
+		)
+		.then(response => response.json())
+		.then(
+			updatedCart => {
+				this.products = updatedCart.products;
+				this.summary = updatedCart.summary;
+				this.productsCount = this.products.length;
+				return !!(this.products && this.summary)
+			}
+		)
+		.catch(
+			err => {
+				return console.log(err)
+			}
+		);
 	}
 
 	sendDeleteRequest(productId) {
@@ -234,17 +259,19 @@ class Cart extends Component {
 					}
 				);
 
-				this.updateSummary(updatedCartState.summary);
+				this.summary = updatedCartState.summary;
 
 				const remainingProducts = this.subtractProducts(this.products, updatedCartState.products);
 
-				this.deleteProduct(productId);
+				return this.deleteProduct(productId);
+			}
+		)
+		.catch(
+			err => {
+				this.removePendingOperation(productId);
+				console.log(err)	
 			}
 		);
-	}
-
-	updateSummary(summary) {
-		this.summary = summary;
 	}
 }
 
@@ -259,28 +286,19 @@ const productStateSchema = {
 };
 
 Cart.STATE = {
-	spritemap: {
-		value: ''
-	},
-	cartAPI: {
-		value: 'http://localhost:8080/o/commerce-cart'
-	},
-	isOpen: {
-		value: true
-	},
-	isDisabled: {
-		value: false
-	},
-	cartId: {
-		value: null
-	},
+	spritemap: Config.string().required(),
+	cartAPI: Config.string().required(),
+	isOpen: Config.bool().value(true),
+	isDisable: Config.bool().value(false),
+	cartId: Config.oneOfType([
+		Config.number(),
+		Config.string(),
+	]).required(),
 	products: {
 		setter: 'normalizeProducts',
 		value: null
 	},
-	productsCount: {
-		value: 0
-	},
+	productsCount: Config.number().value(0),
 	summary: {
 		value: {
 			checkoutUrl: '',
@@ -290,15 +308,12 @@ Cart.STATE = {
 			totalUnits: 0
 		}
 	},
-	isLoading: {
-		value: false
-	},
+	isLoading: Config.bool().value(false),
 	pendingOperations: {
 		value: []
 	},
-	detailsUrl: {
-		value: ''
-	}
+	detailsUrl: Config.string().required(),
+	checkoutUrl: Config.string().required()
 };
 
 export {Cart};
