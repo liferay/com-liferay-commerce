@@ -114,6 +114,7 @@ public class OrderStockManagementTest {
 		).then(
 			"The product's stock availability is updated"
 		);
+
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
@@ -173,6 +174,7 @@ public class OrderStockManagementTest {
 		).then(
 			"The product will be successfully added to the order"
 		);
+
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
@@ -210,6 +212,7 @@ public class OrderStockManagementTest {
 		).then(
 			"The action will fail due to stock unavailability"
 		);
+
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
@@ -238,6 +241,7 @@ public class OrderStockManagementTest {
 		).then(
 			"The action will fail due to stock unavailability"
 		);
+
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
@@ -272,6 +276,7 @@ public class OrderStockManagementTest {
 		).then(
 			"The action will fail due to stock unavailability"
 		);
+
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 

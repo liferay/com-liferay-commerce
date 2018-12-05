@@ -79,7 +79,7 @@ public class CommerceVirtualOrderItemFinderImpl
 		long groupId, long organizationId, int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
 
-		return _doFindByGroupIdAndCustomerId(
+		return _findByGroupIdAndCustomerId(
 			FIND_BY_G_O_A, groupId, organizationId, start, end,
 			orderByComparator);
 	}
@@ -89,11 +89,11 @@ public class CommerceVirtualOrderItemFinderImpl
 		long groupId, long userId, int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
 
-		return _doFindByGroupIdAndCustomerId(
+		return _findByGroupIdAndCustomerId(
 			FIND_BY_G_U_A, groupId, userId, start, end, orderByComparator);
 	}
 
-	private List<CommerceVirtualOrderItem> _doFindByGroupIdAndCustomerId(
+	private List<CommerceVirtualOrderItem> _findByGroupIdAndCustomerId(
 		String customSQLId, long groupId, long customerId, int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
 
