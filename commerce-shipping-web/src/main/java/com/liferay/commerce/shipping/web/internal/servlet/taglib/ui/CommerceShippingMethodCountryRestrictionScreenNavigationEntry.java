@@ -16,7 +16,6 @@ package com.liferay.commerce.shipping.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceShippingMethod;
-import com.liferay.commerce.service.CommerceAddressRestrictionService;
 import com.liferay.commerce.service.CommerceShippingMethodService;
 import com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingMethodRestrictionsDisplayContext;
 import com.liferay.commerce.shipping.web.servlet.taglib.ui.CommerceShippingScreenNavigationConstants;
@@ -101,7 +100,6 @@ public class CommerceShippingMethodCountryRestrictionScreenNavigationEntry
 		CommerceShippingMethodRestrictionsDisplayContext
 			commerceShippingMethodRestrictionsDisplayContext =
 				new CommerceShippingMethodRestrictionsDisplayContext(
-					_commerceAddressRestrictionService,
 					_commerceShippingMethodService, _itemSelector,
 					_portletResourcePermission, renderRequest, renderResponse);
 
@@ -113,10 +111,6 @@ public class CommerceShippingMethodCountryRestrictionScreenNavigationEntry
 			_servletContext, httpServletRequest, httpServletResponse,
 			"/shipping_method/restrictions.jsp");
 	}
-
-	@Reference
-	private CommerceAddressRestrictionService
-		_commerceAddressRestrictionService;
 
 	@Reference
 	private CommerceShippingMethodService _commerceShippingMethodService;
