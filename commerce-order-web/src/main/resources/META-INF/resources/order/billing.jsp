@@ -28,13 +28,13 @@ if (commerceOrder != null) {
 	billingAddress = commerceOrder.getBillingAddress();
 }
 
-List<CommercePaymentMethod> commercePaymentMethods = commerceOrderEditDisplayContext.getCommercePaymentMethods();
+List<CommercePaymentMethodGroupRel> commercePaymentMethods = commerceOrderEditDisplayContext.getCommercePaymentMethods();
 
 long commerceCountryId = BeanParamUtil.getLong(billingAddress, request, "commerceCountryId");
 long commerceRegionId = BeanParamUtil.getLong(billingAddress, request, "commerceRegionId");
 
 int paymentStatus = BeanParamUtil.getInteger(commerceOrder, request, "paymentStatus");
-long commercePaymentMethodId = BeanParamUtil.getLong(commerceOrder, request, "commercePaymentMethodId");
+long commercePaymentMethodKey = BeanParamUtil.getLong(commerceOrder, request, "commercePaymentMethodKey");
 %>
 
 <liferay-portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
@@ -108,11 +108,11 @@ long commercePaymentMethodId = BeanParamUtil.getLong(commerceOrder, request, "co
 						<aui:select label="payment-method" name="paymentMethodId">
 
 							<%
-							for (CommercePaymentMethod commercePaymentMethod : commercePaymentMethods) {
-								long curCommercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodId();
+							for (CommercePaymentMethodGroupRel commercePaymentMethod : commercePaymentMethods) {
+								long curCommercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodGroupRelId();
 							%>
 
-								<aui:option label="<%= commerceOrderEditDisplayContext.getCommercePaymentMethodLabel(commercePaymentMethod) %>" localizeLabel="<%= false %>" selected="<%= curCommercePaymentMethodId == commercePaymentMethodId %>" value="<%= curCommercePaymentMethodId %>" />
+								<aui:option label="<%= commerceOrderEditDisplayContext.getCommercePaymentMethodLabel(commercePaymentMethod) %>" localizeLabel="<%= false %>" selected="<%= curCommercePaymentMethodId == commercePaymentMethodKey %>" value="<%= curCommercePaymentMethodId %>" />
 
 							<%
 							}
