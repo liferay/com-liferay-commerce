@@ -21,6 +21,7 @@ import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
+import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalServiceUtil;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
@@ -274,7 +275,7 @@ public class CommerceSubscriptionEntryTest {
 			cpDefinition.getCPDefinitionId(), cpOption.getCPOptionId(), true,
 			ServiceContextTestUtil.getServiceContext(groupId));
 
-		int cpDefinitionSubscriptionLength = RandomTestUtil.randomInt();
+		int cpDefinitionSubscriptionLength = RandomTestUtil.randomInt(1, 100);
 		String cpDefinitionSubscriptionType = "daily";
 		long cpDefinitionMaxSubscriptionCycles = RandomTestUtil.randomLong();
 
@@ -289,7 +290,7 @@ public class CommerceSubscriptionEntryTest {
 				cpDefinition);
 		}
 
-		int cpInstanceSubscriptionLength = RandomTestUtil.randomInt();
+		int cpInstanceSubscriptionLength = RandomTestUtil.randomInt(1, 100);
 		String cpInstanceSubscriptionType = "daily";
 		long cpInstanceMaxSubscriptionCycles = RandomTestUtil.randomLong();
 
@@ -318,9 +319,14 @@ public class CommerceSubscriptionEntryTest {
 					cpInstance);
 			}
 
-			CommerceTestUtil.addCommerceOrderItem(
-				commerceOrder.getCommerceOrderId(),
-				cpInstance.getCPInstanceId(), 1);
+			CPSubscriptionInfo cpSubscriptionInfo =
+				cpInstance.getCPSubscriptionInfo();
+
+			if (cpSubscriptionInfo != null) {
+				CommerceTestUtil.addCommerceOrderItem(
+					commerceOrder.getCommerceOrderId(),
+					cpInstance.getCPInstanceId(), 1);
+			}
 		}
 
 		_commerceSubscriptionEntryHelper.checkCommerceSubscriptions(
@@ -344,23 +350,23 @@ public class CommerceSubscriptionEntryTest {
 				commerceSubscriptionEntries.get(1);
 
 			Assert.assertEquals(
-				cpInstanceSubscriptionLength,
+				cpDefinitionSubscriptionLength,
 				commerceSubscriptionEntry1.getSubscriptionLength());
 			Assert.assertEquals(
-				cpInstanceSubscriptionType,
+				cpDefinitionSubscriptionType,
 				commerceSubscriptionEntry1.getSubscriptionType());
 			Assert.assertEquals(
-				cpInstanceMaxSubscriptionCycles,
+				cpDefinitionMaxSubscriptionCycles,
 				commerceSubscriptionEntry1.getMaxSubscriptionCycles());
 
 			Assert.assertEquals(
-				cpDefinitionSubscriptionLength,
+				cpInstanceSubscriptionLength,
 				commerceSubscriptionEntry2.getSubscriptionLength());
 			Assert.assertEquals(
-				cpDefinitionSubscriptionType,
+				cpInstanceSubscriptionType,
 				commerceSubscriptionEntry2.getSubscriptionType());
 			Assert.assertEquals(
-				cpDefinitionMaxSubscriptionCycles,
+				cpInstanceMaxSubscriptionCycles,
 				commerceSubscriptionEntry2.getMaxSubscriptionCycles());
 		}
 		else if (!cpDefinitionSubscriptionEnabled &&
