@@ -12,26 +12,23 @@
  * details.
  */
 
-package com.liferay.commerce.constants;
+package com.liferay.commerce.payment.request;
+
+import com.liferay.portal.kernel.exception.PortalException;
+
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Andrea Di Giorgi
- * @author Alessio Antonio Rendina
- * @author Marco Leo
+ * @author Luca Pellizzon
  */
-public class CommerceConstants {
+public interface CommercePaymentRequestProvider {
 
-	public static final String ORDER_SERVICE_NAME =
-		"com.liferay.commerce.order";
-
-	public static final String PRICE_SERVICE_NAME =
-		"com.liferay.commerce.price";
-
-	public static final String RESOURCE_NAME = "com.liferay.commerce";
-
-	public static final String SHIPPING_SERVICE_NAME =
-		"com.liferay.commerce.shipping";
-
-	public static final String TAXES_COMMERCE_ADMIN_MODULE_KEY = "taxes";
+	public CommercePaymentRequest getCommercePaymentRequest(
+			String cancelUrl, long commerceOrderId,
+			HttpServletRequest httpServletRequest, Locale locale,
+			String returnUrl, String transactionId)
+		throws PortalException;
 
 }
