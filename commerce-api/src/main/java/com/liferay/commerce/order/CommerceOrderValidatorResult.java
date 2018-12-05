@@ -65,7 +65,6 @@ public class CommerceOrderValidatorResult implements Serializable {
 
 		_commerceOrderItemId = commerceOrderItemId;
 		_valid = valid;
-		_resourceBundle = resourceBundle;
 		_messageKey = messageKey;
 		_argument = argument;
 		_resourceBundle = resourceBundle;
