@@ -73,9 +73,9 @@ public class SubscriptionCommerceOrderValidatorImpl
 
 		CommerceOrderItem commerceOrderItem = commerceOrderItems.get(0);
 
-		boolean subscription = commerceOrderItem.getSubscription();
+		if (commerceOrderItem.isSubscription() &&
+			(cpSubscriptionInfo == null)) {
 
-		if (subscription && (cpSubscriptionInfo == null)) {
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
 				_getLocalizedMessage(
@@ -83,7 +83,9 @@ public class SubscriptionCommerceOrderValidatorImpl
 					"your-cart-contains-recurring-items-only-one-product-" +
 						"type-is-allowed-per-order"));
 		}
-		else if (!subscription && (cpSubscriptionInfo != null)) {
+		else if (!commerceOrderItem.isSubscription() &&
+				 (cpSubscriptionInfo != null)) {
+
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
 				_getLocalizedMessage(
@@ -114,8 +116,8 @@ public class SubscriptionCommerceOrderValidatorImpl
 				continue;
 			}
 
-			if (curCommerceOrderItem.getSubscription() !=
-					commerceOrderItem.getSubscription()) {
+			if (curCommerceOrderItem.isSubscription() !=
+					commerceOrderItem.isSubscription()) {
 
 				return new CommerceOrderValidatorResult(
 					commerceOrderItem.getCommerceOrderItemId(), false,
