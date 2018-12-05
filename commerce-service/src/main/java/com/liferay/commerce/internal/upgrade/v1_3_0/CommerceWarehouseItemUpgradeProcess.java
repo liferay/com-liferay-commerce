@@ -52,12 +52,11 @@ public class CommerceWarehouseItemUpgradeProcess extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		_addColumn(
 			CommerceWarehouseItemModelImpl.class,
-			CommerceWarehouseItemModelImpl.TABLE_NAME, "CProductId", "LONG");
-
-		_addColumn(
-			CommerceWarehouseItemModelImpl.class,
 			CommerceWarehouseItemModelImpl.TABLE_NAME, "CPInstanceUUID",
 			"VARCHAR(75)");
+		_addColumn(
+			CommerceWarehouseItemModelImpl.class,
+			CommerceWarehouseItemModelImpl.TABLE_NAME, "CProductId", "LONG");
 
 		_addIndexes(CommerceWarehouseItemModelImpl.TABLE_NAME);
 
@@ -75,10 +74,10 @@ public class CommerceWarehouseItemUpgradeProcess extends UpgradeProcess {
 			rs = s.executeQuery("select * from CommerceWarehouseItem");
 
 			while (rs.next()) {
-				long instanceId = rs.getLong("CPInstanceId");
+				long cpInstanceId = rs.getLong("CPInstanceId");
 
 				CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-					instanceId);
+					cpInstanceId);
 
 				CPDefinition cpDefinition =
 					_cpDefinitionLocalService.getCPDefinition(
@@ -87,7 +86,7 @@ public class CommerceWarehouseItemUpgradeProcess extends UpgradeProcess {
 				ps.setLong(1, cpDefinition.getCProductId());
 
 				ps.setString(2, cpInstance.getUuid());
-				ps.setLong(3, instanceId);
+				ps.setLong(3, cpInstanceId);
 
 				ps.execute();
 			}
@@ -97,9 +96,8 @@ public class CommerceWarehouseItemUpgradeProcess extends UpgradeProcess {
 			DataAccess.cleanUp(s, rs);
 		}
 
-		runSQL("drop index IX_B905F012 on CommerceWarehouseItem");
-
 		runSQL("drop index IX_8FBE7F43 on CommerceWarehouseItem");
+		runSQL("drop index IX_B905F012 on CommerceWarehouseItem");
 
 		runSQL("alter table CommerceWarehouseItem drop column CPInstanceId");
 	}

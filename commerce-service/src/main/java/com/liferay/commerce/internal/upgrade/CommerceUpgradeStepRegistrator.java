@@ -55,11 +55,11 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 
 		registry.register(
 			_SCHEMA_VERSION_1_2_0, _SCHEMA_VERSION_1_3_0,
-			new CommerceWarehouseItemUpgradeProcess(
-				_cpDefinitionLocalService, _cpInstanceLocalService),
 			new com.liferay.commerce.internal.upgrade.v1_3_0.
 				CommerceOrderItemUpgradeProcess(
 					_cpDefinitionLocalService, _cpInstanceLocalService),
+			new CommerceWarehouseItemUpgradeProcess(
+				_cpDefinitionLocalService, _cpInstanceLocalService),
 			new CPDAvailabilityEstimateUpgradeProcess(),
 			new CPDefinitionInventoryUpgradeProcess());
 
