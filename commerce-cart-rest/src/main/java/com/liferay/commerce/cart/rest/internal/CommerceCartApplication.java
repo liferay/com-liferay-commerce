@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.liferay.commerce.cart.rest.internal.context.provider.CommerceContextProvider;
-import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCart;
+import com.liferay.commerce.cart.rest.internal.domain.model.Cart;
 import com.liferay.commerce.cart.rest.internal.provider.CommerceCartDataProvider;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
@@ -83,7 +83,7 @@ public class CommerceCartApplication extends Application {
 		@Context HttpServletRequest httpServletRequest,
 		@Context HttpServletResponse httpServletResponse) {
 
-		CommerceCart commerceCart;
+		Cart cart;
 
 		try {
 			ServicePreAction servicePreAction =
@@ -105,15 +105,14 @@ public class CommerceCartApplication extends Application {
 			_commerceOrderItemService.deleteCommerceOrderItem(
 				commerceOrderItem.getCommerceOrderItemId());
 
-			commerceCart = _commerceCartDataProvider.getCommerceCart(
+			cart = _commerceCartDataProvider.getCart(
 				commerceOrderId, themeDisplay, commerceContext);
 		}
 		catch (Exception e) {
-			commerceCart = new CommerceCart(
-				StringUtil.split(e.getLocalizedMessage()));
+			cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
 		}
 
-		return getResponse(commerceCart);
+		return getResponse(cart);
 	}
 
 	@GET
@@ -125,7 +124,7 @@ public class CommerceCartApplication extends Application {
 		@Context HttpServletRequest httpServletRequest,
 		@Context HttpServletResponse httpServletResponse) {
 
-		CommerceCart commerceCart;
+		Cart cart;
 
 		try {
 			ServicePreAction servicePreAction =
@@ -138,15 +137,14 @@ public class CommerceCartApplication extends Application {
 			httpServletRequest.setAttribute(
 				WebKeys.THEME_DISPLAY, themeDisplay);
 
-			commerceCart = _commerceCartDataProvider.getCommerceCart(
+			cart = _commerceCartDataProvider.getCart(
 				commerceOrderId, themeDisplay, commerceContext);
 		}
 		catch (Exception e) {
-			commerceCart = new CommerceCart(
-				StringUtil.split(e.getLocalizedMessage()));
+			cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
 		}
 
-		return getResponse(commerceCart);
+		return getResponse(cart);
 	}
 
 	public Set<Object> getSingletons() {
@@ -168,7 +166,7 @@ public class CommerceCartApplication extends Application {
 		@Context HttpServletRequest httpServletRequest,
 		@Context HttpServletResponse httpServletResponse) {
 
-		CommerceCart commerceCart;
+		Cart cart;
 
 		try {
 			ServicePreAction servicePreAction =
@@ -185,34 +183,33 @@ public class CommerceCartApplication extends Application {
 				_commerceOrderItemService.updateCommerceOrderItem(
 					commerceOrderItemId, quantity, commerceContext);
 
-			commerceCart = _commerceCartDataProvider.getCommerceCart(
+			cart = _commerceCartDataProvider.getCart(
 				commerceOrderItem.getCommerceOrderId(), themeDisplay,
 				commerceContext);
 		}
 		catch (Exception e) {
 			if (e instanceof CommerceOrderValidatorException) {
-				commerceCart = new CommerceCart(
+				cart = new Cart(
 					_getCommerceOrderValidatorResultsMessages(
 						(CommerceOrderValidatorException)e));
 			}
 			else {
-				commerceCart = new CommerceCart(
-					StringUtil.split(e.getLocalizedMessage()));
+				cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
 			}
 		}
 
-		return getResponse(commerceCart);
+		return getResponse(cart);
 	}
 
-	protected Response getResponse(CommerceCart commerceCart) {
-		if (commerceCart == null) {
+	protected Response getResponse(Cart cart) {
+		if (cart == null) {
 			return Response.status(
 				Response.Status.NOT_FOUND
 			).build();
 		}
 
 		try {
-			String json = _OBJECT_MAPPER.writeValueAsString(commerceCart);
+			String json = _OBJECT_MAPPER.writeValueAsString(cart);
 
 			return Response.ok(
 				json, MediaType.APPLICATION_JSON
