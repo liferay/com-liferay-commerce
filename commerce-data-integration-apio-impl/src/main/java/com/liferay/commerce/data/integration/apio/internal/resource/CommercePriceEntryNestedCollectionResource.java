@@ -122,8 +122,8 @@ public class CommercePriceEntryNestedCollectionResource
 				commercePriceListIdToClassPKExternalReferenceCode(
 					commercePriceEntry.getCommercePriceListId())
 		).addBidirectionalModel(
-			"webSite", "commercePriceEntries", CommerceWebSiteIdentifier.class,
-			CommercePriceEntry::getGroupId
+			"commerceWebSite", "commercePriceEntries",
+			CommerceWebSiteIdentifier.class, CommercePriceEntry::getGroupId
 		).addBoolean(
 			"hasTierPrice", CommercePriceEntry::isHasTierPrice
 		).addDate(
