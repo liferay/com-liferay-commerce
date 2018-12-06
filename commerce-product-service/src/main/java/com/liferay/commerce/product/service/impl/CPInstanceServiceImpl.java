@@ -18,6 +18,7 @@ import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.base.CPInstanceServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -100,6 +101,25 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 		}
 
 		return cpInstance;
+	}
+
+	@Override
+	public CPInstance fetchCProductInstance(
+			long cProductId, String cpInstanceUuid)
+		throws PortalException {
+
+		CProduct cProduct = cProductLocalService.fetchCProduct(cProductId);
+
+		if (cProduct == null) {
+			return null;
+		}
+
+		_cpDefinitionModelResourcePermission.check(
+			getPermissionChecker(), cProduct.getPublishedDefinitionId(),
+			ActionKeys.VIEW);
+
+		return cpInstanceLocalService.fetchCProductInstance(
+			cProductId, cpInstanceUuid);
 	}
 
 	@Override
