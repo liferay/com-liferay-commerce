@@ -71,6 +71,10 @@ import java.util.Map;
 public class CommercePriceEntryLocalServiceImpl
 	extends CommercePriceEntryLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated As of Judson (7.1.x)
+	 */
+	@Deprecated
 	@Override
 	public CommercePriceEntry addCommercePriceEntry(
 			long cpInstanceId, long commercePriceListId, BigDecimal price,
@@ -82,7 +86,10 @@ public class CommercePriceEntryLocalServiceImpl
 			serviceContext);
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	 * @deprecated As of Judson (7.1.x)
+	 */
+	@Deprecated
 	@Override
 	public CommercePriceEntry addCommercePriceEntry(
 			long cpInstanceId, long commercePriceListId,
@@ -90,21 +97,47 @@ public class CommercePriceEntryLocalServiceImpl
 			BigDecimal promoPrice, ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
-
-		validate(cpInstanceId, commercePriceListId);
-
-		long commercePriceEntryId = counterLocalService.increment();
-
-		CommercePriceEntry commercePriceEntry =
-			commercePriceEntryPersistence.create(commercePriceEntryId);
-
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpInstance.getCPDefinitionId());
+
+		return commercePriceEntryLocalService.addCommercePriceEntry(
+			cpDefinition.getCProductId(), cpInstance.getUuid(),
+			commercePriceListId, externalReferenceCode, price, promoPrice,
+			serviceContext);
+	}
+
+	@Override
+	public CommercePriceEntry addCommercePriceEntry(
+			long cProductId, String cpInstanceUuid, long commercePriceListId,
+			BigDecimal price, BigDecimal promoPrice,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return addCommercePriceEntry(
+			cProductId, cpInstanceUuid, commercePriceListId, null, price,
+			promoPrice, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommercePriceEntry addCommercePriceEntry(
+			long cProductId, String cpInstanceUuid, long commercePriceListId,
+			String externalReferenceCode, BigDecimal price,
+			BigDecimal promoPrice, ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+		long groupId = serviceContext.getScopeGroupId();
+
+		validate(commercePriceListId, cpInstanceUuid);
+
+		long commercePriceEntryId = counterLocalService.increment();
+
+		CommercePriceEntry commercePriceEntry =
+			commercePriceEntryPersistence.create(commercePriceEntryId);
 
 		commercePriceEntry.setUuid(serviceContext.getUuid());
 		commercePriceEntry.setGroupId(groupId);
@@ -116,8 +149,8 @@ public class CommercePriceEntryLocalServiceImpl
 		commercePriceEntry.setPromoPrice(promoPrice);
 		commercePriceEntry.setExpandoBridgeAttributes(serviceContext);
 		commercePriceEntry.setExternalReferenceCode(externalReferenceCode);
-		commercePriceEntry.setCProductId(cpDefinition.getCProductId());
-		commercePriceEntry.setCPInstanceUuid(cpInstance.getUuid());
+		commercePriceEntry.setCProductId(cProductId);
+		commercePriceEntry.setCPInstanceUuid(cpInstanceUuid);
 
 		return commercePriceEntryPersistence.update(commercePriceEntry);
 	}
@@ -136,6 +169,19 @@ public class CommercePriceEntryLocalServiceImpl
 		}
 	}
 
+	@Override
+	public void deleteCommercePriceEntries(String cpInstanceUuid)
+		throws PortalException {
+
+		List<CommercePriceEntry> commercePriceEntries =
+			commercePriceEntryPersistence.findByCPInstanceUuid(cpInstanceUuid);
+
+		for (CommercePriceEntry commercePriceEntry : commercePriceEntries) {
+			commercePriceEntryLocalService.deleteCommercePriceEntry(
+				commercePriceEntry);
+		}
+	}
+
 	/**
 	 * @deprecated As of Judson (7.1.x)
 	 */
@@ -147,12 +193,9 @@ public class CommercePriceEntryLocalServiceImpl
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
-		List<CommercePriceEntry> commercePriceEntries =
-			commercePriceEntryPersistence.findByUuid_C(
-				cpInstance.getUuid(), cpInstance.getCompanyId());
-
-		for (CommercePriceEntry commercePriceEntry : commercePriceEntries) {
-			deleteCommercePriceEntry(commercePriceEntry);
+		if (cpInstance != null) {
+			commercePriceEntryLocalService.deleteCommercePriceEntries(
+				cpInstance.getUuid());
 		}
 	}
 
@@ -217,7 +260,7 @@ public class CommercePriceEntryLocalServiceImpl
 			return null;
 		}
 
-		return commercePriceEntryPersistence.fetchByC_C(
+		return commercePriceEntryLocalService.fetchCommercePriceEntry(
 			commercePriceListId, cpInstance.getUuid());
 	}
 
@@ -230,9 +273,31 @@ public class CommercePriceEntryLocalServiceImpl
 			long cpInstanceId, long commercePriceListId, boolean useAncestor)
 		throws PortalException {
 
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
+		return commercePriceEntryLocalService.fetchCommercePriceEntry(
+			commercePriceListId, cpInstance.getUuid(), useAncestor);
+	}
+
+	@Override
+	public CommercePriceEntry fetchCommercePriceEntry(
+			long commercePriceListId, String cpInstanceUuid)
+		throws PortalException {
+
+		return commercePriceEntryPersistence.fetchByC_C(
+			commercePriceListId, cpInstanceUuid);
+	}
+
+	@Override
+	public CommercePriceEntry fetchCommercePriceEntry(
+			long commercePriceListId, String cpInstanceUuid,
+			boolean useAncestor)
+		throws PortalException {
+
 		CommercePriceEntry commercePriceEntry =
 			commercePriceEntryLocalService.fetchCommercePriceEntry(
-				cpInstanceId, commercePriceListId);
+				commercePriceListId, cpInstanceUuid);
 
 		if (!useAncestor || (commercePriceEntry != null)) {
 			return commercePriceEntry;
@@ -249,7 +314,7 @@ public class CommercePriceEntryLocalServiceImpl
 		}
 
 		return commercePriceEntryLocalService.fetchCommercePriceEntry(
-			cpInstanceId, commercePriceList.getParentCommercePriceListId(),
+			commercePriceList.getParentCommercePriceListId(), cpInstanceUuid,
 			useAncestor);
 	}
 
@@ -300,7 +365,7 @@ public class CommercePriceEntryLocalServiceImpl
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
-		return commercePriceEntryPersistence.findByCPInstanceUuid(
+		return commercePriceEntryLocalService.getInstanceCommercePriceEntries(
 			cpInstance.getUuid(), start, end);
 	}
 
@@ -317,8 +382,27 @@ public class CommercePriceEntryLocalServiceImpl
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
-		return commercePriceEntryPersistence.findByCPInstanceUuid(
+		return commercePriceEntryLocalService.getInstanceCommercePriceEntries(
 			cpInstance.getUuid(), start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
+			String cpInstanceUuid, int start, int end)
+		throws PortalException {
+
+		return commercePriceEntryPersistence.findByCPInstanceUuid(
+			cpInstanceUuid, start, end);
+	}
+
+	@Override
+	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
+			String cpInstanceUuid, int start, int end,
+			OrderByComparator<CommercePriceEntry> orderByComparator)
+		throws PortalException {
+
+		return commercePriceEntryPersistence.findByCPInstanceUuid(
+			cpInstanceUuid, start, end, orderByComparator);
 	}
 
 	/**
@@ -332,8 +416,16 @@ public class CommercePriceEntryLocalServiceImpl
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
+		return commercePriceEntryLocalService.
+			getInstanceCommercePriceEntriesCount(cpInstance.getUuid());
+	}
+
+	@Override
+	public int getInstanceCommercePriceEntriesCount(String cpInstanceUuid)
+		throws PortalException {
+
 		return commercePriceEntryPersistence.countByCPInstanceUuid(
-			cpInstance.getUuid());
+			cpInstanceUuid);
 	}
 
 	@Override
@@ -408,6 +500,30 @@ public class CommercePriceEntryLocalServiceImpl
 	}
 
 	/**
+	 * @deprecated As of Judson (7.1.x)
+	 */
+	@Deprecated
+	@Override
+	public CommercePriceEntry upsertCommercePriceEntry(
+			long commercePriceEntryId, long cpInstanceId,
+			long commercePriceListId, String externalReferenceCode,
+			BigDecimal price, BigDecimal promoPrice,
+			String skuExternalReferenceCode, ServiceContext serviceContext)
+		throws PortalException {
+
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpInstance.getCPDefinitionId());
+
+		return commercePriceEntryLocalService.upsertCommercePriceEntry(
+			commercePriceEntryId, cpDefinition.getCProductId(),
+			cpInstance.getUuid(), commercePriceListId, externalReferenceCode,
+			price, promoPrice, skuExternalReferenceCode, serviceContext);
+	}
+
+	/**
 	 * This method is used to insert a new CommercePriceEntry or update an
 	 * existing one
 	 *
@@ -435,7 +551,7 @@ public class CommercePriceEntryLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommercePriceEntry upsertCommercePriceEntry(
-			long commercePriceEntryId, long cpInstanceId,
+			long commercePriceEntryId, long cProductId, String cpInstanceUuid,
 			long commercePriceListId, String externalReferenceCode,
 			BigDecimal price, BigDecimal promoPrice,
 			String skuExternalReferenceCode, ServiceContext serviceContext)
@@ -471,14 +587,11 @@ public class CommercePriceEntryLocalServiceImpl
 
 		// Add
 
-		if (cpInstanceId > 0) {
-			validate(cpInstanceId, commercePriceListId);
-
-			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-				cpInstanceId);
+		if ((cProductId > 0) && (cpInstanceUuid != null)) {
+			validate(commercePriceListId, cpInstanceUuid);
 
 			return addCommercePriceEntry(
-				cpInstance.getCPInstanceId(), commercePriceListId,
+				cProductId, cpInstanceUuid, commercePriceListId,
 				externalReferenceCode, price, promoPrice, serviceContext);
 		}
 
@@ -487,17 +600,25 @@ public class CommercePriceEntryLocalServiceImpl
 				_cpInstanceLocalService.getCPInstanceByExternalReferenceCode(
 					serviceContext.getCompanyId(), skuExternalReferenceCode);
 
-			validate(cpInstance.getCPInstanceId(), commercePriceListId);
+			CPDefinition cpDefinition =
+				_cpDefinitionLocalService.getCPDefinition(
+					cpInstance.getCPDefinitionId());
+
+			validate(commercePriceListId, cpInstance.getUuid());
 
 			return addCommercePriceEntry(
-				cpInstance.getCPInstanceId(), commercePriceListId,
-				externalReferenceCode, price, promoPrice, serviceContext);
+				cpDefinition.getCProductId(), cpInstance.getUuid(),
+				commercePriceListId, externalReferenceCode, price, promoPrice,
+				serviceContext);
 		}
 
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(9);
 
-		sb.append("{cpInstanceId=");
-		sb.append(cpInstanceId);
+		sb.append("{cProductId=");
+		sb.append(cProductId);
+		sb.append(StringPool.COMMA_AND_SPACE);
+		sb.append("{cpInstanceUuid=");
+		sb.append(cpInstanceUuid);
 		sb.append(StringPool.COMMA_AND_SPACE);
 		sb.append("skuExternalReferenceCode=");
 		sb.append(skuExternalReferenceCode);
@@ -602,15 +723,12 @@ public class CommercePriceEntryLocalServiceImpl
 			"Unable to fix the search index after 10 attempts");
 	}
 
-	protected void validate(long cpInstanceId, long commercePriceListId)
+	protected void validate(long commercePriceListId, String cpInstanceUuid)
 		throws PortalException {
-
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-			cpInstanceId);
 
 		CommercePriceEntry commercePriceEntry =
 			commercePriceEntryPersistence.fetchByC_C(
-				commercePriceListId, cpInstance.getUuid());
+				commercePriceListId, cpInstanceUuid);
 
 		if (commercePriceEntry != null) {
 			throw new DuplicateCommercePriceEntryException();
