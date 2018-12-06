@@ -210,8 +210,12 @@ public class CommercePriceEntryLocalServiceImpl
 			long cpInstanceId, long commercePriceListId)
 		throws PortalException {
 
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
+
+		if (cpInstance == null) {
+			return null;
+		}
 
 		return commercePriceEntryPersistence.fetchByC_C(
 			commercePriceListId, cpInstance.getUuid());
@@ -226,8 +230,9 @@ public class CommercePriceEntryLocalServiceImpl
 			long cpInstanceId, long commercePriceListId, boolean useAncestor)
 		throws PortalException {
 
-		CommercePriceEntry commercePriceEntry = fetchCommercePriceEntry(
-			cpInstanceId, commercePriceListId);
+		CommercePriceEntry commercePriceEntry =
+			commercePriceEntryLocalService.fetchCommercePriceEntry(
+				cpInstanceId, commercePriceListId);
 
 		if (!useAncestor || (commercePriceEntry != null)) {
 			return commercePriceEntry;
