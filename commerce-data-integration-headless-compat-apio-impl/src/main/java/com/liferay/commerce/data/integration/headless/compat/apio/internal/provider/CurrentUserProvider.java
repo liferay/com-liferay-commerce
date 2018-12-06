@@ -16,7 +16,7 @@ package com.liferay.commerce.data.integration.headless.compat.apio.internal.prov
 
 import com.liferay.apio.architect.functional.Try;
 import com.liferay.apio.architect.provider.Provider;
-import com.liferay.portal.apio.user.CurrentUser;
+import com.liferay.commerce.data.integration.headless.compat.apio.user.CurrentUser;
 import com.liferay.portal.kernel.util.Portal;
 
 import javax.servlet.http.HttpServletRequest;

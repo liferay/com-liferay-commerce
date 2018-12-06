@@ -27,8 +27,8 @@ import com.liferay.commerce.data.integration.headless.compat.apio.identifier.Com
 import com.liferay.commerce.data.integration.headless.compat.apio.internal.form.CommerceUserUpserterForm;
 import com.liferay.commerce.data.integration.headless.compat.apio.internal.model.UserWrapper;
 import com.liferay.commerce.data.integration.headless.compat.apio.internal.util.CommerceUserResourceOperationHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
 import com.liferay.commerce.data.integration.headless.compat.apio.util.UserHelper;
-import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;

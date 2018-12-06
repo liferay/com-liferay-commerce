@@ -2,7 +2,6 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.apio.architect.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.external.reference.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.osgi.service.tracker.collections", version: "3.0.0"
-	compileOnly group: "com.liferay", name: "com.liferay.portal.apio.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.data.integration.apio.api", version: "1.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "3.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.21.0"
