@@ -17,8 +17,8 @@ package com.liferay.commerce.data.integration.headless.compat.apio.internal.secu
 import com.liferay.apio.architect.credentials.Credentials;
 import com.liferay.apio.architect.functional.Try;
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
 import com.liferay.commerce.data.integration.headless.compat.apio.util.UserHelper;
-import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
