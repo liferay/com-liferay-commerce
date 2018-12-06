@@ -1,0 +1,10 @@
+Bundle-Name: Liferay Commerce Data Integration Headless Compat Apio API
+Bundle-SymbolicName: com.liferay.commerce.data.integration.headless.compat.apio.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.commerce.data.integration.headless.compat.apio.exception,\
+	com.liferay.commerce.data.integration.headless.compat.apio.idempotent,\
+	com.liferay.commerce.data.integration.headless.compat.apio.identifier,\
+	com.liferay.commerce.data.integration.headless.compat.apio.permission,\
+	com.liferay.commerce.data.integration.headless.compat.apio.user,\
+	com.liferay.commerce.data.integration.headless.compat.apio.util
