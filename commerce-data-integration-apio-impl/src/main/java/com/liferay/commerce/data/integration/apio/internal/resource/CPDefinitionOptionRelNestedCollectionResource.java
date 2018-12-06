@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
-import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
+import static com.liferay.commerce.data.integration.headless.compat.apio.idempotent.Idempotent.idempotent;
 
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -27,11 +27,11 @@ import com.liferay.commerce.data.integration.apio.identifier.CPDefinitionOptionR
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.internal.form.CPDefinitionOptionRelUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CPDefinitionHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.user.CurrentUser;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
-import com.liferay.portal.apio.permission.HasPermission;
-import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;

@@ -22,11 +22,11 @@ import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalRefe
 import com.liferay.commerce.data.integration.apio.identifier.CommercePriceListIdentifier;
 import com.liferay.commerce.data.integration.apio.internal.util.CommercePriceEntryHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommercePriceListHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
 import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
-import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;

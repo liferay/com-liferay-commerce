@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
-import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
+import static com.liferay.commerce.data.integration.headless.compat.apio.idempotent.Idempotent.idempotent;
 
 import com.liferay.apio.architect.functional.Try;
 import com.liferay.apio.architect.pagination.PageItems;
@@ -29,15 +29,15 @@ import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalRefe
 import com.liferay.commerce.data.integration.apio.internal.form.CPInstanceUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CPDefinitionHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CPInstanceHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.user.CurrentUser;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
-import com.liferay.portal.apio.permission.HasPermission;
-import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
 
@@ -107,8 +107,8 @@ public class CPInstanceNestedCollectionResource
 				cpDefinitionIdToclassPKExternalReferenceCode(
 					cpInstance.getCPDefinitionId())
 		).addBidirectionalModel(
-			"webSite", "commerceProductInstances", WebSiteIdentifier.class,
-			CPInstance::getGroupId
+			"webSite", "commerceProductInstances",
+			CommerceWebSiteIdentifier.class, CPInstance::getGroupId
 		).addBoolean(
 			"purchasable", CPInstance::isPurchasable
 		).addDate(

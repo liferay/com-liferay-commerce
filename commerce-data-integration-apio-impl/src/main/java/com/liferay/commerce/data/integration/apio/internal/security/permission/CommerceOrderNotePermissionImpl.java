@@ -24,11 +24,11 @@ import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalRefe
 import com.liferay.commerce.data.integration.apio.identifier.CommerceOrderIdentifier;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceOrderHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceOrderNoteHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 

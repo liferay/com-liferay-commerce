@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
-import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
+import static com.liferay.commerce.data.integration.headless.compat.apio.idempotent.Idempotent.idempotent;
 
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -30,17 +30,17 @@ import com.liferay.commerce.data.integration.apio.internal.form.CommerceTierPric
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceTierPriceEntryUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommercePriceEntryHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceTierPriceEntryHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
 import com.liferay.commerce.price.list.exception.DuplicateCommerceTierPriceEntryException;
 import com.liferay.commerce.price.list.exception.NoSuchPriceEntryException;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryService;
-import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
 
@@ -115,8 +115,8 @@ public class CommerceTierPriceEntryNestedCollectionResource
 				commercePriceEntryIdToClassPKExternalReferenceCode(
 					commercePriceTier.getCommercePriceEntryId())
 		).addBidirectionalModel(
-			"webSite", "commerceTierPriceEntries", WebSiteIdentifier.class,
-			CommerceTierPriceEntry::getGroupId
+			"webSite", "commerceTierPriceEntries",
+			CommerceWebSiteIdentifier.class, CommerceTierPriceEntry::getGroupId
 		).addDate(
 			"dateCreated", CommerceTierPriceEntry::getCreateDate
 		).addDate(

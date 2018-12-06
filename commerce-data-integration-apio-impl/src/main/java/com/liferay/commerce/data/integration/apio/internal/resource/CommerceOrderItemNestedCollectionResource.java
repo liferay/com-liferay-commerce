@@ -27,11 +27,12 @@ import com.liferay.commerce.data.integration.apio.identifier.CommerceOrderItemId
 import com.liferay.commerce.data.integration.apio.internal.util.CPInstanceHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceOrderHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceOrderItemHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceUserIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.util.UserHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.service.CommerceOrderItemService;
-import com.liferay.person.apio.architect.identifier.PersonIdentifier;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -136,7 +137,10 @@ public class CommerceOrderItemNestedCollectionResource
 		).addDate(
 			"dateModified", CommerceOrderItem::getModifiedDate
 		).addLinkedModel(
-			"author", PersonIdentifier.class, CommerceOrderItem::getUserId
+			"author", CommerceUserIdentifier.class,
+			commerceOrderItem ->
+				_userHelper.userIdToClassPKExternalReferenceCode(
+					commerceOrderItem.getUserId())
 		).addNumber(
 			"commerceOrderId", CommerceOrderItem::getCommerceOrderId
 		).addString(
@@ -209,5 +213,8 @@ public class CommerceOrderItemNestedCollectionResource
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
+
+	@Reference
+	private UserHelper _userHelper;
 
 }

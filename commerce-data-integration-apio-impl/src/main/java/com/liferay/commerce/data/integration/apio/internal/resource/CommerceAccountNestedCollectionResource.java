@@ -26,11 +26,12 @@ import com.liferay.commerce.data.integration.apio.identifier.CommerceAccountIden
 import com.liferay.commerce.data.integration.apio.internal.exceptions.ConflictException;
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceAccountUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.user.CurrentUser;
 import com.liferay.commerce.organization.constants.CommerceOrganizationConstants;
 import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.apio.permission.HasPermission;
-import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.OrganizationParentException;
 import com.liferay.portal.kernel.exception.OrganizationTypeException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -43,7 +44,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.service.GroupService;
 import com.liferay.portal.kernel.service.UserService;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceAccountNestedCollectionResource
 	implements NestedCollectionResource
 		<Organization, ClassPKExternalReferenceCode, CommerceAccountIdentifier,
-		 Long, WebSiteIdentifier> {
+		 Long, CommerceWebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes
@@ -76,7 +76,7 @@ public class CommerceAccountNestedCollectionResource
 			this::_getPageItems, CurrentUser.class
 		).addCreator(
 			this::_upsertAccount, CurrentUser.class,
-			_hasPermission.forAddingIn(WebSiteIdentifier.class),
+			_hasPermission.forAddingIn(CommerceWebSiteIdentifier.class),
 			CommerceAccountUpserterForm::buildForm
 		).build();
 	}
@@ -112,7 +112,7 @@ public class CommerceAccountNestedCollectionResource
 		).identifier(
 			_commerceAccountHelper::organizationToClassPKExternalReferenceCode
 		).addBidirectionalModel(
-			"webSite", "commerceAccounts", WebSiteIdentifier.class,
+			"webSite", "commerceAccounts", CommerceWebSiteIdentifier.class,
 			this::_getSiteId
 		).addNumberList(
 			"members", this::_getUserIds

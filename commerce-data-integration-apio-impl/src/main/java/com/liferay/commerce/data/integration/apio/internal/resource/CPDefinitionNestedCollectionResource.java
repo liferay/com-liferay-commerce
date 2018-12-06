@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
-import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
+import static com.liferay.commerce.data.integration.headless.compat.apio.idempotent.Idempotent.idempotent;
 
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -26,17 +26,18 @@ import com.liferay.commerce.data.integration.apio.identifier.CPDefinitionIdentif
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.internal.form.CPDefinitionUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CPDefinitionHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceUserIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.user.CurrentUser;
+import com.liferay.commerce.data.integration.headless.compat.apio.util.UserHelper;
 import com.liferay.commerce.product.exception.CPDefinitionProductTypeNameException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
-import com.liferay.person.apio.architect.identifier.PersonIdentifier;
-import com.liferay.portal.apio.permission.HasPermission;
-import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,7 +58,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CPDefinitionNestedCollectionResource
 	implements NestedCollectionResource
 		<CPDefinition, ClassPKExternalReferenceCode, CPDefinitionIdentifier,
-		 Long, WebSiteIdentifier> {
+		 Long, CommerceWebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes
@@ -70,7 +71,7 @@ public class CPDefinitionNestedCollectionResource
 			this::_getPageItems
 		).addCreator(
 			this::_upsertCPDefinition, CurrentUser.class,
-			_hasPermission.forAddingIn(WebSiteIdentifier.class),
+			_hasPermission.forAddingIn(CommerceWebSiteIdentifier.class),
 			CPDefinitionUpserterForm::buildForm
 		).build();
 	}
@@ -106,14 +107,16 @@ public class CPDefinitionNestedCollectionResource
 		).identifier(
 			_cpDefinitionHelper::cpDefinitionToClassPKExternalReferenceCode
 		).addBidirectionalModel(
-			"webSite", "commerceProductDefinitions", WebSiteIdentifier.class,
-			CPDefinition::getGroupId
+			"webSite", "commerceProductDefinitions",
+			CommerceWebSiteIdentifier.class, CPDefinition::getGroupId
 		).addDate(
 			"dateCreated", CPDefinition::getCreateDate
 		).addDate(
 			"dateModified", CPDefinition::getModifiedDate
 		).addLinkedModel(
-			"author", PersonIdentifier.class, CPDefinition::getUserId
+			"author", CommerceUserIdentifier.class,
+			cpDefinition -> _userHelper.userIdToClassPKExternalReferenceCode(
+				cpDefinition.getUserId())
 		).addString(
 			"description", CPDefinition::getDescription
 		).addString(
@@ -202,5 +205,8 @@ public class CPDefinitionNestedCollectionResource
 		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
 	)
 	private HasPermission<ClassPKExternalReferenceCode> _hasPermission;
+
+	@Reference
+	private UserHelper _userHelper;
 
 }
