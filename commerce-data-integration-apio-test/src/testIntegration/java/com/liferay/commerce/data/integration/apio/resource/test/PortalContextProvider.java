@@ -66,7 +66,7 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public abstract class PortalContextProvider {
 
-	public static final String WEBSITE = "WebSite";
+	public static final String COMMERCE_WEB_SITE = "CommerceWebSite";
 
 	@ClassRule
 	@Rule
@@ -186,7 +186,7 @@ public abstract class PortalContextProvider {
 
 			try {
 				webSitesEndpointURL = getRootResourceEndpointURL(
-					getApioEntryPoint(), WEBSITE);
+					getApioEntryPoint(), COMMERCE_WEB_SITE);
 			}
 			catch (NoSuchElementException nsee) {
 				return webSiteURLWithNameMap;

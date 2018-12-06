@@ -73,7 +73,7 @@ public class BasicEndToEndTest extends PortalContextProvider {
 		Map<String, String> rootEndpointMap =
 			apioEntryPoint.getRootEndpointMap();
 
-		String[] expectedResources = {"Person", WEBSITE};
+		String[] expectedResources = {"CommerceUser", COMMERCE_WEB_SITE};
 
 		Assert.assertThat(
 			rootEndpointMap.values(), hasItems(expectedResources));
