@@ -1,6 +1,6 @@
 import template from './Summary.soy';
 import Component from 'metal-component';
-import Soy, { Config } from 'metal-soy';
+import Soy, {Config} from 'metal-soy';
 
 import './CartProduct.es';
 import './Loader.es';
