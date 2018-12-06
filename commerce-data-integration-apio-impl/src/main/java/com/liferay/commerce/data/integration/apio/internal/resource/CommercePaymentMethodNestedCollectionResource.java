@@ -21,11 +21,12 @@ import com.liferay.apio.architect.resource.NestedCollectionResource;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
 import com.liferay.commerce.data.integration.apio.identifier.CommercePaymentMethodIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceUserIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.util.UserHelper;
 import com.liferay.commerce.model.CommercePaymentMethod;
 import com.liferay.commerce.service.CommercePaymentMethodService;
-import com.liferay.person.apio.architect.identifier.PersonIdentifier;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommercePaymentMethodNestedCollectionResource
 	implements NestedCollectionResource
 		<CommercePaymentMethod, Long, CommercePaymentMethodIdentifier, Long,
-		 WebSiteIdentifier> {
+		 CommerceWebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes<CommercePaymentMethod, Long, Long>
@@ -76,8 +77,8 @@ public class CommercePaymentMethodNestedCollectionResource
 		).identifier(
 			CommercePaymentMethod::getCommercePaymentMethodId
 		).addBidirectionalModel(
-			"webSite", "commercePaymentMethods", WebSiteIdentifier.class,
-			CommercePaymentMethod::getGroupId
+			"webSite", "commercePaymentMethods",
+			CommerceWebSiteIdentifier.class, CommercePaymentMethod::getGroupId
 		).addBoolean(
 			"active", CommercePaymentMethod::getActive
 		).addDate(
@@ -89,7 +90,10 @@ public class CommercePaymentMethodNestedCollectionResource
 		).addLocalizedStringByLocale(
 			"name", CommercePaymentMethod::getName
 		).addLinkedModel(
-			"author", PersonIdentifier.class, CommercePaymentMethod::getUserId
+			"author", CommerceUserIdentifier.class,
+			commercePaymentMethod ->
+				_userHelper.userIdToClassPKExternalReferenceCode(
+					commercePaymentMethod.getUserId())
 		).addString(
 			"engineKey", CommercePaymentMethod::getEngineKey
 		).build();
@@ -120,5 +124,8 @@ public class CommercePaymentMethodNestedCollectionResource
 
 	@Reference
 	private CommercePaymentMethodService _commercePaymentMethodService;
+
+	@Reference
+	private UserHelper _userHelper;
 
 }

@@ -20,10 +20,10 @@ import com.liferay.apio.architect.router.NestedCollectionRouter;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.identifier.CommercePriceEntryIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ import org.osgi.service.component.annotations.Reference;
 public class WebSitePriceEntryNestedCollectionRouter
 	implements NestedCollectionRouter
 		<CommercePriceEntry, ClassPKExternalReferenceCode,
-		 CommercePriceEntryIdentifier, Long, WebSiteIdentifier> {
+		 CommercePriceEntryIdentifier, Long, CommerceWebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes

@@ -20,7 +20,8 @@ import com.liferay.apio.architect.function.throwable.ThrowableTriFunction;
 import com.liferay.apio.architect.identifier.Identifier;
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
-import com.liferay.portal.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
@@ -32,7 +33,6 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.CompanyService;
 import com.liferay.portal.kernel.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -53,7 +53,7 @@ public class CommerceAccountPermissionImpl
 	public <S> HasNestedAddingPermissionFunction<S> forAddingIn(
 		Class<? extends Identifier<S>> identifierClass) {
 
-		if (identifierClass.equals(WebSiteIdentifier.class)) {
+		if (identifierClass.equals(CommerceWebSiteIdentifier.class)) {
 			return (credentials, groupId) -> {
 				long parentOrganizationId =
 					_commerceAccountHelper.getParentOrganizationId(
