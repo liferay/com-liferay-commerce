@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.cart.rest.internal.provider;
 
-import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCart;
-import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCartProduct;
-import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCartProductPrice;
-import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCartProductSettings;
-import com.liferay.commerce.cart.rest.internal.domain.model.CommerceCartSummary;
+import com.liferay.commerce.cart.rest.internal.domain.model.Cart;
+import com.liferay.commerce.cart.rest.internal.domain.model.Prices;
+import com.liferay.commerce.cart.rest.internal.domain.model.Product;
+import com.liferay.commerce.cart.rest.internal.domain.model.Settings;
+import com.liferay.commerce.cart.rest.internal.domain.model.Summary;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -33,17 +33,12 @@ import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
-import com.liferay.commerce.product.model.CPAttachmentFileEntry;
-import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -65,7 +60,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = CommerceCartDataProvider.class)
 public class CommerceCartDataProvider {
 
-	public CommerceCart getCommerceCart(
+	public Cart getCart(
 			long commerceOrderId, ThemeDisplay themeDisplay,
 			CommerceContext commerceContext)
 		throws Exception {
@@ -73,14 +68,38 @@ public class CommerceCartDataProvider {
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
 
-		return new CommerceCart(
-			getCommerceCartProducts(
-				commerceOrder, themeDisplay, commerceContext),
-			getCommerceCartSummary(
+		return new Cart(
+			getProducts(commerceOrder, themeDisplay, commerceContext),
+			getSummary(
 				commerceOrder, themeDisplay.getLocale(), commerceContext));
 	}
 
-	protected CommerceCartProductPrice getCommerceCartProductPrice(
+	protected String[] getErrorMessages(CommerceOrderItem commerceOrderItem)
+		throws PortalException {
+
+		String[] errorMessages = new String[0];
+
+		List<CommerceOrderValidator> commerceOrderValidators =
+			_commerceOrderValidatorRegistry.getCommerceOrderValidators();
+
+		for (CommerceOrderValidator commerceOrderValidator :
+				commerceOrderValidators) {
+
+			CommerceOrderValidatorResult commerceOrderValidatorResult =
+				commerceOrderValidator.validate(commerceOrderItem);
+
+			if (!commerceOrderValidatorResult.isValid() &&
+				commerceOrderValidatorResult.hasMessageResult()) {
+
+				errorMessages = ArrayUtil.append(
+					errorMessages, commerceOrderValidatorResult.getMessage());
+			}
+		}
+
+		return errorMessages;
+	}
+
+	protected Prices getPrice(
 			CommerceOrderItem commerceOrderItem, Locale locale,
 			CommerceContext commerceContext)
 		throws PortalException {
@@ -92,8 +111,7 @@ public class CommerceCartDataProvider {
 
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 
-		CommerceCartProductPrice commerceCartProductPrice =
-			new CommerceCartProductPrice(unitPrice.format(locale));
+		Prices prices = new Prices(unitPrice.format(locale));
 
 		CommerceMoney unitPromoPrice = commerceProductPrice.getUnitPromoPrice();
 
@@ -102,7 +120,7 @@ public class CommerceCartDataProvider {
 		if ((BigDecimal.ZERO.compareTo(price) >= 0) &&
 			(price.compareTo(unitPrice.getPrice()) >= 0)) {
 
-			commerceCartProductPrice.setDiscount(unitPromoPrice.format(locale));
+			prices.setDiscount(unitPromoPrice.format(locale));
 		}
 
 		CommerceDiscountValue discountValue =
@@ -111,51 +129,45 @@ public class CommerceCartDataProvider {
 		if (discountValue != null) {
 			CommerceMoney discountAmount = discountValue.getDiscountAmount();
 
-			commerceCartProductPrice.setDiscount(discountAmount.format(locale));
+			prices.setDiscount(discountAmount.format(locale));
 		}
 
-		return commerceCartProductPrice;
+		return prices;
 	}
 
-	protected List<CommerceCartProduct> getCommerceCartProducts(
+	protected List<Product> getProducts(
 			CommerceOrder commerceOrder, ThemeDisplay themeDisplay,
 			CommerceContext commerceContext)
 		throws Exception {
 
-		List<CommerceCartProduct> commerceCartProducts = new ArrayList<>();
+		List<Product> products = new ArrayList<>();
 
 		List<CommerceOrderItem> commerceOrderItems =
 			commerceOrder.getCommerceOrderItems();
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			CommerceCartProductPrice commerceCartProductPrice =
-				getCommerceCartProductPrice(
-					commerceOrderItem, themeDisplay.getLocale(),
-					commerceContext);
+			Prices prices = getPrice(
+				commerceOrderItem, themeDisplay.getLocale(), commerceContext);
 
-			CommerceCartProductSettings commerceCartProductSettings =
-				getCommerceCartProductSettings(commerceOrderItem);
+			Settings settings = getSettings(commerceOrderItem);
 
-			commerceCartProducts.add(
-				new CommerceCartProduct(
+			products.add(
+				new Product(
 					commerceOrderItem.getCommerceOrderItemId(),
 					commerceOrderItem.getName(themeDisplay.getLocale()),
 					commerceOrderItem.getSku(), commerceOrderItem.getQuantity(),
-					getCommerceOrderItemThumbnailSrc(
-						commerceOrderItem, themeDisplay),
-					commerceCartProductPrice, commerceCartProductSettings,
-					getErrorMessages(commerceOrderItem)));
+					_cpInstanceHelper.getCPInstanceThumbnailSrc(
+						commerceOrderItem.getCPInstanceId(), themeDisplay),
+					prices, settings, getErrorMessages(commerceOrderItem)));
 		}
 
-		return commerceCartProducts;
+		return products;
 	}
 
-	protected CommerceCartProductSettings getCommerceCartProductSettings(
-			CommerceOrderItem commerceOrderItem)
+	protected Settings getSettings(CommerceOrderItem commerceOrderItem)
 		throws PortalException {
 
-		CommerceCartProductSettings commerceCartProductSettings =
-			new CommerceCartProductSettings();
+		Settings settings = new Settings();
 
 		CPDefinitionInventory cpDefinitionInventory =
 			_cpDefinitionInventoryLocalService.
@@ -186,19 +198,18 @@ public class CommerceCartDataProvider {
 
 				Arrays.sort(allowedQuantities);
 
-				commerceCartProductSettings.setAllowedQuantities(
-					allowedQuantities);
+				settings.setAllowedQuantities(allowedQuantities);
 			}
 		}
 
-		commerceCartProductSettings.setMaxQuantity(maxQuantity);
-		commerceCartProductSettings.setMinQuantity(minQuantity);
-		commerceCartProductSettings.setMultipleQuantity(multipleQuantity);
+		settings.setMaxQuantity(maxQuantity);
+		settings.setMinQuantity(minQuantity);
+		settings.setMultipleQuantity(multipleQuantity);
 
-		return commerceCartProductSettings;
+		return settings;
 	}
 
-	protected CommerceCartSummary getCommerceCartSummary(
+	protected Summary getSummary(
 			CommerceOrder commerceOrder, Locale locale,
 			CommerceContext commerceContext)
 		throws PortalException {
@@ -214,7 +225,7 @@ public class CommerceCartDataProvider {
 			_commerceOrderItemService.getCommerceOrderItemsQuantity(
 				commerceOrder.getCommerceOrderId());
 
-		CommerceCartSummary commerceCartSummary = new CommerceCartSummary(
+		Summary summary = new Summary(
 			subtotal.format(locale), total.format(locale), itemsQuantity);
 
 		CommerceDiscountValue totalDiscountValue =
@@ -224,63 +235,10 @@ public class CommerceCartDataProvider {
 			CommerceMoney discountAmount =
 				totalDiscountValue.getDiscountAmount();
 
-			commerceCartSummary.setDiscount(discountAmount.format(locale));
+			summary.setDiscount(discountAmount.format(locale));
 		}
 
-		return commerceCartSummary;
-	}
-
-	protected String getCommerceOrderItemThumbnailSrc(
-			CommerceOrderItem commerceOrderItem, ThemeDisplay themeDisplay)
-		throws Exception {
-
-		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
-			_cpInstanceHelper.getCPAttachmentFileEntries(
-				commerceOrderItem.getCPDefinitionId(),
-				commerceOrderItem.getJson(),
-				CPAttachmentFileEntryConstants.TYPE_IMAGE);
-
-		if (cpAttachmentFileEntries.isEmpty()) {
-			CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
-
-			return cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
-		}
-
-		CPAttachmentFileEntry cpAttachmentFileEntry =
-			cpAttachmentFileEntries.get(0);
-
-		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
-
-		if (fileEntry == null) {
-			return null;
-		}
-
-		return DLUtil.getThumbnailSrc(fileEntry, themeDisplay);
-	}
-
-	protected String[] getErrorMessages(CommerceOrderItem commerceOrderItem)
-		throws PortalException {
-
-		String[] errorMessages = new String[0];
-
-		List<CommerceOrderValidator> commerceOrderValidators =
-			_commerceOrderValidatorRegistry.getCommerceOrderValidators();
-
-		for (CommerceOrderValidator commerceOrderValidator :
-				commerceOrderValidators) {
-
-			CommerceOrderValidatorResult commerceOrderValidatorResult =
-				commerceOrderValidator.validate(commerceOrderItem);
-
-			if (!commerceOrderValidatorResult.isValid() &&
-				commerceOrderValidatorResult.hasMessageResult()) {
-
-				errorMessages = ArrayUtil.append(
-					errorMessages, commerceOrderValidatorResult.getMessage());
-			}
-		}
-
-		return errorMessages;
+		return summary;
 	}
 
 	@Reference
