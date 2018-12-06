@@ -25,6 +25,8 @@ import com.liferay.commerce.price.list.web.internal.util.CommercePriceListPortle
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelectorCriterion;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -60,12 +62,14 @@ public class CommercePriceEntryDisplayContext
 	public CommercePriceEntryDisplayContext(
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommercePriceEntryService commercePriceEntryService,
-		ItemSelector itemSelector, HttpServletRequest httpServletRequest,
+		CPInstanceService cpInstanceService, ItemSelector itemSelector,
+		HttpServletRequest httpServletRequest,
 		PortletResourcePermission portletResourcePermission) {
 
 		super(commercePriceListActionHelper, httpServletRequest);
 
 		_commercePriceEntryService = commercePriceEntryService;
+		_cpInstanceService = cpInstanceService;
 		_itemSelector = itemSelector;
 		_portletResourcePermission = portletResourcePermission;
 	}
@@ -227,7 +231,11 @@ public class CommercePriceEntryDisplayContext
 			getCommercePriceEntries();
 
 		for (CommercePriceEntry commercePriceEntry : commercePriceEntries) {
-			cpInstanceIdsList.add(commercePriceEntry.getCPInstanceId());
+			CPInstance cpInstance = _cpInstanceService.fetchCProductInstance(
+				commercePriceEntry.getCProductId(),
+				commercePriceEntry.getCPInstanceUuid());
+
+			cpInstanceIdsList.add(cpInstance.getCPInstanceId());
 		}
 
 		if (!cpInstanceIdsList.isEmpty()) {
@@ -246,6 +254,7 @@ public class CommercePriceEntryDisplayContext
 
 	private CommercePriceEntry _commercePriceEntry;
 	private final CommercePriceEntryService _commercePriceEntryService;
+	private final CPInstanceService _cpInstanceService;
 	private final ItemSelector _itemSelector;
 	private final PortletResourcePermission _portletResourcePermission;
 
