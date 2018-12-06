@@ -17,9 +17,9 @@ class QuantitySelector extends Component {
 			states.quantity
 		);
 		return Object.assign(
-			{}, 
-			states, 
-			{	
+			{},
+			states,
+			{
 				isPrevAvailable,
 				isNextAvailable
 			}
