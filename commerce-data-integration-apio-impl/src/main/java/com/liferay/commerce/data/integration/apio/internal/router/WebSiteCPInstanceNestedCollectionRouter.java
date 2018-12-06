@@ -22,15 +22,15 @@ import com.liferay.commerce.data.integration.apio.identifier.CPInstanceIdentifie
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.internal.form.CPInstanceWebSiteUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CPInstanceHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.user.CurrentUser;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
-import com.liferay.portal.apio.permission.HasPermission;
-import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ import org.osgi.service.component.annotations.Reference;
 public class WebSiteCPInstanceNestedCollectionRouter
 	implements NestedCollectionRouter
 		<CPInstance, ClassPKExternalReferenceCode, CPInstanceIdentifier, Long,
-		 WebSiteIdentifier> {
+		 CommerceWebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes
@@ -58,7 +58,7 @@ public class WebSiteCPInstanceNestedCollectionRouter
 			this::_getPageItems
 		).addCreator(
 			this::_upsertCPInstance, CurrentUser.class,
-			_hasPermission.forAddingIn(WebSiteIdentifier.class),
+			_hasPermission.forAddingIn(CommerceWebSiteIdentifier.class),
 			CPInstanceWebSiteUpserterForm::buildForm
 		).build();
 	}

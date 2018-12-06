@@ -23,17 +23,17 @@ import com.liferay.commerce.data.integration.apio.identifier.CommerceAddressIden
 import com.liferay.commerce.data.integration.apio.internal.exceptions.ConflictException;
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceAddressWebSiteCreatorForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAddressHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.user.CurrentUser;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.organization.constants.CommerceOrganizationConstants;
 import com.liferay.commerce.service.CommerceAddressService;
-import com.liferay.portal.apio.permission.HasPermission;
-import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ import org.osgi.service.component.annotations.Reference;
 public class WebSiteCommerceAddressNestedCollectionRouter
 	implements NestedCollectionRouter
 		<CommerceAddress, Long, CommerceAddressIdentifier, Long,
-		 WebSiteIdentifier> {
+		 CommerceWebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes<CommerceAddress, Long, Long>
@@ -64,7 +64,7 @@ public class WebSiteCommerceAddressNestedCollectionRouter
 			this::_getPageItems
 		).addCreator(
 			_commerceAddressHelper::addCommerceAddress, CurrentUser.class,
-			_hasPermission.forAddingIn(WebSiteIdentifier.class),
+			_hasPermission.forAddingIn(CommerceWebSiteIdentifier.class),
 			CommerceAddressWebSiteCreatorForm::buildForm
 		).build();
 	}
