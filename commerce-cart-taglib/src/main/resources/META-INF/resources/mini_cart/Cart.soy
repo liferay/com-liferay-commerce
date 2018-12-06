@@ -74,12 +74,12 @@
 
 							{param id: $product.id /}
 							{param name: $product.name /}
-							{param price: $product.price /}
+							{param prices: $product.prices /}
 							{param sku: $product.sku /}
 							{param quantity: $product.quantity /}
 							{param thumbnail: $product.thumbnail /}
 							{param settings: $product.settings /}
-							{param error: $product.error /}
+							{param errorMessages: $product.errorMessages /}
 
 							{param isDeleting: $product.isDeleting /}
 							{param isCollapsed: $product.isCollapsed /}
@@ -94,9 +94,9 @@
 				{call Summary.render}
 					{param checkoutUrl: $checkoutUrl /}
 					{param subtotal: $summary.subtotal /}
-					{param grandTotal: $summary.grandTotal /}
+					{param total: $summary.total /}
 					{param discount: $summary.discount /}
-					{param totalUnits: $summary.totalUnits /}
+					{param itemsQuantity: $summary.itemsQuantity /}
 					{param productsCount: $productsCount /}
 					{param isLoading: $isLoading /}
 				{/call}

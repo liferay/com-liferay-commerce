@@ -9,10 +9,10 @@
 	{@param name: string }
 	{@param sku: string }
 	{@param quantity: int }
-	{@param? error: string }
-	{@param settings: ? }
 
-	{@param price: ? }
+	{@param errorMessages: ? }
+	{@param settings: ? }
+	{@param prices: ? }
 
 	{@param? isDeleting: bool }
 	{@param? isCollapsed: bool }
@@ -29,7 +29,7 @@
 		{if $isCollapsed}
 			{sp}is-collapsed
 		{/if}
-		{if $error}
+		{if length($errorMessages) > 0}
 			{sp}is-not-valid
 		{/if}
 	{/let}
@@ -57,7 +57,7 @@
 				{/call}
 			{else}
 				{call Price.render}
-					{param price: $price /}
+					{param prices: $prices /}
 				{/call}
 			{/if}
 		</div>
@@ -83,10 +83,12 @@
 				{msg desc="Cancel"}cancel{/msg}
 			</button>
 		</div>
-		{if isNonnull($error)}
-			<div class="minium-item__error">
-				{$error}
-			</div>
+		{if length($errorMessages) > 0}
+			{foreach $error in $errorMessages}
+				<div class="minium-item__error">
+					{$error}
+				</div>
+			{/foreach}
 		{/if}
 	</div>
 {/template}

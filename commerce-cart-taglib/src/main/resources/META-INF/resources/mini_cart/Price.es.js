@@ -5,11 +5,20 @@ import Soy, { Config } from 'metal-soy';
 class Price extends Component {}
 
 Price.STATE = {
-	formattedPrice: Config.string(),
-	formattedPromoPrice: Config.string(),
+
+	prices: Config.shapeOf(
+		{
+			price: Config.string().value('').required(),
+			promoPrice: Config.string()
+		}
+	),
+
 	additionalDiscountedClasses: Config.string().value(''),
+
 	additionalOldPriceClasses: Config.string().value(''),
+
 	additionalPriceClasses: Config.string().value('')
+
 };
 
 Soy.register(Price, template);
