@@ -112,8 +112,8 @@ public class CommerceAccountNestedCollectionResource
 		).identifier(
 			_commerceAccountHelper::organizationToClassPKExternalReferenceCode
 		).addBidirectionalModel(
-			"webSite", "commerceAccounts", CommerceWebSiteIdentifier.class,
-			this::_getSiteId
+			"commerceWebSite", "commerceAccounts",
+			CommerceWebSiteIdentifier.class, this::_getSiteId
 		).addNumberList(
 			"members", this::_getUserIds
 		).addString(

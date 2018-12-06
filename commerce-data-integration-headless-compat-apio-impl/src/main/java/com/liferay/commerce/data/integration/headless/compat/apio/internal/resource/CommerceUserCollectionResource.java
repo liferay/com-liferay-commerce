@@ -111,7 +111,7 @@ public class CommerceUserCollectionResource
 			builder) {
 
 		return builder.types(
-			"Person"
+			"CommerceUser"
 		).identifier(
 			_userHelper::userToClassPKExternalReferenceCode
 		).addDate(

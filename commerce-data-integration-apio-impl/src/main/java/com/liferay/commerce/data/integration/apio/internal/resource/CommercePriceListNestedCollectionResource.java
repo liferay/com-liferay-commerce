@@ -117,8 +117,8 @@ public class CommercePriceListNestedCollectionResource
 			_commercePriceListHelper::
 				commercePriceListToClassPKExternalReferenceCode
 		).addBidirectionalModel(
-			"webSite", "commercePriceLists", CommerceWebSiteIdentifier.class,
-			CommercePriceList::getGroupId
+			"commerceWebSite", "commercePriceLists",
+			CommerceWebSiteIdentifier.class, CommercePriceList::getGroupId
 		).addDate(
 			"dateCreated", CommercePriceList::getCreateDate
 		).addDate(

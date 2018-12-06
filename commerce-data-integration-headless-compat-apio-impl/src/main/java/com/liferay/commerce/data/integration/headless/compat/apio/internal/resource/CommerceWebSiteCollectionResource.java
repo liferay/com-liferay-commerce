@@ -75,7 +75,7 @@ public class CommerceWebSiteCollectionResource
 		Representor.Builder<Group, Long> builder) {
 
 		return builder.types(
-			"WebSite"
+			"CommerceWebSite"
 		).identifier(
 			Group::getGroupId
 		).addLocalizedStringByLanguage(
