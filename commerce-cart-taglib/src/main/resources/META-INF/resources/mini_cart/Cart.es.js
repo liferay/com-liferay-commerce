@@ -17,14 +17,15 @@ class Cart extends Component {
 
 	attached() {
 		window.Liferay.on(
-			'addProductsToCart', 
+			'updateCart', 
 			(evt) => {
-				const newProducts = evt.details[0];
-				this.products = [
-					...this.products,
-					...newProducts
-				];
-				return this.productsCount = this.productsCount + newProducts.length;
+				const updateCartData = evt.details[0];
+				this.products = updateCartData.commerceCartProducts;
+				this.summary = updateCartData.commerceCartSummary;
+				this.isLoading = false;
+				this.pendingOperations = [];
+				this.productsCount = this.products.length;
+				return true;
 			}
 		);
 		return this.cartId && this.getProducts();
@@ -46,7 +47,7 @@ class Cart extends Component {
 						sendDeleteRequest: debounce(
 							() => this.sendDeleteRequest(productData.id),
 							500
-						)
+						),
 					},
 					productStateSchema,
 					productData
@@ -59,7 +60,8 @@ class Cart extends Component {
 	updateProductQuantity(productId, quantity) {
 		this.addPendingOperation(productId);
 		this.setProductProperties(
-			productId, {
+			productId,
+			{
 				isDeleteDisabled: true,
 				quantity: quantity,
 				isUpdating: true
@@ -79,6 +81,15 @@ class Cart extends Component {
 	}
 
 	deleteProduct(productId) {
+		this.setProductProperties(
+			productId,
+			{
+				isDeleteDisabled: true,
+				inputChanged: false,
+				isUpdating: false,
+				isCollapsed: true
+			}
+		);
 		return this.productsCount = this.productsCount - 1;
 	}
 
@@ -117,7 +128,7 @@ class Cart extends Component {
 			}, 
 			orArray
 		);
-		return result;
+		return !subArray.length && result;
 	}
 
 	handleDeleteItem(productId) {
@@ -190,8 +201,8 @@ class Cart extends Component {
 		)
 		.then(response => response.json())
 		.then(
-			updatedCartState => {
-				const updatedPrice = updatedCartState.products.reduce(
+			updatedCart => {
+				const updatedPrice = updatedCart.commerceCartProducts.reduce(
 					(acc, el) => (el.id === productId ? el.price : acc),
 					null
 				);
@@ -201,7 +212,7 @@ class Cart extends Component {
 					isUpdating: false,
 					price: updatedPrice
 				});
-				return this.summary = updatedCartState.summary;
+				return this.summary = updatedCart.commerceCartSummary;
 			}
 		)
 		.catch(
@@ -226,8 +237,8 @@ class Cart extends Component {
 		.then(response => response.json())
 		.then(
 			updatedCart => {
-				this.products = updatedCart.products;
-				this.summary = updatedCart.summary;
+				this.products = updatedCart.commerceCartProducts;
+				this.summary = updatedCart.commerceCartSummary;
 				this.productsCount = this.products.length;
 				return !!(this.products && this.summary)
 			}
@@ -250,7 +261,7 @@ class Cart extends Component {
 		)
 		.then(response => response.json())
 		.then(
-			updatedCartState => {
+			updatedCart => {
 				this.removePendingOperation(productId);
 				this.setProductProperties(
 					productId, 
@@ -259,11 +270,12 @@ class Cart extends Component {
 					}
 				);
 
-				this.summary = updatedCartState.summary;
+				this.summary = updatedCart.commerceCartSummary;
 
-				const remainingProducts = this.subtractProducts(this.products, updatedCartState.products);
-
-				return this.deleteProduct(productId);
+				const productsToBeRemoved = this.subtractProducts(this.products, updatedCart.commerceCartProducts);
+				productsToBeRemoved.forEach(element => {
+					this.deleteProduct(element.id)
+				});
 			}
 		)
 		.catch(
@@ -286,29 +298,47 @@ const productStateSchema = {
 };
 
 Cart.STATE = {
+
 	spritemap: Config.string().required(),
+
 	cartAPI: Config.string().required(),
+
 	isOpen: Config.bool().value(true),
+
 	isDisable: Config.bool().value(false),
-	cartId: Config.oneOfType([
-		Config.number(),
-		Config.string(),
-	]).required(),
+
+	cartId: Config.oneOfType(
+		[
+			Config.number(),
+			Config.string(),
+		]
+	).required(),
+
 	products: {
 		setter: 'normalizeProducts',
 		value: null
 	},
+
 	productsCount: Config.number().value(0),
-	summary: Config.shapeOf({
-		checkoutUrl: Config.string().value(''),
-		subtotal: Config.string().value(''),
-		grandTotal: Config.string().value(''),
-		discount: Config.string().value(''),
-		totalUnits: Config.number().value(0)
-	}),
+
+	summary: Config.shapeOf(
+		{
+			checkoutUrl: Config.string().value(''),
+			subtotal: Config.string().value(''),
+			total: Config.string().value(''),
+			discount: Config.string().value(''),
+			itemsQuantity: Config.number().value(0)
+		}
+	),
+
 	isLoading: Config.bool().value(false),
-	pendingOperations: Config.array().value([]),
+
+	pendingOperations: Config.array().value(
+		[]
+	),
+
 	detailsUrl: Config.string().required(),
+
 	checkoutUrl: Config.string().required()
 };
 

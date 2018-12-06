@@ -8,14 +8,23 @@ import './Loader.es';
 class Summary extends Component {}
 
 Summary.STATE = {
+
 	isLoading: Config.bool().value(false),
+
 	checkoutUrl: Config.string(),
+
 	subtotal: Config.string(),
-	grandTotal: Config.string(),
+
+	total: Config.string(),
+
 	discount: Config.string(),
+
 	taxes: Config.string(),
-	totalUnits: Config.number(),
+
+	itemsQuantity: Config.number(),
+
 	productsCount: Config.number()
+
 };
 
 Soy.register(Summary, template);
