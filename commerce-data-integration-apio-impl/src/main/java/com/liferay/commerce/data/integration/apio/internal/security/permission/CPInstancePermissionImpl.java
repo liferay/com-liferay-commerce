@@ -22,18 +22,18 @@ import com.liferay.commerce.data.integration.apio.identifier.CPDefinitionIdentif
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.internal.util.CPDefinitionHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CPInstanceHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
 import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -77,7 +77,7 @@ public class CPInstancePermissionImpl
 					cpDefinition.getCPDefinitionId(), ActionKeys.UPDATE);
 			};
 		}
-		else if (identifierClass.equals(WebSiteIdentifier.class)) {
+		else if (identifierClass.equals(CommerceWebSiteIdentifier.class)) {
 			return (credentials, groupId) ->
 				_portletResourcePermission.contains(
 					(PermissionChecker)credentials.get(), (Long)groupId,

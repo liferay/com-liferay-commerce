@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
-import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
+import static com.liferay.commerce.data.integration.headless.compat.apio.idempotent.Idempotent.idempotent;
 
 import com.liferay.apio.architect.functional.Try;
 import com.liferay.apio.architect.pagination.PageItems;
@@ -32,16 +32,16 @@ import com.liferay.commerce.data.integration.apio.internal.form.CommerceAddressU
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceAddressWebSiteCreatorForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAddressHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.user.CurrentUser;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.service.CommerceAddressService;
-import com.liferay.portal.apio.permission.HasPermission;
-import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.service.GroupLocalService;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
 
@@ -106,7 +106,7 @@ public class CommerceAddressNestedCollectionResource
 			"commerceAccount", "commerceAddresses",
 			CommerceAccountIdentifier.class, this::_getCommerceAccountCPKERC
 		).addBidirectionalModel(
-			"webSite", "commerceAddresses", WebSiteIdentifier.class,
+			"webSite", "commerceAddresses", CommerceWebSiteIdentifier.class,
 			CommerceAddress::getGroupId
 		).addBoolean(
 			"defaultBilling", CommerceAddress::getDefaultBilling

@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
-import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
+import static com.liferay.commerce.data.integration.headless.compat.apio.idempotent.Idempotent.idempotent;
 
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -28,13 +28,14 @@ import com.liferay.commerce.data.integration.apio.identifier.CommerceOrderNoteId
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceOrderNoteUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceOrderHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceOrderNoteHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceUserIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.util.UserHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.service.CommerceOrderNoteService;
-import com.liferay.person.apio.architect.identifier.PersonIdentifier;
-import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
 
@@ -106,7 +107,7 @@ public class CommerceOrderNoteNestedCollectionResource
 				commerceOrderIdToClassPKExternalReferenceCode(
 					commerceOrderNote.getCommerceOrderId())
 		).addBidirectionalModel(
-			"webSite", "commerceOrderNotes", WebSiteIdentifier.class,
+			"webSite", "commerceOrderNotes", CommerceWebSiteIdentifier.class,
 			CommerceOrderNote::getGroupId
 		).addNumber(
 			"id", CommerceOrderNote::getCommerceOrderNoteId
@@ -121,7 +122,10 @@ public class CommerceOrderNoteNestedCollectionResource
 		).addDate(
 			"dateModified", CommerceOrderNote::getModifiedDate
 		).addLinkedModel(
-			"author", PersonIdentifier.class, CommerceOrderNote::getUserId
+			"author", CommerceUserIdentifier.class,
+			commerceOrderNote ->
+				_userHelper.userIdToClassPKExternalReferenceCode(
+					commerceOrderNote.getUserId())
 		).build();
 	}
 
@@ -177,5 +181,8 @@ public class CommerceOrderNoteNestedCollectionResource
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrderNote)"
 	)
 	private HasPermission<ClassPKExternalReferenceCode> _hasPermission;
+
+	@Reference
+	private UserHelper _userHelper;
 
 }

@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
-import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
+import static com.liferay.commerce.data.integration.headless.compat.apio.idempotent.Idempotent.idempotent;
 
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -30,17 +30,17 @@ import com.liferay.commerce.data.integration.apio.internal.form.CommercePriceEnt
 import com.liferay.commerce.data.integration.apio.internal.form.CommercePriceEntryUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommercePriceEntryHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommercePriceListHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
 import com.liferay.commerce.price.list.exception.DuplicateCommercePriceEntryException;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
 import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
-import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
 
@@ -122,7 +122,7 @@ public class CommercePriceEntryNestedCollectionResource
 				commercePriceListIdToClassPKExternalReferenceCode(
 					commercePriceEntry.getCommercePriceListId())
 		).addBidirectionalModel(
-			"webSite", "commercePriceEntries", WebSiteIdentifier.class,
+			"webSite", "commercePriceEntries", CommerceWebSiteIdentifier.class,
 			CommercePriceEntry::getGroupId
 		).addBoolean(
 			"hasTierPrice", CommercePriceEntry::isHasTierPrice

@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
-import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
+import static com.liferay.commerce.data.integration.headless.compat.apio.idempotent.Idempotent.idempotent;
 
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -25,14 +25,14 @@ import com.liferay.apio.architect.routes.NestedCollectionRoutes;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceCountryIdentifier;
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceCountryUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.ServiceContextHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.user.CurrentUser;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.CommerceCountryService;
-import com.liferay.portal.apio.permission.HasPermission;
-import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceCountryNestedCollectionResource
 	implements NestedCollectionResource
 		<CommerceCountry, Long, CommerceCountryIdentifier, Long,
-		 WebSiteIdentifier> {
+		 CommerceWebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes<CommerceCountry, Long, Long> collectionRoutes(
@@ -57,7 +57,7 @@ public class CommerceCountryNestedCollectionResource
 			this::_getPageItems
 		).addCreator(
 			this::_addCommerceCountry, CurrentUser.class,
-			_hasPermission.forAddingIn(WebSiteIdentifier.class),
+			_hasPermission.forAddingIn(CommerceWebSiteIdentifier.class),
 			CommerceCountryUpserterForm::buildForm
 		).build();
 	}
@@ -91,7 +91,7 @@ public class CommerceCountryNestedCollectionResource
 		).identifier(
 			CommerceCountry::getCommerceCountryId
 		).addBidirectionalModel(
-			"webSite", "commerceCountries", WebSiteIdentifier.class,
+			"webSite", "commerceCountries", CommerceWebSiteIdentifier.class,
 			CommerceCountry::getGroupId
 		).addBoolean(
 			"billingAllowed", CommerceCountry::isBillingAllowed

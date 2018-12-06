@@ -31,14 +31,16 @@ import com.liferay.commerce.data.integration.apio.internal.form.CommerceOrderUpd
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceOrderUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceOrderHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceUserIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
+import com.liferay.commerce.data.integration.headless.compat.apio.user.CurrentUser;
+import com.liferay.commerce.data.integration.headless.compat.apio.util.UserHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.organization.constants.CommerceOrganizationConstants;
 import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.person.apio.architect.identifier.PersonIdentifier;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.apio.permission.HasPermission;
-import com.liferay.portal.apio.user.CurrentUser;
 import com.liferay.portal.kernel.exception.NoSuchOrganizationException;
 import com.liferay.portal.kernel.exception.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -48,7 +50,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceOrderNestedCollectionResource
 	implements NestedCollectionResource
 		<CommerceOrder, ClassPKExternalReferenceCode, CommerceOrderIdentifier,
-		 Long, WebSiteIdentifier> {
+		 Long, CommerceWebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes
@@ -80,7 +81,7 @@ public class CommerceOrderNestedCollectionResource
 			this::_getPageItems, CurrentUser.class
 		).addCreator(
 			this::_upsertCommerceOrder, CurrentUser.class,
-			_hasPermission.forAddingIn(WebSiteIdentifier.class),
+			_hasPermission.forAddingIn(CommerceWebSiteIdentifier.class),
 			CommerceOrderUpserterForm::buildForm
 		).build();
 	}
@@ -119,7 +120,7 @@ public class CommerceOrderNestedCollectionResource
 				organizationIdToClassPKExternalReferenceCode(
 					commerceOrder.getOrderOrganizationId())
 		).addBidirectionalModel(
-			"webSite", "commerceOrders", WebSiteIdentifier.class,
+			"webSite", "commerceOrders", CommerceWebSiteIdentifier.class,
 			CommerceOrder::getGroupId
 		).addLinkedModel(
 			"commerceAccount", CommerceAccountIdentifier.class,
@@ -148,7 +149,9 @@ public class CommerceOrderNestedCollectionResource
 		).addDate(
 			"dateModified", CommerceOrder::getModifiedDate
 		).addLinkedModel(
-			"author", PersonIdentifier.class, CommerceOrder::getUserId
+			"author", CommerceUserIdentifier.class,
+			commerceOrder -> _userHelper.userIdToClassPKExternalReferenceCode(
+				commerceOrder.getUserId())
 		).addString(
 			"authorExternalReferenceCode", this::_getUserExternalReferenceCode
 		).addLinkedModel(
@@ -361,5 +364,8 @@ public class CommerceOrderNestedCollectionResource
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
 	)
 	private HasPermission<ClassPKExternalReferenceCode> _hasPermission;
+
+	@Reference
+	private UserHelper _userHelper;
 
 }

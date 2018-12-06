@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.data.integration.apio.internal.resource;
 
-import static com.liferay.portal.apio.idempotent.Idempotent.idempotent;
+import static com.liferay.commerce.data.integration.headless.compat.apio.idempotent.Idempotent.idempotent;
 
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -26,10 +26,10 @@ import com.liferay.commerce.data.integration.apio.identifier.CPOptionIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.CPOptionValueIdentifier;
 import com.liferay.commerce.data.integration.apio.internal.form.CPOptionValueUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CPOptionValueHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.permission.HasPermission;
 import com.liferay.commerce.product.exception.CPOptionValueKeyException;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.CPOptionValueService;
-import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
