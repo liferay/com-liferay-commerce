@@ -6,8 +6,8 @@
 {template .render}
 	{@param isLoading: bool}
 	{@param subtotal: string}
-	{@param grandTotal: string}
-	{@param totalUnits: int}
+	{@param total: string}
+	{@param itemsQuantity: int}
 	{@param productsCount: int}
 	{@param? checkoutUrl: string}
 	{@param? discount: string}
@@ -22,7 +22,7 @@
 	<div class="minium-cart__footer">
 		<dl class="minium-cart__totals">
 			<dt> {msg desc="Units"}units{/msg}</dt>
-			<dd>{$totalUnits} {msg desc="Of"}of{/msg} {$productsCount} {msg desc="Items"}items{/msg}</dd>
+			<dd>{$itemsQuantity} {msg desc="Of"}of{/msg} {$productsCount} {msg desc="Items"}items{/msg}</dd>
 			<dt>{msg desc="Subtotal"}subtotal{/msg}</dt>
 			<dd>
 				{if $isLoading}
@@ -50,7 +50,7 @@
 						{param inverted: true /}
 					{/call}
 				{else}
-					<big>{$grandTotal}</big>
+					<big>{$total}</big>
 				{/if}
 			</dd>
 		</dl>
