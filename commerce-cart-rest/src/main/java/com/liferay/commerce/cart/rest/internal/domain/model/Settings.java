@@ -17,9 +17,9 @@ package com.liferay.commerce.cart.rest.internal.domain.model;
 /**
  * @author Alessio Antonio Rendina
  */
-public class CommerceCartProductSettings {
+public class Settings {
 
-	public CommerceCartProductSettings() {
+	public Settings() {
 	}
 
 	public int[] getAllowedQuantities() {

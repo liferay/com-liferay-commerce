@@ -19,36 +19,33 @@ import java.util.List;
 /**
  * @author Alessio Antonio Rendina
  */
-public class CommerceCart {
+public class Cart {
 
-	public CommerceCart(
-		List<CommerceCartProduct> commerceCartProducts,
-		CommerceCartSummary commerceCartSummary) {
-
-		_commerceCartProducts = commerceCartProducts;
-		_commerceCartSummary = commerceCartSummary;
+	public Cart(List<Product> products, Summary summary) {
+		_products = products;
+		_summary = summary;
 		_success = true;
 	}
 
-	public CommerceCart(String[] errorMessages) {
+	public Cart(String[] errorMessages) {
 		_errorMessages = errorMessages;
 		_success = false;
-	}
-
-	public List<CommerceCartProduct> getCommerceCartProducts() {
-		return _commerceCartProducts;
-	}
-
-	public CommerceCartSummary getCommerceCartSummary() {
-		return _commerceCartSummary;
 	}
 
 	public String[] getErrorMessages() {
 		return _errorMessages;
 	}
 
+	public List<Product> getProducts() {
+		return _products;
+	}
+
 	public boolean getSuccess() {
 		return _success;
+	}
+
+	public Summary getSummary() {
+		return _summary;
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
@@ -59,9 +56,9 @@ public class CommerceCart {
 		_success = success;
 	}
 
-	private List<CommerceCartProduct> _commerceCartProducts;
-	private CommerceCartSummary _commerceCartSummary;
 	private String[] _errorMessages;
+	private List<Product> _products;
 	private boolean _success;
+	private Summary _summary;
 
 }

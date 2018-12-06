@@ -17,30 +17,20 @@ package com.liferay.commerce.cart.rest.internal.domain.model;
 /**
  * @author Alessio Antonio Rendina
  */
-public class CommerceCartProduct {
+public class Product {
 
-	public CommerceCartProduct(
+	public Product(
 		long id, String name, String sku, int quantity, String thumbnail,
-		CommerceCartProductPrice commerceCartProductPrice,
-		CommerceCartProductSettings commerceCartProductSettings,
-		String[] errorMessages) {
+		Prices prices, Settings settings, String[] errorMessages) {
 
 		_id = id;
 		_name = name;
 		_sku = sku;
 		_quantity = quantity;
 		_thumbnail = thumbnail;
-		_commerceCartProductPrice = commerceCartProductPrice;
-		_commerceCartProductSettings = commerceCartProductSettings;
+		_prices = prices;
+		_settings = settings;
 		_errorMessages = errorMessages;
-	}
-
-	public CommerceCartProductPrice getCommerceCartProductPrice() {
-		return _commerceCartProductPrice;
-	}
-
-	public CommerceCartProductSettings getCommerceCartProductSettings() {
-		return _commerceCartProductSettings;
 	}
 
 	public String[] getErrorMessages() {
@@ -55,8 +45,16 @@ public class CommerceCartProduct {
 		return _name;
 	}
 
+	public Prices getPrices() {
+		return _prices;
+	}
+
 	public int getQuantity() {
 		return _quantity;
+	}
+
+	public Settings getSettings() {
+		return _settings;
 	}
 
 	public String getSku() {
@@ -65,18 +63,6 @@ public class CommerceCartProduct {
 
 	public String getThumbnail() {
 		return _thumbnail;
-	}
-
-	public void setCommerceCartProductPrice(
-		CommerceCartProductPrice commerceCartProductPrice) {
-
-		_commerceCartProductPrice = commerceCartProductPrice;
-	}
-
-	public void setCommerceCartProductSettings(
-		CommerceCartProductSettings commerceCartProductSettings) {
-
-		_commerceCartProductSettings = commerceCartProductSettings;
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
@@ -91,8 +77,16 @@ public class CommerceCartProduct {
 		_name = name;
 	}
 
+	public void setPrices(Prices prices) {
+		_prices = prices;
+	}
+
 	public void setQuantity(int quantity) {
 		_quantity = quantity;
+	}
+
+	public void setSettings(Settings settings) {
+		_settings = settings;
 	}
 
 	public void setSku(String sku) {
@@ -103,12 +97,12 @@ public class CommerceCartProduct {
 		_thumbnail = thumbnail;
 	}
 
-	private CommerceCartProductPrice _commerceCartProductPrice;
-	private CommerceCartProductSettings _commerceCartProductSettings;
 	private String[] _errorMessages;
 	private long _id;
 	private String _name;
+	private Prices _prices;
 	private int _quantity;
+	private Settings _settings;
 	private String _sku;
 	private String _thumbnail;
 
