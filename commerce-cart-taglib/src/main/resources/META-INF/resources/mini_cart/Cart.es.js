@@ -312,7 +312,7 @@ Cart.STATE = {
 			Config.number(),
 			Config.string(),
 		]
-	).required(),
+	),
 
 	products: {
 		setter: 'normalizeProducts',
