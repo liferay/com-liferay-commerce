@@ -282,10 +282,6 @@ public class CommerceWishListLocalServiceImpl
 					fromCommerceWishListItem.getCPInstanceUuid(),
 					fromCommerceWishListItem.getGroupId());
 
-			long cpDefinitionId = fromCPInstance.getCPDefinitionId();
-
-			long cpInstanceId = fromCPInstance.getCPInstanceId();
-
 			String json = fromCommerceWishListItem.getJson();
 
 			boolean found = false;
@@ -298,9 +294,9 @@ public class CommerceWishListLocalServiceImpl
 						toCommerceWishListItem.getCPInstanceUuid(),
 						toCommerceWishListItem.getGroupId());
 
-				if ((cpDefinitionId ==
+				if ((fromCPInstance.getCPDefinitionId() ==
 						toCPInstance.getCPDefinitionId()) &&
-					(cpInstanceId ==
+					(fromCPInstance.getCPInstanceId() ==
 						toCPInstance.getCPInstanceId()) &&
 					_ddmFormValuesHelper.equals(
 						json, toCommerceWishListItem.getJson())) {
@@ -311,8 +307,8 @@ public class CommerceWishListLocalServiceImpl
 
 			if (!found) {
 				commerceWishListItemLocalService.addCommerceWishListItem(
-					toCommerceWishListId, cpDefinitionId, cpInstanceId, json,
-					serviceContext);
+					toCommerceWishListId, fromCPInstance.getCPDefinitionId(),
+					fromCPInstance.getCPInstanceId(), json, serviceContext);
 			}
 		}
 
