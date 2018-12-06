@@ -1,6 +1,6 @@
 import template from './Price.soy';
 import Component from 'metal-component';
-import Soy, { Config } from 'metal-soy';
+import Soy, {Config} from 'metal-soy';
 
 class Price extends Component {}
 

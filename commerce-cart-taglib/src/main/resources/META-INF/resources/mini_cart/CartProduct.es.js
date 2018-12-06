@@ -2,7 +2,7 @@
 
 import template from './CartProduct.soy';
 import Component from 'metal-component';
-import Soy, { Config } from 'metal-soy';
+import Soy, {Config} from 'metal-soy';
 
 import './Loader.es';
 import './Price.es';
