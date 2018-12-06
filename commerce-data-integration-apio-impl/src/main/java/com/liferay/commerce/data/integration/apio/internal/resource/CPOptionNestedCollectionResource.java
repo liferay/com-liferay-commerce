@@ -91,7 +91,7 @@ public class CPOptionNestedCollectionResource
 		).identifier(
 			CPOption::getCPOptionId
 		).addBidirectionalModel(
-			"webSite", "commerceProductOptions",
+			"commerceWebSite", "commerceProductOptions",
 			CommerceWebSiteIdentifier.class, CPOption::getGroupId
 		).addLocalizedStringByLocale(
 			"name", CPOption::getName

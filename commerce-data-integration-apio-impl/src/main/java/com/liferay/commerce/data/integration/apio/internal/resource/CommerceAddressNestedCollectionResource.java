@@ -106,8 +106,8 @@ public class CommerceAddressNestedCollectionResource
 			"commerceAccount", "commerceAddresses",
 			CommerceAccountIdentifier.class, this::_getCommerceAccountCPKERC
 		).addBidirectionalModel(
-			"webSite", "commerceAddresses", CommerceWebSiteIdentifier.class,
-			CommerceAddress::getGroupId
+			"commerceWebSite", "commerceAddresses",
+			CommerceWebSiteIdentifier.class, CommerceAddress::getGroupId
 		).addBoolean(
 			"defaultBilling", CommerceAddress::getDefaultBilling
 		).addBoolean(

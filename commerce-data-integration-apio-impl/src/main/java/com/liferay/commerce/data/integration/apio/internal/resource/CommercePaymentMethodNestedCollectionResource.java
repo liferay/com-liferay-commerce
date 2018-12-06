@@ -77,7 +77,7 @@ public class CommercePaymentMethodNestedCollectionResource
 		).identifier(
 			CommercePaymentMethod::getCommercePaymentMethodId
 		).addBidirectionalModel(
-			"webSite", "commercePaymentMethods",
+			"commerceWebSite", "commercePaymentMethods",
 			CommerceWebSiteIdentifier.class, CommercePaymentMethod::getGroupId
 		).addBoolean(
 			"active", CommercePaymentMethod::getActive

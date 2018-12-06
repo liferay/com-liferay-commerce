@@ -107,7 +107,7 @@ public class CPDefinitionNestedCollectionResource
 		).identifier(
 			_cpDefinitionHelper::cpDefinitionToClassPKExternalReferenceCode
 		).addBidirectionalModel(
-			"webSite", "commerceProductDefinitions",
+			"commerceWebSite", "commerceProductDefinitions",
 			CommerceWebSiteIdentifier.class, CPDefinition::getGroupId
 		).addDate(
 			"dateCreated", CPDefinition::getCreateDate
