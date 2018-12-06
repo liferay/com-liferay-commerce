@@ -18,6 +18,7 @@ import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.internal.catalog.CPSkuImpl;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
+import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
@@ -31,6 +32,7 @@ import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
+import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.dynamic.data.mapping.form.renderer.DDMFormRenderer;
 import com.liferay.dynamic.data.mapping.form.renderer.DDMFormRenderingContext;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
@@ -40,10 +42,12 @@ import com.liferay.dynamic.data.mapping.model.DDMFormRule;
 import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
@@ -53,6 +57,7 @@ import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -81,6 +86,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = CPInstanceHelper.class)
 public class CPInstanceHelperImpl implements CPInstanceHelper {
@@ -88,6 +94,17 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	@Override
 	public List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
 			long cpDefinitionId, String serializedDDMFormValues, int type)
+		throws Exception {
+
+		return getCPAttachmentFileEntries(
+			cpDefinitionId, serializedDDMFormValues, type, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
+	}
+
+	@Override
+	public List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
+			long cpDefinitionId, String serializedDDMFormValues, int type,
+			int start, int end)
 		throws Exception {
 
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries = new ArrayList<>();
@@ -146,6 +163,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		searchContext.setCompanyId(cpDefinition.getCompanyId());
 		searchContext.setGroupIds(new long[] {cpDefinition.getGroupId()});
+		searchContext.setStart(start);
+		searchContext.setEnd(end);
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
@@ -400,6 +419,41 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		return _getDDMForm(
 			cpDefinitionId, locale, ignoreSKUCombinations, skuContributor,
 			false, false);
+	}
+
+	@Override
+	public String getCPInstanceThumbnailSrc(
+			long cpInstanceId, ThemeDisplay themeDisplay)
+		throws Exception {
+
+		CPInstance cpInstance = _cpInstanceService.fetchCPInstance(
+			cpInstanceId);
+
+		if (cpInstance == null) {
+			return StringPool.BLANK;
+		}
+
+		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
+			getCPAttachmentFileEntries(
+				cpInstance.getCPDefinitionId(), cpInstance.getJson(),
+				CPAttachmentFileEntryConstants.TYPE_IMAGE, 0, 1);
+
+		if (cpAttachmentFileEntries.isEmpty()) {
+			CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+			return cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
+		}
+
+		CPAttachmentFileEntry cpAttachmentFileEntry =
+			cpAttachmentFileEntries.get(0);
+
+		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
+
+		if (fileEntry == null) {
+			return null;
+		}
+
+		return DLUtil.getThumbnailSrc(fileEntry, themeDisplay);
 	}
 
 	@Override
