@@ -16,19 +16,14 @@ package com.liferay.commerce.subscription.web.internal.display.context;
 
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
-import com.liferay.commerce.product.model.CPAttachmentFileEntry;
-import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
 import com.liferay.commerce.util.comparator.CommerceSubscriptionEntryCreateDateComparator;
-import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -65,29 +60,8 @@ public class CommerceSubscriptionContentDisplayContext {
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		CPInstance cpInstance = commerceSubscriptionEntry.getCPInstance();
-
-		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
-			_cpInstanceHelper.getCPAttachmentFileEntries(
-				cpInstance.getCPDefinitionId(), cpInstance.getJson(),
-				CPAttachmentFileEntryConstants.TYPE_IMAGE);
-
-		if (cpAttachmentFileEntries.isEmpty()) {
-			CPDefinition cpDefinition = cpInstance.getCPDefinition();
-
-			return cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
-		}
-
-		CPAttachmentFileEntry cpAttachmentFileEntry =
-			cpAttachmentFileEntries.get(0);
-
-		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
-
-		if (fileEntry == null) {
-			return null;
-		}
-
-		return DLUtil.getThumbnailSrc(fileEntry, themeDisplay);
+		return _cpInstanceHelper.getCPInstanceThumbnailSrc(
+			commerceSubscriptionEntry.getCPInstanceId(), themeDisplay);
 	}
 
 	public String getCPDefinitionURL(

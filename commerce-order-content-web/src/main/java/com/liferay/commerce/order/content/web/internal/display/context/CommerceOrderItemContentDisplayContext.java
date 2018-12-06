@@ -25,18 +25,13 @@ import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
-import com.liferay.commerce.product.model.CPAttachmentFileEntry;
-import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.KeyValuePair;
 
@@ -81,28 +76,8 @@ public class CommerceOrderItemContentDisplayContext
 			CommerceOrderItem commerceOrderItem, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
-			_cpInstanceHelper.getCPAttachmentFileEntries(
-				commerceOrderItem.getCPDefinitionId(),
-				commerceOrderItem.getJson(),
-				CPAttachmentFileEntryConstants.TYPE_IMAGE);
-
-		if (cpAttachmentFileEntries.isEmpty()) {
-			CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
-
-			return cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
-		}
-
-		CPAttachmentFileEntry cpAttachmentFileEntry =
-			cpAttachmentFileEntries.get(0);
-
-		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
-
-		if (fileEntry == null) {
-			return null;
-		}
-
-		return DLUtil.getThumbnailSrc(fileEntry, themeDisplay);
+		return _cpInstanceHelper.getCPInstanceThumbnailSrc(
+			commerceOrderItem.getCPInstanceId(), themeDisplay);
 	}
 
 	public CommerceOrderPrice getCommerceOrderPrice() throws PortalException {
