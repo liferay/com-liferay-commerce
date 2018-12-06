@@ -153,15 +153,25 @@ class QuantitySelector extends Component {
 }
 
 QuantitySelector.STATE = {
+	
 	minQuantity: Config.number().value(1),
+
 	maxQuantity: Config.number().value(99999999),
+
 	multipleQuantities: Config.number(),
+
 	allowedOptions: Config.array(),
+
 	quantity: Config.number().value(0),
+
 	isPrevAvailable: Config.bool().value(true),
+
 	isNextAvailable: Config.bool().value(true),
+
 	inputError: Config.string(),
+
 	showError: Config.bool().value(false)
+
 };
 
 Soy.register(QuantitySelector, template);
