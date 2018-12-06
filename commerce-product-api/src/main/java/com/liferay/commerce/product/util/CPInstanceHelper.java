@@ -24,6 +24,7 @@ import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.KeyValuePair;
 
 import java.util.List;
@@ -35,12 +36,18 @@ import javax.portlet.RenderResponse;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public interface CPInstanceHelper {
 
 	public List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
 			long cpDefinitionId, String serializedDDMFormValues, int type)
+		throws Exception;
+
+	public List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
+			long cpDefinitionId, String serializedDDMFormValues, int type,
+			int start, int end)
 		throws Exception;
 
 	public DDMForm getCPAttachmentFileEntryDDMForm(
@@ -63,6 +70,10 @@ public interface CPInstanceHelper {
 			long cpDefinitionId, Locale locale, boolean ignoreSKUCombinations,
 			boolean skuContributor)
 		throws PortalException;
+
+	public String getCPInstanceThumbnailSrc(
+			long cpInstanceId, ThemeDisplay themeDisplay)
+		throws Exception;
 
 	public CPSku getDefaultCPSku(CPCatalogEntry cpCatalogEntry)
 		throws Exception;
