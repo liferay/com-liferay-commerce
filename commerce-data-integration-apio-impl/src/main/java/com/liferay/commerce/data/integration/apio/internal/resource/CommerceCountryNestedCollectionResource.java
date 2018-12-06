@@ -91,8 +91,8 @@ public class CommerceCountryNestedCollectionResource
 		).identifier(
 			CommerceCountry::getCommerceCountryId
 		).addBidirectionalModel(
-			"webSite", "commerceCountries", CommerceWebSiteIdentifier.class,
-			CommerceCountry::getGroupId
+			"commerceWebSite", "commerceCountries",
+			CommerceWebSiteIdentifier.class, CommerceCountry::getGroupId
 		).addBoolean(
 			"billingAllowed", CommerceCountry::isBillingAllowed
 		).addBoolean(

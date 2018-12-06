@@ -107,8 +107,8 @@ public class CommerceOrderNoteNestedCollectionResource
 				commerceOrderIdToClassPKExternalReferenceCode(
 					commerceOrderNote.getCommerceOrderId())
 		).addBidirectionalModel(
-			"webSite", "commerceOrderNotes", CommerceWebSiteIdentifier.class,
-			CommerceOrderNote::getGroupId
+			"commerceWebSite", "commerceOrderNotes",
+			CommerceWebSiteIdentifier.class, CommerceOrderNote::getGroupId
 		).addNumber(
 			"id", CommerceOrderNote::getCommerceOrderNoteId
 		).addString(

@@ -120,8 +120,8 @@ public class CommerceOrderNestedCollectionResource
 				organizationIdToClassPKExternalReferenceCode(
 					commerceOrder.getOrderOrganizationId())
 		).addBidirectionalModel(
-			"webSite", "commerceOrders", CommerceWebSiteIdentifier.class,
-			CommerceOrder::getGroupId
+			"commerceWebSite", "commerceOrders",
+			CommerceWebSiteIdentifier.class, CommerceOrder::getGroupId
 		).addLinkedModel(
 			"commerceAccount", CommerceAccountIdentifier.class,
 			commerceOrder -> _commerceAccountHelper.

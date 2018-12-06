@@ -107,7 +107,7 @@ public class CPInstanceNestedCollectionResource
 				cpDefinitionIdToclassPKExternalReferenceCode(
 					cpInstance.getCPDefinitionId())
 		).addBidirectionalModel(
-			"webSite", "commerceProductInstances",
+			"commerceWebSite", "commerceProductInstances",
 			CommerceWebSiteIdentifier.class, CPInstance::getGroupId
 		).addBoolean(
 			"purchasable", CPInstance::isPurchasable
