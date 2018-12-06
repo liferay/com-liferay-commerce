@@ -147,8 +147,8 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 					</liferay-ui:search-container-column-text>
 
 					<liferay-ui:search-container-column-text
-						name="active"
-						value='<%= LanguageUtil.get(request, commerceSubscriptionEntry.isActive() ? "yes" : "no") %>'
+						name="status"
+						value="<%= LanguageUtil.get(request, CommerceSubscriptionEntryConstants.getSubscriptionStatusLabel(commerceSubscriptionEntry.getSubscriptionStatus())) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
