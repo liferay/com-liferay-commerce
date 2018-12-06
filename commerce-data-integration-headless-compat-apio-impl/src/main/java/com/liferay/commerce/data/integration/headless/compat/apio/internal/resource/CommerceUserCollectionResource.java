@@ -26,7 +26,8 @@ import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalRefe
 import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceUserIdentifier;
 import com.liferay.commerce.data.integration.headless.compat.apio.internal.form.CommerceUserUpserterForm;
 import com.liferay.commerce.data.integration.headless.compat.apio.internal.model.UserWrapper;
-import com.liferay.commerce.data.integration.headless.compat.apio.internal.util.CommerceUserHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.internal.util.CommerceUserResourceOperationHelper;
+import com.liferay.commerce.data.integration.headless.compat.apio.util.UserHelper;
 import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -96,7 +97,7 @@ public class CommerceUserCollectionResource
 		return builder.addGetter(
 			this::_getUserWrapper, ThemeDisplay.class
 		).addRemover(
-			_commerceUserHelper::deleteUser, Company.class,
+			_commerceUserResourceOperationHelper::deleteUser, Company.class,
 			_hasPermission::forDeleting
 		).addUpdater(
 			this::_updateUser, ThemeDisplay.class, _hasPermission::forUpdating,
@@ -112,7 +113,7 @@ public class CommerceUserCollectionResource
 		return builder.types(
 			"Person"
 		).identifier(
-			_commerceUserHelper::userToClassPKExternalReferenceCode
+			_userHelper::userToClassPKExternalReferenceCode
 		).addDate(
 			"birthDate", CommerceUserCollectionResource::_getBirthday
 		).addLocalizedStringByLocale(
@@ -249,7 +250,7 @@ public class CommerceUserCollectionResource
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		User user = _commerceUserHelper.getUser(
+		User user = _userHelper.getUser(
 			commerceUserCPKERC, themeDisplay.getCompanyId());
 
 		if ((user == null) ||
@@ -281,7 +282,7 @@ public class CommerceUserCollectionResource
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		return _commerceUserHelper.updateUser(
+		return _commerceUserResourceOperationHelper.updateUser(
 			commerceUserCPKERC, commerceUserUpserterForm, themeDisplay);
 	}
 
@@ -290,7 +291,7 @@ public class CommerceUserCollectionResource
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		return _commerceUserHelper.upsert(
+		return _commerceUserResourceOperationHelper.upsert(
 			commerceUserUpserterForm, themeDisplay);
 	}
 
@@ -298,7 +299,8 @@ public class CommerceUserCollectionResource
 		CommerceUserCollectionResource.class);
 
 	@Reference
-	private CommerceUserHelper _commerceUserHelper;
+	private CommerceUserResourceOperationHelper
+		_commerceUserResourceOperationHelper;
 
 	@Reference(target = "(name=com.liferay.commerce.user)")
 	private HasPermission<ClassPKExternalReferenceCode> _hasPermission;
@@ -308,6 +310,9 @@ public class CommerceUserCollectionResource
 
 	@Reference
 	private RoleService _roleService;
+
+	@Reference
+	private UserHelper _userHelper;
 
 	@Reference
 	private UserLocalService _userLocalService;
