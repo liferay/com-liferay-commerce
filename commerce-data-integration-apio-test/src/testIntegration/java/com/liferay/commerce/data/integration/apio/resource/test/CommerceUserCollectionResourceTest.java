@@ -53,7 +53,7 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class CommerceUserCollectionResourceTest extends PortalContextProvider {
 
-	public static final String COMMERCE_USER_RESOURCE_TYPE = "Person";
+	public static final String COMMERCE_USER_RESOURCE_TYPE = "CommerceUser";
 
 	@ClassRule
 	@Rule
