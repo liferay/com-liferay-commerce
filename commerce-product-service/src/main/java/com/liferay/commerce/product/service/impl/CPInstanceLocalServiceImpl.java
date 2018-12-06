@@ -24,6 +24,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.search.CPInstanceIndexer;
 import com.liferay.commerce.product.service.base.CPInstanceLocalServiceBaseImpl;
 import com.liferay.commerce.product.util.DDMFormValuesUtil;
@@ -436,6 +437,20 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		return cpInstancePersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
+	}
+
+	@Override
+	public CPInstance fetchCProductInstance(
+		long cProductId, String cpInstanceUuid) {
+
+		CProduct cProduct = cProductLocalService.fetchCProduct(cProductId);
+
+		if (cProduct == null) {
+			return null;
+		}
+
+		return cpInstancePersistence.fetchByU_C(
+			cpInstanceUuid, cProduct.getPublishedDefinitionId());
 	}
 
 	@Override
