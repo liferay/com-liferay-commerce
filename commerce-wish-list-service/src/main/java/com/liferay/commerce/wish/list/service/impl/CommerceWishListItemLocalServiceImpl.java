@@ -17,8 +17,10 @@ package com.liferay.commerce.wish.list.service.impl;
 import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.wish.list.exception.GuestWishListItemMaxAllowedException;
 import com.liferay.commerce.wish.list.internal.configuration.CommerceWishListConfiguration;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
@@ -41,9 +43,30 @@ import java.util.List;
 public class CommerceWishListItemLocalServiceImpl
 	extends CommerceWishListItemLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated As of Judson (7.1.x)
+	 */
+	@Deprecated
 	@Override
 	public CommerceWishListItem addCommerceWishListItem(
 			long commerceWishListId, long cpDefinitionId, long cpInstanceId,
+			String json, ServiceContext serviceContext)
+		throws PortalException {
+
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
+			cpDefinitionId);
+
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
+
+		return commerceWishListItemLocalService.addCommerceWishListItem(
+			commerceWishListId, cpDefinition.getCProductId(),
+			cpInstance.getUuid(), json, serviceContext);
+	}
+
+	@Override
+	public CommerceWishListItem addCommerceWishListItem(
+			long commerceWishListId, long cProductId, String cpInstanceUuid,
 			String json, ServiceContext serviceContext)
 		throws PortalException {
 
@@ -52,18 +75,12 @@ public class CommerceWishListItemLocalServiceImpl
 				commerceWishListId);
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
-		validate(commerceWishList, cpDefinitionId, cpInstanceId);
+		validate(commerceWishList, cProductId, cpInstanceUuid);
 
 		long commerceWishListItemId = counterLocalService.increment();
 
 		CommerceWishListItem commerceWishListItem =
 			commerceWishListItemPersistence.create(commerceWishListItemId);
-
-		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
-			cpDefinitionId);
-
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-			cpInstanceId);
 
 		commerceWishListItem.setGroupId(commerceWishList.getGroupId());
 		commerceWishListItem.setCompanyId(user.getCompanyId());
@@ -71,8 +88,8 @@ public class CommerceWishListItemLocalServiceImpl
 		commerceWishListItem.setUserName(user.getFullName());
 		commerceWishListItem.setCommerceWishListId(
 			commerceWishList.getCommerceWishListId());
-		commerceWishListItem.setCProductId(cpDefinition.getCProductId());
-		commerceWishListItem.setCPInstanceUuid(cpInstance.getUuid());
+		commerceWishListItem.setCPInstanceUuid(cpInstanceUuid);
+		commerceWishListItem.setCProductId(cProductId);
 
 		commerceWishListItem.setJson(json);
 
@@ -145,8 +162,8 @@ public class CommerceWishListItemLocalServiceImpl
 	}
 
 	protected void validate(
-			CommerceWishList commerceWishList, long cpDefinitionId,
-			long cpInstanceId)
+			CommerceWishList commerceWishList, long cProductId,
+			String cpInstanceUuid)
 		throws PortalException {
 
 		if (commerceWishList.getUserId() == 0) {
@@ -162,20 +179,23 @@ public class CommerceWishListItemLocalServiceImpl
 			}
 		}
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
-			cpDefinitionId);
+		CProduct cProduct = _cProductLocalService.getCProduct(cProductId);
 
-		if (cpInstanceId > 0) {
-			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-				cpInstanceId);
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
+			cProduct.getPublishedDefinitionId());
+
+		if ((cpInstanceUuid != null) && (commerceWishList != null)) {
+			CPInstance cpInstance =
+				_cpInstanceLocalService.getCPInstanceByUuidAndGroupId(
+					cpInstanceUuid, commerceWishList.getGroupId());
 
 			if (cpInstance.getCPDefinitionId() !=
 					cpDefinition.getCPDefinitionId()) {
 
 				throw new NoSuchCPInstanceException(
 					StringBundler.concat(
-						"CPInstance ", cpInstance.getCPInstanceId(),
-						" belongs to a different CPDefinition than ",
+						"CPInstance ", cpInstance.getCPDefinitionId(),
+						" belongs to a different CPDefinitionId than ",
 						cpDefinition.getCPDefinitionId()));
 			}
 		}
@@ -192,5 +212,8 @@ public class CommerceWishListItemLocalServiceImpl
 
 	@ServiceReference(type = CPInstanceLocalService.class)
 	private CPInstanceLocalService _cpInstanceLocalService;
+
+	@ServiceReference(type = CProductLocalService.class)
+	private CProductLocalService _cProductLocalService;
 
 }
