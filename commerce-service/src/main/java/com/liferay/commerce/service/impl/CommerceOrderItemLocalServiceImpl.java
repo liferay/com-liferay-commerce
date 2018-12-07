@@ -61,6 +61,7 @@ import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Andrea Di Giorgi
@@ -96,7 +97,9 @@ public class CommerceOrderItemLocalServiceImpl
 			}
 		}
 
-		validate(commerceOrder, cpDefinition, cpInstance, quantity);
+		validate(
+			serviceContext.getLocale(), commerceOrder, cpDefinition, cpInstance,
+			quantity);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -339,7 +342,7 @@ public class CommerceOrderItemLocalServiceImpl
 	@Override
 	public CommerceOrderItem updateCommerceOrderItem(
 			long commerceOrderItemId, int quantity,
-			CommerceContext commerceContext)
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceOrderItem commerceOrderItem =
@@ -347,14 +350,14 @@ public class CommerceOrderItemLocalServiceImpl
 
 		return commerceOrderItemLocalService.updateCommerceOrderItem(
 			commerceOrderItemId, quantity, commerceOrderItem.getJson(),
-			commerceContext);
+			commerceContext, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrderItem updateCommerceOrderItem(
 			long commerceOrderItemId, int quantity, String json,
-			CommerceContext commerceContext)
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceOrderItem commerceOrderItem =
@@ -369,7 +372,7 @@ public class CommerceOrderItemLocalServiceImpl
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
 		validate(
-			commerceOrderItem.getCommerceOrder(),
+			serviceContext.getLocale(), commerceOrderItem.getCommerceOrder(),
 			commerceOrderItem.getCPDefinition(),
 			commerceOrderItem.getCPInstance(), quantity);
 
@@ -428,10 +431,10 @@ public class CommerceOrderItemLocalServiceImpl
 		if (!commerceOrderItems.isEmpty()) {
 			CommerceOrderItem commerceOrderItem = commerceOrderItems.get(0);
 
-			return updateCommerceOrderItem(
+			return commerceOrderItemLocalService.updateCommerceOrderItem(
 				commerceOrderItem.getCommerceOrderItemId(),
 				commerceOrderItem.getQuantity() + quantity,
-				commerceOrderItem.getJson(), commerceContext);
+				commerceOrderItem.getJson(), commerceContext, serviceContext);
 		}
 
 		return addCommerceOrderItem(
@@ -525,8 +528,8 @@ public class CommerceOrderItemLocalServiceImpl
 	}
 
 	protected void validate(
-			CommerceOrder commerceOrder, CPDefinition cpDefinition,
-			CPInstance cpInstance, int quantity)
+			Locale locale, CommerceOrder commerceOrder,
+			CPDefinition cpDefinition, CPInstance cpInstance, int quantity)
 		throws PortalException {
 
 		if (commerceOrder.getUserId() == 0) {
@@ -554,7 +557,7 @@ public class CommerceOrderItemLocalServiceImpl
 		if (!ExportImportThreadLocal.isImportInProcess()) {
 			List<CommerceOrderValidatorResult> commerceCartValidatorResults =
 				_commerceOrderValidatorRegistry.validate(
-					commerceOrder, cpInstance, quantity);
+					locale, commerceOrder, cpInstance, quantity);
 
 			if (!commerceCartValidatorResults.isEmpty()) {
 				throw new CommerceOrderValidatorException(
