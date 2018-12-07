@@ -16,8 +16,6 @@ package com.liferay.commerce.data.provider.internal;
 
 import com.liferay.commerce.data.provider.CommerceDataProvider;
 import com.liferay.commerce.data.provider.CommerceDataProviderRegistry;
-import com.liferay.commerce.frontend.taglib.data.provider.CommerceDataProvider;
-import com.liferay.commerce.frontend.taglib.data.provider.CommerceDataProviderRegistry;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory.ServiceWrapper;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
@@ -25,14 +23,15 @@ import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import org.osgi.framework.BundleContext;
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.osgi.framework.BundleContext;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
 
 /**
  * @author Marco Leo
