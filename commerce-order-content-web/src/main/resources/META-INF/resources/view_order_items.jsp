@@ -118,14 +118,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 											%>
 
 												<div class="alert-danger commerce-alert-danger">
-													<c:choose>
-														<c:when test="<%= commerceOrderValidatorResult.hasArgument() %>">
-															<liferay-ui:message arguments="<%= commerceOrderValidatorResult.getArgument() %>" key="<%= commerceOrderValidatorResult.getMessage() %>" />
-														</c:when>
-														<c:otherwise>
-															<liferay-ui:message key="<%= commerceOrderValidatorResult.getMessage() %>" />
-														</c:otherwise>
-													</c:choose>
+													<liferay-ui:message key="<%= commerceOrderValidatorResult.getLocalizedMessage() %>" />
 												</div>
 
 											<%

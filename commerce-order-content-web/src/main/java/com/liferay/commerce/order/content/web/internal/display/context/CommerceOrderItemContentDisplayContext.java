@@ -90,7 +90,7 @@ public class CommerceOrderItemContentDisplayContext
 		throws PortalException {
 
 		return _commerceOrderValidatorRegistry.getCommerceOrderValidatorResults(
-			getCommerceOrder());
+			cpRequestHelper.getLocale(), getCommerceOrder());
 	}
 
 	public CommerceProductPrice getCommerceProductPrice(

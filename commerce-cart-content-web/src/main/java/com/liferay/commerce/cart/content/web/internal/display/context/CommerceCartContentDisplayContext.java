@@ -127,7 +127,7 @@ public class CommerceCartContentDisplayContext {
 		throws PortalException {
 
 		return _commerceOrderValidatorRegistry.getCommerceOrderValidatorResults(
-			getCommerceOrder());
+			commerceCartContentRequestHelper.getLocale(), getCommerceOrder());
 	}
 
 	public CommerceProductPrice getCommerceProductPrice(
@@ -272,7 +272,8 @@ public class CommerceCartContentDisplayContext {
 			return false;
 		}
 
-		return _commerceOrderValidatorRegistry.isValid(commerceOrder);
+		return _commerceOrderValidatorRegistry.isValid(
+			commerceCartContentRequestHelper.getLocale(), commerceOrder);
 	}
 
 	public List<CommerceOrderValidatorResult> validateCommerceOrderItem(
@@ -283,7 +284,8 @@ public class CommerceCartContentDisplayContext {
 			_commerceOrderItemService.fetchCommerceOrderItem(
 				commerceOrderItemId);
 
-		return _commerceOrderValidatorRegistry.validate(commerceOrderItem);
+		return _commerceOrderValidatorRegistry.validate(
+			commerceCartContentRequestHelper.getLocale(), commerceOrderItem);
 	}
 
 	protected final CommerceCartContentRequestHelper

@@ -24,10 +24,8 @@ import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.Locale;
@@ -59,7 +57,8 @@ public class DefaultCommerceOrderValidatorImpl
 
 	@Override
 	public CommerceOrderValidatorResult validate(
-			CommerceOrder commerceOrder, CPInstance cpInstance, int quantity)
+			Locale locale, CommerceOrder commerceOrder, CPInstance cpInstance,
+			int quantity)
 		throws PortalException {
 
 		if (cpInstance == null) {
@@ -90,16 +89,18 @@ public class DefaultCommerceOrderValidatorImpl
 
 		if ((minOrderQuantity > 0) && (quantity < minOrderQuantity)) {
 			return new CommerceOrderValidatorResult(
-				false, "the-minimum-quantity-is-x",
-				String.valueOf(minOrderQuantity),
-				_getResourceBundle(commerceOrder));
+				false,
+				_getLocalizedMessage(
+					locale, "the-minimum-quantity-is-x",
+					new Object[] {minOrderQuantity}));
 		}
 
 		if ((maxOrderQuantity > 0) && (quantity > maxOrderQuantity)) {
 			return new CommerceOrderValidatorResult(
-				false, "the-maximum-quantity-is-x",
-				String.valueOf(maxOrderQuantity),
-				_getResourceBundle(commerceOrder));
+				false,
+				_getLocalizedMessage(
+					locale, "the-maximum-quantity-is-x",
+					new Object[] {maxOrderQuantity}));
 		}
 
 		if ((allowedOrderQuantities.length > 0) &&
@@ -107,8 +108,9 @@ public class DefaultCommerceOrderValidatorImpl
 				allowedOrderQuantities, String.valueOf(quantity))) {
 
 			return new CommerceOrderValidatorResult(
-				false, "that-quantity-is-not-allowed",
-				_getResourceBundle(commerceOrder));
+				false,
+				_getLocalizedMessage(
+					locale, "that-quantity-is-not-allowed", null));
 		}
 
 		return new CommerceOrderValidatorResult(true);
@@ -116,7 +118,7 @@ public class DefaultCommerceOrderValidatorImpl
 
 	@Override
 	public CommerceOrderValidatorResult validate(
-			CommerceOrderItem commerceOrderItem)
+			Locale locale, CommerceOrderItem commerceOrderItem)
 		throws PortalException {
 
 		CPInstance cpInstance = commerceOrderItem.getCPInstance();
@@ -146,8 +148,9 @@ public class DefaultCommerceOrderValidatorImpl
 
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				"the-minimum-quantity-is-x", String.valueOf(minOrderQuantity),
-				_getResourceBundle(commerceOrderItem.getCommerceOrder()));
+				_getLocalizedMessage(
+					locale, "the-minimum-quantity-is-x",
+					new Object[] {minOrderQuantity}));
 		}
 
 		if ((maxOrderQuantity > 0) &&
@@ -155,8 +158,9 @@ public class DefaultCommerceOrderValidatorImpl
 
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				"the-maximum-quantity-is-x", String.valueOf(maxOrderQuantity),
-				_getResourceBundle(commerceOrderItem.getCommerceOrder()));
+				_getLocalizedMessage(
+					locale, "the-maximum-quantity-is-x",
+					new Object[] {maxOrderQuantity}));
 		}
 
 		if ((allowedOrderQuantities.length > 0) &&
@@ -166,27 +170,24 @@ public class DefaultCommerceOrderValidatorImpl
 
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				"that-quantity-is-not-allowed",
-				_getResourceBundle(commerceOrderItem.getCommerceOrder()));
+				_getLocalizedMessage(
+					locale, "that-quantity-is-not-allowed", null));
 		}
 
 		return new CommerceOrderValidatorResult(true);
 	}
 
-	private ResourceBundle _getResourceBundle(CommerceOrder commerceOrder)
-		throws PortalException {
+	private String _getLocalizedMessage(
+		Locale locale, String key, Object[] arguments) {
 
-		Locale locale = _portal.getSiteDefaultLocale(
-			commerceOrder.getSiteGroupId());
+		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
+			"content.Language", locale, getClass());
 
-		User user = _userLocalService.fetchUser(commerceOrder.getUserId());
-
-		if (user != null) {
-			locale = user.getLocale();
+		if (arguments == null) {
+			return LanguageUtil.get(resourceBundle, key);
 		}
 
-		return ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass());
+		return LanguageUtil.format(resourceBundle, key, arguments);
 	}
 
 	@Reference
@@ -196,11 +197,5 @@ public class DefaultCommerceOrderValidatorImpl
 	@Reference
 	private CPDefinitionInventoryLocalService
 		_cpDefinitionInventoryLocalService;
-
-	@Reference
-	private Portal _portal;
-
-	@Reference
-	private UserLocalService _userLocalService;
 
 }
