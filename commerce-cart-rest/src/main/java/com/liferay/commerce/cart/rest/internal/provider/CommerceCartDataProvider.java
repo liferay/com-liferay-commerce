@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.cart.rest.internal.provider;
 
-import com.liferay.commerce.cart.rest.internal.domain.model.Cart;
-import com.liferay.commerce.cart.rest.internal.domain.model.Prices;
-import com.liferay.commerce.cart.rest.internal.domain.model.Product;
-import com.liferay.commerce.cart.rest.internal.domain.model.Settings;
-import com.liferay.commerce.cart.rest.internal.domain.model.Summary;
+import com.liferay.commerce.cart.rest.internal.model.Cart;
+import com.liferay.commerce.cart.rest.internal.model.Prices;
+import com.liferay.commerce.cart.rest.internal.model.Product;
+import com.liferay.commerce.cart.rest.internal.model.Settings;
+import com.liferay.commerce.cart.rest.internal.model.Summary;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
