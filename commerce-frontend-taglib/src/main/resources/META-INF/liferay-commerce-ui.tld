@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<taglib
+	version="2.1"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+>
+	<description>Provides the Liferay Commerce UI common tags, prefixed with <![CDATA[<code>commerce-ui:</code>]]>.</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>liferay-commerce-ui</short-name>
+	<uri>http://liferay.com/tld/commerce-ui</uri>
+	<tag>
+		<name>table</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.CommerceTableTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>dataProviderKey</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>itemPerPage</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<name>pageNumber</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<name>tableName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>
