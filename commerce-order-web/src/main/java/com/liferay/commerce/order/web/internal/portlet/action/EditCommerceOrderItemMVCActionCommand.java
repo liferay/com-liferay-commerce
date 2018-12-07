@@ -137,14 +137,17 @@ public class EditCommerceOrderItemMVCActionCommand
 
 		int quantity = ParamUtil.getInteger(actionRequest, "quantity");
 
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CommerceOrderItem.class.getName(), actionRequest);
+
 		if (commerceOrder.isOpen()) {
 			_commerceOrderItemService.updateCommerceOrderItem(
-				commerceOrderItemId, quantity, commerceContext);
+				commerceOrderItemId, quantity, commerceContext, serviceContext);
 		}
 		else {
 			_commerceOrderItemService.updateCommerceOrderItem(
 				commerceOrderItemId, quantity, commerceOrderItem.getJson(),
-				commerceContext);
+				commerceContext, serviceContext);
 		}
 	}
 
