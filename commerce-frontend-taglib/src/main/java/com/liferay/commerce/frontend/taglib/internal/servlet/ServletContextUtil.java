@@ -15,9 +15,9 @@
 package com.liferay.commerce.frontend.taglib.internal.servlet;
 
 import com.liferay.commerce.data.provider.CommerceDataProviderRegistry;
-import com.liferay.commerce.frontend.taglib.internal.table.ClayTableUtil;
 import com.liferay.commerce.frontend.taglib.table.ClayTableRegistry;
 import com.liferay.commerce.frontend.taglib.table.ClayTableSerializer;
+import com.liferay.commerce.frontend.taglib.table.ClayTableUtil;
 
 import javax.servlet.ServletContext;
 
