@@ -5,6 +5,7 @@ dependencies {
 	compileInclude group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.6"
 	compileInclude group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.6"
 
+	compileOnly group: "com.liferay", name: "com.liferay.frontend.js.loader.modules.extender.api", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib.soy", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.petra.lang", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.petra.string", version: "2.0.0"
