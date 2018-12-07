@@ -27,25 +27,25 @@ class QuantitySelector extends Component {
 	}
 
 	checkWhetherIsPrevButtonAvailable(quantity) {
-		if (this.allowedOptions && this.allowedOptions.length) {
-			return this.allowedOptions.indexOf(quantity) >= 1;
+		if (this.allowedQuantities && this.allowedQuantities.length) {
+			return this.allowedQuantities.indexOf(quantity) >= 1;
 		}
 
-		let tempValue = this.multipleQuantities ?
-			quantity - this.multipleQuantities :
+		let tempValue = this.multipleQuantity ?
+			quantity - this.multipleQuantity :
 			quantity - 1;
 
 		return tempValue >= this.minQuantity;
 	}
 
 	checkWhetherIsNextButtonAvailable(quantity) {
-		if (this.allowedOptions && this.allowedOptions.length) {
-			const nextOptionIndex = this.allowedOptions.indexOf(quantity) + 1;
-			return !!this.allowedOptions[nextOptionIndex];
+		if (this.allowedQuantities && this.allowedQuantities.length) {
+			const nextOptionIndex = this.allowedQuantities.indexOf(quantity) + 1;
+			return !!this.allowedQuantities[nextOptionIndex];
 		}
 
-		let tempValue = this.multipleQuantities ?
-			quantity + this.multipleQuantities :
+		let tempValue = this.multipleQuantity ?
+			quantity + this.multipleQuantity :
 			quantity - 1;
 
 		return tempValue <= this.maxQuantity;
@@ -60,19 +60,19 @@ class QuantitySelector extends Component {
 
 		let tempQuantity = this.quantity;
 
-		if (this.multipleQuantities) {
-			tempQuantity -= this.multipleQuantities;
+		if (this.multipleQuantity) {
+			tempQuantity -= this.multipleQuantity;
 		}
 
-		if (this.allowedOptions && this.allowedOptions.length) {
-			const index = this.allowedOptions.indexOf(tempQuantity);
+		if (this.allowedQuantities && this.allowedQuantities.length) {
+			const index = this.allowedQuantities.indexOf(tempQuantity);
 			if (!index) {
 				return (this.inputError = 'NoQuantitiesLessThanAvailable');
 			}
-			tempQuantity = this.allowedOptions[index - 1];
+			tempQuantity = this.allowedQuantities[index - 1];
 		}
 
-		if (!this.multipleQuantities && !this.allowedOptions) {
+		if (!this.multipleQuantity && !this.allowedQuantities) {
 			--tempQuantity;
 		}
 
@@ -92,18 +92,18 @@ class QuantitySelector extends Component {
 
 		let tempQuantity = this.quantity;
 
-		if (this.multipleQuantities) {
-			tempQuantity += this.multipleQuantities;
+		if (this.multipleQuantity) {
+			tempQuantity += this.multipleQuantity;
 		}
-		if (this.allowedOptions && this.allowedOptions.length) {
-			const index = this.allowedOptions.indexOf(tempQuantity);
-			if (index + 1 >= this.allowedOptions.length) {
+		if (this.allowedQuantities && this.allowedQuantities.length) {
+			const index = this.allowedQuantities.indexOf(tempQuantity);
+			if (index + 1 >= this.allowedQuantities.length) {
 				return (this.inputError = 'NoQuantitiesHigherThanAvailable');
 			}
-			tempQuantity = this.allowedOptions[index + 1];
+			tempQuantity = this.allowedQuantities[index + 1];
 		}
 
-		if (!this.multipleQuantities && !this.allowedOptions) {
+		if (!this.multipleQuantity && !this.allowedQuantities) {
 			++tempQuantity;
 		}
 
@@ -129,8 +129,8 @@ class QuantitySelector extends Component {
 	}
 
 	submitQuantity(quantity) {
-		if (this.multipleQuantities) {
-			if (quantity % this.multipleQuantities) {
+		if (this.multipleQuantity) {
+			if (quantity % this.multipleQuantity) {
 				return (this.inputError = 'NotMultipleThan');
 			}
 		}
@@ -153,14 +153,14 @@ class QuantitySelector extends Component {
 }
 
 QuantitySelector.STATE = {
-	
+
 	minQuantity: Config.number().value(1),
 
 	maxQuantity: Config.number().value(99999999),
 
-	multipleQuantities: Config.number(),
+	multipleQuantity: Config.number(),
 
-	allowedOptions: Config.array(),
+	allowedQuantities: Config.array(),
 
 	quantity: Config.number().value(0),
 

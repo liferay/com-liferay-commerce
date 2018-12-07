@@ -17,11 +17,11 @@ class Cart extends Component {
 
 	attached() {
 		window.Liferay.on(
-			'updateCart', 
+			'updateCart',
 			(evt) => {
 				const updateCartData = evt.details[0];
-				this.products = updateCartData.commerceCartProducts;
-				this.summary = updateCartData.commerceCartSummary;
+				this.products = updateCartData.products;
+				this.summary = updateCartData.summary;
 				this.isLoading = false;
 				this.pendingOperations = [];
 				this.productsCount = this.products.length;
@@ -47,7 +47,7 @@ class Cart extends Component {
 						sendDeleteRequest: debounce(
 							() => this.sendDeleteRequest(productData.id),
 							500
-						),
+						)
 					},
 					productStateSchema,
 					productData
@@ -72,7 +72,7 @@ class Cart extends Component {
 
 	handleSubmitQuantity(productId, quantity) {
 		this.setProductProperties(
-			productId, 
+			productId,
 			{
 				inputChanged: false
 			}
@@ -116,7 +116,7 @@ class Cart extends Component {
 						return undefined;
 					}
 				}
-			}, 
+			},
 			false
 		);
 	}
@@ -125,7 +125,7 @@ class Cart extends Component {
 		const result = subArray.reduce(
 			(arrayToBeFiltered, elToRemove) => {
 				return arrayToBeFiltered.filter((elToCheck) => elToCheck.id !== elToRemove.id);
-			}, 
+			},
 			orArray
 		);
 		return !subArray.length && result;
@@ -139,7 +139,7 @@ class Cart extends Component {
 
 		if (isDeleteDisabled) {
 			return false;
-		};
+		}
 
 		this.setProductProperties(
 			productId, {
@@ -152,7 +152,7 @@ class Cart extends Component {
 			const isDeleting = this.getProductProperty(productId, 'isDeleting');
 			if (isDeleting) {
 				this.setProductProperties(
-					productId, 
+					productId,
 					{
 						isCollapsed: true
 					}
@@ -188,7 +188,7 @@ class Cart extends Component {
 
 	sendUpdateRequest(productId) {
 		return fetch(
-			this.cartAPI + '/' + productId, 
+			this.cartAPI + '/' + productId,
 			{
 				body: JSON.stringify(
 					{
@@ -202,7 +202,7 @@ class Cart extends Component {
 		.then(response => response.json())
 		.then(
 			updatedCart => {
-				const updatedPrice = updatedCart.commerceCartProducts.reduce(
+				const updatedPrice = updatedCart.products.reduce(
 					(acc, el) => (el.id === productId ? el.price : acc),
 					null
 				);
@@ -212,7 +212,7 @@ class Cart extends Component {
 					isUpdating: false,
 					price: updatedPrice
 				});
-				return this.summary = updatedCart.commerceCartSummary;
+				return this.summary = updatedCart.summary;
 			}
 		)
 		.catch(
@@ -222,7 +222,7 @@ class Cart extends Component {
 					isDeleteDisabled: false,
 					isUpdating: false
 				});
-				console.log(err)	
+				console.log(err);
 			}
 		);
 	}
@@ -237,24 +237,24 @@ class Cart extends Component {
 		.then(response => response.json())
 		.then(
 			updatedCart => {
-				this.products = updatedCart.commerceCartProducts;
-				this.summary = updatedCart.commerceCartSummary;
+				this.products = updatedCart.products;
+				this.summary = updatedCart.summary;
 				this.productsCount = this.products.length;
-				return !!(this.products && this.summary)
+				return !!(this.products && this.summary);
 			}
 		)
 		.catch(
 			err => {
-				return console.log(err)
+				return console.log(err);
 			}
 		);
 	}
 
 	sendDeleteRequest(productId) {
 		this.addPendingOperation(productId);
-		
+
 		return fetch(
-			this.cartAPI + '/' + productId, 
+			this.cartAPI + '/' + productId,
 			{
 				method: 'DELETE'
 			}
@@ -264,24 +264,24 @@ class Cart extends Component {
 			updatedCart => {
 				this.removePendingOperation(productId);
 				this.setProductProperties(
-					productId, 
-					{
+					productId,
+						{
 						isDeleteDisabled: false
 					}
 				);
 
-				this.summary = updatedCart.commerceCartSummary;
+					this.summary = updatedCart.summary;
 
-				const productsToBeRemoved = this.subtractProducts(this.products, updatedCart.commerceCartProducts);
+					const productsToBeRemoved = this.subtractProducts(this.products, updatedCart.products);
 				productsToBeRemoved.forEach(element => {
-					this.deleteProduct(element.id)
+					this.deleteProduct(element.id);
 				});
 			}
 		)
 		.catch(
 			err => {
 				this.removePendingOperation(productId);
-				console.log(err)	
+				console.log(err);
 			}
 		);
 	}
@@ -310,7 +310,7 @@ Cart.STATE = {
 	cartId: Config.oneOfType(
 		[
 			Config.number(),
-			Config.string(),
+			Config.string()
 		]
 	),
 
