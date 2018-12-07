@@ -192,7 +192,9 @@ class Cart extends Component {
 			{
 				body: JSON.stringify(
 					{
-						quantity: this.getProductProperty(productId, 'quantity')
+						cartItem: {
+							quantity: this.getProductProperty(productId, 'quantity')
+						}
 					}
 				),
 				headers: new Headers({'Content-Type': 'application/json'}),
