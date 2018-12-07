@@ -20,7 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.liferay.commerce.cart.rest.internal.context.provider.CommerceContextProvider;
-import com.liferay.commerce.cart.rest.internal.domain.model.Cart;
+import com.liferay.commerce.cart.rest.internal.model.Cart;
+import com.liferay.commerce.cart.rest.internal.model.CartItemUpdate;
 import com.liferay.commerce.cart.rest.internal.provider.CommerceCartDataProvider;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
@@ -43,8 +44,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -156,15 +157,16 @@ public class CommerceCartApplication extends Application {
 		return singletons;
 	}
 
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{commerceOrderItemId}")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateOrderItem(
 		@PathParam("commerceOrderItemId") long commerceOrderItemId,
-		@FormParam("quantity") int quantity, @Context UriInfo uriInfo,
-		@Context CommerceContext commerceContext,
+		@Context UriInfo uriInfo, @Context CommerceContext commerceContext,
 		@Context HttpServletRequest httpServletRequest,
-		@Context HttpServletResponse httpServletResponse) {
+		@Context HttpServletResponse httpServletResponse,
+		CartItemUpdate cartItemUpdate) {
 
 		Cart cart;
 
@@ -181,7 +183,8 @@ public class CommerceCartApplication extends Application {
 
 			CommerceOrderItem commerceOrderItem =
 				_commerceOrderItemService.updateCommerceOrderItem(
-					commerceOrderItemId, quantity, commerceContext);
+					commerceOrderItemId, cartItemUpdate.getQuantity(),
+					commerceContext);
 
 			cart = _commerceCartDataProvider.getCart(
 				commerceOrderItem.getCommerceOrderId(), themeDisplay,
