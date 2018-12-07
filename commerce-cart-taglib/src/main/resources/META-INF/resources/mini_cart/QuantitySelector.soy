@@ -5,7 +5,7 @@
  */
 {template .render}
 	{@param quantity: int}
-	{@param? allowedOptions: ?}
+	{@param? allowedQuantities: ?}
 	{@param? isPrevAvailable: bool}
 	{@param? isNextAvailable: bool}
 
@@ -23,14 +23,14 @@
 		{/if}
 	{/let}
 
-	{if isNonnull($allowedOptions)}
+	{if isNonnull($allowedQuantities)}
 		<div class="quantity-selector">
 			<form data-onsubmit="handleFormSubmit">
 				<select
 					class="quantity-selector__select"
 					data-onchange="handleSelectOption"
 				>
-					{foreach $option in $allowedOptions}
+					{foreach $option in $allowedQuantities}
 						{let $optionAttributes kind="attributes"}
 							value="{$option}"
 							{if $option == $quantity}
