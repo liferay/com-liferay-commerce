@@ -29,11 +29,11 @@ public interface CommerceDataProvider<T> {
 
 	public int countItems(long groupId) throws PortalException;
 
-	public List<T> getItems(long groupId, Pagination pagination, Sort sort)
-		throws PortalException;
-
 	public List<T> getItems(
 			long groupId, int itemPerPage, int pageNumber, Sort sort)
+		throws PortalException;
+
+	public List<T> getItems(long groupId, Pagination pagination, Sort sort)
 		throws PortalException;
 
 }
