@@ -19,83 +19,39 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
-import java.util.ResourceBundle;
-
 /**
  * @author Alessio Antonio Rendina
  */
 public class CommerceOrderValidatorResult implements Serializable {
 
 	public CommerceOrderValidatorResult(boolean valid) {
-		this(0, valid, null, StringPool.BLANK, null);
+		this(0, valid, StringPool.BLANK);
 	}
 
 	public CommerceOrderValidatorResult(
-		boolean valid, String messageKey, ResourceBundle resourceBundle) {
+		boolean valid, String localizedMessage) {
 
-		this(0, valid, messageKey, StringPool.BLANK, resourceBundle);
+		this(0, valid, localizedMessage);
 	}
 
 	public CommerceOrderValidatorResult(
-		boolean valid, String messageKey, String argument,
-		ResourceBundle resourceBundle) {
-
-		this(0, valid, messageKey, argument, resourceBundle);
-	}
-
-	public CommerceOrderValidatorResult(
-		long commerceOrderItemId, boolean valid, String messageKey,
-		ResourceBundle resourceBundle) {
-
-		this(
-			commerceOrderItemId, valid, messageKey, StringPool.BLANK,
-			resourceBundle);
-	}
-
-	public CommerceOrderValidatorResult(
-		long commerceOrderItemId, boolean valid, String messageKey,
-		String argument) {
-
-		this(commerceOrderItemId, valid, messageKey, argument, null);
-	}
-
-	public CommerceOrderValidatorResult(
-		long commerceOrderItemId, boolean valid, String messageKey,
-		String argument, ResourceBundle resourceBundle) {
+		long commerceOrderItemId, boolean valid, String localizedMessage) {
 
 		_commerceOrderItemId = commerceOrderItemId;
 		_valid = valid;
-		_messageKey = messageKey;
-		_argument = argument;
-		_resourceBundle = resourceBundle;
-	}
-
-	public String getArgument() {
-		return _argument;
+		_localizedMessage = localizedMessage;
 	}
 
 	public long getCommerceOrderItemId() {
 		return _commerceOrderItemId;
 	}
 
-	public String getMessage() {
-		return _messageKey;
-	}
-
-	public ResourceBundle getResourceBundle() {
-		return _resourceBundle;
-	}
-
-	public boolean hasArgument() {
-		if (Validator.isNotNull(getArgument())) {
-			return true;
-		}
-
-		return false;
+	public String getLocalizedMessage() {
+		return _localizedMessage;
 	}
 
 	public boolean hasMessageResult() {
-		if (Validator.isNotNull(getMessage())) {
+		if (Validator.isNotNull(getLocalizedMessage())) {
 			return true;
 		}
 
@@ -106,10 +62,8 @@ public class CommerceOrderValidatorResult implements Serializable {
 		return _valid;
 	}
 
-	private String _argument;
 	private long _commerceOrderItemId;
-	private String _messageKey;
-	private ResourceBundle _resourceBundle;
+	private String _localizedMessage;
 	private boolean _valid;
 
 }

@@ -50,14 +50,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 	for (CommerceOrderValidatorResult commerceOrderValidatorResult : commerceOrderValidatorResults) {
 	%>
 
-		<c:choose>
-			<c:when test="<%= commerceOrderValidatorResult.hasArgument() %>">
-				<liferay-ui:message arguments="<%= commerceOrderValidatorResult.getArgument() %>" key="<%= commerceOrderValidatorResult.getMessage() %>" />
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:message key="<%= commerceOrderValidatorResult.getMessage() %>" />
-			</c:otherwise>
-		</c:choose>
+		<liferay-ui:message key="<%= commerceOrderValidatorResult.getLocalizedMessage() %>" />
 
 	<%
 	}

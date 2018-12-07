@@ -27,9 +27,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.UserLocalService;
-import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.Locale;
@@ -61,13 +59,14 @@ public class AvailabilityCommerceOrderValidatorImpl
 
 	@Override
 	public CommerceOrderValidatorResult validate(
-			CommerceOrder commerceOrder, CPInstance cpInstance, int quantity)
+			Locale locale, CommerceOrder commerceOrder, CPInstance cpInstance,
+			int quantity)
 		throws PortalException {
 
 		if (cpInstance == null) {
 			return new CommerceOrderValidatorResult(
-				false, "please-select-a-valid-product",
-				_getResourceBundle(commerceOrder));
+				false,
+				_getLocalizedMessage(locale, "please-select-a-valid-product"));
 		}
 
 		CPDefinition cpDefinition = cpInstance.getCPDefinition();
@@ -76,8 +75,9 @@ public class AvailabilityCommerceOrderValidatorImpl
 			!cpInstance.isPublished() || !cpInstance.isPurchasable()) {
 
 			return new CommerceOrderValidatorResult(
-				false, "the-product-is-no-longer-available",
-				_getResourceBundle(commerceOrder));
+				false,
+				_getLocalizedMessage(
+					locale, "the-product-is-no-longer-available"));
 		}
 
 		CPDefinitionInventory cpDefinitionInventory =
@@ -105,8 +105,8 @@ public class AvailabilityCommerceOrderValidatorImpl
 
 		if (orderQuantity > availableQuantity) {
 			return new CommerceOrderValidatorResult(
-				false, "that-quantity-unavailable",
-				_getResourceBundle(commerceOrder));
+				false,
+				_getLocalizedMessage(locale, "that-quantity-unavailable"));
 		}
 
 		return new CommerceOrderValidatorResult(true);
@@ -114,7 +114,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 
 	@Override
 	public CommerceOrderValidatorResult validate(
-			CommerceOrderItem commerceOrderItem)
+			Locale locale, CommerceOrderItem commerceOrderItem)
 		throws PortalException {
 
 		CPInstance cpInstance = commerceOrderItem.getCPInstance();
@@ -126,8 +126,8 @@ public class AvailabilityCommerceOrderValidatorImpl
 
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				"the-product-is-no-longer-available",
-				_getResourceBundle(commerceOrderItem.getCommerceOrder()));
+				_getLocalizedMessage(
+					locale, "the-product-is-no-longer-available"));
 		}
 
 		CPDefinitionInventory cpDefinitionInventory =
@@ -154,27 +154,17 @@ public class AvailabilityCommerceOrderValidatorImpl
 		if (orderQuantity > availableQuantity) {
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
-				"that-quantity-unavailable",
-				_getResourceBundle(commerceOrderItem.getCommerceOrder()));
+				_getLocalizedMessage(locale, "that-quantity-unavailable"));
 		}
 
 		return new CommerceOrderValidatorResult(true);
 	}
 
-	private ResourceBundle _getResourceBundle(CommerceOrder commerceOrder)
-		throws PortalException {
-
-		Locale locale = _portal.getSiteDefaultLocale(
-			commerceOrder.getSiteGroupId());
-
-		User user = _userLocalService.fetchUser(commerceOrder.getUserId());
-
-		if (user != null) {
-			locale = user.getLocale();
-		}
-
-		return ResourceBundleUtil.getBundle(
+	private String _getLocalizedMessage(Locale locale, String key) {
+		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, getClass());
+
+		return LanguageUtil.get(resourceBundle, key);
 	}
 
 	@Reference
@@ -187,11 +177,5 @@ public class AvailabilityCommerceOrderValidatorImpl
 	@Reference
 	private CPDefinitionInventoryLocalService
 		_cpDefinitionInventoryLocalService;
-
-	@Reference
-	private Portal _portal;
-
-	@Reference
-	private UserLocalService _userLocalService;
 
 }
