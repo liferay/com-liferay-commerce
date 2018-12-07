@@ -12,11 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.frontend.taglib.internal.table;
+package com.liferay.commerce.frontend.taglib.table;
 
-import com.liferay.commerce.frontend.taglib.table.ClayTableAction;
-import com.liferay.commerce.frontend.taglib.table.ClayTableActionProvider;
-import com.liferay.commerce.frontend.taglib.table.ClayTableActionProviderRegistry;
+import com.liferay.commerce.frontend.taglib.internal.table.ClayTableRow;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.ArrayList;
