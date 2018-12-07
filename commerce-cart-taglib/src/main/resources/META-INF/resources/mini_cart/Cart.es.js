@@ -199,32 +199,32 @@ class Cart extends Component {
 				method: 'POST'
 			}
 		)
-		.then(response => response.json())
-		.then(
-			updatedCart => {
-				const updatedPrice = updatedCart.products.reduce(
-					(acc, el) => (el.id === productId ? el.price : acc),
-					null
-				);
-				this.removePendingOperation(productId);
-				this.setProductProperties(productId, {
-					isDeleteDisabled: false,
-					isUpdating: false,
-					price: updatedPrice
-				});
-				return this.summary = updatedCart.summary;
-			}
-		)
-		.catch(
-			err => {
-				this.removePendingOperation(productId);
-				this.setProductProperties(productId, {
-					isDeleteDisabled: false,
-					isUpdating: false
-				});
-				console.log(err);
-			}
-		);
+			.then(response => response.json())
+			.then(
+				updatedCart => {
+					const updatedPrice = updatedCart.products.reduce(
+						(acc, el) => (el.id === productId ? el.price : acc),
+						null
+					);
+					this.removePendingOperation(productId);
+					this.setProductProperties(productId, {
+						isDeleteDisabled: false,
+						isUpdating: false,
+						price: updatedPrice
+					});
+					return this.summary = updatedCart.summary;
+				}
+			)
+			.catch(
+				err => {
+					this.removePendingOperation(productId);
+					this.setProductProperties(productId, {
+						isDeleteDisabled: false,
+						isUpdating: false
+					});
+					console.log(err);
+				}
+			);
 	}
 
 	getProducts() {
@@ -234,20 +234,20 @@ class Cart extends Component {
 				method: 'GET'
 			}
 		)
-		.then(response => response.json())
-		.then(
-			updatedCart => {
-				this.products = updatedCart.products;
-				this.summary = updatedCart.summary;
-				this.productsCount = this.products.length;
-				return !!(this.products && this.summary);
-			}
-		)
-		.catch(
-			err => {
-				return console.log(err);
-			}
-		);
+			.then(response => response.json())
+			.then(
+				updatedCart => {
+					this.products = updatedCart.products;
+					this.summary = updatedCart.summary;
+					this.productsCount = this.products.length;
+					return !!(this.products && this.summary);
+				}
+			)
+			.catch(
+				err => {
+					return console.log(err);
+				}
+			);
 	}
 
 	sendDeleteRequest(productId) {
@@ -259,31 +259,31 @@ class Cart extends Component {
 				method: 'DELETE'
 			}
 		)
-		.then(response => response.json())
-		.then(
-			updatedCart => {
-				this.removePendingOperation(productId);
-				this.setProductProperties(
-					productId,
+			.then(response => response.json())
+			.then(
+				updatedCart => {
+					this.removePendingOperation(productId);
+					this.setProductProperties(
+						productId,
 						{
-						isDeleteDisabled: false
-					}
-				);
+							isDeleteDisabled: false
+						}
+					);
 
 					this.summary = updatedCart.summary;
 
 					const productsToBeRemoved = this.subtractProducts(this.products, updatedCart.products);
-				productsToBeRemoved.forEach(element => {
-					this.deleteProduct(element.id);
-				});
-			}
-		)
-		.catch(
-			err => {
-				this.removePendingOperation(productId);
-				console.log(err);
-			}
-		);
+					productsToBeRemoved.forEach(element => {
+						this.deleteProduct(element.id);
+					});
+				}
+			)
+			.catch(
+				err => {
+					this.removePendingOperation(productId);
+					console.log(err);
+				}
+			);
 	}
 }
 
