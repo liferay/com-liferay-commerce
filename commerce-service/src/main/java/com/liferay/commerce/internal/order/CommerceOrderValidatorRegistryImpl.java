@@ -36,6 +36,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.osgi.framework.BundleContext;
@@ -74,7 +75,8 @@ public class CommerceOrderValidatorRegistryImpl
 
 	@Override
 	public Map<Long, List<CommerceOrderValidatorResult>>
-			getCommerceOrderValidatorResults(CommerceOrder commerceOrder)
+			getCommerceOrderValidatorResults(
+				Locale locale, CommerceOrder commerceOrder)
 		throws PortalException {
 
 		if (commerceOrder == null) {
@@ -92,7 +94,7 @@ public class CommerceOrderValidatorRegistryImpl
 				filteredCommerceOrderValidatorResults = new ArrayList<>();
 
 			List<CommerceOrderValidatorResult> commerceOrderValidatorResults =
-				validate(commerceOrderItem);
+				validate(locale, commerceOrderItem);
 
 			for (CommerceOrderValidatorResult commerceOrderValidatorResult :
 					commerceOrderValidatorResults) {
@@ -141,7 +143,9 @@ public class CommerceOrderValidatorRegistryImpl
 	}
 
 	@Override
-	public boolean isValid(CommerceOrder commerceOrder) throws PortalException {
+	public boolean isValid(Locale locale, CommerceOrder commerceOrder)
+		throws PortalException {
+
 		if (commerceOrder == null) {
 			return false;
 		}
@@ -154,7 +158,8 @@ public class CommerceOrderValidatorRegistryImpl
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 			List<CommerceOrderValidatorResult>
-				itemCommerceOrderValidatorResults = validate(commerceOrderItem);
+				itemCommerceOrderValidatorResults = validate(
+					locale, commerceOrderItem);
 
 			for (CommerceOrderValidatorResult commerceOrderValidatorResult :
 					itemCommerceOrderValidatorResults) {
@@ -168,7 +173,8 @@ public class CommerceOrderValidatorRegistryImpl
 
 	@Override
 	public List<CommerceOrderValidatorResult> validate(
-			CommerceOrder commerceOrder, CPInstance cpInstance, int quantity)
+			Locale locale, CommerceOrder commerceOrder, CPInstance cpInstance,
+			int quantity)
 		throws PortalException {
 
 		List<CommerceOrderValidatorResult> commerceOrderValidatorResults =
@@ -182,7 +188,7 @@ public class CommerceOrderValidatorRegistryImpl
 
 			CommerceOrderValidatorResult commerceOrderValidatorResult =
 				commerceOrderValidator.validate(
-					commerceOrder, cpInstance, quantity);
+					locale, commerceOrder, cpInstance, quantity);
 
 			if (!commerceOrderValidatorResult.isValid() &&
 				commerceOrderValidatorResult.hasMessageResult()) {
@@ -196,7 +202,7 @@ public class CommerceOrderValidatorRegistryImpl
 
 	@Override
 	public List<CommerceOrderValidatorResult> validate(
-			CommerceOrderItem commerceOrderItem)
+			Locale locale, CommerceOrderItem commerceOrderItem)
 		throws PortalException {
 
 		List<CommerceOrderValidatorResult> commerceOrderValidatorResults =
@@ -209,7 +215,7 @@ public class CommerceOrderValidatorRegistryImpl
 				commerceOrderValidators) {
 
 			CommerceOrderValidatorResult commerceOrderValidatorResult =
-				commerceOrderValidator.validate(commerceOrderItem);
+				commerceOrderValidator.validate(locale, commerceOrderItem);
 
 			if (!commerceOrderValidatorResult.isValid()) {
 				commerceOrderValidatorResults.add(commerceOrderValidatorResult);
