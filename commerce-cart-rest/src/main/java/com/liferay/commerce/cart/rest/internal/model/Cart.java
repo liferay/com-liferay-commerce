@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.cart.rest.internal.domain.model;
+package com.liferay.commerce.cart.rest.internal.model;
 
 import java.util.List;
 
