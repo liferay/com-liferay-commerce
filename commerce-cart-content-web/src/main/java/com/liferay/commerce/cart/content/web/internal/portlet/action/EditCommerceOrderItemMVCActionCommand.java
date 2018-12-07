@@ -24,6 +24,8 @@ import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -75,9 +77,14 @@ public class EditCommerceOrderItemMVCActionCommand
 					_commerceOrderItemService.getCommerceOrderItem(
 						commerceOrderItemId);
 
+				ServiceContext serviceContext =
+					ServiceContextFactory.getInstance(
+						CommerceOrderItem.class.getName(), actionRequest);
+
 				_commerceOrderItemService.updateCommerceOrderItem(
 					commerceOrderItem.getCommerceOrderItemId(), quantity,
-					commerceOrderItem.getJson(), commerceContext);
+					commerceOrderItem.getJson(), commerceContext,
+					serviceContext);
 			}
 		}
 		catch (CommerceOrderValidatorException cove) {

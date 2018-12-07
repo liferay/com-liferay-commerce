@@ -207,7 +207,7 @@ public class CommerceOrderItemServiceImpl
 	@Override
 	public CommerceOrderItem updateCommerceOrderItem(
 			long commerceOrderItemId, int quantity,
-			CommerceContext commerceContext)
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceOrderItem commerceOrderItem =
@@ -219,13 +219,13 @@ public class CommerceOrderItemServiceImpl
 			ActionKeys.UPDATE);
 
 		return commerceOrderItemLocalService.updateCommerceOrderItem(
-			commerceOrderItemId, quantity, commerceContext);
+			commerceOrderItemId, quantity, commerceContext, serviceContext);
 	}
 
 	@Override
 	public CommerceOrderItem updateCommerceOrderItem(
 			long commerceOrderItemId, int quantity, String json,
-			CommerceContext commerceContext)
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceOrderItem commerceOrderItem =
@@ -238,7 +238,7 @@ public class CommerceOrderItemServiceImpl
 
 		return commerceOrderItemLocalService.updateCommerceOrderItem(
 			commerceOrderItem.getCommerceOrderItemId(), quantity, json,
-			commerceContext);
+			commerceContext, serviceContext);
 	}
 
 	@Override
