@@ -32,6 +32,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.KeyValuePair;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.math.BigDecimal;
 
@@ -95,8 +96,12 @@ public class OrderSummaryCheckoutStepDisplayContext {
 			getCommerceOrderValidatorResults()
 		throws PortalException {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 		return _commerceOrderValidatorRegistry.getCommerceOrderValidatorResults(
-			_commerceOrder);
+			themeDisplay.getLocale(), _commerceOrder);
 	}
 
 	public CommerceProductPrice getCommerceProductPrice(

@@ -21,6 +21,8 @@ import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.portal.kernel.exception.PortalException;
 
+import java.util.Locale;
+
 /**
  * @author Alessio Antonio Rendina
  */
@@ -30,11 +32,12 @@ public interface CommerceOrderValidator {
 	public String getKey();
 
 	public CommerceOrderValidatorResult validate(
-			CommerceOrder commerceOrder, CPInstance cpInstance, int quantity)
+			Locale locale, CommerceOrder commerceOrder, CPInstance cpInstance,
+			int quantity)
 		throws PortalException;
 
 	public CommerceOrderValidatorResult validate(
-			CommerceOrderItem commerceOrderItem)
+			Locale locale, CommerceOrderItem commerceOrderItem)
 		throws PortalException;
 
 }

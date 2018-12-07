@@ -22,6 +22,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -33,19 +34,22 @@ public interface CommerceOrderValidatorRegistry {
 	public CommerceOrderValidator getCommerceOrderValidator(String key);
 
 	public Map<Long, List<CommerceOrderValidatorResult>>
-			getCommerceOrderValidatorResults(CommerceOrder commerceOrder)
+			getCommerceOrderValidatorResults(
+				Locale locale, CommerceOrder commerceOrder)
 		throws PortalException;
 
 	public List<CommerceOrderValidator> getCommerceOrderValidators();
 
-	public boolean isValid(CommerceOrder commerceOrder) throws PortalException;
-
-	public List<CommerceOrderValidatorResult> validate(
-			CommerceOrder commerceOrder, CPInstance cpInstance, int quantity)
+	public boolean isValid(Locale locale, CommerceOrder commerceOrder)
 		throws PortalException;
 
 	public List<CommerceOrderValidatorResult> validate(
-			CommerceOrderItem commerceOrderItem)
+			Locale locale, CommerceOrder commerceOrder, CPInstance cpInstance,
+			int quantity)
+		throws PortalException;
+
+	public List<CommerceOrderValidatorResult> validate(
+			Locale locale, CommerceOrderItem commerceOrderItem)
 		throws PortalException;
 
 }

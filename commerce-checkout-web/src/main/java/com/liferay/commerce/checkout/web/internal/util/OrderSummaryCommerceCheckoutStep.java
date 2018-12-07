@@ -40,8 +40,10 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -136,8 +138,12 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			CommerceOrder commerceOrder =
 				(CommerceOrder)httpServletRequest.getAttribute(
 					CommerceCheckoutWebKeys.COMMERCE_ORDER);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)httpServletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
-			return _commerceOrderValidatorRegistry.isValid(commerceOrder);
+			return _commerceOrderValidatorRegistry.isValid(
+				themeDisplay.getLocale(), commerceOrder);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
