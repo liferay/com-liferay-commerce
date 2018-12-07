@@ -147,8 +147,7 @@ public class AddCommerceOrderItemMVCActionCommand extends BaseMVCActionCommand {
 
 				errorObject.put(
 					"message",
-					getCommerceOrderValidatorResultMessage(
-						commerceOrderValidatorResult, httpServletRequest));
+					commerceOrderValidatorResult.getLocalizedMessage());
 
 				errorArray.put(errorObject);
 			}
@@ -168,20 +167,6 @@ public class AddCommerceOrderItemMVCActionCommand extends BaseMVCActionCommand {
 		httpServletResponse.setContentType(ContentTypes.APPLICATION_JSON);
 
 		writeJSON(actionResponse, jsonObject);
-	}
-
-	protected String getCommerceOrderValidatorResultMessage(
-		CommerceOrderValidatorResult commerceOrderValidatorResult,
-		HttpServletRequest httpServletRequest) {
-
-		if (commerceOrderValidatorResult.hasArgument()) {
-			return LanguageUtil.format(
-				httpServletRequest, commerceOrderValidatorResult.getMessage(),
-				commerceOrderValidatorResult.getArgument());
-		}
-
-		return LanguageUtil.get(
-			httpServletRequest, commerceOrderValidatorResult.getMessage());
 	}
 
 	protected void writeJSON(ActionResponse actionResponse, Object jsonObj)
