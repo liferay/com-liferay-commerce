@@ -14,10 +14,13 @@
 
 package com.liferay.commerce.cart.taglib.servlet.taglib;
 
+import com.liferay.commerce.cart.taglib.servlet.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -72,7 +75,14 @@ public class MiniCartTag extends ComponentRendererTag {
 
 	@Override
 	public String getModule() {
-		return "commerce-cart-taglib/mini_cart/Cart.es";
+		NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
+
+		if (npmResolver == null) {
+			return StringPool.BLANK;
+		}
+
+		return npmResolver.resolveModuleName(
+			"commerce-cart-taglib/mini_cart/Cart.es");
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(MiniCartTag.class);
