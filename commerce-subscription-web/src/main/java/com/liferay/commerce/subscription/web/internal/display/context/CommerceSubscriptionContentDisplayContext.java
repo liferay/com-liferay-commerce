@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletRequest;
@@ -99,7 +100,11 @@ public class CommerceSubscriptionContentDisplayContext {
 			CommerceSubscriptionEntry commerceSubscriptionEntry)
 		throws PortalException {
 
-		CPInstance cpInstance = commerceSubscriptionEntry.getCPInstance();
+		CPInstance cpInstance = commerceSubscriptionEntry.fetchCPInstance();
+
+		if (cpInstance == null) {
+			return Collections.emptyList();
+		}
 
 		return _cpInstanceHelper.getKeyValuePairs(
 			cpInstance.getJson(), _cpRequestHelper.getLocale());
