@@ -52,7 +52,11 @@ function main {
 
 	start_tomcat
 
-	7z a -md1024m dist/$(get_commerce_bundle_name ${commerce_lpkg_url}) dist/liferay-ce-portal-7.1.1-ga2
+	cd dist
+
+	7z a -md1024m $(get_commerce_bundle_name ${commerce_lpkg_url}) liferay-ce-portal-7.1.1-ga2
+
+	cd ..
 }
 
 function start_tomcat {
