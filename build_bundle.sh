@@ -60,6 +60,10 @@ function main {
 }
 
 function start_tomcat {
+	cp dist/liferay-*/tomcat-*/bin/setenv.sh setenv.sh.bak
+
+	printf "\nexport LIFERAY_CLEAN_OSGI_STATE=true" >> dist/liferay-*/tomcat-*/bin/setenv.sh
+
 	./dist/liferay-*/tomcat-*/bin/catalina.sh start
 
 	until $(curl --head --fail --output /dev/null --silent http://localhost:8080)
@@ -69,9 +73,12 @@ function start_tomcat {
 
 	./dist/liferay-*/tomcat-*/bin/catalina.sh stop
 
-	sleep 10
+	sleep 20
 
+	rm -fr dist/liferay-*/logs/*
 	rm -fr dist/liferay-*/tomcat-*/logs/*
+
+	mv setenv.sh.bak dist/liferay-*/tomcat-*/bin/setenv.sh
 }
 
 main
