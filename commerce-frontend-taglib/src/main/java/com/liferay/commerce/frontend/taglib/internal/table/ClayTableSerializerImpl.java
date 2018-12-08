@@ -15,10 +15,8 @@
 package com.liferay.commerce.frontend.taglib.internal.table;
 
 import com.liferay.commerce.frontend.taglib.table.ClayTable;
-import com.liferay.commerce.frontend.taglib.table.ClayTable.ResponsiveSize;
 import com.liferay.commerce.frontend.taglib.table.ClayTableSchema;
 import com.liferay.commerce.frontend.taglib.table.ClayTableSchemaField;
-import com.liferay.commerce.frontend.taglib.table.ClayTableSchemaField.SortingOrder;
 import com.liferay.commerce.frontend.taglib.table.ClayTableSerializer;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -47,7 +45,7 @@ public class ClayTableSerializerImpl implements ClayTableSerializer {
 		context.put("selectable", clayTable.isSelectable());
 		context.put("showActionsMenu", clayTable.isShowActionsMenu());
 
-		ResponsiveSize responsiveSize = clayTable.getResponsiveSize();
+		ClayTable.ResponsiveSize responsiveSize = clayTable.getResponsiveSize();
 
 		context.put("size", StringUtil.toLowerCase(responsiveSize.toString()));
 
@@ -82,7 +80,8 @@ public class ClayTableSerializerImpl implements ClayTableSerializer {
 			jsonObject.put("label", label);
 			jsonObject.put("sortable", clayTableSchemaField.isSortable());
 
-			SortingOrder sortingOrder = clayTableSchemaField.getSortingOrder();
+			ClayTableSchemaField.SortingOrder sortingOrder =
+				clayTableSchemaField.getSortingOrder();
 
 			if (sortingOrder != null) {
 				jsonObject.put(
