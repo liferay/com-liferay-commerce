@@ -1504,9 +1504,6 @@ public class CommerceOrderLocalServiceImpl
 	@ServiceReference(type = DDMFormValuesHelper.class)
 	private DDMFormValuesHelper _ddmFormValuesHelper;
 
-	@ServiceReference(type = Portal.class)
-	private Portal _portal;
-
 	@ServiceReference(type = WorkflowTaskManager.class)
 	private WorkflowTaskManager _workflowTaskManager;
 
