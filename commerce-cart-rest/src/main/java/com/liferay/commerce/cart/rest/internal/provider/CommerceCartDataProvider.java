@@ -74,7 +74,8 @@ public class CommerceCartDataProvider {
 				commerceOrder, themeDisplay.getLocale(), commerceContext));
 	}
 
-	protected String[] getErrorMessages(CommerceOrderItem commerceOrderItem)
+	protected String[] getErrorMessages(
+			Locale locale, CommerceOrderItem commerceOrderItem)
 		throws PortalException {
 
 		String[] errorMessages = new String[0];
@@ -86,13 +87,14 @@ public class CommerceCartDataProvider {
 				commerceOrderValidators) {
 
 			CommerceOrderValidatorResult commerceOrderValidatorResult =
-				commerceOrderValidator.validate(commerceOrderItem);
+				commerceOrderValidator.validate(locale, commerceOrderItem);
 
 			if (!commerceOrderValidatorResult.isValid() &&
 				commerceOrderValidatorResult.hasMessageResult()) {
 
 				errorMessages = ArrayUtil.append(
-					errorMessages, commerceOrderValidatorResult.getMessage());
+					errorMessages,
+					commerceOrderValidatorResult.getLocalizedMessage());
 			}
 		}
 
@@ -146,19 +148,22 @@ public class CommerceCartDataProvider {
 			commerceOrder.getCommerceOrderItems();
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
+			Locale locale = themeDisplay.getLocale();
+
 			Prices prices = getPrice(
-				commerceOrderItem, themeDisplay.getLocale(), commerceContext);
+				commerceOrderItem, locale, commerceContext);
 
 			Settings settings = getSettings(commerceOrderItem);
 
 			products.add(
 				new Product(
 					commerceOrderItem.getCommerceOrderItemId(),
-					commerceOrderItem.getName(themeDisplay.getLocale()),
+					commerceOrderItem.getName(locale),
 					commerceOrderItem.getSku(), commerceOrderItem.getQuantity(),
 					_cpInstanceHelper.getCPInstanceThumbnailSrc(
 						commerceOrderItem.getCPInstanceId(), themeDisplay),
-					prices, settings, getErrorMessages(commerceOrderItem)));
+					prices, settings,
+					getErrorMessages(locale, commerceOrderItem)));
 		}
 
 		return products;

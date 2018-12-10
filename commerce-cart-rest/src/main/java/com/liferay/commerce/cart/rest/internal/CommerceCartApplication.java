@@ -21,7 +21,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.liferay.commerce.cart.rest.internal.context.provider.CommerceContextProvider;
 import com.liferay.commerce.cart.rest.internal.model.Cart;
-import com.liferay.commerce.cart.rest.internal.model.CartItemUpdate;
 import com.liferay.commerce.cart.rest.internal.provider.CommerceCartDataProvider;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
@@ -31,6 +30,8 @@ import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.portal.events.ServicePreAction;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -44,8 +45,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -157,16 +158,15 @@ public class CommerceCartApplication extends Application {
 		return singletons;
 	}
 
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{commerceOrderItemId}")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateOrderItem(
 		@PathParam("commerceOrderItemId") long commerceOrderItemId,
-		@Context UriInfo uriInfo, @Context CommerceContext commerceContext,
+		@FormParam("quantity") int quantity, @Context UriInfo uriInfo,
+		@Context CommerceContext commerceContext,
 		@Context HttpServletRequest httpServletRequest,
-		@Context HttpServletResponse httpServletResponse,
-		CartItemUpdate cartItemUpdate) {
+		@Context HttpServletResponse httpServletResponse) {
 
 		Cart cart;
 
@@ -181,10 +181,13 @@ public class CommerceCartApplication extends Application {
 			httpServletRequest.setAttribute(
 				WebKeys.THEME_DISPLAY, themeDisplay);
 
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				CommerceOrderItem.class.getName(), httpServletRequest);
+
 			CommerceOrderItem commerceOrderItem =
 				_commerceOrderItemService.updateCommerceOrderItem(
-					commerceOrderItemId, cartItemUpdate.getQuantity(),
-					commerceContext);
+					commerceOrderItemId, quantity, commerceContext,
+					serviceContext);
 
 			cart = _commerceCartDataProvider.getCart(
 				commerceOrderItem.getCommerceOrderId(), themeDisplay,
@@ -240,7 +243,8 @@ public class CommerceCartApplication extends Application {
 
 			if (commerceOrderValidatorResult.hasMessageResult()) {
 				errorMessages = ArrayUtil.append(
-					errorMessages, commerceOrderValidatorResult.getMessage());
+					errorMessages,
+					commerceOrderValidatorResult.getLocalizedMessage());
 			}
 		}
 
