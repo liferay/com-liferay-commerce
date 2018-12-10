@@ -34,7 +34,7 @@ AUI().ready(
 					var cartIconCount = A.one('#b2b-mini-cart-items-count');
 
 					if (cartIconCount) {
-						var orderItemCount = event.commerceOrderItemsQuantity;
+						var orderItemCount = event.productsQuantity;
 
 						cartIconCount.html(orderItemCount);
 					}
