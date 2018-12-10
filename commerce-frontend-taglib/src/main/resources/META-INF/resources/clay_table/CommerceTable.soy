@@ -4,5 +4,30 @@
  * This renders the component's whole content.
  */
 {template .render}
+	{@param _handleItemToggled: any}
+	{@param items: ?}
+	{@param schema: ?}
+	{@param spritemap: string}
+	{@param? selectable: bool}
+
+	{call ClayTable.render}
+		{param events: ['itemToggled': $_handleItemToggled ] /}
+		{param items: $items /}
+		{param schema: $schema /}
+		{param selectable: $selectable /}
+		{param spritemap: $spritemap /}
+	{/call}
+
+	{call ClayPaginationBar.render}
+		{param events: ['itemsPerPageClicked': $_handleItemsPerPageClicked, 'pageClicked': _handlePageClicked ] /}
+		{param currentPage: $currentPage /}
+		{param selectedEntry: $selectedEntry /}
+		{param entries: $items /}
+		{param spritemap: $spritemap /}
+		{param totalEntries: $totalEntries /}
+		{param baseHref: $baseHref /}
+		{param spritemap: $spritemap /}
+		{param id: $id /}
+	{/call}
 
 {/template}
