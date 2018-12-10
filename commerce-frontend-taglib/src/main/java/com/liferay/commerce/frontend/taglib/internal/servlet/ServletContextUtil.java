@@ -91,7 +91,7 @@ public class ServletContextUtil {
 	}
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.commerce.cart.taglib)",
+		target = "(osgi.web.symbolicname=com.liferay.commerce.frontend.taglib)",
 		unbind = "-"
 	)
 	protected void setServletContext(ServletContext servletContext) {

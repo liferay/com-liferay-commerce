@@ -47,19 +47,18 @@ public class ClayTableUtil {
 		for (Object item : items) {
 			ClayTableRow clayTableRow = new ClayTableRow(item);
 
-			if (clayTableActionProviders == null) {
-				continue;
-			}
+			if (clayTableActionProviders != null) {
 
-			for (ClayTableActionProvider clayTableActionProvider :
+				for (ClayTableActionProvider clayTableActionProvider :
 					clayTableActionProviders) {
 
-				List<ClayTableAction> clayTableActions =
-					clayTableActionProvider.clayTableActions(
-						httpServletRequest, groupId, item);
+					List<ClayTableAction> clayTableActions =
+						clayTableActionProvider.clayTableActions(
+							httpServletRequest, groupId, item);
 
-				if (clayTableActions != null) {
-					clayTableRow.addActionItems(clayTableActions);
+					if (clayTableActions != null) {
+						clayTableRow.addActionItems(clayTableActions);
+					}
 				}
 			}
 
