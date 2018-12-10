@@ -21,6 +21,7 @@ import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
 import com.liferay.commerce.frontend.PaginationImpl;
+import com.liferay.commerce.frontend.taglib.internal.pagination.model.ClayPaginationEntry;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -30,6 +31,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +59,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 		int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
 
 		try {
-			CommerceDataSetDataProvider commerceDataProvider =
+			CommerceDataSetDataProvider commerceDataSetDataProvider =
 				_commerceDataProviderRegistry.getCommerceDataProvider(
 					dataProviderKey);
 
@@ -72,7 +74,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 				putValue(entry.getKey(), entry.getValue());
 			}
 
-			List<Object> items = commerceDataProvider.getItems(
+			List<Object> items = commerceDataSetDataProvider.getItems(
 				themeDisplay.getScopeGroupId(),
 				new PaginationImpl(itemPerPage, pageNumber), null);
 
@@ -80,6 +82,22 @@ public class CommerceTableTag extends ComponentRendererTag {
 				themeDisplay.getScopeGroupId(), tableName, items, request);
 
 			putValue("items", JSONFactoryUtil.looseDeserialize(json));
+
+			int totalItems = commerceDataSetDataProvider.countItems(
+				themeDisplay.getScopeGroupId());
+
+			List<ClayPaginationEntry> clayPaginationEntries = new ArrayList<>();
+
+			clayPaginationEntries.add(new ClayPaginationEntry("#", 5));
+			clayPaginationEntries.add(new ClayPaginationEntry("#", 10));
+			clayPaginationEntries.add(new ClayPaginationEntry("#", 100));
+			clayPaginationEntries.add(new ClayPaginationEntry("#", 1000));
+
+			putValue("id", clayTable.getId());
+			putValue("totalItems", totalItems);
+			putValue("currentPage", pageNumber);
+			putValue("paginationSelectedEntry", 1);
+			putValue("paginationEntries", clayPaginationEntries);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

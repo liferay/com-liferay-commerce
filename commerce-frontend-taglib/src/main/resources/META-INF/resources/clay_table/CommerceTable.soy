@@ -4,18 +4,39 @@
  * This renders the component's whole content.
  */
 {template .render}
+	{@param _handlePageClicked: any}
 	{@param _handleItemToggled: any}
+	{@param _handleItemsPerPageClicked: any}
+	{@param currentPage: int}
+	{@param? id: string}
 	{@param items: ?}
+	{@param? paginationBaseHref: string}
+	{@param paginationEntries: ?}
+	{@param paginationSelectedEntry: int}
 	{@param schema: ?}
 	{@param spritemap: string}
 	{@param? selectable: bool}
+	{@param totalItems: int}
 
-	{call ClayTable.render}
-		{param events: ['itemToggled': $_handleItemToggled ] /}
-		{param items: $items /}
-		{param schema: $schema /}
-		{param selectable: $selectable /}
-		{param spritemap: $spritemap /}
-	{/call}
+	<div>
+		{call ClayTable.render}
+			{param events: ['itemToggled': $_handleItemToggled ] /}
+			{param id: $id /}
+			{param items: $items /}
+			{param schema: $schema /}
+			{param selectable: $selectable /}
+			{param spritemap: $spritemap /}
+		{/call}
 
+		{call ClayPaginationBar.render}
+			{param events: ['itemsPerPageClicked': $_handleItemsPerPageClicked, 'pageClicked': $_handlePageClicked ] /}
+			{param currentPage: $currentPage /}
+			{param selectedEntry: $paginationSelectedEntry /}
+			{param entries: $paginationEntries /}
+			{param spritemap: $spritemap /}
+			{param totalEntries: $totalItems /}
+			{param baseHref: $paginationBaseHref /}
+			{param id: $id + 'Pagination' /}
+		{/call}
+	</div>
 {/template}
