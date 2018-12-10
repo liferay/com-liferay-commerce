@@ -73,7 +73,7 @@ public class EditCommerceOrderItemMVCActionCommand
 				cpInstanceId);
 
 			_commerceOrderItemService.addCommerceOrderItem(
-				commerceOrderId, cpInstanceId, 1, 0, cpInstance.getJson(),
+				commerceOrderId, cpInstanceId, 1, cpInstance.getJson(),
 				commerceContext, serviceContext);
 		}
 	}

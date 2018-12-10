@@ -118,7 +118,7 @@ public class CommerceOrderItemLocalServiceTest {
 		CommerceOrderItem commerceOrderItem =
 			_commerceOrderItemLocalService.addCommerceOrderItem(
 				commerceOrder.getCommerceOrderId(),
-				cpInstance.getCPInstanceId(), 1, 0, null, commerceContext,
+				cpInstance.getCPInstanceId(), 1, null, commerceContext,
 				serviceContext);
 
 		List<CommerceOrderItem> commerceOrderItems =
@@ -183,7 +183,7 @@ public class CommerceOrderItemLocalServiceTest {
 
 		_commerceOrderItemLocalService.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(), 1,
-			0, null, commerceContext, serviceContext);
+			null, commerceContext, serviceContext);
 	}
 
 	@Test(expected = CommerceOrderValidatorException.class)
@@ -232,7 +232,7 @@ public class CommerceOrderItemLocalServiceTest {
 
 		_commerceOrderItemLocalService.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(), 1,
-			0, null, commerceContext, serviceContext);
+			null, commerceContext, serviceContext);
 	}
 
 	@Rule
