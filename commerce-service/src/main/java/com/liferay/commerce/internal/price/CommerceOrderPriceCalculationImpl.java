@@ -306,9 +306,6 @@ public class CommerceOrderPriceCalculationImpl
 	private CommerceMoneyFactory _commerceMoneyFactory;
 
 	@Reference
-	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
-
-	@Reference
 	private CommerceTaxCalculation _commerceTaxCalculation;
 
 }
