@@ -18,20 +18,40 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @XmlRootElement(name = "cartItem")
 public class CartItemUpdate {
+
+	@XmlElement
+	public String getOptionsJSON() {
+		return _optionsJSON;
+	}
+
+	@XmlElement
+	public long getProductId() {
+		return _productId;
+	}
 
 	@XmlElement
 	public int getQuantity() {
 		return _quantity;
 	}
 
+	public void setOptionsJSON(String optionsJSON) {
+		_optionsJSON = optionsJSON;
+	}
+
+	public void setProductId(long productId) {
+		_productId = productId;
+	}
+
 	public void setQuantity(int quantity) {
 		_quantity = quantity;
 	}
 
+	private String _optionsJSON;
+	private long _productId;
 	private int _quantity;
 
 }

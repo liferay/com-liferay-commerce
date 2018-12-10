@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.liferay.commerce.cart.rest.internal.context.provider.CommerceContextProvider;
+import com.liferay.commerce.cart.rest.internal.model.AddToCartResponse;
 import com.liferay.commerce.cart.rest.internal.model.Cart;
 import com.liferay.commerce.cart.rest.internal.provider.CommerceCartDataProvider;
 import com.liferay.commerce.context.CommerceContext;
@@ -27,16 +28,17 @@ import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.service.CommerceOrderItemService;
-import com.liferay.portal.events.ServicePreAction;
+import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.HashSet;
 import java.util.List;
@@ -49,6 +51,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -76,31 +79,77 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 )
 public class CommerceCartApplication extends Application {
 
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{cartId}")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addToCart(
+		@PathParam("cartId") long cartId, @Context UriInfo uriInfo,
+		@Context CommerceContext commerceContext,
+		@Context HttpServletRequest httpServletRequest,
+		@Context HttpServletResponse httpServletResponse,
+		CartItemUpdate cartItemUpdate) {
+
+		AddToCartResponse addToCartResponse;
+
+		try {
+			EventsProcessorUtil.process(
+				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,
+				PropsValues.SERVLET_SERVICE_EVENTS_PRE, httpServletRequest,
+				httpServletResponse);
+
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				CommerceOrderItem.class.getName(), httpServletRequest);
+
+			CommerceOrderItem commerceOrderItem =
+				_commerceOrderItemService.upsertCommerceOrderItem(
+					cartId, cartItemUpdate.getProductId(),
+					cartItemUpdate.getQuantity(),
+					cartItemUpdate.getOptionsJSON(), commerceContext,
+					serviceContext);
+
+			addToCartResponse = _commerceCartDataProvider.getAddToCartResponse(
+				commerceOrderItem.getCommerceOrderId(), httpServletRequest,
+				commerceContext);
+		}
+		catch (Exception e) {
+			if (e instanceof CommerceOrderValidatorException) {
+				addToCartResponse = new AddToCartResponse(
+					_getCommerceOrderValidatorResultsMessages(
+						(CommerceOrderValidatorException)e));
+			}
+			else {
+				addToCartResponse = new AddToCartResponse(
+					StringUtil.split(e.getLocalizedMessage()));
+			}
+		}
+
+		return getResponse(addToCartResponse);
+	}
+
 	@DELETE
-	@Path("/{commerceOrderItemId}")
+	@Path("/{productId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteCommerceOrderItem(
-		@PathParam("commerceOrderItemId") long commerceOrderItemId,
-		@Context UriInfo uriInfo, @Context CommerceContext commerceContext,
+		@PathParam("productId") long productId, @Context UriInfo uriInfo,
+		@Context CommerceContext commerceContext,
 		@Context HttpServletRequest httpServletRequest,
 		@Context HttpServletResponse httpServletResponse) {
 
 		Cart cart;
 
 		try {
-			ServicePreAction servicePreAction =
-				(ServicePreAction)InstancePool.get(
-					ServicePreAction.class.getName());
+			EventsProcessorUtil.process(
+				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,
+				PropsValues.SERVLET_SERVICE_EVENTS_PRE, httpServletRequest,
+				httpServletResponse);
 
-			ThemeDisplay themeDisplay = servicePreAction.initThemeDisplay(
-				httpServletRequest, httpServletResponse);
-
-			httpServletRequest.setAttribute(
-				WebKeys.THEME_DISPLAY, themeDisplay);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)httpServletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 			CommerceOrderItem commerceOrderItem =
-				_commerceOrderItemService.getCommerceOrderItem(
-					commerceOrderItemId);
+				_commerceOrderItemService.getCommerceOrderItem(productId);
 
 			long commerceOrderId = commerceOrderItem.getCommerceOrderId();
 
@@ -111,39 +160,40 @@ public class CommerceCartApplication extends Application {
 				commerceOrderId, themeDisplay, commerceContext);
 		}
 		catch (Exception e) {
-			cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
+			cart = new Cart(
+				null, null, false, StringUtil.split(e.getLocalizedMessage()));
 		}
 
 		return getResponse(cart);
 	}
 
 	@GET
-	@Path("/{commerceOrderId}")
+	@Path("/{cartId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCommerceOrder(
-		@PathParam("commerceOrderId") long commerceOrderId,
-		@Context UriInfo uriInfo, @Context CommerceContext commerceContext,
+		@PathParam("cartId") long cartId, @Context UriInfo uriInfo,
+		@Context CommerceContext commerceContext,
 		@Context HttpServletRequest httpServletRequest,
 		@Context HttpServletResponse httpServletResponse) {
 
 		Cart cart;
 
 		try {
-			ServicePreAction servicePreAction =
-				(ServicePreAction)InstancePool.get(
-					ServicePreAction.class.getName());
+			EventsProcessorUtil.process(
+				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,
+				PropsValues.SERVLET_SERVICE_EVENTS_PRE, httpServletRequest,
+				httpServletResponse);
 
-			ThemeDisplay themeDisplay = servicePreAction.initThemeDisplay(
-				httpServletRequest, httpServletResponse);
-
-			httpServletRequest.setAttribute(
-				WebKeys.THEME_DISPLAY, themeDisplay);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)httpServletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 			cart = _commerceCartDataProvider.getCart(
-				commerceOrderId, themeDisplay, commerceContext);
+				cartId, themeDisplay, commerceContext);
 		}
 		catch (Exception e) {
-			cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
+			cart = new Cart(
+				null, null, false, StringUtil.split(e.getLocalizedMessage()));
 		}
 
 		return getResponse(cart);
@@ -158,36 +208,35 @@ public class CommerceCartApplication extends Application {
 		return singletons;
 	}
 
-	@Path("/{commerceOrderItemId}")
-	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{productId}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@PUT
 	public Response updateOrderItem(
-		@PathParam("commerceOrderItemId") long commerceOrderItemId,
-		@FormParam("quantity") int quantity, @Context UriInfo uriInfo,
+		@PathParam("productId") long productId, @Context UriInfo uriInfo,
 		@Context CommerceContext commerceContext,
 		@Context HttpServletRequest httpServletRequest,
-		@Context HttpServletResponse httpServletResponse) {
+		@Context HttpServletResponse httpServletResponse,
+		CartItemUpdate cartItemUpdate) {
 
 		Cart cart;
 
 		try {
-			ServicePreAction servicePreAction =
-				(ServicePreAction)InstancePool.get(
-					ServicePreAction.class.getName());
+			EventsProcessorUtil.process(
+				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,
+				PropsValues.SERVLET_SERVICE_EVENTS_PRE, httpServletRequest,
+				httpServletResponse);
 
-			ThemeDisplay themeDisplay = servicePreAction.initThemeDisplay(
-				httpServletRequest, httpServletResponse);
-
-			httpServletRequest.setAttribute(
-				WebKeys.THEME_DISPLAY, themeDisplay);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)httpServletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				CommerceOrderItem.class.getName(), httpServletRequest);
 
 			CommerceOrderItem commerceOrderItem =
 				_commerceOrderItemService.updateCommerceOrderItem(
-					commerceOrderItemId, quantity, commerceContext,
-					serviceContext);
+					productId, cartItemUpdate.getQuantity(), commerceContext);
 
 			cart = _commerceCartDataProvider.getCart(
 				commerceOrderItem.getCommerceOrderId(), themeDisplay,
@@ -196,26 +245,29 @@ public class CommerceCartApplication extends Application {
 		catch (Exception e) {
 			if (e instanceof CommerceOrderValidatorException) {
 				cart = new Cart(
+					null, null, false,
 					_getCommerceOrderValidatorResultsMessages(
 						(CommerceOrderValidatorException)e));
 			}
 			else {
-				cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
+				cart = new Cart(
+					null, null, false,
+					StringUtil.split(e.getLocalizedMessage()));
 			}
 		}
 
 		return getResponse(cart);
 	}
 
-	protected Response getResponse(Cart cart) {
-		if (cart == null) {
+	protected Response getResponse(Object object) {
+		if (object == null) {
 			return Response.status(
 				Response.Status.NOT_FOUND
 			).build();
 		}
 
 		try {
-			String json = _OBJECT_MAPPER.writeValueAsString(cart);
+			String json = _OBJECT_MAPPER.writeValueAsString(object);
 
 			return Response.ok(
 				json, MediaType.APPLICATION_JSON

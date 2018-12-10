@@ -21,15 +21,14 @@ import java.util.List;
  */
 public class Cart {
 
-	public Cart(List<Product> products, Summary summary) {
+	public Cart(
+		List<Product> products, Summary summary, boolean success,
+		String[] errorMessages) {
+
 		_products = products;
 		_summary = summary;
-		_success = true;
-	}
-
-	public Cart(String[] errorMessages) {
+		_success = success;
 		_errorMessages = errorMessages;
-		_success = false;
 	}
 
 	public String[] getErrorMessages() {
@@ -57,8 +56,8 @@ public class Cart {
 	}
 
 	private String[] _errorMessages;
-	private List<Product> _products;
+	private final List<Product> _products;
 	private boolean _success;
-	private Summary _summary;
+	private final Summary _summary;
 
 }

@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.cart.rest.internal.provider;
 
+import com.liferay.commerce.cart.rest.internal.model.AddToCartResponse;
 import com.liferay.commerce.cart.rest.internal.model.Cart;
 import com.liferay.commerce.cart.rest.internal.model.Prices;
 import com.liferay.commerce.cart.rest.internal.model.Product;
@@ -39,10 +40,12 @@ import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.math.BigDecimal;
 
@@ -50,6 +53,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -59,6 +64,29 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = CommerceCartDataProvider.class)
 public class CommerceCartDataProvider {
+
+	public AddToCartResponse getAddToCartResponse(
+			long commerceOrderId, HttpServletRequest httpServletRequest,
+			CommerceContext commerceContext)
+		throws Exception {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		Cart cart = getCart(commerceOrderId, themeDisplay, commerceContext);
+
+		int productsQuantity =
+			_commerceOrderItemService.getCommerceOrderItemsQuantity(
+				commerceOrderId);
+
+		String successMessage = LanguageUtil.get(
+			httpServletRequest,
+			"the-product-was-successfully-added-to-the-cart");
+
+		return new AddToCartResponse(
+			cart, productsQuantity, true, StringUtil.split(successMessage));
+	}
 
 	public Cart getCart(
 			long commerceOrderId, ThemeDisplay themeDisplay,
@@ -71,7 +99,8 @@ public class CommerceCartDataProvider {
 		return new Cart(
 			getProducts(commerceOrder, themeDisplay, commerceContext),
 			getSummary(
-				commerceOrder, themeDisplay.getLocale(), commerceContext));
+				commerceOrder, themeDisplay.getLocale(), commerceContext),
+			true, null);
 	}
 
 	protected String[] getErrorMessages(
