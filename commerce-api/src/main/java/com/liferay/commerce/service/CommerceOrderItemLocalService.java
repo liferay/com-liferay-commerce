@@ -77,7 +77,7 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem addCommerceOrderItem(long commerceOrderId,
-		long cpInstanceId, int quantity, int shippedQuantity, String json,
+		long cpInstanceId, int quantity, String json,
 		CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
 
@@ -337,7 +337,7 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 		throws PortalException;
 
 	public CommerceOrderItem upsertCommerceOrderItem(long commerceOrderId,
-		long cpInstanceId, int quantity, int shippedQuantity, String json,
+		long cpInstanceId, int quantity, String json,
 		CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
 }

@@ -59,7 +59,7 @@ public interface CommerceOrderItemService extends BaseService {
 	 * Never modify or reference this interface directly. Always use {@link CommerceOrderItemServiceUtil} to access the commerce order item remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceOrderItemServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceOrderItem addCommerceOrderItem(long commerceOrderId,
-		long cpInstanceId, int quantity, int shippedQuantity, String json,
+		long cpInstanceId, int quantity, String json,
 		CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
 
@@ -124,7 +124,7 @@ public interface CommerceOrderItemService extends BaseService {
 		ServiceContext serviceContext) throws PortalException;
 
 	public CommerceOrderItem upsertCommerceOrderItem(long commerceOrderId,
-		long cpInstanceId, int quantity, int shippedQuantity, String json,
+		long cpInstanceId, int quantity, String json,
 		CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
 }
