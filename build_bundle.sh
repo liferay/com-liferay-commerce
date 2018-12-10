@@ -19,66 +19,105 @@ function date {
 	fi
 }
 
-function get_commerce_bundle_name {
-	local commerce_version=${1%/*}
+function main {
 
-	commerce_version=${commerce_version##*/}
+	#
+	# Make temporary directory.
+	#
 
 	local current_date=$(date)
 
 	local timestamp=$(date "${current_date}" "+%Y%m%d%H%M")
 
-	local commerce_bundle_name=liferay-commerce-${commerce_version}-${timestamp}.7z
+	mkdir -p ${timestamp}
 
-	echo ${commerce_bundle_name}
-}
+	#
+	# Download and extract Portal.
+	#
 
-function main {
-	rm -fr dist
-
-	mkdir -p dist
-
-	local portal_bundle_url=https://releases.liferay.com/portal/7.1.1-ga2/liferay-ce-portal-tomcat-7.1.1-ga2-20181112144637000.7z
+	local portal_bundle_url=http://mirrors.lax.liferay.com/${1}
 
 	local portal_bundle_name=${portal_bundle_url##*/}
 
-	curl -o dist/${portal_bundle_name} ${portal_bundle_url}
+	curl -o ${timestamp}/${portal_bundle_name} ${portal_bundle_url}
 
-	7z x -Odist dist/${portal_bundle_name}
+	7z x -O${timestamp} ${timestamp}/${portal_bundle_name}
 
-	local commerce_lpkg_url=https://releases.liferay.com/commerce/1.0.2/Liferay%20Commerce%201.0.2.lpkg
+	rm ${timestamp}/${portal_bundle_name}
 
-	curl -o "dist/liferay-ce-portal-7.1.1-ga2/osgi/marketplace/Liferay Commerce.lpkg" ${commerce_lpkg_url}
+	if [[ ${portal_bundle_name} == *-dxp-* ]]
+	then
+		echo "Download fixpack."
+	fi
 
-	start_tomcat
+	#
+	# Rename Portal to Commerce directory.
+	#
 
-	cd dist
+	local commerce_lpkg_url=http://mirrors.lax.liferay.com/${2}
 
-	7z a -md1024m $(get_commerce_bundle_name ${commerce_lpkg_url}) liferay-ce-portal-7.1.1-ga2
+	local commerce_version=${commerce_lpkg_url%/*}
+
+	commerce_version=${commerce_version##*/}
+
+	local commerce_bundle_name
+
+	if [[ ${portal_bundle_name} == *-dxp-* ]]
+	then
+		commerce_bundle_name=liferay-commerce-enterprise-${commerce_version}
+	else
+		commerce_bundle_name=liferay-commerce-${commerce_version}
+	fi
+
+	mv ${timestamp}/liferay-* ${timestamp}/${commerce_bundle_name}
+
+	#
+	# Download Commerce.
+	#
+
+	local commerce_lpkg_url=http://mirrors.lax.liferay.com/${2}
+
+	curl -o "${timestamp}/${commerce_bundle_name}/osgi/marketplace/Liferay Commerce.lpkg" ${commerce_lpkg_url}
+
+	#
+	# Start Tomcat.
+	#
+
+	start_tomcat ${timestamp}
+
+	#
+	# Build bundle.
+	#
+
+	cd ${timestamp}
+
+	7z a -md1024m ${commerce_bundle_name}-${timestamp}.7z ${commerce_bundle_name}
 
 	cd ..
 }
 
 function start_tomcat {
-	cp dist/liferay-*/tomcat-*/bin/setenv.sh setenv.sh.bak
+	local timestamp=${1}
 
-	printf "\nexport LIFERAY_CLEAN_OSGI_STATE=true" >> dist/liferay-*/tomcat-*/bin/setenv.sh
+	cp ${timestamp}/liferay-commerce-*/tomcat-*/bin/setenv.sh setenv.sh.bak
 
-	./dist/liferay-*/tomcat-*/bin/catalina.sh start
+	printf "\nexport LIFERAY_CLEAN_OSGI_STATE=true" >> ${timestamp}/liferay-commerce-*/tomcat-*/bin/setenv.sh
+
+	./${timestamp}/liferay-commerce-*/tomcat-*/bin/catalina.sh start
 
 	until $(curl --head --fail --output /dev/null --silent http://localhost:8080)
 	do
 		sleep 3
 	done
 
-	./dist/liferay-*/tomcat-*/bin/catalina.sh stop
+	./${timestamp}/liferay-commerce-*/tomcat-*/bin/catalina.sh stop
 
 	sleep 20
 
-	rm -fr dist/liferay-*/logs/*
-	rm -fr dist/liferay-*/tomcat-*/logs/*
+	rm -fr ${timestamp}/liferay-commerce-*/logs/*
+	rm -fr ${timestamp}/liferay-commerce-*/tomcat-*/logs/*
 
-	mv setenv.sh.bak dist/liferay-*/tomcat-*/bin/setenv.sh
+	mv setenv.sh.bak ${timestamp}/liferay-commerce-*/tomcat-*/bin/setenv.sh
 }
 
-main
+main ${1} ${2}
