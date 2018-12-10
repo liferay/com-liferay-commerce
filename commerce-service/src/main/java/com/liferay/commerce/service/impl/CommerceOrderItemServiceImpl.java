@@ -30,23 +30,23 @@ import java.util.List;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class CommerceOrderItemServiceImpl
 	extends CommerceOrderItemServiceBaseImpl {
 
 	@Override
 	public CommerceOrderItem addCommerceOrderItem(
-			long commerceOrderId, long cpInstanceId, int quantity,
-			int shippedQuantity, String json, CommerceContext commerceContext,
-			ServiceContext serviceContext)
+			long commerceOrderId, long cpInstanceId, int quantity, String json,
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		_commerceOrderModelResourcePermission.check(
 			getPermissionChecker(), commerceOrderId, ActionKeys.UPDATE);
 
 		return commerceOrderItemLocalService.addCommerceOrderItem(
-			commerceOrderId, cpInstanceId, quantity, shippedQuantity, json,
-			commerceContext, serviceContext);
+			commerceOrderId, cpInstanceId, quantity, json, commerceContext,
+			serviceContext);
 	}
 
 	@Override
@@ -243,17 +243,16 @@ public class CommerceOrderItemServiceImpl
 
 	@Override
 	public CommerceOrderItem upsertCommerceOrderItem(
-			long commerceOrderId, long cpInstanceId, int quantity,
-			int shippedQuantity, String json, CommerceContext commerceContext,
-			ServiceContext serviceContext)
+			long commerceOrderId, long cpInstanceId, int quantity, String json,
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		_commerceOrderModelResourcePermission.check(
 			getPermissionChecker(), commerceOrderId, ActionKeys.UPDATE);
 
 		return commerceOrderItemLocalService.upsertCommerceOrderItem(
-			commerceOrderId, cpInstanceId, quantity, shippedQuantity, json,
-			commerceContext, serviceContext);
+			commerceOrderId, cpInstanceId, quantity, json, commerceContext,
+			serviceContext);
 	}
 
 	private static volatile ModelResourcePermission<CommerceOrder>

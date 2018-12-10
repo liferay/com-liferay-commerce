@@ -74,9 +74,8 @@ public class CommerceOrderItemLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrderItem addCommerceOrderItem(
-			long commerceOrderId, long cpInstanceId, int quantity,
-			int shippedQuantity, String json, CommerceContext commerceContext,
-			ServiceContext serviceContext)
+			long commerceOrderId, long cpInstanceId, int quantity, String json,
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceOrder commerceOrder =
@@ -121,7 +120,7 @@ public class CommerceOrderItemLocalServiceImpl
 			commerceOrder.getCommerceOrderId());
 		commerceOrderItem.setCPInstanceId(cpInstanceId);
 		commerceOrderItem.setQuantity(quantity);
-		commerceOrderItem.setShippedQuantity(shippedQuantity);
+		commerceOrderItem.setShippedQuantity(0);
 		commerceOrderItem.setJson(json);
 		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
 		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
@@ -419,9 +418,8 @@ public class CommerceOrderItemLocalServiceImpl
 
 	@Override
 	public CommerceOrderItem upsertCommerceOrderItem(
-			long commerceOrderId, long cpInstanceId, int quantity,
-			int shippedQuantity, String json, CommerceContext commerceContext,
-			ServiceContext serviceContext)
+			long commerceOrderId, long cpInstanceId, int quantity, String json,
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		List<CommerceOrderItem> commerceOrderItems = getCommerceOrderItems(
@@ -438,7 +436,7 @@ public class CommerceOrderItemLocalServiceImpl
 		}
 
 		return addCommerceOrderItem(
-			commerceOrderId, cpInstanceId, quantity, 0, json, commerceContext,
+			commerceOrderId, cpInstanceId, quantity, json, commerceContext,
 			serviceContext);
 	}
 
