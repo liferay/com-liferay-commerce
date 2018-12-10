@@ -49,7 +49,7 @@ public class ClayTableUtil {
 
 			if (clayTableActionProviders != null) {
 				for (ClayTableActionProvider clayTableActionProvider :
-					clayTableActionProviders) {
+						clayTableActionProviders) {
 
 					List<ClayTableAction> clayTableActions =
 						clayTableActionProvider.clayTableActions(
