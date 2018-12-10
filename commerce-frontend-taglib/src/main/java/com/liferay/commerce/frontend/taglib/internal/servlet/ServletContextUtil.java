@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.frontend.taglib.internal.servlet;
 
-import com.liferay.commerce.data.provider.CommerceDataProviderRegistry;
-import com.liferay.commerce.frontend.taglib.table.ClayTableRegistry;
-import com.liferay.commerce.frontend.taglib.table.ClayTableSerializer;
-import com.liferay.commerce.frontend.taglib.table.ClayTableUtil;
+import com.liferay.commerce.frontend.ClayTableDataJSONBuilder;
+import com.liferay.commerce.frontend.ClayTableRegistry;
+import com.liferay.commerce.frontend.ClayTableSerializer;
+import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 
 import javax.servlet.ServletContext;
 
@@ -32,16 +32,16 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = ServletContextUtil.class)
 public class ServletContextUtil {
 
+	public static final ClayTableDataJSONBuilder getClayTableDataJSONBuilder() {
+		return _instance._getClayTableDataJSONBuilder();
+	}
+
 	public static final ClayTableRegistry getClayTableRegistry() {
 		return _instance._getClayTableRegistry();
 	}
 
 	public static final ClayTableSerializer getClayTableSerializer() {
 		return _instance._getClayTableSerializer();
-	}
-
-	public static final ClayTableUtil getClayTableUtil() {
-		return _instance._getClayTableUtil();
 	}
 
 	public static final CommerceDataProviderRegistry
@@ -65,6 +65,13 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
+	protected void setClayTableDataJSONBuilder(
+		ClayTableDataJSONBuilder clayTableDataJSONBuilder) {
+
+		_clayTableDataJSONBuilder = clayTableDataJSONBuilder;
+	}
+
+	@Reference(unbind = "-")
 	protected void setClayTableRegistry(ClayTableRegistry clayTableRegistry) {
 		_clayTableRegistry = clayTableRegistry;
 	}
@@ -74,11 +81,6 @@ public class ServletContextUtil {
 		ClayTableSerializer clayTableSerializer) {
 
 		_clayTableSerializer = clayTableSerializer;
-	}
-
-	@Reference(unbind = "-")
-	protected void setClayTableUtil(ClayTableUtil clayTableUtil) {
-		_clayTableUtil = clayTableUtil;
 	}
 
 	@Reference(unbind = "-")
@@ -96,16 +98,16 @@ public class ServletContextUtil {
 		_servletContext = servletContext;
 	}
 
+	private ClayTableDataJSONBuilder _getClayTableDataJSONBuilder() {
+		return _clayTableDataJSONBuilder;
+	}
+
 	private ClayTableRegistry _getClayTableRegistry() {
 		return _clayTableRegistry;
 	}
 
 	private ClayTableSerializer _getClayTableSerializer() {
 		return _clayTableSerializer;
-	}
-
-	private ClayTableUtil _getClayTableUtil() {
-		return _clayTableUtil;
 	}
 
 	private CommerceDataProviderRegistry _getCommerceDataProviderRegistry() {
@@ -118,9 +120,9 @@ public class ServletContextUtil {
 
 	private static ServletContextUtil _instance;
 
+	private ClayTableDataJSONBuilder _clayTableDataJSONBuilder;
 	private ClayTableRegistry _clayTableRegistry;
 	private ClayTableSerializer _clayTableSerializer;
-	private ClayTableUtil _clayTableUtil;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
 	private ServletContext _servletContext;
 

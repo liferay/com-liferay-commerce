@@ -14,20 +14,18 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
-import com.liferay.commerce.data.provider.CommerceDataProvider;
-import com.liferay.commerce.data.provider.CommerceDataProviderRegistry;
+import com.liferay.commerce.frontend.ClayTable;
+import com.liferay.commerce.frontend.ClayTableDataJSONBuilder;
+import com.liferay.commerce.frontend.ClayTableRegistry;
+import com.liferay.commerce.frontend.ClayTableSerializer;
+import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
+import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
+import com.liferay.commerce.frontend.PaginationImpl;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.commerce.frontend.taglib.internal.table.ClayTableRow;
-import com.liferay.commerce.frontend.taglib.table.ClayTable;
-import com.liferay.commerce.frontend.taglib.table.ClayTableRegistry;
-import com.liferay.commerce.frontend.taglib.table.ClayTableSerializer;
-import com.liferay.commerce.frontend.taglib.table.ClayTableUtil;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -58,35 +56,36 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 		int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
 
-		CommerceDataProvider commerceDataProvider =
-			_commerceDataProviderRegistry.getCommerceDataProvider(
-				dataProviderKey);
-
-		ClayTable clayTable = _clayTableRegistry.getClayTable(tableName);
-
-		Map<String, Object> clayTableContext = _clayTableSerializer.serialize(
-			clayTable);
-
-		for (Map.Entry<String, Object> entry : clayTableContext.entrySet()) {
-			putValue(entry.getKey(), entry.getValue());
-		}
-
 		try {
+			CommerceDataSetDataProvider commerceDataProvider =
+				_commerceDataProviderRegistry.getCommerceDataProvider(
+					dataProviderKey);
+
+			ClayTable clayTable = _clayTableRegistry.getClayTable(tableName);
+
+			Map<String, Object> clayTableContext =
+				_clayTableSerializer.serialize(clayTable);
+
+			for (Map.Entry<String, Object> entry :
+					clayTableContext.entrySet()) {
+
+				putValue(entry.getKey(), entry.getValue());
+			}
+
 			List<Object> items = commerceDataProvider.getItems(
-				themeDisplay.getScopeGroupId(), itemPerPage, pageNumber, null);
+				themeDisplay.getScopeGroupId(),
+				new PaginationImpl(itemPerPage, pageNumber), null);
 
-			List<ClayTableRow> clayTableRows = _clayTableUtil.getClayTableRows(
-				items, tableName, request, themeDisplay.getScopeGroupId());
+			String json = _clayTableDataJSONBuilder.build(
+				themeDisplay.getScopeGroupId(), tableName, items, request);
 
-			Object looseDeserializedClayTableRows =
-				JSONFactoryUtil.looseDeserialize(
-					_OBJECT_MAPPER.writeValueAsString(clayTableRows));
-
-			putValue("items", looseDeserializedClayTableRows);
+			putValue("items", JSONFactoryUtil.looseDeserialize(json));
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 		}
+
+		putValue("spritemap", "");
 
 		setTemplateNamespace("CommerceTable.render");
 
@@ -110,7 +109,8 @@ public class CommerceTableTag extends ComponentRendererTag {
 	public void setPageContext(PageContext pageContext) {
 		_clayTableRegistry = ServletContextUtil.getClayTableRegistry();
 		_clayTableSerializer = ServletContextUtil.getClayTableSerializer();
-		_clayTableUtil = ServletContextUtil.getClayTableUtil();
+		_clayTableDataJSONBuilder =
+			ServletContextUtil.getClayTableDataJSONBuilder();
 		_commerceDataProviderRegistry =
 			ServletContextUtil.getCommerceDataProviderRegistry();
 
@@ -125,16 +125,12 @@ public class CommerceTableTag extends ComponentRendererTag {
 		putValue("tableName", tableName);
 	}
 
-	private static final ObjectMapper _OBJECT_MAPPER = new ObjectMapper() {
-		{
-			configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
-			enable(SerializationFeature.INDENT_OUTPUT);
-		}
-	};
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceTableTag.class);
 
+	private ClayTableDataJSONBuilder _clayTableDataJSONBuilder;
 	private ClayTableRegistry _clayTableRegistry;
 	private ClayTableSerializer _clayTableSerializer;
-	private ClayTableUtil _clayTableUtil;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
 
 }
