@@ -15,9 +15,12 @@
 package com.liferay.commerce.cart.taglib.servlet.taglib;
 
 import com.liferay.commerce.cart.taglib.servlet.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
+import com.liferay.commerce.cart.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.CommerceOrderHelper;
+import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
@@ -25,9 +28,16 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.portlet.PortletURL;
+
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author Marco Leo
@@ -44,12 +54,30 @@ public class MiniCartTag extends ComponentRendererTag {
 		try {
 			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
+			String portalURL = PortalUtil.getPortalURL(request);
+
 			putValue("isOpen", false);
 			putValue("isDisabled", false);
-			putValue("detailsUrl", "");
-			putValue("checkoutUrl", "");
+
+			PortletURL commerceCartPortletURL =
+				commerceOrderHttpHelper.getCommerceCartPortletURL(request);
+
+			putValue("detailsUrl", commerceCartPortletURL.toString());
+
+			List<ObjectValuePair<Long, String>> workflowTransitions =
+				commerceOrderHelper.getWorkflowTransitions(
+					themeDisplay.getUserId(), commerceOrder);
+
+			if (workflowTransitions.isEmpty()) {
+				PortletURL commerceCheckoutPortletURL =
+					commerceOrderHttpHelper.getCommerceCheckoutPortletURL(
+						request);
+
+				putValue("checkoutUrl", commerceCheckoutPortletURL.toString());
+			}
+
 			putValue("productsCount", 0);
-			putValue("cartAPI", "http://localhost:8080/o/commerce-cart");
+			putValue("cartAPI", portalURL + "/o/commerce-cart");
 
 			if (commerceOrder != null) {
 				putValue("cartId", commerceOrder.getCommerceOrderId());
@@ -84,6 +112,18 @@ public class MiniCartTag extends ComponentRendererTag {
 		return npmResolver.resolveModuleName(
 			"commerce-cart-taglib/mini_cart/Cart.es");
 	}
+
+	@Override
+	public void setPageContext(PageContext pageContext) {
+		super.setPageContext(pageContext);
+
+		commerceOrderHelper = ServletContextUtil.getCommerceOrderHelper();
+		commerceOrderHttpHelper =
+			ServletContextUtil.getCommerceOrderHttpHelper();
+	}
+
+	protected CommerceOrderHelper commerceOrderHelper;
+	protected CommerceOrderHttpHelper commerceOrderHttpHelper;
 
 	private static final Log _log = LogFactoryUtil.getLog(MiniCartTag.class);
 

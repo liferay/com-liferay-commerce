@@ -19,13 +19,13 @@ class AddToCart extends Component {
 	_addToCart() {
 		var instance = this;
 
+		var _optionsJSON = '[]';
 		var _quantity = this.quantity;
-		var ddmFormValues = '[]';
 
 		var productContent = this._getProductContent();
 
 		if (productContent) {
-			ddmFormValues = JSON.stringify(productContent.getFormValues());
+			_optionsJSON = JSON.stringify(productContent.getFormValues());
 
 			if (this.cpInstanceId == '0') {
 				this.cpInstanceId = productContent.getCPInstanceId();
@@ -38,45 +38,47 @@ class AddToCart extends Component {
 			_quantity = quantityNode.value;
 		}
 
-		let formData = new FormData();
-
-		formData.append(this.portletNamespace + 'cpDefinitionId', this.cpDefinitionId);
-		formData.append(this.portletNamespace + 'cpInstanceId', this.cpInstanceId);
-		formData.append(this.portletNamespace + 'ddmFormValues', ddmFormValues);
-		formData.append(this.portletNamespace + 'quantity', _quantity);
-
 		fetch(
-			this.uri,
+			this.cartAPI + '/' + this.commerceOrderId,
 			{
-				body: formData,
-				credentials: 'include',
-				method: 'post'
+				body: JSON.stringify(
+					{
+						cartItem: {
+							optionsJSON: _optionsJSON,
+							quantity: _quantity,
+							productId: this.cpInstanceId
+						}
+					}
+				),
+				headers: new Headers({'Content-Type': 'application/json'}),
+				method: 'POST'
 			}
-		).then(
-			response => response.json()
-		).then(
-			(jsonresponse) => {
-				if (jsonresponse.success) {
-					Liferay.fire('commerce:productAddedToCart', jsonresponse);
+		)
+			.then(response => response.json())
+			.then(
+				jsonresponse => {
+					var messages = jsonresponse.messages;
 
-					instance._showNotification(jsonresponse.successMessage, 'success');
-				}
-				else {
-					var validatorErrors = jsonresponse.validatorErrors;
+					if (jsonresponse.success) {
+						Liferay.fire('commerce:productAddedToCart', jsonresponse);
 
-					if (validatorErrors) {
-						validatorErrors.forEach(
-							function(validatorError) {
-								instance._showNotification(validatorError.message, 'danger');
+						if (messages) {
+							messages.forEach(
+								function(message) {
+									instance._showNotification(message, 'success');
+								}
+							);
+						}
+					}
+					else if (messages) {
+						messages.forEach(
+							function(message) {
+								instance._showNotification(message, 'danger');
 							}
 						);
 					}
-					else {
-						instance._showNotification(jsonresponse.error, 'danger');
-					}
 				}
-			}
-		);
+			);
 	}
 
 	_getProductContent() {
@@ -233,7 +235,16 @@ AddToCart.STATE = {
 	 * @type {String}
 	 */
 
-	uri: Config.string().required()
+	cartAPI: Config.string().required(),
+
+	/**
+     * CommerceOrderId.
+     * @instance
+     * @memberof AddToCart
+     * @type {number}
+     */
+
+	commerceOrderId: Config.string().required()
 };
 
 // Register component

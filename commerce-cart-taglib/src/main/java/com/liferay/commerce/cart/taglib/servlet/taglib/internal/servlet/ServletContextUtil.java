@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.cart.taglib.servlet.taglib.internal.servlet;
 
+import com.liferay.commerce.order.CommerceOrderHelper;
+import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
 
 import javax.servlet.ServletContext;
@@ -28,6 +30,14 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = ServletContextUtil.class)
 public class ServletContextUtil {
+
+	public static final CommerceOrderHelper getCommerceOrderHelper() {
+		return _instance._getCommerceOrderHelper();
+	}
+
+	public static final CommerceOrderHttpHelper getCommerceOrderHttpHelper() {
+		return _instance._getCommerceOrderHttpHelper();
+	}
 
 	public static final CommerceOrderItemService getCommerceOrderItemService() {
 		return _instance._getCommerceOrderItemService();
@@ -48,6 +58,20 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
+	protected void setCommerceOrderHelper(
+		CommerceOrderHelper commerceOrderHelper) {
+
+		_commerceOrderHelper = commerceOrderHelper;
+	}
+
+	@Reference(unbind = "-")
+	protected void setCommerceOrderHttpHelper(
+		CommerceOrderHttpHelper commerceOrderHttpHelper) {
+
+		_commerceOrderHttpHelper = commerceOrderHttpHelper;
+	}
+
+	@Reference(unbind = "-")
 	protected void setCommerceOrderItemService(
 		CommerceOrderItemService commerceOrderItemService) {
 
@@ -62,6 +86,14 @@ public class ServletContextUtil {
 		_servletContext = servletContext;
 	}
 
+	private CommerceOrderHelper _getCommerceOrderHelper() {
+		return _commerceOrderHelper;
+	}
+
+	private CommerceOrderHttpHelper _getCommerceOrderHttpHelper() {
+		return _commerceOrderHttpHelper;
+	}
+
 	private CommerceOrderItemService _getCommerceOrderItemService() {
 		return _commerceOrderItemService;
 	}
@@ -72,6 +104,8 @@ public class ServletContextUtil {
 
 	private static ServletContextUtil _instance;
 
+	private CommerceOrderHelper _commerceOrderHelper;
+	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 	private CommerceOrderItemService _commerceOrderItemService;
 	private ServletContext _servletContext;
 

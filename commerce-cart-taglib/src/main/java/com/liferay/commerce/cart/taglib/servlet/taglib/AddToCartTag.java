@@ -15,27 +15,28 @@
 package com.liferay.commerce.cart.taglib.servlet.taglib;
 
 import com.liferay.commerce.cart.taglib.servlet.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
+import com.liferay.commerce.cart.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CPDefinitionInventory;
+import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.Map;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletURL;
-import javax.portlet.WindowStateException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author Marco Leo
@@ -80,7 +81,11 @@ public class AddToCartTag extends ComponentRendererTag {
 				PortalUtil.getPortletNamespace(
 					CommercePortletKeys.COMMERCE_CART_CONTENT));
 
-			putValue("uri", _getURI());
+			String portalURL = PortalUtil.getPortalURL(request);
+
+			putValue("cartAPI", portalURL + "/o/commerce-cart");
+
+			putValue("commerceOrderId", _getCommerceOrderId(request));
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
@@ -121,6 +126,14 @@ public class AddToCartTag extends ComponentRendererTag {
 		putValue("label", LanguageUtil.get(request, label));
 	}
 
+	@Override
+	public void setPageContext(PageContext pageContext) {
+		super.setPageContext(pageContext);
+
+		commerceOrderHttpHelper =
+			ServletContextUtil.getCommerceOrderHttpHelper();
+	}
+
 	public void setProductContentId(String productContentId) {
 		putValue("productContentId", productContentId);
 	}
@@ -133,15 +146,20 @@ public class AddToCartTag extends ComponentRendererTag {
 		putValue("taglibQuantityInputId", taglibQuantityInputId);
 	}
 
-	private String _getURI() throws WindowStateException {
-		PortletURL portletURL = PortletURLFactoryUtil.create(
-			request, CommercePortletKeys.COMMERCE_CART_CONTENT,
-			PortletRequest.ACTION_PHASE);
+	protected CommerceOrderHttpHelper commerceOrderHttpHelper;
 
-		portletURL.setParameter(
-			ActionRequest.ACTION_NAME, "addCommerceOrderItem");
+	private long _getCommerceOrderId(HttpServletRequest httpServletRequest)
+		throws PortalException {
 
-		return portletURL.toString();
+		CommerceOrder commerceOrder =
+			commerceOrderHttpHelper.getCurrentCommerceOrder(httpServletRequest);
+
+		if (commerceOrder == null) {
+			commerceOrder = commerceOrderHttpHelper.addCommerceOrder(
+				httpServletRequest);
+		}
+
+		return commerceOrder.getCommerceOrderId();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(AddToCartTag.class);

@@ -198,7 +198,7 @@ class Cart extends Component {
 					}
 				),
 				headers: new Headers({'Content-Type': 'application/json'}),
-				method: 'POST'
+				method: 'PUT'
 			}
 		)
 			.then(response => response.json())
