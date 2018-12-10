@@ -48,7 +48,6 @@ public class ClayTableUtil {
 			ClayTableRow clayTableRow = new ClayTableRow(item);
 
 			if (clayTableActionProviders != null) {
-
 				for (ClayTableActionProvider clayTableActionProvider :
 					clayTableActionProviders) {
 
