@@ -17,6 +17,14 @@ class CommerceTable extends Component {
 
 	}
 
+	_handleItemsPerPageClicked(event) {
+		console.log(event);
+	}
+
+	_handlePageClicked(event) {
+		console.log(event);
+	}
+
 }
 
 Soy.register(CommerceTable, template);
