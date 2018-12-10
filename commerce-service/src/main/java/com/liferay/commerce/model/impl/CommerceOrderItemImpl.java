@@ -21,7 +21,9 @@ import com.liferay.commerce.currency.model.CommerceMoneyFactoryUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
+import com.liferay.commerce.product.service.CProductLocalServiceUtil;
 import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -59,6 +61,11 @@ public class CommerceOrderItemImpl extends CommerceOrderItemBaseImpl {
 	@Override
 	public CPInstance getCPInstance() throws PortalException {
 		return CPInstanceLocalServiceUtil.getCPInstance(getCPInstanceId());
+	}
+
+	@Override
+	public CProduct getCProduct() throws PortalException {
+		return CProductLocalServiceUtil.getCProduct(getCProductId());
 	}
 
 	@Override
