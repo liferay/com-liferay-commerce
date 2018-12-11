@@ -46,6 +46,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = Indexer.class)
 public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
@@ -85,6 +86,26 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 
 			contextBooleanFilter.add(termFilter, BooleanClauseOccur.MUST);
 		}
+
+		long orderOrganizationId = GetterUtil.getLong(
+			searchContext.getAttribute("orderOrganizationId"));
+
+		if (orderOrganizationId > 0) {
+			TermFilter termFilter = new TermFilter(
+				"orderOrganizationId", String.valueOf(orderOrganizationId));
+
+			contextBooleanFilter.add(termFilter, BooleanClauseOccur.MUST);
+		}
+
+		long orderUserId = GetterUtil.getLong(
+			searchContext.getAttribute("orderUserId"));
+
+		if (orderOrganizationId > 0) {
+			TermFilter termFilter = new TermFilter(
+				"orderUserId", String.valueOf(orderUserId));
+
+			contextBooleanFilter.add(termFilter, BooleanClauseOccur.MUST);
+		}
 	}
 
 	@Override
@@ -111,7 +132,7 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 		throws Exception {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Indexing order item " + commerceOrder);
+			_log.debug("Indexing order " + commerceOrder);
 		}
 
 		Document document = getBaseModelDocument(CLASS_NAME, commerceOrder);
@@ -122,6 +143,7 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 		document.addNumber("itemsQuantity", getItemsQuantity(commerceOrder));
 		document.addKeyword(
 			"orderOrganizationId", commerceOrder.getOrderOrganizationId());
+		document.addKeyword("orderUserId", commerceOrder.getOrderUserId());
 		document.addKeyword("orderStatus", commerceOrder.getOrderStatus());
 		document.addKeyword(
 			"purchaseOrderNumber", commerceOrder.getPurchaseOrderNumber());
