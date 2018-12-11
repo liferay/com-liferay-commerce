@@ -24,16 +24,23 @@ import com.liferay.commerce.frontend.PaginationImpl;
 import com.liferay.commerce.frontend.taglib.internal.pagination.model.ClayPaginationEntry;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
+import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
+
+import javax.portlet.PortletURL;
 
 import javax.servlet.jsp.PageContext;
 
@@ -49,14 +56,21 @@ public class CommerceTableTag extends ComponentRendererTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String tableName = GetterUtil.getString(context.get("tableName"));
-
 		String dataProviderKey = GetterUtil.getString(
 			context.get("dataProviderKey"));
 
+		String deltaParam = GetterUtil.getString(
+			context.get("deltaParam"), SearchContainer.DEFAULT_DELTA_PARAM);
+
 		int itemPerPage = GetterUtil.getInteger(context.get("itemPerPage"));
 
+		String namespace = GetterUtil.getString(context.get("namespace"));
+
 		int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
+
+		PortletURL portletURL = (PortletURL)context.get("portletURL");
+
+		String tableName = GetterUtil.getString(context.get("tableName"));
 
 		try {
 			CommerceDataSetDataProvider commerceDataSetDataProvider =
@@ -86,18 +100,36 @@ public class CommerceTableTag extends ComponentRendererTag {
 			int totalItems = commerceDataSetDataProvider.countItems(
 				themeDisplay.getScopeGroupId());
 
-			List<ClayPaginationEntry> clayPaginationEntries = new ArrayList<>();
+			putValue("totalItems", totalItems);
 
-			clayPaginationEntries.add(new ClayPaginationEntry("#", 5));
-			clayPaginationEntries.add(new ClayPaginationEntry("#", 10));
-			clayPaginationEntries.add(new ClayPaginationEntry("#", 100));
-			clayPaginationEntries.add(new ClayPaginationEntry("#", 1000));
+			List<ClayPaginationEntry> clayPaginationEntries =
+				getClayPaginationEntries(portletURL, namespace, deltaParam);
+
+			putValue("paginationEntries", clayPaginationEntries);
+
+			Stream<ClayPaginationEntry> stream = clayPaginationEntries.stream();
+
+			ClayPaginationEntry clayPaginationEntry = stream.filter(
+				entry -> entry.getLabel() == itemPerPage
+			).findAny(
+			).orElse(
+				null
+			);
+
+			int paginationSelectedEntry = clayPaginationEntries.indexOf(
+				clayPaginationEntry);
+
+			putValue("paginationSelectedEntry", paginationSelectedEntry);
 
 			putValue("id", clayTable.getId());
-			putValue("totalItems", totalItems);
+
 			putValue("currentPage", pageNumber);
-			putValue("paginationSelectedEntry", 1);
-			putValue("paginationEntries", clayPaginationEntries);
+
+			putValue(
+				"dataSetAPI",
+				PortalUtil.getPortalURL(request) + "/o/commerce-data-set");
+			putValue("groupId", themeDisplay.getScopeGroupId());
+			putValue("pageSize", itemPerPage);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -119,8 +151,20 @@ public class CommerceTableTag extends ComponentRendererTag {
 		putValue("dataProviderKey", dataProviderKey);
 	}
 
+	public void setDeltaParam(String deltaParam) {
+		putValue("deltaParam", deltaParam);
+	}
+
+	public void setDisableAJAX(boolean disableAJAX) {
+		putValue("disableAJAX", disableAJAX);
+	}
+
 	public void setItemPerPage(int itemPerPage) {
 		putValue("itemPerPage", itemPerPage);
+	}
+
+	public void setNamespace(String namespace) {
+		putValue("namespace", namespace);
 	}
 
 	@Override
@@ -135,12 +179,41 @@ public class CommerceTableTag extends ComponentRendererTag {
 		super.setPageContext(pageContext);
 	}
 
-	public void setPageNumber(String pageNumber) {
+	public void setPageNumber(int pageNumber) {
 		putValue("pageNumber", pageNumber);
+	}
+
+	public void setPortletURL(PortletURL portletURL) {
+		putValue("portletURL", portletURL);
 	}
 
 	public void setTableName(String tableName) {
 		putValue("tableName", tableName);
+	}
+
+	protected List<ClayPaginationEntry> getClayPaginationEntries(
+		PortletURL portletURL, String namespace, String deltaParam) {
+
+		String portletURLString = portletURL.toString();
+
+		portletURLString = HttpUtil.removeParameter(
+			portletURLString, namespace + deltaParam);
+
+		List<ClayPaginationEntry> clayPaginationEntries = new ArrayList<>();
+
+		for (int curDelta : PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES) {
+			if (curDelta > SearchContainer.MAX_DELTA) {
+				continue;
+			}
+
+			String curDeltaURL = HttpUtil.addParameter(
+				portletURLString, namespace + deltaParam, curDelta);
+
+			clayPaginationEntries.add(
+				new ClayPaginationEntry(curDeltaURL, curDelta));
+		}
+
+		return clayPaginationEntries;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
