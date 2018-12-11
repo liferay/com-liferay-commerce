@@ -19,8 +19,12 @@ import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.internal.security.permission.CommerceOrderWorkflowPermissionChecker;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.service.base.CommerceOrderServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -41,6 +45,7 @@ import java.util.List;
 /**
  * @author Andrea Di Giorgi
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
@@ -381,6 +386,26 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
+	public BaseModelSearchResult<CommerceOrder> searchCommerceOrders(
+			long companyId, long groupId, long orderOrganizationId,
+			int orderStatus, String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		long userId = 0;
+
+		Organization organization =
+			_commerceOrganizationService.fetchOrganization(orderOrganizationId);
+
+		if (organization == null) {
+			userId = getUserId();
+		}
+
+		return commerceOrderLocalService.searchCommerceOrders(
+			companyId, groupId, orderOrganizationId, userId, orderStatus,
+			keywords, start, end, sort);
+	}
+
+	@Override
 	public String startCommerceOrderPayment(
 			long commerceOrderId, ServiceContext serviceContext)
 		throws PortalException {
@@ -538,6 +563,9 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	@ServiceReference(type = CommerceOrderWorkflowPermissionChecker.class)
 	private CommerceOrderWorkflowPermissionChecker
 		_commerceOrderWorkflowPermissionChecker;
+
+	@ServiceReference(type = CommerceOrganizationService.class)
+	private CommerceOrganizationService _commerceOrganizationService;
 
 	@ServiceReference(type = WorkflowTaskManager.class)
 	private WorkflowTaskManager _workflowTaskManager;

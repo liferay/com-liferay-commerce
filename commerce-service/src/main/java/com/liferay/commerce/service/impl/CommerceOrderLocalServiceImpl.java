@@ -65,8 +65,10 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -199,7 +201,7 @@ public class CommerceOrderLocalServiceImpl
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
 
-		return addCommerceOrder(
+		return commerceOrderLocalService.addCommerceOrder(
 			siteGroupId, orderOrganizationId, userId, commerceCurrencyId, 0,
 			shippingAddressId, 0, 0, null, purchaseOrderNumber, BigDecimal.ZERO,
 			BigDecimal.ZERO, BigDecimal.ZERO,
@@ -227,7 +229,7 @@ public class CommerceOrderLocalServiceImpl
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
 
-		return addCommerceOrder(
+		return commerceOrderLocalService.addCommerceOrder(
 			siteGroupId, orderOrganizationId, userId, 0, 0, shippingAddressId,
 			0, 0, null, purchaseOrderNumber, BigDecimal.ZERO, BigDecimal.ZERO,
 			BigDecimal.ZERO, CommerceOrderConstants.PAYMENT_STATUS_PENDING,
@@ -820,6 +822,20 @@ public class CommerceOrderLocalServiceImpl
 
 	@Override
 	public BaseModelSearchResult<CommerceOrder> searchCommerceOrders(
+			long companyId, long groupId, long orderOrganizationId,
+			long orderUserId, int orderStatus, String keywords, int start,
+			int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, groupId, orderOrganizationId, orderUserId, orderStatus,
+			keywords, start, end, sort);
+
+		return commerceOrderLocalService.searchCommerceOrders(searchContext);
+	}
+
+	@Override
+	public BaseModelSearchResult<CommerceOrder> searchCommerceOrders(
 			SearchContext searchContext)
 		throws PortalException {
 
@@ -1196,6 +1212,50 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setOrderUserId(user.getUserId());
 
 		return commerceOrderPersistence.update(commerceOrder);
+	}
+
+	protected SearchContext buildSearchContext(
+		long companyId, long groupId, long orderOrganizationId,
+		long orderUserId, int orderStatus, String keywords, int start, int end,
+		Sort sort) {
+
+		SearchContext searchContext = new SearchContext();
+
+		Map<String, Serializable> attributes = new HashMap<>();
+
+		attributes.put(Field.ENTRY_CLASS_PK, keywords);
+		attributes.put("orderStatus", orderStatus);
+		attributes.put("purchaseOrderNumber", keywords);
+
+		if (orderOrganizationId > 0) {
+			attributes.put("orderOrganizationId", orderOrganizationId);
+		}
+
+		if (orderUserId > 0) {
+			attributes.put("orderUserId", orderUserId);
+		}
+
+		searchContext.setAttributes(attributes);
+
+		searchContext.setCompanyId(companyId);
+		searchContext.setGroupIds(new long[] {groupId});
+		searchContext.setStart(start);
+		searchContext.setEnd(end);
+
+		if (Validator.isNotNull(keywords)) {
+			searchContext.setKeywords(keywords);
+		}
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		if (sort != null) {
+			searchContext.setSorts(sort);
+		}
+
+		return searchContext;
 	}
 
 	protected String getCommerceOrderPaymentContent(
