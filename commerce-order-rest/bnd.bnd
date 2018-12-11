@@ -1,0 +1,4 @@
+Bundle-Name: Liferay Commerce Order Rest
+Bundle-SymbolicName: com.liferay.commerce.order.rest
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.commerce.order.rest.model
