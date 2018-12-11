@@ -516,6 +516,17 @@ public class CommerceOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceOrder> searchCommerceOrders(
+		long companyId, long groupId, long orderOrganizationId,
+		long orderUserId, int orderStatus, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceOrders(companyId, groupId,
+			orderOrganizationId, orderUserId, orderStatus, keywords, start,
+			end, sort);
+	}
+
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceOrder> searchCommerceOrders(
 		com.liferay.portal.kernel.search.SearchContext searchContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().searchCommerceOrders(searchContext);

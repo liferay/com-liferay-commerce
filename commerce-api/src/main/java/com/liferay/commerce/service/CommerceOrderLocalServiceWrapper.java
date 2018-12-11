@@ -559,6 +559,17 @@ public class CommerceOrderLocalServiceWrapper
 
 	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceOrder> searchCommerceOrders(
+		long companyId, long groupId, long orderOrganizationId,
+		long orderUserId, int orderStatus, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderLocalService.searchCommerceOrders(companyId,
+			groupId, orderOrganizationId, orderUserId, orderStatus, keywords,
+			start, end, sort);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceOrder> searchCommerceOrders(
 		com.liferay.portal.kernel.search.SearchContext searchContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderLocalService.searchCommerceOrders(searchContext);

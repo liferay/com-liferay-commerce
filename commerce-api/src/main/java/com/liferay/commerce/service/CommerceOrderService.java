@@ -22,6 +22,8 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -154,6 +156,12 @@ public interface CommerceOrderService extends BaseService {
 
 	public CommerceOrder reorderCommerceOrder(long commerceOrderId,
 		CommerceContext commerceContext) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceOrder> searchCommerceOrders(
+		long companyId, long groupId, long orderOrganizationId,
+		int orderStatus, String keywords, int start, int end, Sort sort)
+		throws PortalException;
 
 	public String startCommerceOrderPayment(long commerceOrderId,
 		ServiceContext serviceContext) throws PortalException;

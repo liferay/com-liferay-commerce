@@ -230,6 +230,16 @@ public class CommerceOrderServiceWrapper implements CommerceOrderService,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceOrder> searchCommerceOrders(
+		long companyId, long groupId, long orderOrganizationId,
+		int orderStatus, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderService.searchCommerceOrders(companyId, groupId,
+			orderOrganizationId, orderStatus, keywords, start, end, sort);
+	}
+
+	@Override
 	public String startCommerceOrderPayment(long commerceOrderId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
