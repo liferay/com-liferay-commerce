@@ -21,16 +21,38 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>deltaParam</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>disableAJAX</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
 			<name>itemPerPage</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>int</type>
 		</attribute>
 		<attribute>
+			<name>namespace</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>pageNumber</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>int</type>
+		</attribute>
+		<attribute>
+			<name>portletURL</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>javax.portlet.PortletURL</type>
 		</attribute>
 		<attribute>
 			<name>tableName</name>
