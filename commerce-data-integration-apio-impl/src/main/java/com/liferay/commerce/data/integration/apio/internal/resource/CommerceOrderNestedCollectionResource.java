@@ -26,7 +26,6 @@ import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalRefe
 import com.liferay.commerce.data.integration.apio.identifier.CommerceAccountIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceAddressIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceOrderIdentifier;
-import com.liferay.commerce.data.integration.apio.identifier.CommercePaymentMethodIdentifier;
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceOrderUpdaterForm;
 import com.liferay.commerce.data.integration.apio.internal.form.CommerceOrderUpserterForm;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
@@ -127,9 +126,9 @@ public class CommerceOrderNestedCollectionResource
 			commerceOrder -> _commerceAccountHelper.
 				organizationIdToClassPKExternalReferenceCode(
 					commerceOrder.getOrderOrganizationId())
-		).addLinkedModel(
-			"commercePaymentMethod", CommercePaymentMethodIdentifier.class,
-			CommerceOrder::getCommercePaymentMethodId
+		).addString(
+			"commercePaymentMethodKey",
+			CommerceOrder::getCommercePaymentMethodKey
 		).addNumber(
 			"id", CommerceOrder::getCommerceOrderId
 		).addString(
