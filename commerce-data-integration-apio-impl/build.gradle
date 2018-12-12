@@ -19,6 +19,7 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly project(":apps:commerce:commerce-data-integration-apio-api")
 	compileOnly project(":apps:commerce:commerce-data-integration-headless-compat-apio-api")
+	compileOnly project(":apps:commerce:commerce-payment-api")
 }
 
 deploy {

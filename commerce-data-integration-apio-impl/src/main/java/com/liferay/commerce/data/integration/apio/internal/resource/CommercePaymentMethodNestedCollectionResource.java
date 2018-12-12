@@ -24,8 +24,8 @@ import com.liferay.commerce.data.integration.apio.identifier.CommercePaymentMeth
 import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceUserIdentifier;
 import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
 import com.liferay.commerce.data.integration.headless.compat.apio.util.UserHelper;
-import com.liferay.commerce.model.CommercePaymentMethod;
-import com.liferay.commerce.service.CommercePaymentMethodService;
+import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
@@ -40,14 +40,15 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = NestedCollectionResource.class)
 public class CommercePaymentMethodNestedCollectionResource
 	implements NestedCollectionResource
-		<CommercePaymentMethod, Long, CommercePaymentMethodIdentifier, Long,
-		 CommerceWebSiteIdentifier> {
+		<CommercePaymentMethodGroupRel, Long, CommercePaymentMethodIdentifier,
+		 Long, CommerceWebSiteIdentifier> {
 
 	@Override
-	public NestedCollectionRoutes<CommercePaymentMethod, Long, Long>
+	public NestedCollectionRoutes<CommercePaymentMethodGroupRel, Long, Long>
 		collectionRoutes(
-			NestedCollectionRoutes.Builder<CommercePaymentMethod, Long, Long>
-				builder) {
+			NestedCollectionRoutes.Builder
+				<CommercePaymentMethodGroupRel, Long, Long>
+					builder) {
 
 		return builder.addGetter(
 			this::_getPageItems
@@ -60,8 +61,8 @@ public class CommercePaymentMethodNestedCollectionResource
 	}
 
 	@Override
-	public ItemRoutes<CommercePaymentMethod, Long> itemRoutes(
-		ItemRoutes.Builder<CommercePaymentMethod, Long> builder) {
+	public ItemRoutes<CommercePaymentMethodGroupRel, Long> itemRoutes(
+		ItemRoutes.Builder<CommercePaymentMethodGroupRel, Long> builder) {
 
 		return builder.addGetter(
 			this::_getCommercePaymentMethod
@@ -69,61 +70,63 @@ public class CommercePaymentMethodNestedCollectionResource
 	}
 
 	@Override
-	public Representor<CommercePaymentMethod> representor(
-		Representor.Builder<CommercePaymentMethod, Long> builder) {
+	public Representor<CommercePaymentMethodGroupRel> representor(
+		Representor.Builder<CommercePaymentMethodGroupRel, Long> builder) {
 
 		return builder.types(
-			"CommercePaymentMethod"
+			"CommercePaymentMethodGroupRel"
 		).identifier(
-			CommercePaymentMethod::getCommercePaymentMethodId
+			CommercePaymentMethodGroupRel::getCommercePaymentMethodGroupRelId
 		).addBidirectionalModel(
 			"commerceWebSite", "commercePaymentMethods",
-			CommerceWebSiteIdentifier.class, CommercePaymentMethod::getGroupId
+			CommerceWebSiteIdentifier.class,
+			CommercePaymentMethodGroupRel::getGroupId
 		).addBoolean(
-			"active", CommercePaymentMethod::getActive
+			"active", CommercePaymentMethodGroupRel::getActive
 		).addDate(
-			"dateCreated", CommercePaymentMethod::getCreateDate
+			"dateCreated", CommercePaymentMethodGroupRel::getCreateDate
 		).addDate(
-			"dateModified", CommercePaymentMethod::getModifiedDate
+			"dateModified", CommercePaymentMethodGroupRel::getModifiedDate
 		).addLocalizedStringByLocale(
-			"description", CommercePaymentMethod::getDescription
+			"description", CommercePaymentMethodGroupRel::getDescription
 		).addLocalizedStringByLocale(
-			"name", CommercePaymentMethod::getName
+			"name", CommercePaymentMethodGroupRel::getName
 		).addLinkedModel(
 			"author", CommerceUserIdentifier.class,
 			commercePaymentMethod ->
 				_userHelper.userIdToClassPKExternalReferenceCode(
 					commercePaymentMethod.getUserId())
 		).addString(
-			"engineKey", CommercePaymentMethod::getEngineKey
+			"engineKey", CommercePaymentMethodGroupRel::getEngineKey
 		).build();
 	}
 
-	private CommercePaymentMethod _getCommercePaymentMethod(
+	private CommercePaymentMethodGroupRel _getCommercePaymentMethod(
 			Long commercePaymentMethodId)
 		throws PortalException {
 
-		return _commercePaymentMethodService.getCommercePaymentMethod(
-			commercePaymentMethodId);
+		return _commercePaymentMethodGroupRelService.
+			getCommercePaymentMethodGroupRel(commercePaymentMethodId);
 	}
 
-	private PageItems<CommercePaymentMethod> _getPageItems(
+	private PageItems<CommercePaymentMethodGroupRel> _getPageItems(
 			Pagination pagination, Long webSiteId)
 		throws PortalException {
 
-		List<CommercePaymentMethod> commercePaymentMethods =
-			_commercePaymentMethodService.getCommercePaymentMethods(
-				webSiteId, true);
+		List<CommercePaymentMethodGroupRel> commercePaymentMethods =
+			_commercePaymentMethodGroupRelService.
+				getCommercePaymentMethodGroupRels(webSiteId, true);
 
 		int total =
-			_commercePaymentMethodService.getCommercePaymentMethodsCount(
-				webSiteId, true);
+			_commercePaymentMethodGroupRelService.
+				getCommercePaymentMethodGroupRelsCount(webSiteId, true);
 
 		return new PageItems<>(commercePaymentMethods, total);
 	}
 
 	@Reference
-	private CommercePaymentMethodService _commercePaymentMethodService;
+	private CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
 
 	@Reference
 	private UserHelper _userHelper;
