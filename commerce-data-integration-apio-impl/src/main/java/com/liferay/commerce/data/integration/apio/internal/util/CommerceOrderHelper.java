@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
-import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.Locale;
 
@@ -229,14 +228,11 @@ public class CommerceOrderHelper {
 			getCommerceOrderByClassPKExternalReferenceCode(
 				commerceOrderClassPKExternalReferenceCode);
 
-		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			commerceOrder.getGroupId());
-
 		_commerceOrderService.updateCommerceOrder(
 			commerceOrder.getCommerceOrderId(),
 			commerceOrder.getBillingAddressId(),
 			commerceOrder.getShippingAddressId(),
-			commerceOrder.getCommercePaymentMethodId(),
+			commerceOrder.getCommercePaymentMethodKey(),
 			commerceOrder.getCommerceShippingMethodId(),
 			commerceOrder.getShippingOptionName(),
 			commerceOrder.getPurchaseOrderNumber(), commerceOrder.getSubtotal(),
@@ -250,8 +246,7 @@ public class CommerceOrderHelper {
 
 		if (paymentStatus != null) {
 			_commerceOrderService.updatePaymentStatus(
-				commerceOrder.getCommerceOrderId(), paymentStatus.intValue(),
-				serviceContext);
+				commerceOrder.getCommerceOrderId(), paymentStatus.intValue());
 		}
 
 		return _commerceOrderService.getCommerceOrder(
