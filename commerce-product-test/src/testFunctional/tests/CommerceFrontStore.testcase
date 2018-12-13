@@ -1,105 +1,85 @@
-<definition component-name="portal-commerce">
-	<property name="portal.release" value="true" />
-	<property name="portal.upstream" value="true" />
-	<property name="testray.main.component.name" value="Commerce" />
+@component-name = "portal-commerce"
+definition {
+	property portal.upstream = "true";
+	property testray.main.component.name = "Commerce";
 
-	<set-up>
-		<execute macro="TestCase#setUpPortalInstance" />
+	setUp {
+		TestCase.setUpPortalInstance();
 
-		<execute macro="User#firstLoginPG" />
+		User.firstLoginPG();
 
-		<execute macro="CommerceConfiguration#commerceSetUp" />
-	</set-up>
+		CommerceConfiguration.commerceSetUp();
+	}
 
-	<tear-down>
-		<var method="PropsUtil#get('test.portal.instance')" name="testPortalInstance" />
+	tearDown {
+		var testPortalInstance = PropsUtil.get("test.portal.instance");
 
-		<if>
-			<equals arg1="${testPortalInstance}" arg2="true" />
-			<then>
-				<execute macro="PortalInstances#tearDownCP" />
-			</then>
-			<else>
-				<execute macro="CommerceConfiguration#commerceStoreFrontTearDown" />
-			</else>
-		</if>
-	</tear-down>
+		if ("${testPortalInstance}" == "true") {
+			PortalInstances.tearDownCP();
+		}
+		else {
+			CommerceConfiguration.commerceStoreFrontTearDown();
+		}
+	}
 
-	<command name="ViewStoreFrontSimpleProduct">
-		<property name="portal.acceptance" value="true" />
+	@ignore = "true"
+	test ViewStoreFrontSimpleProduct {
+		property portal.acceptance = "true";
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Catalog" />
-		</execute>
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Catalog"
+		);
 
-		<echo message="Creating new Option complete with Values..." />
+		echo("Creating new Option complete with Values...");
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Options" />
-		</execute>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Options");
 
-		<execute function="Pause" locator1="2000" />
+		Pause(locator1 = "2000");
 
-		<execute macro="CPCommerceCatalog#newOptionsEntry">
-			<var name="optionDescription" value="Option Description" />
-			<var name="optionFieldType" value="Select from List" />
-			<var name="optionName" value="Color" />
-			<var name="optionValuesList" value="Black,Blue,White" />
-			<var name="valuePriority" value="1" />
-		</execute>
+		CPCommerceCatalog.newOptionsEntry(
+			optionDescription = "Option Description",
+			optionFieldType = "Select from List",
+			optionName = "Color",
+			optionValuesList = "Black,Blue,White",
+			valuePriority = "1"
+		);
 
-		<echo message="Creating new Product..." />
+		echo("Creating new Product...");
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Products" />
-		</execute>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Products");
 
-		<execute macro="CPCommerceCatalog#newProductsEntry">
-			<var name="productName" value="Simple T-Shirt" />
-			<var name="productType" value="Simple" />
-		</execute>
+		CPCommerceCatalog.newProductsEntry(
+			productName = "Simple T-Shirt",
+			productType = "Simple"
+		);
 
-		<echo message="Associating the Option to the Product..." />
+		echo("Associating the Option to the Product...");
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Options" />
-		</execute>
+		CommerceEntry.gotoMenuTab(menuTab = "Options");
 
-		<execute macro="CommerceRelations#assignSingleRelationToProductsEntry">
-			<var name="entryName" value="Color" />
-		</execute>
+		CommerceRelations.assignSingleRelationToProductsEntry(entryName = "Color");
 
-		<echo message="Creating SKUs..." />
+		echo("Creating SKUs...");
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="SKUs" />
-		</execute>
+		CommerceEntry.gotoMenuTab(menuTab = "SKUs");
 
-		<execute macro="CommerceSKUs#addSKU">
-			<var name="optionValuesList" value="Black:10.0,Blue:20.0,White:30.0" />
-		</execute>
+		CommerceSKUs.addSKU(optionValuesList = "Black:10.0,Blue:20.0,White:30.0");
 
-		<echo message="Adding Product Images..." />
+		echo("Adding Product Images...");
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Images" />
-		</execute>
+		CommerceEntry.gotoMenuTab(menuTab = "Images");
 
-		<execute macro="CommerceProductImages#addProductImages">
-			<var name="optionValuesList" value="Black,Blue,White" />
-		</execute>
+		CommerceProductImages.addProductImages(optionValuesList = "Black,Blue,White");
 
-		<echo message="Asserting all the attributes are correctly shown in Front Store..." />
+		echo("Asserting all the attributes are correctly shown in Front Store...");
 
-		<execute macro="CommerceNavigator#gotoFrontStoreProductPage">
-			<var name="productName" value="Simple T-Shirt" />
-		</execute>
+		CommerceNavigator.gotoFrontStoreProductPage(productName = "Simple T-Shirt");
 
-		<execute macro="FrontStore#viewProductDetail">
-			<var name="FSOptionValuesList" value="Black:10.0,Blue:20.0,White:30.0" />
-			<var name="FSProductName" value="Simple T-Shirt" />
-		</execute>
-	</command>
-</definition>
+		FrontStore.viewProductDetail(
+			FSOptionValuesList = "Black:10.0,Blue:20.0,White:30.0",
+			FSProductName = "Simple T-Shirt"
+		);
+	}
+}
