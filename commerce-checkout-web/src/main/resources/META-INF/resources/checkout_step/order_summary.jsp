@@ -19,6 +19,8 @@
 <%
 OrderSummaryCheckoutStepDisplayContext orderSummaryCheckoutStepDisplayContext = (OrderSummaryCheckoutStepDisplayContext)request.getAttribute(CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT);
 
+String goToConfirmation = (String)request.getAttribute("goToConfirmation");
+
 CommerceOrder commerceOrder = orderSummaryCheckoutStepDisplayContext.getCommerceOrder();
 CommerceOrderPrice commerceOrderPrice = orderSummaryCheckoutStepDisplayContext.getCommerceOrderPrice();
 
@@ -42,6 +44,10 @@ String commerceShippingOptionName = commerceOrder.getShippingOptionName();
 
 Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = orderSummaryCheckoutStepDisplayContext.getCommerceOrderValidatorResults();
 %>
+
+<c:if test="${not empty goToConfirmation}">
+	<c:redirect url="${goToConfirmation}" />
+</c:if>
 
 <div class="commerce-order-summary">
 	<liferay-ui:error exception="<%= CommerceOrderBillingAddressException.class %>" message="please-select-a-valid-billing-address" />
