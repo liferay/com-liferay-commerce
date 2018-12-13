@@ -59,6 +59,7 @@ public class ActionHelper {
 
 		if (Validator.isUrl(output)) {
 			actionRequest.setAttribute(WebKeys.REDIRECT, output);
+			actionResponse.sendRedirect(output);
 		}
 	}
 
