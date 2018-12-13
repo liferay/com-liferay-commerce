@@ -23,12 +23,23 @@ import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public interface CommerceOrderPriceCalculation {
 
 	public CommerceOrderPrice getCommerceOrderPrice(
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceOrderPrice getCommerceOrderPrice(
 			CommerceOrder commerceOrder, CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceMoney getSubtotal(
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceMoney getSubtotal(
@@ -36,7 +47,17 @@ public interface CommerceOrderPriceCalculation {
 		throws PortalException;
 
 	public CommerceMoney getTaxValue(
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceMoney getTaxValue(
 			CommerceOrder commerceOrder, CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceMoney getTotal(
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceMoney getTotal(

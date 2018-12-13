@@ -26,6 +26,7 @@ import java.util.Optional;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public interface CommerceProductPriceCalculation {
@@ -40,17 +41,39 @@ public interface CommerceProductPriceCalculation {
 		throws PortalException;
 
 	public CommerceMoney getFinalPrice(
+			long cpInstanceId, int quantity, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceMoney getFinalPrice(
 			long cpInstanceId, int quantity, CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceMoney getPromoPrice(
 			long cpInstanceId, int quantity,
 			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency)
+			CommerceCurrency commerceCurrency, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceMoney getPromoPrice(
+			long cpInstanceId, int quantity,
+			Optional<CommercePriceList> commercePriceList,
+			CommerceCurrency commerceCurrency, CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceMoney getUnitMaxPrice(
+			long cpDefinitionId, int quantity, boolean secure,
+			CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceMoney getUnitMaxPrice(
 			long cpDefinitionId, int quantity, CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceMoney getUnitMinPrice(
+			long cpDefinitionId, int quantity, boolean secure,
+			CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceMoney getUnitMinPrice(
@@ -60,7 +83,14 @@ public interface CommerceProductPriceCalculation {
 	public CommerceMoney getUnitPrice(
 			long cpInstanceId, int quantity,
 			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency)
+			CommerceCurrency commerceCurrency, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceMoney getUnitPrice(
+			long cpInstanceId, int quantity,
+			Optional<CommercePriceList> commercePriceList,
+			CommerceCurrency commerceCurrency, CommerceContext commerceContext)
 		throws PortalException;
 
 }
