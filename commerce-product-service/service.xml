@@ -202,8 +202,8 @@
 
 		<!-- Other fields -->
 
-		<column name="CPDefinitionId1" type="long" />
-		<column name="CPDefinitionId2" type="long" />
+		<column name="CPDefinitionId" type="long" />
+		<column name="CProductId" type="long" />
 		<column name="priority" type="double" />
 		<column name="type" type="String" />
 
@@ -215,23 +215,23 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CPDefinitionId1" return-type="Collection">
-			<finder-column name="CPDefinitionId1" />
+		<finder name="CPDefinitionId" return-type="Collection">
+			<finder-column name="CPDefinitionId" />
 		</finder>
-		<finder name="CPDefinitionId2" return-type="Collection">
-			<finder-column name="CPDefinitionId2" />
+		<finder name="CProductId" return-type="Collection">
+			<finder-column name="CProductId" />
 		</finder>
-		<finder name="C1_T" return-type="Collection">
-			<finder-column name="CPDefinitionId1" />
+		<finder name="CPD_T" return-type="Collection">
+			<finder-column name="CPDefinitionId" />
 			<finder-column name="type" />
 		</finder>
-		<finder name="C2_T" return-type="Collection">
-			<finder-column name="CPDefinitionId2" />
+		<finder name="CP_T" return-type="Collection">
+			<finder-column name="CProductId" />
 			<finder-column name="type" />
 		</finder>
-		<finder name="C1_C2_T" return-type="CPDefinitionLink" unique="true">
-			<finder-column name="CPDefinitionId1" />
-			<finder-column name="CPDefinitionId2" />
+		<finder name="C_C_T" return-type="CPDefinitionLink" unique="true">
+			<finder-column name="CPDefinitionId" />
+			<finder-column name="CProductId" />
 			<finder-column name="type" />
 		</finder>
 
