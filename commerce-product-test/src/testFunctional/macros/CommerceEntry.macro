@@ -1,414 +1,425 @@
-<definition>
-	<command name="addFullDescriptionViaAlloyEditor">
-		<execute macro="AlloyEditor#typeEditor">
-			<var name="content" value="${entryFullDescription}" />
-			<var name="editor" value="description" />
-		</execute>
-	</command>
+definition {
+	macro addFullDescriptionViaAlloyEditor {
+		AlloyEditor.typeEditor(
+			content = "${entryFullDescription}",
+			editor = "description"
+		);
+	}
 
-	<command name="addNewAvailabilityEstimatesEntry">
-		<execute function="Type" locator1="CommerceEntry#TITLE_FIELD" value1="${entryName}" />
-	</command>
+	macro addNewAvailabilityEstimatesEntry {
+		Type(locator1 = "CommerceEntry#TITLE_FIELD", value1 = "${entryName}");
+	}
 
-	<command name="addNewCatalogRule">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+	macro addNewCatalogRule {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#ACTIVE_CHECKBOX");
 
-		<execute function="Select" locator1="Select#TYPE" value1="${catalogRuleType}" />
+		Select(locator1 = "Select#TYPE", value1 = "${catalogRuleType}");
 
-		<execute macro="Button#clickSave" />
+		Button.clickSave();
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="User Segments" />
-		</execute>
+		CommerceEntry.gotoMenuTab(menuTab = "User Segments");
 
-		<execute function="Click" locator1="Button#PLUS" />
+		Click(locator1 = "Button#PLUS");
 
-		<execute macro="CommerceItemSelector#selectEntry">
-			<var name="entryName" value="${userSegment}" />
-		</execute>
+		CommerceItemSelector.selectEntry(entryName = "${userSegment}");
 
-		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
-	</command>
+		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+	}
 
-	<command name="addNewCountriesEntry">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+	macro addNewCountriesEntry {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#BILLING_ALLOWED_CHECKBOX" />
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#BILLING_ALLOWED_CHECKBOX");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#SHIPPING_ALLOWED_CHECKBOX" />
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#SHIPPING_ALLOWED_CHECKBOX");
 
-		<execute function="Type" locator1="CommerceEntry#TWO_LETTERS_ISO_CODE_FIELD" value1="NC" />
+		Type(locator1 = "CommerceEntry#TWO_LETTERS_ISO_CODE_FIELD", value1 = "NC");
 
-		<execute function="Type" locator1="CommerceEntry#THREE_LETTERS_ISO_CODE_FIELD" value1="NCO" />
+		Type(locator1 = "CommerceEntry#THREE_LETTERS_ISO_CODE_FIELD", value1 = "NCO");
 
-		<execute function="Type" locator1="CommerceEntry#NUMERIC_ISO_CODE_FIELD" value1="001" />
+		Type(locator1 = "CommerceEntry#NUMERIC_ISO_CODE_FIELD", value1 = "001");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#SUBJECT_TO_VAT_CHECKBOX" />
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#SUBJECT_TO_VAT_CHECKBOX");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
-	</command>
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#ACTIVE_CHECKBOX");
+	}
 
-	<command name="addNewCurrenciesEntry">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+	macro addNewCurrenciesEntry {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
 
-		<execute function="Type" locator1="CommerceEntry#CODE_FIELD" value1="${code}" />
+		Type(locator1 = "CommerceEntry#CODE_FIELD", value1 = "${code}");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#PRIMARY_CHECKBOX" />
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#PRIMARY_CHECKBOX");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
-	</command>
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#ACTIVE_CHECKBOX");
+	}
 
-	<command name="addNewDimensionUnit">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+	macro addNewDimensionUnit {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
 
-		<execute function="Type" locator1="CommerceEntry#KEY_FIELD" value1="${entryName}" />
+		Type(locator1 = "CommerceEntry#KEY_FIELD", value1 = "${entryName}");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#PRIMARY_CHECKBOX" />
-	</command>
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#PRIMARY_CHECKBOX");
+	}
 
-	<command name="addNewDiscountsEntry">
-		<execute function="Type" locator1="CommerceEntry#TITLE_FIELD" value1="${entryTitle}" />
+	macro addNewDiscountsEntry {
+		Type(locator1 = "CommerceEntry#TITLE_FIELD", value1 = "${entryTitle}");
 
-		<execute function="Select" locator1="CommerceEntry#DISCOUNT_TARGET_SELECT" value1="${discountTarget}" />
+		Select(
+			locator1 = "CommerceEntry#DISCOUNT_TARGET_SELECT",
+			value1 = "${discountTarget}"
+		);
 
-		<execute function="Click" locator1="Button#SELECT" />
+		Click(locator1 = "Button#SELECT");
 
-		<execute macro="CommerceItemSelector#selectEntry">
-			<var name="entryName" value="${userSegment}" />
-		</execute>
+		CommerceItemSelector.selectEntry(entryName = "${userSegment}");
 
-		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
+		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
 
-		<execute function="Type" locator1="CommerceEntry#MAXIMUM_DISCOUNT_AMOUNT_FIELD" value1="${maximumDiscountAmount}" />
+		Type(
+			locator1 = "CommerceEntry#MAXIMUM_DISCOUNT_AMOUNT_FIELD",
+			value1 = "${maximumDiscountAmount}"
+		);
 
-		<execute function="Type" locator1="CommerceEntry#DISCOUNT_LEVEL_1_FIELD" value1="${discountLevel}" />
+		Type(
+			locator1 = "CommerceEntry#DISCOUNT_LEVEL_1_FIELD",
+			value1 = "${discountLevel}"
+		);
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
-	</command>
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#ACTIVE_CHECKBOX");
+	}
 
-	<command name="addNewNotificationTemplate">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+	macro addNewNotificationTemplate {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
 
-		<execute function="Type" locator1="TextArea#DESCRIPTION" value1="${entryName} Description" />
+		Type(locator1 = "TextArea#DESCRIPTION", value1 = "${entryName} Description");
 
-		<execute function="Click" locator1="Button#SELECT" />
+		Click(locator1 = "Button#SELECT");
 
-		<execute macro="CommerceItemSelector#selectEntry">
-			<var name="entryName" value="${userSegment}" />
-		</execute>
+		CommerceItemSelector.selectEntry(entryName = "${userSegment}");
 
-		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
+		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
 
-		<execute function="Type" locator1="CommerceEntry#NOTIFICATION_TEMPLATE_FROM_ADDRESS_FIELD" value1="${fromAddress}" />
+		Type(
+			locator1 = "CommerceEntry#NOTIFICATION_TEMPLATE_FROM_ADDRESS_FIELD",
+			value1 = "${fromAddress}"
+		);
 
-		<execute function="Type" locator1="CommerceEntry#NOTIFICATION_TEMPLATE_FROM_NAME_FIELD" value1="${fromName}" />
+		Type(
+			locator1 = "CommerceEntry#NOTIFICATION_TEMPLATE_FROM_NAME_FIELD",
+			value1 = "${fromName}"
+		);
 
-		<execute function="Select" locator1="Select#TYPE" value1="${notificationType}" />
-	</command>
+		Select(locator1 = "Select#TYPE", value1 = "${notificationType}");
+	}
 
-	<command name="addNewPriceListsEntry">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+	macro addNewPriceListsEntry {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
 
-		<execute function="Select" locator1="CommerceEntry#CURRENCY_SELECT" value1="${currencyCode}" />
+		Select(locator1 = "CommerceEntry#CURRENCY_SELECT", value1 = "${currencyCode}");
 
-		<execute function="Click" locator1="CommerceEntry#USER_SEGMENTS_RELS_SELECT" />
+		Click(locator1 = "CommerceEntry#USER_SEGMENTS_RELS_SELECT");
 
-		<execute macro="CommerceItemSelector#selectEntry">
-			<var name="entryName" value="${userSegmentName}" />
-		</execute>
+		CommerceItemSelector.selectEntry(entryName = "${userSegmentName}");
 
-		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
-	</command>
+		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+	}
 
-	<command name="addNewRegionsEntry">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+	macro addNewRegionsEntry {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
 
-		<execute function="Type" locator1="CommerceEntry#CODE_FIELD" value1="${code}" />
+		Type(locator1 = "CommerceEntry#CODE_FIELD", value1 = "${code}");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#ACTIVE_CHECKBOX" />
-	</command>
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#ACTIVE_CHECKBOX");
+	}
 
-	<command name="addNewUserSegmentsEntry">
-		<execute function="Type" locator1="CommerceEntry#MODAL_NAME_FIELD_SMALL" value1="${entryName}" />
+	macro addNewUserSegmentsEntry {
+		Type(locator1 = "CommerceEntry#MODAL_NAME_FIELD_SMALL", value1 = "${entryName}");
 
-		<execute macro="Button#clickSave" />
+		Button.clickSave();
 
-		<execute macro="CommerceNavigator#gotoEntry">
-			<var name="entryName" value="${entryName}" />
-		</execute>
+		CommerceNavigator.gotoEntry(entryName = "${entryName}");
 
-		<execute macro="CommerceEntry#gotoNestedMenu">
-			<var name="nestedMenu" value="Criteria" />
-		</execute>
+		CommerceEntry.gotoNestedMenu(nestedMenu = "Criteria");
 
-		<execute function="Click" locator1="Button#PLUS" />
+		Click(locator1 = "Button#PLUS");
 
-		<execute function="Select" locator1="Select#TYPE" value1="${criteriaType}" />
+		Select(locator1 = "Select#TYPE", value1 = "${criteriaType}");
 
-		<if>
-			<equals arg1="${criteriaType}" arg2="Roles" />
-			<then>
-				<execute function="Click" locator1="CommerceEntry#ROLE_SELECT_BUTTON">
-					<var name="key_roleType" value="${roleType}" />
-				</execute>
-			</then>
-			<else>
-				<execute function="Click" locator1="Button#SELECT" />
-			</else>
-		</if>
+		if ("${criteriaType}" == "Roles") {
+			Click(
+				locator1 = "CommerceEntry#ROLE_SELECT_BUTTON",
+				key_roleType = "${roleType}"
+			);
+		}
+		else {
+			Click(locator1 = "Button#SELECT");
+		}
 
-		<execute macro="CommerceItemSelector#selectEntry">
-			<var name="entryName" value="${criterionEntryName}" />
-		</execute>
+		CommerceItemSelector.selectEntry(entryName = "${criterionEntryName}");
 
-		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
-	</command>
+		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+	}
 
-	<command name="addNewWeightUnit">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${entryName}" />
+	macro addNewWeightUnit {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
 
-		<execute function="Type" locator1="CommerceEntry#KEY_FIELD" value1="${entryName}" />
+		Type(locator1 = "CommerceEntry#KEY_FIELD", value1 = "${entryName}");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#PRIMARY_CHECKBOX" />
-	</command>
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#PRIMARY_CHECKBOX");
+	}
 
-	<command name="addOptionsEntry">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${optionName}" />
+	macro addOptionsEntry {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${optionName}");
 
-		<execute function="Type" locator1="CommerceEntry#DESCRIPTION_FIELD" value1="${optionDescription}" />
+		Type(
+			locator1 = "CommerceEntry#DESCRIPTION_FIELD",
+			value1 = "${optionDescription}"
+		);
 
-		<execute function="Select" locator1="CommerceEntry#FIELD_TYPE_SELECT" value1="${optionFieldType}" />
+		Select(
+			locator1 = "CommerceEntry#FIELD_TYPE_SELECT",
+			value1 = "${optionFieldType}"
+		);
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#FACETABLE_CHECKBOX" />
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#FACETABLE_CHECKBOX");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#REQUIRED_CHECKBOX" />
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#REQUIRED_CHECKBOX");
 
-		<execute function="Check#checkToggleSwitch" locator1="CommerceEntry#SKU_CONTRIBUTOR_CHECKBOX" />
-	</command>
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#SKU_CONTRIBUTOR_CHECKBOX");
+	}
 
-	<command name="addOptionValue">
-		<execute function="Type" locator1="CommerceEntry#MODAL_NAME_FIELD" value1="${valueName}" />
+	macro addOptionValue {
+		Type(locator1 = "CommerceEntry#MODAL_NAME_FIELD", value1 = "${valueName}");
 
-		<execute function="Type" locator1="CommerceEntry#PRIORITY_FIELD" value1="${valuePriority}" />
-	</command>
+		Type(locator1 = "CommerceEntry#PRIORITY_FIELD", value1 = "${valuePriority}");
+	}
 
-	<command name="addPricingEntry">
-		<execute function="Type" locator1="CommerceEntry#PRICE_FIELD" value1="${price}" />
-	</command>
+	macro addPricingEntry {
+		Type(locator1 = "CommerceEntry#PRICE_FIELD", value1 = "${price}");
+	}
 
-	<command name="addProductsEntry">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${productName}" />
+	macro addProductsEntry {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${productName}");
 
-		<execute function="Type" locator1="CommerceEntry#SHORT_DESCRIPTION_FIELD" value1="${productShortDescription}" />
+		Type(
+			locator1 = "CommerceEntry#SHORT_DESCRIPTION_FIELD",
+			value1 = "${productShortDescription}"
+		);
 
-		<execute macro="CommerceEntry#addFullDescriptionViaAlloyEditor">
-			<var name="entryFullDescription" value="${productFullDescription}" />
-		</execute>
-	</command>
+		CommerceEntry.addFullDescriptionViaAlloyEditor(
+			entryFullDescription = "${productFullDescription}"
+		);
+	}
 
-	<command name="addSKUsEntry">
-		<execute function="Type" locator1="CommerceEntry#SKU_FIELD" value1="${productSKU}" />
+	macro addSKUsEntry {
+		Type(locator1 = "CommerceEntry#SKU_FIELD", value1 = "${productSKU}");
 
-		<execute macro="CommerceEntry#selectAssociatedOptionsValue">
-			<var name="optionValue" value="${optionValue}" />
-		</execute>
-	</command>
+		CommerceEntry.selectAssociatedOptionsValue(optionValue = "${optionValue}");
+	}
 
-	<command name="createNewCurrenciesEntry">
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Settings" />
-		</execute>
+	macro createNewCurrenciesEntry {
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Settings"
+		);
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Currencies" />
-		</execute>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Currencies");
 
-		<execute function="Click" locator1="Button#PLUS" />
+		Click(locator1 = "Button#PLUS");
 
-		<execute macro="CommerceEntry#addNewCurrenciesEntry">
-			<var name="code" value="${code}" />
-			<var name="entryName" value="${entryName}" />
-		</execute>
+		CommerceEntry.addNewCurrenciesEntry(
+			code = "${code}",
+			entryName = "${entryName}"
+		);
 
-		<execute macro="Button#clickSave" />
+		Button.clickSave();
 
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-	</command>
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+	}
 
-	<command name="createNewUserSegment">
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="User Segments" />
-		</execute>
+	macro createNewUserSegment {
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "User Segments"
+		);
 
-		<execute function="Click" locator1="Button#PLUS" />
+		Click(locator1 = "Button#PLUS");
 
-		<execute macro="CommerceEntry#addNewUserSegmentsEntry">
-			<var name="criteriaType" value="${criteriaType}" />
-			<var name="criterionEntryName" value="${criterionEntryName}" />
-			<var name="entryName" value="${entryName}" />
-			<var name="roleType" value="${roleType}" />
-		</execute>
+		CommerceEntry.addNewUserSegmentsEntry(
+			criteriaType = "${criteriaType}",
+			criterionEntryName = "${criterionEntryName}",
+			entryName = "${entryName}",
+			roleType = "${roleType}"
+		);
 
-		<execute macro="Button#clickSave" />
+		Button.clickSave();
 
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-	</command>
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+	}
 
-	<command name="editEntryFullDescription">
-		<execute macro="CommerceEntry#addFullDescriptionViaAlloyEditor">
-			<var name="entryFullDescription" value="${newEntryFullDescription}" />
-		</execute>
-	</command>
+	macro editEntryFullDescription {
+		CommerceEntry.addFullDescriptionViaAlloyEditor(
+			entryFullDescription = "${newEntryFullDescription}"
+		);
+	}
 
-	<command name="editEntryName">
-		<execute function="Type" locator1="CommerceEntry#NAME_FIELD" value1="${newEntryName}" />
-	</command>
+	macro editEntryName {
+		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${newEntryName}");
+	}
 
-	<command name="editEntryShortDescription">
-		<execute function="Type" locator1="CommerceEntry#SHORT_DESCRIPTION_FIELD" value1="${newEntryShortDescription}" />
-	</command>
-
-	<command name="gotoBreadcrumb">
-		<execute function="AssertClick" locator1="CommerceEntry#BREADCRUMBS" value1="${breadcrumb}">
-			<var name="key_breadcrumb" value="${breadcrumb}" />
-		</execute>
-	</command>
-
-	<command name="gotoMenuTab">
-		<execute function="AssertClick" locator1="CommerceEntry#MENU_TAB" value1="${menuTab}">
-			<var name="key_menuTab" value="${menuTab}" />
-		</execute>
-	</command>
-
-	<command name="gotoNestedMenu">
-		<execute function="AssertClick" locator1="CommerceEntry#NESTED_MENU" value1="${nestedMenu}">
-			<var name="key_nestedMenu" value="${nestedMenu}" />
-		</execute>
-	</command>
-
-	<command name="publishEntry">
-		<execute macro="Button#clickPublish" />
-
-		<if>
-			<condition function="IsElementPresent" locator1="Message#SUCCESS" />
-			<then>
-				<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-			</then>
-			<else>
-				<execute function="AssertTextEquals" locator1="CommerceEntry#WORKFLOW_STATUS" value1="${status}">
-					<var name="key_status" value="${status}" />
-				</execute>
-			</else>
-		</if>
-
-		<execute function="Pause" locator1="3000" />
-	</command>
-
-	<command name="saveEntry">
-		<execute macro="Button#clickSave" />
-
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-
-		<execute function="Pause" locator1="3000" />
-	</command>
-
-	<command name="saveEntryAsDraft">
-		<execute macro="Button#clickSaveAsDraft" />
-
-		<if>
-			<condition function="IsElementPresent" locator1="Message#SUCCESS" />
-			<then>
-				<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-			</then>
-			<else>
-				<execute function="AssertTextEquals" locator1="CommerceEntry#WORKFLOW_STATUS" value1="${status}">
-					<var name="key_status" value="${status}" />
-				</execute>
-			</else>
-		</if>
-
-		<execute function="Pause" locator1="3000" />
-	</command>
-
-	<command name="selectAssociatedOptionsValue">
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceEntry#ACCORDION" />
-			<then>
-				<execute function="Click" locator1="CommerceEntry#ACCORDION_TITLE">
-					<var name="key_accordionTitle" value="Options" />
-				</execute>
-			</then>
-		</if>
-
-		<if>
-			<condition function="IsElementPresent" locator1="CommerceEntry#OPTION_SELECT" />
-			<then>
-				<execute function="Click" locator1="CommerceEntry#OPTION_SELECT" />
-
-				<execute function="Click" locator1="CommerceEntry#OPTIONS_SELECT_LIST">
-					<var name="key_selectValue" value="${optionValue}" />
-				</execute>
-			</then>
-		</if>
-
-		<if>
-			<condition function="IsElementPresent" locator1="CommerceEntry#OPTION_VALUE">
-				<var name="key_optionType" value="checkbox_multiple" />
-				<var name="key_optionValue" value="${optionValue}" />
-			</condition>
-
-			<then>
-				<execute function="Click" locator1="CommerceEntry#OPTION_VALUE">
-					<var name="key_optionType" value="checkbox_multiple" />
-					<var name="key_optionValue" value="${optionValue}" />
-				</execute>
-			</then>
-		</if>
-
-		<if>
-			<condition function="IsElementPresent" locator1="CommerceEntry#OPTION_VALUE">
-				<var name="key_optionType" value="radio" />
-				<var name="key_optionValue" value="${optionValue}" />
-			</condition>
-
-			<then>
-				<execute function="Click" locator1="CommerceEntry#OPTION_VALUE">
-					<var name="key_optionType" value="radio" />
-					<var name="key_optionValue" value="${optionValue}" />
-				</execute>
-			</then>
-		</if>
-	</command>
-
-	<command name="uploadCatalogEntrySingleImage">
-		<execute function="AssertClick" locator1="CommerceEntry#PRODUCT_IMAGE_SELECT_FILE" value1="Select File" />
-
-		<execute macro="CommerceItemSelector#uploadSingleFile">
-			<var name="uploadFileName" value="${uploadFileName}" />
-		</execute>
-	</command>
-
-	<command name="viewCatalogEntry">
-		<execute function="AssertTextEquals" locator1="CommerceEntry#NAME_FIELD" value1="${productName}" />
-
-		<execute function="AssertTextEquals" locator1="CommerceEntry#SHORT_DESCRIPTION_FIELD" value1="${productShortDescription}" />
-
-		<execute function="AssertTextEquals" locator1="CommerceEntry#FULL_DESCRIPTION_FIELD" value1="${productFullDescription}" />
-
-		<execute function="AssertTextEquals" locator1="CommerceEntry#SEO_FRIENDLYURL" value1="${productName}">
-			<var name="key_productName" value="${productName}" />
-		</execute>
-	</command>
-
-	<command name="viewOptionsEntry">
-		<execute function="AssertTextEquals" locator1="CommerceEntry#NAME_FIELD" value1="${optionName}" />
-
-		<execute function="AssertTextEquals" locator1="CommerceEntry#DESCRIPTION_FIELD" value1="${optionDescription}" />
-	</command>
-</definition>
+	macro editEntryShortDescription {
+		Type(
+			locator1 = "CommerceEntry#SHORT_DESCRIPTION_FIELD",
+			value1 = "${newEntryShortDescription}"
+		);
+	}
+
+	macro gotoBreadcrumb {
+		AssertClick(
+			locator1 = "CommerceEntry#BREADCRUMBS",
+			value1 = "${breadcrumb}",
+			key_breadcrumb = "${breadcrumb}"
+		);
+	}
+
+	macro gotoMenuTab {
+		AssertClick(
+			locator1 = "CommerceEntry#MENU_TAB",
+			value1 = "${menuTab}",
+			key_menuTab = "${menuTab}"
+		);
+	}
+
+	macro gotoNestedMenu {
+		AssertClick(
+			locator1 = "CommerceEntry#NESTED_MENU",
+			value1 = "${nestedMenu}",
+			key_nestedMenu = "${nestedMenu}"
+		);
+	}
+
+	macro publishEntry {
+		Button.clickPublish();
+
+		if (IsElementPresent(locator1 = "Message#SUCCESS")) {
+			AssertElementPresent(locator1 = "Message#SUCCESS");
+		}
+		else {
+			AssertTextEquals(
+				locator1 = "CommerceEntry#WORKFLOW_STATUS",
+				value1 = "${status}",
+				key_status = "${status}"
+			);
+		}
+
+		Pause(locator1 = "3000");
+	}
+
+	macro saveEntry {
+		Button.clickSave();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+
+		Pause(locator1 = "3000");
+	}
+
+	macro saveEntryAsDraft {
+		Button.clickSaveAsDraft();
+
+		if (IsElementPresent(locator1 = "Message#SUCCESS")) {
+			AssertElementPresent(locator1 = "Message#SUCCESS");
+		}
+		else {
+			AssertTextEquals(
+				locator1 = "CommerceEntry#WORKFLOW_STATUS",
+				value1 = "${status}",
+				key_status = "${status}"
+			);
+		}
+
+		Pause(locator1 = "3000");
+	}
+
+	macro selectAssociatedOptionsValue {
+		if (IsElementNotPresent(locator1 = "CommerceEntry#ACCORDION")) {
+			Click(
+				locator1 = "CommerceEntry#ACCORDION_TITLE",
+				key_accordionTitle = "Options"
+			);
+		}
+
+		if (IsElementPresent(locator1 = "CommerceEntry#OPTION_SELECT")) {
+			Click(locator1 = "CommerceEntry#OPTION_SELECT");
+
+			Click(
+				locator1 = "CommerceEntry#OPTIONS_SELECT_LIST",
+				key_selectValue = "${optionValue}"
+			);
+		}
+
+		if (IsElementPresent(locator1 = "CommerceEntry#OPTION_VALUE", key_optionType = "checkbox_multiple", key_optionValue = "${optionValue}")) {
+			Click(
+				locator1 = "CommerceEntry#OPTION_VALUE",
+				key_optionType = "checkbox_multiple",
+				key_optionValue = "${optionValue}"
+			);
+		}
+
+		if (IsElementPresent(locator1 = "CommerceEntry#OPTION_VALUE", key_optionType = "radio", key_optionValue = "${optionValue}")) {
+			Click(
+				locator1 = "CommerceEntry#OPTION_VALUE",
+				key_optionType = "radio",
+				key_optionValue = "${optionValue}"
+			);
+		}
+	}
+
+	macro uploadCatalogEntrySingleImage {
+		AssertClick(
+			locator1 = "CommerceEntry#PRODUCT_IMAGE_SELECT_FILE",
+			value1 = "Select File"
+		);
+
+		CommerceItemSelector.uploadSingleFile(uploadFileName = "${uploadFileName}");
+	}
+
+	macro viewCatalogEntry {
+		AssertTextEquals(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${productName}"
+		);
+
+		AssertTextEquals(
+			locator1 = "CommerceEntry#SHORT_DESCRIPTION_FIELD",
+			value1 = "${productShortDescription}"
+		);
+
+		AssertTextEquals(
+			locator1 = "CommerceEntry#FULL_DESCRIPTION_FIELD",
+			value1 = "${productFullDescription}"
+		);
+
+		AssertTextEquals(
+			locator1 = "CommerceEntry#SEO_FRIENDLYURL",
+			value1 = "${productName}",
+			key_productName = "${productName}"
+		);
+	}
+
+	macro viewOptionsEntry {
+		AssertTextEquals(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${optionName}"
+		);
+
+		AssertTextEquals(
+			locator1 = "CommerceEntry#DESCRIPTION_FIELD",
+			value1 = "${optionDescription}"
+		);
+	}
+}

@@ -1,41 +1,51 @@
-<definition>
-	<command name="selectAlleEntries">
-		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
+definition {
+	macro selectAlleEntries {
+		SelectFrame(locator1 = "ItemSelector#ITEM_SELECTOR_IFRAME");
 
-		<execute function="Click" locator1="CommerceNavigation#SELECT_ALL_CHECKBOX" />
+		Click(locator1 = "CommerceNavigation#SELECT_ALL_CHECKBOX");
 
-		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_MODAL_FOOTER" />
+		SelectFrame(locator1 = "ItemSelector#ITEM_SELECTOR_MODAL_FOOTER");
 
-		<execute function="SelectFrameTop" value1="relative=top" />
-	</command>
+		SelectFrameTop(value1 = "relative=top");
+	}
 
-	<command name="selectEntry">
-		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
+	macro selectEntry {
+		SelectFrame(locator1 = "ItemSelector#ITEM_SELECTOR_IFRAME");
 
-		<execute function="Click" locator1="CommerceNavigation#SINGLE_ENTRY_CHECKBOX">
-			<var name="key_entryName" value="${entryName}" />
-		</execute>
+		Click(
+			locator1 = "CommerceNavigation#SINGLE_ENTRY_CHECKBOX",
+			key_entryName = "${entryName}"
+		);
 
-		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_MODAL_FOOTER" />
+		SelectFrame(locator1 = "ItemSelector#ITEM_SELECTOR_MODAL_FOOTER");
 
-		<execute function="SelectFrameTop" value1="relative=top" />
-	</command>
+		SelectFrameTop(value1 = "relative=top");
+	}
 
-	<command name="uploadSingleFile">
-		<var name="key_uploadFileName" value="${uploadFileName}" />
+	macro uploadSingleFile {
+		var key_uploadFileName = "${uploadFileName}";
 
-		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_IFRAME" />
+		SelectFrame(locator1 = "ItemSelector#ITEM_SELECTOR_IFRAME");
 
-		<execute function="AssertClick" locator1="ItemSelector#SELECT_FILE_UPLOAD_IMAGE" value1="Select File" />
+		AssertClick(
+			locator1 = "ItemSelector#SELECT_FILE_UPLOAD_IMAGE",
+			value1 = "Select File"
+		);
 
-		<execute function="SikuliUploadCommonFile" locator1="OS#FILE_DIALOG_BOX_FILE_NAME_FIELD_PNG" value1="${uploadFileName}" />
+		SikuliUploadCommonFile(
+			locator1 = "OS#FILE_DIALOG_BOX_FILE_NAME_FIELD_PNG",
+			value1 = "${uploadFileName}"
+		);
 
-		<execute function="AssertTextEquals" locator1="ItemSelector#CAPTION" value1="${uploadFileName}" />
+		AssertTextEquals(
+			locator1 = "ItemSelector#CAPTION",
+			value1 = "${uploadFileName}"
+		);
 
-		<execute function="SelectFrame" locator1="ItemSelector#ITEM_SELECTOR_MODAL_FOOTER" />
+		SelectFrame(locator1 = "ItemSelector#ITEM_SELECTOR_MODAL_FOOTER");
 
-		<execute function="AssertClick" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
+		AssertClick(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
 
-		<execute function="SelectFrameTop" value1="relative=top" />
-	</command>
-</definition>
+		SelectFrameTop(value1 = "relative=top");
+	}
+}

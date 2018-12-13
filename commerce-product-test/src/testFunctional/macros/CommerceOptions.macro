@@ -1,51 +1,42 @@
-<definition>
-	<command name="addEntry">
-		<execute function="Pause" locator1="3000" />
+definition {
+	macro addEntry {
+		Pause(locator1 = "3000");
 
-		<execute function="AssertElementPresent" locator1="CommerceEntry#NAME_FIELD" />
+		AssertElementPresent(locator1 = "CommerceEntry#NAME_FIELD");
 
-		<if>
-			<condition function="IsElementPresent" locator1="Button#DELETE" />
-			<then>
-				<execute function="Click" locator1="CommerceEntry#ADD_BUTTON" />
-			</then>
-		</if>
+		if (IsElementPresent(locator1 = "Button#DELETE")) {
+			Click(locator1 = "CommerceEntry#ADD_BUTTON");
+		}
 
-		<execute macro="CommerceEntry#addOptionsEntry">
-			<var name="optionDescription" value="${optionDescription}" />
-			<var name="optionFieldType" value="${optionFieldType}" />
-			<var name="optionName" value="${optionName}" />
-		</execute>
-	</command>
+		CommerceEntry.addOptionsEntry(
+			optionDescription = "${optionDescription}",
+			optionFieldType = "${optionFieldType}",
+			optionName = "${optionName}"
+		);
+	}
 
-	<command name="addOptionValueEntry">
-		<if>
-			<condition function="IsElementPresent" locator1="Button#DELETE" />
-			<then>
-				<execute function="Click" locator1="CommerceEntry#ADD_BUTTON" />
-			</then>
-		</if>
+	macro addOptionValueEntry {
+		if (IsElementPresent(locator1 = "Button#DELETE")) {
+			Click(locator1 = "CommerceEntry#ADD_BUTTON");
+		}
 
-		<execute macro="CommerceEntry#addOptionValue">
-			<var name="valueName" value="${optionValueName}" />
-			<var name="valuePriority" value="${optionValuePriority}" />
-		</execute>
+		CommerceEntry.addOptionValue(
+			valueName = "${optionValueName}",
+			valuePriority = "${optionValuePriority}"
+		);
 
-		<execute macro="CommerceEntry#saveEntry" />
-	</command>
+		CommerceEntry.saveEntry();
+	}
 
-	<command name="deleteOptionsEntries">
-		<while>
-			<condition function="IsElementPresent" locator1="Button#DELETE" />
-			<then>
-				<execute macro="CommerceOptions#deleteOptionsEntry" />
-			</then>
-		</while>
-	</command>
+	macro deleteOptionsEntries {
+		while (IsElementPresent(locator1 = "Button#DELETE")) {
+			CommerceOptions.deleteOptionsEntry();
+		}
+	}
 
-	<command name="deleteOptionsEntry">
-		<execute macro="Button#clickDelete" />
+	macro deleteOptionsEntry {
+		Button.clickDelete();
 
-		<execute function="AssertConfirm#waitForConfirmation" value1="Are you sure to delete?" />
-	</command>
-</definition>
+		AssertConfirm.waitForConfirmation(value1 = "Are you sure to delete?");
+	}
+}

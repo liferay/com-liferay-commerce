@@ -1,47 +1,48 @@
-<definition>
-	<command name="addEntry">
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Products" />
-		</execute>
+definition {
+	macro addEntry {
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Products");
 
-		<execute function="Click" locator1="Button#PLUS" />
+		Click(locator1 = "Button#PLUS");
 
-		<execute function="Click" locator1="MenuItem#DROPDOWN_MENU_ITEM" value1="${key_menuItem}">
-			<var name="key_menuItem" value="${productType}" />
-		</execute>
+		Click(
+			locator1 = "MenuItem#DROPDOWN_MENU_ITEM",
+			value1 = "${key_menuItem}",
+			key_menuItem = "${productType}"
+		);
 
-		<execute macro="CommerceEntry#addProductsEntry">
-			<var name="productFullDescription" value="${productFullDescription}" />
-			<var name="productName" value="${productName}" />
-			<var name="productShortDescription" value="${productShortDescription}" />
-		</execute>
-	</command>
+		CommerceEntry.addProductsEntry(
+			productFullDescription = "${productFullDescription}",
+			productName = "${productName}",
+			productShortDescription = "${productShortDescription}"
+		);
+	}
 
-	<command name="deleteEntries">
-		<execute function="Click" locator1="CommerceNavigation#SELECT_ALL_CHECKBOX" />
+	macro deleteEntries {
+		Click(locator1 = "CommerceNavigation#SELECT_ALL_CHECKBOX");
 
-		<execute function="Click" locator1="Button#DELETE" />
+		Click(locator1 = "Button#DELETE");
 
-		<execute function="AssertConfirm#waitForConfirmation" value1="${deleteMessage}" />
-	</command>
+		AssertConfirm.waitForConfirmation(value1 = "${deleteMessage}");
+	}
 
-	<command name="moveCatalogEntriesToRecycleBin">
-		<execute function="Click" locator1="CommerceNavigation#SELECT_ALL_CHECKBOX" />
+	macro moveCatalogEntriesToRecycleBin {
+		Click(locator1 = "CommerceNavigation#SELECT_ALL_CHECKBOX");
 
-		<execute function="Click" locator1="Button#RECYCLE_BIN" />
-	</command>
+		Click(locator1 = "Button#RECYCLE_BIN");
+	}
 
-	<command name="moveCatalogEntryToRecycleBinViaCheckbox">
-		<execute function="Click" locator1="CommerceNavigation#SINGLE_ENTRY_CHECKBOX">
-			<var name="key_entryName" value="${productName}" />
-		</execute>
+	macro moveCatalogEntryToRecycleBinViaCheckbox {
+		Click(
+			locator1 = "CommerceNavigation#SINGLE_ENTRY_CHECKBOX",
+			key_entryName = "${productName}"
+		);
 
-		<execute function="Click" locator1="Button#RECYCLE_BIN" />
+		Click(locator1 = "Button#RECYCLE_BIN");
 
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+		AssertElementPresent(locator1 = "Message#SUCCESS");
 
-		<execute function="AssertElementNotPresent" locator1="Message#ERROR" />
+		AssertElementNotPresent(locator1 = "Message#ERROR");
 
-		<execute function="AssertElementPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-	</command>
-</definition>
+		AssertElementPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER");
+	}
+}

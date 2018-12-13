@@ -1,37 +1,33 @@
-<definition>
-	<command name="assignAllRelationsToProductsEntry">
-		<execute function="Click" locator1="CommerceEntry#ADD_BUTTON" />
+definition {
+	macro assignAllRelationsToProductsEntry {
+		Click(locator1 = "CommerceEntry#ADD_BUTTON");
 
-		<execute function="WaitForSPARefresh" />
+		WaitForSPARefresh();
 
-		<execute macro="CommerceItemSelector#selectAlleEntries" />
+		CommerceItemSelector.selectAlleEntries();
 
-		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
-	</command>
+		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+	}
 
-	<command name="assignMultipleRelationToProductsEntry">
-		<execute function="Click" locator1="CommerceEntry#ADD_BUTTON" />
+	macro assignMultipleRelationToProductsEntry {
+		Click(locator1 = "CommerceEntry#ADD_BUTTON");
 
-		<execute function="WaitForSPARefresh" />
+		WaitForSPARefresh();
 
-		<for list="${entriesList}" param="entriesNames">
-			<execute macro="CommerceItemSelector#selectEntry">
-				<var name="entryName" value="${entriesNames}" />
-			</execute>
-		</for>
+		for (var entriesNames : list "${entriesList}") {
+			CommerceItemSelector.selectEntry(entryName = "${entriesNames}");
+		}
 
-		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
-	</command>
+		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+	}
 
-	<command name="assignSingleRelationToProductsEntry">
-		<execute function="Click" locator1="CommerceEntry#ADD_BUTTON" />
+	macro assignSingleRelationToProductsEntry {
+		Click(locator1 = "CommerceEntry#ADD_BUTTON");
 
-		<execute function="WaitForSPARefresh" />
+		WaitForSPARefresh();
 
-		<execute macro="CommerceItemSelector#selectEntry">
-			<var name="entryName" value="${entryName}" />
-		</execute>
+		CommerceItemSelector.selectEntry(entryName = "${entryName}");
 
-		<execute function="Click" locator1="ItemSelector#ADD_BUTTON" value1="Add" />
-	</command>
-</definition>
+		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+	}
+}

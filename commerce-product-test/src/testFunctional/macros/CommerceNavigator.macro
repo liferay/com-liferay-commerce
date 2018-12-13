@@ -1,44 +1,49 @@
-<definition>
-	<command name="gotoCommercePortletNavItem">
-		<execute function="AssertClick" locator1="NavBar#NAV_ITEM_LINK" value1="${navItem}">
-			<var name="key_navItem" value="${navItem}" />
-		</execute>
-	</command>
+definition {
+	macro gotoCommercePortletNavItem {
+		AssertClick(
+			locator1 = "NavBar#NAV_ITEM_LINK",
+			value1 = "${navItem}",
+			key_navItem = "${navItem}"
+		);
+	}
 
-	<command name="gotoEntry">
-		<execute function="AssertClick" locator1="CommerceNavigation#ENTRY_NAME" value1="${entryName}">
-			<var name="key_entryName" value="${entryName}" />
-		</execute>
-	</command>
+	macro gotoEntry {
+		AssertClick(
+			locator1 = "CommerceNavigation#ENTRY_NAME",
+			value1 = "${entryName}",
+			key_entryName = "${entryName}"
+		);
+	}
 
-	<command name="gotoFrontStoreProductPage">
-		<execute function="Click" locator1="CommerceEntry#FRONT_STORE_PRODUCT_LINK" />
+	macro gotoFrontStoreProductPage {
+		Click(locator1 = "CommerceEntry#FRONT_STORE_PRODUCT_LINK");
 
-		<execute function="Pause" locator1="30000" />
+		Pause(locator1 = "30000");
 
-		<execute macro="TestCase#getSiteName">
-			<return name="siteName" />
-			<var name="siteName" value="${siteName}" />
-		</execute>
+		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
-		<execute function="SelectWindow" locator1="title=${productName} - Product - ${siteName}" />
-	</command>
+		SelectWindow(locator1 = "title=${productName} - Product - ${siteName}");
+	}
 
-	<command name="gotoOptionValues">
-		<execute function="Click" locator1="CommerceNavigation#OPTION_VALUES_LINK" value1="${optionEntryName}">
-			<var name="key_optionEntryName" value="${optionEntryName}" />
-		</execute>
+	macro gotoOptionValues {
+		Click(
+			locator1 = "CommerceNavigation#OPTION_VALUES_LINK",
+			value1 = "${optionEntryName}",
+			key_optionEntryName = "${optionEntryName}"
+		);
 
-		<execute function="WaitForSPARefresh" />
+		WaitForSPARefresh();
 
-		<execute function="AssertElementPresent" locator1="CommerceEntry#NAME_FIELD" />
-	</command>
+		AssertElementPresent(locator1 = "CommerceEntry#NAME_FIELD");
+	}
 
-	<command name="searchEntry">
-		<execute function="Type" locator1="TextInput#SEARCH" value1="${entryName}">
-			<var name="entryName" value="${entryName}" />
-		</execute>
+	macro searchEntry {
+		Type(
+			locator1 = "TextInput#SEARCH",
+			value1 = "${entryName}",
+			entryName = "${entryName}"
+		);
 
-		<execute function="Click" locator1="CommerceNavigation#SEARCH" />
-	</command>
-</definition>
+		Click(locator1 = "CommerceNavigation#SEARCH");
+	}
+}
