@@ -321,6 +321,29 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 			cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId(),
 			cpDefinitionOptionValueRel.getCPDefinitionOptionRelId(), key);
 
+		CPDefinitionOptionRel cpDefinitionOptionRel =
+			cpDefinitionOptionValueRel.getCPDefinitionOptionRel();
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionOptionRel.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionOptionRel.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByU_C(
+				cpDefinitionOptionRel.getUuid(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionOptionValueRel =
+				cpDefinitionOptionValueRelPersistence.findByC_K(
+					cpDefinitionOptionRel.getCPDefinitionOptionRelId(), key);
+		}
+
 		cpDefinitionOptionValueRel.setNameMap(nameMap);
 		cpDefinitionOptionValueRel.setPriority(priority);
 		cpDefinitionOptionValueRel.setKey(key);

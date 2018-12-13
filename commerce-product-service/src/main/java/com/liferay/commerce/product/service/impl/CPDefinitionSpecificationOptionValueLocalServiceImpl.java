@@ -223,6 +223,24 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 				cpDefinitionSpecificationOptionValuePersistence.
 					findByPrimaryKey(cpDefinitionSpecificationOptionValueId);
 
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionSpecificationOptionValue.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionSpecificationOptionValue =
+				cpDefinitionSpecificationOptionValuePersistence.findByC_CSO(
+					newCPDefinition.getCPDefinitionId(),
+					cpDefinitionSpecificationOptionValue.
+						getCPSpecificationOptionId());
+		}
+
 		cpDefinitionSpecificationOptionValue.setCPOptionCategoryId(
 			cpOptionCategoryId);
 		cpDefinitionSpecificationOptionValue.setValueMap(valueMap);
@@ -253,6 +271,24 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 			cpDefinitionSpecificationOptionValue =
 				cpDefinitionSpecificationOptionValuePersistence.
 					findByPrimaryKey(cpDefinitionSpecificationOptionValueId);
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionSpecificationOptionValue.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionSpecificationOptionValue =
+				cpDefinitionSpecificationOptionValuePersistence.findByC_CSO(
+					newCPDefinition.getCPDefinitionId(),
+					cpDefinitionSpecificationOptionValue.
+						getCPSpecificationOptionId());
+		}
 
 		cpDefinitionSpecificationOptionValue.setCPOptionCategoryId(
 			cpOptionCategoryId);
