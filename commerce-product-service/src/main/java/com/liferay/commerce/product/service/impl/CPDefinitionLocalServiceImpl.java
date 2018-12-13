@@ -36,6 +36,7 @@ import com.liferay.commerce.product.model.CPDisplayLayout;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPInstanceConstants;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.impl.CPDefinitionImpl;
 import com.liferay.commerce.product.service.base.CPDefinitionLocalServiceBaseImpl;
 import com.liferay.commerce.product.type.CPType;
@@ -1279,6 +1280,32 @@ public class CPDefinitionLocalServiceImpl
 		return cpFriendlyURLEntryLocalService.getUrlTitleMapAsXML(
 			cpDefinition.getGroupId(), classNameId,
 			cpDefinition.getCPDefinitionId(), defaultLanguageId);
+	}
+
+	@Override
+	public boolean isPublishedCPDefinition(CPDefinition cpDefinition)
+		throws PortalException {
+
+		CProduct cProduct = cProductLocalService.getCProduct(
+			cpDefinition.getCProductId());
+
+		if (cProduct.getPublishedDefinitionId() ==
+				cpDefinition.getCPDefinitionId()) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean isPublishedCPDefinition(long cpDefinitionId)
+		throws PortalException {
+
+		CPDefinition cpDefinition = cpDefinitionLocalService.getCPDefinition(
+			cpDefinitionId);
+
+		return isPublishedCPDefinition(cpDefinition);
 	}
 
 	@Override
