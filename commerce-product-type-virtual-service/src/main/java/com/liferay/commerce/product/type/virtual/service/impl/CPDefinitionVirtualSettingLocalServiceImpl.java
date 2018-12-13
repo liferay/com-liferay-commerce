@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.product.type.virtual.service.impl;
 
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.type.virtual.exception.CPDefinitionVirtualSettingException;
 import com.liferay.commerce.product.type.virtual.exception.CPDefinitionVirtualSettingFileEntryIdException;
 import com.liferay.commerce.product.type.virtual.exception.CPDefinitionVirtualSettingSampleException;
@@ -32,6 +35,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -242,6 +246,22 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			termsOfUseRequired, termsOfUseContentMap,
 			termsOfUseJournalArticleResourcePrimKey);
 
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionVirtualSetting.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				_cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionVirtualSetting.getCPDefinitionId());
+
+			_cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionVirtualSetting =
+				cpDefinitionVirtualSettingPersistence.findByCPDefinitionId(
+					newCPDefinition.getCPDefinitionId());
+		}
+
 		cpDefinitionVirtualSetting.setFileEntryId(fileEntryId);
 		cpDefinitionVirtualSetting.setUrl(url);
 		cpDefinitionVirtualSetting.setActivationStatus(activationStatus);
@@ -333,8 +353,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 						termsOfUseJournalArticleResourcePrimKey);
 
 				if (journalArticle == null) {
-					throw new
-						CPDefinitionVirtualSettingTermsOfUseArticleResourcePKException();
+					throw new CPDefinitionVirtualSettingTermsOfUseArticleResourcePKException();
 				}
 			}
 			else if ((termsOfUseJournalArticleResourcePrimKey <= 0) &&
@@ -360,5 +379,11 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			}
 		}
 	}
+
+	@ServiceReference(type = CPDefinitionLocalService.class)
+	private CPDefinitionLocalService _cpDefinitionLocalService;
+
+	@ServiceReference(type = CProductLocalService.class)
+	private CProductLocalService _cProductLocalService;
 
 }
