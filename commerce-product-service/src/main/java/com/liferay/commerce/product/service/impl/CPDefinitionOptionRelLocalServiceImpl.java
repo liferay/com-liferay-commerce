@@ -292,6 +292,22 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			cpDefinitionOptionRelPersistence.findByPrimaryKey(
 				cpDefinitionOptionRelId);
 
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionOptionRel.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionOptionRel.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByU_C(
+				cpDefinitionOptionRel.getUuid(),
+				newCPDefinition.getCPDefinitionId());
+		}
+
 		cpDefinitionOptionRel.setCPOptionId(cpOptionId);
 		cpDefinitionOptionRel.setNameMap(nameMap);
 		cpDefinitionOptionRel.setDescriptionMap(descriptionMap);

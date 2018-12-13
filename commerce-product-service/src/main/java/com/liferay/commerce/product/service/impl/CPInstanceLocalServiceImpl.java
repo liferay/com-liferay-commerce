@@ -671,6 +671,21 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			cpInstanceId, cpInstance.getCPDefinitionId(), cpInstance.getSku(),
 			cpInstance.getJson(), cpInstance.getStatus(), serviceContext);
 
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpInstance.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpInstance.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpInstance = cpInstancePersistence.findByU_C(
+				cpInstance.getUuid(), newCPDefinition.getCPDefinitionId());
+		}
+
 		Date displayDate = null;
 		Date expirationDate = null;
 		Date now = new Date();
@@ -732,6 +747,21 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		CPInstance cpInstance = cpInstancePersistence.findByPrimaryKey(
 			cpInstanceId);
 
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpInstance.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpInstance.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpInstance = cpInstancePersistence.findByU_C(
+				cpInstance.getUuid(), newCPDefinition.getCPDefinitionId());
+		}
+
 		Date now = new Date();
 
 		cpInstance.setModifiedDate(serviceContext.getModifiedDate(now));
@@ -751,6 +781,21 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		CPInstance cpInstance = cpInstancePersistence.findByPrimaryKey(
 			cpInstanceId);
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpInstance.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpInstance.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpInstance = cpInstancePersistence.findByU_C(
+				cpInstance.getUuid(), newCPDefinition.getCPDefinitionId());
+		}
 
 		Date now = new Date();
 
@@ -779,6 +824,17 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			cpInstanceId);
 
 		CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinition)) {
+			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
+				cpInstance.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+
+			cpInstance = cpInstancePersistence.findByU_C(
+				cpInstance.getUuid(), cpDefinition.getCPDefinitionId());
+		}
 
 		if (!cpDefinition.isIgnoreSKUCombinations() &&
 			Validator.isNull(cpInstance.getJson())) {
@@ -831,6 +887,21 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		CPInstance cpInstance = cpInstancePersistence.findByPrimaryKey(
 			cpInstanceId);
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpInstance.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpInstance.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpInstance = cpInstancePersistence.findByU_C(
+				cpInstance.getUuid(), newCPDefinition.getCPDefinitionId());
+		}
 
 		Date now = new Date();
 
