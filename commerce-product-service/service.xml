@@ -286,6 +286,10 @@
 		<finder name="CPDefinitionId" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
 		</finder>
+		<finder name="U_C" return-type="CPDefinitionOptionRel" unique="true">
+			<finder-column name="uuid" />
+			<finder-column name="CPDefinitionId" />
+		</finder>
 		<finder name="C_SC" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
 			<finder-column name="skuContributor" />
