@@ -1,350 +1,312 @@
-<definition component-name="portal-commerce">
-	<property name="portal.release" value="true" />
-	<property name="portal.upstream" value="true" />
-	<property name="testray.main.component.name" value="Commerce" />
-
-	<set-up>
-		<execute macro="TestCase#setUpPortalInstance" />
-
-		<execute macro="User#firstLoginPG" />
-
-		<execute macro="CommerceConfiguration#commerceAdminSetUp" />
-
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Users" />
-			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="Users and Organizations" />
-		</execute>
-
-		<execute macro="User#addCP">
-			<var name="userEmailAddress" value="commerceuser@liferay.com" />
-			<var name="userFirstName" value="Commerce" />
-			<var name="userLastName" value="User" />
-			<var name="userScreenName" value="commerce" />
-		</execute>
-	</set-up>
-
-	<tear-down>
-		<var method="PropsUtil#get('test.portal.instance')" name="testPortalInstance" />
-
-		<if>
-			<equals arg1="${testPortalInstance}" arg2="true" />
-			<then>
-				<execute macro="PortalInstances#tearDownCP" />
-			</then>
-			<else>
-				<execute macro="CommerceConfiguration#commerceSettingsTearDown" />
+@component-name = "portal-commerce"
+definition {
+	property portal.upstream = "true";
+	property testray.main.component.name = "Commerce";
 
-				<execute macro="CommerceConfiguration#commerceAdminTearDown" />
-			</else>
-		</if>
-	</tear-down>
-
-	<command name="CreateNewAvailabilityEstimate">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewAvailabilityEstimate" />
-
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Settings" />
-		</execute>
-
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Availability Estimates" />
-		</execute>
-
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute macro="CommerceEntry#addNewAvailabilityEstimatesEntry">
-			<var name="entryName" value="New Availability Estimate" />
-		</execute>
-
-		<execute macro="Button#clickSave" />
-
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-	</command>
-
-	<command name="CreateNewCatalogRule">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewCatalogRule" />
-
-		<execute macro="CommerceEntry#createNewUserSegment">
-			<var name="criteriaType" value="Users" />
-			<var name="criterionEntryName" value="Commerce User" />
-			<var name="entryName" value="User Segment" />
-		</execute>
-
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Catalog Rules" />
-		</execute>
-
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute macro="CommerceEntry#addNewCatalogRule">
-			<var name="catalogRuleType" value="All Products" />
-			<var name="entryName" value="New Catalog Rule" />
-			<var name="userSegment" value="User Segment" />
-		</execute>
-	</command>
-
-	<command name="CreateNewCountry">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewCountry" />
-
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Settings" />
-		</execute>
+	setUp {
+		TestCase.setUpPortalInstance();
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Countries" />
-		</execute>
+		User.firstLoginPG();
 
-		<execute function="Click" locator1="Button#PLUS" />
+		CommerceConfiguration.commerceAdminSetUp();
 
-		<execute macro="CommerceEntry#addNewCountriesEntry">
-			<var name="entryName" value="New Country" />
-		</execute>
+		ProductMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Users and Organizations"
+		);
 
-		<execute macro="Button#clickSave" />
+		User.addCP(
+			userEmailAddress = "commerceuser@liferay.com",
+			userFirstName = "Commerce",
+			userLastName = "User",
+			userScreenName = "commerce"
+		);
+	}
 
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+	tearDown {
+		var testPortalInstance = PropsUtil.get("test.portal.instance");
 
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Regions" />
-		</execute>
+		if ("${testPortalInstance}" == "true") {
+			PortalInstances.tearDownCP();
+		}
+		else {
+			CommerceConfiguration.commerceSettingsTearDown();
 
-		<execute function="Click" locator1="Button#PLUS" />
+			CommerceConfiguration.commerceAdminTearDown();
+		}
+	}
 
-		<execute macro="CommerceEntry#addNewRegionsEntry">
-			<var name="code" value="NRE" />
-			<var name="entryName" value="New Region" />
-		</execute>
+	test CreateNewAvailabilityEstimate {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAvailabilityEstimate";
 
-		<execute macro="Button#clickSave" />
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Settings"
+		);
 
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-	</command>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Availability Estimates");
 
-	<command name="CreateNewCurrency">
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewCurrency" />
+		Click(locator1 = "Button#PLUS");
 
-		<execute macro="CommerceEntry#createNewCurrenciesEntry">
-			<var name="code" value="NCU" />
-			<var name="entryName" value="New Currency" />
-		</execute>
-	</command>
+		CommerceEntry.addNewAvailabilityEstimatesEntry(
+			entryName = "New Availability Estimate"
+		);
 
-	<command name="CreateNewDiscount">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewDiscount" />
+		Button.clickSave();
 
-		<execute macro="CommerceEntry#createNewUserSegment">
-			<var name="criteriaType" value="Users" />
-			<var name="criterionEntryName" value="Commerce User" />
-			<var name="entryName" value="User Segment" />
-		</execute>
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+	}
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Discounts" />
-		</execute>
+	test CreateNewCatalogRule {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewCatalogRule";
 
-		<execute function="Click" locator1="Button#PLUS" />
+		CommerceEntry.createNewUserSegment(
+			criteriaType = "Users",
+			criterionEntryName = "Commerce User",
+			entryName = "User Segment"
+		);
 
-		<execute macro="CommerceEntry#addNewDiscountsEntry">
-			<var name="discountLevel" value="15" />
-			<var name="discountTarget" value="Apply to Product" />
-			<var name="entryTitle" value="New Discount" />
-			<var name="maximumDiscountAmount" value="10" />
-			<var name="userSegment" value="User Segment" />
-		</execute>
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Catalog Rules"
+		);
 
-		<execute macro="Button#clickPublish" />
+		Click(locator1 = "Button#PLUS");
 
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-	</command>
+		CommerceEntry.addNewCatalogRule(
+			catalogRuleType = "All products",
+			entryName = "New Catalog Rule",
+			userSegment = "User Segment"
+		);
+	}
 
-	<command name="CreateNewMeasurementUnits">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewMeasurementUnits" />
+	test CreateNewCountry {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewCountry";
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Settings" />
-		</execute>
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Settings"
+		);
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Measurement Units" />
-		</execute>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Countries");
 
-		<execute function="Click" locator1="Button#PLUS" />
+		Click(locator1 = "Button#PLUS");
 
-		<execute macro="CommerceEntry#addNewDimensionUnit">
-			<var name="entryName" value="New Dimension Unit" />
-		</execute>
+		CommerceEntry.addNewCountriesEntry(entryName = "New Country");
 
-		<execute macro="Button#clickSave" />
+		Button.clickSave();
 
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+		AssertElementPresent(locator1 = "Message#SUCCESS");
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Weight" />
-		</execute>
+		CommerceEntry.gotoMenuTab(menuTab = "Regions");
 
-		<execute function="Click" locator1="Button#PLUS" />
+		Click(locator1 = "Button#PLUS");
 
-		<execute macro="CommerceEntry#addNewWeightUnit">
-			<var name="entryName" value="New Weight Unit" />
-		</execute>
+		CommerceEntry.addNewRegionsEntry(code = "NRE", entryName = "New Region");
 
-		<execute macro="Button#clickSave" />
+		Button.clickSave();
 
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-	</command>
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+	}
 
-	<command ignore="true" name="CreateNewNotificationTemplate">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewNotificationTemplate" />
+	test CreateNewCurrency {
+		CommerceEntry.createNewCurrenciesEntry(code = "NCU", entryName = "New Currency");
+	}
 
-		<execute macro="CommerceEntry#createNewUserSegment">
-			<var name="criteriaType" value="Users" />
-			<var name="criterionEntryName" value="Commerce User" />
-			<var name="entryName" value="User Segment" />
-		</execute>
+	test CreateNewDiscount {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewDiscount";
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Settings" />
-		</execute>
-
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Notificatios" />
-		</execute>
-
-		<execute macro="CommerceEntry#gotoMenuTab">
-			<var name="menuTab" value="Notification Templates" />
-		</execute>
-
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute macro="CommerceEntry#addNewNotificationTemplate">
-			<var name="entryName" value="New Notification Template" />
-			<var name="fromAddress" value="test@liferay.com" />
-			<var name="fromName" value="Test Test" />
-			<var name="notificationType" value="Order Placed" />
-			<var name="userSegment" value="User Segment" />
-		</execute>
-
-		<execute macro="Button#clickSave" />
-
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-	</command>
-
-	<command name="CreateNewPriceList">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewPriceList" />
-
-		<execute macro="CommerceEntry#createNewCurrenciesEntry">
-			<var name="code" value="NCU" />
-			<var name="entryName" value="New Currency" />
-		</execute>
-
-		<execute macro="CommerceEntry#createNewUserSegment">
-			<var name="criteriaType" value="Users" />
-			<var name="criterionEntryName" value="Commerce User" />
-			<var name="entryName" value="User Segment" />
-		</execute>
-
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Price Lists" />
-		</execute>
-
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute macro="CommerceEntry#addNewPriceListsEntry">
-			<var name="currencyCode" value="NCU" />
-			<var name="entryName" value="New Price List" />
-			<var name="userSegmentName" value="User Segment" />
-		</execute>
-
-		<execute macro="Button#clickPublish" />
-
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
-	</command>
-
-	<command name="CreateNewUserSegmentByOrganizations">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByOrganizations" />
-
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Users" />
-			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="Users and Organizations" />
-		</execute>
-
-		<execute macro="Organization#addCP">
-			<var name="orgName" value="Commerce Organization" />
-			<var name="orgType" value="Organization" />
-		</execute>
-
-		<execute macro="CommerceEntry#createNewUserSegment">
-			<var name="criteriaType" value="Organizations" />
-			<var name="criterionEntryName" value="Commerce Organization" />
-			<var name="entryName" value="User Segment" />
-		</execute>
-	</command>
-
-	<command name="CreateNewUserSegmentByRegularRole">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByRegularRole" />
-
-		<execute macro="CommerceEntry#createNewUserSegment">
-			<var name="criteriaType" value="Roles" />
-			<var name="criterionEntryName" value="User" />
-			<var name="entryName" value="User Segment" />
-			<var name="roleType" value="Regular Role" />
-		</execute>
-	</command>
-
-	<command name="CreateNewUserSegmentByUserGroups">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByUserGroups" />
-
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Users" />
-			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="User Groups" />
-		</execute>
-
-		<execute macro="UserGroup#addCP">
-			<var name="userGroupName" value="Commerce UserGroup" />
-		</execute>
-
-		<execute macro="CommerceEntry#createNewUserSegment">
-			<var name="criteriaType" value="User Groups" />
-			<var name="criterionEntryName" value="Commerce UserGroup" />
-			<var name="entryName" value="User Segment" />
-		</execute>
-	</command>
-
-	<command name="CreateNewUserSegmentByUsers">
-		<property name="portal.acceptance" value="true" />
-		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewUserSegmentByUsers" />
-
-		<execute macro="CommerceEntry#createNewUserSegment">
-			<var name="criteriaType" value="Users" />
-			<var name="criterionEntryName" value="Commerce User" />
-			<var name="entryName" value="User Segment" />
-		</execute>
-	</command>
-</definition>
+		CommerceEntry.createNewUserSegment(
+			criteriaType = "Users",
+			criterionEntryName = "Commerce User",
+			entryName = "User Segment"
+		);
+
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Discounts"
+		);
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceEntry.addNewDiscountsEntry(
+			discountLevel = "15",
+			discountTarget = "Apply to Product",
+			entryTitle = "New Discount",
+			maximumDiscountAmount = "10",
+			userSegment = "User Segment"
+		);
+
+		Button.clickPublish();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+	}
+
+	test CreateNewMeasurementUnits {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewMeasurementUnits";
+
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Settings"
+		);
+
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Measurement Units");
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceEntry.addNewDimensionUnit(entryName = "New Dimension Unit");
+
+		Button.clickSave();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Weight");
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceEntry.addNewWeightUnit(entryName = "New Weight Unit");
+
+		Button.clickSave();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+	}
+
+	@ignore = "true"
+	test CreateNewNotificationTemplate {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewNotificationTemplate";
+
+		CommerceEntry.createNewUserSegment(
+			criteriaType = "Users",
+			criterionEntryName = "Commerce User",
+			entryName = "User Segment"
+		);
+
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Settings"
+		);
+
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Notificatios");
+
+		CommerceEntry.gotoMenuTab(menuTab = "Notification Templates");
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceEntry.addNewNotificationTemplate(
+			entryName = "New Notification Template",
+			fromAddress = "test@liferay.com",
+			fromName = "Test Test",
+			notificationType = "Order Placed",
+			userSegment = "User Segment"
+		);
+
+		Button.clickSave();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+	}
+
+	test CreateNewPriceList {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewPriceList";
+
+		CommerceEntry.createNewCurrenciesEntry(code = "NCU", entryName = "New Currency");
+
+		CommerceEntry.createNewUserSegment(
+			criteriaType = "Users",
+			criterionEntryName = "Commerce User",
+			entryName = "User Segment"
+		);
+
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Price Lists"
+		);
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceEntry.addNewPriceListsEntry(
+			currencyCode = "NCU",
+			entryName = "New Price List",
+			userSegmentName = "User Segment"
+		);
+
+		Button.clickPublish();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+	}
+
+	test CreateNewUserSegmentByOrganizations {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewUserSegmentByOrganizations";
+
+		ProductMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Users and Organizations"
+		);
+
+		Organization.addCP(orgName = "Commerce Organization", orgType = "Organization");
+
+		CommerceEntry.createNewUserSegment(
+			criteriaType = "Organizations",
+			criterionEntryName = "Commerce Organization",
+			entryName = "User Segment"
+		);
+	}
+
+	test CreateNewUserSegmentByRegularRole {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewUserSegmentByRegularRole";
+
+		CommerceEntry.createNewUserSegment(
+			criteriaType = "Roles",
+			criterionEntryName = "User",
+			entryName = "User Segment",
+			roleType = "Regular Role"
+		);
+	}
+
+	test CreateNewUserSegmentByUserGroups {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewUserSegmentByUserGroups";
+
+		ProductMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "User Groups"
+		);
+
+		UserGroup.addCP(userGroupName = "Commerce UserGroup");
+
+		CommerceEntry.createNewUserSegment(
+			criteriaType = "User Groups",
+			criterionEntryName = "Commerce UserGroup",
+			entryName = "User Segment"
+		);
+	}
+
+	test CreateNewUserSegmentByUsers {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewUserSegmentByUsers";
+
+		CommerceEntry.createNewUserSegment(
+			criteriaType = "Users",
+			criterionEntryName = "Commerce User",
+			entryName = "User Segment"
+		);
+	}
+}
