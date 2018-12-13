@@ -58,9 +58,21 @@ public class CPDefinitionLinkLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		CPDefinition cpDefinition = null;
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+		}
+		else {
+			cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
+				cpDefinitionId);
+		}
+
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-			cpDefinitionId);
 
 		long cpDefinitionLinkId = counterLocalService.increment();
 
@@ -72,7 +84,7 @@ public class CPDefinitionLinkLocalServiceImpl
 		cpDefinitionLink.setCompanyId(user.getCompanyId());
 		cpDefinitionLink.setUserId(user.getUserId());
 		cpDefinitionLink.setUserName(user.getFullName());
-		cpDefinitionLink.setCPDefinitionId(cpDefinitionId);
+		cpDefinitionLink.setCPDefinitionId(cpDefinition.getCPDefinitionId());
 		cpDefinitionLink.setCProductId(cProductId);
 		cpDefinitionLink.setPriority(priority);
 		cpDefinitionLink.setType(type);
@@ -80,7 +92,7 @@ public class CPDefinitionLinkLocalServiceImpl
 
 		cpDefinitionLinkPersistence.update(cpDefinitionLink);
 
-		reindexCPDefinition(cpDefinitionId);
+		reindexCPDefinition(cpDefinition.getCPDefinitionId());
 
 		return cpDefinitionLink;
 	}
@@ -88,6 +100,22 @@ public class CPDefinitionLinkLocalServiceImpl
 	@Override
 	public CPDefinitionLink deleteCPDefinitionLink(
 		CPDefinitionLink cpDefinitionLink) {
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionLink.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionLink.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionLink = cpDefinitionLinkPersistence.findByC_C_T(
+				newCPDefinition.getCPDefinitionId(),
+				cpDefinitionLink.getCProductId(), cpDefinitionLink.getType());
+		}
 
 		// Commerce product definition link
 
@@ -188,6 +216,22 @@ public class CPDefinitionLinkLocalServiceImpl
 
 		CPDefinitionLink cpDefinitionLink =
 			cpDefinitionLinkPersistence.findByPrimaryKey(cpDefinitionLinkId);
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionLink.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionLink.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionLink = cpDefinitionLinkPersistence.findByC_C_T(
+				newCPDefinition.getCPDefinitionId(),
+				cpDefinitionLink.getCProductId(), cpDefinitionLink.getType());
+		}
 
 		cpDefinitionLink.setPriority(priority);
 		cpDefinitionLink.setExpandoBridgeAttributes(serviceContext);
