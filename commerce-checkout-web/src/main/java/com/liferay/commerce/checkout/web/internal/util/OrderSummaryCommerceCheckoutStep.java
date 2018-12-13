@@ -19,6 +19,7 @@ import com.liferay.commerce.checkout.web.internal.display.context.OrderSummaryCh
 import com.liferay.commerce.checkout.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
 import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
+import com.liferay.commerce.checkout.web.util.CommerceCheckoutStepServicesTracker;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
@@ -37,14 +38,21 @@ import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,6 +80,24 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 	@Override
 	public String getName() {
 		return NAME;
+	}
+
+	public String getRedirect(
+		PortletRequest actionRequest, PortletResponse actionResponse) {
+
+		String redirect = GetterUtil.getString(
+			actionRequest.getAttribute(WebKeys.REDIRECT));
+
+		if (Validator.isNotNull(redirect)) {
+			return redirect;
+		}
+
+		CommerceCheckoutStep commerceCheckoutStep =
+			_commerceCheckoutStepServicesTracker.getCommerceCheckoutStep(
+				OrderConfirmationCommerceCheckoutStep.NAME);
+
+		return getPortletURL(
+			actionRequest, actionResponse, commerceCheckoutStep.getName());
 	}
 
 	@Override
@@ -110,6 +136,25 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			HttpServletResponse httpServletResponse)
 		throws Exception {
 
+		PortletRequest portletRequest =
+			(PortletRequest)httpServletRequest.getAttribute(
+				"javax.portlet.request");
+		PortletResponse portletResponse =
+			(PortletResponse)httpServletRequest.getAttribute(
+				"javax.portlet.response");
+
+		long commerceOrderId = ParamUtil.getLong(
+			httpServletRequest, "commerceOrderId");
+
+		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
+			commerceOrderId);
+
+		if (!commerceOrder.isOpen()) {
+			String redirect = getRedirect(portletRequest, portletResponse);
+
+			httpServletRequest.setAttribute("goToConfirmation", redirect);
+		}
+
 		OrderSummaryCheckoutStepDisplayContext
 			orderSummaryCheckoutStepDisplayContext =
 				new OrderSummaryCheckoutStepDisplayContext(
@@ -144,6 +189,26 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 			return false;
 		}
+	}
+
+	protected String getPortletURL(
+		PortletRequest actionRequest, PortletResponse actionResponse,
+		String checkoutStepName) {
+
+		LiferayPortletResponse liferayPortletResponse =
+			_portal.getLiferayPortletResponse(actionResponse);
+
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+		long commerceOrderId = ParamUtil.getLong(
+			actionRequest, "commerceOrderId");
+
+		portletURL.setParameter(
+			"commerceOrderId", String.valueOf(commerceOrderId));
+
+		portletURL.setParameter("checkoutStepName", checkoutStepName);
+
+		return portletURL.toString();
 	}
 
 	protected void startPayment(
@@ -220,6 +285,10 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 	@Reference
 	private CommerceCheckoutStepHelper _commerceCheckoutStepHelper;
+
+	@Reference
+	private CommerceCheckoutStepServicesTracker
+		_commerceCheckoutStepServicesTracker;
 
 	@Reference
 	private CommerceDiscountCouponCodeHelper _commerceDiscountCouponCodeHelper;
