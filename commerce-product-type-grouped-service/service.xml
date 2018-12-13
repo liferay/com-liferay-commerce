@@ -25,7 +25,7 @@
 		<!-- Other fields -->
 
 		<column name="CPDefinitionId" type="long" />
-		<column name="entryCPDefinitionId" type="long" />
+		<column name="entryCProductId" type="long" />
 		<column name="priority" type="double" />
 		<column name="quantity" type="int" />
 
@@ -42,7 +42,7 @@
 		</finder>
 		<finder name="C_E" return-type="CPDefinitionGroupedEntry" unique="true">
 			<finder-column name="CPDefinitionId" />
-			<finder-column name="entryCPDefinitionId" />
+			<finder-column name="entryCProductId" />
 		</finder>
 	</entity>
 	<exceptions>
