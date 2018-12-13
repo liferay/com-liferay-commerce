@@ -1,276 +1,183 @@
-<definition>
-	<command name="commerceAdminSetUp">
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Configuration" />
-			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="Search" />
-		</execute>
+definition {
+	macro commerceAdminSetUp {
+		ProductMenu.gotoPortlet(
+			category = "Configuration",
+			panel = "Control Panel",
+			portlet = "Search"
+		);
 
-		<execute macro="SearchAdministration#executeSearchActions">
-			<var name="actionsDescription" value="Reindex all search indexes." />
-		</execute>
-	</command>
+		SearchAdministration.executeSearchActions(
+			actionsDescription = "Reindex all search indexes."
+		);
+	}
 
-	<command name="commerceAdminTearDown">
-		<execute macro="Navigator#openURL" />
+	macro commerceAdminTearDown {
+		Navigator.openURL();
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Users" />
-			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="Users and Organizations" />
-		</execute>
+		ProductMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Users and Organizations"
+		);
 
-		<execute macro="User#deactivateCP">
-			<var name="deactivateType" value="Actions" />
-			<var name="userFirstName" value="Commerce" />
-		</execute>
+		User.deactivateCP(deactivateType = "Actions", userFirstName = "Commerce");
 
-		<execute macro="User#deleteCP">
-			<var name="userFirstName" value="Commerce" />
-		</execute>
+		User.deleteCP(userFirstName = "Commerce");
 
-		<execute macro="UsersAndOrganizationsNavigator#gotoOrganizations" />
+		UsersAndOrganizationsNavigator.gotoOrganizations();
 
-		<if>
-			<condition function="IsElementPresent" locator1="UsersAndOrganizations#ORGANIZATION_TABLE_NAME">
-				<var name="key_orgName" value="Commerce Organization" />
-			</condition>
+		if (IsElementPresent(locator1 = "UsersAndOrganizations#ORGANIZATION_TABLE_NAME", key_orgName = "Commerce Organization")) {
+			Organization.deleteCP(orgName = "Commerce Organization");
+		}
 
-			<then>
-				<execute macro="Organization#deleteCP">
-					<var name="orgName" value="Commerce Organization" />
-				</execute>
-			</then>
-		</if>
+		ProductMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "User Groups"
+		);
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Users" />
-			<var name="panel" value="Control Panel" />
-			<var name="portlet" value="User Groups" />
-		</execute>
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			UserGroup.deleteCP(userGroupName = "Commerce UserGroup");
+		}
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-			<then>
-				<execute macro="UserGroup#deleteCP">
-					<var name="userGroupName" value="Commerce UserGroup" />
-				</execute>
-			</then>
-		</if>
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "User Segments"
+		);
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="User Segments" />
-		</execute>
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			CommerceProducts.deleteEntries(
+				deleteMessage = "Are you sure you want to delete the selected entries? They will be deleted immediately."
+			);
+		}
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-			<then>
-				<execute macro="CommerceProducts#deleteEntries">
-					<var name="deleteMessage" value="Are you sure you want to delete the selected entries? They will be deleted immediately." />
-				</execute>
-			</then>
-		</if>
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Price Lists"
+		);
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Price Lists" />
-		</execute>
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			CommerceProducts.deleteEntries(
+				deleteMessage = "Are you sure you want to delete the selected price lists?"
+			);
+		}
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-			<then>
-				<execute macro="CommerceProducts#deleteEntries">
-					<var name="deleteMessage" value="Are you sure you want to delete the selected price lists?" />
-				</execute>
-			</then>
-		</if>
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Discounts"
+		);
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Discounts" />
-		</execute>
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			CommerceProducts.deleteEntries(
+				deleteMessage = "Are you sure you want to delete the selected discounts?"
+			);
+		}
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-			<then>
-				<execute macro="CommerceProducts#deleteEntries">
-					<var name="deleteMessage" value="Are you sure you want to delete the selected discounts?" />
-				</execute>
-			</then>
-		</if>
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Catalog Rules"
+		);
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Catalog Rules" />
-		</execute>
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			CommerceProducts.deleteEntries(
+				deleteMessage = "Are you sure you want to delete the selected catalog rules?"
+			);
+		}
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-			<then>
-				<execute macro="CommerceProducts#deleteEntries">
-					<var name="deleteMessage" value="Are you sure you want to delete the selected catalog rules?" />
-				</execute>
-			</then>
-		</if>
+		User.logoutPG();
+	}
 
-		<execute macro="User#logoutPG" />
-	</command>
+	macro commerceSettingsTearDown {
+		Navigator.openURL();
 
-	<command name="commerceSettingsTearDown">
-		<execute macro="Navigator#openURL" />
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Settings"
+		);
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Settings" />
-		</execute>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Availability Estimates");
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Availability Estimates" />
-		</execute>
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			PortletEntry.deleteViaMenuItem(rowEntry = "New Availability Estimate");
+		}
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-			<then>
-				<execute macro="PortletEntry#deleteViaMenuItem">
-					<var name="rowEntry" value="New Availability Estimate" />
-				</execute>
-			</then>
-		</if>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Countries");
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Countries" />
-		</execute>
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			PortletEntry.deleteViaMenuItem(rowEntry = "New Country");
+		}
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-			<then>
-				<execute macro="PortletEntry#deleteViaMenuItem">
-					<var name="rowEntry" value="New Country" />
-				</execute>
-			</then>
-		</if>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Currencies");
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Currencies" />
-		</execute>
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			PortletEntry.deleteViaMenuItem(rowEntry = "New Currency");
+		}
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-			<then>
-				<execute macro="PortletEntry#deleteViaMenuItem">
-					<var name="rowEntry" value="New Currency" />
-				</execute>
-			</then>
-		</if>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Measurement Units");
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Measurement Units" />
-		</execute>
+		if (IsElementPresent(locator1 = "Icon#ROW_VERTICAL_ELLIPSIS", key_rowEntry = "New Dimension Unit")) {
+			PortletEntry.deleteViaMenuItem(rowEntry = "New Dimension Unit");
+		}
 
-		<if>
-			<condition function="IsElementPresent" locator1="Icon#ROW_VERTICAL_ELLIPSIS">
-				<var name="key_rowEntry" value="New Dimension Unit" />
-			</condition>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Weight");
 
-			<then>
-				<execute macro="PortletEntry#deleteViaMenuItem">
-					<var name="rowEntry" value="New Dimension Unit" />
-				</execute>
-			</then>
-		</if>
+		if (IsElementPresent(locator1 = "Icon#ROW_VERTICAL_ELLIPSIS", key_rowEntry = "New Weight Unit")) {
+			PortletEntry.deleteViaMenuItem(rowEntry = "New Weight Unit");
+		}
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Weight" />
-		</execute>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Notifications");
 
-		<if>
-			<condition function="IsElementPresent" locator1="Icon#ROW_VERTICAL_ELLIPSIS">
-				<var name="key_rowEntry" value="New Weight Unit" />
-			</condition>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Notification Templates");
 
-			<then>
-				<execute macro="PortletEntry#deleteViaMenuItem">
-					<var name="rowEntry" value="New Weight Unit" />
-				</execute>
-			</then>
-		</if>
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			PortletEntry.deleteViaMenuItem(rowEntry = "New Notification Template");
+		}
+	}
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Notifications" />
-		</execute>
+	macro commerceSetUp {
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Settings"
+		);
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Notification Templates" />
-		</execute>
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Health Check");
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-			<then>
-				<execute macro="PortletEntry#deleteViaMenuItem">
-					<var name="rowEntry" value="New Notification Template" />
-				</execute>
-			</then>
-		</if>
-	</command>
+		for (var buttonRowNumber : list "1,2,3,4,5,6,7,8,9,10") {
+			if (!(IsElementPresent(locator1 = "CommerceEntry#FIX_ISSUE_BUTTON", key_buttonStatus = "disabled"))) {
+				Click(
+					locator1 = "CommerceEntry#FIX_ISSUE_BUTTON",
+					key_buttonRowNumber = "${buttonRowNumber}",
+					key_buttonStatus = ""
+				);
+			}
+		}
+	}
 
-	<command name="commerceSetUp">
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Settings" />
-		</execute>
+	macro commerceStoreFrontTearDown {
+		Navigator.openURL();
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Health Check" />
-		</execute>
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Catalog"
+		);
 
-		<for list="1,2,3,4,5,6,7,8,9,10" param="buttonRowNumber">
-			<if>
-				<not>
-					<condition function="IsElementPresent" locator1="CommerceEntry#FIX_ISSUE_BUTTON">
-						<var name="key_buttonStatus" value="disabled" />
-					</condition>
-				</not>
-				<then>
-					<execute function="Click" locator1="CommerceEntry#FIX_ISSUE_BUTTON">
-						<var name="key_buttonRowNumber" value="${buttonRowNumber}" />
-						<var name="key_buttonStatus" value="" />
-					</execute>
-				</then>
-			</if>
-		</for>
-	</command>
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			CommerceProducts.moveCatalogEntriesToRecycleBin();
+		}
 
-	<command name="commerceStoreFrontTearDown">
-		<execute macro="Navigator#openURL" />
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Options");
 
-		<execute macro="ProductMenu#gotoPortlet">
-			<var name="category" value="Commerce" />
-			<var name="panel" value="Site Administration" />
-			<var name="portlet" value="Catalog" />
-		</execute>
+		Pause(locator1 = "3000");
 
-		<if>
-			<condition function="IsElementNotPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-			<then>
-				<execute macro="CommerceProducts#moveCatalogEntriesToRecycleBin" />
-			</then>
-		</if>
+		CommerceOptions.deleteOptionsEntries();
 
-		<execute macro="CommerceNavigator#gotoCommercePortletNavItem">
-			<var name="navItem" value="Options" />
-		</execute>
-
-		<execute function="Pause" locator1="3000" />
-
-		<execute macro="CommerceOptions#deleteOptionsEntries" />
-
-		<execute macro="User#logoutPG" />
-	</command>
-</definition>
+		User.logoutPG();
+	}
+}
