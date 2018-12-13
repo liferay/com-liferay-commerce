@@ -1,19 +1,17 @@
-<definition>
-	<command name="addProductImages">
-		<for list="${optionValuesList}" param="optionValues">
-			<execute function="Click" locator1="Button#PLUS" />
+definition {
+	macro addProductImages {
+		for (var optionValues : list "${optionValuesList}") {
+			Click(locator1 = "Button#PLUS");
 
-			<execute macro="CommerceEntry#uploadCatalogEntrySingleImage">
-				<var name="uploadFileName" value="Commerce_${optionValues}.jpg" />
-			</execute>
+			CommerceEntry.uploadCatalogEntrySingleImage(
+				uploadFileName = "Commerce_${optionValues}.jpg"
+			);
 
-			<execute macro="CommerceEntry#selectAssociatedOptionsValue">
-				<var name="optionValue" value="${optionValues}" />
-			</execute>
+			CommerceEntry.selectAssociatedOptionsValue(optionValue = "${optionValues}");
 
-			<execute macro="CommerceEntry#publishEntry" />
+			CommerceEntry.publishEntry();
 
-			<execute function="AssertNotVisible" locator1="Message#SUCCESS" />
-		</for>
-	</command>
-</definition>
+			AssertNotVisible(locator1 = "Message#SUCCESS");
+		}
+	}
+}

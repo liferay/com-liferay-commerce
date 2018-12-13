@@ -1,35 +1,38 @@
-<definition>
-	<command name="addEntry">
-		<execute function="Click" locator1="Button#PLUS" />
+definition {
+	macro addEntry {
+		Click(locator1 = "Button#PLUS");
 
-		<execute function="AssertClick" locator1="CommerceEntry#PLUS_MENU" value1="${plusMenu}">
-			<var name="key_plusMenu" value="${plusMenu}" />
-		</execute>
+		AssertClick(
+			locator1 = "CommerceEntry#PLUS_MENU",
+			value1 = "${plusMenu}",
+			key_plusMenu = "${plusMenu}"
+		);
 
-		<execute macro="CommerceEntry#addProductsEntry">
-			<var name="productFullDescription" value="${productFullDescription}" />
-			<var name="productShortDescription" value="${productShortDescription}" />
-			<var name="productTitle" value="${productTitle}" />
-		</execute>
-	</command>
+		CommerceEntry.addProductsEntry(
+			productFullDescription = "${productFullDescription}",
+			productShortDescription = "${productShortDescription}",
+			productTitle = "${productTitle}"
+		);
+	}
 
-	<command name="moveCatalogEntriesToRecycleBin">
-		<execute function="Click" locator1="CommerceNavigation#SELECT_ALL_CHECKBOX" />
+	macro moveCatalogEntriesToRecycleBin {
+		Click(locator1 = "CommerceNavigation#SELECT_ALL_CHECKBOX");
 
-		<execute function="Click" locator1="Button#RECYCLE_BIN" />
-	</command>
+		Click(locator1 = "Button#RECYCLE_BIN");
+	}
 
-	<command name="moveCatalogEntryToRecycleBinViaCheckbox">
-		<execute function="Click" locator1="CommerceNavigation#SINGLE_ENTRY_CHECKBOX">
-			<var name="key_entryTitle" value="${productTitle}" />
-		</execute>
+	macro moveCatalogEntryToRecycleBinViaCheckbox {
+		Click(
+			locator1 = "CommerceNavigation#SINGLE_ENTRY_CHECKBOX",
+			key_entryTitle = "${productTitle}"
+		);
 
-		<execute function="Click" locator1="Button#RECYCLE_BIN" />
+		Click(locator1 = "Button#RECYCLE_BIN");
 
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+		AssertElementPresent(locator1 = "Message#SUCCESS");
 
-		<execute function="AssertElementNotPresent" locator1="Message#ERROR" />
+		AssertElementNotPresent(locator1 = "Message#ERROR");
 
-		<execute function="AssertElementPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-	</command>
-</definition>
+		AssertElementPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER");
+	}
+}

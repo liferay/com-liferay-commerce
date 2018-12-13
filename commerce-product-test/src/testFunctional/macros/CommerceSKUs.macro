@@ -1,48 +1,40 @@
-<definition>
-	<command name="addPriceToSKU">
-		<execute macro="CommerceEntry#gotoNestedMenu">
-			<var name="nestedMenu" value="Pricing" />
-		</execute>
+definition {
+	macro addPriceToSKU {
+		CommerceEntry.gotoNestedMenu(nestedMenu = "Pricing");
 
-		<execute macro="CommerceEntry#addPricingEntry">
-			<var name="price" value="${price}" />
-		</execute>
+		CommerceEntry.addPricingEntry(price = "${price}");
 
-		<execute macro="CommerceEntry#saveEntry" />
+		CommerceEntry.saveEntry();
 
-		<execute function="AssertNotVisible" locator1="Message#SUCCESS" />
-	</command>
+		AssertNotVisible(locator1 = "Message#SUCCESS");
+	}
 
-	<command name="addSKU">
-		<for list="${optionValuesList}" param="optionValues">
-			<var method="StringUtil#extractFirst('${optionValues}', ':')" name="optionValue" />
+	macro addSKU {
+		for (var optionValues : list "${optionValuesList}") {
+			var optionValue = StringUtil.extractFirst("${optionValues}", ":");
+			var price = StringUtil.extractLast("${optionValues}", ":");
+			var optionValueUppercase = StringUtil.upperCase("${optionValue}");
 
-			<var method="StringUtil#extractLast('${optionValues}', ':')" name="price" />
+			Click(locator1 = "Button#PLUS");
 
-			<var method="StringUtil#upperCase('${optionValue}')" name="optionValueUppercase" />
+			AssertClick(
+				locator1 = "MenuItem#DROPDOWN_MENU_ITEM",
+				value1 = "${key_menuItem}",
+				key_menuItem = "Add SKU"
+			);
 
-			<execute function="Click" locator1="Button#PLUS" />
+			CommerceEntry.addSKUsEntry(
+				optionValue = "${optionValue}",
+				productSKU = "${optionValueUppercase}SKU"
+			);
 
-			<execute function="AssertClick" locator1="MenuItem#DROPDOWN_MENU_ITEM" value1="${key_menuItem}">
-				<var name="key_menuItem" value="Add SKU" />
-			</execute>
+			CommerceEntry.publishEntry();
 
-			<execute macro="CommerceEntry#addSKUsEntry">
-				<var name="optionValue" value="${optionValue}" />
-				<var name="productSKU" value="${optionValueUppercase}SKU" />
-			</execute>
+			AssertNotVisible(locator1 = "Message#SUCCESS");
 
-			<execute macro="CommerceEntry#publishEntry" />
+			CommerceSKUs.addPriceToSKU(price = "${price}");
 
-			<execute function="AssertNotVisible" locator1="Message#SUCCESS" />
-
-			<execute macro="CommerceSKUs#addPriceToSKU">
-				<var name="price" value="${price}" />
-			</execute>
-
-			<execute macro="CommerceEntry#gotoBreadcrumb">
-				<var name="breadcrumb" value="SKUs" />
-			</execute>
-		</for>
-	</command>
-</definition>
+			CommerceEntry.gotoBreadcrumb(breadcrumb = "SKUs");
+		}
+	}
+}

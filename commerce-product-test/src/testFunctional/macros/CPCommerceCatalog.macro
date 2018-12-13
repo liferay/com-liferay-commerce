@@ -1,102 +1,85 @@
-<definition>
-	<command name="addOptionValues">
-		<var name="optionValuesList" value="${optionValuesList}" />
+definition {
+	macro addOptionValues {
+		var optionValuesList = "${optionValuesList}";
 
-		<execute macro="CommerceNavigator#gotoOptionValues">
-			<var name="optionEntryName" value="${optionEntryName}" />
-		</execute>
+		CommerceNavigator.gotoOptionValues(optionEntryName = "${optionEntryName}");
 
-		<for list="${optionValuesList}" param="optionValues">
+		for (var optionValues : list "${optionValuesList}") {
+			if (IsElementPresent(locator1 = "CommerceEntry#MODAL_DELETE")) {
+				Click(locator1 = "CommerceEntry#MODAL_PLUS");
+			}
 
-			<if>
-				<condition function="IsElementPresent" locator1="CommerceEntry#MODAL_DELETE" />
-				<then>
-					<execute function="Click" locator1="CommerceEntry#MODAL_PLUS" />
-				</then>
-			</if>
+			CommerceEntry.addOptionValue(
+				valueName = "${optionValues}",
+				valuePriority = "${valuePriority}"
+			);
 
-			<execute macro="CommerceEntry#addOptionValue">
-				<var name="valueName" value="${optionValues}" />
-				<var name="valuePriority" value="${valuePriority}" />
-			</execute>
+			Click(locator1 = "CommerceEntry#MODAL_SAVE");
+		}
 
-			<execute function="Click" locator1="CommerceEntry#MODAL_SAVE" />
-		</for>
+		Click(locator1 = "CommerceEntry#MODAL_CLOSE");
+	}
 
-		<execute function="Click" locator1="CommerceEntry#MODAL_CLOSE" />
-	</command>
+	macro moveProductsEntriesToRecycleBin {
+		Click(locator1 = "CommerceNavigation#SELECT_ALL_CHECKBOX");
 
-	<command name="moveProductsEntriesToRecycleBin">
-		<execute function="Click" locator1="CommerceNavigation#SELECT_ALL_CHECKBOX" />
+		Click(locator1 = "Button#RECYCLE_BIN");
+	}
 
-		<execute function="Click" locator1="Button#RECYCLE_BIN" />
-	</command>
+	macro moveProductsToRecycleBinViaCheckbox {
+		Click(
+			locator1 = "CommerceNavigation#SINGLE_ENTRY_CHECKBOX",
+			key_entryName = "${productName}"
+		);
 
-	<command name="moveProductsToRecycleBinViaCheckbox">
-		<execute function="Click" locator1="CommerceNavigation#SINGLE_ENTRY_CHECKBOX">
-			<var name="key_entryName" value="${productName}" />
-		</execute>
+		Click(locator1 = "Button#RECYCLE_BIN");
 
-		<execute function="Click" locator1="Button#RECYCLE_BIN" />
+		AssertElementPresent(locator1 = "Message#SUCCESS");
 
-		<execute function="AssertElementPresent" locator1="Message#SUCCESS" />
+		AssertElementNotPresent(locator1 = "Message#ERROR");
 
-		<execute function="AssertElementNotPresent" locator1="Message#ERROR" />
+		AssertElementPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER");
+	}
 
-		<execute function="AssertElementPresent" locator1="CommerceNavigation#EMPTY_SEARCH_CONTAINER" />
-	</command>
+	macro newOptionsEntry {
+		if (IsElementPresent(locator1 = "Button#DELETE")) {
+			Click(locator1 = "CommerceEntry#ADD_BUTTON");
+		}
 
-	<command name="newOptionsEntry">
-		<if>
-			<condition function="IsElementPresent" locator1="Button#DELETE" />
-			<then>
-				<execute function="Click" locator1="CommerceEntry#ADD_BUTTON" />
-			</then>
-		</if>
+		CommerceOptions.addEntry(
+			optionDescription = "${optionDescription}",
+			optionFieldType = "${optionFieldType}",
+			optionName = "${optionName}"
+		);
 
-		<execute macro="CommerceOptions#addEntry">
-			<var name="optionDescription" value="${optionDescription}" />
-			<var name="optionFieldType" value="${optionFieldType}" />
-			<var name="optionName" value="${optionName}" />
-		</execute>
+		Button.clickSave();
 
-		<execute macro="Button#clickSave" />
+		CommerceEntry.viewOptionsEntry(
+			optionDescription = "${optionDescription}",
+			optionFieldType = "${optionFieldType}",
+			optionName = "${optionName}"
+		);
 
-		<execute macro="CommerceEntry#viewOptionsEntry">
-			<var name="optionDescription" value="${optionDescription}" />
-			<var name="optionFieldType" value="${optionFieldType}" />
-			<var name="optionName" value="${optionName}" />
-		</execute>
+		if (("${optionFieldType}" == "checkbox-multiple") || ("${optionFieldType}" == "Select from List") || ("${optionFieldType}" == "Radio")) {
+			CPCommerceCatalog.addOptionValues(
+				optionEntryName = "${optionName}",
+				optionValues = "${optionValues}",
+				optionValuesList = "${optionValuesList}",
+				valuePriority = "${valuePriority}"
+			);
+		}
+	}
 
-		<if>
-			<or>
-				<equals arg1="${optionFieldType}" arg2="checkbox-multiple" />
-				<equals arg1="${optionFieldType}" arg2="Select from List" />
-				<equals arg1="${optionFieldType}" arg2="Radio" />
-			</or>
-			<then>
-				<execute macro="CPCommerceCatalog#addOptionValues">
-					<var name="optionEntryName" value="${optionName}" />
-					<var name="optionValues" value="${optionValues}" />
-					<var name="optionValuesList" value="${optionValuesList}" />
-					<var name="valuePriority" value="${valuePriority}" />
-				</execute>
-			</then>
-		</if>
-	</command>
+	macro newProductsEntry {
+		CommerceProducts.addEntry(
+			productFullDescription = "${productName} Full Description",
+			productName = "${productName}",
+			productShortDescription = "${productName} Short Description",
+			productType = "${productType}"
+		);
 
-	<command name="newProductsEntry">
-		<execute macro="CommerceProducts#addEntry">
-			<var name="productFullDescription" value="${productName} Full Description" />
-			<var name="productName" value="${productName}" />
-			<var name="productShortDescription" value="${productName} Short Description" />
-			<var name="productType" value="${productType}" />
-		</execute>
+		Pause(locator1 = "3000");
 
-		<execute function="Pause" locator1="3000" />
-
-		<execute macro="CommerceEntry#publishEntry">
-			<var name="status" value="Approved" />
-		</execute>
-	</command>
-</definition>
+		CommerceEntry.publishEntry(status = "Approved");
+	}
+}

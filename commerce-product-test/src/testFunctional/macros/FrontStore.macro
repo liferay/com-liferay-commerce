@@ -1,56 +1,57 @@
-<definition>
-	<command name="selectAssociatedFSOptionsValue">
-		<execute function="Click" locator1="CommerceFrontStore#FS_PRODUCT_OPTIONS_SELECT" />
+definition {
+	macro selectAssociatedFSOptionsValue {
+		Click(locator1 = "CommerceFrontStore#FS_PRODUCT_OPTIONS_SELECT");
 
-		<execute function="Click" locator1="CommerceFrontStore#FS_PRODUCT_OPTION">
-			<var name="key_optionValue" value="${FSOptionValue}" />
-		</execute>
-	</command>
+		Click(
+			locator1 = "CommerceFrontStore#FS_PRODUCT_OPTION",
+			key_optionValue = "${FSOptionValue}"
+		);
+	}
 
-	<command name="viewProductDetail">
-		<execute function="AssertElementPresent" locator1="CommerceFrontStore#FS_PRODUCT_NAME">
-			<var name="key_FSProductName" value="${FSProductName}" />
-		</execute>
+	macro viewProductDetail {
+		AssertElementPresent(
+			locator1 = "CommerceFrontStore#FS_PRODUCT_NAME",
+			key_FSProductName = "${FSProductName}"
+		);
 
-		<if>
-			<condition function="IsElementPresent" locator1="CommerceFrontStore#FS_PRODUCT_OPTIONS_SELECT" />
-			<then>
-				<for list="${FSOptionValuesList}" param="FSOptionValues">
-					<var method="StringUtil#extractFirst('${FSOptionValues}', ':')" name="FSOptionValue" />
+		if (IsElementPresent(locator1 = "CommerceFrontStore#FS_PRODUCT_OPTIONS_SELECT")) {
+			for (var FSOptionValues : list "${FSOptionValuesList}") {
+				var FSOptionValue = StringUtil.extractFirst("${FSOptionValues}", ":");
+				var FSPrice = StringUtil.extractLast("${FSOptionValues}", ":");
+				var FSOptionValueUppercase = StringUtil.upperCase("${FSOptionValue}");
 
-					<var method="StringUtil#extractLast('${FSOptionValues}', ':')" name="FSPrice" />
+				FrontStore.selectAssociatedFSOptionsValue(FSOptionValue = "${FSOptionValue}");
 
-					<var method="StringUtil#upperCase('${FSOptionValue}')" name="FSOptionValueUppercase" />
+				echo("Checking ${FSOptionValue} ${FSProductName} SKU is correct...");
 
-					<execute macro="FrontStore#selectAssociatedFSOptionsValue">
-						<var name="FSOptionValue" value="${FSOptionValue}" />
-					</execute>
+				AssertElementPresent(
+					locator1 = "CommerceFrontStore#FS_PRODUCT_SKU",
+					key_FSProductSKU = "${FSOptionValueUppercase}SKU"
+				);
 
-					<echo message="Checking ${FSOptionValue} ${FSProductName} SKU is correct..." />
+				echo("Checking ${FSOptionValue} ${FSProductName} price is correct...");
 
-					<execute function="AssertElementPresent" locator1="CommerceFrontStore#FS_PRODUCT_SKU">
-						<var name="key_FSProductSKU" value="${FSOptionValueUppercase}SKU" />
-					</execute>
+				AssertElementPresent(
+					locator1 = "CommerceFrontStore#FS_PRODUCT_PRICE",
+					key_FSProductPrice = "${FSPrice}"
+				);
 
-					<echo message="Checking ${FSOptionValue} ${FSProductName} price is correct..." />
+				echo("Checking ${FSOptionValue} ${FSProductName} image is correct...");
 
-					<execute function="AssertElementPresent" locator1="CommerceFrontStore#FS_PRODUCT_PRICE">
-						<var name="key_FSProductPrice" value="${FSPrice}" />
-					</execute>
+				AssertElementPresent(
+					locator1 = "CommerceFrontStore#FS_PRODUCT_FULL_IMAGE",
+					value1 = "${FSOptionValue}",
+					key_FSProductImage = "${FSOptionValue}"
+				);
 
-					<echo message="Checking ${FSOptionValue} ${FSProductName} image is correct..." />
+				echo("Checking ${FSOptionValue} ${FSProductName} thumbnail is correct...");
 
-					<execute function="AssertElementPresent" locator1="CommerceFrontStore#FS_PRODUCT_FULL_IMAGE" value1="${FSOptionValue}">
-						<var name="key_FSProductImage" value="${FSOptionValue}" />
-					</execute>
-
-					<echo message="Checking ${FSOptionValue} ${FSProductName} thumbnail is correct..." />
-
-					<execute function="AssertElementPresent" locator1="CommerceFrontStore#FS_PRODUCT_IMAGE_THUMBNAIL" value1="${FSOptionValue}">
-						<var name="key_FSProductImageThumb" value="${FSOptionValue}" />
-					</execute>
-				</for>
-			</then>
-		</if>
-	</command>
-</definition>
+				AssertElementPresent(
+					locator1 = "CommerceFrontStore#FS_PRODUCT_IMAGE_THUMBNAIL",
+					value1 = "${FSOptionValue}",
+					key_FSProductImageThumb = "${FSOptionValue}"
+				);
+			}
+		}
+	}
+}
