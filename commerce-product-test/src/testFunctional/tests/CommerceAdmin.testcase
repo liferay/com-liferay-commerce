@@ -84,7 +84,7 @@
 		<execute function="Click" locator1="Button#PLUS" />
 
 		<execute macro="CommerceEntry#addNewCatalogRule">
-			<var name="catalogRuleType" value="All products" />
+			<var name="catalogRuleType" value="All Products" />
 			<var name="entryName" value="New Catalog Rule" />
 			<var name="userSegment" value="User Segment" />
 		</execute>
