@@ -31,8 +31,6 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 
-import java.util.Map;
-
 /**
  * @author Marco Leo
  */
@@ -40,8 +38,6 @@ public class AccountSelectorTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
-		Map<String, Object> context = getContext();
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -53,20 +49,18 @@ public class AccountSelectorTag extends ComponentRendererTag {
 			Organization organization = commerceContext.getOrganization();
 
 			if (organization != null) {
-				String thumbnail;
+				StringBundler sb = new StringBundler(5);
 
-				StringBundler stringBundler = new StringBundler(5);
-
-				stringBundler.append(themeDisplay.getPathImage());
+				sb.append(themeDisplay.getPathImage());
 
 				if (organization.getLogoId() == 0) {
-					stringBundler.append("/organization_logo?img_id=0");
+					sb.append("/organization_logo?img_id=0");
 				}
 				else {
-					stringBundler.append("/organization_logo?img_id=");
-					stringBundler.append(organization.getLogoId());
-					stringBundler.append("&t=");
-					stringBundler.append(
+					sb.append("/organization_logo?img_id=");
+					sb.append(organization.getLogoId());
+					sb.append("&t=");
+					sb.append(
 						WebServerServletTokenUtil.getToken(
 							organization.getLogoId()));
 				}
@@ -74,7 +68,7 @@ public class AccountSelectorTag extends ComponentRendererTag {
 				CurrentAccountModel currentAccountModel =
 					new CurrentAccountModel(
 						organization.getOrganizationId(),
-						organization.getName(), stringBundler.toString());
+						organization.getName(), sb.toString());
 
 				putValue("currentAccount", currentAccountModel);
 			}
