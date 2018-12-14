@@ -629,8 +629,9 @@ public class CPDefinitionLocalServiceImpl
 						(CPDefinitionOptionValueRel)cpDefinitionOptionValueRel.
 							clone();
 
-					newCPDefinitionOptionValueRel.setCPDefinitionOptionValueRelId(
-						counterLocalService.increment());
+					newCPDefinitionOptionValueRel.
+						setCPDefinitionOptionValueRelId(
+							counterLocalService.increment());
 					newCPDefinitionOptionValueRel.setModifiedDate(new Date());
 					newCPDefinitionOptionValueRel.setCPDefinitionOptionRelId(
 						newCPDefinitionOptionRelId);
