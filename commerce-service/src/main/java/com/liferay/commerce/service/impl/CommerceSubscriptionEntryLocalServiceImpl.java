@@ -22,8 +22,10 @@ import com.liferay.commerce.exception.CommerceSubscriptionEntrySubscriptionStatu
 import com.liferay.commerce.exception.CommerceSubscriptionTypeException;
 import com.liferay.commerce.internal.search.CommerceSubscriptionEntryIndexer;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
@@ -72,14 +74,35 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
-
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
-		CPSubscriptionInfo cpSubscriptionInfo =
-			cpInstance.getCPSubscriptionInfo();
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpInstance.getCPDefinitionId());
+
+		return addCommerceSubscriptionEntry(
+			cpInstance.getUuid(), cpDefinition.getCProductId(),
+			commerceOrderItemId, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
+			String cpInstanceUuid, long cProductId, long commerceOrderItemId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+		long groupId = serviceContext.getScopeGroupId();
+
+		CPSubscriptionInfo cpSubscriptionInfo = null;
+
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCProductInstance(
+			cProductId, cpInstanceUuid);
+
+		if (cpInstance != null) {
+			cpSubscriptionInfo = cpInstance.getCPSubscriptionInfo();
+		}
 
 		if (cpSubscriptionInfo == null) {
 			throw new CommerceSubscriptionCPInstanceIdException();
@@ -102,7 +125,8 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		commerceSubscriptionEntry.setCompanyId(user.getCompanyId());
 		commerceSubscriptionEntry.setUserId(user.getUserId());
 		commerceSubscriptionEntry.setUserName(user.getFullName());
-		commerceSubscriptionEntry.setCPInstanceId(cpInstanceId);
+		commerceSubscriptionEntry.setCPInstanceUuid(cpInstanceUuid);
+		commerceSubscriptionEntry.setCProductId(cProductId);
 		commerceSubscriptionEntry.setCommerceOrderItemId(commerceOrderItemId);
 		commerceSubscriptionEntry.setSubscriptionLength(
 			cpSubscriptionInfo.getSubscriptionLength());
@@ -445,6 +469,9 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 	private static final String[] _SELECTED_FIELD_NAMES =
 		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
+
+	@ServiceReference(type = CPDefinitionLocalService.class)
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@ServiceReference(type = CPInstanceLocalService.class)
 	private CPInstanceLocalService _cpInstanceLocalService;
