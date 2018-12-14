@@ -1,0 +1,88 @@
+{namespace AccountsTable}
+
+/**
+ * This renders the component's whole content.
+ */
+{template .render}
+	{@param? accounts: list<[
+		name: string,
+		id: string|int,
+		thumbnail: string
+	]>}
+	{@param? filterString: string }
+	{@param? isVisible: bool}
+	{@param? viewAllAccountsLink: string}
+	{@param? createNewAccountLink: string}
+	{@param? handleSelectAccount: ?}
+
+	{@param spritemap: string}
+
+	{let $accountSwitcherClasses kind="text"}
+		account-switcher
+		{if $isVisible}
+			{sp}is-visible
+		{/if}
+	{/let}
+
+	<div class="{$accountSwitcherClasses}">
+		<div class="account-switcher__section">
+			<form class="minium-search" data-onsubmit="_handleSubmitFilter">
+				<div class="minium-search__input">
+					<input
+						type="text"
+						placeholder="Search Accounts…"
+						data-onkeyup="_handleFilterChange"
+					>
+				</div>
+
+				<button class="minium-search__button" type="submit">
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'filters' /}
+					{/call}
+				</button>
+			</form>
+		</div>
+
+		<div class="account-switcher__section account-switcher__section--fill">
+			<div class="account-list">
+				<div class="account-list__title">
+					Select Account...
+				</div>
+				{if isNonnull($accounts)}
+					{foreach $account in $accounts}
+						{call AccountsTableItem.render}
+							{param events: [
+								'selectAccount' : $handleSelectAccount
+							] /}
+							{param id: $account.id /}
+							{param thumbnail: $account.thumbnail /}
+							{param name: $account.name /}
+							{param query: $filterString /}
+						{/call}
+					{/foreach}
+				{/if}
+			</div>
+		</div>
+		{if isNonnull($viewAllAccountsLink)}
+			<div class="account-switcher__section">
+				<a
+					href="{$viewAllAccountsLink}"
+					class="minium-button minium-button--block minium-button--outline"
+				>
+					View all accounts
+				</a>
+			</div>
+		{/if}
+		{if isNonnull($createNewAccountLink)}
+			<div class="account-switcher__section">
+				<a
+					href="{$createNewAccountLink}"
+					class="minium-button minium-button--block"
+				>
+					Create new account
+				</a>
+			</div>
+		{/if}
+	</div>
+{/template}

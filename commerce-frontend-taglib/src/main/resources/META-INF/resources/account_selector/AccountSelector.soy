@@ -1,0 +1,125 @@
+{namespace AccountSelector}
+
+{template .render}
+	{@param? openingState: string}
+	{@param? currentView: string}
+
+	{@param? accounts: list<[
+		name: string,
+		id: string|int,
+		thumbnail: string
+	]>}
+
+	{@param? orders: list<[
+		id: string|int,
+		status: string,
+		lastEdit: string,
+		addOrderLink: string
+	]>}
+
+	{@param? viewAllAccountsLink: string}
+	{@param? createNewAccountLink: string}
+	{@param? viewAllOrdersLink: string}
+	{@param? createNewOrderLink: string}
+
+	{@param? currentAccount: ?}
+	{@param? currentOrder: ?}
+
+	{@param? handleChangeSelectedView: ?}
+	{@param? handleAccountSelected: ?}
+	{@param? handleOrderSelected: ?}
+	{@param? handleGetOrders: ?}
+	{@param? handleGetAccounts: ?}
+
+	{@param spritemap: string}
+
+	{let $curtainClasses kind="text"}
+		{nil}
+		{if $openingState == 'open'}
+			{sp}is-open
+		{/if}
+		{if $openingState == 'closing'}
+			{sp}is-closing
+		{/if}
+	{/let}
+
+	<div class="minium-dropdown">
+		<button
+			class="minium-topbar__button"
+			data-onclick="toggleAccountSelector"
+		>
+			{call .currentState}
+				{param currentAccount: $currentAccount /}
+				{param currentOrder: $currentOrder /}
+			{/call}
+
+			{call ClayIcon.render}
+				{param spritemap: $spritemap /}
+				{param symbol: 'chevron' /}
+			{/call}
+		</button>
+
+		<div class="minium-dropdown__curtain{$curtainClasses}">
+			{if isNonnull($currentAccount)}
+				{let $isOrdersTableVisible: $currentView == 'orders' /}
+				{call OrdersTable.render}
+					{param events: [
+						'changeSelectedView': $handleChangeSelectedView,
+						'orderSelected': $handleOrderSelected,
+						'getOrders': $handleGetOrders
+					] /}
+					{param currentAccountName: $currentAccount.name /}
+					{param orders: $orders /}
+					{param currentOrder: $currentOrder /}
+					{param isVisible: $isOrdersTableVisible /}
+					{param createNewOrderLink: $createNewOrderLink /}
+					{param viewAllOrdersLink: $viewAllOrdersLink /}
+				{/call}
+			{/if}
+			{let $isAccountsTableVisible: $currentView == 'accounts' /}
+			{call AccountsTable.render}
+				{param events: [
+					'accountSelected': $handleAccountSelected,
+					'getAccounts': $handleGetAccounts
+				] /}
+				{param accounts: $accounts /}
+				{param currentAccount: $currentAccount /}
+				{param isVisible: $isAccountsTableVisible /}
+				{param createNewAccountLink: $createNewAccountLink /}
+				{param viewAllAccountsLink: $viewAllAccountsLink /}
+				{param spritemap: $spritemap /}
+			{/call}
+		</div>
+	</div>
+{/template}
+
+{template .currentState }
+	{@param currentAccount: ? }
+	{@param currentOrder: ? }
+
+	{if isNonnull($currentAccount)}
+		<div class="account-selector">
+			<div class="account-selector__image">
+				<img alt="{$currentAccount.name}" src="{$currentAccount.thumbnail}">
+			</div>
+
+			<div class="account-selector__title">
+					{$currentAccount.name}
+			</div>
+
+			<div class="account-selector__info">
+				{if isNonnull($currentOrder)}
+					{$currentOrder.id} | {$currentOrder.status}
+				{else}
+					No order selected
+				{/if}
+			</div>
+		</div>
+	{else}
+		<div class="account-selector">
+			<div class="account-selector__title">
+				Select Account & Order
+			</div>
+		</div>
+	{/if}
+{/template}
