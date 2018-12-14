@@ -14,21 +14,25 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
-
-<%
-CommerceOrganizationDisplayContext commerceOrganizationDisplayContext = (CommerceOrganizationDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
-Organization organization = commerceOrganizationDisplayContext.getCurrentOrganization();
-String keywords = commerceOrganizationDisplayContext.getKeywords();
-PortletURL portletURL = commerceOrganizationDisplayContext.getPortletURL();
-%>
-
 <c:choose>
-	<c:when test="<%= commerceOrganizationDisplayContext.isSelectedOrganization() %>">
-		<%@ include file="/organization_details.jspf" %>
+	<c:when test="<%= organization == null %>">
+		<div class="alert alert-warning" role="alert">
+			<span class="alert-indicator">
+				<svg aria-hidden="true" class="lexicon-icon lexicon-icon-warning-full">
+					<use xlink:href="<%= themeDisplay.getPathThemeImages() %>/lexicon/icons.svg#warning-full"></use>
+				</svg>
+			</span>
+
+			<liferay-ui:message key="no-account-is-selected-for-this-site" />
+		</div>
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/view_organizations.jspf" %>
+		<liferay-frontend:screen-navigation
+			containerCssClass="col-md-10"
+			context="<%= organization %>"
+			key="<%= CommerceOrganizationScreenNavigationConstants.SCREEN_NAVIGATION_KEY %>"
+			navCssClass="col-md-2"
+			portletURL="<%= currentURLObj %>"
+		/>
 	</c:otherwise>
 </c:choose>
