@@ -135,7 +135,9 @@ public class CommerceTableTag extends ComponentRendererTag {
 			_log.error(e, e);
 		}
 
-		putValue("spritemap", "");
+		putValue(
+			"spritemap",
+			themeDisplay.getPathThemeImages() + "/lexicon/icons.svg");
 
 		setTemplateNamespace("CommerceTable.render");
 
