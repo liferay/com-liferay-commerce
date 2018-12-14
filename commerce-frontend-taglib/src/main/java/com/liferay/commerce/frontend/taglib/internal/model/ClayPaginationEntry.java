@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.frontend.taglib.internal.pagination.model;
+package com.liferay.commerce.frontend.taglib.internal.model;
 
 /**
  * @author Marco Leo
