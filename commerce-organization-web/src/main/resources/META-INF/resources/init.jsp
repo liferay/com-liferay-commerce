@@ -19,6 +19,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
+taglib uri="http://liferay.com/tld/commerce-ui" prefix="commerce-ui" %><%@
 taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
 taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
@@ -33,9 +34,8 @@ page import="com.liferay.commerce.model.CommerceAddress" %><%@
 page import="com.liferay.commerce.model.CommerceCountry" %><%@
 page import="com.liferay.commerce.model.CommerceRegion" %><%@
 page import="com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationAddressesDisplayContext" %><%@
-page import="com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationDetailDisplayContext" %><%@
+page import="com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationDisplayContext" %><%@
 page import="com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationMembersDisplayContext" %><%@
-page import="com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationSearchDisplayContext" %><%@
 page import="com.liferay.commerce.organization.web.internal.servlet.taglib.ui.CommerceOrganizationScreenNavigationConstants" %><%@
 page import="com.liferay.frontend.taglib.servlet.taglib.util.AddMenuKeys" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
@@ -73,7 +73,8 @@ page import="com.liferay.users.admin.configuration.UserFileUploadsConfiguration"
 
 <%@ page import="java.util.List" %>
 
-<%@ page import="javax.portlet.WindowState" %>
+<%@ page import="javax.portlet.PortletURL" %><%@
+page import="javax.portlet.WindowState" %>
 
 <liferay-frontend:defineObjects />
 

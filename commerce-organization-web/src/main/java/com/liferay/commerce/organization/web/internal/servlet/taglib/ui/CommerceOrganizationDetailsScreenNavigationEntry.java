@@ -16,7 +16,7 @@ package com.liferay.commerce.organization.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
-import com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationDetailDisplayContext;
+import com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -95,16 +95,15 @@ public class CommerceOrganizationDetailsScreenNavigationEntry
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
-		CommerceOrganizationDetailDisplayContext
-			commerceOrganizationDetailDisplayContext =
-				new CommerceOrganizationDetailDisplayContext(
-					_commerceOrganizationHelper, _commerceOrganizationService,
-					httpServletRequest, _organizationLocalService, _portal,
-					_userFileUploadsConfiguration);
+		CommerceOrganizationDisplayContext commerceOrganizationDisplayContext =
+			new CommerceOrganizationDisplayContext(
+				_commerceOrganizationHelper, _commerceOrganizationService,
+				httpServletRequest, _organizationLocalService, _portal,
+				_userFileUploadsConfiguration);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
-			commerceOrganizationDetailDisplayContext);
+			commerceOrganizationDisplayContext);
 
 		_jspRenderer.renderJSP(
 			httpServletRequest, httpServletResponse,

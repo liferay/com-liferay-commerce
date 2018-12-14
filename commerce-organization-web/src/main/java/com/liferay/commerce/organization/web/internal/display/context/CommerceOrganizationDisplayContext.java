@@ -29,10 +29,10 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Marco Leo
  */
-public class CommerceOrganizationDetailDisplayContext
+public class CommerceOrganizationDisplayContext
 	extends BaseCommerceOrganizationDisplayContext {
 
-	public CommerceOrganizationDetailDisplayContext(
+	public CommerceOrganizationDisplayContext(
 		CommerceOrganizationHelper commerceOrganizationHelper,
 		CommerceOrganizationService commerceOrganizationService,
 		HttpServletRequest httpServletRequest,

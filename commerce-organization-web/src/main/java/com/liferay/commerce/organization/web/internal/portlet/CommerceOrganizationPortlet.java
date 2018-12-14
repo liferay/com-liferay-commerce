@@ -17,7 +17,7 @@ package com.liferay.commerce.organization.web.internal.portlet;
 import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.organization.web.internal.constants.CommerceOrganizationPortletKeys;
-import com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationDetailDisplayContext;
+import com.liferay.commerce.organization.web.internal.display.context.CommerceOrganizationDisplayContext;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
@@ -98,16 +98,15 @@ public class CommerceOrganizationPortlet extends MVCPortlet {
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			renderRequest);
 
-		CommerceOrganizationDetailDisplayContext
-			commerceOrganizationDetailDisplayContext =
-				new CommerceOrganizationDetailDisplayContext(
-					_commerceOrganizationHelper, _commerceOrganizationService,
-					httpServletRequest, _organizationLocalService, _portal,
-					_userFileUploadsConfiguration);
+		CommerceOrganizationDisplayContext commerceOrganizationDisplayContext =
+			new CommerceOrganizationDisplayContext(
+				_commerceOrganizationHelper, _commerceOrganizationService,
+				httpServletRequest, _organizationLocalService, _portal,
+				_userFileUploadsConfiguration);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
-			commerceOrganizationDetailDisplayContext);
+			commerceOrganizationDisplayContext);
 
 		super.render(renderRequest, renderResponse);
 	}

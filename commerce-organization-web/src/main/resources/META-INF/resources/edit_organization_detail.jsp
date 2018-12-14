@@ -17,11 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceOrganizationDetailDisplayContext commerceOrganizationDetailDisplayContext = (CommerceOrganizationDetailDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceOrganizationDisplayContext commerceOrganizationDisplayContext = (CommerceOrganizationDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-Organization organization = commerceOrganizationDetailDisplayContext.getCurrentOrganization();
+Organization organization = commerceOrganizationDisplayContext.getCurrentOrganization();
 
-String[] organizationTypes = commerceOrganizationDetailDisplayContext.getOrganizationTypes();
+String[] organizationTypes = commerceOrganizationDisplayContext.getOrganizationTypes();
 
 String defaultType = StringPool.BLANK;
 
@@ -37,12 +37,12 @@ if (organization != null) {
 	groupId = organization.getGroupId();
 }
 
-Address address = commerceOrganizationDetailDisplayContext.getOrganizationPrimaryAddress();
+Address address = commerceOrganizationDisplayContext.getOrganizationPrimaryAddress();
 
 long countryId = address.getCountryId();
 long regionId = address.getRegionId();
 
-EmailAddress emailAddress = commerceOrganizationDetailDisplayContext.getOrganizationPrimaryEmailAddress();
+EmailAddress emailAddress = commerceOrganizationDisplayContext.getOrganizationPrimaryEmailAddress();
 %>
 
 <portlet:actionURL name="editOrganization" var="editOrganizationActionURL" />
@@ -152,7 +152,7 @@ EmailAddress emailAddress = commerceOrganizationDetailDisplayContext.getOrganiza
 					<%
 					long logoId = organization.getLogoId();
 
-					UserFileUploadsConfiguration userFileUploadsConfiguration = commerceOrganizationDetailDisplayContext.getUserFileUploadsConfiguration();
+					UserFileUploadsConfiguration userFileUploadsConfiguration = commerceOrganizationDisplayContext.getUserFileUploadsConfiguration();
 					%>
 
 					<liferay-ui:logo-selector

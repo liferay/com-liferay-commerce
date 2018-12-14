@@ -14,24 +14,26 @@
 
 package com.liferay.commerce.organization.web.internal.display.context;
 
+import com.liferay.commerce.organization.constants.CommerceOrganizationConstants;
 import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.organization.web.internal.display.context.util.CommerceOrganizationRequestHelper;
+import com.liferay.commerce.organization.web.internal.util.CommerceOrganizationPortletUtil;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Organization;
-import com.liferay.portal.kernel.model.OrganizationConstants;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -87,6 +89,21 @@ public abstract class BaseCommerceOrganizationDisplayContext {
 		}
 
 		return _displayStyle;
+	}
+
+	public String getKeywords() {
+		if (Validator.isNotNull(_keywords)) {
+			return _keywords;
+		}
+
+		_keywords = ParamUtil.getString(
+			commerceOrganizationRequestHelper.getRequest(), "keywords", null);
+
+		if (_keywords == null) {
+			return StringPool.BLANK;
+		}
+
+		return _keywords;
 	}
 
 	public String getOrderByCol() {
@@ -176,52 +193,38 @@ public abstract class BaseCommerceOrganizationDisplayContext {
 			portletURL.setParameter("displayStyle", getDisplayStyle());
 		}
 
+		String keywords = getKeywords();
+
+		if (Validator.isNotNull(keywords)) {
+			portletURL.setParameter("keywords", keywords);
+		}
+
 		return portletURL;
 	}
 
-	public void setBreadcrumbs(Organization currentOrganization)
-		throws PortalException {
+	public boolean isSelectedOrganization() throws PortalException {
+		long organizationId = ParamUtil.getLong(
+			commerceOrganizationRequestHelper.getRequest(), "organizationId");
 
-		PortletURL portletURL = getPortletURL();
-
-		Map<String, Object> data = new HashMap<>();
-
-		data.put("direction-right", StringPool.TRUE);
-
-		Organization topOrganization = _getCurrentAccountOrganization();
-
-		Organization organization = currentOrganization;
-
-		while (organization != null) {
-			if ((organization.getOrganizationId() ==
-					topOrganization.getOrganizationId()) ||
-				(organization.getParentOrganizationId() ==
-					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID)) {
-
-				break;
-			}
-
-			organization = commerceOrganizationService.getOrganization(
-				organization.getParentOrganizationId());
-
-			portletURL.setParameter(
-				"organizationId",
-				String.valueOf(organization.getOrganizationId()));
-
-			portal.addPortletBreadcrumbEntry(
-				commerceOrganizationRequestHelper.getRequest(),
-				organization.getName(), portletURL.toString(), data);
+		if (organizationId > 0) {
+			return true;
 		}
 
-		String currentOrganizationName = StringPool.BLANK;
+		Sort sort = CommerceOrganizationPortletUtil.getOrganizationSort(
+			getOrderByCol(), getOrderByType());
 
-		if (currentOrganization != null) {
-			currentOrganizationName = currentOrganization.getName();
+		BaseModelSearchResult<Organization> baseModelSearchResult =
+			commerceOrganizationService.searchOrganizationsByGroup(
+				commerceOrganizationRequestHelper.getScopeGroupId(),
+				commerceOrganizationRequestHelper.getUserId(),
+				CommerceOrganizationConstants.TYPE_ACCOUNT, getKeywords(),
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, new Sort[] {sort});
+
+		if (baseModelSearchResult.getLength() == 1) {
+			return true;
 		}
 
-		portal.addPortletBreadcrumbEntry(
-			commerceOrganizationRequestHelper.getRequest(),
-			currentOrganizationName, portletURL.toString(), data);
+		return false;
 	}
 
 	protected void setDefaultOrderByCol(String defaultOrderByCol) {
@@ -248,5 +251,6 @@ public abstract class BaseCommerceOrganizationDisplayContext {
 	private String _defaultOrderByCol;
 	private String _defaultOrderByType;
 	private String _displayStyle;
+	private String _keywords;
 
 }
