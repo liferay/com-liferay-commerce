@@ -48,9 +48,7 @@ public class CPDefinitionVirtualSettingUpgradeProcess extends UpgradeProcess {
 			String template = StringUtil.read(
 				CPDefinitionVirtualSettingUpgradeProcess.class.
 					getResourceAsStream(
-						"/META-INF/com/liferay/commerce/product/type/virtual" +
-							"/internal/upgrade/v1_1_0/dependencies" +
-								"/CPDefinitionVirtualSetting.sql"));
+						"dependencies/CPDefinitionVirtualSetting.sql"));
 
 			long classNameId = ClassNameLocalServiceUtil.getClassNameId(
 				CPDefinition.class.getName());
