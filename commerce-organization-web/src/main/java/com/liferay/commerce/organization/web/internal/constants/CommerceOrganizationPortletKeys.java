@@ -23,8 +23,4 @@ public class CommerceOrganizationPortletKeys {
 		"com_liferay_commerce_organization_web_internal_portlet_" +
 			"CommerceOrganizationPortlet";
 
-	public static final String COMMERCE_ORGANIZATION_SEARCH =
-		"com_liferay_commerce_organization_web_internal_portlet_" +
-			"CommerceOrganizationSearchPortlet";
-
 }
