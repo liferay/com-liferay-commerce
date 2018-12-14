@@ -711,7 +711,8 @@
 
 		<!-- Other fields -->
 
-		<column name="CPInstanceId" type="long" />
+		<column name="CPInstanceUuid" type="String" />
+		<column name="CProductId" type="long" />
 		<column name="commerceOrderItemId" type="long" />
 		<column name="subscriptionLength" type="int" />
 		<column name="subscriptionType" type="String" />
@@ -739,6 +740,11 @@
 		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
+		</finder>
+		<finder name="C_C_C" return-type="CommerceSubscriptionEntry" unique="true">
+			<finder-column name="CPInstanceUuid" />
+			<finder-column name="CProductId" />
+			<finder-column name="commerceOrderItemId" />
 		</finder>
 	</entity>
 	<entity local-service="true" name="CommerceWarehouse" remote-service="true">
