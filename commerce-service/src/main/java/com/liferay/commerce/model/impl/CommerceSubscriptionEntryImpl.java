@@ -57,7 +57,8 @@ public class CommerceSubscriptionEntryImpl
 
 	@Override
 	public CPInstance fetchCPInstance() {
-		return CPInstanceLocalServiceUtil.fetchCPInstance(getCPInstanceId());
+		return CPInstanceLocalServiceUtil.fetchCProductInstance(
+			getCProductId(), getCPInstanceUuid());
 	}
 
 	@Override
@@ -85,6 +86,17 @@ public class CommerceSubscriptionEntryImpl
 		}
 
 		return cpInstance.getCPDefinitionId();
+	}
+
+	@Override
+	public long getCPInstanceId() {
+		CPInstance cpInstance = fetchCPInstance();
+
+		if (cpInstance == null) {
+			return 0;
+		}
+
+		return cpInstance.getCPInstanceId();
 	}
 
 	@Override
