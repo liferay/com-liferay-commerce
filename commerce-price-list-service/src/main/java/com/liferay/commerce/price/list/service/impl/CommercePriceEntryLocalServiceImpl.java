@@ -104,7 +104,7 @@ public class CommercePriceEntryLocalServiceImpl
 			cpInstance.getCPDefinitionId());
 
 		return commercePriceEntryLocalService.addCommercePriceEntry(
-			cpDefinition.getCProductId(), cpInstance.getUuid(),
+			cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid(),
 			commercePriceListId, externalReferenceCode, price, promoPrice,
 			serviceContext);
 	}
@@ -195,7 +195,7 @@ public class CommercePriceEntryLocalServiceImpl
 
 		if (cpInstance != null) {
 			commercePriceEntryLocalService.deleteCommercePriceEntries(
-				cpInstance.getUuid());
+				cpInstance.getCPInstanceUuid());
 		}
 	}
 
@@ -261,7 +261,7 @@ public class CommercePriceEntryLocalServiceImpl
 		}
 
 		return commercePriceEntryLocalService.fetchCommercePriceEntry(
-			commercePriceListId, cpInstance.getUuid());
+			commercePriceListId, cpInstance.getCPInstanceUuid());
 	}
 
 	/**
@@ -277,7 +277,7 @@ public class CommercePriceEntryLocalServiceImpl
 			cpInstanceId);
 
 		return commercePriceEntryLocalService.fetchCommercePriceEntry(
-			commercePriceListId, cpInstance.getUuid(), useAncestor);
+			commercePriceListId, cpInstance.getCPInstanceUuid(), useAncestor);
 	}
 
 	@Override
@@ -366,7 +366,7 @@ public class CommercePriceEntryLocalServiceImpl
 			cpInstanceId);
 
 		return commercePriceEntryLocalService.getInstanceCommercePriceEntries(
-			cpInstance.getUuid(), start, end);
+			cpInstance.getCPInstanceUuid(), start, end);
 	}
 
 	/**
@@ -383,7 +383,7 @@ public class CommercePriceEntryLocalServiceImpl
 			cpInstanceId);
 
 		return commercePriceEntryLocalService.getInstanceCommercePriceEntries(
-			cpInstance.getUuid(), start, end, orderByComparator);
+			cpInstance.getCPInstanceUuid(), start, end, orderByComparator);
 	}
 
 	@Override
@@ -417,7 +417,8 @@ public class CommercePriceEntryLocalServiceImpl
 			cpInstanceId);
 
 		return commercePriceEntryLocalService.
-			getInstanceCommercePriceEntriesCount(cpInstance.getUuid());
+			getInstanceCommercePriceEntriesCount(
+				cpInstance.getCPInstanceUuid());
 	}
 
 	@Override
@@ -519,8 +520,9 @@ public class CommercePriceEntryLocalServiceImpl
 
 		return commercePriceEntryLocalService.upsertCommercePriceEntry(
 			commercePriceEntryId, cpDefinition.getCProductId(),
-			cpInstance.getUuid(), commercePriceListId, externalReferenceCode,
-			price, promoPrice, skuExternalReferenceCode, serviceContext);
+			cpInstance.getCPInstanceUuid(), commercePriceListId,
+			externalReferenceCode, price, promoPrice, skuExternalReferenceCode,
+			serviceContext);
 	}
 
 	/**
@@ -604,10 +606,10 @@ public class CommercePriceEntryLocalServiceImpl
 				_cpDefinitionLocalService.getCPDefinition(
 					cpInstance.getCPDefinitionId());
 
-			validate(commercePriceListId, cpInstance.getUuid());
+			validate(commercePriceListId, cpInstance.getCPInstanceUuid());
 
 			return addCommercePriceEntry(
-				cpDefinition.getCProductId(), cpInstance.getUuid(),
+				cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid(),
 				commercePriceListId, externalReferenceCode, price, promoPrice,
 				serviceContext);
 		}

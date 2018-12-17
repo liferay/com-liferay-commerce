@@ -141,7 +141,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 					CPInstance newCPInstance =
 						_cpInstanceLocalService.fetchCProductInstance(
 							newCPDefinition.getCProductId(),
-							cpInstance.getUuid());
+							cpInstance.getCPInstanceUuid());
 
 					classPK = newCPInstance.getCPInstanceId();
 				}
@@ -246,7 +246,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 						CPInstance newCPInstance =
 							_cpInstanceLocalService.fetchCProductInstance(
 								newCPDefinition.getCProductId(),
-								cpInstance.getUuid());
+								cpInstance.getCPInstanceUuid());
 
 						cpDefinitionVirtualSetting =
 							cpDefinitionVirtualSettingPersistence.findByC_C(
@@ -381,7 +381,8 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 
 				CPInstance newCPInstance =
 					_cpInstanceLocalService.fetchCProductInstance(
-						newCPDefinition.getCProductId(), cpInstance.getUuid());
+						newCPDefinition.getCProductId(),
+						cpInstance.getCPInstanceUuid());
 
 				cpDefinitionVirtualSetting =
 					cpDefinitionVirtualSettingPersistence.findByC_C(

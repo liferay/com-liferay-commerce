@@ -81,7 +81,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			cpInstance.getCPDefinitionId());
 
 		return addCommerceSubscriptionEntry(
-			cpInstance.getUuid(), cpDefinition.getCProductId(),
+			cpInstance.getCPInstanceUuid(), cpDefinition.getCProductId(),
 			commerceOrderItemId, serviceContext);
 	}
 

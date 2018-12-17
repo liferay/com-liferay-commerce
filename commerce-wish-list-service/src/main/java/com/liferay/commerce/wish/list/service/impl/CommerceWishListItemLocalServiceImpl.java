@@ -61,7 +61,7 @@ public class CommerceWishListItemLocalServiceImpl
 
 		return commerceWishListItemLocalService.addCommerceWishListItem(
 			commerceWishListId, cpDefinition.getCProductId(),
-			cpInstance.getUuid(), json, serviceContext);
+			cpInstance.getCPInstanceUuid(), json, serviceContext);
 	}
 
 	@Override
@@ -137,7 +137,7 @@ public class CommerceWishListItemLocalServiceImpl
 				cpInstanceId);
 
 			commerceWishListItemPersistence.removeByCPInstanceUuid(
-				cpInstance.getUuid());
+				cpInstance.getCPInstanceUuid());
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
