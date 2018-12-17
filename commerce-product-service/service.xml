@@ -547,6 +547,7 @@
 		<!-- Other fields -->
 
 		<column name="CPDefinitionId" type="long" />
+		<column name="CPInstanceUuid" type="String" />
 		<column name="sku" type="String" />
 		<column name="gtin" type="String" />
 		<column name="manufacturerPartNumber" type="String" />
@@ -592,10 +593,6 @@
 		<finder name="CPDefinitionId" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
 		</finder>
-		<finder name="U_C" return-type="CPInstance" unique="true">
-			<finder-column name="uuid" />
-			<finder-column name="CPDefinitionId" />
-		</finder>
 		<finder name="G_ST" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="status" />
@@ -603,6 +600,10 @@
 		<finder name="G_NotST" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column comparator="!=" name="status" />
+		</finder>
+		<finder name="C_C" return-type="CPInstance" unique="true">
+			<finder-column name="CPDefinitionId" />
+			<finder-column name="CPInstanceUuid" />
 		</finder>
 		<finder name="C_S" return-type="CPInstance" unique="true">
 			<finder-column name="CPDefinitionId" />
