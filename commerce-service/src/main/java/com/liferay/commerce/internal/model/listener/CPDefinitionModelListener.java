@@ -17,6 +17,7 @@ package com.liferay.commerce.internal.model.listener;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.service.CPDAvailabilityEstimateLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.ModelListener;
 
@@ -37,8 +38,14 @@ public class CPDefinitionModelListener extends BaseModelListener<CPDefinition> {
 
 		_cpdAvailabilityEstimateLocalService.
 			deleteCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
-		_cpDefinitionInventoryLocalService.
-			deleteCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
+
+		try {
+			_cpDefinitionInventoryLocalService.
+				deleteCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
+		}
+		catch (PortalException pe) {
+			pe.printStackTrace();
+		}
 	}
 
 	@Reference

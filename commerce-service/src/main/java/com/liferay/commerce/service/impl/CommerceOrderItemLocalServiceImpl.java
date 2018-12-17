@@ -119,6 +119,7 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItem.setUserName(user.getFullName());
 		commerceOrderItem.setCommerceOrderId(
 			commerceOrder.getCommerceOrderId());
+		commerceOrderItem.setCProductId(cpDefinition.getCProductId());
 		commerceOrderItem.setCPInstanceId(cpInstanceId);
 		commerceOrderItem.setQuantity(quantity);
 		commerceOrderItem.setShippedQuantity(shippedQuantity);

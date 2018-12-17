@@ -40,15 +40,15 @@ public class CPDefinitionLinkLocalServiceImpl
 	@Deprecated
 	@Override
 	public CPDefinitionLink addCPDefinitionLink(
-			long cpDefinitionId1, long cpDefinitionId2, double priority,
-			String type, ServiceContext serviceContext)
+			long cpDefinitionId, long cProductId, double priority, String type,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-			cpDefinitionId2);
+			cProductId);
 
 		return addCPDefinitionLinkByCProductId(
-			cpDefinitionId1, cpDefinition.getCProductId(), priority, type,
+			cpDefinitionId, cpDefinition.getCProductId(), priority, type,
 			serviceContext);
 	}
 
@@ -112,7 +112,7 @@ public class CPDefinitionLinkLocalServiceImpl
 				newCPDefinition.getCProductId(),
 				newCPDefinition.getCPDefinitionId());
 
-			cpDefinitionLink = cpDefinitionLinkPersistence.findByC_C_T(
+			cpDefinitionLink = cpDefinitionLinkPersistence.fetchByC_C_T(
 				newCPDefinition.getCPDefinitionId(),
 				cpDefinitionLink.getCProductId(), cpDefinitionLink.getType());
 		}
@@ -148,10 +148,12 @@ public class CPDefinitionLinkLocalServiceImpl
 	public void deleteCPDefinitionLinks(long cpDefinitionId) {
 		deleteCPDefinitionLinksByCPDefinitionId(cpDefinitionId);
 
-		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
+		CPDefinition cpDefinition = cpDefinitionPersistence.fetchByPrimaryKey(
 			cpDefinitionId);
 
-		deleteCPDefinitionLinksByCProductId(cpDefinition.getCProductId());
+		if (cpDefinition != null) {
+			deleteCPDefinitionLinksByCProductId(cpDefinition.getCProductId());
+		}
 	}
 
 	@Override
@@ -238,8 +240,8 @@ public class CPDefinitionLinkLocalServiceImpl
 
 		cpDefinitionLinkPersistence.update(cpDefinitionLink);
 
-		reindexCPDefinition(cpDefinitionLink.getCPDefinitionId1());
-		reindexCPDefinition(cpDefinitionLink.getCPDefinitionId2());
+		reindexCPDefinition(cpDefinitionLink.getCPDefinitionId());
+		reindexCPDefinition(cpDefinitionLink.getCProductId());
 
 		return cpDefinitionLink;
 	}
@@ -299,7 +301,7 @@ public class CPDefinitionLinkLocalServiceImpl
 			return;
 		}
 
-		long[] cProductIds = new long[cpDefinitionIds2];
+		long[] cProductIds = new long[cpDefinitionIds2.length];
 
 		for (int i = 0; i < cProductIds.length; i++) {
 			long cpDefinitionId = cpDefinitionIds2[i];
@@ -310,7 +312,7 @@ public class CPDefinitionLinkLocalServiceImpl
 			cProductIds[i] = cpDefinition.getCProductId();
 		}
 
-		updateCPDefinitionLinksByCProductId(
+		cpDefinitionLinkLocalService.updateCPDefinitionLinkCProductIds(
 			cpDefinitionId1, cProductIds, type, serviceContext);
 	}
 

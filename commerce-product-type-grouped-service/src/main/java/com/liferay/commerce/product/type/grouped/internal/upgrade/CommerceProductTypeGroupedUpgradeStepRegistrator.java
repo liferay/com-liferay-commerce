@@ -14,14 +14,12 @@
 
 package com.liferay.commerce.product.type.grouped.internal.upgrade;
 
-import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.type.grouped.internal.upgrade.v1_1_0.CPDefinitionGroupedEntryUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Ethan Bustad
@@ -40,8 +38,7 @@ public class CommerceProductTypeGroupedUpgradeStepRegistrator
 
 		registry.register(
 			_SCHEMA_VERSION_1_0_0, _SCHEMA_VERSION_1_1_0,
-			new CPDefinitionGroupedEntryUpgradeProcess(
-				_cpDefinitionLocalService));
+			new CPDefinitionGroupedEntryUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -56,8 +53,5 @@ public class CommerceProductTypeGroupedUpgradeStepRegistrator
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceProductTypeGroupedUpgradeStepRegistrator.class);
-
-	@Reference
-	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 }

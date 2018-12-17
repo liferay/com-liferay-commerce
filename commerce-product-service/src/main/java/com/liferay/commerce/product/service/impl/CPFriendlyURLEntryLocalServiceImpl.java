@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.exception.CPFriendlyURLEntryException;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.model.impl.CPFriendlyURLEntryImpl;
 import com.liferay.commerce.product.service.base.CPFriendlyURLEntryLocalServiceBaseImpl;
@@ -86,6 +87,19 @@ public class CPFriendlyURLEntryLocalServiceImpl
 		long groupId, Class<?> clazz, long classPK) {
 
 		long classNameId = classNameLocalService.getClassNameId(clazz);
+
+		if ((clazz == CPDefinition.class) &&
+			cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(classPK);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			classPK = newCPDefinition.getCPDefinitionId();
+		}
 
 		cpFriendlyURLEntryPersistence.removeByG_C_C(
 			groupId, classNameId, classPK);
@@ -230,6 +244,25 @@ public class CPFriendlyURLEntryLocalServiceImpl
 
 		CPFriendlyURLEntry cpFriendlyURLEntry = createCPFriendlyURLEntry(
 			cpFriendlyURLEntryId);
+
+		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
+			CPDefinition.class);
+
+		if ((cpFriendlyURLEntry.getClassNameId() ==
+				cpDefinitionClassNameId) &&
+			cpDefinitionLocalService.isPublishedCPDefinition(
+				cpFriendlyURLEntry.getClassPK())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpFriendlyURLEntry.getClassPK());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			classPK = newCPDefinition.getCPDefinitionId();
+		}
 
 		cpFriendlyURLEntry.setGroupId(groupId);
 		cpFriendlyURLEntry.setCompanyId(companyId);

@@ -55,6 +55,11 @@
 			<finder-column comparator="&lt;" name="displayDate" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="U_C_C" return-type="CPAttachmentFileEntry" unique="true">
+			<finder-column name="uuid" />
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+		</finder>
 		<finder name="C_C_LtD_S" return-type="Collection">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />

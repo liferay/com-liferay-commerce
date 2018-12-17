@@ -108,6 +108,25 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			cpAttachmentFileEntryPersistence.create(cpAttachmentFileEntryId);
 
+		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
+			CPDefinition.class);
+
+		if ((cpAttachmentFileEntry.getClassNameId() ==
+				cpDefinitionClassNameId) &&
+			cpDefinitionLocalService.isPublishedCPDefinition(
+				cpAttachmentFileEntry.getClassPK())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpAttachmentFileEntry.getClassPK());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			classPK = newCPDefinition.getCPDefinitionId();
+		}
+
 		cpAttachmentFileEntry.setUuid(serviceContext.getUuid());
 		cpAttachmentFileEntry.setGroupId(groupId);
 		cpAttachmentFileEntry.setCompanyId(user.getCompanyId());
@@ -216,6 +235,28 @@ public class CPAttachmentFileEntryLocalServiceImpl
 	public CPAttachmentFileEntry deleteCPAttachmentFileEntry(
 			CPAttachmentFileEntry cpAttachmentFileEntry)
 		throws PortalException {
+
+		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
+			CPDefinition.class);
+
+		if ((cpAttachmentFileEntry.getClassNameId() ==
+				cpDefinitionClassNameId) &&
+			cpDefinitionLocalService.isPublishedCPDefinition(
+				cpAttachmentFileEntry.getClassPK())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpAttachmentFileEntry.getClassPK());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpAttachmentFileEntry =
+				cpAttachmentFileEntryPersistence.findByU_C_C(
+					cpAttachmentFileEntry.getUuid(), cpDefinitionClassNameId,
+					newCPDefinition.getCPDefinitionId());
+		}
 
 		// Commerce product attachment file entry
 
@@ -336,6 +377,28 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			cpAttachmentFileEntryPersistence.findByPrimaryKey(
 				cpAttachmentFileEntryId);
 
+		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
+			CPDefinition.class);
+
+		if ((cpAttachmentFileEntry.getClassNameId() ==
+				cpDefinitionClassNameId) &&
+			cpDefinitionLocalService.isPublishedCPDefinition(
+				cpAttachmentFileEntry.getClassPK())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpAttachmentFileEntry.getClassPK());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpAttachmentFileEntry =
+				cpAttachmentFileEntryPersistence.findByU_C_C(
+					cpAttachmentFileEntry.getUuid(), cpDefinitionClassNameId,
+					newCPDefinition.getCPDefinitionId());
+		}
+
 		Date displayDate = null;
 		Date expirationDate = null;
 		Date now = new Date();
@@ -403,6 +466,28 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			cpAttachmentFileEntryPersistence.findByPrimaryKey(
 				cpAttachmentFileEntryId);
+
+		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
+			CPDefinition.class);
+
+		if ((cpAttachmentFileEntry.getClassNameId() ==
+				cpDefinitionClassNameId) &&
+			cpDefinitionLocalService.isPublishedCPDefinition(
+				cpAttachmentFileEntry.getClassPK())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpAttachmentFileEntry.getClassPK());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpAttachmentFileEntry =
+				cpAttachmentFileEntryPersistence.findByU_C_C(
+					cpAttachmentFileEntry.getUuid(), cpDefinitionClassNameId,
+					newCPDefinition.getCPDefinitionId());
+		}
 
 		if ((status == WorkflowConstants.STATUS_APPROVED) &&
 			(cpAttachmentFileEntry.getDisplayDate() != null) &&

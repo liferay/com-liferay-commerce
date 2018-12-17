@@ -16,6 +16,7 @@ package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.base.CPDefinitionLinkServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
@@ -42,10 +43,13 @@ public class CPDefinitionLinkServiceImpl
 				cpDefinitionLinkId);
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionLink.getCPDefinition1(),
+			getPermissionChecker(), cpDefinitionLink.getCPDefinition(),
 			ActionKeys.UPDATE);
+
+		CProduct cProduct = cpDefinitionLink.getCProduct();
+
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionLink.getCPDefinition2(),
+			getPermissionChecker(), cProduct.getPublishedDefinitionId(),
 			ActionKeys.UPDATE);
 
 		cpDefinitionLinkLocalService.deleteCPDefinitionLink(cpDefinitionLinkId);
@@ -61,11 +65,14 @@ public class CPDefinitionLinkServiceImpl
 
 		if (cpDefinitionLink != null) {
 			_cpDefinitionModelResourcePermission.check(
-				getPermissionChecker(), cpDefinitionLink.getCPDefinition1(),
+				getPermissionChecker(), cpDefinitionLink.getCPDefinition(),
 				ActionKeys.VIEW);
+
+			CProduct cProduct = cpDefinitionLink.getCProduct();
+
 			_cpDefinitionModelResourcePermission.check(
-				getPermissionChecker(), cpDefinitionLink.getCPDefinition2(),
-				ActionKeys.VIEW);
+				getPermissionChecker(), cProduct.getPublishedDefinitionId(),
+				ActionKeys.UPDATE);
 		}
 
 		return cpDefinitionLink;
@@ -79,11 +86,14 @@ public class CPDefinitionLinkServiceImpl
 			cpDefinitionLinkLocalService.getCPDefinitionLink(
 				cpDefinitionLinkId);
 
+		CProduct cProduct = cpDefinitionLink.getCProduct();
+
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionLink.getCPDefinition1(),
-			ActionKeys.VIEW);
+			getPermissionChecker(), cProduct.getPublishedDefinitionId(),
+			ActionKeys.UPDATE);
+
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionLink.getCPDefinition2(),
+			getPermissionChecker(), cpDefinitionLink.getCProductId(),
 			ActionKeys.VIEW);
 
 		return cpDefinitionLinkLocalService.getCPDefinitionLink(
@@ -92,38 +102,38 @@ public class CPDefinitionLinkServiceImpl
 
 	@Override
 	public List<CPDefinitionLink> getCPDefinitionLinks(
-			long cpDefinitionId1, String type)
+			long cpDefinitionId, String type)
 		throws PortalException {
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId1, ActionKeys.VIEW);
+			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
 
 		return cpDefinitionLinkLocalService.getCPDefinitionLinks(
-			cpDefinitionId1, type);
+			cpDefinitionId, type);
 	}
 
 	@Override
 	public List<CPDefinitionLink> getCPDefinitionLinks(
-			long cpDefinitionId1, String type, int start, int end,
+			long cpDefinitionId, String type, int start, int end,
 			OrderByComparator<CPDefinitionLink> orderByComparator)
 		throws PortalException {
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId1, ActionKeys.VIEW);
+			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
 
 		return cpDefinitionLinkLocalService.getCPDefinitionLinks(
-			cpDefinitionId1, type, start, end, orderByComparator);
+			cpDefinitionId, type, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCPDefinitionLinksCount(long cpDefinitionId1, String type)
+	public int getCPDefinitionLinksCount(long cpDefinitionId, String type)
 		throws PortalException {
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId1, ActionKeys.VIEW);
+			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
 
 		return cpDefinitionLinkLocalService.getCPDefinitionLinksCount(
-			cpDefinitionId1, type);
+			cpDefinitionId, type);
 	}
 
 	@Override
@@ -137,10 +147,13 @@ public class CPDefinitionLinkServiceImpl
 				cpDefinitionLinkId);
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionLink.getCPDefinition1(),
+			getPermissionChecker(), cpDefinitionLink.getCPDefinition(),
 			ActionKeys.UPDATE);
+
+		CProduct cProduct = cpDefinitionLink.getCProduct();
+
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionLink.getCPDefinition2(),
+			getPermissionChecker(), cProduct.getPublishedDefinitionId(),
 			ActionKeys.UPDATE);
 
 		return cpDefinitionLinkLocalService.updateCPDefinitionLink(
@@ -149,15 +162,15 @@ public class CPDefinitionLinkServiceImpl
 
 	@Override
 	public void updateCPDefinitionLinks(
-			long cpDefinitionId1, long[] cpDefinitionIds2, String type,
+			long cpDefinitionId, long[] cpDefinitionIds2, String type,
 			ServiceContext serviceContext)
 		throws PortalException {
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId1, ActionKeys.UPDATE);
+			getPermissionChecker(), cpDefinitionId, ActionKeys.UPDATE);
 
 		cpDefinitionLinkLocalService.updateCPDefinitionLinks(
-			cpDefinitionId1, cpDefinitionIds2, type, serviceContext);
+			cpDefinitionId, cpDefinitionIds2, type, serviceContext);
 	}
 
 	private static volatile ModelResourcePermission<CPDefinition>
