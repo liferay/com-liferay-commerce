@@ -56,6 +56,16 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 				cpDefinitionSpecificationOptionValuePersistence.create(
 					cpDefinitionSpecificationOptionValueId);
 
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
+
+			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionSpecificationOptionValue.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+		}
+
 		cpDefinitionSpecificationOptionValue.setUuid(serviceContext.getUuid());
 		cpDefinitionSpecificationOptionValue.setGroupId(
 			cpDefinition.getGroupId());
@@ -88,6 +98,24 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 		deleteCPDefinitionSpecificationOptionValue(
 			CPDefinitionSpecificationOptionValue
 				cpDefinitionSpecificationOptionValue) {
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionSpecificationOptionValue.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionSpecificationOptionValue =
+				cpDefinitionSpecificationOptionValuePersistence.fetchByC_CSO(
+					newCPDefinition.getCPDefinitionId(),
+					cpDefinitionSpecificationOptionValue.
+						getCPSpecificationOptionId());
+		}
 
 		// Commerce product definition specification option value
 

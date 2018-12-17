@@ -17,7 +17,9 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
+import com.liferay.commerce.product.service.CProductLocalServiceUtil;
 
 /**
  * @author Alessio Antonio Rendina
@@ -29,15 +31,14 @@ public class CPDefinitionLinkImpl extends CPDefinitionLinkBaseImpl {
 	}
 
 	@Override
-	public CPDefinition getCPDefinition1() {
+	public CPDefinition getCPDefinition() {
 		return CPDefinitionLocalServiceUtil.fetchCPDefinition(
-			getCPDefinitionId1());
+			getCPDefinitionId());
 	}
 
 	@Override
-	public CPDefinition getCPDefinition2() {
-		return CPDefinitionLocalServiceUtil.fetchCPDefinition(
-			getCPDefinitionId2());
+	public CProduct getCProduct() {
+		return CProductLocalServiceUtil.fetchCProduct(getCProductId());
 	}
 
 }

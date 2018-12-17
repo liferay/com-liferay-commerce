@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDisplayLayout;
 import com.liferay.commerce.product.service.base.CPDisplayLayoutLocalServiceBaseImpl;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -35,6 +36,20 @@ public class CPDisplayLayoutLocalServiceImpl
 			cpDisplayLayoutPersistence.fetchByC_C(classNameId, classPK);
 
 		if (oldCPDisplayLayout != null) {
+			if ((clazz == CPDefinition.class) &&
+				cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
+
+				CPDefinition newCPDefinition =
+					cpDefinitionLocalService.copyCPDefinition(classPK);
+
+				cProductLocalService.updatePublishedDefinitionId(
+					newCPDefinition.getCProductId(),
+					newCPDefinition.getCPDefinitionId());
+
+				oldCPDisplayLayout = cpDisplayLayoutPersistence.fetchByC_C(
+					classNameId, newCPDefinition.getCPDefinitionId());
+			}
+
 			oldCPDisplayLayout.setLayoutUuid(layoutUuid);
 
 			return cpDisplayLayoutPersistence.update(oldCPDisplayLayout);
@@ -44,6 +59,19 @@ public class CPDisplayLayoutLocalServiceImpl
 
 		CPDisplayLayout cpDisplayLayout = createCPDisplayLayout(
 			cpDisplayLayoutId);
+
+		if ((clazz == CPDefinition.class) &&
+			cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(classPK);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			classPK = newCPDefinition.getCPDefinitionId();
+		}
 
 		cpDisplayLayout.setGroupId(serviceContext.getScopeGroupId());
 		cpDisplayLayout.setCompanyId(serviceContext.getCompanyId());
@@ -62,6 +90,20 @@ public class CPDisplayLayoutLocalServiceImpl
 			classNameId, classPK);
 
 		if (cpDisplayLayout != null) {
+			if ((clazz == CPDefinition.class) &&
+				cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
+
+				CPDefinition newCPDefinition =
+					cpDefinitionLocalService.copyCPDefinition(classPK);
+
+				cProductLocalService.updatePublishedDefinitionId(
+					newCPDefinition.getCProductId(),
+					newCPDefinition.getCPDefinitionId());
+
+				cpDisplayLayout = cpDisplayLayoutPersistence.fetchByC_C(
+					classNameId, newCPDefinition.getCPDefinitionId());
+			}
+
 			cpDisplayLayoutPersistence.remove(cpDisplayLayout);
 		}
 	}

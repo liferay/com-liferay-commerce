@@ -162,6 +162,20 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		CPInstance cpInstance = cpInstancePersistence.create(cpInstanceId);
 
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpInstance.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpInstance.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionId = newCPDefinition.getCPDefinitionId();
+		}
+
 		cpInstance.setUuid(serviceContext.getUuid());
 		cpInstance.setGroupId(groupId);
 		cpInstance.setCompanyId(user.getCompanyId());
@@ -390,6 +404,21 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CPInstance deleteCPInstance(CPInstance cpInstance)
 		throws PortalException {
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpInstance.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpInstance.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpInstance = cpInstancePersistence.findByU_C(
+				cpInstance.getUuid(), newCPDefinition.getCPDefinitionId());
+		}
 
 		// Commerce product instance
 

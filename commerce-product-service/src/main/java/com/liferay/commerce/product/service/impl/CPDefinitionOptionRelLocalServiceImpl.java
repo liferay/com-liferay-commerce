@@ -97,6 +97,20 @@ public class CPDefinitionOptionRelLocalServiceImpl
 		CPDefinitionOptionRel cpDefinitionOptionRel =
 			cpDefinitionOptionRelPersistence.create(cpDefinitionOptionRelId);
 
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionOptionRel.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionOptionRel.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionId = newCPDefinition.getCPDefinitionId();
+		}
+
 		cpDefinitionOptionRel.setUuid(serviceContext.getUuid());
 		cpDefinitionOptionRel.setGroupId(groupId);
 		cpDefinitionOptionRel.setCompanyId(user.getCompanyId());
@@ -148,6 +162,22 @@ public class CPDefinitionOptionRelLocalServiceImpl
 	public CPDefinitionOptionRel deleteCPDefinitionOptionRel(
 			CPDefinitionOptionRel cpDefinitionOptionRel)
 		throws PortalException {
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionOptionRel.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionOptionRel.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByU_C(
+				cpDefinitionOptionRel.getUuid(),
+				newCPDefinition.getCPDefinitionId());
+		}
 
 		// Commerce product definition option value rels
 

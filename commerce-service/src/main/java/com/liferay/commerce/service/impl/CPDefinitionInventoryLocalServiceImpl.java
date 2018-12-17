@@ -17,6 +17,7 @@ package com.liferay.commerce.service.impl;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.service.base.CPDefinitionInventoryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.SystemEventConstants;
@@ -50,6 +51,17 @@ public class CPDefinitionInventoryLocalServiceImpl
 		CPDefinitionInventory cpDefinitionInventory =
 			cpDefinitionInventoryPersistence.create(cpDefinitionInventoryId);
 
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			CPDefinition newCPDefinition =
+				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
+
+			_cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionId = newCPDefinition.getCPDefinitionId();
+		}
+
 		cpDefinitionInventory.setUuid(serviceContext.getUuid());
 		cpDefinitionInventory.setGroupId(groupId);
 		cpDefinitionInventory.setCompanyId(user.getCompanyId());
@@ -76,7 +88,24 @@ public class CPDefinitionInventoryLocalServiceImpl
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CPDefinitionInventory deleteCPDefinitionInventory(
-		CPDefinitionInventory cpDefinitionInventory) {
+			CPDefinitionInventory cpDefinitionInventory)
+		throws PortalException {
+
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionInventory.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				_cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionInventory.getCPDefinitionId());
+
+			_cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionInventory =
+				cpDefinitionInventoryPersistence.findByCPDefinitionId(
+					newCPDefinition.getCPDefinitionId());
+		}
 
 		return cpDefinitionInventoryPersistence.remove(cpDefinitionInventory);
 	}
@@ -131,6 +160,22 @@ public class CPDefinitionInventoryLocalServiceImpl
 			cpDefinitionInventoryPersistence.findByPrimaryKey(
 				cpDefinitionInventoryId);
 
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionInventory.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				_cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionInventory.getCPDefinitionId());
+
+			_cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionInventory =
+				cpDefinitionInventoryPersistence.findByCPDefinitionId(
+					newCPDefinition.getCPDefinitionId());
+		}
+
 		cpDefinitionInventory.setCPDefinitionInventoryEngine(
 			cpDefinitionInventoryEngine);
 		cpDefinitionInventory.setLowStockActivity(lowStockActivity);
@@ -147,4 +192,11 @@ public class CPDefinitionInventoryLocalServiceImpl
 
 		return cpDefinitionInventory;
 	}
+
+	@ServiceReference(type = CPDefinitionLocalService.class)
+	private CPDefinitionLocalService _cpDefinitionLocalService;
+
+	@ServiceReference(type = CProductLocalService.class)
+	private CProductLocalService _cProductLocalService;
+
 }

@@ -17,7 +17,9 @@ package com.liferay.commerce.product.type.grouped.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
+import com.liferay.commerce.product.service.CProductLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
@@ -37,9 +39,8 @@ public class CPDefinitionGroupedEntryImpl
 	}
 
 	@Override
-	public CPDefinition getEntryCPDefinition() throws PortalException {
-		return CPDefinitionLocalServiceUtil.getCPDefinition(
-			getEntryCPDefinitionId());
+	public CProduct getCProduct() throws PortalException {
+		return CProductLocalServiceUtil.getCProduct(getEntryCProductId());
 	}
 
 }
