@@ -55,7 +55,7 @@ public class CommerceWarehouseItemLocalServiceImpl
 
 		return commerceWarehouseItemLocalService.addCommerceWarehouseItem(
 			commerceWarehouseId, cpDefinition.getCProductId(),
-			cpInstance.getUuid(), quantity, serviceContext);
+			cpInstance.getCPInstanceUuid(), quantity, serviceContext);
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class CommerceWarehouseItemLocalServiceImpl
 
 		commerceWarehouseItemLocalService.
 			deleteCommerceWarehouseItemsByCPI_CPIU(
-				cpDefinition.getCProductId(), cpInstance.getUuid());
+				cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid());
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class CommerceWarehouseItemLocalServiceImpl
 
 		return commerceWarehouseItemLocalService.
 			fetchCommerceWarehouseItemByCWI_CPIU(
-				commerceWarehouseId, cpInstance.getUuid());
+				commerceWarehouseId, cpInstance.getCPInstanceUuid());
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public class CommerceWarehouseItemLocalServiceImpl
 
 		return commerceWarehouseItemLocalService.
 			getCommerceWarehouseItemsByCPI_CPIU(
-				cpDefinition.getCProductId(), cpInstance.getUuid());
+				cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid());
 	}
 
 	/**
@@ -195,8 +195,8 @@ public class CommerceWarehouseItemLocalServiceImpl
 
 		return commerceWarehouseItemLocalService.
 			getCommerceWarehouseItemsByCPI_CPIU(
-				cpDefinition.getCProductId(), cpInstance.getUuid(), start, end,
-				orderByComparator);
+				cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid(),
+				start, end, orderByComparator);
 	}
 
 	@Override
@@ -242,7 +242,7 @@ public class CommerceWarehouseItemLocalServiceImpl
 			cpInstance.getCPDefinitionId());
 
 		return commerceWarehouseItemLocalService.getCommerceWarehouseItemsCount(
-			cpDefinition.getCProductId(), cpInstance.getUuid());
+			cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid());
 	}
 
 	/**
