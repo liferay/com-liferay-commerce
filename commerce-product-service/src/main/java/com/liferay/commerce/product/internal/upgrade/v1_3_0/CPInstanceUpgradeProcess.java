@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.internal.upgrade.v1_3_0;
 
 import com.liferay.commerce.product.model.impl.CPInstanceModelImpl;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.db.IndexMetadata;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
@@ -35,7 +36,40 @@ public class CPInstanceUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
+		_addColumn(
+			CPInstanceModelImpl.class, CPInstanceModelImpl.TABLE_NAME,
+			"CPInstanceUuid", "VARCHAR(75)");
+
+		runSQL("update CPInstance set CPInstanceUuid = uuid_");
+
 		_addIndexes(CPInstanceModelImpl.TABLE_NAME);
+	}
+
+	private void _addColumn(
+			Class<?> entityClass, String tableName, String columnName,
+			String columnType)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				String.format(
+					"Adding column %s to table %s", columnName, tableName));
+		}
+
+		if (!hasColumn(tableName, columnName)) {
+			alter(
+				entityClass,
+				new AlterTableAddColumn(
+					columnName + StringPool.SPACE + columnType));
+		}
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					String.format(
+						"Column %s already exists on table %s", columnName,
+						tableName));
+			}
+		}
 	}
 
 	private void _addIndexes(String tableName) throws Exception {
