@@ -17,6 +17,7 @@ package com.liferay.commerce.product.type.grouped.service.impl;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.type.grouped.constants.GroupedCPTypeConstants;
 import com.liferay.commerce.product.type.grouped.exception.CPDefinitionGroupedEntryQuantityException;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
@@ -37,19 +38,19 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 
 	@Override
 	public void addCPDefinitionGroupedEntries(
-			long cpDefinitionId, long[] entryCPDefinitionIds,
+			long cpDefinitionId, long[] entryCProductIds,
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		for (long entryCPDefinitionId : entryCPDefinitionIds) {
-			addCPDefinitionGroupedEntry(
-				cpDefinitionId, entryCPDefinitionId, 0, 1, serviceContext);
+		for (long entryCProductId : entryCProductIds) {
+			cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntry(
+				cpDefinitionId, entryCProductId, 0, 1, serviceContext);
 		}
 	}
 
 	@Override
 	public CPDefinitionGroupedEntry addCPDefinitionGroupedEntry(
-			long cpDefinitionId, long entryCPDefinitionId, double priority,
+			long cpDefinitionId, long entryCProductId, double priority,
 			int quantity, ServiceContext serviceContext)
 		throws PortalException {
 
@@ -57,13 +58,23 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 			cpDefinitionId);
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
-		validate(cpDefinitionId, entryCPDefinitionId, quantity);
+		validate(cpDefinitionId, entryCProductId, quantity);
 
 		long cpDefinitionGroupedEntryId = counterLocalService.increment();
 
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry =
 			cpDefinitionGroupedEntryPersistence.create(
 				cpDefinitionGroupedEntryId);
+
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionGroupedEntry.getCPDefinitionId())) {
+
+			cpDefinition = _cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
+
+			_cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+		}
 
 		cpDefinitionGroupedEntry.setUuid(serviceContext.getUuid());
 		cpDefinitionGroupedEntry.setGroupId(cpDefinition.getGroupId());
@@ -72,7 +83,8 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 		cpDefinitionGroupedEntry.setUserName(user.getFullName());
 		cpDefinitionGroupedEntry.setCPDefinitionId(
 			cpDefinition.getCPDefinitionId());
-		cpDefinitionGroupedEntry.setEntryCPDefinitionId(entryCPDefinitionId);
+		cpDefinitionGroupedEntry.setEntryCProductId(
+			cpDefinition.getCProductId());
 		cpDefinitionGroupedEntry.setPriority(priority);
 		cpDefinitionGroupedEntry.setQuantity(quantity);
 
@@ -83,16 +95,27 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 
 	@Override
 	public void deleteCPDefinitionGroupedEntries(long cpDefinitionId) {
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			CPDefinition newCPDefinition =
+				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
+
+			_cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionId = newCPDefinition.getCPDefinitionId();
+		}
+
 		cpDefinitionGroupedEntryPersistence.removeByCPDefinitionId(
 			cpDefinitionId);
 	}
 
 	@Override
 	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
-		long cpDefinitionId, long entryCPDefinitionId) {
+		long cpDefinitionId, long entryCProductId) {
 
 		return cpDefinitionGroupedEntryPersistence.fetchByC_E(
-			cpDefinitionId, entryCPDefinitionId);
+			cpDefinitionId, entryCProductId);
 	}
 
 	@Override
@@ -135,9 +158,25 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 			cpDefinitionGroupedEntryPersistence.findByPrimaryKey(
 				cpDefinitionGroupedEntryId);
 
+		long cpDefinitionId = cpDefinitionGroupedEntry.getCPDefinitionId();
+
+		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			CPDefinition newCPDefinition =
+				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
+
+			_cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionGroupedEntry =
+				cpDefinitionGroupedEntryPersistence.findByC_E(
+					newCPDefinition.getCPDefinitionId(),
+					cpDefinitionGroupedEntry.getEntryCProductId());
+		}
+
 		validate(
 			cpDefinitionGroupedEntry.getCPDefinitionId(),
-			cpDefinitionGroupedEntry.getEntryCPDefinitionId(), quantity);
+			cpDefinitionGroupedEntry.getEntryCProductId(), quantity);
 
 		cpDefinitionGroupedEntry.setPriority(priority);
 		cpDefinitionGroupedEntry.setQuantity(quantity);
@@ -148,11 +187,11 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 	}
 
 	protected void validate(
-			long cpDefinitionId, long entryCPDefinitionId, int quantity)
+			long cpDefinitionId, long entryCProductId, int quantity)
 		throws PortalException {
 
 		CPDefinition entryCPDefinition =
-			_cpDefinitionLocalService.getCPDefinition(entryCPDefinitionId);
+			_cpDefinitionLocalService.getCPDefinition(entryCProductId);
 
 		if ((cpDefinitionId == entryCPDefinition.getCPDefinitionId()) ||
 			GroupedCPTypeConstants.NAME.equals(
@@ -168,5 +207,8 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 
 	@ServiceReference(type = CPDefinitionLocalService.class)
 	private CPDefinitionLocalService _cpDefinitionLocalService;
+
+	@ServiceReference(type = CProductLocalService.class)
+	private CProductLocalService _cProductLocalService;
 
 }

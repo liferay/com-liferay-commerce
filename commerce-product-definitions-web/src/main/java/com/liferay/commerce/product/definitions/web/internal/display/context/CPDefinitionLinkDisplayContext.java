@@ -223,7 +223,7 @@ public class CPDefinitionLinkDisplayContext
 			cpDefinitionId, type);
 
 		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks) {
-			cpDefinitionIdsList.add(cpDefinitionLink.getCPDefinitionId2());
+			cpDefinitionIdsList.add(cpDefinitionLink.getCProductId());
 		}
 
 		if (!cpDefinitionIdsList.isEmpty()) {
@@ -251,7 +251,7 @@ public class CPDefinitionLinkDisplayContext
 			cpDefinitionId, type);
 
 		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks) {
-			cpDefinitionIdsList.add(cpDefinitionLink.getCPDefinitionId1());
+			cpDefinitionIdsList.add(cpDefinitionLink.getCPDefinitionId());
 		}
 
 		if (!cpDefinitionIdsList.isEmpty()) {

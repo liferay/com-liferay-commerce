@@ -133,7 +133,7 @@ public class ActionHelper {
 				portletRequest);
 
 			if (cpDefinitionLink != null) {
-				cpDefinitionId = cpDefinitionLink.getCPDefinitionId1();
+				cpDefinitionId = cpDefinitionLink.getCPDefinitionId();
 			}
 		}
 

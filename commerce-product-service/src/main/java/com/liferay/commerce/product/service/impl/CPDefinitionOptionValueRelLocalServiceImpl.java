@@ -101,6 +101,30 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 			cpDefinitionOptionValueRelPersistence.create(
 				cpDefinitionOptionValueRelId);
 
+		CPDefinitionOptionRel cpDefinitionOptionRel =
+			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
+				cpDefinitionOptionRelId);
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionOptionRel.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionOptionRel.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByU_C(
+				cpDefinitionOptionRel.getUuid(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionOptionValueRel =
+				cpDefinitionOptionValueRelPersistence.findByC_K(
+					cpDefinitionOptionRel.getCPDefinitionOptionRelId(), key);
+		}
+
 		cpDefinitionOptionValueRel.setUuid(serviceContext.getUuid());
 		cpDefinitionOptionValueRel.setGroupId(groupId);
 		cpDefinitionOptionValueRel.setCompanyId(user.getCompanyId());
@@ -130,6 +154,30 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 	public CPDefinitionOptionValueRel deleteCPDefinitionOptionValueRel(
 			CPDefinitionOptionValueRel cpDefinitionOptionValueRel)
 		throws PortalException {
+
+		CPDefinitionOptionRel cpDefinitionOptionRel =
+			cpDefinitionOptionValueRel.getCPDefinitionOptionRel();
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionOptionRel.getCPDefinitionId())) {
+
+			CPDefinition newCPDefinition =
+				cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionOptionRel.getCPDefinitionId());
+
+			cProductLocalService.updatePublishedDefinitionId(
+				newCPDefinition.getCProductId(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByU_C(
+				cpDefinitionOptionRel.getUuid(),
+				newCPDefinition.getCPDefinitionId());
+
+			cpDefinitionOptionValueRel =
+				cpDefinitionOptionValueRelPersistence.findByC_K(
+					cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+					cpDefinitionOptionValueRel.getKey());
+		}
 
 		// Commerce product definition option value rel
 
