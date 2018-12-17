@@ -592,7 +592,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks) {
 			reverseCPDefinitionIds.add(
-				String.valueOf(cpDefinitionLink.getCPDefinition1()));
+				String.valueOf(cpDefinitionLink.getCPDefinition()));
 		}
 
 		reverseCPDefinitionIdsArray = reverseCPDefinitionIds.toArray(

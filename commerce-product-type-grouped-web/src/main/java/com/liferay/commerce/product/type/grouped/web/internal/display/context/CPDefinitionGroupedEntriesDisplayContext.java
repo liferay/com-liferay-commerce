@@ -209,7 +209,7 @@ public class CPDefinitionGroupedEntriesDisplayContext
 				cpDefinitionGroupedEntries) {
 
 			cpDefinitionIdsList.add(
-				cpDefinitionGroupedEntry.getEntryCPDefinitionId());
+				cpDefinitionGroupedEntry.getEntryCProductId());
 		}
 
 		if (!cpDefinitionIdsList.isEmpty()) {
