@@ -86,6 +86,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -476,6 +477,8 @@ public class CPDefinitionLocalServiceImpl
 			CPDefinition newCPDefinition =
 				(CPDefinition)originalCPDefinition.clone();
 
+			newCPDefinition.setUuid(PortalUUIDUtil.generate());
+
 			long newCPDefinitionId = counterLocalService.increment();
 
 			newCPDefinition.setCPDefinitionId(newCPDefinitionId);
@@ -522,6 +525,7 @@ public class CPDefinitionLocalServiceImpl
 				CPAttachmentFileEntry newCPAttachmentFileEntry =
 					(CPAttachmentFileEntry)cpAttachmentFileEntry.clone();
 
+				newCPAttachmentFileEntry.setUuid(PortalUUIDUtil.generate());
 				newCPAttachmentFileEntry.setCPAttachmentFileEntryId(
 					counterLocalService.increment());
 
@@ -544,6 +548,7 @@ public class CPDefinitionLocalServiceImpl
 				CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
 					(CPDefinitionGroupedEntry)cpDefinitionGroupedEntry.clone();
 
+				newCPDefinitionGroupedEntry.setUuid(PortalUUIDUtil.generate());
 				newCPDefinitionGroupedEntry.setCPDefinitionGroupedEntryId(
 					counterLocalService.increment());
 				newCPDefinitionGroupedEntry.setModifiedDate(new Date());
@@ -563,13 +568,13 @@ public class CPDefinitionLocalServiceImpl
 			CPDefinitionInventory newCPDefinitionInventory =
 				(CPDefinitionInventory)cpDefinitionInventory.clone();
 
+			newCPDefinitionInventory.setUuid(PortalUUIDUtil.generate());
 			newCPDefinitionInventory.setCPDefinitionInventoryId(
 				counterLocalService.increment());
 			newCPDefinitionInventory.setModifiedDate(new Date());
 			newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
 
-			_cpDefinitionInventoryPersistence.update(
-				newCPDefinitionInventory);
+			_cpDefinitionInventoryPersistence.update(newCPDefinitionInventory);
 
 			// CPDefinitionLink
 
@@ -581,6 +586,7 @@ public class CPDefinitionLocalServiceImpl
 				CPDefinitionLink newCPDefinitionLink =
 					(CPDefinitionLink)cpDefinitionLink.clone();
 
+				newCPDefinitionLink.setUuid(PortalUUIDUtil.generate());
 				newCPDefinitionLink.setCPDefinitionLinkId(
 					counterLocalService.increment());
 				newCPDefinitionLink.setModifiedDate(new Date());
@@ -602,6 +608,8 @@ public class CPDefinitionLocalServiceImpl
 
 				CPDefinitionOptionRel newCPDefinitionOptionRel =
 					(CPDefinitionOptionRel)cpDefinitionOptionRel.clone();
+
+				newCPDefinitionOptionRel.setUuid(PortalUUIDUtil.generate());
 
 				long newCPDefinitionOptionRelId =
 					counterLocalService.increment();
@@ -629,6 +637,8 @@ public class CPDefinitionLocalServiceImpl
 						(CPDefinitionOptionValueRel)cpDefinitionOptionValueRel.
 							clone();
 
+					newCPDefinitionOptionValueRel.setUuid(
+						PortalUUIDUtil.generate());
 					newCPDefinitionOptionValueRel.
 						setCPDefinitionOptionValueRelId(
 							counterLocalService.increment());
@@ -657,6 +667,8 @@ public class CPDefinitionLocalServiceImpl
 						(CPDefinitionSpecificationOptionValue)
 							cpDefinitionSpecificationOptionValue.clone();
 
+				newCPDefinitionSpecificationOptionValue.setUuid(
+					PortalUUIDUtil.generate());
 				newCPDefinitionSpecificationOptionValue.
 					setCPDefinitionSpecificationOptionValueId(
 						counterLocalService.increment());
@@ -680,6 +692,8 @@ public class CPDefinitionLocalServiceImpl
 					(CPDefinitionVirtualSetting)
 						cpDefinitionVirtualSetting.clone();
 
+				newCPDefinitionVirtualSetting.setUuid(
+					PortalUUIDUtil.generate());
 				newCPDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
 					counterLocalService.increment());
 				newCPDefinitionVirtualSetting.setModifiedDate(new Date());
@@ -699,6 +713,7 @@ public class CPDefinitionLocalServiceImpl
 				CPDisplayLayout newCPDisplayLayout =
 					(CPDisplayLayout)cpDisplayLayout.clone();
 
+				newCPDisplayLayout.setUuid(PortalUUIDUtil.generate());
 				newCPDisplayLayout.setCPDisplayLayoutId(
 					counterLocalService.increment());
 				newCPDisplayLayout.setModifiedDate(new Date());
@@ -717,6 +732,7 @@ public class CPDefinitionLocalServiceImpl
 				CPFriendlyURLEntry newCPFriendlyURLEntry =
 					(CPFriendlyURLEntry)cpFriendlyURLEntry.clone();
 
+				newCPFriendlyURLEntry.setUuid(PortalUUIDUtil.generate());
 				newCPFriendlyURLEntry.setCPFriendlyURLEntryId(
 					counterLocalService.increment());
 				newCPFriendlyURLEntry.setModifiedDate(new Date());
@@ -733,6 +749,7 @@ public class CPDefinitionLocalServiceImpl
 			for (CPInstance cpInstance : cpInstances) {
 				CPInstance newCPInstance = (CPInstance)cpInstance.clone();
 
+				newCPInstance.setUuid(PortalUUIDUtil.generate());
 				newCPInstance.setCPInstanceId(counterLocalService.increment());
 				newCPInstance.setModifiedDate(new Date());
 				newCPInstance.setCPDefinitionId(newCPDefinitionId);
@@ -2388,8 +2405,7 @@ public class CPDefinitionLocalServiceImpl
 		_cpDefinitionGroupedEntryPersistence;
 
 	@Reference
-	private CPDefinitionInventoryPersistence
-		_cpDefinitionInventoryPersistence;
+	private CPDefinitionInventoryPersistence _cpDefinitionInventoryPersistence;
 
 	@Reference
 	private CPDefinitionVirtualSettingPersistence
