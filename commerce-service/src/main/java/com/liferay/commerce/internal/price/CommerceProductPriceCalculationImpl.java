@@ -68,11 +68,11 @@ public class CommerceProductPriceCalculationImpl
 
 		CommerceMoney unitPrice = getUnitPrice(
 			cpInstanceId, quantity, commerceContext.getCommercePriceList(),
-			commerceContext.getCommerceCurrency());
+			commerceContext.getCommerceCurrency(), secure, commerceContext);
 
 		CommerceMoney promoPrice = getPromoPrice(
 			cpInstanceId, quantity, commerceContext.getCommercePriceList(),
-			commerceContext.getCommerceCurrency());
+			commerceContext.getCommerceCurrency(), secure, commerceContext);
 
 		CommerceProductPriceImpl commerceProductPrice =
 			new CommerceProductPriceImpl();
@@ -123,8 +123,13 @@ public class CommerceProductPriceCalculationImpl
 
 	@Override
 	public CommerceMoney getFinalPrice(
-			long cpInstanceId, int quantity, CommerceContext commerceContext)
+			long cpInstanceId, int quantity, boolean secure,
+			CommerceContext commerceContext)
 		throws PortalException {
+
+		if (secure && !_hasViewPricePermission(commerceContext)) {
+			return null;
+		}
 
 		CommerceProductPrice commerceProductPrice = getCommerceProductPrice(
 			cpInstanceId, quantity, commerceContext);
@@ -137,11 +142,24 @@ public class CommerceProductPriceCalculationImpl
 	}
 
 	@Override
+	public CommerceMoney getFinalPrice(
+			long cpInstanceId, int quantity, CommerceContext commerceContext)
+		throws PortalException {
+
+		return getFinalPrice(cpInstanceId, quantity, true, commerceContext);
+	}
+
+	@Override
 	public CommerceMoney getPromoPrice(
 			long cpInstanceId, int quantity,
 			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency)
+			CommerceCurrency commerceCurrency, boolean secure,
+			CommerceContext commerceContext)
 		throws PortalException {
+
+		if (secure && !_hasViewPricePermission(commerceContext)) {
+			return null;
+		}
 
 		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
 
@@ -164,9 +182,26 @@ public class CommerceProductPriceCalculationImpl
 	}
 
 	@Override
-	public CommerceMoney getUnitMaxPrice(
-			long cpDefinitionId, int quantity, CommerceContext commerceContext)
+	public CommerceMoney getPromoPrice(
+			long cpInstanceId, int quantity,
+			Optional<CommercePriceList> commercePriceList,
+			CommerceCurrency commerceCurrency, CommerceContext commerceContext)
 		throws PortalException {
+
+		return getPromoPrice(
+			cpInstanceId, quantity, commercePriceList, commerceCurrency, true,
+			commerceContext);
+	}
+
+	@Override
+	public CommerceMoney getUnitMaxPrice(
+			long cpDefinitionId, int quantity, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		if (secure && !_hasViewPricePermission(commerceContext)) {
+			return null;
+		}
 
 		CommerceMoney commerceMoney = null;
 		BigDecimal maxPrice = BigDecimal.ZERO;
@@ -180,7 +215,7 @@ public class CommerceProductPriceCalculationImpl
 			CommerceMoney cpInstanceCommerceMoney = getUnitPrice(
 				cpInstance.getCPInstanceId(), quantity,
 				commerceContext.getCommercePriceList(),
-				commerceContext.getCommerceCurrency());
+				commerceContext.getCommerceCurrency(), secure, commerceContext);
 
 			if (maxPrice.compareTo(cpInstanceCommerceMoney.getPrice()) < 0) {
 				commerceMoney = cpInstanceCommerceMoney;
@@ -193,9 +228,22 @@ public class CommerceProductPriceCalculationImpl
 	}
 
 	@Override
-	public CommerceMoney getUnitMinPrice(
+	public CommerceMoney getUnitMaxPrice(
 			long cpDefinitionId, int quantity, CommerceContext commerceContext)
 		throws PortalException {
+
+		return getUnitMaxPrice(cpDefinitionId, quantity, true, commerceContext);
+	}
+
+	@Override
+	public CommerceMoney getUnitMinPrice(
+			long cpDefinitionId, int quantity, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		if (secure && !_hasViewPricePermission(commerceContext)) {
+			return null;
+		}
 
 		CommerceMoney commerceMoney = null;
 		BigDecimal minPrice = BigDecimal.ZERO;
@@ -209,7 +257,7 @@ public class CommerceProductPriceCalculationImpl
 			CommerceMoney cpInstanceCommerceMoney = getUnitPrice(
 				cpInstance.getCPInstanceId(), quantity,
 				commerceContext.getCommercePriceList(),
-				commerceContext.getCommerceCurrency());
+				commerceContext.getCommerceCurrency(), secure, commerceContext);
 
 			if ((commerceMoney == null) ||
 				(minPrice.compareTo(cpInstanceCommerceMoney.getPrice()) > 0)) {
@@ -224,11 +272,24 @@ public class CommerceProductPriceCalculationImpl
 	}
 
 	@Override
+	public CommerceMoney getUnitMinPrice(
+			long cpDefinitionId, int quantity, CommerceContext commerceContext)
+		throws PortalException {
+
+		return getUnitMinPrice(cpDefinitionId, quantity, true, commerceContext);
+	}
+
+	@Override
 	public CommerceMoney getUnitPrice(
 			long cpInstanceId, int quantity,
 			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency)
+			CommerceCurrency commerceCurrency, boolean secure,
+			CommerceContext commerceContext)
 		throws PortalException {
+
+		if (secure && !_hasViewPricePermission(commerceContext)) {
+			return null;
+		}
 
 		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
 
@@ -248,6 +309,18 @@ public class CommerceProductPriceCalculationImpl
 		}
 
 		return _commerceMoneyFactory.create(commerceCurrency, price);
+	}
+
+	@Override
+	public CommerceMoney getUnitPrice(
+			long cpInstanceId, int quantity,
+			Optional<CommercePriceList> commercePriceList,
+			CommerceCurrency commerceCurrency, CommerceContext commerceContext)
+		throws PortalException {
+
+		return getUnitPrice(
+			cpInstanceId, quantity, commercePriceList, commerceCurrency, true,
+			commerceContext);
 	}
 
 	private BigDecimal _getPriceListPrice(
