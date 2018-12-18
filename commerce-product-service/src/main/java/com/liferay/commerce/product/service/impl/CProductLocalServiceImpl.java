@@ -84,6 +84,8 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 			cProduct.setModifiedDate(now);
 
+			cProduct.setDraftDefinitionId(0);
+
 			cProduct.setPublishedDefinitionId(publishedDefinitionId);
 
 			return cProductPersistence.update(cProduct);
