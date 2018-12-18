@@ -116,13 +116,16 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 				newCPDefinition.getCProductId(),
 				newCPDefinition.getCPDefinitionId());
 
-			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByU_C(
+			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.fetchByU_C(
 				cpDefinitionOptionRel.getUuid(),
 				newCPDefinition.getCPDefinitionId());
 
-			cpDefinitionOptionValueRel =
-				cpDefinitionOptionValueRelPersistence.findByC_K(
-					cpDefinitionOptionRel.getCPDefinitionOptionRelId(), key);
+			if (cpDefinitionOptionRel != null) {
+				cpDefinitionOptionValueRel =
+					cpDefinitionOptionValueRelPersistence.findByC_K(
+						cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+						key);
+			}
 		}
 
 		cpDefinitionOptionValueRel.setUuid(serviceContext.getUuid());
