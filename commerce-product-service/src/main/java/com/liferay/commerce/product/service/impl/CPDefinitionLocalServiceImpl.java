@@ -43,10 +43,10 @@ import com.liferay.commerce.product.service.base.CPDefinitionLocalServiceBaseImp
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
-import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService;
+import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalServiceUtil;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
-import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
-import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
+import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalServiceUtil;
+import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.exception.NoSuchStructureException;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
@@ -538,7 +538,7 @@ public class CPDefinitionLocalServiceImpl
 
 			try {
 				List<CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
-					_cpDefinitionGroupedEntryLocalService.
+					CPDefinitionGroupedEntryLocalServiceUtil.
 						getCPDefinitionGroupedEntriesByCPDefinitionId(
 							cpDefinitionId);
 
@@ -557,7 +557,7 @@ public class CPDefinitionLocalServiceImpl
 					newCPDefinitionGroupedEntry.setCPDefinitionId(
 						newCPDefinitionId);
 
-					_cpDefinitionGroupedEntryLocalService.
+					CPDefinitionGroupedEntryLocalServiceUtil.
 						addCPDefinitionGroupedEntry(
 							newCPDefinitionGroupedEntry);
 				}
@@ -570,7 +570,7 @@ public class CPDefinitionLocalServiceImpl
 
 			try {
 				CPDefinitionInventory cpDefinitionInventory =
-					_cpDefinitionInventoryLocalService.
+					CPDefinitionInventoryLocalServiceUtil.
 						fetchCPDefinitionInventoryByCPDefinitionId(
 							cpDefinitionId);
 
@@ -585,8 +585,8 @@ public class CPDefinitionLocalServiceImpl
 					newCPDefinitionInventory.setCPDefinitionId(
 						newCPDefinitionId);
 
-					_cpDefinitionInventoryLocalService.addCPDefinitionInventory(
-						newCPDefinitionInventory);
+					CPDefinitionInventoryLocalServiceUtil.
+						addCPDefinitionInventory(newCPDefinitionInventory);
 				}
 
 				// CPDefinitionLink
@@ -702,7 +702,7 @@ public class CPDefinitionLocalServiceImpl
 
 			try {
 				CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
-					_cpDefinitionVirtualSettingLocalService.
+					CPDefinitionVirtualSettingLocalServiceUtil.
 						fetchCPDefinitionVirtualSetting(
 							CPDefinition.class.getName(), cpDefinitionId);
 
@@ -719,7 +719,7 @@ public class CPDefinitionLocalServiceImpl
 					newCPDefinitionVirtualSetting.setModifiedDate(new Date());
 					newCPDefinitionVirtualSetting.setClassPK(newCPDefinitionId);
 
-					_cpDefinitionVirtualSettingLocalService.
+					CPDefinitionVirtualSettingLocalServiceUtil.
 						addCPDefinitionVirtualSetting(
 							newCPDefinitionVirtualSetting);
 				}
@@ -2497,18 +2497,6 @@ public class CPDefinitionLocalServiceImpl
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPDefinitionLocalServiceImpl.class);
-
-	@ServiceReference(type = CPDefinitionGroupedEntryLocalService.class)
-	private CPDefinitionGroupedEntryLocalService
-		_cpDefinitionGroupedEntryLocalService;
-
-	@ServiceReference(type = CPDefinitionInventoryLocalService.class)
-	private CPDefinitionInventoryLocalService
-		_cpDefinitionInventoryLocalService;
-
-	@ServiceReference(type = CPDefinitionVirtualSettingLocalService.class)
-	private CPDefinitionVirtualSettingLocalService
-		_cpDefinitionVirtualSettingLocalService;
 
 	@ServiceReference(type = CPTypeServicesTracker.class)
 	private CPTypeServicesTracker _cpTypeServicesTracker;
