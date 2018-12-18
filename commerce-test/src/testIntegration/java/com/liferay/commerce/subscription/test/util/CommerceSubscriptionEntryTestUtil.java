@@ -14,11 +14,13 @@
 
 package com.liferay.commerce.subscription.test.util;
 
+import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
+import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 
@@ -48,6 +50,16 @@ public class CommerceSubscriptionEntryTestUtil {
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
 			groupId, userId, 0);
+
+		CommerceAddress commerceAddress =
+			CommerceTestUtil.addUserCommerceAddress(groupId, userId);
+
+		commerceOrder.setBillingAddressId(
+			commerceAddress.getCommerceAddressId());
+		commerceOrder.setShippingAddressId(
+			commerceAddress.getCommerceAddressId());
+
+		CommerceOrderLocalServiceUtil.updateCommerceOrder(commerceOrder);
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
