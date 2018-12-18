@@ -24,8 +24,14 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.product.constants.CPActionKeys;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.tax.CommerceTaxCalculation;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -43,8 +49,13 @@ public class CommerceOrderPriceCalculationImpl
 
 	@Override
 	public CommerceOrderPrice getCommerceOrderPrice(
-			CommerceOrder commerceOrder, CommerceContext commerceContext)
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
 		throws PortalException {
+
+		if (secure && !_hasViewPricePermission(commerceContext)) {
+			return null;
+		}
 
 		if (commerceOrder == null) {
 			return _getEmptyCommerceOrderPrice(
@@ -56,8 +67,9 @@ public class CommerceOrderPriceCalculationImpl
 		}
 
 		CommerceMoney subtotalMoney = getSubtotal(
-			commerceOrder, commerceContext);
-		CommerceMoney taxValue = getTaxValue(commerceOrder, commerceContext);
+			commerceOrder, secure, commerceContext);
+		CommerceMoney taxValue = getTaxValue(
+			commerceOrder, secure, commerceContext);
 
 		BigDecimal shippingAmount = commerceOrder.getShippingAmount();
 		BigDecimal subtotalAmount = subtotalMoney.getPrice();
@@ -124,9 +136,22 @@ public class CommerceOrderPriceCalculationImpl
 	}
 
 	@Override
-	public CommerceMoney getSubtotal(
+	public CommerceOrderPrice getCommerceOrderPrice(
 			CommerceOrder commerceOrder, CommerceContext commerceContext)
 		throws PortalException {
+
+		return getCommerceOrderPrice(commerceOrder, true, commerceContext);
+	}
+
+	@Override
+	public CommerceMoney getSubtotal(
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		if (secure && !_hasViewPricePermission(commerceContext)) {
+			return null;
+		}
 
 		BigDecimal subtotal = BigDecimal.ZERO;
 
@@ -152,9 +177,22 @@ public class CommerceOrderPriceCalculationImpl
 	}
 
 	@Override
-	public CommerceMoney getTaxValue(
+	public CommerceMoney getSubtotal(
 			CommerceOrder commerceOrder, CommerceContext commerceContext)
 		throws PortalException {
+
+		return getSubtotal(commerceOrder, true, commerceContext);
+	}
+
+	@Override
+	public CommerceMoney getTaxValue(
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		if (secure && !_hasViewPricePermission(commerceContext)) {
+			return null;
+		}
 
 		if (commerceOrder == null) {
 			_commerceMoneyFactory.create(
@@ -172,9 +210,22 @@ public class CommerceOrderPriceCalculationImpl
 	}
 
 	@Override
-	public CommerceMoney getTotal(
+	public CommerceMoney getTaxValue(
 			CommerceOrder commerceOrder, CommerceContext commerceContext)
 		throws PortalException {
+
+		return getTaxValue(commerceOrder, true, commerceContext);
+	}
+
+	@Override
+	public CommerceMoney getTotal(
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		if (secure && !_hasViewPricePermission(commerceContext)) {
+			return null;
+		}
 
 		if (!commerceOrder.isOpen()) {
 			return _commerceMoneyFactory.create(
@@ -186,6 +237,14 @@ public class CommerceOrderPriceCalculationImpl
 			commerceOrder, commerceContext);
 
 		return commerceOrderPrice.getTotal();
+	}
+
+	@Override
+	public CommerceMoney getTotal(
+			CommerceOrder commerceOrder, CommerceContext commerceContext)
+		throws PortalException {
+
+		return getTotal(commerceOrder, true, commerceContext);
 	}
 
 	private CommerceDiscountValue _createCommerceDiscountValue(
@@ -299,6 +358,25 @@ public class CommerceOrderPriceCalculationImpl
 		return commerceOrderPrice;
 	}
 
+	private boolean _hasViewPricePermission(CommerceContext commerceContext)
+		throws PortalException {
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		Organization organization = commerceContext.getOrganization();
+
+		if (organization != null) {
+			return _portletResourcePermission.contains(
+				permissionChecker, organization.getGroupId(),
+				CPActionKeys.VIEW_PRICE);
+		}
+
+		return _portletResourcePermission.contains(
+			permissionChecker, commerceContext.getSiteGroupId(),
+			CPActionKeys.VIEW_PRICE);
+	}
+
 	@Reference
 	private CommerceDiscountCalculation _commerceDiscountCalculation;
 
@@ -307,5 +385,8 @@ public class CommerceOrderPriceCalculationImpl
 
 	@Reference
 	private CommerceTaxCalculation _commerceTaxCalculation;
+
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
+	private PortletResourcePermission _portletResourcePermission;
 
 }
