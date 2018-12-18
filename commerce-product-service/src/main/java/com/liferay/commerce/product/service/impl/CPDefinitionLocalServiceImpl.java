@@ -43,10 +43,10 @@ import com.liferay.commerce.product.service.base.CPDefinitionLocalServiceBaseImp
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
-import com.liferay.commerce.product.type.grouped.service.persistence.CPDefinitionGroupedEntryPersistence;
+import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
-import com.liferay.commerce.product.type.virtual.service.persistence.CPDefinitionVirtualSettingPersistence;
-import com.liferay.commerce.service.persistence.CPDefinitionInventoryPersistence;
+import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
+import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.dynamic.data.mapping.exception.NoSuchStructureException;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
@@ -109,8 +109,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
-
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
@@ -539,8 +537,9 @@ public class CPDefinitionLocalServiceImpl
 			// CPDefinitionGroupedEntry
 
 			List<CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
-				_cpDefinitionGroupedEntryPersistence.findByCPDefinitionId(
-					cpDefinitionId);
+				_cpDefinitionGroupedEntryLocalService.
+					getCPDefinitionGroupedEntriesByCPDefinitionId(
+						cpDefinitionId);
 
 			for (CPDefinitionGroupedEntry cpDefinitionGroupedEntry :
 					cpDefinitionGroupedEntries) {
@@ -555,26 +554,29 @@ public class CPDefinitionLocalServiceImpl
 				newCPDefinitionGroupedEntry.setCPDefinitionId(
 					newCPDefinitionId);
 
-				_cpDefinitionGroupedEntryPersistence.update(
-					newCPDefinitionGroupedEntry);
+				_cpDefinitionGroupedEntryLocalService.
+					addCPDefinitionGroupedEntry(newCPDefinitionGroupedEntry);
 			}
 
 			// CPDefinitionInventory
 
 			CPDefinitionInventory cpDefinitionInventory =
-				_cpDefinitionInventoryPersistence.findByCPDefinitionId(
-					cpDefinitionId);
+				_cpDefinitionInventoryLocalService.
+					fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
 
-			CPDefinitionInventory newCPDefinitionInventory =
-				(CPDefinitionInventory)cpDefinitionInventory.clone();
+			if (cpDefinitionInventory != null) {
+				CPDefinitionInventory newCPDefinitionInventory =
+					(CPDefinitionInventory)cpDefinitionInventory.clone();
 
-			newCPDefinitionInventory.setUuid(PortalUUIDUtil.generate());
-			newCPDefinitionInventory.setCPDefinitionInventoryId(
-				counterLocalService.increment());
-			newCPDefinitionInventory.setModifiedDate(new Date());
-			newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
+				newCPDefinitionInventory.setUuid(PortalUUIDUtil.generate());
+				newCPDefinitionInventory.setCPDefinitionInventoryId(
+					counterLocalService.increment());
+				newCPDefinitionInventory.setModifiedDate(new Date());
+				newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
 
-			_cpDefinitionInventoryPersistence.update(newCPDefinitionInventory);
+				_cpDefinitionInventoryLocalService.addCPDefinitionInventory(
+					newCPDefinitionInventory);
+			}
 
 			// CPDefinitionLink
 
@@ -684,8 +686,9 @@ public class CPDefinitionLocalServiceImpl
 			// CPDefinitionVirtualSetting
 
 			CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
-				_cpDefinitionVirtualSettingPersistence.fetchByC_C(
-					cpDefinitionClassNameId, cpDefinitionId);
+				_cpDefinitionVirtualSettingLocalService.
+					fetchCPDefinitionVirtualSetting(
+						CPDefinition.class.getName(), cpDefinitionId);
 
 			if (cpDefinitionVirtualSetting != null) {
 				CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
@@ -699,8 +702,9 @@ public class CPDefinitionLocalServiceImpl
 				newCPDefinitionVirtualSetting.setModifiedDate(new Date());
 				newCPDefinitionVirtualSetting.setClassPK(newCPDefinitionId);
 
-				_cpDefinitionVirtualSettingPersistence.update(
-					newCPDefinitionVirtualSetting);
+				_cpDefinitionVirtualSettingLocalService.
+					addCPDefinitionVirtualSetting(
+						newCPDefinitionVirtualSetting);
 			}
 
 			// CPDisplayLayout
@@ -2423,16 +2427,17 @@ public class CPDefinitionLocalServiceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPDefinitionLocalServiceImpl.class);
 
-	@Reference
-	private CPDefinitionGroupedEntryPersistence
-		_cpDefinitionGroupedEntryPersistence;
+	@ServiceReference(type = CPDefinitionGroupedEntryLocalService.class)
+	private CPDefinitionGroupedEntryLocalService
+		_cpDefinitionGroupedEntryLocalService;
 
-	@Reference
-	private CPDefinitionInventoryPersistence _cpDefinitionInventoryPersistence;
+	@ServiceReference(type = CPDefinitionInventoryLocalService.class)
+	private CPDefinitionInventoryLocalService
+		_cpDefinitionInventoryLocalService;
 
-	@Reference
-	private CPDefinitionVirtualSettingPersistence
-		_cpDefinitionVirtualSettingPersistence;
+	@ServiceReference(type = CPDefinitionVirtualSettingLocalService.class)
+	private CPDefinitionVirtualSettingLocalService
+		_cpDefinitionVirtualSettingLocalService;
 
 	@ServiceReference(type = CPTypeServicesTracker.class)
 	private CPTypeServicesTracker _cpTypeServicesTracker;
