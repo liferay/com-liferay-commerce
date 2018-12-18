@@ -34,9 +34,7 @@
 			<site-member-defaults>
 				<action-key>VIEW_PRICE</action-key>
 			</site-member-defaults>
-			<guest-defaults>
-				<action-key>VIEW_PRICE</action-key>
-			</guest-defaults>
+			<guest-defaults />
 			<guest-unsupported>
 				<action-key>ADD_COMMERCE_PRODUCT_DEFINITION</action-key>
 				<action-key>ADD_COMMERCE_PRODUCT_OPTION</action-key>
