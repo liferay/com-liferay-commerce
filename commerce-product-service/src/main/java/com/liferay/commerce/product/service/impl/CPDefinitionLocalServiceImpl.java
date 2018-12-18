@@ -1683,8 +1683,19 @@ public class CPDefinitionLocalServiceImpl
 			long cpDefinitionId, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-			cpDefinitionId);
+		CPDefinition cpDefinition = null;
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+		}
+		else {
+			cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
+				cpDefinitionId);
+		}
 
 		updateStatus(
 			serviceContext.getUserId(), cpDefinitionId,
@@ -1713,8 +1724,19 @@ public class CPDefinitionLocalServiceImpl
 			serviceContext.getUserId(), cpDefinitionId, ignoreSKUCombinations,
 			serviceContext);
 
-		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-			cpDefinitionId);
+		CPDefinition cpDefinition = null;
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+		}
+		else {
+			cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
+				cpDefinitionId);
+		}
 
 		cpDefinition.setIgnoreSKUCombinations(ignoreSKUCombinations);
 
@@ -1744,8 +1766,19 @@ public class CPDefinitionLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-			cpDefinitionId);
+		CPDefinition cpDefinition = null;
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+		}
+		else {
+			cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
+				cpDefinitionId);
+		}
 
 		Date now = new Date();
 
@@ -1875,8 +1908,19 @@ public class CPDefinitionLocalServiceImpl
 			long maxSubscriptionCycles, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-			cpDefinitionId);
+		CPDefinition cpDefinition = null;
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+		}
+		else {
+			cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
+				cpDefinitionId);
+		}
 
 		Date now = new Date();
 
@@ -1898,8 +1942,19 @@ public class CPDefinitionLocalServiceImpl
 			boolean telcoOrElectronics)
 		throws PortalException {
 
-		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-			cpDefinitionId);
+		CPDefinition cpDefinition = null;
+
+		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
+
+			cProductLocalService.updatePublishedDefinitionId(
+				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+		}
+		else {
+			cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
+				cpDefinitionId);
+		}
 
 		cpDefinition.setCPTaxCategoryId(cpTaxCategoryId);
 		cpDefinition.setTaxExempt(taxExempt);
