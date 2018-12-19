@@ -102,7 +102,10 @@ public class CommerceOrderModelResourcePermissionLogic
 	private boolean _containsCheckoutPermission(
 		PermissionChecker permissionChecker, CommerceOrder commerceOrder) {
 
-		if (!commerceOrder.isOpen()) {
+		if (!commerceOrder.isOpen() &&
+			(commerceOrder.getOrderStatus() !=
+				CommerceOrderConstants.ORDER_STATUS_IN_PROGRESS)) {
+
 			return false;
 		}
 
