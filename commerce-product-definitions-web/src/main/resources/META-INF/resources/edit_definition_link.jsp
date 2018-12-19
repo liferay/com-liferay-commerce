@@ -25,7 +25,9 @@ CPDefinitionLink cpDefinitionLink = cpDefinitionLinkDisplayContext.getCPDefiniti
 
 long cpDefinitionLinkId = cpDefinitionLinkDisplayContext.getCPDefinitionLinkId();
 
-CPDefinition cpDefinition2 = cpDefinitionLink.getCPDefinition2();
+CProduct cProduct = cpDefinitionLink.getCProduct();
+
+CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -40,7 +42,7 @@ relatedProductsURL.setParameter("cpDefinitionId", String.valueOf(cpDefinition.ge
 relatedProductsURL.setParameter("screenNavigationCategoryKey", screenNavigationCategoryKey);
 relatedProductsURL.setParameter("type", String.valueOf(cpDefinitionLink.getType()));
 
-String title = cpDefinition2.getName(languageId);
+String title = cProductCPDefinition.getName(languageId);
 
 Map<String, Object> data = new HashMap<>();
 
