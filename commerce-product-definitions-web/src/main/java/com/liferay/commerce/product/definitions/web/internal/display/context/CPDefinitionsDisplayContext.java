@@ -281,45 +281,27 @@ public class CPDefinitionsDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(getRowChecker());
 
-		if (isSearch()) {
-			Sort sort = CPDefinitionsPortletUtil.getCPDefinitionSort(
-				getOrderByCol(), getOrderByType());
+		Sort sort = CPDefinitionsPortletUtil.getCPDefinitionSort(
+			getOrderByCol(), getOrderByType());
 
-			String filterFields = ParamUtil.getString(
-				httpServletRequest, "filterFields");
+		String filterFields = ParamUtil.getString(
+			httpServletRequest, "filterFields");
 
-			String filtersValues = ParamUtil.getString(
-				httpServletRequest, "filtersValues");
+		String filtersValues = ParamUtil.getString(
+			httpServletRequest, "filtersValues");
 
-			BaseModelSearchResult<CPDefinition>
-				cpDefinitionBaseModelSearchResult =
-					_cpDefinitionService.searchCPDefinitions(
-						themeDisplay.getCompanyId(),
-						themeDisplay.getScopeGroupId(), getKeywords(),
-						filterFields, filtersValues, searchContainer.getStart(),
-						searchContainer.getEnd(), sort);
+		BaseModelSearchResult<CPDefinition>
+			cpDefinitionBaseModelSearchResult =
+				_cpDefinitionService.searchCPDefinitions(
+					themeDisplay.getCompanyId(),
+					themeDisplay.getScopeGroupId(), getKeywords(),
+					filterFields, filtersValues, searchContainer.getStart(),
+					searchContainer.getEnd(), sort);
 
-			searchContainer.setTotal(
-				cpDefinitionBaseModelSearchResult.getLength());
-			searchContainer.setResults(
-				cpDefinitionBaseModelSearchResult.getBaseModels());
-		}
-		else {
-			int total = _cpDefinitionService.getCPDefinitionsCount(
-				themeDisplay.getScopeGroupId(), null,
-				themeDisplay.getLanguageId(), WorkflowConstants.STATUS_ANY);
-
-			searchContainer.setTotal(total);
-
-			List<CPDefinition> cpDefinitions =
-				_cpDefinitionService.getCPDefinitions(
-					themeDisplay.getScopeGroupId(), null,
-					themeDisplay.getLanguageId(), WorkflowConstants.STATUS_ANY,
-					searchContainer.getStart(), searchContainer.getEnd(),
-					orderByComparator);
-
-			searchContainer.setResults(cpDefinitions);
-		}
+		searchContainer.setTotal(
+			cpDefinitionBaseModelSearchResult.getLength());
+		searchContainer.setResults(
+			cpDefinitionBaseModelSearchResult.getBaseModels());
 
 		return searchContainer;
 	}
