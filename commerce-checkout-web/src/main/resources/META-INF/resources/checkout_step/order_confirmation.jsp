@@ -38,7 +38,7 @@ if (commerceOrderPayment != null) {
 				String taglibValue = "retry";
 
 				if (paymentStatus == CommerceOrderPaymentConstants.STATUS_CANCELLED) {
-					taglibMessageKey = "your-payment-has-been-canceled";
+					taglibMessageKey = "your-payment-has-been-cancelled";
 					taglibValue = "pay-now";
 				}
 				%>

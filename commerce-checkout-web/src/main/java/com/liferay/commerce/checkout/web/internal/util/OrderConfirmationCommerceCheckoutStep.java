@@ -80,10 +80,6 @@ public class OrderConfirmationCommerceCheckoutStep
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceOrder.class.getName(), actionRequest);
 
-		actionResponse.setRenderParameter(
-			"order_confirmation.jsp-commerceOrderId",
-			String.valueOf(commerceOrderId));
-
 		_actionHelper.startPayment(
 			commerceOrderId, actionRequest, actionResponse, serviceContext);
 	}
