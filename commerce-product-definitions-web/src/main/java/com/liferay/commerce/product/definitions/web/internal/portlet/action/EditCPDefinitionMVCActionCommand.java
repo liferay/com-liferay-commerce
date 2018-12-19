@@ -134,7 +134,8 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 				CPDefinition cpDefinition = updateCPDefinition(actionRequest);
 
 				String redirect = getSaveAndContinueRedirect(
-					actionRequest, cpDefinition);
+					actionRequest, cpDefinition,
+					CPDefinitionScreenNavigationConstants.CATEGORY_KEY_DETAILS);
 
 				sendRedirect(actionRequest, actionResponse, redirect);
 			}
@@ -145,7 +146,14 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 				deleteCPDefinitions(actionRequest, true);
 			}
 			else if (cmd.equals("updateCategorization")) {
-				updateCategorization(actionRequest);
+				CPDefinition cpDefinition = updateCategorization(actionRequest);
+
+				String redirect = getSaveAndContinueRedirect(
+					actionRequest, cpDefinition,
+					CPDefinitionScreenNavigationConstants.
+						CATEGORY_KEY_CATEGORIZATION);
+
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else if (cmd.equals("updateCPDisplayLayout")) {
 				updateCPDisplayLayout(actionRequest);
@@ -245,7 +253,8 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	protected String getSaveAndContinueRedirect(
-			ActionRequest actionRequest, CPDefinition cpDefinition)
+			ActionRequest actionRequest, CPDefinition cpDefinition,
+			String screenNavigationCategoryKey)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -260,8 +269,7 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 		portletURL.setParameter(
 			"cpDefinitionId", String.valueOf(cpDefinition.getCPDefinitionId()));
 		portletURL.setParameter(
-			"screenNavigationCategoryKey",
-			CPDefinitionScreenNavigationConstants.CATEGORY_KEY_DETAILS);
+			"screenNavigationCategoryKey", screenNavigationCategoryKey);
 
 		return portletURL.toString();
 	}
@@ -277,7 +285,7 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
-	protected void updateCategorization(ActionRequest actionRequest)
+	protected CPDefinition updateCategorization(ActionRequest actionRequest)
 		throws PortalException {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -286,7 +294,7 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 		long cpDefinitionId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionId");
 
-		_cpDefinitionService.updateCPDefinitionCategorization(
+		return _cpDefinitionService.updateCPDefinitionCategorization(
 			cpDefinitionId, serviceContext);
 	}
 
