@@ -140,14 +140,16 @@ PortletURL portletURL = cpDefinitionLinkDisplayContext.getPortletURL();
 								rowURL.setParameter("cpDefinitionLinkId", String.valueOf(cpDefinitionLink.getCPDefinitionLinkId()));
 								rowURL.setParameter("type", String.valueOf(cpDefinitionLink.getType()));
 
-								CPDefinition cpDefinition2 = cpDefinitionLink.getCPDefinition2();
+								CProduct cProduct = cpDefinitionLink.getCProduct();
+
+								CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
 								%>
 
 								<liferay-ui:search-container-column-text
 									cssClass="important table-cell-content"
 									href="<%= rowURL %>"
 									name="name"
-									value="<%= HtmlUtil.escape(cpDefinition2.getName(languageId)) %>"
+									value="<%= HtmlUtil.escape(cProductCPDefinition.getName(languageId)) %>"
 								/>
 
 								<liferay-ui:search-container-column-text

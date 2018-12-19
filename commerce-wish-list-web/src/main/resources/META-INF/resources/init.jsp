@@ -26,6 +26,8 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.commerce.product.model.CPDefinition" %><%@
+page import="com.liferay.commerce.product.model.CPInstance" %><%@
+page import="com.liferay.commerce.product.model.CProduct" %><%@
 page import="com.liferay.commerce.wish.list.constants.CommerceWishListPortletKeys" %><%@
 page import="com.liferay.commerce.wish.list.exception.CommerceWishListNameException" %><%@
 page import="com.liferay.commerce.wish.list.exception.NoSuchWishListException" %><%@
