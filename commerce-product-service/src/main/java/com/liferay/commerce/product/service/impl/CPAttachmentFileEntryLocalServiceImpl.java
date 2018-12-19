@@ -108,17 +108,13 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			cpAttachmentFileEntryPersistence.create(cpAttachmentFileEntryId);
 
-		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
-			CPDefinition.class);
-
-		if ((cpAttachmentFileEntry.getClassNameId() ==
-				cpDefinitionClassNameId) &&
-			cpDefinitionLocalService.isPublishedCPDefinition(
-				cpAttachmentFileEntry.getClassPK())) {
+		if ((classNameId ==
+				classNameLocalService.getClassNameId(CPDefinition.class)) &&
+			cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
 
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
-					cpAttachmentFileEntry.getClassPK());
+					classPK);
 
 			cProductLocalService.updatePublishedDefinitionId(
 				newCPDefinition.getCProductId(),
@@ -466,28 +462,6 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			cpAttachmentFileEntryPersistence.findByPrimaryKey(
 				cpAttachmentFileEntryId);
-
-		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
-			CPDefinition.class);
-
-		if ((cpAttachmentFileEntry.getClassNameId() ==
-				cpDefinitionClassNameId) &&
-			cpDefinitionLocalService.isPublishedCPDefinition(
-				cpAttachmentFileEntry.getClassPK())) {
-
-			CPDefinition newCPDefinition =
-				cpDefinitionLocalService.copyCPDefinition(
-					cpAttachmentFileEntry.getClassPK());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
-			cpAttachmentFileEntry =
-				cpAttachmentFileEntryPersistence.findByU_C_C(
-					cpAttachmentFileEntry.getUuid(), cpDefinitionClassNameId,
-					newCPDefinition.getCPDefinitionId());
-		}
 
 		if ((status == WorkflowConstants.STATUS_APPROVED) &&
 			(cpAttachmentFileEntry.getDisplayDate() != null) &&
