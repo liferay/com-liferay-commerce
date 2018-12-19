@@ -22,6 +22,9 @@ CommerceWishListDisplayContext commerceWishListDisplayContext = (CommerceWishLis
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceWishListItem commerceWishListItem = (CommerceWishListItem)row.getObject();
+
+CPInstance cpInstance = commerceWishListItem.fetchCPInstance();
+CProduct cProduct = commerceWishListItem.getCProduct();
 %>
 
 <c:choose>
@@ -50,13 +53,13 @@ CommerceWishListItem commerceWishListItem = (CommerceWishListItem)row.getObject(
 		<c:choose>
 			<c:when test="<%= commerceWishListItem.isIgnoreSKUCombinations() %>">
 				<liferay-commerce-cart:add-to-cart
-					CPDefinitionId="<%= commerceWishListItem.getCPDefinitionId() %>"
-					CPInstanceId="<%= commerceWishListItem.getCPInstanceId() %>"
+					CPDefinitionId="<%= cProduct.getPublishedDefinitionId() %>"
+					CPInstanceId="<%= (cpInstance != null) ? cpInstance.getCPInstanceId() : 0 %>"
 					elementClasses="btn-lg btn-primary"
 				/>
 			</c:when>
 			<c:otherwise>
-				<aui:button cssClass="btn-primary" href="<%= commerceWishListDisplayContext.getCPDefinitionURL(commerceWishListItem.getCPDefinitionId(), themeDisplay) %>" name="selectOptions" value="select-options" />
+				<aui:button cssClass="btn-primary" href="<%= commerceWishListDisplayContext.getCPDefinitionURL(cProduct.getPublishedDefinitionId(), themeDisplay) %>" name="selectOptions" value="select-options" />
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>

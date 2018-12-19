@@ -119,17 +119,19 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 			<%
 			for (CPDefinitionGroupedEntry cpDefinitionGroupedEntry : groupedCPTypeHelper.getCPDefinitionGroupedEntry(cpDefinitionId)) {
-				CPDefinition curCPDefinition = cpDefinitionGroupedEntry.getEntryCPDefinition();
+				CProduct cProduct = cpDefinitionGroupedEntry.getCProduct();
+
+				CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
 			%>
 
 				<div class="row">
 					<div class="col-md-4">
-						<img class="img-responsive" src="<%= curCPDefinition.getDefaultImageThumbnailSrc(themeDisplay) %>">
+						<img class="img-responsive" src="<%= cProductCPDefinition.getDefaultImageThumbnailSrc(themeDisplay) %>">
 					</div>
 
 					<div class="col-md-8">
 						<h5>
-							<%= curCPDefinition.getName(LocaleUtil.toLanguageId(locale)) %>
+							<%= cProductCPDefinition.getName(LocaleUtil.toLanguageId(locale)) %>
 						</h5>
 
 						<h6>

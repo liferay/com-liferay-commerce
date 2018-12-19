@@ -22,7 +22,10 @@ CPDefinitionGroupedEntriesDisplayContext cpDefinitionGroupedEntriesDisplayContex
 CPDefinitionGroupedEntry cpDefinitionGroupedEntry = cpDefinitionGroupedEntriesDisplayContext.getCPDefinitionGroupedEntry();
 
 CPDefinition cpDefinition = cpDefinitionGroupedEntry.getCPDefinition();
-CPDefinition entryCPDefinition = cpDefinitionGroupedEntry.getEntryCPDefinition();
+
+CProduct cProduct = cpDefinitionGroupedEntry.getCProduct();
+
+CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
 
 PortletURL groupedProductsURL = renderResponse.createRenderURL();
 
@@ -33,7 +36,7 @@ groupedProductsURL.setParameter("screenNavigationCategoryKey", cpDefinitionGroup
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(groupedProductsURL.toString());
 
-renderResponse.setTitle(cpDefinition.getName(themeDisplay.getLanguageId()) + " - " + entryCPDefinition.getName(themeDisplay.getLanguageId()));
+renderResponse.setTitle(cpDefinition.getName(themeDisplay.getLanguageId()) + " - " + cProductCPDefinition.getName(themeDisplay.getLanguageId()));
 %>
 
 <portlet:actionURL name="editCPDefinitionGroupedEntry" var="editCPDefinitionGroupedEntryActionURL">

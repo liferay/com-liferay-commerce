@@ -46,7 +46,7 @@ CPInstance cpInstance = commercePriceEntry.getCPInstance();
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="commercePriceEntryId" value="<%= String.valueOf(commercePriceEntry.getCommercePriceEntryId()) %>" />
 			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpInstance.getCPDefinitionId()) %>" />
-			<portlet:param name="cpInstanceId" value="<%= String.valueOf(commercePriceEntry.getCPInstanceId()) %>" />
+			<portlet:param name="cpInstanceId" value="<%= String.valueOf(cpInstance.getCPInstanceId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
@@ -58,7 +58,7 @@ CPInstance cpInstance = commercePriceEntry.getCPInstance();
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="commercePriceEntryId" value="<%= String.valueOf(commercePriceEntry.getCommercePriceEntryId()) %>" />
-			<portlet:param name="cpInstanceId" value="<%= String.valueOf(commercePriceEntry.getCPInstanceId()) %>" />
+			<portlet:param name="cpInstanceId" value="<%= String.valueOf(cpInstance.getCPInstanceId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete
