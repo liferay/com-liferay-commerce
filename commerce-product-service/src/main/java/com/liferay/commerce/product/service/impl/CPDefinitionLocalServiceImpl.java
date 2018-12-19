@@ -493,6 +493,25 @@ public class CPDefinitionLocalServiceImpl
 
 			cpDefinitionPersistence.update(newCPDefinition);
 
+			long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
+				CPDefinition.class);
+
+			// AssetEntry
+
+			AssetEntry assetEntry =	assetEntryLocalService.fetchEntry(
+					cpDefinitionClassNameId, cpDefinitionId);
+
+			if (assetEntry != null) {
+				AssetEntry newAssetEntry =
+					(AssetEntry)assetEntry.clone();
+
+				newAssetEntry.setEntryId(counterLocalService.increment());
+				newAssetEntry.setModifiedDate(new Date());
+				newAssetEntry.setClassPK(newCPDefinitionId);
+
+				assetEntryLocalService.updateAssetEntry(newAssetEntry);
+			}
+
 			// CPDefinitionLocalization
 
 			List<CPDefinitionLocalization> cpDefinitionLocalizations =
@@ -515,9 +534,6 @@ public class CPDefinitionLocalServiceImpl
 			}
 
 			// CPAttachmentFileEntry
-
-			long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
-				CPDefinition.class);
 
 			List<CPAttachmentFileEntry> cpAttachmentFileEntries =
 				cpAttachmentFileEntryPersistence.findByC_C(
@@ -1691,18 +1707,19 @@ public class CPDefinitionLocalServiceImpl
 			long cpDefinitionId, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPDefinition cpDefinition = null;
+		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
+			cpDefinitionId);
 
 		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 
 			cProductLocalService.updatePublishedDefinitionId(
 				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
-		}
-		else {
-			cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-				cpDefinitionId);
+
+			cpDefinitionId = cpDefinition.getCPDefinitionId();
+
 		}
 
 		updateStatus(
@@ -1782,10 +1799,7 @@ public class CPDefinitionLocalServiceImpl
 
 			cProductLocalService.updatePublishedDefinitionId(
 				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
-		}
-		else {
-			cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-				cpDefinitionId);
+
 		}
 
 		Date now = new Date();
