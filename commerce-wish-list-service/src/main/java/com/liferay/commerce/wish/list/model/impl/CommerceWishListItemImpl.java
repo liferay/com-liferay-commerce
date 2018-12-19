@@ -18,8 +18,10 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
+import com.liferay.commerce.product.service.CProductLocalServiceUtil;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.service.CommerceWishListLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -33,14 +35,10 @@ public class CommerceWishListItemImpl extends CommerceWishListItemBaseImpl {
 	public CommerceWishListItemImpl() {
 	}
 
-	/**
-	 * @deprecated As of Judson (7.1.x)
-	 */
-	@Deprecated
 	@Override
 	public CPInstance fetchCPInstance() throws PortalException {
-		return CPInstanceLocalServiceUtil.getCPInstanceByUuidAndGroupId(
-			getCPInstanceUuid(), getGroupId());
+		return CPInstanceLocalServiceUtil.fetchCProductInstance(
+			getCProductId(), getCPInstanceUuid());
 	}
 
 	@Override
@@ -49,16 +47,17 @@ public class CommerceWishListItemImpl extends CommerceWishListItemBaseImpl {
 			getCommerceWishListId());
 	}
 
-	/**
-	 * @deprecated As of Judson (7.1.x)
-	 */
-	@Deprecated
 	@Override
 	public CPDefinition getCPDefinition() throws PortalException {
-		CPInstance cpInstance = fetchCPInstance();
+		CProduct cProduct = getCProduct();
 
 		return CPDefinitionLocalServiceUtil.getCPDefinition(
-			cpInstance.getCPDefinitionId());
+			cProduct.getPublishedDefinitionId());
+	}
+
+	@Override
+	public CProduct getCProduct() throws PortalException {
+		return CProductLocalServiceUtil.getCProduct(getCProductId());
 	}
 
 	@Override

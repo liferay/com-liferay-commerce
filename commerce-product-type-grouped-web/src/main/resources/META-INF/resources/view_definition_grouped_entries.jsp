@@ -141,14 +141,16 @@ renderResponse.setTitle(cpDefinition.getName(themeDisplay.getLanguageId()));
 							rowURL.setParameter("cpDefinitionId", String.valueOf(cpDefinitionGroupedEntry.getCPDefinitionId()));
 							rowURL.setParameter("cpDefinitionGroupedEntryId", String.valueOf(cpDefinitionGroupedEntry.getCPDefinitionGroupedEntryId()));
 
-							CPDefinition entryCPDefinition = cpDefinitionGroupedEntry.getEntryCPDefinition();
+							CProduct cProduct = cpDefinitionGroupedEntry.getCProduct();
+
+							CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
 							%>
 
 							<liferay-ui:search-container-column-text
 								cssClass="important table-cell-content"
 								href="<%= rowURL %>"
 								name="name"
-								value="<%= HtmlUtil.escape(entryCPDefinition.getName(themeDisplay.getLanguageId())) %>"
+								value="<%= HtmlUtil.escape(cProductCPDefinition.getName(themeDisplay.getLanguageId())) %>"
 							/>
 
 							<liferay-ui:search-container-column-text

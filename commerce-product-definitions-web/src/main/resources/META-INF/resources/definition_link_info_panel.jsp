@@ -32,7 +32,9 @@ if (cpDefinitionLinks == null) {
 
 		request.setAttribute("info_panel.jsp-entry", cpDefinitionLink);
 
-		CPDefinition cpDefinition2 = cpDefinitionLink.getCPDefinition2();
+		CProduct cProduct = cpDefinitionLink.getCProduct();
+
+		CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
 		%>
 
 		<div class="sidebar-header">
@@ -42,14 +44,14 @@ if (cpDefinitionLinks == null) {
 				</li>
 			</ul>
 
-			<h4><%= HtmlUtil.escape(cpDefinition2.getName(languageId)) %></h4>
+			<h4><%= HtmlUtil.escape(cProductCPDefinition.getName(languageId)) %></h4>
 		</div>
 
 		<div class="sidebar-body">
 			<h5><liferay-ui:message key="product-id" /></h5>
 
 			<p>
-				<%= HtmlUtil.escape(String.valueOf(cpDefinition2.getCPDefinitionId())) %>
+				<%= HtmlUtil.escape(String.valueOf(cProduct.getPublishedDefinitionId())) %>
 			</p>
 		</div>
 	</c:when>
