@@ -41,7 +41,7 @@ else {
 	>
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editCPDefinitionLink" />
-			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionId1()) %>" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionId()) %>" />
 			<portlet:param name="cpDefinitionLinkId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionLinkId()) %>" />
 			<portlet:param name="type" value="<%= String.valueOf(cpDefinitionLink.getType()) %>" />
 		</portlet:renderURL>
@@ -54,7 +54,7 @@ else {
 		<portlet:actionURL name="editCPDefinitionLink" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionId1()) %>" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionId()) %>" />
 			<portlet:param name="cpDefinitionLinkId" value="<%= String.valueOf(cpDefinitionLink.getCPDefinitionLinkId()) %>" />
 			<portlet:param name="type" value="<%= String.valueOf(cpDefinitionLink.getType()) %>" />
 		</portlet:actionURL>

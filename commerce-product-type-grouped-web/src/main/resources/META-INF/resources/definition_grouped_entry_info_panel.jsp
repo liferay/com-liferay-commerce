@@ -30,7 +30,9 @@ if (cpDefinitionGroupedEntries == null) {
 		<%
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry = cpDefinitionGroupedEntries.get(0);
 
-		CPDefinition entryCPDefinition = cpDefinitionGroupedEntry.getEntryCPDefinition();
+		CProduct cProduct = cpDefinitionGroupedEntry.getCProduct();
+
+		CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
 
 		request.setAttribute("info_panel.jsp-entry", cpDefinitionGroupedEntry);
 		%>
@@ -42,7 +44,7 @@ if (cpDefinitionGroupedEntries == null) {
 				</li>
 			</ul>
 
-			<h4><%= HtmlUtil.escape(entryCPDefinition.getName(themeDisplay.getLanguageId())) %></h4>
+			<h4><%= HtmlUtil.escape(cProductCPDefinition.getName(themeDisplay.getLanguageId())) %></h4>
 		</div>
 
 		<div class="sidebar-body">
