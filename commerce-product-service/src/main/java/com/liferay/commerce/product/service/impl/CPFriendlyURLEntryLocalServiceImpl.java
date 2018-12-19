@@ -245,25 +245,6 @@ public class CPFriendlyURLEntryLocalServiceImpl
 		CPFriendlyURLEntry cpFriendlyURLEntry = createCPFriendlyURLEntry(
 			cpFriendlyURLEntryId);
 
-		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
-			CPDefinition.class);
-
-		if ((cpFriendlyURLEntry.getClassNameId() ==
-				cpDefinitionClassNameId) &&
-			cpDefinitionLocalService.isPublishedCPDefinition(
-				cpFriendlyURLEntry.getClassPK())) {
-
-			CPDefinition newCPDefinition =
-				cpDefinitionLocalService.copyCPDefinition(
-					cpFriendlyURLEntry.getClassPK());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
-			classPK = newCPDefinition.getCPDefinitionId();
-		}
-
 		cpFriendlyURLEntry.setGroupId(groupId);
 		cpFriendlyURLEntry.setCompanyId(companyId);
 		cpFriendlyURLEntry.setClassNameId(classNameId);

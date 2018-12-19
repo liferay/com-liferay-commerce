@@ -475,6 +475,10 @@ public class CPDefinitionLocalServiceImpl
 			CPDefinition newCPDefinition =
 				(CPDefinition)originalCPDefinition.clone();
 
+			originalCPDefinition.setPublished(false);
+
+			cpDefinitionPersistence.update(originalCPDefinition);
+
 			newCPDefinition.setUuid(PortalUUIDUtil.generate());
 
 			long newCPDefinitionId = counterLocalService.increment();
@@ -484,6 +488,8 @@ public class CPDefinitionLocalServiceImpl
 			newCPDefinition.setModifiedDate(new Date());
 
 			newCPDefinition.setVersion(originalCPDefinition.getVersion() + 1);
+
+			newCPDefinition.setPublished(true);
 
 			cpDefinitionPersistence.update(newCPDefinition);
 
@@ -1575,6 +1581,8 @@ public class CPDefinitionLocalServiceImpl
 
 			cProductLocalService.updatePublishedDefinitionId(
 				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+
+			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
 
 		cpDefinition.setIgnoreSKUCombinations(ignoreSKUCombinations);
