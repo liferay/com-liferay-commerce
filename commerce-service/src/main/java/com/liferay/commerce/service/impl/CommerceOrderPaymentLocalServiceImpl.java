@@ -86,8 +86,8 @@ public class CommerceOrderPaymentLocalServiceImpl
 			commerceOrder.getCommerceOrderId());
 		commerceOrderPayment.setCommercePaymentMethodKey(
 			commerceOrder.getCommercePaymentMethodKey());
-		commerceOrderPayment.setStatus(status);
 		commerceOrderPayment.setContent(result);
+		commerceOrderPayment.setStatus(status);
 
 		return commerceOrderPaymentPersistence.update(commerceOrderPayment);
 	}
