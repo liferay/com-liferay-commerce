@@ -58,12 +58,10 @@ public class MoneyOrderCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 	@Override
 	public boolean isActive(
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse)
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		long commerceOrderId = ParamUtil.getLong(
-			httpServletRequest, "commerceOrderId");
+		long commerceOrderId = ParamUtil.getLong(request, "commerceOrderId");
 
 		CommerceOrder commerceOrder;
 
@@ -73,7 +71,7 @@ public class MoneyOrderCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 		}
 		else {
 			commerceOrder = _commerceOrderHttpHelper.getCurrentCommerceOrder(
-				httpServletRequest);
+				request);
 		}
 
 		if (MoneyOrderCommercePaymentMethod.KEY.equals(
@@ -92,8 +90,7 @@ public class MoneyOrderCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 	@Override
 	public boolean isVisible(
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse)
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		return false;
@@ -106,23 +103,20 @@ public class MoneyOrderCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 	}
 
 	@Override
-	public void render(
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse)
+	public void render(HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		MoneyOrderCheckoutStepDisplayContext
 			moneyOrderCheckoutStepDisplayContext =
 				new MoneyOrderCheckoutStepDisplayContext(
-					_commerceOrderService, _configurationProvider,
-					httpServletRequest);
+					_commerceOrderService, _configurationProvider, request);
 
-		httpServletRequest.setAttribute(
+		request.setAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
 			moneyOrderCheckoutStepDisplayContext);
 
 		_jspRenderer.renderJSP(
-			_servletContext, httpServletRequest, httpServletResponse,
+			_servletContext, request, response,
 			"/checkout_step/money_order.jsp");
 	}
 
