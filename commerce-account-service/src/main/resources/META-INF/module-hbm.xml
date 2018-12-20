@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="com.liferay.commerce.account.model.CommerceAccount" />
+	<import class="com.liferay.commerce.account.model.CommerceAccountOrganizationRel" />
+	<import class="com.liferay.commerce.account.model.CommerceAccountUserRel" />
+	<class name="com.liferay.commerce.account.model.impl.CommerceAccountImpl" table="CommerceAccount">
+		<id name="commerceAccountId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="externalReferenceCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="parentCommerceAccountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="taxId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property column="active_" name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImpl" table="CommerceAccountOrganizationRel">
+		<composite-id class="com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK" name="primaryKey">
+			<key-property name="commerceAccountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.liferay.commerce.account.model.impl.CommerceAccountUserRelImpl" table="CommerceAccountUserRel">
+		<composite-id class="com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK" name="primaryKey">
+			<key-property name="commerceAccountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>
