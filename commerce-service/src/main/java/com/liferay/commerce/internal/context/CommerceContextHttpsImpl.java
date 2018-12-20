@@ -41,7 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceContextHttpsImpl implements CommerceContext {
 
 	public CommerceContextHttpsImpl(
-		HttpServletRequest request,
+		HttpServletRequest httpServletRequest,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceDiscountCouponCodeHelper commerceDiscountCouponCodeHelper,
 		CommerceOrderHttpHelper commerceOrderHttpHelper,
@@ -50,7 +50,7 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 		CommerceUserSegmentHelper commerceUserSegmentHelper,
 		CPRuleLocalService cpRuleLocalService, Portal portal) {
 
-		_request = request;
+		_httpServletRequest = httpServletRequest;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceDiscountCouponCodeHelper = commerceDiscountCouponCodeHelper;
 		_commerceOrderHttpHelper = commerceOrderHttpHelper;
@@ -67,7 +67,7 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 			return _commerceCurrency;
 		}
 
-		long groupId = _portal.getScopeGroupId(_request);
+		long groupId = _portal.getScopeGroupId(_httpServletRequest);
 
 		_commerceCurrency =
 			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(groupId);
@@ -82,7 +82,7 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 		}
 
 		_commerceOrder = _commerceOrderHttpHelper.getCurrentCommerceOrder(
-			_request);
+			_httpServletRequest);
 
 		return _commerceOrder;
 	}
@@ -95,7 +95,7 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 			return _commercePriceList;
 		}
 
-		long groupId = _portal.getScopeGroupId(_request);
+		long groupId = _portal.getScopeGroupId(_httpServletRequest);
 
 		_commercePriceList =
 			_commercePriceListLocalService.getCommercePriceList(
@@ -111,7 +111,8 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 		}
 
 		_commerceUserSegmentEntryIds =
-			_commerceUserSegmentHelper.getCommerceUserSegmentIds(_request);
+			_commerceUserSegmentHelper.getCommerceUserSegmentIds(
+				_httpServletRequest);
 
 		return _commerceUserSegmentEntryIds;
 	}
@@ -119,7 +120,7 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 	@Override
 	public String getCouponCode() throws PortalException {
 		return _commerceDiscountCouponCodeHelper.getCommerceDiscountCouponCode(
-			_request);
+			_httpServletRequest);
 	}
 
 	@Override
@@ -128,7 +129,7 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 			return _cpRules;
 		}
 
-		long groupId = _portal.getScopeGroupId(_request);
+		long groupId = _portal.getScopeGroupId(_httpServletRequest);
 
 		_cpRules = _cpRuleLocalService.getCPRules(
 			groupId, getCommerceUserSegmentEntryIds());
@@ -143,19 +144,19 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 		}
 
 		_organization = _commerceOrganizationHelper.getCurrentOrganization(
-			_request);
+			_httpServletRequest);
 
 		return _organization;
 	}
 
 	@Override
 	public long getSiteGroupId() throws PortalException {
-		return _portal.getScopeGroupId(_request);
+		return _portal.getScopeGroupId(_httpServletRequest);
 	}
 
 	@Override
 	public long getUserId() {
-		return _portal.getUserId(_request);
+		return _portal.getUserId(_httpServletRequest);
 	}
 
 	private CommerceCurrency _commerceCurrency;
@@ -171,8 +172,8 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 	private final CommerceUserSegmentHelper _commerceUserSegmentHelper;
 	private final CPRuleLocalService _cpRuleLocalService;
 	private List<CPRule> _cpRules;
+	private final HttpServletRequest _httpServletRequest;
 	private Organization _organization;
 	private final Portal _portal;
-	private final HttpServletRequest _request;
 
 }

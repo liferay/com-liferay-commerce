@@ -26,8 +26,9 @@ import javax.servlet.http.HttpServletRequest;
 public interface CommercePaymentRequestProvider {
 
 	public CommercePaymentRequest getCommercePaymentRequest(
-			String cancelUrl, long commerceOrderId, HttpServletRequest request,
-			Locale locale, String returnUrl, String transactionId)
+			String cancelUrl, long commerceOrderId,
+			HttpServletRequest httpServletRequest, Locale locale,
+			String returnUrl, String transactionId)
 		throws PortalException;
 
 }

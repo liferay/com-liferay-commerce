@@ -92,7 +92,9 @@ public class PayPalCommercePaymentMethodConfigurationScreenNavigationEntry
 	}
 
 	@Override
-	public void render(HttpServletRequest request, HttpServletResponse response)
+	public void render(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
 		throws IOException {
 
 		try {
@@ -100,13 +102,13 @@ public class PayPalCommercePaymentMethodConfigurationScreenNavigationEntry
 				_configurationProvider.getConfiguration(
 					PayPalGroupServiceConfiguration.class,
 					new ParameterMapSettingsLocator(
-						request.getParameterMap(),
+						httpServletRequest.getParameterMap(),
 						new GroupServiceSettingsLocator(
-							_portal.getScopeGroupId(request),
+							_portal.getScopeGroupId(httpServletRequest),
 							PayPalCommercePaymentMethodConstants.
 								SERVICE_NAME)));
 
-			request.setAttribute(
+			httpServletRequest.setAttribute(
 				PayPalGroupServiceConfiguration.class.getName(),
 				payPalGroupServiceConfiguration);
 		}
@@ -115,7 +117,8 @@ public class PayPalCommercePaymentMethodConfigurationScreenNavigationEntry
 		}
 
 		_jspRenderer.renderJSP(
-			_servletContext, request, response, "/configuration.jsp");
+			_servletContext, httpServletRequest, httpServletResponse,
+			"/configuration.jsp");
 	}
 
 	@Reference

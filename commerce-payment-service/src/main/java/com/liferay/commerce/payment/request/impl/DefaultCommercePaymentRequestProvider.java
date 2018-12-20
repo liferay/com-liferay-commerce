@@ -43,8 +43,9 @@ public class DefaultCommercePaymentRequestProvider
 
 	@Override
 	public CommercePaymentRequest getCommercePaymentRequest(
-			String cancelUrl, long commerceOrderId, HttpServletRequest request,
-			Locale locale, String returnUrl, String transactionId)
+			String cancelUrl, long commerceOrderId,
+			HttpServletRequest httpServletRequest, Locale locale,
+			String returnUrl, String transactionId)
 		throws PortalException {
 
 		CommerceOrder commerceOrder =

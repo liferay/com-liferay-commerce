@@ -98,12 +98,14 @@ public class PaymentMethodsCommerceAdminModule implements CommerceAdminModule {
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCurrenciesDisplayContext);
 
-		HttpServletRequest request = _portal.getHttpServletRequest(
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			renderRequest);
-		HttpServletResponse response = _portal.getHttpServletResponse(
-			renderResponse);
+		HttpServletResponse httpServletResponse =
+			_portal.getHttpServletResponse(renderResponse);
 
-		_jspRenderer.renderJSP(_servletContext, request, response, "/view.jsp");
+		_jspRenderer.renderJSP(
+			_servletContext, httpServletRequest, httpServletResponse,
+			"/view.jsp");
 	}
 
 	@Reference

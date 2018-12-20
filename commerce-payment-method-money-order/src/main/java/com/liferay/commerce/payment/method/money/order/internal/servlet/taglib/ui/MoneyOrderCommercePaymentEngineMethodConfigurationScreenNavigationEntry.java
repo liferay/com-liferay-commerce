@@ -94,7 +94,9 @@ public class
 	}
 
 	@Override
-	public void render(HttpServletRequest request, HttpServletResponse response)
+	public void render(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
 		throws IOException {
 
 		try {
@@ -103,13 +105,13 @@ public class
 					_configurationProvider.getConfiguration(
 						MoneyOrderGroupServiceConfiguration.class,
 						new ParameterMapSettingsLocator(
-							request.getParameterMap(),
+							httpServletRequest.getParameterMap(),
 							new GroupServiceSettingsLocator(
-								_portal.getScopeGroupId(request),
+								_portal.getScopeGroupId(httpServletRequest),
 								MoneyOrderCommercePaymentEngineMethodConstants.
 									SERVICE_NAME)));
 
-			request.setAttribute(
+			httpServletRequest.setAttribute(
 				MoneyOrderGroupServiceConfiguration.class.getName(),
 				moneyOrderGroupServiceConfiguration);
 		}
@@ -118,7 +120,8 @@ public class
 		}
 
 		_jspRenderer.renderJSP(
-			_servletContext, request, response, "/configuration.jsp");
+			_servletContext, httpServletRequest, httpServletResponse,
+			"/configuration.jsp");
 	}
 
 	@Reference
