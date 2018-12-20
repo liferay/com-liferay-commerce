@@ -39,10 +39,7 @@ public class CommerceOrderPaymentLocalServiceImpl
 
 		User user = userLocalService.getUser(commerceOrder.getUserId());
 
-		CommerceOrderPayment commerceOrderPayment = _getCommerceOrderPayment(
-			status, result, commerceOrder, user);
-
-		return commerceOrderPayment;
+		return _getCommerceOrderPayment(status, result, commerceOrder, user);
 	}
 
 	@Override
@@ -55,10 +52,7 @@ public class CommerceOrderPaymentLocalServiceImpl
 			commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
-		CommerceOrderPayment commerceOrderPayment = _getCommerceOrderPayment(
-			status, content, commerceOrder, user);
-
-		return commerceOrderPayment;
+		return _getCommerceOrderPayment(status, content, commerceOrder, user);
 	}
 
 	@Override
@@ -95,9 +89,7 @@ public class CommerceOrderPaymentLocalServiceImpl
 		commerceOrderPayment.setStatus(status);
 		commerceOrderPayment.setContent(result);
 
-		commerceOrderPaymentPersistence.update(commerceOrderPayment);
-
-		return commerceOrderPayment;
+		return commerceOrderPaymentPersistence.update(commerceOrderPayment);
 	}
 
 }

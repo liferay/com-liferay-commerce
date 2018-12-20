@@ -20,16 +20,14 @@
 CommercePaymentMethodGroupRelsDisplayContext commercePaymentMethodsDisplayContext = (CommercePaymentMethodGroupRelsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommercePaymentMethodGroupRel commercePaymentMethodGroupRel = commercePaymentMethodsDisplayContext.getCommercePaymentMethodGroupRel();
-
-long commercePaymentMethodGroupRelId = commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId();
 %>
 
 <portlet:actionURL name="editCommercePaymentMethodGroupRel" var="commercePaymentMethodGroupRelActionURL" />
 
 <aui:form action="<%= commercePaymentMethodGroupRelActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCommercePaymentMethodGroupRel();" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commercePaymentMethodGroupRelId <= 0) ? Constants.ADD : Constants.UPDATE %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId() <= 0) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commercePaymentMethodGroupRelId" type="hidden" value="<%= commercePaymentMethodGroupRelId %>" />
+	<aui:input name="commercePaymentMethodGroupRelId" type="hidden" value="<%= commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId() %>" />
 	<aui:input name="engineKey" type="hidden" value="<%= commercePaymentMethodGroupRel.getEngineKey() %>" />
 
 	<liferay-ui:error-marker
