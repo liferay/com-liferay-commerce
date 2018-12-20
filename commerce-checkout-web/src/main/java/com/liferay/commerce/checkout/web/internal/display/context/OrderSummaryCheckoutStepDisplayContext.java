@@ -145,14 +145,12 @@ public class OrderSummaryCheckoutStepDisplayContext {
 	}
 
 	public String getPaymentMethodName(String paymentMethodKey, Locale locale) {
-		String paymentMethodName = StringPool.BLANK;
-
-		if (!paymentMethodKey.isEmpty() && (locale != null)) {
-			paymentMethodName = _commercePaymentEngine.getPaymentMethodName(
-				paymentMethodKey, locale);
+		if (paymentMethodKey.isEmpty() || (locale == null)) {
+			return StringPool.BLANK;
 		}
 
-		return paymentMethodName;
+		return _commercePaymentEngine.getPaymentMethodName(
+			paymentMethodKey, locale);
 	}
 
 	private final CommerceContext _commerceContext;

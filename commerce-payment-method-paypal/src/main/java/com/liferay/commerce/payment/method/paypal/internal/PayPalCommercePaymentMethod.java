@@ -69,8 +69,6 @@ import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 
-import java.math.BigDecimal;
-
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
@@ -132,10 +130,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+			commercePaymentRequest.getCommerceOrderId());
 
 		Amount amount = _getAmount(
 			commerceOrder, commerceOrder.getCommerceCurrency());
@@ -165,11 +161,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		messages.add(responseCapture.getReasonCode());
 
-		CommercePaymentResult commercePaymentResult = new CommercePaymentResult(
-			null, commerceOrderId, CommerceOrderConstants.PAYMENT_STATUS_PAID,
-			false, null, responseCapture.getId(), messages, success);
-
-		return commercePaymentResult;
+		return new CommercePaymentResult(
+			null, commercePaymentRequest.getCommerceOrderId(),
+			CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null,
+			responseCapture.getId(), messages, success);
 	}
 
 	@Override
@@ -180,11 +175,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		PayPalCommercePaymentRequest payPalCommercePaymentRequest =
 			(PayPalCommercePaymentRequest)commercePaymentRequest;
 
-		long commerceOrderId =
-			payPalCommercePaymentRequest.getCommerceOrderId();
-
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+			payPalCommercePaymentRequest.getCommerceOrderId());
 
 		String payerId = payPalCommercePaymentRequest.getPayerId();
 
@@ -214,11 +206,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		messages.add(payment.getFailureReason());
 
-		CommercePaymentResult commercePaymentResult = new CommercePaymentResult(
-			null, commerceOrderId, CommerceOrderConstants.PAYMENT_STATUS_PAID,
-			false, null, null, messages, success);
-
-		return commercePaymentResult;
+		return new CommercePaymentResult(
+			null, payPalCommercePaymentRequest.getCommerceOrderId(),
+			CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null, null,
+			messages, success);
 	}
 
 	@Override
@@ -235,10 +226,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		agreement.setToken(token);
 
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+			commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -257,11 +246,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		messages.add(activeAgreement.getDescription());
 
-		CommercePaymentResult commercePaymentResult = new CommercePaymentResult(
-			null, commerceOrderId, CommerceOrderConstants.PAYMENT_STATUS_PAID,
-			false, null, null, messages, success);
-
-		return commercePaymentResult;
+		return new CommercePaymentResult(
+			null, commercePaymentRequest.getCommerceOrderId(),
+			CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null, null,
+			messages, success);
 	}
 
 	@Override
@@ -347,10 +335,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+			commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -358,15 +344,12 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		Amount amount = new Amount();
 
-		BigDecimal commercePaymentRequestAmount =
-			commercePaymentRequest.getAmount();
-
 		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
 
 		amount.setCurrency(StringUtil.toUpperCase(commerceCurrency.getCode()));
 
 		amount.setTotal(
-			_payPalDecimalFormat.format(commercePaymentRequestAmount));
+			_payPalDecimalFormat.format(commercePaymentRequest.getAmount()));
 
 		refundRequest.setAmount(amount);
 
@@ -388,12 +371,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		messages.add(detailedRefund.getDescription());
 
-		CommercePaymentResult commercePaymentResult = new CommercePaymentResult(
-			null, commerceOrderId,
+		return new CommercePaymentResult(
+			null, commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.ORDER_STATUS_PARTIALLY_REFUNDED, false, null,
 			null, messages, success);
-
-		return commercePaymentResult;
 	}
 
 	@Override
@@ -401,10 +382,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+			commercePaymentRequest.getCommerceOrderId());
 
 		Payment payment = _getPayment(
 			commercePaymentRequest, commerceOrder,
@@ -438,12 +417,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		messages.add(payment.getFailureReason());
 
-		CommercePaymentResult commercePaymentResult = new CommercePaymentResult(
-			payment.getId(), commerceOrderId,
+		return new CommercePaymentResult(
+			payment.getId(), commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED, true, url, null,
 			messages, success);
-
-		return commercePaymentResult;
 	}
 
 	@Override
@@ -451,10 +428,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+			commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -488,12 +463,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		messages.add(agreement.getState());
 
-		CommercePaymentResult commercePaymentResult = new CommercePaymentResult(
-			agreement.getToken(), commerceOrderId,
+		return new CommercePaymentResult(
+			agreement.getToken(), commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED, true, url, null,
 			messages, success);
-
-		return commercePaymentResult;
 	}
 
 	@Override
@@ -501,10 +474,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+			commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -533,11 +504,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		messages.add(detailedRefund.getDescription());
 
-		CommercePaymentResult commercePaymentResult = new CommercePaymentResult(
-			null, commerceOrderId, CommerceOrderConstants.ORDER_STATUS_REFUNDED,
-			false, null, null, messages, success);
-
-		return commercePaymentResult;
+		return new CommercePaymentResult(
+			null, commercePaymentRequest.getCommerceOrderId(),
+			CommerceOrderConstants.ORDER_STATUS_REFUNDED, false, null, null,
+			messages, success);
 	}
 
 	@Override
@@ -545,10 +515,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
-		long commerceOrderId = commercePaymentRequest.getCommerceOrderId();
-
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+			commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -569,12 +537,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		messages.add(authorization.getPendingReason());
 
-		CommercePaymentResult commercePaymentResult = new CommercePaymentResult(
-			null, commerceOrderId,
+		return new CommercePaymentResult(
+			null, commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.PAYMENT_STATUS_PENDING, false, null, null,
 			messages, success);
-
-		return commercePaymentResult;
 	}
 
 	private Agreement _getAgreement(
@@ -738,9 +704,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 				commerceOrder, commerceOrder.getCommerceCurrency(),
 				commercePaymentRequest.getLocale()));
 
-		payment = payment.create(apiContext);
-
-		return payment;
+		return payment.create(apiContext);
 	}
 
 	private Plan _getPlan(
@@ -758,11 +722,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 			CPSubscriptionInfo cpSubscriptionInfo =
 				cpInstance.getCPSubscriptionInfo();
-
-			int subscriptionLength = cpSubscriptionInfo.getSubscriptionLength();
-
-			long maxSubscriptionCycles =
-				cpSubscriptionInfo.getMaxSubscriptionCycles();
 
 			String subscriptionType = cpSubscriptionInfo.getSubscriptionType();
 
@@ -794,8 +753,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 			PaymentDefinition paymentDefinition = new PaymentDefinition(
 				"Payment Definition", "REGULAR",
-				String.valueOf(subscriptionLength), subscriptionType,
-				String.valueOf(maxSubscriptionCycles), amount);
+				String.valueOf(cpSubscriptionInfo.getSubscriptionLength()),
+				subscriptionType,
+				String.valueOf(cpSubscriptionInfo.getMaxSubscriptionCycles()),
+				amount);
 
 			paymentDefinitions.add(paymentDefinition);
 		}
@@ -819,9 +780,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		plan = plan.create(apiContext);
 
-		plan = _updatePlan(apiContext, plan);
-
-		return plan;
+		return _updatePlan(apiContext, plan);
 	}
 
 	private ResourceBundle _getResourceBundle(Locale locale) {

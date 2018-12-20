@@ -21,8 +21,6 @@ import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import java.math.BigDecimal;
-
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,13 +49,11 @@ public class PayPalCommercePaymentRequestProvider
 		CommerceOrder commerceOrder =
 			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
-		BigDecimal amount = commerceOrder.getTotal();
-
 		String payerId = ParamUtil.getString(httpServletRequest, "PayerID");
 
 		return new PayPalCommercePaymentRequest(
-			amount, cancelUrl, commerceOrderId, locale, payerId, returnUrl,
-			transactionId);
+			commerceOrder.getTotal(), cancelUrl, commerceOrderId, locale,
+			payerId, returnUrl, transactionId);
 	}
 
 	@Reference
