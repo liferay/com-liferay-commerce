@@ -61,7 +61,7 @@ public class CommerceAccountOrganizationRelWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("commerceAccountId", getCommerceAccountId());
-		attributes.put("userId", getUserId());
+		attributes.put("organizationId", getOrganizationId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -79,10 +79,10 @@ public class CommerceAccountOrganizationRelWrapper
 			setCommerceAccountId(commerceAccountId);
 		}
 
-		Long userId = (Long)attributes.get("userId");
+		Long organizationId = (Long)attributes.get("organizationId");
 
-		if (userId != null) {
-			setUserId(userId);
+		if (organizationId != null) {
+			setOrganizationId(organizationId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -170,6 +170,16 @@ public class CommerceAccountOrganizationRelWrapper
 	@Override
 	public Date getModifiedDate() {
 		return _commerceAccountOrganizationRel.getModifiedDate();
+	}
+
+	/**
+	* Returns the organization ID of this commerce account organization rel.
+	*
+	* @return the organization ID of this commerce account organization rel
+	*/
+	@Override
+	public long getOrganizationId() {
+		return _commerceAccountOrganizationRel.getOrganizationId();
 	}
 
 	/**
@@ -306,6 +316,16 @@ public class CommerceAccountOrganizationRelWrapper
 	@Override
 	public void setNew(boolean n) {
 		_commerceAccountOrganizationRel.setNew(n);
+	}
+
+	/**
+	* Sets the organization ID of this commerce account organization rel.
+	*
+	* @param organizationId the organization ID of this commerce account organization rel
+	*/
+	@Override
+	public void setOrganizationId(long organizationId) {
+		_commerceAccountOrganizationRel.setOrganizationId(organizationId);
 	}
 
 	/**

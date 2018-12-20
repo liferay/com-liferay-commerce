@@ -32,9 +32,11 @@ import com.liferay.commerce.account.service.base.CommerceAccountOrganizationRelL
  */
 public class CommerceAccountOrganizationRelLocalServiceImpl
 	extends CommerceAccountOrganizationRelLocalServiceBaseImpl {
-	/*
+
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalServiceUtil} to access the commerce account organization rel local service.
 	 */
+
 }

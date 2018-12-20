@@ -16,7 +16,7 @@
 	</model>
 	<model name="com.liferay.commerce.account.model.CommerceAccountOrganizationRel">
 		<field name="commerceAccountId" type="long" />
-		<field name="userId" type="long" />
+		<field name="organizationId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

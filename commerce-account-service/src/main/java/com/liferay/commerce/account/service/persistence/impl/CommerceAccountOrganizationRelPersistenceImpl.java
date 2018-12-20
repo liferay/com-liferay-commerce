@@ -92,85 +92,90 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 			CommerceAccountOrganizationRelModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_USERID = new FinderPath(CommerceAccountOrganizationRelModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ORGANIZATIONID =
+		new FinderPath(CommerceAccountOrganizationRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountOrganizationRelModelImpl.FINDER_CACHE_ENABLED,
 			CommerceAccountOrganizationRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByuserId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByOrganizationId",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID =
 		new FinderPath(CommerceAccountOrganizationRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountOrganizationRelModelImpl.FINDER_CACHE_ENABLED,
 			CommerceAccountOrganizationRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByuserId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByOrganizationId",
 			new String[] { Long.class.getName() },
+			CommerceAccountOrganizationRelModelImpl.ORGANIZATIONID_COLUMN_BITMASK |
 			CommerceAccountOrganizationRelModelImpl.USERID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(CommerceAccountOrganizationRelModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_ORGANIZATIONID = new FinderPath(CommerceAccountOrganizationRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountOrganizationRelModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByuserId", new String[] { Long.class.getName() });
+			"countByOrganizationId", new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the commerce account organization rels where userId = &#63;.
+	 * Returns all the commerce account organization rels where organizationId = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 * @return the matching commerce account organization rels
 	 */
 	@Override
-	public List<CommerceAccountOrganizationRel> findByuserId(long userId) {
-		return findByuserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceAccountOrganizationRel> findByOrganizationId(
+		long organizationId) {
+		return findByOrganizationId(organizationId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce account organization rels where userId = &#63;.
+	 * Returns a range of all the commerce account organization rels where organizationId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountOrganizationRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @return the range of matching commerce account organization rels
 	 */
 	@Override
-	public List<CommerceAccountOrganizationRel> findByuserId(long userId,
-		int start, int end) {
-		return findByuserId(userId, start, end, null);
+	public List<CommerceAccountOrganizationRel> findByOrganizationId(
+		long organizationId, int start, int end) {
+		return findByOrganizationId(organizationId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce account organization rels where userId = &#63;.
+	 * Returns an ordered range of all the commerce account organization rels where organizationId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountOrganizationRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce account organization rels
 	 */
 	@Override
-	public List<CommerceAccountOrganizationRel> findByuserId(long userId,
-		int start, int end,
+	public List<CommerceAccountOrganizationRel> findByOrganizationId(
+		long organizationId, int start, int end,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator) {
-		return findByuserId(userId, start, end, orderByComparator, true);
+		return findByOrganizationId(organizationId, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce account organization rels where userId = &#63;.
+	 * Returns an ordered range of all the commerce account organization rels where organizationId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountOrganizationRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -178,8 +183,8 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @return the ordered range of matching commerce account organization rels
 	 */
 	@Override
-	public List<CommerceAccountOrganizationRel> findByuserId(long userId,
-		int start, int end,
+	public List<CommerceAccountOrganizationRel> findByOrganizationId(
+		long organizationId, int start, int end,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -189,12 +194,16 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID;
-			finderArgs = new Object[] { userId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID;
+			finderArgs = new Object[] { organizationId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_USERID;
-			finderArgs = new Object[] { userId, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ORGANIZATIONID;
+			finderArgs = new Object[] {
+					organizationId,
+					
+					start, end, orderByComparator
+				};
 		}
 
 		List<CommerceAccountOrganizationRel> list = null;
@@ -205,7 +214,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAccountOrganizationRel commerceAccountOrganizationRel : list) {
-					if ((userId != commerceAccountOrganizationRel.getUserId())) {
+					if ((organizationId != commerceAccountOrganizationRel.getOrganizationId())) {
 						list = null;
 
 						break;
@@ -227,7 +236,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCEACCOUNTORGANIZATIONREL_WHERE);
 
-			query.append(_FINDER_COLUMN_USERID_USERID_2);
+			query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -249,7 +258,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(userId);
+				qPos.add(organizationId);
 
 				if (!pagination) {
 					list = (List<CommerceAccountOrganizationRel>)QueryUtil.list(q,
@@ -282,18 +291,19 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce account organization rel in the ordered set where userId = &#63;.
+	 * Returns the first commerce account organization rel in the ordered set where organizationId = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce account organization rel
 	 * @throws NoSuchAccountOrganizationRelException if a matching commerce account organization rel could not be found
 	 */
 	@Override
-	public CommerceAccountOrganizationRel findByuserId_First(long userId,
+	public CommerceAccountOrganizationRel findByOrganizationId_First(
+		long organizationId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
 		throws NoSuchAccountOrganizationRelException {
-		CommerceAccountOrganizationRel commerceAccountOrganizationRel = fetchByuserId_First(userId,
+		CommerceAccountOrganizationRel commerceAccountOrganizationRel = fetchByOrganizationId_First(organizationId,
 				orderByComparator);
 
 		if (commerceAccountOrganizationRel != null) {
@@ -304,8 +314,8 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("userId=");
-		msg.append(userId);
+		msg.append("organizationId=");
+		msg.append(organizationId);
 
 		msg.append("}");
 
@@ -313,17 +323,18 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce account organization rel in the ordered set where userId = &#63;.
+	 * Returns the first commerce account organization rel in the ordered set where organizationId = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce account organization rel, or <code>null</code> if a matching commerce account organization rel could not be found
 	 */
 	@Override
-	public CommerceAccountOrganizationRel fetchByuserId_First(long userId,
+	public CommerceAccountOrganizationRel fetchByOrganizationId_First(
+		long organizationId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator) {
-		List<CommerceAccountOrganizationRel> list = findByuserId(userId, 0, 1,
-				orderByComparator);
+		List<CommerceAccountOrganizationRel> list = findByOrganizationId(organizationId,
+				0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -333,18 +344,19 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce account organization rel in the ordered set where userId = &#63;.
+	 * Returns the last commerce account organization rel in the ordered set where organizationId = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce account organization rel
 	 * @throws NoSuchAccountOrganizationRelException if a matching commerce account organization rel could not be found
 	 */
 	@Override
-	public CommerceAccountOrganizationRel findByuserId_Last(long userId,
+	public CommerceAccountOrganizationRel findByOrganizationId_Last(
+		long organizationId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
 		throws NoSuchAccountOrganizationRelException {
-		CommerceAccountOrganizationRel commerceAccountOrganizationRel = fetchByuserId_Last(userId,
+		CommerceAccountOrganizationRel commerceAccountOrganizationRel = fetchByOrganizationId_Last(organizationId,
 				orderByComparator);
 
 		if (commerceAccountOrganizationRel != null) {
@@ -355,8 +367,8 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("userId=");
-		msg.append(userId);
+		msg.append("organizationId=");
+		msg.append(organizationId);
 
 		msg.append("}");
 
@@ -364,22 +376,23 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce account organization rel in the ordered set where userId = &#63;.
+	 * Returns the last commerce account organization rel in the ordered set where organizationId = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce account organization rel, or <code>null</code> if a matching commerce account organization rel could not be found
 	 */
 	@Override
-	public CommerceAccountOrganizationRel fetchByuserId_Last(long userId,
+	public CommerceAccountOrganizationRel fetchByOrganizationId_Last(
+		long organizationId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator) {
-		int count = countByuserId(userId);
+		int count = countByOrganizationId(organizationId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAccountOrganizationRel> list = findByuserId(userId,
+		List<CommerceAccountOrganizationRel> list = findByOrganizationId(organizationId,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -390,18 +403,18 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce account organization rels before and after the current commerce account organization rel in the ordered set where userId = &#63;.
+	 * Returns the commerce account organization rels before and after the current commerce account organization rel in the ordered set where organizationId = &#63;.
 	 *
 	 * @param commerceAccountOrganizationRelPK the primary key of the current commerce account organization rel
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce account organization rel
 	 * @throws NoSuchAccountOrganizationRelException if a commerce account organization rel with the primary key could not be found
 	 */
 	@Override
-	public CommerceAccountOrganizationRel[] findByuserId_PrevAndNext(
+	public CommerceAccountOrganizationRel[] findByOrganizationId_PrevAndNext(
 		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK,
-		long userId,
+		long organizationId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
 		throws NoSuchAccountOrganizationRelException {
 		CommerceAccountOrganizationRel commerceAccountOrganizationRel = findByPrimaryKey(commerceAccountOrganizationRelPK);
@@ -413,15 +426,15 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 			CommerceAccountOrganizationRel[] array = new CommerceAccountOrganizationRelImpl[3];
 
-			array[0] = getByuserId_PrevAndNext(session,
-					commerceAccountOrganizationRel, userId, orderByComparator,
-					true);
+			array[0] = getByOrganizationId_PrevAndNext(session,
+					commerceAccountOrganizationRel, organizationId,
+					orderByComparator, true);
 
 			array[1] = commerceAccountOrganizationRel;
 
-			array[2] = getByuserId_PrevAndNext(session,
-					commerceAccountOrganizationRel, userId, orderByComparator,
-					false);
+			array[2] = getByOrganizationId_PrevAndNext(session,
+					commerceAccountOrganizationRel, organizationId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -433,10 +446,10 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 		}
 	}
 
-	protected CommerceAccountOrganizationRel getByuserId_PrevAndNext(
+	protected CommerceAccountOrganizationRel getByOrganizationId_PrevAndNext(
 		Session session,
 		CommerceAccountOrganizationRel commerceAccountOrganizationRel,
-		long userId,
+		long organizationId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -452,7 +465,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCEACCOUNTORGANIZATIONREL_WHERE);
 
-		query.append(_FINDER_COLUMN_USERID_USERID_2);
+		query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -522,7 +535,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(userId);
+		qPos.add(organizationId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(commerceAccountOrganizationRel);
@@ -543,29 +556,29 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce account organization rels where userId = &#63; from the database.
+	 * Removes all the commerce account organization rels where organizationId = &#63; from the database.
 	 *
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 */
 	@Override
-	public void removeByuserId(long userId) {
-		for (CommerceAccountOrganizationRel commerceAccountOrganizationRel : findByuserId(
-				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByOrganizationId(long organizationId) {
+		for (CommerceAccountOrganizationRel commerceAccountOrganizationRel : findByOrganizationId(
+				organizationId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceAccountOrganizationRel);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce account organization rels where userId = &#63;.
+	 * Returns the number of commerce account organization rels where organizationId = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param organizationId the organization ID
 	 * @return the number of matching commerce account organization rels
 	 */
 	@Override
-	public int countByuserId(long userId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
+	public int countByOrganizationId(long organizationId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ORGANIZATIONID;
 
-		Object[] finderArgs = new Object[] { userId };
+		Object[] finderArgs = new Object[] { organizationId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -574,7 +587,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCEACCOUNTORGANIZATIONREL_WHERE);
 
-			query.append(_FINDER_COLUMN_USERID_USERID_2);
+			query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
 
 			String sql = query.toString();
 
@@ -587,7 +600,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(userId);
+				qPos.add(organizationId);
 
 				count = (Long)q.uniqueResult();
 
@@ -606,12 +619,12 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_USERID_USERID_2 = "commerceAccountOrganizationRel.id.userId = ?";
+	private static final String _FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2 = "commerceAccountOrganizationRel.id.organizationId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTID =
 		new FinderPath(CommerceAccountOrganizationRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountOrganizationRelModelImpl.FINDER_CACHE_ENABLED,
 			CommerceAccountOrganizationRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBycommerceAccountId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommerceAccountId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -623,12 +636,13 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 			CommerceAccountOrganizationRelModelImpl.FINDER_CACHE_ENABLED,
 			CommerceAccountOrganizationRelImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findBycommerceAccountId", new String[] { Long.class.getName() },
-			CommerceAccountOrganizationRelModelImpl.COMMERCEACCOUNTID_COLUMN_BITMASK);
+			"findByCommerceAccountId", new String[] { Long.class.getName() },
+			CommerceAccountOrganizationRelModelImpl.COMMERCEACCOUNTID_COLUMN_BITMASK |
+			CommerceAccountOrganizationRelModelImpl.USERID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID = new FinderPath(CommerceAccountOrganizationRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountOrganizationRelModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countBycommerceAccountId", new String[] { Long.class.getName() });
+			"countByCommerceAccountId", new String[] { Long.class.getName() });
 
 	/**
 	 * Returns all the commerce account organization rels where commerceAccountId = &#63;.
@@ -637,9 +651,9 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @return the matching commerce account organization rels
 	 */
 	@Override
-	public List<CommerceAccountOrganizationRel> findBycommerceAccountId(
+	public List<CommerceAccountOrganizationRel> findByCommerceAccountId(
 		long commerceAccountId) {
-		return findBycommerceAccountId(commerceAccountId, QueryUtil.ALL_POS,
+		return findByCommerceAccountId(commerceAccountId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -656,9 +670,9 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @return the range of matching commerce account organization rels
 	 */
 	@Override
-	public List<CommerceAccountOrganizationRel> findBycommerceAccountId(
+	public List<CommerceAccountOrganizationRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end) {
-		return findBycommerceAccountId(commerceAccountId, start, end, null);
+		return findByCommerceAccountId(commerceAccountId, start, end, null);
 	}
 
 	/**
@@ -675,10 +689,10 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @return the ordered range of matching commerce account organization rels
 	 */
 	@Override
-	public List<CommerceAccountOrganizationRel> findBycommerceAccountId(
+	public List<CommerceAccountOrganizationRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator) {
-		return findBycommerceAccountId(commerceAccountId, start, end,
+		return findByCommerceAccountId(commerceAccountId, start, end,
 			orderByComparator, true);
 	}
 
@@ -697,7 +711,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @return the ordered range of matching commerce account organization rels
 	 */
 	@Override
-	public List<CommerceAccountOrganizationRel> findBycommerceAccountId(
+	public List<CommerceAccountOrganizationRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
 		boolean retrieveFromCache) {
@@ -813,11 +827,11 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @throws NoSuchAccountOrganizationRelException if a matching commerce account organization rel could not be found
 	 */
 	@Override
-	public CommerceAccountOrganizationRel findBycommerceAccountId_First(
+	public CommerceAccountOrganizationRel findByCommerceAccountId_First(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
 		throws NoSuchAccountOrganizationRelException {
-		CommerceAccountOrganizationRel commerceAccountOrganizationRel = fetchBycommerceAccountId_First(commerceAccountId,
+		CommerceAccountOrganizationRel commerceAccountOrganizationRel = fetchByCommerceAccountId_First(commerceAccountId,
 				orderByComparator);
 
 		if (commerceAccountOrganizationRel != null) {
@@ -844,10 +858,10 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @return the first matching commerce account organization rel, or <code>null</code> if a matching commerce account organization rel could not be found
 	 */
 	@Override
-	public CommerceAccountOrganizationRel fetchBycommerceAccountId_First(
+	public CommerceAccountOrganizationRel fetchByCommerceAccountId_First(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator) {
-		List<CommerceAccountOrganizationRel> list = findBycommerceAccountId(commerceAccountId,
+		List<CommerceAccountOrganizationRel> list = findByCommerceAccountId(commerceAccountId,
 				0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -866,11 +880,11 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @throws NoSuchAccountOrganizationRelException if a matching commerce account organization rel could not be found
 	 */
 	@Override
-	public CommerceAccountOrganizationRel findBycommerceAccountId_Last(
+	public CommerceAccountOrganizationRel findByCommerceAccountId_Last(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
 		throws NoSuchAccountOrganizationRelException {
-		CommerceAccountOrganizationRel commerceAccountOrganizationRel = fetchBycommerceAccountId_Last(commerceAccountId,
+		CommerceAccountOrganizationRel commerceAccountOrganizationRel = fetchByCommerceAccountId_Last(commerceAccountId,
 				orderByComparator);
 
 		if (commerceAccountOrganizationRel != null) {
@@ -897,16 +911,16 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @return the last matching commerce account organization rel, or <code>null</code> if a matching commerce account organization rel could not be found
 	 */
 	@Override
-	public CommerceAccountOrganizationRel fetchBycommerceAccountId_Last(
+	public CommerceAccountOrganizationRel fetchByCommerceAccountId_Last(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator) {
-		int count = countBycommerceAccountId(commerceAccountId);
+		int count = countByCommerceAccountId(commerceAccountId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAccountOrganizationRel> list = findBycommerceAccountId(commerceAccountId,
+		List<CommerceAccountOrganizationRel> list = findByCommerceAccountId(commerceAccountId,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -926,7 +940,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @throws NoSuchAccountOrganizationRelException if a commerce account organization rel with the primary key could not be found
 	 */
 	@Override
-	public CommerceAccountOrganizationRel[] findBycommerceAccountId_PrevAndNext(
+	public CommerceAccountOrganizationRel[] findByCommerceAccountId_PrevAndNext(
 		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK,
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
@@ -940,13 +954,13 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 			CommerceAccountOrganizationRel[] array = new CommerceAccountOrganizationRelImpl[3];
 
-			array[0] = getBycommerceAccountId_PrevAndNext(session,
+			array[0] = getByCommerceAccountId_PrevAndNext(session,
 					commerceAccountOrganizationRel, commerceAccountId,
 					orderByComparator, true);
 
 			array[1] = commerceAccountOrganizationRel;
 
-			array[2] = getBycommerceAccountId_PrevAndNext(session,
+			array[2] = getByCommerceAccountId_PrevAndNext(session,
 					commerceAccountOrganizationRel, commerceAccountId,
 					orderByComparator, false);
 
@@ -960,7 +974,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 		}
 	}
 
-	protected CommerceAccountOrganizationRel getBycommerceAccountId_PrevAndNext(
+	protected CommerceAccountOrganizationRel getByCommerceAccountId_PrevAndNext(
 		Session session,
 		CommerceAccountOrganizationRel commerceAccountOrganizationRel,
 		long commerceAccountId,
@@ -1075,8 +1089,8 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @param commerceAccountId the commerce account ID
 	 */
 	@Override
-	public void removeBycommerceAccountId(long commerceAccountId) {
-		for (CommerceAccountOrganizationRel commerceAccountOrganizationRel : findBycommerceAccountId(
+	public void removeByCommerceAccountId(long commerceAccountId) {
+		for (CommerceAccountOrganizationRel commerceAccountOrganizationRel : findByCommerceAccountId(
 				commerceAccountId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceAccountOrganizationRel);
 		}
@@ -1089,7 +1103,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @return the number of matching commerce account organization rels
 	 */
 	@Override
-	public int countBycommerceAccountId(long commerceAccountId) {
+	public int countByCommerceAccountId(long commerceAccountId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID;
 
 		Object[] finderArgs = new Object[] { commerceAccountId };
@@ -1406,11 +1420,11 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 		else
 		 if (isNew) {
 			Object[] args = new Object[] {
-					commerceAccountOrganizationRelModelImpl.getUserId()
+					commerceAccountOrganizationRelModelImpl.getOrganizationId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID,
 				args);
 
 			args = new Object[] {
@@ -1429,21 +1443,23 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 		else {
 			if ((commerceAccountOrganizationRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						commerceAccountOrganizationRelModelImpl.getOriginalUserId()
+						commerceAccountOrganizationRelModelImpl.getOriginalOrganizationId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID,
 					args);
 
 				args = new Object[] {
-						commerceAccountOrganizationRelModelImpl.getUserId()
+						commerceAccountOrganizationRelModelImpl.getOrganizationId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID,
 					args);
 			}
 
@@ -1829,6 +1845,6 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceAccountOrganizationRel exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(CommerceAccountOrganizationRelPersistenceImpl.class);
 	private static final Set<String> _compoundPKColumnNames = SetUtil.fromArray(new String[] {
-				"commerceAccountId", "userId"
+				"commerceAccountId", "organizationId"
 			});
 }

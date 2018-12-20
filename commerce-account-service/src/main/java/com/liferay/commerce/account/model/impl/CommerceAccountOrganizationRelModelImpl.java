@@ -68,7 +68,7 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 	public static final String TABLE_NAME = "CommerceAccountOrganizationRel";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "commerceAccountId", Types.BIGINT },
-			{ "userId", Types.BIGINT },
+			{ "organizationId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -79,7 +79,7 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 
 	static {
 		TABLE_COLUMNS_MAP.put("commerceAccountId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("organizationId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -87,9 +87,9 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceAccountOrganizationRel (commerceAccountId LONG not null,userId LONG not null,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,primary key (commerceAccountId, userId))";
+	public static final String TABLE_SQL_CREATE = "create table CommerceAccountOrganizationRel (commerceAccountId LONG not null,organizationId LONG not null,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,primary key (commerceAccountId, organizationId))";
 	public static final String TABLE_SQL_DROP = "drop table CommerceAccountOrganizationRel";
-	public static final String ORDER_BY_JPQL = " ORDER BY commerceAccountOrganizationRel.id.userId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY commerceAccountOrganizationRel.userId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceAccountOrganizationRel.userId ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -104,7 +104,8 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 				"value.object.column.bitmask.enabled.com.liferay.commerce.account.model.CommerceAccountOrganizationRel"),
 			true);
 	public static final long COMMERCEACCOUNTID_COLUMN_BITMASK = 1L;
-	public static final long USERID_COLUMN_BITMASK = 2L;
+	public static final long ORGANIZATIONID_COLUMN_BITMASK = 2L;
+	public static final long USERID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -121,7 +122,7 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 		CommerceAccountOrganizationRel model = new CommerceAccountOrganizationRelImpl();
 
 		model.setCommerceAccountId(soapModel.getCommerceAccountId());
-		model.setUserId(soapModel.getUserId());
+		model.setOrganizationId(soapModel.getOrganizationId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -160,18 +161,20 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 
 	@Override
 	public CommerceAccountOrganizationRelPK getPrimaryKey() {
-		return new CommerceAccountOrganizationRelPK(_commerceAccountId, _userId);
+		return new CommerceAccountOrganizationRelPK(_commerceAccountId,
+			_organizationId);
 	}
 
 	@Override
 	public void setPrimaryKey(CommerceAccountOrganizationRelPK primaryKey) {
 		setCommerceAccountId(primaryKey.commerceAccountId);
-		setUserId(primaryKey.userId);
+		setOrganizationId(primaryKey.organizationId);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return new CommerceAccountOrganizationRelPK(_commerceAccountId, _userId);
+		return new CommerceAccountOrganizationRelPK(_commerceAccountId,
+			_organizationId);
 	}
 
 	@Override
@@ -194,7 +197,7 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("commerceAccountId", getCommerceAccountId());
-		attributes.put("userId", getUserId());
+		attributes.put("organizationId", getOrganizationId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -215,10 +218,10 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 			setCommerceAccountId(commerceAccountId);
 		}
 
-		Long userId = (Long)attributes.get("userId");
+		Long organizationId = (Long)attributes.get("organizationId");
 
-		if (userId != null) {
-			setUserId(userId);
+		if (organizationId != null) {
+			setOrganizationId(organizationId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -277,41 +280,25 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 
 	@JSON
 	@Override
-	public long getUserId() {
-		return _userId;
+	public long getOrganizationId() {
+		return _organizationId;
 	}
 
 	@Override
-	public void setUserId(long userId) {
-		_columnBitmask = -1L;
+	public void setOrganizationId(long organizationId) {
+		_columnBitmask |= ORGANIZATIONID_COLUMN_BITMASK;
 
-		if (!_setOriginalUserId) {
-			_setOriginalUserId = true;
+		if (!_setOriginalOrganizationId) {
+			_setOriginalOrganizationId = true;
 
-			_originalUserId = _userId;
+			_originalOrganizationId = _organizationId;
 		}
 
-		_userId = userId;
+		_organizationId = organizationId;
 	}
 
-	@Override
-	public String getUserUuid() {
-		try {
-			User user = UserLocalServiceUtil.getUserById(getUserId());
-
-			return user.getUuid();
-		}
-		catch (PortalException pe) {
-			return "";
-		}
-	}
-
-	@Override
-	public void setUserUuid(String userUuid) {
-	}
-
-	public long getOriginalUserId() {
-		return _originalUserId;
+	public long getOriginalOrganizationId() {
+		return _originalOrganizationId;
 	}
 
 	@JSON
@@ -333,6 +320,8 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask = -1L;
+
 		_userId = userId;
 	}
 
@@ -415,7 +404,7 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 		CommerceAccountOrganizationRelImpl commerceAccountOrganizationRelImpl = new CommerceAccountOrganizationRelImpl();
 
 		commerceAccountOrganizationRelImpl.setCommerceAccountId(getCommerceAccountId());
-		commerceAccountOrganizationRelImpl.setUserId(getUserId());
+		commerceAccountOrganizationRelImpl.setOrganizationId(getOrganizationId());
 		commerceAccountOrganizationRelImpl.setCompanyId(getCompanyId());
 		commerceAccountOrganizationRelImpl.setUserId(getUserId());
 		commerceAccountOrganizationRelImpl.setUserName(getUserName());
@@ -495,9 +484,9 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 
 		commerceAccountOrganizationRelModelImpl._setOriginalCommerceAccountId = false;
 
-		commerceAccountOrganizationRelModelImpl._originalUserId = commerceAccountOrganizationRelModelImpl._userId;
+		commerceAccountOrganizationRelModelImpl._originalOrganizationId = commerceAccountOrganizationRelModelImpl._organizationId;
 
-		commerceAccountOrganizationRelModelImpl._setOriginalUserId = false;
+		commerceAccountOrganizationRelModelImpl._setOriginalOrganizationId = false;
 
 		commerceAccountOrganizationRelModelImpl._setModifiedDate = false;
 
@@ -513,7 +502,7 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 
 		commerceAccountOrganizationRelCacheModel.commerceAccountId = getCommerceAccountId();
 
-		commerceAccountOrganizationRelCacheModel.userId = getUserId();
+		commerceAccountOrganizationRelCacheModel.organizationId = getOrganizationId();
 
 		commerceAccountOrganizationRelCacheModel.companyId = getCompanyId();
 
@@ -554,8 +543,8 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 
 		sb.append("{commerceAccountId=");
 		sb.append(getCommerceAccountId());
-		sb.append(", userId=");
-		sb.append(getUserId());
+		sb.append(", organizationId=");
+		sb.append(getOrganizationId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -585,8 +574,8 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 		sb.append(getCommerceAccountId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>userId</column-name><column-value><![CDATA[");
-		sb.append(getUserId());
+			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
+		sb.append(getOrganizationId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -621,9 +610,9 @@ public class CommerceAccountOrganizationRelModelImpl extends BaseModelImpl<Comme
 	private long _commerceAccountId;
 	private long _originalCommerceAccountId;
 	private boolean _setOriginalCommerceAccountId;
-	private long _userId;
-	private long _originalUserId;
-	private boolean _setOriginalUserId;
+	private long _organizationId;
+	private long _originalOrganizationId;
+	private boolean _setOriginalOrganizationId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

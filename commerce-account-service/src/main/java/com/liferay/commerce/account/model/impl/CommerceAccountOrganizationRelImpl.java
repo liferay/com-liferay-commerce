@@ -28,11 +28,13 @@ import aQute.bnd.annotation.ProviderType;
 @ProviderType
 public class CommerceAccountOrganizationRelImpl
 	extends CommerceAccountOrganizationRelBaseImpl {
-	/*
+
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a commerce account organization rel model instance should use the {@link com.liferay.commerce.account.model.CommerceAccountOrganizationRel} interface instead.
 	 */
 	public CommerceAccountOrganizationRelImpl() {
 	}
+
 }

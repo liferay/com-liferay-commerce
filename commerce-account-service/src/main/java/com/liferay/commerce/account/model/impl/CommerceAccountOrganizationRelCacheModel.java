@@ -72,8 +72,8 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 
 		sb.append("{commerceAccountId=");
 		sb.append(commerceAccountId);
-		sb.append(", userId=");
-		sb.append(userId);
+		sb.append(", organizationId=");
+		sb.append(organizationId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -94,7 +94,7 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 		CommerceAccountOrganizationRelImpl commerceAccountOrganizationRelImpl = new CommerceAccountOrganizationRelImpl();
 
 		commerceAccountOrganizationRelImpl.setCommerceAccountId(commerceAccountId);
-		commerceAccountOrganizationRelImpl.setUserId(userId);
+		commerceAccountOrganizationRelImpl.setOrganizationId(organizationId);
 		commerceAccountOrganizationRelImpl.setCompanyId(companyId);
 		commerceAccountOrganizationRelImpl.setUserId(userId);
 
@@ -130,7 +130,7 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		commerceAccountId = objectInput.readLong();
 
-		userId = objectInput.readLong();
+		organizationId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
 
@@ -140,7 +140,7 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 		modifiedDate = objectInput.readLong();
 
 		commerceAccountOrganizationRelPK = new CommerceAccountOrganizationRelPK(commerceAccountId,
-				userId);
+				organizationId);
 	}
 
 	@Override
@@ -148,7 +148,7 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 		throws IOException {
 		objectOutput.writeLong(commerceAccountId);
 
-		objectOutput.writeLong(userId);
+		objectOutput.writeLong(organizationId);
 
 		objectOutput.writeLong(companyId);
 
@@ -166,7 +166,7 @@ public class CommerceAccountOrganizationRelCacheModel implements CacheModel<Comm
 	}
 
 	public long commerceAccountId;
-	public long userId;
+	public long organizationId;
 	public long companyId;
 	public long userId;
 	public String userName;

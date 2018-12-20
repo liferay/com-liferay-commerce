@@ -32,9 +32,11 @@ import com.liferay.commerce.account.service.base.CommerceAccountUserRelServiceBa
  */
 public class CommerceAccountUserRelServiceImpl
 	extends CommerceAccountUserRelServiceBaseImpl {
-	/*
+
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.commerce.account.service.CommerceAccountUserRelServiceUtil} to access the commerce account user rel remote service.
 	 */
+
 }

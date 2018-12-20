@@ -279,6 +279,16 @@ public class CommerceAccountLocalServiceWrapper
 		return _commerceAccountLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
+		long companyId, long parentCommerceAccountId, String keywords,
+		Boolean active, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountLocalService.searchCommerceAccounts(companyId,
+			parentCommerceAccountId, keywords, active, start, end, sort);
+	}
+
 	/**
 	* Updates the commerce account in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -289,6 +299,26 @@ public class CommerceAccountLocalServiceWrapper
 	public com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
 		com.liferay.commerce.account.model.CommerceAccount commerceAccount) {
 		return _commerceAccountLocalService.updateCommerceAccount(commerceAccount);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
+		long commerceAccountId, String name, String taxId, boolean active,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountLocalService.updateCommerceAccount(commerceAccountId,
+			name, taxId, active, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount upsertCommerceAccount(
+		long userId, long parentCommerceAccountId, String name, String taxId,
+		boolean active, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountLocalService.upsertCommerceAccount(userId,
+			parentCommerceAccountId, name, taxId, active,
+			externalReferenceCode, serviceContext);
 	}
 
 	@Override

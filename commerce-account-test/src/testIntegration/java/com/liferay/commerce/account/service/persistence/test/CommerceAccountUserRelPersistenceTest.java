@@ -156,17 +156,17 @@ public class CommerceAccountUserRelPersistenceTest {
 	}
 
 	@Test
-	public void testCountByuserId() throws Exception {
-		_persistence.countByuserId(RandomTestUtil.nextLong());
+	public void testCountByUserId() throws Exception {
+		_persistence.countByUserId(RandomTestUtil.nextLong());
 
-		_persistence.countByuserId(0L);
+		_persistence.countByUserId(0L);
 	}
 
 	@Test
-	public void testCountBycommerceAccountId() throws Exception {
-		_persistence.countBycommerceAccountId(RandomTestUtil.nextLong());
+	public void testCountByCommerceAccountId() throws Exception {
+		_persistence.countByCommerceAccountId(RandomTestUtil.nextLong());
 
-		_persistence.countBycommerceAccountId(0L);
+		_persistence.countByCommerceAccountId(0L);
 	}
 
 	@Test

@@ -43,138 +43,142 @@ public interface CommerceAccountOrganizationRelPersistence
 	 */
 
 	/**
-	* Returns all the commerce account organization rels where userId = &#63;.
+	* Returns all the commerce account organization rels where organizationId = &#63;.
 	*
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	* @return the matching commerce account organization rels
 	*/
-	public java.util.List<CommerceAccountOrganizationRel> findByuserId(
-		long userId);
+	public java.util.List<CommerceAccountOrganizationRel> findByOrganizationId(
+		long organizationId);
 
 	/**
-	* Returns a range of all the commerce account organization rels where userId = &#63;.
+	* Returns a range of all the commerce account organization rels where organizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountOrganizationRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	* @param start the lower bound of the range of commerce account organization rels
 	* @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	* @return the range of matching commerce account organization rels
 	*/
-	public java.util.List<CommerceAccountOrganizationRel> findByuserId(
-		long userId, int start, int end);
+	public java.util.List<CommerceAccountOrganizationRel> findByOrganizationId(
+		long organizationId, int start, int end);
 
 	/**
-	* Returns an ordered range of all the commerce account organization rels where userId = &#63;.
+	* Returns an ordered range of all the commerce account organization rels where organizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountOrganizationRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	* @param start the lower bound of the range of commerce account organization rels
 	* @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce account organization rels
 	*/
-	public java.util.List<CommerceAccountOrganizationRel> findByuserId(
-		long userId, int start, int end,
+	public java.util.List<CommerceAccountOrganizationRel> findByOrganizationId(
+		long organizationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator);
 
 	/**
-	* Returns an ordered range of all the commerce account organization rels where userId = &#63;.
+	* Returns an ordered range of all the commerce account organization rels where organizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountOrganizationRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	* @param start the lower bound of the range of commerce account organization rels
 	* @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce account organization rels
 	*/
-	public java.util.List<CommerceAccountOrganizationRel> findByuserId(
-		long userId, int start, int end,
+	public java.util.List<CommerceAccountOrganizationRel> findByOrganizationId(
+		long organizationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	* Returns the first commerce account organization rel in the ordered set where userId = &#63;.
+	* Returns the first commerce account organization rel in the ordered set where organizationId = &#63;.
 	*
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce account organization rel
 	* @throws NoSuchAccountOrganizationRelException if a matching commerce account organization rel could not be found
 	*/
-	public CommerceAccountOrganizationRel findByuserId_First(long userId,
+	public CommerceAccountOrganizationRel findByOrganizationId_First(
+		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
 		throws NoSuchAccountOrganizationRelException;
 
 	/**
-	* Returns the first commerce account organization rel in the ordered set where userId = &#63;.
+	* Returns the first commerce account organization rel in the ordered set where organizationId = &#63;.
 	*
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce account organization rel, or <code>null</code> if a matching commerce account organization rel could not be found
 	*/
-	public CommerceAccountOrganizationRel fetchByuserId_First(long userId,
+	public CommerceAccountOrganizationRel fetchByOrganizationId_First(
+		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator);
 
 	/**
-	* Returns the last commerce account organization rel in the ordered set where userId = &#63;.
+	* Returns the last commerce account organization rel in the ordered set where organizationId = &#63;.
 	*
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce account organization rel
 	* @throws NoSuchAccountOrganizationRelException if a matching commerce account organization rel could not be found
 	*/
-	public CommerceAccountOrganizationRel findByuserId_Last(long userId,
+	public CommerceAccountOrganizationRel findByOrganizationId_Last(
+		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
 		throws NoSuchAccountOrganizationRelException;
 
 	/**
-	* Returns the last commerce account organization rel in the ordered set where userId = &#63;.
+	* Returns the last commerce account organization rel in the ordered set where organizationId = &#63;.
 	*
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce account organization rel, or <code>null</code> if a matching commerce account organization rel could not be found
 	*/
-	public CommerceAccountOrganizationRel fetchByuserId_Last(long userId,
+	public CommerceAccountOrganizationRel fetchByOrganizationId_Last(
+		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator);
 
 	/**
-	* Returns the commerce account organization rels before and after the current commerce account organization rel in the ordered set where userId = &#63;.
+	* Returns the commerce account organization rels before and after the current commerce account organization rel in the ordered set where organizationId = &#63;.
 	*
 	* @param commerceAccountOrganizationRelPK the primary key of the current commerce account organization rel
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce account organization rel
 	* @throws NoSuchAccountOrganizationRelException if a commerce account organization rel with the primary key could not be found
 	*/
-	public CommerceAccountOrganizationRel[] findByuserId_PrevAndNext(
+	public CommerceAccountOrganizationRel[] findByOrganizationId_PrevAndNext(
 		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK,
-		long userId,
+		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
 		throws NoSuchAccountOrganizationRelException;
 
 	/**
-	* Removes all the commerce account organization rels where userId = &#63; from the database.
+	* Removes all the commerce account organization rels where organizationId = &#63; from the database.
 	*
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	*/
-	public void removeByuserId(long userId);
+	public void removeByOrganizationId(long organizationId);
 
 	/**
-	* Returns the number of commerce account organization rels where userId = &#63;.
+	* Returns the number of commerce account organization rels where organizationId = &#63;.
 	*
-	* @param userId the user ID
+	* @param organizationId the organization ID
 	* @return the number of matching commerce account organization rels
 	*/
-	public int countByuserId(long userId);
+	public int countByOrganizationId(long organizationId);
 
 	/**
 	* Returns all the commerce account organization rels where commerceAccountId = &#63;.
@@ -182,7 +186,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	* @param commerceAccountId the commerce account ID
 	* @return the matching commerce account organization rels
 	*/
-	public java.util.List<CommerceAccountOrganizationRel> findBycommerceAccountId(
+	public java.util.List<CommerceAccountOrganizationRel> findByCommerceAccountId(
 		long commerceAccountId);
 
 	/**
@@ -197,7 +201,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	* @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	* @return the range of matching commerce account organization rels
 	*/
-	public java.util.List<CommerceAccountOrganizationRel> findBycommerceAccountId(
+	public java.util.List<CommerceAccountOrganizationRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end);
 
 	/**
@@ -213,7 +217,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce account organization rels
 	*/
-	public java.util.List<CommerceAccountOrganizationRel> findBycommerceAccountId(
+	public java.util.List<CommerceAccountOrganizationRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator);
 
@@ -231,7 +235,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce account organization rels
 	*/
-	public java.util.List<CommerceAccountOrganizationRel> findBycommerceAccountId(
+	public java.util.List<CommerceAccountOrganizationRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
 		boolean retrieveFromCache);
@@ -244,7 +248,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	* @return the first matching commerce account organization rel
 	* @throws NoSuchAccountOrganizationRelException if a matching commerce account organization rel could not be found
 	*/
-	public CommerceAccountOrganizationRel findBycommerceAccountId_First(
+	public CommerceAccountOrganizationRel findByCommerceAccountId_First(
 		long commerceAccountId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
 		throws NoSuchAccountOrganizationRelException;
@@ -256,7 +260,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce account organization rel, or <code>null</code> if a matching commerce account organization rel could not be found
 	*/
-	public CommerceAccountOrganizationRel fetchBycommerceAccountId_First(
+	public CommerceAccountOrganizationRel fetchByCommerceAccountId_First(
 		long commerceAccountId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator);
 
@@ -268,7 +272,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	* @return the last matching commerce account organization rel
 	* @throws NoSuchAccountOrganizationRelException if a matching commerce account organization rel could not be found
 	*/
-	public CommerceAccountOrganizationRel findBycommerceAccountId_Last(
+	public CommerceAccountOrganizationRel findByCommerceAccountId_Last(
 		long commerceAccountId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
 		throws NoSuchAccountOrganizationRelException;
@@ -280,7 +284,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce account organization rel, or <code>null</code> if a matching commerce account organization rel could not be found
 	*/
-	public CommerceAccountOrganizationRel fetchBycommerceAccountId_Last(
+	public CommerceAccountOrganizationRel fetchByCommerceAccountId_Last(
 		long commerceAccountId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator);
 
@@ -293,7 +297,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	* @return the previous, current, and next commerce account organization rel
 	* @throws NoSuchAccountOrganizationRelException if a commerce account organization rel with the primary key could not be found
 	*/
-	public CommerceAccountOrganizationRel[] findBycommerceAccountId_PrevAndNext(
+	public CommerceAccountOrganizationRel[] findByCommerceAccountId_PrevAndNext(
 		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK,
 		long commerceAccountId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountOrganizationRel> orderByComparator)
@@ -304,7 +308,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	*
 	* @param commerceAccountId the commerce account ID
 	*/
-	public void removeBycommerceAccountId(long commerceAccountId);
+	public void removeByCommerceAccountId(long commerceAccountId);
 
 	/**
 	* Returns the number of commerce account organization rels where commerceAccountId = &#63;.
@@ -312,7 +316,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	* @param commerceAccountId the commerce account ID
 	* @return the number of matching commerce account organization rels
 	*/
-	public int countBycommerceAccountId(long commerceAccountId);
+	public int countByCommerceAccountId(long commerceAccountId);
 
 	/**
 	* Caches the commerce account organization rel in the entity cache if it is enabled.
