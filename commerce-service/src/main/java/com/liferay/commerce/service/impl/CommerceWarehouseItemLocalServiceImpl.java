@@ -175,7 +175,8 @@ public class CommerceWarehouseItemLocalServiceImpl
 		if (cpDefinition != null) {
 			return commerceWarehouseItemLocalService.
 				getCommerceWarehouseItemsByCPI_CPIU(
-					cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid());
+					cpDefinition.getCProductId(),
+					cpInstance.getCPInstanceUuid());
 		}
 
 		return null;

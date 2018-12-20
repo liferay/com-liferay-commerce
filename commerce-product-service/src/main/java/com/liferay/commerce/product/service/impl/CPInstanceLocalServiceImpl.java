@@ -164,7 +164,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		CPInstance cpInstance = cpInstancePersistence.create(cpInstanceId);
 
 		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
-
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 

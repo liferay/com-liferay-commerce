@@ -113,8 +113,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
 
 			CPDefinition newCPDefinition =
-				cpDefinitionLocalService.copyCPDefinition(
-					classPK);
+				cpDefinitionLocalService.copyCPDefinition(classPK);
 
 			cProductLocalService.updatePublishedDefinitionId(
 				newCPDefinition.getCProductId(),
