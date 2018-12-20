@@ -131,7 +131,7 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		_searchContainer = new SearchContainer<>(
 			_renderRequest, getPortletURL(), null, emptyResultsMessage);
 
-		List<CommercePaymentMethodGroupRel> results;
+		List<CommercePaymentMethodGroupRel> results = null;
 
 		if (active != null) {
 			results =
