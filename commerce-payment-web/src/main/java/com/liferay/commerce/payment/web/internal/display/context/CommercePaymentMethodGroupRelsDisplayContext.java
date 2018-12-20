@@ -182,9 +182,6 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 					commercePaymentMethodGroupRels)
 		throws PortalException {
 
-		commercePaymentMethodGroupRels = ListUtil.copy(
-			commercePaymentMethodGroupRels);
-
 		Map<String, CommercePaymentMethod> commercePaymentMethods =
 			_commercePaymentMethodRegistry.getCommercePaymentMethods();
 
@@ -197,6 +194,9 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			commerceEngineKeys.remove(
 				commercePaymentMethodGroupRel.getEngineKey());
 		}
+
+		commercePaymentMethodGroupRels = ListUtil.copy(
+			commercePaymentMethodGroupRels);
 
 		for (String name : commerceEngineKeys) {
 			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
@@ -212,12 +212,12 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			getDefaultCommercePaymentMethodGroupRel(String engineKey)
 		throws PortalException {
 
-		CommercePaymentMethod commercePaymentMethod =
-			_commercePaymentMethodRegistry.getCommercePaymentMethod(engineKey);
-
 		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
 			_commercePaymentMethodGroupRelService.
 				createCommercePaymentMethodGroupRel(0L);
+
+		CommercePaymentMethod commercePaymentMethod =
+			_commercePaymentMethodRegistry.getCommercePaymentMethod(engineKey);
 
 		Locale locale = LocaleUtil.getSiteDefault();
 

@@ -65,8 +65,6 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 
 		// Commerce payment method
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-
 		if ((imageFile != null) && !imageFile.exists()) {
 			imageFile = null;
 		}
@@ -79,9 +77,13 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 
 		commercePaymentMethodGroupRel.setGroupId(
 			serviceContext.getScopeGroupId());
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+
 		commercePaymentMethodGroupRel.setCompanyId(user.getCompanyId());
 		commercePaymentMethodGroupRel.setUserId(user.getUserId());
 		commercePaymentMethodGroupRel.setUserName(user.getFullName());
+
 		commercePaymentMethodGroupRel.setNameMap(nameMap);
 		commercePaymentMethodGroupRel.setDescriptionMap(descriptionMap);
 

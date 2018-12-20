@@ -72,13 +72,6 @@ public class CommercePaymentMethodPayPalServlet extends HttpServlet {
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			boolean cancel = ParamUtil.getBoolean(httpServletRequest, "cancel");
-			String redirect = ParamUtil.getString(
-				httpServletRequest, "redirect");
-			String token = ParamUtil.getString(httpServletRequest, "token");
-			String paymentId = ParamUtil.getString(
-				httpServletRequest, "paymentId");
-
 			long groupId = ParamUtil.getLong(httpServletRequest, "groupId");
 			String uuid = ParamUtil.getString(httpServletRequest, "uuid");
 
@@ -86,11 +79,18 @@ public class CommercePaymentMethodPayPalServlet extends HttpServlet {
 				_commerceOrderService.getCommerceOrderByUuidAndGroupId(
 					uuid, groupId);
 
+			String paymentId = ParamUtil.getString(
+				httpServletRequest, "paymentId");
+
+			boolean cancel = ParamUtil.getBoolean(httpServletRequest, "cancel");
+
 			if (cancel) {
 				_commercePaymentEngine.cancelPayment(
 					commerceOrder.getCommerceOrderId(), paymentId,
 					httpServletRequest);
 			}
+
+			String token = ParamUtil.getString(httpServletRequest, "token");
 
 			if (paymentId.isEmpty() && !token.isEmpty()) {
 				_commercePaymentEngine.completeRecurringPayment(
@@ -102,6 +102,9 @@ public class CommercePaymentMethodPayPalServlet extends HttpServlet {
 					commerceOrder.getCommerceOrderId(), paymentId,
 					httpServletRequest);
 			}
+
+			String redirect = ParamUtil.getString(
+				httpServletRequest, "redirect");
 
 			httpServletResponse.sendRedirect(redirect);
 		}
