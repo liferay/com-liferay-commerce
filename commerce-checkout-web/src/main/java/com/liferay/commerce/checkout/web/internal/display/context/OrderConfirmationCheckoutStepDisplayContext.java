@@ -88,10 +88,9 @@ public class OrderConfirmationCheckoutStepDisplayContext {
 		PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
 		portletURL.setParameter(
-			"commerceOrderId", String.valueOf(commerceOrderId));
-
-		portletURL.setParameter(
 			"checkoutStepName", PaymentProcessCommerceCheckoutStep.NAME);
+		portletURL.setParameter(
+			"commerceOrderId", String.valueOf(commerceOrderId));
 
 		return portletURL.toString();
 	}

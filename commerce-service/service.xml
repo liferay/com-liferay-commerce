@@ -448,8 +448,8 @@
 
 		<column name="commerceOrderId" type="long" />
 		<column name="commercePaymentMethodKey" type="String" />
-		<column name="status" type="int" />
 		<column name="content" type="String" />
+		<column name="status" type="int" />
 
 		<!-- Order -->
 

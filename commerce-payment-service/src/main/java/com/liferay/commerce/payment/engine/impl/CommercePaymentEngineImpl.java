@@ -572,17 +572,17 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			CommercePaymentMethod commercePaymentMethod)
 		throws PortalException {
 
-		String returnUrl = null;
 		String cancelUrl = null;
+		String returnUrl = null;
 
 		if (CommercePaymentConstants.
 				COMMERCE_PAYMENT_METHOD_TYPE_ONLINE_REDIRECT ==
 					commercePaymentMethod.getPaymentType()) {
 
-			returnUrl = _getReturnUrl(
+			cancelUrl = _getCancelUrl(
 				httpServletRequest, commerceOrder, checkoutStepUrl,
 				commercePaymentMethod);
-			cancelUrl = _getCancelUrl(
+			returnUrl = _getReturnUrl(
 				httpServletRequest, commerceOrder, checkoutStepUrl,
 				commercePaymentMethod);
 		}
