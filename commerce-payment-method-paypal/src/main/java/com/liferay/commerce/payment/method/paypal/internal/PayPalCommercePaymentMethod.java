@@ -715,7 +715,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		List<CommerceOrderItem> commerceOrderItems =
 			commerceOrder.getCommerceOrderItems();
 
-		List<PaymentDefinition> paymentDefinitions = new ArrayList<>();
+		List<PaymentDefinition> paymentDefinitions = new ArrayList<>(
+			commerceOrderItems.size());
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 			CPInstance cpInstance = commerceOrderItem.getCPInstance();
