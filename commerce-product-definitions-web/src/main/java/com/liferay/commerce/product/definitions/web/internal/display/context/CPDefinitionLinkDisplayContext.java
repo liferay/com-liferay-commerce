@@ -22,6 +22,7 @@ import com.liferay.commerce.product.item.selector.criterion.CPDefinitionItemSele
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -223,7 +224,9 @@ public class CPDefinitionLinkDisplayContext
 			cpDefinitionId, type);
 
 		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks) {
-			cpDefinitionIdsList.add(cpDefinitionLink.getCProductId());
+			CProduct cProduct = cpDefinitionLink.getCProduct();
+
+			cpDefinitionIdsList.add(cProduct.getPublishedDefinitionId());
 		}
 
 		if (!cpDefinitionIdsList.isEmpty()) {
