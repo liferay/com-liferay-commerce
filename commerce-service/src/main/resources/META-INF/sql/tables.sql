@@ -221,8 +221,8 @@ create table CommerceOrderPayment (
 	modifiedDate DATE null,
 	commerceOrderId LONG,
 	commercePaymentMethodKey VARCHAR(75) null,
-	status INTEGER,
-	content TEXT null
+	content TEXT null,
+	status INTEGER
 );
 
 create table CommercePaymentMethod (

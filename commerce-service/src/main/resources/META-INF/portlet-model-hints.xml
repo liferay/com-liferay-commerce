@@ -192,10 +192,10 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="commerceOrderId" type="long" />
 		<field name="commercePaymentMethodKey" type="String" />
-		<field name="status" type="int" />
 		<field name="content" type="String">
 			<hint-collection name="CLOB" />
 		</field>
+		<field name="status" type="int" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceRegion">
 		<field name="uuid" type="String" />

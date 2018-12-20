@@ -85,10 +85,10 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 		sb.append(commerceOrderId);
 		sb.append(", commercePaymentMethodKey=");
 		sb.append(commercePaymentMethodKey);
-		sb.append(", status=");
-		sb.append(status);
 		sb.append(", content=");
 		sb.append(content);
+		sb.append(", status=");
+		sb.append(status);
 		sb.append("}");
 
 		return sb.toString();
@@ -133,14 +133,14 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 			commerceOrderPaymentImpl.setCommercePaymentMethodKey(commercePaymentMethodKey);
 		}
 
-		commerceOrderPaymentImpl.setStatus(status);
-
 		if (content == null) {
 			commerceOrderPaymentImpl.setContent("");
 		}
 		else {
 			commerceOrderPaymentImpl.setContent(content);
 		}
+
+		commerceOrderPaymentImpl.setStatus(status);
 
 		commerceOrderPaymentImpl.resetOriginalValues();
 
@@ -162,9 +162,9 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 
 		commerceOrderId = objectInput.readLong();
 		commercePaymentMethodKey = objectInput.readUTF();
+		content = objectInput.readUTF();
 
 		status = objectInput.readInt();
-		content = objectInput.readUTF();
 	}
 
 	@Override
@@ -197,14 +197,14 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 			objectOutput.writeUTF(commercePaymentMethodKey);
 		}
 
-		objectOutput.writeInt(status);
-
 		if (content == null) {
 			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(content);
 		}
+
+		objectOutput.writeInt(status);
 	}
 
 	public long commerceOrderPaymentId;
@@ -216,6 +216,6 @@ public class CommerceOrderPaymentCacheModel implements CacheModel<CommerceOrderP
 	public long modifiedDate;
 	public long commerceOrderId;
 	public String commercePaymentMethodKey;
-	public int status;
 	public String content;
+	public int status;
 }
