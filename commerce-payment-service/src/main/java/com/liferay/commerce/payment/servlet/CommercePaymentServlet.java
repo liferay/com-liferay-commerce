@@ -73,7 +73,6 @@ public class CommercePaymentServlet extends HttpServlet {
 
 			_commerceOrderId = ParamUtil.getLong(
 				httpServletRequest, "commerceOrderId");
-
 			_confirmationStepUrl = ParamUtil.getString(
 				httpServletRequest, "confirmationStep");
 

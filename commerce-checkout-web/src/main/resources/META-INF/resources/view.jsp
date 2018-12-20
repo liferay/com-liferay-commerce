@@ -38,6 +38,7 @@ CheckoutDisplayContext checkoutDisplayContext = (CheckoutDisplayContext)request.
 					int step = 1;
 
 					List<CommerceCheckoutStep> commerceCheckoutSteps = checkoutDisplayContext.getCommerceCheckoutSteps();
+
 					Iterator<CommerceCheckoutStep> commerceCheckoutStepIterator = commerceCheckoutSteps.iterator();
 
 					while (commerceCheckoutStepIterator.hasNext()) {

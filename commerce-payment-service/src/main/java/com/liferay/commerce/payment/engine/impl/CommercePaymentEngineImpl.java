@@ -91,7 +91,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			CommerceOrderConstants.ORDER_STATUS_CANCELLED, transactionId);
 
 		_commerceOrderPaymentLocalService.addCommerceOrderPayment(
-			commerceOrderId, commercePaymentResult.getNewPaymentStatus(), "");
+			commerceOrderId, commercePaymentResult.getNewPaymentStatus(),
+			StringPool.BLANK);
 
 		return commercePaymentResult;
 	}
@@ -143,7 +144,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			commercePaymentResult.getAuthTransactionId());
 
 		_commerceOrderPaymentLocalService.addCommerceOrderPayment(
-			commerceOrderId, commercePaymentResult.getNewPaymentStatus(), "");
+			commerceOrderId, commercePaymentResult.getNewPaymentStatus(),
+			StringPool.BLANK);
 
 		return commercePaymentResult;
 	}
@@ -184,7 +186,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			commercePaymentResult.getAuthTransactionId());
 
 		_commerceOrderPaymentLocalService.addCommerceOrderPayment(
-			commerceOrderId, commercePaymentResult.getNewPaymentStatus(), "");
+			commerceOrderId, commercePaymentResult.getNewPaymentStatus(),
+			StringPool.BLANK);
 
 		return commercePaymentResult;
 	}
@@ -226,7 +229,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			commercePaymentResult.getAuthTransactionId());
 
 		_commerceOrderPaymentLocalService.addCommerceOrderPayment(
-			commerceOrderId, commercePaymentResult.getNewPaymentStatus(), "");
+			commerceOrderId, commercePaymentResult.getNewPaymentStatus(),
+			StringPool.BLANK);
 
 		return commercePaymentResult;
 	}
