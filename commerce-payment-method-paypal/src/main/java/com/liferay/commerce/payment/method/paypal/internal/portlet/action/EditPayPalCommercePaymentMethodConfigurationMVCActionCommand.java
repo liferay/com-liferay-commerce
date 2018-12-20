@@ -27,9 +27,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
@@ -68,18 +65,6 @@ public class EditPayPalCommercePaymentMethodConfigurationMVCActionCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String clientId = ParamUtil.getString(
-			actionRequest, "settings--clientId--");
-		String clientSecret = ParamUtil.getString(
-			actionRequest, "settings--clientSecret--");
-		String mode = ParamUtil.getString(actionRequest, "settings--mode--");
-
-		Map<String, String> parameterMap = new HashMap<>();
-
-		parameterMap.put("clientId", clientId);
-		parameterMap.put("clientSecret", clientSecret);
-		parameterMap.put("mode", mode);
-
 		Settings settings = _settingsFactory.getSettings(
 			new GroupServiceSettingsLocator(
 				themeDisplay.getScopeGroupId(),
@@ -88,9 +73,19 @@ public class EditPayPalCommercePaymentMethodConfigurationMVCActionCommand
 		ModifiableSettings modifiableSettings =
 			settings.getModifiableSettings();
 
-		for (Map.Entry<String, String> entry : parameterMap.entrySet()) {
-			modifiableSettings.setValue(entry.getKey(), entry.getValue());
-		}
+		String clientId = ParamUtil.getString(
+			actionRequest, "settings--clientId--");
+
+		modifiableSettings.setValue("clientId", clientId);
+
+		String clientSecret = ParamUtil.getString(
+			actionRequest, "settings--clientSecret--");
+
+		modifiableSettings.setValue("clientSecret", clientSecret);
+
+		String mode = ParamUtil.getString(actionRequest, "settings--mode--");
+
+		modifiableSettings.setValue("mode", mode);
 
 		modifiableSettings.store();
 	}

@@ -849,9 +849,7 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setAdvanceStatus(advanceStatus);
 		commerceOrder.setExternalReferenceCode(externalReferenceCode);
 
-		commerceOrderPersistence.update(commerceOrder);
-
-		return commerceOrder;
+		return commerceOrderPersistence.update(commerceOrder);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -961,9 +959,7 @@ public class CommerceOrderLocalServiceImpl
 
 		commerceOrder.setPurchaseOrderNumber(purchaseOrderNumber);
 
-		commerceOrderPersistence.update(commerceOrder);
-
-		return commerceOrder;
+		return commerceOrderPersistence.update(commerceOrder);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -999,10 +995,8 @@ public class CommerceOrderLocalServiceImpl
 
 		commerceOrderPersistence.update(commerceOrder);
 
-		commerceOrder = commerceOrderLocalService.recalculatePrice(
+		return commerceOrderLocalService.recalculatePrice(
 			commerceOrder.getCommerceOrderId(), commerceContext);
-
-		return commerceOrder;
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -1024,9 +1018,7 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setStatusByUserName(user.getFullName());
 		commerceOrder.setStatusDate(serviceContext.getModifiedDate(now));
 
-		commerceOrderPersistence.update(commerceOrder);
-
-		return commerceOrder;
+		return commerceOrderPersistence.update(commerceOrder);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -1040,9 +1032,7 @@ public class CommerceOrderLocalServiceImpl
 
 		commerceOrder.setTransactionId(transactionId);
 
-		commerceOrderPersistence.update(commerceOrder);
-
-		return commerceOrder;
+		return commerceOrderPersistence.update(commerceOrder);
 	}
 
 	@Override

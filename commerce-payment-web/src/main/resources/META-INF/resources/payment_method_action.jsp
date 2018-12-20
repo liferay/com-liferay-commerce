@@ -22,8 +22,6 @@ CommercePaymentMethodGroupRelsDisplayContext commercePaymentMethodGroupRelsDispl
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommercePaymentMethodGroupRel commercePaymentMethodGroupRel = (CommercePaymentMethodGroupRel)row.getObject();
-
-long commercePaymentMethodGroupRelId = commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId();
 %>
 
 <liferay-ui:icon-menu
@@ -37,7 +35,7 @@ long commercePaymentMethodGroupRelId = commercePaymentMethodGroupRel.getCommerce
 		<portlet:actionURL name="editCommercePaymentMethodGroupRel" var="editURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EDIT %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commercePaymentMethodGroupRelId" value="<%= String.valueOf(commercePaymentMethodGroupRelId) %>" />
+			<portlet:param name="commercePaymentMethodGroupRelId" value="<%= String.valueOf(commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId()) %>" />
 			<portlet:param name="engineKey" value="<%= commercePaymentMethodGroupRel.getEngineKey() %>" />
 		</portlet:actionURL>
 
@@ -49,7 +47,7 @@ long commercePaymentMethodGroupRelId = commercePaymentMethodGroupRel.getCommerce
 		<portlet:actionURL name="editCommercePaymentMethodGroupRel" var="setActiveURL">
 			<portlet:param name="<%= Constants.CMD %>" value="setActive" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commercePaymentMethodGroupRelId" value="<%= String.valueOf(commercePaymentMethodGroupRelId) %>" />
+			<portlet:param name="commercePaymentMethodGroupRelId" value="<%= String.valueOf(commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId()) %>" />
 			<portlet:param name="active" value="<%= String.valueOf(!commercePaymentMethodGroupRel.isActive()) %>" />
 			<portlet:param name="engineKey" value="<%= commercePaymentMethodGroupRel.getEngineKey() %>" />
 		</portlet:actionURL>
