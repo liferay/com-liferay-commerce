@@ -222,20 +222,6 @@ public interface CommerceOrderPaymentModel extends BaseModel<CommerceOrderPaymen
 	public void setCommercePaymentMethodKey(String commercePaymentMethodKey);
 
 	/**
-	 * Returns the status of this commerce order payment.
-	 *
-	 * @return the status of this commerce order payment
-	 */
-	public int getStatus();
-
-	/**
-	 * Sets the status of this commerce order payment.
-	 *
-	 * @param status the status of this commerce order payment
-	 */
-	public void setStatus(int status);
-
-	/**
 	 * Returns the content of this commerce order payment.
 	 *
 	 * @return the content of this commerce order payment
@@ -249,6 +235,20 @@ public interface CommerceOrderPaymentModel extends BaseModel<CommerceOrderPaymen
 	 * @param content the content of this commerce order payment
 	 */
 	public void setContent(String content);
+
+	/**
+	 * Returns the status of this commerce order payment.
+	 *
+	 * @return the status of this commerce order payment
+	 */
+	public int getStatus();
+
+	/**
+	 * Sets the status of this commerce order payment.
+	 *
+	 * @param status the status of this commerce order payment
+	 */
+	public void setStatus(int status);
 
 	@Override
 	public boolean isNew();

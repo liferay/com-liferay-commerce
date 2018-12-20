@@ -68,8 +68,8 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceOrderId", getCommerceOrderId());
 		attributes.put("commercePaymentMethodKey", getCommercePaymentMethodKey());
-		attributes.put("status", getStatus());
 		attributes.put("content", getContent());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -132,16 +132,16 @@ public class CommerceOrderPaymentWrapper implements CommerceOrderPayment,
 			setCommercePaymentMethodKey(commercePaymentMethodKey);
 		}
 
-		Integer status = (Integer)attributes.get("status");
-
-		if (status != null) {
-			setStatus(status);
-		}
-
 		String content = (String)attributes.get("content");
 
 		if (content != null) {
 			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 

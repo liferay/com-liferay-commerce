@@ -138,9 +138,9 @@ public class CommerceOrderPaymentPersistenceTest {
 
 		newCommerceOrderPayment.setCommercePaymentMethodKey(RandomTestUtil.randomString());
 
-		newCommerceOrderPayment.setStatus(RandomTestUtil.nextInt());
-
 		newCommerceOrderPayment.setContent(RandomTestUtil.randomString());
+
+		newCommerceOrderPayment.setStatus(RandomTestUtil.nextInt());
 
 		_commerceOrderPayments.add(_persistence.update(newCommerceOrderPayment));
 
@@ -166,10 +166,10 @@ public class CommerceOrderPaymentPersistenceTest {
 			newCommerceOrderPayment.getCommerceOrderId());
 		Assert.assertEquals(existingCommerceOrderPayment.getCommercePaymentMethodKey(),
 			newCommerceOrderPayment.getCommercePaymentMethodKey());
-		Assert.assertEquals(existingCommerceOrderPayment.getStatus(),
-			newCommerceOrderPayment.getStatus());
 		Assert.assertEquals(existingCommerceOrderPayment.getContent(),
 			newCommerceOrderPayment.getContent());
+		Assert.assertEquals(existingCommerceOrderPayment.getStatus(),
+			newCommerceOrderPayment.getStatus());
 	}
 
 	@Test
@@ -430,9 +430,9 @@ public class CommerceOrderPaymentPersistenceTest {
 
 		commerceOrderPayment.setCommercePaymentMethodKey(RandomTestUtil.randomString());
 
-		commerceOrderPayment.setStatus(RandomTestUtil.nextInt());
-
 		commerceOrderPayment.setContent(RandomTestUtil.randomString());
+
+		commerceOrderPayment.setStatus(RandomTestUtil.nextInt());
 
 		_commerceOrderPayments.add(_persistence.update(commerceOrderPayment));
 

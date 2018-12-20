@@ -43,8 +43,8 @@ public class CommerceOrderPaymentSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCommerceOrderId(model.getCommerceOrderId());
 		soapModel.setCommercePaymentMethodKey(model.getCommercePaymentMethodKey());
-		soapModel.setStatus(model.getStatus());
 		soapModel.setContent(model.getContent());
+		soapModel.setStatus(model.getStatus());
 
 		return soapModel;
 	}
@@ -172,20 +172,20 @@ public class CommerceOrderPaymentSoap implements Serializable {
 		_commercePaymentMethodKey = commercePaymentMethodKey;
 	}
 
-	public int getStatus() {
-		return _status;
-	}
-
-	public void setStatus(int status) {
-		_status = status;
-	}
-
 	public String getContent() {
 		return _content;
 	}
 
 	public void setContent(String content) {
 		_content = content;
+	}
+
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
 	}
 
 	private long _commerceOrderPaymentId;
@@ -197,6 +197,6 @@ public class CommerceOrderPaymentSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _commerceOrderId;
 	private String _commercePaymentMethodKey;
-	private int _status;
 	private String _content;
+	private int _status;
 }
