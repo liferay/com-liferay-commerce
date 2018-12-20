@@ -809,7 +809,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		MerchantPreferences merchantPreferences = new MerchantPreferences();
 
-		//merchantPreferences.setSetupFee(currency);
 		merchantPreferences.setCancelUrl(commercePaymentRequest.getCancelUrl());
 		merchantPreferences.setReturnUrl(commercePaymentRequest.getReturnUrl());
 		merchantPreferences.setMaxFailAttempts("0");
