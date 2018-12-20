@@ -43,8 +43,9 @@ public class PayPalCommercePaymentRequestProvider
 
 	@Override
 	public CommercePaymentRequest getCommercePaymentRequest(
-			String cancelUrl, long commerceOrderId, HttpServletRequest request,
-			Locale locale, String returnUrl, String transactionId)
+			String cancelUrl, long commerceOrderId,
+			HttpServletRequest httpServletRequest, Locale locale,
+			String returnUrl, String transactionId)
 		throws PortalException {
 
 		CommerceOrder commerceOrder =
@@ -52,7 +53,7 @@ public class PayPalCommercePaymentRequestProvider
 
 		BigDecimal amount = commerceOrder.getTotal();
 
-		String payerId = ParamUtil.getString(request, "PayerID");
+		String payerId = ParamUtil.getString(httpServletRequest, "PayerID");
 
 		return new PayPalCommercePaymentRequest(
 			amount, cancelUrl, commerceOrderId, locale, payerId, returnUrl,

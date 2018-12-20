@@ -23,8 +23,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CommerceCheckoutRequestHelper extends BaseRequestHelper {
 
-	public CommerceCheckoutRequestHelper(HttpServletRequest request) {
-		super(request);
+	public CommerceCheckoutRequestHelper(
+		HttpServletRequest httpServletRequest) {
+
+		super(httpServletRequest);
 	}
 
 }

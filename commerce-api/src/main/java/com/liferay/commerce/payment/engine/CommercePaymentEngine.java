@@ -33,24 +33,24 @@ public interface CommercePaymentEngine {
 
 	public CommercePaymentResult cancelPayment(
 			long commerceOrderId, String transactionId,
-			HttpServletRequest request)
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public CommercePaymentResult cancelRecurringPayment(long commerceOrderId);
 
 	public CommercePaymentResult capturePayment(
 			long commerceOrderId, String transactionId,
-			HttpServletRequest request)
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public CommercePaymentResult completePayment(
 			long commerceOrderId, String transactionId,
-			HttpServletRequest request)
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public CommercePaymentResult completeRecurringPayment(
 			long commerceOrderId, String transactionId,
-			HttpServletRequest request)
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public int getCommercePaymentMethodGroupRelsCount(long groupId);
@@ -71,27 +71,27 @@ public interface CommercePaymentEngine {
 
 	public CommercePaymentResult processPayment(
 			long commerceOrderId, String checkoutStepUrl,
-			HttpServletRequest request)
+			HttpServletRequest httpServletRequest)
 		throws Throwable;
 
 	public CommercePaymentResult processRecurringPayment(
 			long commerceOrderId, String checkoutStepUrl,
-			HttpServletRequest request)
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public CommercePaymentResult refundPayment(
 			long commerceOrderId, String transactionId,
-			HttpServletRequest request)
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public CommercePaymentResult startPayment(
 			long commerceOrderId, String checkoutStepUrl,
-			HttpServletRequest request)
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 	public CommercePaymentResult voidTransaction(
 			long commerceOrderId, String transactionId,
-			HttpServletRequest request)
+			HttpServletRequest httpServletRequest)
 		throws Exception;
 
 }

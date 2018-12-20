@@ -36,11 +36,11 @@ public class MoneyOrderCheckoutStepDisplayContext {
 	public MoneyOrderCheckoutStepDisplayContext(
 		CommerceOrderService commerceOrderService,
 		ConfigurationProvider configurationProvider,
-		HttpServletRequest request) {
+		HttpServletRequest httpServletRequest) {
 
 		_commerceOrderService = commerceOrderService;
 		_configurationProvider = configurationProvider;
-		_request = request;
+		_httpServletRequest = httpServletRequest;
 	}
 
 	public String getMessage() throws PortalException {
@@ -62,8 +62,9 @@ public class MoneyOrderCheckoutStepDisplayContext {
 		LocalizedValuesMap localizedValuesMap =
 			moneyOrderGroupServiceConfiguration.message();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		_message = localizedValuesMap.get(themeDisplay.getLocale());
 
@@ -75,7 +76,8 @@ public class MoneyOrderCheckoutStepDisplayContext {
 			return _commerceOrder;
 		}
 
-		long commerceOrderId = ParamUtil.getLong(_request, "commerceOrderId");
+		long commerceOrderId = ParamUtil.getLong(
+			_httpServletRequest, "commerceOrderId");
 
 		_commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
@@ -86,7 +88,7 @@ public class MoneyOrderCheckoutStepDisplayContext {
 	private CommerceOrder _commerceOrder;
 	private final CommerceOrderService _commerceOrderService;
 	private final ConfigurationProvider _configurationProvider;
+	private final HttpServletRequest _httpServletRequest;
 	private String _message;
-	private final HttpServletRequest _request;
 
 }
