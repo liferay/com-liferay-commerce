@@ -202,8 +202,8 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="commerceOrderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commercePaymentMethodKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.commerce.model.impl.CommerceRegionImpl" table="CommerceRegion">
 		<id name="commerceRegionId" type="long">

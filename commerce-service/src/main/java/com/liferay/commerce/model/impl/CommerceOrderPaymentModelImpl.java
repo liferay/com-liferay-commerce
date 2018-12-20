@@ -75,8 +75,8 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "commerceOrderId", Types.BIGINT },
 			{ "commercePaymentMethodKey", Types.VARCHAR },
-			{ "status", Types.INTEGER },
-			{ "content", Types.CLOB }
+			{ "content", Types.CLOB },
+			{ "status", Types.INTEGER }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -90,11 +90,11 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("commerceOrderId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commercePaymentMethodKey", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("content", Types.CLOB);
+		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceOrderPayment (commerceOrderPaymentId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,commercePaymentMethodKey VARCHAR(75) null,status INTEGER,content TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceOrderPayment (commerceOrderPaymentId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,commercePaymentMethodKey VARCHAR(75) null,content TEXT null,status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrderPayment";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceOrderPayment.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceOrderPayment.createDate DESC";
@@ -161,8 +161,8 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceOrderId", getCommerceOrderId());
 		attributes.put("commercePaymentMethodKey", getCommercePaymentMethodKey());
-		attributes.put("status", getStatus());
 		attributes.put("content", getContent());
+		attributes.put("status", getStatus());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -228,16 +228,16 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 			setCommercePaymentMethodKey(commercePaymentMethodKey);
 		}
 
-		Integer status = (Integer)attributes.get("status");
-
-		if (status != null) {
-			setStatus(status);
-		}
-
 		String content = (String)attributes.get("content");
 
 		if (content != null) {
 			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -378,16 +378,6 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 	}
 
 	@Override
-	public int getStatus() {
-		return _status;
-	}
-
-	@Override
-	public void setStatus(int status) {
-		_status = status;
-	}
-
-	@Override
 	public String getContent() {
 		if (_content == null) {
 			return "";
@@ -400,6 +390,16 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 	@Override
 	public void setContent(String content) {
 		_content = content;
+	}
+
+	@Override
+	public int getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(int status) {
+		_status = status;
 	}
 
 	public long getColumnBitmask() {
@@ -442,8 +442,8 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 		commerceOrderPaymentImpl.setModifiedDate(getModifiedDate());
 		commerceOrderPaymentImpl.setCommerceOrderId(getCommerceOrderId());
 		commerceOrderPaymentImpl.setCommercePaymentMethodKey(getCommercePaymentMethodKey());
-		commerceOrderPaymentImpl.setStatus(getStatus());
 		commerceOrderPaymentImpl.setContent(getContent());
+		commerceOrderPaymentImpl.setStatus(getStatus());
 
 		commerceOrderPaymentImpl.resetOriginalValues();
 
@@ -565,8 +565,6 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 			commerceOrderPaymentCacheModel.commercePaymentMethodKey = null;
 		}
 
-		commerceOrderPaymentCacheModel.status = getStatus();
-
 		commerceOrderPaymentCacheModel.content = getContent();
 
 		String content = commerceOrderPaymentCacheModel.content;
@@ -574,6 +572,8 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 		if ((content != null) && (content.length() == 0)) {
 			commerceOrderPaymentCacheModel.content = null;
 		}
+
+		commerceOrderPaymentCacheModel.status = getStatus();
 
 		return commerceOrderPaymentCacheModel;
 	}
@@ -600,10 +600,10 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 		sb.append(getCommerceOrderId());
 		sb.append(", commercePaymentMethodKey=");
 		sb.append(getCommercePaymentMethodKey());
-		sb.append(", status=");
-		sb.append(getStatus());
 		sb.append(", content=");
 		sb.append(getContent());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append("}");
 
 		return sb.toString();
@@ -654,12 +654,12 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 		sb.append(getCommercePaymentMethodKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>status</column-name><column-value><![CDATA[");
-		sb.append(getStatus());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>content</column-name><column-value><![CDATA[");
 		sb.append(getContent());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -683,8 +683,8 @@ public class CommerceOrderPaymentModelImpl extends BaseModelImpl<CommerceOrderPa
 	private long _originalCommerceOrderId;
 	private boolean _setOriginalCommerceOrderId;
 	private String _commercePaymentMethodKey;
-	private int _status;
 	private String _content;
+	private int _status;
 	private long _columnBitmask;
 	private CommerceOrderPayment _escapedModel;
 }
