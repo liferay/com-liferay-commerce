@@ -146,7 +146,7 @@ public class ActionHelper {
 			CProduct cProduct = _cProductLocalService.fetchCProduct(
 				cpDefinition.getCProductId());
 
-			if (cpDefinitionId != cProduct.getPublishedDefinitionId()){
+			if (cpDefinitionId != cProduct.getPublishedDefinitionId()) {
 				cpDefinition = _cpDefinitionService.fetchCPDefinition(
 					cProduct.getPublishedDefinitionId());
 			}

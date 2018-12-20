@@ -498,12 +498,11 @@ public class CPDefinitionLocalServiceImpl
 
 			// AssetEntry
 
-			AssetEntry assetEntry =	assetEntryLocalService.fetchEntry(
-					cpDefinitionClassNameId, cpDefinitionId);
+			AssetEntry assetEntry = assetEntryLocalService.fetchEntry(
+				cpDefinitionClassNameId, cpDefinitionId);
 
 			if (assetEntry != null) {
-				AssetEntry newAssetEntry =
-					(AssetEntry)assetEntry.clone();
+				AssetEntry newAssetEntry = (AssetEntry)assetEntry.clone();
 
 				newAssetEntry.setEntryId(counterLocalService.increment());
 				newAssetEntry.setModifiedDate(new Date());
@@ -1711,7 +1710,6 @@ public class CPDefinitionLocalServiceImpl
 			cpDefinitionId);
 
 		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
-
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 
@@ -1719,7 +1717,6 @@ public class CPDefinitionLocalServiceImpl
 				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
 
 			cpDefinitionId = cpDefinition.getCPDefinitionId();
-
 		}
 
 		updateStatus(
@@ -1799,7 +1796,6 @@ public class CPDefinitionLocalServiceImpl
 
 			cProductLocalService.updatePublishedDefinitionId(
 				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
-
 		}
 
 		Date now = new Date();
