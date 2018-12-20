@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 
 import java.util.Locale;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -43,9 +43,8 @@ public class DefaultCommercePaymentRequestProvider
 
 	@Override
 	public CommercePaymentRequest getCommercePaymentRequest(
-			String cancelUrl, long commerceOrderId,
-			ServletRequest servletRequest, Locale locale, String returnUrl,
-			String transactionId)
+			String cancelUrl, long commerceOrderId, HttpServletRequest request,
+			Locale locale, String returnUrl, String transactionId)
 		throws PortalException {
 
 		CommerceOrder commerceOrder =
