@@ -130,25 +130,26 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
+		boolean success = false;
+
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commercePaymentRequest.getCommerceOrderId());
-
-		Amount amount = _getAmount(
-			commerceOrder, commerceOrder.getCommerceCurrency());
-
-		Capture capture = new Capture();
-
-		capture.setAmount(amount);
-		capture.setIsFinalCapture(true);
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
 		Authorization authorization = Authorization.get(
 			apiContext, commercePaymentRequest.getTransactionId());
 
-		Capture responseCapture = authorization.capture(apiContext, capture);
+		Capture capture = new Capture();
 
-		boolean success = false;
+		Amount amount = _getAmount(
+			commerceOrder, commerceOrder.getCommerceCurrency());
+
+		capture.setAmount(amount);
+
+		capture.setIsFinalCapture(true);
+
+		Capture responseCapture = authorization.capture(apiContext, capture);
 
 		if (PayPalCommercePaymentMethodConstants.
 				AUTHORIZATION_STATE_COMPLETED.equals(
@@ -172,29 +173,29 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
+		boolean success = true;
+
+		Payment payment = new Payment();
+
 		PayPalCommercePaymentRequest payPalCommercePaymentRequest =
 			(PayPalCommercePaymentRequest)commercePaymentRequest;
+
+		String transactionId = payPalCommercePaymentRequest.getTransactionId();
+
+		payment.setId(transactionId);
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			payPalCommercePaymentRequest.getCommerceOrderId());
 
-		String payerId = payPalCommercePaymentRequest.getPayerId();
-
-		String transactionId = payPalCommercePaymentRequest.getTransactionId();
-
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
-		Payment payment = new Payment();
-
-		payment.setId(transactionId);
-
 		PaymentExecution paymentExecution = new PaymentExecution();
+
+		String payerId = payPalCommercePaymentRequest.getPayerId();
 
 		paymentExecution.setPayerId(payerId);
 
 		payment.execute(apiContext, paymentExecution);
-
-		boolean success = true;
 
 		if (PayPalCommercePaymentMethodConstants.PAYMENT_STATE_FAILED.equals(
 				payment.getState())) {
@@ -217,12 +218,14 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
+		boolean success = true;
+
+		Agreement agreement = new Agreement();
+
 		PayPalCommercePaymentRequest payPalCommercePaymentRequest =
 			(PayPalCommercePaymentRequest)commercePaymentRequest;
 
 		String transactionId = payPalCommercePaymentRequest.getTransactionId();
-
-		Agreement agreement = new Agreement();
 
 		agreement.setToken(transactionId);
 
@@ -233,8 +236,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		Agreement activeAgreement = agreement.execute(
 			apiContext, agreement.getToken());
-
-		boolean success = true;
 
 		if (PayPalCommercePaymentMethodConstants.PAYMENT_STATE_FAILED.equals(
 				activeAgreement.getState())) {
@@ -335,10 +336,15 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
+		boolean success = false;
+
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
+
+		Sale sale = Sale.get(
+			apiContext, commercePaymentRequest.getTransactionId());
 
 		RefundRequest refundRequest = new RefundRequest();
 
@@ -353,12 +359,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		refundRequest.setAmount(amount);
 
-		Sale sale = Sale.get(
-			apiContext, commercePaymentRequest.getTransactionId());
-
 		DetailedRefund detailedRefund = sale.refund(apiContext, refundRequest);
-
-		boolean success = false;
 
 		if (PayPalCommercePaymentMethodConstants.
 				AUTHORIZATION_STATE_COMPLETED.equals(
@@ -382,6 +383,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
+		boolean success = false;
+
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commercePaymentRequest.getCommerceOrderId());
 
@@ -404,8 +407,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		}
 
 		url = _http.addParameter(url, "useraction", "commit");
-
-		boolean success = false;
 
 		if (PayPalCommercePaymentMethodConstants.
 				AUTHORIZATION_STATE_CREATED.equals(payment.getState())) {
@@ -439,6 +440,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			return null;
 		}
 
+		boolean success = false;
+
 		Agreement agreement = _getAgreement(commerceOrder, apiContext, plan);
 
 		String url = null;
@@ -450,8 +453,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 				break;
 			}
 		}
-
-		boolean success = false;
 
 		if (PayPalCommercePaymentMethodConstants.
 				AUTHORIZATION_STATE_CREATED.equals(agreement.getState())) {
@@ -474,10 +475,15 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
+		boolean success = false;
+
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
+
+		Sale sale = Sale.get(
+			apiContext, commercePaymentRequest.getTransactionId());
 
 		RefundRequest refundRequest = new RefundRequest();
 
@@ -486,12 +492,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		refundRequest.setAmount(amount);
 
-		Sale sale = Sale.get(
-			apiContext, commercePaymentRequest.getTransactionId());
-
 		DetailedRefund detailedRefund = sale.refund(apiContext, refundRequest);
-
-		boolean success = false;
 
 		if (PayPalCommercePaymentMethodConstants.
 				AUTHORIZATION_STATE_COMPLETED.equals(
@@ -515,6 +516,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
+		boolean success = false;
+
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commercePaymentRequest.getCommerceOrderId());
 
@@ -524,8 +527,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			apiContext, commercePaymentRequest.getTransactionId());
 
 		authorization.doVoid(apiContext);
-
-		boolean success = false;
 
 		if (PayPalCommercePaymentMethodConstants.
 				AUTHORIZATION_STATE_VOIDED.equals(authorization.getState())) {
@@ -658,11 +659,13 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 			Item item = new Item();
 
-			CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
-
 			item.setCurrency(
 				StringUtil.toUpperCase(commerceCurrency.getCode()));
+
+			CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
+
 			item.setDescription(cpDefinition.getShortDescription(languageId));
+
 			item.setName(commerceOrderItem.getName(languageId));
 			item.setPrice(
 				_payPalDecimalFormat.format(commerceOrderItem.getUnitPrice()));
@@ -679,8 +682,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest,
 			CommerceOrder commerceOrder, String intent)
 		throws PayPalRESTException, PortalException {
-
-		APIContext apiContext = _getAPIContext(commerceOrder);
 
 		Payment payment = new Payment();
 
@@ -703,6 +704,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			_getTransactions(
 				commerceOrder, commerceOrder.getCommerceCurrency(),
 				commercePaymentRequest.getLocale()));
+
+		APIContext apiContext = _getAPIContext(commerceOrder);
 
 		return payment.create(apiContext);
 	}
@@ -831,17 +834,18 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	private Plan _updatePlan(APIContext apiContext, Plan plan)
 		throws PayPalRESTException {
 
-		Map<String, String> value = new HashMap<>();
-
-		value.put("state", "ACTIVE");
+		List<Patch> patches = new ArrayList<>();
 
 		Patch patch = new Patch();
 
 		patch.setOp("replace");
 		patch.setPath("/");
-		patch.setValue(value);
 
-		List<Patch> patches = new ArrayList<>();
+		Map<String, String> value = new HashMap<>();
+
+		value.put("state", "ACTIVE");
+
+		patch.setValue(value);
 
 		patches.add(patch);
 
