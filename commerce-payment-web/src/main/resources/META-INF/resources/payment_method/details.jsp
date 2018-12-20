@@ -46,11 +46,7 @@ CommercePaymentMethodGroupRel commercePaymentMethodGroupRel = commercePaymentMet
 			<aui:input name="description" />
 
 			<%
-			String thumbnailSrc = StringPool.BLANK;
-
-			if (commercePaymentMethodGroupRel != null) {
-				thumbnailSrc = commercePaymentMethodGroupRel.getImageURL(themeDisplay);
-			}
+			String thumbnailSrc = commercePaymentMethodGroupRel.getImageURL(themeDisplay);
 			%>
 
 			<c:if test="<%= Validator.isNotNull(thumbnailSrc) %>">
