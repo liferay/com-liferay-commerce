@@ -57,12 +57,12 @@ public interface CommerceAccountOrganizationRel
 			}
 		};
 
-	public static final Accessor<CommerceAccountOrganizationRel, Long> USER_ID_ACCESSOR =
+	public static final Accessor<CommerceAccountOrganizationRel, Long> ORGANIZATION_ID_ACCESSOR =
 		new Accessor<CommerceAccountOrganizationRel, Long>() {
 			@Override
 			public Long get(
 				CommerceAccountOrganizationRel commerceAccountOrganizationRel) {
-				return commerceAccountOrganizationRel.getUserId();
+				return commerceAccountOrganizationRel.getOrganizationId();
 			}
 
 			@Override

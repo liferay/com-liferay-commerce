@@ -38,7 +38,7 @@ public class CommerceAccountOrganizationRelSoap implements Serializable {
 		CommerceAccountOrganizationRelSoap soapModel = new CommerceAccountOrganizationRelSoap();
 
 		soapModel.setCommerceAccountId(model.getCommerceAccountId());
-		soapModel.setUserId(model.getUserId());
+		soapModel.setOrganizationId(model.getOrganizationId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -92,12 +92,13 @@ public class CommerceAccountOrganizationRelSoap implements Serializable {
 	}
 
 	public CommerceAccountOrganizationRelPK getPrimaryKey() {
-		return new CommerceAccountOrganizationRelPK(_commerceAccountId, _userId);
+		return new CommerceAccountOrganizationRelPK(_commerceAccountId,
+			_organizationId);
 	}
 
 	public void setPrimaryKey(CommerceAccountOrganizationRelPK pk) {
 		setCommerceAccountId(pk.commerceAccountId);
-		setUserId(pk.userId);
+		setOrganizationId(pk.organizationId);
 	}
 
 	public long getCommerceAccountId() {
@@ -108,12 +109,12 @@ public class CommerceAccountOrganizationRelSoap implements Serializable {
 		_commerceAccountId = commerceAccountId;
 	}
 
-	public long getUserId() {
-		return _userId;
+	public long getOrganizationId() {
+		return _organizationId;
 	}
 
-	public void setUserId(long userId) {
-		_userId = userId;
+	public void setOrganizationId(long organizationId) {
+		_organizationId = organizationId;
 	}
 
 	public long getCompanyId() {
@@ -157,7 +158,7 @@ public class CommerceAccountOrganizationRelSoap implements Serializable {
 	}
 
 	private long _commerceAccountId;
-	private long _userId;
+	private long _organizationId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

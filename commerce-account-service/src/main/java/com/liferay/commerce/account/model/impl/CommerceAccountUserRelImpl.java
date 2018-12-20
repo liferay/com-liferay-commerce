@@ -27,11 +27,13 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public class CommerceAccountUserRelImpl extends CommerceAccountUserRelBaseImpl {
-	/*
+
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a commerce account user rel model instance should use the {@link com.liferay.commerce.account.model.CommerceAccountUserRel} interface instead.
 	 */
 	public CommerceAccountUserRelImpl() {
 	}
+
 }

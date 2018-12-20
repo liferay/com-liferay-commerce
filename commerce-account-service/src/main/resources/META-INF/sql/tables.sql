@@ -14,13 +14,13 @@ create table CommerceAccount (
 
 create table CommerceAccountOrganizationRel (
 	commerceAccountId LONG not null,
-	userId LONG not null,
+	organizationId LONG not null,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	primary key (commerceAccountId, userId)
+	primary key (commerceAccountId, organizationId)
 );
 
 create table CommerceAccountUserRel (

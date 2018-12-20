@@ -16,13 +16,19 @@ package com.liferay.commerce.account.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
 /**
@@ -49,6 +55,10 @@ public interface CommerceAccountService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceAccountServiceUtil} to access the commerce account remote service. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CommerceAccount addCommerceAccount(long userId,
+		long parentCommerceAccountId, String name, String taxId,
+		boolean active, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -56,4 +66,19 @@ public interface CommerceAccountService extends BaseService {
 	* @return the OSGi service identifier
 	*/
 	public String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
+		long companyId, long parentCommerceAccountId, String keywords,
+		Boolean active, int start, int end, Sort sort)
+		throws PortalException;
+
+	public CommerceAccount updateCommerceAccount(long commerceAccountId,
+		String name, String taxId, boolean active, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommerceAccount upsertCommerceAccount(long userId,
+		long parentCommerceAccountId, String name, String taxId,
+		boolean active, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 }

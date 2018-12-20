@@ -29,14 +29,15 @@ import java.io.Serializable;
 public class CommerceAccountOrganizationRelPK implements Comparable<CommerceAccountOrganizationRelPK>,
 	Serializable {
 	public long commerceAccountId;
-	public long userId;
+	public long organizationId;
 
 	public CommerceAccountOrganizationRelPK() {
 	}
 
-	public CommerceAccountOrganizationRelPK(long commerceAccountId, long userId) {
+	public CommerceAccountOrganizationRelPK(long commerceAccountId,
+		long organizationId) {
 		this.commerceAccountId = commerceAccountId;
-		this.userId = userId;
+		this.organizationId = organizationId;
 	}
 
 	public long getCommerceAccountId() {
@@ -47,12 +48,12 @@ public class CommerceAccountOrganizationRelPK implements Comparable<CommerceAcco
 		this.commerceAccountId = commerceAccountId;
 	}
 
-	public long getUserId() {
-		return userId;
+	public long getOrganizationId() {
+		return organizationId;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setOrganizationId(long organizationId) {
+		this.organizationId = organizationId;
 	}
 
 	@Override
@@ -77,10 +78,10 @@ public class CommerceAccountOrganizationRelPK implements Comparable<CommerceAcco
 			return value;
 		}
 
-		if (userId < pk.userId) {
+		if (organizationId < pk.organizationId) {
 			value = -1;
 		}
-		else if (userId > pk.userId) {
+		else if (organizationId > pk.organizationId) {
 			value = 1;
 		}
 		else {
@@ -107,7 +108,7 @@ public class CommerceAccountOrganizationRelPK implements Comparable<CommerceAcco
 		CommerceAccountOrganizationRelPK pk = (CommerceAccountOrganizationRelPK)obj;
 
 		if ((commerceAccountId == pk.commerceAccountId) &&
-				(userId == pk.userId)) {
+				(organizationId == pk.organizationId)) {
 			return true;
 		}
 		else {
@@ -120,7 +121,7 @@ public class CommerceAccountOrganizationRelPK implements Comparable<CommerceAcco
 		int hashCode = 0;
 
 		hashCode = HashUtil.hash(hashCode, commerceAccountId);
-		hashCode = HashUtil.hash(hashCode, userId);
+		hashCode = HashUtil.hash(hashCode, organizationId);
 
 		return hashCode;
 	}
@@ -134,9 +135,9 @@ public class CommerceAccountOrganizationRelPK implements Comparable<CommerceAcco
 		sb.append("commerceAccountId=");
 
 		sb.append(commerceAccountId);
-		sb.append(", userId=");
+		sb.append(", organizationId=");
 
-		sb.append(userId);
+		sb.append(organizationId);
 
 		sb.append("}");
 

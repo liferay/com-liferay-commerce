@@ -23,7 +23,7 @@
 	<class name="com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImpl" table="CommerceAccountOrganizationRel">
 		<composite-id class="com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK" name="primaryKey">
 			<key-property name="commerceAccountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		</composite-id>
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />

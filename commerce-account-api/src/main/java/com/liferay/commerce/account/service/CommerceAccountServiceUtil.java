@@ -42,6 +42,15 @@ public class CommerceAccountServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.account.model.CommerceAccount addCommerceAccount(
+		long userId, long parentCommerceAccountId, String name, String taxId,
+		boolean active, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceAccount(userId, parentCommerceAccountId, name,
+			taxId, active, externalReferenceCode, serviceContext);
+	}
 
 	/**
 	* Returns the OSGi service identifier.
@@ -50,6 +59,35 @@ public class CommerceAccountServiceUtil {
 	*/
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
+		long companyId, long parentCommerceAccountId, String keywords,
+		Boolean active, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceAccounts(companyId, parentCommerceAccountId,
+			keywords, active, start, end, sort);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
+		long commerceAccountId, String name, String taxId, boolean active,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCommerceAccount(commerceAccountId, name, taxId,
+			active, serviceContext);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount upsertCommerceAccount(
+		long userId, long parentCommerceAccountId, String name, String taxId,
+		boolean active, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .upsertCommerceAccount(userId, parentCommerceAccountId,
+			name, taxId, active, externalReferenceCode, serviceContext);
 	}
 
 	public static CommerceAccountService getService() {

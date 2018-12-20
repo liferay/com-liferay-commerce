@@ -93,7 +93,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_USERID = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
 			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByuserId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUserId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -104,12 +104,12 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
 			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByuserId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUserId",
 			new String[] { Long.class.getName() },
 			CommerceAccountUserRelModelImpl.USERID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByuserId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUserId",
 			new String[] { Long.class.getName() });
 
 	/**
@@ -119,8 +119,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the matching commerce account user rels
 	 */
 	@Override
-	public List<CommerceAccountUserRel> findByuserId(long userId) {
-		return findByuserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceAccountUserRel> findByUserId(long userId) {
+		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
@@ -136,9 +136,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the range of matching commerce account user rels
 	 */
 	@Override
-	public List<CommerceAccountUserRel> findByuserId(long userId, int start,
+	public List<CommerceAccountUserRel> findByUserId(long userId, int start,
 		int end) {
-		return findByuserId(userId, start, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
 	/**
@@ -155,9 +155,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of matching commerce account user rels
 	 */
 	@Override
-	public List<CommerceAccountUserRel> findByuserId(long userId, int start,
+	public List<CommerceAccountUserRel> findByUserId(long userId, int start,
 		int end, OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		return findByuserId(userId, start, end, orderByComparator, true);
+		return findByUserId(userId, start, end, orderByComparator, true);
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of matching commerce account user rels
 	 */
 	@Override
-	public List<CommerceAccountUserRel> findByuserId(long userId, int start,
+	public List<CommerceAccountUserRel> findByUserId(long userId, int start,
 		int end, OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -286,10 +286,10 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	 */
 	@Override
-	public CommerceAccountUserRel findByuserId_First(long userId,
+	public CommerceAccountUserRel findByUserId_First(long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchByuserId_First(userId,
+		CommerceAccountUserRel commerceAccountUserRel = fetchByUserId_First(userId,
 				orderByComparator);
 
 		if (commerceAccountUserRel != null) {
@@ -316,9 +316,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the first matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	 */
 	@Override
-	public CommerceAccountUserRel fetchByuserId_First(long userId,
+	public CommerceAccountUserRel fetchByUserId_First(long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		List<CommerceAccountUserRel> list = findByuserId(userId, 0, 1,
+		List<CommerceAccountUserRel> list = findByUserId(userId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -337,10 +337,10 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	 */
 	@Override
-	public CommerceAccountUserRel findByuserId_Last(long userId,
+	public CommerceAccountUserRel findByUserId_Last(long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchByuserId_Last(userId,
+		CommerceAccountUserRel commerceAccountUserRel = fetchByUserId_Last(userId,
 				orderByComparator);
 
 		if (commerceAccountUserRel != null) {
@@ -367,15 +367,15 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the last matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	 */
 	@Override
-	public CommerceAccountUserRel fetchByuserId_Last(long userId,
+	public CommerceAccountUserRel fetchByUserId_Last(long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		int count = countByuserId(userId);
+		int count = countByUserId(userId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAccountUserRel> list = findByuserId(userId, count - 1,
+		List<CommerceAccountUserRel> list = findByUserId(userId, count - 1,
 				count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -395,7 +395,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchAccountUserRelException if a commerce account user rel with the primary key could not be found
 	 */
 	@Override
-	public CommerceAccountUserRel[] findByuserId_PrevAndNext(
+	public CommerceAccountUserRel[] findByUserId_PrevAndNext(
 		CommerceAccountUserRelPK commerceAccountUserRelPK, long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
@@ -408,12 +408,12 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 
 			CommerceAccountUserRel[] array = new CommerceAccountUserRelImpl[3];
 
-			array[0] = getByuserId_PrevAndNext(session, commerceAccountUserRel,
+			array[0] = getByUserId_PrevAndNext(session, commerceAccountUserRel,
 					userId, orderByComparator, true);
 
 			array[1] = commerceAccountUserRel;
 
-			array[2] = getByuserId_PrevAndNext(session, commerceAccountUserRel,
+			array[2] = getByUserId_PrevAndNext(session, commerceAccountUserRel,
 					userId, orderByComparator, false);
 
 			return array;
@@ -426,7 +426,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		}
 	}
 
-	protected CommerceAccountUserRel getByuserId_PrevAndNext(Session session,
+	protected CommerceAccountUserRel getByUserId_PrevAndNext(Session session,
 		CommerceAccountUserRel commerceAccountUserRel, long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean previous) {
@@ -539,8 +539,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @param userId the user ID
 	 */
 	@Override
-	public void removeByuserId(long userId) {
-		for (CommerceAccountUserRel commerceAccountUserRel : findByuserId(
+	public void removeByUserId(long userId) {
+		for (CommerceAccountUserRel commerceAccountUserRel : findByUserId(
 				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceAccountUserRel);
 		}
@@ -553,7 +553,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the number of matching commerce account user rels
 	 */
 	@Override
-	public int countByuserId(long userId) {
+	public int countByUserId(long userId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
 
 		Object[] finderArgs = new Object[] { userId };
@@ -602,7 +602,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
 			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBycommerceAccountId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCommerceAccountId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -614,12 +614,12 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
 			CommerceAccountUserRelImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findBycommerceAccountId", new String[] { Long.class.getName() },
+			"findByCommerceAccountId", new String[] { Long.class.getName() },
 			CommerceAccountUserRelModelImpl.COMMERCEACCOUNTID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countBycommerceAccountId", new String[] { Long.class.getName() });
+			"countByCommerceAccountId", new String[] { Long.class.getName() });
 
 	/**
 	 * Returns all the commerce account user rels where commerceAccountId = &#63;.
@@ -628,9 +628,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the matching commerce account user rels
 	 */
 	@Override
-	public List<CommerceAccountUserRel> findBycommerceAccountId(
+	public List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId) {
-		return findBycommerceAccountId(commerceAccountId, QueryUtil.ALL_POS,
+		return findByCommerceAccountId(commerceAccountId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -647,9 +647,9 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the range of matching commerce account user rels
 	 */
 	@Override
-	public List<CommerceAccountUserRel> findBycommerceAccountId(
+	public List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end) {
-		return findBycommerceAccountId(commerceAccountId, start, end, null);
+		return findByCommerceAccountId(commerceAccountId, start, end, null);
 	}
 
 	/**
@@ -666,10 +666,10 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of matching commerce account user rels
 	 */
 	@Override
-	public List<CommerceAccountUserRel> findBycommerceAccountId(
+	public List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		return findBycommerceAccountId(commerceAccountId, start, end,
+		return findByCommerceAccountId(commerceAccountId, start, end,
 			orderByComparator, true);
 	}
 
@@ -688,7 +688,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the ordered range of matching commerce account user rels
 	 */
 	@Override
-	public List<CommerceAccountUserRel> findBycommerceAccountId(
+	public List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean retrieveFromCache) {
@@ -804,11 +804,11 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	 */
 	@Override
-	public CommerceAccountUserRel findBycommerceAccountId_First(
+	public CommerceAccountUserRel findByCommerceAccountId_First(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchBycommerceAccountId_First(commerceAccountId,
+		CommerceAccountUserRel commerceAccountUserRel = fetchByCommerceAccountId_First(commerceAccountId,
 				orderByComparator);
 
 		if (commerceAccountUserRel != null) {
@@ -835,10 +835,10 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the first matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	 */
 	@Override
-	public CommerceAccountUserRel fetchBycommerceAccountId_First(
+	public CommerceAccountUserRel fetchByCommerceAccountId_First(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		List<CommerceAccountUserRel> list = findBycommerceAccountId(commerceAccountId,
+		List<CommerceAccountUserRel> list = findByCommerceAccountId(commerceAccountId,
 				0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -857,11 +857,11 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	 */
 	@Override
-	public CommerceAccountUserRel findBycommerceAccountId_Last(
+	public CommerceAccountUserRel findByCommerceAccountId_Last(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchBycommerceAccountId_Last(commerceAccountId,
+		CommerceAccountUserRel commerceAccountUserRel = fetchByCommerceAccountId_Last(commerceAccountId,
 				orderByComparator);
 
 		if (commerceAccountUserRel != null) {
@@ -888,16 +888,16 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the last matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	 */
 	@Override
-	public CommerceAccountUserRel fetchBycommerceAccountId_Last(
+	public CommerceAccountUserRel fetchByCommerceAccountId_Last(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		int count = countBycommerceAccountId(commerceAccountId);
+		int count = countByCommerceAccountId(commerceAccountId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceAccountUserRel> list = findBycommerceAccountId(commerceAccountId,
+		List<CommerceAccountUserRel> list = findByCommerceAccountId(commerceAccountId,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -917,7 +917,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @throws NoSuchAccountUserRelException if a commerce account user rel with the primary key could not be found
 	 */
 	@Override
-	public CommerceAccountUserRel[] findBycommerceAccountId_PrevAndNext(
+	public CommerceAccountUserRel[] findByCommerceAccountId_PrevAndNext(
 		CommerceAccountUserRelPK commerceAccountUserRelPK,
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
@@ -931,13 +931,13 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 
 			CommerceAccountUserRel[] array = new CommerceAccountUserRelImpl[3];
 
-			array[0] = getBycommerceAccountId_PrevAndNext(session,
+			array[0] = getByCommerceAccountId_PrevAndNext(session,
 					commerceAccountUserRel, commerceAccountId,
 					orderByComparator, true);
 
 			array[1] = commerceAccountUserRel;
 
-			array[2] = getBycommerceAccountId_PrevAndNext(session,
+			array[2] = getByCommerceAccountId_PrevAndNext(session,
 					commerceAccountUserRel, commerceAccountId,
 					orderByComparator, false);
 
@@ -951,7 +951,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		}
 	}
 
-	protected CommerceAccountUserRel getBycommerceAccountId_PrevAndNext(
+	protected CommerceAccountUserRel getByCommerceAccountId_PrevAndNext(
 		Session session, CommerceAccountUserRel commerceAccountUserRel,
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
@@ -1065,8 +1065,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @param commerceAccountId the commerce account ID
 	 */
 	@Override
-	public void removeBycommerceAccountId(long commerceAccountId) {
-		for (CommerceAccountUserRel commerceAccountUserRel : findBycommerceAccountId(
+	public void removeByCommerceAccountId(long commerceAccountId) {
+		for (CommerceAccountUserRel commerceAccountUserRel : findByCommerceAccountId(
 				commerceAccountId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceAccountUserRel);
 		}
@@ -1079,7 +1079,7 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the number of matching commerce account user rels
 	 */
 	@Override
-	public int countBycommerceAccountId(long commerceAccountId) {
+	public int countByCommerceAccountId(long commerceAccountId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID;
 
 		Object[] finderArgs = new Object[] { commerceAccountId };

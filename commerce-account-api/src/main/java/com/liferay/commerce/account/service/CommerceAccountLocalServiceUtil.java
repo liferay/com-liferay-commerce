@@ -266,6 +266,16 @@ public class CommerceAccountLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
+		long companyId, long parentCommerceAccountId, String keywords,
+		Boolean active, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceAccounts(companyId, parentCommerceAccountId,
+			keywords, active, start, end, sort);
+	}
+
 	/**
 	* Updates the commerce account in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -275,6 +285,25 @@ public class CommerceAccountLocalServiceUtil {
 	public static com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
 		com.liferay.commerce.account.model.CommerceAccount commerceAccount) {
 		return getService().updateCommerceAccount(commerceAccount);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
+		long commerceAccountId, String name, String taxId, boolean active,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCommerceAccount(commerceAccountId, name, taxId,
+			active, serviceContext);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount upsertCommerceAccount(
+		long userId, long parentCommerceAccountId, String name, String taxId,
+		boolean active, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .upsertCommerceAccount(userId, parentCommerceAccountId,
+			name, taxId, active, externalReferenceCode, serviceContext);
 	}
 
 	public static CommerceAccountLocalService getService() {
