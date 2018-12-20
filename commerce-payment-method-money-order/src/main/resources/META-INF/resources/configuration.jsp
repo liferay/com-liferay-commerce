@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-MoneyOrderGroupServiceConfiguration moneyOrderGroupServiceConfiguration = (MoneyOrderGroupServiceConfiguration)request.getAttribute(MoneyOrderGroupServiceConfiguration.class.getName());
-
 String messageXml = null;
+
+MoneyOrderGroupServiceConfiguration moneyOrderGroupServiceConfiguration = (MoneyOrderGroupServiceConfiguration)request.getAttribute(MoneyOrderGroupServiceConfiguration.class.getName());
 
 LocalizedValuesMap messageLocalizedValuesMap = moneyOrderGroupServiceConfiguration.message();
 
@@ -58,6 +58,6 @@ if (messageLocalizedValuesMap != null) {
 
 <aui:script>
 	function <portlet:namespace />saveCommercePaymentMethod() {
-	submitForm(document.<portlet:namespace />fm);
+		submitForm(document.<portlet:namespace />fm);
 	}
 </aui:script>

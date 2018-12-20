@@ -252,11 +252,10 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 			ActionRequest actionRequest)
 		throws PortalException {
 
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel = null;
+
 		UploadPortletRequest uploadPortletRequest =
 			_portal.getUploadPortletRequest(actionRequest);
-
-		long commercePaymentMethodGroupRelId = ParamUtil.getLong(
-			actionRequest, "commercePaymentMethodGroupRelId");
 
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "name");
@@ -272,7 +271,8 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommercePaymentMethodGroupRel.class.getName(), actionRequest);
 
-		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel = null;
+		long commercePaymentMethodGroupRelId = ParamUtil.getLong(
+			actionRequest, "commercePaymentMethodGroupRelId");
 
 		if (commercePaymentMethodGroupRelId <= 0) {
 			commercePaymentMethodGroupRel =
