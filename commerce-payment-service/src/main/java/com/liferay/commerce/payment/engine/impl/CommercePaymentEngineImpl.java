@@ -301,9 +301,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		rollbackFor = Exception.class
 	)
 	public CommercePaymentResult partiallyRefundPayment(long commerceOrderId) {
-		return new CommercePaymentResult(
-			null, commerceOrderId, -1, false, null, null,
-			Collections.emptyList(), false);
+		return _emptyResult(commerceOrderId);
 	}
 
 	@Override
@@ -314,9 +312,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	public CommercePaymentResult postProcessPayment(long commerceOrderId)
 		throws Exception {
 
-		return new CommercePaymentResult(
-			null, commerceOrderId, -1, false, null, null,
-			Collections.emptyList(), false);
+		return _emptyResult(commerceOrderId);
 	}
 
 	@Override
@@ -412,9 +408,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		if ((commercePaymentMethod == null) ||
 			!commercePaymentMethod.isRefundEnabled()) {
 
-			return new CommercePaymentResult(
-				null, commerceOrderId, -1, false, null, null,
-				Collections.emptyList(), false);
+			return _emptyResult(commerceOrderId);
 		}
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
