@@ -65,7 +65,7 @@ public class MoneyOrderCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 		long commerceOrderId = ParamUtil.getLong(
 			httpServletRequest, "commerceOrderId");
 
-		CommerceOrder commerceOrder;
+		CommerceOrder commerceOrder = null;
 
 		if (commerceOrderId > 0) {
 			commerceOrder = _commerceOrderService.getCommerceOrder(
