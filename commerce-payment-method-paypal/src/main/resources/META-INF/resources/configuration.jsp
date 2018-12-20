@@ -61,6 +61,6 @@ PayPalGroupServiceConfiguration payPalGroupServiceConfiguration = (PayPalGroupSe
 
 <aui:script>
 	function <portlet:namespace />saveCommercePaymentMethod() {
-	submitForm(document.<portlet:namespace />fm);
+		submitForm(document.<portlet:namespace />fm);
 	}
 </aui:script>
