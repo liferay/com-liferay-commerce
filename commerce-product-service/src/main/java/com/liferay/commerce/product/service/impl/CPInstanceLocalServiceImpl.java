@@ -163,12 +163,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		CPInstance cpInstance = cpInstancePersistence.create(cpInstanceId);
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
-				cpInstance.getCPDefinitionId())) {
+		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
 
 			CPDefinition newCPDefinition =
-				cpDefinitionLocalService.copyCPDefinition(
-					cpInstance.getCPDefinitionId());
+				cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 
 			cProductLocalService.updatePublishedDefinitionId(
 				newCPDefinition.getCProductId(),
@@ -859,18 +857,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			cpInstanceId);
 
 		CPDefinition cpDefinition = cpInstance.getCPDefinition();
-
-		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinition)) {
-			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
-				cpInstance.getCPDefinitionId());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
-
-			cpInstance = cpInstancePersistence.findByC_C(
-				cpDefinition.getCPDefinitionId(),
-				cpInstance.getCPInstanceUuid());
-		}
 
 		if (!cpDefinition.isIgnoreSKUCombinations() &&
 			Validator.isNull(cpInstance.getJson())) {
