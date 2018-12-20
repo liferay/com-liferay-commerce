@@ -120,8 +120,8 @@ public class CommerceAccountUserRelUtil {
 	* @param userId the user ID
 	* @return the matching commerce account user rels
 	*/
-	public static List<CommerceAccountUserRel> findByuserId(long userId) {
-		return getPersistence().findByuserId(userId);
+	public static List<CommerceAccountUserRel> findByUserId(long userId) {
+		return getPersistence().findByUserId(userId);
 	}
 
 	/**
@@ -136,9 +136,9 @@ public class CommerceAccountUserRelUtil {
 	* @param end the upper bound of the range of commerce account user rels (not inclusive)
 	* @return the range of matching commerce account user rels
 	*/
-	public static List<CommerceAccountUserRel> findByuserId(long userId,
+	public static List<CommerceAccountUserRel> findByUserId(long userId,
 		int start, int end) {
-		return getPersistence().findByuserId(userId, start, end);
+		return getPersistence().findByUserId(userId, start, end);
 	}
 
 	/**
@@ -154,11 +154,11 @@ public class CommerceAccountUserRelUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce account user rels
 	*/
-	public static List<CommerceAccountUserRel> findByuserId(long userId,
+	public static List<CommerceAccountUserRel> findByUserId(long userId,
 		int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
 		return getPersistence()
-				   .findByuserId(userId, start, end, orderByComparator);
+				   .findByUserId(userId, start, end, orderByComparator);
 	}
 
 	/**
@@ -175,12 +175,12 @@ public class CommerceAccountUserRelUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce account user rels
 	*/
-	public static List<CommerceAccountUserRel> findByuserId(long userId,
+	public static List<CommerceAccountUserRel> findByUserId(long userId,
 		int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByuserId(userId, start, end, orderByComparator,
+				   .findByUserId(userId, start, end, orderByComparator,
 			retrieveFromCache);
 	}
 
@@ -192,10 +192,10 @@ public class CommerceAccountUserRelUtil {
 	* @return the first matching commerce account user rel
 	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	*/
-	public static CommerceAccountUserRel findByuserId_First(long userId,
+	public static CommerceAccountUserRel findByUserId_First(long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
-		return getPersistence().findByuserId_First(userId, orderByComparator);
+		return getPersistence().findByUserId_First(userId, orderByComparator);
 	}
 
 	/**
@@ -205,9 +205,9 @@ public class CommerceAccountUserRelUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	*/
-	public static CommerceAccountUserRel fetchByuserId_First(long userId,
+	public static CommerceAccountUserRel fetchByUserId_First(long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		return getPersistence().fetchByuserId_First(userId, orderByComparator);
+		return getPersistence().fetchByUserId_First(userId, orderByComparator);
 	}
 
 	/**
@@ -218,10 +218,10 @@ public class CommerceAccountUserRelUtil {
 	* @return the last matching commerce account user rel
 	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	*/
-	public static CommerceAccountUserRel findByuserId_Last(long userId,
+	public static CommerceAccountUserRel findByUserId_Last(long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
-		return getPersistence().findByuserId_Last(userId, orderByComparator);
+		return getPersistence().findByUserId_Last(userId, orderByComparator);
 	}
 
 	/**
@@ -231,9 +231,9 @@ public class CommerceAccountUserRelUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	*/
-	public static CommerceAccountUserRel fetchByuserId_Last(long userId,
+	public static CommerceAccountUserRel fetchByUserId_Last(long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		return getPersistence().fetchByuserId_Last(userId, orderByComparator);
+		return getPersistence().fetchByUserId_Last(userId, orderByComparator);
 	}
 
 	/**
@@ -245,12 +245,12 @@ public class CommerceAccountUserRelUtil {
 	* @return the previous, current, and next commerce account user rel
 	* @throws NoSuchAccountUserRelException if a commerce account user rel with the primary key could not be found
 	*/
-	public static CommerceAccountUserRel[] findByuserId_PrevAndNext(
+	public static CommerceAccountUserRel[] findByUserId_PrevAndNext(
 		CommerceAccountUserRelPK commerceAccountUserRelPK, long userId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
 		return getPersistence()
-				   .findByuserId_PrevAndNext(commerceAccountUserRelPK, userId,
+				   .findByUserId_PrevAndNext(commerceAccountUserRelPK, userId,
 			orderByComparator);
 	}
 
@@ -259,8 +259,8 @@ public class CommerceAccountUserRelUtil {
 	*
 	* @param userId the user ID
 	*/
-	public static void removeByuserId(long userId) {
-		getPersistence().removeByuserId(userId);
+	public static void removeByUserId(long userId) {
+		getPersistence().removeByUserId(userId);
 	}
 
 	/**
@@ -269,8 +269,8 @@ public class CommerceAccountUserRelUtil {
 	* @param userId the user ID
 	* @return the number of matching commerce account user rels
 	*/
-	public static int countByuserId(long userId) {
-		return getPersistence().countByuserId(userId);
+	public static int countByUserId(long userId) {
+		return getPersistence().countByUserId(userId);
 	}
 
 	/**
@@ -279,9 +279,9 @@ public class CommerceAccountUserRelUtil {
 	* @param commerceAccountId the commerce account ID
 	* @return the matching commerce account user rels
 	*/
-	public static List<CommerceAccountUserRel> findBycommerceAccountId(
+	public static List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId) {
-		return getPersistence().findBycommerceAccountId(commerceAccountId);
+		return getPersistence().findByCommerceAccountId(commerceAccountId);
 	}
 
 	/**
@@ -296,10 +296,10 @@ public class CommerceAccountUserRelUtil {
 	* @param end the upper bound of the range of commerce account user rels (not inclusive)
 	* @return the range of matching commerce account user rels
 	*/
-	public static List<CommerceAccountUserRel> findBycommerceAccountId(
+	public static List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end) {
 		return getPersistence()
-				   .findBycommerceAccountId(commerceAccountId, start, end);
+				   .findByCommerceAccountId(commerceAccountId, start, end);
 	}
 
 	/**
@@ -315,11 +315,11 @@ public class CommerceAccountUserRelUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce account user rels
 	*/
-	public static List<CommerceAccountUserRel> findBycommerceAccountId(
+	public static List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
 		return getPersistence()
-				   .findBycommerceAccountId(commerceAccountId, start, end,
+				   .findByCommerceAccountId(commerceAccountId, start, end,
 			orderByComparator);
 	}
 
@@ -337,12 +337,12 @@ public class CommerceAccountUserRelUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce account user rels
 	*/
-	public static List<CommerceAccountUserRel> findBycommerceAccountId(
+	public static List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findBycommerceAccountId(commerceAccountId, start, end,
+				   .findByCommerceAccountId(commerceAccountId, start, end,
 			orderByComparator, retrieveFromCache);
 	}
 
@@ -354,12 +354,12 @@ public class CommerceAccountUserRelUtil {
 	* @return the first matching commerce account user rel
 	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	*/
-	public static CommerceAccountUserRel findBycommerceAccountId_First(
+	public static CommerceAccountUserRel findByCommerceAccountId_First(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
 		return getPersistence()
-				   .findBycommerceAccountId_First(commerceAccountId,
+				   .findByCommerceAccountId_First(commerceAccountId,
 			orderByComparator);
 	}
 
@@ -370,11 +370,11 @@ public class CommerceAccountUserRelUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	*/
-	public static CommerceAccountUserRel fetchBycommerceAccountId_First(
+	public static CommerceAccountUserRel fetchByCommerceAccountId_First(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
 		return getPersistence()
-				   .fetchBycommerceAccountId_First(commerceAccountId,
+				   .fetchByCommerceAccountId_First(commerceAccountId,
 			orderByComparator);
 	}
 
@@ -386,12 +386,12 @@ public class CommerceAccountUserRelUtil {
 	* @return the last matching commerce account user rel
 	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	*/
-	public static CommerceAccountUserRel findBycommerceAccountId_Last(
+	public static CommerceAccountUserRel findByCommerceAccountId_Last(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
 		return getPersistence()
-				   .findBycommerceAccountId_Last(commerceAccountId,
+				   .findByCommerceAccountId_Last(commerceAccountId,
 			orderByComparator);
 	}
 
@@ -402,11 +402,11 @@ public class CommerceAccountUserRelUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	*/
-	public static CommerceAccountUserRel fetchBycommerceAccountId_Last(
+	public static CommerceAccountUserRel fetchByCommerceAccountId_Last(
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
 		return getPersistence()
-				   .fetchBycommerceAccountId_Last(commerceAccountId,
+				   .fetchByCommerceAccountId_Last(commerceAccountId,
 			orderByComparator);
 	}
 
@@ -419,13 +419,13 @@ public class CommerceAccountUserRelUtil {
 	* @return the previous, current, and next commerce account user rel
 	* @throws NoSuchAccountUserRelException if a commerce account user rel with the primary key could not be found
 	*/
-	public static CommerceAccountUserRel[] findBycommerceAccountId_PrevAndNext(
+	public static CommerceAccountUserRel[] findByCommerceAccountId_PrevAndNext(
 		CommerceAccountUserRelPK commerceAccountUserRelPK,
 		long commerceAccountId,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
 		return getPersistence()
-				   .findBycommerceAccountId_PrevAndNext(commerceAccountUserRelPK,
+				   .findByCommerceAccountId_PrevAndNext(commerceAccountUserRelPK,
 			commerceAccountId, orderByComparator);
 	}
 
@@ -434,8 +434,8 @@ public class CommerceAccountUserRelUtil {
 	*
 	* @param commerceAccountId the commerce account ID
 	*/
-	public static void removeBycommerceAccountId(long commerceAccountId) {
-		getPersistence().removeBycommerceAccountId(commerceAccountId);
+	public static void removeByCommerceAccountId(long commerceAccountId) {
+		getPersistence().removeByCommerceAccountId(commerceAccountId);
 	}
 
 	/**
@@ -444,8 +444,8 @@ public class CommerceAccountUserRelUtil {
 	* @param commerceAccountId the commerce account ID
 	* @return the number of matching commerce account user rels
 	*/
-	public static int countBycommerceAccountId(long commerceAccountId) {
-		return getPersistence().countBycommerceAccountId(commerceAccountId);
+	public static int countByCommerceAccountId(long commerceAccountId) {
+		return getPersistence().countByCommerceAccountId(commerceAccountId);
 	}
 
 	/**

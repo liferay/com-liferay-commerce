@@ -25,8 +25,10 @@ import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -244,6 +246,12 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
+		long companyId, long parentCommerceAccountId, String keywords,
+		Boolean active, int start, int end, Sort sort)
+		throws PortalException;
+
 	/**
 	* Updates the commerce account in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -253,4 +261,14 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount updateCommerceAccount(
 		CommerceAccount commerceAccount);
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceAccount updateCommerceAccount(long commerceAccountId,
+		String name, String taxId, boolean active, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommerceAccount upsertCommerceAccount(long userId,
+		long parentCommerceAccountId, String name, String taxId,
+		boolean active, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 }

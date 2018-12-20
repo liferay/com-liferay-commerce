@@ -14,10 +14,62 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.base.CommerceAccountServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.service.ServiceContext;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
+
+	@Override
+	public CommerceAccount addCommerceAccount(
+			long userId, long parentCommerceAccountId, String name,
+			String taxId, boolean active, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return commerceAccountLocalService.addCommerceAccount(
+			userId, parentCommerceAccountId, name, taxId, active,
+			externalReferenceCode, serviceContext);
+	}
+
+	@Override
+	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
+			long companyId, long parentCommerceAccountId, String keywords,
+			Boolean active, int start, int end, Sort sort)
+		throws PortalException {
+
+		return commerceAccountLocalService.searchCommerceAccounts(
+			companyId, parentCommerceAccountId, keywords, active, start, end,
+			sort);
+	}
+
+	@Override
+	public CommerceAccount updateCommerceAccount(
+			long commerceAccountId, String name, String taxId, boolean active,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return commerceAccountLocalService.updateCommerceAccount(
+			commerceAccountId, name, taxId, active, serviceContext);
+	}
+
+	@Override
+	public CommerceAccount upsertCommerceAccount(
+			long userId, long parentCommerceAccountId, String name,
+			String taxId, boolean active, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return commerceAccountLocalService.upsertCommerceAccount(
+			userId, parentCommerceAccountId, name, taxId, active,
+			externalReferenceCode, serviceContext);
+	}
+
 }

@@ -46,7 +46,6 @@
 		<reference entity="WorkflowInstanceLink" package-path="com.liferay.portal" />
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-
 	<entity local-service="true" name="CommerceAccountUserRel" remote-service="true">
 
 		<!-- PK fields -->
@@ -70,21 +69,19 @@
 
 		<!-- Finders -->
 
-		<finder name="userId" return-type="Collection">
+		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
-
-		<finder name="commerceAccountId" return-type="Collection">
+		<finder name="CommerceAccountId" return-type="Collection">
 			<finder-column name="commerceAccountId" />
 		</finder>
 	</entity>
-
 	<entity local-service="true" name="CommerceAccountOrganizationRel" remote-service="true">
 
 		<!-- PK fields -->
 
 		<column name="commerceAccountId" primary="true" type="long" />
-		<column name="userId" primary="true" type="long" />
+		<column name="organizationId" primary="true" type="long" />
 
 		<!-- Audit fields -->
 
@@ -102,15 +99,13 @@
 
 		<!-- Finders -->
 
-		<finder name="userId" return-type="Collection">
-			<finder-column name="userId" />
+		<finder name="OrganizationId" return-type="Collection">
+			<finder-column name="organizationId" />
 		</finder>
-
-		<finder name="commerceAccountId" return-type="Collection">
+		<finder name="CommerceAccountId" return-type="Collection">
 			<finder-column name="commerceAccountId" />
 		</finder>
 	</entity>
-
 	<exceptions>
 		<exception>CommerceAccountName</exception>
 		<exception>DuplicateCommerceAccount</exception>

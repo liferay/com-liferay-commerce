@@ -82,36 +82,18 @@ public interface CommerceAccountOrganizationRelModel extends AuditedModel,
 	public void setCommerceAccountId(long commerceAccountId);
 
 	/**
-	 * Returns the user ID of this commerce account organization rel.
+	 * Returns the organization ID of this commerce account organization rel.
 	 *
-	 * @return the user ID of this commerce account organization rel
+	 * @return the organization ID of this commerce account organization rel
 	 */
-	@Override
-	public long getUserId();
+	public long getOrganizationId();
 
 	/**
-	 * Sets the user ID of this commerce account organization rel.
+	 * Sets the organization ID of this commerce account organization rel.
 	 *
-	 * @param userId the user ID of this commerce account organization rel
+	 * @param organizationId the organization ID of this commerce account organization rel
 	 */
-	@Override
-	public void setUserId(long userId);
-
-	/**
-	 * Returns the user uuid of this commerce account organization rel.
-	 *
-	 * @return the user uuid of this commerce account organization rel
-	 */
-	@Override
-	public String getUserUuid();
-
-	/**
-	 * Sets the user uuid of this commerce account organization rel.
-	 *
-	 * @param userUuid the user uuid of this commerce account organization rel
-	 */
-	@Override
-	public void setUserUuid(String userUuid);
+	public void setOrganizationId(long organizationId);
 
 	/**
 	 * Returns the company ID of this commerce account organization rel.

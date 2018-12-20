@@ -139,8 +139,8 @@ public class CommerceAccountOrganizationRelPersistenceTest {
 
 		Assert.assertEquals(existingCommerceAccountOrganizationRel.getCommerceAccountId(),
 			newCommerceAccountOrganizationRel.getCommerceAccountId());
-		Assert.assertEquals(existingCommerceAccountOrganizationRel.getUserId(),
-			newCommerceAccountOrganizationRel.getUserId());
+		Assert.assertEquals(existingCommerceAccountOrganizationRel.getOrganizationId(),
+			newCommerceAccountOrganizationRel.getOrganizationId());
 		Assert.assertEquals(existingCommerceAccountOrganizationRel.getCompanyId(),
 			newCommerceAccountOrganizationRel.getCompanyId());
 		Assert.assertEquals(existingCommerceAccountOrganizationRel.getUserId(),
@@ -158,17 +158,17 @@ public class CommerceAccountOrganizationRelPersistenceTest {
 	}
 
 	@Test
-	public void testCountByuserId() throws Exception {
-		_persistence.countByuserId(RandomTestUtil.nextLong());
+	public void testCountByOrganizationId() throws Exception {
+		_persistence.countByOrganizationId(RandomTestUtil.nextLong());
 
-		_persistence.countByuserId(0L);
+		_persistence.countByOrganizationId(0L);
 	}
 
 	@Test
-	public void testCountBycommerceAccountId() throws Exception {
-		_persistence.countBycommerceAccountId(RandomTestUtil.nextLong());
+	public void testCountByCommerceAccountId() throws Exception {
+		_persistence.countByCommerceAccountId(RandomTestUtil.nextLong());
 
-		_persistence.countBycommerceAccountId(0L);
+		_persistence.countByCommerceAccountId(0L);
 	}
 
 	@Test
@@ -334,8 +334,8 @@ public class CommerceAccountOrganizationRelPersistenceTest {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.commerceAccountId",
 				newCommerceAccountOrganizationRel.getCommerceAccountId()));
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.userId",
-				newCommerceAccountOrganizationRel.getUserId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.organizationId",
+				newCommerceAccountOrganizationRel.getOrganizationId()));
 
 		List<CommerceAccountOrganizationRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -354,7 +354,7 @@ public class CommerceAccountOrganizationRelPersistenceTest {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.commerceAccountId",
 				RandomTestUtil.nextLong()));
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.userId",
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.organizationId",
 				RandomTestUtil.nextLong()));
 
 		List<CommerceAccountOrganizationRel> result = _persistence.findWithDynamicQuery(dynamicQuery);

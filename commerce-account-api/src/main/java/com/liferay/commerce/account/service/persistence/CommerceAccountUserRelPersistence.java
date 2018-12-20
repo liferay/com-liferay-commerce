@@ -47,7 +47,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param userId the user ID
 	* @return the matching commerce account user rels
 	*/
-	public java.util.List<CommerceAccountUserRel> findByuserId(long userId);
+	public java.util.List<CommerceAccountUserRel> findByUserId(long userId);
 
 	/**
 	* Returns a range of all the commerce account user rels where userId = &#63;.
@@ -61,7 +61,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param end the upper bound of the range of commerce account user rels (not inclusive)
 	* @return the range of matching commerce account user rels
 	*/
-	public java.util.List<CommerceAccountUserRel> findByuserId(long userId,
+	public java.util.List<CommerceAccountUserRel> findByUserId(long userId,
 		int start, int end);
 
 	/**
@@ -77,7 +77,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce account user rels
 	*/
-	public java.util.List<CommerceAccountUserRel> findByuserId(long userId,
+	public java.util.List<CommerceAccountUserRel> findByUserId(long userId,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator);
 
@@ -95,7 +95,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce account user rels
 	*/
-	public java.util.List<CommerceAccountUserRel> findByuserId(long userId,
+	public java.util.List<CommerceAccountUserRel> findByUserId(long userId,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean retrieveFromCache);
@@ -108,7 +108,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @return the first matching commerce account user rel
 	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	*/
-	public CommerceAccountUserRel findByuserId_First(long userId,
+	public CommerceAccountUserRel findByUserId_First(long userId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException;
 
@@ -119,7 +119,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	*/
-	public CommerceAccountUserRel fetchByuserId_First(long userId,
+	public CommerceAccountUserRel fetchByUserId_First(long userId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator);
 
 	/**
@@ -130,7 +130,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @return the last matching commerce account user rel
 	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	*/
-	public CommerceAccountUserRel findByuserId_Last(long userId,
+	public CommerceAccountUserRel findByUserId_Last(long userId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException;
 
@@ -141,7 +141,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	*/
-	public CommerceAccountUserRel fetchByuserId_Last(long userId,
+	public CommerceAccountUserRel fetchByUserId_Last(long userId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator);
 
 	/**
@@ -153,7 +153,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @return the previous, current, and next commerce account user rel
 	* @throws NoSuchAccountUserRelException if a commerce account user rel with the primary key could not be found
 	*/
-	public CommerceAccountUserRel[] findByuserId_PrevAndNext(
+	public CommerceAccountUserRel[] findByUserId_PrevAndNext(
 		CommerceAccountUserRelPK commerceAccountUserRelPK, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException;
@@ -163,7 +163,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	*
 	* @param userId the user ID
 	*/
-	public void removeByuserId(long userId);
+	public void removeByUserId(long userId);
 
 	/**
 	* Returns the number of commerce account user rels where userId = &#63;.
@@ -171,7 +171,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param userId the user ID
 	* @return the number of matching commerce account user rels
 	*/
-	public int countByuserId(long userId);
+	public int countByUserId(long userId);
 
 	/**
 	* Returns all the commerce account user rels where commerceAccountId = &#63;.
@@ -179,7 +179,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param commerceAccountId the commerce account ID
 	* @return the matching commerce account user rels
 	*/
-	public java.util.List<CommerceAccountUserRel> findBycommerceAccountId(
+	public java.util.List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId);
 
 	/**
@@ -194,7 +194,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param end the upper bound of the range of commerce account user rels (not inclusive)
 	* @return the range of matching commerce account user rels
 	*/
-	public java.util.List<CommerceAccountUserRel> findBycommerceAccountId(
+	public java.util.List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end);
 
 	/**
@@ -210,7 +210,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce account user rels
 	*/
-	public java.util.List<CommerceAccountUserRel> findBycommerceAccountId(
+	public java.util.List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator);
 
@@ -228,7 +228,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce account user rels
 	*/
-	public java.util.List<CommerceAccountUserRel> findBycommerceAccountId(
+	public java.util.List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator,
 		boolean retrieveFromCache);
@@ -241,7 +241,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @return the first matching commerce account user rel
 	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	*/
-	public CommerceAccountUserRel findBycommerceAccountId_First(
+	public CommerceAccountUserRel findByCommerceAccountId_First(
 		long commerceAccountId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException;
@@ -253,7 +253,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	*/
-	public CommerceAccountUserRel fetchBycommerceAccountId_First(
+	public CommerceAccountUserRel fetchByCommerceAccountId_First(
 		long commerceAccountId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator);
 
@@ -265,7 +265,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @return the last matching commerce account user rel
 	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
 	*/
-	public CommerceAccountUserRel findBycommerceAccountId_Last(
+	public CommerceAccountUserRel findByCommerceAccountId_Last(
 		long commerceAccountId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator)
 		throws NoSuchAccountUserRelException;
@@ -277,7 +277,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
 	*/
-	public CommerceAccountUserRel fetchBycommerceAccountId_Last(
+	public CommerceAccountUserRel fetchByCommerceAccountId_Last(
 		long commerceAccountId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator);
 
@@ -290,7 +290,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @return the previous, current, and next commerce account user rel
 	* @throws NoSuchAccountUserRelException if a commerce account user rel with the primary key could not be found
 	*/
-	public CommerceAccountUserRel[] findBycommerceAccountId_PrevAndNext(
+	public CommerceAccountUserRel[] findByCommerceAccountId_PrevAndNext(
 		CommerceAccountUserRelPK commerceAccountUserRelPK,
 		long commerceAccountId,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel> orderByComparator)
@@ -301,7 +301,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	*
 	* @param commerceAccountId the commerce account ID
 	*/
-	public void removeBycommerceAccountId(long commerceAccountId);
+	public void removeByCommerceAccountId(long commerceAccountId);
 
 	/**
 	* Returns the number of commerce account user rels where commerceAccountId = &#63;.
@@ -309,7 +309,7 @@ public interface CommerceAccountUserRelPersistence extends BasePersistence<Comme
 	* @param commerceAccountId the commerce account ID
 	* @return the number of matching commerce account user rels
 	*/
-	public int countBycommerceAccountId(long commerceAccountId);
+	public int countByCommerceAccountId(long commerceAccountId);
 
 	/**
 	* Caches the commerce account user rel in the entity cache if it is enabled.
