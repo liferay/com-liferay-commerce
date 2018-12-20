@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_1_0.dtd">
+
+<service-builder auto-namespace-tables="false" package-path="com.liferay.commerce.account">
+	<author>Marco Leo</author>
+	<namespace>Commerce</namespace>
+	<entity external-reference-code="true" local-service="true" name="CommerceAccount" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceAccountId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column accessor="true" name="name" type="String" />
+		<column name="parentCommerceAccountId" type="long" />
+		<column name="taxId" type="String" />
+		<column name="active" type="boolean" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finders -->
+
+		<finder name="C_N" return-type="CommerceAccount">
+			<finder-column name="companyId" />
+			<finder-column name="name" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="Group" package-path="com.liferay.portal" />
+		<reference entity="Role" package-path="com.liferay.portal" />
+		<reference entity="WorkflowDefinitionLink" package-path="com.liferay.portal" />
+		<reference entity="WorkflowInstanceLink" package-path="com.liferay.portal" />
+		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
+	</entity>
+
+	<entity local-service="true" name="CommerceAccountUserRel" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceAccountId" primary="true" type="long" />
+		<column name="userId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="userId" />
+		</order>
+
+		<!-- Finders -->
+
+		<finder name="userId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+
+		<finder name="commerceAccountId" return-type="Collection">
+			<finder-column name="commerceAccountId" />
+		</finder>
+	</entity>
+
+	<entity local-service="true" name="CommerceAccountOrganizationRel" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceAccountId" primary="true" type="long" />
+		<column name="userId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="userId" />
+		</order>
+
+		<!-- Finders -->
+
+		<finder name="userId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+
+		<finder name="commerceAccountId" return-type="Collection">
+			<finder-column name="commerceAccountId" />
+		</finder>
+	</entity>
+
+	<exceptions>
+		<exception>CommerceAccountName</exception>
+		<exception>DuplicateCommerceAccount</exception>
+	</exceptions>
+</service-builder>
