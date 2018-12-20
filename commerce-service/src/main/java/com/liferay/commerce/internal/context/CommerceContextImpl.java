@@ -50,7 +50,6 @@ public class CommerceContextImpl implements CommerceContext {
 		_userId = userId;
 		_orderId = orderId;
 		_organizationId = organizationId;
-		//TODO save CouponCode into CommerceOrder!
 		_couponCode = couponCode;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceOrderService = commerceOrderService;
