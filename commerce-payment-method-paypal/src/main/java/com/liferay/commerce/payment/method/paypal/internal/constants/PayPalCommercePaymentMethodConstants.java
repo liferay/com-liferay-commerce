@@ -27,9 +27,9 @@ public class PayPalCommercePaymentMethodConstants {
 
 	public static final String AUTHORIZATION_STATE_VOIDED = "voided";
 
-	public static final String INTENTAUTHORIZE = "authorize";
+	public static final String INTENT_AUTHORIZE = "authorize";
 
-	public static final String INTENTSALE = "sale";
+	public static final String INTENT_SALE = "sale";
 
 	public static final String[] MODES = {Constants.LIVE, Constants.SANDBOX};
 

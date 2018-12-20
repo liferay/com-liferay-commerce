@@ -390,7 +390,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		Payment payment = _getPayment(
 			commercePaymentRequest, commerceOrder,
-			PayPalCommercePaymentMethodConstants.INTENTSALE);
+			PayPalCommercePaymentMethodConstants.INTENT_SALE);
 
 		String url = null;
 
@@ -834,8 +834,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	private Plan _updatePlan(APIContext apiContext, Plan plan)
 		throws PayPalRESTException {
 
-		List<Patch> patches = new ArrayList<>();
-
 		Patch patch = new Patch();
 
 		patch.setOp("replace");
@@ -847,9 +845,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		patch.setValue(value);
 
-		patches.add(patch);
-
-		plan.update(apiContext, patches);
+		plan.update(apiContext, Collections.singletonList(patch));
 
 		return plan;
 	}

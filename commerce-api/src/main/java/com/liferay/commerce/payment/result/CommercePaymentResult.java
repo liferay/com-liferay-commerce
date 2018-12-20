@@ -25,11 +25,11 @@ import java.util.List;
 public class CommercePaymentResult implements Serializable {
 
 	public CommercePaymentResult(
-		String authorizationId, long commerceOrderId, int newPaymentStatus,
+		String authTransactionId, long commerceOrderId, int newPaymentStatus,
 		boolean onlineRedirect, String redirectUrl, String refundId,
 		List<String> resultMessages, boolean success) {
 
-		_authorizationId = authorizationId;
+		_authTransactionId = authTransactionId;
 		_commerceOrderId = commerceOrderId;
 		_newPaymentStatus = newPaymentStatus;
 		_onlineRedirect = onlineRedirect;
@@ -41,7 +41,7 @@ public class CommercePaymentResult implements Serializable {
 	}
 
 	public String getAuthTransactionId() {
-		return _authorizationId;
+		return _authTransactionId;
 	}
 
 	public long getCommerceOrderId() {
@@ -72,7 +72,7 @@ public class CommercePaymentResult implements Serializable {
 		return _success;
 	}
 
-	private final String _authorizationId;
+	private final String _authTransactionId;
 	private final long _commerceOrderId;
 	private final int _newPaymentStatus;
 	private final boolean _onlineRedirect;
