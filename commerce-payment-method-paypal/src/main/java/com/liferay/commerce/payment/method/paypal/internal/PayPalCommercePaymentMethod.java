@@ -774,11 +774,11 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		MerchantPreferences merchantPreferences = new MerchantPreferences();
 
-		merchantPreferences.setCancelUrl(commercePaymentRequest.getCancelUrl());
-		merchantPreferences.setReturnUrl(commercePaymentRequest.getReturnUrl());
-		merchantPreferences.setMaxFailAttempts("0");
 		merchantPreferences.setAutoBillAmount("YES");
+		merchantPreferences.setCancelUrl(commercePaymentRequest.getCancelUrl());
 		merchantPreferences.setInitialFailAmountAction("CONTINUE");
+		merchantPreferences.setMaxFailAttempts("0");
+		merchantPreferences.setReturnUrl(commercePaymentRequest.getReturnUrl());
 
 		plan.setMerchantPreferences(merchantPreferences);
 

@@ -33,8 +33,8 @@ CheckoutDisplayContext checkoutDisplayContext = (CheckoutDisplayContext)request.
 				<ul class="commerce-multi-step-nav multi-step-indicator-label-top multi-step-nav multi-step-nav-collapse-sm">
 
 					<%
-					String currentCheckoutStepName = checkoutDisplayContext.getCurrentCheckoutStepName();
 					boolean complete = true;
+					String currentCheckoutStepName = checkoutDisplayContext.getCurrentCheckoutStepName();
 					int step = 1;
 
 					List<CommerceCheckoutStep> commerceCheckoutSteps = checkoutDisplayContext.getCommerceCheckoutSteps();

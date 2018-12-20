@@ -1197,9 +1197,9 @@ public class CommerceOrderLocalServiceImpl
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
 		serviceContext.setUserId(userId);
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		return startWorkflowInstance(
 			serviceContext.getUserId(), commerceOrder, serviceContext);
