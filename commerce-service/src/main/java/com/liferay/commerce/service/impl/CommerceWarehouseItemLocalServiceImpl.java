@@ -169,12 +169,16 @@ public class CommerceWarehouseItemLocalServiceImpl
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
 			cpInstance.getCPDefinitionId());
 
-		return commerceWarehouseItemLocalService.
-			getCommerceWarehouseItemsByCPI_CPIU(
-				cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid());
+		if (cpDefinition != null) {
+			return commerceWarehouseItemLocalService.
+				getCommerceWarehouseItemsByCPI_CPIU(
+					cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid());
+		}
+
+		return null;
 	}
 
 	/**
