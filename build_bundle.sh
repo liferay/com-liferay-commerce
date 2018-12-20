@@ -206,6 +206,8 @@ function main {
 function start_tomcat {
 	local timestamp=${1}
 
+	rm -fr ${timestamp}/liferay-commerce-*/data/elasticsearch6/*
+
 	fix_tomcat_setenv ${timestamp}/${commerce_bundle_name}/tomcat-$(get_tomcat_version ${timestamp}/${commerce_bundle_name})
 
 	cp ${timestamp}/liferay-commerce-*/tomcat-*/bin/setenv.sh setenv.sh.bak
