@@ -220,11 +220,11 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		PayPalCommercePaymentRequest payPalCommercePaymentRequest =
 			(PayPalCommercePaymentRequest)commercePaymentRequest;
 
-		String token = payPalCommercePaymentRequest.getTransactionId();
+		String transactionId = payPalCommercePaymentRequest.getTransactionId();
 
 		Agreement agreement = new Agreement();
 
-		agreement.setToken(token);
+		agreement.setToken(transactionId);
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commercePaymentRequest.getCommerceOrderId());
