@@ -25,7 +25,6 @@ import java.math.BigDecimal;
 
 import java.util.Locale;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
@@ -44,9 +43,8 @@ public class PayPalCommercePaymentRequestProvider
 
 	@Override
 	public CommercePaymentRequest getCommercePaymentRequest(
-			String cancelUrl, long commerceOrderId,
-			ServletRequest servletRequest, Locale locale, String returnUrl,
-			String transactionId)
+			String cancelUrl, long commerceOrderId, HttpServletRequest request,
+			Locale locale, String returnUrl, String transactionId)
 		throws PortalException {
 
 		CommerceOrder commerceOrder =
@@ -54,10 +52,7 @@ public class PayPalCommercePaymentRequestProvider
 
 		BigDecimal amount = commerceOrder.getTotal();
 
-		HttpServletRequest httpServletRequest =
-			(HttpServletRequest)servletRequest;
-
-		String payerId = ParamUtil.getString(httpServletRequest, "PayerID");
+		String payerId = ParamUtil.getString(request, "PayerID");
 
 		return new PayPalCommercePaymentRequest(
 			amount, cancelUrl, commerceOrderId, locale, payerId, returnUrl,

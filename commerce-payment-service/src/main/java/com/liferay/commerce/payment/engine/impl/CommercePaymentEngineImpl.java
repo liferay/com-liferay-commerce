@@ -45,7 +45,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
@@ -64,7 +63,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	)
 	public CommercePaymentResult cancelPayment(
 			long commerceOrderId, String transactionId,
-			ServletRequest servletRequest)
+			HttpServletRequest request)
 		throws Exception {
 
 		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
@@ -78,9 +77,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -118,7 +114,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	)
 	public CommercePaymentResult capturePayment(
 			long commerceOrderId, String transactionId,
-			ServletRequest servletRequest)
+			HttpServletRequest request)
 		throws Exception {
 
 		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
@@ -132,9 +128,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -162,7 +155,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	)
 	public CommercePaymentResult completePayment(
 			long commerceOrderId, String transactionId,
-			ServletRequest servletRequest)
+			HttpServletRequest request)
 		throws Exception {
 
 		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
@@ -176,9 +169,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -206,7 +196,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	)
 	public CommercePaymentResult completeRecurringPayment(
 			long commerceOrderId, String transactionId,
-			ServletRequest servletRequest)
+			HttpServletRequest request)
 		throws Exception {
 
 		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
@@ -220,9 +210,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -339,7 +326,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	)
 	public CommercePaymentResult processPayment(
 			long commerceOrderId, String checkoutStepUrl,
-			ServletRequest servletRequest)
+			HttpServletRequest request)
 		throws Exception {
 
 		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
@@ -353,9 +340,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -380,7 +364,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	)
 	public CommercePaymentResult processRecurringPayment(
 			long commerceOrderId, String checkoutStepUrl,
-			ServletRequest servletRequest)
+			HttpServletRequest request)
 		throws Exception {
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
@@ -394,9 +378,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 			return _emptyResult(commerceOrderId);
 		}
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -422,7 +403,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	)
 	public CommercePaymentResult refundPayment(
 			long commerceOrderId, String transactionId,
-			ServletRequest servletRequest)
+			HttpServletRequest request)
 		throws Exception {
 
 		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
@@ -439,9 +420,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
 
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
-
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
 				commerceOrder, _portal.getLocale(request), transactionId, null,
@@ -453,14 +431,11 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	@Override
 	public CommercePaymentResult startPayment(
 			long commerceOrderId, String checkoutStepUrl,
-			ServletRequest servletRequest)
+			HttpServletRequest request)
 		throws Exception {
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		if (commerceOrder.isSubscriptionOrder()) {
 			return processRecurringPayment(
@@ -477,7 +452,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	)
 	public CommercePaymentResult voidTransaction(
 			long commerceOrderId, String transactionId,
-			ServletRequest servletRequest)
+			HttpServletRequest request)
 		throws Exception {
 
 		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
@@ -491,9 +466,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -510,11 +482,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	private StringBundler _getBaseUrl(
-		ServletRequest servletRequest, CommerceOrder commerceOrder,
+		HttpServletRequest request, CommerceOrder commerceOrder,
 		String redirect, CommercePaymentMethod commercePaymentMethod) {
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		StringBundler sb = new StringBundler(11);
 
@@ -537,11 +506,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	private String _getCancelUrl(
-		ServletRequest servletRequest, CommerceOrder commerceOrder,
+		HttpServletRequest request, CommerceOrder commerceOrder,
 		String redirect, CommercePaymentMethod commercePaymentMethod) {
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		StringBundler sb = _getBaseUrl(
 			request, commerceOrder, redirect, commercePaymentMethod);
@@ -607,15 +573,12 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 	private CommercePaymentRequest _getCommercePaymentRequest(
 			CommerceOrder commerceOrder, Locale locale, String transactionId,
-			String checkoutStepUrl, ServletRequest servletRequest,
+			String checkoutStepUrl, HttpServletRequest request,
 			CommercePaymentMethod commercePaymentMethod)
 		throws PortalException {
 
 		String returnUrl = null;
 		String cancelUrl = null;
-
-		HttpServletRequest request =
-			(HttpServletRequest)servletRequest;
 
 		if (CommercePaymentConstants.
 				COMMERCE_PAYMENT_METHOD_TYPE_ONLINE_REDIRECT ==
@@ -655,11 +618,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	private String _getReturnUrl(
-		ServletRequest servletRequest, CommerceOrder commerceOrder,
+		HttpServletRequest request, CommerceOrder commerceOrder,
 		String redirect, CommercePaymentMethod commercePaymentMethod) {
-
-		HttpServletRequest httpServletRequest =
-			(HttpServletRequest)servletRequest;
 
 		StringBundler sb = _getBaseUrl(
 			request, commerceOrder, redirect, commercePaymentMethod);
