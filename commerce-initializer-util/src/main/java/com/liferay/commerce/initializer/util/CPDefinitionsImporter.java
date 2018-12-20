@@ -56,13 +56,18 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
+
+import java.io.Serializable;
 
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -218,9 +223,15 @@ public class CPDefinitionsImporter {
 		long[] assetCategoryIds = ListUtil.toLongArray(
 			assetCategories, AssetCategory.CATEGORY_ID_ACCESSOR);
 
+		int originalWorkflowAction = serviceContext.getWorkflowAction();
+
+		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
+
 		CPDefinition cpDefinition = _addCPDefinition(
 			name, shortDescription, description, sku, taxCategory,
 			assetCategoryIds, serviceContext);
+
+		serviceContext.setWorkflowAction(originalWorkflowAction);
 
 		// Commerce product definition specification option values
 
@@ -388,6 +399,14 @@ public class CPDefinitionsImporter {
 					CPAttachmentFileEntryConstants.TYPE_OTHER, serviceContext);
 			}
 		}
+
+		long userId = PortalUtil.getValidUserId(
+			cpDefinition.getCompanyId(), cpDefinition.getUserId());
+
+		_cpDefinitionLocalService.updateStatus(
+			userId, cpDefinition.getCPDefinitionId(),
+			WorkflowConstants.STATUS_APPROVED, serviceContext,
+			new HashMap<String, Serializable>());
 
 		return cpDefinition;
 	}
