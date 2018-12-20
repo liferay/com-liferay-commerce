@@ -81,6 +81,8 @@ public class EditCommercePaymentMethodGroupRelAddressRestrictionMVCActionCommand
 			ActionRequest actionRequest)
 		throws Exception {
 
+		long groupId = _portal.getScopeGroupId(actionRequest);
+
 		long[] deleteCommerceAddressRestrictionIds = null;
 
 		long commerceAddressRestrictionId = ParamUtil.getLong(
@@ -102,8 +104,7 @@ public class EditCommercePaymentMethodGroupRelAddressRestrictionMVCActionCommand
 
 			_commercePaymentMethodGroupRelService.
 				deleteCommerceAddressRestriction(
-					deleteCommerceAddressRestrictionId,
-					_portal.getScopeGroupId(actionRequest));
+					deleteCommerceAddressRestrictionId, groupId);
 		}
 	}
 
