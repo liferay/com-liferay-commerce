@@ -95,9 +95,8 @@ public class EditCPDefinitionMVCRenderCommand implements MVCRenderCommand {
 	protected void setCPDefinitionRequestAttribute(RenderRequest renderRequest)
 		throws PortalException {
 
-		CPDefinition cpDefinition = null;
-
-		cpDefinition = _actionHelper.getCPDefinition(renderRequest);
+		CPDefinition cpDefinition = _actionHelper.getCPDefinition(
+			renderRequest);
 
 		renderRequest.setAttribute(CPWebKeys.CP_DEFINITION, cpDefinition);
 	}

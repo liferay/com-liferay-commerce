@@ -290,16 +290,13 @@ public class CPDefinitionsDisplayContext
 		String filtersValues = ParamUtil.getString(
 			httpServletRequest, "filtersValues");
 
-		BaseModelSearchResult<CPDefinition>
-			cpDefinitionBaseModelSearchResult =
-				_cpDefinitionService.searchCPDefinitions(
-					themeDisplay.getCompanyId(),
-					themeDisplay.getScopeGroupId(), getKeywords(),
-					filterFields, filtersValues, searchContainer.getStart(),
-					searchContainer.getEnd(), sort);
+		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
+			_cpDefinitionService.searchCPDefinitions(
+				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+				getKeywords(), filterFields, filtersValues,
+				searchContainer.getStart(), searchContainer.getEnd(), sort);
 
-		searchContainer.setTotal(
-			cpDefinitionBaseModelSearchResult.getLength());
+		searchContainer.setTotal(cpDefinitionBaseModelSearchResult.getLength());
 		searchContainer.setResults(
 			cpDefinitionBaseModelSearchResult.getBaseModels());
 

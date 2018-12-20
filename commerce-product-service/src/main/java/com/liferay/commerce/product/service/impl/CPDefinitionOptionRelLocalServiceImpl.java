@@ -97,12 +97,9 @@ public class CPDefinitionOptionRelLocalServiceImpl
 		CPDefinitionOptionRel cpDefinitionOptionRel =
 			cpDefinitionOptionRelPersistence.create(cpDefinitionOptionRelId);
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
-				cpDefinitionOptionRel.getCPDefinitionId())) {
-
+		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
 			CPDefinition newCPDefinition =
-				cpDefinitionLocalService.copyCPDefinition(
-					cpDefinitionOptionRel.getCPDefinitionId());
+				cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 
 			cProductLocalService.updatePublishedDefinitionId(
 				newCPDefinition.getCProductId(),
@@ -172,10 +169,6 @@ public class CPDefinitionOptionRelLocalServiceImpl
 
 			cProductLocalService.updatePublishedDefinitionId(
 				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
-			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByU_C(
-				cpDefinitionOptionRel.getUuid(),
 				newCPDefinition.getCPDefinitionId());
 		}
 

@@ -56,7 +56,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
@@ -400,11 +399,8 @@ public class CPDefinitionsImporter {
 			}
 		}
 
-		long userId = PortalUtil.getValidUserId(
-			cpDefinition.getCompanyId(), cpDefinition.getUserId());
-
 		_cpDefinitionLocalService.updateStatus(
-			userId, cpDefinition.getCPDefinitionId(),
+			cpDefinition.getUserId(), cpDefinition.getCPDefinitionId(),
 			WorkflowConstants.STATUS_APPROVED, serviceContext,
 			new HashMap<String, Serializable>());
 
