@@ -54,30 +54,33 @@ public class CommercePaymentMethodPayPalServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(
-			HttpServletRequest request, HttpServletResponse response)
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
 		throws IOException, ServletException {
 
 		try {
-			HttpSession httpSession = request.getSession();
+			HttpSession httpSession = httpServletRequest.getSession();
 
 			if (PortalSessionThreadLocal.getHttpSession() == null) {
 				PortalSessionThreadLocal.setHttpSession(httpSession);
 			}
 
-			User user = _portal.getUser(request);
+			User user = _portal.getUser(httpServletRequest);
 
 			PermissionChecker permissionChecker =
 				PermissionCheckerFactoryUtil.create(user);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			boolean cancel = ParamUtil.getBoolean(request, "cancel");
-			String redirect = ParamUtil.getString(request, "redirect");
-			String token = ParamUtil.getString(request, "token");
-			String paymentId = ParamUtil.getString(request, "paymentId");
+			boolean cancel = ParamUtil.getBoolean(httpServletRequest, "cancel");
+			String redirect = ParamUtil.getString(
+				httpServletRequest, "redirect");
+			String token = ParamUtil.getString(httpServletRequest, "token");
+			String paymentId = ParamUtil.getString(
+				httpServletRequest, "paymentId");
 
-			long groupId = ParamUtil.getLong(request, "groupId");
-			String uuid = ParamUtil.getString(request, "uuid");
+			long groupId = ParamUtil.getLong(httpServletRequest, "groupId");
+			String uuid = ParamUtil.getString(httpServletRequest, "uuid");
 
 			CommerceOrder commerceOrder =
 				_commerceOrderService.getCommerceOrderByUuidAndGroupId(
@@ -85,22 +88,25 @@ public class CommercePaymentMethodPayPalServlet extends HttpServlet {
 
 			if (cancel) {
 				_commercePaymentEngine.cancelPayment(
-					commerceOrder.getCommerceOrderId(), paymentId, request);
+					commerceOrder.getCommerceOrderId(), paymentId,
+					httpServletRequest);
 			}
 
 			if (paymentId.isEmpty() && !token.isEmpty()) {
 				_commercePaymentEngine.completeRecurringPayment(
-					commerceOrder.getCommerceOrderId(), token, request);
+					commerceOrder.getCommerceOrderId(), token,
+					httpServletRequest);
 			}
 			else {
 				_commercePaymentEngine.completePayment(
-					commerceOrder.getCommerceOrderId(), paymentId, request);
+					commerceOrder.getCommerceOrderId(), paymentId,
+					httpServletRequest);
 			}
 
-			response.sendRedirect(redirect);
+			httpServletResponse.sendRedirect(redirect);
 		}
 		catch (Exception e) {
-			_portal.sendError(e, request, response);
+			_portal.sendError(e, httpServletRequest, httpServletResponse);
 		}
 	}
 

@@ -53,50 +53,54 @@ public class CommercePaymentServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(
-			HttpServletRequest request, HttpServletResponse response)
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
 		throws IOException, ServletException {
 
 		try {
-			HttpSession session = request.getSession();
+			HttpSession httpSession = httpServletRequest.getSession();
 
 			if (PortalSessionThreadLocal.getHttpSession() == null) {
-				PortalSessionThreadLocal.setHttpSession(session);
+				PortalSessionThreadLocal.setHttpSession(httpSession);
 			}
 
-			User user = _portal.getUser(request);
+			User user = _portal.getUser(httpServletRequest);
 
 			PermissionChecker permissionChecker =
 				PermissionCheckerFactoryUtil.create(user);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			_commerceOrderId = ParamUtil.getLong(request, "commerceOrderId");
+			_commerceOrderId = ParamUtil.getLong(
+				httpServletRequest, "commerceOrderId");
 
 			_confirmationStepUrl = ParamUtil.getString(
-				request, "confirmationStep");
+				httpServletRequest, "confirmationStep");
 
-			_startPayment(request);
+			_startPayment(httpServletRequest);
 
 			if (_onlineRedirect) {
-				response.sendRedirect(_url);
+				httpServletResponse.sendRedirect(_url);
 			}
 
 			// Offline methods, payment complete
 
 			_commercePaymentEngine.completePayment(
-				_commerceOrderId, null, request);
+				_commerceOrderId, null, httpServletRequest);
 
-			response.sendRedirect(_confirmationStepUrl);
+			httpServletResponse.sendRedirect(_confirmationStepUrl);
 		}
 		catch (Exception e) {
-			_portal.sendError(e, request, response);
+			_portal.sendError(e, httpServletRequest, httpServletResponse);
 		}
 	}
 
-	private void _startPayment(HttpServletRequest request) throws Exception {
+	private void _startPayment(HttpServletRequest httpServletRequest)
+		throws Exception {
+
 		CommercePaymentResult commercePaymentResult =
 			_commercePaymentEngine.startPayment(
-				_commerceOrderId, _confirmationStepUrl, request);
+				_commerceOrderId, _confirmationStepUrl, httpServletRequest);
 
 		_onlineRedirect = commercePaymentResult.isOnlineRedirect();
 		_url = commercePaymentResult.getRedirectUrl();
