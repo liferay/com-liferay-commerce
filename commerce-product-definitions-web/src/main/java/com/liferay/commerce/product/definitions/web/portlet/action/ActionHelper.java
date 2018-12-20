@@ -23,6 +23,7 @@ import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
@@ -30,6 +31,7 @@ import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
 import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -140,6 +142,14 @@ public class ActionHelper {
 		if (cpDefinitionId > 0) {
 			cpDefinition = _cpDefinitionService.fetchCPDefinition(
 				cpDefinitionId);
+
+			CProduct cProduct = _cProductLocalService.fetchCProduct(
+				cpDefinition.getCProductId());
+
+			if (cpDefinitionId != cProduct.getPublishedDefinitionId()){
+				cpDefinition = _cpDefinitionService.fetchCPDefinition(
+					cProduct.getPublishedDefinitionId());
+			}
 		}
 
 		if ((cpDefinition != null) && cpDefinition.isInTrash()) {
@@ -499,6 +509,9 @@ public class ActionHelper {
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
+
+	@Reference
+	private CProductLocalService _cProductLocalService;
 
 	@Reference
 	private CPTypeServicesTracker _cpTypeServicesTracker;
