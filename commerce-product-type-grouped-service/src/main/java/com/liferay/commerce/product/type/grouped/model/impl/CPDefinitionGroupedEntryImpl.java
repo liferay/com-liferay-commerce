@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Ethan Bustad
  */
 @ProviderType
 public class CPDefinitionGroupedEntryImpl
@@ -41,6 +42,14 @@ public class CPDefinitionGroupedEntryImpl
 	@Override
 	public CProduct getCProduct() throws PortalException {
 		return CProductLocalServiceUtil.getCProduct(getEntryCProductId());
+	}
+
+	@Override
+	public CPDefinition getEntryCPDefinition() throws PortalException {
+		CProduct cProduct = getCProduct();
+
+		return CPDefinitionLocalServiceUtil.fetchCPDefinition(
+			cProduct.getPublishedDefinitionId());
 	}
 
 }
