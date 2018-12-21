@@ -19,6 +19,7 @@ import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetLinkConstants;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.product.configuration.CProductVersionConfiguration;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.exception.CPDefinitionDisplayDateException;
 import com.liferay.commerce.product.exception.CPDefinitionExpirationDateException;
 import com.liferay.commerce.product.exception.CPDefinitionIgnoreSKUCombinationsException;
@@ -795,7 +796,7 @@ public class CPDefinitionLocalServiceImpl
 
 		// CProduct
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				originalCPDefinition)) {
 
 			cProductLocalService.updatePublishedDefinitionId(
@@ -1385,6 +1386,8 @@ public class CPDefinitionLocalServiceImpl
 						CProductVersionConfiguration.class.getName()));
 		}
 		catch (PortalException pe) {
+			pe.printStackTrace();
+
 			return false;
 		}
 
@@ -1407,6 +1410,8 @@ public class CPDefinitionLocalServiceImpl
 						CProductVersionConfiguration.class.getName()));
 		}
 		catch (PortalException pe) {
+			pe.printStackTrace();
+
 			return false;
 		}
 
@@ -1628,7 +1633,7 @@ public class CPDefinitionLocalServiceImpl
 			groupId, ddmStructureKey, metaTitleMap, metaDescriptionMap,
 			metaKeywordsMap, cpDefinition.getProductTypeName());
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 
@@ -1744,7 +1749,7 @@ public class CPDefinitionLocalServiceImpl
 		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
 			cpDefinitionId);
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 
@@ -1780,7 +1785,7 @@ public class CPDefinitionLocalServiceImpl
 
 		CPDefinition cpDefinition = null;
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 		}
@@ -1819,7 +1824,7 @@ public class CPDefinitionLocalServiceImpl
 
 		CPDefinition cpDefinition = null;
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 		}
@@ -1954,7 +1959,7 @@ public class CPDefinitionLocalServiceImpl
 
 		CPDefinition cpDefinition = null;
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 		}
@@ -1985,7 +1990,7 @@ public class CPDefinitionLocalServiceImpl
 
 		CPDefinition cpDefinition = null;
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 		}
