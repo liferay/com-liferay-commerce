@@ -1,0 +1,121 @@
+{namespace ProductDetailsModal}
+
+{template .render}
+	
+    {@param availability: string}
+    {@param sku: string}
+    {@param name: string}
+    {@param pictureUrl: string}
+    {@param detailsLink: string}
+
+    {@param? categories: list<[
+		name: string,
+		link: string
+	]>}
+    {@param? description: string}
+    {@param? addToOrderLink: string}
+	{@param? settings: [
+		minQuantity: number
+	]}
+
+	{@param? _isVisible: bool}
+
+	{@param? _handleCloseModal: any}
+
+    {let $availabilityDotClasses kind="text"}
+        d-inline-block minium-dot minium-dot--
+        {switch $availability}
+            {case 'inStock'}
+                good
+            {case 'available'}
+                neutral
+            {default}
+                bad
+        {/switch}
+    {/let}
+
+	{let $body kind="html"}
+		<div class="commerce-modal">
+			<div class="commerce-modal__header">
+				/*
+					<div class="commerce-modal__navigation">
+						<button class="modal-navigation__prev">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="minium-icon">
+								<rect fill="currentColor" x="5" y="5" width="90" height="90" rx="10" ry="10"></rect>
+							</svg>
+						</button>
+						<button class="modal-navigation__next">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="minium-icon">
+								<rect fill="currentColor" x="5" y="5" width="90" height="90" rx="10" ry="10"></rect>
+							</svg>
+						</button>
+					</div>
+				 */
+				<button 
+					class="commerce-modal__close" 
+					data-onclick="{$_handleCloseModal}"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="minium-icon">
+						<rect fill="currentColor" x="5" y="5" width="90" height="90" rx="10" ry="10"></rect>
+					</svg>
+				</button>
+			</div>
+
+			<div class="product-details-modal__picture">
+				<img src="{$pictureUrl}" alt="{$name}" />
+			</div>
+			<div class="product-details-modal__availability">
+				<div class="{$availabilityDotClasses}"></div>
+			</div>
+			<p class="product-details-modal__sku">{$sku}</p>
+			{if isNonnull($settings) and isNonnull($settings.minQuantity)}
+				<span class="product-details-modal__min-quantity">
+					Minimum quantity per order
+					<span class="product-details-modal__min-quantity__value">
+						{isNonnull($settings.minQuantity)}
+					</span>
+				</span>
+			{/if}
+			<h3 class="product-details-modal__name">
+				{$name}
+			</h3>
+			{if isNonnull($categories) and length($categories) > 0}
+				<p class="product-details-modal__categories">
+					{foreach $category in $categories}
+						{if index($category) != 0}
+							,{sp}
+						{/if}
+						<a href="{$category.link}">
+							{$category.name}
+						</a>
+					{/foreach}
+				</p>
+			{/if}
+			{if isNonnull($description)}
+				<p class="product-details-modal__description">
+					{$description}
+				</p>
+			{/if}
+			<a 
+				class="product-details-modal__view-details" 
+				href="{$detailsLink}"
+			>
+				View product details
+			</a>
+			{if isNonnull($addToOrderLink)}
+				<div class="product-details-modal__add-to-order">
+					<a class="minium-button" href="{$addToOrderLink}">
+						Add to order
+					</a>
+				</div>
+			{/if}
+		</div>
+	{/let}
+
+	{call ClayModal.render}
+		{param body: $body /}
+		{param visible: $_isVisible /}
+		{param ref: 'modal' /}
+	{/call}
+
+{/template}
