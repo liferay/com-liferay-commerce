@@ -56,7 +56,8 @@ OrdersTable.STATE = {
 		)
 	),
 	createNewOrderLink: Config.string(),
-	viewAllOrdersLink: Config.string()
+	viewAllOrdersLink: Config.string(),
+	spritemap: Config.string().required()
 };
 
 export {OrdersTable};

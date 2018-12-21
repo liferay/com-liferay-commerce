@@ -153,7 +153,8 @@ AccountSelector.STATE = {
 	viewAllAccountsLink: Config.string().required(),
 	createNewAccountLink: Config.string().required(),
 	viewAllOrdersLink: Config.string().required(),
-	createNewOrderLink: Config.string().required()
+	createNewOrderLink: Config.string().required(),
+	spritemap: Config.string().required()
 };
 
 export {AccountSelector};
