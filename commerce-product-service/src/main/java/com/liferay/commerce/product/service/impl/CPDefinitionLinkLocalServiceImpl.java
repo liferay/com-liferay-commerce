@@ -61,7 +61,7 @@ public class CPDefinitionLinkLocalServiceImpl
 
 		CPDefinition cpDefinition = null;
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 		}
@@ -99,7 +99,7 @@ public class CPDefinitionLinkLocalServiceImpl
 	public CPDefinitionLink deleteCPDefinitionLink(
 		CPDefinitionLink cpDefinitionLink) {
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionLink.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition = null;
@@ -220,7 +220,7 @@ public class CPDefinitionLinkLocalServiceImpl
 		CPDefinitionLink cpDefinitionLink =
 			cpDefinitionLinkPersistence.findByPrimaryKey(cpDefinitionLinkId);
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionLink.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition =

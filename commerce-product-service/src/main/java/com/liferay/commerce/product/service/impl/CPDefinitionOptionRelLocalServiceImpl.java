@@ -97,7 +97,7 @@ public class CPDefinitionOptionRelLocalServiceImpl
 		CPDefinitionOptionRel cpDefinitionOptionRel =
 			cpDefinitionOptionRelPersistence.create(cpDefinitionOptionRelId);
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 
@@ -156,7 +156,7 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			CPDefinitionOptionRel cpDefinitionOptionRel)
 		throws PortalException {
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionOptionRel.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition =
@@ -307,7 +307,7 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			cpDefinitionOptionRelPersistence.findByPrimaryKey(
 				cpDefinitionOptionRelId);
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionOptionRel.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition =

@@ -106,7 +106,7 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 			cpDefinitionGroupedEntryPersistence.create(
 				cpDefinitionGroupedEntryId);
 
-		if (_cpDefinitionLocalService.isPublishedCPDefinition(
+		if (_cpDefinitionLocalService.isVersionable(
 				cpDefinitionGroupedEntry.getCPDefinitionId())) {
 
 			cpDefinition = _cpDefinitionLocalService.copyCPDefinition(
@@ -131,7 +131,7 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 
 	@Override
 	public void deleteCPDefinitionGroupedEntries(long cpDefinitionId) {
-		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (_cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			try {
 				CPDefinition newCPDefinition =
 					_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
@@ -213,7 +213,7 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 
 		long cpDefinitionId = cpDefinitionGroupedEntry.getCPDefinitionId();
 
-		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (_cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			CPDefinition newCPDefinition =
 				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 

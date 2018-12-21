@@ -90,7 +90,7 @@ public class CPFriendlyURLEntryLocalServiceImpl
 		long classNameId = classNameLocalService.getClassNameId(clazz);
 
 		if ((clazz == CPDefinition.class) &&
-			cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
+			cpDefinitionLocalService.isVersionable(classPK)) {
 
 			try {
 				CPDefinition newCPDefinition =
