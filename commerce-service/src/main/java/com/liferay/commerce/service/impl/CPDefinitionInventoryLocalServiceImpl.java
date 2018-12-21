@@ -51,7 +51,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 		CPDefinitionInventory cpDefinitionInventory =
 			cpDefinitionInventoryPersistence.create(cpDefinitionInventoryId);
 
-		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
+		if (_cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			CPDefinition newCPDefinition =
 				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 
@@ -87,7 +87,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 			CPDefinitionInventory cpDefinitionInventory)
 		throws PortalException {
 
-		if (_cpDefinitionLocalService.isPublishedCPDefinition(
+		if (_cpDefinitionLocalService.isVersionable(
 				cpDefinitionInventory.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition =
@@ -151,7 +151,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 			cpDefinitionInventoryPersistence.findByPrimaryKey(
 				cpDefinitionInventoryId);
 
-		if (_cpDefinitionLocalService.isPublishedCPDefinition(
+		if (_cpDefinitionLocalService.isVersionable(
 				cpDefinitionInventory.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition =

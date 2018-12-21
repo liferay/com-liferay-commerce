@@ -110,7 +110,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 
 		if ((classNameId ==
 				classNameLocalService.getClassNameId(CPDefinition.class)) &&
-			cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
+			cpDefinitionLocalService.isVersionable(classPK)) {
 
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(classPK);
@@ -232,7 +232,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 
 		if ((cpAttachmentFileEntry.getClassNameId() ==
 				cpDefinitionClassNameId) &&
-			cpDefinitionLocalService.isPublishedCPDefinition(
+			cpDefinitionLocalService.isVersionable(
 				cpAttachmentFileEntry.getClassPK())) {
 
 			CPDefinition newCPDefinition =
@@ -369,7 +369,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 
 		if ((cpAttachmentFileEntry.getClassNameId() ==
 				cpDefinitionClassNameId) &&
-			cpDefinitionLocalService.isPublishedCPDefinition(
+			cpDefinitionLocalService.isVersionable(
 				cpAttachmentFileEntry.getClassPK())) {
 
 			CPDefinition newCPDefinition =

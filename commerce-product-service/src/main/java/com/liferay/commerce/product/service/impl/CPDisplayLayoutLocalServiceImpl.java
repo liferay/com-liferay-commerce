@@ -38,7 +38,7 @@ public class CPDisplayLayoutLocalServiceImpl
 			cpDisplayLayoutPersistence.fetchByC_C(classNameId, classPK);
 
 		if ((clazz == CPDefinition.class) &&
-			cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
+			cpDefinitionLocalService.isVersionable(classPK)) {
 
 			CPDefinition newCPDefinition = null;
 
@@ -85,7 +85,7 @@ public class CPDisplayLayoutLocalServiceImpl
 
 		if (cpDisplayLayout != null) {
 			if ((clazz == CPDefinition.class) &&
-				cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
+				cpDefinitionLocalService.isVersionable(classPK)) {
 
 				try {
 					CPDefinition newCPDefinition =
