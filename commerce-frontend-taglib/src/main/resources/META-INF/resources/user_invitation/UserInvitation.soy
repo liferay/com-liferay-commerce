@@ -1,0 +1,120 @@
+{namespace UserInvitation}
+
+{template .render}
+	
+	{@param users: list<[
+		id: string | number,
+		thumbnail: string,
+		name: string,
+		email: string
+	]>}
+	
+	{@param addedUsers: list<[
+		id: string | number,
+		thumbnail: string,
+		name: string,
+		email: string
+	]>}
+
+	{@param query: string }
+	{@param spritemap: string }
+
+	{@param _isVisible: bool }
+	{@param _toggleInvitation: any }
+	{@param _handleInputBox: any }
+	{@param _handleFormSubmit: any }
+	{@param _handleCloseModal: any }
+	{@param _sendInvitations: any }
+
+	{let $body kind="html"}
+		<div class="commerce-modal user-invitation">
+			<div class="commerce-modal__header">
+				<h3 class="commerce-modal__title">
+					Invite user to this account
+				</h3>
+				<button 
+					class="commerce-modal__close" 
+					data-onclick="{$_handleCloseModal}"
+				>
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'close' /}
+					{/call}
+				</button>
+			</div>
+			<div class="user-invitation__input autocomplete-input">
+				<div class="autocomplete-input__icon">
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'search' /}
+					{/call}
+				</div>
+				<div class="autocomplete-input__wrapper">
+					<div class="autocomplete-input__content">
+						{foreach $addedUser in $addedUsers}
+							{call UserInvitationInputItem.render}
+								{param events: ['removeItem' : $_toggleInvitation] /}
+								{param id: $addedUser.id /}
+								{param email: $addedUser.email /}
+								{param name: $addedUser.name /}
+								{param thumbnail: $addedUser.thumbnail /}
+								{param spritemap: $spritemap /}
+							{/call}
+						{/foreach}
+						<form ref="form" data-onsubmit="{$_handleFormSubmit}">
+							<input 
+								class="autocomplete-input__box" 
+								type="text" 
+								value="{$query}"
+								data-onkeyup="{$_handleInputBox}"
+							/>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="user-invitation__list">
+				{if length($users) > 0 }
+					{foreach $user in $users}
+						{call UserInvitationListItem.render}
+							{param events: ['toggleInvitation': $_toggleInvitation] /}
+							{param id: $user.id /}
+							{param name: $user.name /}
+							{param email: $user.email /}
+							{param thumbnail: $user.thumbnail /}
+							{param addedUsers: $addedUsers /}
+							{param query: $query /}
+						{/call}
+					{/foreach}
+				{/if}
+				{if length($users) == 0 and $query != ''}
+					{call UserInvitationListItem.render}
+						{param events: ['toggleInvitation': $_toggleInvitation] /}
+						{param email: $query /}
+						{param addedUsers: $addedUsers /}
+					{/call}
+				{/if}
+			</div>
+			{let $inviteButtonClasses kind="text"}
+				minium-button minium-button--big
+				{if length($addedUsers) == 0}
+					{sp}minium-button--disabled
+				{/if}
+			{/let}
+			<div class="user-invitation__invite">
+				<button 
+					class="{$inviteButtonClasses}"
+					data-onclick="{$_sendInvitations}"
+				>
+					Send invite
+				</button>
+			</div>
+		</div>
+	{/let}
+
+	{call ClayModal.render}
+		{param body: $body /}
+		{param visible: $_isVisible /}
+		{param ref: 'modal' /}
+	{/call}
+
+{/template}
