@@ -17,6 +17,30 @@
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
+		<name>add-to-tick-item</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.AddToTickItemTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
+		<name>autocomplete-item</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.AutocompleteItemTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
+		<name>product-card</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.ProductCardTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
+		<name>product-details-modal</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.ProductDetailsModalTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
 		<name>search-bar</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.SearchBarTag</tag-class>
 		<body-content>empty</body-content>
@@ -30,6 +54,11 @@
 		<name>search-results</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.SearchResultsTag</tag-class>
 		<body-content>empty</body-content>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>table</name>
@@ -86,5 +115,11 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+	</tag>
+	<tag>
+		<name>user-invitation</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.UserInvitationTag</tag-class>
+		<body-content>empty</body-content>
 	</tag>
 </taglib>
