@@ -22,6 +22,7 @@ import com.liferay.commerce.product.service.base.CPFriendlyURLEntryLocalServiceB
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -91,14 +92,15 @@ public class CPFriendlyURLEntryLocalServiceImpl
 		if ((clazz == CPDefinition.class) &&
 			cpDefinitionLocalService.isPublishedCPDefinition(classPK)) {
 
-			CPDefinition newCPDefinition =
-				cpDefinitionLocalService.copyCPDefinition(classPK);
+			try {
+				CPDefinition newCPDefinition =
+					cpDefinitionLocalService.copyCPDefinition(classPK);
 
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
-			classPK = newCPDefinition.getCPDefinitionId();
+				classPK = newCPDefinition.getCPDefinitionId();
+			}
+			catch (PortalException pe) {
+				throw new SystemException(pe);
+			}
 		}
 
 		cpFriendlyURLEntryPersistence.removeByG_C_C(

@@ -101,10 +101,6 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
 			cpDefinitionId = newCPDefinition.getCPDefinitionId();
 		}
 
@@ -166,10 +162,6 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionOptionRel.getCPDefinitionId());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
 		}
 
 		// Commerce product definition option value rels
@@ -321,10 +313,6 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionOptionRel.getCPDefinitionId());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
 
 			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByU_C(
 				cpDefinitionOptionRel.getUuid(),
