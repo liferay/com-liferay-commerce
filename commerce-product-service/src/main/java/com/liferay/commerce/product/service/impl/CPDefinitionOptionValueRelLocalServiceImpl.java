@@ -105,7 +105,7 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 				cpDefinitionOptionRelId);
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionOptionRel.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition =
@@ -157,7 +157,7 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 		CPDefinitionOptionRel cpDefinitionOptionRel =
 			cpDefinitionOptionValueRel.getCPDefinitionOptionRel();
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionOptionRel.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition =
@@ -367,7 +367,7 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 		CPDefinitionOptionRel cpDefinitionOptionRel =
 			cpDefinitionOptionValueRel.getCPDefinitionOptionRel();
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionOptionRel.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition =

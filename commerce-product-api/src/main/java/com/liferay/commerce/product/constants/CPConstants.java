@@ -20,6 +20,9 @@ package com.liferay.commerce.product.constants;
  */
 public class CPConstants {
 
+	public static final String C_PRODUCT_VERSIONING_SERVICE_NAME =
+		"com.liferay.commerce.product.versioning";
+
 	public static final String CP_OPTION_SERVICE_NAME =
 		"com.liferay.commerce.product.option";
 
