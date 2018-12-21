@@ -18,6 +18,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.service.base.CPDefinitionLinkLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -63,9 +64,6 @@ public class CPDefinitionLinkLocalServiceImpl
 		if (cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
-
-			cProductLocalService.updatePublishedDefinitionId(
-				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
 		}
 		else {
 			cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
@@ -104,17 +102,20 @@ public class CPDefinitionLinkLocalServiceImpl
 		if (cpDefinitionLocalService.isPublishedCPDefinition(
 				cpDefinitionLink.getCPDefinitionId())) {
 
-			CPDefinition newCPDefinition =
-				cpDefinitionLocalService.copyCPDefinition(
+			CPDefinition newCPDefinition = null;
+
+			try {
+				newCPDefinition = cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionLink.getCPDefinitionId());
 
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
-			cpDefinitionLink = cpDefinitionLinkPersistence.fetchByC_C_T(
-				newCPDefinition.getCPDefinitionId(),
-				cpDefinitionLink.getCProductId(), cpDefinitionLink.getType());
+				cpDefinitionLink = cpDefinitionLinkPersistence.findByC_C_T(
+					newCPDefinition.getCPDefinitionId(),
+					cpDefinitionLink.getCProductId(),
+					cpDefinitionLink.getType());
+			}
+			catch (PortalException pe) {
+				throw new SystemException(pe);
+			}
 		}
 
 		// Commerce product definition link
@@ -225,10 +226,6 @@ public class CPDefinitionLinkLocalServiceImpl
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionLink.getCPDefinitionId());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
 
 			cpDefinitionLink = cpDefinitionLinkPersistence.findByC_C_T(
 				newCPDefinition.getCPDefinitionId(),

@@ -167,10 +167,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
 			cpDefinitionId = newCPDefinition.getCPDefinitionId();
 		}
 
@@ -411,10 +407,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 				cpDefinitionLocalService.copyCPDefinition(
 					cpInstance.getCPDefinitionId());
 
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
 			cpInstance = cpInstancePersistence.findByC_C(
 				newCPDefinition.getCPDefinitionId(),
 				cpInstance.getCPInstanceUuid());
@@ -569,6 +561,17 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	}
 
 	@Override
+	public CPInstance getCProductInstance(
+			long cProductId, String cpInstanceUuid)
+		throws PortalException {
+
+		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+
+		return cpInstancePersistence.findByC_C(
+			cProduct.getPublishedDefinitionId(), cpInstanceUuid);
+	}
+
+	@Override
 	public String[] getSKUs(long cpDefinitionId) {
 		List<CPInstance> cpInstances = getCPDefinitionInstances(
 			cpDefinitionId, WorkflowConstants.STATUS_APPROVED,
@@ -707,10 +710,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 				cpDefinitionLocalService.copyCPDefinition(
 					cpInstance.getCPDefinitionId());
 
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
 			cpInstance = cpInstancePersistence.findByC_C(
 				newCPDefinition.getCPDefinitionId(),
 				cpInstance.getCPInstanceUuid());
@@ -784,10 +783,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 				cpDefinitionLocalService.copyCPDefinition(
 					cpInstance.getCPDefinitionId());
 
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
 			cpInstance = cpInstancePersistence.findByC_C(
 				newCPDefinition.getCPDefinitionId(),
 				cpInstance.getCPInstanceUuid());
@@ -819,10 +814,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
 					cpInstance.getCPDefinitionId());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
 
 			cpInstance = cpInstancePersistence.findByC_C(
 				newCPDefinition.getCPDefinitionId(),
@@ -915,10 +906,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
 					cpInstance.getCPDefinitionId());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
 
 			cpInstance = cpInstancePersistence.findByC_C(
 				newCPDefinition.getCPDefinitionId(),
