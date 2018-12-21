@@ -115,10 +115,6 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(classPK);
 
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
 			classPK = newCPDefinition.getCPDefinitionId();
 		}
 
@@ -242,10 +238,6 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
 					cpAttachmentFileEntry.getClassPK());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
 
 			cpAttachmentFileEntry =
 				cpAttachmentFileEntryPersistence.findByU_C_C(
@@ -383,10 +375,6 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
 					cpAttachmentFileEntry.getClassPK());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
 
 			cpAttachmentFileEntry =
 				cpAttachmentFileEntryPersistence.findByU_C_C(

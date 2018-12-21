@@ -19,6 +19,7 @@ import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.service.base.CPDefinitionSpecificationOptionValueLocalServiceBaseImpl;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -62,8 +63,7 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionSpecificationOptionValue.getCPDefinitionId());
 
-			cProductLocalService.updatePublishedDefinitionId(
-				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
+			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
 
 		cpDefinitionSpecificationOptionValue.setUuid(serviceContext.getUuid());
@@ -102,19 +102,21 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 		if (cpDefinitionLocalService.isPublishedCPDefinition(
 				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
 
-			CPDefinition newCPDefinition =
-				cpDefinitionLocalService.copyCPDefinition(
-					cpDefinitionSpecificationOptionValue.getCPDefinitionId());
+			try {
+				CPDefinition newCPDefinition =
+					cpDefinitionLocalService.copyCPDefinition(
+						cpDefinitionSpecificationOptionValue.
+							getCPDefinitionId());
 
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
-			cpDefinitionSpecificationOptionValue =
-				cpDefinitionSpecificationOptionValuePersistence.fetchByC_CSO(
-					newCPDefinition.getCPDefinitionId(),
-					cpDefinitionSpecificationOptionValue.
-						getCPSpecificationOptionId());
+				cpDefinitionSpecificationOptionValue =
+					cpDefinitionSpecificationOptionValuePersistence.findByC_CSO(
+						newCPDefinition.getCPDefinitionId(),
+						cpDefinitionSpecificationOptionValue.
+							getCPSpecificationOptionId());
+			}
+			catch (PortalException pe) {
+				throw new SystemException(pe);
+			}
 		}
 
 		// Commerce product definition specification option value
@@ -258,10 +260,6 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 				cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionSpecificationOptionValue.getCPDefinitionId());
 
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
 			cpDefinitionSpecificationOptionValue =
 				cpDefinitionSpecificationOptionValuePersistence.findByC_CSO(
 					newCPDefinition.getCPDefinitionId(),
@@ -306,10 +304,6 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionSpecificationOptionValue.getCPDefinitionId());
-
-			cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
 
 			cpDefinitionSpecificationOptionValue =
 				cpDefinitionSpecificationOptionValuePersistence.findByC_CSO(
