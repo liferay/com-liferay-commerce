@@ -109,7 +109,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 				cpDefinitionVirtualSettingId);
 
 		if (className.equals(CPDefinition.class.getName()) &&
-			_cpDefinitionLocalService.isPublishedCPDefinition(
+			_cpDefinitionLocalService.isVersionable(
 				cpDefinitionVirtualSetting.getClassPK())) {
 
 			CPDefinition newCPDefinition =
@@ -122,7 +122,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 				cpDefinitionVirtualSetting.getClassPK());
 
-			if (_cpDefinitionLocalService.isPublishedCPDefinition(
+			if (_cpDefinitionLocalService.isVersionable(
 					cpInstance.getCPDefinitionId())) {
 
 				CPDefinition newCPDefinition =
@@ -199,7 +199,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 
 		if (cpDefinitionVirtualSetting != null) {
 			if (className.equals(CPDefinition.class.getName()) &&
-				_cpDefinitionLocalService.isPublishedCPDefinition(
+				_cpDefinitionLocalService.isVersionable(
 					cpDefinitionVirtualSetting.getClassPK())) {
 
 				CPDefinition newCPDefinition =
@@ -215,7 +215,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 					_cpInstanceLocalService.getCPInstance(
 						cpDefinitionVirtualSetting.getClassPK());
 
-				if (_cpDefinitionLocalService.isPublishedCPDefinition(
+				if (_cpDefinitionLocalService.isVersionable(
 						cpInstance.getCPDefinitionId())) {
 
 					CPDefinition newCPDefinition =
@@ -321,7 +321,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 
 		if ((cpDefinitionVirtualSetting.getClassNameId() ==
 				cpDefinitionClassNameId) &&
-			_cpDefinitionLocalService.isPublishedCPDefinition(
+			_cpDefinitionLocalService.isVersionable(
 				cpDefinitionVirtualSetting.getClassPK())) {
 
 			CPDefinition newCPDefinition =
@@ -339,7 +339,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 				cpDefinitionVirtualSetting.getClassPK());
 
-			if (_cpDefinitionLocalService.isPublishedCPDefinition(
+			if (_cpDefinitionLocalService.isVersionable(
 					cpInstance.getCPDefinitionId())) {
 
 				CPDefinition newCPDefinition =

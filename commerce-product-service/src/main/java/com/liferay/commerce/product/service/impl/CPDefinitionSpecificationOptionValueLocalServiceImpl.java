@@ -57,7 +57,7 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 				cpDefinitionSpecificationOptionValuePersistence.create(
 					cpDefinitionSpecificationOptionValueId);
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
 
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
@@ -99,7 +99,7 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 			CPDefinitionSpecificationOptionValue
 				cpDefinitionSpecificationOptionValue) {
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
 
 			try {
@@ -253,7 +253,7 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 				cpDefinitionSpecificationOptionValuePersistence.
 					findByPrimaryKey(cpDefinitionSpecificationOptionValueId);
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition =
@@ -298,7 +298,7 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 				cpDefinitionSpecificationOptionValuePersistence.
 					findByPrimaryKey(cpDefinitionSpecificationOptionValueId);
 
-		if (cpDefinitionLocalService.isPublishedCPDefinition(
+		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
 
 			CPDefinition newCPDefinition =
