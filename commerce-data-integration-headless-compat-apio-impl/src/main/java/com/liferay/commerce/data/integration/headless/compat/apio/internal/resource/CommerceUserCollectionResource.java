@@ -238,7 +238,7 @@ public class CommerceUserCollectionResource
 				roleNames.add(role.getName());
 			}
 			catch (PortalException pe) {
-				pe.printStackTrace();
+				_log.error(pe, pe);
 			}
 		}
 

@@ -53,48 +53,36 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 	@Override
 	public CProduct updateDraftDefinitionId(
-		long cProductId, long draftDefinitionId) {
+			long cProductId, long draftDefinitionId)
+		throws PortalException {
 
-		try {
-			CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
 
-			Date now = new Date();
+		Date now = new Date();
 
-			cProduct.setModifiedDate(now);
+		cProduct.setModifiedDate(now);
 
-			cProduct.setDraftDefinitionId(draftDefinitionId);
+		cProduct.setDraftDefinitionId(draftDefinitionId);
 
-			return cProductPersistence.update(cProduct);
-		}
-		catch (PortalException pe) {
-			pe.printStackTrace();
-
-			return null;
-		}
+		return cProductPersistence.update(cProduct);
 	}
 
 	@Override
 	public CProduct updatePublishedDefinitionId(
-		long cProductId, long publishedDefinitionId) {
+			long cProductId, long publishedDefinitionId)
+		throws PortalException {
 
-		try {
-			CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
 
-			Date now = new Date();
+		Date now = new Date();
 
-			cProduct.setModifiedDate(now);
+		cProduct.setModifiedDate(now);
 
-			cProduct.setDraftDefinitionId(0);
+		cProduct.setDraftDefinitionId(0);
 
-			cProduct.setPublishedDefinitionId(publishedDefinitionId);
+		cProduct.setPublishedDefinitionId(publishedDefinitionId);
 
-			return cProductPersistence.update(cProduct);
-		}
-		catch (PortalException pe) {
-			pe.printStackTrace();
-
-			return null;
-		}
+		return cProductPersistence.update(cProduct);
 	}
 
 }

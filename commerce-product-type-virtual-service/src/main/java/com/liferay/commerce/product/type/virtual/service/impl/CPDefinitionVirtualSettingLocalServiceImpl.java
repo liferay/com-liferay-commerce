@@ -108,47 +108,34 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			cpDefinitionVirtualSettingPersistence.create(
 				cpDefinitionVirtualSettingId);
 
-		try {
-			if (className.equals(CPDefinition.class.getName()) &&
-				_cpDefinitionLocalService.isPublishedCPDefinition(
-					cpDefinitionVirtualSetting.getClassPK())) {
+		if (className.equals(CPDefinition.class.getName()) &&
+			_cpDefinitionLocalService.isPublishedCPDefinition(
+				cpDefinitionVirtualSetting.getClassPK())) {
+
+			CPDefinition newCPDefinition =
+				_cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionVirtualSetting.getClassPK());
+
+			classPK = newCPDefinition.getCPDefinitionId();
+		}
+		else if (className.equals(CPInstance.class.getName())) {
+			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+				cpDefinitionVirtualSetting.getClassPK());
+
+			if (_cpDefinitionLocalService.isPublishedCPDefinition(
+					cpInstance.getCPDefinitionId())) {
 
 				CPDefinition newCPDefinition =
 					_cpDefinitionLocalService.copyCPDefinition(
-						cpDefinitionVirtualSetting.getClassPK());
+						cpInstance.getCPDefinitionId());
 
-				_cProductLocalService.updatePublishedDefinitionId(
-					newCPDefinition.getCProductId(),
-					newCPDefinition.getCPDefinitionId());
-
-				classPK = newCPDefinition.getCPDefinitionId();
-			}
-			else if (className.equals(CPInstance.class.getName())) {
-				CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-					cpDefinitionVirtualSetting.getClassPK());
-
-				if (_cpDefinitionLocalService.isPublishedCPDefinition(
-						cpInstance.getCPDefinitionId())) {
-
-					CPDefinition newCPDefinition =
-						_cpDefinitionLocalService.copyCPDefinition(
-							cpInstance.getCPDefinitionId());
-
-					_cProductLocalService.updatePublishedDefinitionId(
+				CPInstance newCPInstance =
+					_cpInstanceLocalService.getCProductInstance(
 						newCPDefinition.getCProductId(),
-						newCPDefinition.getCPDefinitionId());
+						cpInstance.getCPInstanceUuid());
 
-					CPInstance newCPInstance =
-						_cpInstanceLocalService.fetchCProductInstance(
-							newCPDefinition.getCProductId(),
-							cpInstance.getCPInstanceUuid());
-
-					classPK = newCPInstance.getCPInstanceId();
-				}
+				classPK = newCPInstance.getCPInstanceId();
 			}
-		}
-		catch (PortalException pe) {
-			pe.printStackTrace();
 		}
 
 		cpDefinitionVirtualSetting.setUuid(serviceContext.getUuid());
@@ -201,7 +188,8 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 
 	@Override
 	public CPDefinitionVirtualSetting deleteCPDefinitionVirtualSetting(
-		String className, long classPK) {
+			String className, long classPK)
+		throws PortalException {
 
 		long classNameId = classNameLocalService.getClassNameId(className);
 
@@ -210,52 +198,39 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 				classNameId, classPK);
 
 		if (cpDefinitionVirtualSetting != null) {
-			try {
-				if (className.equals(CPDefinition.class.getName()) &&
-					_cpDefinitionLocalService.isPublishedCPDefinition(
-						cpDefinitionVirtualSetting.getClassPK())) {
+			if (className.equals(CPDefinition.class.getName()) &&
+				_cpDefinitionLocalService.isPublishedCPDefinition(
+					cpDefinitionVirtualSetting.getClassPK())) {
+
+				CPDefinition newCPDefinition =
+					_cpDefinitionLocalService.copyCPDefinition(
+						cpDefinitionVirtualSetting.getClassPK());
+
+				cpDefinitionVirtualSetting =
+					cpDefinitionVirtualSettingPersistence.findByC_C(
+						classNameId, newCPDefinition.getCPDefinitionId());
+			}
+			else if (className.equals(CPInstance.class.getName())) {
+				CPInstance cpInstance =
+					_cpInstanceLocalService.getCPInstance(
+						cpDefinitionVirtualSetting.getClassPK());
+
+				if (_cpDefinitionLocalService.isPublishedCPDefinition(
+						cpInstance.getCPDefinitionId())) {
 
 					CPDefinition newCPDefinition =
 						_cpDefinitionLocalService.copyCPDefinition(
-							cpDefinitionVirtualSetting.getClassPK());
+							cpInstance.getCPDefinitionId());
 
-					_cProductLocalService.updatePublishedDefinitionId(
-						newCPDefinition.getCProductId(),
-						newCPDefinition.getCPDefinitionId());
+					CPInstance newCPInstance =
+						_cpInstanceLocalService.getCProductInstance(
+							newCPDefinition.getCProductId(),
+							cpInstance.getCPInstanceUuid());
 
 					cpDefinitionVirtualSetting =
 						cpDefinitionVirtualSettingPersistence.findByC_C(
-							classNameId, newCPDefinition.getCPDefinitionId());
+							classNameId, newCPInstance.getCPInstanceId());
 				}
-				else if (className.equals(CPInstance.class.getName())) {
-					CPInstance cpInstance =
-						_cpInstanceLocalService.getCPInstance(
-							cpDefinitionVirtualSetting.getClassPK());
-
-					if (_cpDefinitionLocalService.isPublishedCPDefinition(
-							cpInstance.getCPDefinitionId())) {
-
-						CPDefinition newCPDefinition =
-							_cpDefinitionLocalService.copyCPDefinition(
-								cpInstance.getCPDefinitionId());
-
-						_cProductLocalService.updatePublishedDefinitionId(
-							newCPDefinition.getCProductId(),
-							newCPDefinition.getCPDefinitionId());
-
-						CPInstance newCPInstance =
-							_cpInstanceLocalService.fetchCProductInstance(
-								newCPDefinition.getCProductId(),
-								cpInstance.getCPInstanceUuid());
-
-						cpDefinitionVirtualSetting =
-							cpDefinitionVirtualSettingPersistence.findByC_C(
-								classNameId, newCPInstance.getCPInstanceId());
-					}
-				}
-			}
-			catch (PortalException pe) {
-				pe.printStackTrace();
 			}
 
 			cpDefinitionVirtualSettingPersistence.remove(
@@ -353,10 +328,6 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 				_cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionVirtualSetting.getClassPK());
 
-			_cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
 			cpDefinitionVirtualSetting =
 				cpDefinitionVirtualSettingPersistence.findByC_C(
 					cpDefinitionVirtualSetting.getClassNameId(),
@@ -375,12 +346,8 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 					_cpDefinitionLocalService.copyCPDefinition(
 						cpInstance.getCPDefinitionId());
 
-				_cProductLocalService.updatePublishedDefinitionId(
-					newCPDefinition.getCProductId(),
-					newCPDefinition.getCPDefinitionId());
-
 				CPInstance newCPInstance =
-					_cpInstanceLocalService.fetchCProductInstance(
+					_cpInstanceLocalService.getCProductInstance(
 						newCPDefinition.getCProductId(),
 						cpInstance.getCPInstanceUuid());
 

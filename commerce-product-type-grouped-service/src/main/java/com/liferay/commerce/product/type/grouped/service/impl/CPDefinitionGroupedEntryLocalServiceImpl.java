@@ -23,6 +23,7 @@ import com.liferay.commerce.product.type.grouped.exception.CPDefinitionGroupedEn
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.service.base.CPDefinitionGroupedEntryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -110,9 +111,6 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 
 			cpDefinition = _cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
-
-			_cProductLocalService.updatePublishedDefinitionId(
-				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
 		}
 
 		cpDefinitionGroupedEntry.setUuid(serviceContext.getUuid());
@@ -134,14 +132,15 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 	@Override
 	public void deleteCPDefinitionGroupedEntries(long cpDefinitionId) {
 		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
-			CPDefinition newCPDefinition =
-				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
+			try {
+				CPDefinition newCPDefinition =
+					_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 
-			_cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
-			cpDefinitionId = newCPDefinition.getCPDefinitionId();
+				cpDefinitionId = newCPDefinition.getCPDefinitionId();
+			}
+			catch (PortalException pe) {
+				throw new SystemException(pe);
+			}
 		}
 
 		cpDefinitionGroupedEntryPersistence.removeByCPDefinitionId(
@@ -217,10 +216,6 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 		if (_cpDefinitionLocalService.isPublishedCPDefinition(cpDefinitionId)) {
 			CPDefinition newCPDefinition =
 				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
-
-			_cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
 
 			cpDefinitionGroupedEntry =
 				cpDefinitionGroupedEntryPersistence.findByC_E(

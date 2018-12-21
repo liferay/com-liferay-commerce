@@ -55,10 +55,6 @@ public class CPDefinitionInventoryLocalServiceImpl
 			CPDefinition newCPDefinition =
 				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 
-			_cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
 			cpDefinitionId = newCPDefinition.getCPDefinitionId();
 		}
 
@@ -98,10 +94,6 @@ public class CPDefinitionInventoryLocalServiceImpl
 				_cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionInventory.getCPDefinitionId());
 
-			_cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
-
 			cpDefinitionInventory =
 				cpDefinitionInventoryPersistence.findByCPDefinitionId(
 					newCPDefinition.getCPDefinitionId());
@@ -139,8 +131,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 
 	@Override
 	public CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
-			long cpDefinitionId)
-		throws PortalException {
+			long cpDefinitionId) {
 
 		return cpDefinitionInventoryPersistence.fetchByCPDefinitionId(
 			cpDefinitionId);
@@ -166,10 +157,6 @@ public class CPDefinitionInventoryLocalServiceImpl
 			CPDefinition newCPDefinition =
 				_cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionInventory.getCPDefinitionId());
-
-			_cProductLocalService.updatePublishedDefinitionId(
-				newCPDefinition.getCProductId(),
-				newCPDefinition.getCPDefinitionId());
 
 			cpDefinitionInventory =
 				cpDefinitionInventoryPersistence.findByCPDefinitionId(
