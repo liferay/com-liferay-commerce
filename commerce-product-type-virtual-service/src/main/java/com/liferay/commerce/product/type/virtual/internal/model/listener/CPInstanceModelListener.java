@@ -16,6 +16,8 @@ package com.liferay.commerce.product.type.virtual.internal.model.listener;
 
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.ModelListener;
 
@@ -30,9 +32,15 @@ public class CPInstanceModelListener extends BaseModelListener<CPInstance> {
 
 	@Override
 	public void onBeforeRemove(CPInstance cpInstance) {
-		_cpDefinitionVirtualSettingLocalService.
-			deleteCPDefinitionVirtualSetting(
-				cpInstance.getModelClassName(), cpInstance.getCPInstanceId());
+		try {
+			_cpDefinitionVirtualSettingLocalService.
+				deleteCPDefinitionVirtualSetting(
+					cpInstance.getModelClassName(),
+					cpInstance.getCPInstanceId());
+		}
+		catch (PortalException pe) {
+			throw new SystemException(pe);
+		}
 	}
 
 	@Reference
