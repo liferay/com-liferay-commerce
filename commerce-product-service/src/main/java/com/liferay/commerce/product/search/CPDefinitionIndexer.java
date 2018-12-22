@@ -182,6 +182,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			contextBooleanFilter.addRequiredTerm(FIELD_PUBLISHED, published);
 		}
 
+		contextBooleanFilter.addRequiredTerm(Field.HIDDEN, false);
+
 		String definitionLinkType = GetterUtil.getString(
 			attributes.get("definitionLinkType"));
 
@@ -529,6 +531,19 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				FIELD_DEFAULT_IMAGE_FILE_URL,
 				DLUtil.getDownloadURL(
 					fileEntry, fileEntry.getFileVersion(), null, null));
+		}
+
+		CProduct cProduct = cpDefinition.getCProduct();
+
+		if ((cpDefinition.getCPDefinitionId() ==
+				cProduct.getDraftDefinitionId()) ||
+			(cpDefinition.getCPDefinitionId() ==
+				cProduct.getPublishedDefinitionId())) {
+
+			document.addKeyword(Field.HIDDEN, false);
+		}
+		else {
+			document.addKeyword(Field.HIDDEN, true);
 		}
 
 		for (CPRuleType cpRuleType : _cpRuleTypeRegistry.getCPRuleTypes()) {

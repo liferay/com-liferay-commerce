@@ -14,10 +14,13 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.base.CProductLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.Date;
@@ -58,13 +61,28 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
 
+		long originalDraftDefinitionId = cProduct.getDraftDefinitionId();
+
+		if (originalDraftDefinitionId == draftDefinitionId) {
+			return cProduct;
+		}
+
 		Date now = new Date();
 
 		cProduct.setModifiedDate(now);
 
 		cProduct.setDraftDefinitionId(draftDefinitionId);
 
-		return cProductPersistence.update(cProduct);
+		if (draftDefinitionId == cProduct.getPublishedDefinitionId()) {
+			cProduct.setPublishedDefinitionId(0);
+		}
+
+		cProduct = cProductPersistence.update(cProduct);
+
+		reindexCPDefinition(originalDraftDefinitionId);
+		reindexCPDefinition(draftDefinitionId);
+
+		return cProduct;
 	}
 
 	@Override
@@ -74,15 +92,38 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
 
+		long originalPublishedDefinitionId =
+			cProduct.getPublishedDefinitionId();
+
+		if (originalPublishedDefinitionId == publishedDefinitionId) {
+			return cProduct;
+		}
+
 		Date now = new Date();
 
 		cProduct.setModifiedDate(now);
 
-		cProduct.setDraftDefinitionId(0);
+		if (publishedDefinitionId == cProduct.getDraftDefinitionId()) {
+			cProduct.setDraftDefinitionId(0);
+		}
 
 		cProduct.setPublishedDefinitionId(publishedDefinitionId);
 
-		return cProductPersistence.update(cProduct);
+		cProduct = cProductPersistence.update(cProduct);
+
+		reindexCPDefinition(originalPublishedDefinitionId);
+		reindexCPDefinition(publishedDefinitionId);
+
+		return cProduct;
+	}
+
+	protected void reindexCPDefinition(long cpDefinitionId)
+		throws PortalException {
+
+		Indexer<CPDefinition> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			CPDefinition.class);
+
+		indexer.reindex(CPDefinition.class.getName(), cpDefinitionId);
 	}
 
 }

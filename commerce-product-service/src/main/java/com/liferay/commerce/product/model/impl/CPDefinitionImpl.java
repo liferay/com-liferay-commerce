@@ -25,11 +25,13 @@ import com.liferay.commerce.product.model.CPDefinitionLocalization;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalServiceUtil;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalServiceUtil;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
+import com.liferay.commerce.product.service.CProductLocalServiceUtil;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -178,6 +180,11 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 	public List<CPInstance> getCPInstances() {
 		return CPInstanceLocalServiceUtil.getCPDefinitionInstances(
 			getCPDefinitionId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	@Override
+	public CProduct getCProduct() throws PortalException {
+		return CProductLocalServiceUtil.getCProduct(getCProductId());
 	}
 
 	@Override
