@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.service.impl;
 
-import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
 import com.liferay.commerce.wish.list.exception.CommerceWishListNameException;
 import com.liferay.commerce.wish.list.exception.GuestWishListMaxAllowedException;
@@ -36,6 +34,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Andrea Di Giorgi
@@ -277,11 +276,6 @@ public class CommerceWishListLocalServiceImpl
 		for (CommerceWishListItem fromCommerceWishListItem :
 				fromCommerceWishListItems) {
 
-			CPInstance fromCPInstance =
-				_cpInstanceLocalService.getCPInstanceByUuidAndGroupId(
-					fromCommerceWishListItem.getCPInstanceUuid(),
-					fromCommerceWishListItem.getGroupId());
-
 			String json = fromCommerceWishListItem.getJson();
 
 			boolean found = false;
@@ -289,26 +283,26 @@ public class CommerceWishListLocalServiceImpl
 			for (CommerceWishListItem toCommerceWishListItem :
 					toCommerceWishListItems) {
 
-				CPInstance toCPInstance =
-					_cpInstanceLocalService.getCPInstanceByUuidAndGroupId(
-						toCommerceWishListItem.getCPInstanceUuid(),
-						toCommerceWishListItem.getGroupId());
-
-				if ((fromCPInstance.getCPDefinitionId() ==
-						toCPInstance.getCPDefinitionId()) &&
-					(fromCPInstance.getCPInstanceId() ==
-						toCPInstance.getCPInstanceId()) &&
+				if ((fromCommerceWishListItem.getCProductId() ==
+						toCommerceWishListItem.getCProductId()) &&
+					Objects.equals(
+						fromCommerceWishListItem.getCPInstanceUuid(),
+						toCommerceWishListItem.getCPInstanceUuid()) &&
 					_ddmFormValuesHelper.equals(
 						json, toCommerceWishListItem.getJson())) {
 
 					found = true;
+
+					break;
 				}
 			}
 
 			if (!found) {
 				commerceWishListItemLocalService.addCommerceWishListItem(
-					toCommerceWishListId, fromCPInstance.getCPDefinitionId(),
-					fromCPInstance.getCPInstanceId(), json, serviceContext);
+					toCommerceWishListId,
+					fromCommerceWishListItem.getCProductId(),
+					fromCommerceWishListItem.getCPInstanceUuid(), json,
+					serviceContext);
 			}
 		}
 
@@ -356,9 +350,6 @@ public class CommerceWishListLocalServiceImpl
 
 	@ServiceReference(type = CommerceWishListConfiguration.class)
 	private CommerceWishListConfiguration _commerceWishListConfiguration;
-
-	@ServiceReference(type = CPInstanceLocalService.class)
-	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@ServiceReference(type = DDMFormValuesHelper.class)
 	private DDMFormValuesHelper _ddmFormValuesHelper;

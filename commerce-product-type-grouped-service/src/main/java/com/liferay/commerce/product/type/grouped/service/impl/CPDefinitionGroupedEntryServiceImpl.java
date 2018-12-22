@@ -108,7 +108,8 @@ public class CPDefinitionGroupedEntryServiceImpl
 				cpDefinitionGroupedEntry.getCPDefinitionId(), ActionKeys.VIEW);
 			_cpDefinitionModelResourcePermission.check(
 				getPermissionChecker(),
-				cpDefinitionGroupedEntry.getEntryCProductId(), ActionKeys.VIEW);
+				cpDefinitionGroupedEntry.getEntryCPDefinition(),
+				ActionKeys.VIEW);
 		}
 
 		return cpDefinitionGroupedEntry;
@@ -128,7 +129,7 @@ public class CPDefinitionGroupedEntryServiceImpl
 			cpDefinitionGroupedEntry.getCPDefinitionId(), ActionKeys.UPDATE);
 		_cpDefinitionModelResourcePermission.check(
 			getPermissionChecker(),
-			cpDefinitionGroupedEntry.getEntryCProductId(), ActionKeys.VIEW);
+			cpDefinitionGroupedEntry.getEntryCPDefinition(), ActionKeys.VIEW);
 
 		return
 			cpDefinitionGroupedEntryLocalService.updateCPDefinitionGroupedEntry(

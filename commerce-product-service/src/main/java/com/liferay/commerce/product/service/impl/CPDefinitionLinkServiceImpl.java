@@ -72,7 +72,7 @@ public class CPDefinitionLinkServiceImpl
 
 			_cpDefinitionModelResourcePermission.check(
 				getPermissionChecker(), cProduct.getPublishedDefinitionId(),
-				ActionKeys.UPDATE);
+				ActionKeys.VIEW);
 		}
 
 		return cpDefinitionLink;
@@ -90,7 +90,7 @@ public class CPDefinitionLinkServiceImpl
 
 		_cpDefinitionModelResourcePermission.check(
 			getPermissionChecker(), cProduct.getPublishedDefinitionId(),
-			ActionKeys.UPDATE);
+			ActionKeys.VIEW);
 
 		_cpDefinitionModelResourcePermission.check(
 			getPermissionChecker(), cpDefinitionLink.getCProductId(),

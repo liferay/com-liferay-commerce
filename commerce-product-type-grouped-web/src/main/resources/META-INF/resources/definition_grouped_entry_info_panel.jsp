@@ -30,7 +30,7 @@ if (cpDefinitionGroupedEntries == null) {
 		<%
 		CPDefinitionGroupedEntry cpDefinitionGroupedEntry = cpDefinitionGroupedEntries.get(0);
 
-		CProduct cProduct = cpDefinitionGroupedEntry.getCProduct();
+		CProduct cProduct = cpDefinitionGroupedEntry.getEntryCProduct();
 
 		CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
 
