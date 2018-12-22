@@ -62,10 +62,9 @@ public class CommerceWarehouseItemServiceImpl
 			commerceWarehouseItemLocalService.getCommerceWarehouseItem(
 				commerceWarehouseItemId);
 
-		CPInstance cpInstance =
-			_cpInstanceLocalService.getCPInstanceByUuidAndGroupId(
-				commerceWarehouseItem.getCPInstanceUuid(),
-				commerceWarehouseItem.getGroupId());
+		CPInstance cpInstance = _cpInstanceLocalService.getCProductInstance(
+			commerceWarehouseItem.getCProductId(),
+			commerceWarehouseItem.getCPInstanceUuid());
 
 		_cpDefinitionModelResourcePermission.check(
 			getPermissionChecker(), cpInstance.getCPDefinitionId(),
@@ -100,10 +99,9 @@ public class CommerceWarehouseItemServiceImpl
 			commerceWarehouseItemLocalService.getCommerceWarehouseItem(
 				commerceWarehouseItemId);
 
-		CPInstance cpInstance =
-			_cpInstanceLocalService.getCPInstanceByUuidAndGroupId(
-				commerceWarehouseItem.getCPInstanceUuid(),
-				commerceWarehouseItem.getGroupId());
+		CPInstance cpInstance = _cpInstanceLocalService.getCProductInstance(
+			commerceWarehouseItem.getCProductId(),
+			commerceWarehouseItem.getCPInstanceUuid());
 
 		_cpDefinitionModelResourcePermission.check(
 			getPermissionChecker(), cpInstance.getCPDefinitionId(),
@@ -183,10 +181,9 @@ public class CommerceWarehouseItemServiceImpl
 			commerceWarehouseItemLocalService.getCommerceWarehouseItem(
 				commerceWarehouseItemId);
 
-		CPInstance cpInstance =
-			_cpInstanceLocalService.getCPInstanceByUuidAndGroupId(
-				commerceWarehouseItem.getCPInstanceUuid(),
-				commerceWarehouseItem.getGroupId());
+		CPInstance cpInstance = _cpInstanceLocalService.getCProductInstance(
+			commerceWarehouseItem.getCProductId(),
+			commerceWarehouseItem.getCPInstanceUuid());
 
 		_cpDefinitionModelResourcePermission.check(
 			getPermissionChecker(), cpInstance.getCPDefinitionId(),

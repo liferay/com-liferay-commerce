@@ -28,11 +28,10 @@ import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.base.CommerceWishListItemLocalServiceBaseImpl;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.List;
@@ -44,7 +43,7 @@ public class CommerceWishListItemLocalServiceImpl
 	extends CommerceWishListItemLocalServiceBaseImpl {
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
@@ -90,7 +89,6 @@ public class CommerceWishListItemLocalServiceImpl
 			commerceWishList.getCommerceWishListId());
 		commerceWishListItem.setCPInstanceUuid(cpInstanceUuid);
 		commerceWishListItem.setCProductId(cProductId);
-
 		commerceWishListItem.setJson(json);
 
 		commerceWishListItemPersistence.update(commerceWishListItem);
@@ -105,44 +103,34 @@ public class CommerceWishListItemLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public void deleteCommerceWishListItemsByCPDefinitionId(
 		long cpDefinitionId) {
 
-		try {
-			CPDefinition cpDefinition =
-				_cpDefinitionLocalService.getCPDefinition(cpDefinitionId);
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
+			cpDefinitionId);
 
+		if (cpDefinition != null) {
 			commerceWishListItemPersistence.removeByCProductId(
 				cpDefinition.getCProductId());
-		}
-		catch (PortalException pe) {
-			if (_log.isWarnEnabled()) {
-				_log.error(pe, pe);
-			}
 		}
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public void deleteCommerceWishListItemsByCPInstanceId(long cpInstanceId) {
-		try {
-			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-				cpInstanceId);
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
+			cpInstanceId);
 
+		if (cpInstance != null) {
 			commerceWishListItemPersistence.removeByCPInstanceUuid(
 				cpInstance.getCPInstanceUuid());
-		}
-		catch (PortalException pe) {
-			if (_log.isWarnEnabled()) {
-				_log.error(pe, pe);
-			}
 		}
 	}
 
@@ -179,30 +167,22 @@ public class CommerceWishListItemLocalServiceImpl
 			}
 		}
 
-		CProduct cProduct = _cProductLocalService.getCProduct(cProductId);
+		if (Validator.isNotNull(cpInstanceUuid)) {
+			CPInstance cpInstance = _cpInstanceLocalService.getCProductInstance(
+				cProductId, cpInstanceUuid);
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
-			cProduct.getPublishedDefinitionId());
-
-		if ((cpInstanceUuid != null) && (commerceWishList != null)) {
-			CPInstance cpInstance =
-				_cpInstanceLocalService.getCPInstanceByUuidAndGroupId(
-					cpInstanceUuid, commerceWishList.getGroupId());
-
-			if (cpInstance.getCPDefinitionId() !=
-					cpDefinition.getCPDefinitionId()) {
+			if (cpInstance == null) {
+				CProduct cProduct = _cProductLocalService.getCProduct(
+					cProductId);
 
 				throw new NoSuchCPInstanceException(
 					StringBundler.concat(
-						"CPInstance ", cpInstance.getCPDefinitionId(),
-						" belongs to a different CPDefinitionId than ",
-						cpDefinition.getCPDefinitionId()));
+						"CPInstance ", cpInstanceUuid,
+						" belongs to a different CPDefinition than ",
+						cProduct.getPublishedDefinitionId()));
 			}
 		}
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceWishListItemLocalServiceImpl.class);
 
 	@ServiceReference(type = CommerceWishListConfiguration.class)
 	private CommerceWishListConfiguration _commerceWishListConfiguration;

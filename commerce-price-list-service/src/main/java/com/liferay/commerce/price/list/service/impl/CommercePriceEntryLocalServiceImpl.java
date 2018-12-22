@@ -58,6 +58,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -72,7 +73,7 @@ public class CommercePriceEntryLocalServiceImpl
 	extends CommercePriceEntryLocalServiceBaseImpl {
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
@@ -87,7 +88,7 @@ public class CommercePriceEntryLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
@@ -183,7 +184,7 @@ public class CommercePriceEntryLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
@@ -245,13 +246,12 @@ public class CommercePriceEntryLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public CommercePriceEntry fetchCommercePriceEntry(
-			long cpInstanceId, long commercePriceListId)
-		throws PortalException {
+		long cpInstanceId, long commercePriceListId) {
 
 		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
@@ -265,16 +265,19 @@ public class CommercePriceEntryLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public CommercePriceEntry fetchCommercePriceEntry(
-			long cpInstanceId, long commercePriceListId, boolean useAncestor)
-		throws PortalException {
+		long cpInstanceId, long commercePriceListId, boolean useAncestor) {
 
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
+
+		if (cpInstance == null) {
+			return null;
+		}
 
 		return commercePriceEntryLocalService.fetchCommercePriceEntry(
 			commercePriceListId, cpInstance.getCPInstanceUuid(), useAncestor);
@@ -282,8 +285,7 @@ public class CommercePriceEntryLocalServiceImpl
 
 	@Override
 	public CommercePriceEntry fetchCommercePriceEntry(
-			long commercePriceListId, String cpInstanceUuid)
-		throws PortalException {
+		long commercePriceListId, String cpInstanceUuid) {
 
 		return commercePriceEntryPersistence.fetchByC_C(
 			commercePriceListId, cpInstanceUuid);
@@ -291,9 +293,7 @@ public class CommercePriceEntryLocalServiceImpl
 
 	@Override
 	public CommercePriceEntry fetchCommercePriceEntry(
-			long commercePriceListId, String cpInstanceUuid,
-			boolean useAncestor)
-		throws PortalException {
+		long commercePriceListId, String cpInstanceUuid, boolean useAncestor) {
 
 		CommercePriceEntry commercePriceEntry =
 			commercePriceEntryLocalService.fetchCommercePriceEntry(
@@ -354,33 +354,39 @@ public class CommercePriceEntryLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-			long cpInstanceId, int start, int end)
-		throws PortalException {
+		long cpInstanceId, int start, int end) {
 
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
+
+		if (cpInstance == null) {
+			return Collections.emptyList();
+		}
 
 		return commercePriceEntryLocalService.getInstanceCommercePriceEntries(
 			cpInstance.getCPInstanceUuid(), start, end);
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-			long cpInstanceId, int start, int end,
-			OrderByComparator<CommercePriceEntry> orderByComparator)
-		throws PortalException {
+		long cpInstanceId, int start, int end,
+		OrderByComparator<CommercePriceEntry> orderByComparator) {
 
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
+
+		if (cpInstance == null) {
+			return Collections.emptyList();
+		}
 
 		return commercePriceEntryLocalService.getInstanceCommercePriceEntries(
 			cpInstance.getCPInstanceUuid(), start, end, orderByComparator);
@@ -388,8 +394,7 @@ public class CommercePriceEntryLocalServiceImpl
 
 	@Override
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-			String cpInstanceUuid, int start, int end)
-		throws PortalException {
+		String cpInstanceUuid, int start, int end) {
 
 		return commercePriceEntryPersistence.findByCPInstanceUuid(
 			cpInstanceUuid, start, end);
@@ -397,24 +402,25 @@ public class CommercePriceEntryLocalServiceImpl
 
 	@Override
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
-			String cpInstanceUuid, int start, int end,
-			OrderByComparator<CommercePriceEntry> orderByComparator)
-		throws PortalException {
+		String cpInstanceUuid, int start, int end,
+		OrderByComparator<CommercePriceEntry> orderByComparator) {
 
 		return commercePriceEntryPersistence.findByCPInstanceUuid(
 			cpInstanceUuid, start, end, orderByComparator);
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
-	public int getInstanceCommercePriceEntriesCount(long cpInstanceId)
-		throws PortalException {
-
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+	public int getInstanceCommercePriceEntriesCount(long cpInstanceId) {
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
+
+		if (cpInstance == null) {
+			return 0;
+		}
 
 		return commercePriceEntryLocalService.
 			getInstanceCommercePriceEntriesCount(
@@ -422,9 +428,7 @@ public class CommercePriceEntryLocalServiceImpl
 	}
 
 	@Override
-	public int getInstanceCommercePriceEntriesCount(String cpInstanceUuid)
-		throws PortalException {
-
+	public int getInstanceCommercePriceEntriesCount(String cpInstanceUuid) {
 		return commercePriceEntryPersistence.countByCPInstanceUuid(
 			cpInstanceUuid);
 	}
@@ -501,7 +505,7 @@ public class CommercePriceEntryLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
@@ -602,11 +606,11 @@ public class CommercePriceEntryLocalServiceImpl
 				_cpInstanceLocalService.getCPInstanceByExternalReferenceCode(
 					serviceContext.getCompanyId(), skuExternalReferenceCode);
 
+			validate(commercePriceListId, cpInstance.getCPInstanceUuid());
+
 			CPDefinition cpDefinition =
 				_cpDefinitionLocalService.getCPDefinition(
 					cpInstance.getCPDefinitionId());
-
-			validate(commercePriceListId, cpInstance.getCPInstanceUuid());
 
 			return addCommercePriceEntry(
 				cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid(),
@@ -619,7 +623,7 @@ public class CommercePriceEntryLocalServiceImpl
 		sb.append("{cProductId=");
 		sb.append(cProductId);
 		sb.append(StringPool.COMMA_AND_SPACE);
-		sb.append("{cpInstanceUuid=");
+		sb.append("cpInstanceUuid=");
 		sb.append(cpInstanceUuid);
 		sb.append(StringPool.COMMA_AND_SPACE);
 		sb.append("skuExternalReferenceCode=");

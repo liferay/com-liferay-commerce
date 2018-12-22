@@ -16,6 +16,7 @@ package com.liferay.commerce.product.type.grouped.service.impl;
 
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.type.grouped.constants.GroupedCPTypeConstants;
@@ -51,9 +52,10 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 			CPDefinition cpDefinition =
 				_cpDefinitionLocalService.getCPDefinition(entryCPDefinitionId);
 
-			cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntry(
-				cpDefinitionId, cpDefinition.getCProductId(), 0, 1,
-				serviceContext);
+			cpDefinitionGroupedEntryLocalService.
+				addCPDefinitionGroupedEntryByEntryCProductId(
+					cpDefinitionId, cpDefinition.getCProductId(), 0, 1,
+					serviceContext);
 		}
 	}
 
@@ -64,8 +66,9 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 		throws PortalException {
 
 		for (long entryCProductId : entryCProductIds) {
-			cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntry(
-				cpDefinitionId, entryCProductId, 0, 1, serviceContext);
+			cpDefinitionGroupedEntryLocalService.
+				addCPDefinitionGroupedEntryByEntryCProductId(
+					cpDefinitionId, entryCProductId, 0, 1, serviceContext);
 		}
 	}
 
@@ -82,9 +85,10 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			entryCPDefinitionId);
 
-		return cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntry(
-			cpDefinitionId, cpDefinition.getCProductId(), priority, quantity,
-			serviceContext);
+		return cpDefinitionGroupedEntryLocalService.
+			addCPDefinitionGroupedEntryByEntryCProductId(
+				cpDefinitionId, cpDefinition.getCProductId(), priority,
+				quantity, serviceContext);
 	}
 
 	@Override
@@ -94,8 +98,7 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 				int quantity, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
-			cpDefinitionId);
+		CPDefinition cpDefinition = null;
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		validate(cpDefinitionId, entryCProductId, quantity);
@@ -106,10 +109,12 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 			cpDefinitionGroupedEntryPersistence.create(
 				cpDefinitionGroupedEntryId);
 
-		if (_cpDefinitionLocalService.isVersionable(
-				cpDefinitionGroupedEntry.getCPDefinitionId())) {
-
+		if (_cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = _cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
+		}
+		else {
+			cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 				cpDefinitionId);
 		}
 
@@ -161,14 +166,18 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 	@Deprecated
 	@Override
 	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
-			long cpDefinitionId, long entryCPDefinitionId)
-		throws PortalException {
+		long cpDefinitionId, long entryCPDefinitionId) {
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
-			cpDefinitionId);
+		CPDefinition entryCPDefinition =
+			_cpDefinitionLocalService.fetchCPDefinition(entryCPDefinitionId);
+
+		if (entryCPDefinition == null) {
+			return null;
+		}
 
 		return cpDefinitionGroupedEntryLocalService.
-			fetchCPDefinitionGroupedEntry(cpDefinition.getCProductId());
+			fetchCPDefinitionGroupedEntry(
+				cpDefinitionId, entryCPDefinition.getCProductId());
 	}
 
 	@Override
@@ -211,11 +220,12 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 			cpDefinitionGroupedEntryPersistence.findByPrimaryKey(
 				cpDefinitionGroupedEntryId);
 
-		long cpDefinitionId = cpDefinitionGroupedEntry.getCPDefinitionId();
+		if (_cpDefinitionLocalService.isVersionable(
+				cpDefinitionGroupedEntry.getCPDefinitionId())) {
 
-		if (_cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			CPDefinition newCPDefinition =
-				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
+				_cpDefinitionLocalService.copyCPDefinition(
+					cpDefinitionGroupedEntry.getCPDefinitionId());
 
 			cpDefinitionGroupedEntry =
 				cpDefinitionGroupedEntryPersistence.findByC_E(
@@ -230,19 +240,22 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 		cpDefinitionGroupedEntry.setPriority(priority);
 		cpDefinitionGroupedEntry.setQuantity(quantity);
 
-		cpDefinitionGroupedEntryPersistence.update(cpDefinitionGroupedEntry);
-
-		return cpDefinitionGroupedEntry;
+		return cpDefinitionGroupedEntryPersistence.update(
+			cpDefinitionGroupedEntry);
 	}
 
 	protected void validate(
 			long cpDefinitionId, long entryCProductId, int quantity)
 		throws PortalException {
 
-		CPDefinition entryCPDefinition =
-			_cpDefinitionLocalService.getCPDefinition(cpDefinitionId);
+		CProduct entryCProduct = _cProductLocalService.getCProduct(
+			entryCProductId);
 
-		if ((entryCProductId == entryCPDefinition.getCProductId()) ||
+		CPDefinition entryCPDefinition =
+			_cpDefinitionLocalService.getCPDefinition(
+				entryCProduct.getPublishedDefinitionId());
+
+		if ((cpDefinitionId == entryCProduct.getPublishedDefinitionId()) ||
 			GroupedCPTypeConstants.NAME.equals(
 				entryCPDefinition.getProductTypeName())) {
 
