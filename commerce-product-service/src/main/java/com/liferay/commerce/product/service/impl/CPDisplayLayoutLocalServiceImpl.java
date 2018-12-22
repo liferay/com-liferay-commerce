@@ -40,17 +40,15 @@ public class CPDisplayLayoutLocalServiceImpl
 		if ((clazz == CPDefinition.class) &&
 			cpDefinitionLocalService.isVersionable(classPK)) {
 
-			CPDefinition newCPDefinition = null;
-
 			try {
-				newCPDefinition = cpDefinitionLocalService.copyCPDefinition(
-					classPK);
+				CPDefinition newCPDefinition =
+					cpDefinitionLocalService.copyCPDefinition(classPK);
+
+				classPK = newCPDefinition.getCPDefinitionId();
 			}
 			catch (PortalException pe) {
 				throw new SystemException(pe);
 			}
-
-			classPK = newCPDefinition.getCPDefinitionId();
 
 			oldCPDisplayLayout = cpDisplayLayoutPersistence.fetchByC_C(
 				classNameId, classPK);

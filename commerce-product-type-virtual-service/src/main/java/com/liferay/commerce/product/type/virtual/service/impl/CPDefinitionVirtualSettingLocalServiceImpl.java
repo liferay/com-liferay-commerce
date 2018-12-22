@@ -109,8 +109,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 				cpDefinitionVirtualSettingId);
 
 		if (className.equals(CPDefinition.class.getName()) &&
-			_cpDefinitionLocalService.isVersionable(
-				cpDefinitionVirtualSetting.getClassPK())) {
+			_cpDefinitionLocalService.isVersionable(classPK)) {
 
 			CPDefinition newCPDefinition =
 				_cpDefinitionLocalService.copyCPDefinition(
@@ -120,7 +119,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 		}
 		else if (className.equals(CPInstance.class.getName())) {
 			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-				cpDefinitionVirtualSetting.getClassPK());
+				classPK);
 
 			if (_cpDefinitionLocalService.isVersionable(
 					cpInstance.getCPDefinitionId())) {
@@ -199,21 +198,18 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 
 		if (cpDefinitionVirtualSetting != null) {
 			if (className.equals(CPDefinition.class.getName()) &&
-				_cpDefinitionLocalService.isVersionable(
-					cpDefinitionVirtualSetting.getClassPK())) {
+				_cpDefinitionLocalService.isVersionable(classPK)) {
 
 				CPDefinition newCPDefinition =
-					_cpDefinitionLocalService.copyCPDefinition(
-						cpDefinitionVirtualSetting.getClassPK());
+					_cpDefinitionLocalService.copyCPDefinition(classPK);
 
 				cpDefinitionVirtualSetting =
 					cpDefinitionVirtualSettingPersistence.findByC_C(
 						classNameId, newCPDefinition.getCPDefinitionId());
 			}
 			else if (className.equals(CPInstance.class.getName())) {
-				CPInstance cpInstance =
-					_cpInstanceLocalService.getCPInstance(
-						cpDefinitionVirtualSetting.getClassPK());
+				CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+					classPK);
 
 				if (_cpDefinitionLocalService.isVersionable(
 						cpInstance.getCPDefinitionId())) {

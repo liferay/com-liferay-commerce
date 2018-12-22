@@ -20,6 +20,7 @@ import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.service.base.CPDefinitionInventoryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -84,19 +85,23 @@ public class CPDefinitionInventoryLocalServiceImpl
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CPDefinitionInventory deleteCPDefinitionInventory(
-			CPDefinitionInventory cpDefinitionInventory)
-		throws PortalException {
+		CPDefinitionInventory cpDefinitionInventory) {
 
 		if (_cpDefinitionLocalService.isVersionable(
 				cpDefinitionInventory.getCPDefinitionId())) {
 
-			CPDefinition newCPDefinition =
-				_cpDefinitionLocalService.copyCPDefinition(
-					cpDefinitionInventory.getCPDefinitionId());
+			try {
+				CPDefinition newCPDefinition =
+					_cpDefinitionLocalService.copyCPDefinition(
+						cpDefinitionInventory.getCPDefinitionId());
 
-			cpDefinitionInventory =
-				cpDefinitionInventoryPersistence.findByCPDefinitionId(
-					newCPDefinition.getCPDefinitionId());
+				cpDefinitionInventory =
+					cpDefinitionInventoryPersistence.findByCPDefinitionId(
+						newCPDefinition.getCPDefinitionId());
+			}
+			catch (PortalException pe) {
+				throw new SystemException(pe);
+			}
 		}
 
 		return cpDefinitionInventoryPersistence.remove(cpDefinitionInventory);
@@ -116,8 +121,8 @@ public class CPDefinitionInventoryLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCPDefinitionInventoryByCPDefinitionId(long cpDefinitionId)
-		throws PortalException {
+	public void deleteCPDefinitionInventoryByCPDefinitionId(
+		long cpDefinitionId) {
 
 		CPDefinitionInventory cpDefinitionInventory =
 			cpDefinitionInventoryLocalService.
@@ -131,7 +136,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 
 	@Override
 	public CPDefinitionInventory fetchCPDefinitionInventoryByCPDefinitionId(
-			long cpDefinitionId) {
+		long cpDefinitionId) {
 
 		return cpDefinitionInventoryPersistence.fetchByCPDefinitionId(
 			cpDefinitionId);

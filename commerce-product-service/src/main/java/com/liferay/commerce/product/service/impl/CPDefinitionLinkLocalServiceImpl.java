@@ -16,6 +16,7 @@ package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.base.CPDefinitionLinkLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -36,20 +37,20 @@ public class CPDefinitionLinkLocalServiceImpl
 	extends CPDefinitionLinkLocalServiceBaseImpl {
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public CPDefinitionLink addCPDefinitionLink(
-			long cpDefinitionId, long cProductId, double priority, String type,
-			ServiceContext serviceContext)
+			long cpDefinitionId1, long cpDefinitionId2, double priority,
+			String type, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
-			cProductId);
+		CPDefinition cpDefinition2 = cpDefinitionPersistence.findByPrimaryKey(
+			cpDefinitionId2);
 
 		return addCPDefinitionLinkByCProductId(
-			cpDefinitionId, cpDefinition.getCProductId(), priority, type,
+			cpDefinitionId1, cpDefinition2.getCProductId(), priority, type,
 			serviceContext);
 	}
 
@@ -64,6 +65,8 @@ public class CPDefinitionLinkLocalServiceImpl
 		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
+
+			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
 		else {
 			cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
@@ -90,7 +93,7 @@ public class CPDefinitionLinkLocalServiceImpl
 
 		cpDefinitionLinkPersistence.update(cpDefinitionLink);
 
-		reindexCPDefinition(cpDefinition.getCPDefinitionId());
+		reindexCPDefinition(cpDefinitionId);
 
 		return cpDefinitionLink;
 	}
@@ -142,7 +145,7 @@ public class CPDefinitionLinkLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
@@ -230,6 +233,8 @@ public class CPDefinitionLinkLocalServiceImpl
 			cpDefinitionLink = cpDefinitionLinkPersistence.findByC_C_T(
 				newCPDefinition.getCPDefinitionId(),
 				cpDefinitionLink.getCProductId(), cpDefinitionLink.getType());
+
+			cpDefinitionLinkId = cpDefinitionLink.getCPDefinitionLinkId();
 		}
 
 		cpDefinitionLink.setPriority(priority);
@@ -238,7 +243,11 @@ public class CPDefinitionLinkLocalServiceImpl
 		cpDefinitionLinkPersistence.update(cpDefinitionLink);
 
 		reindexCPDefinition(cpDefinitionLink.getCPDefinitionId());
-		reindexCPDefinition(cpDefinitionLink.getCProductId());
+
+		CProduct cProduct = cProductPersistence.findByPrimaryKey(
+			cpDefinitionLink.getCProductId());
+
+		reindexCPDefinition(cProduct.getPublishedDefinitionId());
 
 		return cpDefinitionLink;
 	}
@@ -285,7 +294,7 @@ public class CPDefinitionLinkLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override

@@ -57,11 +57,9 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 				cpDefinitionSpecificationOptionValuePersistence.create(
 					cpDefinitionSpecificationOptionValueId);
 
-		if (cpDefinitionLocalService.isVersionable(
-				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
-
+		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
-				cpDefinitionSpecificationOptionValue.getCPDefinitionId());
+				cpDefinitionId);
 
 			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
