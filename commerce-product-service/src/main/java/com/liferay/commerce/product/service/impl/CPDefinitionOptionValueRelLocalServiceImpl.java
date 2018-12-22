@@ -112,16 +112,12 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 				cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionOptionRel.getCPDefinitionId());
 
-			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.fetchByU_C(
-				cpDefinitionOptionRel.getUuid(),
-				newCPDefinition.getCPDefinitionId());
+			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByC_C(
+				newCPDefinition.getCPDefinitionId(),
+				cpDefinitionOptionRel.getCPOptionId());
 
-			if (cpDefinitionOptionRel != null) {
-				cpDefinitionOptionValueRel =
-					cpDefinitionOptionValueRelPersistence.findByC_K(
-						cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
-						key);
-			}
+			cpDefinitionOptionRelId =
+				cpDefinitionOptionRel.getCPDefinitionOptionRelId();
 		}
 
 		cpDefinitionOptionValueRel.setUuid(serviceContext.getUuid());
@@ -141,8 +137,7 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 
 		// Commerce product definition
 
-		reindexCPDefinition(
-			cpDefinitionOptionValueRel.getCPDefinitionOptionRel());
+		reindexCPDefinition(cpDefinitionOptionRel);
 
 		return cpDefinitionOptionValueRel;
 	}
@@ -164,9 +159,9 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 				cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionOptionRel.getCPDefinitionId());
 
-			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByU_C(
-				cpDefinitionOptionRel.getUuid(),
-				newCPDefinition.getCPDefinitionId());
+			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByC_C(
+				newCPDefinition.getCPDefinitionId(),
+				cpDefinitionOptionRel.getCPOptionId());
 
 			cpDefinitionOptionValueRel =
 				cpDefinitionOptionValueRelPersistence.findByC_K(
@@ -186,8 +181,7 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 
 		// Commerce product definition
 
-		reindexCPDefinition(
-			cpDefinitionOptionValueRel.getCPDefinitionOptionRel());
+		reindexCPDefinition(cpDefinitionOptionRel);
 
 		return cpDefinitionOptionValueRel;
 	}
@@ -374,9 +368,9 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 				cpDefinitionLocalService.copyCPDefinition(
 					cpDefinitionOptionRel.getCPDefinitionId());
 
-			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByU_C(
-				cpDefinitionOptionRel.getUuid(),
-				newCPDefinition.getCPDefinitionId());
+			cpDefinitionOptionRel = cpDefinitionOptionRelPersistence.findByC_C(
+				newCPDefinition.getCPDefinitionId(),
+				cpDefinitionOptionRel.getCPOptionId());
 
 			cpDefinitionOptionValueRel =
 				cpDefinitionOptionValueRelPersistence.findByC_K(
@@ -393,8 +387,7 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 
 		// Commerce product definition
 
-		reindexCPDefinition(
-			cpDefinitionOptionValueRel.getCPDefinitionOptionRel());
+		reindexCPDefinition(cpDefinitionOptionRel);
 
 		return cpDefinitionOptionValueRel;
 	}

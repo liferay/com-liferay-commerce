@@ -119,7 +119,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 			<%
 			for (CPDefinitionGroupedEntry cpDefinitionGroupedEntry : groupedCPTypeHelper.getCPDefinitionGroupedEntry(cpDefinitionId)) {
-				CProduct cProduct = cpDefinitionGroupedEntry.getCProduct();
+				CProduct cProduct = cpDefinitionGroupedEntry.getEntryCProduct();
 
 				CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
 			%>
