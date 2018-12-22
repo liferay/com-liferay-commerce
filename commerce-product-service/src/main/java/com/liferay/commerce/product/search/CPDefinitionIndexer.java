@@ -28,6 +28,7 @@ import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CPSpecificationOption;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLinkLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ public class CommerceWarehouseItemLocalServiceImpl
 	extends CommerceWarehouseItemLocalServiceBaseImpl {
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
@@ -96,26 +97,31 @@ public class CommerceWarehouseItemLocalServiceImpl
 
 	@Override
 	public void deleteCommerceWarehouseItemsByCPI_CPIU(
-			long cProductId, String cpInstanceUuid)
-		throws PortalException {
+		long cProductId, String cpInstanceUuid) {
 
 		commerceWarehouseItemPersistence.removeByCPI_CPIU(
 			cProductId, cpInstanceUuid);
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
-	public void deleteCommerceWarehouseItemsByCPInstanceId(long cpInstanceId)
-		throws PortalException {
-
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+	public void deleteCommerceWarehouseItemsByCPInstanceId(long cpInstanceId) {
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+		if (cpInstance == null) {
+			return;
+		}
+
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
 			cpInstance.getCPDefinitionId());
+
+		if (cpDefinition == null) {
+			return;
+		}
 
 		commerceWarehouseItemLocalService.
 			deleteCommerceWarehouseItemsByCPI_CPIU(
@@ -124,24 +130,31 @@ public class CommerceWarehouseItemLocalServiceImpl
 
 	@Override
 	public void deleteCommerceWarehouseItemsByCWI_CPIU(
-			long commerceWarehouseId, String cpInstanceUuid)
-		throws PortalException {
+		long commerceWarehouseId, String cpInstanceUuid) {
 
-		commerceWarehouseItemPersistence.removeByCWI_CPIU(
-			commerceWarehouseId, cpInstanceUuid);
+		CommerceWarehouseItem commerceWarehouseItem =
+			commerceWarehouseItemPersistence.fetchByCWI_CPIU(
+				commerceWarehouseId, cpInstanceUuid);
+
+		if (commerceWarehouseItem != null) {
+			commerceWarehouseItemPersistence.remove(commerceWarehouseItem);
+		}
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public CommerceWarehouseItem fetchCommerceWarehouseItem(
-			long commerceWarehouseId, long cpInstanceId)
-		throws PortalException {
+		long commerceWarehouseId, long cpInstanceId) {
 
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
+
+		if (cpInstance == null) {
+			return null;
+		}
 
 		return commerceWarehouseItemLocalService.
 			fetchCommerceWarehouseItemByCWI_CPIU(
@@ -150,53 +163,61 @@ public class CommerceWarehouseItemLocalServiceImpl
 
 	@Override
 	public CommerceWarehouseItem fetchCommerceWarehouseItemByCWI_CPIU(
-			long commerceWarehouseId, String cpInstanceUuid)
-		throws PortalException {
+		long commerceWarehouseId, String cpInstanceUuid) {
 
 		return commerceWarehouseItemPersistence.fetchByCWI_CPIU(
 			commerceWarehouseId, cpInstanceUuid);
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public List<CommerceWarehouseItem> getCommerceWarehouseItems(
-			long cpInstanceId)
-		throws PortalException {
+		long cpInstanceId) {
 
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
+
+		if (cpInstance == null) {
+			return Collections.emptyList();
+		}
 
 		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
 			cpInstance.getCPDefinitionId());
 
-		if (cpDefinition != null) {
-			return commerceWarehouseItemLocalService.
-				getCommerceWarehouseItemsByCPI_CPIU(
-					cpDefinition.getCProductId(),
-					cpInstance.getCPInstanceUuid());
+		if (cpDefinition == null) {
+			return Collections.emptyList();
 		}
 
-		return null;
+		return commerceWarehouseItemLocalService.
+			getCommerceWarehouseItemsByCPI_CPIU(
+				cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid());
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public List<CommerceWarehouseItem> getCommerceWarehouseItems(
-			long cpInstanceId, int start, int end,
-			OrderByComparator<CommerceWarehouseItem> orderByComparator)
-		throws PortalException {
+		long cpInstanceId, int start, int end,
+		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
 
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+		if (cpInstance == null) {
+			return Collections.emptyList();
+		}
+
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
 			cpInstance.getCPDefinitionId());
+
+		if (cpDefinition == null) {
+			return Collections.emptyList();
+		}
 
 		return commerceWarehouseItemLocalService.
 			getCommerceWarehouseItemsByCPI_CPIU(
@@ -215,8 +236,7 @@ public class CommerceWarehouseItemLocalServiceImpl
 
 	@Override
 	public List<CommerceWarehouseItem> getCommerceWarehouseItemsByCPI_CPIU(
-			long cProductId, String cpInstanceUuid)
-		throws PortalException {
+		long cProductId, String cpInstanceUuid) {
 
 		return commerceWarehouseItemPersistence.findByCPI_CPIU(
 			cProductId, cpInstanceUuid);
@@ -224,27 +244,32 @@ public class CommerceWarehouseItemLocalServiceImpl
 
 	@Override
 	public List<CommerceWarehouseItem> getCommerceWarehouseItemsByCPI_CPIU(
-			long cProductId, String cpInstanceUuid, int start, int end,
-			OrderByComparator<CommerceWarehouseItem> orderByComparator)
-		throws PortalException {
+		long cProductId, String cpInstanceUuid, int start, int end,
+		OrderByComparator<CommerceWarehouseItem> orderByComparator) {
 
 		return commerceWarehouseItemPersistence.findByCPI_CPIU(
 			cProductId, cpInstanceUuid, start, end);
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
-	public int getCommerceWarehouseItemsCount(long cpInstanceId)
-		throws PortalException {
-
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+	public int getCommerceWarehouseItemsCount(long cpInstanceId) {
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+		if (cpInstance == null) {
+			return 0;
+		}
+
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
 			cpInstance.getCPDefinitionId());
+
+		if (cpDefinition == null) {
+			return 0;
+		}
 
 		return commerceWarehouseItemLocalService.getCommerceWarehouseItemsCount(
 			cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid());
@@ -256,8 +281,7 @@ public class CommerceWarehouseItemLocalServiceImpl
 	@Deprecated
 	@Override
 	public int getCommerceWarehouseItemsCount(
-			long cProductId, String cpInstanceUuid)
-		throws PortalException {
+		long cProductId, String cpInstanceUuid) {
 
 		return commerceWarehouseItemPersistence.countByCPI_CPIU(
 			cProductId, cpInstanceUuid);

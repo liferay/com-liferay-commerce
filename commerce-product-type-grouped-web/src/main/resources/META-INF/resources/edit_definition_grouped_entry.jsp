@@ -23,7 +23,7 @@ CPDefinitionGroupedEntry cpDefinitionGroupedEntry = cpDefinitionGroupedEntriesDi
 
 CPDefinition cpDefinition = cpDefinitionGroupedEntry.getCPDefinition();
 
-CProduct cProduct = cpDefinitionGroupedEntry.getCProduct();
+CProduct cProduct = cpDefinitionGroupedEntry.getEntryCProduct();
 
 CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
 

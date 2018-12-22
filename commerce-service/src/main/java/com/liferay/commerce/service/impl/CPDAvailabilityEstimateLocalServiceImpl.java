@@ -58,7 +58,7 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
@@ -97,16 +97,19 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
 	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByCPDefinitionId(
-			long cpDefinitionId)
-		throws PortalException {
+		long cpDefinitionId) {
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
 			cpDefinitionId);
+
+		if (cpDefinition == null) {
+			return null;
+		}
 
 		return cpdAvailabilityEstimateLocalService.
 			fetchCPDAvailabilityEstimateByCProductId(
@@ -121,7 +124,7 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Judson (7.1.x)
+	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
 	@Override
