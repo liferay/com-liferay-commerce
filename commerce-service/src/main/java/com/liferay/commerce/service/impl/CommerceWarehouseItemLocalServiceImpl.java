@@ -111,9 +111,24 @@ public class CommerceWarehouseItemLocalServiceImpl
 			cpInstanceId);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	@Override
 	public int getCPInstanceQuantity(long cpInstanceId) {
-		return commerceWarehouseItemFinder.getCPInstanceQuantity(cpInstanceId);
+		int quantity = 0;
+
+		List<CommerceWarehouseItem> commerceWarehouseItems =
+			getCommerceWarehouseItems(cpInstanceId);
+
+		for (CommerceWarehouseItem commerceWarehouseItem :
+				commerceWarehouseItems) {
+
+			quantity += commerceWarehouseItem.getQuantity();
+		}
+
+		return quantity;
 	}
 
 	@Override

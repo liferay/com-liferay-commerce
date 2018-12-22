@@ -21,11 +21,13 @@ import com.liferay.commerce.model.CommerceGeocoder;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseConstants;
+import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.service.base.CommerceWarehouseLocalServiceBaseImpl;
 import com.liferay.commerce.util.comparator.CommerceWarehouseNameComparator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -172,12 +174,28 @@ public class CommerceWarehouseLocalServiceImpl
 			groupId, active, start, end, orderByComparator);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	@Override
 	public List<CommerceWarehouse> getCommerceWarehouses(
 		long cpInstanceId, int start, int end) {
 
-		return commerceWarehouseFinder.findByCPInstanceId(
-			cpInstanceId, start, end);
+		List<CommerceWarehouseItem> commerceWarehouseItems =
+			commerceWarehouseItemLocalService.getCommerceWarehouseItems(
+				cpInstanceId);
+
+		List<Long> commerceWarehouseIds = ListUtil.unique(
+			ListUtil.toList(
+				commerceWarehouseItems,
+				CommerceWarehouseItem::getCommerceWarehouseId));
+
+		return ListUtil.subList(
+			ListUtil.toList(
+				commerceWarehouseIds,
+				commerceWarehouseLocalService::fetchCommerceWarehouse),
+			start, end);
 	}
 
 	@Override
