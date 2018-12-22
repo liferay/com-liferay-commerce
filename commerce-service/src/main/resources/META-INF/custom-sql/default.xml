@@ -197,20 +197,6 @@
 				(CommerceWarehouse.commerceCountryId = ?) [$ALL$]
 		]]>
 	</sql>
-	<sql id="com.liferay.commerce.service.persistence.CommerceWarehouseFinder.findByCPInstanceId">
-		<![CDATA[
-			SELECT
-				DISTINCT {CommerceWarehouse.*}
-			FROM
-				CommerceWarehouse
-			INNER JOIN
-				CommerceWarehouseItem ON
-					CommerceWarehouseItem.commerceWarehouseId = CommerceWarehouse.commerceWarehouseId
-			WHERE
-				(CommerceWarehouse.active_ = true) AND
-				(CommerceWarehouseItem.CPInstanceId = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.commerce.service.persistence.CommerceWarehouseFinder.findByG_N_D_S_C_Z_C">
 		<![CDATA[
 			SELECT
@@ -233,36 +219,6 @@
 				(CommerceWarehouse.commerceCountryId = ?) [$ALL$]
 			ORDER BY
 				CommerceWarehouse.name ASC
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.service.persistence.CommerceWarehouseItemFinder.findByCPInstanceId">
-		<![CDATA[
-			SELECT
-				{CommerceWarehouseItem.*}
-			FROM
-				CommerceWarehouseItem
-			INNER JOIN
-				CommerceWarehouse ON
-					CommerceWarehouse.commerceWarehouseId = CommerceWarehouseItem.commerceWarehouseId
-			WHERE
-				(CommerceWarehouse.active_ = true) AND
-				(CommerceWarehouseItem.CPInstanceId = ?)
-			ORDER BY
-				CommerceWarehouseItem.quantity
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.service.persistence.CommerceWarehouseItemFinder.getCPInstanceQuantity">
-		<![CDATA[
-			SELECT
-				SUM(CommerceWarehouseItem.quantity) AS SUM_VALUE
-			FROM
-				CommerceWarehouseItem
-			INNER JOIN
-				CommerceWarehouse ON
-					CommerceWarehouse.commerceWarehouseId = CommerceWarehouseItem.commerceWarehouseId
-			WHERE
-				(CommerceWarehouse.active_ = true) AND
-				(CommerceWarehouseItem.CPInstanceId = ?)
 		]]>
 	</sql>
 </custom-sql>
