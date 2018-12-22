@@ -42,9 +42,6 @@ public class CommerceWarehouseFinderImpl
 	public static final String COUNT_BY_G_N_D_S_C_Z_C =
 		CommerceWarehouseFinder.class.getName() + ".countByG_N_D_S_C_Z_C";
 
-	public static final String FIND_BY_CP_INSTANCE_ID =
-		CommerceWarehouseFinder.class.getName() + ".findByCPInstanceId";
-
 	public static final String FIND_BY_G_N_D_S_C_Z_C =
 		CommerceWarehouseFinder.class.getName() + ".findByG_N_D_S_C_Z_C";
 
@@ -179,36 +176,6 @@ public class CommerceWarehouseFinderImpl
 			}
 
 			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	@Override
-	public List<CommerceWarehouse> findByCPInstanceId(
-		long cpInstanceId, int start, int end) {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = _customSQL.get(getClass(), FIND_BY_CP_INSTANCE_ID);
-
-			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-			q.addEntity("CommerceWarehouse", CommerceWarehouseImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(cpInstanceId);
-
-			return (List<CommerceWarehouse>)QueryUtil.list(
-				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
