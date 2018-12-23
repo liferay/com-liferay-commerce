@@ -173,6 +173,10 @@
 			<finder-column name="groupId" />
 			<finder-column comparator="!=" name="status" />
 		</finder>
+		<finder name="C_S" return-type="Collection">
+			<finder-column name="CProductId" />
+			<finder-column name="status" />
+		</finder>
 		<finder name="LtD_S" return-type="Collection">
 			<finder-column comparator="&lt;" name="displayDate" />
 			<finder-column name="status" />
