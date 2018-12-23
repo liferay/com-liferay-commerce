@@ -18,6 +18,7 @@ import com.liferay.commerce.product.internal.upgrade.v1_1_0.CPRuleUpgradeProcess
 import com.liferay.commerce.product.internal.upgrade.v1_2_0.ProductSubscriptionUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPDefinitionLinkUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPDefinitionOptionRelUpgradeProcess;
+import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPDefinitionUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPFriendlyURLEntryUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPInstanceUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CProductUpgradeProcess;
@@ -52,7 +53,7 @@ public class CommerceProductUpgradeStepRegistrator
 			_SCHEMA_VERSION_1_2_0, _SCHEMA_VERSION_1_3_0,
 			new CPDefinitionLinkUpgradeProcess(),
 			new CPDefinitionOptionRelUpgradeProcess(),
-			new CProductUpgradeProcess(),
+			new CPDefinitionUpgradeProcess(), new CProductUpgradeProcess(),
 			new CPFriendlyURLEntryUpgradeProcess(),
 			new CPInstanceUpgradeProcess());
 
