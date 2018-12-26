@@ -693,6 +693,11 @@ public class CPDefinitionLocalServiceUtil {
 		return getService().isVersionable(cpDefinitionId, httpServletRequest);
 	}
 
+	public static void maintainVersionThreshold(long cProductId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().maintainVersionThreshold(cProductId);
+	}
+
 	public static void moveCPDefinitionsToTrash(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().moveCPDefinitionsToTrash(groupId, userId);
