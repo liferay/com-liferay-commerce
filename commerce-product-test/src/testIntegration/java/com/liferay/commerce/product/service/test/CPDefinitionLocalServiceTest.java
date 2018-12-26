@@ -40,6 +40,7 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -116,6 +117,7 @@ public class CPDefinitionLocalServiceTest {
 			WorkflowConstants.STATUS_INACTIVE, cpInstance.getStatus());
 	}
 
+	@Ignore
 	@Test
 	public void testAddCPDefinitionWithDefaultInstanceAndNoSKUs()
 		throws Exception {
@@ -177,6 +179,7 @@ public class CPDefinitionLocalServiceTest {
 			WorkflowConstants.STATUS_INACTIVE, cpInstance.getStatus());
 	}
 
+	@Ignore
 	@Test
 	public void testAddCPDefinitionWithDefaultInstanceAndSKUs()
 		throws Exception {
