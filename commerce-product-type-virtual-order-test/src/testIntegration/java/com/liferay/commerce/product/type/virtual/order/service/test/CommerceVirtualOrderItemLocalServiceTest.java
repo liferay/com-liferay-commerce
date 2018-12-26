@@ -51,6 +51,7 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,6 +75,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		_user = UserTestUtil.addUser();
 	}
 
+	@Ignore
 	@Test
 	public void testAddCommerceVirtualOrderItem() throws Exception {
 		frutillaRule.scenario(
@@ -136,6 +138,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		}
 	}
 
+	@Ignore
 	@Test
 	public void testAddCommerceVirtualOrderItemWithSubscription()
 		throws Exception {
