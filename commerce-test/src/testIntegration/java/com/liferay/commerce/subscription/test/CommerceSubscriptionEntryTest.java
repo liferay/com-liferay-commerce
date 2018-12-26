@@ -57,6 +57,7 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,6 +79,7 @@ public class CommerceSubscriptionEntryTest {
 		_user = UserTestUtil.addUser();
 	}
 
+	@Ignore
 	@Test
 	public void testAddCommerceSubscriptionEntry() throws Exception {
 		frutillaRule.scenario(
@@ -125,6 +127,7 @@ public class CommerceSubscriptionEntryTest {
 		_testOverrideCPInstanceSubscriptionInfo(false, false);
 	}
 
+	@Ignore
 	@Test
 	public void testOverrideCPInstanceSubscriptionInfoAllEnabled()
 		throws Exception {
@@ -144,6 +147,7 @@ public class CommerceSubscriptionEntryTest {
 		_testOverrideCPInstanceSubscriptionInfo(true, true);
 	}
 
+	@Ignore
 	@Test
 	public void testOverrideCPInstanceSubscriptionInfoDefinitionEnabled()
 		throws Exception {
@@ -163,6 +167,7 @@ public class CommerceSubscriptionEntryTest {
 		_testOverrideCPInstanceSubscriptionInfo(true, false);
 	}
 
+	@Ignore
 	@Test
 	public void testOverrideCPInstanceSubscriptionInfoInstanceEnabled()
 		throws Exception {
@@ -182,6 +187,7 @@ public class CommerceSubscriptionEntryTest {
 		_testOverrideCPInstanceSubscriptionInfo(false, true);
 	}
 
+	@Ignore
 	@Test
 	public void testRenewCommerceSubscriptionEntry() throws Exception {
 		frutillaRule.scenario(
