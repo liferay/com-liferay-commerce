@@ -526,6 +526,9 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	public boolean isVersionable(long cpDefinitionId,
 		HttpServletRequest httpServletRequest);
 
+	public void maintainVersionThreshold(long cProductId)
+		throws PortalException;
+
 	public void moveCPDefinitionsToTrash(long groupId, long userId)
 		throws PortalException;
 
