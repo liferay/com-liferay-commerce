@@ -741,6 +741,12 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 	}
 
 	@Override
+	public void maintainVersionThreshold(long cProductId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_cpDefinitionLocalService.maintainVersionThreshold(cProductId);
+	}
+
+	@Override
 	public void moveCPDefinitionsToTrash(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_cpDefinitionLocalService.moveCPDefinitionsToTrash(groupId, userId);
