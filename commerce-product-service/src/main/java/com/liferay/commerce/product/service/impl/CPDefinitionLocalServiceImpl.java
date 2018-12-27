@@ -1849,8 +1849,8 @@ public class CPDefinitionLocalServiceImpl
 			Map<Locale, String> shortDescriptionMap,
 			Map<Locale, String> descriptionMap,
 			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaKeywordsMap,
-			Map<Locale, String> metaDescriptionMap)
+			Map<Locale, String> metaDescriptionMap,
+			Map<Locale, String> metaKeywordsMap)
 		throws PortalException {
 
 		Set<Locale> localeSet = new HashSet<>();
