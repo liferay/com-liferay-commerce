@@ -65,12 +65,14 @@ SearchContainer<CommerceTaxMethod> commerceTaxMethodSearchContainer = commerceTa
 			<liferay-ui:search-container-column-text
 				cssClass="important table-cell-content"
 				href="<%= rowURL %>"
-				property="name"
+				name="name"
+				value="<%= commerceTaxMethod.getName(locale) %>"
 			/>
 
 			<liferay-ui:search-container-column-text
 				cssClass="table-cell-content"
-				property="description"
+				name="description"
+				value="<%= commerceTaxMethod.getDescription(locale) %>"
 			/>
 
 			<liferay-ui:search-container-column-text

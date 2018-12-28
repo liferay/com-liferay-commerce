@@ -106,7 +106,8 @@ CPMeasurementUnitsDisplayContext cpMeasurementUnitsDisplayContext = (CPMeasureme
 					<liferay-ui:search-container-column-text
 						cssClass="important table-cell-content"
 						href="<%= rowURL %>"
-						property="name"
+						name="name"
+						value="<%= cpMeasurementUnit.getName(locale) %>"
 					/>
 
 					<liferay-ui:search-container-column-text

@@ -84,12 +84,14 @@ CommercePaymentMethodGroupRelsDisplayContext commercePaymentMethodGroupRelsDispl
 				<liferay-ui:search-container-column-text
 					cssClass="important table-cell-content"
 					href="<%= rowURL %>"
-					property="name"
+					name="name"
+					value="<%= commercePaymentMethodGroupRel.getName(locale) %>"
 				/>
 
 				<liferay-ui:search-container-column-text
 					cssClass="table-cell-content"
-					property="description"
+					name="description"
+					value="<%= commercePaymentMethodGroupRel.getDescription(locale) %>"
 				/>
 
 				<liferay-ui:search-container-column-text
