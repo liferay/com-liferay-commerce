@@ -107,7 +107,8 @@ CommerceCountriesDisplayContext commerceCountriesDisplayContext = (CommerceCount
 					<liferay-ui:search-container-column-text
 						cssClass="important table-cell-content"
 						href="<%= rowURL %>"
-						property="name"
+						name="name"
+						value="<%= commerceCountry.getName(locale) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
