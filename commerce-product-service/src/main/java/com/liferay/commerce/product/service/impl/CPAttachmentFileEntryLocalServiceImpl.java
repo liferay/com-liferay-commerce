@@ -240,9 +240,10 @@ public class CPAttachmentFileEntryLocalServiceImpl
 					cpAttachmentFileEntry.getClassPK());
 
 			cpAttachmentFileEntry =
-				cpAttachmentFileEntryPersistence.findByU_C_C(
-					cpAttachmentFileEntry.getUuid(), cpDefinitionClassNameId,
-					newCPDefinition.getCPDefinitionId());
+				cpAttachmentFileEntryPersistence.findByC_C_F(
+					cpDefinitionClassNameId,
+					newCPDefinition.getCPDefinitionId(),
+					cpAttachmentFileEntry.getFileEntryId());
 		}
 
 		// Commerce product attachment file entry
@@ -377,9 +378,10 @@ public class CPAttachmentFileEntryLocalServiceImpl
 					cpAttachmentFileEntry.getClassPK());
 
 			cpAttachmentFileEntry =
-				cpAttachmentFileEntryPersistence.findByU_C_C(
-					cpAttachmentFileEntry.getUuid(), cpDefinitionClassNameId,
-					newCPDefinition.getCPDefinitionId());
+				cpAttachmentFileEntryPersistence.findByC_C_F(
+					cpDefinitionClassNameId,
+					newCPDefinition.getCPDefinitionId(),
+					cpAttachmentFileEntry.getFileEntryId());
 		}
 
 		Date displayDate = null;
