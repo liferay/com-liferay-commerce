@@ -19,6 +19,7 @@ import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 /**
@@ -35,6 +36,9 @@ public class SearchResultsTag extends ComponentRendererTag {
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 
+		putValue(
+			"searchAPI",
+			PortalUtil.getPortalURL(request) + "/o/commerce-ui/search/");
 		putValue("queryString", "");
 		putValue("visible", false);
 

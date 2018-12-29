@@ -16,7 +16,7 @@ class SearchResults extends Component {
 
 	search() {
 		return fetch(
-			'http://localhost:8080/o/commerce-ui/search/' + themeDisplay.getPlid() + '?q=' + this.queryString,
+			this.searchAPI + themeDisplay.getPlid() + '?q=' + this.queryString,
 			{
 				method: 'GET'
 			}
@@ -106,6 +106,9 @@ SearchResults.STATE = {
 		value: []
 	},
 	queryString: {
+		value: ''
+	},
+	searchAPI: {
 		value: ''
 	},
 	selectedIndex: {
