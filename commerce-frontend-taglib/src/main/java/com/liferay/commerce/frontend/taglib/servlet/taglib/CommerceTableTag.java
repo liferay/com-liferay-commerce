@@ -127,7 +127,8 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 			putValue(
 				"dataSetAPI",
-				PortalUtil.getPortalURL(request) + "/o/commerce-data-set");
+				PortalUtil.getPortalURL(request) +
+					"/o/commerce-ui/commerce-data-set");
 			putValue("groupId", themeDisplay.getScopeGroupId());
 			putValue("pageSize", itemPerPage);
 		}
