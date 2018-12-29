@@ -1,0 +1,85 @@
+{namespace SearchResults}
+
+{template .render}
+	{@param queryString: string }
+	{@param? results: ? }
+	{@param visible: bool }
+
+	{@param? _handleClick: ? }
+
+	{if $visible}
+		<div class="minium-suggestions">
+			<div class="minium-suggestions__wrapper">
+
+				{foreach $item in $results}
+					{delcall MiniumSearchResults.Item variant="$item.type"}
+						{param queryString: $queryString /}
+						{param item: $item /}
+						{param _handleClick: $_handleClick /}
+					{/delcall}
+				{/foreach}
+
+			</div>
+
+			<div class="minium-suggestions__hints">
+				<svg class="minium-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+					<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5" />
+				</svg> to navigate
+				<svg class="minium-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+					<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5" />
+				</svg> to select
+				<svg class="minium-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+					<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5" />
+				</svg> to dismiss
+			</div>
+		</div>
+	{/if}
+{/template}
+
+{deltemplate MiniumSearchResults.Item}
+	{@param queryString: string }
+	{@param item: ? }
+	{@param? _handleClick: ? }
+
+	<div
+		class="minium-suggestions__item {if $item.selected}is-selected{/if}"
+		onclick="{$_handleClick}"
+		data-onmouseenter="handleMouseEnter"
+		data-onmouseleave="handleMouseLeave"
+		data-pos="{$item.pos}"
+	>
+		<div class="minium-item minium-item--search">
+			<img alt="" class="minium-item__image" src="{$item.image}">
+			<div class="minium-item__content">
+				{$item.title}<br>
+				{$item.subtitle}
+			</div>
+		</div>
+	</div>
+{/deltemplate}
+
+{deltemplate MiniumSearchResults.Item variant="'category'"}
+	{@param queryString: string }
+	{@param item: ? }
+	{@param? _handleClick: ? }
+
+	<div
+		class="minium-suggestions__item {if $item.selected}is-selected{/if}"
+		onclick="{$_handleClick}"
+		data-onmouseenter="handleMouseEnter"
+		data-onmouseleave="handleMouseLeave"
+		data-pos="{$item.pos}"
+	>
+		Search "{$queryString}" in {$item.title}
+	</div>
+{/deltemplate}
+
+{deltemplate MiniumSearchResults.Item variant="'label'"}
+	{@param queryString: string }
+	{@param item: ? }
+	{@param? _handleClick: ? }
+
+	<div class="minium-suggestions__label" onclick="{$_handleClick}">
+		{$item.title}
+	</div>
+{/deltemplate}
