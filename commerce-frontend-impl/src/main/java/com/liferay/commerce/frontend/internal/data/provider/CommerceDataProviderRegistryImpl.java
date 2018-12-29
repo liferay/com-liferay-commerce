@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.frontend.internal;
+package com.liferay.commerce.frontend.internal.data.provider;
 
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 import com.liferay.commerce.frontend.CommerceDataSetDataProvider;

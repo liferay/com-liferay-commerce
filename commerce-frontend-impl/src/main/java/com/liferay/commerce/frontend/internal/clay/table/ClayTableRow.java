@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.frontend.internal;
+package com.liferay.commerce.frontend.internal.clay.table;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
