@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.frontend.internal;
+package com.liferay.commerce.frontend.internal.clay.table;
 
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

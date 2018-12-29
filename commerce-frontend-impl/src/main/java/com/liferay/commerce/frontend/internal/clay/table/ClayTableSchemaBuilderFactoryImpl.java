@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.frontend.internal;
+package com.liferay.commerce.frontend.internal.clay.table;
 
 import com.liferay.commerce.frontend.ClayTableSchemaBuilder;
 import com.liferay.commerce.frontend.ClayTableSchemaBuilderFactory;
