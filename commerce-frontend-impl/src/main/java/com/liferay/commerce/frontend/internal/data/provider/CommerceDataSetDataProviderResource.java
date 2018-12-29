@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.frontend.internal.application;
+package com.liferay.commerce.frontend.internal.data.provider;
 
 import com.liferay.commerce.frontend.ClayTableDataJSONBuilder;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
@@ -28,9 +28,7 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +37,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -47,24 +44,15 @@ import javax.ws.rs.core.UriInfo;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Marco Leo
  */
-@Component(
-	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_BASE + "=/commerce-data-set",
-		JaxrsWhiteboardConstants.JAX_RS_NAME + "=CommerceDataSet.Rest",
-		"auth.verifier.auth.verifier.PortalSessionAuthVerifier.urls.includes=/*",
-		"auth.verifier.guest.allowed=true", "liferay.oauth2=false"
-	},
-	service = Application.class
-)
-public class CommerceDataSetDataProviderApplication extends Application {
+@Component(service = CommerceDataSetDataProviderResource.class)
+public class CommerceDataSetDataProviderResource {
 
 	@GET
-	@Path("/{groupId}/{tableName}/{dataProvider}")
+	@Path("/commerce-data-set/{groupId}/{tableName}/{dataProvider}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get(
 		@PathParam("groupId") long groupId,
@@ -102,18 +90,8 @@ public class CommerceDataSetDataProviderApplication extends Application {
 		).build();
 	}
 
-	public Set<Object> getSingletons() {
-		Set<Object> singletons = new HashSet<>();
-
-		singletons.add(_paginationContextProvider);
-		singletons.add(_sortContextProvider);
-		singletons.add(this);
-
-		return singletons;
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceDataSetDataProviderApplication.class);
+		CommerceDataSetDataProviderResource.class);
 
 	@Reference
 	private ClayTableDataJSONBuilder _clayTableDataJSONBuilder;
