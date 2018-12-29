@@ -1,0 +1,42 @@
+{namespace SearchBar}
+
+{template .render}
+	{@param placeholder: string }
+	{@param spritemap: string}
+	{@param active: bool}
+	{@param query: string}
+
+	{let $cssClasses kind="text"}
+		{if $active}
+			{sp}show
+		{else}
+			{sp}hide
+		{/if}
+	{/let}
+
+	<form class="minium-search {$cssClasses}" data-onsubmit="handleSubmit">
+		<div class="minium-search__input">
+			<input
+				type="text"
+				placeholder="{$placeholder}"
+				ref="searchInput"
+				name="queryString"
+				data-onkeyup="handleKeyUp"
+				value="{$query}"
+			>
+		</div>
+
+		{let $buttonClasses kind="text"}
+			{if $active}
+				{sp}is-active
+			{/if}
+		{/let}
+
+		<button class="js-toggle-search minium-search__button {$buttonClasses}" type="submit">
+			{call ClayIcon.render}
+				{param spritemap: $spritemap /}
+				{param symbol: 'close' /}
+			{/call}
+		</button>
+	</form>
+{/template}
