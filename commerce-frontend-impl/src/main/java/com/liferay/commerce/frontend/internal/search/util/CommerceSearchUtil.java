@@ -34,7 +34,10 @@ public class CommerceSearchUtil {
 	public String getCatalogFriendlyURL(ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		Layout layout = _getCatalogLayout(themeDisplay);
+		LayoutSet layoutSet = themeDisplay.getLayoutSet();
+
+		Layout layout = _getCatalogLayout(
+			themeDisplay.getScopeGroupId(), layoutSet.getPrivateLayout());
 
 		if (layout == null) {
 			return null;
@@ -46,7 +49,10 @@ public class CommerceSearchUtil {
 	public String getSearchFriendlyURL(ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		Layout layout = _getSearchLayout(themeDisplay);
+		LayoutSet layoutSet = themeDisplay.getLayoutSet();
+
+		Layout layout = _getSearchLayout(
+			themeDisplay.getScopeGroupId(), layoutSet.getPrivateLayout());
 
 		if (layout == null) {
 			return null;
@@ -55,21 +61,18 @@ public class CommerceSearchUtil {
 		return _portal.getLayoutFriendlyURL(layout, themeDisplay);
 	}
 
-	private Layout _getCatalogLayout(ThemeDisplay themeDisplay)
+	private Layout _getCatalogLayout(long groupId, boolean privateLayout)
 		throws PortalException {
 
-		LayoutSet layoutSet = themeDisplay.getLayoutSet();
-
 		Layout layout = _layoutLocalService.fetchLayoutByFriendlyURL(
-			themeDisplay.getScopeGroupId(), layoutSet.getPrivateLayout(),
-			"/catalog");
+			groupId, privateLayout, "/catalog");
 
 		if (layout != null) {
 			return layout;
 		}
 
 		long plid = _portal.getPlidFromPortletId(
-			themeDisplay.getScopeGroupId(), CPPortletKeys.CP_SEARCH_RESULTS);
+			groupId, CPPortletKeys.CP_SEARCH_RESULTS);
 
 		if (plid > 0) {
 			layout = _layoutLocalService.fetchLayout(plid);
@@ -78,14 +81,9 @@ public class CommerceSearchUtil {
 		return layout;
 	}
 
-	private Layout _getSearchLayout(ThemeDisplay themeDisplay)
-		throws PortalException {
-
-		LayoutSet layoutSet = themeDisplay.getLayoutSet();
-
+	private Layout _getSearchLayout(long groupId, boolean privateLayout) {
 		return _layoutLocalService.fetchLayoutByFriendlyURL(
-			themeDisplay.getScopeGroupId(), layoutSet.getPrivateLayout(),
-			"/search");
+			groupId, privateLayout, "/search");
 	}
 
 	@Reference
