@@ -284,8 +284,10 @@ public class CPDefinitionLinkLocalServiceImpl
 						cpDefinitionId, cProductId, type);
 
 				if (cpDefinitionLink == null) {
-					cpDefinitionLinkLocalService.addCPDefinitionLink(
-						cpDefinitionId, cProductId, 0, type, serviceContext);
+					cpDefinitionLinkLocalService.
+						addCPDefinitionLinkByCProductId(
+							cpDefinitionId, cProductId, 0, type,
+							serviceContext);
 				}
 			}
 		}
