@@ -19,7 +19,7 @@
 <%
 CPSearchResultsDisplayContext cpSearchResultsDisplayContext = (CPSearchResultsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-String viewMode = StringPool.BLANK;
+String viewMode = "list";
 %>
 
 <%@ include file="/search_results/configuration/product_type_renderer.jspf" %>

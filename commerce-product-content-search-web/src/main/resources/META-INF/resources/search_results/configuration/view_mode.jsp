@@ -18,8 +18,14 @@
 
 <%
 CPSearchResultsDisplayContext cpSearchResultsDisplayContext = (CPSearchResultsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
-String viewMode = StringPool.BLANK;
 %>
 
-<%@ include file="/search_results/configuration/product_type_renderer.jspf" %>
+<aui:fieldset markupView="lexicon">
+	<aui:input checked="<%= cpSearchResultsDisplayContext.isEnableViewMode() %>" name="preferences--enableViewMode--" onChange='<%= renderResponse.getNamespace() + "enableViewMode();" %>' type="toggle-switch" />
+</aui:fieldset>
+
+<aui:script>
+	function <portlet:namespace />enableViewMode() {
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>

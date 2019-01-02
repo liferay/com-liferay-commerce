@@ -19,7 +19,10 @@
 <%
 CPSearchResultsDisplayContext cpSearchResultsDisplayContext = (CPSearchResultsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-String viewMode = StringPool.BLANK;
+String cpContentListRendererKey = cpSearchResultsDisplayContext.getCPContentListRendererKey("icon");
+List<CPContentListRenderer> cpContentListRenderers = cpSearchResultsDisplayContext.getCPContentListRenderers();
+
+String inputName = "preferences--icon--cpContentListRendererKey--";
 %>
 
-<%@ include file="/search_results/configuration/product_type_renderer.jspf" %>
+<%@ include file="/search_results/configuration/product_list_renderer.jspf" %>

@@ -19,28 +19,10 @@
 <%
 CPSearchResultsDisplayContext cpSearchResultsDisplayContext = (CPSearchResultsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
+String cpContentListRendererKey = cpSearchResultsDisplayContext.getCPContentListRendererKey();
 List<CPContentListRenderer> cpContentListRenderers = cpSearchResultsDisplayContext.getCPContentListRenderers();
+
+String inputName = "preferences--cpContentListRendererKey--";
 %>
 
-<aui:fieldset markupView="lexicon">
-	<aui:select label="product-list-renderer" name="preferences--cpContentListRendererKey--" onChange='<%= renderResponse.getNamespace() + "chooseCPContentListRendererKey();" %>'>
-
-		<%
-		for (CPContentListRenderer cpContentListRenderer : cpContentListRenderers) {
-			String key = cpContentListRenderer.getKey();
-		%>
-
-			<aui:option label="<%= cpContentListRenderer.getLabel(locale) %>" selected="<%= key.equals(cpSearchResultsDisplayContext.getCPContentListRendererKey()) %>" value="<%= key %>" />
-
-		<%
-		}
-		%>
-
-	</aui:select>
-</aui:fieldset>
-
-<aui:script>
-	function <portlet:namespace />chooseCPContentListRendererKey() {
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
+<%@ include file="/search_results/configuration/product_list_renderer.jspf" %>
