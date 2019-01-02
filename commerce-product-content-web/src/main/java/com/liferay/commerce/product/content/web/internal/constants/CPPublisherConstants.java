@@ -16,8 +16,15 @@ package com.liferay.commerce.product.content.web.internal.constants;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 public class CPPublisherConstants {
+
+	public static final String CATEGORY_KEY_ICON_VIEW_MODE_RENDER_SELECTION =
+		"icon-view-mode-render-selection";
+
+	public static final String CATEGORY_KEY_LIST_VIEW_MODE_RENDER_SELECTION =
+		"list-view-mode-render-selection";
 
 	public static final String CATEGORY_KEY_PAGINATION = "pagination";
 
@@ -26,6 +33,8 @@ public class CPPublisherConstants {
 
 	public static final String CATEGORY_KEY_RENDER_SELECTION =
 		"render-selection";
+
+	public static final String CATEGORY_KEY_VIEW_MODE = "view-mode";
 
 	public static final String FORM_NAVIGATOR_ID_CONFIGURATION =
 		"product.publisher.configuration";

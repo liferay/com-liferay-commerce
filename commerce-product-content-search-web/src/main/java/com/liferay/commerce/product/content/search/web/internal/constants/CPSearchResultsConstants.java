@@ -19,10 +19,18 @@ package com.liferay.commerce.product.content.search.web.internal.constants;
  */
 public class CPSearchResultsConstants {
 
+	public static final String CATEGORY_KEY_ICON_VIEW_MODE_RENDER_SELECTION =
+		"icon-view-mode-render-selection";
+
+	public static final String CATEGORY_KEY_LIST_VIEW_MODE_RENDER_SELECTION =
+		"list-view-mode-render-selection";
+
 	public static final String CATEGORY_KEY_PAGINATION = "pagination";
 
 	public static final String CATEGORY_KEY_RENDER_SELECTION =
 		"render-selection";
+
+	public static final String CATEGORY_KEY_VIEW_MODE = "view-mode";
 
 	public static final String FORM_NAVIGATOR_ID_CONFIGURATION =
 		"search.results.configuration";
