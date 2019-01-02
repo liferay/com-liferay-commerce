@@ -19,6 +19,9 @@
 <%
 CPPublisherDisplayContext cpPublisherDisplayContext = (CPPublisherDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
+boolean enableViewMode = cpPublisherDisplayContext.isEnableViewMode();
+String viewMode = cpPublisherDisplayContext.getViewMode();
+
 Map<String, Object> contextObjects = new HashMap<>();
 
 contextObjects.put("cpPublisherDisplayContext", cpPublisherDisplayContext);
@@ -28,8 +31,52 @@ SearchContainer searchContainer = cpPublisherDisplayContext.getSearchContainer()
 List<CPCatalogEntry> results = searchContainer.getResults();
 %>
 
+<c:if test="<%= enableViewMode %>">
+	<div class="commerce-search-results-view-modes row text-right">
+		<div class="col-md-12 py-3">
+
+			<%
+			for (String curViewMode : CPContentConstants.VIEW_MODES) {
+				String icon = "table2";
+
+				if (curViewMode.equals("icon")) {
+					icon = "cards2";
+				}
+
+				String cssClass = "btn btn-default lfr-portal-tooltip";
+
+				if (curViewMode.equals(viewMode)) {
+					cssClass = "active " + cssClass;
+				}
+
+				Map<String, Object> data = new HashMap<>();
+
+				data.put("title", LanguageUtil.get(request, curViewMode));
+			%>
+
+				<portlet:actionURL name="updateViewMode" var="updateViewModeActionURL">
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="viewMode" value="<%= curViewMode %>" />
+				</portlet:actionURL>
+
+				<aui:a cssClass="<%= cssClass %>" data="<%= data %>" href="<%= updateViewModeActionURL %>" id="<%= renderResponse.getNamespace() + curViewMode %>">
+					<c:if test="<%= Validator.isNotNull(icon) %>">
+						<aui:icon cssClass="icon-monospaced" image="<%= icon %>" markupView="lexicon" />
+					</c:if>
+
+					<span class="sr-only"><liferay-ui:message key="<%= curViewMode %>" /></span>
+				</aui:a>
+
+			<%
+			}
+			%>
+
+		</div>
+	</div>
+</c:if>
+
 <c:choose>
-	<c:when test="<%= cpPublisherDisplayContext.isRenderSelectionADT() %>">
+	<c:when test="<%= !enableViewMode && cpPublisherDisplayContext.isRenderSelectionADT() %>">
 		<liferay-ddm:template-renderer
 			className="<%= CPPublisherPortlet.class.getName() %>"
 			contextObjects="<%= contextObjects %>"
@@ -48,11 +95,11 @@ List<CPCatalogEntry> results = searchContainer.getResults();
 			</aui:form>
 		</c:if>
 	</c:when>
-	<c:when test="<%= cpPublisherDisplayContext.isRenderSelectionCustomRenderer() %>">
+	<c:when test="<%= enableViewMode || cpPublisherDisplayContext.isRenderSelectionCustomRenderer() %>">
 		<liferay-commerce-product:product-list-renderer
 			CPDataSourceResult = "<%= cpPublisherDisplayContext.getCPDataSourceResult() %>"
-			entryKeys = "<%= cpPublisherDisplayContext.getCPContentListEntryRendererKeys() %>"
-			key = "<%= cpPublisherDisplayContext.getCPContentListRendererKey() %>"
+			entryKeys = "<%= cpPublisherDisplayContext.getCPContentListEntryRendererKeys(viewMode) %>"
+			key = "<%= cpPublisherDisplayContext.getCPContentListRendererKey(viewMode) %>"
 		/>
 
 		<c:if test="<%= cpPublisherDisplayContext.isPaginate() %>">
