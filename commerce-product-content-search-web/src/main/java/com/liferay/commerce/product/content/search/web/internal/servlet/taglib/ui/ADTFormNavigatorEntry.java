@@ -66,7 +66,7 @@ public class ADTFormNavigatorEntry extends BaseJSPFormNavigatorEntry<Void> {
 
 	@Override
 	public boolean isVisible(User user, Void object) {
-		return _isSelectionStyleADT();
+		return _isVisible();
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class ADTFormNavigatorEntry extends BaseJSPFormNavigatorEntry<Void> {
 		return "/search_results/configuration/adt.jsp";
 	}
 
-	private boolean _isSelectionStyleADT() {
+	private boolean _isVisible() {
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
@@ -96,6 +96,13 @@ public class ADTFormNavigatorEntry extends BaseJSPFormNavigatorEntry<Void> {
 				cpSearchResultsPortletInstanceConfiguration =
 					portletDisplay.getPortletInstanceConfiguration(
 						CPSearchResultsPortletInstanceConfiguration.class);
+
+			boolean enableViewMode =
+				cpSearchResultsPortletInstanceConfiguration.enableViewMode();
+
+			if (enableViewMode) {
+				return false;
+			}
 
 			String selectionStyle =
 				cpSearchResultsPortletInstanceConfiguration.selectionStyle();

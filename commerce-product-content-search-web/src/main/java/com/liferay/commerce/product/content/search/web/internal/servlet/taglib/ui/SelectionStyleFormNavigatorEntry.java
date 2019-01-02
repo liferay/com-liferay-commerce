@@ -14,10 +14,19 @@
 
 package com.liferay.commerce.product.content.search.web.internal.servlet.taglib.ui;
 
+import com.liferay.commerce.product.content.search.web.internal.configuration.CPSearchResultsPortletInstanceConfiguration;
 import com.liferay.commerce.product.content.search.web.internal.constants.CPSearchResultsConstants;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.servlet.taglib.ui.BaseJSPFormNavigatorEntry;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntry;
+import com.liferay.portal.kernel.theme.PortletDisplay;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.util.Locale;
 
@@ -57,6 +66,11 @@ public class SelectionStyleFormNavigatorEntry
 	}
 
 	@Override
+	public boolean isVisible(User user, Void object) {
+		return _isVisible();
+	}
+
+	@Override
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.product.content.search.web)",
 		unbind = "-"
@@ -69,5 +83,34 @@ public class SelectionStyleFormNavigatorEntry
 	protected String getJspPath() {
 		return "/search_results/configuration/selection_style.jsp";
 	}
+
+	private boolean _isVisible() {
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		try {
+			CPSearchResultsPortletInstanceConfiguration
+				cpSearchResultsPortletInstanceConfiguration =
+					portletDisplay.getPortletInstanceConfiguration(
+						CPSearchResultsPortletInstanceConfiguration.class);
+
+			return
+				!cpSearchResultsPortletInstanceConfiguration.enableViewMode();
+		}
+		catch (PortalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
+
+			return false;
+		}
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		SelectionStyleFormNavigatorEntry.class);
 
 }

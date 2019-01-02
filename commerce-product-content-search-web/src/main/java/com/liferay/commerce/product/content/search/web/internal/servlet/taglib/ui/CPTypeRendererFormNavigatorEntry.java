@@ -72,7 +72,7 @@ public class CPTypeRendererFormNavigatorEntry
 
 	@Override
 	public boolean isVisible(User user, Void object) {
-		return _isSelectionStyleCustomRenderer();
+		return _isVisible();
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class CPTypeRendererFormNavigatorEntry
 		return "/search_results/configuration/product_type_renderer.jsp";
 	}
 
-	private boolean _isSelectionStyleCustomRenderer() {
+	private boolean _isVisible() {
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
@@ -102,6 +102,13 @@ public class CPTypeRendererFormNavigatorEntry
 				cpSearchResultsPortletInstanceConfiguration =
 					portletDisplay.getPortletInstanceConfiguration(
 						CPSearchResultsPortletInstanceConfiguration.class);
+
+			boolean enableViewMode =
+				cpSearchResultsPortletInstanceConfiguration.enableViewMode();
+
+			if (enableViewMode) {
+				return false;
+			}
 
 			String selectionStyle =
 				cpSearchResultsPortletInstanceConfiguration.selectionStyle();

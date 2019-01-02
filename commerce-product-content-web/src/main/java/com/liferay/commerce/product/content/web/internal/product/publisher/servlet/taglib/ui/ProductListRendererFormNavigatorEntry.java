@@ -14,8 +14,12 @@
 
 package com.liferay.commerce.product.content.web.internal.product.publisher.servlet.taglib.ui;
 
+import com.liferay.commerce.product.content.web.internal.configuration.CPPublisherPortletInstanceConfiguration;
 import com.liferay.commerce.product.content.web.internal.constants.CPPublisherConstants;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
@@ -71,7 +75,7 @@ public class ProductListRendererFormNavigatorEntry
 
 	@Override
 	public boolean isVisible(User user, Void object) {
-		return _isSelectionStyleCustomRenderer();
+		return _isVisible();
 	}
 
 	@Override
@@ -88,7 +92,7 @@ public class ProductListRendererFormNavigatorEntry
 		return "/product_publisher/configuration/product_list_renderer.jsp";
 	}
 
-	private boolean _isSelectionStyleCustomRenderer() {
+	private boolean _isVisible() {
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
@@ -96,18 +100,39 @@ public class ProductListRendererFormNavigatorEntry
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		PortletPreferences portletPreferences =
-			themeDisplay.getStrictLayoutPortletSetup(
-				themeDisplay.getLayout(), portletDisplay.getPortletResource());
+		try {
+			CPPublisherPortletInstanceConfiguration
+				cpPublisherPortletInstanceConfiguration =
+					portletDisplay.getPortletInstanceConfiguration(
+						CPPublisherPortletInstanceConfiguration.class);
 
-		String renderSelection = GetterUtil.getString(
-			portletPreferences.getValue("renderSelection", null), "custom");
+			boolean enableViewMode =
+				cpPublisherPortletInstanceConfiguration.enableViewMode();
 
-		if (renderSelection.equals("custom")) {
-			return true;
+			if (enableViewMode) {
+				return false;
+			}
+
+			PortletPreferences portletPreferences =
+				themeDisplay.getStrictLayoutPortletSetup(
+					themeDisplay.getLayout(),
+					portletDisplay.getPortletResource());
+
+			String renderSelection = GetterUtil.getString(
+				portletPreferences.getValue("renderSelection", null), "custom");
+
+			return renderSelection.equals("custom");
 		}
+		catch (PortalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
 
-		return false;
+			return false;
+		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		ProductListRendererFormNavigatorEntry.class);
 
 }
