@@ -463,11 +463,6 @@ public class CPDefinitionLocalServiceImpl
 		cpDefinitionLocalizationPersistence.removeByCPDefinitionId(
 			cpDefinition.getCPDefinitionId());
 
-		// Commerce product definition option rels
-
-		cpDefinitionOptionRelLocalService.deleteCPDefinitionOptionRels(
-			cpDefinition.getCPDefinitionId());
-
 		// Commerce product definition specification option values
 
 		cpDefinitionSpecificationOptionValueLocalService.
@@ -477,6 +472,11 @@ public class CPDefinitionLocalServiceImpl
 		// Commerce product instances
 
 		cpInstanceLocalService.deleteCPInstances(
+			cpDefinition.getCPDefinitionId());
+
+		// Commerce product definition option rels
+
+		cpDefinitionOptionRelLocalService.deleteCPDefinitionOptionRels(
 			cpDefinition.getCPDefinitionId());
 
 		// Commerce product definition attachment file entries
