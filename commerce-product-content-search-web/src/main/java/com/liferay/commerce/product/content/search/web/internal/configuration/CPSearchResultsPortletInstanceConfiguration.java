@@ -39,6 +39,9 @@ public interface CPSearchResultsPortletInstanceConfiguration {
 	@Meta.AD(deflt = "0", name = "display-style-group-id", required = false)
 	public long displayStyleGroupId();
 
+	@Meta.AD(deflt = "false", name = "enable-view-mode", required = false)
+	public boolean enableViewMode();
+
 	@Meta.AD(deflt = "true", name = "paginate", required = false)
 	public boolean paginate();
 
@@ -50,5 +53,8 @@ public interface CPSearchResultsPortletInstanceConfiguration {
 
 	@Meta.AD(deflt = "custom", name = "selection-style", required = false)
 	public String selectionStyle();
+
+	@Meta.AD(deflt = "icon", name = "view-mode", required = false)
+	public String viewMode();
 
 }

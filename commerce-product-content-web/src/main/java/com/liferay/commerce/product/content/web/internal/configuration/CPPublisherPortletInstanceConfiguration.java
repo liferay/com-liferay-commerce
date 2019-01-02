@@ -38,6 +38,9 @@ public interface CPPublisherPortletInstanceConfiguration {
 	@Meta.AD(deflt = "0", name = "display-style-group-id", required = false)
 	public long displayStyleGroupId();
 
+	@Meta.AD(deflt = "false", name = "enable-view-mode", required = false)
+	public boolean enableViewMode();
+
 	@Meta.AD(deflt = "true", name = "paginate", required = false)
 	public boolean paginate();
 
@@ -46,5 +49,8 @@ public interface CPPublisherPortletInstanceConfiguration {
 
 	@Meta.AD(deflt = "more", name = "pagination-type", required = false)
 	public String paginationType();
+
+	@Meta.AD(deflt = "icon", name = "view-mode", required = false)
+	public String viewMode();
 
 }
