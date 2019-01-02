@@ -19,7 +19,13 @@ package com.liferay.commerce.product.content.constants;
  */
 public class CPContentConstants {
 
+	public static final String ICON_VIEW_MODE = "icon";
+
+	public static final String LIST_VIEW_MODE = "list";
+
 	public static final String[] PAGINATION_TYPES =
 		{"approximate", "article", "more", "regular"};
+
+	public static final String[] VIEW_MODES = {ICON_VIEW_MODE, LIST_VIEW_MODE};
 
 }
