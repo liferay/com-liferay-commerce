@@ -16,6 +16,7 @@ package com.liferay.commerce.product.internal.upgrade;
 
 import com.liferay.commerce.product.internal.upgrade.v1_1_0.CPRuleUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_2_0.ProductSubscriptionUpgradeProcess;
+import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPAttachmentFileEntryUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPDefinitionLinkUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPDefinitionOptionRelUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPDefinitionUpgradeProcess;
@@ -51,6 +52,7 @@ public class CommerceProductUpgradeStepRegistrator
 
 		registry.register(
 			_SCHEMA_VERSION_1_2_0, _SCHEMA_VERSION_1_3_0,
+			new CPAttachmentFileEntryUpgradeProcess(),
 			new CPDefinitionLinkUpgradeProcess(),
 			new CPDefinitionOptionRelUpgradeProcess(),
 			new CPDefinitionUpgradeProcess(), new CProductUpgradeProcess(),
