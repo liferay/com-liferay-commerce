@@ -37,7 +37,7 @@ public class CommerceSearchUtil {
 		LayoutSet layoutSet = themeDisplay.getLayoutSet();
 
 		Layout layout = _getCatalogLayout(
-			themeDisplay.getScopeGroupId(), layoutSet.getPrivateLayout());
+			themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
 
 		if (layout == null) {
 			return null;
@@ -52,7 +52,7 @@ public class CommerceSearchUtil {
 		LayoutSet layoutSet = themeDisplay.getLayoutSet();
 
 		Layout layout = _getSearchLayout(
-			themeDisplay.getScopeGroupId(), layoutSet.getPrivateLayout());
+			themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
 
 		if (layout == null) {
 			return null;
