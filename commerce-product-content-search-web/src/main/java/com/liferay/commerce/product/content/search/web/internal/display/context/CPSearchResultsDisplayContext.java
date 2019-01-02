@@ -84,14 +84,21 @@ public class CPSearchResultsDisplayContext {
 				CPSearchResultsPortletInstanceConfiguration.class);
 	}
 
-	public Map<String, String> getCPContentListEntryRendererKeys() {
+	public Map<String, String> getCPContentListEntryRendererKeys(
+		String viewMode) {
+
+		if (!isEnableViewMode()) {
+			viewMode = null;
+		}
+
 		Map<String, String> cpContentListEntryRendererKeys = new HashMap<>();
 
 		for (CPType cpType : getCPTypes()) {
 			String cpTypeName = cpType.getName();
 
 			cpContentListEntryRendererKeys.put(
-				cpTypeName, getCPTypeListEntryRendererKey(cpTypeName));
+				cpTypeName,
+				getCPTypeListEntryRendererKey(viewMode, cpTypeName));
 		}
 
 		return cpContentListEntryRendererKeys;
@@ -106,12 +113,25 @@ public class CPSearchResultsDisplayContext {
 	}
 
 	public String getCPContentListRendererKey() {
+		return getCPContentListRendererKey(null);
+	}
+
+	public String getCPContentListRendererKey(String viewMode) {
+		if (!isEnableViewMode()) {
+			viewMode = null;
+		}
+
 		RenderRequest renderRequest = _cpRequestHelper.getRenderRequest();
 
 		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
-		String value = portletPreferences.getValue(
-			"cpContentListRendererKey", null);
+		String key = "cpContentListRendererKey";
+
+		if (Validator.isNotNull(viewMode)) {
+			key = viewMode + "--" + key;
+		}
+
+		String value = portletPreferences.getValue(key, null);
 
 		if (Validator.isNotNull(value)) {
 			return value;
@@ -148,12 +168,27 @@ public class CPSearchResultsDisplayContext {
 	}
 
 	public String getCPTypeListEntryRendererKey(String cpType) {
+		return getCPTypeListEntryRendererKey(null, cpType);
+	}
+
+	public String getCPTypeListEntryRendererKey(
+		String viewMode, String cpType) {
+
+		if (!isEnableViewMode()) {
+			viewMode = null;
+		}
+
 		RenderRequest renderRequest = _cpRequestHelper.getRenderRequest();
 
 		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
-		String value = portletPreferences.getValue(
-			cpType + "--cpTypeListEntryRendererKey", null);
+		String key = cpType + "--cpTypeListEntryRendererKey";
+
+		if (Validator.isNotNull(viewMode)) {
+			key = viewMode + "--" + key;
+		}
+
+		String value = portletPreferences.getValue(key, null);
 
 		if (Validator.isNotNull(value)) {
 			return value;
@@ -226,6 +261,14 @@ public class CPSearchResultsDisplayContext {
 
 	public String getSelectionStyle() {
 		return _cpSearchResultsPortletInstanceConfiguration.selectionStyle();
+	}
+
+	public String getViewMode() {
+		return _cpSearchResultsPortletInstanceConfiguration.viewMode();
+	}
+
+	public boolean isEnableViewMode() {
+		return _cpSearchResultsPortletInstanceConfiguration.enableViewMode();
 	}
 
 	public boolean isPaginate() {

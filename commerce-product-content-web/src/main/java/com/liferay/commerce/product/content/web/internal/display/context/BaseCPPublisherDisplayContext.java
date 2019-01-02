@@ -82,12 +82,25 @@ public class BaseCPPublisherDisplayContext {
 	}
 
 	public String getCPContentListRendererKey() {
+		return getCPContentListRendererKey(null);
+	}
+
+	public String getCPContentListRendererKey(String viewMode) {
+		if (!isEnableViewMode()) {
+			viewMode = null;
+		}
+
 		RenderRequest renderRequest = cpContentRequestHelper.getRenderRequest();
 
 		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
-		String value = portletPreferences.getValue(
-			"cpContentListRendererKey", null);
+		String key = "cpContentListRendererKey";
+
+		if (Validator.isNotNull(viewMode)) {
+			key = viewMode + "--" + key;
+		}
+
+		String value = portletPreferences.getValue(key, null);
 
 		if (Validator.isNotNull(value)) {
 			return value;
@@ -116,12 +129,27 @@ public class BaseCPPublisherDisplayContext {
 	}
 
 	public String getCPTypeListEntryRendererKey(String cpType) {
+		return getCPTypeListEntryRendererKey(null, cpType);
+	}
+
+	public String getCPTypeListEntryRendererKey(
+		String viewMode, String cpType) {
+
+		if (!isEnableViewMode()) {
+			viewMode = null;
+		}
+
 		RenderRequest renderRequest = cpContentRequestHelper.getRenderRequest();
 
 		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
-		String value = portletPreferences.getValue(
-			cpType + "--cpTypeListEntryRendererKey", null);
+		String key = cpType + "--cpTypeListEntryRendererKey";
+
+		if (Validator.isNotNull(viewMode)) {
+			key = viewMode + "--" + key;
+		}
+
+		String value = portletPreferences.getValue(key, null);
 
 		if (Validator.isNotNull(value)) {
 			return value;
@@ -204,6 +232,14 @@ public class BaseCPPublisherDisplayContext {
 			portletPreferences.getValue("selectionStyle", null), "dynamic");
 
 		return selectionStyle;
+	}
+
+	public String getViewMode() {
+		return cpPublisherPortletInstanceConfiguration.viewMode();
+	}
+
+	public boolean isEnableViewMode() {
+		return cpPublisherPortletInstanceConfiguration.enableViewMode();
 	}
 
 	public boolean isPaginate() {

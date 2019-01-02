@@ -70,14 +70,21 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 		_cpDefinitionHelper = cpDefinitionHelper;
 	}
 
-	public Map<String, String> getCPContentListEntryRendererKeys() {
+	public Map<String, String> getCPContentListEntryRendererKeys(
+		String viewMode) {
+
+		if (!isEnableViewMode()) {
+			viewMode = null;
+		}
+
 		Map<String, String> cpContentListEntryRendererKeys = new HashMap<>();
 
 		for (CPType cpType : getCPTypes()) {
 			String cpTypeName = cpType.getName();
 
 			cpContentListEntryRendererKeys.put(
-				cpTypeName, getCPTypeListEntryRendererKey(cpTypeName));
+				cpTypeName,
+				getCPTypeListEntryRendererKey(viewMode, cpTypeName));
 		}
 
 		return cpContentListEntryRendererKeys;
