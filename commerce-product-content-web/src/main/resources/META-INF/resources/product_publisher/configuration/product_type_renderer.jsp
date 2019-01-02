@@ -18,63 +18,8 @@
 
 <%
 CPPublisherConfigurationDisplayContext cpPublisherConfigurationDisplayContext = (CPPublisherConfigurationDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+String viewMode = StringPool.BLANK;
 %>
 
-<div id="<portlet:namespace/>configuration-tabs">
-	<ul class="nav nav-tabs">
-
-		<%
-		for (CPType cpType : cpPublisherConfigurationDisplayContext.getCPTypes()) {
-		%>
-
-			<li>
-				<a href="#<%= cpType.getName() %>"><%= cpType.getLabel(locale) %></a>
-			</li>
-
-		<%
-		}
-		%>
-
-	</ul>
-
-	<div class="tab-content">
-
-		<%
-		for (CPType cpType : cpPublisherConfigurationDisplayContext.getCPTypes()) {
-		%>
-
-			<div id="<%= cpType.getName() %>">
-				<aui:fieldset markupView="lexicon">
-					<aui:select label='<%= cpType.getLabel(locale) + StringPool.SPACE + LanguageUtil.get(request, "cp-type-list-renderer-key") %>' name='<%= "preferences--" + cpType.getName() + "--cpTypeListEntryRendererKey--" %>'>
-
-						<%
-						List<CPContentListEntryRenderer> cpContentListEntryRenderers = cpPublisherConfigurationDisplayContext.getCPContentListEntryRenderers(cpType.getName());
-
-						for (CPContentListEntryRenderer cpContentListEntryRenderer : cpContentListEntryRenderers) {
-							String key = cpContentListEntryRenderer.getKey();
-						%>
-
-							<aui:option label="<%= cpContentListEntryRenderer.getLabel(locale) %>" selected="<%= key.equals(cpPublisherConfigurationDisplayContext.getCPTypeListEntryRendererKey(cpType.getName())) %>" value="<%= key %>" />
-
-						<%
-						}
-						%>
-
-					</aui:select>
-				</aui:fieldset>
-			</div>
-
-		<%
-		}
-		%>
-
-	</div>
-</div>
-
-<aui:script use="aui-tabview">
-	new A.TabView(
-		{
-			srcNode: '#<portlet:namespace/>configuration-tabs'
-		}
-	).render();
-</aui:script>
+<%@ include file="/product_publisher/configuration/product_type_renderer.jspf" %>

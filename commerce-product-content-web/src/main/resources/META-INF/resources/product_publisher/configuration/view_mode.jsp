@@ -18,11 +18,14 @@
 
 <%
 CPPublisherConfigurationDisplayContext cpPublisherConfigurationDisplayContext = (CPPublisherConfigurationDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
-String cpContentListRendererKey = cpPublisherConfigurationDisplayContext.getCPContentListRendererKey();
-List<CPContentListRenderer> cpContentListRenderers = cpPublisherConfigurationDisplayContext.getCPContentListRenderers();
-
-String inputName = "preferences--cpContentListRendererKey--";
 %>
 
-<%@ include file="/product_publisher/configuration/product_list_renderer.jspf" %>
+<aui:fieldset markupView="lexicon">
+	<aui:input checked="<%= cpPublisherConfigurationDisplayContext.isEnableViewMode() %>" name="preferences--enableViewMode--" onChange='<%= renderResponse.getNamespace() + "enableViewMode();" %>' type="toggle-switch" />
+</aui:fieldset>
+
+<aui:script>
+	function <portlet:namespace />enableViewMode() {
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>

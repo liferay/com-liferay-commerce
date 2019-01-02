@@ -19,10 +19,10 @@
 <%
 CPPublisherConfigurationDisplayContext cpPublisherConfigurationDisplayContext = (CPPublisherConfigurationDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-String cpContentListRendererKey = cpPublisherConfigurationDisplayContext.getCPContentListRendererKey();
+String cpContentListRendererKey = cpPublisherConfigurationDisplayContext.getCPContentListRendererKey("list");
 List<CPContentListRenderer> cpContentListRenderers = cpPublisherConfigurationDisplayContext.getCPContentListRenderers();
 
-String inputName = "preferences--cpContentListRendererKey--";
+String inputName = "preferences--list--cpContentListRendererKey--";
 %>
 
 <%@ include file="/product_publisher/configuration/product_list_renderer.jspf" %>
