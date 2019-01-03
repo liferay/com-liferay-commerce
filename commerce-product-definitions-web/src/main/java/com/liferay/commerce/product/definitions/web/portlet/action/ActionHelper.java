@@ -123,34 +123,7 @@ public class ActionHelper {
 		long cpDefinitionId = ParamUtil.getLong(
 			portletRequest, "cpDefinitionId");
 
-		if (cpDefinitionId <= 0) {
-			CPDefinitionOptionRel cpDefinitionOptionRel =
-				getCPDefinitionOptionRel(portletRequest);
-
-			if (cpDefinitionOptionRel != null) {
-				cpDefinitionId = cpDefinitionOptionRel.getCPDefinitionId();
-			}
-
-			CPDefinitionLink cpDefinitionLink = getCPDefinitionLink(
-				portletRequest);
-
-			if (cpDefinitionLink != null) {
-				cpDefinitionId = cpDefinitionLink.getCPDefinitionId();
-			}
-		}
-
-		if (cpDefinitionId > 0) {
-			cpDefinition = _cpDefinitionService.fetchCPDefinition(
-				cpDefinitionId);
-
-			CProduct cProduct = _cProductLocalService.fetchCProduct(
-				cpDefinition.getCProductId());
-
-			if (cpDefinitionId != cProduct.getPublishedDefinitionId()) {
-				cpDefinition = _cpDefinitionService.fetchCPDefinition(
-					cProduct.getPublishedDefinitionId());
-			}
-		}
+		cpDefinition = _validateCPDefinition(cpDefinitionId);
 
 		if ((cpDefinition != null) && cpDefinition.isInTrash()) {
 			throw new NoSuchCPDefinitionException(
@@ -485,6 +458,27 @@ public class ActionHelper {
 		ServletResponseUtil.write(httpServletResponse, jsonObj.toString());
 
 		httpServletResponse.flushBuffer();
+	}
+
+	private CPDefinition _validateCPDefinition(Long cpDefinitionId)
+		throws PortalException {
+
+		CPDefinition cpDefinition = _cpDefinitionService.fetchCPDefinition(
+			cpDefinitionId);
+
+		if (cpDefinition != null) {
+			CProduct cProduct = _cProductLocalService.fetchCProduct(
+				cpDefinition.getCProductId());
+
+			if ((cpDefinitionId != cProduct.getPublishedDefinitionId()) ||
+				(cpDefinitionId != cProduct.getDraftDefinitionId())) {
+
+				cpDefinition = _cpDefinitionService.fetchCPDefinition(
+					cProduct.getPublishedDefinitionId());
+			}
+		}
+
+		return cpDefinition;
 	}
 
 	@Reference

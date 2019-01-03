@@ -190,6 +190,8 @@ public class CPDefinitionOptionRelDisplayContext
 			"mvcRenderCommandName", "editProductDefinition");
 		portletURL.setParameter(
 			"screenNavigationCategoryKey", getScreenNavigationCategoryKey());
+		portletURL.setParameter(
+			"cpDefinitionId", String.valueOf(getCPDefinitionId()));
 
 		return portletURL;
 	}
