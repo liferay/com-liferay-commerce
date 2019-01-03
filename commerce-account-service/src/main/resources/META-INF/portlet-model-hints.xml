@@ -9,10 +9,23 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="parentCommerceAccountId" type="long" />
+		<field name="logoId" type="long" />
+		<field name="email" type="String">
+			<validator name="required" />
+		</field>
 		<field name="taxId" type="String" />
 		<field name="active" type="boolean" />
+		<field name="displayDate" type="Date" />
+		<field name="expirationDate" type="Date" />
+		<field name="lastPublishDate" type="Date" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.liferay.commerce.account.model.CommerceAccountOrganizationRel">
 		<field name="commerceAccountId" type="long" />
@@ -25,7 +38,7 @@
 	</model>
 	<model name="com.liferay.commerce.account.model.CommerceAccountUserRel">
 		<field name="commerceAccountId" type="long" />
-		<field name="userId" type="long" />
+		<field name="commerceAccountUserId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
