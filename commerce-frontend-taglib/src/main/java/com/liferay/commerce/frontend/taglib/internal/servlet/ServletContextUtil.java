@@ -18,6 +18,7 @@ import com.liferay.commerce.frontend.ClayTableDataJSONBuilder;
 import com.liferay.commerce.frontend.ClayTableRegistry;
 import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
+import com.liferay.commerce.frontend.FilterFactoryRegistry;
 
 import javax.servlet.ServletContext;
 
@@ -48,6 +49,10 @@ public class ServletContextUtil {
 		getCommerceDataProviderRegistry() {
 
 		return _instance._getCommerceDataProviderRegistry();
+	}
+
+	public static final FilterFactoryRegistry getFilterFactoryRegistry() {
+		return _instance._getFilterFactoryRegistry();
 	}
 
 	public static final ServletContext getServletContext() {
@@ -90,6 +95,13 @@ public class ServletContextUtil {
 		_commerceDataProviderRegistry = commerceDataProviderRegistry;
 	}
 
+	@Reference(unbind = "-")
+	protected void setFilterFactoryRegistry(
+		FilterFactoryRegistry filterFactoryRegistry) {
+
+		_filterFactoryRegistry = filterFactoryRegistry;
+	}
+
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.frontend.taglib)",
 		unbind = "-"
@@ -114,6 +126,10 @@ public class ServletContextUtil {
 		return _commerceDataProviderRegistry;
 	}
 
+	private FilterFactoryRegistry _getFilterFactoryRegistry() {
+		return _filterFactoryRegistry;
+	}
+
 	private ServletContext _getServletContext() {
 		return _servletContext;
 	}
@@ -124,6 +140,7 @@ public class ServletContextUtil {
 	private ClayTableRegistry _clayTableRegistry;
 	private ClayTableSerializer _clayTableSerializer;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
+	private FilterFactoryRegistry _filterFactoryRegistry;
 	private ServletContext _servletContext;
 
 }

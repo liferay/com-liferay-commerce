@@ -14,23 +14,20 @@
 
 package com.liferay.commerce.frontend;
 
-import aQute.bnd.annotation.ConsumerType;
-
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.search.Sort;
-
-import java.util.List;
-
 /**
  * @author Marco Leo
  */
-@ConsumerType
-public interface CommerceDataSetDataProvider<T> {
+public class DefaultFilterImpl implements Filter {
 
-	public int countItems(long groupId, Filter filter) throws PortalException;
+	@Override
+	public String getKeywords() {
+		return _keywords;
+	}
 
-	public List<T> getItems(
-			long groupId, Filter filter, Pagination pagination, Sort sort)
-		throws PortalException;
+	public void setKeywords(String keywords) {
+		_keywords = keywords;
+	}
+
+	private String _keywords;
 
 }
