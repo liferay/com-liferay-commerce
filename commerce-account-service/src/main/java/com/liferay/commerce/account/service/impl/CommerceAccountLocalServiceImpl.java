@@ -20,8 +20,11 @@ import com.liferay.commerce.account.exception.DuplicateCommerceAccountException;
 import com.liferay.commerce.account.internal.search.CommerceAccountIndexer;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.base.CommerceAccountLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.GroupConstants;
+import com.liferay.portal.kernel.model.ResourceConstants;
+import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Document;
@@ -36,14 +39,23 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.ServiceProxyFactory;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferay.portal.spring.extender.service.ServiceReference;
+import com.liferay.users.admin.kernel.file.uploads.UserFileUploadsSettings;
+
+import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Marco Leo
@@ -55,19 +67,19 @@ public class CommerceAccountLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceAccount addCommerceAccount(
-			long userId, long parentCommerceAccountId, String name,
+			String name, long parentCommerceAccountId, String email,
 			String taxId, boolean active, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
 
 		// Commerce Account
 
-		User user = userPersistence.findByPrimaryKey(userId);
+		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		parentCommerceAccountId = getParentCommerceAccountId(
-			user.getCompanyId(), parentCommerceAccountId);
+			serviceContext.getCompanyId(), parentCommerceAccountId);
 
-		validate(user.getCompanyId(), 0, name, externalReferenceCode);
+		validate(serviceContext.getCompanyId(), 0, name, externalReferenceCode);
 
 		long commerceAccountId = counterLocalService.increment();
 
@@ -77,11 +89,12 @@ public class CommerceAccountLocalServiceImpl
 		commerceAccount.setCompanyId(user.getCompanyId());
 		commerceAccount.setUserId(user.getUserId());
 		commerceAccount.setUserName(user.getFullName());
-		commerceAccount.setExternalReferenceCode(externalReferenceCode);
-		commerceAccount.setParentCommerceAccountId(parentCommerceAccountId);
 		commerceAccount.setName(name);
+		commerceAccount.setParentCommerceAccountId(parentCommerceAccountId);
+		commerceAccount.setEmail(email);
 		commerceAccount.setTaxId(taxId);
 		commerceAccount.setActive(active);
+		commerceAccount.setExternalReferenceCode(externalReferenceCode);
 		commerceAccount.setExpandoBridgeAttributes(serviceContext);
 
 		commerceAccountPersistence.update(commerceAccount);
@@ -89,7 +102,7 @@ public class CommerceAccountLocalServiceImpl
 		// Group
 
 		groupLocalService.addGroup(
-			userId, GroupConstants.DEFAULT_PARENT_GROUP_ID,
+			user.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,
 			CommerceAccount.class.getName(), commerceAccountId,
 			GroupConstants.DEFAULT_LIVE_GROUP_ID, getLocalizationMap(name),
 			null, GroupConstants.TYPE_SITE_PRIVATE, false,
@@ -99,15 +112,93 @@ public class CommerceAccountLocalServiceImpl
 		// Resources
 
 		resourceLocalService.addResources(
-			user.getCompanyId(), 0, userId, CommerceAccount.class.getName(),
+			user.getCompanyId(), GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			user.getUserId(), CommerceAccount.class.getName(),
 			commerceAccount.getCommerceAccountId(), false, false, false);
 
 		// Workflow
 
 		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			commerceAccount.getCompanyId(), WorkflowConstants.DEFAULT_GROUP_ID,
-			userId, CommerceAccount.class.getName(), commerceAccountId,
-			commerceAccount, serviceContext, new HashMap<>());
+			user.getUserId(), CommerceAccount.class.getName(),
+			commerceAccountId, commerceAccount, serviceContext,
+			new HashMap<>());
+	}
+
+	@Indexable(type = IndexableType.DELETE)
+	@Override
+	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
+	public CommerceAccount deleteCommerceAccount(
+			CommerceAccount commerceAccount)
+		throws PortalException {
+
+		// Commerce account organization rels
+
+		commerceAccountOrganizationRelLocalService.
+			deleteCommerceAccountOrganizationRelsByCommerceAccountId(
+				commerceAccount.getCommerceAccountId());
+
+		// Commerce account user rels
+
+		commerceAccountUserRelLocalService.
+			deleteCommerceAccountUserRelsByCommerceAccountId(
+				commerceAccount.getCommerceAccountId());
+
+		// Commerce account
+
+		commerceAccountPersistence.remove(commerceAccount);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			commerceAccount, ResourceConstants.SCOPE_INDIVIDUAL);
+
+		// Expando
+
+		expandoRowLocalService.deleteRows(
+			commerceAccount.getCommerceAccountId());
+
+		return commerceAccount;
+	}
+
+	@Override
+	public CommerceAccount deleteCommerceAccount(long commerceAccountId)
+		throws PortalException {
+
+		CommerceAccount commerceAccount =
+			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
+
+		return commerceAccountLocalService.deleteCommerceAccount(
+			commerceAccount);
+	}
+
+	@Override
+	public void deleteLogo(long commerceAccountId) throws PortalException {
+		CommerceAccount commerceAccount =
+			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
+
+		_portal.updateImageId(commerceAccount, false, null, "logoId", 0, 0, 0);
+	}
+
+	@Override
+	public CommerceAccount fetchCommerceAccount(long companyId, String name) {
+		return commerceAccountPersistence.fetchByC_N(companyId, name);
+	}
+
+	@Override
+	public List<CommerceAccount> getUserCommerceAccounts(
+		long userId, Long parentCommerceAccountId, int start, int end) {
+
+		QueryDefinition<CommerceAccount> queryDefinition =
+			new QueryDefinition<>();
+
+		queryDefinition.setAttribute(
+			"parentCommerceAccountId", parentCommerceAccountId);
+		queryDefinition.setStart(start);
+		queryDefinition.setEnd(end);
+
+		return commerceAccountFinder.getUserCommerceAccounts(
+			userId, queryDefinition);
 	}
 
 	@Override
@@ -127,7 +218,8 @@ public class CommerceAccountLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceAccount updateCommerceAccount(
-			long commerceAccountId, String name, String taxId, boolean active,
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -140,6 +232,14 @@ public class CommerceAccountLocalServiceImpl
 			commerceAccount.getExternalReferenceCode());
 
 		commerceAccount.setName(name);
+
+		_portal.updateImageId(
+			commerceAccount, logo, logoBytes, "logoId",
+			_userFileUploadsSettings.getImageMaxSize(),
+			_userFileUploadsSettings.getImageMaxHeight(),
+			_userFileUploadsSettings.getImageMaxWidth());
+
+		commerceAccount.setEmail(email);
 		commerceAccount.setTaxId(taxId);
 		commerceAccount.setActive(active);
 		commerceAccount.setExpandoBridgeAttributes(serviceContext);
@@ -155,11 +255,58 @@ public class CommerceAccountLocalServiceImpl
 			new HashMap<>());
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceAccount updateStatus(
+			long userId, long commerceAccountId, int status,
+			ServiceContext serviceContext,
+			Map<String, Serializable> workflowContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(userId);
+		Date now = new Date();
+
+		CommerceAccount commerceAccount =
+			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
+
+		if ((status == WorkflowConstants.STATUS_APPROVED) &&
+			(commerceAccount.getDisplayDate() != null) &&
+			now.before(commerceAccount.getDisplayDate())) {
+
+			status = WorkflowConstants.STATUS_SCHEDULED;
+		}
+
+		Date modifiedDate = serviceContext.getModifiedDate(now);
+
+		commerceAccount.setModifiedDate(modifiedDate);
+
+		if (status == WorkflowConstants.STATUS_APPROVED) {
+			Date expirationDate = commerceAccount.getExpirationDate();
+
+			if ((expirationDate != null) && expirationDate.before(now)) {
+				commerceAccount.setExpirationDate(null);
+			}
+		}
+
+		if (status == WorkflowConstants.STATUS_EXPIRED) {
+			commerceAccount.setExpirationDate(now);
+		}
+
+		commerceAccount.setStatus(status);
+		commerceAccount.setStatusByUserId(user.getUserId());
+		commerceAccount.setStatusByUserName(user.getFullName());
+		commerceAccount.setStatusDate(modifiedDate);
+
+		commerceAccountPersistence.update(commerceAccount);
+
+		return commerceAccount;
+	}
+
 	@Override
 	public CommerceAccount upsertCommerceAccount(
-			long userId, long parentCommerceAccountId, String name,
-			String taxId, boolean active, String externalReferenceCode,
-			ServiceContext serviceContext)
+			String name, long parentCommerceAccountId, boolean logo,
+			byte[] logoBytes, String email, String taxId, boolean active,
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceAccount commerceAccount =
@@ -173,12 +320,12 @@ public class CommerceAccountLocalServiceImpl
 
 		if (commerceAccount != null) {
 			return commerceAccountLocalService.updateCommerceAccount(
-				commerceAccount.getCommerceAccountId(), name, taxId, active,
-				serviceContext);
+				commerceAccount.getCommerceAccountId(), name, logo, logoBytes,
+				email, taxId, active, serviceContext);
 		}
 
 		return commerceAccountLocalService.addCommerceAccount(
-			userId, parentCommerceAccountId, name, taxId, active,
+			name, parentCommerceAccountId, email, taxId, active,
 			externalReferenceCode, serviceContext);
 	}
 
@@ -294,21 +441,25 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, long commerceAccountId,
-			String externalReferenceCode, String name)
+			long companyId, long commerceAccountId, String name,
+			String externalReferenceCode)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
 			throw new CommerceAccountNameException();
 		}
 
-		CommerceAccount commerceAccount =
-			commerceAccountPersistence.fetchByC_ERC(
+		CommerceAccount commerceAccount = null;
+		String errorMessage = null;
+
+		if (Validator.isNotNull(externalReferenceCode)) {
+			commerceAccount = commerceAccountPersistence.fetchByC_ERC(
 				companyId, externalReferenceCode);
 
-		String errorMessage =
-			"There is another commerce account with external reference code " +
-				externalReferenceCode;
+			errorMessage =
+				"There is another commerce account with external reference " +
+					"code " + externalReferenceCode;
+		}
 
 		if (commerceAccount == null) {
 			commerceAccount = commerceAccountPersistence.fetchByC_N(
@@ -326,5 +477,14 @@ public class CommerceAccountLocalServiceImpl
 
 	private static final String[] _SELECTED_FIELD_NAMES =
 		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID};
+
+	private static volatile UserFileUploadsSettings _userFileUploadsSettings =
+		ServiceProxyFactory.newServiceTrackedInstance(
+			UserFileUploadsSettings.class,
+			CommerceAccountLocalServiceImpl.class, "_userFileUploadsSettings",
+			false);
+
+	@ServiceReference(type = Portal.class)
+	private Portal _portal;
 
 }
