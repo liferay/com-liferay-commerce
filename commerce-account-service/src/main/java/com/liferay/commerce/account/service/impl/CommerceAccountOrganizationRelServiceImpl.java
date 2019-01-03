@@ -14,29 +14,73 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.base.CommerceAccountOrganizationRelServiceBaseImpl;
+import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.List;
 
 /**
- * The implementation of the commerce account organization rel remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.account.service.CommerceAccountOrganizationRelService} interface.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
  * @author Marco Leo
- * @see CommerceAccountOrganizationRelServiceBaseImpl
- * @see com.liferay.commerce.account.service.CommerceAccountOrganizationRelServiceUtil
+ * @author Alessio Antonio Rendina
  */
 public class CommerceAccountOrganizationRelServiceImpl
 	extends CommerceAccountOrganizationRelServiceBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.account.service.CommerceAccountOrganizationRelServiceUtil} to access the commerce account organization rel remote service.
-	 */
+	@Override
+	public CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
+			long commerceAccountId, long organizationId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountOrganizationRelLocalService.
+			addCommerceAccountOrganizationRel(
+				commerceAccountId, organizationId, serviceContext);
+	}
+
+	@Override
+	public void deleteCommerceAccountOrganizationRel(
+			long commerceAccountId, long organizationId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK =
+			new CommerceAccountOrganizationRelPK(
+				commerceAccountId, organizationId);
+
+		commerceAccountOrganizationRelLocalService.
+			deleteCommerceAccountOrganizationRel(
+				commerceAccountOrganizationRelPK);
+	}
+
+	@Override
+	public List<CommerceAccountOrganizationRel>
+			getCommerceAccountOrganizationRels(long commerceAccountId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountOrganizationRelLocalService.
+			getCommerceAccountOrganizationRels(commerceAccountId);
+	}
+
+	private static volatile ModelResourcePermission<CommerceAccount>
+		_commerceAccountModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CommerceAccountOrganizationRelServiceImpl.class,
+				"_commerceAccountModelResourcePermission",
+				CommerceAccount.class);
 
 }

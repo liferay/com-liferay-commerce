@@ -14,29 +14,73 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.base.CommerceAccountOrganizationRelLocalServiceBaseImpl;
+import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.List;
 
 /**
- * The implementation of the commerce account organization rel local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Marco Leo
- * @see CommerceAccountOrganizationRelLocalServiceBaseImpl
- * @see com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalServiceUtil
+ * @author Alessio Antonio Rendina
  */
 public class CommerceAccountOrganizationRelLocalServiceImpl
 	extends CommerceAccountOrganizationRelLocalServiceBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalServiceUtil} to access the commerce account organization rel local service.
-	 */
+	@Override
+	public CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
+			long commerceAccountId, long organizationId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+
+		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK =
+			new CommerceAccountOrganizationRelPK(
+				commerceAccountId, organizationId);
+
+		CommerceAccountOrganizationRel commerceAccountOrganizationRel =
+			commerceAccountOrganizationRelPersistence.create(
+				commerceAccountOrganizationRelPK);
+
+		commerceAccountOrganizationRel.setCommerceAccountId(commerceAccountId);
+		commerceAccountOrganizationRel.setOrganizationId(organizationId);
+		commerceAccountOrganizationRel.setCompanyId(user.getCompanyId());
+		commerceAccountOrganizationRel.setUserId(user.getUserId());
+		commerceAccountOrganizationRel.setUserName(user.getFullName());
+
+		commerceAccountOrganizationRelPersistence.update(
+			commerceAccountOrganizationRel);
+
+		return commerceAccountOrganizationRel;
+	}
+
+	@Override
+	public void deleteCommerceAccountOrganizationRelsByCommerceAccountId(
+		long commerceAccountId) {
+
+		commerceAccountOrganizationRelPersistence.removeByCommerceAccountId(
+			commerceAccountId);
+	}
+
+	@Override
+	public void deleteCommerceAccountOrganizationRelsByOrganizationId(
+		long organizationId) {
+
+		commerceAccountOrganizationRelPersistence.removeByOrganizationId(
+			organizationId);
+	}
+
+	@Override
+	public List<CommerceAccountOrganizationRel>
+		getCommerceAccountOrganizationRels(long commerceAccountId) {
+
+		return
+			commerceAccountOrganizationRelPersistence.findByCommerceAccountId(
+				commerceAccountId);
+	}
 
 }
