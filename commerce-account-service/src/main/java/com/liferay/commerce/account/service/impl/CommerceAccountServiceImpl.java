@@ -14,12 +14,23 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.base.CommerceAccountServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.List;
 
 /**
  * @author Marco Leo
@@ -29,47 +40,142 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 	@Override
 	public CommerceAccount addCommerceAccount(
-			long userId, long parentCommerceAccountId, String name,
+			String name, long parentCommerceAccountId, String email,
 			String taxId, boolean active, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		_portletResourcePermission.check(
+			getPermissionChecker(), GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+
 		return commerceAccountLocalService.addCommerceAccount(
-			userId, parentCommerceAccountId, name, taxId, active,
+			name, parentCommerceAccountId, email, taxId, active,
 			externalReferenceCode, serviceContext);
+	}
+
+	@Override
+	public void deleteCommerceAccount(long commerceAccountId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.DELETE);
+
+		commerceAccountLocalService.deleteCommerceAccount(commerceAccountId);
+	}
+
+	@Override
+	public CommerceAccount fetchCommerceAccount(long commerceAccountId)
+		throws PortalException {
+
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.fetchCommerceAccount(commerceAccountId);
+
+		if (commerceAccount != null) {
+			_commerceAccountModelResourcePermission.check(
+				getPermissionChecker(), commerceAccountId, ActionKeys.VIEW);
+		}
+
+		return commerceAccount;
+	}
+
+	@Override
+	public CommerceAccount getCommerceAccount(long commerceAccountId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.VIEW);
+
+		return commerceAccountLocalService.getCommerceAccount(
+			commerceAccountId);
+	}
+
+	@Override
+	public List<CommerceAccount> getUserCommerceAccounts(int start, int end)
+		throws PortalException {
+
+		return commerceAccountService.getUserCommerceAccounts(null, start, end);
+	}
+
+	@Override
+	public List<CommerceAccount> getUserCommerceAccounts(
+			Long parentCommerceAccountId, int start, int end)
+		throws PortalException {
+
+		return commerceAccountLocalService.getUserCommerceAccounts(
+			getUserId(), parentCommerceAccountId, start, end);
 	}
 
 	@Override
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
-			long companyId, long parentCommerceAccountId, String keywords,
+			long groupId, long parentCommerceAccountId, String keywords,
 			Boolean active, int start, int end, Sort sort)
 		throws PortalException {
 
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		_portletResourcePermission.check(
+			permissionChecker, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+
 		return commerceAccountLocalService.searchCommerceAccounts(
-			companyId, parentCommerceAccountId, keywords, active, start, end,
-			sort);
+			permissionChecker.getCompanyId(), parentCommerceAccountId, keywords,
+			active, start, end, sort);
 	}
 
 	@Override
 	public CommerceAccount updateCommerceAccount(
-			long commerceAccountId, String name, String taxId, boolean active,
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
 		return commerceAccountLocalService.updateCommerceAccount(
-			commerceAccountId, name, taxId, active, serviceContext);
+			commerceAccountId, name, logo, logoBytes, email, taxId, active,
+			serviceContext);
 	}
 
 	@Override
 	public CommerceAccount upsertCommerceAccount(
-			long userId, long parentCommerceAccountId, String name,
-			String taxId, boolean active, String externalReferenceCode,
-			ServiceContext serviceContext)
+			String name, long parentCommerceAccountId, boolean logo,
+			byte[] logoBytes, String email, String taxId, boolean active,
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.fetchCommerceAccount(
+				permissionChecker.getCompanyId(), name);
+
+		if (commerceAccount == null) {
+			_portletResourcePermission.check(
+				permissionChecker, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+				CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+		}
+		else {
+			_commerceAccountModelResourcePermission.check(
+				permissionChecker, commerceAccount, ActionKeys.UPDATE);
+		}
+
 		return commerceAccountLocalService.upsertCommerceAccount(
-			userId, parentCommerceAccountId, name, taxId, active,
-			externalReferenceCode, serviceContext);
+			name, parentCommerceAccountId, logo, logoBytes, email, taxId,
+			active, externalReferenceCode, serviceContext);
 	}
+
+	private static volatile ModelResourcePermission<CommerceAccount>
+		_commerceAccountModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CommerceAccountServiceImpl.class,
+				"_commerceAccountModelResourcePermission",
+				CommerceAccount.class);
+	private static volatile PortletResourcePermission
+		_portletResourcePermission =
+			PortletResourcePermissionFactory.getInstance(
+				CommerceAccountServiceImpl.class, "_portletResourcePermission",
+				CommerceAccountConstants.RESOURCE_NAME);
 
 }
