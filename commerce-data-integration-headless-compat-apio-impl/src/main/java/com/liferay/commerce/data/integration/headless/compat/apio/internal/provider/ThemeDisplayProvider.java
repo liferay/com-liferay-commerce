@@ -40,7 +40,7 @@ import org.osgi.service.component.annotations.Component;
  * Lets resources provide {@code ThemeDisplay} as a parameter to route builder
  * methods.
  *
- * @author Eduardo Perez
+ * @author Eduardo Pérez
  */
 @Component(
 	immediate = true, property = "service.ranking:Integer=100",
