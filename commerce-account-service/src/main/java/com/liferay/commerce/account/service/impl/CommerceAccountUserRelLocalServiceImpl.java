@@ -14,29 +14,128 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.base.CommerceAccountUserRelLocalServiceBaseImpl;
+import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.List;
 
 /**
- * The implementation of the commerce account user rel local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.account.service.CommerceAccountUserRelLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Marco Leo
- * @see CommerceAccountUserRelLocalServiceBaseImpl
- * @see com.liferay.commerce.account.service.CommerceAccountUserRelLocalServiceUtil
+ * @author Alessio Antonio Rendina
  */
 public class CommerceAccountUserRelLocalServiceImpl
 	extends CommerceAccountUserRelLocalServiceBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.account.service.CommerceAccountUserRelLocalServiceUtil} to access the commerce account user rel local service.
-	 */
+	@Override
+	public CommerceAccountUserRel addCommerceAccountUserRel(
+			long commerceAccountId, long commerceAccountUserId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+
+		CommerceAccountUserRelPK commerceAccountUserRelPK =
+			new CommerceAccountUserRelPK(
+				commerceAccountId, commerceAccountUserId);
+
+		CommerceAccountUserRel commerceAccountUserRel =
+			commerceAccountUserRelPersistence.create(commerceAccountUserRelPK);
+
+		commerceAccountUserRel.setCommerceAccountId(commerceAccountId);
+		commerceAccountUserRel.setCommerceAccountUserId(commerceAccountUserId);
+		commerceAccountUserRel.setCompanyId(user.getCompanyId());
+		commerceAccountUserRel.setUserId(user.getUserId());
+		commerceAccountUserRel.setUserName(user.getFullName());
+
+		commerceAccountUserRelPersistence.update(commerceAccountUserRel);
+
+		return commerceAccountUserRel;
+	}
+
+	@Override
+	public void addCommerceAccountUserRels(
+			long commerceAccountId, String[] emailAddresses, long[] roleIds,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		long classNameId = classNameLocalService.getClassNameId(
+			CommerceAccount.class.getName());
+
+		Group group = groupPersistence.findByC_C_C(
+			serviceContext.getCompanyId(), classNameId, commerceAccountId);
+
+		for (String emailAddress : emailAddresses) {
+			User user = userLocalService.fetchUserByEmailAddress(
+				serviceContext.getCompanyId(), emailAddress);
+
+			if (user == null) {
+				user = userLocalService.addUserWithWorkflow(
+					serviceContext.getUserId(), serviceContext.getCompanyId(),
+					true, StringPool.BLANK, StringPool.BLANK, true,
+					StringPool.BLANK, emailAddress, 0, StringPool.BLANK,
+					serviceContext.getLocale(), emailAddress, StringPool.BLANK,
+					emailAddress, 0, 0, true, 1, 1, 1970, StringPool.BLANK,
+					null, null, null, null, true, serviceContext);
+			}
+
+			commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+				commerceAccountId, user.getUserId(), serviceContext);
+
+			userGroupRoleLocalService.addUserGroupRoles(
+				user.getUserId(), group.getGroupId(), roleIds);
+		}
+	}
+
+	@Override
+	public void deleteCommerceAccountUserRels(
+			long commerceAccountId, long[] userIds)
+		throws PortalException {
+
+		for (long userId : userIds) {
+			CommerceAccountUserRelPK commerceAccountUserRelPK =
+				new CommerceAccountUserRelPK(commerceAccountId, userId);
+
+			commerceAccountUserRelPersistence.remove(commerceAccountUserRelPK);
+		}
+	}
+
+	@Override
+	public void deleteCommerceAccountUserRelsByCommerceAccountId(
+		long commerceAccountId) {
+
+		commerceAccountUserRelPersistence.removeByCommerceAccountId(
+			commerceAccountId);
+	}
+
+	@Override
+	public void deleteCommerceAccountUserRelsByCommerceAccountUserId(
+		long userId) {
+
+		commerceAccountUserRelPersistence.removeByCommerceAccountUserId(userId);
+	}
+
+	@Override
+	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId) {
+
+		return commerceAccountUserRelPersistence.findByCommerceAccountId(
+			commerceAccountId);
+	}
+
+	@Override
+	public List<CommerceAccountUserRel>
+		getCommerceAccountUserRelsByCommerceAccountUserId(
+			long commerceAccountUserId) {
+
+		return commerceAccountUserRelPersistence.findByCommerceAccountUserId(
+			commerceAccountUserId);
+	}
 
 }

@@ -14,29 +14,94 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.base.CommerceAccountUserRelServiceBaseImpl;
+import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.List;
 
 /**
- * The implementation of the commerce account user rel remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.account.service.CommerceAccountUserRelService} interface.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
  * @author Marco Leo
- * @see CommerceAccountUserRelServiceBaseImpl
- * @see com.liferay.commerce.account.service.CommerceAccountUserRelServiceUtil
+ * @author Alessio Antonio Rendina
  */
 public class CommerceAccountUserRelServiceImpl
 	extends CommerceAccountUserRelServiceBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.account.service.CommerceAccountUserRelServiceUtil} to access the commerce account user rel remote service.
-	 */
+	@Override
+	public CommerceAccountUserRel addCommerceAccountUserRel(
+			long commerceAccountId, long userId, ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+			commerceAccountId, userId, serviceContext);
+	}
+
+	@Override
+	public void addCommerceAccountUserRels(
+			long commerceAccountId, String[] emailAddresses, long[] roleIds,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		commerceAccountUserRelLocalService.addCommerceAccountUserRels(
+			commerceAccountId, emailAddresses, roleIds, serviceContext);
+	}
+
+	@Override
+	public void deleteCommerceAccountUserRel(
+			long commerceAccountId, long userId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		CommerceAccountUserRelPK commerceAccountUserRelPK =
+			new CommerceAccountUserRelPK(commerceAccountId, userId);
+
+		commerceAccountUserRelLocalService.deleteCommerceAccountUserRel(
+			commerceAccountUserRelPK);
+	}
+
+	@Override
+	public void deleteCommerceAccountUserRels(
+			long commerceAccountId, long[] userIds)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		commerceAccountUserRelLocalService.deleteCommerceAccountUserRels(
+			commerceAccountId, userIds);
+	}
+
+	@Override
+	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
+			long commerceAccountId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountUserRelLocalService.getCommerceAccountUserRels(
+			commerceAccountId);
+	}
+
+	private static volatile ModelResourcePermission<CommerceAccount>
+		_commerceAccountModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CommerceAccountUserRelServiceImpl.class,
+				"_commerceAccountModelResourcePermission",
+				CommerceAccount.class);
 
 }
