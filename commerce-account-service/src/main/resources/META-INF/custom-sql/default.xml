@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.commerce.account.service.persistence.CommerceAccountFinder.getUserCommerceAccounts">
+		<![CDATA[
+			SELECT
+				CommerceAccount.*
+			FROM
+				CommerceAccount
+			LEFT JOIN
+			 	CommerceAccountUserRel ON
+			 		CommerceAccountUserRel.commerceAccountId = CommerceAccount.commerceAccountId
+			LEFT JOIN
+				CommerceAccountOrganizationRel ON
+					CommerceAccountOrganizationRel.commerceAccountId =  CommerceAccount.commerceAccountId
+			LEFT JOIN
+				Organization_  ON
+					Organization_.organizationId = CommerceAccountOrganizationRel.organizationId
+			WHERE
+				[$PARENT_ACCOUNT_ID$]
+				(
+					(CommerceAccountUserRel.userId IS NULL) OR
+					(CommerceAccountUserRel.userId = [$USER_ID$])
+				) AND
+				(
+					(Organization_.organizationId IS NULL) OR
+					(
+						Organization_.treePath IN
+							(
+								SELECT
+									Organization_.treePath
+								FROM
+									Organization_
+								INNER JOIN
+									Users_Orgs ON
+										Users_Orgs.organizationId = Organization_.organizationId
+								WHERE
+									Users_Orgs.userId = [$USER_ID$]
+							)
+					)
+				)
+		]]>
+	</sql>
+</custom-sql>
