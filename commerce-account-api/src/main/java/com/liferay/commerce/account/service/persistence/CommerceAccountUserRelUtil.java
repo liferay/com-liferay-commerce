@@ -115,165 +115,6 @@ public class CommerceAccountUserRelUtil {
 	}
 
 	/**
-	* Returns all the commerce account user rels where userId = &#63;.
-	*
-	* @param userId the user ID
-	* @return the matching commerce account user rels
-	*/
-	public static List<CommerceAccountUserRel> findByUserId(long userId) {
-		return getPersistence().findByUserId(userId);
-	}
-
-	/**
-	* Returns a range of all the commerce account user rels where userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param start the lower bound of the range of commerce account user rels
-	* @param end the upper bound of the range of commerce account user rels (not inclusive)
-	* @return the range of matching commerce account user rels
-	*/
-	public static List<CommerceAccountUserRel> findByUserId(long userId,
-		int start, int end) {
-		return getPersistence().findByUserId(userId, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce account user rels where userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param start the lower bound of the range of commerce account user rels
-	* @param end the upper bound of the range of commerce account user rels (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce account user rels
-	*/
-	public static List<CommerceAccountUserRel> findByUserId(long userId,
-		int start, int end,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		return getPersistence()
-				   .findByUserId(userId, start, end, orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce account user rels where userId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param userId the user ID
-	* @param start the lower bound of the range of commerce account user rels
-	* @param end the upper bound of the range of commerce account user rels (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce account user rels
-	*/
-	public static List<CommerceAccountUserRel> findByUserId(long userId,
-		int start, int end,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByUserId(userId, start, end, orderByComparator,
-			retrieveFromCache);
-	}
-
-	/**
-	* Returns the first commerce account user rel in the ordered set where userId = &#63;.
-	*
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce account user rel
-	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
-	*/
-	public static CommerceAccountUserRel findByUserId_First(long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
-		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
-		return getPersistence().findByUserId_First(userId, orderByComparator);
-	}
-
-	/**
-	* Returns the first commerce account user rel in the ordered set where userId = &#63;.
-	*
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
-	*/
-	public static CommerceAccountUserRel fetchByUserId_First(long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		return getPersistence().fetchByUserId_First(userId, orderByComparator);
-	}
-
-	/**
-	* Returns the last commerce account user rel in the ordered set where userId = &#63;.
-	*
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce account user rel
-	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
-	*/
-	public static CommerceAccountUserRel findByUserId_Last(long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
-		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
-		return getPersistence().findByUserId_Last(userId, orderByComparator);
-	}
-
-	/**
-	* Returns the last commerce account user rel in the ordered set where userId = &#63;.
-	*
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
-	*/
-	public static CommerceAccountUserRel fetchByUserId_Last(long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		return getPersistence().fetchByUserId_Last(userId, orderByComparator);
-	}
-
-	/**
-	* Returns the commerce account user rels before and after the current commerce account user rel in the ordered set where userId = &#63;.
-	*
-	* @param commerceAccountUserRelPK the primary key of the current commerce account user rel
-	* @param userId the user ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce account user rel
-	* @throws NoSuchAccountUserRelException if a commerce account user rel with the primary key could not be found
-	*/
-	public static CommerceAccountUserRel[] findByUserId_PrevAndNext(
-		CommerceAccountUserRelPK commerceAccountUserRelPK, long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
-		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
-		return getPersistence()
-				   .findByUserId_PrevAndNext(commerceAccountUserRelPK, userId,
-			orderByComparator);
-	}
-
-	/**
-	* Removes all the commerce account user rels where userId = &#63; from the database.
-	*
-	* @param userId the user ID
-	*/
-	public static void removeByUserId(long userId) {
-		getPersistence().removeByUserId(userId);
-	}
-
-	/**
-	* Returns the number of commerce account user rels where userId = &#63;.
-	*
-	* @param userId the user ID
-	* @return the number of matching commerce account user rels
-	*/
-	public static int countByUserId(long userId) {
-		return getPersistence().countByUserId(userId);
-	}
-
-	/**
 	* Returns all the commerce account user rels where commerceAccountId = &#63;.
 	*
 	* @param commerceAccountId the commerce account ID
@@ -446,6 +287,184 @@ public class CommerceAccountUserRelUtil {
 	*/
 	public static int countByCommerceAccountId(long commerceAccountId) {
 		return getPersistence().countByCommerceAccountId(commerceAccountId);
+	}
+
+	/**
+	* Returns all the commerce account user rels where commerceAccountUserId = &#63;.
+	*
+	* @param commerceAccountUserId the commerce account user ID
+	* @return the matching commerce account user rels
+	*/
+	public static List<CommerceAccountUserRel> findByCommerceAccountUserId(
+		long commerceAccountUserId) {
+		return getPersistence()
+				   .findByCommerceAccountUserId(commerceAccountUserId);
+	}
+
+	/**
+	* Returns a range of all the commerce account user rels where commerceAccountUserId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountUserId the commerce account user ID
+	* @param start the lower bound of the range of commerce account user rels
+	* @param end the upper bound of the range of commerce account user rels (not inclusive)
+	* @return the range of matching commerce account user rels
+	*/
+	public static List<CommerceAccountUserRel> findByCommerceAccountUserId(
+		long commerceAccountUserId, int start, int end) {
+		return getPersistence()
+				   .findByCommerceAccountUserId(commerceAccountUserId, start,
+			end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce account user rels where commerceAccountUserId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountUserId the commerce account user ID
+	* @param start the lower bound of the range of commerce account user rels
+	* @param end the upper bound of the range of commerce account user rels (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce account user rels
+	*/
+	public static List<CommerceAccountUserRel> findByCommerceAccountUserId(
+		long commerceAccountUserId, int start, int end,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
+		return getPersistence()
+				   .findByCommerceAccountUserId(commerceAccountUserId, start,
+			end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce account user rels where commerceAccountUserId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountUserId the commerce account user ID
+	* @param start the lower bound of the range of commerce account user rels
+	* @param end the upper bound of the range of commerce account user rels (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce account user rels
+	*/
+	public static List<CommerceAccountUserRel> findByCommerceAccountUserId(
+		long commerceAccountUserId, int start, int end,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByCommerceAccountUserId(commerceAccountUserId, start,
+			end, orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
+	*
+	* @param commerceAccountUserId the commerce account user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce account user rel
+	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
+	*/
+	public static CommerceAccountUserRel findByCommerceAccountUserId_First(
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
+		return getPersistence()
+				   .findByCommerceAccountUserId_First(commerceAccountUserId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
+	*
+	* @param commerceAccountUserId the commerce account user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
+	*/
+	public static CommerceAccountUserRel fetchByCommerceAccountUserId_First(
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
+		return getPersistence()
+				   .fetchByCommerceAccountUserId_First(commerceAccountUserId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
+	*
+	* @param commerceAccountUserId the commerce account user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce account user rel
+	* @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
+	*/
+	public static CommerceAccountUserRel findByCommerceAccountUserId_Last(
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
+		return getPersistence()
+				   .findByCommerceAccountUserId_Last(commerceAccountUserId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
+	*
+	* @param commerceAccountUserId the commerce account user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
+	*/
+	public static CommerceAccountUserRel fetchByCommerceAccountUserId_Last(
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
+		return getPersistence()
+				   .fetchByCommerceAccountUserId_Last(commerceAccountUserId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the commerce account user rels before and after the current commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
+	*
+	* @param commerceAccountUserRelPK the primary key of the current commerce account user rel
+	* @param commerceAccountUserId the commerce account user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce account user rel
+	* @throws NoSuchAccountUserRelException if a commerce account user rel with the primary key could not be found
+	*/
+	public static CommerceAccountUserRel[] findByCommerceAccountUserId_PrevAndNext(
+		CommerceAccountUserRelPK commerceAccountUserRelPK,
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountUserRelException {
+		return getPersistence()
+				   .findByCommerceAccountUserId_PrevAndNext(commerceAccountUserRelPK,
+			commerceAccountUserId, orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce account user rels where commerceAccountUserId = &#63; from the database.
+	*
+	* @param commerceAccountUserId the commerce account user ID
+	*/
+	public static void removeByCommerceAccountUserId(long commerceAccountUserId) {
+		getPersistence().removeByCommerceAccountUserId(commerceAccountUserId);
+	}
+
+	/**
+	* Returns the number of commerce account user rels where commerceAccountUserId = &#63;.
+	*
+	* @param commerceAccountUserId the commerce account user ID
+	* @return the number of matching commerce account user rels
+	*/
+	public static int countByCommerceAccountUserId(long commerceAccountUserId) {
+		return getPersistence()
+				   .countByCommerceAccountUserId(commerceAccountUserId);
 	}
 
 	/**

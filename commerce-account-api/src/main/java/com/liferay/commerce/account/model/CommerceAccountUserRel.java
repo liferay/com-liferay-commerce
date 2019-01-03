@@ -56,10 +56,11 @@ public interface CommerceAccountUserRel extends CommerceAccountUserRelModel,
 			}
 		};
 
-	public static final Accessor<CommerceAccountUserRel, Long> USER_ID_ACCESSOR = new Accessor<CommerceAccountUserRel, Long>() {
+	public static final Accessor<CommerceAccountUserRel, Long> COMMERCE_ACCOUNT_USER_ID_ACCESSOR =
+		new Accessor<CommerceAccountUserRel, Long>() {
 			@Override
 			public Long get(CommerceAccountUserRel commerceAccountUserRel) {
-				return commerceAccountUserRel.getUserId();
+				return commerceAccountUserRel.getCommerceAccountUserId();
 			}
 
 			@Override
@@ -72,4 +73,7 @@ public interface CommerceAccountUserRel extends CommerceAccountUserRelModel,
 				return CommerceAccountUserRel.class;
 			}
 		};
+
+	public com.liferay.portal.kernel.model.User getUser()
+		throws com.liferay.portal.kernel.exception.PortalException;
 }

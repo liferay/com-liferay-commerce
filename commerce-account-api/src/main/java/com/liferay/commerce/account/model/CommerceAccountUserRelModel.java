@@ -82,36 +82,32 @@ public interface CommerceAccountUserRelModel extends AuditedModel,
 	public void setCommerceAccountId(long commerceAccountId);
 
 	/**
-	 * Returns the user ID of this commerce account user rel.
+	 * Returns the commerce account user ID of this commerce account user rel.
 	 *
-	 * @return the user ID of this commerce account user rel
+	 * @return the commerce account user ID of this commerce account user rel
 	 */
-	@Override
-	public long getUserId();
+	public long getCommerceAccountUserId();
 
 	/**
-	 * Sets the user ID of this commerce account user rel.
+	 * Sets the commerce account user ID of this commerce account user rel.
 	 *
-	 * @param userId the user ID of this commerce account user rel
+	 * @param commerceAccountUserId the commerce account user ID of this commerce account user rel
 	 */
-	@Override
-	public void setUserId(long userId);
+	public void setCommerceAccountUserId(long commerceAccountUserId);
 
 	/**
-	 * Returns the user uuid of this commerce account user rel.
+	 * Returns the commerce account user uuid of this commerce account user rel.
 	 *
-	 * @return the user uuid of this commerce account user rel
+	 * @return the commerce account user uuid of this commerce account user rel
 	 */
-	@Override
-	public String getUserUuid();
+	public String getCommerceAccountUserUuid();
 
 	/**
-	 * Sets the user uuid of this commerce account user rel.
+	 * Sets the commerce account user uuid of this commerce account user rel.
 	 *
-	 * @param userUuid the user uuid of this commerce account user rel
+	 * @param commerceAccountUserUuid the commerce account user uuid of this commerce account user rel
 	 */
-	@Override
-	public void setUserUuid(String userUuid);
+	public void setCommerceAccountUserUuid(String commerceAccountUserUuid);
 
 	/**
 	 * Returns the company ID of this commerce account user rel.

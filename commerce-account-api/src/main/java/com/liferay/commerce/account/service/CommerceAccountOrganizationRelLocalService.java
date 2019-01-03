@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -72,6 +73,10 @@ public interface CommerceAccountOrganizationRelLocalService
 	public CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
 		CommerceAccountOrganizationRel commerceAccountOrganizationRel);
 
+	public CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
+		long commerceAccountId, long organizationId,
+		ServiceContext serviceContext) throws PortalException;
+
 	/**
 	* Creates a new commerce account organization rel with the primary key. Does not add the commerce account organization rel to the database.
 	*
@@ -103,6 +108,12 @@ public interface CommerceAccountOrganizationRelLocalService
 	public CommerceAccountOrganizationRel deleteCommerceAccountOrganizationRel(
 		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
 		throws PortalException;
+
+	public void deleteCommerceAccountOrganizationRelsByCommerceAccountId(
+		long commerceAccountId);
+
+	public void deleteCommerceAccountOrganizationRelsByOrganizationId(
+		long organizationId);
 
 	/**
 	* @throws PortalException
@@ -209,6 +220,10 @@ public interface CommerceAccountOrganizationRelLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
 		int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		long commerceAccountId);
 
 	/**
 	* Returns the number of commerce account organization rels.

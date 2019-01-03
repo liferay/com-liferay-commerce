@@ -12,31 +12,17 @@
  * details.
  */
 
-package com.liferay.commerce.account.exception;
+package com.liferay.commerce.account.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.portal.kernel.exception.PortalException;
-
 /**
  * @author Marco Leo
+ * @generated
  */
 @ProviderType
-public class CommerceAccountNameException extends PortalException {
-
-	public CommerceAccountNameException() {
-	}
-
-	public CommerceAccountNameException(String msg) {
-		super(msg);
-	}
-
-	public CommerceAccountNameException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public CommerceAccountNameException(Throwable cause) {
-		super(cause);
-	}
-
+public interface CommerceAccountFinder {
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
+		long userId,
+		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.account.model.CommerceAccount> queryDefinition);
 }

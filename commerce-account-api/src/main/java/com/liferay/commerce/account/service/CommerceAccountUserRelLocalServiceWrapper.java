@@ -46,6 +46,24 @@ public class CommerceAccountUserRelLocalServiceWrapper
 		return _commerceAccountUserRelLocalService.addCommerceAccountUserRel(commerceAccountUserRel);
 	}
 
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountUserRel addCommerceAccountUserRel(
+		long commerceAccountId, long commerceAccountUserId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountUserRelLocalService.addCommerceAccountUserRel(commerceAccountId,
+			commerceAccountUserId, serviceContext);
+	}
+
+	@Override
+	public void addCommerceAccountUserRels(long commerceAccountId,
+		String[] emailAddresses, long[] roleIds,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountUserRelLocalService.addCommerceAccountUserRels(commerceAccountId,
+			emailAddresses, roleIds, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce account user rel with the primary key. Does not add the commerce account user rel to the database.
 	*
@@ -82,6 +100,26 @@ public class CommerceAccountUserRelLocalServiceWrapper
 		com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK commerceAccountUserRelPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountUserRelLocalService.deleteCommerceAccountUserRel(commerceAccountUserRelPK);
+	}
+
+	@Override
+	public void deleteCommerceAccountUserRels(long commerceAccountId,
+		long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountUserRelLocalService.deleteCommerceAccountUserRels(commerceAccountId,
+			userIds);
+	}
+
+	@Override
+	public void deleteCommerceAccountUserRelsByCommerceAccountId(
+		long commerceAccountId) {
+		_commerceAccountUserRelLocalService.deleteCommerceAccountUserRelsByCommerceAccountId(commerceAccountId);
+	}
+
+	@Override
+	public void deleteCommerceAccountUserRelsByCommerceAccountUserId(
+		long userId) {
+		_commerceAccountUserRelLocalService.deleteCommerceAccountUserRelsByCommerceAccountUserId(userId);
 	}
 
 	/**
@@ -221,6 +259,18 @@ public class CommerceAccountUserRelLocalServiceWrapper
 		int start, int end) {
 		return _commerceAccountUserRelLocalService.getCommerceAccountUserRels(start,
 			end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId) {
+		return _commerceAccountUserRelLocalService.getCommerceAccountUserRels(commerceAccountId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRelsByCommerceAccountUserId(
+		long commerceAccountUserId) {
+		return _commerceAccountUserRelLocalService.getCommerceAccountUserRelsByCommerceAccountUserId(commerceAccountUserId);
 	}
 
 	/**

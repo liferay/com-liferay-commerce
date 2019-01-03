@@ -5,4 +5,4 @@ create index IX_2236CBA3 on CommerceAccountOrganizationRel (commerceAccountId);
 create index IX_16599BBC on CommerceAccountOrganizationRel (organizationId);
 
 create index IX_2D10743B on CommerceAccountUserRel (commerceAccountId);
-create index IX_7D6C70BC on CommerceAccountUserRel (userId);
+create index IX_EC8DEFA6 on CommerceAccountUserRel (commerceAccountUserId);

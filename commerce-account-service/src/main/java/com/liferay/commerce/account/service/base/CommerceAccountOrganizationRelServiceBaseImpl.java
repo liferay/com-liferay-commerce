@@ -16,6 +16,7 @@ package com.liferay.commerce.account.service.base;
 
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelService;
+import com.liferay.commerce.account.service.persistence.CommerceAccountFinder;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPersistence;
 import com.liferay.commerce.account.service.persistence.CommerceAccountPersistence;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPersistence;
@@ -111,6 +112,25 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	public void setCommerceAccountPersistence(
 		CommerceAccountPersistence commerceAccountPersistence) {
 		this.commerceAccountPersistence = commerceAccountPersistence;
+	}
+
+	/**
+	 * Returns the commerce account finder.
+	 *
+	 * @return the commerce account finder
+	 */
+	public CommerceAccountFinder getCommerceAccountFinder() {
+		return commerceAccountFinder;
+	}
+
+	/**
+	 * Sets the commerce account finder.
+	 *
+	 * @param commerceAccountFinder the commerce account finder
+	 */
+	public void setCommerceAccountFinder(
+		CommerceAccountFinder commerceAccountFinder) {
+		this.commerceAccountFinder = commerceAccountFinder;
 	}
 
 	/**
@@ -432,6 +452,8 @@ public abstract class CommerceAccountOrganizationRelServiceBaseImpl
 	protected com.liferay.commerce.account.service.CommerceAccountService commerceAccountService;
 	@BeanReference(type = CommerceAccountPersistence.class)
 	protected CommerceAccountPersistence commerceAccountPersistence;
+	@BeanReference(type = CommerceAccountFinder.class)
+	protected CommerceAccountFinder commerceAccountFinder;
 	@BeanReference(type = com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService.class)
 	protected com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService commerceAccountOrganizationRelLocalService;
 	@BeanReference(type = CommerceAccountOrganizationRelService.class)

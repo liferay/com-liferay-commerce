@@ -55,6 +55,15 @@ public class CommerceAccountOrganizationRelLocalServiceUtil {
 				   .addCommerceAccountOrganizationRel(commerceAccountOrganizationRel);
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
+		long commerceAccountId, long organizationId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceAccountOrganizationRel(commerceAccountId,
+			organizationId, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce account organization rel with the primary key. Does not add the commerce account organization rel to the database.
 	*
@@ -91,6 +100,18 @@ public class CommerceAccountOrganizationRelLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .deleteCommerceAccountOrganizationRel(commerceAccountOrganizationRelPK);
+	}
+
+	public static void deleteCommerceAccountOrganizationRelsByCommerceAccountId(
+		long commerceAccountId) {
+		getService()
+			.deleteCommerceAccountOrganizationRelsByCommerceAccountId(commerceAccountId);
+	}
+
+	public static void deleteCommerceAccountOrganizationRelsByOrganizationId(
+		long organizationId) {
+		getService()
+			.deleteCommerceAccountOrganizationRelsByOrganizationId(organizationId);
 	}
 
 	/**
@@ -218,6 +239,11 @@ public class CommerceAccountOrganizationRelLocalServiceUtil {
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
 		int start, int end) {
 		return getService().getCommerceAccountOrganizationRels(start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		long commerceAccountId) {
+		return getService().getCommerceAccountOrganizationRels(commerceAccountId);
 	}
 
 	/**

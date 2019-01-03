@@ -139,8 +139,8 @@ public class CommerceAccountUserRelPersistenceTest {
 
 		Assert.assertEquals(existingCommerceAccountUserRel.getCommerceAccountId(),
 			newCommerceAccountUserRel.getCommerceAccountId());
-		Assert.assertEquals(existingCommerceAccountUserRel.getUserId(),
-			newCommerceAccountUserRel.getUserId());
+		Assert.assertEquals(existingCommerceAccountUserRel.getCommerceAccountUserId(),
+			newCommerceAccountUserRel.getCommerceAccountUserId());
 		Assert.assertEquals(existingCommerceAccountUserRel.getCompanyId(),
 			newCommerceAccountUserRel.getCompanyId());
 		Assert.assertEquals(existingCommerceAccountUserRel.getUserId(),
@@ -156,17 +156,17 @@ public class CommerceAccountUserRelPersistenceTest {
 	}
 
 	@Test
-	public void testCountByUserId() throws Exception {
-		_persistence.countByUserId(RandomTestUtil.nextLong());
-
-		_persistence.countByUserId(0L);
-	}
-
-	@Test
 	public void testCountByCommerceAccountId() throws Exception {
 		_persistence.countByCommerceAccountId(RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceAccountId(0L);
+	}
+
+	@Test
+	public void testCountByCommerceAccountUserId() throws Exception {
+		_persistence.countByCommerceAccountUserId(RandomTestUtil.nextLong());
+
+		_persistence.countByCommerceAccountUserId(0L);
 	}
 
 	@Test
@@ -327,8 +327,9 @@ public class CommerceAccountUserRelPersistenceTest {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.commerceAccountId",
 				newCommerceAccountUserRel.getCommerceAccountId()));
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.userId",
-				newCommerceAccountUserRel.getUserId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+				"id.commerceAccountUserId",
+				newCommerceAccountUserRel.getCommerceAccountUserId()));
 
 		List<CommerceAccountUserRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -347,8 +348,8 @@ public class CommerceAccountUserRelPersistenceTest {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.commerceAccountId",
 				RandomTestUtil.nextLong()));
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.userId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+				"id.commerceAccountUserId", RandomTestUtil.nextLong()));
 
 		List<CommerceAccountUserRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
 

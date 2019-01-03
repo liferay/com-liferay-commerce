@@ -60,7 +60,7 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("commerceAccountId", getCommerceAccountId());
-		attributes.put("userId", getUserId());
+		attributes.put("commerceAccountUserId", getCommerceAccountUserId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -78,10 +78,11 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 			setCommerceAccountId(commerceAccountId);
 		}
 
-		Long userId = (Long)attributes.get("userId");
+		Long commerceAccountUserId = (Long)attributes.get(
+				"commerceAccountUserId");
 
-		if (userId != null) {
-			setUserId(userId);
+		if (commerceAccountUserId != null) {
+			setCommerceAccountUserId(commerceAccountUserId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -136,6 +137,26 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	}
 
 	/**
+	* Returns the commerce account user ID of this commerce account user rel.
+	*
+	* @return the commerce account user ID of this commerce account user rel
+	*/
+	@Override
+	public long getCommerceAccountUserId() {
+		return _commerceAccountUserRel.getCommerceAccountUserId();
+	}
+
+	/**
+	* Returns the commerce account user uuid of this commerce account user rel.
+	*
+	* @return the commerce account user uuid of this commerce account user rel
+	*/
+	@Override
+	public String getCommerceAccountUserUuid() {
+		return _commerceAccountUserRel.getCommerceAccountUserUuid();
+	}
+
+	/**
 	* Returns the company ID of this commerce account user rel.
 	*
 	* @return the company ID of this commerce account user rel
@@ -183,6 +204,12 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _commerceAccountUserRel.getPrimaryKeyObj();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.User getUser()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountUserRel.getUser();
 	}
 
 	/**
@@ -253,6 +280,26 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 	@Override
 	public void setCommerceAccountId(long commerceAccountId) {
 		_commerceAccountUserRel.setCommerceAccountId(commerceAccountId);
+	}
+
+	/**
+	* Sets the commerce account user ID of this commerce account user rel.
+	*
+	* @param commerceAccountUserId the commerce account user ID of this commerce account user rel
+	*/
+	@Override
+	public void setCommerceAccountUserId(long commerceAccountUserId) {
+		_commerceAccountUserRel.setCommerceAccountUserId(commerceAccountUserId);
+	}
+
+	/**
+	* Sets the commerce account user uuid of this commerce account user rel.
+	*
+	* @param commerceAccountUserUuid the commerce account user uuid of this commerce account user rel
+	*/
+	@Override
+	public void setCommerceAccountUserUuid(String commerceAccountUserUuid) {
+		_commerceAccountUserRel.setCommerceAccountUserUuid(commerceAccountUserUuid);
 	}
 
 	/**
