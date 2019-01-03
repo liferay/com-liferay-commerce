@@ -16,13 +16,42 @@ package com.liferay.commerce.account.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceAccountImpl extends CommerceAccountBaseImpl {
 
 	public CommerceAccountImpl() {
+	}
+
+	@Override
+	public CommerceAccount getParentCommerceAccount() throws PortalException {
+		if (getParentCommerceAccountId() ==
+				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID) {
+
+			return null;
+		}
+
+		return CommerceAccountLocalServiceUtil.getCommerceAccount(
+			getParentCommerceAccountId());
+	}
+
+	@Override
+	public boolean isRoot() {
+		if (getParentCommerceAccountId() ==
+				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 }
