@@ -142,6 +142,8 @@ public class CPDefinitionLinkDisplayContext
 			"screenNavigationCategoryKey", getScreenNavigationCategoryKey());
 		portletURL.setParameter("screenNavigationEntryKey", getType());
 		portletURL.setParameter("type", String.valueOf(getType()));
+		portletURL.setParameter(
+			"cpDefinitionId", String.valueOf(getCPDefinitionId()));
 
 		return portletURL;
 	}
