@@ -16,24 +16,23 @@ package com.liferay.commerce.account.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+
 /**
- * The extended model implementation for the CommerceAccountUserRel service. Represents a row in the &quot;CommerceAccountUserRel&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.account.model.CommerceAccountUserRel} interface.
- * </p>
- *
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceAccountUserRelImpl extends CommerceAccountUserRelBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce account user rel model instance should use the {@link com.liferay.commerce.account.model.CommerceAccountUserRel} interface instead.
-	 */
 	public CommerceAccountUserRelImpl() {
+	}
+
+	@Override
+	public User getUser() throws PortalException {
+		return UserLocalServiceUtil.getUser(getCommerceAccountUserId());
 	}
 
 }
