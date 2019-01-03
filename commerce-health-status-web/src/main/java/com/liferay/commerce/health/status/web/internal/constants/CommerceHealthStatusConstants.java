@@ -19,6 +19,12 @@ package com.liferay.commerce.health.status.web.internal.constants;
  */
 public class CommerceHealthStatusConstants {
 
+	public static final String ACCOUNTS_COMMERCE_HEALTH_STATUS_DESCRIPTION =
+		"accounts.commerce.health.status.description";
+
+	public static final String ACCOUNTS_COMMERCE_HEALTH_STATUS_KEY =
+		"accounts.commerce.health.status.key";
+
 	public static final String
 		COMMERCE_CART_CONTENT_COMMERCE_HEALTH_STATUS_DESCRIPTION =
 			"commerce.cart.content.commerce.health.status.description";
