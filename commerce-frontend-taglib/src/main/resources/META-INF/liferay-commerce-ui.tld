@@ -53,6 +53,12 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
+			<name>filter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.liferay.commerce.frontend.Filter</type>
+		</attribute>
+		<attribute>
 			<name>itemPerPage</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>

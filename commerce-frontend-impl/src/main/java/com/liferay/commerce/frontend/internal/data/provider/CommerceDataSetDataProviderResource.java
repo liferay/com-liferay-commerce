@@ -17,16 +17,17 @@ package com.liferay.commerce.frontend.internal.data.provider;
 import com.liferay.commerce.frontend.ClayTableDataJSONBuilder;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
+import com.liferay.commerce.frontend.FilterFactory;
+import com.liferay.commerce.frontend.FilterFactoryRegistry;
 import com.liferay.commerce.frontend.Pagination;
 import com.liferay.commerce.frontend.internal.application.context.provider.PaginationContextProvider;
 import com.liferay.commerce.frontend.internal.application.context.provider.SortContextProvider;
-import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.List;
 
@@ -65,14 +66,22 @@ public class CommerceDataSetDataProviderResource {
 		CommerceDataSetDataProvider commerceDataProvider =
 			_commerceDataProviderRegistry.getCommerceDataProvider(dataProvider);
 
+		FilterFactory filterFactory = _filterFactoryRegistry.getFilterFactory(
+			dataProvider);
+
 		try {
-			EventsProcessorUtil.process(
-				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,
-				PropsValues.SERVLET_SERVICE_EVENTS_PRE, httpServletRequest,
-				httpServletResponse);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)httpServletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			themeDisplay.setScopeGroupId(groupId);
+
+			httpServletRequest.setAttribute(
+				WebKeys.THEME_DISPLAY, themeDisplay);
 
 			List<Object> items = commerceDataProvider.getItems(
-				groupId, pagination, sort);
+				groupId, filterFactory.create(httpServletRequest), pagination,
+				sort);
 
 			String json = _clayTableDataJSONBuilder.build(
 				groupId, tableName, items, httpServletRequest);
@@ -98,6 +107,9 @@ public class CommerceDataSetDataProviderResource {
 
 	@Reference
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
+
+	@Reference
+	private FilterFactoryRegistry _filterFactoryRegistry;
 
 	@Reference
 	private PaginationContextProvider _paginationContextProvider;

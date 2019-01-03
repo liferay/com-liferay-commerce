@@ -20,6 +20,9 @@ import com.liferay.commerce.frontend.ClayTableRegistry;
 import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
+import com.liferay.commerce.frontend.Filter;
+import com.liferay.commerce.frontend.FilterFactory;
+import com.liferay.commerce.frontend.FilterFactoryRegistry;
 import com.liferay.commerce.frontend.PaginationImpl;
 import com.liferay.commerce.frontend.taglib.internal.model.ClayPaginationEntry;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
@@ -59,6 +62,15 @@ public class CommerceTableTag extends ComponentRendererTag {
 		String dataProviderKey = GetterUtil.getString(
 			context.get("dataProviderKey"));
 
+		Filter filter = (Filter)context.get("filter");
+
+		if (filter == null) {
+			FilterFactory filterFactory =
+				_filterFactoryRegistry.getFilterFactory(dataProviderKey);
+
+			filter = filterFactory.create(request);
+		}
+
 		String deltaParam = GetterUtil.getString(
 			context.get("deltaParam"), SearchContainer.DEFAULT_DELTA_PARAM);
 
@@ -89,7 +101,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 			}
 
 			List<Object> items = commerceDataSetDataProvider.getItems(
-				themeDisplay.getScopeGroupId(),
+				themeDisplay.getScopeGroupId(), filter,
 				new PaginationImpl(itemPerPage, pageNumber), null);
 
 			String json = _clayTableDataJSONBuilder.build(
@@ -98,7 +110,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 			putValue("items", JSONFactoryUtil.looseDeserialize(json));
 
 			int totalItems = commerceDataSetDataProvider.countItems(
-				themeDisplay.getScopeGroupId());
+				themeDisplay.getScopeGroupId(), filter);
 
 			putValue("totalItems", totalItems);
 
@@ -123,6 +135,8 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 			putValue("id", clayTable.getId());
 
+			setComponentId(clayTable.getId());
+
 			putValue("currentPage", pageNumber);
 
 			putValue(
@@ -136,7 +150,9 @@ public class CommerceTableTag extends ComponentRendererTag {
 			_log.error(e, e);
 		}
 
-		putValue("spritemap", "");
+		putValue(
+			"spritemap",
+			themeDisplay.getPathThemeImages() + "/lexicon/icons.svg");
 
 		setTemplateNamespace("CommerceTable.render");
 
@@ -160,6 +176,10 @@ public class CommerceTableTag extends ComponentRendererTag {
 		putValue("disableAJAX", disableAJAX);
 	}
 
+	public void setFilter(Filter filter) {
+		putValue("filter", filter);
+	}
+
 	public void setItemPerPage(int itemPerPage) {
 		putValue("itemPerPage", itemPerPage);
 	}
@@ -176,6 +196,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 			ServletContextUtil.getClayTableDataJSONBuilder();
 		_commerceDataProviderRegistry =
 			ServletContextUtil.getCommerceDataProviderRegistry();
+		_filterFactoryRegistry = ServletContextUtil.getFilterFactoryRegistry();
 
 		super.setPageContext(pageContext);
 	}
@@ -224,5 +245,6 @@ public class CommerceTableTag extends ComponentRendererTag {
 	private ClayTableRegistry _clayTableRegistry;
 	private ClayTableSerializer _clayTableSerializer;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
+	private FilterFactoryRegistry _filterFactoryRegistry;
 
 }
