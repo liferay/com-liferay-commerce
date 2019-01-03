@@ -46,6 +46,15 @@ public class CommerceAccountOrganizationRelLocalServiceWrapper
 		return _commerceAccountOrganizationRelLocalService.addCommerceAccountOrganizationRel(commerceAccountOrganizationRel);
 	}
 
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
+		long commerceAccountId, long organizationId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountOrganizationRelLocalService.addCommerceAccountOrganizationRel(commerceAccountId,
+			organizationId, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce account organization rel with the primary key. Does not add the commerce account organization rel to the database.
 	*
@@ -82,6 +91,18 @@ public class CommerceAccountOrganizationRelLocalServiceWrapper
 		com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountOrganizationRelLocalService.deleteCommerceAccountOrganizationRel(commerceAccountOrganizationRelPK);
+	}
+
+	@Override
+	public void deleteCommerceAccountOrganizationRelsByCommerceAccountId(
+		long commerceAccountId) {
+		_commerceAccountOrganizationRelLocalService.deleteCommerceAccountOrganizationRelsByCommerceAccountId(commerceAccountId);
+	}
+
+	@Override
+	public void deleteCommerceAccountOrganizationRelsByOrganizationId(
+		long organizationId) {
+		_commerceAccountOrganizationRelLocalService.deleteCommerceAccountOrganizationRelsByOrganizationId(organizationId);
 	}
 
 	/**
@@ -221,6 +242,12 @@ public class CommerceAccountOrganizationRelLocalServiceWrapper
 		int start, int end) {
 		return _commerceAccountOrganizationRelLocalService.getCommerceAccountOrganizationRels(start,
 			end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		long commerceAccountId) {
+		return _commerceAccountOrganizationRelLocalService.getCommerceAccountOrganizationRels(commerceAccountId);
 	}
 
 	/**

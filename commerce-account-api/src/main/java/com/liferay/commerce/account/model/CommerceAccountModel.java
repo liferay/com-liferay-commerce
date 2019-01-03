@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ShardedModel;
+import com.liferay.portal.kernel.model.WorkflowedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.io.Serializable;
@@ -44,7 +45,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface CommerceAccountModel extends AuditedModel,
-	BaseModel<CommerceAccount>, ShardedModel {
+	BaseModel<CommerceAccount>, ShardedModel, WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -221,6 +222,35 @@ public interface CommerceAccountModel extends AuditedModel,
 	public void setParentCommerceAccountId(long parentCommerceAccountId);
 
 	/**
+	 * Returns the logo ID of this commerce account.
+	 *
+	 * @return the logo ID of this commerce account
+	 */
+	public long getLogoId();
+
+	/**
+	 * Sets the logo ID of this commerce account.
+	 *
+	 * @param logoId the logo ID of this commerce account
+	 */
+	public void setLogoId(long logoId);
+
+	/**
+	 * Returns the email of this commerce account.
+	 *
+	 * @return the email of this commerce account
+	 */
+	@AutoEscape
+	public String getEmail();
+
+	/**
+	 * Sets the email of this commerce account.
+	 *
+	 * @param email the email of this commerce account
+	 */
+	public void setEmail(String email);
+
+	/**
 	 * Returns the tax ID of this commerce account.
 	 *
 	 * @return the tax ID of this commerce account
@@ -255,6 +285,193 @@ public interface CommerceAccountModel extends AuditedModel,
 	 * @param active the active of this commerce account
 	 */
 	public void setActive(boolean active);
+
+	/**
+	 * Returns the display date of this commerce account.
+	 *
+	 * @return the display date of this commerce account
+	 */
+	public Date getDisplayDate();
+
+	/**
+	 * Sets the display date of this commerce account.
+	 *
+	 * @param displayDate the display date of this commerce account
+	 */
+	public void setDisplayDate(Date displayDate);
+
+	/**
+	 * Returns the expiration date of this commerce account.
+	 *
+	 * @return the expiration date of this commerce account
+	 */
+	public Date getExpirationDate();
+
+	/**
+	 * Sets the expiration date of this commerce account.
+	 *
+	 * @param expirationDate the expiration date of this commerce account
+	 */
+	public void setExpirationDate(Date expirationDate);
+
+	/**
+	 * Returns the last publish date of this commerce account.
+	 *
+	 * @return the last publish date of this commerce account
+	 */
+	public Date getLastPublishDate();
+
+	/**
+	 * Sets the last publish date of this commerce account.
+	 *
+	 * @param lastPublishDate the last publish date of this commerce account
+	 */
+	public void setLastPublishDate(Date lastPublishDate);
+
+	/**
+	 * Returns the status of this commerce account.
+	 *
+	 * @return the status of this commerce account
+	 */
+	@Override
+	public int getStatus();
+
+	/**
+	 * Sets the status of this commerce account.
+	 *
+	 * @param status the status of this commerce account
+	 */
+	@Override
+	public void setStatus(int status);
+
+	/**
+	 * Returns the status by user ID of this commerce account.
+	 *
+	 * @return the status by user ID of this commerce account
+	 */
+	@Override
+	public long getStatusByUserId();
+
+	/**
+	 * Sets the status by user ID of this commerce account.
+	 *
+	 * @param statusByUserId the status by user ID of this commerce account
+	 */
+	@Override
+	public void setStatusByUserId(long statusByUserId);
+
+	/**
+	 * Returns the status by user uuid of this commerce account.
+	 *
+	 * @return the status by user uuid of this commerce account
+	 */
+	@Override
+	public String getStatusByUserUuid();
+
+	/**
+	 * Sets the status by user uuid of this commerce account.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this commerce account
+	 */
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	/**
+	 * Returns the status by user name of this commerce account.
+	 *
+	 * @return the status by user name of this commerce account
+	 */
+	@AutoEscape
+	@Override
+	public String getStatusByUserName();
+
+	/**
+	 * Sets the status by user name of this commerce account.
+	 *
+	 * @param statusByUserName the status by user name of this commerce account
+	 */
+	@Override
+	public void setStatusByUserName(String statusByUserName);
+
+	/**
+	 * Returns the status date of this commerce account.
+	 *
+	 * @return the status date of this commerce account
+	 */
+	@Override
+	public Date getStatusDate();
+
+	/**
+	 * Sets the status date of this commerce account.
+	 *
+	 * @param statusDate the status date of this commerce account
+	 */
+	@Override
+	public void setStatusDate(Date statusDate);
+
+	/**
+	 * Returns <code>true</code> if this commerce account is approved.
+	 *
+	 * @return <code>true</code> if this commerce account is approved; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isApproved();
+
+	/**
+	 * Returns <code>true</code> if this commerce account is denied.
+	 *
+	 * @return <code>true</code> if this commerce account is denied; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDenied();
+
+	/**
+	 * Returns <code>true</code> if this commerce account is a draft.
+	 *
+	 * @return <code>true</code> if this commerce account is a draft; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDraft();
+
+	/**
+	 * Returns <code>true</code> if this commerce account is expired.
+	 *
+	 * @return <code>true</code> if this commerce account is expired; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isExpired();
+
+	/**
+	 * Returns <code>true</code> if this commerce account is inactive.
+	 *
+	 * @return <code>true</code> if this commerce account is inactive; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInactive();
+
+	/**
+	 * Returns <code>true</code> if this commerce account is incomplete.
+	 *
+	 * @return <code>true</code> if this commerce account is incomplete; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isIncomplete();
+
+	/**
+	 * Returns <code>true</code> if this commerce account is pending.
+	 *
+	 * @return <code>true</code> if this commerce account is pending; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isPending();
+
+	/**
+	 * Returns <code>true</code> if this commerce account is scheduled.
+	 *
+	 * @return <code>true</code> if this commerce account is scheduled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isScheduled();
 
 	@Override
 	public boolean isNew();

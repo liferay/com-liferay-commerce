@@ -54,6 +54,24 @@ public class CommerceAccountUserRelLocalServiceUtil {
 		return getService().addCommerceAccountUserRel(commerceAccountUserRel);
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountUserRel addCommerceAccountUserRel(
+		long commerceAccountId, long commerceAccountUserId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceAccountUserRel(commerceAccountId,
+			commerceAccountUserId, serviceContext);
+	}
+
+	public static void addCommerceAccountUserRels(long commerceAccountId,
+		String[] emailAddresses, long[] roleIds,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.addCommerceAccountUserRels(commerceAccountId, emailAddresses,
+			roleIds, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce account user rel with the primary key. Does not add the commerce account user rel to the database.
 	*
@@ -89,6 +107,23 @@ public class CommerceAccountUserRelLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .deleteCommerceAccountUserRel(commerceAccountUserRelPK);
+	}
+
+	public static void deleteCommerceAccountUserRels(long commerceAccountId,
+		long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().deleteCommerceAccountUserRels(commerceAccountId, userIds);
+	}
+
+	public static void deleteCommerceAccountUserRelsByCommerceAccountId(
+		long commerceAccountId) {
+		getService()
+			.deleteCommerceAccountUserRelsByCommerceAccountId(commerceAccountId);
+	}
+
+	public static void deleteCommerceAccountUserRelsByCommerceAccountUserId(
+		long userId) {
+		getService().deleteCommerceAccountUserRelsByCommerceAccountUserId(userId);
 	}
 
 	/**
@@ -214,6 +249,17 @@ public class CommerceAccountUserRelLocalServiceUtil {
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
 		int start, int end) {
 		return getService().getCommerceAccountUserRels(start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId) {
+		return getService().getCommerceAccountUserRels(commerceAccountId);
+	}
+
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRelsByCommerceAccountUserId(
+		long commerceAccountUserId) {
+		return getService()
+				   .getCommerceAccountUserRelsByCommerceAccountUserId(commerceAccountUserId);
 	}
 
 	/**

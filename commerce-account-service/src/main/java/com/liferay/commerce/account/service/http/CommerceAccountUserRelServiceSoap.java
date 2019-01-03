@@ -16,9 +16,16 @@ package com.liferay.commerce.account.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.account.service.CommerceAccountUserRelServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.commerce.account.service.CommerceAccountUserRelServiceUtil} service utility. The
+ * {@link CommerceAccountUserRelServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +60,84 @@ import aQute.bnd.annotation.ProviderType;
  * @author Marco Leo
  * @see CommerceAccountUserRelServiceHttp
  * @see com.liferay.commerce.account.model.CommerceAccountUserRelSoap
- * @see com.liferay.commerce.account.service.CommerceAccountUserRelServiceUtil
+ * @see CommerceAccountUserRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceAccountUserRelServiceSoap {
+	public static com.liferay.commerce.account.model.CommerceAccountUserRelSoap addCommerceAccountUserRel(
+		long commerceAccountId, long userId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.account.model.CommerceAccountUserRel returnValue =
+				CommerceAccountUserRelServiceUtil.addCommerceAccountUserRel(commerceAccountId,
+					userId, serviceContext);
+
+			return com.liferay.commerce.account.model.CommerceAccountUserRelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void addCommerceAccountUserRels(long commerceAccountId,
+		String[] emailAddresses, long[] roleIds,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			CommerceAccountUserRelServiceUtil.addCommerceAccountUserRels(commerceAccountId,
+				emailAddresses, roleIds, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteCommerceAccountUserRel(long commerceAccountId,
+		long userId) throws RemoteException {
+		try {
+			CommerceAccountUserRelServiceUtil.deleteCommerceAccountUserRel(commerceAccountId,
+				userId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteCommerceAccountUserRels(long commerceAccountId,
+		long[] userIds) throws RemoteException {
+		try {
+			CommerceAccountUserRelServiceUtil.deleteCommerceAccountUserRels(commerceAccountId,
+				userIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountUserRelSoap[] getCommerceAccountUserRels(
+		long commerceAccountId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> returnValue =
+				CommerceAccountUserRelServiceUtil.getCommerceAccountUserRels(commerceAccountId);
+
+			return com.liferay.commerce.account.model.CommerceAccountUserRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CommerceAccountUserRelServiceSoap.class);
 }

@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
+import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
@@ -32,6 +33,7 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -40,6 +42,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import java.io.Serializable;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Provides the local service interface for CommerceAccount. Methods of this
@@ -74,8 +77,8 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	public CommerceAccount addCommerceAccount(CommerceAccount commerceAccount);
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CommerceAccount addCommerceAccount(long userId,
-		long parentCommerceAccountId, String name, String taxId,
+	public CommerceAccount addCommerceAccount(String name,
+		long parentCommerceAccountId, String email, String taxId,
 		boolean active, String externalReferenceCode,
 		ServiceContext serviceContext) throws PortalException;
 
@@ -93,10 +96,12 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	*
 	* @param commerceAccount the commerce account
 	* @return the commerce account that was removed
+	* @throws PortalException
 	*/
 	@Indexable(type = IndexableType.DELETE)
+	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceAccount deleteCommerceAccount(
-		CommerceAccount commerceAccount);
+		CommerceAccount commerceAccount) throws PortalException;
 
 	/**
 	* Deletes the commerce account with the primary key from the database. Also notifies the appropriate model listeners.
@@ -108,6 +113,8 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.DELETE)
 	public CommerceAccount deleteCommerceAccount(long commerceAccountId)
 		throws PortalException;
+
+	public void deleteLogo(long commerceAccountId) throws PortalException;
 
 	/**
 	* @throws PortalException
@@ -184,6 +191,9 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAccount fetchCommerceAccount(long commerceAccountId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccount fetchCommerceAccount(long companyId, String name);
+
 	/**
 	* Returns the commerce account with the matching external reference code and company.
 	*
@@ -247,6 +257,10 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccount> getUserCommerceAccounts(long userId,
+		Long parentCommerceAccountId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
 		long companyId, long parentCommerceAccountId, String keywords,
 		Boolean active, int start, int end, Sort sort)
@@ -264,11 +278,18 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount updateCommerceAccount(long commerceAccountId,
-		String name, String taxId, boolean active, ServiceContext serviceContext)
+		String name, boolean logo, byte[] logoBytes, String email,
+		String taxId, boolean active, ServiceContext serviceContext)
 		throws PortalException;
 
-	public CommerceAccount upsertCommerceAccount(long userId,
-		long parentCommerceAccountId, String name, String taxId,
-		boolean active, String externalReferenceCode,
-		ServiceContext serviceContext) throws PortalException;
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceAccount updateStatus(long userId, long commerceAccountId,
+		int status, ServiceContext serviceContext,
+		Map<String, Serializable> workflowContext) throws PortalException;
+
+	public CommerceAccount upsertCommerceAccount(String name,
+		long parentCommerceAccountId, boolean logo, byte[] logoBytes,
+		String email, String taxId, boolean active,
+		String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 }

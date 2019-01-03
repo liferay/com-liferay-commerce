@@ -43,8 +43,17 @@ public class CommerceAccountSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
 		soapModel.setParentCommerceAccountId(model.getParentCommerceAccountId());
+		soapModel.setLogoId(model.getLogoId());
+		soapModel.setEmail(model.getEmail());
 		soapModel.setTaxId(model.getTaxId());
 		soapModel.setActive(model.isActive());
+		soapModel.setDisplayDate(model.getDisplayDate());
+		soapModel.setExpirationDate(model.getExpirationDate());
+		soapModel.setLastPublishDate(model.getLastPublishDate());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 
 		return soapModel;
 	}
@@ -171,6 +180,22 @@ public class CommerceAccountSoap implements Serializable {
 		_parentCommerceAccountId = parentCommerceAccountId;
 	}
 
+	public long getLogoId() {
+		return _logoId;
+	}
+
+	public void setLogoId(long logoId) {
+		_logoId = logoId;
+	}
+
+	public String getEmail() {
+		return _email;
+	}
+
+	public void setEmail(String email) {
+		_email = email;
+	}
+
 	public String getTaxId() {
 		return _taxId;
 	}
@@ -191,6 +216,62 @@ public class CommerceAccountSoap implements Serializable {
 		_active = active;
 	}
 
+	public Date getDisplayDate() {
+		return _displayDate;
+	}
+
+	public void setDisplayDate(Date displayDate) {
+		_displayDate = displayDate;
+	}
+
+	public Date getExpirationDate() {
+		return _expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		_expirationDate = expirationDate;
+	}
+
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
+	}
+
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	private String _externalReferenceCode;
 	private long _commerceAccountId;
 	private long _companyId;
@@ -200,6 +281,15 @@ public class CommerceAccountSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _name;
 	private long _parentCommerceAccountId;
+	private long _logoId;
+	private String _email;
 	private String _taxId;
 	private boolean _active;
+	private Date _displayDate;
+	private Date _expirationDate;
+	private Date _lastPublishDate;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 }

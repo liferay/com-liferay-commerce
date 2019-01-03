@@ -55,12 +55,12 @@ public class CommerceAccountLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccount addCommerceAccount(
-		long userId, long parentCommerceAccountId, String name, String taxId,
+		String name, long parentCommerceAccountId, String email, String taxId,
 		boolean active, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceAccount(userId, parentCommerceAccountId, name,
+				   .addCommerceAccount(name, parentCommerceAccountId, email,
 			taxId, active, externalReferenceCode, serviceContext);
 	}
 
@@ -80,9 +80,11 @@ public class CommerceAccountLocalServiceUtil {
 	*
 	* @param commerceAccount the commerce account
 	* @return the commerce account that was removed
+	* @throws PortalException
 	*/
 	public static com.liferay.commerce.account.model.CommerceAccount deleteCommerceAccount(
-		com.liferay.commerce.account.model.CommerceAccount commerceAccount) {
+		com.liferay.commerce.account.model.CommerceAccount commerceAccount)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteCommerceAccount(commerceAccount);
 	}
 
@@ -97,6 +99,11 @@ public class CommerceAccountLocalServiceUtil {
 		long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteCommerceAccount(commerceAccountId);
+	}
+
+	public static void deleteLogo(long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().deleteLogo(commerceAccountId);
 	}
 
 	/**
@@ -191,6 +198,11 @@ public class CommerceAccountLocalServiceUtil {
 		return getService().fetchCommerceAccount(commerceAccountId);
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccount fetchCommerceAccount(
+		long companyId, String name) {
+		return getService().fetchCommerceAccount(companyId, name);
+	}
+
 	/**
 	* Returns the commerce account with the matching external reference code and company.
 	*
@@ -266,6 +278,13 @@ public class CommerceAccountLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
+		long userId, Long parentCommerceAccountId, int start, int end) {
+		return getService()
+				   .getUserCommerceAccounts(userId, parentCommerceAccountId,
+			start, end);
+	}
+
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
 		long companyId, long parentCommerceAccountId, String keywords,
 		Boolean active, int start, int end,
@@ -288,22 +307,35 @@ public class CommerceAccountLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
-		long commerceAccountId, String name, String taxId, boolean active,
+		long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+		String email, String taxId, boolean active,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .updateCommerceAccount(commerceAccountId, name, taxId,
-			active, serviceContext);
+				   .updateCommerceAccount(commerceAccountId, name, logo,
+			logoBytes, email, taxId, active, serviceContext);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount updateStatus(
+		long userId, long commerceAccountId, int status,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext,
+		java.util.Map<String, java.io.Serializable> workflowContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateStatus(userId, commerceAccountId, status,
+			serviceContext, workflowContext);
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccount upsertCommerceAccount(
-		long userId, long parentCommerceAccountId, String name, String taxId,
-		boolean active, String externalReferenceCode,
+		String name, long parentCommerceAccountId, boolean logo,
+		byte[] logoBytes, String email, String taxId, boolean active,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .upsertCommerceAccount(userId, parentCommerceAccountId,
-			name, taxId, active, externalReferenceCode, serviceContext);
+				   .upsertCommerceAccount(name, parentCommerceAccountId, logo,
+			logoBytes, email, taxId, active, externalReferenceCode,
+			serviceContext);
 	}
 
 	public static CommerceAccountLocalService getService() {

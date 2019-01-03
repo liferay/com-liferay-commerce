@@ -17,8 +17,17 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="parentCommerceAccountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="logoId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="taxId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property column="active_" name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="displayDate" type="org.hibernate.type.TimestampType" />
+		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
+		<property name="lastPublishDate" type="org.hibernate.type.TimestampType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImpl" table="CommerceAccountOrganizationRel">
 		<composite-id class="com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK" name="primaryKey">
@@ -34,7 +43,7 @@
 	<class name="com.liferay.commerce.account.model.impl.CommerceAccountUserRelImpl" table="CommerceAccountUserRel">
 		<composite-id class="com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK" name="primaryKey">
 			<key-property name="commerceAccountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="commerceAccountUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		</composite-id>
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />

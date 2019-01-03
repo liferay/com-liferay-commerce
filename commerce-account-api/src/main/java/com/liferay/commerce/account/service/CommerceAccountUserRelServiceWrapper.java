@@ -34,6 +34,46 @@ public class CommerceAccountUserRelServiceWrapper
 		_commerceAccountUserRelService = commerceAccountUserRelService;
 	}
 
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountUserRel addCommerceAccountUserRel(
+		long commerceAccountId, long userId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountUserRelService.addCommerceAccountUserRel(commerceAccountId,
+			userId, serviceContext);
+	}
+
+	@Override
+	public void addCommerceAccountUserRels(long commerceAccountId,
+		String[] emailAddresses, long[] roleIds,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountUserRelService.addCommerceAccountUserRels(commerceAccountId,
+			emailAddresses, roleIds, serviceContext);
+	}
+
+	@Override
+	public void deleteCommerceAccountUserRel(long commerceAccountId, long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountUserRelService.deleteCommerceAccountUserRel(commerceAccountId,
+			userId);
+	}
+
+	@Override
+	public void deleteCommerceAccountUserRels(long commerceAccountId,
+		long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountUserRelService.deleteCommerceAccountUserRels(commerceAccountId,
+			userIds);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountUserRelService.getCommerceAccountUserRels(commerceAccountId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

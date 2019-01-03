@@ -35,13 +35,33 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccount addCommerceAccount(
-		long userId, long parentCommerceAccountId, String name, String taxId,
+		String name, long parentCommerceAccountId, String email, String taxId,
 		boolean active, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.addCommerceAccount(userId,
-			parentCommerceAccountId, name, taxId, active,
+		return _commerceAccountService.addCommerceAccount(name,
+			parentCommerceAccountId, email, taxId, active,
 			externalReferenceCode, serviceContext);
+	}
+
+	@Override
+	public void deleteCommerceAccount(long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountService.deleteCommerceAccount(commerceAccountId);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount fetchCommerceAccount(
+		long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountService.fetchCommerceAccount(commerceAccountId);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount getCommerceAccount(
+		long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountService.getCommerceAccount(commerceAccountId);
 	}
 
 	/**
@@ -55,32 +75,49 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 	}
 
 	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountService.getUserCommerceAccounts(start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
+		Long parentCommerceAccountId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountService.getUserCommerceAccounts(parentCommerceAccountId,
+			start, end);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
-		long companyId, long parentCommerceAccountId, String keywords,
+		long groupId, long parentCommerceAccountId, String keywords,
 		Boolean active, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.searchCommerceAccounts(companyId,
+		return _commerceAccountService.searchCommerceAccounts(groupId,
 			parentCommerceAccountId, keywords, active, start, end, sort);
 	}
 
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
-		long commerceAccountId, String name, String taxId, boolean active,
+		long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+		String email, String taxId, boolean active,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountService.updateCommerceAccount(commerceAccountId,
-			name, taxId, active, serviceContext);
+			name, logo, logoBytes, email, taxId, active, serviceContext);
 	}
 
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccount upsertCommerceAccount(
-		long userId, long parentCommerceAccountId, String name, String taxId,
-		boolean active, String externalReferenceCode,
+		String name, long parentCommerceAccountId, boolean logo,
+		byte[] logoBytes, String email, String taxId, boolean active,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.upsertCommerceAccount(userId,
-			parentCommerceAccountId, name, taxId, active,
+		return _commerceAccountService.upsertCommerceAccount(name,
+			parentCommerceAccountId, logo, logoBytes, email, taxId, active,
 			externalReferenceCode, serviceContext);
 	}
 

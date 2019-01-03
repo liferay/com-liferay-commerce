@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -72,6 +73,14 @@ public interface CommerceAccountUserRelLocalService extends BaseLocalService,
 	public CommerceAccountUserRel addCommerceAccountUserRel(
 		CommerceAccountUserRel commerceAccountUserRel);
 
+	public CommerceAccountUserRel addCommerceAccountUserRel(
+		long commerceAccountId, long commerceAccountUserId,
+		ServiceContext serviceContext) throws PortalException;
+
+	public void addCommerceAccountUserRels(long commerceAccountId,
+		String[] emailAddresses, long[] roleIds, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	* Creates a new commerce account user rel with the primary key. Does not add the commerce account user rel to the database.
 	*
@@ -103,6 +112,15 @@ public interface CommerceAccountUserRelLocalService extends BaseLocalService,
 	public CommerceAccountUserRel deleteCommerceAccountUserRel(
 		CommerceAccountUserRelPK commerceAccountUserRelPK)
 		throws PortalException;
+
+	public void deleteCommerceAccountUserRels(long commerceAccountId,
+		long[] userIds) throws PortalException;
+
+	public void deleteCommerceAccountUserRelsByCommerceAccountId(
+		long commerceAccountId);
+
+	public void deleteCommerceAccountUserRelsByCommerceAccountUserId(
+		long userId);
 
 	/**
 	* @throws PortalException
@@ -209,6 +227,14 @@ public interface CommerceAccountUserRelLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccountUserRel> getCommerceAccountUserRels(int start,
 		int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountUserRel> getCommerceAccountUserRelsByCommerceAccountUserId(
+		long commerceAccountUserId);
 
 	/**
 	* Returns the number of commerce account user rels.

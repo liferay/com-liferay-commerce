@@ -67,8 +67,17 @@ public class CommerceAccountWrapper implements CommerceAccount,
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
 		attributes.put("parentCommerceAccountId", getParentCommerceAccountId());
+		attributes.put("logoId", getLogoId());
+		attributes.put("email", getEmail());
 		attributes.put("taxId", getTaxId());
 		attributes.put("active", isActive());
+		attributes.put("displayDate", getDisplayDate());
+		attributes.put("expirationDate", getExpirationDate());
+		attributes.put("lastPublishDate", getLastPublishDate());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -131,6 +140,18 @@ public class CommerceAccountWrapper implements CommerceAccount,
 			setParentCommerceAccountId(parentCommerceAccountId);
 		}
 
+		Long logoId = (Long)attributes.get("logoId");
+
+		if (logoId != null) {
+			setLogoId(logoId);
+		}
+
+		String email = (String)attributes.get("email");
+
+		if (email != null) {
+			setEmail(email);
+		}
+
 		String taxId = (String)attributes.get("taxId");
 
 		if (taxId != null) {
@@ -141,6 +162,48 @@ public class CommerceAccountWrapper implements CommerceAccount,
 
 		if (active != null) {
 			setActive(active);
+		}
+
+		Date displayDate = (Date)attributes.get("displayDate");
+
+		if (displayDate != null) {
+			setDisplayDate(displayDate);
+		}
+
+		Date expirationDate = (Date)attributes.get("expirationDate");
+
+		if (expirationDate != null) {
+			setExpirationDate(expirationDate);
+		}
+
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -194,9 +257,39 @@ public class CommerceAccountWrapper implements CommerceAccount,
 		return _commerceAccount.getCreateDate();
 	}
 
+	/**
+	* Returns the display date of this commerce account.
+	*
+	* @return the display date of this commerce account
+	*/
+	@Override
+	public Date getDisplayDate() {
+		return _commerceAccount.getDisplayDate();
+	}
+
+	/**
+	* Returns the email of this commerce account.
+	*
+	* @return the email of this commerce account
+	*/
+	@Override
+	public String getEmail() {
+		return _commerceAccount.getEmail();
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceAccount.getExpandoBridge();
+	}
+
+	/**
+	* Returns the expiration date of this commerce account.
+	*
+	* @return the expiration date of this commerce account
+	*/
+	@Override
+	public Date getExpirationDate() {
+		return _commerceAccount.getExpirationDate();
 	}
 
 	/**
@@ -207,6 +300,26 @@ public class CommerceAccountWrapper implements CommerceAccount,
 	@Override
 	public String getExternalReferenceCode() {
 		return _commerceAccount.getExternalReferenceCode();
+	}
+
+	/**
+	* Returns the last publish date of this commerce account.
+	*
+	* @return the last publish date of this commerce account
+	*/
+	@Override
+	public Date getLastPublishDate() {
+		return _commerceAccount.getLastPublishDate();
+	}
+
+	/**
+	* Returns the logo ID of this commerce account.
+	*
+	* @return the logo ID of this commerce account
+	*/
+	@Override
+	public long getLogoId() {
+		return _commerceAccount.getLogoId();
 	}
 
 	/**
@@ -227,6 +340,12 @@ public class CommerceAccountWrapper implements CommerceAccount,
 	@Override
 	public String getName() {
 		return _commerceAccount.getName();
+	}
+
+	@Override
+	public CommerceAccount getParentCommerceAccount()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccount.getParentCommerceAccount();
 	}
 
 	/**
@@ -252,6 +371,56 @@ public class CommerceAccountWrapper implements CommerceAccount,
 	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _commerceAccount.getPrimaryKeyObj();
+	}
+
+	/**
+	* Returns the status of this commerce account.
+	*
+	* @return the status of this commerce account
+	*/
+	@Override
+	public int getStatus() {
+		return _commerceAccount.getStatus();
+	}
+
+	/**
+	* Returns the status by user ID of this commerce account.
+	*
+	* @return the status by user ID of this commerce account
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _commerceAccount.getStatusByUserId();
+	}
+
+	/**
+	* Returns the status by user name of this commerce account.
+	*
+	* @return the status by user name of this commerce account
+	*/
+	@Override
+	public String getStatusByUserName() {
+		return _commerceAccount.getStatusByUserName();
+	}
+
+	/**
+	* Returns the status by user uuid of this commerce account.
+	*
+	* @return the status by user uuid of this commerce account
+	*/
+	@Override
+	public String getStatusByUserUuid() {
+		return _commerceAccount.getStatusByUserUuid();
+	}
+
+	/**
+	* Returns the status date of this commerce account.
+	*
+	* @return the status date of this commerce account
+	*/
+	@Override
+	public Date getStatusDate() {
+		return _commerceAccount.getStatusDate();
 	}
 
 	/**
@@ -309,9 +478,39 @@ public class CommerceAccountWrapper implements CommerceAccount,
 		return _commerceAccount.isActive();
 	}
 
+	/**
+	* Returns <code>true</code> if this commerce account is approved.
+	*
+	* @return <code>true</code> if this commerce account is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _commerceAccount.isApproved();
+	}
+
 	@Override
 	public boolean isCachedModel() {
 		return _commerceAccount.isCachedModel();
+	}
+
+	/**
+	* Returns <code>true</code> if this commerce account is denied.
+	*
+	* @return <code>true</code> if this commerce account is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _commerceAccount.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this commerce account is a draft.
+	*
+	* @return <code>true</code> if this commerce account is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _commerceAccount.isDraft();
 	}
 
 	@Override
@@ -319,9 +518,64 @@ public class CommerceAccountWrapper implements CommerceAccount,
 		return _commerceAccount.isEscapedModel();
 	}
 
+	/**
+	* Returns <code>true</code> if this commerce account is expired.
+	*
+	* @return <code>true</code> if this commerce account is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _commerceAccount.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this commerce account is inactive.
+	*
+	* @return <code>true</code> if this commerce account is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _commerceAccount.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this commerce account is incomplete.
+	*
+	* @return <code>true</code> if this commerce account is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _commerceAccount.isIncomplete();
+	}
+
 	@Override
 	public boolean isNew() {
 		return _commerceAccount.isNew();
+	}
+
+	/**
+	* Returns <code>true</code> if this commerce account is pending.
+	*
+	* @return <code>true</code> if this commerce account is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _commerceAccount.isPending();
+	}
+
+	@Override
+	public boolean isRoot() {
+		return _commerceAccount.isRoot();
+	}
+
+	/**
+	* Returns <code>true</code> if this commerce account is scheduled.
+	*
+	* @return <code>true</code> if this commerce account is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _commerceAccount.isScheduled();
 	}
 
 	@Override
@@ -374,6 +628,26 @@ public class CommerceAccountWrapper implements CommerceAccount,
 		_commerceAccount.setCreateDate(createDate);
 	}
 
+	/**
+	* Sets the display date of this commerce account.
+	*
+	* @param displayDate the display date of this commerce account
+	*/
+	@Override
+	public void setDisplayDate(Date displayDate) {
+		_commerceAccount.setDisplayDate(displayDate);
+	}
+
+	/**
+	* Sets the email of this commerce account.
+	*
+	* @param email the email of this commerce account
+	*/
+	@Override
+	public void setEmail(String email) {
+		_commerceAccount.setEmail(email);
+	}
+
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
@@ -391,6 +665,16 @@ public class CommerceAccountWrapper implements CommerceAccount,
 	}
 
 	/**
+	* Sets the expiration date of this commerce account.
+	*
+	* @param expirationDate the expiration date of this commerce account
+	*/
+	@Override
+	public void setExpirationDate(Date expirationDate) {
+		_commerceAccount.setExpirationDate(expirationDate);
+	}
+
+	/**
 	* Sets the external reference code of this commerce account.
 	*
 	* @param externalReferenceCode the external reference code of this commerce account
@@ -398,6 +682,26 @@ public class CommerceAccountWrapper implements CommerceAccount,
 	@Override
 	public void setExternalReferenceCode(String externalReferenceCode) {
 		_commerceAccount.setExternalReferenceCode(externalReferenceCode);
+	}
+
+	/**
+	* Sets the last publish date of this commerce account.
+	*
+	* @param lastPublishDate the last publish date of this commerce account
+	*/
+	@Override
+	public void setLastPublishDate(Date lastPublishDate) {
+		_commerceAccount.setLastPublishDate(lastPublishDate);
+	}
+
+	/**
+	* Sets the logo ID of this commerce account.
+	*
+	* @param logoId the logo ID of this commerce account
+	*/
+	@Override
+	public void setLogoId(long logoId) {
+		_commerceAccount.setLogoId(logoId);
 	}
 
 	/**
@@ -448,6 +752,56 @@ public class CommerceAccountWrapper implements CommerceAccount,
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_commerceAccount.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the status of this commerce account.
+	*
+	* @param status the status of this commerce account
+	*/
+	@Override
+	public void setStatus(int status) {
+		_commerceAccount.setStatus(status);
+	}
+
+	/**
+	* Sets the status by user ID of this commerce account.
+	*
+	* @param statusByUserId the status by user ID of this commerce account
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_commerceAccount.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Sets the status by user name of this commerce account.
+	*
+	* @param statusByUserName the status by user name of this commerce account
+	*/
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_commerceAccount.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Sets the status by user uuid of this commerce account.
+	*
+	* @param statusByUserUuid the status by user uuid of this commerce account
+	*/
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_commerceAccount.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Sets the status date of this commerce account.
+	*
+	* @param statusDate the status date of this commerce account
+	*/
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_commerceAccount.setStatusDate(statusDate);
 	}
 
 	/**

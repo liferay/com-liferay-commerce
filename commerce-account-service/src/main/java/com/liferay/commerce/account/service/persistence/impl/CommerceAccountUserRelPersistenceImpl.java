@@ -90,514 +90,6 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_USERID = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUserId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID =
-		new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAccountUserRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUserId",
-			new String[] { Long.class.getName() },
-			CommerceAccountUserRelModelImpl.USERID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUserId",
-			new String[] { Long.class.getName() });
-
-	/**
-	 * Returns all the commerce account user rels where userId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @return the matching commerce account user rels
-	 */
-	@Override
-	public List<CommerceAccountUserRel> findByUserId(long userId) {
-		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the commerce account user rels where userId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param userId the user ID
-	 * @param start the lower bound of the range of commerce account user rels
-	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
-	 * @return the range of matching commerce account user rels
-	 */
-	@Override
-	public List<CommerceAccountUserRel> findByUserId(long userId, int start,
-		int end) {
-		return findByUserId(userId, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce account user rels where userId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param userId the user ID
-	 * @param start the lower bound of the range of commerce account user rels
-	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce account user rels
-	 */
-	@Override
-	public List<CommerceAccountUserRel> findByUserId(long userId, int start,
-		int end, OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		return findByUserId(userId, start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce account user rels where userId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param userId the user ID
-	 * @param start the lower bound of the range of commerce account user rels
-	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching commerce account user rels
-	 */
-	@Override
-	public List<CommerceAccountUserRel> findByUserId(long userId, int start,
-		int end, OrderByComparator<CommerceAccountUserRel> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID;
-			finderArgs = new Object[] { userId };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_USERID;
-			finderArgs = new Object[] { userId, start, end, orderByComparator };
-		}
-
-		List<CommerceAccountUserRel> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAccountUserRel>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAccountUserRel commerceAccountUserRel : list) {
-					if ((userId != commerceAccountUserRel.getUserId())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_COMMERCEACCOUNTUSERREL_WHERE);
-
-			query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(CommerceAccountUserRelModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				if (!pagination) {
-					list = (List<CommerceAccountUserRel>)QueryUtil.list(q,
-							getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceAccountUserRel>)QueryUtil.list(q,
-							getDialect(), start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first commerce account user rel in the ordered set where userId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce account user rel
-	 * @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
-	 */
-	@Override
-	public CommerceAccountUserRel findByUserId_First(long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
-		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchByUserId_First(userId,
-				orderByComparator);
-
-		if (commerceAccountUserRel != null) {
-			return commerceAccountUserRel;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("userId=");
-		msg.append(userId);
-
-		msg.append("}");
-
-		throw new NoSuchAccountUserRelException(msg.toString());
-	}
-
-	/**
-	 * Returns the first commerce account user rel in the ordered set where userId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
-	 */
-	@Override
-	public CommerceAccountUserRel fetchByUserId_First(long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		List<CommerceAccountUserRel> list = findByUserId(userId, 0, 1,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last commerce account user rel in the ordered set where userId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce account user rel
-	 * @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
-	 */
-	@Override
-	public CommerceAccountUserRel findByUserId_Last(long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
-		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = fetchByUserId_Last(userId,
-				orderByComparator);
-
-		if (commerceAccountUserRel != null) {
-			return commerceAccountUserRel;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("userId=");
-		msg.append(userId);
-
-		msg.append("}");
-
-		throw new NoSuchAccountUserRelException(msg.toString());
-	}
-
-	/**
-	 * Returns the last commerce account user rel in the ordered set where userId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
-	 */
-	@Override
-	public CommerceAccountUserRel fetchByUserId_Last(long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
-		int count = countByUserId(userId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<CommerceAccountUserRel> list = findByUserId(userId, count - 1,
-				count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the commerce account user rels before and after the current commerce account user rel in the ordered set where userId = &#63;.
-	 *
-	 * @param commerceAccountUserRelPK the primary key of the current commerce account user rel
-	 * @param userId the user ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce account user rel
-	 * @throws NoSuchAccountUserRelException if a commerce account user rel with the primary key could not be found
-	 */
-	@Override
-	public CommerceAccountUserRel[] findByUserId_PrevAndNext(
-		CommerceAccountUserRelPK commerceAccountUserRelPK, long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator)
-		throws NoSuchAccountUserRelException {
-		CommerceAccountUserRel commerceAccountUserRel = findByPrimaryKey(commerceAccountUserRelPK);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CommerceAccountUserRel[] array = new CommerceAccountUserRelImpl[3];
-
-			array[0] = getByUserId_PrevAndNext(session, commerceAccountUserRel,
-					userId, orderByComparator, true);
-
-			array[1] = commerceAccountUserRel;
-
-			array[2] = getByUserId_PrevAndNext(session, commerceAccountUserRel,
-					userId, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CommerceAccountUserRel getByUserId_PrevAndNext(Session session,
-		CommerceAccountUserRel commerceAccountUserRel, long userId,
-		OrderByComparator<CommerceAccountUserRel> orderByComparator,
-		boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_COMMERCEACCOUNTUSERREL_WHERE);
-
-		query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(CommerceAccountUserRelModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(userId);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceAccountUserRel);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<CommerceAccountUserRel> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the commerce account user rels where userId = &#63; from the database.
-	 *
-	 * @param userId the user ID
-	 */
-	@Override
-	public void removeByUserId(long userId) {
-		for (CommerceAccountUserRel commerceAccountUserRel : findByUserId(
-				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(commerceAccountUserRel);
-		}
-	}
-
-	/**
-	 * Returns the number of commerce account user rels where userId = &#63;.
-	 *
-	 * @param userId the user ID
-	 * @return the number of matching commerce account user rels
-	 */
-	@Override
-	public int countByUserId(long userId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
-
-		Object[] finderArgs = new Object[] { userId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_COMMERCEACCOUNTUSERREL_WHERE);
-
-			query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_USERID_USERID_2 = "commerceAccountUserRel.id.userId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTID =
 		new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
@@ -615,7 +107,8 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 			CommerceAccountUserRelImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"findByCommerceAccountId", new String[] { Long.class.getName() },
-			CommerceAccountUserRelModelImpl.COMMERCEACCOUNTID_COLUMN_BITMASK);
+			CommerceAccountUserRelModelImpl.COMMERCEACCOUNTID_COLUMN_BITMASK |
+			CommerceAccountUserRelModelImpl.USERID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
@@ -1125,6 +618,539 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 
 	private static final String _FINDER_COLUMN_COMMERCEACCOUNTID_COMMERCEACCOUNTID_2 =
 		"commerceAccountUserRel.id.commerceAccountId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID =
+		new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountUserRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCommerceAccountUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID =
+		new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountUserRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommerceAccountUserId",
+			new String[] { Long.class.getName() },
+			CommerceAccountUserRelModelImpl.COMMERCEACCOUNTUSERID_COLUMN_BITMASK |
+			CommerceAccountUserRelModelImpl.USERID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEACCOUNTUSERID = new FinderPath(CommerceAccountUserRelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountUserRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceAccountUserId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the commerce account user rels where commerceAccountUserId = &#63;.
+	 *
+	 * @param commerceAccountUserId the commerce account user ID
+	 * @return the matching commerce account user rels
+	 */
+	@Override
+	public List<CommerceAccountUserRel> findByCommerceAccountUserId(
+		long commerceAccountUserId) {
+		return findByCommerceAccountUserId(commerceAccountUserId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce account user rels where commerceAccountUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountUserId the commerce account user ID
+	 * @param start the lower bound of the range of commerce account user rels
+	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
+	 * @return the range of matching commerce account user rels
+	 */
+	@Override
+	public List<CommerceAccountUserRel> findByCommerceAccountUserId(
+		long commerceAccountUserId, int start, int end) {
+		return findByCommerceAccountUserId(commerceAccountUserId, start, end,
+			null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce account user rels where commerceAccountUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountUserId the commerce account user ID
+	 * @param start the lower bound of the range of commerce account user rels
+	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce account user rels
+	 */
+	@Override
+	public List<CommerceAccountUserRel> findByCommerceAccountUserId(
+		long commerceAccountUserId, int start, int end,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
+		return findByCommerceAccountUserId(commerceAccountUserId, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce account user rels where commerceAccountUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountUserRelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountUserId the commerce account user ID
+	 * @param start the lower bound of the range of commerce account user rels
+	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce account user rels
+	 */
+	@Override
+	public List<CommerceAccountUserRel> findByCommerceAccountUserId(
+		long commerceAccountUserId, int start, int end,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID;
+			finderArgs = new Object[] { commerceAccountUserId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID;
+			finderArgs = new Object[] {
+					commerceAccountUserId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<CommerceAccountUserRel> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CommerceAccountUserRel>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceAccountUserRel commerceAccountUserRel : list) {
+					if ((commerceAccountUserId != commerceAccountUserRel.getCommerceAccountUserId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEACCOUNTUSERREL_WHERE);
+
+			query.append(_FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CommerceAccountUserRelModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceAccountUserId);
+
+				if (!pagination) {
+					list = (List<CommerceAccountUserRel>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceAccountUserRel>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
+	 *
+	 * @param commerceAccountUserId the commerce account user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce account user rel
+	 * @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
+	 */
+	@Override
+	public CommerceAccountUserRel findByCommerceAccountUserId_First(
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+		throws NoSuchAccountUserRelException {
+		CommerceAccountUserRel commerceAccountUserRel = fetchByCommerceAccountUserId_First(commerceAccountUserId,
+				orderByComparator);
+
+		if (commerceAccountUserRel != null) {
+			return commerceAccountUserRel;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceAccountUserId=");
+		msg.append(commerceAccountUserId);
+
+		msg.append("}");
+
+		throw new NoSuchAccountUserRelException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
+	 *
+	 * @param commerceAccountUserId the commerce account user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
+	 */
+	@Override
+	public CommerceAccountUserRel fetchByCommerceAccountUserId_First(
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
+		List<CommerceAccountUserRel> list = findByCommerceAccountUserId(commerceAccountUserId,
+				0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
+	 *
+	 * @param commerceAccountUserId the commerce account user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce account user rel
+	 * @throws NoSuchAccountUserRelException if a matching commerce account user rel could not be found
+	 */
+	@Override
+	public CommerceAccountUserRel findByCommerceAccountUserId_Last(
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+		throws NoSuchAccountUserRelException {
+		CommerceAccountUserRel commerceAccountUserRel = fetchByCommerceAccountUserId_Last(commerceAccountUserId,
+				orderByComparator);
+
+		if (commerceAccountUserRel != null) {
+			return commerceAccountUserRel;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceAccountUserId=");
+		msg.append(commerceAccountUserId);
+
+		msg.append("}");
+
+		throw new NoSuchAccountUserRelException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
+	 *
+	 * @param commerceAccountUserId the commerce account user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce account user rel, or <code>null</code> if a matching commerce account user rel could not be found
+	 */
+	@Override
+	public CommerceAccountUserRel fetchByCommerceAccountUserId_Last(
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator) {
+		int count = countByCommerceAccountUserId(commerceAccountUserId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceAccountUserRel> list = findByCommerceAccountUserId(commerceAccountUserId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce account user rels before and after the current commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
+	 *
+	 * @param commerceAccountUserRelPK the primary key of the current commerce account user rel
+	 * @param commerceAccountUserId the commerce account user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce account user rel
+	 * @throws NoSuchAccountUserRelException if a commerce account user rel with the primary key could not be found
+	 */
+	@Override
+	public CommerceAccountUserRel[] findByCommerceAccountUserId_PrevAndNext(
+		CommerceAccountUserRelPK commerceAccountUserRelPK,
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator)
+		throws NoSuchAccountUserRelException {
+		CommerceAccountUserRel commerceAccountUserRel = findByPrimaryKey(commerceAccountUserRelPK);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceAccountUserRel[] array = new CommerceAccountUserRelImpl[3];
+
+			array[0] = getByCommerceAccountUserId_PrevAndNext(session,
+					commerceAccountUserRel, commerceAccountUserId,
+					orderByComparator, true);
+
+			array[1] = commerceAccountUserRel;
+
+			array[2] = getByCommerceAccountUserId_PrevAndNext(session,
+					commerceAccountUserRel, commerceAccountUserId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceAccountUserRel getByCommerceAccountUserId_PrevAndNext(
+		Session session, CommerceAccountUserRel commerceAccountUserRel,
+		long commerceAccountUserId,
+		OrderByComparator<CommerceAccountUserRel> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEACCOUNTUSERREL_WHERE);
+
+		query.append(_FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceAccountUserRelModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(commerceAccountUserId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceAccountUserRel);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceAccountUserRel> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce account user rels where commerceAccountUserId = &#63; from the database.
+	 *
+	 * @param commerceAccountUserId the commerce account user ID
+	 */
+	@Override
+	public void removeByCommerceAccountUserId(long commerceAccountUserId) {
+		for (CommerceAccountUserRel commerceAccountUserRel : findByCommerceAccountUserId(
+				commerceAccountUserId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				null)) {
+			remove(commerceAccountUserRel);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce account user rels where commerceAccountUserId = &#63;.
+	 *
+	 * @param commerceAccountUserId the commerce account user ID
+	 * @return the number of matching commerce account user rels
+	 */
+	@Override
+	public int countByCommerceAccountUserId(long commerceAccountUserId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEACCOUNTUSERID;
+
+		Object[] finderArgs = new Object[] { commerceAccountUserId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMMERCEACCOUNTUSERREL_WHERE);
+
+			query.append(_FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceAccountUserId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_COMMERCEACCOUNTUSERID_COMMERCEACCOUNTUSERID_2 =
+		"commerceAccountUserRel.id.commerceAccountUserId = ?";
 
 	public CommerceAccountUserRelPersistenceImpl() {
 		setModelClass(CommerceAccountUserRel.class);
@@ -1390,14 +1416,6 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 		else
 		 if (isNew) {
 			Object[] args = new Object[] {
-					commerceAccountUserRelModelImpl.getUserId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
-				args);
-
-			args = new Object[] {
 					commerceAccountUserRelModelImpl.getCommerceAccountId()
 				};
 
@@ -1406,29 +1424,21 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTID,
 				args);
 
+			args = new Object[] {
+					commerceAccountUserRelModelImpl.getCommerceAccountUserId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTUSERID,
+				args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID,
+				args);
+
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
 		}
 
 		else {
-			if ((commerceAccountUserRelModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceAccountUserRelModelImpl.getOriginalUserId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
-					args);
-
-				args = new Object[] { commerceAccountUserRelModelImpl.getUserId() };
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
-					args);
-			}
-
 			if ((commerceAccountUserRelModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
@@ -1447,6 +1457,27 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTID,
 					args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTID,
+					args);
+			}
+
+			if ((commerceAccountUserRelModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						commerceAccountUserRelModelImpl.getOriginalCommerceAccountUserId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTUSERID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID,
+					args);
+
+				args = new Object[] {
+						commerceAccountUserRelModelImpl.getCommerceAccountUserId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTUSERID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTUSERID,
 					args);
 			}
 		}
@@ -1808,6 +1839,6 @@ public class CommerceAccountUserRelPersistenceImpl extends BasePersistenceImpl<C
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceAccountUserRel exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(CommerceAccountUserRelPersistenceImpl.class);
 	private static final Set<String> _compoundPKColumnNames = SetUtil.fromArray(new String[] {
-				"commerceAccountId", "userId"
+				"commerceAccountId", "commerceAccountUserId"
 			});
 }

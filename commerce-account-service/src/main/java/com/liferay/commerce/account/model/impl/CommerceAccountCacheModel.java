@@ -65,7 +65,7 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -85,10 +85,28 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 		sb.append(name);
 		sb.append(", parentCommerceAccountId=");
 		sb.append(parentCommerceAccountId);
+		sb.append(", logoId=");
+		sb.append(logoId);
+		sb.append(", email=");
+		sb.append(email);
 		sb.append(", taxId=");
 		sb.append(taxId);
 		sb.append(", active=");
 		sb.append(active);
+		sb.append(", displayDate=");
+		sb.append(displayDate);
+		sb.append(", expirationDate=");
+		sb.append(expirationDate);
+		sb.append(", lastPublishDate=");
+		sb.append(lastPublishDate);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -138,6 +156,14 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 		}
 
 		commerceAccountImpl.setParentCommerceAccountId(parentCommerceAccountId);
+		commerceAccountImpl.setLogoId(logoId);
+
+		if (email == null) {
+			commerceAccountImpl.setEmail("");
+		}
+		else {
+			commerceAccountImpl.setEmail(email);
+		}
 
 		if (taxId == null) {
 			commerceAccountImpl.setTaxId("");
@@ -147,6 +173,44 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 		}
 
 		commerceAccountImpl.setActive(active);
+
+		if (displayDate == Long.MIN_VALUE) {
+			commerceAccountImpl.setDisplayDate(null);
+		}
+		else {
+			commerceAccountImpl.setDisplayDate(new Date(displayDate));
+		}
+
+		if (expirationDate == Long.MIN_VALUE) {
+			commerceAccountImpl.setExpirationDate(null);
+		}
+		else {
+			commerceAccountImpl.setExpirationDate(new Date(expirationDate));
+		}
+
+		if (lastPublishDate == Long.MIN_VALUE) {
+			commerceAccountImpl.setLastPublishDate(null);
+		}
+		else {
+			commerceAccountImpl.setLastPublishDate(new Date(lastPublishDate));
+		}
+
+		commerceAccountImpl.setStatus(status);
+		commerceAccountImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			commerceAccountImpl.setStatusByUserName("");
+		}
+		else {
+			commerceAccountImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			commerceAccountImpl.setStatusDate(null);
+		}
+		else {
+			commerceAccountImpl.setStatusDate(new Date(statusDate));
+		}
 
 		commerceAccountImpl.resetOriginalValues();
 
@@ -168,9 +232,21 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 		name = objectInput.readUTF();
 
 		parentCommerceAccountId = objectInput.readLong();
+
+		logoId = objectInput.readLong();
+		email = objectInput.readUTF();
 		taxId = objectInput.readUTF();
 
 		active = objectInput.readBoolean();
+		displayDate = objectInput.readLong();
+		expirationDate = objectInput.readLong();
+		lastPublishDate = objectInput.readLong();
+
+		status = objectInput.readInt();
+
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 	}
 
 	@Override
@@ -208,6 +284,15 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 
 		objectOutput.writeLong(parentCommerceAccountId);
 
+		objectOutput.writeLong(logoId);
+
+		if (email == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(email);
+		}
+
 		if (taxId == null) {
 			objectOutput.writeUTF("");
 		}
@@ -216,6 +301,22 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 		}
 
 		objectOutput.writeBoolean(active);
+		objectOutput.writeLong(displayDate);
+		objectOutput.writeLong(expirationDate);
+		objectOutput.writeLong(lastPublishDate);
+
+		objectOutput.writeInt(status);
+
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 	}
 
 	public String externalReferenceCode;
@@ -227,6 +328,15 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 	public long modifiedDate;
 	public String name;
 	public long parentCommerceAccountId;
+	public long logoId;
+	public String email;
 	public String taxId;
 	public boolean active;
+	public long displayDate;
+	public long expirationDate;
+	public long lastPublishDate;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 }

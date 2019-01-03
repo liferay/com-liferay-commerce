@@ -140,9 +140,27 @@ public class CommerceAccountPersistenceTest {
 
 		newCommerceAccount.setParentCommerceAccountId(RandomTestUtil.nextLong());
 
+		newCommerceAccount.setLogoId(RandomTestUtil.nextLong());
+
+		newCommerceAccount.setEmail(RandomTestUtil.randomString());
+
 		newCommerceAccount.setTaxId(RandomTestUtil.randomString());
 
 		newCommerceAccount.setActive(RandomTestUtil.randomBoolean());
+
+		newCommerceAccount.setDisplayDate(RandomTestUtil.nextDate());
+
+		newCommerceAccount.setExpirationDate(RandomTestUtil.nextDate());
+
+		newCommerceAccount.setLastPublishDate(RandomTestUtil.nextDate());
+
+		newCommerceAccount.setStatus(RandomTestUtil.nextInt());
+
+		newCommerceAccount.setStatusByUserId(RandomTestUtil.nextLong());
+
+		newCommerceAccount.setStatusByUserName(RandomTestUtil.randomString());
+
+		newCommerceAccount.setStatusDate(RandomTestUtil.nextDate());
 
 		_commerceAccounts.add(_persistence.update(newCommerceAccount));
 
@@ -168,10 +186,32 @@ public class CommerceAccountPersistenceTest {
 			newCommerceAccount.getName());
 		Assert.assertEquals(existingCommerceAccount.getParentCommerceAccountId(),
 			newCommerceAccount.getParentCommerceAccountId());
+		Assert.assertEquals(existingCommerceAccount.getLogoId(),
+			newCommerceAccount.getLogoId());
+		Assert.assertEquals(existingCommerceAccount.getEmail(),
+			newCommerceAccount.getEmail());
 		Assert.assertEquals(existingCommerceAccount.getTaxId(),
 			newCommerceAccount.getTaxId());
 		Assert.assertEquals(existingCommerceAccount.isActive(),
 			newCommerceAccount.isActive());
+		Assert.assertEquals(Time.getShortTimestamp(
+				existingCommerceAccount.getDisplayDate()),
+			Time.getShortTimestamp(newCommerceAccount.getDisplayDate()));
+		Assert.assertEquals(Time.getShortTimestamp(
+				existingCommerceAccount.getExpirationDate()),
+			Time.getShortTimestamp(newCommerceAccount.getExpirationDate()));
+		Assert.assertEquals(Time.getShortTimestamp(
+				existingCommerceAccount.getLastPublishDate()),
+			Time.getShortTimestamp(newCommerceAccount.getLastPublishDate()));
+		Assert.assertEquals(existingCommerceAccount.getStatus(),
+			newCommerceAccount.getStatus());
+		Assert.assertEquals(existingCommerceAccount.getStatusByUserId(),
+			newCommerceAccount.getStatusByUserId());
+		Assert.assertEquals(existingCommerceAccount.getStatusByUserName(),
+			newCommerceAccount.getStatusByUserName());
+		Assert.assertEquals(Time.getShortTimestamp(
+				existingCommerceAccount.getStatusDate()),
+			Time.getShortTimestamp(newCommerceAccount.getStatusDate()));
 	}
 
 	@Test
@@ -219,7 +259,10 @@ public class CommerceAccountPersistenceTest {
 			"externalReferenceCode", true, "commerceAccountId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "name", true,
-			"parentCommerceAccountId", true, "taxId", true, "active", true);
+			"parentCommerceAccountId", true, "logoId", true, "email", true,
+			"taxId", true, "active", true, "displayDate", true,
+			"expirationDate", true, "lastPublishDate", true, "status", true,
+			"statusByUserId", true, "statusByUserName", true, "statusDate", true);
 	}
 
 	@Test
@@ -461,9 +504,27 @@ public class CommerceAccountPersistenceTest {
 
 		commerceAccount.setParentCommerceAccountId(RandomTestUtil.nextLong());
 
+		commerceAccount.setLogoId(RandomTestUtil.nextLong());
+
+		commerceAccount.setEmail(RandomTestUtil.randomString());
+
 		commerceAccount.setTaxId(RandomTestUtil.randomString());
 
 		commerceAccount.setActive(RandomTestUtil.randomBoolean());
+
+		commerceAccount.setDisplayDate(RandomTestUtil.nextDate());
+
+		commerceAccount.setExpirationDate(RandomTestUtil.nextDate());
+
+		commerceAccount.setLastPublishDate(RandomTestUtil.nextDate());
+
+		commerceAccount.setStatus(RandomTestUtil.nextInt());
+
+		commerceAccount.setStatusByUserId(RandomTestUtil.nextLong());
+
+		commerceAccount.setStatusByUserName(RandomTestUtil.randomString());
+
+		commerceAccount.setStatusDate(RandomTestUtil.nextDate());
 
 		_commerceAccounts.add(_persistence.update(commerceAccount));
 
