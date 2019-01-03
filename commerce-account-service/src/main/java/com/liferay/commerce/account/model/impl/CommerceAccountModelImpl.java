@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
 
@@ -79,8 +80,17 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
 			{ "parentCommerceAccountId", Types.BIGINT },
+			{ "logoId", Types.BIGINT },
+			{ "email", Types.VARCHAR },
 			{ "taxId", Types.VARCHAR },
-			{ "active_", Types.BOOLEAN }
+			{ "active_", Types.BOOLEAN },
+			{ "displayDate", Types.TIMESTAMP },
+			{ "expirationDate", Types.TIMESTAMP },
+			{ "lastPublishDate", Types.TIMESTAMP },
+			{ "status", Types.INTEGER },
+			{ "statusByUserId", Types.BIGINT },
+			{ "statusByUserName", Types.VARCHAR },
+			{ "statusDate", Types.TIMESTAMP }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -94,11 +104,20 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("parentCommerceAccountId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("logoId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("email", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("taxId", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("active_", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("displayDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("expirationDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("statusByUserName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceAccount (externalReferenceCode VARCHAR(75) null,commerceAccountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,parentCommerceAccountId LONG,taxId VARCHAR(75) null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceAccount (externalReferenceCode VARCHAR(75) null,commerceAccountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,parentCommerceAccountId LONG,logoId LONG,email VARCHAR(75) null,taxId VARCHAR(75) null,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceAccount";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceAccount.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceAccount.name ASC";
@@ -140,8 +159,17 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
 		model.setParentCommerceAccountId(soapModel.getParentCommerceAccountId());
+		model.setLogoId(soapModel.getLogoId());
+		model.setEmail(soapModel.getEmail());
 		model.setTaxId(soapModel.getTaxId());
 		model.setActive(soapModel.isActive());
+		model.setDisplayDate(soapModel.getDisplayDate());
+		model.setExpirationDate(soapModel.getExpirationDate());
+		model.setLastPublishDate(soapModel.getLastPublishDate());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
 
 		return model;
 	}
@@ -216,8 +244,17 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
 		attributes.put("parentCommerceAccountId", getParentCommerceAccountId());
+		attributes.put("logoId", getLogoId());
+		attributes.put("email", getEmail());
 		attributes.put("taxId", getTaxId());
 		attributes.put("active", isActive());
+		attributes.put("displayDate", getDisplayDate());
+		attributes.put("expirationDate", getExpirationDate());
+		attributes.put("lastPublishDate", getLastPublishDate());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -283,6 +320,18 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 			setParentCommerceAccountId(parentCommerceAccountId);
 		}
 
+		Long logoId = (Long)attributes.get("logoId");
+
+		if (logoId != null) {
+			setLogoId(logoId);
+		}
+
+		String email = (String)attributes.get("email");
+
+		if (email != null) {
+			setEmail(email);
+		}
+
 		String taxId = (String)attributes.get("taxId");
 
 		if (taxId != null) {
@@ -293,6 +342,48 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 		if (active != null) {
 			setActive(active);
+		}
+
+		Date displayDate = (Date)attributes.get("displayDate");
+
+		if (displayDate != null) {
+			setDisplayDate(displayDate);
+		}
+
+		Date expirationDate = (Date)attributes.get("expirationDate");
+
+		if (expirationDate != null) {
+			setExpirationDate(expirationDate);
+		}
+
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -466,6 +557,33 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 	@JSON
 	@Override
+	public long getLogoId() {
+		return _logoId;
+	}
+
+	@Override
+	public void setLogoId(long logoId) {
+		_logoId = logoId;
+	}
+
+	@JSON
+	@Override
+	public String getEmail() {
+		if (_email == null) {
+			return "";
+		}
+		else {
+			return _email;
+		}
+	}
+
+	@Override
+	public void setEmail(String email) {
+		_email = email;
+	}
+
+	@JSON
+	@Override
 	public String getTaxId() {
 		if (_taxId == null) {
 			return "";
@@ -495,6 +613,184 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 	@Override
 	public void setActive(boolean active) {
 		_active = active;
+	}
+
+	@JSON
+	@Override
+	public Date getDisplayDate() {
+		return _displayDate;
+	}
+
+	@Override
+	public void setDisplayDate(Date displayDate) {
+		_displayDate = displayDate;
+	}
+
+	@JSON
+	@Override
+	public Date getExpirationDate() {
+		return _expirationDate;
+	}
+
+	@Override
+	public void setExpirationDate(Date expirationDate) {
+		_expirationDate = expirationDate;
+	}
+
+	@JSON
+	@Override
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	@Override
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
+	}
+
+	@JSON
+	@Override
+	public int getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	@JSON
+	@Override
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	@Override
+	public String getStatusByUserUuid() {
+		try {
+			User user = UserLocalServiceUtil.getUserById(getStatusByUserId());
+
+			return user.getUuid();
+		}
+		catch (PortalException pe) {
+			return "";
+		}
+	}
+
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+	}
+
+	@JSON
+	@Override
+	public String getStatusByUserName() {
+		if (_statusByUserName == null) {
+			return "";
+		}
+		else {
+			return _statusByUserName;
+		}
+	}
+
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	@JSON
+	@Override
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
+	@Override
+	public boolean isApproved() {
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDenied() {
+		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDraft() {
+		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isExpired() {
+		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isInactive() {
+		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isIncomplete() {
+		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isPending() {
+		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isScheduled() {
+		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public long getColumnBitmask() {
@@ -537,8 +833,17 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		commerceAccountImpl.setModifiedDate(getModifiedDate());
 		commerceAccountImpl.setName(getName());
 		commerceAccountImpl.setParentCommerceAccountId(getParentCommerceAccountId());
+		commerceAccountImpl.setLogoId(getLogoId());
+		commerceAccountImpl.setEmail(getEmail());
 		commerceAccountImpl.setTaxId(getTaxId());
 		commerceAccountImpl.setActive(isActive());
+		commerceAccountImpl.setDisplayDate(getDisplayDate());
+		commerceAccountImpl.setExpirationDate(getExpirationDate());
+		commerceAccountImpl.setLastPublishDate(getLastPublishDate());
+		commerceAccountImpl.setStatus(getStatus());
+		commerceAccountImpl.setStatusByUserId(getStatusByUserId());
+		commerceAccountImpl.setStatusByUserName(getStatusByUserName());
+		commerceAccountImpl.setStatusDate(getStatusDate());
 
 		commerceAccountImpl.resetOriginalValues();
 
@@ -667,6 +972,16 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 		commerceAccountCacheModel.parentCommerceAccountId = getParentCommerceAccountId();
 
+		commerceAccountCacheModel.logoId = getLogoId();
+
+		commerceAccountCacheModel.email = getEmail();
+
+		String email = commerceAccountCacheModel.email;
+
+		if ((email != null) && (email.length() == 0)) {
+			commerceAccountCacheModel.email = null;
+		}
+
 		commerceAccountCacheModel.taxId = getTaxId();
 
 		String taxId = commerceAccountCacheModel.taxId;
@@ -677,12 +992,60 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 		commerceAccountCacheModel.active = isActive();
 
+		Date displayDate = getDisplayDate();
+
+		if (displayDate != null) {
+			commerceAccountCacheModel.displayDate = displayDate.getTime();
+		}
+		else {
+			commerceAccountCacheModel.displayDate = Long.MIN_VALUE;
+		}
+
+		Date expirationDate = getExpirationDate();
+
+		if (expirationDate != null) {
+			commerceAccountCacheModel.expirationDate = expirationDate.getTime();
+		}
+		else {
+			commerceAccountCacheModel.expirationDate = Long.MIN_VALUE;
+		}
+
+		Date lastPublishDate = getLastPublishDate();
+
+		if (lastPublishDate != null) {
+			commerceAccountCacheModel.lastPublishDate = lastPublishDate.getTime();
+		}
+		else {
+			commerceAccountCacheModel.lastPublishDate = Long.MIN_VALUE;
+		}
+
+		commerceAccountCacheModel.status = getStatus();
+
+		commerceAccountCacheModel.statusByUserId = getStatusByUserId();
+
+		commerceAccountCacheModel.statusByUserName = getStatusByUserName();
+
+		String statusByUserName = commerceAccountCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
+			commerceAccountCacheModel.statusByUserName = null;
+		}
+
+		Date statusDate = getStatusDate();
+
+		if (statusDate != null) {
+			commerceAccountCacheModel.statusDate = statusDate.getTime();
+		}
+		else {
+			commerceAccountCacheModel.statusDate = Long.MIN_VALUE;
+		}
+
 		return commerceAccountCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(getExternalReferenceCode());
@@ -702,10 +1065,28 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		sb.append(getName());
 		sb.append(", parentCommerceAccountId=");
 		sb.append(getParentCommerceAccountId());
+		sb.append(", logoId=");
+		sb.append(getLogoId());
+		sb.append(", email=");
+		sb.append(getEmail());
 		sb.append(", taxId=");
 		sb.append(getTaxId());
 		sb.append(", active=");
 		sb.append(isActive());
+		sb.append(", displayDate=");
+		sb.append(getDisplayDate());
+		sb.append(", expirationDate=");
+		sb.append(getExpirationDate());
+		sb.append(", lastPublishDate=");
+		sb.append(getLastPublishDate());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -713,7 +1094,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.account.model.CommerceAccount");
@@ -756,12 +1137,48 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		sb.append(getParentCommerceAccountId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>logoId</column-name><column-value><![CDATA[");
+		sb.append(getLogoId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>email</column-name><column-value><![CDATA[");
+		sb.append(getEmail());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>taxId</column-name><column-value><![CDATA[");
 		sb.append(getTaxId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>active</column-name><column-value><![CDATA[");
 		sb.append(isActive());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>displayDate</column-name><column-value><![CDATA[");
+		sb.append(getDisplayDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
+		sb.append(getExpirationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastPublishDate</column-name><column-value><![CDATA[");
+		sb.append(getLastPublishDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -787,8 +1204,17 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 	private String _name;
 	private String _originalName;
 	private long _parentCommerceAccountId;
+	private long _logoId;
+	private String _email;
 	private String _taxId;
 	private boolean _active;
+	private Date _displayDate;
+	private Date _expirationDate;
+	private Date _lastPublishDate;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private long _columnBitmask;
 	private CommerceAccount _escapedModel;
 }

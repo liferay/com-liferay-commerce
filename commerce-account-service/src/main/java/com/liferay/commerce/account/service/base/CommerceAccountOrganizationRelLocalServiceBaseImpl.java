@@ -18,6 +18,7 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService;
+import com.liferay.commerce.account.service.persistence.CommerceAccountFinder;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPersistence;
 import com.liferay.commerce.account.service.persistence.CommerceAccountPersistence;
@@ -369,6 +370,25 @@ public abstract class CommerceAccountOrganizationRelLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the commerce account finder.
+	 *
+	 * @return the commerce account finder
+	 */
+	public CommerceAccountFinder getCommerceAccountFinder() {
+		return commerceAccountFinder;
+	}
+
+	/**
+	 * Sets the commerce account finder.
+	 *
+	 * @param commerceAccountFinder the commerce account finder
+	 */
+	public void setCommerceAccountFinder(
+		CommerceAccountFinder commerceAccountFinder) {
+		this.commerceAccountFinder = commerceAccountFinder;
+	}
+
+	/**
 	 * Returns the commerce account organization rel local service.
 	 *
 	 * @return the commerce account organization rel local service
@@ -613,6 +633,8 @@ public abstract class CommerceAccountOrganizationRelLocalServiceBaseImpl
 	protected com.liferay.commerce.account.service.CommerceAccountLocalService commerceAccountLocalService;
 	@BeanReference(type = CommerceAccountPersistence.class)
 	protected CommerceAccountPersistence commerceAccountPersistence;
+	@BeanReference(type = CommerceAccountFinder.class)
+	protected CommerceAccountFinder commerceAccountFinder;
 	@BeanReference(type = CommerceAccountOrganizationRelLocalService.class)
 	protected CommerceAccountOrganizationRelLocalService commerceAccountOrganizationRelLocalService;
 	@BeanReference(type = CommerceAccountOrganizationRelPersistence.class)

@@ -86,12 +86,48 @@ public class CommerceUserServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.portal.kernel.model.User> searchCommerceAccountUsers(
+		HttpPrincipal httpPrincipal, long companyId, long commerceAccountId,
+		String keywords, int status, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceUserServiceUtil.class,
+					"searchCommerceAccountUsers",
+					_searchCommerceAccountUsersParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, commerceAccountId, keywords, status, start, end,
+					sort);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.portal.kernel.model.User>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.kernel.model.User updateActive(
 		HttpPrincipal httpPrincipal, long userId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceUserServiceUtil.class,
-					"updateActive", _updateActiveParameterTypes1);
+					"updateActive", _updateActiveParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					active);
@@ -124,7 +160,7 @@ public class CommerceUserServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceUserServiceUtil.class,
-					"updatePassword", _updatePasswordParameterTypes2);
+					"updatePassword", _updatePasswordParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					password1, password2, passwordReset);
@@ -156,7 +192,7 @@ public class CommerceUserServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceUserServiceUtil.class,
-					"updatePasswordReset", _updatePasswordResetParameterTypes3);
+					"updatePasswordReset", _updatePasswordResetParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					passwordReset);
@@ -188,7 +224,7 @@ public class CommerceUserServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceUserServiceUtil.class,
-					"updateReminderQuery", _updateReminderQueryParameterTypes4);
+					"updateReminderQuery", _updateReminderQueryParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					question, answer);
@@ -225,7 +261,7 @@ public class CommerceUserServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceUserServiceUtil.class,
-					"updateUser", _updateUserParameterTypes5);
+					"updateUser", _updateUserParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					screenName, emailAddress, portrait, portraitBytes,
@@ -260,7 +296,7 @@ public class CommerceUserServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceUserServiceUtil.class,
-					"updateUserRoles", _updateUserRolesParameterTypes6);
+					"updateUserRoles", _updateUserRolesParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, roleIds);
@@ -287,25 +323,29 @@ public class CommerceUserServiceHttp {
 	private static final Class<?>[] _getUserParameterTypes0 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _updateActiveParameterTypes1 = new Class[] {
+	private static final Class<?>[] _searchCommerceAccountUsersParameterTypes1 = new Class[] {
+			long.class, long.class, String.class, int.class, int.class,
+			int.class, com.liferay.portal.kernel.search.Sort.class
+		};
+	private static final Class<?>[] _updateActiveParameterTypes2 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _updatePasswordParameterTypes2 = new Class[] {
+	private static final Class<?>[] _updatePasswordParameterTypes3 = new Class[] {
 			long.class, String.class, String.class, boolean.class
 		};
-	private static final Class<?>[] _updatePasswordResetParameterTypes3 = new Class[] {
+	private static final Class<?>[] _updatePasswordResetParameterTypes4 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _updateReminderQueryParameterTypes4 = new Class[] {
+	private static final Class<?>[] _updateReminderQueryParameterTypes5 = new Class[] {
 			long.class, String.class, String.class
 		};
-	private static final Class<?>[] _updateUserParameterTypes5 = new Class[] {
+	private static final Class<?>[] _updateUserParameterTypes6 = new Class[] {
 			long.class, String.class, String.class, boolean.class, byte[].class,
 			String.class, String.class, String.class, String.class, long.class,
 			long.class, boolean.class, int.class, int.class, int.class,
 			String.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateUserRolesParameterTypes6 = new Class[] {
+	private static final Class<?>[] _updateUserRolesParameterTypes7 = new Class[] {
 			long.class, long.class, long[].class
 		};
 }

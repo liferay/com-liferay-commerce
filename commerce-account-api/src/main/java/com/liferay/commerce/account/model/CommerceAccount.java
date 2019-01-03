@@ -71,4 +71,9 @@ public interface CommerceAccount extends CommerceAccountModel, PersistedModel {
 				return CommerceAccount.class;
 			}
 		};
+
+	public CommerceAccount getParentCommerceAccount()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public boolean isRoot();
 }

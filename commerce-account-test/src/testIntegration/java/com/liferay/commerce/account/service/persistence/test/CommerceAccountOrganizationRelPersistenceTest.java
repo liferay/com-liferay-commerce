@@ -158,17 +158,17 @@ public class CommerceAccountOrganizationRelPersistenceTest {
 	}
 
 	@Test
-	public void testCountByOrganizationId() throws Exception {
-		_persistence.countByOrganizationId(RandomTestUtil.nextLong());
-
-		_persistence.countByOrganizationId(0L);
-	}
-
-	@Test
 	public void testCountByCommerceAccountId() throws Exception {
 		_persistence.countByCommerceAccountId(RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceAccountId(0L);
+	}
+
+	@Test
+	public void testCountByOrganizationId() throws Exception {
+		_persistence.countByOrganizationId(RandomTestUtil.nextLong());
+
+		_persistence.countByOrganizationId(0L);
 	}
 
 	@Test

@@ -42,6 +42,28 @@ public class CommerceAccountOrganizationRelServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountOrganizationRelServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
+		long commerceAccountId, long organizationId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceAccountOrganizationRel(commerceAccountId,
+			organizationId, serviceContext);
+	}
+
+	public static void deleteCommerceAccountOrganizationRel(
+		long commerceAccountId, long organizationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.deleteCommerceAccountOrganizationRel(commerceAccountId,
+			organizationId);
+	}
+
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceAccountOrganizationRels(commerceAccountId);
+	}
 
 	/**
 	* Returns the OSGi service identifier.

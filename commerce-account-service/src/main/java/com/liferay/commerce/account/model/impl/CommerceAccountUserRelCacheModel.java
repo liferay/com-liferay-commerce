@@ -71,8 +71,8 @@ public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAcco
 
 		sb.append("{commerceAccountId=");
 		sb.append(commerceAccountId);
-		sb.append(", userId=");
-		sb.append(userId);
+		sb.append(", commerceAccountUserId=");
+		sb.append(commerceAccountUserId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -93,7 +93,7 @@ public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAcco
 		CommerceAccountUserRelImpl commerceAccountUserRelImpl = new CommerceAccountUserRelImpl();
 
 		commerceAccountUserRelImpl.setCommerceAccountId(commerceAccountId);
-		commerceAccountUserRelImpl.setUserId(userId);
+		commerceAccountUserRelImpl.setCommerceAccountUserId(commerceAccountUserId);
 		commerceAccountUserRelImpl.setCompanyId(companyId);
 		commerceAccountUserRelImpl.setUserId(userId);
 
@@ -127,7 +127,7 @@ public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAcco
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		commerceAccountId = objectInput.readLong();
 
-		userId = objectInput.readLong();
+		commerceAccountUserId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
 
@@ -137,7 +137,7 @@ public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAcco
 		modifiedDate = objectInput.readLong();
 
 		commerceAccountUserRelPK = new CommerceAccountUserRelPK(commerceAccountId,
-				userId);
+				commerceAccountUserId);
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAcco
 		throws IOException {
 		objectOutput.writeLong(commerceAccountId);
 
-		objectOutput.writeLong(userId);
+		objectOutput.writeLong(commerceAccountUserId);
 
 		objectOutput.writeLong(companyId);
 
@@ -163,7 +163,7 @@ public class CommerceAccountUserRelCacheModel implements CacheModel<CommerceAcco
 	}
 
 	public long commerceAccountId;
-	public long userId;
+	public long commerceAccountUserId;
 	public long companyId;
 	public long userId;
 	public String userName;

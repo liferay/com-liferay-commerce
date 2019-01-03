@@ -34,6 +34,30 @@ public class CommerceAccountOrganizationRelServiceWrapper
 		_commerceAccountOrganizationRelService = commerceAccountOrganizationRelService;
 	}
 
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountOrganizationRel addCommerceAccountOrganizationRel(
+		long commerceAccountId, long organizationId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountOrganizationRelService.addCommerceAccountOrganizationRel(commerceAccountId,
+			organizationId, serviceContext);
+	}
+
+	@Override
+	public void deleteCommerceAccountOrganizationRel(long commerceAccountId,
+		long organizationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountOrganizationRelService.deleteCommerceAccountOrganizationRel(commerceAccountId,
+			organizationId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountOrganizationRelService.getCommerceAccountOrganizationRels(commerceAccountId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

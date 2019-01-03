@@ -16,14 +16,20 @@ package com.liferay.commerce.account.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.account.model.CommerceAccountUserRel;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+
+import java.util.List;
 
 /**
  * Provides the remote service interface for CommerceAccountUserRel. Methods of this
@@ -49,6 +55,23 @@ public interface CommerceAccountUserRelService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceAccountUserRelServiceUtil} to access the commerce account user rel remote service. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountUserRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CommerceAccountUserRel addCommerceAccountUserRel(
+		long commerceAccountId, long userId, ServiceContext serviceContext)
+		throws PortalException;
+
+	public void addCommerceAccountUserRels(long commerceAccountId,
+		String[] emailAddresses, long[] roleIds, ServiceContext serviceContext)
+		throws PortalException;
+
+	public void deleteCommerceAccountUserRel(long commerceAccountId, long userId)
+		throws PortalException;
+
+	public void deleteCommerceAccountUserRels(long commerceAccountId,
+		long[] userIds) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
