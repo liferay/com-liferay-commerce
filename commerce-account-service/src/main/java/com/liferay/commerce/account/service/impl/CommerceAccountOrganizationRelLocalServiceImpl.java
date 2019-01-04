@@ -59,6 +59,34 @@ public class CommerceAccountOrganizationRelLocalServiceImpl
 	}
 
 	@Override
+	public void addCommerceAccountOrganizationRels(
+			long commerceAccountId, long[] organizationIds,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		for (long organizationId : organizationIds) {
+			commerceAccountOrganizationRelLocalService.
+				addCommerceAccountOrganizationRel(
+					commerceAccountId, organizationId, serviceContext);
+		}
+	}
+
+	@Override
+	public void deleteCommerceAccountOrganizationRels(
+			long commerceAccountId, long[] organizationIds)
+		throws PortalException {
+
+		for (long organizationId : organizationIds) {
+			CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK =
+				new CommerceAccountOrganizationRelPK(
+					commerceAccountId, organizationId);
+
+			commerceAccountOrganizationRelPersistence.remove(
+				commerceAccountOrganizationRelPK);
+		}
+	}
+
+	@Override
 	public void deleteCommerceAccountOrganizationRelsByCommerceAccountId(
 		long commerceAccountId) {
 
@@ -80,6 +108,23 @@ public class CommerceAccountOrganizationRelLocalServiceImpl
 
 		return
 			commerceAccountOrganizationRelPersistence.findByCommerceAccountId(
+				commerceAccountId);
+	}
+
+	@Override
+	public List<CommerceAccountOrganizationRel>
+		getCommerceAccountOrganizationRels(
+			long commerceAccountId, int start, int end) {
+
+		return
+			commerceAccountOrganizationRelPersistence.findByCommerceAccountId(
+				commerceAccountId, start, end);
+	}
+
+	@Override
+	public int getCommerceAccountOrganizationRelsCount(long commerceAccountId) {
+		return
+			commerceAccountOrganizationRelPersistence.countByCommerceAccountId(
 				commerceAccountId);
 	}
 
