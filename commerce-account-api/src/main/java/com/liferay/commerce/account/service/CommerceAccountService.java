@@ -90,6 +90,10 @@ public interface CommerceAccountService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceAccountsCount(Long parentCommerceAccountId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
 		long groupId, long parentCommerceAccountId, String keywords,
 		Boolean active, int start, int end, Sort sort)

@@ -91,6 +91,11 @@ public class CommerceAccountServiceUtil {
 				   .getUserCommerceAccounts(parentCommerceAccountId, start, end);
 	}
 
+	public static int getUserCommerceAccountsCount(Long parentCommerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getUserCommerceAccountsCount(parentCommerceAccountId);
+	}
+
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
 		long groupId, long parentCommerceAccountId, String keywords,
 		Boolean active, int start, int end,

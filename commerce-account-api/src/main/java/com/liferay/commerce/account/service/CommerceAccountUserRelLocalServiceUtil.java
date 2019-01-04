@@ -256,6 +256,12 @@ public class CommerceAccountUserRelLocalServiceUtil {
 		return getService().getCommerceAccountUserRels(commerceAccountId);
 	}
 
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId, int start, int end) {
+		return getService()
+				   .getCommerceAccountUserRels(commerceAccountId, start, end);
+	}
+
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRelsByCommerceAccountUserId(
 		long commerceAccountUserId) {
 		return getService()
@@ -269,6 +275,10 @@ public class CommerceAccountUserRelLocalServiceUtil {
 	*/
 	public static int getCommerceAccountUserRelsCount() {
 		return getService().getCommerceAccountUserRelsCount();
+	}
+
+	public static int getCommerceAccountUserRelsCount(long commerceAccountId) {
+		return getService().getCommerceAccountUserRelsCount(commerceAccountId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {

@@ -64,6 +64,15 @@ public class CommerceAccountOrganizationRelLocalServiceUtil {
 			organizationId, serviceContext);
 	}
 
+	public static void addCommerceAccountOrganizationRels(
+		long commerceAccountId, long[] organizationIds,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.addCommerceAccountOrganizationRels(commerceAccountId,
+			organizationIds, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce account organization rel with the primary key. Does not add the commerce account organization rel to the database.
 	*
@@ -100,6 +109,14 @@ public class CommerceAccountOrganizationRelLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .deleteCommerceAccountOrganizationRel(commerceAccountOrganizationRelPK);
+	}
+
+	public static void deleteCommerceAccountOrganizationRels(
+		long commerceAccountId, long[] organizationIds)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.deleteCommerceAccountOrganizationRels(commerceAccountId,
+			organizationIds);
 	}
 
 	public static void deleteCommerceAccountOrganizationRelsByCommerceAccountId(
@@ -246,6 +263,13 @@ public class CommerceAccountOrganizationRelLocalServiceUtil {
 		return getService().getCommerceAccountOrganizationRels(commerceAccountId);
 	}
 
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		long commerceAccountId, int start, int end) {
+		return getService()
+				   .getCommerceAccountOrganizationRels(commerceAccountId,
+			start, end);
+	}
+
 	/**
 	* Returns the number of commerce account organization rels.
 	*
@@ -253,6 +277,12 @@ public class CommerceAccountOrganizationRelLocalServiceUtil {
 	*/
 	public static int getCommerceAccountOrganizationRelsCount() {
 		return getService().getCommerceAccountOrganizationRelsCount();
+	}
+
+	public static int getCommerceAccountOrganizationRelsCount(
+		long commerceAccountId) {
+		return getService()
+				   .getCommerceAccountOrganizationRelsCount(commerceAccountId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {

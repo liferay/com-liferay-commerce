@@ -268,6 +268,13 @@ public class CommerceAccountUserRelLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId, int start, int end) {
+		return _commerceAccountUserRelLocalService.getCommerceAccountUserRels(commerceAccountId,
+			start, end);
+	}
+
+	@Override
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRelsByCommerceAccountUserId(
 		long commerceAccountUserId) {
 		return _commerceAccountUserRelLocalService.getCommerceAccountUserRelsByCommerceAccountUserId(commerceAccountUserId);
@@ -281,6 +288,11 @@ public class CommerceAccountUserRelLocalServiceWrapper
 	@Override
 	public int getCommerceAccountUserRelsCount() {
 		return _commerceAccountUserRelLocalService.getCommerceAccountUserRelsCount();
+	}
+
+	@Override
+	public int getCommerceAccountUserRelsCount(long commerceAccountId) {
+		return _commerceAccountUserRelLocalService.getCommerceAccountUserRelsCount(commerceAccountId);
 	}
 
 	@Override

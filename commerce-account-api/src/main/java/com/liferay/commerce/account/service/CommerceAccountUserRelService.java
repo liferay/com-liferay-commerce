@@ -73,6 +73,14 @@ public interface CommerceAccountUserRelService extends BaseService {
 	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
 		long commerceAccountId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId, int start, int end) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAccountUserRelsCount(long commerceAccountId)
+		throws PortalException;
+
 	/**
 	* Returns the OSGi service identifier.
 	*

@@ -233,6 +233,10 @@ public interface CommerceAccountUserRelLocalService extends BaseLocalService,
 		long commerceAccountId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccountUserRel> getCommerceAccountUserRelsByCommerceAccountUserId(
 		long commerceAccountUserId);
 
@@ -243,6 +247,9 @@ public interface CommerceAccountUserRelLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAccountUserRelsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAccountUserRelsCount(long commerceAccountId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

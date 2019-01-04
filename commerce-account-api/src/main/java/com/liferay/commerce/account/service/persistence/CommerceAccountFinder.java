@@ -25,4 +25,7 @@ public interface CommerceAccountFinder {
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
 		long userId,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.account.model.CommerceAccount> queryDefinition);
+
+	public int getUserCommerceAccountsCount(long userId,
+		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.account.model.CommerceAccount> queryDefinition);
 }
