@@ -535,8 +535,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		CProduct cProduct = cpDefinition.getCProduct();
 
-		if ((cpDefinition.getCPDefinitionId() ==
-				cProduct.getDraftDefinitionId()) ||
+		if ((cpDefinition.getStatus() != WorkflowConstants.STATUS_APPROVED) ||
 			(cpDefinition.getCPDefinitionId() ==
 				cProduct.getPublishedDefinitionId())) {
 
