@@ -48,6 +48,20 @@ public class CommerceAccountOrganizationRelServiceImpl
 	}
 
 	@Override
+	public void addCommerceAccountOrganizationRels(
+			long commerceAccountId, long[] organizationIds,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		commerceAccountOrganizationRelLocalService.
+			addCommerceAccountOrganizationRels(
+				commerceAccountId, organizationIds, serviceContext);
+	}
+
+	@Override
 	public void deleteCommerceAccountOrganizationRel(
 			long commerceAccountId, long organizationId)
 		throws PortalException {
@@ -65,6 +79,19 @@ public class CommerceAccountOrganizationRelServiceImpl
 	}
 
 	@Override
+	public void deleteCommerceAccountOrganizationRels(
+			long commerceAccountId, long[] organizationIds)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		commerceAccountOrganizationRelLocalService.
+			deleteCommerceAccountOrganizationRels(
+				commerceAccountId, organizationIds);
+	}
+
+	@Override
 	public List<CommerceAccountOrganizationRel>
 			getCommerceAccountOrganizationRels(long commerceAccountId)
 		throws PortalException {
@@ -74,6 +101,30 @@ public class CommerceAccountOrganizationRelServiceImpl
 
 		return commerceAccountOrganizationRelLocalService.
 			getCommerceAccountOrganizationRels(commerceAccountId);
+	}
+
+	@Override
+	public List<CommerceAccountOrganizationRel>
+			getCommerceAccountOrganizationRels(
+				long commerceAccountId, int start, int end)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountOrganizationRelLocalService.
+			getCommerceAccountOrganizationRels(commerceAccountId, start, end);
+	}
+
+	@Override
+	public int getCommerceAccountOrganizationRelsCount(long commerceAccountId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountOrganizationRelLocalService.
+			getCommerceAccountOrganizationRelsCount(commerceAccountId);
 	}
 
 	private static volatile ModelResourcePermission<CommerceAccount>
