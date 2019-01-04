@@ -22,15 +22,12 @@ import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroupRole;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -40,20 +37,6 @@ import java.util.Set;
  */
 public class CommerceUserLocalServiceImpl
 	extends CommerceUserLocalServiceBaseImpl {
-
-	@Override
-	public BaseModelSearchResult<User> searchCommerceAccountUsers(
-			long companyId, long commerceAccountId, String keywords, int status,
-			int start, int end, Sort sort)
-		throws PortalException {
-
-		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
-
-		params.put("commerceAccountId", commerceAccountId);
-
-		return userLocalService.searchUsers(
-			companyId, keywords, status, params, start, end, sort);
-	}
 
 	@Override
 	public User updateActive(long userId, boolean active)
