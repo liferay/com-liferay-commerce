@@ -1,6 +1,6 @@
-import template from "./AddToCartButton.soy.js";
-import Component from "metal-component";
-import Soy, { Config } from "metal-soy";
+import template from './AddToCartButton.soy.js';
+import Component from 'metal-component';
+import Soy, {Config} from 'metal-soy';
 
 class AddToCartButton extends Component {
 	updateQuantity(quantity) {
@@ -15,14 +15,16 @@ class AddToCartButton extends Component {
 
 	handleSubmitClick() {
 		this.editMode = false;
-		this.emit("submitQuantity", this.productId, this.quantity);
+		this.emit('submitQuantity', this.productId, this.quantity);
 	}
 
 	rendered() {
-		if (this.element.querySelector("input"))
-			this.element.querySelector("input").focus();
-		else if (this.element.querySelector("select"))
-			this.element.querySelector("select").focus();
+		if (this.element.querySelector('input')) {
+			this.element.querySelector('input').focus();
+		}
+		else if (this.element.querySelector('select')) {
+			this.element.querySelector('select').focus();
+		}
 	}
 }
 
@@ -39,9 +41,9 @@ AddToCartButton.STATE = {
 		minQuantity: Config.number(),
 		maxQuantity: Config.number(),
 		multipleQuantities: Config.number(),
-		allowedOptions: Config.array(Config.number()),
+		allowedOptions: Config.array(Config.number())
 	}).value({})
 };
 
-export { AddToCartButton };
+export {AddToCartButton};
 export default AddToCartButton;

@@ -14,17 +14,12 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
-import com.liferay.commerce.frontend.taglib.internal.model.CurrentAccountModel;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 
 /**
  * @author Fabio Mastrorilli
@@ -38,7 +33,11 @@ public class ProductDetailsModalTag extends ComponentRendererTag {
 
 		putValue("availability", "inStock");
 		putValue("sku", "AR351184");
-		putValue("pictureUrl", "http://image.superstreetonline.com/f/243817358+w+h+q80+re0+cr1+ar0+st0/006-fully-built-engine-by-the-experts.jpg");
+		putValue(
+			"pictureUrl",
+			"http://image.superstreetonline.com/f" +
+				"/243817358+w+h+q80+re0+cr1+ar0+st0" +
+					"/006-fully-built-engine-by-the-experts.jpg");
 		putValue("name", "Lorem Ipsum Dolor Sit");
 		putValue("detailsLink", "/details/AR351184");
 		putValue("settings", null);
@@ -62,10 +61,8 @@ public class ProductDetailsModalTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/product_details_modal/ProductDetailsModal.es");
+			"commerce-frontend-taglib/product_details_modal" +
+				"/ProductDetailsModal.es");
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		ProductDetailsModalTag.class);
 
 }

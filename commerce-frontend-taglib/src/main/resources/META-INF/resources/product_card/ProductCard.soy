@@ -2,27 +2,27 @@
 
 {template .render}
 
-    {@param? availability: string}
-    {@param sku: string}
-    {@param? pictureUrl: string}
-    {@param name: string}
-    {@param detailsLink: string}
-    {@param? categories: list<[
+	{@param? availability: string}
+	{@param sku: string}
+	{@param? pictureUrl: string}
+	{@param name: string}
+	{@param detailsLink: string}
+	{@param? categories: list<[
 		name: string
 	]>}
-    {@param? description: string}
+	{@param? description: string}
 
-    {let $availabilityDotClasses kind="text"}
-        d-inline-block minium-dot minium-dot--
-        {switch $availability}
-            {case 'inStock'}
-                good
-            {case 'available'}
-                neutral
-            {default}
-                bad
-        {/switch}
-    {/let}
+	{let $availabilityDotClasses kind="text"}
+		d-inline-block minium-dot minium-dot--
+		{switch $availability}
+			{case 'inStock'}
+				good
+			{case 'available'}
+				neutral
+			{default}
+				bad
+		{/switch}
+	{/let}
 
 	<div class="product-card">
 		{if isNonnull($pictureUrl)}
@@ -34,6 +34,7 @@
 			</div>
 		{/if}
 		<p class="product-card__sku">{$sku}</p>
+
 		<a class="product-card__name" href="{$detailsLink}">{$name}</a>
 		{if isNonnull($categories) and length($categories) > 0}
 			<p class="product-card__categories">

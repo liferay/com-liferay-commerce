@@ -17,6 +17,12 @@
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
+		<name>add-to-cart</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.AddToCartTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
 		<name>add-to-tick-item</name>
 		<tag-class>
 			com.liferay.commerce.frontend.taglib.servlet.taglib.AddToTickItemTag</tag-class>
@@ -35,21 +41,15 @@
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
-		<name>add-to-cart</name>
+		<name>product-details-modal</name>
 		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.AddToCartTag</tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.ProductDetailsModalTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
 		<name>quantity-selector</name>
 		<tag-class>
 			com.liferay.commerce.frontend.taglib.servlet.taglib.QuantitySelectorTag</tag-class>
-		<body-content>empty</body-content>
-	</tag>
-	<tag>
-		<name>product-details-modal</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.ProductDetailsModalTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
