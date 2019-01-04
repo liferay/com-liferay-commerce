@@ -130,8 +130,8 @@ public class CProductUpgradeProcess extends UpgradeProcess {
 				StringBundler.concat(
 					"insert into CProduct (uuid_, CProductId, groupId, ",
 					"companyId, userId, userName, createDate, modifiedDate, ",
-					"draftDefinitionId, publishedDefinitionId) values (?, ?, ",
-					"?, ?, ?, ?, ?, ?, 0, ?)"));
+					"publishedDefinitionId) values (?, ?, ?, ?, ?, ?, ?, ?, ?" +
+					StringPool.CLOSE_PARENTHESIS));
 
 			ps.setString(1, uuid);
 			ps.setLong(2, cProductId);

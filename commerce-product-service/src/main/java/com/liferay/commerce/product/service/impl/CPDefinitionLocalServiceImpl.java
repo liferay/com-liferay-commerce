@@ -298,9 +298,6 @@ public class CPDefinitionLocalServiceImpl
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
 			cpDefinition.setStatus(WorkflowConstants.STATUS_DRAFT);
-
-			cProductLocalService.updateDraftDefinitionId(
-				cProduct.getCProductId(), cpDefinition.getCPDefinitionId());
 		}
 		else {
 			cpDefinition.setStatus(WorkflowConstants.STATUS_EXPIRED);
@@ -1861,11 +1858,6 @@ public class CPDefinitionLocalServiceImpl
 
 			assetEntryLocalService.updateVisible(
 				CPDefinition.class.getName(), cpDefinitionId, false);
-
-			//CProduct
-
-			cProductLocalService.updateDraftDefinitionId(
-				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
 
 			// Trash
 
