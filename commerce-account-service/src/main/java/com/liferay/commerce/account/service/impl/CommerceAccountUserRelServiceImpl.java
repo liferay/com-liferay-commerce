@@ -97,6 +97,30 @@ public class CommerceAccountUserRelServiceImpl
 			commerceAccountId);
 	}
 
+	@Override
+	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
+			long commerceAccountId, int start, int end)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountUserRelPersistence.findByCommerceAccountId(
+			commerceAccountId, start, end);
+	}
+
+	@Override
+	public int getCommerceAccountUserRelsCount(long commerceAccountId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return
+			commerceAccountUserRelLocalService.getCommerceAccountUserRelsCount(
+				commerceAccountId);
+	}
+
 	private static volatile ModelResourcePermission<CommerceAccount>
 		_commerceAccountModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(

@@ -110,8 +110,15 @@ public class CommerceAccountUserRelLocalServiceImpl
 	public void deleteCommerceAccountUserRelsByCommerceAccountId(
 		long commerceAccountId) {
 
-		commerceAccountUserRelPersistence.removeByCommerceAccountId(
-			commerceAccountId);
+		List<CommerceAccountUserRel> commerceAccountUserRels =
+			commerceAccountUserRelPersistence.findByCommerceAccountUserId(
+				commerceAccountId);
+
+		for (CommerceAccountUserRel commerceAccountUserRel :
+				commerceAccountUserRels) {
+
+			commerceAccountUserRelPersistence.remove(commerceAccountUserRel);
+		}
 	}
 
 	@Override
@@ -130,12 +137,26 @@ public class CommerceAccountUserRelLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId, int start, int end) {
+
+		return commerceAccountUserRelPersistence.findByCommerceAccountId(
+			commerceAccountId, start, end);
+	}
+
+	@Override
 	public List<CommerceAccountUserRel>
 		getCommerceAccountUserRelsByCommerceAccountUserId(
 			long commerceAccountUserId) {
 
 		return commerceAccountUserRelPersistence.findByCommerceAccountUserId(
 			commerceAccountUserId);
+	}
+
+	@Override
+	public int getCommerceAccountUserRelsCount(long commerceAccountId) {
+		return commerceAccountUserRelPersistence.countByCommerceAccountId(
+			commerceAccountId);
 	}
 
 }
