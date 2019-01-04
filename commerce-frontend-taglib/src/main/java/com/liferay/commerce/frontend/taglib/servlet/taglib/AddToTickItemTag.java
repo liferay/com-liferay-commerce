@@ -14,17 +14,10 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
-import com.liferay.commerce.frontend.taglib.internal.model.CurrentAccountModel;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 
 /**
  * @author Fabio Diego
@@ -33,13 +26,7 @@ public class AddToTickItemTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		putValue(
-			"isAdded",
-			false
-		);
+		putValue("isAdded", false);
 
 		setTemplateNamespace("AddToTickItem.render");
 
@@ -57,8 +44,5 @@ public class AddToTickItemTag extends ComponentRendererTag {
 		return npmResolver.resolveModuleName(
 			"commerce-frontend-taglib/add_to_tick_item/AddToTickItem.es");
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		AddToTickItemTag.class);
 
 }

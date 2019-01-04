@@ -4,22 +4,22 @@
  * This renders the component's whole content.
  */
 {template .render}
-    {@param? text: string | int}
+	{@param? text: string | int}
 	{@param? firstGroup: string }
 	{@param? secondGroup: string }
 	{@param? thirdGroup: string }
 
-    {if isNonnull($text)}
-        <span
-            class="autocomplete-item"
-        >
-            {$firstGroup}
-            {if isNonnull($secondGroup)}
-                <strong>{$secondGroup}</strong>
-            {/if}
-            {if isNonnull($thirdGroup)}
-                {$thirdGroup}
-            {/if}
-        </span>
-    {/if}
+	{if isNonnull($text)}
+		<span
+			class="autocomplete-item"
+		>
+			{$firstGroup}
+			{if isNonnull($secondGroup)}
+				<strong>{$secondGroup}</strong>
+			{/if}
+			{if isNonnull($thirdGroup)}
+				{$thirdGroup}
+			{/if}
+		</span>
+	{/if}
 {/template}

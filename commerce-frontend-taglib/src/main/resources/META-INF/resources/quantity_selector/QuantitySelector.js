@@ -1,6 +1,6 @@
 import template from './QuantitySelector.soy.js';
 import Component from 'metal-component';
-import Soy, { Config } from 'metal-soy';
+import Soy, {Config} from 'metal-soy';
 
 class QuantitySelector extends Component {
 	handleSelectOption(evt) {
