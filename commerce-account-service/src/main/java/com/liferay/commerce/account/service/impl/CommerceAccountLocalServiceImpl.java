@@ -202,6 +202,20 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	@Override
+	public int getUserCommerceAccountsCount(
+		long userId, Long parentCommerceAccountId) {
+
+		QueryDefinition<CommerceAccount> queryDefinition =
+			new QueryDefinition<>();
+
+		queryDefinition.setAttribute(
+			"parentCommerceAccountId", parentCommerceAccountId);
+
+		return commerceAccountFinder.getUserCommerceAccountsCount(
+			userId, queryDefinition);
+	}
+
+	@Override
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
 			long companyId, long parentCommerceAccountId, String keywords,
 			Boolean active, int start, int end, Sort sort)
