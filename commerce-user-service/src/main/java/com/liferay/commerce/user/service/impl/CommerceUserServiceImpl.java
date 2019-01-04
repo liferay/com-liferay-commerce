@@ -14,16 +14,11 @@
 
 package com.liferay.commerce.user.service.impl;
 
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.user.service.base.CommerceUserServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.permission.OrganizationPermissionUtil;
 
@@ -38,19 +33,6 @@ public class CommerceUserServiceImpl extends CommerceUserServiceBaseImpl {
 		_checkUser(userId);
 
 		return userLocalService.getUser(userId);
-	}
-
-	@Override
-	public BaseModelSearchResult<User> searchCommerceAccountUsers(
-			long companyId, long commerceAccountId, String keywords, int status,
-			int start, int end, Sort sort)
-		throws PortalException {
-
-		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
-
-		return commerceUserLocalService.searchCommerceAccountUsers(
-			companyId, commerceAccountId, keywords, status, start, end, sort);
 	}
 
 	@Override
@@ -135,12 +117,5 @@ public class CommerceUserServiceImpl extends CommerceUserServiceBaseImpl {
 
 		throw new PrincipalException();
 	}
-
-	private static volatile ModelResourcePermission<CommerceAccount>
-		_commerceAccountModelResourcePermission =
-			ModelResourcePermissionFactory.getInstance(
-				CommerceUserServiceImpl.class,
-				"_commerceAccountModelResourcePermission",
-				CommerceAccount.class);
 
 }
