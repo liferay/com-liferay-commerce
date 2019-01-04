@@ -6,7 +6,7 @@ import Soy, {Config} from 'metal-soy';
 
 import './Loader.es';
 import './Price.es';
-import './QuantitySelector.es';
+import './CartQuantitySelector.es';
 
 class CartProduct extends Component {
 	updateQuantity(quantity) {
