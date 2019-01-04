@@ -52,15 +52,6 @@ public class CommerceUserLocalServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.portal.kernel.model.User> searchCommerceAccountUsers(
-		long companyId, long commerceAccountId, String keywords, int status,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .searchCommerceAccountUsers(companyId, commerceAccountId,
-			keywords, status, start, end, sort);
-	}
-
 	public static com.liferay.portal.kernel.model.User updateActive(
 		long userId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {

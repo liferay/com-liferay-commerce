@@ -59,12 +59,27 @@ public interface CommerceAccountOrganizationRelService extends BaseService {
 		long commerceAccountId, long organizationId,
 		ServiceContext serviceContext) throws PortalException;
 
+	public void addCommerceAccountOrganizationRels(long commerceAccountId,
+		long[] organizationIds, ServiceContext serviceContext)
+		throws PortalException;
+
 	public void deleteCommerceAccountOrganizationRel(long commerceAccountId,
 		long organizationId) throws PortalException;
+
+	public void deleteCommerceAccountOrganizationRels(long commerceAccountId,
+		long[] organizationIds) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
 		long commerceAccountId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		long commerceAccountId, int start, int end) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAccountOrganizationRelsCount(long commerceAccountId)
+		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.

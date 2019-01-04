@@ -90,6 +90,12 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 	}
 
 	@Override
+	public int getUserCommerceAccountsCount(Long parentCommerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountService.getUserCommerceAccountsCount(parentCommerceAccountId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
 		long groupId, long parentCommerceAccountId, String keywords,
 		Boolean active, int start, int end,

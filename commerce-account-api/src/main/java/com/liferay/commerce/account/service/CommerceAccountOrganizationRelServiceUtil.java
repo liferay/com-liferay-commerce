@@ -51,6 +51,15 @@ public class CommerceAccountOrganizationRelServiceUtil {
 			organizationId, serviceContext);
 	}
 
+	public static void addCommerceAccountOrganizationRels(
+		long commerceAccountId, long[] organizationIds,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.addCommerceAccountOrganizationRels(commerceAccountId,
+			organizationIds, serviceContext);
+	}
+
 	public static void deleteCommerceAccountOrganizationRel(
 		long commerceAccountId, long organizationId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -59,10 +68,33 @@ public class CommerceAccountOrganizationRelServiceUtil {
 			organizationId);
 	}
 
+	public static void deleteCommerceAccountOrganizationRels(
+		long commerceAccountId, long[] organizationIds)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.deleteCommerceAccountOrganizationRels(commerceAccountId,
+			organizationIds);
+	}
+
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
 		long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCommerceAccountOrganizationRels(commerceAccountId);
+	}
+
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		long commerceAccountId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceAccountOrganizationRels(commerceAccountId,
+			start, end);
+	}
+
+	public static int getCommerceAccountOrganizationRelsCount(
+		long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceAccountOrganizationRelsCount(commerceAccountId);
 	}
 
 	/**

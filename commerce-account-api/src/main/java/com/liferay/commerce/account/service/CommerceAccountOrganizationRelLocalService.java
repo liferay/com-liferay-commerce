@@ -77,6 +77,10 @@ public interface CommerceAccountOrganizationRelLocalService
 		long commerceAccountId, long organizationId,
 		ServiceContext serviceContext) throws PortalException;
 
+	public void addCommerceAccountOrganizationRels(long commerceAccountId,
+		long[] organizationIds, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	* Creates a new commerce account organization rel with the primary key. Does not add the commerce account organization rel to the database.
 	*
@@ -108,6 +112,9 @@ public interface CommerceAccountOrganizationRelLocalService
 	public CommerceAccountOrganizationRel deleteCommerceAccountOrganizationRel(
 		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
 		throws PortalException;
+
+	public void deleteCommerceAccountOrganizationRels(long commerceAccountId,
+		long[] organizationIds) throws PortalException;
 
 	public void deleteCommerceAccountOrganizationRelsByCommerceAccountId(
 		long commerceAccountId);
@@ -225,6 +232,10 @@ public interface CommerceAccountOrganizationRelLocalService
 	public List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
 		long commerceAccountId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		long commerceAccountId, int start, int end);
+
 	/**
 	* Returns the number of commerce account organization rels.
 	*
@@ -232,6 +243,9 @@ public interface CommerceAccountOrganizationRelLocalService
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAccountOrganizationRelsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAccountOrganizationRelsCount(long commerceAccountId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

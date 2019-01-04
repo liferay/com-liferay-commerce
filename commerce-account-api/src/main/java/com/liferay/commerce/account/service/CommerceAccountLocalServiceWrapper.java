@@ -301,6 +301,13 @@ public class CommerceAccountLocalServiceWrapper
 	}
 
 	@Override
+	public int getUserCommerceAccountsCount(long userId,
+		Long parentCommerceAccountId) {
+		return _commerceAccountLocalService.getUserCommerceAccountsCount(userId,
+			parentCommerceAccountId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
 		long companyId, long parentCommerceAccountId, String keywords,
 		Boolean active, int start, int end,
