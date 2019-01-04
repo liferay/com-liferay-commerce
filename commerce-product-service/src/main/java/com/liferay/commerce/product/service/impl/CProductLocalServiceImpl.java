@@ -55,37 +55,6 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 	}
 
 	@Override
-	public CProduct updateDraftDefinitionId(
-			long cProductId, long draftDefinitionId)
-		throws PortalException {
-
-		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
-
-		long originalDraftDefinitionId = cProduct.getDraftDefinitionId();
-
-		if (originalDraftDefinitionId == draftDefinitionId) {
-			return cProduct;
-		}
-
-		Date now = new Date();
-
-		cProduct.setModifiedDate(now);
-
-		cProduct.setDraftDefinitionId(draftDefinitionId);
-
-		if (draftDefinitionId == cProduct.getPublishedDefinitionId()) {
-			cProduct.setPublishedDefinitionId(0);
-		}
-
-		cProduct = cProductPersistence.update(cProduct);
-
-		reindexCPDefinition(originalDraftDefinitionId);
-		reindexCPDefinition(draftDefinitionId);
-
-		return cProduct;
-	}
-
-	@Override
 	public CProduct updatePublishedDefinitionId(
 			long cProductId, long publishedDefinitionId)
 		throws PortalException {
@@ -102,10 +71,6 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 		Date now = new Date();
 
 		cProduct.setModifiedDate(now);
-
-		if (publishedDefinitionId == cProduct.getDraftDefinitionId()) {
-			cProduct.setDraftDefinitionId(0);
-		}
 
 		cProduct.setPublishedDefinitionId(publishedDefinitionId);
 

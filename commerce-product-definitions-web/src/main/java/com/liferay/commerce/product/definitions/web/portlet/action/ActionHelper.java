@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.IOException;
 
@@ -470,7 +471,8 @@ public class ActionHelper {
 			CProduct cProduct = _cProductLocalService.getCProduct(
 				cpDefinition.getCProductId());
 
-			if ((cpDefinitionId != cProduct.getDraftDefinitionId()) ||
+			if ((cpDefinition.getStatus() ==
+					WorkflowConstants.STATUS_APPROVED) &&
 				(cpDefinitionId != cProduct.getPublishedDefinitionId())) {
 
 				cpDefinition = _cpDefinitionService.fetchCPDefinition(
