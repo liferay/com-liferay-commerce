@@ -1,19 +1,19 @@
 {namespace ProductDetailsModal}
 
 {template .render}
-	
-    {@param availability: string}
-    {@param sku: string}
-    {@param name: string}
-    {@param pictureUrl: string}
-    {@param detailsLink: string}
 
-    {@param? categories: list<[
+	{@param availability: string}
+	{@param sku: string}
+	{@param name: string}
+	{@param pictureUrl: string}
+	{@param detailsLink: string}
+
+	{@param? categories: list<[
 		name: string,
 		link: string
 	]>}
-    {@param? description: string}
-    {@param? addToOrderLink: string}
+	{@param? description: string}
+	{@param? addToOrderLink: string}
 	{@param? settings: [
 		minQuantity: number
 	]}
@@ -22,17 +22,17 @@
 
 	{@param? _handleCloseModal: any}
 
-    {let $availabilityDotClasses kind="text"}
-        d-inline-block minium-dot minium-dot--
-        {switch $availability}
-            {case 'inStock'}
-                good
-            {case 'available'}
-                neutral
-            {default}
-                bad
-        {/switch}
-    {/let}
+	{let $availabilityDotClasses kind="text"}
+		d-inline-block minium-dot minium-dot--
+		{switch $availability}
+			{case 'inStock'}
+				good
+			{case 'available'}
+				neutral
+			{default}
+				bad
+		{/switch}
+	{/let}
 
 	{let $body kind="html"}
 		<div class="commerce-modal">
@@ -40,33 +40,36 @@
 				/*
 					<div class="commerce-modal__navigation">
 						<button class="modal-navigation__prev">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="minium-icon">
-								<rect fill="currentColor" x="5" y="5" width="90" height="90" rx="10" ry="10"></rect>
+							<svg class="minium-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+								<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5"></rect>
 							</svg>
 						</button>
+
 						<button class="modal-navigation__next">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="minium-icon">
-								<rect fill="currentColor" x="5" y="5" width="90" height="90" rx="10" ry="10"></rect>
+							<svg class="minium-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+								<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5"></rect>
 							</svg>
 						</button>
 					</div>
-				 */
-				<button 
-					class="commerce-modal__close" 
+				*/
+				<button
+					class="commerce-modal__close"
 					data-onclick="{$_handleCloseModal}"
 				>
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="minium-icon">
-						<rect fill="currentColor" x="5" y="5" width="90" height="90" rx="10" ry="10"></rect>
+					<svg class="minium-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+						<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5"></rect>
 					</svg>
 				</button>
 			</div>
 
 			<div class="product-details-modal__picture">
-				<img src="{$pictureUrl}" alt="{$name}" />
+				<img alt="{$name}" src="{$pictureUrl}" />
 			</div>
+
 			<div class="product-details-modal__availability">
 				<div class="{$availabilityDotClasses}"></div>
 			</div>
+
 			<p class="product-details-modal__sku">{$sku}</p>
 			{if isNonnull($settings) and isNonnull($settings.minQuantity)}
 				<span class="product-details-modal__min-quantity">
@@ -96,8 +99,8 @@
 					{$description}
 				</p>
 			{/if}
-			<a 
-				class="product-details-modal__view-details" 
+			<a
+				class="product-details-modal__view-details"
 				href="{$detailsLink}"
 			>
 				View product details

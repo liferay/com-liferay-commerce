@@ -81,6 +81,7 @@
 	{@param? handleOptionChange: any}
 
 	<label>{msg desc=""}is{/msg}</label>
+
 	<select class="filter-select form-control" id="optionsNames" onChange="{$handleOptionChange}">
 		<option value="">{msg desc=""}select-option{/msg}</option>
 		{if $terms}
@@ -115,6 +116,7 @@
 	{@param? terms: ?}
 
 	<label>{msg desc=""}is{/msg}</label>
+
 	<select class="filter-select form-control" id="status">
 		{if $terms}
 			{foreach $term in $terms}
@@ -131,6 +133,7 @@
 	{@param? terms: ?}
 
 	<label>{msg desc=""}is{/msg}</label>
+
 	<select class="filter-select form-control" id="productTypeName">
 		{if $terms}
 			{foreach $term in $terms}
