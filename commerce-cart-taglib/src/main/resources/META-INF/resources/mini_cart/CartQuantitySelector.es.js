@@ -1,8 +1,8 @@
-import template from './QuantitySelector.soy';
+import template from './CartQuantitySelector.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-class QuantitySelector extends Component {
+class CartQuantitySelector extends Component {
 
 	handleSelectOption(evt) {
 		const quantity = parseInt(evt.target.value);
@@ -152,7 +152,7 @@ class QuantitySelector extends Component {
 	}
 }
 
-QuantitySelector.STATE = {
+CartQuantitySelector.STATE = {
 
 	minQuantity: Config.number().value(1),
 
@@ -174,7 +174,7 @@ QuantitySelector.STATE = {
 
 };
 
-Soy.register(QuantitySelector, template);
+Soy.register(CartQuantitySelector, template);
 
-export {QuantitySelector};
-export default QuantitySelector;
+export {CartQuantitySelector};
+export default CartQuantitySelector;
