@@ -858,7 +858,6 @@
 
 		<!-- Other fields -->
 
-		<column name="draftDefinitionId" type="long" />
 		<column name="publishedDefinitionId" type="long" />
 
 		<!-- Order -->
