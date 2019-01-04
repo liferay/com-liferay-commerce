@@ -18,7 +18,7 @@ import templates from './CPDefinitionOptionsEditor.soy';
 class CPDefinitionOptionsEditor extends Component {
 
 	created() {
-		this.loadOptions();
+		this.updateState();
 		this._handleKeyUpForModal = this._handleKeyUpForModal.bind(this);
 	}
 
@@ -52,7 +52,8 @@ class CPDefinitionOptionsEditor extends Component {
 									response => response.json()
 								).then(
 									(jsonResponse) => {
-										instance.loadOptions();
+										instance.cpDefinitionId = jsonResponse.cpDefinitionId.toString();
+										instance.updateState();
 									}
 								);
 							}
@@ -67,7 +68,9 @@ class CPDefinitionOptionsEditor extends Component {
 		);
 	}
 
-	loadOptions() {
+	updateState() {
+		this._updateCPDefinitionId(this);
+
 		fetch(
 			this.cpDefinitionOptionsURL,
 			{
@@ -95,9 +98,11 @@ class CPDefinitionOptionsEditor extends Component {
 	}
 
 	_handleOptionSaved(event) {
+		this.cpDefinitionId = event.cpDefinitionId.toString();
+
 		this._currentOption = event.cpDefinitionOptionRelId;
 
-		this.loadOptions();
+		this.updateState();
 
 		if (event.success) {
 			this._showNotification(this.successMessage, 'success');
@@ -108,15 +113,26 @@ class CPDefinitionOptionsEditor extends Component {
 	}
 
 	_handleoptionDeleted(event) {
+		this.cpDefinitionId = event.cpDefinitionId.toString();
+
 		this._currentOption = null;
 
-		this.loadOptions();
+		this.updateState();
+
+		if (event.success) {
+			this._showNotification(this.successMessage, 'success');
+		}
+		else {
+			this._showNotification(event.message, 'danger');
+		}
 	}
 
 	_handleCancelEditing(event) {
+		this.cpDefinitionId = event.cpDefinitionId.toString();
+
 		this._currentOption = null;
 
-		this.loadOptions();
+		this.updateState();
 	}
 
 	_handleKeyUpForModal(evt) {
@@ -158,6 +174,24 @@ class CPDefinitionOptionsEditor extends Component {
 				);
 			}
 		);
+	}
+
+	_updateCPDefinitionId(instance) {
+		var url = new URL(window.location.href);
+		var cpDefinitionOptionsURL = new URL(instance.cpDefinitionOptionsURL);
+		var cpDefinitionOptionValueRelsURL = new URL(instance.cpDefinitionOptionValueRelsURL);
+
+		var cpDefinitionId = url.searchParams.get(instance.namespace + 'cpDefinitionId');
+
+		if (cpDefinitionId != instance.cpDefinitionId) {
+			url.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+			cpDefinitionOptionsURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+			cpDefinitionOptionValueRelsURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+
+			window.history.pushState({}, '', url);
+			instance.cpDefinitionOptionsURL = cpDefinitionOptionsURL.href;
+			instance.cpDefinitionOptionValueRelsURL = cpDefinitionOptionValueRelsURL.href;
+		}
 	}
 }
 
