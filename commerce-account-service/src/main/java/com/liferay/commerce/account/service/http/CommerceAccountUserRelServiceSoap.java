@@ -83,6 +83,36 @@ public class CommerceAccountUserRelServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountUserRelSoap[] getCommerceAccountUserRels(
+		long commerceAccountId, int start, int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> returnValue =
+				CommerceAccountUserRelServiceUtil.getCommerceAccountUserRels(commerceAccountId,
+					start, end);
+
+			return com.liferay.commerce.account.model.CommerceAccountUserRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceAccountUserRelsCount(long commerceAccountId)
+		throws RemoteException {
+		try {
+			int returnValue = CommerceAccountUserRelServiceUtil.getCommerceAccountUserRelsCount(commerceAccountId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void addCommerceAccountUserRels(long commerceAccountId,
 		String[] emailAddresses, long[] roleIds,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)

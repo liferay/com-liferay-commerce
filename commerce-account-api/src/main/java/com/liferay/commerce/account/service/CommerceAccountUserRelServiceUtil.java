@@ -77,6 +77,18 @@ public class CommerceAccountUserRelServiceUtil {
 		return getService().getCommerceAccountUserRels(commerceAccountId);
 	}
 
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
+		long commerceAccountId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceAccountUserRels(commerceAccountId, start, end);
+	}
+
+	public static int getCommerceAccountUserRelsCount(long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceAccountUserRelsCount(commerceAccountId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

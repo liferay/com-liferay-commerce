@@ -55,6 +55,15 @@ public class CommerceAccountOrganizationRelLocalServiceWrapper
 			organizationId, serviceContext);
 	}
 
+	@Override
+	public void addCommerceAccountOrganizationRels(long commerceAccountId,
+		long[] organizationIds,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountOrganizationRelLocalService.addCommerceAccountOrganizationRels(commerceAccountId,
+			organizationIds, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce account organization rel with the primary key. Does not add the commerce account organization rel to the database.
 	*
@@ -91,6 +100,14 @@ public class CommerceAccountOrganizationRelLocalServiceWrapper
 		com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountOrganizationRelLocalService.deleteCommerceAccountOrganizationRel(commerceAccountOrganizationRelPK);
+	}
+
+	@Override
+	public void deleteCommerceAccountOrganizationRels(long commerceAccountId,
+		long[] organizationIds)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountOrganizationRelLocalService.deleteCommerceAccountOrganizationRels(commerceAccountId,
+			organizationIds);
 	}
 
 	@Override
@@ -250,6 +267,13 @@ public class CommerceAccountOrganizationRelLocalServiceWrapper
 		return _commerceAccountOrganizationRelLocalService.getCommerceAccountOrganizationRels(commerceAccountId);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		long commerceAccountId, int start, int end) {
+		return _commerceAccountOrganizationRelLocalService.getCommerceAccountOrganizationRels(commerceAccountId,
+			start, end);
+	}
+
 	/**
 	* Returns the number of commerce account organization rels.
 	*
@@ -258,6 +282,11 @@ public class CommerceAccountOrganizationRelLocalServiceWrapper
 	@Override
 	public int getCommerceAccountOrganizationRelsCount() {
 		return _commerceAccountOrganizationRelLocalService.getCommerceAccountOrganizationRelsCount();
+	}
+
+	@Override
+	public int getCommerceAccountOrganizationRelsCount(long commerceAccountId) {
+		return _commerceAccountOrganizationRelLocalService.getCommerceAccountOrganizationRelsCount(commerceAccountId);
 	}
 
 	@Override

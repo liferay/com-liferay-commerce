@@ -83,11 +83,40 @@ public class CommerceAccountOrganizationRelServiceSoap {
 		}
 	}
 
+	public static void addCommerceAccountOrganizationRels(
+		long commerceAccountId, long[] organizationIds,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			CommerceAccountOrganizationRelServiceUtil.addCommerceAccountOrganizationRels(commerceAccountId,
+				organizationIds, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteCommerceAccountOrganizationRel(
 		long commerceAccountId, long organizationId) throws RemoteException {
 		try {
 			CommerceAccountOrganizationRelServiceUtil.deleteCommerceAccountOrganizationRel(commerceAccountId,
 				organizationId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteCommerceAccountOrganizationRels(
+		long commerceAccountId, long[] organizationIds)
+		throws RemoteException {
+		try {
+			CommerceAccountOrganizationRelServiceUtil.deleteCommerceAccountOrganizationRels(commerceAccountId,
+				organizationIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -103,6 +132,36 @@ public class CommerceAccountOrganizationRelServiceSoap {
 				CommerceAccountOrganizationRelServiceUtil.getCommerceAccountOrganizationRels(commerceAccountId);
 
 			return com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap[] getCommerceAccountOrganizationRels(
+		long commerceAccountId, int start, int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> returnValue =
+				CommerceAccountOrganizationRelServiceUtil.getCommerceAccountOrganizationRels(commerceAccountId,
+					start, end);
+
+			return com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceAccountOrganizationRelsCount(
+		long commerceAccountId) throws RemoteException {
+		try {
+			int returnValue = CommerceAccountOrganizationRelServiceUtil.getCommerceAccountOrganizationRelsCount(commerceAccountId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

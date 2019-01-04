@@ -285,6 +285,12 @@ public class CommerceAccountLocalServiceUtil {
 			start, end);
 	}
 
+	public static int getUserCommerceAccountsCount(long userId,
+		Long parentCommerceAccountId) {
+		return getService()
+				   .getUserCommerceAccountsCount(userId, parentCommerceAccountId);
+	}
+
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
 		long companyId, long parentCommerceAccountId, String keywords,
 		Boolean active, int start, int end,

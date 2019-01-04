@@ -261,6 +261,10 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 		Long parentCommerceAccountId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceAccountsCount(long userId,
+		Long parentCommerceAccountId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
 		long companyId, long parentCommerceAccountId, String keywords,
 		Boolean active, int start, int end, Sort sort)
