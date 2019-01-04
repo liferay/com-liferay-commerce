@@ -23,10 +23,12 @@ import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -37,6 +39,9 @@ public class CommerceAccountFinderImpl
 
 	public static final String GET_USER_COMMERCE_ACCOUNTS =
 		CommerceAccountFinder.class.getName() + ".getUserCommerceAccounts";
+
+	public static final String GET_USER_COMMERCE_ACCOUNTS_COUNT =
+		CommerceAccountFinder.class.getName() + ".getUserCommerceAccountsCount";
 
 	@Override
 	public List<CommerceAccount> getUserCommerceAccounts(
@@ -73,6 +78,60 @@ public class CommerceAccountFinderImpl
 			return (List<CommerceAccount>)QueryUtil.list(
 				q, getDialect(), queryDefinition.getStart(),
 				queryDefinition.getEnd());
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	public int getUserCommerceAccountsCount(
+		long userId, QueryDefinition<CommerceAccount> queryDefinition) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(
+				getClass(), GET_USER_COMMERCE_ACCOUNTS_COUNT);
+
+			sql = StringUtil.replace(
+				sql, "[$USER_ID$]", String.valueOf(userId));
+
+			Long parentCommerceAccountId = (Long)queryDefinition.getAttribute(
+				"parentCommerceAccountId");
+
+			if (parentCommerceAccountId != null) {
+				sql = StringUtil.replace(
+					sql, "[$PARENT_ACCOUNT_ID$]",
+					_getParentCommerceAccountClause(parentCommerceAccountId));
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$PARENT_ACCOUNT_ID$]", StringPool.BLANK);
+			}
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			int count = 0;
+
+			Iterator<Long> itr = q.iterate();
+
+			while (itr.hasNext()) {
+				Long l = itr.next();
+
+				if (l != null) {
+					count += l.intValue();
+				}
+			}
+
+			return count;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
