@@ -137,13 +137,13 @@ public class CPDefinitionLinkDisplayContext
 		PortletURL portletURL = super.getPortletURL();
 
 		portletURL.setParameter(
+			"cpDefinitionId", String.valueOf(getCPDefinitionId()));
+		portletURL.setParameter(
 			"mvcRenderCommandName", "editProductDefinition");
 		portletURL.setParameter(
 			"screenNavigationCategoryKey", getScreenNavigationCategoryKey());
 		portletURL.setParameter("screenNavigationEntryKey", getType());
 		portletURL.setParameter("type", String.valueOf(getType()));
-		portletURL.setParameter(
-			"cpDefinitionId", String.valueOf(getCPDefinitionId()));
 
 		return portletURL;
 	}

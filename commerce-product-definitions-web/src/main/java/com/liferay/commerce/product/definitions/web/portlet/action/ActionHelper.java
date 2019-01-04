@@ -467,11 +467,11 @@ public class ActionHelper {
 			cpDefinitionId);
 
 		if (cpDefinition != null) {
-			CProduct cProduct = _cProductLocalService.fetchCProduct(
+			CProduct cProduct = _cProductLocalService.getCProduct(
 				cpDefinition.getCProductId());
 
-			if ((cpDefinitionId != cProduct.getPublishedDefinitionId()) ||
-				(cpDefinitionId != cProduct.getDraftDefinitionId())) {
+			if ((cpDefinitionId != cProduct.getDraftDefinitionId()) ||
+				(cpDefinitionId != cProduct.getPublishedDefinitionId())) {
 
 				cpDefinition = _cpDefinitionService.fetchCPDefinition(
 					cProduct.getPublishedDefinitionId());

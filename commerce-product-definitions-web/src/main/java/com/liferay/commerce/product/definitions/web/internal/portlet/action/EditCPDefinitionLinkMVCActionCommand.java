@@ -111,8 +111,6 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		String redirect = getSaveAndContinueRedirect(actionRequest);
-
 		try {
 			if (cmd.equals(Constants.ADD)) {
 				addCPDefinitionLinks(actionRequest);
@@ -123,6 +121,8 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 			else if (cmd.equals(Constants.UPDATE)) {
 				updateCPDefinitionLink(actionRequest);
 			}
+
+			String redirect = getSaveAndContinueRedirect(actionRequest);
 
 			sendRedirect(actionRequest, actionResponse, redirect);
 		}
@@ -158,20 +158,24 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 				"cpDefinitionLinkId", String.valueOf(cpDefinitionLinkId));
 		}
 
+		portletURL.setParameter(
+			"mvcRenderCommandName", "editProductDefinition");
+
 		long cpDefinitionId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionId");
 
-		String toolbarItem = ParamUtil.getString(actionRequest, "toolbarItem");
-
-		portletURL.setParameter(
-			"mvcRenderCommandName", "editProductDefinition");
 		portletURL.setParameter(
 			"cpDefinitionId", String.valueOf(cpDefinitionId));
+
+		String toolbarItem = ParamUtil.getString(actionRequest, "toolbarItem");
+
 		portletURL.setParameter("toolbarItem", toolbarItem);
+
 		portletURL.setParameter(
 			"screenNavigationCategoryKey",
 			CPDefinitionScreenNavigationConstants.
 				CATEGORY_KEY_PRODUCT_RELATIONS);
+
 		portletURL.setWindowState(actionRequest.getWindowState());
 
 		return portletURL.toString();
