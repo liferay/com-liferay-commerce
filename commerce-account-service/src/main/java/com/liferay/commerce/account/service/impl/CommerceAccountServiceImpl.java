@@ -107,6 +107,14 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	}
 
 	@Override
+	public int getUserCommerceAccountsCount(Long parentCommerceAccountId)
+		throws PortalException {
+
+		return commerceAccountLocalService.getUserCommerceAccountsCount(
+			getUserId(), parentCommerceAccountId);
+	}
+
+	@Override
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
 			long groupId, long parentCommerceAccountId, String keywords,
 			Boolean active, int start, int end, Sort sort)
