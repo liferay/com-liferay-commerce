@@ -90,7 +90,7 @@ class CPDefinitionOptionDetail extends Component {
 	}
 
 	_handleDeleteOption() {
-		if (confirm('Are you sure to delte?')) {
+		if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-the-selected-option'))) {
 			this._deleteOption();
 		}
 	}
