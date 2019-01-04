@@ -4,7 +4,7 @@
 	<sql id="com.liferay.commerce.account.service.persistence.CommerceAccountFinder.getUserCommerceAccounts">
 		<![CDATA[
 			SELECT
-				CommerceAccount.*
+				DISTINCT *
 			FROM
 				CommerceAccount
 			LEFT JOIN
@@ -12,32 +12,58 @@
 			 		CommerceAccountUserRel.commerceAccountId = CommerceAccount.commerceAccountId
 			LEFT JOIN
 				CommerceAccountOrganizationRel ON
-					CommerceAccountOrganizationRel.commerceAccountId =  CommerceAccount.commerceAccountId
+					CommerceAccountOrganizationRel.commerceAccountId = CommerceAccount.commerceAccountId
 			LEFT JOIN
-				Organization_  ON
+				Organization_ ON
 					Organization_.organizationId = CommerceAccountOrganizationRel.organizationId
+			LEFT JOIN
+				Organization_ Org2 ON
+					Org2.treePath LIKE Organization_.treePath
+			LEFT JOIN
+				Users_Orgs ON
+					Users_Orgs.organizationId = Org2.organizationId
 			WHERE
 				[$PARENT_ACCOUNT_ID$]
 				(
-					(CommerceAccountUserRel.userId IS NULL) OR
-					(CommerceAccountUserRel.userId = [$USER_ID$])
+					(Users_Orgs.userId IS NULL) OR
+					(Users_Orgs.userId = [$USER_ID$])
 				) AND
 				(
-					(Organization_.organizationId IS NULL) OR
-					(
-						Organization_.treePath IN
-							(
-								SELECT
-									Organization_.treePath
-								FROM
-									Organization_
-								INNER JOIN
-									Users_Orgs ON
-										Users_Orgs.organizationId = Organization_.organizationId
-								WHERE
-									Users_Orgs.userId = [$USER_ID$]
-							)
-					)
+					(CommerceAccountUserRel.userId IS NULL) OR
+					(CommerceAccountUserRel.userId = [$USER_ID$])
+				)
+		]]>
+	</sql>
+	<sql id="com.liferay.commerce.account.service.persistence.CommerceAccountFinder.getUserCommerceAccountsCount">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT CommerceAccount.commerceAccountId) AS COUNT_VALUE
+			FROM
+				CommerceAccount
+			LEFT JOIN
+			 	CommerceAccountUserRel ON
+			 		CommerceAccountUserRel.commerceAccountId = CommerceAccount.commerceAccountId
+			LEFT JOIN
+				CommerceAccountOrganizationRel ON
+					CommerceAccountOrganizationRel.commerceAccountId = CommerceAccount.commerceAccountId
+			LEFT JOIN
+				Organization_ ON
+					Organization_.organizationId = CommerceAccountOrganizationRel.organizationId
+			LEFT JOIN
+				Organization_ Org2 ON
+					Org2.treePath LIKE Organization_.treePath
+			LEFT JOIN
+				Users_Orgs ON
+					Users_Orgs.organizationId = Org2.organizationId
+			WHERE
+				[$PARENT_ACCOUNT_ID$]
+				(
+					(Users_Orgs.userId IS NULL) OR
+					(Users_Orgs.userId = [$USER_ID$])
+				) AND
+				(
+					(CommerceAccountUserRel.userId IS NULL) OR
+					(CommerceAccountUserRel.userId = [$USER_ID$])
 				)
 		]]>
 	</sql>
