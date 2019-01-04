@@ -187,11 +187,11 @@ public class CPDefinitionOptionRelDisplayContext
 		PortletURL portletURL = super.getPortletURL();
 
 		portletURL.setParameter(
+			"cpDefinitionId", String.valueOf(getCPDefinitionId()));
+		portletURL.setParameter(
 			"mvcRenderCommandName", "editProductDefinition");
 		portletURL.setParameter(
 			"screenNavigationCategoryKey", getScreenNavigationCategoryKey());
-		portletURL.setParameter(
-			"cpDefinitionId", String.valueOf(getCPDefinitionId()));
 
 		return portletURL;
 	}
