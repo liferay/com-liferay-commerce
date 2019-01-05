@@ -45,11 +45,11 @@ public class CommerceAccountUserRelServiceWrapper
 
 	@Override
 	public void addCommerceAccountUserRels(long commerceAccountId,
-		String[] emailAddresses, long[] roleIds,
+		long[] userIds, String[] emailAddresses, long[] roleIds,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_commerceAccountUserRelService.addCommerceAccountUserRels(commerceAccountId,
-			emailAddresses, roleIds, serviceContext);
+			userIds, emailAddresses, roleIds, serviceContext);
 	}
 
 	@Override

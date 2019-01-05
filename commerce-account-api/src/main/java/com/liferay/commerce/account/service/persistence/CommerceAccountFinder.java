@@ -22,10 +22,10 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CommerceAccountFinder {
-	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		long userId,
+	public int countByU_P(long userId,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.account.model.CommerceAccount> queryDefinition);
 
-	public int getUserCommerceAccountsCount(long userId,
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> findByU_P(
+		long userId,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.account.model.CommerceAccount> queryDefinition);
 }

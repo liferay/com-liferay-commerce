@@ -67,6 +67,27 @@ import java.rmi.RemoteException;
 public class CommerceAccountServiceSoap {
 	public static com.liferay.commerce.account.model.CommerceAccountSoap addCommerceAccount(
 		String name, long parentCommerceAccountId, String email, String taxId,
+		boolean active, String externalReferenceCode, long[] userIds,
+		String[] emailAddresses,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.addCommerceAccount(name,
+					parentCommerceAccountId, email, taxId, active,
+					externalReferenceCode, userIds, emailAddresses,
+					serviceContext);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap addCommerceAccount(
+		String name, long parentCommerceAccountId, String email, String taxId,
 		boolean active, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -140,12 +161,12 @@ public class CommerceAccountServiceSoap {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountSoap[] getUserCommerceAccounts(
-		Long parentCommerceAccountId, int start, int end)
+		Long parentCommerceAccountId, String keywords, int start, int end)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.account.model.CommerceAccount> returnValue =
 				CommerceAccountServiceUtil.getUserCommerceAccounts(parentCommerceAccountId,
-					start, end);
+					keywords, start, end);
 
 			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModels(returnValue);
 		}
@@ -156,10 +177,12 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
-	public static int getUserCommerceAccountsCount(Long parentCommerceAccountId)
+	public static int getUserCommerceAccountsCount(
+		Long parentCommerceAccountId, String keywords)
 		throws RemoteException {
 		try {
-			int returnValue = CommerceAccountServiceUtil.getUserCommerceAccountsCount(parentCommerceAccountId);
+			int returnValue = CommerceAccountServiceUtil.getUserCommerceAccountsCount(parentCommerceAccountId,
+					keywords);
 
 			return returnValue;
 		}
