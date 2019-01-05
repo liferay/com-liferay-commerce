@@ -76,6 +76,12 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount addCommerceAccount(CommerceAccount commerceAccount);
 
+	public CommerceAccount addCommerceAccount(String name,
+		long parentCommerceAccountId, String email, String taxId,
+		boolean active, String externalReferenceCode, long[] userIds,
+		String[] emailAddresses, ServiceContext serviceContext)
+		throws PortalException;
+
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount addCommerceAccount(String name,
 		long parentCommerceAccountId, String email, String taxId,
@@ -258,11 +264,11 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(long userId,
-		Long parentCommerceAccountId, int start, int end);
+		Long parentCommerceAccountId, String keywords, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceAccountsCount(long userId,
-		Long parentCommerceAccountId);
+		Long parentCommerceAccountId, String keywords);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(

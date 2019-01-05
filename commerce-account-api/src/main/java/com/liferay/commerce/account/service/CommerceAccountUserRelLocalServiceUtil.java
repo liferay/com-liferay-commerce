@@ -64,12 +64,12 @@ public class CommerceAccountUserRelLocalServiceUtil {
 	}
 
 	public static void addCommerceAccountUserRels(long commerceAccountId,
-		String[] emailAddresses, long[] roleIds,
+		long[] userIds, String[] emailAddresses, long[] roleIds,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService()
-			.addCommerceAccountUserRels(commerceAccountId, emailAddresses,
-			roleIds, serviceContext);
+			.addCommerceAccountUserRels(commerceAccountId, userIds,
+			emailAddresses, roleIds, serviceContext);
 	}
 
 	/**
