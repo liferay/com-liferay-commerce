@@ -44,6 +44,18 @@ public class CommerceAccountServiceUtil {
 	 */
 	public static com.liferay.commerce.account.model.CommerceAccount addCommerceAccount(
 		String name, long parentCommerceAccountId, String email, String taxId,
+		boolean active, String externalReferenceCode, long[] userIds,
+		String[] emailAddresses,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceAccount(name, parentCommerceAccountId, email,
+			taxId, active, externalReferenceCode, userIds, emailAddresses,
+			serviceContext);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount addCommerceAccount(
+		String name, long parentCommerceAccountId, String email, String taxId,
 		boolean active, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -85,15 +97,19 @@ public class CommerceAccountServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		Long parentCommerceAccountId, int start, int end)
+		Long parentCommerceAccountId, String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getUserCommerceAccounts(parentCommerceAccountId, start, end);
+				   .getUserCommerceAccounts(parentCommerceAccountId, keywords,
+			start, end);
 	}
 
-	public static int getUserCommerceAccountsCount(Long parentCommerceAccountId)
+	public static int getUserCommerceAccountsCount(
+		Long parentCommerceAccountId, String keywords)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getUserCommerceAccountsCount(parentCommerceAccountId);
+		return getService()
+				   .getUserCommerceAccountsCount(parentCommerceAccountId,
+			keywords);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(

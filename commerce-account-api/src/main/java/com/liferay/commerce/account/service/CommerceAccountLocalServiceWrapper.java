@@ -49,6 +49,18 @@ public class CommerceAccountLocalServiceWrapper
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccount addCommerceAccount(
 		String name, long parentCommerceAccountId, String email, String taxId,
+		boolean active, String externalReferenceCode, long[] userIds,
+		String[] emailAddresses,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountLocalService.addCommerceAccount(name,
+			parentCommerceAccountId, email, taxId, active,
+			externalReferenceCode, userIds, emailAddresses, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount addCommerceAccount(
+		String name, long parentCommerceAccountId, String email, String taxId,
 		boolean active, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -295,16 +307,17 @@ public class CommerceAccountLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		long userId, Long parentCommerceAccountId, int start, int end) {
+		long userId, Long parentCommerceAccountId, String keywords, int start,
+		int end) {
 		return _commerceAccountLocalService.getUserCommerceAccounts(userId,
-			parentCommerceAccountId, start, end);
+			parentCommerceAccountId, keywords, start, end);
 	}
 
 	@Override
 	public int getUserCommerceAccountsCount(long userId,
-		Long parentCommerceAccountId) {
+		Long parentCommerceAccountId, String keywords) {
 		return _commerceAccountLocalService.getUserCommerceAccountsCount(userId,
-			parentCommerceAccountId);
+			parentCommerceAccountId, keywords);
 	}
 
 	@Override

@@ -89,13 +89,136 @@ public class CommerceAccountUserRelServiceHttp {
 		}
 	}
 
+	public static void addCommerceAccountUserRels(HttpPrincipal httpPrincipal,
+		long commerceAccountId, long[] userIds, String[] emailAddresses,
+		long[] roleIds,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
+					"addCommerceAccountUserRels",
+					_addCommerceAccountUserRelsParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceAccountId, userIds, emailAddresses, roleIds,
+					serviceContext);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteCommerceAccountUserRel(
+		HttpPrincipal httpPrincipal, long commerceAccountId, long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
+					"deleteCommerceAccountUserRel",
+					_deleteCommerceAccountUserRelParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceAccountId, userId);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteCommerceAccountUserRels(
+		HttpPrincipal httpPrincipal, long commerceAccountId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
+					"deleteCommerceAccountUserRels",
+					_deleteCommerceAccountUserRelsParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceAccountId, userIds);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
+		HttpPrincipal httpPrincipal, long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
+					"getCommerceAccountUserRels",
+					_getCommerceAccountUserRelsParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceAccountId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
 		HttpPrincipal httpPrincipal, long commerceAccountId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
 					"getCommerceAccountUserRels",
-					_getCommerceAccountUserRelsParameterTypes1);
+					_getCommerceAccountUserRelsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId, start, end);
@@ -128,7 +251,7 @@ public class CommerceAccountUserRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
 					"getCommerceAccountUserRelsCount",
-					_getCommerceAccountUserRelsCountParameterTypes2);
+					_getCommerceAccountUserRelsCountParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId);
@@ -155,146 +278,25 @@ public class CommerceAccountUserRelServiceHttp {
 		}
 	}
 
-	public static void addCommerceAccountUserRels(HttpPrincipal httpPrincipal,
-		long commerceAccountId, String[] emailAddresses, long[] roleIds,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
-					"addCommerceAccountUserRels",
-					_addCommerceAccountUserRelsParameterTypes3);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId, emailAddresses, roleIds, serviceContext);
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void deleteCommerceAccountUserRel(
-		HttpPrincipal httpPrincipal, long commerceAccountId, long userId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
-					"deleteCommerceAccountUserRel",
-					_deleteCommerceAccountUserRelParameterTypes4);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId, userId);
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void deleteCommerceAccountUserRels(
-		HttpPrincipal httpPrincipal, long commerceAccountId, long[] userIds)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
-					"deleteCommerceAccountUserRels",
-					_deleteCommerceAccountUserRelsParameterTypes5);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId, userIds);
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
-		HttpPrincipal httpPrincipal, long commerceAccountId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
-					"getCommerceAccountUserRels",
-					_getCommerceAccountUserRelsParameterTypes6);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(CommerceAccountUserRelServiceHttp.class);
 	private static final Class<?>[] _addCommerceAccountUserRelParameterTypes0 = new Class[] {
 			long.class, long.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes1 = new Class[] {
-			long.class, int.class, int.class
-		};
-	private static final Class<?>[] _getCommerceAccountUserRelsCountParameterTypes2 =
-		new Class[] { long.class };
-	private static final Class<?>[] _addCommerceAccountUserRelsParameterTypes3 = new Class[] {
-			long.class, String[].class, long[].class,
+	private static final Class<?>[] _addCommerceAccountUserRelsParameterTypes1 = new Class[] {
+			long.class, long[].class, String[].class, long[].class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _deleteCommerceAccountUserRelParameterTypes4 =
+	private static final Class<?>[] _deleteCommerceAccountUserRelParameterTypes2 =
 		new Class[] { long.class, long.class };
-	private static final Class<?>[] _deleteCommerceAccountUserRelsParameterTypes5 =
+	private static final Class<?>[] _deleteCommerceAccountUserRelsParameterTypes3 =
 		new Class[] { long.class, long[].class };
-	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes6 = new Class[] {
+	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes4 = new Class[] {
 			long.class
 		};
+	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes5 = new Class[] {
+			long.class, int.class, int.class
+		};
+	private static final Class<?>[] _getCommerceAccountUserRelsCountParameterTypes6 =
+		new Class[] { long.class };
 }

@@ -78,8 +78,8 @@ public interface CommerceAccountUserRelLocalService extends BaseLocalService,
 		ServiceContext serviceContext) throws PortalException;
 
 	public void addCommerceAccountUserRels(long commerceAccountId,
-		String[] emailAddresses, long[] roleIds, ServiceContext serviceContext)
-		throws PortalException;
+		long[] userIds, String[] emailAddresses, long[] roleIds,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new commerce account user rel with the primary key. Does not add the commerce account user rel to the database.

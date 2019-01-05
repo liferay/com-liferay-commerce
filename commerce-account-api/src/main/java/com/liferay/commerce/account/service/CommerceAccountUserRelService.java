@@ -60,8 +60,8 @@ public interface CommerceAccountUserRelService extends BaseService {
 		throws PortalException;
 
 	public void addCommerceAccountUserRels(long commerceAccountId,
-		String[] emailAddresses, long[] roleIds, ServiceContext serviceContext)
-		throws PortalException;
+		long[] userIds, String[] emailAddresses, long[] roleIds,
+		ServiceContext serviceContext) throws PortalException;
 
 	public void deleteCommerceAccountUserRel(long commerceAccountId, long userId)
 		throws PortalException;
