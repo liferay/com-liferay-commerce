@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.commerce.account.service.persistence.CommerceAccountFinder.getUserCommerceAccounts">
+	<sql id="com.liferay.commerce.account.service.persistence.CommerceAccountFinder.countByU_P">
 		<![CDATA[
 			SELECT
-				DISTINCT *
+				COUNT(DISTINCT CommerceAccount.commerceAccountId) AS COUNT_VALUE
 			FROM
 				CommerceAccount
 			LEFT JOIN
@@ -34,10 +34,10 @@
 				)
 		]]>
 	</sql>
-	<sql id="com.liferay.commerce.account.service.persistence.CommerceAccountFinder.getUserCommerceAccountsCount">
+	<sql id="com.liferay.commerce.account.service.persistence.CommerceAccountFinder.findByU_P">
 		<![CDATA[
 			SELECT
-				COUNT(DISTINCT CommerceAccount.commerceAccountId) AS COUNT_VALUE
+				DISTINCT *
 			FROM
 				CommerceAccount
 			LEFT JOIN
