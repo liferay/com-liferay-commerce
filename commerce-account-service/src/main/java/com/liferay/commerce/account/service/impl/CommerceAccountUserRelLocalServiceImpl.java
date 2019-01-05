@@ -61,8 +61,8 @@ public class CommerceAccountUserRelLocalServiceImpl
 
 	@Override
 	public void addCommerceAccountUserRels(
-			long commerceAccountId, String[] emailAddresses, long[] roleIds,
-			ServiceContext serviceContext)
+			long commerceAccountId, long[] userIds, String[] emailAddresses,
+			long[] roleIds, ServiceContext serviceContext)
 		throws PortalException {
 
 		long classNameId = classNameLocalService.getClassNameId(
@@ -71,19 +71,24 @@ public class CommerceAccountUserRelLocalServiceImpl
 		Group group = groupPersistence.findByC_C_C(
 			serviceContext.getCompanyId(), classNameId, commerceAccountId);
 
-		for (String emailAddress : emailAddresses) {
-			User user = userLocalService.fetchUserByEmailAddress(
-				serviceContext.getCompanyId(), emailAddress);
+		for (long userId : userIds) {
+			User user = userLocalService.getUser(userId);
 
-			if (user == null) {
-				user = userLocalService.addUserWithWorkflow(
-					serviceContext.getUserId(), serviceContext.getCompanyId(),
-					true, StringPool.BLANK, StringPool.BLANK, true,
-					StringPool.BLANK, emailAddress, 0, StringPool.BLANK,
-					serviceContext.getLocale(), emailAddress, StringPool.BLANK,
-					emailAddress, 0, 0, true, 1, 1, 1970, StringPool.BLANK,
-					null, null, null, null, true, serviceContext);
-			}
+			commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+				commerceAccountId, user.getUserId(), serviceContext);
+
+			userGroupRoleLocalService.addUserGroupRoles(
+				user.getUserId(), group.getGroupId(), roleIds);
+		}
+
+		for (String emailAddress : emailAddresses) {
+			User user = userLocalService.addUserWithWorkflow(
+				serviceContext.getUserId(), serviceContext.getCompanyId(), true,
+				StringPool.BLANK, StringPool.BLANK, true, StringPool.BLANK,
+				emailAddress, 0, StringPool.BLANK, serviceContext.getLocale(),
+				emailAddress, StringPool.BLANK, emailAddress, 0, 0, true, 1, 1,
+				1970, StringPool.BLANK, null, null, null, null, true,
+				serviceContext);
 
 			commerceAccountUserRelLocalService.addCommerceAccountUserRel(
 				commerceAccountId, user.getUserId(), serviceContext);
