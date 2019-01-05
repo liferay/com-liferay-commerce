@@ -37,14 +37,14 @@ import java.util.List;
 public class CommerceAccountFinderImpl
 	extends CommerceAccountFinderBaseImpl implements CommerceAccountFinder {
 
-	public static final String GET_USER_COMMERCE_ACCOUNTS =
-		CommerceAccountFinder.class.getName() + ".getUserCommerceAccounts";
+	public static final String COUNT_BY_U_P =
+		CommerceAccountFinder.class.getName() + ".countByU_P";
 
-	public static final String GET_USER_COMMERCE_ACCOUNTS_COUNT =
-		CommerceAccountFinder.class.getName() + ".getUserCommerceAccountsCount";
+	public static final String FIND_BY_U_P =
+		CommerceAccountFinder.class.getName() + ".findByU_P";
 
 	@Override
-	public List<CommerceAccount> getUserCommerceAccounts(
+	public int countByU_P(
 		long userId, QueryDefinition<CommerceAccount> queryDefinition) {
 
 		Session session = null;
@@ -52,52 +52,7 @@ public class CommerceAccountFinderImpl
 		try {
 			session = openSession();
 
-			String sql = _customSQL.get(getClass(), GET_USER_COMMERCE_ACCOUNTS);
-
-			sql = StringUtil.replace(
-				sql, "[$USER_ID$]", String.valueOf(userId));
-
-			Long parentCommerceAccountId = (Long)queryDefinition.getAttribute(
-				"parentCommerceAccountId");
-
-			if (parentCommerceAccountId != null) {
-				sql = StringUtil.replace(
-					sql, "[$PARENT_ACCOUNT_ID$]",
-					_getParentCommerceAccountClause(parentCommerceAccountId));
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$PARENT_ACCOUNT_ID$]", StringPool.BLANK);
-			}
-
-			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-			q.addEntity(
-				CommerceAccountImpl.TABLE_NAME, CommerceAccountImpl.class);
-
-			return (List<CommerceAccount>)QueryUtil.list(
-				q, getDialect(), queryDefinition.getStart(),
-				queryDefinition.getEnd());
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	@Override
-	public int getUserCommerceAccountsCount(
-		long userId, QueryDefinition<CommerceAccount> queryDefinition) {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = _customSQL.get(
-				getClass(), GET_USER_COMMERCE_ACCOUNTS_COUNT);
+			String sql = _customSQL.get(getClass(), COUNT_BY_U_P);
 
 			sql = StringUtil.replace(
 				sql, "[$USER_ID$]", String.valueOf(userId));
@@ -132,6 +87,50 @@ public class CommerceAccountFinderImpl
 			}
 
 			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	public List<CommerceAccount> findByU_P(
+		long userId, QueryDefinition<CommerceAccount> queryDefinition) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), FIND_BY_U_P);
+
+			sql = StringUtil.replace(
+				sql, "[$USER_ID$]", String.valueOf(userId));
+
+			Long parentCommerceAccountId = (Long)queryDefinition.getAttribute(
+				"parentCommerceAccountId");
+
+			if (parentCommerceAccountId != null) {
+				sql = StringUtil.replace(
+					sql, "[$PARENT_ACCOUNT_ID$]",
+					_getParentCommerceAccountClause(parentCommerceAccountId));
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$PARENT_ACCOUNT_ID$]", StringPool.BLANK);
+			}
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity(
+				CommerceAccountImpl.TABLE_NAME, CommerceAccountImpl.class);
+
+			return (List<CommerceAccount>)QueryUtil.list(
+				q, getDialect(), queryDefinition.getStart(),
+				queryDefinition.getEnd());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
