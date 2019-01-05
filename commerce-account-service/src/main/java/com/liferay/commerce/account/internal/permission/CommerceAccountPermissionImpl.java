@@ -138,16 +138,15 @@ public class CommerceAccountPermissionImpl
 				   CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID)) {
 
 			if (actionId.equals(ActionKeys.UPDATE) &&
-				permissionChecker.hasPermission(
-					0, CommerceAccount.class.getName(),
-					commerceAccount.getCommerceAccountId(),
+				_portletResourcePermission.contains(
+					permissionChecker, GroupConstants.DEFAULT_LIVE_GROUP_ID,
 					CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
 
 				return true;
 			}
-			else if (permissionChecker.hasPermission(
-						0, CommerceAccount.class.getName(),
-						commerceAccount.getCommerceAccountId(), actionId)) {
+			else if (_portletResourcePermission.contains(
+						permissionChecker, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+						CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
 
 				return true;
 			}
