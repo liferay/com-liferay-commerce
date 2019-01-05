@@ -42,6 +42,23 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	public CommerceAccount addCommerceAccount(
 			String name, long parentCommerceAccountId, String email,
 			String taxId, boolean active, String externalReferenceCode,
+			long[] userIds, String[] emailAddresses,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+
+		return commerceAccountLocalService.addCommerceAccount(
+			name, parentCommerceAccountId, email, taxId, active,
+			externalReferenceCode, userIds, emailAddresses, serviceContext);
+	}
+
+	@Override
+	public CommerceAccount addCommerceAccount(
+			String name, long parentCommerceAccountId, String email,
+			String taxId, boolean active, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
 

@@ -20,10 +20,12 @@ import com.liferay.commerce.account.exception.DuplicateCommerceAccountException;
 import com.liferay.commerce.account.internal.search.CommerceAccountIndexer;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.base.CommerceAccountLocalServiceBaseImpl;
+import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
+import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -63,6 +65,38 @@ import java.util.Map;
  */
 public class CommerceAccountLocalServiceImpl
 	extends CommerceAccountLocalServiceBaseImpl {
+
+	@Override
+	public CommerceAccount addCommerceAccount(
+			String name, long parentCommerceAccountId, String email,
+			String taxId, boolean active, String externalReferenceCode,
+			long[] userIds, String[] emailAddresses,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		// Commerce Account
+
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.addCommerceAccount(
+				name, parentCommerceAccountId, email, taxId, active,
+				externalReferenceCode, serviceContext);
+
+		// Check commerce account roles
+
+		_commerceAccountRoleHelper.checkCommerceAccountRoles(serviceContext);
+
+		Role role = roleLocalService.getRole(
+			serviceContext.getCompanyId(),
+			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME);
+
+		// Commerce account user rels
+
+		commerceAccountUserRelLocalService.addCommerceAccountUserRels(
+			commerceAccount.getCommerceAccountId(), userIds, emailAddresses,
+			new long[] {role.getRoleId()}, serviceContext);
+
+		return commerceAccount;
+	}
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
@@ -197,8 +231,7 @@ public class CommerceAccountLocalServiceImpl
 		queryDefinition.setStart(start);
 		queryDefinition.setEnd(end);
 
-		return commerceAccountFinder.getUserCommerceAccounts(
-			userId, queryDefinition);
+		return commerceAccountFinder.findByU_P(userId, queryDefinition);
 	}
 
 	@Override
@@ -211,8 +244,7 @@ public class CommerceAccountLocalServiceImpl
 		queryDefinition.setAttribute(
 			"parentCommerceAccountId", parentCommerceAccountId);
 
-		return commerceAccountFinder.getUserCommerceAccountsCount(
-			userId, queryDefinition);
+		return commerceAccountFinder.countByU_P(userId, queryDefinition);
 	}
 
 	@Override
@@ -497,6 +529,9 @@ public class CommerceAccountLocalServiceImpl
 			UserFileUploadsSettings.class,
 			CommerceAccountLocalServiceImpl.class, "_userFileUploadsSettings",
 			false);
+
+	@ServiceReference(type = CommerceAccountRoleHelper.class)
+	private CommerceAccountRoleHelper _commerceAccountRoleHelper;
 
 	@ServiceReference(type = Portal.class)
 	private Portal _portal;
