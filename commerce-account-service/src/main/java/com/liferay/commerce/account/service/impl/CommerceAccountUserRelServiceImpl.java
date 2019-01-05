@@ -47,15 +47,16 @@ public class CommerceAccountUserRelServiceImpl
 
 	@Override
 	public void addCommerceAccountUserRels(
-			long commerceAccountId, String[] emailAddresses, long[] roleIds,
-			ServiceContext serviceContext)
+			long commerceAccountId, long[] userIds, String[] emailAddresses,
+			long[] roleIds, ServiceContext serviceContext)
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
 			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
 
 		commerceAccountUserRelLocalService.addCommerceAccountUserRels(
-			commerceAccountId, emailAddresses, roleIds, serviceContext);
+			commerceAccountId, userIds, emailAddresses, roleIds,
+			serviceContext);
 	}
 
 	@Override
