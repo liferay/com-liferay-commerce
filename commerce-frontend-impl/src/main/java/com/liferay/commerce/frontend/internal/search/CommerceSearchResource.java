@@ -143,7 +143,7 @@ public class CommerceSearchResource {
 			searchItemModel.setImage(account.getThumbnail());
 
 			searchItemModel.setUrl(
-				getAccountManagementPortletEditURL(
+				_getAccountManagementPortletEditURL(
 					account.getAccountId(), themeDisplay));
 
 			searchItemModels.add(searchItemModel);
@@ -226,6 +226,20 @@ public class CommerceSearchResource {
 		return searchItemModels;
 	}
 
+	private String _getAccountManagementPortletEditURL(
+			long accountId, ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		PortletURL editURL = PortletProviderUtil.getPortletURL(
+			themeDisplay.getRequest(), CommerceAccount.class.getName(),
+			PortletProvider.Action.EDIT);
+
+		editURL.setParameter("mvcRenderCommandName", "editCommerceAccount");
+		editURL.setParameter("commerceAccountId", String.valueOf(accountId));
+
+		return editURL.toString();
+	}
+
 	private SearchItemModel _getSearchItemModel(
 			CPCatalogEntry cpCatalogEntry, ThemeDisplay themeDisplay)
 		throws PortalException {
@@ -249,20 +263,6 @@ public class CommerceSearchResource {
 		searchItemModel.setUrl(url);
 
 		return searchItemModel;
-	}
-
-	private String getAccountManagementPortletEditURL(
-			long accountId, ThemeDisplay themeDisplay)
-		throws PortalException {
-
-		PortletURL editURL = PortletProviderUtil.getPortletURL(
-			themeDisplay.getRequest(), CommerceAccount.class.getName(),
-			PortletProvider.Action.EDIT);
-
-		editURL.setParameter("mvcRenderCommandName", "editCommerceAccount");
-		editURL.setParameter("commerceAccountId", String.valueOf(accountId));
-
-		return editURL.toString();
 	}
 
 	private static final ObjectMapper _OBJECT_MAPPER = new ObjectMapper() {
