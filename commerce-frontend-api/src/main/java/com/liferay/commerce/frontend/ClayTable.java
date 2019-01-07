@@ -23,6 +23,10 @@ import java.util.Map;
  */
 public interface ClayTable {
 
+	public default String getActionsMenuVariant() {
+		return StringPool.BLANK;
+	}
+
 	public ClayTableSchema getClayTableSchema();
 
 	public default String getElementClasses() {
@@ -37,6 +41,10 @@ public interface ClayTable {
 
 	public default ResponsiveSize getResponsiveSize() {
 		return ResponsiveSize.MD;
+	}
+
+	public default String getTableVariant() {
+		return StringPool.BLANK;
 	}
 
 	public default boolean isSelectable() {
