@@ -31,7 +31,8 @@
 				(
 					(CommerceAccountUserRel.userId IS NULL) OR
 					(CommerceAccountUserRel.userId = [$USER_ID$])
-				)
+				) AND
+				(CommerceAccount.name LIKE ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.account.service.persistence.CommerceAccountFinder.findByU_P">
@@ -64,7 +65,8 @@
 				(
 					(CommerceAccountUserRel.userId IS NULL) OR
 					(CommerceAccountUserRel.userId = [$USER_ID$])
-				)
+				) AND
+				(CommerceAccount.name LIKE ?)
 		]]>
 	</sql>
 </custom-sql>

@@ -221,11 +221,13 @@ public class CommerceAccountLocalServiceImpl
 
 	@Override
 	public List<CommerceAccount> getUserCommerceAccounts(
-		long userId, Long parentCommerceAccountId, int start, int end) {
+		long userId, Long parentCommerceAccountId, String keywords, int start,
+		int end) {
 
 		QueryDefinition<CommerceAccount> queryDefinition =
 			new QueryDefinition<>();
 
+		queryDefinition.setAttribute("keywords", keywords);
 		queryDefinition.setAttribute(
 			"parentCommerceAccountId", parentCommerceAccountId);
 		queryDefinition.setStart(start);
@@ -236,11 +238,12 @@ public class CommerceAccountLocalServiceImpl
 
 	@Override
 	public int getUserCommerceAccountsCount(
-		long userId, Long parentCommerceAccountId) {
+		long userId, Long parentCommerceAccountId, String keywords) {
 
 		QueryDefinition<CommerceAccount> queryDefinition =
 			new QueryDefinition<>();
 
+		queryDefinition.setAttribute("keywords", keywords);
 		queryDefinition.setAttribute(
 			"parentCommerceAccountId", parentCommerceAccountId);
 
