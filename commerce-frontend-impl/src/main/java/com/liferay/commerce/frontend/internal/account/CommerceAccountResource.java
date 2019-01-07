@@ -35,8 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -53,19 +51,32 @@ import org.osgi.service.component.annotations.Reference;
 @Component(service = CommerceAccountResource.class)
 public class CommerceAccountResource {
 
+	public AccountList getAccountList(
+			Long parentAccountId, String keywords, int page, int pageSize,
+			String imagePath)
+		throws PortalException {
+
+		List<Account> accounts = getAccounts(
+			parentAccountId, keywords, page, pageSize, imagePath);
+
+		return new AccountList(
+			accounts, getAccountsCount(parentAccountId, keywords));
+	}
+
 	@GET
-	@Path("/{parentAccountId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCommerceAccounts(
-		@PathParam("parentAccountId") long parentAccountId,
-		@QueryParam("page") int page, @QueryParam("pageSize") int pageSize,
-		@Context UriInfo uriInfo, @Context ThemeDisplay themeDisplay) {
+		@QueryParam("parentAccountId") Long parentAccountId,
+		@QueryParam("q") String queryString, @QueryParam("page") int page,
+		@QueryParam("pageSize") int pageSize, @Context UriInfo uriInfo,
+		@Context ThemeDisplay themeDisplay) {
 
 		AccountList accountList;
 
 		try {
 			accountList = getAccountList(
-				parentAccountId, page, pageSize, themeDisplay.getPathImage());
+				parentAccountId, queryString, page, pageSize,
+				themeDisplay.getPathImage());
 		}
 		catch (Exception e) {
 			accountList = new AccountList(
@@ -75,18 +86,9 @@ public class CommerceAccountResource {
 		return getResponse(accountList);
 	}
 
-	protected AccountList getAccountList(
-			long parentAccountId, int page, int pageSize, String imagePath)
-		throws PortalException {
-
-		List<Account> accounts = getAccounts(
-			parentAccountId, page, pageSize, imagePath);
-
-		return new AccountList(accounts, accounts.size());
-	}
-
 	protected List<Account> getAccounts(
-			long parentAccountId, int page, int pageSize, String imagePath)
+			Long parentAccountId, String keywords, int page, int pageSize,
+			String imagePath)
 		throws PortalException {
 
 		List<Account> accounts = new ArrayList<>();
@@ -96,7 +98,7 @@ public class CommerceAccountResource {
 
 		List<CommerceAccount> userCommerceAccounts =
 			_commerceAccountService.getUserCommerceAccounts(
-				parentAccountId, start, end);
+				parentAccountId, keywords, start, end);
 
 		for (CommerceAccount commerceAccount : userCommerceAccounts) {
 			accounts.add(
@@ -108,6 +110,13 @@ public class CommerceAccountResource {
 		}
 
 		return accounts;
+	}
+
+	protected int getAccountsCount(Long parentAccountId, String keywords)
+		throws PortalException {
+
+		return _commerceAccountService.getUserCommerceAccountsCount(
+			parentAccountId, keywords);
 	}
 
 	protected String getLogoThumbnailSrc(long logoId, String imagePath) {

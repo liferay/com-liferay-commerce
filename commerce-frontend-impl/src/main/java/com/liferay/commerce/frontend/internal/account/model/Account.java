@@ -31,12 +31,12 @@ public class Account {
 		_success = false;
 	}
 
-	public String[] getErrorMessages() {
-		return _errorMessages;
+	public long getAccountId() {
+		return _accountId;
 	}
 
-	public long getId() {
-		return _accountId;
+	public String[] getErrorMessages() {
+		return _errorMessages;
 	}
 
 	public String getName() {
