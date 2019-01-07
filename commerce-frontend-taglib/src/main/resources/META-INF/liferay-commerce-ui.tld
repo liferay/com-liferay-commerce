@@ -133,5 +133,10 @@
 		<tag-class>
 			com.liferay.commerce.frontend.taglib.servlet.taglib.UserInvitationTag</tag-class>
 		<body-content>empty</body-content>
+		<attribute>
+			<name>componentId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 </taglib>
