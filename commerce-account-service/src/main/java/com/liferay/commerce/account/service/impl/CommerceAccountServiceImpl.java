@@ -18,6 +18,7 @@ import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.base.CommerceAccountServiceBaseImpl;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -111,24 +112,26 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	public List<CommerceAccount> getUserCommerceAccounts(int start, int end)
 		throws PortalException {
 
-		return commerceAccountService.getUserCommerceAccounts(null, start, end);
+		return commerceAccountService.getUserCommerceAccounts(
+			null, StringPool.BLANK, start, end);
 	}
 
 	@Override
 	public List<CommerceAccount> getUserCommerceAccounts(
-			Long parentCommerceAccountId, int start, int end)
+			Long parentCommerceAccountId, String keywords, int start, int end)
 		throws PortalException {
 
 		return commerceAccountLocalService.getUserCommerceAccounts(
-			getUserId(), parentCommerceAccountId, start, end);
+			getUserId(), parentCommerceAccountId, keywords, start, end);
 	}
 
 	@Override
-	public int getUserCommerceAccountsCount(Long parentCommerceAccountId)
+	public int getUserCommerceAccountsCount(
+			Long parentCommerceAccountId, String keywords)
 		throws PortalException {
 
 		return commerceAccountLocalService.getUserCommerceAccountsCount(
-			getUserId(), parentCommerceAccountId);
+			getUserId(), parentCommerceAccountId, keywords);
 	}
 
 	@Override

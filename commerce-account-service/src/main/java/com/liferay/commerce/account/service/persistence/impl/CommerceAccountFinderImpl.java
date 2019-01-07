@@ -20,12 +20,14 @@ import com.liferay.commerce.account.service.persistence.CommerceAccountFinder;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.dao.orm.custom.sql.CustomSQL;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.Iterator;
@@ -70,7 +72,17 @@ public class CommerceAccountFinderImpl
 					sql, "[$PARENT_ACCOUNT_ID$]", StringPool.BLANK);
 			}
 
+			String keywords = (String)queryDefinition.getAttribute("keywords");
+
+			if (Validator.isNotNull(keywords)) {
+				keywords = "%" + keywords + "%";
+			}
+
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(keywords);
 
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
@@ -123,10 +135,20 @@ public class CommerceAccountFinderImpl
 					sql, "[$PARENT_ACCOUNT_ID$]", StringPool.BLANK);
 			}
 
+			String keywords = (String)queryDefinition.getAttribute("keywords");
+
+			if (Validator.isNotNull(keywords)) {
+				keywords = "%" + keywords + "%";
+			}
+
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
 			q.addEntity(
 				CommerceAccountImpl.TABLE_NAME, CommerceAccountImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(keywords);
 
 			return (List<CommerceAccount>)QueryUtil.list(
 				q, getDialect(), queryDefinition.getStart(),
