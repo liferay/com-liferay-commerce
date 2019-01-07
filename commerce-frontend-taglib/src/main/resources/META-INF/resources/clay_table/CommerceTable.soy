@@ -18,17 +18,20 @@
 	{@param? selectable: bool}
 	{@param showActionsMenu: bool}
 	{@param totalItems: int}
+	{@param? tableVariant: string}
+	{@param? actionsMenuVariant: string}
 
 	<div>
-		{call ClayTable.render}
-			{param events: ['itemToggled': $_handleItemToggled ] /}
-			{param id: $id /}
+		{delcall CommerceTable.Table variant="$tableVariant"}
+			{param _handleItemToggled: $_handleItemToggled /}
+			{param id: $id + 'Table' /}
 			{param items: $items /}
 			{param schema: $schema /}
 			{param selectable: $selectable /}
 			{param showActionsMenu : $showActionsMenu /}
 			{param spritemap: $spritemap /}
-		{/call}
+			{param actionsMenuVariant: $actionsMenuVariant /}
+		{/delcall}
 
 		{call ClayPaginationBar.render}
 			{param events: ['itemsPerPageClicked': $_handleItemsPerPageClicked, 'pageClicked': $_handlePageClicked ] /}
@@ -41,7 +44,35 @@
 			{param id: $id + 'Pagination' /}
 		{/call}
 	</div>
-{/template}{deltemplate ClayTable.ActionsMenu  variant="'miniumActionsMenuVariant'"}
+{/template}
+
+/**
+ * This renders the default variant of the table
+ */
+{deltemplate CommerceTable.Table}
+	{@param _handleItemToggled: any}
+	{@param? id: string}
+	{@param spritemap: string}
+	{@param items: ?}
+	{@param schema: ?}
+	{@param? selectable: bool}
+	{@param showActionsMenu: bool}
+	{@param? actionsMenuVariant: string}
+
+	{call ClayTable.render}
+		{param events: ['itemToggled': $_handleItemToggled ] /}
+		{param id: $id /}
+		{param items: $items /}
+		{param schema: $schema /}
+		{param selectable: $selectable /}
+		{param showActionsMenu : $showActionsMenu /}
+		{param spritemap: $spritemap /}
+		{param actionsMenuVariant: $actionsMenuVariant /}
+	{/call}
+
+{/deltemplate}
+
+{deltemplate ClayTable.ActionsMenu  variant="'miniumActionsMenuVariant'"}
 	{@param actionItems: list<?>}
 	{@param spritemap: string}
 
@@ -49,4 +80,16 @@
 		{param actionItems: $actionItems /}
 		{param spritemap: $spritemap /}
 	{/call}
+{/deltemplate}
+
+{deltemplate ClayTable.Cell variant="'image'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+
+	<td class="{$fieldSchema.cssClass}">
+		<img src={$value} />
+	</td>
 {/deltemplate}
