@@ -77,12 +77,18 @@ public class CommerceAccountFinderImpl
 			if (Validator.isNotNull(keywords)) {
 				keywords = "%" + keywords + "%";
 			}
+			else {
+				sql = StringUtil.replace(
+					sql, "AND (CommerceAccount.name LIKE ?)", StringPool.BLANK);
+			}
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
-			QueryPos qPos = QueryPos.getInstance(q);
+			if (Validator.isNotNull(keywords)) {
+				QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(keywords);
+				qPos.add(keywords);
+			}
 
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
@@ -140,15 +146,21 @@ public class CommerceAccountFinderImpl
 			if (Validator.isNotNull(keywords)) {
 				keywords = "%" + keywords + "%";
 			}
+			else {
+				sql = StringUtil.replace(
+					sql, "AND (CommerceAccount.name LIKE ?)", StringPool.BLANK);
+			}
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
 			q.addEntity(
 				CommerceAccountImpl.TABLE_NAME, CommerceAccountImpl.class);
 
-			QueryPos qPos = QueryPos.getInstance(q);
+			if (Validator.isNotNull(keywords)) {
+				QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(keywords);
+				qPos.add(keywords);
+			}
 
 			return (List<CommerceAccount>)QueryUtil.list(
 				q, getDialect(), queryDefinition.getStart(),
