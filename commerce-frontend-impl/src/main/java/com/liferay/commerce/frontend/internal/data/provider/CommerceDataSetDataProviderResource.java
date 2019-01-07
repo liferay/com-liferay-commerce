@@ -80,8 +80,8 @@ public class CommerceDataSetDataProviderResource {
 				WebKeys.THEME_DISPLAY, themeDisplay);
 
 			List<Object> items = commerceDataProvider.getItems(
-				groupId, filterFactory.create(httpServletRequest), pagination,
-				sort);
+				httpServletRequest, filterFactory.create(httpServletRequest),
+				pagination, sort);
 
 			String json = _clayTableDataJSONBuilder.build(
 				groupId, tableName, items, httpServletRequest);
