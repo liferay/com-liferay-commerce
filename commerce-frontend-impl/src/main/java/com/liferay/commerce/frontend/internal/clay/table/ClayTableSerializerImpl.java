@@ -18,6 +18,7 @@ import com.liferay.commerce.frontend.ClayTable;
 import com.liferay.commerce.frontend.ClayTableSchema;
 import com.liferay.commerce.frontend.ClayTableSchemaField;
 import com.liferay.commerce.frontend.ClayTableSerializer;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -40,10 +41,12 @@ public class ClayTableSerializerImpl implements ClayTableSerializer {
 	public Map<String, Object> serialize(ClayTable clayTable) {
 		Map<String, Object> context = new HashMap<>();
 
+		context.put("actionsMenuVariant", clayTable.getActionsMenuVariant());
 		context.put("elementClasses", clayTable.getElementClasses());
 		context.put("id", clayTable.getId());
 		context.put("selectable", clayTable.isSelectable());
 		context.put("showActionsMenu", clayTable.isShowActionsMenu());
+		context.put("tableVariant", clayTable.getTableVariant());
 
 		ClayTable.ResponsiveSize responsiveSize = clayTable.getResponsiveSize();
 
@@ -71,7 +74,7 @@ public class ClayTableSerializerImpl implements ClayTableSerializer {
 			String name = clayTableSchemaField.getFieldName();
 
 			if (Validator.isNull(label)) {
-				label = name;
+				label = StringPool.BLANK;
 			}
 
 			jsonObject.put(
@@ -87,6 +90,17 @@ public class ClayTableSerializerImpl implements ClayTableSerializer {
 				jsonObject.put(
 					"sortingOrder",
 					StringUtil.toLowerCase(sortingOrder.toString()));
+			}
+
+			Map<String, Object> properties =
+				clayTableSchemaField.getProperties();
+
+			if (properties != null) {
+				for (Map.Entry<String, Object> property :
+						properties.entrySet()) {
+
+					jsonObject.put(property.getKey(), property.getValue());
+				}
 			}
 
 			fieldsJSONArray.put(jsonObject);

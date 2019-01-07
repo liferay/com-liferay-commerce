@@ -14,29 +14,17 @@
 
 package com.liferay.commerce.frontend;
 
+import aQute.bnd.annotation.ProviderType;
+
+import java.util.List;
+
 /**
  * @author Marco Leo
  */
-public interface ClayTableSchemaBuilder {
+@ProviderType
+public interface ClayTableContextContributorRegistry {
 
-	public void addField(ClayTableSchemaField clayTableSchemaField);
-
-	public ClayTableSchemaField addField(String fieldName);
-
-	public ClayTableSchemaField addField(String fieldName, String label);
-
-	public void addInputNamesMap(String inputName, Object object);
-
-	public void addProperties(String name, Object value);
-
-	public ClayTableSchema build();
-
-	public void removeField(String fieldName);
-
-	public void setClayTableSchema(ClayTableSchema clayTableSchema);
-
-	public void setInputNameField(String inputNameField);
-
-	public void setInputValueField(String inputValueField);
+	public List<ClayTableContextContributor> getClayTableContextContributors(
+		String key);
 
 }
