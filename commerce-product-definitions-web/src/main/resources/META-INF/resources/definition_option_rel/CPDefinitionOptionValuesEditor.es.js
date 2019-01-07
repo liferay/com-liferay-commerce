@@ -28,6 +28,8 @@ class CPDefinitionOptionValuesEditor extends Component {
 	}
 
 	loadOptionValues() {
+		this._updateCPDefinitionId(this);
+
 		if (this.cpDefinitionOptionRelId === undefined || this.cpDefinitionOptionRelId == '0') {
 			this._newCPDefinitionOptionValueRelName = '';
 			this._currentCPDefinitionOptionValueRelId = '0';
@@ -127,6 +129,21 @@ class CPDefinitionOptionValuesEditor extends Component {
 			}
 		);
 	}
+
+	_updateCPDefinitionId(instance) {
+		var url = new URL(window.location.href);
+		var cpDefinitionOptionValueRelsURL = new URL(instance.cpDefinitionOptionValueRelsURL);
+
+		var cpDefinitionId = url.searchParams.get(instance.namespace + 'cpDefinitionId');
+
+		if (cpDefinitionId != instance.cpDefinitionId) {
+			url.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+			cpDefinitionOptionValueRelsURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+
+			window.history.pushState({}, '', url);
+			instance.cpDefinitionOptionValueRelsURL = cpDefinitionOptionValueRelsURL.href;
+		}
+	}
 }
 
 /**
@@ -136,6 +153,7 @@ class CPDefinitionOptionValuesEditor extends Component {
  */
 
 CPDefinitionOptionValuesEditor.STATE = {
+	cpDefinitionId: Config.string(),
 	cpDefinitionOptionRelId: Config.string().required(),
 	cpDefinitionOptionValueRelsURL: Config.string().required(),
 	cpDefinitionOptionValueRelURL: Config.string().required(),
