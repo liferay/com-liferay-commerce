@@ -21,16 +21,20 @@ import com.liferay.portal.kernel.search.Sort;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Marco Leo
  */
 @ConsumerType
 public interface CommerceDataSetDataProvider<T> {
 
-	public int countItems(long groupId, Filter filter) throws PortalException;
+	public int countItems(HttpServletRequest httpServletRequest, Filter filter)
+		throws PortalException;
 
 	public List<T> getItems(
-			long groupId, Filter filter, Pagination pagination, Sort sort)
+			HttpServletRequest httpServletRequest, Filter filter,
+			Pagination pagination, Sort sort)
 		throws PortalException;
 
 }
