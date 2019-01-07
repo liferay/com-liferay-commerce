@@ -72,12 +72,11 @@ public class CommerceAccountIndexer extends BaseIndexer<CommerceAccount> {
 				FIELD_ACTIVE, String.valueOf(active), BooleanClauseOccur.MUST);
 		}
 
-		long parentCommerceAccountId = (long)searchContext.getAttribute(
-			FIELD_PARENT_COMMERCE_ACCOUNT_ID);
+		long parentCommerceAccountId = GetterUtil.getLong(
+			searchContext.getAttribute(FIELD_PARENT_COMMERCE_ACCOUNT_ID));
 
-		contextBooleanFilter.addTerm(
-			FIELD_PARENT_COMMERCE_ACCOUNT_ID,
-			String.valueOf(parentCommerceAccountId), BooleanClauseOccur.MUST);
+		contextBooleanFilter.addRequiredTerm(
+			FIELD_PARENT_COMMERCE_ACCOUNT_ID, parentCommerceAccountId);
 	}
 
 	@Override
