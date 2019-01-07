@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.frontend.internal.search.util;
 
+import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Layout;
@@ -30,6 +31,21 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(service = CommerceSearchUtil.class)
 public class CommerceSearchUtil {
+
+	public String getAccountManagementFriendlyURL(ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		LayoutSet layoutSet = themeDisplay.getLayoutSet();
+
+		Layout layout = _getAccountManagementLayout(
+			themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
+
+		if (layout == null) {
+			return null;
+		}
+
+		return _portal.getLayoutFriendlyURL(layout, themeDisplay);
+	}
 
 	public String getCatalogFriendlyURL(ThemeDisplay themeDisplay)
 		throws PortalException {
@@ -59,6 +75,27 @@ public class CommerceSearchUtil {
 		}
 
 		return _portal.getLayoutFriendlyURL(layout, themeDisplay);
+	}
+
+	private Layout _getAccountManagementLayout(
+			long groupId, boolean privateLayout)
+		throws PortalException {
+
+		Layout layout = _layoutLocalService.fetchLayoutByFriendlyURL(
+			groupId, privateLayout, "/account-management");
+
+		if (layout != null) {
+			return layout;
+		}
+
+		long plid = _portal.getPlidFromPortletId(
+			groupId, CommerceAccountPortletKeys.COMMERCE_ACCOUNT);
+
+		if (plid > 0) {
+			layout = _layoutLocalService.fetchLayout(plid);
+		}
+
+		return layout;
 	}
 
 	private Layout _getCatalogLayout(long groupId, boolean privateLayout)
