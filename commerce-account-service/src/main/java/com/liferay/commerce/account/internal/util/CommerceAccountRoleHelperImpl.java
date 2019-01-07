@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
-import com.liferay.portal.kernel.service.RoleService;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.Collections;
@@ -62,8 +61,8 @@ public class CommerceAccountRoleHelperImpl
 			serviceContext.getCompanyId(), name);
 
 		if (role == null) {
-			role = _roleService.addRole(
-				null, 0, name,
+			role = _roleLocalService.addRole(
+				serviceContext.getUserId(), null, 0, name,
 				Collections.singletonMap(serviceContext.getLocale(), name),
 				Collections.emptyMap(),
 				CommerceAccountConstants.ACCOUNT_ROLE_TYPE, StringPool.BLANK,
@@ -113,8 +112,5 @@ public class CommerceAccountRoleHelperImpl
 
 	@Reference
 	private RoleLocalService _roleLocalService;
-
-	@Reference
-	private RoleService _roleService;
 
 }
