@@ -106,7 +106,8 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 				cpDefinitionOptionRelId);
 
 		if (cpDefinitionLocalService.isVersionable(
-				cpDefinitionOptionRel.getCPDefinitionId())) {
+				cpDefinitionOptionRel.getCPDefinitionId(),
+				serviceContext.getRequest())) {
 
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
@@ -362,7 +363,8 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 			cpDefinitionOptionValueRel.getCPDefinitionOptionRel();
 
 		if (cpDefinitionLocalService.isVersionable(
-				cpDefinitionOptionRel.getCPDefinitionId())) {
+				cpDefinitionOptionRel.getCPDefinitionId(),
+				serviceContext.getRequest())) {
 
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(

@@ -16,6 +16,7 @@ package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
+import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.base.CPDefinitionOptionRelLocalServiceBaseImpl;
@@ -55,6 +56,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Marco Leo
@@ -97,11 +100,20 @@ public class CPDefinitionOptionRelLocalServiceImpl
 		CPDefinitionOptionRel cpDefinitionOptionRel =
 			cpDefinitionOptionRelPersistence.create(cpDefinitionOptionRelId);
 
-		if (cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
+		if (cpDefinitionLocalService.isVersionable(
+			cpDefinitionId, serviceContext.getRequest())) {
+
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
 
 			cpDefinitionId = newCPDefinition.getCPDefinitionId();
+
+			HttpServletRequest httpServletRequest = serviceContext.getRequest();
+
+			httpServletRequest.setAttribute(
+				"versionable#" + cpDefinitionId, Boolean.FALSE);
+
+			serviceContext.setRequest(httpServletRequest);
 		}
 
 		cpDefinitionOptionRel.setUuid(serviceContext.getUuid());
@@ -170,9 +182,21 @@ public class CPDefinitionOptionRelLocalServiceImpl
 
 		// Commerce product definition option value rels
 
-		cpDefinitionOptionValueRelLocalService.
-			deleteCPDefinitionOptionValueRels(
-				cpDefinitionOptionRel.getCPDefinitionOptionRelId());
+		List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
+			cpDefinitionOptionValueRelLocalService.
+				getCPDefinitionOptionValueRels(
+					cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
+				cpDefinitionOptionValueRels) {
+
+			cpDefinitionOptionValueRelPersistence.remove(
+				cpDefinitionOptionValueRel);
+
+			expandoRowLocalService.deleteRows(
+				cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId());
+		}
 
 		// Commerce product definition option rel
 
@@ -312,7 +336,8 @@ public class CPDefinitionOptionRelLocalServiceImpl
 				cpDefinitionOptionRelId);
 
 		if (cpDefinitionLocalService.isVersionable(
-				cpDefinitionOptionRel.getCPDefinitionId())) {
+				cpDefinitionOptionRel.getCPDefinitionId(),
+				serviceContext.getRequest())) {
 
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(
