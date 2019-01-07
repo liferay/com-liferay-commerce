@@ -79,6 +79,16 @@ public class ClayTableSchemaBuilderImpl implements ClayTableSchemaBuilder {
 	}
 
 	@Override
+	public void removeField(String fieldName) {
+		_fields.remove(fieldName);
+	}
+
+	@Override
+	public void setClayTableSchema(ClayTableSchema clayTableSchema) {
+		_clayTableSchema = clayTableSchema;
+	}
+
+	@Override
 	public void setInputNameField(String inputNameField) {
 		_clayTableSchema.setInputNameField(inputNameField);
 	}
@@ -88,7 +98,7 @@ public class ClayTableSchemaBuilderImpl implements ClayTableSchemaBuilder {
 		_clayTableSchema.setInputValueField(inputValueField);
 	}
 
-	private final ClayTableSchema _clayTableSchema;
+	private ClayTableSchema _clayTableSchema;
 	private final Map<String, ClayTableSchemaField> _fields;
 	private final Map<String, Object> _inputNamesMap;
 	private final Map<String, Object> _properties;
