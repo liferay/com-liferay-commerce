@@ -43,8 +43,6 @@ public class SearchBarTag extends ComponentRendererTag {
 
 		String query = ParamUtil.getString(request, "q");
 
-		putValue("active", Validator.isNotNull(query));
-
 		putValue("query", query);
 
 		putValue(
