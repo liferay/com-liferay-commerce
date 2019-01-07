@@ -129,7 +129,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		List<CommerceAccount> userCommerceAccounts =
 			_commerceAccountService.getUserCommerceAccounts(
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				StringPool.BLANK, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		if (userCommerceAccounts.size() == 1) {
 			return userCommerceAccounts.get(0);
