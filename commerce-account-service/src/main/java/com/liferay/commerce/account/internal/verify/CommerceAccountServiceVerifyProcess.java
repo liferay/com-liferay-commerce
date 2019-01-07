@@ -16,6 +16,7 @@ package com.liferay.commerce.account.internal.verify;
 
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.UserConstants;
 import com.liferay.portal.kernel.security.SecureRandomUtil;
 import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -51,6 +52,7 @@ public class CommerceAccountServiceVerifyProcess extends VerifyProcess {
 				ServiceContext serviceContext = new ServiceContext();
 
 				serviceContext.setCompanyId(company.getCompanyId());
+				serviceContext.setUserId(UserConstants.USER_ID_DEFAULT);
 
 				UUID uuid = new UUID(
 					SecureRandomUtil.nextLong(), SecureRandomUtil.nextLong());
