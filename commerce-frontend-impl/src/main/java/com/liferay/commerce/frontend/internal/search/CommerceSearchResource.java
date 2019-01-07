@@ -18,6 +18,10 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.frontend.internal.account.CommerceAccountResource;
+import com.liferay.commerce.frontend.internal.account.model.Account;
+import com.liferay.commerce.frontend.internal.account.model.AccountList;
 import com.liferay.commerce.frontend.internal.search.model.SearchItemModel;
 import com.liferay.commerce.frontend.internal.search.util.CommerceSearchUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
@@ -29,6 +33,8 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
+import com.liferay.portal.kernel.portlet.PortletProvider;
+import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.service.LayoutLocalService;
@@ -44,6 +50,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.portlet.PortletURL;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -83,6 +91,7 @@ public class CommerceSearchResource {
 				searchProducts(
 					themeDisplay.getCompanyId(), layout.getGroupId(),
 					queryString, themeDisplay));
+			searchItemModels.addAll(searchAccounts(queryString, themeDisplay));
 
 			String url = _commerceSearchUtil.getSearchFriendlyURL(themeDisplay);
 
@@ -111,6 +120,51 @@ public class CommerceSearchResource {
 		return Response.status(
 			Response.Status.SERVICE_UNAVAILABLE
 		).build();
+	}
+
+	protected List<SearchItemModel> searchAccounts(
+			String queryString, ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		List<SearchItemModel> searchItemModels = new ArrayList<>();
+
+		AccountList accountList = _commerceAccountResource.getAccountList(
+			null, queryString, 1, 5, themeDisplay.getPathImage());
+
+		searchItemModels.add(
+			new SearchItemModel(
+				"label",
+				LanguageUtil.get(themeDisplay.getLocale(), "accounts")));
+
+		for (Account account : accountList.getAccounts()) {
+			SearchItemModel searchItemModel = new SearchItemModel(
+				"item", HtmlUtil.escape(account.getName()));
+
+			searchItemModel.setImage(account.getThumbnail());
+
+			searchItemModel.setUrl(
+				getAccountManagementPortletEditURL(
+					account.getAccountId(), themeDisplay));
+
+			searchItemModels.add(searchItemModel);
+		}
+
+		String url = _commerceSearchUtil.getAccountManagementFriendlyURL(
+			themeDisplay);
+
+		if (Validator.isNotNull(url)) {
+			url = _http.addParameter(url, "q", queryString);
+
+			SearchItemModel searchItemModel = new SearchItemModel(
+				"category",
+				LanguageUtil.get(themeDisplay.getLocale(), "accounts"));
+
+			searchItemModel.setUrl(url);
+
+			searchItemModels.add(searchItemModel);
+		}
+
+		return searchItemModels;
 	}
 
 	protected List<SearchItemModel> searchProducts(
@@ -197,6 +251,20 @@ public class CommerceSearchResource {
 		return searchItemModel;
 	}
 
+	private String getAccountManagementPortletEditURL(
+			long accountId, ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		PortletURL editURL = PortletProviderUtil.getPortletURL(
+			themeDisplay.getRequest(), CommerceAccount.class.getName(),
+			PortletProvider.Action.EDIT);
+
+		editURL.setParameter("mvcRenderCommandName", "editCommerceAccount");
+		editURL.setParameter("commerceAccountId", String.valueOf(accountId));
+
+		return editURL.toString();
+	}
+
 	private static final ObjectMapper _OBJECT_MAPPER = new ObjectMapper() {
 		{
 			configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
@@ -206,6 +274,9 @@ public class CommerceSearchResource {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceSearchResource.class);
+
+	@Reference
+	private CommerceAccountResource _commerceAccountResource;
 
 	@Reference
 	private CommerceSearchUtil _commerceSearchUtil;
