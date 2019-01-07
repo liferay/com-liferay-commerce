@@ -1,19 +1,20 @@
 {namespace SearchResults}
 
 {template .render}
-	{@param queryString: string }
+	{@param? queryValue: string }
 	{@param? results: ? }
 	{@param visible: bool }
+	{@param? loading: bool }
 
 	{@param? _handleClick: ? }
 
 	{if $visible}
-		<div class="minium-suggestions">
+		<div class="minium-suggestions {if $loading}is-loading{/if}">
 			<div class="minium-suggestions__wrapper">
 
 				{foreach $item in $results}
 					{delcall MiniumSearchResults.Item variant="$item.type"}
-						{param queryString: $queryString /}
+						{param queryValue: $queryValue /}
 						{param item: $item /}
 						{param _handleClick: $_handleClick /}
 					{/delcall}
@@ -37,7 +38,7 @@
 {/template}
 
 {deltemplate MiniumSearchResults.Item}
-	{@param queryString: string }
+	{@param? queryValue: string }
 	{@param item: ? }
 	{@param? _handleClick: ? }
 
@@ -59,7 +60,7 @@
 {/deltemplate}
 
 {deltemplate MiniumSearchResults.Item variant="'category'"}
-	{@param queryString: string }
+	{@param? queryValue: string }
 	{@param item: ? }
 	{@param? _handleClick: ? }
 
@@ -70,12 +71,12 @@
 		data-onmouseleave="handleMouseLeave"
 		data-pos="{$item.pos}"
 	>
-		Search "{$queryString}" in {$item.title}
+		Search "{$queryValue}" in {$item.title}
 	</div>
 {/deltemplate}
 
 {deltemplate MiniumSearchResults.Item variant="'label'"}
-	{@param queryString: string }
+	{@param? queryValue: string }
 	{@param item: ? }
 	{@param? _handleClick: ? }
 

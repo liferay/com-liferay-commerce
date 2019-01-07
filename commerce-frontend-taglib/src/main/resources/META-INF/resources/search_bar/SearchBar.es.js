@@ -1,69 +1,74 @@
-import Component from 'metal-component';
-import debounce from 'metal-debounce';
-import Soy, {Config} from 'metal-soy';
+import Component from "metal-component";
+import Soy, { Config } from "metal-soy";
 
-import template from './SearchBar.soy';
+import template from "./SearchBar.soy";
 
 class SearchBar extends Component {
+  created() {
+    this.handleDocumentKeypress = this.handleDocumentKeypress.bind(this);
+    document.addEventListener("keydown", this.handleDocumentKeypress);
+    document.querySelectorAll(".js-toggle-search").forEach(el => {
+      el.classList.toggle("is-active", status);
+      el.addEventListener("click", this._toogleClick.bind(this));
+    });
+  }
 
-	created() {
-		this.updateQuery = debounce(this.updateQuery.bind(this), 500);
+  detached() {
+    document.removeEventListener("keydown", this.handleDocumentKeypress);
+  }
 
-		document.addEventListener('keydown', this.handleEscape.bind(this));
+  _toogleClick() {
+    this.toogle(!this.active);
+  }
 
-		document.querySelectorAll('.js-toggle-search').forEach(el => {
-			el.addEventListener('click', this._toogleClick.bind(this));
-		});
-	}
+  handleSubmit(e) {
+    e.preventDefault();
+    window.Liferay.fire("search-term-submit", { term: this.query });
+  }
 
-	_toogleClick() {
-		this.toogle(!this.active);
-	}
+  handleEmpty(e) {
+    this.updateQuery("");
+  }
 
-	handleSubmit(e) {
-		e.preventDefault();
-		this.updateQuery(this.refs.searchInput.value);
-	}
+  handleKeyUp(e) {
+    if (e.key == "ArrowDown" || e.key === "ArrowUp") e.preventDefault();
+    this.updateQuery(e.target.value);
+  }
 
-	handleKeyUp(e) {
-		this.updateQuery(e.target.value);
-	}
+  updateQuery(query) {
+    if (query !== this.query) {
+      this.toogle(true);
+      this.query = query;
+      window.Liferay.fire("search-term-update", { term: query });
+    }
+  }
 
-	updateQuery(query) {
-		this.toogle(true);
+  handleDocumentKeypress(e) {
+    if (this.active && e.key === "Escape") {
+      this.toogle(false);
+    } else if (!this.active && e.key === "/") {
+      this.toogle(true);
+    }
+  }
 
-		window.Liferay.fire('search-term-update', {'term': query});
-	}
+  toogle(status) {
+    if (status) setTimeout(() => this.refs.searchInput.focus(), 0);
+    else setTimeout(() => this.refs.searchInput.blur(), 0);
 
-	handleEscape(e) {
-		if (this.active && e.key === 'Escape') {
-			this.toogle();
-		}
-	}
-
-	toogle(status) {
-		this.active = status;
-
-		if (this.active) {
-			this.elementClasses = 'show';
-		}
-		else {
-			this.elementClasses = 'hide';
-		}
-
-		this.emit('toogled', this.active);
-	}
+    this.active = status;
+    this.emit("toogled", status);
+  }
 }
 
 Soy.register(SearchBar, template);
 
 SearchBar.STATE = {
-	placeholder: {
-		value: ''
-	},
-	query: Config.string(),
-	active: Config.bool()
+  placeholder: {
+    value: ""
+  },
+  query: Config.string(),
+  active: Config.bool()
 };
 
-export {SearchBar};
+export { SearchBar };
 export default SearchBar;
