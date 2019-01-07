@@ -17,10 +17,6 @@ class UserInvitation extends Component {
 
 	created() {
 		this._debouncedFetchUser = debounce(this._fetchUsers, 300);
-
-		setTimeout(() => {
-			this._isVisible = !this._isVisible;
-		}, 2000);
 	}
 
 	attached() {
@@ -107,6 +103,10 @@ class UserInvitation extends Component {
 		if (!this.addedUsers.length) {
 			return false;
 		};
+
+		this.emit('userInvitationSave', this.addedUsers)
+
+		/*
 		return fetch(
 			this.invitationAPI,
 			{
@@ -120,6 +120,20 @@ class UserInvitation extends Component {
 			.then(
 				invitation => invitation.state
 			);
+
+		*/
+	}
+
+	toggle() {
+		this._isVisible = !this._isVisible;
+	}
+
+	open() {
+		this._isVisible = true;
+	}
+
+	open() {
+		this._isVisible = false;
 	}
 };
 
@@ -141,7 +155,6 @@ const USER_SCHEMA = Config.shapeOf(
 
 UserInvitation.STATE = {
 	usersAPI: Config.string().required(),
-	invitationAPI: Config.string().required(),
 	query: Config.string().value(''),
 	spritemap: Config.string(),
 	users: Config.array(USER_SCHEMA).value([]),

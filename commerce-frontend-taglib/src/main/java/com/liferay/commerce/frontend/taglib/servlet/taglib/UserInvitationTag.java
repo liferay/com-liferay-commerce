@@ -32,7 +32,6 @@ public class UserInvitationTag extends ComponentRendererTag {
 			WebKeys.THEME_DISPLAY);
 
 		putValue("usersAPI", "api/users");
-		putValue("invitationAPI", "api/invitation");
 
 		putValue(
 			"spritemap",
@@ -53,6 +52,11 @@ public class UserInvitationTag extends ComponentRendererTag {
 
 		return npmResolver.resolveModuleName(
 			"commerce-frontend-taglib/user_invitatation/UserInvitation.es");
+	}
+
+
+	public void setComponentId(String componentId) {
+		setComponentId(componentId);
 	}
 
 }
