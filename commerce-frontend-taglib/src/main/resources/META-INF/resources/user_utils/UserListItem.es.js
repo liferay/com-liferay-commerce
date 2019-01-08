@@ -4,7 +4,7 @@ import template from './UserListItem.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-import '../autocomplete_item/AutocompleteItem.es'
+import '../autocomplete_item/AutocompleteItem.es';
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

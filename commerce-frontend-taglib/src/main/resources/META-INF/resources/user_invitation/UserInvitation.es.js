@@ -104,7 +104,7 @@ class UserInvitation extends Component {
 			return false;
 		};
 
-		return this.emit('userInvitationSave', this.addedUsers)
+		return this.emit('userInvitationSave', this.addedUsers);
 	}
 
 	toggle() {
