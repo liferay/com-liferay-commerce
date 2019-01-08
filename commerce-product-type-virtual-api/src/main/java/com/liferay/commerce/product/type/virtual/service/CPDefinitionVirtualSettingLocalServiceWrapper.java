@@ -78,6 +78,13 @@ public class CPDefinitionVirtualSettingLocalServiceWrapper
 			serviceContext);
 	}
 
+	@Override
+	public void cloneCPDefinitionVirtualSetting(long cpDefinitionId,
+		long newCPDefinitionId) {
+		_cpDefinitionVirtualSettingLocalService.cloneCPDefinitionVirtualSetting(cpDefinitionId,
+			newCPDefinitionId);
+	}
+
 	/**
 	* Creates a new cp definition virtual setting with the primary key. Does not add the cp definition virtual setting to the database.
 	*

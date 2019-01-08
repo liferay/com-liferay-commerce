@@ -324,6 +324,12 @@ public class CProductLocalServiceWrapper implements CProductLocalService,
 		return _cProductLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+	@Override
+	public int increment(long cProductId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cProductLocalService.increment(cProductId);
+	}
+
 	/**
 	* Updates the c product in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -337,19 +343,11 @@ public class CProductLocalServiceWrapper implements CProductLocalService,
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CProduct updateDraftDefinitionId(
-		long cProductId, long draftDefinitionId)
+	public com.liferay.commerce.product.model.CProduct updatePublishedCPDefinitionId(
+		long cProductId, long publishedCPDefinitionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cProductLocalService.updateDraftDefinitionId(cProductId,
-			draftDefinitionId);
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CProduct updatePublishedDefinitionId(
-		long cProductId, long publishedDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cProductLocalService.updatePublishedDefinitionId(cProductId,
-			publishedDefinitionId);
+		return _cProductLocalService.updatePublishedCPDefinitionId(cProductId,
+			publishedCPDefinitionId);
 	}
 
 	@Override

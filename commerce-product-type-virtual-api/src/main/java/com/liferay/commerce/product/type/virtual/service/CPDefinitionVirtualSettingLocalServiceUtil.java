@@ -87,6 +87,12 @@ public class CPDefinitionVirtualSettingLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static void cloneCPDefinitionVirtualSetting(long cpDefinitionId,
+		long newCPDefinitionId) {
+		getService()
+			.cloneCPDefinitionVirtualSetting(cpDefinitionId, newCPDefinitionId);
+	}
+
 	/**
 	* Creates a new cp definition virtual setting with the primary key. Does not add the cp definition virtual setting to the database.
 	*

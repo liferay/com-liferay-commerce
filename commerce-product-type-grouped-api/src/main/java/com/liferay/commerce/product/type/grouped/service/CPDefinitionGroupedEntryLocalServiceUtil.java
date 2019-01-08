@@ -100,6 +100,12 @@ public class CPDefinitionGroupedEntryLocalServiceUtil {
 			entryCProductId, priority, quantity, serviceContext);
 	}
 
+	public static void cloneCPDefinitionGroupedEntries(long cpDefinitionId,
+		long newCPDefinitionId) {
+		getService()
+			.cloneCPDefinitionGroupedEntries(cpDefinitionId, newCPDefinitionId);
+	}
+
 	/**
 	* Creates a new cp definition grouped entry with the primary key. Does not add the cp definition grouped entry to the database.
 	*
