@@ -80,7 +80,13 @@
 	{@param item: ? }
 	{@param? _handleClick: ? }
 
-	<div class="minium-suggestions__label" onclick="{$_handleClick}">
+	<div
+		class="minium-suggestions__label"
+		onclick="{$_handleClick}"
+		data-onmouseenter="handleMouseEnter"
+		data-onmouseleave="handleMouseLeave"
+		data-pos="{$item.pos}"
+	>
 		{$item.title}
 	</div>
 {/deltemplate}
