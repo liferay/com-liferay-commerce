@@ -1,22 +1,22 @@
 'use strict';
 
-import {debounce} from 'debounce';
+import {debounce} from 'metal-debounce';
 
-import template from './UserInvitation.soy.js';
+import template from './UserInvitation.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
 import 'clay-modal';
 
-import './UserInvitationListItem';
-import './UserInvitationInputItem';
+import '../user_utils/UserListItem.es';
+import '../user_utils/UserInputItem.es';
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class UserInvitation extends Component {
 
 	created() {
-		this._debouncedFetchUser = debounce(this._fetchUsers, 300);
+		this._debouncedFetchUser = debounce(() => this._fetchUsers, 300);
 	}
 
 	attached() {
@@ -104,7 +104,7 @@ class UserInvitation extends Component {
 			return false;
 		};
 
-		this.emit('userInvitationSave', this.addedUsers);
+		return this.emit('userInvitationSave', this.addedUsers)
 
 		/*
 		return fetch(
@@ -125,14 +125,14 @@ class UserInvitation extends Component {
 	}
 
 	toggle() {
-		this._isVisible = !this._isVisible;
+		return this._isVisible = !this._isVisible;
 	}
 
 	open() {
-		this._isVisible = true;
+		return this._isVisible = true;
 	}
 
-	open() {
+	close() {
 		this._isVisible = false;
 	}
 };
@@ -154,7 +154,7 @@ const USER_SCHEMA = Config.shapeOf(
 );
 
 UserInvitation.STATE = {
-	usersAPI: Config.string().required(),
+	usersAPI: Config.string().value(''),
 	query: Config.string().value(''),
 	spritemap: Config.string(),
 	users: Config.array(USER_SCHEMA).value([]),
@@ -163,5 +163,5 @@ UserInvitation.STATE = {
 	_isLoading: Config.bool().internal().value(false)
 };
 
-export {UserInvitation, EMAIL_REGEX};
+export {UserInvitation};
 export default UserInvitation;
