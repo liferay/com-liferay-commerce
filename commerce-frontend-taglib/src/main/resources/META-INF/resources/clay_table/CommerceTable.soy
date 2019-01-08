@@ -72,16 +72,6 @@
 
 {/deltemplate}
 
-{deltemplate ClayTable.ActionsMenu  variant="'miniumActionsMenuVariant'"}
-	{@param actionItems: list<?>}
-	{@param spritemap: string}
-
-	{call MiniumActionsMenu.render}
-		{param actionItems: $actionItems /}
-		{param spritemap: $spritemap /}
-	{/call}
-{/deltemplate}
-
 {deltemplate ClayTable.Cell variant="'image'"}
 	{@param fieldSchema: ?}
 	{@param item: ?}
