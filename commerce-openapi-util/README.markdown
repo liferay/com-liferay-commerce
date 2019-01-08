@@ -31,6 +31,9 @@ Configure generator output settings by changing default properties in
 | `osgi.module.generator.overwrite.bnd` | `false` | avoid overwriting BND file |
 | `osgi.module.generator.overwrite.implementation` | `false` | avoid overwriting resource implementation file |
 
-**Run with Gradle runClass task**
+### Run OpenAPI Generator
+`../gradlew generateRestModule`
+
+### Run with Gradle `runClass` task
 
 `../gradlew -PmainClass=com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator runClass`

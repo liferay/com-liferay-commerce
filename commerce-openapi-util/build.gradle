@@ -1,5 +1,8 @@
 import com.liferay.gradle.util.GradleUtil
 
+task generateRestModule(type: JavaExec)
+task runClass(type: JavaExec)
+
 dependencies {
 	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.6.7"
 	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.6.7.1"
@@ -26,10 +29,16 @@ dependencies {
 	runtime group: "org.slf4j", name: "slf4j-log4j12", version: "1.7.2"
 }
 
-task("runClass", type: JavaExec) {
-	main = GradleUtil.getProperty(project, "mainClass", "")
-
+generateRestModule {
 	classpath = sourceSets.main.runtimeClasspath
+	main = "com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator"
+
+	jvmArgs "-Dlog4j.configuration=log4j.xml"
+}
+
+runClass {
+	classpath = sourceSets.main.runtimeClasspath
+	main = GradleUtil.getProperty(project, "mainClass", "")
 
 	jvmArgs "-Dlog4j.configuration=log4j.xml"
 }
