@@ -166,6 +166,7 @@ public class CommerceAccountNestedCollectionResourceTest
 		}
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testAddCollectionItem2() throws IOException, PortalException {
 		_addAccount(RandomTestUtil.randomString());
@@ -184,6 +185,7 @@ public class CommerceAccountNestedCollectionResourceTest
 		Assert.assertThat(resourceOperation, notNullValue());
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testDeleteCollectionItem() throws IOException, PortalException {
 		ApioResourceCollection commerceAccountApioResourceCollection =
@@ -218,6 +220,7 @@ public class CommerceAccountNestedCollectionResourceTest
 		Assert.assertThat(numberOfItems1, equalTo(numberOfItems3));
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testUpdateCollectionItem() throws IOException, PortalException {
 		String accountName = RandomTestUtil.randomString();
