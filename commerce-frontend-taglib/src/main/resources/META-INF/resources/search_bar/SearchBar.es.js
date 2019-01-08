@@ -7,10 +7,12 @@ class SearchBar extends Component {
 	created() {
 		this.handleDocumentKeypress = this.handleDocumentKeypress.bind(this);
 		document.addEventListener('keydown', this.handleDocumentKeypress);
-		document.querySelectorAll('.js-toggle-search').forEach(el => {
-			el.classList.toggle('is-active', status);
-			el.addEventListener('click', this._toogleClick.bind(this));
-		});
+		document.querySelectorAll('.js-toggle-search').forEach(
+			el => {
+				el.classList.toggle('is-active', status);
+				el.addEventListener('click', this._toogleClick.bind(this));
+			}
+		);
 	}
 
 	detached() {
@@ -23,7 +25,10 @@ class SearchBar extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		window.Liferay.fire('search-term-submit', {term: this.query});
+		window.Liferay.fire(
+			'search-term-submit',
+			{term: this.query}
+		);
 	}
 
 	handleEmpty(e) {
@@ -41,7 +46,10 @@ class SearchBar extends Component {
 		if (query !== this.query) {
 			this.toogle(true);
 			this.query = query;
-			window.Liferay.fire('search-term-update', {term: query});
+			window.Liferay.fire(
+				'search-term-update',
+				{term: query}
+			);
 		}
 	}
 
@@ -70,11 +78,11 @@ class SearchBar extends Component {
 Soy.register(SearchBar, template);
 
 SearchBar.STATE = {
+	active: Config.bool(),
 	placeholder: {
 		value: ''
 	},
-	query: Config.string(),
-	active: Config.bool()
+	query: Config.string()
 };
 
 export {SearchBar};
