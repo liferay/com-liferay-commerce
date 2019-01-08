@@ -4,7 +4,6 @@ import {Config} from 'metal-state';
 import Component from 'metal-component';
 import Soy from 'metal-soy';
 
-import './MiniumActionsMenu.es';
 import template from './CommerceTable.soy';
 
 class CommerceTable extends Component {
