@@ -234,6 +234,10 @@ public class CommerceSearchResource {
 			themeDisplay.getRequest(), CommerceAccount.class.getName(),
 			PortletProvider.Action.EDIT);
 
+		if (editURL == null) {
+			return "";
+		}
+
 		editURL.setParameter("mvcRenderCommandName", "editCommerceAccount");
 		editURL.setParameter("commerceAccountId", String.valueOf(accountId));
 
