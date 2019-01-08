@@ -30,18 +30,23 @@ class SearchResults extends Component {
 		}
 
 		this.lock = true;
-		fetch(`${this.searchAPI}${themeDisplay.getPlid()}?q=${this.queryString}`, {
-			method: 'GET'
-		})
+		fetch(
+			`${this.searchAPI}${themeDisplay.getPlid()}?q=${this.queryString}`,
+			{
+				method: 'GET'
+			}
+		)
 			.then(response => response.json())
-			.then(results => {
-				this.loading = false;
-				this.lock = false;
-				this.queryValue = this.queryString;
-				this.results = results;
-				this.selectedIndex = -1;
-				this.selectNext();
-			});
+			.then(
+				results => {
+					this.loading = false;
+					this.lock = false;
+					this.queryValue = this.queryString;
+					this.results = results;
+					this.selectedIndex = -1;
+					this.selectNext();
+				}
+			);
 	}
 
 	willUpdate({visible}) {
@@ -49,7 +54,7 @@ class SearchResults extends Component {
 			if (visible.newVal) {
 				document.addEventListener('keydown', this.handleKeyDown);
 			}
- else {
+			else {
 				document.removeEventListener('keydown', this.handleKeyDown);
 			}
 		}
@@ -70,8 +75,8 @@ class SearchResults extends Component {
 			i => i.pos > this.selectedIndex && i.type !== 'label'
 		);
 		this.selectedIndex = nexts.length ?
-      nexts[0].pos :
-      this.getFirstSuggestion();
+			nexts[0].pos :
+			this.getFirstSuggestion();
 	}
 
 	selectPrevious() {
@@ -89,7 +94,7 @@ class SearchResults extends Component {
 				if (Liferay.SPA) {
 					Liferay.SPA.app.navigate(selected[0].url);
 				}
- else {
+				else {
 					window.location.href = selected[0].url;
 				}
 			}
@@ -100,7 +105,7 @@ class SearchResults extends Component {
 		if (e.key === 'ArrowDown') {
 			this.selectNext();
 		}
- else if (e.key === 'ArrowUp') {
+		else if (e.key === 'ArrowUp') {
 			this.selectPrevious();
 		}
 	}
@@ -119,11 +124,15 @@ class SearchResults extends Component {
 
 	setSelected(sel) {
 		sel = ((sel + 1 + this.results.length + 1) % (this.results.length + 1)) - 1;
-		this.results = this.results.map((item, i) =>
-			Object.assign({}, item, {
-				selected: i === sel,
-				pos: i
-			})
+		this.results = this.results.map(
+			(item, i) => Object.assign(
+				{},
+				item,
+				{
+					pos: i,
+					selected: i === sel
+				}
+			)
 		);
 
 		return sel;
