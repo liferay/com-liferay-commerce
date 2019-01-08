@@ -338,8 +338,8 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="draftDefinitionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="publishedDefinitionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="publishedCPDefinitionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="latestVersion" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.commerce.product.model.impl.CPRuleImpl" table="CPRule">
 		<id name="CPRuleId" type="long">

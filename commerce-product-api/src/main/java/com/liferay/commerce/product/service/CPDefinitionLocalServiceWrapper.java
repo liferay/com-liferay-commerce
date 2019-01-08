@@ -734,6 +734,13 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 	}
 
 	@Override
+	public boolean isVersionable(long cpDefinitionId,
+		javax.servlet.http.HttpServletRequest httpServletRequest) {
+		return _cpDefinitionLocalService.isVersionable(cpDefinitionId,
+			httpServletRequest);
+	}
+
+	@Override
 	public void moveCPDefinitionsToTrash(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_cpDefinitionLocalService.moveCPDefinitionsToTrash(groupId, userId);

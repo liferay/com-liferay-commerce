@@ -92,6 +92,13 @@ public class CPDefinitionGroupedEntryLocalServiceWrapper
 			entryCProductId, priority, quantity, serviceContext);
 	}
 
+	@Override
+	public void cloneCPDefinitionGroupedEntries(long cpDefinitionId,
+		long newCPDefinitionId) {
+		_cpDefinitionGroupedEntryLocalService.cloneCPDefinitionGroupedEntries(cpDefinitionId,
+			newCPDefinitionId);
+	}
+
 	/**
 	* Creates a new cp definition grouped entry with the primary key. Does not add the cp definition grouped entry to the database.
 	*
