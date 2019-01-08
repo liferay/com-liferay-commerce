@@ -9,6 +9,7 @@
 	{@param? id: string}
 	{@param? namespace: string}
 	{@param? optionURL: string}
+	{@param? cpDefinitionId: string}
 	{@param? cpDefinitionOptionValueRelsURL: string}
 	{@param? cpDefinitionOptionValueRelURL: string}
 	{@param? pathThemeImages: string}
@@ -69,6 +70,7 @@
 			{if $_currentOption}
 				{call CPDefinitionOptionValuesEditor.render}
 					{param show: $_showValues /}
+					{param cpDefinitionId: $cpDefinitionId /}
 					{param cpDefinitionOptionRelId: $_currentOption /}
 					{param cpDefinitionOptionValueRelsURL: $cpDefinitionOptionValueRelsURL /}
 					{param cpDefinitionOptionValueRelURL: $cpDefinitionOptionValueRelURL /}
