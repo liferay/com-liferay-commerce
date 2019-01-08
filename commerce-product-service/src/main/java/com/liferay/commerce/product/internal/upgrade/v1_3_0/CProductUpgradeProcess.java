@@ -18,6 +18,7 @@ import com.liferay.commerce.product.model.impl.CPDefinitionModelImpl;
 import com.liferay.commerce.product.model.impl.CProductModelImpl;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.db.IndexMetadata;
+import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -53,18 +54,22 @@ public class CProductUpgradeProcess extends UpgradeProcess {
 			CPDefinitionModelImpl.class, CPDefinitionModelImpl.TABLE_NAME,
 			"version", "INTEGER");
 
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		Statement s = null;
+		String insertCProductSQL = StringBundler.concat(
+			"insert into CProduct (uuid_, CProductId, groupId, companyId, ",
+			"userId, userName, createDate, modifiedDate, ",
+			"publishedCPDefinitionId) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		String updateCPDefinitionSQL =
+			"update CPDefinition set CProductId = ?, version = 1 where " +
+				"CPDefinitionId = ?";
 
-		try {
-			ps = connection.prepareStatement(
-				"update CPDefinition set CProductId = ?, version = 1 where " +
-					"CPDefinitionId = ?");
-
-			s = connection.createStatement();
-
-			rs = s.executeQuery("select * from CPDefinition");
+		try (PreparedStatement ps1 =
+				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
+					connection, insertCProductSQL);
+			PreparedStatement ps2 =
+				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
+					connection, updateCPDefinitionSQL);
+			Statement s = connection.createStatement();
+			ResultSet rs = s.executeQuery("select * from CPDefinition")) {
 
 			while (rs.next()) {
 				String uuid = PortalUUIDUtil.generate();
@@ -75,19 +80,30 @@ public class CProductUpgradeProcess extends UpgradeProcess {
 				String userName = rs.getString("userName");
 				long cpDefinitionId = rs.getLong("CPDefinitionId");
 
-				_addCProduct(
-					uuid, cProductId, groupId, companyId, userId, userName,
-					cpDefinitionId);
+				ps1.setString(1, uuid);
+				ps1.setLong(2, cProductId);
+				ps1.setLong(3, groupId);
+				ps1.setLong(4, companyId);
+				ps1.setLong(5, userId);
+				ps1.setString(6, userName);
 
-				ps.setLong(1, cProductId);
-				ps.setLong(2, cpDefinitionId);
+				Date now = new Date(System.currentTimeMillis());
 
-				ps.execute();
+				ps1.setDate(7, now);
+				ps1.setDate(8, now);
+
+				ps1.setLong(9, cpDefinitionId);
+
+				ps1.executeUpdate();
+
+				ps2.setLong(1, cProductId);
+				ps2.setLong(2, cpDefinitionId);
+
+				ps2.executeUpdate();
 			}
-		}
-		finally {
-			DataAccess.cleanUp(ps);
-			DataAccess.cleanUp(s, rs);
+
+			ps1.executeBatch();
+			ps2.executeBatch();
 		}
 	}
 
@@ -115,42 +131,6 @@ public class CProductUpgradeProcess extends UpgradeProcess {
 						"Column %s already exists on table %s", columnName,
 						tableName));
 			}
-		}
-	}
-
-	private void _addCProduct(
-			String uuid, long cProductId, long groupId, long companyId,
-			long userId, String userName, long publishedCPDefinitionId)
-		throws Exception {
-
-		PreparedStatement ps = null;
-
-		try {
-			ps = connection.prepareStatement(
-				StringBundler.concat(
-					"insert into CProduct (uuid_, CProductId, groupId, ",
-					"companyId, userId, userName, createDate, modifiedDate, ",
-					"publishedCPDefinitionId) values (?, ?, ?, ?, ?, ?, ?, ?, ?" +
-					StringPool.CLOSE_PARENTHESIS));
-
-			ps.setString(1, uuid);
-			ps.setLong(2, cProductId);
-			ps.setLong(3, groupId);
-			ps.setLong(4, companyId);
-			ps.setLong(5, userId);
-			ps.setString(6, userName);
-
-			Date now = new Date(System.currentTimeMillis());
-
-			ps.setDate(7, now);
-			ps.setDate(8, now);
-
-			ps.setLong(9, publishedCPDefinitionId);
-
-			ps.execute();
-		}
-		finally {
-			DataAccess.cleanUp(ps);
 		}
 	}
 
