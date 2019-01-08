@@ -97,8 +97,7 @@ public class CommerceAccountRoleHelperImpl
 
 		if (name.equals(CommerceAccountConstants.ACCOUNT_MANAGER_ROLE_NAME)) {
 			resourceActionIds.put(
-				CommerceAccountConstants.RESOURCE_NAME,
-				new String[] {CommerceAccountActionKeys.MANAGE_ACCOUNTS});
+				"90", new String[] {CommerceAccountActionKeys.MANAGE_ACCOUNTS});
 			resourceActionIds.put(
 				CommerceAccount.class.getName(),
 				new String[] {ActionKeys.UPDATE, ActionKeys.VIEW});

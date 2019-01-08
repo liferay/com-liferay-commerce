@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermi
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 
 import java.util.List;
 
@@ -47,8 +48,8 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), GroupConstants.DEFAULT_LIVE_GROUP_ID,
+		PortalPermissionUtil.contains(
+			getPermissionChecker(),
 			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 
 		return commerceAccountLocalService.addCommerceAccount(
@@ -63,8 +64,8 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), GroupConstants.DEFAULT_LIVE_GROUP_ID,
+		PortalPermissionUtil.contains(
+			getPermissionChecker(),
 			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 
 		return commerceAccountLocalService.addCommerceAccount(
@@ -142,8 +143,8 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		_portletResourcePermission.check(
-			permissionChecker, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+		PortalPermissionUtil.check(
+			permissionChecker,
 			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 
 		return commerceAccountLocalService.searchCommerceAccounts(
@@ -180,8 +181,8 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 				permissionChecker.getCompanyId(), name);
 
 		if (commerceAccount == null) {
-			_portletResourcePermission.check(
-				permissionChecker, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			PortalPermissionUtil.check(
+				permissionChecker,
 				CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 		}
 		else {
@@ -200,10 +201,5 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 				CommerceAccountServiceImpl.class,
 				"_commerceAccountModelResourcePermission",
 				CommerceAccount.class);
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CommerceAccountServiceImpl.class, "_portletResourcePermission",
-				CommerceAccountConstants.RESOURCE_NAME);
 
 }
