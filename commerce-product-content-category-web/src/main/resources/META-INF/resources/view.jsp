@@ -52,6 +52,7 @@ contextObjects.put("cpCategoryContentDisplayContext", cpCategoryContentDisplayCo
 
 			<div class="container-fluid">
 				<h1 class="category-title"><%= assetCategory.getTitle(languageId) %></h1>
+
 				<p class="category-description"><%= assetCategory.getDescription(languageId) %></p>
 			</div>
 		</div>
