@@ -1,10 +1,10 @@
 'use strict';
 
-import template from './UserInvitationInputItem.soy.js';
+import template from './UserInputItem.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-class UserInvitation extends Component {
+class UserInputItem extends Component {
 	_handleRemoveItem() {
 		return this.emit(
 			'removeItem',
@@ -15,14 +15,14 @@ class UserInvitation extends Component {
 	}
 };
 
-Soy.register(UserInvitation, template);
+Soy.register(UserInputItem, template);
 
-UserInvitation.STATE = {
+UserInputItem.STATE = {
 	email: Config.string().required(),
 	name: Config.string(),
 	spritemap: Config.string(),
 	thumbnail: Config.string()
 };
 
-export {UserInvitation};
-export default UserInvitation;
+export {UserInputItem};
+export default UserInputItem;

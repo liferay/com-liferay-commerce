@@ -1,9 +1,8 @@
 import Component from 'metal-component';
 import Soy from 'metal-soy';
 import template from './MiniumActionsMenu.soy';
-import ClayComponent from 'clay-component';
 
-class MiniumActionsMenu extends ClayComponent {
+class MiniumActionsMenu extends Component {
 
 	_handleToggle(e) {
 		const actions = this.refs.actions;
@@ -17,4 +16,4 @@ class MiniumActionsMenu extends ClayComponent {
 Soy.register(MiniumActionsMenu, template);
 
 export {MiniumActionsMenu};
-export default MiniumTable;
+export default MiniumActionsMenu;

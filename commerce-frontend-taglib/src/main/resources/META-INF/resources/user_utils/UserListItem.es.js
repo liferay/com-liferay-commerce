@@ -1,12 +1,14 @@
 'use strict';
 
-import template from './UserInvitationListItem.soy.js';
+import template from './UserListItem.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-import {EMAIL_REGEX} from './UserInvitation';
+import '../autocomplete_item/AutocompleteItem.es'
 
-class UserInvitation extends Component {
+const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+class UserListItem extends Component {
 
 	attached() {
 		return this._updateStatus();
@@ -51,9 +53,9 @@ class UserInvitation extends Component {
 
 };
 
-Soy.register(UserInvitation, template);
+Soy.register(UserListItem, template);
 
-UserInvitation.STATE = {
+UserListItem.STATE = {
 	id: Config.oneOfType(
 		[
 			Config.string(),
@@ -77,5 +79,5 @@ UserInvitation.STATE = {
 	_status: Config.string().value('valid')
 };
 
-export {UserInvitation};
-export default UserInvitation;
+export {UserListItem};
+export default UserListItem;
