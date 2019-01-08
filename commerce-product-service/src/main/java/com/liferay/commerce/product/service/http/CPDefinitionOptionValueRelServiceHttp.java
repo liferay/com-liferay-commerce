@@ -92,7 +92,7 @@ public class CPDefinitionOptionValueRelServiceHttp {
 		}
 	}
 
-	public static void deleteCPDefinitionOptionValueRel(
+	public static com.liferay.commerce.product.model.CPDefinitionOptionValueRel deleteCPDefinitionOptionValueRel(
 		HttpPrincipal httpPrincipal, long cpDefinitionOptionValueRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -103,8 +103,10 @@ public class CPDefinitionOptionValueRelServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpDefinitionOptionValueRelId);
 
+			Object returnObj = null;
+
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -113,6 +115,8 @@ public class CPDefinitionOptionValueRelServiceHttp {
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
+
+			return (com.liferay.commerce.product.model.CPDefinitionOptionValueRel)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);

@@ -99,6 +99,9 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 		long cpDefinitionId, long entryCProductId, double priority,
 		int quantity, ServiceContext serviceContext) throws PortalException;
 
+	public void cloneCPDefinitionGroupedEntries(long cpDefinitionId,
+		long newCPDefinitionId);
+
 	/**
 	* Creates a new cp definition grouped entry with the primary key. Does not add the cp definition grouped entry to the database.
 	*

@@ -85,6 +85,9 @@ public interface CPDefinitionInventoryLocalService extends BaseLocalService,
 		int multipleOrderQuantity, ServiceContext serviceContext)
 		throws PortalException;
 
+	public void cloneCPDefinitionInventory(long cpDefinitionId,
+		long newCPDefinitionId);
+
 	/**
 	* Creates a new cp definition inventory with the primary key. Does not add the cp definition inventory to the database.
 	*

@@ -387,8 +387,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="draftDefinitionId" type="long" />
-		<field name="publishedDefinitionId" type="long" />
+		<field name="publishedCPDefinitionId" type="long" />
+		<field name="latestVersion" type="int" />
 	</model>
 	<model name="com.liferay.commerce.product.model.CPRule">
 		<field name="CPRuleId" type="long" />

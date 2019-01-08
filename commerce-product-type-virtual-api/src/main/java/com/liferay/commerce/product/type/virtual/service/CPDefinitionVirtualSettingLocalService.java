@@ -93,6 +93,9 @@ public interface CPDefinitionVirtualSettingLocalService extends BaseLocalService
 		long termsOfUseJournalArticleResourcePrimKey,
 		ServiceContext serviceContext) throws PortalException;
 
+	public void cloneCPDefinitionVirtualSetting(long cpDefinitionId,
+		long newCPDefinitionId);
+
 	/**
 	* Creates a new cp definition virtual setting with the primary key. Does not add the cp definition virtual setting to the database.
 	*

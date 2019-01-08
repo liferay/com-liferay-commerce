@@ -91,10 +91,13 @@ public class CPDefinitionOptionValueRelServiceSoap {
 		}
 	}
 
-	public static void deleteCPDefinitionOptionValueRel(
+	public static com.liferay.commerce.product.model.CPDefinitionOptionValueRelSoap deleteCPDefinitionOptionValueRel(
 		long cpDefinitionOptionValueRelId) throws RemoteException {
 		try {
-			CPDefinitionOptionValueRelServiceUtil.deleteCPDefinitionOptionValueRel(cpDefinitionOptionValueRelId);
+			com.liferay.commerce.product.model.CPDefinitionOptionValueRel returnValue =
+				CPDefinitionOptionValueRelServiceUtil.deleteCPDefinitionOptionValueRel(cpDefinitionOptionValueRelId);
+
+			return com.liferay.commerce.product.model.CPDefinitionOptionValueRelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

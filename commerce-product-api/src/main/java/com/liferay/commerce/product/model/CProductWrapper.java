@@ -67,8 +67,8 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("draftDefinitionId", getDraftDefinitionId());
-		attributes.put("publishedDefinitionId", getPublishedDefinitionId());
+		attributes.put("publishedCPDefinitionId", getPublishedCPDefinitionId());
+		attributes.put("latestVersion", getLatestVersion());
 
 		return attributes;
 	}
@@ -123,17 +123,17 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 			setModifiedDate(modifiedDate);
 		}
 
-		Long draftDefinitionId = (Long)attributes.get("draftDefinitionId");
+		Long publishedCPDefinitionId = (Long)attributes.get(
+				"publishedCPDefinitionId");
 
-		if (draftDefinitionId != null) {
-			setDraftDefinitionId(draftDefinitionId);
+		if (publishedCPDefinitionId != null) {
+			setPublishedCPDefinitionId(publishedCPDefinitionId);
 		}
 
-		Long publishedDefinitionId = (Long)attributes.get(
-				"publishedDefinitionId");
+		Integer latestVersion = (Integer)attributes.get("latestVersion");
 
-		if (publishedDefinitionId != null) {
-			setPublishedDefinitionId(publishedDefinitionId);
+		if (latestVersion != null) {
+			setLatestVersion(latestVersion);
 		}
 	}
 
@@ -177,16 +177,6 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 		return _cProduct.getCreateDate();
 	}
 
-	/**
-	* Returns the draft definition ID of this c product.
-	*
-	* @return the draft definition ID of this c product
-	*/
-	@Override
-	public long getDraftDefinitionId() {
-		return _cProduct.getDraftDefinitionId();
-	}
-
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _cProduct.getExpandoBridge();
@@ -200,6 +190,16 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 	@Override
 	public long getGroupId() {
 		return _cProduct.getGroupId();
+	}
+
+	/**
+	* Returns the latest version of this c product.
+	*
+	* @return the latest version of this c product
+	*/
+	@Override
+	public int getLatestVersion() {
+		return _cProduct.getLatestVersion();
 	}
 
 	/**
@@ -228,13 +228,13 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 	}
 
 	/**
-	* Returns the published definition ID of this c product.
+	* Returns the published cp definition ID of this c product.
 	*
-	* @return the published definition ID of this c product
+	* @return the published cp definition ID of this c product
 	*/
 	@Override
-	public long getPublishedDefinitionId() {
-		return _cProduct.getPublishedDefinitionId();
+	public long getPublishedCPDefinitionId() {
+		return _cProduct.getPublishedCPDefinitionId();
 	}
 
 	/**
@@ -337,16 +337,6 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 		_cProduct.setCreateDate(createDate);
 	}
 
-	/**
-	* Sets the draft definition ID of this c product.
-	*
-	* @param draftDefinitionId the draft definition ID of this c product
-	*/
-	@Override
-	public void setDraftDefinitionId(long draftDefinitionId) {
-		_cProduct.setDraftDefinitionId(draftDefinitionId);
-	}
-
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
@@ -371,6 +361,16 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 	@Override
 	public void setGroupId(long groupId) {
 		_cProduct.setGroupId(groupId);
+	}
+
+	/**
+	* Sets the latest version of this c product.
+	*
+	* @param latestVersion the latest version of this c product
+	*/
+	@Override
+	public void setLatestVersion(int latestVersion) {
+		_cProduct.setLatestVersion(latestVersion);
 	}
 
 	/**
@@ -404,13 +404,13 @@ public class CProductWrapper implements CProduct, ModelWrapper<CProduct> {
 	}
 
 	/**
-	* Sets the published definition ID of this c product.
+	* Sets the published cp definition ID of this c product.
 	*
-	* @param publishedDefinitionId the published definition ID of this c product
+	* @param publishedCPDefinitionId the published cp definition ID of this c product
 	*/
 	@Override
-	public void setPublishedDefinitionId(long publishedDefinitionId) {
-		_cProduct.setPublishedDefinitionId(publishedDefinitionId);
+	public void setPublishedCPDefinitionId(long publishedCPDefinitionId) {
+		_cProduct.setPublishedCPDefinitionId(publishedCPDefinitionId);
 	}
 
 	/**

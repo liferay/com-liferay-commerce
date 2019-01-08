@@ -53,6 +53,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Provides the local service interface for CPDefinition. Methods of this
  * service will not have security checks based on the propagated JAAS
@@ -519,6 +521,10 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isVersionable(long cpDefinitionId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isVersionable(long cpDefinitionId,
+		HttpServletRequest httpServletRequest);
 
 	public void moveCPDefinitionsToTrash(long groupId, long userId)
 		throws PortalException;
