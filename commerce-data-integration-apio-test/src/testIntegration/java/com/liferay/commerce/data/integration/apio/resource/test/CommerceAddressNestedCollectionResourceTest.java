@@ -51,6 +51,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -111,6 +112,7 @@ public class CommerceAddressNestedCollectionResourceTest
 		organizationLocalService.deleteOrganization(_parentOrganization);
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testAddCollectionItem() throws IOException, PortalException {
 		String accountExternalReferenceCode = _addCommerceAccount(
@@ -132,6 +134,7 @@ public class CommerceAddressNestedCollectionResourceTest
 		Assert.assertThat(resourceOperation, notNullValue());
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testDeleteCollectionItem() throws IOException, PortalException {
 		String accountExternalReferenceCode = _addCommerceAccount(
@@ -167,6 +170,7 @@ public class CommerceAddressNestedCollectionResourceTest
 		Assert.assertThat(totalItems1, equalTo(totalItems3));
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testUpdateCollectionItem() throws IOException, PortalException {
 		String accountExternalReferenceCode = _addCommerceAccount(
