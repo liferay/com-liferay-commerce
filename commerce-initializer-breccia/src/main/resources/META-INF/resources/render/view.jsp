@@ -170,6 +170,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 					<div class="modal-content">
 						<div class="modal-header">
 							<div class="modal-title"><%= cpCatalogEntry.getName() %></div>
+
 							<button aria-label="Close" class="close" data-dismiss="modal" type="button">
 								<aui:icon image="times" markupView="lexicon" />
 							</button>
