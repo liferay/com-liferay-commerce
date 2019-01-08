@@ -43,6 +43,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,6 +61,7 @@ public class CommerceUserCollectionResourceTest extends PortalContextProvider {
 	public static final AggregateTestRule aggregateTestRule =
 		new LiferayIntegrationTestRule();
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testAddCollectionItem() throws IOException, PortalException {
 		String emailAddress = RandomTestUtil.randomString() + _EMAIL_DOMAIN;
@@ -83,6 +85,7 @@ public class CommerceUserCollectionResourceTest extends PortalContextProvider {
 		Assert.assertThat(resourceOperation, notNullValue());
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testDeleteCollectionItem() throws IOException, PortalException {
 		String emailAddress = RandomTestUtil.randomString() + _EMAIL_DOMAIN;
@@ -113,6 +116,7 @@ public class CommerceUserCollectionResourceTest extends PortalContextProvider {
 		Assert.assertThat(numberOfItems1, equalTo(numberOfItems3));
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testUpdateCollectionItem() throws IOException, PortalException {
 		String emailAddress = RandomTestUtil.randomString() + _EMAIL_DOMAIN;

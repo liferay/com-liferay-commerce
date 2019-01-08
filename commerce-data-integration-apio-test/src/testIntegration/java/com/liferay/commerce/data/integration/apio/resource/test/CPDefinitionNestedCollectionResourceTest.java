@@ -44,6 +44,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -70,6 +71,7 @@ public class CPDefinitionNestedCollectionResourceTest
 		CommerceTestSiteActivator.initialize(_group.getGroupId());
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testAddCollectionItem() throws IOException, PortalException {
 		_addCPDefinition(RandomTestUtil.randomString());
@@ -90,6 +92,7 @@ public class CPDefinitionNestedCollectionResourceTest
 		Assert.assertThat(resourceOperation, notNullValue());
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testDeleteCollectionItem() throws IOException, PortalException {
 		ApioResourceCollection cpDefinitionApioResourceCollection =
@@ -127,6 +130,7 @@ public class CPDefinitionNestedCollectionResourceTest
 		Assert.assertThat(numberOfItems1, equalTo(numberOfItems3));
 	}
 
+	@Ignore("Until the fix for APIO-310 is done")
 	@Test
 	public void testUpdateCollectionItem() throws IOException, PortalException {
 		String cpDefinitionTitle = RandomTestUtil.randomString();
