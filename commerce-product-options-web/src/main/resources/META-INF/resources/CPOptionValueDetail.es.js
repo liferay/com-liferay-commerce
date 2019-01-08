@@ -128,7 +128,7 @@ class CPOptionValueDetail extends Component {
 			response => response.json()
 		).then(
 			(jsonResponse) => {
-				this.emit('optionValueDelated', jsonResponse);
+				this.emit('optionValueDeleted', jsonResponse);
 			}
 		);
 	}

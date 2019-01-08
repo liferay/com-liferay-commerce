@@ -89,7 +89,7 @@ class CPDefinitionOptionValuesEditor extends Component {
 		}
 	}
 
-	_handleOptionValueDelated(event) {
+	_handleOptionValueDeleted(event) {
 		this.cpDefinitionId = event.cpDefinitionId.toString();
 		this.cpDefinitionOptionRelId = event.cpDefinitionOptionRelId.toString();
 		this._currentCPDefinitionOptionValueRelId = null;
