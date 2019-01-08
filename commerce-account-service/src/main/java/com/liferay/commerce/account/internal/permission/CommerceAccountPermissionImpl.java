@@ -20,11 +20,9 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.permission.CommerceAccountPermission;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 
@@ -106,8 +104,7 @@ public class CommerceAccountPermissionImpl
 		}
 
 		return PortalPermissionUtil.contains(
-			permissionChecker,
-			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+			permissionChecker, CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 	}
 
 	@Override
@@ -139,9 +136,9 @@ public class CommerceAccountPermissionImpl
 				   CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID)) {
 
 			if (actionId.equals(ActionKeys.UPDATE) &&
-					PortalPermissionUtil.contains(
-						permissionChecker,
-						CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
+				PortalPermissionUtil.contains(
+					permissionChecker,
+					CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
 
 				return true;
 			}

@@ -15,20 +15,16 @@
 package com.liferay.commerce.account.service.impl;
 
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
-import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.base.CommerceAccountServiceBaseImpl;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 
@@ -49,8 +45,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		throws PortalException {
 
 		PortalPermissionUtil.contains(
-			getPermissionChecker(),
-			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+			getPermissionChecker(), CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 
 		return commerceAccountLocalService.addCommerceAccount(
 			name, parentCommerceAccountId, email, taxId, active,
@@ -65,8 +60,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		throws PortalException {
 
 		PortalPermissionUtil.contains(
-			getPermissionChecker(),
-			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+			getPermissionChecker(), CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 
 		return commerceAccountLocalService.addCommerceAccount(
 			name, parentCommerceAccountId, email, taxId, active,
@@ -144,8 +138,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		PortalPermissionUtil.check(
-			permissionChecker,
-			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+			permissionChecker, CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 
 		return commerceAccountLocalService.searchCommerceAccounts(
 			permissionChecker.getCompanyId(), parentCommerceAccountId, keywords,
@@ -182,8 +175,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 		if (commerceAccount == null) {
 			PortalPermissionUtil.check(
-				permissionChecker,
-				CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+				permissionChecker, CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 		}
 		else {
 			_commerceAccountModelResourcePermission.check(
