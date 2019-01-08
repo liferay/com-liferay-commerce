@@ -1,6 +1,6 @@
 # `com-liferay-commerce-openapi-util`
 
-#Commerce OpenAPI specific tasks:
+# Commerce OpenAPI specific tasks:
 
 **runClass** - runs main method for class specified by mainClass parameter
 
@@ -12,7 +12,7 @@
 
 `../gradlew -PmainClass=com.my.package.ClassWithMainMethod runClass --debug-jvm`
 
-#Commerce OpenAPI Generator
+# Commerce OpenAPI Generator
 
 **Configuration**
 
