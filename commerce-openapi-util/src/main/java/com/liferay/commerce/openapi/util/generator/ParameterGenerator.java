@@ -16,11 +16,12 @@ package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Schema;
+import com.liferay.commerce.openapi.util.util.StringUtils;
 
 /**
  * @author Igor Beslic
  */
-public class ParameterGenerator extends BaseGenerator {
+public class ParameterGenerator {
 
 	public String toAnnotatedMethodParameter(Parameter parameter) {
 		String parameterAnnotation = "";
@@ -32,7 +33,7 @@ public class ParameterGenerator extends BaseGenerator {
 
 			return String.format(
 				"%sDTO %sDTO", schema.getReferencedModel(),
-				lowerCaseFirstChar(parameter.getName()));
+				StringUtils.lowerCaseFirstChar(parameter.getName()));
 		}
 		else if (location.equals("cookie")) {
 			parameterAnnotation = "@CookieParam";
@@ -52,7 +53,8 @@ public class ParameterGenerator extends BaseGenerator {
 
 		return String.format(
 			"%s(\"%s\") %s %s", parameterAnnotation, parameter.getName(),
-			parameter.getJavaType(), toCamelCase(parameter.getName()));
+			parameter.getJavaType(),
+			StringUtils.toCamelCase(parameter.getName()));
 	}
 
 	public String toMethodParameter(Parameter parameter) {
@@ -63,11 +65,12 @@ public class ParameterGenerator extends BaseGenerator {
 
 			return String.format(
 				"%sDTO %sDTO", schema.getReferencedModel(),
-				lowerCaseFirstChar(parameter.getName()));
+				StringUtils.lowerCaseFirstChar(parameter.getName()));
 		}
 
 		return String.format(
-			"%s %s", parameter.getJavaType(), toCamelCase(parameter.getName()));
+			"%s %s", parameter.getJavaType(),
+			StringUtils.toCamelCase(parameter.getName()));
 	}
 
 }

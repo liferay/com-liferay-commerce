@@ -21,6 +21,7 @@ import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.PropertyDefinition;
 import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.importer.OpenAPIImporter;
+import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -331,7 +332,7 @@ public class OSGiRESTModuleGenerator {
 
 		dtoSource = dtoSource.replace("${AUTHOR}", _author);
 
-		String resourceClassName = _baseGenerator.upperCaseFirstChar(
+		String resourceClassName = StringUtils.upperCaseFirstChar(
 			componentDefinition.getName()) + "DTO";
 
 		dtoSource = dtoSource.replace("${MODEL_CLASS}", resourceClassName);
@@ -352,13 +353,13 @@ public class OSGiRESTModuleGenerator {
 			methodsSb.append("\tpublic ");
 			methodsSb.append(propertyDefinition.getJavaType());
 			methodsSb.append(" get");
-			methodsSb.append(_baseGenerator.upperCaseFirstChar(name));
+			methodsSb.append(StringUtils.upperCaseFirstChar(name));
 			methodsSb.append("() {\n\t\treturn _");
 			methodsSb.append(name);
 			methodsSb.append(";\n\t}\n\n");
 
 			methodsSb.append("\tpublic void set");
-			methodsSb.append(_baseGenerator.upperCaseFirstChar(name));
+			methodsSb.append(StringUtils.upperCaseFirstChar(name));
 			methodsSb.append("(");
 			methodsSb.append(propertyDefinition.getJavaType());
 			methodsSb.append(" ");
@@ -396,8 +397,8 @@ public class OSGiRESTModuleGenerator {
 	private void _writeResourceImplementationSource(String version, Path path)
 		throws IOException {
 
-		String resourceImplementationClassName =
-			_baseGenerator.upperCaseFirstChar(path.getName() + "ResourceImpl");
+		String resourceImplementationClassName = StringUtils.upperCaseFirstChar(
+			path.getName() + "ResourceImpl");
 
 		String componentSourcePath = _getClassSourcePath(
 			resourceImplementationClassName + ".java", _resourcePackagePath);
@@ -426,7 +427,7 @@ public class OSGiRESTModuleGenerator {
 		sb.append("import ");
 		sb.append(_resourceInterfacePackagePath);
 		sb.append(".");
-		sb.append(_baseGenerator.upperCaseFirstChar(path.getName()));
+		sb.append(StringUtils.upperCaseFirstChar(path.getName()));
 		sb.append("Resource;");
 
 		osgiResourceComponent = osgiResourceComponent.replace(
@@ -449,7 +450,7 @@ public class OSGiRESTModuleGenerator {
 			"${MODEL_RESOURCE_IMPLEMENTATION_CLASS}",
 			resourceImplementationClassName);
 
-		String resourceInterfaceClassName = _baseGenerator.upperCaseFirstChar(
+		String resourceInterfaceClassName = StringUtils.upperCaseFirstChar(
 			path.getName() + "Resource");
 
 		osgiResourceComponent = osgiResourceComponent.replace(
@@ -493,7 +494,7 @@ public class OSGiRESTModuleGenerator {
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${PATH}", path.getName());
 
-		String resourceInterfaceClassName = _baseGenerator.upperCaseFirstChar(
+		String resourceInterfaceClassName = StringUtils.upperCaseFirstChar(
 			path.getName() + "Resource");
 
 		osgiResourceComponent = osgiResourceComponent.replace(
@@ -551,7 +552,6 @@ public class OSGiRESTModuleGenerator {
 	private final String _applicationClassName;
 	private final String _applicationName;
 	private final String _author;
-	private final BaseGenerator _baseGenerator = new BaseGenerator();
 	private final boolean _basicSecurityAllowed;
 	private final String _bundleName;
 	private final String _bundleSynbolicName;

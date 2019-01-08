@@ -18,6 +18,7 @@ import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.Response;
+import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,7 +28,7 @@ import java.util.Set;
 /**
  * @author Igor Beslic
  */
-public class ResourceGenerator extends BaseGenerator {
+public class ResourceGenerator {
 
 	public String generateResourceGetters(List<Path> paths) {
 		Iterator<Path> iterator = paths.iterator();
@@ -41,7 +42,7 @@ public class ResourceGenerator extends BaseGenerator {
 			sb.append(path.getPath());
 			sb.append("\")\n");
 			sb.append("\tpublic Object get");
-			sb.append(upperCaseFirstChar(path.getName()));
+			sb.append(StringUtils.upperCaseFirstChar(path.getName()));
 			sb.append("() {\n");
 			sb.append("\t\treturn _");
 			sb.append(path.getName());
@@ -69,7 +70,7 @@ public class ResourceGenerator extends BaseGenerator {
 			sb.append("import ");
 			sb.append(resourcePackage);
 			sb.append(".");
-			sb.append(upperCaseFirstChar(path.getName()));
+			sb.append(StringUtils.upperCaseFirstChar(path.getName()));
 			sb.append("Resource;\n");
 
 			if (iterator.hasNext()) {
@@ -90,7 +91,7 @@ public class ResourceGenerator extends BaseGenerator {
 
 			sb.append("\t@Reference\n");
 			sb.append("\tprivate ");
-			sb.append(upperCaseFirstChar(path.getName()));
+			sb.append(StringUtils.upperCaseFirstChar(path.getName()));
 			sb.append("Resource _");
 			sb.append(path.getName());
 			sb.append("Resource;");
@@ -149,7 +150,7 @@ public class ResourceGenerator extends BaseGenerator {
 				}
 
 				sb.append("import javax.ws.rs.");
-				sb.append(upperCaseFirstChar(location));
+				sb.append(StringUtils.upperCaseFirstChar(location));
 				sb.append("Param;\n");
 
 				importedClasses.add(location);
@@ -168,7 +169,7 @@ public class ResourceGenerator extends BaseGenerator {
 			sb.append("import ");
 			sb.append(modelPackage);
 			sb.append(".");
-			sb.append(upperCaseFirstChar(referencedModel));
+			sb.append(StringUtils.upperCaseFirstChar(referencedModel));
 			sb.append("DTO;\n");
 		}
 
