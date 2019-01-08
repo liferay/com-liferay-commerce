@@ -211,32 +211,32 @@ public interface CProductModel extends BaseModel<CProduct>, GroupedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the draft definition ID of this c product.
+	 * Returns the published cp definition ID of this c product.
 	 *
-	 * @return the draft definition ID of this c product
+	 * @return the published cp definition ID of this c product
 	 */
-	public long getDraftDefinitionId();
+	public long getPublishedCPDefinitionId();
 
 	/**
-	 * Sets the draft definition ID of this c product.
+	 * Sets the published cp definition ID of this c product.
 	 *
-	 * @param draftDefinitionId the draft definition ID of this c product
+	 * @param publishedCPDefinitionId the published cp definition ID of this c product
 	 */
-	public void setDraftDefinitionId(long draftDefinitionId);
+	public void setPublishedCPDefinitionId(long publishedCPDefinitionId);
 
 	/**
-	 * Returns the published definition ID of this c product.
+	 * Returns the latest version of this c product.
 	 *
-	 * @return the published definition ID of this c product
+	 * @return the latest version of this c product
 	 */
-	public long getPublishedDefinitionId();
+	public int getLatestVersion();
 
 	/**
-	 * Sets the published definition ID of this c product.
+	 * Sets the latest version of this c product.
 	 *
-	 * @param publishedDefinitionId the published definition ID of this c product
+	 * @param latestVersion the latest version of this c product
 	 */
-	public void setPublishedDefinitionId(long publishedDefinitionId);
+	public void setLatestVersion(int latestVersion);
 
 	@Override
 	public boolean isNew();

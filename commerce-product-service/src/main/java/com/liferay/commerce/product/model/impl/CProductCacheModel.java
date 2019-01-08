@@ -82,10 +82,10 @@ public class CProductCacheModel implements CacheModel<CProduct>, Externalizable 
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", draftDefinitionId=");
-		sb.append(draftDefinitionId);
-		sb.append(", publishedDefinitionId=");
-		sb.append(publishedDefinitionId);
+		sb.append(", publishedCPDefinitionId=");
+		sb.append(publishedCPDefinitionId);
+		sb.append(", latestVersion=");
+		sb.append(latestVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -128,8 +128,8 @@ public class CProductCacheModel implements CacheModel<CProduct>, Externalizable 
 			cProductImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		cProductImpl.setDraftDefinitionId(draftDefinitionId);
-		cProductImpl.setPublishedDefinitionId(publishedDefinitionId);
+		cProductImpl.setPublishedCPDefinitionId(publishedCPDefinitionId);
+		cProductImpl.setLatestVersion(latestVersion);
 
 		cProductImpl.resetOriginalValues();
 
@@ -151,9 +151,9 @@ public class CProductCacheModel implements CacheModel<CProduct>, Externalizable 
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		draftDefinitionId = objectInput.readLong();
+		publishedCPDefinitionId = objectInput.readLong();
 
-		publishedDefinitionId = objectInput.readLong();
+		latestVersion = objectInput.readInt();
 	}
 
 	@Override
@@ -184,9 +184,9 @@ public class CProductCacheModel implements CacheModel<CProduct>, Externalizable 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(draftDefinitionId);
+		objectOutput.writeLong(publishedCPDefinitionId);
 
-		objectOutput.writeLong(publishedDefinitionId);
+		objectOutput.writeInt(latestVersion);
 	}
 
 	public String uuid;
@@ -197,6 +197,6 @@ public class CProductCacheModel implements CacheModel<CProduct>, Externalizable 
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long draftDefinitionId;
-	public long publishedDefinitionId;
+	public long publishedCPDefinitionId;
+	public int latestVersion;
 }

@@ -53,11 +53,11 @@ public class CPDefinitionOptionValueRelServiceUtil {
 			nameMap, priority, key, serviceContext);
 	}
 
-	public static void deleteCPDefinitionOptionValueRel(
+	public static com.liferay.commerce.product.model.CPDefinitionOptionValueRel deleteCPDefinitionOptionValueRel(
 		long cpDefinitionOptionValueRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService()
-			.deleteCPDefinitionOptionValueRel(cpDefinitionOptionValueRelId);
+		return getService()
+				   .deleteCPDefinitionOptionValueRel(cpDefinitionOptionValueRelId);
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinitionOptionValueRel fetchCPDefinitionOptionValueRel(

@@ -65,7 +65,7 @@ public interface CPDefinitionOptionValueRelService extends BaseService {
 		double priority, String key, ServiceContext serviceContext)
 		throws PortalException;
 
-	public void deleteCPDefinitionOptionValueRel(
+	public CPDefinitionOptionValueRel deleteCPDefinitionOptionValueRel(
 		long cpDefinitionOptionValueRelId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

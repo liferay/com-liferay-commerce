@@ -282,6 +282,8 @@ public interface CProductLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	public int increment(long cProductId) throws PortalException;
+
 	/**
 	* Updates the c product in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -291,9 +293,6 @@ public interface CProductLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CProduct updateCProduct(CProduct cProduct);
 
-	public CProduct updateDraftDefinitionId(long cProductId,
-		long draftDefinitionId) throws PortalException;
-
-	public CProduct updatePublishedDefinitionId(long cProductId,
-		long publishedDefinitionId) throws PortalException;
+	public CProduct updatePublishedCPDefinitionId(long cProductId,
+		long publishedCPDefinitionId) throws PortalException;
 }

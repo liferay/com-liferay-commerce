@@ -70,6 +70,12 @@ public class CPDefinitionInventoryLocalServiceUtil {
 			multipleOrderQuantity, serviceContext);
 	}
 
+	public static void cloneCPDefinitionInventory(long cpDefinitionId,
+		long newCPDefinitionId) {
+		getService()
+			.cloneCPDefinitionInventory(cpDefinitionId, newCPDefinitionId);
+	}
+
 	/**
 	* Creates a new cp definition inventory with the primary key. Does not add the cp definition inventory to the database.
 	*

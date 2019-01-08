@@ -62,6 +62,13 @@ public class CPDefinitionInventoryLocalServiceWrapper
 			multipleOrderQuantity, serviceContext);
 	}
 
+	@Override
+	public void cloneCPDefinitionInventory(long cpDefinitionId,
+		long newCPDefinitionId) {
+		_cpDefinitionInventoryLocalService.cloneCPDefinitionInventory(cpDefinitionId,
+			newCPDefinitionId);
+	}
+
 	/**
 	* Creates a new cp definition inventory with the primary key. Does not add the cp definition inventory to the database.
 	*

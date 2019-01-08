@@ -46,10 +46,10 @@ public class CPDefinitionOptionValueRelServiceWrapper
 	}
 
 	@Override
-	public void deleteCPDefinitionOptionValueRel(
+	public com.liferay.commerce.product.model.CPDefinitionOptionValueRel deleteCPDefinitionOptionValueRel(
 		long cpDefinitionOptionValueRelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_cpDefinitionOptionValueRelService.deleteCPDefinitionOptionValueRel(cpDefinitionOptionValueRelId);
+		return _cpDefinitionOptionValueRelService.deleteCPDefinitionOptionValueRel(cpDefinitionOptionValueRelId);
 	}
 
 	@Override
