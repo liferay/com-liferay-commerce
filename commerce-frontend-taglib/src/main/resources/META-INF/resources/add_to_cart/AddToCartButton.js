@@ -31,18 +31,22 @@ class AddToCartButton extends Component {
 Soy.register(AddToCartButton, template);
 
 AddToCartButton.STATE = {
-	productId: Config.oneOfType([
-		Config.string(),
-		Config.number()
-	]).required(),
 	editMode: Config.bool().value(false),
+	productId: Config.oneOfType(
+		[
+			Config.string(),
+			Config.number()
+		]
+	).required(),
 	quantity: Config.number().value(0),
-	settings: Config.shapeOf({
-		minQuantity: Config.number(),
-		maxQuantity: Config.number(),
-		multipleQuantities: Config.number(),
-		allowedOptions: Config.array(Config.number())
-	}).value({})
+	settings: Config.shapeOf(
+		{
+			allowedOptions: Config.array(Config.number()),
+			maxQuantity: Config.number(),
+			minQuantity: Config.number(),
+			multipleQuantities: Config.number()
+		}
+	).value({})
 };
 
 export {AddToCartButton};

@@ -31,9 +31,7 @@ class CommerceTable extends Component {
 
 		this.pageSize = event.data.item.label;
 
-		this.paginationSelectedEntry = this.paginationEntries.map(function(x) {
-			return x.label;
-		}).indexOf(this.pageSize);
+		this.paginationSelectedEntry = this.paginationEntries.map((x) => x.label).indexOf(this.pageSize);
 
 		this._loadData();
 	}
@@ -43,8 +41,7 @@ class CommerceTable extends Component {
 			return;
 		}
 
-
-		let newPage = parseInt(event.data.page);
+		let newPage = parseInt(event.data.page, 10);
 
 		if (this.currentPage == newPage) {
 			return;
@@ -69,9 +66,7 @@ class CommerceTable extends Component {
 				}
 			)
 			.catch(
-				err => {
-					console.log(err);
-				}
+				err => {}
 			);
 	}
 
@@ -90,22 +85,22 @@ class CommerceTable extends Component {
 Soy.register(CommerceTable, template);
 
 CommerceTable.STATE = {
+	currentPage: Config.number().required(),
+	dataProviderKey: Config.string().required(),
+	dataSetAPI: Config.string().required(),
 	disableAJAX: Config.bool(),
 	groupId: Config.string().required(),
-	pageSize: Config.number().required(),
-	currentPage: Config.number().required(),
 	id: Config.string(),
 	items: Config.array().required(),
+	pageSize: Config.number().required(),
 	paginationBaseHref: Config.string(),
 	paginationEntries: Config.array().required(),
 	paginationSelectedEntry: Config.number().required(),
 	schema: Config.object().required(),
-	spritemap: Config.string().required(),
 	selectable: Config.bool(),
+	spritemap: Config.string().required(),
 	tableName: Config.string().required(),
-	dataProviderKey: Config.string().required(),
-	totalItems: Config.number().required(),
-	dataSetAPI: Config.string().required()
+	totalItems: Config.number().required()
 };
 
 export {CommerceTable};
