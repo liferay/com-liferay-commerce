@@ -120,7 +120,7 @@ public class CProductUpgradeProcess extends UpgradeProcess {
 
 	private void _addCProduct(
 			String uuid, long cProductId, long groupId, long companyId,
-			long userId, String userName, long publishedDefinitionId)
+			long userId, String userName, long publishedCPDefinitionId)
 		throws Exception {
 
 		PreparedStatement ps = null;
@@ -130,7 +130,7 @@ public class CProductUpgradeProcess extends UpgradeProcess {
 				StringBundler.concat(
 					"insert into CProduct (uuid_, CProductId, groupId, ",
 					"companyId, userId, userName, createDate, modifiedDate, ",
-					"publishedDefinitionId) values (?, ?, ?, ?, ?, ?, ?, ?, ?" +
+					"publishedCPDefinitionId) values (?, ?, ?, ?, ?, ?, ?, ?, ?" +
 					StringPool.CLOSE_PARENTHESIS));
 
 			ps.setString(1, uuid);
@@ -145,7 +145,7 @@ public class CProductUpgradeProcess extends UpgradeProcess {
 			ps.setDate(7, now);
 			ps.setDate(8, now);
 
-			ps.setLong(9, publishedDefinitionId);
+			ps.setLong(9, publishedCPDefinitionId);
 
 			ps.execute();
 		}

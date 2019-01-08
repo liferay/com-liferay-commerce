@@ -247,7 +247,7 @@ public class CPDefinitionLinkLocalServiceImpl
 		CProduct cProduct = cProductPersistence.findByPrimaryKey(
 			cpDefinitionLink.getCProductId());
 
-		reindexCPDefinition(cProduct.getPublishedDefinitionId());
+		reindexCPDefinition(cProduct.getPublishedCPDefinitionId());
 
 		return cpDefinitionLink;
 	}

@@ -75,8 +75,8 @@ public class VersionCommerceOrderValidatorImpl
 			CProduct cProduct = commerceOrderItem.getCProduct();
 
 			if ((cpInstance.getCPDefinitionId() !=
-					cProduct.getPublishedDefinitionId()) &&
-				(cProduct.getPublishedDefinitionId() != 0)) {
+					cProduct.getPublishedCPDefinitionId()) &&
+				(cProduct.getPublishedCPDefinitionId() != 0)) {
 
 				boolean instanceUpdated = _updateInstance(
 					commerceOrderItem, cProduct);
@@ -125,7 +125,7 @@ public class VersionCommerceOrderValidatorImpl
 		throws PortalException {
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-			cProduct.getPublishedDefinitionId(), commerceOrderItem.getSku());
+			cProduct.getPublishedCPDefinitionId(), commerceOrderItem.getSku());
 
 		if (cpInstance != null) {
 			commerceOrderItem.setCPInstanceId(cpInstance.getCPInstanceId());

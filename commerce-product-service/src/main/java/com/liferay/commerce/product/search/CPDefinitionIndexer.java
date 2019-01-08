@@ -537,7 +537,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		if ((cpDefinition.getStatus() != WorkflowConstants.STATUS_APPROVED) ||
 			(cpDefinition.getCPDefinitionId() ==
-				cProduct.getPublishedDefinitionId())) {
+				cProduct.getPublishedCPDefinitionId())) {
 
 			document.addKeyword(Field.HIDDEN, false);
 		}

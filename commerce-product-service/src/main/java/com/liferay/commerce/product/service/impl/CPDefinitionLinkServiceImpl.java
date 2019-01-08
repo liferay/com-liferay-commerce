@@ -49,7 +49,7 @@ public class CPDefinitionLinkServiceImpl
 		CProduct cProduct = cpDefinitionLink.getCProduct();
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cProduct.getPublishedDefinitionId(),
+			getPermissionChecker(), cProduct.getPublishedCPDefinitionId(),
 			ActionKeys.UPDATE);
 
 		cpDefinitionLinkLocalService.deleteCPDefinitionLink(cpDefinitionLinkId);
@@ -71,7 +71,7 @@ public class CPDefinitionLinkServiceImpl
 			CProduct cProduct = cpDefinitionLink.getCProduct();
 
 			_cpDefinitionModelResourcePermission.check(
-				getPermissionChecker(), cProduct.getPublishedDefinitionId(),
+				getPermissionChecker(), cProduct.getPublishedCPDefinitionId(),
 				ActionKeys.VIEW);
 		}
 
@@ -89,7 +89,7 @@ public class CPDefinitionLinkServiceImpl
 		CProduct cProduct = cpDefinitionLink.getCProduct();
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cProduct.getPublishedDefinitionId(),
+			getPermissionChecker(), cProduct.getPublishedCPDefinitionId(),
 			ActionKeys.VIEW);
 
 		_cpDefinitionModelResourcePermission.check(
@@ -153,7 +153,7 @@ public class CPDefinitionLinkServiceImpl
 		CProduct cProduct = cpDefinitionLink.getCProduct();
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cProduct.getPublishedDefinitionId(),
+			getPermissionChecker(), cProduct.getPublishedCPDefinitionId(),
 			ActionKeys.UPDATE);
 
 		return cpDefinitionLinkLocalService.updateCPDefinitionLink(

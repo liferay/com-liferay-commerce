@@ -473,10 +473,10 @@ public class ActionHelper {
 
 			if ((cpDefinition.getStatus() ==
 					WorkflowConstants.STATUS_APPROVED) &&
-				(cpDefinitionId != cProduct.getPublishedDefinitionId())) {
+				(cpDefinitionId != cProduct.getPublishedCPDefinitionId())) {
 
 				cpDefinition = _cpDefinitionService.fetchCPDefinition(
-					cProduct.getPublishedDefinitionId());
+					cProduct.getPublishedCPDefinitionId());
 			}
 		}
 
