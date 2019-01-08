@@ -114,6 +114,16 @@ public class OSGiRESTModuleGenerator {
 			_overwriteBND = false;
 		}
 
+		if ("true".equals(
+				properties.getProperty(
+					"osgi.module.generator.overwrite.gradle"))) {
+
+			_overwriteBuildGradle = true;
+		}
+		else {
+			_overwriteBuildGradle = false;
+		}
+
 		_resourceInterfacePackagePath = properties.getProperty(
 			"osgi.module.resource.interface.package");
 		_resourcePackagePath = properties.getProperty(
@@ -295,12 +305,21 @@ public class OSGiRESTModuleGenerator {
 	}
 
 	private void _writeGradleSource() throws IOException {
+		String gradleSourcePath =
+			_moduleOutputPath + "/" + _TEMPLATE_FILE_GRADLE.replace(".tpl", "");
+
+		if (!_overwriteBuildGradle && _exists(gradleSourcePath)) {
+			_logger.warn(
+				"Gradle build script file {} is not generated. Configure" +
+					"overwrite mode in config file.",
+				gradleSourcePath);
+
+			return;
+		}
+
 		String gradleTpl = _getTemplate(_TEMPLATE_FILE_GRADLE);
 
-		_writeSource(
-			gradleTpl,
-			_moduleOutputPath + "/" +
-				_TEMPLATE_FILE_GRADLE.replace(".tpl", ""));
+		_writeSource(gradleTpl, gradleSourcePath);
 	}
 
 	private void _writeModelSource(ComponentDefinition componentDefinition)
@@ -540,6 +559,7 @@ public class OSGiRESTModuleGenerator {
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;
 	private final boolean _overwriteBND;
+	private final boolean _overwriteBuildGradle;
 	private final boolean _overwriteImplementation;
 	private final ResourceGenerator _resourceGenerator =
 		new ResourceGenerator();
