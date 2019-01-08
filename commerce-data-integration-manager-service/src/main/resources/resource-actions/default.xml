@@ -23,7 +23,7 @@
 		</permissions>
 	</portlet-resource>
 	<model-resource>
-		<model-name>com.liferay.commerce.data.integration.manager</model-name>
+		<model-name>com.liferay.commerce.data.integration.manager.process</model-name>
 		<portlet-ref>
 			<portlet-name>com_liferay_commerce_data_integration_manager_web_internal_portlet_CommerceDataIntegrationManagerPortlet</portlet-name>
 		</portlet-ref>
