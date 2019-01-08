@@ -143,7 +143,7 @@ renderResponse.setTitle(cpDefinition.getName(themeDisplay.getLanguageId()));
 
 							CProduct cProduct = cpDefinitionGroupedEntry.getEntryCProduct();
 
-							CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
+							CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedCPDefinitionId());
 							%>
 
 							<liferay-ui:search-container-column-text

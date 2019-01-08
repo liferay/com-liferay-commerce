@@ -228,7 +228,7 @@ public class CPDefinitionLinkDisplayContext
 		for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks) {
 			CProduct cProduct = cpDefinitionLink.getCProduct();
 
-			cpDefinitionIdsList.add(cProduct.getPublishedDefinitionId());
+			cpDefinitionIdsList.add(cProduct.getPublishedCPDefinitionId());
 		}
 
 		if (!cpDefinitionIdsList.isEmpty()) {

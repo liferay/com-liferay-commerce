@@ -52,7 +52,7 @@ public class CommerceWishListItemImpl extends CommerceWishListItemBaseImpl {
 		CProduct cProduct = getCProduct();
 
 		return CPDefinitionLocalServiceUtil.getCPDefinition(
-			cProduct.getPublishedDefinitionId());
+			cProduct.getPublishedCPDefinitionId());
 	}
 
 	@Override

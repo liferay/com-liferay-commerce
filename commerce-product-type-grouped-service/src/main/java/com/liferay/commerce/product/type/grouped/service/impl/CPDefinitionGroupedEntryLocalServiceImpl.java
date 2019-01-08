@@ -253,9 +253,9 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 
 		CPDefinition entryCPDefinition =
 			_cpDefinitionLocalService.getCPDefinition(
-				entryCProduct.getPublishedDefinitionId());
+				entryCProduct.getPublishedCPDefinitionId());
 
-		if ((cpDefinitionId == entryCProduct.getPublishedDefinitionId()) ||
+		if ((cpDefinitionId == entryCProduct.getPublishedCPDefinitionId()) ||
 			GroupedCPTypeConstants.NAME.equals(
 				entryCPDefinition.getProductTypeName())) {
 

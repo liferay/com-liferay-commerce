@@ -25,7 +25,7 @@ CPDefinition cpDefinition = cpDefinitionGroupedEntry.getCPDefinition();
 
 CProduct cProduct = cpDefinitionGroupedEntry.getEntryCProduct();
 
-CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
+CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedCPDefinitionId());
 
 PortletURL groupedProductsURL = renderResponse.createRenderURL();
 
