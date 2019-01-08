@@ -54,7 +54,6 @@ public class UserInvitationTag extends ComponentRendererTag {
 			"commerce-frontend-taglib/user_invitatation/UserInvitation.es");
 	}
 
-
 	public void setComponentId(String componentId) {
 		setComponentId(componentId);
 	}
