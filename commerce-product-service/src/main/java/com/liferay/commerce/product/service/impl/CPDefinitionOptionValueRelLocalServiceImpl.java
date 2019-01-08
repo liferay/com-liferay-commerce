@@ -376,7 +376,8 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 
 			cpDefinitionOptionValueRel =
 				cpDefinitionOptionValueRelPersistence.findByC_K(
-					cpDefinitionOptionRel.getCPDefinitionOptionRelId(), key);
+					cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+					cpDefinitionOptionValueRel.getKey());
 		}
 
 		cpDefinitionOptionValueRel.setNameMap(nameMap);

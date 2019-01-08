@@ -17,8 +17,9 @@ package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.exception.CPDefinitionOptionValueRelKeyException;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
-import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
+import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -55,17 +56,23 @@ import org.osgi.service.component.annotations.Reference;
 public class EditCPDefinitionOptionValueRelMVCActionCommand
 	extends BaseMVCActionCommand {
 
-	protected void deleteCPDefinitionOptionValueRels(
+	protected CPDefinitionOptionValueRel deleteCPDefinitionOptionValueRels(
 			ActionRequest actionRequest)
 		throws Exception {
+
+		CPDefinitionOptionValueRel cpDefinitionOptionValueRel = null;
 
 		long cpDefinitionOptionValueRelId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionOptionValueRelId");
 
 		if (cpDefinitionOptionValueRelId > 0) {
-			_cpDefinitionOptionValueRelService.deleteCPDefinitionOptionValueRel(
-				cpDefinitionOptionValueRelId);
+			cpDefinitionOptionValueRel =
+				_cpDefinitionOptionValueRelLocalService.
+					deleteCPDefinitionOptionValueRel(
+						cpDefinitionOptionValueRelId);
 		}
+
+		return cpDefinitionOptionValueRel;
 	}
 
 	@Override
@@ -77,10 +84,12 @@ public class EditCPDefinitionOptionValueRelMVCActionCommand
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
+		CPDefinitionOptionValueRel cpDefinitionOptionValueRel = null;
+
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
-					updateCPDefinitionOptionValueRel(actionRequest);
+				cpDefinitionOptionValueRel = updateCPDefinitionOptionValueRel(
+					actionRequest);
 
 				jsonObject.put(
 					"cpDefinitionOptionValueRelId",
@@ -88,8 +97,20 @@ public class EditCPDefinitionOptionValueRelMVCActionCommand
 						getCPDefinitionOptionValueRelId());
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteCPDefinitionOptionValueRels(actionRequest);
+				cpDefinitionOptionValueRel = deleteCPDefinitionOptionValueRels(
+					actionRequest);
 			}
+
+			CPDefinition cpDefinition = _actionHelper.getCPDefinition(
+				actionRequest);
+
+			Long cpDefinitionId = cpDefinition.getCPDefinitionId();
+
+			jsonObject.put("cpDefinitionId", String.valueOf(cpDefinitionId));
+
+			jsonObject.put(
+				"cpDefinitionOptionRelId",
+				cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
 
 			jsonObject.put("success", true);
 		}
@@ -136,7 +157,7 @@ public class EditCPDefinitionOptionValueRelMVCActionCommand
 			// Add commerce product definition option value rel
 
 			cpDefinitionOptionValueRel =
-				_cpDefinitionOptionValueRelService.
+				_cpDefinitionOptionValueRelLocalService.
 					addCPDefinitionOptionValueRel(
 						cpDefinitionOptionRelId, nameMap, priority, key,
 						serviceContext);
@@ -146,7 +167,7 @@ public class EditCPDefinitionOptionValueRelMVCActionCommand
 			// Update commerce product definition option value rel
 
 			cpDefinitionOptionValueRel =
-				_cpDefinitionOptionValueRelService.
+				_cpDefinitionOptionValueRelLocalService.
 					updateCPDefinitionOptionValueRel(
 						cpDefinitionOptionValueRelId, nameMap, priority, key,
 						serviceContext);
@@ -162,8 +183,8 @@ public class EditCPDefinitionOptionValueRelMVCActionCommand
 	private ActionHelper _actionHelper;
 
 	@Reference
-	private CPDefinitionOptionValueRelService
-		_cpDefinitionOptionValueRelService;
+	private CPDefinitionOptionValueRelLocalService
+		_cpDefinitionOptionValueRelLocalService;
 
 	@Reference
 	private JSONFactory _jsonFactory;
