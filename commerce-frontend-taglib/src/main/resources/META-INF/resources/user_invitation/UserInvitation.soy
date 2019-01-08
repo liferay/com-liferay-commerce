@@ -2,29 +2,36 @@
 
 {template .render}
 
-	{@param users: list<[
+	{@param? users: list<[
 		id: string | number,
 		thumbnail: string,
 		name: string,
 		email: string
 	]>}
 
-	{@param addedUsers: list<[
+	{@param? addedUsers: list<[
 		id: string | number,
 		thumbnail: string,
 		name: string,
 		email: string
 	]>}
 
-	{@param query: string }
+	{@param? query: string }
 	{@param spritemap: string }
 
-	{@param _isVisible: bool }
-	{@param _toggleInvitation: any }
-	{@param _handleInputBox: any }
-	{@param _handleFormSubmit: any }
-	{@param _handleCloseModal: any }
-	{@param _sendInvitations: any }
+	{@param? _isVisible: bool }
+	{@param? _toggleInvitation: any }
+	{@param? _handleInputBox: any }
+	{@param? _handleFormSubmit: any }
+	{@param? _handleCloseModal: any }
+	{@param? _sendInvitations: any }
+
+	{let $formattedQuery kind="text"}
+		{nil}
+		{if isNonnull($query)}
+			{$query}
+		{/if}
+	{/let}
 
 	{let $body kind="html"}
 		<div class="commerce-modal user-invitation">
@@ -54,21 +61,23 @@
 
 				<div class="autocomplete-input__wrapper">
 					<div class="autocomplete-input__content">
-						{foreach $addedUser in $addedUsers}
-							{call UserInvitationInputItem.render}
-								{param events: ['removeItem' : $_toggleInvitation] /}
-								{param id: $addedUser.id /}
-								{param email: $addedUser.email /}
-								{param name: $addedUser.name /}
-								{param thumbnail: $addedUser.thumbnail /}
-								{param spritemap: $spritemap /}
-							{/call}
-						{/foreach}
+						{if isNonnull($addedUsers)}
+							{foreach $addedUser in $addedUsers}
+								{call UserInputItem.render}
+									{param events: ['removeItem' : $_toggleInvitation] /}
+									{param id: $addedUser.id /}
+									{param email: $addedUser.email /}
+									{param name: $addedUser.name /}
+									{param thumbnail: $addedUser.thumbnail /}
+									{param spritemap: $spritemap /}
+								{/call}
+							{/foreach}
+						{/if}
 						<form data-onsubmit="{$_handleFormSubmit}" ref="form">
 							<input
 								class="autocomplete-input__box"
 								type="text"
-								value="{$query}"
+								value="{$formattedQuery}"
 								data-onkeyup="{$_handleInputBox}"
 							/>
 						</form>
@@ -77,30 +86,30 @@
 			</div>
 
 			<div class="user-invitation__list">
-				{if length($users) > 0 }
+				{if isNonnull($users) and length($users) > 0 }
 					{foreach $user in $users}
-						{call UserInvitationListItem.render}
+						{call UserListItem.render}
 							{param events: ['toggleInvitation': $_toggleInvitation] /}
 							{param id: $user.id /}
 							{param name: $user.name /}
 							{param email: $user.email /}
 							{param thumbnail: $user.thumbnail /}
 							{param addedUsers: $addedUsers /}
-							{param query: $query /}
+							{param query: $formattedQuery /}
 						{/call}
 					{/foreach}
 				{/if}
-				{if length($users) == 0 and $query != ''}
-					{call UserInvitationListItem.render}
+				{if isNonnull($users) and length($users) == 0 and $formattedQuery != ''}
+					{call UserListItem.render}
 						{param events: ['toggleInvitation': $_toggleInvitation] /}
-						{param email: $query /}
+						{param email: $formattedQuery /}
 						{param addedUsers: $addedUsers /}
 					{/call}
 				{/if}
 			</div>
 			{let $inviteButtonClasses kind="text"}
 				minium-button minium-button--big
-				{if length($addedUsers) == 0}
+				{if isNonnull($addedUsers) and length($addedUsers) == 0}
 					{sp}minium-button--disabled
 				{/if}
 			{/let}
