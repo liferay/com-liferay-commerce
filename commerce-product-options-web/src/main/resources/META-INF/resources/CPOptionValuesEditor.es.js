@@ -85,7 +85,7 @@ class CPOptionValuesEditor extends Component {
 		}
 	}
 
-	_handleOptionValueDelated(event) {
+	_handleOptionValueDeleted(event) {
 		this._currentOptionValue = null;
 
 		this.loadOptionValues();
