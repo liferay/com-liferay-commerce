@@ -32,8 +32,8 @@ class SearchBar extends Component {
 
 	handleKeyUp(e) {
 		if (e.key == 'ArrowDown' || e.key === 'ArrowUp') {
-e.preventDefault();
-}
+			e.preventDefault();
+		}
 		this.updateQuery(e.target.value);
 	}
 
@@ -56,11 +56,11 @@ e.preventDefault();
 
 	toogle(status) {
 		if (status) {
-setTimeout(() => this.refs.searchInput.focus(), 0);
-}
+			setTimeout(() => this.refs.searchInput.focus(), 0);
+		}
 		else {
-setTimeout(() => this.refs.searchInput.blur(), 0);
-}
+			setTimeout(() => this.refs.searchInput.blur(), 0);
+		}
 
 		this.active = status;
 		this.emit('toogled', status);
