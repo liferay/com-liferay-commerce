@@ -12,14 +12,15 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.util.generator;
+package com.liferay.commerce.openapi.util.util;
 
 /**
  * @author Igor Beslic
+ * @author Zoltán Takács
  */
-public class BaseGenerator {
+public class StringUtils {
 
-	public String lowerCaseFirstChar(String string) {
+	public static String lowerCaseFirstChar(String string) {
 		if (Character.isLowerCase(string.charAt(0))) {
 			return string;
 		}
@@ -27,7 +28,7 @@ public class BaseGenerator {
 		return Character.toLowerCase(string.charAt(0)) + string.substring(1);
 	}
 
-	public String toCamelCase(String string) {
+	public static String toCamelCase(String string) {
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < string.length(); i++) {
@@ -44,12 +45,15 @@ public class BaseGenerator {
 		return sb.toString();
 	}
 
-	public String upperCaseFirstChar(String string) {
+	public static String upperCaseFirstChar(String string) {
 		if (Character.isUpperCase(string.charAt(0))) {
 			return string;
 		}
 
 		return Character.toUpperCase(string.charAt(0)) + string.substring(1);
+	}
+
+	private StringUtils() {
 	}
 
 }
