@@ -179,7 +179,7 @@ public class CommerceWishListItemLocalServiceImpl
 					StringBundler.concat(
 						"CPInstance ", cpInstanceUuid,
 						" belongs to a different CPDefinition than ",
-						cProduct.getPublishedDefinitionId()));
+						cProduct.getPublishedCPDefinitionId()));
 			}
 		}
 	}

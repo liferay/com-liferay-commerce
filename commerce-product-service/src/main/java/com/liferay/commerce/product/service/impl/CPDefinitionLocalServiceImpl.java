@@ -769,7 +769,7 @@ public class CPDefinitionLocalServiceImpl
 		// CProduct
 
 		if (cpDefinitionLocalService.isVersionable(originalCPDefinition)) {
-			cProductLocalService.updatePublishedDefinitionId(
+			cProductLocalService.updatePublishedCPDefinitionId(
 				newCPDefinition.getCProductId(),
 				newCPDefinition.getCPDefinitionId());
 		}
@@ -1323,7 +1323,7 @@ public class CPDefinitionLocalServiceImpl
 			cpDefinition.getCProductId());
 
 		if ((cProduct != null) &&
-			(cProduct.getPublishedDefinitionId() ==
+			(cProduct.getPublishedCPDefinitionId() ==
 				cpDefinition.getCPDefinitionId())) {
 
 			return true;
@@ -1842,7 +1842,7 @@ public class CPDefinitionLocalServiceImpl
 
 			//CProduct
 
-			cProductLocalService.updatePublishedDefinitionId(
+			cProductLocalService.updatePublishedCPDefinitionId(
 				cpDefinition.getCProductId(), cpDefinition.getCPDefinitionId());
 
 			// Trash

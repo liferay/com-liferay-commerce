@@ -115,7 +115,7 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 		}
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cProduct.getPublishedDefinitionId(),
+			getPermissionChecker(), cProduct.getPublishedCPDefinitionId(),
 			ActionKeys.VIEW);
 
 		return cpInstanceLocalService.fetchCProductInstance(

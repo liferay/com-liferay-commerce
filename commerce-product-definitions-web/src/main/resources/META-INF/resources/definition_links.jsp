@@ -142,7 +142,7 @@ PortletURL portletURL = cpDefinitionLinkDisplayContext.getPortletURL();
 
 								CProduct cProduct = cpDefinitionLink.getCProduct();
 
-								CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
+								CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedCPDefinitionId());
 								%>
 
 								<liferay-ui:search-container-column-text

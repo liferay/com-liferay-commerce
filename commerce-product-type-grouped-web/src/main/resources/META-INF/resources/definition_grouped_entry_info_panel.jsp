@@ -32,7 +32,7 @@ if (cpDefinitionGroupedEntries == null) {
 
 		CProduct cProduct = cpDefinitionGroupedEntry.getEntryCProduct();
 
-		CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
+		CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedCPDefinitionId());
 
 		request.setAttribute("info_panel.jsp-entry", cpDefinitionGroupedEntry);
 		%>

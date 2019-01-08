@@ -44,14 +44,14 @@ public class CPDefinitionGroupedEntryImpl
 		CProduct cProduct = getEntryCProduct();
 
 		return CPDefinitionLocalServiceUtil.fetchCPDefinition(
-			cProduct.getPublishedDefinitionId());
+			cProduct.getPublishedCPDefinitionId());
 	}
 
 	@Override
 	public long getEntryCPDefinitionId() throws PortalException {
 		CProduct cProduct = getEntryCProduct();
 
-		return cProduct.getPublishedDefinitionId();
+		return cProduct.getPublishedCPDefinitionId();
 	}
 
 	@Override

@@ -34,7 +34,7 @@ if (cpDefinitionLinks == null) {
 
 		CProduct cProduct = cpDefinitionLink.getCProduct();
 
-		CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
+		CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedCPDefinitionId());
 		%>
 
 		<div class="sidebar-header">
@@ -51,7 +51,7 @@ if (cpDefinitionLinks == null) {
 			<h5><liferay-ui:message key="product-id" /></h5>
 
 			<p>
-				<%= HtmlUtil.escape(String.valueOf(cProduct.getPublishedDefinitionId())) %>
+				<%= HtmlUtil.escape(String.valueOf(cProduct.getPublishedCPDefinitionId())) %>
 			</p>
 		</div>
 	</c:when>
