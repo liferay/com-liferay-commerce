@@ -28,9 +28,9 @@ class CPDefinitionOptionValuesEditor extends Component {
 	}
 
 	loadOptionValues() {
-		this._updateCPDefinitionId(this);
+		this._updateCPDefinitionId();
 
-		if (this.cpDefinitionOptionRelId === undefined || this.cpDefinitionOptionRelId == '0') {
+		if (!this.cpDefinitionOptionRelId) {
 			this._newCPDefinitionOptionValueRelName = '';
 			this._currentCPDefinitionOptionValueRelId = '0';
 
@@ -75,6 +75,8 @@ class CPDefinitionOptionValuesEditor extends Component {
 	}
 
 	_handleOptionValueSaved(event) {
+		this.cpDefinitionId = event.cpDefinitionId.toString();
+		this.cpDefinitionOptionRelId = event.cpDefinitionOptionRelId.toString();
 		this._currentCPDefinitionOptionValueRelId = event.cpDefinitionOptionValueRelId;
 
 		this.loadOptionValues();
@@ -88,6 +90,8 @@ class CPDefinitionOptionValuesEditor extends Component {
 	}
 
 	_handleOptionValueDelated(event) {
+		this.cpDefinitionId = event.cpDefinitionId.toString();
+		this.cpDefinitionOptionRelId = event.cpDefinitionOptionRelId.toString();
 		this._currentCPDefinitionOptionValueRelId = null;
 
 		this.loadOptionValues();
@@ -130,17 +134,23 @@ class CPDefinitionOptionValuesEditor extends Component {
 		);
 	}
 
-	_updateCPDefinitionId(instance) {
+	_updateCPDefinitionId() {
+		let instance = this;
+
 		var url = new URL(window.location.href);
+		var cpDefinitionOptionValueRelURL = new URL(instance.cpDefinitionOptionValueRelURL);
 		var cpDefinitionOptionValueRelsURL = new URL(instance.cpDefinitionOptionValueRelsURL);
 
 		var cpDefinitionId = url.searchParams.get(instance.namespace + 'cpDefinitionId');
 
-		if (cpDefinitionId != instance.cpDefinitionId) {
+		if (instance.cpDefinitionId && (cpDefinitionId != instance.cpDefinitionId)) {
 			url.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+
+			cpDefinitionOptionValueRelURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
 			cpDefinitionOptionValueRelsURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
 
 			window.history.pushState({}, '', url);
+			instance.cpDefinitionOptionValueRelURL = cpDefinitionOptionValueRelURL.href;
 			instance.cpDefinitionOptionValueRelsURL = cpDefinitionOptionValueRelsURL.href;
 		}
 	}

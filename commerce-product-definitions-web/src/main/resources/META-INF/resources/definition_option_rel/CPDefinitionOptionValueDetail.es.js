@@ -30,6 +30,7 @@ class CPDefinitionOptionValueDetail extends Component {
 		var url = new URL(this.cpDefinitionOptionValueRelURL);
 
 		url.searchParams.append(this.namespace + 'cpDefinitionOptionValueRelId', cpDefinitionOptionValueRelId);
+		url.searchParams.append(this.namespace + 'cpDefinitionId', this.cpDefinitionId);
 
 		fetch(
 			url,
@@ -62,6 +63,11 @@ class CPDefinitionOptionValueDetail extends Component {
 	}
 
 	_handleCPDefinitionOptionValueChange(event) {
+		this.cpDefinitionId = event.cpDefinitionId;
+		this.cpDefinitionOptionRelId = event.newVal;
+
+		this._updateCPDefinitionId();
+
 		this.loadOptionValueDetail(event.newVal);
 	}
 
@@ -105,7 +111,7 @@ class CPDefinitionOptionValueDetail extends Component {
 	}
 
 	_handleDeleteOptionValue() {
-		if (confirm('Are you sure to delte?')) {
+		if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-the-selected-option'))) {
 			this._deleteOptionValue();
 		}
 	}
@@ -155,6 +161,24 @@ class CPDefinitionOptionValueDetail extends Component {
 			}
 		);
 	}
+
+	_updateCPDefinitionId() {
+		let instance = this;
+
+		var url = new URL(window.location.href);
+		var cpDefinitionOptionValueRelURL = new URL(instance.cpDefinitionOptionValueRelURL);
+
+		var cpDefinitionId = url.searchParams.get(instance.namespace + 'cpDefinitionId');
+
+		if (instance.cpDefinitionId && (cpDefinitionId != instance.cpDefinitionId)) {
+			url.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+
+			cpDefinitionOptionValueRelURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+
+			window.history.pushState({}, '', url);
+			instance.cpDefinitionOptionValueRelURL = cpDefinitionOptionValueRelURL.href;
+		}
+	}
 }
 
 /**
@@ -164,6 +188,7 @@ class CPDefinitionOptionValueDetail extends Component {
  */
 
 CPDefinitionOptionValueDetail.STATE = {
+	cpDefinitionId: Config.string(),
 	cpDefinitionOptionRelId: Config.string().required(),
 	cpDefinitionOptionValueRelId: Config.string().required(),
 	cpDefinitionOptionValueRelURL: Config.string().required(),
