@@ -29,7 +29,8 @@ Configure generator output settings by changing default properties in
 | Configuration | Default | Description |
 |:---|:---|:---:|
 | `osgi.module.generator.overwrite.bnd` | `false` | avoid overwriting BND file |
-| `osgi.module.generator.overwrite.implementation` | `false` | avoid overwriting resource implementation file |
+| `osgi.module.generator.overwrite.gradle` | `false` | avoid overwriting gradle build file |
+| `osgi.module.generator.overwrite.implementation` | `false` | avoid overwriting resource implementation files |
 
 ### Run OpenAPI Generator
 `../gradlew generateRestModule`
