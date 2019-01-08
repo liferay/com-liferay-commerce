@@ -106,7 +106,7 @@ public class OSGiRESTModuleGenerator {
 
 		if ("true".equals(
 				properties.getProperty(
-					"osgi.module.generator.overwrite.implementation"))) {
+					"osgi.module.generator.overwrite.bnd"))) {
 
 			_overwriteBND = true;
 		}
