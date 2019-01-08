@@ -25,8 +25,8 @@ class SearchResults extends Component {
 
 	search() {
 		if (this.lock) {
-return;
-}
+			return;
+		}
 
 		this.lock = true;
 		fetch(`${this.searchAPI}${themeDisplay.getPlid()}?q=${this.queryString}`, {

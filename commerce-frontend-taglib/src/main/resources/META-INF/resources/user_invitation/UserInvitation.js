@@ -104,25 +104,8 @@ class UserInvitation extends Component {
 			return false;
 		};
 
-		this.emit('userInvitationSave', this.addedUsers)
-
-		/*
-		return fetch(
-			this.invitationAPI,
-			{
-				method: 'POST',
-				body: JSON.stringify(this.addedUsers)
-			}
-		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				invitation => invitation.state
-			);
-
-		*/
-	}
+		this.emit('userInvitationSave', this.addedUsers);
+}
 
 	toggle() {
 		this._isVisible = !this._isVisible;
