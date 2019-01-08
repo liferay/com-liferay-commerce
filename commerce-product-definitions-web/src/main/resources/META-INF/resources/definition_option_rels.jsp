@@ -43,7 +43,7 @@ long cpDefinitionId = cpDefinitionOptionRelDisplayContext.getCPDefinitionId();
 	<%
 	Map<String, Object> context = new HashMap<>();
 
-	context.put("cpDefinitionId", cpDefinitionId);
+	context.put("cpDefinitionId", String.valueOf(cpDefinitionId));
 	context.put("cpDefinitionOptionsURL", cpDefinitionOptionsURL);
 	context.put("cpDefinitionOptionValueRelsURL", cpDefinitionOptionValueRelsURL);
 	context.put("cpDefinitionOptionValueRelURL", cpDefinitionOptionValueRelURL);

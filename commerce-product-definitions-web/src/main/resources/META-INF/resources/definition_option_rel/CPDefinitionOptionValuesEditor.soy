@@ -5,6 +5,7 @@
  *
  */
 {template .render}
+	{@param? cpDefinitionId: string}
 	{@param? cpDefinitionOptionRelId: string}
 	{@param? cpDefinitionOptionValueRelURL: string}
 	{@param? id: string}
@@ -73,6 +74,7 @@
 										<div class="form-container">
 											{if $_currentCPDefinitionOptionValueRelId}
 												{call CPDefinitionOptionValueDetail.render}
+													{param cpDefinitionId : $cpDefinitionId /}
 													{param cpDefinitionOptionRelId : $cpDefinitionOptionRelId /}
 													{param cpDefinitionOptionValueRelId : $_currentCPDefinitionOptionValueRelId /}
 													{param namespace: $namespace /}

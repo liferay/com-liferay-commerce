@@ -23,6 +23,8 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 CPDefinitionOptionValueRel cpDefinitionOptionValueRel = null;
 
+long cpDefinitionId = cpDefinitionSpecificationOptionValueDisplayContext.getCPDefinitionId();
+
 if (row != null) {
 	cpDefinitionOptionValueRel = (CPDefinitionOptionValueRel)row.getObject();
 }
@@ -41,6 +43,7 @@ else {
 	>
 		<portlet:renderURL var="editProductDefinitionOptionValueRelURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductDefinitionOptionValueRel" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionId) %>" />
 			<portlet:param name="cpDefinitionOptionValueRelId" value="<%= String.valueOf(cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId()) %>" />
 		</portlet:renderURL>
 
@@ -52,6 +55,7 @@ else {
 		<portlet:actionURL name="editProductDefinitionOptionValueRel" var="deleteProductDefinitionOptionValueRelURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionId) %>" />
 			<portlet:param name="cpDefinitionOptionValueRelId" value="<%= String.valueOf(cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId()) %>" />
 		</portlet:actionURL>
 
