@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 
 import org.osgi.service.component.annotations.Component;
@@ -104,8 +105,8 @@ public class CommerceAccountPermissionImpl
 			return contains(permissionChecker, commerceAccount, actionId);
 		}
 
-		return _portletResourcePermission.contains(
-			permissionChecker, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+		return PortalPermissionUtil.contains(
+			permissionChecker,
 			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 	}
 
@@ -138,14 +139,14 @@ public class CommerceAccountPermissionImpl
 				   CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID)) {
 
 			if (actionId.equals(ActionKeys.UPDATE) &&
-				_portletResourcePermission.contains(
-					permissionChecker, GroupConstants.DEFAULT_LIVE_GROUP_ID,
-					CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
+					PortalPermissionUtil.contains(
+						permissionChecker,
+						CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
 
 				return true;
 			}
-			else if (_portletResourcePermission.contains(
-						permissionChecker, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			else if (PortalPermissionUtil.contains(
+						permissionChecker,
 						CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
 
 				return true;
@@ -159,10 +160,5 @@ public class CommerceAccountPermissionImpl
 
 	@Reference
 	private CommerceAccountLocalService _commerceAccountLocalService;
-
-	@Reference(
-		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 }
