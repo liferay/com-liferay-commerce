@@ -471,7 +471,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		}
 
 		return cpInstancePersistence.fetchByC_C(
-			cProduct.getPublishedDefinitionId(), cpInstanceUuid);
+			cProduct.getPublishedCPDefinitionId(), cpInstanceUuid);
 	}
 
 	@Override
@@ -568,7 +568,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
 
 		return cpInstancePersistence.findByC_C(
-			cProduct.getPublishedDefinitionId(), cpInstanceUuid);
+			cProduct.getPublishedCPDefinitionId(), cpInstanceUuid);
 	}
 
 	@Override

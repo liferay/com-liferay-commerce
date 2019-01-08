@@ -27,7 +27,7 @@ long cpDefinitionLinkId = cpDefinitionLinkDisplayContext.getCPDefinitionLinkId()
 
 CProduct cProduct = cpDefinitionLink.getCProduct();
 
-CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedDefinitionId());
+CPDefinition cProductCPDefinition = CPDefinitionLocalServiceUtil.getCPDefinition(cProduct.getPublishedCPDefinitionId());
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

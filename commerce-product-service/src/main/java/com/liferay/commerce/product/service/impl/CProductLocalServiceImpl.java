@@ -55,16 +55,16 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 	}
 
 	@Override
-	public CProduct updatePublishedDefinitionId(
-			long cProductId, long publishedDefinitionId)
+	public CProduct updatePublishedCPDefinitionId(
+			long cProductId, long publishedCPDefinitionId)
 		throws PortalException {
 
 		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
 
-		long originalPublishedDefinitionId =
-			cProduct.getPublishedDefinitionId();
+		long originalPublishedCPDefinitionId =
+			cProduct.getPublishedCPDefinitionId();
 
-		if (originalPublishedDefinitionId == publishedDefinitionId) {
+		if (originalPublishedCPDefinitionId == publishedCPDefinitionId) {
 			return cProduct;
 		}
 
@@ -72,12 +72,12 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 		cProduct.setModifiedDate(now);
 
-		cProduct.setPublishedDefinitionId(publishedDefinitionId);
+		cProduct.setPublishedCPDefinitionId(publishedCPDefinitionId);
 
 		cProduct = cProductPersistence.update(cProduct);
 
-		reindexCPDefinition(originalPublishedDefinitionId);
-		reindexCPDefinition(publishedDefinitionId);
+		reindexCPDefinition(originalPublishedCPDefinitionId);
+		reindexCPDefinition(publishedCPDefinitionId);
 
 		return cProduct;
 	}
