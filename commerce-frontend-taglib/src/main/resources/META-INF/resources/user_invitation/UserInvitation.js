@@ -104,7 +104,7 @@ class UserInvitation extends Component {
 			return false;
 		};
 
-		this.emit('userInvitationSave', this.addedUsers)
+		this.emit('userInvitationSave', this.addedUsers);
 
 		/*
 		return fetch(
