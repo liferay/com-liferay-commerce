@@ -17,6 +17,7 @@ package com.liferay.commerce.frontend;
 import aQute.bnd.annotation.ProviderType;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,5 +30,11 @@ public interface ClayTableContextContributor {
 	public void contribute(
 		ClayTable clayTable, Map<String, Object> context,
 		HttpServletRequest httpServletRequest);
+
+	public default Set<String> getDependencies(
+		ClayTable clayTable, HttpServletRequest httpServletRequest) {
+
+		return null;
+	}
 
 }

@@ -44,8 +44,10 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
@@ -269,6 +271,8 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 		putValue("id", clayTable.getId());
 
+		Set<String> dependecies = new HashSet<>();
+
 		List<ClayTableContextContributor> clayTablePostProcessors =
 			_clayTableContextContributorRegistry.
 				getClayTableContextContributors(tableName);
@@ -278,7 +282,16 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 			clayTableContextContributor.contribute(
 				clayTable, getContext(), request);
+
+			Set<String> contextContributorDependencies =
+				clayTableContextContributor.getDependencies(clayTable, request);
+
+			if (contextContributorDependencies != null) {
+				dependecies.addAll(contextContributorDependencies);
+			}
 		}
+
+		setDependencies(dependecies);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
