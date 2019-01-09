@@ -45,9 +45,7 @@ public class CommerceOrderSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setSiteGroupId(model.getSiteGroupId());
-		soapModel.setOrderOrganizationId(model.getOrderOrganizationId());
-		soapModel.setOrderUserId(model.getOrderUserId());
+		soapModel.setCommerceAccountId(model.getCommerceAccountId());
 		soapModel.setCommerceCurrencyId(model.getCommerceCurrencyId());
 		soapModel.setBillingAddressId(model.getBillingAddressId());
 		soapModel.setShippingAddressId(model.getShippingAddressId());
@@ -206,28 +204,12 @@ public class CommerceOrderSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getSiteGroupId() {
-		return _siteGroupId;
+	public long getCommerceAccountId() {
+		return _commerceAccountId;
 	}
 
-	public void setSiteGroupId(long siteGroupId) {
-		_siteGroupId = siteGroupId;
-	}
-
-	public long getOrderOrganizationId() {
-		return _orderOrganizationId;
-	}
-
-	public void setOrderOrganizationId(long orderOrganizationId) {
-		_orderOrganizationId = orderOrganizationId;
-	}
-
-	public long getOrderUserId() {
-		return _orderUserId;
-	}
-
-	public void setOrderUserId(long orderUserId) {
-		_orderUserId = orderUserId;
+	public void setCommerceAccountId(long commerceAccountId) {
+		_commerceAccountId = commerceAccountId;
 	}
 
 	public long getCommerceCurrencyId() {
@@ -523,9 +505,7 @@ public class CommerceOrderSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _siteGroupId;
-	private long _orderOrganizationId;
-	private long _orderUserId;
+	private long _commerceAccountId;
 	private long _commerceCurrencyId;
 	private long _billingAddressId;
 	private long _shippingAddressId;

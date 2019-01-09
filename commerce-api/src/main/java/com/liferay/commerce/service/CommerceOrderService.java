@@ -59,17 +59,17 @@ public interface CommerceOrderService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceOrderServiceUtil} to access the commerce order remote service. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceOrderServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceOrder addOrganizationCommerceOrder(long groupId,
-		long siteGroupId, long orderOrganizationId, long commerceCurrencyId,
-		long shippingAddressId, String purchaseOrderNumber)
+	public CommerceOrder addCommerceOrder(long groupId, long userId,
+		long commerceAccountId, long commerceCurrencyId)
 		throws PortalException;
 
-	public CommerceOrder addOrganizationCommerceOrder(long groupId,
-		long siteGroupId, long orderOrganizationId, long shippingAddressId,
+	public CommerceOrder addCommerceOrder(long groupId, long commerceAccountId,
+		long commerceCurrencyId, long shippingAddressId,
 		String purchaseOrderNumber) throws PortalException;
 
-	public CommerceOrder addUserCommerceOrder(long groupId, long userId,
-		long orderUserId, long commerceCurrencyId) throws PortalException;
+	public CommerceOrder addCommerceOrder(long groupId, long commerceAccountId,
+		long shippingAddressId, String purchaseOrderNumber)
+		throws PortalException;
 
 	public CommerceOrder approveCommerceOrder(long commerceOrderId)
 		throws PortalException;
@@ -119,12 +119,12 @@ public interface CommerceOrderService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrder> getCommerceOrders(long siteGroupId,
+	public List<CommerceOrder> getCommerceOrders(long groupId,
 		int[] orderStatuses) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getCommerceOrders(long groupId,
-		long orderUserId, int start, int end,
+		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator)
 		throws PortalException;
 
@@ -132,7 +132,7 @@ public interface CommerceOrderService extends BaseService {
 	public int getCommerceOrdersCount(long groupId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceOrdersCount(long groupId, long orderUserId)
+	public int getCommerceOrdersCount(long groupId, long commerceAccountId)
 		throws PortalException;
 
 	/**
@@ -141,6 +141,23 @@ public interface CommerceOrderService extends BaseService {
 	* @return the OSGi service identifier
 	*/
 	public String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getUserCommerceOrders(long groupId,
+		int orderStatus, String keywords, int start, int end)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getUserCommerceOrders(long groupId,
+		String keywords, int start, int end) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceOrdersCount(long groupId, int orderStatus,
+		String keywords) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceOrdersCount(long groupId, String keywords)
+		throws PortalException;
 
 	public void mergeGuestCommerceOrder(long guestCommerceOrderId,
 		long userCommerceOrderId, CommerceContext commerceContext,

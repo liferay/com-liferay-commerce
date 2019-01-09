@@ -627,6 +627,7 @@ public class CommerceAccountPersistenceImpl extends BasePersistenceImpl<Commerce
 
 			Map<String, String> dbColumnNames = new HashMap<String, String>();
 
+			dbColumnNames.put("type", "type_");
 			dbColumnNames.put("active", "active_");
 
 			field.set(this, dbColumnNames);
@@ -1410,6 +1411,6 @@ public class CommerceAccountPersistenceImpl extends BasePersistenceImpl<Commerce
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceAccount exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(CommerceAccountPersistenceImpl.class);
 	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"active"
+				"type", "active"
 			});
 }

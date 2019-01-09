@@ -67,7 +67,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(93);
+		StringBundler sb = new StringBundler(89);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -87,12 +87,8 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", siteGroupId=");
-		sb.append(siteGroupId);
-		sb.append(", orderOrganizationId=");
-		sb.append(orderOrganizationId);
-		sb.append(", orderUserId=");
-		sb.append(orderUserId);
+		sb.append(", commerceAccountId=");
+		sb.append(commerceAccountId);
 		sb.append(", commerceCurrencyId=");
 		sb.append(commerceCurrencyId);
 		sb.append(", billingAddressId=");
@@ -210,9 +206,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 			commerceOrderImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		commerceOrderImpl.setSiteGroupId(siteGroupId);
-		commerceOrderImpl.setOrderOrganizationId(orderOrganizationId);
-		commerceOrderImpl.setOrderUserId(orderUserId);
+		commerceOrderImpl.setCommerceAccountId(commerceAccountId);
 		commerceOrderImpl.setCommerceCurrencyId(commerceCurrencyId);
 		commerceOrderImpl.setBillingAddressId(billingAddressId);
 		commerceOrderImpl.setShippingAddressId(shippingAddressId);
@@ -315,11 +309,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		siteGroupId = objectInput.readLong();
-
-		orderOrganizationId = objectInput.readLong();
-
-		orderUserId = objectInput.readLong();
+		commerceAccountId = objectInput.readLong();
 
 		commerceCurrencyId = objectInput.readLong();
 
@@ -399,11 +389,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(siteGroupId);
-
-		objectOutput.writeLong(orderOrganizationId);
-
-		objectOutput.writeLong(orderUserId);
+		objectOutput.writeLong(commerceAccountId);
 
 		objectOutput.writeLong(commerceCurrencyId);
 
@@ -495,9 +481,7 @@ public class CommerceOrderCacheModel implements CacheModel<CommerceOrder>,
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long siteGroupId;
-	public long orderOrganizationId;
-	public long orderUserId;
+	public long commerceAccountId;
 	public long commerceCurrencyId;
 	public long billingAddressId;
 	public long shippingAddressId;

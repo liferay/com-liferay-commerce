@@ -132,9 +132,7 @@ create table CommerceOrder (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	siteGroupId LONG,
-	orderOrganizationId LONG,
-	orderUserId LONG,
+	commerceAccountId LONG,
 	commerceCurrencyId LONG,
 	billingAddressId LONG,
 	shippingAddressId LONG,
@@ -225,22 +223,6 @@ create table CommerceOrderPayment (
 	status INTEGER
 );
 
-create table CommercePaymentMethod (
-	commercePaymentMethodId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name STRING null,
-	description STRING null,
-	imageId LONG,
-	engineKey VARCHAR(75) null,
-	priority DOUBLE,
-	active_ BOOLEAN
-);
-
 create table CommerceRegion (
 	uuid_ VARCHAR(75) null,
 	commerceRegionId LONG not null primary key,
@@ -266,9 +248,7 @@ create table CommerceShipment (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	siteGroupId LONG,
-	shipmentOrganizationId LONG,
-	shipmentUserId LONG,
+	commerceAccountId LONG,
 	commerceAddressId LONG,
 	commerceShippingMethodId LONG,
 	shippingOptionName VARCHAR(75) null,

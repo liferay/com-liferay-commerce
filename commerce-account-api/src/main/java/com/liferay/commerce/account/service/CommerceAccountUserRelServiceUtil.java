@@ -65,6 +65,11 @@ public class CommerceAccountUserRelServiceUtil {
 		getService().deleteCommerceAccountUserRel(commerceAccountId, userId);
 	}
 
+	public static void deleteCommerceAccountUserRels(long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().deleteCommerceAccountUserRels(commerceAccountId);
+	}
+
 	public static void deleteCommerceAccountUserRels(long commerceAccountId,
 		long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException {

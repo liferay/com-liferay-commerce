@@ -55,7 +55,7 @@ import com.liferay.portal.kernel.util.MethodKey;
  */
 @ProviderType
 public class CommerceAccountServiceHttp {
-	public static com.liferay.commerce.account.model.CommerceAccount addCommerceAccount(
+	public static com.liferay.commerce.account.model.CommerceAccount addBusinessCommerceAccount(
 		HttpPrincipal httpPrincipal, String name, long parentCommerceAccountId,
 		String email, String taxId, boolean active,
 		String externalReferenceCode, long[] userIds, String[] emailAddresses,
@@ -63,7 +63,8 @@ public class CommerceAccountServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
-					"addCommerceAccount", _addCommerceAccountParameterTypes0);
+					"addBusinessCommerceAccount",
+					_addBusinessCommerceAccountParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					parentCommerceAccountId, email, taxId, active,
@@ -94,7 +95,7 @@ public class CommerceAccountServiceHttp {
 
 	public static com.liferay.commerce.account.model.CommerceAccount addCommerceAccount(
 		HttpPrincipal httpPrincipal, String name, long parentCommerceAccountId,
-		String email, String taxId, boolean active,
+		String email, String taxId, int type, boolean active,
 		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -103,7 +104,7 @@ public class CommerceAccountServiceHttp {
 					"addCommerceAccount", _addCommerceAccountParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					parentCommerceAccountId, email, taxId, active,
+					parentCommerceAccountId, email, taxId, type, active,
 					externalReferenceCode, serviceContext);
 
 			Object returnObj = null;
@@ -189,12 +190,46 @@ public class CommerceAccountServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccount getPersonalCommerceAccount(
+		HttpPrincipal httpPrincipal,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
+					"getPersonalCommerceAccount",
+					_getPersonalCommerceAccountParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccount)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccount getCommerceAccount(
 		HttpPrincipal httpPrincipal, long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
-					"getCommerceAccount", _getCommerceAccountParameterTypes4);
+					"getCommerceAccount", _getCommerceAccountParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId);
@@ -222,15 +257,17 @@ public class CommerceAccountServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		HttpPrincipal httpPrincipal, int start, int end)
+		HttpPrincipal httpPrincipal,
+		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getUserCommerceAccounts",
-					_getUserCommerceAccountsParameterTypes5);
+					_getUserCommerceAccountsParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, start,
-					end);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceSiteType, start, end);
 
 			Object returnObj = null;
 
@@ -256,15 +293,17 @@ public class CommerceAccountServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
 		HttpPrincipal httpPrincipal, Long parentCommerceAccountId,
+		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
 		String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getUserCommerceAccounts",
-					_getUserCommerceAccountsParameterTypes6);
+					_getUserCommerceAccountsParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					parentCommerceAccountId, keywords, start, end);
+					parentCommerceAccountId, commerceSiteType, keywords, start,
+					end);
 
 			Object returnObj = null;
 
@@ -290,15 +329,16 @@ public class CommerceAccountServiceHttp {
 
 	public static int getUserCommerceAccountsCount(
 		HttpPrincipal httpPrincipal, Long parentCommerceAccountId,
+		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
 		String keywords)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getUserCommerceAccountsCount",
-					_getUserCommerceAccountsCountParameterTypes7);
+					_getUserCommerceAccountsCountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					parentCommerceAccountId, keywords);
+					parentCommerceAccountId, commerceSiteType, keywords);
 
 			Object returnObj = null;
 
@@ -323,16 +363,16 @@ public class CommerceAccountServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
-		HttpPrincipal httpPrincipal, long groupId,
-		long parentCommerceAccountId, String keywords, Boolean active,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		HttpPrincipal httpPrincipal, long parentCommerceAccountId,
+		String keywords, Boolean active, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"searchCommerceAccounts",
-					_searchCommerceAccountsParameterTypes8);
+					_searchCommerceAccountsParameterTypes9);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentCommerceAccountId, keywords, active, start, end, sort);
 
 			Object returnObj = null;
@@ -359,18 +399,17 @@ public class CommerceAccountServiceHttp {
 
 	public static com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
 		HttpPrincipal httpPrincipal, long commerceAccountId, String name,
-		boolean logo, byte[] logoBytes, String email, String taxId,
-		boolean active,
+		String email, String taxId, boolean active,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"updateCommerceAccount",
-					_updateCommerceAccountParameterTypes9);
+					_updateCommerceAccountParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId, name, logo, logoBytes, email, taxId,
-					active, serviceContext);
+					commerceAccountId, name, email, taxId, active,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -396,18 +435,18 @@ public class CommerceAccountServiceHttp {
 
 	public static com.liferay.commerce.account.model.CommerceAccount upsertCommerceAccount(
 		HttpPrincipal httpPrincipal, String name, long parentCommerceAccountId,
-		boolean logo, byte[] logoBytes, String email, String taxId,
+		boolean logo, byte[] logoBytes, String email, String taxId, int type,
 		boolean active, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"upsertCommerceAccount",
-					_upsertCommerceAccountParameterTypes10);
+					_upsertCommerceAccountParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					parentCommerceAccountId, logo, logoBytes, email, taxId,
-					active, externalReferenceCode, serviceContext);
+					type, active, externalReferenceCode, serviceContext);
 
 			Object returnObj = null;
 
@@ -432,14 +471,15 @@ public class CommerceAccountServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CommerceAccountServiceHttp.class);
-	private static final Class<?>[] _addCommerceAccountParameterTypes0 = new Class[] {
+	private static final Class<?>[] _addBusinessCommerceAccountParameterTypes0 = new Class[] {
 			String.class, long.class, String.class, String.class, boolean.class,
 			String.class, long[].class, String[].class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addCommerceAccountParameterTypes1 = new Class[] {
-			String.class, long.class, String.class, String.class, boolean.class,
-			String.class, com.liferay.portal.kernel.service.ServiceContext.class
+			String.class, long.class, String.class, String.class, int.class,
+			boolean.class, String.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteCommerceAccountParameterTypes2 = new Class[] {
 			long.class
@@ -447,29 +487,36 @@ public class CommerceAccountServiceHttp {
 	private static final Class<?>[] _fetchCommerceAccountParameterTypes3 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCommerceAccountParameterTypes4 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getUserCommerceAccountsParameterTypes5 = new Class[] {
-			int.class, int.class
-		};
-	private static final Class<?>[] _getUserCommerceAccountsParameterTypes6 = new Class[] {
-			Long.class, String.class, int.class, int.class
-		};
-	private static final Class<?>[] _getUserCommerceAccountsCountParameterTypes7 =
-		new Class[] { Long.class, String.class };
-	private static final Class<?>[] _searchCommerceAccountsParameterTypes8 = new Class[] {
-			long.class, long.class, String.class, Boolean.class, int.class,
-			int.class, com.liferay.portal.kernel.search.Sort.class
-		};
-	private static final Class<?>[] _updateCommerceAccountParameterTypes9 = new Class[] {
-			long.class, String.class, boolean.class, byte[].class, String.class,
-			String.class, boolean.class,
+	private static final Class<?>[] _getPersonalCommerceAccountParameterTypes4 = new Class[] {
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _upsertCommerceAccountParameterTypes10 = new Class[] {
+	private static final Class<?>[] _getCommerceAccountParameterTypes5 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getUserCommerceAccountsParameterTypes6 = new Class[] {
+			com.liferay.commerce.account.util.CommerceSiteType.class, int.class,
+			int.class
+		};
+	private static final Class<?>[] _getUserCommerceAccountsParameterTypes7 = new Class[] {
+			Long.class, com.liferay.commerce.account.util.CommerceSiteType.class,
+			String.class, int.class, int.class
+		};
+	private static final Class<?>[] _getUserCommerceAccountsCountParameterTypes8 =
+		new Class[] {
+			Long.class, com.liferay.commerce.account.util.CommerceSiteType.class,
+			String.class
+		};
+	private static final Class<?>[] _searchCommerceAccountsParameterTypes9 = new Class[] {
+			long.class, String.class, Boolean.class, int.class, int.class,
+			com.liferay.portal.kernel.search.Sort.class
+		};
+	private static final Class<?>[] _updateCommerceAccountParameterTypes10 = new Class[] {
+			long.class, String.class, String.class, String.class, boolean.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
+		};
+	private static final Class<?>[] _upsertCommerceAccountParameterTypes11 = new Class[] {
 			String.class, long.class, boolean.class, byte[].class, String.class,
-			String.class, boolean.class, String.class,
+			String.class, int.class, boolean.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 }

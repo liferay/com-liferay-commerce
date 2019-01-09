@@ -229,60 +229,18 @@ public interface CommerceOrderModel extends BaseModel<CommerceOrder>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the site group ID of this commerce order.
+	 * Returns the commerce account ID of this commerce order.
 	 *
-	 * @return the site group ID of this commerce order
+	 * @return the commerce account ID of this commerce order
 	 */
-	public long getSiteGroupId();
+	public long getCommerceAccountId();
 
 	/**
-	 * Sets the site group ID of this commerce order.
+	 * Sets the commerce account ID of this commerce order.
 	 *
-	 * @param siteGroupId the site group ID of this commerce order
+	 * @param commerceAccountId the commerce account ID of this commerce order
 	 */
-	public void setSiteGroupId(long siteGroupId);
-
-	/**
-	 * Returns the order organization ID of this commerce order.
-	 *
-	 * @return the order organization ID of this commerce order
-	 */
-	public long getOrderOrganizationId();
-
-	/**
-	 * Sets the order organization ID of this commerce order.
-	 *
-	 * @param orderOrganizationId the order organization ID of this commerce order
-	 */
-	public void setOrderOrganizationId(long orderOrganizationId);
-
-	/**
-	 * Returns the order user ID of this commerce order.
-	 *
-	 * @return the order user ID of this commerce order
-	 */
-	public long getOrderUserId();
-
-	/**
-	 * Sets the order user ID of this commerce order.
-	 *
-	 * @param orderUserId the order user ID of this commerce order
-	 */
-	public void setOrderUserId(long orderUserId);
-
-	/**
-	 * Returns the order user uuid of this commerce order.
-	 *
-	 * @return the order user uuid of this commerce order
-	 */
-	public String getOrderUserUuid();
-
-	/**
-	 * Sets the order user uuid of this commerce order.
-	 *
-	 * @param orderUserUuid the order user uuid of this commerce order
-	 */
-	public void setOrderUserUuid(String orderUserUuid);
+	public void setCommerceAccountId(long commerceAccountId);
 
 	/**
 	 * Returns the commerce currency ID of this commerce order.

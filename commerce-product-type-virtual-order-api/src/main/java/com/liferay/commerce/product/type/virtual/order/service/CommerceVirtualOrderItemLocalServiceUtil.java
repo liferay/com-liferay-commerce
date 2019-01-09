@@ -284,6 +284,14 @@ public class CommerceVirtualOrderItemLocalServiceUtil {
 		return getService().getCommerceVirtualOrderItems(start, end);
 	}
 
+	public static java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> getCommerceVirtualOrderItems(
+		long groupId, long commerceAccountId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator) {
+		return getService()
+				   .getCommerceVirtualOrderItems(groupId, commerceAccountId,
+			start, end, orderByComparator);
+	}
+
 	/**
 	* Returns all the commerce virtual order items matching the UUID and company.
 	*
@@ -325,6 +333,12 @@ public class CommerceVirtualOrderItemLocalServiceUtil {
 		return getService().getCommerceVirtualOrderItemsCount();
 	}
 
+	public static int getCommerceVirtualOrderItemsCount(long groupId,
+		long commerceAccountId) {
+		return getService()
+				   .getCommerceVirtualOrderItemsCount(groupId, commerceAccountId);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.exportimport.kernel.lar.PortletDataContext portletDataContext) {
 		return getService().getExportActionableDynamicQuery(portletDataContext);
@@ -337,21 +351,6 @@ public class CommerceVirtualOrderItemLocalServiceUtil {
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		return getService().getIndexableActionableDynamicQuery();
-	}
-
-	public static java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> getOrganizationCommerceVirtualOrderItems(
-		long groupId, long organizationId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator) {
-		return getService()
-				   .getOrganizationCommerceVirtualOrderItems(groupId,
-			organizationId, start, end, orderByComparator);
-	}
-
-	public static int getOrganizationCommerceVirtualOrderItemsCount(
-		long groupId, long organizationId) {
-		return getService()
-				   .getOrganizationCommerceVirtualOrderItemsCount(groupId,
-			organizationId);
 	}
 
 	/**
@@ -367,20 +366,6 @@ public class CommerceVirtualOrderItemLocalServiceUtil {
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getPersistedModel(primaryKeyObj);
-	}
-
-	public static java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> getUserCommerceVirtualOrderItems(
-		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator) {
-		return getService()
-				   .getUserCommerceVirtualOrderItems(groupId, userId, start,
-			end, orderByComparator);
-	}
-
-	public static int getUserCommerceVirtualOrderItemsCount(long groupId,
-		long userId) {
-		return getService()
-				   .getUserCommerceVirtualOrderItemsCount(groupId, userId);
 	}
 
 	public static com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem incrementCommerceVirtualOrderItemUsages(

@@ -213,24 +213,13 @@ public interface CommerceShipmentLocalService extends BaseLocalService,
 	public List<CommerceShipment> getCommerceShipments(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceShipment> getCommerceShipmentsByG_S(long groupId,
+	public List<CommerceShipment> getCommerceShipments(long groupId,
 		int status, int start, int end,
 		OrderByComparator<CommerceShipment> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceShipment> getCommerceShipmentsByGroupId(long groupId,
-		int start, int end,
-		OrderByComparator<CommerceShipment> orderByComparator);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceShipment> getCommerceShipmentsByS_S(long siteGroupId,
-		int status, int start, int end,
-		OrderByComparator<CommerceShipment> orderByComparator);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceShipment> getCommerceShipmentsBySiteGroupId(
-		long siteGroupId, int start, int end,
-		OrderByComparator<CommerceShipment> orderByComparator);
+	public List<CommerceShipment> getCommerceShipments(long groupId, int start,
+		int end, OrderByComparator<CommerceShipment> orderByComparator);
 
 	/**
 	* Returns the number of commerce shipments.
@@ -241,16 +230,10 @@ public interface CommerceShipmentLocalService extends BaseLocalService,
 	public int getCommerceShipmentsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceShipmentsCountByG_S(long groupId, int status);
+	public int getCommerceShipmentsCount(long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceShipmentsCountByGroupId(long groupId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceShipmentsCountByS_S(long siteGroupId, int status);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceShipmentsCountBySiteGroupId(long siteGroupId);
+	public int getCommerceShipmentsCount(long groupId, int status);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
