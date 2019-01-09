@@ -90,7 +90,7 @@ public class AddressCommerceShippingOriginLocator
 			_commerceAddressLocalService.createCommerceAddress(0);
 
 		CommerceWarehouse commerceWarehouse = _getDefaultCommerceWarehouse(
-			commerceOrder.getSiteGroupId());
+			commerceOrder.getGroupId());
 
 		commerceAddress.setName(commerceWarehouse.getName());
 		commerceAddress.setStreet1(commerceWarehouse.getStreet1());

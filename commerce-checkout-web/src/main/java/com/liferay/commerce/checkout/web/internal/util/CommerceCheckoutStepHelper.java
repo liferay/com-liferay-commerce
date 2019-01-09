@@ -58,7 +58,7 @@ public class CommerceCheckoutStepHelper {
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
 		if (_commercePaymentEngine.getCommercePaymentMethodGroupRelsCount(
-				commerceOrder.getSiteGroupId()) > 0) {
+				commerceOrder.getGroupId()) > 0) {
 
 			return true;
 		}
@@ -81,7 +81,7 @@ public class CommerceCheckoutStepHelper {
 		}
 
 		if (_commerceShippingMethodLocalService.getCommerceShippingMethodsCount(
-				commerceOrder.getSiteGroupId(), true) > 0) {
+				commerceOrder.getGroupId(), true) > 0) {
 
 			return true;
 		}

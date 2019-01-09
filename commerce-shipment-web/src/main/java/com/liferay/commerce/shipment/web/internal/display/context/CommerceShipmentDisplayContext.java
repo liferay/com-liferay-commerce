@@ -215,22 +215,19 @@ public class CommerceShipmentDisplayContext
 			navigation);
 
 		if (!navigation.equals("all") && (shipmentStatus != null)) {
-			total = _commerceShipmentService.getCommerceShipmentsCountByS_S(
+			total = _commerceShipmentService.getCommerceShipmentsCount(
 				cpRequestHelper.getScopeGroupId(), shipmentStatus);
-			results = _commerceShipmentService.getCommerceShipmentsByS_S(
+			results = _commerceShipmentService.getCommerceShipments(
 				cpRequestHelper.getScopeGroupId(), shipmentStatus,
 				searchContainer.getStart(), searchContainer.getEnd(),
 				orderByComparator);
 		}
 		else {
-			total =
-				_commerceShipmentService.getCommerceShipmentsCountBySiteGroupId(
-					cpRequestHelper.getScopeGroupId());
-			results =
-				_commerceShipmentService.getCommerceShipmentsBySiteGroupId(
-					cpRequestHelper.getScopeGroupId(),
-					searchContainer.getStart(), searchContainer.getEnd(),
-					orderByComparator);
+			total = _commerceShipmentService.getCommerceShipmentsCount(
+				cpRequestHelper.getScopeGroupId());
+			results = _commerceShipmentService.getCommerceShipments(
+				cpRequestHelper.getScopeGroupId(), searchContainer.getStart(),
+				searchContainer.getEnd(), orderByComparator);
 		}
 
 		searchContainer.setTotal(total);

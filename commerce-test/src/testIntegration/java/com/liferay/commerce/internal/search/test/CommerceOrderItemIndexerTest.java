@@ -94,7 +94,7 @@ public class CommerceOrderItemIndexerTest {
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
-		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
+		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
 
 		for (int i = 0; i < count; i++) {

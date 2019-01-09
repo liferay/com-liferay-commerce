@@ -48,7 +48,7 @@ public class CommerceSubscriptionEntryTestUtil {
 
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
 
-		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
+		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			groupId, userId, 0);
 
 		CommerceAddress commerceAddress =

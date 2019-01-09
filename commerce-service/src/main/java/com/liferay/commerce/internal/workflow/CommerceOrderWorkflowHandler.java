@@ -70,7 +70,7 @@ public class CommerceOrderWorkflowHandler
 		}
 
 		return _workflowDefinitionLinkLocalService.fetchWorkflowDefinitionLink(
-			commerceOrder.getCompanyId(), commerceOrder.getSiteGroupId(),
+			commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
 			CommerceOrder.class.getName(), 0, typePK, true);
 	}
 
