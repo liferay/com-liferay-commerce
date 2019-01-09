@@ -27,7 +27,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 @Meta.OCD(
 	id = "com.liferay.commerce.payment.method.paypal.internal.configuration.PayPalGroupServiceConfiguration",
 	localization = "content/Language",
-	name = "commerce-payment-engine-method-paypal-group-service-configuration-name"
+	name = "commerce-payment-method-paypal-group-service-configuration-name"
 )
 public interface PayPalGroupServiceConfiguration {
 
