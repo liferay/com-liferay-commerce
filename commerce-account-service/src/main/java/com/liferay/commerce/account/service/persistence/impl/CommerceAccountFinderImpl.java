@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.service.persistence.impl;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.impl.CommerceAccountImpl;
 import com.liferay.commerce.account.service.persistence.CommerceAccountFinder;
@@ -149,6 +150,22 @@ public class CommerceAccountFinderImpl
 			else {
 				sql = StringUtil.replace(
 					sql, "AND (CommerceAccount.name LIKE ?)", StringPool.BLANK);
+			}
+
+			boolean B2B = (boolean)queryDefinition.getAttribute("B2B");
+			boolean B2C = (boolean)queryDefinition.getAttribute("B2C");
+
+			if (B2B && !B2C) {
+				sql = StringUtil.add(
+					sql,
+					" AND (CommerceAccount.type_ = " +
+						CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS + ")");
+			}
+			else if (!B2B && B2C) {
+				sql = StringUtil.add(
+					sql,
+					" AND (CommerceAccount.type_ = " +
+						CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL + ")");
 			}
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
