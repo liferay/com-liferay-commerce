@@ -14,14 +14,21 @@
 
 package com.liferay.commerce.account.internal.util;
 
+import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceSiteType;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.SessionParamUtil;
 
@@ -93,7 +100,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 			return null;
 		}
 		else if (currentCommerceAccountId == 0) {
-			commerceAccount = _getSingleCommerceAccount();
+			commerceAccount = _getSingleCommerceAccount(httpServletRequest);
 
 			if (commerceAccount == null) {
 				setCurrentCommerceAccount(httpServletRequest, -1);
@@ -125,10 +132,37 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		httpSession.setAttribute(curGroupOrganizationIdKey, commerceAccountId);
 	}
 
-	private CommerceAccount _getSingleCommerceAccount() throws PortalException {
+	private CommerceAccount _getSingleCommerceAccount(
+			HttpServletRequest httpServletRequest)
+		throws PortalException {
+
+		User user = _portal.getUser(httpServletRequest);
+
+		if (user.isDefaultUser()) {
+			return _commerceAccountLocalService.getGuestCommerceAccount(
+				user.getCompanyId());
+		}
+
+		CommerceAccountGroupServiceConfiguration
+			commerceAccountGroupServiceConfiguration =
+				_configurationProvider.getGroupConfiguration(
+					CommerceAccountGroupServiceConfiguration.class,
+					_portal.getScopeGroupId(httpServletRequest));
+
+		if (commerceAccountGroupServiceConfiguration.commerceSiteType() ==
+				CommerceSiteType.B2C) {
+
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				CommerceAccount.class.getName(), httpServletRequest);
+
+			return _commerceAccountService.getPersonalCommerceAccount(
+				serviceContext);
+		}
+
 		List<CommerceAccount> userCommerceAccounts =
 			_commerceAccountService.getUserCommerceAccounts(
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
+				commerceAccountGroupServiceConfiguration.commerceSiteType(),
 				StringPool.BLANK, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		if (userCommerceAccounts.size() == 1) {
@@ -145,7 +179,13 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		"LIFERAY_SHARED_CURRENT_COMMERCE_ACCOUNT_ID_";
 
 	@Reference
+	private CommerceAccountLocalService _commerceAccountLocalService;
+
+	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private Portal _portal;
