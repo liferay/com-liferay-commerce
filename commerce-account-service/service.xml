@@ -25,6 +25,7 @@
 		<column name="logoId" type="long" />
 		<column name="email" type="String" />
 		<column name="taxId" type="String" />
+		<column name="type" type="int" />
 		<column name="active" type="boolean" />
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
