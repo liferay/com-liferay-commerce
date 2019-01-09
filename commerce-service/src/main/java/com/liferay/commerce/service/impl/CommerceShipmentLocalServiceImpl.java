@@ -67,10 +67,8 @@ public class CommerceShipmentLocalServiceImpl
 		commerceShipment.setCompanyId(user.getCompanyId());
 		commerceShipment.setUserId(user.getUserId());
 		commerceShipment.setUserName(user.getFullName());
-		commerceShipment.setSiteGroupId(commerceOrder.getSiteGroupId());
-		commerceShipment.setShipmentOrganizationId(
-			commerceOrder.getOrderOrganizationId());
-		commerceShipment.setShipmentUserId(commerceOrder.getOrderUserId());
+		commerceShipment.setCommerceAccountId(
+			commerceOrder.getCommerceAccountId());
 		commerceShipment.setCommerceAddressId(
 			commerceOrder.getShippingAddressId());
 		commerceShipment.setCommerceShippingMethodId(
@@ -113,7 +111,7 @@ public class CommerceShipmentLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceShipment> getCommerceShipmentsByG_S(
+	public List<CommerceShipment> getCommerceShipments(
 		long groupId, int status, int start, int end,
 		OrderByComparator<CommerceShipment> orderByComparator) {
 
@@ -122,7 +120,7 @@ public class CommerceShipmentLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceShipment> getCommerceShipmentsByGroupId(
+	public List<CommerceShipment> getCommerceShipments(
 		long groupId, int start, int end,
 		OrderByComparator<CommerceShipment> orderByComparator) {
 
@@ -131,41 +129,13 @@ public class CommerceShipmentLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceShipment> getCommerceShipmentsByS_S(
-		long siteGroupId, int status, int start, int end,
-		OrderByComparator<CommerceShipment> orderByComparator) {
-
-		return commerceShipmentPersistence.findByS_S(
-			siteGroupId, status, start, end, orderByComparator);
-	}
-
-	@Override
-	public List<CommerceShipment> getCommerceShipmentsBySiteGroupId(
-		long siteGroupId, int start, int end,
-		OrderByComparator<CommerceShipment> orderByComparator) {
-
-		return commerceShipmentPersistence.findBySiteGroupId(
-			siteGroupId, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getCommerceShipmentsCountByG_S(long groupId, int status) {
-		return commerceShipmentPersistence.countByG_S(groupId, status);
-	}
-
-	@Override
-	public int getCommerceShipmentsCountByGroupId(long groupId) {
+	public int getCommerceShipmentsCount(long groupId) {
 		return commerceShipmentPersistence.countByGroupId(groupId);
 	}
 
 	@Override
-	public int getCommerceShipmentsCountByS_S(long siteGroupId, int status) {
-		return commerceShipmentPersistence.countByS_S(siteGroupId, status);
-	}
-
-	@Override
-	public int getCommerceShipmentsCountBySiteGroupId(long siteGroupId) {
-		return commerceShipmentPersistence.countBySiteGroupId(siteGroupId);
+	public int getCommerceShipmentsCount(long groupId, int status) {
+		return commerceShipmentPersistence.countByG_S(groupId, status);
 	}
 
 	@Override
