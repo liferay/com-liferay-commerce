@@ -75,7 +75,7 @@ public class CommerceShipmentServiceImpl
 	}
 
 	@Override
-	public List<CommerceShipment> getCommerceShipmentsByG_S(
+	public List<CommerceShipment> getCommerceShipments(
 			long groupId, int status, int start, int end,
 			OrderByComparator<CommerceShipment> orderByComparator)
 		throws PortalException {
@@ -84,12 +84,12 @@ public class CommerceShipmentServiceImpl
 			getPermissionChecker(), groupId,
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 
-		return commerceShipmentLocalService.getCommerceShipmentsByG_S(
+		return commerceShipmentLocalService.getCommerceShipments(
 			groupId, status, start, end, orderByComparator);
 	}
 
 	@Override
-	public List<CommerceShipment> getCommerceShipmentsByGroupId(
+	public List<CommerceShipment> getCommerceShipments(
 			long groupId, int start, int end,
 			OrderByComparator<CommerceShipment> orderByComparator)
 		throws PortalException {
@@ -98,85 +98,29 @@ public class CommerceShipmentServiceImpl
 			getPermissionChecker(), groupId,
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 
-		return commerceShipmentLocalService.getCommerceShipmentsByGroupId(
+		return commerceShipmentLocalService.getCommerceShipments(
 			groupId, start, end, orderByComparator);
 	}
 
 	@Override
-	public List<CommerceShipment> getCommerceShipmentsByS_S(
-			long siteGroupId, int status, int start, int end,
-			OrderByComparator<CommerceShipment> orderByComparator)
-		throws PortalException {
-
+	public int getCommerceShipmentsCount(long groupId) throws PortalException {
 		_portletResourcePermission.check(
-			getPermissionChecker(), siteGroupId,
+			getPermissionChecker(), groupId,
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 
-		return commerceShipmentLocalService.getCommerceShipmentsByS_S(
-			siteGroupId, status, start, end, orderByComparator);
+		return commerceShipmentLocalService.getCommerceShipmentsCount(groupId);
 	}
 
 	@Override
-	public List<CommerceShipment> getCommerceShipmentsBySiteGroupId(
-			long siteGroupId, int start, int end,
-			OrderByComparator<CommerceShipment> orderByComparator)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), siteGroupId,
-			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
-
-		return commerceShipmentLocalService.getCommerceShipmentsBySiteGroupId(
-			siteGroupId, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getCommerceShipmentsCountByG_S(long groupId, int status)
+	public int getCommerceShipmentsCount(long groupId, int status)
 		throws PortalException {
 
 		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 
-		return commerceShipmentLocalService.getCommerceShipmentsCountByG_S(
+		return commerceShipmentLocalService.getCommerceShipmentsCount(
 			groupId, status);
-	}
-
-	@Override
-	public int getCommerceShipmentsCountByGroupId(long groupId)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
-
-		return commerceShipmentLocalService.getCommerceShipmentsCountByGroupId(
-			groupId);
-	}
-
-	@Override
-	public int getCommerceShipmentsCountByS_S(long siteGroupId, int status)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), siteGroupId,
-			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
-
-		return commerceShipmentLocalService.getCommerceShipmentsCountByS_S(
-			siteGroupId, status);
-	}
-
-	@Override
-	public int getCommerceShipmentsCountBySiteGroupId(long siteGroupId)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), siteGroupId,
-			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
-
-		return
-			commerceShipmentLocalService.getCommerceShipmentsCountBySiteGroupId(
-				siteGroupId);
 	}
 
 	@Override
