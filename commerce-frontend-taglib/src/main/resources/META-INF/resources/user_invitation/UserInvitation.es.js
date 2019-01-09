@@ -83,7 +83,7 @@ class UserInvitation extends Component {
 
 	_fetchUsers() {
 		return fetch(
-			this.usersAPI + '/' + this.query,
+			this.usersAPI + '?q=' + this.query,
 			{
 				method: 'GET'
 			}
