@@ -27,8 +27,6 @@ import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.Organization;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 
 import java.util.Locale;
@@ -254,26 +252,15 @@ public class CommerceOrderHelper {
 	}
 
 	public CommerceOrder upsertCommerceOrder(
-			long groupId, long orderOrganizationId, long orderUserId,
-			String currency, long shippingAddressId, String purchaseOrderNumber,
-			User currentUser)
+			long groupId, long commerceAccountId, String currency,
+			long shippingAddressId, String purchaseOrderNumber)
 		throws PortalException {
 
 		long commerceCurrencyId = _getCommerceCurrencyId(groupId, currency);
 
-		if (orderOrganizationId > 0) {
-			Organization organization =
-				_commerceOrganizationService.getOrganization(
-					orderOrganizationId);
-
-			return _commerceOrderService.addOrganizationCommerceOrder(
-				organization.getGroupId(), groupId,
-				organization.getOrganizationId(), commerceCurrencyId,
-				shippingAddressId, purchaseOrderNumber);
-		}
-
-		return _commerceOrderService.addUserCommerceOrder(
-			groupId, currentUser.getUserId(), orderUserId, commerceCurrencyId);
+		return _commerceOrderService.addCommerceOrder(
+			groupId, commerceAccountId, commerceCurrencyId, shippingAddressId,
+			purchaseOrderNumber);
 	}
 
 	private static CommerceAddress _getBillingAddress(

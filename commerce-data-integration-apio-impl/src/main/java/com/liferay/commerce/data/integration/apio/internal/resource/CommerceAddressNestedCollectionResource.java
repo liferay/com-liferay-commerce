@@ -23,6 +23,8 @@ import com.liferay.apio.architect.representor.Representor;
 import com.liferay.apio.architect.resource.NestedCollectionResource;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceAccountIdentifier;
 import com.liferay.commerce.data.integration.apio.identifier.CommerceAddressIdentifier;
@@ -41,7 +43,6 @@ import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
-import com.liferay.portal.kernel.service.GroupLocalService;
 
 import java.util.List;
 
@@ -144,16 +145,16 @@ public class CommerceAddressNestedCollectionResource
 	private ClassPKExternalReferenceCode _getCommerceAccountCPKERC(
 		CommerceAddress commerceAddress) {
 
-		long groupId = commerceAddress.getGroupId();
+		long classPK = commerceAddress.getClassPK();
 
-		Long organizationId = Try.fromFallible(
-			() -> _groupLocalService.getGroup(groupId)
+		Long commerceAccountId = Try.fromFallible(
+			() -> _commerceAccountLocalService.getCommerceAccount(classPK)
 		).map(
-			Group::getOrganizationId
+			CommerceAccount::getCommerceAccountId
 		).getUnchecked();
 
 		return _commerceAccountHelper.
-			organizationIdToClassPKExternalReferenceCode(organizationId);
+			commerceAccountIdToClassPKExternalReferenceCode(commerceAccountId);
 	}
 
 	private PageItems<CommerceAddress> _getPageItems(
@@ -183,6 +184,9 @@ public class CommerceAddressNestedCollectionResource
 	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
+	private CommerceAccountLocalService _commerceAccountLocalService;
+
+	@Reference
 	private CommerceAddressHelper _commerceAddressHelper;
 
 	@Reference
@@ -190,9 +194,6 @@ public class CommerceAddressNestedCollectionResource
 
 	@Reference
 	private CommerceOrganizationService _commerceOrganizationService;
-
-	@Reference
-	private GroupLocalService _groupLocalService;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.model.CommerceAddress)"
