@@ -17,6 +17,7 @@ package com.liferay.commerce.account.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceSiteType;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -57,14 +58,14 @@ public interface CommerceAccountService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceAccountServiceUtil} to access the commerce account remote service. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceAccount addCommerceAccount(String name,
+	public CommerceAccount addBusinessCommerceAccount(String name,
 		long parentCommerceAccountId, String email, String taxId,
 		boolean active, String externalReferenceCode, long[] userIds,
 		String[] emailAddresses, ServiceContext serviceContext)
 		throws PortalException;
 
 	public CommerceAccount addCommerceAccount(String name,
-		long parentCommerceAccountId, String email, String taxId,
+		long parentCommerceAccountId, String email, String taxId, int type,
 		boolean active, String externalReferenceCode,
 		ServiceContext serviceContext) throws PortalException;
 
@@ -87,32 +88,36 @@ public interface CommerceAccountService extends BaseService {
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAccount> getUserCommerceAccounts(int start, int end)
+	public CommerceAccount getPersonalCommerceAccount(
+		ServiceContext serviceContext) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccount> getUserCommerceAccounts(
+		CommerceSiteType commerceSiteType, int start, int end)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(
-		Long parentCommerceAccountId, String keywords, int start, int end)
-		throws PortalException;
+		Long parentCommerceAccountId, CommerceSiteType commerceSiteType,
+		String keywords, int start, int end) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceAccountsCount(Long parentCommerceAccountId,
-		String keywords) throws PortalException;
+		CommerceSiteType commerceSiteType, String keywords)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
-		long groupId, long parentCommerceAccountId, String keywords,
-		Boolean active, int start, int end, Sort sort)
-		throws PortalException;
+		long parentCommerceAccountId, String keywords, Boolean active,
+		int start, int end, Sort sort) throws PortalException;
 
 	public CommerceAccount updateCommerceAccount(long commerceAccountId,
-		String name, boolean logo, byte[] logoBytes, String email,
-		String taxId, boolean active, ServiceContext serviceContext)
-		throws PortalException;
+		String name, String email, String taxId, boolean active,
+		ServiceContext serviceContext) throws PortalException;
 
 	public CommerceAccount upsertCommerceAccount(String name,
 		long parentCommerceAccountId, boolean logo, byte[] logoBytes,
-		String email, String taxId, boolean active,
+		String email, String taxId, int type, boolean active,
 		String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
 }

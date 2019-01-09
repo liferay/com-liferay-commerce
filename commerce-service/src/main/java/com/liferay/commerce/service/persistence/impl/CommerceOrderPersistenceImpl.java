@@ -3519,91 +3519,91 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 
 	private static final String _FINDER_COLUMN_SHIPPINGADDRESSID_SHIPPINGADDRESSID_2 =
 		"commerceOrder.shippingAddressId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_O = new FinderPath(CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C = new FinderPath(CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceOrderModelImpl.FINDER_CACHE_ENABLED,
 			CommerceOrderImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_O",
+			"findByG_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_O = new FinderPath(CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C = new FinderPath(CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceOrderModelImpl.FINDER_CACHE_ENABLED,
 			CommerceOrderImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByG_O",
+			"findByG_C",
 			new String[] { Long.class.getName(), Long.class.getName() },
 			CommerceOrderModelImpl.GROUPID_COLUMN_BITMASK |
-			CommerceOrderModelImpl.ORDERUSERID_COLUMN_BITMASK |
+			CommerceOrderModelImpl.COMMERCEACCOUNTID_COLUMN_BITMASK |
 			CommerceOrderModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_O = new FinderPath(CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_C = new FinderPath(CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_O",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns all the commerce orders where groupId = &#63; and orderUserId = &#63;.
+	 * Returns all the commerce orders where groupId = &#63; and commerceAccountId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 * @return the matching commerce orders
 	 */
 	@Override
-	public List<CommerceOrder> findByG_O(long groupId, long orderUserId) {
-		return findByG_O(groupId, orderUserId, QueryUtil.ALL_POS,
+	public List<CommerceOrder> findByG_C(long groupId, long commerceAccountId) {
+		return findByG_C(groupId, commerceAccountId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce orders where groupId = &#63; and orderUserId = &#63;.
+	 * Returns a range of all the commerce orders where groupId = &#63; and commerceAccountId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @return the range of matching commerce orders
 	 */
 	@Override
-	public List<CommerceOrder> findByG_O(long groupId, long orderUserId,
+	public List<CommerceOrder> findByG_C(long groupId, long commerceAccountId,
 		int start, int end) {
-		return findByG_O(groupId, orderUserId, start, end, null);
+		return findByG_C(groupId, commerceAccountId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce orders where groupId = &#63; and orderUserId = &#63;.
+	 * Returns an ordered range of all the commerce orders where groupId = &#63; and commerceAccountId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
-	public List<CommerceOrder> findByG_O(long groupId, long orderUserId,
+	public List<CommerceOrder> findByG_C(long groupId, long commerceAccountId,
 		int start, int end, OrderByComparator<CommerceOrder> orderByComparator) {
-		return findByG_O(groupId, orderUserId, start, end, orderByComparator,
-			true);
+		return findByG_C(groupId, commerceAccountId, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce orders where groupId = &#63; and orderUserId = &#63;.
+	 * Returns an ordered range of all the commerce orders where groupId = &#63; and commerceAccountId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -3611,7 +3611,7 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
-	public List<CommerceOrder> findByG_O(long groupId, long orderUserId,
+	public List<CommerceOrder> findByG_C(long groupId, long commerceAccountId,
 		int start, int end, OrderByComparator<CommerceOrder> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -3621,13 +3621,13 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_O;
-			finderArgs = new Object[] { groupId, orderUserId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C;
+			finderArgs = new Object[] { groupId, commerceAccountId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_O;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C;
 			finderArgs = new Object[] {
-					groupId, orderUserId,
+					groupId, commerceAccountId,
 					
 					start, end, orderByComparator
 				};
@@ -3642,7 +3642,7 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrder commerceOrder : list) {
 					if ((groupId != commerceOrder.getGroupId()) ||
-							(orderUserId != commerceOrder.getOrderUserId())) {
+							(commerceAccountId != commerceOrder.getCommerceAccountId())) {
 						list = null;
 
 						break;
@@ -3664,9 +3664,9 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 
 			query.append(_SQL_SELECT_COMMERCEORDER_WHERE);
 
-			query.append(_FINDER_COLUMN_G_O_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_O_ORDERUSERID_2);
+			query.append(_FINDER_COLUMN_G_C_COMMERCEACCOUNTID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -3690,7 +3690,7 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 
 				qPos.add(groupId);
 
-				qPos.add(orderUserId);
+				qPos.add(commerceAccountId);
 
 				if (!pagination) {
 					list = (List<CommerceOrder>)QueryUtil.list(q, getDialect(),
@@ -3723,20 +3723,20 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 	}
 
 	/**
-	 * Returns the first commerce order in the ordered set where groupId = &#63; and orderUserId = &#63;.
+	 * Returns the first commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce order
 	 * @throws NoSuchOrderException if a matching commerce order could not be found
 	 */
 	@Override
-	public CommerceOrder findByG_O_First(long groupId, long orderUserId,
+	public CommerceOrder findByG_C_First(long groupId, long commerceAccountId,
 		OrderByComparator<CommerceOrder> orderByComparator)
 		throws NoSuchOrderException {
-		CommerceOrder commerceOrder = fetchByG_O_First(groupId, orderUserId,
-				orderByComparator);
+		CommerceOrder commerceOrder = fetchByG_C_First(groupId,
+				commerceAccountId, orderByComparator);
 
 		if (commerceOrder != null) {
 			return commerceOrder;
@@ -3749,8 +3749,8 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 		msg.append("groupId=");
 		msg.append(groupId);
 
-		msg.append(", orderUserId=");
-		msg.append(orderUserId);
+		msg.append(", commerceAccountId=");
+		msg.append(commerceAccountId);
 
 		msg.append("}");
 
@@ -3758,17 +3758,17 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 	}
 
 	/**
-	 * Returns the first commerce order in the ordered set where groupId = &#63; and orderUserId = &#63;.
+	 * Returns the first commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	 */
 	@Override
-	public CommerceOrder fetchByG_O_First(long groupId, long orderUserId,
+	public CommerceOrder fetchByG_C_First(long groupId, long commerceAccountId,
 		OrderByComparator<CommerceOrder> orderByComparator) {
-		List<CommerceOrder> list = findByG_O(groupId, orderUserId, 0, 1,
+		List<CommerceOrder> list = findByG_C(groupId, commerceAccountId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3779,20 +3779,20 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 	}
 
 	/**
-	 * Returns the last commerce order in the ordered set where groupId = &#63; and orderUserId = &#63;.
+	 * Returns the last commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce order
 	 * @throws NoSuchOrderException if a matching commerce order could not be found
 	 */
 	@Override
-	public CommerceOrder findByG_O_Last(long groupId, long orderUserId,
+	public CommerceOrder findByG_C_Last(long groupId, long commerceAccountId,
 		OrderByComparator<CommerceOrder> orderByComparator)
 		throws NoSuchOrderException {
-		CommerceOrder commerceOrder = fetchByG_O_Last(groupId, orderUserId,
-				orderByComparator);
+		CommerceOrder commerceOrder = fetchByG_C_Last(groupId,
+				commerceAccountId, orderByComparator);
 
 		if (commerceOrder != null) {
 			return commerceOrder;
@@ -3805,8 +3805,8 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 		msg.append("groupId=");
 		msg.append(groupId);
 
-		msg.append(", orderUserId=");
-		msg.append(orderUserId);
+		msg.append(", commerceAccountId=");
+		msg.append(commerceAccountId);
 
 		msg.append("}");
 
@@ -3814,24 +3814,24 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 	}
 
 	/**
-	 * Returns the last commerce order in the ordered set where groupId = &#63; and orderUserId = &#63;.
+	 * Returns the last commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	 */
 	@Override
-	public CommerceOrder fetchByG_O_Last(long groupId, long orderUserId,
+	public CommerceOrder fetchByG_C_Last(long groupId, long commerceAccountId,
 		OrderByComparator<CommerceOrder> orderByComparator) {
-		int count = countByG_O(groupId, orderUserId);
+		int count = countByG_C(groupId, commerceAccountId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceOrder> list = findByG_O(groupId, orderUserId, count - 1,
-				count, orderByComparator);
+		List<CommerceOrder> list = findByG_C(groupId, commerceAccountId,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3841,18 +3841,18 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 	}
 
 	/**
-	 * Returns the commerce orders before and after the current commerce order in the ordered set where groupId = &#63; and orderUserId = &#63;.
+	 * Returns the commerce orders before and after the current commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63;.
 	 *
 	 * @param commerceOrderId the primary key of the current commerce order
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce order
 	 * @throws NoSuchOrderException if a commerce order with the primary key could not be found
 	 */
 	@Override
-	public CommerceOrder[] findByG_O_PrevAndNext(long commerceOrderId,
-		long groupId, long orderUserId,
+	public CommerceOrder[] findByG_C_PrevAndNext(long commerceOrderId,
+		long groupId, long commerceAccountId,
 		OrderByComparator<CommerceOrder> orderByComparator)
 		throws NoSuchOrderException {
 		CommerceOrder commerceOrder = findByPrimaryKey(commerceOrderId);
@@ -3864,13 +3864,13 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 
 			CommerceOrder[] array = new CommerceOrderImpl[3];
 
-			array[0] = getByG_O_PrevAndNext(session, commerceOrder, groupId,
-					orderUserId, orderByComparator, true);
+			array[0] = getByG_C_PrevAndNext(session, commerceOrder, groupId,
+					commerceAccountId, orderByComparator, true);
 
 			array[1] = commerceOrder;
 
-			array[2] = getByG_O_PrevAndNext(session, commerceOrder, groupId,
-					orderUserId, orderByComparator, false);
+			array[2] = getByG_C_PrevAndNext(session, commerceOrder, groupId,
+					commerceAccountId, orderByComparator, false);
 
 			return array;
 		}
@@ -3882,8 +3882,8 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 		}
 	}
 
-	protected CommerceOrder getByG_O_PrevAndNext(Session session,
-		CommerceOrder commerceOrder, long groupId, long orderUserId,
+	protected CommerceOrder getByG_C_PrevAndNext(Session session,
+		CommerceOrder commerceOrder, long groupId, long commerceAccountId,
 		OrderByComparator<CommerceOrder> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -3898,9 +3898,9 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 
 		query.append(_SQL_SELECT_COMMERCEORDER_WHERE);
 
-		query.append(_FINDER_COLUMN_G_O_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_O_ORDERUSERID_2);
+		query.append(_FINDER_COLUMN_G_C_COMMERCEACCOUNTID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -3972,7 +3972,7 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 
 		qPos.add(groupId);
 
-		qPos.add(orderUserId);
+		qPos.add(commerceAccountId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(commerceOrder);
@@ -3993,31 +3993,31 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 	}
 
 	/**
-	 * Removes all the commerce orders where groupId = &#63; and orderUserId = &#63; from the database.
+	 * Removes all the commerce orders where groupId = &#63; and commerceAccountId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 */
 	@Override
-	public void removeByG_O(long groupId, long orderUserId) {
-		for (CommerceOrder commerceOrder : findByG_O(groupId, orderUserId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByG_C(long groupId, long commerceAccountId) {
+		for (CommerceOrder commerceOrder : findByG_C(groupId,
+				commerceAccountId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceOrder);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce orders where groupId = &#63; and orderUserId = &#63;.
+	 * Returns the number of commerce orders where groupId = &#63; and commerceAccountId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param orderUserId the order user ID
+	 * @param commerceAccountId the commerce account ID
 	 * @return the number of matching commerce orders
 	 */
 	@Override
-	public int countByG_O(long groupId, long orderUserId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_O;
+	public int countByG_C(long groupId, long commerceAccountId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C;
 
-		Object[] finderArgs = new Object[] { groupId, orderUserId };
+		Object[] finderArgs = new Object[] { groupId, commerceAccountId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -4026,9 +4026,9 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 
 			query.append(_SQL_COUNT_COMMERCEORDER_WHERE);
 
-			query.append(_FINDER_COLUMN_G_O_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_O_ORDERUSERID_2);
+			query.append(_FINDER_COLUMN_G_C_COMMERCEACCOUNTID_2);
 
 			String sql = query.toString();
 
@@ -4043,7 +4043,7 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 
 				qPos.add(groupId);
 
-				qPos.add(orderUserId);
+				qPos.add(commerceAccountId);
 
 				count = (Long)q.uniqueResult();
 
@@ -4062,8 +4062,8 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_O_GROUPID_2 = "commerceOrder.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_O_ORDERUSERID_2 = "commerceOrder.orderUserId = ?";
+	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "commerceOrder.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_COMMERCEACCOUNTID_2 = "commerceOrder.commerceAccountId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_U_O = new FinderPath(CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceOrderModelImpl.FINDER_CACHE_ENABLED,
 			CommerceOrderImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -5942,11 +5942,11 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 
 			args = new Object[] {
 					commerceOrderModelImpl.getGroupId(),
-					commerceOrderModelImpl.getOrderUserId()
+					commerceOrderModelImpl.getCommerceAccountId()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_O, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_O,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C,
 				args);
 
 			args = new Object[] {
@@ -6078,23 +6078,23 @@ public class CommerceOrderPersistenceImpl extends BasePersistenceImpl<CommerceOr
 			}
 
 			if ((commerceOrderModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_O.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						commerceOrderModelImpl.getOriginalGroupId(),
-						commerceOrderModelImpl.getOriginalOrderUserId()
+						commerceOrderModelImpl.getOriginalCommerceAccountId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_O, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_O,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C,
 					args);
 
 				args = new Object[] {
 						commerceOrderModelImpl.getGroupId(),
-						commerceOrderModelImpl.getOrderUserId()
+						commerceOrderModelImpl.getCommerceAccountId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_O, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_O,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C,
 					args);
 			}
 

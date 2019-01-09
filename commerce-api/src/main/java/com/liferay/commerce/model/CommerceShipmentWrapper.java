@@ -65,9 +65,7 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("siteGroupId", getSiteGroupId());
-		attributes.put("shipmentOrganizationId", getShipmentOrganizationId());
-		attributes.put("shipmentUserId", getShipmentUserId());
+		attributes.put("commerceAccountId", getCommerceAccountId());
 		attributes.put("commerceAddressId", getCommerceAddressId());
 		attributes.put("commerceShippingMethodId", getCommerceShippingMethodId());
 		attributes.put("shippingOptionName", getShippingOptionName());
@@ -124,23 +122,10 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 			setModifiedDate(modifiedDate);
 		}
 
-		Long siteGroupId = (Long)attributes.get("siteGroupId");
+		Long commerceAccountId = (Long)attributes.get("commerceAccountId");
 
-		if (siteGroupId != null) {
-			setSiteGroupId(siteGroupId);
-		}
-
-		Long shipmentOrganizationId = (Long)attributes.get(
-				"shipmentOrganizationId");
-
-		if (shipmentOrganizationId != null) {
-			setShipmentOrganizationId(shipmentOrganizationId);
-		}
-
-		Long shipmentUserId = (Long)attributes.get("shipmentUserId");
-
-		if (shipmentUserId != null) {
-			setShipmentUserId(shipmentUserId);
+		if (commerceAccountId != null) {
+			setCommerceAccountId(commerceAccountId);
 		}
 
 		Long commerceAddressId = (Long)attributes.get("commerceAddressId");
@@ -224,6 +209,16 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 	}
 
 	/**
+	* Returns the commerce account ID of this commerce shipment.
+	*
+	* @return the commerce account ID of this commerce shipment
+	*/
+	@Override
+	public long getCommerceAccountId() {
+		return _commerceShipment.getCommerceAccountId();
+	}
+
+	/**
 	* Returns the commerce address ID of this commerce shipment.
 	*
 	* @return the commerce address ID of this commerce shipment
@@ -280,17 +275,6 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 	}
 
 	@Override
-	public long getCustomerId() {
-		return _commerceShipment.getCustomerId();
-	}
-
-	@Override
-	public String getCustomerName()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipment.getCustomerName();
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceShipment.getExpandoBridge();
 	}
@@ -341,45 +325,9 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Organization getShipmentOrganization()
+	public com.liferay.commerce.account.model.CommerceAccount getShipmentAccount()
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipment.getShipmentOrganization();
-	}
-
-	/**
-	* Returns the shipment organization ID of this commerce shipment.
-	*
-	* @return the shipment organization ID of this commerce shipment
-	*/
-	@Override
-	public long getShipmentOrganizationId() {
-		return _commerceShipment.getShipmentOrganizationId();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.User getShipmentUser()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipment.getShipmentUser();
-	}
-
-	/**
-	* Returns the shipment user ID of this commerce shipment.
-	*
-	* @return the shipment user ID of this commerce shipment
-	*/
-	@Override
-	public long getShipmentUserId() {
-		return _commerceShipment.getShipmentUserId();
-	}
-
-	/**
-	* Returns the shipment user uuid of this commerce shipment.
-	*
-	* @return the shipment user uuid of this commerce shipment
-	*/
-	@Override
-	public String getShipmentUserUuid() {
-		return _commerceShipment.getShipmentUserUuid();
+		return _commerceShipment.getShipmentAccount();
 	}
 
 	/**
@@ -400,16 +348,6 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 	@Override
 	public String getShippingOptionName() {
 		return _commerceShipment.getShippingOptionName();
-	}
-
-	/**
-	* Returns the site group ID of this commerce shipment.
-	*
-	* @return the site group ID of this commerce shipment
-	*/
-	@Override
-	public long getSiteGroupId() {
-		return _commerceShipment.getSiteGroupId();
 	}
 
 	/**
@@ -500,6 +438,16 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 	@Override
 	public void setCarrier(String carrier) {
 		_commerceShipment.setCarrier(carrier);
+	}
+
+	/**
+	* Sets the commerce account ID of this commerce shipment.
+	*
+	* @param commerceAccountId the commerce account ID of this commerce shipment
+	*/
+	@Override
+	public void setCommerceAccountId(long commerceAccountId) {
+		_commerceShipment.setCommerceAccountId(commerceAccountId);
 	}
 
 	/**
@@ -619,36 +567,6 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 	}
 
 	/**
-	* Sets the shipment organization ID of this commerce shipment.
-	*
-	* @param shipmentOrganizationId the shipment organization ID of this commerce shipment
-	*/
-	@Override
-	public void setShipmentOrganizationId(long shipmentOrganizationId) {
-		_commerceShipment.setShipmentOrganizationId(shipmentOrganizationId);
-	}
-
-	/**
-	* Sets the shipment user ID of this commerce shipment.
-	*
-	* @param shipmentUserId the shipment user ID of this commerce shipment
-	*/
-	@Override
-	public void setShipmentUserId(long shipmentUserId) {
-		_commerceShipment.setShipmentUserId(shipmentUserId);
-	}
-
-	/**
-	* Sets the shipment user uuid of this commerce shipment.
-	*
-	* @param shipmentUserUuid the shipment user uuid of this commerce shipment
-	*/
-	@Override
-	public void setShipmentUserUuid(String shipmentUserUuid) {
-		_commerceShipment.setShipmentUserUuid(shipmentUserUuid);
-	}
-
-	/**
 	* Sets the shipping date of this commerce shipment.
 	*
 	* @param shippingDate the shipping date of this commerce shipment
@@ -666,16 +584,6 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 	@Override
 	public void setShippingOptionName(String shippingOptionName) {
 		_commerceShipment.setShippingOptionName(shippingOptionName);
-	}
-
-	/**
-	* Sets the site group ID of this commerce shipment.
-	*
-	* @param siteGroupId the site group ID of this commerce shipment
-	*/
-	@Override
-	public void setSiteGroupId(long siteGroupId) {
-		_commerceShipment.setSiteGroupId(siteGroupId);
 	}
 
 	/**

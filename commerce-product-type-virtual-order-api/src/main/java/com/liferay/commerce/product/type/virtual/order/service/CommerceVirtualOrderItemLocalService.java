@@ -253,6 +253,11 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	public List<CommerceVirtualOrderItem> getCommerceVirtualOrderItems(
 		int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceVirtualOrderItem> getCommerceVirtualOrderItems(
+		long groupId, long commerceAccountId, int start, int end,
+		OrderByComparator<CommerceVirtualOrderItem> orderByComparator);
+
 	/**
 	* Returns all the commerce virtual order items matching the UUID and company.
 	*
@@ -288,6 +293,10 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	public int getCommerceVirtualOrderItemsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceVirtualOrderItemsCount(long groupId,
+		long commerceAccountId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		PortletDataContext portletDataContext);
 
@@ -297,15 +306,6 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceVirtualOrderItem> getOrganizationCommerceVirtualOrderItems(
-		long groupId, long organizationId, int start, int end,
-		OrderByComparator<CommerceVirtualOrderItem> orderByComparator);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getOrganizationCommerceVirtualOrderItemsCount(long groupId,
-		long organizationId);
 
 	/**
 	* Returns the OSGi service identifier.
@@ -318,14 +318,6 @@ public interface CommerceVirtualOrderItemLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceVirtualOrderItem> getUserCommerceVirtualOrderItems(
-		long groupId, long userId, int start, int end,
-		OrderByComparator<CommerceVirtualOrderItem> orderByComparator);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserCommerceVirtualOrderItemsCount(long groupId, long userId);
 
 	public CommerceVirtualOrderItem incrementCommerceVirtualOrderItemUsages(
 		long commerceVirtualOrderItemId) throws PortalException;

@@ -108,13 +108,13 @@ public class CommerceShipmentServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceShipmentSoap[] getCommerceShipmentsByG_S(
+	public static com.liferay.commerce.model.CommerceShipmentSoap[] getCommerceShipments(
 		long groupId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceShipment> returnValue =
-				CommerceShipmentServiceUtil.getCommerceShipmentsByG_S(groupId,
+				CommerceShipmentServiceUtil.getCommerceShipments(groupId,
 					status, start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceShipmentSoap.toSoapModels(returnValue);
@@ -126,13 +126,13 @@ public class CommerceShipmentServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceShipmentSoap[] getCommerceShipmentsByGroupId(
+	public static com.liferay.commerce.model.CommerceShipmentSoap[] getCommerceShipments(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceShipment> returnValue =
-				CommerceShipmentServiceUtil.getCommerceShipmentsByGroupId(groupId,
+				CommerceShipmentServiceUtil.getCommerceShipments(groupId,
 					start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceShipmentSoap.toSoapModels(returnValue);
@@ -144,16 +144,12 @@ public class CommerceShipmentServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceShipmentSoap[] getCommerceShipmentsByS_S(
-		long siteGroupId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator)
+	public static int getCommerceShipmentsCount(long groupId)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.commerce.model.CommerceShipment> returnValue =
-				CommerceShipmentServiceUtil.getCommerceShipmentsByS_S(siteGroupId,
-					status, start, end, orderByComparator);
+			int returnValue = CommerceShipmentServiceUtil.getCommerceShipmentsCount(groupId);
 
-			return com.liferay.commerce.model.CommerceShipmentSoap.toSoapModels(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -162,72 +158,11 @@ public class CommerceShipmentServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceShipmentSoap[] getCommerceShipmentsBySiteGroupId(
-		long siteGroupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator)
+	public static int getCommerceShipmentsCount(long groupId, int status)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.commerce.model.CommerceShipment> returnValue =
-				CommerceShipmentServiceUtil.getCommerceShipmentsBySiteGroupId(siteGroupId,
-					start, end, orderByComparator);
-
-			return com.liferay.commerce.model.CommerceShipmentSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getCommerceShipmentsCountByG_S(long groupId, int status)
-		throws RemoteException {
-		try {
-			int returnValue = CommerceShipmentServiceUtil.getCommerceShipmentsCountByG_S(groupId,
+			int returnValue = CommerceShipmentServiceUtil.getCommerceShipmentsCount(groupId,
 					status);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getCommerceShipmentsCountByGroupId(long groupId)
-		throws RemoteException {
-		try {
-			int returnValue = CommerceShipmentServiceUtil.getCommerceShipmentsCountByGroupId(groupId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getCommerceShipmentsCountByS_S(long siteGroupId,
-		int status) throws RemoteException {
-		try {
-			int returnValue = CommerceShipmentServiceUtil.getCommerceShipmentsCountByS_S(siteGroupId,
-					status);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getCommerceShipmentsCountBySiteGroupId(long siteGroupId)
-		throws RemoteException {
-		try {
-			int returnValue = CommerceShipmentServiceUtil.getCommerceShipmentsCountBySiteGroupId(siteGroupId);
 
 			return returnValue;
 		}

@@ -81,38 +81,33 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder addCommerceOrder(CommerceOrder commerceOrder);
 
-	public CommerceOrder addCommerceOrder(long siteGroupId,
-		long orderOrganizationId, long orderUserId, long commerceCurrencyId,
-		long billingAddressId, long shippingAddressId,
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder addCommerceOrder(long groupId, long userId,
+		long commerceAccountId) throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder addCommerceOrder(long groupId, long userId,
+		long commerceAccountId, long commerceCurrencyId)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder addCommerceOrder(long groupId, long userId,
+		long commerceAccountId, long commerceCurrencyId,
+		long shippingAddressId, String purchaseOrderNumber)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder addCommerceOrder(long groupId, long userId,
+		long commerceAccountId, long shippingAddressId,
+		String purchaseOrderNumber) throws PortalException;
+
+	public CommerceOrder addCommerceOrder(long commerceAccountId,
+		long commerceCurrencyId, long billingAddressId, long shippingAddressId,
 		String commercePaymentMethodKey, long commerceShippingMethodId,
 		String shippingOptionName, String purchaseOrderNumber,
 		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
 		int paymentStatus, int orderStatus, ServiceContext serviceContext)
 		throws PortalException;
-
-	@Indexable(type = IndexableType.REINDEX)
-	public CommerceOrder addOrganizationCommerceOrder(long groupId,
-		long userId, long siteGroupId, long orderOrganizationId,
-		long commerceCurrencyId, long shippingAddressId,
-		String purchaseOrderNumber) throws PortalException;
-
-	@Indexable(type = IndexableType.REINDEX)
-	public CommerceOrder addOrganizationCommerceOrder(long groupId,
-		long userId, long siteGroupId, long orderOrganizationId,
-		long shippingAddressId, String purchaseOrderNumber)
-		throws PortalException;
-
-	@Indexable(type = IndexableType.REINDEX)
-	public CommerceOrder addUserCommerceOrder(long groupId, long userId)
-		throws PortalException;
-
-	@Indexable(type = IndexableType.REINDEX)
-	public CommerceOrder addUserCommerceOrder(long groupId, long userId,
-		long orderUserId) throws PortalException;
-
-	@Indexable(type = IndexableType.REINDEX)
-	public CommerceOrder addUserCommerceOrder(long groupId, long userId,
-		long orderUserId, long commerceCurrencyId) throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder approveCommerceOrder(long userId, long commerceOrderId)
@@ -316,12 +311,12 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 		int end, OrderByComparator<CommerceOrder> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrder> getCommerceOrders(long siteGroupId,
+	public List<CommerceOrder> getCommerceOrders(long groupId,
 		int[] orderStatuses);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getCommerceOrders(long groupId,
-		long orderUserId, int start, int end,
+		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -370,7 +365,7 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	public int getCommerceOrdersCount(long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceOrdersCount(long groupId, long orderUserId);
+	public int getCommerceOrdersCount(long groupId, long commerceAccountId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
@@ -390,6 +385,14 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
+		Integer orderStatus, String keywords, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceOrdersCount(long groupId, long userId,
+		Integer orderStatus, String keywords);
 
 	public void mergeGuestCommerceOrder(long guestCommerceOrderId,
 		long userCommerceOrderId, CommerceContext commerceContext,

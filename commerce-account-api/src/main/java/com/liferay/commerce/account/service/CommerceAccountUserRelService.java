@@ -66,6 +66,9 @@ public interface CommerceAccountUserRelService extends BaseService {
 	public void deleteCommerceAccountUserRel(long commerceAccountId, long userId)
 		throws PortalException;
 
+	public void deleteCommerceAccountUserRels(long commerceAccountId)
+		throws PortalException;
+
 	public void deleteCommerceAccountUserRels(long commerceAccountId,
 		long[] userIds) throws PortalException;
 

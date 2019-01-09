@@ -83,6 +83,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 			{ "logoId", Types.BIGINT },
 			{ "email", Types.VARCHAR },
 			{ "taxId", Types.VARCHAR },
+			{ "type_", Types.INTEGER },
 			{ "active_", Types.BOOLEAN },
 			{ "displayDate", Types.TIMESTAMP },
 			{ "expirationDate", Types.TIMESTAMP },
@@ -107,6 +108,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		TABLE_COLUMNS_MAP.put("logoId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("email", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("taxId", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("type_", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("active_", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("displayDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("expirationDate", Types.TIMESTAMP);
@@ -117,7 +119,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceAccount (externalReferenceCode VARCHAR(75) null,commerceAccountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,parentCommerceAccountId LONG,logoId LONG,email VARCHAR(75) null,taxId VARCHAR(75) null,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceAccount (externalReferenceCode VARCHAR(75) null,commerceAccountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,parentCommerceAccountId LONG,logoId LONG,email VARCHAR(75) null,taxId VARCHAR(75) null,type_ INTEGER,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceAccount";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceAccount.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceAccount.name ASC";
@@ -162,6 +164,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		model.setLogoId(soapModel.getLogoId());
 		model.setEmail(soapModel.getEmail());
 		model.setTaxId(soapModel.getTaxId());
+		model.setType(soapModel.getType());
 		model.setActive(soapModel.isActive());
 		model.setDisplayDate(soapModel.getDisplayDate());
 		model.setExpirationDate(soapModel.getExpirationDate());
@@ -247,6 +250,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		attributes.put("logoId", getLogoId());
 		attributes.put("email", getEmail());
 		attributes.put("taxId", getTaxId());
+		attributes.put("type", getType());
 		attributes.put("active", isActive());
 		attributes.put("displayDate", getDisplayDate());
 		attributes.put("expirationDate", getExpirationDate());
@@ -336,6 +340,12 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 		if (taxId != null) {
 			setTaxId(taxId);
+		}
+
+		Integer type = (Integer)attributes.get("type");
+
+		if (type != null) {
+			setType(type);
 		}
 
 		Boolean active = (Boolean)attributes.get("active");
@@ -600,6 +610,17 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 	@JSON
 	@Override
+	public int getType() {
+		return _type;
+	}
+
+	@Override
+	public void setType(int type) {
+		_type = type;
+	}
+
+	@JSON
+	@Override
 	public boolean getActive() {
 		return _active;
 	}
@@ -836,6 +857,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		commerceAccountImpl.setLogoId(getLogoId());
 		commerceAccountImpl.setEmail(getEmail());
 		commerceAccountImpl.setTaxId(getTaxId());
+		commerceAccountImpl.setType(getType());
 		commerceAccountImpl.setActive(isActive());
 		commerceAccountImpl.setDisplayDate(getDisplayDate());
 		commerceAccountImpl.setExpirationDate(getExpirationDate());
@@ -990,6 +1012,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 			commerceAccountCacheModel.taxId = null;
 		}
 
+		commerceAccountCacheModel.type = getType();
+
 		commerceAccountCacheModel.active = isActive();
 
 		Date displayDate = getDisplayDate();
@@ -1045,7 +1069,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(getExternalReferenceCode());
@@ -1071,6 +1095,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		sb.append(getEmail());
 		sb.append(", taxId=");
 		sb.append(getTaxId());
+		sb.append(", type=");
+		sb.append(getType());
 		sb.append(", active=");
 		sb.append(isActive());
 		sb.append(", displayDate=");
@@ -1094,7 +1120,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.account.model.CommerceAccount");
@@ -1147,6 +1173,10 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		sb.append(
 			"<column><column-name>taxId</column-name><column-value><![CDATA[");
 		sb.append(getTaxId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>active</column-name><column-value><![CDATA[");
@@ -1207,6 +1237,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 	private long _logoId;
 	private String _email;
 	private String _taxId;
+	private int _type;
 	private boolean _active;
 	private Date _displayDate;
 	private Date _expirationDate;

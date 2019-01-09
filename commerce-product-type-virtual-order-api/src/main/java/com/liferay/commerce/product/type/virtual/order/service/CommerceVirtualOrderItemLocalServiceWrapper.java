@@ -291,6 +291,14 @@ public class CommerceVirtualOrderItemLocalServiceWrapper
 			end);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> getCommerceVirtualOrderItems(
+		long groupId, long commerceAccountId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator) {
+		return _commerceVirtualOrderItemLocalService.getCommerceVirtualOrderItems(groupId,
+			commerceAccountId, start, end, orderByComparator);
+	}
+
 	/**
 	* Returns all the commerce virtual order items matching the UUID and company.
 	*
@@ -334,6 +342,13 @@ public class CommerceVirtualOrderItemLocalServiceWrapper
 	}
 
 	@Override
+	public int getCommerceVirtualOrderItemsCount(long groupId,
+		long commerceAccountId) {
+		return _commerceVirtualOrderItemLocalService.getCommerceVirtualOrderItemsCount(groupId,
+			commerceAccountId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.exportimport.kernel.lar.PortletDataContext portletDataContext) {
 		return _commerceVirtualOrderItemLocalService.getExportActionableDynamicQuery(portletDataContext);
@@ -348,21 +363,6 @@ public class CommerceVirtualOrderItemLocalServiceWrapper
 	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
 		return _commerceVirtualOrderItemLocalService.getIndexableActionableDynamicQuery();
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> getOrganizationCommerceVirtualOrderItems(
-		long groupId, long organizationId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator) {
-		return _commerceVirtualOrderItemLocalService.getOrganizationCommerceVirtualOrderItems(groupId,
-			organizationId, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getOrganizationCommerceVirtualOrderItemsCount(long groupId,
-		long organizationId) {
-		return _commerceVirtualOrderItemLocalService.getOrganizationCommerceVirtualOrderItemsCount(groupId,
-			organizationId);
 	}
 
 	/**
@@ -380,20 +380,6 @@ public class CommerceVirtualOrderItemLocalServiceWrapper
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceVirtualOrderItemLocalService.getPersistedModel(primaryKeyObj);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> getUserCommerceVirtualOrderItems(
-		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator) {
-		return _commerceVirtualOrderItemLocalService.getUserCommerceVirtualOrderItems(groupId,
-			userId, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getUserCommerceVirtualOrderItemsCount(long groupId, long userId) {
-		return _commerceVirtualOrderItemLocalService.getUserCommerceVirtualOrderItemsCount(groupId,
-			userId);
 	}
 
 	@Override
