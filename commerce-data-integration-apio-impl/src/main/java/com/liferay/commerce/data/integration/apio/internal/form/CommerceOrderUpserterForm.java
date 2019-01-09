@@ -37,25 +37,18 @@ public class CommerceOrderUpserterForm {
 			"purchaseOrderNumber",
 			CommerceOrderUpserterForm::setPurchaseOrderNumber
 		).addRequiredLong(
-			"orderOrganizationId",
-			CommerceOrderUpserterForm::setOrderOrganizationId
-		).addRequiredLong(
-			"orderUserId", CommerceOrderUpserterForm::setOrderUserId
+			"commerceAccountId", CommerceOrderUpserterForm::setCommerceAccountId
 		).addRequiredString(
 			"currency", CommerceOrderUpserterForm::setCurrency
 		).build();
 	}
 
+	public long getCommerceAccountId() {
+		return _commerceAccountId;
+	}
+
 	public String getCurrency() {
 		return _currency;
-	}
-
-	public long getOrderOrganizationId() {
-		return _orderOrganizationId;
-	}
-
-	public long getOrderUserId() {
-		return _orderUserId;
 	}
 
 	public String getPurchaseOrderNumber() {
@@ -66,16 +59,12 @@ public class CommerceOrderUpserterForm {
 		return _shippingAddressId;
 	}
 
+	public void setCommerceAccountId(long commerceAccountId) {
+		_commerceAccountId = commerceAccountId;
+	}
+
 	public void setCurrency(String currency) {
 		_currency = currency;
-	}
-
-	public void setOrderOrganizationId(long orderOrganizationId) {
-		_orderOrganizationId = orderOrganizationId;
-	}
-
-	public void setOrderUserId(long orderUserId) {
-		_orderUserId = orderUserId;
 	}
 
 	public void setPurchaseOrderNumber(String purchaseOrderNumber) {
@@ -86,9 +75,8 @@ public class CommerceOrderUpserterForm {
 		_shippingAddressId = shippingAddressId;
 	}
 
+	private long _commerceAccountId;
 	private String _currency;
-	private long _orderOrganizationId;
-	private long _orderUserId;
 	private String _purchaseOrderNumber;
 	private long _shippingAddressId;
 

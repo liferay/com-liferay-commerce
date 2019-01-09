@@ -18,6 +18,9 @@ import com.liferay.apio.architect.alias.routes.permission.HasNestedAddingPermiss
 import com.liferay.apio.architect.credentials.Credentials;
 import com.liferay.apio.architect.function.throwable.ThrowableTriFunction;
 import com.liferay.apio.architect.identifier.Identifier;
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
 import com.liferay.commerce.data.integration.apio.internal.util.CommerceAccountHelper;
 import com.liferay.commerce.data.integration.headless.compat.apio.identifier.CommerceWebSiteIdentifier;
@@ -25,14 +28,13 @@ import com.liferay.commerce.data.integration.headless.compat.apio.permission.Has
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.Organization;
-import com.liferay.portal.kernel.model.OrganizationConstants;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.CompanyService;
-import com.liferay.portal.kernel.service.permission.OrganizationPermissionUtil;
-import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -43,7 +45,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Zoltán Takács
  */
 @Component(
-	property = "model.class.name=com.liferay.portal.kernel.model.Organization",
+	property = "model.class.name=com.liferay.commerce.account.model.CommerceAccount",
 	service = HasPermission.class
 )
 public class CommerceAccountPermissionImpl
@@ -55,21 +57,22 @@ public class CommerceAccountPermissionImpl
 
 		if (identifierClass.equals(CommerceWebSiteIdentifier.class)) {
 			return (credentials, groupId) -> {
-				long parentOrganizationId =
-					_commerceAccountHelper.getParentOrganizationId(
+				long parentCommerceAccountId =
+					_commerceAccountHelper.getParentCommerceAccountId(
 						(Long)groupId);
 
-				if (parentOrganizationId ==
-						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+				if (parentCommerceAccountId ==
+						CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID) {
 
-					return PortalPermissionUtil.contains(
+					return _portletResourcePermission.contains(
 						(PermissionChecker)credentials.get(),
-						ActionKeys.ADD_ORGANIZATION);
+						GroupConstants.DEFAULT_LIVE_GROUP_ID,
+						CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 				}
 
-				return OrganizationPermissionUtil.contains(
-					(PermissionChecker)credentials.get(), parentOrganizationId,
-					ActionKeys.ADD_ORGANIZATION);
+				return _modelResourcePermission.contains(
+					(PermissionChecker)credentials.get(),
+					parentCommerceAccountId, ActionKeys.UPDATE);
 			};
 		}
 
@@ -104,22 +107,23 @@ public class CommerceAccountPermissionImpl
 			Company company = _companyService.getCompanyById(
 				CompanyThreadLocal.getCompanyId());
 
-			Organization organization = _commerceAccountHelper.getOrganization(
-				commerceAccountCPKERC, company);
+			CommerceAccount commerceAccount =
+				_commerceAccountHelper.getCommerceAccount(
+					commerceAccountCPKERC, company);
 
-			if (organization == null) {
+			if (commerceAccount == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"No Organization exists with identifier: " +
+						"No CommerceAccount exists with identifier: " +
 							commerceAccountCPKERC);
 				}
 
 				return false;
 			}
 
-			return OrganizationPermissionUtil.contains(
+			return _modelResourcePermission.contains(
 				(PermissionChecker)credentials.get(),
-				organization.getOrganizationId(), actionId);
+				commerceAccount.getCommerceAccountId(), actionId);
 		};
 	}
 
@@ -131,5 +135,15 @@ public class CommerceAccountPermissionImpl
 
 	@Reference
 	private CompanyService _companyService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
+	)
+	private ModelResourcePermission<CommerceAccount> _modelResourcePermission;
+
+	@Reference(
+		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 }

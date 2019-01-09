@@ -18,6 +18,7 @@ import com.liferay.apio.architect.alias.routes.permission.HasNestedAddingPermiss
 import com.liferay.apio.architect.credentials.Credentials;
 import com.liferay.apio.architect.function.throwable.ThrowableBiFunction;
 import com.liferay.apio.architect.identifier.Identifier;
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
@@ -29,9 +30,10 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 
 import org.osgi.service.component.annotations.Component;
@@ -54,26 +56,24 @@ public class CommerceAddressPermissionImpl implements HasPermission<Long> {
 
 		if (identifierClass.equals(CommerceAccountIdentifier.class)) {
 			return (credentials, commerceAccountCPKERC) -> {
-				Organization organization =
-					(Organization)_commerceAccountHelper.getOrganization(
-						(ClassPKExternalReferenceCode)
-							commerceAccountCPKERC,
+				CommerceAccount commerceAccount =
+					_commerceAccountHelper.getCommerceAccount(
+						(ClassPKExternalReferenceCode)commerceAccountCPKERC,
 						CompanyThreadLocal.getCompanyId());
 
-				if (organization == null) {
+				if (commerceAccount == null) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"No Organization exists with identifier: " +
+							"No CommerceAccount exists with identifier: " +
 								commerceAccountCPKERC);
 					}
 
 					return false;
 				}
 
-				return _portletResourcePermission.contains(
+				return _modelResourcePermission.contains(
 					(PermissionChecker)credentials.get(),
-					organization.getGroupId(),
-					CommerceActionKeys.MANAGE_COMMERCE_ADDRESSES);
+					commerceAccount.getCommerceAccountId(), ActionKeys.UPDATE);
 			};
 		}
 		else if (identifierClass.equals(CommerceWebSiteIdentifier.class)) {
@@ -132,6 +132,11 @@ public class CommerceAddressPermissionImpl implements HasPermission<Long> {
 
 	@Reference
 	private CommerceAddressService _commerceAddressService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
+	)
+	private ModelResourcePermission<CommerceAccount> _modelResourcePermission;
 
 	@Reference(
 		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
