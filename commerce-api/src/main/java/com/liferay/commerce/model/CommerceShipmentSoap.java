@@ -41,9 +41,7 @@ public class CommerceShipmentSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setSiteGroupId(model.getSiteGroupId());
-		soapModel.setShipmentOrganizationId(model.getShipmentOrganizationId());
-		soapModel.setShipmentUserId(model.getShipmentUserId());
+		soapModel.setCommerceAccountId(model.getCommerceAccountId());
 		soapModel.setCommerceAddressId(model.getCommerceAddressId());
 		soapModel.setCommerceShippingMethodId(model.getCommerceShippingMethodId());
 		soapModel.setShippingOptionName(model.getShippingOptionName());
@@ -162,28 +160,12 @@ public class CommerceShipmentSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getSiteGroupId() {
-		return _siteGroupId;
+	public long getCommerceAccountId() {
+		return _commerceAccountId;
 	}
 
-	public void setSiteGroupId(long siteGroupId) {
-		_siteGroupId = siteGroupId;
-	}
-
-	public long getShipmentOrganizationId() {
-		return _shipmentOrganizationId;
-	}
-
-	public void setShipmentOrganizationId(long shipmentOrganizationId) {
-		_shipmentOrganizationId = shipmentOrganizationId;
-	}
-
-	public long getShipmentUserId() {
-		return _shipmentUserId;
-	}
-
-	public void setShipmentUserId(long shipmentUserId) {
-		_shipmentUserId = shipmentUserId;
+	public void setCommerceAccountId(long commerceAccountId) {
+		_commerceAccountId = commerceAccountId;
 	}
 
 	public long getCommerceAddressId() {
@@ -257,9 +239,7 @@ public class CommerceShipmentSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _siteGroupId;
-	private long _shipmentOrganizationId;
-	private long _shipmentUserId;
+	private long _commerceAccountId;
 	private long _commerceAddressId;
 	private long _commerceShippingMethodId;
 	private String _shippingOptionName;

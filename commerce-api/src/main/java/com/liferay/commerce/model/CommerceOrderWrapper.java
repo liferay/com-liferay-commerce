@@ -71,9 +71,7 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("siteGroupId", getSiteGroupId());
-		attributes.put("orderOrganizationId", getOrderOrganizationId());
-		attributes.put("orderUserId", getOrderUserId());
+		attributes.put("commerceAccountId", getCommerceAccountId());
 		attributes.put("commerceCurrencyId", getCommerceCurrencyId());
 		attributes.put("billingAddressId", getBillingAddressId());
 		attributes.put("shippingAddressId", getShippingAddressId());
@@ -181,22 +179,10 @@ public class CommerceOrderWrapper implements CommerceOrder,
 			setModifiedDate(modifiedDate);
 		}
 
-		Long siteGroupId = (Long)attributes.get("siteGroupId");
+		Long commerceAccountId = (Long)attributes.get("commerceAccountId");
 
-		if (siteGroupId != null) {
-			setSiteGroupId(siteGroupId);
-		}
-
-		Long orderOrganizationId = (Long)attributes.get("orderOrganizationId");
-
-		if (orderOrganizationId != null) {
-			setOrderOrganizationId(orderOrganizationId);
-		}
-
-		Long orderUserId = (Long)attributes.get("orderUserId");
-
-		if (orderUserId != null) {
-			setOrderUserId(orderUserId);
+		if (commerceAccountId != null) {
+			setCommerceAccountId(commerceAccountId);
 		}
 
 		Long commerceCurrencyId = (Long)attributes.get("commerceCurrencyId");
@@ -458,16 +444,14 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		return _commerceOrder.getBillingAddressId();
 	}
 
+	/**
+	* Returns the commerce account ID of this commerce order.
+	*
+	* @return the commerce account ID of this commerce order
+	*/
 	@Override
-	public String getClassName()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrder.getClassName();
-	}
-
-	@Override
-	public long getClassPK()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrder.getClassPK();
+	public long getCommerceAccountId() {
+		return _commerceOrder.getCommerceAccountId();
 	}
 
 	@Override
@@ -554,17 +538,6 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	@Override
-	public long getCustomerId() {
-		return _commerceOrder.getCustomerId();
-	}
-
-	@Override
-	public String getCustomerName()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrder.getCustomerName();
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceOrder.getExpandoBridge();
 	}
@@ -600,19 +573,9 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Organization getOrderOrganization()
+	public com.liferay.commerce.account.model.CommerceAccount getOrderAccount()
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrder.getOrderOrganization();
-	}
-
-	/**
-	* Returns the order organization ID of this commerce order.
-	*
-	* @return the order organization ID of this commerce order
-	*/
-	@Override
-	public long getOrderOrganizationId() {
-		return _commerceOrder.getOrderOrganizationId();
+		return _commerceOrder.getOrderAccount();
 	}
 
 	/**
@@ -623,32 +586,6 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public int getOrderStatus() {
 		return _commerceOrder.getOrderStatus();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.User getOrderUser()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrder.getOrderUser();
-	}
-
-	/**
-	* Returns the order user ID of this commerce order.
-	*
-	* @return the order user ID of this commerce order
-	*/
-	@Override
-	public long getOrderUserId() {
-		return _commerceOrder.getOrderUserId();
-	}
-
-	/**
-	* Returns the order user uuid of this commerce order.
-	*
-	* @return the order user uuid of this commerce order
-	*/
-	@Override
-	public String getOrderUserUuid() {
-		return _commerceOrder.getOrderUserUuid();
 	}
 
 	/**
@@ -776,16 +713,6 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public String getShippingOptionName() {
 		return _commerceOrder.getShippingOptionName();
-	}
-
-	/**
-	* Returns the site group ID of this commerce order.
-	*
-	* @return the site group ID of this commerce order
-	*/
-	@Override
-	public long getSiteGroupId() {
-		return _commerceOrder.getSiteGroupId();
 	}
 
 	/**
@@ -1193,6 +1120,16 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	/**
+	* Sets the commerce account ID of this commerce order.
+	*
+	* @param commerceAccountId the commerce account ID of this commerce order
+	*/
+	@Override
+	public void setCommerceAccountId(long commerceAccountId) {
+		_commerceOrder.setCommerceAccountId(commerceAccountId);
+	}
+
+	/**
 	* Sets the commerce currency ID of this commerce order.
 	*
 	* @param commerceCurrencyId the commerce currency ID of this commerce order
@@ -1304,16 +1241,6 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	}
 
 	/**
-	* Sets the order organization ID of this commerce order.
-	*
-	* @param orderOrganizationId the order organization ID of this commerce order
-	*/
-	@Override
-	public void setOrderOrganizationId(long orderOrganizationId) {
-		_commerceOrder.setOrderOrganizationId(orderOrganizationId);
-	}
-
-	/**
 	* Sets the order status of this commerce order.
 	*
 	* @param orderStatus the order status of this commerce order
@@ -1321,26 +1248,6 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public void setOrderStatus(int orderStatus) {
 		_commerceOrder.setOrderStatus(orderStatus);
-	}
-
-	/**
-	* Sets the order user ID of this commerce order.
-	*
-	* @param orderUserId the order user ID of this commerce order
-	*/
-	@Override
-	public void setOrderUserId(long orderUserId) {
-		_commerceOrder.setOrderUserId(orderUserId);
-	}
-
-	/**
-	* Sets the order user uuid of this commerce order.
-	*
-	* @param orderUserUuid the order user uuid of this commerce order
-	*/
-	@Override
-	public void setOrderUserUuid(String orderUserUuid) {
-		_commerceOrder.setOrderUserUuid(orderUserUuid);
 	}
 
 	/**
@@ -1466,16 +1373,6 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public void setShippingOptionName(String shippingOptionName) {
 		_commerceOrder.setShippingOptionName(shippingOptionName);
-	}
-
-	/**
-	* Sets the site group ID of this commerce order.
-	*
-	* @param siteGroupId the site group ID of this commerce order
-	*/
-	@Override
-	public void setSiteGroupId(long siteGroupId) {
-		_commerceOrder.setSiteGroupId(siteGroupId);
 	}
 
 	/**

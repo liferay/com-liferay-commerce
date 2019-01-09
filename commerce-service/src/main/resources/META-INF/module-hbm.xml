@@ -110,9 +110,7 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="siteGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="orderOrganizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="orderUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commerceAccountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceCurrencyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="billingAddressId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="shippingAddressId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -233,9 +231,7 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="siteGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="shipmentOrganizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="shipmentUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commerceAccountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceAddressId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceShippingMethodId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="shippingOptionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />

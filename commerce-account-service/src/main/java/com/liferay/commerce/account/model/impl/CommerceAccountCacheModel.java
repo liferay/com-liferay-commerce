@@ -65,7 +65,7 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -91,6 +91,8 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 		sb.append(email);
 		sb.append(", taxId=");
 		sb.append(taxId);
+		sb.append(", type=");
+		sb.append(type);
 		sb.append(", active=");
 		sb.append(active);
 		sb.append(", displayDate=");
@@ -172,6 +174,7 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 			commerceAccountImpl.setTaxId(taxId);
 		}
 
+		commerceAccountImpl.setType(type);
 		commerceAccountImpl.setActive(active);
 
 		if (displayDate == Long.MIN_VALUE) {
@@ -237,6 +240,8 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 		email = objectInput.readUTF();
 		taxId = objectInput.readUTF();
 
+		type = objectInput.readInt();
+
 		active = objectInput.readBoolean();
 		displayDate = objectInput.readLong();
 		expirationDate = objectInput.readLong();
@@ -300,6 +305,8 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 			objectOutput.writeUTF(taxId);
 		}
 
+		objectOutput.writeInt(type);
+
 		objectOutput.writeBoolean(active);
 		objectOutput.writeLong(displayDate);
 		objectOutput.writeLong(expirationDate);
@@ -331,6 +338,7 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 	public long logoId;
 	public String email;
 	public String taxId;
+	public int type;
 	public boolean active;
 	public long displayDate;
 	public long expirationDate;

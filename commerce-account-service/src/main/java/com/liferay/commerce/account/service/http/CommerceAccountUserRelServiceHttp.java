@@ -151,12 +151,41 @@ public class CommerceAccountUserRelServiceHttp {
 	}
 
 	public static void deleteCommerceAccountUserRels(
-		HttpPrincipal httpPrincipal, long commerceAccountId, long[] userIds)
+		HttpPrincipal httpPrincipal, long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
 					"deleteCommerceAccountUserRels",
 					_deleteCommerceAccountUserRelsParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceAccountId);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteCommerceAccountUserRels(
+		HttpPrincipal httpPrincipal, long commerceAccountId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
+					"deleteCommerceAccountUserRels",
+					_deleteCommerceAccountUserRelsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId, userIds);
@@ -185,7 +214,7 @@ public class CommerceAccountUserRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
 					"getCommerceAccountUserRels",
-					_getCommerceAccountUserRelsParameterTypes4);
+					_getCommerceAccountUserRelsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId);
@@ -218,7 +247,7 @@ public class CommerceAccountUserRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
 					"getCommerceAccountUserRels",
-					_getCommerceAccountUserRelsParameterTypes5);
+					_getCommerceAccountUserRelsParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId, start, end);
@@ -251,7 +280,7 @@ public class CommerceAccountUserRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountUserRelServiceUtil.class,
 					"getCommerceAccountUserRelsCount",
-					_getCommerceAccountUserRelsCountParameterTypes6);
+					_getCommerceAccountUserRelsCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId);
@@ -290,13 +319,15 @@ public class CommerceAccountUserRelServiceHttp {
 	private static final Class<?>[] _deleteCommerceAccountUserRelParameterTypes2 =
 		new Class[] { long.class, long.class };
 	private static final Class<?>[] _deleteCommerceAccountUserRelsParameterTypes3 =
+		new Class[] { long.class };
+	private static final Class<?>[] _deleteCommerceAccountUserRelsParameterTypes4 =
 		new Class[] { long.class, long[].class };
-	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes5 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes6 = new Class[] {
 			long.class, int.class, int.class
 		};
-	private static final Class<?>[] _getCommerceAccountUserRelsCountParameterTypes6 =
+	private static final Class<?>[] _getCommerceAccountUserRelsCountParameterTypes7 =
 		new Class[] { long.class };
 }

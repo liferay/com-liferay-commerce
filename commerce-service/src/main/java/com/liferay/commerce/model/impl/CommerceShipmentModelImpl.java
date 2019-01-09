@@ -78,9 +78,7 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "siteGroupId", Types.BIGINT },
-			{ "shipmentOrganizationId", Types.BIGINT },
-			{ "shipmentUserId", Types.BIGINT },
+			{ "commerceAccountId", Types.BIGINT },
 			{ "commerceAddressId", Types.BIGINT },
 			{ "commerceShippingMethodId", Types.BIGINT },
 			{ "shippingOptionName", Types.VARCHAR },
@@ -100,9 +98,7 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("siteGroupId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("shipmentOrganizationId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("shipmentUserId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("commerceAccountId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceAddressId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceShippingMethodId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("shippingOptionName", Types.VARCHAR);
@@ -113,7 +109,7 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 		TABLE_COLUMNS_MAP.put("expectedDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceShipment (commerceShipmentId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,siteGroupId LONG,shipmentOrganizationId LONG,shipmentUserId LONG,commerceAddressId LONG,commerceShippingMethodId LONG,shippingOptionName VARCHAR(75) null,carrier VARCHAR(75) null,trackingNumber VARCHAR(75) null,status INTEGER,shippingDate DATE null,expectedDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceShipment (commerceShipmentId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceAddressId LONG,commerceShippingMethodId LONG,shippingOptionName VARCHAR(75) null,carrier VARCHAR(75) null,trackingNumber VARCHAR(75) null,status INTEGER,shippingDate DATE null,expectedDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceShipment";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceShipment.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceShipment.createDate DESC";
@@ -130,9 +126,8 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 				"value.object.column.bitmask.enabled.com.liferay.commerce.model.CommerceShipment"),
 			true);
 	public static final long GROUPID_COLUMN_BITMASK = 1L;
-	public static final long SITEGROUPID_COLUMN_BITMASK = 2L;
-	public static final long STATUS_COLUMN_BITMASK = 4L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 8L;
+	public static final long STATUS_COLUMN_BITMASK = 2L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -154,9 +149,7 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setSiteGroupId(soapModel.getSiteGroupId());
-		model.setShipmentOrganizationId(soapModel.getShipmentOrganizationId());
-		model.setShipmentUserId(soapModel.getShipmentUserId());
+		model.setCommerceAccountId(soapModel.getCommerceAccountId());
 		model.setCommerceAddressId(soapModel.getCommerceAddressId());
 		model.setCommerceShippingMethodId(soapModel.getCommerceShippingMethodId());
 		model.setShippingOptionName(soapModel.getShippingOptionName());
@@ -237,9 +230,7 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("siteGroupId", getSiteGroupId());
-		attributes.put("shipmentOrganizationId", getShipmentOrganizationId());
-		attributes.put("shipmentUserId", getShipmentUserId());
+		attributes.put("commerceAccountId", getCommerceAccountId());
 		attributes.put("commerceAddressId", getCommerceAddressId());
 		attributes.put("commerceShippingMethodId", getCommerceShippingMethodId());
 		attributes.put("shippingOptionName", getShippingOptionName());
@@ -299,23 +290,10 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 			setModifiedDate(modifiedDate);
 		}
 
-		Long siteGroupId = (Long)attributes.get("siteGroupId");
+		Long commerceAccountId = (Long)attributes.get("commerceAccountId");
 
-		if (siteGroupId != null) {
-			setSiteGroupId(siteGroupId);
-		}
-
-		Long shipmentOrganizationId = (Long)attributes.get(
-				"shipmentOrganizationId");
-
-		if (shipmentOrganizationId != null) {
-			setShipmentOrganizationId(shipmentOrganizationId);
-		}
-
-		Long shipmentUserId = (Long)attributes.get("shipmentUserId");
-
-		if (shipmentUserId != null) {
-			setShipmentUserId(shipmentUserId);
+		if (commerceAccountId != null) {
+			setCommerceAccountId(commerceAccountId);
 		}
 
 		Long commerceAddressId = (Long)attributes.get("commerceAddressId");
@@ -488,63 +466,13 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 
 	@JSON
 	@Override
-	public long getSiteGroupId() {
-		return _siteGroupId;
+	public long getCommerceAccountId() {
+		return _commerceAccountId;
 	}
 
 	@Override
-	public void setSiteGroupId(long siteGroupId) {
-		_columnBitmask |= SITEGROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalSiteGroupId) {
-			_setOriginalSiteGroupId = true;
-
-			_originalSiteGroupId = _siteGroupId;
-		}
-
-		_siteGroupId = siteGroupId;
-	}
-
-	public long getOriginalSiteGroupId() {
-		return _originalSiteGroupId;
-	}
-
-	@JSON
-	@Override
-	public long getShipmentOrganizationId() {
-		return _shipmentOrganizationId;
-	}
-
-	@Override
-	public void setShipmentOrganizationId(long shipmentOrganizationId) {
-		_shipmentOrganizationId = shipmentOrganizationId;
-	}
-
-	@JSON
-	@Override
-	public long getShipmentUserId() {
-		return _shipmentUserId;
-	}
-
-	@Override
-	public void setShipmentUserId(long shipmentUserId) {
-		_shipmentUserId = shipmentUserId;
-	}
-
-	@Override
-	public String getShipmentUserUuid() {
-		try {
-			User user = UserLocalServiceUtil.getUserById(getShipmentUserId());
-
-			return user.getUuid();
-		}
-		catch (PortalException pe) {
-			return "";
-		}
-	}
-
-	@Override
-	public void setShipmentUserUuid(String shipmentUserUuid) {
+	public void setCommerceAccountId(long commerceAccountId) {
+		_commerceAccountId = commerceAccountId;
 	}
 
 	@JSON
@@ -700,9 +628,7 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 		commerceShipmentImpl.setUserName(getUserName());
 		commerceShipmentImpl.setCreateDate(getCreateDate());
 		commerceShipmentImpl.setModifiedDate(getModifiedDate());
-		commerceShipmentImpl.setSiteGroupId(getSiteGroupId());
-		commerceShipmentImpl.setShipmentOrganizationId(getShipmentOrganizationId());
-		commerceShipmentImpl.setShipmentUserId(getShipmentUserId());
+		commerceShipmentImpl.setCommerceAccountId(getCommerceAccountId());
 		commerceShipmentImpl.setCommerceAddressId(getCommerceAddressId());
 		commerceShipmentImpl.setCommerceShippingMethodId(getCommerceShippingMethodId());
 		commerceShipmentImpl.setShippingOptionName(getShippingOptionName());
@@ -780,10 +706,6 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 
 		commerceShipmentModelImpl._setModifiedDate = false;
 
-		commerceShipmentModelImpl._originalSiteGroupId = commerceShipmentModelImpl._siteGroupId;
-
-		commerceShipmentModelImpl._setOriginalSiteGroupId = false;
-
 		commerceShipmentModelImpl._originalStatus = commerceShipmentModelImpl._status;
 
 		commerceShipmentModelImpl._setOriginalStatus = false;
@@ -829,11 +751,7 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 			commerceShipmentCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		commerceShipmentCacheModel.siteGroupId = getSiteGroupId();
-
-		commerceShipmentCacheModel.shipmentOrganizationId = getShipmentOrganizationId();
-
-		commerceShipmentCacheModel.shipmentUserId = getShipmentUserId();
+		commerceShipmentCacheModel.commerceAccountId = getCommerceAccountId();
 
 		commerceShipmentCacheModel.commerceAddressId = getCommerceAddressId();
 
@@ -888,7 +806,7 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{commerceShipmentId=");
 		sb.append(getCommerceShipmentId());
@@ -904,12 +822,8 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", siteGroupId=");
-		sb.append(getSiteGroupId());
-		sb.append(", shipmentOrganizationId=");
-		sb.append(getShipmentOrganizationId());
-		sb.append(", shipmentUserId=");
-		sb.append(getShipmentUserId());
+		sb.append(", commerceAccountId=");
+		sb.append(getCommerceAccountId());
 		sb.append(", commerceAddressId=");
 		sb.append(getCommerceAddressId());
 		sb.append(", commerceShippingMethodId=");
@@ -933,7 +847,7 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceShipment");
@@ -968,16 +882,8 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>siteGroupId</column-name><column-value><![CDATA[");
-		sb.append(getSiteGroupId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>shipmentOrganizationId</column-name><column-value><![CDATA[");
-		sb.append(getShipmentOrganizationId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>shipmentUserId</column-name><column-value><![CDATA[");
-		sb.append(getShipmentUserId());
+			"<column><column-name>commerceAccountId</column-name><column-value><![CDATA[");
+		sb.append(getCommerceAccountId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>commerceAddressId</column-name><column-value><![CDATA[");
@@ -1031,11 +937,7 @@ public class CommerceShipmentModelImpl extends BaseModelImpl<CommerceShipment>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _siteGroupId;
-	private long _originalSiteGroupId;
-	private boolean _setOriginalSiteGroupId;
-	private long _shipmentOrganizationId;
-	private long _shipmentUserId;
+	private long _commerceAccountId;
 	private long _commerceAddressId;
 	private long _commerceShippingMethodId;
 	private String _shippingOptionName;

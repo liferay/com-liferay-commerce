@@ -46,6 +46,7 @@ public class CommerceAccountSoap implements Serializable {
 		soapModel.setLogoId(model.getLogoId());
 		soapModel.setEmail(model.getEmail());
 		soapModel.setTaxId(model.getTaxId());
+		soapModel.setType(model.getType());
 		soapModel.setActive(model.isActive());
 		soapModel.setDisplayDate(model.getDisplayDate());
 		soapModel.setExpirationDate(model.getExpirationDate());
@@ -204,6 +205,14 @@ public class CommerceAccountSoap implements Serializable {
 		_taxId = taxId;
 	}
 
+	public int getType() {
+		return _type;
+	}
+
+	public void setType(int type) {
+		_type = type;
+	}
+
 	public boolean getActive() {
 		return _active;
 	}
@@ -284,6 +293,7 @@ public class CommerceAccountSoap implements Serializable {
 	private long _logoId;
 	private String _email;
 	private String _taxId;
+	private int _type;
 	private boolean _active;
 	private Date _displayDate;
 	private Date _expirationDate;

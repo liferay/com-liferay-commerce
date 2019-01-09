@@ -232,34 +232,18 @@ public class CommerceShipmentLocalServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipmentsByG_S(
+	public java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
 		long groupId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator) {
-		return _commerceShipmentLocalService.getCommerceShipmentsByG_S(groupId,
+		return _commerceShipmentLocalService.getCommerceShipments(groupId,
 			status, start, end, orderByComparator);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipmentsByGroupId(
+	public java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator) {
-		return _commerceShipmentLocalService.getCommerceShipmentsByGroupId(groupId,
-			start, end, orderByComparator);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipmentsByS_S(
-		long siteGroupId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator) {
-		return _commerceShipmentLocalService.getCommerceShipmentsByS_S(siteGroupId,
-			status, start, end, orderByComparator);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipmentsBySiteGroupId(
-		long siteGroupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator) {
-		return _commerceShipmentLocalService.getCommerceShipmentsBySiteGroupId(siteGroupId,
+		return _commerceShipmentLocalService.getCommerceShipments(groupId,
 			start, end, orderByComparator);
 	}
 
@@ -274,25 +258,14 @@ public class CommerceShipmentLocalServiceWrapper
 	}
 
 	@Override
-	public int getCommerceShipmentsCountByG_S(long groupId, int status) {
-		return _commerceShipmentLocalService.getCommerceShipmentsCountByG_S(groupId,
+	public int getCommerceShipmentsCount(long groupId) {
+		return _commerceShipmentLocalService.getCommerceShipmentsCount(groupId);
+	}
+
+	@Override
+	public int getCommerceShipmentsCount(long groupId, int status) {
+		return _commerceShipmentLocalService.getCommerceShipmentsCount(groupId,
 			status);
-	}
-
-	@Override
-	public int getCommerceShipmentsCountByGroupId(long groupId) {
-		return _commerceShipmentLocalService.getCommerceShipmentsCountByGroupId(groupId);
-	}
-
-	@Override
-	public int getCommerceShipmentsCountByS_S(long siteGroupId, int status) {
-		return _commerceShipmentLocalService.getCommerceShipmentsCountByS_S(siteGroupId,
-			status);
-	}
-
-	@Override
-	public int getCommerceShipmentsCountBySiteGroupId(long siteGroupId) {
-		return _commerceShipmentLocalService.getCommerceShipmentsCountBySiteGroupId(siteGroupId);
 	}
 
 	@Override

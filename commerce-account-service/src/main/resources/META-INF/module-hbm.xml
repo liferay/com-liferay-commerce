@@ -20,6 +20,7 @@
 		<property name="logoId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="taxId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property column="type_" name="type" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property column="active_" name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="displayDate" type="org.hibernate.type.TimestampType" />
 		<property name="expirationDate" type="org.hibernate.type.TimestampType" />

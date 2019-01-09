@@ -111,6 +111,18 @@ public class CommerceAccountUserRelServiceSoap {
 		}
 	}
 
+	public static void deleteCommerceAccountUserRels(long commerceAccountId)
+		throws RemoteException {
+		try {
+			CommerceAccountUserRelServiceUtil.deleteCommerceAccountUserRels(commerceAccountId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteCommerceAccountUserRels(long commerceAccountId,
 		long[] userIds) throws RemoteException {
 		try {

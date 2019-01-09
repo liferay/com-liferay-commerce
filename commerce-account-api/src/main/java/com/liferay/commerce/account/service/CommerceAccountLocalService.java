@@ -17,6 +17,7 @@ package com.liferay.commerce.account.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceSiteType;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -66,6 +67,11 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceAccountLocalServiceUtil} to access the commerce account local service. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CommerceAccount addBusinessCommerceAccount(String name,
+		long parentCommerceAccountId, String email, String taxId,
+		boolean active, String externalReferenceCode, long[] userIds,
+		String[] emailAddresses, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	* Adds the commerce account to the database. Also notifies the appropriate model listeners.
@@ -76,16 +82,14 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount addCommerceAccount(CommerceAccount commerceAccount);
 
-	public CommerceAccount addCommerceAccount(String name,
-		long parentCommerceAccountId, String email, String taxId,
-		boolean active, String externalReferenceCode, long[] userIds,
-		String[] emailAddresses, ServiceContext serviceContext)
-		throws PortalException;
-
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount addCommerceAccount(String name,
-		long parentCommerceAccountId, String email, String taxId,
+		long parentCommerceAccountId, String email, String taxId, int type,
 		boolean active, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
+
+	public CommerceAccount addPersonalCommerceAccount(long userId,
+		String taxId, String externalReferenceCode,
 		ServiceContext serviceContext) throws PortalException;
 
 	/**
@@ -248,6 +252,10 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	public int getCommerceAccountsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccount getGuestCommerceAccount(long companyId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**
@@ -263,12 +271,18 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccount getPersonalCommerceAccount(
+		ServiceContext serviceContext) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(long userId,
-		Long parentCommerceAccountId, String keywords, int start, int end);
+		Long parentCommerceAccountId, CommerceSiteType commerceSiteType,
+		String keywords, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceAccountsCount(long userId,
-		Long parentCommerceAccountId, String keywords);
+		Long parentCommerceAccountId, CommerceSiteType commerceSiteType,
+		String keywords);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
@@ -288,9 +302,8 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount updateCommerceAccount(long commerceAccountId,
-		String name, boolean logo, byte[] logoBytes, String email,
-		String taxId, boolean active, ServiceContext serviceContext)
-		throws PortalException;
+		String name, String email, String taxId, boolean active,
+		ServiceContext serviceContext) throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount updateStatus(long userId, long commerceAccountId,
@@ -299,7 +312,7 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 
 	public CommerceAccount upsertCommerceAccount(String name,
 		long parentCommerceAccountId, boolean logo, byte[] logoBytes,
-		String email, String taxId, boolean active,
+		String email, String taxId, int type, boolean active,
 		String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
 }

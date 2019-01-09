@@ -70,6 +70,7 @@ public class CommerceAccountWrapper implements CommerceAccount,
 		attributes.put("logoId", getLogoId());
 		attributes.put("email", getEmail());
 		attributes.put("taxId", getTaxId());
+		attributes.put("type", getType());
 		attributes.put("active", isActive());
 		attributes.put("displayDate", getDisplayDate());
 		attributes.put("expirationDate", getExpirationDate());
@@ -156,6 +157,12 @@ public class CommerceAccountWrapper implements CommerceAccount,
 
 		if (taxId != null) {
 			setTaxId(taxId);
+		}
+
+		Integer type = (Integer)attributes.get("type");
+
+		if (type != null) {
+			setType(type);
 		}
 
 		Boolean active = (Boolean)attributes.get("active");
@@ -431,6 +438,16 @@ public class CommerceAccountWrapper implements CommerceAccount,
 	@Override
 	public String getTaxId() {
 		return _commerceAccount.getTaxId();
+	}
+
+	/**
+	* Returns the type of this commerce account.
+	*
+	* @return the type of this commerce account
+	*/
+	@Override
+	public int getType() {
+		return _commerceAccount.getType();
 	}
 
 	/**
@@ -812,6 +829,16 @@ public class CommerceAccountWrapper implements CommerceAccount,
 	@Override
 	public void setTaxId(String taxId) {
 		_commerceAccount.setTaxId(taxId);
+	}
+
+	/**
+	* Sets the type of this commerce account.
+	*
+	* @param type the type of this commerce account
+	*/
+	@Override
+	public void setType(int type) {
+		_commerceAccount.setType(type);
 	}
 
 	/**
