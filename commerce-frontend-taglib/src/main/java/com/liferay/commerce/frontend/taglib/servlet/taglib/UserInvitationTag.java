@@ -32,10 +32,8 @@ public class UserInvitationTag extends ComponentRendererTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		putValue("usersAPI", "api/users");
-
 		putValue(
-			"searchAPI",
+			"usersAPI",
 			PortalUtil.getPortalURL(request) + "/o/commerce-ui/search-users");
 
 		putValue("query", "");

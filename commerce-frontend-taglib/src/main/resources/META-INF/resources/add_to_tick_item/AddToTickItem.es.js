@@ -1,6 +1,6 @@
 'use strict';
 
-import template from './AddToTickItem.soy.js';
+import template from './AddToTickItem.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 

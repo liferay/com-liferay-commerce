@@ -16,7 +16,7 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 class UserInvitation extends Component {
 
 	created() {
-		this._debouncedFetchUser = debounce(() => this._fetchUsers, 300);
+		this._debouncedFetchUser = debounce(this._fetchUsers.bind(this), 300);
 	}
 
 	attached() {
@@ -30,9 +30,11 @@ class UserInvitation extends Component {
 		return true;
 	}
 
-	_handleCloseModal(evt) {
-		evt.preventDefault();
-		this.refs.modal.show();
+	_handleCloseModal(e) {
+		e.preventDefault();
+		// this.components.modal.show()
+		this._isVisible = false;
+		// this.refs.modal.show();
 	}
 
 	syncQuery() {
@@ -92,9 +94,9 @@ class UserInvitation extends Component {
 				response => response.json()
 			)
 			.then(
-				users => {
+				response => {
 					this._isLoading = false;
-					return this.users = users;
+					return this.users = response.users;
 				}
 			);
 	}
@@ -103,7 +105,6 @@ class UserInvitation extends Component {
 		if (!this.addedUsers.length) {
 			return false;
 		};
-
 		return this.emit('userInvitationSave', this.addedUsers);
 	}
 
@@ -124,7 +125,7 @@ Soy.register(UserInvitation, template);
 
 const USER_SCHEMA = Config.shapeOf(
 	{
-		id: Config.oneOfType(
+		userId: Config.oneOfType(
 			[
 				Config.string(),
 				Config.number()
