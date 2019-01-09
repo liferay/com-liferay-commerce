@@ -8,11 +8,12 @@
 	<form class="minium-search" data-onsubmit="handleSubmit">
 		<div class="minium-search__input">
 			<input
-				type="text"
+				autocomplete="off"
+				data-onkeyup="handleKeyUp"
+				name="queryString"
 				placeholder="{$placeholder}"
 				ref="searchInput"
-				name="queryString"
-				data-onkeyup="handleKeyUp"
+				type="text"
 				value="{$query}"
 			>
 		</div>
