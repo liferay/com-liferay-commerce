@@ -144,9 +144,7 @@ public class EditCPDefinitionOptionRelMVCActionCommand
 			CPDefinition cpDefinition = _actionHelper.getCPDefinition(
 				actionRequest);
 
-			Long cpDefinitionId = cpDefinition.getCPDefinitionId();
-
-			jsonObject.put("cpDefinitionId", cpDefinitionId);
+			jsonObject.put("cpDefinitionId", cpDefinition.getCPDefinitionId());
 
 			jsonObject.put("success", true);
 		}
