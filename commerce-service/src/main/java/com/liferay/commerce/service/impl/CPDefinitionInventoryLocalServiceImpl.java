@@ -25,7 +25,10 @@ import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
+
+import java.util.Date;
 
 /**
  * @author Alessio Antonio Rendina
@@ -80,6 +83,29 @@ public class CPDefinitionInventoryLocalServiceImpl
 		cpDefinitionInventoryPersistence.update(cpDefinitionInventory);
 
 		return cpDefinitionInventory;
+	}
+
+	@Override
+	public void cloneCPDefinitionInventory(
+		long cpDefinitionId, long newCPDefinitionId) {
+
+		CPDefinitionInventory cpDefinitionInventory =
+			cpDefinitionInventoryLocalService.
+				fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
+
+		if (cpDefinitionInventory != null) {
+			CPDefinitionInventory newCPDefinitionInventory =
+				(CPDefinitionInventory)cpDefinitionInventory.clone();
+
+			newCPDefinitionInventory.setUuid(PortalUUIDUtil.generate());
+			newCPDefinitionInventory.setCPDefinitionInventoryId(
+				counterLocalService.increment());
+			newCPDefinitionInventory.setModifiedDate(new Date());
+			newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
+
+			cpDefinitionInventoryLocalService.addCPDefinitionInventory(
+				newCPDefinitionInventory);
+		}
 	}
 
 	@Override
