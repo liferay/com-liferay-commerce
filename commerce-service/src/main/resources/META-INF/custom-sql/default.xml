@@ -21,7 +21,7 @@
 				CommerceCountry.priority
 		]]>
 	</sql>
-	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.findByS_O">
+	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.findByG_O">
 		<![CDATA[
 			SELECT
 				DISTINCT {CommerceOrder.*}
@@ -31,7 +31,7 @@
 				CommerceOrderItem ON
 					CommerceOrderItem.commerceOrderId = CommerceOrder.commerceOrderId
 			WHERE
-				(CommerceOrder.siteGroupId = ?) AND
+				(CommerceOrder.groupId = ?) AND
 				(CommerceOrder.orderStatus IN ([$ORDER_STATUS$])) AND
 				(CommerceOrderItem.quantity > CommerceOrderItem.shippedQuantity)
 		]]>
