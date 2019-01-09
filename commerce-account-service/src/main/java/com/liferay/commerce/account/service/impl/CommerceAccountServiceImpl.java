@@ -17,6 +17,7 @@ package com.liferay.commerce.account.service.impl;
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.base.CommerceAccountServiceBaseImpl;
+import com.liferay.commerce.account.util.CommerceSiteType;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -37,7 +38,7 @@ import java.util.List;
 public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 	@Override
-	public CommerceAccount addCommerceAccount(
+	public CommerceAccount addBusinessCommerceAccount(
 			String name, long parentCommerceAccountId, String email,
 			String taxId, boolean active, String externalReferenceCode,
 			long[] userIds, String[] emailAddresses,
@@ -47,7 +48,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		PortalPermissionUtil.contains(
 			getPermissionChecker(), CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 
-		return commerceAccountLocalService.addCommerceAccount(
+		return commerceAccountLocalService.addBusinessCommerceAccount(
 			name, parentCommerceAccountId, email, taxId, active,
 			externalReferenceCode, userIds, emailAddresses, serviceContext);
 	}
@@ -55,15 +56,15 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	@Override
 	public CommerceAccount addCommerceAccount(
 			String name, long parentCommerceAccountId, String email,
-			String taxId, boolean active, String externalReferenceCode,
-			ServiceContext serviceContext)
+			String taxId, int type, boolean active,
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
 		PortalPermissionUtil.contains(
 			getPermissionChecker(), CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 
 		return commerceAccountLocalService.addCommerceAccount(
-			name, parentCommerceAccountId, email, taxId, active,
+			name, parentCommerceAccountId, email, taxId, type, active,
 			externalReferenceCode, serviceContext);
 	}
 
@@ -86,7 +87,8 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 		if (commerceAccount != null) {
 			_commerceAccountModelResourcePermission.check(
-				getPermissionChecker(), commerceAccountId, ActionKeys.VIEW);
+				getPermissionChecker(), commerceAccount.getCommerceAccountId(),
+				ActionKeys.VIEW);
 		}
 
 		return commerceAccount;
@@ -104,35 +106,55 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	}
 
 	@Override
-	public List<CommerceAccount> getUserCommerceAccounts(int start, int end)
+	public CommerceAccount getPersonalCommerceAccount(
+			ServiceContext serviceContext)
 		throws PortalException {
 
-		return commerceAccountService.getUserCommerceAccounts(
-			null, StringPool.BLANK, start, end);
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.getPersonalCommerceAccount(
+				serviceContext);
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccount.getCommerceAccountId(),
+			ActionKeys.VIEW);
+
+		return commerceAccount;
 	}
 
 	@Override
 	public List<CommerceAccount> getUserCommerceAccounts(
-			Long parentCommerceAccountId, String keywords, int start, int end)
+			CommerceSiteType commerceSiteType, int start, int end)
+		throws PortalException {
+
+		return commerceAccountService.getUserCommerceAccounts(
+			null, commerceSiteType, StringPool.BLANK, start, end);
+	}
+
+	@Override
+	public List<CommerceAccount> getUserCommerceAccounts(
+			Long parentCommerceAccountId, CommerceSiteType commerceSiteType,
+			String keywords, int start, int end)
 		throws PortalException {
 
 		return commerceAccountLocalService.getUserCommerceAccounts(
-			getUserId(), parentCommerceAccountId, keywords, start, end);
+			getUserId(), parentCommerceAccountId, commerceSiteType, keywords,
+			start, end);
 	}
 
 	@Override
 	public int getUserCommerceAccountsCount(
-			Long parentCommerceAccountId, String keywords)
+			Long parentCommerceAccountId, CommerceSiteType commerceSiteType,
+			String keywords)
 		throws PortalException {
 
 		return commerceAccountLocalService.getUserCommerceAccountsCount(
-			getUserId(), parentCommerceAccountId, keywords);
+			getUserId(), parentCommerceAccountId, commerceSiteType, keywords);
 	}
 
 	@Override
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
-			long groupId, long parentCommerceAccountId, String keywords,
-			Boolean active, int start, int end, Sort sort)
+			long parentCommerceAccountId, String keywords, Boolean active,
+			int start, int end, Sort sort)
 		throws PortalException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
@@ -147,24 +169,23 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 	@Override
 	public CommerceAccount updateCommerceAccount(
-			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
-			String email, String taxId, boolean active,
-			ServiceContext serviceContext)
+			long commerceAccountId, String name, String email, String taxId,
+			boolean active, ServiceContext serviceContext)
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
 			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
 
 		return commerceAccountLocalService.updateCommerceAccount(
-			commerceAccountId, name, logo, logoBytes, email, taxId, active,
-			serviceContext);
+			commerceAccountId, name, email, taxId, active, serviceContext);
 	}
 
 	@Override
 	public CommerceAccount upsertCommerceAccount(
 			String name, long parentCommerceAccountId, boolean logo,
-			byte[] logoBytes, String email, String taxId, boolean active,
-			String externalReferenceCode, ServiceContext serviceContext)
+			byte[] logoBytes, String email, String taxId, int type,
+			boolean active, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
@@ -183,7 +204,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		}
 
 		return commerceAccountLocalService.upsertCommerceAccount(
-			name, parentCommerceAccountId, logo, logoBytes, email, taxId,
+			name, parentCommerceAccountId, logo, logoBytes, email, taxId, type,
 			active, externalReferenceCode, serviceContext);
 	}
 
