@@ -103,7 +103,7 @@ public class CommerceOrderAssetRenderer
 		throws Exception {
 
 		Group group = GroupLocalServiceUtil.getGroup(
-			_commerceOrder.getSiteGroupId());
+			_commerceOrder.getGroupId());
 
 		PortletURL portletURL = PortletProviderUtil.getPortletURL(
 			liferayPortletRequest, group, CommerceOrder.class.getName(),

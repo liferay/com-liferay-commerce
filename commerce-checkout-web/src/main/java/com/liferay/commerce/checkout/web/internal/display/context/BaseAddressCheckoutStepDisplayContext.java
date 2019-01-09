@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.checkout.web.internal.display.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
@@ -50,8 +51,8 @@ public abstract class BaseAddressCheckoutStepDisplayContext {
 
 	public List<CommerceAddress> getCommerceAddresses() throws PortalException {
 		return _commerceAddressService.getCommerceAddresses(
-			_commerceOrder.getGroupId(), _commerceOrder.getClassName(),
-			_commerceOrder.getClassPK());
+			_commerceOrder.getGroupId(), CommerceAccount.class.getName(),
+			_commerceOrder.getCommerceAccountId());
 	}
 
 	public abstract String getCommerceCountrySelectionColumnName();

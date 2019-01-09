@@ -65,7 +65,7 @@ public class ShippingMethodCheckoutStepDisplayContext {
 
 	public List<CommerceShippingMethod> getCommerceShippingMethods() {
 		return _commerceShippingMethodLocalService.getCommerceShippingMethods(
-			_commerceOrder.getSiteGroupId(), true);
+			_commerceOrder.getGroupId(), true);
 	}
 
 	public String getCommerceShippingOptionKey(

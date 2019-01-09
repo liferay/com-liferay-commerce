@@ -129,7 +129,8 @@ public class CommerceSearchResource {
 		List<SearchItemModel> searchItemModels = new ArrayList<>();
 
 		AccountList accountList = _commerceAccountResource.getAccountList(
-			null, queryString, 1, 5, themeDisplay.getPathImage());
+			themeDisplay.getScopeGroupId(), null, queryString, 1, 5,
+			themeDisplay.getPathImage());
 
 		searchItemModels.add(
 			new SearchItemModel(

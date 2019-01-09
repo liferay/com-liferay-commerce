@@ -19,8 +19,10 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
+import com.liferay.commerce.account.util.CommerceSiteType;
 import com.liferay.commerce.frontend.internal.account.model.Account;
 import com.liferay.commerce.frontend.internal.account.model.AccountList;
 import com.liferay.commerce.frontend.internal.account.model.AccountUser;
@@ -30,6 +32,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -59,15 +62,15 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceAccountResource {
 
 	public AccountList getAccountList(
-			Long parentAccountId, String keywords, int page, int pageSize,
-			String imagePath)
+			long groupId, Long parentAccountId, String keywords, int page,
+			int pageSize, String imagePath)
 		throws PortalException {
 
 		List<Account> accounts = getAccounts(
-			parentAccountId, keywords, page, pageSize, imagePath);
+			groupId, parentAccountId, keywords, page, pageSize, imagePath);
 
 		return new AccountList(
-			accounts, getAccountsCount(parentAccountId, keywords));
+			accounts, getAccountsCount(groupId, parentAccountId, keywords));
 	}
 
 	public AccountUserList getAccountUserList(
@@ -93,8 +96,8 @@ public class CommerceAccountResource {
 
 		try {
 			accountList = getAccountList(
-				parentAccountId, queryString, page, pageSize,
-				themeDisplay.getPathImage());
+				themeDisplay.getScopeGroupId(), parentAccountId, queryString,
+				page, pageSize, themeDisplay.getPathImage());
 		}
 		catch (Exception e) {
 			accountList = new AccountList(
@@ -127,8 +130,8 @@ public class CommerceAccountResource {
 	}
 
 	protected List<Account> getAccounts(
-			Long parentAccountId, String keywords, int page, int pageSize,
-			String imagePath)
+			long groupId, Long parentAccountId, String keywords, int page,
+			int pageSize, String imagePath)
 		throws PortalException {
 
 		List<Account> accounts = new ArrayList<>();
@@ -138,7 +141,8 @@ public class CommerceAccountResource {
 
 		List<CommerceAccount> userCommerceAccounts =
 			_commerceAccountService.getUserCommerceAccounts(
-				parentAccountId, keywords, start, end);
+				parentAccountId, _getCommerceSiteType(groupId), keywords, start,
+				end);
 
 		for (CommerceAccount commerceAccount : userCommerceAccounts) {
 			accounts.add(
@@ -152,11 +156,12 @@ public class CommerceAccountResource {
 		return accounts;
 	}
 
-	protected int getAccountsCount(Long parentAccountId, String keywords)
+	protected int getAccountsCount(
+			long groupId, Long parentAccountId, String keywords)
 		throws PortalException {
 
 		return _commerceAccountService.getUserCommerceAccountsCount(
-			parentAccountId, keywords);
+			parentAccountId, _getCommerceSiteType(groupId), keywords);
 	}
 
 	protected String getLogoThumbnailSrc(long logoId, String imagePath) {
@@ -206,6 +211,17 @@ public class CommerceAccountResource {
 		return sb.toString();
 	}
 
+	private CommerceSiteType _getCommerceSiteType(long groupId)
+		throws PortalException {
+
+		CommerceAccountGroupServiceConfiguration
+			commerceAccountGroupServiceConfiguration =
+				_configurationProvider.getGroupConfiguration(
+					CommerceAccountGroupServiceConfiguration.class, groupId);
+
+		return commerceAccountGroupServiceConfiguration.commerceSiteType();
+	}
+
 	private List<AccountUser> _searchUsers(
 			long companyId, String keywords, String imagePath)
 		throws PortalException {
@@ -239,6 +255,9 @@ public class CommerceAccountResource {
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private UserLocalService _userLocalService;

@@ -50,6 +50,9 @@ public class CommerceOrderSearch extends SearchContainer<CommerceOrder> {
 			(CommerceOrderDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			CommerceOrderDisplayTerms.COMMERCE_ACCOUNT_ID,
+			String.valueOf(commerceOrderDisplayTerms.getCommerceAccountId()));
+		iteratorURL.setParameter(
 			CommerceOrderDisplayTerms.END_CREATE_DATE_DAY,
 			String.valueOf(commerceOrderDisplayTerms.getEndCreateDateDay()));
 		iteratorURL.setParameter(
@@ -58,9 +61,6 @@ public class CommerceOrderSearch extends SearchContainer<CommerceOrder> {
 		iteratorURL.setParameter(
 			CommerceOrderDisplayTerms.END_CREATE_DATE_YEAR,
 			String.valueOf(commerceOrderDisplayTerms.getEndCreateDateYear()));
-		iteratorURL.setParameter(
-			CommerceOrderDisplayTerms.ORDER_ORGANIZATION_ID,
-			String.valueOf(commerceOrderDisplayTerms.getOrderOrganizationId()));
 		iteratorURL.setParameter(
 			CommerceOrderDisplayTerms.START_CREATE_DATE_DAY,
 			String.valueOf(commerceOrderDisplayTerms.getStartCreateDateDay()));

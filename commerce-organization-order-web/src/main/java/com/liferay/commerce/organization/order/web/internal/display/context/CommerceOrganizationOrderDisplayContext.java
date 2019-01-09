@@ -305,7 +305,7 @@ public class CommerceOrganizationOrderDisplayContext {
 		CommercePaymentMethodGroupRel commercePaymentMethod =
 			_commercePaymentMethodGroupRelService.
 				getCommercePaymentMethodGroupRel(
-					commerceOrder.getSiteGroupId(), commercePaymentMethodKey);
+					commerceOrder.getGroupId(), commercePaymentMethodKey);
 
 		if (commercePaymentMethod == null) {
 			return StringPool.BLANK;

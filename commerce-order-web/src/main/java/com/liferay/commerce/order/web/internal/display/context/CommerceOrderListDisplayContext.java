@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -239,6 +238,25 @@ public class CommerceOrderListDisplayContext {
 			facet.getFieldId(), commerceOrderDisplayTerms.getAdvanceStatus());
 	}
 
+	private void _addFacetCommerceAccountId(
+		SearchContext searchContext,
+		CommerceOrderDisplayTerms commerceOrderDisplayTerms) {
+
+		Facet facet = new SimpleFacet(searchContext);
+
+		facet.setFieldName("commerceAccountId");
+
+		searchContext.addFacet(facet);
+
+		long commerceAccountId =
+			commerceOrderDisplayTerms.getCommerceAccountId();
+
+		if (commerceAccountId > 0) {
+			searchContext.setAttribute(
+				facet.getFieldId(), String.valueOf(commerceAccountId));
+		}
+	}
+
 	private void _addFacetCreateDate(
 		SearchContext searchContext,
 		CommerceOrderDisplayTerms commerceOrderDisplayTerms) {
@@ -266,25 +284,6 @@ public class CommerceOrderListDisplayContext {
 		facet.setStatic(true);
 
 		searchContext.addFacet(facet);
-	}
-
-	private void _addFacetOrderOrganizationId(
-		SearchContext searchContext,
-		CommerceOrderDisplayTerms commerceOrderDisplayTerms) {
-
-		Facet facet = new SimpleFacet(searchContext);
-
-		facet.setFieldName("orderOrganizationId");
-
-		searchContext.addFacet(facet);
-
-		long orderOrganizationId =
-			commerceOrderDisplayTerms.getOrderOrganizationId();
-
-		if (orderOrganizationId > 0) {
-			searchContext.setAttribute(
-				facet.getFieldId(), String.valueOf(orderOrganizationId));
-		}
 	}
 
 	private void _addFacetOrderStatus(
@@ -463,12 +462,13 @@ public class CommerceOrderListDisplayContext {
 		return navigationItem;
 	}
 
-	private SearchContext _buildSearchContext() throws PortalException {
+	private SearchContext _buildSearchContext() {
 		SearchContext searchContext = new SearchContext();
 
 		CommerceOrderDisplayTerms commerceOrderDisplayTerms =
 			(CommerceOrderDisplayTerms)_searchContainer.getDisplayTerms();
 
+		_addFacetCommerceAccountId(searchContext, commerceOrderDisplayTerms);
 		_addFacetCreateDate(searchContext, commerceOrderDisplayTerms);
 		_addFacetOrderStatus(searchContext, commerceOrderDisplayTerms);
 
@@ -478,19 +478,9 @@ public class CommerceOrderListDisplayContext {
 			_addFacetAdvanceStatus(searchContext, commerceOrderDisplayTerms);
 		}
 
-		Group group = _groupLocalService.getGroup(
-			_commerceOrderRequestHelper.getSiteGroupId());
-
-		if (group.isOrganization()) {
-			_addFacetOrderOrganizationId(
-				searchContext, commerceOrderDisplayTerms);
-		}
-
 		searchContext.setAttribute(Field.ENTRY_CLASS_PK, _keywords);
 		searchContext.setAttribute("faceted", Boolean.TRUE);
 		searchContext.setAttribute("purchaseOrderNumber", _keywords);
-		searchContext.setAttribute(
-			"siteGroupId", _commerceOrderRequestHelper.getSiteGroupId());
 		searchContext.setAttribute(
 			"useSearchResultPermissionFilter", Boolean.FALSE);
 
@@ -520,7 +510,7 @@ public class CommerceOrderListDisplayContext {
 			(CommerceOrderDisplayTerms)_searchContainer.getDisplayTerms();
 
 		if (Validator.isNotNull(_keywords) ||
-			(commerceOrderDisplayTerms.getOrderOrganizationId() > 0) ||
+			(commerceOrderDisplayTerms.getCommerceAccountId() > 0) ||
 			(commerceOrderDisplayTerms.getStartCreateDate() != null) ||
 			(commerceOrderDisplayTerms.getEndCreateDate() != null) ||
 			(filterByStatuses &&
@@ -590,8 +580,6 @@ public class CommerceOrderListDisplayContext {
 			true);
 		_addFacetStatus(searchContext);
 
-		searchContext.setAttribute(
-			"siteGroupId", _commerceOrderRequestHelper.getSiteGroupId());
 		searchContext.setAttribute(
 			"useSearchResultPermissionFilter", Boolean.FALSE);
 

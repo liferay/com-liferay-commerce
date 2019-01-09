@@ -15,7 +15,6 @@
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context;
 
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
@@ -32,7 +31,6 @@ import com.liferay.journal.model.JournalArticleDisplay;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletRequestModel;
@@ -56,7 +54,6 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceVirtualOrderItemContentDisplayContext {
 
 	public CommerceVirtualOrderItemContentDisplayContext(
-			CommerceOrganizationHelper commerceOrganizationHelper,
 			CommerceVirtualOrderItemLocalService
 				commerceVirtualOrderItemLocalService,
 			CPDefinitionHelper cpDefinitionHelper,
@@ -65,7 +62,6 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		_commerceOrganizationHelper = commerceOrganizationHelper;
 		_commerceVirtualOrderItemLocalService =
 			commerceVirtualOrderItemLocalService;
 		_cpDefinitionHelper = cpDefinitionHelper;
@@ -295,42 +291,18 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 				getLiferayPortletRequest(),
 			getPortletURL(), null, "no-items-were-found");
 
-		long siteGroupId =
-			_commerceVirtualOrderItemContentRequestHelper.getSiteGroupId();
-
-		int total;
-		List<CommerceVirtualOrderItem> results;
-
-		Organization organization =
-			_commerceOrganizationHelper.getCurrentOrganization(
-				_commerceVirtualOrderItemContentRequestHelper.getRequest());
-
-		if (organization == null) {
-			long userId =
-				_commerceVirtualOrderItemContentRequestHelper.getUserId();
-
-			total =
-				_commerceVirtualOrderItemLocalService.
-					getUserCommerceVirtualOrderItemsCount(siteGroupId, userId);
-			results =
-				_commerceVirtualOrderItemLocalService.
-					getUserCommerceVirtualOrderItems(
-						siteGroupId, userId, _searchContainer.getStart(),
-						_searchContainer.getEnd(),
-						new CommerceVirtualOrderItemCreateDateComparator());
-		}
-		else {
-			total =
-				_commerceVirtualOrderItemLocalService.
-					getOrganizationCommerceVirtualOrderItemsCount(
-						siteGroupId, organization.getOrganizationId());
-			results =
-				_commerceVirtualOrderItemLocalService.
-					getOrganizationCommerceVirtualOrderItems(
-						siteGroupId, organization.getOrganizationId(),
-						_searchContainer.getStart(), _searchContainer.getEnd(),
-						new CommerceVirtualOrderItemCreateDateComparator());
-		}
+		int total =
+			_commerceVirtualOrderItemLocalService.
+				getCommerceVirtualOrderItemsCount(
+					_commerceVirtualOrderItemContentRequestHelper.
+						getScopeGroupId(),
+					_commerceVirtualOrderItemContentRequestHelper.getUserId());
+		List<CommerceVirtualOrderItem> results =
+			_commerceVirtualOrderItemLocalService.getCommerceVirtualOrderItems(
+				_commerceVirtualOrderItemContentRequestHelper.getScopeGroupId(),
+				_commerceVirtualOrderItemContentRequestHelper.getUserId(),
+				_searchContainer.getStart(), _searchContainer.getEnd(),
+				new CommerceVirtualOrderItemCreateDateComparator());
 
 		_searchContainer.setTotal(total);
 		_searchContainer.setResults(results);
@@ -339,7 +311,6 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 	}
 
 	private JournalArticleDisplay _articleDisplay;
-	private final CommerceOrganizationHelper _commerceOrganizationHelper;
 	private final CommerceVirtualOrderItemContentPortletInstanceConfiguration
 		_commerceVirtualOrderItemContentPortletInstanceConfiguration;
 	private final CommerceVirtualOrderItemContentRequestHelper
