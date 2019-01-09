@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.settings.LocalizedValuesMap;
 @Meta.OCD(
 	id = "com.liferay.commerce.payment.method.money.order.internal.configuration.MoneyOrderGroupServiceConfiguration",
 	localization = "content/Language",
-	name = "commerce-payment-engine-money-order-group-service-configuration-name"
+	name = "commerce-payment-method-money-order-group-service-configuration-name"
 )
 public interface MoneyOrderGroupServiceConfiguration {
 
