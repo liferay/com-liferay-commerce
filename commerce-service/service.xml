@@ -243,9 +243,7 @@
 
 		<!-- Other fields -->
 
-		<column name="siteGroupId" type="long" />
-		<column name="orderOrganizationId" type="long" />
-		<column name="orderUserId" type="long" />
+		<column name="commerceAccountId" type="long" />
 		<column name="commerceCurrencyId" type="long" />
 		<column name="billingAddressId" type="long" />
 		<column name="shippingAddressId" type="long" />
@@ -301,9 +299,9 @@
 		<finder name="ShippingAddressId" return-type="Collection">
 			<finder-column name="shippingAddressId" />
 		</finder>
-		<finder name="G_O" return-type="Collection">
+		<finder name="G_C" return-type="Collection">
 			<finder-column name="groupId" />
-			<finder-column name="orderUserId" />
+			<finder-column name="commerceAccountId" />
 		</finder>
 		<finder name="G_U_O" return-type="Collection">
 			<finder-column name="groupId" />
@@ -530,9 +528,7 @@
 
 		<!-- Other fields -->
 
-		<column name="siteGroupId" type="long" />
-		<column name="shipmentOrganizationId" type="long" />
-		<column name="shipmentUserId" type="long" />
+		<column name="commerceAccountId" type="long" />
 		<column name="commerceAddressId" type="long" />
 		<column name="commerceShippingMethodId" type="long" />
 		<column name="shippingOptionName" type="String" />
@@ -553,15 +549,8 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="SiteGroupId" return-type="Collection">
-			<finder-column name="siteGroupId" />
-		</finder>
 		<finder name="G_S" return-type="Collection">
 			<finder-column name="groupId" />
-			<finder-column name="status" />
-		</finder>
-		<finder name="S_S" return-type="Collection">
-			<finder-column name="siteGroupId" />
 			<finder-column name="status" />
 		</finder>
 	</entity>
