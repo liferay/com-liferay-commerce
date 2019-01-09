@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.internal.notification.type;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
@@ -22,8 +24,9 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
@@ -90,15 +93,18 @@ public class SubscriptionRenewedCommerceNotificationTypeImpl
 		if (term.equals(_ORDER_CREATOR)) {
 			CommerceOrder commerceOrder = _commerceOrderItem.getCommerceOrder();
 
-			Organization organization = commerceOrder.getOrderOrganization();
+			CommerceAccount commerceAccount = commerceOrder.getOrderAccount();
 
-			if (organization != null) {
-				return organization.getName();
+			if (commerceAccount.getType() ==
+					CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL) {
+
+				User user = _userLocalService.getUser(
+					GetterUtil.getLong(commerceAccount.getName()));
+
+				return user.getFullName(true, true);
 			}
 
-			User user = commerceOrder.getOrderUser();
-
-			return user.getFullName(true, true);
+			return commerceAccount.getName();
 		}
 
 		if (term.equals(_ORDER_ID)) {
@@ -137,5 +143,8 @@ public class SubscriptionRenewedCommerceNotificationTypeImpl
 
 	@Reference
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }

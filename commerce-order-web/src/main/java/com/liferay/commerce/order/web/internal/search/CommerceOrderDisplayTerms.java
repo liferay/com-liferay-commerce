@@ -31,6 +31,8 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 
 	public static final String ADVANCE_STATUS = "advanceStatus";
 
+	public static final String COMMERCE_ACCOUNT_ID = "commerceAccountId";
+
 	public static final String END_CREATE_DATE = "endCreateDate";
 
 	public static final String END_CREATE_DATE_DAY = END_CREATE_DATE + "Day";
@@ -39,8 +41,6 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 		END_CREATE_DATE + "Month";
 
 	public static final String END_CREATE_DATE_YEAR = END_CREATE_DATE + "Year";
-
-	public static final String ORDER_ORGANIZATION_ID = "orderOrganizationId";
 
 	public static final String ORDER_STATUS = "orderStatus";
 
@@ -59,14 +59,14 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 		super(portletRequest);
 
 		_advanceStatus = ParamUtil.getString(portletRequest, ADVANCE_STATUS);
+		_commerceAccountId = ParamUtil.getLong(
+			portletRequest, COMMERCE_ACCOUNT_ID);
 		_endCreateDateDay = ParamUtil.getInteger(
 			portletRequest, END_CREATE_DATE_DAY, _NULL_DATE_DAY);
 		_endCreateDateMonth = ParamUtil.getInteger(
 			portletRequest, END_CREATE_DATE_MONTH, _NULL_DATE_MONTH);
 		_endCreateDateYear = ParamUtil.getInteger(
 			portletRequest, END_CREATE_DATE_YEAR, _NULL_DATE_YEAR);
-		_orderOrganizationId = ParamUtil.getLong(
-			portletRequest, ORDER_ORGANIZATION_ID);
 		_orderStatus = ParamUtil.getInteger(
 			portletRequest, ORDER_STATUS,
 			CommerceOrderConstants.ORDER_STATUS_ANY);
@@ -80,6 +80,10 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 
 	public String getAdvanceStatus() {
 		return _advanceStatus;
+	}
+
+	public long getCommerceAccountId() {
+		return _commerceAccountId;
 	}
 
 	public Date getEndCreateDate() {
@@ -107,10 +111,6 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 
 	public int getEndCreateDateYear() {
 		return _endCreateDateYear;
-	}
-
-	public long getOrderOrganizationId() {
-		return _orderOrganizationId;
 	}
 
 	public int getOrderStatus() {
@@ -151,10 +151,10 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 	private static final int _NULL_DATE_YEAR = 0;
 
 	private final String _advanceStatus;
+	private final long _commerceAccountId;
 	private final int _endCreateDateDay;
 	private final int _endCreateDateMonth;
 	private final int _endCreateDateYear;
-	private final long _orderOrganizationId;
 	private final int _orderStatus;
 	private final int _startCreateDateDay;
 	private final int _startCreateDateMonth;

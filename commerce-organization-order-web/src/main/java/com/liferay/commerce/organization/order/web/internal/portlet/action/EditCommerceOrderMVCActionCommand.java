@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.organization.order.web.internal.portlet.action;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
@@ -21,10 +23,7 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
-import com.liferay.commerce.organization.service.CommerceOrganizationLocalService;
-import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -36,8 +35,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
-import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -274,19 +271,15 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		long commerceOrderId = ParamUtil.getLong(
 			actionRequest, "commerceOrderId");
 
-		long organizationId = ParamUtil.getLong(
-			actionRequest, "organizationId");
+		long commerceAccountId = ParamUtil.getLong(
+			actionRequest, "commerceAccountId");
 		long shippingAddressId = ParamUtil.getLong(
 			actionRequest, "shippingAddressId");
 		String purchaseOrderNumber = ParamUtil.getString(
 			actionRequest, "purchaseOrderNumber");
 
-		Organization organization =
-			_commerceOrganizationService.getOrganization(organizationId);
-
-		Organization accountOrganization =
-			_commerceOrganizationLocalService.getAccountOrganization(
-				organization.getOrganizationId());
+		CommerceAccount commerceAccount =
+			_commerceAccountService.getCommerceAccount(commerceAccountId);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -314,12 +307,15 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 				commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
 			}
 
-			_commerceOrderService.addOrganizationCommerceOrder(
-				organization.getGroupId(), themeDisplay.getSiteGroupId(),
-				accountOrganization.getOrganizationId(), commerceCurrencyId,
+			_commerceOrderService.addCommerceOrder(
+				themeDisplay.getScopeGroupId(),
+				commerceAccount.getCommerceAccountId(), commerceCurrencyId,
 				shippingAddressId, purchaseOrderNumber);
 		}
 	}
+
+	@Reference
+	private CommerceAccountService _commerceAccountService;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
@@ -328,21 +324,9 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 	private CommerceOrderService _commerceOrderService;
 
 	@Reference
-	private CommerceOrganizationLocalService _commerceOrganizationLocalService;
-
-	@Reference
-	private CommerceOrganizationService _commerceOrganizationService;
-
-	@Reference
 	private Portal _portal;
 
 	@Reference
 	private PortletURLFactory _portletURLFactory;
-
-	@Reference
-	private WorkflowInstanceManager _workflowInstanceManager;
-
-	@Reference
-	private WorkflowTaskManager _workflowTaskManager;
 
 }

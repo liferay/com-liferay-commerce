@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
@@ -31,7 +30,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
-import com.liferay.portal.kernel.search.filter.TermFilter;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -72,22 +70,6 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 	}
 
 	@Override
-	public void postProcessContextBooleanFilter(
-			BooleanFilter contextBooleanFilter, SearchContext searchContext)
-		throws Exception {
-
-		long siteGroupId = GetterUtil.getLong(
-			searchContext.getAttribute("siteGroupId"));
-
-		if (siteGroupId > 0) {
-			TermFilter termFilter = new TermFilter(
-				"siteGroupId", String.valueOf(siteGroupId));
-
-			contextBooleanFilter.add(termFilter, BooleanClauseOccur.MUST);
-		}
-	}
-
-	@Override
 	public void postProcessSearchQuery(
 			BooleanQuery searchQuery, BooleanFilter fullQueryBooleanFilter,
 			SearchContext searchContext)
@@ -119,13 +101,12 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 		document.addNumberSortable(
 			Field.ENTRY_CLASS_PK, commerceOrder.getCommerceOrderId());
 		document.addKeyword("advanceStatus", commerceOrder.getAdvanceStatus());
-		document.addNumber("itemsQuantity", getItemsQuantity(commerceOrder));
 		document.addKeyword(
-			"orderOrganizationId", commerceOrder.getOrderOrganizationId());
+			"commerceAccountId", commerceOrder.getCommerceAccountId());
+		document.addNumber("itemsQuantity", getItemsQuantity(commerceOrder));
 		document.addKeyword("orderStatus", commerceOrder.getOrderStatus());
 		document.addKeyword(
 			"purchaseOrderNumber", commerceOrder.getPurchaseOrderNumber());
-		document.addKeyword("siteGroupId", commerceOrder.getSiteGroupId());
 		document.addNumber("total", commerceOrder.getTotal());
 
 		if (_log.isDebugEnabled()) {

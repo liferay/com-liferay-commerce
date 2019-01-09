@@ -66,8 +66,7 @@ public class CommerceTaxCalculationImpl implements CommerceTaxCalculation {
 				commerceOrder.getCommerceOrderItems()) {
 
 			List<CommerceTaxValue> commerceTaxValues = getCommerceTaxValues(
-				commerceOrder.getSiteGroupId(),
-				commerceOrderItem.getCPInstanceId(),
+				commerceOrder.getGroupId(), commerceOrderItem.getCPInstanceId(),
 				commerceOrder.getBillingAddressId(),
 				commerceOrderItem.getFinalPrice(), commerceContext);
 

@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.checkout.web.internal.util;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.checkout.web.internal.display.context.BaseAddressCheckoutStepDisplayContext;
 import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
@@ -119,9 +120,10 @@ public abstract class BaseAddressCommerceCheckoutStep
 		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
 
 		return commerceAddressService.addCommerceAddress(
-			commerceOrder.getClassName(), commerceOrder.getClassPK(), name,
-			description, street1, street2, street3, city, zip, commerceRegionId,
-			commerceCountryId, phoneNumber, false, false, serviceContext);
+			CommerceAccount.class.getName(),
+			commerceOrder.getCommerceAccountId(), name, description, street1,
+			street2, street3, city, zip, commerceRegionId, commerceCountryId,
+			phoneNumber, false, false, serviceContext);
 	}
 
 	protected abstract BaseAddressCheckoutStepDisplayContext

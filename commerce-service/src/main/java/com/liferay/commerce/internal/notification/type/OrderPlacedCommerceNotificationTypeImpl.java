@@ -14,12 +14,15 @@
 
 package com.liferay.commerce.internal.notification.type;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.notification.type.CommerceNotificationType;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.HashMap;
@@ -28,6 +31,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
@@ -73,15 +77,18 @@ public class OrderPlacedCommerceNotificationTypeImpl
 		CommerceOrder commerceOrder = (CommerceOrder)object;
 
 		if (term.equals(_ORDER_CREATOR)) {
-			Organization organization = commerceOrder.getOrderOrganization();
+			CommerceAccount commerceAccount = commerceOrder.getOrderAccount();
 
-			if (organization != null) {
-				return organization.getName();
+			if (commerceAccount.getType() ==
+					CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL) {
+
+				User user = _userLocalService.getUser(
+					GetterUtil.getLong(commerceAccount.getName()));
+
+				return user.getFullName(true, true);
 			}
 
-			User user = commerceOrder.getOrderUser();
-
-			return user.getFullName(true, true);
+			return commerceAccount.getName();
 		}
 
 		if (term.equals(_ORDER_ID)) {
@@ -107,5 +114,8 @@ public class OrderPlacedCommerceNotificationTypeImpl
 	private static final String _ORDER_CREATOR = "[%ORDER_CREATOR%]";
 
 	private static final String _ORDER_ID = "[%ORDER_ID%]";
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
