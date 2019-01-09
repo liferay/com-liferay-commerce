@@ -34,7 +34,7 @@ public class AccountUser {
 		_success = false;
 	}
 
-	public long getAccountId() {
+	public long getUserId() {
 		return _userId;
 	}
 
@@ -44,6 +44,10 @@ public class AccountUser {
 
 	public String getName() {
 		return _name;
+	}
+
+	public String getEmail() {
+		return _email;
 	}
 
 	public boolean getSuccess() {

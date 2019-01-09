@@ -3,14 +3,14 @@
 {template .render}
 
 	{@param? users: list<[
-		id: string | number,
+		userId: string | number,
 		thumbnail: string,
 		name: string,
 		email: string
 	]>}
 
 	{@param? addedUsers: list<[
-		id: string | number,
+		userId: string | number,
 		thumbnail: string,
 		name: string,
 		email: string
@@ -65,7 +65,7 @@
 							{foreach $addedUser in $addedUsers}
 								{call UserInputItem.render}
 									{param events: ['removeItem' : $_toggleInvitation] /}
-									{param id: $addedUser.id /}
+									{param userId: $addedUser.userId /}
 									{param email: $addedUser.email /}
 									{param name: $addedUser.name /}
 									{param thumbnail: $addedUser.thumbnail /}
@@ -90,7 +90,7 @@
 					{foreach $user in $users}
 						{call UserListItem.render}
 							{param events: ['toggleInvitation': $_toggleInvitation] /}
-							{param id: $user.id /}
+							{param userId: $user.userId /}
 							{param name: $user.name /}
 							{param email: $user.email /}
 							{param thumbnail: $user.thumbnail /}
@@ -124,10 +124,12 @@
 		</div>
 	{/let}
 
-	{call ClayModal.render}
-		{param body: $body /}
-		{param visible: $_isVisible /}
-		{param ref: 'modal' /}
-	{/call}
+	<div class="user-invitation-wrapper">
+		{call ClayModal.render}
+			{param body: $body /}
+			{param visible: $_isVisible /}
+			{param events: ['hide': $_handleCloseModal] /}
+		{/call}
+	</div>
 
 {/template}

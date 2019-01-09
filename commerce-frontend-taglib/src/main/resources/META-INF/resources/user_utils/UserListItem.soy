@@ -8,6 +8,8 @@
 	{@param? _invited: bool }
 	{@param? query: string }
 
+	{@param? _handleToggleInvitation: ?}
+
 	<div class="user-item">
 		<div class="user-item__content">
 			{if isNonnull($thumbnail)}
@@ -49,7 +51,7 @@
 			{/if}
 		</div>
 		{if $_status == 'valid'}
-			<button class="user-item__action" data-onclick="_handleToggleInvitation">
+			<button class="user-item__action" data-onclick="{$_handleToggleInvitation}">
 				{call AddToTickItem.render}
 					{param isAdded: $_invited /}
 				{/call}
