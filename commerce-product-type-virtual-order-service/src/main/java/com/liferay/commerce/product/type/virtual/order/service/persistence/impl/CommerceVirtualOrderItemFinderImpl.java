@@ -22,11 +22,13 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,14 +38,89 @@ public class CommerceVirtualOrderItemFinderImpl
 	extends CommerceVirtualOrderItemFinderBaseImpl
 	implements CommerceVirtualOrderItemFinder {
 
+	public static final String COUNT_BY_G_C_A =
+		CommerceVirtualOrderItemFinder.class.getName() + ".countByG_C_A";
+
+	public static final String FIND_BY_G_C_A =
+		CommerceVirtualOrderItemFinder.class.getName() + ".findByG_C_A";
+
 	public static final String FIND_BY_END_DATE =
 		CommerceVirtualOrderItemFinder.class.getName() + ".findByEndDate";
 
-	public static final String FIND_BY_G_O_A =
-		CommerceVirtualOrderItemFinder.class.getName() + ".findByG_O_A";
+	@Override
+	public int countByG_C(long groupId, long commerceAccountId) {
+		Session session = null;
 
-	public static final String FIND_BY_G_U_A =
-		CommerceVirtualOrderItemFinder.class.getName() + ".findByG_U_A";
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), COUNT_BY_G_C_A);
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(commerceAccountId);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			int count = 0;
+
+			Iterator<Long> itr = q.iterate();
+
+			while (itr.hasNext()) {
+				Long l = itr.next();
+
+				if (l != null) {
+					count += l.intValue();
+				}
+			}
+
+			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	public List<CommerceVirtualOrderItem> findByG_C(
+		long groupId, long commerceAccountId, int start, int end,
+		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), FIND_BY_G_C_A);
+
+			sql = _customSQL.replaceOrderBy(sql, orderByComparator);
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity(
+				"CommerceVirtualOrderItem", CommerceVirtualOrderItemImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(commerceAccountId);
+
+			return (List<CommerceVirtualOrderItem>)QueryUtil.list(
+				q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
 
 	@Override
 	public List<CommerceVirtualOrderItem> findByEndDate(Date endDate) {
@@ -65,59 +142,6 @@ public class CommerceVirtualOrderItemFinderImpl
 
 			return (List<CommerceVirtualOrderItem>)QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	@Override
-	public List<CommerceVirtualOrderItem> findByG_O(
-		long groupId, long organizationId, int start, int end,
-		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
-
-		return _findByGroupIdAndCustomerId(
-			FIND_BY_G_O_A, groupId, organizationId, start, end,
-			orderByComparator);
-	}
-
-	@Override
-	public List<CommerceVirtualOrderItem> findByG_U(
-		long groupId, long userId, int start, int end,
-		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
-
-		return _findByGroupIdAndCustomerId(
-			FIND_BY_G_U_A, groupId, userId, start, end, orderByComparator);
-	}
-
-	private List<CommerceVirtualOrderItem> _findByGroupIdAndCustomerId(
-		String customSQLId, long groupId, long customerId, int start, int end,
-		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = _customSQL.get(getClass(), customSQLId);
-
-			sql = _customSQL.replaceOrderBy(sql, orderByComparator);
-
-			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-			q.addEntity(
-				"CommerceVirtualOrderItem", CommerceVirtualOrderItemImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(customerId);
-
-			return (List<CommerceVirtualOrderItem>)QueryUtil.list(
-				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
