@@ -12,36 +12,32 @@
  * details.
  */
 
-package com.liferay.commerce.internal.model.listener;
+package com.liferay.commerce.internal.util;
 
-import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.service.CPDAvailabilityEstimateLocalService;
+import com.liferay.commerce.product.util.CPVersionContributor;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
-import com.liferay.portal.kernel.model.BaseModelListener;
-import com.liferay.portal.kernel.model.ModelListener;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Alessio Antonio Rendina
- * @author Andrea Di Giorgi
- * @author Marco Leo
+ * @author Ethan Bustad
  */
-@Component(immediate = true, service = ModelListener.class)
-public class CPDefinitionModelListener extends BaseModelListener<CPDefinition> {
+@Component(immediate = true, service = CPVersionContributor.class)
+public class CPDefinitionInventoryCPVersionContributor
+	implements CPVersionContributor {
 
 	@Override
-	public void onBeforeRemove(CPDefinition cpDefinition) {
-		long cpDefinitionId = cpDefinition.getCPDefinitionId();
-
-		_cpdAvailabilityEstimateLocalService.
-			deleteCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
+	public void onDelete(long cpDefinitionId) {
+		_cpDefinitionInventoryLocalService.
+			deleteCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
 	}
 
-	@Reference
-	private CPDAvailabilityEstimateLocalService
-		_cpdAvailabilityEstimateLocalService;
+	@Override
+	public void onUpdate(long oldCPDefinitionId, long newCPDefinitionId) {
+		_cpDefinitionInventoryLocalService.cloneCPDefinitionInventory(
+			oldCPDefinitionId, newCPDefinitionId);
+	}
 
 	@Reference
 	private CPDefinitionInventoryLocalService

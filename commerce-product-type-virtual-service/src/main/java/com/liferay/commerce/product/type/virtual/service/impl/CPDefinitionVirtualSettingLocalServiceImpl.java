@@ -37,9 +37,11 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
@@ -183,6 +185,30 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 				duration, maxUsages, useSample, sampleFileEntryId, sampleUrl,
 				termsOfUseRequired, termsOfUseContentMap,
 				termsOfUseJournalArticleResourcePrimKey, false, serviceContext);
+	}
+
+	@Override
+	public void cloneCPDefinitionVirtualSetting(
+		long cpDefinitionId, long newCPDefinitionId) {
+
+		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
+			cpDefinitionVirtualSettingLocalService.
+				fetchCPDefinitionVirtualSetting(
+					CPDefinition.class.getName(), cpDefinitionId);
+
+		if (cpDefinitionVirtualSetting != null) {
+			CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
+				(CPDefinitionVirtualSetting)cpDefinitionVirtualSetting.clone();
+
+			newCPDefinitionVirtualSetting.setUuid(PortalUUIDUtil.generate());
+			newCPDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
+				counterLocalService.increment());
+			newCPDefinitionVirtualSetting.setModifiedDate(new Date());
+			newCPDefinitionVirtualSetting.setClassPK(newCPDefinitionId);
+
+			cpDefinitionVirtualSettingLocalService.
+				addCPDefinitionVirtualSetting(newCPDefinitionVirtualSetting);
+		}
 	}
 
 	@Override

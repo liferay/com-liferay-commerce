@@ -28,8 +28,10 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -132,6 +134,31 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 		cpDefinitionGroupedEntryPersistence.update(cpDefinitionGroupedEntry);
 
 		return cpDefinitionGroupedEntry;
+	}
+
+	@Override
+	public void cloneCPDefinitionGroupedEntries(
+		long cpDefinitionId, long newCPDefinitionId) {
+
+		List<CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
+			cpDefinitionGroupedEntryLocalService.
+				getCPDefinitionGroupedEntriesByCPDefinitionId(cpDefinitionId);
+
+		for (CPDefinitionGroupedEntry cpDefinitionGroupedEntry :
+				cpDefinitionGroupedEntries) {
+
+			CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
+				(CPDefinitionGroupedEntry)cpDefinitionGroupedEntry.clone();
+
+			newCPDefinitionGroupedEntry.setUuid(PortalUUIDUtil.generate());
+			newCPDefinitionGroupedEntry.setCPDefinitionGroupedEntryId(
+				counterLocalService.increment());
+			newCPDefinitionGroupedEntry.setModifiedDate(new Date());
+			newCPDefinitionGroupedEntry.setCPDefinitionId(newCPDefinitionId);
+
+			cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntry(
+				newCPDefinitionGroupedEntry);
+		}
 	}
 
 	@Override
