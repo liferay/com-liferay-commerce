@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.type.virtual.order.internal.util;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
@@ -150,11 +151,16 @@ public class CommerceVirtualOrderItemCheckerImpl
 				firstCommerceSubscriptionCycleEntry.getCommerceOrderItemId());
 	}
 
-	private ServiceContext _getServiceContext(CommerceOrder commerceOrder) {
+	private ServiceContext _getServiceContext(CommerceOrder commerceOrder)
+		throws PortalException {
+
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setScopeGroupId(commerceOrder.getSiteGroupId());
-		serviceContext.setUserId(commerceOrder.getUserId());
+		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
+
+		CommerceAccount commerceAccount = commerceOrder.getOrderAccount();
+
+		serviceContext.setUserId(commerceAccount.getUserId());
 
 		UUID uuid = new UUID(
 			SecureRandomUtil.nextLong(), SecureRandomUtil.nextLong());

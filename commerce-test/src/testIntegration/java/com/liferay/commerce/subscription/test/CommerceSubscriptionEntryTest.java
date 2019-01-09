@@ -300,7 +300,7 @@ public class CommerceSubscriptionEntryTest {
 
 		CPTestUtil.buildCPInstances(cpDefinition);
 
-		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
+		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			groupId, _user.getUserId(), 0);
 
 		List<CPInstance> cpInstances =

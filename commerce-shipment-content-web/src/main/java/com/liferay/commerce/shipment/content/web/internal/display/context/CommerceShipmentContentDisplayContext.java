@@ -15,7 +15,6 @@
 package com.liferay.commerce.shipment.content.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceShipmentConstants;
-import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.model.CommerceShipmentItem;
@@ -32,7 +31,6 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
@@ -224,32 +222,21 @@ public class CommerceShipmentContentDisplayContext {
 			return _searchContainer;
 		}
 
-		CommerceContext commerceContext =
-			_commerceShipmentContentRequestHelper.getCommerceContext();
-
 		_searchContainer = new SearchContainer<>(
 			_commerceShipmentContentRequestHelper.getLiferayPortletRequest(),
 			getPortletURL(), null, null);
 
 		_searchContainer.setEmptyResultsMessage("no-shipments-were-found");
 
-		long groupId = _commerceShipmentContentRequestHelper.getScopeGroupId();
-
-		Organization organization = commerceContext.getOrganization();
-
-		if (organization != null) {
-			groupId = organization.getGroupId();
-		}
-
-		int total =
-			_commerceShipmentLocalService.getCommerceShipmentsCountByGroupId(
-				groupId);
+		int total = _commerceShipmentLocalService.getCommerceShipmentsCount(
+			_commerceShipmentContentRequestHelper.getScopeGroupId());
 
 		_searchContainer.setTotal(total);
 
 		List<CommerceShipment> results =
-			_commerceShipmentLocalService.getCommerceShipmentsByGroupId(
-				groupId, _searchContainer.getStart(), _searchContainer.getEnd(),
+			_commerceShipmentLocalService.getCommerceShipments(
+				_commerceShipmentContentRequestHelper.getScopeGroupId(),
+				_searchContainer.getStart(), _searchContainer.getEnd(),
 				new CommerceShipmentCreateDateComparator());
 
 		_searchContainer.setResults(results);

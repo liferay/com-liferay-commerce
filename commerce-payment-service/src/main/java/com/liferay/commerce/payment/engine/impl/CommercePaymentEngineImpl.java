@@ -257,7 +257,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			return _getCommercePaymentMethodsList(
 				_commercePaymentMethodGroupRelLocalService.
 					getCommercePaymentMethodGroupRels(
-						commerceOrder.getSiteGroupId(),
+						commerceOrder.getGroupId(),
 						commerceAddress.getCommerceCountryId(), true),
 				subscriptionOrder);
 		}
@@ -265,7 +265,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		return _getCommercePaymentMethodsList(
 			_commercePaymentMethodGroupRelLocalService.
 				getCommercePaymentMethodGroupRels(
-					commerceOrder.getSiteGroupId(), true),
+					commerceOrder.getGroupId(), true),
 			subscriptionOrder);
 	}
 

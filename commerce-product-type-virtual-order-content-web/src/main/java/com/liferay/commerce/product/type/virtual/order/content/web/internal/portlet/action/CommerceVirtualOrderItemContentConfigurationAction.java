@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.portlet.action;
 
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.product.type.virtual.order.constants.CommerceVirtualOrderPortletKeys;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.CommerceVirtualOrderItemContentDisplayContext;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
@@ -62,7 +61,6 @@ public class CommerceVirtualOrderItemContentConfigurationAction
 			CommerceVirtualOrderItemContentDisplayContext
 				commerceVirtualOrderItemContentDisplayContext =
 					new CommerceVirtualOrderItemContentDisplayContext(
-						_commerceOrganizationHelper,
 						_commerceVirtualOrderItemLocalService,
 						_cpDefinitionHelper, _cpDefinitionVirtualSettingService,
 						_cpInstanceHelper, httpServletRequest);
@@ -89,9 +87,6 @@ public class CommerceVirtualOrderItemContentConfigurationAction
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceVirtualOrderItemContentConfigurationAction.class);
-
-	@Reference
-	private CommerceOrganizationHelper _commerceOrganizationHelper;
 
 	@Reference
 	private CommerceVirtualOrderItemLocalService

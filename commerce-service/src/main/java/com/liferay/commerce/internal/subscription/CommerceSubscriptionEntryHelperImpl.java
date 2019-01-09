@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.internal.subscription;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceOrder;
@@ -50,8 +51,11 @@ public class CommerceSubscriptionEntryHelperImpl
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setScopeGroupId(commerceOrder.getSiteGroupId());
-		serviceContext.setUserId(commerceOrder.getOrderUserId());
+		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
+
+		CommerceAccount commerceAccount = commerceOrder.getOrderAccount();
+
+		serviceContext.setUserId(commerceAccount.getUserId());
 
 		List<CommerceOrderItem> commerceOrderItems =
 			_commerceOrderItemLocalService.getSubscriptionCommerceOrderItems(
@@ -131,21 +135,10 @@ public class CommerceSubscriptionEntryHelperImpl
 
 		CommerceOrder oldOrder = oldCommerceOrderItem.getCommerceOrder();
 
-		CommerceOrder newOrder;
-
-		if (oldOrder.getOrderOrganization() != null) {
-			newOrder = _commerceOrderLocalService.addOrganizationCommerceOrder(
-				oldOrder.getGroupId(), oldOrder.getUserId(),
-				oldOrder.getSiteGroupId(), oldOrder.getOrderOrganizationId(),
-				oldOrder.getCommerceCurrencyId(),
-				oldOrder.getShippingAddressId(),
-				oldOrder.getPurchaseOrderNumber());
-		}
-		else {
-			newOrder = _commerceOrderLocalService.addUserCommerceOrder(
-				oldOrder.getGroupId(), oldOrder.getUserId(),
-				oldOrder.getOrderUserId(), oldOrder.getCommerceCurrencyId());
-		}
+		CommerceOrder newOrder = _commerceOrderLocalService.addCommerceOrder(
+			oldOrder.getGroupId(), oldOrder.getUserId(),
+			oldOrder.getCommerceAccountId(), oldOrder.getCommerceCurrencyId(),
+			oldOrder.getShippingAddressId(), oldOrder.getPurchaseOrderNumber());
 
 		newOrder.setBillingAddressId(oldOrder.getBillingAddressId());
 		newOrder.setCommercePaymentMethodKey(

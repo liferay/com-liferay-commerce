@@ -15,9 +15,10 @@
 package com.liferay.commerce.service.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.model.CommerceOrder;
@@ -32,6 +33,7 @@ import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.test.util.TestCommerceContext;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -107,9 +109,17 @@ public class CommerceOrderItemLocalServiceTest {
 
 		Assert.assertNotNull(commerceCurrency);
 
+		CommerceAccount commerceAccount =
+			_commerceAccountLocalService.addPersonalCommerceAccount(
+				_user.getUserId(), StringPool.BLANK, StringPool.BLANK,
+				serviceContext);
+
+		Assert.assertNotNull(commerceAccount);
+
 		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.addUserCommerceOrder(
-				_group.getGroupId(), _user.getUserId(), _user.getUserId(),
+			_commerceOrderLocalService.addCommerceOrder(
+				_group.getGroupId(), _user.getUserId(),
+				commerceAccount.getCommerceAccountId(),
 				commerceCurrency.getCommerceCurrencyId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
@@ -173,9 +183,17 @@ public class CommerceOrderItemLocalServiceTest {
 
 		Assert.assertNotNull(commerceCurrency);
 
+		CommerceAccount commerceAccount =
+			_commerceAccountLocalService.addPersonalCommerceAccount(
+				_user.getUserId(), StringPool.BLANK, StringPool.BLANK,
+				serviceContext);
+
+		Assert.assertNotNull(commerceAccount);
+
 		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.addUserCommerceOrder(
-				_group.getGroupId(), _user.getUserId(), _user.getUserId(),
+			_commerceOrderLocalService.addCommerceOrder(
+				_group.getGroupId(), _user.getUserId(),
+				commerceAccount.getCommerceAccountId(),
 				commerceCurrency.getCommerceCurrencyId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
@@ -222,9 +240,17 @@ public class CommerceOrderItemLocalServiceTest {
 
 		Assert.assertNotNull(commerceCurrency);
 
+		CommerceAccount commerceAccount =
+			_commerceAccountLocalService.addPersonalCommerceAccount(
+				_user.getUserId(), StringPool.BLANK, StringPool.BLANK,
+				serviceContext);
+
+		Assert.assertNotNull(commerceAccount);
+
 		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.addUserCommerceOrder(
-				_group.getGroupId(), _user.getUserId(), _user.getUserId(),
+			_commerceOrderLocalService.addCommerceOrder(
+				_group.getGroupId(), _user.getUserId(),
+				commerceAccount.getCommerceAccountId(),
 				commerceCurrency.getCommerceCurrencyId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
@@ -239,7 +265,7 @@ public class CommerceOrderItemLocalServiceTest {
 	public FrutillaRule frutillaRule = new FrutillaRule();
 
 	@Inject
-	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
+	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Inject
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;

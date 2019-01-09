@@ -610,7 +610,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			_configurationProvider.getConfiguration(
 				PayPalGroupServiceConfiguration.class,
 				new GroupServiceSettingsLocator(
-					commerceOrder.getSiteGroupId(),
+					commerceOrder.getGroupId(),
 					PayPalCommercePaymentMethodConstants.SERVICE_NAME));
 
 		return new APIContext(

@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.internal.security.permission.resource;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.model.CommerceOrder;
@@ -32,6 +33,7 @@ import java.util.List;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class CommerceOrderModelResourcePermissionLogic
 	implements ModelResourcePermissionLogic<CommerceOrder> {
@@ -100,7 +102,8 @@ public class CommerceOrderModelResourcePermissionLogic
 	}
 
 	private boolean _containsCheckoutPermission(
-		PermissionChecker permissionChecker, CommerceOrder commerceOrder) {
+			PermissionChecker permissionChecker, CommerceOrder commerceOrder)
+		throws PortalException {
 
 		if (!commerceOrder.isOpen() &&
 			(commerceOrder.getOrderStatus() !=
@@ -129,7 +132,8 @@ public class CommerceOrderModelResourcePermissionLogic
 	}
 
 	private boolean _containsDeletePermission(
-		PermissionChecker permissionChecker, CommerceOrder commerceOrder) {
+			PermissionChecker permissionChecker, CommerceOrder commerceOrder)
+		throws PortalException {
 
 		if (commerceOrder.isOpen()) {
 			if (commerceOrder.isDraft()) {
@@ -142,7 +146,7 @@ public class CommerceOrderModelResourcePermissionLogic
 		}
 
 		return _portletResourcePermission.contains(
-			permissionChecker, commerceOrder.getSiteGroupId(),
+			permissionChecker, commerceOrder.getGroupId(),
 			CommerceOrderActionKeys.DELETE_COMMERCE_ORDERS);
 	}
 
@@ -176,8 +180,7 @@ public class CommerceOrderModelResourcePermissionLogic
 			}
 
 			if (_workflowDefinitionLinkLocalService.hasWorkflowDefinitionLink(
-					commerceOrder.getCompanyId(),
-					commerceOrder.getSiteGroupId(),
+					commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
 					CommerceOrder.class.getName(), 0,
 					CommerceOrderConstants.TYPE_PK_APPROVAL)) {
 
@@ -246,12 +249,15 @@ public class CommerceOrderModelResourcePermissionLogic
 	}
 
 	private boolean _hasOwnerPermission(
-		PermissionChecker permissionChecker, CommerceOrder commerceOrder) {
+			PermissionChecker permissionChecker, CommerceOrder commerceOrder)
+		throws PortalException {
 
 		long userId = permissionChecker.getUserId();
 
+		CommerceAccount commerceAccount = commerceOrder.getOrderAccount();
+
 		if ((userId == commerceOrder.getUserId()) ||
-			(userId == commerceOrder.getOrderUserId())) {
+			(userId == commerceAccount.getUserId())) {
 
 			return true;
 		}
