@@ -31,7 +31,6 @@ import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -192,6 +191,23 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceVirtualOrderItem> getCommerceVirtualOrderItems(
+		long groupId, long commerceAccountId, int start, int end,
+		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
+
+		return commerceVirtualOrderItemFinder.findByG_C(
+			groupId, commerceAccountId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceVirtualOrderItemsCount(
+		long groupId, long commerceAccountId) {
+
+		return commerceVirtualOrderItemFinder.countByG_C(
+			groupId, commerceAccountId);
+	}
+
+	@Override
 	public File getFile(long commerceVirtualOrderItemId) throws Exception {
 		CommerceVirtualOrderItem commerceVirtualOrderItem =
 			commerceVirtualOrderItemPersistence.findByPrimaryKey(
@@ -242,48 +258,6 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 		}
 
 		return file;
-	}
-
-	@Override
-	public List<CommerceVirtualOrderItem>
-		getOrganizationCommerceVirtualOrderItems(
-			long groupId, long organizationId, int start, int end,
-			OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
-
-		return commerceVirtualOrderItemFinder.findByG_O(
-			groupId, organizationId, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getOrganizationCommerceVirtualOrderItemsCount(
-		long groupId, long organizationId) {
-
-		List<CommerceVirtualOrderItem> commerceVirtualOrderItems =
-			commerceVirtualOrderItemFinder.findByG_O(
-				groupId, organizationId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				null);
-
-		return commerceVirtualOrderItems.size();
-	}
-
-	@Override
-	public List<CommerceVirtualOrderItem> getUserCommerceVirtualOrderItems(
-		long groupId, long userId, int start, int end,
-		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
-
-		return commerceVirtualOrderItemFinder.findByG_U(
-			groupId, userId, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getUserCommerceVirtualOrderItemsCount(
-		long groupId, long userId) {
-
-		List<CommerceVirtualOrderItem> commerceVirtualOrderItems =
-			commerceVirtualOrderItemFinder.findByG_U(
-				groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-
-		return commerceVirtualOrderItems.size();
 	}
 
 	@Override
