@@ -136,9 +136,18 @@ public class CommerceAccountPermissionImpl
 				   CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID)) {
 
 			if (actionId.equals(ActionKeys.UPDATE) &&
-				PortalPermissionUtil.contains(
-					permissionChecker,
-					CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
+				(commerceAccount.getType() ==
+					CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL) &&
+				(permissionChecker.getUserId() ==
+					commerceAccount.getUserId())) {
+
+				return true;
+			}
+			else if (actionId.equals(ActionKeys.VIEW) &&
+					 (commerceAccount.getType() ==
+						 CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL) &&
+					 (permissionChecker.getUserId() ==
+						 commerceAccount.getUserId())) {
 
 				return true;
 			}
