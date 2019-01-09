@@ -35,19 +35,17 @@ import java.util.List;
 public class CommerceOrderFinderImpl
 	extends CommerceOrderFinderBaseImpl implements CommerceOrderFinder {
 
-	public static final String FIND_BY_S_O =
-		CommerceOrderFinder.class.getName() + ".findByS_O";
+	public static final String FIND_BY_G_O =
+		CommerceOrderFinder.class.getName() + ".findByG_O";
 
 	@Override
-	public List<CommerceOrder> findByS_O(
-		long siteGroupId, int[] orderStatuses) {
-
+	public List<CommerceOrder> findByG_O(long groupId, int[] orderStatuses) {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = _customSQL.get(getClass(), FIND_BY_S_O);
+			String sql = _customSQL.get(getClass(), FIND_BY_G_O);
 
 			sql = replaceOrderStatus(sql, orderStatuses);
 
@@ -57,7 +55,7 @@ public class CommerceOrderFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(siteGroupId);
+			qPos.add(groupId);
 
 			return (List<CommerceOrder>)QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
