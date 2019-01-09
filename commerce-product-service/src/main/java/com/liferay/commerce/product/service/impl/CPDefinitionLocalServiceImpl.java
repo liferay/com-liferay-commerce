@@ -47,6 +47,8 @@ import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalServiceUtil;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalServiceUtil;
+import com.liferay.commerce.product.util.CPVersionContributor;
+import com.liferay.commerce.product.util.CPVersionContributorRegistryUtil;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.exception.NoSuchStructureException;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
@@ -552,48 +554,6 @@ public class CPDefinitionLocalServiceImpl
 			cpAttachmentFileEntryPersistence.update(newCPAttachmentFileEntry);
 		}
 
-		// CPDefinitionGroupedEntry
-
-		List<CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
-			CPDefinitionGroupedEntryLocalServiceUtil.
-				getCPDefinitionGroupedEntriesByCPDefinitionId(cpDefinitionId);
-
-		for (CPDefinitionGroupedEntry cpDefinitionGroupedEntry :
-				cpDefinitionGroupedEntries) {
-
-			CPDefinitionGroupedEntry newCPDefinitionGroupedEntry =
-				(CPDefinitionGroupedEntry)cpDefinitionGroupedEntry.clone();
-
-			newCPDefinitionGroupedEntry.setUuid(PortalUUIDUtil.generate());
-			newCPDefinitionGroupedEntry.setCPDefinitionGroupedEntryId(
-				counterLocalService.increment());
-			newCPDefinitionGroupedEntry.setModifiedDate(new Date());
-			newCPDefinitionGroupedEntry.setCPDefinitionId(newCPDefinitionId);
-
-			CPDefinitionGroupedEntryLocalServiceUtil.
-				addCPDefinitionGroupedEntry(newCPDefinitionGroupedEntry);
-		}
-
-		// CPDefinitionInventory
-
-		CPDefinitionInventory cpDefinitionInventory =
-			CPDefinitionInventoryLocalServiceUtil.
-				fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
-
-		if (cpDefinitionInventory != null) {
-			CPDefinitionInventory newCPDefinitionInventory =
-				(CPDefinitionInventory)cpDefinitionInventory.clone();
-
-			newCPDefinitionInventory.setUuid(PortalUUIDUtil.generate());
-			newCPDefinitionInventory.setCPDefinitionInventoryId(
-				counterLocalService.increment());
-			newCPDefinitionInventory.setModifiedDate(new Date());
-			newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
-
-			CPDefinitionInventoryLocalServiceUtil.addCPDefinitionInventory(
-				newCPDefinitionInventory);
-		}
-
 		// CPDefinitionLink
 
 		List<CPDefinitionLink> cpDefinitionLinks =
@@ -692,27 +652,6 @@ public class CPDefinitionLocalServiceImpl
 				newCPDefinitionSpecificationOptionValue);
 		}
 
-		// CPDefinitionVirtualSetting
-
-		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
-			CPDefinitionVirtualSettingLocalServiceUtil.
-				fetchCPDefinitionVirtualSetting(
-					CPDefinition.class.getName(), cpDefinitionId);
-
-		if (cpDefinitionVirtualSetting != null) {
-			CPDefinitionVirtualSetting newCPDefinitionVirtualSetting =
-				(CPDefinitionVirtualSetting)cpDefinitionVirtualSetting.clone();
-
-			newCPDefinitionVirtualSetting.setUuid(PortalUUIDUtil.generate());
-			newCPDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
-				counterLocalService.increment());
-			newCPDefinitionVirtualSetting.setModifiedDate(new Date());
-			newCPDefinitionVirtualSetting.setClassPK(newCPDefinitionId);
-
-			CPDefinitionVirtualSettingLocalServiceUtil.
-				addCPDefinitionVirtualSetting(newCPDefinitionVirtualSetting);
-		}
-
 		// CPDisplayLayout
 
 		CPDisplayLayout cpDisplayLayout = cpDisplayLayoutPersistence.fetchByC_C(
@@ -764,6 +703,17 @@ public class CPDefinitionLocalServiceImpl
 			newCPInstance.setCPDefinitionId(newCPDefinitionId);
 
 			cpInstancePersistence.update(newCPInstance);
+		}
+
+		// CPVersionContributors
+
+		List<CPVersionContributor> cpVersionContributors =
+			CPVersionContributorRegistryUtil.getCPVersionContributors();
+
+		for (CPVersionContributor cpVersionContributor :
+				cpVersionContributors) {
+
+			cpVersionContributor.onUpdate(cpDefinitionId, newCPDefinitionId);
 		}
 
 		// CProduct
@@ -852,6 +802,17 @@ public class CPDefinitionLocalServiceImpl
 
 		cpDisplayLayoutLocalService.deleteCPDisplayLayout(
 			CPDefinition.class, cpDefinition.getCPDefinitionId());
+
+		// CPVersionContributors
+
+		List<CPVersionContributor> cpVersionContributors =
+			CPVersionContributorRegistryUtil.getCPVersionContributors();
+
+		for (CPVersionContributor cpVersionContributor :
+				cpVersionContributors) {
+
+			cpVersionContributor.onDelete(cpDefinition.getCPDefinitionId());
+		}
 
 		// Commerce product definition
 
