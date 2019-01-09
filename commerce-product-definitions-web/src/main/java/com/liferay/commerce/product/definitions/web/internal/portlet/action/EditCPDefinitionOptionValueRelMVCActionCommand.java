@@ -106,7 +106,9 @@ public class EditCPDefinitionOptionValueRelMVCActionCommand
 
 			Long cpDefinitionId = cpDefinition.getCPDefinitionId();
 
-			jsonObject.put("cpDefinitionId", String.valueOf(cpDefinitionId));
+			jsonObject.put(
+				"cpDefinitionId",
+				String.valueOf(cpDefinition.getCPDefinitionId()));
 
 			jsonObject.put(
 				"cpDefinitionOptionRelId",

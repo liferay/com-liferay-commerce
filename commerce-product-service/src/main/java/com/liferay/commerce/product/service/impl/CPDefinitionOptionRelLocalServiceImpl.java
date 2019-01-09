@@ -101,7 +101,7 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			cpDefinitionOptionRelPersistence.create(cpDefinitionOptionRelId);
 
 		if (cpDefinitionLocalService.isVersionable(
-			cpDefinitionId, serviceContext.getRequest())) {
+				cpDefinitionId, serviceContext.getRequest())) {
 
 			CPDefinition newCPDefinition =
 				cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
