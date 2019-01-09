@@ -75,6 +75,17 @@ public class CommerceAccountUserRelServiceImpl
 	}
 
 	@Override
+	public void deleteCommerceAccountUserRels(long commerceAccountId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		commerceAccountUserRelLocalService.
+			deleteCommerceAccountUserRelsByCommerceAccountId(commerceAccountId);
+	}
+
+	@Override
 	public void deleteCommerceAccountUserRels(
 			long commerceAccountId, long[] userIds)
 		throws PortalException {
