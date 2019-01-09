@@ -21,6 +21,7 @@ import java.util.List;
 /**
  * @author Rodrigo Guedes de Souza
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 public class CommerceAccountUpserterForm {
 
@@ -33,26 +34,34 @@ public class CommerceAccountUpserterForm {
 			__ -> "This form can be used to create or update an account"
 		).constructor(
 			CommerceAccountUpserterForm::new
-		).addOptionalLong(
-			"countryId", CommerceAccountUpserterForm::setCountryId
-		).addOptionalLong(
-			"regionId", CommerceAccountUpserterForm::setRegionId
 		).addOptionalLongList(
 			"commerceUserIds", CommerceAccountUpserterForm::setCommerceUserIds
+		).addOptionalString(
+			"taxId", CommerceAccountUpserterForm::setTaxId
+		).addRequiredBoolean(
+			"active", CommerceAccountUpserterForm::setActive
+		).addRequiredLong(
+			"type", CommerceAccountUpserterForm::setType
 		).addRequiredString(
 			"externalReferenceCode",
 			CommerceAccountUpserterForm::setExternalReferenceCode
 		).addRequiredString(
+			"email", CommerceAccountUpserterForm::setEmail
+		).addRequiredString(
 			"name", CommerceAccountUpserterForm::setName
 		).build();
+	}
+
+	public boolean getActive() {
+		return _active;
 	}
 
 	public List<Long> getCommerceUserIds() {
 		return _commerceUserIds;
 	}
 
-	public long getCountryId() {
-		return _countryId;
+	public String getEmail() {
+		return _email;
 	}
 
 	public String getExternalReferenceCode() {
@@ -63,16 +72,24 @@ public class CommerceAccountUpserterForm {
 		return _name;
 	}
 
-	public long getRegionId() {
-		return _regionId;
+	public String getTaxId() {
+		return _taxId;
+	}
+
+	public int getType() {
+		return _type;
+	}
+
+	public void setActive(boolean active) {
+		_active = active;
 	}
 
 	public void setCommerceUserIds(List<Long> commerceUserIds) {
 		_commerceUserIds = commerceUserIds;
 	}
 
-	public void setCountryId(long countryId) {
-		_countryId = countryId;
+	public void setEmail(String email) {
+		_email = email;
 	}
 
 	public void setExternalReferenceCode(String externalReferenceCode) {
@@ -83,14 +100,20 @@ public class CommerceAccountUpserterForm {
 		_name = name;
 	}
 
-	public void setRegionId(long regionId) {
-		_regionId = regionId;
+	public void setTaxId(String taxId) {
+		_taxId = taxId;
 	}
 
+	public void setType(long type) {
+		_type = Math.toIntExact(type);
+	}
+
+	private boolean _active;
 	private List<Long> _commerceUserIds;
-	private long _countryId;
+	private String _email;
 	private String _externalReferenceCode;
 	private String _name;
-	private long _regionId;
+	private String _taxId;
+	private int _type;
 
 }

@@ -20,6 +20,7 @@ import com.liferay.apio.architect.representor.Representor;
 import com.liferay.apio.architect.resource.NestedCollectionResource;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.currency.exception.NoSuchCurrencyException;
 import com.liferay.commerce.data.integration.apio.identifier.ClassPKExternalReferenceCode;
@@ -40,14 +41,12 @@ import com.liferay.commerce.organization.constants.CommerceOrganizationConstants
 import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.NoSuchOrganizationException;
-import com.liferay.portal.kernel.exception.NoSuchUserException;
+import com.liferay.portal.kernel.exception.NoSuchAccountException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Organization;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 
 import java.util.ArrayList;
@@ -61,6 +60,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Rodrigo Guedes de Souza
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = NestedCollectionResource.class)
 public class CommerceOrderNestedCollectionResource
@@ -79,7 +79,7 @@ public class CommerceOrderNestedCollectionResource
 		return builder.addGetter(
 			this::_getPageItems, CurrentUser.class
 		).addCreator(
-			this::_upsertCommerceOrder, CurrentUser.class,
+			this::_upsertCommerceOrder,
 			_hasPermission.forAddingIn(CommerceWebSiteIdentifier.class),
 			CommerceOrderUpserterForm::buildForm
 		).build();
@@ -116,16 +116,16 @@ public class CommerceOrderNestedCollectionResource
 			"commerceAccount", "commerceOrders",
 			CommerceAccountIdentifier.class,
 			commerceOrder -> _commerceAccountHelper.
-				organizationIdToClassPKExternalReferenceCode(
-					commerceOrder.getOrderOrganizationId())
+				commerceAccountIdToClassPKExternalReferenceCode(
+					commerceOrder.getCommerceAccountId())
 		).addBidirectionalModel(
 			"commerceWebSite", "commerceOrders",
 			CommerceWebSiteIdentifier.class, CommerceOrder::getGroupId
 		).addLinkedModel(
 			"commerceAccount", CommerceAccountIdentifier.class,
 			commerceOrder -> _commerceAccountHelper.
-				organizationIdToClassPKExternalReferenceCode(
-					commerceOrder.getOrderOrganizationId())
+				commerceAccountIdToClassPKExternalReferenceCode(
+					commerceOrder.getCommerceAccountId())
 		).addString(
 			"commercePaymentMethodKey",
 			CommerceOrder::getCommercePaymentMethodKey
@@ -151,8 +151,6 @@ public class CommerceOrderNestedCollectionResource
 			"author", CommerceUserIdentifier.class,
 			commerceOrder -> _userHelper.userIdToClassPKExternalReferenceCode(
 				commerceOrder.getUserId())
-		).addString(
-			"authorExternalReferenceCode", this::_getUserExternalReferenceCode
 		).addLinkedModel(
 			"shippingAddress", CommerceAddressIdentifier.class,
 			CommerceOrder::getShippingAddressId
@@ -192,15 +190,15 @@ public class CommerceOrderNestedCollectionResource
 
 		if (commerceOrder != null) {
 			try {
-				Organization organization =
-					commerceOrder.getOrderOrganization();
+				CommerceAccount commerceAccount =
+					commerceOrder.getOrderAccount();
 
-				return organization.getExternalReferenceCode();
+				return commerceAccount.getExternalReferenceCode();
 			}
 			catch (PortalException pe) {
 				_log.error(
-					"Unable to find Organization with ID " +
-						commerceOrder.getOrderOrganizationId(),
+					"Unable to find Commerce Account with ID " +
+						commerceOrder.getCommerceAccountId(),
 					pe);
 			}
 		}
@@ -211,15 +209,15 @@ public class CommerceOrderNestedCollectionResource
 	private String _getAccountName(CommerceOrder commerceOrder) {
 		if (commerceOrder != null) {
 			try {
-				Organization organization =
-					commerceOrder.getOrderOrganization();
+				CommerceAccount commerceAccount =
+					commerceOrder.getOrderAccount();
 
-				return organization.getName();
+				return commerceAccount.getName();
 			}
 			catch (PortalException pe) {
 				_log.error(
-					"Unable to find Organization with ID " +
-						commerceOrder.getOrderOrganizationId(),
+					"Unable to find Commerce Account with ID " +
+						commerceOrder.getCommerceAccountId(),
 					pe);
 			}
 		}
@@ -277,24 +275,6 @@ public class CommerceOrderNestedCollectionResource
 		return new PageItems<>(commerceOrders, count);
 	}
 
-	private String _getUserExternalReferenceCode(CommerceOrder commerceOrder) {
-		if (commerceOrder != null) {
-			try {
-				User user = commerceOrder.getOrderUser();
-
-				return user.getExternalReferenceCode();
-			}
-			catch (PortalException pe) {
-				_log.error(
-					"Unable to find User with ID " +
-						commerceOrder.getOrderUserId(),
-					pe);
-			}
-		}
-
-		return null;
-	}
-
 	private CommerceOrder _updateCommerceOrder(
 			ClassPKExternalReferenceCode
 				commerceOrderClassPKExternalReferenceCode,
@@ -309,18 +289,15 @@ public class CommerceOrderNestedCollectionResource
 	}
 
 	private CommerceOrder _upsertCommerceOrder(
-			Long groupId, CommerceOrderUpserterForm commerceOrderUpserterForm,
-			User currentUser)
+			Long groupId, CommerceOrderUpserterForm commerceOrderUpserterForm)
 		throws PortalException {
 
 		try {
 			return _commerceOrderHelper.upsertCommerceOrder(
-				groupId, commerceOrderUpserterForm.getOrderOrganizationId(),
-				commerceOrderUpserterForm.getOrderUserId(),
+				groupId, commerceOrderUpserterForm.getCommerceAccountId(),
 				commerceOrderUpserterForm.getCurrency(),
 				commerceOrderUpserterForm.getShippingAddressId(),
-				commerceOrderUpserterForm.getPurchaseOrderNumber(),
-				currentUser);
+				commerceOrderUpserterForm.getPurchaseOrderNumber());
 		}
 		catch (NoSuchCurrencyException nsce) {
 			throw new NotFoundException(
@@ -330,17 +307,11 @@ public class CommerceOrderNestedCollectionResource
 					commerceOrderUpserterForm.getCurrency()),
 				nsce);
 		}
-		catch (NoSuchOrganizationException nsoe) {
+		catch (NoSuchAccountException nsae) {
 			throw new NotFoundException(
-				"Unable to find organization with primary key " +
-					commerceOrderUpserterForm.getOrderOrganizationId(),
-				nsoe);
-		}
-		catch (NoSuchUserException nsue) {
-			throw new NotFoundException(
-				"Unable to find user with primary key " +
-					commerceOrderUpserterForm.getOrderUserId(),
-				nsue);
+				"Unable to find commerce account with primary key " +
+					commerceOrderUpserterForm.getCommerceAccountId(),
+				nsae);
 		}
 	}
 
