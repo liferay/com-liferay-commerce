@@ -96,7 +96,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
 
-		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
+		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), _user.getUserId(), 0);
 
 		for (CPInstance cpInstance : cpDefinition.getCPInstances()) {
@@ -116,10 +116,9 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 			commerceOrder.getCommerceOrderItems();
 
 		List<CommerceVirtualOrderItem> userCommerceVirtualOrderItems =
-			_commerceVirtualOrderItemLocalService.
-				getUserCommerceVirtualOrderItems(
-					_group.getGroupId(), _user.getUserId(), QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS, null);
+			_commerceVirtualOrderItemLocalService.getCommerceVirtualOrderItems(
+				_group.getGroupId(), commerceOrder.getCommerceAccountId(),
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Assert.assertEquals(
 			userCommerceVirtualOrderItems.toString(), commerceOrderItems.size(),
@@ -161,7 +160,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
 
-		CommerceOrder commerceOrder = CommerceTestUtil.addUserCommerceOrder(
+		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), _user.getUserId(), 0);
 
 		int subscriptionLength = 1;
@@ -189,10 +188,9 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 			commerceOrder.getCommerceOrderItems();
 
 		List<CommerceVirtualOrderItem> userCommerceVirtualOrderItems =
-			_commerceVirtualOrderItemLocalService.
-				getUserCommerceVirtualOrderItems(
-					_group.getGroupId(), _user.getUserId(), QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS, null);
+			_commerceVirtualOrderItemLocalService.getCommerceVirtualOrderItems(
+				_group.getGroupId(), commerceOrder.getCommerceAccountId(),
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Assert.assertEquals(
 			userCommerceVirtualOrderItems.toString(), commerceOrderItems.size(),

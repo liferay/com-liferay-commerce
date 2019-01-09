@@ -193,60 +193,18 @@ public interface CommerceShipmentModel extends BaseModel<CommerceShipment>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the site group ID of this commerce shipment.
+	 * Returns the commerce account ID of this commerce shipment.
 	 *
-	 * @return the site group ID of this commerce shipment
+	 * @return the commerce account ID of this commerce shipment
 	 */
-	public long getSiteGroupId();
+	public long getCommerceAccountId();
 
 	/**
-	 * Sets the site group ID of this commerce shipment.
+	 * Sets the commerce account ID of this commerce shipment.
 	 *
-	 * @param siteGroupId the site group ID of this commerce shipment
+	 * @param commerceAccountId the commerce account ID of this commerce shipment
 	 */
-	public void setSiteGroupId(long siteGroupId);
-
-	/**
-	 * Returns the shipment organization ID of this commerce shipment.
-	 *
-	 * @return the shipment organization ID of this commerce shipment
-	 */
-	public long getShipmentOrganizationId();
-
-	/**
-	 * Sets the shipment organization ID of this commerce shipment.
-	 *
-	 * @param shipmentOrganizationId the shipment organization ID of this commerce shipment
-	 */
-	public void setShipmentOrganizationId(long shipmentOrganizationId);
-
-	/**
-	 * Returns the shipment user ID of this commerce shipment.
-	 *
-	 * @return the shipment user ID of this commerce shipment
-	 */
-	public long getShipmentUserId();
-
-	/**
-	 * Sets the shipment user ID of this commerce shipment.
-	 *
-	 * @param shipmentUserId the shipment user ID of this commerce shipment
-	 */
-	public void setShipmentUserId(long shipmentUserId);
-
-	/**
-	 * Returns the shipment user uuid of this commerce shipment.
-	 *
-	 * @return the shipment user uuid of this commerce shipment
-	 */
-	public String getShipmentUserUuid();
-
-	/**
-	 * Sets the shipment user uuid of this commerce shipment.
-	 *
-	 * @param shipmentUserUuid the shipment user uuid of this commerce shipment
-	 */
-	public void setShipmentUserUuid(String shipmentUserUuid);
+	public void setCommerceAccountId(long commerceAccountId);
 
 	/**
 	 * Returns the commerce address ID of this commerce shipment.

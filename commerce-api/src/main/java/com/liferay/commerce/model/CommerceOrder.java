@@ -58,12 +58,6 @@ public interface CommerceOrder extends CommerceOrderModel, PersistedModel {
 	public CommerceAddress getBillingAddress()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public String getClassName()
-		throws com.liferay.portal.kernel.exception.PortalException;
-
-	public long getClassPK()
-		throws com.liferay.portal.kernel.exception.PortalException;
-
 	public com.liferay.commerce.currency.model.CommerceCurrency getCommerceCurrency()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
@@ -75,15 +69,7 @@ public interface CommerceOrder extends CommerceOrderModel, PersistedModel {
 	public CommerceShippingMethod getCommerceShippingMethod()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public long getCustomerId();
-
-	public String getCustomerName()
-		throws com.liferay.portal.kernel.exception.PortalException;
-
-	public com.liferay.portal.kernel.model.Organization getOrderOrganization()
-		throws com.liferay.portal.kernel.exception.PortalException;
-
-	public com.liferay.portal.kernel.model.User getOrderUser()
+	public com.liferay.commerce.account.model.CommerceAccount getOrderAccount()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public CommerceAddress getShippingAddress()

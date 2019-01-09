@@ -146,6 +146,8 @@ public class CommerceAccountPersistenceTest {
 
 		newCommerceAccount.setTaxId(RandomTestUtil.randomString());
 
+		newCommerceAccount.setType(RandomTestUtil.nextInt());
+
 		newCommerceAccount.setActive(RandomTestUtil.randomBoolean());
 
 		newCommerceAccount.setDisplayDate(RandomTestUtil.nextDate());
@@ -192,6 +194,8 @@ public class CommerceAccountPersistenceTest {
 			newCommerceAccount.getEmail());
 		Assert.assertEquals(existingCommerceAccount.getTaxId(),
 			newCommerceAccount.getTaxId());
+		Assert.assertEquals(existingCommerceAccount.getType(),
+			newCommerceAccount.getType());
 		Assert.assertEquals(existingCommerceAccount.isActive(),
 			newCommerceAccount.isActive());
 		Assert.assertEquals(Time.getShortTimestamp(
@@ -260,7 +264,7 @@ public class CommerceAccountPersistenceTest {
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "name", true,
 			"parentCommerceAccountId", true, "logoId", true, "email", true,
-			"taxId", true, "active", true, "displayDate", true,
+			"taxId", true, "type", true, "active", true, "displayDate", true,
 			"expirationDate", true, "lastPublishDate", true, "status", true,
 			"statusByUserId", true, "statusByUserName", true, "statusDate", true);
 	}
@@ -509,6 +513,8 @@ public class CommerceAccountPersistenceTest {
 		commerceAccount.setEmail(RandomTestUtil.randomString());
 
 		commerceAccount.setTaxId(RandomTestUtil.randomString());
+
+		commerceAccount.setType(RandomTestUtil.nextInt());
 
 		commerceAccount.setActive(RandomTestUtil.randomBoolean());
 

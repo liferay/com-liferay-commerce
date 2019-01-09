@@ -134,11 +134,7 @@ public class CommerceShipmentPersistenceTest {
 
 		newCommerceShipment.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceShipment.setSiteGroupId(RandomTestUtil.nextLong());
-
-		newCommerceShipment.setShipmentOrganizationId(RandomTestUtil.nextLong());
-
-		newCommerceShipment.setShipmentUserId(RandomTestUtil.nextLong());
+		newCommerceShipment.setCommerceAccountId(RandomTestUtil.nextLong());
 
 		newCommerceShipment.setCommerceAddressId(RandomTestUtil.nextLong());
 
@@ -176,12 +172,8 @@ public class CommerceShipmentPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCommerceShipment.getModifiedDate()),
 			Time.getShortTimestamp(newCommerceShipment.getModifiedDate()));
-		Assert.assertEquals(existingCommerceShipment.getSiteGroupId(),
-			newCommerceShipment.getSiteGroupId());
-		Assert.assertEquals(existingCommerceShipment.getShipmentOrganizationId(),
-			newCommerceShipment.getShipmentOrganizationId());
-		Assert.assertEquals(existingCommerceShipment.getShipmentUserId(),
-			newCommerceShipment.getShipmentUserId());
+		Assert.assertEquals(existingCommerceShipment.getCommerceAccountId(),
+			newCommerceShipment.getCommerceAccountId());
 		Assert.assertEquals(existingCommerceShipment.getCommerceAddressId(),
 			newCommerceShipment.getCommerceAddressId());
 		Assert.assertEquals(existingCommerceShipment.getCommerceShippingMethodId(),
@@ -210,26 +202,11 @@ public class CommerceShipmentPersistenceTest {
 	}
 
 	@Test
-	public void testCountBySiteGroupId() throws Exception {
-		_persistence.countBySiteGroupId(RandomTestUtil.nextLong());
-
-		_persistence.countBySiteGroupId(0L);
-	}
-
-	@Test
 	public void testCountByG_S() throws Exception {
 		_persistence.countByG_S(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextInt());
 
 		_persistence.countByG_S(0L, 0);
-	}
-
-	@Test
-	public void testCountByS_S() throws Exception {
-		_persistence.countByS_S(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextInt());
-
-		_persistence.countByS_S(0L, 0);
 	}
 
 	@Test
@@ -258,8 +235,7 @@ public class CommerceShipmentPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CommerceShipment",
 			"commerceShipmentId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "siteGroupId", true,
-			"shipmentOrganizationId", true, "shipmentUserId", true,
+			"modifiedDate", true, "commerceAccountId", true,
 			"commerceAddressId", true, "commerceShippingMethodId", true,
 			"shippingOptionName", true, "carrier", true, "trackingNumber",
 			true, "status", true, "shippingDate", true, "expectedDate", true);
@@ -476,11 +452,7 @@ public class CommerceShipmentPersistenceTest {
 
 		commerceShipment.setModifiedDate(RandomTestUtil.nextDate());
 
-		commerceShipment.setSiteGroupId(RandomTestUtil.nextLong());
-
-		commerceShipment.setShipmentOrganizationId(RandomTestUtil.nextLong());
-
-		commerceShipment.setShipmentUserId(RandomTestUtil.nextLong());
+		commerceShipment.setCommerceAccountId(RandomTestUtil.nextLong());
 
 		commerceShipment.setCommerceAddressId(RandomTestUtil.nextLong());
 

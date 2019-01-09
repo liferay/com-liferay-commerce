@@ -44,6 +44,7 @@ public class CommerceAccountFinderBaseImpl extends BasePersistenceImpl<CommerceA
 
 			Map<String, String> dbColumnNames = new HashMap<String, String>();
 
+			dbColumnNames.put("type", "type_");
 			dbColumnNames.put("active", "active_");
 
 			field.set(this, dbColumnNames);

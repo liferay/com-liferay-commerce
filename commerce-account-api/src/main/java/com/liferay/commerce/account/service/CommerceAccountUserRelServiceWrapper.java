@@ -60,6 +60,12 @@ public class CommerceAccountUserRelServiceWrapper
 	}
 
 	@Override
+	public void deleteCommerceAccountUserRels(long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountUserRelService.deleteCommerceAccountUserRels(commerceAccountId);
+	}
+
+	@Override
 	public void deleteCommerceAccountUserRels(long commerceAccountId,
 		long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException {

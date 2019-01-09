@@ -266,6 +266,20 @@ public interface CommerceAccountModel extends AuditedModel,
 	public void setTaxId(String taxId);
 
 	/**
+	 * Returns the type of this commerce account.
+	 *
+	 * @return the type of this commerce account
+	 */
+	public int getType();
+
+	/**
+	 * Sets the type of this commerce account.
+	 *
+	 * @param type the type of this commerce account
+	 */
+	public void setType(int type);
+
+	/**
 	 * Returns the active of this commerce account.
 	 *
 	 * @return the active of this commerce account

@@ -22,14 +22,12 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CommerceVirtualOrderItemFinder {
+	public int countByG_C(long groupId, long commerceAccountId);
+
 	public java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> findByEndDate(
 		java.util.Date endDate);
 
-	public java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> findByG_O(
-		long groupId, long organizationId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator);
-
-	public java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> findByG_U(
-		long groupId, long userId, int start, int end,
+	public java.util.List<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> findByG_C(
+		long groupId, long commerceAccountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem> orderByComparator);
 }

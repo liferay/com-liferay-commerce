@@ -142,11 +142,7 @@ public class CommerceOrderPersistenceTest {
 
 		newCommerceOrder.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceOrder.setSiteGroupId(RandomTestUtil.nextLong());
-
-		newCommerceOrder.setOrderOrganizationId(RandomTestUtil.nextLong());
-
-		newCommerceOrder.setOrderUserId(RandomTestUtil.nextLong());
+		newCommerceOrder.setCommerceAccountId(RandomTestUtil.nextLong());
 
 		newCommerceOrder.setCommerceCurrencyId(RandomTestUtil.nextLong());
 
@@ -257,12 +253,8 @@ public class CommerceOrderPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingCommerceOrder.getModifiedDate()),
 			Time.getShortTimestamp(newCommerceOrder.getModifiedDate()));
-		Assert.assertEquals(existingCommerceOrder.getSiteGroupId(),
-			newCommerceOrder.getSiteGroupId());
-		Assert.assertEquals(existingCommerceOrder.getOrderOrganizationId(),
-			newCommerceOrder.getOrderOrganizationId());
-		Assert.assertEquals(existingCommerceOrder.getOrderUserId(),
-			newCommerceOrder.getOrderUserId());
+		Assert.assertEquals(existingCommerceOrder.getCommerceAccountId(),
+			newCommerceOrder.getCommerceAccountId());
 		Assert.assertEquals(existingCommerceOrder.getCommerceCurrencyId(),
 			newCommerceOrder.getCommerceCurrencyId());
 		Assert.assertEquals(existingCommerceOrder.getBillingAddressId(),
@@ -390,11 +382,11 @@ public class CommerceOrderPersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_O() throws Exception {
-		_persistence.countByG_O(RandomTestUtil.nextLong(),
+	public void testCountByG_C() throws Exception {
+		_persistence.countByG_C(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong());
 
-		_persistence.countByG_O(0L, 0L);
+		_persistence.countByG_C(0L, 0L);
 	}
 
 	@Test
@@ -448,15 +440,14 @@ public class CommerceOrderPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CommerceOrder", "uuid",
 			true, "externalReferenceCode", true, "commerceOrderId", true,
 			"groupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true, "siteGroupId",
-			true, "orderOrganizationId", true, "orderUserId", true,
-			"commerceCurrencyId", true, "billingAddressId", true,
-			"shippingAddressId", true, "commercePaymentMethodKey", true,
-			"transactionId", true, "commerceShippingMethodId", true,
-			"shippingOptionName", true, "purchaseOrderNumber", true,
-			"subtotal", true, "subtotalDiscountAmount", true,
-			"subtotalDiscountPercentageLevel1", true,
-			"subtotalDiscountPercentageLevel2", true,
+			true, "createDate", true, "modifiedDate", true,
+			"commerceAccountId", true, "commerceCurrencyId", true,
+			"billingAddressId", true, "shippingAddressId", true,
+			"commercePaymentMethodKey", true, "transactionId", true,
+			"commerceShippingMethodId", true, "shippingOptionName", true,
+			"purchaseOrderNumber", true, "subtotal", true,
+			"subtotalDiscountAmount", true, "subtotalDiscountPercentageLevel1",
+			true, "subtotalDiscountPercentageLevel2", true,
 			"subtotalDiscountPercentageLevel3", true,
 			"subtotalDiscountPercentageLevel4", true, "shippingAmount", true,
 			"shippingDiscountAmount", true, "shippingDiscountPercentageLevel1",
@@ -711,11 +702,7 @@ public class CommerceOrderPersistenceTest {
 
 		commerceOrder.setModifiedDate(RandomTestUtil.nextDate());
 
-		commerceOrder.setSiteGroupId(RandomTestUtil.nextLong());
-
-		commerceOrder.setOrderOrganizationId(RandomTestUtil.nextLong());
-
-		commerceOrder.setOrderUserId(RandomTestUtil.nextLong());
+		commerceOrder.setCommerceAccountId(RandomTestUtil.nextLong());
 
 		commerceOrder.setCommerceCurrencyId(RandomTestUtil.nextLong());
 
