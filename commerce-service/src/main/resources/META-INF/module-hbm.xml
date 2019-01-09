@@ -115,7 +115,7 @@
 		<property name="billingAddressId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="shippingAddressId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commercePaymentMethodKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="transactionId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="transactionId" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
 		<property name="commerceShippingMethodId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="shippingOptionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="purchaseOrderNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
