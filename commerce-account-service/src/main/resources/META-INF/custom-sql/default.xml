@@ -32,6 +32,7 @@
 					(CommerceAccountUserRel.userId IS NULL) OR
 					(CommerceAccountUserRel.userId = [$USER_ID$])
 				) AND
+				(CommerceAccount.type_ != 0) AND
 				(CommerceAccount.name LIKE ?)
 		]]>
 	</sql>
@@ -66,6 +67,7 @@
 					(CommerceAccountUserRel.userId IS NULL) OR
 					(CommerceAccountUserRel.userId = [$USER_ID$])
 				) AND
+				(CommerceAccount.type_ != 0) AND
 				(CommerceAccount.name LIKE ?)
 		]]>
 	</sql>
