@@ -76,10 +76,12 @@ public class CommercePaymentServlet extends HttpServlet {
 			_confirmationStepUrl = ParamUtil.getString(
 				httpServletRequest, "confirmationStep");
 
-			_startPayment(httpServletRequest);
+			CommercePaymentResult commercePaymentResult = _startPayment(
+				httpServletRequest);
 
-			if (_onlineRedirect) {
-				httpServletResponse.sendRedirect(_url);
+			if (commercePaymentResult.isOnlineRedirect()) {
+				httpServletResponse.sendRedirect(
+					commercePaymentResult.getRedirectUrl());
 			}
 
 			// Offline methods, payment complete
@@ -94,15 +96,12 @@ public class CommercePaymentServlet extends HttpServlet {
 		}
 	}
 
-	private void _startPayment(HttpServletRequest httpServletRequest)
+	private CommercePaymentResult _startPayment(
+			HttpServletRequest httpServletRequest)
 		throws Exception {
 
-		CommercePaymentResult commercePaymentResult =
-			_commercePaymentEngine.startPayment(
-				_commerceOrderId, _confirmationStepUrl, httpServletRequest);
-
-		_onlineRedirect = commercePaymentResult.isOnlineRedirect();
-		_url = commercePaymentResult.getRedirectUrl();
+		return _commercePaymentEngine.startPayment(
+			_commerceOrderId, _confirmationStepUrl, httpServletRequest);
 	}
 
 	private long _commerceOrderId;
@@ -111,11 +110,8 @@ public class CommercePaymentServlet extends HttpServlet {
 	private CommercePaymentEngine _commercePaymentEngine;
 
 	private String _confirmationStepUrl;
-	private boolean _onlineRedirect;
 
 	@Reference
 	private Portal _portal;
-
-	private String _url;
 
 }
