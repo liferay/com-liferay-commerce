@@ -41,43 +41,13 @@ import java.util.List;
 /**
  * @author Andrea Di Giorgi
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
-	public CommerceOrder addOrganizationCommerceOrder(
-			long groupId, long siteGroupId, long orderOrganizationId,
-			long commerceCurrencyId, long shippingAddressId,
-			String purchaseOrderNumber)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
-
-		return commerceOrderLocalService.addOrganizationCommerceOrder(
-			groupId, getUserId(), siteGroupId, orderOrganizationId,
-			commerceCurrencyId, shippingAddressId, purchaseOrderNumber);
-	}
-
-	@Override
-	public CommerceOrder addOrganizationCommerceOrder(
-			long groupId, long siteGroupId, long orderOrganizationId,
-			long shippingAddressId, String purchaseOrderNumber)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
-
-		return commerceOrderLocalService.addOrganizationCommerceOrder(
-			groupId, getUserId(), siteGroupId, orderOrganizationId,
-			shippingAddressId, purchaseOrderNumber);
-	}
-
-	@Override
-	public CommerceOrder addUserCommerceOrder(
-			long groupId, long userId, long orderUserId,
+	public CommerceOrder addCommerceOrder(
+			long groupId, long userId, long commerceAccountId,
 			long commerceCurrencyId)
 		throws PortalException {
 
@@ -85,8 +55,38 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			getPermissionChecker(), groupId,
 			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
 
-		return commerceOrderLocalService.addUserCommerceOrder(
-			groupId, userId, orderUserId, commerceCurrencyId);
+		return commerceOrderLocalService.addCommerceOrder(
+			groupId, userId, commerceAccountId, commerceCurrencyId);
+	}
+
+	@Override
+	public CommerceOrder addCommerceOrder(
+			long groupId, long commerceAccountId, long commerceCurrencyId,
+			long shippingAddressId, String purchaseOrderNumber)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
+
+		return commerceOrderLocalService.addCommerceOrder(
+			groupId, getUserId(), commerceAccountId, commerceCurrencyId,
+			shippingAddressId, purchaseOrderNumber);
+	}
+
+	@Override
+	public CommerceOrder addCommerceOrder(
+			long groupId, long commerceAccountId, long shippingAddressId,
+			String purchaseOrderNumber)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
+
+		return commerceOrderLocalService.addCommerceOrder(
+			groupId, getUserId(), commerceAccountId, shippingAddressId,
+			purchaseOrderNumber);
 	}
 
 	@Override
@@ -268,35 +268,29 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public List<CommerceOrder> getCommerceOrders(
-			long siteGroupId, int[] orderStatuses)
+			long groupId, int[] orderStatuses)
 		throws PortalException {
 
 		_portletResourcePermission.check(
-			getPermissionChecker(), siteGroupId,
+			getPermissionChecker(), groupId,
 			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getCommerceOrders(
-			siteGroupId, orderStatuses);
+			groupId, orderStatuses);
 	}
 
 	@Override
 	public List<CommerceOrder> getCommerceOrders(
-			long groupId, long orderUserId, int start, int end,
+			long groupId, long commerceAccountId, int start, int end,
 			OrderByComparator<CommerceOrder> orderByComparator)
 		throws PortalException {
 
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		if ((orderUserId != permissionChecker.getUserId()) &&
-			!_portletResourcePermission.contains(
-				permissionChecker, groupId,
-				CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS)) {
-
-			throw new PrincipalException();
-		}
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getCommerceOrders(
-			groupId, orderUserId, start, end, orderByComparator);
+			groupId, commerceAccountId, start, end, orderByComparator);
 	}
 
 	@Override
@@ -309,21 +303,50 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
-	public int getCommerceOrdersCount(long groupId, long orderUserId)
+	public int getCommerceOrdersCount(long groupId, long commerceAccountId)
 		throws PortalException {
 
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		if ((orderUserId != permissionChecker.getUserId()) &&
-			!_portletResourcePermission.contains(
-				permissionChecker, groupId,
-				CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS)) {
-
-			throw new PrincipalException();
-		}
+		_portletResourcePermission.contains(
+			getPermissionChecker(), groupId,
+			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getCommerceOrdersCount(
-			groupId, orderUserId);
+			groupId, commerceAccountId);
+	}
+
+	@Override
+	public List<CommerceOrder> getUserCommerceOrders(
+			long groupId, int orderStatus, String keywords, int start, int end)
+		throws PortalException {
+
+		return commerceOrderLocalService.getUserCommerceOrders(
+			groupId, getUserId(), orderStatus, keywords, start, end);
+	}
+
+	@Override
+	public List<CommerceOrder> getUserCommerceOrders(
+			long groupId, String keywords, int start, int end)
+		throws PortalException {
+
+		return commerceOrderLocalService.getUserCommerceOrders(
+			groupId, getUserId(), null, keywords, start, end);
+	}
+
+	@Override
+	public int getUserCommerceOrdersCount(
+			long groupId, int orderStatus, String keywords)
+		throws PortalException {
+
+		return commerceOrderLocalService.getUserCommerceOrdersCount(
+			groupId, getUserId(), orderStatus, keywords);
+	}
+
+	@Override
+	public int getUserCommerceOrdersCount(long groupId, String keywords)
+		throws PortalException {
+
+		return commerceOrderLocalService.getUserCommerceOrdersCount(
+			groupId, getUserId(), null, keywords);
 	}
 
 	@Override
