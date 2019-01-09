@@ -5,7 +5,9 @@ import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
 class UserInputItem extends Component {
-	_handleRemoveItem() {
+	_handleRemoveItem(e) {
+		e.preventDefault();
+
 		return this.emit(
 			'removeItem',
 			{

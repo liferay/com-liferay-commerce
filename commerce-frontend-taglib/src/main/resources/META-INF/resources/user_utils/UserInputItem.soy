@@ -5,6 +5,8 @@
 	{@param email: string }
 	{@param spritemap: string }
 	{@param? thumbnail: string }
+	
+	{@param? _handleRemoveItem: ?}
 
 	<span class="added-input-item">
 		{if isNonnull($thumbnail)}
@@ -20,7 +22,7 @@
 			{/if}
 		</span>
 
-		<button class="added-input-item__delete" data-onclick="_handleRemoveItem">
+		<button class="added-input-item__delete" data-onclick="{$_handleRemoveItem}">
 			{call ClayIcon.render}
 				{param spritemap: $spritemap /}
 				{param symbol: 'close' /}

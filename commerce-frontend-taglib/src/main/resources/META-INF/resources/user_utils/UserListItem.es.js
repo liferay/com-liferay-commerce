@@ -5,6 +5,8 @@ import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
 import '../autocomplete_item/AutocompleteItem.es';
+import '../add_to_tick_item/AddToTickItem.es';
+
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -23,7 +25,7 @@ class UserListItem extends Component {
 	}
 
 	_updateStatus() {
-		if (this.id) {
+		if (this.userId) {
 			return this._status = 'valid';
 		}
 		if (this.email.indexOf('@') < 0) {
@@ -35,15 +37,17 @@ class UserListItem extends Component {
 		return this._status = 'valid';
 	}
 
-	_handleToggleInvitation() {
+	_handleToggleInvitation(e) {
+		e.preventDefault();
+		
 		return this.emit(
 			'toggleInvitation',
 			Object.assign(
 				{
 					email: this.email
 				},
-				this.id ? {
-					id: this.id,
+				this.userId ? {
+					userId: this.userId,
 					name: this.name,
 					thumbnail: this.thumbnail
 				} : {}
@@ -56,7 +60,7 @@ class UserListItem extends Component {
 Soy.register(UserListItem, template);
 
 UserListItem.STATE = {
-	id: Config.oneOfType(
+	userId: Config.oneOfType(
 		[
 			Config.string(),
 			Config.number()
