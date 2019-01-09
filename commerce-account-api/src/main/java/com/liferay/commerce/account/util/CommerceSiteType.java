@@ -25,24 +25,21 @@ public enum CommerceSiteType {
 	B2B(CommerceAccountConstants.B2B_SITE_TYPE),
 	B2C_B2B(CommerceAccountConstants.B2C_B2B_SITE_TYPE);
 
-	final int oldType;
-
 	public static CommerceSiteType valueOf(int cst) {
-		switch (cst) {
-
-			case CommerceAccountConstants.B2C_SITE_TYPE:
-				return B2C;
-
-			case CommerceAccountConstants.B2B_SITE_TYPE:
-				return B2B;
-
-			case CommerceAccountConstants.B2C_B2B_SITE_TYPE:
-				return B2C_B2B;
-
-			default:
-				throw new IllegalArgumentException("argument out of range");
+		if (cst == CommerceAccountConstants.B2C_SITE_TYPE) {
+			return B2C;
 		}
+		else if (cst == CommerceAccountConstants.B2B_SITE_TYPE) {
+			return B2B;
+		}
+		else if (cst == CommerceAccountConstants.B2C_B2B_SITE_TYPE) {
+			return B2C_B2B;
+		}
+
+		throw new IllegalArgumentException("argument out of range");
 	}
+
+	protected final int oldType;
 
 	private CommerceSiteType(int oldType) {
 		this.oldType = oldType;
