@@ -41,11 +41,11 @@ public class CommerceVirtualOrderItemFinderImpl
 	public static final String COUNT_BY_G_C_A =
 		CommerceVirtualOrderItemFinder.class.getName() + ".countByG_C_A";
 
-	public static final String FIND_BY_G_C_A =
-		CommerceVirtualOrderItemFinder.class.getName() + ".findByG_C_A";
-
 	public static final String FIND_BY_END_DATE =
 		CommerceVirtualOrderItemFinder.class.getName() + ".findByEndDate";
+
+	public static final String FIND_BY_G_C_A =
+		CommerceVirtualOrderItemFinder.class.getName() + ".findByG_C_A";
 
 	@Override
 	public int countByG_C(long groupId, long commerceAccountId) {
@@ -88,6 +88,35 @@ public class CommerceVirtualOrderItemFinderImpl
 	}
 
 	@Override
+	public List<CommerceVirtualOrderItem> findByEndDate(Date endDate) {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), FIND_BY_END_DATE);
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity(
+				"CommerceVirtualOrderItem", CommerceVirtualOrderItemImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(endDate);
+
+			return (List<CommerceVirtualOrderItem>)QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
 	public List<CommerceVirtualOrderItem> findByG_C(
 		long groupId, long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator) {
@@ -113,35 +142,6 @@ public class CommerceVirtualOrderItemFinderImpl
 
 			return (List<CommerceVirtualOrderItem>)QueryUtil.list(
 				q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	@Override
-	public List<CommerceVirtualOrderItem> findByEndDate(Date endDate) {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = _customSQL.get(getClass(), FIND_BY_END_DATE);
-
-			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-			q.addEntity(
-				"CommerceVirtualOrderItem", CommerceVirtualOrderItemImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(endDate);
-
-			return (List<CommerceVirtualOrderItem>)QueryUtil.list(
-				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

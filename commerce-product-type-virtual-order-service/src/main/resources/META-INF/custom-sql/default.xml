@@ -19,6 +19,18 @@
 				(CommerceVirtualOrderItem.active_ = true)
 		]]>
 	</sql>
+	<sql id="com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemFinder.findByEndDate">
+		<![CDATA[
+			SELECT
+				CommerceVirtualOrderItem.*
+			FROM
+				CommerceVirtualOrderItem
+			WHERE
+				(CommerceVirtualOrderItem.active_ = true) AND
+				(CommerceVirtualOrderItem.endDate < ?) AND
+				(CommerceVirtualOrderItem.endDate IS NOT NULL)
+		]]>
+	</sql>
 	<sql id="com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemFinder.findByG_C_A">
 		<![CDATA[
 			SELECT
@@ -37,18 +49,6 @@
 				(CommerceVirtualOrderItem.active_ = true)
 			ORDER BY
 				CommerceVirtualOrderItem.createDate
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemFinder.findByEndDate">
-		<![CDATA[
-			SELECT
-				CommerceVirtualOrderItem.*
-			FROM
-				CommerceVirtualOrderItem
-			WHERE
-				(CommerceVirtualOrderItem.active_ = true) AND
-				(CommerceVirtualOrderItem.endDate < ?) AND
-				(CommerceVirtualOrderItem.endDate IS NOT NULL)
 		]]>
 	</sql>
 </custom-sql>
