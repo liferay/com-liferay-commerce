@@ -53,6 +53,7 @@ class CPDefinitionOptionsEditor extends Component {
 								).then(
 									(jsonResponse) => {
 										instance.cpDefinitionId = jsonResponse.cpDefinitionId.toString();
+
 										instance.updateState();
 									}
 								);
@@ -112,7 +113,7 @@ class CPDefinitionOptionsEditor extends Component {
 		}
 	}
 
-	_handleoptionDeleted(event) {
+	_handleOptionDeleted(event) {
 		this.cpDefinitionId = event.cpDefinitionId.toString();
 
 		this._currentOption = null;
@@ -182,27 +183,37 @@ class CPDefinitionOptionsEditor extends Component {
 		let instance = this;
 
 		var url = new URL(window.location.href);
-		var cpDefinitionOptionsURL = new URL(instance.cpDefinitionOptionsURL);
-		var cpDefinitionOptionValueRelURL = new URL(instance.cpDefinitionOptionValueRelURL);
-		var cpDefinitionOptionValueRelsURL = new URL(instance.cpDefinitionOptionValueRelsURL);
 
-		var cpDefinitionId = url.searchParams.get(instance.namespace + 'cpDefinitionId');
+		var urlCPDefinitionId = url.searchParams.get(instance.namespace + 'cpDefinitionId');
 
-		if (cpDefinitionId > instance.cpDefinitionId || !instance.cpDefinitionId) {
-			instance.cpDefinitionId = cpDefinitionId;
-			cpDefinitionId = 0;
-		}
+		if (urlCPDefinitionId != instance.cpDefinitionId) {
+			var cpDefinitionId = Math.max(urlCPDefinitionId, instance.cpDefinitionId || 0);
 
-		if (cpDefinitionId != instance.cpDefinitionId) {
-			url.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
-			cpDefinitionOptionsURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
-			cpDefinitionOptionValueRelURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
-			cpDefinitionOptionValueRelsURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+			instance.cpDefinitionId = cpDefinitionId.toString();
 
-			window.history.pushState({}, '', url);
+			var cpDefinitionOptionsURL = new URL(instance.cpDefinitionOptionsURL);
+
+			cpDefinitionOptionsURL.searchParams.set(instance.namespace + 'cpDefinitionId', cpDefinitionId);
+
 			instance.cpDefinitionOptionsURL = cpDefinitionOptionsURL.href;
+
+			var cpDefinitionOptionValueRelURL = new URL(instance.cpDefinitionOptionValueRelURL);
+
+			cpDefinitionOptionValueRelURL.searchParams.set(instance.namespace + 'cpDefinitionId', cpDefinitionId);
+
 			instance.cpDefinitionOptionValueRelURL = cpDefinitionOptionValueRelURL.href;
+
+			var cpDefinitionOptionValueRelsURL = new URL(instance.cpDefinitionOptionValueRelsURL);
+
+			cpDefinitionOptionValueRelsURL.searchParams.set(instance.namespace + 'cpDefinitionId', cpDefinitionId);
+
 			instance.cpDefinitionOptionValueRelsURL = cpDefinitionOptionValueRelsURL.href;
+
+			if (urlCPDefinitionId != cpDefinitionId) {
+				url.searchParams.set(instance.namespace + 'cpDefinitionId', cpDefinitionId);
+
+				window.history.pushState({}, '', url);
+			}
 		}
 	}
 }
