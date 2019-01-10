@@ -75,13 +75,11 @@ public class CommerceAccountFinderImpl
 
 			String keywords = (String)queryDefinition.getAttribute("keywords");
 
-			if (Validator.isNotNull(keywords)) {
-				keywords = "%" + keywords + "%";
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "AND (CommerceAccount.name LIKE ?)", StringPool.BLANK);
-			}
+			String[] names = _customSQL.keywords(keywords);
+
+			sql = _customSQL.replaceKeywords(
+				sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
+				names);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -144,13 +142,11 @@ public class CommerceAccountFinderImpl
 
 			String keywords = (String)queryDefinition.getAttribute("keywords");
 
-			if (Validator.isNotNull(keywords)) {
-				keywords = "%" + keywords + "%";
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "AND (CommerceAccount.name LIKE ?)", StringPool.BLANK);
-			}
+			String[] names = _customSQL.keywords(keywords);
+
+			sql = _customSQL.replaceKeywords(
+				sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
+				names);
 
 			boolean B2B = (boolean)queryDefinition.getAttribute("B2B");
 			boolean B2C = (boolean)queryDefinition.getAttribute("B2C");
