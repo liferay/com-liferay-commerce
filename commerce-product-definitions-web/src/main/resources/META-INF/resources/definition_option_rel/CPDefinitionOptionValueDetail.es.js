@@ -29,8 +29,8 @@ class CPDefinitionOptionValueDetail extends Component {
 
 		var url = new URL(this.cpDefinitionOptionValueRelURL);
 
-		url.searchParams.append(this.namespace + 'cpDefinitionOptionValueRelId', cpDefinitionOptionValueRelId);
 		url.searchParams.append(this.namespace + 'cpDefinitionId', this.cpDefinitionId);
+		url.searchParams.append(this.namespace + 'cpDefinitionOptionValueRelId', cpDefinitionOptionValueRelId);
 
 		fetch(
 			url,
@@ -166,17 +166,19 @@ class CPDefinitionOptionValueDetail extends Component {
 		let instance = this;
 
 		var url = new URL(window.location.href);
-		var cpDefinitionOptionValueRelURL = new URL(instance.cpDefinitionOptionValueRelURL);
 
 		var cpDefinitionId = url.searchParams.get(instance.namespace + 'cpDefinitionId');
 
 		if (instance.cpDefinitionId && (cpDefinitionId != instance.cpDefinitionId)) {
-			url.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+			var cpDefinitionOptionValueRelURL = new URL(instance.cpDefinitionOptionValueRelURL);
 
 			cpDefinitionOptionValueRelURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
 
-			window.history.pushState({}, '', url);
 			instance.cpDefinitionOptionValueRelURL = cpDefinitionOptionValueRelURL.href;
+
+			url.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+
+			window.history.pushState({}, '', url);
 		}
 	}
 }
