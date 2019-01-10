@@ -24,10 +24,12 @@ import com.liferay.commerce.product.internal.catalog.IndexCPCatalogEntryImpl;
 import com.liferay.commerce.product.internal.search.CPDefinitionSearcher;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -86,79 +88,10 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 	public String getFriendlyURL(long cpDefinitionId, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		long classNameId = _portal.getClassNameId(CPDefinition.class);
-
-		CPFriendlyURLEntry cpFriendlyURLEntry =
-			_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-				themeDisplay.getScopeGroupId(), classNameId, cpDefinitionId,
-				themeDisplay.getLanguageId(), true);
-
-		if (cpFriendlyURLEntry == null) {
-			cpFriendlyURLEntry =
-				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-					themeDisplay.getScopeGroupId(), classNameId, cpDefinitionId,
-					LocaleUtil.toLanguageId(
-						themeDisplay.getSiteDefaultLocale()),
-					true);
-		}
-
-		if (cpFriendlyURLEntry == null) {
-			if (_log.isInfoEnabled()) {
-				_log.info("No friendly URL found for " + cpDefinitionId);
-			}
-
-			return StringPool.BLANK;
-		}
-
-		Layout layout = null;
-
-		Group group = themeDisplay.getScopeGroup();
-
-		String layoutUuid = _cpDefinitionLocalService.getLayoutUuid(
+		CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
 			cpDefinitionId);
 
-		if (Validator.isNotNull(layoutUuid)) {
-			try {
-				layout = _layoutLocalService.getLayoutByUuidAndGroupId(
-					layoutUuid, group.getGroupId(), true);
-			}
-			catch (PortalException pe) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(pe, pe);
-				}
-			}
-
-			if (layout == null) {
-				try {
-					layout = _layoutLocalService.getLayoutByUuidAndGroupId(
-						layoutUuid, group.getGroupId(), false);
-				}
-				catch (PortalException pe) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(pe, pe);
-					}
-				}
-			}
-		}
-
-		if (layout == null) {
-			long plid = _portal.getPlidFromPortletId(
-				group.getGroupId(), CPPortletKeys.CP_CONTENT_WEB);
-
-			if (plid > 0) {
-				layout = _layoutLocalService.getLayout(plid);
-			}
-		}
-
-		if (layout == null) {
-			layout = themeDisplay.getLayout();
-		}
-
-		String currentSiteURL = _portal.getGroupFriendlyURL(
-			layout.getLayoutSet(), themeDisplay);
-
-		return currentSiteURL + CPConstants.SEPARATOR_PRODUCT_URL +
-			cpFriendlyURLEntry.getUrlTitle();
+		return _getFriendlyURL(cpDefinition.getCProductId(), themeDisplay);
 	}
 
 	@Override
@@ -207,6 +140,86 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 		searchContext.setStart(start);
 
 		return cpDefinitionSearcher;
+	}
+
+	private String _getFriendlyURL(long cProductId, ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		long classNameId = _portal.getClassNameId(CProduct.class);
+
+		CPFriendlyURLEntry cpFriendlyURLEntry =
+			_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
+				themeDisplay.getScopeGroupId(), classNameId, cProductId,
+				themeDisplay.getLanguageId(), true);
+
+		if (cpFriendlyURLEntry == null) {
+			cpFriendlyURLEntry =
+				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
+					themeDisplay.getScopeGroupId(), classNameId, cProductId,
+					LocaleUtil.toLanguageId(
+						themeDisplay.getSiteDefaultLocale()),
+					true);
+		}
+
+		if (cpFriendlyURLEntry == null) {
+			if (_log.isInfoEnabled()) {
+				_log.info("No friendly URL found for " + cProductId);
+			}
+
+			return StringPool.BLANK;
+		}
+
+		Layout layout = null;
+
+		Group group = themeDisplay.getScopeGroup();
+
+		CProduct cProduct = _cProductLocalService.getCProduct(cProductId);
+
+		String layoutUuid = _cpDefinitionLocalService.getLayoutUuid(
+			cProduct.getPublishedCPDefinitionId());
+
+		if (Validator.isNotNull(layoutUuid)) {
+			try {
+				layout = _layoutLocalService.getLayoutByUuidAndGroupId(
+					layoutUuid, group.getGroupId(), true);
+			}
+			catch (PortalException pe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(pe, pe);
+				}
+			}
+
+			if (layout == null) {
+				try {
+					layout = _layoutLocalService.getLayoutByUuidAndGroupId(
+						layoutUuid, group.getGroupId(), false);
+				}
+				catch (PortalException pe) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(pe, pe);
+					}
+				}
+			}
+		}
+
+		if (layout == null) {
+			long plid = _portal.getPlidFromPortletId(
+				group.getGroupId(), CPPortletKeys.CP_CONTENT_WEB);
+
+			if (plid > 0) {
+				layout = _layoutLocalService.getLayout(plid);
+			}
+		}
+
+		if (layout == null) {
+			layout = themeDisplay.getLayout();
+		}
+
+		String currentSiteURL = _portal.getGroupFriendlyURL(
+			layout.getLayoutSet(), themeDisplay);
+
+		return currentSiteURL + CPConstants.SEPARATOR_PRODUCT_URL +
+			cpFriendlyURLEntry.getUrlTitle();
 	}
 
 	private String _getOrderByCol(String sortField, Locale locale) {
@@ -266,6 +279,9 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 
 	@Reference
 	private CPFriendlyURLEntryLocalService _cpFriendlyURLEntryLocalService;
+
+	@Reference
+	private CProductLocalService _cProductLocalService;
 
 	@Reference
 	private LayoutLocalService _layoutLocalService;
