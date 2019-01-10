@@ -332,11 +332,11 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 
 	@Override
 	public String getURL(String languageId) {
-		long classNameId = PortalUtil.getClassNameId(CPDefinition.class);
+		long classNameId = PortalUtil.getClassNameId(CProduct.class);
 
 		Map<String, String> languageIdToUrlTitleMap =
 			CPFriendlyURLEntryLocalServiceUtil.getLanguageIdToUrlTitleMap(
-				getGroupId(), classNameId, getCPDefinitionId());
+				getGroupId(), classNameId, getCProductId());
 
 		return languageIdToUrlTitleMap.get(languageId);
 	}
