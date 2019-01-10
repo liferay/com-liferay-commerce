@@ -859,6 +859,7 @@
 		<!-- Other fields -->
 
 		<column name="publishedCPDefinitionId" type="long" />
+		<column name="latestVersion" type="int" />
 
 		<!-- Order -->
 
