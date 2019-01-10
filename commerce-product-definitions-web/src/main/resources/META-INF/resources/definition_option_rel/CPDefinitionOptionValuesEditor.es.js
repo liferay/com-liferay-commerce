@@ -138,20 +138,25 @@ class CPDefinitionOptionValuesEditor extends Component {
 		let instance = this;
 
 		var url = new URL(window.location.href);
-		var cpDefinitionOptionValueRelURL = new URL(instance.cpDefinitionOptionValueRelURL);
-		var cpDefinitionOptionValueRelsURL = new URL(instance.cpDefinitionOptionValueRelsURL);
 
 		var cpDefinitionId = url.searchParams.get(instance.namespace + 'cpDefinitionId');
 
 		if (instance.cpDefinitionId && (cpDefinitionId != instance.cpDefinitionId)) {
-			url.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+			var cpDefinitionOptionValueRelURL = new URL(instance.cpDefinitionOptionValueRelURL);
 
 			cpDefinitionOptionValueRelURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+
+			instance.cpDefinitionOptionValueRelURL = cpDefinitionOptionValueRelURL.href;
+
+			var cpDefinitionOptionValueRelsURL = new URL(instance.cpDefinitionOptionValueRelsURL);
+
 			cpDefinitionOptionValueRelsURL.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
 
-			window.history.pushState({}, '', url);
-			instance.cpDefinitionOptionValueRelURL = cpDefinitionOptionValueRelURL.href;
 			instance.cpDefinitionOptionValueRelsURL = cpDefinitionOptionValueRelsURL.href;
+
+			url.searchParams.set(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
+
+			window.history.pushState({}, '', url);
 		}
 	}
 }

@@ -112,8 +112,6 @@ public class CPDefinitionOptionRelLocalServiceImpl
 
 			httpServletRequest.setAttribute(
 				"versionable#" + cpDefinitionId, Boolean.FALSE);
-
-			serviceContext.setRequest(httpServletRequest);
 		}
 
 		cpDefinitionOptionRel.setUuid(serviceContext.getUuid());
