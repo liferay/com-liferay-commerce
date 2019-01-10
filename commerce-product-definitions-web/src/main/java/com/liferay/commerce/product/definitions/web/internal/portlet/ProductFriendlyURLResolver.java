@@ -103,7 +103,7 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		if (!cpFriendlyURLEntry.isMain()) {
 			cpFriendlyURLEntry =
 				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-					groupId, classNameId, cpFriendlyURLEntry.getPrimaryKey(),
+					groupId, classNameId, cpFriendlyURLEntry.getClassPK(),
 					languageId, true);
 		}
 
