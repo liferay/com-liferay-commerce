@@ -51,7 +51,24 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 		cProduct.setCreateDate(now);
 		cProduct.setModifiedDate(now);
 
+		cProduct.setLatestVersion(1);
+
 		return cProductPersistence.update(cProduct);
+	}
+
+	@Override
+	public int increment(long cProductId) throws PortalException {
+		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+
+		Date now = new Date();
+
+		cProduct.setModifiedDate(now);
+
+		cProduct.setLatestVersion(cProduct.getLatestVersion() + 1);
+
+		cProductPersistence.update(cProduct);
+
+		return cProduct.getLatestVersion();
 	}
 
 	@Override
