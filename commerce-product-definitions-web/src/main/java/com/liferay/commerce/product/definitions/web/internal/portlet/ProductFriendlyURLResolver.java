@@ -24,9 +24,11 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPRulesThreadLocal;
@@ -79,7 +81,7 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		String urlTitle = friendlyURL.substring(
 			CPConstants.SEPARATOR_PRODUCT_URL.length());
 
-		long classNameId = _portal.getClassNameId(CPDefinition.class);
+		long classNameId = _portal.getClassNameId(CProduct.class);
 
 		CPFriendlyURLEntry cpFriendlyURLEntry =
 			_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
@@ -109,8 +111,11 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 		_initCPRulesThreadLocal(groupId, httpServletRequest);
 
+		CProduct cProduct = _cProductLocalService.getCProduct(
+			cpFriendlyURLEntry.getClassPK());
+
 		CPCatalogEntry cpCatalogEntry = _cpDefinitionHelper.getCPCatalogEntry(
-			cpFriendlyURLEntry.getClassPK(), locale);
+			cProduct.getPublishedCPDefinitionId(), locale);
 
 		Layout layout = getProductLayout(
 			groupId, privateLayout, cpCatalogEntry.getCPDefinitionId());
@@ -193,7 +198,7 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 		String urlTitle = friendlyURL.substring(
 			CPConstants.SEPARATOR_PRODUCT_URL.length());
-		long classNameId = _portal.getClassNameId(CPDefinition.class);
+		long classNameId = _portal.getClassNameId(CProduct.class);
 
 		CPFriendlyURLEntry cpFriendlyURLEntry =
 			_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
@@ -223,8 +228,11 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 		_initCPRulesThreadLocal(groupId, httpServletRequest);
 
+		CProduct cProduct = _cProductLocalService.getCProduct(
+			cpFriendlyURLEntry.getClassPK());
+
 		Layout layout = getProductLayout(
-			groupId, privateLayout, cpFriendlyURLEntry.getClassPK());
+			groupId, privateLayout, cProduct.getPublishedCPDefinitionId());
 
 		return new LayoutFriendlyURLComposite(
 			layout, getURLSeparator() + cpFriendlyURLEntry.getUrlTitle());
@@ -306,6 +314,9 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 	@Reference
 	private CPFriendlyURLEntryLocalService _cpFriendlyURLEntryLocalService;
+
+	@Reference
+	private CProductLocalService _cProductLocalService;
 
 	@Reference
 	private CPRuleLocalService _cpRuleLocalService;

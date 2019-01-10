@@ -25,9 +25,11 @@ import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPInstanceUpgradePro
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CProductUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Ethan Bustad
@@ -56,7 +58,7 @@ public class CommerceProductUpgradeStepRegistrator
 			new CPDefinitionLinkUpgradeProcess(),
 			new CPDefinitionOptionRelUpgradeProcess(),
 			new CPDefinitionUpgradeProcess(), new CProductUpgradeProcess(),
-			new CPFriendlyURLEntryUpgradeProcess(),
+			new CPFriendlyURLEntryUpgradeProcess(_classNameLocalService),
 			new CPInstanceUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
@@ -74,5 +76,8 @@ public class CommerceProductUpgradeStepRegistrator
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceProductUpgradeStepRegistrator.class);
+
+	@Reference
+	private ClassNameLocalService _classNameLocalService;
 
 }
