@@ -22,12 +22,19 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.frontend.internal.account.CommerceAccountResource;
 import com.liferay.commerce.frontend.internal.account.model.Account;
 import com.liferay.commerce.frontend.internal.account.model.AccountList;
+import com.liferay.commerce.frontend.internal.order.CommerceOrderResource;
+import com.liferay.commerce.frontend.internal.order.model.Order;
+import com.liferay.commerce.frontend.internal.order.model.OrderList;
 import com.liferay.commerce.frontend.internal.search.model.SearchItemModel;
 import com.liferay.commerce.frontend.internal.search.util.CommerceSearchUtil;
+import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -67,6 +74,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @Component(service = CommerceSearchResource.class)
 public class CommerceSearchResource {
@@ -92,6 +100,7 @@ public class CommerceSearchResource {
 					themeDisplay.getCompanyId(), layout.getGroupId(),
 					queryString, themeDisplay));
 			searchItemModels.addAll(searchAccounts(queryString, themeDisplay));
+			searchItemModels.addAll(searchOrders(queryString, themeDisplay));
 
 			String url = _commerceSearchUtil.getSearchFriendlyURL(themeDisplay);
 
@@ -159,6 +168,53 @@ public class CommerceSearchResource {
 			SearchItemModel searchItemModel = new SearchItemModel(
 				"category",
 				LanguageUtil.get(themeDisplay.getLocale(), "accounts"));
+
+			searchItemModel.setUrl(url);
+
+			searchItemModels.add(searchItemModel);
+		}
+
+		return searchItemModels;
+	}
+
+	protected List<SearchItemModel> searchOrders(
+			String queryString, ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		List<SearchItemModel> searchItemModels = new ArrayList<>();
+
+		OrderList orderList = _commerceOrderResource.getOrderList(
+			themeDisplay.getScopeGroupId(), queryString, 1, 5);
+
+		searchItemModels.add(
+			new SearchItemModel(
+				"label", LanguageUtil.get(themeDisplay.getLocale(), "orders")));
+
+		for (Order order : orderList.getOrders()) {
+			SearchItemModel searchItemModel = new SearchItemModel(
+				"item", HtmlUtil.escape(String.valueOf(order.getOrderId())));
+
+			searchItemModel.setImage(StringPool.BLANK);
+
+			CommerceOrder commerceOrder =
+				_commerceOrderService.getCommerceOrder(order.getOrderId());
+
+			searchItemModel.setUrl(
+				String.valueOf(
+					_commerceOrderHttpHelper.getCommerceCartPortletURL(
+						themeDisplay.getRequest(), commerceOrder)));
+
+			searchItemModels.add(searchItemModel);
+		}
+
+		String url = _commerceSearchUtil.getOrdersFriendlyURL(themeDisplay);
+
+		if (Validator.isNotNull(url)) {
+			url = _http.addParameter(url, "q", queryString);
+
+			SearchItemModel searchItemModel = new SearchItemModel(
+				"category",
+				LanguageUtil.get(themeDisplay.getLocale(), "orders"));
 
 			searchItemModel.setUrl(url);
 
@@ -281,6 +337,15 @@ public class CommerceSearchResource {
 
 	@Reference
 	private CommerceAccountResource _commerceAccountResource;
+
+	@Reference
+	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
+
+	@Reference
+	private CommerceOrderResource _commerceOrderResource;
+
+	@Reference
+	private CommerceOrderService _commerceOrderService;
 
 	@Reference
 	private CommerceSearchUtil _commerceSearchUtil;
