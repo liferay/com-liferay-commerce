@@ -18,15 +18,20 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.impl.CommerceOrderImpl;
 import com.liferay.commerce.service.persistence.CommerceOrderFinder;
 import com.liferay.petra.string.StringBundler;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.dao.orm.custom.sql.CustomSQL;
+import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -35,8 +40,85 @@ import java.util.List;
 public class CommerceOrderFinderImpl
 	extends CommerceOrderFinderBaseImpl implements CommerceOrderFinder {
 
+	public static final String COUNT_BY_G_U_O =
+		CommerceOrderFinder.class.getName() + ".countByG_U_O";
+
 	public static final String FIND_BY_G_O =
 		CommerceOrderFinder.class.getName() + ".findByG_O";
+
+	public static final String FIND_BY_G_U_O =
+		CommerceOrderFinder.class.getName() + ".findByG_U_O";
+
+	@Override
+	public int countByU_O(
+		long userId, QueryDefinition<CommerceOrder> queryDefinition) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), COUNT_BY_G_U_O);
+
+			sql = StringUtil.replace(
+				sql, "[$USER_ID$]", String.valueOf(userId));
+
+			Integer orderStatus = (Integer)queryDefinition.getAttribute(
+				"orderStatus");
+
+			if (orderStatus != null) {
+				sql = StringUtil.replace(
+					sql, "[$ORDER_STATUS$]",
+					_getOrderStatusClause(orderStatus));
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$ORDER_STATUS$]", StringPool.BLANK);
+			}
+
+			String keywords = (String)queryDefinition.getAttribute("keywords");
+
+			String[] names = _customSQL.keywords(keywords);
+
+			sql = _customSQL.replaceKeywords(
+				sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
+				names);
+
+			int groupId = (int)queryDefinition.getAttribute("groupId");
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (Validator.isNotNull(keywords)) {
+				qPos.add(keywords);
+			}
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			int count = 0;
+
+			Iterator<Long> itr = q.iterate();
+
+			while (itr.hasNext()) {
+				Long l = itr.next();
+
+				if (l != null) {
+					count += l.intValue();
+				}
+			}
+
+			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
 
 	@Override
 	public List<CommerceOrder> findByG_O(long groupId, int[] orderStatuses) {
@@ -68,6 +150,67 @@ public class CommerceOrderFinderImpl
 		}
 	}
 
+	@Override
+	public List<CommerceOrder> findByU_O(
+		long userId, QueryDefinition<CommerceOrder> queryDefinition) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), FIND_BY_G_U_O);
+
+			sql = StringUtil.replace(
+				sql, "[$USER_ID$]", String.valueOf(userId));
+
+			Integer orderStatus = (Integer)queryDefinition.getAttribute(
+				"orderStatus");
+
+			if (orderStatus != null) {
+				sql = StringUtil.replace(
+					sql, "[$ORDER_STATUS$]",
+					_getOrderStatusClause(orderStatus));
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$ORDER_STATUS$]", StringPool.BLANK);
+			}
+
+			String keywords = (String)queryDefinition.getAttribute("keywords");
+
+			String[] names = _customSQL.keywords(keywords);
+
+			sql = _customSQL.replaceKeywords(
+				sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
+				names);
+
+			int groupId = (int)queryDefinition.getAttribute("groupId");
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity(CommerceOrderImpl.TABLE_NAME, CommerceOrderImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (Validator.isNotNull(keywords)) {
+				qPos.add(keywords);
+			}
+
+			return (List<CommerceOrder>)QueryUtil.list(
+				q, getDialect(), queryDefinition.getStart(),
+				queryDefinition.getEnd());
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	protected String replaceOrderStatus(String sql, int[] orderStatuses) {
 		StringBundler sb = new StringBundler(orderStatuses.length);
 
@@ -80,6 +223,10 @@ public class CommerceOrderFinderImpl
 		}
 
 		return StringUtil.replace(sql, "[$ORDER_STATUS$]", sb.toString());
+	}
+
+	private String _getOrderStatusClause(int orderStatus) {
+		return "(CommerceOrder.orderStatus = " + orderStatus + " ) AND";
 	}
 
 	@ServiceReference(type = CustomSQL.class)

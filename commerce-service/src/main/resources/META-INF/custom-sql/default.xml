@@ -21,6 +21,44 @@
 				CommerceCountry.priority
 		]]>
 	</sql>
+	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.countByG_U_O">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT CommerceOrder.commerceOrderId) AS COUNT_VALUE
+			FROM
+				CommerceOrder
+			LEFT JOIN
+			 	CommerceAccount ON
+			 		CommerceAccount.commerceAccountId = CommerceOrder.commerceOrderId
+			LEFT JOIN
+			 	CommerceAccountUserRel ON
+			 		CommerceAccountUserRel.commerceAccountId = CommerceAccount.commerceAccountId
+			LEFT JOIN
+				CommerceAccountOrganizationRel ON
+					CommerceAccountOrganizationRel.commerceAccountId = CommerceAccount.commerceAccountId
+			LEFT JOIN
+				Organization_ ON
+					Organization_.organizationId = CommerceAccountOrganizationRel.organizationId
+			LEFT JOIN
+				Organization_ Org2 ON
+					Org2.treePath LIKE Organization_.treePath
+			LEFT JOIN
+				Users_Orgs ON
+					Users_Orgs.organizationId = Org2.organizationId
+			WHERE
+				[$ORDER_STATUS$]
+				(CommerceOrder.groupId = ?) AND
+				(
+					(Users_Orgs.userId IS NULL) OR
+					(Users_Orgs.userId = [$USER_ID$])
+				) AND
+				(
+					(CommerceAccountUserRel.userId IS NULL) OR
+					(CommerceAccountUserRel.userId = [$USER_ID$])
+				) AND
+				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
+		]]>
+	</sql>
 	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.findByG_O">
 		<![CDATA[
 			SELECT
@@ -34,6 +72,44 @@
 				(CommerceOrder.groupId = ?) AND
 				(CommerceOrder.orderStatus IN ([$ORDER_STATUS$])) AND
 				(CommerceOrderItem.quantity > CommerceOrderItem.shippedQuantity)
+		]]>
+	</sql>
+	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.findByG_U_O">
+		<![CDATA[
+			SELECT
+				DISTINCT *
+			FROM
+				CommerceOrder
+			INNER JOIN
+			 	CommerceAccount ON
+			 		CommerceAccount.commerceAccountId = CommerceOrder.commerceOrderId
+			LEFT JOIN
+			 	CommerceAccountUserRel ON
+			 		CommerceAccountUserRel.commerceAccountId = CommerceAccount.commerceAccountId
+			LEFT JOIN
+				CommerceAccountOrganizationRel ON
+					CommerceAccountOrganizationRel.commerceAccountId = CommerceAccount.commerceAccountId
+			LEFT JOIN
+				Organization_ ON
+					Organization_.organizationId = CommerceAccountOrganizationRel.organizationId
+			LEFT JOIN
+				Organization_ Org2 ON
+					Org2.treePath LIKE Organization_.treePath
+			LEFT JOIN
+				Users_Orgs ON
+					Users_Orgs.organizationId = Org2.organizationId
+			WHERE
+				[$ORDER_STATUS$]
+				(CommerceOrder.groupId = ?) AND
+				(
+					(Users_Orgs.userId IS NULL) OR
+					(Users_Orgs.userId = [$USER_ID$])
+				) AND
+				(
+					(CommerceAccountUserRel.userId IS NULL) OR
+					(CommerceAccountUserRel.userId = [$USER_ID$])
+				) AND
+				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.service.persistence.CommerceOrderItemFinder.findByAvailableQuantity">
