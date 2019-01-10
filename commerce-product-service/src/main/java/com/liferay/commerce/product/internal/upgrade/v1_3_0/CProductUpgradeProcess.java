@@ -57,7 +57,8 @@ public class CProductUpgradeProcess extends UpgradeProcess {
 		String insertCProductSQL = StringBundler.concat(
 			"insert into CProduct (uuid_, CProductId, groupId, companyId, ",
 			"userId, userName, createDate, modifiedDate, ",
-			"publishedCPDefinitionId) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			"publishedCPDefinitionId, latestVersion) values (?, ?, ?, ?, ?, ",
+			"?, ?, ?, ?, 1)");
 		String updateCPDefinitionSQL =
 			"update CPDefinition set CProductId = ?, version = 1 where " +
 				"CPDefinitionId = ?";

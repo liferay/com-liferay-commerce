@@ -491,7 +491,9 @@ public class CPDefinitionLocalServiceImpl
 
 		newCPDefinition.setModifiedDate(new Date());
 
-		newCPDefinition.setVersion(originalCPDefinition.getVersion() + 1);
+		newCPDefinition.setVersion(
+			cProductLocalService.increment(
+				originalCPDefinition.getCProductId()));
 
 		cpDefinitionPersistence.update(newCPDefinition);
 
