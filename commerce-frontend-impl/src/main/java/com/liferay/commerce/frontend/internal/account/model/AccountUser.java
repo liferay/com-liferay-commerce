@@ -34,8 +34,8 @@ public class AccountUser {
 		_success = false;
 	}
 
-	public long getUserId() {
-		return _userId;
+	public String getEmail() {
+		return _email;
 	}
 
 	public String[] getErrorMessages() {
@@ -46,16 +46,16 @@ public class AccountUser {
 		return _name;
 	}
 
-	public String getEmail() {
-		return _email;
-	}
-
 	public boolean getSuccess() {
 		return _success;
 	}
 
 	public String getThumbnail() {
 		return _thumbnail;
+	}
+
+	public long getUserId() {
+		return _userId;
 	}
 
 	public void setErrorMessages(String[] errorMessages) {

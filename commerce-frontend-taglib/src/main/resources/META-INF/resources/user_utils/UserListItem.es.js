@@ -39,7 +39,7 @@ class UserListItem extends Component {
 
 	_handleToggleInvitation(e) {
 		e.preventDefault();
-		
+
 		return this.emit(
 			'toggleInvitation',
 			Object.assign(
