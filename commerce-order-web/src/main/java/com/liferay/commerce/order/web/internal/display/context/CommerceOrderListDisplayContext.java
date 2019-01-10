@@ -22,7 +22,6 @@ import com.liferay.commerce.order.web.internal.search.CommerceOrderDisplayTerms;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderSearch;
 import com.liferay.commerce.order.web.internal.search.facet.NegatableMultiValueFacet;
 import com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission;
-import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.search.facet.NegatableSimpleFacet;
 import com.liferay.commerce.service.CommerceOrderLocalService;
@@ -39,7 +38,6 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Field;
@@ -53,7 +51,6 @@ import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
 import com.liferay.portal.kernel.search.facet.collector.TermCollector;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -83,6 +80,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class CommerceOrderListDisplayContext {
 
@@ -90,15 +88,11 @@ public class CommerceOrderListDisplayContext {
 		CommerceOrderLocalService commerceOrderLocalService,
 		CommerceOrderNoteService commerceOrderNoteService,
 		CommerceOrderPriceCalculation commerceOrderPriceCalculation,
-		CommerceOrganizationService commerceOrganizationService,
-		GroupLocalService groupLocalService, JSONFactory jsonFactory,
-		RenderRequest renderRequest) {
+		JSONFactory jsonFactory, RenderRequest renderRequest) {
 
 		_commerceOrderLocalService = commerceOrderLocalService;
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
-		_commerceOrganizationService = commerceOrganizationService;
-		_groupLocalService = groupLocalService;
 		_jsonFactory = jsonFactory;
 
 		_commerceOrderRequestHelper = new CommerceOrderRequestHelper(
@@ -125,16 +119,6 @@ public class CommerceOrderListDisplayContext {
 		}
 
 		return _availableAdvanceStatusKVPs;
-	}
-
-	public List<KeyValuePair> getAvailableOrderOrganizationKVPs()
-		throws PortalException {
-
-		if (_availableOrderOrganizationKVPs == null) {
-			_initSearch();
-		}
-
-		return _availableOrderOrganizationKVPs;
 	}
 
 	public List<KeyValuePair> getAvailableOrderStatusKVPs()
@@ -468,7 +452,6 @@ public class CommerceOrderListDisplayContext {
 		CommerceOrderDisplayTerms commerceOrderDisplayTerms =
 			(CommerceOrderDisplayTerms)_searchContainer.getDisplayTerms();
 
-		_addFacetCommerceAccountId(searchContext, commerceOrderDisplayTerms);
 		_addFacetCreateDate(searchContext, commerceOrderDisplayTerms);
 		_addFacetOrderStatus(searchContext, commerceOrderDisplayTerms);
 
@@ -485,6 +468,8 @@ public class CommerceOrderListDisplayContext {
 			"useSearchResultPermissionFilter", Boolean.FALSE);
 
 		searchContext.setCompanyId(_commerceOrderRequestHelper.getCompanyId());
+		searchContext.setGroupIds(
+			new long[] {_commerceOrderRequestHelper.getScopeGroupId()});
 		searchContext.setKeywords(_keywords);
 		searchContext.setStart(_searchContainer.getStart());
 		searchContext.setEnd(_searchContainer.getEnd());
@@ -631,22 +616,6 @@ public class CommerceOrderListDisplayContext {
 		_availableAdvanceStatusKVPs = _buildFacetKeyValuePairs(
 			searchContext, "advanceStatus", key -> key);
 
-		_availableOrderOrganizationKVPs = _buildFacetKeyValuePairs(
-			searchContext, "orderOrganizationId",
-			key -> {
-				long organizationId = GetterUtil.getLong(key);
-
-				if (organizationId <= 0) {
-					return null;
-				}
-
-				Organization organization =
-					_commerceOrganizationService.getOrganization(
-						organizationId);
-
-				return organization.getName();
-			});
-
 		if (filterByStatuses) {
 			_availableOrderStatusKVPs = _buildFacetKeyValuePairs(
 				searchContext, "orderStatus",
@@ -664,15 +633,12 @@ public class CommerceOrderListDisplayContext {
 	}
 
 	private List<KeyValuePair> _availableAdvanceStatusKVPs;
-	private List<KeyValuePair> _availableOrderOrganizationKVPs;
 	private List<KeyValuePair> _availableOrderStatusKVPs;
 	private final Format _commerceOrderDateFormatDateTime;
 	private final CommerceOrderLocalService _commerceOrderLocalService;
 	private final CommerceOrderNoteService _commerceOrderNoteService;
 	private final CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
-	private final CommerceOrganizationService _commerceOrganizationService;
-	private final GroupLocalService _groupLocalService;
 	private final JSONFactory _jsonFactory;
 	private final String _keywords;
 	private List<NavigationItem> _navigationItems;
