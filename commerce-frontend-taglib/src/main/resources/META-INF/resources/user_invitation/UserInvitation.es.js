@@ -32,9 +32,10 @@ class UserInvitation extends Component {
 
 	_handleCloseModal(e) {
 		e.preventDefault();
+
 		// this.components.modal.show()
+
 		this._isVisible = false;
-		// this.refs.modal.show();
 	}
 
 	syncQuery() {
