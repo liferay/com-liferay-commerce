@@ -66,7 +66,7 @@ Map<String, String> processTypes = (HashMap)request.getAttribute("processTypes")
 						</aui:select>
 					</c:if>
 
-					<aui:input name="className" required="<%= true %>" />
+					<aui:input name="className" />
 					<aui:input name="contextProperties" type="file" />
 					<aui:input name="srcArchive" required="<%= true %>" type="file" />
 				</aui:fieldset>
