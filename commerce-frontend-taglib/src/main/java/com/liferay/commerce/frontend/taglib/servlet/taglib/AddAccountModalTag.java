@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 /**
  * @author Fabio Mastrorilli
  */
-public class UserInvitationTag extends ComponentRendererTag {
+public class AddAccountModalTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
@@ -42,7 +42,7 @@ public class UserInvitationTag extends ComponentRendererTag {
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 
-		setTemplateNamespace("UserInvitation.render");
+		setTemplateNamespace("AddAccountModal.render");
 
 		return super.doStartTag();
 	}
@@ -56,7 +56,7 @@ public class UserInvitationTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/user_invitation/UserInvitation.es");
+			"commerce-frontend-taglib/add_account_modal/AddAccountModal.es");
 	}
 
 }
