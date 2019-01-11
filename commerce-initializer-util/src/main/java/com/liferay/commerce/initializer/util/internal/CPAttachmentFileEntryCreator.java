@@ -15,8 +15,8 @@
 package com.liferay.commerce.initializer.util.internal;
 
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
-import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
+import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.petra.string.StringPool;
@@ -48,7 +48,7 @@ public class CPAttachmentFileEntryCreator {
 
 	public CPAttachmentFileEntry addCPAttachmentFileEntry(
 			ClassedModel classedModel, ClassLoader classLoader,
-			String dependenciesPath, String fileName, double priority,
+			String dependenciesPath, String fileName, double priority, int type,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -66,9 +66,14 @@ public class CPAttachmentFileEntryCreator {
 		}
 
 		File file = null;
-		FileEntry fileEntry = null;
+		FileEntry fileEntry;
 
 		try {
+			fileEntry = _dlAppService.getFileEntry(
+				serviceContext.getScopeGroupId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, fileName);
+		}
+		catch (NoSuchFileEntryException nsfee) {
 			file = FileUtil.createTempFile(inputStream);
 
 			fileEntry = _dlAppService.addFileEntry(
@@ -78,7 +83,9 @@ public class CPAttachmentFileEntryCreator {
 				StringPool.BLANK, file, serviceContext);
 		}
 		finally {
-			FileUtil.delete(file);
+			if (file != null) {
+				FileUtil.delete(file);
+			}
 		}
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
@@ -118,8 +125,7 @@ public class CPAttachmentFileEntryCreator {
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, true, titleMap, null,
-			priority, CPAttachmentFileEntryConstants.TYPE_IMAGE,
-			serviceContext);
+			priority, type, serviceContext);
 	}
 
 	@Reference
