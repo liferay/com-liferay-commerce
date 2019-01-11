@@ -93,8 +93,16 @@ public class OSGiRESTModuleGenerator {
 			"osgi.module.jaxrs.json.package");
 		_modelPackagePath = properties.getProperty("osgi.module.model.package");
 
+		String moduleRootPath = properties.getProperty("osgi.module.root.path");
+
+		if (StringUtils.isEmpty(moduleRootPath)) {
+			_logger.error("You must specify the generated module root path");
+
+			System.exit(-1);
+		}
+
 		_moduleOutputPath = String.format(
-			"%s/%s", properties.getProperty("osgi.module.root.path"),
+			"%s/%s", moduleRootPath,
 			properties.getProperty("osgi.module.name"));
 
 		if ("true".equals(
