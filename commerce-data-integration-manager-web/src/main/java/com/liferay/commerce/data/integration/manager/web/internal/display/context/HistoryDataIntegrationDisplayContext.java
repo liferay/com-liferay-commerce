@@ -38,10 +38,12 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletURL;
@@ -79,7 +81,11 @@ public class HistoryDataIntegrationDisplayContext {
 		httpServletRequest = _portal.getHttpServletRequest(renderRequest);
 		_defaultOrderByCol = "modified-date";
 		_defaultOrderByType = "desc";
-		_simpleDateFormat = new SimpleDateFormat(_datePattern);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		_locale = themeDisplay.getLocale();
 	}
 
 	public String getDeleteHistoryURL(long historyId) throws PortalException {
@@ -110,7 +116,10 @@ public class HistoryDataIntegrationDisplayContext {
 
 	public String getFormattedDate(Date date) {
 		if (date != null) {
-			return _simpleDateFormat.format(date);
+			DateFormat dateFormat = DateFormat.getDateTimeInstance(
+				SimpleDateFormat.SHORT, SimpleDateFormat.LONG, _locale);
+
+			return dateFormat.format(date);
 		}
 
 		return "";
@@ -288,16 +297,15 @@ public class HistoryDataIntegrationDisplayContext {
 
 	private final ActionHelper _actionHelper;
 	private final DataIntegrationRequestHelper _dataIntegrationRequestHelper;
-	private String _datePattern = "yyyy-dd-MM HH:mm:ss";
 	private final String _defaultOrderByCol;
 	private final String _defaultOrderByType;
 	private final DLFileEntryService _dlFileEntryService;
 	private final HistoryLocalService _historyLocalService;
 	private String _keywords;
+	private final Locale _locale;
 	private final Portal _portal;
 	private final PortletResourcePermission _portletResourcePermission;
 	private RowChecker _rowChecker;
 	private SearchContainer<History> _searchContainer;
-	private final SimpleDateFormat _simpleDateFormat;
 
 }
