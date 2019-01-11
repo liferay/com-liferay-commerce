@@ -32,6 +32,11 @@ public class Content {
 		return _schema;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("{mimeType=%s, schema=%s}", _mimeType, _schema);
+	}
+
 	private final String _mimeType;
 	private final Schema _schema;
 
