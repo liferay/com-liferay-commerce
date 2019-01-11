@@ -178,9 +178,21 @@ public class ComponentImporter {
 
 			String type = typeJSONNode.asText();
 
+			String itemsReference = null;
+
+			if (schemaJSONNode.has("items")) {
+				JsonNode itemsJSONNode = schemaJSONNode.get("items");
+
+				if (itemsJSONNode.has("$ref")) {
+					JsonNode referenceJSONNode = itemsJSONNode.get("$ref");
+
+					itemsReference = referenceJSONNode.asText();
+				}
+			}
+
 			ComponentDefinition componentDefinition = new ComponentDefinition(
 				schemaEntry.getKey(), _getPropertyDefinitions(schemaJSONNode),
-				type);
+				type, itemsReference);
 
 			components.add(componentDefinition);
 
