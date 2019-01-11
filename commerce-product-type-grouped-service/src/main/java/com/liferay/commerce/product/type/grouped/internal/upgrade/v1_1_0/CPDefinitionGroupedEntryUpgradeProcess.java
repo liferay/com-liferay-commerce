@@ -41,9 +41,9 @@ public class CPDefinitionGroupedEntryUpgradeProcess extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		_addColumn(
-			CPDefinitionGroupedEntry.class,
+			CPDefinitionGroupedEntryModelImpl.class,
 			CPDefinitionGroupedEntryModelImpl.TABLE_NAME, "entryCProductId",
-			"long");
+			"LONG");
 
 		_addIndexes(CPDefinitionGroupedEntryModelImpl.TABLE_NAME);
 
