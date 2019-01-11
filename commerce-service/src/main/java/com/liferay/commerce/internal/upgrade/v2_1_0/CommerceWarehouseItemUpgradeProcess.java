@@ -71,7 +71,8 @@ public class CommerceWarehouseItemUpgradeProcess extends UpgradeProcess {
 
 			s = connection.createStatement();
 
-			rs = s.executeQuery("select * from CommerceWarehouseItem");
+			rs = s.executeQuery(
+				"select distinct CPInstanceId from CommerceWarehouseItem");
 
 			while (rs.next()) {
 				long cpInstanceId = rs.getLong("CPInstanceId");
