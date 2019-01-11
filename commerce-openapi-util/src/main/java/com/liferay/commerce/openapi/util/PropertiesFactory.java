@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Igor Beslic
  */
-public class ClassPropertiesFactory {
+public class PropertiesFactory {
 
 	public static Properties getPropertiesFor(Class clazz) throws IOException {
 		String configFileName = clazz.getName() + ".config";
@@ -102,7 +102,7 @@ public class ClassPropertiesFactory {
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
-		ClassPropertiesFactory.class);
+		PropertiesFactory.class);
 
 	private static final Map<String, Properties> _classProperties =
 		new ConcurrentHashMap<>();
