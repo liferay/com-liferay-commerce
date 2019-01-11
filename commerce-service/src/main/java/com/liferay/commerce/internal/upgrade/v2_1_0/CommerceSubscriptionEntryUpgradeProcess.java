@@ -12,10 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.product.internal.upgrade.v1_3_0;
+package com.liferay.commerce.internal.upgrade.v2_1_0;
 
-import com.liferay.commerce.product.model.CPDefinitionLink;
-import com.liferay.commerce.product.model.impl.CPDefinitionLinkModelImpl;
+import com.liferay.commerce.model.impl.CommerceSubscriptionEntryModelImpl;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.db.IndexMetadata;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
@@ -23,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -36,20 +38,27 @@ import java.util.Objects;
 /**
  * @author Ethan Bustad
  */
-public class CPDefinitionLinkUpgradeProcess extends UpgradeProcess {
+public class CommerceSubscriptionEntryUpgradeProcess extends UpgradeProcess {
+
+	public CommerceSubscriptionEntryUpgradeProcess(
+		CPDefinitionLocalService cpDefinitionLocalService,
+		CPInstanceLocalService cpInstanceLocalService) {
+
+		_cpDefinitionLocalService = cpDefinitionLocalService;
+		_cpInstanceLocalService = cpInstanceLocalService;
+	}
 
 	@Override
 	protected void doUpgrade() throws Exception {
 		_addColumn(
-			CPDefinitionLinkModelImpl.class,
-			CPDefinitionLinkModelImpl.TABLE_NAME, "CProductId", "LONG");
+			CommerceSubscriptionEntryModelImpl.class,
+			CommerceSubscriptionEntryModelImpl.TABLE_NAME, "CPInstanceUUID",
+			"VARCHAR(75)");
+		_addColumn(
+			CommerceSubscriptionEntryModelImpl.class,
+			CommerceSubscriptionEntryModelImpl.TABLE_NAME, "CProductId", "LONG");
 
-		_renameColumn(
-			CPDefinitionLinkModelImpl.class,
-			CPDefinitionLinkModelImpl.TABLE_NAME, "CPDefinitionId1",
-			"CPDefinitionId LONG");
-
-		_addIndexes(CPDefinitionLinkModelImpl.TABLE_NAME);
+		_addIndexes(CommerceSubscriptionEntryModelImpl.TABLE_NAME);
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -57,21 +66,28 @@ public class CPDefinitionLinkUpgradeProcess extends UpgradeProcess {
 
 		try {
 			ps = connection.prepareStatement(
-				"update CPDefinitionLink set CProductId = ? where " +
-					"CPDefinitionId2 = ?");
+				"update CommerceSubscriptionEntry set CProductId = ?," +
+					"CPInstanceUUID = ? where CPInstanceId = ?");
 
 			s = connection.createStatement();
 
-			rs = s.executeQuery("select * from CPDefinitionLink");
+			rs = s.executeQuery(
+				"select distinct CPInstanceId from CommerceSubscriptionEntry");
 
 			while (rs.next()) {
-				long cpDefinitionId2 = rs.getLong("CPDefinitionId2");
+				long cpInstanceId = rs.getLong("CPInstanceId");
 
-				long cProductId = _getCProductId(cpDefinitionId2);
+				CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+					cpInstanceId);
 
-				ps.setLong(1, cProductId);
+				CPDefinition cpDefinition =
+					_cpDefinitionLocalService.getCPDefinition(
+						cpInstance.getCPDefinitionId());
 
-				ps.setLong(2, cpDefinitionId2);
+				ps.setLong(1, cpDefinition.getCProductId());
+
+				ps.setString(2, cpInstance.getCPInstanceUuid());
+				ps.setLong(3, cpInstanceId);
 
 				ps.execute();
 			}
@@ -81,11 +97,8 @@ public class CPDefinitionLinkUpgradeProcess extends UpgradeProcess {
 			DataAccess.cleanUp(s, rs);
 		}
 
-		_dropIndex(CPDefinitionLinkModelImpl.TABLE_NAME, "IX_31ED1AF");
-		_dropIndex(CPDefinitionLinkModelImpl.TABLE_NAME, "IX_EA724334");
-		_dropIndex(CPDefinitionLinkModelImpl.TABLE_NAME, "IX_F76842CE");
-
-		_dropColumn(CPDefinitionLinkModelImpl.TABLE_NAME, "CPDefinitionId2");
+		runSQL(
+			"alter table CommerceSubscriptionEntry drop column CPInstanceId");
 	}
 
 	private void _addColumn(
@@ -143,102 +156,6 @@ public class CPDefinitionLinkUpgradeProcess extends UpgradeProcess {
 		}
 	}
 
-	private void _dropColumn(String tableName, String columnName)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				String.format(
-					"Dropping column %s from table %s", columnName, tableName));
-		}
-
-		if (hasColumn(tableName, columnName)) {
-			runSQL(
-				StringBundler.concat(
-					"alter table ", tableName, " drop column ", columnName));
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					String.format(
-						"Column %s already does not exist on table %s",
-						columnName, tableName));
-			}
-		}
-	}
-
-	private void _dropIndex(String tableName, String indexName)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				String.format(
-					"Dropping index %s from table %s", indexName, tableName));
-		}
-
-		if (_tableHasIndex(tableName, indexName)) {
-			runSQL(
-				StringBundler.concat(
-					"drop index ", indexName, " on ", tableName));
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					String.format(
-						"Index %s already does not exist on table %s",
-						indexName, tableName));
-			}
-		}
-	}
-
-	private long _getCProductId(long cpDefinitionId) throws Exception {
-		Statement s = null;
-		ResultSet rs = null;
-
-		try {
-			s = connection.createStatement();
-
-			rs = s.executeQuery(
-				"select CProductId from CPDefinition where CPDefinitionId = " +
-					cpDefinitionId);
-
-			if (rs.next()) {
-				return rs.getLong("CProductId");
-			}
-		}
-		finally {
-			DataAccess.cleanUp(s, rs);
-		}
-
-		return 0;
-	}
-
-	private void _renameColumn(
-			Class<?> tableClass, String tableName, String oldColumnName,
-			String newColumnName)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				String.format(
-					"Renaming column %s to %s in table %s", oldColumnName,
-					newColumnName, tableName));
-		}
-
-		if (!hasColumn(tableName, newColumnName)) {
-			alter(
-				tableClass, new AlterColumnName(oldColumnName, newColumnName));
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					String.format(
-						"Column %s already exists on table %s", newColumnName,
-						tableName));
-			}
-		}
-	}
-
 	private boolean _tableHasIndex(String tableName, String indexName)
 		throws Exception {
 
@@ -265,6 +182,9 @@ public class CPDefinitionLinkUpgradeProcess extends UpgradeProcess {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CPDefinitionLinkUpgradeProcess.class);
+		CommerceSubscriptionEntryUpgradeProcess.class);
+
+	private final CPDefinitionLocalService _cpDefinitionLocalService;
+	private final CPInstanceLocalService _cpInstanceLocalService;
 
 }

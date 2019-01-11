@@ -20,6 +20,7 @@ import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v1_2_0.CommerceSubscriptionUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v2_0_0.CommercePaymentMethodUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v2_1_0.CPDAvailabilityEstimateUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v2_1_0.CommerceSubscriptionEntryUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v2_1_0.CommerceWarehouseItemUpgradeProcess;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
@@ -62,6 +63,8 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 			new com.liferay.commerce.internal.upgrade.v2_1_0.
 				CommerceOrderItemUpgradeProcess(
 					_cpDefinitionLocalService, _cpInstanceLocalService),
+			new CommerceSubscriptionEntryUpgradeProcess(
+				_cpDefinitionLocalService, _cpInstanceLocalService),
 			new CommerceWarehouseItemUpgradeProcess(
 				_cpDefinitionLocalService, _cpInstanceLocalService),
 			new CPDAvailabilityEstimateUpgradeProcess(
