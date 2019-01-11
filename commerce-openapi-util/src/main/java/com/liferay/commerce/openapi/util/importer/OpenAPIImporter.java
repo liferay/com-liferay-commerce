@@ -17,12 +17,12 @@ package com.liferay.commerce.openapi.util.importer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.liferay.commerce.openapi.util.ClassPropertiesFactory;
 import com.liferay.commerce.openapi.util.ComponentDefinition;
 import com.liferay.commerce.openapi.util.Content;
 import com.liferay.commerce.openapi.util.Definition;
 import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.Parameter;
+import com.liferay.commerce.openapi.util.PropertiesFactory;
 import com.liferay.commerce.openapi.util.Response;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
@@ -68,7 +68,7 @@ public class OpenAPIImporter {
 	}
 
 	public OpenAPIImporter() throws IOException {
-		_properties = ClassPropertiesFactory.getPropertiesFor(getClass());
+		_properties = PropertiesFactory.getPropertiesFor(getClass());
 
 		_apiDefinitionURL = _properties.getProperty("openapi.swagger.url");
 
