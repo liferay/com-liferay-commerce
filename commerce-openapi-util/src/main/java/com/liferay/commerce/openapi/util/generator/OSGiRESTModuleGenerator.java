@@ -47,7 +47,9 @@ public class OSGiRESTModuleGenerator {
 	public static void main(String[] args) {
 		try {
 			OSGiRESTModuleGenerator osgiRESTModuleGenerator =
-				new OSGiRESTModuleGenerator();
+				new OSGiRESTModuleGenerator(
+					ClassPropertiesFactory.getPropertiesFor(
+						OSGiRESTModuleGenerator.class, args));
 
 			osgiRESTModuleGenerator.generate();
 
@@ -63,9 +65,12 @@ public class OSGiRESTModuleGenerator {
 	}
 
 	public OSGiRESTModuleGenerator() throws IOException {
-		Properties properties = ClassPropertiesFactory.getPropertiesFor(
-			getClass());
+		this(
+			ClassPropertiesFactory.getPropertiesFor(
+				OSGiRESTModuleGenerator.class));
+	}
 
+	public OSGiRESTModuleGenerator(Properties properties) {
 		_apiPackagePath = properties.getProperty("osgi.module.api.package");
 		_applicationBase = properties.getProperty(
 			"osgi.module.application.base");
