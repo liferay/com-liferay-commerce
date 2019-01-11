@@ -20,6 +20,30 @@ generateRestModule {
 	classpath = sourceSets.main.runtimeClasspath
 	main = "com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator"
 
+	def extensionContainer = project.getExtensions()
+
+	def extraPropertiesExtension = extensionContainer.getExtraProperties()
+
+	def projectProperties = extraPropertiesExtension.properties
+
+	def entrySet = projectProperties.entrySet()
+
+	List<String> mainClassArgs = new ArrayList<>();
+
+	for (int i; i < entrySet.size(); i++) {
+		Map.Entry entry = entrySet.getAt(i);
+
+		String key = entry.getKey()
+
+		if (!key.startsWith("osgi.module")) {
+			continue;
+		}
+
+		mainClassArgs.add(key + "=" + GradleUtil.getProperty(project, key, ""));
+	}
+
+	args mainClassArgs
+
 	jvmArgs "-Dlog4j.configuration=log4j.xml"
 }
 
