@@ -167,7 +167,10 @@ public class DLManagementUtil {
 				repositoryId, parentFolderId, folderName);
 		}
 		catch (PortalException pe) {
-			pe.printStackTrace();
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
+
 			folder = null;
 		}
 
