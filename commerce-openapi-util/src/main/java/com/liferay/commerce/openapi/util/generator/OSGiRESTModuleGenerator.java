@@ -266,7 +266,6 @@ public class OSGiRESTModuleGenerator {
 		StringBuilder sb = new StringBuilder();
 
 		if (_basicSecurityAllowed) {
-			sb.append("\n\t\t");
 			sb.append(_getTemplate("basic.authentication.tpl"));
 			sb.append(",");
 		}
