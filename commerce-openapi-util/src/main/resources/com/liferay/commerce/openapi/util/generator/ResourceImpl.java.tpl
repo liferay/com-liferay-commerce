@@ -17,12 +17,12 @@ package ${PACKAGE};
 ${IMPORT_STATEMENTS}
 
 import javax.annotation.Generated;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
-
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author ${AUTHOR}
@@ -30,9 +30,8 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"api.version=${API_VERSION}",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true",
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=${APPLICATION_NAME}.Rest)"
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=${APPLICATION_NAME}.Rest)",
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=${API_VERSION}"
 	},
 	service = ${MODEL_RESOURCE_INTERFACE_CLASS}.class)
 @Generated(value = "OSGiRESTModuleGenerator")

@@ -14,12 +14,12 @@
 
 package ${PACKAGE};
 
+import javax.annotation.Generated;
+
+import javax.ws.rs.core.Application;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
-
-import javax.annotation.Generated;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Application;
 
 /**
  * @author ${AUTHOR}
@@ -27,8 +27,9 @@ import javax.ws.rs.core.Application;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_BASE + "=${APPLICATION_BASE}",
+		JaxrsWhiteboardConstants.JAX_RS_EXTENSION_SELECT + "=(osgi.jaxrs.name=Liferay.OAuth2)",
 		JaxrsWhiteboardConstants.JAX_RS_NAME + "=${APPLICATION_NAME}.Rest",
-		JaxrsWhiteboardConstants.JAX_RS_EXTENSION_SELECT + "=(osgi.jaxrs.name=Liferay.OAuth2)",${BASIC_AUTHENTICATION}
+		${BASIC_AUTHENTICATION}
 		"oauth2.scopechecker.type=annotations"
 	},
 	service = Application.class
