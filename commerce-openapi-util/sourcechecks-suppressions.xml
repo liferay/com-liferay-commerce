@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
 <suppressions>
+	<suppress checks="GradleDependencyConfigurationCheck" files="commerce-openapi-util/build.gradle" />
 	<suppress checks="JavaModuleInternalImportsCheck" files="commerce-openapi-util/src/main/java/com/liferay/commerce/openapi/util/importer/OpenAPIImporter.java" />
 	<suppress checks="StringMethodsCheck" files="commerce-openapi-util/src/main/java/com/liferay/commerce/openapi/util/Method.java" />
 </suppressions>
