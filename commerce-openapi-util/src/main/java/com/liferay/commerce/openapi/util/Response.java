@@ -19,12 +19,12 @@ package com.liferay.commerce.openapi.util;
  */
 public class Response {
 
-	public Response(int status, String content) {
+	public Response(int status, Content content) {
 		_status = status;
 		_content = content;
 	}
 
-	public String getContent() {
+	public Content getContent() {
 		return _content;
 	}
 
@@ -45,7 +45,7 @@ public class Response {
 		return String.format("{content=%s, status=%s}", _content, _status);
 	}
 
-	private final String _content;
+	private final Content _content;
 	private final int _status;
 
 }

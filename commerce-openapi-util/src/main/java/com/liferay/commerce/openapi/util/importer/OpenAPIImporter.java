@@ -260,8 +260,7 @@ public class OpenAPIImporter {
 						for (Content content : contents) {
 							responses.add(
 								new Response(
-									_getInteger(entry.getKey()),
-									content.getMimeType()));
+									_getInteger(entry.getKey()), content));
 						}
 					}
 					else {
