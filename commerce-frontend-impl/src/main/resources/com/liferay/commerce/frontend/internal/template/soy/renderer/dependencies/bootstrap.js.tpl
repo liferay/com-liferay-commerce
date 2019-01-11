@@ -1,10 +1,8 @@
 var context = Object.assign(
-	$CONTEXT,
-	Liferay.getComponentCache('$ID')
+	$CONTEXT
 );
 
 var componentConfig = {
-	cacheState: context.cacheState,
 	destroyOnNavigate: true,
 	portletId: context.portletId
 };
