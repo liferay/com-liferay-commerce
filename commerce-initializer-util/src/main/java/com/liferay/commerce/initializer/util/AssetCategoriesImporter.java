@@ -20,6 +20,7 @@ import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.service.AssetCategoryLocalService;
 import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.initializer.util.internal.CPAttachmentFileEntryCreator;
+import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -129,7 +130,8 @@ public class AssetCategoriesImporter {
 		if (Validator.isNotNull(imageFileName)) {
 			_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 				assetCategory, classLoader, imageDependenciesPath,
-				imageFileName, 0, serviceContext);
+				imageFileName, 0, CPAttachmentFileEntryConstants.TYPE_IMAGE,
+				serviceContext);
 		}
 
 		return assetCategory;
