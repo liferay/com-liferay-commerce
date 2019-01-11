@@ -2,9 +2,6 @@
 
 {template .render}
 
-	{@param spritemap: string }
-	{@param usersAPI: string }
-
 	{@param? users: list<[
 		userId: string | number,
 		thumbnail: string,
@@ -12,14 +9,33 @@
 		email: string
 	]>}
 
+	{@param? addedUsers: list<[
+		userId: string | number,
+		thumbnail: string,
+		name: string,
+		email: string
+	]>}
+
+	{@param? query: string }
+	{@param spritemap: string }
+	{@param? accountName: string }
+
 	{@param? _isVisible: bool }
+	{@param? _toggleInvitation: any }
+	{@param? _handleInputBox: any }
+	{@param? _handleFormSubmit: any }
 	{@param? _handleCloseModal: any }
 	{@param? _sendInvitations: any }
-	{@param? _updateUsers: any }
+
+	{let $formattedQuery kind="text"}
+		{nil}
+		{if isNonnull($query)}
+			{$query}
+		{/if}
+	{/let}
 
 	{let $body kind="html"}
-
-	    <div class="commerce-modal user-invitation">
+		<div class="commerce-modal">
 			<div class="commerce-modal__header">
 				<h3 class="commerce-modal__title">
 					Invite user to this account
@@ -36,32 +52,89 @@
 				</button>
 			</div>
 
-			{call UserInvitation.render}
-				{param events: ['updateUsers' : $_updateUsers] /}
-				{param spritemap: $spritemap /}
-				{param usersAPI: $usersAPI /}
-			{/call}
+			<div class="commerce-modal__content">
+
+				<label class="commerce-modal__label">
+					Name or Email
+				</label>
+				<div class="user-invitation">
+					<div class="autocomplete-input user-invitation__input">
+						<div class="autocomplete-input__icon">
+							{call ClayIcon.render}
+								{param spritemap: $spritemap /}
+								{param symbol: 'search' /}
+							{/call}
+						</div>
+
+						<div class="autocomplete-input__wrapper">
+							<div class="autocomplete-input__content">
+								{if isNonnull($addedUsers)}
+									{foreach $addedUser in $addedUsers}
+										{call UserInputItem.render}
+											{param events: ['removeItem' : $_toggleInvitation] /}
+											{param userId: $addedUser.userId /}
+											{param email: $addedUser.email /}
+											{param name: $addedUser.name /}
+											{param thumbnail: $addedUser.thumbnail /}
+											{param spritemap: $spritemap /}
+										{/call}
+									{/foreach}
+								{/if}
+								<form data-onsubmit="{$_handleFormSubmit}" ref="form">
+									<input
+										class="autocomplete-input__box"
+										type="text"
+										value="{$formattedQuery}"
+										data-onkeyup="{$_handleInputBox}"
+									/>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<div class="user-invitation__list">
+						{if isNonnull($users) and length($users) > 0 }
+							{foreach $user in $users}
+								{call UserListItem.render}
+									{param events: ['toggleInvitation': $_toggleInvitation] /}
+									{param userId: $user.userId /}
+									{param name: $user.name /}
+									{param email: $user.email /}
+									{param thumbnail: $user.thumbnail /}
+									{param addedUsers: $addedUsers /}
+									{param query: $formattedQuery /}
+								{/call}
+							{/foreach}
+						{/if}
+						{if isNonnull($users) and length($users) == 0 and $formattedQuery != ''}
+							{call UserListItem.render}
+								{param events: ['toggleInvitation': $_toggleInvitation] /}
+								{param email: $formattedQuery /}
+								{param addedUsers: $addedUsers /}
+							{/call}
+						{/if}
+					</div>
+				</div>
+			</div>
 
 			{let $inviteButtonClasses kind="text"}
 				minium-button minium-button--big
-				{if isNonnull($users) and length($users) == 0}
+				{if isNonnull($addedUsers) and length($addedUsers) == 0 and isNonnull($accountName) and $accountName == ''}
 					{sp}minium-button--disabled
 				{/if}
 			{/let}
-
-			<div class="user-invitation__invite">
+			<div class="commerce-modal__actions">
 				<button
 					class="{$inviteButtonClasses}"
 					data-onclick="{$_sendInvitations}"
 				>
-					Send invite
+					Create Account
 				</button>
 			</div>
 		</div>
-
 	{/let}
 
-	<div class="user-invitation-wrapper">
+	<div class="commerce-modal-wrapper">
 		{call ClayModal.render}
 			{param body: $body /}
 			{param visible: $_isVisible /}

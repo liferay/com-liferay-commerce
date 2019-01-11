@@ -1,40 +1,122 @@
 'use strict';
 
+import {debounce} from 'metal-debounce';
+
 import template from './AddAccountModal.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
 import 'clay-modal';
 
-import '../user_utils/UserInvitation.es';
+import '../user_utils/UserListItem.es';
+import '../user_utils/UserInputItem.es';
+
+const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class AddAccountModal extends Component {
 
-	_updateAddedUsers(users) {
-		console.log('update triggered!', users);
-		return this.users = users;
+	created() {
+		this._debouncedFetchUser = debounce(this._fetchUsers.bind(this), 300);
+	}
+
+	attached() {
+		this._fetchUsers();
+	}
+
+	syncAddedUsers() {
+		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
+		this.element.querySelector('.autocomplete-input__box').focus();
+		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+		return true;
 	}
 
 	_handleCloseModal(e) {
 		e.preventDefault();
-		return this._isVisible = false;
+		this._isVisible = false;
 	}
 
-	_addAccounts() {
-		if (!this.users.length) {
+	syncQuery() {
+		this._isLoading = true;
+		return this._debouncedFetchUser();
+	}
+
+	_handleFormSubmit(evt) {
+		evt.preventDefault();
+		if (this.query.match(EMAIL_REGEX)) {
+			this.addedUsers = [
+				...this.addedUsers,
+				{
+					email: this.query
+				}
+			];
+			this.query = '';
+			return true;
+		}
+		return false;
+	}
+
+	_handleInputBox(evt) {
+		if (evt.keyCode === 8 && !this.query.length) {
+			this.addedUsers = this.addedUsers.slice(0, -1);
 			return false;
-		};
-		
-		const result = {
-			account: 'test',
-			users: this.users
+		}
+		return this.query = evt.target.value;
+	}
+
+    _handleInputName(evt) {
+        return this.accountName = evt.target.value;
+    }
+
+	_toggleInvitation(userToBeToggled) {
+		if (!userToBeToggled.id) {
+			this.query = '';
 		}
 
-		console.log(result);
+		const hasUserAlreadyBeenAdded = this.addedUsers.reduce(
+			(alreadyAdded, user) => alreadyAdded || user.email === userToBeToggled.email,
+			false
+		);
+
+		this.addedUsers =
+			hasUserAlreadyBeenAdded ?
+				this.addedUsers.filter((user) => user.email !== userToBeToggled.email) :
+				[...this.addedUsers, userToBeToggled];
+
+		return this.addedUsers;
+	}
+
+	_fetchUsers() {
+		return fetch(
+			this.usersAPI + '?q=' + this.query,
+			{
+				method: 'GET'
+			}
+		)
+        .then(
+            response => response.json()
+        )
+        .then(
+            response => {
+                this._isLoading = false;
+                return this.users = response.users;
+            }
+        );
+	}
+
+	_sendInvitations() {
+		if (!this.addedUsers.length) {
+			return false;
+        };
+        
+        const data = {
+            accountName: this.accountName,
+            administratorsEmail: this.addedUsers
+        };
 
 		return this.emit(
-			'addAccount', result
-		);
+            'AddAccountModalSave', 
+            data
+        );
 	}
 
 	toggle() {
@@ -69,8 +151,10 @@ const USER_SCHEMA = Config.shapeOf(
 AddAccountModal.STATE = {
 	usersAPI: Config.string().value(''),
 	query: Config.string().value(''),
+	accountName: Config.string().value(''),
 	spritemap: Config.string(),
 	users: Config.array(USER_SCHEMA).value([]),
+	addedUsers: Config.array(USER_SCHEMA).value([]),
 	_isVisible: Config.bool().internal().value(false),
 	_isLoading: Config.bool().internal().value(false)
 };
