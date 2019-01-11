@@ -24,6 +24,7 @@ import com.liferay.commerce.data.integration.manager.talend.util.DLManagementUti
 import com.liferay.commerce.data.integration.manager.talend.util.launcher.configuration.TalendJobExecutorConfiguration;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -32,9 +33,11 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -112,9 +115,7 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 		return "talend";
 	}
 
-	public boolean init(
-			long contextFileEntryId, long archiveProcessFileEntryId,
-			String version, String className)
+	public boolean init(long contextFileEntryId, long archiveProcessFileEntryId)
 		throws Exception {
 
 		FileEntry propsFileEntry = null;
@@ -154,12 +155,14 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 
 			outStream.close();
 
-			_rootDirectoryName = _dlManagementUtil.unzipFile(tempArchiveFile);
+			String rootDirectoryName = _dlManagementUtil.unzipFile(
+				tempArchiveFile);
 
-			_jarName = _rootDirectoryName + _buildJarName(className, version);
+			_buildJarNameAndClassName(
+				rootDirectoryName, archiveFileEntry.getFileName());
 
 			_libDirectoryName =
-				_rootDirectoryName + _configuration.libFolderName();
+				rootDirectoryName + _configuration.libFolderName();
 
 			if (_PARM_ENVIRONMENT_FIRST) {
 				_evaluateEnvironment();
@@ -204,8 +207,7 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 
 			boolean init = init(
 				process.getContextPropertiesFileEntryId(),
-				process.getSrcArchiveFileEntryId(), process.getVersion(),
-				process.getClassName());
+				process.getSrcArchiveFileEntryId());
 
 			if (init) {
 				execute(
@@ -308,26 +310,52 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 		return commandSB.toString();
 	}
 
-	private String _buildJarName(String className, String version) {
-		String jarName = "";
+	private void _buildJarNameAndClassName(
+			String rootDirectoryName, String fileName)
+		throws IOException {
 
-		int lastIndexOfDot = className.lastIndexOf(".");
+		int lastIndexOfDot = fileName.lastIndexOf(StringPool.PERIOD);
 
-		if (lastIndexOfDot > 0) {
-			jarName = className.substring(lastIndexOfDot + 1);
-		}
+		String shortFileName = fileName.substring(0, lastIndexOfDot);
+
+		String jarName = StringUtil.toLowerCase(
+			shortFileName.replace(StringPool.PERIOD, StringPool.UNDERLINE));
+
+		int dashIndex = shortFileName.indexOf(StringPool.UNDERLINE);
+
+		String projectFolder = shortFileName.substring(0, dashIndex);
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("/");
+		sb.append(rootDirectoryName);
+		sb.append(StringPool.SLASH);
+		sb.append(projectFolder);
+		sb.append(StringPool.SLASH);
 		sb.append(jarName);
-		sb.append("/");
-		sb.append(jarName);
-		sb.append("_");
-		sb.append(version.replace(".", "_"));
-		sb.append(".jar");
+		sb.append(_JAR);
 
-		return sb.toString();
+		_jarName = sb.toString();
+
+		if (_className.isEmpty()) {
+			Properties prop = new Properties();
+
+			prop.load(
+				new FileInputStream(
+					new File(rootDirectoryName + _JOBINFO_FILE)));
+
+			String projectName = StringUtil.toLowerCase(
+				prop.getProperty(_PROJECT_PROPERTY));
+
+			sb = new StringBuilder();
+
+			sb.append(projectName);
+			sb.append(StringPool.PERIOD);
+			sb.append(jarName);
+			sb.append(StringPool.PERIOD);
+			sb.append(projectFolder);
+
+			_className = sb.toString();
+		}
 	}
 
 	private void _evaluateEnvironment() {
@@ -343,11 +371,18 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 
 	private static final String _CP = "-cp";
 
+	private static final String _JAR = ".jar";
+
+	private static final String _JOBINFO_FILE = StringPool.SLASH +
+		"jobInfo.properties";
+
 	private static final String _PARM_DELIMITER = "_";
 
 	private static final Boolean _PARM_ENVIRONMENT_FIRST = true;
 
 	private static final String _PARM_TOS_QUALIFIER = "TOS";
+
+	private static final String _PROJECT_PROPERTY = "project";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		TalendJobLauncher.class);
@@ -366,6 +401,5 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 	private String _jarName;
 	private String _libDirectoryName;
 	private Properties _props;
-	private String _rootDirectoryName;
 
 }
