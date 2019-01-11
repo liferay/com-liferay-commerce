@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
-import com.liferay.commerce.openapi.util.ClassPropertiesFactory;
 import com.liferay.commerce.openapi.util.ComponentDefinition;
 import com.liferay.commerce.openapi.util.Definition;
 import com.liferay.commerce.openapi.util.Path;
+import com.liferay.commerce.openapi.util.PropertiesFactory;
 import com.liferay.commerce.openapi.util.PropertyDefinition;
 import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.importer.OpenAPIImporter;
@@ -48,7 +48,7 @@ public class OSGiRESTModuleGenerator {
 		try {
 			OSGiRESTModuleGenerator osgiRESTModuleGenerator =
 				new OSGiRESTModuleGenerator(
-					ClassPropertiesFactory.getPropertiesFor(
+					PropertiesFactory.getPropertiesFor(
 						OSGiRESTModuleGenerator.class, args));
 
 			osgiRESTModuleGenerator.generate();
@@ -65,9 +65,7 @@ public class OSGiRESTModuleGenerator {
 	}
 
 	public OSGiRESTModuleGenerator() throws IOException {
-		this(
-			ClassPropertiesFactory.getPropertiesFor(
-				OSGiRESTModuleGenerator.class));
+		this(PropertiesFactory.getPropertiesFor(OSGiRESTModuleGenerator.class));
 	}
 
 	public OSGiRESTModuleGenerator(Properties properties) {
