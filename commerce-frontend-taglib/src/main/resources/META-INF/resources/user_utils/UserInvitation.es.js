@@ -1,3 +1,4 @@
+
 'use strict';
 
 import {debounce} from 'metal-debounce';
@@ -8,43 +9,53 @@ import Soy, {Config} from 'metal-soy';
 
 import 'clay-modal';
 
-import '../user_utils/UserListItem.es';
-import '../user_utils/UserInputItem.es';
+import './UserListItem.es';
+import './UserInputItem.es';
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class UserInvitation extends Component {
 
-	created() {
-		this._debouncedFetchUser = debounce(this._fetchUsers.bind(this), 300);
-	}
+    created() {
+        this._fetchUsers();
+    }
 
 	attached() {
-		this._fetchUsers();
+        this._debouncedFetchUsers = debounce(this._fetchUsers.bind(this), 300);
 	}
 
-	syncAddedUsers() {
-		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
+	// syncAddedUsers(e) {
+    //     console.log(e)
+    //     if (e.length === this.addedUsers.length) {
+    //         return null;
+    //     }
+    //     const contentWrapper = this.element.querySelector('.autocomplete-input__content');
+	// 	this.element.querySelector('.autocomplete-input__box').focus();
+	// 	contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+    //     this.emit('updateUsers', this.addedUsers);
+    //     return e;
+	// }
+
+	// syncQuery(e) {
+	// 	this._isLoading = true;
+    //     return this._debouncedFetchUsers();
+    // }
+    
+    testAddedUsers(e) {
+        const contentWrapper = this.element.querySelector('.autocomplete-input__content');
 		this.element.querySelector('.autocomplete-input__box').focus();
 		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-		return true;
-	}
+        return this.emit('updateUsers', this.addedUsers);
+    }
 
-	_handleCloseModal(e) {
-		e.preventDefault();
-
-		// this.components.modal.show()
-
-		this._isVisible = false;
-	}
-
-	syncQuery() {
+	testQuery() {
 		this._isLoading = true;
-		return this._debouncedFetchUser();
-	}
+        return this._debouncedFetchUsers();
+    }
 
 	_handleFormSubmit(evt) {
-		evt.preventDefault();
+        evt.preventDefault();
+        
 		if (this.query.match(EMAIL_REGEX)) {
 			this.addedUsers = [
 				...this.addedUsers,
@@ -52,18 +63,26 @@ class UserInvitation extends Component {
 					email: this.query
 				}
 			];
-			this.query = '';
+            this.query = '';
+            this.testAddedUsers();
+            this.testQuery()
 			return true;
 		}
 		return false;
 	}
 
 	_handleInputBox(evt) {
+        evt.preventDefault();
+        
 		if (evt.keyCode === 8 && !this.query.length) {
-			this.addedUsers = this.addedUsers.slice(0, -1);
+            this.addedUsers = this.addedUsers.slice(0, -1);
+            this.testAddedUsers();
 			return false;
 		}
-		return this.query = evt.target.value;
+        
+        this.query = evt.target.value;
+        this.testQuery()
+        return true
 	}
 
 	_toggleInvitation(userToBeToggled) {
@@ -80,7 +99,8 @@ class UserInvitation extends Component {
 			hasUserAlreadyBeenAdded ?
 				this.addedUsers.filter((user) => user.email !== userToBeToggled.email) :
 				[...this.addedUsers, userToBeToggled];
-
+        
+        this.testAddedUsers();
 		return this.addedUsers;
 	}
 
@@ -91,34 +111,17 @@ class UserInvitation extends Component {
 				method: 'GET'
 			}
 		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				response => {
-					this._isLoading = false;
-					return this.users = response.users;
-				}
-			);
-	}
-
-	_sendInvitations() {
-		if (!this.addedUsers.length) {
-			return false;
-		};
-		return this.emit('userInvitationSave', this.addedUsers);
-	}
-
-	toggle() {
-		return this._isVisible = !this._isVisible;
-	}
-
-	open() {
-		return this._isVisible = true;
-	}
-
-	close() {
-		this._isVisible = false;
+        .then(
+            response => response.json()
+        )
+        .then(
+            response => {
+                this._isLoading = false;
+                this.users = response.users;
+                console.log(response.users, this.users)
+                return this.users;
+            }
+        );
 	}
 };
 
@@ -144,7 +147,6 @@ UserInvitation.STATE = {
 	spritemap: Config.string(),
 	users: Config.array(USER_SCHEMA).value([]),
 	addedUsers: Config.array(USER_SCHEMA).value([]),
-	_isVisible: Config.bool().internal().value(false),
 	_isLoading: Config.bool().internal().value(false)
 };
 
