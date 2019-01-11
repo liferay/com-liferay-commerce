@@ -32,8 +32,19 @@ Configure generator output settings by changing default properties in
 | `osgi.module.generator.overwrite.gradle` | `false` | avoid overwriting gradle build file |
 | `osgi.module.generator.overwrite.implementation` | `false` | avoid overwriting resource implementation files |
 
+Any configuration property prefixed with ``osgi.module`` can be overridden by gradle project property. Pass `-Posgi.module.generator.overwrite.gradle=true` to `generateRestModule` task to override default from config file.  
 ### Run OpenAPI Generator
+Example 1 - generate module based on configuration in config file
+
 `../gradlew generateRestModule`
+
+Example 2 - generate module at location other than defined in config file
+
+`../gradlew generateRestModule -Posgi.module.root.path=/Volumes/dev`
+
+Example 3 - generate module at location other than defined in config file and overwrite existing implementation files
+
+`../gradlew generateRestModule -Posgi.module.root.path=/Volumes/dev -Posgi.module.generator.overwrite.implementation=true`
 
 ### Run with Gradle `runClass` task
 
