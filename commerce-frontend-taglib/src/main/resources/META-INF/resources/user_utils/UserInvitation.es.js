@@ -41,6 +41,23 @@ class UserInvitation extends Component {
     //     return this._debouncedFetchUsers();
     // }
     
+    shouldUpdate(changes) {
+        console.log(changes)
+        if(changes.events){
+            return false;
+        }
+        return true
+        if(
+            (changes.children)
+            || (changes.users && typeof changes.users.newVal !== 'undefined')
+            || (changes.addedUsers && typeof changes.addedUsers.newVal !== 'undefined')
+            || (changes.query && typeof changes.query.newVal !== 'undefined')
+        ){
+            return true;
+        }
+        return false;
+    }
+
     testAddedUsers(e) {
         const contentWrapper = this.element.querySelector('.autocomplete-input__content');
 		this.element.querySelector('.autocomplete-input__box').focus();
@@ -118,7 +135,6 @@ class UserInvitation extends Component {
             response => {
                 this._isLoading = false;
                 this.users = response.users;
-                console.log(response.users, this.users)
                 return this.users;
             }
         );

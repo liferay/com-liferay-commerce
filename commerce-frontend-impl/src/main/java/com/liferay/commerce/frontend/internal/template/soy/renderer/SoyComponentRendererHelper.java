@@ -135,10 +135,14 @@ public class SoyComponentRendererHelper {
 		sb.append(_componentDescriptor.getModule());
 		sb.append(" as ");
 		sb.append(_moduleName);
-		sb.append(
-			String.join(
-				StringPool.COMMA, _componentDescriptor.getDependencies()));
 
+		for(String dependency : _componentDescriptor.getDependencies()) {
+			sb.append(StringPool.COMMA);
+			sb.append(dependency);
+			sb.append(" as ");
+			sb.append(StringUtil.strip(dependency, _UNSAFE_MODULE_NAME_CHARS));
+		}
+		
 		if (_componentDescriptor.isPositionInLine()) {
 			ScriptData scriptData = new ScriptData();
 
@@ -185,7 +189,7 @@ public class SoyComponentRendererHelper {
 	}
 
 	private static final char[] _UNSAFE_MODULE_NAME_CHARS = {
-		CharPool.PERIOD, CharPool.DASH
+		CharPool.PERIOD, CharPool.DASH, CharPool.SLASH, CharPool.AT
 	};
 
 	private final ComponentDescriptor _componentDescriptor;
