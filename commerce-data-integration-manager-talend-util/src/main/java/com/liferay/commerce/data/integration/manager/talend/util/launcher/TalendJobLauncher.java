@@ -91,12 +91,12 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 
 		DLFileEntry errorLogFileEntry = _dlManagementUtil.addFileEntry(
 			userId, scheduledTask.getCompanyId(), scheduledTask.getGroupId(),
-			scheduledTask.getName(), scheduledTask.getName() + "_error",
+			scheduledTask.getName(), scheduledTask.getName() + _ERROR,
 			ContentTypes.APPLICATION_TEXT, error);
 
 		DLFileEntry runtimeLogFileEntry = _dlManagementUtil.addFileEntry(
 			userId, scheduledTask.getCompanyId(), scheduledTask.getGroupId(),
-			scheduledTask.getName(), scheduledTask.getName() + "_runtime",
+			scheduledTask.getName(), scheduledTask.getName() + _RUNTIME,
 			ContentTypes.APPLICATION_TEXT, log);
 
 		historyLocalService.addHistory(
@@ -112,7 +112,7 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 
 	@Override
 	public String getName() {
-		return "talend";
+		return KEY;
 	}
 
 	public boolean init(long contextFileEntryId, long archiveProcessFileEntryId)
@@ -232,8 +232,8 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 			DLFileEntry errorLogFileEntry = _dlManagementUtil.addFileEntry(
 				userId, scheduledTask.getCompanyId(),
 				scheduledTask.getGroupId(), scheduledTask.getName(),
-				scheduledTask.getName() + "_error",
-				ContentTypes.APPLICATION_TEXT, error);
+				scheduledTask.getName() + _ERROR, ContentTypes.APPLICATION_TEXT,
+				error);
 
 			historyLocalService.addHistory(
 				userId, scheduledTaskId, executionType, startDate, endDate,
@@ -261,22 +261,22 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 	private void _buildCommand() {
 		_command = new ArrayList<>();
 
-		_command.add("java");
+		_command.add(_JAVA);
 		_command.add(_configuration.xms());
 		_command.add(_configuration.xmx());
 		_command.add(_CP);
 		_command.add(_jarCommandArgs);
 		_command.add(_className);
 		_command.add(_configuration.endCommandChar());
-		_command.add("--context=" + _configuration.context());
+		_command.add(_CONTEXT_ARG + _configuration.context());
 
 		if (_props != null) {
 			StringBundler sb = new StringBundler();
 
 			for (Object key : _props.keySet()) {
-				sb.append("--context_param ");
+				sb.append(_CONTEXT_PARAM_ARG);
 				sb.append(key);
-				sb.append("=");
+				sb.append(StringPool.EQUAL);
 				sb.append(_props.get(key));
 
 				_command.add(sb.toString());
@@ -289,7 +289,8 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 	private String _buildJarCommandArgs() {
 		StringBundler commandSB = new StringBundler();
 
-		commandSB.append(".:");
+		commandSB.append(StringPool.PERIOD);
+		commandSB.append(StringPool.COLON);
 
 		if (_libDirectoryName != null) {
 			File rootPathAsFileObject = new File(_libDirectoryName);
@@ -297,15 +298,15 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 			if (rootPathAsFileObject.isDirectory()) {
 				for (String file : rootPathAsFileObject.list()) {
 					commandSB.append(_libDirectoryName);
-					commandSB.append("/");
+					commandSB.append(StringPool.SLASH);
 					commandSB.append(file);
-					commandSB.append(":");
+					commandSB.append(StringPool.COLON);
 				}
 			}
 		}
 
 		commandSB.append(_jarName);
-		commandSB.append(":");
+		commandSB.append(StringPool.COLON);
 
 		return commandSB.toString();
 	}
@@ -369,12 +370,20 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 		}
 	}
 
+	private static final String _CONTEXT_ARG = "--context=";
+
+	private static final String _CONTEXT_PARAM_ARG = "--context_param ";
+
 	private static final String _CP = "-cp";
+
+	private static final String _ERROR = "_error";
 
 	private static final String _JAR = ".jar";
 
-	private static final String _JOBINFO_FILE = StringPool.SLASH +
-		"jobInfo.properties";
+	private static final String _JAVA = "java";
+
+	private static final String _JOBINFO_FILE =
+		StringPool.SLASH + "jobInfo.properties";
 
 	private static final String _PARM_DELIMITER = "_";
 
@@ -383,6 +392,8 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 	private static final String _PARM_TOS_QUALIFIER = "TOS";
 
 	private static final String _PROJECT_PROPERTY = "project";
+
+	private static final String _RUNTIME = "_runtime";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		TalendJobLauncher.class);
