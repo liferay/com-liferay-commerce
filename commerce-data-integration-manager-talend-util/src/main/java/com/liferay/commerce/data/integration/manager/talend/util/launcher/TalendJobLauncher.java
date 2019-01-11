@@ -43,6 +43,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -89,14 +91,22 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 
 		pr.waitFor();
 
+		String startTime = _fileNameDateFormat.format(startDate);
+
+		String errorFileName = StringBundler.concat(
+			scheduledTask.getName(), _ERROR, StringPool.UNDERLINE, startTime);
+
+		String runtimeFileName = StringBundler.concat(
+			scheduledTask.getName(), _RUNTIME, StringPool.UNDERLINE, startTime);
+
 		DLFileEntry errorLogFileEntry = _dlManagementUtil.addFileEntry(
 			userId, scheduledTask.getCompanyId(), scheduledTask.getGroupId(),
-			scheduledTask.getName(), scheduledTask.getName() + _ERROR,
+			scheduledTask.getName(), errorFileName,
 			ContentTypes.APPLICATION_TEXT, error);
 
 		DLFileEntry runtimeLogFileEntry = _dlManagementUtil.addFileEntry(
 			userId, scheduledTask.getCompanyId(), scheduledTask.getGroupId(),
-			scheduledTask.getName(), scheduledTask.getName() + _RUNTIME,
+			scheduledTask.getName(), runtimeFileName,
 			ContentTypes.APPLICATION_TEXT, log);
 
 		historyLocalService.addHistory(
@@ -229,11 +239,16 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 			scheduledTaskLocalService.stopScheduledTask(
 				userId, scheduledTaskId);
 
+			String startTime = _fileNameDateFormat.format(startDate);
+
+			String errorFileName = StringBundler.concat(
+				scheduledTask.getName(), _ERROR, StringPool.UNDERLINE,
+				startTime);
+
 			DLFileEntry errorLogFileEntry = _dlManagementUtil.addFileEntry(
 				userId, scheduledTask.getCompanyId(),
 				scheduledTask.getGroupId(), scheduledTask.getName(),
-				scheduledTask.getName() + _ERROR, ContentTypes.APPLICATION_TEXT,
-				error);
+				errorFileName, ContentTypes.APPLICATION_TEXT, error);
 
 			historyLocalService.addHistory(
 				userId, scheduledTaskId, executionType, startDate, endDate,
@@ -397,6 +412,9 @@ public class TalendJobLauncher implements ScheduledTaskExectutorService {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		TalendJobLauncher.class);
+
+	private static final SimpleDateFormat _fileNameDateFormat =
+		new SimpleDateFormat("yyyyMMddHHmmss");
 
 	private String _className;
 	private List<String> _command;
