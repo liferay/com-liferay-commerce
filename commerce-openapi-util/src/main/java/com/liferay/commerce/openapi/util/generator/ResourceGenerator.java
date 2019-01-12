@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Igor Beslic
@@ -224,13 +226,7 @@ public class ResourceGenerator {
 			sb.append(method.getHttpMethod());
 			sb.append("\n");
 
-			for (Response response : method.getResponses()) {
-				if (response.hasContent()) {
-					sb.append("\t@Produces(\"");
-					sb.append(response.getContent());
-					sb.append("\")\n");
-				}
-			}
+			sb.append(_getProducesAnnotation(method.getResponses()));
 
 			if (method.getAccepts() != null) {
 				sb.append("\t@Consumes(\"");
@@ -281,6 +277,58 @@ public class ResourceGenerator {
 		}
 
 		sb.append(")");
+	}
+
+	private String _getProducesAnnotation(List<Response> responses) {
+		Stream<Response> stream = responses.stream();
+
+		List<Response> contentResponses = stream.filter(
+			response -> response.hasContent()
+		).collect(
+			Collectors.toList()
+		);
+
+		if (contentResponses.isEmpty()) {
+			return "";
+		}
+
+		boolean arrayStyleAnnotationContent = false;
+
+		if (contentResponses.size() > 1) {
+			arrayStyleAnnotationContent = true;
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("\t@Produces(");
+
+		if (arrayStyleAnnotationContent) {
+			sb.append("{");
+		}
+
+		Iterator<Response> iterator = contentResponses.iterator();
+
+		while (iterator.hasNext()) {
+			sb.append("\"");
+
+			Response response = iterator.next();
+
+			sb.append(response.getContent());
+
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(", ");
+			}
+		}
+
+		if (arrayStyleAnnotationContent) {
+			sb.append("}");
+		}
+
+		sb.append(")\n");
+
+		return sb.toString();
 	}
 
 	private final ParameterGenerator _parameterGenerator =
