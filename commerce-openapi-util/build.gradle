@@ -24,16 +24,14 @@ generateRestModule {
 
 	def extraPropertiesExtension = extensionContainer.getExtraProperties()
 
-	def projectProperties = extraPropertiesExtension.properties
-
-	def entrySet = projectProperties.entrySet()
+	def projectProperties = extraPropertiesExtension.properties.entrySet()
 
 	List<String> mainClassArgs = new ArrayList<>();
 
-	for (int i; i < entrySet.size(); i++) {
-		Map.Entry entry = entrySet.getAt(i);
+	for (int i; i < projectProperties.size(); i++) {
+		Map.Entry property = projectProperties.getAt(i);
 
-		String key = entry.getKey()
+		String key = property.getKey()
 
 		if (!key.startsWith("osgi.module")) {
 			continue;
