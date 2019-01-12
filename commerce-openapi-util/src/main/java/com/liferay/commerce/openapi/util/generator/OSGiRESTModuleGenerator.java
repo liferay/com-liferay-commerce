@@ -386,10 +386,14 @@ public class OSGiRESTModuleGenerator {
 
 		dtoSource = dtoSource.replace("${AUTHOR}", _author);
 
-		String resourceClassName = StringUtils.upperCaseFirstChar(
-			componentDefinition.getName()) + "DTO";
+		String modelName = StringUtils.upperCaseFirstChar(
+			componentDefinition.getName());
 
-		dtoSource = dtoSource.replace("${MODEL_CLASS}", resourceClassName);
+		dtoSource = dtoSource.replace("${MODEL}", modelName);
+
+		String dtoClassName = modelName + "DTO";
+
+		dtoSource = dtoSource.replace("${DTO_CLASS}", dtoClassName);
 
 		List<PropertyDefinition> propertyDefinitions =
 			componentDefinition.getPropertyDefinitions();
@@ -443,7 +447,7 @@ public class OSGiRESTModuleGenerator {
 		dtoSource = dtoSource.replace("${VARIABLES}", variablesSb.toString());
 
 		String componentSourcePath = _getClassSourcePath(
-			resourceClassName + ".java", _modelPackagePath);
+			dtoClassName + ".java", _modelPackagePath);
 
 		_writeSource(dtoSource, componentSourcePath);
 	}
