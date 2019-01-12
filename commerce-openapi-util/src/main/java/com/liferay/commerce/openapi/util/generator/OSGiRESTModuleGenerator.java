@@ -23,12 +23,7 @@ import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.importer.OpenAPIImporter;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -42,7 +37,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Igor Beslic
  */
-public class OSGiRESTModuleGenerator {
+public class OSGiRESTModuleGenerator extends SourceGenerator {
 
 	public static void main(String[] args) {
 		try {
@@ -150,35 +145,13 @@ public class OSGiRESTModuleGenerator {
 		_logger.info("Module generated at location {}", _moduleOutputPath);
 	}
 
-	private void _checkModuleOutputPath(String moduleOutputPath)
-		throws IOException {
-
-		File file = new File(moduleOutputPath);
-
-		if (file.mkdirs()) {
-			_logger.info("Created directory {}", file.getAbsolutePath());
-		}
-	}
-
-	private void _checkModuleOutputPaths() throws IOException {
-		_checkModuleOutputPath(_moduleOutputPath + "/");
-		_checkModuleOutputPath(_moduleOutputPath + "/src/main/java");
-		_checkModuleOutputPath(_moduleOutputPath + "/src/main/resources");
-	}
-
-	private boolean _exists(String filePath) {
-		File file = new File(filePath);
-
-		return file.exists();
-	}
-
 	private void _generateModule() throws IOException {
 		OpenAPIImporter openAPIImporter = new OpenAPIImporter();
 
 		Definition definition = openAPIImporter.getDefinition();
 
 		try {
-			_checkModuleOutputPaths();
+			checkModuleOutputPaths(_moduleOutputPath);
 
 			_writeBNDSource();
 
@@ -217,53 +190,8 @@ public class OSGiRESTModuleGenerator {
 		}
 	}
 
-	private String _getClassSourcePath(
-			String classSourceName, String classPackage)
-		throws IOException {
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(_moduleOutputPath);
-		sb.append("/src/main/java/");
-		sb.append(classPackage.replace(".", "/"));
-		sb.append("/");
-
-		String packagePath = sb.toString();
-
-		_checkModuleOutputPath(packagePath);
-
-		return packagePath + classSourceName;
-	}
-
-	private String _getTemplate(String templateName) throws IOException {
-		Class<?> clazz = getClass();
-
-		BufferedReader reader = new BufferedReader(
-			new InputStreamReader(clazz.getResourceAsStream(templateName)));
-
-		String line = null;
-
-		StringBuilder stringBuilder = new StringBuilder();
-
-		String ls = System.getProperty("line.separator");
-
-		try {
-			while ((line = reader.readLine()) != null) {
-				stringBuilder.append(line);
-				stringBuilder.append(ls);
-			}
-
-			stringBuilder.setLength(stringBuilder.length() - ls.length());
-
-			return stringBuilder.toString();
-		}
-		finally {
-			reader.close();
-		}
-	}
-
 	private void _writeApplicationSource() throws IOException {
-		String osgiApplicationComponent = _getTemplate(
+		String osgiApplicationComponent = getTemplate(
 			_TEMPLATE_FILE_APPLICATION);
 
 		osgiApplicationComponent = osgiApplicationComponent.replace(
@@ -281,7 +209,7 @@ public class OSGiRESTModuleGenerator {
 		StringBuilder sb = new StringBuilder();
 
 		if (_basicSecurityAllowed) {
-			sb.append(_getTemplate("basic.authentication.tpl"));
+			sb.append(getTemplate("basic.authentication.tpl"));
 			sb.append(",");
 		}
 
@@ -291,17 +219,18 @@ public class OSGiRESTModuleGenerator {
 		osgiApplicationComponent = osgiApplicationComponent.replace(
 			"${APPLICATION_CLASS}", _applicationClassName);
 
-		String componentSourcePath = _getClassSourcePath(
-			_applicationClassName + ".java", _apiPackagePath);
+		String componentSourcePath = getClassSourcePath(
+			_moduleOutputPath, _applicationClassName + ".java",
+			_apiPackagePath);
 
-		_writeSource(osgiApplicationComponent, componentSourcePath);
+		writeSource(osgiApplicationComponent, componentSourcePath);
 	}
 
 	private void _writeBNDSource() throws IOException {
 		String bndSourcePath =
 			_moduleOutputPath + "/" + _TEMPLATE_FILE_BND.replace(".tpl", "");
 
-		if (!_overwriteBND && _exists(bndSourcePath)) {
+		if (!_overwriteBND && exists(bndSourcePath)) {
 			_logger.warn(
 				"BND source file {} is not generated. Configure overwrite " +
 					"mode in config file.",
@@ -310,20 +239,20 @@ public class OSGiRESTModuleGenerator {
 			return;
 		}
 
-		String bndTpl = _getTemplate(_TEMPLATE_FILE_BND);
+		String bndTpl = getTemplate(_TEMPLATE_FILE_BND);
 
 		bndTpl = bndTpl.replace("${BUNDLE_NAME}", _bundleName);
 		bndTpl = bndTpl.replace("${BUNDLE_SYMBOLIC_NAME}", _bundleSynbolicName);
 		bndTpl = bndTpl.replace("${BUNDLE_VERSION}", _bundleVersion);
 
-		_writeSource(bndTpl, bndSourcePath);
+		writeSource(bndTpl, bndSourcePath);
 	}
 
 	private void _writeGradleSource() throws IOException {
 		String gradleSourcePath =
 			_moduleOutputPath + "/" + _TEMPLATE_FILE_GRADLE.replace(".tpl", "");
 
-		if (!_overwriteBuildGradle && _exists(gradleSourcePath)) {
+		if (!_overwriteBuildGradle && exists(gradleSourcePath)) {
 			_logger.warn(
 				"Gradle build script file {} is not generated. Configure" +
 					"overwrite mode in config file.",
@@ -332,16 +261,17 @@ public class OSGiRESTModuleGenerator {
 			return;
 		}
 
-		String gradleTpl = _getTemplate(_TEMPLATE_FILE_GRADLE);
+		String gradleTpl = getTemplate(_TEMPLATE_FILE_GRADLE);
 
-		_writeSource(gradleTpl, gradleSourcePath);
+		writeSource(gradleTpl, gradleSourcePath);
 	}
 
 	private void _writeJsonMessageBodyReaderSource() throws IOException {
-		String jsonMessageBodyReaderTpl = _getTemplate(
+		String jsonMessageBodyReaderTpl = getTemplate(
 			_TEMPLATE_FILE_JSON_MESSAGE_BODY_READER);
 
-		String jsonMessageBodyReaderSourcePath = _getClassSourcePath(
+		String jsonMessageBodyReaderSourcePath = getClassSourcePath(
+			_moduleOutputPath,
 			_TEMPLATE_FILE_JSON_MESSAGE_BODY_READER.replace(".tpl", ""),
 			_jaxRSJSONPackagePath);
 
@@ -354,11 +284,11 @@ public class OSGiRESTModuleGenerator {
 		jsonMessageBodyReaderTpl = jsonMessageBodyReaderTpl.replace(
 			"${APPLICATION_NAME}", _applicationName);
 
-		_writeSource(jsonMessageBodyReaderTpl, jsonMessageBodyReaderSourcePath);
+		writeSource(jsonMessageBodyReaderTpl, jsonMessageBodyReaderSourcePath);
 	}
 
 	private void _writeJsonMessageBodyWriterSource() throws IOException {
-		String jsonMessageBodyWriterTpl = _getTemplate(
+		String jsonMessageBodyWriterTpl = getTemplate(
 			_TEMPLATE_FILE_JSON_MESSAGE_BODY_WRITER);
 
 		jsonMessageBodyWriterTpl = jsonMessageBodyWriterTpl.replace(
@@ -370,17 +300,18 @@ public class OSGiRESTModuleGenerator {
 		jsonMessageBodyWriterTpl = jsonMessageBodyWriterTpl.replace(
 			"${APPLICATION_NAME}", _applicationName);
 
-		String jsonMessageBodyWriterSourcePath = _getClassSourcePath(
+		String jsonMessageBodyWriterSourcePath = getClassSourcePath(
+			_moduleOutputPath,
 			_TEMPLATE_FILE_JSON_MESSAGE_BODY_WRITER.replace(".tpl", ""),
 			_jaxRSJSONPackagePath);
 
-		_writeSource(jsonMessageBodyWriterTpl, jsonMessageBodyWriterSourcePath);
+		writeSource(jsonMessageBodyWriterTpl, jsonMessageBodyWriterSourcePath);
 	}
 
 	private void _writeModelSource(ComponentDefinition componentDefinition)
 		throws IOException {
 
-		String dtoSource = _getTemplate(_TEMPLATE_FILE_MODEL);
+		String dtoSource = getTemplate(_TEMPLATE_FILE_MODEL);
 
 		dtoSource = dtoSource.replace("${PACKAGE}", _modelPackagePath);
 
@@ -446,10 +377,10 @@ public class OSGiRESTModuleGenerator {
 		dtoSource = dtoSource.replace("${METHODS}", methodsSb.toString());
 		dtoSource = dtoSource.replace("${VARIABLES}", variablesSb.toString());
 
-		String dtoSourcePath = _getClassSourcePath(
-			dtoClassName + ".java", _modelPackagePath);
+		String dtoSourcePath = getClassSourcePath(
+			_moduleOutputPath, dtoClassName + ".java", _modelPackagePath);
 
-		_writeSource(dtoSource, dtoSourcePath);
+		writeSource(dtoSource, dtoSourcePath);
 	}
 
 	private void _writeResourceImplementationSource(String version, Path path)
@@ -458,10 +389,11 @@ public class OSGiRESTModuleGenerator {
 		String resourceImplementationClassName = StringUtils.upperCaseFirstChar(
 			path.getName() + "ResourceImpl");
 
-		String componentSourcePath = _getClassSourcePath(
-			resourceImplementationClassName + ".java", _resourcePackagePath);
+		String componentSourcePath = getClassSourcePath(
+			_moduleOutputPath, resourceImplementationClassName + ".java",
+			_resourcePackagePath);
 
-		if (!_overwriteImplementation && _exists(componentSourcePath)) {
+		if (!_overwriteImplementation && exists(componentSourcePath)) {
 			_logger.warn(
 				"Resource implementation source file {} is not generated. " +
 					"Configure overwrite mode in config file.",
@@ -470,7 +402,7 @@ public class OSGiRESTModuleGenerator {
 			return;
 		}
 
-		String osgiResourceComponent = _getTemplate(
+		String osgiResourceComponent = getTemplate(
 			_TEMPLATE_FILE_RESOURCE_IMPLEMENTATION);
 
 		osgiResourceComponent = osgiResourceComponent.replace(
@@ -522,13 +454,13 @@ public class OSGiRESTModuleGenerator {
 			_resourceGenerator.toResourceImplementationMethods(
 				path.getMethods()));
 
-		_writeSource(osgiResourceComponent, componentSourcePath);
+		writeSource(osgiResourceComponent, componentSourcePath);
 	}
 
 	private void _writeResourceInterfaceSource(String version, Path path)
 		throws IOException {
 
-		String osgiResourceComponent = _getTemplate(
+		String osgiResourceComponent = getTemplate(
 			_TEMPLATE_FILE_RESOURCE_INTERFACE);
 
 		osgiResourceComponent = osgiResourceComponent.replace(
@@ -562,29 +494,11 @@ public class OSGiRESTModuleGenerator {
 			"${METHODS}",
 			_resourceGenerator.toResourceInterfaceMethods(path.getMethods()));
 
-		String componentSourcePath = _getClassSourcePath(
-			resourceInterfaceClassName + ".java",
+		String componentSourcePath = getClassSourcePath(
+			_moduleOutputPath, resourceInterfaceClassName + ".java",
 			_resourceInterfacePackagePath);
 
-		_writeSource(osgiResourceComponent, componentSourcePath);
-	}
-
-	private void _writeSource(String content, String fileName)
-		throws IOException {
-
-		File file = new File(fileName);
-
-		BufferedWriter bufferedWriter = new BufferedWriter(
-			new FileWriter(file));
-
-		try {
-			bufferedWriter.write(content.toCharArray());
-		}
-		finally {
-			bufferedWriter.flush();
-
-			bufferedWriter.close();
-		}
+		writeSource(osgiResourceComponent, componentSourcePath);
 	}
 
 	private static final String _TEMPLATE_FILE_APPLICATION =
