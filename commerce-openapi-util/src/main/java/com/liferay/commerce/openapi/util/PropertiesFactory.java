@@ -54,13 +54,14 @@ public class PropertiesFactory {
 		return properties;
 	}
 
-	public static Properties getPropertiesFor(Class clazz, String[] mergeArgs)
+	public static Properties getPropertiesFor(
+			Class clazz, String[] externalProps)
 		throws IOException {
 
 		Properties properties = getPropertiesFor(clazz);
 
-		if (mergeArgs != null) {
-			_mergeArguments(properties, mergeArgs);
+		if (externalProps != null) {
+			_mergeExternalProps(properties, externalProps);
 		}
 
 		return properties;
@@ -85,17 +86,17 @@ public class PropertiesFactory {
 		return path;
 	}
 
-	private static void _mergeArguments(
-		Properties properties, String[] mergeArgs) {
+	private static void _mergeExternalProps(
+		Properties properties, String[] externalProps) {
 
-		for (String argument : mergeArgs) {
-			Matcher matcher = _propertyPattern.matcher(argument);
+		for (String property : externalProps) {
+			Matcher matcher = _propertyPattern.matcher(property);
 
 			if (matcher.find()) {
 				properties.put(matcher.group(1), matcher.group(2));
 
 				_logger.trace(
-					"Merged argument {} = {}", matcher.group(1),
+					"Merged property {} = {}", matcher.group(1),
 					matcher.group(2));
 			}
 		}
