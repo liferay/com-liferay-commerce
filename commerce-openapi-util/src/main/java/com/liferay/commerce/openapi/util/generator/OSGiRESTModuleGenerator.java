@@ -18,7 +18,6 @@ import com.liferay.commerce.openapi.util.ComponentDefinition;
 import com.liferay.commerce.openapi.util.Definition;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.PropertiesFactory;
-import com.liferay.commerce.openapi.util.PropertyDefinition;
 import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.importer.OpenAPIImporter;
 import com.liferay.commerce.openapi.util.util.StringUtils;
@@ -26,10 +25,9 @@ import com.liferay.commerce.openapi.util.util.StringUtils;
 import java.io.IOException;
 
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -171,13 +169,26 @@ public class OSGiRESTModuleGenerator extends SourceGenerator {
 			Set<ComponentDefinition> componentDefinitions =
 				definition.getComponentDefinitions();
 
-			for (ComponentDefinition componentDefinition :
-					componentDefinitions) {
+			Stream<ComponentDefinition> stream = componentDefinitions.stream();
 
-				if (componentDefinition.isObject()) {
-					_writeModelSource(componentDefinition);
+			stream.filter(
+				componentDefinition -> componentDefinition.isObject()
+			).forEach(
+				componentDefinition -> {
+					DTOGenerator dtoGenerator = new DTOGenerator(
+						_author, _moduleOutputPath, _modelPackagePath,
+						componentDefinition);
+
+					try {
+						dtoGenerator.writeModelSource();
+					}
+					catch (IOException ioe) {
+						_logger.error(
+							"Unable to write DTO source for {}",
+							componentDefinition, ioe);
+					}
 				}
-			}
+			);
 
 			_writeApplicationSource();
 
@@ -306,81 +317,6 @@ public class OSGiRESTModuleGenerator extends SourceGenerator {
 			_jaxRSJSONPackagePath);
 
 		writeSource(jsonMessageBodyWriterTpl, jsonMessageBodyWriterSourcePath);
-	}
-
-	private void _writeModelSource(ComponentDefinition componentDefinition)
-		throws IOException {
-
-		String dtoSource = getTemplate(_TEMPLATE_FILE_MODEL);
-
-		dtoSource = dtoSource.replace("${PACKAGE}", _modelPackagePath);
-
-		dtoSource = dtoSource.replace("${AUTHOR}", _author);
-
-		String modelName = StringUtils.upperCaseFirstChar(
-			componentDefinition.getName());
-
-		dtoSource = dtoSource.replace("${MODEL}", modelName);
-
-		String dtoClassName = modelName + "DTO";
-
-		dtoSource = dtoSource.replace("${DTO_CLASS}", dtoClassName);
-
-		List<PropertyDefinition> propertyDefinitions =
-			componentDefinition.getPropertyDefinitions();
-
-		Iterator<PropertyDefinition> iterator = propertyDefinitions.iterator();
-
-		StringBuilder methodsSb = new StringBuilder();
-		StringBuilder variablesSb = new StringBuilder();
-
-		while (iterator.hasNext()) {
-			PropertyDefinition propertyDefinition = iterator.next();
-
-			String name = propertyDefinition.getName();
-
-			methodsSb.append("\tpublic ");
-			methodsSb.append(propertyDefinition.getJavaType());
-			methodsSb.append(" get");
-			methodsSb.append(StringUtils.upperCaseFirstChar(name));
-			methodsSb.append("() {\n\t\treturn _");
-			methodsSb.append(name);
-			methodsSb.append(";\n\t}\n\n");
-
-			methodsSb.append("\tpublic void set");
-			methodsSb.append(StringUtils.upperCaseFirstChar(name));
-			methodsSb.append("(");
-			methodsSb.append(propertyDefinition.getJavaType());
-			methodsSb.append(" ");
-			methodsSb.append(name);
-			methodsSb.append(") {\n\t\t_");
-			methodsSb.append(name);
-			methodsSb.append(" = ");
-			methodsSb.append(name);
-			methodsSb.append(";\n\t}");
-
-			if (iterator.hasNext()) {
-				methodsSb.append("\n\n");
-			}
-
-			variablesSb.append("\tprivate ");
-			variablesSb.append(propertyDefinition.getJavaType());
-			variablesSb.append(" _");
-			variablesSb.append(name);
-			variablesSb.append(";");
-
-			if (iterator.hasNext()) {
-				variablesSb.append("\n");
-			}
-		}
-
-		dtoSource = dtoSource.replace("${METHODS}", methodsSb.toString());
-		dtoSource = dtoSource.replace("${VARIABLES}", variablesSb.toString());
-
-		String dtoSourcePath = getClassSourcePath(
-			_moduleOutputPath, dtoClassName + ".java", _modelPackagePath);
-
-		writeSource(dtoSource, dtoSourcePath);
 	}
 
 	private void _writeResourceImplementationSource(String version, Path path)
@@ -513,8 +449,6 @@ public class OSGiRESTModuleGenerator extends SourceGenerator {
 
 	private static final String _TEMPLATE_FILE_JSON_MESSAGE_BODY_WRITER =
 		"JsonMessageBodyWriter.java.tpl";
-
-	private static final String _TEMPLATE_FILE_MODEL = "Model.java.tpl";
 
 	private static final String _TEMPLATE_FILE_RESOURCE_IMPLEMENTATION =
 		"ResourceImpl.java.tpl";
