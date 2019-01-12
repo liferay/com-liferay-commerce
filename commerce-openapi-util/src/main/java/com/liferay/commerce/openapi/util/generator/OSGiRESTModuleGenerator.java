@@ -446,10 +446,10 @@ public class OSGiRESTModuleGenerator {
 		dtoSource = dtoSource.replace("${METHODS}", methodsSb.toString());
 		dtoSource = dtoSource.replace("${VARIABLES}", variablesSb.toString());
 
-		String componentSourcePath = _getClassSourcePath(
+		String dtoSourcePath = _getClassSourcePath(
 			dtoClassName + ".java", _modelPackagePath);
 
-		_writeSource(dtoSource, componentSourcePath);
+		_writeSource(dtoSource, dtoSourcePath);
 	}
 
 	private void _writeResourceImplementationSource(String version, Path path)
