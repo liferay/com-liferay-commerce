@@ -28,11 +28,17 @@ public class ComponentDefinition {
 		String name, List<PropertyDefinition> propertyDefinitions,
 		String type) {
 
-		_componentType = ComponentType.SCHEMA;
 		_name = name;
 		_parameter = null;
 		_propertyDefinitions = new ArrayList<>(propertyDefinitions);
-		_type = type;
+
+		ComponentType componentType = ComponentType.OBJECT;
+
+		if ((type != null) && type.equals("array")) {
+			componentType = ComponentType.ARRAY;
+		}
+
+		_componentType = componentType;
 	}
 
 	public ComponentDefinition(String name, Parameter parameter) {
@@ -40,7 +46,6 @@ public class ComponentDefinition {
 		_parameter = parameter;
 		_componentType = ComponentType.PARAMETER;
 		_propertyDefinitions = Collections.emptyList();
-		_type = "array";
 	}
 
 	public String getName() {
@@ -53,6 +58,22 @@ public class ComponentDefinition {
 
 	public List<PropertyDefinition> getPropertyDefinitions() {
 		return new ArrayList<>(_propertyDefinitions);
+	}
+
+	public boolean isArray() {
+		if (_componentType == ComponentType.ARRAY) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean isObject() {
+		if (_componentType == ComponentType.OBJECT) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isParameter() {
@@ -94,7 +115,7 @@ public class ComponentDefinition {
 
 	public enum ComponentType {
 
-		PARAMETER, SCHEMA
+		ARRAY, OBJECT, PARAMETER
 
 	}
 
@@ -103,6 +124,5 @@ public class ComponentDefinition {
 	private final Parameter _parameter;
 	private final List<PropertyDefinition> _propertyDefinitions;
 	private String _toString;
-	private final String _type;
 
 }
