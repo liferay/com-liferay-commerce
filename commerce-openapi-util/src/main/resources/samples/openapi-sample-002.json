@@ -1,265 +1,4 @@
 {
-	"openapi" : "3.0.0",
-	"servers" : [ {
-			"description" : "SwaggerHub API Auto Mocking",
-			"url" : "https://virtserver.swaggerhub.com/liferay6/commerce-admin/1.0"
-		}, {
-			"description" : "Liferay Commerce UAT server (quality assurance and acceptance test)",
-			"url" : "https://commerce-uat.liferay.com/1.0/commerce-admin"
-		}, {
-			"description" : "Liferay Commerce DEV server (development test)",
-			"url" : "https://commerce-dev.liferay.com/1.0/commerce-admin"
-		} ],
-	"info" : {
-		"contact" : {
-			"email" : "commerce@liferay.com"
-		},
-		"description" : "Liferay Commerce Admin API",
-		"license" : {
-			"name" : "Apache 2.0",
-			"url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
-		},
-		"title" : "Liferay Commerce Admin API",
-		"version" : "1.0"
-	},
-	"paths" : {
-		"/priceList/" : {
-			"get" : {
-				"operationId" : "getPriceLists",
-				"parameters" : [ {
-						"$ref" : "#/components/parameters/groupQueryParam"
-					} ],
-				"responses" : {
-					"200" : {
-						"content" : {
-							"application/json" : {
-								"schema" : {
-									"$ref" : "#/components/schemas/PriceLists"
-								}
-							}
-						},
-						"description" : "returns results matching criteria"
-					},
-					"400" : {
-						"description" : "bad input parameter"
-					}
-				},
-				"tags" : [ "Price List" ]
-			},
-			"post" : {
-				"operationId" : "upsertPriceList",
-				"requestBody" : {
-					"content" : {
-						"application/json" : {
-							"schema" : {
-								"$ref" : "#/components/schemas/PriceList"
-							}
-						}
-					},
-					"required" : true
-				},
-				"responses" : {
-					"201" : {
-						"description" : "Created"
-					},
-					"202" : {
-						"description" : "Async"
-					},
-					"204" : {
-						"description" : "Updated"
-					},
-					"400" : {
-						"description" : "bad input parameter"
-					}
-				},
-				"tags" : [ "Price List" ]
-			}
-		},
-		"/priceList/{id}" : {
-			"delete" : {
-				"operationId" : "deletePriceList",
-				"parameters" : [ {
-						"$ref" : "#/components/parameters/idPathParam"
-					} ],
-				"responses" : {
-					"204" : {
-						"description" : "No content"
-					}
-				},
-				"tags" : [ "Price List" ]
-			},
-			"get" : {
-				"operationId" : "getPriceList",
-				"parameters" : [ {
-						"$ref" : "#/components/parameters/idPathParam"
-					}, {
-						"$ref" : "#/components/parameters/groupQueryParam"
-					} ],
-				"responses" : {
-					"200" : {
-						"content" : {
-							"application/json" : {
-								"schema" : {
-									"$ref" : "#/components/schemas/PriceList"
-								}
-							}
-						},
-						"description" : "returns results matching criteria"
-					},
-					"400" : {
-						"description" : "bad input parameter"
-					}
-				},
-				"tags" : [ "Price List" ]
-			},
-			"put" : {
-				"operationId" : "updatePriceList",
-				"parameters" : [ {
-						"$ref" : "#/components/parameters/idPathParam"
-					} ],
-				"requestBody" : {
-					"content" : {
-						"application/json" : {
-							"schema" : {
-								"$ref" : "#/components/schemas/PriceList"
-							}
-						}
-					},
-					"required" : true
-				},
-				"responses" : {
-					"201" : {
-						"description" : "Created"
-					},
-					"202" : {
-						"description" : "Async"
-					},
-					"400" : {
-						"description" : "bad input parameter"
-					}
-				},
-				"tags" : [ "Price List" ]
-			}
-		},
-		"/product/" : {
-			"get" : {
-				"operationId" : "getProducts",
-				"parameters" : [ {
-						"$ref" : "#/components/parameters/groupQueryParam"
-					} ],
-				"responses" : {
-					"200" : {
-						"content" : {
-							"application/json" : {
-								"schema" : {
-									"$ref" : "#/components/schemas/Products"
-								}
-							}
-						},
-						"description" : "returns results matching criteria"
-					},
-					"400" : {
-						"description" : "bad input parameter"
-					}
-				},
-				"tags" : [ "Product" ]
-			},
-			"post" : {
-				"operationId" : "upsertProduct",
-				"requestBody" : {
-					"content" : {
-						"application/json" : {
-							"schema" : {
-								"$ref" : "#/components/schemas/Product"
-							}
-						}
-					},
-					"required" : true
-				},
-				"responses" : {
-					"201" : {
-						"description" : "Created"
-					},
-					"202" : {
-						"description" : "Async"
-					},
-					"204" : {
-						"description" : "Updated"
-					},
-					"400" : {
-						"description" : "bad input parameter"
-					}
-				},
-				"tags" : [ "Product" ]
-			}
-		},
-		"/product/{id}" : {
-			"delete" : {
-				"operationId" : "deleteProduct",
-				"parameters" : [ {
-						"$ref" : "#/components/parameters/idPathParam"
-					} ],
-				"responses" : {
-					"204" : {
-						"description" : "No content"
-					}
-				},
-				"tags" : [ "Product" ]
-			},
-			"get" : {
-				"operationId" : "getProduct",
-				"parameters" : [ {
-						"$ref" : "#/components/parameters/idPathParam"
-					}, {
-						"$ref" : "#/components/parameters/groupQueryParam"
-					} ],
-				"responses" : {
-					"200" : {
-						"content" : {
-							"application/json" : {
-								"schema" : {
-									"$ref" : "#/components/schemas/Product"
-								}
-							}
-						},
-						"description" : "returns results matching criteria"
-					},
-					"400" : {
-						"description" : "bad input parameter"
-					}
-				},
-				"tags" : [ "Product" ]
-			},
-			"put" : {
-				"operationId" : "updateProduct",
-				"parameters" : [ {
-						"$ref" : "#/components/parameters/idPathParam"
-					} ],
-				"requestBody" : {
-					"content" : {
-						"application/json" : {
-							"schema" : {
-								"$ref" : "#/components/schemas/Product"
-							}
-						}
-					},
-					"required" : true
-				},
-				"responses" : {
-					"201" : {
-						"description" : "Created"
-					},
-					"202" : {
-						"description" : "Async"
-					},
-					"400" : {
-						"description" : "bad input parameter"
-					}
-				},
-				"tags" : [ "Product" ]
-			}
-		}
-	},
 	"components" : {
 		"parameters" : {
 			"groupQueryParam" : {
@@ -327,7 +66,14 @@
 						"type" : "number"
 					}
 				},
-				"required" : [ "active", "externalReferenceCode", "neverExpire", "priority", "currency", "name" ],
+				"required" : [
+					"active",
+					"externalReferenceCode",
+					"neverExpire",
+					"priority",
+					"currency",
+					"name"
+				],
 				"type" : "object"
 			},
 			"PriceLists" : {
@@ -344,7 +90,11 @@
 						"type" : "boolean"
 					},
 					"assetCategoryIds" : {
-						"example" : [ 20001237, 20210282, 50441007 ],
+						"example" : [
+							20001237,
+							20210282,
+							50441007
+						],
 						"items" : {
 							"type" : "integer"
 						},
@@ -375,7 +125,12 @@
 						"type" : "string"
 					}
 				},
-				"required" : [ "title", "active", "externalReferenceCode", "productTypeName" ],
+				"required" : [
+					"title",
+					"active",
+					"externalReferenceCode",
+					"productTypeName"
+				],
 				"type" : "object"
 			},
 			"Products" : {
@@ -387,11 +142,317 @@
 			}
 		}
 	},
-	"tags" : [ {
-			"name" : "Price List",
-			"description" : "Access to Price Lists"
-		}, {
+	"info" : {
+		"contact" : {
+			"email" : "commerce@liferay.com"
+		},
+		"description" : "Liferay Commerce Admin API",
+		"license" : {
+			"name" : "Apache 2.0",
+			"url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+		},
+		"title" : "Liferay Commerce Admin API",
+		"version" : "1.0"
+	},
+	"openapi" : "3.0.0",
+	"paths" : {
+		"/priceList/" : {
+			"get" : {
+				"operationId" : "getPriceLists",
+				"parameters" : [
+					{
+						"$ref" : "#/components/parameters/groupQueryParam"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/PriceLists"
+								}
+							}
+						},
+						"description" : "returns results matching criteria"
+					},
+					"400" : {
+						"description" : "bad input parameter"
+					}
+				},
+				"tags" : [
+					"Price List"
+				]
+			},
+			"post" : {
+				"operationId" : "upsertPriceList",
+				"requestBody" : {
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/PriceList"
+							}
+						}
+					},
+					"required" : true
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created"
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "bad input parameter"
+					}
+				},
+				"tags" : [
+					"Price List"
+				]
+			}
+		},
+		"/priceList/{id}" : {
+			"delete" : {
+				"operationId" : "deletePriceList",
+				"parameters" : [
+					{
+						"$ref" : "#/components/parameters/idPathParam"
+					}
+				],
+				"responses" : {
+					"204" : {
+						"description" : "No content"
+					}
+				},
+				"tags" : [
+					"Price List"
+				]
+			},
+			"get" : {
+				"operationId" : "getPriceList",
+				"parameters" : [
+					{
+						"$ref" : "#/components/parameters/idPathParam"
+					},
+					{
+						"$ref" : "#/components/parameters/groupQueryParam"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/PriceList"
+								}
+							}
+						},
+						"description" : "returns results matching criteria"
+					},
+					"400" : {
+						"description" : "bad input parameter"
+					}
+				},
+				"tags" : [
+					"Price List"
+				]
+			},
+			"put" : {
+				"operationId" : "updatePriceList",
+				"parameters" : [
+					{
+						"$ref" : "#/components/parameters/idPathParam"
+					}
+				],
+				"requestBody" : {
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/PriceList"
+							}
+						}
+					},
+					"required" : true
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created"
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"400" : {
+						"description" : "bad input parameter"
+					}
+				},
+				"tags" : [
+					"Price List"
+				]
+			}
+		},
+		"/product/" : {
+			"get" : {
+				"operationId" : "getProducts",
+				"parameters" : [
+					{
+						"$ref" : "#/components/parameters/groupQueryParam"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Products"
+								}
+							}
+						},
+						"description" : "returns results matching criteria"
+					},
+					"400" : {
+						"description" : "bad input parameter"
+					}
+				},
+				"tags" : [
+					"Product"
+				]
+			},
+			"post" : {
+				"operationId" : "upsertProduct",
+				"requestBody" : {
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Product"
+							}
+						}
+					},
+					"required" : true
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created"
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"204" : {
+						"description" : "Updated"
+					},
+					"400" : {
+						"description" : "bad input parameter"
+					}
+				},
+				"tags" : [
+					"Product"
+				]
+			}
+		},
+		"/product/{id}" : {
+			"delete" : {
+				"operationId" : "deleteProduct",
+				"parameters" : [
+					{
+						"$ref" : "#/components/parameters/idPathParam"
+					}
+				],
+				"responses" : {
+					"204" : {
+						"description" : "No content"
+					}
+				},
+				"tags" : [
+					"Product"
+				]
+			},
+			"get" : {
+				"operationId" : "getProduct",
+				"parameters" : [
+					{
+						"$ref" : "#/components/parameters/idPathParam"
+					},
+					{
+						"$ref" : "#/components/parameters/groupQueryParam"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"content" : {
+							"application/json" : {
+								"schema" : {
+									"$ref" : "#/components/schemas/Product"
+								}
+							}
+						},
+						"description" : "returns results matching criteria"
+					},
+					"400" : {
+						"description" : "bad input parameter"
+					}
+				},
+				"tags" : [
+					"Product"
+				]
+			},
+			"put" : {
+				"operationId" : "updateProduct",
+				"parameters" : [
+					{
+						"$ref" : "#/components/parameters/idPathParam"
+					}
+				],
+				"requestBody" : {
+					"content" : {
+						"application/json" : {
+							"schema" : {
+								"$ref" : "#/components/schemas/Product"
+							}
+						}
+					},
+					"required" : true
+				},
+				"responses" : {
+					"201" : {
+						"description" : "Created"
+					},
+					"202" : {
+						"description" : "Async"
+					},
+					"400" : {
+						"description" : "bad input parameter"
+					}
+				},
+				"tags" : [
+					"Product"
+				]
+			}
+		}
+	},
+	"servers" : [
+		{
+			"description" : "SwaggerHub API Auto Mocking",
+			"url" : "https://virtserver.swaggerhub.com/liferay6/commerce-admin/1.0"
+		},
+		{
+			"description" : "Liferay Commerce UAT server (quality assurance and acceptance test)",
+			"url" : "https://commerce-uat.liferay.com/1.0/commerce-admin"
+		},
+		{
+			"description" : "Liferay Commerce DEV server (development test)",
+			"url" : "https://commerce-dev.liferay.com/1.0/commerce-admin"
+		}
+	],
+	"tags" : [
+		{
+			"description" : "Access to Price Lists",
+			"name" : "Price List"
+		},
+		{
 			"description" : "Access to Products",
 			"name" : "Product"
-		} ]
+		}
+	]
 }
