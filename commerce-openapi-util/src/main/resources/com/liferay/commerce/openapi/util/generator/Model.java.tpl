@@ -16,11 +16,14 @@ package ${PACKAGE};
 
 import javax.annotation.Generated;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author ${AUTHOR}
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-public class ${MODEL_CLASS} {
+@XmlRootElement(name ="${MODEL}")
+public class ${DTO_CLASS} {
 
 ${METHODS}
 
