@@ -201,11 +201,9 @@ public class OSGiRESTModuleGenerator {
 			for (ComponentDefinition componentDefinition :
 					componentDefinitions) {
 
-				if (componentDefinition.isParameter()) {
-					continue;
+				if (componentDefinition.isObject()) {
+					_writeModelSource(componentDefinition);
 				}
-
-				_writeModelSource(componentDefinition);
 			}
 
 			_writeApplicationSource();
