@@ -78,16 +78,16 @@ public class CommerceAccountFinderImpl
 			String[] names = _customSQL.keywords(keywords);
 
 			sql = _customSQL.replaceKeywords(
-				sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
+				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
 				names);
+
+			sql = _customSQL.replaceAndOperator(sql, true);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
-			if (Validator.isNotNull(keywords)) {
-				QueryPos qPos = QueryPos.getInstance(q);
+			QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(keywords);
-			}
+			qPos.add(names, 2);
 
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
@@ -142,10 +142,14 @@ public class CommerceAccountFinderImpl
 
 			String keywords = (String)queryDefinition.getAttribute("keywords");
 
+			if (Validator.isBlank(keywords)) {
+				keywords = null;
+			}
+
 			String[] names = _customSQL.keywords(keywords);
 
 			sql = _customSQL.replaceKeywords(
-				sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
+				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
 				names);
 
 			boolean b2b = (boolean)queryDefinition.getAttribute("B2B");
@@ -164,16 +168,16 @@ public class CommerceAccountFinderImpl
 						CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL + ")");
 			}
 
+			sql = _customSQL.replaceAndOperator(sql, true);
+
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
 			q.addEntity(
 				CommerceAccountImpl.TABLE_NAME, CommerceAccountImpl.class);
 
-			if (Validator.isNotNull(keywords)) {
-				QueryPos qPos = QueryPos.getInstance(q);
+			QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(keywords);
-			}
+			qPos.add(names, 2);
 
 			return (List<CommerceAccount>)QueryUtil.list(
 				q, getDialect(), queryDefinition.getStart(),
