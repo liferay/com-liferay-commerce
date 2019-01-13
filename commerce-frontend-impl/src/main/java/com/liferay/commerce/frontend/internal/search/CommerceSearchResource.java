@@ -232,13 +232,12 @@ public class CommerceSearchResource {
 
 		PortletURL editURL = PortletProviderUtil.getPortletURL(
 			themeDisplay.getRequest(), CommerceAccount.class.getName(),
-			PortletProvider.Action.EDIT);
+			PortletProvider.Action.VIEW);
 
 		if (editURL == null) {
 			return "";
 		}
 
-		editURL.setParameter("mvcRenderCommandName", "editCommerceAccount");
 		editURL.setParameter("commerceAccountId", String.valueOf(accountId));
 
 		return editURL.toString();
