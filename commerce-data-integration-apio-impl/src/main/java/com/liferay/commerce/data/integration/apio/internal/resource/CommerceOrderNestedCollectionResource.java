@@ -191,7 +191,7 @@ public class CommerceOrderNestedCollectionResource
 		if (commerceOrder != null) {
 			try {
 				CommerceAccount commerceAccount =
-					commerceOrder.getOrderAccount();
+					commerceOrder.getCommerceAccount();
 
 				return commerceAccount.getExternalReferenceCode();
 			}
@@ -210,7 +210,7 @@ public class CommerceOrderNestedCollectionResource
 		if (commerceOrder != null) {
 			try {
 				CommerceAccount commerceAccount =
-					commerceOrder.getOrderAccount();
+					commerceOrder.getCommerceAccount();
 
 				return commerceAccount.getName();
 			}
