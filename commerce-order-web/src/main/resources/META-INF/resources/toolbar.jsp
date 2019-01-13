@@ -24,7 +24,6 @@ CommerceOrderDisplayTerms commerceOrderDisplayTerms = (CommerceOrderDisplayTerms
 boolean showFilter = commerceOrderListDisplayContext.isShowFilter();
 
 List<KeyValuePair> availableAdvanceStatusKVPs = commerceOrderListDisplayContext.getAvailableAdvanceStatusKVPs();
-List<KeyValuePair> availableOrderOrganizationKVPs = commerceOrderListDisplayContext.getAvailableOrderOrganizationKVPs();
 List<KeyValuePair> availableOrderStatusKVPs = commerceOrderListDisplayContext.getAvailableOrderStatusKVPs();
 
 PortletURL searchURL = commerceOrderListDisplayContext.getPortletURL();
@@ -71,24 +70,7 @@ pageContext.setAttribute("searchURL", searchURL);
 	</liferay-frontend:management-bar>
 
 	<div class="form-group-autofit <%= showFilter ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />filterSettings">
-		<c:if test="<%= !availableOrderOrganizationKVPs.isEmpty() %>">
-			<div class="form-group-item">
-				<aui:select label="account" name="<%= CommerceOrderDisplayTerms.ORDER_ORGANIZATION_ID %>" showEmptyOption="<%= true %>">
 
-					<%
-					for (KeyValuePair keyValuePair : availableOrderOrganizationKVPs) {
-						long organizationId = GetterUtil.getLong(keyValuePair.getKey());
-					%>
-
-						<aui:option label="<%= keyValuePair.getValue() %>" localizeLabel="<%= false %>" selected="<%= organizationId == commerceOrderDisplayTerms.getOrderOrganizationId() %>" value="<%= organizationId %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-			</div>
-		</c:if>
 
 		<div class="form-group-item">
 			<label for="<portlet:namespace /><%= CommerceOrderDisplayTerms.START_CREATE_DATE %>">
