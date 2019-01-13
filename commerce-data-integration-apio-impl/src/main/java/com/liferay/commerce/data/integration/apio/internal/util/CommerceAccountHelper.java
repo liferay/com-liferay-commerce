@@ -146,8 +146,8 @@ public class CommerceAccountHelper {
 			currentUser);
 
 		commerceAccount = _commerceAccountLocalService.updateCommerceAccount(
-			commerceAccount.getCommerceAccountId(), name, email, taxId, active,
-			serviceContext);
+			commerceAccount.getCommerceAccountId(), name, false, null, email,
+			taxId, active, serviceContext);
 
 		_setMembers(commerceAccount, userIds, serviceContext);
 

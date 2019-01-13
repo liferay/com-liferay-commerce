@@ -97,11 +97,11 @@ if (commerceAddress != null) {
 			<h3 class="shipment-details-title"><liferay-ui:message key="customer" /></h3>
 
 			<div class="customer-name shipment-details-subtitle">
-				<%= HtmlUtil.escape(commerceShipment.getCustomerName()) %>
+				<%= HtmlUtil.escape(commerceShipment.getCommerceAccountName()) %>
 			</div>
 
 			<div class="customer-id">
-				<%= commerceShipment.getCustomerId() %>
+				<%= commerceShipment.getCommerceAccountId() %>
 			</div>
 		</div>
 	</div>
