@@ -63,9 +63,9 @@ class AddAccountModal extends Component {
 		return this.query = evt.target.value;
 	}
 
-    _handleInputName(evt) {
-        return this.accountName = evt.target.value;
-    }
+	_handleInputName(evt) {
+		return this.accountName = evt.target.value;
+	}
 
 	_toggleInvitation(userToBeToggled) {
 		if (!userToBeToggled.id) {
@@ -92,31 +92,31 @@ class AddAccountModal extends Component {
 				method: 'GET'
 			}
 		)
-        .then(
-            response => response.json()
-        )
-        .then(
-            response => {
-                this._isLoading = false;
-                return this.users = response.users;
-            }
-        );
+			.then(
+				response => response.json()
+			)
+			.then(
+				response => {
+					this._isLoading = false;
+					return this.users = response.users;
+				}
+			);
 	}
 
 	_sendInvitations() {
 		if (!this.addedUsers.length) {
 			return false;
-        };
-        
-        const data = {
-            accountName: this.accountName,
-            administratorsEmail: this.addedUsers
-        };
+		};
+
+		const data = {
+			accountName: this.accountName,
+			administratorsEmail: this.addedUsers
+		};
 
 		return this.emit(
-            'AddAccountModalSave', 
-            data
-        );
+			'AddAccountModalSave',
+			data
+		);
 	}
 
 	toggle() {
