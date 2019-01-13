@@ -16,63 +16,63 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 
 class UserInvitation extends Component {
 
-    created() {
-        this._fetchUsers();
-    }
+	created() {
+		this._fetchUsers();
+	}
 
 	attached() {
-        this._debouncedFetchUsers = debounce(this._fetchUsers.bind(this), 300);
+		this._debouncedFetchUsers = debounce(this._fetchUsers.bind(this), 300);
 	}
 
 	// syncAddedUsers(e) {
-    //     console.log(e)
-    //     if (e.length === this.addedUsers.length) {
-    //         return null;
-    //     }
-    //     const contentWrapper = this.element.querySelector('.autocomplete-input__content');
+	//     console.log(e)
+	//     if (e.length === this.addedUsers.length) {
+	//         return null;
+	//     }
+	//     const contentWrapper = this.element.querySelector('.autocomplete-input__content');
 	// 	this.element.querySelector('.autocomplete-input__box').focus();
 	// 	contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-    //     this.emit('updateUsers', this.addedUsers);
-    //     return e;
+	//     this.emit('updateUsers', this.addedUsers);
+	//     return e;
 	// }
 
 	// syncQuery(e) {
 	// 	this._isLoading = true;
-    //     return this._debouncedFetchUsers();
-    // }
-    
-    shouldUpdate(changes) {
-        console.log(changes)
-        if(changes.events){
-            return false;
-        }
-        return true
-        if(
-            (changes.children)
-            || (changes.users && typeof changes.users.newVal !== 'undefined')
-            || (changes.addedUsers && typeof changes.addedUsers.newVal !== 'undefined')
-            || (changes.query && typeof changes.query.newVal !== 'undefined')
-        ){
-            return true;
-        }
-        return false;
-    }
+	//     return this._debouncedFetchUsers();
+	// }
 
-    testAddedUsers(e) {
-        const contentWrapper = this.element.querySelector('.autocomplete-input__content');
+	shouldUpdate(changes) {
+		console.log(changes);
+		if (changes.events) {
+			return false;
+		}
+		return true;
+		if (
+			(changes.children) ||
+            (changes.users && typeof changes.users.newVal !== 'undefined') ||
+            (changes.addedUsers && typeof changes.addedUsers.newVal !== 'undefined') ||
+            (changes.query && typeof changes.query.newVal !== 'undefined')
+		) {
+			return true;
+		}
+		return false;
+	}
+
+	testAddedUsers(e) {
+		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
 		this.element.querySelector('.autocomplete-input__box').focus();
 		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-        return this.emit('updateUsers', this.addedUsers);
-    }
+		return this.emit('updateUsers', this.addedUsers);
+	}
 
 	testQuery() {
 		this._isLoading = true;
-        return this._debouncedFetchUsers();
-    }
+		return this._debouncedFetchUsers();
+	}
 
 	_handleFormSubmit(evt) {
-        evt.preventDefault();
-        
+		evt.preventDefault();
+
 		if (this.query.match(EMAIL_REGEX)) {
 			this.addedUsers = [
 				...this.addedUsers,
@@ -80,26 +80,26 @@ class UserInvitation extends Component {
 					email: this.query
 				}
 			];
-            this.query = '';
-            this.testAddedUsers();
-            this.testQuery()
+			this.query = '';
+			this.testAddedUsers();
+			this.testQuery();
 			return true;
 		}
 		return false;
 	}
 
 	_handleInputBox(evt) {
-        evt.preventDefault();
-        
+		evt.preventDefault();
+
 		if (evt.keyCode === 8 && !this.query.length) {
-            this.addedUsers = this.addedUsers.slice(0, -1);
-            this.testAddedUsers();
+			this.addedUsers = this.addedUsers.slice(0, -1);
+			this.testAddedUsers();
 			return false;
 		}
-        
-        this.query = evt.target.value;
-        this.testQuery()
-        return true
+
+		this.query = evt.target.value;
+		this.testQuery();
+		return true;
 	}
 
 	_toggleInvitation(userToBeToggled) {
@@ -116,8 +116,8 @@ class UserInvitation extends Component {
 			hasUserAlreadyBeenAdded ?
 				this.addedUsers.filter((user) => user.email !== userToBeToggled.email) :
 				[...this.addedUsers, userToBeToggled];
-        
-        this.testAddedUsers();
+
+		this.testAddedUsers();
 		return this.addedUsers;
 	}
 
@@ -128,16 +128,16 @@ class UserInvitation extends Component {
 				method: 'GET'
 			}
 		)
-        .then(
-            response => response.json()
-        )
-        .then(
-            response => {
-                this._isLoading = false;
-                this.users = response.users;
-                return this.users;
-            }
-        );
+			.then(
+				response => response.json()
+			)
+			.then(
+				response => {
+					this._isLoading = false;
+					this.users = response.users;
+					return this.users;
+				}
+			);
 	}
 };
 

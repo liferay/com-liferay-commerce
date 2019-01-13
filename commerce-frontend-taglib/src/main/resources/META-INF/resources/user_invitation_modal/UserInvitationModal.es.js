@@ -63,9 +63,9 @@ class UserInvitationModal extends Component {
 		return this.query = evt.target.value;
 	}
 
-    _handleInputName(evt) {
-        return this.accountName = evt.target.value;
-    }
+	_handleInputName(evt) {
+		return this.accountName = evt.target.value;
+	}
 
 	_toggleInvitation(userToBeToggled) {
 		if (!userToBeToggled.id) {
@@ -92,26 +92,26 @@ class UserInvitationModal extends Component {
 				method: 'GET'
 			}
 		)
-        .then(
-            response => response.json()
-        )
-        .then(
-            response => {
-                this._isLoading = false;
-                return this.users = response.users;
-            }
-        );
+			.then(
+				response => response.json()
+			)
+			.then(
+				response => {
+					this._isLoading = false;
+					return this.users = response.users;
+				}
+			);
 	}
 
 	_sendInvitations() {
 		if (!this.addedUsers.length) {
 			return false;
-        };
-        
+		};
+
 		return this.emit(
-            'inviteUserToAccount', 
-            this.addedUsers
-        );
+			'inviteUserToAccount',
+			this.addedUsers
+		);
 	}
 
 	toggle() {
