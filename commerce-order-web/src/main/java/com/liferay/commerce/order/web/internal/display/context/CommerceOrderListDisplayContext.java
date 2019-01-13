@@ -222,25 +222,6 @@ public class CommerceOrderListDisplayContext {
 			facet.getFieldId(), commerceOrderDisplayTerms.getAdvanceStatus());
 	}
 
-	private void _addFacetCommerceAccountId(
-		SearchContext searchContext,
-		CommerceOrderDisplayTerms commerceOrderDisplayTerms) {
-
-		Facet facet = new SimpleFacet(searchContext);
-
-		facet.setFieldName("commerceAccountId");
-
-		searchContext.addFacet(facet);
-
-		long commerceAccountId =
-			commerceOrderDisplayTerms.getCommerceAccountId();
-
-		if (commerceAccountId > 0) {
-			searchContext.setAttribute(
-				facet.getFieldId(), String.valueOf(commerceAccountId));
-		}
-	}
-
 	private void _addFacetCreateDate(
 		SearchContext searchContext,
 		CommerceOrderDisplayTerms commerceOrderDisplayTerms) {
