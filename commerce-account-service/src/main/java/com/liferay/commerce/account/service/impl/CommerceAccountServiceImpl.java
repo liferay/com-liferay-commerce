@@ -167,17 +167,18 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			active, start, end, sort);
 	}
 
-	@Override
 	public CommerceAccount updateCommerceAccount(
-			long commerceAccountId, String name, String email, String taxId,
-			boolean active, ServiceContext serviceContext)
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
 			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
 
 		return commerceAccountLocalService.updateCommerceAccount(
-			commerceAccountId, name, email, taxId, active, serviceContext);
+			commerceAccountId, name, logo, logoBytes, email, taxId, active,
+			serviceContext);
 	}
 
 	@Override
