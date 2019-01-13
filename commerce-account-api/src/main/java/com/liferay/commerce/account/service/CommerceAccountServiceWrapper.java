@@ -132,12 +132,12 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
-		long commerceAccountId, String name, String email, String taxId,
-		boolean active,
+		long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+		String email, String taxId, boolean active,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountService.updateCommerceAccount(commerceAccountId,
-			name, email, taxId, active, serviceContext);
+			name, logo, logoBytes, email, taxId, active, serviceContext);
 	}
 
 	@Override

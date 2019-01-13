@@ -112,8 +112,9 @@ public interface CommerceAccountService extends BaseService {
 		int start, int end, Sort sort) throws PortalException;
 
 	public CommerceAccount updateCommerceAccount(long commerceAccountId,
-		String name, String email, String taxId, boolean active,
-		ServiceContext serviceContext) throws PortalException;
+		String name, boolean logo, byte[] logoBytes, String email,
+		String taxId, boolean active, ServiceContext serviceContext)
+		throws PortalException;
 
 	public CommerceAccount upsertCommerceAccount(String name,
 		long parentCommerceAccountId, boolean logo, byte[] logoBytes,

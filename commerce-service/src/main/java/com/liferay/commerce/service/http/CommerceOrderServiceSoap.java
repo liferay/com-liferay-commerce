@@ -81,70 +81,6 @@ public class CommerceOrderServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.model.CommerceOrderSoap[] getUserCommerceOrders(
-		long groupId, String keywords, int start, int end)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
-				CommerceOrderServiceUtil.getUserCommerceOrders(groupId,
-					keywords, start, end);
-
-			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getUserCommerceOrdersCount(long groupId, String keywords)
-		throws RemoteException {
-		try {
-			int returnValue = CommerceOrderServiceUtil.getUserCommerceOrdersCount(groupId,
-					keywords);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.model.CommerceOrderSoap[] getUserCommerceOrders(
-		long groupId, int orderStatus, String keywords, int start, int end)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
-				CommerceOrderServiceUtil.getUserCommerceOrders(groupId,
-					orderStatus, keywords, start, end);
-
-			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getUserCommerceOrdersCount(long groupId, int orderStatus,
-		String keywords) throws RemoteException {
-		try {
-			int returnValue = CommerceOrderServiceUtil.getUserCommerceOrdersCount(groupId,
-					orderStatus, keywords);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.commerce.model.CommerceOrderSoap addCommerceOrder(
 		long groupId, long commerceAccountId, long commerceCurrencyId,
 		long shippingAddressId, String purchaseOrderNumber)
@@ -412,6 +348,70 @@ public class CommerceOrderServiceSoap {
 		try {
 			int returnValue = CommerceOrderServiceUtil.getCommerceOrdersCount(groupId,
 					commerceAccountId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderSoap[] getUserCommerceOrders(
+		long groupId, int orderStatus, String keywords, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
+				CommerceOrderServiceUtil.getUserCommerceOrders(groupId,
+					orderStatus, keywords, start, end);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderSoap[] getUserCommerceOrders(
+		long groupId, String keywords, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
+				CommerceOrderServiceUtil.getUserCommerceOrders(groupId,
+					keywords, start, end);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getUserCommerceOrdersCount(long groupId, int orderStatus,
+		String keywords) throws RemoteException {
+		try {
+			int returnValue = CommerceOrderServiceUtil.getUserCommerceOrdersCount(groupId,
+					orderStatus, keywords);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getUserCommerceOrdersCount(long groupId, String keywords)
+		throws RemoteException {
+		try {
+			int returnValue = CommerceOrderServiceUtil.getUserCommerceOrdersCount(groupId,
+					keywords);
 
 			return returnValue;
 		}

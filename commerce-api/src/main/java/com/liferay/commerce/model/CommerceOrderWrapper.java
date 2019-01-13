@@ -444,6 +444,12 @@ public class CommerceOrderWrapper implements CommerceOrder,
 		return _commerceOrder.getBillingAddressId();
 	}
 
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount getCommerceAccount()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrder.getCommerceAccount();
+	}
+
 	/**
 	* Returns the commerce account ID of this commerce order.
 	*
@@ -452,6 +458,12 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public long getCommerceAccountId() {
 		return _commerceOrder.getCommerceAccountId();
+	}
+
+	@Override
+	public String getCommerceAccountName()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrder.getCommerceAccountName();
 	}
 
 	@Override
@@ -570,12 +582,6 @@ public class CommerceOrderWrapper implements CommerceOrder,
 	@Override
 	public Date getModifiedDate() {
 		return _commerceOrder.getModifiedDate();
-	}
-
-	@Override
-	public com.liferay.commerce.account.model.CommerceAccount getOrderAccount()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrder.getOrderAccount();
 	}
 
 	/**
