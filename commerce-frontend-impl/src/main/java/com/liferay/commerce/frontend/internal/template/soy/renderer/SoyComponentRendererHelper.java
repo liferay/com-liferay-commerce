@@ -136,13 +136,13 @@ public class SoyComponentRendererHelper {
 		sb.append(" as ");
 		sb.append(_moduleName);
 
-		for(String dependency : _componentDescriptor.getDependencies()) {
+		for (String dependency : _componentDescriptor.getDependencies()) {
 			sb.append(StringPool.COMMA);
 			sb.append(dependency);
 			sb.append(" as ");
 			sb.append(StringUtil.strip(dependency, _UNSAFE_MODULE_NAME_CHARS));
 		}
-		
+
 		if (_componentDescriptor.isPositionInLine()) {
 			ScriptData scriptData = new ScriptData();
 
