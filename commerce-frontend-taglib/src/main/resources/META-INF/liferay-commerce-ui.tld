@@ -17,6 +17,17 @@
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
+		<name>add-account-modal</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.AddAccountModalTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>componentId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>add-to-cart</name>
 		<tag-class>
 			com.liferay.commerce.frontend.taglib.servlet.taglib.AddToCartTag</tag-class>
@@ -126,17 +137,6 @@
 		<name>user-invitation-modal</name>
 		<tag-class>
 			com.liferay.commerce.frontend.taglib.servlet.taglib.UserInvitationModalTag</tag-class>
-		<body-content>empty</body-content>
-		<attribute>
-			<name>componentId</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>add-account-modal</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.AddAccountModalTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>componentId</name>
