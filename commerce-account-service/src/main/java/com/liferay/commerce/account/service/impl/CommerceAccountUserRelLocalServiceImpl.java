@@ -77,8 +77,10 @@ public class CommerceAccountUserRelLocalServiceImpl
 			commerceAccountUserRelLocalService.addCommerceAccountUserRel(
 				commerceAccountId, user.getUserId(), serviceContext);
 
-			userGroupRoleLocalService.addUserGroupRoles(
-				user.getUserId(), group.getGroupId(), roleIds);
+			if (roleIds != null) {
+				userGroupRoleLocalService.addUserGroupRoles(
+					user.getUserId(), group.getGroupId(), roleIds);
+			}
 		}
 
 		for (String emailAddress : emailAddresses) {
@@ -93,8 +95,10 @@ public class CommerceAccountUserRelLocalServiceImpl
 			commerceAccountUserRelLocalService.addCommerceAccountUserRel(
 				commerceAccountId, user.getUserId(), serviceContext);
 
-			userGroupRoleLocalService.addUserGroupRoles(
-				user.getUserId(), group.getGroupId(), roleIds);
+			if (roleIds != null) {
+				userGroupRoleLocalService.addUserGroupRoles(
+					user.getUserId(), group.getGroupId(), roleIds);
+			}
 		}
 	}
 
