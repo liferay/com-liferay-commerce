@@ -96,9 +96,16 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 	}
 
 	@Override
-	public CommerceAccount getOrderAccount() throws PortalException {
+	public CommerceAccount getCommerceAccount() throws PortalException {
 		return CommerceAccountLocalServiceUtil.getCommerceAccount(
 			getCommerceAccountId());
+	}
+
+	@Override
+	public String getCommerceAccountName() throws PortalException {
+		CommerceAccount commerceAccount = getCommerceAccount();
+
+		return commerceAccount.getName();
 	}
 
 	@Override
@@ -133,7 +140,7 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 
 	@Override
 	public boolean isB2B() throws PortalException {
-		CommerceAccount commerceAccount = getOrderAccount();
+		CommerceAccount commerceAccount = getCommerceAccount();
 
 		if (commerceAccount.getType() ==
 				CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS) {
@@ -157,7 +164,7 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 
 	@Override
 	public boolean isGuestOrder() throws PortalException {
-		CommerceAccount commerceAccount = getOrderAccount();
+		CommerceAccount commerceAccount = getCommerceAccount();
 
 		if (commerceAccount.getType() ==
 				CommerceAccountConstants.ACCOUNT_TYPE_GUEST) {
