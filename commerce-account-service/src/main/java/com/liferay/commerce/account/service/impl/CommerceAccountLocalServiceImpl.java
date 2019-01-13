@@ -328,8 +328,9 @@ public class CommerceAccountLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceAccount updateCommerceAccount(
-			long commerceAccountId, String name, String email, String taxId,
-			boolean active, ServiceContext serviceContext)
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceAccount commerceAccount =
@@ -341,6 +342,13 @@ public class CommerceAccountLocalServiceImpl
 			commerceAccount.getExternalReferenceCode());
 
 		commerceAccount.setName(name);
+
+		_portal.updateImageId(
+			commerceAccount, logo, logoBytes, "logoId",
+			_userFileUploadsSettings.getImageMaxSize(),
+			_userFileUploadsSettings.getImageMaxHeight(),
+			_userFileUploadsSettings.getImageMaxWidth());
+
 		commerceAccount.setEmail(email);
 		commerceAccount.setTaxId(taxId);
 		commerceAccount.setActive(active);
@@ -423,8 +431,8 @@ public class CommerceAccountLocalServiceImpl
 
 		if (commerceAccount != null) {
 			return commerceAccountLocalService.updateCommerceAccount(
-				commerceAccount.getCommerceAccountId(), name, email, taxId,
-				active, serviceContext);
+				commerceAccount.getCommerceAccountId(), name, logo, logoBytes,
+				email, taxId, active, serviceContext);
 		}
 
 		return commerceAccountLocalService.addCommerceAccount(
@@ -585,21 +593,21 @@ public class CommerceAccountLocalServiceImpl
 		QueryDefinition<CommerceAccount> queryDefinition =
 			new QueryDefinition<>();
 
-		boolean B2B = false;
+		boolean b2b = false;
 
 		if (commerceSiteType != CommerceSiteType.B2C) {
-			B2B = true;
+			b2b = true;
 		}
 
-		queryDefinition.setAttribute("B2B", B2B);
+		queryDefinition.setAttribute("B2B", b2b);
 
-		boolean B2C = false;
+		boolean b2c = false;
 
 		if (commerceSiteType != CommerceSiteType.B2B) {
-			B2C = true;
+			b2c = true;
 		}
 
-		queryDefinition.setAttribute("B2C", B2C);
+		queryDefinition.setAttribute("B2C", b2c);
 
 		queryDefinition.setAttribute("keywords", keywords);
 		queryDefinition.setAttribute(
@@ -610,6 +618,12 @@ public class CommerceAccountLocalServiceImpl
 
 	private static final String[] _SELECTED_FIELD_NAMES =
 		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID};
+
+	private static volatile UserFileUploadsSettings _userFileUploadsSettings =
+		ServiceProxyFactory.newServiceTrackedInstance(
+			UserFileUploadsSettings.class,
+			CommerceAccountLocalServiceImpl.class, "_userFileUploadsSettings",
+			false);
 
 	@ServiceReference(type = CommerceAccountRoleHelper.class)
 	private CommerceAccountRoleHelper _commerceAccountRoleHelper;
