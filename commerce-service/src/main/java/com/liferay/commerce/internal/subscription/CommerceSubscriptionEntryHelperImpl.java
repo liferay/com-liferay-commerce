@@ -53,7 +53,7 @@ public class CommerceSubscriptionEntryHelperImpl
 
 		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
 
-		CommerceAccount commerceAccount = commerceOrder.getOrderAccount();
+		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 
 		serviceContext.setUserId(commerceAccount.getUserId());
 
