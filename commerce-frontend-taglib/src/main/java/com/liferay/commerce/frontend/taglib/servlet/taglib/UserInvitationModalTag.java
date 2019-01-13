@@ -56,7 +56,8 @@ public class UserInvitationModalTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/user_invitation_modal/UserInvitationModal.es");
+			"commerce-frontend-taglib/user_invitation_modal" +
+				"/UserInvitationModal.es");
 	}
 
 }
