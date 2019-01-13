@@ -208,6 +208,12 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 		return _commerceShipment.getCarrier();
 	}
 
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount getCommerceAccount()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceShipment.getCommerceAccount();
+	}
+
 	/**
 	* Returns the commerce account ID of this commerce shipment.
 	*
@@ -216,6 +222,12 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 	@Override
 	public long getCommerceAccountId() {
 		return _commerceShipment.getCommerceAccountId();
+	}
+
+	@Override
+	public String getCommerceAccountName()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceShipment.getCommerceAccountName();
 	}
 
 	/**
@@ -322,12 +334,6 @@ public class CommerceShipmentWrapper implements CommerceShipment,
 	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _commerceShipment.getPrimaryKeyObj();
-	}
-
-	@Override
-	public com.liferay.commerce.account.model.CommerceAccount getShipmentAccount()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShipment.getShipmentAccount();
 	}
 
 	/**

@@ -131,11 +131,10 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.account.model.CommerceAccountSoap getPersonalCommerceAccount(
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
+	public static com.liferay.commerce.account.model.CommerceAccountSoap getCommerceAccount(
+		long commerceAccountId) throws RemoteException {
 		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.getPersonalCommerceAccount(serviceContext);
+			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.getCommerceAccount(commerceAccountId);
 
 			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
 		}
@@ -146,10 +145,11 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.account.model.CommerceAccountSoap getCommerceAccount(
-		long commerceAccountId) throws RemoteException {
+	public static com.liferay.commerce.account.model.CommerceAccountSoap getPersonalCommerceAccount(
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.getCommerceAccount(commerceAccountId);
+			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.getPersonalCommerceAccount(serviceContext);
 
 			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
 		}
@@ -213,13 +213,13 @@ public class CommerceAccountServiceSoap {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountSoap updateCommerceAccount(
-		long commerceAccountId, String name, String email, String taxId,
-		boolean active,
+		long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+		String email, String taxId, boolean active,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.updateCommerceAccount(commerceAccountId,
-					name, email, taxId, active, serviceContext);
+					name, logo, logoBytes, email, taxId, active, serviceContext);
 
 			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
 		}

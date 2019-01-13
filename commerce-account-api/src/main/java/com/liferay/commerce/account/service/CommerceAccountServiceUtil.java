@@ -133,13 +133,13 @@ public class CommerceAccountServiceUtil {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccount updateCommerceAccount(
-		long commerceAccountId, String name, String email, String taxId,
-		boolean active,
+		long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+		String email, String taxId, boolean active,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .updateCommerceAccount(commerceAccountId, name, email,
-			taxId, active, serviceContext);
+				   .updateCommerceAccount(commerceAccountId, name, logo,
+			logoBytes, email, taxId, active, serviceContext);
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccount upsertCommerceAccount(

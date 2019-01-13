@@ -302,8 +302,9 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount updateCommerceAccount(long commerceAccountId,
-		String name, String email, String taxId, boolean active,
-		ServiceContext serviceContext) throws PortalException;
+		String name, boolean logo, byte[] logoBytes, String email,
+		String taxId, boolean active, ServiceContext serviceContext)
+		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount updateStatus(long userId, long commerceAccountId,
