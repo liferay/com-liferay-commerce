@@ -25,10 +25,10 @@ public interface CommerceOrderFinder {
 	public int countByU_O(long userId,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.model.CommerceOrder> queryDefinition);
 
+	public java.util.List<com.liferay.commerce.model.CommerceOrder> findByG_O(
+		long groupId, int[] orderStatuses);
+
 	public java.util.List<com.liferay.commerce.model.CommerceOrder> findByU_O(
 		long userId,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.model.CommerceOrder> queryDefinition);
-
-	public java.util.List<com.liferay.commerce.model.CommerceOrder> findByG_O(
-		long groupId, int[] orderStatuses);
 }

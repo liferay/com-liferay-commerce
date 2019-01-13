@@ -69,7 +69,10 @@ public interface CommerceOrder extends CommerceOrderModel, PersistedModel {
 	public CommerceShippingMethod getCommerceShippingMethod()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public com.liferay.commerce.account.model.CommerceAccount getOrderAccount()
+	public com.liferay.commerce.account.model.CommerceAccount getCommerceAccount()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public String getCommerceAccountName()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public CommerceAddress getShippingAddress()
