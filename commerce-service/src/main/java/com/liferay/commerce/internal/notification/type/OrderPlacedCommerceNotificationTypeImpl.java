@@ -77,7 +77,8 @@ public class OrderPlacedCommerceNotificationTypeImpl
 		CommerceOrder commerceOrder = (CommerceOrder)object;
 
 		if (term.equals(_ORDER_CREATOR)) {
-			CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
+			CommerceAccount commerceAccount =
+				commerceOrder.getCommerceAccount();
 
 			if (commerceAccount.getType() ==
 					CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL) {
