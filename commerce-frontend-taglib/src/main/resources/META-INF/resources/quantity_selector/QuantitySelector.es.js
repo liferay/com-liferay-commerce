@@ -1,4 +1,4 @@
-import template from './QuantitySelector.soy.js';
+import template from './QuantitySelector.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
