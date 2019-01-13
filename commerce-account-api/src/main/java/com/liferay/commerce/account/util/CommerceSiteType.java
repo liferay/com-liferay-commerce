@@ -21,8 +21,8 @@ import com.liferay.commerce.account.constants.CommerceAccountConstants;
  */
 public enum CommerceSiteType {
 
-	B2C(CommerceAccountConstants.B2C_SITE_TYPE),
 	B2B(CommerceAccountConstants.B2B_SITE_TYPE),
+	B2C(CommerceAccountConstants.B2C_SITE_TYPE),
 	B2C_B2B(CommerceAccountConstants.B2C_B2B_SITE_TYPE);
 
 	public static CommerceSiteType valueOf(int cst) {

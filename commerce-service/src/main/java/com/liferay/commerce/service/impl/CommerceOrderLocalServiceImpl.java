@@ -209,6 +209,7 @@ public class CommerceOrderLocalServiceImpl
 		// Commerce order
 
 		long groupId = serviceContext.getScopeGroupId();
+
 		long userId = serviceContext.getUserId();
 
 		User user = userLocalService.getUser(userId);
