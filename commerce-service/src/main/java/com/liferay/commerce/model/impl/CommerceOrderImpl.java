@@ -63,6 +63,19 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 	}
 
 	@Override
+	public CommerceAccount getCommerceAccount() throws PortalException {
+		return CommerceAccountLocalServiceUtil.getCommerceAccount(
+			getCommerceAccountId());
+	}
+
+	@Override
+	public String getCommerceAccountName() throws PortalException {
+		CommerceAccount commerceAccount = getCommerceAccount();
+
+		return commerceAccount.getName();
+	}
+
+	@Override
 	public CommerceCurrency getCommerceCurrency() throws PortalException {
 		return CommerceCurrencyLocalServiceUtil.getCommerceCurrency(
 			getCommerceCurrencyId());
@@ -93,19 +106,6 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 		}
 
 		return null;
-	}
-
-	@Override
-	public CommerceAccount getCommerceAccount() throws PortalException {
-		return CommerceAccountLocalServiceUtil.getCommerceAccount(
-			getCommerceAccountId());
-	}
-
-	@Override
-	public String getCommerceAccountName() throws PortalException {
-		CommerceAccount commerceAccount = getCommerceAccount();
-
-		return commerceAccount.getName();
 	}
 
 	@Override

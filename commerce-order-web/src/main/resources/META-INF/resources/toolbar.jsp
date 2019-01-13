@@ -70,8 +70,6 @@ pageContext.setAttribute("searchURL", searchURL);
 	</liferay-frontend:management-bar>
 
 	<div class="form-group-autofit <%= showFilter ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />filterSettings">
-
-
 		<div class="form-group-item">
 			<label for="<portlet:namespace /><%= CommerceOrderDisplayTerms.START_CREATE_DATE %>">
 				<liferay-ui:message key="from" />
