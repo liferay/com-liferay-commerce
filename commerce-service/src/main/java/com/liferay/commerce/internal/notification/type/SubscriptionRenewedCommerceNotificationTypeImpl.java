@@ -93,7 +93,7 @@ public class SubscriptionRenewedCommerceNotificationTypeImpl
 		if (term.equals(_ORDER_CREATOR)) {
 			CommerceOrder commerceOrder = _commerceOrderItem.getCommerceOrder();
 
-			CommerceAccount commerceAccount = commerceOrder.getOrderAccount();
+			CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 
 			if (commerceAccount.getType() ==
 					CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL) {

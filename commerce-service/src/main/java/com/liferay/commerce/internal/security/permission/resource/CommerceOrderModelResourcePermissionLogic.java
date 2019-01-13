@@ -254,7 +254,7 @@ public class CommerceOrderModelResourcePermissionLogic
 
 		long userId = permissionChecker.getUserId();
 
-		CommerceAccount commerceAccount = commerceOrder.getOrderAccount();
+		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 
 		if ((userId == commerceOrder.getUserId()) ||
 			(userId == commerceAccount.getUserId())) {

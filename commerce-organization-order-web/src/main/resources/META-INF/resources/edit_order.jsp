@@ -167,11 +167,11 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 				<h3 class="order-details-title"><liferay-ui:message key="customer" /></h3>
 
 				<div class="customer-name order-details-subtitle">
-					<%= HtmlUtil.escape(commerceOrder.getCustomerName()) %>
+					<%= HtmlUtil.escape(commerceOrder.getCommerceAccountName()) %>
 				</div>
 
 				<div class="customer-id">
-					<%= commerceOrder.getCustomerId() %>
+					<%= commerceOrder.getCommerceAccountId() %>
 				</div>
 			</div>
 		</div>

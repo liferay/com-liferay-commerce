@@ -153,12 +153,12 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 
 					<liferay-ui:search-container-column-text
 						name="customer-name"
-						value="<%= commerceOrder.getCustomerName() %>"
+						value="<%= commerceOrder.getCommerceAccountName() %>"
 					/>
 
 					<liferay-ui:search-container-column-text
 						name="customer-id"
-						value="<%= String.valueOf(commerceOrder.getCustomerId()) %>"
+						value="<%= String.valueOf(commerceOrder.getCommerceAccountId()) %>"
 					/>
 
 					<liferay-ui:search-container-column-jsp
