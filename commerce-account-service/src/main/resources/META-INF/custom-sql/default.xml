@@ -38,7 +38,7 @@
 	<sql id="com.liferay.commerce.account.service.persistence.CommerceAccountFinder.findByU_P">
 		<![CDATA[
 			SELECT
-				DISTINCT *
+				DISTINCT CommerceAccount.*
 			FROM
 				CommerceAccount
 			LEFT JOIN
