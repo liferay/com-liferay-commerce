@@ -2,6 +2,8 @@ import template from './AddToCartButton.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
+import '../quantity_selector/QuantitySelector.es';
+
 class AddToCartButton extends Component {
 	updateQuantity(quantity) {
 		this.quantity = quantity;
