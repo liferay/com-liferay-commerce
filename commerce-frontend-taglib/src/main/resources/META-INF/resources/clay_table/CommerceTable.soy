@@ -83,3 +83,33 @@
 		<img src={$value} />
 	</td>
 {/deltemplate}
+
+{deltemplate ClayTable.Cell variant="'imageName'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+
+	<td class="">
+		<h1 class="table-list-title">
+			<span class="text-truncate-inline">
+				{let $label kind="html"}
+					{if $item.thumbnail}
+						<img src={$item.thumbnail} />
+					{/if}
+					<span class="text-truncate">{$value}</span>
+				{/let}
+				{if $item.href}
+					{call ClayLink.render}
+						{param elementClasses: 'text-truncate' /}
+						{param href: $item.href /}
+						{param label: $label /}
+					{/call}
+				{else}
+					{$label}
+				{/if}
+			</span>
+		</h1>
+	</td>
+{/deltemplate}
