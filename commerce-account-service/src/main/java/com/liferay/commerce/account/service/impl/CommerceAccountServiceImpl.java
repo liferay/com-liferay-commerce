@@ -98,21 +98,18 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	public CommerceAccount getCommerceAccount(long commerceAccountId)
 		throws PortalException {
 
-		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.VIEW);
-
 		return commerceAccountLocalService.getCommerceAccount(
-			commerceAccountId);
+			getUserId(), commerceAccountId);
 	}
 
 	@Override
 	public CommerceAccount getPersonalCommerceAccount(
-			ServiceContext serviceContext)
+			long companyId, long userId)
 		throws PortalException {
 
 		CommerceAccount commerceAccount =
 			commerceAccountLocalService.getPersonalCommerceAccount(
-				serviceContext);
+				companyId, userId);
 
 		_commerceAccountModelResourcePermission.check(
 			getPermissionChecker(), commerceAccount.getCommerceAccountId(),
