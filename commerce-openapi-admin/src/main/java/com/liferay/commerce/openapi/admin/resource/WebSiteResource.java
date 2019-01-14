@@ -14,14 +14,20 @@
 
 package com.liferay.commerce.openapi.admin.resource;
 
+import com.liferay.commerce.openapi.admin.context.Pagination;
+import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
+import com.liferay.portal.kernel.model.Company;
+
+import java.util.List;
+import java.util.Locale;
+
 import javax.annotation.Generated;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Context;
 
 /**
  * @author Igor Beslic
@@ -33,13 +39,14 @@ public interface WebSiteResource {
 	@GET
 	@Path("/{id}")
 	@Produces({"application/*", "application/json"})
-	public Response getWebSite(@PathParam("id") String id);
+	public WebSiteDTO getWebSite(
+		@PathParam("id") String id, @Context Locale locale);
 
 	@GET
 	@Path("/")
 	@Produces({"application/*", "application/json"})
-	public Response getWebSites(
-		@QueryParam("group_id") long groupId, @QueryParam("page") int page,
-		@QueryParam("pageSize") int pageSize);
+	public List<WebSiteDTO> getWebSites(
+		@Context Company company, @Context Locale locale,
+		@Context Pagination pagination);
 
 }
