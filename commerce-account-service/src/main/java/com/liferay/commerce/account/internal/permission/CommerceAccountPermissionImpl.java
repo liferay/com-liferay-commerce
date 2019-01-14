@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 
@@ -131,15 +132,34 @@ public class CommerceAccountPermissionImpl
 			CommerceAccount commerceAccount, String actionId)
 		throws PortalException {
 
+		if (permissionChecker.isOmniadmin()) {
+			return true;
+		}
+
 		while ((commerceAccount != null) &&
 			   (commerceAccount.getCommerceAccountId() !=
 				   CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID)) {
+
+			if (PortalPermissionUtil.contains(
+					permissionChecker,
+					CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
+
+				return true;
+			}
 
 			if (actionId.equals(ActionKeys.UPDATE) &&
 				(commerceAccount.getType() ==
 					CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL) &&
 				(permissionChecker.getUserId() ==
 					commerceAccount.getUserId())) {
+
+				return true;
+			}
+			else if (actionId.equals(ActionKeys.UPDATE) &&
+					 _portletResourcePermission.contains(
+						 permissionChecker,
+						 commerceAccount.getCommerceAccountGroupId(),
+						 CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
 
 				return true;
 			}
@@ -151,9 +171,11 @@ public class CommerceAccountPermissionImpl
 
 				return true;
 			}
-			else if (PortalPermissionUtil.contains(
-						permissionChecker,
-						CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
+			else if (actionId.equals(ActionKeys.VIEW) &&
+					 _portletResourcePermission.contains(
+						 permissionChecker,
+						 commerceAccount.getCommerceAccountGroupId(),
+						 CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
 
 				return true;
 			}
@@ -166,5 +188,10 @@ public class CommerceAccountPermissionImpl
 
 	@Reference
 	private CommerceAccountLocalService _commerceAccountLocalService;
+
+	@Reference(
+		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 }
