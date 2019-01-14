@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.account.service.impl;
 
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.base.CommerceAccountUserRelLocalServiceBaseImpl;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
@@ -65,11 +64,8 @@ public class CommerceAccountUserRelLocalServiceImpl
 			long[] roleIds, ServiceContext serviceContext)
 		throws PortalException {
 
-		long classNameId = classNameLocalService.getClassNameId(
-			CommerceAccount.class.getName());
-
-		Group group = groupPersistence.findByC_C_C(
-			serviceContext.getCompanyId(), classNameId, commerceAccountId);
+		Group group = commerceAccountLocalService.getCommerceAccountGroup(
+			commerceAccountId);
 
 		for (long userId : userIds) {
 			User user = userLocalService.getUser(userId);
