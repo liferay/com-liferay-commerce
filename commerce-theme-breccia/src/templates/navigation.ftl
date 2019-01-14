@@ -1,13 +1,3 @@
-<#assign
-	accountName=languageUtil.get(request, "select-account")
-/>
-
-<#if currentOrganization?has_content>
-	<#assign
-		accountName=currentOrganization.getName()
-	/>
-</#if>
-
 <nav class="commerce-navigation navbar navbar-collapse-absolute navbar-expand-md navigation-bar navigation-bar-light">
 	<div class="container-fluid container-fluid-max-xl">
 		<div class="nav-link navbar-breakpoint-d-none">
