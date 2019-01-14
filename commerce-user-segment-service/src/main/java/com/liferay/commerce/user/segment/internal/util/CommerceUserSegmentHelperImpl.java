@@ -14,12 +14,12 @@
 
 package com.liferay.commerce.user.segment.internal.util;
 
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalService;
 import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
@@ -58,15 +58,9 @@ public class CommerceUserSegmentHelperImpl
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		Organization organization =
-			_commerceOrganizationHelper.getCurrentOrganization(
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
 				httpServletRequest);
-
-		long organizationId = 0;
-
-		if (organization != null) {
-			organizationId = organization.getOrganizationId();
-		}
 
 		User user = _portal.getUser(httpServletRequest);
 
@@ -77,22 +71,22 @@ public class CommerceUserSegmentHelperImpl
 
 		return _commerceUserSegmentEntryLocalService.
 			getCommerceUserSegmentEntryIds(
-				_portal.getScopeGroupId(httpServletRequest), organizationId,
-				user.getUserId());
+				_portal.getScopeGroupId(httpServletRequest),
+				commerceAccount.getCommerceAccountId(), user.getUserId());
 	}
 
 	@Override
 	public long[] getCommerceUserSegmentIds(
-			long groupId, long organizationId, long userId)
+			long groupId, long commerceAccountId, long userId)
 		throws PortalException {
 
 		return _commerceUserSegmentEntryLocalService.
-			getCommerceUserSegmentEntryIds(groupId, organizationId, userId);
+			getCommerceUserSegmentEntryIds(groupId, commerceAccountId, userId);
 	}
 
 	@Override
 	public long[] getUserIds(
-			long groupId, long organizationId,
+			long groupId, long commerceAccountId,
 			long[] commerceUserSegmentEntryIds, int start, int end)
 		throws PortalException {
 
@@ -102,9 +96,9 @@ public class CommerceUserSegmentHelperImpl
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
+		attributes.put("commerceAccountId", commerceAccountId);
 		attributes.put(
 			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);
-		attributes.put("organizationId", organizationId);
 
 		searchContext.setAttributes(attributes);
 
@@ -133,7 +127,7 @@ public class CommerceUserSegmentHelperImpl
 	}
 
 	@Reference
-	private CommerceOrganizationHelper _commerceOrganizationHelper;
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceUserSegmentEntryLocalService
