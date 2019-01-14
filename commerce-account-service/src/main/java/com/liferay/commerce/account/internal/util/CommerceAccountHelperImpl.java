@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.SessionParamUtil;
 
@@ -152,11 +150,8 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		if (commerceAccountGroupServiceConfiguration.commerceSiteType() ==
 				CommerceSiteType.B2C) {
 
-			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				CommerceAccount.class.getName(), httpServletRequest);
-
 			return _commerceAccountService.getPersonalCommerceAccount(
-				serviceContext);
+				user.getCompanyId(), user.getUserId());
 		}
 
 		List<CommerceAccount> userCommerceAccounts =
