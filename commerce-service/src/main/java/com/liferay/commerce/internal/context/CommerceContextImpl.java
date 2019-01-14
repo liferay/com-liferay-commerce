@@ -14,11 +14,12 @@
 
 package com.liferay.commerce.internal.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.organization.service.CommerceOrganizationService;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.model.CPRule;
@@ -26,7 +27,6 @@ import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Organization;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,11 +37,10 @@ import java.util.Optional;
 public class CommerceContextImpl implements CommerceContext {
 
 	public CommerceContextImpl(
-		long groupId, long userId, long orderId, long organizationId,
-		String couponCode,
+		long groupId, long userId, long orderId, long commerceAccountId,
+		String couponCode, CommerceAccountService commerceAccountService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceOrderService commerceOrderService,
-		CommerceOrganizationService commerceOrganizationService,
 		CommercePriceListLocalService commercePriceListLocalService,
 		CommerceUserSegmentHelper commerceUserSegmentHelper,
 		CPRuleLocalService cpRuleLocalService) {
@@ -49,14 +48,26 @@ public class CommerceContextImpl implements CommerceContext {
 		_groupId = groupId;
 		_userId = userId;
 		_orderId = orderId;
-		_organizationId = organizationId;
+		_commerceAccountId = commerceAccountId;
 		_couponCode = couponCode;
+		_commerceAccountService = commerceAccountService;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceOrderService = commerceOrderService;
-		_commerceOrganizationService = commerceOrganizationService;
 		_commercePriceListLocalService = commercePriceListLocalService;
 		_commerceUserSegmentHelper = commerceUserSegmentHelper;
 		_cpRuleLocalService = cpRuleLocalService;
+	}
+
+	@Override
+	public CommerceAccount getCommerceAccount() throws PortalException {
+		if (_commerceAccount != null) {
+			return _commerceAccount;
+		}
+
+		_commerceAccount = _commerceAccountService.getCommerceAccount(
+			_commerceAccountId);
+
+		return _commerceAccount;
 	}
 
 	@Override
@@ -106,7 +117,7 @@ public class CommerceContextImpl implements CommerceContext {
 
 		_commerceUserSegmentEntryIds =
 			_commerceUserSegmentHelper.getCommerceUserSegmentIds(
-				_groupId, _organizationId, _userId);
+				_groupId, _commerceAccountId, _userId);
 
 		return _commerceUserSegmentEntryIds;
 	}
@@ -129,18 +140,6 @@ public class CommerceContextImpl implements CommerceContext {
 	}
 
 	@Override
-	public Organization getOrganization() throws PortalException {
-		if (_organization != null) {
-			return _organization;
-		}
-
-		_organization = _commerceOrganizationService.getOrganization(
-			_organizationId);
-
-		return _organization;
-	}
-
-	@Override
 	public long getSiteGroupId() throws PortalException {
 		return _groupId;
 	}
@@ -150,11 +149,13 @@ public class CommerceContextImpl implements CommerceContext {
 		return _userId;
 	}
 
+	private CommerceAccount _commerceAccount;
+	private final long _commerceAccountId;
+	private final CommerceAccountService _commerceAccountService;
 	private CommerceCurrency _commerceCurrency;
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;
 	private CommerceOrder _commerceOrder;
 	private final CommerceOrderService _commerceOrderService;
-	private final CommerceOrganizationService _commerceOrganizationService;
 	private Optional<CommercePriceList> _commercePriceList;
 	private final CommercePriceListLocalService _commercePriceListLocalService;
 	private long[] _commerceUserSegmentEntryIds;
@@ -164,8 +165,6 @@ public class CommerceContextImpl implements CommerceContext {
 	private List<CPRule> _cpRules;
 	private final long _groupId;
 	private final long _orderId;
-	private Organization _organization;
-	private final long _organizationId;
 	private final long _userId;
 
 }
