@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Commerce Organization Test Utilities
-Bundle-SymbolicName: com.liferay.commerce.organization.test.util
-Bundle-Version: 1.0.4
-Export-Package: com.liferay.commerce.organization.test.util
