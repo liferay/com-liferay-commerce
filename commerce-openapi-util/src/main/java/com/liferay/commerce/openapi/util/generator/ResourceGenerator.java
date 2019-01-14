@@ -196,7 +196,7 @@ public class ResourceGenerator {
 
 			sb.append("\t@Override\n");
 
-			_appendMethodDeclaration(sb, method, false, schemaComponents);
+			sb.append(_getMethodDeclaration(method, false, schemaComponents));
 
 			sb.append(" {\n");
 
@@ -246,7 +246,7 @@ public class ResourceGenerator {
 
 			sb.append(_getConsumesAnnotation(method.getRequestBody()));
 
-			_appendMethodDeclaration(sb, method, true, schemaComponents);
+			sb.append(_getMethodDeclaration(method, true, schemaComponents));
 
 			sb.append(";\n");
 
@@ -258,9 +258,27 @@ public class ResourceGenerator {
 		return sb.toString();
 	}
 
-	private void _appendMethodDeclaration(
-		StringBuilder sb, Method method, boolean annotateParameter,
+	private String _getConsumesAnnotation(List<Content> requestBody) {
+		if (requestBody.isEmpty()) {
+			return "";
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("\t@Consumes(");
+
+		sb.append(_getMimeTypes(requestBody));
+
+		sb.append(")\n");
+
+		return sb.toString();
+	}
+
+	private String _getMethodDeclaration(
+		Method method, boolean annotateParameter,
 		Set<ComponentDefinition> schemaComponents) {
+
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("\tpublic ");
 
@@ -292,20 +310,6 @@ public class ResourceGenerator {
 		}
 
 		sb.append(")");
-	}
-
-	private String _getConsumesAnnotation(List<Content> requestBody) {
-		if (requestBody.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("\t@Consumes(");
-
-		sb.append(_getMimeTypes(requestBody));
-
-		sb.append(")\n");
 
 		return sb.toString();
 	}
