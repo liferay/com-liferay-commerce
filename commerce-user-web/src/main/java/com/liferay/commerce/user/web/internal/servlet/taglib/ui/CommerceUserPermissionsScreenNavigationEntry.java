@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.user.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.user.service.CommerceUserService;
 import com.liferay.commerce.user.util.CommerceRoleRegistry;
 import com.liferay.commerce.user.web.internal.display.context.CommerceUserPermissionsDisplayContext;
@@ -113,7 +113,7 @@ public class CommerceUserPermissionsScreenNavigationEntry
 		CommerceUserPermissionsDisplayContext
 			commerceUserPermissionsDisplayContext =
 				new CommerceUserPermissionsDisplayContext(
-					_commerceOrganizationHelper, _commerceRoleRegistry,
+					_commerceAccountHelper, _commerceRoleRegistry,
 					_commerceUserService, httpServletRequest, _portal,
 					_userGroupRoleLocalService);
 
@@ -129,7 +129,7 @@ public class CommerceUserPermissionsScreenNavigationEntry
 		CommerceUserPermissionsScreenNavigationEntry.class);
 
 	@Reference
-	private CommerceOrganizationHelper _commerceOrganizationHelper;
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceRoleRegistry _commerceRoleRegistry;

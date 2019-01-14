@@ -25,12 +25,9 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
-import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.search.filter.TermFilter;
-import com.liferay.portal.kernel.search.filter.TermsFilter;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -95,24 +92,6 @@ public class OrganizationCommerceUserSegmentCriterionTypeImpl
 			organizationNames, StringPool.COMMA_AND_SPACE);
 
 		return StringUtil.shorten(preview, length, StringPool.TRIPLE_PERIOD);
-	}
-
-	@Override
-	public void postProcessContextBooleanFilter(
-			BooleanFilter contextBooleanFilter, SearchContext searchContext)
-		throws PortalException {
-
-		long organizationId = GetterUtil.getLong(
-			searchContext.getAttribute("organizationId"));
-
-		if (organizationId > 0) {
-			organizationPostProcessContextBooleanFilter(
-				contextBooleanFilter, organizationId);
-		}
-		else {
-			super.postProcessContextBooleanFilter(
-				contextBooleanFilter, searchContext);
-		}
 	}
 
 	@Override
@@ -189,34 +168,6 @@ public class OrganizationCommerceUserSegmentCriterionTypeImpl
 		LongStream longStream = stream.mapToLong(field -> field.longValue());
 
 		return longStream.toArray();
-	}
-
-	protected void organizationPostProcessContextBooleanFilter(
-			BooleanFilter contextBooleanFilter, long organizationId)
-		throws PortalException {
-
-		Organization organization = _organizationLocalService.getOrganization(
-			organizationId);
-
-		long[] ancestorOrganizationIds =
-			organization.getAncestorOrganizationIds();
-
-		Filter existFilter = new TermFilter(
-			getIndexerFieldName() + "_required_matches", "0");
-
-		TermsFilter organizationFilter = new TermsFilter(getIndexerFieldName());
-
-		organizationFilter.addValues(
-			ArrayUtil.toStringArray(ancestorOrganizationIds));
-
-		organizationFilter.addValue(String.valueOf(organizationId));
-
-		BooleanFilter fieldBooleanFilter = new BooleanFilter();
-
-		fieldBooleanFilter.add(existFilter, BooleanClauseOccur.SHOULD);
-		fieldBooleanFilter.add(organizationFilter, BooleanClauseOccur.SHOULD);
-
-		contextBooleanFilter.add(fieldBooleanFilter, BooleanClauseOccur.MUST);
 	}
 
 	@Reference

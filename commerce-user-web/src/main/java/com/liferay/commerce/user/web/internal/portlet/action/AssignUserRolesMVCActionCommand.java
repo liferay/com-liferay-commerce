@@ -14,12 +14,12 @@
 
 package com.liferay.commerce.user.web.internal.portlet.action;
 
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.user.constants.CommerceUserPortletKeys;
 import com.liferay.commerce.user.service.CommerceUserService;
 import com.liferay.portal.kernel.exception.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -59,14 +59,14 @@ public class AssignUserRolesMVCActionCommand extends BaseMVCActionCommand {
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			actionRequest);
 
-		Organization organization =
-			_commerceOrganizationHelper.getCurrentOrganization(
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
 				httpServletRequest);
 
 		long groupId = 0;
 
-		if (organization != null) {
-			groupId = organization.getGroupId();
+		if (commerceAccount != null) {
+			groupId = commerceAccount.getCommerceAccountGroupId();
 		}
 
 		_commerceUserService.updateUserRoles(userId, groupId, roleIds);
@@ -99,7 +99,7 @@ public class AssignUserRolesMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	@Reference
-	private CommerceOrganizationHelper _commerceOrganizationHelper;
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceUserService _commerceUserService;

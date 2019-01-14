@@ -14,15 +14,15 @@
 
 package com.liferay.commerce.discount.internal.discount;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -120,12 +120,12 @@ public class CommerceDiscountCouponCodeHelperImpl
 
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
 
-		Organization organization =
-			_commerceOrganizationHelper.getCurrentOrganization(
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
 				httpServletRequest);
 
-		if (organization != null) {
-			groupId = organization.getGroupId();
+		if (commerceAccount != null) {
+			groupId = commerceAccount.getCommerceAccountGroupId();
 		}
 
 		return _SESSION_COMMERCE_DISCOUNT_COUPON_CODE + groupId;
@@ -135,13 +135,13 @@ public class CommerceDiscountCouponCodeHelperImpl
 		"LIFERAY_SHARED_COMMERCE_DISCOUNT_COUPON_CODE_";
 
 	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
+
+	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
-
-	@Reference
-	private CommerceOrganizationHelper _commerceOrganizationHelper;
 
 	@Reference
 	private Portal _portal;
