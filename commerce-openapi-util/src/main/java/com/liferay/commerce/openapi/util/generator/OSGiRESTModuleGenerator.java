@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Igor Beslic
  */
-public class OSGiRESTModuleGenerator extends SourceGenerator {
+public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 	public static void main(String[] args) {
 		try {

@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * @author Igor Beslic
  */
-public class DTOGenerator extends SourceGenerator {
+public class DTOGenerator extends BaseSourceGenerator {
 
 	public DTOGenerator(
 		String author, String moduleOutputPath, String modelPackagePath,
