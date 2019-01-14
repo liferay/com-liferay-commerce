@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.test.util;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
@@ -23,7 +24,6 @@ import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 
 import java.util.Collections;
@@ -37,15 +37,20 @@ public class TestCommerceContext implements CommerceContext {
 
 	public TestCommerceContext(
 		CommerceCurrency commerceCurrency, User contextUser, Group contextGroup,
-		Organization organization, CommerceOrder commerceOrder,
+		CommerceAccount commerceAccount, CommerceOrder commerceOrder,
 		String couponCode) {
 
 		_commerceCurrency = commerceCurrency;
 		_contextUser = contextUser;
 		_contextGroup = contextGroup;
-		_organization = organization;
+		_commerceAccount = commerceAccount;
 		_commerceOrder = commerceOrder;
 		_couponCode = couponCode;
+	}
+
+	@Override
+	public CommerceAccount getCommerceAccount() {
+		return _commerceAccount;
 	}
 
 	@Override
@@ -62,23 +67,24 @@ public class TestCommerceContext implements CommerceContext {
 	public Optional<CommercePriceList> getCommercePriceList()
 		throws PortalException {
 
-		if (_organization == null) {
+		if (_commerceAccount == null) {
 			return Optional.empty();
 		}
 
 		return CommercePriceListLocalServiceUtil.getCommercePriceList(
-			_organization.getGroupId(), getCommerceUserSegmentEntryIds());
+			_contextGroup.getGroupId(), getCommerceUserSegmentEntryIds());
 	}
 
 	@Override
 	public long[] getCommerceUserSegmentEntryIds() throws PortalException {
-		if ((_organization == null) || (_contextUser == null)) {
+		if (_contextUser == null) {
 			return new long[0];
 		}
 
 		return CommerceUserSegmentEntryLocalServiceUtil.
 			getCommerceUserSegmentEntryIds(
-				_organization.getGroupId(), _organization.getOrganizationId(),
+				_contextGroup.getGroupId(),
+				_commerceAccount.getCommerceAccountId(),
 				_contextUser.getUserId());
 	}
 
@@ -93,11 +99,6 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	@Override
-	public Organization getOrganization() {
-		return _organization;
-	}
-
-	@Override
 	public long getSiteGroupId() throws PortalException {
 		return _contextGroup.getGroupId();
 	}
@@ -107,11 +108,11 @@ public class TestCommerceContext implements CommerceContext {
 		return _contextUser.getUserId();
 	}
 
+	private final CommerceAccount _commerceAccount;
 	private final CommerceCurrency _commerceCurrency;
 	private final CommerceOrder _commerceOrder;
 	private final Group _contextGroup;
 	private final User _contextUser;
 	private final String _couponCode;
-	private final Organization _organization;
 
 }

@@ -14,14 +14,14 @@
 
 package com.liferay.commerce.checkout.web.internal.util;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Organization;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,11 +38,11 @@ public class CommerceCheckoutStepHelper {
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		Organization organization =
-			_commerceOrganizationHelper.getCurrentOrganization(
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
 				httpServletRequest);
 
-		if (organization != null) {
+		if (commerceAccount != null) {
 			return false;
 		}
 
@@ -90,7 +90,7 @@ public class CommerceCheckoutStepHelper {
 	}
 
 	@Reference
-	private CommerceOrganizationHelper _commerceOrganizationHelper;
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommercePaymentEngine _commercePaymentEngine;

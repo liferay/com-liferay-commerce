@@ -35,65 +35,54 @@ List<CommerceOrder> results = searchContainer.getResults();
 	displayStyleGroupId="<%= commerceOrganizationOrderDisplayContext.getDisplayStyleGroupId() %>"
 	entries="<%= results %>"
 >
-	<c:choose>
-		<c:when test="<%= commerceOrganizationOrderDisplayContext.getOrganization() == null %>">
-			<div class="alert alert-warning text-center">
-				<liferay-ui:message key="please-select-an-account" />
-			</div>
-		</c:when>
-		<c:when test="<%= (commerceOrganizationOrderDisplayContext.getOrganization() != null) && !results.isEmpty() %>">
-			<div class="order-cards-row" id="<portlet:namespace />openOrdersContainer">
+	<div class="order-cards-row" id="<portlet:namespace />openOrdersContainer">
 
-				<%
-				for (CommerceOrder commerceOrder : results) {
-				%>
+		<%
+		for (CommerceOrder commerceOrder : results) {
+		%>
 
-					<div class="order-card">
-						<div>
-							<aui:workflow-status markupView="lexicon" showHelpMessage="<%= false %>" showLabel="<%= false %>" status="<%= commerceOrder.getStatus() %>" />
+			<div class="order-card">
+				<div>
+					<aui:workflow-status markupView="lexicon" showHelpMessage="<%= false %>" showLabel="<%= false %>" status="<%= commerceOrder.getStatus() %>" />
 
-							<h4 class="order-id"><aui:a href="<%= commerceOrganizationOrderDisplayContext.getOrderDetailURL(commerceOrder) %>" label="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" /></h4>
+					<h4 class="order-id"><aui:a href="<%= commerceOrganizationOrderDisplayContext.getOrderDetailURL(commerceOrder) %>" label="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" /></h4>
 
-							<div><strong><%= commerceOrganizationOrderDisplayContext.getCommerceOrderValue(commerceOrder) %></strong></div>
-						</div>
+					<div><strong><%= commerceOrganizationOrderDisplayContext.getCommerceOrderValue(commerceOrder) %></strong></div>
+				</div>
 
-						<div class="text-right">
-							<p class="text-muted"><%= commerceOrganizationOrderDisplayContext.getCommerceOrderDate(commerceOrder) + StringPool.SPACE + commerceOrganizationOrderDisplayContext.getCommerceOrderTime(commerceOrder) %></p>
+				<div class="text-right">
+					<p class="text-muted"><%= commerceOrganizationOrderDisplayContext.getCommerceOrderDate(commerceOrder) + StringPool.SPACE + commerceOrganizationOrderDisplayContext.getCommerceOrderTime(commerceOrder) %></p>
 
-							<%
-							request.setAttribute("order_transition.jsp-commerceOrder", commerceOrder);
-							%>
+					<%
+					request.setAttribute("order_transition.jsp-commerceOrder", commerceOrder);
+					%>
 
-							<liferay-commerce:order-transitions
-								commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
-								cssClass="btn btn-secondary btn-sm"
-							/>
-						</div>
-					</div>
-
-				<%
-				}
-				%>
-
+					<liferay-commerce:order-transitions
+						commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
+						cssClass="btn btn-secondary btn-sm"
+					/>
+				</div>
 			</div>
 
-			<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
+		<%
+		}
+		%>
 
-			<%@ include file="/transition.jspf" %>
+	</div>
 
-			<aui:script use="aui-base">
-				var openOrdersContainer = A.one('#<portlet:namespace />openOrdersContainer');
+	<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 
-				openOrdersContainer.delegate(
-					'click',
-					function(event) {
-						<portlet:namespace />transition(event);
-					},
-					'.transition-link'
-				);
-			</aui:script>
-		</c:when>
-		<c:otherwise>
-		</c:otherwise>
-	</c:choose>
+	<%@ include file="/transition.jspf" %>
+
+	<aui:script use="aui-base">
+		var openOrdersContainer = A.one('#<portlet:namespace />openOrdersContainer');
+
+		openOrdersContainer.delegate(
+			'click',
+			function(event) {
+				<portlet:namespace />transition(event);
+			},
+			'.transition-link'
+		);
+	</aui:script>
 </liferay-ddm:template-renderer>

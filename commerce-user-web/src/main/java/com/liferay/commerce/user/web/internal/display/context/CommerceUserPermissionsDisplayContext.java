@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.user.web.internal.display.context;
 
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.user.service.CommerceUserService;
 import com.liferay.commerce.user.util.CommerceRoleRegistry;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.util.Portal;
@@ -33,7 +33,7 @@ public class CommerceUserPermissionsDisplayContext
 	extends BaseCommerceUserDisplayContext {
 
 	public CommerceUserPermissionsDisplayContext(
-		CommerceOrganizationHelper commerceOrganizationHelper,
+		CommerceAccountHelper commerceAccountHelper,
 		CommerceRoleRegistry commerceRoleRegistry,
 		CommerceUserService commerceUserService,
 		HttpServletRequest httpServletRequest, Portal portal,
@@ -41,7 +41,7 @@ public class CommerceUserPermissionsDisplayContext
 
 		super(commerceUserService, httpServletRequest, portal);
 
-		_commerceOrganizationHelper = commerceOrganizationHelper;
+		_commerceAccountHelper = commerceAccountHelper;
 		_commerceRoleRegistry = commerceRoleRegistry;
 		_userGroupRoleLocalService = userGroupRoleLocalService;
 	}
@@ -54,19 +54,19 @@ public class CommerceUserPermissionsDisplayContext
 	}
 
 	public boolean hasUserGroupRole(long userId, long roleId) throws Exception {
-		Organization organization =
-			_commerceOrganizationHelper.getCurrentOrganization(
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
 				commerceUserRequestHelper.getRequest());
 
-		if (organization == null) {
+		if (commerceAccount == null) {
 			return false;
 		}
 
 		return _userGroupRoleLocalService.hasUserGroupRole(
-			userId, organization.getGroupId(), roleId);
+			userId, commerceAccount.getCommerceAccountGroupId(), roleId);
 	}
 
-	private final CommerceOrganizationHelper _commerceOrganizationHelper;
+	private final CommerceAccountHelper _commerceAccountHelper;
 	private final CommerceRoleRegistry _commerceRoleRegistry;
 	private final UserGroupRoleLocalService _userGroupRoleLocalService;
 
