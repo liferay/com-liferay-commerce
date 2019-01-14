@@ -14,13 +14,13 @@
 
 package com.liferay.commerce.internal.context;
 
+import com.liferay.commerce.account.service.CommerceAccountService;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
-import com.liferay.commerce.organization.service.CommerceOrganizationService;
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
@@ -41,23 +41,29 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 	@Override
 	public CommerceContext create(HttpServletRequest httpServletRequest) {
 		return new CommerceContextHttpsImpl(
-			httpServletRequest, _commerceCurrencyLocalService,
-			_commerceDiscountCouponCodeHelper, _commerceOrderHttpHelper,
-			_commerceOrganizationHelper, _commercePriceListLocalService,
+			httpServletRequest, _commerceAccountHelper,
+			_commerceCurrencyLocalService, _commerceDiscountCouponCodeHelper,
+			_commerceOrderHttpHelper, _commercePriceListLocalService,
 			_commerceUserSegmentHelper, _cpRuleLocalService, _portal);
 	}
 
 	@Override
 	public CommerceContext create(
-		long groupId, long userId, long orderId, long organizationId,
+		long groupId, long userId, long orderId, long commerceAccountId,
 		String couponCode) {
 
 		return new CommerceContextImpl(
-			groupId, userId, orderId, organizationId, couponCode,
-			_commerceCurrencyLocalService, _commerceOrderService,
-			_commerceOrganizationService, _commercePriceListLocalService,
+			groupId, userId, orderId, commerceAccountId, couponCode,
+			_commerceAccountService, _commerceCurrencyLocalService,
+			_commerceOrderService, _commercePriceListLocalService,
 			_commerceUserSegmentHelper, _cpRuleLocalService);
 	}
+
+	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
+
+	@Reference
+	private CommerceAccountService _commerceAccountService;
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
@@ -70,12 +76,6 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
-
-	@Reference
-	private CommerceOrganizationHelper _commerceOrganizationHelper;
-
-	@Reference
-	private CommerceOrganizationService _commerceOrganizationService;
 
 	@Reference
 	private CommercePriceListLocalService _commercePriceListLocalService;
