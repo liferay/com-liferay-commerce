@@ -47,13 +47,6 @@
 	/>
 </#macro>
 
-<#macro commerce_search_organization default_preferences = "">
-	<@liferay_portlet["runtime"]
-		defaultPreferences=default_preferences
-		portletName="com_liferay_commerce_organization_web_internal_portlet_CommerceOrganizationSearchPortlet"
-	/>
-</#macro>
-
 <#macro site_navigation_menu_0 default_preferences = "">
 	<@liferay_portlet["runtime"]
 		defaultPreferences=default_preferences
