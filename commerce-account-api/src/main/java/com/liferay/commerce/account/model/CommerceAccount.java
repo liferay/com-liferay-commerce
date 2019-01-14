@@ -76,4 +76,10 @@ public interface CommerceAccount extends CommerceAccountModel, PersistedModel {
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public boolean isRoot();
+
+	public com.liferay.portal.kernel.model.Group getCommerceAccountGroup()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public long getCommerceAccountGroupId()
+		throws com.liferay.portal.kernel.exception.PortalException;
 }

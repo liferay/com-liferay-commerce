@@ -255,7 +255,7 @@ public interface CommerceUserSegmentEntryLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long[] getCommerceUserSegmentEntryIds(long groupId,
-		long organizationId, long userId) throws PortalException;
+		long commerceAccountId, long userId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

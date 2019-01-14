@@ -265,6 +265,13 @@ public class CommerceAccountLocalServiceWrapper
 		return _commerceAccountLocalService.getCommerceAccount(commerceAccountId);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.model.Group getCommerceAccountGroup(
+		long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountLocalService.getCommerceAccountGroup(commerceAccountId);
+	}
+
 	/**
 	* Returns a range of all the commerce accounts.
 	*

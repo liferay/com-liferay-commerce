@@ -286,10 +286,10 @@ public class CommerceUserSegmentEntryLocalServiceWrapper
 
 	@Override
 	public long[] getCommerceUserSegmentEntryIds(long groupId,
-		long organizationId, long userId)
+		long commerceAccountId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceUserSegmentEntryLocalService.getCommerceUserSegmentEntryIds(groupId,
-			organizationId, userId);
+			commerceAccountId, userId);
 	}
 
 	@Override
