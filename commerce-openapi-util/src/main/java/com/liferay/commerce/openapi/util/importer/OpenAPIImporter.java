@@ -220,7 +220,7 @@ public class OpenAPIImporter {
 						componentDefinitions));
 			}
 
-			String methodAccepts = null;
+			List<Content> requestBodyContents = new ArrayList<>();
 
 			if (httpMethodJSONNode.has("requestBody")) {
 				JsonNode requestBody = httpMethodJSONNode.get("requestBody");
@@ -238,7 +238,7 @@ public class OpenAPIImporter {
 							schema.getReferencedModel(), "body", content,
 							true));
 
-					methodAccepts = content.getMimeType();
+					requestBodyContents.addAll(contents);
 				}
 			}
 
@@ -257,11 +257,9 @@ public class OpenAPIImporter {
 						List<Content> contents = _getContents(
 							jsonNode.get("content"));
 
-						for (Content content : contents) {
-							responses.add(
-								new Response(
-									_getInteger(entry.getKey()), content));
-						}
+						responses.add(
+							new Response(
+								_getInteger(entry.getKey()), contents));
 					}
 					else {
 						responses.add(
@@ -271,8 +269,8 @@ public class OpenAPIImporter {
 
 			methods.add(
 				new Method(
-					methodName, methodAccepts, httpMethodName, path, parameters,
-					responses));
+					methodName, requestBodyContents, httpMethodName, path,
+					parameters, responses));
 		}
 
 		return methods;
