@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.user.segment.service.impl;
 
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.user.segment.exception.CommerceUserSegmentEntryKeyException;
 import com.liferay.commerce.user.segment.exception.CommerceUserSegmentEntryNameException;
