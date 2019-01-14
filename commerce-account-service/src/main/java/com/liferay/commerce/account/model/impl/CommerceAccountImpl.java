@@ -59,6 +59,24 @@ public class CommerceAccountImpl extends CommerceAccountBaseImpl {
 	}
 
 	@Override
+	public boolean isBusinessAccount() {
+		if (getType() == CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean isPersonalAccount() {
+		if (getType() == CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
 	public boolean isRoot() {
 		if (getParentCommerceAccountId() ==
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID) {
