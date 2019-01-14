@@ -20,6 +20,7 @@ import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 
 /**
  * @author Marco Leo
@@ -29,6 +30,20 @@ import com.liferay.portal.kernel.exception.PortalException;
 public class CommerceAccountImpl extends CommerceAccountBaseImpl {
 
 	public CommerceAccountImpl() {
+	}
+
+	@Override
+	public Group getCommerceAccountGroup() throws PortalException {
+		return CommerceAccountLocalServiceUtil.getCommerceAccountGroup(
+			getCommerceAccountId());
+	}
+
+	@Override
+	public long getCommerceAccountGroupId() throws PortalException {
+		Group group = CommerceAccountLocalServiceUtil.getCommerceAccountGroup(
+			getCommerceAccountId());
+
+		return group.getGroupId();
 	}
 
 	@Override
