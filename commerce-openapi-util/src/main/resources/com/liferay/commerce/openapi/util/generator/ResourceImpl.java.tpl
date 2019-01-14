@@ -17,11 +17,9 @@ package ${PACKAGE};
 ${IMPORT_STATEMENTS}
 
 import java.util.Collections;
-import java.util.List;
 
 import javax.annotation.Generated;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
