@@ -1280,7 +1280,7 @@ public class CommerceOrderLocalServiceImpl
 			throw new CommerceOrderStatusException();
 		}
 
-		if (!commerceOrder.isB2B() &&
+		if (commerceOrder.isB2B() &&
 			(commerceOrder.getBillingAddressId() <= 0)) {
 
 			throw new CommerceOrderBillingAddressException();
