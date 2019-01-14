@@ -14,12 +14,12 @@
 
 package com.liferay.commerce.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Organization;
 
 import java.io.Serializable;
 
@@ -30,6 +30,8 @@ import java.util.Optional;
  * @author Marco Leo
  */
 public interface CommerceContext extends Serializable {
+
+	public CommerceAccount getCommerceAccount() throws PortalException;
 
 	public CommerceCurrency getCommerceCurrency() throws PortalException;
 
@@ -43,8 +45,6 @@ public interface CommerceContext extends Serializable {
 	public String getCouponCode() throws PortalException;
 
 	public List<CPRule> getCPRules() throws PortalException;
-
-	public Organization getOrganization() throws PortalException;
 
 	public long getSiteGroupId() throws PortalException;
 

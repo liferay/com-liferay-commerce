@@ -14,20 +14,20 @@
 
 package com.liferay.commerce.internal.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.util.Portal;
 
 import java.util.List;
@@ -42,23 +42,35 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 
 	public CommerceContextHttpsImpl(
 		HttpServletRequest httpServletRequest,
+		CommerceAccountHelper commerceAccountHelper,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceDiscountCouponCodeHelper commerceDiscountCouponCodeHelper,
 		CommerceOrderHttpHelper commerceOrderHttpHelper,
-		CommerceOrganizationHelper commerceOrganizationHelper,
 		CommercePriceListLocalService commercePriceListLocalService,
 		CommerceUserSegmentHelper commerceUserSegmentHelper,
 		CPRuleLocalService cpRuleLocalService, Portal portal) {
 
 		_httpServletRequest = httpServletRequest;
+		_commerceAccountHelper = commerceAccountHelper;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceDiscountCouponCodeHelper = commerceDiscountCouponCodeHelper;
 		_commerceOrderHttpHelper = commerceOrderHttpHelper;
-		_commerceOrganizationHelper = commerceOrganizationHelper;
 		_commercePriceListLocalService = commercePriceListLocalService;
 		_commerceUserSegmentHelper = commerceUserSegmentHelper;
 		_cpRuleLocalService = cpRuleLocalService;
 		_portal = portal;
+	}
+
+	@Override
+	public CommerceAccount getCommerceAccount() throws PortalException {
+		if (_commerceAccount != null) {
+			return _commerceAccount;
+		}
+
+		_commerceAccount = _commerceAccountHelper.getCurrentCommerceAccount(
+			_httpServletRequest);
+
+		return _commerceAccount;
 	}
 
 	@Override
@@ -138,18 +150,6 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 	}
 
 	@Override
-	public Organization getOrganization() throws PortalException {
-		if (_organization != null) {
-			return _organization;
-		}
-
-		_organization = _commerceOrganizationHelper.getCurrentOrganization(
-			_httpServletRequest);
-
-		return _organization;
-	}
-
-	@Override
 	public long getSiteGroupId() throws PortalException {
 		return _portal.getScopeGroupId(_httpServletRequest);
 	}
@@ -159,13 +159,14 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 		return _portal.getUserId(_httpServletRequest);
 	}
 
+	private CommerceAccount _commerceAccount;
+	private final CommerceAccountHelper _commerceAccountHelper;
 	private CommerceCurrency _commerceCurrency;
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;
 	private final CommerceDiscountCouponCodeHelper
 		_commerceDiscountCouponCodeHelper;
 	private CommerceOrder _commerceOrder;
 	private final CommerceOrderHttpHelper _commerceOrderHttpHelper;
-	private final CommerceOrganizationHelper _commerceOrganizationHelper;
 	private Optional<CommercePriceList> _commercePriceList;
 	private final CommercePriceListLocalService _commercePriceListLocalService;
 	private long[] _commerceUserSegmentEntryIds;
@@ -173,7 +174,6 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 	private final CPRuleLocalService _cpRuleLocalService;
 	private List<CPRule> _cpRules;
 	private final HttpServletRequest _httpServletRequest;
-	private Organization _organization;
 	private final Portal _portal;
 
 }
