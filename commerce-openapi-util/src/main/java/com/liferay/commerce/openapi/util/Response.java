@@ -20,6 +20,7 @@ import java.util.List;
 
 /**
  * @author Igor Beslic
+ * @author Ivica Cardic
  */
 public class Response {
 
@@ -40,7 +41,7 @@ public class Response {
 	}
 
 	public boolean hasContent() {
-		if (_content != null) {
+		if ((_status == 200) && !_contents.isEmpty()) {
 			return true;
 		}
 
