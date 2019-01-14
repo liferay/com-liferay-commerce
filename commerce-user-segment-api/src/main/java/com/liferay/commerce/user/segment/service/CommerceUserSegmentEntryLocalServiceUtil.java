@@ -273,10 +273,10 @@ public class CommerceUserSegmentEntryLocalServiceUtil {
 	}
 
 	public static long[] getCommerceUserSegmentEntryIds(long groupId,
-		long organizationId, long userId)
+		long commerceAccountId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceUserSegmentEntryIds(groupId, organizationId,
+				   .getCommerceUserSegmentEntryIds(groupId, commerceAccountId,
 			userId);
 	}
 

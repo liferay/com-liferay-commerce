@@ -254,6 +254,12 @@ public class CommerceAccountLocalServiceUtil {
 		return getService().getCommerceAccount(commerceAccountId);
 	}
 
+	public static com.liferay.portal.kernel.model.Group getCommerceAccountGroup(
+		long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceAccountGroup(commerceAccountId);
+	}
+
 	/**
 	* Returns a range of all the commerce accounts.
 	*

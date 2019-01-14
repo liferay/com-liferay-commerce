@@ -234,6 +234,18 @@ public class CommerceAccountWrapper implements CommerceAccount,
 		return _commerceAccount.getActive();
 	}
 
+	@Override
+	public com.liferay.portal.kernel.model.Group getCommerceAccountGroup()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccount.getCommerceAccountGroup();
+	}
+
+	@Override
+	public long getCommerceAccountGroupId()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccount.getCommerceAccountGroupId();
+	}
+
 	/**
 	* Returns the commerce account ID of this commerce account.
 	*
