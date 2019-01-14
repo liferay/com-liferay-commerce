@@ -27,16 +27,16 @@ String couponCode = commerceContext.getCouponCode();
 List<CommerceUserSegmentEntry> commerceUserSegmentEntries = commerceContextDisplayContext.getCommerceUserSegmentEntries();
 List<CPRule> cpRules = commerceContext.getCPRules();
 Optional<CommercePriceList> optionalCommercePriceList = commerceContext.getCommercePriceList();
-Organization organization = commerceContext.getOrganization();
+CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 %>
 
 <div class="sheet-section">
 	<h3 class="sheet-subtitle"><liferay-ui:message key="current-organization" /></h3>
 
 	<c:choose>
-		<c:when test="<%= organization == null %>">
+		<c:when test="<%= commerceAccount == null %>">
 			<div class="alert alert-info mx-auto">
-				<liferay-ui:message arguments="organization" key="x-is-not-set" translateArguments="<%= true %>" />
+				<liferay-ui:message arguments="account" key="x-is-not-set" translateArguments="<%= true %>" />
 			</div>
 		</c:when>
 		<c:otherwise>
@@ -47,9 +47,9 @@ Organization organization = commerceContext.getOrganization();
 					<th class="table-cell-content"><liferay-ui:message key="type" /></th>
 				</tr>
 				<tr>
-					<td class="table-cell-content"><%= organization.getOrganizationId() %></td>
-					<td class="table-cell-content"><%= organization.getName() %></td>
-					<td class="table-cell-content"><%= organization.getType() %></td>
+					<td class="table-cell-content"><%= commerceAccount.getCommerceAccountId() %></td>
+					<td class="table-cell-content"><%= commerceAccount.getName() %></td>
+					<td class="table-cell-content"><%= commerceAccount.getType() %></td>
 				</tr>
 			</table>
 		</c:otherwise>

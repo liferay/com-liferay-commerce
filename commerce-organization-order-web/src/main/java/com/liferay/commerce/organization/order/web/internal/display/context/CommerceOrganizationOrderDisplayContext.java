@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.organization.order.web.internal.display.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
@@ -56,7 +57,6 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
@@ -164,7 +164,7 @@ public class CommerceOrganizationOrderDisplayContext {
 
 		_currentCommerceOrder = commerceContext.getCommerceOrder();
 
-		_organization = commerceContext.getOrganization();
+		_commerceAccount = commerceContext.getCommerceAccount();
 
 		_commerceOrderId = ParamUtil.getLong(renderRequest, "commerceOrderId");
 		_commerceOrderNoteId = ParamUtil.getLong(
@@ -195,8 +195,9 @@ public class CommerceOrganizationOrderDisplayContext {
 		throws PortalException {
 
 		return _commerceAddressService.getCommerceAddresses(
-			_organization.getGroupId(), Organization.class.getName(),
-			_organization.getOrganizationId());
+			_commerceAccount.getCommerceAccountGroupId(),
+			CommerceAccount.class.getName(),
+			_commerceAccount.getCommerceAccountId());
 	}
 
 	public List<KeyValuePair> getAvailableOrderStatusKVPs()
@@ -207,6 +208,10 @@ public class CommerceOrganizationOrderDisplayContext {
 		}
 
 		return _availableOrderStatusKVPs;
+	}
+
+	public CommerceAccount getCommerceAccount() {
+		return _commerceAccount;
 	}
 
 	public CommerceOrder getCommerceOrder() throws PortalException {
@@ -482,10 +487,6 @@ public class CommerceOrganizationOrderDisplayContext {
 		return StringPool.BLANK;
 	}
 
-	public Organization getOrganization() {
-		return _organization;
-	}
-
 	public PortletURL getPortletURL() {
 		LiferayPortletResponse liferayPortletResponse =
 			_commerceOrganizationOrderRequestHelper.getLiferayPortletResponse();
@@ -706,10 +707,6 @@ public class CommerceOrganizationOrderDisplayContext {
 		long groupId =
 			_commerceOrganizationOrderRequestHelper.getScopeGroupId();
 
-		if (_organization != null) {
-			groupId = _organization.getGroupId();
-		}
-
 		searchContext.setGroupIds(new long[] {groupId});
 
 		searchContext.setKeywords(_keywords);
@@ -879,6 +876,7 @@ public class CommerceOrganizationOrderDisplayContext {
 
 	private List<KeyValuePair> _availableAdvanceStatusKVPs;
 	private List<KeyValuePair> _availableOrderStatusKVPs;
+	private final CommerceAccount _commerceAccount;
 	private final CommerceAddressService _commerceAddressService;
 	private CommerceOrder _commerceOrder;
 	private final Format _commerceOrderDateFormatDate;
@@ -910,7 +908,6 @@ public class CommerceOrganizationOrderDisplayContext {
 	private final String _keywords;
 	private final ModelResourcePermission<CommerceOrder>
 		_modelResourcePermission;
-	private final Organization _organization;
 	private SearchContainer<CommerceOrder> _searchContainer;
 	private final boolean _showFilter;
 	private final String _tabs1;

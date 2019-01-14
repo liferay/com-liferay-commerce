@@ -31,12 +31,12 @@ public interface CommerceUserSegmentHelper {
 		throws PortalException;
 
 	public long[] getCommerceUserSegmentIds(
-			long groupId, long organizationId, long userId)
+			long groupId, long commerceAccountId, long userId)
 		throws PortalException;
 
 	public long[] getUserIds(
-			long groupId, long organizationId,
-			long[] commerceUserSegmentEntryIds, int start, int end)
+			long groupId, long organizationId, long[] commerceAccountId,
+			int start, int end)
 		throws PortalException;
 
 }

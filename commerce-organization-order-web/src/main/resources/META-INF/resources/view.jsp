@@ -20,202 +20,193 @@
 CommerceOrganizationOrderDisplayContext commerceOrganizationOrderDisplayContext = (CommerceOrganizationOrderDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
-<c:choose>
-	<c:when test="<%= commerceOrganizationOrderDisplayContext.getOrganization() != null %>">
-		<liferay-portlet:renderURL var="addCommerceOrderURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-			<liferay-portlet:param name="mvcRenderCommandName" value="editCommerceOrderDetails" />
-			<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-		</liferay-portlet:renderURL>
+<liferay-portlet:renderURL var="addCommerceOrderURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+	<liferay-portlet:param name="mvcRenderCommandName" value="editCommerceOrderDetails" />
+	<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
+</liferay-portlet:renderURL>
 
-		<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
+<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 
-		<clay:navigation-bar
-			navigationItems="<%= commerceOrganizationOrderDisplayContext.getNavigationItems() %>"
-		/>
+<clay:navigation-bar
+	navigationItems="<%= commerceOrganizationOrderDisplayContext.getNavigationItems() %>"
+/>
 
-		<liferay-util:include page="/toolbar.jsp" servletContext="<%= application %>" />
+<liferay-util:include page="/toolbar.jsp" servletContext="<%= application %>" />
 
-		<aui:form action="<%= editCommerceOrderURL %>" method="post" name="fm">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="deleteCommerceOrderIds" type="hidden" />
+<aui:form action="<%= editCommerceOrderURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="deleteCommerceOrderIds" type="hidden" />
 
-			<liferay-ui:search-container
-				cssClass="table-nowrap table-responsive"
-				id="commerceOrders"
-				searchContainer="<%= commerceOrganizationOrderDisplayContext.getSearchContainer() %>"
-			>
-				<liferay-ui:search-container-row
-					className="com.liferay.commerce.model.CommerceOrder"
-					keyProperty="commerceOrderId"
-					modelVar="commerceOrder"
-				>
-					<liferay-ui:search-container-column-text
-						name="order-id"
-						property="commerceOrderId"
-					/>
+	<liferay-ui:search-container
+		cssClass="table-nowrap table-responsive"
+		id="commerceOrders"
+		searchContainer="<%= commerceOrganizationOrderDisplayContext.getSearchContainer() %>"
+	>
+		<liferay-ui:search-container-row
+			className="com.liferay.commerce.model.CommerceOrder"
+			keyProperty="commerceOrderId"
+			modelVar="commerceOrder"
+		>
+			<liferay-ui:search-container-column-text
+				name="order-id"
+				property="commerceOrderId"
+			/>
 
-					<%
-					PortletURL rowURL = renderResponse.createRenderURL();
+			<%
+			PortletURL rowURL = renderResponse.createRenderURL();
 
-					rowURL.setParameter("redirect", currentURL);
-					rowURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
-					rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrder.getCommerceOrderId()));
-					%>
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
+			rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrder.getCommerceOrderId()));
+			%>
 
-					<liferay-ui:search-container-column-text
-						cssClass="important table-list-title"
-						href="<%= rowURL %>"
-						name="order-date"
-						value="<%= HtmlUtil.escape(commerceOrganizationOrderDisplayContext.getCommerceOrderDateTime(commerceOrder)) %>"
-					/>
+			<liferay-ui:search-container-column-text
+				cssClass="important table-list-title"
+				href="<%= rowURL %>"
+				name="order-date"
+				value="<%= HtmlUtil.escape(commerceOrganizationOrderDisplayContext.getCommerceOrderDateTime(commerceOrder)) %>"
+			/>
 
-					<liferay-ui:search-container-column-text
-						name="order-status"
-						value="<%= commerceOrganizationOrderDisplayContext.getCommerceOrderStatus(commerceOrder) %>"
-					/>
+			<liferay-ui:search-container-column-text
+				name="order-status"
+				value="<%= commerceOrganizationOrderDisplayContext.getCommerceOrderStatus(commerceOrder) %>"
+			/>
 
-					<c:if test="<%= commerceOrganizationOrderDisplayContext.isOpenOrdersTab() && WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, CommerceOrder.class.getName()) %>">
-						<liferay-ui:search-container-column-status
-							name="buyer-workflow-status"
-							status="<%= commerceOrder.getStatus() %>"
-							statusByUserId="<%= commerceOrder.getStatusByUserId() %>"
-							statusDate="<%= commerceOrder.getStatusDate() %>"
-						/>
-					</c:if>
-
-					<liferay-ui:search-container-column-text
-						name="customer-name"
-						property="customerName"
-					/>
-
-					<liferay-ui:search-container-column-text
-						name="customer-id"
-						property="customerId"
-					/>
-
-					<liferay-ui:search-container-column-text
-						name="order-total"
-						value="<%= commerceOrganizationOrderDisplayContext.getCommerceOrderTotal(commerceOrder) %>"
-					/>
-
-					<liferay-ui:search-container-column-jsp
-						align="center"
-						name="notes"
-						path="/order_notes.jsp"
-					/>
-
-					<liferay-ui:search-container-column-text
-						cssClass="transition-column"
-					>
-						<liferay-commerce:order-transitions
-							commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
-							cssClass="btn btn-secondary btn-sm"
-						/>
-					</liferay-ui:search-container-column-text>
-
-					<liferay-ui:search-container-column-jsp
-						align="center"
-						cssClass="entry-action-column"
-						name="actions"
-						path="/order_action.jsp"
-					/>
-				</liferay-ui:search-container-row>
-
-				<liferay-ui:search-iterator
-					markupView="lexicon"
+			<c:if test="<%= commerceOrganizationOrderDisplayContext.isOpenOrdersTab() && WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, CommerceOrder.class.getName()) %>">
+				<liferay-ui:search-container-column-status
+					name="buyer-workflow-status"
+					status="<%= commerceOrder.getStatus() %>"
+					statusByUserId="<%= commerceOrder.getStatusByUserId() %>"
+					statusDate="<%= commerceOrder.getStatusDate() %>"
 				/>
-			</liferay-ui:search-container>
-		</aui:form>
+			</c:if>
 
-		<%@ include file="/transition.jspf" %>
+			<liferay-ui:search-container-column-text
+				name="customer-name"
+				property="customerName"
+			/>
 
-		<aui:script>
-			Liferay.provide(
-				window,
-				'<portlet:namespace />addCommerceOrder',
-				function(A) {
-					var A = AUI();
+			<liferay-ui:search-container-column-text
+				name="customer-id"
+				property="customerId"
+			/>
 
-					var dialog = Liferay.Util.Window.getWindow(
-						{
-							dialog: {
-								destroyOnClose: true,
-								toolbars: {
-									footer: [
-										{
-											cssClass: 'btn-cancel mr-2',
-											label: '<liferay-ui:message key="cancel" />',
-											on: {
-												click: function() {
-													dialog.hide();
-												}
-											}
-										},
-										{
-											cssClass: 'btn-primary',
-											label: '<liferay-ui:message key="add-order" />',
-											on: {
-												click: function() {
-													submitForm(document.<portlet:namespace />editFm);
-												}
-											}
+			<liferay-ui:search-container-column-text
+				name="order-total"
+				value="<%= commerceOrganizationOrderDisplayContext.getCommerceOrderTotal(commerceOrder) %>"
+			/>
+
+			<liferay-ui:search-container-column-jsp
+				align="center"
+				name="notes"
+				path="/order_notes.jsp"
+			/>
+
+			<liferay-ui:search-container-column-text
+				cssClass="transition-column"
+			>
+				<liferay-commerce:order-transitions
+					commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
+					cssClass="btn btn-secondary btn-sm"
+				/>
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-jsp
+				align="center"
+				cssClass="entry-action-column"
+				name="actions"
+				path="/order_action.jsp"
+			/>
+		</liferay-ui:search-container-row>
+
+		<liferay-ui:search-iterator
+			markupView="lexicon"
+		/>
+	</liferay-ui:search-container>
+</aui:form>
+
+<%@ include file="/transition.jspf" %>
+
+<aui:script>
+	Liferay.provide(
+		window,
+		'<portlet:namespace />addCommerceOrder',
+		function(A) {
+			var A = AUI();
+
+			var dialog = Liferay.Util.Window.getWindow(
+				{
+					dialog: {
+						destroyOnClose: true,
+						toolbars: {
+							footer: [
+								{
+									cssClass: 'btn-cancel mr-2',
+									label: '<liferay-ui:message key="cancel" />',
+									on: {
+										click: function() {
+											dialog.hide();
 										}
-									],
-									header: [
-										{
-											cssClass: 'close',
-											discardDefaultButtonCssClasses: true,
-											labelHTML: '<clay:icon symbol="times" />',
-											on: {
-												click: function(event) {
-													dialog.hide();
-												}
-											}
-										}
-									]
+									}
 								},
-								width: 600
-							},
-							title: '<liferay-ui:message key="add-order" />'
-						}
-					).plug(
-						A.Plugin.IO,
-						{
-							uri: '<%= addCommerceOrderURL %>'
-						}
-					).render();
-				},
-				['aui-io-deprecated', 'liferay-util-window']
-			);
-
-			function <portlet:namespace />deleteCommerceOrders() {
-				if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-orders" />')) {
-					var form = AUI.$(document.<portlet:namespace />fm);
-
-					form.fm('<%= Constants.CMD %>').val('<%= Constants.DELETE %>');
-					form.fm('deleteCommerceOrderIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-
-					submitForm(form);
+								{
+									cssClass: 'btn-primary',
+									label: '<liferay-ui:message key="add-order" />',
+									on: {
+										click: function() {
+											submitForm(document.<portlet:namespace />editFm);
+										}
+									}
+								}
+							],
+							header: [
+								{
+									cssClass: 'close',
+									discardDefaultButtonCssClasses: true,
+									labelHTML: '<clay:icon symbol="times" />',
+									on: {
+										click: function(event) {
+											dialog.hide();
+										}
+									}
+								}
+							]
+						},
+						width: 600
+					},
+					title: '<liferay-ui:message key="add-order" />'
 				}
-			}
-		</aui:script>
+			).plug(
+				A.Plugin.IO,
+				{
+					uri: '<%= addCommerceOrderURL %>'
+				}
+			).render();
+		},
+		['aui-io-deprecated', 'liferay-util-window']
+	);
 
-		<aui:script use="aui-base">
-			var searchContainer = A.one('#<portlet:namespace />commerceOrdersSearchContainer');
+	function <portlet:namespace />deleteCommerceOrders() {
+		if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-orders" />')) {
+			var form = AUI.$(document.<portlet:namespace />fm);
 
-			searchContainer.delegate(
-				'click',
-				function(event) {
-					<portlet:namespace />transition(event);
-				},
-				'.transition-link'
-			);
-		</aui:script>
-	</c:when>
-	<c:otherwise>
-		<div class="alert alert-warning text-center">
-			<liferay-ui:message key="please-select-an-account" />
-		</div>
-	</c:otherwise>
-</c:choose>
+			form.fm('<%= Constants.CMD %>').val('<%= Constants.DELETE %>');
+			form.fm('deleteCommerceOrderIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+
+			submitForm(form);
+		}
+	}
+</aui:script>
+
+<aui:script use="aui-base">
+	var searchContainer = A.one('#<portlet:namespace />commerceOrdersSearchContainer');
+
+	searchContainer.delegate(
+		'click',
+		function(event) {
+			<portlet:namespace />transition(event);
+		},
+		'.transition-link'
+	);
+</aui:script>

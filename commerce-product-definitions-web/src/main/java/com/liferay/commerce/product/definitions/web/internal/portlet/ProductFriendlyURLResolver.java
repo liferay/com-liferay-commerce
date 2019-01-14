@@ -16,7 +16,8 @@ package com.liferay.commerce.product.definitions.web.internal.portlet;
 
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetTagLocalService;
-import com.liferay.commerce.organization.util.CommerceOrganizationHelper;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
@@ -35,7 +36,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutFriendlyURLComposite;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.FriendlyURLResolver;
 import com.liferay.portal.kernel.service.LayoutLocalService;
@@ -269,19 +269,19 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 		// Passing the groupId is mandatory here. See COMMERCE-728.
 
-		Organization organization =
-			_commerceOrganizationHelper.getCurrentOrganization(
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
 				groupId, httpServletRequest);
 
-		long organizationId = 0;
+		long commerceAccountId = 0;
 
-		if (organization != null) {
-			organizationId = organization.getOrganizationId();
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
 		}
 
 		long[] commerceUserSegmentEntryIds =
 			_commerceUserSegmentHelper.getCommerceUserSegmentIds(
-				groupId, organizationId, user.getUserId());
+				groupId, commerceAccountId, user.getUserId());
 
 		List<CPRule> cpRules = _cpRuleLocalService.getCPRules(
 			groupId, commerceUserSegmentEntryIds);
@@ -293,7 +293,7 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 	private AssetTagLocalService _assetTagLocalService;
 
 	@Reference
-	private CommerceOrganizationHelper _commerceOrganizationHelper;
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceUserSegmentHelper _commerceUserSegmentHelper;
