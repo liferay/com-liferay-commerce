@@ -28,7 +28,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -125,7 +124,9 @@ public class ResourceGenerator {
 				importedClasses.add(method.getHttpMethod());
 			}
 
-			if ((method.getAccepts() != null) &&
+			List<Content> requestBody = method.getRequestBody();
+
+			if (!requestBody.isEmpty() &&
 				!importedClasses.contains("Consumes")) {
 
 				sb.append("import javax.ws.rs.Consumes;\n");
@@ -243,11 +244,7 @@ public class ResourceGenerator {
 
 			sb.append(_getProducesAnnotation(method.getResponses()));
 
-			if (method.getAccepts() != null) {
-				sb.append("\t@Consumes(\"");
-				sb.append(method.getAccepts());
-				sb.append("\")\n");
-			}
+			sb.append(_getConsumesAnnotation(method.getRequestBody()));
 
 			_appendMethodDeclaration(sb, method, true, schemaComponents);
 
@@ -297,52 +294,71 @@ public class ResourceGenerator {
 		sb.append(")");
 	}
 
-	private String _getProducesAnnotation(List<Response> responses) {
-		Stream<Response> stream = responses.stream();
-
-		List<Response> contentResponses = stream.filter(
-			response -> response.hasContent()
-		).collect(
-			Collectors.toList()
-		);
-
-		if (contentResponses.isEmpty()) {
+	private String _getConsumesAnnotation(List<Content> requestBody) {
+		if (requestBody.isEmpty()) {
 			return "";
 		}
 
-		boolean arrayStyleAnnotationContent = false;
+		StringBuilder sb = new StringBuilder();
 
-		if (contentResponses.size() > 1) {
-			arrayStyleAnnotationContent = true;
+		sb.append("\t@Consumes(");
+
+		sb.append(_getMimeTypes(requestBody));
+
+		sb.append(")\n");
+
+		return sb.toString();
+	}
+
+	private String _getMimeTypes(List<Content> contents) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("\"");
+
+		if (contents.size() > 1) {
+			sb.append("{");
+		}
+
+		for (int i = 0; i < contents.size(); i++) {
+			Content content = contents.get(i);
+
+			sb.append(content.getMimeType());
+
+			if (i < (contents.size() - 1)) {
+				sb.append(",");
+			}
+		}
+
+		if (contents.size() > 1) {
+			sb.append("}");
+		}
+
+		sb.append("\"");
+
+		return sb.toString();
+	}
+
+	private String _getProducesAnnotation(List<Response> responses) {
+		Stream<Response> stream = responses.stream();
+
+		Response response = stream.filter(
+			Response::hasContent
+		).findFirst(
+		).orElse(
+			null
+		);
+
+		if (response == null) {
+			return "";
 		}
 
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("\t@Produces(");
 
-		if (arrayStyleAnnotationContent) {
-			sb.append("{");
-		}
+		List<Content> contents = response.getContents();
 
-		Iterator<Response> iterator = contentResponses.iterator();
-
-		while (iterator.hasNext()) {
-			sb.append("\"");
-
-			Response response = iterator.next();
-
-			sb.append(response.getContent());
-
-			sb.append("\"");
-
-			if (iterator.hasNext()) {
-				sb.append(", ");
-			}
-		}
-
-		if (arrayStyleAnnotationContent) {
-			sb.append("}");
-		}
+		sb.append(_getMimeTypes(contents));
 
 		sb.append(")\n");
 
@@ -350,16 +366,15 @@ public class ResourceGenerator {
 	}
 
 	private Content _getResponseContent(List<Response> responses) {
-		Stream<Response> responseStream = responses.stream();
+		for (Response response : responses) {
+			List<Content> contents = response.getContents();
 
-		return responseStream.filter(
-			response -> response.getContent() != null
-		).findFirst(
-		).map(
-			Response::getContent
-		).orElse(
-			null
-		);
+			if (!contents.isEmpty()) {
+				return contents.get(0);
+			}
+		}
+
+		return null;
 	}
 
 	private String _getReturnValue(

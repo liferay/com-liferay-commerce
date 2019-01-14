@@ -24,11 +24,16 @@ import java.util.List;
 public class Method {
 
 	public Method(
-		String name, String accepts, String httpMethod, String absolutePath,
-		List<Parameter> parameters, List<Response> responses) {
+		String name, List<Content> requestBody, String httpMethod,
+		String absolutePath, List<Parameter> parameters,
+		List<Response> responses) {
 
 		_name = name;
-		_accepts = accepts;
+
+		if (requestBody != null) {
+			_requestBody.addAll(requestBody);
+		}
+
 		_httpMethod = httpMethod.toUpperCase();
 		_absolutePath = absolutePath;
 
@@ -51,10 +56,6 @@ public class Method {
 
 	public String getAbsolutePath() {
 		return _absolutePath;
-	}
-
-	public String getAccepts() {
-		return _accepts;
 	}
 
 	public String getHttpMethod() {
@@ -92,6 +93,10 @@ public class Method {
 		return _path;
 	}
 
+	public List<Content> getRequestBody() {
+		return _requestBody;
+	}
+
 	public List<Response> getResponses() {
 		return _responses;
 	}
@@ -122,6 +127,12 @@ public class Method {
 			}
 		}
 
+		for (Content content : _requestBody) {
+			sb.append("consumes: ");
+			sb.append(content);
+			sb.append(", ");
+		}
+
 		sb.append("name: ");
 		sb.append(_name);
 		sb.append(", parameters: {");
@@ -144,13 +155,13 @@ public class Method {
 	}
 
 	private final String _absolutePath;
-	private final String _accepts;
 	private final boolean _hasResponseContent;
 	private final String _httpMethod;
 	private String _modelPath;
 	private final String _name;
 	private final List<Parameter> _parameters = new ArrayList<>();
 	private String _path;
+	private final List<Content> _requestBody = new ArrayList<>();
 	private final List<Response> _responses = new ArrayList<>();
 	private String _toString;
 
