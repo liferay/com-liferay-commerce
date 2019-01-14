@@ -426,7 +426,7 @@ public class ResourceGenerator {
 				schemaComponentDefinition = _getSchemaComponentDefinition(
 					itemsReferenceModel, componentDefinitions);
 
-				sb.append("List<");
+				sb.append("CollectionDTO<");
 				sb.append(schemaComponentDefinition.getName());
 				sb.append("DTO> ");
 			}
