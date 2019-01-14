@@ -138,9 +138,9 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 		User user = _portal.getUser(httpServletRequest);
 
-		if (user.isDefaultUser()) {
+		if ((user == null) || user.isDefaultUser()) {
 			return _commerceAccountLocalService.getGuestCommerceAccount(
-				user.getCompanyId());
+				_portal.getCompanyId(httpServletRequest));
 		}
 
 		CommerceAccountGroupServiceConfiguration
