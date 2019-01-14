@@ -142,13 +142,7 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 	public boolean isB2B() throws PortalException {
 		CommerceAccount commerceAccount = getCommerceAccount();
 
-		if (commerceAccount.getType() ==
-				CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS) {
-
-			return true;
-		}
-
-		return false;
+		return commerceAccount.isBusinessAccount();
 	}
 
 	@Override
