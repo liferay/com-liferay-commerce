@@ -26,6 +26,7 @@ import com.liferay.commerce.account.util.CommerceSiteType;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.Role;
@@ -238,6 +239,20 @@ public class CommerceAccountLocalServiceImpl
 	@Override
 	public CommerceAccount fetchCommerceAccount(long companyId, String name) {
 		return commerceAccountPersistence.fetchByC_N(companyId, name);
+	}
+
+	@Override
+	public Group getCommerceAccountGroup(long commerceAccountId)
+		throws PortalException {
+
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.getCommerceAccount(commerceAccountId);
+
+		long classNameId = classNameLocalService.getClassNameId(
+			CommerceAccount.class.getName());
+
+		return groupPersistence.findByC_C_C(
+			commerceAccount.getCompanyId(), classNameId, commerceAccountId);
 	}
 
 	@Override
