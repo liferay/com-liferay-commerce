@@ -46,6 +46,9 @@ public class CommerceAccountFinderImpl
 	public static final String FIND_BY_U_P =
 		CommerceAccountFinder.class.getName() + ".findByU_P";
 
+	public static final String FIND_BY_U_C =
+		CommerceAccountFinder.class.getName() + ".findByU_C";
+
 	@Override
 	public int countByU_P(
 		long userId, QueryDefinition<CommerceAccount> queryDefinition) {
@@ -182,6 +185,40 @@ public class CommerceAccountFinderImpl
 			return (List<CommerceAccount>)QueryUtil.list(
 				q, getDialect(), queryDefinition.getStart(),
 				queryDefinition.getEnd());
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	public CommerceAccount findByU_C(long userId, long commerceAccountId) {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), FIND_BY_U_C);
+
+			sql = StringUtil.replace(
+				sql, "[$USER_ID$]", String.valueOf(userId));
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity(
+				CommerceAccountImpl.TABLE_NAME, CommerceAccountImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(commerceAccountId);
+
+			List<CommerceAccount> list = (List<CommerceAccount>)QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+			return list.get(0);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
