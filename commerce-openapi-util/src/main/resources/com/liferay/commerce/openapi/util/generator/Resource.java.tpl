@@ -20,8 +20,6 @@ import javax.annotation.Generated;
 
 ${MODEL_IMPORT_STATEMENTS_JAVAX}
 
-import java.util.List;
-
 import javax.annotation.Generated;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
