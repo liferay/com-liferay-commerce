@@ -11,7 +11,6 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.admin.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.application.list", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.organization.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.item.selector.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.service", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.service", version: "1.0.0"
