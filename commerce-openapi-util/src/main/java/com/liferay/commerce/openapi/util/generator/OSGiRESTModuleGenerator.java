@@ -175,19 +175,20 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 			_writeGradleSource();
 
+			Set<ComponentDefinition> componentDefinitions =
+				definition.getComponentDefinitions();
+
 			Set<String> referencedModels = new HashSet<>();
 
 			for (Path path : definition.getPaths()) {
 				referencedModels.addAll(path.getReferencedModels());
 
-				_writeResourceInterfaceSource(definition.getVersion(), path);
+				_writeResourceInterfaceSource(
+					definition.getVersion(), path, componentDefinitions);
 
 				_writeResourceImplementationSource(
-					definition.getVersion(), path);
+					definition.getVersion(), path, componentDefinitions);
 			}
-
-			Set<ComponentDefinition> componentDefinitions =
-				definition.getComponentDefinitions();
 
 			Stream<ComponentDefinition> stream = componentDefinitions.stream();
 
@@ -363,7 +364,9 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		writeSource(jsonMessageBodyWriterTpl, jsonMessageBodyWriterSourcePath);
 	}
 
-	private void _writeResourceImplementationSource(String version, Path path)
+	private void _writeResourceImplementationSource(
+			String version, Path path,
+			Set<ComponentDefinition> componentDefinitions)
 		throws IOException {
 
 		String resourceImplementationClassName = StringUtils.upperCaseFirstChar(
@@ -432,12 +435,14 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${METHODS}",
 			_resourceGenerator.toResourceImplementationMethods(
-				path.getMethods()));
+				path.getMethods(), componentDefinitions));
 
 		writeSource(osgiResourceComponent, componentSourcePath);
 	}
 
-	private void _writeResourceInterfaceSource(String version, Path path)
+	private void _writeResourceInterfaceSource(
+			String version, Path path,
+			Set<ComponentDefinition> componentDefinitions)
 		throws IOException {
 
 		String osgiResourceComponent = getTemplate(
@@ -472,7 +477,8 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${METHODS}",
-			_resourceGenerator.toResourceInterfaceMethods(path.getMethods()));
+			_resourceGenerator.toResourceInterfaceMethods(
+				path.getMethods(), componentDefinitions));
 
 		String componentSourcePath = getClassSourcePath(
 			_moduleOutputPath, resourceInterfaceClassName + ".java",
