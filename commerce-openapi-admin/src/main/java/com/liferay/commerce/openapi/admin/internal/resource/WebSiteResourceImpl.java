@@ -14,18 +14,32 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.context.Pagination;
+import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.openapi.admin.resource.WebSiteResource;
+import com.liferay.commerce.openapi.admin.util.DTOUtils;
+import com.liferay.commerce.openapi.admin.util.IdUtils;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.service.GroupService;
+import com.liferay.portal.kernel.util.GetterUtil;
 
-import javax.annotation.Generated;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.ServerErrorException;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
- * @author Igor Beslic
+ * @author Zoltán Takács
  */
 @Component(
 	immediate = true,
@@ -35,21 +49,57 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	service = WebSiteResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class WebSiteResourceImpl implements WebSiteResource {
 
 	@Override
-	public Response getWebSite(String id) {
-		return Response.ok(
-			"Here goes output", MediaType.APPLICATION_JSON
-		).build();
+	public WebSiteDTO getWebSite(String id, Locale locale) {
+		Group group = _getGroupById(id);
+
+		return DTOUtils.modelToDTO(group, locale);
 	}
 
 	@Override
-	public Response getWebSites(long groupId, int page, int pageSize) {
-		return Response.ok(
-			"Here goes output", MediaType.APPLICATION_JSON
-		).build();
+	public List<WebSiteDTO> getWebSites(
+		Company company, Locale locale, Pagination pagination) {
+
+		List<Group> groups = null;
+
+		try {
+			groups = _groupService.getGroups(
+				company.getCompanyId(), 0, true, pagination.getStartPosition(),
+				pagination.getEndPosition());
+		}
+		catch (PortalException pe) {
+			throw new ServerErrorException(
+				"Unable to fetch web sites",
+				Response.Status.INTERNAL_SERVER_ERROR, pe);
+		}
+
+		Stream<Group> stream = groups.stream();
+
+		return stream.map(
+			group -> DTOUtils.modelToDTO(group, locale)
+		).collect(
+			Collectors.toList()
+		);
 	}
+
+	private Group _getGroupById(String id) {
+		if (IdUtils.isLocalPK(id)) {
+			try {
+				return _groupService.getGroup(GetterUtil.getLong(id));
+			}
+			catch (PortalException pe) {
+				throw new ServerErrorException(
+					"Unable to find Price List with ID " + id,
+					Response.Status.INTERNAL_SERVER_ERROR, pe);
+			}
+		}
+
+		throw new NotFoundException("Unable to find web site with ID " + id);
+	}
+
+	@Reference
+	private GroupService _groupService;
 
 }
