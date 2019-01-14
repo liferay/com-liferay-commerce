@@ -185,6 +185,10 @@ public class ResourceGenerator {
 			sb.append("DTO;\n");
 		}
 
+		sb.append("import ");
+		sb.append(modelPackage);
+		sb.append(".CollectionDTO;\n");
+
 		return sb.toString();
 	}
 
@@ -210,7 +214,8 @@ public class ResourceGenerator {
 					_getSchemaComponentDefinition(method, componentDefinitions);
 
 				if (schemaComponentDefinition.isArray()) {
-					sb.append("\t\treturn Collections.emptyList();\n");
+					sb.append("\t\treturn new CollectionDTO(");
+					sb.append("Collections.emptyList(), 0);\n");
 				}
 				else {
 					sb.append("\t\treturn null;\n");
