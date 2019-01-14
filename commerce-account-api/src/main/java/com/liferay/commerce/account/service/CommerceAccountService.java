@@ -88,8 +88,8 @@ public interface CommerceAccountService extends BaseService {
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceAccount getPersonalCommerceAccount(
-		ServiceContext serviceContext) throws PortalException;
+	public CommerceAccount getPersonalCommerceAccount(long companyId,
+		long userId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(

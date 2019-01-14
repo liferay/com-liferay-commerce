@@ -56,14 +56,12 @@ public class CommerceDiscountUsageEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.discount.model.CommerceDiscountUsageEntry addCommerceDiscountUsageEntry(
-		long discountUserId, long discountOrganizationId, long commerceOrderId,
-		long commerceDiscountId,
+		long commerceAccountId, long commerceOrderId, long commerceDiscountId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceDiscountUsageEntry(discountUserId,
-			discountOrganizationId, commerceOrderId, commerceDiscountId,
-			serviceContext);
+				   .addCommerceDiscountUsageEntry(commerceAccountId,
+			commerceOrderId, commerceDiscountId, serviceContext);
 	}
 
 	/**

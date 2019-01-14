@@ -88,9 +88,10 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccount getPersonalCommerceAccount(
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		long companyId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.getPersonalCommerceAccount(serviceContext);
+		return _commerceAccountService.getPersonalCommerceAccount(companyId,
+			userId);
 	}
 
 	@Override

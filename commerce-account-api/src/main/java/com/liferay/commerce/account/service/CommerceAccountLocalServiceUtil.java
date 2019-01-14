@@ -254,6 +254,11 @@ public class CommerceAccountLocalServiceUtil {
 		return getService().getCommerceAccount(commerceAccountId);
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccount getCommerceAccount(
+		long userId, long commerceAccountId) {
+		return getService().getCommerceAccount(userId, commerceAccountId);
+	}
+
 	public static com.liferay.portal.kernel.model.Group getCommerceAccountGroup(
 		long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -311,9 +316,9 @@ public class CommerceAccountLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccount getPersonalCommerceAccount(
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		long companyId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getPersonalCommerceAccount(serviceContext);
+		return getService().getPersonalCommerceAccount(companyId, userId);
 	}
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(

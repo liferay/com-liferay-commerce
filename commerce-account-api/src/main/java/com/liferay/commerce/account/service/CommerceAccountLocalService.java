@@ -231,6 +231,10 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccount getCommerceAccount(long userId,
+		long commerceAccountId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Group getCommerceAccountGroup(long commerceAccountId)
 		throws PortalException;
 
@@ -276,8 +280,8 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceAccount getPersonalCommerceAccount(
-		ServiceContext serviceContext) throws PortalException;
+	public CommerceAccount getPersonalCommerceAccount(long companyId,
+		long userId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(long userId,

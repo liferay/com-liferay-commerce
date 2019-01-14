@@ -134,9 +134,7 @@ public class CommerceDiscountUsageEntryPersistenceTest {
 
 		newCommerceDiscountUsageEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceDiscountUsageEntry.setDiscountUserId(RandomTestUtil.nextLong());
-
-		newCommerceDiscountUsageEntry.setDiscountOrganizationId(RandomTestUtil.nextLong());
+		newCommerceDiscountUsageEntry.setCommerceAccountId(RandomTestUtil.nextLong());
 
 		newCommerceDiscountUsageEntry.setCommerceOrderId(RandomTestUtil.nextLong());
 
@@ -165,10 +163,8 @@ public class CommerceDiscountUsageEntryPersistenceTest {
 				existingCommerceDiscountUsageEntry.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceDiscountUsageEntry.getModifiedDate()));
-		Assert.assertEquals(existingCommerceDiscountUsageEntry.getDiscountUserId(),
-			newCommerceDiscountUsageEntry.getDiscountUserId());
-		Assert.assertEquals(existingCommerceDiscountUsageEntry.getDiscountOrganizationId(),
-			newCommerceDiscountUsageEntry.getDiscountOrganizationId());
+		Assert.assertEquals(existingCommerceDiscountUsageEntry.getCommerceAccountId(),
+			newCommerceDiscountUsageEntry.getCommerceAccountId());
 		Assert.assertEquals(existingCommerceDiscountUsageEntry.getCommerceOrderId(),
 			newCommerceDiscountUsageEntry.getCommerceOrderId());
 		Assert.assertEquals(existingCommerceDiscountUsageEntry.getCommerceDiscountId(),
@@ -209,9 +205,8 @@ public class CommerceDiscountUsageEntryPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CommerceDiscountUsageEntry",
 			"commerceDiscountUsageEntryId", true, "groupId", true, "companyId",
 			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "discountUserId", true,
-			"discountOrganizationId", true, "commerceOrderId", true,
-			"commerceDiscountId", true);
+			"modifiedDate", true, "commerceAccountId", true, "commerceOrderId",
+			true, "commerceDiscountId", true);
 	}
 
 	@Test
@@ -442,9 +437,7 @@ public class CommerceDiscountUsageEntryPersistenceTest {
 
 		commerceDiscountUsageEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		commerceDiscountUsageEntry.setDiscountUserId(RandomTestUtil.nextLong());
-
-		commerceDiscountUsageEntry.setDiscountOrganizationId(RandomTestUtil.nextLong());
+		commerceDiscountUsageEntry.setCommerceAccountId(RandomTestUtil.nextLong());
 
 		commerceDiscountUsageEntry.setCommerceOrderId(RandomTestUtil.nextLong());
 
