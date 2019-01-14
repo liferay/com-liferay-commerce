@@ -28,9 +28,8 @@ public class CommerceDiscountUsageEntryLocalServiceImpl
 
 	@Override
 	public CommerceDiscountUsageEntry addCommerceDiscountUsageEntry(
-			long discountUserId, long discountOrganizationId,
-			long commerceOrderId, long commerceDiscountId,
-			ServiceContext serviceContext)
+			long commerceAccountId, long commerceOrderId,
+			long commerceDiscountId, ServiceContext serviceContext)
 		throws PortalException {
 
 		long groupId = serviceContext.getScopeGroupId();
@@ -53,9 +52,7 @@ public class CommerceDiscountUsageEntryLocalServiceImpl
 		commerceDiscountUsageEntry.setCompanyId(user.getCompanyId());
 		commerceDiscountUsageEntry.setUserId(userId);
 		commerceDiscountUsageEntry.setUserName(user.getFullName());
-		commerceDiscountUsageEntry.setDiscountUserId(discountUserId);
-		commerceDiscountUsageEntry.setDiscountOrganizationId(
-			discountOrganizationId);
+		commerceDiscountUsageEntry.setCommerceAccountId(commerceAccountId);
 		commerceDiscountUsageEntry.setCommerceOrderId(commerceOrderId);
 		commerceDiscountUsageEntry.setCommerceDiscountId(commerceDiscountId);
 
