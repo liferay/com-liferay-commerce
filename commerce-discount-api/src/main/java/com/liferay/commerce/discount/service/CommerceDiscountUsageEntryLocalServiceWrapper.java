@@ -48,13 +48,11 @@ public class CommerceDiscountUsageEntryLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.discount.model.CommerceDiscountUsageEntry addCommerceDiscountUsageEntry(
-		long discountUserId, long discountOrganizationId, long commerceOrderId,
-		long commerceDiscountId,
+		long commerceAccountId, long commerceOrderId, long commerceDiscountId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountUsageEntryLocalService.addCommerceDiscountUsageEntry(discountUserId,
-			discountOrganizationId, commerceOrderId, commerceDiscountId,
-			serviceContext);
+		return _commerceDiscountUsageEntryLocalService.addCommerceDiscountUsageEntry(commerceAccountId,
+			commerceOrderId, commerceDiscountId, serviceContext);
 	}
 
 	/**

@@ -68,8 +68,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="discountUserId" type="long" />
-		<field name="discountOrganizationId" type="long" />
+		<field name="commerceAccountId" type="long" />
 		<field name="commerceOrderId" type="long" />
 		<field name="commerceDiscountId" type="long" />
 	</model>

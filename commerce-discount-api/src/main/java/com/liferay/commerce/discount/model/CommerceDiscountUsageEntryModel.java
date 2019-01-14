@@ -194,46 +194,18 @@ public interface CommerceDiscountUsageEntryModel extends BaseModel<CommerceDisco
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the discount user ID of this commerce discount usage entry.
+	 * Returns the commerce account ID of this commerce discount usage entry.
 	 *
-	 * @return the discount user ID of this commerce discount usage entry
+	 * @return the commerce account ID of this commerce discount usage entry
 	 */
-	public long getDiscountUserId();
+	public long getCommerceAccountId();
 
 	/**
-	 * Sets the discount user ID of this commerce discount usage entry.
+	 * Sets the commerce account ID of this commerce discount usage entry.
 	 *
-	 * @param discountUserId the discount user ID of this commerce discount usage entry
+	 * @param commerceAccountId the commerce account ID of this commerce discount usage entry
 	 */
-	public void setDiscountUserId(long discountUserId);
-
-	/**
-	 * Returns the discount user uuid of this commerce discount usage entry.
-	 *
-	 * @return the discount user uuid of this commerce discount usage entry
-	 */
-	public String getDiscountUserUuid();
-
-	/**
-	 * Sets the discount user uuid of this commerce discount usage entry.
-	 *
-	 * @param discountUserUuid the discount user uuid of this commerce discount usage entry
-	 */
-	public void setDiscountUserUuid(String discountUserUuid);
-
-	/**
-	 * Returns the discount organization ID of this commerce discount usage entry.
-	 *
-	 * @return the discount organization ID of this commerce discount usage entry
-	 */
-	public long getDiscountOrganizationId();
-
-	/**
-	 * Sets the discount organization ID of this commerce discount usage entry.
-	 *
-	 * @param discountOrganizationId the discount organization ID of this commerce discount usage entry
-	 */
-	public void setDiscountOrganizationId(long discountOrganizationId);
+	public void setCommerceAccountId(long commerceAccountId);
 
 	/**
 	 * Returns the commerce order ID of this commerce discount usage entry.

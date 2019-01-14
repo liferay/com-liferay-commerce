@@ -28,4 +28,7 @@ public interface CommerceAccountFinder {
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> findByU_P(
 		long userId,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.account.model.CommerceAccount> queryDefinition);
+
+	public com.liferay.commerce.account.model.CommerceAccount findByU_C(
+		long userId, long commerceAccountId);
 }

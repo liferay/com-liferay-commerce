@@ -266,6 +266,13 @@ public class CommerceAccountLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.account.model.CommerceAccount getCommerceAccount(
+		long userId, long commerceAccountId) {
+		return _commerceAccountLocalService.getCommerceAccount(userId,
+			commerceAccountId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.model.Group getCommerceAccountGroup(
 		long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -330,9 +337,10 @@ public class CommerceAccountLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccount getPersonalCommerceAccount(
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		long companyId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountLocalService.getPersonalCommerceAccount(serviceContext);
+		return _commerceAccountLocalService.getPersonalCommerceAccount(companyId,
+			userId);
 	}
 
 	@Override
