@@ -144,4 +144,15 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	<tag>
+		<name>user-roles-modal</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.UserRolesModalTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>componentId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 </taglib>

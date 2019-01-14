@@ -1,0 +1,43 @@
+{namespace RoleListItem}
+
+{template .render}
+	{@param id: string|int }
+	{@param name: string }
+	{@param? query: string }
+
+	{@param? _selected: bool }
+
+	{@param? _handleToggleItem: ?}
+
+	{let $checkboxAttributes kind="attributes"}
+		type="checkbox"
+		name="{$name}"
+		value="{$id}"
+		{if isNonnull($_selected) and $_selected == true}
+			{sp}checked
+		{/if}
+	{/let}
+
+	{let $checkboxContainerClasses kind="text"}
+		commerce-checkbox
+		{if isNonnull($_selected) and $_selected == true}
+			{sp}commerce-checkbox--checked
+		{/if}
+	{/let}
+
+	<div class="{$checkboxContainerClasses}">
+		<div class="commerce-checkbox__input">
+			<input 
+				data-onchange="{$_handleToggleItem}"
+				{$checkboxAttributes}
+			/>
+		</div>
+		<div class="commerce-checkbox__label">
+			{call AutocompleteItem.render}
+				{param text: $name /}
+				{param query: $query /}
+			{/call}
+		</div>
+	</div>
+
+{/template}
