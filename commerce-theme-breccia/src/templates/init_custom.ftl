@@ -7,7 +7,6 @@
 	show_header_search = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-header-search"))
 	orderItemsQuantity = commerceOrderHttpHelper.getCommerceOrderItemsQuantity(request)
 	cartUrl = commerceOrderHttpHelper.getCommerceCartPortletURL(request)
-	currentOrganization = (commerceOrganizationHelper.getCurrentOrganization(request))!""
 	demo_mode = getterUtil.getBoolean(themeDisplay.getThemeSetting("demo-mode"))
 	userManagementUrl = commerceOrganizationHelper.getCommerceUserPortletURL(request)
 	wishListItemsCount = commerceWishListHttpHelper.getCurrentCommerceWishListItemsCount(request, themeDisplay.getResponse())
