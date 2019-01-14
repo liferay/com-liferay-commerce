@@ -45,6 +45,10 @@ public class ProductDTO {
 		return _externalReferenceCode;
 	}
 
+	public long getId() {
+		return _id;
+	}
+
 	public String getProductTypeName() {
 		return _productTypeName;
 	}
@@ -77,6 +81,10 @@ public class ProductDTO {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
+	public void setId(long id) {
+		_id = id;
+	}
+
 	public void setProductTypeName(String productTypeName) {
 		_productTypeName = productTypeName;
 	}
@@ -94,6 +102,7 @@ public class ProductDTO {
 	private String _defaultSku;
 	private String _description;
 	private String _externalReferenceCode;
+	private long _id;
 	private String _productTypeName;
 	private String _shortDescription;
 	private String _title;
