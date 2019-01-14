@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.internal.price;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -28,7 +29,6 @@ import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.tax.CommerceTaxCalculation;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -364,11 +364,11 @@ public class CommerceOrderPriceCalculationImpl
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		Organization organization = commerceContext.getOrganization();
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
-		if (organization != null) {
+		if (commerceAccount != null) {
 			return _portletResourcePermission.contains(
-				permissionChecker, organization.getGroupId(),
+				permissionChecker, commerceAccount.getCommerceAccountGroupId(),
 				CPActionKeys.VIEW_PRICE);
 		}
 

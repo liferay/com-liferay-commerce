@@ -1,4 +1,4 @@
-<%--
+%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -21,7 +21,7 @@ CommerceOrganizationOrderDisplayContext commerceOrganizationOrderDisplayContext 
 
 CommerceOrder commerceOrder = commerceOrganizationOrderDisplayContext.getCommerceOrder();
 List<CommerceAddress> commerceAddresses = commerceOrganizationOrderDisplayContext.getAvailableCommerceOrderAddresses();
-Organization organization = commerceOrganizationOrderDisplayContext.getOrganization();
+CommerceAccount commerceAccount = commerceOrganizationOrderDisplayContext.getCommerceAccount();
 %>
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderActionURL" />
@@ -30,7 +30,7 @@ Organization organization = commerceOrganizationOrderDisplayContext.getOrganizat
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceOrder == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= (commerceOrder == null) ? 0 : commerceOrder.getCommerceOrderId() %>" />
-	<aui:input name="organizationId" type="hidden" value="<%= organization.getOrganizationId() %>" />
+	<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccount.getCommerceAccountId() %>" />
 
 	<aui:model-context bean="<%= commerceOrder %>" model="<%= CommerceOrder.class %>" />
 

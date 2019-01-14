@@ -22,7 +22,8 @@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%@ page import="com.liferay.commerce.context.CommerceContext" %><%@
+<%@ page import="com.liferay.commerce.account.model.CommerceAccount" %><%@
+page import="com.liferay.commerce.context.CommerceContext" %><%@
 page import="com.liferay.commerce.currency.model.CommerceCurrency" %><%@
 page import="com.liferay.commerce.model.CommerceOrder" %><%@
 page import="com.liferay.commerce.price.list.model.CommercePriceList" %><%@
@@ -30,7 +31,6 @@ page import="com.liferay.commerce.product.model.CPRule" %><%@
 page import="com.liferay.commerce.support.web.internal.display.context.CommerceContextDisplayContext" %><%@
 page import="com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
-page import="com.liferay.portal.kernel.model.Organization" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %>
 
