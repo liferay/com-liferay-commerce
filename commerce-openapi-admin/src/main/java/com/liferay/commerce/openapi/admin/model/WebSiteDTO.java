@@ -29,6 +29,10 @@ public class WebSiteDTO {
 		return _description;
 	}
 
+	public long getId() {
+		return _id;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -37,11 +41,16 @@ public class WebSiteDTO {
 		_description = description;
 	}
 
+	public void setId(long id) {
+		_id = id;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
 
 	private String _description;
+	private long _id;
 	private String _name;
 
 }

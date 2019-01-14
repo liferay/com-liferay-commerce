@@ -51,6 +51,10 @@ public class PriceListDTO {
 		return _externalReferenceCode;
 	}
 
+	public long getId() {
+		return _id;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -87,6 +91,10 @@ public class PriceListDTO {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
+	public void setId(long id) {
+		_id = id;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
@@ -105,6 +113,7 @@ public class PriceListDTO {
 	private Date _displayDate;
 	private Date _expirationDate;
 	private String _externalReferenceCode;
+	private long _id;
 	private String _name;
 	private boolean _neverExpire;
 	private float _priority;
