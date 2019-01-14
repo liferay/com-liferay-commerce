@@ -14,21 +14,26 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
+import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.Content;
 import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.Response;
+import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * @author Igor Beslic
+ * @author Ivica Cardic
  */
 public class ResourceGenerator {
 
@@ -178,7 +183,9 @@ public class ResourceGenerator {
 		return sb.toString();
 	}
 
-	public String toResourceImplementationMethods(List<Method> methods) {
+	public String toResourceImplementationMethods(
+		List<Method> methods, Set<ComponentDefinition> schemaComponents) {
+
 		StringBuilder sb = new StringBuilder();
 
 		Iterator<Method> iterator = methods.iterator();
@@ -188,14 +195,20 @@ public class ResourceGenerator {
 
 			sb.append("\t@Override\n");
 
-			_appendMethodDeclaration(sb, method, false);
+			_appendMethodDeclaration(sb, method, false, schemaComponents);
 
 			sb.append(" {\n");
 
 			if (method.hasResponseContent()) {
-				sb.append("\t\treturn Response.ok(\n");
-				sb.append("\t\t\t\"Here goes output\", ");
-				sb.append("MediaType.APPLICATION_JSON\n\t\t).build();\n");
+				ComponentDefinition schemaComponentDefinition =
+					_getSchemaComponentDefinition(method, schemaComponents);
+
+				if (schemaComponentDefinition.isArray()) {
+					sb.append("\t\treturn Collections.emptyList();\n");
+				}
+				else {
+					sb.append("\t\treturn null;\n");
+				}
 			}
 			else {
 				sb.append("\t\treturn Response.ok().build();\n");
@@ -211,7 +224,9 @@ public class ResourceGenerator {
 		return sb.toString();
 	}
 
-	public String toResourceInterfaceMethods(List<Method> methods) {
+	public String toResourceInterfaceMethods(
+		List<Method> methods, Set<ComponentDefinition> schemaComponents) {
+
 		StringBuilder sb = new StringBuilder();
 
 		Iterator<Method> iterator = methods.iterator();
@@ -234,7 +249,7 @@ public class ResourceGenerator {
 				sb.append("\")\n");
 			}
 
-			_appendMethodDeclaration(sb, method, true);
+			_appendMethodDeclaration(sb, method, true, schemaComponents);
 
 			sb.append(";\n");
 
@@ -247,9 +262,12 @@ public class ResourceGenerator {
 	}
 
 	private void _appendMethodDeclaration(
-		StringBuilder sb, Method method, boolean annotateParameter) {
+		StringBuilder sb, Method method, boolean annotateParameter,
+		Set<ComponentDefinition> schemaComponents) {
 
-		sb.append("\tpublic Response ");
+		sb.append("\tpublic ");
+
+		sb.append(_getReturnValue(method, schemaComponents));
 
 		sb.append(method.getName());
 
@@ -329,6 +347,83 @@ public class ResourceGenerator {
 		sb.append(")\n");
 
 		return sb.toString();
+	}
+
+	private Content _getResponseContent(List<Response> responses) {
+		Stream<Response> responseStream = responses.stream();
+
+		return responseStream.filter(
+			response -> response.getContent() != null
+		).findFirst(
+		).map(
+			Response::getContent
+		).orElse(
+			null
+		);
+	}
+
+	private String _getReturnValue(
+		Method method, Set<ComponentDefinition> componentDefinitions) {
+
+		StringBuilder sb = new StringBuilder();
+
+		if (method.hasResponseContent()) {
+			ComponentDefinition schemaComponentDefinition =
+				_getSchemaComponentDefinition(method, componentDefinitions);
+
+			String itemsReferenceModel =
+				schemaComponentDefinition.getItemsReferencedModel();
+
+			if (schemaComponentDefinition.isArray() &&
+				(itemsReferenceModel != null)) {
+
+				schemaComponentDefinition = _getSchemaComponentDefinition(
+					itemsReferenceModel, componentDefinitions);
+
+				sb.append("List<");
+				sb.append(schemaComponentDefinition.getName());
+				sb.append("DTO> ");
+			}
+			else if (schemaComponentDefinition.isObject()) {
+				sb.append(schemaComponentDefinition.getName());
+				sb.append("DTO ");
+			}
+			else {
+				sb.append("Response ");
+			}
+		}
+		else {
+			sb.append("Response ");
+		}
+
+		return sb.toString();
+	}
+
+	private ComponentDefinition _getSchemaComponentDefinition(
+		Method method, Set<ComponentDefinition> componentDefinitions) {
+
+		Content content = _getResponseContent(method.getResponses());
+
+		Schema schema = content.getSchema();
+
+		return _getSchemaComponentDefinition(
+			schema.getReferencedModel(), componentDefinitions);
+	}
+
+	private ComponentDefinition _getSchemaComponentDefinition(
+		String name, Set<ComponentDefinition> componentDefinitions) {
+
+		for (ComponentDefinition componentDefinition : componentDefinitions) {
+			if (componentDefinition.isParameter()) {
+				continue;
+			}
+
+			if (Objects.equals(name, componentDefinition.getName())) {
+				return componentDefinition;
+			}
+		}
+
+		return null;
 	}
 
 	private final ParameterGenerator _parameterGenerator =
