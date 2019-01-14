@@ -242,6 +242,13 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	@Override
+	public CommerceAccount getCommerceAccount(
+		long userId, long commerceAccountId) {
+
+		return commerceAccountFinder.findByU_C(userId, commerceAccountId);
+	}
+
+	@Override
 	public Group getCommerceAccountGroup(long commerceAccountId)
 		throws PortalException {
 
@@ -281,21 +288,24 @@ public class CommerceAccountLocalServiceImpl
 
 	@Override
 	public CommerceAccount getPersonalCommerceAccount(
-			ServiceContext serviceContext)
+			long companyId, long userId)
 		throws PortalException {
 
 		CommerceAccount commerceAccount =
 			commerceAccountLocalService.fetchCommerceAccount(
-				serviceContext.getCompanyId(),
-				String.valueOf(serviceContext.getUserId()));
+				companyId, String.valueOf(userId));
 
 		if (commerceAccount != null) {
 			return commerceAccount;
 		}
 
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setCompanyId(companyId);
+		serviceContext.setUserId(userId);
+
 		return commerceAccountLocalService.addPersonalCommerceAccount(
-			serviceContext.getUserId(), StringPool.BLANK, StringPool.BLANK,
-			serviceContext);
+			userId, StringPool.BLANK, StringPool.BLANK, serviceContext);
 	}
 
 	@Override
