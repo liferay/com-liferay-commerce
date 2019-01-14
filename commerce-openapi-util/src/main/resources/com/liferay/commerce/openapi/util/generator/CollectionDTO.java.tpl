@@ -17,11 +17,13 @@ package ${PACKAGE};
 import java.util.Collection;
 
 import javax.annotation.Generated;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author ${AUTHOR}
  */
 @Generated(value = "OSGiRESTModuleGenerator")
+@XmlRootElement(name ="collection")
 public class CollectionDTO<T> {
 
 	public CollectionDTO(Collection<T> items, int totalItems) {
