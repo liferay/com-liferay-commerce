@@ -36,6 +36,10 @@ import java.util.stream.Stream;
  */
 public class ResourceGenerator {
 
+	public ResourceGenerator(String applicationName) {
+		_applicationName = applicationName;
+	}
+
 	public String generateResourceGetters(List<Path> paths) {
 		Iterator<Path> iterator = paths.iterator();
 
@@ -246,6 +250,8 @@ public class ResourceGenerator {
 
 			sb.append(_getConsumesAnnotation(method.getRequestBody()));
 
+			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
+
 			sb.append(_getMethodDeclaration(method, true, schemaComponents));
 
 			sb.append(";\n");
@@ -369,6 +375,25 @@ public class ResourceGenerator {
 		return sb.toString();
 	}
 
+	private String _getRequiresScopeAnnotation(String httpMethod) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("\t@RequiresScope(\"");
+		sb.append(_applicationName);
+		sb.append(".");
+
+		if (Objects.equals(httpMethod, "GET")) {
+			sb.append("read");
+		}
+		else {
+			sb.append("write");
+		}
+
+		sb.append("\")\n");
+
+		return sb.toString();
+	}
+
 	private Content _getResponseContent(List<Response> responses) {
 		for (Response response : responses) {
 			List<Content> contents = response.getContents();
@@ -445,6 +470,7 @@ public class ResourceGenerator {
 		return null;
 	}
 
+	private final String _applicationName;
 	private final ParameterGenerator _parameterGenerator =
 		new ParameterGenerator();
 

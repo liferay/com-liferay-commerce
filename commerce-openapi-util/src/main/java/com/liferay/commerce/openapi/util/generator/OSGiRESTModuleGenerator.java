@@ -155,6 +155,8 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			"osgi.module.resource.interface.package");
 		_resourcePackagePath = properties.getProperty(
 			"osgi.module.resource.package");
+
+		_resourceGenerator = new ResourceGenerator(_applicationName);
 	}
 
 	public void generate() throws IOException {
@@ -526,8 +528,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private final boolean _overwriteBND;
 	private final boolean _overwriteBuildGradle;
 	private final boolean _overwriteImplementation;
-	private final ResourceGenerator _resourceGenerator =
-		new ResourceGenerator();
+	private final ResourceGenerator _resourceGenerator;
 	private final String _resourceInterfacePackagePath;
 	private final String _resourcePackagePath;
 
