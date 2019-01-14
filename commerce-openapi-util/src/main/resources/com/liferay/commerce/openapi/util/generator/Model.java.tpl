@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ${AUTHOR}
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@XmlRootElement(name ="${MODEL}")
+@XmlRootElement(name = "${MODEL}")
 public class ${DTO_CLASS} {
 
 ${METHODS}
