@@ -160,6 +160,10 @@ public class CPDefinitionsImporter {
 			String taxCategory, ServiceContext serviceContext)
 		throws PortalException {
 
+		if (Validator.isNull(taxCategory)) {
+			return 0;
+		}
+
 		List<CPTaxCategory> cpTaxCategories =
 			_cpTaxCategoryLocalService.getCPTaxCategories(
 				serviceContext.getScopeGroupId());
