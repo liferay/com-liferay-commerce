@@ -64,8 +64,7 @@ create table CommerceDiscountUsageEntry (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	discountUserId LONG,
-	discountOrganizationId LONG,
+	commerceAccountId LONG,
 	commerceOrderId LONG,
 	commerceDiscountId LONG
 );

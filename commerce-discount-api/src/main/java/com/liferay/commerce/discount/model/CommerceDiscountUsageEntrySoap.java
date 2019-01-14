@@ -41,8 +41,7 @@ public class CommerceDiscountUsageEntrySoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setDiscountUserId(model.getDiscountUserId());
-		soapModel.setDiscountOrganizationId(model.getDiscountOrganizationId());
+		soapModel.setCommerceAccountId(model.getCommerceAccountId());
 		soapModel.setCommerceOrderId(model.getCommerceOrderId());
 		soapModel.setCommerceDiscountId(model.getCommerceDiscountId());
 
@@ -157,20 +156,12 @@ public class CommerceDiscountUsageEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getDiscountUserId() {
-		return _discountUserId;
+	public long getCommerceAccountId() {
+		return _commerceAccountId;
 	}
 
-	public void setDiscountUserId(long discountUserId) {
-		_discountUserId = discountUserId;
-	}
-
-	public long getDiscountOrganizationId() {
-		return _discountOrganizationId;
-	}
-
-	public void setDiscountOrganizationId(long discountOrganizationId) {
-		_discountOrganizationId = discountOrganizationId;
+	public void setCommerceAccountId(long commerceAccountId) {
+		_commerceAccountId = commerceAccountId;
 	}
 
 	public long getCommerceOrderId() {
@@ -196,8 +187,7 @@ public class CommerceDiscountUsageEntrySoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _discountUserId;
-	private long _discountOrganizationId;
+	private long _commerceAccountId;
 	private long _commerceOrderId;
 	private long _commerceDiscountId;
 }

@@ -91,9 +91,9 @@ public class CommerceAccountServiceUtil {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccount getPersonalCommerceAccount(
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		long companyId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getPersonalCommerceAccount(serviceContext);
+		return getService().getPersonalCommerceAccount(companyId, userId);
 	}
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(

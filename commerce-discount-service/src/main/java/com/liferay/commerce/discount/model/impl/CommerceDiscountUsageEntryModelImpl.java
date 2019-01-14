@@ -73,8 +73,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "discountUserId", Types.BIGINT },
-			{ "discountOrganizationId", Types.BIGINT },
+			{ "commerceAccountId", Types.BIGINT },
 			{ "commerceOrderId", Types.BIGINT },
 			{ "commerceDiscountId", Types.BIGINT }
 		};
@@ -88,13 +87,12 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("discountUserId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("discountOrganizationId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("commerceAccountId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceOrderId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceDiscountId", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceDiscountUsageEntry (commerceDiscountUsageEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,discountUserId LONG,discountOrganizationId LONG,commerceOrderId LONG,commerceDiscountId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceDiscountUsageEntry (commerceDiscountUsageEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceOrderId LONG,commerceDiscountId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceDiscountUsageEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceDiscountUsageEntry.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceDiscountUsageEntry.createDate DESC";
@@ -160,8 +158,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("discountUserId", getDiscountUserId());
-		attributes.put("discountOrganizationId", getDiscountOrganizationId());
+		attributes.put("commerceAccountId", getCommerceAccountId());
 		attributes.put("commerceOrderId", getCommerceOrderId());
 		attributes.put("commerceDiscountId", getCommerceDiscountId());
 
@@ -216,17 +213,10 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 			setModifiedDate(modifiedDate);
 		}
 
-		Long discountUserId = (Long)attributes.get("discountUserId");
+		Long commerceAccountId = (Long)attributes.get("commerceAccountId");
 
-		if (discountUserId != null) {
-			setDiscountUserId(discountUserId);
-		}
-
-		Long discountOrganizationId = (Long)attributes.get(
-				"discountOrganizationId");
-
-		if (discountOrganizationId != null) {
-			setDiscountOrganizationId(discountOrganizationId);
+		if (commerceAccountId != null) {
+			setCommerceAccountId(commerceAccountId);
 		}
 
 		Long commerceOrderId = (Long)attributes.get("commerceOrderId");
@@ -355,39 +345,13 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 	}
 
 	@Override
-	public long getDiscountUserId() {
-		return _discountUserId;
+	public long getCommerceAccountId() {
+		return _commerceAccountId;
 	}
 
 	@Override
-	public void setDiscountUserId(long discountUserId) {
-		_discountUserId = discountUserId;
-	}
-
-	@Override
-	public String getDiscountUserUuid() {
-		try {
-			User user = UserLocalServiceUtil.getUserById(getDiscountUserId());
-
-			return user.getUuid();
-		}
-		catch (PortalException pe) {
-			return "";
-		}
-	}
-
-	@Override
-	public void setDiscountUserUuid(String discountUserUuid) {
-	}
-
-	@Override
-	public long getDiscountOrganizationId() {
-		return _discountOrganizationId;
-	}
-
-	@Override
-	public void setDiscountOrganizationId(long discountOrganizationId) {
-		_discountOrganizationId = discountOrganizationId;
+	public void setCommerceAccountId(long commerceAccountId) {
+		_commerceAccountId = commerceAccountId;
 	}
 
 	@Override
@@ -448,8 +412,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 		commerceDiscountUsageEntryImpl.setUserName(getUserName());
 		commerceDiscountUsageEntryImpl.setCreateDate(getCreateDate());
 		commerceDiscountUsageEntryImpl.setModifiedDate(getModifiedDate());
-		commerceDiscountUsageEntryImpl.setDiscountUserId(getDiscountUserId());
-		commerceDiscountUsageEntryImpl.setDiscountOrganizationId(getDiscountOrganizationId());
+		commerceDiscountUsageEntryImpl.setCommerceAccountId(getCommerceAccountId());
 		commerceDiscountUsageEntryImpl.setCommerceOrderId(getCommerceOrderId());
 		commerceDiscountUsageEntryImpl.setCommerceDiscountId(getCommerceDiscountId());
 
@@ -563,9 +526,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 			commerceDiscountUsageEntryCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		commerceDiscountUsageEntryCacheModel.discountUserId = getDiscountUserId();
-
-		commerceDiscountUsageEntryCacheModel.discountOrganizationId = getDiscountOrganizationId();
+		commerceDiscountUsageEntryCacheModel.commerceAccountId = getCommerceAccountId();
 
 		commerceDiscountUsageEntryCacheModel.commerceOrderId = getCommerceOrderId();
 
@@ -576,7 +537,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{commerceDiscountUsageEntryId=");
 		sb.append(getCommerceDiscountUsageEntryId());
@@ -592,10 +553,8 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", discountUserId=");
-		sb.append(getDiscountUserId());
-		sb.append(", discountOrganizationId=");
-		sb.append(getDiscountOrganizationId());
+		sb.append(", commerceAccountId=");
+		sb.append(getCommerceAccountId());
 		sb.append(", commerceOrderId=");
 		sb.append(getCommerceOrderId());
 		sb.append(", commerceDiscountId=");
@@ -607,7 +566,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -643,12 +602,8 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>discountUserId</column-name><column-value><![CDATA[");
-		sb.append(getDiscountUserId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>discountOrganizationId</column-name><column-value><![CDATA[");
-		sb.append(getDiscountOrganizationId());
+			"<column><column-name>commerceAccountId</column-name><column-value><![CDATA[");
+		sb.append(getCommerceAccountId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>commerceOrderId</column-name><column-value><![CDATA[");
@@ -678,8 +633,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _discountUserId;
-	private long _discountOrganizationId;
+	private long _commerceAccountId;
 	private long _commerceOrderId;
 	private long _commerceDiscountId;
 	private long _columnBitmask;

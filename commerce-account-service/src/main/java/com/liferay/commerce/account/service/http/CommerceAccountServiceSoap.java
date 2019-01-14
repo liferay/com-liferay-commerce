@@ -146,10 +146,10 @@ public class CommerceAccountServiceSoap {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountSoap getPersonalCommerceAccount(
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
+		long companyId, long userId) throws RemoteException {
 		try {
-			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.getPersonalCommerceAccount(serviceContext);
+			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.getPersonalCommerceAccount(companyId,
+					userId);
 
 			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
 		}

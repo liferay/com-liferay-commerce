@@ -66,7 +66,7 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{commerceDiscountUsageEntryId=");
 		sb.append(commerceDiscountUsageEntryId);
@@ -82,10 +82,8 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", discountUserId=");
-		sb.append(discountUserId);
-		sb.append(", discountOrganizationId=");
-		sb.append(discountOrganizationId);
+		sb.append(", commerceAccountId=");
+		sb.append(commerceAccountId);
 		sb.append(", commerceOrderId=");
 		sb.append(commerceOrderId);
 		sb.append(", commerceDiscountId=");
@@ -126,8 +124,7 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 					modifiedDate));
 		}
 
-		commerceDiscountUsageEntryImpl.setDiscountUserId(discountUserId);
-		commerceDiscountUsageEntryImpl.setDiscountOrganizationId(discountOrganizationId);
+		commerceDiscountUsageEntryImpl.setCommerceAccountId(commerceAccountId);
 		commerceDiscountUsageEntryImpl.setCommerceOrderId(commerceOrderId);
 		commerceDiscountUsageEntryImpl.setCommerceDiscountId(commerceDiscountId);
 
@@ -149,9 +146,7 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		discountUserId = objectInput.readLong();
-
-		discountOrganizationId = objectInput.readLong();
+		commerceAccountId = objectInput.readLong();
 
 		commerceOrderId = objectInput.readLong();
 
@@ -179,9 +174,7 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(discountUserId);
-
-		objectOutput.writeLong(discountOrganizationId);
+		objectOutput.writeLong(commerceAccountId);
 
 		objectOutput.writeLong(commerceOrderId);
 
@@ -195,8 +188,7 @@ public class CommerceDiscountUsageEntryCacheModel implements CacheModel<Commerce
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long discountUserId;
-	public long discountOrganizationId;
+	public long commerceAccountId;
 	public long commerceOrderId;
 	public long commerceDiscountId;
 }

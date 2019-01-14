@@ -73,9 +73,8 @@ public interface CommerceDiscountUsageEntryLocalService extends BaseLocalService
 		CommerceDiscountUsageEntry commerceDiscountUsageEntry);
 
 	public CommerceDiscountUsageEntry addCommerceDiscountUsageEntry(
-		long discountUserId, long discountOrganizationId, long commerceOrderId,
-		long commerceDiscountId, ServiceContext serviceContext)
-		throws PortalException;
+		long commerceAccountId, long commerceOrderId, long commerceDiscountId,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new commerce discount usage entry with the primary key. Does not add the commerce discount usage entry to the database.

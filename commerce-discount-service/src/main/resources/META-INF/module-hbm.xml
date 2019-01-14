@@ -78,8 +78,7 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="discountUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="discountOrganizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commerceAccountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceOrderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceDiscountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>

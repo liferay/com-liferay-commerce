@@ -68,8 +68,7 @@ public class CommerceDiscountUsageEntryWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("discountUserId", getDiscountUserId());
-		attributes.put("discountOrganizationId", getDiscountOrganizationId());
+		attributes.put("commerceAccountId", getCommerceAccountId());
 		attributes.put("commerceOrderId", getCommerceOrderId());
 		attributes.put("commerceDiscountId", getCommerceDiscountId());
 
@@ -121,17 +120,10 @@ public class CommerceDiscountUsageEntryWrapper
 			setModifiedDate(modifiedDate);
 		}
 
-		Long discountUserId = (Long)attributes.get("discountUserId");
+		Long commerceAccountId = (Long)attributes.get("commerceAccountId");
 
-		if (discountUserId != null) {
-			setDiscountUserId(discountUserId);
-		}
-
-		Long discountOrganizationId = (Long)attributes.get(
-				"discountOrganizationId");
-
-		if (discountOrganizationId != null) {
-			setDiscountOrganizationId(discountOrganizationId);
+		if (commerceAccountId != null) {
+			setCommerceAccountId(commerceAccountId);
 		}
 
 		Long commerceOrderId = (Long)attributes.get("commerceOrderId");
@@ -155,6 +147,16 @@ public class CommerceDiscountUsageEntryWrapper
 	@Override
 	public int compareTo(CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
 		return _commerceDiscountUsageEntry.compareTo(commerceDiscountUsageEntry);
+	}
+
+	/**
+	* Returns the commerce account ID of this commerce discount usage entry.
+	*
+	* @return the commerce account ID of this commerce discount usage entry
+	*/
+	@Override
+	public long getCommerceAccountId() {
+		return _commerceDiscountUsageEntry.getCommerceAccountId();
 	}
 
 	/**
@@ -205,36 +207,6 @@ public class CommerceDiscountUsageEntryWrapper
 	@Override
 	public Date getCreateDate() {
 		return _commerceDiscountUsageEntry.getCreateDate();
-	}
-
-	/**
-	* Returns the discount organization ID of this commerce discount usage entry.
-	*
-	* @return the discount organization ID of this commerce discount usage entry
-	*/
-	@Override
-	public long getDiscountOrganizationId() {
-		return _commerceDiscountUsageEntry.getDiscountOrganizationId();
-	}
-
-	/**
-	* Returns the discount user ID of this commerce discount usage entry.
-	*
-	* @return the discount user ID of this commerce discount usage entry
-	*/
-	@Override
-	public long getDiscountUserId() {
-		return _commerceDiscountUsageEntry.getDiscountUserId();
-	}
-
-	/**
-	* Returns the discount user uuid of this commerce discount usage entry.
-	*
-	* @return the discount user uuid of this commerce discount usage entry
-	*/
-	@Override
-	public String getDiscountUserUuid() {
-		return _commerceDiscountUsageEntry.getDiscountUserUuid();
 	}
 
 	@Override
@@ -338,6 +310,16 @@ public class CommerceDiscountUsageEntryWrapper
 	}
 
 	/**
+	* Sets the commerce account ID of this commerce discount usage entry.
+	*
+	* @param commerceAccountId the commerce account ID of this commerce discount usage entry
+	*/
+	@Override
+	public void setCommerceAccountId(long commerceAccountId) {
+		_commerceDiscountUsageEntry.setCommerceAccountId(commerceAccountId);
+	}
+
+	/**
 	* Sets the commerce discount ID of this commerce discount usage entry.
 	*
 	* @param commerceDiscountId the commerce discount ID of this commerce discount usage entry
@@ -386,36 +368,6 @@ public class CommerceDiscountUsageEntryWrapper
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceDiscountUsageEntry.setCreateDate(createDate);
-	}
-
-	/**
-	* Sets the discount organization ID of this commerce discount usage entry.
-	*
-	* @param discountOrganizationId the discount organization ID of this commerce discount usage entry
-	*/
-	@Override
-	public void setDiscountOrganizationId(long discountOrganizationId) {
-		_commerceDiscountUsageEntry.setDiscountOrganizationId(discountOrganizationId);
-	}
-
-	/**
-	* Sets the discount user ID of this commerce discount usage entry.
-	*
-	* @param discountUserId the discount user ID of this commerce discount usage entry
-	*/
-	@Override
-	public void setDiscountUserId(long discountUserId) {
-		_commerceDiscountUsageEntry.setDiscountUserId(discountUserId);
-	}
-
-	/**
-	* Sets the discount user uuid of this commerce discount usage entry.
-	*
-	* @param discountUserUuid the discount user uuid of this commerce discount usage entry
-	*/
-	@Override
-	public void setDiscountUserUuid(String discountUserUuid) {
-		_commerceDiscountUsageEntry.setDiscountUserUuid(discountUserUuid);
 	}
 
 	@Override

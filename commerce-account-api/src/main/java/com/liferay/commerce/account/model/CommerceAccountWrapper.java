@@ -518,6 +518,11 @@ public class CommerceAccountWrapper implements CommerceAccount,
 	}
 
 	@Override
+	public boolean isBusinessAccount() {
+		return _commerceAccount.isBusinessAccount();
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _commerceAccount.isCachedModel();
 	}
@@ -590,6 +595,11 @@ public class CommerceAccountWrapper implements CommerceAccount,
 	@Override
 	public boolean isPending() {
 		return _commerceAccount.isPending();
+	}
+
+	@Override
+	public boolean isPersonalAccount() {
+		return _commerceAccount.isPersonalAccount();
 	}
 
 	@Override
