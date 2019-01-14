@@ -43,7 +43,7 @@ public class CommerceCheckoutStepHelper {
 				httpServletRequest);
 
 		if (commerceAccount != null) {
-			return false;
+			return commerceAccount.isBusinessAccount();
 		}
 
 		return true;
