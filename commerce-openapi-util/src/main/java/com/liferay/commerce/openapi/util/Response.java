@@ -14,18 +14,25 @@
 
 package com.liferay.commerce.openapi.util;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * @author Igor Beslic
  */
 public class Response {
 
-	public Response(int status, Content content) {
+	public Response(int status, List<Content> contents) {
 		_status = status;
-		_content = content;
+
+		if (contents != null) {
+			_contents.addAll(contents);
+		}
 	}
 
-	public Content getContent() {
-		return _content;
+	public List<Content> getContents() {
+		return _contents;
 	}
 
 	public int getStatus() {
@@ -42,10 +49,34 @@ public class Response {
 
 	@Override
 	public String toString() {
-		return String.format("{content=%s, status=%s}", _content, _status);
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{content={");
+
+		for (Content content : _contents) {
+			sb.append(content);
+			sb.append(", ");
+		}
+
+		Iterator<Content> iterator = _contents.iterator();
+
+		while (iterator.hasNext()) {
+			sb.append(iterator.next());
+
+			if (iterator.hasNext()) {
+				sb.append(", ");
+			}
+		}
+
+		sb.append("}, status=");
+		sb.append(_status);
+
+		sb.append("}");
+
+		return sb.toString();
 	}
 
-	private final Content _content;
+	private final List<Content> _contents = new ArrayList<>();
 	private final int _status;
 
 }
