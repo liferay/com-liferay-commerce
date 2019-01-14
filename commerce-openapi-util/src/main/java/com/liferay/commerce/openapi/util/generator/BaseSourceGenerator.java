@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Igor Beslic
  */
-public class SourceGenerator {
+public abstract class BaseSourceGenerator {
 
 	protected void checkModuleOutputPaths(String moduleOutputPath) {
 		_checkModuleOutputPath(moduleOutputPath + "/");
@@ -112,6 +112,6 @@ public class SourceGenerator {
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
-		SourceGenerator.class);
+		BaseSourceGenerator.class);
 
 }
