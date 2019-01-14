@@ -175,8 +175,7 @@
 
 		<!-- Other fields -->
 
-		<column name="discountUserId" type="long" />
-		<column name="discountOrganizationId" type="long" />
+		<column name="commerceAccountId" type="long" />
 		<column name="commerceOrderId" type="long" />
 		<column name="commerceDiscountId" type="long" />
 
