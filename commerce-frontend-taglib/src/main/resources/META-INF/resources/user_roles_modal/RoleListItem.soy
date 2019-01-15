@@ -13,6 +13,7 @@
 		type="checkbox"
 		name="{$name}"
 		value="{$id}"
+		id="role-checkbox--{$id}"
 		{if isNonnull($_selected) and $_selected == true}
 			{sp}checked
 		{/if}
@@ -33,12 +34,15 @@
 			/>
 		</div>
 
-		<div class="commerce-checkbox__label">
+		<label 
+			class="commerce-checkbox__label" 
+			for="role-checkbox--{$id}"
+		>
 			{call AutocompleteItem.render}
 				{param text: $name /}
 				{param query: $query /}
 			{/call}
-		</div>
+		</label>
 	</div>
 
 {/template}
