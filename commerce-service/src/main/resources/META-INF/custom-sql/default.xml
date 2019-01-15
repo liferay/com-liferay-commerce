@@ -77,7 +77,7 @@
 	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.findByG_U_O">
 		<![CDATA[
 			SELECT
-				DISTINCT *
+				DISTINCT CommerceOrder.*
 			FROM
 				CommerceOrder
 			INNER JOIN
