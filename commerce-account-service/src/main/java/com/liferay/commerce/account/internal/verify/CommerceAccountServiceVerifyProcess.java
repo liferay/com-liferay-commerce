@@ -15,16 +15,21 @@
 package com.liferay.commerce.account.internal.verify;
 
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
+import com.liferay.portal.kernel.exception.NoSuchUserException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.UserConstants;
-import com.liferay.portal.kernel.security.SecureRandomUtil;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.service.CompanyLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.LoggingTimer;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.verify.VerifyProcess;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -52,12 +57,9 @@ public class CommerceAccountServiceVerifyProcess extends VerifyProcess {
 				ServiceContext serviceContext = new ServiceContext();
 
 				serviceContext.setCompanyId(company.getCompanyId());
-				serviceContext.setUserId(UserConstants.USER_ID_DEFAULT);
-
-				UUID uuid = new UUID(
-					SecureRandomUtil.nextLong(), SecureRandomUtil.nextLong());
-
-				serviceContext.setUuid(uuid.toString());
+				serviceContext.setUserId(
+					_getAdminUserId(company.getCompanyId()));
+				serviceContext.setUuid(PortalUUIDUtil.generate());
 
 				_commerceAccountRoleHelper.checkCommerceAccountRoles(
 					serviceContext);
@@ -65,10 +67,32 @@ public class CommerceAccountServiceVerifyProcess extends VerifyProcess {
 		}
 	}
 
+	private long _getAdminUserId(long companyId) throws PortalException {
+		Role role = _roleLocalService.getRole(
+			companyId, RoleConstants.ADMINISTRATOR);
+
+		long[] userIds = _userLocalService.getRoleUserIds(role.getRoleId());
+
+		if (userIds.length == 0) {
+			throw new NoSuchUserException(
+				StringBundler.concat(
+					"No user exists in company ", String.valueOf(companyId),
+					" with role ", String.valueOf(role.getRoleId())));
+		}
+
+		return userIds[0];
+	}
+
 	@Reference
 	private CommerceAccountRoleHelper _commerceAccountRoleHelper;
 
 	@Reference
 	private CompanyLocalService _companyLocalService;
+
+	@Reference
+	private RoleLocalService _roleLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
