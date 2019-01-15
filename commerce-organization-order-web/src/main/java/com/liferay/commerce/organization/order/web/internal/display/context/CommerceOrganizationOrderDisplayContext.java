@@ -31,8 +31,7 @@ import com.liferay.commerce.organization.order.web.internal.configuration.Commer
 import com.liferay.commerce.organization.order.web.internal.display.context.util.CommerceOrganizationOrderRequestHelper;
 import com.liferay.commerce.organization.order.web.internal.search.CommerceOrderDisplayTerms;
 import com.liferay.commerce.organization.order.web.internal.search.CommerceOrderSearch;
-import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
-import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPrice;
@@ -119,8 +118,7 @@ public class CommerceOrganizationOrderDisplayContext {
 			CommerceOrderNoteService commerceOrderNoteService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderService commerceOrderService,
-			CommercePaymentMethodGroupRelService
-				commercePaymentMethodGroupRelService,
+			CommercePaymentEngine commercePaymentEngine,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			CommerceShipmentItemService commerceShipmentItemService,
 			CPInstanceHelper cpInstanceHelper, JSONFactory jsonFactory,
@@ -134,8 +132,7 @@ public class CommerceOrganizationOrderDisplayContext {
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_commerceOrderService = commerceOrderService;
-		_commercePaymentMethodGroupRelService =
-			commercePaymentMethodGroupRelService;
+		_commercePaymentEngine = commercePaymentEngine;
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_commerceShipmentItemService = commerceShipmentItemService;
 		_cpInstanceHelper = cpInstanceHelper;
@@ -304,40 +301,9 @@ public class CommerceOrganizationOrderDisplayContext {
 	public String getCommerceOrderPaymentMethodName(CommerceOrder commerceOrder)
 		throws PortalException {
 
-		String commercePaymentMethodKey =
-			commerceOrder.getCommercePaymentMethodKey();
-
-		if (Validator.isNull(commercePaymentMethodKey)) {
-			return StringPool.BLANK;
-		}
-
-		CommercePaymentMethodGroupRel commercePaymentMethod =
-			_commercePaymentMethodGroupRelService.
-				getCommercePaymentMethodGroupRel(
-					commerceOrder.getGroupId(), commercePaymentMethodKey);
-
-		if (commercePaymentMethod == null) {
-			return StringPool.BLANK;
-		}
-
-		String name = commercePaymentMethod.getName(
+		return _commercePaymentEngine.getCommerceOrderPaymentMethodName(
+			commerceOrder, _commerceOrganizationOrderRequestHelper.getRequest(),
 			_commerceOrganizationOrderRequestHelper.getLocale());
-
-		if (!commercePaymentMethod.isActive()) {
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(name);
-			sb.append(" (");
-			sb.append(
-				LanguageUtil.get(
-					_commerceOrganizationOrderRequestHelper.getRequest(),
-					"inactive"));
-			sb.append(CharPool.CLOSE_PARENTHESIS);
-
-			name = sb.toString();
-		}
-
-		return name;
 	}
 
 	public CommerceOrderPrice getCommerceOrderPrice() throws PortalException {
@@ -900,8 +866,7 @@ public class CommerceOrganizationOrderDisplayContext {
 		_commerceOrganizationOpenOrderPortletInstanceConfiguration;
 	private final CommerceOrganizationOrderRequestHelper
 		_commerceOrganizationOrderRequestHelper;
-	private final CommercePaymentMethodGroupRelService
-		_commercePaymentMethodGroupRelService;
+	private final CommercePaymentEngine _commercePaymentEngine;
 	private final CommerceProductPriceCalculation
 		_commerceProductPriceCalculation;
 	private final CommerceShipmentItemService _commerceShipmentItemService;
