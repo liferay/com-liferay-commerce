@@ -16,6 +16,7 @@ package com.liferay.commerce.payment.engine;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -53,14 +54,19 @@ public interface CommercePaymentEngine {
 			HttpServletRequest httpServletRequest)
 		throws Exception;
 
-	public int getCommercePaymentMethodGroupRelsCount(long groupId);
-
-	public List<CommercePaymentMethod> getCommercePaymentMethods(
-			long commerceOrderId)
+	public String getCommerceOrderPaymentMethodName(
+			CommerceOrder commerceOrder, HttpServletRequest httpServletRequest,
+			Locale locale)
 		throws PortalException;
+
+	public int getCommercePaymentMethodGroupRelsCount(long groupId);
 
 	public int getCommercePaymentMethodType(long commerceOrderId)
 		throws Exception;
+
+	public List<CommercePaymentMethod> getEnabledCommercePaymentMethodsForOrder(
+			long commerceOrderId)
+		throws PortalException;
 
 	public String getPaymentMethodName(String paymentMethodKey, Locale locale);
 
