@@ -40,6 +40,8 @@ public interface CommerceContext extends Serializable {
 	public Optional<CommercePriceList> getCommercePriceList()
 		throws PortalException;
 
+	public int getCommerceSiteType();
+
 	public long[] getCommerceUserSegmentEntryIds() throws PortalException;
 
 	public String getCouponCode() throws PortalException;

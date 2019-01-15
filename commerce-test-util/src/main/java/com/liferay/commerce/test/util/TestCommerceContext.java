@@ -76,6 +76,11 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	@Override
+	public int getCommerceSiteType() {
+		return 0;
+	}
+
+	@Override
 	public long[] getCommerceUserSegmentEntryIds() throws PortalException {
 		if (_contextUser == null) {
 			return new long[0];
