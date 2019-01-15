@@ -65,6 +65,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 		PortalHelper portalHelper, ClientHelper clientHelper) {
 
 		Company company = portalHelper.getCompany();
+		final int totalItems;
 		List<Group> groups = null;
 
 		Pagination pagination = clientHelper.getPagination();
@@ -73,6 +74,9 @@ public class WebSiteResourceImpl implements WebSiteResource {
 			groups = _groupService.getGroups(
 				company.getCompanyId(), 0, true, pagination.getStartPosition(),
 				pagination.getEndPosition());
+
+			totalItems = _groupService.getGroupsCount(
+				company.getCompanyId(), 0, true);
 		}
 		catch (PortalException pe) {
 			throw new ServerErrorException(
@@ -88,7 +92,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 			Collectors.collectingAndThen(
 				Collectors.toList(),
 				webSiteDTOs ->
-					new CollectionDTO<>(webSiteDTOs, webSiteDTOs.size()))
+					new CollectionDTO<>(webSiteDTOs, totalItems))
 		);
 	}
 
