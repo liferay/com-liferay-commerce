@@ -73,9 +73,20 @@ public class ParameterImporter {
 			"Create parameter using {}, {}, {}, {}", nameJSONNode.asText(),
 			in.asText(), schema, requiredJSONNode.asBoolean());
 
-		return new Parameter(
-			nameJSONNode.asText(), in.asText(), schema,
-			requiredJSONNode.asBoolean());
+		Parameter.ParameterBuilder parameterBuilder =
+			new Parameter.ParameterBuilder();
+
+		parameterBuilder.location(
+			in.asText()
+		).name(
+			nameJSONNode.asText()
+		).required(
+			requiredJSONNode.asBoolean()
+		).schema(
+			schema
+		);
+
+		return parameterBuilder.build();
 	}
 
 	public static Schema getSchema(JsonNode schemaJSONNode) {
