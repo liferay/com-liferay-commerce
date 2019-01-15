@@ -27,11 +27,12 @@
 
 	<div class="{$checkboxContainerClasses}">
 		<div class="commerce-checkbox__input">
-			<input 
+			<input
 				data-onchange="{$_handleToggleItem}"
 				{$checkboxAttributes}
 			/>
 		</div>
+
 		<div class="commerce-checkbox__label">
 			{call AutocompleteItem.render}
 				{param text: $name /}
