@@ -25,6 +25,7 @@ import com.liferay.commerce.openapi.util.util.StringUtils;
 import java.io.IOException;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -210,7 +211,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 			_writeApplicationSource();
 
-			_writeCollectionDTOSource();
+			_writeCollectionDTOSource(referencedModels);
 
 			_writeJsonMessageBodyReaderSource();
 
@@ -303,12 +304,34 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		writeSource(bndTpl, bndSourcePath);
 	}
 
-	private void _writeCollectionDTOSource() throws IOException {
+	private void _writeCollectionDTOSource(Set<String> referencedModels)
+		throws IOException {
+
 		String dtoSource = getTemplate(_TEMPLATE_FILE_COLLECTION_DTO);
 
 		dtoSource = dtoSource.replace("${PACKAGE}", _modelPackagePath);
 
 		dtoSource = dtoSource.replace("${AUTHOR}", _author);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{");
+
+		Iterator<String> iterator = referencedModels.iterator();
+
+		while (iterator.hasNext()) {
+			sb.append(iterator.next());
+
+			sb.append("DTO.class");
+
+			if (iterator.hasNext()) {
+				sb.append(", ");
+			}
+		}
+
+		sb.append("}");
+
+		dtoSource = dtoSource.replace("${MODEL_CLASSES}", sb.toString());
 
 		String componentSourcePath = getClassSourcePath(
 			_moduleOutputPath, "CollectionDTO.java", _modelPackagePath);

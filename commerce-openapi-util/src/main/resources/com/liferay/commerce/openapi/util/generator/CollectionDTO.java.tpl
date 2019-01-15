@@ -15,30 +15,42 @@
 package ${PACKAGE};
 
 import java.util.Collection;
+import java.util.Collections;
 
 import javax.annotation.Generated;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  * @author ${AUTHOR}
  */
 @Generated(value = "OSGiRESTModuleGenerator")
 @XmlRootElement(name ="collection")
+@XmlSeeAlso(${MODEL_CLASSES})
 public class CollectionDTO<T> {
+
+	public CollectionDTO() {
+	    _items = Collections.emptyList();
+	    _totalItems = 0;
+	}
 
 	public CollectionDTO(Collection<T> items, int totalItems) {
 		_items = items;
 		_totalItems = totalItems;
 	}
 
+    @XmlElement(name = "item")
 	public Collection<T> getItems() {
 		return _items;
 	}
 
+    @XmlElement
 	public int getNumberOfItems() {
 		return _items.size();
 	}
 
+    @XmlElement
 	public int getTotalItems() {
 		return _totalItems;
 	}
