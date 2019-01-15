@@ -18,6 +18,7 @@ import com.liferay.commerce.exception.CommerceAddressCityException;
 import com.liferay.commerce.exception.CommerceAddressCountryException;
 import com.liferay.commerce.exception.CommerceAddressNameException;
 import com.liferay.commerce.exception.CommerceAddressStreetException;
+import com.liferay.commerce.exception.CommerceAddressZipException;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceGeocoder;
 import com.liferay.commerce.model.CommerceOrder;
@@ -72,7 +73,7 @@ public class CommerceAddressLocalServiceImpl
 		long groupId = serviceContext.getScopeGroupId();
 
 		validate(
-			0, groupId, className, classPK, name, street1, city,
+			0, groupId, className, classPK, name, street1, city, zip,
 			commerceCountryId, defaultBilling, defaultShipping);
 
 		long commerceAddressId = counterLocalService.increment();
@@ -282,7 +283,7 @@ public class CommerceAddressLocalServiceImpl
 		validate(
 			commerceAddress.getCommerceAddressId(),
 			commerceAddress.getGroupId(), commerceAddress.getClassName(),
-			commerceAddress.getClassPK(), name, street1, city,
+			commerceAddress.getClassPK(), name, street1, city, zip,
 			commerceCountryId, defaultBilling, defaultShipping);
 
 		commerceAddress.setName(name);
@@ -453,7 +454,7 @@ public class CommerceAddressLocalServiceImpl
 
 	protected void validate(
 			long commerceAddressId, long groupId, String className,
-			long classPK, String name, String street1, String city,
+			long classPK, String name, String street1, String city, String zip,
 			long commerceCountryId, boolean defaultBilling,
 			boolean defaultShipping)
 		throws PortalException {
@@ -468,6 +469,10 @@ public class CommerceAddressLocalServiceImpl
 
 		if (Validator.isNull(city)) {
 			throw new CommerceAddressCityException();
+		}
+
+		if (Validator.isNull(zip)) {
+			throw new CommerceAddressZipException();
 		}
 
 		if (commerceCountryId <= 0) {
