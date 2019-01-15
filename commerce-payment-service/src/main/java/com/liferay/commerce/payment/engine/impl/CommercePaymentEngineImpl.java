@@ -33,6 +33,7 @@ import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.Portal;
@@ -236,13 +237,72 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	@Override
+	public String getCommerceOrderPaymentMethodName(
+			CommerceOrder commerceOrder, HttpServletRequest httpServletRequest,
+			Locale locale)
+		throws PortalException {
+
+		String commercePaymentMethodKey =
+			commerceOrder.getCommercePaymentMethodKey();
+
+		if (Validator.isNull(commercePaymentMethodKey)) {
+			return StringPool.BLANK;
+		}
+
+		CommercePaymentMethodGroupRel commercePaymentMethod =
+			_commercePaymentMethodGroupRelLocalService.
+				getCommercePaymentMethodGroupRel(
+					commerceOrder.getGroupId(), commercePaymentMethodKey);
+
+		if (commercePaymentMethod == null) {
+			return StringPool.BLANK;
+		}
+
+		String name = commercePaymentMethod.getName(locale);
+
+		if (!commercePaymentMethod.isActive()) {
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(name);
+			sb.append(" (");
+			sb.append(LanguageUtil.get(httpServletRequest, "inactive"));
+			sb.append(CharPool.CLOSE_PARENTHESIS);
+
+			name = sb.toString();
+		}
+
+		return name;
+	}
+
+	@Override
 	public int getCommercePaymentMethodGroupRelsCount(long groupId) {
 		return _commercePaymentMethodGroupRelLocalService.
 			getCommercePaymentMethodGroupRelsCount(groupId, true);
 	}
 
 	@Override
-	public List<CommercePaymentMethod> getCommercePaymentMethods(
+	public int getCommercePaymentMethodType(long commerceOrderId)
+		throws PortalException {
+
+		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
+			commerceOrderId);
+
+		String commercePaymentMethodKey =
+			commerceOrder.getCommercePaymentMethodKey();
+
+		if (commercePaymentMethodKey.isEmpty()) {
+			return -1;
+		}
+
+		CommercePaymentMethod commercePaymentMethod =
+			_commercePaymentMethodRegistry.getCommercePaymentMethod(
+				commercePaymentMethodKey);
+
+		return commercePaymentMethod.getPaymentType();
+	}
+
+	@Override
+	public List<CommercePaymentMethod> getEnabledCommercePaymentMethodsForOrder(
 			long commerceOrderId)
 		throws PortalException {
 
@@ -267,27 +327,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 				getCommercePaymentMethodGroupRels(
 					commerceOrder.getGroupId(), true),
 			subscriptionOrder);
-	}
-
-	@Override
-	public int getCommercePaymentMethodType(long commerceOrderId)
-		throws PortalException {
-
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
-
-		String commercePaymentMethodKey =
-			commerceOrder.getCommercePaymentMethodKey();
-
-		if (commercePaymentMethodKey.isEmpty()) {
-			return -1;
-		}
-
-		CommercePaymentMethod commercePaymentMethod =
-			_commercePaymentMethodRegistry.getCommercePaymentMethod(
-				commercePaymentMethodKey);
-
-		return commercePaymentMethod.getPaymentType();
 	}
 
 	@Override
