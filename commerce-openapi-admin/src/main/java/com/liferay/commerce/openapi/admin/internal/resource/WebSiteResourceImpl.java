@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 import com.liferay.commerce.openapi.admin.context.ClientHelper;
 import com.liferay.commerce.openapi.admin.context.Pagination;
 import com.liferay.commerce.openapi.admin.context.PortalHelper;
+import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.openapi.admin.resource.WebSiteResource;
 import com.liferay.commerce.openapi.admin.util.DTOUtils;
@@ -60,7 +61,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 	}
 
 	@Override
-	public List<WebSiteDTO> getWebSites(
+	public CollectionDTO<WebSiteDTO> getWebSites(
 		PortalHelper portalHelper, ClientHelper clientHelper) {
 
 		Company company = portalHelper.getCompany();
@@ -84,7 +85,10 @@ public class WebSiteResourceImpl implements WebSiteResource {
 		return stream.map(
 			group -> DTOUtils.modelToDTO(group, portalHelper.getLocale())
 		).collect(
-			Collectors.toList()
+			Collectors.collectingAndThen(
+				Collectors.toList(),
+				webSiteDTOs ->
+					new CollectionDTO<>(webSiteDTOs, webSiteDTOs.size()))
 		);
 	}
 
