@@ -135,7 +135,9 @@ public class CommerceAccountResource {
 		catch (Exception e) {
 			_log.error(e, e);
 
-			return Response.serverError().build();
+			Response.ResponseBuilder responseBuilder = Response.serverError();
+
+			return responseBuilder.build();
 		}
 
 		return Response.ok(
