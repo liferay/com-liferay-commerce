@@ -307,6 +307,10 @@ public class CommerceOrganizationOrderDisplayContext {
 		String commercePaymentMethodKey =
 			commerceOrder.getCommercePaymentMethodKey();
 
+		if (Validator.isNull(commercePaymentMethodKey)) {
+			return StringPool.BLANK;
+		}
+
 		CommercePaymentMethodGroupRel commercePaymentMethod =
 			_commercePaymentMethodGroupRelService.
 				getCommercePaymentMethodGroupRel(

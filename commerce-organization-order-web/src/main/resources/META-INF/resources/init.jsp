@@ -83,8 +83,6 @@ page import="java.util.StringJoiner" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
 
-<
-
 <liferay-frontend:defineObjects />
 
 <liferay-theme:defineObjects />
