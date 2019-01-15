@@ -152,6 +152,9 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 			cpContentRequestHelper.getLiferayPortletRequest(), getPortletURL(),
 			null, "there-are-no-products");
 
+		_searchContainer.setDelta(
+			cpPublisherPortletInstanceConfiguration.paginationDelta());
+
 		CPDataSourceResult cpDataSourceResult = getCPDataSourceResult();
 
 		if (cpDataSourceResult != null) {
