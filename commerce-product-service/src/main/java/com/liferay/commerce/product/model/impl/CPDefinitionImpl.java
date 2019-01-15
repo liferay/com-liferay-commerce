@@ -20,7 +20,6 @@ import com.liferay.commerce.product.exception.CPDefinitionMetaDescriptionExcepti
 import com.liferay.commerce.product.exception.CPDefinitionMetaKeywordsException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaTitleException;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLocalization;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;

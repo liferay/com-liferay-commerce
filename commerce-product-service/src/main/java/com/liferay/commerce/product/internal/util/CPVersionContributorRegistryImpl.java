@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -81,8 +80,7 @@ public class CPVersionContributorRegistryImpl
 			bundleContext, CPVersionContributor.class,
 			"commerce.product.content.contributor.name",
 			ServiceTrackerCustomizerFactory.
-				<CPVersionContributor>serviceWrapper(
-					bundleContext));
+				<CPVersionContributor>serviceWrapper(bundleContext));
 	}
 
 	@Deactivate
@@ -93,8 +91,7 @@ public class CPVersionContributorRegistryImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPVersionContributorRegistryImpl.class);
 
-	private ServiceTrackerMap
-		<String, ServiceWrapper<CPVersionContributor>>
-			_serviceTrackerMap;
+	private ServiceTrackerMap<String, ServiceWrapper<CPVersionContributor>>
+		_serviceTrackerMap;
 
 }

@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.internal.upgrade.v1_3_0;
 
-import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.model.impl.CPDefinitionLinkModelImpl;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.db.IndexMetadata;
