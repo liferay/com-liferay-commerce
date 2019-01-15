@@ -23,6 +23,8 @@ import com.liferay.commerce.openapi.util.Response;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
+import java.io.IOException;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -30,14 +32,27 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Igor Beslic
  * @author Ivica Cardic
  */
-public class ResourceGenerator {
+public class ResourceGenerator extends BaseSourceGenerator {
 
-	public ResourceGenerator(String applicationName) {
+	public ResourceGenerator(
+		String applicationName, String author, String moduleOutputPath,
+		String modelPackagePath, boolean overwriteImplementation,
+		String resourceInterfacePackagePath, String resourcePackagePath) {
+
 		_applicationName = applicationName;
+		_author = author;
+		_moduleOutputPath = moduleOutputPath;
+		_modelPackagePath = modelPackagePath;
+		_overwriteImplementation = overwriteImplementation;
+		_resourceInterfacePackagePath = resourceInterfacePackagePath;
+		_resourcePackagePath = resourcePackagePath;
 	}
 
 	public String generateResourceGetters(List<Path> paths) {
@@ -114,161 +129,14 @@ public class ResourceGenerator {
 		return sb.toString();
 	}
 
-	public String toJavaxImports(List<Method> methods) {
-		StringBuilder sb = new StringBuilder();
+	public void writeResourceSources(
+			String version, Path path,
+			Set<ComponentDefinition> componentDefinitions)
+		throws IOException {
 
-		Set<String> importedClasses = new HashSet<>();
+		_writeResourceInterfaceSource(version, path, componentDefinitions);
 
-		for (Method method : methods) {
-			if (!importedClasses.contains(method.getHttpMethod())) {
-				sb.append("import javax.ws.rs.");
-				sb.append(method.getHttpMethod());
-				sb.append(";\n");
-
-				importedClasses.add(method.getHttpMethod());
-			}
-
-			List<Content> requestBody = method.getRequestBody();
-
-			if (!requestBody.isEmpty() &&
-				!importedClasses.contains("Consumes")) {
-
-				sb.append("import javax.ws.rs.Consumes;\n");
-
-				importedClasses.add("Consumes");
-			}
-
-			if (!importedClasses.contains("Produces")) {
-				for (Response response : method.getResponses()) {
-					if (response.hasContent()) {
-						sb.append("import javax.ws.rs.Produces;\n");
-
-						importedClasses.add("Produces");
-
-						break;
-					}
-				}
-			}
-
-			for (Parameter parameter : method.getParameters()) {
-				String location = parameter.getLocation();
-
-				if (location.equals("body")) {
-					continue;
-				}
-
-				if (importedClasses.contains(location)) {
-					continue;
-				}
-
-				sb.append("import javax.ws.rs.");
-				sb.append(StringUtils.upperCaseFirstChar(location));
-				sb.append("Param;\n");
-
-				importedClasses.add(location);
-			}
-		}
-
-		return sb.toString();
-	}
-
-	public String toModelImportStatements(
-		String modelPackage, Set<String> referencedModels) {
-
-		StringBuilder sb = new StringBuilder();
-
-		for (String referencedModel : referencedModels) {
-			sb.append("import ");
-			sb.append(modelPackage);
-			sb.append(".");
-			sb.append(StringUtils.upperCaseFirstChar(referencedModel));
-			sb.append("DTO;\n");
-		}
-
-		sb.append("import ");
-		sb.append(modelPackage);
-		sb.append(".CollectionDTO;\n");
-
-		return sb.toString();
-	}
-
-	public String toResourceImplementationMethods(
-		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
-
-		StringBuilder sb = new StringBuilder();
-
-		Iterator<Method> iterator = methods.iterator();
-
-		while (iterator.hasNext()) {
-			Method method = iterator.next();
-
-			sb.append("\t@Override\n");
-
-			sb.append(
-				_getMethodDeclaration(method, false, componentDefinitions));
-
-			sb.append(" {\n");
-
-			if (method.hasResponseContent()) {
-				ComponentDefinition schemaComponentDefinition =
-					_getSchemaComponentDefinition(method, componentDefinitions);
-
-				if (schemaComponentDefinition.isArray()) {
-					sb.append("\t\treturn new CollectionDTO(");
-					sb.append("Collections.emptyList(), 0);\n");
-				}
-				else {
-					sb.append("\t\treturn null;\n");
-				}
-			}
-			else {
-				sb.append("\t\treturn Response.ok().build();\n");
-			}
-
-			sb.append("\t}\n");
-
-			if (iterator.hasNext()) {
-				sb.append("\n");
-			}
-		}
-
-		return sb.toString();
-	}
-
-	public String toResourceInterfaceMethods(
-		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
-
-		StringBuilder sb = new StringBuilder();
-
-		Iterator<Method> iterator = methods.iterator();
-
-		while (iterator.hasNext()) {
-			Method method = iterator.next();
-
-			sb.append("\t@Path(\"");
-			sb.append(method.getPath());
-			sb.append("\")\n");
-			sb.append("\t@");
-			sb.append(method.getHttpMethod());
-			sb.append("\n");
-
-			sb.append(_getProducesAnnotation(method.getResponses()));
-
-			sb.append(_getConsumesAnnotation(method.getRequestBody()));
-
-			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
-
-			sb.append(
-				_getMethodDeclaration(method, true, componentDefinitions));
-
-			sb.append(";\n");
-
-			if (iterator.hasNext()) {
-				sb.append("\n");
-			}
-		}
-
-		return sb.toString();
+		_writeResourceImplementationSource(version, path, componentDefinitions);
 	}
 
 	private String _getConsumesAnnotation(List<Content> requestBody) {
@@ -477,8 +345,303 @@ public class ResourceGenerator {
 		return null;
 	}
 
+	private String _toJavaxImports(List<Method> methods) {
+		StringBuilder sb = new StringBuilder();
+
+		Set<String> importedClasses = new HashSet<>();
+
+		for (Method method : methods) {
+			if (!importedClasses.contains(method.getHttpMethod())) {
+				sb.append("import javax.ws.rs.");
+				sb.append(method.getHttpMethod());
+				sb.append(";\n");
+
+				importedClasses.add(method.getHttpMethod());
+			}
+
+			List<Content> requestBody = method.getRequestBody();
+
+			if (!requestBody.isEmpty() &&
+				!importedClasses.contains("Consumes")) {
+
+				sb.append("import javax.ws.rs.Consumes;\n");
+
+				importedClasses.add("Consumes");
+			}
+
+			if (!importedClasses.contains("Produces")) {
+				for (Response response : method.getResponses()) {
+					if (response.hasContent()) {
+						sb.append("import javax.ws.rs.Produces;\n");
+
+						importedClasses.add("Produces");
+
+						break;
+					}
+				}
+			}
+
+			for (Parameter parameter : method.getParameters()) {
+				String location = parameter.getLocation();
+
+				if (location.equals("body")) {
+					continue;
+				}
+
+				if (importedClasses.contains(location)) {
+					continue;
+				}
+
+				sb.append("import javax.ws.rs.");
+				sb.append(StringUtils.upperCaseFirstChar(location));
+				sb.append("Param;\n");
+
+				importedClasses.add(location);
+			}
+		}
+
+		return sb.toString();
+	}
+
+	private String _toModelImportStatements(
+		String modelPackage, Set<String> referencedModels) {
+
+		StringBuilder sb = new StringBuilder();
+
+		for (String referencedModel : referencedModels) {
+			sb.append("import ");
+			sb.append(modelPackage);
+			sb.append(".");
+			sb.append(StringUtils.upperCaseFirstChar(referencedModel));
+			sb.append("DTO;\n");
+		}
+
+		sb.append("import ");
+		sb.append(modelPackage);
+		sb.append(".CollectionDTO;\n");
+
+		return sb.toString();
+	}
+
+	private String _toResourceImplementationMethods(
+		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
+
+		StringBuilder sb = new StringBuilder();
+
+		Iterator<Method> iterator = methods.iterator();
+
+		while (iterator.hasNext()) {
+			Method method = iterator.next();
+
+			sb.append("\t@Override\n");
+
+			sb.append(
+				_getMethodDeclaration(method, false, componentDefinitions));
+
+			sb.append(" {\n");
+
+			if (method.hasResponseContent()) {
+				ComponentDefinition schemaComponentDefinition =
+					_getSchemaComponentDefinition(method, componentDefinitions);
+
+				if (schemaComponentDefinition.isArray()) {
+					sb.append("\t\treturn new CollectionDTO(");
+					sb.append("Collections.emptyList(), 0);\n");
+				}
+				else {
+					sb.append("\t\treturn null;\n");
+				}
+			}
+			else {
+				sb.append("\t\treturn Response.ok().build();\n");
+			}
+
+			sb.append("\t}\n");
+
+			if (iterator.hasNext()) {
+				sb.append("\n");
+			}
+		}
+
+		return sb.toString();
+	}
+
+	private String _toResourceInterfaceMethods(
+		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
+
+		StringBuilder sb = new StringBuilder();
+
+		Iterator<Method> iterator = methods.iterator();
+
+		while (iterator.hasNext()) {
+			Method method = iterator.next();
+
+			sb.append("\t@Path(\"");
+			sb.append(method.getPath());
+			sb.append("\")\n");
+			sb.append("\t@");
+			sb.append(method.getHttpMethod());
+			sb.append("\n");
+
+			sb.append(_getProducesAnnotation(method.getResponses()));
+
+			sb.append(_getConsumesAnnotation(method.getRequestBody()));
+
+			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
+
+			sb.append(
+				_getMethodDeclaration(method, true, componentDefinitions));
+
+			sb.append(";\n");
+
+			if (iterator.hasNext()) {
+				sb.append("\n");
+			}
+		}
+
+		return sb.toString();
+	}
+
+	private void _writeResourceImplementationSource(
+			String version, Path path,
+			Set<ComponentDefinition> componentDefinitions)
+		throws IOException {
+
+		String resourceImplementationClassName = StringUtils.upperCaseFirstChar(
+			path.getName() + "ResourceImpl");
+
+		String componentSourcePath = getClassSourcePath(
+			_moduleOutputPath, resourceImplementationClassName + ".java",
+			_resourcePackagePath);
+
+		if (!_overwriteImplementation && exists(componentSourcePath)) {
+			_logger.warn(
+				"Resource implementation source file {} is not generated. " +
+					"Configure overwrite mode in config file.",
+				componentSourcePath);
+
+			return;
+		}
+
+		String osgiResourceComponent = getTemplate(
+			_TEMPLATE_FILE_RESOURCE_IMPLEMENTATION);
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${PACKAGE}", _resourcePackagePath);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(
+			_toModelImportStatements(
+				_modelPackagePath, path.getReferencedModels()));
+
+		sb.append("import ");
+		sb.append(_resourceInterfacePackagePath);
+		sb.append(".");
+		sb.append(StringUtils.upperCaseFirstChar(path.getName()));
+		sb.append("Resource;");
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${IMPORT_STATEMENTS}", sb.toString());
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${API_VERSION}", version);
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${AUTHOR}", _author);
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${APPLICATION_NAME}", _applicationName);
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
+			_toJavaxImports(path.getMethods()));
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${MODEL_RESOURCE_IMPLEMENTATION_CLASS}",
+			resourceImplementationClassName);
+
+		String resourceInterfaceClassName = StringUtils.upperCaseFirstChar(
+			path.getName() + "Resource");
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${MODEL_RESOURCE_INTERFACE_CLASS}", resourceInterfaceClassName);
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${PATH}", path.getName());
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${METHODS}",
+			_toResourceImplementationMethods(
+				path.getMethods(), componentDefinitions));
+
+		writeSource(osgiResourceComponent, componentSourcePath);
+	}
+
+	private void _writeResourceInterfaceSource(
+			String version, Path path,
+			Set<ComponentDefinition> componentDefinitions)
+		throws IOException {
+
+		String osgiResourceComponent = getTemplate(
+			_TEMPLATE_FILE_RESOURCE_INTERFACE);
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${PACKAGE}", _resourceInterfacePackagePath);
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${MODEL_IMPORT_STATEMENTS}",
+			_toModelImportStatements(
+				_modelPackagePath, path.getReferencedModels()));
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${API_VERSION}", version);
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${AUTHOR}", _author);
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
+			_toJavaxImports(path.getMethods()));
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${PATH}", path.getName());
+
+		String resourceInterfaceClassName = StringUtils.upperCaseFirstChar(
+			path.getName() + "Resource");
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${MODEL_RESOURCE_INTERFACE_CLASS}", resourceInterfaceClassName);
+
+		osgiResourceComponent = osgiResourceComponent.replace(
+			"${METHODS}",
+			_toResourceInterfaceMethods(
+				path.getMethods(), componentDefinitions));
+
+		String componentSourcePath = getClassSourcePath(
+			_moduleOutputPath, resourceInterfaceClassName + ".java",
+			_resourceInterfacePackagePath);
+
+		writeSource(osgiResourceComponent, componentSourcePath);
+	}
+
+	private static final String _TEMPLATE_FILE_RESOURCE_IMPLEMENTATION =
+		"ResourceImpl.java.tpl";
+
+	private static final String _TEMPLATE_FILE_RESOURCE_INTERFACE =
+		"Resource.java.tpl";
+
+	private static final Logger _logger = LoggerFactory.getLogger(
+		ResourceGenerator.class);
+
 	private final String _applicationName;
+	private final String _author;
+	private final String _modelPackagePath;
+	private final String _moduleOutputPath;
+	private final boolean _overwriteImplementation;
 	private final ParameterGenerator _parameterGenerator =
 		new ParameterGenerator();
+	private final String _resourceInterfacePackagePath;
+	private final String _resourcePackagePath;
 
 }

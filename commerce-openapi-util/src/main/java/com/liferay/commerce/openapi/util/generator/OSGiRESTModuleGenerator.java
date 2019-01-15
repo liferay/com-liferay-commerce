@@ -121,14 +121,13 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			"%s/%s", moduleRootPath,
 			properties.getProperty("osgi.module.name"));
 
+		boolean overwriteImplementation = false;
+
 		if ("true".equals(
 				properties.getProperty(
 					"osgi.module.generator.overwrite.implementation"))) {
 
-			_overwriteImplementation = true;
-		}
-		else {
-			_overwriteImplementation = false;
+			overwriteImplementation = true;
 		}
 
 		if ("true".equals(
@@ -151,12 +150,11 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			_overwriteBuildGradle = false;
 		}
 
-		_resourceInterfacePackagePath = properties.getProperty(
-			"osgi.module.resource.interface.package");
-		_resourcePackagePath = properties.getProperty(
-			"osgi.module.resource.package");
-
-		_resourceGenerator = new ResourceGenerator(_applicationName);
+		_resourceGenerator = new ResourceGenerator(
+			_applicationName, _author, _moduleOutputPath, _modelPackagePath,
+			overwriteImplementation,
+			properties.getProperty("osgi.module.resource.interface.package"),
+			properties.getProperty("osgi.module.resource.package"));
 	}
 
 	public void generate() throws IOException {
@@ -185,10 +183,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			for (Path path : definition.getPaths()) {
 				referencedModels.addAll(path.getReferencedModels());
 
-				_writeResourceInterfaceSource(
-					definition.getVersion(), path, componentDefinitions);
-
-				_writeResourceImplementationSource(
+				_resourceGenerator.writeResourceSources(
 					definition.getVersion(), path, componentDefinitions);
 			}
 
@@ -381,129 +376,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		writeSource(jsonMessageBodyWriterTpl, jsonMessageBodyWriterSourcePath);
 	}
 
-	private void _writeResourceImplementationSource(
-			String version, Path path,
-			Set<ComponentDefinition> componentDefinitions)
-		throws IOException {
-
-		String resourceImplementationClassName = StringUtils.upperCaseFirstChar(
-			path.getName() + "ResourceImpl");
-
-		String componentSourcePath = getClassSourcePath(
-			_moduleOutputPath, resourceImplementationClassName + ".java",
-			_resourcePackagePath);
-
-		if (!_overwriteImplementation && exists(componentSourcePath)) {
-			_logger.warn(
-				"Resource implementation source file {} is not generated. " +
-					"Configure overwrite mode in config file.",
-				componentSourcePath);
-
-			return;
-		}
-
-		String osgiResourceComponent = getTemplate(
-			_TEMPLATE_FILE_RESOURCE_IMPLEMENTATION);
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${PACKAGE}", _resourcePackagePath);
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(
-			_resourceGenerator.toModelImportStatements(
-				_modelPackagePath, path.getReferencedModels()));
-
-		sb.append("import ");
-		sb.append(_resourceInterfacePackagePath);
-		sb.append(".");
-		sb.append(StringUtils.upperCaseFirstChar(path.getName()));
-		sb.append("Resource;");
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${IMPORT_STATEMENTS}", sb.toString());
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${API_VERSION}", version);
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${AUTHOR}", _author);
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${APPLICATION_NAME}", _applicationName);
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
-			_resourceGenerator.toJavaxImports(path.getMethods()));
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${MODEL_RESOURCE_IMPLEMENTATION_CLASS}",
-			resourceImplementationClassName);
-
-		String resourceInterfaceClassName = StringUtils.upperCaseFirstChar(
-			path.getName() + "Resource");
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${MODEL_RESOURCE_INTERFACE_CLASS}", resourceInterfaceClassName);
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${PATH}", path.getName());
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${METHODS}",
-			_resourceGenerator.toResourceImplementationMethods(
-				path.getMethods(), componentDefinitions));
-
-		writeSource(osgiResourceComponent, componentSourcePath);
-	}
-
-	private void _writeResourceInterfaceSource(
-			String version, Path path,
-			Set<ComponentDefinition> componentDefinitions)
-		throws IOException {
-
-		String osgiResourceComponent = getTemplate(
-			_TEMPLATE_FILE_RESOURCE_INTERFACE);
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${PACKAGE}", _resourceInterfacePackagePath);
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${MODEL_IMPORT_STATEMENTS}",
-			_resourceGenerator.toModelImportStatements(
-				_modelPackagePath, path.getReferencedModels()));
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${API_VERSION}", version);
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${AUTHOR}", _author);
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
-			_resourceGenerator.toJavaxImports(path.getMethods()));
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${PATH}", path.getName());
-
-		String resourceInterfaceClassName = StringUtils.upperCaseFirstChar(
-			path.getName() + "Resource");
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${MODEL_RESOURCE_INTERFACE_CLASS}", resourceInterfaceClassName);
-
-		osgiResourceComponent = osgiResourceComponent.replace(
-			"${METHODS}",
-			_resourceGenerator.toResourceInterfaceMethods(
-				path.getMethods(), componentDefinitions));
-
-		String componentSourcePath = getClassSourcePath(
-			_moduleOutputPath, resourceInterfaceClassName + ".java",
-			_resourceInterfacePackagePath);
-
-		writeSource(osgiResourceComponent, componentSourcePath);
-	}
-
 	private static final String _TEMPLATE_FILE_APPLICATION =
 		"Application.java.tpl";
 
@@ -519,12 +391,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 	private static final String _TEMPLATE_FILE_JSON_MESSAGE_BODY_WRITER =
 		"JsonMessageBodyWriter.java.tpl";
-
-	private static final String _TEMPLATE_FILE_RESOURCE_IMPLEMENTATION =
-		"ResourceImpl.java.tpl";
-
-	private static final String _TEMPLATE_FILE_RESOURCE_INTERFACE =
-		"Resource.java.tpl";
 
 	private static final Logger _logger = LoggerFactory.getLogger(
 		OSGiRESTModuleGenerator.class);
@@ -545,9 +411,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private final boolean _oauth2SecurityAllowed;
 	private final boolean _overwriteBND;
 	private final boolean _overwriteBuildGradle;
-	private final boolean _overwriteImplementation;
 	private final ResourceGenerator _resourceGenerator;
-	private final String _resourceInterfacePackagePath;
-	private final String _resourcePackagePath;
 
 }
