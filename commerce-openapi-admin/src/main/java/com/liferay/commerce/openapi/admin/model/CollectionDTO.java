@@ -12,22 +12,23 @@
  * details.
  */
 
-package ${PACKAGE};
+package com.liferay.commerce.openapi.admin.model;
 
 import java.util.Collection;
 import java.util.Collections;
 
 import javax.annotation.Generated;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
- * @author ${AUTHOR}
+ * @author Igor Beslic
  */
 @Generated(value = "OSGiRESTModuleGenerator")
 @XmlRootElement(name = "collection")
-@XmlSeeAlso(${MODEL_CLASSES})
+@XmlSeeAlso({WebSiteDTO.class, ProductDTO.class, PriceListDTO.class})
 public class CollectionDTO<T> {
 
 	public CollectionDTO() {

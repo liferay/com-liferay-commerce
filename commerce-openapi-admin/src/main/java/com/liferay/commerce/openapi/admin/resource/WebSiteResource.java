@@ -16,9 +16,9 @@ package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.context.ClientHelper;
 import com.liferay.commerce.openapi.admin.context.PortalHelper;
+import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
-
-import java.util.List;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import javax.annotation.Generated;
 
@@ -37,14 +37,16 @@ public interface WebSiteResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces({"application/*", "application/json"})
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public WebSiteDTO getWebSite(
 		@PathParam("id") String id, @Context PortalHelper portalHelper);
 
 	@GET
 	@Path("/")
-	@Produces({"application/*", "application/json"})
-	public List<WebSiteDTO> getWebSites(
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<WebSiteDTO> getWebSites(
 		@Context PortalHelper portalHelper, @Context ClientHelper clientHelper);
 
 }
