@@ -32,7 +32,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 public interface CProductVersionConfiguration {
 
-	@Meta.AD(deflt = "true", name = "enabled", required = false)
+	@Meta.AD(deflt = "false", name = "enabled", required = false)
 	public boolean enabled();
 
 	@Meta.AD(deflt = "5", name = "versions-to-retain", required = false)
