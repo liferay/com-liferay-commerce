@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.type.grouped.internal.upgrade.v1_1_0;
 
-import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryModelImpl;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.db.IndexMetadata;

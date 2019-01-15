@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.util;
 
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**

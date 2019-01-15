@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.product.type.grouped.internal.util;
 
-import com.liferay.commerce.product.util.CPVersionContributor;
 import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService;
+import com.liferay.commerce.product.util.CPVersionContributor;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
