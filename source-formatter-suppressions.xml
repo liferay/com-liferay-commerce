@@ -2,6 +2,7 @@
 
 <suppressions>
 	<checkstyle>
+		<suppress checks="ChainingCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/account/CommerceAccountResource\.java" />
 		<suppress checks="PersistenceCallCheck" files="commerce-account-service/src/main/java/com/liferay/commerce/account/service/impl/CommerceAccountLocalServiceImpl\.java" />
 		<suppress checks="VariableDeclarationAsUsedCheck" files=".*" />
 	</checkstyle>
