@@ -33,12 +33,6 @@ public class CommerceAccountConstants {
 
 	public static final int ACCOUNT_TYPE_PERSONAL = 1;
 
-	public static final int B2B_SITE_TYPE = 1;
-
-	public static final int B2C_B2B_SITE_TYPE = 2;
-
-	public static final int B2C_SITE_TYPE = 0;
-
 	public static final String BUYER_ROLE_NAME = "Buyer";
 
 	public static final long DEFAULT_PARENT_ACCOUNT_ID = 0;
@@ -50,5 +44,29 @@ public class CommerceAccountConstants {
 	public static final String RESOURCE_NAME = "com.liferay.commerce.account";
 
 	public static final String SERVICE_NAME = "com.liferay.commerce.account";
+
+	public static final int SITE_TYPE_B2B = 1;
+
+	public static final int SITE_TYPE_B2C = 0;
+
+	public static final int SITE_TYPE_B2C_B2B = 2;
+
+	public static final int[] SITE_TYPES = {
+		SITE_TYPE_B2C, SITE_TYPE_B2B, SITE_TYPE_B2C_B2B
+	};
+
+	public static String getSiteTypeLabel(int siteType) {
+		if (siteType == SITE_TYPE_B2C) {
+			return "b2c";
+		}
+		else if (siteType == SITE_TYPE_B2B) {
+			return "b2b";
+		}
+		else if (siteType == SITE_TYPE_B2C_B2B) {
+			return "b2c-b2b";
+		}
+
+		return null;
+	}
 
 }
