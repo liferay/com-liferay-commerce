@@ -62,6 +62,10 @@ public class CommerceUserSegmentHelperImpl
 			_commerceAccountHelper.getCurrentCommerceAccount(
 				httpServletRequest);
 
+		if (commerceAccount == null) {
+			return new long[0];
+		}
+
 		User user = _portal.getUser(httpServletRequest);
 
 		if (user == null) {
