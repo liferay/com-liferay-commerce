@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 public class CollectionDTO<T> {
 
 	public CollectionDTO() {
-	    _items = Collections.emptyList();
-	    _totalItems = 0;
+		_items = Collections.emptyList();
+		_totalItems = 0;
 	}
 
 	public CollectionDTO(Collection<T> items, int totalItems) {
@@ -40,17 +40,17 @@ public class CollectionDTO<T> {
 		_totalItems = totalItems;
 	}
 
-    @XmlElement(name = "item")
+	@XmlElement(name = "item")
 	public Collection<T> getItems() {
 		return _items;
 	}
 
-    @XmlElement
+	@XmlElement
 	public int getNumberOfItems() {
 		return _items.size();
 	}
 
-    @XmlElement
+	@XmlElement
 	public int getTotalItems() {
 		return _totalItems;
 	}
