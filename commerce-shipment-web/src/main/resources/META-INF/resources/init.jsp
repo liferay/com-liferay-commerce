@@ -28,6 +28,7 @@ page import="com.liferay.commerce.constants.CommerceShipmentConstants" %><%@
 page import="com.liferay.commerce.exception.CommerceAddressCityException" %><%@
 page import="com.liferay.commerce.exception.CommerceAddressCountryException" %><%@
 page import="com.liferay.commerce.exception.CommerceAddressStreetException" %><%@
+page import="com.liferay.commerce.exception.CommerceAddressZipException" %><%@
 page import="com.liferay.commerce.exception.CommerceShipmentItemQuantityException" %><%@
 page import="com.liferay.commerce.exception.CommerceShipmentStatusException" %><%@
 page import="com.liferay.commerce.exception.NoSuchShipmentException" %><%@

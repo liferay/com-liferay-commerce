@@ -25,6 +25,7 @@ import com.liferay.commerce.exception.CommerceAddressCityException;
 import com.liferay.commerce.exception.CommerceAddressCountryException;
 import com.liferay.commerce.exception.CommerceAddressNameException;
 import com.liferay.commerce.exception.CommerceAddressStreetException;
+import com.liferay.commerce.exception.CommerceAddressZipException;
 import com.liferay.commerce.exception.CommerceOrderBillingAddressException;
 import com.liferay.commerce.exception.CommerceOrderShippingAddressException;
 import com.liferay.commerce.model.CommerceAddress;
@@ -69,6 +70,7 @@ public abstract class BaseAddressCommerceCheckoutStep
 				e instanceof CommerceAddressCountryException ||
 				e instanceof CommerceAddressNameException ||
 				e instanceof CommerceAddressStreetException ||
+				e instanceof CommerceAddressZipException ||
 				e instanceof CommerceOrderBillingAddressException ||
 				e instanceof CommerceOrderShippingAddressException) {
 

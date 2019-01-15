@@ -45,6 +45,7 @@ if (commerceAddress != null) {
 	<liferay-ui:error exception="<%= CommerceAddressCityException.class %>" message="please-enter-a-valid-city" />
 	<liferay-ui:error exception="<%= CommerceAddressCountryException.class %>" message="please-select-a-country" />
 	<liferay-ui:error exception="<%= CommerceAddressStreetException.class %>" message="please-enter-a-valid-street" />
+	<liferay-ui:error exception="<%= CommerceAddressZipException.class %>" message="please-enter-a-valid-zip" />
 	<liferay-ui:error exception="<%= CommerceShipmentStatusException.class %>" message="please-select-a-valid-status" />
 
 	<aui:fieldset-group markupView="lexicon">
