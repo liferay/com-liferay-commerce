@@ -189,7 +189,7 @@ public class ResourceGenerator {
 	}
 
 	public String toResourceImplementationMethods(
-		List<Method> methods, Set<ComponentDefinition> schemaComponents) {
+		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -200,13 +200,14 @@ public class ResourceGenerator {
 
 			sb.append("\t@Override\n");
 
-			sb.append(_getMethodDeclaration(method, false, schemaComponents));
+			sb.append(
+				_getMethodDeclaration(method, false, componentDefinitions));
 
 			sb.append(" {\n");
 
 			if (method.hasResponseContent()) {
 				ComponentDefinition schemaComponentDefinition =
-					_getSchemaComponentDefinition(method, schemaComponents);
+					_getSchemaComponentDefinition(method, componentDefinitions);
 
 				if (schemaComponentDefinition.isArray()) {
 					sb.append("\t\treturn Collections.emptyList();\n");
@@ -230,7 +231,7 @@ public class ResourceGenerator {
 	}
 
 	public String toResourceInterfaceMethods(
-		List<Method> methods, Set<ComponentDefinition> schemaComponents) {
+		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -252,7 +253,8 @@ public class ResourceGenerator {
 
 			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
 
-			sb.append(_getMethodDeclaration(method, true, schemaComponents));
+			sb.append(
+				_getMethodDeclaration(method, true, componentDefinitions));
 
 			sb.append(";\n");
 
@@ -282,13 +284,13 @@ public class ResourceGenerator {
 
 	private String _getMethodDeclaration(
 		Method method, boolean annotateParameter,
-		Set<ComponentDefinition> schemaComponents) {
+		Set<ComponentDefinition> componentDefinitions) {
 
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("\tpublic ");
 
-		sb.append(_getReturnValue(method, schemaComponents));
+		sb.append(_getReturnValue(method, componentDefinitions));
 
 		sb.append(method.getName());
 
