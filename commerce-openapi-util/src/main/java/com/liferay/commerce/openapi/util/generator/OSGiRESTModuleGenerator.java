@@ -71,14 +71,34 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			"osgi.module.application.name");
 		_author = properties.getProperty("osgi.module.author");
 
-		if ("allowed".equals(
+		if ("true".equals(
 				properties.getProperty(
-					"osgi.module.application.security.basic"))) {
+					"osgi.module.application.security.basic.auth.allowed"))) {
 
 			_basicSecurityAllowed = true;
 		}
 		else {
 			_basicSecurityAllowed = false;
+		}
+
+		if ("true".equals(
+				properties.getProperty(
+					"osgi.module.application.security.oauth2.auth.allowed"))) {
+
+			_oauth2SecurityAllowed = true;
+		}
+		else {
+			_oauth2SecurityAllowed = false;
+		}
+
+		if ("true".equals(
+				properties.getProperty(
+					"osgi.module.application.security.guests.allowed"))) {
+
+			_guestsAllowed = true;
+		}
+		else {
+			_guestsAllowed = false;
 		}
 
 		_bundleName = properties.getProperty("osgi.module.bundle.name");
@@ -220,12 +240,36 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		StringBuilder sb = new StringBuilder();
 
 		if (_basicSecurityAllowed) {
-			sb.append(getTemplate("basic.authentication.tpl"));
-			sb.append(",");
+			sb.append(getTemplate("auth/basic.verifier.tpl"));
 		}
 
 		osgiApplicationComponent = osgiApplicationComponent.replace(
-			"${BASIC_AUTHENTICATION}", sb.toString());
+			"${BASIC_AUTH_VERIFIER}", sb.toString());
+
+		sb = new StringBuilder();
+
+		if (_oauth2SecurityAllowed) {
+			sb.append(getTemplate("auth/oauth2.verifier.tpl"));
+		}
+		else {
+			sb.append("\"liferay.oauth2=false\"");
+		}
+
+		osgiApplicationComponent = osgiApplicationComponent.replace(
+			"${OAUTH2_AUTH_VERIFIER}", sb.toString());
+
+		osgiApplicationComponent = osgiApplicationComponent.replace(
+			"${PORTAL_SESSION_AUTH_VERIFIER}",
+			getTemplate("auth/portal.session.verifier.tpl"));
+
+		sb = new StringBuilder();
+
+		if (_guestsAllowed) {
+			sb.append(getTemplate("auth/guest.verifier.tpl"));
+		}
+
+		osgiApplicationComponent = osgiApplicationComponent.replace(
+			"${GUEST_ALLOWED}", sb.toString());
 
 		osgiApplicationComponent = osgiApplicationComponent.replace(
 			"${APPLICATION_CLASS}", _applicationClassName);
@@ -468,9 +512,11 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private final String _bundleName;
 	private final String _bundleSynbolicName;
 	private final String _bundleVersion;
+	private final boolean _guestsAllowed;
 	private final String _jaxRSJSONPackagePath;
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;
+	private final boolean _oauth2SecurityAllowed;
 	private final boolean _overwriteBND;
 	private final boolean _overwriteBuildGradle;
 	private final boolean _overwriteImplementation;
