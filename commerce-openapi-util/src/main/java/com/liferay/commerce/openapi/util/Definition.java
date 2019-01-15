@@ -55,7 +55,7 @@ public class Definition {
 			}
 		}
 
-		return path.addMethod(method);
+		return path.addMethod(method, _componentDefinitions);
 	}
 
 	public Set<ComponentDefinition> getComponentDefinitions() {
