@@ -8,7 +8,7 @@
 
 	{@param? _handleToggleItem: ?}
 
-	<div 
+	<div
 		class="user-item commerce-bdc-{$colorId}"
 		data-onclick="{$_handleToggleItem}"
 	>
@@ -20,8 +20,9 @@
 				{/call}
 			</span>
 		</div>
-		<button 
-			class="user-item__action" 
+
+		<button
+			class="user-item__action"
 		>
 			{call AddToTickItem.render}
 				{param isAdded: $_selected /}

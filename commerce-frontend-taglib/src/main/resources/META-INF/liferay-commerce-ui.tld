@@ -28,6 +28,17 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>add-organizations-modal</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.AddOrganizationsModalTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>componentId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>add-to-cart</name>
 		<tag-class>
 			com.liferay.commerce.frontend.taglib.servlet.taglib.AddToCartTag</tag-class>
@@ -148,17 +159,6 @@
 		<name>user-roles-modal</name>
 		<tag-class>
 			com.liferay.commerce.frontend.taglib.servlet.taglib.UserRolesModalTag</tag-class>
-		<body-content>empty</body-content>
-		<attribute>
-			<name>componentId</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>add-organizations-modal</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.AddOrganizationsModalTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>componentId</name>

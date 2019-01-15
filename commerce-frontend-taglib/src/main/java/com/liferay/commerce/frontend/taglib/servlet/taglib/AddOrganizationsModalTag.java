@@ -34,7 +34,8 @@ public class AddOrganizationsModalTag extends ComponentRendererTag {
 
 		putValue(
 			"organizationsAPI",
-			PortalUtil.getPortalURL(request) + "/o/commerce-ui/search-organizations");
+			PortalUtil.getPortalURL(request) +
+				"/o/commerce-ui/search-organizations");
 
 		putValue("query", "");
 
