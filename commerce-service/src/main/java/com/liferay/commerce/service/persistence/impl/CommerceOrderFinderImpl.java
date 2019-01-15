@@ -57,8 +57,6 @@ public class CommerceOrderFinderImpl
 		try {
 			session = openSession();
 
-			long groupId = (long)queryDefinition.getAttribute("groupId");
-
 			String sql = _customSQL.get(getClass(), COUNT_BY_G_U_O);
 
 			sql = StringUtil.replace(
@@ -90,6 +88,8 @@ public class CommerceOrderFinderImpl
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
+
+			long groupId = (Long)queryDefinition.getAttribute("groupId");
 
 			qPos.add(groupId);
 
@@ -158,7 +158,7 @@ public class CommerceOrderFinderImpl
 		try {
 			session = openSession();
 
-			long groupId = (long)queryDefinition.getAttribute("groupId");
+			long groupId = (Long)queryDefinition.getAttribute("groupId");
 
 			String sql = _customSQL.get(getClass(), FIND_BY_G_U_O);
 
