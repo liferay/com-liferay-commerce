@@ -85,7 +85,7 @@ public class PaymentMethodCommerceCheckoutStep
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
 		List<CommercePaymentMethod> commercePaymentMethods =
-			_commercePaymentEngine.getCommercePaymentMethods(
+			_commercePaymentEngine.getEnabledCommercePaymentMethodsForOrder(
 				commerceOrder.getCommerceOrderId());
 
 		if (commercePaymentMethods.isEmpty()) {

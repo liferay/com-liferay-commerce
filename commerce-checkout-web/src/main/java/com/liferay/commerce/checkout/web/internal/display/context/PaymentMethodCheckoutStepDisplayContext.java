@@ -55,7 +55,7 @@ public class PaymentMethodCheckoutStepDisplayContext {
 				WebKeys.THEME_DISPLAY);
 
 		List<CommercePaymentMethod> commercePaymentMethods =
-			_commercePaymentEngine.getCommercePaymentMethods(
+			_commercePaymentEngine.getEnabledCommercePaymentMethodsForOrder(
 				_commerceOrder.getCommerceOrderId());
 
 		return ListUtil.sort(
