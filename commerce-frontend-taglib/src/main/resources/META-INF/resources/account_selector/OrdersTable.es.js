@@ -6,7 +6,7 @@ import template from './OrdersTable.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-import './AutocompleteItem.es';
+import '../autocomplete_item/AutocompleteItem.es';
 
 class OrdersTable extends Component {
 

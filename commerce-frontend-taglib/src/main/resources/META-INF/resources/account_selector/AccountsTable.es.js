@@ -11,7 +11,7 @@ import './AccountsTableItem.es';
 class AccountsTable extends Component {
 
 	created() {
-		this._handleFilterChange = debounce(this._handleFilterChange, 500);
+		this._handleFilterChange = debounce(this._handleFilterChange.bind(this), 500);
 	}
 
 	handleSelectAccount(accountData) {
@@ -38,7 +38,7 @@ Soy.register(AccountsTable, template);
 AccountsTable.STATE = {
 	currentAccount: Config.shapeOf(
 		{
-			id: Config.string(),
+			accountId: Config.number(),
 			name: Config.string(),
 			thumbnail: Config.string()
 		}
@@ -47,7 +47,7 @@ AccountsTable.STATE = {
 	accounts: Config.arrayOf(
 		Config.shapeOf(
 			{
-				id: Config.string(),
+				accountId: Config.number(),
 				name: Config.string(),
 				thumbnail: Config.string()
 			}

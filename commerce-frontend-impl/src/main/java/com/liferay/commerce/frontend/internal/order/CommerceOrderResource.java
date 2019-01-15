@@ -19,8 +19,8 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import com.liferay.commerce.frontend.internal.order.model.Order;
-import com.liferay.commerce.frontend.internal.order.model.OrderList;
+import com.liferay.commerce.frontend.internal.account.model.Order;
+import com.liferay.commerce.frontend.internal.account.model.OrderList;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
