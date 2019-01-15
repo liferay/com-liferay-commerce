@@ -19,6 +19,10 @@ package com.liferay.commerce.openapi.util.importer.exception;
  */
 public class ImporterException extends RuntimeException {
 
+	public ImporterException(String message) {
+		super(message);
+	}
+
 	public ImporterException(String message, Throwable cause) {
 		super(message, cause);
 	}

@@ -16,8 +16,10 @@ package com.liferay.commerce.openapi.util.importer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import com.liferay.commerce.openapi.util.ComponentDefinition;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Schema;
+import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,34 @@ import org.slf4j.LoggerFactory;
  * @author Igor Beslic
  */
 public class ParameterImporter {
+
+	public static Parameter fromComponentDefinition(
+			JsonNode parameterReferenceJSONNode,
+			List<ComponentDefinition> componentDefinitions)
+		throws ImporterException {
+
+		String parameterReference = Parameter.getParameterReference(
+			parameterReferenceJSONNode.asText());
+
+		_logger.debug("Parameter is reference to {}", parameterReference);
+
+		for (ComponentDefinition componentDefinition : componentDefinitions) {
+			if (!componentDefinition.isParameter()) {
+				continue;
+			}
+
+			if (parameterReference.equals(componentDefinition.getName())) {
+				_logger.debug(
+					"Reference resolved to {}",
+					componentDefinition.getParameter());
+
+				return componentDefinition.getParameter();
+			}
+		}
+
+		throw new ImporterException(
+			"Unable to resolve parameter reference " + parameterReference);
+	}
 
 	public static Parameter fromJSONNode(JsonNode parameterJSONNode) {
 		JsonNode in = parameterJSONNode.get("in");
