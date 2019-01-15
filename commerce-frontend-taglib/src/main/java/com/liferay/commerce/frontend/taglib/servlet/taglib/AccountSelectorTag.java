@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
@@ -26,6 +28,9 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Layout;
+import com.liferay.portal.kernel.model.LayoutSet;
+import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -40,6 +45,8 @@ public class AccountSelectorTag extends ComponentRendererTag {
 	public int doStartTag() {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		LayoutSet layoutSet = themeDisplay.getLayoutSet();
 
 		try {
 			CommerceContext commerceContext =
@@ -73,14 +80,35 @@ public class AccountSelectorTag extends ComponentRendererTag {
 
 				putValue("currentAccount", currentAccountModel);
 			}
+
+			Layout accountManagmentLayout = _getAccountManagementLayout(
+				themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
+
+			putValue(
+				"viewAllAccountsLink",
+				PortalUtil.getLayoutFriendlyURL(
+					accountManagmentLayout, themeDisplay));
+
+			Layout orderManagmentLayout = _getOrdersLayout(
+				themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
+
+			putValue(
+				"viewAllOrdersLink",
+				PortalUtil.getLayoutFriendlyURL(
+					orderManagmentLayout, themeDisplay));
+
+			putValue(
+				"accountsAPI",
+				PortalUtil.getPortalURL(request) + "/o/commerce-ui/");
+
+			putValue(
+				"createNewOrderLink",
+				PortalUtil.getLayoutFriendlyURL(
+					orderManagmentLayout, themeDisplay));
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
 		}
-
-		putValue(
-			"dataSetAPI",
-			PortalUtil.getPortalURL(request) + "/o/commerce-data-set");
 
 		putValue(
 			"spritemap",
@@ -101,6 +129,47 @@ public class AccountSelectorTag extends ComponentRendererTag {
 
 		return npmResolver.resolveModuleName(
 			"commerce-frontend-taglib/account_selector/AccountSelector.es");
+	}
+
+	private Layout _getAccountManagementLayout(
+			long groupId, boolean privateLayout)
+		throws PortalException {
+
+		Layout layout = LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
+			groupId, privateLayout, "/account-management");
+
+		if (layout != null) {
+			return layout;
+		}
+
+		long plid = PortalUtil.getPlidFromPortletId(
+			groupId, CommerceAccountPortletKeys.COMMERCE_ACCOUNT);
+
+		if (plid > 0) {
+			layout = LayoutLocalServiceUtil.fetchLayout(plid);
+		}
+
+		return layout;
+	}
+
+	private Layout _getOrdersLayout(long groupId, boolean privateLayout)
+		throws PortalException {
+
+		Layout layout = LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
+			groupId, privateLayout, "/orders");
+
+		if (layout != null) {
+			return layout;
+		}
+
+		long plid = PortalUtil.getPlidFromPortletId(
+			groupId, CommercePortletKeys.COMMERCE_ORDER_CONTENT);
+
+		if (plid > 0) {
+			layout = LayoutLocalServiceUtil.fetchLayout(plid);
+		}
+
+		return layout;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
