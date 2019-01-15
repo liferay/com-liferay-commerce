@@ -30,6 +30,9 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION_SELECT + "=(osgi.jaxrs.name=Liferay.OAuth2)",
 		JaxrsWhiteboardConstants.JAX_RS_NAME + "=CommerceOpenApiAdmin.Rest",
 		"auth.verifier.auth.verifier.BasicAuthHeaderAuthVerifier.urls.includes=/*",
+		"auth.verifier.auth.verifier.OAuth2RestAuthVerifier.urls.includes=/*",
+		"auth.verifier.auth.verifier.PortalSessionAuthVerifier.urls.includes=/*",
+		"auth.verifier.guest.allowed=true",
 		"oauth2.scopechecker.type=annotations"
 	},
 	service = Application.class
