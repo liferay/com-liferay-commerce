@@ -66,7 +66,7 @@ public class ComponentImporter {
 
 			ComponentDefinition componentDefinition = new ComponentDefinition(
 				parameterField.getKey(),
-				parameterImporter.getParameter(parameterField.getValue()));
+				parameterImporter.fromJSONNode(parameterField.getValue()));
 
 			components.add(componentDefinition);
 

@@ -318,7 +318,7 @@ public class OpenAPIImporter {
 				}
 				else {
 					parameters.add(
-						ParameterImporter.getParameter(parameterJSONNode));
+						ParameterImporter.fromJSONNode(parameterJSONNode));
 				}
 			});
 
