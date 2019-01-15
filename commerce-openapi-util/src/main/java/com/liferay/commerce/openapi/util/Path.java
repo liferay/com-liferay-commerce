@@ -17,10 +17,12 @@ package com.liferay.commerce.openapi.util;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * @author Igor Beslic
+ * @author Ivica Cardic
  */
 public class Path {
 
@@ -29,18 +31,14 @@ public class Path {
 		_path = path;
 	}
 
-	public boolean addMethod(Method method) {
-		for (Parameter parameter : method.getParameters()) {
-			if (parameter.getSchema() == null) {
-				continue;
-			}
+	public boolean addMethod(
+		Method method, Set<ComponentDefinition> componentDefinitions) {
 
-			Schema schema = parameter.getSchema();
+		_checkParameterReferenceModel(method);
 
-			if (schema.getReferencedModel() != null) {
-				_referencedModels.add(schema.getReferencedModel());
-			}
-		}
+		_checkRequestBodyReferenceModel(method);
+
+		_checkResponseReferenceModel(method, componentDefinitions);
 
 		return _methods.add(method);
 	}
@@ -94,6 +92,80 @@ public class Path {
 		_toString = sb.toString();
 
 		return _toString;
+	}
+
+	private void _checkParameterReferenceModel(Method method) {
+		for (Parameter parameter : method.getParameters()) {
+			_checkReferenceModel(parameter.getSchema());
+		}
+	}
+
+	private void _checkReferenceModel(Schema schema) {
+		if (schema == null) {
+			return;
+		}
+
+		if (schema.getReferencedModel() != null) {
+			_referencedModels.add(schema.getReferencedModel());
+		}
+	}
+
+	private void _checkRequestBodyReferenceModel(Method method) {
+		for (Content content : method.getRequestBody()) {
+			_checkReferenceModel(content.getSchema());
+		}
+	}
+
+	private void _checkResponseReferenceModel(
+		Method method, Set<ComponentDefinition> componentDefinitions) {
+
+		for (Response response : method.getResponses()) {
+			if (!response.hasContent()) {
+				continue;
+			}
+
+			for (Content content : response.getContents()) {
+				if (content.getSchema() == null) {
+					continue;
+				}
+
+				Schema schema = content.getSchema();
+
+				if (schema.getReferencedModel() == null) {
+					continue;
+				}
+
+				ComponentDefinition componentDefinition =
+					_getSchemaComponentDefinition(
+						schema.getReferencedModel(), componentDefinitions);
+
+				if ((componentDefinition == null) ||
+					(componentDefinition.getItemsReferencedModel() == null)) {
+
+					_referencedModels.add(schema.getReferencedModel());
+				}
+				else {
+					_referencedModels.add(
+						componentDefinition.getItemsReferencedModel());
+				}
+			}
+		}
+	}
+
+	private ComponentDefinition _getSchemaComponentDefinition(
+		String name, Set<ComponentDefinition> componentDefinitions) {
+
+		for (ComponentDefinition componentDefinition : componentDefinitions) {
+			if (componentDefinition.isParameter()) {
+				continue;
+			}
+
+			if (Objects.equals(name, componentDefinition.getName())) {
+				return componentDefinition;
+			}
+		}
+
+		return null;
 	}
 
 	private final List<Method> _methods = new ArrayList<>();
