@@ -27,14 +27,14 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_BASE + "=${APPLICATION_BASE}",
-		JaxrsWhiteboardConstants.JAX_RS_EXTENSION_SELECT + "=(osgi.jaxrs.name=Liferay.OAuth2)",
 		JaxrsWhiteboardConstants.JAX_RS_NAME + "=${APPLICATION_NAME}.Rest",
-		${BASIC_AUTHENTICATION}
-		"oauth2.scopechecker.type=annotations"
+		${PORTAL_SESSION_AUTH_VERIFIER},
+		${BASIC_AUTH_VERIFIER},
+		${OAUTH2_AUTH_VERIFIER},
+		${GUEST_ALLOWED}
 	},
 	service = Application.class
 )
 @Generated(value = "OSGiRESTModuleGenerator")
 public class ${APPLICATION_CLASS} extends Application {
-
 }

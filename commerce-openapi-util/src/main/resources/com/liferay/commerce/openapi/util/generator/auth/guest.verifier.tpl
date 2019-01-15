@@ -1,0 +1,1 @@
+"auth.verifier.guest.allowed=true"
