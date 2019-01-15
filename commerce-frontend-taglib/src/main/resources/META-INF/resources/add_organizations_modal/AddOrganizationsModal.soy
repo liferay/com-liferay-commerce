@@ -1,20 +1,17 @@
-{namespace UserRolesModal}
+{namespace AddOrganizationsModal}
 
 {template .render}
 
-	{@param? roles: list<[
-		id: string|int,
-		name: string
+	{@param? organizations: list<[
+		id: string | number,
+		name: string,
+		colorId: number
 	]>}
 
-	{@param? selectedRoles: list<[
-		id: string|int,
-		name: string
-	]>}
-
-	{@param? filteredRoles: list<[
-		id: string|int,
-		name: string
+	{@param? selectedOrganizations: list<[
+		id: string | number,
+		name: string,
+		colorId: number
 	]>}
 
 	{@param? query: string }
@@ -25,7 +22,7 @@
 	{@param? _handleInputBox: any }
 	{@param? _handleFormSubmit: any }
 	{@param? _handleCloseModal: any }
-	{@param? _updateRoles: any }
+	{@param? _addOrganizations: any }
 
 	{let $formattedQuery kind="text"}
 		{nil}
@@ -38,7 +35,7 @@
 		<div class="commerce-modal">
 			<div class="commerce-modal__header">
 				<h3 class="commerce-modal__title">
-					Choose user roles
+					Add organization to this account
 				</h3>
 
 				<button
@@ -54,8 +51,8 @@
 
 			<div class="commerce-modal__content">
 
-				<label class="commerce-modal__label" for="user-roles-input-text">
-					Available roles
+				<label class="commerce-modal__label">
+					Organization name
 				</label>
 
 				<div class="user-invitation">
@@ -69,12 +66,12 @@
 
 						<div class="autocomplete-input__wrapper">
 							<div class="autocomplete-input__content">
-								{if isNonnull($selectedRoles)}
-									{foreach $role in $selectedRoles}
-										{call RoleInputItem.render}
+								{if isNonnull($selectedOrganizations)}
+									{foreach $addedOrganization in $selectedOrganizations}
+										{call OrganizationInputItem.render}
 											{param events: ['removeItem' : $_toggleItem] /}
-											{param id: $role.id /}
-											{param name: $role.name /}
+											{param id: $addedOrganization.id /}
+											{param name: $addedOrganization.name /}
 											{param spritemap: $spritemap /}
 										{/call}
 									{/foreach}
@@ -83,7 +80,6 @@
 									<input
 										class="autocomplete-input__box"
 										type="text"
-										id="user-roles-input-text"
 										value="{$formattedQuery}"
 										data-onkeyup="{$_handleInputBox}"
 									/>
@@ -93,34 +89,22 @@
 					</div>
 
 					<div class="user-invitation__list">
-						{if isNonnull($filteredRoles) and length($filteredRoles) > 0 }
-							{foreach $role in $filteredRoles}
-								{call RoleListItem.render}
+						{if isNonnull($organizations) and length($organizations) > 0 }
+							{foreach $organization in $organizations}
+								{call OrganizationListItem.render}
 									{param events: ['toggleItem': $_toggleItem] /}
-									{param id: $role.id /}
-									{param name: $role.name /}
+									{param id: $organization.id /}
+									{param name: $organization.name /}
+									{param colorId: $organization.colorId /}
+									{param selectedOrganizations: $selectedOrganizations /}
 									{param query: $formattedQuery /}
-									{param selectedRoles: $selectedRoles /}
 								{/call}
 							{/foreach}
-						{else}
-							{if isNonnull($query) and $query != ''}
-								<div class="no-element-found">
-									No element found
-								</div>
-							{else}
-								{if isNonnull($roles) and length($roles) > 0 }
-									{foreach $role in $roles}
-										{call RoleListItem.render}
-											{param events: ['toggleItem': $_toggleItem] /}
-											{param id: $role.id /}
-											{param name: $role.name /}
-											{param query: $formattedQuery /}
-											{param selectedRoles: $selectedRoles /}
-										{/call}
-									{/foreach}
-								{/if}
-							{/if}
+						{/if}
+						{if isNonnull($organizations) and length($organizations) == 0 }
+							<div class="no-element-found">
+								No element found
+							</div>
 						{/if}
 					</div>
 				</div>
@@ -128,23 +112,16 @@
 
 			{let $inviteButtonClasses kind="text"}
 				minium-button minium-button--big
-				{if isNonnull($selectedRoles) and length($selectedRoles) == 0}
+				{if isNonnull($selectedOrganizations) and length($selectedOrganizations) == 0}
 					{sp}minium-button--disabled
 				{/if}
 			{/let}
 			<div class="commerce-modal__actions">
 				<button
-					class="minium-button minium-button--big minium-button--outline"
-					data-onclick="{$_handleCloseModal}"
-				>
-					Cancel
-				</button>
-
-				<button
 					class="{$inviteButtonClasses}"
-					data-onclick="{$_updateRoles}"
+					data-onclick="{$_addOrganizations}"
 				>
-					Done
+					Add organization
 				</button>
 			</div>
 		</div>
