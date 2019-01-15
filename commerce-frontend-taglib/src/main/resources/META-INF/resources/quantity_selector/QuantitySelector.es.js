@@ -42,7 +42,8 @@ class QuantitySelector extends Component {
 		return tempValue <= this.maxQuantity;
 	}
 
-	handlePrevQuantity() {
+	handlePrevQuantity(e) {
+		e.preventDefault();
 		if (!this.isPrevAvailable) {
 			return (this.showError = true);
 		}
@@ -72,7 +73,8 @@ class QuantitySelector extends Component {
 		this.updateQuantity(tempQuantity);
 	}
 
-	handleNextQuantity() {
+	handleNextQuantity(e) {
+		e.preventDefault();
 		if (!this.isNextAvailable) {
 			return (this.showError = true);
 		}
