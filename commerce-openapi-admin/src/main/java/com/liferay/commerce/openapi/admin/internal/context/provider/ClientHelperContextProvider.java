@@ -14,8 +14,13 @@
 
 package com.liferay.commerce.openapi.admin.internal.context.provider;
 
+import com.liferay.commerce.openapi.admin.context.ClientHelper;
 import com.liferay.commerce.openapi.admin.context.Pagination;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,10 +43,11 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	service = ContextProvider.class
 )
 @Provider
-public class PaginationContextProvider implements ContextProvider<Pagination> {
+public class ClientHelperContextProvider
+	implements ContextProvider<ClientHelper> {
 
 	@Override
-	public Pagination createContext(Message message) {
+	public ClientHelper createContext(Message message) {
 		HttpServletRequest httpServletRequest =
 			(HttpServletRequest)message.getContextualProperty("HTTP.REQUEST");
 
@@ -49,7 +55,20 @@ public class PaginationContextProvider implements ContextProvider<Pagination> {
 		int itemsPerPage = ParamUtil.getInteger(
 			httpServletRequest, "pageSize", 20);
 
-		return new Pagination(itemsPerPage, pageNumber);
+		Pagination pagination = new Pagination(itemsPerPage, pageNumber);
+
+		String sortString = ParamUtil.getString(
+			httpServletRequest, "sortField");
+		String sortDir = ParamUtil.getString(httpServletRequest, "sortDir");
+
+		Sort sort = SortFactoryUtil.create(
+			StringUtil.trim(sortString), sortDir.equals("desc"));
+
+		if (Validator.isNull(sortString)) {
+			sort = null;
+		}
+
+		return new ClientHelper(pagination, sort);
 	}
 
 }
