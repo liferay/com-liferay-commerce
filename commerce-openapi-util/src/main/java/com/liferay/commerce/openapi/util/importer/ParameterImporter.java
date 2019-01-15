@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ParameterImporter {
 
-	public static Parameter getParameter(JsonNode parameterJSONNode) {
+	public static Parameter fromJSONNode(JsonNode parameterJSONNode) {
 		JsonNode in = parameterJSONNode.get("in");
 		JsonNode nameJSONNode = parameterJSONNode.get("name");
 		JsonNode requiredJSONNode = parameterJSONNode.get("required");
@@ -85,7 +85,7 @@ public class ParameterImporter {
 
 		parametersParentJSONNode.forEach(
 			parameterJSONNode -> {
-				parameters.add(getParameter(parameterJSONNode));
+				parameters.add(fromJSONNode(parameterJSONNode));
 			});
 
 		return parameters;
