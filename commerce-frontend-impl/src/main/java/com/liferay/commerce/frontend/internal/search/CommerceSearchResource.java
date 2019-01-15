@@ -19,6 +19,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.internal.account.CommerceAccountResource;
 import com.liferay.commerce.frontend.internal.account.model.Account;
 import com.liferay.commerce.frontend.internal.account.model.AccountList;
@@ -59,6 +61,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -137,8 +141,14 @@ public class CommerceSearchResource {
 
 		List<SearchItemModel> searchItemModels = new ArrayList<>();
 
+		HttpServletRequest httpServletRequest = themeDisplay.getRequest();
+
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
 		AccountList accountList = _commerceAccountResource.getAccountList(
-			themeDisplay.getScopeGroupId(), null, queryString, 1, 5,
+			null, commerceContext.getCommerceSiteType(), queryString, 1, 5,
 			themeDisplay.getPathImage());
 
 		searchItemModels.add(
@@ -184,7 +194,8 @@ public class CommerceSearchResource {
 		List<SearchItemModel> searchItemModels = new ArrayList<>();
 
 		OrderList orderList = _commerceOrderResource.getOrderList(
-			themeDisplay.getScopeGroupId(), queryString, 1, 5);
+			themeDisplay.getScopeGroupId(), queryString, 1, 5,
+			themeDisplay.getRequest());
 
 		searchItemModels.add(
 			new SearchItemModel(
