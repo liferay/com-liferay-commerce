@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.Iterator;
@@ -58,6 +57,8 @@ public class CommerceOrderFinderImpl
 		try {
 			session = openSession();
 
+			long groupId = (long)queryDefinition.getAttribute("groupId");
+
 			String sql = _customSQL.get(getClass(), COUNT_BY_G_U_O);
 
 			sql = StringUtil.replace(
@@ -84,7 +85,7 @@ public class CommerceOrderFinderImpl
 				sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
 				names);
 
-			int groupId = (int)queryDefinition.getAttribute("groupId");
+			sql = _customSQL.replaceAndOperator(sql, true);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -92,9 +93,7 @@ public class CommerceOrderFinderImpl
 
 			qPos.add(groupId);
 
-			if (Validator.isNotNull(keywords)) {
-				qPos.add(keywords);
-			}
+			qPos.add(names, 2);
 
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
@@ -159,6 +158,8 @@ public class CommerceOrderFinderImpl
 		try {
 			session = openSession();
 
+			long groupId = (long)queryDefinition.getAttribute("groupId");
+
 			String sql = _customSQL.get(getClass(), FIND_BY_G_U_O);
 
 			sql = StringUtil.replace(
@@ -182,10 +183,10 @@ public class CommerceOrderFinderImpl
 			String[] names = _customSQL.keywords(keywords);
 
 			sql = _customSQL.replaceKeywords(
-				sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
+				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
 				names);
 
-			int groupId = (int)queryDefinition.getAttribute("groupId");
+			sql = _customSQL.replaceAndOperator(sql, true);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -195,9 +196,7 @@ public class CommerceOrderFinderImpl
 
 			qPos.add(groupId);
 
-			if (Validator.isNotNull(keywords)) {
-				qPos.add(keywords);
-			}
+			qPos.add(names, 2);
 
 			return (List<CommerceOrder>)QueryUtil.list(
 				q, getDialect(), queryDefinition.getStart(),

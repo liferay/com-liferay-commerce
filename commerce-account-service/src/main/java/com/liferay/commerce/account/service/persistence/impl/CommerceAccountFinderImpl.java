@@ -162,13 +162,15 @@ public class CommerceAccountFinderImpl
 				sql = StringUtil.add(
 					sql,
 					" AND (CommerceAccount.type_ = " +
-						CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS + ")");
+						CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS + ")",
+					StringPool.BLANK);
 			}
 			else if (!b2b && b2c) {
 				sql = StringUtil.add(
 					sql,
 					" AND (CommerceAccount.type_ = " +
-						CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL + ")");
+						CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL + ")",
+					StringPool.BLANK);
 			}
 
 			sql = _customSQL.replaceAndOperator(sql, true);
