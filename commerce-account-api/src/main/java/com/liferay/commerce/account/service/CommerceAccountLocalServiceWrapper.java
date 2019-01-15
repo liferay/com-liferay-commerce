@@ -345,8 +345,7 @@ public class CommerceAccountLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		long userId, Long parentCommerceAccountId,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
 		String keywords, int start, int end) {
 		return _commerceAccountLocalService.getUserCommerceAccounts(userId,
 			parentCommerceAccountId, commerceSiteType, keywords, start, end);
@@ -354,9 +353,7 @@ public class CommerceAccountLocalServiceWrapper
 
 	@Override
 	public int getUserCommerceAccountsCount(long userId,
-		Long parentCommerceAccountId,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		String keywords) {
+		Long parentCommerceAccountId, int commerceSiteType, String keywords) {
 		return _commerceAccountLocalService.getUserCommerceAccountsCount(userId,
 			parentCommerceAccountId, commerceSiteType, keywords);
 	}

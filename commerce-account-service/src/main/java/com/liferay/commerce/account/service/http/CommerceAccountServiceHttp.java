@@ -256,9 +256,7 @@ public class CommerceAccountServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		HttpPrincipal httpPrincipal,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		int start, int end)
+		HttpPrincipal httpPrincipal, int commerceSiteType, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
@@ -292,8 +290,7 @@ public class CommerceAccountServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
 		HttpPrincipal httpPrincipal, Long parentCommerceAccountId,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		String keywords, int start, int end)
+		int commerceSiteType, String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
@@ -328,8 +325,7 @@ public class CommerceAccountServiceHttp {
 
 	public static int getUserCommerceAccountsCount(
 		HttpPrincipal httpPrincipal, Long parentCommerceAccountId,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		String keywords)
+		int commerceSiteType, String keywords)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
@@ -494,18 +490,13 @@ public class CommerceAccountServiceHttp {
 			long.class, long.class
 		};
 	private static final Class<?>[] _getUserCommerceAccountsParameterTypes6 = new Class[] {
-			com.liferay.commerce.account.util.CommerceSiteType.class, int.class,
-			int.class
+			int.class, int.class, int.class
 		};
 	private static final Class<?>[] _getUserCommerceAccountsParameterTypes7 = new Class[] {
-			Long.class, com.liferay.commerce.account.util.CommerceSiteType.class,
-			String.class, int.class, int.class
+			Long.class, int.class, String.class, int.class, int.class
 		};
 	private static final Class<?>[] _getUserCommerceAccountsCountParameterTypes8 =
-		new Class[] {
-			Long.class, com.liferay.commerce.account.util.CommerceSiteType.class,
-			String.class
-		};
+		new Class[] { Long.class, int.class, String.class };
 	private static final Class<?>[] _searchCommerceAccountsParameterTypes9 = new Class[] {
 			long.class, String.class, Boolean.class, int.class, int.class,
 			com.liferay.portal.kernel.search.Sort.class
