@@ -96,8 +96,7 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 
 	@Override
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		int start, int end)
+		int commerceSiteType, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountService.getUserCommerceAccounts(commerceSiteType,
 			start, end);
@@ -105,9 +104,8 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 
 	@Override
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		Long parentCommerceAccountId,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		String keywords, int start, int end)
+		Long parentCommerceAccountId, int commerceSiteType, String keywords,
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountService.getUserCommerceAccounts(parentCommerceAccountId,
 			commerceSiteType, keywords, start, end);
@@ -115,8 +113,7 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 
 	@Override
 	public int getUserCommerceAccountsCount(Long parentCommerceAccountId,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		String keywords)
+		int commerceSiteType, String keywords)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountService.getUserCommerceAccountsCount(parentCommerceAccountId,
 			commerceSiteType, keywords);

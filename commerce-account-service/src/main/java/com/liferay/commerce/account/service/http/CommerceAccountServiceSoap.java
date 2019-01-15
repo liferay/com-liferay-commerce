@@ -161,8 +161,7 @@ public class CommerceAccountServiceSoap {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountSoap[] getUserCommerceAccounts(
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		int start, int end) throws RemoteException {
+		int commerceSiteType, int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.account.model.CommerceAccount> returnValue =
 				CommerceAccountServiceUtil.getUserCommerceAccounts(commerceSiteType,
@@ -178,9 +177,8 @@ public class CommerceAccountServiceSoap {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountSoap[] getUserCommerceAccounts(
-		Long parentCommerceAccountId,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		String keywords, int start, int end) throws RemoteException {
+		Long parentCommerceAccountId, int commerceSiteType, String keywords,
+		int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.account.model.CommerceAccount> returnValue =
 				CommerceAccountServiceUtil.getUserCommerceAccounts(parentCommerceAccountId,
@@ -196,9 +194,8 @@ public class CommerceAccountServiceSoap {
 	}
 
 	public static int getUserCommerceAccountsCount(
-		Long parentCommerceAccountId,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		String keywords) throws RemoteException {
+		Long parentCommerceAccountId, int commerceSiteType, String keywords)
+		throws RemoteException {
 		try {
 			int returnValue = CommerceAccountServiceUtil.getUserCommerceAccountsCount(parentCommerceAccountId,
 					commerceSiteType, keywords);
