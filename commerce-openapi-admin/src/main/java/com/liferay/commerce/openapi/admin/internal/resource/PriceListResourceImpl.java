@@ -14,8 +14,11 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.admin.resource.PriceListResource;
+
+import java.util.Arrays;
 
 import javax.annotation.Generated;
 
@@ -47,17 +50,15 @@ public class PriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
-	public Response getPriceList(String id, long groupId) {
-		return Response.ok(
-			"Here goes output", MediaType.APPLICATION_JSON
-		).build();
+	public PriceListDTO getPriceList(String id, long groupId) {
+		return new PriceListDTO();
 	}
 
 	@Override
-	public Response getPriceLists(long groupId, int page, int pageSize) {
-		return Response.ok(
-			"Here goes output", MediaType.APPLICATION_JSON
-		).build();
+	public CollectionDTO<PriceListDTO> getPriceLists(
+		long groupId, int page, int pageSize) {
+
+		return new CollectionDTO(Arrays.asList(new PriceListDTO()), 0);
 	}
 
 	@Override
@@ -68,10 +69,8 @@ public class PriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
-	public Response upsertPriceList(PriceListDTO priceListDTO) {
-		return Response.ok(
-			"Here goes output", MediaType.APPLICATION_JSON
-		).build();
+	public PriceListDTO upsertPriceList(PriceListDTO priceListDTO) {
+		return new PriceListDTO();
 	}
 
 }

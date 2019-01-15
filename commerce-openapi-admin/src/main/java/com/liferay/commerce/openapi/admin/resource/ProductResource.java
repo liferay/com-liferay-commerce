@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.openapi.admin.resource;
 
+import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import javax.annotation.Generated;
 
@@ -38,32 +40,36 @@ public interface ProductResource {
 
 	@DELETE
 	@Path("/{id}")
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProduct(@PathParam("id") String id);
 
 	@GET
 	@Path("/{id}")
-	@Produces({"application/*", "application/json"})
-	public Response getProduct(
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public ProductDTO getProduct(
 		@PathParam("id") String id, @QueryParam("group_id") long groupId);
 
 	@GET
 	@Path("/")
-	@Produces({"application/*", "application/json"})
-	public Response getProducts(
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<ProductDTO> getProducts(
 		@QueryParam("group_id") long groupId, @QueryParam("page") int page,
 		@QueryParam("pageSize") int pageSize);
 
 	@Consumes("application/*")
 	@Path("/{id}")
-	@Produces("application/json")
 	@PUT
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProduct(
 		@PathParam("id") String id, ProductDTO productDTO);
 
 	@Consumes("application/*")
 	@Path("/")
 	@POST
-	@Produces("application/json")
-	public Response upsertProduct(ProductDTO productDTO);
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public ProductDTO upsertProduct(ProductDTO productDTO);
 
 }

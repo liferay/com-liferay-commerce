@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.openapi.admin.resource;
 
+import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import javax.annotation.Generated;
 
@@ -38,32 +40,36 @@ public interface PriceListResource {
 
 	@DELETE
 	@Path("/{id}")
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceList(@PathParam("id") String id);
 
 	@GET
 	@Path("/{id}")
-	@Produces({"application/*", "application/json"})
-	public Response getPriceList(
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public PriceListDTO getPriceList(
 		@PathParam("id") String id, @QueryParam("group_id") long groupId);
 
 	@GET
 	@Path("/")
-	@Produces({"application/*", "application/json"})
-	public Response getPriceLists(
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<PriceListDTO> getPriceLists(
 		@QueryParam("group_id") long groupId, @QueryParam("page") int page,
 		@QueryParam("pageSize") int pageSize);
 
 	@Consumes("application/*")
 	@Path("/{id}")
-	@Produces("application/json")
 	@PUT
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceList(
 		@PathParam("id") String id, PriceListDTO priceListDTO);
 
 	@Consumes("application/*")
 	@Path("/")
 	@POST
-	@Produces("application/json")
-	public Response upsertPriceList(PriceListDTO priceListDTO);
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public PriceListDTO upsertPriceList(PriceListDTO priceListDTO);
 
 }

@@ -14,8 +14,11 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductResource;
+
+import java.util.Arrays;
 
 import javax.annotation.Generated;
 
@@ -47,17 +50,15 @@ public class ProductResourceImpl implements ProductResource {
 	}
 
 	@Override
-	public Response getProduct(String id, long groupId) {
-		return Response.ok(
-			"Here goes output", MediaType.APPLICATION_JSON
-		).build();
+	public ProductDTO getProduct(String id, long groupId) {
+		return new ProductDTO();
 	}
 
 	@Override
-	public Response getProducts(long groupId, int page, int pageSize) {
-		return Response.ok(
-			"Here goes output", MediaType.APPLICATION_JSON
-		).build();
+	public CollectionDTO<ProductDTO> getProducts(
+		long groupId, int page, int pageSize) {
+
+		return new CollectionDTO(Arrays.asList(new ProductDTO()), 0);
 	}
 
 	@Override
@@ -68,10 +69,8 @@ public class ProductResourceImpl implements ProductResource {
 	}
 
 	@Override
-	public Response upsertProduct(ProductDTO productDTO) {
-		return Response.ok(
-			"Here goes output", MediaType.APPLICATION_JSON
-		).build();
+	public ProductDTO upsertProduct(ProductDTO productDTO) {
+		return new ProductDTO();
 	}
 
 }
