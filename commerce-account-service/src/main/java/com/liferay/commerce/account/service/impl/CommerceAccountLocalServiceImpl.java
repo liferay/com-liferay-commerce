@@ -22,7 +22,6 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.impl.CommerceAccountImpl;
 import com.liferay.commerce.account.service.base.CommerceAccountLocalServiceBaseImpl;
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
-import com.liferay.commerce.account.util.CommerceSiteType;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -310,9 +309,8 @@ public class CommerceAccountLocalServiceImpl
 
 	@Override
 	public List<CommerceAccount> getUserCommerceAccounts(
-		long userId, Long parentCommerceAccountId,
-		CommerceSiteType commerceSiteType, String keywords, int start,
-		int end) {
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
+		String keywords, int start, int end) {
 
 		QueryDefinition<CommerceAccount> queryDefinition =
 			_getCommerceAccountQueryDefinition(
@@ -326,8 +324,8 @@ public class CommerceAccountLocalServiceImpl
 
 	@Override
 	public int getUserCommerceAccountsCount(
-		long userId, Long parentCommerceAccountId,
-		CommerceSiteType commerceSiteType, String keywords) {
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
+		String keywords) {
 
 		QueryDefinition<CommerceAccount> queryDefinition =
 			_getCommerceAccountQueryDefinition(
@@ -612,15 +610,14 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	private QueryDefinition<CommerceAccount> _getCommerceAccountQueryDefinition(
-		Long parentCommerceAccountId, CommerceSiteType commerceSiteType,
-		String keywords) {
+		Long parentCommerceAccountId, int commerceSiteType, String keywords) {
 
 		QueryDefinition<CommerceAccount> queryDefinition =
 			new QueryDefinition<>();
 
 		boolean b2b = false;
 
-		if (commerceSiteType != CommerceSiteType.B2C) {
+		if (commerceSiteType != CommerceAccountConstants.SITE_TYPE_B2C) {
 			b2b = true;
 		}
 
@@ -628,7 +625,7 @@ public class CommerceAccountLocalServiceImpl
 
 		boolean b2c = false;
 
-		if (commerceSiteType != CommerceSiteType.B2B) {
+		if (commerceSiteType != CommerceAccountConstants.SITE_TYPE_B2B) {
 			b2c = true;
 		}
 
