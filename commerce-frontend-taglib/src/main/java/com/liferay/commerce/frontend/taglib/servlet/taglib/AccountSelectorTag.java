@@ -43,6 +43,10 @@ public class AccountSelectorTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
+		putValue(
+			"accountsAPI",
+			PortalUtil.getPortalURL(request) + "/o/commerce-ui/");
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -81,30 +85,25 @@ public class AccountSelectorTag extends ComponentRendererTag {
 				putValue("currentAccount", currentAccountModel);
 			}
 
-			Layout accountManagmentLayout = _getAccountManagementLayout(
+			Layout accountManagementLayout = _getAccountManagementLayout(
 				themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
 
 			putValue(
 				"viewAllAccountsLink",
 				PortalUtil.getLayoutFriendlyURL(
-					accountManagmentLayout, themeDisplay));
+					accountManagementLayout, themeDisplay));
 
-			Layout orderManagmentLayout = _getOrdersLayout(
+			Layout orderManagementLayout = _getOrdersLayout(
 				themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
-
-			putValue(
-				"viewAllOrdersLink",
-				PortalUtil.getLayoutFriendlyURL(
-					orderManagmentLayout, themeDisplay));
-
-			putValue(
-				"accountsAPI",
-				PortalUtil.getPortalURL(request) + "/o/commerce-ui/");
 
 			putValue(
 				"createNewOrderLink",
 				PortalUtil.getLayoutFriendlyURL(
-					orderManagmentLayout, themeDisplay));
+					orderManagementLayout, themeDisplay));
+			putValue(
+				"viewAllOrdersLink",
+				PortalUtil.getLayoutFriendlyURL(
+					orderManagementLayout, themeDisplay));
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
