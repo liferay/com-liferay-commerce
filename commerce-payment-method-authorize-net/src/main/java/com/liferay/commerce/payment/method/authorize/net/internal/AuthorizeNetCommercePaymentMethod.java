@@ -24,7 +24,6 @@ import com.liferay.commerce.payment.method.authorize.net.internal.constants.Auth
 import com.liferay.commerce.payment.request.CommercePaymentRequest;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -160,10 +159,8 @@ public class AuthorizeNetCommercePaymentMethod
 		AuthorizeNetGroupServiceConfiguration configuration = _getConfiguration(
 			commerceOrder.getGroupId());
 
-		String environmentType = configuration.environment();
-
 		Environment environment = Environment.valueOf(
-			StringUtil.toUpperCase(environmentType));
+			StringUtil.toUpperCase(configuration.environment()));
 
 		ApiOperationBase.setEnvironment(environment);
 
@@ -176,8 +173,14 @@ public class AuthorizeNetCommercePaymentMethod
 
 		ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
+		GetHostedPaymentPageRequest getHostedPaymentPageRequest =
+			new GetHostedPaymentPageRequest();
+
 		TransactionRequestType transactionRequestType =
 			_getTransactionRequestType(commerceOrder.getTotal());
+
+		getHostedPaymentPageRequest.setTransactionRequest(
+			transactionRequestType);
 
 		ArrayOfSetting arrayOfSetting = _getArrayOfSetting(
 			commerceOrder.getGroupId(),
@@ -185,11 +188,6 @@ public class AuthorizeNetCommercePaymentMethod
 			authorizeNetCommercePaymentRequest.getReturnUrl(),
 			authorizeNetCommercePaymentRequest.getLocale());
 
-		GetHostedPaymentPageRequest getHostedPaymentPageRequest =
-			new GetHostedPaymentPageRequest();
-
-		getHostedPaymentPageRequest.setTransactionRequest(
-			transactionRequestType);
 		getHostedPaymentPageRequest.setHostedPaymentSettings(arrayOfSetting);
 
 		GetHostedPaymentPageController controller =
@@ -213,13 +211,11 @@ public class AuthorizeNetCommercePaymentMethod
 						PRODUCTION_REDIRECT_URL;
 			}
 
-			String url = _getServletUrl(authorizeNetCommercePaymentRequest);
-
-			url += CharPool.QUESTION + "redirectUrl=" + redirectUrl;
-
-			String encodedToken = URLEncoder.encode(token, "UTF-8");
-
-			url += CharPool.AMPERSAND + "token=" + encodedToken;
+			String url = StringBundler.concat(
+				_getServletUrl(authorizeNetCommercePaymentRequest),
+				StringPool.QUESTION, "redirectUrl=", redirectUrl,
+				StringPool.AMPERSAND, "token=",
+				URLEncoder.encode(token, "UTF-8"));
 
 			return new CommercePaymentResult(
 				token, authorizeNetCommercePaymentRequest.getCommerceOrderId(),
@@ -380,7 +376,7 @@ public class AuthorizeNetCommercePaymentMethod
 			_portal.getPortalURL(
 				authorizeNetCommercePaymentRequest.getHttpServletRequest()));
 		sb.append(_portal.getPathModule());
-		sb.append(CharPool.SLASH);
+		sb.append(StringPool.SLASH);
 		sb.append(
 			AuthorizeNetCommercePaymentMethodConstants.
 				START_PAYMENT_SERVLET_PATH);
