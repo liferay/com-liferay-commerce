@@ -20,7 +20,6 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
-import com.liferay.commerce.account.util.CommerceSiteType;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -147,7 +146,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 					_portal.getScopeGroupId(httpServletRequest));
 
 		if (commerceAccountGroupServiceConfiguration.commerceSiteType() ==
-				CommerceSiteType.B2C) {
+				CommerceAccountConstants.SITE_TYPE_B2C) {
 
 			return _commerceAccountService.getPersonalCommerceAccount(
 				user.getCompanyId(), user.getUserId());
