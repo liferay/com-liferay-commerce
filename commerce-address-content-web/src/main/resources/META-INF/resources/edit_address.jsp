@@ -46,6 +46,7 @@ long commerceRegionId = commerceAddressDisplayContext.getCommerceRegionId();
 	<liferay-ui:error exception="<%= CommerceAddressCityException.class %>" message="please-enter-a-valid-city" />
 	<liferay-ui:error exception="<%= CommerceAddressCountryException.class %>" message="please-select-a-country" />
 	<liferay-ui:error exception="<%= CommerceAddressStreetException.class %>" message="please-enter-a-valid-street" />
+	<liferay-ui:error exception="<%= CommerceAddressZipException.class %>" message="please-enter-a-valid-zip" />
 
 	<div class="lfr-form-content">
 		<aui:fieldset cssClass="addresses">
