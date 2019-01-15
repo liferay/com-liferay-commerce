@@ -83,35 +83,31 @@ public class EditAuthorizeNetCommercePaymentMethodConfigurationMVCActionCommand
 
 		modifiableSettings.setValue("environment", environment);
 
-		Boolean requireCaptcha = ParamUtil.getBoolean(
+		String requireCaptcha = ParamUtil.getString(
 			actionRequest, "settings--requireCaptcha--");
 
-		modifiableSettings.setValue(
-			"requireCaptcha", requireCaptcha.toString());
+		modifiableSettings.setValue("requireCaptcha", requireCaptcha);
 
-		Boolean requireCardCodeVerification = ParamUtil.getBoolean(
+		String requireCardCodeVerification = ParamUtil.getString(
 			actionRequest, "settings--requireCardCodeVerification--");
 
 		modifiableSettings.setValue(
-			"requireCardCodeVerification",
-			requireCardCodeVerification.toString());
+			"requireCardCodeVerification", requireCardCodeVerification);
 
-		Boolean showBankAccount = ParamUtil.getBoolean(
+		String showBankAccount = ParamUtil.getString(
 			actionRequest, "settings--showBankAccount--");
 
-		modifiableSettings.setValue(
-			"showBankAccount", showBankAccount.toString());
+		modifiableSettings.setValue("showBankAccount", showBankAccount);
 
-		Boolean showCreditCard = ParamUtil.getBoolean(
+		String showCreditCard = ParamUtil.getString(
 			actionRequest, "settings--showCreditCard--");
 
-		modifiableSettings.setValue(
-			"showCreditCard", showCreditCard.toString());
+		modifiableSettings.setValue("showCreditCard", showCreditCard);
 
-		Boolean showStoreName = ParamUtil.getBoolean(
+		String showStoreName = ParamUtil.getString(
 			actionRequest, "settings--showStoreName--");
 
-		modifiableSettings.setValue("showStoreName", showStoreName.toString());
+		modifiableSettings.setValue("showStoreName", showStoreName);
 
 		String transactionKey = ParamUtil.getString(
 			actionRequest, "settings--transactionKey--");

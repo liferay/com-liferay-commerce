@@ -21,12 +21,14 @@ String token = request.getParameter("token");
 
 <form action="<%= redirectUrl %>" id="formAuthorizeNet" method="post" name="formAuthorizeNet">
 	<input name="token" type="hidden" value="<%= token %>" />
-	Continue to Authorize.Net Payment Page
+
+	<liferay-ui:message key="continue-to-authorize-net-payment-page" />
+
 	<button id="btnContinue">Continue</button>
 </form>
 
 <script use="aui-base">
-	window.onload=function() {
+	window.onload = function() {
 		document.querySelector('form').submit();
 	}
 </script>
