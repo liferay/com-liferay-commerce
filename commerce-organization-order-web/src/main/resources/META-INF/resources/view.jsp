@@ -83,13 +83,13 @@ CommerceOrganizationOrderDisplayContext commerceOrganizationOrderDisplayContext 
 			</c:if>
 
 			<liferay-ui:search-container-column-text
-				name="customer-name"
-				property="customerName"
+				name="account-name"
+				property="commerceAccountName"
 			/>
 
 			<liferay-ui:search-container-column-text
-				name="customer-id"
-				property="customerId"
+				name="account-id"
+				property="commerceAccountId"
 			/>
 
 			<liferay-ui:search-container-column-text
