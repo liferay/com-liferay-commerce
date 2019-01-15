@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.context.ClientHelper;
 import com.liferay.commerce.openapi.admin.context.Pagination;
+import com.liferay.commerce.openapi.admin.context.PortalHelper;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.openapi.admin.resource.WebSiteResource;
 import com.liferay.commerce.openapi.admin.util.DTOUtils;
@@ -26,7 +28,6 @@ import com.liferay.portal.kernel.service.GroupService;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -52,17 +53,20 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class WebSiteResourceImpl implements WebSiteResource {
 
 	@Override
-	public WebSiteDTO getWebSite(String id, Locale locale) {
+	public WebSiteDTO getWebSite(String id, PortalHelper portalHelper) {
 		Group group = _getGroupById(id);
 
-		return DTOUtils.modelToDTO(group, locale);
+		return DTOUtils.modelToDTO(group, portalHelper.getLocale());
 	}
 
 	@Override
 	public List<WebSiteDTO> getWebSites(
-		Company company, Locale locale, Pagination pagination) {
+		PortalHelper portalHelper, ClientHelper clientHelper) {
 
+		Company company = portalHelper.getCompany();
 		List<Group> groups = null;
+
+		Pagination pagination = clientHelper.getPagination();
 
 		try {
 			groups = _groupService.getGroups(
@@ -78,7 +82,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 		Stream<Group> stream = groups.stream();
 
 		return stream.map(
-			group -> DTOUtils.modelToDTO(group, locale)
+			group -> DTOUtils.modelToDTO(group, portalHelper.getLocale())
 		).collect(
 			Collectors.toList()
 		);
@@ -91,7 +95,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 			}
 			catch (PortalException pe) {
 				throw new ServerErrorException(
-					"Unable to find Price List with ID " + id,
+					"Unable to find Price List with ID: " + id,
 					Response.Status.INTERNAL_SERVER_ERROR, pe);
 			}
 		}

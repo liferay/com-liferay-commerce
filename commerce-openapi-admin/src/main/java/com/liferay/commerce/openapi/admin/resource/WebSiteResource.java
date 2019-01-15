@@ -14,12 +14,11 @@
 
 package com.liferay.commerce.openapi.admin.resource;
 
-import com.liferay.commerce.openapi.admin.context.Pagination;
+import com.liferay.commerce.openapi.admin.context.ClientHelper;
+import com.liferay.commerce.openapi.admin.context.PortalHelper;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
-import com.liferay.portal.kernel.model.Company;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.Generated;
 
@@ -40,13 +39,12 @@ public interface WebSiteResource {
 	@Path("/{id}")
 	@Produces({"application/*", "application/json"})
 	public WebSiteDTO getWebSite(
-		@PathParam("id") String id, @Context Locale locale);
+		@PathParam("id") String id, @Context PortalHelper portalHelper);
 
 	@GET
 	@Path("/")
 	@Produces({"application/*", "application/json"})
 	public List<WebSiteDTO> getWebSites(
-		@Context Company company, @Context Locale locale,
-		@Context Pagination pagination);
+		@Context PortalHelper portalHelper, @Context ClientHelper clientHelper);
 
 }
