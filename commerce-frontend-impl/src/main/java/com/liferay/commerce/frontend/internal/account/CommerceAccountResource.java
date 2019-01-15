@@ -26,6 +26,8 @@ import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.account.util.CommerceSiteType;
 import com.liferay.commerce.frontend.internal.account.model.Account;
 import com.liferay.commerce.frontend.internal.account.model.AccountList;
+import com.liferay.commerce.frontend.internal.account.model.AccountOrganization;
+import com.liferay.commerce.frontend.internal.account.model.AccountOrganizationList;
 import com.liferay.commerce.frontend.internal.account.model.AccountUser;
 import com.liferay.commerce.frontend.internal.account.model.AccountUserList;
 import com.liferay.commerce.frontend.internal.account.model.Order;
@@ -33,11 +35,15 @@ import com.liferay.commerce.frontend.internal.account.model.OrderList;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringBundler;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -81,6 +87,17 @@ public class CommerceAccountResource {
 
 		return new AccountList(
 			accounts, getAccountsCount(groupId, parentAccountId, keywords));
+	}
+
+	public AccountOrganizationList getAccountOrganizationList(
+			long companyId, String keywords, String imagePath)
+		throws PortalException {
+
+		List<AccountOrganization> accountOrganizations = _searchOrganizations(
+			companyId, keywords, imagePath);
+
+		return new AccountOrganizationList(
+			accountOrganizations, accountOrganizations.size());
 	}
 
 	public AccountUserList getAccountUserList(
@@ -174,6 +191,28 @@ public class CommerceAccountResource {
 		List<Order> orders = getOrders(groupId, accountId, page, pageSize);
 
 		return new OrderList(orders, orders.size());
+	}
+
+	@GET
+	@Path("/search-organizations")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response searchOrganizations(
+		@QueryParam("q") String queryString,
+		@Context ThemeDisplay themeDisplay) {
+
+		AccountOrganizationList accountOrganizationList;
+
+		try {
+			accountOrganizationList = getAccountOrganizationList(
+				themeDisplay.getCompanyId(), queryString,
+				themeDisplay.getPathImage());
+		}
+		catch (Exception e) {
+			accountOrganizationList = new AccountOrganizationList(
+				StringUtil.split(e.getLocalizedMessage()));
+		}
+
+		return getResponse(accountOrganizationList);
 	}
 
 	@GET
@@ -315,9 +354,31 @@ public class CommerceAccountResource {
 		return commerceAccountGroupServiceConfiguration.commerceSiteType();
 	}
 
-	private List<AccountUser> _searchUsers(
+	private List<AccountOrganization> _searchOrganizations(
 			long companyId, String keywords, String imagePath)
 		throws PortalException {
+
+		List<AccountOrganization> accountOrganizations = new ArrayList<>();
+
+		BaseModelSearchResult<Organization> baseModelSearchResult =
+			_organizationLocalService.searchOrganizations(
+				companyId, 0, keywords, null, 0, 10, null);
+
+		for (Organization organization :
+				baseModelSearchResult.getBaseModels()) {
+
+			accountOrganizations.add(
+				new AccountOrganization(
+					organization.getOrganizationId(), organization.getName(),
+					StringPool.BLANK,
+					getLogoThumbnailSrc(organization.getLogoId(), imagePath)));
+		}
+
+		return accountOrganizations;
+	}
+
+	private List<AccountUser> _searchUsers(
+		long companyId, String keywords, String imagePath) {
 
 		List<AccountUser> accountUsers = new ArrayList<>();
 
@@ -357,6 +418,9 @@ public class CommerceAccountResource {
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;
+
+	@Reference
+	private OrganizationLocalService _organizationLocalService;
 
 	@Reference
 	private UserLocalService _userLocalService;
