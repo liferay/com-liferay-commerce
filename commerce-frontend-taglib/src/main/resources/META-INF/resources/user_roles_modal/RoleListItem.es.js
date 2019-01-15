@@ -10,7 +10,7 @@ class RoleListItem extends Component {
 
 	syncSelectedRoles() {
 		return this._selected = this.selectedRoles.reduce(
-			(hasItemBeenSelected, item) => 
+			(hasItemBeenSelected, item) =>
 				hasItemBeenSelected || item.id === this.id, false
 		);
 	}
@@ -48,14 +48,14 @@ RoleListItem.STATE = {
 						Config.number()
 					]
 				),
-				name: Config.string(),
+				name: Config.string()
 			}
 		)
 	).value(
 		[]
 	),
 	query: Config.string(),
-	_selected: Config.bool().value(false),
+	_selected: Config.bool().value(false)
 };
 
 export {RoleListItem};

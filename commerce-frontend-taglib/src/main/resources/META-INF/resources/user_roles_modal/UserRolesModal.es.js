@@ -33,15 +33,15 @@ class UserRolesModal extends Component {
 		evt.preventDefault();
 
 		if (this.filteredRoles.length) {
-			this._toggleItem(this.filteredRoles[0])
+			this._toggleItem(this.filteredRoles[0]);
 			this.query = '';
 			return true;
 		}
 		return false;
 	}
 
-	_handleCheckBox(e){
-		console.log(e)
+	_handleCheckBox(e) {
+		console.log(e);
 	}
 
 	_handleInputBox(evt) {
@@ -71,7 +71,7 @@ class UserRolesModal extends Component {
 	}
 
 	_filterRoles() {
-		return this.filteredRoles = this.roles.filter(role => role.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1)
+		return this.filteredRoles = this.roles.filter(role => role.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
 	}
 
 	_updateRoles() {
@@ -154,7 +154,7 @@ UserRolesModal.STATE = {
 		{
 			id: 9,
 			name: 'Phasellus finibut massa'
-		},
+		}
 	]),
 	filteredRoles: Config.array(ROLE_SCHEMA).value([]),
 	selectedRoles: Config.array(ROLE_SCHEMA).value([]),
