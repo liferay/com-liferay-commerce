@@ -393,7 +393,7 @@ public class CommerceAccountResource {
 			"commerceOrderId", String.valueOf(commerceOrderId));
 
 		String redirect = _portal.getCurrentURL(httpServletRequest);
-
+		
 		editURL.setParameter("redirect", redirect);
 
 		return editURL.toString();
