@@ -17,7 +17,6 @@ package com.liferay.commerce.account.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceSiteType;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -92,19 +91,17 @@ public interface CommerceAccountService extends BaseService {
 		long userId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAccount> getUserCommerceAccounts(
-		CommerceSiteType commerceSiteType, int start, int end)
-		throws PortalException;
+	public List<CommerceAccount> getUserCommerceAccounts(int commerceSiteType,
+		int start, int end) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(
-		Long parentCommerceAccountId, CommerceSiteType commerceSiteType,
-		String keywords, int start, int end) throws PortalException;
+		Long parentCommerceAccountId, int commerceSiteType, String keywords,
+		int start, int end) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceAccountsCount(Long parentCommerceAccountId,
-		CommerceSiteType commerceSiteType, String keywords)
-		throws PortalException;
+		int commerceSiteType, String keywords) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(

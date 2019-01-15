@@ -17,7 +17,6 @@ package com.liferay.commerce.account.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceSiteType;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -285,13 +284,12 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(long userId,
-		Long parentCommerceAccountId, CommerceSiteType commerceSiteType,
-		String keywords, int start, int end);
+		Long parentCommerceAccountId, int commerceSiteType, String keywords,
+		int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceAccountsCount(long userId,
-		Long parentCommerceAccountId, CommerceSiteType commerceSiteType,
-		String keywords);
+		Long parentCommerceAccountId, int commerceSiteType, String keywords);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(

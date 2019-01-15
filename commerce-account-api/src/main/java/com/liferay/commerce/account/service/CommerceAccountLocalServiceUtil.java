@@ -322,8 +322,7 @@ public class CommerceAccountLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		long userId, Long parentCommerceAccountId,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
 		String keywords, int start, int end) {
 		return getService()
 				   .getUserCommerceAccounts(userId, parentCommerceAccountId,
@@ -331,9 +330,7 @@ public class CommerceAccountLocalServiceUtil {
 	}
 
 	public static int getUserCommerceAccountsCount(long userId,
-		Long parentCommerceAccountId,
-		com.liferay.commerce.account.util.CommerceSiteType commerceSiteType,
-		String keywords) {
+		Long parentCommerceAccountId, int commerceSiteType, String keywords) {
 		return getService()
 				   .getUserCommerceAccountsCount(userId,
 			parentCommerceAccountId, commerceSiteType, keywords);
