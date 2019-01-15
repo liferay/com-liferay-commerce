@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.internal.context;
 
+import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.context.CommerceContext;
@@ -28,6 +30,9 @@ import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.util.Portal;
 
 import java.util.List;
@@ -48,6 +53,7 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 		CommerceOrderHttpHelper commerceOrderHttpHelper,
 		CommercePriceListLocalService commercePriceListLocalService,
 		CommerceUserSegmentHelper commerceUserSegmentHelper,
+		ConfigurationProvider configurationProvider,
 		CPRuleLocalService cpRuleLocalService, Portal portal) {
 
 		_httpServletRequest = httpServletRequest;
@@ -59,6 +65,16 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 		_commerceUserSegmentHelper = commerceUserSegmentHelper;
 		_cpRuleLocalService = cpRuleLocalService;
 		_portal = portal;
+
+		try {
+			_commerceAccountGroupServiceConfiguration =
+				configurationProvider.getGroupConfiguration(
+					CommerceAccountGroupServiceConfiguration.class,
+					_portal.getScopeGroupId(httpServletRequest));
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
 	}
 
 	@Override
@@ -117,6 +133,15 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 	}
 
 	@Override
+	public int getCommerceSiteType() {
+		if (_commerceAccountGroupServiceConfiguration == null) {
+			return CommerceAccountConstants.SITE_TYPE_B2C;
+		}
+
+		return _commerceAccountGroupServiceConfiguration.commerceSiteType();
+	}
+
+	@Override
 	public long[] getCommerceUserSegmentEntryIds() throws PortalException {
 		if (_commerceUserSegmentEntryIds != null) {
 			return _commerceUserSegmentEntryIds;
@@ -159,7 +184,12 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 		return _portal.getUserId(_httpServletRequest);
 	}
 
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceContextHttpsImpl.class);
+
 	private CommerceAccount _commerceAccount;
+	private CommerceAccountGroupServiceConfiguration
+		_commerceAccountGroupServiceConfiguration;
 	private final CommerceAccountHelper _commerceAccountHelper;
 	private CommerceCurrency _commerceCurrency;
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;
