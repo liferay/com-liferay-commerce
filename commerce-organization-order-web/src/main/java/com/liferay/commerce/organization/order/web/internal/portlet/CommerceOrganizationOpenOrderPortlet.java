@@ -17,7 +17,7 @@ package com.liferay.commerce.organization.order.web.internal.portlet;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.organization.order.web.internal.display.context.CommerceOrganizationOrderDisplayContext;
-import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPInstanceHelper;
@@ -100,7 +100,7 @@ public class CommerceOrganizationOpenOrderPortlet extends MVCPortlet {
 						_commerceAddressService, _commerceOrderItemService,
 						_commerceOrderLocalService, _commerceOrderNoteService,
 						_commerceOrderPriceCalculation, _commerceOrderService,
-						_commercePaymentMethodGroupRelService,
+						_commercePaymentEngine,
 						_commerceProductPriceCalculation,
 						_commerceShipmentItemService, _cpInstanceHelper,
 						_jsonFactory, _modelResourcePermission, renderRequest);
@@ -135,8 +135,7 @@ public class CommerceOrganizationOpenOrderPortlet extends MVCPortlet {
 	private CommerceOrderService _commerceOrderService;
 
 	@Reference
-	private CommercePaymentMethodGroupRelService
-		_commercePaymentMethodGroupRelService;
+	private CommercePaymentEngine _commercePaymentEngine;
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
