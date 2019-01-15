@@ -289,32 +289,10 @@ public class OpenAPIImporter {
 		parametersJSONNode.forEach(
 			parameterJSONNode -> {
 				if (parameterJSONNode.has("$ref")) {
-					JsonNode parameterReferenceJSONNode = parameterJSONNode.get(
-						"$ref");
-
-					String parameterReference = Parameter.getParameterReference(
-						parameterReferenceJSONNode.asText());
-
-					_logger.debug(
-						"Parameter is reference to {}", parameterReference);
-
-					for (ComponentDefinition componentDefinition :
-							componentDefinitions) {
-
-						if (!componentDefinition.isParameter()) {
-							continue;
-						}
-
-						if (parameterReference.equals(
-								componentDefinition.getName())) {
-
-							parameters.add(componentDefinition.getParameter());
-
-							_logger.debug(
-								"Reference resolved to {}",
-								componentDefinition.getParameter());
-						}
-					}
+					parameters.add(
+						ParameterImporter.fromComponentDefinition(
+							parameterJSONNode.get("$ref"),
+							componentDefinitions));
 				}
 				else {
 					parameters.add(
