@@ -101,7 +101,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 			commerceAccount = _getSingleCommerceAccount(httpServletRequest);
 
 			if (commerceAccount == null) {
-				setCurrentCommerceAccount(httpServletRequest, -1);
+				setCurrentCommerceAccount(httpServletRequest, groupId, -1);
 			}
 		}
 		else if (currentCommerceAccountId > 0) {
@@ -114,10 +114,9 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 	@Override
 	public void setCurrentCommerceAccount(
-			HttpServletRequest httpServletRequest, long commerceAccountId)
+			HttpServletRequest httpServletRequest, long groupId,
+			long commerceAccountId)
 		throws PortalException {
-
-		long groupId = _portal.getScopeGroupId(httpServletRequest);
 
 		String curGroupOrganizationIdKey =
 			_CURRENT_COMMERCE_ACCOUNT_ID_KEY + groupId;
