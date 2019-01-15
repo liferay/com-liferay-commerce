@@ -19,11 +19,11 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
-import com.liferay.commerce.account.util.CommerceSiteType;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.internal.account.model.Account;
 import com.liferay.commerce.frontend.internal.account.model.AccountList;
 import com.liferay.commerce.frontend.internal.account.model.AccountOrganization;
@@ -37,24 +37,32 @@ import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.OrganizationConstants;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.portlet.PortletProvider;
+import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -80,15 +88,17 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceAccountResource {
 
 	public AccountList getAccountList(
-			long groupId, Long parentAccountId, String keywords, int page,
-			int pageSize, String imagePath)
+			Long parentAccountId, int commerceSiteType, String keywords,
+			int page, int pageSize, String imagePath)
 		throws PortalException {
 
 		List<Account> accounts = getAccounts(
-			groupId, parentAccountId, keywords, page, pageSize, imagePath);
+			parentAccountId, commerceSiteType, keywords, page, pageSize,
+			imagePath);
 
 		return new AccountList(
-			accounts, getAccountsCount(groupId, parentAccountId, keywords));
+			accounts,
+			getAccountsCount(parentAccountId, commerceSiteType, keywords));
 	}
 
 	public AccountOrganizationList getAccountOrganizationList(
@@ -126,10 +136,16 @@ public class CommerceAccountResource {
 
 		themeDisplay.setScopeGroupId(groupId);
 
+		HttpServletRequest httpServletRequest = themeDisplay.getRequest();
+
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
 		try {
 			accountList = getAccountList(
-				groupId, parentAccountId, queryString, page, pageSize,
-				themeDisplay.getPathImage());
+				parentAccountId, commerceContext.getCommerceSiteType(),
+				queryString, page, pageSize, themeDisplay.getPathImage());
 		}
 		catch (Exception e) {
 			accountList = new AccountList(
@@ -171,12 +187,14 @@ public class CommerceAccountResource {
 		@PathParam("groupId") long groupId,
 		@PathParam("accountId") long accountId,
 		@QueryParam("q") String queryString, @QueryParam("page") int page,
-		@QueryParam("pageSize") int pageSize) {
+		@QueryParam("pageSize") int pageSize,
+		@Context ThemeDisplay themeDisplay) {
 
 		OrderList orderList;
 
 		try {
-			orderList = getOrderList(groupId, accountId, page, pageSize);
+			orderList = getOrderList(
+				groupId, accountId, page, pageSize, themeDisplay.getRequest());
 		}
 		catch (Exception e) {
 			orderList = new OrderList(
@@ -187,10 +205,12 @@ public class CommerceAccountResource {
 	}
 
 	public OrderList getOrderList(
-			long groupId, long accountId, int page, int pageSize)
+			long groupId, long accountId, int page, int pageSize,
+			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		List<Order> orders = getOrders(groupId, accountId, page, pageSize);
+		List<Order> orders = getOrders(
+			groupId, accountId, page, pageSize, httpServletRequest);
 
 		return new OrderList(orders, orders.size());
 	}
@@ -240,8 +260,8 @@ public class CommerceAccountResource {
 	}
 
 	protected List<Account> getAccounts(
-			long groupId, Long parentAccountId, String keywords, int page,
-			int pageSize, String imagePath)
+			Long parentAccountId, int commerceSiteType, String keywords,
+			int page, int pageSize, String imagePath)
 		throws PortalException {
 
 		List<Account> accounts = new ArrayList<>();
@@ -251,8 +271,7 @@ public class CommerceAccountResource {
 
 		List<CommerceAccount> userCommerceAccounts =
 			_commerceAccountService.getUserCommerceAccounts(
-				parentAccountId, _getCommerceSiteType(groupId), keywords, start,
-				end);
+				parentAccountId, commerceSiteType, keywords, start, end);
 
 		for (CommerceAccount commerceAccount : userCommerceAccounts) {
 			accounts.add(
@@ -267,11 +286,11 @@ public class CommerceAccountResource {
 	}
 
 	protected int getAccountsCount(
-			long groupId, Long parentAccountId, String keywords)
+			Long parentAccountId, int commerceSiteType, String keywords)
 		throws PortalException {
 
 		return _commerceAccountService.getUserCommerceAccountsCount(
-			parentAccountId, _getCommerceSiteType(groupId), keywords);
+			parentAccountId, commerceSiteType, keywords);
 	}
 
 	protected String getLogoThumbnailSrc(long logoId, String imagePath) {
@@ -287,7 +306,8 @@ public class CommerceAccountResource {
 	}
 
 	protected List<Order> getOrders(
-			long groupId, long accountId, int page, int pageSize)
+			long groupId, long accountId, int page, int pageSize,
+			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		List<Order> orders = new ArrayList<>();
@@ -300,11 +320,25 @@ public class CommerceAccountResource {
 				groupId, accountId, start, end, null);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
+			Date modifiedDate = commerceOrder.getModifiedDate();
+
+			String modifiedDateTimeDescription =
+				LanguageUtil.getTimeDescription(
+					httpServletRequest,
+					System.currentTimeMillis() - modifiedDate.getTime(), true);
+
 			orders.add(
 				new Order(
 					commerceOrder.getCommerceOrderId(),
 					commerceOrder.getCommerceAccountId(),
-					commerceOrder.getPurchaseOrderNumber()));
+					commerceOrder.getPurchaseOrderNumber(),
+					LanguageUtil.format(
+						httpServletRequest, "x-ago",
+						modifiedDateTimeDescription),
+					WorkflowConstants.getStatusLabel(commerceOrder.getStatus()),
+					_getOrderLinkURL(
+						commerceOrder.getCommerceOrderId(),
+						httpServletRequest)));
 		}
 
 		return orders;
@@ -345,15 +379,24 @@ public class CommerceAccountResource {
 		return sb.toString();
 	}
 
-	private CommerceSiteType _getCommerceSiteType(long groupId)
+	private String _getOrderLinkURL(
+			long commerceOrderId, HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		CommerceAccountGroupServiceConfiguration
-			commerceAccountGroupServiceConfiguration =
-				_configurationProvider.getGroupConfiguration(
-					CommerceAccountGroupServiceConfiguration.class, groupId);
+		PortletURL editURL = PortletProviderUtil.getPortletURL(
+			httpServletRequest, CommerceOrder.class.getName(),
+			PortletProvider.Action.EDIT);
 
-		return commerceAccountGroupServiceConfiguration.commerceSiteType();
+		editURL.setParameter(ActionRequest.ACTION_NAME, "editCommerceOrder");
+		editURL.setParameter(Constants.CMD, "setCurrent");
+		editURL.setParameter(
+			"commerceOrderId", String.valueOf(commerceOrderId));
+
+		String redirect = _portal.getCurrentURL(httpServletRequest);
+
+		editURL.setParameter("redirect", redirect);
+
+		return editURL.toString();
 	}
 
 	private List<AccountOrganization> _searchOrganizations(
@@ -420,10 +463,10 @@ public class CommerceAccountResource {
 	private CommerceOrderService _commerceOrderService;
 
 	@Reference
-	private ConfigurationProvider _configurationProvider;
+	private OrganizationLocalService _organizationLocalService;
 
 	@Reference
-	private OrganizationLocalService _organizationLocalService;
+	private Portal _portal;
 
 	@Reference
 	private UserLocalService _userLocalService;

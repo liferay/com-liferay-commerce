@@ -22,15 +22,28 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.liferay.commerce.frontend.internal.account.model.Order;
 import com.liferay.commerce.frontend.internal.account.model.OrderList;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.PortletProvider;
+import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -62,7 +75,8 @@ public class CommerceOrderResource {
 
 		try {
 			orderList = getOrderList(
-				themeDisplay.getScopeGroupId(), queryString, page, pageSize);
+				themeDisplay.getScopeGroupId(), queryString, page, pageSize,
+				themeDisplay.getRequest());
 		}
 		catch (Exception e) {
 			orderList = new OrderList(
@@ -73,16 +87,19 @@ public class CommerceOrderResource {
 	}
 
 	public OrderList getOrderList(
-			long groupId, String keywords, int page, int pageSize)
+			long groupId, String keywords, int page, int pageSize,
+			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		List<Order> orders = getOrders(groupId, keywords, page, pageSize);
+		List<Order> orders = getOrders(
+			groupId, keywords, page, pageSize, httpServletRequest);
 
 		return new OrderList(orders, getOrdersCount(groupId, keywords));
 	}
 
 	protected List<Order> getOrders(
-			long groupId, String keywords, int page, int pageSize)
+			long groupId, String keywords, int page, int pageSize,
+			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		List<Order> orders = new ArrayList<>();
@@ -95,11 +112,25 @@ public class CommerceOrderResource {
 				groupId, keywords, start, end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
+			Date modifiedDate = commerceOrder.getModifiedDate();
+
+			String modifiedDateTimeDescription =
+				LanguageUtil.getTimeDescription(
+					httpServletRequest,
+					System.currentTimeMillis() - modifiedDate.getTime(), true);
+
 			orders.add(
 				new Order(
 					commerceOrder.getCommerceOrderId(),
 					commerceOrder.getCommerceAccountId(),
-					commerceOrder.getPurchaseOrderNumber()));
+					commerceOrder.getPurchaseOrderNumber(),
+					LanguageUtil.format(
+						httpServletRequest, "x-ago",
+						modifiedDateTimeDescription),
+					WorkflowConstants.getStatusLabel(commerceOrder.getStatus()),
+					_getOrderLinkURL(
+						commerceOrder.getCommerceOrderId(),
+						httpServletRequest)));
 		}
 
 		return orders;
@@ -135,6 +166,26 @@ public class CommerceOrderResource {
 		).build();
 	}
 
+	private String _getOrderLinkURL(
+			long commerceOrderId, HttpServletRequest httpServletRequest)
+		throws PortalException {
+
+		PortletURL editURL = PortletProviderUtil.getPortletURL(
+			httpServletRequest, CommerceOrder.class.getName(),
+			PortletProvider.Action.EDIT);
+
+		editURL.setParameter(ActionRequest.ACTION_NAME, "editCommerceOrder");
+		editURL.setParameter(Constants.CMD, "setCurrent");
+		editURL.setParameter(
+			"commerceOrderId", String.valueOf(commerceOrderId));
+
+		String redirect = _portal.getCurrentURL(httpServletRequest);
+
+		editURL.setParameter("redirect", redirect);
+
+		return editURL.toString();
+	}
+
 	private static final ObjectMapper _OBJECT_MAPPER = new ObjectMapper() {
 		{
 			configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
@@ -146,6 +197,12 @@ public class CommerceOrderResource {
 		CommerceOrderResource.class);
 
 	@Reference
+	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
+
+	@Reference
 	private CommerceOrderService _commerceOrderService;
+
+	@Reference
+	private Portal _portal;
 
 }
