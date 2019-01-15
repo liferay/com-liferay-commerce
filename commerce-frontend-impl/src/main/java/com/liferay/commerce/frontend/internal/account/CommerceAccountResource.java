@@ -22,11 +22,16 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.account.util.CommerceSiteType;
 import com.liferay.commerce.frontend.internal.account.model.Account;
 import com.liferay.commerce.frontend.internal.account.model.AccountList;
 import com.liferay.commerce.frontend.internal.account.model.AccountUser;
 import com.liferay.commerce.frontend.internal.account.model.AccountUserList;
+import com.liferay.commerce.frontend.internal.account.model.Order;
+import com.liferay.commerce.frontend.internal.account.model.OrderList;
+import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -43,8 +48,13 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -84,9 +94,10 @@ public class CommerceAccountResource {
 	}
 
 	@GET
-	@Path("/search-accounts")
+	@Path("/search-accounts/{groupId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCommerceAccounts(
+		@PathParam("groupId") long groupId,
 		@QueryParam("parentAccountId") Long parentAccountId,
 		@QueryParam("q") String queryString, @QueryParam("page") int page,
 		@QueryParam("pageSize") int pageSize, @Context UriInfo uriInfo,
@@ -94,10 +105,12 @@ public class CommerceAccountResource {
 
 		AccountList accountList;
 
+		themeDisplay.setScopeGroupId(groupId);
+
 		try {
 			accountList = getAccountList(
-				themeDisplay.getScopeGroupId(), parentAccountId, queryString,
-				page, pageSize, themeDisplay.getPathImage());
+				groupId, parentAccountId, queryString, page, pageSize,
+				themeDisplay.getPathImage());
 		}
 		catch (Exception e) {
 			accountList = new AccountList(
@@ -105,6 +118,60 @@ public class CommerceAccountResource {
 		}
 
 		return getResponse(accountList);
+	}
+
+	@Path("/set-current-account/{groupId}")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCommerceOrders(
+		@PathParam("groupId") long groupId,
+		@FormParam("accountId") long accountId,
+		@Context HttpServletRequest httpServletRequest) {
+
+		try {
+			_commerceAccountHelper.setCurrentCommerceAccount(
+				httpServletRequest, groupId, accountId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return Response.serverError().build();
+		}
+
+		return Response.ok(
+			MediaType.APPLICATION_JSON
+		).build();
+	}
+
+	@GET
+	@Path("/search-accounts/{groupId}/{accountId}/orders/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCommerceOrders(
+		@PathParam("groupId") long groupId,
+		@PathParam("accountId") long accountId,
+		@QueryParam("q") String queryString, @QueryParam("page") int page,
+		@QueryParam("pageSize") int pageSize) {
+
+		OrderList orderList;
+
+		try {
+			orderList = getOrderList(groupId, accountId, page, pageSize);
+		}
+		catch (Exception e) {
+			orderList = new OrderList(
+				StringUtil.split(e.getLocalizedMessage()));
+		}
+
+		return getResponse(orderList);
+	}
+
+	public OrderList getOrderList(
+			long groupId, long accountId, int page, int pageSize)
+		throws PortalException {
+
+		List<Order> orders = getOrders(groupId, accountId, page, pageSize);
+
+		return new OrderList(orders, orders.size());
 	}
 
 	@GET
@@ -174,6 +241,30 @@ public class CommerceAccountResource {
 		sb.append(WebServerServletTokenUtil.getToken(logoId));
 
 		return sb.toString();
+	}
+
+	protected List<Order> getOrders(
+			long groupId, long accountId, int page, int pageSize)
+		throws PortalException {
+
+		List<Order> orders = new ArrayList<>();
+
+		int start = (page - 1) * pageSize;
+		int end = page * pageSize;
+
+		List<CommerceOrder> userCommerceOrders =
+			_commerceOrderService.getCommerceOrders(
+				groupId, accountId, start, end, null);
+
+		for (CommerceOrder commerceOrder : userCommerceOrders) {
+			orders.add(
+				new Order(
+					commerceOrder.getCommerceOrderId(),
+					commerceOrder.getCommerceAccountId(),
+					commerceOrder.getPurchaseOrderNumber()));
+		}
+
+		return orders;
 	}
 
 	protected Response getResponse(Object object) {
@@ -254,7 +345,13 @@ public class CommerceAccountResource {
 		CommerceAccountResource.class);
 
 	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
+
+	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private CommerceOrderService _commerceOrderService;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;

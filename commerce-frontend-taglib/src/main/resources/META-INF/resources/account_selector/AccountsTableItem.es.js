@@ -4,13 +4,13 @@ import template from './AccountsTableItem.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-import './AutocompleteItem.es';
+import '../autocomplete_item/AutocompleteItem.es';
 
 class AccountsTableItem extends Component {
 
 	_handleItemClick() {
 		this.emit('selectAccount', {
-			id: this.id,
+			accountId: this.accountId,
 			name: this.name,
 			thumbnail: this.thumbnail
 		});
@@ -21,12 +21,7 @@ class AccountsTableItem extends Component {
 Soy.register(AccountsTableItem, template);
 
 AccountsTableItem.STATE = {
-	id: Config.oneOfType(
-		[
-			Config.string(),
-			Config.number()
-		]
-	),
+	accountId: Config.number(),
 	name: Config.string(),
 	thumbnail: Config.string(),
 	query: Config.string()
