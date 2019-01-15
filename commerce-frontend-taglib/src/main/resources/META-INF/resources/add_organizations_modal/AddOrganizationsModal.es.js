@@ -69,7 +69,7 @@ class AddOrganizationModal extends Component {
 		evt.preventDefault();
 
 		if (this.organizations.length) {
-			this._toggleItem(this.organizations[0])
+			this._toggleItem(this.organizations[0]);
 			this.query = '';
 			return true;
 		}
@@ -116,8 +116,8 @@ class AddOrganizationModal extends Component {
 				response => {
 					this._isLoading = false;
 
-					const fakeResult = fakeData.filter( org => org.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1)
-					
+					const fakeResult = fakeData.filter(org => org.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
+
 					return this.organizations = this.addColorToOrganizations(fakeResult);
 					return this.organizations = this.addColorToOrganizations(response.organizations);
 				}
@@ -125,14 +125,14 @@ class AddOrganizationModal extends Component {
 	}
 
 	addColorToOrganizations(organizations) {
-		return organizations.map( organization => {
+		return organizations.map(organization => {
 			return Object.assign(
 				{
 					colorId: Math.floor(Math.random() * 6) + 1
 				},
 				organization,
-			)
-		})
+			);
+		});
 	}
 
 	_addOrganizations() {

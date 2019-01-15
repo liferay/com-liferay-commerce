@@ -10,7 +10,7 @@ class OrganizationListItem extends Component {
 
 	syncSelectedOrganizations() {
 		return this._selected = this.selectedOrganizations.reduce(
-			(hasItemBeenSelected, item) => 
+			(hasItemBeenSelected, item) =>
 				hasItemBeenSelected || item.id === this.id, false
 		);
 	}
@@ -48,7 +48,7 @@ OrganizationListItem.STATE = {
 						Config.number()
 					]
 				),
-				name: Config.string(),
+				name: Config.string()
 			}
 		)
 	).value(
@@ -56,7 +56,7 @@ OrganizationListItem.STATE = {
 	),
 	colorId: Config.number(),
 	query: Config.string(),
-	_selected: Config.bool().value(false),
+	_selected: Config.bool().value(false)
 };
 
 export {OrganizationListItem};
