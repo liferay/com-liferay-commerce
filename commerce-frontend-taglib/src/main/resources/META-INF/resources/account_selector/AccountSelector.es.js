@@ -42,12 +42,31 @@ class AccountSelector extends Component {
 
 	handleAccountSelected(selectedAccount) {
 		if (this.currentAccount) {
-			if (selectedAccount.id === this.currentAccount.id) {
+			if (selectedAccount.accountId === this.currentAccount.accountId) {
 				return this.currentView = 'orders';
 			}
 			this.orders = null;
 		}
 		this.currentAccount = selectedAccount;
+
+		let formData = new FormData();
+
+		formData.append('accountId', this.currentAccount.accountId);
+
+		fetch(
+			this.accountsAPI + '/set-current-account/' + themeDisplay.getScopeGroupId(),
+			{
+				body: formData,
+				method: 'POST'
+			}
+		).then(
+			response => response.json()
+		).then(
+			(jsonResponse) => {
+				this.emit('accountSelected', this.currentAccount);
+			}
+		);
+
 		this.currentView = 'orders';
 		return this.fetchOrders();
 	}
@@ -67,7 +86,7 @@ class AccountSelector extends Component {
 
 	fetchAccounts(query = '') {
 		return fetch(
-			this.accountsAPI + '/' + query,
+			this.accountsAPI + '/search-accounts/' + themeDisplay.getScopeGroupId() + '?page=1&pageSize=10&q=' + query,
 			{
 				method: 'GET'
 			}
@@ -76,15 +95,15 @@ class AccountSelector extends Component {
 				response => response.json()
 			)
 			.then(
-				accounts => {
-					return this.accounts = accounts;
+				response => {
+					return this.accounts = response.accounts;
 				}
 			);
 	}
 
 	fetchOrders(query = '') {
 		return fetch(
-			this.accountsAPI + '/' + this.currentAccount.id + '/orders/' + query,
+			this.accountsAPI + '/search-accounts/' + themeDisplay.getScopeGroupId() + '/' + this.currentAccount.accountId + '/orders?page=1&pageSize=10&q=' + query,
 			{
 				method: 'GET'
 			}
@@ -93,8 +112,8 @@ class AccountSelector extends Component {
 				response => response.json()
 			)
 			.then(
-				orders => {
-					return this.orders = orders;
+				response => {
+					return this.orders = response.orders;
 				}
 			);
 	}
@@ -123,12 +142,7 @@ AccountSelector.STATE = {
 	accounts: Config.arrayOf(
 		Config.shapeOf(
 			{
-				id: Config.oneOfType(
-					[
-						Config.string(),
-						Config.number()
-					]
-				),
+				accountId: Config.number(),
 				name: Config.string(),
 				thumbnail: Config.string()
 			}
@@ -138,12 +152,7 @@ AccountSelector.STATE = {
 	orders: Config.arrayOf(
 		Config.shapeOf(
 			{
-				id: Config.oneOfType(
-					[
-						Config.string(),
-						Config.number()
-					]
-				),
+				id: Config.number(),
 				lastEdit: Config.string(),
 				status: Config.string(),
 				addOrderLink: Config.string()
@@ -151,9 +160,9 @@ AccountSelector.STATE = {
 		)
 	),
 	viewAllAccountsLink: Config.string().required(),
-	createNewAccountLink: Config.string().required(),
+	createNewAccountLink: Config.string(),
 	viewAllOrdersLink: Config.string().required(),
-	createNewOrderLink: Config.string().required(),
+	createNewOrderLink: Config.string(),
 	spritemap: Config.string().required()
 };
 
