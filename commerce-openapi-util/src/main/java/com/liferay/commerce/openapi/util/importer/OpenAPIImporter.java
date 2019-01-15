@@ -233,10 +233,20 @@ public class OpenAPIImporter {
 
 					Schema schema = content.getSchema();
 
-					parameters.add(
-						new Parameter(
-							schema.getReferencedModel(), "body", content,
-							true));
+					Parameter.ParameterBuilder parameterBuilder =
+						new Parameter.ParameterBuilder();
+
+					parameterBuilder.name(
+						schema.getReferencedModel()
+					).location(
+						"body"
+					).content(
+						content
+					).required(
+						true
+					);
+
+					parameters.add(parameterBuilder.build());
 
 					requestBodyContents.addAll(contents);
 				}

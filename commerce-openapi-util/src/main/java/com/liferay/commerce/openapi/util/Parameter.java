@@ -32,36 +32,6 @@ public class Parameter {
 		return null;
 	}
 
-	public Parameter(
-		String name, String location, Content content, boolean required) {
-
-		this(name, location, content.getSchema(), required);
-
-		_content = content;
-	}
-
-	public Parameter(
-		String name, String location, Schema schema, boolean required) {
-
-		_name = name;
-		_location = location;
-		_schema = schema;
-		_required = required;
-
-		HttpParameterType httpParameterType = HttpParameterType.OBJECT;
-
-		if (_schema.getType() != null) {
-			httpParameterType = HttpParameterType.fromDefinition(
-				schema.getType());
-		}
-
-		HttpParameterFormat httpParameterFormat =
-			HttpParameterFormat.fromHttpParameterTypeAndDefinition(
-				httpParameterType, schema.getFormat());
-
-		_httpParameterFormat = httpParameterFormat;
-	}
-
 	public String getContentMimeType() {
 		if (_content == null) {
 			return null;
@@ -99,6 +69,80 @@ public class Parameter {
 			_schema);
 
 		return _toString;
+	}
+
+	public static class ParameterBuilder {
+
+		public Parameter build() {
+			return new Parameter(this);
+		}
+
+		public ParameterBuilder content(Content content) {
+			_content = content;
+
+			return this;
+		}
+
+		public ParameterBuilder httpParameterFormat(
+			HttpParameterFormat httpParameterFormat) {
+
+			_httpParameterFormat = httpParameterFormat;
+
+			return this;
+		}
+
+		public ParameterBuilder location(String location) {
+			_location = location;
+
+			return this;
+		}
+
+		public ParameterBuilder name(String name) {
+			_name = name;
+
+			return this;
+		}
+
+		public ParameterBuilder required(boolean required) {
+			_required = required;
+
+			return this;
+		}
+
+		public ParameterBuilder schema(Schema schema) {
+			_schema = schema;
+
+			return this;
+		}
+
+		private Content _content;
+		private HttpParameterFormat _httpParameterFormat;
+		private String _location;
+		private String _name;
+		private boolean _required;
+		private Schema _schema;
+
+	}
+
+	private Parameter(ParameterBuilder parameterBuilder) {
+		_name = parameterBuilder._name;
+		_location = parameterBuilder._location;
+		_content = parameterBuilder._content;
+		_schema = parameterBuilder._schema;
+		_required = parameterBuilder._required;
+
+		HttpParameterType httpParameterType = HttpParameterType.OBJECT;
+
+		if (_schema.getType() != null) {
+			httpParameterType = HttpParameterType.fromDefinition(
+				_schema.getType());
+		}
+
+		HttpParameterFormat httpParameterFormat =
+			HttpParameterFormat.fromHttpParameterTypeAndDefinition(
+				httpParameterType, _schema.getFormat());
+
+		_httpParameterFormat = httpParameterFormat;
 	}
 
 	private static final Pattern _parameterReferencePattern = Pattern.compile(
