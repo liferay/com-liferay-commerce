@@ -143,6 +143,6 @@ public class CPFriendlyURLEntryUpgradeProcess extends UpgradeProcess {
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPFriendlyURLEntryUpgradeProcess.class);
 
-	private ClassNameLocalService _classNameLocalService;
+	private final ClassNameLocalService _classNameLocalService;
 
 }

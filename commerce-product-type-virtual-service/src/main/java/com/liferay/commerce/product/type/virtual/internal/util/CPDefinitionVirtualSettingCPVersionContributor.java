@@ -15,8 +15,8 @@
 package com.liferay.commerce.product.type.virtual.internal.util;
 
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.util.CPVersionContributor;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
+import com.liferay.commerce.product.util.CPVersionContributor;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import org.osgi.service.component.annotations.Component;

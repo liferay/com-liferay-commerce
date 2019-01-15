@@ -56,7 +56,8 @@ public class CommerceSubscriptionEntryUpgradeProcess extends UpgradeProcess {
 			"VARCHAR(75)");
 		_addColumn(
 			CommerceSubscriptionEntryModelImpl.class,
-			CommerceSubscriptionEntryModelImpl.TABLE_NAME, "CProductId", "LONG");
+			CommerceSubscriptionEntryModelImpl.TABLE_NAME, "CProductId",
+			"LONG");
 
 		_addIndexes(CommerceSubscriptionEntryModelImpl.TABLE_NAME);
 

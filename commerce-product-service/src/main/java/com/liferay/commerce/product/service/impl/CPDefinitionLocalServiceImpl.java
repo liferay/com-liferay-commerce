@@ -17,7 +17,6 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetLinkConstants;
-import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.product.configuration.CProductVersionConfiguration;
 import com.liferay.commerce.product.exception.CPDefinitionDisplayDateException;
 import com.liferay.commerce.product.exception.CPDefinitionExpirationDateException;
@@ -35,7 +34,6 @@ import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPDisplayLayout;
-import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.model.CProduct;
@@ -43,13 +41,8 @@ import com.liferay.commerce.product.model.impl.CPDefinitionImpl;
 import com.liferay.commerce.product.service.base.CPDefinitionLocalServiceBaseImpl;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
-import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
-import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalServiceUtil;
-import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
-import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalServiceUtil;
 import com.liferay.commerce.product.util.CPVersionContributor;
 import com.liferay.commerce.product.util.CPVersionContributorRegistryUtil;
-import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.exception.NoSuchStructureException;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
@@ -1236,8 +1229,7 @@ public class CPDefinitionLocalServiceImpl
 			return Collections.emptyMap();
 		}
 
-		long classNameId = classNameLocalService.getClassNameId(
-			CProduct.class);
+		long classNameId = classNameLocalService.getClassNameId(CProduct.class);
 
 		return cpFriendlyURLEntryLocalService.getUrlTitleMap(
 			cpDefinition.getGroupId(), classNameId,
@@ -1251,8 +1243,7 @@ public class CPDefinitionLocalServiceImpl
 		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
 			cpDefinitionId);
 
-		long classNameId = classNameLocalService.getClassNameId(
-			CProduct.class);
+		long classNameId = classNameLocalService.getClassNameId(CProduct.class);
 
 		Locale defaultLocale = LocaleUtil.getSiteDefault();
 
@@ -2368,8 +2359,7 @@ public class CPDefinitionLocalServiceImpl
 
 		Map<Locale, String> titleMap = cpDefinition.getNameMap();
 
-		long classNameId = classNameLocalService.getClassNameId(
-			CProduct.class);
+		long classNameId = classNameLocalService.getClassNameId(CProduct.class);
 
 		for (Map.Entry<Locale, String> titleEntry : titleMap.entrySet()) {
 			String urlTitle = urlTitleMap.get(titleEntry.getKey());

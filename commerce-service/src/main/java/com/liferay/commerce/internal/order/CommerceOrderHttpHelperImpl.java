@@ -469,7 +469,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;
-	
+
 	@Reference
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
 
