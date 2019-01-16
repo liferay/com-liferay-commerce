@@ -791,7 +791,7 @@ public class CPDefinitionLocalServiceImpl
 
 		cpFriendlyURLEntryLocalService.deleteCPFriendlyURLEntries(
 			cpDefinition.getGroupId(), CPDefinition.class,
-			cpDefinition.getCPDefinitionId());
+			cpDefinition.getCProductId());
 
 		// Commerce product display layout
 
@@ -1584,6 +1584,13 @@ public class CPDefinitionLocalServiceImpl
 		if (cpDefinitionLocalService.isVersionable(cpDefinition)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
+
+			if (serviceContext.getWorkflowAction() !=
+					WorkflowConstants.ACTION_PUBLISH) {
+
+				cProductLocalService.updatePublishedCPDefinitionId(
+					cpDefinition.getCProductId(), cpDefinitionId);
+			}
 
 			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
