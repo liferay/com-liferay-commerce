@@ -113,9 +113,28 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		return commerceAccount;
 	}
 
+	@Override
+	public void setCurrentCommerceAccount(
+			HttpServletRequest httpServletRequest, long groupId,
+			long commerceAccountId)
+		throws PortalException {
 
-	private void _checkAccountType(
-			long groupId, long commerceAccountId)
+		if (commerceAccountId > 0) {
+			_checkAccountType(groupId, commerceAccountId);
+		}
+
+		String curGroupOrganizationIdKey =
+			_CURRENT_COMMERCE_ACCOUNT_ID_KEY + groupId;
+
+		httpServletRequest = _portal.getOriginalServletRequest(
+			httpServletRequest);
+
+		HttpSession httpSession = httpServletRequest.getSession();
+
+		httpSession.setAttribute(curGroupOrganizationIdKey, commerceAccountId);
+	}
+
+	private void _checkAccountType(long groupId, long commerceAccountId)
 		throws PortalException {
 
 		CommerceAccountGroupServiceConfiguration
@@ -129,41 +148,20 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 			_commerceAccountLocalService.getCommerceAccount(commerceAccountId);
 
 		if ((commerceAccountGroupServiceConfiguration.commerceSiteType() ==
-				 CommerceAccountConstants.SITE_TYPE_B2C) &&
-				(commerceAccount.isBusinessAccount())) {
+				CommerceAccountConstants.SITE_TYPE_B2C) &&
+			(commerceAccount.isBusinessAccount())) {
 
 			throw new PortalException(
 				"Just Personal accounts are allowed in a b2c site");
 		}
 
 		if ((commerceAccountGroupServiceConfiguration.commerceSiteType() ==
-				 CommerceAccountConstants.SITE_TYPE_B2B) &&
-				(commerceAccount.isPersonalAccount())) {
+				CommerceAccountConstants.SITE_TYPE_B2B) &&
+			(commerceAccount.isPersonalAccount())) {
 
 			throw new PortalException(
 				"Just Business accounts are allowed in a b2b site");
 		}
-	}
-
-	@Override
-	public void setCurrentCommerceAccount(
-			HttpServletRequest httpServletRequest, long groupId,
-			long commerceAccountId)
-		throws PortalException {
-
-		if(commerceAccountId > 0){
-			_checkAccountType(groupId, commerceAccountId);
-		}
-
-		String curGroupOrganizationIdKey =
-			_CURRENT_COMMERCE_ACCOUNT_ID_KEY + groupId;
-
-		httpServletRequest = _portal.getOriginalServletRequest(
-			httpServletRequest);
-
-		HttpSession httpSession = httpServletRequest.getSession();
-
-		httpSession.setAttribute(curGroupOrganizationIdKey, commerceAccountId);
 	}
 
 	private CommerceAccount _getSingleCommerceAccount(

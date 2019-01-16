@@ -97,7 +97,8 @@ public interface CPContentHelper {
 			CPCatalogEntry cpCatalogEntry, ThemeDisplay themeDisplay)
 		throws PortalException;
 
-	public List<CPMedia> getImages(long cpDefinitionId, ThemeDisplay themeDisplay)
+	public List<CPMedia> getImages(
+			long cpDefinitionId, ThemeDisplay themeDisplay)
 		throws PortalException;
 
 	public String getImageURL(FileEntry fileEntry, ThemeDisplay themeDisplay)

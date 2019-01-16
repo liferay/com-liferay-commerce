@@ -91,10 +91,9 @@ public class ViewCPInstanceCommerceTierPriceEntriesMVCRenderCommand
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(
-					"Unable to include instance_tier_price_entries.jsp", e);
-			}
+
+			throw new PortletException(
+				"Unable to include instance_tier_price_entries.jsp", e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;

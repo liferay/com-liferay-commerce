@@ -92,9 +92,8 @@ public class EditAssetCategoryCPAttachmentFileEntryMVCRenderCommand
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(e);
-			}
+
+			throw new PortletException(e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;

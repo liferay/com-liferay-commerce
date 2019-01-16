@@ -15,7 +15,6 @@
 package com.liferay.commerce.user.web.internal.portlet.action;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.user.constants.CommerceUserPortletKeys;

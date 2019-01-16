@@ -84,10 +84,8 @@ public class EditCommerceCountryMVCRenderCommand implements MVCRenderCommand {
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(
-					"Unable to include edit_country.jsp", e);
-			}
+
+			throw new PortletException("Unable to include edit_country.jsp", e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;

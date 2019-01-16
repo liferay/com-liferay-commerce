@@ -260,7 +260,8 @@ public class CPContentHelperImpl implements CPContentHelper {
 	}
 
 	@Override
-	public List<CPMedia> getImages(long cpDefinitionId, ThemeDisplay themeDisplay)
+	public List<CPMedia> getImages(
+			long cpDefinitionId, ThemeDisplay themeDisplay)
 		throws PortalException {
 
 		List<CPMedia> cpMedias = new ArrayList<>();
@@ -274,7 +275,9 @@ public class CPContentHelperImpl implements CPContentHelper {
 				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);
 
-		for (CPAttachmentFileEntry cpAttachmentFileEntry: cpAttachmentFileEntries) {
+		for (CPAttachmentFileEntry cpAttachmentFileEntry :
+				cpAttachmentFileEntries) {
+
 			cpMedias.add(new CPMediaImpl(cpAttachmentFileEntry, themeDisplay));
 		}
 
