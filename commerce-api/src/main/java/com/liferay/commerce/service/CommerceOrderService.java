@@ -143,21 +143,29 @@ public interface CommerceOrderService extends BaseService {
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrder> getUserCommerceOrders(long groupId,
-		int orderStatus, String keywords, int start, int end)
-		throws PortalException;
+	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
+		int orderStatus, String keywords, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrder> getUserCommerceOrders(long groupId,
-		String keywords, int start, int end) throws PortalException;
+	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
+		Integer orderStatus, boolean excludeOrderStatus, String keywords,
+		int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserCommerceOrdersCount(long groupId, int orderStatus,
+	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
+		String keywords, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceOrdersCount(long groupId, long userId,
+		int orderStatus, boolean excludeOrderStatus, String keywords);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceOrdersCount(long groupId, long userId,
+		int orderStatus, String keywords);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getUserCommerceOrdersCount(long groupId, long userId,
 		String keywords) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserCommerceOrdersCount(long groupId, String keywords)
-		throws PortalException;
 
 	public void mergeGuestCommerceOrder(long guestCommerceOrderId,
 		long userCommerceOrderId, CommerceContext commerceContext,
