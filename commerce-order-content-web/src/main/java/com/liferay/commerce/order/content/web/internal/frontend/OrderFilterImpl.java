@@ -1,4 +1,3 @@
-<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -12,19 +11,24 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
---%>
 
-<%@ include file="/init.jsp" %>
+package com.liferay.commerce.order.content.web.internal.frontend;
 
-<%
-CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-%>
+import com.liferay.commerce.frontend.DefaultFilterImpl;
 
-<c:choose>
-	<c:when test="<%= commerceOrderContentDisplayContext.isCommerceSiteTypeB2C() %>">
-		<liferay-util:include page="/b2c/view.jsp" servletContext="<%= application %>" />
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/b2b/view.jsp" servletContext="<%= application %>" />
-	</c:otherwise>
-</c:choose>
+/**
+ * @author Alessio Antonio Rendina
+ */
+public class OrderFilterImpl extends DefaultFilterImpl {
+
+	public long getOrderId() {
+		return _orderId;
+	}
+
+	public void setOrderId(long accountId) {
+		_orderId = accountId;
+	}
+
+	private long _orderId;
+
+}

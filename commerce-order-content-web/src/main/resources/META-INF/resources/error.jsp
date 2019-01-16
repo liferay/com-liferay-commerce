@@ -16,15 +16,9 @@
 
 <%@ include file="/init.jsp" %>
 
-<%
-CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-%>
+<liferay-ui:error-header />
 
-<c:choose>
-	<c:when test="<%= commerceOrderContentDisplayContext.isCommerceSiteTypeB2C() %>">
-		<liferay-util:include page="/b2c/view.jsp" servletContext="<%= application %>" />
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/b2b/view.jsp" servletContext="<%= application %>" />
-	</c:otherwise>
-</c:choose>
+<liferay-ui:error exception="<%= NoSuchOrderException.class %>" message="the-order-could-not-be-found" />
+<liferay-ui:error exception="<%= NoSuchOrderNoteException.class %>" message="the-note-could-not-be-found" />
+
+<liferay-ui:error-principal />

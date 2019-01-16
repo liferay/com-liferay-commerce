@@ -15,18 +15,28 @@
 package com.liferay.commerce.order.content.web.internal.portlet;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.content.web.internal.display.context.CommerceOrderContentDisplayContext;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.service.CommerceOrderNoteService;
+import com.liferay.commerce.service.CommerceShipmentItemService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
@@ -66,6 +76,20 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceOrderContentPortlet extends MVCPortlet {
 
 	@Override
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws IOException, PortletException {
+
+		try (ProxyModeThreadLocalCloseable proxyModeThreadLocalCloseable =
+				new ProxyModeThreadLocalCloseable()) {
+
+			ProxyModeThreadLocal.setForceSync(true);
+
+			super.processAction(actionRequest, actionResponse);
+		}
+	}
+
+	@Override
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -77,8 +101,12 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 			CommerceOrderContentDisplayContext
 				commerceOrderContentDisplayContext =
 					new CommerceOrderContentDisplayContext(
-						httpServletRequest, _commerceOrderLocalService,
-						_commerceOrderPriceCalculation);
+						_commerceAddressService, _commerceOrderLocalService,
+						_commerceOrderNoteService,
+						_commerceOrderPriceCalculation,
+						_commercePaymentMethodGroupRelService,
+						_commerceShipmentItemService, httpServletRequest,
+						_modelResourcePermission);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -95,10 +123,28 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 		CommerceOrderContentPortlet.class);
 
 	@Reference
+	private CommerceAddressService _commerceAddressService;
+
+	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Reference
+	private CommerceOrderNoteService _commerceOrderNoteService;
+
+	@Reference
 	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
+
+	@Reference
+	private CommercePaymentMethodGroupRelService
+		_commercePaymentMethodGroupRelService;
+
+	@Reference
+	private CommerceShipmentItemService _commerceShipmentItemService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
+	)
+	private ModelResourcePermission<CommerceOrder> _modelResourcePermission;
 
 	@Reference
 	private Portal _portal;

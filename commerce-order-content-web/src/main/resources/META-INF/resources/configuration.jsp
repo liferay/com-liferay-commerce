@@ -41,6 +41,22 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 							showEmptyOption="<%= true %>"
 						/>
 					</div>
+
+					<aui:select name="preferences--orderStatus--">
+
+						<%
+						for (int orderStatus : CommerceOrderConstants.ORDER_STATUSES) {
+						%>
+
+							<aui:option label="<%= CommerceOrderConstants.getOrderStatusLabel(orderStatus) %>" selected="<%= orderStatus == commerceOrderContentDisplayContext.getConfigurationOrderStatus() %>" value="<%= orderStatus %>" />
+
+						<%
+						}
+						%>
+
+					</aui:select>
+
+					<aui:input checked="<%= commerceOrderContentDisplayContext.getConfigurationExclude() %>" label="exclude" name="preferences--exclude--" type="toggle-switch" value="<%= commerceOrderContentDisplayContext.getConfigurationExclude() %>" />
 				</aui:fieldset>
 			</aui:fieldset-group>
 		</div>
