@@ -86,10 +86,19 @@ public class CommercePaymentServlet extends HttpServlet {
 
 			// Offline methods, payment complete
 
-			_commercePaymentEngine.completePayment(
-				_commerceOrderId, null, httpServletRequest);
+			int commercePaymentMethodType =
+				_commercePaymentEngine.getCommercePaymentMethodType(
+					_commerceOrderId);
 
-			httpServletResponse.sendRedirect(_confirmationStepUrl);
+			if(
+				CommercePaymentConstants.COMMERCE_PAYMENT_METHOD_TYPE_OFFLINE ==
+					commercePaymentMethodType) {
+
+				_commercePaymentEngine.completePayment(
+						_commerceOrderId, null, httpServletRequest);
+
+				httpServletResponse.sendRedirect(_confirmationStepUrl);
+			}
 		}
 		catch (Exception e) {
 			_portal.sendError(e, httpServletRequest, httpServletResponse);
