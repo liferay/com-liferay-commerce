@@ -15,7 +15,6 @@
 package com.liferay.commerce.user.web.internal.display.context;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.user.service.CommerceUserService;
@@ -57,8 +56,7 @@ public class CommerceUserPermissionsDisplayContext
 	}
 
 	public boolean hasUserGroupRole(long userId, long roleId) throws Exception {
-		CommerceAccount commerceAccount =
-			_commerceContext.getCommerceAccount();
+		CommerceAccount commerceAccount = _commerceContext.getCommerceAccount();
 
 		if (commerceAccount == null) {
 			return false;

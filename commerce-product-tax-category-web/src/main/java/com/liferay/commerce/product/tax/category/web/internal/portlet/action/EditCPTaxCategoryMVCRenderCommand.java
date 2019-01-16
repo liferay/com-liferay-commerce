@@ -84,10 +84,9 @@ public class EditCPTaxCategoryMVCRenderCommand implements MVCRenderCommand {
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(
-					"Unable to include edit_tax_category.jsp", e);
-			}
+
+			throw new PortletException(
+				"Unable to include edit_tax_category.jsp", e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;

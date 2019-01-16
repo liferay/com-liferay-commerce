@@ -240,15 +240,14 @@ public class CPAssetCategoriesNavigationDisplayContext {
 			if (languageId.equals(defaultLanguageId)) {
 				return StringPool.BLANK;
 			}
-			else {
-				cpFriendlyURLEntry =
-					_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-						assetCategory.getGroupId(), classNameId, categoryId,
-						defaultLanguageId, true);
 
-				if (cpFriendlyURLEntry == null) {
-					return StringPool.BLANK;
-				}
+			cpFriendlyURLEntry =
+				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
+					assetCategory.getGroupId(), classNameId, categoryId,
+					defaultLanguageId, true);
+
+			if (cpFriendlyURLEntry == null) {
+				return StringPool.BLANK;
 			}
 		}
 

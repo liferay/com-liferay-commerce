@@ -81,9 +81,8 @@ public class EditCPDefinitionLinkMVCRenderCommand implements MVCRenderCommand {
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(e);
-			}
+
+			throw new PortletException(e);
 		}
 
 		return "/edit_definition_link.jsp";

@@ -51,29 +51,29 @@ public class CPMediaImpl implements CPMedia {
 	}
 
 	@Override
+	public String getThumbnailUrl() {
+		return _thumbnailUrl;
+	}
+
+	@Override
 	public String getTitle() {
 		return _title;
 	}
 
 	@Override
-	public String getThumbnailUrl() {
-
-		return _thumbnailUrl;
-	}
-
-	@Override
-	public String getUrl(){
+	public String getUrl() {
 		return _url;
 	}
 
 	@Override
-	public String mimeType(){
+	public String mimeType() {
 		return _mimeType;
 	}
 
-	private String _thumbnailUrl;
-	private String _url;
-	private String _mimeType;
-	private String _title;
-	private long _id;
+	private final long _id;
+	private final String _mimeType;
+	private final String _thumbnailUrl;
+	private final String _title;
+	private final String _url;
+
 }

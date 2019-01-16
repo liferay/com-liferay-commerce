@@ -78,9 +78,8 @@ public class EditCPDefinitionOptionValueRelMVCRenderCommand
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(e);
-			}
+
+			throw new PortletException(e);
 		}
 
 		return "/edit_definition_option_value_rel.jsp";

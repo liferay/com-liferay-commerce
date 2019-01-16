@@ -22,7 +22,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
-import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.frontend.internal.account.model.Account;
@@ -139,10 +138,9 @@ public class CommerceAccountResource {
 
 		HttpServletRequest httpServletRequest = themeDisplay.getRequest();
 
-		CommerceContext commerceContext =
-			_commerceContextFactory.create(
-				groupId, _portal.getUserId(httpServletRequest), 0, 0,
-				StringPool.BLANK);
+		CommerceContext commerceContext = _commerceContextFactory.create(
+			groupId, _portal.getUserId(httpServletRequest), 0, 0,
+			StringPool.BLANK);
 
 		try {
 			accountList = getAccountList(
@@ -462,6 +460,9 @@ public class CommerceAccountResource {
 	private CommerceAccountService _commerceAccountService;
 
 	@Reference
+	private CommerceContextFactory _commerceContextFactory;
+
+	@Reference
 	private CommerceOrderService _commerceOrderService;
 
 	@Reference
@@ -472,8 +473,5 @@ public class CommerceAccountResource {
 
 	@Reference
 	private UserLocalService _userLocalService;
-
-	@Reference
-	private CommerceContextFactory _commerceContextFactory;
 
 }

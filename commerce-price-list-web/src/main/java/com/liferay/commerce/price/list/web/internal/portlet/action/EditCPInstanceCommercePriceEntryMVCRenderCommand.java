@@ -94,10 +94,9 @@ public class EditCPInstanceCommercePriceEntryMVCRenderCommand
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(
-					"Unable to include edit_instance_price_entry.jsp", e);
-			}
+
+			throw new PortletException(
+				"Unable to include edit_instance_price_entry.jsp", e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;

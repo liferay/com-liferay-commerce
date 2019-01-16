@@ -90,12 +90,11 @@ public class CommercePaymentServlet extends HttpServlet {
 				_commercePaymentEngine.getCommercePaymentMethodType(
 					_commerceOrderId);
 
-			if(
-				CommercePaymentConstants.COMMERCE_PAYMENT_METHOD_TYPE_OFFLINE ==
+			if (CommercePaymentConstants.COMMERCE_PAYMENT_METHOD_TYPE_OFFLINE ==
 					commercePaymentMethodType) {
 
 				_commercePaymentEngine.completePayment(
-						_commerceOrderId, null, httpServletRequest);
+					_commerceOrderId, null, httpServletRequest);
 
 				httpServletResponse.sendRedirect(_confirmationStepUrl);
 			}

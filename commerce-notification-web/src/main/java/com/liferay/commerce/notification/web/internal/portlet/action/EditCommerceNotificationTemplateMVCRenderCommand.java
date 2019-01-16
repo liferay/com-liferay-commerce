@@ -94,10 +94,9 @@ public class EditCommerceNotificationTemplateMVCRenderCommand
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(
-					"Unable to include edit_notification_template.jsp", e);
-			}
+
+			throw new PortletException(
+				"Unable to include edit_notification_template.jsp", e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;
