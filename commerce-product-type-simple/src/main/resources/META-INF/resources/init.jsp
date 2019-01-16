@@ -11,7 +11,7 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- */
+ */com.liferay.commerce.taglib
 --%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -38,6 +38,7 @@ page import="com.liferay.commerce.product.model.CPSpecificationOption" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.portal.kernel.repository.model.FileEntry" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.commerce.product.catalog.CPMedia" %>
 
 <%@ page import="java.util.List" %>
 

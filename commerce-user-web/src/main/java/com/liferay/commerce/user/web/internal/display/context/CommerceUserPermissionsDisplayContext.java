@@ -16,6 +16,8 @@ package com.liferay.commerce.user.web.internal.display.context;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.user.service.CommerceUserService;
 import com.liferay.commerce.user.util.CommerceRoleRegistry;
 import com.liferay.portal.kernel.model.Role;
@@ -33,7 +35,6 @@ public class CommerceUserPermissionsDisplayContext
 	extends BaseCommerceUserDisplayContext {
 
 	public CommerceUserPermissionsDisplayContext(
-		CommerceAccountHelper commerceAccountHelper,
 		CommerceRoleRegistry commerceRoleRegistry,
 		CommerceUserService commerceUserService,
 		HttpServletRequest httpServletRequest, Portal portal,
@@ -41,9 +42,11 @@ public class CommerceUserPermissionsDisplayContext
 
 		super(commerceUserService, httpServletRequest, portal);
 
-		_commerceAccountHelper = commerceAccountHelper;
 		_commerceRoleRegistry = commerceRoleRegistry;
 		_userGroupRoleLocalService = userGroupRoleLocalService;
+
+		_commerceContext = (CommerceContext)httpServletRequest.getAttribute(
+			CommerceWebKeys.COMMERCE_CONTEXT);
 	}
 
 	public List<Role> getRoles() {
@@ -55,8 +58,7 @@ public class CommerceUserPermissionsDisplayContext
 
 	public boolean hasUserGroupRole(long userId, long roleId) throws Exception {
 		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
-				commerceUserRequestHelper.getRequest());
+			_commerceContext.getCommerceAccount();
 
 		if (commerceAccount == null) {
 			return false;
@@ -66,7 +68,7 @@ public class CommerceUserPermissionsDisplayContext
 			userId, commerceAccount.getCommerceAccountGroupId(), roleId);
 	}
 
-	private final CommerceAccountHelper _commerceAccountHelper;
+	private final CommerceContext _commerceContext;
 	private final CommerceRoleRegistry _commerceRoleRegistry;
 	private final UserGroupRoleLocalService _userGroupRoleLocalService;
 

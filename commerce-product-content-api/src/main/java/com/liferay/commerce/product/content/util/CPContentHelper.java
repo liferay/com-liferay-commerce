@@ -17,6 +17,7 @@ package com.liferay.commerce.product.content.util;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.content.render.CPContentRenderer;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
@@ -96,7 +97,7 @@ public interface CPContentHelper {
 			CPCatalogEntry cpCatalogEntry, ThemeDisplay themeDisplay)
 		throws PortalException;
 
-	public List<CPAttachmentFileEntry> getImages(long cpDefinitionId)
+	public List<CPMedia> getImages(long cpDefinitionId, ThemeDisplay themeDisplay)
 		throws PortalException;
 
 	public String getImageURL(FileEntry fileEntry, ThemeDisplay themeDisplay)

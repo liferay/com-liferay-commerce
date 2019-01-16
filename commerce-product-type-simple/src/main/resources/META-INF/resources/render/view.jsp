@@ -34,12 +34,11 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						<div id="<portlet:namespace />thumbs-container">
 
 							<%
-							for (CPAttachmentFileEntry cpAttachmentFileEntry : cpContentHelper.getImages(cpDefinitionId)) {
-								String url = cpContentHelper.getImageURL(cpAttachmentFileEntry.getFileEntry(), themeDisplay);
+							for (CPMedia cpMedia : cpContentHelper.getImages(cpDefinitionId, themeDisplay)) {
 							%>
 
-								<div class="card thumb" data-url="<%= url %>">
-									<img class="center-block img-responsive" src="<%= url %>">
+								<div class="card thumb" data-url="<%= cpMedia.getUrl() %>">
+									<img class="center-block img-responsive" src="<%= cpMedia.getUrl() %>">
 								</div>
 
 							<%

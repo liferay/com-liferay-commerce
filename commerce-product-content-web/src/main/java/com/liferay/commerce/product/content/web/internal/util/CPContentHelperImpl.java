@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.content.web.internal.util;
 
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.constants.CPContentContributorConstants;
 import com.liferay.commerce.product.constants.CPOptionCategoryConstants;
@@ -51,6 +52,7 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
@@ -258,16 +260,25 @@ public class CPContentHelperImpl implements CPContentHelper {
 	}
 
 	@Override
-	public List<CPAttachmentFileEntry> getImages(long cpDefinitionId)
+	public List<CPMedia> getImages(long cpDefinitionId, ThemeDisplay themeDisplay)
 		throws PortalException {
+
+		List<CPMedia> cpMedias = new ArrayList<>();
 
 		long classNameId = _portal.getClassNameId(CPDefinition.class);
 
-		return _cpAttachmentFileEntryService.getCPAttachmentFileEntries(
-			classNameId, cpDefinitionId,
-			CPAttachmentFileEntryConstants.TYPE_IMAGE,
-			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS);
+		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
+			_cpAttachmentFileEntryService.getCPAttachmentFileEntries(
+				classNameId, cpDefinitionId,
+				CPAttachmentFileEntryConstants.TYPE_IMAGE,
+				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+		for (CPAttachmentFileEntry cpAttachmentFileEntry: cpAttachmentFileEntries) {
+			cpMedias.add(new CPMediaImpl(cpAttachmentFileEntry, themeDisplay));
+		}
+
+		return cpMedias;
 	}
 
 	@Override

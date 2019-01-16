@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.Portal;
 
 import java.util.List;
@@ -43,9 +44,9 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Marco Leo
  */
-public class CommerceContextHttpsImpl implements CommerceContext {
+public class CommerceContextHttpImpl implements CommerceContext {
 
-	public CommerceContextHttpsImpl(
+	public CommerceContextHttpImpl(
 		HttpServletRequest httpServletRequest,
 		CommerceAccountHelper commerceAccountHelper,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
@@ -68,9 +69,11 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 
 		try {
 			_commerceAccountGroupServiceConfiguration =
-				configurationProvider.getGroupConfiguration(
+				configurationProvider.getConfiguration(
 					CommerceAccountGroupServiceConfiguration.class,
-					_portal.getScopeGroupId(httpServletRequest));
+					new GroupServiceSettingsLocator(
+						_portal.getScopeGroupId(httpServletRequest),
+						CommerceAccountConstants.SERVICE_NAME));
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -185,7 +188,7 @@ public class CommerceContextHttpsImpl implements CommerceContext {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceContextHttpsImpl.class);
+		CommerceContextHttpImpl.class);
 
 	private CommerceAccount _commerceAccount;
 	private CommerceAccountGroupServiceConfiguration

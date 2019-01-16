@@ -113,9 +113,8 @@ public class CommerceUserPermissionsScreenNavigationEntry
 		CommerceUserPermissionsDisplayContext
 			commerceUserPermissionsDisplayContext =
 				new CommerceUserPermissionsDisplayContext(
-					_commerceAccountHelper, _commerceRoleRegistry,
-					_commerceUserService, httpServletRequest, _portal,
-					_userGroupRoleLocalService);
+					_commerceRoleRegistry, _commerceUserService,
+					httpServletRequest, _portal, _userGroupRoleLocalService);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -128,8 +127,6 @@ public class CommerceUserPermissionsScreenNavigationEntry
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUserPermissionsScreenNavigationEntry.class);
 
-	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceRoleRegistry _commerceRoleRegistry;
