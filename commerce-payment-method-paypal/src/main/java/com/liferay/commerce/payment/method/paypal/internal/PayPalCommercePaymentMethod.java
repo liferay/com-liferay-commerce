@@ -73,14 +73,17 @@ import java.math.BigDecimal;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -556,7 +559,23 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		agreement.setName("Base Agreement");
 		agreement.setDescription("Basic Agreement");
-		agreement.setStartDate("2019-06-17T9:45:04Z");
+
+		String pattern = "yyyy-MM-dd hh:mm:ss";
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		TimeZone timeZone = TimeZone.getTimeZone("UTC");
+
+		Calendar calendar = Calendar.getInstance(timeZone);
+
+		calendar.add(Calendar.MINUTE, 10);
+
+		String date = simpleDateFormat.format(calendar.getTime());
+
+		date = StringUtil.replace(date, CharPool.SPACE, 'T');
+		date = date + "Z";
+
+		agreement.setStartDate(date);
 
 		// Set plan ID
 
@@ -725,8 +744,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
 
-		BigDecimal initialAmount = BigDecimal.ZERO;
-
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 			CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
@@ -755,8 +772,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 			BigDecimal finalPrice = commerceOrderItem.getFinalPrice();
 
-			initialAmount = initialAmount.add(finalPrice);
-
 			String value = _payPalDecimalFormat.format(finalPrice);
 
 			Currency amount = new Currency(commerceCurrency.getCode(), value);
@@ -765,8 +780,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 				"Payment Definition", "REGULAR",
 				String.valueOf(cpSubscriptionInfo.getSubscriptionLength()),
 				subscriptionType,
-				String.valueOf(
-					cpSubscriptionInfo.getMaxSubscriptionCycles() - 1),
+				String.valueOf(cpSubscriptionInfo.getMaxSubscriptionCycles()),
 				amount);
 
 			paymentDefinitions.add(paymentDefinition);
@@ -786,12 +800,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		merchantPreferences.setInitialFailAmountAction("CONTINUE");
 		merchantPreferences.setMaxFailAttempts("0");
 		merchantPreferences.setReturnUrl(commercePaymentRequest.getReturnUrl());
-
-		String value = _payPalDecimalFormat.format(initialAmount);
-
-		Currency setUpFee = new Currency(commerceCurrency.getCode(), value);
-
-		merchantPreferences.setSetupFee(setUpFee);
 
 		plan.setMerchantPreferences(merchantPreferences);
 
