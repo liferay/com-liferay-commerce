@@ -26,7 +26,7 @@ public class Method {
 	public Method(
 		String name, List<Content> requestBody, String httpMethod,
 		String absolutePath, List<Parameter> parameters,
-		List<Response> responses) {
+		List<Response> responses, List<Extension> extensions) {
 
 		_name = name;
 
@@ -50,6 +50,8 @@ public class Method {
 				break;
 			}
 		}
+
+		_extensions.addAll(extensions);
 
 		_hasResponseContent = hasResponseContent;
 	}
@@ -99,6 +101,14 @@ public class Method {
 
 	public List<Response> getResponses() {
 		return _responses;
+	}
+
+	public boolean hasExtensions() {
+		if (_extensions.isEmpty()) {
+			return false;
+		}
+
+		return true;
 	}
 
 	public boolean hasResponseContent() {
@@ -155,6 +165,7 @@ public class Method {
 	}
 
 	private final String _absolutePath;
+	private final List<Extension> _extensions = new ArrayList<>();
 	private final boolean _hasResponseContent;
 	private final String _httpMethod;
 	private String _modelPath;
