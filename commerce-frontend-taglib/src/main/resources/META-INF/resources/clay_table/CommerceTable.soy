@@ -91,14 +91,16 @@
 	{@param? _handleCellContentClick: any}
 	{@param? spritemap: string}
 
-	<td class="">
+	<td class="image-name-cell">
 		<h1 class="table-list-title">
 			<span class="text-truncate-inline">
 				{let $label kind="html"}
-					{if $item.thumbnail}
-						<img src={$item.thumbnail} />
-					{/if}
-					<span class="text-truncate">{$value}</span>
+					<div class="image-name-cell-label">
+						{if $item.thumbnail}
+							<img src={$item.thumbnail} />
+						{/if}
+						<span class="text-truncate">{$value}</span>
+					</div>
 				{/let}
 				{if $item.href}
 					{call ClayLink.render}
