@@ -17,7 +17,7 @@ package com.liferay.commerce.frontend.internal;
 import com.liferay.commerce.frontend.DefaultFilterImpl;
 import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.FilterFactory;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,7 +30,7 @@ public class DefaultFilterFactoryImpl implements FilterFactory {
 	public Filter create(HttpServletRequest httpServletRequest) {
 		DefaultFilterImpl defaultFilter = new DefaultFilterImpl();
 
-		String keywords = GetterUtil.getString(httpServletRequest, "q");
+		String keywords = ParamUtil.getString(httpServletRequest, "q");
 
 		defaultFilter.setKeywords(keywords);
 
