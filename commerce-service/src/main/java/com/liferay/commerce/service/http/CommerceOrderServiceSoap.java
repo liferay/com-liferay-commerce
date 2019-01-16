@@ -359,11 +359,11 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderSoap[] getUserCommerceOrders(
-		long groupId, int orderStatus, String keywords, int start, int end)
-		throws RemoteException {
+		long groupId, long userId, int orderStatus, String keywords, int start,
+		int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
-				CommerceOrderServiceUtil.getUserCommerceOrders(groupId,
+				CommerceOrderServiceUtil.getUserCommerceOrders(groupId, userId,
 					orderStatus, keywords, start, end);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
@@ -376,11 +376,29 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderSoap[] getUserCommerceOrders(
-		long groupId, String keywords, int start, int end)
+		long groupId, long userId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords, int start, int end)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
-				CommerceOrderServiceUtil.getUserCommerceOrders(groupId,
+				CommerceOrderServiceUtil.getUserCommerceOrders(groupId, userId,
+					orderStatus, excludeOrderStatus, keywords, start, end);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderSoap[] getUserCommerceOrders(
+		long groupId, long userId, String keywords, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
+				CommerceOrderServiceUtil.getUserCommerceOrders(groupId, userId,
 					keywords, start, end);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
@@ -392,11 +410,12 @@ public class CommerceOrderServiceSoap {
 		}
 	}
 
-	public static int getUserCommerceOrdersCount(long groupId, int orderStatus,
-		String keywords) throws RemoteException {
+	public static int getUserCommerceOrdersCount(long groupId, long userId,
+		int orderStatus, boolean excludeOrderStatus, String keywords)
+		throws RemoteException {
 		try {
 			int returnValue = CommerceOrderServiceUtil.getUserCommerceOrdersCount(groupId,
-					orderStatus, keywords);
+					userId, orderStatus, excludeOrderStatus, keywords);
 
 			return returnValue;
 		}
@@ -407,11 +426,26 @@ public class CommerceOrderServiceSoap {
 		}
 	}
 
-	public static int getUserCommerceOrdersCount(long groupId, String keywords)
-		throws RemoteException {
+	public static int getUserCommerceOrdersCount(long groupId, long userId,
+		int orderStatus, String keywords) throws RemoteException {
 		try {
 			int returnValue = CommerceOrderServiceUtil.getUserCommerceOrdersCount(groupId,
-					keywords);
+					userId, orderStatus, keywords);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getUserCommerceOrdersCount(long groupId, long userId,
+		String keywords) throws RemoteException {
+		try {
+			int returnValue = CommerceOrderServiceUtil.getUserCommerceOrdersCount(groupId,
+					userId, keywords);
 
 			return returnValue;
 		}
