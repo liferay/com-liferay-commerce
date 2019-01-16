@@ -18,14 +18,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.liferay.commerce.openapi.util.ComponentDefinition;
-import com.liferay.commerce.openapi.util.Content;
 import com.liferay.commerce.openapi.util.Definition;
 import com.liferay.commerce.openapi.util.Method;
-import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.PropertiesFactory;
-import com.liferay.commerce.openapi.util.Response;
-import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
+import com.liferay.commerce.openapi.util.util.GetterUtil;
 import com.liferay.petra.json.web.service.client.JSONWebServiceClient;
 import com.liferay.petra.json.web.service.client.JSONWebServiceException;
 import com.liferay.petra.json.web.service.client.internal.JSONWebServiceClientImpl;
@@ -36,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import org.apache.http.NameValuePair;
@@ -83,7 +79,8 @@ public class OpenAPIImporter {
 			_properties.getProperty("openapi.swagger.host.name"));
 
 		_jsonWebServiceClient.setHostPort(
-			_getInteger(_properties.getProperty("openapi.swagger.host.port")));
+			GetterUtil.getInteger(
+				_properties.getProperty("openapi.swagger.host.port")));
 
 		_jsonWebServiceClient.setProtocol(
 			_properties.getProperty("openapi.swagger.protocol"));
@@ -112,28 +109,6 @@ public class OpenAPIImporter {
 		}
 	}
 
-	private List<Content> _getContents(JsonNode contentJsonNode) {
-		List<Content> contents = new ArrayList<>();
-
-		Iterator<String> fieldNames = contentJsonNode.fieldNames();
-
-		fieldNames.forEachRemaining(
-			mimeType -> {
-				JsonNode mimeTypeJSONNode = contentJsonNode.get(mimeType);
-
-				Schema schema = null;
-
-				if (mimeTypeJSONNode.has("schema")) {
-					schema = ParameterImporter.getSchema(
-						mimeTypeJSONNode.get("schema"));
-				}
-
-				contents.add(new Content(mimeType, schema));
-			});
-
-		return contents;
-	}
-
 	private Definition _getDefinition(String json) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 
@@ -160,10 +135,12 @@ public class OpenAPIImporter {
 
 		Iterator<String> iterator = pathsJSONNode.fieldNames();
 
+		MethodImporter methodImporter = new MethodImporter();
+
 		while (iterator.hasNext()) {
 			String path = iterator.next();
 
-			List<Method> methods = _getMethods(
+			List<Method> methods = methodImporter.getMethods(
 				path, pathsJSONNode.get(path), componentDefinitions);
 
 			for (Method method : methods) {
@@ -172,145 +149,6 @@ public class OpenAPIImporter {
 		}
 
 		return definition;
-	}
-
-	private int _getInteger(String value) {
-		if (value == null) {
-			return 0;
-		}
-
-		try {
-			return Integer.parseInt(value);
-		}
-		catch (NumberFormatException nfe) {
-			_logger.error("Unable to parse value {}", value, nfe);
-		}
-
-		return 0;
-	}
-
-	private List<Method> _getMethods(
-		String path, JsonNode pathJSONNode,
-		List<ComponentDefinition> componentDefinitions) {
-
-		List<Method> methods = new ArrayList<>();
-
-		Iterator<String> iterator = pathJSONNode.fieldNames();
-
-		while (iterator.hasNext()) {
-			String httpMethodName = iterator.next();
-
-			JsonNode httpMethodJSONNode = pathJSONNode.get(httpMethodName);
-
-			String methodName = httpMethodName;
-
-			if (httpMethodJSONNode.has("operationId")) {
-				JsonNode operationIdJSONNode = httpMethodJSONNode.get(
-					"operationId");
-
-				methodName = operationIdJSONNode.asText();
-			}
-
-			List<Parameter> parameters = new ArrayList<>();
-
-			if (httpMethodJSONNode.has("parameters")) {
-				parameters.addAll(
-					_getParameters(
-						httpMethodJSONNode.get("parameters"),
-						componentDefinitions));
-			}
-
-			List<Content> requestBodyContents = new ArrayList<>();
-
-			if (httpMethodJSONNode.has("requestBody")) {
-				JsonNode requestBody = httpMethodJSONNode.get("requestBody");
-
-				List<Content> contents = _getContents(
-					requestBody.get("content"));
-
-				if (!contents.isEmpty()) {
-					Content content = contents.get(0);
-
-					Schema schema = content.getSchema();
-
-					Parameter.ParameterBuilder parameterBuilder =
-						new Parameter.ParameterBuilder();
-
-					parameterBuilder.name(
-						schema.getReferencedModel()
-					).location(
-						"body"
-					).content(
-						content
-					).required(
-						true
-					);
-
-					parameters.add(parameterBuilder.build());
-
-					requestBodyContents.addAll(contents);
-				}
-			}
-
-			JsonNode responsesJSONNode = httpMethodJSONNode.get("responses");
-
-			List<Response> responses = new ArrayList<>();
-
-			Iterator<Map.Entry<String, JsonNode>> fields =
-				responsesJSONNode.fields();
-
-			fields.forEachRemaining(
-				entry -> {
-					JsonNode jsonNode = entry.getValue();
-
-					if (jsonNode.has("content")) {
-						List<Content> contents = _getContents(
-							jsonNode.get("content"));
-
-						responses.add(
-							new Response(
-								_getInteger(entry.getKey()), contents));
-					}
-					else {
-						responses.add(
-							new Response(_getInteger(entry.getKey()), null));
-					}
-				});
-
-			methods.add(
-				new Method(
-					methodName, requestBodyContents, httpMethodName, path,
-					parameters, responses));
-		}
-
-		return methods;
-	}
-
-	private List<Parameter> _getParameters(
-		JsonNode parametersJSONNode,
-		List<ComponentDefinition> componentDefinitions) {
-
-		if (parametersJSONNode.isNull()) {
-			return Collections.emptyList();
-		}
-
-		List<Parameter> parameters = new ArrayList<>();
-
-		parametersJSONNode.forEach(
-			parameterJSONNode -> {
-				if (parameterJSONNode.has("$ref")) {
-					parameters.add(
-						ParameterImporter.fromComponentDefinition(
-							parameterJSONNode.get("$ref"),
-							componentDefinitions));
-				}
-				else {
-					parameters.add(
-						ParameterImporter.fromJSONNode(parameterJSONNode));
-				}
-			});
-
-		return parameters;
 	}
 
 	private static Logger _logger = LoggerFactory.getLogger(
