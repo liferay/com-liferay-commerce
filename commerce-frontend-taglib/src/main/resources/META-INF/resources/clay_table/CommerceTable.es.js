@@ -71,9 +71,9 @@ class CommerceTable extends Component {
 	}
 
 	_getApiURL() {
-		let url = this.dataSetAPI + '/' + this.groupId + '/' + this.tableName + '/' + this.dataProviderKey + '?';
+		let url = this.dataSetAPI;
 
-		url = url + 'pageSize=' + this.pageSize;
+		url = url + '&pageSize=' + this.pageSize;
 
 		url = url + '&page=' + this.currentPage;
 
@@ -89,7 +89,6 @@ CommerceTable.STATE = {
 	dataProviderKey: Config.string().required(),
 	dataSetAPI: Config.string().required(),
 	disableAJAX: Config.bool(),
-	groupId: Config.string().required(),
 	id: Config.string(),
 	items: Config.array().required(),
 	pageSize: Config.number().required(),

@@ -31,11 +31,14 @@ import com.liferay.commerce.frontend.taglib.internal.model.ClayPaginationEntry;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Layout;
+import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -71,6 +74,10 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 		String tableName = GetterUtil.getString(context.get("tableName"));
 
+		Layout layout = themeDisplay.getLayout();
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
 		try {
 			_setTableContext(tableName);
 			_setItems(dataProviderKey);
@@ -78,12 +85,21 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 			setComponentId(tableName + "CommerceTable");
 
-			putValue(
-				"dataSetAPI",
-				PortalUtil.getPortalURL(request) +
-					"/o/commerce-ui/commerce-data-set");
+			StringBundler sb = new StringBundler(11);
 
-			putValue("groupId", themeDisplay.getScopeGroupId());
+			sb.append(PortalUtil.getPortalURL(request));
+			sb.append("/o/commerce-ui/commerce-data-set/");
+			sb.append(themeDisplay.getScopeGroupId());
+			sb.append(StringPool.FORWARD_SLASH);
+			sb.append(tableName);
+			sb.append(StringPool.FORWARD_SLASH);
+			sb.append(dataProviderKey);
+			sb.append("?plid=");
+			sb.append(layout.getPlid());
+			sb.append("&portletId=");
+			sb.append(portletDisplay.getId());
+
+			putValue("dataSetAPI", sb.toString());
 
 			putValue(
 				"spritemap",
