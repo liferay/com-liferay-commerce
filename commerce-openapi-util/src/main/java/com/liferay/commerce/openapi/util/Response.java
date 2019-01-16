@@ -41,7 +41,10 @@ public class Response {
 	}
 
 	public boolean hasContent() {
-		if ((_status == 200) && !_contents.isEmpty()) {
+		if ((javax.ws.rs.core.Response.Status.Family.familyOf(_status) ==
+				javax.ws.rs.core.Response.Status.Family.SUCCESSFUL) &&
+			!_contents.isEmpty()) {
+
 			return true;
 		}
 
