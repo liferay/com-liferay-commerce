@@ -97,7 +97,8 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 			return null;
 		}
 		else if (currentCommerceAccountId == 0) {
-			commerceAccount = _getSingleCommerceAccount(httpServletRequest);
+			commerceAccount = _getSingleCommerceAccount(
+				groupId, httpServletRequest);
 
 			if (commerceAccount == null) {
 				setCurrentCommerceAccount(httpServletRequest, groupId, -1);
@@ -129,7 +130,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 	}
 
 	private CommerceAccount _getSingleCommerceAccount(
-			HttpServletRequest httpServletRequest)
+			long groupId, HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		User user = _portal.getUser(httpServletRequest);
@@ -142,8 +143,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		CommerceAccountGroupServiceConfiguration
 			commerceAccountGroupServiceConfiguration =
 				_configurationProvider.getGroupConfiguration(
-					CommerceAccountGroupServiceConfiguration.class,
-					_portal.getScopeGroupId(httpServletRequest));
+					CommerceAccountGroupServiceConfiguration.class, groupId);
 
 		if (commerceAccountGroupServiceConfiguration.commerceSiteType() ==
 				CommerceAccountConstants.SITE_TYPE_B2C) {
