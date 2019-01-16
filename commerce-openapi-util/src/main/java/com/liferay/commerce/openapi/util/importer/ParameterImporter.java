@@ -22,6 +22,7 @@ import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -61,30 +62,28 @@ public class ParameterImporter {
 	}
 
 	public static Parameter fromJSONNode(JsonNode parameterJSONNode) {
-		JsonNode in = parameterJSONNode.get("in");
-		JsonNode nameJSONNode = parameterJSONNode.get("name");
-		JsonNode requiredJSONNode = parameterJSONNode.get("required");
-
-		JsonNode schemaJSONNode = parameterJSONNode.get("schema");
-
-		Schema schema = getSchema(schemaJSONNode);
-
-		_logger.debug(
-			"Create parameter using {}, {}, {}, {}", nameJSONNode.asText(),
-			in.asText(), schema, requiredJSONNode.asBoolean());
-
 		Parameter.ParameterBuilder parameterBuilder =
 			new Parameter.ParameterBuilder();
 
-		parameterBuilder.location(
-			in.asText()
-		).name(
-			nameJSONNode.asText()
-		).required(
-			requiredJSONNode.asBoolean()
-		).schema(
-			schema
-		);
+		JsonNode inJSONNode = parameterJSONNode.get("in");
+
+		parameterBuilder.location(inJSONNode.asText());
+
+		JsonNode nameJSONNode = parameterJSONNode.get("name");
+
+		parameterBuilder.name(nameJSONNode.asText());
+
+		if (parameterJSONNode.has("required")) {
+			JsonNode requiredJSONNode = parameterJSONNode.get("required");
+
+			parameterBuilder.required(requiredJSONNode.asBoolean());
+		}
+
+		parameterBuilder.schema(getSchema(parameterJSONNode.get("schema")));
+
+		_logger.debug(
+			"Create {} parameter {}", inJSONNode.asText(),
+			nameJSONNode.asText());
 
 		return parameterBuilder.build();
 	}
@@ -121,12 +120,27 @@ public class ParameterImporter {
 		return new Schema(type, format, reference);
 	}
 
-	public List<Parameter> getParameters(JsonNode parametersParentJSONNode) {
+	public List<Parameter> getParameters(
+		JsonNode parametersParentJSONNode,
+		List<ComponentDefinition> componentDefinitions) {
+
+		if (parametersParentJSONNode == null) {
+			return Collections.emptyList();
+		}
+
 		List<Parameter> parameters = new ArrayList<>();
 
 		parametersParentJSONNode.forEach(
 			parameterJSONNode -> {
-				parameters.add(fromJSONNode(parameterJSONNode));
+				if (parameterJSONNode.has("$ref")) {
+					parameters.add(
+						fromComponentDefinition(
+							parameterJSONNode.get("$ref"),
+							componentDefinitions));
+				}
+				else {
+					parameters.add(fromJSONNode(parameterJSONNode));
+				}
 			});
 
 		return parameters;
