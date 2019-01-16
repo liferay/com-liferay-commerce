@@ -139,17 +139,17 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 		CommerceAccountGroupServiceConfiguration
 			commerceAccountGroupServiceConfiguration =
-			_configurationProvider.getConfiguration(
-				CommerceAccountGroupServiceConfiguration.class,
-				new GroupServiceSettingsLocator(
-					groupId, CommerceAccountConstants.SERVICE_NAME));
+				_configurationProvider.getConfiguration(
+					CommerceAccountGroupServiceConfiguration.class,
+					new GroupServiceSettingsLocator(
+						groupId, CommerceAccountConstants.SERVICE_NAME));
 
 		CommerceAccount commerceAccount =
 			_commerceAccountLocalService.getCommerceAccount(commerceAccountId);
 
 		if ((commerceAccountGroupServiceConfiguration.commerceSiteType() ==
 				CommerceAccountConstants.SITE_TYPE_B2C) &&
-			(commerceAccount.isBusinessAccount())) {
+			commerceAccount.isBusinessAccount()) {
 
 			throw new PortalException(
 				"Just Personal accounts are allowed in a b2c site");
@@ -157,7 +157,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 		if ((commerceAccountGroupServiceConfiguration.commerceSiteType() ==
 				CommerceAccountConstants.SITE_TYPE_B2B) &&
-			(commerceAccount.isPersonalAccount())) {
+			commerceAccount.isPersonalAccount()) {
 
 			throw new PortalException(
 				"Just Business accounts are allowed in a b2b site");
