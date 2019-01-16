@@ -27,9 +27,9 @@
 				COUNT(DISTINCT CommerceOrder.commerceOrderId) AS COUNT_VALUE
 			FROM
 				CommerceOrder
-			LEFT JOIN
+			INNER JOIN
 			 	CommerceAccount ON
-			 		CommerceAccount.commerceAccountId = CommerceOrder.commerceOrderId
+			 		CommerceAccount.commerceAccountId = CommerceOrder.commerceAccountId
 			LEFT JOIN
 			 	CommerceAccountUserRel ON
 			 		CommerceAccountUserRel.commerceAccountId = CommerceAccount.commerceAccountId
@@ -82,7 +82,7 @@
 				CommerceOrder
 			INNER JOIN
 			 	CommerceAccount ON
-			 		CommerceAccount.commerceAccountId = CommerceOrder.commerceOrderId
+			 		CommerceAccount.commerceAccountId = CommerceOrder.commerceAccountId
 			LEFT JOIN
 			 	CommerceAccountUserRel ON
 			 		CommerceAccountUserRel.commerceAccountId = CommerceAccount.commerceAccountId
