@@ -533,12 +533,13 @@ public class CommerceOrderLocalServiceImpl
 
 	@Override
 	public List<CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, Integer orderStatus, String keywords,
-		int start, int end) {
+		long groupId, long userId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords, int start, int end) {
 
 		QueryDefinition<CommerceOrder> queryDefinition =
 			new QueryDefinition<>();
 
+		queryDefinition.setAttribute("excludeOrderStatus", excludeOrderStatus);
 		queryDefinition.setAttribute("groupId", groupId);
 		queryDefinition.setAttribute("keywords", keywords);
 		queryDefinition.setAttribute("orderStatus", orderStatus);
@@ -549,17 +550,36 @@ public class CommerceOrderLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceOrder> getUserCommerceOrders(
+		long groupId, long userId, Integer orderStatus, String keywords,
+		int start, int end) {
+
+		return commerceOrderLocalService.getUserCommerceOrders(
+			groupId, userId, orderStatus, false, keywords, start, end);
+	}
+
+	@Override
 	public int getUserCommerceOrdersCount(
-		long groupId, long userId, Integer orderStatus, String keywords) {
+		long groupId, long userId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords) {
 
 		QueryDefinition<CommerceOrder> queryDefinition =
 			new QueryDefinition<>();
 
+		queryDefinition.setAttribute("excludeOrderStatus", excludeOrderStatus);
 		queryDefinition.setAttribute("groupId", groupId);
 		queryDefinition.setAttribute("keywords", keywords);
 		queryDefinition.setAttribute("orderStatus", orderStatus);
 
 		return commerceOrderFinder.countByU_O(userId, queryDefinition);
+	}
+
+	@Override
+	public int getUserCommerceOrdersCount(
+		long groupId, long userId, Integer orderStatus, String keywords) {
+
+		return commerceOrderLocalService.getUserCommerceOrdersCount(
+			groupId, userId, orderStatus, false, keywords);
 	}
 
 	@Override
