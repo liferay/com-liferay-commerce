@@ -32,6 +32,12 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 public interface CommerceOrderContentPortletInstanceConfiguration {
 
+	@Meta.AD(deflt = "-1", name = "order-status", required = false)
+	public int orderStatus();
+
+	@Meta.AD(deflt = "false", name = "exclude", required = false)
+	public boolean exclude();
+
 	@Meta.AD(deflt = "", name = "display-style", required = false)
 	public String displayStyle();
 
