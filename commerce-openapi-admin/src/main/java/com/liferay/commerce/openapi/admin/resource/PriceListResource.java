@@ -41,7 +41,8 @@ public interface PriceListResource {
 	@DELETE
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deletePriceList(@PathParam("id") String id);
+	public Response deletePriceList(
+		@PathParam("id") String id, @QueryParam("groupId") long groupId);
 
 	@GET
 	@Path("/{id}")
@@ -62,13 +63,15 @@ public interface PriceListResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceList(
-		@PathParam("id") String id, PriceListDTO priceListDTO);
+		@PathParam("id") String id, @QueryParam("groupId") long groupId,
+		PriceListDTO priceListDTO);
 
 	@Consumes("application/*")
 	@Path("/")
 	@POST
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public PriceListDTO upsertPriceList(PriceListDTO priceListDTO);
+	public PriceListDTO upsertPriceList(
+		@QueryParam("groupId") long groupId, PriceListDTO priceListDTO);
 
 }
