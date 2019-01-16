@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.LayoutConstants;
 import com.liferay.portal.kernel.portlet.BasePortletProvider;
+import com.liferay.portal.kernel.portlet.ManagePortletProvider;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
-import com.liferay.portal.kernel.portlet.ViewPortletProvider;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -39,10 +39,10 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = "model.class.name=com.liferay.commerce.model.CommerceOrder",
-	service = ViewPortletProvider.class
+	service = ManagePortletProvider.class
 )
 public class CommerceOrderPortletProvider
-	extends BasePortletProvider implements ViewPortletProvider {
+	extends BasePortletProvider implements ManagePortletProvider {
 
 	@Override
 	public String getPortletName() {
