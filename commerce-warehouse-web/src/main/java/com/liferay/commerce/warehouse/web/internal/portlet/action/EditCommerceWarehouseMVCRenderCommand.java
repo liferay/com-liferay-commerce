@@ -85,10 +85,9 @@ public class EditCommerceWarehouseMVCRenderCommand implements MVCRenderCommand {
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(
-					"Unable to include edit_warehouse.jsp", e);
-			}
+
+			throw new PortletException(
+				"Unable to include edit_warehouse.jsp", e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;

@@ -15,7 +15,6 @@
 package com.liferay.commerce.discount.internal.discount;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.discount.CommerceDiscountCouponCodeHelper;
@@ -124,8 +123,7 @@ public class CommerceDiscountCouponCodeHelperImpl
 			(CommerceContext)httpServletRequest.getAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT);
 
-		CommerceAccount commerceAccount =
-			commerceContext.getCommerceAccount();
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
 		if (commerceAccount != null) {
 			groupId = commerceAccount.getCommerceAccountGroupId();

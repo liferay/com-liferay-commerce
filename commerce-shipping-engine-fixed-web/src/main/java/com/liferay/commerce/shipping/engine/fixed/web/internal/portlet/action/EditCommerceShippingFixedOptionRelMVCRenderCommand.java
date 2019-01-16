@@ -101,10 +101,9 @@ public class EditCommerceShippingFixedOptionRelMVCRenderCommand
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(
-					"Unable to include edit_shipping_option_setting.jsp", e);
-			}
+
+			throw new PortletException(
+				"Unable to include edit_shipping_option_setting.jsp", e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;

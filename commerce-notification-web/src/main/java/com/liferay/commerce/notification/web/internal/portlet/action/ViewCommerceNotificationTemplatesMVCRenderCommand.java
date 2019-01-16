@@ -94,10 +94,9 @@ public class ViewCommerceNotificationTemplatesMVCRenderCommand
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(
-					"Unable to include view_notification_templates.jsp", e);
-			}
+
+			throw new PortletException(
+				"Unable to include view_notification_templates.jsp", e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;

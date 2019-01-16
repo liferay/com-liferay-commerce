@@ -97,8 +97,8 @@ public class AuthorizeNetCommercePaymentMethod
 
 		return new CommercePaymentResult(
 			null, authorizeNetCommercePaymentRequest.getCommerceOrderId(),
-			CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null, null, Collections.emptyList(),
-			true);
+			CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null, null,
+			Collections.emptyList(), true);
 	}
 
 	@Override

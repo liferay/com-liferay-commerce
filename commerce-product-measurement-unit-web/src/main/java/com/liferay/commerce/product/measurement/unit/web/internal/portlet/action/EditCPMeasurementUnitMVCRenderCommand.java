@@ -84,10 +84,9 @@ public class EditCPMeasurementUnitMVCRenderCommand implements MVCRenderCommand {
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(
-					"Unable to include edit_measurement_unit.jsp", e);
-			}
+
+			throw new PortletException(
+				"Unable to include edit_measurement_unit.jsp", e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;

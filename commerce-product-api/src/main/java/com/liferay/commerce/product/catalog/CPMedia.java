@@ -14,20 +14,19 @@
 
 package com.liferay.commerce.product.catalog;
 
-import java.math.BigDecimal;
-
 /**
  * @author Marco Leo
  */
 public interface CPMedia {
 
-	public String getTitle();
-
 	public long getId();
 
 	public String getThumbnailUrl();
 
+	public String getTitle();
+
 	public String getUrl();
 
 	public String mimeType();
+
 }

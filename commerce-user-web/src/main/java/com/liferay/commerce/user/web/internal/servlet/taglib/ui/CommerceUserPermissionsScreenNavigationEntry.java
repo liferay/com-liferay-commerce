@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.user.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.user.service.CommerceUserService;
 import com.liferay.commerce.user.util.CommerceRoleRegistry;
 import com.liferay.commerce.user.web.internal.display.context.CommerceUserPermissionsDisplayContext;
@@ -126,7 +125,6 @@ public class CommerceUserPermissionsScreenNavigationEntry
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUserPermissionsScreenNavigationEntry.class);
-
 
 	@Reference
 	private CommerceRoleRegistry _commerceRoleRegistry;

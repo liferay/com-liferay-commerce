@@ -83,10 +83,8 @@ public class EditCommerceRegionMVCRenderCommand implements MVCRenderCommand {
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(
-					"Unable to include edit_region.jsp", e);
-			}
+
+			throw new PortletException("Unable to include edit_region.jsp", e);
 		}
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;

@@ -15,7 +15,6 @@
 package com.liferay.commerce.internal.order;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;

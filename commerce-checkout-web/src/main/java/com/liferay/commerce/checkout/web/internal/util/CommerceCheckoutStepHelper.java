@@ -15,7 +15,6 @@
 package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
@@ -44,8 +43,7 @@ public class CommerceCheckoutStepHelper {
 			(CommerceContext)httpServletRequest.getAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT);
 
-		CommerceAccount commerceAccount =
-			commerceContext.getCommerceAccount();
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
 		if (commerceAccount != null) {
 			return commerceAccount.isBusinessAccount();

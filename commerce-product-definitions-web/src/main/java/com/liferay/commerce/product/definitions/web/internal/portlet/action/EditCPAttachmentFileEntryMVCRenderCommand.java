@@ -93,9 +93,8 @@ public class EditCPAttachmentFileEntryMVCRenderCommand
 
 				return "/error.jsp";
 			}
-			else {
-				throw new PortletException(e);
-			}
+
+			throw new PortletException(e);
 		}
 
 		return "/edit_attachment_file_entry.jsp";
