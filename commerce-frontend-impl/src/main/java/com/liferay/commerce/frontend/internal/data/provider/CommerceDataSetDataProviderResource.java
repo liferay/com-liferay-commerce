@@ -20,13 +20,13 @@ import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
 import com.liferay.commerce.frontend.FilterFactory;
 import com.liferay.commerce.frontend.FilterFactoryRegistry;
 import com.liferay.commerce.frontend.Pagination;
-import com.liferay.commerce.frontend.internal.application.context.provider.PaginationContextProvider;
-import com.liferay.commerce.frontend.internal.application.context.provider.SortContextProvider;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.service.LayoutLocalService;
+import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.List;
@@ -38,6 +38,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -59,25 +60,37 @@ public class CommerceDataSetDataProviderResource {
 		@PathParam("groupId") long groupId,
 		@PathParam("tableName") String tableName,
 		@PathParam("dataProvider") String dataProvider,
-		@Context UriInfo uriInfo, @Context Pagination pagination,
-		@Context Sort sort, @Context HttpServletRequest httpServletRequest,
+		@QueryParam("plid") long plid,
+		@QueryParam("portletId") String portletId, @Context UriInfo uriInfo,
+		@Context Pagination pagination, @Context Sort sort,
+		@Context HttpServletRequest httpServletRequest,
 		@Context HttpServletResponse httpServletResponse) {
 
 		CommerceDataSetDataProvider commerceDataProvider =
 			_commerceDataProviderRegistry.getCommerceDataProvider(dataProvider);
-
-		FilterFactory filterFactory = _filterFactoryRegistry.getFilterFactory(
-			dataProvider);
 
 		try {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)httpServletRequest.getAttribute(
 					WebKeys.THEME_DISPLAY);
 
+			if (plid > 0) {
+				Layout layout = _layoutLocalService.fetchLayout(plid);
+
+				themeDisplay.setLayout(layout);
+			}
+
 			themeDisplay.setScopeGroupId(groupId);
+
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+			portletDisplay.setId(portletId);
 
 			httpServletRequest.setAttribute(
 				WebKeys.THEME_DISPLAY, themeDisplay);
+
+			FilterFactory filterFactory =
+				_filterFactoryRegistry.getFilterFactory(dataProvider);
 
 			List<Object> items = commerceDataProvider.getItems(
 				httpServletRequest, filterFactory.create(httpServletRequest),
@@ -112,12 +125,6 @@ public class CommerceDataSetDataProviderResource {
 	private FilterFactoryRegistry _filterFactoryRegistry;
 
 	@Reference
-	private PaginationContextProvider _paginationContextProvider;
-
-	@Reference
-	private Portal _portal;
-
-	@Reference
-	private SortContextProvider _sortContextProvider;
+	private LayoutLocalService _layoutLocalService;
 
 }

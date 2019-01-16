@@ -194,8 +194,8 @@ public class CommerceSearchResource {
 		List<SearchItemModel> searchItemModels = new ArrayList<>();
 
 		OrderList orderList = _commerceOrderResource.getOrderList(
-			themeDisplay.getScopeGroupId(), queryString, 1, 5,
-			themeDisplay.getRequest());
+			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
+			queryString, 1, 5, themeDisplay.getRequest());
 
 		searchItemModels.add(
 			new SearchItemModel(
