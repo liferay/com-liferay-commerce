@@ -18,7 +18,7 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.resource.PriceEntryResource;
 
-import java.util.Collections;
+import java.util.Arrays;
 
 import javax.annotation.Generated;
 
@@ -42,7 +42,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
-	public Response deletePriceEntry(String id) {
+	public Response deletePriceEntry(String id, long groupId) {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
@@ -50,24 +50,28 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
 	public PriceEntryDTO getPriceEntry(String id, long groupId) {
-		return null;
+		return new PriceEntryDTO();
 	}
 
 	@Override
 	public CollectionDTO<PriceEntryDTO> getPriceEntrys(long groupId) {
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return new CollectionDTO(Arrays.asList(new PriceEntryDTO()), 0);
 	}
 
 	@Override
-	public Response updatePriceEntry(String id, PriceEntryDTO priceEntryDTO) {
+	public Response updatePriceEntry(
+		String id, long groupId, PriceEntryDTO priceEntryDTO) {
+
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	public PriceEntryDTO upsertPriceEntry(PriceEntryDTO priceEntryDTO) {
-		return null;
+	public PriceEntryDTO upsertPriceEntry(
+		long groupId, PriceEntryDTO priceEntryDTO) {
+
+		return new PriceEntryDTO();
 	}
 
 }
