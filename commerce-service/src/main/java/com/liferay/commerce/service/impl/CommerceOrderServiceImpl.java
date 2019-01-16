@@ -316,37 +316,55 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public List<CommerceOrder> getUserCommerceOrders(
-			long groupId, int orderStatus, String keywords, int start, int end)
-		throws PortalException {
+		long groupId, long userId, int orderStatus, String keywords, int start,
+		int end) {
 
 		return commerceOrderLocalService.getUserCommerceOrders(
-			groupId, getUserId(), orderStatus, keywords, start, end);
+			groupId, userId, orderStatus, keywords, start, end);
 	}
 
 	@Override
 	public List<CommerceOrder> getUserCommerceOrders(
-			long groupId, String keywords, int start, int end)
-		throws PortalException {
+		long groupId, long userId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords, int start, int end) {
 
 		return commerceOrderLocalService.getUserCommerceOrders(
-			groupId, getUserId(), null, keywords, start, end);
+			groupId, userId, orderStatus, excludeOrderStatus, keywords, start,
+			end);
+	}
+
+	@Override
+	public List<CommerceOrder> getUserCommerceOrders(
+		long groupId, long userId, String keywords, int start, int end) {
+
+		return commerceOrderLocalService.getUserCommerceOrders(
+			groupId, userId, null, keywords, start, end);
 	}
 
 	@Override
 	public int getUserCommerceOrdersCount(
-			long groupId, int orderStatus, String keywords)
-		throws PortalException {
+		long groupId, long userId, int orderStatus, boolean excludeOrderStatus,
+		String keywords) {
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
-			groupId, getUserId(), orderStatus, keywords);
+			groupId, userId, orderStatus, excludeOrderStatus, keywords);
 	}
 
 	@Override
-	public int getUserCommerceOrdersCount(long groupId, String keywords)
+	public int getUserCommerceOrdersCount(
+		long groupId, long userId, int orderStatus, String keywords) {
+
+		return commerceOrderLocalService.getUserCommerceOrdersCount(
+			groupId, userId, orderStatus, keywords);
+	}
+
+	@Override
+	public int getUserCommerceOrdersCount(
+			long groupId, long userId, String keywords)
 		throws PortalException {
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
-			groupId, getUserId(), null, keywords);
+			groupId, userId, null, keywords);
 	}
 
 	@Override
