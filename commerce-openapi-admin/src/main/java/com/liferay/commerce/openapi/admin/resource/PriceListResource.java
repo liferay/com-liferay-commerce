@@ -48,15 +48,14 @@ public interface PriceListResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceListDTO getPriceList(
-		@PathParam("id") String id, @QueryParam("group_id") long groupId);
+		@PathParam("id") String id, @QueryParam("groupId") long groupId);
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceListDTO> getPriceLists(
-		@QueryParam("group_id") long groupId, @QueryParam("page") int page,
-		@QueryParam("pageSize") int pageSize);
+		@QueryParam("groupId") long groupId);
 
 	@Consumes("application/*")
 	@Path("/{id}")
