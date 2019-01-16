@@ -55,14 +55,14 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 					<div class="product-detail-thumbnail-column">
 
 					<%
-					List<CPAttachmentFileEntry> imagesCPAttachmentFileEntries = cpContentHelper.getImages(cpDefinitionId);
+					List<CPMedia> cpMediaList = cpContentHelper.getImages(cpDefinitionId, themeDisplay);
 
-					String[] imageOverflowUrls = new String[imagesCPAttachmentFileEntries.size()];
+					String[] imageOverflowUrls = new String[cpMediaList.size()];
 
-					for (int i = 0; i < imagesCPAttachmentFileEntries.size(); i++) {
-						CPAttachmentFileEntry cpAttachmentFileEntry = imagesCPAttachmentFileEntries.get(i);
+					for (int i = 0; i < cpMediaList.size(); i++) {
+						CPMedia cpMedia = cpMediaList.get(i);
 
-						String url = cpContentHelper.getImageURL(cpAttachmentFileEntry.getFileEntry(), themeDisplay);
+						String url = cpMedia.getThumbnailUrl();
 
 						imageOverflowUrls = ArrayUtil.append(imageOverflowUrls, url);
 					%>
@@ -72,7 +72,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 								<c:if test="<%= i == 4 %>">
 									<div class="product-detail-thumbnail-container product-detail-thumbnail-text-container" id="<portlet:namespace />thumbs-container">
 										<a class="thumb thumb-text" data-toggle="modal" href="#<portlet:namespace />ImageWidgetModal">
-											+ <%= imagesCPAttachmentFileEntries.size() - i %>
+											+ <%= cpMediaList.size() - i %>
 										</a>
 									</div>
 								</c:if>
