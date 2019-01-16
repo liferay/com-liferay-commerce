@@ -15,8 +15,8 @@
 package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
-import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
-import com.liferay.commerce.openapi.admin.resource.PriceEntryResource;
+import com.liferay.commerce.openapi.admin.model.UserDTO;
+import com.liferay.commerce.openapi.admin.resource.UserResource;
 
 import java.util.Arrays;
 
@@ -36,42 +36,38 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
 	},
-	service = PriceEntryResource.class
+	service = UserResource.class
 )
 @Generated(value = "OSGiRESTModuleGenerator")
-public class PriceEntryResourceImpl implements PriceEntryResource {
+public class UserResourceImpl implements UserResource {
 
 	@Override
-	public Response deletePriceEntry(String id, long groupId) {
+	public Response deleteUser(String id) {
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	public PriceEntryDTO getPriceEntry(String id, long groupId) {
-		return new PriceEntryDTO();
+	public UserDTO getUser(String id) {
+		return new UserDTO();
 	}
 
 	@Override
-	public CollectionDTO<PriceEntryDTO> getPriceEntrys(long groupId) {
-		return new CollectionDTO(Arrays.asList(new PriceEntryDTO()), 0);
+	public CollectionDTO<UserDTO> getUsers() {
+		return new CollectionDTO(Arrays.asList(new UserDTO()), 0);
 	}
 
 	@Override
-	public Response updatePriceEntry(
-		String id, long groupId, PriceEntryDTO priceEntryDTO) {
-
+	public Response updateUser(String id, UserDTO userDTO) {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	public PriceEntryDTO upsertPriceEntry(
-		long groupId, PriceEntryDTO priceEntryDTO) {
-
-		return new PriceEntryDTO();
+	public UserDTO upsertUser(UserDTO userDTO) {
+		return new UserDTO();
 	}
 
 }
