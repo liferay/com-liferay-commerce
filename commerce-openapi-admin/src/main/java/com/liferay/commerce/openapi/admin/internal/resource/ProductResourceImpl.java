@@ -43,7 +43,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class ProductResourceImpl implements ProductResource {
 
 	@Override
-	public Response deleteProduct(String id) {
+	public Response deleteProduct(String id, long groupId) {
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -55,21 +55,21 @@ public class ProductResourceImpl implements ProductResource {
 	}
 
 	@Override
-	public CollectionDTO<ProductDTO> getProducts(
-		long groupId, int page, int pageSize) {
-
+	public CollectionDTO<ProductDTO> getProducts(long groupId) {
 		return new CollectionDTO(Arrays.asList(new ProductDTO()), 0);
 	}
 
 	@Override
-	public Response updateProduct(String id, ProductDTO productDTO) {
+	public Response updateProduct(
+		String id, long groupId, ProductDTO productDTO) {
+
 		return Response.ok(
 			"Here goes output", MediaType.APPLICATION_JSON
 		).build();
 	}
 
 	@Override
-	public ProductDTO upsertProduct(ProductDTO productDTO) {
+	public ProductDTO upsertProduct(long groupId, ProductDTO productDTO) {
 		return new ProductDTO();
 	}
 

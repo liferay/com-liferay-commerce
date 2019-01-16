@@ -43,7 +43,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
-	public Response deletePriceList(String id) {
+	public Response deletePriceList(String id, long groupId) {
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -55,21 +55,23 @@ public class PriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
-	public CollectionDTO<PriceListDTO> getPriceLists(
-		long groupId, int page, int pageSize) {
-
+	public CollectionDTO<PriceListDTO> getPriceLists(long groupId) {
 		return new CollectionDTO(Arrays.asList(new PriceListDTO()), 0);
 	}
 
 	@Override
-	public Response updatePriceList(String id, PriceListDTO priceListDTO) {
+	public Response updatePriceList(
+		String id, long groupId, PriceListDTO priceListDTO) {
+
 		return Response.ok(
 			"Here goes output", MediaType.APPLICATION_JSON
 		).build();
 	}
 
 	@Override
-	public PriceListDTO upsertPriceList(PriceListDTO priceListDTO) {
+	public PriceListDTO upsertPriceList(
+		long groupId, PriceListDTO priceListDTO) {
+
 		return new PriceListDTO();
 	}
 

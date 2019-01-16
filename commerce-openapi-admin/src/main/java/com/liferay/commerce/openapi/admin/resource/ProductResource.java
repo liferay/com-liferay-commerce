@@ -41,7 +41,8 @@ public interface ProductResource {
 	@DELETE
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteProduct(@PathParam("id") String id);
+	public Response deleteProduct(
+		@PathParam("id") String id, @QueryParam("groupId") long groupId);
 
 	@GET
 	@Path("/{id}")
@@ -62,13 +63,15 @@ public interface ProductResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProduct(
-		@PathParam("id") String id, ProductDTO productDTO);
+		@PathParam("id") String id, @QueryParam("groupId") long groupId,
+		ProductDTO productDTO);
 
 	@Consumes("application/*")
 	@Path("/")
 	@POST
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public ProductDTO upsertProduct(ProductDTO productDTO);
+	public ProductDTO upsertProduct(
+		@QueryParam("groupId") long groupId, ProductDTO productDTO);
 
 }
