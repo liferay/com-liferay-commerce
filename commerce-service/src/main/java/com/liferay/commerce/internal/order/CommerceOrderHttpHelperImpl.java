@@ -144,25 +144,6 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 				httpServletRequest, CommercePortletKeys.COMMERCE_CART_CONTENT);
 		}
 
-		plid = _portal.getPlidFromPortletId(
-			groupId, CommercePortletKeys.COMMERCE_ORGANIZATION_ORDER);
-
-		if (plid > 0) {
-			PortletURL portletURL = _getPortletURL(
-				httpServletRequest,
-				CommercePortletKeys.COMMERCE_ORGANIZATION_ORDER);
-
-			if (commerceOrder != null) {
-				portletURL.setParameter(
-					"mvcRenderCommandName", "editCommerceOrder");
-				portletURL.setParameter(
-					"commerceOrderId",
-					String.valueOf(commerceOrder.getCommerceOrderId()));
-			}
-
-			return portletURL;
-		}
-
 		return null;
 	}
 
