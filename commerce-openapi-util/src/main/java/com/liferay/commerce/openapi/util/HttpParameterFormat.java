@@ -19,6 +19,7 @@ package com.liferay.commerce.openapi.util;
  */
 public enum HttpParameterFormat {
 
+	BIGDECIMAL("bigdecimal", HttpParameterType.NUMBER, "java.math.BigDecimal"),
 	BINARY("binary", HttpParameterType.STRING, "byte[]"),
 	BOOLEAN("boolean", HttpParameterType.BOOLEAN, "boolean", true),
 	BYTE("byte", HttpParameterType.STRING, "byte"),
