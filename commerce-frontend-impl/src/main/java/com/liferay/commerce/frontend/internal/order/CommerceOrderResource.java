@@ -75,8 +75,8 @@ public class CommerceOrderResource {
 
 		try {
 			orderList = getOrderList(
-				themeDisplay.getScopeGroupId(), queryString, page, pageSize,
-				themeDisplay.getRequest());
+				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
+				queryString, page, pageSize, themeDisplay.getRequest());
 		}
 		catch (Exception e) {
 			orderList = new OrderList(
@@ -87,18 +87,18 @@ public class CommerceOrderResource {
 	}
 
 	public OrderList getOrderList(
-			long groupId, String keywords, int page, int pageSize,
+			long groupId, long userId, String keywords, int page, int pageSize,
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		List<Order> orders = getOrders(
-			groupId, keywords, page, pageSize, httpServletRequest);
+			groupId, userId, keywords, page, pageSize, httpServletRequest);
 
-		return new OrderList(orders, getOrdersCount(groupId, keywords));
+		return new OrderList(orders, getOrdersCount(groupId, userId, keywords));
 	}
 
 	protected List<Order> getOrders(
-			long groupId, String keywords, int page, int pageSize,
+			long groupId, long userId, String keywords, int page, int pageSize,
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
@@ -109,7 +109,7 @@ public class CommerceOrderResource {
 
 		List<CommerceOrder> userCommerceOrders =
 			_commerceOrderService.getUserCommerceOrders(
-				groupId, keywords, start, end);
+				groupId, userId, keywords, start, end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
 			Date modifiedDate = commerceOrder.getModifiedDate();
@@ -136,11 +136,11 @@ public class CommerceOrderResource {
 		return orders;
 	}
 
-	protected int getOrdersCount(long groupId, String keywords)
+	protected int getOrdersCount(long groupId, long userId, String keywords)
 		throws PortalException {
 
 		return _commerceOrderService.getUserCommerceOrdersCount(
-			groupId, keywords);
+			groupId, userId, keywords);
 	}
 
 	protected Response getResponse(Object object) {
