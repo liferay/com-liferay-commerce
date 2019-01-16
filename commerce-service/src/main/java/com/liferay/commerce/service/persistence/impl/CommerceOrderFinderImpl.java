@@ -66,9 +66,12 @@ public class CommerceOrderFinderImpl
 				"orderStatus");
 
 			if (orderStatus != null) {
+				boolean excludeOrderStatus =
+					(boolean)queryDefinition.getAttribute("excludeOrderStatus");
+
 				sql = StringUtil.replace(
 					sql, "[$ORDER_STATUS$]",
-					_getOrderStatusClause(orderStatus));
+					_getOrderStatusClause(orderStatus, excludeOrderStatus));
 			}
 			else {
 				sql = StringUtil.replace(
@@ -169,9 +172,12 @@ public class CommerceOrderFinderImpl
 				"orderStatus");
 
 			if (orderStatus != null) {
+				boolean excludeOrderStatus =
+					(boolean)queryDefinition.getAttribute("excludeOrderStatus");
+
 				sql = StringUtil.replace(
 					sql, "[$ORDER_STATUS$]",
-					_getOrderStatusClause(orderStatus));
+					_getOrderStatusClause(orderStatus, excludeOrderStatus));
 			}
 			else {
 				sql = StringUtil.replace(
@@ -224,7 +230,15 @@ public class CommerceOrderFinderImpl
 		return StringUtil.replace(sql, "[$ORDER_STATUS$]", sb.toString());
 	}
 
-	private String _getOrderStatusClause(int orderStatus) {
+	private String _getOrderStatusClause(int orderStatus, boolean exclude) {
+		if (orderStatus < 0) {
+			return StringPool.BLANK;
+		}
+
+		if (exclude) {
+			return "(CommerceOrder.orderStatus != " + orderStatus + " ) AND";
+		}
+
 		return "(CommerceOrder.orderStatus = " + orderStatus + " ) AND";
 	}
 
