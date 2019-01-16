@@ -120,9 +120,12 @@ public class CommerceDiscountCouponCodeHelperImpl
 
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
 
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
 		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
-				httpServletRequest);
+			commerceContext.getCommerceAccount();
 
 		if (commerceAccount != null) {
 			groupId = commerceAccount.getCommerceAccountGroupId();
@@ -133,9 +136,6 @@ public class CommerceDiscountCouponCodeHelperImpl
 
 	private static final String _SESSION_COMMERCE_DISCOUNT_COUPON_CODE =
 		"LIFERAY_SHARED_COMMERCE_DISCOUNT_COUPON_CODE_";
-
-	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;

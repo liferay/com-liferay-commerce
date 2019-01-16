@@ -16,6 +16,8 @@ package com.liferay.commerce.user.web.internal.portlet.action;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.user.constants.CommerceUserPortletKeys;
 import com.liferay.commerce.user.service.CommerceUserService;
 import com.liferay.portal.kernel.exception.NoSuchUserException;
@@ -59,9 +61,11 @@ public class AssignUserRolesMVCActionCommand extends BaseMVCActionCommand {
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			actionRequest);
 
-		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
-				httpServletRequest);
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
 		long groupId = 0;
 
@@ -97,9 +101,6 @@ public class AssignUserRolesMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 	}
-
-	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceUserService _commerceUserService;

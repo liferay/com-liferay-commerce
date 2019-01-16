@@ -24,6 +24,7 @@ import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.frontend.internal.account.model.Account;
 import com.liferay.commerce.frontend.internal.account.model.AccountList;
 import com.liferay.commerce.frontend.internal.account.model.AccountOrganization;
@@ -139,8 +140,9 @@ public class CommerceAccountResource {
 		HttpServletRequest httpServletRequest = themeDisplay.getRequest();
 
 		CommerceContext commerceContext =
-			(CommerceContext)httpServletRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
+			_commerceContextFactory.create(
+				groupId, _portal.getUserId(httpServletRequest), 0, 0,
+				StringPool.BLANK);
 
 		try {
 			accountList = getAccountList(
@@ -470,5 +472,8 @@ public class CommerceAccountResource {
 
 	@Reference
 	private UserLocalService _userLocalService;
+
+	@Reference
+	private CommerceContextFactory _commerceContextFactory;
 
 }

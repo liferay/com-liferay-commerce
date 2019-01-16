@@ -88,9 +88,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
 		}
 
-		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
-				httpServletRequest);
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
 		if (commerceAccount != null) {
 			commerceOrder = _commerceOrderService.addCommerceOrder(
@@ -466,9 +464,6 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 	private static final ThreadLocal<CommerceOrder>
 		_commerceOrderUuidThreadLocal = new CentralizedThreadLocal<>(
 			CommerceOrderHttpHelperImpl.class.getName());
-
-	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;

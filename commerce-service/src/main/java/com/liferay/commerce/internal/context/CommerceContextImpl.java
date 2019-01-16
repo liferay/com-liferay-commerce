@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 
 import java.util.List;
 import java.util.Optional;
@@ -65,8 +66,10 @@ public class CommerceContextImpl implements CommerceContext {
 
 		try {
 			_commerceAccountGroupServiceConfiguration =
-				configurationProvider.getGroupConfiguration(
-					CommerceAccountGroupServiceConfiguration.class, groupId);
+				configurationProvider.getConfiguration(
+					CommerceAccountGroupServiceConfiguration.class,
+					new GroupServiceSettingsLocator(
+						_groupId, CommerceAccountConstants.SERVICE_NAME));
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);

@@ -41,7 +41,7 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 
 	@Override
 	public CommerceContext create(HttpServletRequest httpServletRequest) {
-		return new CommerceContextHttpsImpl(
+		return new CommerceContextHttpImpl(
 			httpServletRequest, _commerceAccountHelper,
 			_commerceCurrencyLocalService, _commerceDiscountCouponCodeHelper,
 			_commerceOrderHttpHelper, _commercePriceListLocalService,

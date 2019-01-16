@@ -17,6 +17,8 @@ package com.liferay.commerce.checkout.web.internal.util;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
@@ -38,9 +40,12 @@ public class CommerceCheckoutStepHelper {
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
 		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
-				httpServletRequest);
+			commerceContext.getCommerceAccount();
 
 		if (commerceAccount != null) {
 			return commerceAccount.isBusinessAccount();
@@ -88,9 +93,6 @@ public class CommerceCheckoutStepHelper {
 
 		return false;
 	}
-
-	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommercePaymentEngine _commercePaymentEngine;
