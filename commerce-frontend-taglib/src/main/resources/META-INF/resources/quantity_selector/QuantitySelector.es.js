@@ -115,6 +115,7 @@ class QuantitySelector extends Component {
 	handleFormSubmit(evt) {
 		evt.preventDefault();
 		this.showError = true;
+		this.emit('submitQuantity', this.quantity);
 	}
 
 	submitQuantity(quantity) {
