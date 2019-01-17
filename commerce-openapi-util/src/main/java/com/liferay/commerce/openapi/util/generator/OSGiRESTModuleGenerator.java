@@ -105,8 +105,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		_bundleSynbolicName = properties.getProperty(
 			"osgi.module.bundle.symbolic.name");
 		_bundleVersion = properties.getProperty("osgi.module.bundle.version");
-		_jaxRSJSONPackagePath = properties.getProperty(
-			"osgi.module.jaxrs.json.package");
 		_modelPackagePath = properties.getProperty("osgi.module.model.package");
 
 		String moduleRootPath = properties.getProperty("osgi.module.root.path");
@@ -149,6 +147,11 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		else {
 			_overwriteBuildGradle = false;
 		}
+
+		_jsonMessageBodyGenerator = new JsonMessageBodyGenerator(
+			_author, _applicationName,
+			properties.getProperty("osgi.module.jaxrs.json.package"),
+			_moduleOutputPath);
 
 		_resourceGenerator = new ResourceGenerator(
 			_applicationName, _author, _moduleOutputPath, _modelPackagePath,
@@ -217,9 +220,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 			collectionDTOGenerator.writeCollectionDTOSource();
 
-			_writeJsonMessageBodyReaderSource();
-
-			_writeJsonMessageBodyWriterSource();
+			_jsonMessageBodyGenerator.writeJsonMessageBodySources();
 		}
 		catch (Exception e) {
 			throw new GeneratorException("Unable to generate module", e);
@@ -326,60 +327,12 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		writeSource(gradleTpl, gradleSourcePath);
 	}
 
-	private void _writeJsonMessageBodyReaderSource() throws IOException {
-		String jsonMessageBodyReaderTpl = getTemplate(
-			_TEMPLATE_FILE_JSON_MESSAGE_BODY_READER);
-
-		String jsonMessageBodyReaderSourcePath = getClassSourcePath(
-			_moduleOutputPath,
-			_TEMPLATE_FILE_JSON_MESSAGE_BODY_READER.replace(".tpl", ""),
-			_jaxRSJSONPackagePath);
-
-		jsonMessageBodyReaderTpl = jsonMessageBodyReaderTpl.replace(
-			"${PACKAGE}", _jaxRSJSONPackagePath);
-
-		jsonMessageBodyReaderTpl = jsonMessageBodyReaderTpl.replace(
-			"${AUTHOR}", _author);
-
-		jsonMessageBodyReaderTpl = jsonMessageBodyReaderTpl.replace(
-			"${APPLICATION_NAME}", _applicationName);
-
-		writeSource(jsonMessageBodyReaderTpl, jsonMessageBodyReaderSourcePath);
-	}
-
-	private void _writeJsonMessageBodyWriterSource() throws IOException {
-		String jsonMessageBodyWriterTpl = getTemplate(
-			_TEMPLATE_FILE_JSON_MESSAGE_BODY_WRITER);
-
-		jsonMessageBodyWriterTpl = jsonMessageBodyWriterTpl.replace(
-			"${PACKAGE}", _jaxRSJSONPackagePath);
-
-		jsonMessageBodyWriterTpl = jsonMessageBodyWriterTpl.replace(
-			"${AUTHOR}", _author);
-
-		jsonMessageBodyWriterTpl = jsonMessageBodyWriterTpl.replace(
-			"${APPLICATION_NAME}", _applicationName);
-
-		String jsonMessageBodyWriterSourcePath = getClassSourcePath(
-			_moduleOutputPath,
-			_TEMPLATE_FILE_JSON_MESSAGE_BODY_WRITER.replace(".tpl", ""),
-			_jaxRSJSONPackagePath);
-
-		writeSource(jsonMessageBodyWriterTpl, jsonMessageBodyWriterSourcePath);
-	}
-
 	private static final String _TEMPLATE_FILE_APPLICATION =
 		"Application.java.tpl";
 
 	private static final String _TEMPLATE_FILE_BND = "bnd.bnd.tpl";
 
 	private static final String _TEMPLATE_FILE_GRADLE = "build.gradle.tpl";
-
-	private static final String _TEMPLATE_FILE_JSON_MESSAGE_BODY_READER =
-		"JsonMessageBodyReader.java.tpl";
-
-	private static final String _TEMPLATE_FILE_JSON_MESSAGE_BODY_WRITER =
-		"JsonMessageBodyWriter.java.tpl";
 
 	private static final Logger _logger = LoggerFactory.getLogger(
 		OSGiRESTModuleGenerator.class);
@@ -394,7 +347,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private final String _bundleSynbolicName;
 	private final String _bundleVersion;
 	private final boolean _guestsAllowed;
-	private final String _jaxRSJSONPackagePath;
+	private final JsonMessageBodyGenerator _jsonMessageBodyGenerator;
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;
 	private final boolean _oauth2SecurityAllowed;
