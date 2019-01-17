@@ -29,169 +29,165 @@ List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCa
 %>
 
 <c:if test="<%= !cpCatalogEntries.isEmpty() %>">
-	<div class="commerce-compare-table">
-		<table class="table table-sm">
-			<tr class="product-table-row">
-				<td></td>
-
-				<%
-				for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
-				%>
-
-					<td>
-						<liferay-commerce-product:product-list-entry-renderer
-							CPCatalogEntry = "<%= cpCatalogEntry %>"
-						/>
-					</td>
-
-				<%
-				}
-				%>
-
-			</tr>
-
-			<c:if test="<%= !cpDefinitionOptionRelTitles.isEmpty() %>">
-				<tr class="table-divider">
-					<td colspan="<%= cpCatalogEntries.size() + 1 %>"><h4 class="table-title"><liferay-ui:message key="options" /></h4></td>
-				</tr>
-
-				<%
-				for (String cpDefinitionOptionRelTitle : cpDefinitionOptionRelTitles) {
-				%>
-
-					<tr>
-						<td class="title-column"><div class="table-title"><%= HtmlUtil.escape(cpDefinitionOptionRelTitle) %></div></td>
-
-						<%
-						for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
-						%>
-
-							<td><%= HtmlUtil.escape(cpCompareContentHelper.getCPDefinitionOptionValueRels(cpCatalogEntry, cpDefinitionOptionRelTitle, locale)) %></td>
-
-						<%
-						}
-						%>
-
-					</tr>
-
-				<%
-				}
-				%>
-
-			</c:if>
-
-			<tr class="table-divider">
-				<td colspan="<%= cpCatalogEntries.size() + 1 %>"><h4 class="table-title"><liferay-ui:message key="dimensions" /></h4></td>
-			</tr>
-
+	<table class="commerce-compare-table table table-sm entry--<%= cpCatalogEntries.size() %>">
+		<tr class="commerce-compare-table__card-row">
+			<td></td>
 			<%
+			for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
+			%>
+				<td class="commerce-compare-table__card">
+					<liferay-commerce-product:product-list-entry-renderer
+						CPCatalogEntry = "<%= cpCatalogEntry %>"
+					/>
+				</td>
+			<%
+			}
+			%>
+		</tr>
+
+		<c:if test="<%= !cpDefinitionOptionRelTitles.isEmpty() %>">
+			<tr class="commerce-compare-table__separator">
+				<td colspan="<%= cpCatalogEntries.size() + 1 %>">
+					<h4 class="commerce-compare-table__title"><liferay-ui:message key="options" /></h4>
+				</td>
+			</tr>
+			<%
+				for (String cpDefinitionOptionRelTitle : cpDefinitionOptionRelTitles) {
+			%>
+				<tr>
+					<td class="commerce-compare-table__title">
+						<%= HtmlUtil.escape(cpDefinitionOptionRelTitle) %>
+					</td>
+					<%
+						for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
+					%>
+						<td class="commerce-compare-table__value">
+							<%= HtmlUtil.escape(cpCompareContentHelper.getCPDefinitionOptionValueRels(cpCatalogEntry, cpDefinitionOptionRelTitle, locale)) %>
+						</td>
+					<%
+						}
+					%>
+				</tr>
+			<%
+				}
+			%>
+
+		</c:if>
+
+		<tr class="commerce-compare-table__separator">
+			<td colspan="<%= cpCatalogEntries.size() + 1 %>">
+				<h4 class="commerce-compare-table__title">
+					<liferay-ui:message key="dimensions" />
+				</h4>
+			</td>
+		</tr>
+
+		<%
 			String dimensionCPMeasurementUnitName = cpCompareContentHelper.getDimensionCPMeasurementUnitName(scopeGroupId, locale);
 
 			if (Validator.isNotNull(dimensionCPMeasurementUnitName)) {
 				dimensionCPMeasurementUnitName = StringPool.OPEN_PARENTHESIS + dimensionCPMeasurementUnitName + StringPool.CLOSE_PARENTHESIS;
 			}
+		%>
+
+		<tr>
+			<td class="commerce-compare-table__title">
+				<%= LanguageUtil.get(request, "depth").concat(StringPool.SPACE).concat(HtmlUtil.escape(dimensionCPMeasurementUnitName)) %>
+			</td>
+
+			<%
+				for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
+			%>
+				<td class="commerce-compare-table__value">
+					<%= cpCatalogEntry.getDepth() %>
+				</td>
+			<%
+				}
 			%>
 
-			<tr>
-				<td class="title-column"><div class="table-title"><%= LanguageUtil.get(request, "depth").concat(StringPool.SPACE).concat(HtmlUtil.escape(dimensionCPMeasurementUnitName)) %></div></td>
-
-				<%
+		</tr>
+		<tr>
+			<td class="commerce-compare-table__title">
+				<%= LanguageUtil.get(request, "height").concat(StringPool.SPACE).concat(HtmlUtil.escape(dimensionCPMeasurementUnitName)) %>
+			</td>
+			<%
 				for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
-				%>
-
-					<td><%= cpCatalogEntry.getDepth() %></td>
-
-				<%
+			%>
+				<td class="commerce-compare-table__value">
+					<%= cpCatalogEntry.getHeight() %>
+				</td>
+			<%
 				}
-				%>
+			%>
 
+		</tr>
+
+		<c:if test="<%= !cpSpecificationOptions.isEmpty() %>">
+			<tr class="commerce-compare-table__separator">
+				<td colspan="<%= cpCatalogEntries.size() + 1 %>">
+					<h4 class="commerce-compare-table__title">
+						<liferay-ui:message key="specifications" />
+					</h4>
+				</td>
 			</tr>
-			<tr>
-				<td class="title-column"><div class="table-title"><%= LanguageUtil.get(request, "height").concat(StringPool.SPACE).concat(HtmlUtil.escape(dimensionCPMeasurementUnitName)) %></div></td>
-
-				<%
-				for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
-				%>
-
-					<td><%= cpCatalogEntry.getHeight() %></td>
-
-				<%
+			<%
+				for (CPSpecificationOption cpSpecificationOption : cpSpecificationOptions) {
+			%>
+				<tr>
+					<td class="commerce-compare-table__title">
+						<%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %>
+					</td>
+					<%
+						for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
+					%>
+						<td class="commerce-compare-table__value">
+							<%= HtmlUtil.escape(cpCompareContentHelper.getCPDefinitionSpecificationOptionValue(cpCatalogEntry.getCPDefinitionId(), cpSpecificationOption.getCPSpecificationOptionId(), locale)) %>
+						</td>
+					<%
+						}
+					%>
+				</tr>
+			<%
 				}
-				%>
+			%>
+		</c:if>
 
-			</tr>
-
-			<c:if test="<%= !cpSpecificationOptions.isEmpty() %>">
-				<tr class="table-divider">
-					<td colspan="<%= cpCatalogEntries.size() + 1 %>"><h4 class="table-title"><liferay-ui:message key="specifications" /></h4></td>
+		<%
+			for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
+		%>
+			<c:if test="<%= cpCompareContentHelper.hasCategorizedCPDefinitionSpecificationOptionValues(cpDataSourceResult, cpOptionCategory.getCPOptionCategoryId()) %>">
+				<tr class="commerce-compare-table__separator">
+					<td colspan="<%= cpCatalogEntries.size() + 1 %>">
+						<h4 class="commerce-compare-table__title">
+							<%= HtmlUtil.escape(cpOptionCategory.getTitle(languageId)) %>
+						</h4>
+					</td>
 				</tr>
 
 				<%
-				for (CPSpecificationOption cpSpecificationOption : cpSpecificationOptions) {
-				%>
-
-					<tr>
-						<td class="title-column"><div class="table-title"><%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %></div></td>
-
-						<%
-						for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
-						%>
-
-							<td><%= HtmlUtil.escape(cpCompareContentHelper.getCPDefinitionSpecificationOptionValue(cpCatalogEntry.getCPDefinitionId(), cpSpecificationOption.getCPSpecificationOptionId(), locale)) %></td>
-
-						<%
-						}
-						%>
-
-					</tr>
-
-				<%
-				}
-				%>
-
-			</c:if>
-
-			<%
-			for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
-			%>
-
-				<c:if test="<%= cpCompareContentHelper.hasCategorizedCPDefinitionSpecificationOptionValues(cpDataSourceResult, cpOptionCategory.getCPOptionCategoryId()) %>">
-					<tr class="table-divider">
-						<td colspan="<%= cpCatalogEntries.size() + 1 %>"><h4 class="table-title"><%= HtmlUtil.escape(cpOptionCategory.getTitle(languageId)) %></h4></td>
-					</tr>
-
-					<%
-					for (CPSpecificationOption cpSpecificationOption : categorizedCPSpecificationOptions) {
-						if (cpSpecificationOption.getCPOptionCategoryId() != cpOptionCategory.getCPOptionCategoryId()) {
-							continue;
-						}
-					%>
-
-						<tr>
-							<td class="title-column"><div class="table-title"><%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %></div></td>
-
-							<%
-							for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
-							%>
-
-								<td><%= HtmlUtil.escape(cpCompareContentHelper.getCPDefinitionSpecificationOptionValue(cpCatalogEntry.getCPDefinitionId(), cpSpecificationOption.getCPSpecificationOptionId(), locale)) %></td>
-
-							<%
-							}
-							%>
-
-						</tr>
-
-					<%
+				for (CPSpecificationOption cpSpecificationOption : categorizedCPSpecificationOptions) {
+					if (cpSpecificationOption.getCPOptionCategoryId() != cpOptionCategory.getCPOptionCategoryId()) {
+						continue;
 					}
-					%>
-
-				</c:if>
-
-			<%
+				%>
+					<tr>
+						<%
+							for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
+						%>
+							<td class="commerce-compare-table__value">
+								<%= HtmlUtil.escape(cpCompareContentHelper.getCPDefinitionSpecificationOptionValue(cpCatalogEntry.getCPDefinitionId(), cpSpecificationOption.getCPSpecificationOptionId(), locale)) %>
+							</td>
+						<%
+							}
+						%>
+					</tr>
+				<%
+					}
+				%>
+			</c:if>
+		<%
 			}
-			%>
+		%>
 
-		</table>
-	</div>
+	</table>
 </c:if>
