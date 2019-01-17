@@ -37,7 +37,7 @@ formatSourceModule {
 		osgiModuleRootPath = properties.get("osgi.module.root.path")
 	}
 
-	baseDirName = osgiModuleRootPath + osgiModuleName
+	baseDirName = osgiModuleRootPath + "/" + osgiModuleName
 }
 
 generateRestModule {
