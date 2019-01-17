@@ -59,7 +59,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 </liferay-ui:error>
 
 <div class="b2b-portlet-content-header">
-	<liferay-ui:icon
+	<%-- <liferay-ui:icon
 		cssClass="header-back-to"
 		icon="order-arrow-down"
 		id="TabsBack"
@@ -68,78 +68,88 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 		message='<%= LanguageUtil.get(resourceBundle, "back") %>'
 		method="get"
 		url="<%= layout.getRegularURL(request) %>"
-	/>
+	/> --%>
 
-	<div class="autofit-float autofit-row header-title-bar">
-		<div class="autofit-col autofit-col-expand">
+	<div class="row header-title-bar">
+		<%-- <div class="autofit-col autofit-col-expand">
 			<liferay-ui:header
 				backURL="<%= backURL %>"
 				localizeTitle="<%= false %>"
 				showBackURL="<%= false %>"
 				title='<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>'
 			/>
-		</div>
+		</div> --%>
 
-		<div class="autofit-col">
-			<liferay-ui:icon
-				icon="print"
-				iconCssClass="inline-item inline-item-after"
-				label="<%= true %>"
-				linkCssClass="lfr-icon-item-reverse link-outline link-outline-borderless link-outline-secondary"
-				markupView="lexicon"
-				message="print"
-				method="get"
-				url="javascript:window.print();"
-			/>
-		</div>
-
-		<div class="autofit-col">
-
-			<%
-			request.setAttribute("order_notes.jsp-showLabel", Boolean.TRUE);
-			request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
-			%>
-
-			<liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" />
-		</div>
-
-		<c:if test="<%= commerceOrder.isOpen() %>">
-			<div class="autofit-col">
-				<liferay-commerce:order-transitions
-					commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
-					cssClass="btn btn-secondary btn-sm"
-				/>
+		<div class="col-9">
+			<div class="minium-typo__section-title">
+				<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>
 			</div>
+		</div>
 
-			<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+		<div class="col3">
+			<div class="autofit-row">
 				<div class="autofit-col">
-					<liferay-ui:icon-menu
-						direction="right"
-						icon="<%= StringPool.BLANK %>"
+					<liferay-ui:icon
+						icon="print"
+						iconCssClass="inline-item inline-item-after"
+						label="<%= true %>"
+						linkCssClass="lfr-icon-item-reverse link-outline link-outline-borderless link-outline-secondary"
 						markupView="lexicon"
-						message="<%= StringPool.BLANK %>"
-						showWhenSingleIcon="<%= true %>"
-						triggerCssClass="component-action"
-					>
-						<liferay-ui:icon
-							message="edit"
-							url='<%= "javascript:" + renderResponse.getNamespace() + "editCommerceOrder();" %>'
-						/>
-
-						<portlet:actionURL name="editCommerceOrderItem" var="deleteURL">
-							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESET %>" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-						</portlet:actionURL>
-
-						<liferay-ui:icon-delete
-							message="delete-all"
-							url="<%= deleteURL %>"
-						/>
-					</liferay-ui:icon-menu>
+						message="print"
+						method="get"
+						url="javascript:window.print();"
+					/>
 				</div>
-			</c:if>
-		</c:if>
+
+				<div class="autofit-col">
+
+					<%
+					request.setAttribute("order_notes.jsp-showLabel", Boolean.TRUE);
+					request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
+					%>
+
+					<liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" />
+				</div>
+
+				<c:if test="<%= commerceOrder.isOpen() %>">
+					<div class="autofit-col">
+						<liferay-commerce:order-transitions
+							commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
+							cssClass="btn btn-secondary btn-sm"
+						/>
+					</div>
+
+					<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+						<div class="autofit-col">
+							<liferay-ui:icon-menu
+								direction="right"
+								icon="<%= StringPool.BLANK %>"
+								markupView="lexicon"
+								message="<%= StringPool.BLANK %>"
+								showWhenSingleIcon="<%= true %>"
+								triggerCssClass="component-action"
+							>
+								<liferay-ui:icon
+									message="edit"
+									url='<%= "javascript:" + renderResponse.getNamespace() + "editCommerceOrder();" %>'
+								/>
+
+								<portlet:actionURL name="editCommerceOrderItem" var="deleteURL">
+									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESET %>" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
+								</portlet:actionURL>
+
+								<liferay-ui:icon-delete
+									message="delete-all"
+									url="<%= deleteURL %>"
+								/>
+							</liferay-ui:icon-menu>
+						</div>
+					</c:if>
+				</c:if>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -147,67 +157,67 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
 
-	<div class="autofit-float autofit-row order-details-header">
-		<div class="autofit-col autofit-col-expand">
-			<div class="autofit-section">
-				<h3 class="order-details-title"><liferay-ui:message key="order-date" /></h3>
-
-				<div class="order-date order-details-subtitle">
-					<%= commerceOrderContentDisplayContext.getCommerceOrderDate(commerceOrder) %>
-				</div>
-
-				<div class="order-time">
-					<%= commerceOrderContentDisplayContext.getCommerceOrderTime(commerceOrder) %>
+	<div class="row order-details-header">
+		<div class="col-3">
+			<div class="minium-card">
+				<h3 class="minium-card__title"><liferay-ui:message key="order-date" /></h3>
+				<div class="minium-card__content">
+					<p>
+						<%= commerceOrderContentDisplayContext.getCommerceOrderDate(commerceOrder) %>
+						<%= commerceOrderContentDisplayContext.getCommerceOrderTime(commerceOrder) %>
+					</p>
 				</div>
 			</div>
 		</div>
 
-		<div class="autofit-col autofit-col-expand">
-			<div class="autofit-section">
-				<h3 class="order-details-title"><liferay-ui:message key="customer" /></h3>
+		<div class="col-3">
+			<div class="minium-card">
+				<h3 class="minium-card__title"><liferay-ui:message key="customer" /></h3>
 
-				<div class="customer-name order-details-subtitle">
-					<%= HtmlUtil.escape(commerceOrder.getCommerceAccountName()) %>
-				</div>
-
-				<div class="customer-id">
-					<%= commerceOrder.getCommerceAccountId() %>
-				</div>
-			</div>
-		</div>
-
-		<div class="autofit-col autofit-col-expand">
-			<div class="autofit-section">
-				<h3 class="order-details-title"><liferay-ui:message key="payment" /></h3>
-
-				<%
-				String paymentMethodName = commerceOrderContentDisplayContext.getCommerceOrderPaymentMethodName(commerceOrder);
-				%>
-
-				<c:if test="<%= Validator.isNotNull(paymentMethodName) %>">
-					<div class="order-details-subtitle payment-method-name">
-						<%= HtmlUtil.escape(paymentMethodName) %>
-					</div>
-				</c:if>
-
-				<div class="order-details-subtitle purchase-order-number">
-					<liferay-ui:message arguments="<%= HtmlUtil.escape(commerceOrder.getPurchaseOrderNumber()) %>" key="purchase-order-number-x" translateArguments="<%= false %>" />
+				<div class="minium-card__content">
+					<p>
+						<%= commerceOrder.getCommerceAccountId() %>:
+						<%= HtmlUtil.escape(commerceOrder.getCommerceAccountName()) %>
+					</p>
 				</div>
 			</div>
 		</div>
 
-		<div class="autofit-col autofit-col-expand">
-			<div class="autofit-section">
-				<h3 class="order-details-title"><liferay-ui:message key="status" /></h3>
+		<div class="col-3">
+			<div class="minium-card">
+				<h3 class="minium-card__title"><liferay-ui:message key="payment" /></h3>
 
-				<div class="order-details-subtitle order-status">
-					<%= commerceOrderContentDisplayContext.getCommerceOrderStatus(commerceOrder) %>
+				<div class="minium-card__content">
+					<%
+					String paymentMethodName = commerceOrderContentDisplayContext.getCommerceOrderPaymentMethodName(commerceOrder);
+					%>
+
+					<c:if test="<%= Validator.isNotNull(paymentMethodName) %>">
+						<div class="order-details-subtitle payment-method-name">
+							<%= HtmlUtil.escape(paymentMethodName) %>
+						</div>
+					</c:if>
+
+					<p>
+						<liferay-ui:message arguments="<%= HtmlUtil.escape(commerceOrder.getPurchaseOrderNumber()) %>" key="purchase-order-number-x" translateArguments="<%= false %>" />
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-3">
+			<div class="minium-card">
+				<h3 class="minium-card__title"><liferay-ui:message key="status" /></h3>
+				<div class="minium-card__content">
+					<p>
+						<%= commerceOrderContentDisplayContext.getCommerceOrderStatus(commerceOrder) %>
+					</p>
 				</div>
 			</div>
 		</div>
 
 		<c:if test="<%= !commerceOrder.isOpen() %>">
-			<div class="autofit-col autofit-col-expand order-details-reorder">
+			<div class="col-3 order-details-reorder">
 				<div class="autofit-section">
 					<aui:button icon="icon-refresh" iconAlign="right" onClick='<%= renderResponse.getNamespace() + "reorderCommerceOrder();" %>' primary="<%= true %>" value="reorder" />
 				</div>
