@@ -160,17 +160,20 @@ public class CommerceWishListDisplayContext {
 
 		CPInstance cpInstance = commerceWishListItem.fetchCPInstance();
 
-		if (cpInstance != null) {
-			CommerceMoney commerceMoney =
-				_commerceProductPriceCalculation.getFinalPrice(
-					cpInstance.getCPInstanceId(), 1,
-					_commerceWishListRequestHelper.getCommerceContext());
-
-			return commerceMoney.format(
-				_commerceWishListRequestHelper.getLocale());
+		if (cpInstance == null) {
+			return StringPool.BLANK;
 		}
 
-		return StringPool.BLANK;
+		CommerceMoney commerceMoney =
+			_commerceProductPriceCalculation.getFinalPrice(
+				cpInstance.getCPInstanceId(), 1,
+				_commerceWishListRequestHelper.getCommerceContext());
+
+		if (commerceMoney == null) {
+			return StringPool.BLANK;
+		}
+
+		return commerceMoney.format(_commerceWishListRequestHelper.getLocale());
 	}
 
 	public SearchContainer<CommerceWishListItem>

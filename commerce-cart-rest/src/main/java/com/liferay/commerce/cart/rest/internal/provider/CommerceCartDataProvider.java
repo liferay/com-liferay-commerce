@@ -111,6 +111,10 @@ public class CommerceCartDataProvider {
 				commerceOrderItem.getCPInstanceId(),
 				commerceOrderItem.getQuantity(), true, commerceContext);
 
+		if (commerceProductPrice == null) {
+			return null;
+		}
+
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 
 		Prices prices = new Prices(unitPrice.format(locale));
@@ -222,6 +226,10 @@ public class CommerceCartDataProvider {
 		CommerceOrderPrice commerceOrderPrice =
 			_commerceOrderPriceCalculation.getCommerceOrderPrice(
 				commerceOrder, commerceContext);
+
+		if (commerceOrderPrice == null) {
+			return null;
+		}
 
 		CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
 		CommerceMoney total = commerceOrderPrice.getTotal();
