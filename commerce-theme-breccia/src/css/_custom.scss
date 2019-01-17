@@ -2247,6 +2247,10 @@
 
 	.specification-desc {
 		font-weight: $font-weight-bold;
+
+		.lexicon-icon-shortcut {
+			display: none;
+		}
 	}
 }
 
