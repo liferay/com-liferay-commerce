@@ -7,6 +7,7 @@
 	{@param settings: ? }
 
 	{@param? updateQuantity: ? }
+	{@param? submitQuantity: ? }
 
 	{let $btnClass kind="text"}
 		minium-button
@@ -28,6 +29,7 @@
 		{else}
 			{call QuantitySelector.render}
 				{param events: [
+					'submitQuantity' : $submitQuantity,
 					'updateQuantity' : $updateQuantity
 				] /}
 				{param quantity: $quantity /}

@@ -9,6 +9,11 @@ class AddToCartButton extends Component {
 		this.quantity = quantity;
 	}
 
+	submitQuantity(quantity) {
+		this.quantity = quantity;
+		this.handleSubmitClick();
+	}
+
 	handleBtnClick(e) {
 		if (!this.editMode && this.element === e.target) {
 			this.editMode = true;
