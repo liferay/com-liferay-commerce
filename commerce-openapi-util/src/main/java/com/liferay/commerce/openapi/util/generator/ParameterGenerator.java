@@ -57,6 +57,12 @@ public class ParameterGenerator {
 			StringUtils.toCamelCase(parameter.getName()));
 	}
 
+	public String toAnnotatedMethodContextParameter(String parameterType) {
+		return String.format(
+			"@Context %s %s", parameterType,
+			StringUtils.lowerCaseFirstChar(parameterType));
+	}
+
 	public String toMethodParameter(Parameter parameter) {
 		String location = parameter.getLocation();
 
@@ -71,6 +77,12 @@ public class ParameterGenerator {
 		return String.format(
 			"%s %s", parameter.getJavaType(),
 			StringUtils.toCamelCase(parameter.getName()));
+	}
+
+	public String toMethodParameter(String parameterType) {
+		return String.format(
+			"%s %s", parameterType,
+			StringUtils.lowerCaseFirstChar(parameterType));
 	}
 
 }
