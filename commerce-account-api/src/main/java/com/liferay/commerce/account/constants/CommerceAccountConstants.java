@@ -37,7 +37,7 @@ public class CommerceAccountConstants {
 
 	public static final long DEFAULT_PARENT_ACCOUNT_ID = 0;
 
-	public static final long GUEST_ACCOUNT_ID = 0;
+	public static final long GUEST_ACCOUNT_ID = -1;
 
 	public static final String ORDER_MANAGER_ROLE_NAME = "Order Manager";
 
