@@ -40,6 +40,10 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 		portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
 		tableName="commerceOrders"
 	/>
+
+	<div class="minium-frame__cta is-visible">
+		<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "addCommerceOrder();" %>' value="add-order" />
+	</div>
 </aui:form>
 
 <aui:script>
