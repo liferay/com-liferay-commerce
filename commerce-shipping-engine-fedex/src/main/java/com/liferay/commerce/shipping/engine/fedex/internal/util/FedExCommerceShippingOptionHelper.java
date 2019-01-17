@@ -543,7 +543,7 @@ public class FedExCommerceShippingOptionHelper {
 			CommerceMoney commerceMoney =
 				_commerceProductPriceCalculation.getFinalPrice(
 					commerceOrderItem.getCPInstanceId(),
-					commerceOrderItem.getQuantity(), _commerceContext);
+					commerceOrderItem.getQuantity(), false, _commerceContext);
 
 			price = price.add(commerceMoney.getPrice());
 		}
@@ -704,7 +704,8 @@ public class FedExCommerceShippingOptionHelper {
 
 			CommerceMoney commerceMoney =
 				_commerceProductPriceCalculation.getFinalPrice(
-					commerceOrderItem.getCPInstanceId(), 1, _commerceContext);
+					commerceOrderItem.getCPInstanceId(), 1, false,
+					_commerceContext);
 
 			for (int j = 0; j < commerceOrderItem.getQuantity(); j++) {
 				RequestedPackageLineItem requestedPackageLineItem =
