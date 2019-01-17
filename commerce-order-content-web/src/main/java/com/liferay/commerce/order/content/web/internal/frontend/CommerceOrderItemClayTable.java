@@ -28,7 +28,6 @@ import com.liferay.commerce.frontend.ClayTableSchemaField;
 import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
 import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
-import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.content.web.internal.model.OrderItem;
 import com.liferay.commerce.price.CommerceProductPrice;
@@ -41,10 +40,10 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletQName;
+import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -52,6 +51,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -88,11 +88,15 @@ public class CommerceOrderItemClayTable
 
 		OrderItem orderItem = (OrderItem)model;
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 		String viewURL = StringPool.BLANK;
 
 		try {
 			viewURL = _getViewShipmentURL(
-				orderItem.getOrderItemId(), httpServletRequest);
+				orderItem.getOrderItemId(), themeDisplay);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -207,7 +211,7 @@ public class CommerceOrderItemClayTable
 							commerceOrderItem.getCPInstanceId(), themeDisplay),
 						_getViewShipmentURL(
 							commerceOrderItem.getCommerceOrderId(),
-							httpServletRequest)));
+							themeDisplay)));
 			}
 		}
 		catch (Exception e) {
@@ -223,24 +227,26 @@ public class CommerceOrderItemClayTable
 	}
 
 	private String _getViewShipmentURL(
-			long commerceOrderItemId, HttpServletRequest httpServletRequest)
+			long commerceOrderItemId, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		PortletURL viewShipmentURL = PortletProviderUtil.getPortletURL(
-			httpServletRequest, CommerceOrder.class.getName(),
-			PortletProvider.Action.VIEW);
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		viewShipmentURL.setParameter(
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			themeDisplay.getRequest(), portletDisplay.getId(),
+			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+		portletURL.setParameter(
 			"mvcRenderCommandName", "viewCommerceOrderShipments");
-		viewShipmentURL.setParameter(
+		portletURL.setParameter(
 			"commerceOrderItemId", String.valueOf(commerceOrderItemId));
-		viewShipmentURL.setWindowState(LiferayWindowState.POP_UP);
+		portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-		viewShipmentURL.setParameter(
+		portletURL.setParameter(
 			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
-			_portal.getCurrentURL(httpServletRequest));
+			_portal.getCurrentURL(themeDisplay.getRequest()));
 
-		return viewShipmentURL.toString();
+		return portletURL.toString();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

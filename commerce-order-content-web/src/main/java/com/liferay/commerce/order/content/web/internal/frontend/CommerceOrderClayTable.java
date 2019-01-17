@@ -32,9 +32,8 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletQName;
+import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -51,6 +50,7 @@ import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,7 +96,7 @@ public class CommerceOrderClayTable
 				ActionKeys.VIEW)) {
 
 			String viewURL = _getOrderViewDetailURL(
-				order.getOrderId(), httpServletRequest);
+				order.getOrderId(), themeDisplay);
 
 			ClayTableAction clayTableAction = new ClayTableAction(
 				viewURL, StringPool.BLANK,
@@ -218,8 +218,7 @@ public class CommerceOrderClayTable
 					WorkflowConstants.getStatusLabel(commerceOrder.getStatus()),
 					amount,
 					_getOrderViewDetailURL(
-						commerceOrder.getCommerceOrderId(),
-						httpServletRequest)));
+						commerceOrder.getCommerceOrderId(), themeDisplay)));
 		}
 
 		return orders;
@@ -231,22 +230,24 @@ public class CommerceOrderClayTable
 	}
 
 	private String _getOrderViewDetailURL(
-			long commerceOrderId, HttpServletRequest httpServletRequest)
+			long commerceOrderId, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		PortletURL viewURL = PortletProviderUtil.getPortletURL(
-			httpServletRequest, CommerceOrder.class.getName(),
-			PortletProvider.Action.VIEW);
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		viewURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
-		viewURL.setParameter(
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			themeDisplay.getRequest(), portletDisplay.getId(),
+			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
+		portletURL.setParameter(
 			"commerceOrderId", String.valueOf(commerceOrderId));
 
-		viewURL.setParameter(
+		portletURL.setParameter(
 			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
-			_portal.getCurrentURL(httpServletRequest));
+			_portal.getCurrentURL(themeDisplay.getRequest()));
 
-		return viewURL.toString();
+		return portletURL.toString();
 	}
 
 	@Reference
