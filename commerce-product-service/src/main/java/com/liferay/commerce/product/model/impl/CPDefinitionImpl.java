@@ -195,8 +195,7 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 		}
 
 		return CommerceMediaResolverUtil.getUrl(
-			cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
-			getCPDefinitionId());
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
 	@Override
@@ -211,8 +210,7 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 		}
 
 		return CommerceMediaResolverUtil.getThumbnailUrl(
-			cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
-			getCPDefinitionId());
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
 	@Override

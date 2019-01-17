@@ -1,5 +1,4 @@
 Bundle-Name: Liferay Commerce Media Api
 Bundle-SymbolicName: com.liferay.commerce.media.api
 Bundle-Version: 1.0.0
-Export-Package:\
-	com.liferay.commerce.media
+Export-Package: com.liferay.commerce.media
