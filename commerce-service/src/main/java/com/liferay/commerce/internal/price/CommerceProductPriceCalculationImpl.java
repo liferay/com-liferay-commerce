@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.internal.price;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
@@ -35,6 +36,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -63,7 +65,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			return null;
+			throw new PrincipalException();
 		}
 
 		CommerceMoney unitPrice = getUnitPrice(
@@ -128,7 +130,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			return null;
+			throw new PrincipalException();
 		}
 
 		CommerceProductPrice commerceProductPrice = getCommerceProductPrice(
@@ -158,7 +160,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			return null;
+			throw new PrincipalException();
 		}
 
 		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
@@ -200,7 +202,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			return null;
+			throw new PrincipalException();
 		}
 
 		CommerceMoney commerceMoney = null;
@@ -242,7 +244,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			return null;
+			throw new PrincipalException();
 		}
 
 		CommerceMoney commerceMoney = null;
@@ -288,7 +290,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			return null;
+			throw new PrincipalException();
 		}
 
 		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
@@ -381,7 +383,10 @@ public class CommerceProductPriceCalculationImpl
 
 		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
-		if (commerceAccount != null) {
+		if ((commerceAccount != null) &&
+			(commerceAccount.getType() ==
+				CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS)) {
+
 			return _portletResourcePermission.contains(
 				permissionChecker, commerceAccount.getCommerceAccountGroupId(),
 				CPActionKeys.VIEW_PRICE);

@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.discount.internal.discount;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
@@ -125,7 +126,10 @@ public class CommerceDiscountCouponCodeHelperImpl
 
 		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
-		if (commerceAccount != null) {
+		if ((commerceAccount != null) &&
+			(commerceAccount.getType() ==
+				CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS)) {
+
 			groupId = commerceAccount.getCommerceAccountGroupId();
 		}
 
