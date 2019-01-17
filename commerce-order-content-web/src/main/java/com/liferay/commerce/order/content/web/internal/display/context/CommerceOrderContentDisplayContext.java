@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
@@ -79,7 +80,8 @@ public class CommerceOrderContentDisplayContext {
 				commercePaymentMethodGroupRelService,
 			CommerceShipmentItemService commerceShipmentItemService,
 			HttpServletRequest httpServletRequest,
-			ModelResourcePermission<CommerceOrder> modelResourcePermission)
+			ModelResourcePermission<CommerceOrder> modelResourcePermission,
+			PortletResourcePermission portletResourcePermission)
 		throws PortalException {
 
 		_commerceAddressService = commerceAddressService;
@@ -91,6 +93,7 @@ public class CommerceOrderContentDisplayContext {
 		_commerceShipmentItemService = commerceShipmentItemService;
 		_httpServletRequest = httpServletRequest;
 		_modelResourcePermission = modelResourcePermission;
+		_portletResourcePermission = portletResourcePermission;
 
 		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
 
@@ -177,7 +180,7 @@ public class CommerceOrderContentDisplayContext {
 			CommerceOrder commerceOrder)
 		throws PortalException {
 
-		if (hasPermission(
+		if (hasModelPermission(
 				commerceOrder,
 				CommerceOrderActionKeys.
 					MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES)) {
@@ -194,7 +197,7 @@ public class CommerceOrderContentDisplayContext {
 	public int getCommerceOrderNotesCount(CommerceOrder commerceOrder)
 		throws PortalException {
 
-		if (hasPermission(commerceOrder, ActionKeys.UPDATE_DISCUSSION)) {
+		if (hasModelPermission(commerceOrder, ActionKeys.UPDATE_DISCUSSION)) {
 			return _commerceOrderNoteService.getCommerceOrderNotesCount(
 				commerceOrder.getCommerceOrderId());
 		}
@@ -379,18 +382,25 @@ public class CommerceOrderContentDisplayContext {
 		return portletURL;
 	}
 
-	public boolean hasPermission(CommerceOrder commerceOrder, String actionId)
+	public boolean hasModelPermission(
+			CommerceOrder commerceOrder, String actionId)
 		throws PortalException {
 
 		return _modelResourcePermission.contains(
 			_cpRequestHelper.getPermissionChecker(), commerceOrder, actionId);
 	}
 
-	public boolean hasPermission(long commerceOrderId, String actionId)
+	public boolean hasModelPermission(long commerceOrderId, String actionId)
 		throws PortalException {
 
 		return _modelResourcePermission.contains(
 			_cpRequestHelper.getPermissionChecker(), commerceOrderId, actionId);
+	}
+
+	public boolean hasPermission(String actionId) {
+		return _portletResourcePermission.contains(
+			_cpRequestHelper.getPermissionChecker(),
+			_cpRequestHelper.getScopeGroupId(), actionId);
 	}
 
 	public boolean isCommerceSiteTypeB2C() {
@@ -424,5 +434,6 @@ public class CommerceOrderContentDisplayContext {
 	private final HttpServletRequest _httpServletRequest;
 	private final ModelResourcePermission<CommerceOrder>
 		_modelResourcePermission;
+	private final PortletResourcePermission _portletResourcePermission;
 
 }

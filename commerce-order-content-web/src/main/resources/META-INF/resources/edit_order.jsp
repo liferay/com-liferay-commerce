@@ -111,7 +111,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 				/>
 			</div>
 
-			<c:if test="<%= commerceOrderContentDisplayContext.hasPermission(commerceOrder, ActionKeys.UPDATE) %>">
+			<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
 				<div class="autofit-col">
 					<liferay-ui:icon-menu
 						direction="right"
