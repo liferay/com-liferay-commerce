@@ -80,9 +80,11 @@ public class PriceCPContentContributor implements CPContentContributor {
 				cpDefinitionInventoryEngine.getMinOrderQuantity(cpInstance),
 				commerceContext);
 
-		jsonObject.put(
-			CPContentContributorConstants.PRICE,
-			commerceMoney.format(_portal.getLocale(httpServletRequest)));
+		if (commerceMoney != null) {
+			jsonObject.put(
+				CPContentContributorConstants.PRICE,
+				commerceMoney.format(_portal.getLocale(httpServletRequest)));
+		}
 
 		return jsonObject;
 	}

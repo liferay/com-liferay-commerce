@@ -179,25 +179,30 @@ public class CommerceOrderItemClayTable
 						commerceOrderItem.getCPInstanceId(),
 						commerceOrderItem.getQuantity(), commerceContext);
 
-				CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
-				CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+				if (commerceProductPrice != null) {
+					CommerceMoney unitPrice =
+						commerceProductPrice.getUnitPrice();
+					CommerceMoney finalPrice =
+						commerceProductPrice.getFinalPrice();
 
-				CommerceDiscountValue discountValue =
-					commerceProductPrice.getDiscountValue();
+					CommerceDiscountValue discountValue =
+						commerceProductPrice.getDiscountValue();
 
-				if (unitPrice != null) {
-					price = unitPrice.format(themeDisplay.getLocale());
-				}
+					if (unitPrice != null) {
+						price = unitPrice.format(themeDisplay.getLocale());
+					}
 
-				if (finalPrice != null) {
-					total = finalPrice.format(themeDisplay.getLocale());
-				}
+					if (finalPrice != null) {
+						total = finalPrice.format(themeDisplay.getLocale());
+					}
 
-				if (discountValue != null) {
-					CommerceMoney discountAmount =
-						discountValue.getDiscountAmount();
+					if (discountValue != null) {
+						CommerceMoney discountAmount =
+							discountValue.getDiscountAmount();
 
-					discount = discountAmount.format(themeDisplay.getLocale());
+						discount = discountAmount.format(
+							themeDisplay.getLocale());
+					}
 				}
 
 				orderItems.add(

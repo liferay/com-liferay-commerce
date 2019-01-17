@@ -63,6 +63,10 @@ public class CartTotalCommerceDiscountRuleTypeImpl
 			_commerceOrderPriceCalculation.getSubtotal(
 				commerceOrder, commerceContext);
 
+		if (orderPriceMoney == null) {
+			return false;
+		}
+
 		BigDecimal orderPrice = orderPriceMoney.getPrice();
 
 		String settingsProperty = commerceDiscountRule.getSettingsProperty(

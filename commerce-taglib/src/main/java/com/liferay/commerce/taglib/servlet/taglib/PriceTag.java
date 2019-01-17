@@ -171,6 +171,10 @@ public class PriceTag extends IncludeTag {
 			commerceProductPriceCalculation.getUnitMinPrice(
 				_cpDefinitionId, quantity, commerceContext);
 
+		if (minPriceCommerceMoney == null) {
+			return StringPool.BLANK;
+		}
+
 		if (!_showPriceRange) {
 			return minPriceCommerceMoney.format(locale);
 		}
