@@ -91,8 +91,17 @@ public class OrderSummaryCheckoutStepDisplayContext {
 	}
 
 	public CommerceOrderPrice getCommerceOrderPrice() throws PortalException {
-		return _commerceOrderPriceCalculation.getCommerceOrderPrice(
-			getCommerceOrder(), _commerceContext);
+		CommerceOrderPrice commerceOrderPrice =
+			_commerceOrderPriceCalculation.getCommerceOrderPrice(
+				getCommerceOrder(), _commerceContext);
+
+		if (commerceOrderPrice != null) {
+			return commerceOrderPrice;
+		}
+
+		throw new PortalException(
+			"There is no price for this order, or the current user does not " +
+				"have permission to view it");
 	}
 
 	public Map<Long, List<CommerceOrderValidatorResult>>
