@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.File;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Html;
@@ -48,6 +49,7 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.URLCodec;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
@@ -100,19 +102,21 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 			long cpAttachmentFileEntryId, boolean download, boolean thumbnail)
 		throws PortalException {
 
-		CPAttachmentFileEntry cpAttachmentFileEntry =
-			_cpAttachmentFileEntryService.fetchCPAttachmentFileEntry(
-				cpAttachmentFileEntryId);
-
-		if (cpAttachmentFileEntry == null) {
-			return StringPool.BLANK;
-		}
-
 		StringBundler sb = new StringBundler(13);
 
 		sb.append(_portal.getPathModule());
 		sb.append(StringPool.SLASH);
 		sb.append(CommerceMediaConstants.SERVLET_PATH);
+
+		CPAttachmentFileEntry cpAttachmentFileEntry =
+			_cpAttachmentFileEntryService.fetchCPAttachmentFileEntry(
+				cpAttachmentFileEntryId);
+
+		if (cpAttachmentFileEntry == null) {
+			sb.append("/default/");
+
+			return _html.escape(sb.toString());
+		}
 
 		Locale siteDefaultLocale = _portal.getSiteDefaultLocale(
 			cpAttachmentFileEntry.getGroupId());
@@ -171,7 +175,17 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 		String[] pathArray = StringUtil.split(path, CharPool.SLASH);
 
 		if (pathArray.length < 2) {
-			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)httpServletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			String logoUrl = themeDisplay.getLayoutSetLogo();
+
+			if (logoUrl == null) {
+				logoUrl = themeDisplay.getCompanyLogo();
+			}
+
+			httpServletResponse.sendRedirect(logoUrl);
 
 			return;
 		}
