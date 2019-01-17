@@ -1,5 +1,7 @@
+import com.liferay.gradle.plugins.source.formatter.FormatSourceTask;
 import com.liferay.gradle.util.GradleUtil
 
+task formatSourceModule(type: FormatSourceTask)
 task generateRestModule(type: JavaExec)
 task runClass(type: JavaExec)
 
@@ -17,7 +19,30 @@ dependencies {
 	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.6.7"
 }
 
+formatSourceModule {
+	String osgiModuleName = GradleUtil.getProperty(project, "osgi.module.name", "")
+	String osgiModuleRootPath = GradleUtil.getProperty(project, "osgi.module.root.path", "")
+
+	def properties = new Properties()
+
+	file("src/main/resources/com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator.config").withInputStream {
+		properties.load(it)
+	}
+
+	if (osgiModuleName == "") {
+		osgiModuleName = properties.get("osgi.module.name")
+	}
+
+	if (osgiModuleRootPath == "") {
+		osgiModuleRootPath = properties.get("osgi.module.root.path")
+	}
+
+	baseDirName = osgiModuleRootPath + osgiModuleName
+}
+
 generateRestModule {
+	finalizedBy formatSourceModule
+
 	classpath = sourceSets.main.runtimeClasspath
 	main = "com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator"
 
