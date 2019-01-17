@@ -130,12 +130,6 @@ public class ByWeightCommerceShippingEngine implements CommerceShippingEngine {
 		List<CommerceOrderItem> commerceOrderItems =
 			commerceOrder.getCommerceOrderItems();
 
-		CommerceMoney commerceMoney =
-			_commerceOrderPriceCalculation.getSubtotal(
-				commerceOrder, false, commerceContext);
-
-		BigDecimal orderPrice = commerceMoney.getPrice();
-
 		double orderWeight = _commerceShippingHelper.getWeight(
 			commerceOrderItems);
 
@@ -170,6 +164,12 @@ public class ByWeightCommerceShippingEngine implements CommerceShippingEngine {
 
 		BigDecimal ratePercentage = new BigDecimal(
 			commerceShippingFixedOptionRel.getRatePercentage());
+
+		CommerceMoney commerceMoney =
+			_commerceOrderPriceCalculation.getSubtotal(
+				commerceOrder, false, commerceContext);
+
+		BigDecimal orderPrice = commerceMoney.getPrice();
 
 		amount = amount.add(
 			ratePercentage.multiply(orderPrice.divide(new BigDecimal(100))));

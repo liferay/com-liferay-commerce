@@ -182,19 +182,20 @@ public class CommerceOrderItemClayTable
 				if (commerceProductPrice != null) {
 					CommerceMoney unitPrice =
 						commerceProductPrice.getUnitPrice();
-					CommerceMoney finalPrice =
-						commerceProductPrice.getFinalPrice();
-
-					CommerceDiscountValue discountValue =
-						commerceProductPrice.getDiscountValue();
 
 					if (unitPrice != null) {
 						price = unitPrice.format(themeDisplay.getLocale());
 					}
 
+					CommerceMoney finalPrice =
+						commerceProductPrice.getFinalPrice();
+
 					if (finalPrice != null) {
 						total = finalPrice.format(themeDisplay.getLocale());
 					}
+
+					CommerceDiscountValue discountValue =
+						commerceProductPrice.getDiscountValue();
 
 					if (discountValue != null) {
 						CommerceMoney discountAmount =

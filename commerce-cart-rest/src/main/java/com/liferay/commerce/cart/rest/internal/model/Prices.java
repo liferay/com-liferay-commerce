@@ -35,12 +35,12 @@ public class Prices {
 		return _promoPrice;
 	}
 
-	public void sePrice(String price) {
-		_price = price;
-	}
-
 	public void setDiscount(String discount) {
 		_discount = discount;
+	}
+
+	public void setPrice(String price) {
+		_price = price;
 	}
 
 	public void setPromoPrice(String promoPrice) {
