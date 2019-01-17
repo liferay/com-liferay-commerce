@@ -58,6 +58,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.Format;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletURL;
@@ -119,6 +120,10 @@ public class CommerceOrderContentDisplayContext {
 
 	public List<CommerceAddress> getAvailableCommerceOrderAddresses()
 		throws PortalException {
+
+		if (_commerceAccount == null) {
+			return Collections.emptyList();
+		}
 
 		return _commerceAddressService.getCommerceAddresses(
 			_commerceAccount.getCommerceAccountGroupId(),
