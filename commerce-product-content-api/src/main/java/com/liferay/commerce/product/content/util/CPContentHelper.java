@@ -20,7 +20,6 @@ import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.content.render.CPContentRenderer;
-import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOptionCategory;
@@ -58,8 +57,8 @@ public interface CPContentHelper {
 				long cpDefinitionId, long cpOptionCategoryId)
 		throws PortalException;
 
-	public List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
-			long cpDefinitionId)
+	public List<CPMedia> getCPAttachmentFileEntries(
+			long cpDefinitionId, ThemeDisplay themeDisplay)
 		throws PortalException;
 
 	public CPCatalogEntry getCPCatalogEntry(
