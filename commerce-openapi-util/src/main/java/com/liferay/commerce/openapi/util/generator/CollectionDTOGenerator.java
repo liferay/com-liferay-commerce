@@ -43,21 +43,22 @@ public class CollectionDTOGenerator extends BaseSourceGenerator {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{");
+		sb.append("{\n");
 
 		Iterator<String> iterator = _referencedModels.iterator();
 
 		while (iterator.hasNext()) {
+			sb.append("\t\t");
 			sb.append(iterator.next());
 
 			sb.append("DTO.class");
 
 			if (iterator.hasNext()) {
-				sb.append(", ");
+				sb.append(",\n");
 			}
 		}
 
-		sb.append("}");
+		sb.append("\n\t}");
 
 		dtoSource = dtoSource.replace("${MODEL_CLASSES}", sb.toString());
 
