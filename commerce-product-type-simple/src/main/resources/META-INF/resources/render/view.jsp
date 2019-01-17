@@ -225,7 +225,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 												<span><%= curCPMedia.getTitle() %></span>
 
 												<span>
-													<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" url="<%= cpContentHelper.getDownloadFileEntryURL(fileEntry, themeDisplay) %>" />
+													<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" target="_blank" url="<%= curCPMedia.getDownloadUrl() %>" />
 												</span>
 											</td>
 										</tr>

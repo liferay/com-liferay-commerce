@@ -55,12 +55,12 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 					<div class="product-detail-thumbnail-column">
 
 					<%
-					List<CPMedia> cpMediaList = cpContentHelper.getImages(cpDefinitionId, themeDisplay);
+					List<CPMedia> imageCPMedias = cpContentHelper.getImages(cpDefinitionId, themeDisplay);
 
-					String[] imageOverflowUrls = new String[cpMediaList.size()];
+					String[] imageOverflowUrls = new String[imageCPMedias.size()];
 
-					for (int i = 0; i < cpMediaList.size(); i++) {
-						CPMedia cpMedia = cpMediaList.get(i);
+					for (int i = 0; i < imageCPMedias.size(); i++) {
+						CPMedia cpMedia = imageCPMedias.get(i);
 
 						String url = cpMedia.getThumbnailUrl();
 
@@ -72,7 +72,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 								<c:if test="<%= i == 4 %>">
 									<div class="product-detail-thumbnail-container product-detail-thumbnail-text-container" id="<portlet:namespace />thumbs-container">
 										<a class="thumb thumb-text" data-toggle="modal" href="#<portlet:namespace />ImageWidgetModal">
-											+ <%= cpMediaList.size() - i %>
+											+ <%= imageCPMedias.size() - i %>
 										</a>
 									</div>
 								</c:if>
@@ -237,7 +237,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 <%
 List<CPDefinitionSpecificationOptionValue> cpDefinitionSpecificationOptionValues = cpContentHelper.getCPDefinitionSpecificationOptionValues(cpDefinitionId);
 List<CPOptionCategory> cpOptionCategories = cpContentHelper.getCPOptionCategories(scopeGroupId);
-List<CPAttachmentFileEntry> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntries(cpDefinitionId);
+List<CPMedia> attachmentCPMedias = cpContentHelper.getCPAttachmentFileEntries(cpDefinitionId, themeDisplay);
 %>
 
 <div class="product-detail-description">
@@ -259,7 +259,7 @@ List<CPAttachmentFileEntry> cpAttachmentFileEntries = cpContentHelper.getCPAttac
 				</li>
 			</c:if>
 
-			<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
+			<c:if test="<%= !attachmentCPMedias.isEmpty() %>">
 				<li class="nav-item" role="presentation">
 					<a aria-controls="<portlet:namespace />attachments" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />attachments" role="tab">
 						<%= LanguageUtil.get(resourceBundle, "attachments") %>
@@ -333,22 +333,21 @@ List<CPAttachmentFileEntry> cpAttachmentFileEntries = cpContentHelper.getCPAttac
 				</div>
 			</c:if>
 
-			<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
+			<c:if test="<%= !attachmentCPMedias.isEmpty() %>">
 				<div class="fade tab-pane" id="<portlet:namespace />attachments">
 					<dl class="autofit-float autofit-row autofit-row-center specification-list">
 
 						<%
 						int attachmentsCount = 0;
 
-						for (CPAttachmentFileEntry curCPAttachmentFileEntry : cpAttachmentFileEntries) {
-							FileEntry fileEntry = curCPAttachmentFileEntry.getFileEntry();
+						for (CPMedia attachmentCPMedia : attachmentCPMedias) {
 						%>
 
 							<dt class="autofit-col specification-term">
-								<%= curCPAttachmentFileEntry.getTitle(themeDisplay.getLanguageId()) %>
+								<%= attachmentCPMedia.getTitle() %>
 							</dt>
 							<dd class="autofit-col specification-desc">
-								<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" url="<%= cpContentHelper.getDownloadFileEntryURL(fileEntry, themeDisplay) %>" />
+								<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" target="_blank" url="<%= attachmentCPMedia.getDownloadUrl() %>" />
 							</dd>
 
 							<%
