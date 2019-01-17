@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.order.content.web.internal.portlet.action;
 
-import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.content.web.internal.display.context.CommerceOrderContentDisplayContext;
@@ -122,7 +122,7 @@ public class CommerceOrderContentConfigurationAction
 	private ModelResourcePermission<CommerceOrder> _modelResourcePermission;
 
 	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
+		target = "(resource.name=" + CommerceOrderConstants.RESOURCE_NAME + ")"
 	)
 	private PortletResourcePermission _portletResourcePermission;
 
