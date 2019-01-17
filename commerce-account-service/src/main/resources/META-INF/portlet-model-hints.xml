@@ -14,9 +14,7 @@
 		</field>
 		<field name="parentCommerceAccountId" type="long" />
 		<field name="logoId" type="long" />
-		<field name="email" type="String">
-			<validator name="required" />
-		</field>
+		<field name="email" type="String" />
 		<field name="taxId" type="String" />
 		<field name="type" type="int" />
 		<field name="active" type="boolean" />
