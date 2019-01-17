@@ -15,7 +15,9 @@
 package ${PACKAGE};
 
 import com.liferay.oauth2.provider.scope.RequiresScope;
+
 ${MODEL_IMPORT_STATEMENTS}
+
 import javax.annotation.Generated;
 
 ${MODEL_IMPORT_STATEMENTS_JAVAX}
