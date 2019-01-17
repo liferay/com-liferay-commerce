@@ -11,33 +11,6 @@ import 'clay-modal';
 import './OrganizationInputItem.es';
 import './OrganizationListItem.es';
 
-const fakeData = [
-	{
-		id: 4,
-		name: 'Lorem Ipsum'
-	},
-	{
-		id: 5,
-		name: 'Dolor Sit'
-	},
-	{
-		id: 6,
-		name: 'Donec nunc elit'
-	},
-	{
-		id: 7,
-		name: 'Vestibulum ante ipsum'
-	},
-	{
-		id: 8,
-		name: 'Sed facilisis libero'
-	},
-	{
-		id: 9,
-		name: 'Phasellus finibut massa'
-	}
-];
-
 class AddOrganizationModal extends Component {
 
 	created() {
@@ -116,9 +89,6 @@ class AddOrganizationModal extends Component {
 				response => {
 					this._isLoading = false;
 
-					const fakeResult = fakeData.filter(org => org.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
-
-					return this.organizations = this.addColorToOrganizations(fakeResult);
 					return this.organizations = this.addColorToOrganizations(response.organizations);
 				}
 			);

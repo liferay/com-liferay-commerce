@@ -4,6 +4,7 @@ import template from './OrganizationListItem.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
+import '../add_to_tick_item/AddToTickItem.es';
 import '../autocomplete_item/AutocompleteItem.es';
 
 class OrganizationListItem extends Component {
