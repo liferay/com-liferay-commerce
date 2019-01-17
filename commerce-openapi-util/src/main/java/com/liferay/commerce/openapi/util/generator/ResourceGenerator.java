@@ -453,7 +453,10 @@ public class ResourceGenerator extends BaseSourceGenerator {
 				}
 			}
 			else {
-				sb.append("\t\treturn Response.ok().build();\n");
+				sb.append(
+					"\t\tResponse.ResponseBuilder responseBuilder = ");
+				sb.append("Response.ok();\n");
+				sb.append("\t\treturn responseBuilder.build();\n");
 			}
 
 			sb.append("\t}\n");
