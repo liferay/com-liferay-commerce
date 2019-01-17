@@ -149,7 +149,7 @@ public class ByWeightCommerceShippingEngine implements CommerceShippingEngine {
 		String name = commerceShippingFixedOption.getName(locale);
 
 		if (_commerceShippingHelper.isFreeShipping(commerceOrder)) {
-			new CommerceShippingOption(name, name, BigDecimal.ZERO);
+			return new CommerceShippingOption(name, name, BigDecimal.ZERO);
 		}
 
 		BigDecimal amount = commerceShippingFixedOptionRel.getFixedPrice();
