@@ -21,8 +21,8 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 
 CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrder();
 
-boolean manageNotesPermission = commerceOrderContentDisplayContext.hasPermission(commerceOrder, CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_NOTES);
-boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.hasPermission(commerceOrder, CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES);
+boolean manageNotesPermission = commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_NOTES);
+boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES);
 %>
 
 <portlet:actionURL name="editCommerceOrderNote" var="editCommerceOrderNoteURL">

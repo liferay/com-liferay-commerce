@@ -41,9 +41,11 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 		tableName="commerceOrders"
 	/>
 
-	<div class="minium-frame__cta is-visible">
-		<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "addCommerceOrder();" %>' value="add-order" />
-	</div>
+	<c:if test="<%= commerceOrderContentDisplayContext.hasPermission(CommerceOrderActionKeys.ADD_COMMERCE_ORDER) %>">
+		<div class="minium-frame__cta is-visible">
+			<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "addCommerceOrder();" %>' value="add-order" />
+		</div>
+	</c:if>
 </aui:form>
 
 <aui:script>

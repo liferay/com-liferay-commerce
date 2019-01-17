@@ -65,7 +65,7 @@ CommerceOrderNote commerceOrderNote = commerceOrderContentDisplayContext.getComm
 			<aui:fieldset>
 				<aui:input autoFocus="<%= true %>" name="content" />
 
-				<c:if test="<%= commerceOrderContentDisplayContext.hasPermission(commerceOrderNote.getCommerceOrderId(), CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES) %>">
+				<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrderNote.getCommerceOrderId(), CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES) %>">
 					<aui:input helpMessage="restricted-help" label="private" name="restricted" />
 				</c:if>
 			</aui:fieldset>
