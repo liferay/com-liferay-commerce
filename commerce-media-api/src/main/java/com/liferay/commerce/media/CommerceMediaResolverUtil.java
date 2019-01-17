@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.media;
 
-import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.osgi.util.ServiceTrackerFactory;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -30,15 +29,13 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class CommerceMediaResolverUtil {
 
-	public static String getDownloadUrl(
-			long cpAttachmentFileEntryId, long cpDefinitionId)
+	public static String getDownloadUrl(long cpAttachmentFileEntryId)
 		throws PortalException {
 
 		CommerceMediaResolver commerceMediaResolver =
 			_serviceTracker.getService();
 
-		return commerceMediaResolver.getDownloadUrl(
-			cpAttachmentFileEntryId, cpDefinitionId);
+		return commerceMediaResolver.getDownloadUrl(cpAttachmentFileEntryId);
 	}
 
 	public static byte[] getMediaBytes(HttpServletRequest httpServletRequest)
@@ -50,26 +47,22 @@ public class CommerceMediaResolverUtil {
 		return commerceMediaResolver.getMediaBytes(httpServletRequest);
 	}
 
-	public static String getThumbnailUrl(
-			long cpAttachmentFileEntryId, long cpDefinitionId)
+	public static String getThumbnailUrl(long cpAttachmentFileEntryId)
 		throws PortalException {
 
 		CommerceMediaResolver commerceMediaResolver =
 			_serviceTracker.getService();
 
-		return commerceMediaResolver.getThumbnailUrl(
-			cpAttachmentFileEntryId, cpDefinitionId);
+		return commerceMediaResolver.getThumbnailUrl(cpAttachmentFileEntryId);
 	}
 
-	public static String getUrl(
-			long cpAttachmentFileEntryId, long cpDefinitionId)
+	public static String getUrl(long cpAttachmentFileEntryId)
 		throws PortalException {
 
 		CommerceMediaResolver commerceMediaResolver =
 			_serviceTracker.getService();
 
-		return commerceMediaResolver.getUrl(
-			cpAttachmentFileEntryId, cpDefinitionId);
+		return commerceMediaResolver.getUrl(cpAttachmentFileEntryId);
 	}
 
 	public static void sendMediaBytes(

@@ -29,23 +29,19 @@ import javax.servlet.http.HttpServletResponse;
 @ProviderType
 public interface CommerceMediaResolver {
 
-	public String getDownloadUrl(
-			long cpAttachmentFileEntryId, long cpDefinitionId)
+	public String getDownloadUrl(long cpAttachmentFileEntryId)
 		throws PortalException;
 
 	public byte[] getMediaBytes(HttpServletRequest httpServletRequest)
 		throws IOException, PortalException;
 
-	public String getThumbnailUrl(
-			long cpAttachmentFileEntryId, long cpDefinitionId)
+	public String getThumbnailUrl(long cpAttachmentFileEntryId)
 		throws PortalException;
 
-	public String getUrl(long cpAttachmentFileEntryId, long cpDefinitionId)
-		throws PortalException;
+	public String getUrl(long cpAttachmentFileEntryId) throws PortalException;
 
 	public String getUrl(
-			long cpAttachmentFileEntryId, long cpDefinitionId, boolean download,
-			boolean thumbnail)
+			long cpAttachmentFileEntryId, boolean download, boolean thumbnail)
 		throws PortalException;
 
 	public void sendMediaBytes(

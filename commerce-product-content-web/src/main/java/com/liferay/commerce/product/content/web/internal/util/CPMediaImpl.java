@@ -34,17 +34,14 @@ public class CPMediaImpl implements CPMedia {
 		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
 
 		_downloadUrl = CommerceMediaResolverUtil.getDownloadUrl(
-			cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
-			cpAttachmentFileEntry.getClassPK());
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 		_id = cpAttachmentFileEntry.getCPAttachmentFileEntryId();
 		_mimeType = fileEntry.getMimeType();
 		_url = CommerceMediaResolverUtil.getUrl(
-			cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
-			cpAttachmentFileEntry.getClassPK());
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 		_title = cpAttachmentFileEntry.getTitle(themeDisplay.getLanguageId());
 		_thumbnailUrl = CommerceMediaResolverUtil.getThumbnailUrl(
-			cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
-			cpAttachmentFileEntry.getClassPK());
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
 	@Override
