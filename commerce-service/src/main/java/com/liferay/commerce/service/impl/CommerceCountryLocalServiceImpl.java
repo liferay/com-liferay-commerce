@@ -21,6 +21,7 @@ import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.base.CommerceCountryLocalServiceBaseImpl;
 import com.liferay.commerce.starter.CommerceRegionsStarter;
 import com.liferay.commerce.starter.CommerceRegionsStarterRegistry;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -43,8 +44,11 @@ import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.service.access.policy.model.SAPEntry;
+import com.liferay.portal.security.service.access.policy.service.SAPEntryLocalService;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.ArrayList;
@@ -52,6 +56,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * @author Alessio Antonio Rendina
@@ -270,6 +275,43 @@ public class CommerceCountryLocalServiceImpl
 				commerceRegionsStarter.start(serviceContext);
 			}
 		}
+
+		SAPEntry sapEntry = _sapEntryLocalService.fetchSAPEntry(
+			serviceContext.getCompanyId(), _COMMERCE_SAP_ENTRY_NAME);
+
+		if (sapEntry == null) {
+			String ungatedServicesPath =
+				"com/liferay/commerce/internal/ungated-services.json";
+
+			String ungatedServicesJSON = StringUtil.read(
+				clazz.getClassLoader(), ungatedServicesPath, false);
+
+			JSONArray ungatedServicesJSONArray =
+				JSONFactoryUtil.createJSONArray(ungatedServicesJSON);
+
+			String[] ungatedServices =
+				new String[ungatedServicesJSONArray.length()];
+
+			for (int i = 0; i < ungatedServicesJSONArray.length(); i++) {
+				ungatedServices[i] = ungatedServicesJSONArray.getString(i);
+			}
+
+			Map<Locale, String> titleMap = new HashMap<>();
+
+			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
+				"content.Language", serviceContext.getLocale(), clazz);
+
+			String localizedTitle = LanguageUtil.get(
+				resourceBundle,
+				"public-access-to-the-commerce-country-and-region-apis");
+
+			titleMap.put(serviceContext.getLocale(), localizedTitle);
+
+			_sapEntryLocalService.addSAPEntry(
+				serviceContext.getUserId(),
+				StringUtil.merge(ungatedServices, StringPool.NEW_LINE), true,
+				true, _COMMERCE_SAP_ENTRY_NAME, titleMap, serviceContext);
+		}
 	}
 
 	@Override
@@ -400,10 +442,15 @@ public class CommerceCountryLocalServiceImpl
 		}
 	}
 
+	private static final String _COMMERCE_SAP_ENTRY_NAME = "COMMERCE_DEFAULT";
+
 	private static final String[] _SELECTED_FIELD_NAMES =
 		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
 
 	@ServiceReference(type = CommerceRegionsStarterRegistry.class)
 	private CommerceRegionsStarterRegistry _commerceRegionsStarterRegistry;
+
+	@ServiceReference(type = SAPEntryLocalService.class)
+	private SAPEntryLocalService _sapEntryLocalService;
 
 }
