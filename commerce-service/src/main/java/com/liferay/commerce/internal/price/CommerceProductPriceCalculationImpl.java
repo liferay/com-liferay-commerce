@@ -36,7 +36,6 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -65,7 +64,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			throw new PrincipalException();
+			return null;
 		}
 
 		CommerceMoney unitPrice = getUnitPrice(
@@ -130,7 +129,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			throw new PrincipalException();
+			return null;
 		}
 
 		CommerceProductPrice commerceProductPrice = getCommerceProductPrice(
@@ -160,7 +159,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			throw new PrincipalException();
+			return null;
 		}
 
 		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
@@ -202,7 +201,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			throw new PrincipalException();
+			return null;
 		}
 
 		CommerceMoney commerceMoney = null;
@@ -244,7 +243,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			throw new PrincipalException();
+			return null;
 		}
 
 		CommerceMoney commerceMoney = null;
@@ -290,7 +289,7 @@ public class CommerceProductPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			throw new PrincipalException();
+			return null;
 		}
 
 		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
