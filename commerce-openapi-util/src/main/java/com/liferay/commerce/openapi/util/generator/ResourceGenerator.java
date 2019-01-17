@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.ComponentDefinition;
 import com.liferay.commerce.openapi.util.Content;
+import com.liferay.commerce.openapi.util.Extension;
 import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Path;
@@ -42,12 +43,14 @@ import org.slf4j.LoggerFactory;
 public class ResourceGenerator extends BaseSourceGenerator {
 
 	public ResourceGenerator(
-		String applicationName, String author, String moduleOutputPath,
+		String applicationName, String author, String contextOutputPath,
+		String moduleOutputPath,
 		String modelPackagePath, boolean overwriteImplementation,
 		String resourceInterfacePackagePath, String resourcePackagePath) {
 
 		_applicationName = applicationName;
 		_author = author;
+		_contextOutputPath = contextOutputPath;
 		_moduleOutputPath = moduleOutputPath;
 		_modelPackagePath = modelPackagePath;
 		_overwriteImplementation = overwriteImplementation;
@@ -155,6 +158,50 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return sb.toString();
 	}
 
+	private String _getContextParametersDeclaration(
+		Method method, boolean annotateParameter) {
+
+		List<Extension> extensions = method.getExtensions();
+
+		Iterator<Extension> iterator = extensions.iterator();
+
+		StringBuilder sb = new StringBuilder();
+
+		while (iterator.hasNext()) {
+			Extension extension = iterator.next();
+
+			Extension.ExtensionType extensionType =
+				extension.getExtensionType();
+
+			List<String> providers = extensionType.getProviders();
+
+			Iterator<String> providerIterator = providers.iterator();
+
+			while (providerIterator.hasNext()) {
+				if (annotateParameter) {
+					sb.append(
+						_parameterGenerator.toAnnotatedMethodContextParameter(
+							providerIterator.next()));
+				}
+				else {
+					sb.append(
+						_parameterGenerator.toMethodParameter(
+							providerIterator.next()));
+				}
+
+				if (providerIterator.hasNext()) {
+					sb.append(", ");
+				}
+			}
+
+			if (iterator.hasNext()) {
+				sb.append(", ");
+			}
+		}
+
+		return sb.toString();
+	}
+
 	private String _getMethodDeclaration(
 		Method method, boolean annotateParameter,
 		Set<ComponentDefinition> componentDefinitions) {
@@ -188,6 +235,15 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			if (parameterIterator.hasNext()) {
 				sb.append(", ");
 			}
+		}
+
+		if (method.hasExtensions()) {
+			if (!parameters.isEmpty()) {
+				sb.append(", ");
+			}
+
+			sb.append(
+				_getContextParametersDeclaration(method, annotateParameter));
 		}
 
 		sb.append(")");
@@ -397,6 +453,33 @@ public class ResourceGenerator extends BaseSourceGenerator {
 				sb.append("Param;\n");
 
 				importedClasses.add(location);
+			}
+
+			if (method.hasExtensions()) {
+				if (!importedClasses.contains("Context")) {
+					sb.append("import javax.ws.rs.core.Context;\n");
+
+					importedClasses.add("Context");
+				}
+
+				for (Extension extension : method.getExtensions()) {
+					Extension.ExtensionType extensionType =
+						extension.getExtensionType();
+
+					for (String provider : extensionType.getProviders()) {
+						if (importedClasses.contains(provider)) {
+							continue;
+						}
+
+						sb.append("import ");
+						sb.append(_contextOutputPath);
+						sb.append(".");
+						sb.append(StringUtils.upperCaseFirstChar(provider));
+						sb.append(";\n");
+
+						importedClasses.add(provider);
+					}
+				}
 			}
 		}
 
@@ -645,5 +728,6 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		new ParameterGenerator();
 	private final String _resourceInterfacePackagePath;
 	private final String _resourcePackagePath;
+	private final String _contextOutputPath;
 
 }

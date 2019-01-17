@@ -154,7 +154,9 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			_moduleOutputPath);
 
 		_resourceGenerator = new ResourceGenerator(
-			_applicationName, _author, _moduleOutputPath, _modelPackagePath,
+			_applicationName, _author,
+			_bundleSynbolicName + ".internal.context",
+			_moduleOutputPath, _modelPackagePath,
 			overwriteImplementation,
 			properties.getProperty("osgi.module.resource.interface.package"),
 			properties.getProperty("osgi.module.resource.package"));
