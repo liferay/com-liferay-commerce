@@ -44,8 +44,8 @@ String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId
 						<div id="<portlet:namespace />thumbs-container">
 
 							<%
-							for (CPAttachmentFileEntry cpAttachmentFileEntry : cpContentHelper.getImages(cpDefinitionId)) {
-								String url = cpContentHelper.getImageURL(cpAttachmentFileEntry.getFileEntry(), themeDisplay);
+							for (CPMedia imageCPMedia : cpContentHelper.getImages(cpDefinitionId, themeDisplay)) {
+								String url = imageCPMedia.getUrl();
 							%>
 
 								<div class="card thumb" data-url="<%= url %>">
@@ -140,7 +140,7 @@ String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId
 	<%
 	List<CPDefinitionSpecificationOptionValue> cpDefinitionSpecificationOptionValues = cpContentHelper.getCPDefinitionSpecificationOptionValues(cpDefinitionId);
 	List<CPOptionCategory> cpOptionCategories = cpContentHelper.getCPOptionCategories(scopeGroupId);
-	List<CPAttachmentFileEntry> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntries(cpDefinitionId);
+	List<CPMedia> attachmentCPMedias = cpContentHelper.getCPAttachmentFileEntries(cpDefinitionId, themeDisplay);
 	%>
 
 	<div class="row">
@@ -161,7 +161,7 @@ String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId
 						</li>
 					</c:if>
 
-					<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
+					<c:if test="<%= !attachmentCPMedias.isEmpty() %>">
 						<li class="nav-item" role="presentation">
 							<a aria-controls="<portlet:namespace />attachments" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />attachments" role="tab">
 								<%= LanguageUtil.get(resourceBundle, "attachments") %>
@@ -235,22 +235,21 @@ String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId
 						</div>
 					</c:if>
 
-					<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
+					<c:if test="<%= !attachmentCPMedias.isEmpty() %>">
 						<div class="tab-pane" id="<portlet:namespace />attachments">
 							<div class="table-responsive">
 								<table class="table table-bordered table-striped">
 
 									<%
-									for (CPAttachmentFileEntry curCPAttachmentFileEntry : cpAttachmentFileEntries) {
-										FileEntry fileEntry = curCPAttachmentFileEntry.getFileEntry();
+									for (CPAttachmentFileEntry attachmentCPMedia : attachmentCPMedias) {
 									%>
 
 										<tr>
 											<td>
-												<span><%= curCPAttachmentFileEntry.getTitle(locale) %></span>
+												<span><%= attachmentCPMedia.getTitle(locale) %></span>
 
 												<span>
-													<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" url="<%= cpContentHelper.getDownloadFileEntryURL(fileEntry, themeDisplay) %>" />
+													<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" target="_blank" url="<%= attachmentCPMedia.getDownloadUrl() %>" />
 												</span>
 											</td>
 										</tr>

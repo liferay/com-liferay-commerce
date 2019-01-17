@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.content.web.internal.util;
 
-import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.catalog.CPSku;
