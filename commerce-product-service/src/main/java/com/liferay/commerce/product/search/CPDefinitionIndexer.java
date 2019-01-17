@@ -531,11 +531,11 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			document.addNumber(
 				FIELD_DEFAULT_IMAGE_FILE_ENTRY_ID,
 				cpAttachmentFileEntry.getFileEntryId());
-
-			document.addKeyword(
-				FIELD_DEFAULT_IMAGE_FILE_URL,
-				cpDefinition.getDefaultImageFileURL());
 		}
+
+		document.addKeyword(
+			FIELD_DEFAULT_IMAGE_FILE_URL,
+			cpDefinition.getDefaultImageFileURL());
 
 		CProduct cProduct = cpDefinition.getCProduct();
 
