@@ -14,19 +14,21 @@
 
 package com.liferay.commerce.product.internal.data.source;
 
+import com.liferay.asset.kernel.model.AssetEntry;
+import com.liferay.asset.kernel.service.AssetEntryLocalService;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
-import com.liferay.commerce.product.configuration.CPDefinitionLinkTypeConfiguration;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.data.source.CPDataSource;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
@@ -36,35 +38,37 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
  */
 @Component(
-	configurationPid = "com.liferay.commerce.product.configuration.CPDefinitionLinkTypeConfiguration",
 	immediate = true,
-	property = "commerce.product.data.source.name=definitionLinkDataSource",
+	property = "commerce.product.data.source.name=" + CPDataSourceAssetCategoriesImpl.NAME,
 	service = CPDataSource.class
 )
-public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
+public class CPDataSourceAssetCategoriesImpl implements CPDataSource {
+
+	public static final String NAME = "assetCategoriesDataSource";
 
 	@Override
 	public String getLabel(Locale locale) {
-		return
-			LanguageUtil.get(locale, "product-relations") + StringPool.SPACE +
-				_cpDefinitionLinkTypeConfiguration.type();
+		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
+			"content.Language", locale, getClass());
+
+		return LanguageUtil.get(
+			resourceBundle, "products-of-the-same-categories");
 	}
 
 	@Override
 	public String getName() {
-		return _cpDefinitionLinkTypeConfiguration.type();
+		return NAME;
 	}
 
 	@Override
@@ -88,9 +92,7 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 		attributes.put(
-			"definitionLinkCPDefinitionId", cpCatalogEntry.getCPDefinitionId());
-		attributes.put(
-			"definitionLinkType", _cpDefinitionLinkTypeConfiguration.type());
+			"excludedCPDefinitionId", cpCatalogEntry.getCPDefinitionId());
 
 		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
 
@@ -105,23 +107,22 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 
 		searchContext.setKeywords(StringPool.STAR);
 
-		return _cpDefinitionHelper.search(
-			groupId, searchContext, new CPQuery(), start, end);
-	}
+		CPQuery cpQuery = new CPQuery();
 
-	@Activate
-	@Modified
-	protected void activate(Map<String, Object> properties) {
-		_cpDefinitionLinkTypeConfiguration =
-			ConfigurableUtil.createConfigurable(
-				CPDefinitionLinkTypeConfiguration.class, properties);
+		AssetEntry assetEntry = _assetEntryLocalService.getEntry(
+			CPDefinition.class.getName(), cpCatalogEntry.getCPDefinitionId());
+
+		cpQuery.setAnyCategoryIds(assetEntry.getCategoryIds());
+
+		return _cpDefinitionHelper.search(
+			groupId, searchContext, cpQuery, start, end);
 	}
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private AssetEntryLocalService _assetEntryLocalService;
 
-	private volatile CPDefinitionLinkTypeConfiguration
-		_cpDefinitionLinkTypeConfiguration;
+	@Reference
+	private CPDefinitionHelper _cpDefinitionHelper;
 
 	@Reference
 	private Portal _portal;

@@ -207,6 +207,15 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 			addCPRulesFilters(contextBooleanFilter, groupIds[0]);
 		}
+
+		if (attributes.containsKey("excludedCPDefinitionId")) {
+			String excludedCPDefinitionId = String.valueOf(
+				attributes.get("excludedCPDefinitionId"));
+
+			contextBooleanFilter.addTerm(
+				Field.ENTRY_CLASS_PK, excludedCPDefinitionId,
+				BooleanClauseOccur.MUST_NOT);
+		}
 	}
 
 	@Override
