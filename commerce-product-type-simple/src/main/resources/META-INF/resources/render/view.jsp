@@ -114,7 +114,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 	<%
 	List<CPDefinitionSpecificationOptionValue> cpDefinitionSpecificationOptionValues = cpContentHelper.getCPDefinitionSpecificationOptionValues(cpDefinitionId);
 	List<CPOptionCategory> cpOptionCategories = cpContentHelper.getCPOptionCategories(scopeGroupId);
-	List<CPAttachmentFileEntry> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntries(cpDefinitionId);
+	List<CPMedia> cpMediaEntries = cpContentHelper.getCPAttachmentFileEntries(cpDefinitionId, themeDisplay);
 	%>
 
 	<div class="row">
@@ -135,7 +135,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						</li>
 					</c:if>
 
-					<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
+					<c:if test="<%= !cpMediaEntries.isEmpty() %>">
 						<li class="nav-item" role="presentation">
 							<a aria-controls="<portlet:namespace />attachments" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />attachments" role="tab">
 								<%= LanguageUtil.get(resourceBundle, "attachments") %>
@@ -211,19 +211,18 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						</div>
 					</c:if>
 
-					<c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
+					<c:if test="<%= !cpMediaEntries.isEmpty() %>">
 						<div class="tab-pane" id="<portlet:namespace />attachments">
 							<div class="table-responsive">
 								<table class="table table-bordered table-striped">
 
 									<%
-									for (CPAttachmentFileEntry curCPAttachmentFileEntry : cpAttachmentFileEntries) {
-										FileEntry fileEntry = curCPAttachmentFileEntry.getFileEntry();
+									for (CPMedia curCPMedia : cpMediaEntries) {
 									%>
 
 										<tr>
 											<td>
-												<span><%= curCPAttachmentFileEntry.getTitle(languageId) %></span>
+												<span><%= curCPMedia.getTitle() %></span>
 
 												<span>
 													<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" url="<%= cpContentHelper.getDownloadFileEntryURL(fileEntry, themeDisplay) %>" />
