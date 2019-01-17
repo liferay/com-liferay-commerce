@@ -70,7 +70,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 		url="<%= layout.getRegularURL(request) %>"
 	/> --%>
 
-	<div class="row header-title-bar">
+	<div class="header-title-bar row">
 		<%-- <div class="autofit-col autofit-col-expand">
 			<liferay-ui:header
 				backURL="<%= backURL %>"
@@ -157,10 +157,11 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
 
-	<div class="row order-details-header">
+	<div class="order-details-header row">
 		<div class="col-3">
 			<div class="minium-card">
 				<h3 class="minium-card__title"><liferay-ui:message key="order-date" /></h3>
+
 				<div class="minium-card__content">
 					<p>
 						<%= commerceOrderContentDisplayContext.getCommerceOrderDate(commerceOrder) %>
@@ -188,6 +189,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 				<h3 class="minium-card__title"><liferay-ui:message key="payment" /></h3>
 
 				<div class="minium-card__content">
+
 					<%
 					String paymentMethodName = commerceOrderContentDisplayContext.getCommerceOrderPaymentMethodName(commerceOrder);
 					%>
@@ -208,6 +210,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 		<div class="col-3">
 			<div class="minium-card">
 				<h3 class="minium-card__title"><liferay-ui:message key="status" /></h3>
+
 				<div class="minium-card__content">
 					<p>
 						<%= commerceOrderContentDisplayContext.getCommerceOrderStatus(commerceOrder) %>
