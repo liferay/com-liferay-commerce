@@ -17,56 +17,38 @@ package com.liferay.commerce.product.internal.data.source;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetEntryLocalService;
-import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
-import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.data.source.CPDataSource;
-import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.ResourceBundleUtil;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
-import java.io.Serializable;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Marco Leo
+ * @author Ethan Bustad
  */
 @Component(
 	immediate = true,
 	property = "commerce.product.data.source.name=" + CPDataSourceAssetCategoriesAndTagsImpl.NAME,
 	service = CPDataSource.class
 )
-public class CPDataSourceAssetCategoriesAndTagsImpl implements CPDataSource {
+public class CPDataSourceAssetCategoriesAndTagsImpl
+	extends BaseCPDataSourceAssetEntryImpl {
 
 	public static final String NAME = "assetCategoriesAndTagsDataSource";
 
 	@Override
 	public String getLabel(Locale locale) {
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass());
-
 		return LanguageUtil.get(
-			resourceBundle, "products-of-the-same-categories-and-tags");
+			getResourceBundle(locale),
+			"products-of-the-same-categories-and-tags");
 	}
 
 	@Override
@@ -75,51 +57,16 @@ public class CPDataSourceAssetCategoriesAndTagsImpl implements CPDataSource {
 	}
 
 	@Override
-	public CPDataSourceResult getResult(
-			HttpServletRequest httpServletRequest, int start, int end)
-		throws Exception {
-
-		long groupId = _portal.getScopeGroupId(httpServletRequest);
-
-		CPCatalogEntry cpCatalogEntry =
-			(CPCatalogEntry)httpServletRequest.getAttribute(
-				CPWebKeys.CP_CATALOG_ENTRY);
-
-		if (cpCatalogEntry == null) {
-			return new CPDataSourceResult(new ArrayList<>(), 0);
-		}
-
-		SearchContext searchContext = new SearchContext();
-
-		Map<String, Serializable> attributes = new HashMap<>();
-
-		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
-		attributes.put(
-			"excludedCPDefinitionId", cpCatalogEntry.getCPDefinitionId());
-
-		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
-
-		params.put("keywords", StringPool.STAR);
-
-		attributes.put("params", params);
-
-		searchContext.setAttributes(attributes);
-
-		searchContext.setCompanyId(_portal.getCompanyId(httpServletRequest));
-		searchContext.setGroupIds(new long[] {groupId});
-
-		searchContext.setKeywords(StringPool.STAR);
-
+	protected CPQuery getCPQuery(long cpDefinitionId) throws PortalException {
 		CPQuery cpQuery = new CPQuery();
 
 		AssetEntry assetEntry = _assetEntryLocalService.getEntry(
-			CPDefinition.class.getName(), cpCatalogEntry.getCPDefinitionId());
+			CPDefinition.class.getName(), cpDefinitionId);
 
 		cpQuery.setAnyCategoryIds(assetEntry.getCategoryIds());
 		cpQuery.setAnyTagIds(_getTagIds(assetEntry));
 
-		return _cpDefinitionHelper.search(
-			groupId, searchContext, cpQuery, start, end);
+		return cpQuery;
 	}
 
 	private long[] _getTagIds(AssetEntry assetEntry) throws PortalException {
@@ -136,13 +83,17 @@ public class CPDataSourceAssetCategoriesAndTagsImpl implements CPDataSource {
 		return tagIds;
 	}
 
+	@Reference(unbind = "-")
+	private void _setCPDefinitionHelper(CPDefinitionHelper cpDefinitionHelper) {
+		this.cpDefinitionHelper = cpDefinitionHelper;
+	}
+
+	@Reference(unbind = "-")
+	private void _setPortal(Portal portal) {
+		this.portal = portal;
+	}
+
 	@Reference
 	private AssetEntryLocalService _assetEntryLocalService;
-
-	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
-
-	@Reference
-	private Portal _portal;
 
 }
