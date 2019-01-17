@@ -14,10 +14,9 @@
 
 package com.liferay.commerce.product.content.web.internal.util;
 
+import com.liferay.commerce.media.CommerceMediaResolverUtil;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
-import com.liferay.document.library.kernel.util.DLUtil;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -34,15 +33,23 @@ public class CPMediaImpl implements CPMedia {
 
 		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
 
+		_downloadUrl = CommerceMediaResolverUtil.getDownloadUrl(
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
+			cpAttachmentFileEntry.getClassPK());
 		_id = cpAttachmentFileEntry.getCPAttachmentFileEntryId();
 		_mimeType = fileEntry.getMimeType();
-		_url = DLUtil.getDownloadURL(
-			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
-			StringPool.BLANK, true, true);
+		_url = CommerceMediaResolverUtil.getUrl(
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
+			cpAttachmentFileEntry.getClassPK());
 		_title = cpAttachmentFileEntry.getTitle(themeDisplay.getLanguageId());
-		_thumbnailUrl = DLUtil.getPreviewURL(
-			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
-			StringPool.BLANK, true, true);
+		_thumbnailUrl = CommerceMediaResolverUtil.getThumbnailUrl(
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
+			cpAttachmentFileEntry.getClassPK());
+	}
+
+	@Override
+	public String getDownloadUrl() {
+		return _downloadUrl;
 	}
 
 	@Override
@@ -70,6 +77,7 @@ public class CPMediaImpl implements CPMedia {
 		return _mimeType;
 	}
 
+	private final String _downloadUrl;
 	private final long _id;
 	private final String _mimeType;
 	private final String _thumbnailUrl;
