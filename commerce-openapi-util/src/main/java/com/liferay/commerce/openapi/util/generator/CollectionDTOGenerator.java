@@ -25,16 +25,16 @@ import java.util.Set;
 public class CollectionDTOGenerator extends BaseSourceGenerator {
 
 	public CollectionDTOGenerator(
-		String author, String moduleOutputPath, String modelPackagePath,
-		Set<String> referencedModels) {
+		String author, String moduleOutputPath, String modelPackagePath) {
 
 		_author = author;
 		_moduleOutputPath = moduleOutputPath;
 		_modelPackagePath = modelPackagePath;
-		_referencedModels = referencedModels;
 	}
 
-	public void writeCollectionDTOSource() throws IOException {
+	public void writeCollectionDTOSource(Set<String> referencedModels)
+		throws IOException {
+
 		String dtoSource = getTemplate(_TEMPLATE_FILE_COLLECTION_DTO);
 
 		dtoSource = dtoSource.replace("${PACKAGE}", _modelPackagePath);
@@ -45,7 +45,7 @@ public class CollectionDTOGenerator extends BaseSourceGenerator {
 
 		sb.append("{\n");
 
-		Iterator<String> iterator = _referencedModels.iterator();
+		Iterator<String> iterator = referencedModels.iterator();
 
 		while (iterator.hasNext()) {
 			sb.append("\t\t");
@@ -74,6 +74,5 @@ public class CollectionDTOGenerator extends BaseSourceGenerator {
 	private final String _author;
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;
-	private final Set<String> _referencedModels;
 
 }
