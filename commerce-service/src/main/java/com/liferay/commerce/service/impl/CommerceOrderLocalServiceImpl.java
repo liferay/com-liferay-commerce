@@ -650,7 +650,7 @@ public class CommerceOrderLocalServiceImpl
 
 		CommerceOrderPrice commerceOrderPrice =
 			_commerceOrderPriceCalculation.getCommerceOrderPrice(
-				commerceOrder, commerceContext);
+				commerceOrder, false, commerceContext);
 
 		CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
 		CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
@@ -867,7 +867,7 @@ public class CommerceOrderLocalServiceImpl
 		if (commerceContext != null) {
 			CommerceOrderPrice commerceOrderPrice =
 				_commerceOrderPriceCalculation.getCommerceOrderPrice(
-					commerceOrder, commerceContext);
+					commerceOrder, false, commerceContext);
 
 			CommerceDiscountValue shippingDiscountValue =
 				commerceOrderPrice.getShippingDiscountValue();
