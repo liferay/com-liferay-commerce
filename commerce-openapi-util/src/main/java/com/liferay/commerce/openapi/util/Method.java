@@ -60,6 +60,10 @@ public class Method {
 		return _absolutePath;
 	}
 
+	public List<Extension> getExtensions() {
+		return new ArrayList<>(_extensions);
+	}
+
 	public String getHttpMethod() {
 		return _httpMethod;
 	}

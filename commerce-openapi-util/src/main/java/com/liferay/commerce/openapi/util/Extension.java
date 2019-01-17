@@ -15,7 +15,10 @@
 package com.liferay.commerce.openapi.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Igor Beslic
@@ -58,9 +61,22 @@ public class Extension {
 				"Unsupported Open API name: " + openApiName);
 		}
 
+		public List<String> getProviders() {
+			return new ArrayList<>(_extensionToProvider.get(this));
+		}
+
 		private ExtensionType(String openApiName) {
 			_openApiName = openApiName;
 		}
+
+		private static final Map<ExtensionType, List<String>>
+			_extensionToProvider = new HashMap<ExtensionType, List<String>>() {
+				{
+					put(CLIENT_HELPER_CONTEXT, Arrays.asList("Pagination"));
+					put(PORTAL_HELPER_CONTEXT, Arrays.asList("Locale"));
+					put(FILTER_CONTEXT, Arrays.asList("Filter"));
+				}
+			};
 
 		private final String _openApiName;
 
