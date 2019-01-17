@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.order.content.web.internal.portlet;
 
+import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.content.web.internal.display.context.CommerceOrderContentDisplayContext;
@@ -30,6 +31,7 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -106,7 +108,7 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 						_commerceOrderPriceCalculation,
 						_commercePaymentMethodGroupRelService,
 						_commerceShipmentItemService, httpServletRequest,
-						_modelResourcePermission);
+						_modelResourcePermission, _portletResourcePermission);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -148,5 +150,10 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(
+		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 }
