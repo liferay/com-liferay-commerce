@@ -16,6 +16,7 @@ package com.liferay.commerce.product.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.media.CommerceMediaResolverUtil;
 import com.liferay.commerce.product.exception.CPDefinitionMetaDescriptionException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaKeywordsException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaTitleException;
@@ -31,11 +32,9 @@ import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValue
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalServiceUtil;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.product.service.CProductLocalServiceUtil;
-import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.ModelHintsUtil;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -195,10 +194,9 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 			return null;
 		}
 
-		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
-
-		return DLUtil.getDownloadURL(
-			fileEntry, fileEntry.getFileVersion(), null, null);
+		return CommerceMediaResolverUtil.getUrl(
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
+			getCPDefinitionId());
 	}
 
 	@Override
@@ -212,13 +210,9 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 			return null;
 		}
 
-		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
-
-		if (fileEntry == null) {
-			return null;
-		}
-
-		return DLUtil.getThumbnailSrc(fileEntry, themeDisplay);
+		return CommerceMediaResolverUtil.getThumbnailUrl(
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
+			getCPDefinitionId());
 	}
 
 	@Override
