@@ -30,7 +30,6 @@ import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.tax.CommerceTaxCalculation;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -56,7 +55,7 @@ public class CommerceOrderPriceCalculationImpl
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
-			throw new PrincipalException();
+			return null;
 		}
 
 		if (commerceOrder == null) {
