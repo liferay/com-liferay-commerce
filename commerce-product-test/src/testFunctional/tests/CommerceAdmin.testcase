@@ -131,6 +131,8 @@
 	</command>
 
 	<command name="CreateNewCurrency">
+		<property name="test.name.skip.portal.instance" value="CommerceAdmin#CreateNewCurrency" />
+
 		<execute macro="CommerceEntry#createNewCurrenciesEntry">
 			<var name="code" value="NCU" />
 			<var name="entryName" value="New Currency" />
