@@ -31,6 +31,7 @@ import com.liferay.frontend.taglib.clay.servlet.taglib.util.NavigationItem;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -170,6 +171,10 @@ public class CommerceOrderListDisplayContext {
 
 		CommerceMoney subtotal = _commerceOrderPriceCalculation.getSubtotal(
 			commerceOrder, _commerceOrderRequestHelper.getCommerceContext());
+
+		if (subtotal == null) {
+			return StringPool.BLANK;
+		}
 
 		return subtotal.format(_commerceOrderRequestHelper.getLocale());
 	}
