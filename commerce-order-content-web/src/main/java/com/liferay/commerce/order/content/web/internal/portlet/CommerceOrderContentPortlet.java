@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.order.content.web.internal.portlet;
 
-import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.content.web.internal.display.context.CommerceOrderContentDisplayContext;
@@ -152,7 +152,7 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 	private Portal _portal;
 
 	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
+		target = "(resource.name=" + CommerceOrderConstants.RESOURCE_NAME + ")"
 	)
 	private PortletResourcePermission _portletResourcePermission;
 
