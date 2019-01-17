@@ -20,9 +20,9 @@ package com.liferay.commerce.frontend.internal.account.model;
 public class AccountOrganization {
 
 	public AccountOrganization(
-		long organizationId, String name, String email, String thumbnail) {
+		long id, String name, String email, String thumbnail) {
 
-		_organizationId = organizationId;
+		_id = id;
 		_name = name;
 		_email = email;
 		_success = true;
@@ -42,12 +42,12 @@ public class AccountOrganization {
 		return _errorMessages;
 	}
 
-	public String getName() {
-		return _name;
+	public long getId() {
+		return _id;
 	}
 
-	public long getOrganizationId() {
-		return _organizationId;
+	public String getName() {
+		return _name;
 	}
 
 	public boolean getSuccess() {
@@ -68,8 +68,8 @@ public class AccountOrganization {
 
 	private String _email;
 	private String[] _errorMessages;
+	private long _id;
 	private String _name;
-	private long _organizationId;
 	private boolean _success;
 	private String _thumbnail;
 
