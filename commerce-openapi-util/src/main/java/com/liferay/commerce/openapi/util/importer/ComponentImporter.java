@@ -52,8 +52,6 @@ public class ComponentImporter {
 	private List<ComponentDefinition> _getParameters(
 		JsonNode componentsJSONNode) {
 
-		ParameterImporter parameterImporter = new ParameterImporter();
-
 		List<ComponentDefinition> components = new ArrayList<>();
 
 		JsonNode parametersJSONNode = componentsJSONNode.get("parameters");
@@ -66,7 +64,7 @@ public class ComponentImporter {
 
 			ComponentDefinition componentDefinition = new ComponentDefinition(
 				parameterField.getKey(),
-				parameterImporter.fromJSONNode(parameterField.getValue()));
+				ParameterImporter.fromJSONNode(parameterField.getValue()));
 
 			components.add(componentDefinition);
 
