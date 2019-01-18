@@ -453,10 +453,10 @@ public class CommerceOrderLocalServiceImpl
 
 	@Override
 	public CommerceOrder fetchCommerceOrder(
-		long groupId, long userId, int orderStatus) {
+		long commerceAccountId, int orderStatus) {
 
-		return commerceOrderPersistence.fetchByG_U_O_First(
-			groupId, userId, orderStatus, null);
+		return commerceOrderPersistence.fetchByC_O_First(
+			commerceAccountId, orderStatus, null);
 	}
 
 	@Override
