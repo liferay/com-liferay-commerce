@@ -137,17 +137,16 @@ AccountSelector.STATE = {
 		]
 	)
 		.value('accounts'),
-	currentAccount: Config.shapeOf(
-		{
-			accountId: Config.string(),
-			name: Config.string(),
-			thumbnail: Config.string()
-		}
-	),
+	currentAccount: Config.object(),
 	accounts: Config.arrayOf(
 		Config.shapeOf(
 			{
-				accountId: Config.string(),
+				accountId: Config.oneOfType(
+					[
+						Config.string(),
+						Config.number()
+					]
+				).required(),
 				name: Config.string(),
 				thumbnail: Config.string()
 			}
@@ -162,7 +161,7 @@ AccountSelector.STATE = {
 						Config.string(),
 						Config.number()
 					]
-				),
+				).required(),
 				lastEdit: Config.string(),
 				status: Config.string(),
 				addOrderLink: Config.string()
