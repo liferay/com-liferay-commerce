@@ -6,7 +6,7 @@
 {template .render}
 	{@param? accounts: list<[
 		name: string,
-		accountId: string,
+		accountId: number|string,
 		thumbnail: string
 	]>}
 	{@param? filterString: string }
@@ -37,10 +37,10 @@
 
 		<div class="account-switcher__section account-switcher__section--fill">
 			<div class="account-list">
-				<div class="account-list__title">
-					Select Account...
-				</div>
-				{if isNonnull($accounts)}
+				{if isNonnull($accounts) and length($accounts) > 0}
+					<div class="account-list__title">
+						Select Account...
+					</div>
 					{foreach $account in $accounts}
 						{call AccountsTableItem.render}
 							{param events: [
@@ -53,27 +53,30 @@
 						{/call}
 					{/foreach}
 				{/if}
+				{if isNonnull($accounts) and length($accounts) == 0}
+					<div class="account-switcher__empty-table">
+						No accounts found
+					</div>
+				{/if}
 			</div>
 		</div>
-		{if isNonnull($viewAllAccountsLink)}
-			<div class="account-switcher__section">
+		<div class="account-switcher__section">
+			{if isNonnull($viewAllAccountsLink)}
 				<a
 					href="{$viewAllAccountsLink}"
-					class="minium-button minium-button--block minium-button--outline"
+					class="account-switcher__button minium-button minium-button--block minium-button--outline"
 				>
 					View all accounts
 				</a>
-			</div>
-		{/if}
-		{if isNonnull($createNewAccountLink)}
-			<div class="account-switcher__section">
+			{/if}
+			{if isNonnull($createNewAccountLink)}
 				<a
 					href="{$createNewAccountLink}"
-					class="minium-button minium-button--block"
+					class="account-switcher__button minium-button minium-button--block"
 				>
 					Create new account
 				</a>
-			</div>
-		{/if}
+			{/if}
+		</div>
 	</div>
 {/template}
