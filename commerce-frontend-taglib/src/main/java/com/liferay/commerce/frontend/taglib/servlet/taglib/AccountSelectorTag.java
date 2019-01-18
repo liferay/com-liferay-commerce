@@ -82,7 +82,7 @@ public class AccountSelectorTag extends ComponentRendererTag {
 
 				CurrentAccountModel currentAccountModel =
 					new CurrentAccountModel(
-						String.valueOf(commerceAccount.getCommerceAccountId()),
+						commerceAccount.getCommerceAccountId(),
 						commerceAccount.getName(), sb.toString());
 
 				putValue("currentAccount", currentAccountModel);
