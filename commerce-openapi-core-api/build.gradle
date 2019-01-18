@@ -1,0 +1,3 @@
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.21.0"
+}
