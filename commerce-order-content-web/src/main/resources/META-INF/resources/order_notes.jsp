@@ -61,7 +61,7 @@ else {
 	icon="forms"
 	iconCssClass="<%= taglibIconCssClass %>"
 	label="<%= showLabel %>"
-	linkCssClass="minium-button minium-button--small minium-button--outline"
+	linkCssClass="minium-button minium-button--outline minium-button--small"
 	markupView="lexicon"
 	message="<%= taglibMessage %>"
 	method="get"
