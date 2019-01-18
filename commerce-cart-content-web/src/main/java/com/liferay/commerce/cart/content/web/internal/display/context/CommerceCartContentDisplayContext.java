@@ -258,6 +258,9 @@ public class CommerceCartContentDisplayContext {
 			_commerceOrder, actionId);
 	}
 
+	public boolean hasViewPricePermission()throws PortalException {
+	}
+
 	public boolean isValidCommerceOrder() throws PortalException {
 		CommerceOrder commerceOrder = getCommerceOrder();
 
