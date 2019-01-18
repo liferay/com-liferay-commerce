@@ -12,43 +12,54 @@
  * details.
  */
 
-package com.liferay.commerce.cart.rest.internal.model;
+package com.liferay.commerce.frontend.internal.cart.model;
 
 /**
  * @author Alessio Antonio Rendina
  */
-public class Prices {
+public class Summary {
 
-	public Prices(String price) {
-		_price = price;
+	public Summary(String subtotal, String total, int itemsQuantity) {
+		_subtotal = subtotal;
+		_total = total;
+		_itemsQuantity = itemsQuantity;
 	}
 
 	public String getDiscount() {
 		return _discount;
 	}
 
-	public String getPrice() {
-		return _price;
+	public int getItemsQuantity() {
+		return _itemsQuantity;
 	}
 
-	public String getPromoPrice() {
-		return _promoPrice;
+	public String getSubtotal() {
+		return _subtotal;
 	}
 
-	public void sePrice(String price) {
-		_price = price;
+	public String getTotal() {
+		return _total;
 	}
 
 	public void setDiscount(String discount) {
 		_discount = discount;
 	}
 
-	public void setPromoPrice(String promoPrice) {
-		_promoPrice = promoPrice;
+	public void setItemsQuantity(int itemsQuantity) {
+		_itemsQuantity = itemsQuantity;
+	}
+
+	public void setSubtotal(String subtotal) {
+		_subtotal = subtotal;
+	}
+
+	public void setTotal(String total) {
+		_total = total;
 	}
 
 	private String _discount;
-	private String _price;
-	private String _promoPrice;
+	private int _itemsQuantity;
+	private String _subtotal;
+	private String _total;
 
 }

@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.cart.taglib.servlet.taglib;
+package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.cart.taglib.servlet.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
@@ -82,7 +82,7 @@ public class MiniCartTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-cart-taglib/mini_cart/Cart.es");
+			"commerce-frontend-taglib/mini_cart/Cart.es");
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(MiniCartTag.class);
