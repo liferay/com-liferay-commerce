@@ -12,18 +12,15 @@
  * details.
  */
 
-package com.liferay.commerce.cart.rest.internal;
+package com.liferay.commerce.frontend.internal.cart;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
-import com.liferay.commerce.cart.rest.internal.context.provider.CommerceContextProvider;
-import com.liferay.commerce.cart.rest.internal.model.Cart;
-import com.liferay.commerce.cart.rest.internal.provider.CommerceCartDataProvider;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
+import com.liferay.commerce.frontend.internal.cart.model.Cart;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.service.CommerceOrderItemService;
@@ -37,14 +34,12 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -57,10 +52,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Alessio Antonio Rendina
@@ -152,7 +146,6 @@ public class CommerceCartApplication extends Application {
 	public Set<Object> getSingletons() {
 		Set<Object> singletons = new HashSet<>();
 
-		singletons.add(_commerceContextProvider);
 		singletons.add(this);
 
 		return singletons;
@@ -263,9 +256,6 @@ public class CommerceCartApplication extends Application {
 
 	@Reference
 	private CommerceCartDataProvider _commerceCartDataProvider;
-
-	@Reference
-	private CommerceContextProvider _commerceContextProvider;
 
 	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;

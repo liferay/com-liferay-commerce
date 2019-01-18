@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.cart.rest.internal.provider;
+package com.liferay.commerce.frontend.internal.cart;
 
-import com.liferay.commerce.cart.rest.internal.model.Cart;
-import com.liferay.commerce.cart.rest.internal.model.Prices;
-import com.liferay.commerce.cart.rest.internal.model.Product;
-import com.liferay.commerce.cart.rest.internal.model.Settings;
-import com.liferay.commerce.cart.rest.internal.model.Summary;
+import com.liferay.commerce.frontend.internal.cart.model.Cart;
+import com.liferay.commerce.frontend.internal.cart.model.Prices;
+import com.liferay.commerce.frontend.internal.cart.model.Product;
+import com.liferay.commerce.frontend.internal.cart.model.Settings;
+import com.liferay.commerce.frontend.internal.cart.model.Summary;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -43,16 +43,14 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
