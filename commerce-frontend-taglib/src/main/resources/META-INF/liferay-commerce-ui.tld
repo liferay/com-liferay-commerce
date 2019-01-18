@@ -57,6 +57,11 @@
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
+		<name>mini-cart</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.MiniCartTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	<tag>
 		<name>product-details-modal</name>
 		<tag-class>
 			com.liferay.commerce.frontend.taglib.servlet.taglib.ProductDetailsModalTag</tag-class>
