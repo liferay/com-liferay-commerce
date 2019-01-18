@@ -17,30 +17,22 @@ package com.liferay.commerce.frontend.taglib.internal.model;
 /**
  * @author Marco Leo
  */
-public class CurrentAccountModel {
+public class CurrentOrderModel {
 
-	public CurrentAccountModel(
-		String accountId, String name, String thumbnail) {
-
-		_accountId = accountId;
-		_name = name;
-		_thumbnail = thumbnail;
+	public CurrentOrderModel(long id, String status) {
+		_id = id;
+		_status = status;
 	}
 
-	public String getAccountId() {
-		return _accountId;
+	public long getId() {
+		return _id;
 	}
 
-	public String getName() {
-		return _name;
+	public String getStatus() {
+		return _status;
 	}
 
-	public String getThumbnail() {
-		return _thumbnail;
-	}
-
-	private final String _accountId;
-	private final String _name;
-	private final String _thumbnail;
+	private final long _id;
+	private final String _status;
 
 }

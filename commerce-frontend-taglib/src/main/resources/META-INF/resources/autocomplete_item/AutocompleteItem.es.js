@@ -44,7 +44,7 @@ class AutocompleteItem extends Component {
 Soy.register(AutocompleteItem, template);
 
 AutocompleteItem.STATE = {
-	text: Config.string(),
+	text: Config.any(),
 	query: Config.string(),
 	firstGroup: Config.string().internal(),
 	secondGroup: Config.string().internal(),

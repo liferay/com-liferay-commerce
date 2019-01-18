@@ -19,7 +19,7 @@ package com.liferay.commerce.frontend.internal.account.model;
  */
 public class Account {
 
-	public Account(long accountId, String name, String thumbnail) {
+	public Account(String accountId, String name, String thumbnail) {
 		_accountId = accountId;
 		_name = name;
 		_success = true;
@@ -31,7 +31,7 @@ public class Account {
 		_success = false;
 	}
 
-	public long getAccountId() {
+	public String getAccountId() {
 		return _accountId;
 	}
 
@@ -59,7 +59,7 @@ public class Account {
 		_success = success;
 	}
 
-	private long _accountId;
+	private String _accountId;
 	private String[] _errorMessages;
 	private String _name;
 	private boolean _success;

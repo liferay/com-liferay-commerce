@@ -50,7 +50,6 @@ import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -61,7 +60,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.portlet.ActionRequest;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -175,9 +173,7 @@ public class CommerceAccountResource {
 			return responseBuilder.build();
 		}
 
-		return Response.ok(
-			MediaType.APPLICATION_JSON
-		).build();
+		return Response.ok().build();
 	}
 
 	@GET
@@ -189,6 +185,8 @@ public class CommerceAccountResource {
 		@QueryParam("q") String queryString, @QueryParam("page") int page,
 		@QueryParam("pageSize") int pageSize,
 		@Context ThemeDisplay themeDisplay) {
+
+		themeDisplay.setScopeGroupId(groupId);
 
 		OrderList orderList;
 
@@ -276,7 +274,7 @@ public class CommerceAccountResource {
 		for (CommerceAccount commerceAccount : userCommerceAccounts) {
 			accounts.add(
 				new Account(
-					commerceAccount.getCommerceAccountId(),
+					String.valueOf(commerceAccount.getCommerceAccountId()),
 					commerceAccount.getName(),
 					getLogoThumbnailSrc(
 						commerceAccount.getLogoId(), imagePath)));
@@ -385,16 +383,11 @@ public class CommerceAccountResource {
 
 		PortletURL editURL = PortletProviderUtil.getPortletURL(
 			httpServletRequest, CommerceOrder.class.getName(),
-			PortletProvider.Action.EDIT);
+			PortletProvider.Action.VIEW);
 
-		editURL.setParameter(ActionRequest.ACTION_NAME, "editCommerceOrder");
-		editURL.setParameter(Constants.CMD, "setCurrent");
+		editURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
 		editURL.setParameter(
 			"commerceOrderId", String.valueOf(commerceOrderId));
-
-		String redirect = _portal.getCurrentURL(httpServletRequest);
-
-		editURL.setParameter("redirect", redirect);
 
 		return editURL.toString();
 	}

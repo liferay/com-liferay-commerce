@@ -6,7 +6,7 @@
 
 	{@param? accounts: list<[
 		name: string,
-		accountId: number,
+		accountId: string,
 		thumbnail: string
 	]>}
 
@@ -22,7 +22,11 @@
 	{@param? viewAllOrdersLink: string}
 	{@param? createNewOrderLink: string}
 
-	{@param? currentAccount: ?}
+	{@param? currentAccount: [
+		accountId: string,
+		name: string,
+		thumbnail: string
+	]}
 	{@param? currentOrder: ?}
 
 	{@param? handleChangeSelectedView: ?}
@@ -84,7 +88,6 @@
 					'getAccounts': $handleGetAccounts
 				] /}
 				{param accounts: $accounts /}
-				{param currentAccount: $currentAccount /}
 				{param isVisible: $isAccountsTableVisible /}
 				{param createNewAccountLink: $createNewAccountLink /}
 				{param viewAllAccountsLink: $viewAllAccountsLink /}
