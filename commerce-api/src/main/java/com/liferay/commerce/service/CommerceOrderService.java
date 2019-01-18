@@ -94,8 +94,8 @@ public interface CommerceOrderService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceOrder fetchCommerceOrder(long groupId, int orderStatus)
-		throws PortalException;
+	public CommerceOrder fetchCommerceOrder(long commerceAccountId,
+		int orderStatus) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrder fetchCommerceOrder(String uuid, long groupId)

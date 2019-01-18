@@ -277,8 +277,8 @@ public class CommerceOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder fetchCommerceOrder(
-		long groupId, long userId, int orderStatus) {
-		return getService().fetchCommerceOrder(groupId, userId, orderStatus);
+		long commerceAccountId, int orderStatus) {
+		return getService().fetchCommerceOrder(commerceAccountId, orderStatus);
 	}
 
 	/**

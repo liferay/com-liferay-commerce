@@ -352,14 +352,14 @@ public class CommerceOrderServiceHttp {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder fetchCommerceOrder(
-		HttpPrincipal httpPrincipal, long groupId, int orderStatus)
+		HttpPrincipal httpPrincipal, long commerceAccountId, int orderStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
 					"fetchCommerceOrder", _fetchCommerceOrderParameterTypes9);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					orderStatus);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceAccountId, orderStatus);
 
 			Object returnObj = null;
 

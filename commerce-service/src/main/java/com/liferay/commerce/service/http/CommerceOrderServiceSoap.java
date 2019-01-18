@@ -205,9 +205,9 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderSoap fetchCommerceOrder(
-		long groupId, int orderStatus) throws RemoteException {
+		long commerceAccountId, int orderStatus) throws RemoteException {
 		try {
-			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.fetchCommerceOrder(groupId,
+			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.fetchCommerceOrder(commerceAccountId,
 					orderStatus);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(returnValue);
