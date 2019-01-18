@@ -303,6 +303,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="commerceAccountId" />
 		</finder>
+		<finder name="C_O" return-type="Collection">
+			<finder-column name="commerceAccountId" />
+			<finder-column name="orderStatus" />
+		</finder>
 		<finder name="G_U_O" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
