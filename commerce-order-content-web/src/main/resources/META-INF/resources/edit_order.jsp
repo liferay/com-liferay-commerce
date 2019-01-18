@@ -70,7 +70,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 		url="<%= layout.getRegularURL(request) %>"
 	/> --%>
 
-	<div class="header-title-bar row">
+	<div class="header-title-bar row align-items-center">
 		<%-- <div class="autofit-col autofit-col-expand">
 			<liferay-ui:header
 				backURL="<%= backURL %>"
@@ -80,76 +80,71 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 			/>
 		</div> --%>
 
-		<div class="col-9">
+		<div class="col">
 			<div class="minium-typo__section-title">
 				<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>
 			</div>
 		</div>
 
-		<div class="col3">
-			<div class="autofit-row">
-				<div class="autofit-col">
-					<liferay-ui:icon
-						icon="print"
-						iconCssClass="inline-item inline-item-after"
-						label="<%= true %>"
-						linkCssClass="lfr-icon-item-reverse link-outline link-outline-borderless link-outline-secondary"
-						markupView="lexicon"
-						message="print"
-						method="get"
-						url="javascript:window.print();"
-					/>
-				</div>
-
-				<div class="autofit-col">
-
-					<%
-					request.setAttribute("order_notes.jsp-showLabel", Boolean.TRUE);
-					request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
-					%>
-
-					<liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" />
-				</div>
-
-				<c:if test="<%= commerceOrder.isOpen() %>">
-					<div class="autofit-col">
-						<liferay-commerce:order-transitions
-							commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
-							cssClass="btn btn-secondary btn-sm"
-						/>
-					</div>
-
-					<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
-						<div class="autofit-col">
-							<liferay-ui:icon-menu
-								direction="right"
-								icon="<%= StringPool.BLANK %>"
-								markupView="lexicon"
-								message="<%= StringPool.BLANK %>"
-								showWhenSingleIcon="<%= true %>"
-								triggerCssClass="component-action"
-							>
-								<liferay-ui:icon
-									message="edit"
-									url='<%= "javascript:" + renderResponse.getNamespace() + "editCommerceOrder();" %>'
-								/>
-
-								<portlet:actionURL name="editCommerceOrderItem" var="deleteURL">
-									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESET %>" />
-									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-								</portlet:actionURL>
-
-								<liferay-ui:icon-delete
-									message="delete-all"
-									url="<%= deleteURL %>"
-								/>
-							</liferay-ui:icon-menu>
-						</div>
-					</c:if>
-				</c:if>
-			</div>
+		<div class="col-md-auto">
+			<liferay-ui:icon
+				icon="print"
+				iconCssClass="inline-item inline-item-before"
+				label="<%= true %>"
+				linkCssClass="minium-button minium-button--small minium-button--outline"
+				markupView="lexicon"
+				message="print"
+				method="get"
+				url="javascript:window.print();"
+			/>
 		</div>
+
+		<div class="col-md-auto">
+			<%
+			request.setAttribute("order_notes.jsp-showLabel", Boolean.TRUE);
+			request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
+			%>
+
+			<liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" />
+		</div>
+
+		<c:if test="<%= commerceOrder.isOpen() %>">
+			<div class="col-md-auto">
+				<liferay-commerce:order-transitions
+					commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
+					cssClass="minium-button minium-button--small"
+				/>
+			</div>
+
+			<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+				<div class="col-md-auto">
+					<liferay-ui:icon-menu
+						direction="right"
+						icon="<%= StringPool.BLANK %>"
+						markupView="lexicon"
+						message="<%= StringPool.BLANK %>"
+						showWhenSingleIcon="<%= true %>"
+						triggerCssClass="component-action"
+					>
+						<liferay-ui:icon
+							message="edit"
+							url='<%= "javascript:" + renderResponse.getNamespace() + "editCommerceOrder();" %>'
+						/>
+
+						<portlet:actionURL name="editCommerceOrderItem" var="deleteURL">
+							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESET %>" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
+						</portlet:actionURL>
+
+						<liferay-ui:icon-delete
+							message="delete-all"
+							url="<%= deleteURL %>"
+						/>
+					</liferay-ui:icon-menu>
+				</div>
+			</c:if>
+		</c:if>
 	</div>
 </div>
 
