@@ -126,19 +126,22 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 						</c:if>
 					</liferay-ui:search-container-column-text>
 
-					<%
-					CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
-					%>
-
 					<liferay-ui:search-container-column-text
 						name="price"
 					>
-						<%= finalPriceMoney.format(locale) %>
+						<c:if test="<%= commerceCartContentDisplayContext.hasViewPricePermission() %>">
 
-						<liferay-commerce:subscription-info
-							CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
-							showDuration="<%= false %>"
-						/>
+							<%
+							CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
+							%>
+
+							<%= finalPriceMoney.format(locale) %>
+
+							<liferay-commerce:subscription-info
+								CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+								showDuration="<%= false %>"
+							/>
+						</c:if>
 					</liferay-ui:search-container-column-text>
 
 					<liferay-ui:search-container-column-text>

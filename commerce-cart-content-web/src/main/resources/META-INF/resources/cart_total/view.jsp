@@ -19,13 +19,17 @@
 <%
 CommerceCartContentTotalDisplayContext commerceCartContentTotalDisplayContext = (CommerceCartContentTotalDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
+CommerceMoney subtotal = null;
+CommerceMoney taxValue = null;
+CommerceMoney totalOrder = null;
+
 CommerceOrderPrice commerceOrderPrice = commerceCartContentTotalDisplayContext.getCommerceOrderPrice();
 
-CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
-
-CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
-
-CommerceMoney totalOrder = commerceOrderPrice.getTotal();
+if (commerceOrderPrice != null) {
+	subtotal = commerceOrderPrice.getSubtotal();
+	taxValue = commerceOrderPrice.getTaxValue();
+	totalOrder = commerceOrderPrice.getTotal();
+}
 
 Map<String, Object> contextObjects = new HashMap<>();
 
@@ -42,35 +46,41 @@ SearchContainer<CommerceOrderItem> commerceOrderItemSearchContainer = commerceCa
 	entries="<%= commerceOrderItemSearchContainer.getResults() %>"
 >
 	<div class="order-total text-dark">
-		<div class="row">
-			<div class="col-auto">
-				<h3 class="h4"><liferay-ui:message key="subtotal" /></h3>
-			</div>
+		<c:if test="<%= subtotal != null %>">
+			<div class="row">
+				<div class="col-auto">
+					<h3 class="h4"><liferay-ui:message key="subtotal" /></h3>
+				</div>
 
-			<div class="col text-right">
-				<h3 class="h4"><%= HtmlUtil.escape(subtotal.format(locale)) %></h3>
+				<div class="col text-right">
+					<h3 class="h4"><%= HtmlUtil.escape(subtotal.format(locale)) %></h3>
+				</div>
 			</div>
-		</div>
+		</c:if>
 
-		<div class="row">
-			<div class="col-auto">
-				<h3 class="h4"><liferay-ui:message key="tax" /></h3>
-			</div>
+		<c:if test="<%= taxValue != null %>">
+			<div class="row">
+				<div class="col-auto">
+					<h3 class="h4"><liferay-ui:message key="tax" /></h3>
+				</div>
 
-			<div class="col text-right">
-				<h3 class="h4"><%= HtmlUtil.escape(taxValue.format(locale)) %></h3>
+				<div class="col text-right">
+					<h3 class="h4"><%= HtmlUtil.escape(taxValue.format(locale)) %></h3>
+				</div>
 			</div>
-		</div>
+		</c:if>
 
-		<div class="row">
-			<div class="col-auto">
-				<h3 class="h4"><liferay-ui:message key="total" /></h3>
-			</div>
+		<c:if test="<%= totalOrder != null %>">
+			<div class="row">
+				<div class="col-auto">
+					<h3 class="h4"><liferay-ui:message key="total" /></h3>
+				</div>
 
-			<div class="col text-right">
-				<h3 class="h4"><%= HtmlUtil.escape(totalOrder.format(locale)) %></h3>
+				<div class="col text-right">
+					<h3 class="h4"><%= HtmlUtil.escape(totalOrder.format(locale)) %></h3>
+				</div>
 			</div>
-		</div>
+		</c:if>
 	</div>
 
 	<aui:button-row>
