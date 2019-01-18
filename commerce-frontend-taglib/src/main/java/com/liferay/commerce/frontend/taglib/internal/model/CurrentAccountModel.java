@@ -37,7 +37,7 @@ public class CurrentAccountModel {
 		return _thumbnail;
 	}
 
-	private final String _accountId;
+	private final long _accountId;
 	private final String _name;
 	private final String _thumbnail;
 
