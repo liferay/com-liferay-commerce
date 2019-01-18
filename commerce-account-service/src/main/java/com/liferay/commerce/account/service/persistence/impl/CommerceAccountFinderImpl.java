@@ -84,6 +84,24 @@ public class CommerceAccountFinderImpl
 				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
 				names);
 
+			boolean b2b = (boolean)queryDefinition.getAttribute("B2B");
+			boolean b2c = (boolean)queryDefinition.getAttribute("B2C");
+
+			if (b2b && !b2c) {
+				sql = StringUtil.add(
+					sql,
+					" AND (CommerceAccount.type_ = " +
+						CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS + ")",
+					StringPool.BLANK);
+			}
+			else if (!b2b && b2c) {
+				sql = StringUtil.add(
+					sql,
+					" AND (CommerceAccount.type_ = " +
+						CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL + ")",
+					StringPool.BLANK);
+			}
+
 			sql = _customSQL.replaceAndOperator(sql, true);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
