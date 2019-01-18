@@ -19,8 +19,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.frontend.internal.account.CommerceAccountResource;
 import com.liferay.commerce.frontend.internal.account.model.Account;
 import com.liferay.commerce.frontend.internal.account.model.AccountList;
@@ -48,6 +48,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.Validator;
@@ -61,8 +62,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletURL;
-
-import javax.servlet.http.HttpServletRequest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -141,11 +140,9 @@ public class CommerceSearchResource {
 
 		List<SearchItemModel> searchItemModels = new ArrayList<>();
 
-		HttpServletRequest httpServletRequest = themeDisplay.getRequest();
-
-		CommerceContext commerceContext =
-			(CommerceContext)httpServletRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
+		CommerceContext commerceContext = _commerceContextFactory.create(
+			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(), 0, 0,
+			StringPool.BLANK);
 
 		AccountList accountList = _commerceAccountResource.getAccountList(
 			null, commerceContext.getCommerceSiteType(), queryString, 1, 5,
@@ -164,7 +161,7 @@ public class CommerceSearchResource {
 
 			searchItemModel.setUrl(
 				_getAccountManagementPortletEditURL(
-					account.getAccountId(), themeDisplay));
+					GetterUtil.getLong(account.getAccountId()), themeDisplay));
 
 			searchItemModels.add(searchItemModel);
 		}
@@ -203,12 +200,12 @@ public class CommerceSearchResource {
 
 		for (Order order : orderList.getOrders()) {
 			SearchItemModel searchItemModel = new SearchItemModel(
-				"item", HtmlUtil.escape(String.valueOf(order.getOrderId())));
+				"item", HtmlUtil.escape(String.valueOf(order.getId())));
 
 			searchItemModel.setImage(StringPool.BLANK);
 
 			CommerceOrder commerceOrder =
-				_commerceOrderService.getCommerceOrder(order.getOrderId());
+				_commerceOrderService.getCommerceOrder(order.getId());
 
 			searchItemModel.setUrl(
 				String.valueOf(
@@ -348,6 +345,9 @@ public class CommerceSearchResource {
 
 	@Reference
 	private CommerceAccountResource _commerceAccountResource;
+
+	@Reference
+	private CommerceContextFactory _commerceContextFactory;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
