@@ -21,7 +21,12 @@ class AccountsTableItem extends Component {
 Soy.register(AccountsTableItem, template);
 
 AccountsTableItem.STATE = {
-	accountId: Config.string(),
+	accountId: Config.oneOfType(
+		[
+			Config.string(),
+			Config.number()
+		]
+	).required(),
 	name: Config.string(),
 	thumbnail: Config.string(),
 	query: Config.string()

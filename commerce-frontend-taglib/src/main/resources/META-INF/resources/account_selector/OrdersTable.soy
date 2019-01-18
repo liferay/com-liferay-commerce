@@ -11,7 +11,7 @@
 	{@param? createNewOrderLink: string}
 	{@param? viewAllOrdersLink: string}
 	{@param? orders: list<[
-		id: string|int,
+		id: string|number,
 		status: string,
 		lastEdit: string,
 		addOrderLink: string
@@ -53,17 +53,17 @@
 		</div>
 
 		<div class="account-switcher__section account-switcher__section--fill account-switcher__section--padded">
-			<div class="d-table small-table">
-				<div class="d-table-head-group">
-					<div class="d-table-row">
-						<div class="d-table-cell">Select Order</div>
-						<div class="d-table-cell u-tac">Status</div>
-						<div class="d-table-cell u-tar">Last Modified</div>
+			{if isNonnull($orders) and length($orders) > 0}
+				<div class="d-table small-table">
+					<div class="d-table-head-group">
+						<div class="d-table-row">
+							<div class="d-table-cell">Select Order</div>
+							<div class="d-table-cell u-tac">Status</div>
+							<div class="d-table-cell u-tar">Last Modified</div>
+						</div>
 					</div>
-				</div>
 
-				<div class="d-table-row-group">
-					{if isNonnull($orders)}
+					<div class="d-table-row-group">
 						{foreach $order in $orders}
 							{call .order}
 								{param id: $order.id /}
@@ -73,30 +73,33 @@
 								{param query: $filterString /}
 							{/call}
 						{/foreach}
-					{/if}
+					</div>
 				</div>
-			</div>
+			{/if}
+			{if isNonnull($orders) and length($orders) == 0}
+				<div class="account-switcher__empty-table">
+					No orders found
+				</div>
+			{/if}
 		</div>
-		{if isNonnull($createNewOrderLink)}
-			<div class="account-switcher__section">
+		<div class="account-switcher__section">
+			{if isNonnull($createNewOrderLink)}
 				<a
 					href="{$createNewOrderLink}"
-					class="minium-button minium-button--block minium-button--outline"
+					class="account-switcher__button minium-button minium-button--block minium-button--outline"
 				>
 					Create new order
 				</a>
-			</div>
-		{/if}
-		{if isNonnull($viewAllOrdersLink)}
-			<div class="account-switcher__section">
+			{/if}
+			{if isNonnull($viewAllOrdersLink)}
 				<a
 					href="{$viewAllOrdersLink}"
-					class="minium-button minium-button--block"
+					class="account-switcher__button minium-button minium-button--block"
 				>
 					View all orders
 				</a>
-			</div>
-		{/if}
+			{/if}
+		</div>
 	</div>
 {/template}
 
@@ -104,7 +107,7 @@
  * This renders the component's whole content.
  */
 {template .order}
-	{@param id: int|string}
+	{@param id: number|string}
 	{@param status: string}
 	{@param lastEdit: string}
 	{@param addOrderLink: string}

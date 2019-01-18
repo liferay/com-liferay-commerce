@@ -53,7 +53,7 @@ OrdersTable.STATE = {
 						Config.string(),
 						Config.number()
 					]
-				),
+				).required(),
 				lastEdit: Config.string(),
 				status: Config.string(),
 				addOrderLink: Config.string()
