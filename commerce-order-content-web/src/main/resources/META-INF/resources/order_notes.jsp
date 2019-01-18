@@ -46,7 +46,7 @@ if (!showLabel) {
 	}
 }
 else {
-	taglibIconCssClass = "inline-item inline-item-after";
+	taglibIconCssClass = "inline-item inline-item-before";
 }
 %>
 
@@ -61,7 +61,7 @@ else {
 	icon="forms"
 	iconCssClass="<%= taglibIconCssClass %>"
 	label="<%= showLabel %>"
-	linkCssClass="<%= taglibLinkCssClass %>"
+	linkCssClass="minium-button minium-button--small minium-button--outline"
 	markupView="lexicon"
 	message="<%= taglibMessage %>"
 	method="get"
