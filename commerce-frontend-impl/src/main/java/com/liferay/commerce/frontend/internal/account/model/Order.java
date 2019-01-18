@@ -20,10 +20,10 @@ package com.liferay.commerce.frontend.internal.account.model;
 public class Order {
 
 	public Order(
-		long orderId, long accountId, String purchaseOrderNumber,
-		String lastEdit, String status, String addOrderLink) {
+		long id, long accountId, String purchaseOrderNumber, String lastEdit,
+		String status, String addOrderLink) {
 
-		_orderId = orderId;
+		_id = id;
 		_accountId = accountId;
 		_purchaseOrderNumber = purchaseOrderNumber;
 		_lastEdit = lastEdit;
@@ -49,12 +49,12 @@ public class Order {
 		return _errorMessages;
 	}
 
-	public String getLastEdit() {
-		return _lastEdit;
+	public long getId() {
+		return _id;
 	}
 
-	public long getOrderId() {
-		return _orderId;
+	public String getLastEdit() {
+		return _lastEdit;
 	}
 
 	public String getPurchaseOrderNumber() {
@@ -80,8 +80,8 @@ public class Order {
 	private long _accountId;
 	private String _addOrderLink;
 	private String[] _errorMessages;
+	private long _id;
 	private String _lastEdit;
-	private long _orderId;
 	private String _purchaseOrderNumber;
 	private String _status;
 	private boolean _success;

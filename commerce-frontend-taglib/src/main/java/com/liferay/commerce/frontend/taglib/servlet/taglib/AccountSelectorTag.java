@@ -21,6 +21,8 @@ import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.commerce.frontend.taglib.internal.model.CurrentAccountModel;
+import com.liferay.commerce.frontend.taglib.internal.model.CurrentOrderModel;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringBundler;
@@ -35,6 +37,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 /**
  * @author Marco Leo
@@ -79,10 +82,21 @@ public class AccountSelectorTag extends ComponentRendererTag {
 
 				CurrentAccountModel currentAccountModel =
 					new CurrentAccountModel(
-						commerceAccount.getCommerceAccountId(),
+						String.valueOf(commerceAccount.getCommerceAccountId()),
 						commerceAccount.getName(), sb.toString());
 
 				putValue("currentAccount", currentAccountModel);
+			}
+
+			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+
+			if (commerceOrder != null) {
+				CurrentOrderModel currentOrderModel = new CurrentOrderModel(
+					commerceOrder.getCommerceOrderId(),
+					WorkflowConstants.getStatusLabel(
+						commerceOrder.getStatus()));
+
+				putValue("currentOrder", currentOrderModel);
 			}
 
 			Layout accountManagementLayout = _getAccountManagementLayout(
