@@ -180,12 +180,13 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
-	public CommerceOrder fetchCommerceOrder(long groupId, int orderStatus)
+	public CommerceOrder fetchCommerceOrder(
+			long commerceAccountId, int orderStatus)
 		throws PortalException {
 
 		CommerceOrder commerceOrder =
 			commerceOrderLocalService.fetchCommerceOrder(
-				groupId, getGuestOrUserId(), orderStatus);
+				commerceAccountId, orderStatus);
 
 		if (commerceOrder != null) {
 			_commerceOrderModelResourcePermission.check(
