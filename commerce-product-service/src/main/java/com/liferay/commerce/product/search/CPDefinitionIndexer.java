@@ -34,13 +34,11 @@ import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.util.CPRulesThreadLocal;
-import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -534,12 +532,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				FIELD_DEFAULT_IMAGE_FILE_ENTRY_ID,
 				cpAttachmentFileEntry.getFileEntryId());
 
-			FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
-
 			document.addKeyword(
 				FIELD_DEFAULT_IMAGE_FILE_URL,
-				DLUtil.getDownloadURL(
-					fileEntry, fileEntry.getFileVersion(), null, null));
+				cpDefinition.getDefaultImageFileURL());
 		}
 
 		CProduct cProduct = cpDefinition.getCProduct();
