@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.util;
+package com.liferay.commerce.openapi.admin.internal.util;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

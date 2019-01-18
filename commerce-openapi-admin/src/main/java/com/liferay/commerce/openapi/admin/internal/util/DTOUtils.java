@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.util;
+package com.liferay.commerce.openapi.admin.internal.util;
 
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.portal.kernel.model.Group;
