@@ -23,13 +23,21 @@ Map<String, Object> contextObjects = new HashMap<>();
 
 contextObjects.put("commerceCartContentMiniDisplayContext", commerceCartContentMiniDisplayContext);
 
+CommerceMoney subtotal = null;
+CommerceDiscountValue subtotalDiscountValue = null;
+CommerceMoney taxValue = null;
+CommerceDiscountValue totalDiscountValue = null;
+CommerceMoney totalOrder = null;
+
 CommerceOrderPrice commerceOrderPrice = commerceCartContentMiniDisplayContext.getCommerceOrderPrice();
 
-CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
-CommerceDiscountValue subtotalDiscountValue = commerceOrderPrice.getSubtotalDiscountValue();
-CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
-CommerceDiscountValue totalDiscountValue = commerceOrderPrice.getTotalDiscountValue();
-CommerceMoney totalOrder = commerceOrderPrice.getTotal();
+if (commerceOrderPrice != null) {
+	subtotal = commerceOrderPrice.getSubtotal();
+	subtotalDiscountValue = commerceOrderPrice.getSubtotalDiscountValue();
+	taxValue = commerceOrderPrice.getTaxValue();
+	totalDiscountValue = commerceOrderPrice.getTotalDiscountValue();
+	totalOrder = commerceOrderPrice.getTotal();
+}
 
 SearchContainer<CommerceOrderItem> commerceOrderItemSearchContainer = commerceCartContentMiniDisplayContext.getSearchContainer();
 
@@ -139,15 +147,18 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 					</div>
 				</liferay-ui:search-container-column-text>
 
-				<%
-				CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
-				%>
+				<c:if test="<%= commerceCartContentMiniDisplayContext.hasViewPricePermission() %>">
 
-				<liferay-ui:search-container-column-text>
-					<div class="mt-3">
-						<%= finalPriceMoney.format(locale) %>
-					</div>
-				</liferay-ui:search-container-column-text>
+					<%
+					CommerceMoney finalPriceMoney = commerceOrderItem.getFinalPriceMoney();
+					%>
+
+					<liferay-ui:search-container-column-text>
+						<div class="mt-3">
+							<%= finalPriceMoney.format(locale) %>
+						</div>
+					</liferay-ui:search-container-column-text>
+				</c:if>
 			</liferay-ui:search-container-row>
 
 			<liferay-ui:search-iterator
@@ -171,13 +182,15 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 
 	<ul class="commerce-order-items-footer">
 		<li class="autofit-row commerce-tax">
-			<div class="autofit-col autofit-col-expand">
-				<div class="commerce-description"><liferay-ui:message key="subtotal" /></div>
-			</div>
+			<c:if test="<%= subtotal != null %>">
+				<div class="autofit-col autofit-col-expand">
+					<div class="commerce-description"><liferay-ui:message key="subtotal" /></div>
+				</div>
 
-			<div class="autofit-col">
-				<div class="commerce-value"><%= HtmlUtil.escape(subtotal.format(locale)) %></div>
-			</div>
+				<div class="autofit-col">
+					<div class="commerce-value"><%= HtmlUtil.escape(subtotal.format(locale)) %></div>
+				</div>
+			</c:if>
 
 			<c:if test="<%= subtotalDiscountValue != null %>">
 
@@ -199,13 +212,15 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 			</c:if>
 		</li>
 		<li class="autofit-row commerce-tax">
-			<div class="autofit-col autofit-col-expand">
-				<div class="commerce-description"><liferay-ui:message key="tax" /></div>
-			</div>
+			<c:if test="<%= taxValue != null %>">
+				<div class="autofit-col autofit-col-expand">
+					<div class="commerce-description"><liferay-ui:message key="tax" /></div>
+				</div>
 
-			<div class="autofit-col">
-				<div class="commerce-value"><%= HtmlUtil.escape(taxValue.format(locale)) %></div>
-			</div>
+				<div class="autofit-col">
+					<div class="commerce-value"><%= HtmlUtil.escape(taxValue.format(locale)) %></div>
+				</div>
+			</c:if>
 		</li>
 		<li class="autofit-row commerce-total">
 			<c:if test="<%= totalDiscountValue != null %>">
@@ -227,13 +242,15 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 				</div>
 			</c:if>
 
-			<div class="autofit-col autofit-col-expand">
-				<div class="commerce-description"><liferay-ui:message key="total" /></div>
-			</div>
+			<c:if test="<%= totalOrder != null %>">
+				<div class="autofit-col autofit-col-expand">
+					<div class="commerce-description"><liferay-ui:message key="total" /></div>
+				</div>
 
-			<div class="autofit-col">
-				<div class="commerce-value"><%= HtmlUtil.escape(totalOrder.format(locale)) %></div>
-			</div>
+				<div class="autofit-col">
+					<div class="commerce-value"><%= HtmlUtil.escape(totalOrder.format(locale)) %></div>
+				</div>
+			</c:if>
 		</li>
 	</ul>
 

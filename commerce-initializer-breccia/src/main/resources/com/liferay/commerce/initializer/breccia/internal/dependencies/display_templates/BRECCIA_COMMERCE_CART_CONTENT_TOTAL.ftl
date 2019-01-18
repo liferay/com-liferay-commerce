@@ -1,15 +1,6 @@
 <#assign
 	orderId = '${commerceCartContentTotalDisplayContext.getCommerceOrderId()}'
 	orderTotalItems = 0
-	commerceOrderPrice = commerceCartContentTotalDisplayContext.getCommerceOrderPrice()
-	subtotalPrice = commerceOrderPrice.getSubtotal()
-	shippingValuePrice = commerceOrderPrice.getShippingValue()
-	taxValuePrice = commerceOrderPrice.getTaxValue()
-	totalOrderPrice = commerceOrderPrice.getTotal()
-	shippingPrice = '${shippingValuePrice.format(locale)}'
-	subTotal = '${subtotalPrice.format(locale)}'
-	tax = '${taxValuePrice.format(locale)}'
-	total = '${totalOrderPrice.format(locale)}'
 />
 
 <#if commerceCartContentTotalDisplayContext.getCommerceOrderId() == 0>
@@ -22,12 +13,28 @@
 	<#assign orderTotalItems = orderTotalItems + curCommerceOrderItem.getQuantity() />
 </#list>
 
-<div class="commerce-component-header">
-	<h2 class="component-title">
-		<span class="component-title-label">${languageUtil.get(request, "total")}</span>
-		<span class="component-title-value">${total}</span>
-	</h2>
-</div>
+<#if commerceCartContentTotalDisplayContext.getCommerceOrderPrice()??>
+	<#assign
+		commerceOrderPrice = commerceCartContentTotalDisplayContext.getCommerceOrderPrice()
+		subtotalPrice = commerceOrderPrice.getSubtotal()
+		shippingValuePrice = commerceOrderPrice.getShippingValue()
+		taxValuePrice = commerceOrderPrice.getTaxValue()
+		totalOrderPrice = commerceOrderPrice.getTotal()
+		shippingPrice = '${shippingValuePrice.format(locale)}'
+		subtotal = '${subtotalPrice.format(locale)}'
+		tax = '${taxValuePrice.format(locale)}'
+		total = '${totalOrderPrice.format(locale)}'
+	/>
+</#if>
+
+<#if total??>
+	<div class="commerce-component-header">
+		<h2 class="component-title">
+			<span class="component-title-label">${languageUtil.get(request, "total")}</span>
+			<span class="component-title-value">${total}</span>
+		</h2>
+	</div>
+</#if>
 
 <div class="commerce-panel-secondary panel">
 	<div class="panel-header">
@@ -36,59 +43,67 @@
 
 	<div class="panel-body">
 		<ul class="commerce-cart-content-total-list list-unstyled">
-			<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
-				<div class="autofit-col autofit-col-expand">
-					<div class="autofit-section">
-						<span class="commerce-cart-content-total-label subtotal-label">${languageUtil.get(request, "subtotal")} (${orderTotalItems})</span>
+			<#if subtotal??>
+				<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
+					<div class="autofit-col autofit-col-expand">
+						<div class="autofit-section">
+							<span class="commerce-cart-content-total-label subtotal-label">${languageUtil.get(request, "subtotal")} (${orderTotalItems})</span>
+						</div>
 					</div>
-				</div>
 
-				<div class="autofit-col">
-					<div class="autofit-section">
-						<span class="commerce-cart-content-total-value subtotal-value">${subTotal}</span>
+					<div class="autofit-col">
+						<div class="autofit-section">
+							<span class="commerce-cart-content-total-value subtotal-value">${subtotal}</span>
+						</div>
 					</div>
-				</div>
-			</li>
-			<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
-				<div class="autofit-col autofit-col-expand">
-					<div class="autofit-section">
-						<span class="commerce-cart-content-total-label shipping-label">${languageUtil.get(request, "delivery")}</span>
+				</li>
+			</#if>
+			<#if shippingPrice??>
+				<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
+					<div class="autofit-col autofit-col-expand">
+						<div class="autofit-section">
+							<span class="commerce-cart-content-total-label shipping-label">${languageUtil.get(request, "delivery")}</span>
+						</div>
 					</div>
-				</div>
 
-				<div class="autofit-col">
-					<div class="autofit-section">
-						<span class="commerce-cart-content-total-value shipping-value">${shippingPrice}</span>
+					<div class="autofit-col">
+						<div class="autofit-section">
+							<span class="commerce-cart-content-total-value shipping-value">${shippingPrice}</span>
+						</div>
 					</div>
-				</div>
-			</li>
-			<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
-				<div class="autofit-col autofit-col-expand">
-					<div class="autofit-section">
-						<span class="commerce-cart-content-total-label tax-label">${languageUtil.get(request, "tax")}</span>
+				</li>
+			</#if>
+			<#if tax??>
+				<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
+					<div class="autofit-col autofit-col-expand">
+						<div class="autofit-section">
+							<span class="commerce-cart-content-total-label tax-label">${languageUtil.get(request, "tax")}</span>
+						</div>
 					</div>
-				</div>
 
-				<div class="autofit-col">
-					<div class="autofit-section">
-						<span class="commerce-cart-content-total-value tax-value">${tax}</span>
+					<div class="autofit-col">
+						<div class="autofit-section">
+							<span class="commerce-cart-content-total-value tax-value">${tax}</span>
+						</div>
 					</div>
-				</div>
-			</li>
-			<li class="commerce-cart-content-total-divider"></li>
-			<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
-				<div class="autofit-col autofit-col-expand">
-					<div class="autofit-section">
-						<span class="commerce-cart-content-total-label total-label">${languageUtil.get(request, "total")}</span>
+				</li>
+			</#if>
+			<#if total??>
+				<li class="commerce-cart-content-total-divider"></li>
+				<li class="autofit-float autofit-row autofit-row-center commerce-cart-content-total-item">
+					<div class="autofit-col autofit-col-expand">
+						<div class="autofit-section">
+							<span class="commerce-cart-content-total-label total-label">${languageUtil.get(request, "total")}</span>
+						</div>
 					</div>
-				</div>
 
-				<div class="autofit-col">
-					<div class="autofit-section">
-						<span class="commerce-cart-content-total-value total-value">${total}</span>
+					<div class="autofit-col">
+						<div class="autofit-section">
+							<span class="commerce-cart-content-total-value total-value">${total}</span>
+						</div>
 					</div>
-				</div>
-			</li>
+				</li>
+			</#if>
 		</ul>
 	</div>
 </div>
