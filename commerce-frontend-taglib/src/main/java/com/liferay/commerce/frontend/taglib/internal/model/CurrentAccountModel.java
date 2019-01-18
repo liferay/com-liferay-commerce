@@ -25,7 +25,7 @@ public class CurrentAccountModel {
 		_thumbnail = thumbnail;
 	}
 
-	public long getAccountIdId() {
+	public long getAccountId() {
 		return _accountId;
 	}
 

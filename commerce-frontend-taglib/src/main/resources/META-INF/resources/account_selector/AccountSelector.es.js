@@ -142,7 +142,12 @@ AccountSelector.STATE = {
 	accounts: Config.arrayOf(
 		Config.shapeOf(
 			{
-				accountId: Config.number(),
+				accountId: Config.oneOfType(
+					[
+						Config.string(),
+						Config.number()
+					]
+				).required(),
 				name: Config.string(),
 				thumbnail: Config.string()
 			}
@@ -152,7 +157,12 @@ AccountSelector.STATE = {
 	orders: Config.arrayOf(
 		Config.shapeOf(
 			{
-				id: Config.number(),
+				id: Config.oneOfType(
+					[
+						Config.string(),
+						Config.number()
+					]
+				).required(),
 				lastEdit: Config.string(),
 				status: Config.string(),
 				addOrderLink: Config.string()

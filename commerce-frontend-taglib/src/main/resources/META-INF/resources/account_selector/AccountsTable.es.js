@@ -38,7 +38,12 @@ Soy.register(AccountsTable, template);
 AccountsTable.STATE = {
 	currentAccount: Config.shapeOf(
 		{
-			accountId: Config.number(),
+			accountId: Config.oneOfType(
+				[
+					Config.string(),
+					Config.number()
+				]
+			).required(),
 			name: Config.string(),
 			thumbnail: Config.string()
 		}
@@ -47,7 +52,12 @@ AccountsTable.STATE = {
 	accounts: Config.arrayOf(
 		Config.shapeOf(
 			{
-				accountId: Config.number(),
+				accountId: Config.oneOfType(
+					[
+						Config.string(),
+						Config.number()
+					]
+				).required(),
 				name: Config.string(),
 				thumbnail: Config.string()
 			}
