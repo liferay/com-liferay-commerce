@@ -1,0 +1,6 @@
+Bundle-Name: Liferay Commerce OpenAPI Core API
+Bundle-SymbolicName: com.liferay.commerce.openapi.core.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.commerce.openapi.core.context,\
+	com.liferay.commerce.openapi.core.exception
