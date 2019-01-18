@@ -35,6 +35,7 @@ create index IX_91EA24D5 on CommerceCountry (uuid_[$COLUMN_LENGTH:75$], companyI
 create unique index IX_7EFDC97 on CommerceCountry (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_12131FC1 on CommerceOrder (billingAddressId);
+create index IX_81097E4C on CommerceOrder (commerceAccountId, orderStatus);
 create index IX_48EEEDEE on CommerceOrder (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_BBCEC1AC on CommerceOrder (groupId, commerceAccountId);
 create index IX_67E0AF05 on CommerceOrder (groupId, userId, orderStatus);
