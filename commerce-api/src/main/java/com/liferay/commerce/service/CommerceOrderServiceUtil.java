@@ -114,9 +114,9 @@ public class CommerceOrderServiceUtil {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder fetchCommerceOrder(
-		long groupId, int orderStatus)
+		long commerceAccountId, int orderStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().fetchCommerceOrder(groupId, orderStatus);
+		return getService().fetchCommerceOrder(commerceAccountId, orderStatus);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder fetchCommerceOrder(

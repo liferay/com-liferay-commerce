@@ -237,7 +237,7 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	public CommerceOrder fetchCommerceOrder(long commerceOrderId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceOrder fetchCommerceOrder(long groupId, long userId,
+	public CommerceOrder fetchCommerceOrder(long commerceAccountId,
 		int orderStatus);
 
 	/**
