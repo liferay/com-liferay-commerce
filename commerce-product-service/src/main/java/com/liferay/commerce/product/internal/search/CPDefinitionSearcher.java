@@ -53,7 +53,8 @@ public class CPDefinitionSearcher extends BaseSearcher {
 			CPDefinitionIndexer.FIELD_DEFAULT_IMAGE_FILE_URL,
 			CPDefinitionIndexer.FIELD_DEPTH, CPDefinitionIndexer.FIELD_HEIGHT,
 			CPDefinitionIndexer.FIELD_IS_IGNORE_SKU_COMBINATIONS,
-			CPDefinitionIndexer.FIELD_PRODUCT_TYPE_NAME);
+			CPDefinitionIndexer.FIELD_PRODUCT_TYPE_NAME,
+			CPDefinitionIndexer.FIELD_DEFAULT_IMAGE_FILE_URL);
 	}
 
 	@Override
