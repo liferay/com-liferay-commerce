@@ -30,19 +30,27 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 </portlet:actionURL>
 
 <div class="b2b-portlet-content-header">
-	<c:if test="<%= Validator.isNotNull(redirect) %>">
-		<liferay-ui:icon
-			cssClass="header-back-to"
-			icon="order-arrow-down"
-			id="TabsBack"
-			label="<%= false %>"
-			markupView="lexicon"
-			message='<%= LanguageUtil.get(resourceBundle, "back") %>'
-			method="get"
-			url="<%= redirect %>"
-		/>
-	</c:if>
+	<div class="row">
+		<%-- <c:if test="<%= Validator.isNotNull(redirect) %>">
+			<liferay-ui:icon
+				cssClass="header-back-to"
+				icon="order-arrow-down"
+				id="TabsBack"
+				label="<%= false %>"
+				markupView="lexicon"
+				message='<%= LanguageUtil.get(resourceBundle, "back") %>'
+				method="get"
+				url="<%= redirect %>"
+			/>
+		</c:if> --%>
 
+		<div class="col">
+			<div class="minium-typo__section-title">
+				<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>
+			</div>
+		</div>
+	</div>
+<%-- 
 	<div class="autofit-float autofit-row header-title-bar">
 		<div class="autofit-col autofit-col-expand">
 			<liferay-ui:header
@@ -52,7 +60,7 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 				title='<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>'
 			/>
 		</div>
-	</div>
+	</div> --%>
 </div>
 
 <aui:form action="<%= editCommerceOrderNoteURL %>" cssClass="order-notes-form" method="post" name="fm">
@@ -64,33 +72,33 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 
 	<aui:model-context model="<%= CommerceOrderNote.class %>" />
 
-	<aui:fieldset-group markupView="lexicon">
+
 		<div class="taglib-discussion">
 			<c:if test="<%= manageNotesPermission || manageRestrictedNotesPermission %>">
-				<aui:fieldset cssClass="add-comment">
-					<div class="panel">
-						<div class="panel-body">
-							<div class="lfr-discussion-details">
-								<liferay-ui:user-portrait
-									cssClass="user-icon-lg"
-									user="<%= user %>"
-								/>
-							</div>
+				<div class="minium-card">
+					<div class="minium-card__content">
+						<div class="lfr-discussion-details">
+							<liferay-ui:user-portrait
+								cssClass="user-icon-lg"
+								user="<%= user %>"
+							/>
+						</div>
 
-							<div class="lfr-discussion-body">
-								<aui:input autoFocus="<%= true %>" label="" name="content" placeholder="type-your-note-here" />
+						<div class="lfr-discussion-body">
+							<aui:input autoFocus="<%= true %>" label="" name="content" placeholder="type-your-note-here" />
 
+							<div class="order-notes-submit-actions">
 								<c:if test="<%= manageRestrictedNotesPermission %>">
 									<aui:input helpMessage="restricted-help" label="private" name="restricted" />
 								</c:if>
 
 								<aui:button-row>
-									<aui:button cssClass="btn-lg btn-primary" type="submit" />
+									<aui:button cssClass="minium-button" type="submit" />
 								</aui:button-row>
 							</div>
 						</div>
 					</div>
-				</aui:fieldset>
+				</div>
 			</c:if>
 
 			<%
@@ -99,8 +107,8 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 			for (CommerceOrderNote commerceOrderNote : commerceOrderContentDisplayContext.getCommerceOrderNotes(commerceOrder)) {
 			%>
 
-				<article class="card-tab-group lfr-discussion">
-					<div class="card list-group-card panel">
+				<article class="minium-card">
+					<div class="minium-card__content">
 						<div class="panel-body">
 							<div class="card-row">
 								<div class="card-col-content">
@@ -201,5 +209,5 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 			%>
 
 		</div>
-	</aui:fieldset-group>
+
 </aui:form>
