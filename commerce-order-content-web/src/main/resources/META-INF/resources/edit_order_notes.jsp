@@ -50,7 +50,8 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 			</div>
 		</div>
 	</div>
-<%-- 
+
+<%--
 	<div class="autofit-float autofit-row header-title-bar">
 		<div class="autofit-col autofit-col-expand">
 			<liferay-ui:header
@@ -71,7 +72,6 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 	<liferay-ui:error exception="<%= CommerceOrderNoteContentException.class %>" message="please-enter-valid-content" />
 
 	<aui:model-context model="<%= CommerceOrderNote.class %>" />
-
 
 		<div class="taglib-discussion">
 			<c:if test="<%= manageNotesPermission || manageRestrictedNotesPermission %>">

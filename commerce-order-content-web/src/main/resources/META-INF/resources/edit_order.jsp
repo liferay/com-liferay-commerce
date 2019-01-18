@@ -70,7 +70,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 		url="<%= layout.getRegularURL(request) %>"
 	/> --%>
 
-	<div class="header-title-bar row align-items-center">
+	<div class="align-items-center header-title-bar row">
 		<%-- <div class="autofit-col autofit-col-expand">
 			<liferay-ui:header
 				backURL="<%= backURL %>"
@@ -91,7 +91,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 				icon="print"
 				iconCssClass="inline-item inline-item-before"
 				label="<%= true %>"
-				linkCssClass="minium-button minium-button--small minium-button--outline"
+				linkCssClass="minium-button minium-button--outline minium-button--small"
 				markupView="lexicon"
 				message="print"
 				method="get"
@@ -100,6 +100,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 		</div>
 
 		<div class="col-md-auto">
+
 			<%
 			request.setAttribute("order_notes.jsp-showLabel", Boolean.TRUE);
 			request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");

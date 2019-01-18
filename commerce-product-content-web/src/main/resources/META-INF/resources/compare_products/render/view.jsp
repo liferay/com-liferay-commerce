@@ -50,6 +50,7 @@ List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCa
 
 			</tr>
 		</thead>
+
 		<tbody>
 			<c:if test="<%= !cpDefinitionOptionRelTitles.isEmpty() %>">
 				<tr class="commerce-compare-table__separator">
@@ -223,6 +224,7 @@ List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCa
 			<%
 			}
 			%>
+
 		</tbody>
 	</table>
 </c:if>
