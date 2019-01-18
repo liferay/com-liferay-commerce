@@ -27,6 +27,7 @@ import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 
 import java.math.BigDecimal;
@@ -53,14 +54,16 @@ public class CommerceCartContentMiniDisplayContext
 			CPDefinitionHelper cpDefinitionHelper,
 			CPInstanceHelper cpInstanceHelper,
 			ModelResourcePermission<CommerceOrder>
-				commerceOrderModelResourcePermission)
+				commerceOrderModelResourcePermission,
+			PortletResourcePermission commerceProductPortletResourcePermission)
 		throws PortalException {
 
 		super(
 			httpServletRequest, commerceOrderItemService,
 			commerceOrderPriceCalculation, commerceOrderValidatorRegistry,
 			commerceProductPriceCalculation, cpDefinitionHelper,
-			cpInstanceHelper, commerceOrderModelResourcePermission);
+			cpInstanceHelper, commerceOrderModelResourcePermission,
+			commerceProductPortletResourcePermission);
 
 		PortletDisplay portletDisplay =
 			commerceCartContentRequestHelper.getPortletDisplay();
