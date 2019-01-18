@@ -54,15 +54,14 @@ class AccountSelector extends Component {
 		formData.append('accountId', this.currentAccount.accountId);
 
 		fetch(
-			this.accountsAPI + '/set-current-account/' + themeDisplay.getScopeGroupId(),
+			this.accountsAPI + 'set-current-account/' + themeDisplay.getScopeGroupId(),
 			{
 				body: formData,
 				method: 'POST'
 			}
 		).then(
-			response => response.json()
-		).then(
-			(jsonResponse) => {
+			() => {
+				this.currentOrder = null;
 				this.emit('accountSelected', this.currentAccount);
 			}
 		);
@@ -138,11 +137,17 @@ AccountSelector.STATE = {
 		]
 	)
 		.value('accounts'),
-	currentAccount: Config.object(),
+	currentAccount: Config.shapeOf(
+		{
+			accountId: Config.string(),
+			name: Config.string(),
+			thumbnail: Config.string()
+		}
+	),
 	accounts: Config.arrayOf(
 		Config.shapeOf(
 			{
-				accountId: Config.number(),
+				accountId: Config.string(),
 				name: Config.string(),
 				thumbnail: Config.string()
 			}
@@ -152,7 +157,12 @@ AccountSelector.STATE = {
 	orders: Config.arrayOf(
 		Config.shapeOf(
 			{
-				id: Config.number(),
+				id: Config.oneOfType(
+					[
+						Config.string(),
+						Config.number()
+					]
+				),
 				lastEdit: Config.string(),
 				status: Config.string(),
 				addOrderLink: Config.string()

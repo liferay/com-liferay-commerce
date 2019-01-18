@@ -48,7 +48,12 @@ OrdersTable.STATE = {
 	orders: Config.arrayOf(
 		Config.shapeOf(
 			{
-				id: Config.string(),
+				id: Config.oneOfType(
+					[
+						Config.string(),
+						Config.number()
+					]
+				),
 				lastEdit: Config.string(),
 				status: Config.string(),
 				addOrderLink: Config.string()

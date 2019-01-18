@@ -36,18 +36,11 @@ class AccountsTable extends Component {
 Soy.register(AccountsTable, template);
 
 AccountsTable.STATE = {
-	currentAccount: Config.shapeOf(
-		{
-			accountId: Config.number(),
-			name: Config.string(),
-			thumbnail: Config.string()
-		}
-	),
 	filterString: Config.string().value('').internal(),
 	accounts: Config.arrayOf(
 		Config.shapeOf(
 			{
-				accountId: Config.number(),
+				accountId: Config.string(),
 				name: Config.string(),
 				thumbnail: Config.string()
 			}
