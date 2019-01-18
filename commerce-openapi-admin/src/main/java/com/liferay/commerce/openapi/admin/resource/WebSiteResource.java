@@ -14,11 +14,13 @@
 
 package com.liferay.commerce.openapi.admin.resource;
 
-import com.liferay.commerce.openapi.admin.context.ClientHelper;
-import com.liferay.commerce.openapi.admin.context.PortalHelper;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
+import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.model.Company;
+
+import java.util.Locale;
 
 import javax.annotation.Generated;
 
@@ -40,13 +42,14 @@ public interface WebSiteResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public WebSiteDTO getWebSite(
-		@PathParam("id") String id, @Context PortalHelper portalHelper);
+		@PathParam("id") String id, @Context Locale locale);
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<WebSiteDTO> getWebSites(
-		@Context PortalHelper portalHelper, @Context ClientHelper clientHelper);
+		@Context Locale locale, @Context Company company,
+		@Context Pagination pagination);
 
 }

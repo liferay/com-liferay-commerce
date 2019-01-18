@@ -14,14 +14,12 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
-import com.liferay.commerce.openapi.admin.context.ClientHelper;
-import com.liferay.commerce.openapi.admin.context.Pagination;
-import com.liferay.commerce.openapi.admin.context.PortalHelper;
+import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.openapi.admin.resource.WebSiteResource;
-import com.liferay.commerce.openapi.admin.util.DTOUtils;
-import com.liferay.commerce.openapi.admin.util.IdUtils;
+import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
@@ -29,6 +27,7 @@ import com.liferay.portal.kernel.service.GroupService;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -54,21 +53,18 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class WebSiteResourceImpl implements WebSiteResource {
 
 	@Override
-	public WebSiteDTO getWebSite(String id, PortalHelper portalHelper) {
+	public WebSiteDTO getWebSite(String id, Locale locale) {
 		Group group = _getGroupById(id);
 
-		return DTOUtils.modelToDTO(group, portalHelper.getLocale());
+		return DTOUtils.modelToDTO(group, locale);
 	}
 
 	@Override
 	public CollectionDTO<WebSiteDTO> getWebSites(
-		PortalHelper portalHelper, ClientHelper clientHelper) {
+		Locale locale, Company company, Pagination pagination) {
 
-		Company company = portalHelper.getCompany();
 		final int totalItems;
 		List<Group> groups = null;
-
-		Pagination pagination = clientHelper.getPagination();
 
 		try {
 			groups = _groupService.getGroups(
@@ -87,7 +83,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 		Stream<Group> stream = groups.stream();
 
 		return stream.map(
-			group -> DTOUtils.modelToDTO(group, portalHelper.getLocale())
+			group -> DTOUtils.modelToDTO(group, locale)
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
