@@ -78,6 +78,18 @@ public class Definition {
 		return _version;
 	}
 
+	public boolean hasContextExtensions() {
+		for (Path path : _paths) {
+			for (Method method : path.getMethods()) {
+				if (method.hasExtensions()) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	public void setComponentDefinitions(
 		List<ComponentDefinition> componentDefinitions) {
 
