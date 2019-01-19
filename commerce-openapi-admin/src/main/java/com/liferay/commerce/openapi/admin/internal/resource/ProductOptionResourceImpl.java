@@ -15,8 +15,9 @@
 package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
-import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
-import com.liferay.commerce.openapi.admin.resource.PriceEntryResource;
+import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
+import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
+import com.liferay.commerce.openapi.admin.resource.ProductOptionResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
@@ -40,13 +41,13 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
 	},
-	service = PriceEntryResource.class
+	service = ProductOptionResource.class
 )
 @Generated(value = "OSGiRESTModuleGenerator")
-public class PriceEntryResourceImpl implements PriceEntryResource {
+public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
-	public Response deletePriceEntry(
+	public Response deleteProductOption(
 		String id, long groupId, User user, Locale locale, Company company) {
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -55,14 +56,14 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
-	public PriceEntryDTO getPriceEntry(
+	public ProductOptionDTO getProductOption(
 		String id, long groupId, User user, Locale locale, Company company) {
 
-		return new PriceEntryDTO();
+		return new ProductOptionDTO();
 	}
 
 	@Override
-	public CollectionDTO<PriceEntryDTO> getPriceEntrys(
+	public CollectionDTO<ProductOptionDTO> getProductOptions(
 		long groupId, User user, Locale locale, Company company,
 		Pagination pagination) {
 
@@ -70,8 +71,16 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
-	public Response updatePriceEntry(
-		String id, long groupId, PriceEntryDTO priceEntryDTO, User user,
+	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
+		String id, long groupId, User user, Locale locale, Company company,
+		Pagination pagination) {
+
+		return new CollectionDTO(Collections.emptyList(), 0);
+	}
+
+	@Override
+	public Response updateProductOption(
+		String id, long groupId, ProductOptionDTO productOptionDTO, User user,
 		Locale locale, Company company) {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -80,11 +89,19 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
-	public PriceEntryDTO upsertPriceEntry(
-		long groupId, PriceEntryDTO priceEntryDTO, User user, Locale locale,
-		Company company) {
+	public ProductOptionDTO upsertProductOption(
+		long groupId, ProductOptionDTO productOptionDTO, User user,
+		Locale locale, Company company) {
 
-		return new PriceEntryDTO();
+		return new ProductOptionDTO();
+	}
+
+	@Override
+	public ProductOptionValueDTO upsertProductOptionValue(
+		String id, long groupId, ProductOptionValueDTO productOptionValueDTO,
+		User user, Locale locale, Company company) {
+
+		return new ProductOptionValueDTO();
 	}
 
 }

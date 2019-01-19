@@ -14,9 +14,9 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.model.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
-import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
-import com.liferay.commerce.openapi.admin.resource.PriceEntryResource;
+import com.liferay.commerce.openapi.admin.resource.AccountResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
@@ -40,13 +40,13 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
 	},
-	service = PriceEntryResource.class
+	service = AccountResource.class
 )
 @Generated(value = "OSGiRESTModuleGenerator")
-public class PriceEntryResourceImpl implements PriceEntryResource {
+public class AccountResourceImpl implements AccountResource {
 
 	@Override
-	public Response deletePriceEntry(
+	public Response deleteAccount(
 		String id, long groupId, User user, Locale locale, Company company) {
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -55,14 +55,14 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
-	public PriceEntryDTO getPriceEntry(
+	public AccountDTO getAccount(
 		String id, long groupId, User user, Locale locale, Company company) {
 
-		return new PriceEntryDTO();
+		return new AccountDTO();
 	}
 
 	@Override
-	public CollectionDTO<PriceEntryDTO> getPriceEntrys(
+	public CollectionDTO<AccountDTO> getAccounts(
 		long groupId, User user, Locale locale, Company company,
 		Pagination pagination) {
 
@@ -70,8 +70,8 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
-	public Response updatePriceEntry(
-		String id, long groupId, PriceEntryDTO priceEntryDTO, User user,
+	public Response updateAccount(
+		String id, long groupId, AccountDTO accountDTO, User user,
 		Locale locale, Company company) {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -80,11 +80,11 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
-	public PriceEntryDTO upsertPriceEntry(
-		long groupId, PriceEntryDTO priceEntryDTO, User user, Locale locale,
+	public AccountDTO upsertAccount(
+		long groupId, AccountDTO accountDTO, User user, Locale locale,
 		Company company) {
 
-		return new PriceEntryDTO();
+		return new AccountDTO();
 	}
 
 }

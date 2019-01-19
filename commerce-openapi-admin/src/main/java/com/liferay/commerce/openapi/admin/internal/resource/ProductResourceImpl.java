@@ -15,14 +15,19 @@
 package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
+import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
+import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductResource;
+import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.User;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Locale;
 
 import javax.annotation.Generated;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -43,34 +48,69 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class ProductResourceImpl implements ProductResource {
 
 	@Override
-	public Response deleteProduct(String id, long groupId) {
+	public Response deleteProduct(
+		String id, long groupId, User user, Locale locale, Company company) {
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	public ProductDTO getProduct(String id, long groupId) {
+	public ProductDTO getProduct(
+		String id, long groupId, User user, Locale locale, Company company) {
+
 		return new ProductDTO();
 	}
 
 	@Override
-	public CollectionDTO<ProductDTO> getProducts(long groupId) {
-		return new CollectionDTO(Arrays.asList(new ProductDTO()), 0);
+	public CollectionDTO<ProductDTO> getProducts(
+		long groupId, User user, Locale locale, Company company,
+		Pagination pagination) {
+
+		return new CollectionDTO(Collections.emptyList(), 0);
+	}
+
+	@Override
+	public CollectionDTO<SkuDTO> getSkus(
+		String id, long groupId, User user, Locale locale, Company company,
+		Pagination pagination) {
+
+		return new CollectionDTO(Collections.emptyList(), 0);
 	}
 
 	@Override
 	public Response updateProduct(
-		String id, long groupId, ProductDTO productDTO) {
+		String id, long groupId, ProductDTO productDTO, User user,
+		Locale locale, Company company) {
 
-		return Response.ok(
-			"Here goes output", MediaType.APPLICATION_JSON
-		).build();
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
-	public ProductDTO upsertProduct(long groupId, ProductDTO productDTO) {
+	public InventoryDTO upsertInventory(
+		String id, long groupId, InventoryDTO inventoryDTO, User user,
+		Locale locale, Company company) {
+
+		return new InventoryDTO();
+	}
+
+	@Override
+	public ProductDTO upsertProduct(
+		long groupId, ProductDTO productDTO, User user, Locale locale,
+		Company company) {
+
 		return new ProductDTO();
+	}
+
+	@Override
+	public SkuDTO upsertSku(
+		String id, long groupId, SkuDTO skuDTO, User user, Locale locale,
+		Company company) {
+
+		return new SkuDTO();
 	}
 
 }

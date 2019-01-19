@@ -15,8 +15,8 @@
 package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
-import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
-import com.liferay.commerce.openapi.admin.resource.PriceEntryResource;
+import com.liferay.commerce.openapi.admin.model.InventoryDTO;
+import com.liferay.commerce.openapi.admin.resource.InventoryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
@@ -40,13 +40,13 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
 	},
-	service = PriceEntryResource.class
+	service = InventoryResource.class
 )
 @Generated(value = "OSGiRESTModuleGenerator")
-public class PriceEntryResourceImpl implements PriceEntryResource {
+public class InventoryResourceImpl implements InventoryResource {
 
 	@Override
-	public Response deletePriceEntry(
+	public Response deleteInventory(
 		String id, long groupId, User user, Locale locale, Company company) {
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -55,36 +55,27 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
-	public PriceEntryDTO getPriceEntry(
+	public InventoryDTO getInventory(
 		String id, long groupId, User user, Locale locale, Company company) {
 
-		return new PriceEntryDTO();
+		return new InventoryDTO();
 	}
 
 	@Override
-	public CollectionDTO<PriceEntryDTO> getPriceEntrys(
-		long groupId, User user, Locale locale, Company company,
-		Pagination pagination) {
+	public CollectionDTO<InventoryDTO> getInventorys(
+		User user, Locale locale, Company company, Pagination pagination) {
 
 		return new CollectionDTO(Collections.emptyList(), 0);
 	}
 
 	@Override
-	public Response updatePriceEntry(
-		String id, long groupId, PriceEntryDTO priceEntryDTO, User user,
+	public Response updateInventory(
+		String id, long groupId, InventoryDTO inventoryDTO, User user,
 		Locale locale, Company company) {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	public PriceEntryDTO upsertPriceEntry(
-		long groupId, PriceEntryDTO priceEntryDTO, User user, Locale locale,
-		Company company) {
-
-		return new PriceEntryDTO();
 	}
 
 }
