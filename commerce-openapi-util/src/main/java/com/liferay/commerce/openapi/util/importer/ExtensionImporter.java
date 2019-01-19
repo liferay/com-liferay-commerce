@@ -54,7 +54,12 @@ public class ExtensionImporter {
 				"Importing extension {} with parameter size {}", name,
 				parameters.size());
 
-			extensions.add(new Extension(name, parameters));
+			try {
+				extensions.add(new Extension(name, parameters));
+			}
+			catch (IllegalArgumentException iae) {
+				_logger.warn("Unable to process extension: {}", name);
+			}
 		}
 
 		return extensions;
