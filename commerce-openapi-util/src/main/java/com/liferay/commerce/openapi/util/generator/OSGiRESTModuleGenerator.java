@@ -221,7 +221,16 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 			collectionDTOGenerator.writeCollectionDTOSource();
 
-			_jsonMessageBodyGenerator.writeJsonMessageBodySources();
+			Properties properties = PropertiesFactory.getPropertiesFor(
+				OSGiRESTModuleGenerator.class);
+
+			if ("true".equals(
+					properties.getProperty(
+						"osgi.module.generator.embed.message.body." +
+							"converters"))) {
+
+				_jsonMessageBodyGenerator.writeJsonMessageBodySources();
+			}
 		}
 		catch (Exception e) {
 			throw new GeneratorException("Unable to generate module", e);
