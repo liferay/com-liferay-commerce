@@ -15,13 +15,13 @@
 package com.liferay.commerce.openapi.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Igor Beslic
+ * @author Zoltán Takács
  */
 public class Extension {
 
@@ -45,10 +45,32 @@ public class Extension {
 		return _parameters;
 	}
 
+	public static class Provider {
+
+		public Provider(String modelName, String fqcn) {
+			_modelName = modelName;
+			_fqcn = fqcn;
+		}
+
+		public String getModelFQCN() {
+			return _fqcn;
+		}
+
+		public String getModelName() {
+			return _modelName;
+		}
+
+		private final String _fqcn;
+		private final String _modelName;
+
+	}
+
 	public enum ExtensionType {
 
-		CLIENT_HELPER_CONTEXT("client"), FILTER_CONTEXT("filter"),
-		PORTAL_HELPER_CONTEXT("portal");
+		COMPANY_CONTEXT("company"), FILTER_CONTEXT("filter"),
+		LOCALE_CONTEXT("locale"), PAGINATION_CONTEXT("pagination"),
+		PERMISSION_CHEKCER_CONTEXT("permissionchecker"), SORT_CONTEXT("sort"),
+		THEMEDISPLAY_CONTEXT("themedisplay"), USER_CONTEXT("user");
 
 		public static ExtensionType fromOpenApiName(String openApiName) {
 			for (ExtensionType extensionType : values()) {
@@ -61,20 +83,56 @@ public class Extension {
 				"Unsupported Open API name: " + openApiName);
 		}
 
-		public List<String> getProviders() {
-			return new ArrayList<>(_extensionToProvider.get(this));
+		public Provider getProvider() {
+			return _extensionToProvider.get(this);
 		}
 
 		private ExtensionType(String openApiName) {
 			_openApiName = openApiName;
 		}
 
-		private static final Map<ExtensionType, List<String>>
-			_extensionToProvider = new HashMap<ExtensionType, List<String>>() {
+		private static final Map<ExtensionType, Provider> _extensionToProvider =
+			new HashMap<ExtensionType, Provider>() {
 				{
-					put(CLIENT_HELPER_CONTEXT, Arrays.asList("Pagination"));
-					put(PORTAL_HELPER_CONTEXT, Arrays.asList("Locale"));
-					put(FILTER_CONTEXT, Arrays.asList("Filter"));
+					put(
+						USER_CONTEXT,
+						new Provider(
+							"User", "com.liferay.portal.kernel.model.User"));
+					put(
+						LOCALE_CONTEXT,
+						new Provider("Locale", "java.util.Locale"));
+					put(
+						THEMEDISPLAY_CONTEXT,
+						new Provider(
+							"ThemeDisplay",
+							"com.liferay.portal.kernel.theme.ThemeDisplay"));
+					put(
+						COMPANY_CONTEXT,
+						new Provider(
+							"Company",
+							"com.liferay.portal.kernel.model.Company"));
+					put(
+						PERMISSION_CHEKCER_CONTEXT,
+						new Provider(
+							"PermissionChecker",
+							"com.liferay.portal.kernel.security.permission." +
+								"PermissionChecker"));
+					put(
+						PAGINATION_CONTEXT,
+						new Provider(
+							"Pagination",
+							"com.liferay.commerce.openapi.core.context." +
+								"Pagination"));
+					put(
+						SORT_CONTEXT,
+						new Provider(
+							"Sort", "com.liferay.portal.kernel.search.Sort"));
+					put(
+						FILTER_CONTEXT,
+						new Provider(
+							"Filter",
+							"com.liferay.commerce.openapi.core.context." +
+								"Filter"));
 				}
 			};
 
