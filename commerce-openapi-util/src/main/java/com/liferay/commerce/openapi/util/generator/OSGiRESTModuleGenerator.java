@@ -138,16 +138,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			_overwriteBND = false;
 		}
 
-		if ("true".equals(
-				properties.getProperty(
-					"osgi.module.generator.overwrite.gradle"))) {
-
-			_overwriteBuildGradle = true;
-		}
-		else {
-			_overwriteBuildGradle = false;
-		}
-
 		_jsonMessageBodyGenerator = new JsonMessageBodyGenerator(
 			_author, _applicationName,
 			properties.getProperty("osgi.module.jaxrs.json.package"),
@@ -177,7 +167,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 			_writeBNDSource();
 
-			_writeGradleSource();
+			_writeGradleSource(definition);
 
 			Set<ComponentDefinition> componentDefinitions =
 				definition.getComponentDefinitions();
@@ -319,30 +309,30 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		writeSource(bndTpl, bndSourcePath);
 	}
 
-	private void _writeGradleSource() throws IOException {
-		String gradleSourcePath =
-			_moduleOutputPath + "/" + _TEMPLATE_FILE_GRADLE.replace(".tpl", "");
+	private void _writeGradleSource(Definition definition) throws IOException {
+		Properties properties = PropertiesFactory.getPropertiesFor(
+			OSGiRESTModuleGenerator.class);
 
-		if (!_overwriteBuildGradle && exists(gradleSourcePath)) {
-			_logger.warn(
-				"Gradle build script file {} is not generated. Configure" +
-					"overwrite mode in config file.",
-				gradleSourcePath);
+		boolean overwriteBuildGradle = false;
 
-			return;
+		if ("true".equals(
+				properties.getProperty(
+					"osgi.module.generator.overwrite.gradle"))) {
+
+			overwriteBuildGradle = true;
 		}
 
-		String gradleTpl = getTemplate(_TEMPLATE_FILE_GRADLE);
+		BuildGradleGenerator buildGradleGenerator = new BuildGradleGenerator(
+			definition.hasContextExtensions(), _moduleOutputPath,
+			overwriteBuildGradle);
 
-		writeSource(gradleTpl, gradleSourcePath);
+		buildGradleGenerator.writeSource();
 	}
 
 	private static final String _TEMPLATE_FILE_APPLICATION =
 		"Application.java.tpl";
 
 	private static final String _TEMPLATE_FILE_BND = "bnd.bnd.tpl";
-
-	private static final String _TEMPLATE_FILE_GRADLE = "build.gradle.tpl";
 
 	private static final Logger _logger = LoggerFactory.getLogger(
 		OSGiRESTModuleGenerator.class);
@@ -362,7 +352,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private final String _moduleOutputPath;
 	private final boolean _oauth2SecurityAllowed;
 	private final boolean _overwriteBND;
-	private final boolean _overwriteBuildGradle;
 	private final ResourceGenerator _resourceGenerator;
 
 }
