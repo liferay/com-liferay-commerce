@@ -18,4 +18,7 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations", version: "1.3.0"
 	compileOnly group: "org.osgi", name: "org.osgi.service.jaxrs", version: "1.0.0"
+	${COMPILE_ONLY_DEPENDENCIES}
+
+	${RUNTIME_DEPENDENCIES}
 }
