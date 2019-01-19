@@ -86,9 +86,7 @@ public class AvailabilityEstimateCPContentContributor
 			available = true;
 		}
 
-		if (!available &&
-			cpDefinitionInventoryEngine.isBackOrderAllowed(cpInstance)) {
-
+		if (!available) {
 			jsonObject.put(
 				CPContentContributorConstants.AVAILABILITY_ESTIMATE_NAME,
 				getAvailabilityEstimateLabel(
