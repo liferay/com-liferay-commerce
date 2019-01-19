@@ -17,12 +17,15 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.admin.resource.PriceListResource;
+import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.User;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Locale;
 
 import javax.annotation.Generated;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -43,34 +46,43 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
-	public Response deletePriceList(String id, long groupId) {
+	public Response deletePriceList(
+		String id, long groupId, User user, Locale locale, Company company) {
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	public PriceListDTO getPriceList(String id, long groupId) {
+	public PriceListDTO getPriceList(
+		String id, long groupId, User user, Locale locale, Company company) {
+
 		return new PriceListDTO();
 	}
 
 	@Override
-	public CollectionDTO<PriceListDTO> getPriceLists(long groupId) {
-		return new CollectionDTO(Arrays.asList(new PriceListDTO()), 0);
+	public CollectionDTO<PriceListDTO> getPriceLists(
+		long groupId, User user, Locale locale, Company company,
+		Pagination pagination) {
+
+		return new CollectionDTO(Collections.emptyList(), 0);
 	}
 
 	@Override
 	public Response updatePriceList(
-		String id, long groupId, PriceListDTO priceListDTO) {
+		String id, long groupId, PriceListDTO priceListDTO, User user,
+		Locale locale, Company company) {
 
-		return Response.ok(
-			"Here goes output", MediaType.APPLICATION_JSON
-		).build();
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
 	public PriceListDTO upsertPriceList(
-		long groupId, PriceListDTO priceListDTO) {
+		long groupId, PriceListDTO priceListDTO, User user, Locale locale,
+		Company company) {
 
 		return new PriceListDTO();
 	}

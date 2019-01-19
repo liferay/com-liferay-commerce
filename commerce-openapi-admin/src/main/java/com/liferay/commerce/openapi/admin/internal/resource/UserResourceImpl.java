@@ -17,8 +17,12 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.UserDTO;
 import com.liferay.commerce.openapi.admin.resource.UserResource;
+import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.User;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Locale;
 
 import javax.annotation.Generated;
 
@@ -42,24 +46,32 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class UserResourceImpl implements UserResource {
 
 	@Override
-	public Response deleteUser(String id) {
+	public Response deleteUser(
+		String id, User user, Locale locale, Company company) {
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	public UserDTO getUser(String id) {
+	public UserDTO getUser(
+		String id, User user, Locale locale, Company company) {
+
 		return new UserDTO();
 	}
 
 	@Override
-	public CollectionDTO<UserDTO> getUsers() {
-		return new CollectionDTO(Arrays.asList(new UserDTO()), 0);
+	public CollectionDTO<UserDTO> getUsers(
+		User user, Locale locale, Company company, Pagination pagination) {
+
+		return new CollectionDTO(Collections.emptyList(), 0);
 	}
 
 	@Override
-	public Response updateUser(String id, UserDTO userDTO) {
+	public Response updateUser(
+		String id, UserDTO userDTO, User user, Locale locale, Company company) {
+
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
