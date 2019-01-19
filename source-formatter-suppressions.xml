@@ -26,8 +26,6 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-api/src/main/java/com/liferay/commerce/model/CommerceShippingOriginLocator\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-api/src/main/java/com/liferay/commerce/payment/engine/CommercePaymentEngine\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-api/src/main/java/com/liferay/commerce/starter/CommerceRegionsStarter\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-cart-rest/src/main/java/com/liferay/commerce/cart/rest/internal/CommerceCartApplication\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-cart-rest/src/main/java/com/liferay/commerce/cart/rest/internal/provider/CommerceCartDataProvider\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-checkout-web/src/main/java/com/liferay/commerce/checkout/web/internal/portlet/action/ActionHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-data-provider-impl/src/main/java/com/liferay/commerce/data/provider/internal/application/CommerceDataProviderApplication\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-api/src/main/java/com/liferay/commerce/frontend/ClayTableContextContributor\.java" />
@@ -36,6 +34,8 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-api/src/main/java/com/liferay/commerce/frontend/FilterFactory\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/account/CommerceAccountResource\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/application/CommerceFrontEndApplication\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/cart/CommerceCartApplication\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/cart/CommerceCartDataProvider\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/clay/table/ClayTableUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/data/provider/CommerceDataSetDataProviderResource\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/order/CommerceOrderResource\.java" />
