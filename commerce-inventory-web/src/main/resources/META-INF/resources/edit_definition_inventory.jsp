@@ -55,23 +55,6 @@ long cpDefinitionId = cpDefinitionInventoryDisplayContext.getCPDefinitionId();
 
 				</aui:select>
 
-				<aui:select label="low-stock-action" name="lowStockActivity">
-
-					<%
-					List<CommerceLowStockActivity> commerceLowStockActivities = cpDefinitionInventoryDisplayContext.getCommerceLowStockActivities();
-
-					for (CommerceLowStockActivity commerceLowStockActivity : commerceLowStockActivities) {
-						String commerceLowStockActivityName = commerceLowStockActivity.getKey();
-					%>
-
-						<aui:option label="<%= commerceLowStockActivity.getLabel(locale) %>" selected="<%= (cpDefinitionInventory != null) && commerceLowStockActivityName.equals(cpDefinitionInventory.getLowStockActivity()) %>" value="<%= commerceLowStockActivityName %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-
 				<aui:select label="availability-estimate" name="commerceAvailabilityEstimateId" showEmptyOption="<%= true %>">
 
 					<%
@@ -94,9 +77,26 @@ long cpDefinitionId = cpDefinitionInventoryDisplayContext.getCPDefinitionId();
 
 				<liferay-ui:error exception="<%= NumberFormatException.class %>" message="there-was-an-error-processing-one-or-more-of-the-quantities-entered" />
 
-				<aui:input name="minStockQuantity">
+				<aui:input label="low-stock-threshold" name="minStockQuantity">
 					<aui:validator name="digits" />
 				</aui:input>
+
+				<aui:select label="low-stock-action" name="lowStockActivity">
+
+					<%
+					List<CommerceLowStockActivity> commerceLowStockActivities = cpDefinitionInventoryDisplayContext.getCommerceLowStockActivities();
+
+					for (CommerceLowStockActivity commerceLowStockActivity : commerceLowStockActivities) {
+						String commerceLowStockActivityName = commerceLowStockActivity.getKey();
+					%>
+
+						<aui:option label="<%= commerceLowStockActivity.getLabel(locale) %>" selected="<%= (cpDefinitionInventory != null) && commerceLowStockActivityName.equals(cpDefinitionInventory.getLowStockActivity()) %>" value="<%= commerceLowStockActivityName %>" />
+
+					<%
+					}
+					%>
+
+				</aui:select>
 
 				<aui:input checked="<%= (cpDefinitionInventory == null) ? true : cpDefinitionInventory.getBackOrders() %>" label="allow-back-orders" name="backOrders" type="toggle-switch" />
 
