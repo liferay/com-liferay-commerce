@@ -20,6 +20,8 @@ import java.util.Collections;
 
 import javax.annotation.Generated;
 
+${MODEL_IMPORT_STATEMENTS_JAVAX}
+
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;

@@ -44,9 +44,9 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 	public ResourceGenerator(
 		String applicationName, String author, String contextOutputPath,
-		String moduleOutputPath,
-		String modelPackagePath, boolean overwriteImplementation,
-		String resourceInterfacePackagePath, String resourcePackagePath) {
+		String moduleOutputPath, String modelPackagePath,
+		boolean overwriteImplementation, String resourceInterfacePackagePath,
+		String resourcePackagePath) {
 
 		_applicationName = applicationName;
 		_author = author;
@@ -173,25 +173,17 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			Extension.ExtensionType extensionType =
 				extension.getExtensionType();
 
-			List<String> providers = extensionType.getProviders();
+			Extension.Provider provider = extensionType.getProvider();
 
-			Iterator<String> providerIterator = providers.iterator();
-
-			while (providerIterator.hasNext()) {
-				if (annotateParameter) {
-					sb.append(
-						_parameterGenerator.toAnnotatedMethodContextParameter(
-							providerIterator.next()));
-				}
-				else {
-					sb.append(
-						_parameterGenerator.toMethodParameter(
-							providerIterator.next()));
-				}
-
-				if (providerIterator.hasNext()) {
-					sb.append(", ");
-				}
+			if (annotateParameter) {
+				sb.append(
+					_parameterGenerator.toAnnotatedMethodContextParameter(
+						provider.getModelName()));
+			}
+			else {
+				sb.append(
+					_parameterGenerator.toMethodParameter(
+						provider.getModelName()));
 			}
 
 			if (iterator.hasNext()) {
@@ -466,19 +458,30 @@ public class ResourceGenerator extends BaseSourceGenerator {
 					Extension.ExtensionType extensionType =
 						extension.getExtensionType();
 
-					for (String provider : extensionType.getProviders()) {
-						if (importedClasses.contains(provider)) {
-							continue;
-						}
+					Extension.Provider provider = extensionType.getProvider();
 
+					if (importedClasses.contains(provider.getModelName())) {
+						continue;
+					}
+
+					List<Parameter> parameters = extension.getParameters();
+
+					if (parameters.isEmpty()) {
+						sb.append("import ");
+						sb.append(provider.getModelFQCN());
+						sb.append(";\n");
+					}
+					else {
 						sb.append("import ");
 						sb.append(_contextOutputPath);
 						sb.append(".");
-						sb.append(StringUtils.upperCaseFirstChar(provider));
+						sb.append(
+							StringUtils.upperCaseFirstChar(
+								provider.getModelName()));
 						sb.append(";\n");
-
-						importedClasses.add(provider);
 					}
+
+					importedClasses.add(provider.getModelName());
 				}
 			}
 		}
@@ -721,6 +724,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 	private final String _applicationName;
 	private final String _author;
+	private final String _contextOutputPath;
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;
 	private final boolean _overwriteImplementation;
@@ -728,6 +732,5 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		new ParameterGenerator();
 	private final String _resourceInterfacePackagePath;
 	private final String _resourcePackagePath;
-	private final String _contextOutputPath;
 
 }
