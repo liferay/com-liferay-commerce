@@ -15,7 +15,7 @@
 package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
-import com.liferay.commerce.openapi.admin.model.UserDTO;
+import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
@@ -28,11 +28,11 @@ import javax.annotation.Generated;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -40,29 +40,29 @@ import javax.ws.rs.core.Response;
  * @author Igor Beslic
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@Path("/1.0/user")
-public interface UserResource {
+@Path("/1.0/inventory")
+public interface InventoryResource {
 
 	@DELETE
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteUser(
-		@PathParam("id") String id, @Context User user, @Context Locale locale,
-		@Context Company company);
+	public Response deleteInventory(
+		@PathParam("id") String id, @QueryParam("groupId") long groupId,
+		@Context User user, @Context Locale locale, @Context Company company);
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public UserDTO getUser(
-		@PathParam("id") String id, @Context User user, @Context Locale locale,
-		@Context Company company);
+	public InventoryDTO getInventory(
+		@PathParam("id") String id, @QueryParam("groupId") long groupId,
+		@Context User user, @Context Locale locale, @Context Company company);
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public CollectionDTO<UserDTO> getUsers(
+	public CollectionDTO<InventoryDTO> getInventorys(
 		@Context User user, @Context Locale locale, @Context Company company,
 		@Context Pagination pagination);
 
@@ -70,15 +70,9 @@ public interface UserResource {
 	@Path("/{id}")
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response updateUser(
-		@PathParam("id") String id, UserDTO userDTO, @Context User user,
-		@Context Locale locale, @Context Company company);
-
-	@Consumes("application/*")
-	@Path("/")
-	@POST
-	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
-	public UserDTO upsertUser(UserDTO userDTO);
+	public Response updateInventory(
+		@PathParam("id") String id, @QueryParam("groupId") long groupId,
+		InventoryDTO inventoryDTO, @Context User user, @Context Locale locale,
+		@Context Company company);
 
 }

@@ -28,7 +28,13 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  */
 @Generated(value = "OSGiRESTModuleGenerator")
 @XmlRootElement(name = "collection")
-@XmlSeeAlso({PriceEntryDTO.class, UserDTO.class, WebSiteDTO.class, ProductDTO.class, PriceListDTO.class})
+@XmlSeeAlso(
+	{
+		ProductOptionDTO.class, ProductOptionValueDTO.class, AccountDTO.class,
+		PriceEntryDTO.class, UserDTO.class, WebSiteDTO.class, ProductDTO.class,
+		SkuDTO.class, PriceListDTO.class, InventoryDTO.class
+	}
+)
 public class CollectionDTO<T> {
 
 	public CollectionDTO() {
