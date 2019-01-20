@@ -5,5 +5,5 @@ Export-Package:\
 	com.liferay.commerce.configuration,\
 	com.liferay.commerce.configuration.definition,\
 	com.liferay.commerce.model.impl
-Liferay-Require-SchemaVersion: 2.1.0
+Liferay-Require-SchemaVersion: 2.2.0
 Liferay-Service: true
