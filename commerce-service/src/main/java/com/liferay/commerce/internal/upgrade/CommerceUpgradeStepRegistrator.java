@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.internal.upgrade;
 
+import com.liferay.commerce.account.service.CommerceAccountLocalService;
+import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService;
 import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderItemUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderNoteUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderUpgradeProcess;
@@ -26,6 +28,9 @@ import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.service.EmailAddressLocalService;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -70,6 +75,18 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 			new CPDAvailabilityEstimateUpgradeProcess(
 				_cpDefinitionLocalService));
 
+		registry.register(
+			_SCHEMA_VERSION_2_1_0, _SCHEMA_VERSION_2_2_0,
+			new com.liferay.commerce.internal.upgrade.v2_2_0.
+				CommerceAccountUpgradeProcess(
+					_commerceAccountLocalService,
+					_commerceAccountOrganizationRelLocalService,
+					_emailAddressLocalService, _organizationLocalService,
+					_userLocalService),
+			new com.liferay.commerce.internal.upgrade.v2_2_0.
+				CommerceOrderUpgradeProcess(
+					_commerceAccountLocalService, _userLocalService));
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -85,13 +102,31 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 
 	private static final String _SCHEMA_VERSION_2_1_0 = "2.1.0";
 
+	private static final String _SCHEMA_VERSION_2_2_0 = "2.2.0";
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUpgradeStepRegistrator.class);
+
+	@Reference
+	private CommerceAccountLocalService _commerceAccountLocalService;
+
+	@Reference
+	private CommerceAccountOrganizationRelLocalService
+		_commerceAccountOrganizationRelLocalService;
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Reference
 	private CPInstanceLocalService _cpInstanceLocalService;
+
+	@Reference
+	private EmailAddressLocalService _emailAddressLocalService;
+
+	@Reference
+	private OrganizationLocalService _organizationLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
