@@ -1,0 +1,226 @@
+{namespace AddAddressModal}
+
+{template .render}
+
+	{@param spritemap: string }
+	{@param? stage: number }
+	{@param? formData: [
+		address: string,
+		city: string,
+		state: string,
+		zipCode: string,
+		country: string,
+		referent: string,
+		email: string,
+		telephone: string
+	]}
+	{@param? _isVisible: bool }
+	{@param? _handleInputBox: any }
+	{@param? _handleCloseModal: any }
+	{@param? _handleAddAddress: any }
+	{@param? _handleNextButton: any }
+	{@param? _handleFirstDotClick: any }
+	{@param? _handleSecondDotClick: any }
+
+	{let $isNotEmptyPattern kind="text"}
+		[A-Za-z0-9]{lb}1,20{rb}
+	{/let}
+
+	{let $body kind="html"}
+		<div class="commerce-modal add-new-address-address-modal">
+			<div class="commerce-modal__header">
+				<h3 class="commerce-modal__title">
+					Add new address to this account
+				</h3>
+
+				<button
+					class="commerce-modal__close"
+					data-onclick="{$_handleCloseModal}"
+				>
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'close' /}
+					{/call}
+				</button>
+			</div>
+
+			<div class="commerce-modal__content">
+				{if (isNonnull($stage) and $stage == 2) == false}
+					<form class="row" data-onsubmit="{$_handleNextButton}">
+						<div class="col-12">
+							{call CommerceInputText.render}
+								{param contextName: 'add-new-address' /}
+								{param name: 'address' /}
+								{param label: 'Address' /}
+								{param value: $formData.address /}
+								{param type: 'text' /}
+								{param pattern: $isNotEmptyPattern /}
+								{param required: true /}
+								{param _handleInputKeyUp: $_handleInputBox /}
+							{/call}
+						</div>
+						<div class="col-6">
+							{call CommerceInputText.render}
+								{param contextName: 'add-new-address' /}
+								{param name: 'city' /}
+								{param label: 'City' /}
+								{param value: $formData.city /}
+								{param type: 'text' /}
+								{param pattern: $isNotEmptyPattern /}
+								{param required: true /}
+								{param _handleInputKeyUp: $_handleInputBox /}
+							{/call}
+						</div>
+						<div class="col-6">
+							<label 
+								for="add-new-address-state"
+								class="commerce-modal__label"
+							>
+								State
+							</label>
+							<input 
+								type="text"
+								id="add-new-address-state"
+								name="state"
+								class="commerce-modal__input commerce-modal__input--with-margin"
+								required
+								data-onkeyup="{$_handleInputBox}" 
+							>
+						</div>
+						<div class="col-6">
+							{call CommerceInputText.render}
+								{param contextName: 'add-new-address' /}
+								{param name: 'zipCode' /}
+								{param label: 'Zip Code' /}
+								{param value: $formData.zipCode /}
+								{param type: 'text' /}
+								{param pattern: $isNotEmptyPattern /}
+								{param required: true /}
+								{param _handleInputKeyUp: $_handleInputBox /}
+							{/call}
+						</div>
+						<div class="col-6">
+							<label 
+								for="add-new-address-country"
+								class="commerce-modal__label"
+							>
+								Country
+							</label>
+							<input 
+								type="text"
+								id="add-new-address-country"
+								name="country"
+								class="commerce-modal__input commerce-modal__input--with-margin"
+								pattern="[A-Za-z0-9]{lb}1,20{rb}"
+								required
+								data-onkeyup="{$_handleInputBox}" 
+							>
+						</div>
+						<div class="col-12">
+							{let $nextButtonClasses kind="text"}
+								minium-button minium-button--big minium-button--icon
+							{/let}
+							<div class="commerce-modal__actions justify-content-end">
+								<button
+									type="submit"
+									class="{$nextButtonClasses}"
+									data-onclick="{$_handleNextButton}"
+								>
+									{call ClayIcon.render}
+										{param spritemap: $spritemap /}
+										{param symbol: 'next' /}
+									{/call}
+								</button>
+							</div>
+						</div>
+					</form>
+				{else}
+					<form class="row" data-onsubmit="{$_handleAddAddress}">
+						<div class="col-12">
+							{call CommerceInputText.render}
+								{param contextName: 'add-new-address' /}
+								{param name: 'referent' /}
+								{param label: 'Referent' /}
+								{param value: $formData.referent /}
+								{param type: 'text' /}
+								{param pattern: $isNotEmptyPattern /}
+								{param required: true /}
+								{param _handleInputKeyUp: $_handleInputBox /}
+							{/call}
+						</div>
+						<div class="col-12">
+							{call CommerceInputText.render}
+								{param contextName: 'add-new-address' /}
+								{param name: 'email' /}
+								{param label: 'Email' /}
+								{param value: $formData.email /}
+								{param type: 'email' /}
+								{param required: true /}
+								{param _handleInputKeyUp: $_handleInputBox /}
+							{/call}
+						</div>
+						<div class="col-12">
+							{call CommerceInputText.render}
+								{param contextName: 'add-new-address' /}
+								{param name: 'telephone' /}
+								{param label: 'Telephone' /}
+								{param value: $formData.telephone /}
+								{param type: 'tel' /}
+								{param required: true /}
+								{param _handleInputKeyUp: $_handleInputBox /}
+							{/call}
+						</div>
+						<div class="col-12">
+							{let $addButtonClasses kind="text"}
+								minium-button minium-button--big
+							{/let}
+							<div class="commerce-modal__actions">
+								<button
+									type="submit"
+									class="{$addButtonClasses}"
+									data-onclick="{$_handleAddAddress}"
+								>
+									Create
+								</button>
+							</div>
+						</div>
+					</form>
+				{/if}
+			</div>
+
+			{let $firstDotClasses kind="text"}
+				commerce-dot-navigation__dot
+				{if (isNonnull($stage) and $stage == 2) == false}
+					{sp}commerce-dot-navigation__dot--active
+				{/if}
+			{/let}
+			{let $secondDotClasses kind="text"}
+				commerce-dot-navigation__dot
+				{if isNonnull($stage) and $stage == 2}
+					{sp}commerce-dot-navigation__dot--active
+				{/if}
+			{/let}
+
+			<div class="commerce-dot-navigation">
+				<button 
+					class="{$firstDotClasses}"
+					data-onclick="{$_handleFirstDotClick}"
+				></button>
+				<button 
+					class="{$secondDotClasses}"
+					data-onclick="{$_handleSecondDotClick}"
+				></button>
+			</div>
+
+		</div>
+	{/let}
+
+	<div class="commerce-modal-wrapper">
+		{call ClayModal.render}
+			{param body: $body /}
+			{param visible: $_isVisible /}
+			{param events: ['hide': $_handleCloseModal] /}
+		{/call}
+	</div>
+
+{/template}
