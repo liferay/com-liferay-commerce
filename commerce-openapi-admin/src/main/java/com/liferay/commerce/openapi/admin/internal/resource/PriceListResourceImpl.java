@@ -14,25 +14,25 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.PriceListHelper;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.admin.resource.PriceListResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 
-import java.util.Collections;
 import java.util.Locale;
-
-import javax.annotation.Generated;
 
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
- * @author Igor Beslic
+ * @author Zoltán Takács
  */
 @Component(
 	immediate = true,
@@ -42,12 +42,19 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	service = PriceListResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
 	public Response deletePriceList(
 		String id, long groupId, User user, Locale locale, Company company) {
+
+		try {
+			_priceListHelper.deletePriceList(
+				id, groupId, user, locale, company);
+		}
+		catch (PortalException pe) {
+			throw new RuntimeException(pe);
+		}
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -58,7 +65,8 @@ public class PriceListResourceImpl implements PriceListResource {
 	public PriceListDTO getPriceList(
 		String id, long groupId, User user, Locale locale, Company company) {
 
-		return new PriceListDTO();
+		return _priceListHelper.getPriceList(
+			id, groupId, user, locale, company);
 	}
 
 	@Override
@@ -66,7 +74,13 @@ public class PriceListResourceImpl implements PriceListResource {
 		long groupId, User user, Locale locale, Company company,
 		Pagination pagination) {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		try {
+			return _priceListHelper.getPriceLists(
+				groupId, user, locale, company, pagination);
+		}
+		catch (PortalException pe) {
+			throw new RuntimeException(pe);
+		}
 	}
 
 	@Override
@@ -74,7 +88,15 @@ public class PriceListResourceImpl implements PriceListResource {
 		String id, long groupId, PriceListDTO priceListDTO, User user,
 		Locale locale, Company company) {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		try {
+			_priceListHelper.updatePriceList(
+				id, groupId, priceListDTO, user, locale, company);
+		}
+		catch (PortalException pe) {
+			throw new RuntimeException(pe);
+		}
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -84,7 +106,16 @@ public class PriceListResourceImpl implements PriceListResource {
 		long groupId, PriceListDTO priceListDTO, User user, Locale locale,
 		Company company) {
 
-		return new PriceListDTO();
+		try {
+			return _priceListHelper.upsertPriceList(
+				groupId, priceListDTO, user, locale, company);
+		}
+		catch (PortalException pe) {
+			throw new RuntimeException(pe);
+		}
 	}
+
+	@Reference
+	private PriceListHelper _priceListHelper;
 
 }

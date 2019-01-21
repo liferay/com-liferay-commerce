@@ -14,7 +14,12 @@
 
 package com.liferay.commerce.openapi.admin.internal.util;
 
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
+import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 
 import java.util.Locale;
@@ -23,6 +28,38 @@ import java.util.Locale;
  * @author Zoltán Takács
  */
 public class DTOUtils {
+
+	public static PriceListDTO modelToDTO(
+		CommercePriceList commercePriceList, Locale locale) {
+
+		PriceListDTO priceListDTO = new PriceListDTO();
+
+		try {
+			priceListDTO.setActive(!commercePriceList.isInactive());
+			priceListDTO.setCommercePriceListId(
+				commercePriceList.getCommercePriceListId());
+			CommerceCurrency commerceCurrency =
+				commercePriceList.getCommerceCurrency();
+
+			priceListDTO.setCurrency(commerceCurrency.getName(locale));
+
+			priceListDTO.setDisplayDate(commercePriceList.getDisplayDate());
+			priceListDTO.setExpirationDate(
+				commercePriceList.getExpirationDate());
+			priceListDTO.setExternalReferenceCode(
+				commercePriceList.getExternalReferenceCode());
+			priceListDTO.setId(commercePriceList.getCommercePriceListId());
+			priceListDTO.setName(commercePriceList.getName());
+			priceListDTO.setPriority(commercePriceList.getPriority());
+		}
+		catch (Exception e) {
+			_log.error("Cannot instantiate PriceListDTO ", e);
+
+			throw new RuntimeException(e);
+		}
+
+		return priceListDTO;
+	}
 
 	public static WebSiteDTO modelToDTO(Group group, Locale locale) {
 		WebSiteDTO webSiteDTO = new WebSiteDTO();
@@ -36,5 +73,7 @@ public class DTOUtils {
 
 	private DTOUtils() {
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(DTOUtils.class);
 
 }
