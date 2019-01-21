@@ -289,9 +289,9 @@ public class CommerceOrderLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrder fetchCommerceOrder(
-		long commerceAccountId, int orderStatus) {
+		long commerceAccountId, long groupId, int orderStatus) {
 		return _commerceOrderLocalService.fetchCommerceOrder(commerceAccountId,
-			orderStatus);
+			groupId, orderStatus);
 	}
 
 	/**

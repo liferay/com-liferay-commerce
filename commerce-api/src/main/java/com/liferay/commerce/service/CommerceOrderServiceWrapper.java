@@ -110,10 +110,10 @@ public class CommerceOrderServiceWrapper implements CommerceOrderService,
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrder fetchCommerceOrder(
-		long commerceAccountId, int orderStatus)
+		long commerceAccountId, long groupId, int orderStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderService.fetchCommerceOrder(commerceAccountId,
-			orderStatus);
+			groupId, orderStatus);
 	}
 
 	@Override
