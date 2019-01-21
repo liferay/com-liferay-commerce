@@ -73,7 +73,8 @@ public class CPCompareContentMiniDisplayContext {
 			portletDisplay.getPortletInstanceConfiguration(
 				CPCompareContentMiniPortletInstanceConfiguration.class);
 
-		_cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(httpServletRequest);
+		_cpDefinitionIds = new ArrayList<>(
+			CPCompareUtil.getCPDefinitionIds(httpServletRequest));
 	}
 
 	public Map<String, String> getCPContentListEntryRendererKeys() {
