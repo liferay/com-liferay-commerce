@@ -77,7 +77,7 @@ public class CommerceAccountServiceVerifyProcess extends VerifyProcess {
 			throw new NoSuchUserException(
 				StringBundler.concat(
 					"No user exists in company ", String.valueOf(companyId),
-					" with role ", String.valueOf(role.getRoleId())));
+					" with role ", role.getName()));
 		}
 
 		return userIds[0];

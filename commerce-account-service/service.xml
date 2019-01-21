@@ -20,8 +20,8 @@
 
 		<!-- Other fields -->
 
-		<column accessor="true" name="name" type="String" />
 		<column name="parentCommerceAccountId" type="long" />
+		<column accessor="true" name="name" type="String" />
 		<column name="logoId" type="long" />
 		<column name="email" type="String" />
 		<column name="taxId" type="String" />

@@ -73,20 +73,6 @@ public class CommerceAccountPermissionImpl
 			return true;
 		}
 
-		while (!commerceAccount.isRoot()) {
-			CommerceAccount parentCommerceAccount =
-				commerceAccount.getParentCommerceAccount();
-
-			if (_contains(
-					permissionChecker, parentCommerceAccount,
-					CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
-
-				return true;
-			}
-
-			commerceAccount = parentCommerceAccount;
-		}
-
 		return false;
 	}
 
@@ -132,20 +118,16 @@ public class CommerceAccountPermissionImpl
 			CommerceAccount commerceAccount, String actionId)
 		throws PortalException {
 
-		if (permissionChecker.isOmniadmin()) {
+		if (permissionChecker.isOmniadmin() ||
+			PortalPermissionUtil.contains(
+				permissionChecker, CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
+
 			return true;
 		}
 
 		while ((commerceAccount != null) &&
 			   (commerceAccount.getCommerceAccountId() !=
 				   CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID)) {
-
-			if (PortalPermissionUtil.contains(
-					permissionChecker,
-					CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
-
-				return true;
-			}
 
 			if (actionId.equals(ActionKeys.UPDATE) &&
 				(commerceAccount.getType() ==

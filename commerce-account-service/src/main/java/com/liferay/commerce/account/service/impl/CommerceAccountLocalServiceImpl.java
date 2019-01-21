@@ -57,8 +57,8 @@ import com.liferay.users.admin.kernel.file.uploads.UserFileUploadsSettings;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -127,8 +127,8 @@ public class CommerceAccountLocalServiceImpl
 		commerceAccount.setCompanyId(user.getCompanyId());
 		commerceAccount.setUserId(user.getUserId());
 		commerceAccount.setUserName(user.getFullName());
-		commerceAccount.setName(name);
 		commerceAccount.setParentCommerceAccountId(parentCommerceAccountId);
+		commerceAccount.setName(name);
 		commerceAccount.setEmail(email);
 		commerceAccount.setTaxId(taxId);
 		commerceAccount.setType(type);
@@ -161,7 +161,7 @@ public class CommerceAccountLocalServiceImpl
 			commerceAccount.getCompanyId(), WorkflowConstants.DEFAULT_GROUP_ID,
 			user.getUserId(), CommerceAccount.class.getName(),
 			commerceAccountId, commerceAccount, serviceContext,
-			new HashMap<>());
+			Collections.emptyMap());
 	}
 
 	@Override
@@ -408,7 +408,7 @@ public class CommerceAccountLocalServiceImpl
 			commerceAccount.getCompanyId(), WorkflowConstants.DEFAULT_GROUP_ID,
 			commerceAccount.getUserId(), CommerceAccount.class.getName(),
 			commerceAccountId, commerceAccount, serviceContext,
-			new HashMap<>());
+			Collections.emptyMap());
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -419,7 +419,6 @@ public class CommerceAccountLocalServiceImpl
 			Map<String, Serializable> workflowContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(userId);
 		Date now = new Date();
 
 		CommerceAccount commerceAccount =
@@ -449,8 +448,12 @@ public class CommerceAccountLocalServiceImpl
 		}
 
 		commerceAccount.setStatus(status);
+
+		User user = userLocalService.getUser(userId);
+
 		commerceAccount.setStatusByUserId(user.getUserId());
 		commerceAccount.setStatusByUserName(user.getFullName());
+
 		commerceAccount.setStatusDate(modifiedDate);
 
 		commerceAccountPersistence.update(commerceAccount);

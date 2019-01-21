@@ -48,9 +48,7 @@ public class CommerceAccountImpl extends CommerceAccountBaseImpl {
 
 	@Override
 	public CommerceAccount getParentCommerceAccount() throws PortalException {
-		if (getParentCommerceAccountId() ==
-				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID) {
-
+		if (isRoot()) {
 			return null;
 		}
 
