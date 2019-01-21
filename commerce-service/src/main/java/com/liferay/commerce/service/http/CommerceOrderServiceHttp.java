@@ -680,14 +680,14 @@ public class CommerceOrderServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
 		HttpPrincipal httpPrincipal, long groupId, long userId,
-		int orderStatus, String keywords, int start, int end) {
+		int[] orderStatuses, String keywords, int start, int end) {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
 					"getUserCommerceOrders",
 					_getUserCommerceOrdersParameterTypes19);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					userId, orderStatus, keywords, start, end);
+					userId, orderStatuses, keywords, start, end);
 
 			Object returnObj = null;
 
@@ -709,7 +709,7 @@ public class CommerceOrderServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
 		HttpPrincipal httpPrincipal, long groupId, long userId,
-		Integer orderStatus, boolean excludeOrderStatus, String keywords,
+		int[] orderStatuses, boolean excludeOrderStatus, String keywords,
 		int start, int end) {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
@@ -717,7 +717,7 @@ public class CommerceOrderServiceHttp {
 					_getUserCommerceOrdersParameterTypes20);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					userId, orderStatus, excludeOrderStatus, keywords, start,
+					userId, orderStatuses, excludeOrderStatus, keywords, start,
 					end);
 
 			Object returnObj = null;
@@ -768,15 +768,15 @@ public class CommerceOrderServiceHttp {
 	}
 
 	public static int getUserCommerceOrdersCount(HttpPrincipal httpPrincipal,
-		long groupId, long userId, int orderStatus, boolean excludeOrderStatus,
-		String keywords) {
+		long groupId, long userId, int[] orderStatuses,
+		boolean excludeOrderStatus, String keywords) {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
 					"getUserCommerceOrdersCount",
 					_getUserCommerceOrdersCountParameterTypes22);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					userId, orderStatus, excludeOrderStatus, keywords);
+					userId, orderStatuses, excludeOrderStatus, keywords);
 
 			Object returnObj = null;
 
@@ -797,14 +797,14 @@ public class CommerceOrderServiceHttp {
 	}
 
 	public static int getUserCommerceOrdersCount(HttpPrincipal httpPrincipal,
-		long groupId, long userId, int orderStatus, String keywords) {
+		long groupId, long userId, int[] orderStatuses, String keywords) {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceOrderServiceUtil.class,
 					"getUserCommerceOrdersCount",
 					_getUserCommerceOrdersCountParameterTypes23);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					userId, orderStatus, keywords);
+					userId, orderStatuses, keywords);
 
 			Object returnObj = null;
 
@@ -1373,21 +1373,21 @@ public class CommerceOrderServiceHttp {
 			long.class, long.class
 		};
 	private static final Class<?>[] _getUserCommerceOrdersParameterTypes19 = new Class[] {
-			long.class, long.class, int.class, String.class, int.class,
+			long.class, long.class, int[].class, String.class, int.class,
 			int.class
 		};
 	private static final Class<?>[] _getUserCommerceOrdersParameterTypes20 = new Class[] {
-			long.class, long.class, Integer.class, boolean.class, String.class,
+			long.class, long.class, int[].class, boolean.class, String.class,
 			int.class, int.class
 		};
 	private static final Class<?>[] _getUserCommerceOrdersParameterTypes21 = new Class[] {
 			long.class, long.class, String.class, int.class, int.class
 		};
 	private static final Class<?>[] _getUserCommerceOrdersCountParameterTypes22 = new Class[] {
-			long.class, long.class, int.class, boolean.class, String.class
+			long.class, long.class, int[].class, boolean.class, String.class
 		};
 	private static final Class<?>[] _getUserCommerceOrdersCountParameterTypes23 = new Class[] {
-			long.class, long.class, int.class, String.class
+			long.class, long.class, int[].class, String.class
 		};
 	private static final Class<?>[] _getUserCommerceOrdersCountParameterTypes24 = new Class[] {
 			long.class, long.class, String.class

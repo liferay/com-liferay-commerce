@@ -388,20 +388,20 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
-		Integer orderStatus, boolean excludeOrderStatus, String keywords,
+		int[] orderStatuses, boolean excludeOrderStatus, String keywords,
 		int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
-		Integer orderStatus, String keywords, int start, int end);
+		int[] orderStatuses, String keywords, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceOrdersCount(long groupId, long userId,
-		Integer orderStatus, boolean excludeOrderStatus, String keywords);
+		int[] orderStatuses, boolean excludeOrderStatus, String keywords);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceOrdersCount(long groupId, long userId,
-		Integer orderStatus, String keywords);
+		int[] orderStatuses, String keywords);
 
 	public void mergeGuestCommerceOrder(long guestCommerceOrderId,
 		long userCommerceOrderId, CommerceContext commerceContext,

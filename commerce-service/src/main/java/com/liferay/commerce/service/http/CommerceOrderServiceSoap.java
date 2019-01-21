@@ -360,12 +360,12 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderSoap[] getUserCommerceOrders(
-		long groupId, long userId, int orderStatus, String keywords, int start,
-		int end) throws RemoteException {
+		long groupId, long userId, int[] orderStatuses, String keywords,
+		int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
 				CommerceOrderServiceUtil.getUserCommerceOrders(groupId, userId,
-					orderStatus, keywords, start, end);
+					orderStatuses, keywords, start, end);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
 		}
@@ -377,13 +377,13 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderSoap[] getUserCommerceOrders(
-		long groupId, long userId, Integer orderStatus,
+		long groupId, long userId, int[] orderStatuses,
 		boolean excludeOrderStatus, String keywords, int start, int end)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceOrder> returnValue =
 				CommerceOrderServiceUtil.getUserCommerceOrders(groupId, userId,
-					orderStatus, excludeOrderStatus, keywords, start, end);
+					orderStatuses, excludeOrderStatus, keywords, start, end);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(returnValue);
 		}
@@ -412,11 +412,11 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static int getUserCommerceOrdersCount(long groupId, long userId,
-		int orderStatus, boolean excludeOrderStatus, String keywords)
+		int[] orderStatuses, boolean excludeOrderStatus, String keywords)
 		throws RemoteException {
 		try {
 			int returnValue = CommerceOrderServiceUtil.getUserCommerceOrdersCount(groupId,
-					userId, orderStatus, excludeOrderStatus, keywords);
+					userId, orderStatuses, excludeOrderStatus, keywords);
 
 			return returnValue;
 		}
@@ -428,10 +428,10 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static int getUserCommerceOrdersCount(long groupId, long userId,
-		int orderStatus, String keywords) throws RemoteException {
+		int[] orderStatuses, String keywords) throws RemoteException {
 		try {
 			int returnValue = CommerceOrderServiceUtil.getUserCommerceOrdersCount(groupId,
-					userId, orderStatus, keywords);
+					userId, orderStatuses, keywords);
 
 			return returnValue;
 		}

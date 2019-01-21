@@ -144,12 +144,12 @@ public interface CommerceOrderService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
-		int orderStatus, String keywords, int start, int end);
+		int[] orderStatuses, boolean excludeOrderStatus, String keywords,
+		int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
-		Integer orderStatus, boolean excludeOrderStatus, String keywords,
-		int start, int end);
+		int[] orderStatuses, String keywords, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
@@ -157,11 +157,11 @@ public interface CommerceOrderService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceOrdersCount(long groupId, long userId,
-		int orderStatus, boolean excludeOrderStatus, String keywords);
+		int[] orderStatuses, boolean excludeOrderStatus, String keywords);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceOrdersCount(long groupId, long userId,
-		int orderStatus, String keywords);
+		int[] orderStatuses, String keywords);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceOrdersCount(long groupId, long userId,
