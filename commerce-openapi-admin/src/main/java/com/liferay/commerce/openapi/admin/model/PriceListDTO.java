@@ -31,7 +31,7 @@ public class PriceListDTO {
 		return _active;
 	}
 
-	public int getCommercePriceListId() {
+	public long getCommercePriceListId() {
 		return _commercePriceListId;
 	}
 
@@ -63,7 +63,7 @@ public class PriceListDTO {
 		return _neverExpire;
 	}
 
-	public float getPriority() {
+	public double getPriority() {
 		return _priority;
 	}
 
@@ -71,7 +71,7 @@ public class PriceListDTO {
 		_active = active;
 	}
 
-	public void setCommercePriceListId(int commercePriceListId) {
+	public void setCommercePriceListId(long commercePriceListId) {
 		_commercePriceListId = commercePriceListId;
 	}
 
@@ -103,12 +103,12 @@ public class PriceListDTO {
 		_neverExpire = neverExpire;
 	}
 
-	public void setPriority(float priority) {
+	public void setPriority(double priority) {
 		_priority = priority;
 	}
 
 	private boolean _active;
-	private int _commercePriceListId;
+	private long _commercePriceListId;
 	private String _currency;
 	private Date _displayDate;
 	private Date _expirationDate;
@@ -116,6 +116,6 @@ public class PriceListDTO {
 	private long _id;
 	private String _name;
 	private boolean _neverExpire;
-	private float _priority;
+	private double _priority;
 
 }
