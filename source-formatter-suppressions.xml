@@ -36,6 +36,8 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/application/CommerceFrontEndApplication\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/cart/CommerceCartApplication\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/cart/CommerceCartDataProvider\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/cart/CommerceCartResource\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/cart/CommerceCartResourceUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/clay/table/ClayTableUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/data/provider/CommerceDataSetDataProviderResource\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/order/CommerceOrderResource\.java" />
