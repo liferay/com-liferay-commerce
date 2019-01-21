@@ -45,13 +45,18 @@ public class PropertiesFactory {
 
 		InputStream resourceAsStream = new FileInputStream(configFileNamePath);
 
-		Properties properties = new Properties();
+		try {
+			Properties properties = new Properties();
 
-		properties.load(resourceAsStream);
+			properties.load(resourceAsStream);
 
-		_classProperties.put(configFileName, properties);
+			_classProperties.put(configFileName, properties);
 
-		return properties;
+			return properties;
+		}
+		finally {
+			resourceAsStream.close();
+		}
 	}
 
 	public static Properties getPropertiesFor(
