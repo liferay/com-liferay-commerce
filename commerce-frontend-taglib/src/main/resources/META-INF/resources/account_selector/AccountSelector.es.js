@@ -63,6 +63,7 @@ class AccountSelector extends Component {
 			() => {
 				this.currentOrder = null;
 				this.emit('accountSelected', this.currentAccount);
+				Liferay.fire('accountSelected', this.currentAccount);
 			}
 		);
 
