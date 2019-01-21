@@ -18,6 +18,7 @@ import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.util.PortalUtil;
 
 /**
  * @author Fabio Diego
@@ -27,6 +28,8 @@ public class AddToCartTag extends ComponentRendererTag {
 	@Override
 	public int doStartTag() {
 		putValue("productId", "ASD123456");
+
+		putValue("cartAPI", PortalUtil.getPortalURL(request) + "/o/cart-item");
 
 		setTemplateNamespace("AddToCart.render");
 

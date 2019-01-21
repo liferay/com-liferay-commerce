@@ -2,6 +2,7 @@
 
 {template .render}
 
+	{@param? disabled: bool }
 	{@param quantity: int }
 	{@param editMode: bool }
 	{@param settings: ? }
@@ -15,13 +16,16 @@
 		{if $quantity > 0 and $editMode == false}
 			{sp}minium-button--good
 		{/if}
+		{if isNonnull($disabled) and $disabled == true }
+			{sp}minium-button--disabled
+		{/if}
 	{/let}
 
 	<div class="{$btnClass}" data-onclick="handleBtnClick">
 
 		{if $editMode == false}
 			{if $quantity == 0}
-				Add to cart
+				{msg desc=""}add-to-cart{/msg}
 			{else}
 				{$quantity} added
 				<div class="add-to-cart-button__ok"></div>
