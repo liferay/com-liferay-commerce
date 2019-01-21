@@ -171,7 +171,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
 
-		Sort prioritySort = SortFactoryUtil.create(Field.PRIORITY, true);
+		Sort prioritySort = SortFactoryUtil.create(Field.PRIORITY, false);
 
 		searchContext.setSorts(prioritySort);
 
