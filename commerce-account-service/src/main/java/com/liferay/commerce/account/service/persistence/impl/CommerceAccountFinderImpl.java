@@ -84,8 +84,8 @@ public class CommerceAccountFinderImpl
 				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
 				names);
 
-			boolean b2b = (boolean)queryDefinition.getAttribute("B2B");
-			boolean b2c = (boolean)queryDefinition.getAttribute("B2C");
+			boolean b2b = (Boolean)queryDefinition.getAttribute("B2B");
+			boolean b2c = (Boolean)queryDefinition.getAttribute("B2C");
 
 			if (b2b && !b2c) {
 				sql = StringUtil.add(
@@ -173,8 +173,8 @@ public class CommerceAccountFinderImpl
 				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
 				names);
 
-			boolean b2b = (boolean)queryDefinition.getAttribute("B2B");
-			boolean b2c = (boolean)queryDefinition.getAttribute("B2C");
+			boolean b2b = (Boolean)queryDefinition.getAttribute("B2B");
+			boolean b2c = (Boolean)queryDefinition.getAttribute("B2C");
 
 			if (b2b && !b2c) {
 				sql = StringUtil.add(
@@ -256,7 +256,7 @@ public class CommerceAccountFinderImpl
 		long parentCommerceAccountId) {
 
 		return "(CommerceAccount.parentCommerceAccountId = " +
-			parentCommerceAccountId + " ) AND";
+			parentCommerceAccountId + ") AND";
 	}
 
 	@ServiceReference(type = CustomSQL.class)

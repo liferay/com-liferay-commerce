@@ -95,10 +95,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		long currentCommerceAccountId = SessionParamUtil.getLong(
 			httpServletRequest, curGroupCommerceAccountIdKey);
 
-		if (currentCommerceAccountId == -1) {
-			return null;
-		}
-		else if (currentCommerceAccountId == 0) {
+		if (currentCommerceAccountId == 0) {
 			commerceAccount = _getSingleCommerceAccount(
 				groupId, httpServletRequest);
 
@@ -153,7 +150,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 			commerceAccount.isBusinessAccount()) {
 
 			throw new PortalException(
-				"Just Personal accounts are allowed in a b2c site");
+				"Only personal accounts are allowed in a b2c site");
 		}
 
 		if ((commerceAccountGroupServiceConfiguration.commerceSiteType() ==
@@ -161,7 +158,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 			commerceAccount.isPersonalAccount()) {
 
 			throw new PortalException(
-				"Just Business accounts are allowed in a b2b site");
+				"Only business accounts are allowed in a b2b site");
 		}
 	}
 
