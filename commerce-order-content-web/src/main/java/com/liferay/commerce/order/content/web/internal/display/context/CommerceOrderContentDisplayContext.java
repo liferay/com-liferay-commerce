@@ -259,7 +259,8 @@ public class CommerceOrderContentDisplayContext {
 			_commerceOrders = _commerceOrderLocalService.getUserCommerceOrders(
 				_cpRequestHelper.getScopeGroupId(),
 				_cpRequestHelper.getUserId(),
-				_commerceOrderContentPortletInstanceConfiguration.orderStatus(),
+				_commerceOrderContentPortletInstanceConfiguration.
+					orderStatuses(),
 				_commerceOrderContentPortletInstanceConfiguration.exclude(),
 				keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
@@ -267,7 +268,8 @@ public class CommerceOrderContentDisplayContext {
 			_commerceOrders = _commerceOrderLocalService.getUserCommerceOrders(
 				_cpRequestHelper.getScopeGroupId(),
 				_cpRequestHelper.getUserId(),
-				_commerceOrderContentPortletInstanceConfiguration.orderStatus(),
+				_commerceOrderContentPortletInstanceConfiguration.
+					orderStatuses(),
 				keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 
@@ -313,8 +315,9 @@ public class CommerceOrderContentDisplayContext {
 		return _commerceOrderContentPortletInstanceConfiguration.exclude();
 	}
 
-	public int getConfigurationOrderStatus() {
-		return _commerceOrderContentPortletInstanceConfiguration.orderStatus();
+	public int[] getConfigurationOrderStatuses() {
+		return
+			_commerceOrderContentPortletInstanceConfiguration.orderStatuses();
 	}
 
 	public String getDisplayStyle() {

@@ -127,14 +127,15 @@ public class CommerceOrderClayTable
 		if (commerceOrderContentPortletInstanceConfiguration.exclude()) {
 			return _commerceOrderService.getUserCommerceOrdersCount(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				commerceOrderContentPortletInstanceConfiguration.orderStatus(),
+				commerceOrderContentPortletInstanceConfiguration.
+					orderStatuses(),
 				commerceOrderContentPortletInstanceConfiguration.exclude(),
 				filter.getKeywords());
 		}
 
 		return _commerceOrderService.getUserCommerceOrdersCount(
 			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-			commerceOrderContentPortletInstanceConfiguration.orderStatus(),
+			commerceOrderContentPortletInstanceConfiguration.orderStatuses(),
 			filter.getKeywords());
 	}
 
@@ -183,7 +184,8 @@ public class CommerceOrderClayTable
 		if (commerceOrderContentPortletInstanceConfiguration.exclude()) {
 			commerceOrders = _commerceOrderService.getUserCommerceOrders(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				commerceOrderContentPortletInstanceConfiguration.orderStatus(),
+				commerceOrderContentPortletInstanceConfiguration.
+					orderStatuses(),
 				commerceOrderContentPortletInstanceConfiguration.exclude(),
 				filter.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
@@ -191,7 +193,8 @@ public class CommerceOrderClayTable
 		else {
 			commerceOrders = _commerceOrderService.getUserCommerceOrders(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				commerceOrderContentPortletInstanceConfiguration.orderStatus(),
+				commerceOrderContentPortletInstanceConfiguration.
+					orderStatuses(),
 				filter.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
 		}
