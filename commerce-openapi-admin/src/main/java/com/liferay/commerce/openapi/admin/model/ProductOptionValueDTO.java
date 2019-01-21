@@ -41,7 +41,7 @@ public class ProductOptionValueDTO {
 		return _name;
 	}
 
-	public float getPriority() {
+	public double getPriority() {
 		return _priority;
 	}
 
@@ -61,7 +61,7 @@ public class ProductOptionValueDTO {
 		_name = name;
 	}
 
-	public void setPriority(float priority) {
+	public void setPriority(double priority) {
 		_priority = priority;
 	}
 
@@ -69,6 +69,6 @@ public class ProductOptionValueDTO {
 	private long _id;
 	private String _key;
 	private String _name;
-	private float _priority;
+	private double _priority;
 
 }
