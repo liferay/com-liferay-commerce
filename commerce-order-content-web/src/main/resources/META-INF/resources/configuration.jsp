@@ -18,6 +18,8 @@
 
 <%
 CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+int[] orderStatuses = commerceOrderContentDisplayContext.getConfigurationOrderStatuses();
 %>
 
 <liferay-portlet:actionURL portletConfiguration="<%= true %>" var="configurationActionURL" />
@@ -42,19 +44,15 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 						/>
 					</div>
 
-					<aui:select name="preferences--orderStatus--">
+					<%
+					for (int orderStatus : CommerceOrderConstants.ORDER_STATUSES) {
+					%>
 
-						<%
-						for (int orderStatus : CommerceOrderConstants.ORDER_STATUSES) {
-						%>
+						<aui:input checked="<%= ArrayUtil.contains(orderStatuses, orderStatus) %>" label="<%= CommerceOrderConstants.getOrderStatusLabel(orderStatus) %>" name="orderStatuses" type="checkbox" value="<%= orderStatus %>" />
 
-							<aui:option label="<%= CommerceOrderConstants.getOrderStatusLabel(orderStatus) %>" selected="<%= orderStatus == commerceOrderContentDisplayContext.getConfigurationOrderStatus() %>" value="<%= orderStatus %>" />
-
-						<%
-						}
-						%>
-
-					</aui:select>
+					<%
+					}
+					%>
 
 					<aui:input checked="<%= commerceOrderContentDisplayContext.getConfigurationExclude() %>" label="exclude" name="preferences--exclude--" type="toggle-switch" value="<%= commerceOrderContentDisplayContext.getConfigurationExclude() %>" />
 				</aui:fieldset>
