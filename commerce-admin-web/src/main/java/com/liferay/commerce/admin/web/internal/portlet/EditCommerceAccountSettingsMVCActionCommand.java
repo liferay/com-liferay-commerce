@@ -73,21 +73,15 @@ public class EditCommerceAccountSettingsMVCActionCommand
 
 			modifiableSettings.store();
 		}
-		catch (Exception e) {
-			if (e instanceof PrincipalException) {
-				hideDefaultErrorMessage(actionRequest);
-				hideDefaultSuccessMessage(actionRequest);
+		catch (PrincipalException pe) {
+			hideDefaultErrorMessage(actionRequest);
+			hideDefaultSuccessMessage(actionRequest);
 
-				SessionErrors.add(actionRequest, e.getClass());
+			SessionErrors.add(actionRequest, pe.getClass());
 
-				String redirect = ParamUtil.getString(
-					actionRequest, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-				sendRedirect(actionRequest, actionResponse, redirect);
-			}
-			else {
-				throw e;
-			}
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 	}
 

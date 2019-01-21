@@ -33,7 +33,7 @@ CommerceContext commerceContext = (CommerceContext)request.getAttribute(Commerce
 				for (int commerceSiteType : CommerceAccountConstants.SITE_TYPES) {
 				%>
 
-					<aui:option label="<%= StringUtil.toUpperCase(CommerceAccountConstants.getSiteTypeLabel(commerceSiteType)) %>" selected="<%= commerceSiteType == commerceContext.getCommerceSiteType() %>" value="<%= commerceSiteType %>" />
+					<aui:option label="<%= CommerceAccountConstants.getSiteTypeLabel(commerceSiteType) %>" selected="<%= commerceSiteType == commerceContext.getCommerceSiteType() %>" value="<%= commerceSiteType %>" />
 
 				<%
 				}
