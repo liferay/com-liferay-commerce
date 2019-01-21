@@ -238,7 +238,7 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrder fetchCommerceOrder(long commerceAccountId,
-		int orderStatus);
+		long groupId, int orderStatus);
 
 	/**
 	* Returns the commerce order with the matching external reference code and company.

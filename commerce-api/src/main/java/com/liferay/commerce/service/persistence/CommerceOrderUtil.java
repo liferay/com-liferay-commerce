@@ -1537,43 +1537,48 @@ public class CommerceOrderUtil {
 	}
 
 	/**
-	* Returns all the commerce orders where commerceAccountId = &#63; and orderStatus = &#63;.
+	* Returns all the commerce orders where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
 	*
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	* @return the matching commerce orders
 	*/
-	public static List<CommerceOrder> findByC_O(long commerceAccountId,
-		int orderStatus) {
-		return getPersistence().findByC_O(commerceAccountId, orderStatus);
+	public static List<CommerceOrder> findByC_G_O(long groupId,
+		long commerceAccountId, int orderStatus) {
+		return getPersistence()
+				   .findByC_G_O(groupId, commerceAccountId, orderStatus);
 	}
 
 	/**
-	* Returns a range of all the commerce orders where commerceAccountId = &#63; and orderStatus = &#63;.
+	* Returns a range of all the commerce orders where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	* @param start the lower bound of the range of commerce orders
 	* @param end the upper bound of the range of commerce orders (not inclusive)
 	* @return the range of matching commerce orders
 	*/
-	public static List<CommerceOrder> findByC_O(long commerceAccountId,
-		int orderStatus, int start, int end) {
+	public static List<CommerceOrder> findByC_G_O(long groupId,
+		long commerceAccountId, int orderStatus, int start, int end) {
 		return getPersistence()
-				   .findByC_O(commerceAccountId, orderStatus, start, end);
+				   .findByC_G_O(groupId, commerceAccountId, orderStatus, start,
+			end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce orders where commerceAccountId = &#63; and orderStatus = &#63;.
+	* Returns an ordered range of all the commerce orders where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	* @param start the lower bound of the range of commerce orders
@@ -1581,21 +1586,22 @@ public class CommerceOrderUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce orders
 	*/
-	public static List<CommerceOrder> findByC_O(long commerceAccountId,
-		int orderStatus, int start, int end,
+	public static List<CommerceOrder> findByC_G_O(long groupId,
+		long commerceAccountId, int orderStatus, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator) {
 		return getPersistence()
-				   .findByC_O(commerceAccountId, orderStatus, start, end,
-			orderByComparator);
+				   .findByC_G_O(groupId, commerceAccountId, orderStatus, start,
+			end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce orders where commerceAccountId = &#63; and orderStatus = &#63;.
+	* Returns an ordered range of all the commerce orders where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	* @param start the lower bound of the range of commerce orders
@@ -1604,117 +1610,131 @@ public class CommerceOrderUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce orders
 	*/
-	public static List<CommerceOrder> findByC_O(long commerceAccountId,
-		int orderStatus, int start, int end,
+	public static List<CommerceOrder> findByC_G_O(long groupId,
+		long commerceAccountId, int orderStatus, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByC_O(commerceAccountId, orderStatus, start, end,
-			orderByComparator, retrieveFromCache);
+				   .findByC_G_O(groupId, commerceAccountId, orderStatus, start,
+			end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce order in the ordered set where commerceAccountId = &#63; and orderStatus = &#63;.
+	* Returns the first commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
 	*
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce order
 	* @throws NoSuchOrderException if a matching commerce order could not be found
 	*/
-	public static CommerceOrder findByC_O_First(long commerceAccountId,
-		int orderStatus, OrderByComparator<CommerceOrder> orderByComparator)
+	public static CommerceOrder findByC_G_O_First(long groupId,
+		long commerceAccountId, int orderStatus,
+		OrderByComparator<CommerceOrder> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchOrderException {
 		return getPersistence()
-				   .findByC_O_First(commerceAccountId, orderStatus,
+				   .findByC_G_O_First(groupId, commerceAccountId, orderStatus,
 			orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce order in the ordered set where commerceAccountId = &#63; and orderStatus = &#63;.
+	* Returns the first commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
 	*
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	*/
-	public static CommerceOrder fetchByC_O_First(long commerceAccountId,
-		int orderStatus, OrderByComparator<CommerceOrder> orderByComparator) {
+	public static CommerceOrder fetchByC_G_O_First(long groupId,
+		long commerceAccountId, int orderStatus,
+		OrderByComparator<CommerceOrder> orderByComparator) {
 		return getPersistence()
-				   .fetchByC_O_First(commerceAccountId, orderStatus,
+				   .fetchByC_G_O_First(groupId, commerceAccountId, orderStatus,
 			orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce order in the ordered set where commerceAccountId = &#63; and orderStatus = &#63;.
+	* Returns the last commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
 	*
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce order
 	* @throws NoSuchOrderException if a matching commerce order could not be found
 	*/
-	public static CommerceOrder findByC_O_Last(long commerceAccountId,
-		int orderStatus, OrderByComparator<CommerceOrder> orderByComparator)
+	public static CommerceOrder findByC_G_O_Last(long groupId,
+		long commerceAccountId, int orderStatus,
+		OrderByComparator<CommerceOrder> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchOrderException {
 		return getPersistence()
-				   .findByC_O_Last(commerceAccountId, orderStatus,
+				   .findByC_G_O_Last(groupId, commerceAccountId, orderStatus,
 			orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce order in the ordered set where commerceAccountId = &#63; and orderStatus = &#63;.
+	* Returns the last commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
 	*
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	*/
-	public static CommerceOrder fetchByC_O_Last(long commerceAccountId,
-		int orderStatus, OrderByComparator<CommerceOrder> orderByComparator) {
+	public static CommerceOrder fetchByC_G_O_Last(long groupId,
+		long commerceAccountId, int orderStatus,
+		OrderByComparator<CommerceOrder> orderByComparator) {
 		return getPersistence()
-				   .fetchByC_O_Last(commerceAccountId, orderStatus,
+				   .fetchByC_G_O_Last(groupId, commerceAccountId, orderStatus,
 			orderByComparator);
 	}
 
 	/**
-	* Returns the commerce orders before and after the current commerce order in the ordered set where commerceAccountId = &#63; and orderStatus = &#63;.
+	* Returns the commerce orders before and after the current commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
 	*
 	* @param commerceOrderId the primary key of the current commerce order
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce order
 	* @throws NoSuchOrderException if a commerce order with the primary key could not be found
 	*/
-	public static CommerceOrder[] findByC_O_PrevAndNext(long commerceOrderId,
-		long commerceAccountId, int orderStatus,
-		OrderByComparator<CommerceOrder> orderByComparator)
+	public static CommerceOrder[] findByC_G_O_PrevAndNext(
+		long commerceOrderId, long groupId, long commerceAccountId,
+		int orderStatus, OrderByComparator<CommerceOrder> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchOrderException {
 		return getPersistence()
-				   .findByC_O_PrevAndNext(commerceOrderId, commerceAccountId,
-			orderStatus, orderByComparator);
+				   .findByC_G_O_PrevAndNext(commerceOrderId, groupId,
+			commerceAccountId, orderStatus, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce orders where commerceAccountId = &#63; and orderStatus = &#63; from the database.
+	* Removes all the commerce orders where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63; from the database.
 	*
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	*/
-	public static void removeByC_O(long commerceAccountId, int orderStatus) {
-		getPersistence().removeByC_O(commerceAccountId, orderStatus);
+	public static void removeByC_G_O(long groupId, long commerceAccountId,
+		int orderStatus) {
+		getPersistence().removeByC_G_O(groupId, commerceAccountId, orderStatus);
 	}
 
 	/**
-	* Returns the number of commerce orders where commerceAccountId = &#63; and orderStatus = &#63;.
+	* Returns the number of commerce orders where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
 	*
+	* @param groupId the group ID
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	* @return the number of matching commerce orders
 	*/
-	public static int countByC_O(long commerceAccountId, int orderStatus) {
-		return getPersistence().countByC_O(commerceAccountId, orderStatus);
+	public static int countByC_G_O(long groupId, long commerceAccountId,
+		int orderStatus) {
+		return getPersistence()
+				   .countByC_G_O(groupId, commerceAccountId, orderStatus);
 	}
 
 	/**

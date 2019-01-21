@@ -398,11 +398,11 @@ public class CommerceOrderPersistenceTest {
 	}
 
 	@Test
-	public void testCountByC_O() throws Exception {
-		_persistence.countByC_O(RandomTestUtil.nextLong(),
-			RandomTestUtil.nextInt());
+	public void testCountByC_G_O() throws Exception {
+		_persistence.countByC_G_O(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
-		_persistence.countByC_O(0L, 0);
+		_persistence.countByC_G_O(0L, 0L, 0);
 	}
 
 	@Test
