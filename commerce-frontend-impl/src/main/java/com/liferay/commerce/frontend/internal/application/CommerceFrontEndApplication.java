@@ -18,6 +18,7 @@ import com.liferay.commerce.frontend.internal.account.CommerceAccountResource;
 import com.liferay.commerce.frontend.internal.application.context.provider.PaginationContextProvider;
 import com.liferay.commerce.frontend.internal.application.context.provider.SortContextProvider;
 import com.liferay.commerce.frontend.internal.application.context.provider.ThemeDisplayContextProvider;
+import com.liferay.commerce.frontend.internal.cart.CommerceCartResource;
 import com.liferay.commerce.frontend.internal.data.provider.CommerceDataSetDataProviderResource;
 import com.liferay.commerce.frontend.internal.search.CommerceSearchResource;
 
@@ -48,6 +49,7 @@ public class CommerceFrontEndApplication extends Application {
 		Set<Object> singletons = new HashSet<>();
 
 		singletons.add(_commerceAccountResource);
+		singletons.add(_commerceCartResource);
 		singletons.add(_commerceDataSetDataProviderResource);
 		singletons.add(_commerceSearchResource);
 		singletons.add(_paginationContextProvider);
@@ -59,6 +61,9 @@ public class CommerceFrontEndApplication extends Application {
 
 	@Reference
 	private CommerceAccountResource _commerceAccountResource;
+
+	@Reference
+	private CommerceCartResource _commerceCartResource;
 
 	@Reference
 	private CommerceDataSetDataProviderResource
