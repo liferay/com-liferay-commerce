@@ -188,7 +188,7 @@ class Cart extends Component {
 
 	sendUpdateRequest(productId) {
 		return fetch(
-			this.cartAPI + '/' + productId,
+			this.cartAPI + '/cart-item/' + productId,
 			{
 				body: JSON.stringify(
 					{
@@ -198,23 +198,50 @@ class Cart extends Component {
 					}
 				),
 				headers: new Headers({'Content-Type': 'application/json'}),
-				method: 'POST'
+				method: 'PUT'
 			}
 		)
 			.then(response => response.json())
 			.then(
-				updatedCart => {
-					const updatedPrice = updatedCart.products.reduce(
-						(acc, el) => (el.id === productId ? el.price : acc),
-						null
-					);
-					this.removePendingOperation(productId);
-					this.setProductProperties(productId, {
-						isDeleteDisabled: false,
-						isUpdating: false,
-						price: updatedPrice
-					});
-					return this.summary = updatedCart.summary;
+				(jsonresponse) => {
+					if (jsonresponse.success) {
+						const updatedPrice = jsonresponse.products.reduce(
+							(acc, el) => (el.id === productId ? el.price : acc), null);
+						this.removePendingOperation(productId);
+						this.setProductProperties(productId, {
+							isDeleteDisabled: false,
+							isUpdating: false,
+							price: updatedPrice
+						});
+						return this.summary = jsonresponse.summary;
+					}
+					else if (jsonresponse.errorMessages) {
+						this.setProductProperties(productId, {
+							isDeleteDisabled: false,
+							isUpdating: false,
+							errorMessages: jsonresponse.errorMessages
+						});
+						this.removePendingOperation(productId);
+					}
+					else {
+						var validatorErrors = jsonresponse.validatorErrors;
+
+						if (validatorErrors) {
+							this.setProductProperties(productId, {
+								isDeleteDisabled: false,
+								isUpdating: false,
+								errorMessages: validatorErrors.map((item) => item.message)
+							});
+						}
+						else {
+							this.setProductProperties(productId, {
+								isDeleteDisabled: false,
+								isUpdating: false,
+								errorMessages: jsonresponse.error
+							});
+						}
+						this.removePendingOperation(productId);
+					}
 				}
 			)
 			.catch(
@@ -256,28 +283,46 @@ class Cart extends Component {
 		this.addPendingOperation(productId);
 
 		return fetch(
-			this.cartAPI + '/' + productId,
+			this.cartAPI + '/cart-item/' + productId,
 			{
 				method: 'DELETE'
 			}
 		)
 			.then(response => response.json())
 			.then(
-				updatedCart => {
-					this.removePendingOperation(productId);
-					this.setProductProperties(
-						productId,
-						{
-							isDeleteDisabled: false
-						}
-					);
+				(jsonresponse) => {
+					if (jsonresponse.success) {
+						this.removePendingOperation(productId);
+						this.setProductProperties(
+							productId,
+							{
+								isDeleteDisabled: false
+							}
+						);
 
-					this.summary = updatedCart.summary;
+						this.summary = jsonresponse.summary;
 
-					const productsToBeRemoved = this.subtractProducts(this.products, updatedCart.products);
-					productsToBeRemoved.forEach(element => {
-						this.deleteProduct(element.id);
-					});
+						const productsToBeRemoved = this.subtractProducts(this.products, jsonresponse.products);
+						productsToBeRemoved.forEach(element => {
+							this.deleteProduct(element.id);
+						});
+					}
+					else if (jsonresponse.errorMessages) {
+						this.setProductProperties(productId, {
+							isDeleteDisabled: false,
+							isUpdating: false,
+							errorMessages: jsonresponse.errorMessages
+						});
+						this.removePendingOperation(productId);
+					}
+					else {
+						this.setProductProperties(productId, {
+							isDeleteDisabled: false,
+							isUpdating: false,
+							errorMessages: jsonresponse.error
+						});
+						this.removePendingOperation(productId);
+					}
 				}
 			)
 			.catch(

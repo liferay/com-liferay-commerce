@@ -1,11 +1,10 @@
 'use strict';
-
 import template from './CartProduct.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
 import './Loader.es';
-import './Price.es';
+import '../price/Price.es';
 import '../quantity_selector/QuantitySelector.es';
 
 class CartProduct extends Component {
