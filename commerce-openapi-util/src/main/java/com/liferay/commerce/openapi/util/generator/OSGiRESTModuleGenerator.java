@@ -110,9 +110,8 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		String moduleRootPath = properties.getProperty("osgi.module.root.path");
 
 		if (StringUtils.isEmpty(moduleRootPath)) {
-			_logger.error("You must specify the generated module root path");
-
-			System.exit(-1);
+			throw new GeneratorException(
+				"The generated module root path must be specified");
 		}
 
 		_moduleOutputPath = String.format(
