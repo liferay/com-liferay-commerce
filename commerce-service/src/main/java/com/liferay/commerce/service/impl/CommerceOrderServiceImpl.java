@@ -317,21 +317,21 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public List<CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, int orderStatus, String keywords, int start,
-		int end) {
+		long groupId, long userId, int[] orderStatuses,
+		boolean excludeOrderStatus, String keywords, int start, int end) {
 
 		return commerceOrderLocalService.getUserCommerceOrders(
-			groupId, userId, orderStatus, keywords, start, end);
+			groupId, userId, orderStatuses, excludeOrderStatus, keywords, start,
+			end);
 	}
 
 	@Override
 	public List<CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, Integer orderStatus,
-		boolean excludeOrderStatus, String keywords, int start, int end) {
+		long groupId, long userId, int[] orderStatuses, String keywords,
+		int start, int end) {
 
 		return commerceOrderLocalService.getUserCommerceOrders(
-			groupId, userId, orderStatus, excludeOrderStatus, keywords, start,
-			end);
+			groupId, userId, orderStatuses, keywords, start, end);
 	}
 
 	@Override
@@ -344,19 +344,19 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public int getUserCommerceOrdersCount(
-		long groupId, long userId, int orderStatus, boolean excludeOrderStatus,
-		String keywords) {
+		long groupId, long userId, int[] orderStatuses,
+		boolean excludeOrderStatus, String keywords) {
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
-			groupId, userId, orderStatus, excludeOrderStatus, keywords);
+			groupId, userId, orderStatuses, excludeOrderStatus, keywords);
 	}
 
 	@Override
 	public int getUserCommerceOrdersCount(
-		long groupId, long userId, int orderStatus, String keywords) {
+		long groupId, long userId, int[] orderStatuses, String keywords) {
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
-			groupId, userId, orderStatus, keywords);
+			groupId, userId, orderStatuses, keywords);
 	}
 
 	@Override

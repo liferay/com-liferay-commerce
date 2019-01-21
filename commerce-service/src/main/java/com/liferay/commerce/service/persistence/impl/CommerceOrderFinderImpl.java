@@ -62,16 +62,16 @@ public class CommerceOrderFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$USER_ID$]", String.valueOf(userId));
 
-			Integer orderStatus = (Integer)queryDefinition.getAttribute(
-				"orderStatus");
+			int[] orderStatuses = (int[])queryDefinition.getAttribute(
+				"orderStatuses");
 
-			if (orderStatus != null) {
+			if (orderStatuses != null) {
 				boolean excludeOrderStatus =
 					(boolean)queryDefinition.getAttribute("excludeOrderStatus");
 
 				sql = StringUtil.replace(
 					sql, "[$ORDER_STATUS$]",
-					_getOrderStatusClause(orderStatus, excludeOrderStatus));
+					getOrderStatusClause(orderStatuses, excludeOrderStatus));
 			}
 			else {
 				sql = StringUtil.replace(
@@ -168,16 +168,16 @@ public class CommerceOrderFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$USER_ID$]", String.valueOf(userId));
 
-			Integer orderStatus = (Integer)queryDefinition.getAttribute(
-				"orderStatus");
+			int[] orderStatuses = (int[])queryDefinition.getAttribute(
+				"orderStatuses");
 
-			if (orderStatus != null) {
+			if (orderStatuses != null) {
 				boolean excludeOrderStatus =
 					(boolean)queryDefinition.getAttribute("excludeOrderStatus");
 
 				sql = StringUtil.replace(
 					sql, "[$ORDER_STATUS$]",
-					_getOrderStatusClause(orderStatus, excludeOrderStatus));
+					getOrderStatusClause(orderStatuses, excludeOrderStatus));
 			}
 			else {
 				sql = StringUtil.replace(
@@ -216,6 +216,24 @@ public class CommerceOrderFinderImpl
 		}
 	}
 
+	protected String getOrderStatusClause(
+		int[] orderStatuses, boolean exclude) {
+
+		if ((orderStatuses == null) || (orderStatuses.length == 0)) {
+			return StringPool.BLANK;
+		}
+
+		String orderStatusClause =
+			"(CommerceOrder.orderStatus IN ([$ORDER_STATUS$])) AND";
+
+		if (exclude) {
+			orderStatusClause =
+				"(CommerceOrder.orderStatus NOT IN ([$ORDER_STATUS$])) AND";
+		}
+
+		return replaceOrderStatus(orderStatusClause, orderStatuses);
+	}
+
 	protected String replaceOrderStatus(String sql, int[] orderStatuses) {
 		StringBundler sb = new StringBundler(orderStatuses.length);
 
@@ -228,18 +246,6 @@ public class CommerceOrderFinderImpl
 		}
 
 		return StringUtil.replace(sql, "[$ORDER_STATUS$]", sb.toString());
-	}
-
-	private String _getOrderStatusClause(int orderStatus, boolean exclude) {
-		if (orderStatus < 0) {
-			return StringPool.BLANK;
-		}
-
-		if (exclude) {
-			return "(CommerceOrder.orderStatus != " + orderStatus + " ) AND";
-		}
-
-		return "(CommerceOrder.orderStatus = " + orderStatus + " ) AND";
 	}
 
 	@ServiceReference(type = CustomSQL.class)
