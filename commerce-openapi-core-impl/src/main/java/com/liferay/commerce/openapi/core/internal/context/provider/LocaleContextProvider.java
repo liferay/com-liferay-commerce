@@ -41,6 +41,15 @@ public class LocaleContextProvider implements ContextProvider<Locale> {
 
 	@Override
 	public Locale createContext(Message message) {
+		HttpServletRequest httpServletRequest =
+			(HttpServletRequest)message.getContextualProperty("HTTP.REQUEST");
+
+		Locale locale = httpServletRequest.getLocale();
+
+		if (locale.hashCode() > 0) {
+			return locale;
+		}
+
 		return _portal.getLocale(
 			(HttpServletRequest)message.getContextualProperty("HTTP.REQUEST"));
 	}
