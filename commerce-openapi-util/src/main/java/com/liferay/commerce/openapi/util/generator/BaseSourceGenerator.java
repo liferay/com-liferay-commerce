@@ -17,9 +17,11 @@ package com.liferay.commerce.openapi.util.generator;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +64,8 @@ public abstract class BaseSourceGenerator {
 		Class<?> clazz = getClass();
 
 		BufferedReader reader = new BufferedReader(
-			new InputStreamReader(clazz.getResourceAsStream(templateName)));
+			new InputStreamReader(
+				clazz.getResourceAsStream(templateName), "UTF-8"));
 
 		String line = null;
 
@@ -90,8 +93,8 @@ public abstract class BaseSourceGenerator {
 
 		File file = new File(fileName);
 
-		BufferedWriter bufferedWriter = new BufferedWriter(
-			new FileWriter(file));
+		BufferedWriter bufferedWriter = Files.newBufferedWriter(
+			file.toPath(), StandardCharsets.UTF_8);
 
 		try {
 			bufferedWriter.write(content.toCharArray());
