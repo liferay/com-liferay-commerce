@@ -58,35 +58,127 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 
 </liferay-ui:error>
 
-<div class="b2b-portlet-content-header">
-	<%-- <liferay-ui:icon
-		cssClass="header-back-to"
-		icon="order-arrow-down"
-		id="TabsBack"
-		label="<%= false %>"
-		markupView="lexicon"
-		message='<%= LanguageUtil.get(resourceBundle, "back") %>'
-		method="get"
-		url="<%= layout.getRegularURL(request) %>"
-	/> --%>
+<div class="minium-card">
+	<div class="minium-card__content">
+		<div class="row align-items-center">
+			<div class="col-md-3">
+				<div class="minium-order-title">
+					Bob's Sporting Mx
+				</div>
+			</div>
+			<div class="col-md-3">
+				<dl class="minium-list">
+					<dt>Subtotal:</dt>
+					<dd class="text-right"><%= HtmlUtil.escape(subtotal.format(locale)) %></dd>
+					<dt>Delivery:</dt>
+					<dd class="text-right"><%= HtmlUtil.escape(shippingValue.format(locale)) %></dd>
+					<dt>Tax:</dt>
+					<dd class="text-right"><%= HtmlUtil.escape(taxValue.format(locale)) %></dd>
+					<dt>Total:</dt>
+					<dd class="text-right"><%= HtmlUtil.escape(totalOrder.format(locale)) %></dd>
+				</dl>
+			</div>
+			<div class="col-md-3">
+				<dl class="minium-list">
+					<dt>Order notes</dt>
+					<dd>
+						<%
+							request.setAttribute("order_notes.jsp-showLabel", Boolean.TRUE);
+							request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
+						%>
 
-	<div class="align-items-center header-title-bar row">
-		<%-- <div class="autofit-col autofit-col-expand">
-			<liferay-ui:header
-				backURL="<%= backURL %>"
-				localizeTitle="<%= false %>"
-				showBackURL="<%= false %>"
-				title='<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>'
-			/>
-		</div> --%>
-
-		<div class="col">
-			<div class="minium-typo__section-title">
-				<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>
+						<liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" />
+					</dd>
+				</dl>
+			</div>
+			<div class="col-md-3 text-right">
+				<c:if test="<%= commerceOrder.isOpen() %>">
+					<liferay-commerce:order-transitions
+						commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
+						cssClass="minium-button"
+					/>
+				</c:if>
 			</div>
 		</div>
+	</div>
+	<div class="minium-card__content">
+		<div class="row align-items-center">
+			<div class="col-md-3">
+				<dl class="minium-list">
+					<dt>Account ID</dt>
+					<dd>XXXXXX</dd>
+				</dl>
+			</div>
+			<div class="col-md-3">
+				<dl class="minium-list">
+					<dt>Order ID</dt>
+					<dd><%= commerceOrder.getCommerceOrderId() %></dd>
+				</dl>
+			</div>
+			<div class="col-md-3">
+				<dl class="minium-list">
+					<dt>PO</dt>
+					<dd>XXXXXX</dd>
+				</dl>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+</div>
 
-		<div class="col-md-auto">
+<div class="row">
+	<div class="col-md-6">
+		<div class="minium-card">
+			<div class="minium-card__title">Billing address</div>
+			<div class="minium-card__content">
+				<div class="row">
+					<div class="col-md-8">
+						<dl class="minium-list">
+							<dt>Address</dt>
+							<dd>
+								<input type="text" class="minium-input">
+							</dd>
+						</dl>
+					</div>
+					<div class="col-md-4">
+						<div class="minium-button minium-button--outline minium-button--small">Add address</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="minium-card">
+			<div class="minium-card__title">Shipping address & date</div>
+			<div class="minium-card__content">
+				<div class="row">
+					<div class="col-md-8">
+						<dl class="minium-list">
+							<dt>Address</dt>
+							<dd>
+								<input type="text" class="minium-input">
+							</dd>
+						</dl>
+						<dl class="minium-list">
+							<dt>Request delivery date</dt>
+							<dd>
+								<input type="text" class="minium-input">
+							</dd>
+						</dl>
+					</div>
+					<div class="col-md-4">
+						<div class="minium-button minium-button--outline minium-button--small">Add address</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+		<%-- <div class="col-md-auto">
 			<liferay-ui:icon
 				icon="print"
 				iconCssClass="inline-item inline-item-before"
@@ -97,9 +189,9 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 				method="get"
 				url="javascript:window.print();"
 			/>
-		</div>
+		</div> --%>
 
-		<div class="col-md-auto">
+		<%-- <div class="col-md-auto">
 
 			<%
 			request.setAttribute("order_notes.jsp-showLabel", Boolean.TRUE);
@@ -107,15 +199,18 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 			%>
 
 			<liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" />
-		</div>
+		</div> --%>
 
+
+
+<div class="minium-thumb-menu">
 		<c:if test="<%= commerceOrder.isOpen() %>">
-			<div class="col-md-auto">
+			<%-- <div class="col-md-auto">
 				<liferay-commerce:order-transitions
 					commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
 					cssClass="minium-button minium-button--small"
 				/>
-			</div>
+			</div> --%>
 
 			<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
 				<div class="col-md-auto">
@@ -127,6 +222,11 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 						showWhenSingleIcon="<%= true %>"
 						triggerCssClass="component-action"
 					>
+						<liferay-ui:icon
+							message="print"
+							url='<%= "javascript:window.print();" %>'
+						/>
+
 						<liferay-ui:icon
 							message="edit"
 							url='<%= "javascript:" + renderResponse.getNamespace() + "editCommerceOrder();" %>'
@@ -146,13 +246,14 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 				</div>
 			</c:if>
 		</c:if>
-	</div>
 </div>
+
+
 
 <aui:form action="<%= editCommerceOrderActionURL %>" cssClass="order-details-container" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-
+<%-- 
 	<div class="order-details-header row">
 		<div class="col-3">
 			<div class="minium-card">
@@ -222,7 +323,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 				</div>
 			</div>
 		</c:if>
-	</div>
+	</div> --%>
 </aui:form>
 
 <commerce-ui:table
@@ -233,7 +334,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 	portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
 	tableName="commerceOrderItems"
 />
-
+<%-- 
 <aui:row>
 	<aui:col width="<%= 70 %>" />
 
@@ -352,7 +453,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 			</li>
 		</ul>
 	</aui:col>
-</aui:row>
+</aui:row> --%>
 
 <liferay-portlet:renderURL var="editCommerceOrderDetailsURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 	<liferay-portlet:param name="mvcRenderCommandName" value="editCommerceOrderDetails" />
