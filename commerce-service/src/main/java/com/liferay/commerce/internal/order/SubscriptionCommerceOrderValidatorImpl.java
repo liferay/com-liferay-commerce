@@ -74,7 +74,15 @@ public class SubscriptionCommerceOrderValidatorImpl
 		CommerceOrderItem commerceOrderItem = commerceOrderItems.get(0);
 
 		if (commerceOrderItem.isSubscription() &&
-			(cpSubscriptionInfo == null)) {
+			(cpSubscriptionInfo != null)) {
+
+			return new CommerceOrderValidatorResult(
+				commerceOrderItem.getCommerceOrderItemId(), false,
+				_getLocalizedMessage(
+					locale, "only-one-subscription-per-order"));
+		}
+		else if (commerceOrderItem.isSubscription() &&
+				 (cpSubscriptionInfo == null)) {
 
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
