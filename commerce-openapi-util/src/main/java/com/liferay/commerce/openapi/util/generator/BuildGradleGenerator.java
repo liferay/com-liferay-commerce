@@ -59,10 +59,10 @@ public class BuildGradleGenerator extends BaseSourceGenerator {
 			runtimeDependenciesSb.append("\n");
 		}
 
-		buildGradleTemplate.replace(
+		buildGradleTemplate = buildGradleTemplate.replace(
 			"${COMPILE_ONLY_DEPENDENCIES}",
 			compileOnlyDependenciesSb.toString());
-		buildGradleTemplate.replace(
+		buildGradleTemplate = buildGradleTemplate.replace(
 			"${RUNTIME_DEPENDENCIES}", runtimeDependenciesSb.toString());
 
 		writeSource(buildGradleTemplate, gradleSourcePath);
