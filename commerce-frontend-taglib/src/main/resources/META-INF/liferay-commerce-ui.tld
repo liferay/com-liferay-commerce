@@ -28,6 +28,17 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>add-address-modal</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.AddAddressModalTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>componentId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>add-organizations-modal</name>
 		<tag-class>
 			com.liferay.commerce.frontend.taglib.servlet.taglib.AddOrganizationsModalTag</tag-class>
