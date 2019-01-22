@@ -51,7 +51,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
@@ -312,8 +311,7 @@ public class CommercePriceListDisplayContext
 			commercePriceListUserSegmentEntryRels.stream();
 
 		return stream.mapToLong(
-			CommercePriceListUserSegmentEntryRel::
-				getCommerceUserSegmentEntryId
+			CommercePriceListUserSegmentEntryRel::getCommerceUserSegmentEntryId
 		).toArray();
 	}
 
