@@ -238,6 +238,20 @@ public class ResourceGenerator extends BaseSourceGenerator {
 				_getContextParametersDeclaration(method, annotateParameter));
 		}
 
+		if (!method.hasPaginationContextExtension()) {
+			ComponentDefinition schemaComponentDefinition =
+				_getSchemaComponentDefinition(method, componentDefinitions);
+
+			if (schemaComponentDefinition.isArray()) {
+				if (!parameters.isEmpty()) {
+					sb.append(", ");
+				}
+
+				sb.append(
+					_getPagingContextParametersDeclaration(annotateParameter));
+			}
+		}
+
 		sb.append(") throws Exception");
 
 		return sb.toString();
@@ -269,6 +283,22 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		sb.append("\"");
 
 		return sb.toString();
+	}
+
+	private String _getPagingContextParametersDeclaration(
+		boolean annotateParameter) {
+
+		Extension.ExtensionType paginationContextExtension =
+			Extension.ExtensionType.PAGINATION_CONTEXT;
+
+		Extension.Provider provider = paginationContextExtension.getProvider();
+
+		if (annotateParameter) {
+			return _parameterGenerator.toAnnotatedMethodContextParameter(
+				provider.getModelName());
+		}
+
+		return _parameterGenerator.toMethodParameter(provider.getModelName());
 	}
 
 	private String _getProducesAnnotation(List<Response> responses) {
