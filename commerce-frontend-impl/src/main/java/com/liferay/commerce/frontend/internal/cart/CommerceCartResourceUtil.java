@@ -26,7 +26,6 @@ import com.liferay.commerce.frontend.internal.cart.model.Summary;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.order.CommerceOrderValidator;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.price.CommerceOrderPrice;
@@ -37,17 +36,13 @@ import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -80,22 +75,15 @@ public class CommerceCartResourceUtil {
 
 		String[] errorMessages = new String[0];
 
-		List<CommerceOrderValidator> commerceOrderValidators =
-			_commerceOrderValidatorRegistry.getCommerceOrderValidators();
+		List<CommerceOrderValidatorResult> commerceOrderValidatorResults =
+			_commerceOrderValidatorRegistry.validate(locale, commerceOrderItem);
 
-		for (CommerceOrderValidator commerceOrderValidator :
-				commerceOrderValidators) {
+		for (CommerceOrderValidatorResult commerceOrderValidatorResult :
+				commerceOrderValidatorResults) {
 
-			CommerceOrderValidatorResult commerceOrderValidatorResult =
-				commerceOrderValidator.validate(locale, commerceOrderItem);
-
-			if (!commerceOrderValidatorResult.isValid() &&
-				commerceOrderValidatorResult.hasMessageResult()) {
-
-				errorMessages = ArrayUtil.append(
-					errorMessages,
-					commerceOrderValidatorResult.getLocalizedMessage());
-			}
+			errorMessages = ArrayUtil.append(
+				errorMessages,
+				commerceOrderValidatorResult.getLocalizedMessage());
 		}
 
 		return errorMessages;
@@ -195,19 +183,11 @@ public class CommerceCartResourceUtil {
 			minQuantity = cpDefinitionInventory.getMinOrderQuantity();
 			multipleQuantity = cpDefinitionInventory.getMultipleOrderQuantity();
 
-			String allowedOrderQuantities =
-				cpDefinitionInventory.getAllowedOrderQuantities();
+			int[] allowedOrderQuantities =
+				cpDefinitionInventory.getAllowedOrderQuantitiesArray();
 
-			if (Validator.isNotNull(allowedOrderQuantities)) {
-				allowedOrderQuantities = allowedOrderQuantities.replaceAll(
-					" *(, *)|(\\. *)|( +)", StringPool.COMMA);
-
-				int[] allowedQuantities = StringUtil.split(
-					allowedOrderQuantities, 0);
-
-				Arrays.sort(allowedQuantities);
-
-				settings.setAllowedQuantities(allowedQuantities);
+			if (allowedOrderQuantities.length > 0) {
+				settings.setAllowedQuantities(allowedOrderQuantities);
 			}
 		}
 

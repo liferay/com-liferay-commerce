@@ -190,9 +190,7 @@ public class CommerceOrderValidatorRegistryImpl
 				commerceOrderValidator.validate(
 					locale, commerceOrder, cpInstance, quantity);
 
-			if (!commerceOrderValidatorResult.isValid() &&
-				commerceOrderValidatorResult.hasMessageResult()) {
-
+			if (!commerceOrderValidatorResult.isValid()) {
 				commerceOrderValidatorResults.add(commerceOrderValidatorResult);
 			}
 		}
