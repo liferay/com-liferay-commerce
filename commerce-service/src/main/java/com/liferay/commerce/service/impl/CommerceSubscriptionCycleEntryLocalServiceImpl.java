@@ -57,10 +57,10 @@ public class CommerceSubscriptionCycleEntryLocalServiceImpl
 			commerceSubscriptionEntry.getUserId());
 		commerceSubscriptionCycleEntry.setUserName(
 			commerceSubscriptionEntry.getUserName());
-		commerceSubscriptionCycleEntry.setCommerceSubscriptionEntryId(
-			commerceSubscriptionEntryId);
 		commerceSubscriptionCycleEntry.setCommerceOrderItemId(
 			commerceOrderItemId);
+		commerceSubscriptionCycleEntry.setCommerceSubscriptionEntryId(
+			commerceSubscriptionEntryId);
 		commerceSubscriptionCycleEntry.setRenew(renew);
 
 		commerceSubscriptionCycleEntryPersistence.update(

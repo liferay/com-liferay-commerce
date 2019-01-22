@@ -71,6 +71,14 @@ public class SubscriptionInfoCPContentContributor
 		return jsonObject;
 	}
 
+	private String _getPeriodKey(long count, String period) {
+		if (count != 1) {
+			return StringUtil.toLowerCase(period) + CharPool.LOWER_CASE_S;
+		}
+
+		return period;
+	}
+
 	private String _getSubscriptionInfo(
 		CPSubscriptionInfo cpSubscriptionInfo,
 		HttpServletRequest httpServletRequest) {
@@ -127,14 +135,6 @@ public class SubscriptionInfoCPContentContributor
 		}
 
 		return sb.toString();
-	}
-
-	private String _getPeriodKey(long count, String period) {
-		if (count != 1) {
-			return StringUtil.toLowerCase(period) + CharPool.LOWER_CASE_S;
-		}
-
-		return period;
 	}
 
 	@Reference

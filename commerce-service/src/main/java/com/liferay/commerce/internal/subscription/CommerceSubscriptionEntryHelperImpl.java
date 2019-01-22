@@ -156,8 +156,8 @@ public class CommerceSubscriptionEntryHelperImpl
 		CommerceOrder newCommerceOrder =
 			_commerceOrderLocalService.addCommerceOrder(
 				oldCommerceOrder.getCommerceAccountId(),
-				oldCommerceOrder.getCommerceCurrencyId(),
-				0, oldCommerceOrder.getShippingAddressId(), null, 0, null,
+				oldCommerceOrder.getCommerceCurrencyId(), 0,
+				oldCommerceOrder.getShippingAddressId(), null, 0, null,
 				oldCommerceOrder.getPurchaseOrderNumber(), BigDecimal.ZERO,
 				BigDecimal.ZERO, BigDecimal.ZERO,
 				CommerceOrderConstants.PAYMENT_STATUS_PENDING,

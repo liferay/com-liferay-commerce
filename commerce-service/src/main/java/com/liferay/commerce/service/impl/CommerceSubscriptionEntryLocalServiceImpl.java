@@ -242,19 +242,6 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			subscriptionStatus,
 			commerceSubscriptionEntry.getSubscriptionStatus());
 
-		Date nextIterationDate;
-		Date startDate;
-
-		nextIterationDate = PortalUtil.getDate(
-			nextIterationDateMonth, nextIterationDateDay, nextIterationDateYear,
-			nextIterationDateHour, nextIterationDateMinute, user.getTimeZone(),
-			CommerceSubscriptionEntryNextIterationDateException.class);
-
-		startDate = PortalUtil.getDate(
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, user.getTimeZone(),
-			CommerceSubscriptionEntryStartDateException.class);
-
 		commerceSubscriptionEntry.setSubscriptionLength(subscriptionLength);
 		commerceSubscriptionEntry.setSubscriptionType(subscriptionType);
 		commerceSubscriptionEntry.setSubscriptionTypeSettingsProperties(
@@ -262,7 +249,19 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		commerceSubscriptionEntry.setMaxSubscriptionCycles(
 			maxSubscriptionCycles);
 		commerceSubscriptionEntry.setSubscriptionStatus(subscriptionStatus);
+
+		Date nextIterationDate = PortalUtil.getDate(
+			nextIterationDateMonth, nextIterationDateDay, nextIterationDateYear,
+			nextIterationDateHour, nextIterationDateMinute, user.getTimeZone(),
+			CommerceSubscriptionEntryNextIterationDateException.class);
+
 		commerceSubscriptionEntry.setNextIterationDate(nextIterationDate);
+
+		Date startDate = PortalUtil.getDate(
+			startDateMonth, startDateDay, startDateYear, startDateHour,
+			startDateMinute, user.getTimeZone(),
+			CommerceSubscriptionEntryStartDateException.class);
+
 		commerceSubscriptionEntry.setStartDate(startDate);
 
 		return commerceSubscriptionEntryPersistence.update(
@@ -332,10 +331,6 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		SearchContext searchContext = new SearchContext();
 
-		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
-
-		params.put("keywords", keywords);
-
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(Field.ENTRY_CLASS_PK, keywords);
@@ -354,6 +349,10 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 				CommerceSubscriptionEntryIndexer.FIELD_SUBSCRIPTION_STATUS,
 				subscriptionStatus);
 		}
+
+		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
+
+		params.put("keywords", keywords);
 
 		attributes.put("params", params);
 

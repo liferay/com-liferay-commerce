@@ -60,7 +60,7 @@ public class SubscriptionInfoTag extends IncludeTag {
 				return SKIP_BODY;
 			}
 
-			String subscriptionType;
+			String subscriptionType = null;
 
 			if (commerceSubscriptionCycleEntry != null) {
 				CommerceSubscriptionEntry commerceSubscriptionEntry =
@@ -92,14 +92,14 @@ public class SubscriptionInfoTag extends IncludeTag {
 				subscriptionType = cpSubscriptionInfo.getSubscriptionType();
 			}
 
+			String period = StringPool.BLANK;
+
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 			CPSubscriptionType cpSubscriptionType =
 				cpSubscriptionTypeRegistry.getCPSubscriptionType(
 					subscriptionType);
-
-			String period = StringPool.BLANK;
 
 			if (cpSubscriptionType != null) {
 				period = cpSubscriptionType.getLabel(themeDisplay.getLocale());
@@ -150,8 +150,8 @@ public class SubscriptionInfoTag extends IncludeTag {
 		_duration = 0;
 		_durationPeriodKey = null;
 		_length = 0;
-		_subscriptionPeriodKey = null;
 		_showDuration = true;
+		_subscriptionPeriodKey = null;
 	}
 
 	@Override
@@ -169,10 +169,10 @@ public class SubscriptionInfoTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-commerce:subscription-info:length", _length);
 		request.setAttribute(
+			"liferay-commerce:subscription-info:showDuration", _showDuration);
+		request.setAttribute(
 			"liferay-commerce:subscription-info:subscriptionPeriodKey",
 			_subscriptionPeriodKey);
-		request.setAttribute(
-			"liferay-commerce:subscription-info:showDuration", _showDuration);
 	}
 
 	protected CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry;
