@@ -27,7 +27,7 @@
 	{/let}
 
 	{let $body kind="html"}
-		<div class="commerce-modal add-new-address-address-modal">
+		<div class="add-new-address-address-modal commerce-modal">
 			<div class="commerce-modal__header">
 				<h3 class="commerce-modal__title">
 					Add new address to this account
@@ -59,6 +59,7 @@
 								{param _handleInputKeyUp: $_handleInputBox /}
 							{/call}
 						</div>
+
 						<div class="col-6">
 							{call CommerceInputText.render}
 								{param contextName: 'add-new-address' /}
@@ -71,22 +72,25 @@
 								{param _handleInputKeyUp: $_handleInputBox /}
 							{/call}
 						</div>
+
 						<div class="col-6">
-							<label 
+							<label
 								for="add-new-address-state"
 								class="commerce-modal__label"
 							>
 								State
 							</label>
-							<input 
+
+							<input
 								type="text"
 								id="add-new-address-state"
 								name="state"
 								class="commerce-modal__input commerce-modal__input--with-margin"
 								required
-								data-onkeyup="{$_handleInputBox}" 
+								data-onkeyup="{$_handleInputBox}"
 							>
 						</div>
+
 						<div class="col-6">
 							{call CommerceInputText.render}
 								{param contextName: 'add-new-address' /}
@@ -99,23 +103,26 @@
 								{param _handleInputKeyUp: $_handleInputBox /}
 							{/call}
 						</div>
+
 						<div class="col-6">
-							<label 
+							<label
 								for="add-new-address-country"
 								class="commerce-modal__label"
 							>
 								Country
 							</label>
-							<input 
+
+							<select
 								type="text"
-								id="add-new-address-country"
-								name="country"
+								id="commerceCountry"
+								name="commerceCountry"
 								class="commerce-modal__input commerce-modal__input--with-margin"
-								pattern="[A-Za-z0-9]{lb}1,20{rb}"
 								required
-								data-onkeyup="{$_handleInputBox}" 
+								data-onkeyup="{$_handleInputBox}"
 							>
+							</select>
 						</div>
+
 						<div class="col-12">
 							{let $nextButtonClasses kind="text"}
 								minium-button minium-button--big minium-button--icon
@@ -148,6 +155,7 @@
 								{param _handleInputKeyUp: $_handleInputBox /}
 							{/call}
 						</div>
+
 						<div class="col-12">
 							{call CommerceInputText.render}
 								{param contextName: 'add-new-address' /}
@@ -159,6 +167,7 @@
 								{param _handleInputKeyUp: $_handleInputBox /}
 							{/call}
 						</div>
+
 						<div class="col-12">
 							{call CommerceInputText.render}
 								{param contextName: 'add-new-address' /}
@@ -170,6 +179,7 @@
 								{param _handleInputKeyUp: $_handleInputBox /}
 							{/call}
 						</div>
+
 						<div class="col-12">
 							{let $addButtonClasses kind="text"}
 								minium-button minium-button--big
@@ -202,11 +212,11 @@
 			{/let}
 
 			<div class="commerce-dot-navigation">
-				<button 
+				<button
 					class="{$firstDotClasses}"
 					data-onclick="{$_handleFirstDotClick}"
 				></button>
-				<button 
+				<button
 					class="{$secondDotClasses}"
 					data-onclick="{$_handleSecondDotClick}"
 				></button>
