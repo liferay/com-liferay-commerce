@@ -19,8 +19,6 @@ import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.Consumes;
@@ -45,9 +43,7 @@ public interface PriceEntryResource {
 	@DELETE
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deletePriceEntry(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
+	public Response deletePriceEntry(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
@@ -55,17 +51,14 @@ public interface PriceEntryResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceEntryDTO> getPriceEntries(
-			@QueryParam("groupId") long groupId, @Context Locale locale,
-			@Context Pagination pagination)
+			@QueryParam("groupId") long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public PriceEntryDTO getPriceEntry(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
+	public PriceEntryDTO getPriceEntry(@PathParam("id") String id)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -73,8 +66,7 @@ public interface PriceEntryResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceEntry(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			PriceEntryDTO priceEntryDTO, @Context Locale locale)
+			@PathParam("id") String id, PriceEntryDTO priceEntryDTO)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -83,8 +75,7 @@ public interface PriceEntryResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceEntryDTO upsertPriceEntry(
-			@QueryParam("groupId") long groupId, PriceEntryDTO priceEntryDTO,
-			@Context Locale locale)
+			@QueryParam("groupId") long groupId, PriceEntryDTO priceEntryDTO)
 		throws Exception;
 
 }
