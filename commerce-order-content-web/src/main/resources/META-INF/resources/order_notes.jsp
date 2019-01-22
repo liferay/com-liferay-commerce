@@ -55,6 +55,7 @@ else {
 <portlet:renderURL var="editCommerceOrderNotesURL">
 	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderNotes" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
+	<portlet:param name='<%= PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL" %>' value="<%= currentURL %>" />
 	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
 </portlet:renderURL>
 
