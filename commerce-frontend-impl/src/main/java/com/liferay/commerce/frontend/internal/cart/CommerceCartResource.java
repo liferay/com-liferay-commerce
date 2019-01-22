@@ -76,7 +76,7 @@ public class CommerceCartResource {
 		@PathParam("id") long commerceOrderItemId,
 		@Context HttpServletRequest httpServletRequest) {
 
-		Cart cart;
+		Cart cart = null;
 
 		try {
 			CommerceOrderItem commerceOrderItem =
@@ -132,7 +132,7 @@ public class CommerceCartResource {
 		CartItemUpdate cartItemUpdate,
 		@Context HttpServletRequest httpServletRequest) {
 
-		Cart cart;
+		Cart cart = null;
 
 		try {
 			CommerceOrderItem commerceOrderItem =
@@ -194,7 +194,7 @@ public class CommerceCartResource {
 		@PathParam("orderId") long commerceOrderId,
 		@Context HttpServletRequest httpServletRequest) {
 
-		Cart cart;
+		Cart cart = null;
 
 		try {
 			CommerceOrder commerceOrder =
@@ -246,7 +246,7 @@ public class CommerceCartResource {
 		@FormParam("orderId") long orderId,
 		@Context HttpServletRequest httpServletRequest) {
 
-		Cart cart;
+		Cart cart = null;
 
 		try {
 			String couponCode =
