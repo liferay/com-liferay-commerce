@@ -3,28 +3,38 @@
 {template .render}
 
 	{@param spritemap: string }
-	{@param? stage: number }
-	{@param? formData: [
+	{@param? _stage: number }
+	{@param? _formData: [
 		address: string,
 		city: string,
-		state: string,
 		zipCode: string,
+		region: string,
 		country: string,
 		referent: string,
 		email: string,
 		telephone: string
 	]}
+	{@param? _countries: list<[
+		id: number,
+		name: string
+	]> }
+	{@param? _regions: list<[
+		id: number,
+		name: string
+	]> }
+	{@param? _isFirstFormValid: bool }
+	{@param? _isSecondFormValid: bool }
+	{@param? _addressType: string }
 	{@param? _isVisible: bool }
 	{@param? _handleInputBox: any }
+	{@param? _handleSelectBox: any }
 	{@param? _handleCloseModal: any }
-	{@param? _handleAddAddress: any }
+	{@param? _handleFormSubmit: any }
+	{@param? _handleCreateButton: any }
 	{@param? _handleNextButton: any }
+	{@param? _handleTypeChange: any }
 	{@param? _handleFirstDotClick: any }
 	{@param? _handleSecondDotClick: any }
-
-	{let $isNotEmptyPattern kind="text"}
-		[A-Za-z0-9]{lb}1,20{rb}
-	{/let}
 
 	{let $body kind="html"}
 		<div class="add-new-address-address-modal commerce-modal">
@@ -45,16 +55,58 @@
 			</div>
 
 			<div class="commerce-modal__content">
-				{if (isNonnull($stage) and $stage == 2) == false}
-					<form class="row" data-onsubmit="{$_handleNextButton}">
+				{if (isNonnull($_stage) and $_stage == 2) == false}
+					<form class="row" data-onsubmit="{$_handleNextButton}" ref="firstForm">
+						<div class="col-12">
+							<div class="row">
+								<div class="col-6">
+									<input 
+										id="add-address-type-shipping"
+										class="commerce-modal__radio commerce-modal__radio--with-margin"
+										type="radio"
+										name="add-address-type"
+										value="shipping" 
+										data-onchange="{$_handleTypeChange}"
+										{if (isNonnull($_addressType) and $_addressType == 'billing') == false}
+											checked
+										{/if}
+									/>
+									<label 
+										class="commerce-modal__label commerce-modal__label--radio"
+										for="add-address-type-shipping"
+									>
+										Shipping
+									</label>
+								</div>
+								<div class="col-6">
+									<input 
+										id="add-address-type-billing" 
+										class="commerce-modal__radio commerce-modal__radio--with-margin"
+										type="radio" 
+										name="add-address-type"
+										value="billing" 
+										data-onchange="{$_handleTypeChange}" 
+										{if isNonnull($_addressType) and $_addressType == 'billing'}
+											checked
+										{/if}
+									/>
+									<label 
+										class="commerce-modal__label commerce-modal__label--radio"
+										for="add-address-type-billing"
+									>
+										Billing
+									</label>
+								</div>					
+							</div>
+						</div>
+
 						<div class="col-12">
 							{call CommerceInputText.render}
 								{param contextName: 'add-new-address' /}
 								{param name: 'address' /}
 								{param label: 'Address' /}
-								{param value: $formData.address /}
+								{param value: $_formData.address /}
 								{param type: 'text' /}
-								{param pattern: $isNotEmptyPattern /}
 								{param required: true /}
 								{param _handleInputKeyUp: $_handleInputBox /}
 							{/call}
@@ -65,40 +117,8 @@
 								{param contextName: 'add-new-address' /}
 								{param name: 'city' /}
 								{param label: 'City' /}
-								{param value: $formData.city /}
+								{param value: $_formData.city /}
 								{param type: 'text' /}
-								{param pattern: $isNotEmptyPattern /}
-								{param required: true /}
-								{param _handleInputKeyUp: $_handleInputBox /}
-							{/call}
-						</div>
-
-						<div class="col-6">
-							<label
-								for="add-new-address-state"
-								class="commerce-modal__label"
-							>
-								State
-							</label>
-
-							<input
-								type="text"
-								id="add-new-address-state"
-								name="state"
-								class="commerce-modal__input commerce-modal__input--with-margin"
-								required
-								data-onkeyup="{$_handleInputBox}"
-							>
-						</div>
-
-						<div class="col-6">
-							{call CommerceInputText.render}
-								{param contextName: 'add-new-address' /}
-								{param name: 'zipCode' /}
-								{param label: 'Zip Code' /}
-								{param value: $formData.zipCode /}
-								{param type: 'text' /}
-								{param pattern: $isNotEmptyPattern /}
 								{param required: true /}
 								{param _handleInputKeyUp: $_handleInputBox /}
 							{/call}
@@ -113,19 +133,73 @@
 							</label>
 
 							<select
-								type="text"
 								id="commerceCountry"
 								name="commerceCountry"
-								class="commerce-modal__input commerce-modal__input--with-margin"
+								class="commerce-modal__select commerce-modal__select--with-margin"
 								required
-								data-onkeyup="{$_handleInputBox}"
+								data-onchange="{$_handleSelectBox}"
 							>
+								<option value=""></option>
+								{if isNonnull($_countries) and length($_countries) > 0}
+									{foreach $country in $_countries}
+										<option 
+											value="{$country.id}"
+											{if isNonnull($_formData) and isNonnull($_formData.country) and $_formData.country == $country.id}
+												{sp}selected
+											{/if}
+										>{$country.name}</option>
+									{/foreach}
+								{/if}
 							</select>
+						</div>
+
+						<div class="col-6">
+							<label
+								for="add-new-address-country"
+								class="commerce-modal__label"
+							>
+								Region
+							</label>
+
+							<select
+								id="commerceRegion"
+								name="commerceRegion"
+								class="commerce-modal__select commerce-modal__select--with-margin"
+								required
+								data-onchange="{$_handleSelectBox}"
+							>
+								<option value=""></option>
+								{if isNonnull($_regions) and length($_regions) > 0}
+									{foreach $region in $_regions}
+										<option 
+											value="{$region.id}"
+											{if isNonnull($_formData) and isNonnull($_formData.region) and $_formData.region == $region.id}
+												{sp}selected
+											{/if}
+										>{$region.name}</option>
+									{/foreach}
+								{/if}
+							</select>
+						</div>
+
+						<div class="col-6">
+							{call CommerceInputText.render}
+								{param contextName: 'add-new-address' /}
+								{param name: 'zipCode' /}
+								{param label: 'Zip Code' /}
+								{param value: $_formData.zipCode /}
+								{param type: 'text' /}
+								{param required: true /}
+								{param _handleInputKeyUp: $_handleInputBox /}
+							{/call}
 						</div>
 
 						<div class="col-12">
 							{let $nextButtonClasses kind="text"}
 								minium-button minium-button--big minium-button--icon
+								{if (isNonnull($_isFirstFormValid) and $_isFirstFormValid == true) == false}
+									{sp}minium-button--disabled
+								{/if}
 							{/let}
 							<div class="commerce-modal__actions justify-content-end">
 								<button
@@ -142,15 +216,14 @@
 						</div>
 					</form>
 				{else}
-					<form class="row" data-onsubmit="{$_handleAddAddress}">
+					<form class="row" data-onsubmit="{$_handleFormSubmit}" ref="secondForm">
 						<div class="col-12">
 							{call CommerceInputText.render}
 								{param contextName: 'add-new-address' /}
 								{param name: 'referent' /}
 								{param label: 'Referent' /}
-								{param value: $formData.referent /}
+								{param value: $_formData.referent /}
 								{param type: 'text' /}
-								{param pattern: $isNotEmptyPattern /}
 								{param required: true /}
 								{param _handleInputKeyUp: $_handleInputBox /}
 							{/call}
@@ -161,7 +234,7 @@
 								{param contextName: 'add-new-address' /}
 								{param name: 'email' /}
 								{param label: 'Email' /}
-								{param value: $formData.email /}
+								{param value: $_formData.email /}
 								{param type: 'email' /}
 								{param required: true /}
 								{param _handleInputKeyUp: $_handleInputBox /}
@@ -173,7 +246,7 @@
 								{param contextName: 'add-new-address' /}
 								{param name: 'telephone' /}
 								{param label: 'Telephone' /}
-								{param value: $formData.telephone /}
+								{param value: $_formData.telephone /}
 								{param type: 'tel' /}
 								{param required: true /}
 								{param _handleInputKeyUp: $_handleInputBox /}
@@ -183,12 +256,15 @@
 						<div class="col-12">
 							{let $addButtonClasses kind="text"}
 								minium-button minium-button--big
+								{if (isNonnull($_isSecondFormValid) and $_isSecondFormValid == true) == false}
+									{sp}minium-button--disabled
+								{/if}
 							{/let}
 							<div class="commerce-modal__actions">
 								<button
 									type="submit"
 									class="{$addButtonClasses}"
-									data-onclick="{$_handleAddAddress}"
+									data-onclick="{$_handleCreateButton}"
 								>
 									Create
 								</button>
@@ -200,14 +276,18 @@
 
 			{let $firstDotClasses kind="text"}
 				commerce-dot-navigation__dot
-				{if (isNonnull($stage) and $stage == 2) == false}
+				{if (isNonnull($_stage) and $_stage == 2) == false}
 					{sp}commerce-dot-navigation__dot--active
 				{/if}
 			{/let}
+
 			{let $secondDotClasses kind="text"}
 				commerce-dot-navigation__dot
-				{if isNonnull($stage) and $stage == 2}
+				{if isNonnull($_stage) and $_stage == 2}
 					{sp}commerce-dot-navigation__dot--active
+				{/if}
+				{if (isNonnull($_isFirstFormValid) and $_isFirstFormValid == true) == false}
+					{sp}commerce-dot-navigation__dot--disabled
 				{/if}
 			{/let}
 
@@ -215,10 +295,12 @@
 				<button
 					class="{$firstDotClasses}"
 					data-onclick="{$_handleFirstDotClick}"
+					data-index="1"
 				></button>
 				<button
 					class="{$secondDotClasses}"
 					data-onclick="{$_handleSecondDotClick}"
+					data-index="2"
 				></button>
 			</div>
 
@@ -230,6 +312,7 @@
 			{param body: $body /}
 			{param visible: $_isVisible /}
 			{param events: ['hide': $_handleCloseModal] /}
+			{param ref: 'modal' /}
 		{/call}
 	</div>
 

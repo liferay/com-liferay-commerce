@@ -128,7 +128,7 @@ public class AddressResource {
 		}
 
 		try {
-			String json = _OBJECT_MAPPER.writeValueAsString(commerceCountries);
+			String json = _OBJECT_MAPPER.writeValueAsString(countryModels);
 
 			return Response.ok(
 				json, MediaType.APPLICATION_JSON
