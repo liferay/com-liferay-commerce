@@ -33,12 +33,19 @@ public class AddAddressModalTag extends ComponentRendererTag {
 			WebKeys.THEME_DISPLAY);
 
 		putValue(
-			"countriesAPI",
-			PortalUtil.getPortalURL(request) + "/api/jsonws/commerce.commercecountry/get-billing-commerce-countries");
+			"shippingCountriesAPI",
+			PortalUtil.getPortalURL(request) +
+				"/o/commerce-ui/address/shipping-countries/");
+
+		putValue(
+			"billingCountriesAPI",
+			PortalUtil.getPortalURL(request) +
+				"/o/commerce-ui/address/billing-countries/");
 
 		putValue(
 			"regionsAPI",
-			PortalUtil.getPortalURL(request) + "/api/jsonws/commerce.commerceregion/get-commerce-regions");
+			PortalUtil.getPortalURL(request) +
+				"/o/commerce-ui/address/regions/");
 
 		putValue(
 			"spritemap",

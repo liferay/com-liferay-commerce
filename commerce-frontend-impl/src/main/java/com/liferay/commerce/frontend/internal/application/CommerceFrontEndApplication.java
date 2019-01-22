@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.internal.application;
 
 import com.liferay.commerce.frontend.internal.account.CommerceAccountResource;
+import com.liferay.commerce.frontend.internal.address.AddressResource;
 import com.liferay.commerce.frontend.internal.application.context.provider.PaginationContextProvider;
 import com.liferay.commerce.frontend.internal.application.context.provider.SortContextProvider;
 import com.liferay.commerce.frontend.internal.application.context.provider.ThemeDisplayContextProvider;
@@ -55,9 +56,13 @@ public class CommerceFrontEndApplication extends Application {
 		singletons.add(_paginationContextProvider);
 		singletons.add(_sortContextProvider);
 		singletons.add(_themeDisplayContextProvider);
+		singletons.add(_addressResource);
 
 		return singletons;
 	}
+
+	@Reference
+	private AddressResource _addressResource;
 
 	@Reference
 	private CommerceAccountResource _commerceAccountResource;

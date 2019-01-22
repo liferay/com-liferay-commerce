@@ -11,23 +11,23 @@ import '../input_utils/CommerceInputText';
 class AddAddressModal extends Component {
 
 
-	attached() {
-		// this._fetchCountries();
+	rendered() {
+		this._fetchCountries();
 	}
 
-	_handleFirstDotClick(){
+	_handleFirstDotClick() {
 		return this.stage = 1;
 	}
 
-	_handleSecondDotClick(){
+	_handleSecondDotClick() {
 		return this.stage = 2;
 	}
 
 	_handleNextButton(e) {
 		e.preventDefault();
 
-		if(this.noErrors) {
-			return this.stage = 2
+		if (this.noErrors) {
+			return this.stage = 2;
 		}
 	}
 
@@ -70,47 +70,60 @@ class AddAddressModal extends Component {
 			this.countriesAPI,
 			{
 				method: 'POST',
-				body: JSON.stringify({
-					groupId: themeDisplay.getScopeGroupId(),
-					billingAllowed: true,
-					active: true
-				}),
-				credentials: 'include'
-			}
-		)
-		.then(
-			response => response.json()
-		)
-		.then(
-			response => {
-				console.log(response)
-				this._isLoading = false;
-				return this.users = response.users;
-			}
-		);
-	}
-
-	_fetchRegions(countryId) {
-		return fetch(
-			this.countriesAPI,
-			{
-				method: 'POST',
 				body: {
 					commerceCountryId: countryId,
 					active: true
 				}
 			}
 		)
-		.then(
-			response => response.json()
-		)
-		.then(
-			response => {
-				console.log(response)
-				this._isLoading = false;
-				return this.users = response.users;
+			.then(
+				response => response.json()
+			)
+			.then(
+				response => {
+					console.log(response);
+					this._isLoading = false;
+					return this.users = response.users;
+				}
+			);
+	}
+
+	_fetchShipingCountries() {
+		return fetch(
+			this.shippingCountriesAPI + themeDisplay.getScopeGroupId(),
+			{
+				method: 'GET'
 			}
-		);
+		)
+			.then(
+				response => response.json()
+			)
+			.then(
+				response => {
+					console.log(response);
+					this._isLoading = false;
+					return this.users = response.users;
+				}
+			);
+	}
+
+	_fetchRegions(countryId) {
+		return fetch(
+			this.regionsAPI + countryId,
+			{
+				method: 'GET'
+			}
+		)
+			.then(
+				response => response.json()
+			)
+			.then(
+				response => {
+					console.log(response);
+					this._isLoading = false;
+					return this.users = response.users;
+				}
+			);
 	}
 
 	_handleAddAddress(e) {
@@ -169,7 +182,8 @@ AddAddressModal.STATE = {
 			telephone: ''
 		}
 	),
-	countriesAPI: Config.string().required(),
+	shippingCountriesAPI: Config.string().required(),
+	billingCountriesAPI: Config.string().required(),
 	regionsAPI: Config.string().required(),
 	countries: Config.array().value([]),
 	regions: Config.array().value([]),

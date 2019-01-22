@@ -29,7 +29,9 @@ public class AddToCartTag extends ComponentRendererTag {
 	public int doStartTag() {
 		putValue("productId", "ASD123456");
 
-		putValue("cartAPI", PortalUtil.getPortalURL(request) + "/o/cart-item");
+		putValue(
+			"cartAPI",
+			PortalUtil.getPortalURL(request) + "/o/commerce-ui/cart-item");
 
 		setTemplateNamespace("AddToCart.render");
 
