@@ -65,10 +65,9 @@ public class CommerceShippingMethodServiceWrapper
 
 	@Override
 	public void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId, long groupId)
+		long commerceAddressRestrictionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceShippingMethodService.deleteCommerceAddressRestriction(commerceAddressRestrictionId,
-			groupId);
+		_commerceShippingMethodService.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
 	}
 
 	@Override
@@ -80,19 +79,17 @@ public class CommerceShippingMethodServiceWrapper
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
 		long commerceShippingMethodId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
-		long groupId)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceShippingMethodService.getCommerceAddressRestrictions(commerceShippingMethodId,
-			start, end, orderByComparator, groupId);
+			start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceAddressRestrictionsCount(
-		long commerceShippingMethodId, long groupId)
+		long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingMethodService.getCommerceAddressRestrictionsCount(commerceShippingMethodId,
-			groupId);
+		return _commerceShippingMethodService.getCommerceAddressRestrictionsCount(commerceShippingMethodId);
 	}
 
 	@Override

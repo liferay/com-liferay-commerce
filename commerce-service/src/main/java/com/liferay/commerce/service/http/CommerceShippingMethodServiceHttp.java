@@ -163,8 +163,7 @@ public class CommerceShippingMethodServiceHttp {
 	}
 
 	public static void deleteCommerceAddressRestriction(
-		HttpPrincipal httpPrincipal, long commerceAddressRestrictionId,
-		long groupId)
+		HttpPrincipal httpPrincipal, long commerceAddressRestrictionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceShippingMethodServiceUtil.class,
@@ -172,7 +171,7 @@ public class CommerceShippingMethodServiceHttp {
 					_deleteCommerceAddressRestrictionParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAddressRestrictionId, groupId);
+					commerceAddressRestrictionId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -224,8 +223,7 @@ public class CommerceShippingMethodServiceHttp {
 	public static java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
 		HttpPrincipal httpPrincipal, long commerceShippingMethodId, int start,
 		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
-		long groupId)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceShippingMethodServiceUtil.class,
@@ -233,8 +231,7 @@ public class CommerceShippingMethodServiceHttp {
 					_getCommerceAddressRestrictionsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceShippingMethodId, start, end, orderByComparator,
-					groupId);
+					commerceShippingMethodId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -259,7 +256,7 @@ public class CommerceShippingMethodServiceHttp {
 	}
 
 	public static int getCommerceAddressRestrictionsCount(
-		HttpPrincipal httpPrincipal, long commerceShippingMethodId, long groupId)
+		HttpPrincipal httpPrincipal, long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceShippingMethodServiceUtil.class,
@@ -267,7 +264,7 @@ public class CommerceShippingMethodServiceHttp {
 					_getCommerceAddressRestrictionsCountParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceShippingMethodId, groupId);
+					commerceShippingMethodId);
 
 			Object returnObj = null;
 
@@ -506,16 +503,16 @@ public class CommerceShippingMethodServiceHttp {
 	private static final Class<?>[] _createCommerceShippingMethodParameterTypes2 =
 		new Class[] { long.class };
 	private static final Class<?>[] _deleteCommerceAddressRestrictionParameterTypes3 =
-		new Class[] { long.class, long.class };
+		new Class[] { long.class };
 	private static final Class<?>[] _deleteCommerceShippingMethodParameterTypes4 =
 		new Class[] { long.class };
 	private static final Class<?>[] _getCommerceAddressRestrictionsParameterTypes5 =
 		new Class[] {
 			long.class, int.class, int.class,
-			com.liferay.portal.kernel.util.OrderByComparator.class, long.class
+			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getCommerceAddressRestrictionsCountParameterTypes6 =
-		new Class[] { long.class, long.class };
+		new Class[] { long.class };
 	private static final Class<?>[] _getCommerceShippingMethodParameterTypes7 = new Class[] {
 			long.class
 		};

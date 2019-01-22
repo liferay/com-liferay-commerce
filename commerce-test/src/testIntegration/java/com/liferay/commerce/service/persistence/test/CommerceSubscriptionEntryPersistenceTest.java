@@ -248,10 +248,10 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountBysubscriptionStatus() throws Exception {
-		_persistence.countBysubscriptionStatus(RandomTestUtil.nextInt());
+	public void testCountBySubscriptionStatus() throws Exception {
+		_persistence.countBySubscriptionStatus(RandomTestUtil.nextInt());
 
-		_persistence.countBysubscriptionStatus(0);
+		_persistence.countBySubscriptionStatus(0);
 	}
 
 	@Test

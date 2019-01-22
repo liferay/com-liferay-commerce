@@ -2020,7 +2020,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 		new FinderPath(CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceSubscriptionEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBysubscriptionStatus",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBySubscriptionStatus",
 			new String[] {
 				Integer.class.getName(),
 				
@@ -2032,14 +2032,14 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceSubscriptionEntryImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findBysubscriptionStatus",
+			"findBySubscriptionStatus",
 			new String[] { Integer.class.getName() },
 			CommerceSubscriptionEntryModelImpl.SUBSCRIPTIONSTATUS_COLUMN_BITMASK |
 			CommerceSubscriptionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_SUBSCRIPTIONSTATUS = new FinderPath(CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countBysubscriptionStatus",
+			"countBySubscriptionStatus",
 			new String[] { Integer.class.getName() });
 
 	/**
@@ -2049,9 +2049,9 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @return the matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus) {
-		return findBysubscriptionStatus(subscriptionStatus, QueryUtil.ALL_POS,
+		return findBySubscriptionStatus(subscriptionStatus, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -2068,9 +2068,9 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @return the range of matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end) {
-		return findBysubscriptionStatus(subscriptionStatus, start, end, null);
+		return findBySubscriptionStatus(subscriptionStatus, start, end, null);
 	}
 
 	/**
@@ -2087,10 +2087,10 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
-		return findBysubscriptionStatus(subscriptionStatus, start, end,
+		return findBySubscriptionStatus(subscriptionStatus, start, end,
 			orderByComparator, true);
 	}
 
@@ -2109,7 +2109,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
 		boolean retrieveFromCache) {
@@ -2225,11 +2225,11 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry findBysubscriptionStatus_First(
+	public CommerceSubscriptionEntry findBySubscriptionStatus_First(
 		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException {
-		CommerceSubscriptionEntry commerceSubscriptionEntry = fetchBysubscriptionStatus_First(subscriptionStatus,
+		CommerceSubscriptionEntry commerceSubscriptionEntry = fetchBySubscriptionStatus_First(subscriptionStatus,
 				orderByComparator);
 
 		if (commerceSubscriptionEntry != null) {
@@ -2256,10 +2256,10 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry fetchBysubscriptionStatus_First(
+	public CommerceSubscriptionEntry fetchBySubscriptionStatus_First(
 		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
-		List<CommerceSubscriptionEntry> list = findBysubscriptionStatus(subscriptionStatus,
+		List<CommerceSubscriptionEntry> list = findBySubscriptionStatus(subscriptionStatus,
 				0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2278,11 +2278,11 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry findBysubscriptionStatus_Last(
+	public CommerceSubscriptionEntry findBySubscriptionStatus_Last(
 		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException {
-		CommerceSubscriptionEntry commerceSubscriptionEntry = fetchBysubscriptionStatus_Last(subscriptionStatus,
+		CommerceSubscriptionEntry commerceSubscriptionEntry = fetchBySubscriptionStatus_Last(subscriptionStatus,
 				orderByComparator);
 
 		if (commerceSubscriptionEntry != null) {
@@ -2309,16 +2309,16 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry fetchBysubscriptionStatus_Last(
+	public CommerceSubscriptionEntry fetchBySubscriptionStatus_Last(
 		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
-		int count = countBysubscriptionStatus(subscriptionStatus);
+		int count = countBySubscriptionStatus(subscriptionStatus);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceSubscriptionEntry> list = findBysubscriptionStatus(subscriptionStatus,
+		List<CommerceSubscriptionEntry> list = findBySubscriptionStatus(subscriptionStatus,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2338,7 +2338,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry[] findBysubscriptionStatus_PrevAndNext(
+	public CommerceSubscriptionEntry[] findBySubscriptionStatus_PrevAndNext(
 		long commerceSubscriptionEntryId, int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException {
@@ -2351,13 +2351,13 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 			CommerceSubscriptionEntry[] array = new CommerceSubscriptionEntryImpl[3];
 
-			array[0] = getBysubscriptionStatus_PrevAndNext(session,
+			array[0] = getBySubscriptionStatus_PrevAndNext(session,
 					commerceSubscriptionEntry, subscriptionStatus,
 					orderByComparator, true);
 
 			array[1] = commerceSubscriptionEntry;
 
-			array[2] = getBysubscriptionStatus_PrevAndNext(session,
+			array[2] = getBySubscriptionStatus_PrevAndNext(session,
 					commerceSubscriptionEntry, subscriptionStatus,
 					orderByComparator, false);
 
@@ -2371,7 +2371,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 		}
 	}
 
-	protected CommerceSubscriptionEntry getBysubscriptionStatus_PrevAndNext(
+	protected CommerceSubscriptionEntry getBySubscriptionStatus_PrevAndNext(
 		Session session, CommerceSubscriptionEntry commerceSubscriptionEntry,
 		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
@@ -2485,8 +2485,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @param subscriptionStatus the subscription status
 	 */
 	@Override
-	public void removeBysubscriptionStatus(int subscriptionStatus) {
-		for (CommerceSubscriptionEntry commerceSubscriptionEntry : findBysubscriptionStatus(
+	public void removeBySubscriptionStatus(int subscriptionStatus) {
+		for (CommerceSubscriptionEntry commerceSubscriptionEntry : findBySubscriptionStatus(
 				subscriptionStatus, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceSubscriptionEntry);
 		}
@@ -2499,7 +2499,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @return the number of matching commerce subscription entries
 	 */
 	@Override
-	public int countBysubscriptionStatus(int subscriptionStatus) {
+	public int countBySubscriptionStatus(int subscriptionStatus) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_SUBSCRIPTIONSTATUS;
 
 		Object[] finderArgs = new Object[] { subscriptionStatus };

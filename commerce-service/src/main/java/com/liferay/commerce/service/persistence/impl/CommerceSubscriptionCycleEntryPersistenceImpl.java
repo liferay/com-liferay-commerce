@@ -2027,543 +2027,6 @@ public class CommerceSubscriptionCycleEntryPersistenceImpl
 	}
 
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "commerceSubscriptionCycleEntry.groupId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCESUBSCRIPTIONENTRYID =
-		new FinderPath(CommerceSubscriptionCycleEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceSubscriptionCycleEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceSubscriptionCycleEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findBycommerceSubscriptionEntryId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESUBSCRIPTIONENTRYID =
-		new FinderPath(CommerceSubscriptionCycleEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceSubscriptionCycleEntryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceSubscriptionCycleEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findBycommerceSubscriptionEntryId",
-			new String[] { Long.class.getName() },
-			CommerceSubscriptionCycleEntryModelImpl.COMMERCESUBSCRIPTIONENTRYID_COLUMN_BITMASK |
-			CommerceSubscriptionCycleEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCESUBSCRIPTIONENTRYID =
-		new FinderPath(CommerceSubscriptionCycleEntryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceSubscriptionCycleEntryModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countBycommerceSubscriptionEntryId",
-			new String[] { Long.class.getName() });
-
-	/**
-	 * Returns all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 * @return the matching commerce subscription cycle entries
-	 */
-	@Override
-	public List<CommerceSubscriptionCycleEntry> findBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId) {
-		return findBycommerceSubscriptionEntryId(commerceSubscriptionEntryId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 * @param start the lower bound of the range of commerce subscription cycle entries
-	 * @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
-	 * @return the range of matching commerce subscription cycle entries
-	 */
-	@Override
-	public List<CommerceSubscriptionCycleEntry> findBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId, int start, int end) {
-		return findBycommerceSubscriptionEntryId(commerceSubscriptionEntryId,
-			start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 * @param start the lower bound of the range of commerce subscription cycle entries
-	 * @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce subscription cycle entries
-	 */
-	@Override
-	public List<CommerceSubscriptionCycleEntry> findBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId, int start, int end,
-		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator) {
-		return findBycommerceSubscriptionEntryId(commerceSubscriptionEntryId,
-			start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 * @param start the lower bound of the range of commerce subscription cycle entries
-	 * @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching commerce subscription cycle entries
-	 */
-	@Override
-	public List<CommerceSubscriptionCycleEntry> findBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId, int start, int end,
-		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESUBSCRIPTIONENTRYID;
-			finderArgs = new Object[] { commerceSubscriptionEntryId };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCESUBSCRIPTIONENTRYID;
-			finderArgs = new Object[] {
-					commerceSubscriptionEntryId,
-					
-					start, end, orderByComparator
-				};
-		}
-
-		List<CommerceSubscriptionCycleEntry> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceSubscriptionCycleEntry>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry : list) {
-					if ((commerceSubscriptionEntryId != commerceSubscriptionCycleEntry.getCommerceSubscriptionEntryId())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONCYCLEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_COMMERCESUBSCRIPTIONENTRYID_COMMERCESUBSCRIPTIONENTRYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(CommerceSubscriptionCycleEntryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(commerceSubscriptionEntryId);
-
-				if (!pagination) {
-					list = (List<CommerceSubscriptionCycleEntry>)QueryUtil.list(q,
-							getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceSubscriptionCycleEntry>)QueryUtil.list(q,
-							getDialect(), start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce subscription cycle entry
-	 * @throws NoSuchSubscriptionCycleEntryException if a matching commerce subscription cycle entry could not be found
-	 */
-	@Override
-	public CommerceSubscriptionCycleEntry findBycommerceSubscriptionEntryId_First(
-		long commerceSubscriptionEntryId,
-		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
-		throws NoSuchSubscriptionCycleEntryException {
-		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry = fetchBycommerceSubscriptionEntryId_First(commerceSubscriptionEntryId,
-				orderByComparator);
-
-		if (commerceSubscriptionCycleEntry != null) {
-			return commerceSubscriptionCycleEntry;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("commerceSubscriptionEntryId=");
-		msg.append(commerceSubscriptionEntryId);
-
-		msg.append("}");
-
-		throw new NoSuchSubscriptionCycleEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the first commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce subscription cycle entry, or <code>null</code> if a matching commerce subscription cycle entry could not be found
-	 */
-	@Override
-	public CommerceSubscriptionCycleEntry fetchBycommerceSubscriptionEntryId_First(
-		long commerceSubscriptionEntryId,
-		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator) {
-		List<CommerceSubscriptionCycleEntry> list = findBycommerceSubscriptionEntryId(commerceSubscriptionEntryId,
-				0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce subscription cycle entry
-	 * @throws NoSuchSubscriptionCycleEntryException if a matching commerce subscription cycle entry could not be found
-	 */
-	@Override
-	public CommerceSubscriptionCycleEntry findBycommerceSubscriptionEntryId_Last(
-		long commerceSubscriptionEntryId,
-		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
-		throws NoSuchSubscriptionCycleEntryException {
-		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry = fetchBycommerceSubscriptionEntryId_Last(commerceSubscriptionEntryId,
-				orderByComparator);
-
-		if (commerceSubscriptionCycleEntry != null) {
-			return commerceSubscriptionCycleEntry;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("commerceSubscriptionEntryId=");
-		msg.append(commerceSubscriptionEntryId);
-
-		msg.append("}");
-
-		throw new NoSuchSubscriptionCycleEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the last commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce subscription cycle entry, or <code>null</code> if a matching commerce subscription cycle entry could not be found
-	 */
-	@Override
-	public CommerceSubscriptionCycleEntry fetchBycommerceSubscriptionEntryId_Last(
-		long commerceSubscriptionEntryId,
-		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator) {
-		int count = countBycommerceSubscriptionEntryId(commerceSubscriptionEntryId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<CommerceSubscriptionCycleEntry> list = findBycommerceSubscriptionEntryId(commerceSubscriptionEntryId,
-				count - 1, count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the commerce subscription cycle entries before and after the current commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
-	 *
-	 * @param commerceSubscriptionCycleEntryId the primary key of the current commerce subscription cycle entry
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce subscription cycle entry
-	 * @throws NoSuchSubscriptionCycleEntryException if a commerce subscription cycle entry with the primary key could not be found
-	 */
-	@Override
-	public CommerceSubscriptionCycleEntry[] findBycommerceSubscriptionEntryId_PrevAndNext(
-		long commerceSubscriptionCycleEntryId,
-		long commerceSubscriptionEntryId,
-		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
-		throws NoSuchSubscriptionCycleEntryException {
-		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry = findByPrimaryKey(commerceSubscriptionCycleEntryId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CommerceSubscriptionCycleEntry[] array = new CommerceSubscriptionCycleEntryImpl[3];
-
-			array[0] = getBycommerceSubscriptionEntryId_PrevAndNext(session,
-					commerceSubscriptionCycleEntry,
-					commerceSubscriptionEntryId, orderByComparator, true);
-
-			array[1] = commerceSubscriptionCycleEntry;
-
-			array[2] = getBycommerceSubscriptionEntryId_PrevAndNext(session,
-					commerceSubscriptionCycleEntry,
-					commerceSubscriptionEntryId, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CommerceSubscriptionCycleEntry getBycommerceSubscriptionEntryId_PrevAndNext(
-		Session session,
-		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry,
-		long commerceSubscriptionEntryId,
-		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator,
-		boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONCYCLEENTRY_WHERE);
-
-		query.append(_FINDER_COLUMN_COMMERCESUBSCRIPTIONENTRYID_COMMERCESUBSCRIPTIONENTRYID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(CommerceSubscriptionCycleEntryModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(commerceSubscriptionEntryId);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceSubscriptionCycleEntry);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<CommerceSubscriptionCycleEntry> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63; from the database.
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 */
-	@Override
-	public void removeBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId) {
-		for (CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry : findBycommerceSubscriptionEntryId(
-				commerceSubscriptionEntryId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
-			remove(commerceSubscriptionCycleEntry);
-		}
-	}
-
-	/**
-	 * Returns the number of commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
-	 * @return the number of matching commerce subscription cycle entries
-	 */
-	@Override
-	public int countBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCESUBSCRIPTIONENTRYID;
-
-		Object[] finderArgs = new Object[] { commerceSubscriptionEntryId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_COMMERCESUBSCRIPTIONCYCLEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_COMMERCESUBSCRIPTIONENTRYID_COMMERCESUBSCRIPTIONENTRYID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(commerceSubscriptionEntryId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_COMMERCESUBSCRIPTIONENTRYID_COMMERCESUBSCRIPTIONENTRYID_2 =
-		"commerceSubscriptionCycleEntry.commerceSubscriptionEntryId = ?";
 	public static final FinderPath FINDER_PATH_FETCH_BY_COMMERCEORDERITEMID = new FinderPath(CommerceSubscriptionCycleEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceSubscriptionCycleEntryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceSubscriptionCycleEntryImpl.class, FINDER_CLASS_NAME_ENTITY,
@@ -2767,6 +2230,543 @@ public class CommerceSubscriptionCycleEntryPersistenceImpl
 
 	private static final String _FINDER_COLUMN_COMMERCEORDERITEMID_COMMERCEORDERITEMID_2 =
 		"commerceSubscriptionCycleEntry.commerceOrderItemId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCESUBSCRIPTIONENTRYID =
+		new FinderPath(CommerceSubscriptionCycleEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceSubscriptionCycleEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceSubscriptionCycleEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCommerceSubscriptionEntryId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESUBSCRIPTIONENTRYID =
+		new FinderPath(CommerceSubscriptionCycleEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceSubscriptionCycleEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceSubscriptionCycleEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommerceSubscriptionEntryId",
+			new String[] { Long.class.getName() },
+			CommerceSubscriptionCycleEntryModelImpl.COMMERCESUBSCRIPTIONENTRYID_COLUMN_BITMASK |
+			CommerceSubscriptionCycleEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCESUBSCRIPTIONENTRYID =
+		new FinderPath(CommerceSubscriptionCycleEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceSubscriptionCycleEntryModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceSubscriptionEntryId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 * @return the matching commerce subscription cycle entries
+	 */
+	@Override
+	public List<CommerceSubscriptionCycleEntry> findByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId) {
+		return findByCommerceSubscriptionEntryId(commerceSubscriptionEntryId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 * @param start the lower bound of the range of commerce subscription cycle entries
+	 * @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
+	 * @return the range of matching commerce subscription cycle entries
+	 */
+	@Override
+	public List<CommerceSubscriptionCycleEntry> findByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId, int start, int end) {
+		return findByCommerceSubscriptionEntryId(commerceSubscriptionEntryId,
+			start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 * @param start the lower bound of the range of commerce subscription cycle entries
+	 * @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce subscription cycle entries
+	 */
+	@Override
+	public List<CommerceSubscriptionCycleEntry> findByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId, int start, int end,
+		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator) {
+		return findByCommerceSubscriptionEntryId(commerceSubscriptionEntryId,
+			start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 * @param start the lower bound of the range of commerce subscription cycle entries
+	 * @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce subscription cycle entries
+	 */
+	@Override
+	public List<CommerceSubscriptionCycleEntry> findByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId, int start, int end,
+		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCESUBSCRIPTIONENTRYID;
+			finderArgs = new Object[] { commerceSubscriptionEntryId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCESUBSCRIPTIONENTRYID;
+			finderArgs = new Object[] {
+					commerceSubscriptionEntryId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<CommerceSubscriptionCycleEntry> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CommerceSubscriptionCycleEntry>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry : list) {
+					if ((commerceSubscriptionEntryId != commerceSubscriptionCycleEntry.getCommerceSubscriptionEntryId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONCYCLEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_COMMERCESUBSCRIPTIONENTRYID_COMMERCESUBSCRIPTIONENTRYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CommerceSubscriptionCycleEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceSubscriptionEntryId);
+
+				if (!pagination) {
+					list = (List<CommerceSubscriptionCycleEntry>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceSubscriptionCycleEntry>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce subscription cycle entry
+	 * @throws NoSuchSubscriptionCycleEntryException if a matching commerce subscription cycle entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionCycleEntry findByCommerceSubscriptionEntryId_First(
+		long commerceSubscriptionEntryId,
+		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
+		throws NoSuchSubscriptionCycleEntryException {
+		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry = fetchByCommerceSubscriptionEntryId_First(commerceSubscriptionEntryId,
+				orderByComparator);
+
+		if (commerceSubscriptionCycleEntry != null) {
+			return commerceSubscriptionCycleEntry;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceSubscriptionEntryId=");
+		msg.append(commerceSubscriptionEntryId);
+
+		msg.append("}");
+
+		throw new NoSuchSubscriptionCycleEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce subscription cycle entry, or <code>null</code> if a matching commerce subscription cycle entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionCycleEntry fetchByCommerceSubscriptionEntryId_First(
+		long commerceSubscriptionEntryId,
+		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator) {
+		List<CommerceSubscriptionCycleEntry> list = findByCommerceSubscriptionEntryId(commerceSubscriptionEntryId,
+				0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce subscription cycle entry
+	 * @throws NoSuchSubscriptionCycleEntryException if a matching commerce subscription cycle entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionCycleEntry findByCommerceSubscriptionEntryId_Last(
+		long commerceSubscriptionEntryId,
+		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
+		throws NoSuchSubscriptionCycleEntryException {
+		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry = fetchByCommerceSubscriptionEntryId_Last(commerceSubscriptionEntryId,
+				orderByComparator);
+
+		if (commerceSubscriptionCycleEntry != null) {
+			return commerceSubscriptionCycleEntry;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceSubscriptionEntryId=");
+		msg.append(commerceSubscriptionEntryId);
+
+		msg.append("}");
+
+		throw new NoSuchSubscriptionCycleEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce subscription cycle entry, or <code>null</code> if a matching commerce subscription cycle entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionCycleEntry fetchByCommerceSubscriptionEntryId_Last(
+		long commerceSubscriptionEntryId,
+		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator) {
+		int count = countByCommerceSubscriptionEntryId(commerceSubscriptionEntryId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceSubscriptionCycleEntry> list = findByCommerceSubscriptionEntryId(commerceSubscriptionEntryId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce subscription cycle entries before and after the current commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
+	 *
+	 * @param commerceSubscriptionCycleEntryId the primary key of the current commerce subscription cycle entry
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce subscription cycle entry
+	 * @throws NoSuchSubscriptionCycleEntryException if a commerce subscription cycle entry with the primary key could not be found
+	 */
+	@Override
+	public CommerceSubscriptionCycleEntry[] findByCommerceSubscriptionEntryId_PrevAndNext(
+		long commerceSubscriptionCycleEntryId,
+		long commerceSubscriptionEntryId,
+		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
+		throws NoSuchSubscriptionCycleEntryException {
+		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry = findByPrimaryKey(commerceSubscriptionCycleEntryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceSubscriptionCycleEntry[] array = new CommerceSubscriptionCycleEntryImpl[3];
+
+			array[0] = getByCommerceSubscriptionEntryId_PrevAndNext(session,
+					commerceSubscriptionCycleEntry,
+					commerceSubscriptionEntryId, orderByComparator, true);
+
+			array[1] = commerceSubscriptionCycleEntry;
+
+			array[2] = getByCommerceSubscriptionEntryId_PrevAndNext(session,
+					commerceSubscriptionCycleEntry,
+					commerceSubscriptionEntryId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceSubscriptionCycleEntry getByCommerceSubscriptionEntryId_PrevAndNext(
+		Session session,
+		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry,
+		long commerceSubscriptionEntryId,
+		OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONCYCLEENTRY_WHERE);
+
+		query.append(_FINDER_COLUMN_COMMERCESUBSCRIPTIONENTRYID_COMMERCESUBSCRIPTIONENTRYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceSubscriptionCycleEntryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(commerceSubscriptionEntryId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceSubscriptionCycleEntry);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceSubscriptionCycleEntry> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63; from the database.
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 */
+	@Override
+	public void removeByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId) {
+		for (CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry : findByCommerceSubscriptionEntryId(
+				commerceSubscriptionEntryId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(commerceSubscriptionCycleEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID
+	 * @return the number of matching commerce subscription cycle entries
+	 */
+	@Override
+	public int countByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCESUBSCRIPTIONENTRYID;
+
+		Object[] finderArgs = new Object[] { commerceSubscriptionEntryId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMMERCESUBSCRIPTIONCYCLEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_COMMERCESUBSCRIPTIONENTRYID_COMMERCESUBSCRIPTIONENTRYID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceSubscriptionEntryId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_COMMERCESUBSCRIPTIONENTRYID_COMMERCESUBSCRIPTIONENTRYID_2 =
+		"commerceSubscriptionCycleEntry.commerceSubscriptionEntryId = ?";
 
 	public CommerceSubscriptionCycleEntryPersistenceImpl() {
 		setModelClass(CommerceSubscriptionCycleEntry.class);

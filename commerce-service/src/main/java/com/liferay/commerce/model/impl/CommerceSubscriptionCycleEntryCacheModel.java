@@ -84,10 +84,10 @@ public class CommerceSubscriptionCycleEntryCacheModel implements CacheModel<Comm
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", commerceSubscriptionEntryId=");
-		sb.append(commerceSubscriptionEntryId);
 		sb.append(", commerceOrderItemId=");
 		sb.append(commerceOrderItemId);
+		sb.append(", commerceSubscriptionEntryId=");
+		sb.append(commerceSubscriptionEntryId);
 		sb.append(", renew=");
 		sb.append(renew);
 		sb.append("}");
@@ -134,8 +134,8 @@ public class CommerceSubscriptionCycleEntryCacheModel implements CacheModel<Comm
 					modifiedDate));
 		}
 
-		commerceSubscriptionCycleEntryImpl.setCommerceSubscriptionEntryId(commerceSubscriptionEntryId);
 		commerceSubscriptionCycleEntryImpl.setCommerceOrderItemId(commerceOrderItemId);
+		commerceSubscriptionCycleEntryImpl.setCommerceSubscriptionEntryId(commerceSubscriptionEntryId);
 		commerceSubscriptionCycleEntryImpl.setRenew(renew);
 
 		commerceSubscriptionCycleEntryImpl.resetOriginalValues();
@@ -158,9 +158,9 @@ public class CommerceSubscriptionCycleEntryCacheModel implements CacheModel<Comm
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		commerceSubscriptionEntryId = objectInput.readLong();
-
 		commerceOrderItemId = objectInput.readLong();
+
+		commerceSubscriptionEntryId = objectInput.readLong();
 
 		renew = objectInput.readBoolean();
 	}
@@ -193,9 +193,9 @@ public class CommerceSubscriptionCycleEntryCacheModel implements CacheModel<Comm
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(commerceSubscriptionEntryId);
-
 		objectOutput.writeLong(commerceOrderItemId);
+
+		objectOutput.writeLong(commerceSubscriptionEntryId);
 
 		objectOutput.writeBoolean(renew);
 	}
@@ -208,7 +208,7 @@ public class CommerceSubscriptionCycleEntryCacheModel implements CacheModel<Comm
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long commerceSubscriptionEntryId;
 	public long commerceOrderItemId;
+	public long commerceSubscriptionEntryId;
 	public boolean renew;
 }
