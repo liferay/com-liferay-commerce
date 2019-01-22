@@ -60,12 +60,13 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 
 <div class="minium-card">
 	<div class="minium-card__content">
-		<div class="row align-items-center">
+		<div class="align-items-center row">
 			<div class="col-md-3">
 				<div class="minium-order-title">
 					Bob's Sporting Mx
 				</div>
 			</div>
+
 			<div class="col-md-3">
 				<dl class="minium-list">
 					<dt>Subtotal:</dt>
@@ -78,10 +79,12 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 					<dd class="text-right"><%= HtmlUtil.escape(totalOrder.format(locale)) %></dd>
 				</dl>
 			</div>
+
 			<div class="col-md-3">
 				<dl class="minium-list">
 					<dt>Order notes</dt>
 					<dd>
+
 						<%
 							request.setAttribute("order_notes.jsp-showLabel", Boolean.TRUE);
 							request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
@@ -91,6 +94,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 					</dd>
 				</dl>
 			</div>
+
 			<div class="col-md-3 text-right">
 				<c:if test="<%= commerceOrder.isOpen() %>">
 					<liferay-commerce:order-transitions
@@ -101,26 +105,30 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 			</div>
 		</div>
 	</div>
+
 	<div class="minium-card__content">
-		<div class="row align-items-center">
+		<div class="align-items-center row">
 			<div class="col-md-3">
 				<dl class="minium-list">
 					<dt>Account ID</dt>
 					<dd>XXXXXX</dd>
 				</dl>
 			</div>
+
 			<div class="col-md-3">
 				<dl class="minium-list">
 					<dt>Order ID</dt>
 					<dd><%= commerceOrder.getCommerceOrderId() %></dd>
 				</dl>
 			</div>
+
 			<div class="col-md-3">
 				<dl class="minium-list">
 					<dt>PO</dt>
 					<dd>XXXXXX</dd>
 				</dl>
 			</div>
+
 			<div class="col-md-3"></div>
 		</div>
 	</div>
@@ -136,10 +144,11 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 						<dl class="minium-list">
 							<dt>Address</dt>
 							<dd>
-								<input type="text" class="minium-input">
+								<input class="minium-input" type="text">
 							</dd>
 						</dl>
 					</div>
+
 					<div class="col-md-4">
 						<div class="minium-button minium-button--outline minium-button--small">Add address</div>
 					</div>
@@ -147,6 +156,7 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 			</div>
 		</div>
 	</div>
+
 	<div class="col-md-6">
 		<div class="minium-card">
 			<div class="minium-card__title">Shipping address & date</div>
@@ -156,16 +166,18 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 						<dl class="minium-list">
 							<dt>Address</dt>
 							<dd>
-								<input type="text" class="minium-input">
+								<input class="minium-input" type="text">
 							</dd>
 						</dl>
+
 						<dl class="minium-list">
 							<dt>Request delivery date</dt>
 							<dd>
-								<input type="text" class="minium-input">
+								<input class="minium-input" type="text">
 							</dd>
 						</dl>
 					</div>
+
 					<div class="col-md-4">
 						<div class="minium-button minium-button--outline minium-button--small">Add address</div>
 					</div>
@@ -174,9 +186,6 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 		</div>
 	</div>
 </div>
-
-
-
 
 		<%-- <div class="col-md-auto">
 			<liferay-ui:icon
@@ -200,8 +209,6 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 
 			<liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" />
 		</div> --%>
-
-
 
 <div class="minium-thumb-menu">
 		<c:if test="<%= commerceOrder.isOpen() %>">
@@ -248,12 +255,11 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 		</c:if>
 </div>
 
-
-
 <aui:form action="<%= editCommerceOrderActionURL %>" cssClass="order-details-container" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-<%-- 
+
+<%--
 	<div class="order-details-header row">
 		<div class="col-3">
 			<div class="minium-card">
@@ -334,7 +340,8 @@ List<CommerceOrderValidatorResult> commerceOrderValidatorResults = new ArrayList
 	portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
 	tableName="commerceOrderItems"
 />
-<%-- 
+
+<%--
 <aui:row>
 	<aui:col width="<%= 70 %>" />
 
