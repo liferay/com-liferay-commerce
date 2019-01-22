@@ -60,43 +60,46 @@
 						<div class="col-12">
 							<div class="row">
 								<div class="col-6">
-									<input 
+									<input
 										id="add-address-type-shipping"
 										class="commerce-modal__radio commerce-modal__radio--with-margin"
 										type="radio"
 										name="add-address-type"
-										value="shipping" 
+										value="shipping"
 										data-onchange="{$_handleTypeChange}"
 										{if (isNonnull($_addressType) and $_addressType == 'billing') == false}
 											checked
 										{/if}
 									/>
-									<label 
+
+									<label
 										class="commerce-modal__label commerce-modal__label--radio"
 										for="add-address-type-shipping"
 									>
 										Shipping
 									</label>
 								</div>
+
 								<div class="col-6">
-									<input 
-										id="add-address-type-billing" 
+									<input
+										id="add-address-type-billing"
 										class="commerce-modal__radio commerce-modal__radio--with-margin"
-										type="radio" 
+										type="radio"
 										name="add-address-type"
-										value="billing" 
-										data-onchange="{$_handleTypeChange}" 
+										value="billing"
+										data-onchange="{$_handleTypeChange}"
 										{if isNonnull($_addressType) and $_addressType == 'billing'}
 											checked
 										{/if}
 									/>
-									<label 
+
+									<label
 										class="commerce-modal__label commerce-modal__label--radio"
 										for="add-address-type-billing"
 									>
 										Billing
 									</label>
-								</div>					
+								</div>
 							</div>
 						</div>
 
@@ -142,7 +145,7 @@
 								<option value=""></option>
 								{if isNonnull($_countries) and length($_countries) > 0}
 									{foreach $country in $_countries}
-										<option 
+										<option
 											value="{$country.id}"
 											{if isNonnull($_formData) and isNonnull($_formData.country) and $_formData.country == $country.id}
 												{sp}selected
@@ -171,7 +174,7 @@
 								<option value=""></option>
 								{if isNonnull($_regions) and length($_regions) > 0}
 									{foreach $region in $_regions}
-										<option 
+										<option
 											value="{$region.id}"
 											{if isNonnull($_formData) and isNonnull($_formData.region) and $_formData.region == $region.id}
 												{sp}selected

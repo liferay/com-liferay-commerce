@@ -137,7 +137,6 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 						</dd>
 					</dl>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -315,10 +314,10 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 			tableName="commerceOrderItems"
 		/>
 	</div>
+
 	<div class="col-md-3">
 		<div class="minium-card">
 			<div class="minium-card__content">
-
 				<dl class="minium-list">
 					<dt><liferay-ui:message key="subtotal" /></dt>
 					<dd class="text-right"><%= HtmlUtil.escape(subtotal.format(locale)) %></dd>
@@ -366,6 +365,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 					</c:if>
 				</dl>
 			</div>
+
 			<div class="minium-card__content">
 				<dl class="minium-list">
 					<dt><liferay-ui:message key="total" /></dt>
@@ -375,7 +375,6 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 		</div>
 	</div>
 </div>
-
 
 <liferay-portlet:renderURL var="editCommerceOrderDetailsURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 	<liferay-portlet:param name="mvcRenderCommandName" value="editCommerceOrderDetails" />
