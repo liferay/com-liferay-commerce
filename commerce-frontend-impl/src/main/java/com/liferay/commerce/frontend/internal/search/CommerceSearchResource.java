@@ -53,6 +53,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
@@ -62,6 +63,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.portlet.PortletURL;
 
@@ -275,10 +277,12 @@ public class CommerceSearchResource {
 		CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
 			groupId, searchContext, cpQuery, 0, 5);
 
+		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
+			"content.Language", themeDisplay.getLocale(), getClass());
+
 		searchItemModels.add(
 			new SearchItemModel(
-				"label",
-				LanguageUtil.get(themeDisplay.getLocale(), "catalog")));
+				"label", LanguageUtil.get(resourceBundle, "catalog")));
 
 		for (CPCatalogEntry cpCatalogEntry :
 				cpDataSourceResult.getCPCatalogEntries()) {
@@ -293,8 +297,7 @@ public class CommerceSearchResource {
 			url = _http.addParameter(url, "q", queryString);
 
 			SearchItemModel searchItemModel = new SearchItemModel(
-				"category",
-				LanguageUtil.get(themeDisplay.getLocale(), "catalog"));
+				"category", LanguageUtil.get(resourceBundle, "catalog"));
 
 			searchItemModel.setUrl(url);
 
