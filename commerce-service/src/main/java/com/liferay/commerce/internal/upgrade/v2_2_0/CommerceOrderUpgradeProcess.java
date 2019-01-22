@@ -51,15 +51,32 @@ public class CommerceOrderUpgradeProcess extends UpgradeProcess {
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"commerceAccountId", "LONG");
 
-		runSQL("update CommerceOrder set groupId = siteGroupId");
+		if (hasColumn(CommerceOrderModelImpl.TABLE_NAME, "siteGroupId")) {
+			runSQL("update CommerceOrder set groupId = siteGroupId");
 
-		String updateCommerceOrderSQL =
+			_dropColumn(CommerceOrderModelImpl.TABLE_NAME, "siteGroupId");
+		}
+
+		if (!hasColumn(
+				CommerceOrderModelImpl.TABLE_NAME, "orderOrganizationId") ||
+			!hasColumn(CommerceOrderModelImpl.TABLE_NAME, "orderUserId")) {
+
+			return;
+		}
+
+		String updateCommerceOrderSQL1 =
 			"update CommerceOrder set commerceAccountId = ? where " +
 				"orderOrganizationId = ?";
+		String updateCommerceOrderSQL2 =
+			"update CommerceOrder set commerceAccountId = ? where " +
+				"orderUserId = ?";
 
-		try (PreparedStatement ps =
+		try (PreparedStatement ps1 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
-					connection, updateCommerceOrderSQL);
+					connection, updateCommerceOrderSQL1);
+			PreparedStatement ps2 =
+				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
+					connection, updateCommerceOrderSQL2);
 			Statement s = connection.createStatement(
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 			ResultSet rs = s.executeQuery(
@@ -83,6 +100,11 @@ public class CommerceOrderUpgradeProcess extends UpgradeProcess {
 
 						continue;
 					}
+
+					ps1.setLong(1, commerceAccountId);
+					ps1.setLong(2, orderOrganizationId);
+
+					ps1.execute();
 				}
 				else if (orderUserId > 0) {
 					User user = _userLocalService.getUser(orderUserId);
@@ -98,20 +120,21 @@ public class CommerceOrderUpgradeProcess extends UpgradeProcess {
 							StringPool.BLANK, serviceContext);
 
 					commerceAccountId = commerceAccount.getCommerceAccountId();
+
+					ps2.setLong(1, commerceAccountId);
+
+					ps2.setLong(2, orderUserId);
+
+					ps2.execute();
 				}
-
-				ps.setLong(1, commerceAccountId);
-				ps.setLong(2, orderOrganizationId);
-
-				ps.execute();
 			}
 
-			ps.executeBatch();
+			ps1.executeBatch();
+			ps2.executeBatch();
 		}
 
 		_dropColumn(CommerceOrderModelImpl.TABLE_NAME, "orderOrganizationId");
 		_dropColumn(CommerceOrderModelImpl.TABLE_NAME, "orderUserId");
-		_dropColumn(CommerceOrderModelImpl.TABLE_NAME, "siteGroupId");
 	}
 
 	private void _addColumn(
