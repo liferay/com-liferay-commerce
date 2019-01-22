@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.internal.util;
 
+import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.internal.catalog.CPSkuImpl;
@@ -32,7 +33,6 @@ import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
-import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.dynamic.data.mapping.form.renderer.DDMFormRenderer;
 import com.liferay.dynamic.data.mapping.form.renderer.DDMFormRenderingContext;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
@@ -47,7 +47,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
@@ -447,13 +446,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			cpAttachmentFileEntries.get(0);
 
-		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
-
-		if (fileEntry == null) {
-			return null;
-		}
-
-		return DLUtil.getThumbnailSrc(fileEntry, themeDisplay);
+		return _commerceMediaResolver.getThumbnailUrl(
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
 	@Override
@@ -844,6 +838,9 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		return _ddmFormRenderer.render(ddmForm, ddmFormRenderingContext);
 	}
+
+	@Reference
+	private CommerceMediaResolver _commerceMediaResolver;
 
 	@Reference
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
