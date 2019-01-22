@@ -71,7 +71,8 @@ public class CommercePriceEntryUpgradeProcess extends UpgradeProcess {
 
 			s = connection.createStatement();
 
-			rs = s.executeQuery("select * from CommercePriceEntry");
+			rs = s.executeQuery(
+				"select distinct CPInstanceId from CommercePriceEntry");
 
 			while (rs.next()) {
 				long cpInstanceId = rs.getLong("CPInstanceId");
@@ -86,6 +87,7 @@ public class CommercePriceEntryUpgradeProcess extends UpgradeProcess {
 				ps.setLong(1, cpDefinition.getCProductId());
 
 				ps.setString(2, cpInstance.getCPInstanceUuid());
+
 				ps.setLong(3, cpInstanceId);
 
 				ps.execute();
