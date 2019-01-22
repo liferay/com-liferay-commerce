@@ -55,18 +55,18 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
-	public PriceEntryDTO getPriceEntry(
-		String id, long groupId, User user, Locale locale, Company company) {
-
-		return new PriceEntryDTO();
-	}
-
-	@Override
-	public CollectionDTO<PriceEntryDTO> getPriceEntrys(
+	public CollectionDTO<PriceEntryDTO> getPriceEntries(
 		long groupId, User user, Locale locale, Company company,
 		Pagination pagination) {
 
 		return new CollectionDTO(Collections.emptyList(), 0);
+	}
+
+	@Override
+	public PriceEntryDTO getPriceEntry(
+		String id, long groupId, User user, Locale locale, Company company) {
+
+		return new PriceEntryDTO();
 	}
 
 	@Override

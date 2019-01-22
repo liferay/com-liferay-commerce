@@ -52,21 +52,21 @@ public interface PriceEntryResource {
 		@Context User user, @Context Locale locale, @Context Company company);
 
 	@GET
+	@Path("/")
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<PriceEntryDTO> getPriceEntries(
+		@QueryParam("groupId") long groupId, @Context User user,
+		@Context Locale locale, @Context Company company,
+		@Context Pagination pagination);
+
+	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceEntryDTO getPriceEntry(
 		@PathParam("id") String id, @QueryParam("groupId") long groupId,
 		@Context User user, @Context Locale locale, @Context Company company);
-
-	@GET
-	@Path("/")
-	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
-	public CollectionDTO<PriceEntryDTO> getPriceEntrys(
-		@QueryParam("groupId") long groupId, @Context User user,
-		@Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
 
 	@Consumes("application/*")
 	@Path("/{id}")
