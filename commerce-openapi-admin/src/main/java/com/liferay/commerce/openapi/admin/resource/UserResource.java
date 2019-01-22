@@ -47,38 +47,42 @@ public interface UserResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteUser(
-		@PathParam("id") String id, @Context User user, @Context Locale locale,
-		@Context Company company);
+			@PathParam("id") String id, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public UserDTO getUser(
-		@PathParam("id") String id, @Context User user, @Context Locale locale,
-		@Context Company company);
+			@PathParam("id") String id, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<UserDTO> getUsers(
-		@Context User user, @Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
+			@Context User user, @Context Locale locale,
+			@Context Company company, @Context Pagination pagination)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateUser(
-		@PathParam("id") String id, UserDTO userDTO, @Context User user,
-		@Context Locale locale, @Context Company company);
+			@PathParam("id") String id, UserDTO userDTO, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/")
 	@POST
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public UserDTO upsertUser(UserDTO userDTO);
+	public UserDTO upsertUser(UserDTO userDTO) throws Exception;
 
 }

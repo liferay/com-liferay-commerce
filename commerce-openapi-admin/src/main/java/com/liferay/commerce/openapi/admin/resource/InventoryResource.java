@@ -47,32 +47,38 @@ public interface InventoryResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteInventory(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public InventoryDTO getInventory(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<InventoryDTO> getInventorys(
-		@Context User user, @Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
+			@Context User user, @Context Locale locale,
+			@Context Company company, @Context Pagination pagination)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateInventory(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		InventoryDTO inventoryDTO, @Context User user, @Context Locale locale,
-		@Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			InventoryDTO inventoryDTO, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 }

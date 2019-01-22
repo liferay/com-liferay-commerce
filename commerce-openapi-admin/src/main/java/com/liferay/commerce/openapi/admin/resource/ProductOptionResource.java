@@ -49,43 +49,50 @@ public interface ProductOptionResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProductOption(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductOptionDTO getProductOption(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionDTO> getProductOptions(
-		@QueryParam("groupId") long groupId, @Context User user,
-		@Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
+			@QueryParam("groupId") long groupId, @Context User user,
+			@Context Locale locale, @Context Company company,
+			@Context Pagination pagination)
+		throws Exception;
 
 	@GET
 	@Path("/{id}/productOptionValue")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company, @Context Pagination pagination)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOption(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		ProductOptionDTO productOptionDTO, @Context User user,
-		@Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			ProductOptionDTO productOptionDTO, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/")
@@ -93,8 +100,10 @@ public interface ProductOptionResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductOptionDTO upsertProductOption(
-		@QueryParam("groupId") long groupId, ProductOptionDTO productOptionDTO,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@QueryParam("groupId") long groupId,
+			ProductOptionDTO productOptionDTO, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}/productOptionValue")
@@ -102,8 +111,9 @@ public interface ProductOptionResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductOptionValueDTO upsertProductOptionValue(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		ProductOptionValueDTO productOptionValueDTO, @Context User user,
-		@Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			ProductOptionValueDTO productOptionValueDTO, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 }

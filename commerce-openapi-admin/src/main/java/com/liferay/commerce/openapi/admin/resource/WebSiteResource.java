@@ -42,14 +42,16 @@ public interface WebSiteResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public WebSiteDTO getWebSite(
-		@PathParam("id") String id, @Context Locale locale);
+			@PathParam("id") String id, @Context Locale locale)
+		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<WebSiteDTO> getWebSites(
-		@Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
+			@Context Locale locale, @Context Company company,
+			@Context Pagination pagination)
+		throws Exception;
 
 }
