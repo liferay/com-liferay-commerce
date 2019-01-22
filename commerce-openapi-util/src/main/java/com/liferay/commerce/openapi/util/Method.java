@@ -115,6 +115,16 @@ public class Method {
 		return true;
 	}
 
+	public boolean hasPaginationContextExtension() {
+		for (Extension extension : _extensions) {
+			if (extension.isPaginationContext()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public boolean hasResponseContent() {
 		return _hasResponseContent;
 	}
