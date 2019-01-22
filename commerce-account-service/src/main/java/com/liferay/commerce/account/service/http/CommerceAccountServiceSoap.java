@@ -161,11 +161,12 @@ public class CommerceAccountServiceSoap {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountSoap[] getUserCommerceAccounts(
-		int commerceSiteType, int start, int end) throws RemoteException {
+		long userId, int commerceSiteType, int start, int end)
+		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.account.model.CommerceAccount> returnValue =
-				CommerceAccountServiceUtil.getUserCommerceAccounts(commerceSiteType,
-					start, end);
+				CommerceAccountServiceUtil.getUserCommerceAccounts(userId,
+					commerceSiteType, start, end);
 
 			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModels(returnValue);
 		}
@@ -177,12 +178,13 @@ public class CommerceAccountServiceSoap {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountSoap[] getUserCommerceAccounts(
-		Long parentCommerceAccountId, int commerceSiteType, String keywords,
-		int start, int end) throws RemoteException {
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
+		String keywords, int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.account.model.CommerceAccount> returnValue =
-				CommerceAccountServiceUtil.getUserCommerceAccounts(parentCommerceAccountId,
-					commerceSiteType, keywords, start, end);
+				CommerceAccountServiceUtil.getUserCommerceAccounts(userId,
+					parentCommerceAccountId, commerceSiteType, keywords, start,
+					end);
 
 			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModels(returnValue);
 		}
@@ -193,12 +195,12 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
-	public static int getUserCommerceAccountsCount(
+	public static int getUserCommerceAccountsCount(long userId,
 		Long parentCommerceAccountId, int commerceSiteType, String keywords)
 		throws RemoteException {
 		try {
-			int returnValue = CommerceAccountServiceUtil.getUserCommerceAccountsCount(parentCommerceAccountId,
-					commerceSiteType, keywords);
+			int returnValue = CommerceAccountServiceUtil.getUserCommerceAccountsCount(userId,
+					parentCommerceAccountId, commerceSiteType, keywords);
 
 			return returnValue;
 		}

@@ -91,17 +91,17 @@ public interface CommerceAccountService extends BaseService {
 		long userId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAccount> getUserCommerceAccounts(int commerceSiteType,
-		int start, int end) throws PortalException;
+	public List<CommerceAccount> getUserCommerceAccounts(long userId,
+		int commerceSiteType, int start, int end) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAccount> getUserCommerceAccounts(
+	public List<CommerceAccount> getUserCommerceAccounts(long userId,
 		Long parentCommerceAccountId, int commerceSiteType, String keywords,
-		int start, int end) throws PortalException;
+		int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserCommerceAccountsCount(Long parentCommerceAccountId,
-		int commerceSiteType, String keywords) throws PortalException;
+	public int getUserCommerceAccountsCount(long userId,
+		Long parentCommerceAccountId, int commerceSiteType, String keywords);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
