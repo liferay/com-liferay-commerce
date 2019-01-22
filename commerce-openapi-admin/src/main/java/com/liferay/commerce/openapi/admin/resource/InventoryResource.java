@@ -18,8 +18,6 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
 
 import java.util.Locale;
 
@@ -48,8 +46,7 @@ public interface InventoryResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteInventory(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -58,8 +55,7 @@ public interface InventoryResource {
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public InventoryDTO getInventory(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -67,8 +63,7 @@ public interface InventoryResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<InventoryDTO> getInventorys(
-			@Context User user, @Context Locale locale,
-			@Context Company company, @Context Pagination pagination)
+			@Context Locale locale, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -77,8 +72,7 @@ public interface InventoryResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateInventory(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			InventoryDTO inventoryDTO, @Context User user,
-			@Context Locale locale, @Context Company company)
+			InventoryDTO inventoryDTO, @Context Locale locale)
 		throws Exception;
 
 }

@@ -18,8 +18,6 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
 
 import java.util.Locale;
 
@@ -49,8 +47,7 @@ public interface PriceEntryResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceEntry(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -58,8 +55,7 @@ public interface PriceEntryResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceEntryDTO> getPriceEntries(
-			@QueryParam("groupId") long groupId, @Context User user,
-			@Context Locale locale, @Context Company company,
+			@QueryParam("groupId") long groupId, @Context Locale locale,
 			@Context Pagination pagination)
 		throws Exception;
 
@@ -69,8 +65,7 @@ public interface PriceEntryResource {
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceEntryDTO getPriceEntry(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -79,8 +74,7 @@ public interface PriceEntryResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceEntry(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			PriceEntryDTO priceEntryDTO, @Context User user,
-			@Context Locale locale, @Context Company company)
+			PriceEntryDTO priceEntryDTO, @Context Locale locale)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -90,8 +84,7 @@ public interface PriceEntryResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceEntryDTO upsertPriceEntry(
 			@QueryParam("groupId") long groupId, PriceEntryDTO priceEntryDTO,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 }

@@ -16,8 +16,6 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.SkuResource;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
 
 import java.util.Locale;
 
@@ -26,25 +24,25 @@ import javax.annotation.Generated;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Igor Beslic
  */
 @Component(
-	immediate = true,
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
 	},
-	service = SkuResource.class
+	scope = ServiceScope.PROTOTYPE, service = SkuResource.class
 )
 @Generated(value = "OSGiRESTModuleGenerator")
 public class SkuResourceImpl implements SkuResource {
 
 	@Override
-	public Response deleteSku(
-		String id, long groupId, User user, Locale locale, Company company) {
+	public Response deleteSku(String id, long groupId, Locale locale)
+		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -52,18 +50,18 @@ public class SkuResourceImpl implements SkuResource {
 	}
 
 	@Override
-	public SkuDTO getSku(
-		String id, long groupId, User user, Locale locale, Company company) {
+	public SkuDTO getSku(String id, long groupId, Locale locale)
+		throws Exception {
 
 		return new SkuDTO();
 	}
 
 	@Override
 	public Response updateSku(
-		String id, long groupId, SkuDTO skuDTO, User user, Locale locale,
-		Company company) {
+			String id, long groupId, SkuDTO skuDTO, Locale locale)
+		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
 	}

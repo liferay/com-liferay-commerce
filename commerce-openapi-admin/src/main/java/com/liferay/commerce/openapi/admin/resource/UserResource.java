@@ -18,8 +18,6 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.UserDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
 
 import java.util.Locale;
 
@@ -47,17 +45,14 @@ public interface UserResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteUser(
-			@PathParam("id") String id, @Context User user,
-			@Context Locale locale, @Context Company company)
+			@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public UserDTO getUser(
-			@PathParam("id") String id, @Context User user,
-			@Context Locale locale, @Context Company company)
+	public UserDTO getUser(@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -65,8 +60,7 @@ public interface UserResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<UserDTO> getUsers(
-			@Context User user, @Context Locale locale,
-			@Context Company company, @Context Pagination pagination)
+			@Context Locale locale, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -74,8 +68,7 @@ public interface UserResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateUser(
-			@PathParam("id") String id, UserDTO userDTO, @Context User user,
-			@Context Locale locale, @Context Company company)
+			@PathParam("id") String id, UserDTO userDTO, @Context Locale locale)
 		throws Exception;
 
 	@Consumes("application/*")

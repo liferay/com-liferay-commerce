@@ -18,8 +18,6 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
 
 import java.util.Locale;
 
@@ -49,8 +47,7 @@ public interface PriceListResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceList(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -59,8 +56,7 @@ public interface PriceListResource {
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceListDTO getPriceList(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -68,8 +64,7 @@ public interface PriceListResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceListDTO> getPriceLists(
-			@QueryParam("groupId") long groupId, @Context User user,
-			@Context Locale locale, @Context Company company,
+			@QueryParam("groupId") long groupId, @Context Locale locale,
 			@Context Pagination pagination)
 		throws Exception;
 
@@ -79,8 +74,7 @@ public interface PriceListResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceList(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			PriceListDTO priceListDTO, @Context User user,
-			@Context Locale locale, @Context Company company)
+			PriceListDTO priceListDTO, @Context Locale locale)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -90,8 +84,7 @@ public interface PriceListResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceListDTO upsertPriceList(
 			@QueryParam("groupId") long groupId, PriceListDTO priceListDTO,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 }

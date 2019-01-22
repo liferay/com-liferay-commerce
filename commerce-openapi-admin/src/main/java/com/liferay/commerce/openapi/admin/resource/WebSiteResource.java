@@ -18,7 +18,6 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-import com.liferay.portal.kernel.model.Company;
 
 import java.util.Locale;
 
@@ -50,8 +49,7 @@ public interface WebSiteResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<WebSiteDTO> getWebSites(
-			@Context Locale locale, @Context Company company,
-			@Context Pagination pagination)
+			@Context Locale locale, @Context Pagination pagination)
 		throws Exception;
 
 }
