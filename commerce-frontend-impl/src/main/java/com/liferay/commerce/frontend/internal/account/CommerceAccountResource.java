@@ -444,7 +444,7 @@ public class CommerceAccountResource {
 	private static final ObjectMapper _OBJECT_MAPPER = new ObjectMapper() {
 		{
 			configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
-			enable(SerializationFeature.INDENT_OUTPUT);
+			disable(SerializationFeature.INDENT_OUTPUT);
 		}
 	};
 
