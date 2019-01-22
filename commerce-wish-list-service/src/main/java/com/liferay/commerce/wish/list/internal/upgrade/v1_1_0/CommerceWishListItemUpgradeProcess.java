@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -71,7 +72,8 @@ public class CommerceWishListItemUpgradeProcess extends UpgradeProcess {
 
 			s = connection.createStatement();
 
-			rs = s.executeQuery("select * from CommerceWishListItem");
+			rs = s.executeQuery(
+				"select distinct CPInstanceId from CommerceWishListItem");
 
 			while (rs.next()) {
 				long cpInstanceId = rs.getLong("CPInstanceId");
@@ -96,11 +98,20 @@ public class CommerceWishListItemUpgradeProcess extends UpgradeProcess {
 			DataAccess.cleanUp(s, rs);
 		}
 
-		runSQL("drop index IX_622C400A on CommerceWishListItem");
-		runSQL("drop index IX_6FB8DFC8 on CommerceWishListItem");
+		if (_tableHasIndex(
+				CommerceWishListItemModelImpl.TABLE_NAME, "IX_622C400A")) {
 
-		runSQL("alter table CommerceWishListItem drop column CPDefinitionId");
-		runSQL("alter table CommerceWishListItem drop column CPInstanceId");
+			runSQL("drop index IX_622C400A on CommerceWishListItem");
+		}
+
+		if (_tableHasIndex(
+				CommerceWishListItemModelImpl.TABLE_NAME, "IX_6FB8DFC8")) {
+
+			runSQL("drop index IX_6FB8DFC8 on CommerceWishListItem");
+		}
+
+		_dropColumn(CommerceWishListItemModelImpl.TABLE_NAME, "CPDefinitionId");
+		_dropColumn(CommerceWishListItemModelImpl.TABLE_NAME, "CPInstanceId");
 	}
 
 	private void _addColumn(
@@ -154,6 +165,30 @@ public class CommerceWishListItemUpgradeProcess extends UpgradeProcess {
 					String.format(
 						"Index %s already exists on table %s",
 						indexMetadata.getIndexName(), tableName));
+			}
+		}
+	}
+
+	private void _dropColumn(String tableName, String columnName)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				String.format(
+					"Dropping column %s from table %s", columnName, tableName));
+		}
+
+		if (hasColumn(tableName, columnName)) {
+			runSQL(
+				StringBundler.concat(
+					"alter table ", tableName, " drop column ", columnName));
+		}
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					String.format(
+						"Column %s already does not exist on table %s",
+						columnName, tableName));
 			}
 		}
 	}
