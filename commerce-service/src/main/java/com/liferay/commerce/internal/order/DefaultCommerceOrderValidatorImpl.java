@@ -87,7 +87,7 @@ public class DefaultCommerceOrderValidatorImpl
 			return new CommerceOrderValidatorResult(true);
 		}
 
-		if ((minOrderQuantity > 0) && (quantity < minOrderQuantity)) {
+		if (quantity < minOrderQuantity) {
 			return new CommerceOrderValidatorResult(
 				false,
 				_getLocalizedMessage(
@@ -143,9 +143,7 @@ public class DefaultCommerceOrderValidatorImpl
 		String[] allowedOrderQuantities =
 			cpDefinitionInventoryEngine.getAllowedOrderQuantities(cpInstance);
 
-		if ((minOrderQuantity > 0) &&
-			(commerceOrderItem.getQuantity() < minOrderQuantity)) {
-
+		if (commerceOrderItem.getQuantity() < minOrderQuantity) {
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
 				_getLocalizedMessage(

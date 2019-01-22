@@ -399,8 +399,6 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 			if (commerceOrder != null) {
 				_commerceOrderUuidThreadLocal.set(commerceOrder);
-
-				return commerceOrder;
 			}
 		}
 
@@ -479,12 +477,11 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		versionCommerceOrderValidator.setCPInstanceLocalService(
 			_cpInstanceLocalService);
 
-		Locale locale = themeDisplay.getLocale();
-
 		for (CommerceOrderItem commerceOrderItem :
 				commerceOrder.getCommerceOrderItems()) {
 
-			versionCommerceOrderValidator.validate(locale, commerceOrderItem);
+			versionCommerceOrderValidator.validate(
+				themeDisplay.getLocale(), commerceOrderItem);
 		}
 	}
 
