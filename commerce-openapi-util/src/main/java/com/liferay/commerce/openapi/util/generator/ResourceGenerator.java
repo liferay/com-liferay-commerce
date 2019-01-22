@@ -317,6 +317,22 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return sb.toString();
 	}
 
+	private String _getResponse(List<Response> responses) {
+		for (Response response : responses) {
+			if (response.getStatus() == 201) {
+				return "Response.created();\n";
+			}
+			else if (response.getStatus() == 202) {
+				return "Response.accepted();\n";
+			}
+			else if (response.getStatus() == 204) {
+				return "Response.noContent();\n";
+			}
+		}
+
+		return "Response.ok();\n";
+	}
+
 	private Content _getResponseContent(List<Response> responses) {
 		for (Response response : responses) {
 			List<Content> contents = response.getContents();
@@ -552,7 +568,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			}
 			else {
 				sb.append("\t\tResponse.ResponseBuilder responseBuilder = ");
-				sb.append("Response.ok();\n");
+				sb.append(_getResponse(method.getResponses()));
 				sb.append("\t\treturn responseBuilder.build();\n");
 			}
 
