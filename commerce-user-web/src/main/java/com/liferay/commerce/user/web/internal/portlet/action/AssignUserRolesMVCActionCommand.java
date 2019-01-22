@@ -55,7 +55,7 @@ public class AssignUserRolesMVCActionCommand extends BaseMVCActionCommand {
 
 		long userId = ParamUtil.getLong(actionRequest, "userId");
 
-		long[] roleIds = ParamUtil.getLongValues(actionRequest, "roleIds");
+		long groupId = 0;
 
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			actionRequest);
@@ -66,11 +66,11 @@ public class AssignUserRolesMVCActionCommand extends BaseMVCActionCommand {
 
 		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
-		long groupId = 0;
-
 		if (commerceAccount != null) {
 			groupId = commerceAccount.getCommerceAccountGroupId();
 		}
+
+		long[] roleIds = ParamUtil.getLongValues(actionRequest, "roleIds");
 
 		_commerceUserService.updateUserRoles(userId, groupId, roleIds);
 	}

@@ -61,7 +61,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
@@ -225,21 +224,21 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 			long groupId, long commerceAccountId, long userId)
 		throws PortalException {
 
-		Group group = groupLocalService.getGroup(groupId);
+		PortalCache<String, Serializable> portalCache =
+			MultiVMPoolUtil.getPortalCache("USER_SEGMENTS_" + groupId);
 
 		String cacheKey = String.valueOf(commerceAccountId);
 
-		PortalCache<String, Serializable> portalCache =
-			MultiVMPoolUtil.getPortalCache("USER_SEGMENTS_" + groupId);
+		long[] commerceUserSegmentEntryIds = (long[])portalCache.get(cacheKey);
 
 		boolean userSegmentsCalculated = GetterUtil.getBoolean(
 			portalCache.get(cacheKey + "_calculated"));
 
-		long[] commerceUserSegmentEntryIds = (long[])portalCache.get(cacheKey);
-
 		if (userSegmentsCalculated) {
 			return commerceUserSegmentEntryIds;
 		}
+
+		Group group = groupLocalService.getGroup(groupId);
 
 		SearchContext searchContext = buildSearchContext(
 			group.getCompanyId(), groupId, commerceAccountId, userId);
@@ -254,10 +253,9 @@ public class CommerceUserSegmentEntryLocalServiceImpl
 
 		Stream<Document> stream = documents.stream();
 
-		LongStream longStream = stream.mapToLong(
-			field -> GetterUtil.getLong(field.get(Field.ENTRY_CLASS_PK)));
-
-		commerceUserSegmentEntryIds = longStream.toArray();
+		commerceUserSegmentEntryIds = stream.mapToLong(
+			field -> GetterUtil.getLong(field.get(Field.ENTRY_CLASS_PK))
+		).toArray();
 
 		portalCache.put(cacheKey + "_calculated", true);
 		portalCache.put(cacheKey, commerceUserSegmentEntryIds);
