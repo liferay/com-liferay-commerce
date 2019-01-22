@@ -285,8 +285,8 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="commerceSubscriptionEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceOrderItemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commerceSubscriptionEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="renew" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.commerce.model.impl.CommerceSubscriptionEntryImpl" table="CommerceSubscriptionEntry">

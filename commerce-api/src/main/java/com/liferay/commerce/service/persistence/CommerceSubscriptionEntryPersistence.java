@@ -509,7 +509,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	* @param subscriptionStatus the subscription status
 	* @return the matching commerce subscription entries
 	*/
-	public java.util.List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public java.util.List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus);
 
 	/**
@@ -524,7 +524,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	* @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	* @return the range of matching commerce subscription entries
 	*/
-	public java.util.List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public java.util.List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end);
 
 	/**
@@ -540,7 +540,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce subscription entries
 	*/
-	public java.util.List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public java.util.List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
@@ -558,7 +558,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce subscription entries
 	*/
-	public java.util.List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public java.util.List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
 		boolean retrieveFromCache);
@@ -571,7 +571,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	* @return the first matching commerce subscription entry
 	* @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	*/
-	public CommerceSubscriptionEntry findBysubscriptionStatus_First(
+	public CommerceSubscriptionEntry findBySubscriptionStatus_First(
 		int subscriptionStatus,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
@@ -583,7 +583,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	*/
-	public CommerceSubscriptionEntry fetchBysubscriptionStatus_First(
+	public CommerceSubscriptionEntry fetchBySubscriptionStatus_First(
 		int subscriptionStatus,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
@@ -595,7 +595,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	* @return the last matching commerce subscription entry
 	* @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	*/
-	public CommerceSubscriptionEntry findBysubscriptionStatus_Last(
+	public CommerceSubscriptionEntry findBySubscriptionStatus_Last(
 		int subscriptionStatus,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
@@ -607,7 +607,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	*/
-	public CommerceSubscriptionEntry fetchBysubscriptionStatus_Last(
+	public CommerceSubscriptionEntry fetchBySubscriptionStatus_Last(
 		int subscriptionStatus,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
@@ -620,7 +620,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	* @return the previous, current, and next commerce subscription entry
 	* @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
 	*/
-	public CommerceSubscriptionEntry[] findBysubscriptionStatus_PrevAndNext(
+	public CommerceSubscriptionEntry[] findBySubscriptionStatus_PrevAndNext(
 		long commerceSubscriptionEntryId, int subscriptionStatus,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
@@ -630,7 +630,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	*
 	* @param subscriptionStatus the subscription status
 	*/
-	public void removeBysubscriptionStatus(int subscriptionStatus);
+	public void removeBySubscriptionStatus(int subscriptionStatus);
 
 	/**
 	* Returns the number of commerce subscription entries where subscriptionStatus = &#63;.
@@ -638,7 +638,7 @@ public interface CommerceSubscriptionEntryPersistence extends BasePersistence<Co
 	* @param subscriptionStatus the subscription status
 	* @return the number of matching commerce subscription entries
 	*/
-	public int countBysubscriptionStatus(int subscriptionStatus);
+	public int countBySubscriptionStatus(int subscriptionStatus);
 
 	/**
 	* Returns all the commerce subscription entries where groupId = &#63; and userId = &#63;.

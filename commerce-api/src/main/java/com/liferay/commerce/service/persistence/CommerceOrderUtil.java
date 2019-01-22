@@ -1544,10 +1544,10 @@ public class CommerceOrderUtil {
 	* @param orderStatus the order status
 	* @return the matching commerce orders
 	*/
-	public static List<CommerceOrder> findByC_G_O(long groupId,
+	public static List<CommerceOrder> findByG_C_O(long groupId,
 		long commerceAccountId, int orderStatus) {
 		return getPersistence()
-				   .findByC_G_O(groupId, commerceAccountId, orderStatus);
+				   .findByG_C_O(groupId, commerceAccountId, orderStatus);
 	}
 
 	/**
@@ -1564,10 +1564,10 @@ public class CommerceOrderUtil {
 	* @param end the upper bound of the range of commerce orders (not inclusive)
 	* @return the range of matching commerce orders
 	*/
-	public static List<CommerceOrder> findByC_G_O(long groupId,
+	public static List<CommerceOrder> findByG_C_O(long groupId,
 		long commerceAccountId, int orderStatus, int start, int end) {
 		return getPersistence()
-				   .findByC_G_O(groupId, commerceAccountId, orderStatus, start,
+				   .findByG_C_O(groupId, commerceAccountId, orderStatus, start,
 			end);
 	}
 
@@ -1586,11 +1586,11 @@ public class CommerceOrderUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce orders
 	*/
-	public static List<CommerceOrder> findByC_G_O(long groupId,
+	public static List<CommerceOrder> findByG_C_O(long groupId,
 		long commerceAccountId, int orderStatus, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator) {
 		return getPersistence()
-				   .findByC_G_O(groupId, commerceAccountId, orderStatus, start,
+				   .findByG_C_O(groupId, commerceAccountId, orderStatus, start,
 			end, orderByComparator);
 	}
 
@@ -1610,12 +1610,12 @@ public class CommerceOrderUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce orders
 	*/
-	public static List<CommerceOrder> findByC_G_O(long groupId,
+	public static List<CommerceOrder> findByG_C_O(long groupId,
 		long commerceAccountId, int orderStatus, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByC_G_O(groupId, commerceAccountId, orderStatus, start,
+				   .findByG_C_O(groupId, commerceAccountId, orderStatus, start,
 			end, orderByComparator, retrieveFromCache);
 	}
 
@@ -1629,12 +1629,12 @@ public class CommerceOrderUtil {
 	* @return the first matching commerce order
 	* @throws NoSuchOrderException if a matching commerce order could not be found
 	*/
-	public static CommerceOrder findByC_G_O_First(long groupId,
+	public static CommerceOrder findByG_C_O_First(long groupId,
 		long commerceAccountId, int orderStatus,
 		OrderByComparator<CommerceOrder> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchOrderException {
 		return getPersistence()
-				   .findByC_G_O_First(groupId, commerceAccountId, orderStatus,
+				   .findByG_C_O_First(groupId, commerceAccountId, orderStatus,
 			orderByComparator);
 	}
 
@@ -1647,11 +1647,11 @@ public class CommerceOrderUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	*/
-	public static CommerceOrder fetchByC_G_O_First(long groupId,
+	public static CommerceOrder fetchByG_C_O_First(long groupId,
 		long commerceAccountId, int orderStatus,
 		OrderByComparator<CommerceOrder> orderByComparator) {
 		return getPersistence()
-				   .fetchByC_G_O_First(groupId, commerceAccountId, orderStatus,
+				   .fetchByG_C_O_First(groupId, commerceAccountId, orderStatus,
 			orderByComparator);
 	}
 
@@ -1665,12 +1665,12 @@ public class CommerceOrderUtil {
 	* @return the last matching commerce order
 	* @throws NoSuchOrderException if a matching commerce order could not be found
 	*/
-	public static CommerceOrder findByC_G_O_Last(long groupId,
+	public static CommerceOrder findByG_C_O_Last(long groupId,
 		long commerceAccountId, int orderStatus,
 		OrderByComparator<CommerceOrder> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchOrderException {
 		return getPersistence()
-				   .findByC_G_O_Last(groupId, commerceAccountId, orderStatus,
+				   .findByG_C_O_Last(groupId, commerceAccountId, orderStatus,
 			orderByComparator);
 	}
 
@@ -1683,11 +1683,11 @@ public class CommerceOrderUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	*/
-	public static CommerceOrder fetchByC_G_O_Last(long groupId,
+	public static CommerceOrder fetchByG_C_O_Last(long groupId,
 		long commerceAccountId, int orderStatus,
 		OrderByComparator<CommerceOrder> orderByComparator) {
 		return getPersistence()
-				   .fetchByC_G_O_Last(groupId, commerceAccountId, orderStatus,
+				   .fetchByG_C_O_Last(groupId, commerceAccountId, orderStatus,
 			orderByComparator);
 	}
 
@@ -1702,12 +1702,12 @@ public class CommerceOrderUtil {
 	* @return the previous, current, and next commerce order
 	* @throws NoSuchOrderException if a commerce order with the primary key could not be found
 	*/
-	public static CommerceOrder[] findByC_G_O_PrevAndNext(
+	public static CommerceOrder[] findByG_C_O_PrevAndNext(
 		long commerceOrderId, long groupId, long commerceAccountId,
 		int orderStatus, OrderByComparator<CommerceOrder> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchOrderException {
 		return getPersistence()
-				   .findByC_G_O_PrevAndNext(commerceOrderId, groupId,
+				   .findByG_C_O_PrevAndNext(commerceOrderId, groupId,
 			commerceAccountId, orderStatus, orderByComparator);
 	}
 
@@ -1718,9 +1718,9 @@ public class CommerceOrderUtil {
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	*/
-	public static void removeByC_G_O(long groupId, long commerceAccountId,
+	public static void removeByG_C_O(long groupId, long commerceAccountId,
 		int orderStatus) {
-		getPersistence().removeByC_G_O(groupId, commerceAccountId, orderStatus);
+		getPersistence().removeByG_C_O(groupId, commerceAccountId, orderStatus);
 	}
 
 	/**
@@ -1731,10 +1731,10 @@ public class CommerceOrderUtil {
 	* @param orderStatus the order status
 	* @return the number of matching commerce orders
 	*/
-	public static int countByC_G_O(long groupId, long commerceAccountId,
+	public static int countByG_C_O(long groupId, long commerceAccountId,
 		int orderStatus) {
 		return getPersistence()
-				   .countByC_G_O(groupId, commerceAccountId, orderStatus);
+				   .countByG_C_O(groupId, commerceAccountId, orderStatus);
 	}
 
 	/**

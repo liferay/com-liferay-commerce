@@ -279,8 +279,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="commerceSubscriptionEntryId" type="long" />
 		<field name="commerceOrderItemId" type="long" />
+		<field name="commerceSubscriptionEntryId" type="long" />
 		<field name="renew" type="boolean" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceSubscriptionEntry">

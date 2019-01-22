@@ -231,12 +231,12 @@ public class CPDefinitionOptionValueRelPersistenceTest {
 	}
 
 	@Test
-	public void testCountBykey() throws Exception {
-		_persistence.countBykey("");
+	public void testCountByKey() throws Exception {
+		_persistence.countByKey("");
 
-		_persistence.countBykey("null");
+		_persistence.countByKey("null");
 
-		_persistence.countBykey((String)null);
+		_persistence.countByKey((String)null);
 	}
 
 	@Test

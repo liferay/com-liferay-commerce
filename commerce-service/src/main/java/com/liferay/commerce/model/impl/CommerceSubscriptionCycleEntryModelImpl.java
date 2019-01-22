@@ -82,8 +82,8 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "commerceSubscriptionEntryId", Types.BIGINT },
 			{ "commerceOrderItemId", Types.BIGINT },
+			{ "commerceSubscriptionEntryId", Types.BIGINT },
 			{ "renew", Types.BOOLEAN }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
@@ -97,12 +97,12 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("commerceSubscriptionEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceOrderItemId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("commerceSubscriptionEntryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("renew", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CSubscriptionCycleEntry (uuid_ VARCHAR(75) null,CSubscriptionCycleEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceSubscriptionEntryId LONG,commerceOrderItemId LONG,renew BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table CSubscriptionCycleEntry (uuid_ VARCHAR(75) null,CSubscriptionCycleEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderItemId LONG,commerceSubscriptionEntryId LONG,renew BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table CSubscriptionCycleEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceSubscriptionCycleEntry.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CSubscriptionCycleEntry.createDate DESC";
@@ -147,8 +147,8 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setCommerceSubscriptionEntryId(soapModel.getCommerceSubscriptionEntryId());
 		model.setCommerceOrderItemId(soapModel.getCommerceOrderItemId());
+		model.setCommerceSubscriptionEntryId(soapModel.getCommerceSubscriptionEntryId());
 		model.setRenew(soapModel.isRenew());
 
 		return model;
@@ -224,9 +224,9 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
 		attributes.put("commerceSubscriptionEntryId",
 			getCommerceSubscriptionEntryId());
-		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
 		attributes.put("renew", isRenew());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
@@ -286,17 +286,17 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 			setModifiedDate(modifiedDate);
 		}
 
+		Long commerceOrderItemId = (Long)attributes.get("commerceOrderItemId");
+
+		if (commerceOrderItemId != null) {
+			setCommerceOrderItemId(commerceOrderItemId);
+		}
+
 		Long commerceSubscriptionEntryId = (Long)attributes.get(
 				"commerceSubscriptionEntryId");
 
 		if (commerceSubscriptionEntryId != null) {
 			setCommerceSubscriptionEntryId(commerceSubscriptionEntryId);
-		}
-
-		Long commerceOrderItemId = (Long)attributes.get("commerceOrderItemId");
-
-		if (commerceOrderItemId != null) {
-			setCommerceOrderItemId(commerceOrderItemId);
 		}
 
 		Boolean renew = (Boolean)attributes.get("renew");
@@ -463,29 +463,6 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 
 	@JSON
 	@Override
-	public long getCommerceSubscriptionEntryId() {
-		return _commerceSubscriptionEntryId;
-	}
-
-	@Override
-	public void setCommerceSubscriptionEntryId(long commerceSubscriptionEntryId) {
-		_columnBitmask |= COMMERCESUBSCRIPTIONENTRYID_COLUMN_BITMASK;
-
-		if (!_setOriginalCommerceSubscriptionEntryId) {
-			_setOriginalCommerceSubscriptionEntryId = true;
-
-			_originalCommerceSubscriptionEntryId = _commerceSubscriptionEntryId;
-		}
-
-		_commerceSubscriptionEntryId = commerceSubscriptionEntryId;
-	}
-
-	public long getOriginalCommerceSubscriptionEntryId() {
-		return _originalCommerceSubscriptionEntryId;
-	}
-
-	@JSON
-	@Override
 	public long getCommerceOrderItemId() {
 		return _commerceOrderItemId;
 	}
@@ -505,6 +482,29 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 
 	public long getOriginalCommerceOrderItemId() {
 		return _originalCommerceOrderItemId;
+	}
+
+	@JSON
+	@Override
+	public long getCommerceSubscriptionEntryId() {
+		return _commerceSubscriptionEntryId;
+	}
+
+	@Override
+	public void setCommerceSubscriptionEntryId(long commerceSubscriptionEntryId) {
+		_columnBitmask |= COMMERCESUBSCRIPTIONENTRYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCommerceSubscriptionEntryId) {
+			_setOriginalCommerceSubscriptionEntryId = true;
+
+			_originalCommerceSubscriptionEntryId = _commerceSubscriptionEntryId;
+		}
+
+		_commerceSubscriptionEntryId = commerceSubscriptionEntryId;
+	}
+
+	public long getOriginalCommerceSubscriptionEntryId() {
+		return _originalCommerceSubscriptionEntryId;
 	}
 
 	@JSON
@@ -569,8 +569,8 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 		commerceSubscriptionCycleEntryImpl.setUserName(getUserName());
 		commerceSubscriptionCycleEntryImpl.setCreateDate(getCreateDate());
 		commerceSubscriptionCycleEntryImpl.setModifiedDate(getModifiedDate());
-		commerceSubscriptionCycleEntryImpl.setCommerceSubscriptionEntryId(getCommerceSubscriptionEntryId());
 		commerceSubscriptionCycleEntryImpl.setCommerceOrderItemId(getCommerceOrderItemId());
+		commerceSubscriptionCycleEntryImpl.setCommerceSubscriptionEntryId(getCommerceSubscriptionEntryId());
 		commerceSubscriptionCycleEntryImpl.setRenew(isRenew());
 
 		commerceSubscriptionCycleEntryImpl.resetOriginalValues();
@@ -649,13 +649,13 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 
 		commerceSubscriptionCycleEntryModelImpl._setModifiedDate = false;
 
-		commerceSubscriptionCycleEntryModelImpl._originalCommerceSubscriptionEntryId = commerceSubscriptionCycleEntryModelImpl._commerceSubscriptionEntryId;
-
-		commerceSubscriptionCycleEntryModelImpl._setOriginalCommerceSubscriptionEntryId = false;
-
 		commerceSubscriptionCycleEntryModelImpl._originalCommerceOrderItemId = commerceSubscriptionCycleEntryModelImpl._commerceOrderItemId;
 
 		commerceSubscriptionCycleEntryModelImpl._setOriginalCommerceOrderItemId = false;
+
+		commerceSubscriptionCycleEntryModelImpl._originalCommerceSubscriptionEntryId = commerceSubscriptionCycleEntryModelImpl._commerceSubscriptionEntryId;
+
+		commerceSubscriptionCycleEntryModelImpl._setOriginalCommerceSubscriptionEntryId = false;
 
 		commerceSubscriptionCycleEntryModelImpl._columnBitmask = 0;
 	}
@@ -707,9 +707,9 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 			commerceSubscriptionCycleEntryCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		commerceSubscriptionCycleEntryCacheModel.commerceSubscriptionEntryId = getCommerceSubscriptionEntryId();
-
 		commerceSubscriptionCycleEntryCacheModel.commerceOrderItemId = getCommerceOrderItemId();
+
+		commerceSubscriptionCycleEntryCacheModel.commerceSubscriptionEntryId = getCommerceSubscriptionEntryId();
 
 		commerceSubscriptionCycleEntryCacheModel.renew = isRenew();
 
@@ -736,10 +736,10 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", commerceSubscriptionEntryId=");
-		sb.append(getCommerceSubscriptionEntryId());
 		sb.append(", commerceOrderItemId=");
 		sb.append(getCommerceOrderItemId());
+		sb.append(", commerceSubscriptionEntryId=");
+		sb.append(getCommerceSubscriptionEntryId());
 		sb.append(", renew=");
 		sb.append(isRenew());
 		sb.append("}");
@@ -788,12 +788,12 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>commerceSubscriptionEntryId</column-name><column-value><![CDATA[");
-		sb.append(getCommerceSubscriptionEntryId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>commerceOrderItemId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceOrderItemId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>commerceSubscriptionEntryId</column-name><column-value><![CDATA[");
+		sb.append(getCommerceSubscriptionEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>renew</column-name><column-value><![CDATA[");
@@ -823,12 +823,12 @@ public class CommerceSubscriptionCycleEntryModelImpl extends BaseModelImpl<Comme
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _commerceSubscriptionEntryId;
-	private long _originalCommerceSubscriptionEntryId;
-	private boolean _setOriginalCommerceSubscriptionEntryId;
 	private long _commerceOrderItemId;
 	private long _originalCommerceOrderItemId;
 	private boolean _setOriginalCommerceOrderItemId;
+	private long _commerceSubscriptionEntryId;
+	private long _originalCommerceSubscriptionEntryId;
+	private boolean _setOriginalCommerceSubscriptionEntryId;
 	private boolean _renew;
 	private long _columnBitmask;
 	private CommerceSubscriptionCycleEntry _escapedModel;

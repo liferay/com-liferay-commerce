@@ -97,11 +97,9 @@ public class CommerceShippingMethodServiceSoap {
 	}
 
 	public static void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId, long groupId)
-		throws RemoteException {
+		long commerceAddressRestrictionId) throws RemoteException {
 		try {
-			CommerceShippingMethodServiceUtil.deleteCommerceAddressRestriction(commerceAddressRestrictionId,
-				groupId);
+			CommerceShippingMethodServiceUtil.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -124,12 +122,12 @@ public class CommerceShippingMethodServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceAddressRestrictionSoap[] getCommerceAddressRestrictions(
 		long commerceShippingMethodId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
-		long groupId) throws RemoteException {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
+		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> returnValue =
 				CommerceShippingMethodServiceUtil.getCommerceAddressRestrictions(commerceShippingMethodId,
-					start, end, orderByComparator, groupId);
+					start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceAddressRestrictionSoap.toSoapModels(returnValue);
 		}
@@ -141,10 +139,9 @@ public class CommerceShippingMethodServiceSoap {
 	}
 
 	public static int getCommerceAddressRestrictionsCount(
-		long commerceShippingMethodId, long groupId) throws RemoteException {
+		long commerceShippingMethodId) throws RemoteException {
 		try {
-			int returnValue = CommerceShippingMethodServiceUtil.getCommerceAddressRestrictionsCount(commerceShippingMethodId,
-					groupId);
+			int returnValue = CommerceShippingMethodServiceUtil.getCommerceAddressRestrictionsCount(commerceShippingMethodId);
 
 			return returnValue;
 		}

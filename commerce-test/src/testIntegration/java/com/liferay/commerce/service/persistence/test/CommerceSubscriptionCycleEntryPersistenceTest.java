@@ -138,9 +138,9 @@ public class CommerceSubscriptionCycleEntryPersistenceTest {
 
 		newCommerceSubscriptionCycleEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceSubscriptionCycleEntry.setCommerceSubscriptionEntryId(RandomTestUtil.nextLong());
-
 		newCommerceSubscriptionCycleEntry.setCommerceOrderItemId(RandomTestUtil.nextLong());
+
+		newCommerceSubscriptionCycleEntry.setCommerceSubscriptionEntryId(RandomTestUtil.nextLong());
 
 		newCommerceSubscriptionCycleEntry.setRenew(RandomTestUtil.randomBoolean());
 
@@ -169,10 +169,10 @@ public class CommerceSubscriptionCycleEntryPersistenceTest {
 				existingCommerceSubscriptionCycleEntry.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceSubscriptionCycleEntry.getModifiedDate()));
-		Assert.assertEquals(existingCommerceSubscriptionCycleEntry.getCommerceSubscriptionEntryId(),
-			newCommerceSubscriptionCycleEntry.getCommerceSubscriptionEntryId());
 		Assert.assertEquals(existingCommerceSubscriptionCycleEntry.getCommerceOrderItemId(),
 			newCommerceSubscriptionCycleEntry.getCommerceOrderItemId());
+		Assert.assertEquals(existingCommerceSubscriptionCycleEntry.getCommerceSubscriptionEntryId(),
+			newCommerceSubscriptionCycleEntry.getCommerceSubscriptionEntryId());
 		Assert.assertEquals(existingCommerceSubscriptionCycleEntry.isRenew(),
 			newCommerceSubscriptionCycleEntry.isRenew());
 	}
@@ -212,18 +212,18 @@ public class CommerceSubscriptionCycleEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountBycommerceSubscriptionEntryId()
-		throws Exception {
-		_persistence.countBycommerceSubscriptionEntryId(RandomTestUtil.nextLong());
-
-		_persistence.countBycommerceSubscriptionEntryId(0L);
-	}
-
-	@Test
 	public void testCountByCommerceOrderItemId() throws Exception {
 		_persistence.countByCommerceOrderItemId(RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceOrderItemId(0L);
+	}
+
+	@Test
+	public void testCountByCommerceSubscriptionEntryId()
+		throws Exception {
+		_persistence.countByCommerceSubscriptionEntryId(RandomTestUtil.nextLong());
+
+		_persistence.countByCommerceSubscriptionEntryId(0L);
 	}
 
 	@Test
@@ -253,9 +253,8 @@ public class CommerceSubscriptionCycleEntryPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CSubscriptionCycleEntry",
 			"uuid", true, "commerceSubscriptionCycleEntryId", true, "groupId",
 			true, "companyId", true, "userId", true, "userName", true,
-			"createDate", true, "modifiedDate", true,
-			"commerceSubscriptionEntryId", true, "commerceOrderItemId", true,
-			"renew", true);
+			"createDate", true, "modifiedDate", true, "commerceOrderItemId",
+			true, "commerceSubscriptionEntryId", true, "renew", true);
 	}
 
 	@Test
@@ -514,9 +513,9 @@ public class CommerceSubscriptionCycleEntryPersistenceTest {
 
 		commerceSubscriptionCycleEntry.setModifiedDate(RandomTestUtil.nextDate());
 
-		commerceSubscriptionCycleEntry.setCommerceSubscriptionEntryId(RandomTestUtil.nextLong());
-
 		commerceSubscriptionCycleEntry.setCommerceOrderItemId(RandomTestUtil.nextLong());
+
+		commerceSubscriptionCycleEntry.setCommerceSubscriptionEntryId(RandomTestUtil.nextLong());
 
 		commerceSubscriptionCycleEntry.setRenew(RandomTestUtil.randomBoolean());
 

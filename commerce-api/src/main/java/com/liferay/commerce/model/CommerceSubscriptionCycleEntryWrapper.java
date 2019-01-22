@@ -71,9 +71,9 @@ public class CommerceSubscriptionCycleEntryWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
 		attributes.put("commerceSubscriptionEntryId",
 			getCommerceSubscriptionEntryId());
-		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
 		attributes.put("renew", isRenew());
 
 		return attributes;
@@ -130,17 +130,17 @@ public class CommerceSubscriptionCycleEntryWrapper
 			setModifiedDate(modifiedDate);
 		}
 
+		Long commerceOrderItemId = (Long)attributes.get("commerceOrderItemId");
+
+		if (commerceOrderItemId != null) {
+			setCommerceOrderItemId(commerceOrderItemId);
+		}
+
 		Long commerceSubscriptionEntryId = (Long)attributes.get(
 				"commerceSubscriptionEntryId");
 
 		if (commerceSubscriptionEntryId != null) {
 			setCommerceSubscriptionEntryId(commerceSubscriptionEntryId);
-		}
-
-		Long commerceOrderItemId = (Long)attributes.get("commerceOrderItemId");
-
-		if (commerceOrderItemId != null) {
-			setCommerceOrderItemId(commerceOrderItemId);
 		}
 
 		Boolean renew = (Boolean)attributes.get("renew");

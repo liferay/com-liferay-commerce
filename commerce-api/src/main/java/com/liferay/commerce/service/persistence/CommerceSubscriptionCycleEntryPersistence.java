@@ -508,146 +508,6 @@ public interface CommerceSubscriptionCycleEntryPersistence
 	public int countByGroupId(long groupId);
 
 	/**
-	* Returns all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	* @return the matching commerce subscription cycle entries
-	*/
-	public java.util.List<CommerceSubscriptionCycleEntry> findBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId);
-
-	/**
-	* Returns a range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	* @param start the lower bound of the range of commerce subscription cycle entries
-	* @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
-	* @return the range of matching commerce subscription cycle entries
-	*/
-	public java.util.List<CommerceSubscriptionCycleEntry> findBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId, int start, int end);
-
-	/**
-	* Returns an ordered range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	* @param start the lower bound of the range of commerce subscription cycle entries
-	* @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce subscription cycle entries
-	*/
-	public java.util.List<CommerceSubscriptionCycleEntry> findBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	* @param start the lower bound of the range of commerce subscription cycle entries
-	* @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce subscription cycle entries
-	*/
-	public java.util.List<CommerceSubscriptionCycleEntry> findBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce subscription cycle entry
-	* @throws NoSuchSubscriptionCycleEntryException if a matching commerce subscription cycle entry could not be found
-	*/
-	public CommerceSubscriptionCycleEntry findBycommerceSubscriptionEntryId_First(
-		long commerceSubscriptionEntryId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
-		throws NoSuchSubscriptionCycleEntryException;
-
-	/**
-	* Returns the first commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce subscription cycle entry, or <code>null</code> if a matching commerce subscription cycle entry could not be found
-	*/
-	public CommerceSubscriptionCycleEntry fetchBycommerceSubscriptionEntryId_First(
-		long commerceSubscriptionEntryId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator);
-
-	/**
-	* Returns the last commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce subscription cycle entry
-	* @throws NoSuchSubscriptionCycleEntryException if a matching commerce subscription cycle entry could not be found
-	*/
-	public CommerceSubscriptionCycleEntry findBycommerceSubscriptionEntryId_Last(
-		long commerceSubscriptionEntryId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
-		throws NoSuchSubscriptionCycleEntryException;
-
-	/**
-	* Returns the last commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce subscription cycle entry, or <code>null</code> if a matching commerce subscription cycle entry could not be found
-	*/
-	public CommerceSubscriptionCycleEntry fetchBycommerceSubscriptionEntryId_Last(
-		long commerceSubscriptionEntryId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator);
-
-	/**
-	* Returns the commerce subscription cycle entries before and after the current commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
-	*
-	* @param commerceSubscriptionCycleEntryId the primary key of the current commerce subscription cycle entry
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce subscription cycle entry
-	* @throws NoSuchSubscriptionCycleEntryException if a commerce subscription cycle entry with the primary key could not be found
-	*/
-	public CommerceSubscriptionCycleEntry[] findBycommerceSubscriptionEntryId_PrevAndNext(
-		long commerceSubscriptionCycleEntryId,
-		long commerceSubscriptionEntryId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
-		throws NoSuchSubscriptionCycleEntryException;
-
-	/**
-	* Removes all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63; from the database.
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	*/
-	public void removeBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId);
-
-	/**
-	* Returns the number of commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
-	*
-	* @param commerceSubscriptionEntryId the commerce subscription entry ID
-	* @return the number of matching commerce subscription cycle entries
-	*/
-	public int countBycommerceSubscriptionEntryId(
-		long commerceSubscriptionEntryId);
-
-	/**
 	* Returns the commerce subscription cycle entry where commerceOrderItemId = &#63; or throws a {@link NoSuchSubscriptionCycleEntryException} if it could not be found.
 	*
 	* @param commerceOrderItemId the commerce order item ID
@@ -692,6 +552,146 @@ public interface CommerceSubscriptionCycleEntryPersistence
 	* @return the number of matching commerce subscription cycle entries
 	*/
 	public int countByCommerceOrderItemId(long commerceOrderItemId);
+
+	/**
+	* Returns all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
+	*
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	* @return the matching commerce subscription cycle entries
+	*/
+	public java.util.List<CommerceSubscriptionCycleEntry> findByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId);
+
+	/**
+	* Returns a range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	* @param start the lower bound of the range of commerce subscription cycle entries
+	* @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
+	* @return the range of matching commerce subscription cycle entries
+	*/
+	public java.util.List<CommerceSubscriptionCycleEntry> findByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	* @param start the lower bound of the range of commerce subscription cycle entries
+	* @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce subscription cycle entries
+	*/
+	public java.util.List<CommerceSubscriptionCycleEntry> findByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceSubscriptionCycleEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	* @param start the lower bound of the range of commerce subscription cycle entries
+	* @param end the upper bound of the range of commerce subscription cycle entries (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce subscription cycle entries
+	*/
+	public java.util.List<CommerceSubscriptionCycleEntry> findByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
+	*
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce subscription cycle entry
+	* @throws NoSuchSubscriptionCycleEntryException if a matching commerce subscription cycle entry could not be found
+	*/
+	public CommerceSubscriptionCycleEntry findByCommerceSubscriptionEntryId_First(
+		long commerceSubscriptionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
+		throws NoSuchSubscriptionCycleEntryException;
+
+	/**
+	* Returns the first commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
+	*
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce subscription cycle entry, or <code>null</code> if a matching commerce subscription cycle entry could not be found
+	*/
+	public CommerceSubscriptionCycleEntry fetchByCommerceSubscriptionEntryId_First(
+		long commerceSubscriptionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator);
+
+	/**
+	* Returns the last commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
+	*
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce subscription cycle entry
+	* @throws NoSuchSubscriptionCycleEntryException if a matching commerce subscription cycle entry could not be found
+	*/
+	public CommerceSubscriptionCycleEntry findByCommerceSubscriptionEntryId_Last(
+		long commerceSubscriptionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
+		throws NoSuchSubscriptionCycleEntryException;
+
+	/**
+	* Returns the last commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
+	*
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce subscription cycle entry, or <code>null</code> if a matching commerce subscription cycle entry could not be found
+	*/
+	public CommerceSubscriptionCycleEntry fetchByCommerceSubscriptionEntryId_Last(
+		long commerceSubscriptionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator);
+
+	/**
+	* Returns the commerce subscription cycle entries before and after the current commerce subscription cycle entry in the ordered set where commerceSubscriptionEntryId = &#63;.
+	*
+	* @param commerceSubscriptionCycleEntryId the primary key of the current commerce subscription cycle entry
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce subscription cycle entry
+	* @throws NoSuchSubscriptionCycleEntryException if a commerce subscription cycle entry with the primary key could not be found
+	*/
+	public CommerceSubscriptionCycleEntry[] findByCommerceSubscriptionEntryId_PrevAndNext(
+		long commerceSubscriptionCycleEntryId,
+		long commerceSubscriptionEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceSubscriptionCycleEntry> orderByComparator)
+		throws NoSuchSubscriptionCycleEntryException;
+
+	/**
+	* Removes all the commerce subscription cycle entries where commerceSubscriptionEntryId = &#63; from the database.
+	*
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	*/
+	public void removeByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId);
+
+	/**
+	* Returns the number of commerce subscription cycle entries where commerceSubscriptionEntryId = &#63;.
+	*
+	* @param commerceSubscriptionEntryId the commerce subscription entry ID
+	* @return the number of matching commerce subscription cycle entries
+	*/
+	public int countByCommerceSubscriptionEntryId(
+		long commerceSubscriptionEntryId);
 
 	/**
 	* Caches the commerce subscription cycle entry in the entity cache if it is enabled.

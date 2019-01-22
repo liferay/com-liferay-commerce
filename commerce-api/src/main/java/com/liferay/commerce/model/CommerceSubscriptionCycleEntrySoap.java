@@ -43,8 +43,8 @@ public class CommerceSubscriptionCycleEntrySoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCommerceSubscriptionEntryId(model.getCommerceSubscriptionEntryId());
 		soapModel.setCommerceOrderItemId(model.getCommerceOrderItemId());
+		soapModel.setCommerceSubscriptionEntryId(model.getCommerceSubscriptionEntryId());
 		soapModel.setRenew(model.isRenew());
 
 		return soapModel;
@@ -166,20 +166,20 @@ public class CommerceSubscriptionCycleEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCommerceSubscriptionEntryId() {
-		return _commerceSubscriptionEntryId;
-	}
-
-	public void setCommerceSubscriptionEntryId(long commerceSubscriptionEntryId) {
-		_commerceSubscriptionEntryId = commerceSubscriptionEntryId;
-	}
-
 	public long getCommerceOrderItemId() {
 		return _commerceOrderItemId;
 	}
 
 	public void setCommerceOrderItemId(long commerceOrderItemId) {
 		_commerceOrderItemId = commerceOrderItemId;
+	}
+
+	public long getCommerceSubscriptionEntryId() {
+		return _commerceSubscriptionEntryId;
+	}
+
+	public void setCommerceSubscriptionEntryId(long commerceSubscriptionEntryId) {
+		_commerceSubscriptionEntryId = commerceSubscriptionEntryId;
 	}
 
 	public boolean getRenew() {
@@ -202,7 +202,7 @@ public class CommerceSubscriptionCycleEntrySoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _commerceSubscriptionEntryId;
 	private long _commerceOrderItemId;
+	private long _commerceSubscriptionEntryId;
 	private boolean _renew;
 }

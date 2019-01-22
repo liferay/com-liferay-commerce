@@ -74,8 +74,7 @@ public interface CommerceShippingMethodService extends BaseService {
 		long commerceShippingMethodId) throws PortalException;
 
 	public void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId, long groupId)
-		throws PortalException;
+		long commerceAddressRestrictionId) throws PortalException;
 
 	public void deleteCommerceShippingMethod(long commerceShippingMethodId)
 		throws PortalException;
@@ -83,12 +82,12 @@ public interface CommerceShippingMethodService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
 		long commerceShippingMethodId, int start, int end,
-		OrderByComparator<CommerceAddressRestriction> orderByComparator,
-		long groupId) throws PortalException;
+		OrderByComparator<CommerceAddressRestriction> orderByComparator)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressRestrictionsCount(
-		long commerceShippingMethodId, long groupId) throws PortalException;
+		long commerceShippingMethodId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceShippingMethod getCommerceShippingMethod(
