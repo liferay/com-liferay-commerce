@@ -17,6 +17,7 @@ package com.liferay.commerce.payment.method.authorize.net.internal;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommerceOrderPaymentConstants;
 import com.liferay.commerce.constants.CommercePaymentConstants;
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.authorize.net.internal.configuration.AuthorizeNetGroupServiceConfiguration;
@@ -41,6 +42,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import java.net.URLEncoder;
 
@@ -177,7 +179,7 @@ public class AuthorizeNetCommercePaymentMethod
 			new GetHostedPaymentPageRequest();
 
 		TransactionRequestType transactionRequestType =
-			_getTransactionRequestType(commerceOrder.getTotal());
+			_getTransactionRequestType(commerceOrder);
 
 		getHostedPaymentPageRequest.setTransactionRequest(
 			transactionRequestType);
@@ -385,7 +387,8 @@ public class AuthorizeNetCommercePaymentMethod
 	}
 
 	private TransactionRequestType _getTransactionRequestType(
-		BigDecimal amount) {
+			CommerceOrder commerceOrder)
+		throws PortalException {
 
 		TransactionRequestType transactionRequestType =
 			new TransactionRequestType();
@@ -395,7 +398,16 @@ public class AuthorizeNetCommercePaymentMethod
 
 		transactionRequestType.setTransactionType(transactionType);
 
-		transactionRequestType.setAmount(amount);
+		BigDecimal amount = commerceOrder.getTotal();
+
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
+		String roundingMode = commerceCurrency.getRoundingMode();
+
+		transactionRequestType.setAmount(
+			amount.setScale(
+				commerceCurrency.getMaxFractionDigits(),
+				RoundingMode.valueOf(roundingMode)));
 
 		return transactionRequestType;
 	}
