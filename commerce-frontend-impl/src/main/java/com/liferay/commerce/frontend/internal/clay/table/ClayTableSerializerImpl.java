@@ -58,16 +58,10 @@ public class ClayTableSerializerImpl implements ClayTableSerializer {
 
 		ClayTableSchema clayTableSchema = clayTable.getClayTableSchema();
 
-		String inputValueField = clayTableSchema.getInputNameField();
-
 		Map<String, ClayTableSchemaField> fieldsMap =
 			clayTableSchema.getFields();
 
-		for (Map.Entry<String, ClayTableSchemaField> entry :
-				fieldsMap.entrySet()) {
-
-			ClayTableSchemaField clayTableSchemaField = entry.getValue();
-
+		for (ClayTableSchemaField clayTableSchemaField : fieldsMap.values()) {
 			JSONObject jsonObject = _jsonFactory.createJSONObject();
 
 			String label = clayTableSchemaField.getLabel();
@@ -105,7 +99,7 @@ public class ClayTableSerializerImpl implements ClayTableSerializer {
 
 			fieldsJSONArray.put(jsonObject);
 
-			if (name.equals(inputValueField)) {
+			if (name.equals(clayTableSchema.getInputNameField())) {
 				schemaJSONObject.put("inputValueField", name);
 			}
 		}
