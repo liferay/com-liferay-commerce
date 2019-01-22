@@ -3,18 +3,19 @@ import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
 class QuantitySelector extends Component {
-	handleSelectOption(evt) {
-		const quantity = parseInt(evt.target.value);
-		this.emit('updateQuantity', quantity);
-	}
 
-	prepareStateForRender(states) {
-		this.isPrevAvailable = this.checkWhetherIsPrevButtonAvailable(
-			states.quantity
-		);
-		this.isNextAvailable = this.checkWhetherIsNextButtonAvailable(
-			states.quantity
-		);
+	checkWhetherIsNextButtonAvailable(quantity) {
+		if (this.allowedOptions && this.allowedOptions.length) {
+			const nextOptionIndex = this.allowedOptions.indexOf(quantity) + 1;
+
+			return !!this.allowedOptions[nextOptionIndex];
+		}
+
+		let tempValue = this.multipleQuantities ?
+			quantity + this.multipleQuantities :
+			quantity - 1;
+
+		return tempValue <= this.maxQuantity;
 	}
 
 	checkWhetherIsPrevButtonAvailable(quantity) {
@@ -29,21 +30,66 @@ class QuantitySelector extends Component {
 		return tempValue >= this.minQuantity;
 	}
 
-	checkWhetherIsNextButtonAvailable(quantity) {
-		if (this.allowedOptions && this.allowedOptions.length) {
-			const nextOptionIndex = this.allowedOptions.indexOf(quantity) + 1;
-			return !!this.allowedOptions[nextOptionIndex];
-		}
+	handleSelectOption(evt) {
+		const quantity = parseInt(evt.target.value);
 
-		let tempValue = this.multipleQuantities ?
-			quantity + this.multipleQuantities :
-			quantity - 1;
-
-		return tempValue <= this.maxQuantity;
+		this.emit('updateQuantity', quantity);
 	}
 
-	handlePrevQuantity(e) {
-		e.preventDefault();
+	handleFormSubmit(evt) {
+		evt.preventDefault();
+
+		this.showError = true;
+
+		this.emit('submitQuantity', this.quantity);
+	}
+
+	handleInputKeyUp(evt) {
+		if (!evt.target.value) {
+			return null;
+		}
+
+		const quantity = parseInt(evt.target.value);
+
+		this.submitQuantity(quantity);
+	}
+
+	handleNextQuantity(evt) {
+		evt.preventDefault();
+
+		if (!this.isNextAvailable) {
+			return (this.showError = true);
+		}
+
+		let tempQuantity = this.quantity;
+
+		if (this.multipleQuantities) {
+			tempQuantity += this.multipleQuantities;
+		}
+		if (this.allowedOptions && this.allowedOptions.length) {
+			const index = this.allowedOptions.indexOf(tempQuantity);
+
+			if (index + 1 >= this.allowedOptions.length) {
+				return (this.inputError = 'NoQuantitiesHigherThanAvailable');
+			}
+
+			tempQuantity = this.allowedOptions[index + 1];
+		}
+
+		if (!this.multipleQuantities && !this.allowedOptions) {
+			tempQuantity++;
+		}
+
+		if (tempQuantity > this.maxQuantity) {
+			return (this.inputError = 'MaxAvailableReached');
+		}
+
+		this.updateQuantity(tempQuantity);
+	}
+
+	handlePrevQuantity(evt) {
+		evt.preventDefault();
+
 		if (!this.isPrevAvailable) {
 			return (this.showError = true);
 		}
@@ -56,14 +102,16 @@ class QuantitySelector extends Component {
 
 		if (this.allowedOptions && this.allowedOptions.length) {
 			const index = this.allowedOptions.indexOf(tempQuantity);
+
 			if (!index) {
 				return (this.inputError = 'NoQuantitiesLessThanAvailable');
 			}
+
 			tempQuantity = this.allowedOptions[index - 1];
 		}
 
 		if (!this.multipleQuantities && !this.allowedOptions) {
-			--tempQuantity;
+			tempQuantity--;
 		}
 
 		if (tempQuantity < this.minQuantity) {
@@ -73,49 +121,14 @@ class QuantitySelector extends Component {
 		this.updateQuantity(tempQuantity);
 	}
 
-	handleNextQuantity(e) {
-		e.preventDefault();
-		if (!this.isNextAvailable) {
-			return (this.showError = true);
-		}
+	prepareStateForRender(states) {
+		this.isPrevAvailable = this.checkWhetherIsPrevButtonAvailable(
+			states.quantity
+		);
 
-		let tempQuantity = this.quantity;
-
-		if (this.multipleQuantities) {
-			tempQuantity += this.multipleQuantities;
-		}
-		if (this.allowedOptions && this.allowedOptions.length) {
-			const index = this.allowedOptions.indexOf(tempQuantity);
-			if (index + 1 >= this.allowedOptions.length) {
-				return (this.inputError = 'NoQuantitiesHigherThanAvailable');
-			}
-			tempQuantity = this.allowedOptions[index + 1];
-		}
-
-		if (!this.multipleQuantities && !this.allowedOptions) {
-			++tempQuantity;
-		}
-
-		if (tempQuantity > this.maxQuantity) {
-			return (this.inputError = 'MaxAvailableReached');
-		}
-
-		this.updateQuantity(tempQuantity);
-	}
-
-	handleInputKeyUp(evt) {
-		if (!evt.target.value) {
-			return null;
-		}
-
-		const quantity = parseInt(evt.target.value);
-		this.submitQuantity(quantity);
-	}
-
-	handleFormSubmit(evt) {
-		evt.preventDefault();
-		this.showError = true;
-		this.emit('submitQuantity', this.quantity);
+		this.isNextAvailable = this.checkWhetherIsNextButtonAvailable(
+			states.quantity
+		);
 	}
 
 	submitQuantity(quantity) {
@@ -138,19 +151,21 @@ class QuantitySelector extends Component {
 
 	updateQuantity(quantity) {
 		this.showError = false;
+
 		this.emit('updateQuantity', quantity);
 	}
+
 }
 
 QuantitySelector.STATE = {
-	minQuantity: Config.number().value(1),
-	maxQuantity: Config.number().value(99999999),
-	multipleQuantities: Config.number(),
 	allowedOptions: Config.array(Config.number()),
-	quantity: Config.number(),
-	isPrevAvailable: Config.bool().value(true),
-	isNextAvailable: Config.bool().value(true),
 	inputError: Config.string(),
+	isNextAvailable: Config.bool().value(true),
+	isPrevAvailable: Config.bool().value(true),
+	maxQuantity: Config.number().value(99999999),
+	minQuantity: Config.number().value(1),
+	multipleQuantities: Config.number(),
+	quantity: Config.number(),
 	showError: Config.bool().value(false)
 };
 

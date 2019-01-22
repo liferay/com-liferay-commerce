@@ -5,8 +5,9 @@ import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
 class RoleInputItem extends Component {
-	_handleRemoveItem(e) {
-		e.preventDefault();
+
+	_handleRemoveItem(evt) {
+		evt.preventDefault();
 
 		return this.emit(
 			'removeItem',
@@ -15,6 +16,7 @@ class RoleInputItem extends Component {
 			}
 		);
 	}
+
 };
 
 Soy.register(RoleInputItem, template);

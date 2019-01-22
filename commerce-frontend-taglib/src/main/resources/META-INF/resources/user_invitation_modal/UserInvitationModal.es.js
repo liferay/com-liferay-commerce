@@ -15,33 +15,51 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 
 class UserInvitationModal extends Component {
 
-	created() {
-		this._debouncedFetchUser = debounce(this._fetchUsers.bind(this), 300);
-	}
-
 	attached() {
 		this._fetchUsers();
 	}
 
-	syncAddedUsers() {
-		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
-		this.element.querySelector('.autocomplete-input__box').focus();
-		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-		return true;
+	close() {
+		return this._isVisible = false;
 	}
 
-	_handleCloseModal(e) {
-		e.preventDefault();
-		this._isVisible = false;
+	created() {
+		this._debouncedFetchUser = debounce(this._fetchUsers.bind(this), 300);
+	}
+
+	open() {
+		return this._isVisible = true;
+	}
+
+	syncAddedUsers() {
+		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
+
+		this.element.querySelector('.autocomplete-input__box').focus();
+
+		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+
+		return true;
 	}
 
 	syncQuery() {
 		this._isLoading = true;
+
 		return this._debouncedFetchUser();
+	}
+
+	toggle() {
+		return this._isVisible = !this._isVisible;
+	}
+
+	_handleCloseModal(evt) {
+		evt.preventDefault();
+
+		this._isVisible = false;
 	}
 
 	_handleFormSubmit(evt) {
 		evt.preventDefault();
+
 		if (this.query.match(EMAIL_REGEX)) {
 			this.addedUsers = [
 				...this.addedUsers,
@@ -49,17 +67,22 @@ class UserInvitationModal extends Component {
 					email: this.query
 				}
 			];
+
 			this.query = '';
+
 			return true;
 		}
+
 		return false;
 	}
 
 	_handleInputBox(evt) {
 		if (evt.keyCode === 8 && !this.query.length) {
 			this.addedUsers = this.addedUsers.slice(0, -1);
+
 			return false;
 		}
+
 		return this.query = evt.target.value;
 	}
 
@@ -114,43 +137,32 @@ class UserInvitationModal extends Component {
 		);
 	}
 
-	toggle() {
-		return this._isVisible = !this._isVisible;
-	}
-
-	open() {
-		return this._isVisible = true;
-	}
-
-	close() {
-		return this._isVisible = false;
-	}
 };
 
 Soy.register(UserInvitationModal, template);
 
 const USER_SCHEMA = Config.shapeOf(
 	{
+		email: Config.string().required(),
+		name: Config.string().required(),
+		thumbnail: Config.string().required(),
 		userId: Config.oneOfType(
 			[
-				Config.string(),
-				Config.number()
+				Config.number(),
+				Config.string()
 			]
-		).required(),
-		thumbnail: Config.string().required(),
-		name: Config.string().required(),
-		email: Config.string().required()
+		).required()
 	}
 );
 
 UserInvitationModal.STATE = {
-	usersAPI: Config.string().value(''),
+	_isLoading: Config.bool().internal().value(false),
+	_isVisible: Config.bool().internal().value(false),
+	addedUsers: Config.array(USER_SCHEMA).value([]),
 	query: Config.string().value(''),
 	spritemap: Config.string(),
 	users: Config.array(USER_SCHEMA).value([]),
-	addedUsers: Config.array(USER_SCHEMA).value([]),
-	_isVisible: Config.bool().internal().value(false),
-	_isLoading: Config.bool().internal().value(false)
+	usersAPI: Config.string().value('')
 };
 
 export {UserInvitationModal};

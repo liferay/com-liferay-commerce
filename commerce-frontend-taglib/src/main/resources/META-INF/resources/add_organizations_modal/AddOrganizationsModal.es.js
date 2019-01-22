@@ -13,66 +13,62 @@ import './OrganizationListItem.es';
 
 class AddOrganizationModal extends Component {
 
-	created() {
-		this._debouncedFetchOrganizations = debounce(this._fetchOrganizations.bind(this), 300);
+	addColorToOrganizations(organizations) {
+		return organizations.map(organization => {
+			return Object.assign(
+				{
+					colorId: Math.floor(Math.random() * 6) + 1
+				},
+				organization,
+			);
+		});
 	}
 
 	attached() {
 		this._fetchOrganizations();
 	}
 
-	syncAddedOrganizations() {
-		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
-		this.element.querySelector('.autocomplete-input__box').focus();
-		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-		return true;
+	close() {
+		return this._isVisible = false;
 	}
 
-	_handleCloseModal(e) {
-		e.preventDefault();
-		this._isVisible = false;
+	created() {
+		this._debouncedFetchOrganizations = debounce(this._fetchOrganizations.bind(this), 300);
+	}
+
+	open() {
+		return this._isVisible = true;
+	}
+
+	syncAddedOrganizations() {
+		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
+
+		this.element.querySelector('.autocomplete-input__box').focus();
+
+		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+
+		return true;
 	}
 
 	syncQuery() {
 		this._isLoading = true;
+
 		return this._debouncedFetchOrganizations();
 	}
 
-	_handleFormSubmit(evt) {
-		evt.preventDefault();
-
-		if (this.organizations.length) {
-			this._toggleItem(this.organizations[0]);
-			this.query = '';
-			return true;
-		}
-		return false;
+	toggle() {
+		return this._isVisible = !this._isVisible;
 	}
 
-	_handleInputBox(evt) {
-		if (evt.keyCode === 8 && !this.query.length) {
-			this.selectedOrganizations = this.selectedOrganizations.slice(0, -1);
+	_addOrganizations() {
+		if (!this.selectedOrganizations.length) {
 			return false;
-		}
-		return this.query = evt.target.value;
-	}
+		};
 
-	_toggleItem(organizationToBeToggled) {
-		if (!organizationToBeToggled.id) {
-			this.query = '';
-		}
-
-		const hasOrganizationAlreadyBeenAdded = this.selectedOrganizations.reduce(
-			(alreadyAdded, organization) => alreadyAdded || organization.id === organizationToBeToggled.id,
-			false
+		return this.emit(
+			'addOrganization',
+			this.selectedOrganizations
 		);
-
-		this.selectedOrganizations =
-			hasOrganizationAlreadyBeenAdded ?
-				this.selectedOrganizations.filter((organization) => organization.id !== organizationToBeToggled.id) :
-				[...this.selectedOrganizations, organizationToBeToggled];
-
-		return this.selectedOrganizations;
 	}
 
 	_fetchOrganizations() {
@@ -94,53 +90,68 @@ class AddOrganizationModal extends Component {
 			);
 	}
 
-	addColorToOrganizations(organizations) {
-		return organizations.map(organization => {
-			return Object.assign(
-				{
-					colorId: Math.floor(Math.random() * 6) + 1
-				},
-				organization,
-			);
-		});
+	_handleCloseModal(e) {
+		e.preventDefault();
+
+		this._isVisible = false;
 	}
 
-	_addOrganizations() {
-		if (!this.selectedOrganizations.length) {
+	_handleFormSubmit(evt) {
+		evt.preventDefault();
+
+		if (this.organizations.length) {
+			this._toggleItem(this.organizations[0]);
+
+			this.query = '';
+
+			return true;
+		}
+
+		return false;
+	}
+
+	_handleInputBox(evt) {
+		if (evt.keyCode === 8 && !this.query.length) {
+			this.selectedOrganizations = this.selectedOrganizations.slice(0, -1);
+
 			return false;
-		};
+		}
 
-		return this.emit(
-			'addOrganization',
-			this.selectedOrganizations
+		return this.query = evt.target.value;
+	}
+
+	_toggleItem(organizationToBeToggled) {
+		if (!organizationToBeToggled.id) {
+			this.query = '';
+		}
+
+		const hasOrganizationAlreadyBeenAdded = this.selectedOrganizations.reduce(
+			(alreadyAdded, organization) => alreadyAdded || organization.id === organizationToBeToggled.id,
+			false
 		);
+
+		this.selectedOrganizations =
+			hasOrganizationAlreadyBeenAdded ?
+				this.selectedOrganizations.filter((organization) => organization.id !== organizationToBeToggled.id) :
+				[...this.selectedOrganizations, organizationToBeToggled];
+
+		return this.selectedOrganizations;
 	}
 
-	toggle() {
-		return this._isVisible = !this._isVisible;
-	}
-
-	open() {
-		return this._isVisible = true;
-	}
-
-	close() {
-		return this._isVisible = false;
-	}
 };
 
 Soy.register(AddOrganizationModal, template);
 
 const ORGANIZATION_SCHEMA = Config.shapeOf(
 	{
+		colorId: Config.number(),
 		id: Config.oneOfType(
 			[
 				Config.number(),
 				Config.string()
 			]
 		).required(),
-		name: Config.string().required(),
-		colorId: Config.number()
+		name: Config.string().required()
 	}
 );
 

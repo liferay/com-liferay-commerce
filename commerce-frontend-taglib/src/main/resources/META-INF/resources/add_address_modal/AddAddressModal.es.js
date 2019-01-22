@@ -10,9 +10,16 @@ import '../input_utils/CommerceInputText';
 
 class AddAddressModal extends Component {
 
-
 	attached() {
 		this._fetchCountries();
+	}
+
+	close() {
+		return this._isVisible = false;
+	}
+
+	open() {
+		return this._isVisible = true;
 	}
 
 	sync_addressType() {
@@ -23,92 +30,23 @@ class AddAddressModal extends Component {
 		return this._validateForms();
 	}
 
-	_handleFirstDotClick(e) {
-		e.preventDefault();
-		return this._stage = 1;
+	toggle() {
+		return this._isVisible = !this._isVisible;
 	}
 
-	_handleSecondDotClick(e) {
-		return this._handleNextButton(e);
-	}
-
-	_handleTypeChange(evt) {
-		return this._addressType = evt.target.value;
-	}
-
-	_handleNextButton(e) {
-		e.preventDefault();
-		this._isFirstFormValid = this.refs.modal.refs.firstForm.checkValidity();
-		if (this._isFirstFormValid) {
-			return this._stage = 2;
-		}
-		return false;
-	}
-
-	_handleCloseModal(e) {
-		e.preventDefault();
-		this._isVisible = false;
-	}
-
-	_handleSelectBox(evt) {
-		const value = evt.target.value;
-		if (evt.target.name === 'commerceCountry') {
-			this._formData = Object.assign(
-				{},
-				this._formData,
-				{
-					country: value
-				}
-			);
-			this._fetchRegions();
-		}
-		else {
-			this._formData = Object.assign(
-				{},
-				this._formData,
-				{
-					region: value
-				}
-			);
-		}
-		return value;
-	}
-
-	_handleInputBox(evt) {
-		this._formData = Object.assign(
-			{},
-			this._formData,
-			{
-				[evt.target.name]: evt.target.value
-			}
+	_addAddress(e) {
+		return this.emit(
+			'addAddressModalSave',
+			Object.assign(
+				{}, this._formData,
+				{addressType: this._addressType})
 		);
-		return evt.target.value;
-	}
-
-	_validateForms(form) {
-		const isFirstFormValid =
-			!!(
-				this._formData.address && this._formData.address.length &&
-				this._formData.city && this._formData.city.length &&
-				this._formData.zipCode && this._formData.zipCode.length &&
-				this._formData.country && this._formData.country.length &&
-				this._formData.region && this._formData.region.length
-			);
-		this._isFirstFormValid = isFirstFormValid;
-
-		const isSecondFormValid =
-			!!(
-				this._formData.referent && this._formData.referent.length
-			);
-		this._isSecondFormValid = isSecondFormValid;
-
-		return this._isFirstFormValid && this._isSecondFormValid;
 	}
 
 	_fetchCountries() {
 		return fetch(
 			(this._addressType === 'shipping' ? this.shippingCountriesAPI : this.billingCountriesAPI) +
-			themeDisplay.getScopeGroupId(),
+				themeDisplay.getScopeGroupId(),
 			{
 				method: 'GET'
 			}
@@ -140,56 +78,132 @@ class AddAddressModal extends Component {
 			);
 	}
 
+	_handleCloseModal(e) {
+		e.preventDefault();
+
+		this._isVisible = false;
+	}
+
+	_handleFirstDotClick(e) {
+		e.preventDefault();
+
+		return this._stage = 1;
+	}
+
 	_handleFormSubmit(e) {
 		e.preventDefault();
+
 		const isFormValid = e.target.checkValidity();
+
 		if (isFormValid) {
 			this._addAddress(e);
 		}
 	}
 
-	_addAddress(e) {
-		return this.emit(
-			'addAddressModalSave',
-			Object.assign(
+	_handleInputBox(evt) {
+		this._formData = Object.assign(
+			{},
+			this._formData,
+			{
+				[evt.target.name]: evt.target.value
+			}
+		);
+
+		return evt.target.value;
+	}
+
+	_handleNextButton(e) {
+		e.preventDefault();
+
+		this._isFirstFormValid = this.refs.modal.refs.firstForm.checkValidity();
+
+		if (this._isFirstFormValid) {
+			return this._stage = 2;
+		}
+
+		return false;
+	}
+
+	_handleSecondDotClick(e) {
+		return this._handleNextButton(e);
+	}
+
+	_handleSelectBox(evt) {
+		const value = evt.target.value;
+
+		if (evt.target.name === 'commerceCountry') {
+			this._formData = Object.assign(
 				{},
 				this._formData,
-				{addressType: this._addressType})
-		);
+				{
+					country: value
+				}
+			);
+
+			this._fetchRegions();
+		}
+		else {
+			this._formData = Object.assign(
+				{},
+				this._formData,
+				{
+					region: value
+				}
+			);
+		}
+
+		return value;
 	}
 
-	toggle() {
-		return this._isVisible = !this._isVisible;
+	_handleTypeChange(evt) {
+		return this._addressType = evt.target.value;
 	}
 
-	open() {
-		return this._isVisible = true;
+	_validateForms(form) {
+		const isFirstFormValid =
+			!!(
+				this._formData.address && this._formData.address.length &&
+				this._formData.city && this._formData.city.length &&
+				this._formData.zipCode && this._formData.zipCode.length &&
+				this._formData.country && this._formData.country.length &&
+				this._formData.region && this._formData.region.length
+			);
+
+		this._isFirstFormValid = isFirstFormValid;
+
+		const isSecondFormValid =
+			!!(
+				this._formData.referent && this._formData.referent.length
+			);
+
+		this._isSecondFormValid = isSecondFormValid;
+
+		return this._isFirstFormValid && this._isSecondFormValid;
 	}
 
-	close() {
-		return this._isVisible = false;
-	}
 };
 
 Soy.register(AddAddressModal, template);
 
 AddAddressModal.STATE = {
-	_stage: Config.number(
-		Config.oneOf(
-			[
-				1,
-				2
-			]
-		)
-	).value(1),
+	billingCountriesAPI: Config.string().required(),
+	regionsAPI: Config.string().required(),
+	shippingCountriesAPI: Config.string().required(),
+	spritemap: Config.string(),
 	_addressType: Config.oneOf(
 		[
 			'billing',
 			'shipping'
 		]
 	).internal().value('shipping'),
-	_isFirstFormValid: Config.bool().value(false),
-	_isSecondFormValid: Config.bool().value(false),
+	_countries: Config.array(
+		Config.shapeOf(
+			{
+				id: Config.number().required(),
+				name: Config.string().required()
+			}
+		)
+	).value([]),
 	_formData: Config.shapeOf(
 		{
 			address: Config.string(),
@@ -221,17 +235,10 @@ AddAddressModal.STATE = {
 			telephone: null
 		}
 	),
-	shippingCountriesAPI: Config.string().required(),
-	billingCountriesAPI: Config.string().required(),
-	regionsAPI: Config.string().required(),
-	_countries: Config.array(
-		Config.shapeOf(
-			{
-				id: Config.number().required(),
-				name: Config.string().required()
-			}
-		)
-	).value([]),
+	_isFirstFormValid: Config.bool().value(false),
+	_isLoading: Config.bool().internal().value(false),
+	_isSecondFormValid: Config.bool().value(false),
+	_isVisible: Config.bool().internal().value(false),
 	_regions: Config.array(
 		Config.shapeOf(
 			{
@@ -240,9 +247,14 @@ AddAddressModal.STATE = {
 			}
 		)
 	).value([]),
-	spritemap: Config.string(),
-	_isVisible: Config.bool().internal().value(false),
-	_isLoading: Config.bool().internal().value(false)
+	_stage: Config.number(
+		Config.oneOf(
+			[
+				1,
+				2
+			]
+		)
+	).value(1)
 };
 
 export {AddAddressModal};

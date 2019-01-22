@@ -7,11 +7,8 @@ import '../price/Price.es';
 class Loader extends Component {}
 
 Loader.STATE = {
-
-	inverted: Config.bool(),
-
-	direction: Config.string()
-
+	direction: Config.string(),
+	inverted: Config.bool()
 };
 
 Soy.register(Loader, template);

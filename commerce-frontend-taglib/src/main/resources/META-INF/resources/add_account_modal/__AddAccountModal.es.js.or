@@ -13,24 +13,26 @@ class AddAccountModal extends Component {
 	attached() {
 		Liferay.on('updateUsersOnModal', (e) => {
 			this.users = e.details;
-		})
+		});
 	}
 
-	_updateAddedUsers(users) {
-		console.log('update triggered!', users);
-		return this.users = users;
-	}
-
-	_handleCloseModal(e) {
-		e.preventDefault();
+	close() {
 		return this._isVisible = false;
+	}
+
+	open() {
+		return this._isVisible = true;
+	}
+
+	toggle() {
+		return this._isVisible = !this._isVisible;
 	}
 
 	_addAccounts() {
 		if (!this.users.length) {
 			return false;
 		};
-		
+
 		const result = {
 			account: 'test',
 			users: this.users
@@ -41,42 +43,41 @@ class AddAccountModal extends Component {
 		);
 	}
 
-	toggle() {
-		return this._isVisible = !this._isVisible;
-	}
+	_handleCloseModal(e) {
+		e.preventDefault();
 
-	open() {
-		return this._isVisible = true;
-	}
-
-	close() {
 		return this._isVisible = false;
 	}
+
+	_updateAddedUsers(users) {
+		return this.users = users;
+	}
+
 };
 
 Soy.register(AddAccountModal, template);
 
 const USER_SCHEMA = Config.shapeOf(
 	{
+		email: Config.string().required(),
+		name: Config.string().required(),
+		thumbnail: Config.string().required(),
 		userId: Config.oneOfType(
 			[
-				Config.string(),
-				Config.number()
+				Config.number(),
+				Config.string()
 			]
-		).required(),
-		thumbnail: Config.string().required(),
-		name: Config.string().required(),
-		email: Config.string().required()
+		).required()
 	}
 );
 
 AddAccountModal.STATE = {
-	usersAPI: Config.string().value(''),
 	query: Config.string().value(''),
 	spritemap: Config.string(),
 	users: Config.array(USER_SCHEMA).value([]),
-	_isVisible: Config.bool().internal().value(false),
-	_isLoading: Config.bool().internal().value(false)
+	usersAPI: Config.string().value(''),
+	_isLoading: Config.bool().internal().value(false),
+	_isVisible: Config.bool().internal().value(false)
 };
 
 export {AddAccountModal};

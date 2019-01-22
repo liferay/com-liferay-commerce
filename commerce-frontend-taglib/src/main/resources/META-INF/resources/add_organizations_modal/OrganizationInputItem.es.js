@@ -5,6 +5,7 @@ import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
 class OrganizationInputItem extends Component {
+
 	_handleRemoveItem(e) {
 		e.preventDefault();
 
@@ -15,6 +16,7 @@ class OrganizationInputItem extends Component {
 			}
 		);
 	}
+
 };
 
 Soy.register(OrganizationInputItem, template);

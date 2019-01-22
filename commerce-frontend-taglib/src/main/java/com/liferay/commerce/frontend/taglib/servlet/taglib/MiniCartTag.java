@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
-import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.portlet.PortletURL;
 
@@ -50,15 +50,17 @@ public class MiniCartTag extends ComponentRendererTag {
 			WebKeys.THEME_DISPLAY);
 
 		try {
-			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
-
-			putValue("isOpen", false);
-			putValue("isDisabled", false);
+			putValue(
+				"cartAPI",
+				PortalUtil.getPortalURL(request) + "/o/commerce-ui/cart");
 
 			String checkoutURL = StringPool.BLANK;
-			String detailsURL = StringPool.BLANK;
+
+			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
 			if (commerceOrder != null) {
+				putValue("cartId", commerceOrder.getCommerceOrderId());
+
 				PortletURL commerceCheckoutPortletURL =
 					_commerceOrderHttpHelper.getCommerceCheckoutPortletURL(
 						request);
@@ -68,6 +70,10 @@ public class MiniCartTag extends ComponentRendererTag {
 				}
 			}
 
+			putValue("checkoutUrl", checkoutURL);
+
+			String detailsURL = StringPool.BLANK;
+
 			PortletURL commerceCartPortletURL =
 				_commerceOrderHttpHelper.getCommerceCartPortletURL(
 					request, commerceOrder);
@@ -76,19 +82,12 @@ public class MiniCartTag extends ComponentRendererTag {
 				detailsURL = String.valueOf(commerceCartPortletURL);
 			}
 
-			putValue("checkoutUrl", checkoutURL);
 			putValue("detailsUrl", detailsURL);
 
+			putValue("isDisabled", false);
+			putValue("isOpen", false);
+			putValue("products", Collections.emptyList());
 			putValue("productsCount", 0);
-			putValue(
-				"cartAPI",
-				PortalUtil.getPortalURL(request) + "/o/commerce-ui/cart");
-
-			if (commerceOrder != null) {
-				putValue("cartId", commerceOrder.getCommerceOrderId());
-			}
-
-			putValue("products", new ArrayList<>());
 			putValue(
 				"spritemap",
 				themeDisplay.getPathThemeImages() + "/commerce-icons.svg");

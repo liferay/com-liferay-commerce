@@ -11,8 +11,12 @@ import './Summary.es';
 
 class Cart extends Component {
 
-	toggleCart() {
-		return (this.isOpen = !this.isOpen);
+	addPendingOperation(productId) {
+		if (!this.pendingOperations.includes(productId)) {
+			return (this.pendingOperations = [...this.pendingOperations, productId]);
+		}
+
+		return false;
 	}
 
 	attached() {
@@ -20,24 +24,139 @@ class Cart extends Component {
 			'updateCart',
 			(evt) => {
 				const updateCartData = evt.details[0];
+
 				this.products = updateCartData.products;
+				this.productsCount = updateCartData.products.length;
 				this.summary = updateCartData.summary;
+
 				this.isLoading = false;
 				this.pendingOperations = [];
-				this.productsCount = updateCartData.products.length;
+
 				return true;
 			}
 		);
+
 		return this.cartId && this.getProducts();
 	}
 
-	syncPendingOperations(pendingOperations) {
-		this.isLoading = !!pendingOperations.length;
+	deleteProduct(productId) {
+		this.setProductProperties(
+			productId,
+			{
+				inputChanged: false,
+				isCollapsed: true,
+				isDeleteDisabled: true,
+				isUpdating: false
+			}
+		);
+
+		return this.productsCount = this.productsCount - 1;
+	}
+
+	getProductProperty(productId, key) {
+		return this.products.reduce(
+			(property, product) => {
+				if (property) {
+					return property;
+				}
+				if (product.id === productId) {
+					try {
+						return product[key];
+					}
+					catch (error) {
+						console.warn(`Property ${key} not found!`);
+
+						return undefined;
+					}
+				}
+			},
+			false
+		);
+	}
+
+	getProducts() {
+		return fetch(
+			this.cartAPI + '/' + this.cartId,
+			{
+				method: 'GET'
+			}
+		)
+			.then(response => response.json())
+			.then(
+				updatedCart => {
+					this.products = updatedCart.products;
+					this.productsCount = updatedCart.products.length;
+					this.summary = updatedCart.summary;
+
+					return !!(this.products && this.summary);
+				}
+			)
+			.catch(
+				err => {
+					return console.log(err);
+				}
+			);
+	}
+
+	handleCancelItemDeletion(productId) {
+		this.setProductProperties(
+			productId,
+			{
+				isDeleteDisabled: false,
+				isDeleting: false
+			}
+		);
+
+		return this.removePendingOperation();
+	}
+
+	handleDeleteItem(productId) {
+		const deleteDisabled = this.getProductProperty(
+			productId,
+			'isDeleteDisabled'
+		);
+
+		if (deleteDisabled) {
+			return false;
+		}
+
+		this.setProductProperties(
+			productId, {
+				isDeleteDisabled: true,
+				isDeleting: true
+			}
+		);
+
+		return setTimeout(() => {
+			const deleting = this.getProductProperty(productId, 'isDeleting');
+
+			if (deleting) {
+				this.setProductProperties(
+					productId,
+					{
+						isCollapsed: true
+					}
+				);
+
+				this.getProductProperty(productId, 'sendDeleteRequest')();
+			}
+		}, 2000);
+	}
+
+	handleSubmitQuantity(productId, quantity) {
+		this.setProductProperties(
+			productId,
+			{
+				inputChanged: false
+			}
+		);
+
+		return this.updateProductQuantity(productId, quantity);
 	}
 
 	normalizeProducts(rawProducts) {
 		const normalizedProducts = rawProducts.map(
-			productData => {
+			(productData) => {
 				return Object.assign(
 					{
 						sendUpdateRequest: debounce(
@@ -54,227 +173,14 @@ class Cart extends Component {
 				);
 			}
 		);
+
 		return normalizedProducts;
-	}
-
-	updateProductQuantity(productId, quantity) {
-		this.addPendingOperation(productId);
-		this.setProductProperties(
-			productId,
-			{
-				isDeleteDisabled: true,
-				quantity: quantity,
-				isUpdating: true
-			}
-		);
-		return this.getProductProperty(productId, 'sendUpdateRequest')();
-	}
-
-	handleSubmitQuantity(productId, quantity) {
-		this.setProductProperties(
-			productId,
-			{
-				inputChanged: false
-			}
-		);
-		return this.updateProductQuantity(productId, quantity);
-	}
-
-	deleteProduct(productId) {
-		this.setProductProperties(
-			productId,
-			{
-				isDeleteDisabled: true,
-				inputChanged: false,
-				isUpdating: false,
-				isCollapsed: true
-			}
-		);
-		return this.productsCount = this.productsCount - 1;
-	}
-
-	setProductProperties(productId, newProperties) {
-		return this.products = this.products.map(product =>
-			product.id === productId ?
-				Object.assign({}, product, newProperties) :
-				product
-		);
-	}
-
-	getProductProperty(productId, key) {
-		return this.products.reduce(
-			(property, product) => {
-				if (property) {
-					return property;
-				}
-				if (product.id === productId) {
-					try {
-						return product[key];
-					}
-					catch (error) {
-						console.warn(`Property ${key} not found!`);
-						return undefined;
-					}
-				}
-			},
-			false
-		);
-	}
-
-	subtractProducts(orArray, subArray) {
-		const result = subArray.reduce(
-			(arrayToBeFiltered, elToRemove) => {
-				return arrayToBeFiltered.filter((elToCheck) => elToCheck.id !== elToRemove.id);
-			},
-			orArray
-		);
-		return !subArray.length && result;
-	}
-
-	handleDeleteItem(productId) {
-		const isDeleteDisabled = this.getProductProperty(
-			productId,
-			'isDeleteDisabled'
-		);
-
-		if (isDeleteDisabled) {
-			return false;
-		}
-
-		this.setProductProperties(
-			productId, {
-				isDeleteDisabled: true,
-				isDeleting: true
-			}
-		);
-
-		return setTimeout(() => {
-			const isDeleting = this.getProductProperty(productId, 'isDeleting');
-			if (isDeleting) {
-				this.setProductProperties(
-					productId,
-					{
-						isCollapsed: true
-					}
-				);
-				this.getProductProperty(productId, 'sendDeleteRequest')();
-			}
-		}, 2000);
-	}
-
-	handleCancelItemDeletion(productId) {
-		this.setProductProperties(
-			productId,
-			{
-				isDeleting: false,
-				isDeleteDisabled: false
-			}
-		);
-		return this.removePendingOperation();
-	}
-
-	addPendingOperation(productId) {
-		if (!this.pendingOperations.includes(productId)) {
-			return (this.pendingOperations = [...this.pendingOperations, productId]);
-		}
-		return false;
 	}
 
 	removePendingOperation(productId) {
 		return (this.pendingOperations = this.pendingOperations.filter(
 			el => el !== productId
 		));
-	}
-
-	sendUpdateRequest(productId) {
-		return fetch(
-			this.cartAPI + '/cart-item/' + productId,
-			{
-				body: JSON.stringify(
-					{
-						quantity: this.getProductProperty(productId, 'quantity')
-					}
-				),
-				headers: new Headers({'Content-Type': 'application/json'}),
-				method: 'PUT'
-			}
-		)
-			.then(response => response.json())
-			.then(
-				(jsonresponse) => {
-					if (jsonresponse.success) {
-						const updatedPrice = jsonresponse.products.reduce(
-							(acc, el) => (el.id === productId ? el.price : acc), null);
-						this.removePendingOperation(productId);
-						this.setProductProperties(productId, {
-							isDeleteDisabled: false,
-							isUpdating: false,
-							price: updatedPrice
-						});
-						return this.summary = jsonresponse.summary;
-					}
-					else if (jsonresponse.errorMessages) {
-						this.setProductProperties(productId, {
-							isDeleteDisabled: false,
-							isUpdating: false,
-							errorMessages: jsonresponse.errorMessages
-						});
-						this.removePendingOperation(productId);
-					}
-					else {
-						var validatorErrors = jsonresponse.validatorErrors;
-
-						if (validatorErrors) {
-							this.setProductProperties(productId, {
-								isDeleteDisabled: false,
-								isUpdating: false,
-								errorMessages: validatorErrors.map((item) => item.message)
-							});
-						}
-						else {
-							this.setProductProperties(productId, {
-								isDeleteDisabled: false,
-								isUpdating: false,
-								errorMessages: jsonresponse.error
-							});
-						}
-						this.removePendingOperation(productId);
-					}
-				}
-			)
-			.catch(
-				err => {
-					this.removePendingOperation(productId);
-					this.setProductProperties(productId, {
-						isDeleteDisabled: false,
-						isUpdating: false
-					});
-					console.log(err);
-				}
-			);
-	}
-
-	getProducts() {
-		return fetch(
-			this.cartAPI + '/' + this.cartId,
-			{
-				method: 'GET'
-			}
-		)
-			.then(response => response.json())
-			.then(
-				updatedCart => {
-					this.products = updatedCart.products;
-					this.summary = updatedCart.summary;
-					this.productsCount = this.products.length;
-					return !!(this.products && this.summary);
-				}
-			)
-			.catch(
-				err => {
-					return console.log(err);
-				}
-			);
 	}
 
 	sendDeleteRequest(productId) {
@@ -301,24 +207,27 @@ class Cart extends Component {
 						this.summary = jsonresponse.summary;
 
 						const productsToBeRemoved = this.subtractProducts(this.products, jsonresponse.products);
+
 						productsToBeRemoved.forEach(element => {
 							this.deleteProduct(element.id);
 						});
 					}
 					else if (jsonresponse.errorMessages) {
 						this.setProductProperties(productId, {
+							errorMessages: jsonresponse.errorMessages,
 							isDeleteDisabled: false,
-							isUpdating: false,
-							errorMessages: jsonresponse.errorMessages
+							isUpdating: false
 						});
+
 						this.removePendingOperation(productId);
 					}
 					else {
 						this.setProductProperties(productId, {
+							errorMessages: jsonresponse.error,
 							isDeleteDisabled: false,
-							isUpdating: false,
-							errorMessages: jsonresponse.error
+							isUpdating: false
 						});
+
 						this.removePendingOperation(productId);
 					}
 				}
@@ -326,46 +235,162 @@ class Cart extends Component {
 			.catch(
 				err => {
 					this.removePendingOperation(productId);
+
 					console.log(err);
 				}
 			);
 	}
+
+	sendUpdateRequest(productId) {
+		return fetch(
+			this.cartAPI + '/cart-item/' + productId,
+			{
+				body: JSON.stringify(
+					{
+						quantity: this.getProductProperty(productId, 'quantity')
+					}
+				),
+				headers: new Headers({'Content-Type': 'application/json'}),
+				method: 'PUT'
+			}
+		)
+			.then(response => response.json())
+			.then(
+				(jsonresponse) => {
+					if (jsonresponse.success) {
+						this.removePendingOperation(productId);
+
+						const updatedPrice = jsonresponse.products.reduce(
+							(acc, el) => (el.id === productId ? el.price : acc),
+							null);
+
+						this.setProductProperties(productId, {
+							isDeleteDisabled: false,
+							isUpdating: false,
+							price: updatedPrice
+						});
+
+						return this.summary = jsonresponse.summary;
+					}
+					else if (jsonresponse.errorMessages) {
+						this.setProductProperties(productId, {
+							errorMessages: jsonresponse.errorMessages,
+							isDeleteDisabled: false,
+							isUpdating: false
+						});
+
+						this.removePendingOperation(productId);
+					}
+					else {
+						var validatorErrors = jsonresponse.validatorErrors;
+
+						if (validatorErrors) {
+							this.setProductProperties(productId, {
+								errorMessages: validatorErrors.map((item) => item.message),
+								isDeleteDisabled: false,
+								isUpdating: false
+							});
+						}
+						else {
+							this.setProductProperties(productId, {
+								errorMessages: jsonresponse.error,
+								isDeleteDisabled: false,
+								isUpdating: false
+							});
+						}
+
+						this.removePendingOperation(productId);
+					}
+				}
+			)
+			.catch(
+				err => {
+					this.removePendingOperation(productId);
+					this.setProductProperties(productId, {
+						isDeleteDisabled: false,
+						isUpdating: false
+					});
+
+					console.log(err);
+				}
+			);
+	}
+
+	setProductProperties(productId, newProperties) {
+		return this.products = this.products.map(product =>
+			product.id === productId ?
+				Object.assign({}, product, newProperties) :
+				product
+		);
+	}
+
+	subtractProducts(orArray, subArray) {
+		const result = subArray.reduce(
+			(arrayToBeFiltered, elToRemove) => {
+				return arrayToBeFiltered.filter((elToCheck) => elToCheck.id !== elToRemove.id);
+			},
+			orArray
+		);
+
+		return !subArray.length && result;
+	}
+
+	syncPendingOperations(pendingOperations) {
+		this.isLoading = !!pendingOperations.length;
+	}
+
+	toggleCart() {
+		if (this.isOpen = !this.isOpen) {
+			return true;
+		}
+
+		return false;
+	}
+
+	updateProductQuantity(productId, quantity) {
+		this.addPendingOperation(productId);
+		this.setProductProperties(
+			productId,
+			{
+				isDeleteDisabled: true,
+				isUpdating: true,
+				quantity: quantity
+			}
+		);
+
+		return this.getProductProperty(productId, 'sendUpdateRequest')();
+	}
+
 }
 
 Soy.register(Cart, template);
 
 const productStateSchema = {
 	inputChanged: false,
-	isDeleting: false,
-	isDeleteDisabled: false,
 	isCollapsed: false,
+	isDeleteDisabled: false,
+	isDeleting: false,
 	isUpdating: false
 };
 
 Cart.STATE = {
-
-	spritemap: Config.string().required(),
-
 	cartAPI: Config.string().required(),
-
-	isOpen: Config.bool().value(true),
-
-	isDisable: Config.bool().value(false),
-
 	cartId: Config.oneOfType(
 		[
 			Config.number(),
 			Config.string()
 		]
 	),
-
-	products: {
-		setter: 'normalizeProducts',
-		value: null
-	},
-
+	checkoutUrl: Config.string().required(),
+	detailsUrl: Config.string().required(),
+	isDisable: Config.bool().value(false),
+	isLoading: Config.bool().value(false),
+	isOpen: Config.bool().value(true),
+	pendingOperations: Config.array().value(
+		[]
+	),
 	productsCount: Config.number().value(0),
-
+	spritemap: Config.string().required(),
 	summary: Config.shapeOf(
 		{
 			checkoutUrl: Config.string().value(''),
@@ -374,17 +399,7 @@ Cart.STATE = {
 			discount: Config.string().value(''),
 			itemsQuantity: Config.number().value(0)
 		}
-	),
-
-	isLoading: Config.bool().value(false),
-
-	pendingOperations: Config.array().value(
-		[]
-	),
-
-	detailsUrl: Config.string().required(),
-
-	checkoutUrl: Config.string().required()
+	)
 };
 
 export {Cart};

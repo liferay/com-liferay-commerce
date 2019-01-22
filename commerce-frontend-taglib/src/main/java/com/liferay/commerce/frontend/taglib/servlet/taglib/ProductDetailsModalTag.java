@@ -22,30 +22,31 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
 /**
- * @author Fabio Mastrorilli
+ * @author Fabio Diego Mastrorilli
  */
 public class ProductDetailsModalTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
+		putValue("addToOrderLink", null);
 		putValue("availability", "inStock");
-		putValue("sku", "AR351184");
+		putValue("detailsLink", "/details/AR351184");
+		putValue("name", "Lorem Ipsum Dolor Sit");
 		putValue(
 			"pictureUrl",
 			"http://image.superstreetonline.com/f" +
 				"/243817358+w+h+q80+re0+cr1+ar0+st0" +
 					"/006-fully-built-engine-by-the-experts.jpg");
-		putValue("name", "Lorem Ipsum Dolor Sit");
-		putValue("detailsLink", "/details/AR351184");
 		putValue("settings", null);
-		putValue("addToOrderlink", null);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		putValue(
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
+
+		putValue("sku", "AR351184");
 
 		setTemplateNamespace("ProductDetailsModal.render");
 

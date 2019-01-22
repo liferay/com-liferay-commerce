@@ -59,12 +59,12 @@ public class PriceTag extends ComponentRendererTag {
 		try {
 			Map<String, Object> context = getContext();
 
-			long cpInstanceId = (long)context.getOrDefault("CPInstanceId", 0);
+			long cpInstanceId = (Long)context.getOrDefault("CPInstanceId", 0L);
 
 			CPInstance cpInstance = CPInstanceServiceUtil.getCPInstance(
 				cpInstanceId);
 
-			int quantity = (int)context.getOrDefault("quantity", 1);
+			int quantity = (Integer)context.getOrDefault("quantity", 1);
 
 			if (quantity <= 0) {
 				CPDefinitionInventory cpDefinitionInventory =

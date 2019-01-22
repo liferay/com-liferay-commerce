@@ -20,7 +20,7 @@ import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
 
 /**
- * @author Fabio Diego
+ * @author Fabio Diego Mastrorilli
  */
 public class QuantitySelectorTag extends ComponentRendererTag {
 

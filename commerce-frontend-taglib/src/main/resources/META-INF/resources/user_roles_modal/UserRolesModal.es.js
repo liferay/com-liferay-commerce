@@ -13,20 +13,36 @@ import './RoleListItem.es';
 
 class UserRolesModal extends Component {
 
-	syncSelectedRoles() {
-		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
-		this.element.querySelector('.autocomplete-input__box').focus();
-		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-		return true;
+	close() {
+		return this._isVisible = false;
 	}
 
-	_handleCloseModal(e) {
-		e.preventDefault();
-		this._isVisible = false;
+	open() {
+		return this._isVisible = true;
 	}
 
 	syncQuery(e) {
 		return this._filterRoles();
+	}
+
+	syncSelectedRoles() {
+		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
+
+		this.element.querySelector('.autocomplete-input__box').focus();
+
+		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+
+		return true;
+	}
+
+	toggle() {
+		return this._isVisible = !this._isVisible;
+	}
+
+	_handleCloseModal(evt) {
+		evt.preventDefault();
+
+		this._isVisible = false;
 	}
 
 	_handleFormSubmit(evt) {
@@ -34,21 +50,26 @@ class UserRolesModal extends Component {
 
 		if (this.filteredRoles.length) {
 			this._toggleItem(this.filteredRoles[0]);
+
 			this.query = '';
+
 			return true;
 		}
+
 		return false;
 	}
 
-	_handleCheckBox(e) {
-		console.log(e);
+	_handleCheckBox(evt) {
+		console.log(evt);
 	}
 
 	_handleInputBox(evt) {
 		if (evt.keyCode === 8 && !this.query.length) {
 			this.selectedRoles = this.selectedRoles.slice(0, -1);
+
 			return false;
 		}
+
 		return this.query = evt.target.value;
 	}
 
@@ -87,21 +108,9 @@ class UserRolesModal extends Component {
 		);
 	}
 
-	toggle() {
-		return this._isVisible = !this._isVisible;
-	}
-
-	open() {
-		return this._isVisible = true;
-	}
-
-	close() {
-		return this._isVisible = false;
-	}
 };
 
 Soy.register(UserRolesModal, template);
-
 
 const ROLE_SCHEMA = Config.shapeOf(
 	{
@@ -116,11 +125,11 @@ const ROLE_SCHEMA = Config.shapeOf(
 );
 
 UserRolesModal.STATE = {
-	query: Config.string().value(''),
-	spritemap: Config.string(),
-	roles: Config.array(ROLE_SCHEMA).value([]),
 	filteredRoles: Config.array(ROLE_SCHEMA).value([]),
+	query: Config.string().value(''),
+	roles: Config.array(ROLE_SCHEMA).value([]),
 	selectedRoles: Config.array(ROLE_SCHEMA).value([]),
+	spritemap: Config.string(),
 	_isVisible: Config.bool().internal().value(false)
 };
 

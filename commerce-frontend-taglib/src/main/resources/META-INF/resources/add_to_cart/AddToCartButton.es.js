@@ -12,15 +12,6 @@ class AddToCartButton extends Component {
 		}
 	}
 
-	updateQuantity(quantity) {
-		this.quantity = quantity;
-	}
-
-	submitQuantity(quantity) {
-		this.quantity = quantity;
-		this.handleSubmitClick();
-	}
-
 	handleBtnClick(e) {
 		if (!this.editMode && this.element === e.target && !this.disabled) {
 			this.editMode = true;
@@ -32,9 +23,9 @@ class AddToCartButton extends Component {
 
 		formData.append('accountId', this.accountId);
 		formData.append('groupId', themeDisplay.getScopeGroupId());
+		formData.append('options', '[]');
 		formData.append('productId', this.productId);
 		formData.append('quantity', this.quantity);
-		formData.append('options', '[]');
 
 		if (this.orderId) {
 			formData.append('orderId', this.orderId);
@@ -77,7 +68,6 @@ class AddToCartButton extends Component {
 			);
 	}
 
-
 	rendered() {
 		if (this.element.querySelector('input')) {
 			this.element.querySelector('input').focus();
@@ -85,6 +75,16 @@ class AddToCartButton extends Component {
 		else if (this.element.querySelector('select')) {
 			this.element.querySelector('select').focus();
 		}
+	}
+
+	submitQuantity(quantity) {
+		this.quantity = quantity;
+
+		this.handleSubmitClick();
+	}
+
+	updateQuantity(quantity) {
+		this.quantity = quantity;
 	}
 
 	_showNotification(message, type) {
@@ -115,23 +115,23 @@ Soy.register(AddToCartButton, template);
 AddToCartButton.STATE = {
 	accountId: Config.oneOfType(
 		[
-			Config.string(),
-			Config.number()
-		]
-	),
-	orderId: Config.oneOfType(
-		[
-			Config.string(),
-			Config.number()
+			Config.number(),
+			Config.string()
 		]
 	),
 	cartAPI: Config.string().required(),
 	disabled: Config.bool().value(false),
 	editMode: Config.bool().value(false),
+	orderId: Config.oneOfType(
+		[
+			Config.number(),
+			Config.string()
+		]
+	),
 	productId: Config.oneOfType(
 		[
-			Config.string(),
-			Config.number()
+			Config.number(),
+			Config.string()
 		]
 	).required(),
 	quantity: Config.number().value(0),

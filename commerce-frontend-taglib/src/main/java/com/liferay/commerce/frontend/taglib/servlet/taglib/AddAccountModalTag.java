@@ -23,24 +23,24 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 /**
- * @author Fabio Mastrorilli
+ * @author Fabio Diego Mastrorilli
  */
 public class AddAccountModalTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
+		putValue("query", StringPool.BLANK);
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		putValue(
-			"usersAPI",
-			PortalUtil.getPortalURL(request) + "/o/commerce-ui/search-users");
-
-		putValue("query", "");
-
-		putValue(
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
+
+		putValue(
+			"usersAPI",
+			PortalUtil.getPortalURL(request) + "/o/commerce-ui/search-users");
 
 		setTemplateNamespace("AddAccountModal.render");
 

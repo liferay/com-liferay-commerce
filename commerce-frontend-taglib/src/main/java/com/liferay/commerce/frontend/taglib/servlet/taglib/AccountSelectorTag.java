@@ -72,18 +72,18 @@ public class AccountSelectorTag extends ComponentRendererTag {
 				commerceContext.getCommerceAccount();
 
 			if (commerceAccount != null) {
-				StringBundler sb = new StringBundler(5);
-
-				sb.append(themeDisplay.getPathImage());
+				String thumbnailUrl = null;
 
 				if (commerceAccount.getLogoId() == 0) {
-					sb.append("/organization_logo?img_id=0");
+					thumbnailUrl =
+						themeDisplay.getPathImage() +
+							"/organization_logo?img_id=0";
 				}
 				else {
-					sb.append("/organization_logo?img_id=");
-					sb.append(commerceAccount.getLogoId());
-					sb.append("&t=");
-					sb.append(
+					thumbnailUrl = StringBundler.concat(
+						themeDisplay.getPathImage(),
+						"/organization_logo?img_id=",
+						commerceAccount.getLogoId(), "&t=",
 						WebServerServletTokenUtil.getToken(
 							commerceAccount.getLogoId()));
 				}
@@ -91,7 +91,7 @@ public class AccountSelectorTag extends ComponentRendererTag {
 				CurrentAccountModel currentAccountModel =
 					new CurrentAccountModel(
 						commerceAccount.getCommerceAccountId(),
-						commerceAccount.getName(), sb.toString());
+						commerceAccount.getName(), thumbnailUrl);
 
 				putValue("currentAccount", currentAccountModel);
 			}

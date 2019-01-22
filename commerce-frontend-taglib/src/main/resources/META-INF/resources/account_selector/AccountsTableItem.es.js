@@ -23,13 +23,13 @@ Soy.register(AccountsTableItem, template);
 AccountsTableItem.STATE = {
 	accountId: Config.oneOfType(
 		[
-			Config.string(),
-			Config.number()
+			Config.number(),
+			Config.string()
 		]
 	).required(),
 	name: Config.string(),
-	thumbnail: Config.string(),
-	query: Config.string()
+	query: Config.string(),
+	thumbnail: Config.string()
 };
 
 export {AccountsTableItem};
