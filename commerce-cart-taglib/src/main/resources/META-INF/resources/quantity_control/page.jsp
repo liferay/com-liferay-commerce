@@ -64,17 +64,17 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_commerce_
 <aui:script>
 	Liferay.provide(
 		window,
-		'<%= portletNamespace +randomNamespace %>updateQuantity',
+		'<%= portletNamespace + randomNamespace %>updateQuantity',
 		function() {
 			var A = AUI();
 
-			var form = A.one('#<%= portletNamespace + randomNamespace + "Fm" %>');
+			var form = A.one('#<%= portletNamespace + randomNamespace %>Fm');
 
-			var quantity = form.one('#<%= portletNamespace + randomNamespace + "Quantity" %>');
+			var quantity = form.one('#<%= portletNamespace + randomNamespace %>Quantity');
 
-			form.one('#<%= portletNamespace + "quantity" %>').val(quantity.val());
+			form.one('#<%= portletNamespace %>'quantity).val(quantity.val());
 
-			submitForm(document.<%= portletNamespace + randomNamespace + "Fm" %>);
+			submitForm(document.<%= portletNamespace + randomNamespace %>Fm);
 		},
 		['aui-base']
 	);
@@ -82,7 +82,7 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_commerce_
 
 <c:if test="<%= updateOnChange %>">
 	<aui:script use="aui-base">
-		var form = A.one('#<%= portletNamespace + randomNamespace + "Fm" %>');
+		var form = A.one('#<%= portletNamespace + randomNamespace %>Fm');
 
 		form.delegate(
 			'change',
