@@ -63,7 +63,8 @@ public class CPDAvailabilityEstimateUpgradeProcess extends UpgradeProcess {
 
 			s = connection.createStatement();
 
-			rs = s.executeQuery("select * from CPDAvailabilityEstimate");
+			rs = s.executeQuery(
+				"select distinct CPDefinitionId from CPDAvailabilityEstimate");
 
 			while (rs.next()) {
 				long cpDefinitionId = rs.getLong("CPDefinitionId");
