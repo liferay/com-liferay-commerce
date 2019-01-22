@@ -32,7 +32,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 public interface CommerceVirtualOrderItemContentPortletInstanceConfiguration {
 
-	@Meta.AD(deflt = "", name = "display-style", required = false)
+	@Meta.AD(name = "display-style", required = false)
 	public String displayStyle();
 
 	@Meta.AD(deflt = "0", name = "display-style-group-id", required = false)

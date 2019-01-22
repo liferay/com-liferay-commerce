@@ -35,7 +35,7 @@ public interface CPCategoryContentPortletInstanceConfiguration {
 	@Meta.AD(deflt = "0", name = "asset-category-id", required = false)
 	public long assetCategoryId();
 
-	@Meta.AD(deflt = "", name = "display-style", required = false)
+	@Meta.AD(name = "display-style", required = false)
 	public String displayStyle();
 
 	@Meta.AD(deflt = "0", name = "display-style-group-id", required = false)
