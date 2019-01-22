@@ -59,7 +59,7 @@ CommerceAccount commerceAccount = commerceOrderContentDisplayContext.getCommerce
 
 					<div class="autofit-col autofit-col-expand">
 						<div class="autofit-section">
-							<label class="order-shipping-address-label" for="<portlet:namespace /><%= "shippingAddressId" + i %>">
+							<label class="order-shipping-address-label" for="<portlet:namespace />shippingAddressId<%= i %>">
 								<span class="commerce-name list-group-title"><%= commerceAddress.getName() %></span>
 								<span class="commerce-street1 list-group-text"><%= commerceAddress.getStreet1() %></span>
 

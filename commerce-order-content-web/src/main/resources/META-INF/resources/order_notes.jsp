@@ -22,12 +22,14 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrder();
 
 String taglibIconCssClass = StringPool.BLANK;
+
 String taglibLinkCssClass = GetterUtil.getString(request.getAttribute("order_notes.jsp-taglibLinkCssClass"));
-String taglibMessage = "notes";
 
 if (taglibLinkCssClass == StringPool.BLANK) {
 	taglibLinkCssClass = "table-action-link";
 }
+
+String taglibMessage = "notes";
 
 boolean showLabel = GetterUtil.getBoolean(request.getAttribute("order_notes.jsp-showLabel"));
 

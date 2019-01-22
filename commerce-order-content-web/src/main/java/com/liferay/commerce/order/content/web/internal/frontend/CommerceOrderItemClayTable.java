@@ -86,13 +86,13 @@ public class CommerceOrderItemClayTable
 
 		List<ClayTableAction> clayTableActions = new ArrayList<>();
 
+		String viewURL = StringPool.BLANK;
+
 		OrderItem orderItem = (OrderItem)model;
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
-
-		String viewURL = StringPool.BLANK;
 
 		try {
 			viewURL = _getViewShipmentURL(

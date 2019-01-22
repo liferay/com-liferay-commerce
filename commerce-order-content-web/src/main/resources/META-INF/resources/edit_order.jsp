@@ -83,7 +83,7 @@ if (commerceOrder != null) {
 					<c:if test="<%= (subtotalDiscountValue != null) && (BigDecimal.ZERO.compareTo(subtotalDiscountValue.getDiscountPercentage()) < 0) %>">
 
 						<%
-							CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
+						CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount();
 						%>
 
 						<dt><liferay-ui:message key="subtotal-discount" /></dt>
@@ -98,7 +98,7 @@ if (commerceOrder != null) {
 					<c:if test="<%= (shippingDiscountValue != null) && (BigDecimal.ZERO.compareTo(shippingDiscountValue.getDiscountPercentage()) < 0) %>">
 
 						<%
-							CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount();
+						CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount();
 						%>
 
 						<dt><liferay-ui:message key="delivery-discount" /></dt>
@@ -113,7 +113,7 @@ if (commerceOrder != null) {
 					<c:if test="<%= (totalDiscountValue != null) && (BigDecimal.ZERO.compareTo(totalDiscountValue.getDiscountPercentage()) < 0) %>">
 
 						<%
-							CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount();
+						CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount();
 						%>
 
 						<dt><liferay-ui:message key="delivery-discount" /></dt>
@@ -133,8 +133,8 @@ if (commerceOrder != null) {
 					<dd>
 
 						<%
-							request.setAttribute("order_notes.jsp-showLabel", Boolean.TRUE);
-							request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
+						request.setAttribute("order_notes.jsp-showLabel", Boolean.TRUE);
+						request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
 						%>
 
 						<liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" />
@@ -248,92 +248,46 @@ if (commerceOrder != null) {
 </div>
 
 <div class="minium-thumb-menu">
-		<c:if test="<%= commerceOrder.isOpen() %>">
-			<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
-				<div class="col-md-auto">
-					<liferay-ui:icon-menu
-						direction="right"
-						icon="<%= StringPool.BLANK %>"
-						markupView="lexicon"
-						message="<%= StringPool.BLANK %>"
-						showWhenSingleIcon="<%= true %>"
-						triggerCssClass="component-action"
-					>
-						<liferay-ui:icon
-							message="print"
-							url='<%= "javascript:window.print();" %>'
-						/>
+	<c:if test="<%= commerceOrder.isOpen() %>">
+		<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+			<div class="col-md-auto">
+				<liferay-ui:icon-menu
+					direction="right"
+					icon="<%= StringPool.BLANK %>"
+					markupView="lexicon"
+					message="<%= StringPool.BLANK %>"
+					showWhenSingleIcon="<%= true %>"
+					triggerCssClass="component-action"
+				>
+					<liferay-ui:icon
+						message="print"
+						url='<%= "javascript:window.print();" %>'
+					/>
 
-						<liferay-ui:icon
-							message="edit"
-							url='<%= "javascript:" + renderResponse.getNamespace() + "editCommerceOrder();" %>'
-						/>
+					<liferay-ui:icon
+						message="edit"
+						url='<%= "javascript:" + renderResponse.getNamespace() + "editCommerceOrder();" %>'
+					/>
 
-						<portlet:actionURL name="editCommerceOrderItem" var="deleteURL">
-							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESET %>" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-						</portlet:actionURL>
+					<portlet:actionURL name="editCommerceOrderItem" var="deleteURL">
+						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESET %>" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
+					</portlet:actionURL>
 
-						<liferay-ui:icon-delete
-							message="delete-all"
-							url="<%= deleteURL %>"
-						/>
-					</liferay-ui:icon-menu>
-				</div>
-			</c:if>
+					<liferay-ui:icon-delete
+						message="delete-all"
+						url="<%= deleteURL %>"
+					/>
+				</liferay-ui:icon-menu>
+			</div>
 		</c:if>
+	</c:if>
 </div>
 
 <aui:form action="<%= editCommerceOrderActionURL %>" cssClass="order-details-container" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-
-<%--
-	<div class="order-details-header row">
-		<div class="col-3">
-			<div class="minium-card">
-				<h3 class="minium-card__title"><liferay-ui:message key="payment" /></h3>
-
-				<div class="minium-card__content">
-
-					<%
-					String paymentMethodName = commerceOrderContentDisplayContext.getCommerceOrderPaymentMethodName(commerceOrder);
-					%>
-
-					<c:if test="<%= Validator.isNotNull(paymentMethodName) %>">
-						<div class="order-details-subtitle payment-method-name">
-							<%= HtmlUtil.escape(paymentMethodName) %>
-						</div>
-					</c:if>
-
-					<p>
-						<liferay-ui:message arguments="<%= HtmlUtil.escape(commerceOrder.getPurchaseOrderNumber()) %>" key="purchase-order-number-x" translateArguments="<%= false %>" />
-					</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-3">
-			<div class="minium-card">
-				<h3 class="minium-card__title"><liferay-ui:message key="status" /></h3>
-
-				<div class="minium-card__content">
-					<p>
-						<%= commerceOrderContentDisplayContext.getCommerceOrderStatus(commerceOrder) %>
-					</p>
-				</div>
-			</div>
-		</div>
-
-		<c:if test="<%= !commerceOrder.isOpen() %>">
-			<div class="col-3 order-details-reorder">
-				<div class="autofit-section">
-					<aui:button icon="icon-refresh" iconAlign="right" onClick='<%= renderResponse.getNamespace() + "reorderCommerceOrder();" %>' primary="<%= true %>" value="reorder" />
-				</div>
-			</div>
-		</c:if>
-	</div> --%>
 </aui:form>
 
 <commerce-ui:table
@@ -378,34 +332,34 @@ if (commerceOrder != null) {
 									}
 								},
 								{
-								cssClass: 'btn-primary',
-								label: '<liferay-ui:message key="edit-order" />',
-								on: {
-									click: function() {
-										submitForm(document.<portlet:namespace />editFm);
+									cssClass: 'btn-primary',
+									label: '<liferay-ui:message key="edit-order" />',
+									on: {
+										click: function() {
+											submitForm(document.<portlet:namespace />editFm);
+										}
 									}
 								}
-							}
-						],
-						header: [
-							{
-								cssClass: 'close',
-								discardDefaultButtonCssClasses: true,
-								labelHTML: '<clay:icon symbol="times" />',
-								on: {
-									click: function(event) {
-										dialog.hide();
+							],
+							header: [
+								{
+									cssClass: 'close',
+									discardDefaultButtonCssClasses: true,
+									labelHTML: '<clay:icon symbol="times" />',
+									on: {
+										click: function(event) {
+											dialog.hide();
+										}
 									}
 								}
-							}
-						]
+							]
+						},
+						width: 600
 					},
-					width: 600
-				},
-				title: '<liferay-ui:message key="edit-order" />'
-			}
-		).plug(
-			A.Plugin.IO,
+					title: '<liferay-ui:message key="edit-order" />'
+				}
+			).plug(
+				A.Plugin.IO,
 				{
 					uri: '<%= editCommerceOrderDetailsURL %>'
 				}

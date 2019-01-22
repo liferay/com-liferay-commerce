@@ -85,11 +85,11 @@ public class CommerceOrderClayTable
 
 		List<ClayTableAction> clayTableActions = new ArrayList<>();
 
-		Order order = (Order)model;
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
+
+		Order order = (Order)model;
 
 		if (_modelResourcePermission.contains(
 				themeDisplay.getPermissionChecker(), order.getOrderId(),
@@ -178,7 +178,7 @@ public class CommerceOrderClayTable
 					CommerceOrderContentPortletInstanceConfiguration.class,
 					themeDisplay.getLayout(), portletDisplay.getId());
 
-		List<CommerceOrder> commerceOrders;
+		List<CommerceOrder> commerceOrders = null;
 
 		if (commerceOrderContentPortletInstanceConfiguration.exclude()) {
 			commerceOrders = _commerceOrderService.getUserCommerceOrders(
