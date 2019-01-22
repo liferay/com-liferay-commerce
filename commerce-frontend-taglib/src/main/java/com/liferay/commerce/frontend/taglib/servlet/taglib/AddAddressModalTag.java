@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 /**
- * @author Fabio Mastrorilli
+ * @author Fabio Diego Mastrorilli
  */
 public class AddAddressModalTag extends ComponentRendererTag {
 
@@ -33,20 +33,17 @@ public class AddAddressModalTag extends ComponentRendererTag {
 			WebKeys.THEME_DISPLAY);
 
 		putValue(
-			"shippingCountriesAPI",
-			PortalUtil.getPortalURL(request) +
-				"/o/commerce-ui/address/shipping-countries/");
-
-		putValue(
 			"billingCountriesAPI",
 			PortalUtil.getPortalURL(request) +
 				"/o/commerce-ui/address/billing-countries/");
-
 		putValue(
 			"regionsAPI",
 			PortalUtil.getPortalURL(request) +
 				"/o/commerce-ui/address/regions/");
-
+		putValue(
+			"shippingCountriesAPI",
+			PortalUtil.getPortalURL(request) +
+				"/o/commerce-ui/address/shipping-countries/");
 		putValue(
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");

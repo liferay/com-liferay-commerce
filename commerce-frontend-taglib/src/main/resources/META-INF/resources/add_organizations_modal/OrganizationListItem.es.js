@@ -33,20 +33,22 @@ class OrganizationListItem extends Component {
 Soy.register(OrganizationListItem, template);
 
 OrganizationListItem.STATE = {
+	colorId: Config.number(),
 	id: Config.oneOfType(
 		[
-			Config.string(),
-			Config.number()
+			Config.number(),
+			Config.string()
 		]
 	),
 	name: Config.string().required(),
+	query: Config.string(),
 	selectedOrganizations: Config.array(
 		Config.shapeOf(
 			{
 				id: Config.oneOfType(
 					[
-						Config.string(),
-						Config.number()
+						Config.number(),
+						Config.string()
 					]
 				),
 				name: Config.string()
@@ -55,8 +57,6 @@ OrganizationListItem.STATE = {
 	).value(
 		[]
 	),
-	colorId: Config.number(),
-	query: Config.string(),
 	_selected: Config.bool().value(false)
 };
 

@@ -8,14 +8,14 @@ import template from './CommerceTable.soy';
 
 class CommerceTable extends Component {
 
-	/**
-	 * Toggles the selection of an item and adds or removes it from selected items
-	 * list.
-	 * @param {!Event} event
-	 * @private
-	 */
-	_handleItemToggled(event) {
+	_getApiURL() {
+		let url = this.dataSetAPI;
 
+		url = url + '&pageSize=' + this.pageSize;
+
+		url = url + '&page=' + this.currentPage;
+
+		return url;
 	}
 
 	_handleItemsPerPageClicked(event) {
@@ -34,6 +34,15 @@ class CommerceTable extends Component {
 		this.paginationSelectedEntry = this.paginationEntries.map((x) => x.label).indexOf(this.pageSize);
 
 		this._loadData();
+	}
+
+	/**
+	 * Toggles the selection of an item and adds or removes it from selected items
+	 * list.
+	 * @param {!Event} event
+	 * @private
+	 */
+	_handleItemToggled(event) {
 	}
 
 	_handlePageClicked(event) {
@@ -68,16 +77,6 @@ class CommerceTable extends Component {
 			.catch(
 				err => {}
 			);
-	}
-
-	_getApiURL() {
-		let url = this.dataSetAPI;
-
-		url = url + '&pageSize=' + this.pageSize;
-
-		url = url + '&page=' + this.currentPage;
-
-		return url;
 	}
 
 }

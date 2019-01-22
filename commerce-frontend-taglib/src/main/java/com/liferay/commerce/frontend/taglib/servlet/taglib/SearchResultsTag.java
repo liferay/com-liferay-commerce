@@ -29,6 +29,8 @@ public class SearchResultsTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
+		putValue("queryString", StringPool.BLANK);
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -39,7 +41,6 @@ public class SearchResultsTag extends ComponentRendererTag {
 		putValue(
 			"searchAPI",
 			PortalUtil.getPortalURL(request) + "/o/commerce-ui/search/");
-		putValue("queryString", "");
 		putValue("visible", false);
 
 		setTemplateNamespace("SearchResults.render");

@@ -18,37 +18,27 @@ class AccountsTable extends Component {
 		this.emit('accountSelected', accountData);
 	}
 
+	_getAccounts() {
+		return this.emit('getAccounts', this.filterString);
+	}
+
 	_handleFilterChange(evt) {
 		this.filterString = evt.target.value;
+
 		return this._getAccounts();
 	}
 
 	_handleSubmitFilter(evt) {
 		evt.preventDefault();
+
 		return this._getAccounts();
 	}
 
-	_getAccounts() {
-		return this.emit('getAccounts', this.filterString);
-	}
 }
 
 Soy.register(AccountsTable, template);
 
 AccountsTable.STATE = {
-	currentAccount: Config.shapeOf(
-		{
-			accountId: Config.oneOfType(
-				[
-					Config.string(),
-					Config.number()
-				]
-			).required(),
-			name: Config.string(),
-			thumbnail: Config.string()
-		}
-	),
-	filterString: Config.string().value('').internal(),
 	accounts: Config.arrayOf(
 		Config.shapeOf(
 			{
@@ -63,7 +53,20 @@ AccountsTable.STATE = {
 			}
 		)
 	),
-	createNewOrderLink: Config.string()
+	createNewOrderLink: Config.string(),
+	currentAccount: Config.shapeOf(
+		{
+			accountId: Config.oneOfType(
+				[
+					Config.string(),
+					Config.number()
+				]
+			).required(),
+			name: Config.string(),
+			thumbnail: Config.string()
+		}
+	),
+	filterString: Config.string().value('').internal()
 };
 
 export {AccountsTable};

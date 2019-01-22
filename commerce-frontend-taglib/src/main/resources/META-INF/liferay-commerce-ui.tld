@@ -12,14 +12,12 @@
 	<uri>http://liferay.com/tld/commerce-ui</uri>
 	<tag>
 		<name>account-selector</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.AccountSelectorTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.AccountSelectorTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
 		<name>add-account-modal</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.AddAccountModalTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.AddAccountModalTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>componentId</name>
@@ -29,8 +27,7 @@
 	</tag>
 	<tag>
 		<name>add-address-modal</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.AddAddressModalTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.AddAddressModalTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>componentId</name>
@@ -40,8 +37,7 @@
 	</tag>
 	<tag>
 		<name>add-organizations-modal</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.AddOrganizationsModalTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.AddOrganizationsModalTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>componentId</name>
@@ -51,8 +47,7 @@
 	</tag>
 	<tag>
 		<name>add-to-cart</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.AddToCartTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.AddToCartTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
@@ -73,8 +68,7 @@
 	</tag>
 	<tag>
 		<name>price</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.PriceTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.PriceTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>additionalDiscountedClasses</name>
@@ -104,14 +98,12 @@
 	</tag>
 	<tag>
 		<name>product-details-modal</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.ProductDetailsModalTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.ProductDetailsModalTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
 		<name>quantity-selector</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.QuantitySelectorTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.QuantitySelectorTag</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
@@ -136,8 +128,7 @@
 	</tag>
 	<tag>
 		<name>table</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.CommerceTableTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.CommerceTableTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>dataProviderKey</name>
@@ -192,8 +183,7 @@
 	</tag>
 	<tag>
 		<name>user-invitation-modal</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.UserInvitationModalTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.UserInvitationModalTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>componentId</name>
@@ -203,8 +193,7 @@
 	</tag>
 	<tag>
 		<name>user-roles-modal</name>
-		<tag-class>
-			com.liferay.commerce.frontend.taglib.servlet.taglib.UserRolesModalTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.UserRolesModalTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>commerceAccountId</name>

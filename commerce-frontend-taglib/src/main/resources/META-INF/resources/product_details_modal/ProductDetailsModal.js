@@ -16,6 +16,7 @@ class ProductDetailsModal extends Component {
 
 	_handleCloseModal(evt) {
 		evt.preventDefault();
+
 		this.refs.modal.show();
 	}
 
@@ -24,14 +25,12 @@ class ProductDetailsModal extends Component {
 Soy.register(ProductDetailsModal, template);
 
 ProductDetailsModal.STATE = {
+	addToOrderLink: Config.string(),
 	availability: Config.string().oneOf([
 		'inStock',
 		'available',
 		'notAvailable'
 	]).value('inStock'),
-	pictureUrl: Config.string().required(),
-	sku: Config.string().required(),
-	name: Config.string().required(),
 	categories: Config.array(
 		Config.shapeOf(
 			{
@@ -40,15 +39,17 @@ ProductDetailsModal.STATE = {
 			}
 		)
 	).value([]),
+	description: Config.string(),
+	detailsLink: Config.string(),
+	name: Config.string().required(),
+	pictureUrl: Config.string().required(),
 	settings: Config.shapeOf(
 		{
 			minQuantity: Config.number()
 		}
 	).value(),
+	sku: Config.string().required(),
 	spritemap: Config.string(),
-	description: Config.string(),
-	detailsLink: Config.string(),
-	addToOrderLink: Config.string(),
 	_isVisible: Config.bool().value(false)
 };
 

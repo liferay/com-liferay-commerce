@@ -14,22 +14,24 @@ class OrdersTable extends Component {
 		this._getOrders = debounce(this._getOrders, 500);
 	}
 
+	_getOrders() {
+		return this.emit('getOrders', this.filterString);
+	}
+
 	_handleBackButtonClick() {
 		return this.emit('changeSelectedView', 'accounts');
 	}
 
 	_handleFilterChange(evt) {
 		this.filterString = evt.target.value;
+
 		return this._getOrders();
 	}
 
 	_handleSubmitFilter(evt) {
 		evt.preventDefault();
-		return this._getOrders();
-	}
 
-	_getOrders() {
-		return this.emit('getOrders', this.filterString);
+		return this._getOrders();
 	}
 
 }
@@ -38,6 +40,7 @@ Soy.register(OrdersTable, template);
 
 OrdersTable.STATE = {
 	accountName: Config.string(),
+	createNewOrderLink: Config.string(),
 	currentOrderId: Config.oneOfType(
 		[
 			Config.number(),
@@ -48,21 +51,20 @@ OrdersTable.STATE = {
 	orders: Config.arrayOf(
 		Config.shapeOf(
 			{
+				addOrderLink: Config.string(),
 				id: Config.oneOfType(
 					[
-						Config.string(),
-						Config.number()
+						Config.number(),
+						Config.string()
 					]
 				).required(),
 				lastEdit: Config.string(),
-				status: Config.string(),
-				addOrderLink: Config.string()
+				status: Config.string()
 			}
 		)
 	),
-	createNewOrderLink: Config.string(),
-	viewAllOrdersLink: Config.string(),
-	spritemap: Config.string().required()
+	spritemap: Config.string().required(),
+	viewAllOrdersLink: Config.string()
 };
 
 export {OrdersTable};

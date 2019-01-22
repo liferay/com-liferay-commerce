@@ -36,9 +36,9 @@ public class SearchBarTag extends ComponentRendererTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Map<String, Object> context = getContext();
-
-		String id = GetterUtil.getString(context.get("id"));
+		putValue(
+			"placeholder",
+			LanguageUtil.get(themeDisplay.getLocale(), "search"));
 
 		String query = ParamUtil.getString(request, "q");
 
@@ -48,9 +48,9 @@ public class SearchBarTag extends ComponentRendererTag {
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 
-		putValue(
-			"placeholder",
-			LanguageUtil.get(themeDisplay.getLocale(), "search"));
+		Map<String, Object> context = getContext();
+
+		String id = GetterUtil.getString(context.get("id"));
 
 		setComponentId(id);
 

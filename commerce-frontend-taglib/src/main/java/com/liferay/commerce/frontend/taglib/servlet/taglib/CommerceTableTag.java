@@ -66,13 +66,13 @@ public class CommerceTableTag extends ComponentRendererTag {
 	public int doStartTag() {
 		Map<String, Object> context = getContext();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		String dataProviderKey = GetterUtil.getString(
 			context.get("dataProviderKey"));
 
 		String tableName = GetterUtil.getString(context.get("tableName"));
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
@@ -205,13 +205,18 @@ public class CommerceTableTag extends ComponentRendererTag {
 	private void _setItems(String dataProviderKey) throws Exception {
 		Map<String, Object> context = getContext();
 
+		int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
+
+		putValue("currentPage", pageNumber);
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		int itemPerPage = GetterUtil.getInteger(context.get("itemPerPage"));
-		int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
-
 		String tableName = GetterUtil.getString(context.get("tableName"));
+
+		CommerceDataSetDataProvider commerceDataSetDataProvider =
+			_commerceDataProviderRegistry.getCommerceDataProvider(
+				dataProviderKey);
 
 		Filter filter = (Filter)context.get("filter");
 
@@ -222,9 +227,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 			filter = filterFactory.create(request);
 		}
 
-		CommerceDataSetDataProvider commerceDataSetDataProvider =
-			_commerceDataProviderRegistry.getCommerceDataProvider(
-				dataProviderKey);
+		int itemPerPage = GetterUtil.getInteger(context.get("itemPerPage"));
 
 		List<Object> items = commerceDataSetDataProvider.getItems(
 			request, filter, new PaginationImpl(itemPerPage, pageNumber), null);
@@ -234,26 +237,21 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 		putValue("items", JSONFactoryUtil.looseDeserialize(json));
 
+		putValue("pageSize", itemPerPage);
+
 		int totalItems = commerceDataSetDataProvider.countItems(
 			request, filter);
 
 		putValue("totalItems", totalItems);
-
-		putValue("currentPage", pageNumber);
-		putValue("pageSize", itemPerPage);
 	}
 
 	private void _setPagination() {
 		Map<String, Object> context = getContext();
 
+		PortletURL portletURL = (PortletURL)context.get("portletURL");
+		String namespace = GetterUtil.getString(context.get("namespace"));
 		String deltaParam = GetterUtil.getString(
 			context.get("deltaParam"), SearchContainer.DEFAULT_DELTA_PARAM);
-
-		String namespace = GetterUtil.getString(context.get("namespace"));
-
-		int itemPerPage = GetterUtil.getInteger(context.get("itemPerPage"));
-
-		PortletURL portletURL = (PortletURL)context.get("portletURL");
 
 		List<ClayPaginationEntry> clayPaginationEntries =
 			getClayPaginationEntries(portletURL, namespace, deltaParam);
@@ -261,6 +259,8 @@ public class CommerceTableTag extends ComponentRendererTag {
 		putValue("paginationEntries", clayPaginationEntries);
 
 		Stream<ClayPaginationEntry> stream = clayPaginationEntries.stream();
+
+		int itemPerPage = GetterUtil.getInteger(context.get("itemPerPage"));
 
 		ClayPaginationEntry clayPaginationEntry = stream.filter(
 			entry -> entry.getLabel() == itemPerPage
@@ -287,7 +287,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 		putValue("id", clayTable.getId());
 
-		Set<String> dependecies = new HashSet<>();
+		Set<String> dependencies = new HashSet<>();
 
 		List<ClayTableContextContributor> clayTablePostProcessors =
 			_clayTableContextContributorRegistry.
@@ -303,11 +303,11 @@ public class CommerceTableTag extends ComponentRendererTag {
 				clayTableContextContributor.getDependencies(clayTable, request);
 
 			if (contextContributorDependencies != null) {
-				dependecies.addAll(contextContributorDependencies);
+				dependencies.addAll(contextContributorDependencies);
 			}
 		}
 
-		setDependencies(dependecies);
+		setDependencies(dependencies);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

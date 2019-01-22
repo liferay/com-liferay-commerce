@@ -16,57 +16,35 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 
 class UserInvitation extends Component {
 
-	created() {
-		this._fetchUsers();
-	}
-
 	attached() {
 		this._debouncedFetchUsers = debounce(this._fetchUsers.bind(this), 300);
 	}
 
-	// syncAddedUsers(e) {
-	//     console.log(e)
-	//     if (e.length === this.addedUsers.length) {
-	//         return null;
-	//     }
-	//     const contentWrapper = this.element.querySelector('.autocomplete-input__content');
-	// 	this.element.querySelector('.autocomplete-input__box').focus();
-	// 	contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-	//     this.emit('updateUsers', this.addedUsers);
-	//     return e;
-	// }
-
-	// syncQuery(e) {
-	// 	this._isLoading = true;
-	//     return this._debouncedFetchUsers();
-	// }
+	created() {
+		this._fetchUsers();
+	}
 
 	shouldUpdate(changes) {
-		console.log(changes);
 		if (changes.events) {
 			return false;
 		}
+
 		return true;
-		if (
-			(changes.children) ||
-            (changes.users && typeof changes.users.newVal !== 'undefined') ||
-            (changes.addedUsers && typeof changes.addedUsers.newVal !== 'undefined') ||
-            (changes.query && typeof changes.query.newVal !== 'undefined')
-		) {
-			return true;
-		}
-		return false;
 	}
 
 	testAddedUsers(e) {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
+
 		this.element.querySelector('.autocomplete-input__box').focus();
+
 		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+
 		return this.emit('updateUsers', this.addedUsers);
 	}
 
 	testQuery() {
 		this._isLoading = true;
+
 		return this._debouncedFetchUsers();
 	}
 
@@ -80,11 +58,15 @@ class UserInvitation extends Component {
 					email: this.query
 				}
 			];
+
 			this.query = '';
+
 			this.testAddedUsers();
 			this.testQuery();
+
 			return true;
 		}
+
 		return false;
 	}
 
@@ -93,12 +75,16 @@ class UserInvitation extends Component {
 
 		if (evt.keyCode === 8 && !this.query.length) {
 			this.addedUsers = this.addedUsers.slice(0, -1);
+
 			this.testAddedUsers();
+
 			return false;
 		}
 
 		this.query = evt.target.value;
+
 		this.testQuery();
+
 		return true;
 	}
 
@@ -118,6 +104,7 @@ class UserInvitation extends Component {
 				[...this.addedUsers, userToBeToggled];
 
 		this.testAddedUsers();
+
 		return this.addedUsers;
 	}
 
@@ -134,7 +121,9 @@ class UserInvitation extends Component {
 			.then(
 				response => {
 					this._isLoading = false;
+
 					this.users = response.users;
+
 					return this.users;
 				}
 			);
@@ -145,24 +134,24 @@ Soy.register(UserInvitation, template);
 
 const USER_SCHEMA = Config.shapeOf(
 	{
+		email: Config.string().required(),
+		name: Config.string().required(),
+		thumbnail: Config.string().required(),
 		userId: Config.oneOfType(
 			[
-				Config.string(),
-				Config.number()
+				Config.number(),
+				Config.string()
 			]
-		).required(),
-		thumbnail: Config.string().required(),
-		name: Config.string().required(),
-		email: Config.string().required()
+		).required()
 	}
 );
 
 UserInvitation.STATE = {
-	usersAPI: Config.string().value(''),
+	addedUsers: Config.array(USER_SCHEMA).value([]),
 	query: Config.string().value(''),
 	spritemap: Config.string(),
 	users: Config.array(USER_SCHEMA).value([]),
-	addedUsers: Config.array(USER_SCHEMA).value([]),
+	usersAPI: Config.string().value(''),
 	_isLoading: Config.bool().internal().value(false)
 };
 

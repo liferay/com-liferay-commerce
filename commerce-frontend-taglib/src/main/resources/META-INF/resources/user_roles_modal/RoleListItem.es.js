@@ -15,8 +15,8 @@ class RoleListItem extends Component {
 		);
 	}
 
-	_handleToggleItem(e) {
-		e.preventDefault();
+	_handleToggleItem(evt) {
+		evt.preventDefault();
 
 		return this.emit(
 			'toggleItem',
@@ -34,18 +34,19 @@ Soy.register(RoleListItem, template);
 RoleListItem.STATE = {
 	id: Config.oneOfType(
 		[
-			Config.string(),
-			Config.number()
+			Config.number(),
+			Config.string()
 		]
 	),
 	name: Config.string(),
+	query: Config.string(),
 	selectedRoles: Config.array(
 		Config.shapeOf(
 			{
 				id: Config.oneOfType(
 					[
-						Config.string(),
-						Config.number()
+						Config.number(),
+						Config.string()
 					]
 				),
 				name: Config.string()
@@ -54,7 +55,6 @@ RoleListItem.STATE = {
 	).value(
 		[]
 	),
-	query: Config.string(),
 	_selected: Config.bool().value(false)
 };
 

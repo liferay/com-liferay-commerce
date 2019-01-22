@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Fabio Mastrorilli
+ * @author Fabio Diego Mastrorilli
  */
 public class UserRolesModalTag extends ComponentRendererTag {
 
@@ -48,17 +48,20 @@ public class UserRolesModalTag extends ComponentRendererTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Map<String, Object> context = getContext();
-
-		long commerceAccountId = GetterUtil.getLong(
-			context.get("commerceAccountId"));
-		long userId = GetterUtil.getLong(context.get("userId"));
-
 		putValue(
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 
 		try {
+			List<AccountRole> selectedRoles = new ArrayList<>();
+
+			Map<String, Object> context = getContext();
+
+			long userId = GetterUtil.getLong(context.get("userId"));
+
+			long commerceAccountId = GetterUtil.getLong(
+				context.get("commerceAccountId"));
+
 			CommerceAccount commerceAccount =
 				CommerceAccountServiceUtil.getCommerceAccount(
 					commerceAccountId);
@@ -66,8 +69,6 @@ public class UserRolesModalTag extends ComponentRendererTag {
 			List<UserGroupRole> userGroupRoles =
 				UserGroupRoleLocalServiceUtil.getUserGroupRoles(
 					userId, commerceAccount.getCommerceAccountGroupId());
-
-			List<AccountRole> selectedRoles = new ArrayList<>();
 
 			for (UserGroupRole userGroupRole : userGroupRoles) {
 				Role role = userGroupRole.getRole();
@@ -78,18 +79,18 @@ public class UserRolesModalTag extends ComponentRendererTag {
 
 			putValue("selectedRoles", selectedRoles);
 
-			List<AccountRole> avaiableRoles = new ArrayList<>();
+			List<AccountRole> availableRoles = new ArrayList<>();
 
 			List<Role> roles = RoleServiceUtil.getRoles(
 				PortalUtil.getCompanyId(request),
 				new int[] {CommerceAccountConstants.ACCOUNT_ROLE_TYPE});
 
 			for (Role role : roles) {
-				avaiableRoles.add(
+				availableRoles.add(
 					new AccountRole(role.getRoleId(), role.getName()));
 			}
 
-			putValue("roles", avaiableRoles);
+			putValue("roles", availableRoles);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);

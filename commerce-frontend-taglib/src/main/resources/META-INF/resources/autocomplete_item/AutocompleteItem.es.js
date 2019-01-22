@@ -6,16 +6,9 @@ import Soy, {Config} from 'metal-soy';
 
 class AutocompleteItem extends Component {
 
-	syncQuery() {
-		this.processQuery();
-	}
-
-	syncText() {
-		this.processQuery();
-	}
-
 	processQuery() {
 		const regex = new RegExp(`(.*?)(${this.query})(.*)`, 'gmi');
+
 		const results = regex.exec(this.text);
 
 		if (!results) {
@@ -29,13 +22,23 @@ class AutocompleteItem extends Component {
 		this.firstGroup = this.text;
 		this.secondGroup = null;
 		this.thirdGroup = null;
+
 		return false;
+	}
+
+	syncQuery() {
+		this.processQuery();
+	}
+
+	syncText() {
+		this.processQuery();
 	}
 
 	updateHighlightedText(results) {
 		this.firstGroup = results[1] || null;
 		this.secondGroup = results[2] || null;
 		this.thirdGroup = results[3] || null;
+
 		return true;
 	}
 
@@ -44,10 +47,10 @@ class AutocompleteItem extends Component {
 Soy.register(AutocompleteItem, template);
 
 AutocompleteItem.STATE = {
-	text: Config.any(),
-	query: Config.string(),
 	firstGroup: Config.string().internal(),
+	query: Config.string(),
 	secondGroup: Config.string().internal(),
+	text: Config.any(),
 	thirdGroup: Config.string().internal()
 };
 
