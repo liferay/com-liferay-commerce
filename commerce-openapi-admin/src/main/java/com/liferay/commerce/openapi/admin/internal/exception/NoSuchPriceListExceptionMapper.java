@@ -42,7 +42,7 @@ public class NoSuchPriceListExceptionMapper
 
 	@Override
 	public String getErrorDescription() {
-		return "Unable to update price list.";
+		return "Unable to find price list.";
 	}
 
 	@Override
