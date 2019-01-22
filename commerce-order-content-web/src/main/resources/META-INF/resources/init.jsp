@@ -30,7 +30,6 @@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.account.model.CommerceAccount" %><%@
 page import="com.liferay.commerce.constants.CommerceOrderActionKeys" %><%@
-page import="com.liferay.commerce.constants.CommercePortletKeys" %><%@
 page import="com.liferay.commerce.constants.CommerceWebKeys" %><%@
 page import="com.liferay.commerce.context.CommerceContext" %><%@
 page import="com.liferay.commerce.currency.model.CommerceMoney" %><%@
@@ -40,7 +39,6 @@ page import="com.liferay.commerce.exception.CommerceOrderValidatorException" %><
 page import="com.liferay.commerce.exception.NoSuchOrderException" %><%@
 page import="com.liferay.commerce.exception.NoSuchOrderNoteException" %><%@
 page import="com.liferay.commerce.model.CommerceAddress" %><%@
-page import="com.liferay.commerce.model.CommerceCountry" %><%@
 page import="com.liferay.commerce.model.CommerceOrder" %><%@
 page import="com.liferay.commerce.model.CommerceOrderNote" %><%@
 page import="com.liferay.commerce.model.CommerceShipment" %><%@
