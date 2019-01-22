@@ -50,6 +50,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -160,6 +161,25 @@ public class CPDefinitionsImporter {
 			expirationDateMinute, true, sku, StringPool.BLANK, serviceContext);
 	}
 
+	private void _addWarehouseQuantities(
+			JSONObject skuJSONObject, long[] commerceWarehouseIds,
+			ServiceContext serviceContext, CPInstance cpInstance)
+		throws PortalException {
+
+		for (int i = 0; i < commerceWarehouseIds.length; i++) {
+			long commerceWarehouseId = commerceWarehouseIds[i];
+
+			int quantity = skuJSONObject.getInt(
+				"Warehouse" + String.valueOf(i + 1));
+
+			if (quantity > 0) {
+				_commerceWarehouseItemLocalService.addCommerceWarehouseItem(
+					commerceWarehouseId, cpInstance.getCPInstanceId(), quantity,
+					serviceContext);
+			}
+		}
+	}
+
 	private long _getCPTaxCategoryId(
 			String taxCategory, ServiceContext serviceContext)
 		throws PortalException {
@@ -260,58 +280,66 @@ public class CPDefinitionsImporter {
 
 		// Commerce product instances
 
-		try {
-			_cpInstanceLocalService.buildCPInstances(
-				cpDefinition.getCPDefinitionId(), serviceContext);
-		}
-		catch (NoSuchSkuContributorCPDefinitionOptionRelException nssccpdore) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"No options defined as sku contributor for CPDefinition " +
-						cpDefinition.getCPDefinitionId());
+		JSONArray skusJSONArray = jsonObject.getJSONArray("Skus");
+
+		Calendar calendar = Calendar.getInstance();
+
+		if (skusJSONArray != null) {
+			for (int i = 0; i < skusJSONArray.length(); i++) {
+				JSONObject skuJSONObject = skusJSONArray.getJSONObject(i);
+
+				_importCPInstance(
+					cpDefinition.getCPDefinitionId(), skuJSONObject,
+					commerceWarehouseIds, calendar, serviceContext);
 			}
 		}
+		else {
+			try {
+				_cpInstanceLocalService.buildCPInstances(
+					cpDefinition.getCPDefinitionId(), serviceContext);
+			}
+			catch (NoSuchSkuContributorCPDefinitionOptionRelException
+				nssccpdore) {
 
-		List<CPInstance> cpInstances = cpDefinition.getCPInstances();
-
-		for (CPInstance cpInstance : cpInstances) {
-
-			// Commerce product instance
-
-			double priceDouble = jsonObject.getDouble("Price");
-
-			BigDecimal price = BigDecimal.valueOf(priceDouble);
-
-			BigDecimal cost = BigDecimal.valueOf(
-				jsonObject.getDouble("Cost", priceDouble));
-
-			BigDecimal promoPrice = BigDecimal.valueOf(
-				jsonObject.getDouble("PromoPrice", 0));
-
-			cpInstance.setPrice(price);
-			cpInstance.setPromoPrice(promoPrice);
-			cpInstance.setCost(cost);
-
-			String manufacturerPartNumber = jsonObject.getString(
-				"ManufacturerPartNumber");
-
-			cpInstance.setManufacturerPartNumber(manufacturerPartNumber);
-
-			_cpInstanceLocalService.updateCPInstance(cpInstance);
-
-			// Commerce warehouse items
-
-			for (int i = 0; i < commerceWarehouseIds.length; i++) {
-				long commerceWarehouseId = commerceWarehouseIds[i];
-
-				int quantity = jsonObject.getInt(
-					"Warehouse" + String.valueOf(i + 1));
-
-				if (quantity > 0) {
-					_commerceWarehouseItemLocalService.addCommerceWarehouseItem(
-						commerceWarehouseId, cpInstance.getCPInstanceId(),
-						quantity, serviceContext);
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"No options defined as sku contributor for " +
+							"CPDefinition " + cpDefinition.getCPDefinitionId());
 				}
+			}
+
+			List<CPInstance> cpInstances = cpDefinition.getCPInstances();
+
+			for (CPInstance cpInstance : cpInstances) {
+
+				// Commerce product instance
+
+				double priceDouble = jsonObject.getDouble("Price");
+
+				BigDecimal price = BigDecimal.valueOf(priceDouble);
+
+				BigDecimal cost = BigDecimal.valueOf(
+					jsonObject.getDouble("Cost", priceDouble));
+
+				BigDecimal promoPrice = BigDecimal.valueOf(
+					jsonObject.getDouble("PromoPrice", 0));
+
+				cpInstance.setPrice(price);
+				cpInstance.setPromoPrice(promoPrice);
+				cpInstance.setCost(cost);
+
+				String manufacturerPartNumber = jsonObject.getString(
+					"ManufacturerPartNumber");
+
+				cpInstance.setManufacturerPartNumber(manufacturerPartNumber);
+
+				_cpInstanceLocalService.updateCPInstance(cpInstance);
+
+				// Commerce warehouse items
+
+				_addWarehouseQuantities(
+					jsonObject, commerceWarehouseIds, serviceContext,
+					cpInstance);
 			}
 		}
 
@@ -416,7 +444,7 @@ public class CPDefinitionsImporter {
 
 		boolean importOptionValue = true;
 
-		JSONArray valuesJSONArray = jsonObject.getJSONArray("values");
+		JSONArray valuesJSONArray = jsonObject.getJSONArray("Values");
 
 		if ((valuesJSONArray != null) && (valuesJSONArray.length() > 0)) {
 			importOptionValue = false;
@@ -490,6 +518,99 @@ public class CPDefinitionsImporter {
 				cpDefinition.getCPDefinitionId(),
 				cpSpecificationOption.getCPSpecificationOptionId(),
 				cpOptionCategoryId, valueMap, priority, serviceContext);
+	}
+
+	private CPInstance _importCPInstance(
+			long cpDefinitionId, JSONObject skuJSONObject,
+			long[] commerceWarehouseIds, Calendar calendar,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		String sku = skuJSONObject.getString("Sku");
+		String manufacturerPartNumber = skuJSONObject.getString(
+			"ManufacturerPartNumber");
+		double price = skuJSONObject.getDouble("Price");
+		double promoPrice = skuJSONObject.getDouble("PromoPrice");
+
+		JSONArray options = skuJSONObject.getJSONArray("ContributorOptions");
+
+		String optionsJSON = null;
+
+		if (options != null) {
+			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+			for (int i = 0; i < options.length(); i++) {
+				JSONObject optionsJSONObject = options.getJSONObject(i);
+
+				String key = optionsJSONObject.getString("key");
+
+				CPOption cpOption = _cpOptionLocalService.fetchCPOption(
+					serviceContext.getScopeGroupId(), key);
+
+				if (cpOption == null) {
+					continue;
+				}
+
+				CPDefinitionOptionRel cpDefinitionOptionRel =
+					_cpDefinitionOptionRelLocalService.
+						fetchCPDefinitionOptionRel(
+							cpDefinitionId, cpOption.getCPOptionId());
+
+				if (cpDefinitionOptionRel == null) {
+					continue;
+				}
+
+				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+				jsonObject.put(
+					"key", cpDefinitionOptionRel.getCPDefinitionOptionRelId());
+
+				List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
+					_cpDefinitionOptionValueRelLocalService.
+						getCPDefinitionOptionValueRels(
+							cpDefinitionOptionRel.getCPDefinitionOptionRelId());
+
+				for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
+						cpDefinitionOptionValueRels) {
+
+					String name = cpDefinitionOptionValueRel.getName(
+						serviceContext.getLocale());
+
+					if (name.equals(optionsJSONObject.getString("value"))) {
+						JSONArray valueJSONArray =
+							JSONFactoryUtil.createJSONArray();
+
+						valueJSONArray.put(
+							String.valueOf(
+								cpDefinitionOptionValueRel.
+									getCPDefinitionOptionValueRelId()));
+
+						jsonObject.put("value", valueJSONArray);
+					}
+				}
+
+				jsonArray.put(jsonObject);
+			}
+
+			optionsJSON = jsonArray.toString();
+		}
+
+		CPInstance cpInstance = _cpInstanceLocalService.addCPInstance(
+			cpDefinitionId, sku, null, manufacturerPartNumber, true,
+			optionsJSON, true, calendar.get(Calendar.MONTH),
+			calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.YEAR),
+			calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
+			0, 0, 0, 0, 0, true, serviceContext);
+
+		cpInstance.setPrice(new BigDecimal(price));
+		cpInstance.setPromoPrice(new BigDecimal(promoPrice));
+
+		_addWarehouseQuantities(
+			skuJSONObject, commerceWarehouseIds, serviceContext, cpInstance);
+
+		_cpInstanceLocalService.updateCPInstance(cpInstance);
+
+		return cpInstance;
 	}
 
 	private CPDAvailabilityEstimate _updateCPDAvailabilityEstimate(
