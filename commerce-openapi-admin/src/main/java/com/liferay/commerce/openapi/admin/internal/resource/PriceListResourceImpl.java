@@ -24,31 +24,31 @@ import com.liferay.portal.kernel.model.User;
 
 import java.util.Locale;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Zoltán Takács
  */
 @Component(
-	immediate = true,
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
 	},
-	service = PriceListResource.class
+	scope = ServiceScope.PROTOTYPE, service = PriceListResource.class
 )
 public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
-	public Response deletePriceList(
-			String id, long groupId, User user, Locale locale, Company company)
+	public Response deletePriceList(String id, long groupId, Locale locale)
 		throws Exception {
 
-		_priceListHelper.deletePriceList(id, groupId, user, locale, company);
+		_priceListHelper.deletePriceList(id, groupId, _user, locale, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -56,32 +56,29 @@ public class PriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
-	public PriceListDTO getPriceList(
-			String id, long groupId, User user, Locale locale, Company company)
+	public PriceListDTO getPriceList(String id, long groupId, Locale locale)
 		throws Exception {
 
 		return _priceListHelper.getPriceList(
-			id, groupId, user, locale, company);
+			id, groupId, _user, locale, _company);
 	}
 
 	@Override
 	public CollectionDTO<PriceListDTO> getPriceLists(
-			long groupId, User user, Locale locale, Company company,
-			Pagination pagination)
+			long groupId, Locale locale, Pagination pagination)
 		throws Exception {
 
 		return _priceListHelper.getPriceLists(
-			groupId, user, locale, company, pagination);
+			groupId, _user, locale, _company, pagination);
 	}
 
 	@Override
 	public Response updatePriceList(
-			String id, long groupId, PriceListDTO priceListDTO, User user,
-			Locale locale, Company company)
+			String id, long groupId, PriceListDTO priceListDTO, Locale locale)
 		throws Exception {
 
 		_priceListHelper.updatePriceList(
-			id, groupId, priceListDTO, user, locale, company);
+			id, groupId, priceListDTO, _user, locale, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -90,15 +87,20 @@ public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
 	public PriceListDTO upsertPriceList(
-			long groupId, PriceListDTO priceListDTO, User user, Locale locale,
-			Company company)
+			long groupId, PriceListDTO priceListDTO, Locale locale)
 		throws Exception {
 
 		return _priceListHelper.upsertPriceList(
-			groupId, priceListDTO, user, locale, company);
+			groupId, priceListDTO, _user, locale, _company);
 	}
+
+	@Context
+	private Company _company;
 
 	@Reference
 	private PriceListHelper _priceListHelper;
+
+	@Context
+	private User _user;
 
 }
