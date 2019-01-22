@@ -62,10 +62,10 @@ public class MoneyOrderCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			HttpServletResponse httpServletResponse)
 		throws Exception {
 
+		CommerceOrder commerceOrder = null;
+
 		long commerceOrderId = ParamUtil.getLong(
 			httpServletRequest, "commerceOrderId");
-
-		CommerceOrder commerceOrder = null;
 
 		if (commerceOrderId > 0) {
 			commerceOrder = _commerceOrderService.getCommerceOrder(

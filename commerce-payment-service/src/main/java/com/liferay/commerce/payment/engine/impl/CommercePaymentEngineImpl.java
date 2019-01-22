@@ -167,7 +167,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		if ((commercePaymentMethod == null) ||
 			!commercePaymentMethod.isCompleteEnabled()) {
 
-			_completeOrderWithOutPaymentMethod(commerceOrderId);
+			_completeOrderWithoutPaymentMethod(commerceOrderId);
 
 			return _emptyResult(commerceOrderId);
 		}
@@ -510,7 +510,7 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		return commercePaymentMethod.voidTransaction(commercePaymentRequest);
 	}
 
-	private void _completeOrderWithOutPaymentMethod(long commerceOrderId)
+	private void _completeOrderWithoutPaymentMethod(long commerceOrderId)
 		throws PortalException {
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(

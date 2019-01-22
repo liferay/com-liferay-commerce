@@ -387,6 +387,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		throws Exception {
 
 		boolean success = false;
+		String url = null;
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commercePaymentRequest.getCommerceOrderId());
@@ -394,8 +395,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		Payment payment = _getPayment(
 			commercePaymentRequest, commerceOrder,
 			PayPalCommercePaymentMethodConstants.INTENT_SALE);
-
-		String url = null;
 
 		for (Links links : payment.getLinks()) {
 			if ("approval_url".equals(links.getRel())) {
@@ -444,10 +443,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		}
 
 		boolean success = false;
+		String url = null;
 
 		Agreement agreement = _getAgreement(commerceOrder, apiContext, plan);
-
-		String url = null;
 
 		for (Links links : agreement.getLinks()) {
 			if ("approval_url".equals(links.getRel())) {
@@ -709,8 +707,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		RedirectUrls redirectUrls = new RedirectUrls();
 
-		redirectUrls.setReturnUrl(commercePaymentRequest.getReturnUrl());
 		redirectUrls.setCancelUrl(commercePaymentRequest.getCancelUrl());
+		redirectUrls.setReturnUrl(commercePaymentRequest.getReturnUrl());
 
 		payment.setRedirectUrls(redirectUrls);
 
@@ -729,13 +727,18 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommerceOrder commerceOrder, APIContext apiContext)
 		throws PayPalRESTException, PortalException {
 
+		String name = "Payment Plan";
+		String description = "Plan with regular payment definitions";
+
+		Plan plan = new Plan(name, description, "fixed");
+
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
 		List<CommerceOrderItem> commerceOrderItems =
 			commerceOrder.getCommerceOrderItems();
 
 		List<PaymentDefinition> paymentDefinitions = new ArrayList<>(
 			commerceOrderItems.size());
-
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 			CPInstance cpInstance = commerceOrderItem.getCPInstance();
@@ -778,11 +781,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 			paymentDefinitions.add(paymentDefinition);
 		}
-
-		String name = "Payment Plan";
-		String description = "Plan with regular payment definitions";
-
-		Plan plan = new Plan(name, description, "fixed");
 
 		plan.setPaymentDefinitions(paymentDefinitions);
 
