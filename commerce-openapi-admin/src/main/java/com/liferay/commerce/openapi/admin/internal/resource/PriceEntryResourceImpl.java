@@ -62,7 +62,7 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
-	public CollectionDTO<PriceEntryDTO> getPriceEntrys(
+	public CollectionDTO<PriceEntryDTO> getPriceEntries(
 		long groupId, User user, Locale locale, Company company,
 		Pagination pagination) {
 
