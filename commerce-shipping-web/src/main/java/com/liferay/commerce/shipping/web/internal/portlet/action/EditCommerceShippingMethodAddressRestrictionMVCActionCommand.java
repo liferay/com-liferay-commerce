@@ -101,8 +101,7 @@ public class EditCommerceShippingMethodAddressRestrictionMVCActionCommand
 				deleteCommerceAddressRestrictionIds) {
 
 			_commerceShippingMethodService.deleteCommerceAddressRestriction(
-				deleteCommerceAddressRestrictionId,
-				_portal.getScopeGroupId(actionRequest));
+				deleteCommerceAddressRestrictionId);
 		}
 	}
 

@@ -179,8 +179,7 @@ public class CommerceShippingMethodRestrictionsDisplayContext {
 
 		int total =
 			_commerceShippingMethodService.getCommerceAddressRestrictionsCount(
-				getCommerceShippingMethodId(),
-				_commerceShippingMethod.getGroupId());
+				getCommerceShippingMethodId());
 
 		_searchContainer.setTotal(total);
 
@@ -236,8 +235,7 @@ public class CommerceShippingMethodRestrictionsDisplayContext {
 		throws PortalException {
 
 		return _commerceShippingMethodService.getCommerceAddressRestrictions(
-			getCommerceShippingMethodId(), start, end, orderByComparator,
-			_commerceShippingMethod.getGroupId());
+			getCommerceShippingMethodId(), start, end, orderByComparator);
 	}
 
 	private CommerceShippingMethod _commerceShippingMethod;
