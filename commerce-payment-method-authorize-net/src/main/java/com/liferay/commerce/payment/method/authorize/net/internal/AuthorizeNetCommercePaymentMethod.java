@@ -372,18 +372,12 @@ public class AuthorizeNetCommercePaymentMethod
 	private String _getServletUrl(
 		AuthorizeNetCommercePaymentRequest authorizeNetCommercePaymentRequest) {
 
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(
+		return StringBundler.concat(
 			_portal.getPortalURL(
-				authorizeNetCommercePaymentRequest.getHttpServletRequest()));
-		sb.append(_portal.getPathModule());
-		sb.append(StringPool.SLASH);
-		sb.append(
+				authorizeNetCommercePaymentRequest.getHttpServletRequest()),
+			_portal.getPathModule(), StringPool.SLASH,
 			AuthorizeNetCommercePaymentMethodConstants.
 				START_PAYMENT_SERVLET_PATH);
-
-		return sb.toString();
 	}
 
 	private TransactionRequestType _getTransactionRequestType(

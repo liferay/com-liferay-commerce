@@ -78,10 +78,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -560,20 +558,15 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		agreement.setName("Base Agreement");
 		agreement.setDescription("Basic Agreement");
 
-		String pattern = "yyyy-MM-dd hh:mm:ss";
+		String pattern = "yyyy-MM-dd'T'hh:mm:ss'Z'";
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-		TimeZone timeZone = TimeZone.getTimeZone("UTC");
-
-		Calendar calendar = Calendar.getInstance(timeZone);
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 
 		calendar.add(Calendar.MINUTE, 10);
 
 		String date = simpleDateFormat.format(calendar.getTime());
-
-		date = StringUtil.replace(date, CharPool.SPACE, 'T');
-		date = date + "Z";
 
 		agreement.setStartDate(date);
 
@@ -772,9 +765,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 			BigDecimal finalPrice = commerceOrderItem.getFinalPrice();
 
-			String value = _payPalDecimalFormat.format(finalPrice);
-
-			Currency amount = new Currency(commerceCurrency.getCode(), value);
+			Currency amount = new Currency(
+				commerceCurrency.getCode(),
+				_payPalDecimalFormat.format(finalPrice));
 
 			PaymentDefinition paymentDefinition = new PaymentDefinition(
 				"Payment Definition", "REGULAR",
@@ -860,11 +853,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		patch.setOp("replace");
 		patch.setPath("/");
 
-		Map<String, String> value = new HashMap<>();
-
-		value.put("state", "ACTIVE");
-
-		patch.setValue(value);
+		patch.setValue(Collections.singletonMap("state", "ACTIVE"));
 
 		plan.update(apiContext, Collections.singletonList(patch));
 

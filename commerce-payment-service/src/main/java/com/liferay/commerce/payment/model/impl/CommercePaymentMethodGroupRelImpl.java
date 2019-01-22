@@ -21,25 +21,11 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 
 /**
- * The extended model implementation for the CommercePaymentMethodGroupRel service. Represents a row in the &quot;CommercePaymentMethodGroupRel&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel} interface.
- * </p>
- *
  * @author Luca Pellizzon
  */
 @ProviderType
 public class CommercePaymentMethodGroupRelImpl
 	extends CommercePaymentMethodGroupRelBaseImpl {
-
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce payment method group rel model instance should use the {@link com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel} interface instead.
-	 */
-	public CommercePaymentMethodGroupRelImpl() {
-	}
 
 	@Override
 	public String getImageURL(ThemeDisplay themeDisplay) {
@@ -47,15 +33,10 @@ public class CommercePaymentMethodGroupRelImpl
 			return null;
 		}
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(themeDisplay.getPathImage());
-		sb.append("/payment/method?img_id=");
-		sb.append(getImageId());
-		sb.append("&t=");
-		sb.append(WebServerServletTokenUtil.getToken(getImageId()));
-
-		return sb.toString();
+		return StringBundler.concat(
+			themeDisplay.getPathImage(), "/payment/method?img_id=",
+			String.valueOf(getImageId()), "&t=",
+			WebServerServletTokenUtil.getToken(getImageId()));
 	}
 
 }

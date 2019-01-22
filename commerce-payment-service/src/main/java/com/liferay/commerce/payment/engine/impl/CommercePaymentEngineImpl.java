@@ -263,14 +263,9 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		String name = commercePaymentMethod.getName(locale);
 
 		if (!commercePaymentMethod.isActive()) {
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(name);
-			sb.append(" (");
-			sb.append(LanguageUtil.get(httpServletRequest, "inactive"));
-			sb.append(CharPool.CLOSE_PARENTHESIS);
-
-			name = sb.toString();
+			name = StringBundler.concat(
+				name, " (", LanguageUtil.get(httpServletRequest, "inactive"),
+				StringPool.CLOSE_PARENTHESIS);
 		}
 
 		return name;
@@ -615,12 +610,13 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 				_commercePaymentMethodRegistry.getCommercePaymentMethod(
 					commercePaymentMethodGroupRel.getEngineKey());
 
-			if (!subscriptionOrder ||
-				(subscriptionOrder &&
-				 commercePaymentMethod.isProcessRecurringEnabled())) {
+			if (subscriptionOrder &&
+				!commercePaymentMethod.isProcessRecurringEnabled()) {
 
-				commercePaymentMethods.add(commercePaymentMethod);
+				continue;
 			}
+
+			commercePaymentMethods.add(commercePaymentMethod);
 		}
 
 		return commercePaymentMethods;
