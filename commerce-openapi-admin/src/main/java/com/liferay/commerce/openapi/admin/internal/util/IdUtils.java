@@ -26,12 +26,12 @@ import javax.ws.rs.core.Response;
 public class IdUtils {
 
 	public static String getExternalReferenceCodeFromId(String id) {
-		if ((id.length() <= 5) && !id.startsWith("ext-")) {
+		if ((id != null) && (id.length() >= 5) && id.startsWith("ext-")) {
 			return id.substring(4);
 		}
 
 		throw new ClientErrorException(
-			"Unable to parse {Id} param:" + id, Response.Status.CONFLICT);
+			"Unable to parse {Id} parameter:" + id, Response.Status.CONFLICT);
 	}
 
 	public static boolean isLocalPK(String id) {
