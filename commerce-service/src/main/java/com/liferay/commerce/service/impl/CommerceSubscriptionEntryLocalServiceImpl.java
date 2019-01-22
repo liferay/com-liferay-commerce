@@ -171,7 +171,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	public List<CommerceSubscriptionEntry>
 		getActiveCommerceSubscriptionEntries() {
 
-		return commerceSubscriptionEntryPersistence.findBysubscriptionStatus(
+		return commerceSubscriptionEntryPersistence.findBySubscriptionStatus(
 			CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE);
 	}
 
