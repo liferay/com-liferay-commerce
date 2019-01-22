@@ -20,8 +20,6 @@ import com.liferay.commerce.payment.request.CommercePaymentRequestProvider;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 
-import java.math.BigDecimal;
-
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,11 +48,9 @@ public class AuthorizeNetCommercePaymentRequestProvider
 		CommerceOrder commerceOrder =
 			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
-		BigDecimal amount = commerceOrder.getTotal();
-
 		return new AuthorizeNetCommercePaymentRequest(
-			amount, cancelUrl, commerceOrderId, locale, httpServletRequest,
-			returnUrl, transactionId);
+			commerceOrder.getTotal(), cancelUrl, commerceOrderId, locale,
+			httpServletRequest, returnUrl, transactionId);
 	}
 
 	@Reference

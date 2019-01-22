@@ -210,10 +210,15 @@ public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 	}
 
 	protected long[] getCheckedCommerceCountryIds() throws PortalException {
-		List<Long> commerceCountryIdsList = new ArrayList<>();
-
 		List<CommerceAddressRestriction> commerceAddressRestrictions =
 			getCommerceAddressRestrictions();
+
+		if (commerceAddressRestrictions.isEmpty()) {
+			return new long[0];
+		}
+
+		List<Long> commerceCountryIdsList = new ArrayList<>(
+			commerceAddressRestrictions.size());
 
 		for (CommerceAddressRestriction commerceAddressRestriction :
 				commerceAddressRestrictions) {
@@ -222,11 +227,7 @@ public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 				commerceAddressRestriction.getCommerceCountryId());
 		}
 
-		if (!commerceCountryIdsList.isEmpty()) {
-			return ArrayUtil.toLongArray(commerceCountryIdsList);
-		}
-
-		return new long[0];
+		return ArrayUtil.toLongArray(commerceCountryIdsList);
 	}
 
 	protected List<CommerceAddressRestriction> getCommerceAddressRestrictions()
