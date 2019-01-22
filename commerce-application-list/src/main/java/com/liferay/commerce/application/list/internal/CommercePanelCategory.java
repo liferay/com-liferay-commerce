@@ -63,11 +63,11 @@ public class CommercePanelCategory extends BasePanelCategory {
 
 		boolean show = super.isShow(permissionChecker, group);
 
-		if (show) {
-			show = !group.isStaged();
+		if (show && !group.isStaged()) {
+			return true;
 		}
 
-		return show;
+		return false;
 	}
 
 }
