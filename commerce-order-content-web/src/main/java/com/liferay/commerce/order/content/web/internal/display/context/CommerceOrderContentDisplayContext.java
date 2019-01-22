@@ -292,6 +292,10 @@ public class CommerceOrderContentDisplayContext {
 		CommerceMoney total = _commerceOrderPriceCalculation.getTotal(
 			commerceOrder, _commerceContext);
 
+		if (total == null) {
+			return StringPool.BLANK;
+		}
+
 		return total.format(_cpRequestHelper.getLocale());
 	}
 
@@ -305,7 +309,7 @@ public class CommerceOrderContentDisplayContext {
 
 	public String getCommerceShipmentStatusLabel(int status) {
 		return LanguageUtil.get(
-			_cpRequestHelper.getLocale(),
+			_httpServletRequest,
 			CommerceShipmentConstants.getShipmentStatusLabel(status));
 	}
 
@@ -346,14 +350,15 @@ public class CommerceOrderContentDisplayContext {
 			return StringPool.BLANK;
 		}
 
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
-
 		DecimalFormat decimalFormat = new DecimalFormat();
+
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
 
 		decimalFormat.setMaximumFractionDigits(
 			commerceCurrency.getMaxFractionDigits());
 		decimalFormat.setMinimumFractionDigits(
 			commerceCurrency.getMinFractionDigits());
+
 		decimalFormat.setNegativeSuffix(StringPool.PERCENT);
 		decimalFormat.setPositiveSuffix(StringPool.PERCENT);
 

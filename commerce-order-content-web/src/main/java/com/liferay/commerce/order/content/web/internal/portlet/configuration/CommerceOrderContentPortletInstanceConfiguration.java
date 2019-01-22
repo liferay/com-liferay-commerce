@@ -38,7 +38,7 @@ public interface CommerceOrderContentPortletInstanceConfiguration {
 	@Meta.AD(deflt = "false", name = "exclude", required = false)
 	public boolean exclude();
 
-	@Meta.AD(deflt = "", name = "display-style", required = false)
+	@Meta.AD(name = "display-style", required = false)
 	public String displayStyle();
 
 	@Meta.AD(deflt = "0", name = "display-style-group-id", required = false)

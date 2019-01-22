@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-long commerceOrderItemId = ParamUtil.getLong(request, "commerceOrderItemId");
-
 CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+long commerceOrderItemId = ParamUtil.getLong(request, "commerceOrderItemId");
 
 List<CommerceShipmentItem> commerceShipmentItems = commerceOrderContentDisplayContext.getCommerceShipmentItems(commerceOrderItemId);
 %>

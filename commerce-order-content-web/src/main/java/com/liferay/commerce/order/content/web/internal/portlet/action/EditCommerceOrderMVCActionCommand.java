@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.order.content.web.internal.portlet.action;
 
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
@@ -265,21 +264,16 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			(CommerceContext)actionRequest.getAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT);
 
-		long commerceOrderId = ParamUtil.getLong(
-			actionRequest, "commerceOrderId");
-
-		long commerceAccountId = ParamUtil.getLong(
-			actionRequest, "commerceAccountId");
 		long shippingAddressId = ParamUtil.getLong(
 			actionRequest, "shippingAddressId");
 		String purchaseOrderNumber = ParamUtil.getString(
 			actionRequest, "purchaseOrderNumber");
 
-		CommerceAccount commerceAccount =
-			_commerceAccountService.getCommerceAccount(commerceAccountId);
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		long commerceOrderId = ParamUtil.getLong(
+			actionRequest, "commerceOrderId");
 
 		if (commerceOrderId > 0) {
 			CommerceOrder commerceOrder =
@@ -295,6 +289,9 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 				commerceContext);
 		}
 		else {
+			long commerceAccountId = ParamUtil.getLong(
+				actionRequest, "commerceAccountId");
+
 			long commerceCurrencyId = 0;
 
 			CommerceCurrency commerceCurrency =
@@ -305,9 +302,8 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			}
 
 			_commerceOrderService.addCommerceOrder(
-				themeDisplay.getScopeGroupId(),
-				commerceAccount.getCommerceAccountId(), commerceCurrencyId,
-				shippingAddressId, purchaseOrderNumber);
+				themeDisplay.getScopeGroupId(), commerceAccountId,
+				commerceCurrencyId, shippingAddressId, purchaseOrderNumber);
 		}
 	}
 

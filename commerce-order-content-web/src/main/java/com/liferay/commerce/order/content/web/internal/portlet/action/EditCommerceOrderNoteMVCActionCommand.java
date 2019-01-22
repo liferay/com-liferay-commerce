@@ -75,15 +75,15 @@ public class EditCommerceOrderNoteMVCActionCommand
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchOrderNoteException ||
-				e instanceof PrincipalException) {
+			if (e instanceof CommerceOrderNoteContentException) {
+				SessionErrors.add(actionRequest, e.getClass());
+			}
+			else if (e instanceof NoSuchOrderNoteException ||
+					 e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
-			}
-			else if (e instanceof CommerceOrderNoteContentException) {
-				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else {
 				throw e;
@@ -94,18 +94,19 @@ public class EditCommerceOrderNoteMVCActionCommand
 	protected void updateCommerceOrderNote(ActionRequest actionRequest)
 		throws Exception {
 
-		long commerceOrderNoteId = ParamUtil.getLong(
-			actionRequest, "commerceOrderNoteId");
-
-		long commerceOrderId = ParamUtil.getLong(
-			actionRequest, "commerceOrderId");
 		String content = ParamUtil.getString(actionRequest, "content");
 		boolean restricted = ParamUtil.getBoolean(actionRequest, "restricted");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceOrderNote.class.getName(), actionRequest);
+		long commerceOrderNoteId = ParamUtil.getLong(
+			actionRequest, "commerceOrderNoteId");
 
 		if (commerceOrderNoteId <= 0) {
+			long commerceOrderId = ParamUtil.getLong(
+				actionRequest, "commerceOrderId");
+
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				CommerceOrderNote.class.getName(), actionRequest);
+
 			_commerceOrderNoteService.addCommerceOrderNote(
 				commerceOrderId, content, restricted, serviceContext);
 		}
