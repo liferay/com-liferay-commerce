@@ -46,9 +46,6 @@ public class ClayTableContextContributorRegistryImpl
 	public List<ClayTableContextContributor> getClayTableContextContributors(
 		String key) {
 
-		List<ClayTableContextContributor> clayTableContextContributors =
-			new ArrayList<>();
-
 		List<ServiceWrapper<ClayTableContextContributor>>
 			clayTableContextContributorServiceWrappers =
 				ListUtil.fromCollection(_serviceTrackerMap.getService(key));
@@ -62,6 +59,9 @@ public class ClayTableContextContributorRegistryImpl
 
 			return Collections.emptyList();
 		}
+
+		List<ClayTableContextContributor> clayTableContextContributors =
+			new ArrayList<>();
 
 		for (ServiceWrapper<ClayTableContextContributor>
 				tableActionProviderServiceWrapper :

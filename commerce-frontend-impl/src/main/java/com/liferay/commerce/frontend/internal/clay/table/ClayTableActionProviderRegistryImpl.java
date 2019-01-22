@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.osgi.framework.BundleContext;
@@ -42,9 +43,6 @@ public class ClayTableActionProviderRegistryImpl
 	public List<ClayTableActionProvider> getClayTableActionProviders(
 		String key) {
 
-		List<ClayTableActionProvider> clayTableActionProviders =
-			new ArrayList<>();
-
 		List<ServiceWrapper<ClayTableActionProvider>>
 			clayTableActionProviderServiceWrappers =
 				_serviceTrackerMap.getService(key);
@@ -55,8 +53,11 @@ public class ClayTableActionProviderRegistryImpl
 					"No ClayTableActionProvider registered with key " + key);
 			}
 
-			return null;
+			return Collections.emptyList();
 		}
+
+		List<ClayTableActionProvider> clayTableActionProviders =
+			new ArrayList<>();
 
 		for (ServiceWrapper<ClayTableActionProvider>
 				tableActionProviderServiceWrapper :

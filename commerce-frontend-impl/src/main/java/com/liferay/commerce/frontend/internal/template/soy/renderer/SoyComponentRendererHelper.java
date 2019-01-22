@@ -33,6 +33,7 @@ import java.io.Writer;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -127,16 +128,18 @@ public class SoyComponentRendererHelper {
 
 	private void _renderJavaScript(Writer writer) throws IOException {
 		String componentJavaScript = SoyJavaScriptRendererUtil.getJavaScript(
-			(Map)_context, _wrapperId, _moduleName,
+			_context, _wrapperId, _moduleName,
 			_componentDescriptor.isWrapper());
 
-		StringBundler sb = new StringBundler(4);
+		Set<String> dependencies = _componentDescriptor.getDependencies();
+
+		StringBundler sb = new StringBundler((dependencies.size() * 4) + 3);
 
 		sb.append(_componentDescriptor.getModule());
 		sb.append(" as ");
 		sb.append(_moduleName);
 
-		for (String dependency : _componentDescriptor.getDependencies()) {
+		for (String dependency : dependencies) {
 			sb.append(StringPool.COMMA);
 			sb.append(dependency);
 			sb.append(" as ");
