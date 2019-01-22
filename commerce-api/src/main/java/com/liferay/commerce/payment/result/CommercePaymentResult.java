@@ -78,7 +78,7 @@ public class CommercePaymentResult implements Serializable {
 	private final boolean _onlineRedirect;
 	private final String _redirectUrl;
 	private final String _refundId;
-	private List<String> _resultMessages = new ArrayList<>();
+	private final List<String> _resultMessages = new ArrayList<>();
 	private final boolean _success;
 
 }

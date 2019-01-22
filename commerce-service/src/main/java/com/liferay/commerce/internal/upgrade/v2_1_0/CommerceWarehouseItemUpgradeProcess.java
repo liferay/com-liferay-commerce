@@ -87,6 +87,7 @@ public class CommerceWarehouseItemUpgradeProcess extends UpgradeProcess {
 				ps.setLong(1, cpDefinition.getCProductId());
 
 				ps.setString(2, cpInstance.getCPInstanceUuid());
+
 				ps.setLong(3, cpInstanceId);
 
 				ps.execute();

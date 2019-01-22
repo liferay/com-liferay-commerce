@@ -44,8 +44,6 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
-import java.util.Locale;
-
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 

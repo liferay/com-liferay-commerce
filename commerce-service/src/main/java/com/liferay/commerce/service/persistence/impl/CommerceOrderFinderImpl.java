@@ -301,10 +301,10 @@ public class CommerceOrderFinderImpl
 		}
 
 		if (exclude) {
-			return "(CommerceOrder.orderStatus != " + orderStatus + " ) AND";
+			return "(CommerceOrder.orderStatus != " + orderStatus + ") AND";
 		}
 
-		return "(CommerceOrder.orderStatus = " + orderStatus + " ) AND";
+		return "(CommerceOrder.orderStatus = " + orderStatus + ") AND";
 	}
 
 	@ServiceReference(type = CustomSQL.class)

@@ -83,10 +83,10 @@ public class CommerceOrderItemLocalServiceImpl
 			commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
+		CPDefinition cpDefinition = null;
+
 		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
-
-		CPDefinition cpDefinition = null;
 
 		if (cpInstance != null) {
 			cpDefinition = _cpDefinitionLocalService.getCPDefinition(
