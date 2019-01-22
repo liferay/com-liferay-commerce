@@ -56,6 +56,10 @@ public class JsonMessageBodyWriter implements MessageBodyWriter<Object> {
 		Class<?> type, Type genericType, Annotation[] annotations,
 		MediaType mediaType) {
 
+		if (type == String.class) {
+			return false;
+		}
+
 		return _OBJECT_MAPPER.canSerialize(type);
 	}
 
