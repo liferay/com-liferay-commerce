@@ -16,6 +16,7 @@ package com.liferay.commerce.product.content.web.internal.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
 
 /**
@@ -32,13 +33,13 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 public interface CPPublisherPortletInstanceConfiguration {
 
-	@Meta.AD(deflt = "", name = "display-style", required = false)
+	@Meta.AD(name = "display-style", required = false)
 	public String displayStyle();
 
 	@Meta.AD(deflt = "0", name = "display-style-group-id", required = false)
 	public long displayStyleGroupId();
 
-	@Meta.AD(deflt = "true", name = "paginate", required = false)
+	@Meta.AD(deflt = StringPool.TRUE, name = "paginate", required = false)
 	public boolean paginate();
 
 	@Meta.AD(deflt = "15", name = "pagination-delta", required = false)
