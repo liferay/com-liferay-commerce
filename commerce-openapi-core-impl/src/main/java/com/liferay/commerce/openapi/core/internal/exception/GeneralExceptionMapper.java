@@ -14,11 +14,8 @@
 
 package com.liferay.commerce.openapi.core.internal.exception;
 
-import com.liferay.commerce.openapi.core.exception.RESTError;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -28,33 +25,28 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Igor Beslic
+ * @author Ivica Cardic
  */
 @Component(
 	property = JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true",
 	service = ExceptionMapper.class
 )
 @Provider
-public class GeneralExceptionMapper implements ExceptionMapper<Exception> {
+public class GeneralExceptionMapper extends BaseExceptionMapper<Exception> {
 
 	@Override
-	public Response toResponse(Exception e) {
-		_log.error("General exception", e);
-
-		Response.Status badRequest = Response.Status.BAD_REQUEST;
-
-		Response.ResponseBuilder responseBuilder = Response.status(badRequest);
-
-		RESTError restError = RESTError.GENERAL_ERROR;
-
-		responseBuilder.entity(
-			restError.toJSON(e.getMessage(), badRequest.getStatusCode()));
-
-		responseBuilder.type(MediaType.APPLICATION_JSON_TYPE);
-
-		return responseBuilder.build();
+	public int getErrorCode() {
+		return 999;
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		GeneralExceptionMapper.class);
+	@Override
+	public String getErrorDescription() {
+		return "General error.";
+	}
+
+	@Override
+	public Response.Status getStatus() {
+		return Response.Status.BAD_REQUEST;
+	}
 
 }
