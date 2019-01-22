@@ -33,22 +33,23 @@ import java.util.stream.Stream;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.ServerErrorException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Zoltán Takács
  */
 @Component(
-	immediate = true,
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
 	},
-	service = WebSiteResource.class
+	scope = ServiceScope.PROTOTYPE, service = WebSiteResource.class
 )
 public class WebSiteResourceImpl implements WebSiteResource {
 
@@ -61,18 +62,18 @@ public class WebSiteResourceImpl implements WebSiteResource {
 
 	@Override
 	public CollectionDTO<WebSiteDTO> getWebSites(
-		Locale locale, Company company, Pagination pagination) {
+		Locale locale, Pagination pagination) {
 
 		final int totalItems;
 		List<Group> groups = null;
 
 		try {
 			groups = _groupService.getGroups(
-				company.getCompanyId(), 0, true, pagination.getStartPosition(),
+				_company.getCompanyId(), 0, true, pagination.getStartPosition(),
 				pagination.getEndPosition());
 
 			totalItems = _groupService.getGroupsCount(
-				company.getCompanyId(), 0, true);
+				_company.getCompanyId(), 0, true);
 		}
 		catch (PortalException pe) {
 			throw new ServerErrorException(
@@ -106,6 +107,9 @@ public class WebSiteResourceImpl implements WebSiteResource {
 
 		throw new NotFoundException("Unable to find web site with ID " + id);
 	}
+
+	@Context
+	private Company _company;
 
 	@Reference
 	private GroupService _groupService;
