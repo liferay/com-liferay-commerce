@@ -373,8 +373,16 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		Schema schema = content.getSchema();
 
-		return _getSchemaComponentDefinition(
-			schema.getReferencedModel(), componentDefinitions);
+		ComponentDefinition schemaComponentDefinition =
+			_getSchemaComponentDefinition(
+				schema.getReferencedModel(), componentDefinitions);
+
+		if ("array".equals(schema.getType())) {
+			return ComponentDefinition.asComponentTypeArray(
+				schemaComponentDefinition, schema.getReference());
+		}
+
+		return schemaComponentDefinition;
 	}
 
 	private ComponentDefinition _getSchemaComponentDefinition(
