@@ -19,8 +19,6 @@ import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
 
 import java.util.Locale;
 
@@ -50,8 +48,7 @@ public interface ProductOptionResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProductOption(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -60,8 +57,7 @@ public interface ProductOptionResource {
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductOptionDTO getProductOption(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -69,8 +65,7 @@ public interface ProductOptionResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionDTO> getProductOptions(
-			@QueryParam("groupId") long groupId, @Context User user,
-			@Context Locale locale, @Context Company company,
+			@QueryParam("groupId") long groupId, @Context Locale locale,
 			@Context Pagination pagination)
 		throws Exception;
 
@@ -80,8 +75,7 @@ public interface ProductOptionResource {
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company, @Context Pagination pagination)
+			@Context Locale locale, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -90,8 +84,7 @@ public interface ProductOptionResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOption(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			ProductOptionDTO productOptionDTO, @Context User user,
-			@Context Locale locale, @Context Company company)
+			ProductOptionDTO productOptionDTO, @Context Locale locale)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -101,8 +94,7 @@ public interface ProductOptionResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductOptionDTO upsertProductOption(
 			@QueryParam("groupId") long groupId,
-			ProductOptionDTO productOptionDTO, @Context User user,
-			@Context Locale locale, @Context Company company)
+			ProductOptionDTO productOptionDTO, @Context Locale locale)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -112,8 +104,7 @@ public interface ProductOptionResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductOptionValueDTO upsertProductOptionValue(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			ProductOptionValueDTO productOptionValueDTO, @Context User user,
-			@Context Locale locale, @Context Company company)
+			ProductOptionValueDTO productOptionValueDTO, @Context Locale locale)
 		throws Exception;
 
 }

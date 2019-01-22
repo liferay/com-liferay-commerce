@@ -16,8 +16,6 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductOptionValueResource;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
 
 import java.util.Locale;
 
@@ -26,18 +24,18 @@ import javax.annotation.Generated;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Igor Beslic
  */
 @Component(
-	immediate = true,
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
 	},
-	service = ProductOptionValueResource.class
+	scope = ServiceScope.PROTOTYPE, service = ProductOptionValueResource.class
 )
 @Generated(value = "OSGiRESTModuleGenerator")
 public class ProductOptionValueResourceImpl
@@ -45,7 +43,8 @@ public class ProductOptionValueResourceImpl
 
 	@Override
 	public Response deleteProductOptionValue(
-		String id, long groupId, User user, Locale locale, Company company) {
+			String id, long groupId, Locale locale)
+		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -54,17 +53,19 @@ public class ProductOptionValueResourceImpl
 
 	@Override
 	public ProductOptionValueDTO getProductOptionValue(
-		String id, long groupId, User user, Locale locale, Company company) {
+			String id, long groupId, Locale locale)
+		throws Exception {
 
 		return new ProductOptionValueDTO();
 	}
 
 	@Override
 	public Response updateProductOptionValue(
-		String id, long groupId, ProductOptionValueDTO productOptionValueDTO,
-		User user, Locale locale, Company company) {
+			String id, long groupId,
+			ProductOptionValueDTO productOptionValueDTO, Locale locale)
+		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
 	}

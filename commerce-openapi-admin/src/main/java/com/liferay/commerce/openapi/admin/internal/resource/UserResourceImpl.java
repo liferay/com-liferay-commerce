@@ -18,8 +18,6 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.UserDTO;
 import com.liferay.commerce.openapi.admin.resource.UserResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -29,56 +27,52 @@ import javax.annotation.Generated;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Igor Beslic
  */
 @Component(
-	immediate = true,
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
 	},
-	service = UserResource.class
+	scope = ServiceScope.PROTOTYPE, service = UserResource.class
 )
 @Generated(value = "OSGiRESTModuleGenerator")
 public class UserResourceImpl implements UserResource {
 
 	@Override
-	public Response deleteUser(
-		String id, User user, Locale locale, Company company) {
-
+	public Response deleteUser(String id, Locale locale) throws Exception {
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	public UserDTO getUser(
-		String id, User user, Locale locale, Company company) {
-
+	public UserDTO getUser(String id, Locale locale) throws Exception {
 		return new UserDTO();
 	}
 
 	@Override
-	public CollectionDTO<UserDTO> getUsers(
-		User user, Locale locale, Company company, Pagination pagination) {
+	public CollectionDTO<UserDTO> getUsers(Locale locale, Pagination pagination)
+		throws Exception {
 
 		return new CollectionDTO(Collections.emptyList(), 0);
 	}
 
 	@Override
-	public Response updateUser(
-		String id, UserDTO userDTO, User user, Locale locale, Company company) {
+	public Response updateUser(String id, UserDTO userDTO, Locale locale)
+		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	public UserDTO upsertUser(UserDTO userDTO) {
+	public UserDTO upsertUser(UserDTO userDTO) throws Exception {
 		return new UserDTO();
 	}
 
