@@ -228,6 +228,11 @@ public class CPDefinitionInventoryWrapper implements CPDefinitionInventory,
 		return _cpDefinitionInventory.getAllowedOrderQuantities();
 	}
 
+	@Override
+	public int[] getAllowedOrderQuantitiesArray() {
+		return _cpDefinitionInventory.getAllowedOrderQuantitiesArray();
+	}
+
 	/**
 	* Returns the back orders of this cp definition inventory.
 	*
