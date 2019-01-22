@@ -208,8 +208,6 @@ public class CommerceOrderLocalServiceImpl
 
 		// Commerce order
 
-		long groupId = serviceContext.getScopeGroupId();
-
 		long userId = serviceContext.getUserId();
 
 		User user = userLocalService.getUser(userId);
@@ -223,7 +221,7 @@ public class CommerceOrderLocalServiceImpl
 		if (commerceCurrencyId <= 0) {
 			CommerceCurrency commerceCurrency =
 				_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-					groupId);
+					serviceContext.getScopeGroupId());
 
 			if (commerceCurrency != null) {
 				commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
@@ -236,7 +234,7 @@ public class CommerceOrderLocalServiceImpl
 			commerceOrderId);
 
 		commerceOrder.setUuid(serviceContext.getUuid());
-		commerceOrder.setGroupId(groupId);
+		commerceOrder.setGroupId(serviceContext.getScopeGroupId());
 		commerceOrder.setCompanyId(user.getCompanyId());
 		commerceOrder.setUserId(userId);
 		commerceOrder.setUserName(user.getFullName());

@@ -62,19 +62,8 @@ public class SubscriptionInfoCPContentContributor
 			return jsonObject;
 		}
 
-		CPSubscriptionInfo cpSubscriptionInfo =
-			cpInstance.getCPSubscriptionInfo();
-
-		if (cpSubscriptionInfo == null) {
-			jsonObject.put(
-				CPContentContributorConstants.SUBSCRIPTION_INFO,
-				StringPool.BLANK);
-
-			return jsonObject;
-		}
-
 		String subscriptionInfo = _getSubscriptionInfo(
-			cpSubscriptionInfo, httpServletRequest);
+			cpInstance.getCPSubscriptionInfo(), httpServletRequest);
 
 		jsonObject.put(
 			CPContentContributorConstants.SUBSCRIPTION_INFO, subscriptionInfo);
@@ -85,6 +74,10 @@ public class SubscriptionInfoCPContentContributor
 	private String _getSubscriptionInfo(
 		CPSubscriptionInfo cpSubscriptionInfo,
 		HttpServletRequest httpServletRequest) {
+
+		if (cpSubscriptionInfo == null) {
+			return StringPool.BLANK;
+		}
 
 		long maxSubscriptionCycles =
 			cpSubscriptionInfo.getMaxSubscriptionCycles();

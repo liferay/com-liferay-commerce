@@ -92,9 +92,6 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
-
 		CPSubscriptionInfo cpSubscriptionInfo = null;
 
 		CPInstance cpInstance = _cpInstanceLocalService.fetchCProductInstance(
@@ -121,10 +118,14 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 				commerceSubscriptionEntryId);
 
 		commerceSubscriptionEntry.setUuid(serviceContext.getUuid());
-		commerceSubscriptionEntry.setGroupId(groupId);
+		commerceSubscriptionEntry.setGroupId(serviceContext.getScopeGroupId());
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+
 		commerceSubscriptionEntry.setCompanyId(user.getCompanyId());
 		commerceSubscriptionEntry.setUserId(user.getUserId());
 		commerceSubscriptionEntry.setUserName(user.getFullName());
+
 		commerceSubscriptionEntry.setCPInstanceUuid(cpInstanceUuid);
 		commerceSubscriptionEntry.setCProductId(cProductId);
 		commerceSubscriptionEntry.setCommerceOrderItemId(commerceOrderItemId);
@@ -264,9 +265,8 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		commerceSubscriptionEntry.setNextIterationDate(nextIterationDate);
 		commerceSubscriptionEntry.setStartDate(startDate);
 
-		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
-
-		return commerceSubscriptionEntry;
+		return commerceSubscriptionEntryPersistence.update(
+			commerceSubscriptionEntry);
 	}
 
 	@Override
@@ -301,9 +301,8 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		commerceSubscriptionEntry.setNextIterationDate(
 			subscriptionNextIterationDate);
 
-		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
-
-		return commerceSubscriptionEntry;
+		return commerceSubscriptionEntryPersistence.update(
+			commerceSubscriptionEntry);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -322,9 +321,8 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		commerceSubscriptionEntry.setSubscriptionStatus(subscriptionStatus);
 
-		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
-
-		return commerceSubscriptionEntry;
+		return commerceSubscriptionEntryPersistence.update(
+			commerceSubscriptionEntry);
 	}
 
 	protected SearchContext buildSearchContext(
