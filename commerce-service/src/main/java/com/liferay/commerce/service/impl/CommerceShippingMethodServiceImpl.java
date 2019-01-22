@@ -89,11 +89,15 @@ public class CommerceShippingMethodServiceImpl
 
 	@Override
 	public void deleteCommerceAddressRestriction(
-			long commerceAddressRestrictionId, long groupId)
+			long commerceAddressRestrictionId)
 		throws PortalException {
 
+		CommerceAddressRestriction commerceAddressRestriction =
+			commerceAddressRestrictionLocalService.
+				getCommerceAddressRestriction(commerceAddressRestrictionId);
+
 		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+			getPermissionChecker(), commerceAddressRestriction.getGroupId(),
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
 
 		commerceShippingMethodLocalService.deleteCommerceAddressRestriction(
@@ -119,12 +123,15 @@ public class CommerceShippingMethodServiceImpl
 	@Override
 	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
 			long commerceShippingMethodId, int start, int end,
-			OrderByComparator<CommerceAddressRestriction> orderByComparator,
-			long groupId)
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws PortalException {
 
+		CommerceShippingMethod commerceShippingMethod =
+			commerceShippingMethodLocalService.getCommerceShippingMethod(
+				commerceShippingMethodId);
+
 		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+			getPermissionChecker(), commerceShippingMethod.getGroupId(),
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
 
 		return commerceShippingMethodLocalService.
@@ -134,11 +141,15 @@ public class CommerceShippingMethodServiceImpl
 
 	@Override
 	public int getCommerceAddressRestrictionsCount(
-			long commerceShippingMethodId, long groupId)
+			long commerceShippingMethodId)
 		throws PortalException {
 
+		CommerceShippingMethod commerceShippingMethod =
+			commerceShippingMethodLocalService.getCommerceShippingMethod(
+				commerceShippingMethodId);
+
 		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+			getPermissionChecker(), commerceShippingMethod.getGroupId(),
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
 
 		return commerceShippingMethodLocalService.
