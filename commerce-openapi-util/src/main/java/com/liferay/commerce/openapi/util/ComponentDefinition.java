@@ -27,6 +27,14 @@ import java.util.regex.Pattern;
  */
 public class ComponentDefinition {
 
+	public static ComponentDefinition asComponentTypeArray(
+		ComponentDefinition componentDefinition, String itemsReference) {
+
+		return new ComponentDefinition(
+			componentDefinition._name, componentDefinition._propertyDefinitions,
+			"array", itemsReference);
+	}
+
 	public ComponentDefinition(
 		String name, List<PropertyDefinition> propertyDefinitions, String type,
 		String itemsReference) {
