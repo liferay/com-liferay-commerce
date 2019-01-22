@@ -20,7 +20,6 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionServiceUtil;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -38,7 +37,7 @@ public class QuantityInputTag extends IncludeTag {
 	@Override
 	public int doStartTag() throws JspException {
 		try {
-			_allowedOrderQuantity = StringPool.BLANK;
+			_allowedOrderQuantities = new int[0];
 			_maxOrderQuantity =
 				CPDefinitionInventoryConstants.DEFAULT_MAX_ORDER_QUANTITY;
 			_minOrderQuantity =
@@ -51,8 +50,8 @@ public class QuantityInputTag extends IncludeTag {
 					fetchCPDefinitionInventoryByCPDefinitionId(_cpDefinitionId);
 
 			if (cpDefinitionInventory != null) {
-				_allowedOrderQuantity =
-					cpDefinitionInventory.getAllowedOrderQuantities();
+				_allowedOrderQuantities =
+					cpDefinitionInventory.getAllowedOrderQuantitiesArray();
 				_maxOrderQuantity = cpDefinitionInventory.getMaxOrderQuantity();
 				_minOrderQuantity = cpDefinitionInventory.getMinOrderQuantity();
 				_multipleOrderQuantity =
@@ -108,7 +107,7 @@ public class QuantityInputTag extends IncludeTag {
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_allowedOrderQuantity = null;
+		_allowedOrderQuantities = null;
 		_cpDefinition = null;
 		_cpDefinitionId = 0;
 		_maxOrderQuantity = 0;
@@ -128,8 +127,8 @@ public class QuantityInputTag extends IncludeTag {
 	@Override
 	protected void setAttributes(HttpServletRequest httpServletRequest) {
 		request.setAttribute(
-			"liferay-commerce:quantity-input:allowedOrderQuantity",
-			_allowedOrderQuantity);
+			"liferay-commerce:quantity-input:allowedOrderQuantities",
+			_allowedOrderQuantities);
 		request.setAttribute(
 			"liferay-commerce:quantity-input:cpDefinition", _cpDefinition);
 		request.setAttribute(
@@ -154,7 +153,7 @@ public class QuantityInputTag extends IncludeTag {
 	private static final Log _log = LogFactoryUtil.getLog(
 		QuantityInputTag.class);
 
-	private String _allowedOrderQuantity;
+	private int[] _allowedOrderQuantities;
 	private CPDefinition _cpDefinition;
 	private long _cpDefinitionId;
 	private int _maxOrderQuantity;

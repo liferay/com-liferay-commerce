@@ -17,7 +17,7 @@
 <%@ include file="/quantity_input/init.jsp" %>
 
 <%
-String allowedOrderQuantity = (String)request.getAttribute("liferay-commerce:quantity-input:allowedOrderQuantity");
+int[] allowedOrderQuantities = (int[])request.getAttribute("liferay-commerce:quantity-input:allowedOrderQuantities");
 CPDefinition cpDefinition = (CPDefinition)request.getAttribute("liferay-commerce:quantity-input:cpDefinition");
 int maxOrderQuantity = (int)request.getAttribute("liferay-commerce:quantity-input:maxOrderQuantity");
 int minOrderQuantity = (int)request.getAttribute("liferay-commerce:quantity-input:minOrderQuantity");
@@ -31,17 +31,6 @@ long cpDefinitionId = cpDefinition.getCPDefinitionId();
 
 if (Validator.isNull(name)) {
 	name = cpDefinitionId + "Quantity";
-}
-
-int[] allowedOrderQuantities = null;
-
-if (Validator.isNotNull(allowedOrderQuantity)) {
-	String allowedOrderQuantitiesString =
-			allowedOrderQuantity.replaceAll(" *(, *)|(\\. *)|( +)", StringPool.COMMA);
-
-	allowedOrderQuantities = StringUtil.split(allowedOrderQuantitiesString, 0);
-
-	Arrays.sort(allowedOrderQuantities);
 }
 %>
 
