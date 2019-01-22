@@ -47,7 +47,7 @@ CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
 	<c:if test="<%= commerceOrderContentDisplayContext.hasPermission(CommerceOrderActionKeys.ADD_COMMERCE_ORDER) && (commerceAccount != null) %>">
 		<div class="minium-frame__cta is-visible">
-			<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick="<%= renderResponse.getNamespace() %>addCommerceOrder();" value="add-order" />
+			<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "addCommerceOrder();" %>' value="add-order" />
 		</div>
 	</c:if>
 </aui:form>

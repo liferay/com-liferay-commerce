@@ -21,10 +21,26 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 %>
 
 <c:choose>
-	<c:when test="<%= commerceOrderContentDisplayContext.isCommerceSiteTypeB2C() %>">
-		<liferay-util:include page="/b2c/view.jsp" servletContext="<%= application %>" />
+	<c:when test="<%= portletName.equals(CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT) %>">
+		<commerce-ui:table
+			dataProviderKey="commerceOrders"
+			itemPerPage="<%= 5 %>"
+			namespace="<%= renderResponse.getNamespace() %>"
+			pageNumber="1"
+			portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
+			tableName="commerceOrders"
+		/>
+	</c:when>
+	<c:when test="<%= portletName.equals(CommercePortletKeys.COMMERCE_ORDER_CONTENT) %>">
+		<c:choose>
+			<c:when test="<%= commerceOrderContentDisplayContext.isCommerceSiteTypeB2C() %>">
+				<liferay-util:include page="/b2c/view.jsp" servletContext="<%= application %>" />
+			</c:when>
+			<c:otherwise>
+				<liferay-util:include page="/b2b/view.jsp" servletContext="<%= application %>" />
+			</c:otherwise>
+		</c:choose>
 	</c:when>
 	<c:otherwise>
-		<liferay-util:include page="/b2b/view.jsp" servletContext="<%= application %>" />
 	</c:otherwise>
 </c:choose>
