@@ -17,58 +17,43 @@ package com.liferay.commerce.openapi.core.exception;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+
 /**
  * @author Igor Beslic
+ * @author Ivica Cardic
  */
-public enum RESTError {
+public abstract class BaseExceptionMapper<E extends Throwable>
+	implements ExceptionMapper<E> {
 
-	GENERAL_ERROR(999, "General error."),
-	INTERNAL_ERROR(998, "Internal error. Please try again later."),
-	UNDEFINED(0, "Undefined error.");
+	public abstract int getErrorCode();
 
-	public static RESTError getRESTError(String message) {
-		try {
-			int idx = message.indexOf("errorCode");
+	public abstract String getErrorDescription();
 
-			if (idx < 0) {
-				return UNDEFINED;
-			}
+	public abstract Response.Status getStatus();
 
-			idx = idx + 12;
+	@Override
+	public Response toResponse(E e) {
+		_log.error("General exception", e);
 
-			int errorCode = Integer.parseInt(
-				message.substring(idx, message.indexOf(",", idx)));
+		Response.ResponseBuilder responseBuilder = Response.status(getStatus());
 
-			return toRestError(errorCode);
-		}
-		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(e.getMessage(), e);
-			}
+		Response.Status status = getStatus();
 
-			return UNDEFINED;
-		}
+		responseBuilder.entity(toJSON(e, status.getStatusCode()));
+
+		responseBuilder.type(MediaType.APPLICATION_JSON_TYPE);
+
+		return responseBuilder.build();
 	}
 
-	public static RESTError toRestError(int errorCode) {
-		for (RESTError restError : values()) {
-			if (restError.getErrorCode() == errorCode) {
-				return restError;
-			}
-		}
-
-		return UNDEFINED;
+	protected String toJSON(E e, int status) {
+		return toJSON(e.getMessage(), status);
 	}
 
-	public int getErrorCode() {
-		return _errorCode;
-	}
-
-	public String getErrorDescription() {
-		return _errorDescription;
-	}
-
-	public String toJSON(String message, int status, Object... args) {
+	protected String toJSON(String message, int status, Object... args) {
 		StringBuilder sb = new StringBuilder(9 + (args.length * 8));
 
 		sb.append("{\"errorCode\": ");
@@ -94,7 +79,7 @@ public enum RESTError {
 			sb.append("\"");
 			sb.append(":");
 			sb.append("\"");
-			sb.append(String.valueOf(args[i + 1]));
+			sb.append(args[i + 1]);
 			sb.append("\"");
 
 			if ((i + 2) < args.length) {
@@ -107,14 +92,7 @@ public enum RESTError {
 		return sb.toString();
 	}
 
-	private RESTError(int errorCode, String errorDescription) {
-		_errorCode = errorCode;
-		_errorDescription = errorDescription;
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(RESTError.class);
-
-	private final int _errorCode;
-	private final String _errorDescription;
+	private static final Log _log = LogFactoryUtil.getLog(
+		BaseExceptionMapper.class);
 
 }
