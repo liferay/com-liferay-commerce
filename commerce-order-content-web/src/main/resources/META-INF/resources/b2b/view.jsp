@@ -18,6 +18,10 @@
 
 <%
 CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
+
+CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 %>
 
 <liferay-portlet:renderURL var="addCommerceOrderURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
@@ -41,7 +45,7 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 		tableName="commerceOrders"
 	/>
 
-	<c:if test="<%= commerceOrderContentDisplayContext.hasPermission(CommerceOrderActionKeys.ADD_COMMERCE_ORDER) %>">
+	<c:if test="<%= commerceOrderContentDisplayContext.hasPermission(CommerceOrderActionKeys.ADD_COMMERCE_ORDER) && (commerceAccount != null) %>">
 		<div class="minium-frame__cta is-visible">
 			<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "addCommerceOrder();" %>' value="add-order" />
 		</div>
