@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.util.util;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +23,18 @@ import org.slf4j.LoggerFactory;
  * @author Igor Beslic
  */
 public class GetterUtil {
+
+	public static String getAsTextOrNullIfMisses(
+		String attribute, JsonNode jsonParentNode) {
+
+		if (!jsonParentNode.has(attribute)) {
+			return null;
+		}
+
+		JsonNode jsonNode = jsonParentNode.get(attribute);
+
+		return jsonNode.asText();
+	}
 
 	public static int getInteger(String value) {
 		if (value == null) {
