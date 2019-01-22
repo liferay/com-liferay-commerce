@@ -308,7 +308,7 @@
 			<finder-column name="userId" />
 			<finder-column name="orderStatus" />
 		</finder>
-		<finder name="C_G_O" return-type="Collection">
+		<finder name="G_C_O" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="commerceAccountId" />
 			<finder-column name="orderStatus" />
@@ -689,7 +689,7 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="commerceSubscriptionEntryId" return-type="Collection">
+		<finder name="CommerceSubscriptionEntryId" return-type="Collection">
 			<finder-column name="commerceSubscriptionEntryId" />
 		</finder>
 		<finder name="CommerceOrderItemId" return-type="CommerceSubscriptionCycleEntry" unique="true">
@@ -739,7 +739,7 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="subscriptionStatus" return-type="Collection">
+		<finder name="SubscriptionStatus" return-type="Collection">
 			<finder-column name="subscriptionStatus" />
 		</finder>
 		<finder name="G_U" return-type="Collection">

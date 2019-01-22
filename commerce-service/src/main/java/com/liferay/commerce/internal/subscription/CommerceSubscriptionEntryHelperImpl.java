@@ -133,18 +133,18 @@ public class CommerceSubscriptionEntryHelperImpl
 			_commerceOrderItemLocalService.getCommerceOrderItem(
 				commerceSubscriptionEntry.getCommerceOrderItemId());
 
-		CommerceOrder oldOrder = oldCommerceOrderItem.getCommerceOrder();
+		CommerceOrder oldCommerceOrder = oldCommerceOrderItem.getCommerceOrder();
 
-		CommerceOrder newOrder = _commerceOrderLocalService.addCommerceOrder(
-			oldOrder.getGroupId(), oldOrder.getUserId(),
-			oldOrder.getCommerceAccountId(), oldOrder.getCommerceCurrencyId(),
-			oldOrder.getShippingAddressId(), oldOrder.getPurchaseOrderNumber());
+		CommerceOrder newCommerceOrder = _commerceOrderLocalService.addCommerceOrder(
+			oldCommerceOrder.getGroupId(), oldCommerceOrder.getUserId(),
+			oldCommerceOrder.getCommerceAccountId(), oldCommerceOrder.getCommerceCurrencyId(),
+			oldCommerceOrder.getShippingAddressId(), oldCommerceOrder.getPurchaseOrderNumber());
 
-		newOrder.setBillingAddressId(oldOrder.getBillingAddressId());
-		newOrder.setCommercePaymentMethodKey(
-			oldOrder.getCommercePaymentMethodKey());
-		newOrder.setCommerceShippingMethodId(
-			oldOrder.getCommerceShippingMethodId());
+		newCommerceOrder.setBillingAddressId(oldCommerceOrder.getBillingAddressId());
+		newCommerceOrder.setCommercePaymentMethodKey(
+			oldCommerceOrder.getCommercePaymentMethodKey());
+		newCommerceOrder.setCommerceShippingMethodId(
+			oldCommerceOrder.getCommerceShippingMethodId());
 
 		long newCommerceOrderItemId = _counterLocalService.increment();
 
@@ -152,32 +152,32 @@ public class CommerceSubscriptionEntryHelperImpl
 			(CommerceOrderItem)oldCommerceOrderItem.clone();
 
 		newCommerceOrderItem.setCommerceOrderItemId(newCommerceOrderItemId);
-		newCommerceOrderItem.setCommerceOrderId(newOrder.getCommerceOrderId());
+		newCommerceOrderItem.setCommerceOrderId(newCommerceOrder.getCommerceOrderId());
 
 		newCommerceOrderItem =
 			_commerceOrderItemLocalService.addCommerceOrderItem(
 				newCommerceOrderItem);
 
-		newOrder.setSubtotal(newCommerceOrderItem.getFinalPrice());
-		newOrder.setTotal(newCommerceOrderItem.getFinalPrice());
+		newCommerceOrder.setSubtotal(newCommerceOrderItem.getFinalPrice());
+		newCommerceOrder.setTotal(newCommerceOrderItem.getFinalPrice());
 
-		newOrder.setPaymentStatus(
+		newCommerceOrder.setPaymentStatus(
 			CommerceOrderConstants.PAYMENT_STATUS_PENDING);
-		newOrder.setOrderStatus(
+		newCommerceOrder.setOrderStatus(
 			CommerceOrderConstants.ORDER_STATUS_SUBSCRIPTION);
 
-		newOrder = _commerceOrderLocalService.updateCommerceOrder(newOrder);
+		newCommerceOrder = _commerceOrderLocalService.updateCommerceOrder(newCommerceOrder);
 
 		// ServiceContext
 
-		ExpandoBridge expandoBridge = oldOrder.getExpandoBridge();
+		ExpandoBridge expandoBridge = oldCommerceOrder.getExpandoBridge();
 
 		serviceContext.setExpandoBridgeAttributes(
 			expandoBridge.getAttributes());
 
-		serviceContext.setCompanyId(oldOrder.getCompanyId());
-		serviceContext.setScopeGroupId(oldOrder.getGroupId());
-		serviceContext.setUserId(oldOrder.getUserId());
+		serviceContext.setCompanyId(oldCommerceOrder.getCompanyId());
+		serviceContext.setScopeGroupId(oldCommerceOrder.getGroupId());
+		serviceContext.setUserId(oldCommerceOrder.getUserId());
 
 		// Add CommerceSubscriptionCycleEntry
 
@@ -186,7 +186,7 @@ public class CommerceSubscriptionEntryHelperImpl
 				commerceSubscriptionEntry.getCommerceSubscriptionEntryId(),
 				newCommerceOrderItemId, true);
 
-		return newOrder;
+		return newCommerceOrder;
 	}
 
 	private boolean _isNewSubscription(CommerceOrderItem commerceOrderItem) {

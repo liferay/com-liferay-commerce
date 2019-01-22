@@ -455,7 +455,7 @@ public class CommerceOrderLocalServiceImpl
 	public CommerceOrder fetchCommerceOrder(
 		long commerceAccountId, long groupId, int orderStatus) {
 
-		return commerceOrderPersistence.fetchByC_G_O_First(
+		return commerceOrderPersistence.fetchByG_C_O_First(
 			groupId, commerceAccountId, orderStatus, null);
 	}
 

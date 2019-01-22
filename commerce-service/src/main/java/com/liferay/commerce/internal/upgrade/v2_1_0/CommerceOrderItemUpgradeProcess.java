@@ -70,10 +70,10 @@ public class CommerceOrderItemUpgradeProcess extends UpgradeProcess {
 			rs = s.executeQuery("select * from CommerceOrderItem");
 
 			while (rs.next()) {
-				long instanceId = rs.getLong("CPInstanceId");
+				long cpInstanceId = rs.getLong("CPInstanceId");
 
 				CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-					instanceId);
+					cpInstanceId);
 
 				CPDefinition cpDefinition =
 					_cpDefinitionLocalService.getCPDefinition(
@@ -81,7 +81,7 @@ public class CommerceOrderItemUpgradeProcess extends UpgradeProcess {
 
 				ps.setLong(1, cpDefinition.getCProductId());
 
-				ps.setLong(2, instanceId);
+				ps.setLong(2, cpInstanceId);
 
 				ps.execute();
 			}

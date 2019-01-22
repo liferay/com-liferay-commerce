@@ -102,7 +102,7 @@ public class CommerceSubscriptionCycleEntryLocalServiceImpl
 		getCommerceSubscriptionCycleEntries(long commerceSubscriptionEntryId) {
 
 		return commerceSubscriptionCycleEntryPersistence.
-			findBycommerceSubscriptionEntryId(commerceSubscriptionEntryId);
+			findByCommerceSubscriptionEntryId(commerceSubscriptionEntryId);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class CommerceSubscriptionCycleEntryLocalServiceImpl
 				orderByComparator) {
 
 		return commerceSubscriptionCycleEntryPersistence.
-			findBycommerceSubscriptionEntryId(
+			findByCommerceSubscriptionEntryId(
 				commerceSubscriptionEntryId, start, end, orderByComparator);
 	}
 
@@ -122,7 +122,7 @@ public class CommerceSubscriptionCycleEntryLocalServiceImpl
 		long commerceSubscriptionEntryId) {
 
 		return commerceSubscriptionCycleEntryPersistence.
-			countBycommerceSubscriptionEntryId(commerceSubscriptionEntryId);
+			countByCommerceSubscriptionEntryId(commerceSubscriptionEntryId);
 	}
 
 	protected void reindexCommerceSubscriptionEntry(
