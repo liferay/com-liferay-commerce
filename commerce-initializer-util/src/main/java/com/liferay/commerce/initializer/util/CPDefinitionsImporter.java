@@ -198,7 +198,7 @@ public class CPDefinitionsImporter {
 
 		// Categories
 
-		List<AssetCategory> assetCategories = null;
+		List<AssetCategory> assetCategories = Collections.emptyList();
 
 		JSONArray categoriesJSONArray = jsonObject.getJSONArray("Categories");
 
@@ -206,9 +206,6 @@ public class CPDefinitionsImporter {
 			assetCategories = _assetCategoriesImporter.importAssetCategories(
 				categoriesJSONArray, assetVocabularyName, classLoader,
 				imageDependenciesPath, serviceContext);
-		}
-		else {
-			assetCategories = Collections.emptyList();
 		}
 
 		// Commerce product definition
@@ -289,7 +286,7 @@ public class CPDefinitionsImporter {
 				jsonObject.getDouble("Cost", priceDouble));
 
 			BigDecimal promoPrice = BigDecimal.valueOf(
-				jsonObject.getDouble("PromoPrice", 0D));
+				jsonObject.getDouble("PromoPrice", 0));
 
 			cpInstance.setPrice(price);
 			cpInstance.setPromoPrice(promoPrice);
@@ -528,7 +525,7 @@ public class CPDefinitionsImporter {
 
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
 			_commerceAvailabilityEstimateLocalService.
-				addCommerceAvailabilityEstimate(titleMap, 0D, serviceContext);
+				addCommerceAvailabilityEstimate(titleMap, 0, serviceContext);
 
 		return
 			_cpdAvailabilityEstimateLocalService.updateCPDAvailabilityEstimate(
