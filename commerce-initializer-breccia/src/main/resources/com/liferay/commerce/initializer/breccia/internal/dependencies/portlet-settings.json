@@ -107,14 +107,5 @@
 		"portletPreferences": {
 			"destination" : "catalog"
 		}
-	},
-	{
-		"instanceId": "breccia",
-		"layoutFriendlyURL": "/your-orders",
-		"portletName": "com_liferay_commerce_order_content_web_internal_portlet_CommerceOrderContentPortlet",
-		"portletPreferences": {
-			"exclude": true,
-			"orderStatus": 2
-		}
 	}
 ]
