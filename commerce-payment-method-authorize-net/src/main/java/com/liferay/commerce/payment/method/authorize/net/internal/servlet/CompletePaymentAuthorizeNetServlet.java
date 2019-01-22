@@ -91,7 +91,8 @@ public class CompletePaymentAuthorizeNetServlet extends HttpServlet {
 			}
 			else {
 				_commercePaymentEngine.completePayment(
-					commerceOrder.getCommerceOrderId(), null, httpServletRequest);
+					commerceOrder.getCommerceOrderId(), null,
+					httpServletRequest);
 			}
 
 			httpServletResponse.sendRedirect(redirect);
