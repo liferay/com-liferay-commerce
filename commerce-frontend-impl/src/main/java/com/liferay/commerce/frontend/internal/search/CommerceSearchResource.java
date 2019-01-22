@@ -313,7 +313,7 @@ public class CommerceSearchResource {
 			PortletProvider.Action.VIEW);
 
 		if (editURL == null) {
-			return "";
+			return StringPool.BLANK;
 		}
 
 		editURL.setParameter("commerceAccountId", String.valueOf(accountId));
