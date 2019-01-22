@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.util;
 
-import com.liferay.commerce.currency.exception.NoSuchCurrencyException;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
@@ -22,8 +21,6 @@ import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.commerce.price.list.exception.CommercePriceListDisplayDateException;
-import com.liferay.commerce.price.list.exception.CommercePriceListExpirationDateException;
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
@@ -49,10 +46,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.ServerErrorException;
-import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -84,9 +77,9 @@ public class PriceListHelper {
 		try {
 			commercePriceList = getPriceListById(id, company);
 		}
-		catch (ServerErrorException see) {
+		catch (NoSuchPriceListException nsple) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Price List not exist with ID: " + id, see);
+				_log.debug("Price List not exist with ID: " + id, nsple);
 			}
 
 			return;
@@ -97,44 +90,39 @@ public class PriceListHelper {
 	}
 
 	public PriceListDTO getPriceList(
-		String id, long groupId, User user, Locale locale, Company company) {
+			String id, long groupId, User user, Locale locale, Company company)
+		throws PortalException {
 
 		return DTOUtils.modelToDTO(getPriceListById(id, company), locale);
 	}
 
-	public CommercePriceList getPriceListById(String id, Company company) {
+	public CommercePriceList getPriceListById(String id, Company company)
+		throws PortalException {
+
 		CommercePriceList commercePriceList = null;
 
-		try {
-			if (IdUtils.isLocalPK(id)) {
-				commercePriceList =
-					_commercePriceListService.fetchCommercePriceList(
-						GetterUtil.getLong(id));
-			}
-			else {
-
-				// Get Price List by External Reference Code
-
-				String erc = IdUtils.getExternalReferenceCodeFromId(id);
-
-				commercePriceList =
-					_commercePriceListService.fetchByExternalReferenceCode(
-						company.getCompanyId(), erc);
-			}
+		if (IdUtils.isLocalPK(id)) {
+			commercePriceList =
+				_commercePriceListService.fetchCommercePriceList(
+					GetterUtil.getLong(id));
 		}
-		catch (PortalException pe) {
-			throw new ServerErrorException(
-				"Unable to find Price List with ID: " + id,
-				Response.Status.INTERNAL_SERVER_ERROR, pe);
+		else {
+
+			// Get Price List by External Reference Code
+
+			String erc = IdUtils.getExternalReferenceCodeFromId(id);
+
+			commercePriceList =
+				_commercePriceListService.fetchByExternalReferenceCode(
+					company.getCompanyId(), erc);
 		}
 
-		return Optional.of(
-			commercePriceList
-		).orElseThrow(
-			() -> new ServerErrorException(
-				"Unable to find Price List with ID: " + id,
-				Response.Status.INTERNAL_SERVER_ERROR)
-		);
+		if (commercePriceList == null) {
+			throw new NoSuchPriceListException(
+				"Unable to find Price List with ID: " + id);
+		}
+
+		return commercePriceList;
 	}
 
 	public CollectionDTO<PriceListDTO> getPriceLists(
@@ -168,36 +156,13 @@ public class PriceListHelper {
 			Locale locale, Company company)
 		throws PortalException {
 
-		try {
-			return DTOUtils.modelToDTO(
-				_updatePriceList(
-					id, company, priceListDTO.getCurrency(),
-					priceListDTO.getName(), priceListDTO.getPriority(),
-					priceListDTO.getNeverExpire(),
-					priceListDTO.getDisplayDate(),
-					priceListDTO.getExpirationDate()),
-				locale);
-		}
-		catch (NoSuchCurrencyException nsce) {
-			throw new ClientErrorException(
-				String.format(
-					"Unable to find currency with code: %s. Currency code " +
-						"should be expressed with 3-letter ISO 4217 format",
-					priceListDTO.getCurrency()),
-				Response.Status.CONFLICT, nsce);
-		}
-		catch (CommercePriceListDisplayDateException cpldde) {
-			throw new ClientErrorException(
-				"Invalid display date:  " +
-					priceListDTO.getDisplayDate(),
-				Response.Status.CONFLICT, cpldde);
-		}
-		catch (CommercePriceListExpirationDateException cplede) {
-			throw new ClientErrorException(
-				"Invalid expiration date:  " +
-					priceListDTO.getExpirationDate(),
-				Response.Status.CONFLICT, cplede);
-		}
+		return DTOUtils.modelToDTO(
+			_updatePriceList(
+				id, company, priceListDTO.getCurrency(), priceListDTO.getName(),
+				priceListDTO.getPriority(), priceListDTO.getNeverExpire(),
+				priceListDTO.getDisplayDate(),
+				priceListDTO.getExpirationDate()),
+			locale);
 	}
 
 	public PriceListDTO upsertPriceList(
@@ -205,31 +170,15 @@ public class PriceListHelper {
 			Company company)
 		throws PortalException {
 
-		try {
-			return DTOUtils.modelToDTO(
-				_upsertPriceList(
-					groupId, priceListDTO.getCommercePriceListId(),
-					priceListDTO.getCurrency(), priceListDTO.getName(),
-					priceListDTO.getPriority(), priceListDTO.getNeverExpire(),
-					priceListDTO.getDisplayDate(),
-					priceListDTO.getExpirationDate(),
-					priceListDTO.getExternalReferenceCode(),
-					priceListDTO.getActive(), user),
-				locale);
-		}
-		catch (NoSuchPriceListException nsple) {
-			throw new ClientErrorException(
-				"Unable to update price list: " + nsple.getLocalizedMessage(),
-				Response.Status.CONFLICT.getStatusCode(), nsple);
-		}
-		catch (NoSuchCurrencyException nsce) {
-			throw new ClientErrorException(
-				String.format(
-					"Unable to find currency with code: %s. Currency code " +
-						"should be expressed with 3-letter ISO 4217 format",
-					priceListDTO.getCurrency()),
-				Response.Status.CONFLICT.getStatusCode(), nsce);
-		}
+		return DTOUtils.modelToDTO(
+			_upsertPriceList(
+				groupId, priceListDTO.getCommercePriceListId(),
+				priceListDTO.getCurrency(), priceListDTO.getName(),
+				priceListDTO.getPriority(), priceListDTO.getNeverExpire(),
+				priceListDTO.getDisplayDate(), priceListDTO.getExpirationDate(),
+				priceListDTO.getExternalReferenceCode(),
+				priceListDTO.getActive(), user),
+			locale);
 	}
 
 	private Calendar _convertDateToCalendar(Date date) {
