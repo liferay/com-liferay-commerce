@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -212,9 +213,11 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			getDefaultCommercePaymentMethodGroupRel(String engineKey)
 		throws PortalException {
 
+		long groupId = PortalUtil.getScopeGroupId(_renderRequest);
+
 		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
 			_commercePaymentMethodGroupRelService.
-				createCommercePaymentMethodGroupRel(0L);
+				createCommercePaymentMethodGroupRel(groupId);
 
 		CommercePaymentMethod commercePaymentMethod =
 			_commercePaymentMethodRegistry.getCommercePaymentMethod(engineKey);
