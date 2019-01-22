@@ -20,6 +20,7 @@ import com.liferay.commerce.openapi.util.ComponentDefinition;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
+import com.liferay.commerce.openapi.util.util.GetterUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,28 +94,25 @@ public class ParameterImporter {
 			return null;
 		}
 
-		String format = null;
+		String format = GetterUtil.getAsTextOrNullIfMisses(
+			"format", schemaJSONNode);
 
-		if (schemaJSONNode.has("format")) {
-			JsonNode formatJSONNode = schemaJSONNode.get("format");
+		String reference = GetterUtil.getAsTextOrNullIfMisses(
+			"$ref", schemaJSONNode);
 
-			format = formatJSONNode.asText();
-		}
+		String type = GetterUtil.getAsTextOrNullIfMisses(
+			"type", schemaJSONNode);
 
-		String reference = null;
+		if ("array".equals(type)) {
+			Schema itemSchema = getSchema(schemaJSONNode.get("items"));
 
-		if (schemaJSONNode.has("$ref")) {
-			JsonNode referenceJSONNode = schemaJSONNode.get("$ref");
+			if (itemSchema.getReference() == null) {
+				throw new ImporterException(
+					"Importer implementation supports only array items " +
+						"described with reference object");
+			}
 
-			reference = referenceJSONNode.asText();
-		}
-
-		String type = null;
-
-		if (schemaJSONNode.has("type")) {
-			JsonNode typeJSONNode = schemaJSONNode.get("type");
-
-			type = typeJSONNode.asText();
+			reference = itemSchema.getReference();
 		}
 
 		return new Schema(type, format, reference);
