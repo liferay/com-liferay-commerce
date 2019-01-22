@@ -24,6 +24,9 @@ CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrde
 long billingCommerceAddressId = BeanParamUtil.getLong(commerceOrder, request, "billingAddressId");
 long shippingCommerceAddressId = BeanParamUtil.getLong(commerceOrder, request, "shippingAddressId");
 
+CommerceAddress billingCommerceAddress = commerceOrder.getBillingAddress();
+CommerceAddress shippingCommerceAddress = commerceOrder.getShippingAddress();
+
 CommerceOrderPrice commerceOrderPrice = commerceOrderContentDisplayContext.getCommerceOrderPrice();
 
 CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
@@ -147,7 +150,14 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 					<div class="row">
 						<div class="col-md-6">
 							<dl class="minium-list">
-								<aui:input cssClass="minium-input" inlineField="<%= true %>" label="" name="purchaseOrderNumber" wrappedField="<%= false %>" />
+								<c:choose>
+									<c:when test="<%= commerceOrder.isOpen() && commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+										<aui:input cssClass="minium-input" inlineField="<%= true %>" label="" name="purchaseOrderNumber" wrappedField="<%= false %>" />
+									</c:when>
+									<c:otherwise>
+										<%= commerceOrder.getPurchaseOrderNumber() %>
+									</c:otherwise>
+								</c:choose>
 							</dl>
 						</div>
 					</div>
@@ -164,19 +174,29 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 					<div class="row">
 						<div class="col-md-8">
 							<dl class="minium-list">
-								<aui:select cssClass="minium-input" inlineField="<%= true %>" label="" name="billingAddressId" wrappedField="<%= false %>">
+								<c:choose>
+									<c:when test="<%= commerceOrder.isOpen() && commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+										<aui:select cssClass="minium-input" inlineField="<%= true %>" label="" name="billingAddressId" wrappedField="<%= false %>">
 
-									<%
-									for (CommerceAddress commerceAddress : commerceAddresses) {
-									%>
+											<%
+											for (CommerceAddress commerceAddress : commerceAddresses) {
+											%>
 
-										<aui:option label="<%= commerceAddress.getName() %>" selected="<%= billingCommerceAddressId == commerceAddress.getCommerceAddressId() %>" value="<%= commerceAddress.getCommerceAddressId() %>" />
+												<aui:option label="<%= commerceAddress.getName() %>" selected="<%= billingCommerceAddressId == commerceAddress.getCommerceAddressId() %>" value="<%= commerceAddress.getCommerceAddressId() %>" />
 
-									<%
-									}
-									%>
+											<%
+											}
+											%>
 
-								</aui:select>
+										</aui:select>
+									</c:when>
+									<c:otherwise>
+										<c:if test="<%= billingCommerceAddress != null %>">
+											<%= billingCommerceAddress.getStreet1() %><br />
+											<%= billingCommerceAddress.getCity() + StringPool.SPACE + billingCommerceAddress.getZip() %>
+										</c:if>
+									</c:otherwise>
+								</c:choose>
 							</dl>
 						</div>
 
@@ -195,19 +215,29 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 					<div class="row">
 						<div class="col-md-8">
 							<dl class="minium-list">
-								<aui:select cssClass="minium-input" inlineField="<%= true %>" label="" name="shippingAddressId" wrappedField="<%= false %>">
+								<c:choose>
+									<c:when test="<%= commerceOrder.isOpen() && commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+										<aui:select cssClass="minium-input" inlineField="<%= true %>" label="" name="shippingAddressId" wrappedField="<%= false %>">
 
-									<%
-									for (CommerceAddress commerceAddress : commerceAddresses) {
-									%>
+											<%
+											for (CommerceAddress commerceAddress : commerceAddresses) {
+											%>
 
-										<aui:option label="<%= commerceAddress.getName() %>" selected="<%= shippingCommerceAddressId == commerceAddress.getCommerceAddressId() %>" value="<%= commerceAddress.getCommerceAddressId() %>" />
+												<aui:option label="<%= commerceAddress.getName() %>" selected="<%= shippingCommerceAddressId == commerceAddress.getCommerceAddressId() %>" value="<%= commerceAddress.getCommerceAddressId() %>" />
 
-									<%
-									}
-									%>
+											<%
+											}
+											%>
 
-								</aui:select>
+										</aui:select>
+									</c:when>
+									<c:otherwise>
+										<c:if test="<%= shippingCommerceAddress != null %>">
+											<%= shippingCommerceAddress.getStreet1() %><br />
+											<%= shippingCommerceAddress.getCity() + StringPool.SPACE + shippingCommerceAddress.getZip() %>
+										</c:if>
+									</c:otherwise>
+								</c:choose>
 							</dl>
 						</div>
 
