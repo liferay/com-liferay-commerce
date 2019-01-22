@@ -45,6 +45,14 @@ public class Extension {
 		return _parameters;
 	}
 
+	public boolean isPaginationContext() {
+		if (_extensionType == ExtensionType.PAGINATION_CONTEXT) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public static class Provider {
 
 		public Provider(String modelName, String fqcn) {
