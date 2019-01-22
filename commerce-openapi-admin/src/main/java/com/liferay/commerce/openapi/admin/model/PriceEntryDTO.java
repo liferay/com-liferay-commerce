@@ -31,6 +31,10 @@ public class PriceEntryDTO {
 		return _commercePriceListId;
 	}
 
+	public long getCommerceProductInstanceId() {
+		return _commerceProductInstanceId;
+	}
+
 	public String getExternalReferenceCode() {
 		return _externalReferenceCode;
 	}
@@ -67,6 +71,10 @@ public class PriceEntryDTO {
 		_commercePriceListId = commercePriceListId;
 	}
 
+	public void setCommerceProductInstanceId(long commerceProductInstanceId) {
+		_commerceProductInstanceId = commerceProductInstanceId;
+	}
+
 	public void setExternalReferenceCode(String externalReferenceCode) {
 		_externalReferenceCode = externalReferenceCode;
 	}
@@ -100,6 +108,7 @@ public class PriceEntryDTO {
 	}
 
 	private long _commercePriceListId;
+	private long _commerceProductInstanceId;
 	private String _externalReferenceCode;
 	private boolean _hasTierPrice;
 	private long _id;
