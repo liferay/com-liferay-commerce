@@ -21,8 +21,6 @@ import com.liferay.commerce.openapi.admin.resource.PriceEntryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.portal.kernel.model.Company;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.core.Context;
@@ -47,9 +45,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
-	public Response deletePriceEntry(String id, long groupId, Locale locale)
-		throws Exception {
-
+	public Response deletePriceEntry(String id) throws Exception {
 		_priceEntryHelper.deleteCommercePriceEntry(id, _company.getCompanyId());
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -59,22 +55,19 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
 	public CollectionDTO<PriceEntryDTO> getPriceEntries(
-			long groupId, Locale locale, Pagination pagination)
+			long groupId, Pagination pagination)
 		throws Exception {
 
 		return _priceEntryHelper.getCommercePriceEntryDTOs(groupId, pagination);
 	}
 
 	@Override
-	public PriceEntryDTO getPriceEntry(String id, long groupId, Locale locale)
-		throws Exception {
-
+	public PriceEntryDTO getPriceEntry(String id) throws Exception {
 		return _priceEntryHelper.getPriceEntryDTO(id, _company.getCompanyId());
 	}
 
 	@Override
-	public Response updatePriceEntry(
-			String id, long groupId, PriceEntryDTO priceEntryDTO, Locale locale)
+	public Response updatePriceEntry(String id, PriceEntryDTO priceEntryDTO)
 		throws Exception {
 
 		_priceEntryHelper.updateCommercePriceEntry(
@@ -87,7 +80,7 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
 	public PriceEntryDTO upsertPriceEntry(
-			long groupId, PriceEntryDTO priceEntryDTO, Locale locale)
+			long groupId, PriceEntryDTO priceEntryDTO)
 		throws Exception {
 
 		return _priceEntryHelper.upsertCommercePriceEntry(
