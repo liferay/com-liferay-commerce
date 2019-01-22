@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.TriggerFactory;
-import com.liferay.portal.kernel.util.DateUtil;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -74,7 +73,8 @@ public class CheckCommerceSubscriptionOrderPaidMessageListener
 
 		Trigger trigger = _triggerFactory.createTrigger(
 			className, className, null, null,
-			_commerceSubscriptionConfiguration.checkPaidOrderInterval(),
+			_commerceSubscriptionConfiguration.
+				orderStatusUpdateIntervalMinutes(),
 			TimeUnit.MINUTE);
 
 		SchedulerEntry schedulerEntry = new SchedulerEntryImpl(
@@ -116,10 +116,10 @@ public class CheckCommerceSubscriptionOrderPaidMessageListener
 
 			Date now = new Date();
 
+			Calendar calendar = new GregorianCalendar();
+
 			Date creationDate =
 				firstCommerceSubscriptionCycleEntry.getCreateDate();
-
-			Calendar calendar = GregorianCalendar.getInstance();
 
 			calendar.setTime(creationDate);
 
@@ -138,7 +138,7 @@ public class CheckCommerceSubscriptionOrderPaidMessageListener
 				((commerceOrder != null) &&
 				 !(commerceOrder.getPaymentStatus() ==
 					 CommerceOrderConstants.PAYMENT_STATUS_PAID) &&
-				 !(DateUtil.compareTo(calendar.getTime(), now) < 0))) {
+				 !now.before(calendar.getTime()))) {
 
 				_commercePaymentEngine.suspendSubscription(
 					commerceSubscriptionEntry.getCommerceSubscriptionEntryId());

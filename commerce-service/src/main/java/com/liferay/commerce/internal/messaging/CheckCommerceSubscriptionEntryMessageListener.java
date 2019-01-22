@@ -61,7 +61,7 @@ public class CheckCommerceSubscriptionEntryMessageListener
 
 		Trigger trigger = _triggerFactory.createTrigger(
 			className, className, null, null,
-			commerceSubscriptionConfiguration.checkRenewInterval(),
+			commerceSubscriptionConfiguration.renewalCheckIntervalMinutes(),
 			TimeUnit.MINUTE);
 
 		SchedulerEntry schedulerEntry = new SchedulerEntryImpl(
