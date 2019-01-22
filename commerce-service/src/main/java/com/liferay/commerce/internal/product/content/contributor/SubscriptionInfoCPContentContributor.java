@@ -102,41 +102,43 @@ public class SubscriptionInfoCPContentContributor
 		}
 
 		StringBundler sb = new StringBundler(
-			(maxSubscriptionCycles > 0) ? 11 : 7);
+			(maxSubscriptionCycles > 0) ? 6 : 3);
 
 		sb.append(StringPool.OPEN_PARENTHESIS);
-		sb.append(LanguageUtil.get(httpServletRequest, "every"));
-		sb.append(StringPool.SPACE);
-		sb.append(subscriptionLength);
-		sb.append(StringPool.SPACE);
-		sb.append(_getSuffix(subscriptionLength, period, httpServletRequest));
+
+		String subscriptionPeriodKey = _getPeriodKey(
+			subscriptionLength, period);
+
+		String subscriptionMessage = LanguageUtil.format(
+			httpServletRequest, "every-x-x",
+			new Object[] {subscriptionLength, subscriptionPeriodKey}, true);
+
+		sb.append(subscriptionMessage);
+
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
 		if (maxSubscriptionCycles > 0) {
 			long totalLength = subscriptionLength * maxSubscriptionCycles;
 
-			String duration = LanguageUtil.format(
-				httpServletRequest, "duration-x", totalLength, false);
+			sb.append(StringPool.SPACE);
 
-			String durationSuffix = _getSuffix(
-				totalLength, period, httpServletRequest);
+			String durationPeriodKey = _getPeriodKey(totalLength, period);
+
+			String durationMessage = LanguageUtil.format(
+				httpServletRequest, "duration-x-x",
+				new Object[] {totalLength, durationPeriodKey}, true);
+
+			sb.append(durationMessage);
 
 			sb.append(StringPool.SPACE);
-			sb.append(duration);
-			sb.append(StringPool.SPACE);
-			sb.append(durationSuffix);
 		}
 
 		return sb.toString();
 	}
 
-	private String _getSuffix(
-		long count, String period, HttpServletRequest httpServletRequest) {
-
-		if (count > 1) {
-			return LanguageUtil.get(
-				httpServletRequest,
-				StringUtil.toLowerCase(period) + CharPool.LOWER_CASE_S);
+	private String _getPeriodKey(long count, String period) {
+		if (count != 1) {
+			return StringUtil.toLowerCase(period) + CharPool.LOWER_CASE_S;
 		}
 
 		return period;

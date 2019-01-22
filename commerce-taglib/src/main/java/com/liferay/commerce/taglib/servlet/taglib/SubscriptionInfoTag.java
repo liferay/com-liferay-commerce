@@ -105,9 +105,9 @@ public class SubscriptionInfoTag extends IncludeTag {
 				period = cpSubscriptionType.getLabel(themeDisplay.getLocale());
 			}
 
-			_periodSuffix = _getPeriodSuffix(period, _length > 1);
+			_subscriptionPeriodKey = _getPeriodKey(period, _length != 1);
 
-			_durationSuffix = _getPeriodSuffix(period, _duration > 1);
+			_durationPeriodKey = _getPeriodKey(period, _duration != 1);
 		}
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
@@ -148,9 +148,9 @@ public class SubscriptionInfoTag extends IncludeTag {
 		_commerceOrderItemId = 0;
 		_cpInstanceId = 0;
 		_duration = 0;
-		_durationSuffix = null;
+		_durationPeriodKey = null;
 		_length = 0;
-		_periodSuffix = null;
+		_subscriptionPeriodKey = null;
 		_showDuration = true;
 	}
 
@@ -164,19 +164,20 @@ public class SubscriptionInfoTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-commerce:subscription-info:duration", _duration);
 		request.setAttribute(
-			"liferay-commerce:subscription-info:durationSuffix",
-			_durationSuffix);
+			"liferay-commerce:subscription-info:durationPeriodKey",
+			_durationPeriodKey);
 		request.setAttribute(
 			"liferay-commerce:subscription-info:length", _length);
 		request.setAttribute(
-			"liferay-commerce:subscription-info:periodSuffix", _periodSuffix);
+			"liferay-commerce:subscription-info:subscriptionPeriodKey",
+			_subscriptionPeriodKey);
 		request.setAttribute(
 			"liferay-commerce:subscription-info:showDuration", _showDuration);
 	}
 
 	protected CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry;
 
-	private String _getPeriodSuffix(String period, boolean plural) {
+	private String _getPeriodKey(String period, boolean plural) {
 		if (plural) {
 			return LanguageUtil.get(
 				request,
@@ -194,9 +195,9 @@ public class SubscriptionInfoTag extends IncludeTag {
 	private long _commerceOrderItemId;
 	private long _cpInstanceId;
 	private long _duration;
-	private String _durationSuffix;
+	private String _durationPeriodKey;
 	private long _length;
-	private String _periodSuffix;
 	private boolean _showDuration = true;
+	private String _subscriptionPeriodKey;
 
 }
