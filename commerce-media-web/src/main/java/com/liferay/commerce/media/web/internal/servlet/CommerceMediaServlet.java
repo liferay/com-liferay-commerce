@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.media.web.internal.servlet;
 
-import com.liferay.commerce.constants.CommerceMediaConstants;
 import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.media.constants.CommerceMediaConstants;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
