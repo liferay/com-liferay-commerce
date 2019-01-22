@@ -311,11 +311,10 @@ public class CommercePriceListDisplayContext
 		Stream<CommercePriceListUserSegmentEntryRel> stream =
 			commercePriceListUserSegmentEntryRels.stream();
 
-		LongStream longStream = stream.mapToLong(
+		return stream.mapToLong(
 			CommercePriceListUserSegmentEntryRel::
-				getCommerceUserSegmentEntryId);
-
-		return longStream.toArray();
+				getCommerceUserSegmentEntryId
+		).toArray();
 	}
 
 	private final CommerceCurrencyService _commerceCurrencyService;
