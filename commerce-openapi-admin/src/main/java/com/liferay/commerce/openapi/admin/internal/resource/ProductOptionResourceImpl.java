@@ -14,20 +14,24 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.ProductOptionHelper;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductOptionResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.portal.kernel.model.Company;
 
 import java.util.Collections;
 import java.util.Locale;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -48,6 +52,8 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 	public Response deleteProductOption(String id, long groupId, Locale locale)
 		throws Exception {
 
+		_productOptionHelper.deleteProductOption(id, _company);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -58,7 +64,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			String id, long groupId, Locale locale)
 		throws Exception {
 
-		return new ProductOptionDTO();
+		return _productOptionHelper.getProductOption(id, locale, _company);
 	}
 
 	@Override
@@ -66,7 +72,8 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			long groupId, Locale locale, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _productOptionHelper.getProductOptions(
+			groupId, locale, pagination);
 	}
 
 	@Override
@@ -83,6 +90,9 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			Locale locale)
 		throws Exception {
 
+		_productOptionHelper.updateProductOption(
+			id, groupId, productOptionDTO, locale, _company);
+
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
@@ -93,7 +103,8 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			long groupId, ProductOptionDTO productOptionDTO, Locale locale)
 		throws Exception {
 
-		return new ProductOptionDTO();
+		return _productOptionHelper.upsertProductOption(
+			groupId, productOptionDTO, locale);
 	}
 
 	@Override
@@ -104,5 +115,11 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 		return new ProductOptionValueDTO();
 	}
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private ProductOptionHelper _productOptionHelper;
 
 }

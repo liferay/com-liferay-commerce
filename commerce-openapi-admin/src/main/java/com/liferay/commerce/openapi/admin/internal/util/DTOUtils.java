@@ -17,9 +17,11 @@ package com.liferay.commerce.openapi.admin.internal.util;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
+import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.product.model.CPOption;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -81,6 +83,25 @@ public class DTOUtils {
 		}
 
 		return priceListDTO;
+	}
+
+	public static ProductOptionDTO modelToDTO(
+		CPOption cpOption, Locale locale) {
+
+		ProductOptionDTO productOptionDTO = new ProductOptionDTO();
+
+		productOptionDTO.setDescription(cpOption.getDescription(locale));
+		productOptionDTO.setExternalReferenceCode(
+			cpOption.getExternalReferenceCode());
+		productOptionDTO.setFacetable(cpOption.getFacetable());
+		productOptionDTO.setFieldType(cpOption.getDDMFormFieldTypeName());
+		productOptionDTO.setId(cpOption.getCPOptionId());
+		productOptionDTO.setKey(cpOption.getKey());
+		productOptionDTO.setName(cpOption.getName(locale));
+		productOptionDTO.setRequired(cpOption.getRequired());
+		productOptionDTO.setSkuContributor(cpOption.getSkuContributor());
+
+		return productOptionDTO;
 	}
 
 	public static WebSiteDTO modelToDTO(Group group, Locale locale) {
