@@ -66,18 +66,16 @@ public class CommercePaymentMethodGroupRelServiceUtil {
 	}
 
 	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel createCommercePaymentMethodGroupRel(
-		long commercePaymentMethodGroupRelId)
+		long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .createCommercePaymentMethodGroupRel(commercePaymentMethodGroupRelId);
+		return getService().createCommercePaymentMethodGroupRel(groupId);
 	}
 
 	public static void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId, long groupId)
+		long commerceAddressRestrictionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService()
-			.deleteCommerceAddressRestriction(commerceAddressRestrictionId,
-			groupId);
+			.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
 	}
 
 	public static void deleteCommercePaymentMethodGroupRel(
@@ -89,18 +87,16 @@ public class CommercePaymentMethodGroupRelServiceUtil {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
 		long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
-		long groupId)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceAddressRestrictions(classPK, start, end,
-			orderByComparator, groupId);
+			orderByComparator);
 	}
 
-	public static int getCommerceAddressRestrictionsCount(long classPK,
-		long groupId)
+	public static int getCommerceAddressRestrictionsCount(long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceAddressRestrictionsCount(classPK, groupId);
+		return getService().getCommerceAddressRestrictionsCount(classPK);
 	}
 
 	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel getCommercePaymentMethodGroupRel(

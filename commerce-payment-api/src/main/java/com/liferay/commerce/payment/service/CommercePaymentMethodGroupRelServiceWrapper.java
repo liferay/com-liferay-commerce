@@ -59,17 +59,16 @@ public class CommercePaymentMethodGroupRelServiceWrapper
 
 	@Override
 	public com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel createCommercePaymentMethodGroupRel(
-		long commercePaymentMethodGroupRelId)
+		long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commercePaymentMethodGroupRelService.createCommercePaymentMethodGroupRel(commercePaymentMethodGroupRelId);
+		return _commercePaymentMethodGroupRelService.createCommercePaymentMethodGroupRel(groupId);
 	}
 
 	@Override
 	public void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId, long groupId)
+		long commerceAddressRestrictionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_commercePaymentMethodGroupRelService.deleteCommerceAddressRestriction(commerceAddressRestrictionId,
-			groupId);
+		_commercePaymentMethodGroupRelService.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
 	}
 
 	@Override
@@ -82,18 +81,16 @@ public class CommercePaymentMethodGroupRelServiceWrapper
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
 		long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
-		long groupId)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commercePaymentMethodGroupRelService.getCommerceAddressRestrictions(classPK,
-			start, end, orderByComparator, groupId);
+			start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceAddressRestrictionsCount(long classPK, long groupId)
+	public int getCommerceAddressRestrictionsCount(long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commercePaymentMethodGroupRelService.getCommerceAddressRestrictionsCount(classPK,
-			groupId);
+		return _commercePaymentMethodGroupRelService.getCommerceAddressRestrictionsCount(classPK);
 	}
 
 	@Override
