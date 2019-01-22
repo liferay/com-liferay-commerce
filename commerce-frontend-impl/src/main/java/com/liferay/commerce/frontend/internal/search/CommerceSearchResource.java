@@ -145,7 +145,8 @@ public class CommerceSearchResource {
 			StringPool.BLANK);
 
 		AccountList accountList = _commerceAccountResource.getAccountList(
-			null, commerceContext.getCommerceSiteType(), queryString, 1, 5,
+			themeDisplay.getUserId(), null,
+			commerceContext.getCommerceSiteType(), queryString, 1, 5,
 			themeDisplay.getPathImage());
 
 		searchItemModels.add(
