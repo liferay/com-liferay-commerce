@@ -14,12 +14,9 @@
 
 package com.liferay.commerce.openapi.core.internal.exception;
 
-import com.liferay.commerce.openapi.core.exception.RESTError;
+import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -29,36 +26,29 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Igor Beslic
+ * @author Ivica Cardic
  */
 @Component(
 	property = JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true",
 	service = ExceptionMapper.class
 )
 @Provider
-public class SystemExceptionMapper implements ExceptionMapper<SystemException> {
+public class SystemExceptionMapper
+	extends BaseExceptionMapper<SystemException> {
 
 	@Override
-	public Response toResponse(SystemException e) {
-		_log.error("Internal server exception", e);
-
-		Response.Status internalServerError =
-			Response.Status.INTERNAL_SERVER_ERROR;
-
-		Response.ResponseBuilder responseBuilder = Response.status(
-			internalServerError);
-
-		RESTError restError = RESTError.INTERNAL_ERROR;
-
-		responseBuilder.entity(
-			restError.toJSON(
-				e.getMessage(), internalServerError.getStatusCode()));
-
-		responseBuilder.type(MediaType.APPLICATION_JSON_TYPE);
-
-		return responseBuilder.build();
+	public int getErrorCode() {
+		return 998;
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		SystemExceptionMapper.class);
+	@Override
+	public String getErrorDescription() {
+		return "Internal error. Please try again later.";
+	}
+
+	@Override
+	public Response.Status getStatus() {
+		return Response.Status.INTERNAL_SERVER_ERROR;
+	}
 
 }
