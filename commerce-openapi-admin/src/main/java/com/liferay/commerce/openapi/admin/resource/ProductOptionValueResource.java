@@ -45,24 +45,29 @@ public interface ProductOptionValueResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProductOptionValue(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductOptionValueDTO getProductOptionValue(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOptionValue(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		ProductOptionValueDTO productOptionValueDTO, @Context User user,
-		@Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			ProductOptionValueDTO productOptionValueDTO, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 }

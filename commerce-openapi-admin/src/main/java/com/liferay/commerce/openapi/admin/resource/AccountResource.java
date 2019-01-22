@@ -48,34 +48,40 @@ public interface AccountResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteAccount(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public AccountDTO getAccount(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<AccountDTO> getAccounts(
-		@QueryParam("groupId") long groupId, @Context User user,
-		@Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
+			@QueryParam("groupId") long groupId, @Context User user,
+			@Context Locale locale, @Context Company company,
+			@Context Pagination pagination)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateAccount(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		AccountDTO accountDTO, @Context User user, @Context Locale locale,
-		@Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			AccountDTO accountDTO, @Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/")
@@ -83,7 +89,9 @@ public interface AccountResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public AccountDTO upsertAccount(
-		@QueryParam("groupId") long groupId, AccountDTO accountDTO,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@QueryParam("groupId") long groupId, AccountDTO accountDTO,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 }

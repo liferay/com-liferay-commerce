@@ -48,34 +48,40 @@ public interface PriceListResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceList(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceListDTO getPriceList(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceListDTO> getPriceLists(
-		@QueryParam("groupId") long groupId, @Context User user,
-		@Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
+			@QueryParam("groupId") long groupId, @Context User user,
+			@Context Locale locale, @Context Company company,
+			@Context Pagination pagination)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceList(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		PriceListDTO priceListDTO, @Context User user, @Context Locale locale,
-		@Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			PriceListDTO priceListDTO, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/")
@@ -83,7 +89,9 @@ public interface PriceListResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceListDTO upsertPriceList(
-		@QueryParam("groupId") long groupId, PriceListDTO priceListDTO,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@QueryParam("groupId") long groupId, PriceListDTO priceListDTO,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 }

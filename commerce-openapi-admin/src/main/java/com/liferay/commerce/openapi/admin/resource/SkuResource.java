@@ -45,24 +45,29 @@ public interface SkuResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteSku(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public SkuDTO getSku(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateSku(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		SkuDTO skuDTO, @Context User user, @Context Locale locale,
-		@Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			SkuDTO skuDTO, @Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 }

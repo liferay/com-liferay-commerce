@@ -48,34 +48,40 @@ public interface PriceEntryResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceEntry(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
+
+	@GET
+	@Path("/")
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<PriceEntryDTO> getPriceEntries(
+			@QueryParam("groupId") long groupId, @Context User user,
+			@Context Locale locale, @Context Company company,
+			@Context Pagination pagination)
+		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceEntryDTO getPriceEntry(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
-
-	@GET
-	@Path("/")
-	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
-	public CollectionDTO<PriceEntryDTO> getPriceEntrys(
-		@QueryParam("groupId") long groupId, @Context User user,
-		@Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceEntry(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		PriceEntryDTO priceEntryDTO, @Context User user, @Context Locale locale,
-		@Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			PriceEntryDTO priceEntryDTO, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/")
@@ -83,7 +89,9 @@ public interface PriceEntryResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceEntryDTO upsertPriceEntry(
-		@QueryParam("groupId") long groupId, PriceEntryDTO priceEntryDTO,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@QueryParam("groupId") long groupId, PriceEntryDTO priceEntryDTO,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 }
