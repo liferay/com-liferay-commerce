@@ -18,18 +18,18 @@
 
 <%
 long duration = (long)request.getAttribute("liferay-commerce:subscription-info:duration");
-String durationSuffix = (String)request.getAttribute("liferay-commerce:subscription-info:durationSuffix");
+String durationPeriodKey = (String)request.getAttribute("liferay-commerce:subscription-info:durationPeriodKey");
 long length = (long)request.getAttribute("liferay-commerce:subscription-info:length");
-String periodSuffix = (String)request.getAttribute("liferay-commerce:subscription-info:periodSuffix");
 boolean showDuration = (boolean)request.getAttribute("liferay-commerce:subscription-info:showDuration");
+String subscriptionPeriodKey = (String)request.getAttribute("liferay-commerce:subscription-info:subscriptionPeriodKey");
 %>
 
-<c:if test="<%= (length > 0) && Validator.isNotNull(periodSuffix) %>">
+<c:if test="<%= (length > 0) && Validator.isNotNull(subscriptionPeriodKey) %>">
 	<span class="product-subscription-period">
-		(<liferay-ui:message key="every" /> <%= length %> <%= periodSuffix %>)
+		(<liferay-ui:message arguments="<%= new Object[] {length, subscriptionPeriodKey} %>" key="every-x-x" />)
 	</span>
 </c:if>
 
 <c:if test="<%= showDuration && (duration > 0) %>">
-	<span class="product-subscription-duration"> <liferay-ui:message arguments="<%= duration %>" key="duration-x" /><%= durationSuffix %></span>
+	<span class="product-subscription-duration"> <liferay-ui:message arguments="<%= new Object[] {duration, durationPeriodKey} %>" key="duration-x-x" /></span>
 </c:if>
