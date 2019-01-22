@@ -18,8 +18,6 @@ import com.liferay.commerce.openapi.admin.model.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
 
 import java.util.Locale;
 
@@ -49,8 +47,7 @@ public interface AccountResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteAccount(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -59,8 +56,7 @@ public interface AccountResource {
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public AccountDTO getAccount(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -68,8 +64,7 @@ public interface AccountResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<AccountDTO> getAccounts(
-			@QueryParam("groupId") long groupId, @Context User user,
-			@Context Locale locale, @Context Company company,
+			@QueryParam("groupId") long groupId, @Context Locale locale,
 			@Context Pagination pagination)
 		throws Exception;
 
@@ -79,8 +74,7 @@ public interface AccountResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateAccount(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			AccountDTO accountDTO, @Context User user, @Context Locale locale,
-			@Context Company company)
+			AccountDTO accountDTO, @Context Locale locale)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -90,8 +84,7 @@ public interface AccountResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public AccountDTO upsertAccount(
 			@QueryParam("groupId") long groupId, AccountDTO accountDTO,
-			@Context User user, @Context Locale locale,
-			@Context Company company)
+			@Context Locale locale)
 		throws Exception;
 
 }

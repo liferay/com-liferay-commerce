@@ -19,8 +19,6 @@ import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductOptionResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -30,25 +28,25 @@ import javax.annotation.Generated;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Igor Beslic
  */
 @Component(
-	immediate = true,
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
 		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
 	},
-	service = ProductOptionResource.class
+	scope = ServiceScope.PROTOTYPE, service = ProductOptionResource.class
 )
 @Generated(value = "OSGiRESTModuleGenerator")
 public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
-	public Response deleteProductOption(
-		String id, long groupId, User user, Locale locale, Company company) {
+	public Response deleteProductOption(String id, long groupId, Locale locale)
+		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -57,49 +55,52 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	public ProductOptionDTO getProductOption(
-		String id, long groupId, User user, Locale locale, Company company) {
+			String id, long groupId, Locale locale)
+		throws Exception {
 
 		return new ProductOptionDTO();
 	}
 
 	@Override
 	public CollectionDTO<ProductOptionDTO> getProductOptions(
-		long groupId, User user, Locale locale, Company company,
-		Pagination pagination) {
+			long groupId, Locale locale, Pagination pagination)
+		throws Exception {
 
 		return new CollectionDTO(Collections.emptyList(), 0);
 	}
 
 	@Override
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
-		String id, long groupId, User user, Locale locale, Company company,
-		Pagination pagination) {
+			String id, long groupId, Locale locale, Pagination pagination)
+		throws Exception {
 
 		return new CollectionDTO(Collections.emptyList(), 0);
 	}
 
 	@Override
 	public Response updateProductOption(
-		String id, long groupId, ProductOptionDTO productOptionDTO, User user,
-		Locale locale, Company company) {
+			String id, long groupId, ProductOptionDTO productOptionDTO,
+			Locale locale)
+		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
 	}
 
 	@Override
 	public ProductOptionDTO upsertProductOption(
-		long groupId, ProductOptionDTO productOptionDTO, User user,
-		Locale locale, Company company) {
+			long groupId, ProductOptionDTO productOptionDTO, Locale locale)
+		throws Exception {
 
 		return new ProductOptionDTO();
 	}
 
 	@Override
 	public ProductOptionValueDTO upsertProductOptionValue(
-		String id, long groupId, ProductOptionValueDTO productOptionValueDTO,
-		User user, Locale locale, Company company) {
+			String id, long groupId,
+			ProductOptionValueDTO productOptionValueDTO, Locale locale)
+		throws Exception {
 
 		return new ProductOptionValueDTO();
 	}
