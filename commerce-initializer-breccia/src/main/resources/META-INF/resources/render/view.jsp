@@ -97,7 +97,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 							<div class="full-image product-detail-image-container">
 								<div class="liferayzoom liferayzoom--adjacent product-detail-image">
 									<a href="<%= cpCatalogEntry.getDefaultImageFileUrl() %>" tabindex="-1">
-										<img class="img-fluid" id="<portlet:namespace />full-image" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>">
+										<img class="img-fluid" id="<portlet:namespace />fullImage" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>">
 									</a>
 
 									<div class="liferayzoom-flyout">
@@ -392,7 +392,7 @@ List<CPMedia> attachmentCPMedias = cpContentHelper.getCPAttachmentFileEntries(cp
 		zoomImage.style.transform = 'translate(' + translate.x + 'px, ' + translate.y + 'px)';
 	}
 
-	var fullImage = document.getElementById('<portlet:namespace />full-image');
+	var fullImage = document.getElementById('<portlet:namespace />fullImage');
 
 	if (fullImage) {
 		fullImage.addEventListener('mousemove', detectMousePosition);
@@ -403,7 +403,7 @@ List<CPMedia> attachmentCPMedias = cpContentHelper.getCPAttachmentFileEntries(cp
 	var productContent = new Liferay.Portlet.ProductContent(
 		{
 			cpDefinitionId: <%= cpDefinitionId %>,
-			fullImageSelector : '#<portlet:namespace />full-image',
+			fullImageSelector : '#<portlet:namespace />fullImage',
 			namespace: '<portlet:namespace />',
 			productContentSelector: '#<portlet:namespace /><%= cpDefinitionId %>ProductContent',
 			thumbsContainerSelector : '#<portlet:namespace />thumbs-container',

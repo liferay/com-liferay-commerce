@@ -66,7 +66,7 @@ public class CPAttachmentFileEntryCreator {
 		}
 
 		File file = null;
-		FileEntry fileEntry;
+		FileEntry fileEntry = null;
 
 		try {
 			fileEntry = _dlAppService.getFileEntry(
