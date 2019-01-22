@@ -30,6 +30,9 @@ import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+
+import java.math.BigDecimal;
 
 import java.util.Date;
 import java.util.List;
@@ -97,10 +100,13 @@ public class CommerceSubscriptionEntryHelperImpl
 				CommerceSubscriptionEntryConstants.
 					SUBSCRIPTION_STATUS_ACTIVE)) {
 
+			CommerceOrder commerceOrder = _addCommerceOrder(
+				commerceSubscriptionEntry);
+
 			ServiceContext serviceContext = new ServiceContext();
 
-			CommerceOrder commerceOrder = _addCommerceOrder(
-				commerceSubscriptionEntry, serviceContext);
+			serviceContext.setScopeGroupId(commerceOrder.getGroupId());
+			serviceContext.setUserId(commerceOrder.getUserId());
 
 			_commerceOrderLocalService.checkoutCommerceOrder(
 				commerceOrder.getCommerceOrderId(), null, serviceContext);
@@ -125,22 +131,40 @@ public class CommerceSubscriptionEntryHelperImpl
 	}
 
 	private CommerceOrder _addCommerceOrder(
-			CommerceSubscriptionEntry commerceSubscriptionEntry,
-			ServiceContext serviceContext)
+			CommerceSubscriptionEntry commerceSubscriptionEntry)
 		throws PortalException {
 
 		CommerceOrderItem oldCommerceOrderItem =
 			_commerceOrderItemLocalService.getCommerceOrderItem(
 				commerceSubscriptionEntry.getCommerceOrderItemId());
 
-		CommerceOrder oldCommerceOrder = oldCommerceOrderItem.getCommerceOrder();
+		CommerceOrder oldCommerceOrder =
+			oldCommerceOrderItem.getCommerceOrder();
 
-		CommerceOrder newCommerceOrder = _commerceOrderLocalService.addCommerceOrder(
-			oldCommerceOrder.getGroupId(), oldCommerceOrder.getUserId(),
-			oldCommerceOrder.getCommerceAccountId(), oldCommerceOrder.getCommerceCurrencyId(),
-			oldCommerceOrder.getShippingAddressId(), oldCommerceOrder.getPurchaseOrderNumber());
+		ServiceContext serviceContext = new ServiceContext();
 
-		newCommerceOrder.setBillingAddressId(oldCommerceOrder.getBillingAddressId());
+		ExpandoBridge expandoBridge = oldCommerceOrder.getExpandoBridge();
+
+		serviceContext.setExpandoBridgeAttributes(
+			expandoBridge.getAttributes());
+
+		serviceContext.setCompanyId(oldCommerceOrder.getCompanyId());
+		serviceContext.setScopeGroupId(oldCommerceOrder.getGroupId());
+		serviceContext.setUserId(oldCommerceOrder.getUserId());
+		serviceContext.setUuid(PortalUUIDUtil.generate());
+
+		CommerceOrder newCommerceOrder =
+			_commerceOrderLocalService.addCommerceOrder(
+				oldCommerceOrder.getCommerceAccountId(),
+				oldCommerceOrder.getCommerceCurrencyId(),
+				0, oldCommerceOrder.getShippingAddressId(), null, 0, null,
+				oldCommerceOrder.getPurchaseOrderNumber(), BigDecimal.ZERO,
+				BigDecimal.ZERO, BigDecimal.ZERO,
+				CommerceOrderConstants.PAYMENT_STATUS_PENDING,
+				CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
+
+		newCommerceOrder.setBillingAddressId(
+			oldCommerceOrder.getBillingAddressId());
 		newCommerceOrder.setCommercePaymentMethodKey(
 			oldCommerceOrder.getCommercePaymentMethodKey());
 		newCommerceOrder.setCommerceShippingMethodId(
@@ -152,7 +176,8 @@ public class CommerceSubscriptionEntryHelperImpl
 			(CommerceOrderItem)oldCommerceOrderItem.clone();
 
 		newCommerceOrderItem.setCommerceOrderItemId(newCommerceOrderItemId);
-		newCommerceOrderItem.setCommerceOrderId(newCommerceOrder.getCommerceOrderId());
+		newCommerceOrderItem.setCommerceOrderId(
+			newCommerceOrder.getCommerceOrderId());
 
 		newCommerceOrderItem =
 			_commerceOrderItemLocalService.addCommerceOrderItem(
@@ -166,18 +191,8 @@ public class CommerceSubscriptionEntryHelperImpl
 		newCommerceOrder.setOrderStatus(
 			CommerceOrderConstants.ORDER_STATUS_SUBSCRIPTION);
 
-		newCommerceOrder = _commerceOrderLocalService.updateCommerceOrder(newCommerceOrder);
-
-		// ServiceContext
-
-		ExpandoBridge expandoBridge = oldCommerceOrder.getExpandoBridge();
-
-		serviceContext.setExpandoBridgeAttributes(
-			expandoBridge.getAttributes());
-
-		serviceContext.setCompanyId(oldCommerceOrder.getCompanyId());
-		serviceContext.setScopeGroupId(oldCommerceOrder.getGroupId());
-		serviceContext.setUserId(oldCommerceOrder.getUserId());
+		newCommerceOrder = _commerceOrderLocalService.updateCommerceOrder(
+			newCommerceOrder);
 
 		// Add CommerceSubscriptionCycleEntry
 
