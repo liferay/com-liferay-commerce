@@ -86,17 +86,18 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceAccountResource {
 
 	public AccountList getAccountList(
-			Long parentAccountId, int commerceSiteType, String keywords,
-			int page, int pageSize, String imagePath)
+			long userId, Long parentAccountId, int commerceSiteType,
+			String keywords, int page, int pageSize, String imagePath)
 		throws PortalException {
 
 		List<Account> accounts = getAccounts(
-			parentAccountId, commerceSiteType, keywords, page, pageSize,
+			userId, parentAccountId, commerceSiteType, keywords, page, pageSize,
 			imagePath);
 
 		return new AccountList(
 			accounts,
-			getAccountsCount(parentAccountId, commerceSiteType, keywords));
+			getAccountsCount(
+				userId, parentAccountId, commerceSiteType, keywords));
 	}
 
 	public AccountOrganizationList getAccountOrganizationList(
@@ -142,8 +143,9 @@ public class CommerceAccountResource {
 
 		try {
 			accountList = getAccountList(
-				parentAccountId, commerceContext.getCommerceSiteType(),
-				queryString, page, pageSize, themeDisplay.getPathImage());
+				themeDisplay.getUserId(), parentAccountId,
+				commerceContext.getCommerceSiteType(), queryString, page,
+				pageSize, themeDisplay.getPathImage());
 		}
 		catch (Exception e) {
 			accountList = new AccountList(
@@ -258,8 +260,8 @@ public class CommerceAccountResource {
 	}
 
 	protected List<Account> getAccounts(
-			Long parentAccountId, int commerceSiteType, String keywords,
-			int page, int pageSize, String imagePath)
+			long userId, Long parentAccountId, int commerceSiteType,
+			String keywords, int page, int pageSize, String imagePath)
 		throws PortalException {
 
 		List<Account> accounts = new ArrayList<>();
@@ -269,7 +271,8 @@ public class CommerceAccountResource {
 
 		List<CommerceAccount> userCommerceAccounts =
 			_commerceAccountService.getUserCommerceAccounts(
-				parentAccountId, commerceSiteType, keywords, start, end);
+				userId, parentAccountId, commerceSiteType, keywords, start,
+				end);
 
 		for (CommerceAccount commerceAccount : userCommerceAccounts) {
 			accounts.add(
@@ -284,11 +287,12 @@ public class CommerceAccountResource {
 	}
 
 	protected int getAccountsCount(
-			Long parentAccountId, int commerceSiteType, String keywords)
+			long userId, Long parentAccountId, int commerceSiteType,
+			String keywords)
 		throws PortalException {
 
 		return _commerceAccountService.getUserCommerceAccountsCount(
-			parentAccountId, commerceSiteType, keywords);
+			userId, parentAccountId, commerceSiteType, keywords);
 	}
 
 	protected String getLogoThumbnailSrc(long logoId, String imagePath) {

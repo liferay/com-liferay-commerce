@@ -191,6 +191,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 		List<CommerceAccount> userCommerceAccounts =
 			_commerceAccountService.getUserCommerceAccounts(
+				user.getUserId(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
 				commerceAccountGroupServiceConfiguration.commerceSiteType(),
 				StringPool.BLANK, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
