@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -215,8 +216,8 @@ public class AuthorizeNetCommercePaymentMethod
 
 			String url = StringBundler.concat(
 				_getServletUrl(authorizeNetCommercePaymentRequest),
-				StringPool.QUESTION, "redirectUrl=", redirectUrl,
-				StringPool.AMPERSAND, "token=",
+				StringPool.QUESTION, "redirectUrl=",
+				URLCodec.encodeURL(redirectUrl), StringPool.AMPERSAND, "token=",
 				URLEncoder.encode(token, "UTF-8"));
 
 			return new CommercePaymentResult(

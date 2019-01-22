@@ -185,8 +185,7 @@ public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 		int total =
 			_commercePaymentMethodGroupRelService.
 				getCommerceAddressRestrictionsCount(
-					getCommercePaymentMethodGroupRelId(),
-					_commercePaymentMethodGroupRel.getGroupId());
+					getCommercePaymentMethodGroupRelId());
 
 		_searchContainer.setTotal(total);
 
@@ -245,7 +244,7 @@ public class CommercePaymentMethodGroupRelRestrictionsDisplayContext {
 		return _commercePaymentMethodGroupRelService.
 			getCommerceAddressRestrictions(
 				getCommercePaymentMethodGroupRelId(), start, end,
-				orderByComparator, _commercePaymentMethodGroupRel.getGroupId());
+				orderByComparator);
 	}
 
 	private CommercePaymentMethodGroupRel _commercePaymentMethodGroupRel;

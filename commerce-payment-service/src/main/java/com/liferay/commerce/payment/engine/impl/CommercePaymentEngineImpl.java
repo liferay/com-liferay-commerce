@@ -533,9 +533,11 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 	private StringBundler _getBaseUrl(
 		HttpServletRequest httpServletRequest, CommerceOrder commerceOrder,
-		String redirect, CommercePaymentMethod commercePaymentMethod) {
+		String redirect, CommercePaymentMethod commercePaymentMethod,
+		int extraCapacity) {
 
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(
+			extraCapacity + (Validator.isNotNull(redirect) ? 13 : 11));
 
 		sb.append(_portal.getPortalURL(httpServletRequest));
 		sb.append(_portal.getPathModule());
@@ -560,7 +562,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		String redirect, CommercePaymentMethod commercePaymentMethod) {
 
 		StringBundler sb = _getBaseUrl(
-			httpServletRequest, commerceOrder, redirect, commercePaymentMethod);
+			httpServletRequest, commerceOrder, redirect, commercePaymentMethod,
+			2);
 
 		sb.append("&cancel=");
 		sb.append(StringPool.TRUE);
@@ -675,7 +678,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		String redirect, CommercePaymentMethod commercePaymentMethod) {
 
 		StringBundler sb = _getBaseUrl(
-			httpServletRequest, commerceOrder, redirect, commercePaymentMethod);
+			httpServletRequest, commerceOrder, redirect, commercePaymentMethod,
+			0);
 
 		return sb.toString();
 	}
