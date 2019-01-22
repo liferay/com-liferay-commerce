@@ -50,43 +50,50 @@ public interface ProductResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProduct(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductDTO getProduct(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductDTO> getProducts(
-		@QueryParam("groupId") long groupId, @Context User user,
-		@Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
+			@QueryParam("groupId") long groupId, @Context User user,
+			@Context Locale locale, @Context Company company,
+			@Context Pagination pagination)
+		throws Exception;
 
 	@GET
 	@Path("/{id}/sku")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<SkuDTO> getSkus(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		@Context User user, @Context Locale locale, @Context Company company,
-		@Context Pagination pagination);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@Context User user, @Context Locale locale,
+			@Context Company company, @Context Pagination pagination)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProduct(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		ProductDTO productDTO, @Context User user, @Context Locale locale,
-		@Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			ProductDTO productDTO, @Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}/inventory")
@@ -94,9 +101,10 @@ public interface ProductResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public InventoryDTO upsertInventory(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		InventoryDTO inventoryDTO, @Context User user, @Context Locale locale,
-		@Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			InventoryDTO inventoryDTO, @Context User user,
+			@Context Locale locale, @Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/")
@@ -104,8 +112,10 @@ public interface ProductResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductDTO upsertProduct(
-		@QueryParam("groupId") long groupId, ProductDTO productDTO,
-		@Context User user, @Context Locale locale, @Context Company company);
+			@QueryParam("groupId") long groupId, ProductDTO productDTO,
+			@Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}/sku")
@@ -113,8 +123,9 @@ public interface ProductResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public SkuDTO upsertSku(
-		@PathParam("id") String id, @QueryParam("groupId") long groupId,
-		SkuDTO skuDTO, @Context User user, @Context Locale locale,
-		@Context Company company);
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			SkuDTO skuDTO, @Context User user, @Context Locale locale,
+			@Context Company company)
+		throws Exception;
 
 }
