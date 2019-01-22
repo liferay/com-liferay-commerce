@@ -69,9 +69,6 @@ public class EditMoneyOrderCommercePaymentMethodConfigurationMVCActionCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		UnicodeProperties parameterMap = PropertiesParamUtil.getProperties(
-			actionRequest, "settings--");
-
 		Settings settings = _settingsFactory.getSettings(
 			new GroupServiceSettingsLocator(
 				themeDisplay.getScopeGroupId(),
@@ -79,6 +76,9 @@ public class EditMoneyOrderCommercePaymentMethodConfigurationMVCActionCommand
 
 		ModifiableSettings modifiableSettings =
 			settings.getModifiableSettings();
+
+		UnicodeProperties parameterMap = PropertiesParamUtil.getProperties(
+			actionRequest, "settings--");
 
 		for (Map.Entry<String, String> entry : parameterMap.entrySet()) {
 			modifiableSettings.setValue(entry.getKey(), entry.getValue());
