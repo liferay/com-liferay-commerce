@@ -97,26 +97,25 @@ public class CommerceAccountServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		int commerceSiteType, int start, int end)
+		long userId, int commerceSiteType, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getUserCommerceAccounts(commerceSiteType, start, end);
+		return getService()
+				   .getUserCommerceAccounts(userId, commerceSiteType, start, end);
 	}
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		Long parentCommerceAccountId, int commerceSiteType, String keywords,
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
+		String keywords, int start, int end) {
 		return getService()
-				   .getUserCommerceAccounts(parentCommerceAccountId,
+				   .getUserCommerceAccounts(userId, parentCommerceAccountId,
 			commerceSiteType, keywords, start, end);
 	}
 
-	public static int getUserCommerceAccountsCount(
-		Long parentCommerceAccountId, int commerceSiteType, String keywords)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public static int getUserCommerceAccountsCount(long userId,
+		Long parentCommerceAccountId, int commerceSiteType, String keywords) {
 		return getService()
-				   .getUserCommerceAccountsCount(parentCommerceAccountId,
-			commerceSiteType, keywords);
+				   .getUserCommerceAccountsCount(userId,
+			parentCommerceAccountId, commerceSiteType, keywords);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(

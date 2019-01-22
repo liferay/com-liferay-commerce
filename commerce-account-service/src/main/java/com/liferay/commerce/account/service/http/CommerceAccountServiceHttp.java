@@ -256,14 +256,15 @@ public class CommerceAccountServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		HttpPrincipal httpPrincipal, int commerceSiteType, int start, int end)
+		HttpPrincipal httpPrincipal, long userId, int commerceSiteType,
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getUserCommerceAccounts",
 					_getUserCommerceAccountsParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					commerceSiteType, start, end);
 
 			Object returnObj = null;
@@ -289,15 +290,14 @@ public class CommerceAccountServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		HttpPrincipal httpPrincipal, Long parentCommerceAccountId,
-		int commerceSiteType, String keywords, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		HttpPrincipal httpPrincipal, long userId, Long parentCommerceAccountId,
+		int commerceSiteType, String keywords, int start, int end) {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getUserCommerceAccounts",
 					_getUserCommerceAccountsParameterTypes7);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					parentCommerceAccountId, commerceSiteType, keywords, start,
 					end);
 
@@ -307,10 +307,6 @@ public class CommerceAccountServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
@@ -324,15 +320,14 @@ public class CommerceAccountServiceHttp {
 	}
 
 	public static int getUserCommerceAccountsCount(
-		HttpPrincipal httpPrincipal, Long parentCommerceAccountId,
-		int commerceSiteType, String keywords)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		HttpPrincipal httpPrincipal, long userId, Long parentCommerceAccountId,
+		int commerceSiteType, String keywords) {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getUserCommerceAccountsCount",
 					_getUserCommerceAccountsCountParameterTypes8);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					parentCommerceAccountId, commerceSiteType, keywords);
 
 			Object returnObj = null;
@@ -341,10 +336,6 @@ public class CommerceAccountServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
@@ -490,13 +481,14 @@ public class CommerceAccountServiceHttp {
 			long.class, long.class
 		};
 	private static final Class<?>[] _getUserCommerceAccountsParameterTypes6 = new Class[] {
-			int.class, int.class, int.class
+			long.class, int.class, int.class, int.class
 		};
 	private static final Class<?>[] _getUserCommerceAccountsParameterTypes7 = new Class[] {
-			Long.class, int.class, String.class, int.class, int.class
+			long.class, Long.class, int.class, String.class, int.class,
+			int.class
 		};
 	private static final Class<?>[] _getUserCommerceAccountsCountParameterTypes8 =
-		new Class[] { Long.class, int.class, String.class };
+		new Class[] { long.class, Long.class, int.class, String.class };
 	private static final Class<?>[] _searchCommerceAccountsParameterTypes9 = new Class[] {
 			long.class, String.class, Boolean.class, int.class, int.class,
 			com.liferay.portal.kernel.search.Sort.class
