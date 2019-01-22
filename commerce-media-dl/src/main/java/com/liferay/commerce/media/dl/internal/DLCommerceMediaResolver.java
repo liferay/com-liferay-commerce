@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.File;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Html;
@@ -49,7 +48,6 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.URLCodec;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
@@ -175,17 +173,7 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 		String[] pathArray = StringUtil.split(path, CharPool.SLASH);
 
 		if (pathArray.length < 2) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)httpServletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
-			String logoUrl = themeDisplay.getLayoutSetLogo();
-
-			if (logoUrl == null) {
-				logoUrl = themeDisplay.getCompanyLogo();
-			}
-
-			httpServletResponse.sendRedirect(logoUrl);
+			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
 
 			return;
 		}
