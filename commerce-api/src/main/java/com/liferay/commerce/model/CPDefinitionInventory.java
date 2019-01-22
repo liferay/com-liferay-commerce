@@ -55,4 +55,6 @@ public interface CPDefinitionInventory extends CPDefinitionInventoryModel,
 				return CPDefinitionInventory.class;
 			}
 		};
+
+	public int[] getAllowedOrderQuantitiesArray();
 }
