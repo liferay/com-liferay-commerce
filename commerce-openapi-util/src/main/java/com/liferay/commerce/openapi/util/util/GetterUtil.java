@@ -25,13 +25,13 @@ import org.slf4j.LoggerFactory;
 public class GetterUtil {
 
 	public static String getAsTextOrNullIfMisses(
-		String attribute, JsonNode jsonParentNode) {
+		String attribute, JsonNode parentJsonNode) {
 
-		if (!jsonParentNode.has(attribute)) {
+		if (!parentJsonNode.has(attribute)) {
 			return null;
 		}
 
-		JsonNode jsonNode = jsonParentNode.get(attribute);
+		JsonNode jsonNode = parentJsonNode.get(attribute);
 
 		return jsonNode.asText();
 	}
