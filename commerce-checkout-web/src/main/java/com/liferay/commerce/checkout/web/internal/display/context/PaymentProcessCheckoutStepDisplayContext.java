@@ -68,15 +68,15 @@ public class PaymentProcessCheckoutStepDisplayContext {
 		LiferayPortletResponse liferayPortletResponse =
 			_commerceCheckoutRequestHelper.getLiferayPortletResponse();
 
-		CommerceCheckoutStep commerceCheckoutStep =
-			_commerceCheckoutStepServicesTracker.getCommerceCheckoutStep(
-				OrderConfirmationCommerceCheckoutStep.NAME);
-
 		PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
 		portletURL.setParameter(
 			"commerceOrderId",
 			String.valueOf(_commerceOrder.getCommerceOrderId()));
+
+		CommerceCheckoutStep commerceCheckoutStep =
+			_commerceCheckoutStepServicesTracker.getCommerceCheckoutStep(
+				OrderConfirmationCommerceCheckoutStep.NAME);
 
 		portletURL.setParameter(
 			"checkoutStepName", commerceCheckoutStep.getName());
