@@ -1211,7 +1211,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @param orderStatus the order status
 	* @return the matching commerce orders
 	*/
-	public java.util.List<CommerceOrder> findByC_G_O(long groupId,
+	public java.util.List<CommerceOrder> findByG_C_O(long groupId,
 		long commerceAccountId, int orderStatus);
 
 	/**
@@ -1228,7 +1228,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @param end the upper bound of the range of commerce orders (not inclusive)
 	* @return the range of matching commerce orders
 	*/
-	public java.util.List<CommerceOrder> findByC_G_O(long groupId,
+	public java.util.List<CommerceOrder> findByG_C_O(long groupId,
 		long commerceAccountId, int orderStatus, int start, int end);
 
 	/**
@@ -1246,7 +1246,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce orders
 	*/
-	public java.util.List<CommerceOrder> findByC_G_O(long groupId,
+	public java.util.List<CommerceOrder> findByG_C_O(long groupId,
 		long commerceAccountId, int orderStatus, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder> orderByComparator);
 
@@ -1266,7 +1266,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce orders
 	*/
-	public java.util.List<CommerceOrder> findByC_G_O(long groupId,
+	public java.util.List<CommerceOrder> findByG_C_O(long groupId,
 		long commerceAccountId, int orderStatus, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder> orderByComparator,
 		boolean retrieveFromCache);
@@ -1281,7 +1281,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @return the first matching commerce order
 	* @throws NoSuchOrderException if a matching commerce order could not be found
 	*/
-	public CommerceOrder findByC_G_O_First(long groupId,
+	public CommerceOrder findByG_C_O_First(long groupId,
 		long commerceAccountId, int orderStatus,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder> orderByComparator)
 		throws NoSuchOrderException;
@@ -1295,7 +1295,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	*/
-	public CommerceOrder fetchByC_G_O_First(long groupId,
+	public CommerceOrder fetchByG_C_O_First(long groupId,
 		long commerceAccountId, int orderStatus,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder> orderByComparator);
 
@@ -1309,7 +1309,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @return the last matching commerce order
 	* @throws NoSuchOrderException if a matching commerce order could not be found
 	*/
-	public CommerceOrder findByC_G_O_Last(long groupId, long commerceAccountId,
+	public CommerceOrder findByG_C_O_Last(long groupId, long commerceAccountId,
 		int orderStatus,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder> orderByComparator)
 		throws NoSuchOrderException;
@@ -1323,7 +1323,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	*/
-	public CommerceOrder fetchByC_G_O_Last(long groupId,
+	public CommerceOrder fetchByG_C_O_Last(long groupId,
 		long commerceAccountId, int orderStatus,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder> orderByComparator);
 
@@ -1338,7 +1338,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @return the previous, current, and next commerce order
 	* @throws NoSuchOrderException if a commerce order with the primary key could not be found
 	*/
-	public CommerceOrder[] findByC_G_O_PrevAndNext(long commerceOrderId,
+	public CommerceOrder[] findByG_C_O_PrevAndNext(long commerceOrderId,
 		long groupId, long commerceAccountId, int orderStatus,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder> orderByComparator)
 		throws NoSuchOrderException;
@@ -1350,7 +1350,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @param commerceAccountId the commerce account ID
 	* @param orderStatus the order status
 	*/
-	public void removeByC_G_O(long groupId, long commerceAccountId,
+	public void removeByG_C_O(long groupId, long commerceAccountId,
 		int orderStatus);
 
 	/**
@@ -1361,7 +1361,7 @@ public interface CommerceOrderPersistence extends BasePersistence<CommerceOrder>
 	* @param orderStatus the order status
 	* @return the number of matching commerce orders
 	*/
-	public int countByC_G_O(long groupId, long commerceAccountId,
+	public int countByG_C_O(long groupId, long commerceAccountId,
 		int orderStatus);
 
 	/**

@@ -680,9 +680,9 @@ public class CommerceSubscriptionEntryUtil {
 	* @param subscriptionStatus the subscription status
 	* @return the matching commerce subscription entries
 	*/
-	public static List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public static List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus) {
-		return getPersistence().findBysubscriptionStatus(subscriptionStatus);
+		return getPersistence().findBySubscriptionStatus(subscriptionStatus);
 	}
 
 	/**
@@ -697,10 +697,10 @@ public class CommerceSubscriptionEntryUtil {
 	* @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	* @return the range of matching commerce subscription entries
 	*/
-	public static List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public static List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end) {
 		return getPersistence()
-				   .findBysubscriptionStatus(subscriptionStatus, start, end);
+				   .findBySubscriptionStatus(subscriptionStatus, start, end);
 	}
 
 	/**
@@ -716,11 +716,11 @@ public class CommerceSubscriptionEntryUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce subscription entries
 	*/
-	public static List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public static List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 		return getPersistence()
-				   .findBysubscriptionStatus(subscriptionStatus, start, end,
+				   .findBySubscriptionStatus(subscriptionStatus, start, end,
 			orderByComparator);
 	}
 
@@ -738,12 +738,12 @@ public class CommerceSubscriptionEntryUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce subscription entries
 	*/
-	public static List<CommerceSubscriptionEntry> findBysubscriptionStatus(
+	public static List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findBysubscriptionStatus(subscriptionStatus, start, end,
+				   .findBySubscriptionStatus(subscriptionStatus, start, end,
 			orderByComparator, retrieveFromCache);
 	}
 
@@ -755,12 +755,12 @@ public class CommerceSubscriptionEntryUtil {
 	* @return the first matching commerce subscription entry
 	* @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	*/
-	public static CommerceSubscriptionEntry findBysubscriptionStatus_First(
+	public static CommerceSubscriptionEntry findBySubscriptionStatus_First(
 		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
 		return getPersistence()
-				   .findBysubscriptionStatus_First(subscriptionStatus,
+				   .findBySubscriptionStatus_First(subscriptionStatus,
 			orderByComparator);
 	}
 
@@ -771,11 +771,11 @@ public class CommerceSubscriptionEntryUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	*/
-	public static CommerceSubscriptionEntry fetchBysubscriptionStatus_First(
+	public static CommerceSubscriptionEntry fetchBySubscriptionStatus_First(
 		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 		return getPersistence()
-				   .fetchBysubscriptionStatus_First(subscriptionStatus,
+				   .fetchBySubscriptionStatus_First(subscriptionStatus,
 			orderByComparator);
 	}
 
@@ -787,12 +787,12 @@ public class CommerceSubscriptionEntryUtil {
 	* @return the last matching commerce subscription entry
 	* @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	*/
-	public static CommerceSubscriptionEntry findBysubscriptionStatus_Last(
+	public static CommerceSubscriptionEntry findBySubscriptionStatus_Last(
 		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
 		return getPersistence()
-				   .findBysubscriptionStatus_Last(subscriptionStatus,
+				   .findBySubscriptionStatus_Last(subscriptionStatus,
 			orderByComparator);
 	}
 
@@ -803,11 +803,11 @@ public class CommerceSubscriptionEntryUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	*/
-	public static CommerceSubscriptionEntry fetchBysubscriptionStatus_Last(
+	public static CommerceSubscriptionEntry fetchBySubscriptionStatus_Last(
 		int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 		return getPersistence()
-				   .fetchBysubscriptionStatus_Last(subscriptionStatus,
+				   .fetchBySubscriptionStatus_Last(subscriptionStatus,
 			orderByComparator);
 	}
 
@@ -820,12 +820,12 @@ public class CommerceSubscriptionEntryUtil {
 	* @return the previous, current, and next commerce subscription entry
 	* @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
 	*/
-	public static CommerceSubscriptionEntry[] findBysubscriptionStatus_PrevAndNext(
+	public static CommerceSubscriptionEntry[] findBySubscriptionStatus_PrevAndNext(
 		long commerceSubscriptionEntryId, int subscriptionStatus,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
 		return getPersistence()
-				   .findBysubscriptionStatus_PrevAndNext(commerceSubscriptionEntryId,
+				   .findBySubscriptionStatus_PrevAndNext(commerceSubscriptionEntryId,
 			subscriptionStatus, orderByComparator);
 	}
 
@@ -834,8 +834,8 @@ public class CommerceSubscriptionEntryUtil {
 	*
 	* @param subscriptionStatus the subscription status
 	*/
-	public static void removeBysubscriptionStatus(int subscriptionStatus) {
-		getPersistence().removeBysubscriptionStatus(subscriptionStatus);
+	public static void removeBySubscriptionStatus(int subscriptionStatus) {
+		getPersistence().removeBySubscriptionStatus(subscriptionStatus);
 	}
 
 	/**
@@ -844,8 +844,8 @@ public class CommerceSubscriptionEntryUtil {
 	* @param subscriptionStatus the subscription status
 	* @return the number of matching commerce subscription entries
 	*/
-	public static int countBysubscriptionStatus(int subscriptionStatus) {
-		return getPersistence().countBysubscriptionStatus(subscriptionStatus);
+	public static int countBySubscriptionStatus(int subscriptionStatus) {
+		return getPersistence().countBySubscriptionStatus(subscriptionStatus);
 	}
 
 	/**

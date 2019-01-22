@@ -212,20 +212,6 @@ public interface CommerceSubscriptionCycleEntryModel extends BaseModel<CommerceS
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the commerce subscription entry ID of this commerce subscription cycle entry.
-	 *
-	 * @return the commerce subscription entry ID of this commerce subscription cycle entry
-	 */
-	public long getCommerceSubscriptionEntryId();
-
-	/**
-	 * Sets the commerce subscription entry ID of this commerce subscription cycle entry.
-	 *
-	 * @param commerceSubscriptionEntryId the commerce subscription entry ID of this commerce subscription cycle entry
-	 */
-	public void setCommerceSubscriptionEntryId(long commerceSubscriptionEntryId);
-
-	/**
 	 * Returns the commerce order item ID of this commerce subscription cycle entry.
 	 *
 	 * @return the commerce order item ID of this commerce subscription cycle entry
@@ -238,6 +224,20 @@ public interface CommerceSubscriptionCycleEntryModel extends BaseModel<CommerceS
 	 * @param commerceOrderItemId the commerce order item ID of this commerce subscription cycle entry
 	 */
 	public void setCommerceOrderItemId(long commerceOrderItemId);
+
+	/**
+	 * Returns the commerce subscription entry ID of this commerce subscription cycle entry.
+	 *
+	 * @return the commerce subscription entry ID of this commerce subscription cycle entry
+	 */
+	public long getCommerceSubscriptionEntryId();
+
+	/**
+	 * Sets the commerce subscription entry ID of this commerce subscription cycle entry.
+	 *
+	 * @param commerceSubscriptionEntryId the commerce subscription entry ID of this commerce subscription cycle entry
+	 */
+	public void setCommerceSubscriptionEntryId(long commerceSubscriptionEntryId);
 
 	/**
 	 * Returns the renew of this commerce subscription cycle entry.

@@ -1029,8 +1029,8 @@ public class CPDefinitionOptionValueRelUtil {
 	* @param key the key
 	* @return the matching cp definition option value rels
 	*/
-	public static List<CPDefinitionOptionValueRel> findBykey(String key) {
-		return getPersistence().findBykey(key);
+	public static List<CPDefinitionOptionValueRel> findByKey(String key) {
+		return getPersistence().findByKey(key);
 	}
 
 	/**
@@ -1045,9 +1045,9 @@ public class CPDefinitionOptionValueRelUtil {
 	* @param end the upper bound of the range of cp definition option value rels (not inclusive)
 	* @return the range of matching cp definition option value rels
 	*/
-	public static List<CPDefinitionOptionValueRel> findBykey(String key,
+	public static List<CPDefinitionOptionValueRel> findByKey(String key,
 		int start, int end) {
-		return getPersistence().findBykey(key, start, end);
+		return getPersistence().findByKey(key, start, end);
 	}
 
 	/**
@@ -1063,10 +1063,10 @@ public class CPDefinitionOptionValueRelUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching cp definition option value rels
 	*/
-	public static List<CPDefinitionOptionValueRel> findBykey(String key,
+	public static List<CPDefinitionOptionValueRel> findByKey(String key,
 		int start, int end,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator) {
-		return getPersistence().findBykey(key, start, end, orderByComparator);
+		return getPersistence().findByKey(key, start, end, orderByComparator);
 	}
 
 	/**
@@ -1083,12 +1083,12 @@ public class CPDefinitionOptionValueRelUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching cp definition option value rels
 	*/
-	public static List<CPDefinitionOptionValueRel> findBykey(String key,
+	public static List<CPDefinitionOptionValueRel> findByKey(String key,
 		int start, int end,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findBykey(key, start, end, orderByComparator,
+				   .findByKey(key, start, end, orderByComparator,
 			retrieveFromCache);
 	}
 
@@ -1100,10 +1100,10 @@ public class CPDefinitionOptionValueRelUtil {
 	* @return the first matching cp definition option value rel
 	* @throws NoSuchCPDefinitionOptionValueRelException if a matching cp definition option value rel could not be found
 	*/
-	public static CPDefinitionOptionValueRel findBykey_First(String key,
+	public static CPDefinitionOptionValueRel findByKey_First(String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator)
 		throws com.liferay.commerce.product.exception.NoSuchCPDefinitionOptionValueRelException {
-		return getPersistence().findBykey_First(key, orderByComparator);
+		return getPersistence().findByKey_First(key, orderByComparator);
 	}
 
 	/**
@@ -1113,9 +1113,9 @@ public class CPDefinitionOptionValueRelUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching cp definition option value rel, or <code>null</code> if a matching cp definition option value rel could not be found
 	*/
-	public static CPDefinitionOptionValueRel fetchBykey_First(String key,
+	public static CPDefinitionOptionValueRel fetchByKey_First(String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator) {
-		return getPersistence().fetchBykey_First(key, orderByComparator);
+		return getPersistence().fetchByKey_First(key, orderByComparator);
 	}
 
 	/**
@@ -1126,10 +1126,10 @@ public class CPDefinitionOptionValueRelUtil {
 	* @return the last matching cp definition option value rel
 	* @throws NoSuchCPDefinitionOptionValueRelException if a matching cp definition option value rel could not be found
 	*/
-	public static CPDefinitionOptionValueRel findBykey_Last(String key,
+	public static CPDefinitionOptionValueRel findByKey_Last(String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator)
 		throws com.liferay.commerce.product.exception.NoSuchCPDefinitionOptionValueRelException {
-		return getPersistence().findBykey_Last(key, orderByComparator);
+		return getPersistence().findByKey_Last(key, orderByComparator);
 	}
 
 	/**
@@ -1139,9 +1139,9 @@ public class CPDefinitionOptionValueRelUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching cp definition option value rel, or <code>null</code> if a matching cp definition option value rel could not be found
 	*/
-	public static CPDefinitionOptionValueRel fetchBykey_Last(String key,
+	public static CPDefinitionOptionValueRel fetchByKey_Last(String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator) {
-		return getPersistence().fetchBykey_Last(key, orderByComparator);
+		return getPersistence().fetchByKey_Last(key, orderByComparator);
 	}
 
 	/**
@@ -1153,12 +1153,12 @@ public class CPDefinitionOptionValueRelUtil {
 	* @return the previous, current, and next cp definition option value rel
 	* @throws NoSuchCPDefinitionOptionValueRelException if a cp definition option value rel with the primary key could not be found
 	*/
-	public static CPDefinitionOptionValueRel[] findBykey_PrevAndNext(
+	public static CPDefinitionOptionValueRel[] findByKey_PrevAndNext(
 		long CPDefinitionOptionValueRelId, String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator)
 		throws com.liferay.commerce.product.exception.NoSuchCPDefinitionOptionValueRelException {
 		return getPersistence()
-				   .findBykey_PrevAndNext(CPDefinitionOptionValueRelId, key,
+				   .findByKey_PrevAndNext(CPDefinitionOptionValueRelId, key,
 			orderByComparator);
 	}
 
@@ -1167,8 +1167,8 @@ public class CPDefinitionOptionValueRelUtil {
 	*
 	* @param key the key
 	*/
-	public static void removeBykey(String key) {
-		getPersistence().removeBykey(key);
+	public static void removeByKey(String key) {
+		getPersistence().removeByKey(key);
 	}
 
 	/**
@@ -1177,8 +1177,8 @@ public class CPDefinitionOptionValueRelUtil {
 	* @param key the key
 	* @return the number of matching cp definition option value rels
 	*/
-	public static int countBykey(String key) {
-		return getPersistence().countBykey(key);
+	public static int countByKey(String key) {
+		return getPersistence().countByKey(key);
 	}
 
 	/**

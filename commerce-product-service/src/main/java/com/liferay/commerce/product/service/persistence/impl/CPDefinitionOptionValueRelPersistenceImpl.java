@@ -3069,7 +3069,7 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_KEY = new FinderPath(CPDefinitionOptionValueRelModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionOptionValueRelModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionOptionValueRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBykey",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByKey",
 			new String[] {
 				String.class.getName(),
 				
@@ -3079,14 +3079,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_KEY = new FinderPath(CPDefinitionOptionValueRelModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionOptionValueRelModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionOptionValueRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBykey",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByKey",
 			new String[] { String.class.getName() },
 			CPDefinitionOptionValueRelModelImpl.KEY_COLUMN_BITMASK |
 			CPDefinitionOptionValueRelModelImpl.PRIORITY_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_KEY = new FinderPath(CPDefinitionOptionValueRelModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionOptionValueRelModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countBykey", new String[] { String.class.getName() });
+			"countByKey", new String[] { String.class.getName() });
 
 	/**
 	 * Returns all the cp definition option value rels where key = &#63;.
@@ -3095,8 +3095,8 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @return the matching cp definition option value rels
 	 */
 	@Override
-	public List<CPDefinitionOptionValueRel> findBykey(String key) {
-		return findBykey(key, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CPDefinitionOptionValueRel> findByKey(String key) {
+		return findByKey(key, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
@@ -3112,9 +3112,9 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @return the range of matching cp definition option value rels
 	 */
 	@Override
-	public List<CPDefinitionOptionValueRel> findBykey(String key, int start,
+	public List<CPDefinitionOptionValueRel> findByKey(String key, int start,
 		int end) {
-		return findBykey(key, start, end, null);
+		return findByKey(key, start, end, null);
 	}
 
 	/**
@@ -3131,9 +3131,9 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @return the ordered range of matching cp definition option value rels
 	 */
 	@Override
-	public List<CPDefinitionOptionValueRel> findBykey(String key, int start,
+	public List<CPDefinitionOptionValueRel> findByKey(String key, int start,
 		int end, OrderByComparator<CPDefinitionOptionValueRel> orderByComparator) {
-		return findBykey(key, start, end, orderByComparator, true);
+		return findByKey(key, start, end, orderByComparator, true);
 	}
 
 	/**
@@ -3151,7 +3151,7 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @return the ordered range of matching cp definition option value rels
 	 */
 	@Override
-	public List<CPDefinitionOptionValueRel> findBykey(String key, int start,
+	public List<CPDefinitionOptionValueRel> findByKey(String key, int start,
 		int end,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator,
 		boolean retrieveFromCache) {
@@ -3277,10 +3277,10 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @throws NoSuchCPDefinitionOptionValueRelException if a matching cp definition option value rel could not be found
 	 */
 	@Override
-	public CPDefinitionOptionValueRel findBykey_First(String key,
+	public CPDefinitionOptionValueRel findByKey_First(String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator)
 		throws NoSuchCPDefinitionOptionValueRelException {
-		CPDefinitionOptionValueRel cpDefinitionOptionValueRel = fetchBykey_First(key,
+		CPDefinitionOptionValueRel cpDefinitionOptionValueRel = fetchByKey_First(key,
 				orderByComparator);
 
 		if (cpDefinitionOptionValueRel != null) {
@@ -3307,9 +3307,9 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @return the first matching cp definition option value rel, or <code>null</code> if a matching cp definition option value rel could not be found
 	 */
 	@Override
-	public CPDefinitionOptionValueRel fetchBykey_First(String key,
+	public CPDefinitionOptionValueRel fetchByKey_First(String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator) {
-		List<CPDefinitionOptionValueRel> list = findBykey(key, 0, 1,
+		List<CPDefinitionOptionValueRel> list = findByKey(key, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3328,10 +3328,10 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @throws NoSuchCPDefinitionOptionValueRelException if a matching cp definition option value rel could not be found
 	 */
 	@Override
-	public CPDefinitionOptionValueRel findBykey_Last(String key,
+	public CPDefinitionOptionValueRel findByKey_Last(String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator)
 		throws NoSuchCPDefinitionOptionValueRelException {
-		CPDefinitionOptionValueRel cpDefinitionOptionValueRel = fetchBykey_Last(key,
+		CPDefinitionOptionValueRel cpDefinitionOptionValueRel = fetchByKey_Last(key,
 				orderByComparator);
 
 		if (cpDefinitionOptionValueRel != null) {
@@ -3358,15 +3358,15 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @return the last matching cp definition option value rel, or <code>null</code> if a matching cp definition option value rel could not be found
 	 */
 	@Override
-	public CPDefinitionOptionValueRel fetchBykey_Last(String key,
+	public CPDefinitionOptionValueRel fetchByKey_Last(String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator) {
-		int count = countBykey(key);
+		int count = countByKey(key);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPDefinitionOptionValueRel> list = findBykey(key, count - 1,
+		List<CPDefinitionOptionValueRel> list = findByKey(key, count - 1,
 				count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3386,7 +3386,7 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @throws NoSuchCPDefinitionOptionValueRelException if a cp definition option value rel with the primary key could not be found
 	 */
 	@Override
-	public CPDefinitionOptionValueRel[] findBykey_PrevAndNext(
+	public CPDefinitionOptionValueRel[] findByKey_PrevAndNext(
 		long CPDefinitionOptionValueRelId, String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator)
 		throws NoSuchCPDefinitionOptionValueRelException {
@@ -3399,12 +3399,12 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 			CPDefinitionOptionValueRel[] array = new CPDefinitionOptionValueRelImpl[3];
 
-			array[0] = getBykey_PrevAndNext(session,
+			array[0] = getByKey_PrevAndNext(session,
 					cpDefinitionOptionValueRel, key, orderByComparator, true);
 
 			array[1] = cpDefinitionOptionValueRel;
 
-			array[2] = getBykey_PrevAndNext(session,
+			array[2] = getByKey_PrevAndNext(session,
 					cpDefinitionOptionValueRel, key, orderByComparator, false);
 
 			return array;
@@ -3417,7 +3417,7 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 		}
 	}
 
-	protected CPDefinitionOptionValueRel getBykey_PrevAndNext(Session session,
+	protected CPDefinitionOptionValueRel getByKey_PrevAndNext(Session session,
 		CPDefinitionOptionValueRel cpDefinitionOptionValueRel, String key,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator,
 		boolean previous) {
@@ -3544,8 +3544,8 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @param key the key
 	 */
 	@Override
-	public void removeBykey(String key) {
-		for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel : findBykey(
+	public void removeByKey(String key) {
+		for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel : findByKey(
 				key, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(cpDefinitionOptionValueRel);
 		}
@@ -3558,7 +3558,7 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @return the number of matching cp definition option value rels
 	 */
 	@Override
-	public int countBykey(String key) {
+	public int countByKey(String key) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_KEY;
 
 		Object[] finderArgs = new Object[] { key };

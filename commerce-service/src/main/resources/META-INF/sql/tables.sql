@@ -43,8 +43,8 @@ create table CSubscriptionCycleEntry (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	commerceSubscriptionEntryId LONG,
 	commerceOrderItemId LONG,
+	commerceSubscriptionEntryId LONG,
 	renew BOOLEAN
 );
 

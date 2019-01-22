@@ -71,11 +71,10 @@ public class CommerceShippingMethodServiceUtil {
 	}
 
 	public static void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId, long groupId)
+		long commerceAddressRestrictionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService()
-			.deleteCommerceAddressRestriction(commerceAddressRestrictionId,
-			groupId);
+			.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
 	}
 
 	public static void deleteCommerceShippingMethod(
@@ -86,20 +85,18 @@ public class CommerceShippingMethodServiceUtil {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
 		long commerceShippingMethodId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
-		long groupId)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceAddressRestrictions(commerceShippingMethodId,
-			start, end, orderByComparator, groupId);
+			start, end, orderByComparator);
 	}
 
 	public static int getCommerceAddressRestrictionsCount(
-		long commerceShippingMethodId, long groupId)
+		long commerceShippingMethodId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceAddressRestrictionsCount(commerceShippingMethodId,
-			groupId);
+				   .getCommerceAddressRestrictionsCount(commerceShippingMethodId);
 	}
 
 	public static com.liferay.commerce.model.CommerceShippingMethod getCommerceShippingMethod(
