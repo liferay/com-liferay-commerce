@@ -1,3 +1,4 @@
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -11,16 +12,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+--%>
 
-package com.liferay.commerce.constants;
+<%@ include file="/init.jsp" %>
 
-/**
- * @author Alec Sloan
- */
-public class CommerceMediaConstants {
+<liferay-ui:error-header />
 
-	public static final String SERVICE_NAME = "com.liferay.commerce.media";
+<liferay-ui:error exception="<%= NoSuchModelException.class %>" message="the-entry-could-not-be-found" />
 
-	public static final String SERVLET_PATH = "commerce-media";
-
-}
+<liferay-ui:error-principal />
