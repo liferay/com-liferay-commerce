@@ -47,11 +47,12 @@ public class SortContextProvider implements ContextProvider<Sort> {
 
 		String sortString = ParamUtil.getString(
 			httpServletRequest, "sort.field");
-		String sortDir = ParamUtil.getString(httpServletRequest, "sort.dir");
 
 		if (Validator.isNull(sortString)) {
 			return null;
 		}
+
+		String sortDir = ParamUtil.getString(httpServletRequest, "sort.dir");
 
 		return SortFactoryUtil.create(
 			StringUtil.trim(sortString), sortDir.equals("desc"));
