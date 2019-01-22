@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.order.content.web.internal.portlet.action;
 
-import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
@@ -52,7 +51,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_CART_CONTENT_MINI,
-		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_ORDER_CONTENT,
+		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT,
 		"mvc.command.name=editCommerceOrder"
 	},
 	service = MVCActionCommand.class
@@ -264,6 +263,8 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			(CommerceContext)actionRequest.getAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT);
 
+		long billingAddressId = ParamUtil.getLong(
+			actionRequest, "billingAddressId");
 		long shippingAddressId = ParamUtil.getLong(
 			actionRequest, "shippingAddressId");
 		String purchaseOrderNumber = ParamUtil.getString(
@@ -280,8 +281,8 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 				_commerceOrderService.getCommerceOrder(commerceOrderId);
 
 			_commerceOrderService.updateCommerceOrder(
-				commerceOrderId, commerceOrder.getBillingAddressId(),
-				shippingAddressId, commerceOrder.getCommercePaymentMethodKey(),
+				commerceOrderId, billingAddressId, shippingAddressId,
+				commerceOrder.getCommercePaymentMethodKey(),
 				commerceOrder.getCommerceShippingMethodId(),
 				commerceOrder.getShippingOptionName(), purchaseOrderNumber,
 				commerceOrder.getSubtotal(), commerceOrder.getShippingAmount(),
@@ -306,9 +307,6 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 				commerceCurrencyId, shippingAddressId, purchaseOrderNumber);
 		}
 	}
-
-	@Reference
-	private CommerceAccountService _commerceAccountService;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
