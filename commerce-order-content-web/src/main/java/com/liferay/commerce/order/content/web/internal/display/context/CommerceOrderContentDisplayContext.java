@@ -18,6 +18,7 @@ import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceOrderConstants;
+import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceShipmentConstants;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
@@ -138,6 +139,14 @@ public class CommerceOrderContentDisplayContext {
 		return _commerceAccount;
 	}
 
+	public List<CommerceAddress> getCommerceAddresses(long commerceAccountId)
+		throws PortalException {
+
+		return _commerceAddressService.getCommerceAddresses(
+			_cpRequestHelper.getScopeGroupId(), CommerceAccount.class.getName(),
+			commerceAccountId);
+	}
+
 	public CommerceOrder getCommerceOrder() {
 		return _commerceOrderLocalService.fetchCommerceOrder(
 			getCommerceOrderId());
@@ -255,20 +264,19 @@ public class CommerceOrderContentDisplayContext {
 
 		String keywords = ParamUtil.getString(_httpServletRequest, "keywords");
 
-		if (_commerceOrderContentPortletInstanceConfiguration.exclude()) {
+		if (isOpenOrderContentPortlet()) {
 			_commerceOrders = _commerceOrderLocalService.getUserCommerceOrders(
 				_cpRequestHelper.getScopeGroupId(),
 				_cpRequestHelper.getUserId(),
-				_commerceOrderContentPortletInstanceConfiguration.orderStatus(),
-				_commerceOrderContentPortletInstanceConfiguration.exclude(),
-				keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				CommerceOrderConstants.ORDER_STATUS_OPEN, keywords,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		else {
 			_commerceOrders = _commerceOrderLocalService.getUserCommerceOrders(
 				_cpRequestHelper.getScopeGroupId(),
 				_cpRequestHelper.getUserId(),
-				_commerceOrderContentPortletInstanceConfiguration.orderStatus(),
-				keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				CommerceOrderConstants.ORDER_STATUS_OPEN, true, keywords,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 
 		return _commerceOrders;
@@ -311,14 +319,6 @@ public class CommerceOrderContentDisplayContext {
 		return LanguageUtil.get(
 			_httpServletRequest,
 			CommerceShipmentConstants.getShipmentStatusLabel(status));
-	}
-
-	public boolean getConfigurationExclude() {
-		return _commerceOrderContentPortletInstanceConfiguration.exclude();
-	}
-
-	public int getConfigurationOrderStatus() {
-		return _commerceOrderContentPortletInstanceConfiguration.orderStatus();
 	}
 
 	public String getDisplayStyle() {
@@ -416,6 +416,13 @@ public class CommerceOrderContentDisplayContext {
 		}
 
 		return false;
+	}
+
+	public boolean isOpenOrderContentPortlet() {
+		String portletName = _cpRequestHelper.getPortletName();
+
+		return portletName.equals(
+			CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
 	}
 
 	private final CommerceAccount _commerceAccount;

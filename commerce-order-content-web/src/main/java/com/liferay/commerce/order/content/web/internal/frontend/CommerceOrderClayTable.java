@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.order.content.web.internal.frontend;
 
+import com.liferay.commerce.constants.CommerceOrderConstants;
+import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.frontend.ClayTable;
 import com.liferay.commerce.frontend.ClayTableAction;
@@ -26,12 +28,10 @@ import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.content.web.internal.model.Order;
-import com.liferay.commerce.order.content.web.internal.portlet.configuration.CommerceOrderContentPortletInstanceConfiguration;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.PortletQName;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
@@ -118,23 +118,19 @@ public class CommerceOrderClayTable
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		CommerceOrderContentPortletInstanceConfiguration
-			commerceOrderContentPortletInstanceConfiguration =
-				_configurationProvider.getPortletInstanceConfiguration(
-					CommerceOrderContentPortletInstanceConfiguration.class,
-					themeDisplay.getLayout(), portletDisplay.getId());
+		String portletName = portletDisplay.getPortletName();
 
-		if (commerceOrderContentPortletInstanceConfiguration.exclude()) {
+		if (portletName.equals(
+				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT)) {
+
 			return _commerceOrderService.getUserCommerceOrdersCount(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				commerceOrderContentPortletInstanceConfiguration.orderStatus(),
-				commerceOrderContentPortletInstanceConfiguration.exclude(),
-				filter.getKeywords());
+				CommerceOrderConstants.ORDER_STATUS_OPEN, filter.getKeywords());
 		}
 
 		return _commerceOrderService.getUserCommerceOrdersCount(
 			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-			commerceOrderContentPortletInstanceConfiguration.orderStatus(),
+			CommerceOrderConstants.ORDER_STATUS_OPEN, true,
 			filter.getKeywords());
 	}
 
@@ -172,26 +168,22 @@ public class CommerceOrderClayTable
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		CommerceOrderContentPortletInstanceConfiguration
-			commerceOrderContentPortletInstanceConfiguration =
-				_configurationProvider.getPortletInstanceConfiguration(
-					CommerceOrderContentPortletInstanceConfiguration.class,
-					themeDisplay.getLayout(), portletDisplay.getId());
+		String portletName = portletDisplay.getPortletName();
 
 		List<CommerceOrder> commerceOrders = null;
 
-		if (commerceOrderContentPortletInstanceConfiguration.exclude()) {
+		if (portletName.equals(
+				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT)) {
+
 			commerceOrders = _commerceOrderService.getUserCommerceOrders(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				commerceOrderContentPortletInstanceConfiguration.orderStatus(),
-				commerceOrderContentPortletInstanceConfiguration.exclude(),
-				filter.getKeywords(), pagination.getStartPosition(),
-				pagination.getEndPosition());
+				CommerceOrderConstants.ORDER_STATUS_OPEN, filter.getKeywords(),
+				pagination.getStartPosition(), pagination.getEndPosition());
 		}
 		else {
 			commerceOrders = _commerceOrderService.getUserCommerceOrders(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				commerceOrderContentPortletInstanceConfiguration.orderStatus(),
+				CommerceOrderConstants.ORDER_STATUS_OPEN, true,
 				filter.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
 		}
@@ -255,9 +247,6 @@ public class CommerceOrderClayTable
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
-
-	@Reference
-	private ConfigurationProvider _configurationProvider;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
