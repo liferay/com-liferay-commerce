@@ -75,7 +75,8 @@ public class CommerceSubscriptionDisplayContextHelper {
 					_configurationProvider.getSystemConfiguration(
 						CommerceSubscriptionConfiguration.class);
 
-			if (commerceSubscriptionConfiguration.suspendSubscription() &&
+			if (commerceSubscriptionConfiguration.
+					subscriptionSuspensionAllowed() &&
 				(subscriptionStatus !=
 					CommerceSubscriptionEntryConstants.
 						SUBSCRIPTION_STATUS_SUSPENDED)) {
@@ -83,7 +84,8 @@ public class CommerceSubscriptionDisplayContextHelper {
 				dropdownItems.add(_getDropdownItem("suspend"));
 			}
 
-			if (commerceSubscriptionConfiguration.cancelSubscription() &&
+			if (commerceSubscriptionConfiguration.
+					subscriptionCancellationAllowed() &&
 				(subscriptionStatus !=
 					CommerceSubscriptionEntryConstants.
 						SUBSCRIPTION_STATUS_CANCELLED)) {
