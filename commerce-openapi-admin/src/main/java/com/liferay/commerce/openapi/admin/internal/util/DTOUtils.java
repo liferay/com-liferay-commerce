@@ -15,8 +15,10 @@
 package com.liferay.commerce.openapi.admin.internal.util;
 
 import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
+import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -28,6 +30,26 @@ import java.util.Locale;
  * @author Zoltán Takács
  */
 public class DTOUtils {
+
+	public static PriceEntryDTO modelToDTO(
+		CommercePriceEntry commercePriceEntry,
+		String skuExternalReferenceCode) {
+
+		PriceEntryDTO priceEntryDTO = new PriceEntryDTO();
+
+		priceEntryDTO.setCommercePriceListId(
+			commercePriceEntry.getCommercePriceListId());
+		priceEntryDTO.setExternalReferenceCode(
+			priceEntryDTO.getExternalReferenceCode());
+		priceEntryDTO.setHasTierPrice(commercePriceEntry.getHasTierPrice());
+		priceEntryDTO.setId(commercePriceEntry.getCommercePriceEntryId());
+		priceEntryDTO.setPrice(commercePriceEntry.getPrice());
+		priceEntryDTO.setPromoPrice(commercePriceEntry.getPromoPrice());
+		priceEntryDTO.setSku(priceEntryDTO.getSku());
+		priceEntryDTO.setSkuExternalReferenceCode(skuExternalReferenceCode);
+
+		return priceEntryDTO;
+	}
 
 	public static PriceListDTO modelToDTO(
 		CommercePriceList commercePriceList, Locale locale) {
