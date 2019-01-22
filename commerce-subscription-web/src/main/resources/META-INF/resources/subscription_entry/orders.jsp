@@ -17,11 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 CommerceSubscriptionEntryDisplayContext commerceSubscriptionEntryDisplayContext = (CommerceSubscriptionEntryDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 SearchContainer<CommerceOrder> commerceSubscriptionEntryOrderSearchContainer = commerceSubscriptionEntryDisplayContext.getCommerceSubscriptionEntryOrderSearchContainer();
+
+String redirect = ParamUtil.getString(request, "redirect");
 
 if (Validator.isNotNull(redirect)) {
 	portletDisplay.setShowBackIcon(true);

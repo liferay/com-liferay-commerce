@@ -152,7 +152,11 @@ public class CommerceSubscriptionEntryDisplayContext {
 			getCommerceSubscriptionEntryOrderSearchContainer()
 		throws PortalException {
 
-		_commerceSubscriptionEntryOrderSearchContainer = new SearchContainer<>(
+		if (_commerceSubscriptionEntryOrderSearchContainer != null) {
+			return _commerceSubscriptionEntryOrderSearchContainer;
+		}
+
+		SearchContainer<CommerceOrder> searchContainer = new SearchContainer<>(
 			_cpRequestHelper.getLiferayPortletRequest(), getPortletURL(), null,
 			"there-are-no-orders");
 
@@ -175,21 +179,20 @@ public class CommerceSubscriptionEntryDisplayContext {
 			}
 		}
 
-		int total = commerceOrders.size();
+		int end = searchContainer.getEnd();
 
-		_commerceSubscriptionEntryOrderSearchContainer.setTotal(total);
-
-		int fromIndex =
-			_commerceSubscriptionEntryOrderSearchContainer.getStart();
-
-		int toIndex = _commerceSubscriptionEntryOrderSearchContainer.getEnd();
-
-		if (total < toIndex) {
-			toIndex = total;
+		if (total < end) {
+			end = total;
 		}
 
-		_commerceSubscriptionEntryOrderSearchContainer.setResults(
-			commerceOrders.subList(fromIndex, toIndex));
+		searchContainer.setResults(
+			commerceOrders.subList(searchContainer.getStart(), end));
+
+		int total = commerceOrders.size();
+
+		searchContainer.setTotal(total);
+
+		_commerceSubscriptionEntryOrderSearchContainer = searchContainer;
 
 		return _commerceSubscriptionEntryOrderSearchContainer;
 	}
@@ -324,6 +327,15 @@ public class CommerceSubscriptionEntryDisplayContext {
 			portletURL.setParameter("redirect", redirect);
 		}
 
+		long commerceSubscriptionEntryId = ParamUtil.getLong(
+			_httpServletRequest, "commerceSubscriptionEntryId");
+
+		if (commerceSubscriptionEntryId > 0) {
+			portletURL.setParameter(
+				"commerceSubscriptionEntryId",
+				String.valueOf(commerceSubscriptionEntryId));
+		}
+
 		String delta = ParamUtil.getString(_httpServletRequest, "delta");
 
 		if (Validator.isNotNull(delta)) {
@@ -357,15 +369,6 @@ public class CommerceSubscriptionEntryDisplayContext {
 			portletURL.setParameter("orderByType", orderByType);
 		}
 
-		long commerceSubscriptionEntryId = ParamUtil.getLong(
-			_httpServletRequest, "commerceSubscriptionEntryId");
-
-		if (commerceSubscriptionEntryId > 0) {
-			portletURL.setParameter(
-				"commerceSubscriptionEntryId",
-				String.valueOf(commerceSubscriptionEntryId));
-		}
-
 		return portletURL;
 	}
 
@@ -380,6 +383,10 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 	public SearchContainer<CommerceSubscriptionEntry> getSearchContainer()
 		throws PortalException {
+
+		if (_searchContainer != null) {
+			return _searchContainer;
+		}
 
 		String emptyResultsMessage = "there-are-no-subscriptions";
 		Long maxSubscriptionCycles = null;
@@ -412,18 +419,21 @@ public class CommerceSubscriptionEntryDisplayContext {
 		}
 		else if (navigation.equals("never-ends")) {
 			emptyResultsMessage = "there-are-no-unlimited-subscriptions";
-			maxSubscriptionCycles = 0L;
+			maxSubscriptionCycles = 0;
 		}
 
-		_searchContainer = new SearchContainer<>(
-			_cpRequestHelper.getLiferayPortletRequest(), getPortletURL(), null,
-			emptyResultsMessage);
+		SearchContainer<CommerceSubscriptionEntry> searchContainer =
+			new SearchContainer<>(
+				_cpRequestHelper.getLiferayPortletRequest(), getPortletURL(),
+				null, emptyResultsMessage);
 
 		String orderByCol = getOrderByCol();
 		String orderByType = getOrderByType();
 
-		_searchContainer.setOrderByCol(orderByCol);
-		_searchContainer.setOrderByType(orderByType);
+		searchContainer.setOrderByCol(orderByCol);
+		searchContainer.setOrderByType(orderByType);
+
+		searchContainer.setRowChecker(_rowChecker);
 
 		BaseModelSearchResult<CommerceSubscriptionEntry>
 			commerceSubscriptionBaseModelSearchResult =
@@ -432,18 +442,18 @@ public class CommerceSubscriptionEntryDisplayContext {
 						_cpRequestHelper.getCompanyId(),
 						_cpRequestHelper.getScopeGroupId(),
 						maxSubscriptionCycles, subscriptionStatus,
-						getKeywords(), _searchContainer.getStart(),
-						_searchContainer.getEnd(),
+						getKeywords(), searchContainer.getStart(),
+						searchContainer.getEnd(),
 						CommerceSubscriptionEntryPortletUtil.
 							getCommerceSubscriptionEntrySort(
 								orderByCol, orderByType));
 
-		_searchContainer.setTotal(
-			commerceSubscriptionBaseModelSearchResult.getLength());
-		_searchContainer.setResults(
+		searchContainer.setResults(
 			commerceSubscriptionBaseModelSearchResult.getBaseModels());
+		searchContainer.setTotal(
+			commerceSubscriptionBaseModelSearchResult.getLength());
 
-		_searchContainer.setRowChecker(_rowChecker);
+		_searchContainer = searchContainer;
 
 		return _searchContainer;
 	}

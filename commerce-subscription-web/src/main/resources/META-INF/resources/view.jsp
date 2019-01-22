@@ -140,6 +140,9 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 							<c:when test="<%= commerceSubscriptionEntry.getMaxSubscriptionCycles() == 0 %>">
 								<%= LanguageUtil.get(request, "never-ends") %>
 							</c:when>
+							<c:when test="<%= commerceSubscriptionEntry.getMaxSubscriptionCycles() == 1 %>">
+								<%= LanguageUtil.get(request, "after-1-cycle") %>
+							</c:when>
 							<c:otherwise>
 								<%= LanguageUtil.format(request, "after-x-cycles", commerceSubscriptionEntry.getMaxSubscriptionCycles()) %>
 							</c:otherwise>

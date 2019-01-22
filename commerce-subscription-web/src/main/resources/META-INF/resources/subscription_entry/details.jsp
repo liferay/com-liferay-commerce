@@ -22,9 +22,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 CommerceSubscriptionEntryDisplayContext commerceSubscriptionEntryDisplayContext = (CommerceSubscriptionEntryDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceSubscriptionEntry commerceSubscriptionEntry = commerceSubscriptionEntryDisplayContext.getCommerceSubscriptionEntry();
-List<CPSubscriptionType> cpSubscriptionTypes = commerceSubscriptionEntryDisplayContext.getCPSubscriptionTypes();
 
 String defaultCPSubscriptionType = StringPool.BLANK;
+
+List<CPSubscriptionType> cpSubscriptionTypes = commerceSubscriptionEntryDisplayContext.getCPSubscriptionTypes();
 
 if (!cpSubscriptionTypes.isEmpty()) {
 	CPSubscriptionType firstCPSubscriptionType = cpSubscriptionTypes.get(0);
@@ -47,7 +48,11 @@ if (cpSubscriptionType != null) {
 
 CPSubscriptionTypeJSPContributor cpSubscriptionTypeJSPContributor = commerceSubscriptionEntryDisplayContext.getCPSubscriptionTypeJSPContributor(subscriptionType);
 
-boolean ending = maxSubscriptionCycles > 0;
+boolean finiteSubscription = false;
+
+if (maxSubscriptionCycles > 0) {
+	finiteSubscription = true;
+}
 %>
 
 <portlet:actionURL name="editCommerceSubscriptionEntry" var="editCommerceSubscriptionEntryActionURL" />
@@ -93,19 +98,19 @@ boolean ending = maxSubscriptionCycles > 0;
 
 			<div id="<portlet:namespace />neverEndsContainer">
 				<div class="never-ends-header">
-					<aui:input checked="<%= ending ? false : true %>" name="neverEnds" type="toggle-switch" />
+					<aui:input checked="<%= finiteSubscription ? false : true %>" name="neverEnds" type="toggle-switch" />
 				</div>
 
 				<%
 				String cssClass = "never-ends-content hide";
 
-				if (ending) {
+				if (finiteSubscription) {
 					cssClass = "never-ends-content";
 				}
 				%>
 
 				<div class="<%= cssClass %>">
-					<aui:input disabled="<%= ending ? false : true %>" helpMessage="max-subscription-cycles-help" label="end-after" name="maxSubscriptionCycles" suffix='<%= LanguageUtil.get(request, "cycles") %>' value="<%= String.valueOf(maxSubscriptionCycles) %>">
+					<aui:input disabled="<%= finiteSubscription ? false : true %>" helpMessage="max-subscription-cycles-help" label="end-after" name="maxSubscriptionCycles" suffix='<%= LanguageUtil.get(request, "cycles") %>' value="<%= String.valueOf(maxSubscriptionCycles) %>">
 						<aui:validator name="digits" />
 
 						<aui:validator errorMessage='<%= LanguageUtil.format(request, "please-enter-a-value-greater-than-or-equal-to-x", 1) %>' name="custom">
@@ -114,7 +119,11 @@ boolean ending = maxSubscriptionCycles > 0;
 									return true;
 								}
 
-								return (parseInt(val, 10) > 0);
+								if (parseInt(val, 10) > 0) {
+									return true;
+								}
+
+								return false;
 							}
 						</aui:validator>
 					</aui:input>
@@ -155,17 +164,17 @@ boolean ending = maxSubscriptionCycles > 0;
 		function() {
 			var A = AUI();
 
-			var subscriptionLength = A.one('#<portlet:namespace />subscriptionLength').val();
-			var subscriptionType = A.one('#<portlet:namespace />subscriptionType').val();
 			var maxSubscriptionCycles = A.one('#<portlet:namespace />maxSubscriptionCycles').val();
+			var subscriptionLength = A.one('#<portlet:namespace />subscriptionLength').val();
 			var subscriptionStatus = A.one('#<portlet:namespace />subscriptionStatus').val();
+			var subscriptionType = A.one('#<portlet:namespace />subscriptionType').val();
 
 			var portletURL = new Liferay.PortletURL.createURL('<%= currentURLObj %>');
 
-			portletURL.setParameter('subscriptionLength', subscriptionLength);
-			portletURL.setParameter('subscriptionType', subscriptionType);
 			portletURL.setParameter('maxSubscriptionCycles', maxSubscriptionCycles);
+			portletURL.setParameter('subscriptionLength', subscriptionLength);
 			portletURL.setParameter('subscriptionStatus', subscriptionStatus);
+			portletURL.setParameter('subscriptionType', subscriptionType);
 
 			window.location.replace(portletURL.toString());
 		},
@@ -189,15 +198,13 @@ boolean ending = maxSubscriptionCycles > 0;
 		{
 			animated: true,
 			content: '#<portlet:namespace />neverEndsContainer .never-ends-content',
-			expanded: <%= ending %>,
+			expanded: <%= finiteSubscription %>,
 			header: '#<portlet:namespace />neverEndsContainer .never-ends-header',
 			on: {
 				animatingChange: function(event) {
 					var instance = this;
 
-					var expanded = !instance.get('expanded');
-
-					if (expanded) {
+					if (!instance.get('expanded')) {
 						A.one('#<portlet:namespace />neverEndsContainer .never-ends-content').removeClass('hide');
 
 						A.one('#<portlet:namespace />maxSubscriptionCycles').attr('disabled', false);
