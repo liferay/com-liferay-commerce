@@ -24,7 +24,7 @@ class Cart extends Component {
 				this.summary = updateCartData.summary;
 				this.isLoading = false;
 				this.pendingOperations = [];
-				this.productsCount = this.products.length;
+				this.productsCount = updateCartData.products.length;
 				return true;
 			}
 		);
