@@ -62,6 +62,37 @@
 		<body-content>empty</body-content>
 	</tag>
 	<tag>
+		<name>price</name>
+		<tag-class>
+			com.liferay.commerce.frontend.taglib.servlet.taglib.PriceTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>additionalDiscountedClasses</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>additionalOldPriceClasses</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>additionalPriceClasses</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>CPInstanceId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>quantity</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>product-details-modal</name>
 		<tag-class>
 			com.liferay.commerce.frontend.taglib.servlet.taglib.ProductDetailsModalTag</tag-class>

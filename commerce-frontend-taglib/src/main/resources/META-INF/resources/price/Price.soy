@@ -32,10 +32,10 @@
 	{@param? additionalDiscountedClasses: string}
 	{@param? additionalOldPriceClasses: string}
 	<span>
-		<span class="price price--discounted{$additionalDiscountedClasses}">
+		<span class="price price--discounted {$additionalDiscountedClasses}">
 			{$prices.promoPrice}
 		</span>
-		<span class="price price--old{$additionalOldPriceClasses}">
+		<span class="price price--old {$additionalOldPriceClasses}">
 			{$prices.price}
 		</span>
 	</span>
@@ -50,7 +50,7 @@
 	]}
 	{@param? additionalPriceClasses: string}
 
-	<span class="price{$additionalPriceClasses}">
+	<span class="price {$additionalPriceClasses}">
 		{$prices.price}
 	</span>
 {/template}

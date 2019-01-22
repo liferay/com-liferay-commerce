@@ -20,6 +20,7 @@ import com.liferay.commerce.frontend.ClayTableRegistry;
 import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 import com.liferay.commerce.frontend.FilterFactoryRegistry;
+import com.liferay.commerce.price.CommerceProductPriceCalculation;
 
 import javax.servlet.ServletContext;
 
@@ -56,6 +57,12 @@ public class ServletContextUtil {
 		getCommerceDataProviderRegistry() {
 
 		return _instance._getCommerceDataProviderRegistry();
+	}
+
+	public static final CommerceProductPriceCalculation
+		getCommerceProductPriceCalculation() {
+
+		return _instance._getCommerceProductPriceCalculation();
 	}
 
 	public static final FilterFactoryRegistry getFilterFactoryRegistry() {
@@ -112,6 +119,13 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
+	protected void setCommerceProductPriceCalculation(
+		CommerceProductPriceCalculation commerceProductPriceCalculation) {
+
+		_commerceProductPriceCalculation = commerceProductPriceCalculation;
+	}
+
+	@Reference(unbind = "-")
 	protected void setFilterFactoryRegistry(
 		FilterFactoryRegistry filterFactoryRegistry) {
 
@@ -148,6 +162,12 @@ public class ServletContextUtil {
 		return _commerceDataProviderRegistry;
 	}
 
+	private CommerceProductPriceCalculation
+		_getCommerceProductPriceCalculation() {
+
+		return _commerceProductPriceCalculation;
+	}
+
 	private FilterFactoryRegistry _getFilterFactoryRegistry() {
 		return _filterFactoryRegistry;
 	}
@@ -164,6 +184,7 @@ public class ServletContextUtil {
 	private ClayTableRegistry _clayTableRegistry;
 	private ClayTableSerializer _clayTableSerializer;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
+	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 	private FilterFactoryRegistry _filterFactoryRegistry;
 	private ServletContext _servletContext;
 
