@@ -105,8 +105,8 @@ public class CPDefinitionsImporter {
 
 	private CPDefinition _addCPDefinition(
 			String name, String shortDescription, String description,
-			String sku, String taxCategory, long[] assetCategoryIds,
-			ServiceContext serviceContext)
+			String sku, String taxCategory, long width, long height, long depth,
+			long weight, long[] assetCategoryIds, ServiceContext serviceContext)
 		throws PortalException {
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
@@ -153,12 +153,13 @@ public class CPDefinitionsImporter {
 
 		return _cpDefinitionLocalService.addCPDefinition(
 			nameMap, shortDescriptionMap, descriptionMap, nameMap, null, null,
-			null, "simple", true, true, false, false, 0, 10, 10, 10, 10,
-			_getCPTaxCategoryId(taxCategory, serviceContext), false, false,
-			null, true, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, true, sku, StringPool.BLANK, serviceContext);
+			null, "simple", true, true, false, false, 0, width, height, depth,
+			weight, _getCPTaxCategoryId(taxCategory, serviceContext), false,
+			false, null, true, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, true, sku,
+			StringPool.BLANK, serviceContext);
 	}
 
 	private void _addWarehouseQuantities(
@@ -236,6 +237,11 @@ public class CPDefinitionsImporter {
 		String sku = jsonObject.getString("Sku");
 		String taxCategory = jsonObject.getString("TaxCategory");
 
+		long width = jsonObject.getLong("Width");
+		long height = jsonObject.getLong("Height");
+		long length = jsonObject.getLong("Length");
+		long weight = jsonObject.getLong("Weight");
+
 		long[] assetCategoryIds = ListUtil.toLongArray(
 			assetCategories, AssetCategory.CATEGORY_ID_ACCESSOR);
 
@@ -244,8 +250,8 @@ public class CPDefinitionsImporter {
 		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
 
 		CPDefinition cpDefinition = _addCPDefinition(
-			name, shortDescription, description, sku, taxCategory,
-			assetCategoryIds, serviceContext);
+			name, shortDescription, description, sku, taxCategory, width,
+			height, length, weight, assetCategoryIds, serviceContext);
 
 		serviceContext.setWorkflowAction(originalWorkflowAction);
 
