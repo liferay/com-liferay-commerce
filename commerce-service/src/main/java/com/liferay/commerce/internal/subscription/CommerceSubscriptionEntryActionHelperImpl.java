@@ -63,7 +63,9 @@ public class CommerceSubscriptionEntryActionHelperImpl
 			_configurationProvider.getSystemConfiguration(
 				CommerceSubscriptionConfiguration.class);
 
-		if (commerceSubscriptionConfiguration.cancelSubscription()) {
+		if (commerceSubscriptionConfiguration.
+				subscriptionCancellationAllowed()) {
+
 			_commerceSubscriptionEntryLocalService.updateSubscriptionStatus(
 				commerceSubscriptionEntryId,
 				CommerceSubscriptionEntryConstants.
@@ -80,7 +82,7 @@ public class CommerceSubscriptionEntryActionHelperImpl
 			_configurationProvider.getSystemConfiguration(
 				CommerceSubscriptionConfiguration.class);
 
-		if (commerceSubscriptionConfiguration.suspendSubscription()) {
+		if (commerceSubscriptionConfiguration.subscriptionSuspensionAllowed()) {
 			_commerceSubscriptionEntryLocalService.updateSubscriptionStatus(
 				commerceSubscriptionEntryId,
 				CommerceSubscriptionEntryConstants.
