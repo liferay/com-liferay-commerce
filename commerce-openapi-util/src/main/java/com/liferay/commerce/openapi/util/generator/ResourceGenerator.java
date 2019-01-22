@@ -319,10 +319,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 	private String _getResponse(List<Response> responses) {
 		for (Response response : responses) {
-			if (response.getStatus() == 201) {
-				return "Response.created();\n";
-			}
-			else if (response.getStatus() == 202) {
+			if (response.getStatus() == 202) {
 				return "Response.accepted();\n";
 			}
 			else if (response.getStatus() == 204) {
