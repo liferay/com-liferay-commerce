@@ -181,14 +181,14 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 		int end = searchContainer.getEnd();
 
+		int total = commerceOrders.size();
+
 		if (total < end) {
 			end = total;
 		}
 
 		searchContainer.setResults(
 			commerceOrders.subList(searchContainer.getStart(), end));
-
-		int total = commerceOrders.size();
 
 		searchContainer.setTotal(total);
 
@@ -419,7 +419,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 		}
 		else if (navigation.equals("never-ends")) {
 			emptyResultsMessage = "there-are-no-unlimited-subscriptions";
-			maxSubscriptionCycles = 0;
+			maxSubscriptionCycles = 0L;
 		}
 
 		SearchContainer<CommerceSubscriptionEntry> searchContainer =
