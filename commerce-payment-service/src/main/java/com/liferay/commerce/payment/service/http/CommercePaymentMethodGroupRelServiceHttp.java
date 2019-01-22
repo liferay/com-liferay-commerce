@@ -130,15 +130,14 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 	}
 
 	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel createCommercePaymentMethodGroupRel(
-		HttpPrincipal httpPrincipal, long commercePaymentMethodGroupRelId)
+		HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePaymentMethodGroupRelServiceUtil.class,
 					"createCommercePaymentMethodGroupRel",
 					_createCommercePaymentMethodGroupRelParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commercePaymentMethodGroupRelId);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
 			Object returnObj = null;
 
@@ -163,8 +162,7 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 	}
 
 	public static void deleteCommerceAddressRestriction(
-		HttpPrincipal httpPrincipal, long commerceAddressRestrictionId,
-		long groupId)
+		HttpPrincipal httpPrincipal, long commerceAddressRestrictionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePaymentMethodGroupRelServiceUtil.class,
@@ -172,7 +170,7 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 					_deleteCommerceAddressRestrictionParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAddressRestrictionId, groupId);
+					commerceAddressRestrictionId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -223,8 +221,7 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
 		HttpPrincipal httpPrincipal, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
-		long groupId)
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePaymentMethodGroupRelServiceUtil.class,
@@ -232,7 +229,7 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 					_getCommerceAddressRestrictionsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, classPK,
-					start, end, orderByComparator, groupId);
+					start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -257,15 +254,14 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 	}
 
 	public static int getCommerceAddressRestrictionsCount(
-		HttpPrincipal httpPrincipal, long classPK, long groupId)
+		HttpPrincipal httpPrincipal, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePaymentMethodGroupRelServiceUtil.class,
 					"getCommerceAddressRestrictionsCount",
 					_getCommerceAddressRestrictionsCountParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, classPK,
-					groupId);
+			MethodHandler methodHandler = new MethodHandler(methodKey, classPK);
 
 			Object returnObj = null;
 
@@ -576,16 +572,16 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 	private static final Class<?>[] _createCommercePaymentMethodGroupRelParameterTypes2 =
 		new Class[] { long.class };
 	private static final Class<?>[] _deleteCommerceAddressRestrictionParameterTypes3 =
-		new Class[] { long.class, long.class };
+		new Class[] { long.class };
 	private static final Class<?>[] _deleteCommercePaymentMethodGroupRelParameterTypes4 =
 		new Class[] { long.class };
 	private static final Class<?>[] _getCommerceAddressRestrictionsParameterTypes5 =
 		new Class[] {
 			long.class, int.class, int.class,
-			com.liferay.portal.kernel.util.OrderByComparator.class, long.class
+			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getCommerceAddressRestrictionsCountParameterTypes6 =
-		new Class[] { long.class, long.class };
+		new Class[] { long.class };
 	private static final Class<?>[] _getCommercePaymentMethodGroupRelParameterTypes7 =
 		new Class[] { long.class };
 	private static final Class<?>[] _getCommercePaymentMethodGroupRelParameterTypes8 =

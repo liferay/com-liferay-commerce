@@ -83,10 +83,10 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 	}
 
 	public static com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap createCommercePaymentMethodGroupRel(
-		long commercePaymentMethodGroupRelId) throws RemoteException {
+		long groupId) throws RemoteException {
 		try {
 			com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel returnValue =
-				CommercePaymentMethodGroupRelServiceUtil.createCommercePaymentMethodGroupRel(commercePaymentMethodGroupRelId);
+				CommercePaymentMethodGroupRelServiceUtil.createCommercePaymentMethodGroupRel(groupId);
 
 			return com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap.toSoapModel(returnValue);
 		}
@@ -98,11 +98,9 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 	}
 
 	public static void deleteCommerceAddressRestriction(
-		long commerceAddressRestrictionId, long groupId)
-		throws RemoteException {
+		long commerceAddressRestrictionId) throws RemoteException {
 		try {
-			CommercePaymentMethodGroupRelServiceUtil.deleteCommerceAddressRestriction(commerceAddressRestrictionId,
-				groupId);
+			CommercePaymentMethodGroupRelServiceUtil.deleteCommerceAddressRestriction(commerceAddressRestrictionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -125,12 +123,12 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceAddressRestrictionSoap[] getCommerceAddressRestrictions(
 		long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator,
-		long groupId) throws RemoteException {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
+		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> returnValue =
 				CommercePaymentMethodGroupRelServiceUtil.getCommerceAddressRestrictions(classPK,
-					start, end, orderByComparator, groupId);
+					start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceAddressRestrictionSoap.toSoapModels(returnValue);
 		}
@@ -141,11 +139,10 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 		}
 	}
 
-	public static int getCommerceAddressRestrictionsCount(long classPK,
-		long groupId) throws RemoteException {
+	public static int getCommerceAddressRestrictionsCount(long classPK)
+		throws RemoteException {
 		try {
-			int returnValue = CommercePaymentMethodGroupRelServiceUtil.getCommerceAddressRestrictionsCount(classPK,
-					groupId);
+			int returnValue = CommercePaymentMethodGroupRelServiceUtil.getCommerceAddressRestrictionsCount(classPK);
 
 			return returnValue;
 		}
