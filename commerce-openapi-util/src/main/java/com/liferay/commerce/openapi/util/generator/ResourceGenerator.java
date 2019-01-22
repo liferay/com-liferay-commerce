@@ -543,7 +543,11 @@ public class ResourceGenerator extends BaseSourceGenerator {
 					sb.append("Collections.emptyList(), 0);\n");
 				}
 				else {
-					sb.append("\t\treturn null;\n");
+					sb.append("\t\treturn new ");
+
+					sb.append(schemaComponentDefinition.getName());
+
+					sb.append("DTO();\n");
 				}
 			}
 			else {
