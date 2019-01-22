@@ -12,12 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.media.dl.internal;
+package com.liferay.commerce.media.internal;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
-import com.liferay.commerce.constants.CommerceMediaConstants;
 import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.media.constants.CommerceMediaConstants;
+import com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPRule;
@@ -31,24 +32,29 @@ import com.liferay.commerce.product.util.CPRulesThreadLocal;
 import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.petra.string.CharPool;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.File;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Html;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.URLCodec;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
@@ -58,6 +64,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -66,7 +73,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alec Sloan
  */
 @Component(service = CommerceMediaResolver.class)
-public class DLCommerceMediaResolver implements CommerceMediaResolver {
+public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 	@Override
 	public String getDownloadUrl(long cpAttachmentFileEntryId)
@@ -130,7 +137,13 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 		}
 
 		if (cpAttachmentFileEntry == null) {
-			sb.append("/default/");
+			sb.append("/default/?groupId=");
+
+			HttpSession httpSession = PortalSessionThreadLocal.getHttpSession();
+
+			sb.append(
+				GetterUtil.getLong(
+					httpSession.getAttribute(WebKeys.VISITED_GROUP_ID_RECENT)));
 
 			return _html.escape(sb.toString());
 		}
@@ -192,7 +205,17 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 		String[] pathArray = StringUtil.split(path, CharPool.SLASH);
 
 		if (pathArray.length < 2) {
-			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+			long groupId = ParamUtil.getLong(httpServletRequest, "groupId", 0);
+
+			if (groupId == 0) {
+				httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+
+				return;
+			}
+
+			sendDefaultMediaBytes(
+				httpServletRequest, httpServletResponse, contentDisposition,
+				groupId);
 
 			return;
 		}
@@ -222,14 +245,16 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 			FileEntry fileEntry = getFileEntry(httpServletRequest);
 
 			if (fileEntry == null) {
-				httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+				sendDefaultMediaBytes(
+					httpServletRequest, httpServletResponse, contentDisposition,
+					cProduct.getGroupId());
 
 				return;
 			}
 
 			ServletResponseUtil.sendFile(
 				httpServletRequest, httpServletResponse,
-				fileEntry.getFileName(), getMediaBytes(httpServletRequest),
+				fileEntry.getFileName(), getMediaBytes(fileEntry),
 				fileEntry.getMimeType(), contentDisposition);
 		}
 		catch (PortalException pe) {
@@ -253,6 +278,47 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 		long fileEntryId = GetterUtil.getLong(pathArray[pathArray.length - 2]);
 
 		return _dlAppLocalService.getFileEntry(fileEntryId);
+	}
+
+	protected FileEntry getFileEntry(long fileEntryId) throws PortalException {
+		return _dlAppLocalService.getFileEntry(fileEntryId);
+	}
+
+	protected void sendDefaultMediaBytes(
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse, String contentDisposition,
+			long groupId)
+		throws IOException {
+
+		try {
+			CommerceMediaDefaultImageConfiguration
+				commerceMediaDefaultImageConfiguration =
+					ConfigurationProviderUtil.getConfiguration(
+						CommerceMediaDefaultImageConfiguration.class,
+						new GroupServiceSettingsLocator(
+							groupId,
+							CommerceMediaDefaultImageConfiguration.class.
+								getName()));
+
+			FileEntry fileEntry = getFileEntry(
+				commerceMediaDefaultImageConfiguration.defaultFileEntryId());
+
+			if (fileEntry == null) {
+				httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+
+				return;
+			}
+
+			ServletResponseUtil.sendFile(
+				httpServletRequest, httpServletResponse,
+				fileEntry.getFileName(), getMediaBytes(fileEntry),
+				fileEntry.getMimeType(), contentDisposition);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+
+			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+		}
 	}
 
 	protected void setCPRules(
@@ -287,7 +353,7 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		DLCommerceMediaResolver.class);
+		DefaultCommerceMediaResolver.class);
 
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;
