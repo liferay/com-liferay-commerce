@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import javax.portlet.ActionRequest;
@@ -81,8 +80,6 @@ public class EditCommercePaymentMethodGroupRelAddressRestrictionMVCActionCommand
 			ActionRequest actionRequest)
 		throws Exception {
 
-		long groupId = _portal.getScopeGroupId(actionRequest);
-
 		long[] deleteCommerceAddressRestrictionIds = null;
 
 		long commerceAddressRestrictionId = ParamUtil.getLong(
@@ -104,7 +101,7 @@ public class EditCommercePaymentMethodGroupRelAddressRestrictionMVCActionCommand
 
 			_commercePaymentMethodGroupRelService.
 				deleteCommerceAddressRestriction(
-					deleteCommerceAddressRestrictionId, groupId);
+					deleteCommerceAddressRestrictionId);
 		}
 	}
 
@@ -148,8 +145,5 @@ public class EditCommercePaymentMethodGroupRelAddressRestrictionMVCActionCommand
 	@Reference
 	private CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
-
-	@Reference
-	private Portal _portal;
 
 }
