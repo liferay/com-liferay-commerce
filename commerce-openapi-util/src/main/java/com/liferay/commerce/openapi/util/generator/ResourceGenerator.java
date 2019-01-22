@@ -238,7 +238,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 				_getContextParametersDeclaration(method, annotateParameter));
 		}
 
-		sb.append(")");
+		sb.append(") throws Exception");
 
 		return sb.toString();
 	}
