@@ -38,11 +38,11 @@ public class ClayTableUtil {
 			HttpServletRequest httpServletRequest, long groupId)
 		throws PortalException {
 
+		List<ClayTableRow> clayTableRows = new ArrayList<>();
+
 		List<ClayTableActionProvider> clayTableActionProviders =
 			_clayTableActionProviderRegistry.getClayTableActionProviders(
 				tableName);
-
-		List<ClayTableRow> clayTableRows = new ArrayList<>();
 
 		for (Object item : items) {
 			ClayTableRow clayTableRow = new ClayTableRow(item);

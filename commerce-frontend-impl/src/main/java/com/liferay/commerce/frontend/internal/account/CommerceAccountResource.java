@@ -130,7 +130,7 @@ public class CommerceAccountResource {
 		@QueryParam("page") int page, @QueryParam("pageSize") int pageSize,
 		@Context UriInfo uriInfo, @Context ThemeDisplay themeDisplay) {
 
-		AccountList accountList;
+		AccountList accountList = null;
 
 		themeDisplay.setScopeGroupId(groupId);
 
@@ -191,7 +191,7 @@ public class CommerceAccountResource {
 
 		themeDisplay.setScopeGroupId(groupId);
 
-		OrderList orderList;
+		OrderList orderList = null;
 
 		try {
 			orderList = getOrderList(
@@ -223,7 +223,7 @@ public class CommerceAccountResource {
 		@QueryParam("q") String queryString,
 		@Context ThemeDisplay themeDisplay) {
 
-		AccountOrganizationList accountOrganizationList;
+		AccountOrganizationList accountOrganizationList = null;
 
 		try {
 			accountOrganizationList = getAccountOrganizationList(
@@ -245,7 +245,7 @@ public class CommerceAccountResource {
 		@QueryParam("q") String queryString,
 		@Context ThemeDisplay themeDisplay) {
 
-		AccountUserList accountUserList;
+		AccountUserList accountUserList = null;
 
 		try {
 			accountUserList = getAccountUserList(

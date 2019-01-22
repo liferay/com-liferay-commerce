@@ -65,7 +65,6 @@ public class ClayTableSerializerImpl implements ClayTableSerializer {
 			JSONObject jsonObject = _jsonFactory.createJSONObject();
 
 			String label = clayTableSchemaField.getLabel();
-			String name = clayTableSchemaField.getFieldName();
 
 			if (Validator.isNull(label)) {
 				label = StringPool.BLANK;
@@ -73,7 +72,11 @@ public class ClayTableSerializerImpl implements ClayTableSerializer {
 
 			jsonObject.put(
 				"contentRenderer", clayTableSchemaField.getContentRenderer());
+
+			String name = clayTableSchemaField.getFieldName();
+
 			jsonObject.put("fieldName", name);
+
 			jsonObject.put("label", label);
 			jsonObject.put("sortable", clayTableSchemaField.isSortable());
 
