@@ -59,6 +59,23 @@ public class CPOptionServiceImpl extends CPOptionServiceBaseImpl {
 	}
 
 	@Override
+	public CPOption fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CPOption cpOption = cpOptionLocalService.fetchByExternalReferenceCode(
+			companyId, externalReferenceCode);
+
+		if (cpOption != null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(), cpOption.getGroupId(),
+				CPActionKeys.MANAGE_CATALOG);
+		}
+
+		return cpOption;
+	}
+
+	@Override
 	public CPOption fetchCPOption(long cpOptionId) throws PortalException {
 		CPOption cpOption = cpOptionLocalService.fetchCPOption(cpOptionId);
 
