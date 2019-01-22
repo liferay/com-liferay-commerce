@@ -119,31 +119,30 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 	@Override
 	public List<CommerceAccount> getUserCommerceAccounts(
-			int commerceSiteType, int start, int end)
+			long userId, int commerceSiteType, int start, int end)
 		throws PortalException {
 
 		return commerceAccountService.getUserCommerceAccounts(
-			null, commerceSiteType, StringPool.BLANK, start, end);
+			userId, null, commerceSiteType, StringPool.BLANK, start, end);
 	}
 
 	@Override
 	public List<CommerceAccount> getUserCommerceAccounts(
-			Long parentCommerceAccountId, int commerceSiteType, String keywords,
-			int start, int end)
-		throws PortalException {
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
+		String keywords, int start, int end) {
 
 		return commerceAccountLocalService.getUserCommerceAccounts(
-			getUserId(), parentCommerceAccountId, commerceSiteType, keywords,
-			start, end);
+			userId, parentCommerceAccountId, commerceSiteType, keywords, start,
+			end);
 	}
 
 	@Override
 	public int getUserCommerceAccountsCount(
-			Long parentCommerceAccountId, int commerceSiteType, String keywords)
-		throws PortalException {
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
+		String keywords) {
 
 		return commerceAccountLocalService.getUserCommerceAccountsCount(
-			getUserId(), parentCommerceAccountId, commerceSiteType, keywords);
+			userId, parentCommerceAccountId, commerceSiteType, keywords);
 	}
 
 	@Override
