@@ -77,8 +77,8 @@ public class MethodImporter {
 			if (httpMethodJSONNode.has("requestBody")) {
 				JsonNode requestBody = httpMethodJSONNode.get("requestBody");
 
-				List<Content> contents = _getContents(
-					requestBody.get("content"));
+				List<Content> contents = ContentImporter.getContents(
+					requestBody);
 
 				if (!contents.isEmpty()) {
 					Content content = contents.get(0);
@@ -117,20 +117,10 @@ public class MethodImporter {
 				entry -> {
 					JsonNode jsonNode = entry.getValue();
 
-					if (jsonNode.has("content")) {
-						List<Content> contents = _getContents(
-							jsonNode.get("content"));
-
-						responses.add(
-							new Response(
-								GetterUtil.getInteger(entry.getKey()),
-								contents));
-					}
-					else {
-						responses.add(
-							new Response(
-								GetterUtil.getInteger(entry.getKey()), null));
-					}
+					responses.add(
+						new Response(
+							GetterUtil.getInteger(entry.getKey()),
+							ContentImporter.getContents(jsonNode)));
 				});
 
 			List<Extension> extensions = _getMethodExtensions(
@@ -145,28 +135,6 @@ public class MethodImporter {
 		_logger.trace("Imported {} methods for path {}", methods.size(), path);
 
 		return methods;
-	}
-
-	private List<Content> _getContents(JsonNode contentJsonNode) {
-		List<Content> contents = new ArrayList<>();
-
-		Iterator<String> fieldNames = contentJsonNode.fieldNames();
-
-		fieldNames.forEachRemaining(
-			mimeType -> {
-				JsonNode mimeTypeJSONNode = contentJsonNode.get(mimeType);
-
-				Schema schema = null;
-
-				if (mimeTypeJSONNode.has("schema")) {
-					schema = ParameterImporter.getSchema(
-						mimeTypeJSONNode.get("schema"));
-				}
-
-				contents.add(new Content(mimeType, schema));
-			});
-
-		return contents;
 	}
 
 	private List<Extension> _getMethodExtensions(
