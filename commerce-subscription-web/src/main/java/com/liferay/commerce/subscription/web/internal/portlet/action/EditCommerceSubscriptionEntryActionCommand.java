@@ -85,10 +85,10 @@ public class EditCommerceSubscriptionEntryActionCommand
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
 		long commerceSubscriptionEntryId = ParamUtil.getLong(
 			actionRequest, "commerceSubscriptionEntryId");
+
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.DELETE)) {

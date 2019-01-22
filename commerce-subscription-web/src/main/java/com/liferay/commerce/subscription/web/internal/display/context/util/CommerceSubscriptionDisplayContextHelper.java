@@ -62,10 +62,6 @@ public class CommerceSubscriptionDisplayContextHelper {
 			return null;
 		}
 
-		CommerceSubscriptionConfiguration commerceSubscriptionConfiguration =
-			_configurationProvider.getSystemConfiguration(
-				CommerceSubscriptionConfiguration.class);
-
 		DropdownItemList dropdownItems = new DropdownItemList();
 
 		if (CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_SUSPENDED ==
@@ -74,6 +70,11 @@ public class CommerceSubscriptionDisplayContextHelper {
 			dropdownItems.add(_getDropdownItem("activate"));
 		}
 		else {
+			CommerceSubscriptionConfiguration
+				commerceSubscriptionConfiguration =
+					_configurationProvider.getSystemConfiguration(
+						CommerceSubscriptionConfiguration.class);
+
 			if (commerceSubscriptionConfiguration.suspendSubscription() &&
 				(subscriptionStatus !=
 					CommerceSubscriptionEntryConstants.
@@ -100,15 +101,15 @@ public class CommerceSubscriptionDisplayContextHelper {
 
 		ActionURL actionURL = liferayPortletResponse.createActionURL();
 
-		actionURL.setParameter(Constants.CMD, cmd);
 		actionURL.setParameter(
 			ActionRequest.ACTION_NAME, "editCommerceSubscriptionEntry");
-		actionURL.setParameter(
-			"redirect", PortalUtil.getCurrentURL(_portletRequest));
+		actionURL.setParameter(Constants.CMD, cmd);
 		actionURL.setParameter(
 			"commerceSubscriptionEntryId",
 			String.valueOf(
 				_commerceSubscriptionEntry.getCommerceSubscriptionEntryId()));
+		actionURL.setParameter(
+			"redirect", PortalUtil.getCurrentURL(_portletRequest));
 
 		return actionURL;
 	}
@@ -118,7 +119,8 @@ public class CommerceSubscriptionDisplayContextHelper {
 
 		dropdownItem.setHref(_getActionURL(cmd));
 		dropdownItem.setLabel(
-			LanguageUtil.get(PortalUtil.getLocale(_portletRequest), cmd));
+			LanguageUtil.get(
+				PortalUtil.getHttpServletRequest(_portletRequest), cmd));
 
 		return dropdownItem;
 	}
