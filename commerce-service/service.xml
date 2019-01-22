@@ -674,8 +674,8 @@
 
 		<!-- Other fields -->
 
-		<column name="commerceSubscriptionEntryId" type="long" />
 		<column name="commerceOrderItemId" type="long" />
+		<column name="commerceSubscriptionEntryId" type="long" />
 		<column name="renew" type="boolean" />
 
 		<!-- Order -->
@@ -689,11 +689,11 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="CommerceSubscriptionEntryId" return-type="Collection">
-			<finder-column name="commerceSubscriptionEntryId" />
-		</finder>
 		<finder name="CommerceOrderItemId" return-type="CommerceSubscriptionCycleEntry" unique="true">
 			<finder-column name="commerceOrderItemId" />
+		</finder>
+		<finder name="CommerceSubscriptionEntryId" return-type="Collection">
+			<finder-column name="commerceSubscriptionEntryId" />
 		</finder>
 	</entity>
 	<entity local-service="true" name="CommerceSubscriptionEntry" remote-service="true" uuid="true">

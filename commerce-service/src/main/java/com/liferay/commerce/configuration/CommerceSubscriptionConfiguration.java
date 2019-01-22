@@ -32,23 +32,32 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 public interface CommerceSubscriptionConfiguration {
 
-	@Meta.AD(deflt = "10", name = "renewal-check-interval-minutes", required = false)
-	public int renewalCheckIntervalMinutes();
-
 	@Meta.AD(
-		deflt = "10", name = "order-status-update-interval-minutes", required = false
+		deflt = "10", name = "order-status-update-interval-minutes",
+		required = false
 	)
 	public int orderStatusUpdateIntervalMinutes();
-
-	@Meta.AD(deflt = "false", name = "subscription-cancellation-allowed", required = false)
-	public boolean subscriptionCancellationAllowed();
-
-	@Meta.AD(deflt = "false", name = "subscription-suspension-allowed", required = false)
-	public boolean subscriptionSuspensionAllowed();
 
 	@Meta.AD(
 		deflt = "99", name = "payment-attempts-max-count", required = false
 	)
 	public int paymentAttemptsMaxCount();
+
+	@Meta.AD(
+		deflt = "10", name = "renewal-check-interval-minutes", required = false
+	)
+	public int renewalCheckIntervalMinutes();
+
+	@Meta.AD(
+		deflt = "false", name = "subscription-cancellation-allowed",
+		required = false
+	)
+	public boolean subscriptionCancellationAllowed();
+
+	@Meta.AD(
+		deflt = "false", name = "subscription-suspension-allowed",
+		required = false
+	)
+	public boolean subscriptionSuspensionAllowed();
 
 }
