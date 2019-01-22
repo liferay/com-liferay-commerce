@@ -11,24 +11,38 @@ import '../input_utils/CommerceInputText';
 class AddAddressModal extends Component {
 
 
-	rendered() {
+	attached() {
 		this._fetchCountries();
 	}
-
-	_handleFirstDotClick() {
-		return this.stage = 1;
+	
+	sync_addressType(){
+		return this._fetchCountries();
 	}
 
-	_handleSecondDotClick() {
-		return this.stage = 2;
+	sync_formData(){
+		return this._validateForms();
+	}
+
+	_handleFirstDotClick(e) {
+		e.preventDefault();
+		return this._stage = 1;
+	}
+
+	_handleSecondDotClick(e) {
+		return this._handleNextButton(e);
+	}
+
+	_handleTypeChange(evt) {
+		return this.addressType = evt.target.value;
 	}
 
 	_handleNextButton(e) {
 		e.preventDefault();
-
-		if (this.noErrors) {
-			return this.stage = 2;
+		this._isFirstFormValid = this.refs.modal.refs.firstForm.checkValidity();
+		if(this._isFirstFormValid) {
+			return this._stage = 2;
 		}
+		return false
 	}
 
 	_handleCloseModal(e) {
@@ -36,102 +50,109 @@ class AddAddressModal extends Component {
 		this._isVisible = false;
 	}
 
-	syncQuery() {
-		this._isLoading = true;
-		return this._debouncedFetchUser();
-	}
-
-	_handleFormSubmit(evt) {
-		evt.preventDefault();
-		if (this.query.match(EMAIL_REGEX)) {
-			this.addedUsers = [
-				...this.addedUsers,
+	_handleSelectBox(evt) {
+		const value = evt.target.value;
+		if(evt.target.name === "commerceCountry") {
+			this._formData = Object.assign(
+				{},
+				this._formData,
 				{
-					email: this.query
+					country: value
 				}
-			];
-			this.query = '';
-			return true;
+				)
+				this._fetchRegions();
+		} else {
+			this._formData = Object.assign(
+				{},
+				this._formData,
+				{
+					region: value
+				}
+			)
 		}
-		return false;
+		return value;
 	}
 
 	_handleInputBox(evt) {
-		console.log(evt.target);
-		if (evt.keyCode === 8 && !this.query.length) {
-			this.addedUsers = this.addedUsers.slice(0, -1);
-			return false;
-		}
-		return this.query = evt.target.value;
+		this._formData = Object.assign(
+			{},
+			this._formData,
+			{
+				[evt.target.name]: evt.target.value
+			}
+		)
+		return evt.target.value;
+	}
+
+	_validateForms(form) {
+		const isFirstFormValid = 
+			!!(
+				this._formData.address && this._formData.address.length &&
+				this._formData.city && this._formData.city.length &&
+				this._formData.zipCode && this._formData.zipCode.length &&
+				this._formData.country && this._formData.country.length &&
+				this._formData.region && this._formData.region.length
+			)
+		this._isFirstFormValid = isFirstFormValid;
+
+		const isSecondFormValid = 
+			!!(
+				this._formData.referent && this._formData.referent.length &&
+				this._formData.email && this._formData.email.length &&
+				this._formData.telephone && this._formData.telephone.length
+			)
+		this._isSecondFormValid = isSecondFormValid;
+
+		return this._isFirstFormValid && this._isSecondFormValid;
 	}
 
 	_fetchCountries() {
 		return fetch(
-			this.countriesAPI,
-			{
-				method: 'POST',
-				body: {
-					commerceCountryId: countryId,
-					active: true
-				}
-			}
-		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				response => {
-					console.log(response);
-					this._isLoading = false;
-					return this.users = response.users;
-				}
-			);
-	}
-
-	_fetchShipingCountries() {
-		return fetch(
-			this.shippingCountriesAPI + themeDisplay.getScopeGroupId(),
+			(this.addressType === 'shipping' ? this.shippingCountriesAPI : this.billingCountriesAPI)
+			+ themeDisplay.getScopeGroupId(),
 			{
 				method: 'GET'
 			}
 		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				response => {
-					console.log(response);
-					this._isLoading = false;
-					return this.users = response.users;
-				}
-			);
+		.then(
+			response => response.json()
+		)
+		.then(
+			countries => {
+				return this._countries = countries;
+			}
+		);
 	}
 
-	_fetchRegions(countryId) {
+	_fetchRegions() {
 		return fetch(
-			this.regionsAPI + countryId,
+			this.regionsAPI + this._formData.country,
 			{
 				method: 'GET'
 			}
 		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				response => {
-					console.log(response);
-					this._isLoading = false;
-					return this.users = response.users;
-				}
-			);
+		.then(
+			response => response.json()
+		)
+		.then(
+			regions => {
+				return this._regions = regions;
+			}
+		);
 	}
 
-	_handleAddAddress(e) {
+	_handleFormSubmit(e) {
 		e.preventDefault();
+		const isFormValid = e.target.checkValidity();
+		if(isFormValid) {
+			this._addAddress(e);
+		}
+	}
 
+	_addAddress(e) {
 		return this.emit(
-			'AddAddressModalSave',
-			data
+			'addAddressModalSave',
+			this._formData
 		);
 	}
 
@@ -151,7 +172,7 @@ class AddAddressModal extends Component {
 Soy.register(AddAddressModal, template);
 
 AddAddressModal.STATE = {
-	stage: Config.number(
+	_stage: Config.number(
 		Config.oneOf(
 			[
 				1,
@@ -159,34 +180,66 @@ AddAddressModal.STATE = {
 			]
 		)
 	).value(1),
-	formData: Config.shapeOf(
+	addressType: Config.oneOf(
+		[
+			'billing',
+			'shipping'
+		]
+	).internal(),
+	_isFirstFormValid: Config.bool().value(false),
+	_isSecondFormValid: Config.bool().value(false),
+	_formData: Config.shapeOf(
 		{
 			address: Config.string(),
 			city: Config.string(),
-			state: Config.string(),
 			zipCode: Config.string(),
-			country: Config.string(),
+			country: Config.oneOfType(
+				[
+					Config.string(),
+					Config.number()
+				]
+			),
+			region: Config.oneOfType(
+				[
+					Config.string(),
+					Config.number()
+				]
+			),
 			referent: Config.string(),
 			email: Config.string(),
 			telephone: Config.string()
 		}
 	).value(
 		{
-			address: '',
-			city: '',
-			state: '',
-			zipCode: '',
-			country: '',
-			referent: '',
-			email: '',
-			telephone: ''
+			address: null,
+			city: null,
+			region: null,
+			zipCode: null,
+			country: null,
+			referent: null,
+			email: null,
+			telephone: null
 		}
 	),
 	shippingCountriesAPI: Config.string().required(),
 	billingCountriesAPI: Config.string().required(),
 	regionsAPI: Config.string().required(),
-	countries: Config.array().value([]),
-	regions: Config.array().value([]),
+	_countries: Config.array(
+		Config.shapeOf(
+			{
+				id: Config.number().required(),
+				name: Config.string().required()
+			}
+		)
+	).value([]),
+	_regions: Config.array(
+		Config.shapeOf(
+			{
+				id: Config.number().required(),
+				name: Config.string().required()
+			}
+		)
+	).value([]),
 	spritemap: Config.string(),
 	_isVisible: Config.bool().internal().value(false),
 	_isLoading: Config.bool().internal().value(false)
