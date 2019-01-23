@@ -32,10 +32,23 @@ public enum RESTError {
 	INTERNAL_ERROR(
 		998, "Internal error. Please try again later.",
 		Response.Status.INTERNAL_SERVER_ERROR),
+	INVALID_COMMERCE_PRICE_LIST_DISPLAY_DATE(
+		995, "Invalid commerce price list display date.",
+		Response.Status.BAD_REQUEST),
+	INVALID_COMMERCE_PRICE_LIST_EXPIRATION_DATE(
+		994, "Invalid commerce price list expiration date.",
+		Response.Status.BAD_REQUEST),
 	NO_SUCH_CP_INSTANCE(
 		987, "Unable to find product instance", Response.Status.NOT_FOUND),
+	NO_SUCH_CURRENCY(
+		996,
+		"Unable to find currency. Currency code should be expressed with " +
+			"3-letter ISO 4217 format.",
+		Response.Status.NOT_FOUND),
 	NO_SUCH_PRICE_ENTRY(
 		989, "Unable to find price entry", Response.Status.NOT_FOUND),
+	NO_SUCH_PRICE_LIST(
+		997, "Unable to find price list.", Response.Status.NOT_FOUND),
 	NO_SUCH_PRODUCT_OPTION(
 		992, "Unable to find product option.", Response.Status.NOT_FOUND),
 	NO_SUCH_PRODUCT_OPTION_VALUE(

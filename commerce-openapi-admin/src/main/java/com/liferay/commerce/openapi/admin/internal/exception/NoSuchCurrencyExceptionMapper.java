@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.exception;
 
 import com.liferay.commerce.currency.exception.NoSuchCurrencyException;
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
+import com.liferay.commerce.openapi.core.exception.RESTError;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -37,18 +38,17 @@ public class NoSuchCurrencyExceptionMapper
 
 	@Override
 	public int getErrorCode() {
-		return 996;
+		return RESTError.NO_SUCH_CURRENCY.getErrorCode();
 	}
 
 	@Override
 	public String getErrorDescription() {
-		return "Unable to find currency. Currency code should be expressed " +
-			"with 3-letter ISO 4217 format.";
+		return RESTError.NO_SUCH_CURRENCY.getErrorDescription();
 	}
 
 	@Override
 	public Response.Status getStatus() {
-		return Response.Status.CONFLICT;
+		return RESTError.NO_SUCH_CURRENCY.getStatus();
 	}
 
 }

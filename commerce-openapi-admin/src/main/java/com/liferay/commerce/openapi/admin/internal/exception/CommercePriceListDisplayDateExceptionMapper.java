@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.internal.exception;
 
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
+import com.liferay.commerce.openapi.core.exception.RESTError;
 import com.liferay.commerce.price.list.exception.CommercePriceListDisplayDateException;
 
 import javax.ws.rs.core.Response;
@@ -37,17 +38,19 @@ public class CommercePriceListDisplayDateExceptionMapper
 
 	@Override
 	public int getErrorCode() {
-		return 995;
+		return RESTError.INVALID_COMMERCE_PRICE_LIST_DISPLAY_DATE.
+			getErrorCode();
 	}
 
 	@Override
 	public String getErrorDescription() {
-		return "Invalid display date.";
+		return RESTError.INVALID_COMMERCE_PRICE_LIST_DISPLAY_DATE.
+			getErrorDescription();
 	}
 
 	@Override
 	public Response.Status getStatus() {
-		return Response.Status.CONFLICT;
+		return RESTError.INVALID_COMMERCE_PRICE_LIST_DISPLAY_DATE.getStatus();
 	}
 
 }
