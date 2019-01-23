@@ -36,7 +36,7 @@ import java.util.Locale;
 public class DTOUtils {
 
 	public static PriceEntryDTO modelToDTO(
-		CommercePriceEntry commercePriceEntry,
+		CommercePriceEntry commercePriceEntry, String sku,
 		String skuExternalReferenceCode) {
 
 		PriceEntryDTO priceEntryDTO = new PriceEntryDTO();
@@ -44,12 +44,12 @@ public class DTOUtils {
 		priceEntryDTO.setCommercePriceListId(
 			commercePriceEntry.getCommercePriceListId());
 		priceEntryDTO.setExternalReferenceCode(
-			priceEntryDTO.getExternalReferenceCode());
+			commercePriceEntry.getExternalReferenceCode());
 		priceEntryDTO.setHasTierPrice(commercePriceEntry.isHasTierPrice());
 		priceEntryDTO.setId(commercePriceEntry.getCommercePriceEntryId());
 		priceEntryDTO.setPrice(commercePriceEntry.getPrice());
 		priceEntryDTO.setPromoPrice(commercePriceEntry.getPromoPrice());
-		priceEntryDTO.setSku(priceEntryDTO.getSku());
+		priceEntryDTO.setSku(sku);
 		priceEntryDTO.setSkuExternalReferenceCode(skuExternalReferenceCode);
 
 		return priceEntryDTO;
