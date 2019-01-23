@@ -34,7 +34,7 @@ long commerceCountryId = BeanParamUtil.getLong(billingAddress, request, "commerc
 long commerceRegionId = BeanParamUtil.getLong(billingAddress, request, "commerceRegionId");
 
 int paymentStatus = BeanParamUtil.getInteger(commerceOrder, request, "paymentStatus");
-long commercePaymentMethodKey = BeanParamUtil.getLong(commerceOrder, request, "commercePaymentMethodKey");
+String commercePaymentMethodKey = BeanParamUtil.getString(commerceOrder, request, "commercePaymentMethodKey");
 %>
 
 <liferay-portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
@@ -109,10 +109,10 @@ long commercePaymentMethodKey = BeanParamUtil.getLong(commerceOrder, request, "c
 
 							<%
 							for (CommercePaymentMethodGroupRel commercePaymentMethod : commercePaymentMethods) {
-								long curCommercePaymentMethodId = commercePaymentMethod.getCommercePaymentMethodGroupRelId();
+								String curCommercePaymentMethodId = commercePaymentMethod.getEngineKey();
 							%>
 
-								<aui:option label="<%= commerceOrderEditDisplayContext.getCommercePaymentMethodLabel(commercePaymentMethod) %>" localizeLabel="<%= false %>" selected="<%= curCommercePaymentMethodId == commercePaymentMethodKey %>" value="<%= curCommercePaymentMethodId %>" />
+								<aui:option label="<%= commerceOrderEditDisplayContext.getCommercePaymentMethodLabel(commercePaymentMethod) %>" localizeLabel="<%= false %>" selected="<%= curCommercePaymentMethodId.equals(commercePaymentMethodKey) %>" value="<%= curCommercePaymentMethodId %>" />
 
 							<%
 							}
