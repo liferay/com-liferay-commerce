@@ -100,19 +100,20 @@ public class CPOptionsImporter {
 
 		JSONArray valuesJSONArray = jsonObject.getJSONArray("Values");
 
-		if (valuesJSONArray != null) {
-			for (int i = 0; i < valuesJSONArray.length(); i++) {
-				JSONObject valueJSONObject = valuesJSONArray.getJSONObject(i);
+		if (valuesJSONArray == null) {
+			return cpOption;
+		}
 
-				if (valueJSONObject != null) {
-					_importCPOptionValue(
-						valueJSONObject, cpOption, i, serviceContext);
-				}
-				else {
-					_addCPOptionValue(
-						cpOption, i, valuesJSONArray.getString(i),
-						serviceContext);
-				}
+		for (int i = 0; i < valuesJSONArray.length(); i++) {
+			JSONObject valueJSONObject = valuesJSONArray.getJSONObject(i);
+
+			if (valueJSONObject != null) {
+				_importCPOptionValue(
+					valueJSONObject, cpOption, i, serviceContext);
+			}
+			else {
+				_addCPOptionValue(
+					cpOption, i, valuesJSONArray.getString(i), serviceContext);
 			}
 		}
 

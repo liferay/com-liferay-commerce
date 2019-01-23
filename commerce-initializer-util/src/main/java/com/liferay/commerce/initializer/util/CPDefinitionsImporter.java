@@ -56,6 +56,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -465,7 +466,16 @@ public class CPDefinitionsImporter {
 
 		if (!importOptionValue) {
 			for (int i = 0; i < valuesJSONArray.length(); i++) {
-				String key = valuesJSONArray.getString(i);
+				String key;
+
+				JSONObject valueJSONObject = valuesJSONArray.getJSONObject(i);
+
+				if (valueJSONObject != null) {
+					key = valueJSONObject.getString("Key");
+				}
+				else {
+					key = valuesJSONArray.getString(i);
+				}
 
 				_importCPDefinitionOptionValueRel(
 					key, cpDefinitionOptionRel, serviceContext);
@@ -482,7 +492,8 @@ public class CPDefinitionsImporter {
 
 		CPOptionValue cpOptionValue =
 			_cpOptionValueLocalService.getCPOptionValue(
-				cpDefinitionOptionRel.getCPOptionId(), key);
+				cpDefinitionOptionRel.getCPOptionId(),
+				FriendlyURLNormalizerUtil.normalize(key));
 
 		return _cpDefinitionOptionValueRelLocalService.
 			addCPDefinitionOptionValueRel(
