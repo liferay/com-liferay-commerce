@@ -77,6 +77,13 @@ public class CommerceAccountIndexer extends BaseIndexer<CommerceAccount> {
 
 		contextBooleanFilter.addRequiredTerm(
 			FIELD_PARENT_COMMERCE_ACCOUNT_ID, parentCommerceAccountId);
+
+		int type = GetterUtil.getInteger(
+			searchContext.getAttribute(Field.TYPE), -1);
+
+		if (type > -1) {
+			contextBooleanFilter.addRequiredTerm(Field.TYPE, type);
+		}
 	}
 
 	@Override
@@ -112,6 +119,7 @@ public class CommerceAccountIndexer extends BaseIndexer<CommerceAccount> {
 			FIELD_PARENT_COMMERCE_ACCOUNT_ID,
 			commerceAccount.getParentCommerceAccountId());
 		document.addText(FIELD_TAX_ID, commerceAccount.getTaxId());
+		document.addNumber(Field.TYPE, commerceAccount.getType());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Document " + commerceAccount + " indexed successfully");
