@@ -29,8 +29,8 @@
 					(Users_Orgs.userId = [$USER_ID$])
 				) AND
 				(
-					(CommerceAccountUserRel.userId IS NULL) OR
-					(CommerceAccountUserRel.userId = [$USER_ID$])
+					(CommerceAccountUserRel.commerceaccountuserid IS NULL) OR
+					(CommerceAccountUserRel.commerceaccountuserid = [$USER_ID$])
 				) AND
 				(CommerceAccount.type_ != 0) AND
 				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
@@ -64,8 +64,8 @@
 					(Users_Orgs.userId = [$USER_ID$])
 				) AND
 				(
-					(CommerceAccountUserRel.userId IS NULL) OR
-					(CommerceAccountUserRel.userId = [$USER_ID$])
+					(CommerceAccountUserRel.commerceaccountuserid IS NULL) OR
+					(CommerceAccountUserRel.commerceaccountuserid = [$USER_ID$])
 				) AND
 				(CommerceAccount.type_ != 0) AND
 				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
@@ -98,8 +98,8 @@
 					(Users_Orgs.userId = [$USER_ID$])
 				) AND
 				(
-					(CommerceAccountUserRel.userId IS NULL) OR
-					(CommerceAccountUserRel.userId = [$USER_ID$])
+					(CommerceAccountUserRel.commerceaccountuserid IS NULL) OR
+					(CommerceAccountUserRel.commerceaccountuserid = [$USER_ID$])
 				) AND
 				(CommerceAccount.type_ != 0) AND
 				(CommerceAccount.commerceAccountId = ?)

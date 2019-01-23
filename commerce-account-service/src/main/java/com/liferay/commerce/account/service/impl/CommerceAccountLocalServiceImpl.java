@@ -24,6 +24,7 @@ import com.liferay.commerce.account.service.base.CommerceAccountLocalServiceBase
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
@@ -31,7 +32,6 @@ import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
@@ -335,17 +335,32 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	@Override
-	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
+	public List<CommerceAccount> searchCommerceAccounts(
 			long companyId, long parentCommerceAccountId, String keywords,
-			Boolean active, int start, int end, Sort sort)
+			int type, Boolean active, int start, int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, parentCommerceAccountId, active, start, end, sort);
+			companyId, parentCommerceAccountId, type, active, start, end, sort);
 
 		searchContext.setKeywords(keywords);
 
 		return searchCommerceAccounts(searchContext);
+	}
+
+	@Override
+	public int searchCommerceAccountsCount(
+			long companyId, long parentCommerceAccountId, String keywords,
+			int type, Boolean active)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, parentCommerceAccountId, type, active, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+
+		searchContext.setKeywords(keywords);
+
+		return searchCommerceAccountsCount(searchContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -464,8 +479,8 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long parentCommerceAccountId, Boolean active, int start,
-		int end, Sort sort) {
+		long companyId, long parentCommerceAccountId, int type, Boolean active,
+		int start, int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -476,6 +491,10 @@ public class CommerceAccountLocalServiceImpl
 		if (active != null) {
 			searchContext.setAttribute(
 				CommerceAccountIndexer.FIELD_ACTIVE, active);
+		}
+
+		if (type >= 0) {
+			searchContext.setAttribute(Field.TYPE, type);
 		}
 
 		searchContext.setCompanyId(companyId);
@@ -552,7 +571,7 @@ public class CommerceAccountLocalServiceImpl
 		return parentCommerceAccountId;
 	}
 
-	protected BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
+	protected List<CommerceAccount> searchCommerceAccounts(
 			SearchContext searchContext)
 		throws PortalException {
 
@@ -565,13 +584,21 @@ public class CommerceAccountLocalServiceImpl
 			List<CommerceAccount> commerceAccounts = getCommerceAccounts(hits);
 
 			if (commerceAccounts != null) {
-				return new BaseModelSearchResult<>(
-					commerceAccounts, hits.getLength());
+				return commerceAccounts;
 			}
 		}
 
 		throw new SearchException(
 			"Unable to fix the search index after 10 attempts");
+	}
+
+	protected int searchCommerceAccountsCount(SearchContext searchContext)
+		throws PortalException {
+
+		Indexer<CommerceAccount> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(CommerceAccount.class);
+
+		return GetterUtil.getInteger(indexer.searchCount(searchContext));
 	}
 
 	protected void validate(
