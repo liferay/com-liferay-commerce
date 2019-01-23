@@ -157,24 +157,9 @@ public class CommerceOrderServiceUtil {
 		return getService().getCommerceOrders(groupId, orderStatuses);
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getCommerceOrders(
-		long groupId, long commerceAccountId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceOrder> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceOrders(groupId, commerceAccountId, start, end,
-			orderByComparator);
-	}
-
 	public static int getCommerceOrdersCount(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCommerceOrdersCount(groupId);
-	}
-
-	public static int getCommerceOrdersCount(long groupId,
-		long commerceAccountId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceOrdersCount(groupId, commerceAccountId);
 	}
 
 	/**
@@ -186,46 +171,36 @@ public class CommerceOrderServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, int orderStatus, String keywords, int start,
-		int end) {
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getPendingCommerceOrders(
+		long groupId, long commerceAccountId, String keywords, int start,
+		int end) throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getUserCommerceOrders(groupId, userId, orderStatus,
+				   .getPendingCommerceOrders(groupId, commerceAccountId,
 			keywords, start, end);
 	}
 
-	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, Integer orderStatus,
-		boolean excludeOrderStatus, String keywords, int start, int end) {
+	public static int getPendingCommerceOrdersCount(long groupId,
+		long commerceAccountId, String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getUserCommerceOrders(groupId, userId, orderStatus,
-			excludeOrderStatus, keywords, start, end);
-	}
-
-	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, String keywords, int start, int end) {
-		return getService()
-				   .getUserCommerceOrders(groupId, userId, keywords, start, end);
-	}
-
-	public static int getUserCommerceOrdersCount(long groupId, long userId,
-		int orderStatus, boolean excludeOrderStatus, String keywords) {
-		return getService()
-				   .getUserCommerceOrdersCount(groupId, userId, orderStatus,
-			excludeOrderStatus, keywords);
-	}
-
-	public static int getUserCommerceOrdersCount(long groupId, long userId,
-		int orderStatus, String keywords) {
-		return getService()
-				   .getUserCommerceOrdersCount(groupId, userId, orderStatus,
+				   .getPendingCommerceOrdersCount(groupId, commerceAccountId,
 			keywords);
 	}
 
-	public static int getUserCommerceOrdersCount(long groupId, long userId,
-		String keywords)
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getPlacedCommerceOrders(
+		long groupId, long commerceAccountId, String keywords, int start,
+		int end) throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getPlacedCommerceOrders(groupId, commerceAccountId,
+			keywords, start, end);
+	}
+
+	public static int getPlacedCommerceOrdersCount(long groupId,
+		long commerceAccountId, String keywords)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getUserCommerceOrdersCount(groupId, userId, keywords);
+		return getService()
+				   .getPlacedCommerceOrdersCount(groupId, commerceAccountId,
+			keywords);
 	}
 
 	public static void mergeGuestCommerceOrder(long guestCommerceOrderId,

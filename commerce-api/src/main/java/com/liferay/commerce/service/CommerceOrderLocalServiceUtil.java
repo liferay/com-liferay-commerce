@@ -463,33 +463,19 @@ public class CommerceOrderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, Integer orderStatus,
+		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
 		return getService()
-				   .getUserCommerceOrders(groupId, userId, orderStatus,
-			excludeOrderStatus, keywords, start, end);
-	}
-
-	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, Integer orderStatus, String keywords,
-		int start, int end) {
-		return getService()
-				   .getUserCommerceOrders(groupId, userId, orderStatus,
-			keywords, start, end);
+				   .getUserCommerceOrders(groupId, userId, commerceAccountId,
+			orderStatus, excludeOrderStatus, keywords, start, end);
 	}
 
 	public static int getUserCommerceOrdersCount(long groupId, long userId,
-		Integer orderStatus, boolean excludeOrderStatus, String keywords) {
+		long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords) {
 		return getService()
-				   .getUserCommerceOrdersCount(groupId, userId, orderStatus,
-			excludeOrderStatus, keywords);
-	}
-
-	public static int getUserCommerceOrdersCount(long groupId, long userId,
-		Integer orderStatus, String keywords) {
-		return getService()
-				   .getUserCommerceOrdersCount(groupId, userId, orderStatus,
-			keywords);
+				   .getUserCommerceOrdersCount(groupId, userId,
+			commerceAccountId, orderStatus, excludeOrderStatus, keywords);
 	}
 
 	public static void mergeGuestCommerceOrder(long guestCommerceOrderId,

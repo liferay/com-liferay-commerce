@@ -498,32 +498,19 @@ public class CommerceOrderLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, Integer orderStatus,
+		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
 		return _commerceOrderLocalService.getUserCommerceOrders(groupId,
-			userId, orderStatus, excludeOrderStatus, keywords, start, end);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.model.CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, Integer orderStatus, String keywords,
-		int start, int end) {
-		return _commerceOrderLocalService.getUserCommerceOrders(groupId,
-			userId, orderStatus, keywords, start, end);
+			userId, commerceAccountId, orderStatus, excludeOrderStatus,
+			keywords, start, end);
 	}
 
 	@Override
 	public int getUserCommerceOrdersCount(long groupId, long userId,
-		Integer orderStatus, boolean excludeOrderStatus, String keywords) {
+		long commerceAccountId, Integer orderStatus,
+		boolean excludeOrderStatus, String keywords) {
 		return _commerceOrderLocalService.getUserCommerceOrdersCount(groupId,
-			userId, orderStatus, excludeOrderStatus, keywords);
-	}
-
-	@Override
-	public int getUserCommerceOrdersCount(long groupId, long userId,
-		Integer orderStatus, String keywords) {
-		return _commerceOrderLocalService.getUserCommerceOrdersCount(groupId,
-			userId, orderStatus, keywords);
+			userId, commerceAccountId, orderStatus, excludeOrderStatus, keywords);
 	}
 
 	@Override
