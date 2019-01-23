@@ -14,35 +14,19 @@
 		</permissions>
 	</portlet-resource>
 	<model-resource>
-		<model-name>com.liferay.commerce.account.model.CommerceAccount</model-name>
+		<model-name>com.liferay.commerce.account</model-name>
 		<portlet-ref>
 			<portlet-name>com_liferay_commerce_account_web_internal_portlet_CommerceAccountPortlet</portlet-name>
 		</portlet-ref>
 		<weight>2</weight>
 		<permissions>
 			<supports>
-				<action-key>ASSIGN_MEMBERS</action-key>
-				<action-key>ASSIGN_USER_ROLES</action-key>
-				<action-key>DELETE</action-key>
 				<action-key>MANAGE_ACCOUNTS</action-key>
-				<action-key>MANAGE_USERS</action-key>
-				<action-key>PERMISSIONS</action-key>
-				<action-key>UPDATE</action-key>
-				<action-key>VIEW</action-key>
-				<action-key>VIEW_MEMBERS</action-key>
 			</supports>
 			<site-member-defaults />
 			<guest-defaults />
 			<guest-unsupported>
-				<action-key>ASSIGN_MEMBERS</action-key>
-				<action-key>ASSIGN_USER_ROLES</action-key>
-				<action-key>DELETE</action-key>
 				<action-key>MANAGE_ACCOUNTS</action-key>
-				<action-key>MANAGE_USERS</action-key>
-				<action-key>PERMISSIONS</action-key>
-				<action-key>UPDATE</action-key>
-				<action-key>VIEW</action-key>
-				<action-key>VIEW_MEMBERS</action-key>
 			</guest-unsupported>
 		</permissions>
 	</model-resource>

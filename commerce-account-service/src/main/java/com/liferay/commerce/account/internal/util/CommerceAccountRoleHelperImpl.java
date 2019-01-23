@@ -16,14 +16,12 @@ package com.liferay.commerce.account.internal.util;
 
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.Role;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -99,8 +97,16 @@ public class CommerceAccountRoleHelperImpl
 			resourceActionIds.put(
 				"90", new String[] {CommerceAccountActionKeys.MANAGE_ACCOUNTS});
 			resourceActionIds.put(
-				CommerceAccount.class.getName(),
-				new String[] {ActionKeys.UPDATE, ActionKeys.VIEW});
+				CommerceAccountConstants.RESOURCE_NAME,
+				new String[] {CommerceAccountActionKeys.MANAGE_ACCOUNTS});
+			resourceActionIds.put(
+				"com.liferay.commerce.order",
+				new String[] {
+					"ADD_COMMERCE_ORDER", "APPROVE_OPEN_COMMERCE_ORDERS",
+					"CHECKOUT_OPEN_COMMERCE_ORDERS", "DELETE_COMMERCE_ORDERS",
+					"MANAGE_COMMERCE_ORDERS", "VIEW_COMMERCE_ORDERS",
+					"VIEW_OPEN_COMMERCE_ORDERS"
+				});
 		}
 
 		_setRolePermissions(role, resourceActionIds, serviceContext);
