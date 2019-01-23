@@ -37,11 +37,11 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 							<%
 							for (CPMedia imageCPMedia : cpContentHelper.getImages(cpDefinitionId, themeDisplay)) {
-								String url = imageCPMedia.getURL();
+								String thumbnailUrl = imageCPMedia.getThumbnailUrl();
 							%>
 
-								<div class="card thumb" data-url="<%= url %>">
-									<img class="center-block img-responsive" src="<%= url %>">
+								<div class="card thumb" data-url="<%= thumbnailUrl %>">
+									<img class="center-block img-responsive" src="<%= thumbnailUrl %>">
 								</div>
 
 							<%

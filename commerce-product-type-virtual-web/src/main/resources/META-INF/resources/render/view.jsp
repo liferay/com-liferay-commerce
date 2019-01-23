@@ -241,12 +241,12 @@ String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId
 								<table class="table table-bordered table-striped">
 
 									<%
-									for (CPAttachmentFileEntry attachmentCPMedia : attachmentCPMedias) {
+									for (CPMedia attachmentCPMedia : attachmentCPMedias) {
 									%>
 
 										<tr>
 											<td>
-												<span><%= attachmentCPMedia.getTitle(locale) %></span>
+												<span><%= attachmentCPMedia.getTitle() %></span>
 
 												<span>
 													<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" target="_blank" url="<%= attachmentCPMedia.getDownloadUrl() %>" />
