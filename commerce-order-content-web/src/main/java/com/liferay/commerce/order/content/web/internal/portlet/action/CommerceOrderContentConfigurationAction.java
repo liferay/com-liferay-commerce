@@ -21,8 +21,8 @@ import com.liferay.commerce.order.content.web.internal.display.context.CommerceO
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.service.CommerceAddressService;
-import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
+import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentItemService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -54,7 +54,7 @@ public class CommerceOrderContentConfigurationAction
 
 	@Override
 	public String getJspPath(HttpServletRequest httpServletRequest) {
-		return "/configuration.jsp";
+		return "/placed_orders/configuration.jsp";
 	}
 
 	@Override
@@ -67,9 +67,8 @@ public class CommerceOrderContentConfigurationAction
 			CommerceOrderContentDisplayContext
 				commerceOrderContentDisplayContext =
 					new CommerceOrderContentDisplayContext(
-						_commerceAddressService, _commerceOrderLocalService,
-						_commerceOrderNoteService,
-						_commerceOrderPriceCalculation,
+						_commerceAddressService, _commerceOrderNoteService,
+						_commerceOrderPriceCalculation, _commerceOrderService,
 						_commercePaymentMethodGroupRelService,
 						_commerceShipmentItemService, httpServletRequest,
 						_modelResourcePermission, _portletResourcePermission);
@@ -101,13 +100,13 @@ public class CommerceOrderContentConfigurationAction
 	private CommerceAddressService _commerceAddressService;
 
 	@Reference
-	private CommerceOrderLocalService _commerceOrderLocalService;
-
-	@Reference
 	private CommerceOrderNoteService _commerceOrderNoteService;
 
 	@Reference
 	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
+
+	@Reference
+	private CommerceOrderService _commerceOrderService;
 
 	@Reference
 	private CommercePaymentMethodGroupRelService

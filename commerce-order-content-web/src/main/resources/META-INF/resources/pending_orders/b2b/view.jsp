@@ -18,10 +18,6 @@
 
 <%
 CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
-CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
-
-CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 %>
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
@@ -29,23 +25,20 @@ CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 <aui:form action="<%= editCommerceOrderURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commerceAccountId" type="hidden" value="<%= (commerceAccount == null) ? 0 : commerceAccount.getCommerceAccountId() %>" />
 	<aui:input name="deleteCommerceOrderIds" type="hidden" />
 
 	<commerce-ui:table
-		dataProviderKey="commerceOrders"
+		dataProviderKey="commercePendingOrders"
 		itemPerPage="<%= 5 %>"
 		namespace="<%= renderResponse.getNamespace() %>"
 		pageNumber="1"
 		portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
-		tableName="commerceOrders"
+		tableName="commercePendingOrders"
 	/>
 
-	<c:if test="<%= commerceOrderContentDisplayContext.isOpenOrderContentPortlet() && commerceOrderContentDisplayContext.hasPermission(CommerceOrderActionKeys.ADD_COMMERCE_ORDER) && (commerceAccount != null) %>">
-		<div class="minium-frame__cta is-visible">
-			<aui:button cssClass="js-invite-user minium-button minium-button--big" type="submit" value="add-order" />
-		</div>
-	</c:if>
+	<div class="minium-frame__cta is-visible">
+		<aui:button cssClass="js-invite-user minium-button minium-button--big" type="submit" value="add-order" />
+	</div>
 </aui:form>
 
 <aui:script>

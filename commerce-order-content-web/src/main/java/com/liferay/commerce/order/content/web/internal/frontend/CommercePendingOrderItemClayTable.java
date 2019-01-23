@@ -30,6 +30,7 @@ import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
 import com.liferay.commerce.order.content.web.internal.model.OrderItem;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
@@ -41,8 +42,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.portlet.PortletQName;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
@@ -50,7 +49,6 @@ import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermi
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
@@ -71,19 +69,19 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"commerce.data.provider.key=" + CommerceOrderItemClayTable.NAME,
-		"commerce.table.name=" + CommerceOrderItemClayTable.NAME
+		"commerce.data.provider.key=" + CommercePendingOrderItemClayTable.NAME,
+		"commerce.table.name=" + CommercePendingOrderItemClayTable.NAME
 	},
 	service = {
 		ClayTable.class, ClayTableActionProvider.class,
 		CommerceDataSetDataProvider.class
 	}
 )
-public class CommerceOrderItemClayTable
+public class CommercePendingOrderItemClayTable
 	implements CommerceDataSetDataProvider<OrderItem>, ClayTable,
 			   ClayTableActionProvider {
 
-	public static final String NAME = "commerceOrderItems";
+	public static final String NAME = "commercePendingOrderItems";
 
 	@Override
 	public List<ClayTableAction> clayTableActions(
@@ -100,25 +98,6 @@ public class CommerceOrderItemClayTable
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			orderItem.getOrderId());
-
-		if (!commerceOrder.isOpen()) {
-			String viewURL = StringPool.BLANK;
-
-			try {
-				viewURL = _getViewShipmentURL(
-					orderItem.getOrderItemId(), themeDisplay);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-
-			ClayTableAction clayTableAction = new ClayTableAction(
-				viewURL, StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "view-shipments"), false,
-				false);
-
-			clayTableActions.add(clayTableAction);
-		}
 
 		if (_modelResourcePermission.contains(
 				themeDisplay.getPermissionChecker(), commerceOrder,
@@ -240,7 +219,7 @@ public class CommerceOrderItemClayTable
 						price, discount, commerceOrderItem.getQuantity(), total,
 						_cpInstanceHelper.getCPInstanceThumbnailSrc(
 							commerceOrderItem.getCPInstanceId(), themeDisplay),
-						_getViewShipmentURL(
+						CommerceOrderClayTableUtil.getViewShipmentURL(
 							commerceOrderItem.getCommerceOrderId(),
 							themeDisplay)));
 			}
@@ -276,31 +255,8 @@ public class CommerceOrderItemClayTable
 		return portletURL.toString();
 	}
 
-	private String _getViewShipmentURL(
-			long commerceOrderItemId, ThemeDisplay themeDisplay)
-		throws Exception {
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		PortletURL portletURL = PortletURLFactoryUtil.create(
-			themeDisplay.getRequest(), portletDisplay.getId(),
-			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
-
-		portletURL.setParameter(
-			"mvcRenderCommandName", "viewCommerceOrderShipments");
-		portletURL.setParameter(
-			"commerceOrderItemId", String.valueOf(commerceOrderItemId));
-		portletURL.setWindowState(LiferayWindowState.POP_UP);
-
-		portletURL.setParameter(
-			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
-			_portal.getCurrentURL(themeDisplay.getRequest()));
-
-		return portletURL.toString();
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceOrderItemClayTable.class);
+		CommercePendingOrderItemClayTable.class);
 
 	@Reference
 	private ClayTableSchemaBuilderFactory _clayTableSchemaBuilderFactory;
@@ -321,8 +277,5 @@ public class CommerceOrderItemClayTable
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
 	)
 	private ModelResourcePermission<CommerceOrder> _modelResourcePermission;
-
-	@Reference
-	private Portal _portal;
 
 }

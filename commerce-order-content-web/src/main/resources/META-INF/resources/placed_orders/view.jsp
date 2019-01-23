@@ -22,9 +22,9 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 
 <c:choose>
 	<c:when test="<%= commerceOrderContentDisplayContext.isCommerceSiteTypeB2C() %>">
-		<liferay-util:include page="/b2c/view.jsp" servletContext="<%= application %>" />
+		<liferay-util:include page="/placed_orders/b2c/view.jsp" servletContext="<%= application %>" />
 	</c:when>
 	<c:otherwise>
-		<liferay-util:include page="/b2b/view.jsp" servletContext="<%= application %>" />
+		<liferay-util:include page="/placed_orders/b2b/view.jsp" servletContext="<%= application %>" />
 	</c:otherwise>
 </c:choose>

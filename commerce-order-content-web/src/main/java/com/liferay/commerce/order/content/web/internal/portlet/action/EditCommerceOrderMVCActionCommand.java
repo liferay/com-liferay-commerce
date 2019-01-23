@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.order.content.web.internal.portlet.action;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
@@ -56,6 +57,7 @@ import org.osgi.service.component.annotations.Reference;
 	property = {
 		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_CART_CONTENT_MINI,
 		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT,
+		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_ORDER_CONTENT,
 		"mvc.command.name=editCommerceOrder"
 	},
 	service = MVCActionCommand.class
@@ -72,8 +74,7 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long commerceAccountId = ParamUtil.getLong(
-			actionRequest, "commerceAccountId");
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
 		long commerceCurrencyId = 0;
 
@@ -85,8 +86,9 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		}
 
 		return _commerceOrderService.addCommerceOrder(
-			themeDisplay.getScopeGroupId(), commerceAccountId,
-			commerceCurrencyId, 0, StringPool.BLANK);
+			themeDisplay.getScopeGroupId(),
+			commerceAccount.getCommerceAccountId(), commerceCurrencyId, 0,
+			StringPool.BLANK);
 	}
 
 	protected void approveCommerceOrder(long commerceOrderId) throws Exception {
