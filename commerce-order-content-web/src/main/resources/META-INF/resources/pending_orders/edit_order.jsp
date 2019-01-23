@@ -171,9 +171,9 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 				<div class="minium-card__title"><liferay-ui:message key="billing-address" /></div>
 				<div class="minium-card__content">
 					<div class="row">
-						<c:choose>
-							<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
-								<div class="col-md-8">
+						<div class="col-md-12">
+							<c:choose>
+								<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
 									<dl class="minium-list">
 										<aui:select cssClass="minium-input" inlineField="<%= true %>" label="" name="billingAddressId" wrappedField="<%= false %>">
 
@@ -189,21 +189,15 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 										</aui:select>
 									</dl>
-								</div>
-
-								<div class="col-md-4">
-									<div class="minium-button minium-button--outline minium-button--small"><liferay-ui:message key="add-address" /></div>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="col-md-12">
+								</c:when>
+								<c:otherwise>
 									<c:if test="<%= billingCommerceAddress != null %>">
 										<%= billingCommerceAddress.getStreet1() %><br />
 										<%= billingCommerceAddress.getCity() + StringPool.SPACE + billingCommerceAddress.getZip() %>
 									</c:if>
-								</div>
-							</c:otherwise>
-						</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -214,9 +208,9 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 				<div class="minium-card__title"><liferay-ui:message key="shipping-address" /></div>
 				<div class="minium-card__content">
 					<div class="row">
-						<c:choose>
-							<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
-								<div class="col-md-8">
+						<div class="col-md-12">
+							<c:choose>
+								<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
 									<dl class="minium-list">
 										<aui:select cssClass="minium-input" inlineField="<%= true %>" label="" name="shippingAddressId" wrappedField="<%= false %>">
 
@@ -232,21 +226,15 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 										</aui:select>
 									</dl>
-								</div>
-
-								<div class="col-md-4">
-									<div class="minium-button minium-button--outline minium-button--small"><liferay-ui:message key="add-address" /></div>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="col-md-12">
+								</c:when>
+								<c:otherwise>
 									<c:if test="<%= shippingCommerceAddress != null %>">
 										<%= shippingCommerceAddress.getStreet1() %><br />
 										<%= shippingCommerceAddress.getCity() + StringPool.SPACE + shippingCommerceAddress.getZip() %>
 									</c:if>
-								</div>
-							</c:otherwise>
-						</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</div>
 					</div>
 				</div>
 			</div>
