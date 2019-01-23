@@ -35,15 +35,6 @@ public class CommerceAccountUserRelServiceWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.account.model.CommerceAccountUserRel addCommerceAccountUserRel(
-		long commerceAccountId, long userId,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountUserRelService.addCommerceAccountUserRel(commerceAccountId,
-			userId, serviceContext);
-	}
-
-	@Override
 	public void addCommerceAccountUserRels(long commerceAccountId,
 		long[] userIds, String[] emailAddresses, long[] roleIds,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -71,13 +62,6 @@ public class CommerceAccountUserRelServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_commerceAccountUserRelService.deleteCommerceAccountUserRels(commerceAccountId,
 			userIds);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.account.model.CommerceAccountUserRel> getCommerceAccountUserRels(
-		long commerceAccountId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountUserRelService.getCommerceAccountUserRels(commerceAccountId);
 	}
 
 	@Override
