@@ -533,12 +533,13 @@ public class CommerceOrderLocalServiceImpl
 
 	@Override
 	public List<CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, Integer orderStatus,
+		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
 
 		QueryDefinition<CommerceOrder> queryDefinition =
 			new QueryDefinition<>();
 
+		queryDefinition.setAttribute("commerceAccountId", commerceAccountId);
 		queryDefinition.setAttribute("excludeOrderStatus", excludeOrderStatus);
 		queryDefinition.setAttribute("groupId", groupId);
 		queryDefinition.setAttribute("keywords", keywords);
@@ -546,40 +547,24 @@ public class CommerceOrderLocalServiceImpl
 		queryDefinition.setStart(start);
 		queryDefinition.setEnd(end);
 
-		return commerceOrderFinder.findByU_O(userId, queryDefinition);
-	}
-
-	@Override
-	public List<CommerceOrder> getUserCommerceOrders(
-		long groupId, long userId, Integer orderStatus, String keywords,
-		int start, int end) {
-
-		return commerceOrderLocalService.getUserCommerceOrders(
-			groupId, userId, orderStatus, false, keywords, start, end);
+		return commerceOrderFinder.findByG_U_C_O(userId, queryDefinition);
 	}
 
 	@Override
 	public int getUserCommerceOrdersCount(
-		long groupId, long userId, Integer orderStatus,
+		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords) {
 
 		QueryDefinition<CommerceOrder> queryDefinition =
 			new QueryDefinition<>();
 
+		queryDefinition.setAttribute("commerceAccountId", commerceAccountId);
 		queryDefinition.setAttribute("excludeOrderStatus", excludeOrderStatus);
 		queryDefinition.setAttribute("groupId", groupId);
 		queryDefinition.setAttribute("keywords", keywords);
 		queryDefinition.setAttribute("orderStatus", orderStatus);
 
-		return commerceOrderFinder.countByU_O(userId, queryDefinition);
-	}
-
-	@Override
-	public int getUserCommerceOrdersCount(
-		long groupId, long userId, Integer orderStatus, String keywords) {
-
-		return commerceOrderLocalService.getUserCommerceOrdersCount(
-			groupId, userId, orderStatus, false, keywords);
+		return commerceOrderFinder.countByG_U_C_O(userId, queryDefinition);
 	}
 
 	@Override
