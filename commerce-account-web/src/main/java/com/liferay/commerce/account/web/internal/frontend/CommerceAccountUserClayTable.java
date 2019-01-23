@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -47,6 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.portlet.ActionRequest;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -100,6 +102,20 @@ public class CommerceAccountUserClayTable
 			ClayTableAction clayTableAction = new ClayTableAction(
 				viewURL, StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "view"), false, false);
+
+			clayTableActions.add(clayTableAction);
+		}
+
+		if (_modelResourcePermission.contains(
+				themeDisplay.getPermissionChecker(), commerceAccountId,
+				ActionKeys.UPDATE)) {
+
+			String deleteURL = _getAccountUserDeleteURL(
+				member.getMemberId(), httpServletRequest);
+
+			ClayTableAction clayTableAction = new ClayTableAction(
+				deleteURL, StringPool.BLANK,
+				LanguageUtil.get(httpServletRequest, "delete"), false, false);
 
 			clayTableActions.add(clayTableAction);
 		}
@@ -178,6 +194,32 @@ public class CommerceAccountUserClayTable
 		).toArray(
 			String[]::new
 		);
+	}
+
+	private String _getAccountUserDeleteURL(
+			long userId, HttpServletRequest httpServletRequest)
+		throws PortalException {
+
+		PortletURL deleteURL = PortletProviderUtil.getPortletURL(
+			httpServletRequest, CommerceAccount.class.getName(),
+			PortletProvider.Action.EDIT);
+
+		deleteURL.setParameter(ActionRequest.ACTION_NAME, "inviteUser");
+		deleteURL.setParameter(Constants.CMD, Constants.REMOVE);
+		deleteURL.setParameter(
+			"redirect", _portal.getCurrentURL(httpServletRequest));
+
+		long commerceAccountId = ParamUtil.getLong(
+			httpServletRequest, "commerceAccountId");
+
+		if (commerceAccountId > 0) {
+			deleteURL.setParameter(
+				"commerceAccountId", String.valueOf(commerceAccountId));
+		}
+
+		deleteURL.setParameter("userId", String.valueOf(userId));
+
+		return deleteURL.toString();
 	}
 
 	private String _getAccountUserViewDetailURL(
