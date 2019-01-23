@@ -128,7 +128,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 			if (commerceOrder != null) {
 				portletURL.setParameter(
-					"mvcRenderCommandName", "editCommerceOrder");
+					"mvcRenderCommandName", "viewCommerceOrderDetails");
 				portletURL.setParameter(
 					"commerceOrderId",
 					String.valueOf(commerceOrder.getCommerceOrderId()));
@@ -143,6 +143,25 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		if (plid > 0) {
 			return _getPortletURL(
 				httpServletRequest, CommercePortletKeys.COMMERCE_CART_CONTENT);
+		}
+
+		plid = _portal.getPlidFromPortletId(
+			groupId, CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
+
+		if ((plid > 0) && (commerceOrder != null) && commerceOrder.isOpen()) {
+			PortletURL portletURL = _getPortletURL(
+				httpServletRequest,
+				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
+
+			if (commerceOrder != null) {
+				portletURL.setParameter(
+					"mvcRenderCommandName", "editCommerceOrder");
+				portletURL.setParameter(
+					"commerceOrderId",
+					String.valueOf(commerceOrder.getCommerceOrderId()));
+			}
+
+			return portletURL;
 		}
 
 		return null;
