@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.core.internal.exception;
 
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
+import com.liferay.commerce.openapi.core.exception.RESTError;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import javax.ws.rs.core.Response;
@@ -38,17 +39,17 @@ public class SystemExceptionMapper
 
 	@Override
 	public int getErrorCode() {
-		return 998;
+		return RESTError.INTERNAL_ERROR.getErrorCode();
 	}
 
 	@Override
 	public String getErrorDescription() {
-		return "Internal error. Please try again later.";
+		return RESTError.INTERNAL_ERROR.getErrorDescription();
 	}
 
 	@Override
 	public Response.Status getStatus() {
-		return Response.Status.INTERNAL_SERVER_ERROR;
+		return RESTError.INTERNAL_ERROR.getStatus();
 	}
 
 }
