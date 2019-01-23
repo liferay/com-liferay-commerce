@@ -57,6 +57,14 @@ public class CPOptionValueServiceUtil {
 		getService().deleteCPOptionValue(cpOptionValueId);
 	}
 
+	public static com.liferay.commerce.product.model.CPOptionValue fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.product.model.CPOptionValue fetchCPOptionValue(
 		long cpOptionValueId)
 		throws com.liferay.portal.kernel.exception.PortalException {
