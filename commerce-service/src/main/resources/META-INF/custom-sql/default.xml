@@ -21,7 +21,7 @@
 				CommerceCountry.priority
 		]]>
 	</sql>
-	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.countByG_U_O">
+	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.countByG_U_C_O">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT CommerceOrder.commerceOrderId) AS COUNT_VALUE
@@ -47,6 +47,7 @@
 					Users_Orgs.organizationId = Org2.organizationId
 			WHERE
 				[$ORDER_STATUS$]
+				[$ACCOUNT_ID$]
 				(CommerceOrder.groupId = ?) AND
 				(
 					(Users_Orgs.userId IS NULL) OR
@@ -74,7 +75,7 @@
 				(CommerceOrderItem.quantity > CommerceOrderItem.shippedQuantity)
 		]]>
 	</sql>
-	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.findByG_U_O">
+	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.findByG_U_C_O">
 		<![CDATA[
 			SELECT
 				DISTINCT CommerceOrder.*
@@ -100,6 +101,7 @@
 					Users_Orgs.organizationId = Org2.organizationId
 			WHERE
 				[$ORDER_STATUS$]
+				[$ACCOUNT_ID$]
 				(CommerceOrder.groupId = ?) AND
 				(
 					(Users_Orgs.userId IS NULL) OR

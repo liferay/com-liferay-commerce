@@ -39,17 +39,17 @@ import java.util.List;
 public class CommerceOrderFinderImpl
 	extends CommerceOrderFinderBaseImpl implements CommerceOrderFinder {
 
-	public static final String COUNT_BY_G_U_O =
-		CommerceOrderFinder.class.getName() + ".countByG_U_O";
+	public static final String COUNT_BY_G_U_C_O =
+		CommerceOrderFinder.class.getName() + ".countByG_U_C_O";
 
 	public static final String FIND_BY_G_O =
 		CommerceOrderFinder.class.getName() + ".findByG_O";
 
-	public static final String FIND_BY_G_U_O =
-		CommerceOrderFinder.class.getName() + ".findByG_U_O";
+	public static final String FIND_BY_G_U_C_O =
+		CommerceOrderFinder.class.getName() + ".findByG_U_C_O";
 
 	@Override
-	public int countByU_O(
+	public int countByG_U_C_O(
 		long userId, QueryDefinition<CommerceOrder> queryDefinition) {
 
 		Session session = null;
@@ -57,10 +57,23 @@ public class CommerceOrderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = _customSQL.get(getClass(), COUNT_BY_G_U_O);
+			String sql = _customSQL.get(getClass(), COUNT_BY_G_U_C_O);
 
 			sql = StringUtil.replace(
 				sql, "[$USER_ID$]", String.valueOf(userId));
+
+			long commerceAccountId = (Long)queryDefinition.getAttribute(
+				"commerceAccountId");
+
+			if (commerceAccountId > 0) {
+				sql = StringUtil.replace(
+					sql, "[$ACCOUNT_ID$]",
+					_getAccountIdClause(commerceAccountId));
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$ACCOUNT_ID$]", StringPool.BLANK);
+			}
 
 			Integer orderStatus = (Integer)queryDefinition.getAttribute(
 				"orderStatus");
@@ -153,7 +166,7 @@ public class CommerceOrderFinderImpl
 	}
 
 	@Override
-	public List<CommerceOrder> findByU_O(
+	public List<CommerceOrder> findByG_U_C_O(
 		long userId, QueryDefinition<CommerceOrder> queryDefinition) {
 
 		Session session = null;
@@ -161,12 +174,23 @@ public class CommerceOrderFinderImpl
 		try {
 			session = openSession();
 
-			long groupId = (Long)queryDefinition.getAttribute("groupId");
-
-			String sql = _customSQL.get(getClass(), FIND_BY_G_U_O);
+			String sql = _customSQL.get(getClass(), FIND_BY_G_U_C_O);
 
 			sql = StringUtil.replace(
 				sql, "[$USER_ID$]", String.valueOf(userId));
+
+			long commerceAccountId = (Long)queryDefinition.getAttribute(
+				"commerceAccountId");
+
+			if (commerceAccountId > 0) {
+				sql = StringUtil.replace(
+					sql, "[$ACCOUNT_ID$]",
+					_getAccountIdClause(commerceAccountId));
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$ACCOUNT_ID$]", StringPool.BLANK);
+			}
 
 			Integer orderStatus = (Integer)queryDefinition.getAttribute(
 				"orderStatus");
@@ -200,6 +224,8 @@ public class CommerceOrderFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			long groupId = (Long)queryDefinition.getAttribute("groupId");
+
 			qPos.add(groupId);
 
 			qPos.add(names, 2);
@@ -228,6 +254,11 @@ public class CommerceOrderFinderImpl
 		}
 
 		return StringUtil.replace(sql, "[$ORDER_STATUS$]", sb.toString());
+	}
+
+	private String _getAccountIdClause(long commerceAccountId) {
+		return "(CommerceAccount.commerceAccountId = " + commerceAccountId +
+			" ) AND";
 	}
 
 	private String _getOrderStatusClause(int orderStatus, boolean exclude) {
