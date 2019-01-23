@@ -17,7 +17,9 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
+import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
@@ -30,8 +32,13 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
 
+import javax.portlet.PortletURL;
+
+import javax.servlet.jsp.PageContext;
+
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 public class MiniCartTag extends ComponentRendererTag {
 
@@ -47,8 +54,31 @@ public class MiniCartTag extends ComponentRendererTag {
 
 			putValue("isOpen", false);
 			putValue("isDisabled", false);
-			putValue("detailsUrl", "");
-			putValue("checkoutUrl", "");
+
+			String checkoutURL = StringPool.BLANK;
+			String detailsURL = StringPool.BLANK;
+
+			if (commerceOrder != null) {
+				PortletURL commerceCheckoutPortletURL =
+					_commerceOrderHttpHelper.getCommerceCheckoutPortletURL(
+						request);
+
+				if (commerceCheckoutPortletURL != null) {
+					checkoutURL = String.valueOf(commerceCheckoutPortletURL);
+				}
+			}
+
+			PortletURL commerceCartPortletURL =
+				_commerceOrderHttpHelper.getCommerceCartPortletURL(
+					request, commerceOrder);
+
+			if (commerceCartPortletURL != null) {
+				detailsURL = String.valueOf(commerceCartPortletURL);
+			}
+
+			putValue("checkoutUrl", checkoutURL);
+			putValue("detailsUrl", detailsURL);
+
 			putValue("productsCount", 0);
 			putValue(
 				"cartAPI",
@@ -88,6 +118,16 @@ public class MiniCartTag extends ComponentRendererTag {
 			"commerce-frontend-taglib/mini_cart/Cart.es");
 	}
 
+	@Override
+	public void setPageContext(PageContext pageContext) {
+		_commerceOrderHttpHelper =
+			ServletContextUtil.getCommerceOrderHttpHelper();
+
+		super.setPageContext(pageContext);
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(MiniCartTag.class);
+
+	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 
 }

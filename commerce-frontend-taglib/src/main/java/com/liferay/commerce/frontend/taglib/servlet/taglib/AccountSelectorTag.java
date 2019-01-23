@@ -32,12 +32,20 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutSet;
+import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Marco Leo
@@ -107,13 +115,12 @@ public class AccountSelectorTag extends ComponentRendererTag {
 				PortalUtil.getLayoutFriendlyURL(
 					accountManagementLayout, themeDisplay));
 
-			Layout orderManagementLayout = _getOrdersLayout(
-				themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
-
 			putValue(
-				"createNewOrderLink",
-				PortalUtil.getLayoutFriendlyURL(
-					orderManagementLayout, themeDisplay));
+				"createNewOrderLink", _getAddCommerceOrderURL(themeDisplay));
+
+			Layout orderManagementLayout = _getOrdersLayout(
+				themeDisplay.getScopeGroupId());
+
 			putValue(
 				"viewAllOrdersLink",
 				PortalUtil.getLayoutFriendlyURL(
@@ -165,24 +172,62 @@ public class AccountSelectorTag extends ComponentRendererTag {
 		return layout;
 	}
 
-	private Layout _getOrdersLayout(long groupId, boolean privateLayout)
+	private String _getAddCommerceOrderURL(ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		Layout layout = LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
-			groupId, privateLayout, "/orders");
+		long plid = PortalUtil.getPlidFromPortletId(
+			themeDisplay.getScopeGroupId(),
+			CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
 
-		if (layout != null) {
-			return layout;
+		if (plid > 0) {
+			PortletURL portletURL = _getPortletURL(
+				themeDisplay.getRequest(),
+				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
+
+			portletURL.setParameter(
+				ActionRequest.ACTION_NAME, "editCommerceOrder");
+			portletURL.setParameter(Constants.CMD, Constants.ADD);
+
+			return portletURL.toString();
 		}
 
+		return StringPool.BLANK;
+	}
+
+	private Layout _getOrdersLayout(long groupId) throws PortalException {
+		Layout layout = null;
+
 		long plid = PortalUtil.getPlidFromPortletId(
-			groupId, CommercePortletKeys.COMMERCE_ORDER_CONTENT);
+			groupId, CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
 
 		if (plid > 0) {
 			layout = LayoutLocalServiceUtil.fetchLayout(plid);
 		}
 
 		return layout;
+	}
+
+	private PortletURL _getPortletURL(
+			HttpServletRequest httpServletRequest, String portletId)
+		throws PortalException {
+
+		PortletURL portletURL = null;
+
+		long groupId = PortalUtil.getScopeGroupId(httpServletRequest);
+
+		long plid = PortalUtil.getPlidFromPortletId(groupId, portletId);
+
+		if (plid > 0) {
+			portletURL = PortletURLFactoryUtil.create(
+				httpServletRequest, portletId, plid,
+				PortletRequest.ACTION_PHASE);
+		}
+		else {
+			portletURL = PortletURLFactoryUtil.create(
+				httpServletRequest, portletId, PortletRequest.ACTION_PHASE);
+		}
+
+		return portletURL;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
