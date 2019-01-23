@@ -2,8 +2,8 @@
 
 {template .render}
 	{@param productId: number|string }
-	{@param? isCompareAvailable: bool }
 	{@param? isCheckboxVisible: bool }
+	{@param? isCompareAvailable: bool }
 	{@param? isInCompare: bool }
 	{@param? isLabelVisible: bool }
 	{@param? _handleCompareCheckbox: any }
@@ -32,7 +32,7 @@
 				data-onchange="{$_handleCompareCheckbox}"
 			/>
 			{if isNonnull($isLabelVisible) and $isLabelVisible == true}
-				<label 
+				<label
 					class="product-compare-checkbox__label"
 					for="{$checkboxId}"
 				>
