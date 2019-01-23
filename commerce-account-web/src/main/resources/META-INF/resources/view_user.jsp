@@ -54,6 +54,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 		</div>
 	</section>
 </div>
+
 <div class="commerce-account-container">
 	<commerce-ui:table
 		dataProviderKey="commerceAccountUserRoles"

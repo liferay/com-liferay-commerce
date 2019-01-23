@@ -40,8 +40,7 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId,
-			ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
 
 		commerceAccountUserRelLocalService.addCommerceAccountUserRels(
 			commerceAccountId, userIds, emailAddresses, roleIds,
@@ -54,8 +53,7 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId,
-			ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
 
 		CommerceAccountUserRelPK commerceAccountUserRelPK =
 			new CommerceAccountUserRelPK(commerceAccountId, userId);
@@ -69,8 +67,7 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId,
-			ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
 
 		commerceAccountUserRelLocalService.
 			deleteCommerceAccountUserRelsByCommerceAccountId(commerceAccountId);
@@ -82,8 +79,7 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId,
-			ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
 
 		commerceAccountUserRelLocalService.deleteCommerceAccountUserRels(
 			commerceAccountId, userIds);
