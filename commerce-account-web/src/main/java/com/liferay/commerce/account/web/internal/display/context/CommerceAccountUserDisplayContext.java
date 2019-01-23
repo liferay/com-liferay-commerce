@@ -17,6 +17,7 @@ package com.liferay.commerce.account.web.internal.display.context;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.web.internal.frontend.AccountFilterImpl;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -53,6 +54,17 @@ public class CommerceAccountUserDisplayContext
 
 		_userFileUploadsConfiguration = userFileUploadsConfiguration;
 		_userLocalService = userLocalService;
+	}
+
+	public AccountFilterImpl getAccountFilter() throws PortalException {
+		AccountFilterImpl accountFilter = new AccountFilterImpl();
+
+		HttpServletRequest httpServletRequest =
+			commerceAccountRequestHelper.getRequest();
+
+		accountFilter.setAccountId(getCurrentCommerceAccountId());
+
+		return accountFilter;
 	}
 
 	public User getSelectedUser() throws PortalException {
