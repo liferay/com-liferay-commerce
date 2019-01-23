@@ -8,7 +8,7 @@
 	orderItemsQuantity = commerceOrderHttpHelper.getCommerceOrderItemsQuantity(request)
 	cartUrl = commerceOrderHttpHelper.getCommerceCartPortletURL(request)
 	demo_mode = getterUtil.getBoolean(themeDisplay.getThemeSetting("demo-mode"))
-	userManagementUrl = commerceAccountHelper.getCommerceUserPortletURL(request)
+	accountManagementUrl = commerceAccountHelper.getAccountManagementPortletURL(request)
 	wishListItemsCount = commerceWishListHttpHelper.getCurrentCommerceWishListItemsCount(request, themeDisplay.getResponse())
 	wishlistUrl = commerceWishListHttpHelper.getCommerceWishListPortletURL(request)
 	orderNumber = ""
