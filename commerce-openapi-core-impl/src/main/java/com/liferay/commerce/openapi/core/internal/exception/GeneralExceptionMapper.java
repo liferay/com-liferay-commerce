@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.core.internal.exception;
 
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
+import com.liferay.commerce.openapi.core.exception.RESTError;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -36,17 +37,17 @@ public class GeneralExceptionMapper extends BaseExceptionMapper<Exception> {
 
 	@Override
 	public int getErrorCode() {
-		return 999;
+		return RESTError.GENERAL_ERROR.getErrorCode();
 	}
 
 	@Override
 	public String getErrorDescription() {
-		return "General error.";
+		return RESTError.GENERAL_ERROR.getErrorDescription();
 	}
 
 	@Override
 	public Response.Status getStatus() {
-		return Response.Status.BAD_REQUEST;
+		return RESTError.GENERAL_ERROR.getStatus();
 	}
 
 }
