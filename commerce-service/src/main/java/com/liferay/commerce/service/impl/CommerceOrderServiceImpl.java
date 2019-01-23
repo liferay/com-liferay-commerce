@@ -297,7 +297,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			int end)
 		throws PortalException {
 
-		checkAccountOrderPermissions(groupId, commerceAccountId);
+		_checkAccountOrderPermissions(groupId, commerceAccountId);
 
 		return commerceOrderLocalService.getUserCommerceOrders(
 			groupId, getUserId(), commerceAccountId,
@@ -310,7 +310,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			long groupId, long commerceAccountId, String keywords)
 		throws PortalException {
 
-		checkAccountOrderPermissions(groupId, commerceAccountId);
+		_checkAccountOrderPermissions(groupId, commerceAccountId);
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
 			groupId, getUserId(), commerceAccountId,
@@ -323,7 +323,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			int end)
 		throws PortalException {
 
-		checkAccountOrderPermissions(groupId, commerceAccountId);
+		_checkAccountOrderPermissions(groupId, commerceAccountId);
 
 		return commerceOrderLocalService.getUserCommerceOrders(
 			groupId, getUserId(), commerceAccountId,
@@ -336,7 +336,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			long groupId, long commerceAccountId, String keywords)
 		throws PortalException {
 
-		checkAccountOrderPermissions(groupId, commerceAccountId);
+		_checkAccountOrderPermissions(groupId, commerceAccountId);
 
 		return commerceOrderLocalService.getUserCommerceOrdersCount(
 			groupId, getUserId(), commerceAccountId,
@@ -530,7 +530,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 		return commerceOrderLocalService.updateUser(commerceOrderId, userId);
 	}
 
-	private void checkAccountOrderPermissions(
+	private void _checkAccountOrderPermissions(
 			long groupId, long commerceAccountId)
 		throws PortalException {
 
