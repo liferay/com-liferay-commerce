@@ -30,4 +30,25 @@
 			</guest-unsupported>
 		</permissions>
 	</model-resource>
+	<model-resource>
+		<model-name>com.liferay.commerce.account.model.CommerceAccount</model-name>
+		<portlet-ref>
+			<portlet-name>com_liferay_commerce_account_web_internal_portlet_CommerceAccountPortlet</portlet-name>
+		</portlet-ref>
+		<weight>2</weight>
+		<permissions>
+			<supports>
+				<action-key>DELETE</action-key>
+				<action-key>UPDATE</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<site-member-defaults />
+			<guest-defaults />
+			<guest-unsupported>
+				<action-key>DELETE</action-key>
+				<action-key>UPDATE</action-key>
+				<action-key>VIEW</action-key>
+			</guest-unsupported>
+		</permissions>
+	</model-resource>
 </resource-action-mapping>

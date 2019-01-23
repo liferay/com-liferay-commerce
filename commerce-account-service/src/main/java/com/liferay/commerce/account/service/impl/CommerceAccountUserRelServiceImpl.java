@@ -41,7 +41,7 @@ public class CommerceAccountUserRelServiceImpl
 
 		_commerceAccountModelResourcePermission.check(
 			getPermissionChecker(), commerceAccountId,
-			ActionKeys.ASSIGN_MEMBERS);
+			ActionKeys.UPDATE);
 
 		commerceAccountUserRelLocalService.addCommerceAccountUserRels(
 			commerceAccountId, userIds, emailAddresses, roleIds,
@@ -55,7 +55,7 @@ public class CommerceAccountUserRelServiceImpl
 
 		_commerceAccountModelResourcePermission.check(
 			getPermissionChecker(), commerceAccountId,
-			ActionKeys.ASSIGN_MEMBERS);
+			ActionKeys.UPDATE);
 
 		CommerceAccountUserRelPK commerceAccountUserRelPK =
 			new CommerceAccountUserRelPK(commerceAccountId, userId);
@@ -70,7 +70,7 @@ public class CommerceAccountUserRelServiceImpl
 
 		_commerceAccountModelResourcePermission.check(
 			getPermissionChecker(), commerceAccountId,
-			ActionKeys.ASSIGN_MEMBERS);
+			ActionKeys.UPDATE);
 
 		commerceAccountUserRelLocalService.
 			deleteCommerceAccountUserRelsByCommerceAccountId(commerceAccountId);
@@ -83,7 +83,7 @@ public class CommerceAccountUserRelServiceImpl
 
 		_commerceAccountModelResourcePermission.check(
 			getPermissionChecker(), commerceAccountId,
-			ActionKeys.ASSIGN_MEMBERS);
+			ActionKeys.UPDATE);
 
 		commerceAccountUserRelLocalService.deleteCommerceAccountUserRels(
 			commerceAccountId, userIds);
@@ -95,7 +95,7 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.VIEW_MEMBERS);
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
 
 		return commerceAccountUserRelPersistence.findByCommerceAccountId(
 			commerceAccountId, start, end);
@@ -106,7 +106,7 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.VIEW_MEMBERS);
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
 
 		return
 			commerceAccountUserRelLocalService.getCommerceAccountUserRelsCount(
