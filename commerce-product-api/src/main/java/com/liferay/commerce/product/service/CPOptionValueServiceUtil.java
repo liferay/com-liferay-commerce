@@ -59,7 +59,7 @@ public class CPOptionValueServiceUtil {
 
 	public static com.liferay.commerce.product.model.CPOptionValue fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode)
-		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .fetchByExternalReferenceCode(companyId,
 			externalReferenceCode);

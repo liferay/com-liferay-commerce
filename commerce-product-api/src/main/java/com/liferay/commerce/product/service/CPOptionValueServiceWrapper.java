@@ -52,7 +52,7 @@ public class CPOptionValueServiceWrapper implements CPOptionValueService,
 	@Override
 	public com.liferay.commerce.product.model.CPOptionValue fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode)
-		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpOptionValueService.fetchByExternalReferenceCode(companyId,
 			externalReferenceCode);
 	}
