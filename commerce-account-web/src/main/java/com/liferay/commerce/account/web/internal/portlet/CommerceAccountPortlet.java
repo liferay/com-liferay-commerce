@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.web.internal.portlet;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
@@ -27,6 +28,8 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.users.admin.configuration.UserFileUploadsConfiguration;
@@ -108,8 +111,8 @@ public class CommerceAccountPortlet extends MVCPortlet {
 				_commerceAccountHelper, _commerceAccountService,
 				_commerceAddressService, _commerceCountryService,
 				_commerceRegionService, httpServletRequest,
-				_modelResourcePermission, _portal,
-				_userFileUploadsConfiguration);
+				_modelResourcePermission, _portal, _portletResourcePermission,
+				_userFileUploadsConfiguration, _userLocalService);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);
@@ -147,6 +150,14 @@ public class CommerceAccountPortlet extends MVCPortlet {
 	@Reference
 	private Portal _portal;
 
+	@Reference(
+		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
+
 	private volatile UserFileUploadsConfiguration _userFileUploadsConfiguration;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }

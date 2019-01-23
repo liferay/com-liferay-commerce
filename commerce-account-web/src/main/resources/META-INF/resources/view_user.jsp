@@ -17,11 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceAccountUserDisplayContext commerceAccountUserDisplayContext = (CommerceAccountUserDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceAccount commerceAccount = commerceAccountUserDisplayContext.getCurrentCommerceAccount();
-User selectedUser = commerceAccountUserDisplayContext.getSelectedUser();
-PortletURL portletURL = commerceAccountUserDisplayContext.getPortletURL();
+CommerceAccount commerceAccount = commerceAccountDisplayContext.getCurrentCommerceAccount();
+User selectedUser = commerceAccountDisplayContext.getSelectedUser();
+PortletURL portletURL = commerceAccountDisplayContext.getPortletURL();
 
 portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 %>
@@ -58,7 +58,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 <div class="commerce-account-container">
 	<commerce-ui:table
 		dataProviderKey="commerceAccountUserRoles"
-		filter="<%= commerceAccountUserDisplayContext.getAccountFilter() %>"
+		filter="<%= commerceAccountDisplayContext.getAccountFilter() %>"
 		itemPerPage="<%= 5 %>"
 		namespace="<%= renderResponse.getNamespace() %>"
 		pageNumber="1"

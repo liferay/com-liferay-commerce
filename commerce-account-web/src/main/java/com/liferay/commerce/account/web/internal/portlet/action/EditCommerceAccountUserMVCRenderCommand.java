@@ -14,16 +14,19 @@
 
 package com.liferay.commerce.account.web.internal.portlet.action;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
-import com.liferay.commerce.account.web.internal.display.context.CommerceAccountUserDisplayContext;
+import com.liferay.commerce.account.web.internal.display.context.CommerceAccountDisplayContext;
+import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -65,15 +68,16 @@ public class EditCommerceAccountUserMVCRenderCommand
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			renderRequest);
 
-		CommerceAccountUserDisplayContext commerceAccountUserDisplayContext =
-			new CommerceAccountUserDisplayContext(
+		CommerceAccountDisplayContext commerceAccountDisplayContext =
+			new CommerceAccountDisplayContext(
 				_commerceAccountHelper, _commerceAccountService,
-				_commerceCountryService, _commerceRegionService,
-				httpServletRequest, _modelResourcePermission, _portal,
-				_userFileUploadsConfiguration, _userLocalService);
+				_commerceAddressService, _commerceCountryService,
+				_commerceRegionService, httpServletRequest,
+				_modelResourcePermission, _portal, _portletResourcePermission,
+				null, _userLocalService);
 
 		renderRequest.setAttribute(
-			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountUserDisplayContext);
+			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);
 
 		return "/edit_user.jsp";
 	}
@@ -92,6 +96,9 @@ public class EditCommerceAccountUserMVCRenderCommand
 	private CommerceAccountService _commerceAccountService;
 
 	@Reference
+	private CommerceAddressService _commerceAddressService;
+
+	@Reference
 	private CommerceCountryService _commerceCountryService;
 
 	@Reference
@@ -104,6 +111,11 @@ public class EditCommerceAccountUserMVCRenderCommand
 
 	@Reference
 	private Portal _portal;
+
+	@Reference(
+		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 
 	private volatile UserFileUploadsConfiguration _userFileUploadsConfiguration;
 
