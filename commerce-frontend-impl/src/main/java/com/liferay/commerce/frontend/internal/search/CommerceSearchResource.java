@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
@@ -145,7 +146,8 @@ public class CommerceSearchResource {
 			StringPool.BLANK);
 
 		AccountList accountList = _commerceAccountResource.getAccountList(
-			themeDisplay.getUserId(), null,
+			themeDisplay.getUserId(),
+			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
 			commerceContext.getCommerceSiteType(), queryString, 1, 5,
 			themeDisplay.getPathImage());
 

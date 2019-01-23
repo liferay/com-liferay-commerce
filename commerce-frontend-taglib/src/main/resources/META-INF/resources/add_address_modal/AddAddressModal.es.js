@@ -99,7 +99,6 @@ class AddAddressModal extends Component {
 		const isSecondFormValid =
 			!!(
 				this._formData.referent && this._formData.referent.length &&
-				this._formData.email && this._formData.email.length &&
 				this._formData.telephone && this._formData.telephone.length
 			);
 		this._isSecondFormValid = isSecondFormValid;
@@ -153,7 +152,10 @@ class AddAddressModal extends Component {
 	_addAddress(e) {
 		return this.emit(
 			'addAddressModalSave',
-			this._formData
+			Object.assign(
+				{},
+				this._formData,
+				{addressType: this.addressType})
 		);
 	}
 
@@ -207,7 +209,6 @@ AddAddressModal.STATE = {
 				]
 			),
 			referent: Config.string(),
-			email: Config.string(),
 			telephone: Config.string()
 		}
 	).value(
@@ -218,7 +219,6 @@ AddAddressModal.STATE = {
 			zipCode: null,
 			country: null,
 			referent: null,
-			email: null,
 			telephone: null
 		}
 	),
