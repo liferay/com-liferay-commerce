@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.commerce.price.list.exception.NoSuchPriceEntryException;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
 import com.liferay.commerce.product.model.CPInstance;
@@ -31,8 +32,6 @@ import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.ws.rs.NotFoundException;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -70,7 +69,7 @@ public class PriceEntryHelper {
 		}
 
 		if (commercePriceEntry == null) {
-			throw new NotFoundException(
+			throw new NoSuchPriceEntryException(
 				"Unable to find Price Entry with ID " + id);
 		}
 
