@@ -22,6 +22,7 @@ import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.Response;
 import com.liferay.commerce.openapi.util.Schema;
+import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.IOException;
@@ -142,6 +143,97 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		_writeResourceImplementationSource(version, path, componentDefinitions);
 	}
 
+	protected String toResourceImplementationMethods(
+		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
+
+		StringBuilder sb = new StringBuilder();
+
+		Iterator<Method> iterator = methods.iterator();
+
+		while (iterator.hasNext()) {
+			Method method = iterator.next();
+
+			sb.append("\t@Override\n");
+
+			sb.append(
+				_getMethodDeclaration(method, false, componentDefinitions));
+
+			sb.append(" {\n");
+
+			if (method.hasResponseContent()) {
+				ComponentDefinition schemaComponentDefinition =
+					_getSchemaComponentDefinition(method, componentDefinitions);
+
+				if (schemaComponentDefinition == null) {
+					throw new GeneratorException(
+						"Response schema definition misses for method " +
+							method);
+				}
+
+				if (schemaComponentDefinition.isArray()) {
+					sb.append("\t\treturn new CollectionDTO(");
+					sb.append("Collections.emptyList(), 0);\n");
+				}
+				else {
+					sb.append("\t\treturn new ");
+
+					sb.append(schemaComponentDefinition.getName());
+
+					sb.append("DTO();\n");
+				}
+			}
+			else {
+				sb.append("\t\tResponse.ResponseBuilder responseBuilder = ");
+				sb.append(_getResponse(method.getResponses()));
+				sb.append("\t\treturn responseBuilder.build();\n");
+			}
+
+			sb.append("\t}\n");
+
+			if (iterator.hasNext()) {
+				sb.append("\n");
+			}
+		}
+
+		return sb.toString();
+	}
+
+	protected String toResourceInterfaceMethods(
+		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
+
+		StringBuilder sb = new StringBuilder();
+
+		Iterator<Method> iterator = methods.iterator();
+
+		while (iterator.hasNext()) {
+			Method method = iterator.next();
+
+			sb.append("\t@Path(\"");
+			sb.append(method.getPath());
+			sb.append("\")\n");
+			sb.append("\t@");
+			sb.append(method.getHttpMethod());
+			sb.append("\n");
+
+			sb.append(_getProducesAnnotation(method.getResponses()));
+
+			sb.append(_getConsumesAnnotation(method.getRequestBody()));
+
+			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
+
+			sb.append(
+				_getMethodDeclaration(method, true, componentDefinitions));
+
+			sb.append(";\n");
+
+			if (iterator.hasNext()) {
+				sb.append("\n");
+			}
+		}
+
+		return sb.toString();
+	}
+
 	private String _getConsumesAnnotation(List<Content> requestBody) {
 		if (requestBody.isEmpty()) {
 			return "";
@@ -242,7 +334,9 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			ComponentDefinition schemaComponentDefinition =
 				_getSchemaComponentDefinition(method, componentDefinitions);
 
-			if (schemaComponentDefinition.isArray()) {
+			if ((schemaComponentDefinition != null) &&
+				schemaComponentDefinition.isArray()) {
+
 				if (!parameters.isEmpty()) {
 					sb.append(", ");
 				}
@@ -414,6 +508,10 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		Content content = _getResponseContent(method.getResponses());
 
+		if (content == null) {
+			return null;
+		}
+
 		Schema schema = content.getSchema();
 
 		ComponentDefinition schemaComponentDefinition =
@@ -560,91 +658,6 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return sb.toString();
 	}
 
-	private String _toResourceImplementationMethods(
-		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
-
-		StringBuilder sb = new StringBuilder();
-
-		Iterator<Method> iterator = methods.iterator();
-
-		while (iterator.hasNext()) {
-			Method method = iterator.next();
-
-			sb.append("\t@Override\n");
-
-			sb.append(
-				_getMethodDeclaration(method, false, componentDefinitions));
-
-			sb.append(" {\n");
-
-			if (method.hasResponseContent()) {
-				ComponentDefinition schemaComponentDefinition =
-					_getSchemaComponentDefinition(method, componentDefinitions);
-
-				if (schemaComponentDefinition.isArray()) {
-					sb.append("\t\treturn new CollectionDTO(");
-					sb.append("Collections.emptyList(), 0);\n");
-				}
-				else {
-					sb.append("\t\treturn new ");
-
-					sb.append(schemaComponentDefinition.getName());
-
-					sb.append("DTO();\n");
-				}
-			}
-			else {
-				sb.append("\t\tResponse.ResponseBuilder responseBuilder = ");
-				sb.append(_getResponse(method.getResponses()));
-				sb.append("\t\treturn responseBuilder.build();\n");
-			}
-
-			sb.append("\t}\n");
-
-			if (iterator.hasNext()) {
-				sb.append("\n");
-			}
-		}
-
-		return sb.toString();
-	}
-
-	private String _toResourceInterfaceMethods(
-		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
-
-		StringBuilder sb = new StringBuilder();
-
-		Iterator<Method> iterator = methods.iterator();
-
-		while (iterator.hasNext()) {
-			Method method = iterator.next();
-
-			sb.append("\t@Path(\"");
-			sb.append(method.getPath());
-			sb.append("\")\n");
-			sb.append("\t@");
-			sb.append(method.getHttpMethod());
-			sb.append("\n");
-
-			sb.append(_getProducesAnnotation(method.getResponses()));
-
-			sb.append(_getConsumesAnnotation(method.getRequestBody()));
-
-			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
-
-			sb.append(
-				_getMethodDeclaration(method, true, componentDefinitions));
-
-			sb.append(";\n");
-
-			if (iterator.hasNext()) {
-				sb.append("\n");
-			}
-		}
-
-		return sb.toString();
-	}
-
 	private void _writeResourceImplementationSource(
 			String version, Path path,
 			Set<ComponentDefinition> componentDefinitions)
@@ -715,7 +728,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${METHODS}",
-			_toResourceImplementationMethods(
+			toResourceImplementationMethods(
 				path.getMethods(), componentDefinitions));
 
 		writeSource(osgiResourceComponent, componentSourcePath);
@@ -758,7 +771,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${METHODS}",
-			_toResourceInterfaceMethods(
+			toResourceInterfaceMethods(
 				path.getMethods(), componentDefinitions));
 
 		String componentSourcePath = getClassSourcePath(
