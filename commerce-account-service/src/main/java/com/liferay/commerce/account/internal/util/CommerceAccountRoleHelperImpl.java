@@ -22,10 +22,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.service.ResourceActionLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,6 +78,9 @@ public class CommerceAccountRoleHelperImpl
 		throws PortalException {
 
 		for (Map.Entry<String, String[]> entry : resourceActionIds.entrySet()) {
+			_resourceActionLocalService.checkResourceActions(
+				entry.getKey(), Arrays.asList(entry.getValue()));
+
 			for (String actionId : entry.getValue()) {
 				_resourcePermissionLocalService.addResourcePermission(
 					serviceContext.getCompanyId(), entry.getKey(),
@@ -111,6 +116,9 @@ public class CommerceAccountRoleHelperImpl
 
 		_setRolePermissions(role, resourceActionIds, serviceContext);
 	}
+
+	@Reference
+	private ResourceActionLocalService _resourceActionLocalService;
 
 	@Reference
 	private ResourcePermissionLocalService _resourcePermissionLocalService;
