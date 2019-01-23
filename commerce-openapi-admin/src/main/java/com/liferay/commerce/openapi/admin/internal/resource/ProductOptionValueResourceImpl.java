@@ -14,16 +14,20 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.ProductOptionValueHelper;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductOptionValueResource;
+import com.liferay.portal.kernel.model.Company;
 
 import java.util.Locale;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -46,6 +50,8 @@ public class ProductOptionValueResourceImpl
 			String id, long groupId, Locale locale)
 		throws Exception {
 
+		_productOptionValueHelper.deleteProductOptionValue(id, _company);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -56,7 +62,8 @@ public class ProductOptionValueResourceImpl
 			String id, long groupId, Locale locale)
 		throws Exception {
 
-		return new ProductOptionValueDTO();
+		return _productOptionValueHelper.getProductOptionValue(
+			id, locale, _company);
 	}
 
 	@Override
@@ -65,9 +72,18 @@ public class ProductOptionValueResourceImpl
 			ProductOptionValueDTO productOptionValueDTO, Locale locale)
 		throws Exception {
 
+		_productOptionValueHelper.updateProductOptionValue(
+			id, groupId, productOptionValueDTO, locale, _company);
+
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
 	}
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private ProductOptionValueHelper _productOptionValueHelper;
 
 }
