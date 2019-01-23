@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.ProductOptionHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.ProductOptionValueHelper;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
@@ -22,7 +23,6 @@ import com.liferay.commerce.openapi.admin.resource.ProductOptionResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.portal.kernel.model.Company;
 
-import java.util.Collections;
 import java.util.Locale;
 
 import javax.annotation.Generated;
@@ -81,7 +81,8 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			String id, long groupId, Locale locale, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _productOptionValueHelper.getProductOptionValues(
+			id, locale, _company, pagination);
 	}
 
 	@Override
@@ -113,7 +114,8 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			ProductOptionValueDTO productOptionValueDTO, Locale locale)
 		throws Exception {
 
-		return new ProductOptionValueDTO();
+		return _productOptionValueHelper.upsertProductOptionValue(
+			id, groupId, productOptionValueDTO, locale, _company);
 	}
 
 	@Context
@@ -121,5 +123,8 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Reference
 	private ProductOptionHelper _productOptionHelper;
+
+	@Reference
+	private ProductOptionValueHelper _productOptionValueHelper;
 
 }

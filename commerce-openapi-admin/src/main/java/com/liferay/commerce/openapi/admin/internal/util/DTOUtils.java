@@ -18,10 +18,12 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
+import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.product.model.CPOption;
+import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -102,6 +104,22 @@ public class DTOUtils {
 		productOptionDTO.setSkuContributor(cpOption.getSkuContributor());
 
 		return productOptionDTO;
+	}
+
+	public static ProductOptionValueDTO modelToDTO(
+		CPOptionValue cpOptionValue, Locale locale) {
+
+		ProductOptionValueDTO productOptionValueDTO =
+			new ProductOptionValueDTO();
+
+		productOptionValueDTO.setExternalReferenceCode(
+			cpOptionValue.getExternalReferenceCode());
+		productOptionValueDTO.setId(cpOptionValue.getCPOptionValueId());
+		productOptionValueDTO.setKey(cpOptionValue.getKey());
+		productOptionValueDTO.setName(cpOptionValue.getName(locale));
+		productOptionValueDTO.setPriority(cpOptionValue.getPriority());
+
+		return productOptionValueDTO;
 	}
 
 	public static WebSiteDTO modelToDTO(Group group, Locale locale) {
