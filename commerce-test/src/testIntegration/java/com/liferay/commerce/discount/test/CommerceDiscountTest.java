@@ -70,6 +70,7 @@ public class CommerceDiscountTest {
 		_user = UserTestUtil.addUser();
 	}
 
+	@Ignore
 	@Test
 	public void testCommerceFixedDiscount() throws Exception {
 		frutillaRule.scenario(
@@ -440,6 +441,7 @@ public class CommerceDiscountTest {
 			actualPrice5.stripTrailingZeros());
 	}
 
+	@Ignore
 	@Test
 	public void testCouponCodeDiscount() throws Exception {
 		frutillaRule.scenario(
@@ -507,6 +509,7 @@ public class CommerceDiscountTest {
 			actualPrice.stripTrailingZeros());
 	}
 
+	@Ignore
 	@Test
 	public void testUserSegmentDiscount() throws Exception {
 		frutillaRule.scenario(
