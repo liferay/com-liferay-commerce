@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 @ProviderType
 public interface CommerceAccountHelper {
 
-	public String getCommerceUserPortletURL(
+	public String getAccountManagementPortletURL(
 			HttpServletRequest httpServletRequest)
 		throws PortalException;
 
