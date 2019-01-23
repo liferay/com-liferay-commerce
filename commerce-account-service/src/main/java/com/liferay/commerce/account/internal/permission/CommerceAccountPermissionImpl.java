@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 
@@ -156,10 +156,10 @@ public class CommerceAccountPermissionImpl
 				return true;
 			}
 			else if (actionId.equals(ActionKeys.UPDATE) &&
-					 _portletResourcePermission.contains(
+					 _commerceAccountModelResourcePermission.contains(
 						 permissionChecker,
 						 commerceAccount.getCommerceAccountGroupId(),
-						 CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
+						 ActionKeys.UPDATE)) {
 
 				return true;
 			}
@@ -172,7 +172,16 @@ public class CommerceAccountPermissionImpl
 				return true;
 			}
 			else if (actionId.equals(ActionKeys.VIEW) &&
-					 _portletResourcePermission.contains(
+					 _commerceAccountModelResourcePermission.contains(
+						 permissionChecker,
+						 commerceAccount.getCommerceAccountGroupId(),
+						 CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
+
+				return true;
+			}
+			else if (actionId.equals(
+						CommerceAccountActionKeys.MANAGE_ACCOUNTS) &&
+					 _commerceAccountModelResourcePermission.contains(
 						 permissionChecker,
 						 commerceAccount.getCommerceAccountGroupId(),
 						 CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
@@ -190,8 +199,9 @@ public class CommerceAccountPermissionImpl
 	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Reference(
-		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
+		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
 	)
-	private PortletResourcePermission _portletResourcePermission;
+	private ModelResourcePermission<CommerceAccount>
+		_commerceAccountModelResourcePermission;
 
 }
