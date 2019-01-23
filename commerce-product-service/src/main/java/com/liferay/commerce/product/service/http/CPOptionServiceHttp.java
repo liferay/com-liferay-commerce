@@ -121,12 +121,46 @@ public class CPOptionServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPOption fetchByExternalReferenceCode(
+		HttpPrincipal httpPrincipal, long companyId,
+		String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPOptionServiceUtil.class,
+					"fetchByExternalReferenceCode",
+					_fetchByExternalReferenceCodeParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, externalReferenceCode);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.product.model.CPOption)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CPOption fetchCPOption(
 		HttpPrincipal httpPrincipal, long cpOptionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPOptionServiceUtil.class,
-					"fetchCPOption", _fetchCPOptionParameterTypes2);
+					"fetchCPOption", _fetchCPOptionParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpOptionId);
@@ -158,7 +192,7 @@ public class CPOptionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPOptionServiceUtil.class,
-					"fetchCPOption", _fetchCPOptionParameterTypes3);
+					"fetchCPOption", _fetchCPOptionParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					key);
@@ -190,44 +224,10 @@ public class CPOptionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPOptionServiceUtil.class,
-					"getCPOption", _getCPOptionParameterTypes4);
+					"getCPOption", _getCPOptionParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpOptionId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.commerce.product.model.CPOption)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CPOption fetchByExternalReferenceCode(
-		HttpPrincipal httpPrincipal, long companyId,
-		String externalReferenceCode)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CPOptionServiceUtil.class,
-					"fetchByExternalReferenceCode",
-					_fetchByExternalReferenceCodeParameterTypes5);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, externalReferenceCode);
 
 			Object returnObj = null;
 
@@ -434,17 +434,17 @@ public class CPOptionServiceHttp {
 	private static final Class<?>[] _deleteCPOptionParameterTypes1 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _fetchCPOptionParameterTypes2 = new Class[] {
+	private static final Class<?>[] _fetchByExternalReferenceCodeParameterTypes2 =
+		new Class[] { long.class, String.class };
+	private static final Class<?>[] _fetchCPOptionParameterTypes3 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _fetchCPOptionParameterTypes3 = new Class[] {
+	private static final Class<?>[] _fetchCPOptionParameterTypes4 = new Class[] {
 			long.class, String.class
 		};
-	private static final Class<?>[] _getCPOptionParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getCPOptionParameterTypes5 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _fetchByExternalReferenceCodeParameterTypes5 =
-		new Class[] { long.class, String.class };
 	private static final Class<?>[] _getCPOptionsParameterTypes6 = new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
