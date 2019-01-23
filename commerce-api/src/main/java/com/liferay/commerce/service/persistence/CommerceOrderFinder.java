@@ -22,13 +22,13 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CommerceOrderFinder {
-	public int countByU_O(long userId,
+	public int countByG_U_C_O(long userId,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.model.CommerceOrder> queryDefinition);
 
 	public java.util.List<com.liferay.commerce.model.CommerceOrder> findByG_O(
 		long groupId, int[] orderStatuses);
 
-	public java.util.List<com.liferay.commerce.model.CommerceOrder> findByU_O(
+	public java.util.List<com.liferay.commerce.model.CommerceOrder> findByG_U_C_O(
 		long userId,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.model.CommerceOrder> queryDefinition);
 }

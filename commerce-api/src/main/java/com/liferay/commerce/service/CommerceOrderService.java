@@ -123,17 +123,7 @@ public interface CommerceOrderService extends BaseService {
 		int[] orderStatuses) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrder> getCommerceOrders(long groupId,
-		long commerceAccountId, int start, int end,
-		OrderByComparator<CommerceOrder> orderByComparator)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceOrdersCount(long groupId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceOrdersCount(long groupId, long commerceAccountId)
-		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -143,29 +133,22 @@ public interface CommerceOrderService extends BaseService {
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
-		int orderStatus, String keywords, int start, int end);
+	public List<CommerceOrder> getPendingCommerceOrders(long groupId,
+		long commerceAccountId, String keywords, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
-		Integer orderStatus, boolean excludeOrderStatus, String keywords,
-		int start, int end);
+	public int getPendingCommerceOrdersCount(long groupId,
+		long commerceAccountId, String keywords) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrder> getUserCommerceOrders(long groupId, long userId,
-		String keywords, int start, int end);
+	public List<CommerceOrder> getPlacedCommerceOrders(long groupId,
+		long commerceAccountId, String keywords, int start, int end)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserCommerceOrdersCount(long groupId, long userId,
-		int orderStatus, boolean excludeOrderStatus, String keywords);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserCommerceOrdersCount(long groupId, long userId,
-		int orderStatus, String keywords);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserCommerceOrdersCount(long groupId, long userId,
-		String keywords) throws PortalException;
+	public int getPlacedCommerceOrdersCount(long groupId,
+		long commerceAccountId, String keywords) throws PortalException;
 
 	public void mergeGuestCommerceOrder(long guestCommerceOrderId,
 		long userCommerceOrderId, CommerceContext commerceContext,
