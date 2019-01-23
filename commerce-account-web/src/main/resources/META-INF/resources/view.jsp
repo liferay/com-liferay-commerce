@@ -23,16 +23,13 @@ List<CommerceAccount> commerceAccounts = commerceAccountDisplayContext.getCommer
 %>
 
 <c:choose>
-	<c:when test="<%= (commerceAccounts.size() == 1) && commerceAccountDisplayContext.hasManageCommerceAccountPermissions() %>">
+	<c:when test="<%= (commerceAccounts.size() > 1) || commerceAccountDisplayContext.hasManageCommerceAccountPermissions() %>">
 		<liferay-util:include page="/view_account_list.jsp" servletContext="<%= application %>" />
 	</c:when>
-	<c:when test="<%= (commerceAccounts.size() == 1) && commerceAccountDisplayContext.hasEditCommerceAccountPermissions(commerceAccounts.get(0)) %>">
+	<c:when test="<%= commerceAccountDisplayContext.hasEditCommerceAccountPermissions(commerceAccounts.get(0)) %>">
 		<liferay-util:include page="/view_account.jsp" servletContext="<%= application %>" />
 	</c:when>
-	<c:when test="<%= commerceAccounts.size() == 1 %>">
-		<liferay-util:include page="/view_user.jsp" servletContext="<%= application %>" />
-	</c:when>
 	<c:otherwise>
-		<liferay-util:include page="/view_account_list.jsp" servletContext="<%= application %>" />
+		<liferay-util:include page="/view_user.jsp" servletContext="<%= application %>" />
 	</c:otherwise>
 </c:choose>
