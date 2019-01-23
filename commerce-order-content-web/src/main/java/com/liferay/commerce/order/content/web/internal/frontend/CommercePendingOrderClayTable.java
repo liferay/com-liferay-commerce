@@ -14,9 +14,6 @@
 
 package com.liferay.commerce.order.content.web.internal.frontend;
 
-import com.liferay.commerce.constants.CommerceOrderConstants;
-import com.liferay.commerce.constants.CommercePortletKeys;
-import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.frontend.ClayTable;
 import com.liferay.commerce.frontend.ClayTableAction;
 import com.liferay.commerce.frontend.ClayTableActionProvider;
@@ -27,31 +24,20 @@ import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
 import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
 import com.liferay.commerce.order.content.web.internal.model.Order;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.portlet.PortletQName;
-import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
-
-import java.text.DateFormat;
-import java.text.Format;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -64,19 +50,19 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"commerce.data.provider.key=" + CommerceOrderClayTable.NAME,
-		"commerce.table.name=" + CommerceOrderClayTable.NAME
+		"commerce.data.provider.key=" + CommercePendingOrderClayTable.NAME,
+		"commerce.table.name=" + CommercePendingOrderClayTable.NAME
 	},
 	service = {
 		ClayTable.class, ClayTableActionProvider.class,
 		CommerceDataSetDataProvider.class
 	}
 )
-public class CommerceOrderClayTable
+public class CommercePendingOrderClayTable
 	implements CommerceDataSetDataProvider<Order>, ClayTable,
 			   ClayTableActionProvider {
 
-	public static final String NAME = "commerceOrders";
+	public static final String NAME = "commercePendingOrders";
 
 	@Override
 	public List<ClayTableAction> clayTableActions(
@@ -95,11 +81,11 @@ public class CommerceOrderClayTable
 				themeDisplay.getPermissionChecker(), order.getOrderId(),
 				ActionKeys.VIEW)) {
 
-			String viewURL = _getOrderViewDetailURL(
+			String editURL = CommerceOrderClayTableUtil.getEditOrderURL(
 				order.getOrderId(), themeDisplay);
 
 			ClayTableAction clayTableAction = new ClayTableAction(
-				viewURL, StringPool.BLANK,
+				editURL, StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "view"), false, false);
 
 			clayTableActions.add(clayTableAction);
@@ -116,21 +102,9 @@ public class CommerceOrderClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		String portletName = portletDisplay.getPortletName();
-
-		if (portletName.equals(
-				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT)) {
-
-			return _commerceOrderService.getUserCommerceOrdersCount(
-				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				CommerceOrderConstants.ORDER_STATUS_OPEN, filter.getKeywords());
-		}
-
-		return _commerceOrderService.getUserCommerceOrdersCount(
-			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-			CommerceOrderConstants.ORDER_STATUS_OPEN, true,
+		return _commerceOrderService.getPendingCommerceOrdersCount(
+			themeDisplay.getScopeGroupId(),
+			CommerceOrderClayTableUtil.getCommerceAccountId(httpServletRequest),
 			filter.getKeywords());
 	}
 
@@ -160,86 +134,25 @@ public class CommerceOrderClayTable
 			Pagination pagination, Sort sort)
 		throws PortalException {
 
-		List<Order> orders = new ArrayList<>();
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		String portletName = portletDisplay.getPortletName();
-
-		List<CommerceOrder> commerceOrders = null;
-
-		if (portletName.equals(
-				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT)) {
-
-			commerceOrders = _commerceOrderService.getUserCommerceOrders(
-				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				CommerceOrderConstants.ORDER_STATUS_OPEN, filter.getKeywords(),
-				pagination.getStartPosition(), pagination.getEndPosition());
-		}
-		else {
-			commerceOrders = _commerceOrderService.getUserCommerceOrders(
-				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				CommerceOrderConstants.ORDER_STATUS_OPEN, true,
+		List<CommerceOrder> commerceOrders =
+			_commerceOrderService.getPendingCommerceOrders(
+				themeDisplay.getScopeGroupId(),
+				CommerceOrderClayTableUtil.getCommerceAccountId(
+					httpServletRequest),
 				filter.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
-		}
 
-		for (CommerceOrder commerceOrder : commerceOrders) {
-			String amount = StringPool.BLANK;
-
-			CommerceMoney totalMoney = commerceOrder.getTotalMoney();
-
-			if (totalMoney != null) {
-				amount = totalMoney.format(themeDisplay.getLocale());
-			}
-
-			Format dateFormat = FastDateFormatFactoryUtil.getDate(
-				DateFormat.MEDIUM, themeDisplay.getLocale(),
-				themeDisplay.getTimeZone());
-
-			orders.add(
-				new Order(
-					commerceOrder.getCommerceOrderId(),
-					commerceOrder.getCommerceAccountName(),
-					dateFormat.format(commerceOrder.getCreateDate()),
-					commerceOrder.getUserName(),
-					WorkflowConstants.getStatusLabel(commerceOrder.getStatus()),
-					amount,
-					_getOrderViewDetailURL(
-						commerceOrder.getCommerceOrderId(), themeDisplay)));
-		}
-
-		return orders;
+		return CommerceOrderClayTableUtil.getOrders(
+			commerceOrders, themeDisplay, true);
 	}
 
 	@Override
 	public boolean isShowActionsMenu() {
 		return true;
-	}
-
-	private String _getOrderViewDetailURL(
-			long commerceOrderId, ThemeDisplay themeDisplay)
-		throws PortalException {
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		PortletURL portletURL = PortletURLFactoryUtil.create(
-			themeDisplay.getRequest(), portletDisplay.getId(),
-			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
-
-		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
-		portletURL.setParameter(
-			"commerceOrderId", String.valueOf(commerceOrderId));
-
-		portletURL.setParameter(
-			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
-			_portal.getCurrentURL(themeDisplay.getRequest()));
-
-		return portletURL.toString();
 	}
 
 	@Reference
@@ -252,8 +165,5 @@ public class CommerceOrderClayTable
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
 	)
 	private ModelResourcePermission<CommerceOrder> _modelResourcePermission;
-
-	@Reference
-	private Portal _portal;
 
 }

@@ -49,7 +49,7 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 	<aui:model-context model="<%= CommerceOrderNote.class %>" />
 
 	<div class="taglib-discussion">
-		<c:if test="<%= commerceOrder.isOpen() && (manageNotesPermission || manageRestrictedNotesPermission) %>">
+		<c:if test="<%= manageNotesPermission || manageRestrictedNotesPermission %>">
 			<div class="minium-card">
 				<div class="minium-card__content">
 					<div class="lfr-discussion-details">
@@ -140,37 +140,35 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 							</div>
 
 							<div class="card-col-field">
-								<c:if test="<%= commerceOrder.isOpen() %>">
-									<liferay-ui:icon-menu
-										direction="left-side"
-										icon="<%= StringPool.BLANK %>"
-										markupView="lexicon"
-										message="<%= StringPool.BLANK %>"
-										showWhenSingleIcon="<%= true %>"
-									>
-										<portlet:renderURL var="editURL">
-											<portlet:param name="mvcRenderCommandName" value="editCommerceOrderNote" />
-											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="commerceOrderNoteId" value="<%= String.valueOf(commerceOrderNote.getCommerceOrderNoteId()) %>" />
-										</portlet:renderURL>
+								<liferay-ui:icon-menu
+									direction="left-side"
+									icon="<%= StringPool.BLANK %>"
+									markupView="lexicon"
+									message="<%= StringPool.BLANK %>"
+									showWhenSingleIcon="<%= true %>"
+								>
+									<portlet:renderURL var="editURL">
+										<portlet:param name="mvcRenderCommandName" value="editCommerceOrderNote" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="commerceOrderNoteId" value="<%= String.valueOf(commerceOrderNote.getCommerceOrderNoteId()) %>" />
+									</portlet:renderURL>
 
-										<liferay-ui:icon
-											message="edit"
-											url="<%= editURL %>"
-										/>
+									<liferay-ui:icon
+										message="edit"
+										url="<%= editURL %>"
+									/>
 
-										<portlet:actionURL name="editCommerceOrderNote" var="deleteURL">
-											<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="commerceOrderNoteId" value="<%= String.valueOf(commerceOrderNote.getCommerceOrderNoteId()) %>" />
-										</portlet:actionURL>
+									<portlet:actionURL name="editCommerceOrderNote" var="deleteURL">
+										<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="commerceOrderNoteId" value="<%= String.valueOf(commerceOrderNote.getCommerceOrderNoteId()) %>" />
+									</portlet:actionURL>
 
-										<liferay-ui:icon-delete
-											label="<%= true %>"
-											url="<%= deleteURL %>"
-										/>
-									</liferay-ui:icon-menu>
-								</c:if>
+									<liferay-ui:icon-delete
+										label="<%= true %>"
+										url="<%= deleteURL %>"
+									/>
+								</liferay-ui:icon-menu>
 							</div>
 						</div>
 					</div>

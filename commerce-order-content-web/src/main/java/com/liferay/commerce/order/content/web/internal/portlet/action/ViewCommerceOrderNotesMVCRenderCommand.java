@@ -24,16 +24,16 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	property = {
-		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT,
+		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_ORDER_CONTENT,
 		"mvc.command.name=editCommerceOrderNotes"
 	},
 	service = MVCRenderCommand.class
 )
-public class EditCommerceOrderNotesMVCRenderCommand
+public class ViewCommerceOrderNotesMVCRenderCommand
 	implements MVCRenderCommand {
 
 	@Override
@@ -41,7 +41,7 @@ public class EditCommerceOrderNotesMVCRenderCommand
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		return "/pending_orders/edit_order_notes.jsp";
+		return "/placed_orders/view_order_notes.jsp";
 	}
 
 }

@@ -36,12 +36,12 @@ List<CommerceOrder> commerceOrders = commerceOrderContentDisplayContext.getComme
 	<div class="container-fluid-1280" id="<portlet:namespace />ordersContainer">
 		<div class="commerce-orders-container" id="<portlet:namespace />entriesContainer">
 			<commerce-ui:table
-				dataProviderKey="commerceOrders"
+				dataProviderKey="commercePendingOrders"
 				itemPerPage="<%= 5 %>"
 				namespace="<%= renderResponse.getNamespace() %>"
 				pageNumber="1"
 				portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
-				tableName="commerceOrders"
+				tableName="commercePendingOrders"
 			/>
 		</div>
 	</div>
