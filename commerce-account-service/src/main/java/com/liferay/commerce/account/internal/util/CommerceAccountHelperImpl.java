@@ -16,6 +16,7 @@ package com.liferay.commerce.account.internal.util;
 
 import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountService;
@@ -49,19 +50,19 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 	@Override
-	public String getCommerceUserPortletURL(
+	public String getAccountManagementPortletURL(
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
 
 		long plid = _portal.getPlidFromPortletId(
-			groupId, _COMMERCE_USER_PORTLET_ID);
+			groupId, CommerceAccountPortletKeys.COMMERCE_ACCOUNT);
 
 		if (plid > 0) {
 			PortletURL portletURL = _portletURLFactory.create(
-				httpServletRequest, _COMMERCE_USER_PORTLET_ID, plid,
-				PortletRequest.RENDER_PHASE);
+				httpServletRequest, CommerceAccountPortletKeys.COMMERCE_ACCOUNT,
+				plid, PortletRequest.RENDER_PHASE);
 
 			return portletURL.toString();
 		}
@@ -202,9 +203,6 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 		return null;
 	}
-
-	private static final String _COMMERCE_USER_PORTLET_ID =
-		"com_liferay_commerce_user_web_internal_portlet_CommerceUserPortlet";
 
 	private static final String _CURRENT_COMMERCE_ACCOUNT_ID_KEY =
 		"LIFERAY_SHARED_CURRENT_COMMERCE_ACCOUNT_ID_";
