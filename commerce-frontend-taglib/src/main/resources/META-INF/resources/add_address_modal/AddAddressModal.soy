@@ -11,7 +11,6 @@
 		region: string,
 		country: string,
 		referent: string,
-		email: string,
 		telephone: string
 	]}
 	{@param? _countries: list<[
@@ -30,7 +29,6 @@
 	{@param? _handleSelectBox: any }
 	{@param? _handleCloseModal: any }
 	{@param? _handleFormSubmit: any }
-	{@param? _handleCreateButton: any }
 	{@param? _handleNextButton: any }
 	{@param? _handleTypeChange: any }
 	{@param? _handleFirstDotClick: any }
@@ -235,18 +233,6 @@
 						<div class="col-12">
 							{call CommerceInputText.render}
 								{param contextName: 'add-new-address' /}
-								{param name: 'email' /}
-								{param label: 'Email' /}
-								{param value: $_formData.email /}
-								{param type: 'email' /}
-								{param required: true /}
-								{param _handleInputKeyUp: $_handleInputBox /}
-							{/call}
-						</div>
-
-						<div class="col-12">
-							{call CommerceInputText.render}
-								{param contextName: 'add-new-address' /}
 								{param name: 'telephone' /}
 								{param label: 'Telephone' /}
 								{param value: $_formData.telephone /}
@@ -267,7 +253,7 @@
 								<button
 									type="submit"
 									class="{$addButtonClasses}"
-									data-onclick="{$_handleCreateButton}"
+									data-onclick="{$_handleFormSubmit}"
 								>
 									Create
 								</button>
