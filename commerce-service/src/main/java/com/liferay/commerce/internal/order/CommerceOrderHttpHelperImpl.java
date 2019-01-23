@@ -32,11 +32,8 @@ import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.lang.CentralizedThreadLocal;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -384,17 +381,9 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			themeDisplay.getRequest(), cookieName, true);
 
 		if (Validator.isNotNull(commerceOrderUuid)) {
-			try {
-				commerceOrder = _commerceOrderService.fetchCommerceOrder(
+			commerceOrder =
+				_commerceOrderLocalService.fetchCommerceOrderByUuidAndGroupId(
 					commerceOrderUuid, themeDisplay.getScopeGroupId());
-			}
-			catch (PrincipalException pe) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(pe, pe);
-				}
-
-				return null;
-			}
 
 			if (commerceOrder != null) {
 				_commerceOrderUuidThreadLocal.set(commerceOrder);
@@ -478,9 +467,6 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			versionCommerceOrderValidator.validate(locale, commerceOrderItem);
 		}
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceOrderHttpHelperImpl.class);
 
 	private static ModelResourcePermission<CommerceOrder>
 		_commerceOrderModelResourcePermission;
