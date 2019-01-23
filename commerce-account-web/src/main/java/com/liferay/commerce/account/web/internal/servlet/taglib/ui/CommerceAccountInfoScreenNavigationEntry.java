@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.web.internal.servlet.taglib.ui;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
@@ -27,6 +28,8 @@ import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.users.admin.configuration.UserFileUploadsConfiguration;
@@ -91,8 +94,8 @@ public class CommerceAccountInfoScreenNavigationEntry
 				_commerceAccountHelper, _commerceAccountService,
 				_commerceAddressService, _commerceCountryService,
 				_commerceRegionService, httpServletRequest,
-				_modelResourcePermission, _portal,
-				_userFileUploadsConfiguration);
+				_modelResourcePermission, _portal, _portletResourcePermission,
+				_userFileUploadsConfiguration, _userLocalService);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);
@@ -134,6 +137,14 @@ public class CommerceAccountInfoScreenNavigationEntry
 	@Reference
 	private Portal _portal;
 
+	@Reference(
+		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
+	)
+	private PortletResourcePermission _portletResourcePermission;
+
 	private volatile UserFileUploadsConfiguration _userFileUploadsConfiguration;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
