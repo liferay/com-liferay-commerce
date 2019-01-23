@@ -102,6 +102,21 @@ public class CPOptionValueServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPOptionValueSoap fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CPOptionValue returnValue = CPOptionValueServiceUtil.fetchByExternalReferenceCode(companyId,
+					externalReferenceCode);
+
+			return com.liferay.commerce.product.model.CPOptionValueSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CPOptionValueSoap fetchCPOptionValue(
 		long cpOptionValueId) throws RemoteException {
 		try {

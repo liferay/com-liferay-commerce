@@ -107,6 +107,21 @@ public class CPOptionServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPOptionSoap fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CPOption returnValue = CPOptionServiceUtil.fetchByExternalReferenceCode(companyId,
+					externalReferenceCode);
+
+			return com.liferay.commerce.product.model.CPOptionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CPOptionSoap fetchCPOption(
 		long cpOptionId) throws RemoteException {
 		try {
@@ -140,21 +155,6 @@ public class CPOptionServiceSoap {
 		long cpOptionId) throws RemoteException {
 		try {
 			com.liferay.commerce.product.model.CPOption returnValue = CPOptionServiceUtil.getCPOption(cpOptionId);
-
-			return com.liferay.commerce.product.model.CPOptionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CPOptionSoap fetchByExternalReferenceCode(
-		long companyId, String externalReferenceCode) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPOption returnValue = CPOptionServiceUtil.fetchByExternalReferenceCode(companyId,
-					externalReferenceCode);
 
 			return com.liferay.commerce.product.model.CPOptionSoap.toSoapModel(returnValue);
 		}
