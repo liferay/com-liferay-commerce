@@ -14,21 +14,31 @@
 
 package com.liferay.commerce.account.web.internal.display.context;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.account.web.internal.frontend.AccountFilterImpl;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
@@ -56,8 +66,9 @@ public class CommerceAccountDisplayContext
 		CommerceRegionService commerceRegionService,
 		HttpServletRequest httpServletRequest,
 		ModelResourcePermission<CommerceAccount> modelResourcePermission,
-		Portal portal,
-		UserFileUploadsConfiguration userFileUploadsConfiguration) {
+		Portal portal, PortletResourcePermission portletResourcePermission,
+		UserFileUploadsConfiguration userFileUploadsConfiguration,
+		UserLocalService userLocalService) {
 
 		super(
 			commerceAccountHelper, commerceAccountService,
@@ -65,7 +76,12 @@ public class CommerceAccountDisplayContext
 			modelResourcePermission, portal);
 
 		_commerceAddressService = commerceAddressService;
+		_portletResourcePermission = portletResourcePermission;
 		_userFileUploadsConfiguration = userFileUploadsConfiguration;
+		_userLocalService = userLocalService;
+
+		_commerceContext = (CommerceContext)httpServletRequest.getAttribute(
+			CommerceWebKeys.COMMERCE_CONTEXT);
 	}
 
 	public AccountFilterImpl getAccountFilter() throws PortalException {
@@ -74,10 +90,10 @@ public class CommerceAccountDisplayContext
 		HttpServletRequest httpServletRequest =
 			commerceAccountRequestHelper.getRequest();
 
-		boolean filterPerAcount = (boolean)httpServletRequest.getAttribute(
+		boolean filterPerAccount = (boolean)httpServletRequest.getAttribute(
 			"view.jsp-filterPerAccount");
 
-		if (filterPerAcount) {
+		if (filterPerAccount) {
 			accountFilter.setAccountId(getCurrentCommerceAccountId());
 		}
 
@@ -116,6 +132,14 @@ public class CommerceAccountDisplayContext
 		sb.append(StringPool.SEMICOLON);
 
 		return sb.toString();
+	}
+
+	public List<CommerceAccount> getCommerceAccounts() throws PortalException {
+		return commerceAccountService.getUserCommerceAccounts(
+			commerceAccountRequestHelper.getUserId(),
+			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
+			_commerceContext.getCommerceSiteType(), StringPool.BLANK,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public CommerceAddress getDefaultBillingCommerceAddress()
@@ -158,11 +182,33 @@ public class CommerceAccountDisplayContext
 		return sb.toString();
 	}
 
+	public User getSelectedUser() throws PortalException {
+		long userId = ParamUtil.getLong(
+			commerceAccountRequestHelper.getRequest(), "userId");
+
+		if (userId > 0) {
+			return _userLocalService.getUser(userId);
+		}
+
+		return portal.getUser(commerceAccountRequestHelper.getRequest());
+	}
+
 	public UserFileUploadsConfiguration getUserFileUploadsConfiguration() {
 		return _userFileUploadsConfiguration;
 	}
 
+	public boolean hasManageCommerceAccountPermissions()
+		throws PortalException {
+
+		return PortalPermissionUtil.contains(
+			commerceAccountRequestHelper.getPermissionChecker(),
+			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+	}
+
 	private final CommerceAddressService _commerceAddressService;
+	private final CommerceContext _commerceContext;
+	private final PortletResourcePermission _portletResourcePermission;
 	private final UserFileUploadsConfiguration _userFileUploadsConfiguration;
+	private final UserLocalService _userLocalService;
 
 }
