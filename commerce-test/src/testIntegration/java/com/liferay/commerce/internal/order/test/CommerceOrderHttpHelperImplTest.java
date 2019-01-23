@@ -51,6 +51,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -106,6 +107,7 @@ public class CommerceOrderHttpHelperImplTest {
 		CentralizedThreadLocal.clearShortLivedThreadLocals();
 	}
 
+	@Ignore
 	@Test
 	public void testGetCommerceOrder() throws Exception {
 		frutillaRule.scenario(
@@ -130,6 +132,7 @@ public class CommerceOrderHttpHelperImplTest {
 			actualCommerceOrder.getCommerceOrderId());
 	}
 
+	@Ignore
 	@Test
 	public void testGetCommerceOrderItemsQuantity() throws Exception {
 		frutillaRule.scenario(

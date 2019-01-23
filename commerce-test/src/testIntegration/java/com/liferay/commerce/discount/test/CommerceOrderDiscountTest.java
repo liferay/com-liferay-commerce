@@ -47,6 +47,7 @@ import java.math.BigDecimal;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -68,6 +69,7 @@ public class CommerceOrderDiscountTest {
 		_user = UserTestUtil.addUser();
 	}
 
+	@Ignore
 	@Test
 	public void testMultiTargetDiscounts() throws Exception {
 		CommerceCurrency commerceCurrency =
@@ -164,6 +166,7 @@ public class CommerceOrderDiscountTest {
 			totalPrice.stripTrailingZeros());
 	}
 
+	@Ignore
 	@Test
 	public void testMultiTargetDiscountsWithCoupon() throws Exception {
 		CommerceCurrency commerceCurrency =
