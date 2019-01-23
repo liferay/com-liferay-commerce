@@ -45,7 +45,7 @@
 						<li class="nav-item">
 							<div class="nav-link user-personal-bar">
 								<@liferay_commerce["user-management-bar"]
-									href=userManagementUrl
+									href=accountManagementUrl
 									showNotifications=true
 								/>
 							</div>
