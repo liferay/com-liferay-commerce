@@ -15,11 +15,8 @@
 package com.liferay.commerce.account.web.internal.frontend;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.CommerceAccountService;
-import com.liferay.commerce.account.service.CommerceAccountUserRelService;
 import com.liferay.commerce.account.web.internal.model.AccountRole;
-import com.liferay.commerce.account.web.internal.model.Member;
 import com.liferay.commerce.frontend.ClayTable;
 import com.liferay.commerce.frontend.ClayTableAction;
 import com.liferay.commerce.frontend.ClayTableActionProvider;
@@ -34,29 +31,23 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Role;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroupRole;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
-import com.liferay.portal.kernel.portlet.PortletQName;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.service.RoleService;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
-import com.liferay.portal.kernel.service.UserGroupRoleService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
-import javax.portlet.PortletURL;
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
@@ -128,7 +119,7 @@ public class CommerceAccountUserRolesClayTable
 			_commerceAccountService.getCommerceAccount(
 				accountFilter.getAccountId());
 
-		return	_userGroupRoleLocalService.getUserGroupRolesCount(
+		return _userGroupRoleLocalService.getUserGroupRolesCount(
 				_portal.getUserId(httpServletRequest),
 				commerceAccount.getCommerceAccountGroupId());
 	}
@@ -168,12 +159,9 @@ public class CommerceAccountUserRolesClayTable
 		List<AccountRole> accountRoles = new ArrayList<>();
 
 		for (UserGroupRole userGroupRole : userGroupRoles) {
-
 			Role role = userGroupRole.getRole();
 
-			accountRoles.add(
-				new AccountRole(
-					role.getRoleId(), role.getName()));
+			accountRoles.add(new AccountRole(role.getRoleId(), role.getName()));
 		}
 
 		return accountRoles;

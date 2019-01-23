@@ -24,12 +24,12 @@ public class AccountRole {
 		_name = name;
 	}
 
-	public long getRoleId() {
-		return _roleId;
-	}
-
 	public String getName() {
 		return _name;
+	}
+
+	public long getRoleId() {
+		return _roleId;
 	}
 
 	private final String _name;
