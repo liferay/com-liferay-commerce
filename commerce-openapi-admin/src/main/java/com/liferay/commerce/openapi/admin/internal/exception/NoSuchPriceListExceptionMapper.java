@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.internal.exception;
 
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
+import com.liferay.commerce.openapi.core.exception.RESTError;
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 
 import javax.ws.rs.core.Response;
@@ -37,17 +38,17 @@ public class NoSuchPriceListExceptionMapper
 
 	@Override
 	public int getErrorCode() {
-		return 997;
+		return RESTError.NO_SUCH_PRICE_LIST.getErrorCode();
 	}
 
 	@Override
 	public String getErrorDescription() {
-		return "Unable to find price list.";
+		return RESTError.NO_SUCH_PRICE_LIST.getErrorDescription();
 	}
 
 	@Override
 	public Response.Status getStatus() {
-		return Response.Status.CONFLICT;
+		return RESTError.NO_SUCH_PRICE_LIST.getStatus();
 	}
 
 }
