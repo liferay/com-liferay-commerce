@@ -227,7 +227,7 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 				street1, commerceAddress.getStreet2(),
 				commerceAddress.getStreet3(), city, zip, commerceRegionId,
 				commerceCountryId, commerceAddress.getPhoneNumber(), true,
-				commerceAddress.getDefaultShipping(), serviceContext);
+				commerceAddress.isDefaultShipping(), serviceContext);
 		}
 	}
 
