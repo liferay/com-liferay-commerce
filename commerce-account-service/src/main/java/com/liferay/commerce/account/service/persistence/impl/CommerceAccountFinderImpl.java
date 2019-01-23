@@ -238,7 +238,11 @@ public class CommerceAccountFinderImpl
 			List<CommerceAccount> list = (List<CommerceAccount>)QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-			return list.get(0);
+			if (list.isEmpty()) {
+				return list.get(0);
+			}
+
+			return null;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
