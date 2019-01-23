@@ -20,6 +20,7 @@ import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.base.CPOptionValueServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -57,6 +58,23 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 			cpOptionValueId);
 
 		cpOptionValueLocalService.deleteCPOptionValue(cpOptionValue);
+	}
+
+	public CPOptionValue fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PrincipalException {
+
+		CPOptionValue cpOptionValue =
+			cpOptionValueLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		if (cpOptionValue != null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(), cpOptionValue.getGroupId(),
+				CPActionKeys.MANAGE_CATALOG);
+		}
+
+		return cpOptionValue;
 	}
 
 	@Override
