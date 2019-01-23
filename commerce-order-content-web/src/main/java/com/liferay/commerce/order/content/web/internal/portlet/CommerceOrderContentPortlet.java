@@ -21,8 +21,8 @@ import com.liferay.commerce.order.content.web.internal.display.context.CommerceO
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.service.CommerceAddressService;
-import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
+import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentItemService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -66,9 +66,9 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.private-session-attributes=false",
 		"com.liferay.portlet.render-weight=50",
 		"com.liferay.portlet.scopeable=true",
-		"javax.portlet.display-name=Commerce Order Content",
+		"javax.portlet.display-name=Placed Orders",
 		"javax.portlet.expiration-cache=0",
-		"javax.portlet.init-param.view-template=/view.jsp",
+		"javax.portlet.init-param.view-template=/placed_orders/view.jsp",
 		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_ORDER_CONTENT,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user",
@@ -104,9 +104,8 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 			CommerceOrderContentDisplayContext
 				commerceOrderContentDisplayContext =
 					new CommerceOrderContentDisplayContext(
-						_commerceAddressService, _commerceOrderLocalService,
-						_commerceOrderNoteService,
-						_commerceOrderPriceCalculation,
+						_commerceAddressService, _commerceOrderNoteService,
+						_commerceOrderPriceCalculation, _commerceOrderService,
 						_commercePaymentMethodGroupRelService,
 						_commerceShipmentItemService, httpServletRequest,
 						_modelResourcePermission, _portletResourcePermission);
@@ -129,13 +128,13 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 	private CommerceAddressService _commerceAddressService;
 
 	@Reference
-	private CommerceOrderLocalService _commerceOrderLocalService;
-
-	@Reference
 	private CommerceOrderNoteService _commerceOrderNoteService;
 
 	@Reference
 	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
+
+	@Reference
+	private CommerceOrderService _commerceOrderService;
 
 	@Reference
 	private CommercePaymentMethodGroupRelService

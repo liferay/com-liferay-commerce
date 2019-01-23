@@ -33,16 +33,17 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	property = {
-		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT,
-		"mvc.command.name=editCommerceOrder"
+		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_ORDER_CONTENT,
+		"mvc.command.name=viewCommerceOrderDetails"
 	},
 	service = MVCRenderCommand.class
 )
-public class EditCommerceOrderMVCRenderCommand implements MVCRenderCommand {
+public class ViewCommerceOrderDetailsMVCRenderCommand
+	implements MVCRenderCommand {
 
 	@Override
 	public String render(
@@ -65,7 +66,7 @@ public class EditCommerceOrderMVCRenderCommand implements MVCRenderCommand {
 					commerceOrder);
 			}
 
-			return "/pending_orders/edit_order.jsp";
+			return "/placed_orders/view_order_details.jsp";
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchOrderException ||

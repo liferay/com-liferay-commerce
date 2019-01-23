@@ -150,7 +150,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 						<div class="col-md-6">
 							<dl class="minium-list">
 								<c:choose>
-									<c:when test="<%= commerceOrder.isOpen() && commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+									<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
 										<aui:input cssClass="minium-input" inlineField="<%= true %>" label="" name="purchaseOrderNumber" wrappedField="<%= false %>" />
 									</c:when>
 									<c:otherwise>
@@ -172,7 +172,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 				<div class="minium-card__content">
 					<div class="row">
 						<c:choose>
-							<c:when test="<%= commerceOrder.isOpen() && commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+							<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
 								<div class="col-md-8">
 									<dl class="minium-list">
 										<aui:select cssClass="minium-input" inlineField="<%= true %>" label="" name="billingAddressId" wrappedField="<%= false %>">
@@ -215,7 +215,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 				<div class="minium-card__content">
 					<div class="row">
 						<c:choose>
-							<c:when test="<%= commerceOrder.isOpen() && commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
+							<c:when test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
 								<div class="col-md-8">
 									<dl class="minium-list">
 										<aui:select cssClass="minium-input" inlineField="<%= true %>" label="" name="shippingAddressId" wrappedField="<%= false %>">
@@ -253,65 +253,61 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 		</div>
 	</div>
 
-	<c:if test="<%= commerceOrder.isOpen() %>">
-		<div class="minium-thumb-menu">
-			<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.UPDATE) %>">
-				<div class="col-md-auto">
-					<liferay-ui:icon-menu
-						direction="right"
-						icon="<%= StringPool.BLANK %>"
-						markupView="lexicon"
-						message="<%= StringPool.BLANK %>"
-						showWhenSingleIcon="<%= true %>"
-						triggerCssClass="component-action"
-					>
-						<liferay-ui:icon
-							message="print"
-							url='<%= "javascript:window.print();" %>'
-						/>
+	<div class="minium-thumb-menu">
+		<div class="col-md-auto">
+			<liferay-ui:icon-menu
+				direction="right"
+				icon="<%= StringPool.BLANK %>"
+				markupView="lexicon"
+				message="<%= StringPool.BLANK %>"
+				showWhenSingleIcon="<%= true %>"
+				triggerCssClass="component-action"
+			>
+				<liferay-ui:icon
+					message="print"
+					url='<%= "javascript:window.print();" %>'
+				/>
 
-						<liferay-ui:icon
-							message="edit"
-							url='<%= "javascript:" + renderResponse.getNamespace() + "editCommerceOrder();" %>'
-						/>
+				<liferay-ui:icon
+					message="edit"
+					url='<%= "javascript:" + renderResponse.getNamespace() + "editCommerceOrder();" %>'
+				/>
 
-						<portlet:actionURL name="editCommerceOrderItem" var="deleteURL">
-							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESET %>" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-						</portlet:actionURL>
+				<portlet:actionURL name="editCommerceOrderItem" var="deleteURL">
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESET %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
+				</portlet:actionURL>
 
-						<liferay-ui:icon-delete
-							message="delete-all"
-							url="<%= deleteURL %>"
-						/>
-					</liferay-ui:icon-menu>
-				</div>
-			</c:if>
+				<liferay-ui:icon-delete
+					message="delete-all"
+					url="<%= deleteURL %>"
+				/>
+			</liferay-ui:icon-menu>
 		</div>
+	</div>
 
-		<div class="minium-frame__cta is-visible">
-			<aui:button cssClass="minium-button minium-button--big minium-button--outline" href="<%= backURL %>" value="cancel" />
+	<div class="minium-frame__cta is-visible">
+		<aui:button cssClass="minium-button minium-button--big minium-button--outline" href="<%= backURL %>" value="cancel" />
 
-			<aui:button cssClass="minium-button minium-button--big minium-button--outline" type="submit" />
+		<aui:button cssClass="minium-button minium-button--big minium-button--outline" type="submit" />
 
-			<liferay-commerce:order-transitions
-				commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
-				cssClass="minium-button minium-button--big minium-button--spaced"
-			/>
-		</div>
-	</c:if>
+		<liferay-commerce:order-transitions
+			commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
+			cssClass="minium-button minium-button--big minium-button--spaced"
+		/>
+	</div>
 </aui:form>
 
 <div class="row">
 	<div class="col-md-9">
 		<commerce-ui:table
-			dataProviderKey="commerceOrderItems"
+			dataProviderKey="commercePendingOrderItems"
 			itemPerPage="<%= 5 %>"
 			namespace="<%= renderResponse.getNamespace() %>"
 			pageNumber="1"
 			portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
-			tableName="commerceOrderItems"
+			tableName="commercePendingOrderItems"
 		/>
 	</div>
 
@@ -384,7 +380,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 
-<%@ include file="/transition.jspf" %>
+<%@ include file="/pending_orders/transition.jspf" %>
 
 <aui:script>
 	Liferay.provide(
@@ -444,30 +440,6 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 		},
 		['aui-io-deprecated', 'liferay-util-window']
 	);
-
-	function <portlet:namespace/>viewCommerceOrderShipments(uri) {
-		Liferay.Util.openWindow(
-			{
-				dialog: {
-					centered: true,
-					destroyOnClose: true,
-					modal: true
-				},
-				dialogIframe: {
-					bodyCssClass: 'dialog'
-				},
-				id: 'viewCommerceOrderShipmentsDialog',
-				title: '',
-				uri: uri
-			}
-		);
-	}
-
-	function <portlet:namespace />reorderCommerceOrder() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'reorder';
-
-		submitForm(document.<portlet:namespace />fm);
-	}
 </aui:script>
 
 <aui:script use="aui-base">

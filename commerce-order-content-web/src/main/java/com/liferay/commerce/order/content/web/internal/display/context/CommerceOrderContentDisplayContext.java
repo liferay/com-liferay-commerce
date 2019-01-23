@@ -35,8 +35,8 @@ import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.service.CommerceAddressService;
-import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
+import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentItemService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
@@ -74,9 +74,9 @@ public class CommerceOrderContentDisplayContext {
 
 	public CommerceOrderContentDisplayContext(
 			CommerceAddressService commerceAddressService,
-			CommerceOrderLocalService commerceOrderLocalService,
 			CommerceOrderNoteService commerceOrderNoteService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
+			CommerceOrderService commerceOrderService,
 			CommercePaymentMethodGroupRelService
 				commercePaymentMethodGroupRelService,
 			CommerceShipmentItemService commerceShipmentItemService,
@@ -86,9 +86,9 @@ public class CommerceOrderContentDisplayContext {
 		throws PortalException {
 
 		_commerceAddressService = commerceAddressService;
-		_commerceOrderLocalService = commerceOrderLocalService;
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
+		_commerceOrderService = commerceOrderService;
 		_commercePaymentMethodGroupRelService =
 			commercePaymentMethodGroupRelService;
 		_commerceShipmentItemService = commerceShipmentItemService;
@@ -139,6 +139,16 @@ public class CommerceOrderContentDisplayContext {
 		return _commerceAccount;
 	}
 
+	public long getCommerceAccountId() {
+		long commerceAccountId = 0;
+
+		if (_commerceAccount != null) {
+			commerceAccountId = _commerceAccount.getCommerceAccountId();
+		}
+
+		return commerceAccountId;
+	}
+
 	public List<CommerceAddress> getCommerceAddresses(long commerceAccountId)
 		throws PortalException {
 
@@ -147,9 +157,8 @@ public class CommerceOrderContentDisplayContext {
 			commerceAccountId);
 	}
 
-	public CommerceOrder getCommerceOrder() {
-		return _commerceOrderLocalService.fetchCommerceOrder(
-			getCommerceOrderId());
+	public CommerceOrder getCommerceOrder() throws PortalException {
+		return _commerceOrderService.fetchCommerceOrder(getCommerceOrderId());
 	}
 
 	public String getCommerceOrderDate(CommerceOrder commerceOrder) {
@@ -257,7 +266,7 @@ public class CommerceOrderContentDisplayContext {
 			getCommerceOrder(), _commerceContext);
 	}
 
-	public List<CommerceOrder> getCommerceOrders() {
+	public List<CommerceOrder> getCommerceOrders() throws PortalException {
 		if (_commerceOrders != null) {
 			return _commerceOrders;
 		}
@@ -265,18 +274,14 @@ public class CommerceOrderContentDisplayContext {
 		String keywords = ParamUtil.getString(_httpServletRequest, "keywords");
 
 		if (isOpenOrderContentPortlet()) {
-			_commerceOrders = _commerceOrderLocalService.getUserCommerceOrders(
-				_cpRequestHelper.getScopeGroupId(),
-				_cpRequestHelper.getUserId(),
-				CommerceOrderConstants.ORDER_STATUS_OPEN, keywords,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			_commerceOrders = _commerceOrderService.getPendingCommerceOrders(
+				_cpRequestHelper.getScopeGroupId(), getCommerceAccountId(),
+				keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		else {
-			_commerceOrders = _commerceOrderLocalService.getUserCommerceOrders(
-				_cpRequestHelper.getScopeGroupId(),
-				_cpRequestHelper.getUserId(),
-				CommerceOrderConstants.ORDER_STATUS_OPEN, true, keywords,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			_commerceOrders = _commerceOrderService.getPlacedCommerceOrders(
+				_cpRequestHelper.getScopeGroupId(), getCommerceAccountId(),
+				keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 
 		return _commerceOrders;
@@ -432,12 +437,12 @@ public class CommerceOrderContentDisplayContext {
 		_commerceOrderContentPortletInstanceConfiguration;
 	private final Format _commerceOrderDateFormatDate;
 	private final Format _commerceOrderDateFormatTime;
-	private final CommerceOrderLocalService _commerceOrderLocalService;
 	private CommerceOrderNote _commerceOrderNote;
 	private final long _commerceOrderNoteId;
 	private final CommerceOrderNoteService _commerceOrderNoteService;
 	private final CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 	private List<CommerceOrder> _commerceOrders;
+	private final CommerceOrderService _commerceOrderService;
 	private final CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
 	private final CommerceShipmentItemService _commerceShipmentItemService;
