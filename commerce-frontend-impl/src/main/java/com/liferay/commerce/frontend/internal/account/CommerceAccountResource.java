@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
@@ -86,7 +87,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceAccountResource {
 
 	public AccountList getAccountList(
-			long userId, Long parentAccountId, int commerceSiteType,
+			long userId, long parentAccountId, int commerceSiteType,
 			String keywords, int page, int pageSize, String imagePath)
 		throws PortalException {
 
@@ -125,11 +126,9 @@ public class CommerceAccountResource {
 	@Path("/search-accounts/{groupId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCommerceAccounts(
-		@PathParam("groupId") long groupId,
-		@QueryParam("parentAccountId") Long parentAccountId,
-		@QueryParam("q") String queryString, @QueryParam("page") int page,
-		@QueryParam("pageSize") int pageSize, @Context UriInfo uriInfo,
-		@Context ThemeDisplay themeDisplay) {
+		@PathParam("groupId") long groupId, @QueryParam("q") String queryString,
+		@QueryParam("page") int page, @QueryParam("pageSize") int pageSize,
+		@Context UriInfo uriInfo, @Context ThemeDisplay themeDisplay) {
 
 		AccountList accountList;
 
@@ -143,11 +142,13 @@ public class CommerceAccountResource {
 
 		try {
 			accountList = getAccountList(
-				themeDisplay.getUserId(), parentAccountId,
+				themeDisplay.getUserId(),
+				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
 				commerceContext.getCommerceSiteType(), queryString, page,
 				pageSize, themeDisplay.getPathImage());
 		}
 		catch (Exception e) {
+			_log.error(e, e);
 			accountList = new AccountList(
 				StringUtil.split(e.getLocalizedMessage()));
 		}
@@ -260,7 +261,7 @@ public class CommerceAccountResource {
 	}
 
 	protected List<Account> getAccounts(
-			long userId, Long parentAccountId, int commerceSiteType,
+			long userId, long parentAccountId, int commerceSiteType,
 			String keywords, int page, int pageSize, String imagePath)
 		throws PortalException {
 
