@@ -336,14 +336,22 @@ public class CommerceAccountLocalServiceUtil {
 			parentCommerceAccountId, commerceSiteType, keywords);
 	}
 
-	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
 		long companyId, long parentCommerceAccountId, String keywords,
-		Boolean active, int start, int end,
+		int type, Boolean active, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .searchCommerceAccounts(companyId, parentCommerceAccountId,
-			keywords, active, start, end, sort);
+			keywords, type, active, start, end, sort);
+	}
+
+	public static int searchCommerceAccountsCount(long companyId,
+		long parentCommerceAccountId, String keywords, int type, Boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceAccountsCount(companyId,
+			parentCommerceAccountId, keywords, type, active);
 	}
 
 	/**

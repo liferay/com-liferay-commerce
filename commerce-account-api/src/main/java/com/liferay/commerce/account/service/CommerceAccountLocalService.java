@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.model.SystemEventConstants;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.search.Sort;
@@ -292,9 +291,14 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 		Long parentCommerceAccountId, int commerceSiteType, String keywords);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
-		long companyId, long parentCommerceAccountId, String keywords,
+	public List<CommerceAccount> searchCommerceAccounts(long companyId,
+		long parentCommerceAccountId, String keywords, int type,
 		Boolean active, int start, int end, Sort sort)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCommerceAccountsCount(long companyId,
+		long parentCommerceAccountId, String keywords, int type, Boolean active)
 		throws PortalException;
 
 	/**

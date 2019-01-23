@@ -21,8 +21,6 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -92,21 +90,13 @@ public interface CommerceAccountService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccount> getUserCommerceAccounts(long userId,
-		int commerceSiteType, int start, int end) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAccount> getUserCommerceAccounts(long userId,
-		Long parentCommerceAccountId, int commerceSiteType, String keywords,
-		int start, int end);
+		long parentCommerceAccountId, int commerceSiteType, String keywords,
+		int start, int end) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserCommerceAccountsCount(long userId,
-		Long parentCommerceAccountId, int commerceSiteType, String keywords);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
-		long parentCommerceAccountId, String keywords, Boolean active,
-		int start, int end, Sort sort) throws PortalException;
+		long parentCommerceAccountId, int commerceSiteType, String keywords)
+		throws PortalException;
 
 	public CommerceAccount updateCommerceAccount(long commerceAccountId,
 		String name, boolean logo, byte[] logoBytes, String email,

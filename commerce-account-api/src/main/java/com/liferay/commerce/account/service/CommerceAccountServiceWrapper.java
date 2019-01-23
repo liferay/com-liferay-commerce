@@ -96,34 +96,19 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 
 	@Override
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		long userId, int commerceSiteType, int start, int end)
+		long userId, long parentCommerceAccountId, int commerceSiteType,
+		String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.getUserCommerceAccounts(userId,
-			commerceSiteType, start, end);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.account.model.CommerceAccount> getUserCommerceAccounts(
-		long userId, Long parentCommerceAccountId, int commerceSiteType,
-		String keywords, int start, int end) {
 		return _commerceAccountService.getUserCommerceAccounts(userId,
 			parentCommerceAccountId, commerceSiteType, keywords, start, end);
 	}
 
 	@Override
 	public int getUserCommerceAccountsCount(long userId,
-		Long parentCommerceAccountId, int commerceSiteType, String keywords) {
+		long parentCommerceAccountId, int commerceSiteType, String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountService.getUserCommerceAccountsCount(userId,
 			parentCommerceAccountId, commerceSiteType, keywords);
-	}
-
-	@Override
-	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.account.model.CommerceAccount> searchCommerceAccounts(
-		long parentCommerceAccountId, String keywords, Boolean active,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountService.searchCommerceAccounts(parentCommerceAccountId,
-			keywords, active, start, end, sort);
 	}
 
 	@Override
