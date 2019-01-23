@@ -148,7 +148,9 @@ String backURL = ParamUtil.getString(request, "backURL", redirect);
 	</section>
 
 	<div class="minium-frame__cta is-visible">
-		<aui:button cssClass="minium-button minium-button--big minium-button--outline" href="<%= backURL %>" value="cancel" />
+		<c:if test="<%= Validator.isNotNull(backURL) %>">
+			<aui:button cssClass="minium-button minium-button--big minium-button--outline" href="<%= backURL %>" value="cancel" />
+		</c:if>
 
 		<aui:button cssClass="minium-button minium-button--big" type="submit" />
 	</div>
