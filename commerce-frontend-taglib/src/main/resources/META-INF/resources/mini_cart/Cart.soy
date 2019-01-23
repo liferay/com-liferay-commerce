@@ -23,6 +23,9 @@
 		{if $isDisabled}
 			{sp}is-disabled
 		{/if}
+		{if $productsCount > 0}
+			{sp}has-badge
+		{/if}
 	{/let}
 
 	{let $cartModifiers kind="text"}
@@ -35,6 +38,7 @@
 		<button
 			class="minium-topbar__button{$openCartButtonModifiers}"
 			data-onclick="toggleCart"
+			data-badge-count={$productsCount}
 		>
 			{call ClayIcon.render}
 				{param spritemap: $spritemap /}
