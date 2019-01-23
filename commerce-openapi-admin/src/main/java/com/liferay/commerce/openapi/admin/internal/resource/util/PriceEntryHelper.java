@@ -122,7 +122,7 @@ public class PriceEntryHelper {
 		for (CommercePriceEntry commercePriceEntry : commercePriceEntries) {
 			priceEntryDTOs.add(
 				DTOUtils.modelToDTO(
-					commercePriceEntry,
+					commercePriceEntry, getSKU(commercePriceEntry),
 					getSKUExternalReferenceCode(commercePriceEntry)));
 		}
 
@@ -136,7 +136,7 @@ public class PriceEntryHelper {
 			id, companyId);
 
 		return DTOUtils.modelToDTO(
-			commercePriceEntry,
+			commercePriceEntry, getSKU(commercePriceEntry),
 			getSKUExternalReferenceCode(commercePriceEntry));
 	}
 
@@ -190,7 +190,7 @@ public class PriceEntryHelper {
 		}
 
 		return DTOUtils.modelToDTO(
-			commercePriceEntry,
+			commercePriceEntry, getSKU(commercePriceEntry),
 			getSKUExternalReferenceCode(commercePriceEntry));
 	}
 
