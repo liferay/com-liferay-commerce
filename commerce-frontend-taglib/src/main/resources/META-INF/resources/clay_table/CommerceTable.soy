@@ -20,29 +20,40 @@
 	{@param totalItems: int}
 	{@param? tableVariant: string}
 	{@param? actionsMenuVariant: string}
+	{@param? emptyTableMessage: string}
 
 	<div>
-		{delcall CommerceTable.Table variant="$tableVariant"}
-			{param _handleItemToggled: $_handleItemToggled /}
-			{param id: $id + 'Table' /}
-			{param items: $items /}
-			{param schema: $schema /}
-			{param selectable: $selectable /}
-			{param showActionsMenu : $showActionsMenu /}
-			{param spritemap: $spritemap /}
-			{param actionsMenuVariant: $actionsMenuVariant /}
-		{/delcall}
+		{if length($items) == 0}
+			<div class="empty-table-message">
+				{if $emptyTableMessage}
+					{$emptyTableMessage}
+				{else}
+					{msg desc="No results to display"}No results to display{/msg}
+				{/if}
+			</div>
+		{else}
+			{delcall CommerceTable.Table variant="$tableVariant"}
+				{param _handleItemToggled: $_handleItemToggled /}
+				{param id: $id + 'Table' /}
+				{param items: $items /}
+				{param schema: $schema /}
+				{param selectable: $selectable /}
+				{param showActionsMenu : $showActionsMenu /}
+				{param spritemap: $spritemap /}
+				{param actionsMenuVariant: $actionsMenuVariant /}
+			{/delcall}
 
-		{call ClayPaginationBar.render}
-			{param events: ['itemsPerPageClicked': $_handleItemsPerPageClicked, 'pageClicked': $_handlePageClicked ] /}
-			{param currentPage: $currentPage /}
-			{param selectedEntry: $paginationSelectedEntry /}
-			{param entries: $paginationEntries /}
-			{param spritemap: $spritemap /}
-			{param totalEntries: $totalItems /}
-			{param baseHref: $paginationBaseHref /}
-			{param id: $id + 'Pagination' /}
-		{/call}
+			{call ClayPaginationBar.render}
+				{param events: ['itemsPerPageClicked': $_handleItemsPerPageClicked, 'pageClicked': $_handlePageClicked ] /}
+				{param currentPage: $currentPage /}
+				{param selectedEntry: $paginationSelectedEntry /}
+				{param entries: $paginationEntries /}
+				{param spritemap: $spritemap /}
+				{param totalEntries: $totalItems /}
+				{param baseHref: $paginationBaseHref /}
+				{param id: $id + 'Pagination' /}
+			{/call}
+		{/if}
 	</div>
 {/template}
 
