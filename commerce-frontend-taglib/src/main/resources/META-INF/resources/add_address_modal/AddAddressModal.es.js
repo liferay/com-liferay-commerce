@@ -62,7 +62,7 @@ class AddAddressModal extends Component {
 			);
 			this._fetchRegions();
 		}
- else {
+		else {
 			this._formData = Object.assign(
 				{},
 				this._formData,
