@@ -44,6 +44,11 @@ public interface CommerceMediaResolver {
 			long cpAttachmentFileEntryId, boolean download, boolean thumbnail)
 		throws PortalException;
 
+	public String getUrl(
+			long cpAttachmentFileEntryId, boolean download, boolean thumbnail,
+			boolean secure)
+		throws PortalException;
+
 	public void sendMediaBytes(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)

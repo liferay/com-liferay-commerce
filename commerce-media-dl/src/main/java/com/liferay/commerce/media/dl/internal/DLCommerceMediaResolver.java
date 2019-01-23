@@ -23,6 +23,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
+import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
@@ -100,15 +101,33 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 			long cpAttachmentFileEntryId, boolean download, boolean thumbnail)
 		throws PortalException {
 
+		return getUrl(cpAttachmentFileEntryId, download, thumbnail, true);
+	}
+
+	@Override
+	public String getUrl(
+			long cpAttachmentFileEntryId, boolean download, boolean thumbnail,
+			boolean secure)
+		throws PortalException {
+
 		StringBundler sb = new StringBundler(13);
 
 		sb.append(_portal.getPathModule());
 		sb.append(StringPool.SLASH);
 		sb.append(CommerceMediaConstants.SERVLET_PATH);
 
-		CPAttachmentFileEntry cpAttachmentFileEntry =
-			_cpAttachmentFileEntryService.fetchCPAttachmentFileEntry(
-				cpAttachmentFileEntryId);
+		CPAttachmentFileEntry cpAttachmentFileEntry = null;
+
+		if (secure) {
+			cpAttachmentFileEntry =
+				_cpAttachmentFileEntryService.fetchCPAttachmentFileEntry(
+					cpAttachmentFileEntryId);
+		}
+		else {
+			cpAttachmentFileEntry =
+				_cpAttachmentFileEntryLocalService.fetchCPAttachmentFileEntry(
+					cpAttachmentFileEntryId);
+		}
 
 		if (cpAttachmentFileEntry == null) {
 			sb.append("/default/");
@@ -275,6 +294,10 @@ public class DLCommerceMediaResolver implements CommerceMediaResolver {
 
 	@Reference
 	private CommerceUserSegmentHelper _commerceUserSegmentHelper;
+
+	@Reference
+	private CPAttachmentFileEntryLocalService
+		_cpAttachmentFileEntryLocalService;
 
 	@Reference
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
