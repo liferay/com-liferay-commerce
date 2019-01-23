@@ -1,0 +1,111 @@
+<%--
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+--%>
+
+<%@ include file="/init.jsp" %>
+
+<%
+CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+%>
+
+<commerce-ui:table
+	dataProviderKey="commerceAccountUsers"
+	itemPerPage="<%= 5 %>"
+	namespace="<%= renderResponse.getNamespace() %>"
+	pageNumber="1"
+	portletURL="<%= commerceAccountDisplayContext.getPortletURL() %>"
+	tableName="commerceAccountUsers"
+/>
+
+<div class="minium-frame__cta is-visible">
+	<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openUserInvitationModal();" %>' value="invite-user" />
+
+	<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openUserRolesModal();" %>' value="user-roles" />
+</div>
+
+<commerce-ui:user-invitation-modal
+	componentId="userInvitationModal"
+/>
+
+<commerce-ui:user-roles-modal
+	componentId="userRolesModal"
+/>
+
+<portlet:actionURL name="inviteUser" var="inviteUserActionURL" />
+
+<aui:form action="<%= inviteUserActionURL %>" method="post" name="inviteUserFm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ASSIGN %>" />
+	<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccountDisplayContext.getCurrentCommerceAccountId() %>" />
+	<aui:input name="userIds" type="hidden" />
+	<aui:input name="emailAddresses" type="hidden" />
+</aui:form>
+
+<aui:script>
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />openUserInvitationModal',
+		function(evt) {
+			const userInvitationModal = Liferay.component('userInvitationModal');
+			userInvitationModal.open();
+		}
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />openUserRolesModal',
+		function(evt) {
+			const userRolesModal = Liferay.component('userRolesModal');
+			userRolesModal.open();
+		}
+	);
+
+	Liferay.componentReady('userInvitationModal').then(
+		function(userInvitationModal) {
+			userInvitationModal.on(
+				'inviteUserToAccount',
+				function(users) {
+					let existingUsersIds = users.filter(
+						function(el) {
+							return el.userId
+						}
+					).map(
+						function(usr) {
+							return usr.userId
+						}
+					).join(',');
+
+					let newUsersEmails = users.filter(
+						function(el) {
+							return !el.userId
+						}
+					).map(
+						function(usr) {
+							return usr.email
+						}
+					).join(',');
+
+					document.querySelector('#<portlet:namespace />userIds').value = existingUsersIds;
+					document.querySelector('#<portlet:namespace />emailAddresses').value = newUsersEmails;
+
+					userInvitationModal.close();
+
+					submitForm(document.<portlet:namespace />inviteUserFm);
+				}
+			);
+		}
+	);
+
+</aui:script>
