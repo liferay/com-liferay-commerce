@@ -62,8 +62,11 @@ public class CommerceOrderModelResourcePermissionLogic
 		}
 
 		if (actionId.equals(CommerceOrderActionKeys.APPROVE_COMMERCE_ORDER)) {
+			CommerceAccount commerceAccount =
+				commerceOrder.getCommerceAccount();
+
 			return _hasAncestorPermission(
-				permissionChecker, commerceOrder.getGroupId(),
+				permissionChecker, commerceAccount.getCommerceAccountGroupId(),
 				CommerceOrderActionKeys.APPROVE_OPEN_COMMERCE_ORDERS);
 		}
 
@@ -112,9 +115,11 @@ public class CommerceOrderModelResourcePermissionLogic
 			return false;
 		}
 
+		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
+
 		if (commerceOrder.isPending() &&
 			!_hasPermission(
-				permissionChecker, commerceOrder.getGroupId(),
+				permissionChecker, commerceAccount.getCommerceAccountGroupId(),
 				CommerceOrderActionKeys.APPROVE_OPEN_COMMERCE_ORDERS)) {
 
 			return false;
@@ -127,7 +132,7 @@ public class CommerceOrderModelResourcePermissionLogic
 		}
 
 		return _portletResourcePermission.contains(
-			permissionChecker, commerceOrder.getGroupId(),
+			permissionChecker, commerceAccount.getCommerceAccountGroup(),
 			CommerceOrderActionKeys.CHECKOUT_OPEN_COMMERCE_ORDERS);
 	}
 
@@ -145,8 +150,10 @@ public class CommerceOrderModelResourcePermissionLogic
 			}
 		}
 
+		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
+
 		return _portletResourcePermission.contains(
-			permissionChecker, commerceOrder.getGroupId(),
+			permissionChecker, commerceAccount.getCommerceAccountGroup(),
 			CommerceOrderActionKeys.DELETE_COMMERCE_ORDERS);
 	}
 
@@ -161,14 +168,18 @@ public class CommerceOrderModelResourcePermissionLogic
 			return true;
 		}
 
+		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
+
 		return _hasAncestorPermission(
-			permissionChecker, commerceOrder.getGroupId(),
+			permissionChecker, commerceAccount.getCommerceAccountGroupId(),
 			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 	}
 
 	private boolean _containsUpdatePermission(
 			PermissionChecker permissionChecker, CommerceOrder commerceOrder)
 		throws PortalException {
+
+		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 
 		if (commerceOrder.isOpen()) {
 			if (_hasOwnerPermission(permissionChecker, commerceOrder)) {
@@ -185,13 +196,14 @@ public class CommerceOrderModelResourcePermissionLogic
 					CommerceOrderConstants.TYPE_PK_APPROVAL)) {
 
 				return _hasPermission(
-					permissionChecker, commerceOrder.getGroupId(),
+					permissionChecker,
+					commerceAccount.getCommerceAccountGroupId(),
 					CommerceOrderActionKeys.APPROVE_OPEN_COMMERCE_ORDERS);
 			}
 		}
 
 		return _hasAncestorPermission(
-			permissionChecker, commerceOrder.getGroupId(),
+			permissionChecker, commerceAccount.getCommerceAccountGroupId(),
 			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 	}
 
@@ -209,19 +221,21 @@ public class CommerceOrderModelResourcePermissionLogic
 			return true;
 		}
 
+		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
+
 		if (commerceOrder.isOpen()) {
 			if (commerceOrder.isDraft()) {
 				return false;
 			}
 
 			return _hasPermission(
-				permissionChecker, commerceOrder.getGroupId(),
+				permissionChecker, commerceAccount.getCommerceAccountGroupId(),
 				CommerceOrderActionKeys.APPROVE_OPEN_COMMERCE_ORDERS,
 				CommerceOrderActionKeys.VIEW_OPEN_COMMERCE_ORDERS);
 		}
 
 		return _hasAncestorPermission(
-			permissionChecker, commerceOrder.getGroupId(),
+			permissionChecker, commerceAccount.getCommerceAccountGroupId(),
 			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS,
 			CommerceOrderActionKeys.VIEW_COMMERCE_ORDERS);
 	}
@@ -249,16 +263,11 @@ public class CommerceOrderModelResourcePermissionLogic
 	}
 
 	private boolean _hasOwnerPermission(
-			PermissionChecker permissionChecker, CommerceOrder commerceOrder)
-		throws PortalException {
+		PermissionChecker permissionChecker, CommerceOrder commerceOrder) {
 
 		long userId = permissionChecker.getUserId();
 
-		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
-
-		if ((userId == commerceOrder.getUserId()) ||
-			(userId == commerceAccount.getUserId())) {
-
+		if (userId == commerceOrder.getUserId()) {
 			return true;
 		}
 
