@@ -337,7 +337,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			if ((schemaComponentDefinition != null) &&
 				schemaComponentDefinition.isArray()) {
 
-				if (!parameters.isEmpty()) {
+				if (method.hasExtensions()) {
 					sb.append(", ");
 				}
 
