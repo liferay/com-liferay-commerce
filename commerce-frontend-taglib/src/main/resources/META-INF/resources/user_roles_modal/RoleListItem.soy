@@ -20,14 +20,14 @@
 	{/let}
 
 	{let $checkboxContainerClasses kind="text"}
-		commerce-checkbox
+		commerce-input commerce-input--checkbox
 		{if isNonnull($_selected) and $_selected == true}
-			{sp}commerce-checkbox--checked
+			{sp}commerce-input commerce-input--checkbox--checked
 		{/if}
 	{/let}
 
 	<div class="{$checkboxContainerClasses}">
-		<div class="commerce-checkbox__input">
+		<div class="commerce-input commerce-input--checkbox__input">
 			<input
 				data-onchange="{$_handleToggleItem}"
 				{$checkboxAttributes}
@@ -35,7 +35,7 @@
 		</div>
 
 		<label
-			class="commerce-checkbox__label"
+			class="commerce-input commerce-input--checkbox__label"
 			for="role-checkbox--{$id}"
 		>
 			{call AutocompleteItem.render}

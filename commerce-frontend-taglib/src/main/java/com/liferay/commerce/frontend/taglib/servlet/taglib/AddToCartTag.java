@@ -21,7 +21,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.util.PortalUtil;
 
 /**
- * @author Fabio Diego
+ * @author Fabio Diego Mastrorilli
  */
 public class AddToCartTag extends ComponentRendererTag {
 

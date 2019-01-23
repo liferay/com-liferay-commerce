@@ -18,19 +18,27 @@ import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 
 /**
- * @author Fabio Diego Mastrorilli
+ * @author Fabio Mastrorilli
  */
-public class AutocompleteItemTag extends ComponentRendererTag {
+public class CompareCheckboxTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
-		putValue("text", null);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		putValue("query", null);
+		putValue("productId", 45625);
+		putValue("pictureUrl", "/o/commerce-media/products/45626/coil-spring-rear/45645/Minium_ProductImage_13.png?download=false");
+		putValue("isLabelVisible", true);
+		putValue("isCheckboxVisible", true);
+		putValue("isCompareAvailable", true);
+		putValue("isInCompare", false);
 
-		setTemplateNamespace("AutocompleteItem.render");
+		setTemplateNamespace("CompareCheckbox.render");
 
 		return super.doStartTag();
 	}
@@ -44,7 +52,8 @@ public class AutocompleteItemTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/autocomplete_item/AutocompleteItem.es");
+			"commerce-frontend-taglib/compare_checkbox" +
+				"/CompareCheckbox.es");
 	}
 
 }
