@@ -37,8 +37,8 @@
 
 	{@param spritemap: string}
 
-	{let $curtainClasses kind="text"}
-		{nil}
+	{let $dropdownClasses kind="text"}
+		minium-dropdown
 		{if $openingState == 'open'}
 			{sp}is-open
 		{/if}
@@ -47,7 +47,17 @@
 		{/if}
 	{/let}
 
-	<div class="minium-dropdown">
+	{let $curtainClasses kind="text"}
+		minium-dropdown__curtain
+		{if $openingState == 'open'}
+			{sp}is-open
+		{/if}
+		{if $openingState == 'closing'}
+			{sp}is-closing
+		{/if}
+	{/let}
+
+	<div class="{$dropdownClasses}">
 		<button
 			class="minium-topbar__button"
 			data-onclick="toggleAccountSelector"
@@ -64,7 +74,7 @@
 			{/call}
 		</button>
 
-		<div class="minium-dropdown__curtain{$curtainClasses}">
+		<div class="{$curtainClasses}">
 			{if isNonnull($currentAccount)}
 				{let $isOrdersTableVisible: $currentView == 'orders' /}
 				{call OrdersTable.render}
