@@ -45,9 +45,9 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 <aui:form action="<%= editCommerceAccountActionURL %>" method="post" name="commerceAccountFm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 	<aui:input name="active" type="hidden" value="<%= true %>" />
+	<aui:input name="emailAddresses" type="hidden" />
 	<aui:input name="name" type="hidden" />
 	<aui:input name="userIds" type="hidden" />
-	<aui:input name="emailAddresses" type="hidden" />
 </aui:form>
 
 <commerce-ui:add-account-modal
@@ -55,12 +55,12 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 />
 
 <aui:script>
-
 	Liferay.provide(
 		window,
 		'<portlet:namespace />openAddAccountModal',
 		function(evt) {
 			const addAccountModal = Liferay.component('addAccountModal');
+
 			addAccountModal.open();
 		}
 	);
@@ -70,8 +70,7 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 			addAccountModal.on(
 				'AddAccountModalSave',
 				function(event) {
-
-					let existingUsersIds = event.administratorsEmail.filter(
+					let existingUserIds = event.administratorsEmail.filter(
 						function(el) {
 							return el.userId;
 						}
@@ -81,7 +80,7 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 						}
 					).join(',');
 
-					let newUsersEmails = event.administratorsEmail.filter(
+					let newUserEmails = event.administratorsEmail.filter(
 						function(el) {
 							return !el.userId;
 						}
@@ -91,9 +90,9 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 						}
 					).join(',');
 
+					document.querySelector('#<portlet:namespace />emailAddresses').value = newUserEmails;
 					document.querySelector('#<portlet:namespace />name').value = event.accountName;
-					document.querySelector('#<portlet:namespace />userIds').value = existingUsersIds;
-					document.querySelector('#<portlet:namespace />emailAddresses').value = newUsersEmails;
+					document.querySelector('#<portlet:namespace />userIds').value = existingUserIds;
 
 					addAccountModal.close();
 
@@ -102,5 +101,4 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 			);
 		}
 	);
-
 </aui:script>
