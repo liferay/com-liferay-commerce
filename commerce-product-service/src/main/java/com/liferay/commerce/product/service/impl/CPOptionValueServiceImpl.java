@@ -20,7 +20,6 @@ import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.base.CPOptionValueServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -62,7 +61,7 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 
 	public CPOptionValue fetchByExternalReferenceCode(
 			long companyId, String externalReferenceCode)
-		throws PrincipalException {
+		throws PortalException {
 
 		CPOptionValue cpOptionValue =
 			cpOptionValueLocalService.fetchByExternalReferenceCode(
