@@ -21,8 +21,6 @@ import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.Response;
-import com.liferay.commerce.openapi.util.Schema;
-import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.IOException;
@@ -143,6 +141,115 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		_writeResourceImplementationSource(version, path, componentDefinitions);
 	}
 
+	protected String getReturnType(
+		Method method, Set<ComponentDefinition> componentDefinitions) {
+
+		StringBuilder sb = new StringBuilder();
+
+		if (method.hasResponseContent()) {
+			String returnType = method.getReturnType(componentDefinitions);
+
+			if (method.hasCollectionReturnType(componentDefinitions)) {
+				sb.append("CollectionDTO<");
+				sb.append(returnType);
+				sb.append("DTO> ");
+			}
+			else {
+				sb.append(returnType);
+				sb.append("DTO ");
+			}
+		}
+		else {
+			sb.append("Response ");
+		}
+
+		return sb.toString();
+	}
+
+	protected String toJavaxImports(
+		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
+
+		Set<String> importStatements = new HashSet<>();
+
+		for (Method method : methods) {
+			importStatements.add(
+				String.format(
+					"import javax.ws.rs.%s;%n", method.getHttpMethod()));
+
+			List<Content> requestBody = method.getRequestBody();
+
+			if (!requestBody.isEmpty()) {
+				importStatements.add("import javax.ws.rs.Consumes;\n");
+			}
+
+			for (Response response : method.getResponses()) {
+				if (response.hasContent()) {
+					importStatements.add("import javax.ws.rs.Produces;\n");
+
+					break;
+				}
+			}
+
+			for (Parameter parameter : method.getParameters()) {
+				String location = parameter.getLocation();
+
+				if (location.equals("body")) {
+					continue;
+				}
+
+				importStatements.add(
+					String.format(
+						"import javax.ws.rs.%sParam;%n",
+						StringUtils.upperCaseFirstChar(location)));
+			}
+
+			if (method.hasExtensions()) {
+				importStatements.add("import javax.ws.rs.core.Context;\n");
+
+				for (Extension extension : method.getExtensions()) {
+					Extension.ExtensionType extensionType =
+						extension.getExtensionType();
+
+					Extension.Provider provider = extensionType.getProvider();
+
+					List<Parameter> parameters = extension.getParameters();
+
+					if (parameters.isEmpty()) {
+						importStatements.add(
+							String.format(
+								"import %s;%n", provider.getModelFQCN()));
+					}
+					else {
+						importStatements.add(
+							String.format(
+								"import %s.%s;%n", _contextOutputPath,
+								StringUtils.upperCaseFirstChar(
+									provider.getModelName())));
+					}
+				}
+			}
+
+			if (method.hasImplicitPaginationContext(componentDefinitions)) {
+				Extension.ExtensionType paginationExtensionType =
+					Extension.ExtensionType.PAGINATION_CONTEXT;
+
+				Extension.Provider provider =
+					paginationExtensionType.getProvider();
+
+				importStatements.add(
+					String.format("import %s;%n", provider.getModelFQCN()));
+			}
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		for (String importStatement : importStatements) {
+			sb.append(importStatement);
+		}
+
+		return sb.toString();
+	}
+
 	protected String toResourceImplementationMethods(
 		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
 
@@ -161,23 +268,14 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			sb.append(" {\n");
 
 			if (method.hasResponseContent()) {
-				ComponentDefinition schemaComponentDefinition =
-					_getSchemaComponentDefinition(method, componentDefinitions);
-
-				if (schemaComponentDefinition == null) {
-					throw new GeneratorException(
-						"Response schema definition misses for method " +
-							method);
-				}
-
-				if (schemaComponentDefinition.isArray()) {
+				if (method.hasCollectionReturnType(componentDefinitions)) {
 					sb.append("\t\treturn new CollectionDTO(");
 					sb.append("Collections.emptyList(), 0);\n");
 				}
 				else {
 					sb.append("\t\treturn new ");
 
-					sb.append(schemaComponentDefinition.getName());
+					sb.append(method.getReturnType(componentDefinitions));
 
 					sb.append("DTO();\n");
 				}
@@ -294,7 +392,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		sb.append("\tpublic ");
 
-		sb.append(_getReturnValue(method, componentDefinitions));
+		sb.append(getReturnType(method, componentDefinitions));
 
 		sb.append(method.getName());
 
@@ -330,20 +428,13 @@ public class ResourceGenerator extends BaseSourceGenerator {
 				_getContextParametersDeclaration(method, annotateParameter));
 		}
 
-		if (!method.hasPaginationContextExtension()) {
-			ComponentDefinition schemaComponentDefinition =
-				_getSchemaComponentDefinition(method, componentDefinitions);
-
-			if ((schemaComponentDefinition != null) &&
-				schemaComponentDefinition.isArray()) {
-
-				if (method.hasExtensions()) {
-					sb.append(", ");
-				}
-
-				sb.append(
-					_getPagingContextParametersDeclaration(annotateParameter));
+		if (method.hasImplicitPaginationContext(componentDefinitions)) {
+			if (!parameters.isEmpty() || method.hasExtensions()) {
+				sb.append(", ");
 			}
+
+			sb.append(
+				_getPagingContextParametersDeclaration(annotateParameter));
 		}
 
 		sb.append(") throws Exception");
@@ -454,190 +545,6 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return "Response.ok();\n";
 	}
 
-	private Content _getResponseContent(List<Response> responses) {
-		for (Response response : responses) {
-			List<Content> contents = response.getContents();
-
-			if (!contents.isEmpty()) {
-				return contents.get(0);
-			}
-		}
-
-		return null;
-	}
-
-	private String _getReturnValue(
-		Method method, Set<ComponentDefinition> componentDefinitions) {
-
-		StringBuilder sb = new StringBuilder();
-
-		if (method.hasResponseContent()) {
-			ComponentDefinition schemaComponentDefinition =
-				_getSchemaComponentDefinition(method, componentDefinitions);
-
-			String itemsReferenceModel =
-				schemaComponentDefinition.getItemsReferencedModel();
-
-			if (schemaComponentDefinition.isArray() &&
-				(itemsReferenceModel != null)) {
-
-				schemaComponentDefinition = _getSchemaComponentDefinition(
-					itemsReferenceModel, componentDefinitions);
-
-				sb.append("CollectionDTO<");
-				sb.append(schemaComponentDefinition.getName());
-				sb.append("DTO> ");
-			}
-			else if (schemaComponentDefinition.isObject()) {
-				sb.append(schemaComponentDefinition.getName());
-				sb.append("DTO ");
-			}
-			else {
-				sb.append("Response ");
-			}
-		}
-		else {
-			sb.append("Response ");
-		}
-
-		return sb.toString();
-	}
-
-	private ComponentDefinition _getSchemaComponentDefinition(
-		Method method, Set<ComponentDefinition> componentDefinitions) {
-
-		Content content = _getResponseContent(method.getResponses());
-
-		if (content == null) {
-			return null;
-		}
-
-		Schema schema = content.getSchema();
-
-		ComponentDefinition schemaComponentDefinition =
-			_getSchemaComponentDefinition(
-				schema.getReferencedModel(), componentDefinitions);
-
-		if ("array".equals(schema.getType())) {
-			return ComponentDefinition.asComponentTypeArray(
-				schemaComponentDefinition, schema.getReference());
-		}
-
-		return schemaComponentDefinition;
-	}
-
-	private ComponentDefinition _getSchemaComponentDefinition(
-		String name, Set<ComponentDefinition> componentDefinitions) {
-
-		for (ComponentDefinition componentDefinition : componentDefinitions) {
-			if (componentDefinition.isParameter()) {
-				continue;
-			}
-
-			if (Objects.equals(name, componentDefinition.getName())) {
-				return componentDefinition;
-			}
-		}
-
-		return null;
-	}
-
-	private String _toJavaxImports(List<Method> methods) {
-		StringBuilder sb = new StringBuilder();
-
-		Set<String> importedClasses = new HashSet<>();
-
-		for (Method method : methods) {
-			if (!importedClasses.contains(method.getHttpMethod())) {
-				sb.append("import javax.ws.rs.");
-				sb.append(method.getHttpMethod());
-				sb.append(";\n");
-
-				importedClasses.add(method.getHttpMethod());
-			}
-
-			List<Content> requestBody = method.getRequestBody();
-
-			if (!requestBody.isEmpty() &&
-				!importedClasses.contains("Consumes")) {
-
-				sb.append("import javax.ws.rs.Consumes;\n");
-
-				importedClasses.add("Consumes");
-			}
-
-			if (!importedClasses.contains("Produces")) {
-				for (Response response : method.getResponses()) {
-					if (response.hasContent()) {
-						sb.append("import javax.ws.rs.Produces;\n");
-
-						importedClasses.add("Produces");
-
-						break;
-					}
-				}
-			}
-
-			for (Parameter parameter : method.getParameters()) {
-				String location = parameter.getLocation();
-
-				if (location.equals("body")) {
-					continue;
-				}
-
-				if (importedClasses.contains(location)) {
-					continue;
-				}
-
-				sb.append("import javax.ws.rs.");
-				sb.append(StringUtils.upperCaseFirstChar(location));
-				sb.append("Param;\n");
-
-				importedClasses.add(location);
-			}
-
-			if (method.hasExtensions()) {
-				if (!importedClasses.contains("Context")) {
-					sb.append("import javax.ws.rs.core.Context;\n");
-
-					importedClasses.add("Context");
-				}
-
-				for (Extension extension : method.getExtensions()) {
-					Extension.ExtensionType extensionType =
-						extension.getExtensionType();
-
-					Extension.Provider provider = extensionType.getProvider();
-
-					if (importedClasses.contains(provider.getModelName())) {
-						continue;
-					}
-
-					List<Parameter> parameters = extension.getParameters();
-
-					if (parameters.isEmpty()) {
-						sb.append("import ");
-						sb.append(provider.getModelFQCN());
-						sb.append(";\n");
-					}
-					else {
-						sb.append("import ");
-						sb.append(_contextOutputPath);
-						sb.append(".");
-						sb.append(
-							StringUtils.upperCaseFirstChar(
-								provider.getModelName()));
-						sb.append(";\n");
-					}
-
-					importedClasses.add(provider.getModelName());
-				}
-			}
-		}
-
-		return sb.toString();
-	}
-
 	private String _toModelImportStatements(
 		String modelPackage, Set<String> referencedModels) {
 
@@ -711,7 +618,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
-			_toJavaxImports(path.getMethods()));
+			toJavaxImports(path.getMethods(), componentDefinitions));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${MODEL_RESOURCE_IMPLEMENTATION_CLASS}",
@@ -758,7 +665,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
-			_toJavaxImports(path.getMethods()));
+			toJavaxImports(path.getMethods(), componentDefinitions));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${PATH}", path.getName());
