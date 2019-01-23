@@ -17,10 +17,10 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceAccountUserDisplayContext commerceAccountUserDisplayContext = (CommerceAccountUserDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceAccount commerceAccount = commerceAccountUserDisplayContext.getCurrentCommerceAccount();
-User selectedUser = commerceAccountUserDisplayContext.getSelectedUser();
+CommerceAccount commerceAccount = commerceAccountDisplayContext.getCurrentCommerceAccount();
+User selectedUser = commerceAccountDisplayContext.getSelectedUser();
 
 PasswordPolicy passwordPolicy = selectedUser.getPasswordPolicy();
 
@@ -118,7 +118,7 @@ String backURL = ParamUtil.getString(request, "backURL", redirect);
 						<c:when test='<%= UsersAdminUtil.hasUpdateFieldPermission(permissionChecker, user, selectedUser, "portrait") %>'>
 
 							<%
-							UserFileUploadsConfiguration userFileUploadsConfiguration = commerceAccountUserDisplayContext.getUserFileUploadsConfiguration();
+							UserFileUploadsConfiguration userFileUploadsConfiguration = commerceAccountDisplayContext.getUserFileUploadsConfiguration();
 							%>
 
 							<liferay-ui:logo-selector
