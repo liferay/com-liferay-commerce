@@ -33,9 +33,8 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
-import com.liferay.portal.kernel.service.GroupService;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
-import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -339,7 +338,7 @@ public class AuthorizeNetCommercePaymentMethod
 		JSONObject hostedPaymentOrderOptionsJSONObject =
 			_jsonFactory.createJSONObject();
 
-		Group group = _groupService.getGroup(groupId);
+		Group group = _groupLocalService.getGroup(groupId);
 
 		hostedPaymentOrderOptionsJSONObject.put(
 			"merchantName", group.getDescriptiveName(locale));
@@ -414,10 +413,7 @@ public class AuthorizeNetCommercePaymentMethod
 	private ConfigurationProvider _configurationProvider;
 
 	@Reference
-	private GroupService _groupService;
-
-	@Reference
-	private Http _http;
+	private GroupLocalService _groupLocalService;
 
 	@Reference
 	private JSONFactory _jsonFactory;
