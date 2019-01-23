@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.catalog.rule.CPRuleType;
 import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.constants.CPActionKeys;
@@ -523,6 +524,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			document.addKeyword(type, linkedProductIds);
 		}
 
+		long cpAttachmentFileEntryId = 0;
+
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			_cpDefinitionLocalService.getDefaultImage(
 				cpDefinition.getCPDefinitionId());
@@ -531,11 +534,15 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			document.addNumber(
 				FIELD_DEFAULT_IMAGE_FILE_ENTRY_ID,
 				cpAttachmentFileEntry.getFileEntryId());
+
+			cpAttachmentFileEntryId =
+				cpAttachmentFileEntry.getCPAttachmentFileEntryId();
 		}
 
 		document.addKeyword(
 			FIELD_DEFAULT_IMAGE_FILE_URL,
-			cpDefinition.getDefaultImageFileURL());
+			_commerceMediaResolver.getUrl(
+				cpAttachmentFileEntryId, false, false, false));
 
 		CProduct cProduct = cpDefinition.getCProduct();
 
@@ -651,6 +658,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
+	private CommerceMediaResolver _commerceMediaResolver;
 
 	@Reference
 	private CPDefinitionLinkLocalService _cpDefinitionLinkLocalService;
