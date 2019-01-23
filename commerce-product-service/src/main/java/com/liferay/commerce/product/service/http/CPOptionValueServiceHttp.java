@@ -121,7 +121,7 @@ public class CPOptionValueServiceHttp {
 	public static com.liferay.commerce.product.model.CPOptionValue fetchByExternalReferenceCode(
 		HttpPrincipal httpPrincipal, long companyId,
 		String externalReferenceCode)
-		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPOptionValueServiceUtil.class,
 					"fetchByExternalReferenceCode",
@@ -136,8 +136,8 @@ public class CPOptionValueServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.security.auth.PrincipalException) {
-					throw (com.liferay.portal.kernel.security.auth.PrincipalException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);

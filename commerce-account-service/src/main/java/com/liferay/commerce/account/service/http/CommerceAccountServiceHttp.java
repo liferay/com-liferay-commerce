@@ -262,7 +262,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getUserCommerceAccounts",
-					_getUserCommerceAccountsParameterTypes7);
+					_getUserCommerceAccountsParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					parentCommerceAccountId, commerceSiteType, keywords, start,
@@ -297,7 +297,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getUserCommerceAccountsCount",
-					_getUserCommerceAccountsCountParameterTypes8);
+					_getUserCommerceAccountsCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					parentCommerceAccountId, commerceSiteType, keywords);
@@ -333,7 +333,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"updateCommerceAccount",
-					_updateCommerceAccountParameterTypes9);
+					_updateCommerceAccountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId, name, logo, logoBytes, email, taxId,
@@ -370,7 +370,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"upsertCommerceAccount",
-					_upsertCommerceAccountParameterTypes10);
+					_upsertCommerceAccountParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					parentCommerceAccountId, logo, logoBytes, email, taxId,
@@ -421,18 +421,18 @@ public class CommerceAccountServiceHttp {
 	private static final Class<?>[] _getPersonalCommerceAccountParameterTypes5 = new Class[] {
 			long.class, long.class
 		};
-	private static final Class<?>[] _getUserCommerceAccountsParameterTypes7 = new Class[] {
+	private static final Class<?>[] _getUserCommerceAccountsParameterTypes6 = new Class[] {
 			long.class, long.class, int.class, String.class, int.class,
 			int.class
 		};
-	private static final Class<?>[] _getUserCommerceAccountsCountParameterTypes8 =
+	private static final Class<?>[] _getUserCommerceAccountsCountParameterTypes7 =
 		new Class[] { long.class, long.class, int.class, String.class };
-	private static final Class<?>[] _updateCommerceAccountParameterTypes9 = new Class[] {
+	private static final Class<?>[] _updateCommerceAccountParameterTypes8 = new Class[] {
 			long.class, String.class, boolean.class, byte[].class, String.class,
 			String.class, boolean.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _upsertCommerceAccountParameterTypes10 = new Class[] {
+	private static final Class<?>[] _upsertCommerceAccountParameterTypes9 = new Class[] {
 			String.class, long.class, boolean.class, byte[].class, String.class,
 			String.class, int.class, boolean.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class

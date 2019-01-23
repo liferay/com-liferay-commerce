@@ -343,6 +343,21 @@ public class CommerceOrderServiceSoap {
 		}
 	}
 
+	public static int getPendingCommerceOrdersCount(long groupId,
+		long commerceAccountId, String keywords) throws RemoteException {
+		try {
+			int returnValue = CommerceOrderServiceUtil.getPendingCommerceOrdersCount(groupId,
+					commerceAccountId, keywords);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderSoap[] getPlacedCommerceOrders(
 		long groupId, long commerceAccountId, String keywords, int start,
 		int end) throws RemoteException {
@@ -364,21 +379,6 @@ public class CommerceOrderServiceSoap {
 		long commerceAccountId, String keywords) throws RemoteException {
 		try {
 			int returnValue = CommerceOrderServiceUtil.getPlacedCommerceOrdersCount(groupId,
-					commerceAccountId, keywords);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getPendingCommerceOrdersCount(long groupId,
-		long commerceAccountId, String keywords) throws RemoteException {
-		try {
-			int returnValue = CommerceOrderServiceUtil.getPendingCommerceOrdersCount(groupId,
 					commerceAccountId, keywords);
 
 			return returnValue;
