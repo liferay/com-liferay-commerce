@@ -27,6 +27,18 @@ public enum RESTError {
 		998, "Internal error. Please try again later.",
 		Response.Status.INTERNAL_SERVER_ERROR);
 
+	public int getErrorCode() {
+		return _errorCode;
+	}
+
+	public String getErrorDescription() {
+		return _errorDescription;
+	}
+
+	public Response.Status getStatus() {
+		return _status;
+	}
+
 	private RESTError(
 		int errorCode, String errorDescription, Response.Status status) {
 
