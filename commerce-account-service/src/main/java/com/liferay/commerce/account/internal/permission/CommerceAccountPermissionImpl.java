@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 
@@ -156,10 +156,10 @@ public class CommerceAccountPermissionImpl
 				return true;
 			}
 			else if (actionId.equals(ActionKeys.UPDATE) &&
-					 _commerceAccountModelResourcePermission.contains(
+					 _portletResourcePermission.contains(
 						 permissionChecker,
 						 commerceAccount.getCommerceAccountGroupId(),
-						 ActionKeys.UPDATE)) {
+						 CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
 
 				return true;
 			}
@@ -172,16 +172,7 @@ public class CommerceAccountPermissionImpl
 				return true;
 			}
 			else if (actionId.equals(ActionKeys.VIEW) &&
-					 _commerceAccountModelResourcePermission.contains(
-						 permissionChecker,
-						 commerceAccount.getCommerceAccountGroupId(),
-						 ActionKeys.VIEW)) {
-
-				return true;
-			}
-			else if (actionId.equals(
-						CommerceAccountActionKeys.MANAGE_ACCOUNTS) &&
-					 _commerceAccountModelResourcePermission.contains(
+					 _portletResourcePermission.contains(
 						 permissionChecker,
 						 commerceAccount.getCommerceAccountGroupId(),
 						 CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
@@ -199,9 +190,8 @@ public class CommerceAccountPermissionImpl
 	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Reference(
-		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
+		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
 	)
-	private ModelResourcePermission<CommerceAccount>
-		_commerceAccountModelResourcePermission;
+	private PortletResourcePermission _portletResourcePermission;
 
 }
