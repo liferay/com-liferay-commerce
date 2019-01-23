@@ -45,7 +45,7 @@ public class DTOUtils {
 			commercePriceEntry.getCommercePriceListId());
 		priceEntryDTO.setExternalReferenceCode(
 			priceEntryDTO.getExternalReferenceCode());
-		priceEntryDTO.setHasTierPrice(commercePriceEntry.getHasTierPrice());
+		priceEntryDTO.setHasTierPrice(commercePriceEntry.isHasTierPrice());
 		priceEntryDTO.setId(commercePriceEntry.getCommercePriceEntryId());
 		priceEntryDTO.setPrice(commercePriceEntry.getPrice());
 		priceEntryDTO.setPromoPrice(commercePriceEntry.getPromoPrice());
@@ -95,13 +95,13 @@ public class DTOUtils {
 		productOptionDTO.setDescription(cpOption.getDescription(locale));
 		productOptionDTO.setExternalReferenceCode(
 			cpOption.getExternalReferenceCode());
-		productOptionDTO.setFacetable(cpOption.getFacetable());
+		productOptionDTO.setFacetable(cpOption.isFacetable());
 		productOptionDTO.setFieldType(cpOption.getDDMFormFieldTypeName());
 		productOptionDTO.setId(cpOption.getCPOptionId());
 		productOptionDTO.setKey(cpOption.getKey());
 		productOptionDTO.setName(cpOption.getName(locale));
-		productOptionDTO.setRequired(cpOption.getRequired());
-		productOptionDTO.setSkuContributor(cpOption.getSkuContributor());
+		productOptionDTO.setRequired(cpOption.isRequired());
+		productOptionDTO.setSkuContributor(cpOption.isSkuContributor());
 
 		return productOptionDTO;
 	}
