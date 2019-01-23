@@ -59,9 +59,6 @@ public class CommerceAccountUserDisplayContext
 	public AccountFilterImpl getAccountFilter() throws PortalException {
 		AccountFilterImpl accountFilter = new AccountFilterImpl();
 
-		HttpServletRequest httpServletRequest =
-			commerceAccountRequestHelper.getRequest();
-
 		accountFilter.setAccountId(getCurrentCommerceAccountId());
 
 		return accountFilter;

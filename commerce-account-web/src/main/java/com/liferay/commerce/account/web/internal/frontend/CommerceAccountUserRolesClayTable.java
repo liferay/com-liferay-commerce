@@ -120,8 +120,8 @@ public class CommerceAccountUserRolesClayTable
 				accountFilter.getAccountId());
 
 		return _userGroupRoleLocalService.getUserGroupRolesCount(
-				_portal.getUserId(httpServletRequest),
-				commerceAccount.getCommerceAccountGroupId());
+			_portal.getUserId(httpServletRequest),
+			commerceAccount.getCommerceAccountGroupId());
 	}
 
 	@Override
