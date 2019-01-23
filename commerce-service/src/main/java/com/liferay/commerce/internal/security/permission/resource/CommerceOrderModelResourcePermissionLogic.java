@@ -115,6 +115,12 @@ public class CommerceOrderModelResourcePermissionLogic
 			return false;
 		}
 
+		User user = permissionChecker.getUser();
+
+		if (user.isDefaultUser() && commerceOrder.isGuestOrder()) {
+			return false;
+		}
+
 		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 
 		if (commerceOrder.isPending() &&
@@ -179,6 +185,12 @@ public class CommerceOrderModelResourcePermissionLogic
 			PermissionChecker permissionChecker, CommerceOrder commerceOrder)
 		throws PortalException {
 
+		User user = permissionChecker.getUser();
+
+		if (user.isDefaultUser() && commerceOrder.isGuestOrder()) {
+			return true;
+		}
+
 		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 
 		if (commerceOrder.isOpen()) {
@@ -217,7 +229,7 @@ public class CommerceOrderModelResourcePermissionLogic
 
 		User user = permissionChecker.getUser();
 
-		if (!user.isSetupComplete() && commerceOrder.isGuestOrder()) {
+		if (user.isDefaultUser() && commerceOrder.isGuestOrder()) {
 			return true;
 		}
 
