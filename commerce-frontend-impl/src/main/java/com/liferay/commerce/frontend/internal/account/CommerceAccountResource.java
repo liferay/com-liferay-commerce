@@ -318,8 +318,8 @@ public class CommerceAccountResource {
 		int end = page * pageSize;
 
 		List<CommerceOrder> userCommerceOrders =
-			_commerceOrderService.getCommerceOrders(
-				groupId, accountId, start, end, null);
+			_commerceOrderService.getPendingCommerceOrders(
+				groupId, accountId, StringPool.BLANK, start, end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
 			Date modifiedDate = commerceOrder.getModifiedDate();
@@ -387,7 +387,7 @@ public class CommerceAccountResource {
 
 		PortletURL editURL = PortletProviderUtil.getPortletURL(
 			httpServletRequest, CommerceOrder.class.getName(),
-			PortletProvider.Action.VIEW);
+			PortletProvider.Action.EDIT);
 
 		editURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
 		editURL.setParameter(

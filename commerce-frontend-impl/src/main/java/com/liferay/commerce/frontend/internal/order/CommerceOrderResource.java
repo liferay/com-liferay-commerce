@@ -75,8 +75,8 @@ public class CommerceOrderResource {
 
 		try {
 			orderList = getOrderList(
-				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				queryString, page, pageSize, themeDisplay.getRequest());
+				themeDisplay.getScopeGroupId(), queryString, page, pageSize,
+				themeDisplay.getRequest());
 		}
 		catch (Exception e) {
 			orderList = new OrderList(
@@ -87,18 +87,18 @@ public class CommerceOrderResource {
 	}
 
 	public OrderList getOrderList(
-			long groupId, long userId, String keywords, int page, int pageSize,
+			long groupId, String keywords, int page, int pageSize,
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		List<Order> orders = getOrders(
-			groupId, userId, keywords, page, pageSize, httpServletRequest);
+			groupId, keywords, page, pageSize, httpServletRequest);
 
-		return new OrderList(orders, getOrdersCount(groupId, userId, keywords));
+		return new OrderList(orders, getOrdersCount(groupId, keywords));
 	}
 
 	protected List<Order> getOrders(
-			long groupId, long userId, String keywords, int page, int pageSize,
+			long groupId, String keywords, int page, int pageSize,
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
@@ -108,8 +108,8 @@ public class CommerceOrderResource {
 		int end = page * pageSize;
 
 		List<CommerceOrder> userCommerceOrders =
-			_commerceOrderService.getUserCommerceOrders(
-				groupId, userId, keywords, start, end);
+			_commerceOrderService.getPendingCommerceOrders(
+				groupId, 0, keywords, start, end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
 			Date modifiedDate = commerceOrder.getModifiedDate();
@@ -136,11 +136,11 @@ public class CommerceOrderResource {
 		return orders;
 	}
 
-	protected int getOrdersCount(long groupId, long userId, String keywords)
+	protected int getOrdersCount(long groupId, String keywords)
 		throws PortalException {
 
-		return _commerceOrderService.getUserCommerceOrdersCount(
-			groupId, userId, keywords);
+		return _commerceOrderService.getPendingCommerceOrdersCount(
+			groupId, 0, keywords);
 	}
 
 	protected Response getResponse(Object object) {
