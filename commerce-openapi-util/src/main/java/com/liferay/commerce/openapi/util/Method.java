@@ -17,6 +17,8 @@ package com.liferay.commerce.openapi.util;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Igor Beslic
@@ -107,12 +109,65 @@ public class Method {
 		return _responses;
 	}
 
+	public String getReturnType(Set<ComponentDefinition> componentDefinitions) {
+		ComponentDefinition schemaComponentDefinition =
+			_getSchemaComponentDefinition(componentDefinitions);
+
+		if (schemaComponentDefinition == null) {
+			return null;
+		}
+
+		if (hasCollectionReturnType(componentDefinitions)) {
+			String itemsReferenceModel =
+				schemaComponentDefinition.getItemsReferencedModel();
+
+			schemaComponentDefinition = _getSchemaComponentDefinition(
+				itemsReferenceModel, componentDefinitions);
+		}
+
+		return schemaComponentDefinition.getName();
+	}
+
+	public boolean hasCollectionReturnType(
+		Set<ComponentDefinition> componentDefinitions) {
+
+		ComponentDefinition schemaComponentDefinition =
+			_getSchemaComponentDefinition(componentDefinitions);
+
+		if (schemaComponentDefinition == null) {
+			return false;
+		}
+
+		if (schemaComponentDefinition.isArray()) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean hasExtensions() {
 		if (_extensions.isEmpty()) {
 			return false;
 		}
 
 		return true;
+	}
+
+	public boolean hasImplicitPaginationContext(
+		Set<ComponentDefinition> componentDefinitions) {
+
+		if (!hasPaginationContextExtension()) {
+			ComponentDefinition schemaComponentDefinition =
+				_getSchemaComponentDefinition(componentDefinitions);
+
+			if ((schemaComponentDefinition != null) &&
+				schemaComponentDefinition.isArray()) {
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public boolean hasPaginationContextExtension() {
@@ -176,6 +231,57 @@ public class Method {
 		_toString = sb.toString();
 
 		return _toString;
+	}
+
+	private Content _getResponseContent(List<Response> responses) {
+		for (Response response : responses) {
+			List<Content> contents = response.getContents();
+
+			if (!contents.isEmpty()) {
+				return contents.get(0);
+			}
+		}
+
+		return null;
+	}
+
+	private ComponentDefinition _getSchemaComponentDefinition(
+		Set<ComponentDefinition> componentDefinitions) {
+
+		Content content = _getResponseContent(getResponses());
+
+		if (content == null) {
+			return null;
+		}
+
+		Schema schema = content.getSchema();
+
+		ComponentDefinition schemaComponentDefinition =
+			_getSchemaComponentDefinition(
+				schema.getReferencedModel(), componentDefinitions);
+
+		if ("array".equals(schema.getType())) {
+			return ComponentDefinition.asComponentTypeArray(
+				schemaComponentDefinition, schema.getReference());
+		}
+
+		return schemaComponentDefinition;
+	}
+
+	private ComponentDefinition _getSchemaComponentDefinition(
+		String name, Set<ComponentDefinition> componentDefinitions) {
+
+		for (ComponentDefinition componentDefinition : componentDefinitions) {
+			if (componentDefinition.isParameter()) {
+				continue;
+			}
+
+			if (Objects.equals(name, componentDefinition.getName())) {
+				return componentDefinition;
+			}
+		}
+
+		return null;
 	}
 
 	private final String _absolutePath;
