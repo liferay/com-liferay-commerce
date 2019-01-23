@@ -12,7 +12,7 @@ import './Summary.es';
 class Cart extends Component {
 
 	toggleCart() {
-		return this.cartId && (this.isOpen = !this.isOpen);
+		return (this.isOpen = !this.isOpen);
 	}
 
 	attached() {
@@ -192,9 +192,7 @@ class Cart extends Component {
 			{
 				body: JSON.stringify(
 					{
-						cartItem: {
-							quantity: this.getProductProperty(productId, 'quantity')
-						}
+						quantity: this.getProductProperty(productId, 'quantity')
 					}
 				),
 				headers: new Headers({'Content-Type': 'application/json'}),

@@ -14,12 +14,12 @@ class AddAddressModal extends Component {
 	attached() {
 		this._fetchCountries();
 	}
-	
-	sync_addressType(){
+
+	sync_addressType() {
 		return this._fetchCountries();
 	}
 
-	sync_formData(){
+	sync_formData() {
 		return this._validateForms();
 	}
 
@@ -39,10 +39,10 @@ class AddAddressModal extends Component {
 	_handleNextButton(e) {
 		e.preventDefault();
 		this._isFirstFormValid = this.refs.modal.refs.firstForm.checkValidity();
-		if(this._isFirstFormValid) {
+		if (this._isFirstFormValid) {
 			return this._stage = 2;
 		}
-		return false
+		return false;
 	}
 
 	_handleCloseModal(e) {
@@ -52,23 +52,24 @@ class AddAddressModal extends Component {
 
 	_handleSelectBox(evt) {
 		const value = evt.target.value;
-		if(evt.target.name === "commerceCountry") {
+		if (evt.target.name === 'commerceCountry') {
 			this._formData = Object.assign(
 				{},
 				this._formData,
 				{
 					country: value
 				}
-				)
-				this._fetchRegions();
-		} else {
+			);
+			this._fetchRegions();
+		}
+ else {
 			this._formData = Object.assign(
 				{},
 				this._formData,
 				{
 					region: value
 				}
-			)
+			);
 		}
 		return value;
 	}
@@ -80,27 +81,27 @@ class AddAddressModal extends Component {
 			{
 				[evt.target.name]: evt.target.value
 			}
-		)
+		);
 		return evt.target.value;
 	}
 
 	_validateForms(form) {
-		const isFirstFormValid = 
+		const isFirstFormValid =
 			!!(
 				this._formData.address && this._formData.address.length &&
 				this._formData.city && this._formData.city.length &&
 				this._formData.zipCode && this._formData.zipCode.length &&
 				this._formData.country && this._formData.country.length &&
 				this._formData.region && this._formData.region.length
-			)
+			);
 		this._isFirstFormValid = isFirstFormValid;
 
-		const isSecondFormValid = 
+		const isSecondFormValid =
 			!!(
 				this._formData.referent && this._formData.referent.length &&
 				this._formData.email && this._formData.email.length &&
 				this._formData.telephone && this._formData.telephone.length
-			)
+			);
 		this._isSecondFormValid = isSecondFormValid;
 
 		return this._isFirstFormValid && this._isSecondFormValid;
@@ -108,20 +109,20 @@ class AddAddressModal extends Component {
 
 	_fetchCountries() {
 		return fetch(
-			(this.addressType === 'shipping' ? this.shippingCountriesAPI : this.billingCountriesAPI)
-			+ themeDisplay.getScopeGroupId(),
+			(this.addressType === 'shipping' ? this.shippingCountriesAPI : this.billingCountriesAPI) +
+			themeDisplay.getScopeGroupId(),
 			{
 				method: 'GET'
 			}
 		)
-		.then(
-			response => response.json()
-		)
-		.then(
-			countries => {
-				return this._countries = countries;
-			}
-		);
+			.then(
+				response => response.json()
+			)
+			.then(
+				countries => {
+					return this._countries = countries;
+				}
+			);
 	}
 
 	_fetchRegions() {
@@ -131,20 +132,20 @@ class AddAddressModal extends Component {
 				method: 'GET'
 			}
 		)
-		.then(
-			response => response.json()
-		)
-		.then(
-			regions => {
-				return this._regions = regions;
-			}
-		);
+			.then(
+				response => response.json()
+			)
+			.then(
+				regions => {
+					return this._regions = regions;
+				}
+			);
 	}
 
 	_handleFormSubmit(e) {
 		e.preventDefault();
 		const isFormValid = e.target.checkValidity();
-		if(isFormValid) {
+		if (isFormValid) {
 			this._addAddress(e);
 		}
 	}
