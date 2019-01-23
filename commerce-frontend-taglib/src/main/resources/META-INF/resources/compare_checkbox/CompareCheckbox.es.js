@@ -2,18 +2,10 @@
 
 import template from './CompareCheckbox.soy';
 import Component from 'metal-component';
-import Soy, { Config } from 'metal-soy';
+import Soy, {Config} from 'metal-soy';
 
 class CompareCheckbox extends Component {
 	attached() {
-		Liferay.on(
-			'productRemovedFromCompare',
-			(data) => {
-				if (data.id === this.productId) {
-					this.isInCompare = false;
-				}
-			}
-		);
 		Liferay.on(
 			'compareIsAvailable',
 			() => {
@@ -26,11 +18,21 @@ class CompareCheckbox extends Component {
 				return this.isCompareAvailable = false;
 			}
 		);
+		Liferay.on(
+			'productRemovedFromCompare',
+			(data) => {
+				if (data.id === this.productId) {
+					this.isInCompare = false;
+				}
+			}
+		);
 	}
 
 	_handleCompareCheckbox(evt) {
 		evt.preventDefault();
+
 		this.isInCompare = !this.isInCompare;
+
 		return Liferay.fire('toggleProductToCompare', {
 			id: this.productId,
 			thumbnail: this.pictureUrl
@@ -41,17 +43,17 @@ class CompareCheckbox extends Component {
 Soy.register(CompareCheckbox, template);
 
 CompareCheckbox.STATE = {
+	isCheckboxVisible: Config.bool(),
+	isCompareAvailable: Config.bool(),
+	isInCompare: Config.bool(),
+	isLabelVisible: Config.bool(),
 	pictureUrl: Config.string().required(),
 	productId: Config.oneOfType(
 		[
 			Config.number(),
 			Config.string()
 		]
-	).required(),
-	isInCompare: Config.bool(),
-	isCompareAvailable: Config.bool(),
-	isCheckboxVisible: Config.bool(),
-	isLabelVisible: Config.bool()
+	).required()
 };
 
 export {CompareCheckbox};
