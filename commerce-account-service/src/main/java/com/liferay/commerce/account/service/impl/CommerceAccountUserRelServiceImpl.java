@@ -34,25 +34,14 @@ public class CommerceAccountUserRelServiceImpl
 	extends CommerceAccountUserRelServiceBaseImpl {
 
 	@Override
-	public CommerceAccountUserRel addCommerceAccountUserRel(
-			long commerceAccountId, long userId, ServiceContext serviceContext)
-		throws PortalException {
-
-		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
-
-		return commerceAccountUserRelLocalService.addCommerceAccountUserRel(
-			commerceAccountId, userId, serviceContext);
-	}
-
-	@Override
 	public void addCommerceAccountUserRels(
 			long commerceAccountId, long[] userIds, String[] emailAddresses,
 			long[] roleIds, ServiceContext serviceContext)
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			ActionKeys.ASSIGN_MEMBERS);
 
 		commerceAccountUserRelLocalService.addCommerceAccountUserRels(
 			commerceAccountId, userIds, emailAddresses, roleIds,
@@ -65,7 +54,8 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			ActionKeys.ASSIGN_MEMBERS);
 
 		CommerceAccountUserRelPK commerceAccountUserRelPK =
 			new CommerceAccountUserRelPK(commerceAccountId, userId);
@@ -79,7 +69,8 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			ActionKeys.ASSIGN_MEMBERS);
 
 		commerceAccountUserRelLocalService.
 			deleteCommerceAccountUserRelsByCommerceAccountId(commerceAccountId);
@@ -91,22 +82,11 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			ActionKeys.ASSIGN_MEMBERS);
 
 		commerceAccountUserRelLocalService.deleteCommerceAccountUserRels(
 			commerceAccountId, userIds);
-	}
-
-	@Override
-	public List<CommerceAccountUserRel> getCommerceAccountUserRels(
-			long commerceAccountId)
-		throws PortalException {
-
-		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
-
-		return commerceAccountUserRelLocalService.getCommerceAccountUserRels(
-			commerceAccountId);
 	}
 
 	@Override
@@ -115,7 +95,7 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId, ActionKeys.VIEW_MEMBERS);
 
 		return commerceAccountUserRelPersistence.findByCommerceAccountId(
 			commerceAccountId, start, end);
@@ -126,7 +106,7 @@ public class CommerceAccountUserRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId, ActionKeys.VIEW_MEMBERS);
 
 		return
 			commerceAccountUserRelLocalService.getCommerceAccountUserRelsCount(

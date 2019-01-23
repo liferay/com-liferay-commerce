@@ -15,12 +15,13 @@
 package com.liferay.commerce.account.service.impl;
 
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.base.CommerceAccountServiceBaseImpl;
-import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.NoSuchAccountException;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermi
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -44,7 +46,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		PortalPermissionUtil.contains(
+		PortalPermissionUtil.check(
 			getPermissionChecker(), CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 
 		return commerceAccountLocalService.addBusinessCommerceAccount(
@@ -59,7 +61,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
-		PortalPermissionUtil.contains(
+		PortalPermissionUtil.check(
 			getPermissionChecker(), CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 
 		return commerceAccountLocalService.addCommerceAccount(
@@ -97,6 +99,20 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	public CommerceAccount getCommerceAccount(long commerceAccountId)
 		throws PortalException {
 
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.fetchCommerceAccount(commerceAccountId);
+
+		if (commerceAccount == null) {
+			throw new NoSuchAccountException();
+		}
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.VIEW);
+
+		if (_isAccountCompanyAdministrator(commerceAccount.getCompanyId())) {
+			return commerceAccount;
+		}
+
 		return commerceAccountLocalService.getCommerceAccount(
 			getUserId(), commerceAccountId);
 	}
@@ -119,46 +135,70 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 	@Override
 	public List<CommerceAccount> getUserCommerceAccounts(
-			long userId, int commerceSiteType, int start, int end)
+			long userId, long parentCommerceAccountId, int commerceSiteType,
+			String keywords, int start, int end)
 		throws PortalException {
 
-		return commerceAccountService.getUserCommerceAccounts(
-			userId, null, commerceSiteType, StringPool.BLANK, start, end);
-	}
+		User user = userLocalService.fetchUser(userId);
 
-	@Override
-	public List<CommerceAccount> getUserCommerceAccounts(
-		long userId, Long parentCommerceAccountId, int commerceSiteType,
-		String keywords, int start, int end) {
+		if (user == null) {
+			return Collections.emptyList();
+		}
 
-		return commerceAccountLocalService.getUserCommerceAccounts(
-			userId, parentCommerceAccountId, commerceSiteType, keywords, start,
-			end);
+		if ((userId == getUserId()) &&
+			!_isAccountCompanyAdministrator(user.getCompanyId())) {
+
+			return commerceAccountLocalService.getUserCommerceAccounts(
+				userId, parentCommerceAccountId, commerceSiteType, keywords,
+				start, end);
+		}
+		else if (_isAccountCompanyAdministrator(user.getCompanyId())) {
+			int accountType = CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS;
+
+			if (commerceSiteType == CommerceAccountConstants.SITE_TYPE_B2C) {
+				accountType = CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL;
+			}
+
+			return commerceAccountLocalService.searchCommerceAccounts(
+				user.getCompanyId(), parentCommerceAccountId, keywords,
+				accountType, true, start, end,
+				SortFactoryUtil.create("name", false));
+		}
+
+		return Collections.emptyList();
 	}
 
 	@Override
 	public int getUserCommerceAccountsCount(
-		long userId, Long parentCommerceAccountId, int commerceSiteType,
-		String keywords) {
-
-		return commerceAccountLocalService.getUserCommerceAccountsCount(
-			userId, parentCommerceAccountId, commerceSiteType, keywords);
-	}
-
-	@Override
-	public BaseModelSearchResult<CommerceAccount> searchCommerceAccounts(
-			long parentCommerceAccountId, String keywords, Boolean active,
-			int start, int end, Sort sort)
+			long userId, long parentCommerceAccountId, int commerceSiteType,
+			String keywords)
 		throws PortalException {
 
-		PermissionChecker permissionChecker = getPermissionChecker();
+		User user = userLocalService.fetchUser(userId);
 
-		PortalPermissionUtil.check(
-			permissionChecker, CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+		if (user == null) {
+			return 0;
+		}
 
-		return commerceAccountLocalService.searchCommerceAccounts(
-			permissionChecker.getCompanyId(), parentCommerceAccountId, keywords,
-			active, start, end, sort);
+		if ((userId == getUserId()) &&
+			!_isAccountCompanyAdministrator(user.getCompanyId())) {
+
+			return commerceAccountLocalService.getUserCommerceAccountsCount(
+				userId, parentCommerceAccountId, commerceSiteType, keywords);
+		}
+		else if (_isAccountCompanyAdministrator(user.getCompanyId())) {
+			int accountType = CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS;
+
+			if (commerceSiteType == CommerceAccountConstants.SITE_TYPE_B2C) {
+				accountType = CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL;
+			}
+
+			return commerceAccountLocalService.searchCommerceAccountsCount(
+				user.getCompanyId(), parentCommerceAccountId, keywords,
+				accountType, true);
+		}
+
+		return 0;
 	}
 
 	public CommerceAccount updateCommerceAccount(
@@ -201,6 +241,23 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		return commerceAccountLocalService.upsertCommerceAccount(
 			name, parentCommerceAccountId, logo, logoBytes, email, taxId, type,
 			active, externalReferenceCode, serviceContext);
+	}
+
+	private boolean _isAccountCompanyAdministrator(long companyId)
+		throws PortalException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (permissionChecker.isOmniadmin()) {
+			return true;
+		}
+
+		if (permissionChecker.isCompanyAdmin(companyId)) {
+			return true;
+		}
+
+		return PortalPermissionUtil.contains(
+			getPermissionChecker(), CommerceAccountActionKeys.MANAGE_ACCOUNTS);
 	}
 
 	private static volatile ModelResourcePermission<CommerceAccount>
