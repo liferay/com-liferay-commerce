@@ -175,7 +175,7 @@ public class CommerceAccountPermissionImpl
 					 _commerceAccountModelResourcePermission.contains(
 						 permissionChecker,
 						 commerceAccount.getCommerceAccountGroupId(),
-						 CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
+						 ActionKeys.VIEW)) {
 
 				return true;
 			}
