@@ -92,7 +92,7 @@ public abstract class BaseCommerceAccountDisplayContext {
 			return commerceAccountService.getCommerceAccount(commerceAccountId);
 		}
 
-		return _getCurrentAccount();
+		return getCurrentAccount();
 	}
 
 	public long getCurrentCommerceAccountId() throws PortalException {
@@ -147,7 +147,7 @@ public abstract class BaseCommerceAccountDisplayContext {
 	public String getPath(CommerceAccount commerceAccount)
 		throws PortalException {
 
-		CommerceAccount topCommerceAccount = _getCurrentAccount();
+		CommerceAccount topCommerceAccount = getCurrentAccount();
 
 		List<CommerceAccount> commerceAccounts = new ArrayList<>();
 
@@ -252,12 +252,26 @@ public abstract class BaseCommerceAccountDisplayContext {
 		return portletURL;
 	}
 
+	public boolean hasEditCommerceAccountPermissions(
+			CommerceAccount commerceAccount)
+		throws PortalException {
+
+		return modelResourcePermission.contains(
+			commerceAccountRequestHelper.getPermissionChecker(),
+			commerceAccount, ActionKeys.UPDATE);
+	}
+
 	public boolean hasEditCommerceAccountPermissions(long commerceAccountId)
 		throws PortalException {
 
 		return modelResourcePermission.contains(
 			commerceAccountRequestHelper.getPermissionChecker(),
 			commerceAccountId, ActionKeys.UPDATE);
+	}
+
+	protected CommerceAccount getCurrentAccount() throws PortalException {
+		return _commerceAccountHelper.getCurrentCommerceAccount(
+			commerceAccountRequestHelper.getRequest());
 	}
 
 	protected void setDefaultOrderByCol(String defaultOrderByCol) {
@@ -275,11 +289,6 @@ public abstract class BaseCommerceAccountDisplayContext {
 	protected final ModelResourcePermission<CommerceAccount>
 		modelResourcePermission;
 	protected final Portal portal;
-
-	private CommerceAccount _getCurrentAccount() throws PortalException {
-		return _commerceAccountHelper.getCurrentCommerceAccount(
-			commerceAccountRequestHelper.getRequest());
-	}
 
 	private final CommerceAccountHelper _commerceAccountHelper;
 	private String _defaultOrderByCol;
