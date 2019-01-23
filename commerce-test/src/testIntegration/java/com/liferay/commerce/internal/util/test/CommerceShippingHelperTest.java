@@ -42,6 +42,7 @@ import java.math.BigDecimal;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,6 +68,7 @@ public class CommerceShippingHelperTest {
 			_group.getGroupId());
 	}
 
+	@Ignore
 	@Test
 	public void testGetDimensions() throws Exception {
 		CommerceCurrency commerceCurrency =
@@ -123,6 +125,7 @@ public class CommerceShippingHelperTest {
 			0.00001);
 	}
 
+	@Ignore
 	@Test
 	public void testGetWeight() throws Exception {
 		CommerceCurrency commerceCurrency =

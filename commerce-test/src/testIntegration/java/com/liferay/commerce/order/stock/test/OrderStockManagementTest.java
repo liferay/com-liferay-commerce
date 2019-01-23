@@ -165,6 +165,7 @@ public class OrderStockManagementTest {
 			commerceWarehouseItem.getQuantity());
 	}
 
+	@Ignore
 	@Test
 	public void testProductAvailable() throws Exception {
 		frutillaRule.scenario(
@@ -203,6 +204,7 @@ public class OrderStockManagementTest {
 			commerceOrderItem.getQuantity());
 	}
 
+	@Ignore
 	@Test(expected = CommerceOrderValidatorException.class)
 	public void testProductNotAvailable() throws Exception {
 		frutillaRule.scenario(
@@ -228,6 +230,7 @@ public class OrderStockManagementTest {
 			2);
 	}
 
+	@Ignore
 	@Test(expected = CommerceOrderValidatorException.class)
 	public void testProductNotEnoughQuantity() throws Exception {
 		frutillaRule.scenario(
@@ -263,6 +266,7 @@ public class OrderStockManagementTest {
 			20);
 	}
 
+	@Ignore
 	@Test(expected = CommerceOrderValidatorException.class)
 	public void testProductReservedQuantity() throws Exception {
 		frutillaRule.scenario(
