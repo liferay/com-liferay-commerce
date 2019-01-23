@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.internal.exception;
 
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
+import com.liferay.commerce.openapi.core.exception.RESTError;
 import com.liferay.commerce.price.list.exception.CommercePriceListExpirationDateException;
 
 import javax.ws.rs.core.Response;
@@ -37,17 +38,20 @@ public class CommercePriceListExpirationDateExceptionMapper
 
 	@Override
 	public int getErrorCode() {
-		return 994;
+		return RESTError.INVALID_COMMERCE_PRICE_LIST_EXPIRATION_DATE.
+			getErrorCode();
 	}
 
 	@Override
 	public String getErrorDescription() {
-		return "Invalid expiration date.";
+		return RESTError.INVALID_COMMERCE_PRICE_LIST_EXPIRATION_DATE.
+			getErrorDescription();
 	}
 
 	@Override
 	public Response.Status getStatus() {
-		return Response.Status.CONFLICT;
+		return RESTError.INVALID_COMMERCE_PRICE_LIST_EXPIRATION_DATE.
+			getStatus();
 	}
 
 }
