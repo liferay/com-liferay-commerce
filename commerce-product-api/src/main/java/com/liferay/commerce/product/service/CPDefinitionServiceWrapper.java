@@ -107,6 +107,14 @@ public class CPDefinitionServiceWrapper implements CPDefinitionService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPDefinition fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPDefinition fetchCPDefinition(
 		long cpDefinitionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -281,6 +289,16 @@ public class CPDefinitionServiceWrapper implements CPDefinitionService,
 		return _cpDefinitionService.updateShippingInfo(cpDefinitionId,
 			shippable, freeShipping, shipSeparately, shippingExtraPrice, width,
 			height, depth, weight, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPDefinition updateStatus(
+		long userId, long cpDefinitionId, int status,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext,
+		java.util.Map<String, java.io.Serializable> workflowContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionService.updateStatus(userId, cpDefinitionId,
+			status, serviceContext, workflowContext);
 	}
 
 	@Override
