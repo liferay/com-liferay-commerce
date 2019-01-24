@@ -75,7 +75,7 @@ public class ProductHelper {
 	public ProductDTO getProduct(String id, Locale locale, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(getProductById(id, company), locale);
+		return DTOUtils.modelToDTO(getProductById(id, company));
 	}
 
 	public CPDefinition getProductById(String id, Company company)
@@ -121,7 +121,7 @@ public class ProductHelper {
 		Stream<CPDefinition> stream = cpDefinitions.stream();
 
 		return stream.map(
-			commercePriceList -> DTOUtils.modelToDTO(commercePriceList, locale)
+			DTOUtils::modelToDTO
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -139,8 +139,7 @@ public class ProductHelper {
 			_updateProduct(
 				id, company, productDTO.getDefaultSku(),
 				productDTO.getDescription(), productDTO.getProductTypeName(),
-				productDTO.getShortDescription(), productDTO.getTitle()),
-			locale);
+				productDTO.getShortDescription(), productDTO.getName()));
 	}
 
 	public ProductDTO upsertProduct(
@@ -153,8 +152,7 @@ public class ProductHelper {
 				productDTO.getDescription(),
 				productDTO.getExternalReferenceCode(),
 				productDTO.getProductTypeName(),
-				productDTO.getShortDescription(), productDTO.getTitle(), user),
-			locale);
+				productDTO.getShortDescription(), productDTO.getName(), user));
 	}
 
 	private DateConfig _getDateConfig(Calendar calendar) {
@@ -199,7 +197,7 @@ public class ProductHelper {
 
 		DateConfig expirationDateConfig = _getDateConfig(expirationCalendar);
 
-		boolean neverExpire = true;
+		boolean neverExpire = Boolean.TRUE;
 
 		return _cpDefinitionService.updateCPDefinition(
 			cpDefinition.getCPDefinitionId(), Collections.emptyMap(),
@@ -218,7 +216,7 @@ public class ProductHelper {
 	private CPDefinition _upsertProduct(
 			Long groupId, boolean active, String defaultSku, String description,
 			String externalReferenceCode, String productTypeName,
-			String shortDescription, String title, User currentUser)
+			String shortDescription, String name, User currentUser)
 		throws PortalException {
 
 		boolean neverExpire = Boolean.TRUE;

@@ -49,16 +49,16 @@ public class ProductDTO {
 		return _id;
 	}
 
+	public String getName() {
+		return _name;
+	}
+
 	public String getProductTypeName() {
 		return _productTypeName;
 	}
 
 	public String getShortDescription() {
 		return _shortDescription;
-	}
-
-	public String getTitle() {
-		return _title;
 	}
 
 	public void setActive(boolean active) {
@@ -85,6 +85,10 @@ public class ProductDTO {
 		_id = id;
 	}
 
+	public void setName(String name) {
+		_name = name;
+	}
+
 	public void setProductTypeName(String productTypeName) {
 		_productTypeName = productTypeName;
 	}
@@ -93,18 +97,14 @@ public class ProductDTO {
 		_shortDescription = shortDescription;
 	}
 
-	public void setTitle(String title) {
-		_title = title;
-	}
-
 	private boolean _active;
 	private int[] _assetCategoryIds;
 	private String _defaultSku;
 	private String _description;
 	private String _externalReferenceCode;
 	private long _id;
+	private String _name;
 	private String _productTypeName;
 	private String _shortDescription;
-	private String _title;
 
 }
