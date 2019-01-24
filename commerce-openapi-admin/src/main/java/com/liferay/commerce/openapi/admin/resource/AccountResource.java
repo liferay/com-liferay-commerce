@@ -64,7 +64,8 @@ public interface AccountResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<AccountDTO> getAccounts(
-			@QueryParam("groupId") long groupId, @Context Pagination pagination)
+			@QueryParam("groupId") long groupId, @Context Locale locale,
+			@Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
