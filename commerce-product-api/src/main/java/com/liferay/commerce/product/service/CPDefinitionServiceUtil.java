@@ -115,6 +115,14 @@ public class CPDefinitionServiceUtil {
 		getService().deleteCPDefinition(cpDefinitionId);
 	}
 
+	public static com.liferay.commerce.product.model.CPDefinition fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.product.model.CPDefinition fetchCPDefinition(
 		long cpDefinitionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -278,6 +286,16 @@ public class CPDefinitionServiceUtil {
 				   .updateShippingInfo(cpDefinitionId, shippable, freeShipping,
 			shipSeparately, shippingExtraPrice, width, height, depth, weight,
 			serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CPDefinition updateStatus(
+		long userId, long cpDefinitionId, int status,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext,
+		java.util.Map<String, java.io.Serializable> workflowContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateStatus(userId, cpDefinitionId, status,
+			serviceContext, workflowContext);
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinition updateSubscriptionInfo(
