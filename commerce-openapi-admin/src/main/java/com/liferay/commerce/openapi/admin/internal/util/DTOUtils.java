@@ -15,6 +15,9 @@
 package com.liferay.commerce.openapi.admin.internal.util;
 
 import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.model.CommerceWarehouse;
+import com.liferay.commerce.model.CommerceWarehouseItem;
+import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
@@ -93,6 +96,30 @@ public class DTOUtils {
 		}
 
 		return priceListDTO;
+	}
+
+	public static InventoryDTO modelToDTO(
+			CommerceWarehouseItem commerceWarehouseItem)
+		throws PortalException {
+
+		InventoryDTO inventoryDTO = new InventoryDTO();
+
+		inventoryDTO.setId(commerceWarehouseItem.getCommerceWarehouseId());
+		inventoryDTO.setQuantity(commerceWarehouseItem.getQuantity());
+
+		CPInstance cpInstance = commerceWarehouseItem.getCPInstance();
+
+		inventoryDTO.setSkuExternalReferenceCode(
+			cpInstance.getExternalReferenceCode());
+		inventoryDTO.setSkuId(cpInstance.getCPInstanceId());
+
+		CommerceWarehouse commerceWarehouse =
+			commerceWarehouseItem.getCommerceWarehouse();
+
+		inventoryDTO.setWarehouseId(commerceWarehouse.getCommerceWarehouseId());
+		inventoryDTO.setWarehouseName(commerceWarehouse.getName());
+
+		return inventoryDTO;
 	}
 
 	public static ProductDTO modelToDTO(CPDefinition cpDefinition) {
