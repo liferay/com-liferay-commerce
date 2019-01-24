@@ -17,11 +17,13 @@ package com.liferay.commerce.openapi.admin.internal.util;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
+import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
@@ -91,6 +93,24 @@ public class DTOUtils {
 		}
 
 		return priceListDTO;
+	}
+
+	public static ProductDTO modelToDTO(
+		CPDefinition cpDefinition, Locale locale) {
+
+		ProductDTO productDTO = new ProductDTO();
+
+		productDTO.setActive(!cpDefinition.isInactive());
+
+		productDTO.setDescription(cpDefinition.getDescription());
+		productDTO.setExternalReferenceCode(
+			cpDefinition.getExternalReferenceCode());
+		productDTO.setId(cpDefinition.getCProductId());
+		productDTO.setProductTypeName(cpDefinition.getProductTypeName());
+		productDTO.setShortDescription(cpDefinition.getShortDescription());
+		productDTO.setTitle(cpDefinition.getMetaTitle(locale.getLanguage()));
+
+		return null;
 	}
 
 	public static ProductOptionDTO modelToDTO(
