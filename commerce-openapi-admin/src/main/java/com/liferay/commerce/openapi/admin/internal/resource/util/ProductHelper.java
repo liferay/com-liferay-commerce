@@ -137,9 +137,9 @@ public class ProductHelper {
 
 		return DTOUtils.modelToDTO(
 			_updateProduct(
-				id, company, productDTO.getDefaultSku(),
-				productDTO.getDescription(), productDTO.getProductTypeName(),
-				productDTO.getShortDescription(), productDTO.getName()));
+				id, company, productDTO.getDescription(),
+				productDTO.getShortDescription(), productDTO.getName(),
+				locale));
 	}
 
 	public ProductDTO upsertProduct(
@@ -152,7 +152,8 @@ public class ProductHelper {
 				productDTO.getDescription(),
 				productDTO.getExternalReferenceCode(),
 				productDTO.getProductTypeName(),
-				productDTO.getShortDescription(), productDTO.getName(), user));
+				productDTO.getShortDescription(), productDTO.getName(), user,
+				locale));
 	}
 
 	private DateConfig _getDateConfig(Calendar calendar) {
@@ -173,9 +174,19 @@ public class ProductHelper {
 		return dateConfig;
 	}
 
+	private Map<Locale, String> _getLocalizedField(
+		Locale locale, String field) {
+
+		Map<Locale, String> localizedMap = new HashMap<>();
+
+		localizedMap.put(locale, field);
+
+		return Collections.unmodifiableMap(localizedMap);
+	}
+
 	private CPDefinition _updateProduct(
-			String id, Company company, String defaultSku, String description,
-			String productTypeName, String shortDescription, String title)
+			String id, Company company, String description,
+			String shortDescription, String name, Locale locale)
 		throws PortalException {
 
 		CPDefinition cpDefinition = getProductById(id, company);
@@ -200,10 +211,12 @@ public class ProductHelper {
 		boolean neverExpire = Boolean.TRUE;
 
 		return _cpDefinitionService.updateCPDefinition(
-			cpDefinition.getCPDefinitionId(), Collections.emptyMap(),
-			Collections.emptyMap(), Collections.emptyMap(),
-			cpDefinition.getUrlTitleMap(), Collections.emptyMap(),
-			Collections.emptyMap(), Collections.emptyMap(),
+			cpDefinition.getCPDefinitionId(), _getLocalizedField(locale, name),
+			_getLocalizedField(locale, shortDescription),
+			_getLocalizedField(locale, description),
+			cpDefinition.getUrlTitleMap(), cpDefinition.getMetaTitleMap(),
+			cpDefinition.getMetaDescriptionMap(),
+			cpDefinition.getMetaKeywordsMap(),
 			cpDefinition.getIgnoreSKUCombinations(),
 			cpDefinition.getDDMStructureKey(), true, displayDateConfig._month,
 			displayDateConfig._day, displayDateConfig._year,
@@ -216,7 +229,8 @@ public class ProductHelper {
 	private CPDefinition _upsertProduct(
 			Long groupId, boolean active, String defaultSku, String description,
 			String externalReferenceCode, String productTypeName,
-			String shortDescription, String name, User currentUser)
+			String shortDescription, String name, User currentUser,
+			Locale locale)
 		throws PortalException {
 
 		boolean neverExpire = Boolean.TRUE;
@@ -239,17 +253,18 @@ public class ProductHelper {
 		String ddmStructureKey = null;
 
 		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
-			Collections.emptyMap(), Collections.emptyMap(),
-			Collections.emptyMap(), Collections.emptyMap(),
-			Collections.emptyMap(), Collections.emptyMap(),
-			Collections.emptyMap(), productTypeName, true, true, true, true,
-			0.0, 0.0, 0.0, 0.0, 0.0, 0L, false, false, ddmStructureKey, true,
-			displayDateConfig._month, displayDateConfig._day,
-			displayDateConfig._year, displayDateConfig._hour,
-			displayDateConfig._minute, expirationDateConfig._month,
-			expirationDateConfig._day, expirationDateConfig._year,
-			expirationDateConfig._hour, expirationDateConfig._minute,
-			neverExpire, defaultSku, externalReferenceCode, serviceContext);
+			_getLocalizedField(locale, name),
+			_getLocalizedField(locale, shortDescription),
+			_getLocalizedField(locale, description), null,
+			_getLocalizedField(locale, name), null, null, productTypeName, true,
+			true, true, true, 0.0, 0.0, 0.0, 0.0, 0.0, 0L, false, false,
+			ddmStructureKey, true, displayDateConfig._month,
+			displayDateConfig._day, displayDateConfig._year,
+			displayDateConfig._hour, displayDateConfig._minute,
+			expirationDateConfig._month, expirationDateConfig._day,
+			expirationDateConfig._year, expirationDateConfig._hour,
+			expirationDateConfig._minute, neverExpire, defaultSku,
+			externalReferenceCode, serviceContext);
 
 		if (!active) {
 			Map<String, Serializable> workflowContext = new HashMap<>();
