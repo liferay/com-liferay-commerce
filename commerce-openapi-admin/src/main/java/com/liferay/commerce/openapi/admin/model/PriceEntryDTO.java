@@ -39,10 +39,6 @@ public class PriceEntryDTO {
 		return _externalReferenceCode;
 	}
 
-	public boolean getHasTierPrice() {
-		return _hasTierPrice;
-	}
-
 	public long getId() {
 		return _id;
 	}
@@ -63,7 +59,11 @@ public class PriceEntryDTO {
 		return _skuExternalReferenceCode;
 	}
 
-	public boolean getStandardPrice() {
+	public boolean isHasTierPrice() {
+		return _hasTierPrice;
+	}
+
+	public boolean isStandardPrice() {
 		return _standardPrice;
 	}
 

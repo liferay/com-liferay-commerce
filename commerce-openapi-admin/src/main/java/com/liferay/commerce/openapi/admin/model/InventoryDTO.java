@@ -29,18 +29,6 @@ public class InventoryDTO {
 		return _allowedOrderQuantities;
 	}
 
-	public boolean getBackOrders() {
-		return _backOrders;
-	}
-
-	public boolean getDisplayAvailability() {
-		return _displayAvailability;
-	}
-
-	public boolean getDisplayStockQuantity() {
-		return _displayStockQuantity;
-	}
-
 	public long getId() {
 		return _id;
 	}
@@ -67,6 +55,18 @@ public class InventoryDTO {
 
 	public int getMultipleOrderQuantity() {
 		return _multipleOrderQuantity;
+	}
+
+	public boolean isBackOrders() {
+		return _backOrders;
+	}
+
+	public boolean isDisplayAvailability() {
+		return _displayAvailability;
+	}
+
+	public boolean isDisplayStockQuantity() {
+		return _displayStockQuantity;
 	}
 
 	public void setAllowedOrderQuantities(String allowedOrderQuantities) {

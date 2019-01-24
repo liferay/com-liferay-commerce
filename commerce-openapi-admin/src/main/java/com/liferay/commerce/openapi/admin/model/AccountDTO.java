@@ -25,10 +25,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Account")
 public class AccountDTO {
 
-	public boolean getBusiness() {
-		return _business;
-	}
-
 	public String getEmail() {
 		return _email;
 	}
@@ -57,14 +53,6 @@ public class AccountDTO {
 		return _organizationId;
 	}
 
-	public boolean getPersonal() {
-		return _personal;
-	}
-
-	public boolean getRoot() {
-		return _root;
-	}
-
 	public String getTaxId() {
 		return _taxId;
 	}
@@ -79,6 +67,18 @@ public class AccountDTO {
 
 	public long[] getUserIds() {
 		return _userIds;
+	}
+
+	public boolean isBusiness() {
+		return _business;
+	}
+
+	public boolean isPersonal() {
+		return _personal;
+	}
+
+	public boolean isRoot() {
+		return _root;
 	}
 
 	public void setBusiness(boolean business) {

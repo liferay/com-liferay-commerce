@@ -27,10 +27,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "PriceList")
 public class PriceListDTO {
 
-	public boolean getActive() {
-		return _active;
-	}
-
 	public long getCommercePriceListId() {
 		return _commercePriceListId;
 	}
@@ -59,12 +55,16 @@ public class PriceListDTO {
 		return _name;
 	}
 
-	public boolean getNeverExpire() {
-		return _neverExpire;
-	}
-
 	public double getPriority() {
 		return _priority;
+	}
+
+	public boolean isActive() {
+		return _active;
+	}
+
+	public boolean isNeverExpire() {
+		return _neverExpire;
 	}
 
 	public void setActive(boolean active) {
