@@ -60,8 +60,20 @@ public enum ParameterFormat {
 		return defaultParameterFormat;
 	}
 
+	public String getGetterSyntax() {
+		if (this == BOOLEAN) {
+			return "is";
+		}
+
+		return "get";
+	}
+
 	public String getJavaType() {
 		return _javaType;
+	}
+
+	public String getSetterSyntax() {
+		return "set";
 	}
 
 	private ParameterFormat(
