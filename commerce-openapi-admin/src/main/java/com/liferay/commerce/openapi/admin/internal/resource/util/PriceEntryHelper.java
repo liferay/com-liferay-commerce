@@ -76,7 +76,16 @@ public class PriceEntryHelper {
 		return commercePriceEntry;
 	}
 
-	public CollectionDTO<PriceEntryDTO> getCommercePriceEntryDTOs(
+	public PriceEntryDTO getPriceEntryDTO(String id, long companyId)
+		throws PortalException {
+
+		CommercePriceEntry commercePriceEntry = getCommercePriceEntry(
+			id, companyId);
+
+		return DTOUtils.modelToDTO(commercePriceEntry);
+	}
+
+	public CollectionDTO<PriceEntryDTO> getPriceEntryDTOs(
 			long groupId, Pagination pagination)
 		throws PortalException {
 
@@ -96,15 +105,6 @@ public class PriceEntryHelper {
 		}
 
 		return new CollectionDTO<>(priceEntryDTOs, count);
-	}
-
-	public PriceEntryDTO getPriceEntryDTO(String id, long companyId)
-		throws PortalException {
-
-		CommercePriceEntry commercePriceEntry = getCommercePriceEntry(
-			id, companyId);
-
-		return DTOUtils.modelToDTO(commercePriceEntry);
 	}
 
 	public void updateCommercePriceEntry(
