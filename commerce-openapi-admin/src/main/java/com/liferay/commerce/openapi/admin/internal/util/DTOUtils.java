@@ -110,7 +110,7 @@ public class DTOUtils {
 		productDTO.setShortDescription(cpDefinition.getShortDescription());
 		productDTO.setTitle(cpDefinition.getMetaTitle(locale.getLanguage()));
 
-		return null;
+		return productDTO;
 	}
 
 	public static ProductOptionDTO modelToDTO(
