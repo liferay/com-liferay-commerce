@@ -14,16 +14,23 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.InventoryHelper;
+import com.liferay.commerce.openapi.admin.model.CollectionDTO;
+import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.SkuResource;
+import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.portal.kernel.model.Company;
 
 import java.util.Locale;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -50,6 +57,14 @@ public class SkuResourceImpl implements SkuResource {
 	}
 
 	@Override
+	public CollectionDTO<InventoryDTO> getInventories(
+			String id, Pagination pagination)
+		throws Exception {
+
+		return _inventoryHelper.getInventories(id, _company, pagination);
+	}
+
+	@Override
 	public SkuDTO getSku(String id, long groupId, Locale locale)
 		throws Exception {
 
@@ -65,5 +80,20 @@ public class SkuResourceImpl implements SkuResource {
 
 		return responseBuilder.build();
 	}
+
+	@Override
+	public InventoryDTO upsertInventory(
+			String id, long groupId, InventoryDTO inventoryDTO)
+		throws Exception {
+
+		return _inventoryHelper.upsertInventory(
+			id, groupId, inventoryDTO, _company);
+	}
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private InventoryHelper _inventoryHelper;
 
 }
