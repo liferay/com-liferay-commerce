@@ -21,7 +21,7 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly project(":apps:commerce:commerce-cart-taglib")
 	compileOnly project(":apps:commerce:commerce-initializer-util")
-	compileOnly project(":apps:commerce:commerce-price-list-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.price.list.api", version: "2.0.0"
 	compileOnly project(":apps:commerce:commerce-product-content-api")
 	compileOnly project(":apps:commerce:commerce-product-taglib")
 	compileOnly project(":apps:commerce:commerce-product-type-grouped-api")
