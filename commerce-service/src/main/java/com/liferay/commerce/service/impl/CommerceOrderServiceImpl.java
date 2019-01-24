@@ -327,7 +327,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		return commerceOrderLocalService.getUserCommerceOrders(
 			groupId, getUserId(), commerceAccountId,
-			CommerceOrderConstants.ORDER_STATUS_OPEN, false, keywords, start,
+			CommerceOrderConstants.ORDER_STATUS_OPEN, true, keywords, start,
 			end);
 	}
 
