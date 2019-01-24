@@ -1,6 +1,6 @@
 Bundle-Name: Liferay Commerce Taglib
 Bundle-SymbolicName: com.liferay.commerce.taglib
-Bundle-Version: 1.2.0
+Bundle-Version: 1.2.1
 Export-Package: com.liferay.commerce.taglib.servlet.taglib
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title:
