@@ -1,19 +1,19 @@
 dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.petra.string", version: "2.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "1.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "3.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "1.1.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.5.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.test", version: "1.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.test.integration", version: "1.0.0"
 	compileOnly group: "junit", name: "junit", version: "4.12"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-api")
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-currency-test-util")
 	compileOnly project(":apps:commerce:commerce-payment-api")
 	compileOnly project(":apps:commerce:commerce-price-list-api")
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "3.0.0"
 	compileOnly project(":apps:commerce:commerce-product-test-util")
 	compileOnly project(":apps:commerce:commerce-shipping-engine-fixed-api")
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.user.segment.api", version: "1.1.0"
 }
 
 liferay {
