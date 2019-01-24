@@ -74,7 +74,7 @@ public interface ProductResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<SkuDTO> getSkus(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@PathParam("id") String id, @QueryParam("status") int status,
 			@Context Locale locale, @Context Pagination pagination)
 		throws Exception;
 

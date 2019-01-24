@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.ProductHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.SKUHelper;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
@@ -23,7 +24,6 @@ import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 
-import java.util.Collections;
 import java.util.Locale;
 
 import javax.annotation.Generated;
@@ -77,10 +77,10 @@ public class ProductResourceImpl implements ProductResource {
 
 	@Override
 	public CollectionDTO<SkuDTO> getSkus(
-			String id, long groupId, Locale locale, Pagination pagination)
+			String id, int status, Locale locale, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _skuHelper.getSKUs(id, status, _company, pagination);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class ProductResourceImpl implements ProductResource {
 			String id, long groupId, SkuDTO skuDTO, Locale locale)
 		throws Exception {
 
-		return new SkuDTO();
+		return _skuHelper.updateSKU(id, groupId, skuDTO, _company);
 	}
 
 	@Context
@@ -117,6 +117,9 @@ public class ProductResourceImpl implements ProductResource {
 
 	@Reference
 	private ProductHelper _productHelper;
+
+	@Reference
+	private SKUHelper _skuHelper;
 
 	@Context
 	private User _user;
