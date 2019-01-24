@@ -61,6 +61,10 @@ public class PropertyDefinition {
 		return _example;
 	}
 
+	public String getGetterSyntax() {
+		return _parameterFormat.getGetterSyntax();
+	}
+
 	public String getItemFormat() {
 		return _itemFormat;
 	}
@@ -79,6 +83,10 @@ public class PropertyDefinition {
 
 	public String getName() {
 		return _name;
+	}
+
+	public String getSetterSyntax() {
+		return _parameterFormat.getSetterSyntax();
 	}
 
 	public String getType() {
