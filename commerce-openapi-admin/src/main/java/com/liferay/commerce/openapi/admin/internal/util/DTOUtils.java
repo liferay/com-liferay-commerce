@@ -22,8 +22,10 @@ import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -36,8 +38,8 @@ import java.util.Locale;
 public class DTOUtils {
 
 	public static PriceEntryDTO modelToDTO(
-		CommercePriceEntry commercePriceEntry, String sku,
-		String skuExternalReferenceCode) {
+			CommercePriceEntry commercePriceEntry)
+		throws PortalException {
 
 		PriceEntryDTO priceEntryDTO = new PriceEntryDTO();
 
@@ -49,8 +51,12 @@ public class DTOUtils {
 		priceEntryDTO.setId(commercePriceEntry.getCommercePriceEntryId());
 		priceEntryDTO.setPrice(commercePriceEntry.getPrice());
 		priceEntryDTO.setPromoPrice(commercePriceEntry.getPromoPrice());
-		priceEntryDTO.setSku(sku);
-		priceEntryDTO.setSkuExternalReferenceCode(skuExternalReferenceCode);
+
+		CPInstance cpInstance = commercePriceEntry.getCPInstance();
+
+		priceEntryDTO.setSku(cpInstance.getSku());
+		priceEntryDTO.setSkuExternalReferenceCode(
+			cpInstance.getExternalReferenceCode());
 
 		return priceEntryDTO;
 	}
