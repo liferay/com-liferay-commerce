@@ -23,6 +23,7 @@ import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
+import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
@@ -136,6 +137,31 @@ public class DTOUtils {
 		productDTO.setName(cpDefinition.getName());
 
 		return productDTO;
+	}
+
+	public static SkuDTO modelToDTO(CPInstance cpInstance) {
+		SkuDTO skuDTO = new SkuDTO();
+
+		skuDTO.setCost(cpInstance.getCost());
+		skuDTO.setDepth(cpInstance.getDepth());
+		skuDTO.setDisplayDate(cpInstance.getDisplayDate());
+		skuDTO.setExpirationDate(cpInstance.getExpirationDate());
+		skuDTO.setExternalReferenceCode(cpInstance.getExternalReferenceCode());
+		skuDTO.setGtin(cpInstance.getGtin());
+		skuDTO.setHeight(cpInstance.getHeight());
+		skuDTO.setId(cpInstance.getCPInstanceId());
+		skuDTO.setManufacturerPartNumber(
+			cpInstance.getManufacturerPartNumber());
+		skuDTO.setNeverExpire(cpInstance.isExpired());
+		skuDTO.setPrice(cpInstance.getPrice());
+		skuDTO.setPromoPrice(cpInstance.getPromoPrice());
+		skuDTO.setPublished(cpInstance.isPublished());
+		skuDTO.setPurchasable(cpInstance.isPurchasable());
+		skuDTO.setSku(cpInstance.getSku());
+		skuDTO.setWeight(cpInstance.getWeight());
+		skuDTO.setWidth(cpInstance.getWidth());
+
+		return skuDTO;
 	}
 
 	public static ProductOptionDTO modelToDTO(
