@@ -25,10 +25,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Product")
 public class ProductDTO {
 
-	public boolean getActive() {
-		return _active;
-	}
-
 	public int[] getAssetCategoryIds() {
 		return _assetCategoryIds;
 	}
@@ -59,6 +55,10 @@ public class ProductDTO {
 
 	public String getShortDescription() {
 		return _shortDescription;
+	}
+
+	public boolean isActive() {
+		return _active;
 	}
 
 	public void setActive(boolean active) {
