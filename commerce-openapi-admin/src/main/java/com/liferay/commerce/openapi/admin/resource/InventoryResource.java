@@ -14,12 +14,8 @@
 
 package com.liferay.commerce.openapi.admin.resource;
 
-import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
-import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-
-import java.util.Locale;
 
 import javax.annotation.Generated;
 
@@ -31,7 +27,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 /**
@@ -44,26 +39,14 @@ public interface InventoryResource {
 	@DELETE
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteInventory(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
+	public Response deleteInventory(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public InventoryDTO getInventory(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
-		throws Exception;
-
-	@GET
-	@Path("/")
-	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
-	public CollectionDTO<InventoryDTO> getInventorys(
-			@Context Locale locale, @Context Pagination pagination)
+	public InventoryDTO getInventory(@PathParam("id") String id)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -72,7 +55,7 @@ public interface InventoryResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateInventory(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			InventoryDTO inventoryDTO, @Context Locale locale)
+			InventoryDTO inventoryDTO)
 		throws Exception;
 
 }

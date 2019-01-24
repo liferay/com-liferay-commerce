@@ -43,8 +43,7 @@ public interface ProductOptionValueResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProductOptionValue(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
+			@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -52,8 +51,7 @@ public interface ProductOptionValueResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductOptionValueDTO getProductOptionValue(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
+			@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
 
 	@Consumes("application/*")

@@ -47,8 +47,7 @@ public interface ProductOptionResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProductOption(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
+			@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -56,8 +55,7 @@ public interface ProductOptionResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductOptionDTO getProductOption(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
+			@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
 
 	@GET
@@ -74,8 +72,8 @@ public interface ProductOptionResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale, @Context Pagination pagination)
+			@PathParam("id") String id, @Context Locale locale,
+			@Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
