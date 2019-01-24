@@ -230,6 +230,8 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			}
 
 			if (method.hasImplicitPaginationContext(componentDefinitions)) {
+				importStatements.add("import javax.ws.rs.core.Context;\n");
+
 				Extension.ExtensionType paginationExtensionType =
 					Extension.ExtensionType.PAGINATION_CONTEXT;
 
