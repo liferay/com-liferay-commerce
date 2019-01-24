@@ -25,8 +25,8 @@ function fix_tomcat_setenv {
 	# This is only for 7.1.10.
 	#
 
-	sed -i "s/-Xmx1024m -XX:MaxMetaspaceSize=512m/-Xms2560m -Xmx2560m -XX:MaxNewSize=1536m -XX:MaxMetaspaceSize=384m -XX:MetaspaceSize=384m -XX:NewSize=1536m -XX:SurvivorRatio=7/" ${1}/bin/setenv.bat
-	sed -i "s/-Xmx1024m -XX:MaxMetaspaceSize=512m/-Xms2560m -Xmx2560m -XX:MaxNewSize=1536m -XX:MaxMetaspaceSize=384m -XX:MetaspaceSize=384m -XX:NewSize=1536m -XX:SurvivorRatio=7/" ${1}/bin/setenv.sh
+	sed -i "s/-Xmx1024m -XX:MaxMetaspaceSize=512m/-Xms2560m -Xmx2560m -XX:MaxNewSize=1536m -XX:MaxMetaspaceSize=512m -XX:MetaspaceSize=512m -XX:NewSize=1536m -XX:SurvivorRatio=7/" ${1}/bin/setenv.bat
+	sed -i "s/-Xmx1024m -XX:MaxMetaspaceSize=512m/-Xms2560m -Xmx2560m -XX:MaxNewSize=1536m -XX:MaxMetaspaceSize=512m -XX:MetaspaceSize=512m -XX:NewSize=1536m -XX:SurvivorRatio=7/" ${1}/bin/setenv.sh
 }
 
 function get_tomcat_version {
