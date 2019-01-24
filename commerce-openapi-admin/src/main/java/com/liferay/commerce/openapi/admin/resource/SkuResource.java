@@ -14,7 +14,10 @@
 
 package com.liferay.commerce.openapi.admin.resource;
 
+import com.liferay.commerce.openapi.admin.model.CollectionDTO;
+import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
+import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import java.util.Locale;
@@ -24,6 +27,7 @@ import javax.annotation.Generated;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -42,19 +46,21 @@ public interface SkuResource {
 	@DELETE
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteSku(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
+	public Response deleteSku(@PathParam("id") String id) throws Exception;
+
+	@GET
+	@Path("/{id}inventory")
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<InventoryDTO> getInventorys(
+			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public SkuDTO getSku(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
-		throws Exception;
+	public SkuDTO getSku(@PathParam("id") String id) throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
@@ -63,6 +69,16 @@ public interface SkuResource {
 	public Response updateSku(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
 			SkuDTO skuDTO, @Context Locale locale)
+		throws Exception;
+
+	@Consumes("application/*")
+	@Path("/{id}/inventory")
+	@POST
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public InventoryDTO upsertInventory(
+			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			InventoryDTO inventoryDTO)
 		throws Exception;
 
 }

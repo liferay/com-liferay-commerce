@@ -15,7 +15,6 @@
 package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
-import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
@@ -86,16 +85,6 @@ public interface ProductResource {
 	public Response updateProduct(
 			@PathParam("id") String id, @QueryParam("groupId") long groupId,
 			ProductDTO productDTO, @Context Locale locale)
-		throws Exception;
-
-	@Consumes("application/*")
-	@Path("/{id}/inventory")
-	@POST
-	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
-	public InventoryDTO upsertInventory(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			InventoryDTO inventoryDTO, @Context Locale locale)
 		throws Exception;
 
 	@Consumes("application/*")
