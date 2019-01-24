@@ -96,10 +96,9 @@ CommerceAccount commerceAccount = commerceAccountAddressesDisplayContext.getCurr
 				function(formData) {
 
 					document.querySelector('#<portlet:namespace />name').value = formData.referent;
-					document.querySelector('#<portlet:namespace />name').value = formData.referent;
 					document.querySelector('#<portlet:namespace />street1').value = formData.address;
 					document.querySelector('#<portlet:namespace />city').value = formData.city;
-					document.querySelector('#<portlet:namespace />zip').value = formData.existingUsersIds;
+					document.querySelector('#<portlet:namespace />zip').value = formData.zipCode;
 					document.querySelector('#<portlet:namespace />commerceCountryId').value = formData.country;
 					document.querySelector('#<portlet:namespace />commerceRegionId').value = formData.region;
 					document.querySelector('#<portlet:namespace />phoneNumber').value = formData.telephone;
