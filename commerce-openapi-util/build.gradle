@@ -6,6 +6,8 @@ task formatSourceModule(type: FormatSourceTask)
 task generateRestModule(type: JavaExec)
 task runClass(type: JavaExec)
 
+defaultTasks "generateRestModule"
+
 dependencies {
 	compile group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.6.7.1"
 	compile group: "com.liferay", name: "com.liferay.petra.json.web.service.client", version: "11.0.0"
