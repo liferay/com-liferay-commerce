@@ -14,19 +14,18 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
-import com.liferay.commerce.openapi.admin.model.CollectionDTO;
+import com.liferay.commerce.openapi.admin.internal.resource.util.InventoryHelper;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.resource.InventoryResource;
-import com.liferay.commerce.openapi.core.context.Pagination;
-
-import java.util.Collections;
-import java.util.Locale;
+import com.liferay.portal.kernel.model.Company;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -44,8 +43,8 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class InventoryResourceImpl implements InventoryResource {
 
 	@Override
-	public Response deleteInventory(String id, long groupId, Locale locale)
-		throws Exception {
+	public Response deleteInventory(String id) throws Exception {
+		_inventoryHelper.deleteInventory(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -53,28 +52,26 @@ public class InventoryResourceImpl implements InventoryResource {
 	}
 
 	@Override
-	public InventoryDTO getInventory(String id, long groupId, Locale locale)
-		throws Exception {
-
-		return new InventoryDTO();
-	}
-
-	@Override
-	public CollectionDTO<InventoryDTO> getInventorys(
-			Locale locale, Pagination pagination)
-		throws Exception {
-
-		return new CollectionDTO(Collections.emptyList(), 0);
+	public InventoryDTO getInventory(String id) throws Exception {
+		return _inventoryHelper.getInventory(id);
 	}
 
 	@Override
 	public Response updateInventory(
-			String id, long groupId, InventoryDTO inventoryDTO, Locale locale)
+			String id, long groupId, InventoryDTO inventoryDTO)
 		throws Exception {
+
+		_inventoryHelper.updateInventory(id, groupId, inventoryDTO);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
 	}
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private InventoryHelper _inventoryHelper;
 
 }
