@@ -55,6 +55,12 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 	</section>
 </div>
 
+<div class="minium-frame__cta is-visible">
+	<c:if test="<%= selectedUser.getUserId() != user.getUserId() %>">
+		<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openUserRolesModal();" %>' value="roles" />
+	</c:if>
+</div>
+
 <div class="commerce-account-container">
 	<commerce-ui:table
 		dataProviderKey="commerceAccountUserRoles"
@@ -66,3 +72,54 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 		tableName="commerceAccountUserRoles"
 	/>
 </div>
+
+<portlet:actionURL name="editCommerceAccountUser" var="editCommerceAccountUserURL" />
+
+<aui:form action="<%= editCommerceAccountUserURL %>" method="post" name="editCommerceAccountUserFm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="EDIT_ROLES" />
+	<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccount.getCommerceAccountId() %>" />
+	<aui:input name="userId" type="hidden" value="<%= selectedUser.getUserId() %>" />
+	<aui:input name="selectedRoleIds" type="hidden" />
+</aui:form>
+
+<c:if test="<%= selectedUser.getUserId() != user.getUserId() %>">
+	<commerce-ui:user-roles-modal
+		commerceAccountId="<%= commerceAccount.getCommerceAccountId() %>"
+		componentId="userRolesModal"
+		userId="<%= selectedUser.getUserId() %>"
+	/>
+
+	<aui:script>
+
+		Liferay.provide(
+			window,
+			'<portlet:namespace />openUserRolesModal',
+			function(evt) {
+				const userRolesModal = Liferay.component('userRolesModal');
+				userRolesModal.open();
+			}
+		);
+
+		Liferay.componentReady('userRolesModal').then(
+			function(userRolesModal) {
+				userRolesModal.on(
+					'updateRoles',
+					function(selectedRoles) {
+						let selectedRoleIds = selectedRoles.map(
+							function(role) {
+								return role.id
+							}
+						).join(',');
+
+						document.querySelector('#<portlet:namespace />selectedRoleIds').value = selectedRoleIds;
+
+						userRolesModal.close();
+
+						submitForm(document.<portlet:namespace />editCommerceAccountUserFm);
+					}
+				);
+			}
+		);
+
+	</aui:script>
+</c:if>

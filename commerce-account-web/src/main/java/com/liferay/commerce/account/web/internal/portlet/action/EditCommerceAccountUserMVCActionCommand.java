@@ -15,6 +15,8 @@
 package com.liferay.commerce.account.web.internal.portlet.action;
 
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.ContactBirthdayException;
 import com.liferay.portal.kernel.exception.ContactNameException;
@@ -37,6 +39,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.UserService;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -48,6 +51,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PropsValues;
@@ -90,6 +94,12 @@ public class EditCommerceAccountUserMVCActionCommand
 
 				TransactionInvokerUtil.invoke(_transactionConfig, userCallable);
 			}
+			else if (cmd.equals("EDIT_ROLES")) {
+				Callable<User> userCallable = new EditRoleCallable(
+					actionRequest);
+
+				TransactionInvokerUtil.invoke(_transactionConfig, userCallable);
+			}
 		}
 		catch (Throwable t) {
 			if (t instanceof NoSuchUserException ||
@@ -117,6 +127,26 @@ public class EditCommerceAccountUserMVCActionCommand
 		}
 
 		hideDefaultSuccessMessage(actionRequest);
+	}
+
+	protected void editUserRoles(ActionRequest actionRequest)
+		throws PortalException {
+
+		long commerceAccountId = ParamUtil.getLong(
+			actionRequest, "commerceAccountId");
+		long userId = ParamUtil.getLong(actionRequest, "userId");
+		long[] selectedRoleIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "selectedRoleIds"), 0L);
+
+		CommerceAccount commerceAccount =
+			_commerceAccountService.getCommerceAccount(commerceAccountId);
+
+		_userGroupRoleLocalService.deleteUserGroupRoles(
+			userId, new long[] {commerceAccount.getCommerceAccountGroupId()});
+
+		_userGroupRoleLocalService.addUserGroupRoles(
+			userId, commerceAccount.getCommerceAccountGroupId(),
+			selectedRoleIds);
 	}
 
 	protected void updatePassword(User user, ActionRequest actionRequest)
@@ -219,13 +249,36 @@ public class EditCommerceAccountUserMVCActionCommand
 			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 	@Reference
+	private CommerceAccountService _commerceAccountService;
+
+	@Reference
 	private DLAppLocalService _dlAppLocalService;
+
+	@Reference
+	private UserGroupRoleLocalService _userGroupRoleLocalService;
 
 	@Reference
 	private UserLocalService _userLocalService;
 
 	@Reference
 	private UserService _userService;
+
+	private class EditRoleCallable implements Callable<User> {
+
+		@Override
+		public User call() throws Exception {
+			editUserRoles(_actionRequest);
+
+			return null;
+		}
+
+		private EditRoleCallable(ActionRequest actionRequest) {
+			_actionRequest = actionRequest;
+		}
+
+		private final ActionRequest _actionRequest;
+
+	}
 
 	private class UserCallable implements Callable<User> {
 

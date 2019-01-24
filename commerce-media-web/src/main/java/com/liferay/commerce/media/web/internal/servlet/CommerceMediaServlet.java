@@ -19,6 +19,7 @@ import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
@@ -76,6 +77,8 @@ public class CommerceMediaServlet extends HttpServlet {
 				PermissionCheckerFactoryUtil.create(user);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
+
+			PrincipalThreadLocal.setName(user.getUserId());
 		}
 		catch (Exception e) {
 			_log.error(e, e);

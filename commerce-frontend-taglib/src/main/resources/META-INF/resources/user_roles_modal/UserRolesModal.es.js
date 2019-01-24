@@ -118,44 +118,7 @@ const ROLE_SCHEMA = Config.shapeOf(
 UserRolesModal.STATE = {
 	query: Config.string().value(''),
 	spritemap: Config.string(),
-	roles: Config.array(ROLE_SCHEMA).value([
-		{
-			id: 1,
-			name: 'Account Manager'
-		},
-		{
-			id: 2,
-			name: 'Project Manager'
-		},
-		{
-			id: 3,
-			name: 'Technical Expert'
-		},
-		{
-			id: 4,
-			name: 'Lorem Ipsum'
-		},
-		{
-			id: 5,
-			name: 'Dolor Sit'
-		},
-		{
-			id: 6,
-			name: 'Donec nunc elit'
-		},
-		{
-			id: 7,
-			name: 'Vestibulum ante ipsum'
-		},
-		{
-			id: 8,
-			name: 'Sed facilisis libero'
-		},
-		{
-			id: 9,
-			name: 'Phasellus finibut massa'
-		}
-	]),
+	roles: Config.array(ROLE_SCHEMA).value([]),
 	filteredRoles: Config.array(ROLE_SCHEMA).value([]),
 	selectedRoles: Config.array(ROLE_SCHEMA).value([]),
 	_isVisible: Config.bool().internal().value(false)
