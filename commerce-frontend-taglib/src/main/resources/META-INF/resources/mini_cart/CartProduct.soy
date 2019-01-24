@@ -10,33 +10,35 @@
 	{@param sku: string }
 	{@param quantity: int }
 
-	{@param errorMessages: ? }
+	{@param? errorMessages: ? }
 	{@param settings: ? }
 	{@param prices: ? }
 
-	{@param? isDeleting: bool }
-	{@param? isCollapsed: bool }
-	{@param? isUpdating: bool }
-	{@param? isDeleteDisabled: bool }
+	{@param? deleting: bool }
+	{@param? collapsed: bool }
+	{@param? updating: bool }
+	{@param? deleteDisabled: bool }
 
-	{@param? updateQuantity: ? }
+	{@param? _handleCancelDeletion: any }
+	{@param? _handleDeleteItem: any }
+	{@param? _handleUpdateQuantity: any }
 
 	{let $miniumCartItemClasses kind="text"}
 		minium-cart__item minium-item u-hoverable
-		{if $isDeleting}
+		{if isNonnull($deleting) and $deleting}
 			{sp}is-deleting
 		{/if}
-		{if $isCollapsed}
+		{if isNonnull($collapsed) and $collapsed}
 			{sp}is-collapsed
 		{/if}
-		{if length($errorMessages) > 0}
+		{if isNonnull($errorMessages) and length($errorMessages) > 0}
 			{sp}is-not-valid
 		{/if}
 	{/let}
 
 	{let $deleteButtonClasses kind="text"}
-		{nil}
-		{if $isDeleteDisabled}
+		minium-item__delete
+		{if isNonnull($deleteDisabled) and $deleteDisabled}
 			{sp}is-disabled
 		{/if}
 	{/let}
@@ -50,7 +52,7 @@
 		<div class="minium-item__content">
 			{$sku}<br>
 			{$name}<br>
-			{if $isUpdating}
+			{if $updating}
 				{call Loader.render}
 					{param direction: 'right' /}
 					{param inverted: false /}
@@ -65,7 +67,7 @@
 		<div class="minium-item__actions">
 			{call QuantitySelector.render}
 				{param events: [
-					'updateQuantity' : $updateQuantity
+					'updateQuantity' : $_handleUpdateQuantity
 				] /}
 				{param quantity: $quantity /}
 				{param minQuantity: $settings.minQuantity /}
@@ -74,19 +76,19 @@
 				{param allowedQuantities: $settings.allowedQuantities /}
 			{/call}
 
-			<button class="minium-item__delete{$deleteButtonClasses}" data-onclick="deleteItem"></button>
+			<button class="{$deleteButtonClasses}" data-onclick="{$_handleDeleteItem}"></button>
 		</div>
 
 		<div class="minium-item__cancel-delete">
 			{msg desc="The Element Has Been Removed"}the-element-has-been-removed{/msg}
-			<button class="minium-button minium-button--inline" data-onclick="cancelDeletion">
+			<button class="minium-button minium-button--inline" data-onclick="{$_handleCancelDeletion}">
 				{msg desc="Cancel"}cancel{/msg}
 			</button>
 		</div>
-		{if length($errorMessages) > 0}
+		{if isNonnull($errorMessages) and length($errorMessages) > 0}
 			{foreach $error in $errorMessages}
 				<div class="minium-item__error">
-					{$error}
+					{msg meaning="error" desc="error description"}{$error}{/msg}
 				</div>
 			{/foreach}
 		{/if}

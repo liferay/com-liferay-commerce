@@ -33,12 +33,8 @@ class AddAccountModal extends Component {
 
 	syncAddedUsers() {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
-
 		this.element.querySelector('.autocomplete-input__box').focus();
-
 		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-
-		return true;
 	}
 
 	syncQuery() {
@@ -71,13 +67,13 @@ class AddAccountModal extends Component {
 
 	_handleCloseModal(e) {
 		e.preventDefault();
-
 		this._isVisible = false;
+		return e;
 	}
 
 	_handleFormSubmit(evt) {
 		evt.preventDefault();
-
+		let result = false;
 		if (this.query.match(EMAIL_REGEX)) {
 			this.addedUsers = [
 				...this.addedUsers,
@@ -87,41 +83,24 @@ class AddAccountModal extends Component {
 			];
 
 			this.query = '';
-
-			return true;
+			result = true;
 		}
-
-		return false;
+		return result;
 	}
 
 	_handleInputBox(evt) {
 		if (evt.keyCode === 8 && !this.query.length) {
 			this.addedUsers = this.addedUsers.slice(0, -1);
-
-			return false;
 		}
-
-		return this.query = evt.target.value;
+		else {
+			this.query = evt.target.value;
+		}
+		return evt;
 	}
 
 	_handleInputName(evt) {
-		return this.accountName = evt.target.value;
-	}
-
-	_sendInvitations() {
-		if (!this.addedUsers.length) {
-			return false;
-		};
-
-		const data = {
-			accountName: this.accountName,
-			administratorsEmail: this.addedUsers
-		};
-
-		return this.emit(
-			'AddAccountModalSave',
-			data
-		);
+		this.accountName = evt.target.value;
+		return evt;
 	}
 
 	_toggleInvitation(userToBeToggled) {
@@ -140,6 +119,56 @@ class AddAccountModal extends Component {
 				[...this.addedUsers, userToBeToggled];
 
 		return this.addedUsers;
+	}
+
+	_fetchUsers() {
+		return fetch(
+			this.usersAPI + '?q=' + this.query,
+			{
+				method: 'GET'
+			}
+		)
+			.then(
+				response => response.json()
+			)
+			.then(
+				response => {
+					this._isLoading = false;
+					this.users = response.users;
+					return this.users;
+				}
+			);
+	}
+
+	_sendInvitations() {
+		if (!this.addedUsers.length) {
+			return false;
+		};
+
+		const data = {
+			accountName: this.accountName,
+			administratorsEmail: this.addedUsers
+		};
+
+		return this.emit(
+			'AddAccountModalSave',
+			data
+		);
+	}
+
+	toggle() {
+		this._isVisible = !this._isVisible;
+		return this._isVisible;
+	}
+
+	open() {
+		this._isVisible = true;
+		return this._isVisible;
+	}
+
+	close() {
+		this._isVisible = false;
+		return this._isVisible;
 	}
 
 };
@@ -161,14 +190,14 @@ const USER_SCHEMA = Config.shapeOf(
 );
 
 AddAccountModal.STATE = {
+	_isLoading: Config.bool().internal().value(false),
+	_isVisible: Config.bool().internal().value(false),
 	accountName: Config.string().value(''),
 	addedUsers: Config.array(USER_SCHEMA).value([]),
-	query: Config.string().value(''),
-	spritemap: Config.string(),
-	users: Config.array(USER_SCHEMA).value([]),
 	usersAPI: Config.string().value(''),
-	_isLoading: Config.bool().internal().value(false),
-	_isVisible: Config.bool().internal().value(false)
+	users: Config.array(USER_SCHEMA).value([]),
+	query: Config.string().value(''),
+	spritemap: Config.string()
 };
 
 export {AddAccountModal};

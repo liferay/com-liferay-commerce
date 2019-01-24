@@ -9,15 +9,17 @@ import 'clay-modal';
 class ProductDetailsModal extends Component {
 
 	created() {
-		setTimeout(() => {
-			this._isVisible = !this._isVisible;
-		}, 2000);
+		setTimeout(
+			() => {
+				this._isVisible = !this._isVisible;
+			},
+			2000
+		);
 	}
 
 	_handleCloseModal(evt) {
 		evt.preventDefault();
-
-		this.refs.modal.show();
+		return this.refs.modal.show();
 	}
 
 };
@@ -25,6 +27,7 @@ class ProductDetailsModal extends Component {
 Soy.register(ProductDetailsModal, template);
 
 ProductDetailsModal.STATE = {
+	_isVisible: Config.bool().value(false),
 	addToOrderLink: Config.string(),
 	availability: Config.string().oneOf([
 		'inStock',
@@ -49,8 +52,7 @@ ProductDetailsModal.STATE = {
 		}
 	).value(),
 	sku: Config.string().required(),
-	spritemap: Config.string(),
-	_isVisible: Config.bool().value(false)
+	spritemap: Config.string()
 };
 
 export {ProductDetailsModal};

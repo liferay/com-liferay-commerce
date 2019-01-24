@@ -4,8 +4,7 @@ import template from './AddToTickItem.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-class AddToTickItem extends Component {
-};
+class AddToTickItem extends Component {}
 
 Soy.register(AddToTickItem, template);
 

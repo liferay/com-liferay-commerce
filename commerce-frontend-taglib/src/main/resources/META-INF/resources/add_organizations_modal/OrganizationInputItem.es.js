@@ -16,8 +16,7 @@ class OrganizationInputItem extends Component {
 			}
 		);
 	}
-
-};
+}
 
 Soy.register(OrganizationInputItem, template);
 
