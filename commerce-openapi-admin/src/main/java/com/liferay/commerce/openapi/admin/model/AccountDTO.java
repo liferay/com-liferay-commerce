@@ -25,10 +25,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Account")
 public class AccountDTO {
 
-	public boolean getActive() {
-		return _active;
-	}
-
 	public boolean getBusiness() {
 		return _business;
 	}
@@ -83,10 +79,6 @@ public class AccountDTO {
 
 	public long[] getUserIds() {
 		return _userIds;
-	}
-
-	public void setActive(boolean active) {
-		_active = active;
 	}
 
 	public void setBusiness(boolean business) {
@@ -145,7 +137,6 @@ public class AccountDTO {
 		_userIds = userIds;
 	}
 
-	private boolean _active;
 	private boolean _business;
 	private String _email;
 	private String[] _emailAddresses;
