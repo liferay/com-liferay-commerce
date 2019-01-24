@@ -33,10 +33,6 @@ public class ProductOptionDTO {
 		return _externalReferenceCode;
 	}
 
-	public boolean getFacetable() {
-		return _facetable;
-	}
-
 	public String getFieldType() {
 		return _fieldType;
 	}
@@ -53,11 +49,15 @@ public class ProductOptionDTO {
 		return _name;
 	}
 
-	public boolean getRequired() {
+	public boolean isFacetable() {
+		return _facetable;
+	}
+
+	public boolean isRequired() {
 		return _required;
 	}
 
-	public boolean getSkuContributor() {
+	public boolean isSkuContributor() {
 		return _skuContributor;
 	}
 

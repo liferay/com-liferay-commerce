@@ -65,24 +65,12 @@ public class SkuDTO {
 		return _manufacturerPartNumber;
 	}
 
-	public boolean getNeverExpire() {
-		return _neverExpire;
-	}
-
 	public BigDecimal getPrice() {
 		return _price;
 	}
 
 	public BigDecimal getPromoPrice() {
 		return _promoPrice;
-	}
-
-	public boolean getPublished() {
-		return _published;
-	}
-
-	public boolean getPurchasable() {
-		return _purchasable;
 	}
 
 	public String getSku() {
@@ -95,6 +83,18 @@ public class SkuDTO {
 
 	public double getWidth() {
 		return _width;
+	}
+
+	public boolean isNeverExpire() {
+		return _neverExpire;
+	}
+
+	public boolean isPublished() {
+		return _published;
+	}
+
+	public boolean isPurchasable() {
+		return _purchasable;
 	}
 
 	public void setCost(BigDecimal cost) {
