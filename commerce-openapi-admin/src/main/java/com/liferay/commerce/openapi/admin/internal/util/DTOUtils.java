@@ -95,9 +95,7 @@ public class DTOUtils {
 		return priceListDTO;
 	}
 
-	public static ProductDTO modelToDTO(
-		CPDefinition cpDefinition, Locale locale) {
-
+	public static ProductDTO modelToDTO(CPDefinition cpDefinition) {
 		ProductDTO productDTO = new ProductDTO();
 
 		productDTO.setActive(!cpDefinition.isInactive());
@@ -108,7 +106,7 @@ public class DTOUtils {
 		productDTO.setId(cpDefinition.getCProductId());
 		productDTO.setProductTypeName(cpDefinition.getProductTypeName());
 		productDTO.setShortDescription(cpDefinition.getShortDescription());
-		productDTO.setTitle(cpDefinition.getMetaTitle(locale.getLanguage()));
+		productDTO.setName(cpDefinition.getName());
 
 		return productDTO;
 	}
