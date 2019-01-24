@@ -58,7 +58,7 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 			long groupId, Pagination pagination)
 		throws Exception {
 
-		return _priceEntryHelper.getCommercePriceEntryDTOs(groupId, pagination);
+		return _priceEntryHelper.getPriceEntryDTOs(groupId, pagination);
 	}
 
 	@Override
