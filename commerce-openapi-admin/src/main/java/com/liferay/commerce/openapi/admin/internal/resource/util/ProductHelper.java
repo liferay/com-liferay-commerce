@@ -148,7 +148,7 @@ public class ProductHelper {
 
 		return DTOUtils.modelToDTO(
 			_upsertProduct(
-				groupId, productDTO.getActive(), productDTO.getDefaultSku(),
+				groupId, productDTO.isActive(), productDTO.getDefaultSku(),
 				productDTO.getDescription(),
 				productDTO.getExternalReferenceCode(),
 				productDTO.getProductTypeName(),

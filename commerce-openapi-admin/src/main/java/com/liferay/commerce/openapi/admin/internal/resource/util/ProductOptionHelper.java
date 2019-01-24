@@ -132,9 +132,9 @@ public class ProductOptionHelper {
 
 		cpOption = _cpOptionService.updateCPOption(
 			cpOption.getCPOptionId(), nameMap, descriptionMap,
-			productOptionDTO.getFieldType(), productOptionDTO.getFacetable(),
-			productOptionDTO.getRequired(),
-			productOptionDTO.getSkuContributor(), productOptionDTO.getKey(),
+			productOptionDTO.getFieldType(), productOptionDTO.isFacetable(),
+			productOptionDTO.isRequired(), productOptionDTO.isSkuContributor(),
+			productOptionDTO.getKey(),
 			_serviceContextHelper.getServiceContext(groupId));
 
 		return DTOUtils.modelToDTO(cpOption, locale);
@@ -158,8 +158,8 @@ public class ProductOptionHelper {
 
 		CPOption cpOption = _cpOptionService.upsertCPOption(
 			nameMap, descriptionMap, productOptionDTO.getFieldType(),
-			productOptionDTO.getFacetable(), productOptionDTO.getRequired(),
-			productOptionDTO.getSkuContributor(), productOptionDTO.getKey(),
+			productOptionDTO.isFacetable(), productOptionDTO.isRequired(),
+			productOptionDTO.isSkuContributor(), productOptionDTO.getKey(),
 			productOptionDTO.getExternalReferenceCode(),
 			_serviceContextHelper.getServiceContext(groupId));
 
