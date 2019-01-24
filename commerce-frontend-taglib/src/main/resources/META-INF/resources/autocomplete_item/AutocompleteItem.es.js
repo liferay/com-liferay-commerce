@@ -11,11 +11,14 @@ class AutocompleteItem extends Component {
 
 		const results = regex.exec(this.text);
 
-		if (!results) {
-			return this.reinitializeTextGroups();
+		if (results) {
+			this.updateHighlightedText(results);
+		}
+		else {
+			this.reinitializeTextGroups();
 		}
 
-		return this.updateHighlightedText(results);
+		return !!results;
 	}
 
 	reinitializeTextGroups() {

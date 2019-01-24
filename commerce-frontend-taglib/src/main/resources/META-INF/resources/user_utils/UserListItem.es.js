@@ -7,7 +7,6 @@ import Soy, {Config} from 'metal-soy';
 import '../autocomplete_item/AutocompleteItem.es';
 import '../add_to_tick_item/AddToTickItem.es';
 
-
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class UserListItem extends Component {
@@ -21,20 +20,23 @@ class UserListItem extends Component {
 	}
 
 	syncAddedUsers() {
-		return this._invited = this.addedUsers.reduce((hasBeenInvited, user) => hasBeenInvited || user.email === this.email, false);
+		this._invited = this.addedUsers.reduce((hasBeenInvited, user) => hasBeenInvited || user.email === this.email, false);
 	}
 
 	_updateStatus() {
 		if (this.userId) {
-			return this._status = 'valid';
+			this._status = 'valid';
 		}
-		if (this.email.indexOf('@') < 0) {
-			return this._status = 'user-not-found';
+ 		else if (this.email.indexOf('@') < 0) {
+			this._status = 'user-not-found';
 		}
-		if (!EMAIL_REGEX.test(this.email)) {
-			return this._status = 'email-not-valid';
+ 		else if (!EMAIL_REGEX.test(this.email)) {
+			this._status = 'email-not-valid';
 		}
-		return this._status = 'valid';
+ 		else {
+			this._status = 'valid';
+		}
+		return this._status;
 	}
 
 	_handleToggleInvitation(e) {
@@ -47,28 +49,20 @@ class UserListItem extends Component {
 					email: this.email
 				},
 				this.userId ? {
-					userId: this.userId,
 					name: this.name,
-					thumbnail: this.thumbnail
+					thumbnail: this.thumbnail,
+					userId: this.userId
 				} : {}
 			)
 		);
 	}
-
-};
+}
 
 Soy.register(UserListItem, template);
 
 UserListItem.STATE = {
-	userId: Config.oneOfType(
-		[
-			Config.string(),
-			Config.number()
-		]
-	),
-	thumbnail: Config.string(),
-	name: Config.string(),
-	email: Config.string().required(),
+	_invited: Config.bool().value(false),
+	_status: Config.string().value('valid'),
 	addedUsers: Config.array(
 		Config.shapeOf(
 			{
@@ -78,9 +72,16 @@ UserListItem.STATE = {
 	).value(
 		[]
 	),
+	email: Config.string().required(),
+	name: Config.string(),
 	query: Config.string(),
-	_invited: Config.bool().value(false),
-	_status: Config.string().value('valid')
+	thumbnail: Config.string(),
+	userId: Config.oneOfType(
+		[
+			Config.string(),
+			Config.number()
+		]
+	)
 };
 
 export {UserListItem};

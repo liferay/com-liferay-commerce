@@ -32,26 +32,7 @@ class QuantitySelector extends Component {
 
 	handleSelectOption(evt) {
 		const quantity = parseInt(evt.target.value);
-
 		this.emit('updateQuantity', quantity);
-	}
-
-	handleFormSubmit(evt) {
-		evt.preventDefault();
-
-		this.showError = true;
-
-		this.emit('submitQuantity', this.quantity);
-	}
-
-	handleInputKeyUp(evt) {
-		if (!evt.target.value) {
-			return null;
-		}
-
-		const quantity = parseInt(evt.target.value);
-
-		this.submitQuantity(quantity);
 	}
 
 	handleNextQuantity(evt) {
@@ -84,7 +65,7 @@ class QuantitySelector extends Component {
 			return (this.inputError = 'MaxAvailableReached');
 		}
 
-		this.updateQuantity(tempQuantity);
+		return this.updateQuantity(tempQuantity);
 	}
 
 	handlePrevQuantity(evt) {
@@ -118,7 +99,7 @@ class QuantitySelector extends Component {
 			return (this.inputError = 'MinAvailableReached');
 		}
 
-		this.updateQuantity(tempQuantity);
+		return this.updateQuantity(tempQuantity);
 	}
 
 	prepareStateForRender(states) {
@@ -129,6 +110,21 @@ class QuantitySelector extends Component {
 		this.isNextAvailable = this.checkWhetherIsNextButtonAvailable(
 			states.quantity
 		);
+	}
+	
+	handleInputKeyUp(evt) {
+		if (!evt.target.value) {
+			return null;
+		}
+
+		const quantity = parseInt(evt.target.value);
+		return this.submitQuantity(quantity);
+	}
+
+	handleFormSubmit(evt) {
+		evt.preventDefault();
+		this.showError = true;
+		return this.emit('submitQuantity', this.quantity);
 	}
 
 	submitQuantity(quantity) {
@@ -151,8 +147,7 @@ class QuantitySelector extends Component {
 
 	updateQuantity(quantity) {
 		this.showError = false;
-
-		this.emit('updateQuantity', quantity);
+		return this.emit('updateQuantity', quantity);
 	}
 
 }

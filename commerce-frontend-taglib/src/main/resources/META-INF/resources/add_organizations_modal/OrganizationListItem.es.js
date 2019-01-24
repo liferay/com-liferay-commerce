@@ -10,10 +10,13 @@ import '../autocomplete_item/AutocompleteItem.es';
 class OrganizationListItem extends Component {
 
 	syncSelectedOrganizations() {
-		return this._selected = this.selectedOrganizations.reduce(
+		this._selected = this.selectedOrganizations.reduce(
 			(hasItemBeenSelected, item) =>
-				hasItemBeenSelected || item.id === this.id, false
+				hasItemBeenSelected || item.id === this.id,
+			false
 		);
+
+		return this._selected;
 	}
 
 	_handleToggleItem(e) {
@@ -33,6 +36,7 @@ class OrganizationListItem extends Component {
 Soy.register(OrganizationListItem, template);
 
 OrganizationListItem.STATE = {
+	_selected: Config.bool().value(false),
 	colorId: Config.number(),
 	id: Config.oneOfType(
 		[
@@ -56,8 +60,7 @@ OrganizationListItem.STATE = {
 		)
 	).value(
 		[]
-	),
-	_selected: Config.bool().value(false)
+	)
 };
 
 export {OrganizationListItem};

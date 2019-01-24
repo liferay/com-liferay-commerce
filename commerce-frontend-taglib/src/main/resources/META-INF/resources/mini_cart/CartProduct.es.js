@@ -8,17 +8,16 @@ import '../price/Price.es';
 import '../quantity_selector/QuantitySelector.es';
 
 class CartProduct extends Component {
-
-	cancelDeletion() {
-		this.emit('cancelItemDeletion', this.id);
+	_handleUpdateQuantity(quantity) {
+		return this.emit('submitQuantity', this.id, quantity);
 	}
 
-	deleteItem() {
-		this.emit('deleteItem', this.id);
+	_handleDeleteItem() {
+		return this.emit('deleteItem', this.id);
 	}
 
-	updateQuantity(quantity) {
-		this.emit('submitQuantity', this.id, quantity);
+	_handleCancelDeletion() {
+		return this.emit('cancelItemDeletion', this.id);
 	}
 
 }
@@ -36,14 +35,14 @@ CartProduct.STATE = {
 		]
 	),
 	inputChanged: Config.bool().value(false),
-	isCollapsed: Config.bool().value(false),
-	isDeleteDisabled: Config.bool().value(false),
-	isDeleting: Config.bool().value(false),
-	isUpdating: Config.bool().value(false),
-	quantity: Config.number().value(0),
+	collapsed: Config.bool().value(false),
+	deleteDisabled: Config.bool().value(false),
+	deleting: Config.bool().value(false),
+	updating: Config.bool().value(false),
 	settings: Config.object().value(
 		{}
-	)
+	),
+	quantity: Config.number().value(0)
 };
 
 export {CartProduct};

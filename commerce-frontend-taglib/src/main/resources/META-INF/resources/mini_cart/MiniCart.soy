@@ -1,36 +1,60 @@
-{namespace Cart}
+{namespace MiniCart}
 
 /**
  * This renders the component's whole content.
  */
 {template .render}
-	{@param isOpen: bool}
-	{@param isDisabled: bool}
-	{@param products: ?}
 	{@param detailsUrl: string}
 	{@param checkoutUrl: string}
-	{@param productsCount: int}
 	{@param spritemap: string }
 
-	{@param summary: ?}
-	{@param isLoading: ?}
+	{@param? disabled: bool}
+	{@param? products: list<[
+		id: string|number,
+		name: string,
+		sku: string,
+		quantity: int,
+		thumbnail: string,
+		prices: ?,
+		settings: ?,
+		errorMessages: ?,
+		deleting: bool,
+		collapsed: bool,
+		updating: bool,
+		deleteDisabled: bool
+	]>}
 
-	{@param handleSubmitQuantity: ?}
-	{@param handleDeleteItem: ?}
-	{@param handleCancelItemDeletion: ?}
+	{@param? productsQuantity: int}
+
+	{@param? summary: [
+		checkoutUrl: string,
+		discount: string,
+		itemsQuantity: int,
+		subtotal: string,
+		total: string
+	]}
+
+	{@param? _open: bool}
+	{@param? _loading: bool}
+
+	{@param? _handleSubmitQuantity: any}
+	{@param? _handleDeleteItem: any}
+	{@param? _handleCancelItemDeletion: any}
+
+	{let $formattedProductsQuantity : isNonnull($productsQuantity) ? $productsQuantity : 0 /}
 
 	{let $openCartButtonModifiers kind="text"}
-		{if $isDisabled}
+		{if isNonnull($disabled) and $disabled}
 			{sp}is-disabled
 		{/if}
 
-		{if $productsCount > 0}
+		{if $formattedProductsQuantity > 0}
 			{sp}has-badge
 		{/if}
 	{/let}
 
 	{let $cartModifiers kind="text"}
-		{if $isOpen}
+		{if isNonnull($_open) and $_open}
 			{sp}is-open
 		{/if}
 	{/let}
@@ -38,7 +62,7 @@
 	<div>
 		<button
 			class="minium-topbar__button{$openCartButtonModifiers}"
-			data-badge-count={$productsCount}
+			data-badge-count={$formattedProductsQuantity}
 			data-onclick="toggleCart"
 		>
 			{call ClayIcon.render}
@@ -60,7 +84,7 @@
 
 			<div class="minium-cart__top">
 				<div>
-					<strong>{$productsCount}</strong> {msg desc="Products"}products{/msg}
+					<strong>{$formattedProductsQuantity}</strong> {msg desc="Products"}products{/msg}
 				</div>
 
 				<a class="minium-link" href="{$detailsUrl}">{msg desc="View Details"}view-details{/msg}</a>
@@ -72,9 +96,9 @@
 						{call CartProduct.render}
 
 							{param events: [
-								'submitQuantity' : $handleSubmitQuantity,
-								'deleteItem' : $handleDeleteItem,
-								'cancelItemDeletion' : $handleCancelItemDeletion,
+								'submitQuantity' : $_handleSubmitQuantity,
+								'deleteItem' : $_handleDeleteItem,
+								'cancelItemDeletion' : $_handleCancelItemDeletion,
 							] /}
 
 							{param id: $product.id /}
@@ -86,10 +110,10 @@
 							{param settings: $product.settings /}
 							{param errorMessages: $product.errorMessages /}
 
-							{param isDeleting: $product.isDeleting /}
-							{param isCollapsed: $product.isCollapsed /}
-							{param isUpdating: $product.isUpdating /}
-							{param isDeleteDisabled: $product.isDeleteDisabled /}
+							{param deleting: $product.deleting /}
+							{param collapsed: $product.collapsed /}
+							{param updating: $product.updating /}
+							{param deleteDisabled: $product.deleteDisabled /}
 						{/call}
 					{/foreach}
 				{/if}
@@ -102,8 +126,8 @@
 					{param total: $summary.total /}
 					{param discount: $summary.discount /}
 					{param itemsQuantity: $summary.itemsQuantity /}
-					{param productsCount: $productsCount /}
-					{param isLoading: $isLoading /}
+					{param productsQuantity: $formattedProductsQuantity /}
+					{param loading: $_loading /}
 				{/call}
 			{/if}
 

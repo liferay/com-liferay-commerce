@@ -50,17 +50,15 @@ public class MiniCartTag extends ComponentRendererTag {
 			WebKeys.THEME_DISPLAY);
 
 		try {
-			putValue(
-				"cartAPI",
-				PortalUtil.getPortalURL(request) + "/o/commerce-ui/cart");
-
-			String checkoutURL = StringPool.BLANK;
-
 			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
-			if (commerceOrder != null) {
-				putValue("cartId", commerceOrder.getCommerceOrderId());
+			putValue("open", false);
+			putValue("disabled", false);
 
+			String checkoutURL = StringPool.BLANK;
+			String detailsURL = StringPool.BLANK;
+
+			if (commerceOrder != null) {
 				PortletURL commerceCheckoutPortletURL =
 					_commerceOrderHttpHelper.getCommerceCheckoutPortletURL(
 						request);
@@ -70,10 +68,6 @@ public class MiniCartTag extends ComponentRendererTag {
 				}
 			}
 
-			putValue("checkoutUrl", checkoutURL);
-
-			String detailsURL = StringPool.BLANK;
-
 			PortletURL commerceCartPortletURL =
 				_commerceOrderHttpHelper.getCommerceCartPortletURL(
 					request, commerceOrder);
@@ -82,17 +76,24 @@ public class MiniCartTag extends ComponentRendererTag {
 				detailsURL = String.valueOf(commerceCartPortletURL);
 			}
 
+			putValue("checkoutUrl", checkoutURL);
 			putValue("detailsUrl", detailsURL);
 
-			putValue("isDisabled", false);
-			putValue("isOpen", false);
-			putValue("products", Collections.emptyList());
 			putValue("productsCount", 0);
+			putValue(
+				"cartAPI",
+				PortalUtil.getPortalURL(request) + "/o/commerce-ui/cart");
+
+			if (commerceOrder != null) {
+				putValue("cartId", commerceOrder.getCommerceOrderId());
+			}
+
+			putValue("products", new ArrayList<>());
 			putValue(
 				"spritemap",
 				themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 
-			setTemplateNamespace("Cart.render");
+			setTemplateNamespace("MiniCart.render");
 		}
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
@@ -114,7 +115,7 @@ public class MiniCartTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/mini_cart/Cart.es");
+			"commerce-frontend-taglib/mini_cart/MiniCart.es");
 	}
 
 	@Override
