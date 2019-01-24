@@ -14,21 +14,26 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.ProductHelper;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.User;
 
 import java.util.Collections;
 import java.util.Locale;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -49,6 +54,8 @@ public class ProductResourceImpl implements ProductResource {
 	public Response deleteProduct(String id, long groupId, Locale locale)
 		throws Exception {
 
+		_productHelper.deleteProduct(id, _company);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -58,7 +65,7 @@ public class ProductResourceImpl implements ProductResource {
 	public ProductDTO getProduct(String id, long groupId, Locale locale)
 		throws Exception {
 
-		return new ProductDTO();
+		return _productHelper.getProduct(id, locale, _company);
 	}
 
 	@Override
@@ -66,7 +73,7 @@ public class ProductResourceImpl implements ProductResource {
 			long groupId, Locale locale, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _productHelper.getProducts(groupId, locale, pagination);
 	}
 
 	@Override
@@ -82,7 +89,10 @@ public class ProductResourceImpl implements ProductResource {
 			String id, long groupId, ProductDTO productDTO, Locale locale)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_productHelper.updateProductDTO(
+			id, productDTO, _user, locale, _company);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -100,7 +110,7 @@ public class ProductResourceImpl implements ProductResource {
 			long groupId, ProductDTO productDTO, Locale locale)
 		throws Exception {
 
-		return new ProductDTO();
+		return _productHelper.upsertProduct(groupId, productDTO, _user, locale);
 	}
 
 	@Override
@@ -110,5 +120,14 @@ public class ProductResourceImpl implements ProductResource {
 
 		return new SkuDTO();
 	}
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private ProductHelper _productHelper;
+
+	@Context
+	private User _user;
 
 }
