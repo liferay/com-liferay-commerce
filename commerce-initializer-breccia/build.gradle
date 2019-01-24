@@ -24,7 +24,7 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "4.0.0"
 	compileOnly project(":apps:commerce:commerce-cart-taglib")
 	compileOnly project(":apps:commerce:commerce-initializer-util")
-	compileOnly project(":apps:commerce:commerce-product-taglib")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.taglib", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-product-type-virtual-api")
 	compileOnly project(":apps:commerce:commerce-taglib")
 }
