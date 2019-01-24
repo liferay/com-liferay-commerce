@@ -191,7 +191,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 						componentDefinition);
 
 					try {
-						dtoGenerator.writeModelSource();
+						dtoGenerator.writeClassSource();
 					}
 					catch (IOException ioe) {
 						_logger.error(

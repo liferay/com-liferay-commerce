@@ -38,21 +38,23 @@ public class DTOGenerator extends BaseSourceGenerator {
 		_componentDefinition = componentDefinition;
 	}
 
-	public void writeModelSource() throws IOException {
+	public void writeClassSource() throws IOException {
+		String dtoSourcePath = getClassSourcePath(
+			_moduleOutputPath, _getDTOClassName() + ".java", _modelPackagePath);
+
+		writeSource(getClassSource(), dtoSourcePath);
+	}
+
+	protected String getClassSource() throws IOException {
 		String dtoSource = getTemplate(_TEMPLATE_FILE_MODEL);
 
 		dtoSource = dtoSource.replace("${PACKAGE}", _modelPackagePath);
 
 		dtoSource = dtoSource.replace("${AUTHOR}", _author);
 
-		String modelName = StringUtils.upperCaseFirstChar(
-			_componentDefinition.getName());
+		dtoSource = dtoSource.replace("${MODEL}", _getModelName());
 
-		dtoSource = dtoSource.replace("${MODEL}", modelName);
-
-		String dtoClassName = modelName + "DTO";
-
-		dtoSource = dtoSource.replace("${DTO_CLASS}", dtoClassName);
+		dtoSource = dtoSource.replace("${DTO_CLASS}", _getDTOClassName());
 
 		List<PropertyDefinition> propertyDefinitions =
 			_componentDefinition.getPropertyDefinitions();
@@ -107,10 +109,15 @@ public class DTOGenerator extends BaseSourceGenerator {
 		dtoSource = dtoSource.replace("${METHODS}", methodsSb.toString());
 		dtoSource = dtoSource.replace("${VARIABLES}", variablesSb.toString());
 
-		String dtoSourcePath = getClassSourcePath(
-			_moduleOutputPath, dtoClassName + ".java", _modelPackagePath);
+		return dtoSource;
+	}
 
-		writeSource(dtoSource, dtoSourcePath);
+	private String _getDTOClassName() {
+		return _getModelName() + "DTO";
+	}
+
+	private String _getModelName() {
+		return StringUtils.upperCaseFirstChar(_componentDefinition.getName());
 	}
 
 	private static final String _TEMPLATE_FILE_MODEL = "Model.java.tpl";
