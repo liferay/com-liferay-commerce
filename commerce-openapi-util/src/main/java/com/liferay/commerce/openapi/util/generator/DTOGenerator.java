@@ -69,13 +69,15 @@ public class DTOGenerator extends BaseSourceGenerator {
 
 			methodsSb.append("\tpublic ");
 			methodsSb.append(propertyDefinition.getJavaType());
-			methodsSb.append(" get");
+			methodsSb.append(" ");
+			methodsSb.append(propertyDefinition.getGetterSyntax());
 			methodsSb.append(StringUtils.upperCaseFirstChar(name));
 			methodsSb.append("() {\n\t\treturn _");
 			methodsSb.append(name);
 			methodsSb.append(";\n\t}\n\n");
 
-			methodsSb.append("\tpublic void set");
+			methodsSb.append("\tpublic void ");
+			methodsSb.append(propertyDefinition.getSetterSyntax());
 			methodsSb.append(StringUtils.upperCaseFirstChar(name));
 			methodsSb.append("(");
 			methodsSb.append(propertyDefinition.getJavaType());
