@@ -67,6 +67,9 @@ public class ResourceGeneratorTest {
 		Assert.assertTrue(
 			"Exactly one import statement expected",
 			_containsOnlyOne(imports, "import javax.ws.rs.GET;"));
+		Assert.assertTrue(
+			"Exactly one import statement expected",
+			_containsOnlyOne(imports, "import javax.ws.rs.core.Context;"));
 
 		imports = resourceGenerator.toJavaxImports(
 			_getMethods(true, "testModel", _getExtensions("locale", "company")),
@@ -75,6 +78,9 @@ public class ResourceGeneratorTest {
 		Assert.assertTrue(
 			"Exactly one import statement expected",
 			_containsOnlyOne(imports, "import java.util.Locale;"));
+		Assert.assertTrue(
+			"Exactly one import statement expected",
+			_containsOnlyOne(imports, "import javax.ws.rs.core.Context;"));
 	}
 
 	@Test
