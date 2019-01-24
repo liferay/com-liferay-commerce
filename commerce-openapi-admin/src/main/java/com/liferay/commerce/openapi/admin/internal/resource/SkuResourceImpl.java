@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.InventoryHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.SKUHelper;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
@@ -48,8 +49,8 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class SkuResourceImpl implements SkuResource {
 
 	@Override
-	public Response deleteSku(String id, long groupId, Locale locale)
-		throws Exception {
+	public Response deleteSku(String id) throws Exception {
+		_skuHelper.deleteSKU(id, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -57,7 +58,7 @@ public class SkuResourceImpl implements SkuResource {
 	}
 
 	@Override
-	public CollectionDTO<InventoryDTO> getInventories(
+	public CollectionDTO<InventoryDTO> getInventorys(
 			String id, Pagination pagination)
 		throws Exception {
 
@@ -65,16 +66,16 @@ public class SkuResourceImpl implements SkuResource {
 	}
 
 	@Override
-	public SkuDTO getSku(String id, long groupId, Locale locale)
-		throws Exception {
-
-		return new SkuDTO();
+	public SkuDTO getSku(String id) throws Exception {
+		return _skuHelper.getSku(id, _company);
 	}
 
 	@Override
 	public Response updateSku(
 			String id, long groupId, SkuDTO skuDTO, Locale locale)
 		throws Exception {
+
+		_skuHelper.updateSKU(id, groupId, skuDTO, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
@@ -95,5 +96,8 @@ public class SkuResourceImpl implements SkuResource {
 
 	@Reference
 	private InventoryHelper _inventoryHelper;
+
+	@Reference
+	private SKUHelper _skuHelper;
 
 }
