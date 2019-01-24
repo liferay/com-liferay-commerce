@@ -13,7 +13,7 @@ dependencies {
 	compileOnly group: "junit", name: "junit", version: "4.12"
 	compileOnly project(":apps:commerce:commerce-currency-test-util")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.payment.api", version: "1.0.0"
-	compileOnly project(":apps:commerce:commerce-shipping-engine-fixed-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.shipping.engine.fixed.api", version: "1.0.0"
 }
 
 liferay {
