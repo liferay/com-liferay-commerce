@@ -14,13 +14,29 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountServiceUtil;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
+import com.liferay.commerce.frontend.taglib.internal.model.AccountRole;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.UserGroupRole;
+import com.liferay.portal.kernel.service.RoleServiceUtil;
+import com.liferay.portal.kernel.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Fabio Mastrorilli
@@ -32,15 +48,52 @@ public class UserRolesModalTag extends ComponentRendererTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		putValue(
-			"usersAPI",
-			PortalUtil.getPortalURL(request) + "/o/commerce-ui/search-users");
+		Map<String, Object> context = getContext();
 
-		putValue("query", "");
+		long commerceAccountId = GetterUtil.getLong(
+			context.get("commerceAccountId"));
+		long userId = GetterUtil.getLong(context.get("userId"));
 
 		putValue(
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
+
+		try {
+			CommerceAccount commerceAccount =
+				CommerceAccountServiceUtil.getCommerceAccount(
+					commerceAccountId);
+
+			List<UserGroupRole> userGroupRoles =
+				UserGroupRoleLocalServiceUtil.getUserGroupRoles(
+					userId, commerceAccount.getCommerceAccountGroupId());
+
+			List<AccountRole> selectedRoles = new ArrayList<>();
+
+			for (UserGroupRole userGroupRole : userGroupRoles) {
+				Role role = userGroupRole.getRole();
+
+				selectedRoles.add(
+					new AccountRole(role.getRoleId(), role.getName()));
+			}
+
+			putValue("selectedRoles", selectedRoles);
+
+			List<AccountRole> avaiableRoles = new ArrayList<>();
+
+			List<Role> roles = RoleServiceUtil.getRoles(
+				PortalUtil.getCompanyId(request),
+				new int[] {CommerceAccountConstants.ACCOUNT_ROLE_TYPE});
+
+			for (Role role : roles) {
+				avaiableRoles.add(
+					new AccountRole(role.getRoleId(), role.getName()));
+			}
+
+			putValue("roles", avaiableRoles);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
 
 		setTemplateNamespace("UserRolesModal.render");
 
@@ -58,5 +111,16 @@ public class UserRolesModalTag extends ComponentRendererTag {
 		return npmResolver.resolveModuleName(
 			"commerce-frontend-taglib/user_roles_modal/UserRolesModal.es");
 	}
+
+	public void setCommerceAccountId(long commerceAccountId) {
+		putValue("commerceAccountId", commerceAccountId);
+	}
+
+	public void setUserId(long userId) {
+		putValue("userId", userId);
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		UserRolesModalTag.class);
 
 }

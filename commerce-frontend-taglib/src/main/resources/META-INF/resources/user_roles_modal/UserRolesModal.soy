@@ -69,7 +69,7 @@
 
 						<div class="autocomplete-input__wrapper">
 							<div class="autocomplete-input__content">
-								{if isNonnull($selectedRoles)}
+								{if isNonnull($selectedRoles) and length($selectedRoles) > 0 }
 									{foreach $role in $selectedRoles}
 										{call RoleInputItem.render}
 											{param events: ['removeItem' : $_toggleItem] /}

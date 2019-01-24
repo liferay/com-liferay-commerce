@@ -207,7 +207,17 @@
 			com.liferay.commerce.frontend.taglib.servlet.taglib.UserRolesModalTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
+			<name>commerceAccountId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>componentId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>userId</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

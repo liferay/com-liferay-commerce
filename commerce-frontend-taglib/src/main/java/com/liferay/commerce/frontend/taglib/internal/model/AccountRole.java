@@ -12,33 +12,27 @@
  * details.
  */
 
-package com.liferay.commerce.account.web.internal.frontend;
-
-import com.liferay.commerce.frontend.DefaultFilterImpl;
+package com.liferay.commerce.frontend.taglib.internal.model;
 
 /**
- * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
-public class AccountFilterImpl extends DefaultFilterImpl {
+public class AccountRole {
 
-	public long getAccountId() {
-		return _accountId;
+	public AccountRole(long id, String name) {
+		_id = id;
+		_name = name;
 	}
 
-	public long getUserId() {
-		return _userId;
+	public long getId() {
+		return _id;
 	}
 
-	public void setAccountId(long accountId) {
-		_accountId = accountId;
+	public String getName() {
+		return _name;
 	}
 
-	public void setUserId(long userId) {
-		_userId = userId;
-	}
-
-	private long _accountId;
-	private long _userId;
+	private final long _id;
+	private final String _name;
 
 }
