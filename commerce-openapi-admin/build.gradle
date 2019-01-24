@@ -22,7 +22,7 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.openapi.core.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-price-list-api")
 	compileOnly project(":apps:commerce:commerce-price-list-service")
-	compileOnly project(":apps:commerce:commerce-product-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "3.0.0"
 
 	runtime project(":apps:commerce:commerce-openapi-core-impl")
 }
