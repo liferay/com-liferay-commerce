@@ -24,17 +24,17 @@ public class PropertyDefinition {
 		_type = type;
 		_format = format;
 
-		HttpParameterType httpParameterType = HttpParameterType.OBJECT;
+		ParameterType parameterType = ParameterType.OBJECT;
 
 		if (type != null) {
-			httpParameterType = HttpParameterType.fromDefinition(type);
+			parameterType = ParameterType.fromDefinition(type);
 		}
 
-		HttpParameterFormat httpParameterFormat =
-			HttpParameterFormat.fromHttpParameterTypeAndDefinition(
-				httpParameterType, _format);
+		ParameterFormat parameterFormat =
+			ParameterFormat.fromHttpParameterTypeAndDefinition(
+				parameterType, _format);
 
-		_httpParameterFormat = httpParameterFormat;
+		_parameterFormat = parameterFormat;
 	}
 
 	public PropertyDefinition(
@@ -44,17 +44,17 @@ public class PropertyDefinition {
 		_type = type;
 		_format = itemsFormat;
 
-		HttpParameterType httpParameterType = HttpParameterType.OBJECT;
+		ParameterType parameterType = ParameterType.OBJECT;
 
 		if (type != null) {
-			httpParameterType = HttpParameterType.fromDefinition(itemsType);
+			parameterType = ParameterType.fromDefinition(itemsType);
 		}
 
-		HttpParameterFormat httpParameterFormat =
-			HttpParameterFormat.fromHttpParameterTypeAndDefinition(
-				httpParameterType, _format);
+		ParameterFormat parameterFormat =
+			ParameterFormat.fromHttpParameterTypeAndDefinition(
+				parameterType, _format);
 
-		_httpParameterFormat = httpParameterFormat;
+		_parameterFormat = parameterFormat;
 	}
 
 	public String getExample() {
@@ -71,10 +71,10 @@ public class PropertyDefinition {
 
 	public String getJavaType() {
 		if ("array".equals(_type)) {
-			return _httpParameterFormat.getJavaType() + "[]";
+			return _parameterFormat.getJavaType() + "[]";
 		}
 
-		return _httpParameterFormat.getJavaType();
+		return _parameterFormat.getJavaType();
 	}
 
 	public String getName() {
@@ -144,10 +144,10 @@ public class PropertyDefinition {
 
 	private String _example;
 	private final String _format;
-	private final HttpParameterFormat _httpParameterFormat;
 	private String _itemFormat;
 	private String _itemType;
 	private String _name;
+	private final ParameterFormat _parameterFormat;
 	private boolean _required;
 	private String _toString;
 	private String _type;
