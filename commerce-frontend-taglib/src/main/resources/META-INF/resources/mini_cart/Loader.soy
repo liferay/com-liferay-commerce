@@ -12,7 +12,7 @@
 		{if isNonnull($direction)}
 			{sp}minium-loader__dots-wrapper--{$direction}
 		{/if}
-		{if $inverted}
+		{if isNonnull($inverted) and $inverted}
 			{sp}minium-loader__dots-wrapper--inverted
 		{/if}
 	{/let}
