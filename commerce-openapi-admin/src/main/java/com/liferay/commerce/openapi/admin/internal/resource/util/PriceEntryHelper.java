@@ -143,7 +143,7 @@ public class PriceEntryHelper {
 
 		CPInstance cpInstance = commercePriceEntry.getCPInstance();
 
-		if (priceEntryDTO.getStandardPrice()) {
+		if (priceEntryDTO.isStandardPrice()) {
 			_cpInstanceService.updatePricingInfo(
 				cpInstance.getCPInstanceId(), priceEntryDTO.getPrice(),
 				priceEntryDTO.getPromoPrice(), cpInstance.getCost(),

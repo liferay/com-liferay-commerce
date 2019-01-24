@@ -159,7 +159,7 @@ public class PriceListHelper {
 		return DTOUtils.modelToDTO(
 			_updatePriceList(
 				id, company, priceListDTO.getCurrency(), priceListDTO.getName(),
-				priceListDTO.getPriority(), priceListDTO.getNeverExpire(),
+				priceListDTO.getPriority(), priceListDTO.isNeverExpire(),
 				priceListDTO.getDisplayDate(),
 				priceListDTO.getExpirationDate()),
 			locale);
@@ -174,10 +174,10 @@ public class PriceListHelper {
 			_upsertPriceList(
 				groupId, priceListDTO.getCommercePriceListId(),
 				priceListDTO.getCurrency(), priceListDTO.getName(),
-				priceListDTO.getPriority(), priceListDTO.getNeverExpire(),
+				priceListDTO.getPriority(), priceListDTO.isNeverExpire(),
 				priceListDTO.getDisplayDate(), priceListDTO.getExpirationDate(),
 				priceListDTO.getExternalReferenceCode(),
-				priceListDTO.getActive(), user),
+				priceListDTO.isActive(), user),
 			locale);
 	}
 
