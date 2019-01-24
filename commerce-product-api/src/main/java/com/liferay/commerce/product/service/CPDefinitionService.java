@@ -33,6 +33,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
+import java.io.Serializable;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -96,6 +98,10 @@ public interface CPDefinitionService extends BaseService {
 
 	public void deleteCPDefinition(long cpDefinitionId)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPDefinition fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinition fetchCPDefinition(long cpDefinitionId)
@@ -190,6 +196,10 @@ public interface CPDefinitionService extends BaseService {
 		boolean shippable, boolean freeShipping, boolean shipSeparately,
 		double shippingExtraPrice, double width, double height, double depth,
 		double weight, ServiceContext serviceContext) throws PortalException;
+
+	public CPDefinition updateStatus(long userId, long cpDefinitionId,
+		int status, ServiceContext serviceContext,
+		Map<String, Serializable> workflowContext) throws PortalException;
 
 	public CPDefinition updateSubscriptionInfo(long cpDefinitionId,
 		boolean subscriptionEnabled, int subscriptionLength,
