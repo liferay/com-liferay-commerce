@@ -43,31 +43,6 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = PriceEntryHelper.class)
 public class PriceEntryHelper {
 
-	public static String getSKU(CommercePriceEntry commercePriceEntry)
-		throws PortalException {
-
-		CPInstance cpInstance = _getCPInstance(commercePriceEntry);
-
-		if (cpInstance == null) {
-			return null;
-		}
-
-		return cpInstance.getSku();
-	}
-
-	public static String getSKUExternalReferenceCode(
-			CommercePriceEntry commercePriceEntry)
-		throws PortalException {
-
-		CPInstance cpInstance = _getCPInstance(commercePriceEntry);
-
-		if (cpInstance == null) {
-			return null;
-		}
-
-		return cpInstance.getExternalReferenceCode();
-	}
-
 	public void deleteCommercePriceEntry(String id, long companyId)
 		throws PortalException {
 
@@ -106,9 +81,7 @@ public class PriceEntryHelper {
 			long groupId, Pagination pagination)
 		throws PortalException {
 
-		List<CommercePriceEntry> commercePriceEntries;
-
-		commercePriceEntries =
+		List<CommercePriceEntry> commercePriceEntries =
 			_commercePriceEntryService.getCommercePriceEntriesByGroupId(
 				groupId, pagination.getStartPosition(),
 				pagination.getEndPosition());
@@ -120,10 +93,7 @@ public class PriceEntryHelper {
 		List<PriceEntryDTO> priceEntryDTOs = new ArrayList<>();
 
 		for (CommercePriceEntry commercePriceEntry : commercePriceEntries) {
-			priceEntryDTOs.add(
-				DTOUtils.modelToDTO(
-					commercePriceEntry, getSKU(commercePriceEntry),
-					getSKUExternalReferenceCode(commercePriceEntry)));
+			priceEntryDTOs.add(DTOUtils.modelToDTO(commercePriceEntry));
 		}
 
 		return new CollectionDTO<>(priceEntryDTOs, count);
@@ -135,9 +105,7 @@ public class PriceEntryHelper {
 		CommercePriceEntry commercePriceEntry = getCommercePriceEntry(
 			id, companyId);
 
-		return DTOUtils.modelToDTO(
-			commercePriceEntry, getSKU(commercePriceEntry),
-			getSKUExternalReferenceCode(commercePriceEntry));
+		return DTOUtils.modelToDTO(commercePriceEntry);
 	}
 
 	public void updateCommercePriceEntry(
@@ -189,20 +157,7 @@ public class PriceEntryHelper {
 				serviceContext);
 		}
 
-		return DTOUtils.modelToDTO(
-			commercePriceEntry, getSKU(commercePriceEntry),
-			getSKUExternalReferenceCode(commercePriceEntry));
-	}
-
-	private static CPInstance _getCPInstance(
-			CommercePriceEntry commercePriceEntry)
-		throws PortalException {
-
-		CPInstance cpInstance = null;
-
-		cpInstance = commercePriceEntry.getCPInstance();
-
-		return cpInstance;
+		return DTOUtils.modelToDTO(commercePriceEntry);
 	}
 
 	@Reference
