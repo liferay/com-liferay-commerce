@@ -41,7 +41,7 @@ public class Parameter {
 	}
 
 	public String getJavaType() {
-		return _httpParameterFormat.getJavaType();
+		return _parameterFormat.getJavaType();
 	}
 
 	public String getLocation() {
@@ -65,8 +65,7 @@ public class Parameter {
 		_toString = String.format(
 			"{content=%s, location=%s, name=%s, javaType=%s, required=%s, " +
 				"schema=%s}",
-			_content, _location, _name, _httpParameterFormat, _required,
-			_schema);
+			_content, _location, _name, _parameterFormat, _required, _schema);
 
 		return _toString;
 	}
@@ -84,9 +83,9 @@ public class Parameter {
 		}
 
 		public ParameterBuilder httpParameterFormat(
-			HttpParameterFormat httpParameterFormat) {
+			ParameterFormat parameterFormat) {
 
-			_httpParameterFormat = httpParameterFormat;
+			_parameterFormat = parameterFormat;
 
 			return this;
 		}
@@ -116,9 +115,9 @@ public class Parameter {
 		}
 
 		private Content _content;
-		private HttpParameterFormat _httpParameterFormat;
 		private String _location;
 		private String _name;
+		private ParameterFormat _parameterFormat;
 		private boolean _required;
 		private Schema _schema;
 
@@ -131,27 +130,26 @@ public class Parameter {
 		_schema = parameterBuilder._schema;
 		_required = parameterBuilder._required;
 
-		HttpParameterType httpParameterType = HttpParameterType.OBJECT;
+		ParameterType parameterType = ParameterType.OBJECT;
 
 		if (_schema.getType() != null) {
-			httpParameterType = HttpParameterType.fromDefinition(
-				_schema.getType());
+			parameterType = ParameterType.fromDefinition(_schema.getType());
 		}
 
-		HttpParameterFormat httpParameterFormat =
-			HttpParameterFormat.fromHttpParameterTypeAndDefinition(
-				httpParameterType, _schema.getFormat());
+		ParameterFormat parameterFormat =
+			ParameterFormat.fromHttpParameterTypeAndDefinition(
+				parameterType, _schema.getFormat());
 
-		_httpParameterFormat = httpParameterFormat;
+		_parameterFormat = parameterFormat;
 	}
 
 	private static final Pattern _parameterReferencePattern = Pattern.compile(
 		"^#/?(\\w+/)+(\\w+)$");
 
 	private Content _content;
-	private final HttpParameterFormat _httpParameterFormat;
 	private final String _location;
 	private final String _name;
+	private final ParameterFormat _parameterFormat;
 	private final boolean _required;
 	private final Schema _schema;
 	private String _toString;
