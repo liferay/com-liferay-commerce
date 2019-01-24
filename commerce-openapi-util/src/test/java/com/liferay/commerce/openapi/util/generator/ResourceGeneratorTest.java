@@ -33,7 +33,7 @@ import org.junit.Test;
 /**
  * @author Igor Beslic
  */
-public class ResourceGeneratorTest {
+public class ResourceGeneratorTest extends BaseGeneratorTest {
 
 	@Test
 	public void testGetReturnType() {
@@ -66,10 +66,10 @@ public class ResourceGeneratorTest {
 
 		Assert.assertTrue(
 			"Exactly one import statement expected",
-			_containsOnlyOne(imports, "import javax.ws.rs.GET;"));
+			containsOnlyOne(imports, "import javax.ws.rs.GET;"));
 		Assert.assertTrue(
 			"Exactly one import statement expected",
-			_containsOnlyOne(imports, "import javax.ws.rs.core.Context;"));
+			containsOnlyOne(imports, "import javax.ws.rs.core.Context;"));
 
 		imports = resourceGenerator.toJavaxImports(
 			_getMethods(true, "testModel", _getExtensions("locale", "company")),
@@ -77,10 +77,10 @@ public class ResourceGeneratorTest {
 
 		Assert.assertTrue(
 			"Exactly one import statement expected",
-			_containsOnlyOne(imports, "import java.util.Locale;"));
+			containsOnlyOne(imports, "import java.util.Locale;"));
 		Assert.assertTrue(
 			"Exactly one import statement expected",
-			_containsOnlyOne(imports, "import javax.ws.rs.core.Context;"));
+			containsOnlyOne(imports, "import javax.ws.rs.core.Context;"));
 	}
 
 	@Test
@@ -127,25 +127,6 @@ public class ResourceGeneratorTest {
 			"Context parameters with proper syntax expected",
 			interfaceMethods.contains(
 				"Locale locale, @Context Pagination pagination"));
-	}
-
-	private boolean _containsOnlyOne(String source, String term) {
-		int count = 0;
-		int indexOf = -1;
-
-		do {
-			indexOf = source.indexOf(term, indexOf + 1);
-
-			if (indexOf >= 0) {
-				count++;
-			}
-		} while (indexOf != -1);
-
-		if (count == 1) {
-			return true;
-		}
-
-		return false;
 	}
 
 	private List<Extension> _getExtensions(String... extensionOpenApiNames) {
