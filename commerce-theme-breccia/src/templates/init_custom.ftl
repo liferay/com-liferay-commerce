@@ -1,17 +1,17 @@
 <#assign
+	accountManagementUrl = commerceAccountHelper.getAccountManagementPortletURL(request)
+	cartUrl = commerceOrderHttpHelper.getCommerceCartPortletURL(request)
 	company_phone_number = getterUtil.getString(themeDisplay.getThemeSetting("company-phone-number"))
 	copyright = getterUtil.getString(themeDisplay.getThemeSetting("copyright"))
+	demo_mode = getterUtil.getBoolean(themeDisplay.getThemeSetting("demo-mode"))
 	header_column_1 = getterUtil.getString(themeDisplay.getThemeSetting("header-column-1"))
 	header_column_2 = getterUtil.getString(themeDisplay.getThemeSetting("header-column-2"))
 	header_column_3 = getterUtil.getString(themeDisplay.getThemeSetting("header-column-3"))
-	show_header_search = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-header-search"))
 	orderItemsQuantity = commerceOrderHttpHelper.getCommerceOrderItemsQuantity(request)
-	cartUrl = commerceOrderHttpHelper.getCommerceCartPortletURL(request)
-	demo_mode = getterUtil.getBoolean(themeDisplay.getThemeSetting("demo-mode"))
-	accountManagementUrl = commerceAccountHelper.getAccountManagementPortletURL(request)
+	orderNumber = ""
+	show_header_search = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-header-search"))
 	wishListItemsCount = commerceWishListHttpHelper.getCurrentCommerceWishListItemsCount(request, themeDisplay.getResponse())
 	wishlistUrl = commerceWishListHttpHelper.getCommerceWishListPortletURL(request)
-	orderNumber = ""
 />
 
 <#if commerceOrderHttpHelper.getCurrentCommerceOrder(request)??>
