@@ -1,4 +1,4 @@
 Bundle-Name: Liferay Commerce Product Catalog Rule Web
 Bundle-SymbolicName: com.liferay.commerce.product.catalog.rule.web
-Bundle-Version: 1.0.7
+Bundle-Version: 1.0.8
 Web-ContextPath: /commerce-product-catalog-rule-web
