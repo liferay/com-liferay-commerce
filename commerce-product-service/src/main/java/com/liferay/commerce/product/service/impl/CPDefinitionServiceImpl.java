@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
+import java.io.Serializable;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -127,6 +129,23 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 			getPermissionChecker(), cpDefinitionId, ActionKeys.DELETE);
 
 		cpDefinitionLocalService.deleteCPDefinition(cpDefinitionId);
+	}
+
+	@Override
+	public CPDefinition fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CPDefinition cpDefinition =
+			cpDefinitionLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		if (cpDefinition != null) {
+			_cpDefinitionModelResourcePermission.check(
+				getPermissionChecker(), cpDefinition, ActionKeys.VIEW);
+		}
+
+		return cpDefinition;
 	}
 
 	@Override
@@ -382,6 +401,19 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 		return cpDefinitionLocalService.updateShippingInfo(
 			cpDefinitionId, shippable, freeShipping, shipSeparately,
 			shippingExtraPrice, width, height, depth, weight, serviceContext);
+	}
+
+	public CPDefinition updateStatus(
+			long userId, long cpDefinitionId, int status,
+			ServiceContext serviceContext,
+			Map<String, Serializable> workflowContext)
+		throws PortalException {
+
+		_cpDefinitionModelResourcePermission.check(
+			getPermissionChecker(), cpDefinitionId, ActionKeys.UPDATE);
+
+		return cpDefinitionLocalService.updateStatus(
+			userId, cpDefinitionId, status, serviceContext, workflowContext);
 	}
 
 	@Override
