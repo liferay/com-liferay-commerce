@@ -24,6 +24,6 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
-	compileOnly project(":apps:commerce:commerce-frontend-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.frontend.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-product-api")
 }
