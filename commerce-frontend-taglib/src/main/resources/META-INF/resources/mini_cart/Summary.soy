@@ -4,56 +4,65 @@
  * This renders the component's whole content.
  */
 {template .render}
-	{@param isLoading: bool}
-	{@param subtotal: string}
-	{@param total: string}
-	{@param itemsQuantity: int}
-	{@param productsCount: int}
+	{@param? loading: bool}
+	{@param? subtotal: string}
+	{@param? total: string}
+	{@param? itemsQuantity: int}
+	{@param? productsQuantity: int}
 	{@param? checkoutUrl: string}
 	{@param? discount: string}
 	{@param? taxes: string}
 
-	{let $submitModifiers kind="text"}
-		{if $isLoading or $productsCount == 0 }
-			{sp}minium-button--disabled
-		{/if}
-	{/let}
-
 	<div class="minium-cart__footer">
-		<dl class="minium-cart__totals">
-			<dt> {msg desc="Units"}units{/msg}</dt>
-			<dd>{$itemsQuantity} {msg desc="Of"}of{/msg} {$productsCount} {msg desc="Items"}items{/msg}</dd>
-			<dt>{msg desc="Subtotal"}subtotal{/msg}</dt>
-			<dd>
-				{if $isLoading}
-					{call Loader.render}
-						{param direction: 'right' /}
-						{param inverted: true /}
-					{/call}
-				{else}
-					{$subtotal}
+
+		{if isNonnull($itemsQuantity) and $itemsQuantity != 0}
+			<dl class="minium-cart__totals">
+				<dt> {msg desc="Units"}units{/msg}</dt>
+				<dd>
+					{$itemsQuantity} {msg desc="Of"}of{/msg} {$productsQuantity} {msg desc="Items"}items{/msg}
+				</dd>
+				<dt>{msg desc="Subtotal"}subtotal{/msg}</dt>
+				<dd>
+					{if isNonnull($loading) and $loading}
+						{call Loader.render}
+							{param direction: 'right' /}
+							{param inverted: true /}
+						{/call}
+					{else}
+						{if isNonnull($subtotal)}
+							{$subtotal}
+						{/if}
+					{/if}
+				</dd>
+				{if isNonnull($discount)}
+					<dt>{msg desc="Discount"}discount{/msg}</dt>
+					<dd>{$discount}</dd>
 				{/if}
-			</dd>
-			{if $discount}
-				<dt>{msg desc="Discount"}discount{/msg}</dt>
-				<dd>{$discount}</dd>
-			{/if}
-			{if $taxes}
-				<dt>{msg desc="Taxes"}taxes{/msg}</dt>
-				<dd>{$taxes}</dd>
-			{/if}
-			<dt>{msg desc="Total"}total{/msg}</dt>
-			<dd>
-				{if $isLoading}
-					{call Loader.render}
-						{param direction: 'right' /}
-						{param inverted: true /}
-					{/call}
-				{else}
-					<big>{$total}</big>
+				{if isNonnull($taxes)}
+					<dt>{msg desc="Taxes"}taxes{/msg}</dt>
+					<dd>{$taxes}</dd>
 				{/if}
-			</dd>
-		</dl>
+				<dt>{msg desc="Total"}total{/msg}</dt>
+				<dd>
+					{if isNonnull($loading) and $loading}
+						{call Loader.render}
+							{param direction: 'right' /}
+							{param inverted: true /}
+						{/call}
+					{else}
+						{if isNonnull($total)}
+							<big>{$total}</big>
+						{/if}
+					{/if}
+				</dd>
+			</dl>
+		{/if}
+		{let $submitModifiers kind="text"}
+			{if (isNonnull($loading) and $loading) or $productsQuantity == 0 }
+				{sp}minium-button--disabled
+			{/if}
+		{/let}
+
 		{if isNonnull($checkoutUrl)}
 			<a class="minium-button minium-button--block{$submitModifiers}" href="{$checkoutUrl}">{msg desc="Submit"}submit{/msg}</a>
 		{/if}

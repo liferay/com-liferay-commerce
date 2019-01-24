@@ -9,13 +9,13 @@ class CompareCheckbox extends Component {
 		Liferay.on(
 			'compareIsAvailable',
 			() => {
-				return this.isCompareAvailable = true;
+				this.isCompareAvailable = true;
 			}
 		);
 		Liferay.on(
 			'compareIsUnavailable',
 			() => {
-				return this.isCompareAvailable = false;
+				this.isCompareAvailable = false;
 			}
 		);
 		Liferay.on(
@@ -30,13 +30,14 @@ class CompareCheckbox extends Component {
 
 	_handleCompareCheckbox(evt) {
 		evt.preventDefault();
-
 		this.isInCompare = !this.isInCompare;
-
-		return Liferay.fire('toggleProductToCompare', {
-			id: this.productId,
-			thumbnail: this.pictureUrl
-		});
+		return Liferay.fire(
+			'toggleProductToCompare',
+			{
+				id: this.productId,
+				thumbnail: this.pictureUrl
+			}
+		);
 	}
 }
 
