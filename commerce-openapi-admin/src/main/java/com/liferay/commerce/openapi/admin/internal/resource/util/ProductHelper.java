@@ -217,7 +217,7 @@ public class ProductHelper {
 			cpDefinition.getUrlTitleMap(), cpDefinition.getMetaTitleMap(),
 			cpDefinition.getMetaDescriptionMap(),
 			cpDefinition.getMetaKeywordsMap(),
-			cpDefinition.getIgnoreSKUCombinations(),
+			cpDefinition.isIgnoreSKUCombinations(),
 			cpDefinition.getDDMStructureKey(), true, displayDateConfig._month,
 			displayDateConfig._day, displayDateConfig._year,
 			displayDateConfig._hour, displayDateConfig._minute,
