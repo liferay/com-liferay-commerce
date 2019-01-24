@@ -64,6 +64,14 @@ public class CPInstanceServiceWrapper implements CPInstanceService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPInstance fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpInstanceService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPInstance fetchCPInstance(
 		long cpInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {
