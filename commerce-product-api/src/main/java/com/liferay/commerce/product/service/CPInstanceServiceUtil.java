@@ -71,6 +71,14 @@ public class CPInstanceServiceUtil {
 		getService().deleteCPInstance(cpInstanceId);
 	}
 
+	public static com.liferay.commerce.product.model.CPInstance fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.product.model.CPInstance fetchCPInstance(
 		long cpInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {

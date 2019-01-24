@@ -76,6 +76,10 @@ public interface CPInstanceService extends BaseService {
 	public void deleteCPInstance(long cpInstanceId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPInstance fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPInstance fetchCPInstance(long cpInstanceId)
 		throws PortalException;
 
