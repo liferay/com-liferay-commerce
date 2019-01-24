@@ -73,7 +73,7 @@ public class EditCommerceAccountMVCRenderCommand implements MVCRenderCommand {
 				_commerceAddressService, _commerceCountryService,
 				_commerceRegionService, httpServletRequest,
 				_modelResourcePermission, _portal, _portletResourcePermission,
-				null, _userLocalService);
+				_userFileUploadsConfiguration, _userLocalService);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);
