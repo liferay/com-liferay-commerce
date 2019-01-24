@@ -10,7 +10,7 @@ dependencies {
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.test", version: "1.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.test.integration", version: "1.0.0"
 	compileOnly group: "junit", name: "junit", version: "4.12"
-	compileOnly project(":apps:commerce:commerce-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "4.0.0"
 	compileOnly project(":apps:commerce:commerce-currency-test-util")
 	compileOnly project(":apps:commerce:commerce-payment-api")
 	compileOnly project(":apps:commerce:commerce-shipping-engine-fixed-api")
