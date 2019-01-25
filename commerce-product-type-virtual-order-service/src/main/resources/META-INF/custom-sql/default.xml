@@ -16,7 +16,7 @@
 			WHERE
 				(CommerceOrder.groupId = ?) AND
 				(CommerceOrder.commerceAccountId = ?) AND
-				(CommerceVirtualOrderItem.active_ = true)
+				(CommerceVirtualOrderItem.active_ = [$TRUE$])
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.product.type.virtual.order.service.persistence.CommerceVirtualOrderItemFinder.findByEndDate">
@@ -26,7 +26,7 @@
 			FROM
 				CommerceVirtualOrderItem
 			WHERE
-				(CommerceVirtualOrderItem.active_ = true) AND
+				(CommerceVirtualOrderItem.active_ = [$TRUE$]) AND
 				(CommerceVirtualOrderItem.endDate < ?) AND
 				(CommerceVirtualOrderItem.endDate IS NOT NULL)
 		]]>
@@ -46,7 +46,7 @@
 			WHERE
 				(CommerceOrder.groupId = ?) AND
 				(CommerceOrder.commerceAccountId = ?) AND
-				(CommerceVirtualOrderItem.active_ = true)
+				(CommerceVirtualOrderItem.active_ = [$TRUE$])
 			ORDER BY
 				CommerceVirtualOrderItem.createDate
 		]]>
