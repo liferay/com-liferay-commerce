@@ -140,8 +140,8 @@ class AddAccountModal extends Component {
 			);
 	}
 
-	_sendInvitations() {
-		if (!this.addedUsers.length) {
+	_handleCreateAccount() {
+		if (!this.addedUsers.length || !this.accountName ) {
 			return false;
 		};
 

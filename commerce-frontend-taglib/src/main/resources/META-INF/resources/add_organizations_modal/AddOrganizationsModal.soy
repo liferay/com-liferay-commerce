@@ -35,7 +35,7 @@
 		<div class="commerce-modal">
 			<div class="commerce-modal__header">
 				<h3 class="commerce-modal__title">
-					Add Organization to This Account
+					{msg desc="Add Organization to this account"}add-organization-to-this-account{/msg}
 				</h3>
 
 				<button
@@ -52,7 +52,7 @@
 			<div class="commerce-modal__content">
 
 				<label class="commerce-modal__label">
-					Organization name
+					{msg desc="Organization name"}organization-name{/msg}
 				</label>
 
 				<div class="user-invitation">
@@ -103,7 +103,7 @@
 						{/if}
 						{if isNonnull($organizations) and length($organizations) == 0 }
 							<div class="no-element-found">
-								No element found
+								{msg desc="No elements found"}no-elements-found{/msg}
 							</div>
 						{/if}
 					</div>
@@ -121,7 +121,7 @@
 					class="{$inviteButtonClasses}"
 					data-onclick="{$_addOrganizations}"
 				>
-					Add organization
+					{msg desc="Add organization"}add-organization{/msg}
 				</button>
 			</div>
 		</div>

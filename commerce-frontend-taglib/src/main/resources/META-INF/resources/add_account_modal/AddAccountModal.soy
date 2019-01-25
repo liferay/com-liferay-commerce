@@ -25,7 +25,7 @@
 	{@param? _handleInputBox: any }
 	{@param? _handleFormSubmit: any }
 	{@param? _handleCloseModal: any }
-	{@param? _sendInvitations: any }
+	{@param? _handleCreateAccount: any }
 	{@param? _handleInputName: any }
 
 	{let $formattedQuery kind="text"}
@@ -39,7 +39,7 @@
 		<div class="commerce-modal">
 			<div class="commerce-modal__header">
 				<h3 class="commerce-modal__title">
-					Create a New Account
+					{msg desc="Create a New Account"}create-a-new-account{/msg}
 				</h3>
 
 				<button
@@ -56,13 +56,13 @@
 			<div class="commerce-modal__content">
 
 				<label class="commerce-modal__label">
-					Account name
+					{msg desc="Account name"}account-name{/msg}
 				</label>
 
-				<input class="commerce-modal__input" data-onchange="{$_handleInputName}" type="text">
+				<input class="commerce-modal__input" data-onkeyup="{$_handleInputName}" type="text" />
 
 				<label class="commerce-modal__label">
-					Administrators email
+					{msg desc="Administrators email"}administrators-email{/msg}
 				</label>
 
 				<div class="user-invitation">
@@ -127,16 +127,16 @@
 
 			{let $inviteButtonClasses kind="text"}
 				minium-button minium-button--big
-				{if isNonnull($addedUsers) and length($addedUsers) == 0 and isNonnull($accountName) and $accountName == ''}
+				{if (isNonnull($addedUsers) and length($addedUsers) > 0 and isNonnull($accountName) and $accountName != '') == false }
 					{sp}minium-button--disabled
 				{/if}
 			{/let}
 			<div class="commerce-modal__actions">
 				<button
 					class="{$inviteButtonClasses}"
-					data-onclick="{$_sendInvitations}"
+					data-onclick="{$_handleCreateAccount}"
 				>
-					Create Account
+					{msg desc="Create Account"}create-account{/msg}
 				</button>
 			</div>
 		</div>
