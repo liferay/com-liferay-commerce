@@ -24,6 +24,7 @@ import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
+import com.liferay.commerce.openapi.admin.model.UserDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
@@ -35,6 +36,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.util.Locale;
 
@@ -207,6 +210,33 @@ public class DTOUtils {
 		webSiteDTO.setName(group.getName(locale));
 
 		return webSiteDTO;
+	}
+
+	public static UserDTO modelToDTO(
+			User user, long[] commerceAccountIds, String dashboardURL,
+			String profileURL, String[] roleNames, ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		UserDTO userDTO = new UserDTO();
+
+		userDTO.setAdditionalName(user.getMiddleName());
+		userDTO.setAlternateName(user.getScreenName());
+		userDTO.setBirthDate(user.getBirthday());
+		userDTO.setCommerceAccountIds(commerceAccountIds);
+		userDTO.setDashboardURL(dashboardURL);
+		userDTO.setEmail(user.getEmailAddress());
+		userDTO.setExternalReferenceCode(user.getExternalReferenceCode());
+		userDTO.setFamilyName(user.getLastName());
+		userDTO.setGender(user.isMale() ? "male" : "female");
+		userDTO.setGivenName(user.getFirstName());
+		userDTO.setId(user.getUserId());
+		userDTO.setImage(user.getPortraitURL(themeDisplay));
+		userDTO.setJobTitle(user.getJobTitle());
+		userDTO.setName(user.getFullName());
+		userDTO.setProfileURL(profileURL);
+		userDTO.setRoleNames(roleNames);
+
+		return userDTO;
 	}
 
 	private DTOUtils() {
