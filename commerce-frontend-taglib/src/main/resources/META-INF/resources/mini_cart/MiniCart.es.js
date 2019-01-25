@@ -475,7 +475,7 @@ Cart.STATE = {
 	detailsUrl: Config.string().required(),
 	disabled: Config.bool().value(false),
 	_loading: Config.bool().internal().value(false),
-	_open: Config.bool().internal().value(true),
+	_open: Config.bool().internal().value(false),
 	pendingOperations: Config.array().value(
 		[]
 	),
