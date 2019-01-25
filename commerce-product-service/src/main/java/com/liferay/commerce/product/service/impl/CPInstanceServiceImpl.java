@@ -23,7 +23,6 @@ import com.liferay.commerce.product.service.base.CPInstanceServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
@@ -89,11 +88,13 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 	}
 
 	@Override
-	public CPInstance fetchCPInstance(long cpInstanceId)
+	public CPInstance fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
 		throws PortalException {
 
-		CPInstance cpInstance = cpInstanceLocalService.fetchCPInstance(
-			cpInstanceId);
+		CPInstance cpInstance =
+			cpInstanceLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
 
 		if (cpInstance != null) {
 			_cpDefinitionModelResourcePermission.check(
@@ -105,13 +106,11 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 	}
 
 	@Override
-	public CPInstance fetchByExternalReferenceCode(
-			long companyId, String externalReferenceCode)
+	public CPInstance fetchCPInstance(long cpInstanceId)
 		throws PortalException {
 
-		CPInstance cpInstance =
-			cpInstanceLocalService.fetchByExternalReferenceCode(
-				companyId, externalReferenceCode);
+		CPInstance cpInstance = cpInstanceLocalService.fetchCPInstance(
+			cpInstanceId);
 
 		if (cpInstance != null) {
 			_cpDefinitionModelResourcePermission.check(
