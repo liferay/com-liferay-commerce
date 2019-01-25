@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.UserGroupRole;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.util.Portal;
 
@@ -124,11 +123,6 @@ public class CommerceAccountUserRolesClayTable
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
-	)
-	private ModelResourcePermission<CommerceAccount> _modelResourcePermission;
 
 	@Reference
 	private Portal _portal;

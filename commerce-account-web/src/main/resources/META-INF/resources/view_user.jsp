@@ -37,7 +37,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 	<section class="details-header__section details-header__primary">
 		<div class="details-header__main-data">
 			<div class="details-header__avatar">
-				<img alt="avatar" src="https://via.placeholder.com/120" />
+				<img alt="avatar" src="<%= selectedUser.getPortraitURL(themeDisplay) %>" />
 			</div>
 
 			<div class="details-header__name">
