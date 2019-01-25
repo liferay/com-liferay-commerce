@@ -19,9 +19,11 @@ import javax.ws.rs.core.Response;
 /**
  * @author Igor Beslic
  * @author Matija Petanjek
+ * @author Zoltán Takács
  */
 public enum RESTError {
 
+	DUPLICATE_ACCOUNT(981, "Duplicate account", Response.Status.CONFLICT),
 	DUPLICATE_PRICE_ENTRY(
 		988, "Duplicated price entry", Response.Status.CONFLICT),
 	DUPLICATE_PRODUCT_OPTION_KEY(
