@@ -14,9 +14,11 @@
 
 package com.liferay.commerce.openapi.admin.internal.util;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
+import com.liferay.commerce.openapi.admin.model.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
@@ -45,6 +47,35 @@ import java.util.Locale;
  * @author Zoltán Takács
  */
 public class DTOUtils {
+
+	public static AccountDTO modelToDTO(CommerceAccount commerceAccount) {
+		AccountDTO accountDTO = new AccountDTO();
+
+		try {
+			accountDTO.setId(commerceAccount.getCommerceAccountId());
+			accountDTO.setRoot(commerceAccount.isRoot());
+			accountDTO.setPersonal(commerceAccount.isPersonalAccount());
+			accountDTO.setBusiness(commerceAccount.isBusinessAccount());
+			accountDTO.setOrganizationId(
+				commerceAccount.getCommerceAccountGroupId());
+			accountDTO.setExternalReferenceCode(
+				commerceAccount.getExternalReferenceCode());
+			accountDTO.setName(commerceAccount.getName());
+			accountDTO.setLogoId(commerceAccount.getLogoId());
+			accountDTO.setTaxId(commerceAccount.getTaxId());
+			accountDTO.setType(_getAccountType(commerceAccount.getType()));
+			accountDTO.setUserIds(new long[] {commerceAccount.getUserId()});
+			accountDTO.setEmailAddresses(
+				new String[] {commerceAccount.getEmail()});
+		}
+		catch (Exception e) {
+			_log.error("Cannot instantiate AccountDTO ", e);
+
+			throw new RuntimeException(e);
+		}
+
+		return accountDTO;
+	}
 
 	public static PriceEntryDTO modelToDTO(
 			CommercePriceEntry commercePriceEntry)
@@ -237,6 +268,17 @@ public class DTOUtils {
 		userDTO.setRoleNames(roleNames);
 
 		return userDTO;
+	}
+
+	private static String _getAccountType(int type) {
+		if (type == 1) {
+			return "Personal";
+		}
+		else if (type == 2) {
+			return "Business";
+		}
+
+		return "Guest";
 	}
 
 	private DTOUtils() {
