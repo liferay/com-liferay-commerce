@@ -165,7 +165,7 @@ public class DTOUtils {
 		productDTO.setDescription(cpDefinition.getDescription());
 		productDTO.setExternalReferenceCode(
 			cpDefinition.getExternalReferenceCode());
-		productDTO.setId(cpDefinition.getCProductId());
+		productDTO.setId(cpDefinition.getCPDefinitionId());
 		productDTO.setProductTypeName(cpDefinition.getProductTypeName());
 		productDTO.setShortDescription(cpDefinition.getShortDescription());
 		productDTO.setName(cpDefinition.getName());
