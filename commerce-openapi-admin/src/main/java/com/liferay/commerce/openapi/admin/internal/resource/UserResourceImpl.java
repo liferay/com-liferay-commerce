@@ -22,8 +22,6 @@ import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.core.Context;
@@ -48,7 +46,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class UserResourceImpl implements UserResource {
 
 	@Override
-	public Response deleteUser(String id, Locale locale) throws Exception {
+	public Response deleteUser(String id) throws Exception {
 		_userHelper.deleteUser(_company.getCompanyId(), id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -57,23 +55,24 @@ public class UserResourceImpl implements UserResource {
 	}
 
 	@Override
-	public UserDTO getUser(String id, Locale locale) throws Exception {
+	public UserDTO getUser(String id, ThemeDisplay themeDisplay)
+		throws Exception {
+
 		return _userHelper.getUserDTO(
-			_company.getCompanyId(), id, _themeDisplay);
+			_company.getCompanyId(), id, themeDisplay);
 	}
 
 	@Override
-	public CollectionDTO<UserDTO> getUsers(Locale locale, Pagination pagination)
+	public CollectionDTO<UserDTO> getUsers(
+			Pagination pagination, ThemeDisplay themeDisplay)
 		throws Exception {
 
 		return _userHelper.getUserDTOs(
-			_company.getCompanyId(), pagination, _themeDisplay);
+			_company.getCompanyId(), pagination, themeDisplay);
 	}
 
 	@Override
-	public Response updateUser(String id, UserDTO userDTO, Locale locale)
-		throws Exception {
-
+	public Response updateUser(String id, UserDTO userDTO) throws Exception {
 		_userHelper.updateUser(_company.getCompanyId(), id, userDTO);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -82,16 +81,15 @@ public class UserResourceImpl implements UserResource {
 	}
 
 	@Override
-	public UserDTO upsertUser(UserDTO userDTO) throws Exception {
+	public UserDTO upsertUser(ThemeDisplay themeDisplay, UserDTO userDTO)
+		throws Exception {
+
 		return _userHelper.upsertUser(
-			_company.getCompanyId(), userDTO, _themeDisplay);
+			_company.getCompanyId(), userDTO, themeDisplay);
 	}
 
 	@Context
 	private Company _company;
-
-	@Context
-	private ThemeDisplay _themeDisplay;
 
 	@Reference
 	private UserHelper _userHelper;
