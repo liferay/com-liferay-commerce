@@ -14,11 +14,15 @@
 
 package com.liferay.commerce.openapi.util;
 
+import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Igor Beslic
@@ -75,8 +79,14 @@ public class Method {
 			return _modelPath;
 		}
 
-		_modelPath = _absolutePath.substring(
-			0, _absolutePath.indexOf("/", _absolutePath.indexOf("/", 1)));
+		Matcher matcher = _pathPattern.matcher(_absolutePath);
+
+		if (!matcher.find()) {
+			throw new ImporterException(
+				"Unable to process path " + _absolutePath);
+		}
+
+		_modelPath = matcher.group(1);
 
 		return _modelPath;
 	}
@@ -96,7 +106,8 @@ public class Method {
 
 		String modelPath = getModelPath();
 
-		_path = _absolutePath.substring(modelPath.length());
+		_path = _absolutePath.substring(
+			_absolutePath.indexOf(modelPath) + modelPath.length());
 
 		return _path;
 	}
@@ -292,6 +303,8 @@ public class Method {
 	private final String _name;
 	private final List<Parameter> _parameters = new ArrayList<>();
 	private String _path;
+	private Pattern _pathPattern = Pattern.compile(
+		"^/(\\w+)(/\\{?\\w+\\}?)*/?$");
 	private final List<Content> _requestBody = new ArrayList<>();
 	private final List<Response> _responses = new ArrayList<>();
 	private String _toString;
