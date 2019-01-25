@@ -72,7 +72,7 @@ public class ProductHelper {
 			cpDefinition.getCPDefinitionId());
 	}
 
-	public ProductDTO getProduct(String id, Locale locale, Company company)
+	public ProductDTO getProduct(String id, Company company)
 		throws PortalException {
 
 		return DTOUtils.modelToDTO(getProductById(id, company));
@@ -106,7 +106,7 @@ public class ProductHelper {
 	}
 
 	public CollectionDTO<ProductDTO> getProducts(
-			long groupId, Locale locale, Pagination pagination)
+			long groupId, Pagination pagination)
 		throws PortalException {
 
 		List<CPDefinition> cpDefinitions =
@@ -131,8 +131,7 @@ public class ProductHelper {
 	}
 
 	public ProductDTO updateProductDTO(
-			String id, ProductDTO productDTO, User user, Locale locale,
-			Company company)
+			String id, ProductDTO productDTO, Locale locale, Company company)
 		throws PortalException {
 
 		return DTOUtils.modelToDTO(
