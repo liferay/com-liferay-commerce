@@ -20,6 +20,7 @@ import com.liferay.commerce.openapi.admin.model.UserDTO;
 import com.liferay.commerce.openapi.admin.resource.UserResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import javax.annotation.Generated;
@@ -59,7 +60,7 @@ public class UserResourceImpl implements UserResource {
 		throws Exception {
 
 		return _userHelper.getUserDTO(
-			_company.getCompanyId(), id, themeDisplay);
+			_company.getCompanyId(), id, _permissionChecker, themeDisplay);
 	}
 
 	@Override
@@ -68,12 +69,14 @@ public class UserResourceImpl implements UserResource {
 		throws Exception {
 
 		return _userHelper.getUserDTOs(
-			_company.getCompanyId(), pagination, themeDisplay);
+			_company.getCompanyId(), pagination, _permissionChecker,
+			themeDisplay);
 	}
 
 	@Override
 	public Response updateUser(String id, UserDTO userDTO) throws Exception {
-		_userHelper.updateUser(_company.getCompanyId(), id, userDTO);
+		_userHelper.updateUser(
+			_company.getCompanyId(), id, _permissionChecker, userDTO);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -85,11 +88,14 @@ public class UserResourceImpl implements UserResource {
 		throws Exception {
 
 		return _userHelper.upsertUser(
-			_company.getCompanyId(), userDTO, themeDisplay);
+			_company.getCompanyId(), _permissionChecker, userDTO, themeDisplay);
 	}
 
 	@Context
 	private Company _company;
+
+	@Context
+	private PermissionChecker _permissionChecker;
 
 	@Reference
 	private UserHelper _userHelper;
