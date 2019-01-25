@@ -16,7 +16,6 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.ProductHelper;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
-import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductResource;
@@ -95,14 +94,6 @@ public class ProductResourceImpl implements ProductResource {
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	public InventoryDTO upsertInventory(
-			String id, long groupId, InventoryDTO inventoryDTO, Locale locale)
-		throws Exception {
-
-		return new InventoryDTO();
 	}
 
 	@Override

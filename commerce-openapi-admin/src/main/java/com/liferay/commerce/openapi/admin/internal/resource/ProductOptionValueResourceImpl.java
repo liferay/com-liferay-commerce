@@ -46,8 +46,7 @@ public class ProductOptionValueResourceImpl
 	implements ProductOptionValueResource {
 
 	@Override
-	public Response deleteProductOptionValue(
-			String id, long groupId, Locale locale)
+	public Response deleteProductOptionValue(String id, Locale locale)
 		throws Exception {
 
 		_productOptionValueHelper.deleteProductOptionValue(id, _company);
@@ -58,8 +57,7 @@ public class ProductOptionValueResourceImpl
 	}
 
 	@Override
-	public ProductOptionValueDTO getProductOptionValue(
-			String id, long groupId, Locale locale)
+	public ProductOptionValueDTO getProductOptionValue(String id, Locale locale)
 		throws Exception {
 
 		return _productOptionValueHelper.getProductOptionValue(
