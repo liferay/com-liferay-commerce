@@ -46,7 +46,7 @@ public class BuildGradleGenerator extends BaseSourceGenerator {
 			return;
 		}
 
-		String buildGradleTemplate = getTemplate(gradleSourcePath);
+		String buildGradleTemplate = getTemplate(_TEMPLATE_FILE_GRADLE);
 
 		StringBuilder compileOnlyDependenciesSb = new StringBuilder();
 		StringBuilder runtimeDependenciesSb = new StringBuilder();
