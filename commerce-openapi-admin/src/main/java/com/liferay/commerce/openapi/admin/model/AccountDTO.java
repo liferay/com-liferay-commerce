@@ -25,10 +25,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Account")
 public class AccountDTO {
 
-	public String getEmail() {
-		return _email;
-	}
-
 	public String[] getEmailAddresses() {
 		return _emailAddresses;
 	}
@@ -81,10 +77,6 @@ public class AccountDTO {
 		_business = business;
 	}
 
-	public void setEmail(String email) {
-		_email = email;
-	}
-
 	public void setEmailAddresses(String[] emailAddresses) {
 		_emailAddresses = emailAddresses;
 	}
@@ -130,7 +122,6 @@ public class AccountDTO {
 	}
 
 	private boolean _business;
-	private String _email;
 	private String[] _emailAddresses;
 	private String _externalReferenceCode;
 	private long _id;
