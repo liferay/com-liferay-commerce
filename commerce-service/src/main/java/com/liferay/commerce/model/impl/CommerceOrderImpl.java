@@ -79,6 +79,10 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 	public String getCommerceAccountName() throws PortalException {
 		CommerceAccount commerceAccount = getCommerceAccount();
 
+		if (commerceAccount.isPersonalAccount()) {
+			return commerceAccount.getUserName();
+		}
+
 		return commerceAccount.getName();
 	}
 
