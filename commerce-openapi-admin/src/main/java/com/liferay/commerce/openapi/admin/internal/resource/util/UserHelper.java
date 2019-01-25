@@ -26,10 +26,13 @@ import com.liferay.portal.kernel.model.Contact;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.RoleService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.UserService;
+import com.liferay.portal.kernel.service.permission.UserPermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -60,7 +63,10 @@ public class UserHelper {
 		_userService.deleteUser(user.getUserId());
 	}
 
-	public User getUser(long companyId, String id) throws PortalException {
+	public User getUser(
+			long companyId, String id, PermissionChecker permissionChecker)
+		throws PortalException {
+
 		if (IdUtils.isLocalPK(id)) {
 			return _userService.getUserById(GetterUtil.getLong(id));
 		}
@@ -72,14 +78,18 @@ public class UserHelper {
 			throw new NoSuchUserException("Unable to find user with ID " + id);
 		}
 
+		_userPermission.check(
+			permissionChecker, user.getUserId(), ActionKeys.VIEW);
+
 		return user;
 	}
 
 	public UserDTO getUserDTO(
-			long companyId, String id, ThemeDisplay themeDisplay)
+			long companyId, String id, PermissionChecker permissionChecker,
+			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		User user = getUser(companyId, id);
+		User user = getUser(companyId, id, permissionChecker);
 
 		String dashboardURL = _getDashboardURL(user, themeDisplay);
 		String profileURL = _getProfileURL(user, themeDisplay);
@@ -91,7 +101,8 @@ public class UserHelper {
 	}
 
 	public CollectionDTO<UserDTO> getUserDTOs(
-			long companyId, Pagination pagination, ThemeDisplay themeDisplay)
+			long companyId, Pagination pagination,
+			PermissionChecker permissionChecker, ThemeDisplay themeDisplay)
 		throws PortalException {
 
 		List<User> users = _userService.getCompanyUsers(
@@ -105,16 +116,19 @@ public class UserHelper {
 		for (User user : users) {
 			userDTOs.add(
 				getUserDTO(
-					companyId, String.valueOf(user.getUserId()), themeDisplay));
+					companyId, String.valueOf(user.getUserId()),
+					permissionChecker, themeDisplay));
 		}
 
 		return new CollectionDTO<>(userDTOs, count);
 	}
 
-	public User updateUser(long companyId, String id, UserDTO userDTO)
+	public User updateUser(
+			long companyId, String id, PermissionChecker permissionChecker,
+			UserDTO userDTO)
 		throws PortalException {
 
-		User user = getUser(companyId, id);
+		User user = getUser(companyId, id, permissionChecker);
 
 		String alternateName = _getAlternateName(user, userDTO);
 
@@ -138,7 +152,8 @@ public class UserHelper {
 	}
 
 	public UserDTO upsertUser(
-			long companyId, UserDTO userDTO, ThemeDisplay themeDisplay)
+			long companyId, PermissionChecker permissionChecker,
+			UserDTO userDTO, ThemeDisplay themeDisplay)
 		throws PortalException {
 
 		Date birthDate = userDTO.getBirthDate();
@@ -156,7 +171,8 @@ public class UserHelper {
 			new ServiceContext());
 
 		return getUserDTO(
-			companyId, String.valueOf(user.getUserId()), themeDisplay);
+			companyId, String.valueOf(user.getUserId()), permissionChecker,
+			themeDisplay);
 	}
 
 	private String _getAlternateName(User user, UserDTO userDTO) {
@@ -241,6 +257,9 @@ public class UserHelper {
 
 	@Reference
 	private UserLocalService _userLocalService;
+
+	@Reference
+	private UserPermission _userPermission;
 
 	@Reference
 	private UserService _userService;
