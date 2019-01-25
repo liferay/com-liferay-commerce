@@ -56,6 +56,9 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-initializer-util/src/main/java/com/liferay/commerce/initializer/util/PortletSettingsImporter\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-media-api/src/main/java/com/liferay/commerce/media/CommerceMediaResolver\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-media-api/src/main/java/com/liferay/commerce/media/CommerceMediaResolverUtil\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/resource/util/UserHelper\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/internal/util/DTOUtils\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="commerce-openapi-admin/src/main/java/com/liferay/commerce/openapi/admin/resource/UserResource\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-organization-api/src/main/java/com/liferay/commerce/organization/util/CommerceOrganizationHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/catalog/rule/CPRuleType\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/data/source/CPDataSource\.java" />
