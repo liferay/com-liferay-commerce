@@ -32,9 +32,9 @@ public class Definition {
 	}
 
 	public boolean addMethod(Method method) {
-		String modelName = method.getModelPath();
+		String modelName = method.getModelName();
 
-		Path path = new Path(modelName, method.getModelPath());
+		Path path = new Path(modelName, method.getModelName());
 
 		if (!_paths.contains(path)) {
 			_paths.add(path);
