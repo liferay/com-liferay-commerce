@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.MutableRenderParameters;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -105,15 +104,6 @@ public class InviteUserMVCActionCommand extends BaseMVCActionCommand {
 				throw e;
 			}
 		}
-
-		MutableRenderParameters renderParameters =
-			actionResponse.getRenderParameters();
-
-		renderParameters.setValue(
-			"mvcRenderCommandName", "viewCommerceAccount");
-
-		renderParameters.setValue(
-			"screenNavigationCategoryKey", "account-members");
 	}
 
 	protected void removeUsers(ActionRequest actionRequest)

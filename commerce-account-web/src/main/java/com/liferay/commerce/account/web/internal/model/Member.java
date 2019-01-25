@@ -19,11 +19,19 @@ package com.liferay.commerce.account.web.internal.model;
  */
 public class Member {
 
-	public Member(long memberId, String name, String email, String[] roles) {
+	public Member(
+		long memberId, long accountId, String name, String email,
+		String[] roles) {
+
 		_memberId = memberId;
+		_accountId = accountId;
 		_name = name;
 		_email = email;
 		_roles = roles;
+	}
+
+	public long getAccountId() {
+		return _accountId;
 	}
 
 	public String getEmail() {
@@ -42,6 +50,7 @@ public class Member {
 		return _roles;
 	}
 
+	private final long _accountId;
 	private final String _email;
 	private final long _memberId;
 	private final String _name;

@@ -29,10 +29,6 @@ if (commerceAddress != null) {
 	commerceCountryId = commerceAddress.getCommerceCountryId();
 	commerceRegionId = commerceAddress.getCommerceRegionId();
 }
-
-String redirect = ParamUtil.getString(request, "redirect");
-
-String backURL = ParamUtil.getString(request, "backURL", redirect);
 %>
 
 <portlet:actionURL name="editCommerceAccount" var="editCommerceAccountActionURL" />
@@ -128,7 +124,9 @@ String backURL = ParamUtil.getString(request, "backURL", redirect);
 			</div>
 
 			<div class="col-lg-4">
-				<aui:input inlineLabel="true" name="zip" />
+				<aui:input inlineLabel="true" name="zip">
+					<aui:validator name="required" />
+				</aui:input>
 			</div>
 
 			<div class="col-lg-4">

@@ -72,3 +72,9 @@ page import="com.liferay.users.admin.kernel.util.UsersAdminUtil" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
+
+<%
+String redirect = ParamUtil.getString(request, "redirect");
+
+String backURL = ParamUtil.getString(request, PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL", redirect);
+%>
