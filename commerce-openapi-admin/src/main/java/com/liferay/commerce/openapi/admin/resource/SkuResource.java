@@ -49,7 +49,7 @@ public interface SkuResource {
 	public Response deleteSku(@PathParam("id") String id) throws Exception;
 
 	@GET
-	@Path("/{id}inventory")
+	@Path("/{id}/inventory")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<InventoryDTO> getInventorys(
