@@ -58,7 +58,7 @@ public interface UserResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<UserDTO> getUsers(
-			@Context Pagination pagination, @Context ThemeDisplay themeDisplay)
+			@Context ThemeDisplay themeDisplay, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -74,7 +74,7 @@ public interface UserResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public UserDTO upsertUser(
-			@Context ThemeDisplay themeDisplay, UserDTO userDTO)
+			UserDTO userDTO, @Context ThemeDisplay themeDisplay)
 		throws Exception;
 
 }
