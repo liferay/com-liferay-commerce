@@ -37,7 +37,7 @@ import javax.ws.rs.core.Response;
  * @author Igor Beslic
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@Path("/1.0/priceEntry")
+@Path("/v1.0/priceEntry")
 public interface PriceEntryResource {
 
 	@DELETE

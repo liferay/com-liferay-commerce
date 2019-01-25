@@ -40,7 +40,7 @@ import javax.ws.rs.core.Response;
  * @author Igor Beslic
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@Path("/1.0/sku")
+@Path("/v1.0/sku")
 public interface SkuResource {
 
 	@DELETE
