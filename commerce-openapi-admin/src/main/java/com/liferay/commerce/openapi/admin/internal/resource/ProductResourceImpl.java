@@ -73,10 +73,10 @@ public class ProductResourceImpl implements ProductResource {
 
 	@Override
 	public CollectionDTO<SkuDTO> getSkus(
-			String id, int status, Locale locale, Pagination pagination)
+			String id, Locale locale, Pagination pagination)
 		throws Exception {
 
-		return _skuHelper.getSKUs(id, status, _company, pagination);
+		return _skuHelper.getSKUs(id, _company, pagination);
 	}
 
 	@Override
