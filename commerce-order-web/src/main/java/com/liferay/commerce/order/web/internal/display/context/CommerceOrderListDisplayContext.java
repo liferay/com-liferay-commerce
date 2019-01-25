@@ -73,6 +73,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -256,18 +257,8 @@ public class CommerceOrderListDisplayContext {
 		searchContext.addFacet(facet);
 	}
 
-	private void _addFacetOrderStatus(
-		SearchContext searchContext,
-		CommerceOrderDisplayTerms commerceOrderDisplayTerms) {
-
-		_addFacetOrderStatus(
-			searchContext, _tabs1, commerceOrderDisplayTerms.getOrderStatus(),
-			false);
-	}
-
-	private void _addFacetOrderStatus(
-		SearchContext searchContext, String tabs1, int orderStatus,
-		boolean staticFacet) {
+	private SearchContext _addFacetOrderStatus(
+		SearchContext searchContext, String tabs1, int orderStatus) {
 
 		NegatableMultiValueFacet negatableMultiValueFacet =
 			new NegatableMultiValueFacet(searchContext);
@@ -304,30 +295,14 @@ public class CommerceOrderListDisplayContext {
 
 		negatableMultiValueFacet.setNegated(negated);
 
-		if (staticFacet) {
-			negatableMultiValueFacet.setStatic(true);
+		searchContext.setAttribute(
+			negatableMultiValueFacet.getFieldId(),
+			StringUtil.merge(orderStatuses));
 
-			FacetConfiguration facetConfiguration =
-				negatableMultiValueFacet.getFacetConfiguration();
-
-			JSONObject dataJSONObject = facetConfiguration.getData();
-
-			JSONArray valuesJSONArray = _jsonFactory.createJSONArray();
-
-			for (int curOrderStatus : orderStatuses) {
-				valuesJSONArray.put(curOrderStatus);
-			}
-
-			dataJSONObject.put("values", valuesJSONArray);
-		}
-		else {
-			searchContext.setAttribute(
-				negatableMultiValueFacet.getFieldId(),
-				StringUtil.merge(orderStatuses));
-		}
+		return searchContext;
 	}
 
-	private void _addFacetStatus(SearchContext searchContext) {
+	private SearchContext _addFacetStatus(SearchContext searchContext) {
 		NegatableSimpleFacet negatableSimpleFacet = new NegatableSimpleFacet(
 			searchContext);
 
@@ -344,6 +319,8 @@ public class CommerceOrderListDisplayContext {
 			"value", String.valueOf(WorkflowConstants.STATUS_DRAFT));
 
 		searchContext.addFacet(negatableSimpleFacet);
+
+		return searchContext;
 	}
 
 	private List<KeyValuePair> _buildFacetKeyValuePairs(
@@ -396,9 +373,7 @@ public class CommerceOrderListDisplayContext {
 		return keyValuePairs;
 	}
 
-	private NavigationItem _buildNavigationItem(String name)
-		throws PortalException {
-
+	private NavigationItem _buildNavigationItem(String name) {
 		NavigationItem navigationItem = new NavigationItem();
 
 		if (_tabs1.equals(name)) {
@@ -411,23 +386,8 @@ public class CommerceOrderListDisplayContext {
 
 		navigationItem.setHref(portletURL);
 
-		String label = LanguageUtil.get(
-			_commerceOrderRequestHelper.getRequest(), name);
-
-		long count = _getNavigationItemCount(name);
-
-		if (count > 0) {
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(label);
-			sb.append(" (");
-			sb.append(count);
-			sb.append(CharPool.CLOSE_PARENTHESIS);
-
-			label = sb.toString();
-		}
-
-		navigationItem.setLabel(label);
+		navigationItem.setLabel(
+			LanguageUtil.get(_commerceOrderRequestHelper.getRequest(), name));
 
 		return navigationItem;
 	}
@@ -439,7 +399,8 @@ public class CommerceOrderListDisplayContext {
 			(CommerceOrderDisplayTerms)_searchContainer.getDisplayTerms();
 
 		_addFacetCreateDate(searchContext, commerceOrderDisplayTerms);
-		_addFacetOrderStatus(searchContext, commerceOrderDisplayTerms);
+		_addFacetOrderStatus(
+			searchContext, _tabs1, commerceOrderDisplayTerms.getOrderStatus());
 
 		_addFacetStatus(searchContext);
 
@@ -543,29 +504,7 @@ public class CommerceOrderListDisplayContext {
 		return sb.toString();
 	}
 
-	private long _getNavigationItemCount(String tabs1) throws PortalException {
-		SearchContext searchContext = new SearchContext();
-
-		_addFacetOrderStatus(
-			searchContext, tabs1, CommerceOrderConstants.ORDER_STATUS_ANY,
-			true);
-		_addFacetStatus(searchContext);
-
-		searchContext.setAttribute(
-			"useSearchResultPermissionFilter", Boolean.FALSE);
-
-		searchContext.setCompanyId(_commerceOrderRequestHelper.getCompanyId());
-
-		QueryConfig queryConfig = searchContext.getQueryConfig();
-
-		queryConfig.setHighlightEnabled(false);
-		queryConfig.setScoreEnabled(false);
-
-		return _commerceOrderLocalService.searchCommerceOrdersCount(
-			searchContext);
-	}
-
-	private void _initNavigationItems() throws PortalException {
+	private void _initNavigationItems() {
 		_navigationItems = new ArrayList<>(3);
 
 		_navigationItems.add(_buildNavigationItem("open"));
