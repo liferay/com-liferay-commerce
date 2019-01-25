@@ -107,7 +107,7 @@ CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayC
 
 <liferay-portlet:resourceURL id="cpDefinitionsFacets" var="cpDefinitionsFacetsURL" />
 
-<aui:script require="commerce-product-definitions-web@1.1.2/DefinitionToolbarFilter.es as DefinitionToolbarFilter">
+<aui:script require="commerce-product-definitions-web@1.1.4/DefinitionToolbarFilter.es as DefinitionToolbarFilter">
 	var definitionToolbarFilter = new DefinitionToolbarFilter.default(
 		{
 			categorySelectorURL: '<%= cpDefinitionsDisplayContext.getCategorySelectorURL(renderResponse.getNamespace() + "selectCategory") %>',
