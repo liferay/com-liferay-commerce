@@ -4,7 +4,7 @@
  * This renders the component's whole content.
  */
 {template .render}
-	{@param currentAccountName: string}
+	{@param? currentAccountName: string}
 	{@param spritemap: string}
 	{@param? filterString: string}
 	{@param? isVisible: bool}
@@ -18,7 +18,7 @@
 	]>}
 
 	{let $orderSwitcherClasses kind="text"}
-		account-switcher
+		account-manager-switcher account-manager-switcher--orders
 		{if $isVisible}
 			{sp}is-visible
 		{/if}
@@ -26,21 +26,23 @@
 
 	<div class="{$orderSwitcherClasses}">
 
-		<div class="account-switcher__section account-switcher__section--header">
-			<button class="account-switcher__back" data-onclick="_handleBackButtonClick">
+		<div class="account-manager-switcher__section account-manager-switcher__section--header">
+			<button class="account-manager-switcher__back" data-onclick="_handleBackButtonClick">
 				{call ClayIcon.render}
 					{param spritemap: $spritemap /}
 					{param symbol: 'back' /}
 				{/call}
-				Back
+				{msg desc="Back"}back{/msg}
 			</button>
 
-			<div class="account-switcher__title">
-				{$currentAccountName}
+			<div class="account-manager-switcher__title">
+				{if isNonnull($currentAccountName)}
+					{$currentAccountName}
+				{/if}
 			</div>
 		</div>
 
-		<div class="account-switcher__section">
+		<div class="account-manager-switcher__section">
 			<form class="minium-search" data-onsubmit="_handleSubmitFilter">
 				<div class="minium-search__input">
 					<input
@@ -52,14 +54,14 @@
 			</form>
 		</div>
 
-		<div class="account-switcher__section account-switcher__section--fill account-switcher__section--padded">
+		<div class="account-manager-switcher__section account-manager-switcher__section--fill account-manager-switcher__section--padded">
 			{if isNonnull($orders) and length($orders) > 0}
 				<div class="d-table small-table">
 					<div class="d-table-head-group">
 						<div class="d-table-row">
-							<div class="d-table-cell">Select Order</div>
-							<div class="d-table-cell u-tac">Status</div>
-							<div class="d-table-cell u-tar">Last Modified</div>
+							<div class="d-table-cell">{msg desc="Select Order"}select-order{/msg}</div>
+							<div class="d-table-cell u-tac">{msg desc="Status"}status{/msg}</div>
+							<div class="d-table-cell u-tar">{msg desc="Last Modified"}last-modified{/msg}</div>
 						</div>
 					</div>
 
@@ -77,27 +79,27 @@
 				</div>
 			{/if}
 			{if isNonnull($orders) and length($orders) == 0}
-				<div class="account-switcher__empty-table">
-					No orders found
+				<div class="account-manager-switcher__empty-table p-0">
+					{msg desc="No orders found"}no-orders-found{/msg}
 				</div>
 			{/if}
 		</div>
 
-		<div class="account-switcher__section">
+		<div class="account-manager-switcher__section">
 			{if isNonnull($createNewOrderLink)}
 				<a
 					href="{$createNewOrderLink}"
-					class="account-switcher__button minium-button minium-button--block minium-button--outline"
+					class="account-manager-switcher__button minium-button minium-button--block minium-button--outline"
 				>
-					Create new order
+					{msg desc="Create new order"}create-new-order{/msg}
 				</a>
 			{/if}
 			{if isNonnull($viewAllOrdersLink)}
 				<a
 					href="{$viewAllOrdersLink}"
-					class="account-switcher__button minium-button minium-button--block"
+					class="account-manager-switcher__button minium-button minium-button--block"
 				>
-					View all orders
+					{msg desc="View all orders"}view-all-orders{/msg}
 				</a>
 			{/if}
 		</div>

@@ -25,9 +25,9 @@
 
 		{if $editMode == false}
 			{if $quantity == 0}
-				{msg desc=""}add-to-cart{/msg}
+				{msg desc="Add to cart"}add-to-cart{/msg}
 			{else}
-				{$quantity} added
+				{$quantity} {msg desc="Added"}added{/msg}
 				<div class="add-to-cart-button__ok"></div>
 			{/if}
 		{else}

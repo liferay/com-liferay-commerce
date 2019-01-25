@@ -39,21 +39,15 @@
 
 	{let $dropdownClasses kind="text"}
 		minium-dropdown
-		{if $openingState == 'open'}
-			{sp}is-open
-		{/if}
-		{if $openingState == 'closing'}
-			{sp}is-closing
+		{if isNonnull($openingState)}
+			{sp}is-{$openingState}
 		{/if}
 	{/let}
 
 	{let $curtainClasses kind="text"}
 		minium-dropdown__curtain
-		{if $openingState == 'open'}
-			{sp}is-open
-		{/if}
-		{if $openingState == 'closing'}
-			{sp}is-closing
+		{if isNonnull($openingState)}
+			{sp}is-{$openingState}
 		{/if}
 	{/let}
 
@@ -75,7 +69,7 @@
 		</button>
 
 		<div class="{$curtainClasses}">
-			{if isNonnull($currentAccount)}
+			<div class="minium-dropdown__absolute-content">
 				{let $isOrdersTableVisible: $currentView == 'orders' /}
 				{call OrdersTable.render}
 					{param events: [
@@ -83,7 +77,7 @@
 						'orderSelected': $handleOrderSelected,
 						'getOrders': $handleGetOrders
 					] /}
-					{param currentAccountName: $currentAccount.name /}
+					{param currentAccountName: isNonnull($currentAccount) ? $currentAccount.name : null /}
 					{param orders: $orders /}
 					{param currentOrder: $currentOrder /}
 					{param isVisible: $isOrdersTableVisible /}
@@ -91,19 +85,19 @@
 					{param viewAllOrdersLink: $viewAllOrdersLink /}
 					{param spritemap: $spritemap /}
 				{/call}
-			{/if}
-			{let $isAccountsTableVisible: $currentView == 'accounts' /}
-			{call AccountsTable.render}
-				{param events: [
-					'accountSelected': $handleAccountSelected,
-					'getAccounts': $handleGetAccounts
-				] /}
-				{param accounts: $accounts /}
-				{param isVisible: $isAccountsTableVisible /}
-				{param createNewAccountLink: $createNewAccountLink /}
-				{param viewAllAccountsLink: $viewAllAccountsLink /}
-				{param spritemap: $spritemap /}
-			{/call}
+				{let $isAccountsTableVisible: $currentView == 'accounts' /}
+				{call AccountsTable.render}
+					{param events: [
+						'accountSelected': $handleAccountSelected,
+						'getAccounts': $handleGetAccounts
+					] /}
+					{param accounts: $accounts /}
+					{param isVisible: $isAccountsTableVisible /}
+					{param createNewAccountLink: $createNewAccountLink /}
+					{param viewAllAccountsLink: $viewAllAccountsLink /}
+					{param spritemap: $spritemap /}
+				{/call}
+			</div>
 		</div>
 	</div>
 {/template}
@@ -135,14 +129,14 @@
 				{if isNonnull($currentOrder)}
 					{$currentOrder.id} | {$currentOrder.status}
 				{else}
-					No order selected
+					{msg desc="No order selected"}no-order-selected{/msg}
 				{/if}
 			</div>
 		</div>
 	{else}
 		<div class="account-selector">
 			<div class="account-selector__title">
-				Select Account & Order
+				{msg desc="Select Account & Order"}select account and order{/msg}
 			</div>
 		</div>
 	{/if}

@@ -16,14 +16,14 @@
 	{@param? handleSelectAccount: ?}
 
 	{let $accountSwitcherClasses kind="text"}
-		account-switcher
+		account-manager-switcher account-manager-switcher--accounts
 		{if $isVisible}
 			{sp}is-visible
 		{/if}
 	{/let}
 
 	<div class="{$accountSwitcherClasses}">
-		<div class="account-switcher__section">
+		<div class="account-manager-switcher__section">
 			<form class="minium-search" data-onsubmit="_handleSubmitFilter">
 				<div class="minium-search__input">
 					<input
@@ -35,11 +35,11 @@
 			</form>
 		</div>
 
-		<div class="account-switcher__section account-switcher__section--fill">
+		<div class="account-manager-switcher__section account-manager-switcher__section--fill">
 			<div class="account-list">
 				{if isNonnull($accounts) and length($accounts) > 0}
 					<div class="account-list__title">
-						Select Account...
+						{msg desc="Select Account..."}select-account{/msg}
 					</div>
 					{foreach $account in $accounts}
 						{call AccountsTableItem.render}
@@ -54,20 +54,20 @@
 					{/foreach}
 				{/if}
 				{if isNonnull($accounts) and length($accounts) == 0}
-					<div class="account-switcher__empty-table">
-						No accounts found
+					<div class="account-manager-switcher__empty-table">
+						{msg desc="No accounts found"}no-accounts-found{/msg}
 					</div>
 				{/if}
 			</div>
 		</div>
 
-		<div class="account-switcher__section">
+		<div class="account-manager-switcher__section">
 			{if isNonnull($viewAllAccountsLink)}
 				<a
 					href="{$viewAllAccountsLink}"
-					class="account-switcher__button minium-button minium-button--block minium-button--outline"
+					class="account-manager-switcher__button minium-button minium-button--block minium-button--outline"
 				>
-					View all accounts
+					{msg desc="View all accounts"}view-all-accounts{/msg}
 				</a>
 			{/if}
 			{if isNonnull($createNewAccountLink)}
@@ -75,7 +75,7 @@
 					href="{$createNewAccountLink}"
 					class="account-switcher__button minium-button minium-button--block"
 				>
-					Create new account
+					{msg desc="Create new account"}create-new-account{/msg}
 				</a>
 			{/if}
 		</div>

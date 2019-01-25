@@ -38,7 +38,7 @@
 		<div class="add-new-address-address-modal commerce-modal">
 			<div class="commerce-modal__header">
 				<h3 class="commerce-modal__title">
-					Add new address to this account
+					{msg desc="Add new address to this account"}add-new-address-to-this-account{/msg}
 				</h3>
 
 				<button
@@ -74,7 +74,7 @@
 										class="commerce-modal__label commerce-modal__label--radio"
 										for="add-address-type-shipping"
 									>
-										Shipping
+										{msg desc="Shipping"}shipping{/msg}
 									</label>
 								</div>
 
@@ -95,7 +95,7 @@
 										class="commerce-modal__label commerce-modal__label--radio"
 										for="add-address-type-billing"
 									>
-										Billing
+										{msg desc="Billing"}billing{/msg}
 									</label>
 								</div>
 							</div>
@@ -130,7 +130,7 @@
 								for="add-new-address-country"
 								class="commerce-modal__label"
 							>
-								Country
+								{msg desc="Country"}country{/msg}
 							</label>
 
 							<select
@@ -159,7 +159,7 @@
 								for="add-new-address-country"
 								class="commerce-modal__label"
 							>
-								Region
+								{msg desc="Region"}region{/msg}
 							</label>
 
 							<select
@@ -255,7 +255,7 @@
 									class="{$addButtonClasses}"
 									data-onclick="{$_handleFormSubmit}"
 								>
-									Create
+									{msg desc="Create"}create{/msg}
 								</button>
 							</div>
 						</div>
