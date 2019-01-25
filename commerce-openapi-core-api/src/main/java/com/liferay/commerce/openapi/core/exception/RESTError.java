@@ -54,7 +54,7 @@ public enum RESTError {
 		992, "Unable to find product option.", Response.Status.NOT_FOUND),
 	NO_SUCH_PRODUCT_OPTION_VALUE(
 		990, "Unable to find product option value.", Response.Status.NOT_FOUND),
-	NO_SUCH_USER(984, "Unable to find user", Response.Status.NOT_FOUND),
+	NO_SUCH_USER(982, "Unable to find user", Response.Status.NOT_FOUND),
 	NO_SUCH_WAREHOUSE_ITEM_VALUE(
 		985, "Unable to find warehouse item.", Response.Status.NOT_FOUND),
 	PRINCIPAL_ERROR(
