@@ -78,7 +78,7 @@ public class CommerceAccountFinderImpl
 
 			String keywords = (String)queryDefinition.getAttribute("keywords");
 
-			String[] names = _customSQL.keywords(keywords);
+			String[] names = {"%" + keywords + "%"};
 
 			sql = _customSQL.replaceKeywords(
 				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
@@ -167,7 +167,7 @@ public class CommerceAccountFinderImpl
 				keywords = null;
 			}
 
-			String[] names = _customSQL.keywords(keywords);
+			String[] names = {"%" + keywords + "%"};
 
 			sql = _customSQL.replaceKeywords(
 				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
