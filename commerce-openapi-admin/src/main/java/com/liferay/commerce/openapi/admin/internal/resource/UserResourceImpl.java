@@ -14,19 +14,23 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.UserHelper;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.UserDTO;
 import com.liferay.commerce.openapi.admin.resource.UserResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 
-import java.util.Collections;
 import java.util.Locale;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -45,6 +49,8 @@ public class UserResourceImpl implements UserResource {
 
 	@Override
 	public Response deleteUser(String id, Locale locale) throws Exception {
+		_userHelper.deleteUser(_company.getCompanyId(), id);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -52,28 +58,42 @@ public class UserResourceImpl implements UserResource {
 
 	@Override
 	public UserDTO getUser(String id, Locale locale) throws Exception {
-		return new UserDTO();
+		return _userHelper.getUserDTO(
+			_company.getCompanyId(), id, _themeDisplay);
 	}
 
 	@Override
 	public CollectionDTO<UserDTO> getUsers(Locale locale, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _userHelper.getUserDTOs(
+			_company.getCompanyId(), pagination, _themeDisplay);
 	}
 
 	@Override
 	public Response updateUser(String id, UserDTO userDTO, Locale locale)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_userHelper.updateUser(_company.getCompanyId(), id, userDTO);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
 	public UserDTO upsertUser(UserDTO userDTO) throws Exception {
-		return new UserDTO();
+		return _userHelper.upsertUser(
+			_company.getCompanyId(), userDTO, _themeDisplay);
 	}
+
+	@Context
+	private Company _company;
+
+	@Context
+	private ThemeDisplay _themeDisplay;
+
+	@Reference
+	private UserHelper _userHelper;
 
 }
