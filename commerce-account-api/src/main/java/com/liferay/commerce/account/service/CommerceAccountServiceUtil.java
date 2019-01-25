@@ -69,6 +69,14 @@ public class CommerceAccountServiceUtil {
 		getService().deleteCommerceAccount(commerceAccountId);
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccount fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccount fetchCommerceAccount(
 		long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {

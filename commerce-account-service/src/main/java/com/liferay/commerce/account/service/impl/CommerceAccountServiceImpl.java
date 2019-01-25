@@ -80,6 +80,24 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	}
 
 	@Override
+	public CommerceAccount fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		if (commerceAccount != null) {
+			_commerceAccountModelResourcePermission.check(
+				getPermissionChecker(), commerceAccount.getCommerceAccountId(),
+				ActionKeys.VIEW);
+		}
+
+		return commerceAccount;
+	}
+
+	@Override
 	public CommerceAccount fetchCommerceAccount(long commerceAccountId)
 		throws PortalException {
 

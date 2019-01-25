@@ -63,6 +63,14 @@ public class CommerceAccountServiceWrapper implements CommerceAccountService,
 	}
 
 	@Override
+	public com.liferay.commerce.account.model.CommerceAccount fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.account.model.CommerceAccount fetchCommerceAccount(
 		long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
