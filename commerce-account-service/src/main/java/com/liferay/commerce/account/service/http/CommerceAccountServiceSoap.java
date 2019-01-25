@@ -117,6 +117,21 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountSoap fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) throws RemoteException {
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue = CommerceAccountServiceUtil.fetchByExternalReferenceCode(companyId,
+					externalReferenceCode);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccountSoap fetchCommerceAccount(
 		long commerceAccountId) throws RemoteException {
 		try {

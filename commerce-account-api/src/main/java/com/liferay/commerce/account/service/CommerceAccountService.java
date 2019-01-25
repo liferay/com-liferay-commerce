@@ -70,6 +70,10 @@ public interface CommerceAccountService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccount fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAccount fetchCommerceAccount(long commerceAccountId)
 		throws PortalException;
 

@@ -158,12 +158,46 @@ public class CommerceAccountServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccount fetchByExternalReferenceCode(
+		HttpPrincipal httpPrincipal, long companyId,
+		String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
+					"fetchByExternalReferenceCode",
+					_fetchByExternalReferenceCodeParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, externalReferenceCode);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccount)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccount fetchCommerceAccount(
 		HttpPrincipal httpPrincipal, long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
-					"fetchCommerceAccount", _fetchCommerceAccountParameterTypes3);
+					"fetchCommerceAccount", _fetchCommerceAccountParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId);
@@ -195,7 +229,7 @@ public class CommerceAccountServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
-					"getCommerceAccount", _getCommerceAccountParameterTypes4);
+					"getCommerceAccount", _getCommerceAccountParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId);
@@ -228,7 +262,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getPersonalCommerceAccount",
-					_getPersonalCommerceAccountParameterTypes5);
+					_getPersonalCommerceAccountParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, userId);
@@ -262,7 +296,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getUserCommerceAccounts",
-					_getUserCommerceAccountsParameterTypes6);
+					_getUserCommerceAccountsParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					parentCommerceAccountId, commerceSiteType, keywords, start,
@@ -297,7 +331,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"getUserCommerceAccountsCount",
-					_getUserCommerceAccountsCountParameterTypes7);
+					_getUserCommerceAccountsCountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					parentCommerceAccountId, commerceSiteType, keywords);
@@ -333,7 +367,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"updateCommerceAccount",
-					_updateCommerceAccountParameterTypes8);
+					_updateCommerceAccountParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountId, name, logo, logoBytes, email, taxId,
@@ -370,7 +404,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountServiceUtil.class,
 					"upsertCommerceAccount",
-					_upsertCommerceAccountParameterTypes9);
+					_upsertCommerceAccountParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					parentCommerceAccountId, logo, logoBytes, email, taxId,
@@ -412,27 +446,29 @@ public class CommerceAccountServiceHttp {
 	private static final Class<?>[] _deleteCommerceAccountParameterTypes2 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _fetchCommerceAccountParameterTypes3 = new Class[] {
+	private static final Class<?>[] _fetchByExternalReferenceCodeParameterTypes3 =
+		new Class[] { long.class, String.class };
+	private static final Class<?>[] _fetchCommerceAccountParameterTypes4 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCommerceAccountParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getCommerceAccountParameterTypes5 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getPersonalCommerceAccountParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getPersonalCommerceAccountParameterTypes6 = new Class[] {
 			long.class, long.class
 		};
-	private static final Class<?>[] _getUserCommerceAccountsParameterTypes6 = new Class[] {
+	private static final Class<?>[] _getUserCommerceAccountsParameterTypes7 = new Class[] {
 			long.class, long.class, int.class, String.class, int.class,
 			int.class
 		};
-	private static final Class<?>[] _getUserCommerceAccountsCountParameterTypes7 =
+	private static final Class<?>[] _getUserCommerceAccountsCountParameterTypes8 =
 		new Class[] { long.class, long.class, int.class, String.class };
-	private static final Class<?>[] _updateCommerceAccountParameterTypes8 = new Class[] {
+	private static final Class<?>[] _updateCommerceAccountParameterTypes9 = new Class[] {
 			long.class, String.class, boolean.class, byte[].class, String.class,
 			String.class, boolean.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _upsertCommerceAccountParameterTypes9 = new Class[] {
+	private static final Class<?>[] _upsertCommerceAccountParameterTypes10 = new Class[] {
 			String.class, long.class, boolean.class, byte[].class, String.class,
 			String.class, int.class, boolean.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class

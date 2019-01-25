@@ -236,6 +236,14 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	@Override
+	public CommerceAccount fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return commerceAccountPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+	}
+
+	@Override
 	public CommerceAccount fetchCommerceAccount(long companyId, String name) {
 		return commerceAccountPersistence.fetchByC_N(companyId, name);
 	}
