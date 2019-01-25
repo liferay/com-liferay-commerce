@@ -19,8 +19,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Igor Beslic
@@ -34,7 +32,7 @@ public class Definition {
 	}
 
 	public boolean addMethod(Method method) {
-		String modelName = _getModelFromPath(method.getAbsolutePath());
+		String modelName = method.getModelPath();
 
 		Path path = new Path(modelName, method.getModelPath());
 
@@ -81,7 +79,9 @@ public class Definition {
 	public boolean hasContextExtensions() {
 		for (Path path : _paths) {
 			for (Method method : path.getMethods()) {
-				if (method.hasExtensions()) {
+				if (method.hasExtensions() ||
+					method.hasCollectionReturnType(_componentDefinitions)) {
+
 					return true;
 				}
 			}
@@ -140,19 +140,6 @@ public class Definition {
 
 		return sb.toString();
 	}
-
-	private String _getModelFromPath(String path) {
-		Matcher matcher = _schemaReferencePattern.matcher(path);
-
-		if (matcher.find()) {
-			return matcher.group(1);
-		}
-
-		return path;
-	}
-
-	private static final Pattern _schemaReferencePattern = Pattern.compile(
-		"^/?(\\w+)/.*$");
 
 	private final Set<ComponentDefinition> _componentDefinitions =
 		new HashSet<>();
