@@ -79,12 +79,12 @@ CommerceOrderListDisplayContext commerceOrderListDisplayContext = (CommerceOrder
 
 			<liferay-ui:search-container-column-text
 				name="customer-name"
-				property="customerName"
+				value="<%= HtmlUtil.escape(commerceOrder.getCommerceAccountName()) %>"
 			/>
 
 			<liferay-ui:search-container-column-text
 				name="customer-id"
-				property="customerId"
+				property="commerceAccountId"
 			/>
 
 			<liferay-ui:search-container-column-text
