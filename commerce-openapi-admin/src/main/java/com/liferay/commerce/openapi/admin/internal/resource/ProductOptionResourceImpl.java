@@ -49,7 +49,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
-	public Response deleteProductOption(String id, long groupId, Locale locale)
+	public Response deleteProductOption(String id, Locale locale)
 		throws Exception {
 
 		_productOptionHelper.deleteProductOption(id, _company);
@@ -60,8 +60,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 	}
 
 	@Override
-	public ProductOptionDTO getProductOption(
-			String id, long groupId, Locale locale)
+	public ProductOptionDTO getProductOption(String id, Locale locale)
 		throws Exception {
 
 		return _productOptionHelper.getProductOption(id, locale, _company);
@@ -78,7 +77,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
-			String id, long groupId, Locale locale, Pagination pagination)
+			String id, Locale locale, Pagination pagination)
 		throws Exception {
 
 		return _productOptionValueHelper.getProductOptionValues(
