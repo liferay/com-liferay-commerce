@@ -33,7 +33,7 @@ import javax.ws.rs.core.Context;
  * @author Igor Beslic
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@Path("/1.0/webSite")
+@Path("/v1.0/webSite")
 public interface WebSiteResource {
 
 	@GET
