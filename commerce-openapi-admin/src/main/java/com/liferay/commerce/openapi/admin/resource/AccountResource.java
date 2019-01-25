@@ -19,8 +19,6 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.Consumes;
@@ -31,7 +29,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -45,27 +42,19 @@ public interface AccountResource {
 	@DELETE
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteAccount(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
-		throws Exception;
+	public Response deleteAccount(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public AccountDTO getAccount(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
-		throws Exception;
+	public AccountDTO getAccount(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public CollectionDTO<AccountDTO> getAccounts(
-			@QueryParam("groupId") long groupId, @Context Locale locale,
-			@Context Pagination pagination)
+	public CollectionDTO<AccountDTO> getAccounts(@Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -73,8 +62,7 @@ public interface AccountResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateAccount(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			AccountDTO accountDTO, @Context Locale locale)
+			@PathParam("id") String id, AccountDTO accountDTO)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -82,9 +70,6 @@ public interface AccountResource {
 	@POST
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public AccountDTO upsertAccount(
-			@QueryParam("groupId") long groupId, AccountDTO accountDTO,
-			@Context Locale locale)
-		throws Exception;
+	public AccountDTO upsertAccount(AccountDTO accountDTO) throws Exception;
 
 }
