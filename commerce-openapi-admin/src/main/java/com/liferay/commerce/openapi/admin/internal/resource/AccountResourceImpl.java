@@ -14,24 +14,26 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.AccountHelper;
 import com.liferay.commerce.openapi.admin.model.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.resource.AccountResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.User;
 
-import java.util.Collections;
 import java.util.Locale;
 
-import javax.annotation.Generated;
-
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
- * @author Igor Beslic
+ * @author Zoltán Takács
  */
 @Component(
 	property = {
@@ -40,12 +42,13 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	scope = ServiceScope.PROTOTYPE, service = AccountResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class AccountResourceImpl implements AccountResource {
 
 	@Override
 	public Response deleteAccount(String id, long groupId, Locale locale)
 		throws Exception {
+
+		_accountHelper.deleteAccount(id, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -56,7 +59,7 @@ public class AccountResourceImpl implements AccountResource {
 	public AccountDTO getAccount(String id, long groupId, Locale locale)
 		throws Exception {
 
-		return new AccountDTO();
+		return _accountHelper.getAccount(id, _company);
 	}
 
 	@Override
@@ -64,13 +67,15 @@ public class AccountResourceImpl implements AccountResource {
 			long groupId, Locale locale, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _accountHelper.getAccounts(_user, pagination);
 	}
 
 	@Override
 	public Response updateAccount(
 			String id, long groupId, AccountDTO accountDTO, Locale locale)
 		throws Exception {
+
+		_accountHelper.updateAccount(id, accountDTO, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
@@ -82,7 +87,16 @@ public class AccountResourceImpl implements AccountResource {
 			long groupId, AccountDTO accountDTO, Locale locale)
 		throws Exception {
 
-		return new AccountDTO();
+		return _accountHelper.upsertAccount(accountDTO);
 	}
+
+	@Reference
+	private AccountHelper _accountHelper;
+
+	@Context
+	private Company _company;
+
+	@Context
+	private User _user;
 
 }
