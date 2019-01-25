@@ -49,6 +49,7 @@ public enum RESTError {
 		989, "Unable to find price entry", Response.Status.NOT_FOUND),
 	NO_SUCH_PRICE_LIST(
 		997, "Unable to find price list.", Response.Status.NOT_FOUND),
+	NO_SUCH_PRODUCT(984, "Unable to find product.", Response.Status.NOT_FOUND),
 	NO_SUCH_PRODUCT_OPTION(
 		992, "Unable to find product option.", Response.Status.NOT_FOUND),
 	NO_SUCH_PRODUCT_OPTION_VALUE(
