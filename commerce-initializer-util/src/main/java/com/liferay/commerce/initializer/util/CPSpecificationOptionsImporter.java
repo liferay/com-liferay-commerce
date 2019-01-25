@@ -76,7 +76,7 @@ public class CPSpecificationOptionsImporter {
 
 		long cpOptionCategoryId = 0;
 
-		String categoryKey = jsonObject.getString("categoryKey");
+		String categoryKey = jsonObject.getString("CategoryKey");
 
 		if (Validator.isNotNull(categoryKey)) {
 			CPOptionCategory cpOptionCategory =
