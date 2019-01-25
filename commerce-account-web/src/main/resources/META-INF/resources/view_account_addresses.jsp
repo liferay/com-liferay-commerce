@@ -20,6 +20,10 @@
 CommerceAccountAddressesDisplayContext commerceAccountAddressesDisplayContext = (CommerceAccountAddressesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceAccount commerceAccount = commerceAccountAddressesDisplayContext.getCurrentCommerceAccount();
+
+PortletURL portletURL = currentURLObj;
+
+portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL", backURL);
 %>
 
 <portlet:actionURL name="editCommerceAddress" var="editCommerceAddressActionURL" />
@@ -45,6 +49,7 @@ CommerceAccount commerceAccount = commerceAccountAddressesDisplayContext.getCurr
 
 <aui:form action="<%= editCommerceAddressActionURL %>" method="post" name="addressFm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+	<aui:input name="redirect" type="hidden" value="<%= portletURL %>" />
 	<aui:input name="commerceAddressId" type="hidden" value="" />
 	<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccount.getCommerceAccountId() %>" />
 	<aui:input name="name" type="hidden" />
@@ -96,10 +101,9 @@ CommerceAccount commerceAccount = commerceAccountAddressesDisplayContext.getCurr
 				function(formData) {
 
 					document.querySelector('#<portlet:namespace />name').value = formData.referent;
-					document.querySelector('#<portlet:namespace />name').value = formData.referent;
 					document.querySelector('#<portlet:namespace />street1').value = formData.address;
 					document.querySelector('#<portlet:namespace />city').value = formData.city;
-					document.querySelector('#<portlet:namespace />zip').value = formData.existingUsersIds;
+					document.querySelector('#<portlet:namespace />zip').value = formData.zipCode;
 					document.querySelector('#<portlet:namespace />commerceCountryId').value = formData.country;
 					document.querySelector('#<portlet:namespace />commerceRegionId').value = formData.region;
 					document.querySelector('#<portlet:namespace />phoneNumber').value = formData.telephone;

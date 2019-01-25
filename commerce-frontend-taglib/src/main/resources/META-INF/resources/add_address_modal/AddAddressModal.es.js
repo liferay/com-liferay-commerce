@@ -33,7 +33,7 @@ class AddAddressModal extends Component {
 	}
 
 	_handleTypeChange(evt) {
-		return this.addressType = evt.target.value;
+		return this._addressType = evt.target.value;
 	}
 
 	_handleNextButton(e) {
@@ -98,8 +98,7 @@ class AddAddressModal extends Component {
 
 		const isSecondFormValid =
 			!!(
-				this._formData.referent && this._formData.referent.length &&
-				this._formData.telephone && this._formData.telephone.length
+				this._formData.referent && this._formData.referent.length
 			);
 		this._isSecondFormValid = isSecondFormValid;
 
@@ -108,7 +107,7 @@ class AddAddressModal extends Component {
 
 	_fetchCountries() {
 		return fetch(
-			(this.addressType === 'shipping' ? this.shippingCountriesAPI : this.billingCountriesAPI) +
+			(this._addressType === 'shipping' ? this.shippingCountriesAPI : this.billingCountriesAPI) +
 			themeDisplay.getScopeGroupId(),
 			{
 				method: 'GET'
@@ -155,7 +154,7 @@ class AddAddressModal extends Component {
 			Object.assign(
 				{},
 				this._formData,
-				{addressType: this.addressType})
+				{addressType: this._addressType})
 		);
 	}
 
@@ -183,12 +182,12 @@ AddAddressModal.STATE = {
 			]
 		)
 	).value(1),
-	addressType: Config.oneOf(
+	_addressType: Config.oneOf(
 		[
 			'billing',
 			'shipping'
 		]
-	).internal(),
+	).internal().value('shipping'),
 	_isFirstFormValid: Config.bool().value(false),
 	_isSecondFormValid: Config.bool().value(false),
 	_formData: Config.shapeOf(
