@@ -308,9 +308,8 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		while (iterator.hasNext()) {
 			Method method = iterator.next();
 
-			sb.append("\t@Path(\"");
-			sb.append(method.getPath());
-			sb.append("\")\n");
+			sb.append(_getPathAnnotation(method.getPath()));
+
 			sb.append("\t@");
 			sb.append(method.getHttpMethod());
 			sb.append("\n");
@@ -486,6 +485,14 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		}
 
 		return _parameterGenerator.toMethodParameter(provider.getModelName());
+	}
+
+	private String _getPathAnnotation(String path) {
+		if ((path != null) && (path.length() > 0)) {
+			return "\t@Path(\"" + path + "\")\n";
+		}
+
+		return "";
 	}
 
 	private String _getProducesAnnotation(List<Response> responses) {
