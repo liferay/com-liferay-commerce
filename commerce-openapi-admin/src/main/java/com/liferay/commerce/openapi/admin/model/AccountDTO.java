@@ -61,10 +61,6 @@ public class AccountDTO {
 		return _type;
 	}
 
-	public long getUserId() {
-		return _userId;
-	}
-
 	public long[] getUserIds() {
 		return _userIds;
 	}
@@ -129,10 +125,6 @@ public class AccountDTO {
 		_type = type;
 	}
 
-	public void setUserId(long userId) {
-		_userId = userId;
-	}
-
 	public void setUserIds(long[] userIds) {
 		_userIds = userIds;
 	}
@@ -149,7 +141,6 @@ public class AccountDTO {
 	private boolean _root;
 	private String _taxId;
 	private String _type;
-	private long _userId;
 	private long[] _userIds;
 
 }
