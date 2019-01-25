@@ -74,7 +74,7 @@ public class Method {
 		return _httpMethod;
 	}
 
-	public String getModelPath() {
+	public String getModelName() {
 		if (_modelPath != null) {
 			return _modelPath;
 		}
@@ -104,7 +104,7 @@ public class Method {
 			return _path;
 		}
 
-		String modelPath = getModelPath();
+		String modelPath = getModelName();
 
 		_path = _absolutePath.substring(
 			_absolutePath.indexOf(modelPath) + modelPath.length());
