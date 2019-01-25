@@ -44,8 +44,6 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 
 		String classSource = dtoGenerator.getClassSource();
 
-		System.out.println(classSource);
-
 		Assert.assertTrue(
 			"package statement is present",
 			containsOnlyOne(classSource, "package com.liferay.test;"));
