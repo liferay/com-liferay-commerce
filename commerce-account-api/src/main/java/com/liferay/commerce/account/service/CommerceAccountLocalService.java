@@ -198,6 +198,10 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccount fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAccount fetchCommerceAccount(long commerceAccountId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

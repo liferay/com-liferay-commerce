@@ -213,6 +213,13 @@ public class CommerceAccountLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccount fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccount fetchCommerceAccount(
 		long commerceAccountId) {
 		return getService().fetchCommerceAccount(commerceAccountId);
