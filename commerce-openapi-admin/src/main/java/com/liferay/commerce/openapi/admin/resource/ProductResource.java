@@ -47,26 +47,21 @@ public interface ProductResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProduct(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
+			@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public ProductDTO getProduct(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
-			@Context Locale locale)
-		throws Exception;
+	public ProductDTO getProduct(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductDTO> getProducts(
-			@QueryParam("groupId") long groupId, @Context Locale locale,
-			@Context Pagination pagination)
+			@QueryParam("groupId") long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
