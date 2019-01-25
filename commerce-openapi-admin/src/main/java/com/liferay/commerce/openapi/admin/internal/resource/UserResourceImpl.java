@@ -65,7 +65,7 @@ public class UserResourceImpl implements UserResource {
 
 	@Override
 	public CollectionDTO<UserDTO> getUsers(
-			Pagination pagination, ThemeDisplay themeDisplay)
+			ThemeDisplay themeDisplay, Pagination pagination)
 		throws Exception {
 
 		return _userHelper.getUserDTOs(
@@ -84,7 +84,7 @@ public class UserResourceImpl implements UserResource {
 	}
 
 	@Override
-	public UserDTO upsertUser(ThemeDisplay themeDisplay, UserDTO userDTO)
+	public UserDTO upsertUser(UserDTO userDTO, ThemeDisplay themeDisplay)
 		throws Exception {
 
 		return _userHelper.upsertUser(
