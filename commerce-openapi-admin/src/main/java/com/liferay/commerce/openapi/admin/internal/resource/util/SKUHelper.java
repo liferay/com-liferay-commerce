@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -91,8 +92,7 @@ public class SKUHelper {
 	}
 
 	public CollectionDTO<SkuDTO> getSKUs(
-			String productId, int status, Company company,
-			Pagination pagination)
+			String productId, Company company, Pagination pagination)
 		throws PortalException {
 
 		CPDefinition cpDefinition = _productHelper.getProductById(
@@ -100,12 +100,14 @@ public class SKUHelper {
 
 		List<CPInstance> cpInstances =
 			_cpInstanceService.getCPDefinitionInstances(
-				cpDefinition.getCPDefinitionId(), status,
+				cpDefinition.getCPDefinitionId(),
+				WorkflowConstants.STATUS_APPROVED,
 				pagination.getStartPosition(), pagination.getEndPosition(),
 				null);
 
 		int totalItems = _cpInstanceService.getCPDefinitionInstancesCount(
-			cpDefinition.getCPDefinitionId(), status);
+			cpDefinition.getCPDefinitionId(),
+			WorkflowConstants.STATUS_APPROVED);
 
 		Stream<CPInstance> stream = cpInstances.stream();
 
