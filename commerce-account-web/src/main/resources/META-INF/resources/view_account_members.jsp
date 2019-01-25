@@ -18,6 +18,10 @@
 
 <%
 CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+PortletURL portletURL = currentURLObj;
+
+portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL", backURL);
 %>
 
 <commerce-ui:table
@@ -41,6 +45,7 @@ CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDi
 
 <aui:form action="<%= inviteUserActionURL %>" method="post" name="inviteUserFm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ASSIGN %>" />
+	<aui:input name="redirect" type="hidden" value="<%= portletURL %>" />
 	<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccountDisplayContext.getCurrentCommerceAccountId() %>" />
 	<aui:input name="userIds" type="hidden" />
 	<aui:input name="emailAddresses" type="hidden" />

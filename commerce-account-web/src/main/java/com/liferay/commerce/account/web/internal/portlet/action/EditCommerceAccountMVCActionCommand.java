@@ -78,11 +78,11 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				Callable<CommerceAccount> cpRuleCallable =
+				Callable<CommerceAccount> commerceAccountCallable =
 					new CommerceAccountCallable(actionRequest);
 
 				CommerceAccount commerceAccount = TransactionInvokerUtil.invoke(
-					_transactionConfig, cpRuleCallable);
+					_transactionConfig, commerceAccountCallable);
 
 				String redirect = getSaveAndContinueRedirect(
 					actionRequest, commerceAccount);
@@ -173,7 +173,7 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 		if (commerceAccountId > 0) {
 			commerceAccount = _commerceAccountService.updateCommerceAccount(
 				commerceAccountId, name, !deleteLogo, logoBytes, email, taxId,
-				active, serviceContext);
+				true, serviceContext);
 
 			// Update commerce address
 

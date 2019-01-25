@@ -32,12 +32,16 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.model.UserGroupRole;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletQName;
+import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
+import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -49,6 +53,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -111,7 +116,7 @@ public class CommerceAccountUserClayTable
 				ActionKeys.UPDATE)) {
 
 			String deleteURL = _getAccountUserDeleteURL(
-				member.getMemberId(), httpServletRequest);
+				member.getMemberId(), member.getAccountId(), themeDisplay);
 
 			ClayTableAction clayTableAction = new ClayTableAction(
 				deleteURL, StringPool.BLANK,
@@ -138,9 +143,9 @@ public class CommerceAccountUserClayTable
 		ClayTableSchemaBuilder clayTableSchemaBuilder =
 			_clayTableSchemaBuilderFactory.clayTableSchemaBuilder();
 
-		clayTableSchemaBuilder.addField("name");
-		clayTableSchemaBuilder.addField("roles");
-		clayTableSchemaBuilder.addField("email");
+		clayTableSchemaBuilder.addField("name", "name");
+		clayTableSchemaBuilder.addField("roles", "roles");
+		clayTableSchemaBuilder.addField("email", "email");
 
 		return clayTableSchemaBuilder.build();
 	}
@@ -172,8 +177,9 @@ public class CommerceAccountUserClayTable
 
 			members.add(
 				new Member(
-					user.getUserId(), user.getFullName(),
-					user.getEmailAddress(), getUserRoles(user)));
+					user.getUserId(), accountFilter.getAccountId(),
+					user.getFullName(), user.getEmailAddress(),
+					getUserRoles(user, accountFilter.getAccountId())));
 		}
 
 		return members;
@@ -184,8 +190,18 @@ public class CommerceAccountUserClayTable
 		return true;
 	}
 
-	protected String[] getUserRoles(User user) {
-		List<Role> roles = user.getRoles();
+	protected String[] getUserRoles(User user, long groupId)
+		throws PortalException {
+
+		List<Role> roles = new ArrayList<>();
+
+		List<UserGroupRole> userGroupRoles =
+			_userGroupRoleLocalService.getUserGroupRoles(
+				user.getUserId(), groupId);
+
+		for (UserGroupRole userGroupRole : userGroupRoles) {
+			roles.add(userGroupRole.getRole());
+		}
 
 		Stream<Role> stream = roles.stream();
 
@@ -197,26 +213,25 @@ public class CommerceAccountUserClayTable
 	}
 
 	private String _getAccountUserDeleteURL(
-			long userId, HttpServletRequest httpServletRequest)
-		throws PortalException {
+		long userId, long commerceAccountId, ThemeDisplay themeDisplay) {
 
-		PortletURL deleteURL = PortletProviderUtil.getPortletURL(
-			httpServletRequest, CommerceAccount.class.getName(),
-			PortletProvider.Action.EDIT);
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		PortletURL deleteURL = PortletURLFactoryUtil.create(
+			themeDisplay.getRequest(), portletDisplay.getId(),
+			themeDisplay.getPlid(), PortletRequest.ACTION_PHASE);
 
 		deleteURL.setParameter(ActionRequest.ACTION_NAME, "inviteUser");
 		deleteURL.setParameter(Constants.CMD, Constants.REMOVE);
+
+		String redirect = ParamUtil.getString(
+			themeDisplay.getRequest(), "redirect",
+			themeDisplay.getURLCurrent());
+
+		deleteURL.setParameter("redirect", redirect);
+
 		deleteURL.setParameter(
-			"redirect", _portal.getCurrentURL(httpServletRequest));
-
-		long commerceAccountId = ParamUtil.getLong(
-			httpServletRequest, "commerceAccountId");
-
-		if (commerceAccountId > 0) {
-			deleteURL.setParameter(
-				"commerceAccountId", String.valueOf(commerceAccountId));
-		}
-
+			"commerceAccountId", String.valueOf(commerceAccountId));
 		deleteURL.setParameter("userId", String.valueOf(userId));
 
 		return deleteURL.toString();
@@ -262,5 +277,8 @@ public class CommerceAccountUserClayTable
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private UserGroupRoleLocalService _userGroupRoleLocalService;
 
 }
