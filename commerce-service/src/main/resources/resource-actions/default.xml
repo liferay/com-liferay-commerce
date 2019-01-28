@@ -21,6 +21,7 @@
 				<action-key>MANAGE_COMMERCE_ORDER_WORKFLOWS</action-key>
 				<action-key>MANAGE_COMMERCE_PAYMENT_METHODS</action-key>
 				<action-key>MANAGE_COMMERCE_PRICE_LISTS</action-key>
+				<action-key>MANAGE_COMMERCE_PRODUCT_ATTACHMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_DEFINITION_INVENTORY</action-key>
 				<action-key>MANAGE_COMMERCE_SHIPMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_SHIPPING_METHODS</action-key>
@@ -38,6 +39,7 @@
 				<action-key>MANAGE_COMMERCE_ORDER_WORKFLOWS</action-key>
 				<action-key>MANAGE_COMMERCE_PAYMENT_METHODS</action-key>
 				<action-key>MANAGE_COMMERCE_PRICE_LISTS</action-key>
+				<action-key>MANAGE_COMMERCE_PRODUCT_ATTACHMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_DEFINITION_INVENTORY</action-key>
 				<action-key>MANAGE_COMMERCE_SHIPMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_SHIPPING_METHODS</action-key>
