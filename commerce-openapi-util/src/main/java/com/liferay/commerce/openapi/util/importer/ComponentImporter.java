@@ -58,7 +58,7 @@ public class ComponentImporter {
 
 		String itemsReference = null;
 
-		if (schemaEntryJSONNode.has("items")) {
+		if ("array".equals(type)) {
 			JsonNode itemsJSONNode = schemaEntryJSONNode.get("items");
 
 			if (itemsJSONNode.has("$ref")) {
