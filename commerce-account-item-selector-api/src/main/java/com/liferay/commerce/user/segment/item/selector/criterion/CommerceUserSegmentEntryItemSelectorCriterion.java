@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.user.segment.item.selector.criterion;
+package com.liferay.commerce.account.item.selector.criterion;
 
 import com.liferay.item.selector.BaseItemSelectorCriterion;
 
 /**
  * @author Alessio Antonio Rendina
  */
-public class CommerceUserSegmentEntryItemSelectorCriterion
+public class CommerceAccountItemSelectorCriterion
 	extends BaseItemSelectorCriterion {
 }

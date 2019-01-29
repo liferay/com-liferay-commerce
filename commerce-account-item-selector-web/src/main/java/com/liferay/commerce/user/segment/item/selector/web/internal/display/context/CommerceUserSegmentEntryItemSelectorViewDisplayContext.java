@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.user.segment.item.selector.web.internal.display.context;
+package com.liferay.commerce.account.item.selector.web.internal.display.context;
 
-import com.liferay.commerce.user.segment.item.selector.web.internal.display.context.util.CommerceUserSegmentItemSelectorRequestHelper;
-import com.liferay.commerce.user.segment.item.selector.web.internal.search.CommerceUserSegmentEntryItemSelectorChecker;
-import com.liferay.commerce.user.segment.item.selector.web.internal.util.CommerceUserSegmentItemSelectorViewUtil;
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
+import com.liferay.commerce.account.item.selector.web.internal.display.context.util.CommerceAccountItemSelectorRequestHelper;
+import com.liferay.commerce.account.item.selector.web.internal.search.CommerceAccountItemSelectorChecker;
+import com.liferay.commerce.account.item.selector.web.internal.util.CommerceAccountItemSelectorViewUtil;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -37,19 +37,19 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Alessio Antonio Rendina
  */
-public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
+public class CommerceAccountItemSelectorViewDisplayContext {
 
-	public CommerceUserSegmentEntryItemSelectorViewDisplayContext(
-		CommerceUserSegmentEntryService commerceUserSegmentEntryService,
+	public CommerceAccountItemSelectorViewDisplayContext(
+		CommerceAccountService commerceAccountService,
 		HttpServletRequest httpServletRequest, PortletURL portletURL,
 		String itemSelectedEventName) {
 
-		_commerceUserSegmentEntryService = commerceUserSegmentEntryService;
+		_commerceAccountService = commerceAccountService;
 		_portletURL = portletURL;
 		_itemSelectedEventName = itemSelectedEventName;
 
-		_commerceUserSegmentItemSelectorRequestHelper =
-			new CommerceUserSegmentItemSelectorRequestHelper(
+		_commerceAccountItemSelectorRequestHelper =
+			new CommerceAccountItemSelectorRequestHelper(
 				httpServletRequest);
 	}
 
@@ -59,13 +59,13 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 
 	public String getOrderByCol() {
 		return ParamUtil.getString(
-			_commerceUserSegmentItemSelectorRequestHelper.getRenderRequest(),
+			_commerceAccountItemSelectorRequestHelper.getRenderRequest(),
 			SearchContainer.DEFAULT_ORDER_BY_COL_PARAM, "priority");
 	}
 
 	public String getOrderByType() {
 		return ParamUtil.getString(
-			_commerceUserSegmentItemSelectorRequestHelper.getRenderRequest(),
+			_commerceAccountItemSelectorRequestHelper.getRenderRequest(),
 			SearchContainer.DEFAULT_ORDER_BY_TYPE_PARAM, "asc");
 	}
 
@@ -73,7 +73,7 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 		return _portletURL;
 	}
 
-	public SearchContainer<CommerceUserSegmentEntry> getSearchContainer()
+	public SearchContainer<CommerceAccount> getSearchContainer()
 		throws PortalException {
 
 		if (_searchContainer != null) {
@@ -81,20 +81,20 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 		}
 
 		_searchContainer = new SearchContainer<>(
-			_commerceUserSegmentItemSelectorRequestHelper.
+			_commerceAccountItemSelectorRequestHelper.
 				getLiferayPortletRequest(),
 			getPortletURL(), null, null);
 
 		_searchContainer.setEmptyResultsMessage("there-are-no-entries");
 
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator =
-			CommerceUserSegmentItemSelectorViewUtil.
-				getCommerceUserSegmentEntryOrderByComparator(
+		OrderByComparator<CommerceAccount> orderByComparator =
+			CommerceAccountItemSelectorViewUtil.
+				getCommerceAccountOrderByComparator(
 					getOrderByCol(), getOrderByType());
 
-		RowChecker rowChecker = new CommerceUserSegmentEntryItemSelectorChecker(
-			_commerceUserSegmentItemSelectorRequestHelper.getRenderResponse(),
-			getCheckedCommerceUserSegmentEntryIds());
+		RowChecker rowChecker = new CommerceAccountItemSelectorChecker(
+			_commerceAccountItemSelectorRequestHelper.getRenderResponse(),
+			getCheckedCommerceAccountIds());
 
 		_searchContainer.setOrderByCol(getOrderByCol());
 		_searchContainer.setOrderByComparator(orderByComparator);
@@ -103,16 +103,16 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 
 		if (isSearch()) {
 			Sort sort =
-				CommerceUserSegmentItemSelectorViewUtil.
-					getCommerceUserSegmentEntrySort(
+				CommerceAccountItemSelectorViewUtil.
+					getCommerceAccountSort(
 						getOrderByCol(), getOrderByType());
 
-			BaseModelSearchResult<CommerceUserSegmentEntry> results =
-				_commerceUserSegmentEntryService.
-					searchCommerceUserSegmentEntries(
-						_commerceUserSegmentItemSelectorRequestHelper.
+			BaseModelSearchResult<CommerceAccount> results =
+				_commerceAccountService.
+					searchCommerceAccounts(
+						_commerceAccountItemSelectorRequestHelper.
 							getCompanyId(),
-						_commerceUserSegmentItemSelectorRequestHelper.
+						_commerceAccountItemSelectorRequestHelper.
 							getScopeGroupId(),
 						getKeywords(), _searchContainer.getStart(),
 						_searchContainer.getEnd(), sort);
@@ -122,16 +122,16 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 		}
 		else {
 			int total =
-				_commerceUserSegmentEntryService.
-					getCommerceUserSegmentEntriesCount(
-						_commerceUserSegmentItemSelectorRequestHelper.
+				_commerceAccountService.
+					getCommerceAccountsCount(
+						_commerceAccountItemSelectorRequestHelper.
 							getScopeGroupId());
 
 			_searchContainer.setTotal(total);
 
-			List<CommerceUserSegmentEntry> results =
-				_commerceUserSegmentEntryService.getCommerceUserSegmentEntries(
-					_commerceUserSegmentItemSelectorRequestHelper.
+			List<CommerceAccount> results =
+				_commerceAccountService.getCommerceAccounts(
+					_commerceAccountItemSelectorRequestHelper.
 						getScopeGroupId(),
 					_searchContainer.getStart(), _searchContainer.getEnd(),
 					orderByComparator);
@@ -142,10 +142,10 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 		return _searchContainer;
 	}
 
-	protected long[] getCheckedCommerceUserSegmentEntryIds() {
+	protected long[] getCheckedCommerceAccountIds() {
 		return ParamUtil.getLongValues(
-			_commerceUserSegmentItemSelectorRequestHelper.getRenderRequest(),
-			"checkedCommerceUserSegmentEntryIds");
+			_commerceAccountItemSelectorRequestHelper.getRenderRequest(),
+			"checkedCommerceAccountIds");
 	}
 
 	protected String getKeywords() {
@@ -154,7 +154,7 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 		}
 
 		_keywords = ParamUtil.getString(
-			_commerceUserSegmentItemSelectorRequestHelper.getRenderRequest(),
+			_commerceAccountItemSelectorRequestHelper.getRenderRequest(),
 			"keywords");
 
 		return _keywords;
@@ -168,13 +168,13 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 		return false;
 	}
 
-	private final CommerceUserSegmentEntryService
-		_commerceUserSegmentEntryService;
-	private final CommerceUserSegmentItemSelectorRequestHelper
-		_commerceUserSegmentItemSelectorRequestHelper;
+	private final CommerceAccountService
+		_commerceAccountService;
+	private final CommerceAccountItemSelectorRequestHelper
+		_commerceAccountItemSelectorRequestHelper;
 	private final String _itemSelectedEventName;
 	private String _keywords;
 	private final PortletURL _portletURL;
-	private SearchContainer<CommerceUserSegmentEntry> _searchContainer;
+	private SearchContainer<CommerceAccount> _searchContainer;
 
 }

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.user.segment.item.selector.web.internal.display.context.util;
+package com.liferay.commerce.account.item.selector.web.internal.display.context.util;
 
 import com.liferay.portal.kernel.display.context.util.BaseRequestHelper;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -25,10 +25,10 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Alessio Antonio Rendina
  */
-public class CommerceUserSegmentItemSelectorRequestHelper
+public class CommerceAccountItemSelectorRequestHelper
 	extends BaseRequestHelper {
 
-	public CommerceUserSegmentItemSelectorRequestHelper(
+	public CommerceAccountItemSelectorRequestHelper(
 		HttpServletRequest httpServletRequest) {
 
 		super(httpServletRequest);

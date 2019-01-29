@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.commerce.user.segment.item.selector.web.internal.util;
+package com.liferay.commerce.account.item.selector.web.internal.util;
 
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
-import com.liferay.commerce.user.segment.util.comparator.CommerceUserSegmentEntryPriorityComparator;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.comparator.CommerceAccountPriorityComparator;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
@@ -26,10 +26,10 @@ import java.util.Objects;
 /**
  * @author Alessio Antonio Rendina
  */
-public class CommerceUserSegmentItemSelectorViewUtil {
+public class CommerceAccountItemSelectorViewUtil {
 
-	public static OrderByComparator<CommerceUserSegmentEntry>
-		getCommerceUserSegmentEntryOrderByComparator(
+	public static OrderByComparator<CommerceAccount>
+		getCommerceAccountOrderByComparator(
 			String orderByCol, String orderByType) {
 
 		boolean orderByAsc = false;
@@ -38,17 +38,17 @@ public class CommerceUserSegmentItemSelectorViewUtil {
 			orderByAsc = true;
 		}
 
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator = null;
+		OrderByComparator<CommerceAccount> orderByComparator = null;
 
 		if (orderByCol.equals("priority")) {
-			orderByComparator = new CommerceUserSegmentEntryPriorityComparator(
+			orderByComparator = new CommerceAccountPriorityComparator(
 				orderByAsc);
 		}
 
 		return orderByComparator;
 	}
 
-	public static Sort getCommerceUserSegmentEntrySort(
+	public static Sort getCommerceAccountSort(
 		String orderByCol, String orderByType) {
 
 		boolean reverse = true;

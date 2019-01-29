@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.user.segment.item.selector.web.internal;
+package com.liferay.commerce.account.item.selector.web.internal;
 
-import com.liferay.commerce.user.segment.item.selector.criterion.CommerceUserSegmentEntryItemSelectorCriterion;
-import com.liferay.commerce.user.segment.item.selector.web.internal.display.context.CommerceUserSegmentEntryItemSelectorViewDisplayContext;
-import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
+import com.liferay.commerce.account.item.selector.criterion.CommerceAccountItemSelectorCriterion;
+import com.liferay.commerce.account.item.selector.web.internal.display.context.CommerceAccountItemSelectorViewDisplayContext;
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorView;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -49,14 +49,14 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = ItemSelectorView.class)
-public class CommerceUserSegmentEntryItemSelectorView
-	implements ItemSelectorView<CommerceUserSegmentEntryItemSelectorCriterion> {
+public class CommerceAccountItemSelectorView
+	implements ItemSelectorView<CommerceAccountItemSelectorCriterion> {
 
 	@Override
-	public Class<CommerceUserSegmentEntryItemSelectorCriterion>
+	public Class<CommerceAccountItemSelectorCriterion>
 		getItemSelectorCriterionClass() {
 
-		return CommerceUserSegmentEntryItemSelectorCriterion.class;
+		return CommerceAccountItemSelectorCriterion.class;
 	}
 
 	public ServletContext getServletContext() {
@@ -73,7 +73,7 @@ public class CommerceUserSegmentEntryItemSelectorView
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, getClass());
 
-		return LanguageUtil.get(resourceBundle, "user-segment-entries");
+		return LanguageUtil.get(resourceBundle, "accounts");
 	}
 
 	@Override
@@ -89,29 +89,29 @@ public class CommerceUserSegmentEntryItemSelectorView
 	@Override
 	public void renderHTML(
 			ServletRequest servletRequest, ServletResponse servletResponse,
-			CommerceUserSegmentEntryItemSelectorCriterion
-				commerceUserSegmentEntryItemSelectorCriterion,
+			CommerceAccountItemSelectorCriterion
+				commerceAccountItemSelectorCriterion,
 			PortletURL portletURL, String itemSelectedEventName, boolean search)
 		throws IOException, ServletException {
 
 		HttpServletRequest httpServletRequest =
 			(HttpServletRequest)servletRequest;
 
-		CommerceUserSegmentEntryItemSelectorViewDisplayContext
-			commerceUserSegmentEntryItemSelectorViewDisplayContext =
-				new CommerceUserSegmentEntryItemSelectorViewDisplayContext(
-					_commerceUserSegmentEntryService, httpServletRequest,
+		CommerceAccountItemSelectorViewDisplayContext
+			commerceAccountItemSelectorViewDisplayContext =
+				new CommerceAccountItemSelectorViewDisplayContext(
+					_commerceAccountService, httpServletRequest,
 					portletURL, itemSelectedEventName);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
-			commerceUserSegmentEntryItemSelectorViewDisplayContext);
+			commerceAccountItemSelectorViewDisplayContext);
 
 		ServletContext servletContext = getServletContext();
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(
-				"/user_segment_entry_item_selector.jsp");
+				"/account_item_selector.jsp");
 
 		requestDispatcher.include(servletRequest, servletResponse);
 	}
@@ -124,10 +124,10 @@ public class CommerceUserSegmentEntryItemSelectorView
 				}));
 
 	@Reference
-	private CommerceUserSegmentEntryService _commerceUserSegmentEntryService;
+	private CommerceAccountService _commerceAccountService;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.commerce.user.segment.item.selector.web)"
+		target = "(osgi.web.symbolicname=com.liferay.commerce.account.item.selector.web)"
 	)
 	private ServletContext _servletContext;
 

@@ -17,16 +17,16 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceUserSegmentEntryItemSelectorViewDisplayContext commerceUserSegmentEntryItemSelectorViewDisplayContext = (CommerceUserSegmentEntryItemSelectorViewDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceAccountItemSelectorViewDisplayContext commerceAccountItemSelectorViewDisplayContext = (CommerceAccountItemSelectorViewDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-SearchContainer commerceUserSegmentEntrySearchContainer = commerceUserSegmentEntryItemSelectorViewDisplayContext.getSearchContainer();
-String itemSelectedEventName = commerceUserSegmentEntryItemSelectorViewDisplayContext.getItemSelectedEventName();
-PortletURL portletURL = commerceUserSegmentEntryItemSelectorViewDisplayContext.getPortletURL();
+SearchContainer commerceAccountSearchContainer = commerceAccountItemSelectorViewDisplayContext.getSearchContainer();
+String itemSelectedEventName = commerceAccountItemSelectorViewDisplayContext.getItemSelectedEventName();
+PortletURL portletURL = commerceAccountItemSelectorViewDisplayContext.getPortletURL();
 %>
 
 <liferay-frontend:management-bar
 	includeCheckBox="<%= true %>"
-	searchContainerId="commerceUserSegmentEntries"
+	searchContainerId="commerceAccounts"
 >
 	<liferay-frontend:management-bar-buttons>
 		<liferay-frontend:management-bar-display-buttons
@@ -51,31 +51,31 @@ PortletURL portletURL = commerceUserSegmentEntryItemSelectorViewDisplayContext.g
 		/>
 
 		<liferay-frontend:management-bar-sort
-			orderByCol="<%= commerceUserSegmentEntryItemSelectorViewDisplayContext.getOrderByCol() %>"
-			orderByType="<%= commerceUserSegmentEntryItemSelectorViewDisplayContext.getOrderByType() %>"
+			orderByCol="<%= commerceAccountItemSelectorViewDisplayContext.getOrderByCol() %>"
+			orderByType="<%= commerceAccountItemSelectorViewDisplayContext.getOrderByType() %>"
 			orderColumns='<%= new String[] {"priority"} %>'
 			portletURL="<%= portletURL %>"
 		/>
 	</liferay-frontend:management-bar-filters>
 </liferay-frontend:management-bar>
 
-<div class="container-fluid-1280" id="<portlet:namespace />commerceUserSegmentEntrySelectorWrapper">
+<div class="container-fluid-1280" id="<portlet:namespace />commerceAccountSelectorWrapper">
 	<liferay-ui:search-container
-		id="commerceUserSegmentEntries"
-		searchContainer="<%= commerceUserSegmentEntrySearchContainer %>"
+		id="commerceAccounts"
+		searchContainer="<%= commerceAccountSearchContainer %>"
 	>
 		<liferay-ui:search-container-row
-			className="com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry"
-			cssClass="commerce-user-segment-entry-row"
-			keyProperty="commerceUserSegmentEntryId"
-			modelVar="commerceUserSegmentEntry"
+			className="com.liferay.commerce.account.model.CommerceAccount"
+			cssClass="commerce-account-row"
+			keyProperty="commerceAccountId"
+			modelVar="commerceAccount"
 		>
 
 			<%
 			Map<String, Object> data = new HashMap<>();
 
-			data.put("commerce-user-segment-entry-id", commerceUserSegmentEntry.getCommerceUserSegmentEntryId());
-			data.put("name", commerceUserSegmentEntry.getName(locale));
+			data.put("commerce-account-id", commerceAccount.getCommerceAccountId());
+			data.put("name", commerceAccount.getName(locale));
 
 			row.setData(data);
 			%>
@@ -103,9 +103,9 @@ PortletURL portletURL = commerceUserSegmentEntryItemSelectorViewDisplayContext.g
 </div>
 
 <aui:script use="liferay-search-container">
-	var commerceUserSegmentEntrySelectorWrapper = A.one("#<portlet:namespace />commerceUserSegmentEntrySelectorWrapper");
+	var commerceAccountSelectorWrapper = A.one("#<portlet:namespace />commerceAccountSelectorWrapper");
 
-	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />commerceUserSegmentEntries');
+	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />commerceAccounts');
 
 	searchContainer.on(
 		'rowToggled',
@@ -120,7 +120,7 @@ PortletURL portletURL = commerceUserSegmentEntryItemSelectorViewDisplayContext.g
 
 					var data = row.getDOM().dataset;
 
-					arr.push({commerceUserSegmentEntryId : data.commerceUserSegmentEntryId, name : data.name});
+					arr.push({commerceAccountId : data.commerceAccountId, name : data.name});
 				}
 			);
 
