@@ -134,11 +134,11 @@
 		<reference entity="WorkflowInstanceLink" package-path="com.liferay.portal" />
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-	<entity local-service="true" name="CommercePriceListUserSegmentEntryRel" remote-service="true" table="CPLUserSegmentEntryRel" uuid="true">
+	<entity local-service="true" name="CommercePriceListAccountRel" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
-		<column db-name="CPLUserSegmentEntryRelId" name="commercePriceListUserSegmentEntryRelId" primary="true" type="long" />
+		<column name="commercePriceListAccountRelId" primary="true" type="long" />
 
 		<!-- Group instance -->
 
@@ -154,8 +154,8 @@
 
 		<!-- Other fields -->
 
+		<column name="commerceAccountId" type="long" />
 		<column name="commercePriceListId" type="long" />
-		<column name="commerceUserSegmentEntryId" type="long" />
 		<column name="order" type="int" />
 		<column name="lastPublishDate" type="Date" />
 
@@ -170,9 +170,9 @@
 		<finder name="CommercePriceListId" return-type="Collection">
 			<finder-column name="commercePriceListId" />
 		</finder>
-		<finder name="C_C" return-type="CommercePriceListUserSegmentEntryRel" unique="true">
+		<finder name="C_C" return-type="CommercePriceListAccountRel" unique="true">
+			<finder-column name="commerceAccountId" />
 			<finder-column name="commercePriceListId" />
-			<finder-column name="commerceUserSegmentEntryId" />
 		</finder>
 
 		<!-- References -->
