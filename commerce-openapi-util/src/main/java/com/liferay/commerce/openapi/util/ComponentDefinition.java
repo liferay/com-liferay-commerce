@@ -149,7 +149,6 @@ public class ComponentDefinition {
 			}
 		}
 
-
 		sb.append("}");
 		sb.append(", componentType=");
 		sb.append(_componentType);
