@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.user.segment.item.selector.web.internal.search;
+package com.liferay.commerce.account.item.selector.web.internal.search;
 
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.util.SetUtil;
 
@@ -25,26 +25,26 @@ import javax.portlet.RenderResponse;
 /**
  * @author Alessio Antonio Rendina
  */
-public class CommerceUserSegmentEntryItemSelectorChecker
+public class CommerceAccountItemSelectorChecker
 	extends EmptyOnClickRowChecker {
 
-	public CommerceUserSegmentEntryItemSelectorChecker(
+	public CommerceAccountItemSelectorChecker(
 		RenderResponse renderResponse,
-		long[] checkedCommerceUserSegmentEntryIds) {
+		long[] checkedCommerceAccountIds) {
 
 		super(renderResponse);
 
-		_checkedCommerceUserSegmentEntryIds = SetUtil.fromArray(
-			checkedCommerceUserSegmentEntryIds);
+		_checkedCommerceAccountIds = SetUtil.fromArray(
+			checkedCommerceAccountIds);
 	}
 
 	@Override
 	public boolean isChecked(Object obj) {
-		CommerceUserSegmentEntry commerceUserSegmentEntry =
-			(CommerceUserSegmentEntry)obj;
+		CommerceAccount commerceAccount =
+			(CommerceAccount)obj;
 
-		return _checkedCommerceUserSegmentEntryIds.contains(
-			commerceUserSegmentEntry.getCommerceUserSegmentEntryId());
+		return _checkedCommerceAccountIds.contains(
+			commerceAccount.getCommerceAccountId());
 	}
 
 	@Override
@@ -52,6 +52,6 @@ public class CommerceUserSegmentEntryItemSelectorChecker
 		return isChecked(obj);
 	}
 
-	private final Set<Long> _checkedCommerceUserSegmentEntryIds;
+	private final Set<Long> _checkedCommerceAccountIds;
 
 }
