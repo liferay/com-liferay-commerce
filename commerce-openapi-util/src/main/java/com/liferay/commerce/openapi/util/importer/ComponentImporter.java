@@ -49,6 +49,30 @@ public class ComponentImporter {
 		return components;
 	}
 
+	private ComponentDefinition _getComponentDefinition(
+		String name, JsonNode schemaEntryJSONNode) {
+
+		JsonNode typeJSONNode = schemaEntryJSONNode.get("type");
+
+		String type = typeJSONNode.asText();
+
+		String itemsReference = null;
+
+		if (schemaEntryJSONNode.has("items")) {
+			JsonNode itemsJSONNode = schemaEntryJSONNode.get("items");
+
+			if (itemsJSONNode.has("$ref")) {
+				JsonNode referenceJSONNode = itemsJSONNode.get("$ref");
+
+				itemsReference = referenceJSONNode.asText();
+			}
+		}
+
+		return new ComponentDefinition(
+			name, _getPropertyDefinitions(schemaEntryJSONNode), type,
+			itemsReference);
+	}
+
 	private List<ComponentDefinition> _getParameters(
 		JsonNode componentsJSONNode) {
 
@@ -75,14 +99,14 @@ public class ComponentImporter {
 	}
 
 	private List<PropertyDefinition> _getPropertyDefinitions(
-		JsonNode componentJSONNode) {
+		JsonNode schemaEntryJSONNode) {
 
 		List<PropertyDefinition> propertyDefinitions = new ArrayList<>();
 
 		List<String> requiredProperties = new ArrayList<>();
 
-		if (componentJSONNode.has("required")) {
-			JsonNode requiredJSONNode = componentJSONNode.get("required");
+		if (schemaEntryJSONNode.has("required")) {
+			JsonNode requiredJSONNode = schemaEntryJSONNode.get("required");
 
 			if (requiredJSONNode.isArray() && (requiredJSONNode.size() > 0)) {
 				for (int i = 0; i < requiredJSONNode.size(); i++) {
@@ -93,8 +117,8 @@ public class ComponentImporter {
 			}
 		}
 
-		if (componentJSONNode.has("properties")) {
-			JsonNode propertiesJSONNode = componentJSONNode.get("properties");
+		if (schemaEntryJSONNode.has("properties")) {
+			JsonNode propertiesJSONNode = schemaEntryJSONNode.get("properties");
 
 			Iterator<Map.Entry<String, JsonNode>> fields =
 				propertiesJSONNode.fields();
@@ -170,27 +194,8 @@ public class ComponentImporter {
 		while (schemaFields.hasNext()) {
 			Map.Entry<String, JsonNode> schemaEntry = schemaFields.next();
 
-			JsonNode schemaJSONNode = schemaEntry.getValue();
-
-			JsonNode typeJSONNode = schemaJSONNode.get("type");
-
-			String type = typeJSONNode.asText();
-
-			String itemsReference = null;
-
-			if (schemaJSONNode.has("items")) {
-				JsonNode itemsJSONNode = schemaJSONNode.get("items");
-
-				if (itemsJSONNode.has("$ref")) {
-					JsonNode referenceJSONNode = itemsJSONNode.get("$ref");
-
-					itemsReference = referenceJSONNode.asText();
-				}
-			}
-
-			ComponentDefinition componentDefinition = new ComponentDefinition(
-				schemaEntry.getKey(), _getPropertyDefinitions(schemaJSONNode),
-				type, itemsReference);
+			ComponentDefinition componentDefinition = _getComponentDefinition(
+				schemaEntry.getKey(), schemaEntry.getValue());
 
 			components.add(componentDefinition);
 
