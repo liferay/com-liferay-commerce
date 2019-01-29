@@ -67,6 +67,19 @@ public class ComponentImporter {
 				itemsReference = referenceJSONNode.asText();
 			}
 		}
+		else if (schemaEntryJSONNode.has("additionalProperties")) {
+				JsonNode additionalPropertiesJSONNode = schemaEntryJSONNode.get(
+					"additionalProperties");
+
+				if (additionalPropertiesJSONNode.has("$ref")) {
+					JsonNode referenceJSONNode =
+						additionalPropertiesJSONNode.get("$ref");
+
+					itemsReference = referenceJSONNode.asText();
+				}
+
+				type = "dictionary";
+		}
 
 		return new ComponentDefinition(
 			name, _getPropertyDefinitions(schemaEntryJSONNode), type,
@@ -153,6 +166,9 @@ public class ComponentImporter {
 					propertyDefinition = new PropertyDefinition(
 						propertyEntry.getKey(), propertyType, itemType,
 						itemFormat);
+				}
+				else if ("object".equals(propertyType)) {
+
 				}
 				else {
 					String format = null;
