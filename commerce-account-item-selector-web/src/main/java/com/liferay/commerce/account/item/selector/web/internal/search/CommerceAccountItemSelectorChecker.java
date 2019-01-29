@@ -24,6 +24,7 @@ import javax.portlet.RenderResponse;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Ethan Bustad
  */
 public class CommerceAccountItemSelectorChecker
 	extends EmptyOnClickRowChecker {
