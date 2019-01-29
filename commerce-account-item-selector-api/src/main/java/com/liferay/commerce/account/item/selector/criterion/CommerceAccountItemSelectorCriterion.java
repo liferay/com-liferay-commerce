@@ -18,6 +18,7 @@ import com.liferay.item.selector.BaseItemSelectorCriterion;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Ethan Bustad
  */
 public class CommerceAccountItemSelectorCriterion
 	extends BaseItemSelectorCriterion {
