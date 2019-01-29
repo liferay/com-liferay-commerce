@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Ethan Bustad
  */
 public class CommerceAccountItemSelectorRequestHelper
 	extends BaseRequestHelper {

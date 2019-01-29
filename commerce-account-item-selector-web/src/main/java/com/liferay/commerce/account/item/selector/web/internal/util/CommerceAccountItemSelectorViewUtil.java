@@ -25,6 +25,7 @@ import java.util.Objects;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Ethan Bustad
  */
 public class CommerceAccountItemSelectorViewUtil {
 
