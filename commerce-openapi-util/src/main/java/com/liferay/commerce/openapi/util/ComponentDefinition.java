@@ -45,8 +45,13 @@ public class ComponentDefinition {
 
 		ComponentType componentType = ComponentType.OBJECT;
 
-		if ((type != null) && type.equals("array")) {
-			componentType = ComponentType.ARRAY;
+		if (type != null) {
+			if (type.equals("array")) {
+				componentType = ComponentType.ARRAY;
+			}
+			else if (type.equals("dictionary")) {
+				componentType = ComponentType.DICTIONARY;
+			}
 		}
 
 		_componentType = componentType;
@@ -98,6 +103,14 @@ public class ComponentDefinition {
 		return false;
 	}
 
+	public boolean isDictionary() {
+		if (_componentType == ComponentType.DICTIONARY) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isObject() {
 		if (_componentType == ComponentType.OBJECT) {
 			return true;
@@ -136,7 +149,15 @@ public class ComponentDefinition {
 			}
 		}
 
-		sb.append("}}");
+
+		sb.append("}");
+		sb.append(", componentType=");
+		sb.append(_componentType);
+		sb.append(", itemsReference=");
+		sb.append(_itemsReference);
+		sb.append(", itemsReferencedModel=");
+		sb.append(_itemsReferencedModel);
+		sb.append("}");
 
 		_toString = sb.toString();
 
@@ -145,7 +166,7 @@ public class ComponentDefinition {
 
 	public enum ComponentType {
 
-		ARRAY, OBJECT, PARAMETER
+		ARRAY, DICTIONARY, OBJECT, PARAMETER
 
 	}
 
