@@ -15,13 +15,16 @@
 package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.ParameterFormat;
 import com.liferay.commerce.openapi.util.PropertyDefinition;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.IOException;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Igor Beslic
@@ -30,12 +33,15 @@ public class DTOGenerator extends BaseSourceGenerator {
 
 	public DTOGenerator(
 		String author, String moduleOutputPath, String modelPackagePath,
-		ComponentDefinition componentDefinition) {
+		ComponentDefinition componentDefinition,
+		Set<ComponentDefinition> componentDefinitions) {
 
 		_author = author;
 		_moduleOutputPath = moduleOutputPath;
 		_modelPackagePath = modelPackagePath;
 		_componentDefinition = componentDefinition;
+
+		_componentDefinitions.addAll(componentDefinitions);
 	}
 
 	public void writeClassSource() throws IOException {
@@ -68,9 +74,11 @@ public class DTOGenerator extends BaseSourceGenerator {
 			PropertyDefinition propertyDefinition = iterator.next();
 
 			String name = propertyDefinition.getName();
+			String javaType = ParameterFormat.getJavaType(
+				propertyDefinition, _componentDefinitions);
 
 			methodsSb.append("\tpublic ");
-			methodsSb.append(propertyDefinition.getJavaType());
+			methodsSb.append(javaType);
 			methodsSb.append(" ");
 			methodsSb.append(propertyDefinition.getGetterSyntax());
 			methodsSb.append(StringUtils.upperCaseFirstChar(name));
@@ -82,7 +90,7 @@ public class DTOGenerator extends BaseSourceGenerator {
 			methodsSb.append(propertyDefinition.getSetterSyntax());
 			methodsSb.append(StringUtils.upperCaseFirstChar(name));
 			methodsSb.append("(");
-			methodsSb.append(propertyDefinition.getJavaType());
+			methodsSb.append(javaType);
 			methodsSb.append(" ");
 			methodsSb.append(name);
 			methodsSb.append(") {\n\t\t_");
@@ -96,7 +104,7 @@ public class DTOGenerator extends BaseSourceGenerator {
 			}
 
 			variablesSb.append("\tprivate ");
-			variablesSb.append(propertyDefinition.getJavaType());
+			variablesSb.append(javaType);
 			variablesSb.append(" _");
 			variablesSb.append(name);
 			variablesSb.append(";");
@@ -124,6 +132,8 @@ public class DTOGenerator extends BaseSourceGenerator {
 
 	private final String _author;
 	private final ComponentDefinition _componentDefinition;
+	private final Set<ComponentDefinition> _componentDefinitions =
+		new HashSet<>();
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;
 
