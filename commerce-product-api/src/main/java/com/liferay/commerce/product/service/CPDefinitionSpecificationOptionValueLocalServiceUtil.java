@@ -212,10 +212,10 @@ public class CPDefinitionSpecificationOptionValueLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue fetchCPDefinitionSpecificationOptionValue(
-		long cpDefinitionId, long cpSpecificationOptionId) {
+		long cpDefinitionId, long cpDefinitionSpecificationOptionValueId) {
 		return getService()
 				   .fetchCPDefinitionSpecificationOptionValue(cpDefinitionId,
-			cpSpecificationOptionId);
+			cpDefinitionSpecificationOptionValueId);
 	}
 
 	/**
@@ -295,6 +295,13 @@ public class CPDefinitionSpecificationOptionValueLocalServiceUtil {
 		return getService()
 				   .getCPDefinitionSpecificationOptionValues(cpDefinitionId,
 			cpOptionCategoryId);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValuesByC_CSO(
+		long cpDefinitionId, long cpSpecificationOptionId) {
+		return getService()
+				   .getCPDefinitionSpecificationOptionValuesByC_CSO(cpDefinitionId,
+			cpSpecificationOptionId);
 	}
 
 	/**
