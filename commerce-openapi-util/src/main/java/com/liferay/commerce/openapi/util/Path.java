@@ -14,10 +14,11 @@
 
 package com.liferay.commerce.openapi.util;
 
+import com.liferay.commerce.openapi.util.util.ComponentDefinitionUtil;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -136,7 +137,7 @@ public class Path {
 				}
 
 				ComponentDefinition componentDefinition =
-					_getSchemaComponentDefinition(
+					ComponentDefinitionUtil.getSchemaComponentDefinition(
 						schema.getReferencedModel(), componentDefinitions);
 
 				if ((componentDefinition == null) ||
@@ -150,22 +151,6 @@ public class Path {
 				}
 			}
 		}
-	}
-
-	private ComponentDefinition _getSchemaComponentDefinition(
-		String name, Set<ComponentDefinition> componentDefinitions) {
-
-		for (ComponentDefinition componentDefinition : componentDefinitions) {
-			if (componentDefinition.isParameter()) {
-				continue;
-			}
-
-			if (Objects.equals(name, componentDefinition.getName())) {
-				return componentDefinition;
-			}
-		}
-
-		return null;
 	}
 
 	private final List<Method> _methods = new ArrayList<>();

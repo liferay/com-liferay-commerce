@@ -24,6 +24,18 @@ import org.slf4j.LoggerFactory;
  */
 public class GetterUtil {
 
+	public static String getAsText(
+		String attribute, JsonNode parentJsonNode, String defaultValue) {
+
+		String text = getAsTextOrNullIfMisses(attribute, parentJsonNode);
+
+		if (text == null) {
+			return defaultValue;
+		}
+
+		return text;
+	}
+
 	public static String getAsTextOrNullIfMisses(
 		String attribute, JsonNode parentJsonNode) {
 

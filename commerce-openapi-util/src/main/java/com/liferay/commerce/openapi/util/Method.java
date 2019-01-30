@@ -15,11 +15,11 @@
 package com.liferay.commerce.openapi.util;
 
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
+import com.liferay.commerce.openapi.util.util.ComponentDefinitionUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -132,8 +132,9 @@ public class Method {
 			String itemsReferenceModel =
 				schemaComponentDefinition.getItemsReferencedModel();
 
-			schemaComponentDefinition = _getSchemaComponentDefinition(
-				itemsReferenceModel, componentDefinitions);
+			schemaComponentDefinition =
+				ComponentDefinitionUtil.getSchemaComponentDefinition(
+					itemsReferenceModel, componentDefinitions);
 		}
 
 		return schemaComponentDefinition.getName();
@@ -268,7 +269,7 @@ public class Method {
 		Schema schema = content.getSchema();
 
 		ComponentDefinition schemaComponentDefinition =
-			_getSchemaComponentDefinition(
+			ComponentDefinitionUtil.getSchemaComponentDefinition(
 				schema.getReferencedModel(), componentDefinitions);
 
 		if ("array".equals(schema.getType())) {
@@ -277,22 +278,6 @@ public class Method {
 		}
 
 		return schemaComponentDefinition;
-	}
-
-	private ComponentDefinition _getSchemaComponentDefinition(
-		String name, Set<ComponentDefinition> componentDefinitions) {
-
-		for (ComponentDefinition componentDefinition : componentDefinitions) {
-			if (componentDefinition.isParameter()) {
-				continue;
-			}
-
-			if (Objects.equals(name, componentDefinition.getName())) {
-				return componentDefinition;
-			}
-		}
-
-		return null;
 	}
 
 	private final String _absolutePath;
