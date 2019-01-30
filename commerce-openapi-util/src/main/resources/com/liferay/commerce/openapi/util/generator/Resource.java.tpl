@@ -14,6 +14,7 @@
 
 package ${PACKAGE};
 
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 
 ${MODEL_IMPORT_STATEMENTS}

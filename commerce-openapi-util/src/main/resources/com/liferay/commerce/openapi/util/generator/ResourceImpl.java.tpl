@@ -16,6 +16,8 @@ package ${PACKAGE};
 
 ${IMPORT_STATEMENTS}
 
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
+
 import java.util.Collections;
 
 import javax.annotation.Generated;
