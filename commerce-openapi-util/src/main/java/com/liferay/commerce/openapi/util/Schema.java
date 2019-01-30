@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.util;
 
+import com.liferay.commerce.openapi.util.exception.OpenApiException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,22 +24,27 @@ import java.util.regex.Pattern;
  */
 public class Schema {
 
+	public static String getReferencedModel(String reference) {
+		if (reference == null) {
+			return null;
+		}
+
+		Matcher matcher = _schemaReferencedModelPattern.matcher(reference);
+
+		if (matcher.find()) {
+			return matcher.group(2);
+		}
+
+		throw new OpenApiException(
+			"Unable to locate model pattern in " + reference);
+	}
+
 	public Schema(String type, String format, String reference) {
 		_type = type;
 		_format = format;
 		_reference = reference;
 
-		String referencedModel = null;
-
-		if (_reference != null) {
-			Matcher matcher = _schemaReferencedModelPattern.matcher(_reference);
-
-			if (matcher.find()) {
-				referencedModel = matcher.group(2);
-			}
-		}
-
-		_referencedModel = referencedModel;
+		_referencedModel = getReferencedModel(reference);
 	}
 
 	public String getFormat() {
