@@ -137,9 +137,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			_overwriteBND = false;
 		}
 
-		_collectionDTOGenerator = new CollectionDTOGenerator(
-			_author, _moduleOutputPath, _modelPackagePath);
-
 		_jsonMessageBodyGenerator = new JsonMessageBodyGenerator(
 			_author, _applicationName,
 			properties.getProperty("osgi.module.jaxrs.json.package"),
@@ -205,8 +202,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			);
 
 			_writeApplicationSource();
-
-			_collectionDTOGenerator.writeCollectionDTOSource(referencedModels);
 
 			Properties properties = PropertiesFactory.getPropertiesFor(
 				OSGiRESTModuleGenerator.class);
@@ -343,7 +338,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private final String _bundleName;
 	private final String _bundleSynbolicName;
 	private final String _bundleVersion;
-	private final CollectionDTOGenerator _collectionDTOGenerator;
 	private final boolean _guestsAllowed;
 	private final JsonMessageBodyGenerator _jsonMessageBodyGenerator;
 	private final String _modelPackagePath;

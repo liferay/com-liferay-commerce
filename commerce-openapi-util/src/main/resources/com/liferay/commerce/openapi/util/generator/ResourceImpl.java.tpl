@@ -18,6 +18,8 @@ import com.liferay.oauth2.provider.scope.RequiresScope;
 
 ${IMPORT_STATEMENTS}
 
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
+
 import java.util.Collections;
 
 import javax.annotation.Generated;
