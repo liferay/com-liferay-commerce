@@ -16,12 +16,12 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.InventoryHelper;
 import com.liferay.commerce.openapi.admin.internal.resource.util.SKUHelper;
-import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.SkuResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.model.Company;
 
 import java.util.Locale;

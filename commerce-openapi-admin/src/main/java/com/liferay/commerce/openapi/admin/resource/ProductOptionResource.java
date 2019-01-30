@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.openapi.admin.resource;
 
-import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
 import java.util.Locale;
 

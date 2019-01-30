@@ -15,11 +15,11 @@
 package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.UserHelper;
-import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.UserDTO;
 import com.liferay.commerce.openapi.admin.resource.UserResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
