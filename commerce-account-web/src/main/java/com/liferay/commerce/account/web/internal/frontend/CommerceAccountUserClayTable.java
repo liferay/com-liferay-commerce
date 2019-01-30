@@ -16,6 +16,7 @@ package com.liferay.commerce.account.web.internal.frontend;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.service.CommerceAccountUserRelService;
 import com.liferay.commerce.account.web.internal.model.Member;
 import com.liferay.commerce.frontend.ClayTable;
@@ -175,11 +176,16 @@ public class CommerceAccountUserClayTable
 
 			User user = commerceAccountUserRel.getUser();
 
+			CommerceAccount commerceAccount =
+				_commerceAccountService.getCommerceAccount(
+					accountFilter.getAccountId());
+
 			members.add(
 				new Member(
 					user.getUserId(), accountFilter.getAccountId(),
 					user.getFullName(), user.getEmailAddress(),
-					getUserRoles(user, accountFilter.getAccountId())));
+					getUserRoles(
+						user, commerceAccount.getCommerceAccountGroupId())));
 		}
 
 		return members;
@@ -266,6 +272,9 @@ public class CommerceAccountUserClayTable
 
 	@Reference
 	private ClayTableSchemaBuilderFactory _clayTableSchemaBuilderFactory;
+
+	@Reference
+	private CommerceAccountService _commerceAccountService;
 
 	@Reference
 	private CommerceAccountUserRelService _commerceAccountUserRelService;
