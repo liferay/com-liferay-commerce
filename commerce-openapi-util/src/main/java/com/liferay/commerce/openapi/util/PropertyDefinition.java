@@ -24,17 +24,16 @@ public class PropertyDefinition {
 		_type = type;
 		_format = format;
 
-		ParameterType parameterType = ParameterType.OBJECT;
+		OpenApiType openApiType = OpenApiType.OBJECT;
 
 		if (type != null) {
-			parameterType = ParameterType.fromDefinition(type);
+			openApiType = OpenApiType.fromDefinition(type);
 		}
 
-		ParameterFormat parameterFormat =
-			ParameterFormat.fromHttpParameterTypeAndDefinition(
-				parameterType, _format);
+		OpenApiFormat openApiFormat = OpenApiFormat.fromOpenApiTypeAndFormat(
+			openApiType, _format);
 
-		_parameterFormat = parameterFormat;
+		_openApiFormat = openApiFormat;
 	}
 
 	public PropertyDefinition(
@@ -44,17 +43,16 @@ public class PropertyDefinition {
 		_type = type;
 		_format = itemsFormat;
 
-		ParameterType parameterType = ParameterType.OBJECT;
+		OpenApiType openApiType = OpenApiType.OBJECT;
 
 		if (type != null) {
-			parameterType = ParameterType.fromDefinition(itemsType);
+			openApiType = OpenApiType.fromDefinition(itemsType);
 		}
 
-		ParameterFormat parameterFormat =
-			ParameterFormat.fromHttpParameterTypeAndDefinition(
-				parameterType, _format);
+		OpenApiFormat openApiFormat = OpenApiFormat.fromOpenApiTypeAndFormat(
+			openApiType, _format);
 
-		_parameterFormat = parameterFormat;
+		_openApiFormat = openApiFormat;
 	}
 
 	public String getExample() {
@@ -66,11 +64,11 @@ public class PropertyDefinition {
 	}
 
 	public String getGetterSyntax() {
-		if (_parameterFormat == null) {
+		if (_openApiFormat == null) {
 			return "get";
 		}
 
-		return _parameterFormat.getGetterSyntax();
+		return _openApiFormat.getGetterSyntax();
 	}
 
 	public String getItemType() {
@@ -79,10 +77,10 @@ public class PropertyDefinition {
 
 	public String getJavaType() {
 		if ("array".equals(_type)) {
-			return _parameterFormat.getJavaType() + "[]";
+			return _openApiFormat.getJavaType() + "[]";
 		}
 
-		return _parameterFormat.getJavaType();
+		return _openApiFormat.getJavaType();
 	}
 
 	public String getName() {
@@ -90,11 +88,11 @@ public class PropertyDefinition {
 	}
 
 	public String getSetterSyntax() {
-		if (_parameterFormat == null) {
+		if (_openApiFormat == null) {
 			return "set";
 		}
 
-		return _parameterFormat.getSetterSyntax();
+		return _openApiFormat.getSetterSyntax();
 	}
 
 	public String getType() {
@@ -171,7 +169,7 @@ public class PropertyDefinition {
 	private String _itemFormat;
 	private String _itemType;
 	private String _name;
-	private final ParameterFormat _parameterFormat;
+	private final OpenApiFormat _openApiFormat;
 	private boolean _required;
 	private String _toString;
 	private String _type;

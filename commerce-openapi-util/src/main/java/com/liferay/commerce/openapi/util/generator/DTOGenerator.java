@@ -15,7 +15,7 @@
 package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.ComponentDefinition;
-import com.liferay.commerce.openapi.util.ParameterFormat;
+import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.PropertyDefinition;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
@@ -74,7 +74,7 @@ public class DTOGenerator extends BaseSourceGenerator {
 			PropertyDefinition propertyDefinition = iterator.next();
 
 			String name = propertyDefinition.getName();
-			String javaType = ParameterFormat.getJavaType(
+			String javaType = OpenApiFormat.getJavaType(
 				propertyDefinition, _componentDefinitions);
 
 			methodsSb.append("\tpublic ");

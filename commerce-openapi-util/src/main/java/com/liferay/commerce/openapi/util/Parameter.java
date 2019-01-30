@@ -41,7 +41,7 @@ public class Parameter {
 	}
 
 	public String getJavaType() {
-		return _parameterFormat.getJavaType();
+		return _openApiFormat.getJavaType();
 	}
 
 	public String getLocation() {
@@ -65,7 +65,7 @@ public class Parameter {
 		_toString = String.format(
 			"{content=%s, location=%s, name=%s, javaType=%s, required=%s, " +
 				"schema=%s}",
-			_content, _location, _name, _parameterFormat, _required, _schema);
+			_content, _location, _name, _openApiFormat, _required, _schema);
 
 		return _toString;
 	}
@@ -82,14 +82,6 @@ public class Parameter {
 			return this;
 		}
 
-		public ParameterBuilder httpParameterFormat(
-			ParameterFormat parameterFormat) {
-
-			_parameterFormat = parameterFormat;
-
-			return this;
-		}
-
 		public ParameterBuilder location(String location) {
 			_location = location;
 
@@ -98,6 +90,12 @@ public class Parameter {
 
 		public ParameterBuilder name(String name) {
 			_name = name;
+
+			return this;
+		}
+
+		public ParameterBuilder openApiFormat(OpenApiFormat openApiFormat) {
+			_openApiFormat = openApiFormat;
 
 			return this;
 		}
@@ -117,7 +115,7 @@ public class Parameter {
 		private Content _content;
 		private String _location;
 		private String _name;
-		private ParameterFormat _parameterFormat;
+		private OpenApiFormat _openApiFormat;
 		private boolean _required;
 		private Schema _schema;
 
@@ -130,17 +128,16 @@ public class Parameter {
 		_schema = parameterBuilder._schema;
 		_required = parameterBuilder._required;
 
-		ParameterType parameterType = ParameterType.OBJECT;
+		OpenApiType openApiType = OpenApiType.OBJECT;
 
 		if (_schema.getType() != null) {
-			parameterType = ParameterType.fromDefinition(_schema.getType());
+			openApiType = OpenApiType.fromDefinition(_schema.getType());
 		}
 
-		ParameterFormat parameterFormat =
-			ParameterFormat.fromHttpParameterTypeAndDefinition(
-				parameterType, _schema.getFormat());
+		OpenApiFormat openApiFormat = OpenApiFormat.fromOpenApiTypeAndFormat(
+			openApiType, _schema.getFormat());
 
-		_parameterFormat = parameterFormat;
+		_openApiFormat = openApiFormat;
 	}
 
 	private static final Pattern _parameterReferencePattern = Pattern.compile(
@@ -149,7 +146,7 @@ public class Parameter {
 	private Content _content;
 	private final String _location;
 	private final String _name;
-	private final ParameterFormat _parameterFormat;
+	private final OpenApiFormat _openApiFormat;
 	private final boolean _required;
 	private final Schema _schema;
 	private String _toString;
