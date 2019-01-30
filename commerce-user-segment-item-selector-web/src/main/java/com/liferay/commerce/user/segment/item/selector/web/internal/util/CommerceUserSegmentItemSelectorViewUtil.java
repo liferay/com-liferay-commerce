@@ -38,14 +38,11 @@ public class CommerceUserSegmentItemSelectorViewUtil {
 			orderByAsc = true;
 		}
 
-		OrderByComparator<CommerceUserSegmentEntry> orderByComparator = null;
-
 		if (orderByCol.equals("priority")) {
-			orderByComparator = new CommerceUserSegmentEntryPriorityComparator(
-				orderByAsc);
+			return new CommerceUserSegmentEntryPriorityComparator(orderByAsc);
 		}
 
-		return orderByComparator;
+		return null;
 	}
 
 	public static Sort getCommerceUserSegmentEntrySort(
@@ -57,14 +54,12 @@ public class CommerceUserSegmentItemSelectorViewUtil {
 			reverse = false;
 		}
 
-		Sort sort = null;
-
 		if (orderByCol.equals("priority")) {
-			sort = SortFactoryUtil.create(
+			return SortFactoryUtil.create(
 				Field.PRIORITY, Sort.INT_TYPE, reverse);
 		}
 
-		return sort;
+		return null;
 	}
 
 }

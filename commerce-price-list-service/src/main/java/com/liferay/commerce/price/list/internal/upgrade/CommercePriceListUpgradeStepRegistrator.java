@@ -15,6 +15,7 @@
 package com.liferay.commerce.price.list.internal.upgrade;
 
 import com.liferay.commerce.price.list.internal.upgrade.v1_1_0.CommercePriceEntryUpgradeProcess;
+import com.liferay.commerce.price.list.internal.upgrade.v1_2_0.CommercePriceListAccountRelUpgradeProcess;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
@@ -42,6 +43,10 @@ public class CommercePriceListUpgradeStepRegistrator
 			new CommercePriceEntryUpgradeProcess(
 				_cpDefinitionLocalService, _cpInstanceLocalService));
 
+		registry.register(
+			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_1_2_0,
+			new CommercePriceListAccountRelUpgradeProcess());
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRICE LIST UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -50,6 +55,8 @@ public class CommercePriceListUpgradeStepRegistrator
 	private static final String _SCHEMA_VERSION_1_0_0 = "1.0.0";
 
 	private static final String _SCHEMA_VERSION_1_1_0 = "1.1.0";
+
+	private static final String _SCHEMA_VERSION_1_2_0 = "1.2.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommercePriceListUpgradeStepRegistrator.class);
