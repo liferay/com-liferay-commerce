@@ -22,47 +22,47 @@ import java.util.Set;
 /**
  * @author Igor Beslic
  */
-public enum ParameterFormat {
+public enum OpenApiFormat {
 
-	BIGDECIMAL("bigdecimal", ParameterType.NUMBER, "java.math.BigDecimal"),
-	BINARY("binary", ParameterType.STRING, "byte[]"),
-	BOOLEAN("boolean", ParameterType.BOOLEAN, "boolean", true),
-	BYTE("byte", ParameterType.STRING, "byte"),
-	DATE("date", ParameterType.STRING, "java.util.Date"),
-	DATE_TIME("date-time", ParameterType.STRING, "java.util.Date"),
-	DOUBLE("double", ParameterType.NUMBER, "double"),
-	FLOAT("float", ParameterType.NUMBER, "float", true),
-	INT32("int32", ParameterType.INTEGER, "int", true),
-	INT64("int64", ParameterType.INTEGER, "long"),
-	STRING(null, ParameterType.STRING, "String", true);
+	BIGDECIMAL("bigdecimal", OpenApiType.NUMBER, "java.math.BigDecimal"),
+	BINARY("binary", OpenApiType.STRING, "byte[]"),
+	BOOLEAN("boolean", OpenApiType.BOOLEAN, "boolean", true),
+	BYTE("byte", OpenApiType.STRING, "byte"),
+	DATE("date", OpenApiType.STRING, "java.util.Date"),
+	DATE_TIME("date-time", OpenApiType.STRING, "java.util.Date"),
+	DOUBLE("double", OpenApiType.NUMBER, "double"),
+	FLOAT("float", OpenApiType.NUMBER, "float", true),
+	INT32("int32", OpenApiType.INTEGER, "int", true),
+	INT64("int64", OpenApiType.INTEGER, "long"),
+	STRING(null, OpenApiType.STRING, "String", true);
 
-	public static ParameterFormat fromHttpParameterTypeAndDefinition(
-		ParameterType parameterType, String swaggerDefinitionFormat) {
+	public static OpenApiFormat fromOpenApiTypeAndFormat(
+		OpenApiType openApiType, String openApiFormatExpression) {
 
-		ParameterFormat defaultParameterFormat = null;
+		OpenApiFormat defaultOpenApiFormat = null;
 
-		for (ParameterFormat parameterFormat : values()) {
-			if (parameterType != parameterFormat._parameterType) {
+		for (OpenApiFormat openApiFormat : values()) {
+			if (openApiType != openApiFormat._openApiType) {
 				continue;
 			}
 
-			if ((swaggerDefinitionFormat == null) && parameterFormat._default) {
-				return parameterFormat;
+			if ((openApiFormatExpression == null) && openApiFormat._default) {
+				return openApiFormat;
 			}
 
-			if ((swaggerDefinitionFormat != null) &&
-				swaggerDefinitionFormat.equals(
-					parameterFormat._swaggerDefinitionFormat)) {
+			if ((openApiFormatExpression != null) &&
+				openApiFormatExpression.equals(
+					openApiFormat._openApiFormatExpression)) {
 
-				return parameterFormat;
+				return openApiFormat;
 			}
 
-			if (parameterFormat._default) {
-				defaultParameterFormat = parameterFormat;
+			if (openApiFormat._default) {
+				defaultOpenApiFormat = openApiFormat;
 			}
 		}
 
-		return defaultParameterFormat;
+		return defaultOpenApiFormat;
 	}
 
 	public static String getJavaType(
@@ -105,27 +105,27 @@ public enum ParameterFormat {
 		return "set";
 	}
 
-	private ParameterFormat(
-		String swaggerDefinitionFormat, ParameterType parameterType,
+	private OpenApiFormat(
+		String openApiFormatExpression, OpenApiType openApiType,
 		String javaType) {
 
-		_swaggerDefinitionFormat = swaggerDefinitionFormat;
-		_parameterType = parameterType;
+		_openApiFormatExpression = openApiFormatExpression;
+		_openApiType = openApiType;
 		_javaType = javaType;
 	}
 
-	private ParameterFormat(
-		String swaggerDefinitionFormat, ParameterType parameterType,
+	private OpenApiFormat(
+		String openApiFormatExpression, OpenApiType openApiType,
 		String javaType, boolean defaultFormat) {
 
-		this(swaggerDefinitionFormat, parameterType, javaType);
+		this(openApiFormatExpression, openApiType, javaType);
 
 		_default = defaultFormat;
 	}
 
 	private boolean _default;
 	private String _javaType;
-	private ParameterType _parameterType;
-	private String _swaggerDefinitionFormat;
+	private String _openApiFormatExpression;
+	private OpenApiType _openApiType;
 
 }

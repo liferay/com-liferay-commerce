@@ -20,22 +20,22 @@ import org.junit.Test;
 /**
  * @author Igor Beslic
  */
-public class ParameterFormatTest {
+public class OpenApiFormatTest {
 
 	@Test
 	public void testGetterSyntax() {
-		for (ParameterFormat parameterFormat : ParameterFormat.values()) {
-			if (parameterFormat == ParameterFormat.BOOLEAN) {
+		for (OpenApiFormat openApiFormat : OpenApiFormat.values()) {
+			if (openApiFormat == OpenApiFormat.BOOLEAN) {
 				Assert.assertEquals(
 					"Boolean syntax for getter", "is",
-					parameterFormat.getGetterSyntax());
+					openApiFormat.getGetterSyntax());
 
 				continue;
 			}
 
 			Assert.assertEquals(
-				parameterFormat.getJavaType() + " syntax for getter", "get",
-				parameterFormat.getGetterSyntax());
+				openApiFormat.getJavaType() + " syntax for getter", "get",
+				openApiFormat.getGetterSyntax());
 		}
 	}
 
