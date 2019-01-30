@@ -101,8 +101,8 @@ public class CommerceAccountItemSelectorView
 		CommerceAccountItemSelectorViewDisplayContext
 			commerceAccountItemSelectorViewDisplayContext =
 				new CommerceAccountItemSelectorViewDisplayContext(
-					_commerceAccountService, httpServletRequest,
-					portletURL, itemSelectedEventName);
+					_commerceAccountService, httpServletRequest, portletURL,
+					itemSelectedEventName);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -111,8 +111,7 @@ public class CommerceAccountItemSelectorView
 		ServletContext servletContext = getServletContext();
 
 		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(
-				"/account_item_selector.jsp");
+			servletContext.getRequestDispatcher("/account_item_selector.jsp");
 
 		requestDispatcher.include(servletRequest, servletResponse);
 	}

@@ -50,8 +50,7 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 		_itemSelectedEventName = itemSelectedEventName;
 
 		_commerceAccountItemSelectorRequestHelper =
-			new CommerceAccountItemSelectorRequestHelper(
-				httpServletRequest);
+			new CommerceAccountItemSelectorRequestHelper(httpServletRequest);
 	}
 
 	public String getItemSelectedEventName() {
@@ -105,8 +104,7 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 		if (isSearch()) {
 			Sort sort =
 				CommerceAccountItemSelectorViewUtil.
-					getCommerceAccountSort(
-						getOrderByCol(), getOrderByType());
+					getCommerceAccountSort(getOrderByCol(), getOrderByType());
 
 			BaseModelSearchResult<CommerceAccount> results =
 				_commerceAccountService.
@@ -132,8 +130,7 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 
 			List<CommerceAccount> results =
 				_commerceAccountService.getCommerceAccounts(
-					_commerceAccountItemSelectorRequestHelper.
-						getScopeGroupId(),
+					_commerceAccountItemSelectorRequestHelper.getScopeGroupId(),
 					_searchContainer.getStart(), _searchContainer.getEnd(),
 					orderByComparator);
 
@@ -169,10 +166,9 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 		return false;
 	}
 
-	private final CommerceAccountService
-		_commerceAccountService;
 	private final CommerceAccountItemSelectorRequestHelper
 		_commerceAccountItemSelectorRequestHelper;
+	private final CommerceAccountService _commerceAccountService;
 	private final String _itemSelectedEventName;
 	private String _keywords;
 	private final PortletURL _portletURL;
