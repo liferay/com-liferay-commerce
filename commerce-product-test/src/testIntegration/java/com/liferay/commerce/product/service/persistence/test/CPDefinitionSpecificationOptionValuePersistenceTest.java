@@ -254,6 +254,14 @@ public class CPDefinitionSpecificationOptionValuePersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_COC() throws Exception {
+		_persistence.countByC_COC(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
+
+		_persistence.countByC_COC(0L, 0L);
+	}
+
+	@Test
 	public void testCountByC_CSO() throws Exception {
 		_persistence.countByC_CSO(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong());
@@ -262,11 +270,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceTest {
 	}
 
 	@Test
-	public void testCountByC_COC() throws Exception {
-		_persistence.countByC_COC(RandomTestUtil.nextLong(),
+	public void testCountByC_CSOVI() throws Exception {
+		_persistence.countByC_CSOVI(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong());
 
-		_persistence.countByC_COC(0L, 0L);
+		_persistence.countByC_CSOVI(0L, 0L);
 	}
 
 	@Test
@@ -551,10 +559,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceTest {
 				existingCPDefinitionSpecificationOptionValue,
 				"getOriginalCPDefinitionId", new Class<?>[0]));
 		Assert.assertEquals(Long.valueOf(
-				existingCPDefinitionSpecificationOptionValue.getCPSpecificationOptionId()),
+				existingCPDefinitionSpecificationOptionValue.getCPDefinitionSpecificationOptionValueId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCPDefinitionSpecificationOptionValue,
-				"getOriginalCPSpecificationOptionId", new Class<?>[0]));
+				"getOriginalCPDefinitionSpecificationOptionValueId",
+				new Class<?>[0]));
 	}
 
 	protected CPDefinitionSpecificationOptionValue addCPDefinitionSpecificationOptionValue()

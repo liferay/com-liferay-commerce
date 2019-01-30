@@ -927,60 +927,6 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	public int countByCPOptionCategoryId(long CPOptionCategoryId);
 
 	/**
-	* Returns the cp definition specification option value where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63; or throws a {@link NoSuchCPDefinitionSpecificationOptionValueException} if it could not be found.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @param CPSpecificationOptionId the cp specification option ID
-	* @return the matching cp definition specification option value
-	* @throws NoSuchCPDefinitionSpecificationOptionValueException if a matching cp definition specification option value could not be found
-	*/
-	public CPDefinitionSpecificationOptionValue findByC_CSO(
-		long CPDefinitionId, long CPSpecificationOptionId)
-		throws NoSuchCPDefinitionSpecificationOptionValueException;
-
-	/**
-	* Returns the cp definition specification option value where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @param CPSpecificationOptionId the cp specification option ID
-	* @return the matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
-	*/
-	public CPDefinitionSpecificationOptionValue fetchByC_CSO(
-		long CPDefinitionId, long CPSpecificationOptionId);
-
-	/**
-	* Returns the cp definition specification option value where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @param CPSpecificationOptionId the cp specification option ID
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
-	*/
-	public CPDefinitionSpecificationOptionValue fetchByC_CSO(
-		long CPDefinitionId, long CPSpecificationOptionId,
-		boolean retrieveFromCache);
-
-	/**
-	* Removes the cp definition specification option value where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63; from the database.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @param CPSpecificationOptionId the cp specification option ID
-	* @return the cp definition specification option value that was removed
-	*/
-	public CPDefinitionSpecificationOptionValue removeByC_CSO(
-		long CPDefinitionId, long CPSpecificationOptionId)
-		throws NoSuchCPDefinitionSpecificationOptionValueException;
-
-	/**
-	* Returns the number of cp definition specification option values where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
-	*
-	* @param CPDefinitionId the cp definition ID
-	* @param CPSpecificationOptionId the cp specification option ID
-	* @return the number of matching cp definition specification option values
-	*/
-	public int countByC_CSO(long CPDefinitionId, long CPSpecificationOptionId);
-
-	/**
 	* Returns all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
 	*
 	* @param CPDefinitionId the cp definition ID
@@ -1128,6 +1074,210 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	* @return the number of matching cp definition specification option values
 	*/
 	public int countByC_COC(long CPDefinitionId, long CPOptionCategoryId);
+
+	/**
+	* Returns all the cp definition specification option values where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	* @return the matching cp definition specification option values
+	*/
+	public java.util.List<CPDefinitionSpecificationOptionValue> findByC_CSO(
+		long CPDefinitionId, long CPSpecificationOptionId);
+
+	/**
+	* Returns a range of all the cp definition specification option values where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionSpecificationOptionValueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	* @param start the lower bound of the range of cp definition specification option values
+	* @param end the upper bound of the range of cp definition specification option values (not inclusive)
+	* @return the range of matching cp definition specification option values
+	*/
+	public java.util.List<CPDefinitionSpecificationOptionValue> findByC_CSO(
+		long CPDefinitionId, long CPSpecificationOptionId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the cp definition specification option values where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionSpecificationOptionValueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	* @param start the lower bound of the range of cp definition specification option values
+	* @param end the upper bound of the range of cp definition specification option values (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching cp definition specification option values
+	*/
+	public java.util.List<CPDefinitionSpecificationOptionValue> findByC_CSO(
+		long CPDefinitionId, long CPSpecificationOptionId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionSpecificationOptionValue> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the cp definition specification option values where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPDefinitionSpecificationOptionValueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	* @param start the lower bound of the range of cp definition specification option values
+	* @param end the upper bound of the range of cp definition specification option values (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching cp definition specification option values
+	*/
+	public java.util.List<CPDefinitionSpecificationOptionValue> findByC_CSO(
+		long CPDefinitionId, long CPSpecificationOptionId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionSpecificationOptionValue> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching cp definition specification option value
+	* @throws NoSuchCPDefinitionSpecificationOptionValueException if a matching cp definition specification option value could not be found
+	*/
+	public CPDefinitionSpecificationOptionValue findByC_CSO_First(
+		long CPDefinitionId, long CPSpecificationOptionId,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionSpecificationOptionValue> orderByComparator)
+		throws NoSuchCPDefinitionSpecificationOptionValueException;
+
+	/**
+	* Returns the first cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
+	*/
+	public CPDefinitionSpecificationOptionValue fetchByC_CSO_First(
+		long CPDefinitionId, long CPSpecificationOptionId,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionSpecificationOptionValue> orderByComparator);
+
+	/**
+	* Returns the last cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching cp definition specification option value
+	* @throws NoSuchCPDefinitionSpecificationOptionValueException if a matching cp definition specification option value could not be found
+	*/
+	public CPDefinitionSpecificationOptionValue findByC_CSO_Last(
+		long CPDefinitionId, long CPSpecificationOptionId,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionSpecificationOptionValue> orderByComparator)
+		throws NoSuchCPDefinitionSpecificationOptionValueException;
+
+	/**
+	* Returns the last cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
+	*/
+	public CPDefinitionSpecificationOptionValue fetchByC_CSO_Last(
+		long CPDefinitionId, long CPSpecificationOptionId,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionSpecificationOptionValue> orderByComparator);
+
+	/**
+	* Returns the cp definition specification option values before and after the current cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
+	*
+	* @param CPDefinitionSpecificationOptionValueId the primary key of the current cp definition specification option value
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next cp definition specification option value
+	* @throws NoSuchCPDefinitionSpecificationOptionValueException if a cp definition specification option value with the primary key could not be found
+	*/
+	public CPDefinitionSpecificationOptionValue[] findByC_CSO_PrevAndNext(
+		long CPDefinitionSpecificationOptionValueId, long CPDefinitionId,
+		long CPSpecificationOptionId,
+		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionSpecificationOptionValue> orderByComparator)
+		throws NoSuchCPDefinitionSpecificationOptionValueException;
+
+	/**
+	* Removes all the cp definition specification option values where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63; from the database.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	*/
+	public void removeByC_CSO(long CPDefinitionId, long CPSpecificationOptionId);
+
+	/**
+	* Returns the number of cp definition specification option values where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPSpecificationOptionId the cp specification option ID
+	* @return the number of matching cp definition specification option values
+	*/
+	public int countByC_CSO(long CPDefinitionId, long CPSpecificationOptionId);
+
+	/**
+	* Returns the cp definition specification option value where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63; or throws a {@link NoSuchCPDefinitionSpecificationOptionValueException} if it could not be found.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
+	* @return the matching cp definition specification option value
+	* @throws NoSuchCPDefinitionSpecificationOptionValueException if a matching cp definition specification option value could not be found
+	*/
+	public CPDefinitionSpecificationOptionValue findByC_CSOVI(
+		long CPDefinitionId, long CPDefinitionSpecificationOptionValueId)
+		throws NoSuchCPDefinitionSpecificationOptionValueException;
+
+	/**
+	* Returns the cp definition specification option value where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
+	* @return the matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
+	*/
+	public CPDefinitionSpecificationOptionValue fetchByC_CSOVI(
+		long CPDefinitionId, long CPDefinitionSpecificationOptionValueId);
+
+	/**
+	* Returns the cp definition specification option value where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
+	*/
+	public CPDefinitionSpecificationOptionValue fetchByC_CSOVI(
+		long CPDefinitionId, long CPDefinitionSpecificationOptionValueId,
+		boolean retrieveFromCache);
+
+	/**
+	* Removes the cp definition specification option value where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63; from the database.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
+	* @return the cp definition specification option value that was removed
+	*/
+	public CPDefinitionSpecificationOptionValue removeByC_CSOVI(
+		long CPDefinitionId, long CPDefinitionSpecificationOptionValueId)
+		throws NoSuchCPDefinitionSpecificationOptionValueException;
+
+	/**
+	* Returns the number of cp definition specification option values where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63;.
+	*
+	* @param CPDefinitionId the cp definition ID
+	* @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
+	* @return the number of matching cp definition specification option values
+	*/
+	public int countByC_CSOVI(long CPDefinitionId,
+		long CPDefinitionSpecificationOptionValueId);
 
 	/**
 	* Caches the cp definition specification option value in the entity cache if it is enabled.
