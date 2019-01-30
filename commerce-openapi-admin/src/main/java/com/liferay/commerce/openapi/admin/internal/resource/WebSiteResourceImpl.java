@@ -16,10 +16,10 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
 import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
-import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.openapi.admin.resource.WebSiteResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;

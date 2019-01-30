@@ -15,10 +15,10 @@
 package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.PriceEntryHelper;
-import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.resource.PriceEntryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.model.Company;
 
 import javax.annotation.Generated;
