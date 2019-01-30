@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import com.liferay.commerce.openapi.util.ComponentDefinition;
 import com.liferay.commerce.openapi.util.PropertyDefinition;
+import com.liferay.commerce.openapi.util.util.GetterUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -52,9 +53,8 @@ public class ComponentImporter {
 	private ComponentDefinition _getComponentDefinition(
 		String name, JsonNode schemaEntryJSONNode) {
 
-		JsonNode typeJSONNode = schemaEntryJSONNode.get("type");
-
-		String type = typeJSONNode.asText();
+		String type = GetterUtil.getAsText(
+			"type", schemaEntryJSONNode, "object");
 
 		String itemsReference = null;
 
@@ -68,17 +68,17 @@ public class ComponentImporter {
 			}
 		}
 		else if (schemaEntryJSONNode.has("additionalProperties")) {
-				JsonNode additionalPropertiesJSONNode = schemaEntryJSONNode.get(
-					"additionalProperties");
+			JsonNode additionalPropertiesJSONNode = schemaEntryJSONNode.get(
+				"additionalProperties");
 
-				if (additionalPropertiesJSONNode.has("$ref")) {
-					JsonNode referenceJSONNode =
-						additionalPropertiesJSONNode.get("$ref");
+			if (additionalPropertiesJSONNode.has("$ref")) {
+				JsonNode referenceJSONNode = additionalPropertiesJSONNode.get(
+					"$ref");
 
-					itemsReference = referenceJSONNode.asText();
-				}
+				itemsReference = referenceJSONNode.asText();
+			}
 
-				type = "dictionary";
+			type = "dictionary";
 		}
 
 		return new ComponentDefinition(
@@ -141,9 +141,8 @@ public class ComponentImporter {
 
 				JsonNode propertyJSONNode = propertyEntry.getValue();
 
-				JsonNode propertyTypeJSONNode = propertyJSONNode.get("type");
-
-				String propertyType = propertyTypeJSONNode.asText();
+				String propertyType = GetterUtil.getAsText(
+					"type", propertyJSONNode, "object");
 
 				PropertyDefinition propertyDefinition = null;
 
@@ -168,7 +167,13 @@ public class ComponentImporter {
 						itemFormat);
 				}
 				else if ("object".equals(propertyType)) {
+					propertyDefinition = new PropertyDefinition(
+						propertyEntry.getKey(), propertyType,
+						GetterUtil.getAsTextOrNullIfMisses(
+							"$ref", propertyJSONNode));
 
+					_logger.trace(
+						"Detected nested object {}", propertyDefinition);
 				}
 				else {
 					String format = null;
