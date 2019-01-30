@@ -56,7 +56,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 </div>
 
 <div class="minium-frame__cta is-visible">
-	<c:if test="<%= selectedUser.getUserId() != user.getUserId() %>">
+	<c:if test="<%= (selectedUser.getUserId() != user.getUserId()) && commerceAccountDisplayContext.hasManageCommerceAccountPermissions() %>">
 		<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openUserRolesModal();" %>' value="roles" />
 	</c:if>
 </div>
@@ -77,12 +77,13 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 
 <aui:form action="<%= editCommerceAccountUserURL %>" method="post" name="editCommerceAccountUserFm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="EDIT_ROLES" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccount.getCommerceAccountId() %>" />
 	<aui:input name="userId" type="hidden" value="<%= selectedUser.getUserId() %>" />
 	<aui:input name="selectedRoleIds" type="hidden" />
 </aui:form>
 
-<c:if test="<%= selectedUser.getUserId() != user.getUserId() %>">
+<c:if test="<%= (selectedUser.getUserId() != user.getUserId()) && commerceAccountDisplayContext.hasManageCommerceAccountPermissions() %>">
 	<commerce-ui:user-roles-modal
 		commerceAccountId="<%= commerceAccount.getCommerceAccountId() %>"
 		componentId="userRolesModal"
