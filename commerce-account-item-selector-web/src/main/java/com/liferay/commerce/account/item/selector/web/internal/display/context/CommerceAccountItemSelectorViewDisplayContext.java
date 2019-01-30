@@ -103,28 +103,22 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 
 		if (isSearch()) {
 			Sort sort =
-				CommerceAccountItemSelectorViewUtil.
-					getCommerceAccountSort(getOrderByCol(), getOrderByType());
+				CommerceAccountItemSelectorViewUtil.getCommerceAccountSort(
+					getOrderByCol(), getOrderByType());
 
 			BaseModelSearchResult<CommerceAccount> results =
-				_commerceAccountService.
-					searchCommerceAccounts(
-						_commerceAccountItemSelectorRequestHelper.
-							getCompanyId(),
-						_commerceAccountItemSelectorRequestHelper.
-							getScopeGroupId(),
-						getKeywords(), _searchContainer.getStart(),
-						_searchContainer.getEnd(), sort);
+				_commerceAccountService.searchCommerceAccounts(
+					_commerceAccountItemSelectorRequestHelper.getCompanyId(),
+					_commerceAccountItemSelectorRequestHelper.getScopeGroupId(),
+					getKeywords(), _searchContainer.getStart(),
+					_searchContainer.getEnd(), sort);
 
 			_searchContainer.setTotal(results.getLength());
 			_searchContainer.setResults(results.getBaseModels());
 		}
 		else {
-			int total =
-				_commerceAccountService.
-					getCommerceAccountsCount(
-						_commerceAccountItemSelectorRequestHelper.
-							getScopeGroupId());
+			int total = _commerceAccountService.getCommerceAccountsCount(
+				_commerceAccountItemSelectorRequestHelper.getScopeGroupId());
 
 			_searchContainer.setTotal(total);
 
