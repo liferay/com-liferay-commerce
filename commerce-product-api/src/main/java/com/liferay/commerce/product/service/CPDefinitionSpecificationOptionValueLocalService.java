@@ -197,7 +197,7 @@ public interface CPDefinitionSpecificationOptionValueLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionSpecificationOptionValue fetchCPDefinitionSpecificationOptionValue(
-		long cpDefinitionId, long cpSpecificationOptionId);
+		long cpDefinitionId, long cpDefinitionSpecificationOptionValueId);
 
 	/**
 	* Returns the cp definition specification option value matching the UUID and group.
@@ -259,6 +259,10 @@ public interface CPDefinitionSpecificationOptionValueLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValues(
 		long cpDefinitionId, long cpOptionCategoryId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDefinitionSpecificationOptionValue> getCPDefinitionSpecificationOptionValuesByC_CSO(
+		long cpDefinitionId, long cpSpecificationOptionId);
 
 	/**
 	* Returns all the cp definition specification option values matching the UUID and company.

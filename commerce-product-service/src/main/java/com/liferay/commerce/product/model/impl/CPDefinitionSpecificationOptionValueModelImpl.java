@@ -131,12 +131,14 @@ public class CPDefinitionSpecificationOptionValueModelImpl extends BaseModelImpl
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue"),
 			true);
 	public static final long CPDEFINITIONID_COLUMN_BITMASK = 1L;
-	public static final long CPOPTIONCATEGORYID_COLUMN_BITMASK = 2L;
-	public static final long CPSPECIFICATIONOPTIONID_COLUMN_BITMASK = 4L;
-	public static final long COMPANYID_COLUMN_BITMASK = 8L;
-	public static final long GROUPID_COLUMN_BITMASK = 16L;
-	public static final long UUID_COLUMN_BITMASK = 32L;
-	public static final long PRIORITY_COLUMN_BITMASK = 64L;
+	public static final long CPDEFINITIONSPECIFICATIONOPTIONVALUEID_COLUMN_BITMASK =
+		2L;
+	public static final long CPOPTIONCATEGORYID_COLUMN_BITMASK = 4L;
+	public static final long CPSPECIFICATIONOPTIONID_COLUMN_BITMASK = 8L;
+	public static final long COMPANYID_COLUMN_BITMASK = 16L;
+	public static final long GROUPID_COLUMN_BITMASK = 32L;
+	public static final long UUID_COLUMN_BITMASK = 64L;
+	public static final long PRIORITY_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -375,7 +377,19 @@ public class CPDefinitionSpecificationOptionValueModelImpl extends BaseModelImpl
 	@Override
 	public void setCPDefinitionSpecificationOptionValueId(
 		long CPDefinitionSpecificationOptionValueId) {
+		_columnBitmask |= CPDEFINITIONSPECIFICATIONOPTIONVALUEID_COLUMN_BITMASK;
+
+		if (!_setOriginalCPDefinitionSpecificationOptionValueId) {
+			_setOriginalCPDefinitionSpecificationOptionValueId = true;
+
+			_originalCPDefinitionSpecificationOptionValueId = _CPDefinitionSpecificationOptionValueId;
+		}
+
 		_CPDefinitionSpecificationOptionValueId = CPDefinitionSpecificationOptionValueId;
+	}
+
+	public long getOriginalCPDefinitionSpecificationOptionValueId() {
+		return _originalCPDefinitionSpecificationOptionValueId;
 	}
 
 	@JSON
@@ -874,6 +888,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl extends BaseModelImpl
 
 		cpDefinitionSpecificationOptionValueModelImpl._originalUuid = cpDefinitionSpecificationOptionValueModelImpl._uuid;
 
+		cpDefinitionSpecificationOptionValueModelImpl._originalCPDefinitionSpecificationOptionValueId = cpDefinitionSpecificationOptionValueModelImpl._CPDefinitionSpecificationOptionValueId;
+
+		cpDefinitionSpecificationOptionValueModelImpl._setOriginalCPDefinitionSpecificationOptionValueId = false;
+
 		cpDefinitionSpecificationOptionValueModelImpl._originalGroupId = cpDefinitionSpecificationOptionValueModelImpl._groupId;
 
 		cpDefinitionSpecificationOptionValueModelImpl._setOriginalGroupId = false;
@@ -1089,6 +1107,8 @@ public class CPDefinitionSpecificationOptionValueModelImpl extends BaseModelImpl
 	private String _uuid;
 	private String _originalUuid;
 	private long _CPDefinitionSpecificationOptionValueId;
+	private long _originalCPDefinitionSpecificationOptionValueId;
+	private boolean _setOriginalCPDefinitionSpecificationOptionValueId;
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
