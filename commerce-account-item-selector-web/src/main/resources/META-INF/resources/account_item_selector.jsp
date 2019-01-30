@@ -53,7 +53,7 @@ PortletURL portletURL = commerceAccountItemSelectorViewDisplayContext.getPortlet
 		<liferay-frontend:management-bar-sort
 			orderByCol="<%= commerceAccountItemSelectorViewDisplayContext.getOrderByCol() %>"
 			orderByType="<%= commerceAccountItemSelectorViewDisplayContext.getOrderByType() %>"
-			orderColumns='<%= new String[] {"priority"} %>'
+			orderColumns="<%= new String[0] %>"
 			portletURL="<%= portletURL %>"
 		/>
 	</liferay-frontend:management-bar-filters>
@@ -75,7 +75,7 @@ PortletURL portletURL = commerceAccountItemSelectorViewDisplayContext.getPortlet
 			Map<String, Object> data = new HashMap<>();
 
 			data.put("commerce-account-id", commerceAccount.getCommerceAccountId());
-			data.put("name", commerceAccount.getName(locale));
+			data.put("name", commerceAccount.getName());
 
 			row.setData(data);
 			%>
@@ -83,11 +83,6 @@ PortletURL portletURL = commerceAccountItemSelectorViewDisplayContext.getPortlet
 			<liferay-ui:search-container-column-text
 				cssClass="table-cell-content"
 				property="name"
-			/>
-
-			<liferay-ui:search-container-column-text
-				cssClass="table-cell-content"
-				property="priority"
 			/>
 
 			<liferay-ui:search-container-column-text
@@ -103,8 +98,6 @@ PortletURL portletURL = commerceAccountItemSelectorViewDisplayContext.getPortlet
 </div>
 
 <aui:script use="liferay-search-container">
-	var commerceAccountSelectorWrapper = A.one("#<portlet:namespace />commerceAccountSelectorWrapper");
-
 	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />commerceAccounts');
 
 	searchContainer.on(

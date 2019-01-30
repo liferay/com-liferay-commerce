@@ -14,11 +14,23 @@
 
 package com.liferay.commerce.price.list.service.impl;
 
+import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
 import com.liferay.commerce.price.list.service.base.CommercePriceListAccountRelLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * @author Ethan Bustad
  */
 public class CommercePriceListAccountRelLocalServiceImpl
 	extends CommercePriceListAccountRelLocalServiceBaseImpl {
+
+	@Override
+	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
+		long commercePriceListId) {
+
+		return commercePriceListAccountRelPersistence.findByCommercePriceListId(
+			commercePriceListId);
+	}
+
 }

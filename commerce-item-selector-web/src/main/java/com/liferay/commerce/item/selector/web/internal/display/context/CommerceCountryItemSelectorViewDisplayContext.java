@@ -81,23 +81,21 @@ public class CommerceCountryItemSelectorViewDisplayContext
 
 		searchContainer.setEmptyResultsMessage("there-are-no-countries");
 
+		searchContainer.setOrderByCol(getOrderByCol());
+
 		OrderByComparator<CommerceCountry> orderByComparator =
 			CommerceUtil.getCommerceCountryOrderByComparator(
 				getOrderByCol(), getOrderByType());
+
+		searchContainer.setOrderByComparator(orderByComparator);
+
+		searchContainer.setOrderByType(getOrderByType());
 
 		RowChecker rowChecker = new CommerceCountryItemSelectorChecker(
 			cpRequestHelper.getRenderResponse(),
 			getCheckedCommerceCountryIds());
 
-		searchContainer.setOrderByCol(getOrderByCol());
-		searchContainer.setOrderByComparator(orderByComparator);
-		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(rowChecker);
-
-		int total = _commerceCountryService.getCommerceCountriesCount(
-			themeDisplay.getScopeGroupId());
-
-		searchContainer.setTotal(total);
 
 		List<CommerceCountry> results =
 			_commerceCountryService.getCommerceCountries(
@@ -106,6 +104,11 @@ public class CommerceCountryItemSelectorViewDisplayContext
 				orderByComparator);
 
 		searchContainer.setResults(results);
+
+		int total = _commerceCountryService.getCommerceCountriesCount(
+			themeDisplay.getScopeGroupId());
+
+		searchContainer.setTotal(total);
 
 		return searchContainer;
 	}
