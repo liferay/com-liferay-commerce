@@ -33,6 +33,7 @@ import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValue
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeServicesTracker;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -173,17 +174,26 @@ public class CPCompareContentHelperImpl implements CPCompareContentHelper {
 	public String getCPDefinitionSpecificationOptionValue(
 		long cpDefinitionId, long cpSpecificationOptionId, Locale locale) {
 
-		CPDefinitionSpecificationOptionValue
-			cpDefinitionSpecificationOptionValue =
+		List<CPDefinitionSpecificationOptionValue>
+			cpDefinitionSpecificationOptionValues =
 				_cpDefinitionSpecificationOptionValueLocalService.
-					fetchCPDefinitionSpecificationOptionValue(
+					getCPDefinitionSpecificationOptionValuesByC_CSO(
 						cpDefinitionId, cpSpecificationOptionId);
 
-		if (cpDefinitionSpecificationOptionValue == null) {
-			return StringPool.BLANK;
+		StringBundler sb = new StringBundler(
+			cpDefinitionSpecificationOptionValues.size() * 2);
+
+		for (CPDefinitionSpecificationOptionValue
+				cpDefinitionSpecificationOptionValue :
+					cpDefinitionSpecificationOptionValues) {
+
+			sb.append(cpDefinitionSpecificationOptionValue.getValue(locale));
+			sb.append(StringPool.COMMA_AND_SPACE);
 		}
 
-		return cpDefinitionSpecificationOptionValue.getValue(locale);
+		sb.setIndex(sb.index() - 1);
+
+		return sb.toString();
 	}
 
 	@Override
