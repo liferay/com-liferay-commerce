@@ -107,10 +107,11 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 							getCPDefinitionId());
 
 				cpDefinitionSpecificationOptionValue =
-					cpDefinitionSpecificationOptionValuePersistence.findByC_CSO(
-						newCPDefinition.getCPDefinitionId(),
-						cpDefinitionSpecificationOptionValue.
-							getCPSpecificationOptionId());
+					cpDefinitionSpecificationOptionValuePersistence.
+						findByC_CSOVI(
+							newCPDefinition.getCPDefinitionId(),
+							cpDefinitionSpecificationOptionValue.
+								getCPDefinitionSpecificationOptionValueId());
 			}
 			catch (PortalException pe) {
 				throw new SystemException(pe);
@@ -202,10 +203,10 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 	@Override
 	public CPDefinitionSpecificationOptionValue
 		fetchCPDefinitionSpecificationOptionValue(
-			long cpDefinitionId, long cpSpecificationOptionId) {
+			long cpDefinitionId, long cpDefinitionSpecificationOptionValueId) {
 
-		return cpDefinitionSpecificationOptionValuePersistence.fetchByC_CSO(
-			cpDefinitionId, cpSpecificationOptionId);
+		return cpDefinitionSpecificationOptionValuePersistence.fetchByC_CSOVI(
+			cpDefinitionId, cpDefinitionSpecificationOptionValueId);
 	}
 
 	@Override
@@ -226,6 +227,15 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 
 		return cpDefinitionSpecificationOptionValuePersistence.findByC_COC(
 			cpDefinitionId, cpOptionCategoryId);
+	}
+
+	@Override
+	public List<CPDefinitionSpecificationOptionValue>
+		getCPDefinitionSpecificationOptionValuesByC_CSO(
+			long cpDefinitionId, long cpSpecificationOptionId) {
+
+		return cpDefinitionSpecificationOptionValuePersistence.findByC_CSO(
+			cpDefinitionId, cpSpecificationOptionId);
 	}
 
 	@Override
@@ -259,10 +269,10 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 					cpDefinitionSpecificationOptionValue.getCPDefinitionId());
 
 			cpDefinitionSpecificationOptionValue =
-				cpDefinitionSpecificationOptionValuePersistence.findByC_CSO(
+				cpDefinitionSpecificationOptionValuePersistence.findByC_CSOVI(
 					newCPDefinition.getCPDefinitionId(),
 					cpDefinitionSpecificationOptionValue.
-						getCPSpecificationOptionId());
+						getCPDefinitionSpecificationOptionValueId());
 		}
 
 		cpDefinitionSpecificationOptionValue.setCPOptionCategoryId(
@@ -304,10 +314,10 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 					cpDefinitionSpecificationOptionValue.getCPDefinitionId());
 
 			cpDefinitionSpecificationOptionValue =
-				cpDefinitionSpecificationOptionValuePersistence.findByC_CSO(
+				cpDefinitionSpecificationOptionValuePersistence.findByC_CSOVI(
 					newCPDefinition.getCPDefinitionId(),
 					cpDefinitionSpecificationOptionValue.
-						getCPSpecificationOptionId());
+						getCPDefinitionSpecificationOptionValueId());
 		}
 
 		cpDefinitionSpecificationOptionValue.setCPOptionCategoryId(
