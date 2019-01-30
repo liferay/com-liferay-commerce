@@ -62,11 +62,15 @@ public class PropertyDefinition {
 	}
 
 	public String getGetterSyntax() {
+		if (_parameterFormat == null) {
+			return "get";
+		}
+
 		return _parameterFormat.getGetterSyntax();
 	}
 
-	public String getItemFormat() {
-		return _itemFormat;
+	public String getFormat() {
+		return _format;
 	}
 
 	public String getItemType() {
@@ -86,6 +90,10 @@ public class PropertyDefinition {
 	}
 
 	public String getSetterSyntax() {
+		if (_parameterFormat == null) {
+			return "set";
+		}
+
 		return _parameterFormat.getSetterSyntax();
 	}
 
@@ -119,6 +127,14 @@ public class PropertyDefinition {
 
 	public void setType(String type) {
 		_type = type;
+	}
+
+	public boolean isObject() {
+		if (_type.equals("object")) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
