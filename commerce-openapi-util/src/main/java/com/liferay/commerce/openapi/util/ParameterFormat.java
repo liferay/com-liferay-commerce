@@ -14,6 +14,11 @@
 
 package com.liferay.commerce.openapi.util;
 
+import com.liferay.commerce.openapi.util.exception.OpenApiException;
+import com.liferay.commerce.openapi.util.util.ComponentDefinitionUtil;
+
+import java.util.Set;
+
 /**
  * @author Igor Beslic
  */
@@ -58,6 +63,30 @@ public enum ParameterFormat {
 		}
 
 		return defaultParameterFormat;
+	}
+
+	public static String getJavaType(
+		PropertyDefinition propertyDefinition,
+		Set<ComponentDefinition> componentDefinitions) {
+
+		if (propertyDefinition.isObject()) {
+			ComponentDefinition componentDefinition =
+				ComponentDefinitionUtil.getSchemaComponentDefinition(
+					Schema.getReferencedModel(propertyDefinition.getFormat()),
+					componentDefinitions);
+
+			if (componentDefinition.isDictionary()) {
+				return "Map<String, String>";
+			}
+			else if (componentDefinition.isObject()) {
+				return componentDefinition.getName() + "DTO";
+			}
+
+			throw new OpenApiException(
+				"Unable to resolve java type for " + componentDefinition);
+		}
+
+		return propertyDefinition.getJavaType();
 	}
 
 	public String getGetterSyntax() {

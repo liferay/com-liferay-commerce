@@ -61,16 +61,16 @@ public class PropertyDefinition {
 		return _example;
 	}
 
+	public String getFormat() {
+		return _format;
+	}
+
 	public String getGetterSyntax() {
 		if (_parameterFormat == null) {
 			return "get";
 		}
 
 		return _parameterFormat.getGetterSyntax();
-	}
-
-	public String getFormat() {
-		return _format;
 	}
 
 	public String getItemType() {
@@ -101,6 +101,14 @@ public class PropertyDefinition {
 		return _type;
 	}
 
+	public boolean isObject() {
+		if (_type.equals("object")) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isRequired() {
 		return _required;
 	}
@@ -127,14 +135,6 @@ public class PropertyDefinition {
 
 	public void setType(String type) {
 		_type = type;
-	}
-
-	public boolean isObject() {
-		if (_type.equals("object")) {
-			return true;
-		}
-
-		return false;
 	}
 
 	@Override
