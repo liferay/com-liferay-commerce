@@ -87,18 +87,21 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 
 		_searchContainer.setEmptyResultsMessage("there-are-no-entries");
 
+		_searchContainer.setOrderByCol(getOrderByCol());
+
 		OrderByComparator<CommerceUserSegmentEntry> orderByComparator =
 			CommerceUserSegmentItemSelectorViewUtil.
 				getCommerceUserSegmentEntryOrderByComparator(
 					getOrderByCol(), getOrderByType());
 
+		_searchContainer.setOrderByComparator(orderByComparator);
+
+		_searchContainer.setOrderByType(getOrderByType());
+
 		RowChecker rowChecker = new CommerceUserSegmentEntryItemSelectorChecker(
 			_commerceUserSegmentItemSelectorRequestHelper.getRenderResponse(),
 			getCheckedCommerceUserSegmentEntryIds());
 
-		_searchContainer.setOrderByCol(getOrderByCol());
-		_searchContainer.setOrderByComparator(orderByComparator);
-		_searchContainer.setOrderByType(getOrderByType());
 		_searchContainer.setRowChecker(rowChecker);
 
 		if (isSearch()) {
@@ -117,18 +120,10 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 						getKeywords(), _searchContainer.getStart(),
 						_searchContainer.getEnd(), sort);
 
-			_searchContainer.setTotal(results.getLength());
 			_searchContainer.setResults(results.getBaseModels());
+			_searchContainer.setTotal(results.getLength());
 		}
 		else {
-			int total =
-				_commerceUserSegmentEntryService.
-					getCommerceUserSegmentEntriesCount(
-						_commerceUserSegmentItemSelectorRequestHelper.
-							getScopeGroupId());
-
-			_searchContainer.setTotal(total);
-
 			List<CommerceUserSegmentEntry> results =
 				_commerceUserSegmentEntryService.getCommerceUserSegmentEntries(
 					_commerceUserSegmentItemSelectorRequestHelper.
@@ -137,6 +132,14 @@ public class CommerceUserSegmentEntryItemSelectorViewDisplayContext {
 					orderByComparator);
 
 			_searchContainer.setResults(results);
+
+			int total =
+				_commerceUserSegmentEntryService.
+					getCommerceUserSegmentEntriesCount(
+						_commerceUserSegmentItemSelectorRequestHelper.
+							getScopeGroupId());
+
+			_searchContainer.setTotal(total);
 		}
 
 		return _searchContainer;

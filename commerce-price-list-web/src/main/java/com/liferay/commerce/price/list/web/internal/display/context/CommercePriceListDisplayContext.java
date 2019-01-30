@@ -14,13 +14,18 @@
 
 package com.liferay.commerce.price.list.web.internal.display.context;
 
+import com.liferay.commerce.account.item.selector.criterion.CommerceAccountItemSelectorCriterion;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.currency.util.comparator.CommerceCurrencyPriorityComparator;
 import com.liferay.commerce.item.selector.criterion.CommercePriceListItemSelectorCriterion;
 import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
 import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
+import com.liferay.commerce.price.list.service.CommercePriceListAccountRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelService;
 import com.liferay.commerce.price.list.util.comparator.CommercePriceListPriorityComparator;
@@ -32,6 +37,7 @@ import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.commerce.user.segment.service.CommerceUserSegmentEntryService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
+import com.liferay.item.selector.criteria.Base64ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -65,8 +71,10 @@ public class CommercePriceListDisplayContext
 
 	public CommercePriceListDisplayContext(
 		CommercePriceListActionHelper commercePriceListActionHelper,
+		CommerceAccountService commerceAccountService,
 		CommerceCurrencyService commerceCurrencyService,
 		CommerceUserSegmentEntryService commerceUserSegmentEntryService,
+		CommercePriceListAccountRelService commercePriceListAccountRelService,
 		CommercePriceListUserSegmentEntryRelService
 			commercePriceListUserSegmentEntryRelService,
 		CommercePriceListService commercePriceListService,
@@ -75,8 +83,11 @@ public class CommercePriceListDisplayContext
 
 		super(commercePriceListActionHelper, httpServletRequest);
 
+		_commerceAccountService = commerceAccountService;
 		_commerceCurrencyService = commerceCurrencyService;
 		_commerceUserSegmentEntryService = commerceUserSegmentEntryService;
+		_commercePriceListAccountRelService =
+			commercePriceListAccountRelService;
 		_commercePriceListUserSegmentEntryRelService =
 			commercePriceListUserSegmentEntryRelService;
 		_commercePriceListService = commercePriceListService;
@@ -85,6 +96,37 @@ public class CommercePriceListDisplayContext
 
 		setDefaultOrderByCol("priority");
 		setDefaultOrderByType("asc");
+	}
+
+	public CommerceAccount getCommerceAccount(long commerceAccountId)
+		throws PortalException {
+
+		return _commerceAccountService.getCommerceAccount(commerceAccountId);
+	}
+
+	public String getCommerceAccountSelectorUrl() throws PortalException {
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
+			RequestBackedPortletURLFactoryUtil.create(httpServletRequest);
+
+		CommerceAccountItemSelectorCriterion
+			commerceAccountItemSelectorCriterion =
+				new CommerceAccountItemSelectorCriterion();
+
+		commerceAccountItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
+			Collections.<ItemSelectorReturnType>singletonList(
+				new Base64ItemSelectorReturnType()));
+
+		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
+			requestBackedPortletURLFactory, "accountsSelectItem",
+			commerceAccountItemSelectorCriterion);
+
+		String checkedCommerceAccountIds = StringUtil.merge(
+			getCheckedCommerceAccountIds());
+
+		itemSelectorURL.setParameter(
+			"checkedCommerceAccountIds", checkedCommerceAccountIds);
+
+		return itemSelectorURL.toString();
 	}
 
 	public List<CommerceCurrency> getCommerceCurrencies()
@@ -97,6 +139,19 @@ public class CommercePriceListDisplayContext
 		return _commerceCurrencyService.getCommerceCurrencies(
 			themeDisplay.getScopeGroupId(), true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, new CommerceCurrencyPriorityComparator(true));
+	}
+
+	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels()
+		throws PortalException {
+
+		long commercePriceListId = getCommercePriceListId();
+
+		if (commercePriceListId <= 0) {
+			return Collections.emptyList();
+		}
+
+		return _commercePriceListAccountRelService.
+			getCommercePriceListAccountRels(commercePriceListId);
 	}
 
 	public List<CommercePriceList> getCommercePriceLists()
@@ -139,7 +194,9 @@ public class CommercePriceListDisplayContext
 			commerceUserSegmentEntryId);
 	}
 
-	public String getItemSelectorUrl() throws PortalException {
+	public String getCommerceUserSegmentEntrySelectorUrl()
+		throws PortalException {
+
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(httpServletRequest);
 
@@ -296,6 +353,22 @@ public class CommercePriceListDisplayContext
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 	}
 
+	protected long[] getCheckedCommerceAccountIds() throws PortalException {
+		List<CommercePriceListAccountRel> commercePriceListAccountRels =
+			getCommercePriceListAccountRels();
+
+		if (commercePriceListAccountRels.isEmpty()) {
+			return new long[0];
+		}
+
+		Stream<CommercePriceListAccountRel> stream =
+			commercePriceListAccountRels.stream();
+
+		return stream.mapToLong(
+			CommercePriceListAccountRel::getCommerceAccountId
+		).toArray();
+	}
+
 	protected long[] getCheckedCommerceUserSegmentEntryIds()
 		throws PortalException {
 
@@ -315,7 +388,10 @@ public class CommercePriceListDisplayContext
 		).toArray();
 	}
 
+	private final CommerceAccountService _commerceAccountService;
 	private final CommerceCurrencyService _commerceCurrencyService;
+	private final CommercePriceListAccountRelService
+		_commercePriceListAccountRelService;
 	private final CommercePriceListService _commercePriceListService;
 	private final CommercePriceListUserSegmentEntryRelService
 		_commercePriceListUserSegmentEntryRelService;

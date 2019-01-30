@@ -14,19 +14,18 @@
 
 package com.liferay.commerce.account.item.selector.web.internal.display.context;
 
+import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.item.selector.web.internal.display.context.util.CommerceAccountItemSelectorRequestHelper;
 import com.liferay.commerce.account.item.selector.web.internal.search.CommerceAccountItemSelectorChecker;
-import com.liferay.commerce.account.item.selector.web.internal.util.CommerceAccountItemSelectorViewUtil;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
 
@@ -42,10 +41,12 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 
 	public CommerceAccountItemSelectorViewDisplayContext(
 		CommerceAccountService commerceAccountService,
+		ConfigurationProvider configurationProvider,
 		HttpServletRequest httpServletRequest, PortletURL portletURL,
 		String itemSelectedEventName) {
 
 		_commerceAccountService = commerceAccountService;
+		_configurationProvider = configurationProvider;
 		_portletURL = portletURL;
 		_itemSelectedEventName = itemSelectedEventName;
 
@@ -60,13 +61,13 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 	public String getOrderByCol() {
 		return ParamUtil.getString(
 			_commerceAccountItemSelectorRequestHelper.getRenderRequest(),
-			SearchContainer.DEFAULT_ORDER_BY_COL_PARAM, "priority");
+			SearchContainer.DEFAULT_ORDER_BY_COL_PARAM, "createDate_sortable");
 	}
 
 	public String getOrderByType() {
 		return ParamUtil.getString(
 			_commerceAccountItemSelectorRequestHelper.getRenderRequest(),
-			SearchContainer.DEFAULT_ORDER_BY_TYPE_PARAM, "asc");
+			SearchContainer.DEFAULT_ORDER_BY_TYPE_PARAM, "desc");
 	}
 
 	public PortletURL getPortletURL() {
@@ -85,51 +86,43 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 				getLiferayPortletRequest(),
 			getPortletURL(), null, null);
 
-		_searchContainer.setEmptyResultsMessage("there-are-no-entries");
+		_searchContainer.setEmptyResultsMessage("there-are-no-accounts");
 
-		OrderByComparator<CommerceAccount> orderByComparator =
-			CommerceAccountItemSelectorViewUtil.
-				getCommerceAccountOrderByComparator(
-					getOrderByCol(), getOrderByType());
+		_searchContainer.setOrderByCol(getOrderByCol());
+		_searchContainer.setOrderByType(getOrderByType());
 
 		RowChecker rowChecker = new CommerceAccountItemSelectorChecker(
 			_commerceAccountItemSelectorRequestHelper.getRenderResponse(),
 			getCheckedCommerceAccountIds());
 
-		_searchContainer.setOrderByCol(getOrderByCol());
-		_searchContainer.setOrderByComparator(orderByComparator);
-		_searchContainer.setOrderByType(getOrderByType());
 		_searchContainer.setRowChecker(rowChecker);
 
-		if (isSearch()) {
-			Sort sort =
-				CommerceAccountItemSelectorViewUtil.getCommerceAccountSort(
-					getOrderByCol(), getOrderByType());
+		CommerceAccountGroupServiceConfiguration
+			commerceAccountGroupServiceConfiguration =
+				_configurationProvider.getConfiguration(
+					CommerceAccountGroupServiceConfiguration.class,
+					new GroupServiceSettingsLocator(
+						_commerceAccountItemSelectorRequestHelper.
+							getScopeGroupId(),
+						CommerceAccountConstants.SERVICE_NAME));
 
-			BaseModelSearchResult<CommerceAccount> results =
-				_commerceAccountService.searchCommerceAccounts(
-					_commerceAccountItemSelectorRequestHelper.getCompanyId(),
-					_commerceAccountItemSelectorRequestHelper.getScopeGroupId(),
-					getKeywords(), _searchContainer.getStart(),
-					_searchContainer.getEnd(), sort);
+		List<CommerceAccount> results =
+			_commerceAccountService.getUserCommerceAccounts(
+				_commerceAccountItemSelectorRequestHelper.getUserId(),
+				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
+				commerceAccountGroupServiceConfiguration.commerceSiteType(),
+				getKeywords(), _searchContainer.getStart(),
+				_searchContainer.getEnd());
 
-			_searchContainer.setTotal(results.getLength());
-			_searchContainer.setResults(results.getBaseModels());
-		}
-		else {
-			int total = _commerceAccountService.getCommerceAccountsCount(
-				_commerceAccountItemSelectorRequestHelper.getScopeGroupId());
+		_searchContainer.setResults(results);
 
-			_searchContainer.setTotal(total);
+		int total = _commerceAccountService.getUserCommerceAccountsCount(
+			_commerceAccountItemSelectorRequestHelper.getUserId(),
+			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
+			commerceAccountGroupServiceConfiguration.commerceSiteType(),
+			getKeywords());
 
-			List<CommerceAccount> results =
-				_commerceAccountService.getCommerceAccounts(
-					_commerceAccountItemSelectorRequestHelper.getScopeGroupId(),
-					_searchContainer.getStart(), _searchContainer.getEnd(),
-					orderByComparator);
-
-			_searchContainer.setResults(results);
-		}
+		_searchContainer.setTotal(total);
 
 		return _searchContainer;
 	}
@@ -152,17 +145,10 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 		return _keywords;
 	}
 
-	protected boolean isSearch() {
-		if (Validator.isNotNull(getKeywords())) {
-			return true;
-		}
-
-		return false;
-	}
-
 	private final CommerceAccountItemSelectorRequestHelper
 		_commerceAccountItemSelectorRequestHelper;
 	private final CommerceAccountService _commerceAccountService;
+	private final ConfigurationProvider _configurationProvider;
 	private final String _itemSelectedEventName;
 	private String _keywords;
 	private final PortletURL _portletURL;

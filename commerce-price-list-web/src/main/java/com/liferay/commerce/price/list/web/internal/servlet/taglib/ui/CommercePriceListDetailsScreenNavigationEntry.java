@@ -14,9 +14,11 @@
 
 package com.liferay.commerce.price.list.web.internal.servlet.taglib.ui;
 
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.service.CommercePriceListAccountRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelService;
 import com.liferay.commerce.price.list.web.internal.display.context.CommercePriceListDisplayContext;
@@ -89,8 +91,9 @@ public class CommercePriceListDetailsScreenNavigationEntry
 		try {
 			CommercePriceListDisplayContext commercePriceListDisplayContext =
 				new CommercePriceListDisplayContext(
-					_commercePriceListActionHelper, _commerceCurrencyService,
-					_commerceUserSegmentEntryService,
+					_commercePriceListActionHelper, _commerceAccountService,
+					_commerceCurrencyService, _commerceUserSegmentEntryService,
+					_commercePriceListAccountRelService,
 					_commercePriceListUserSegmentEntryRelService,
 					_commercePriceListService, httpServletRequest,
 					_itemSelector, _portletResourcePermission);
@@ -112,7 +115,14 @@ public class CommercePriceListDetailsScreenNavigationEntry
 		CommercePriceListDetailsScreenNavigationEntry.class);
 
 	@Reference
+	private CommerceAccountService _commerceAccountService;
+
+	@Reference
 	private CommerceCurrencyService _commerceCurrencyService;
+
+	@Reference
+	private CommercePriceListAccountRelService
+		_commercePriceListAccountRelService;
 
 	@Reference
 	private CommercePriceListActionHelper _commercePriceListActionHelper;

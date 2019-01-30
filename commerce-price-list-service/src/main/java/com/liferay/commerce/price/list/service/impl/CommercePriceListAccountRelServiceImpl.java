@@ -14,11 +14,45 @@
 
 package com.liferay.commerce.price.list.service.impl;
 
+import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
+import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
+import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
 import com.liferay.commerce.price.list.service.base.CommercePriceListAccountRelServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
+
+import java.util.List;
 
 /**
  * @author Ethan Bustad
  */
 public class CommercePriceListAccountRelServiceImpl
 	extends CommercePriceListAccountRelServiceBaseImpl {
+
+	@Override
+	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
+			long commercePriceListId)
+		throws PortalException {
+
+		CommercePriceList commercePriceList =
+			commercePriceListLocalService.getCommercePriceList(
+				commercePriceListId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceList.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
+		return commercePriceListAccountRelLocalService.
+			getCommercePriceListAccountRels(commercePriceListId);
+	}
+
+	private static volatile PortletResourcePermission
+		_portletResourcePermission =
+			PortletResourcePermissionFactory.getInstance(
+				CommercePriceListAccountRelServiceImpl.class,
+				"_portletResourcePermission",
+				CommercePriceListConstants.RESOURCE_NAME);
+
 }

@@ -19,11 +19,11 @@ import com.liferay.commerce.account.item.selector.web.internal.display.context.C
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorView;
-import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
+import com.liferay.item.selector.criteria.Base64ItemSelectorReturnType;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import javax.portlet.PortletURL;
 
@@ -71,10 +70,7 @@ public class CommerceAccountItemSelectorView
 
 	@Override
 	public String getTitle(Locale locale) {
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass());
-
-		return LanguageUtil.get(resourceBundle, "accounts");
+		return LanguageUtil.get(locale, "accounts");
 	}
 
 	@Override
@@ -101,8 +97,8 @@ public class CommerceAccountItemSelectorView
 		CommerceAccountItemSelectorViewDisplayContext
 			commerceAccountItemSelectorViewDisplayContext =
 				new CommerceAccountItemSelectorViewDisplayContext(
-					_commerceAccountService, httpServletRequest, portletURL,
-					itemSelectedEventName);
+					_commerceAccountService, _configurationProvider,
+					httpServletRequest, portletURL, itemSelectedEventName);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -120,11 +116,14 @@ public class CommerceAccountItemSelectorView
 		_supportedItemSelectorReturnTypes = Collections.unmodifiableList(
 			ListUtil.fromArray(
 				new ItemSelectorReturnType[] {
-					new UUIDItemSelectorReturnType()
+					new Base64ItemSelectorReturnType()
 				}));
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.account.item.selector.web)"
