@@ -15,8 +15,8 @@
 package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiTestUtil;
-import com.liferay.commerce.openapi.util.ParameterFormat;
 import com.liferay.commerce.openapi.util.PropertyDefinition;
 import com.liferay.commerce.openapi.util.importer.ComponentImporter;
 import com.liferay.commerce.openapi.util.util.StringUtils;
@@ -120,7 +120,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 					classSource,
 					String.format(
 						"private %s _%s",
-						ParameterFormat.getJavaType(
+						OpenApiFormat.getJavaType(
 							propertyDefinition, new HashSet<>(components)),
 						propertyDefinition.getName())));
 		}

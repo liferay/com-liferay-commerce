@@ -17,17 +17,17 @@ package com.liferay.commerce.openapi.util;
 /**
  * @author Igor Beslic
  */
-public enum ParameterType {
+public enum OpenApiType {
 
 	ARRAY("array"), BOOLEAN("boolean"), INTEGER("integer"), NUMBER("number"),
 	OBJECT("object"), STRING("string");
 
-	public static ParameterType fromDefinition(String swaggerDefinitionType) {
-		for (ParameterType parameterType : values()) {
+	public static OpenApiType fromDefinition(String swaggerDefinitionType) {
+		for (OpenApiType openApiType : values()) {
 			if (swaggerDefinitionType.equals(
-					parameterType._swaggerDefinitionType)) {
+					openApiType._swaggerDefinitionType)) {
 
-				return parameterType;
+				return openApiType;
 			}
 		}
 
@@ -35,7 +35,7 @@ public enum ParameterType {
 			"Unknown swagger parameter type " + swaggerDefinitionType);
 	}
 
-	private ParameterType(String swaggerDefinitionType) {
+	private OpenApiType(String swaggerDefinitionType) {
 		_swaggerDefinitionType = swaggerDefinitionType;
 	}
 
