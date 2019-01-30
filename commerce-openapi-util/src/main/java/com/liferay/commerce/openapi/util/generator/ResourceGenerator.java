@@ -564,10 +564,6 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			sb.append("DTO;\n");
 		}
 
-		sb.append("import ");
-		sb.append(modelPackage);
-		sb.append(".CollectionDTO;\n");
-
 		return sb.toString();
 	}
 
