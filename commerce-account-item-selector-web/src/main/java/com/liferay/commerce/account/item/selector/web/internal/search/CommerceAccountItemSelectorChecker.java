@@ -26,12 +26,10 @@ import javax.portlet.RenderResponse;
  * @author Alessio Antonio Rendina
  * @author Ethan Bustad
  */
-public class CommerceAccountItemSelectorChecker
-	extends EmptyOnClickRowChecker {
+public class CommerceAccountItemSelectorChecker extends EmptyOnClickRowChecker {
 
 	public CommerceAccountItemSelectorChecker(
-		RenderResponse renderResponse,
-		long[] checkedCommerceAccountIds) {
+		RenderResponse renderResponse, long[] checkedCommerceAccountIds) {
 
 		super(renderResponse);
 
@@ -41,8 +39,7 @@ public class CommerceAccountItemSelectorChecker
 
 	@Override
 	public boolean isChecked(Object obj) {
-		CommerceAccount commerceAccount =
-			(CommerceAccount)obj;
+		CommerceAccount commerceAccount = (CommerceAccount)obj;
 
 		return _checkedCommerceAccountIds.contains(
 			commerceAccount.getCommerceAccountId());
