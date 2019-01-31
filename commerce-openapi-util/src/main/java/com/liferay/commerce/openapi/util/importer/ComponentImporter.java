@@ -16,7 +16,7 @@ package com.liferay.commerce.openapi.util.importer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
 
@@ -34,10 +34,10 @@ import org.slf4j.LoggerFactory;
  */
 public class ComponentImporter {
 
-	public List<ComponentDefinition> getComponents(
+	public List<OpenApiComponent> getComponents(
 		JsonNode componentsJSONNode) {
 
-		List<ComponentDefinition> components = new ArrayList<>();
+		List<OpenApiComponent> components = new ArrayList<>();
 
 		if (componentsJSONNode.has("schemas")) {
 			components.addAll(_getSchemas(componentsJSONNode));
@@ -50,7 +50,7 @@ public class ComponentImporter {
 		return components;
 	}
 
-	private ComponentDefinition _getComponentDefinition(
+	private OpenApiComponent _getOpenApiComponent(
 		String name, JsonNode schemaEntryJSONNode) {
 
 		String type = GetterUtil.getAsText(
@@ -81,15 +81,15 @@ public class ComponentImporter {
 			type = "dictionary";
 		}
 
-		return new ComponentDefinition(
+		return new OpenApiComponent(
 			name, _getPropertyDefinitions(schemaEntryJSONNode), type,
 			itemsReference);
 	}
 
-	private List<ComponentDefinition> _getParameters(
+	private List<OpenApiComponent> _getParameters(
 		JsonNode componentsJSONNode) {
 
-		List<ComponentDefinition> components = new ArrayList<>();
+		List<OpenApiComponent> components = new ArrayList<>();
 
 		JsonNode parametersJSONNode = componentsJSONNode.get("parameters");
 
@@ -99,13 +99,13 @@ public class ComponentImporter {
 		while (fields.hasNext()) {
 			Map.Entry<String, JsonNode> parameterField = fields.next();
 
-			ComponentDefinition componentDefinition = new ComponentDefinition(
+			OpenApiComponent openApiComponent = new OpenApiComponent(
 				parameterField.getKey(),
 				ParameterImporter.fromJSONNode(parameterField.getValue()));
 
-			components.add(componentDefinition);
+			components.add(openApiComponent);
 
-			_logger.debug("Resolved parameter {}", componentDefinition);
+			_logger.debug("Resolved parameter {}", openApiComponent);
 		}
 
 		return components;
@@ -182,19 +182,19 @@ public class ComponentImporter {
 				}
 
 				if ("object".equals(openApiTypeDefinition)) {
-					ComponentDefinition componentDefinition =
-						_getComponentDefinition(
+					OpenApiComponent openApiComponent =
+						_getOpenApiComponent(
 							propertyEntry.getKey(), propertyJSONNode);
 
-					if (componentDefinition.isDictionary()) {
+					if (openApiComponent.isDictionary()) {
 						openApiPropertyBuilder.openApiTypeDefinition(
 							"dictionary");
 						openApiPropertyBuilder.componentReference(
-							componentDefinition.getItemsReference());
+							openApiComponent.getItemsReference());
 					}
 
 					_logger.warn(
-						"Detected nested object {}", componentDefinition);
+						"Detected nested object {}", openApiComponent);
 				}
 
 				openApiProperties.add(openApiPropertyBuilder.build());
@@ -204,8 +204,8 @@ public class ComponentImporter {
 		return openApiProperties;
 	}
 
-	private List<ComponentDefinition> _getSchemas(JsonNode componentsJSONNode) {
-		List<ComponentDefinition> components = new ArrayList<>();
+	private List<OpenApiComponent> _getSchemas(JsonNode componentsJSONNode) {
+		List<OpenApiComponent> components = new ArrayList<>();
 
 		JsonNode schemasJSONNode = componentsJSONNode.get("schemas");
 
@@ -215,12 +215,12 @@ public class ComponentImporter {
 		while (schemaFields.hasNext()) {
 			Map.Entry<String, JsonNode> schemaEntry = schemaFields.next();
 
-			ComponentDefinition componentDefinition = _getComponentDefinition(
+			OpenApiComponent openApiComponent = _getOpenApiComponent(
 				schemaEntry.getKey(), schemaEntry.getValue());
 
-			components.add(componentDefinition);
+			components.add(openApiComponent);
 
-			_logger.debug("Resolved schema {}", componentDefinition);
+			_logger.debug("Resolved schema {}", openApiComponent);
 		}
 
 		return components;

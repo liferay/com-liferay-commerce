@@ -25,17 +25,17 @@ import java.util.regex.Pattern;
  * @author Igor Beslic
  * @author Ivica Cardic
  */
-public class ComponentDefinition {
+public class OpenApiComponent {
 
-	public static ComponentDefinition asComponentTypeArray(
-		ComponentDefinition componentDefinition, String itemsReference) {
+	public static OpenApiComponent asComponentTypeArray(
+		OpenApiComponent openApiComponent, String itemsReference) {
 
-		return new ComponentDefinition(
-			componentDefinition._name, componentDefinition._openApiProperties,
+		return new OpenApiComponent(
+			openApiComponent._name, openApiComponent._openApiProperties,
 			"array", itemsReference);
 	}
 
-	public ComponentDefinition(
+	public OpenApiComponent(
 		String name, List<OpenApiProperty> openApiProperties, String type,
 		String itemsReference) {
 
@@ -68,7 +68,7 @@ public class ComponentDefinition {
 		}
 	}
 
-	public ComponentDefinition(String name, Parameter parameter) {
+	public OpenApiComponent(String name, Parameter parameter) {
 		_name = name;
 		_parameter = parameter;
 		_componentType = ComponentType.PARAMETER;

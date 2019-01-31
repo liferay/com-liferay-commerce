@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Definition;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.PropertiesFactory;
@@ -171,8 +171,8 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 			_writeGradleSource(definition);
 
-			Set<ComponentDefinition> componentDefinitions =
-				definition.getComponentDefinitions();
+			Set<OpenApiComponent> openApiComponents =
+				definition.getOpenApiComponents();
 
 			Set<String> referencedModels = new HashSet<>();
 
@@ -180,10 +180,10 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 				referencedModels.addAll(path.getReferencedModels());
 
 				_resourceGenerator.writeResourceSources(
-					definition.getVersion(), path, componentDefinitions);
+					definition.getVersion(), path, openApiComponents);
 			}
 
-			Stream<ComponentDefinition> stream = componentDefinitions.stream();
+			Stream<OpenApiComponent> stream = openApiComponents.stream();
 
 			stream.filter(
 				componentDefinition -> componentDefinition.isObject()
@@ -191,7 +191,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 				componentDefinition -> {
 					DTOGenerator dtoGenerator = new DTOGenerator(
 						_author, _moduleOutputPath, _modelPackagePath,
-						componentDefinition, componentDefinitions);
+						componentDefinition, openApiComponents);
 
 					try {
 						dtoGenerator.writeClassSource();

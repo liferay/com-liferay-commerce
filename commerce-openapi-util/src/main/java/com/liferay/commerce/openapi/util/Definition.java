@@ -53,11 +53,11 @@ public class Definition {
 			}
 		}
 
-		return path.addMethod(method, _componentDefinitions);
+		return path.addMethod(method, _openApiComponents);
 	}
 
-	public Set<ComponentDefinition> getComponentDefinitions() {
-		return new HashSet<>(_componentDefinitions);
+	public Set<OpenApiComponent> getOpenApiComponents() {
+		return new HashSet<>(_openApiComponents);
 	}
 
 	public String getDescription() {
@@ -80,7 +80,7 @@ public class Definition {
 		for (Path path : _paths) {
 			for (Method method : path.getMethods()) {
 				if (method.hasExtensions() ||
-					method.hasCollectionReturnType(_componentDefinitions)) {
+					method.hasCollectionReturnType(_openApiComponents)) {
 
 					return true;
 				}
@@ -90,10 +90,10 @@ public class Definition {
 		return false;
 	}
 
-	public void setComponentDefinitions(
-		List<ComponentDefinition> componentDefinitions) {
+	public void setOpenApiComponents(
+		List<OpenApiComponent> openApiComponents) {
 
-		_componentDefinitions.addAll(componentDefinitions);
+		_openApiComponents.addAll(openApiComponents);
 	}
 
 	@Override
@@ -127,8 +127,8 @@ public class Definition {
 			}
 		}
 
-		Iterator<ComponentDefinition> componentDefinitionsIterator =
-			_componentDefinitions.iterator();
+		Iterator<OpenApiComponent> componentDefinitionsIterator =
+			_openApiComponents.iterator();
 
 		while (componentDefinitionsIterator.hasNext()) {
 			sb.append(componentDefinitionsIterator.next());
@@ -141,7 +141,7 @@ public class Definition {
 		return sb.toString();
 	}
 
-	private final Set<ComponentDefinition> _componentDefinitions =
+	private final Set<OpenApiComponent> _openApiComponents =
 		new HashSet<>();
 	private final String _description;
 	private final Set<Path> _paths = new HashSet<>();

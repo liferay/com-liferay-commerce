@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Content;
 import com.liferay.commerce.openapi.util.Extension;
 import com.liferay.commerce.openapi.util.Method;
@@ -133,23 +133,23 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 	public void writeResourceSources(
 			String version, Path path,
-			Set<ComponentDefinition> componentDefinitions)
+			Set<OpenApiComponent> openApiComponents)
 		throws IOException {
 
-		_writeResourceInterfaceSource(version, path, componentDefinitions);
+		_writeResourceInterfaceSource(version, path, openApiComponents);
 
-		_writeResourceImplementationSource(version, path, componentDefinitions);
+		_writeResourceImplementationSource(version, path, openApiComponents);
 	}
 
 	protected String getReturnType(
-		Method method, Set<ComponentDefinition> componentDefinitions) {
+		Method method, Set<OpenApiComponent> openApiComponents) {
 
 		StringBuilder sb = new StringBuilder();
 
 		if (method.hasResponseContent()) {
-			String returnType = method.getReturnType(componentDefinitions);
+			String returnType = method.getReturnType(openApiComponents);
 
-			if (method.hasCollectionReturnType(componentDefinitions)) {
+			if (method.hasCollectionReturnType(openApiComponents)) {
 				sb.append("CollectionDTO<");
 				sb.append(returnType);
 				sb.append("DTO> ");
@@ -167,7 +167,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 	}
 
 	protected String toJavaxImports(
-		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
+		List<Method> methods, Set<OpenApiComponent> openApiComponents) {
 
 		Set<String> importStatements = new HashSet<>();
 
@@ -229,7 +229,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 				}
 			}
 
-			if (method.hasImplicitPaginationContext(componentDefinitions)) {
+			if (method.hasImplicitPaginationContext(openApiComponents)) {
 				importStatements.add("import javax.ws.rs.core.Context;\n");
 
 				Extension.ExtensionType paginationExtensionType =
@@ -253,7 +253,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 	}
 
 	protected String toResourceImplementationMethods(
-		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
+		List<Method> methods, Set<OpenApiComponent> openApiComponents) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -265,19 +265,19 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			sb.append("\t@Override\n");
 
 			sb.append(
-				_getMethodDeclaration(method, false, componentDefinitions));
+				_getMethodDeclaration(method, false, openApiComponents));
 
 			sb.append(" {\n");
 
 			if (method.hasResponseContent()) {
-				if (method.hasCollectionReturnType(componentDefinitions)) {
+				if (method.hasCollectionReturnType(openApiComponents)) {
 					sb.append("\t\treturn new CollectionDTO(");
 					sb.append("Collections.emptyList(), 0);\n");
 				}
 				else {
 					sb.append("\t\treturn new ");
 
-					sb.append(method.getReturnType(componentDefinitions));
+					sb.append(method.getReturnType(openApiComponents));
 
 					sb.append("DTO();\n");
 				}
@@ -299,7 +299,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 	}
 
 	protected String toResourceInterfaceMethods(
-		List<Method> methods, Set<ComponentDefinition> componentDefinitions) {
+		List<Method> methods, Set<OpenApiComponent> openApiComponents) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -321,7 +321,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
 
 			sb.append(
-				_getMethodDeclaration(method, true, componentDefinitions));
+				_getMethodDeclaration(method, true, openApiComponents));
 
 			sb.append(";\n");
 
@@ -387,13 +387,13 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 	private String _getMethodDeclaration(
 		Method method, boolean annotateParameter,
-		Set<ComponentDefinition> componentDefinitions) {
+		Set<OpenApiComponent> openApiComponents) {
 
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("\tpublic ");
 
-		sb.append(getReturnType(method, componentDefinitions));
+		sb.append(getReturnType(method, openApiComponents));
 
 		sb.append(method.getName());
 
@@ -429,7 +429,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 				_getContextParametersDeclaration(method, annotateParameter));
 		}
 
-		if (method.hasImplicitPaginationContext(componentDefinitions)) {
+		if (method.hasImplicitPaginationContext(openApiComponents)) {
 			if (!parameters.isEmpty() || method.hasExtensions()) {
 				sb.append(", ");
 			}
@@ -576,7 +576,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 	private void _writeResourceImplementationSource(
 			String version, Path path,
-			Set<ComponentDefinition> componentDefinitions)
+			Set<OpenApiComponent> openApiComponents)
 		throws IOException {
 
 		String resourceImplementationClassName = StringUtils.upperCaseFirstChar(
@@ -627,7 +627,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
-			toJavaxImports(path.getMethods(), componentDefinitions));
+			toJavaxImports(path.getMethods(), openApiComponents));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${MODEL_RESOURCE_IMPLEMENTATION_CLASS}",
@@ -645,14 +645,14 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${METHODS}",
 			toResourceImplementationMethods(
-				path.getMethods(), componentDefinitions));
+				path.getMethods(), openApiComponents));
 
 		writeSource(osgiResourceComponent, componentSourcePath);
 	}
 
 	private void _writeResourceInterfaceSource(
 			String version, Path path,
-			Set<ComponentDefinition> componentDefinitions)
+			Set<OpenApiComponent> openApiComponents)
 		throws IOException {
 
 		String osgiResourceComponent = getTemplate(
@@ -674,7 +674,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${MODEL_IMPORT_STATEMENTS_JAVAX}",
-			toJavaxImports(path.getMethods(), componentDefinitions));
+			toJavaxImports(path.getMethods(), openApiComponents));
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${PATH}", path.getName());
@@ -688,7 +688,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${METHODS}",
 			toResourceInterfaceMethods(
-				path.getMethods(), componentDefinitions));
+				path.getMethods(), openApiComponents));
 
 		String componentSourcePath = getClassSourcePath(
 			_moduleOutputPath, resourceInterfaceClassName + ".java",

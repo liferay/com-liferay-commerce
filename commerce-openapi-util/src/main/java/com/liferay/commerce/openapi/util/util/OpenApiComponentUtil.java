@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.util.util;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 
 import java.util.Objects;
 import java.util.Set;
@@ -22,18 +22,18 @@ import java.util.Set;
 /**
  * @author Igor Beslic
  */
-public class ComponentDefinitionUtil {
+public class OpenApiComponentUtil {
 
-	public static ComponentDefinition getSchemaComponentDefinition(
-		String name, Set<ComponentDefinition> componentDefinitions) {
+	public static OpenApiComponent getSchemaOpenApiComponent(
+		String name, Set<OpenApiComponent> openApiComponents) {
 
-		for (ComponentDefinition componentDefinition : componentDefinitions) {
-			if (componentDefinition.isParameter()) {
+		for (OpenApiComponent openApiComponent : openApiComponents) {
+			if (openApiComponent.isParameter()) {
 				continue;
 			}
 
-			if (Objects.equals(name, componentDefinition.getName())) {
-				return componentDefinition;
+			if (Objects.equals(name, openApiComponent.getName())) {
+				return openApiComponent;
 			}
 		}
 
