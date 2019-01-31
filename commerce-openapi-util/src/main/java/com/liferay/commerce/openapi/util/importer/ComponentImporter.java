@@ -17,7 +17,7 @@ package com.liferay.commerce.openapi.util.importer;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import com.liferay.commerce.openapi.util.ComponentDefinition;
-import com.liferay.commerce.openapi.util.PropertyDefinition;
+import com.liferay.commerce.openapi.util.OpenApiProperty;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
 
 import java.util.ArrayList;
@@ -111,10 +111,10 @@ public class ComponentImporter {
 		return components;
 	}
 
-	private List<PropertyDefinition> _getPropertyDefinitions(
+	private List<OpenApiProperty> _getPropertyDefinitions(
 		JsonNode schemaEntryJSONNode) {
 
-		List<PropertyDefinition> propertyDefinitions = new ArrayList<>();
+		List<OpenApiProperty> openApiProperties = new ArrayList<>();
 
 		List<String> requiredProperties = new ArrayList<>();
 
@@ -143,9 +143,9 @@ public class ComponentImporter {
 
 				JsonNode propertyJSONNode = propertyEntry.getValue();
 
-				PropertyDefinition.OpenApiPropertyBuilder
+				OpenApiProperty.OpenApiPropertyBuilder
 					openApiPropertyBuilder =
-						new PropertyDefinition.OpenApiPropertyBuilder();
+						new OpenApiProperty.OpenApiPropertyBuilder();
 
 				openApiPropertyBuilder.name(name);
 
@@ -197,11 +197,11 @@ public class ComponentImporter {
 						"Detected nested object {}", componentDefinition);
 				}
 
-				propertyDefinitions.add(openApiPropertyBuilder.build());
+				openApiProperties.add(openApiPropertyBuilder.build());
 			}
 		}
 
-		return propertyDefinitions;
+		return openApiProperties;
 	}
 
 	private List<ComponentDefinition> _getSchemas(JsonNode componentsJSONNode) {

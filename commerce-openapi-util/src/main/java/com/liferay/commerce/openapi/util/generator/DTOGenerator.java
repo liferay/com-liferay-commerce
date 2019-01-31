@@ -16,7 +16,7 @@ package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.ComponentDefinition;
 import com.liferay.commerce.openapi.util.OpenApiFormat;
-import com.liferay.commerce.openapi.util.PropertyDefinition;
+import com.liferay.commerce.openapi.util.OpenApiProperty;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.IOException;
@@ -62,32 +62,32 @@ public class DTOGenerator extends BaseSourceGenerator {
 
 		dtoSource = dtoSource.replace("${DTO_CLASS}", _getDTOClassName());
 
-		List<PropertyDefinition> propertyDefinitions =
-			_componentDefinition.getPropertyDefinitions();
+		List<OpenApiProperty> openApiProperties =
+			_componentDefinition.getOpenApiProperties();
 
-		Iterator<PropertyDefinition> iterator = propertyDefinitions.iterator();
+		Iterator<OpenApiProperty> iterator = openApiProperties.iterator();
 
 		StringBuilder methodsSb = new StringBuilder();
 		StringBuilder variablesSb = new StringBuilder();
 
 		while (iterator.hasNext()) {
-			PropertyDefinition propertyDefinition = iterator.next();
+			OpenApiProperty openApiProperty = iterator.next();
 
-			String name = propertyDefinition.getName();
+			String name = openApiProperty.getName();
 			String javaType = OpenApiFormat.getJavaType(
-				propertyDefinition, _componentDefinitions);
+				openApiProperty, _componentDefinitions);
 
 			methodsSb.append("\tpublic ");
 			methodsSb.append(javaType);
 			methodsSb.append(" ");
-			methodsSb.append(propertyDefinition.getGetterSyntax());
+			methodsSb.append(openApiProperty.getGetterSyntax());
 			methodsSb.append(StringUtils.upperCaseFirstChar(name));
 			methodsSb.append("() {\n\t\treturn _");
 			methodsSb.append(name);
 			methodsSb.append(";\n\t}\n\n");
 
 			methodsSb.append("\tpublic void ");
-			methodsSb.append(propertyDefinition.getSetterSyntax());
+			methodsSb.append(openApiProperty.getSetterSyntax());
 			methodsSb.append(StringUtils.upperCaseFirstChar(name));
 			methodsSb.append("(");
 			methodsSb.append(javaType);

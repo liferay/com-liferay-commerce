@@ -31,17 +31,17 @@ public class ComponentDefinition {
 		ComponentDefinition componentDefinition, String itemsReference) {
 
 		return new ComponentDefinition(
-			componentDefinition._name, componentDefinition._propertyDefinitions,
+			componentDefinition._name, componentDefinition._openApiProperties,
 			"array", itemsReference);
 	}
 
 	public ComponentDefinition(
-		String name, List<PropertyDefinition> propertyDefinitions, String type,
+		String name, List<OpenApiProperty> openApiProperties, String type,
 		String itemsReference) {
 
 		_name = name;
 		_parameter = null;
-		_propertyDefinitions = new ArrayList<>(propertyDefinitions);
+		_openApiProperties = new ArrayList<>(openApiProperties);
 
 		ComponentType componentType = ComponentType.OBJECT;
 
@@ -72,7 +72,7 @@ public class ComponentDefinition {
 		_name = name;
 		_parameter = parameter;
 		_componentType = ComponentType.PARAMETER;
-		_propertyDefinitions = Collections.emptyList();
+		_openApiProperties = Collections.emptyList();
 	}
 
 	public String getItemsReference() {
@@ -91,8 +91,8 @@ public class ComponentDefinition {
 		return _parameter;
 	}
 
-	public List<PropertyDefinition> getPropertyDefinitions() {
-		return new ArrayList<>(_propertyDefinitions);
+	public List<OpenApiProperty> getOpenApiProperties() {
+		return new ArrayList<>(_openApiProperties);
 	}
 
 	public boolean isArray() {
@@ -139,7 +139,7 @@ public class ComponentDefinition {
 		sb.append(_name);
 		sb.append(", propertyDefinitions={");
 
-		Iterator<PropertyDefinition> iterator = _propertyDefinitions.iterator();
+		Iterator<OpenApiProperty> iterator = _openApiProperties.iterator();
 
 		while (iterator.hasNext()) {
 			sb.append(iterator.next());
@@ -177,7 +177,7 @@ public class ComponentDefinition {
 	private String _itemsReferencedModel;
 	private final String _name;
 	private final Parameter _parameter;
-	private final List<PropertyDefinition> _propertyDefinitions;
+	private final List<OpenApiProperty> _openApiProperties;
 	private String _toString;
 
 }

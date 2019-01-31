@@ -66,14 +66,14 @@ public enum OpenApiFormat {
 	}
 
 	public static String getJavaType(
-		PropertyDefinition propertyDefinition,
+		OpenApiProperty openApiProperty,
 		Set<ComponentDefinition> componentDefinitions) {
 
-		if (propertyDefinition.isObject()) {
+		if (openApiProperty.isObject()) {
 			ComponentDefinition componentDefinition =
 				ComponentDefinitionUtil.getSchemaComponentDefinition(
 					Schema.getReferencedModel(
-						propertyDefinition.getComponentReference()),
+						openApiProperty.getComponentReference()),
 					componentDefinitions);
 
 			if (componentDefinition.isDictionary()) {
@@ -87,7 +87,7 @@ public enum OpenApiFormat {
 				"Unable to resolve java type for " + componentDefinition);
 		}
 
-		return propertyDefinition.getJavaType();
+		return openApiProperty.getJavaType();
 	}
 
 	public String getGetterSyntax() {
