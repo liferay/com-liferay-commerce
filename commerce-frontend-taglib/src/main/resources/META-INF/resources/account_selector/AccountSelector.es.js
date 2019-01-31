@@ -86,7 +86,7 @@ class AccountSelector extends Component {
 
 	fetchAccounts(query = '') {
 		return fetch(
-			this.accountsAPI + '/search-accounts/' + themeDisplay.getScopeGroupId() + '?page=1&pageSize=10&q=' + query,
+			this.accountsAPI + '/search-accounts/' + themeDisplay.getScopeGroupId() + '?groupId=' + themeDisplay.getScopeGroupId() + '&page=1&pageSize=10&q=' + query,
 			{
 				method: 'GET'
 			}
@@ -103,7 +103,7 @@ class AccountSelector extends Component {
 
 	fetchOrders(query = '') {
 		return fetch(
-			this.accountsAPI + '/search-accounts/' + themeDisplay.getScopeGroupId() + '/' + this.currentAccount.accountId + '/orders?page=1&pageSize=10&q=' + query,
+			this.accountsAPI + '/search-accounts/' + themeDisplay.getScopeGroupId() + '/' + this.currentAccount.accountId + '/orders?groupId=' + themeDisplay.getScopeGroupId() + '&page=1&pageSize=10&q=' + query,
 			{
 				method: 'GET'
 			}

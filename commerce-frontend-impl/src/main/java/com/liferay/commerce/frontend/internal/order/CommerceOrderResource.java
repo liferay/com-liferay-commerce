@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.frontend.internal.account.model.Order;
 import com.liferay.commerce.frontend.internal.account.model.OrderList;
 import com.liferay.commerce.model.CommerceOrder;
@@ -30,10 +31,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.ArrayList;
@@ -45,14 +44,8 @@ import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -63,43 +56,24 @@ import org.osgi.service.component.annotations.Reference;
 @Component(service = CommerceOrderResource.class)
 public class CommerceOrderResource {
 
-	@GET
-	@Path("/search-orders")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCommerceOrders(
-		@QueryParam("q") String queryString, @QueryParam("page") int page,
-		@QueryParam("pageSize") int pageSize, @Context UriInfo uriInfo,
-		@Context ThemeDisplay themeDisplay) {
-
-		OrderList orderList;
-
-		try {
-			orderList = getOrderList(
-				themeDisplay.getScopeGroupId(), queryString, page, pageSize,
-				themeDisplay.getRequest());
-		}
-		catch (Exception e) {
-			orderList = new OrderList(
-				StringUtil.split(e.getLocalizedMessage()));
-		}
-
-		return getResponse(orderList);
-	}
-
 	public OrderList getOrderList(
 			long groupId, String keywords, int page, int pageSize,
-			HttpServletRequest httpServletRequest)
+			HttpServletRequest httpServletRequest,
+			CommerceAccount commerceAccount)
 		throws PortalException {
 
 		List<Order> orders = getOrders(
-			groupId, keywords, page, pageSize, httpServletRequest);
+			groupId, keywords, page, pageSize, httpServletRequest,
+			commerceAccount);
 
-		return new OrderList(orders, getOrdersCount(groupId, keywords));
+		return new OrderList(
+			orders, getOrdersCount(groupId, keywords, commerceAccount));
 	}
 
 	protected List<Order> getOrders(
 			long groupId, String keywords, int page, int pageSize,
-			HttpServletRequest httpServletRequest)
+			HttpServletRequest httpServletRequest,
+			CommerceAccount commerceAccount)
 		throws PortalException {
 
 		List<Order> orders = new ArrayList<>();
@@ -109,7 +83,8 @@ public class CommerceOrderResource {
 
 		List<CommerceOrder> userCommerceOrders =
 			_commerceOrderService.getPendingCommerceOrders(
-				groupId, 0, keywords, start, end);
+				groupId, commerceAccount.getCommerceAccountId(), keywords,
+				start, end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
 			Date modifiedDate = commerceOrder.getModifiedDate();
@@ -136,11 +111,12 @@ public class CommerceOrderResource {
 		return orders;
 	}
 
-	protected int getOrdersCount(long groupId, String keywords)
+	protected int getOrdersCount(
+			long groupId, String keywords, CommerceAccount commerceAccount)
 		throws PortalException {
 
 		return _commerceOrderService.getPendingCommerceOrdersCount(
-			groupId, 0, keywords);
+			groupId, commerceAccount.getCommerceAccountId(), keywords);
 	}
 
 	protected Response getResponse(Object object) {
