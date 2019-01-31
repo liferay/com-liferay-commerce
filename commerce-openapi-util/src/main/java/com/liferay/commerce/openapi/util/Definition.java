@@ -56,12 +56,12 @@ public class Definition {
 		return path.addMethod(method, _openApiComponents);
 	}
 
-	public Set<OpenApiComponent> getOpenApiComponents() {
-		return new HashSet<>(_openApiComponents);
-	}
-
 	public String getDescription() {
 		return _description;
+	}
+
+	public Set<OpenApiComponent> getOpenApiComponents() {
+		return new HashSet<>(_openApiComponents);
 	}
 
 	public List<Path> getPaths() {
@@ -90,9 +90,7 @@ public class Definition {
 		return false;
 	}
 
-	public void setOpenApiComponents(
-		List<OpenApiComponent> openApiComponents) {
-
+	public void setOpenApiComponents(List<OpenApiComponent> openApiComponents) {
 		_openApiComponents.addAll(openApiComponents);
 	}
 
@@ -141,9 +139,8 @@ public class Definition {
 		return sb.toString();
 	}
 
-	private final Set<OpenApiComponent> _openApiComponents =
-		new HashSet<>();
 	private final String _description;
+	private final Set<OpenApiComponent> _openApiComponents = new HashSet<>();
 	private final Set<Path> _paths = new HashSet<>();
 	private final String _title;
 	private final String _version;

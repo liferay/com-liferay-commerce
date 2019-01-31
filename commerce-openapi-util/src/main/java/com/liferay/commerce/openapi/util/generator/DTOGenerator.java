@@ -131,10 +131,9 @@ public class DTOGenerator extends BaseSourceGenerator {
 	private static final String _TEMPLATE_FILE_MODEL = "Model.java.tpl";
 
 	private final String _author;
-	private final OpenApiComponent _openApiComponent;
-	private final Set<OpenApiComponent> _openApiComponents =
-		new HashSet<>();
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;
+	private final OpenApiComponent _openApiComponent;
+	private final Set<OpenApiComponent> _openApiComponents = new HashSet<>();
 
 }

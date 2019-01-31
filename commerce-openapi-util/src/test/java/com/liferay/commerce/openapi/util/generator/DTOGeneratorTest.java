@@ -16,8 +16,8 @@ package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiFormat;
-import com.liferay.commerce.openapi.util.OpenApiTestUtil;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
+import com.liferay.commerce.openapi.util.OpenApiTestUtil;
 import com.liferay.commerce.openapi.util.importer.ComponentImporter;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
@@ -110,8 +110,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			containsOnlyOne(classSource, "package com.liferay.test;"));
 
 		for (OpenApiProperty openApiProperty :
-				dictionaryConsumerOpenApiComponent.
-					getOpenApiProperties()) {
+				dictionaryConsumerOpenApiComponent.getOpenApiProperties()) {
 
 			Assert.assertTrue(
 				"DTO class name has private variable _" +

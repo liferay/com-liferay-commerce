@@ -87,12 +87,12 @@ public class OpenApiComponent {
 		return _name;
 	}
 
-	public Parameter getParameter() {
-		return _parameter;
-	}
-
 	public List<OpenApiProperty> getOpenApiProperties() {
 		return new ArrayList<>(_openApiProperties);
+	}
+
+	public Parameter getParameter() {
+		return _parameter;
 	}
 
 	public boolean isArray() {
@@ -176,8 +176,8 @@ public class OpenApiComponent {
 	private String _itemsReference;
 	private String _itemsReferencedModel;
 	private final String _name;
-	private final Parameter _parameter;
 	private final List<OpenApiProperty> _openApiProperties;
+	private final Parameter _parameter;
 	private String _toString;
 
 }
