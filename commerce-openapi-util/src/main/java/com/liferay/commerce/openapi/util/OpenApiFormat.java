@@ -15,7 +15,7 @@
 package com.liferay.commerce.openapi.util;
 
 import com.liferay.commerce.openapi.util.exception.OpenApiException;
-import com.liferay.commerce.openapi.util.util.ComponentDefinitionUtil;
+import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 
 import java.util.Set;
 
@@ -67,24 +67,24 @@ public enum OpenApiFormat {
 
 	public static String getJavaType(
 		OpenApiProperty openApiProperty,
-		Set<ComponentDefinition> componentDefinitions) {
+		Set<OpenApiComponent> openApiComponents) {
 
 		if (openApiProperty.isObject()) {
-			ComponentDefinition componentDefinition =
-				ComponentDefinitionUtil.getSchemaComponentDefinition(
+			OpenApiComponent openApiComponent =
+				OpenApiComponentUtil.getSchemaOpenApiComponent(
 					Schema.getReferencedModel(
 						openApiProperty.getComponentReference()),
-					componentDefinitions);
+					openApiComponents);
 
-			if (componentDefinition.isDictionary()) {
+			if (openApiComponent.isDictionary()) {
 				return "Map<String, String>";
 			}
-			else if (componentDefinition.isObject()) {
-				return componentDefinition.getName() + "DTO";
+			else if (openApiComponent.isObject()) {
+				return openApiComponent.getName() + "DTO";
 			}
 
 			throw new OpenApiException(
-				"Unable to resolve java type for " + componentDefinition);
+				"Unable to resolve java type for " + openApiComponent);
 		}
 
 		return openApiProperty.getJavaType();

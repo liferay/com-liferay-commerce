@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.util.importer;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiTestUtil;
 
 import java.util.List;
@@ -31,30 +31,30 @@ public class ComponentImporterTest {
 	public void testGetComponents() throws Exception {
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<ComponentDefinition> components = componentImporter.getComponents(
+		List<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getComponentDefinitions());
 
 		Assert.assertEquals("Two components expected", 3, components.size());
 
-		ComponentDefinition componentDefinition =
+		OpenApiComponent openApiComponent =
 			_getDictionaryComponentDefinition(components);
 
 		Assert.assertNotNull(
-			"Dictionary component definition", componentDefinition);
+			"Dictionary component definition", openApiComponent);
 		Assert.assertEquals(
 			"Dictionary has reference", "#/components/schemas/DictionaryValue",
-			componentDefinition.getItemsReference());
+			openApiComponent.getItemsReference());
 		Assert.assertEquals(
 			"Dictionary has referenced model", "DictionaryValue",
-			componentDefinition.getItemsReferencedModel());
+			openApiComponent.getItemsReferencedModel());
 	}
 
-	private ComponentDefinition _getDictionaryComponentDefinition(
-		List<ComponentDefinition> componentDefinitions) {
+	private OpenApiComponent _getDictionaryComponentDefinition(
+		List<OpenApiComponent> openApiComponents) {
 
-		for (ComponentDefinition componentDefinition : componentDefinitions) {
-			if (componentDefinition.isDictionary()) {
-				return componentDefinition;
+		for (OpenApiComponent openApiComponent : openApiComponents) {
+			if (openApiComponent.isDictionary()) {
+				return openApiComponent;
 			}
 		}
 

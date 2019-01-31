@@ -16,7 +16,7 @@ package com.liferay.commerce.openapi.util.importer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
@@ -36,7 +36,7 @@ public class ParameterImporter {
 
 	public static Parameter fromComponentDefinition(
 			JsonNode parameterReferenceJSONNode,
-			List<ComponentDefinition> componentDefinitions)
+			List<OpenApiComponent> openApiComponents)
 		throws ImporterException {
 
 		String parameterReference = Parameter.getParameterReference(
@@ -44,17 +44,17 @@ public class ParameterImporter {
 
 		_logger.debug("Parameter is reference to {}", parameterReference);
 
-		for (ComponentDefinition componentDefinition : componentDefinitions) {
-			if (!componentDefinition.isParameter()) {
+		for (OpenApiComponent openApiComponent : openApiComponents) {
+			if (!openApiComponent.isParameter()) {
 				continue;
 			}
 
-			if (parameterReference.equals(componentDefinition.getName())) {
+			if (parameterReference.equals(openApiComponent.getName())) {
 				_logger.debug(
 					"Reference resolved to {}",
-					componentDefinition.getParameter());
+					openApiComponent.getParameter());
 
-				return componentDefinition.getParameter();
+				return openApiComponent.getParameter();
 			}
 		}
 
@@ -120,7 +120,7 @@ public class ParameterImporter {
 
 	public List<Parameter> getParameters(
 		JsonNode parametersParentJSONNode,
-		List<ComponentDefinition> componentDefinitions) {
+		List<OpenApiComponent> openApiComponents) {
 
 		if (parametersParentJSONNode == null) {
 			return Collections.emptyList();
@@ -134,7 +134,7 @@ public class ParameterImporter {
 					parameters.add(
 						fromComponentDefinition(
 							parameterJSONNode.get("$ref"),
-							componentDefinitions));
+							openApiComponents));
 				}
 				else {
 					parameters.add(fromJSONNode(parameterJSONNode));

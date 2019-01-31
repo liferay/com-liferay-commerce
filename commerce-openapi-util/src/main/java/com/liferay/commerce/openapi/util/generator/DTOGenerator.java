@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
 import com.liferay.commerce.openapi.util.util.StringUtils;
@@ -33,15 +33,15 @@ public class DTOGenerator extends BaseSourceGenerator {
 
 	public DTOGenerator(
 		String author, String moduleOutputPath, String modelPackagePath,
-		ComponentDefinition componentDefinition,
-		Set<ComponentDefinition> componentDefinitions) {
+		OpenApiComponent openApiComponent,
+		Set<OpenApiComponent> openApiComponents) {
 
 		_author = author;
 		_moduleOutputPath = moduleOutputPath;
 		_modelPackagePath = modelPackagePath;
-		_componentDefinition = componentDefinition;
+		_openApiComponent = openApiComponent;
 
-		_componentDefinitions.addAll(componentDefinitions);
+		_openApiComponents.addAll(openApiComponents);
 	}
 
 	public void writeClassSource() throws IOException {
@@ -63,7 +63,7 @@ public class DTOGenerator extends BaseSourceGenerator {
 		dtoSource = dtoSource.replace("${DTO_CLASS}", _getDTOClassName());
 
 		List<OpenApiProperty> openApiProperties =
-			_componentDefinition.getOpenApiProperties();
+			_openApiComponent.getOpenApiProperties();
 
 		Iterator<OpenApiProperty> iterator = openApiProperties.iterator();
 
@@ -75,7 +75,7 @@ public class DTOGenerator extends BaseSourceGenerator {
 
 			String name = openApiProperty.getName();
 			String javaType = OpenApiFormat.getJavaType(
-				openApiProperty, _componentDefinitions);
+				openApiProperty, _openApiComponents);
 
 			methodsSb.append("\tpublic ");
 			methodsSb.append(javaType);
@@ -125,14 +125,14 @@ public class DTOGenerator extends BaseSourceGenerator {
 	}
 
 	private String _getModelName() {
-		return StringUtils.upperCaseFirstChar(_componentDefinition.getName());
+		return StringUtils.upperCaseFirstChar(_openApiComponent.getName());
 	}
 
 	private static final String _TEMPLATE_FILE_MODEL = "Model.java.tpl";
 
 	private final String _author;
-	private final ComponentDefinition _componentDefinition;
-	private final Set<ComponentDefinition> _componentDefinitions =
+	private final OpenApiComponent _openApiComponent;
+	private final Set<OpenApiComponent> _openApiComponents =
 		new HashSet<>();
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;

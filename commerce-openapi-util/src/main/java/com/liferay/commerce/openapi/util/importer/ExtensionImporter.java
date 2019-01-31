@@ -16,7 +16,7 @@ package com.liferay.commerce.openapi.util.importer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Extension;
 import com.liferay.commerce.openapi.util.Parameter;
 
@@ -34,7 +34,7 @@ public class ExtensionImporter {
 
 	public List<Extension> getExtensions(
 		JsonNode extensionJSONNode,
-		List<ComponentDefinition> componentDefinitions) {
+		List<OpenApiComponent> openApiComponents) {
 
 		List<Extension> extensions = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class ExtensionImporter {
 			JsonNode extensionDefinition = extensionJSONNode.get(name);
 
 			List<Parameter> parameters = parameterImporter.getParameters(
-				extensionDefinition.get("parameters"), componentDefinitions);
+				extensionDefinition.get("parameters"), openApiComponents);
 
 			_logger.info(
 				"Importing extension {} with parameter size {}", name,

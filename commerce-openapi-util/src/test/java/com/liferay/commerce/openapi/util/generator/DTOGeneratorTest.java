@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiTestUtil;
-import com.liferay.commerce.openapi.util.PropertyDefinition;
+import com.liferay.commerce.openapi.util.OpenApiProperty;
 import com.liferay.commerce.openapi.util.importer.ComponentImporter;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
@@ -38,13 +38,13 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 
 	@Test
 	public void testGetDTOSource() throws IOException {
-		List<PropertyDefinition> propertyDefinitions = _getPropertyDefinitions(
+		List<OpenApiProperty> openApiProperties = _getPropertyDefinitions(
 			"string", "integer", "boolean");
 
 		DTOGenerator dtoGenerator = new DTOGenerator(
 			"test", "test", "com.liferay.test",
-			new ComponentDefinition(
-				"Component", propertyDefinitions, "object", null),
+			new OpenApiComponent(
+				"Component", openApiProperties, "object", null),
 			Collections.emptySet());
 
 		String classSource = dtoGenerator.getClassSource();
@@ -57,17 +57,17 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			"DTO class name has DTO in name",
 			containsOnlyOne(classSource, "public class ComponentDTO {"));
 
-		for (PropertyDefinition propertyDefinition : propertyDefinitions) {
+		for (OpenApiProperty openApiProperty : openApiProperties) {
 			Assert.assertTrue(
 				"DTO class name has private variable _" +
-					propertyDefinition.getName(),
+					openApiProperty.getName(),
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"private %s _%s", propertyDefinition.getJavaType(),
-						propertyDefinition.getName())));
+						"private %s _%s", openApiProperty.getJavaType(),
+						openApiProperty.getName())));
 
-			if (!"boolean".equals(propertyDefinition.getJavaType())) {
+			if (!"boolean".equals(openApiProperty.getJavaType())) {
 				continue;
 			}
 
@@ -76,9 +76,9 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"public %s is%s", propertyDefinition.getJavaType(),
+						"public %s is%s", openApiProperty.getJavaType(),
 						StringUtils.upperCaseFirstChar(
-							propertyDefinition.getName()))));
+							openApiProperty.getName()))));
 		}
 	}
 
@@ -86,14 +86,14 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 	public void testGetDTOSourceIfDictionaryPresent() throws IOException {
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<ComponentDefinition> components = componentImporter.getComponents(
+		List<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getComponentDefinitions());
 
-		ComponentDefinition dictionaryConsumerComponentDefinition = null;
+		OpenApiComponent dictionaryConsumerOpenApiComponent = null;
 
-		for (ComponentDefinition componentDefinition : components) {
-			if ("DictionaryConsumer".equals(componentDefinition.getName())) {
-				dictionaryConsumerComponentDefinition = componentDefinition;
+		for (OpenApiComponent openApiComponent : components) {
+			if ("DictionaryConsumer".equals(openApiComponent.getName())) {
+				dictionaryConsumerOpenApiComponent = openApiComponent;
 
 				break;
 			}
@@ -101,7 +101,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 
 		DTOGenerator dtoGenerator = new DTOGenerator(
 			"test", "test", "com.liferay.test",
-			dictionaryConsumerComponentDefinition, new HashSet<>(components));
+			dictionaryConsumerOpenApiComponent, new HashSet<>(components));
 
 		String classSource = dtoGenerator.getClassSource();
 
@@ -109,38 +109,43 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			"package statement is present",
 			containsOnlyOne(classSource, "package com.liferay.test;"));
 
-		for (PropertyDefinition propertyDefinition :
-				dictionaryConsumerComponentDefinition.
-					getPropertyDefinitions()) {
+		for (OpenApiProperty openApiProperty :
+				dictionaryConsumerOpenApiComponent.
+					getOpenApiProperties()) {
 
 			Assert.assertTrue(
 				"DTO class name has private variable _" +
-					propertyDefinition.getName(),
+					openApiProperty.getName(),
 				containsOnlyOne(
 					classSource,
 					String.format(
 						"private %s _%s",
 						OpenApiFormat.getJavaType(
-							propertyDefinition, new HashSet<>(components)),
-						propertyDefinition.getName())));
+							openApiProperty, new HashSet<>(components)),
+						openApiProperty.getName())));
 		}
 	}
 
-	private List<PropertyDefinition> _getPropertyDefinitions(
-		String... propertyTypes) {
+	private List<OpenApiProperty> _getPropertyDefinitions(
+		String... openApiTypeDefinitions) {
 
-		if (propertyTypes == null) {
+		if (openApiTypeDefinitions == null) {
 			return Collections.emptyList();
 		}
 
-		List<PropertyDefinition> propertyDefinitions = new ArrayList<>();
+		List<OpenApiProperty> openApiProperties = new ArrayList<>();
 
-		for (String propertyType : propertyTypes) {
-			propertyDefinitions.add(
-				new PropertyDefinition(propertyType, propertyType, null));
+		OpenApiProperty.OpenApiPropertyBuilder openApiPropertyBuilder =
+			new OpenApiProperty.OpenApiPropertyBuilder();
+
+		for (String openApiTypeDefinition : openApiTypeDefinitions) {
+			openApiPropertyBuilder.name(openApiTypeDefinition);
+			openApiPropertyBuilder.openApiTypeDefinition(openApiTypeDefinition);
+
+			openApiProperties.add(openApiPropertyBuilder.build());
 		}
 
-		return propertyDefinitions;
+		return openApiProperties;
 	}
 
 }

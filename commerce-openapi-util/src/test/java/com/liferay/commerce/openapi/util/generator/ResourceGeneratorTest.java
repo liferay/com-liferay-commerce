@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Content;
 import com.liferay.commerce.openapi.util.Extension;
 import com.liferay.commerce.openapi.util.Method;
@@ -188,22 +188,22 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 		return methods;
 	}
 
-	private Set<ComponentDefinition> _getRandomComponentDefinitions(
+	private Set<OpenApiComponent> _getRandomComponentDefinitions(
 		int size, String modelPattern) {
 
-		Set<ComponentDefinition> componentDefinitions = new HashSet<>();
+		Set<OpenApiComponent> openApiComponents = new HashSet<>();
 
 		String modelReferencePattern = String.format(
 			"#/components/schemas/%s", modelPattern);
 
 		for (int i = 0; i < size; i++) {
-			componentDefinitions.add(
-				new ComponentDefinition(
+			openApiComponents.add(
+				new OpenApiComponent(
 					modelPattern + i, Collections.emptyList(), "object",
 					modelReferencePattern + i));
 		}
 
-		return componentDefinitions;
+		return openApiComponents;
 	}
 
 	private List<Content> _getRequestContents() {
