@@ -95,15 +95,7 @@ boolean ending = maxSubscriptionCycles > 0;
 						<aui:input checked="<%= ending ? false : true %>" name="neverEnds" type="toggle-switch" />
 					</div>
 
-					<%
-					String cssClass = "never-ends-content hide";
-
-					if (ending) {
-						cssClass = "never-ends-content";
-					}
-					%>
-
-					<div class="<%= cssClass %>">
+					<div class="never-ends-content">
 						<aui:input disabled="<%= ending ? false : true %>" helpMessage="max-subscription-cycles-help" label="end-after" name="maxSubscriptionCycles" suffix='<%= LanguageUtil.get(request, "cycles") %>' value="<%= String.valueOf(maxSubscriptionCycles) %>">
 							<aui:validator name="digits" />
 
@@ -113,7 +105,11 @@ boolean ending = maxSubscriptionCycles > 0;
 										return true;
 									}
 
-									return (parseInt(val, 10) > 0);
+									if (parseInt(val, 10) > 0) {
+										return true;
+									}
+
+									return false;
 								}
 							</aui:validator>
 						</aui:input>
@@ -179,16 +175,10 @@ boolean ending = maxSubscriptionCycles > 0;
 				animatingChange: function(event) {
 					var instance = this;
 
-					var expanded = !instance.get('expanded');
-
-					if (expanded) {
-						A.one('#<portlet:namespace />neverEndsContainer .never-ends-content').removeClass('hide');
-
+					if (!instance.get('expanded')) {
 						A.one('#<portlet:namespace />maxSubscriptionCycles').attr('disabled', false);
 					}
 					else {
-						A.one('#<portlet:namespace />neverEndsContainer .never-ends-content').addClass('hide');
-
 						A.one('#<portlet:namespace />maxSubscriptionCycles').attr('disabled', true);
 					}
 				}
