@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.util;
 
-import com.liferay.commerce.openapi.util.util.ComponentDefinitionUtil;
+import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -33,13 +33,13 @@ public class Path {
 	}
 
 	public boolean addMethod(
-		Method method, Set<ComponentDefinition> componentDefinitions) {
+		Method method, Set<OpenApiComponent> openApiComponents) {
 
 		_checkParameterReferenceModel(method);
 
 		_checkRequestBodyReferenceModel(method);
 
-		_checkResponseReferenceModel(method, componentDefinitions);
+		_checkResponseReferenceModel(method, openApiComponents);
 
 		return _methods.add(method);
 	}
@@ -118,7 +118,7 @@ public class Path {
 	}
 
 	private void _checkResponseReferenceModel(
-		Method method, Set<ComponentDefinition> componentDefinitions) {
+		Method method, Set<OpenApiComponent> openApiComponents) {
 
 		for (Response response : method.getResponses()) {
 			if (!response.hasContent()) {
@@ -136,18 +136,18 @@ public class Path {
 					continue;
 				}
 
-				ComponentDefinition componentDefinition =
-					ComponentDefinitionUtil.getSchemaComponentDefinition(
-						schema.getReferencedModel(), componentDefinitions);
+				OpenApiComponent openApiComponent =
+					OpenApiComponentUtil.getSchemaOpenApiComponent(
+						schema.getReferencedModel(), openApiComponents);
 
-				if ((componentDefinition == null) ||
-					(componentDefinition.getItemsReferencedModel() == null)) {
+				if ((openApiComponent == null) ||
+					(openApiComponent.getItemsReferencedModel() == null)) {
 
 					_referencedModels.add(schema.getReferencedModel());
 				}
 				else {
 					_referencedModels.add(
-						componentDefinition.getItemsReferencedModel());
+						openApiComponent.getItemsReferencedModel());
 				}
 			}
 		}

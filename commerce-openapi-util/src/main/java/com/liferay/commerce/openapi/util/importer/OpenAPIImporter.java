@@ -17,7 +17,7 @@ package com.liferay.commerce.openapi.util.importer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.liferay.commerce.openapi.util.ComponentDefinition;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Definition;
 import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.PropertiesFactory;
@@ -126,10 +126,10 @@ public class OpenAPIImporter {
 
 		ComponentImporter componentImporter = new ComponentImporter();
 
-		List<ComponentDefinition> componentDefinitions =
+		List<OpenApiComponent> openApiComponents =
 			componentImporter.getComponents(rootJSONNode.get("components"));
 
-		definition.setComponentDefinitions(componentDefinitions);
+		definition.setOpenApiComponents(openApiComponents);
 
 		JsonNode pathsJSONNode = rootJSONNode.get("paths");
 
@@ -141,7 +141,7 @@ public class OpenAPIImporter {
 			String path = iterator.next();
 
 			List<Method> methods = methodImporter.getMethods(
-				path, pathsJSONNode.get(path), componentDefinitions);
+				path, pathsJSONNode.get(path), openApiComponents);
 
 			for (Method method : methods) {
 				definition.addMethod(method);

@@ -15,7 +15,7 @@
 package com.liferay.commerce.openapi.util;
 
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
-import com.liferay.commerce.openapi.util.util.ComponentDefinitionUtil;
+import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -120,37 +120,37 @@ public class Method {
 		return _responses;
 	}
 
-	public String getReturnType(Set<ComponentDefinition> componentDefinitions) {
-		ComponentDefinition schemaComponentDefinition =
-			_getSchemaComponentDefinition(componentDefinitions);
+	public String getReturnType(Set<OpenApiComponent> openApiComponents) {
+		OpenApiComponent schemaOpenApiComponent =
+			_getSchemaComponentDefinition(openApiComponents);
 
-		if (schemaComponentDefinition == null) {
+		if (schemaOpenApiComponent == null) {
 			return null;
 		}
 
-		if (hasCollectionReturnType(componentDefinitions)) {
+		if (hasCollectionReturnType(openApiComponents)) {
 			String itemsReferenceModel =
-				schemaComponentDefinition.getItemsReferencedModel();
+				schemaOpenApiComponent.getItemsReferencedModel();
 
-			schemaComponentDefinition =
-				ComponentDefinitionUtil.getSchemaComponentDefinition(
-					itemsReferenceModel, componentDefinitions);
+			schemaOpenApiComponent =
+				OpenApiComponentUtil.getSchemaOpenApiComponent(
+					itemsReferenceModel, openApiComponents);
 		}
 
-		return schemaComponentDefinition.getName();
+		return schemaOpenApiComponent.getName();
 	}
 
 	public boolean hasCollectionReturnType(
-		Set<ComponentDefinition> componentDefinitions) {
+		Set<OpenApiComponent> openApiComponents) {
 
-		ComponentDefinition schemaComponentDefinition =
-			_getSchemaComponentDefinition(componentDefinitions);
+		OpenApiComponent schemaOpenApiComponent =
+			_getSchemaComponentDefinition(openApiComponents);
 
-		if (schemaComponentDefinition == null) {
+		if (schemaOpenApiComponent == null) {
 			return false;
 		}
 
-		if (schemaComponentDefinition.isArray()) {
+		if (schemaOpenApiComponent.isArray()) {
 			return true;
 		}
 
@@ -166,14 +166,14 @@ public class Method {
 	}
 
 	public boolean hasImplicitPaginationContext(
-		Set<ComponentDefinition> componentDefinitions) {
+		Set<OpenApiComponent> openApiComponents) {
 
 		if (!hasPaginationContextExtension()) {
-			ComponentDefinition schemaComponentDefinition =
-				_getSchemaComponentDefinition(componentDefinitions);
+			OpenApiComponent schemaOpenApiComponent =
+				_getSchemaComponentDefinition(openApiComponents);
 
-			if ((schemaComponentDefinition != null) &&
-				schemaComponentDefinition.isArray()) {
+			if ((schemaOpenApiComponent != null) &&
+				schemaOpenApiComponent.isArray()) {
 
 				return true;
 			}
@@ -257,8 +257,8 @@ public class Method {
 		return null;
 	}
 
-	private ComponentDefinition _getSchemaComponentDefinition(
-		Set<ComponentDefinition> componentDefinitions) {
+	private OpenApiComponent _getSchemaComponentDefinition(
+		Set<OpenApiComponent> openApiComponents) {
 
 		Content content = _getResponseContent(getResponses());
 
@@ -268,16 +268,16 @@ public class Method {
 
 		Schema schema = content.getSchema();
 
-		ComponentDefinition schemaComponentDefinition =
-			ComponentDefinitionUtil.getSchemaComponentDefinition(
-				schema.getReferencedModel(), componentDefinitions);
+		OpenApiComponent schemaOpenApiComponent =
+			OpenApiComponentUtil.getSchemaOpenApiComponent(
+				schema.getReferencedModel(), openApiComponents);
 
 		if ("array".equals(schema.getType())) {
-			return ComponentDefinition.asComponentTypeArray(
-				schemaComponentDefinition, schema.getReference());
+			return OpenApiComponent.asComponentTypeArray(
+				schemaOpenApiComponent, schema.getReference());
 		}
 
-		return schemaComponentDefinition;
+		return schemaOpenApiComponent;
 	}
 
 	private final String _absolutePath;
