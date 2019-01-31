@@ -34,9 +34,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ComponentImporter {
 
-	public List<OpenApiComponent> getComponents(
-		JsonNode componentsJSONNode) {
-
+	public List<OpenApiComponent> getComponents(JsonNode componentsJSONNode) {
 		List<OpenApiComponent> components = new ArrayList<>();
 
 		if (componentsJSONNode.has("schemas")) {
@@ -86,9 +84,7 @@ public class ComponentImporter {
 			itemsReference);
 	}
 
-	private List<OpenApiComponent> _getParameters(
-		JsonNode componentsJSONNode) {
-
+	private List<OpenApiComponent> _getParameters(JsonNode componentsJSONNode) {
 		List<OpenApiComponent> components = new ArrayList<>();
 
 		JsonNode parametersJSONNode = componentsJSONNode.get("parameters");
@@ -143,9 +139,8 @@ public class ComponentImporter {
 
 				JsonNode propertyJSONNode = propertyEntry.getValue();
 
-				OpenApiProperty.OpenApiPropertyBuilder
-					openApiPropertyBuilder =
-						new OpenApiProperty.OpenApiPropertyBuilder();
+				OpenApiProperty.OpenApiPropertyBuilder openApiPropertyBuilder =
+					new OpenApiProperty.OpenApiPropertyBuilder();
 
 				openApiPropertyBuilder.name(name);
 
@@ -182,9 +177,8 @@ public class ComponentImporter {
 				}
 
 				if ("object".equals(openApiTypeDefinition)) {
-					OpenApiComponent openApiComponent =
-						_getOpenApiComponent(
-							propertyEntry.getKey(), propertyJSONNode);
+					OpenApiComponent openApiComponent = _getOpenApiComponent(
+						propertyEntry.getKey(), propertyJSONNode);
 
 					if (openApiComponent.isDictionary()) {
 						openApiPropertyBuilder.openApiTypeDefinition(
@@ -193,8 +187,7 @@ public class ComponentImporter {
 							openApiComponent.getItemsReference());
 					}
 
-					_logger.warn(
-						"Detected nested object {}", openApiComponent);
+					_logger.warn("Detected nested object {}", openApiComponent);
 				}
 
 				openApiProperties.add(openApiPropertyBuilder.build());

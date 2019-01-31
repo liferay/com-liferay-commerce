@@ -16,8 +16,8 @@ package com.liferay.commerce.openapi.util.importer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Extension;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Parameter;
 
 import java.util.ArrayList;
@@ -33,8 +33,7 @@ import org.slf4j.LoggerFactory;
 public class ExtensionImporter {
 
 	public List<Extension> getExtensions(
-		JsonNode extensionJSONNode,
-		List<OpenApiComponent> openApiComponents) {
+		JsonNode extensionJSONNode, List<OpenApiComponent> openApiComponents) {
 
 		List<Extension> extensions = new ArrayList<>();
 

@@ -133,8 +133,7 @@ public class ParameterImporter {
 				if (parameterJSONNode.has("$ref")) {
 					parameters.add(
 						fromComponentDefinition(
-							parameterJSONNode.get("$ref"),
-							openApiComponents));
+							parameterJSONNode.get("$ref"), openApiComponents));
 				}
 				else {
 					parameters.add(fromJSONNode(parameterJSONNode));
