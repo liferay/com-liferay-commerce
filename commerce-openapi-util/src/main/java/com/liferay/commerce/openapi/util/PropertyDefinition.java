@@ -19,48 +19,8 @@ package com.liferay.commerce.openapi.util;
  */
 public class PropertyDefinition {
 
-	public PropertyDefinition(String name, String type, String format) {
-		_name = name;
-		_type = type;
-		_format = format;
-
-		OpenApiType openApiType = OpenApiType.OBJECT;
-
-		if (type != null) {
-			openApiType = OpenApiType.fromDefinition(type);
-		}
-
-		OpenApiFormat openApiFormat = OpenApiFormat.fromOpenApiTypeAndFormat(
-			openApiType, _format);
-
-		_openApiFormat = openApiFormat;
-	}
-
-	public PropertyDefinition(
-		String name, String type, String itemsType, String itemsFormat) {
-
-		_name = name;
-		_type = type;
-		_format = itemsFormat;
-
-		OpenApiType openApiType = OpenApiType.OBJECT;
-
-		if (type != null) {
-			openApiType = OpenApiType.fromDefinition(itemsType);
-		}
-
-		OpenApiFormat openApiFormat = OpenApiFormat.fromOpenApiTypeAndFormat(
-			openApiType, _format);
-
-		_openApiFormat = openApiFormat;
-	}
-
-	public String getExample() {
-		return _example;
-	}
-
-	public String getFormat() {
-		return _format;
+	public String getComponentReference() {
+		return _componentReference;
 	}
 
 	public String getGetterSyntax() {
@@ -71,13 +31,12 @@ public class PropertyDefinition {
 		return _openApiFormat.getGetterSyntax();
 	}
 
-	public String getItemType() {
-		return _itemType;
-	}
-
 	public String getJavaType() {
-		if ("array".equals(_type)) {
-			return _openApiFormat.getJavaType() + "[]";
+		if (_openApiType == OpenApiType.ARRAY) {
+			return _itemFormat.getJavaType() + "[]";
+		}
+		else if (_openApiType == OpenApiType.DICTIONARY) {
+			return "Map<String, String>";
 		}
 
 		return _openApiFormat.getJavaType();
@@ -95,12 +54,8 @@ public class PropertyDefinition {
 		return _openApiFormat.getSetterSyntax();
 	}
 
-	public String getType() {
-		return _type;
-	}
-
 	public boolean isObject() {
-		if (_type.equals("object")) {
+		if (_openApiType == OpenApiType.OBJECT) {
 			return true;
 		}
 
@@ -115,14 +70,6 @@ public class PropertyDefinition {
 		_example = example;
 	}
 
-	public void setItemFormat(String itemFormat) {
-		_itemFormat = itemFormat;
-	}
-
-	public void setItemType(String itemType) {
-		_itemType = itemType;
-	}
-
 	public void setName(String name) {
 		_name = name;
 	}
@@ -131,8 +78,8 @@ public class PropertyDefinition {
 		_required = required;
 	}
 
-	public void setType(String type) {
-		_type = type;
+	public void setType(String openApiDefinition) {
+		_openApiType = OpenApiType.fromDefinition(openApiDefinition);
 	}
 
 	@Override
@@ -146,7 +93,7 @@ public class PropertyDefinition {
 		sb.append("{example=");
 		sb.append(_example);
 		sb.append(", format=");
-		sb.append(_format);
+		sb.append(_openApiFormat);
 		sb.append(", itemFormat=");
 		sb.append(_itemFormat);
 		sb.append(", itemType=");
@@ -156,7 +103,7 @@ public class PropertyDefinition {
 		sb.append(", required=");
 		sb.append(_required);
 		sb.append(", type=");
-		sb.append(_type);
+		sb.append(_openApiType);
 		sb.append("}");
 
 		_toString = sb.toString();
@@ -164,14 +111,116 @@ public class PropertyDefinition {
 		return _toString;
 	}
 
+	public static class OpenApiPropertyBuilder {
+
+		public PropertyDefinition build() {
+			return new PropertyDefinition(this);
+		}
+
+		public OpenApiPropertyBuilder componentReference(
+			String componentReference) {
+
+			_componentReference = componentReference;
+
+			return this;
+		}
+
+		public OpenApiPropertyBuilder example(String example) {
+			_example = example;
+
+			return this;
+		}
+
+		public OpenApiPropertyBuilder itemOpenApiFormatDefinition(
+			String itemOpenApiFormatDefinition) {
+
+			_itemOpenApiFormatDefinition = itemOpenApiFormatDefinition;
+
+			return this;
+		}
+
+		public OpenApiPropertyBuilder itemOpenApiTypeDefinition(
+			String itemOpenApiTypeDefinition) {
+
+			_itemOpenApiTypeDefinition = itemOpenApiTypeDefinition;
+
+			return this;
+		}
+
+		public OpenApiPropertyBuilder name(String name) {
+			_name = name;
+
+			return this;
+		}
+
+		public OpenApiPropertyBuilder openApiFormatDefinition(
+			String openApiFormatDefinition) {
+
+			_openApiFormatDefinition = openApiFormatDefinition;
+
+			return this;
+		}
+
+		public OpenApiPropertyBuilder openApiTypeDefinition(
+			String openApiTypeDefinition) {
+
+			_openApiTypeDefinition = openApiTypeDefinition;
+
+			return this;
+		}
+
+		public OpenApiPropertyBuilder required(boolean required) {
+			_required = required;
+
+			return this;
+		}
+
+		private String _componentReference;
+		private String _example;
+		private String _itemOpenApiFormatDefinition;
+		private String _itemOpenApiTypeDefinition;
+		private String _name;
+		private String _openApiFormatDefinition;
+		private String _openApiTypeDefinition;
+		private boolean _required;
+
+	}
+
+	private PropertyDefinition(OpenApiPropertyBuilder openApiPropertyBuilder) {
+		_example = openApiPropertyBuilder._example;
+		_itemType = _fromOpenApiDefinition(
+			openApiPropertyBuilder._itemOpenApiTypeDefinition);
+
+		_itemFormat = OpenApiFormat.fromOpenApiTypeAndFormat(
+			_itemType, openApiPropertyBuilder._itemOpenApiFormatDefinition);
+
+		_name = openApiPropertyBuilder._name;
+		_required = openApiPropertyBuilder._required;
+		_openApiType = _fromOpenApiDefinition(
+			openApiPropertyBuilder._openApiTypeDefinition);
+
+		_openApiFormat = OpenApiFormat.fromOpenApiTypeAndFormat(
+			_openApiType, openApiPropertyBuilder._openApiFormatDefinition);
+
+		_componentReference = openApiPropertyBuilder._componentReference;
+	}
+
+	private OpenApiType _fromOpenApiDefinition(String openApiTypeDefinition) {
+		if (openApiTypeDefinition == null) {
+			return OpenApiType.OBJECT;
+		}
+
+		return OpenApiType.fromDefinition(openApiTypeDefinition);
+	}
+
+	private String _componentReference;
 	private String _example;
-	private final String _format;
-	private String _itemFormat;
-	private String _itemType;
+	private final OpenApiFormat _itemFormat;
+	private final OpenApiType _itemType;
 	private String _name;
 	private final OpenApiFormat _openApiFormat;
+	private OpenApiType _openApiType;
 	private boolean _required;
 	private String _toString;
-	private String _type;
 
 }
