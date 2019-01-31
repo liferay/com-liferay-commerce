@@ -36,8 +36,8 @@ public class ComponentImporterTest {
 
 		Assert.assertEquals("Two components expected", 3, components.size());
 
-		OpenApiComponent openApiComponent =
-			_getDictionaryComponentDefinition(components);
+		OpenApiComponent openApiComponent = _getDictionaryComponentDefinition(
+			components);
 
 		Assert.assertNotNull(
 			"Dictionary component definition", openApiComponent);

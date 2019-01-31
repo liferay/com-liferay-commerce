@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
-import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Content;
 import com.liferay.commerce.openapi.util.Extension;
 import com.liferay.commerce.openapi.util.Method;
+import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.Response;
@@ -132,8 +132,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 	}
 
 	public void writeResourceSources(
-			String version, Path path,
-			Set<OpenApiComponent> openApiComponents)
+			String version, Path path, Set<OpenApiComponent> openApiComponents)
 		throws IOException {
 
 		_writeResourceInterfaceSource(version, path, openApiComponents);
@@ -264,8 +263,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 			sb.append("\t@Override\n");
 
-			sb.append(
-				_getMethodDeclaration(method, false, openApiComponents));
+			sb.append(_getMethodDeclaration(method, false, openApiComponents));
 
 			sb.append(" {\n");
 
@@ -320,8 +318,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
 
-			sb.append(
-				_getMethodDeclaration(method, true, openApiComponents));
+			sb.append(_getMethodDeclaration(method, true, openApiComponents));
 
 			sb.append(";\n");
 
@@ -575,8 +572,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 	}
 
 	private void _writeResourceImplementationSource(
-			String version, Path path,
-			Set<OpenApiComponent> openApiComponents)
+			String version, Path path, Set<OpenApiComponent> openApiComponents)
 		throws IOException {
 
 		String resourceImplementationClassName = StringUtils.upperCaseFirstChar(
@@ -651,8 +647,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 	}
 
 	private void _writeResourceInterfaceSource(
-			String version, Path path,
-			Set<OpenApiComponent> openApiComponents)
+			String version, Path path, Set<OpenApiComponent> openApiComponents)
 		throws IOException {
 
 		String osgiResourceComponent = getTemplate(
@@ -687,8 +682,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		osgiResourceComponent = osgiResourceComponent.replace(
 			"${METHODS}",
-			toResourceInterfaceMethods(
-				path.getMethods(), openApiComponents));
+			toResourceInterfaceMethods(path.getMethods(), openApiComponents));
 
 		String componentSourcePath = getClassSourcePath(
 			_moduleOutputPath, resourceInterfaceClassName + ".java",

@@ -121,8 +121,8 @@ public class Method {
 	}
 
 	public String getReturnType(Set<OpenApiComponent> openApiComponents) {
-		OpenApiComponent schemaOpenApiComponent =
-			_getSchemaComponentDefinition(openApiComponents);
+		OpenApiComponent schemaOpenApiComponent = _getSchemaOpenApiComponent(
+			openApiComponents);
 
 		if (schemaOpenApiComponent == null) {
 			return null;
@@ -143,8 +143,8 @@ public class Method {
 	public boolean hasCollectionReturnType(
 		Set<OpenApiComponent> openApiComponents) {
 
-		OpenApiComponent schemaOpenApiComponent =
-			_getSchemaComponentDefinition(openApiComponents);
+		OpenApiComponent schemaOpenApiComponent = _getSchemaOpenApiComponent(
+			openApiComponents);
 
 		if (schemaOpenApiComponent == null) {
 			return false;
@@ -170,7 +170,7 @@ public class Method {
 
 		if (!hasPaginationContextExtension()) {
 			OpenApiComponent schemaOpenApiComponent =
-				_getSchemaComponentDefinition(openApiComponents);
+				_getSchemaOpenApiComponent(openApiComponents);
 
 			if ((schemaOpenApiComponent != null) &&
 				schemaOpenApiComponent.isArray()) {
@@ -257,7 +257,7 @@ public class Method {
 		return null;
 	}
 
-	private OpenApiComponent _getSchemaComponentDefinition(
+	private OpenApiComponent _getSchemaOpenApiComponent(
 		Set<OpenApiComponent> openApiComponents) {
 
 		Content content = _getResponseContent(getResponses());
