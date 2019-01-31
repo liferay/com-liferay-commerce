@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.internal.events;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.product.util.CPRulesThreadLocal;
@@ -22,6 +24,7 @@ import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.LifecycleAction;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 
 import java.util.List;
@@ -36,7 +39,10 @@ import org.osgi.service.component.annotations.Reference;
  * @author Andrea Di Giorgi
  */
 @Component(
-	property = "key=servlet.service.events.pre", service = LifecycleAction.class
+	property = {
+		"key=servlet.service.events.pre", "service.ranking:Integer=100"
+	},
+	service = LifecycleAction.class
 )
 public class CPRulesPreAction extends Action {
 
@@ -47,10 +53,23 @@ public class CPRulesPreAction extends Action {
 		throws ActionException {
 
 		try {
-			long groupId = _portal.getScopeGroupId(httpServletRequest);
-			long[] commerceUserSegmentEntryIds =
+			long groupId = ParamUtil.getLong(httpServletRequest, "groupId", -1);
+
+			if (groupId == -1) {
+				groupId = _portal.getScopeGroupId(httpServletRequest);
+			}
+
+			CommerceAccount commerceAccount =
+				_commerceAccountHelper.getCurrentCommerceAccount(
+					groupId, httpServletRequest);
+
+			long[] commerceUserSegmentEntryIds = new long[0];
+
+			if (commerceAccount != null) {
 				_commerceUserSegmentHelper.getCommerceUserSegmentIds(
-					httpServletRequest);
+					groupId, commerceAccount.getCommerceAccountId(),
+					_portal.getUserId(httpServletRequest));
+			}
 
 			List<CPRule> cpRules = _cpRuleLocalService.getCPRules(
 				groupId, commerceUserSegmentEntryIds);
@@ -61,6 +80,9 @@ public class CPRulesPreAction extends Action {
 			throw new ActionException(pe);
 		}
 	}
+
+	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceUserSegmentHelper _commerceUserSegmentHelper;
