@@ -14,17 +14,17 @@
 
 package com.liferay.commerce.openapi.admin.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 import java.math.BigDecimal;
 
 import javax.annotation.Generated;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Igor Beslic
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@XmlRootElement(name = "PriceEntry")
+@JacksonXmlRootElement(localName = "PriceEntry")
 public class PriceEntryDTO {
 
 	public Long getCommercePriceListId() {

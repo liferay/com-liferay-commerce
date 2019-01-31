@@ -14,15 +14,15 @@
 
 package com.liferay.commerce.openapi.admin.model;
 
-import javax.annotation.Generated;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.annotation.Generated;
 
 /**
  * @author Igor Beslic
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@XmlRootElement(name = "Inventory")
+@JacksonXmlRootElement(localName = "Inventory")
 public class InventoryDTO {
 
 	public Long getId() {
