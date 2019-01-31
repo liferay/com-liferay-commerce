@@ -86,9 +86,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 	public byte[] getMediaBytes(HttpServletRequest httpServletRequest)
 		throws IOException, PortalException {
 
-		FileEntry fileEntry = getFileEntry(httpServletRequest);
-
-		return _file.getBytes(fileEntry.getContentStream());
+		return getBytes(getFileEntry(httpServletRequest));
 	}
 
 	@Override
@@ -137,7 +135,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		}
 
 		if (cpAttachmentFileEntry == null) {
-			sb.append("/default/?groupId=");
+			sb.append("/default?groupId=");
 
 			HttpSession httpSession = PortalSessionThreadLocal.getHttpSession();
 
@@ -205,7 +203,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		String[] pathArray = StringUtil.split(path, CharPool.SLASH);
 
 		if (pathArray.length < 2) {
-			long groupId = ParamUtil.getLong(httpServletRequest, "groupId", 0);
+			long groupId = ParamUtil.getLong(httpServletRequest, "groupId");
 
 			if (groupId == 0) {
 				httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -254,7 +252,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 			ServletResponseUtil.sendFile(
 				httpServletRequest, httpServletResponse,
-				fileEntry.getFileName(), getMediaBytes(fileEntry),
+				fileEntry.getFileName(), getBytes(fileEntry),
 				fileEntry.getMimeType(), contentDisposition);
 		}
 		catch (PortalException pe) {
@@ -262,6 +260,12 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
 		}
+	}
+
+	protected byte[] getBytes(FileEntry fileEntry)
+		throws IOException, PortalException {
+
+		return _file.getBytes(fileEntry.getContentStream());
 	}
 
 	protected FileEntry getFileEntry(HttpServletRequest httpServletRequest)
@@ -277,11 +281,20 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 		long fileEntryId = GetterUtil.getLong(pathArray[pathArray.length - 2]);
 
-		return _dlAppLocalService.getFileEntry(fileEntryId);
+		return getFileEntry(fileEntryId);
 	}
 
-	protected FileEntry getFileEntry(long fileEntryId) throws PortalException {
-		return _dlAppLocalService.getFileEntry(fileEntryId);
+	protected FileEntry getFileEntry(long fileEntryId) {
+		try {
+			return _dlAppLocalService.getFileEntry(fileEntryId);
+		}
+		catch (PortalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
+
+			return null;
+		}
 	}
 
 	protected void sendDefaultMediaBytes(
@@ -311,7 +324,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 			ServletResponseUtil.sendFile(
 				httpServletRequest, httpServletResponse,
-				fileEntry.getFileName(), getMediaBytes(fileEntry),
+				fileEntry.getFileName(), getBytes(fileEntry),
 				fileEntry.getMimeType(), contentDisposition);
 		}
 		catch (PortalException pe) {
