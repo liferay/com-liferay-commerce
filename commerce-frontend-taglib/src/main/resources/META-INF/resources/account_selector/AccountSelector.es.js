@@ -4,6 +4,7 @@ import template from './AccountSelector.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
+import 'clay-icon';
 import './OrdersTable.es';
 import './AccountsTable.es';
 
