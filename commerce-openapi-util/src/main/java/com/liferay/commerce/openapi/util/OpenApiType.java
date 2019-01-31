@@ -21,8 +21,8 @@ import com.liferay.commerce.openapi.util.exception.OpenApiException;
  */
 public enum OpenApiType {
 
-	ARRAY("array"), BOOLEAN("boolean"), INTEGER("integer"), NUMBER("number"),
-	OBJECT("object"), STRING("string");
+	ARRAY("array"), BOOLEAN("boolean"), DICTIONARY("dictionary"),
+	INTEGER("integer"), NUMBER("number"), OBJECT("object"), STRING("string");
 
 	public static OpenApiType fromDefinition(String openApiDefinition) {
 		for (OpenApiType openApiType : values()) {
