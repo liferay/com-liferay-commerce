@@ -37,7 +37,7 @@ public enum OpenApiFormat {
 	STRING(null, OpenApiType.STRING, "String", true);
 
 	public static OpenApiFormat fromOpenApiTypeAndFormat(
-		OpenApiType openApiType, String openApiFormatExpression) {
+		OpenApiType openApiType, String openApiFormatDefinition) {
 
 		OpenApiFormat defaultOpenApiFormat = null;
 
@@ -46,12 +46,12 @@ public enum OpenApiFormat {
 				continue;
 			}
 
-			if ((openApiFormatExpression == null) && openApiFormat._default) {
+			if ((openApiFormatDefinition == null) && openApiFormat._default) {
 				return openApiFormat;
 			}
 
-			if ((openApiFormatExpression != null) &&
-				openApiFormatExpression.equals(
+			if ((openApiFormatDefinition != null) &&
+				openApiFormatDefinition.equals(
 					openApiFormat._openApiFormatExpression)) {
 
 				return openApiFormat;

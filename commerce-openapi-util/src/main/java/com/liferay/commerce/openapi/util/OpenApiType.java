@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.util;
 
+import com.liferay.commerce.openapi.util.exception.OpenApiException;
+
 /**
  * @author Igor Beslic
  */
@@ -22,23 +24,21 @@ public enum OpenApiType {
 	ARRAY("array"), BOOLEAN("boolean"), INTEGER("integer"), NUMBER("number"),
 	OBJECT("object"), STRING("string");
 
-	public static OpenApiType fromDefinition(String swaggerDefinitionType) {
+	public static OpenApiType fromDefinition(String openApiDefinition) {
 		for (OpenApiType openApiType : values()) {
-			if (swaggerDefinitionType.equals(
-					openApiType._swaggerDefinitionType)) {
-
+			if (openApiDefinition.equals(openApiType._openApiDefinition)) {
 				return openApiType;
 			}
 		}
 
-		throw new UnsupportedOperationException(
-			"Unknown swagger parameter type " + swaggerDefinitionType);
+		throw new OpenApiException(
+			"Unknown Open API type " + openApiDefinition);
 	}
 
-	private OpenApiType(String swaggerDefinitionType) {
-		_swaggerDefinitionType = swaggerDefinitionType;
+	private OpenApiType(String openApiDefinition) {
+		_openApiDefinition = openApiDefinition;
 	}
 
-	private final String _swaggerDefinitionType;
+	private final String _openApiDefinition;
 
 }
