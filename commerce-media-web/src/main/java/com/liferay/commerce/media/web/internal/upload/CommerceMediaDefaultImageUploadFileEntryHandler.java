@@ -57,10 +57,6 @@ public class CommerceMediaDefaultImageUploadFileEntryHandler
 	public FileEntry upload(UploadPortletRequest uploadPortletRequest)
 		throws IOException, PortalException {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)uploadPortletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
 		long size = uploadPortletRequest.getSize(_PARAMETER_NAME);
 
@@ -68,6 +64,10 @@ public class CommerceMediaDefaultImageUploadFileEntryHandler
 
 		String contentType = uploadPortletRequest.getContentType(
 			_PARAMETER_NAME);
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)uploadPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		try (InputStream inputStream =
 				uploadPortletRequest.getFileAsStream(_PARAMETER_NAME)) {

@@ -59,21 +59,21 @@ public class AttachmentsUploadResponseHandler implements UploadResponseHandler {
 		if (pe instanceof CPAttachmentFileEntryNameException ||
 			pe instanceof CPAttachmentFileEntrySizeException) {
 
+			JSONObject errorJSONObject = _jsonFactory.createJSONObject();
+
 			String errorMessage = StringPool.BLANK;
 			int errorType = 0;
 
 			if (pe instanceof CPAttachmentFileEntryNameException) {
-				errorType =
-					ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION;
-
 				errorMessage = StringUtil.merge(
 					_attachmentsConfiguration.imageExtensions());
+
+				errorType =
+					ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION;
 			}
 			else if (pe instanceof CPAttachmentFileEntrySizeException) {
 				errorType = ServletResponseConstants.SC_FILE_SIZE_EXCEPTION;
 			}
-
-			JSONObject errorJSONObject = _jsonFactory.createJSONObject();
 
 			errorJSONObject.put("errorType", errorType);
 			errorJSONObject.put("message", errorMessage);

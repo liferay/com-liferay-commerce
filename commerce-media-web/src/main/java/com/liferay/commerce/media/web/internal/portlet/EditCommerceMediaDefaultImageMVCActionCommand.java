@@ -54,8 +54,6 @@ public class EditCommerceMediaDefaultImageMVCActionCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String fileEntryId = ParamUtil.getString(actionRequest, "fileEntryId");
-
 		Settings settings = _settingsFactory.getSettings(
 			new GroupServiceSettingsLocator(
 				themeDisplay.getScopeGroupId(),
@@ -63,6 +61,8 @@ public class EditCommerceMediaDefaultImageMVCActionCommand
 
 		ModifiableSettings modifiableSettings =
 			settings.getModifiableSettings();
+
+		String fileEntryId = ParamUtil.getString(actionRequest, "fileEntryId");
 
 		modifiableSettings.setValue("defaultFileEntryId", fileEntryId);
 
