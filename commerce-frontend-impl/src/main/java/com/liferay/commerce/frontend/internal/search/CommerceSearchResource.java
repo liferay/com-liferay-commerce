@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.frontend.internal.account.CommerceAccountResource;
@@ -64,6 +65,8 @@ import java.util.Map;
 
 import javax.portlet.PortletURL;
 
+import javax.servlet.http.HttpServletRequest;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -88,7 +91,8 @@ public class CommerceSearchResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response get(
 		@PathParam("plid") long plid, @QueryParam("q") String queryString,
-		@Context ThemeDisplay themeDisplay) {
+		@Context ThemeDisplay themeDisplay,
+		@Context HttpServletRequest httpServletRequest) {
 
 		try {
 			Layout layout = _layoutLocalService.getLayout(plid);
@@ -97,6 +101,10 @@ public class CommerceSearchResource {
 			themeDisplay.setLayout(layout);
 			themeDisplay.setLayoutSet(layout.getLayoutSet());
 
+			CommerceAccount commerceAccount =
+				_commerceAccountHelper.getCurrentCommerceAccount(
+					themeDisplay.getScopeGroupId(), httpServletRequest);
+
 			List<SearchItemModel> searchItemModels = new ArrayList<>();
 
 			searchItemModels.addAll(
@@ -104,7 +112,8 @@ public class CommerceSearchResource {
 					themeDisplay.getCompanyId(), layout.getGroupId(),
 					queryString, themeDisplay));
 			searchItemModels.addAll(searchAccounts(queryString, themeDisplay));
-			searchItemModels.addAll(searchOrders(queryString, themeDisplay));
+			searchItemModels.addAll(
+				searchOrders(queryString, themeDisplay, commerceAccount));
 
 			String url = _commerceSearchUtil.getSearchFriendlyURL(themeDisplay);
 
@@ -188,14 +197,15 @@ public class CommerceSearchResource {
 	}
 
 	protected List<SearchItemModel> searchOrders(
-			String queryString, ThemeDisplay themeDisplay)
+			String queryString, ThemeDisplay themeDisplay,
+			CommerceAccount commerceAccount)
 		throws PortalException {
 
 		List<SearchItemModel> searchItemModels = new ArrayList<>();
 
 		OrderList orderList = _commerceOrderResource.getOrderList(
 			themeDisplay.getScopeGroupId(), queryString, 1, 5,
-			themeDisplay.getRequest());
+			themeDisplay.getRequest(), commerceAccount);
 
 		searchItemModels.add(
 			new SearchItemModel(
@@ -345,6 +355,9 @@ public class CommerceSearchResource {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceSearchResource.class);
+
+	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceAccountResource _commerceAccountResource;
