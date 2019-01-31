@@ -16,7 +16,6 @@ package com.liferay.commerce.media;
 
 import com.liferay.osgi.util.ServiceTrackerFactory;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 
 import java.io.IOException;
 

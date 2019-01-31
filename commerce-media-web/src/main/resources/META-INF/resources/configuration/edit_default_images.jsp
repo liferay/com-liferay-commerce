@@ -25,9 +25,6 @@ long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 %>
 
 <div class="container-fluid-1280 mt-4 sheet">
-	<portlet:actionURL name="editCommerceMediaDefaultImage" var="editCommerceMediaDefaultImageActionURL" />
-	<portlet:actionURL name="uploadCommerceMediaDefaultImage" var="uploadCommerceMediaDefaultImageActionURL" />
-
 	<liferay-ui:error-marker
 		key="<%= WebKeys.ERROR_SECTION %>"
 		value="details"
@@ -36,6 +33,8 @@ long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 	<liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="please-select-an-existing-file" />
 
 	<aui:model-context bean="<%= fileEntry %>" model="<%= FileEntry.class %>" />
+
+	<portlet:actionURL name="editCommerceMediaDefaultImage" var="editCommerceMediaDefaultImageActionURL" />
 
 	<aui:form action="<%= editCommerceMediaDefaultImageActionURL %>" method="post" name="fm">
 		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
@@ -48,15 +47,17 @@ long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 
 		<aui:fieldset>
 			<div class="lfr-attachment-cover-image-selector">
+				<portlet:actionURL name="uploadCommerceMediaDefaultImage" var="uploadCommerceMediaDefaultImageActionURL" />
+
 				<liferay-item-selector:image-selector
 					draggableImage="vertical"
 					fileEntryId="<%= fileEntryId %>"
-					itemSelectorEventName='<%= "addFileEntry" %>'
+					itemSelectorEventName="addFileEntry"
 					itemSelectorURL="<%= commerceMediaDefaultImageDisplayContext.getImageItemSelectorUrl() %>"
 					maxFileSize="<%= commerceMediaDefaultImageDisplayContext.getImageMaxSize() %>"
 					paramName="fileEntry"
 					uploadURL="<%= uploadCommerceMediaDefaultImageActionURL %>"
-					validExtensions='<%= StringUtil.merge(commerceMediaDefaultImageDisplayContext.getImageExtensions(), ", ") %>'
+					validExtensions="<%= StringUtil.merge(commerceMediaDefaultImageDisplayContext.getImageExtensions(), StringPool.COMMA_AND_SPACE) %>"
 				/>
 			</div>
 		</aui:fieldset>

@@ -90,8 +90,6 @@ public class CommerceMediaDefaultImageAdminModule
 
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			renderRequest);
-		HttpServletResponse httpServletResponse =
-			_portal.getHttpServletResponse(renderResponse);
 
 		CommerceMediaDefaultImageDisplayContext
 			commerceMediaDefaultImageDisplayContext =
@@ -103,6 +101,9 @@ public class CommerceMediaDefaultImageAdminModule
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
 			commerceMediaDefaultImageDisplayContext);
+
+		HttpServletResponse httpServletResponse =
+			_portal.getHttpServletResponse(renderResponse);
 
 		_jspRenderer.renderJSP(
 			_servletContext, httpServletRequest, httpServletResponse,
