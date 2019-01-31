@@ -14,19 +14,19 @@
 
 package com.liferay.commerce.openapi.admin.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 import java.math.BigDecimal;
 
 import java.util.Date;
 
 import javax.annotation.Generated;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * @author Igor Beslic
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@XmlRootElement(name = "Sku")
+@JacksonXmlRootElement(localName = "Sku")
 public class SkuDTO {
 
 	public BigDecimal getCost() {
