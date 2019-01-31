@@ -73,7 +73,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
