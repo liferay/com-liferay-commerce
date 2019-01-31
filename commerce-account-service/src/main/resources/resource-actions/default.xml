@@ -18,6 +18,7 @@
 		<portlet-ref>
 			<portlet-name>com_liferay_commerce_account_web_internal_portlet_CommerceAccountPortlet</portlet-name>
 		</portlet-ref>
+		<root>true</root>
 		<weight>2</weight>
 		<permissions>
 			<supports>
