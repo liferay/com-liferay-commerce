@@ -72,7 +72,8 @@ public enum OpenApiFormat {
 		if (propertyDefinition.isObject()) {
 			ComponentDefinition componentDefinition =
 				ComponentDefinitionUtil.getSchemaComponentDefinition(
-					Schema.getReferencedModel(propertyDefinition.getFormat()),
+					Schema.getReferencedModel(
+						propertyDefinition.getComponentReference()),
 					componentDefinitions);
 
 			if (componentDefinition.isDictionary()) {

@@ -139,65 +139,65 @@ public class ComponentImporter {
 			while (fields.hasNext()) {
 				Map.Entry<String, JsonNode> propertyEntry = fields.next();
 
+				String name = propertyEntry.getKey();
+
 				JsonNode propertyJSONNode = propertyEntry.getValue();
 
-				String propertyType = GetterUtil.getAsText(
+				PropertyDefinition.OpenApiPropertyBuilder
+					openApiPropertyBuilder =
+						new PropertyDefinition.OpenApiPropertyBuilder();
+
+				openApiPropertyBuilder.name(name);
+
+				String openApiTypeDefinition = GetterUtil.getAsText(
 					"type", propertyJSONNode, "object");
 
-				PropertyDefinition propertyDefinition = null;
-
-				if ("array".equals(propertyType)) {
-					JsonNode itemsJSONNode = propertyJSONNode.get("items");
-
-					JsonNode itemsTypeJSONNode = itemsJSONNode.get("type");
-
-					String itemType = itemsTypeJSONNode.asText();
-
-					String itemFormat = null;
-
-					if (itemsJSONNode.has("format")) {
-						JsonNode itemsFormatJSONNode = itemsJSONNode.get(
-							"format");
-
-						itemFormat = itemsFormatJSONNode.asText();
-					}
-
-					propertyDefinition = new PropertyDefinition(
-						propertyEntry.getKey(), propertyType, itemType,
-						itemFormat);
-				}
-				else if ("object".equals(propertyType)) {
-					propertyDefinition = new PropertyDefinition(
-						propertyEntry.getKey(), propertyType,
-						GetterUtil.getAsTextOrNullIfMisses(
-							"$ref", propertyJSONNode));
-
-					_logger.trace(
-						"Detected nested object {}", propertyDefinition);
-				}
-				else {
-					String format = null;
-
-					if (propertyJSONNode.has("format")) {
-						JsonNode propertyFormatJSONNode = propertyJSONNode.get(
-							"format");
-
-						format = propertyFormatJSONNode.asText();
-					}
-
-					propertyDefinition = new PropertyDefinition(
-						propertyEntry.getKey(), propertyType, format);
-				}
+				openApiPropertyBuilder.openApiTypeDefinition(
+					openApiTypeDefinition);
 
 				_setIfHas(
 					propertyJSONNode, "example",
-					propertyDefinition :: setExample);
+					openApiPropertyBuilder :: example);
+				_setIfHas(
+					propertyJSONNode, "format",
+					openApiPropertyBuilder :: openApiFormatDefinition);
 
-				if (requiredProperties.contains(propertyDefinition.getName())) {
-					propertyDefinition.setRequired(true);
+				if (propertyJSONNode.has("items")) {
+					JsonNode itemsJSONNode = propertyJSONNode.get("items");
+
+					_setIfHas(
+						itemsJSONNode, "type",
+						openApiPropertyBuilder :: itemOpenApiTypeDefinition);
+					_setIfHas(
+						itemsJSONNode, "format",
+						openApiPropertyBuilder ::itemOpenApiFormatDefinition);
 				}
 
-				propertyDefinitions.add(propertyDefinition);
+				_setIfHas(
+					propertyJSONNode, "$ref",
+					openApiPropertyBuilder :: componentReference);
+
+				if (requiredProperties.contains(name)) {
+					openApiPropertyBuilder.required(true);
+				}
+
+				if ("object".equals(openApiTypeDefinition)) {
+					ComponentDefinition componentDefinition =
+						_getComponentDefinition(
+							propertyEntry.getKey(), propertyJSONNode);
+
+					if (componentDefinition.isDictionary()) {
+						openApiPropertyBuilder.openApiTypeDefinition(
+							"dictionary");
+						openApiPropertyBuilder.componentReference(
+							componentDefinition.getItemsReference());
+					}
+
+					_logger.warn(
+						"Detected nested object {}", componentDefinition);
+				}
+
+				propertyDefinitions.add(openApiPropertyBuilder.build());
 			}
 		}
 
