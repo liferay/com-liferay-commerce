@@ -17,7 +17,7 @@ package com.liferay.commerce.openapi.util;
 /**
  * @author Igor Beslic
  */
-public class PropertyDefinition {
+public class OpenApiProperty {
 
 	public String getComponentReference() {
 		return _componentReference;
@@ -113,8 +113,8 @@ public class PropertyDefinition {
 
 	public static class OpenApiPropertyBuilder {
 
-		public PropertyDefinition build() {
-			return new PropertyDefinition(this);
+		public OpenApiProperty build() {
+			return new OpenApiProperty(this);
 		}
 
 		public OpenApiPropertyBuilder componentReference(
@@ -186,7 +186,7 @@ public class PropertyDefinition {
 
 	}
 
-	private PropertyDefinition(OpenApiPropertyBuilder openApiPropertyBuilder) {
+	private OpenApiProperty(OpenApiPropertyBuilder openApiPropertyBuilder) {
 		_example = openApiPropertyBuilder._example;
 		_itemType = _fromOpenApiDefinition(
 			openApiPropertyBuilder._itemOpenApiTypeDefinition);
