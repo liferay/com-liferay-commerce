@@ -21,6 +21,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.portal.spring.extender", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.upgrade.api", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.registry.api", version: "2.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.admin.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.media.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.organization.api", version: "1.0.0"
