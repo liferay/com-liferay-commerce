@@ -16,13 +16,13 @@ package ${PACKAGE};
 
 import javax.annotation.Generated;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
  * @author ${AUTHOR}
  */
 @Generated(value = "OSGiRESTModuleGenerator")
-@XmlRootElement(name = "${MODEL}")
+@JacksonXmlRootElement(localName = "${MODEL}")
 public class ${DTO_CLASS} {
 
 ${METHODS}
