@@ -37,7 +37,7 @@ public class ProductOptionDTO {
 		return _fieldType;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return _id;
 	}
 
@@ -49,15 +49,15 @@ public class ProductOptionDTO {
 		return _name;
 	}
 
-	public boolean isFacetable() {
+	public Boolean isFacetable() {
 		return _facetable;
 	}
 
-	public boolean isRequired() {
+	public Boolean isRequired() {
 		return _required;
 	}
 
-	public boolean isSkuContributor() {
+	public Boolean isSkuContributor() {
 		return _skuContributor;
 	}
 
@@ -69,7 +69,7 @@ public class ProductOptionDTO {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	public void setFacetable(boolean facetable) {
+	public void setFacetable(Boolean facetable) {
 		_facetable = facetable;
 	}
 
@@ -77,7 +77,7 @@ public class ProductOptionDTO {
 		_fieldType = fieldType;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		_id = id;
 	}
 
@@ -89,22 +89,22 @@ public class ProductOptionDTO {
 		_name = name;
 	}
 
-	public void setRequired(boolean required) {
+	public void setRequired(Boolean required) {
 		_required = required;
 	}
 
-	public void setSkuContributor(boolean skuContributor) {
+	public void setSkuContributor(Boolean skuContributor) {
 		_skuContributor = skuContributor;
 	}
 
 	private String _description;
 	private String _externalReferenceCode;
-	private boolean _facetable;
+	private Boolean _facetable;
 	private String _fieldType;
-	private long _id;
+	private Long _id;
 	private String _key;
 	private String _name;
-	private boolean _required;
-	private boolean _skuContributor;
+	private Boolean _required;
+	private Boolean _skuContributor;
 
 }

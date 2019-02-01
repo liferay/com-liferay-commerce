@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "PriceList")
 public class PriceListDTO {
 
-	public long getCommercePriceListId() {
+	public Long getCommercePriceListId() {
 		return _commercePriceListId;
 	}
 
@@ -47,7 +47,7 @@ public class PriceListDTO {
 		return _externalReferenceCode;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return _id;
 	}
 
@@ -55,23 +55,23 @@ public class PriceListDTO {
 		return _name;
 	}
 
-	public double getPriority() {
+	public Double getPriority() {
 		return _priority;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return _active;
 	}
 
-	public boolean isNeverExpire() {
+	public Boolean isNeverExpire() {
 		return _neverExpire;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		_active = active;
 	}
 
-	public void setCommercePriceListId(long commercePriceListId) {
+	public void setCommercePriceListId(Long commercePriceListId) {
 		_commercePriceListId = commercePriceListId;
 	}
 
@@ -91,7 +91,7 @@ public class PriceListDTO {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		_id = id;
 	}
 
@@ -99,23 +99,23 @@ public class PriceListDTO {
 		_name = name;
 	}
 
-	public void setNeverExpire(boolean neverExpire) {
+	public void setNeverExpire(Boolean neverExpire) {
 		_neverExpire = neverExpire;
 	}
 
-	public void setPriority(double priority) {
+	public void setPriority(Double priority) {
 		_priority = priority;
 	}
 
-	private boolean _active;
-	private long _commercePriceListId;
+	private Boolean _active;
+	private Long _commercePriceListId;
 	private String _currency;
 	private Date _displayDate;
 	private Date _expirationDate;
 	private String _externalReferenceCode;
-	private long _id;
+	private Long _id;
 	private String _name;
-	private boolean _neverExpire;
-	private double _priority;
+	private Boolean _neverExpire;
+	private Double _priority;
 
 }

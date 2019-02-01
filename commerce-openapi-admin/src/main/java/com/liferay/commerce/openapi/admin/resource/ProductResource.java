@@ -46,9 +46,7 @@ public interface ProductResource {
 	@DELETE
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteProduct(
-			@PathParam("id") String id, @Context Locale locale)
-		throws Exception;
+	public Response deleteProduct(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/{id}")
@@ -61,7 +59,7 @@ public interface ProductResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductDTO> getProducts(
-			@QueryParam("groupId") long groupId, @Context Pagination pagination)
+			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
@@ -69,8 +67,7 @@ public interface ProductResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<SkuDTO> getSkus(
-			@PathParam("id") String id, @Context Locale locale,
-			@Context Pagination pagination)
+			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -78,7 +75,7 @@ public interface ProductResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProduct(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			ProductDTO productDTO, @Context Locale locale)
 		throws Exception;
 
@@ -88,7 +85,7 @@ public interface ProductResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductDTO upsertProduct(
-			@QueryParam("groupId") long groupId, ProductDTO productDTO,
+			@QueryParam("groupId") Long groupId, ProductDTO productDTO,
 			@Context Locale locale)
 		throws Exception;
 
@@ -98,7 +95,7 @@ public interface ProductResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public SkuDTO upsertSku(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			SkuDTO skuDTO, @Context Locale locale)
 		throws Exception;
 

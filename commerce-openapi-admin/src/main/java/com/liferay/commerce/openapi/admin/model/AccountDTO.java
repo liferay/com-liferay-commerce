@@ -33,11 +33,15 @@ public class AccountDTO {
 		return _externalReferenceCode;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return _id;
 	}
 
-	public long getLogoId() {
+	public Byte[] getLogo() {
+		return _logo;
+	}
+
+	public Long getLogoId() {
 		return _logoId;
 	}
 
@@ -45,7 +49,7 @@ public class AccountDTO {
 		return _name;
 	}
 
-	public long getOrganizationId() {
+	public Long getOrganizationId() {
 		return _organizationId;
 	}
 
@@ -57,23 +61,23 @@ public class AccountDTO {
 		return _type;
 	}
 
-	public long[] getUserIds() {
+	public Long[] getUserIds() {
 		return _userIds;
 	}
 
-	public boolean isBusiness() {
+	public Boolean isBusiness() {
 		return _business;
 	}
 
-	public boolean isPersonal() {
+	public Boolean isPersonal() {
 		return _personal;
 	}
 
-	public boolean isRoot() {
+	public Boolean isRoot() {
 		return _root;
 	}
 
-	public void setBusiness(boolean business) {
+	public void setBusiness(Boolean business) {
 		_business = business;
 	}
 
@@ -85,11 +89,15 @@ public class AccountDTO {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		_id = id;
 	}
 
-	public void setLogoId(long logoId) {
+	public void setLogo(Byte[] logo) {
+		_logo = logo;
+	}
+
+	public void setLogoId(Long logoId) {
 		_logoId = logoId;
 	}
 
@@ -97,15 +105,15 @@ public class AccountDTO {
 		_name = name;
 	}
 
-	public void setOrganizationId(long organizationId) {
+	public void setOrganizationId(Long organizationId) {
 		_organizationId = organizationId;
 	}
 
-	public void setPersonal(boolean personal) {
+	public void setPersonal(Boolean personal) {
 		_personal = personal;
 	}
 
-	public void setRoot(boolean root) {
+	public void setRoot(Boolean root) {
 		_root = root;
 	}
 
@@ -117,21 +125,22 @@ public class AccountDTO {
 		_type = type;
 	}
 
-	public void setUserIds(long[] userIds) {
+	public void setUserIds(Long[] userIds) {
 		_userIds = userIds;
 	}
 
-	private boolean _business;
+	private Boolean _business;
 	private String[] _emailAddresses;
 	private String _externalReferenceCode;
-	private long _id;
-	private long _logoId;
+	private Long _id;
+	private Byte[] _logo;
+	private Long _logoId;
 	private String _name;
-	private long _organizationId;
-	private boolean _personal;
-	private boolean _root;
+	private Long _organizationId;
+	private Boolean _personal;
+	private Boolean _root;
 	private String _taxId;
 	private String _type;
-	private long[] _userIds;
+	private Long[] _userIds;
 
 }

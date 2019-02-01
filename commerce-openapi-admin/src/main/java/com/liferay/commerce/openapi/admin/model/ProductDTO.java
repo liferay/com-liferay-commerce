@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.admin.model;
 
+import java.util.Map;
+
 import javax.annotation.Generated;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Product")
 public class ProductDTO {
 
-	public int[] getAssetCategoryIds() {
+	public Integer[] getAssetCategoryIds() {
 		return _assetCategoryIds;
 	}
 
@@ -33,7 +35,7 @@ public class ProductDTO {
 		return _defaultSku;
 	}
 
-	public String getDescription() {
+	public Map getDescription() {
 		return _description;
 	}
 
@@ -41,11 +43,11 @@ public class ProductDTO {
 		return _externalReferenceCode;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return _id;
 	}
 
-	public String getName() {
+	public Map getName() {
 		return _name;
 	}
 
@@ -53,19 +55,19 @@ public class ProductDTO {
 		return _productTypeName;
 	}
 
-	public String getShortDescription() {
+	public Map getShortDescription() {
 		return _shortDescription;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return _active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		_active = active;
 	}
 
-	public void setAssetCategoryIds(int[] assetCategoryIds) {
+	public void setAssetCategoryIds(Integer[] assetCategoryIds) {
 		_assetCategoryIds = assetCategoryIds;
 	}
 
@@ -73,7 +75,7 @@ public class ProductDTO {
 		_defaultSku = defaultSku;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(Map description) {
 		_description = description;
 	}
 
@@ -81,11 +83,11 @@ public class ProductDTO {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		_id = id;
 	}
 
-	public void setName(String name) {
+	public void setName(Map name) {
 		_name = name;
 	}
 
@@ -93,18 +95,18 @@ public class ProductDTO {
 		_productTypeName = productTypeName;
 	}
 
-	public void setShortDescription(String shortDescription) {
+	public void setShortDescription(Map shortDescription) {
 		_shortDescription = shortDescription;
 	}
 
-	private boolean _active;
-	private int[] _assetCategoryIds;
+	private Boolean _active;
+	private Integer[] _assetCategoryIds;
 	private String _defaultSku;
-	private String _description;
+	private Map _description;
 	private String _externalReferenceCode;
-	private long _id;
-	private String _name;
+	private Long _id;
+	private Map _name;
 	private String _productTypeName;
-	private String _shortDescription;
+	private Map _shortDescription;
 
 }
