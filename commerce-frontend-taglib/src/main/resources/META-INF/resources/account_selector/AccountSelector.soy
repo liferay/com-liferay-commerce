@@ -29,11 +29,11 @@
 	]}
 	{@param? currentOrder: ?}
 
-	{@param? handleChangeSelectedView: ?}
-	{@param? handleAccountSelected: ?}
-	{@param? handleOrderSelected: ?}
-	{@param? handleGetOrders: ?}
-	{@param? handleGetAccounts: ?}
+	{@param? _handleChangeSelectedView: any}
+	{@param? _handleAccountSelected: any}
+	{@param? _handleOrderSelected: any}
+	{@param? _handleGetOrders: any}
+	{@param? _handleGetAccounts: any}
 
 	{@param spritemap: string}
 
@@ -73,9 +73,9 @@
 				{let $isOrdersTableVisible: $currentView == 'orders' /}
 				{call OrdersTable.render}
 					{param events: [
-						'changeSelectedView': $handleChangeSelectedView,
-						'orderSelected': $handleOrderSelected,
-						'getOrders': $handleGetOrders
+						'changeSelectedView': $_handleChangeSelectedView,
+						'orderSelected': $_handleOrderSelected,
+						'getOrders': $_handleGetOrders
 					] /}
 					{param currentAccountName: isNonnull($currentAccount) ? $currentAccount.name : null /}
 					{param orders: $orders /}
@@ -88,8 +88,8 @@
 				{let $isAccountsTableVisible: $currentView == 'accounts' /}
 				{call AccountsTable.render}
 					{param events: [
-						'accountSelected': $handleAccountSelected,
-						'getAccounts': $handleGetAccounts
+						'accountSelected': $_handleAccountSelected,
+						'getAccounts': $_handleGetAccounts
 					] /}
 					{param accounts: $accounts /}
 					{param isVisible: $isAccountsTableVisible /}

@@ -9,11 +9,14 @@ import '../autocomplete_item/AutocompleteItem.es';
 class AccountsTableItem extends Component {
 
 	_handleItemClick() {
-		this.emit('selectAccount', {
-			accountId: this.accountId,
-			name: this.name,
-			thumbnail: this.thumbnail
-		});
+		this.emit(
+			'selectAccount',
+			{
+				accountId: this.accountId,
+				name: this.name,
+				thumbnail: this.thumbnail
+			}
+		);
 	}
 
 }
