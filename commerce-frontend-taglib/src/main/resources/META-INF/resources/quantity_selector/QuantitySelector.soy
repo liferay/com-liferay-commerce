@@ -2,32 +2,37 @@
 
 {template .render}
 	{@param quantity: int}
-	{@param? allowedOptions: ?}
-	{@param? isPrevAvailable: bool}
-	{@param? isNextAvailable: bool}
+	{@param? allowedQuantities: list<number>}
+	{@param? prevAvailable: bool}
+	{@param? nextAvailable: bool}
+	{@param? _handlePrevQuantity: any}
+	{@param? _handleFormSubmit: any}
+	{@param? _handleInputKeyUp: any}
+	{@param? _handleNextQuantity: any}
+	{@param? _handleSelectOption: any}
 
 	{let $prevClass kind="text"}
-		{nil}
-		{if $isPrevAvailable == false}
+		quantity-selector__btn
+		{if $prevAvailable == false}
 			{sp}is-disabled
 		{/if}
 	{/let}
 
 	{let $nextClass kind="text"}
-		{nil}
-		{if $isNextAvailable == false}
+		quantity-selector__btn
+		{if $nextAvailable == false}
 			{sp}is-disabled
 		{/if}
 	{/let}
 
 	<div class="quantity-selector">
-		{if isNonnull($allowedOptions)}
-			<form data-onsubmit="handleFormSubmit">
+		{if isNonnull($allowedQuantities)}
+			<form data-onsubmit="{$_handleFormSubmit}">
 				<select
 					class="quantity-selector__select"
-					data-onchange="handleSelectOption"
+					data-onchange="{$_handleSelectOption}"
 				>
-					{foreach $option in $allowedOptions}
+					{foreach $option in $allowedQuantities}
 						{let $optionAttributes kind="attributes"}
 							value="{$option}"
 							{if $option == $quantity}
@@ -39,32 +44,29 @@
 				</select>
 			</form>
 		{else}
-			<a
-				href="#"
-				class="quantity-selector__btn{$prevClass}"
-				data-onclick="handlePrevQuantity"
+			<button
+				class="{$prevClass}"
+				data-onclick="{$_handlePrevQuantity}"
 			>
 				-
-			</a>
+			</button>
 
-			<form data-onsubmit="handleFormSubmit">
+			<form data-onsubmit="{$_handleFormSubmit}">
 				<input
 					name="quantity"
 					type="number"
 					class="quantity-selector__input"
-					data-onkeyup="handleInputKeyUp"
+					data-onkeyup="{$_handleInputKeyUp}"
 					value="{$quantity}"
 				>
 			</form>
 
-			<a
-				href="#"
-				class="quantity-selector__btn{$nextClass}"
-				data-onclick="handleNextQuantity"
+			<button
+				class="{$nextClass}"
+				data-onclick="{$_handleNextQuantity}"
 			>
 				+
-			</a>
+			</button>
 		{/if}
 	</div>
-
 {/template}
