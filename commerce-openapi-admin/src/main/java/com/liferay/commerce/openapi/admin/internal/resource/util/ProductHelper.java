@@ -184,8 +184,8 @@ public class ProductHelper {
 	}
 
 	private CPDefinition _updateProduct(
-			String id, Company company, String description,
-			String shortDescription, String name, Locale locale)
+			String id, Company company, Map description, Map shortDescription,
+			Map name, Locale locale)
 		throws PortalException {
 
 		CPDefinition cpDefinition = getProductById(id, company);
@@ -210,10 +210,9 @@ public class ProductHelper {
 		boolean neverExpire = Boolean.TRUE;
 
 		return _cpDefinitionService.updateCPDefinition(
-			cpDefinition.getCPDefinitionId(), _getLocalizedField(locale, name),
-			_getLocalizedField(locale, shortDescription),
-			_getLocalizedField(locale, description),
-			cpDefinition.getUrlTitleMap(), cpDefinition.getMetaTitleMap(),
+			cpDefinition.getCPDefinitionId(), name, shortDescription,
+			description, cpDefinition.getUrlTitleMap(),
+			cpDefinition.getMetaTitleMap(),
 			cpDefinition.getMetaDescriptionMap(),
 			cpDefinition.getMetaKeywordsMap(),
 			cpDefinition.isIgnoreSKUCombinations(),
@@ -226,10 +225,9 @@ public class ProductHelper {
 	}
 
 	private CPDefinition _upsertProduct(
-			Long groupId, boolean active, String defaultSku, String description,
+			Long groupId, boolean active, String defaultSku, Map description,
 			String externalReferenceCode, String productTypeName,
-			String shortDescription, String name, User currentUser,
-			Locale locale)
+			Map shortDescription, Map name, User currentUser, Locale locale)
 		throws PortalException {
 
 		boolean neverExpire = Boolean.TRUE;
@@ -252,12 +250,9 @@ public class ProductHelper {
 		String ddmStructureKey = null;
 
 		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
-			_getLocalizedField(locale, name),
-			_getLocalizedField(locale, shortDescription),
-			_getLocalizedField(locale, description), null,
-			_getLocalizedField(locale, name), null, null, productTypeName, true,
-			true, true, true, 0.0, 0.0, 0.0, 0.0, 0.0, 0L, false, false,
-			ddmStructureKey, true, displayDateConfig._month,
+			name, shortDescription, description, null, name, null, null,
+			productTypeName, true, true, true, true, 0.0, 0.0, 0.0, 0.0, 0.0,
+			0L, false, false, ddmStructureKey, true, displayDateConfig._month,
 			displayDateConfig._day, displayDateConfig._year,
 			displayDateConfig._hour, displayDateConfig._minute,
 			expirationDateConfig._month, expirationDateConfig._day,

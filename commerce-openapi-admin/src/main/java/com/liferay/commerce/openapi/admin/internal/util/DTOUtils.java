@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ArrayUtil;
 
 import java.util.Locale;
 
@@ -64,7 +65,7 @@ public class DTOUtils {
 			accountDTO.setLogoId(commerceAccount.getLogoId());
 			accountDTO.setTaxId(commerceAccount.getTaxId());
 			accountDTO.setType(_getAccountType(commerceAccount.getType()));
-			accountDTO.setUserIds(new long[] {commerceAccount.getUserId()});
+			accountDTO.setUserIds(new Long[] {commerceAccount.getUserId()});
 			accountDTO.setEmailAddresses(
 				new String[] {commerceAccount.getEmail()});
 		}
@@ -162,13 +163,13 @@ public class DTOUtils {
 
 		productDTO.setActive(!cpDefinition.isInactive());
 
-		productDTO.setDescription(cpDefinition.getDescription());
+		productDTO.setDescription(cpDefinition.getDescriptionMap());
 		productDTO.setExternalReferenceCode(
 			cpDefinition.getExternalReferenceCode());
 		productDTO.setId(cpDefinition.getCPDefinitionId());
 		productDTO.setProductTypeName(cpDefinition.getProductTypeName());
-		productDTO.setShortDescription(cpDefinition.getShortDescription());
-		productDTO.setName(cpDefinition.getName());
+		productDTO.setShortDescription(cpDefinition.getShortDescriptionMap());
+		productDTO.setName(cpDefinition.getNameMap());
 
 		return productDTO;
 	}
@@ -253,7 +254,7 @@ public class DTOUtils {
 		userDTO.setAdditionalName(user.getMiddleName());
 		userDTO.setAlternateName(user.getScreenName());
 		userDTO.setBirthDate(user.getBirthday());
-		userDTO.setCommerceAccountIds(commerceAccountIds);
+		userDTO.setCommerceAccountIds(ArrayUtil.toArray(commerceAccountIds));
 		userDTO.setDashboardURL(dashboardURL);
 		userDTO.setEmail(user.getEmailAddress());
 		userDTO.setExternalReferenceCode(user.getExternalReferenceCode());
