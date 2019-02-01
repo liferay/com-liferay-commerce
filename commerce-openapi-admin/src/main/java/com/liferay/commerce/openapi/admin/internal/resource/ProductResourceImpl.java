@@ -50,7 +50,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class ProductResourceImpl implements ProductResource {
 
 	@Override
-	public Response deleteProduct(String id, Locale locale) throws Exception {
+	public Response deleteProduct(String id) throws Exception {
 		_productHelper.deleteProduct(id, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -65,15 +65,14 @@ public class ProductResourceImpl implements ProductResource {
 
 	@Override
 	public CollectionDTO<ProductDTO> getProducts(
-			long groupId, Pagination pagination)
+			Long groupId, Pagination pagination)
 		throws Exception {
 
 		return _productHelper.getProducts(groupId, pagination);
 	}
 
 	@Override
-	public CollectionDTO<SkuDTO> getSkus(
-			String id, Locale locale, Pagination pagination)
+	public CollectionDTO<SkuDTO> getSkus(String id, Pagination pagination)
 		throws Exception {
 
 		return _skuHelper.getSKUs(id, _company, pagination);
