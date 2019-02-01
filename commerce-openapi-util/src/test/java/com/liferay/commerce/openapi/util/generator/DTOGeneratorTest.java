@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
 import com.liferay.commerce.openapi.util.OpenApiTestUtil;
 import com.liferay.commerce.openapi.util.importer.ComponentImporter;
+import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.IOException;
@@ -58,16 +59,18 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			containsOnlyOne(classSource, "public class ComponentDTO {"));
 
 		for (OpenApiProperty openApiProperty : openApiProperties) {
+			Provider javaTypeProvider = openApiProperty.getJavaTypeProvider();
+
 			Assert.assertTrue(
 				"DTO class name has private variable _" +
 					openApiProperty.getName(),
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"private %s _%s", openApiProperty.getJavaType(),
+						"private %s _%s", javaTypeProvider.getModelName(),
 						openApiProperty.getName())));
 
-			if (!"boolean".equals(openApiProperty.getJavaType())) {
+			if (!"Boolean".equals(javaTypeProvider.getModelName())) {
 				continue;
 			}
 
@@ -76,7 +79,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"public %s is%s", openApiProperty.getJavaType(),
+						"public %s is%s", javaTypeProvider.getModelName(),
 						StringUtils.upperCaseFirstChar(
 							openApiProperty.getName()))));
 		}
@@ -112,15 +115,16 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		for (OpenApiProperty openApiProperty :
 				dictionaryConsumerOpenApiComponent.getOpenApiProperties()) {
 
+			Provider javaTypeProvider = OpenApiFormat.getJavaTypeProvider(
+				openApiProperty, new HashSet<>(components));
+
 			Assert.assertTrue(
 				"DTO class name has private variable _" +
 					openApiProperty.getName(),
 				containsOnlyOne(
 					classSource,
 					String.format(
-						"private %s _%s",
-						OpenApiFormat.getJavaType(
-							openApiProperty, new HashSet<>(components)),
+						"private %s _%s", javaTypeProvider.getModelName(),
 						openApiProperty.getName())));
 		}
 	}

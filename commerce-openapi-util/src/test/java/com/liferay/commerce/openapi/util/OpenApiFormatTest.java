@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.util;
 
+import com.liferay.commerce.openapi.util.util.Provider;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,6 +27,8 @@ public class OpenApiFormatTest {
 	@Test
 	public void testGetterSyntax() {
 		for (OpenApiFormat openApiFormat : OpenApiFormat.values()) {
+			Provider provider = openApiFormat.getProvider();
+
 			if (openApiFormat == OpenApiFormat.BOOLEAN) {
 				Assert.assertEquals(
 					"Boolean syntax for getter", "is",
@@ -34,7 +38,7 @@ public class OpenApiFormatTest {
 			}
 
 			Assert.assertEquals(
-				openApiFormat.getJavaType() + " syntax for getter", "get",
+				provider.getModelName() + " syntax for getter", "get",
 				openApiFormat.getGetterSyntax());
 		}
 	}
