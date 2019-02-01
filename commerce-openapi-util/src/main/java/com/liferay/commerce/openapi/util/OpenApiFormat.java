@@ -15,7 +15,9 @@
 package com.liferay.commerce.openapi.util;
 
 import com.liferay.commerce.openapi.util.exception.OpenApiException;
+import com.liferay.commerce.openapi.util.util.DTOProvider;
 import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
+import com.liferay.commerce.openapi.util.util.Provider;
 
 import java.util.Set;
 
@@ -24,17 +26,27 @@ import java.util.Set;
  */
 public enum OpenApiFormat {
 
-	BIGDECIMAL("bigdecimal", OpenApiType.NUMBER, "java.math.BigDecimal"),
-	BINARY("binary", OpenApiType.STRING, "byte[]"),
-	BOOLEAN("boolean", OpenApiType.BOOLEAN, "boolean", true),
-	BYTE("byte", OpenApiType.STRING, "byte"),
-	DATE("date", OpenApiType.STRING, "java.util.Date"),
-	DATE_TIME("date-time", OpenApiType.STRING, "java.util.Date"),
-	DOUBLE("double", OpenApiType.NUMBER, "double"),
-	FLOAT("float", OpenApiType.NUMBER, "float", true),
-	INT32("int32", OpenApiType.INTEGER, "int", true),
-	INT64("int64", OpenApiType.INTEGER, "long"),
-	STRING(null, OpenApiType.STRING, "String", true);
+	BIGDECIMAL(
+		"bigdecimal", OpenApiType.NUMBER,
+		new Provider("BigDecimal", "java.math.BigDecimal"), true),
+	BINARY("binary", OpenApiType.STRING, new Provider("Byte[]", null), false),
+	BOOLEAN(
+		"boolean", OpenApiType.BOOLEAN, new Provider("Boolean", null), true),
+	BYTE("byte", OpenApiType.STRING, new Provider("Byte", null), false),
+	DATE(
+		"date", OpenApiType.STRING, new Provider("Date", "java.util.Date"),
+		false),
+	DATE_TIME(
+		"date-time", OpenApiType.STRING, new Provider("Date", "java.util.Date"),
+		false),
+	DICTIONARY(
+		null, OpenApiType.DICTIONARY, new Provider("Map", "java.util.Map"),
+		true),
+	DOUBLE("double", OpenApiType.NUMBER, new Provider("Double", null), false),
+	FLOAT("float", OpenApiType.NUMBER, new Provider("Float", null), true),
+	INT32("int32", OpenApiType.INTEGER, new Provider("Integer", null), true),
+	INT64("int64", OpenApiType.INTEGER, new Provider("Long", null), false),
+	STRING(null, OpenApiType.STRING, new Provider("String", null), true);
 
 	public static OpenApiFormat fromOpenApiTypeAndFormat(
 		OpenApiType openApiType, String openApiFormatDefinition) {
@@ -65,7 +77,7 @@ public enum OpenApiFormat {
 		return defaultOpenApiFormat;
 	}
 
-	public static String getJavaType(
+	public static Provider getJavaTypeProvider(
 		OpenApiProperty openApiProperty,
 		Set<OpenApiComponent> openApiComponents) {
 
@@ -77,17 +89,17 @@ public enum OpenApiFormat {
 					openApiComponents);
 
 			if (openApiComponent.isDictionary()) {
-				return "Map<String, String>";
+				return DICTIONARY.getProvider();
 			}
 			else if (openApiComponent.isObject()) {
-				return openApiComponent.getName() + "DTO";
+				return new DTOProvider(openApiComponent.getName());
 			}
 
 			throw new OpenApiException(
 				"Unable to resolve java type for " + openApiComponent);
 		}
 
-		return openApiProperty.getJavaType();
+		return openApiProperty.getJavaTypeProvider();
 	}
 
 	public String getGetterSyntax() {
@@ -98,8 +110,8 @@ public enum OpenApiFormat {
 		return "get";
 	}
 
-	public String getJavaType() {
-		return _javaType;
+	public Provider getProvider() {
+		return _provider;
 	}
 
 	public String getSetterSyntax() {
@@ -108,25 +120,17 @@ public enum OpenApiFormat {
 
 	private OpenApiFormat(
 		String openApiFormatExpression, OpenApiType openApiType,
-		String javaType) {
-
-		_openApiFormatExpression = openApiFormatExpression;
-		_openApiType = openApiType;
-		_javaType = javaType;
-	}
-
-	private OpenApiFormat(
-		String openApiFormatExpression, OpenApiType openApiType,
-		String javaType, boolean defaultFormat) {
-
-		this(openApiFormatExpression, openApiType, javaType);
+		Provider javaTypeProvider, boolean defaultFormat) {
 
 		_default = defaultFormat;
+		_openApiFormatExpression = openApiFormatExpression;
+		_openApiType = openApiType;
+		_provider = javaTypeProvider;
 	}
 
-	private boolean _default;
-	private String _javaType;
-	private String _openApiFormatExpression;
-	private OpenApiType _openApiType;
+	private final boolean _default;
+	private final String _openApiFormatExpression;
+	private final OpenApiType _openApiType;
+	private final Provider _provider;
 
 }
