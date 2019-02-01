@@ -11,21 +11,8 @@ import './RoleListItem.es';
 
 class UserRolesModal extends Component {
 
-	close() {
-		return this._isVisible = false;
-	}
-
-	open() {
-		return this._isVisible = true;
-	}
-
-	syncQuery(e) {
-		return this._filterRoles();
-	}
-
 	syncSelectedRoles() {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
-
 		this.element.querySelector('.autocomplete-input__box').focus();
 		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
 	}
@@ -45,7 +32,6 @@ class UserRolesModal extends Component {
 
 		if (this.filteredRoles.length) {
 			this._toggleItem(this.filteredRoles[0]);
-
 			this.query = '';
 			result = true;
 		}
