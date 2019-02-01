@@ -119,6 +119,12 @@ public class CommerceAccountLocalServiceWrapper
 	}
 
 	@Override
+	public void deleteCommerceAccounts(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountLocalService.deleteCommerceAccounts(companyId);
+	}
+
+	@Override
 	public void deleteLogo(long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_commerceAccountLocalService.deleteLogo(commerceAccountId);

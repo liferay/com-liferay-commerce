@@ -121,6 +121,11 @@ public class CommerceAccountLocalServiceUtil {
 		return getService().deleteCommerceAccount(commerceAccountId);
 	}
 
+	public static void deleteCommerceAccounts(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().deleteCommerceAccounts(companyId);
+	}
+
 	public static void deleteLogo(long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().deleteLogo(commerceAccountId);
