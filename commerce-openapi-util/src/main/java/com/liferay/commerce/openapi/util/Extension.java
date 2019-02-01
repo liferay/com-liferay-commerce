@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.util;
 
+import com.liferay.commerce.openapi.util.util.Provider;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,26 +53,6 @@ public class Extension {
 		}
 
 		return false;
-	}
-
-	public static class Provider {
-
-		public Provider(String modelName, String fqcn) {
-			_modelName = modelName;
-			_fqcn = fqcn;
-		}
-
-		public String getModelFQCN() {
-			return _fqcn;
-		}
-
-		public String getModelName() {
-			return _modelName;
-		}
-
-		private final String _fqcn;
-		private final String _modelName;
-
 	}
 
 	public enum ExtensionType {
