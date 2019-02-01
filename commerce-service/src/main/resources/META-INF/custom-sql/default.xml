@@ -50,11 +50,7 @@
 				[$ACCOUNT_ID$]
 				(CommerceOrder.groupId = ?) AND
 				(
-					(Users_Orgs.userId IS NULL) OR
-					(Users_Orgs.userId = [$USER_ID$])
-				) AND
-				(
-					(CommerceAccountUserRel.commerceAccountUserId IS NULL) OR
+					(Users_Orgs.userId = [$USER_ID$]) OR
 					(CommerceAccountUserRel.commerceAccountUserId = [$USER_ID$])
 				) AND
 				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
@@ -104,11 +100,7 @@
 				[$ACCOUNT_ID$]
 				(CommerceOrder.groupId = ?) AND
 				(
-					(Users_Orgs.userId IS NULL) OR
-					(Users_Orgs.userId = [$USER_ID$])
-				) AND
-				(
-					(CommerceAccountUserRel.commerceAccountUserId IS NULL) OR
+					(Users_Orgs.userId = [$USER_ID$]) OR
 					(CommerceAccountUserRel.commerceAccountUserId = [$USER_ID$])
 				) AND
 				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
