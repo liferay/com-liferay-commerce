@@ -17,10 +17,12 @@ package com.liferay.commerce.openapi.util.generator;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
+import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.IOException;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -70,12 +72,19 @@ public class DTOGenerator extends BaseSourceGenerator {
 		StringBuilder methodsSb = new StringBuilder();
 		StringBuilder variablesSb = new StringBuilder();
 
+		Set<String> importableJavaTypes = new HashSet<>();
+
 		while (iterator.hasNext()) {
 			OpenApiProperty openApiProperty = iterator.next();
 
 			String name = openApiProperty.getName();
-			String javaType = OpenApiFormat.getJavaType(
+
+			Provider javaTypeProvider = OpenApiFormat.getJavaTypeProvider(
 				openApiProperty, _openApiComponents);
+
+			importableJavaTypes.add(javaTypeProvider.getModelFQCN());
+
+			String javaType = javaTypeProvider.getModelName();
 
 			methodsSb.append("\tpublic ");
 			methodsSb.append(javaType);
@@ -114,6 +123,10 @@ public class DTOGenerator extends BaseSourceGenerator {
 			}
 		}
 
+		dtoSource = dtoSource.replace(
+			"${MODEL_IMPORT_STATEMENTS}",
+			_toImportStatements(importableJavaTypes));
+
 		dtoSource = dtoSource.replace("${METHODS}", methodsSb.toString());
 		dtoSource = dtoSource.replace("${VARIABLES}", variablesSb.toString());
 
@@ -126,6 +139,26 @@ public class DTOGenerator extends BaseSourceGenerator {
 
 	private String _getModelName() {
 		return StringUtils.upperCaseFirstChar(_openApiComponent.getName());
+	}
+
+	private String _toImportStatements(Set<String> importableJavaTypes) {
+		importableJavaTypes.removeAll(Collections.singleton(null));
+
+		StringBuilder sb = new StringBuilder();
+
+		Iterator<String> iterator = importableJavaTypes.iterator();
+
+		while (iterator.hasNext()) {
+			sb.append("import ");
+			sb.append(iterator.next());
+			sb.append(";");
+
+			if (iterator.hasNext()) {
+				sb.append("\n");
+			}
+		}
+
+		return sb.toString();
 	}
 
 	private static final String _TEMPLATE_FILE_MODEL = "Model.java.tpl";
