@@ -83,7 +83,7 @@ public class ProductResourceImpl implements ProductResource {
 			String id, Long groupId, ProductDTO productDTO, Locale locale)
 		throws Exception {
 
-		_productHelper.updateProductDTO(id, productDTO, locale, _company);
+		_productHelper.updateProductDTO(id, productDTO, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -95,7 +95,7 @@ public class ProductResourceImpl implements ProductResource {
 			Long groupId, ProductDTO productDTO, Locale locale)
 		throws Exception {
 
-		return _productHelper.upsertProduct(groupId, productDTO, _user, locale);
+		return _productHelper.upsertProduct(groupId, productDTO, _user);
 	}
 
 	@Override
