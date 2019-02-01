@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Schema;
+import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 /**
@@ -57,9 +58,11 @@ public class ParameterGenerator {
 			parameterAnnotation = "@PathParam";
 		}
 
+		Provider javaTypeProvider = parameter.getJavaTypeProvider();
+
 		return String.format(
 			"%s(\"%s\") %s %s", parameterAnnotation, parameter.getName(),
-			parameter.getJavaType(),
+			javaTypeProvider.getModelName(),
 			StringUtils.toCamelCase(parameter.getName()));
 	}
 
@@ -74,8 +77,10 @@ public class ParameterGenerator {
 				StringUtils.lowerCaseFirstChar(parameter.getName()));
 		}
 
+		Provider javaTypeProvider = parameter.getJavaTypeProvider();
+
 		return String.format(
-			"%s %s", parameter.getJavaType(),
+			"%s %s", javaTypeProvider.getModelName(),
 			StringUtils.toCamelCase(parameter.getName()));
 	}
 
