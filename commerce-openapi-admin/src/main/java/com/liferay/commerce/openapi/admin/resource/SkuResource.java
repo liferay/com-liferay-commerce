@@ -67,7 +67,7 @@ public interface SkuResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateSku(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			SkuDTO skuDTO, @Context Locale locale)
 		throws Exception;
 
@@ -77,7 +77,7 @@ public interface SkuResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public InventoryDTO upsertInventory(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			InventoryDTO inventoryDTO)
 		throws Exception;
 

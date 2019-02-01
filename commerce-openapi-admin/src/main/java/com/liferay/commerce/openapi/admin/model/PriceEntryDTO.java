@@ -27,11 +27,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "PriceEntry")
 public class PriceEntryDTO {
 
-	public long getCommercePriceListId() {
+	public Long getCommercePriceListId() {
 		return _commercePriceListId;
 	}
 
-	public long getCommerceProductInstanceId() {
+	public Long getCommerceProductInstanceId() {
 		return _commerceProductInstanceId;
 	}
 
@@ -39,7 +39,7 @@ public class PriceEntryDTO {
 		return _externalReferenceCode;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return _id;
 	}
 
@@ -59,19 +59,19 @@ public class PriceEntryDTO {
 		return _skuExternalReferenceCode;
 	}
 
-	public boolean isHasTierPrice() {
+	public Boolean isHasTierPrice() {
 		return _hasTierPrice;
 	}
 
-	public boolean isStandardPrice() {
+	public Boolean isStandardPrice() {
 		return _standardPrice;
 	}
 
-	public void setCommercePriceListId(long commercePriceListId) {
+	public void setCommercePriceListId(Long commercePriceListId) {
 		_commercePriceListId = commercePriceListId;
 	}
 
-	public void setCommerceProductInstanceId(long commerceProductInstanceId) {
+	public void setCommerceProductInstanceId(Long commerceProductInstanceId) {
 		_commerceProductInstanceId = commerceProductInstanceId;
 	}
 
@@ -79,11 +79,11 @@ public class PriceEntryDTO {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	public void setHasTierPrice(boolean hasTierPrice) {
+	public void setHasTierPrice(Boolean hasTierPrice) {
 		_hasTierPrice = hasTierPrice;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		_id = id;
 	}
 
@@ -103,19 +103,19 @@ public class PriceEntryDTO {
 		_skuExternalReferenceCode = skuExternalReferenceCode;
 	}
 
-	public void setStandardPrice(boolean standardPrice) {
+	public void setStandardPrice(Boolean standardPrice) {
 		_standardPrice = standardPrice;
 	}
 
-	private long _commercePriceListId;
-	private long _commerceProductInstanceId;
+	private Long _commercePriceListId;
+	private Long _commerceProductInstanceId;
 	private String _externalReferenceCode;
-	private boolean _hasTierPrice;
-	private long _id;
+	private Boolean _hasTierPrice;
+	private Long _id;
 	private BigDecimal _price;
 	private BigDecimal _promoPrice;
 	private String _sku;
 	private String _skuExternalReferenceCode;
-	private boolean _standardPrice;
+	private Boolean _standardPrice;
 
 }

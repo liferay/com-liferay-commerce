@@ -46,7 +46,7 @@ public interface PriceListResource {
 	@Path("/{id}")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceList(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			@Context Locale locale)
 		throws Exception;
 
@@ -55,7 +55,7 @@ public interface PriceListResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceListDTO getPriceList(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			@Context Locale locale)
 		throws Exception;
 
@@ -64,7 +64,7 @@ public interface PriceListResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceListDTO> getPriceLists(
-			@QueryParam("groupId") long groupId, @Context Locale locale,
+			@QueryParam("groupId") Long groupId, @Context Locale locale,
 			@Context Pagination pagination)
 		throws Exception;
 
@@ -73,7 +73,7 @@ public interface PriceListResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceList(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			PriceListDTO priceListDTO, @Context Locale locale)
 		throws Exception;
 
@@ -83,7 +83,7 @@ public interface PriceListResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceListDTO upsertPriceList(
-			@QueryParam("groupId") long groupId, PriceListDTO priceListDTO,
+			@QueryParam("groupId") Long groupId, PriceListDTO priceListDTO,
 			@Context Locale locale)
 		throws Exception;
 

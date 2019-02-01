@@ -59,7 +59,7 @@ public interface ProductOptionValueResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOptionValue(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			ProductOptionValueDTO productOptionValueDTO, @Context Locale locale)
 		throws Exception;
 

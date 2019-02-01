@@ -29,7 +29,7 @@ public class WebSiteDTO {
 		return _description;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return _id;
 	}
 
@@ -41,7 +41,7 @@ public class WebSiteDTO {
 		_description = description;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		_id = id;
 	}
 
@@ -50,7 +50,7 @@ public class WebSiteDTO {
 	}
 
 	private String _description;
-	private long _id;
+	private Long _id;
 	private String _name;
 
 }

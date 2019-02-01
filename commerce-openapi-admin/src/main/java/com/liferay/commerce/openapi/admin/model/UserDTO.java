@@ -39,7 +39,7 @@ public class UserDTO {
 		return _birthDate;
 	}
 
-	public long[] getCommerceAccountIds() {
+	public Long[] getCommerceAccountIds() {
 		return _commerceAccountIds;
 	}
 
@@ -67,7 +67,7 @@ public class UserDTO {
 		return _givenName;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return _id;
 	}
 
@@ -103,7 +103,7 @@ public class UserDTO {
 		_birthDate = birthDate;
 	}
 
-	public void setCommerceAccountIds(long[] commerceAccountIds) {
+	public void setCommerceAccountIds(Long[] commerceAccountIds) {
 		_commerceAccountIds = commerceAccountIds;
 	}
 
@@ -131,7 +131,7 @@ public class UserDTO {
 		_givenName = givenName;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		_id = id;
 	}
 
@@ -158,14 +158,14 @@ public class UserDTO {
 	private String _additionalName;
 	private String _alternateName;
 	private Date _birthDate;
-	private long[] _commerceAccountIds;
+	private Long[] _commerceAccountIds;
 	private String _dashboardURL;
 	private String _email;
 	private String _externalReferenceCode;
 	private String _familyName;
 	private String _gender;
 	private String _givenName;
-	private long _id;
+	private Long _id;
 	private String _image;
 	private String _jobTitle;
 	private String _name;

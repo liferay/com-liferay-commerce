@@ -25,11 +25,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Inventory")
 public class InventoryDTO {
 
-	public long getId() {
+	public Long getId() {
 		return _id;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return _quantity;
 	}
 
@@ -37,11 +37,11 @@ public class InventoryDTO {
 		return _skuExternalReferenceCode;
 	}
 
-	public long getSkuId() {
+	public Long getSkuId() {
 		return _skuId;
 	}
 
-	public long getWarehouseId() {
+	public Long getWarehouseId() {
 		return _warehouseId;
 	}
 
@@ -49,11 +49,11 @@ public class InventoryDTO {
 		return _warehouseName;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		_id = id;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		_quantity = quantity;
 	}
 
@@ -61,11 +61,11 @@ public class InventoryDTO {
 		_skuExternalReferenceCode = skuExternalReferenceCode;
 	}
 
-	public void setSkuId(long skuId) {
+	public void setSkuId(Long skuId) {
 		_skuId = skuId;
 	}
 
-	public void setWarehouseId(long warehouseId) {
+	public void setWarehouseId(Long warehouseId) {
 		_warehouseId = warehouseId;
 	}
 
@@ -73,11 +73,11 @@ public class InventoryDTO {
 		_warehouseName = warehouseName;
 	}
 
-	private long _id;
-	private int _quantity;
+	private Long _id;
+	private Integer _quantity;
 	private String _skuExternalReferenceCode;
-	private long _skuId;
-	private long _warehouseId;
+	private Long _skuId;
+	private Long _warehouseId;
 	private String _warehouseName;
 
 }
