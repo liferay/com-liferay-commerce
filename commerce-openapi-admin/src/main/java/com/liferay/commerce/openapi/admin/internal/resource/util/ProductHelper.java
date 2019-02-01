@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.util;
 
 import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
 import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
+import com.liferay.commerce.openapi.admin.internal.util.LanguageUtils;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
@@ -35,10 +36,8 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import java.io.Serializable;
 
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -131,18 +130,17 @@ public class ProductHelper {
 	}
 
 	public ProductDTO updateProductDTO(
-			String id, ProductDTO productDTO, Locale locale, Company company)
+			String id, ProductDTO productDTO, Company company)
 		throws PortalException {
 
 		return DTOUtils.modelToDTO(
 			_updateProduct(
 				id, company, productDTO.getDescription(),
-				productDTO.getShortDescription(), productDTO.getName(),
-				locale));
+				productDTO.getShortDescription(), productDTO.getName()));
 	}
 
 	public ProductDTO upsertProduct(
-			long groupId, ProductDTO productDTO, User user, Locale locale)
+			long groupId, ProductDTO productDTO, User user)
 		throws PortalException {
 
 		return DTOUtils.modelToDTO(
@@ -151,8 +149,7 @@ public class ProductHelper {
 				productDTO.getDescription(),
 				productDTO.getExternalReferenceCode(),
 				productDTO.getProductTypeName(),
-				productDTO.getShortDescription(), productDTO.getName(), user,
-				locale));
+				productDTO.getShortDescription(), productDTO.getName(), user));
 	}
 
 	private DateConfig _getDateConfig(Calendar calendar) {
@@ -173,19 +170,9 @@ public class ProductHelper {
 		return dateConfig;
 	}
 
-	private Map<Locale, String> _getLocalizedField(
-		Locale locale, String field) {
-
-		Map<Locale, String> localizedMap = new HashMap<>();
-
-		localizedMap.put(locale, field);
-
-		return Collections.unmodifiableMap(localizedMap);
-	}
-
 	private CPDefinition _updateProduct(
-			String id, Company company, Map description, Map shortDescription,
-			Map name, Locale locale)
+			String id, Company company, Map<String, String> description,
+			Map<String, String> shortDescription, Map<String, String> name)
 		throws PortalException {
 
 		CPDefinition cpDefinition = getProductById(id, company);
@@ -210,9 +197,11 @@ public class ProductHelper {
 		boolean neverExpire = Boolean.TRUE;
 
 		return _cpDefinitionService.updateCPDefinition(
-			cpDefinition.getCPDefinitionId(), name, shortDescription,
-			description, cpDefinition.getUrlTitleMap(),
-			cpDefinition.getMetaTitleMap(),
+			cpDefinition.getCPDefinitionId(),
+			LanguageUtils.getLocalizedMap(name),
+			LanguageUtils.getLocalizedMap(shortDescription),
+			LanguageUtils.getLocalizedMap(description),
+			cpDefinition.getUrlTitleMap(), cpDefinition.getMetaTitleMap(),
 			cpDefinition.getMetaDescriptionMap(),
 			cpDefinition.getMetaKeywordsMap(),
 			cpDefinition.isIgnoreSKUCombinations(),
@@ -225,9 +214,10 @@ public class ProductHelper {
 	}
 
 	private CPDefinition _upsertProduct(
-			Long groupId, boolean active, String defaultSku, Map description,
-			String externalReferenceCode, String productTypeName,
-			Map shortDescription, Map name, User currentUser, Locale locale)
+			Long groupId, boolean active, String defaultSku,
+			Map<String, String> description, String externalReferenceCode,
+			String productTypeName, Map<String, String> shortDescription,
+			Map<String, String> name, User currentUser)
 		throws PortalException {
 
 		boolean neverExpire = Boolean.TRUE;
@@ -250,9 +240,12 @@ public class ProductHelper {
 		String ddmStructureKey = null;
 
 		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
-			name, shortDescription, description, null, name, null, null,
-			productTypeName, true, true, true, true, 0.0, 0.0, 0.0, 0.0, 0.0,
-			0L, false, false, ddmStructureKey, true, displayDateConfig._month,
+			LanguageUtils.getLocalizedMap(name),
+			LanguageUtils.getLocalizedMap(shortDescription),
+			LanguageUtils.getLocalizedMap(description), null,
+			LanguageUtils.getLocalizedMap(name), null, null, productTypeName,
+			true, true, true, true, 0.0, 0.0, 0.0, 0.0, 0.0, 0L, false, false,
+			ddmStructureKey, true, displayDateConfig._month,
 			displayDateConfig._day, displayDateConfig._year,
 			displayDateConfig._hour, displayDateConfig._minute,
 			expirationDateConfig._month, expirationDateConfig._day,
