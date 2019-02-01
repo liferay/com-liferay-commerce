@@ -16,8 +16,11 @@ package com.liferay.commerce.payment.engine.impl;
 
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommercePaymentConstants;
+import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
@@ -26,10 +29,11 @@ import com.liferay.commerce.payment.request.CommercePaymentRequest;
 import com.liferay.commerce.payment.request.CommercePaymentRequestProvider;
 import com.liferay.commerce.payment.request.CommercePaymentRequestProviderRegistry;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
+import com.liferay.commerce.payment.result.CommerceSubscriptionStatusResult;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
-import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -76,8 +80,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			return _emptyResult(commerceOrderId);
 		}
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -128,8 +132,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			return _emptyResult(commerceOrderId);
 		}
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -172,8 +176,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			return _emptyResult(commerceOrderId);
 		}
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -214,8 +218,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			return _emptyResult(commerceOrderId);
 		}
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -281,8 +285,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	public int getCommercePaymentMethodType(long commerceOrderId)
 		throws PortalException {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		String commercePaymentMethodKey =
 			commerceOrder.getCommercePaymentMethodKey();
@@ -303,8 +307,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			long commerceOrderId)
 		throws PortalException {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		boolean subscriptionOrder = commerceOrder.isSubscriptionOrder();
 
@@ -336,12 +340,49 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	@Override
+	public CommerceSubscriptionStatusResult getSubscriptionPaymentDetails(
+			long commerceOrderId)
+		throws Exception {
+
+		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
+			commerceOrderId);
+
+		if ((commercePaymentMethod == null) ||
+			!commercePaymentMethod.isProcessRecurringEnabled()) {
+
+			return null;
+		}
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
+
+		CommercePaymentRequestProvider commercePaymentRequestProvider =
+			_getCommercePaymentRequestProvider(commercePaymentMethod);
+
+		CommercePaymentRequest commercePaymentRequest =
+			commercePaymentRequestProvider.getCommercePaymentRequest(
+				null, commerceOrderId, null, null, null,
+				commerceOrder.getTransactionId());
+
+		return commercePaymentMethod.getSubscriptionPaymentDetails(
+			commercePaymentRequest);
+	}
+
+	@Override
 	@Transactional(
 		propagation = Propagation.REQUIRED, readOnly = false,
 		rollbackFor = Exception.class
 	)
 	public CommercePaymentResult partiallyRefundPayment(long commerceOrderId) {
 		return _emptyResult(commerceOrderId);
+	}
+
+	@Override
+	public int payedOrderInterval(long commerceOrderId) throws PortalException {
+		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
+			commerceOrderId);
+
+		return commercePaymentMethod.payedOrderInterval();
 	}
 
 	@Override
@@ -374,8 +415,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			return _emptyResult(commerceOrderId);
 		}
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -403,8 +444,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			HttpServletRequest httpServletRequest)
 		throws Exception {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
 			commerceOrderId);
@@ -451,8 +492,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			return _emptyResult(commerceOrderId);
 		}
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -468,8 +509,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			HttpServletRequest httpServletRequest)
 		throws Exception {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		if (commerceOrder.isSubscriptionOrder()) {
 			return processRecurringPayment(
@@ -478,6 +519,53 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 		return processPayment(
 			commerceOrderId, checkoutStepUrl, httpServletRequest);
+	}
+
+	@Override
+	@Transactional(
+		propagation = Propagation.REQUIRED, readOnly = false,
+		rollbackFor = Exception.class
+	)
+	public boolean suspendSubscription(long commerceSubscriptionEntryId)
+		throws Exception {
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			_commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntry(
+				commerceSubscriptionEntryId);
+
+		CommerceOrderItem commerceOrderItem =
+			commerceSubscriptionEntry.fetchCommerceOrderItem();
+
+		CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
+
+		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
+			commerceOrder.getCommerceOrderId());
+
+		if ((commercePaymentMethod == null) ||
+			!commercePaymentMethod.isProcessRecurringEnabled()) {
+
+			return false;
+		}
+
+		CommercePaymentRequestProvider commercePaymentRequestProvider =
+			_getCommercePaymentRequestProvider(commercePaymentMethod);
+
+		CommercePaymentRequest commercePaymentRequest =
+			commercePaymentRequestProvider.getCommercePaymentRequest(
+				null, commerceOrder.getCommerceOrderId(), null, null, null,
+				commerceOrder.getTransactionId());
+
+		boolean suspendSubscription = commercePaymentMethod.suspendSubscription(
+			commercePaymentRequest);
+
+		if (suspendSubscription) {
+			_commerceSubscriptionEntryLocalService.updateSubscriptionStatus(
+				commerceSubscriptionEntry.getCommerceSubscriptionEntryId(),
+				CommerceSubscriptionEntryConstants.
+					SUBSCRIPTION_STATUS_SUSPENDED);
+		}
+
+		return suspendSubscription;
 	}
 
 	@Override
@@ -499,8 +587,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			return _emptyResult(commerceOrderId);
 		}
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		CommercePaymentRequest commercePaymentRequest =
 			_getCommercePaymentRequest(
@@ -513,8 +601,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	private void _completeOrderWithoutPaymentMethod(long commerceOrderId)
 		throws PortalException {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		_commerceOrderLocalService.updatePaymentStatusAndTransactionId(
 			commerceOrder.getUserId(), commerceOrderId,
@@ -575,8 +663,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			long commerceOrderId)
 		throws PortalException {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		String commercePaymentMethodKey =
 			commerceOrder.getCommercePaymentMethodKey();
@@ -691,9 +779,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	private CommerceOrderPaymentLocalService _commerceOrderPaymentLocalService;
 
 	@Reference
-	private CommerceOrderService _commerceOrderService;
-
-	@Reference
 	private CommercePaymentMethodGroupRelLocalService
 		_commercePaymentMethodGroupRelLocalService;
 
@@ -703,6 +788,10 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	@Reference
 	private CommercePaymentRequestProviderRegistry
 		_commercePaymentRequestProviderRegistry;
+
+	@Reference
+	private CommerceSubscriptionEntryLocalService
+		_commerceSubscriptionEntryLocalService;
 
 	@Reference
 	private Portal _portal;
