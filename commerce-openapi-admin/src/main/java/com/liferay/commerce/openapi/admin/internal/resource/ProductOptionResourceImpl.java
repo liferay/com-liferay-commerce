@@ -41,7 +41,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = ProductOptionResource.class
 )
@@ -68,7 +68,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	public CollectionDTO<ProductOptionDTO> getProductOptions(
-			long groupId, Locale locale, Pagination pagination)
+			Long groupId, Locale locale, Pagination pagination)
 		throws Exception {
 
 		return _productOptionHelper.getProductOptions(
@@ -86,7 +86,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	public Response updateProductOption(
-			String id, long groupId, ProductOptionDTO productOptionDTO,
+			String id, Long groupId, ProductOptionDTO productOptionDTO,
 			Locale locale)
 		throws Exception {
 
@@ -100,7 +100,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	public ProductOptionDTO upsertProductOption(
-			long groupId, ProductOptionDTO productOptionDTO, Locale locale)
+			Long groupId, ProductOptionDTO productOptionDTO, Locale locale)
 		throws Exception {
 
 		return _productOptionHelper.upsertProductOption(
@@ -109,7 +109,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	public ProductOptionValueDTO upsertProductOptionValue(
-			String id, long groupId,
+			String id, Long groupId,
 			ProductOptionValueDTO productOptionValueDTO, Locale locale)
 		throws Exception {
 

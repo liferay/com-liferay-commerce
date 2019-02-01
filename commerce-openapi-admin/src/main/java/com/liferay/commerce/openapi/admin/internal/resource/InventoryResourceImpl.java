@@ -35,7 +35,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = InventoryResource.class
 )
@@ -58,7 +58,7 @@ public class InventoryResourceImpl implements InventoryResource {
 
 	@Override
 	public Response updateInventory(
-			String id, long groupId, InventoryDTO inventoryDTO)
+			String id, Long groupId, InventoryDTO inventoryDTO)
 		throws Exception {
 
 		_inventoryHelper.updateInventory(id, groupId, inventoryDTO);
