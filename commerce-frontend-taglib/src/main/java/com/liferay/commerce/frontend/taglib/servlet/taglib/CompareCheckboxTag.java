@@ -26,10 +26,10 @@ public class CompareCheckboxTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
-		putValue("isCheckboxVisible", true);
-		putValue("isCompareAvailable", true);
-		putValue("isInCompare", false);
-		putValue("isLabelVisible", true);
+		putValue("checkboxVisible", true);
+		putValue("compareAvailable", true);
+		putValue("inCompare", false);
+		putValue("labelVisible", true);
 		putValue(
 			"pictureUrl",
 			"/o/commerce-media/products/45626/coil-spring-rear/45645" +
