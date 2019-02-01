@@ -25,12 +25,8 @@
 			WHERE
 				[$PARENT_ACCOUNT_ID$]
 				(
-					(Users_Orgs.userId IS NULL) OR
-					(Users_Orgs.userId = [$USER_ID$])
-				) AND
-				(
-					(CommerceAccountUserRel.commerceaccountuserid IS NULL) OR
-					(CommerceAccountUserRel.commerceaccountuserid = [$USER_ID$])
+					(Users_Orgs.userId = [$USER_ID$]) OR
+					(CommerceAccountUserRel.commerceAccountUserId = [$USER_ID$])
 				) AND
 				(CommerceAccount.type_ != 0) AND
 				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
@@ -60,12 +56,8 @@
 			WHERE
 				[$PARENT_ACCOUNT_ID$]
 				(
-					(Users_Orgs.userId IS NULL) OR
-					(Users_Orgs.userId = [$USER_ID$])
-				) AND
-				(
-					(CommerceAccountUserRel.commerceaccountuserid IS NULL) OR
-					(CommerceAccountUserRel.commerceaccountuserid = [$USER_ID$])
+					(Users_Orgs.userId = [$USER_ID$]) OR
+					(CommerceAccountUserRel.commerceAccountUserId = [$USER_ID$])
 				) AND
 				(CommerceAccount.type_ != 0) AND
 				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
@@ -94,12 +86,8 @@
 					Users_Orgs.organizationId = Org2.organizationId
 			WHERE
 				(
-					(Users_Orgs.userId IS NULL) OR
-					(Users_Orgs.userId = [$USER_ID$])
-				) AND
-				(
-					(CommerceAccountUserRel.commerceaccountuserid IS NULL) OR
-					(CommerceAccountUserRel.commerceaccountuserid = [$USER_ID$])
+					(Users_Orgs.userId = [$USER_ID$]) OR
+					(CommerceAccountUserRel.commerceAccountUserId = [$USER_ID$])
 				) AND
 				(CommerceAccount.type_ != 0) AND
 				(CommerceAccount.commerceAccountId = ?)
