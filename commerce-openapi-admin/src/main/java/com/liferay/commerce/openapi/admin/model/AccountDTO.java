@@ -37,10 +37,6 @@ public class AccountDTO {
 		return _id;
 	}
 
-	public Byte[] getLogo() {
-		return _logo;
-	}
-
 	public Long getLogoId() {
 		return _logoId;
 	}
@@ -93,10 +89,6 @@ public class AccountDTO {
 		_id = id;
 	}
 
-	public void setLogo(Byte[] logo) {
-		_logo = logo;
-	}
-
 	public void setLogoId(Long logoId) {
 		_logoId = logoId;
 	}
@@ -133,7 +125,6 @@ public class AccountDTO {
 	private String[] _emailAddresses;
 	private String _externalReferenceCode;
 	private Long _id;
-	private Byte[] _logo;
 	private Long _logoId;
 	private String _name;
 	private Long _organizationId;
