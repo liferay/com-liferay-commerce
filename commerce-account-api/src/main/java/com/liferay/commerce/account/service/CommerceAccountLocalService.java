@@ -123,6 +123,9 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	public CommerceAccount deleteCommerceAccount(long commerceAccountId)
 		throws PortalException;
 
+	public void deleteCommerceAccounts(long companyId)
+		throws PortalException;
+
 	public void deleteLogo(long commerceAccountId) throws PortalException;
 
 	/**

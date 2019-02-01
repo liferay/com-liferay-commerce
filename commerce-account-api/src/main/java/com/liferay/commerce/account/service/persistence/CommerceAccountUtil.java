@@ -113,6 +113,243 @@ public class CommerceAccountUtil {
 	}
 
 	/**
+	* Returns all the commerce accounts where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @return the matching commerce accounts
+	*/
+	public static List<CommerceAccount> findByCompanyId(long companyId) {
+		return getPersistence().findByCompanyId(companyId);
+	}
+
+	/**
+	* Returns a range of all the commerce accounts where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param start the lower bound of the range of commerce accounts
+	* @param end the upper bound of the range of commerce accounts (not inclusive)
+	* @return the range of matching commerce accounts
+	*/
+	public static List<CommerceAccount> findByCompanyId(long companyId,
+		int start, int end) {
+		return getPersistence().findByCompanyId(companyId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce accounts where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param start the lower bound of the range of commerce accounts
+	* @param end the upper bound of the range of commerce accounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce accounts
+	*/
+	public static List<CommerceAccount> findByCompanyId(long companyId,
+		int start, int end, OrderByComparator<CommerceAccount> orderByComparator) {
+		return getPersistence()
+				   .findByCompanyId(companyId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce accounts where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param start the lower bound of the range of commerce accounts
+	* @param end the upper bound of the range of commerce accounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce accounts
+	*/
+	public static List<CommerceAccount> findByCompanyId(long companyId,
+		int start, int end,
+		OrderByComparator<CommerceAccount> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByCompanyId(companyId, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce account in the ordered set where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce account
+	* @throws NoSuchAccountException if a matching commerce account could not be found
+	*/
+	public static CommerceAccount findByCompanyId_First(long companyId,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountException {
+		return getPersistence()
+				   .findByCompanyId_First(companyId, orderByComparator);
+	}
+
+	/**
+	* Returns the first commerce account in the ordered set where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce account, or <code>null</code> if a matching commerce account could not be found
+	*/
+	public static CommerceAccount fetchByCompanyId_First(long companyId,
+		OrderByComparator<CommerceAccount> orderByComparator) {
+		return getPersistence()
+				   .fetchByCompanyId_First(companyId, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce account in the ordered set where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce account
+	* @throws NoSuchAccountException if a matching commerce account could not be found
+	*/
+	public static CommerceAccount findByCompanyId_Last(long companyId,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountException {
+		return getPersistence()
+				   .findByCompanyId_Last(companyId, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce account in the ordered set where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce account, or <code>null</code> if a matching commerce account could not be found
+	*/
+	public static CommerceAccount fetchByCompanyId_Last(long companyId,
+		OrderByComparator<CommerceAccount> orderByComparator) {
+		return getPersistence()
+				   .fetchByCompanyId_Last(companyId, orderByComparator);
+	}
+
+	/**
+	* Returns the commerce accounts before and after the current commerce account in the ordered set where companyId = &#63;.
+	*
+	* @param commerceAccountId the primary key of the current commerce account
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce account
+	* @throws NoSuchAccountException if a commerce account with the primary key could not be found
+	*/
+	public static CommerceAccount[] findByCompanyId_PrevAndNext(
+		long commerceAccountId, long companyId,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountException {
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(commerceAccountId, companyId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns all the commerce accounts that the user has permission to view where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @return the matching commerce accounts that the user has permission to view
+	*/
+	public static List<CommerceAccount> filterFindByCompanyId(long companyId) {
+		return getPersistence().filterFindByCompanyId(companyId);
+	}
+
+	/**
+	* Returns a range of all the commerce accounts that the user has permission to view where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param start the lower bound of the range of commerce accounts
+	* @param end the upper bound of the range of commerce accounts (not inclusive)
+	* @return the range of matching commerce accounts that the user has permission to view
+	*/
+	public static List<CommerceAccount> filterFindByCompanyId(long companyId,
+		int start, int end) {
+		return getPersistence().filterFindByCompanyId(companyId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce accounts that the user has permissions to view where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param start the lower bound of the range of commerce accounts
+	* @param end the upper bound of the range of commerce accounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce accounts that the user has permission to view
+	*/
+	public static List<CommerceAccount> filterFindByCompanyId(long companyId,
+		int start, int end, OrderByComparator<CommerceAccount> orderByComparator) {
+		return getPersistence()
+				   .filterFindByCompanyId(companyId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the commerce accounts before and after the current commerce account in the ordered set of commerce accounts that the user has permission to view where companyId = &#63;.
+	*
+	* @param commerceAccountId the primary key of the current commerce account
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce account
+	* @throws NoSuchAccountException if a commerce account with the primary key could not be found
+	*/
+	public static CommerceAccount[] filterFindByCompanyId_PrevAndNext(
+		long commerceAccountId, long companyId,
+		OrderByComparator<CommerceAccount> orderByComparator)
+		throws com.liferay.commerce.account.exception.NoSuchAccountException {
+		return getPersistence()
+				   .filterFindByCompanyId_PrevAndNext(commerceAccountId,
+			companyId, orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce accounts where companyId = &#63; from the database.
+	*
+	* @param companyId the company ID
+	*/
+	public static void removeByCompanyId(long companyId) {
+		getPersistence().removeByCompanyId(companyId);
+	}
+
+	/**
+	* Returns the number of commerce accounts where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @return the number of matching commerce accounts
+	*/
+	public static int countByCompanyId(long companyId) {
+		return getPersistence().countByCompanyId(companyId);
+	}
+
+	/**
+	* Returns the number of commerce accounts that the user has permission to view where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @return the number of matching commerce accounts that the user has permission to view
+	*/
+	public static int filterCountByCompanyId(long companyId) {
+		return getPersistence().filterCountByCompanyId(companyId);
+	}
+
+	/**
 	* Returns the commerce account where companyId = &#63; and name = &#63; or throws a {@link NoSuchAccountException} if it could not be found.
 	*
 	* @param companyId the company ID
