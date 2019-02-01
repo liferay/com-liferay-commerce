@@ -33,10 +33,10 @@ public interface CommerceSubscriptionEntryHelper {
 
 	public void renewSubscriptionEntries(
 			List<CommerceSubscriptionEntry> commerceSubscriptionEntries)
-		throws PortalException;
+		throws Exception;
 
 	public void renewSubscriptionEntry(
 			CommerceSubscriptionEntry commerceSubscriptionEntry)
-		throws PortalException;
+		throws Exception;
 
 }
