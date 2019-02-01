@@ -59,7 +59,7 @@
 		{/if}
 	{/let}
 
-	<div>
+	<div class="mini-cart-wrapper">
 		<button
 			class="minium-topbar__button{$openCartButtonModifiers}"
 			data-badge-count={$formattedProductsQuantity}
@@ -83,7 +83,7 @@
 			</button>
 
 			<div class="minium-cart__top">
-				<div>
+				<div class="minium-cart__products-quantity">
 					<strong>{$formattedProductsQuantity}</strong> {msg desc="Products"}products{/msg}
 				</div>
 
