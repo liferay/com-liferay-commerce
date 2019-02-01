@@ -21,6 +21,7 @@ import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.Response;
+import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.IOException;
@@ -209,7 +210,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 					Extension.ExtensionType extensionType =
 						extension.getExtensionType();
 
-					Extension.Provider provider = extensionType.getProvider();
+					Provider provider = extensionType.getProvider();
 
 					List<Parameter> parameters = extension.getParameters();
 
@@ -234,8 +235,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 				Extension.ExtensionType paginationExtensionType =
 					Extension.ExtensionType.PAGINATION_CONTEXT;
 
-				Extension.Provider provider =
-					paginationExtensionType.getProvider();
+				Provider provider = paginationExtensionType.getProvider();
 
 				importStatements.add(
 					String.format("import %s;%n", provider.getModelFQCN()));
@@ -361,7 +361,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			Extension.ExtensionType extensionType =
 				extension.getExtensionType();
 
-			Extension.Provider provider = extensionType.getProvider();
+			Provider provider = extensionType.getProvider();
 
 			if (annotateParameter) {
 				sb.append(
@@ -474,7 +474,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		Extension.ExtensionType paginationContextExtension =
 			Extension.ExtensionType.PAGINATION_CONTEXT;
 
-		Extension.Provider provider = paginationContextExtension.getProvider();
+		Provider provider = paginationContextExtension.getProvider();
 
 		if (annotateParameter) {
 			return _parameterGenerator.toAnnotatedMethodContextParameter(
