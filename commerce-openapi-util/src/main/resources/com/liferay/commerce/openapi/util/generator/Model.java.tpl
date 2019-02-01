@@ -14,6 +14,8 @@
 
 package ${PACKAGE};
 
+${MODEL_IMPORT_STATEMENTS}
+
 import javax.annotation.Generated;
 
 import javax.xml.bind.annotation.XmlRootElement;
