@@ -228,6 +228,16 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	@Override
+	public void deleteCommerceAccounts(long companyId) throws PortalException {
+		List<CommerceAccount> commerceAccounts =
+			commerceAccountPersistence.findByCompanyId(companyId);
+
+		for (CommerceAccount commerceAccount : commerceAccounts) {
+			commerceAccountLocalService.deleteCommerceAccount(commerceAccount);
+		}
+	}
+
+	@Override
 	public void deleteLogo(long commerceAccountId) throws PortalException {
 		CommerceAccount commerceAccount =
 			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
