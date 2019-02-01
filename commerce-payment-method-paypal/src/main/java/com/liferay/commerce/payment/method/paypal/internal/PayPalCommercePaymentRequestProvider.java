@@ -49,7 +49,11 @@ public class PayPalCommercePaymentRequestProvider
 		CommerceOrder commerceOrder =
 			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
-		String payerId = ParamUtil.getString(httpServletRequest, "PayerID");
+		String payerId = null;
+
+		if (httpServletRequest != null) {
+			payerId = ParamUtil.getString(httpServletRequest, "PayerID");
+		}
 
 		return new PayPalCommercePaymentRequest(
 			commerceOrder.getTotal(), cancelUrl, commerceOrderId, locale,

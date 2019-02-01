@@ -17,7 +17,6 @@ package com.liferay.commerce.internal.osgi.commands;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
-import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
 
@@ -37,7 +36,7 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class CommerceOSGiCommands {
 
-	public void renewSubscriptionEntries() throws PortalException {
+	public void renewSubscriptionEntries() throws Exception {
 		List<CommerceSubscriptionEntry> activeCommerceSubscriptionEntries =
 			_commerceSubscriptionEntryLocalService.
 				getActiveCommerceSubscriptionEntries();
