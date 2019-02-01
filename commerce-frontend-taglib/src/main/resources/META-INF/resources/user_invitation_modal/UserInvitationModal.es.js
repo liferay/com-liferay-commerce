@@ -15,20 +15,12 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 
 class UserInvitationModal extends Component {
 
-	attached() {
-		this._fetchUsers();
-	}
-
-	close() {
-		return this._isVisible = false;
-	}
-
 	created() {
 		this._debouncedFetchUser = debounce(this._fetchUsers.bind(this), 300);
 	}
 
-	open() {
-		return this._isVisible = true;
+	attached() {
+		this._fetchUsers();
 	}
 
 	syncAddedUsers() {
@@ -47,19 +39,8 @@ class UserInvitationModal extends Component {
 		return this._debouncedFetchUser();
 	}
 
-	toggle() {
-		return this._isVisible = !this._isVisible;
-	}
-
-	_handleCloseModal(evt) {
-		evt.preventDefault();
-
-		this._isVisible = false;
-	}
-
 	_handleFormSubmit(evt) {
 		evt.preventDefault();
-
 		if (this.query.match(EMAIL_REGEX)) {
 			this.addedUsers = [
 				...this.addedUsers,
@@ -67,7 +48,6 @@ class UserInvitationModal extends Component {
 					email: this.query
 				}
 			];
-
 			this.query = '';
 		}
 		return this.query;
@@ -159,30 +139,21 @@ const USER_SCHEMA = Config.shapeOf(
 		thumbnail: Config.string().required(),
 		userId: Config.oneOfType(
 			[
-				Config.number(),
-				Config.string()
+				Config.string(),
+				Config.number()
 			]
 		).required()
 	}
 );
 
 UserInvitationModal.STATE = {
-<<<<<<< HEAD
-	_isLoading: Config.bool().internal().value(false),
-	_isVisible: Config.bool().internal().value(false),
-=======
->>>>>>> COMMERCE-686 source formatting on modals
 	addedUsers: Config.array(USER_SCHEMA).value([]),
 	query: Config.string().value(''),
 	spritemap: Config.string(),
 	users: Config.array(USER_SCHEMA).value([]),
-<<<<<<< HEAD
-	usersAPI: Config.string().value('')
-=======
 	usersAPI: Config.string().value(''),
 	_loading: Config.bool().internal().value(false),
 	_modalVisible: Config.bool().internal().value(false)
->>>>>>> COMMERCE-686 source formatting on modals
 };
 
 export {UserInvitationModal};

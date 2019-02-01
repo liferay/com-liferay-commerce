@@ -13,36 +13,16 @@ import './OrganizationListItem.es';
 
 class AddOrganizationModal extends Component {
 
-	addColorToOrganizations(organizations) {
-		return organizations.map(organization => {
-			return Object.assign(
-				{
-					colorId: Math.floor(Math.random() * 6) + 1
-				},
-				organization,
-			);
-		});
+	created() {
+		this._debouncedFetchOrganizations = debounce(this._fetchOrganizations.bind(this), 300);
 	}
 
 	attached() {
 		return this._fetchOrganizations();
 	}
 
-	close() {
-		return this._isVisible = false;
-	}
-
-	created() {
-		this._debouncedFetchOrganizations = debounce(this._fetchOrganizations.bind(this), 300);
-	}
-
-	open() {
-		return this._isVisible = true;
-	}
-
 	syncAddedOrganizations() {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
-
 		this.element.querySelector('.autocomplete-input__box').focus();
 		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
 	}
@@ -62,7 +42,6 @@ class AddOrganizationModal extends Component {
 
 		if (this.organizations.length) {
 			this._toggleItem(this.organizations[0]);
-
 			this.query = '';
 		}
 
@@ -72,7 +51,6 @@ class AddOrganizationModal extends Component {
 	_handleInputBox(e) {
 		if (e.keyCode === 8 && !this.query.length) {
 			this.selectedOrganizations = this.selectedOrganizations.slice(0, -1);
-
 			return false;
 		}
 		this.query = e.target.value;
