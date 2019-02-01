@@ -9,33 +9,46 @@ class CompareCheckbox extends Component {
 		Liferay.on(
 			'compareIsAvailable',
 			() => {
-				this.isCompareAvailable = true;
+				this.compareAvailable = true;
+				return this._emitUpdates();
 			}
 		);
 		Liferay.on(
 			'compareIsUnavailable',
 			() => {
-				this.isCompareAvailable = false;
+				this.compareAvailable = false;
+				return this._emitUpdates();
 			}
 		);
 		Liferay.on(
 			'productRemovedFromCompare',
 			(data) => {
 				if (data.id === this.productId) {
-					this.isInCompare = false;
+					this.inCompare = false;
 				}
+				return this._emitUpdates();
 			}
 		);
 	}
 
+	_emitUpdates() {
+		this.emit(
+			'checkboxCompareUpdated',
+			{
+				compareAvailable: this.compareAvailable,
+				inCompare: this.inCompare
+			}
+		)
+	}
+
 	_handleCompareCheckbox(evt) {
 		evt.preventDefault();
-		this.isInCompare = !this.isInCompare;
+		this.inCompare = !this.inCompare;
 		return Liferay.fire(
 			'toggleProductToCompare',
 			{
 				id: this.productId,
-				thumbnail: this.pictureUrl
+				thumbnail: this.pictureUrl || null
 			}
 		);
 	}
@@ -44,11 +57,11 @@ class CompareCheckbox extends Component {
 Soy.register(CompareCheckbox, template);
 
 CompareCheckbox.STATE = {
-	isCheckboxVisible: Config.bool(),
-	isCompareAvailable: Config.bool(),
-	isInCompare: Config.bool(),
-	isLabelVisible: Config.bool(),
-	pictureUrl: Config.string().required(),
+	checkboxVisible: Config.bool(),
+	compareAvailable: Config.bool(),
+	inCompare: Config.bool(),
+	labelVisible: Config.bool(),
+	pictureUrl: Config.string(),
 	productId: Config.oneOfType(
 		[
 			Config.number(),
