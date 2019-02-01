@@ -29,22 +29,26 @@ import com.liferay.commerce.payment.method.paypal.internal.configuration.PayPalG
 import com.liferay.commerce.payment.method.paypal.internal.constants.PayPalCommercePaymentMethodConstants;
 import com.liferay.commerce.payment.request.CommercePaymentRequest;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
+import com.liferay.commerce.payment.result.CommerceSubscriptionStatusResult;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
-import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import com.paypal.api.payments.Agreement;
+import com.paypal.api.payments.AgreementDetails;
+import com.paypal.api.payments.AgreementStateDescriptor;
 import com.paypal.api.payments.Amount;
 import com.paypal.api.payments.Authorization;
 import com.paypal.api.payments.Capture;
@@ -135,8 +139,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		boolean success = false;
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commercePaymentRequest.getCommerceOrderId());
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -187,8 +192,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		payment.setId(transactionId);
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			payPalCommercePaymentRequest.getCommerceOrderId());
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				payPalCommercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -228,12 +234,11 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		PayPalCommercePaymentRequest payPalCommercePaymentRequest =
 			(PayPalCommercePaymentRequest)commercePaymentRequest;
 
-		String transactionId = payPalCommercePaymentRequest.getTransactionId();
+		agreement.setToken(payPalCommercePaymentRequest.getTransactionId());
 
-		agreement.setToken(transactionId);
-
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commercePaymentRequest.getCommerceOrderId());
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -251,7 +256,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		messages.add(activeAgreement.getDescription());
 
 		return new CommercePaymentResult(
-			null, commercePaymentRequest.getCommerceOrderId(),
+			activeAgreement.getId(),
+			commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null, null,
 			messages, success);
 	}
@@ -282,6 +288,36 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	@Override
 	public String getServletPath() {
 		return PayPalCommercePaymentMethodConstants.SERVLET_PATH;
+	}
+
+	@Override
+	public CommerceSubscriptionStatusResult getSubscriptionPaymentDetails(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
+
+		APIContext apiContext = _getAPIContext(commerceOrder);
+
+		Agreement agreement = Agreement.get(
+			apiContext, commercePaymentRequest.getTransactionId());
+
+		AgreementDetails agreementDetails = agreement.getAgreementDetails();
+
+		Long failedPaymentCount = GetterUtil.getLong(
+			agreementDetails.getFailedPaymentCount());
+		Long cyclesRemaining = GetterUtil.getLong(
+			agreementDetails.getCyclesRemaining());
+		Long cyclesCompleted = GetterUtil.getLong(
+			agreementDetails.getCyclesCompleted());
+
+		CommerceSubscriptionStatusResult commerceSubscriptionStatusResult =
+			new CommerceSubscriptionStatusResult(
+				failedPaymentCount, cyclesRemaining, cyclesCompleted);
+
+		return commerceSubscriptionStatusResult;
 	}
 
 	@Override
@@ -341,8 +377,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		boolean success = false;
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commercePaymentRequest.getCommerceOrderId());
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -382,6 +419,11 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	}
 
 	@Override
+	public int payedOrderInterval() {
+		return 2880;
+	}
+
+	@Override
 	public CommercePaymentResult processPayment(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
@@ -389,8 +431,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		boolean success = false;
 		String url = null;
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commercePaymentRequest.getCommerceOrderId());
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
 
 		Payment payment = _getPayment(
 			commercePaymentRequest, commerceOrder,
@@ -431,8 +474,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commercePaymentRequest.getCommerceOrderId());
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -478,8 +522,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		boolean success = false;
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commercePaymentRequest.getCommerceOrderId());
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -513,14 +558,47 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	}
 
 	@Override
+	public boolean suspendSubscription(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		Agreement agreement = new Agreement();
+
+		agreement.setId(commercePaymentRequest.getTransactionId());
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
+
+		APIContext apiContext = _getAPIContext(commerceOrder);
+
+		AgreementStateDescriptor agreementStateDescriptor =
+			new AgreementStateDescriptor();
+
+		agreementStateDescriptor.setNote("Suspending the agreement");
+
+		agreement.suspend(apiContext, agreementStateDescriptor);
+
+		Agreement updatedAgreement = Agreement.get(
+			apiContext, agreement.getId());
+
+		if ("Suspended".equals(updatedAgreement.getState())) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
 	public CommercePaymentResult voidTransaction(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
 		boolean success = false;
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commercePaymentRequest.getCommerceOrderId());
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
 
 		APIContext apiContext = _getAPIContext(commerceOrder);
 
@@ -562,7 +640,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 
-		calendar.add(Calendar.MINUTE, 10);
+		calendar.add(Calendar.DAY_OF_MONTH, 1);
 
 		String date = simpleDateFormat.format(calendar.getTime());
 
@@ -859,7 +937,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	}
 
 	@Reference
-	private CommerceOrderService _commerceOrderService;
+	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;
