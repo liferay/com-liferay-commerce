@@ -7,8 +7,10 @@
 	{@param editMode: bool }
 	{@param settings: ? }
 
-	{@param? updateQuantity: ? }
-	{@param? submitQuantity: ? }
+	{@param? _handleSubmitClick: any }
+	{@param? _handleBtnClick: any }
+	{@param? _updateQuantity: any }
+	{@param? _submitQuantity: any }
 
 	{let $btnClass kind="text"}
 		minium-button
@@ -21,7 +23,7 @@
 		{/if}
 	{/let}
 
-	<div class="{$btnClass}" data-onclick="handleBtnClick">
+	<div class="{$btnClass}" data-onclick="{$_handleBtnClick}">
 
 		{if $editMode == false}
 			{if $quantity == 0}
@@ -33,17 +35,17 @@
 		{else}
 			{call QuantitySelector.render}
 				{param events: [
-					'submitQuantity' : $submitQuantity,
-					'updateQuantity' : $updateQuantity
+					'submitQuantity' : $_submitQuantity,
+					'updateQuantity' : $_updateQuantity
 				] /}
 				{param quantity: $quantity /}
 				{param minQuantity: $settings.minQuantity /}
 				{param maxQuantity: $settings.maxQuantity /}
 				{param multipleQuantities: $settings.multipleQuantities /}
-				{param allowedOptions: $settings.allowedOptions /}
+				{param allowedQuantities: $settings.allowedQuantities /}
 			{/call}
 
-			<div class="add-to-cart-button__fwd" data-onclick="handleSubmitClick"></div>
+			<div class="add-to-cart-button__fwd" data-onclick="{$_handleSubmitClick}"></div>
 		{/if}
 	</div>
 
