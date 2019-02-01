@@ -62,18 +62,23 @@ public class CommerceOrderResource {
 			CommerceAccount commerceAccount)
 		throws PortalException {
 
+		long commerceAccountId = 0;
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
+
 		List<Order> orders = getOrders(
 			groupId, keywords, page, pageSize, httpServletRequest,
-			commerceAccount);
+			commerceAccountId);
 
 		return new OrderList(
-			orders, getOrdersCount(groupId, keywords, commerceAccount));
+			orders, getOrdersCount(groupId, keywords, commerceAccountId));
 	}
 
 	protected List<Order> getOrders(
 			long groupId, String keywords, int page, int pageSize,
-			HttpServletRequest httpServletRequest,
-			CommerceAccount commerceAccount)
+			HttpServletRequest httpServletRequest, long commerceAccountId)
 		throws PortalException {
 
 		List<Order> orders = new ArrayList<>();
@@ -83,8 +88,7 @@ public class CommerceOrderResource {
 
 		List<CommerceOrder> userCommerceOrders =
 			_commerceOrderService.getPendingCommerceOrders(
-				groupId, commerceAccount.getCommerceAccountId(), keywords,
-				start, end);
+				groupId, commerceAccountId, keywords, start, end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
 			Date modifiedDate = commerceOrder.getModifiedDate();
@@ -112,11 +116,11 @@ public class CommerceOrderResource {
 	}
 
 	protected int getOrdersCount(
-			long groupId, String keywords, CommerceAccount commerceAccount)
+			long groupId, String keywords, long commerceAccountId)
 		throws PortalException {
 
 		return _commerceOrderService.getPendingCommerceOrdersCount(
-			groupId, commerceAccount.getCommerceAccountId(), keywords);
+			groupId, commerceAccountId, keywords);
 	}
 
 	protected Response getResponse(Object object) {
