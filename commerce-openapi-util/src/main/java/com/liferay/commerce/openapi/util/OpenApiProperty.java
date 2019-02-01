@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.util;
 
 import com.liferay.commerce.openapi.util.util.ArrayProvider;
+import com.liferay.commerce.openapi.util.util.MapStringStringProvider;
 import com.liferay.commerce.openapi.util.util.Provider;
 
 /**
@@ -41,7 +42,8 @@ public class OpenApiProperty {
 		else if (_openApiType == OpenApiType.DICTIONARY) {
 			OpenApiFormat dictionaryOpenApiFormat = OpenApiFormat.DICTIONARY;
 
-			return dictionaryOpenApiFormat.getProvider();
+			return new MapStringStringProvider(
+				dictionaryOpenApiFormat.getProvider());
 		}
 
 		return _openApiFormat.getProvider();
