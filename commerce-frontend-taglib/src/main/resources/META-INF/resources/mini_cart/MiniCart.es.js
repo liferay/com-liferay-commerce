@@ -21,9 +21,7 @@ class Cart extends Component {
 			'updateCart',
 			(evt) => {
 				const updateCartData = evt.details[0];
-
 				this.products = updateCartData.products;
-				this.productsCount = updateCartData.products.length;
 				this.summary = updateCartData.summary;
 				this._loading = false;
 				this.pendingOperations = [];
@@ -120,13 +118,6 @@ class Cart extends Component {
 		);
 	}
 
-	handleCancelItemDeletion(productId) {
-		this.setProductProperties(
-			productId,
-			{
-				isDeleteDisabled: false,
-				isDeleting: false
-			}
 	_subtractProducts(orArray, subArray) {
 		const result = subArray.reduce(
 			(arrayToBeFiltered, elToRemove) => {
@@ -134,8 +125,7 @@ class Cart extends Component {
 			},
 			orArray
 		);
-
-		return this.removePendingOperation();
+		return !subArray.length && result;
 	}
 
 	_handleDeleteItem(productId) {
@@ -305,29 +295,10 @@ class Cart extends Component {
 	_sendDeleteRequest(productId) {
 		this._addPendingOperation(productId);
 
-		return !subArray.length && result;
-	}
-
-	syncPendingOperations(pendingOperations) {
-		this.isLoading = !!pendingOperations.length;
-	}
-
-	toggleCart() {
-		if (this.isOpen = !this.isOpen) {
-			return true;
-		}
-
-		return false;
-	}
-
-	updateProductQuantity(productId, quantity) {
-		this.addPendingOperation(productId);
-		this.setProductProperties(
-			productId,
+		return fetch(
+			this.cartAPI + '/cart-item/' + productId,
 			{
-				isDeleteDisabled: true,
-				isUpdating: true,
-				quantity: quantity
+				method: 'DELETE'
 			}
 		)
 			.then(response => response.json())
@@ -370,7 +341,6 @@ class Cart extends Component {
 				}
 			);
 	}
-
 }
 
 Soy.register(Cart, template);
