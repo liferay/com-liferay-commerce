@@ -54,7 +54,7 @@ public interface InventoryResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateInventory(
-			@PathParam("id") String id, @QueryParam("groupId") long groupId,
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			InventoryDTO inventoryDTO)
 		throws Exception;
 

@@ -51,7 +51,7 @@ public interface PriceEntryResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceEntryDTO> getPriceEntries(
-			@QueryParam("groupId") long groupId, @Context Pagination pagination)
+			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
@@ -75,7 +75,7 @@ public interface PriceEntryResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceEntryDTO upsertPriceEntry(
-			@QueryParam("groupId") long groupId, PriceEntryDTO priceEntryDTO)
+			@QueryParam("groupId") Long groupId, PriceEntryDTO priceEntryDTO)
 		throws Exception;
 
 }

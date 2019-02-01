@@ -29,7 +29,7 @@ public class ErrorDTO {
 		return _message;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return _status;
 	}
 
@@ -37,11 +37,11 @@ public class ErrorDTO {
 		_message = message;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		_status = status;
 	}
 
 	private String _message;
-	private int _status;
+	private Integer _status;
 
 }

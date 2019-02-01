@@ -29,7 +29,7 @@ public class ProductOptionValueDTO {
 		return _externalReferenceCode;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return _id;
 	}
 
@@ -41,7 +41,7 @@ public class ProductOptionValueDTO {
 		return _name;
 	}
 
-	public double getPriority() {
+	public Double getPriority() {
 		return _priority;
 	}
 
@@ -49,7 +49,7 @@ public class ProductOptionValueDTO {
 		_externalReferenceCode = externalReferenceCode;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		_id = id;
 	}
 
@@ -61,14 +61,14 @@ public class ProductOptionValueDTO {
 		_name = name;
 	}
 
-	public void setPriority(double priority) {
+	public void setPriority(Double priority) {
 		_priority = priority;
 	}
 
 	private String _externalReferenceCode;
-	private long _id;
+	private Long _id;
 	private String _key;
 	private String _name;
-	private double _priority;
+	private Double _priority;
 
 }

@@ -33,7 +33,7 @@ public class SkuDTO {
 		return _cost;
 	}
 
-	public double getDepth() {
+	public Double getDepth() {
 		return _depth;
 	}
 
@@ -53,11 +53,11 @@ public class SkuDTO {
 		return _gtin;
 	}
 
-	public double getHeight() {
+	public Double getHeight() {
 		return _height;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return _id;
 	}
 
@@ -77,23 +77,23 @@ public class SkuDTO {
 		return _sku;
 	}
 
-	public double getWeight() {
+	public Double getWeight() {
 		return _weight;
 	}
 
-	public double getWidth() {
+	public Double getWidth() {
 		return _width;
 	}
 
-	public boolean isNeverExpire() {
+	public Boolean isNeverExpire() {
 		return _neverExpire;
 	}
 
-	public boolean isPublished() {
+	public Boolean isPublished() {
 		return _published;
 	}
 
-	public boolean isPurchasable() {
+	public Boolean isPurchasable() {
 		return _purchasable;
 	}
 
@@ -101,7 +101,7 @@ public class SkuDTO {
 		_cost = cost;
 	}
 
-	public void setDepth(double depth) {
+	public void setDepth(Double depth) {
 		_depth = depth;
 	}
 
@@ -121,11 +121,11 @@ public class SkuDTO {
 		_gtin = gtin;
 	}
 
-	public void setHeight(double height) {
+	public void setHeight(Double height) {
 		_height = height;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		_id = id;
 	}
 
@@ -133,7 +133,7 @@ public class SkuDTO {
 		_manufacturerPartNumber = manufacturerPartNumber;
 	}
 
-	public void setNeverExpire(boolean neverExpire) {
+	public void setNeverExpire(Boolean neverExpire) {
 		_neverExpire = neverExpire;
 	}
 
@@ -145,11 +145,11 @@ public class SkuDTO {
 		_promoPrice = promoPrice;
 	}
 
-	public void setPublished(boolean published) {
+	public void setPublished(Boolean published) {
 		_published = published;
 	}
 
-	public void setPurchasable(boolean purchasable) {
+	public void setPurchasable(Boolean purchasable) {
 		_purchasable = purchasable;
 	}
 
@@ -157,30 +157,30 @@ public class SkuDTO {
 		_sku = sku;
 	}
 
-	public void setWeight(double weight) {
+	public void setWeight(Double weight) {
 		_weight = weight;
 	}
 
-	public void setWidth(double width) {
+	public void setWidth(Double width) {
 		_width = width;
 	}
 
 	private BigDecimal _cost;
-	private double _depth;
+	private Double _depth;
 	private Date _displayDate;
 	private Date _expirationDate;
 	private String _externalReferenceCode;
 	private String _gtin;
-	private double _height;
-	private long _id;
+	private Double _height;
+	private Long _id;
 	private String _manufacturerPartNumber;
-	private boolean _neverExpire;
+	private Boolean _neverExpire;
 	private BigDecimal _price;
 	private BigDecimal _promoPrice;
-	private boolean _published;
-	private boolean _purchasable;
+	private Boolean _published;
+	private Boolean _purchasable;
 	private String _sku;
-	private double _weight;
-	private double _width;
+	private Double _weight;
+	private Double _width;
 
 }
