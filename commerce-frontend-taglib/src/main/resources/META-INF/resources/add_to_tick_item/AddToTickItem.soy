@@ -4,11 +4,11 @@
  * This renders the component's whole content.
  */
 {template .render}
-	{@param? isAdded: bool }
+	{@param? added: bool }
 
 	{let $svgClasses kind="text"}
 		add-to-tick
-		{if $isAdded}
+		{if $added}
 			{sp}add-to-tick--is-added
 		{/if}
 	{/let}

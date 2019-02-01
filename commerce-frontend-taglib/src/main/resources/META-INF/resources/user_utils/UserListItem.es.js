@@ -27,13 +27,13 @@ class UserListItem extends Component {
 		if (this.userId) {
 			this._status = 'valid';
 		}
- 		else if (this.email.indexOf('@') < 0) {
+		else if (this.email.indexOf('@') < 0) {
 			this._status = 'user-not-found';
 		}
- 		else if (!EMAIL_REGEX.test(this.email)) {
+		else if (!EMAIL_REGEX.test(this.email)) {
 			this._status = 'email-not-valid';
 		}
- 		else {
+		else {
 			this._status = 'valid';
 		}
 		return this._status;
@@ -61,8 +61,6 @@ class UserListItem extends Component {
 Soy.register(UserListItem, template);
 
 UserListItem.STATE = {
-	_invited: Config.bool().value(false),
-	_status: Config.string().value('valid'),
 	addedUsers: Config.array(
 		Config.shapeOf(
 			{
@@ -81,7 +79,9 @@ UserListItem.STATE = {
 			Config.string(),
 			Config.number()
 		]
-	)
+	),
+	_invited: Config.bool().value(false),
+	_status: Config.string().value('valid')
 };
 
 export {UserListItem};

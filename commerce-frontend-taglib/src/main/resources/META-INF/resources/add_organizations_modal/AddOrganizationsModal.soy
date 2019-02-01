@@ -17,7 +17,7 @@
 	{@param? query: string }
 	{@param spritemap: string }
 
-	{@param? _isVisible: bool }
+	{@param? _modalVisible: bool }
 	{@param? _toggleItem: any }
 	{@param? _handleInputBox: any }
 	{@param? _handleFormSubmit: any }
@@ -130,7 +130,7 @@
 	<div class="commerce-modal-wrapper">
 		{call ClayModal.render}
 			{param body: $body /}
-			{param visible: $_isVisible /}
+			{param visible: $_modalVisible /}
 			{param events: ['hide': $_handleCloseModal] /}
 		{/call}
 	</div>

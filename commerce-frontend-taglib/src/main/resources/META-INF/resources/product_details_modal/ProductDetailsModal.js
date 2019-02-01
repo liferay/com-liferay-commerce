@@ -22,26 +22,30 @@ class ProductDetailsModal extends Component {
 		return this.refs.modal.show();
 	}
 
-};
+}
 
 Soy.register(ProductDetailsModal, template);
 
 ProductDetailsModal.STATE = {
-	_isVisible: Config.bool().value(false),
 	addToOrderLink: Config.string(),
-	availability: Config.string().oneOf([
-		'inStock',
-		'available',
-		'notAvailable'
-	]).value('inStock'),
+	availability: Config.string()
+		.oneOf(
+			[
+				'available',
+				'inStock',
+				'notAvailable'
+			]
+		)
+		.value('inStock'),
 	categories: Config.array(
 		Config.shapeOf(
 			{
-				name: Config.string().required(),
-				link: Config.string().required()
+				link: Config.string().required(),
+				name: Config.string().required()
 			}
 		)
-	).value([]),
+	)
+		.value([]),
 	description: Config.string(),
 	detailsLink: Config.string(),
 	name: Config.string().required(),
@@ -50,9 +54,11 @@ ProductDetailsModal.STATE = {
 		{
 			minQuantity: Config.number()
 		}
-	).value(),
+	)
+		.value(),
 	sku: Config.string().required(),
-	spritemap: Config.string()
+	spritemap: Config.string(),
+	_modalVisible: Config.bool().value(false)
 };
 
 export {ProductDetailsModal};
