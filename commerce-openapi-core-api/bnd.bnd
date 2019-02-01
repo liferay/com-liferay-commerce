@@ -2,6 +2,16 @@ Bundle-Name: Liferay Commerce OpenAPI Core API
 Bundle-SymbolicName: com.liferay.commerce.openapi.core.api
 Bundle-Version: 1.1.0
 Export-Package:\
+	com.fasterxml.aalto.out,\
+	com.fasterxml.jackson.databind,\
+	com.fasterxml.jackson.dataformat.xml,\
+	com.fasterxml.jackson.dataformat.xml.annotation,\
 	com.liferay.commerce.openapi.core.context,\
 	com.liferay.commerce.openapi.core.exception,\
 	com.liferay.commerce.openapi.core.model
+Import-Package:\
+	!com.fasterxml.jackson.annotation.*,\
+	!com.fasterxml.jackson.core.*,\
+	!com.fasterxml.jackson.databind.*,\
+	!com.fasterxml.jackson.module.jaxb.*,\
+	*
