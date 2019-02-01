@@ -163,13 +163,17 @@ public class DTOUtils {
 
 		productDTO.setActive(!cpDefinition.isInactive());
 
-		productDTO.setDescription(cpDefinition.getDescriptionMap());
+		productDTO.setDescription(
+			LanguageUtils.getLanguageIdMap(cpDefinition.getDescriptionMap()));
 		productDTO.setExternalReferenceCode(
 			cpDefinition.getExternalReferenceCode());
 		productDTO.setId(cpDefinition.getCPDefinitionId());
 		productDTO.setProductTypeName(cpDefinition.getProductTypeName());
-		productDTO.setShortDescription(cpDefinition.getShortDescriptionMap());
-		productDTO.setName(cpDefinition.getNameMap());
+		productDTO.setShortDescription(
+			LanguageUtils.getLanguageIdMap(
+				cpDefinition.getShortDescriptionMap()));
+		productDTO.setName(
+			LanguageUtils.getLanguageIdMap(cpDefinition.getNameMap()));
 
 		return productDTO;
 	}
