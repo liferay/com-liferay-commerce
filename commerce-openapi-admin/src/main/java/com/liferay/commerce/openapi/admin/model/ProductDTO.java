@@ -35,7 +35,7 @@ public class ProductDTO {
 		return _defaultSku;
 	}
 
-	public Map getDescription() {
+	public Map<String, String> getDescription() {
 		return _description;
 	}
 
@@ -47,7 +47,7 @@ public class ProductDTO {
 		return _id;
 	}
 
-	public Map getName() {
+	public Map<String, String> getName() {
 		return _name;
 	}
 
@@ -55,7 +55,7 @@ public class ProductDTO {
 		return _productTypeName;
 	}
 
-	public Map getShortDescription() {
+	public Map<String, String> getShortDescription() {
 		return _shortDescription;
 	}
 
@@ -75,7 +75,7 @@ public class ProductDTO {
 		_defaultSku = defaultSku;
 	}
 
-	public void setDescription(Map description) {
+	public void setDescription(Map<String, String> description) {
 		_description = description;
 	}
 
@@ -87,7 +87,7 @@ public class ProductDTO {
 		_id = id;
 	}
 
-	public void setName(Map name) {
+	public void setName(Map<String, String> name) {
 		_name = name;
 	}
 
@@ -95,18 +95,18 @@ public class ProductDTO {
 		_productTypeName = productTypeName;
 	}
 
-	public void setShortDescription(Map shortDescription) {
+	public void setShortDescription(Map<String, String> shortDescription) {
 		_shortDescription = shortDescription;
 	}
 
 	private Boolean _active;
 	private Integer[] _assetCategoryIds;
 	private String _defaultSku;
-	private Map _description;
+	private Map<String, String> _description;
 	private String _externalReferenceCode;
 	private Long _id;
-	private Map _name;
+	private Map<String, String> _name;
 	private String _productTypeName;
-	private Map _shortDescription;
+	private Map<String, String> _shortDescription;
 
 }
