@@ -1,6 +1,6 @@
 Bundle-Name: Liferay Commerce Service
 Bundle-SymbolicName: com.liferay.commerce.service
-Bundle-Version: 2.1.0
+Bundle-Version: 3.0.0
 Export-Package:\
 	com.liferay.commerce.configuration,\
 	com.liferay.commerce.configuration.definition,\
