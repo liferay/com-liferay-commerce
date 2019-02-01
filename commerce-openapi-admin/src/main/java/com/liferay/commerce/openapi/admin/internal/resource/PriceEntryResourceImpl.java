@@ -37,7 +37,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = PriceEntryResource.class
 )
@@ -55,7 +55,7 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
 	public CollectionDTO<PriceEntryDTO> getPriceEntries(
-			long groupId, Pagination pagination)
+			Long groupId, Pagination pagination)
 		throws Exception {
 
 		return _priceEntryHelper.getPriceEntryDTOs(groupId, pagination);
@@ -80,7 +80,7 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
 	public PriceEntryDTO upsertPriceEntry(
-			long groupId, PriceEntryDTO priceEntryDTO)
+			Long groupId, PriceEntryDTO priceEntryDTO)
 		throws Exception {
 
 		return _priceEntryHelper.upsertCommercePriceEntry(

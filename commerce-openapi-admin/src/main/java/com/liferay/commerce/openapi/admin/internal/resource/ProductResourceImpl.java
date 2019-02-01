@@ -81,7 +81,7 @@ public class ProductResourceImpl implements ProductResource {
 
 	@Override
 	public Response updateProduct(
-			String id, long groupId, ProductDTO productDTO, Locale locale)
+			String id, Long groupId, ProductDTO productDTO, Locale locale)
 		throws Exception {
 
 		_productHelper.updateProductDTO(id, productDTO, locale, _company);
@@ -93,7 +93,7 @@ public class ProductResourceImpl implements ProductResource {
 
 	@Override
 	public ProductDTO upsertProduct(
-			long groupId, ProductDTO productDTO, Locale locale)
+			Long groupId, ProductDTO productDTO, Locale locale)
 		throws Exception {
 
 		return _productHelper.upsertProduct(groupId, productDTO, _user, locale);
@@ -101,7 +101,7 @@ public class ProductResourceImpl implements ProductResource {
 
 	@Override
 	public SkuDTO upsertSku(
-			String id, long groupId, SkuDTO skuDTO, Locale locale)
+			String id, Long groupId, SkuDTO skuDTO, Locale locale)
 		throws Exception {
 
 		return _skuHelper.updateSKU(id, groupId, skuDTO, _company);

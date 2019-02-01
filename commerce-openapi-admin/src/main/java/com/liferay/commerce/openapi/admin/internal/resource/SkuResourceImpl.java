@@ -41,7 +41,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = SkuResource.class
 )
@@ -72,7 +72,7 @@ public class SkuResourceImpl implements SkuResource {
 
 	@Override
 	public Response updateSku(
-			String id, long groupId, SkuDTO skuDTO, Locale locale)
+			String id, Long groupId, SkuDTO skuDTO, Locale locale)
 		throws Exception {
 
 		_skuHelper.updateSKU(id, groupId, skuDTO, _company);
@@ -84,7 +84,7 @@ public class SkuResourceImpl implements SkuResource {
 
 	@Override
 	public InventoryDTO upsertInventory(
-			String id, long groupId, InventoryDTO inventoryDTO)
+			String id, Long groupId, InventoryDTO inventoryDTO)
 		throws Exception {
 
 		return _inventoryHelper.upsertInventory(

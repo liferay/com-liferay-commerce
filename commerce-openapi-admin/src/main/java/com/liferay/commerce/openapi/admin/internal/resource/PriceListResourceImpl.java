@@ -38,14 +38,14 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = PriceListResource.class
 )
 public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
-	public Response deletePriceList(String id, long groupId, Locale locale)
+	public Response deletePriceList(String id, Long groupId, Locale locale)
 		throws Exception {
 
 		_priceListHelper.deletePriceList(id, groupId, _user, locale, _company);
@@ -56,7 +56,7 @@ public class PriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
-	public PriceListDTO getPriceList(String id, long groupId, Locale locale)
+	public PriceListDTO getPriceList(String id, Long groupId, Locale locale)
 		throws Exception {
 
 		return _priceListHelper.getPriceList(
@@ -65,7 +65,7 @@ public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
 	public CollectionDTO<PriceListDTO> getPriceLists(
-			long groupId, Locale locale, Pagination pagination)
+			Long groupId, Locale locale, Pagination pagination)
 		throws Exception {
 
 		return _priceListHelper.getPriceLists(
@@ -74,7 +74,7 @@ public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
 	public Response updatePriceList(
-			String id, long groupId, PriceListDTO priceListDTO, Locale locale)
+			String id, Long groupId, PriceListDTO priceListDTO, Locale locale)
 		throws Exception {
 
 		_priceListHelper.updatePriceList(
@@ -87,7 +87,7 @@ public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
 	public PriceListDTO upsertPriceList(
-			long groupId, PriceListDTO priceListDTO, Locale locale)
+			Long groupId, PriceListDTO priceListDTO, Locale locale)
 		throws Exception {
 
 		return _priceListHelper.upsertPriceList(
