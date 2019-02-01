@@ -10,44 +10,65 @@ import './AccountsTable.es';
 
 class AccountSelector extends Component {
 
-	fetchAccounts(query = '') {
-		return fetch(
-			this.accountsAPI + '/search-accounts/' + themeDisplay.getScopeGroupId() + '?groupId=' + themeDisplay.getScopeGroupId() + '&page=1&pageSize=10&q=' + query,
-			{
-				method: 'GET'
-			}
-		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				response => {
-					return this.accounts = response.accounts;
-				}
-			);
+	toggleAccountSelector() {
+		if (this.openingState === 'closed') {
+			this._openModal();
+		}
+
+		if (this.openingState === 'open') {
+			this._closeModal();
+		}
+
+		return this.openingState;
 	}
 
-	fetchOrders(query = '') {
-		return fetch(
-			this.accountsAPI + '/search-accounts/' + themeDisplay.getScopeGroupId() + '/' + this.currentAccount.accountId + '/orders?groupId=' + themeDisplay.getScopeGroupId() + '&page=1&pageSize=10&q=' + query,
-			{
-				method: 'GET'
-			}
-		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				response => {
-					return this.orders = response.orders;
-				}
-			);
+	_openModal() {
+		if (!this.currentAccount && !this.accounts) {
+			this.currentView = 'accounts';
+			this._fetchAccounts();
+		}
+
+		if (this.currentAccount && !this.orders) {
+			this.currentView = 'orders';
+			this._fetchOrders();
+		}
+
+		this.openingState = 'opening';
+
+		return setTimeout(
+			() => {
+				this.openingState = 'open';
+			},
+			200
+		);
 	}
 
-	handleAccountSelected(selectedAccount) {
+	_closeModal() {
+		this.openingState = 'closing';
+
+		return setTimeout(
+			() => {
+				this.openingState = 'closed';
+			},
+			200
+		);
+	}
+
+	_handleChangeSelectedView(view) {
+		if (!this.accounts && view === 'accounts') {
+			this._fetchAccounts();
+		}
+
+		this.currentView = view;
+
+		return this.currentView;
+	}
+
+	_handleAccountSelected(selectedAccount) {
 		if (this.currentAccount) {
 			if (selectedAccount.accountId === this.currentAccount.accountId) {
-				return this.currentView = 'orders';
+				this.currentView = 'orders';
+				return this.currentView;
 			}
 
 			this.orders = null;
@@ -74,55 +95,54 @@ class AccountSelector extends Component {
 		);
 
 		this.currentView = 'orders';
-
-		return this.fetchOrders();
+		return this._fetchOrders();
 	}
 
-	handleChangeSelectedView(view) {
-		if (!this.accounts && view === 'accounts') {
-			this.fetchAccounts();
-		}
-
-		return this.currentView = view;
+	_handleGetAccounts(query = '') {
+		this._fetchAccounts(query);
 	}
 
-	handleGetAccounts(query = '') {
-		this.fetchAccounts(query);
-	}
-
-	handleGetOrders(query = '') {
-		this.fetchOrders(query);
-	}
-
-	handleOrderSelected(selectedOrder) {
+	_handleOrderSelected(selectedOrder) {
 		this.currentOrder = selectedOrder;
-
-		return this.toggleAccountSelector();
+	}
+	
+	_handleGetOrders(query = '') {
+		return this._fetchOrders(query);
 	}
 
-	toggleAccountSelector() {
-		if (this.openingState === 'closed') {
-			if (!this.currentAccount && !this.accounts) {
-				this.currentView = 'accounts';
-				this.fetchAccounts();
+	_fetchAccounts(query = '') {
+		return fetch(
+			this.accountsAPI + '/search-accounts/' + themeDisplay.getScopeGroupId() + '?page=1&pageSize=10&q=' + query,
+			{
+				method: 'GET'
 			}
+		)
+			.then(
+				response => response.json()
+			)
+			.then(
+				response => {
+					this.accounts = response.accounts;
+					return this.accounts;
+				}
+			);
+	}
 
-			if (this.currentAccount && !this.orders) {
-				this.currentView = 'orders';
-				this.fetchOrders();
+	_fetchOrders(query = '') {
+		return fetch(
+			this.accountsAPI + '/search-accounts/' + themeDisplay.getScopeGroupId() + '/' + this.currentAccount.accountId + '/orders?page=1&pageSize=10&q=' + query,
+			{
+				method: 'GET'
 			}
-
-			return this.openingState = 'open';
-		}
-
-		if (this.openingState === 'open') {
-			this.openingState = 'closing';
-
-			return setTimeout(
-				() => {
-					this.openingState = 'closed';
-				},
-				200
+		)
+			.then(
+				response => response.json()
+			)
+			.then(
+				response => {
+					this.orders = response.orders;
+					return this.orders;
+				}
 			);
 		}
 	}
@@ -132,7 +152,6 @@ class AccountSelector extends Component {
 Soy.register(AccountSelector, template);
 
 AccountSelector.STATE = {
-	accountsAPI: Config.string().required(),
 	accounts: Config.arrayOf(
 		Config.shapeOf(
 			{
@@ -147,6 +166,7 @@ AccountSelector.STATE = {
 			}
 		)
 	),
+	accountsAPI: Config.string().required(),
 	createNewAccountLink: Config.string(),
 	createNewOrderLink: Config.string(),
 	currentAccount: Config.object(),
@@ -156,17 +176,21 @@ AccountSelector.STATE = {
 			'accounts',
 			'orders'
 		]
-	).value('accounts'),
+	)
+		.value('accounts'),
 	openingState: Config.oneOf(
 		[
 			'closed',
 			'open',
-			'closing'
+			'closing',
+			'opening'
 		]
-	).value('closed'),
+	)
+		.value('closed'),
 	orders: Config.arrayOf(
 		Config.shapeOf(
 			{
+				addOrderLink: Config.string(),
 				id: Config.oneOfType(
 					[
 						Config.string(),
@@ -174,8 +198,7 @@ AccountSelector.STATE = {
 					]
 				).required(),
 				lastEdit: Config.string(),
-				status: Config.string(),
-				addOrderLink: Config.string()
+				status: Config.string()
 			}
 		)
 	),
