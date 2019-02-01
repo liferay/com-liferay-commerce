@@ -3,12 +3,23 @@ import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
 class QuantitySelector extends Component {
+	_handleSelectOption(evt) {
+		const quantity = parseInt(evt.target.value, 10);
+		return this.emit('updateQuantity', quantity);
+	}
 
-	checkWhetherIsNextButtonAvailable(quantity) {
-		if (this.allowedOptions && this.allowedOptions.length) {
-			const nextOptionIndex = this.allowedOptions.indexOf(quantity) + 1;
+	prepareStateForRender(states) {
+		this._prevAvailable = this._isPrevButtonAvailable(
+			states.quantity
+		);
+		this._nextAvailable = this._isNextButtonAvailable(
+			states.quantity
+		);
+	}
 
-			return !!this.allowedOptions[nextOptionIndex];
+	_isPrevButtonAvailable(quantity) {
+		if (this.allowedQuantities && this.allowedQuantities.length) {
+			return this.allowedQuantities.indexOf(quantity) >= 1;
 		}
 
 		let tempValue = this.multipleQuantities ?
@@ -18,9 +29,10 @@ class QuantitySelector extends Component {
 		return tempValue <= this.maxQuantity;
 	}
 
-	checkWhetherIsPrevButtonAvailable(quantity) {
-		if (this.allowedOptions && this.allowedOptions.length) {
-			return this.allowedOptions.indexOf(quantity) >= 1;
+	_isNextButtonAvailable(quantity) {
+		if (this.allowedQuantities && this.allowedQuantities.length) {
+			const nextOptionIndex = this.allowedQuantities.indexOf(quantity) + 1;
+			return !!this.allowedQuantities[nextOptionIndex];
 		}
 
 		let tempValue = this.multipleQuantities ?
@@ -30,15 +42,9 @@ class QuantitySelector extends Component {
 		return tempValue >= this.minQuantity;
 	}
 
-	handleSelectOption(evt) {
-		const quantity = parseInt(evt.target.value);
-		this.emit('updateQuantity', quantity);
-	}
-
-	handleNextQuantity(evt) {
-		evt.preventDefault();
-
-		if (!this.isNextAvailable) {
+	_handlePrevQuantity(e) {
+		e.preventDefault();
+		if (!this._prevAvailable) {
 			return (this.showError = true);
 		}
 
@@ -47,31 +53,29 @@ class QuantitySelector extends Component {
 		if (this.multipleQuantities) {
 			tempQuantity += this.multipleQuantities;
 		}
-		if (this.allowedOptions && this.allowedOptions.length) {
-			const index = this.allowedOptions.indexOf(tempQuantity);
 
-			if (index + 1 >= this.allowedOptions.length) {
-				return (this.inputError = 'NoQuantitiesHigherThanAvailable');
+		if (this.allowedQuantities && this.allowedQuantities.length) {
+			const index = this.allowedQuantities.indexOf(tempQuantity);
+			if (!index) {
+				return (this.inputError = 'NoQuantitiesLessThanAvailable');
 			}
-
-			tempQuantity = this.allowedOptions[index + 1];
+			tempQuantity = this.allowedQuantities[index - 1];
 		}
 
-		if (!this.multipleQuantities && !this.allowedOptions) {
-			tempQuantity++;
+		if (!this.multipleQuantities && !this.allowedQuantities) {
+			--tempQuantity;
 		}
 
 		if (tempQuantity > this.maxQuantity) {
 			return (this.inputError = 'MaxAvailableReached');
 		}
 
-		return this.updateQuantity(tempQuantity);
+		return this._updateQuantity(tempQuantity);
 	}
 
-	handlePrevQuantity(evt) {
-		evt.preventDefault();
-
-		if (!this.isPrevAvailable) {
+	_handleNextQuantity(e) {
+		e.preventDefault();
+		if (!this._nextAvailable) {
 			return (this.showError = true);
 		}
 
@@ -80,54 +84,41 @@ class QuantitySelector extends Component {
 		if (this.multipleQuantities) {
 			tempQuantity -= this.multipleQuantities;
 		}
-
-		if (this.allowedOptions && this.allowedOptions.length) {
-			const index = this.allowedOptions.indexOf(tempQuantity);
-
-			if (!index) {
-				return (this.inputError = 'NoQuantitiesLessThanAvailable');
+		if (this.allowedQuantities && this.allowedQuantities.length) {
+			const index = this.allowedQuantities.indexOf(tempQuantity);
+			if (index + 1 >= this.allowedQuantities.length) {
+				return (this.inputError = 'NoQuantitiesHigherThanAvailable');
 			}
-
-			tempQuantity = this.allowedOptions[index - 1];
+			tempQuantity = this.allowedQuantities[index + 1];
 		}
 
-		if (!this.multipleQuantities && !this.allowedOptions) {
-			tempQuantity--;
+		if (!this.multipleQuantities && !this.allowedQuantities) {
+			++tempQuantity;
 		}
 
 		if (tempQuantity < this.minQuantity) {
 			return (this.inputError = 'MinAvailableReached');
 		}
 
-		return this.updateQuantity(tempQuantity);
+		return this._updateQuantity(tempQuantity);
 	}
 
-	prepareStateForRender(states) {
-		this.isPrevAvailable = this.checkWhetherIsPrevButtonAvailable(
-			states.quantity
-		);
-
-		this.isNextAvailable = this.checkWhetherIsNextButtonAvailable(
-			states.quantity
-		);
-	}
-	
-	handleInputKeyUp(evt) {
+	_handleInputKeyUp(evt) {
 		if (!evt.target.value) {
 			return null;
 		}
 
-		const quantity = parseInt(evt.target.value);
-		return this.submitQuantity(quantity);
+		const quantity = parseInt(evt.target.value, 10);
+		return this._submitQuantity(quantity);
 	}
 
-	handleFormSubmit(evt) {
+	_handleFormSubmit(evt) {
 		evt.preventDefault();
 		this.showError = true;
 		return this.emit('submitQuantity', this.quantity);
 	}
 
-	submitQuantity(quantity) {
+	_submitQuantity(quantity) {
 		if (this.multipleQuantities) {
 			if (quantity % this.multipleQuantities) {
 				return (this.inputError = 'NotMultipleThan');
@@ -142,10 +133,10 @@ class QuantitySelector extends Component {
 			return (this.inputError = 'MaxAvailableReached');
 		}
 
-		this.updateQuantity(quantity);
+		return this._updateQuantity(quantity);
 	}
 
-	updateQuantity(quantity) {
+	_updateQuantity(quantity) {
 		this.showError = false;
 		return this.emit('updateQuantity', quantity);
 	}
@@ -153,15 +144,15 @@ class QuantitySelector extends Component {
 }
 
 QuantitySelector.STATE = {
-	allowedOptions: Config.array(Config.number()),
+	allowedQuantities: Config.array(Config.number()),
 	inputError: Config.string(),
-	isNextAvailable: Config.bool().value(true),
-	isPrevAvailable: Config.bool().value(true),
 	maxQuantity: Config.number().value(99999999),
 	minQuantity: Config.number().value(1),
 	multipleQuantities: Config.number(),
 	quantity: Config.number(),
-	showError: Config.bool().value(false)
+	showError: Config.bool().value(false),
+	_nextAvailable: Config.bool().value(true),
+	_prevAvailable: Config.bool().value(true)
 };
 
 Soy.register(QuantitySelector, template);
