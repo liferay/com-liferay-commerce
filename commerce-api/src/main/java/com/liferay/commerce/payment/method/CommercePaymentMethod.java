@@ -18,6 +18,7 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.payment.request.CommercePaymentRequest;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
+import com.liferay.commerce.payment.result.CommerceSubscriptionStatusResult;
 
 import java.util.Locale;
 
@@ -78,6 +79,14 @@ public interface CommercePaymentMethod {
 
 	public String getServletPath();
 
+	public default CommerceSubscriptionStatusResult
+			getSubscriptionPaymentDetails(
+				CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		throw new UnsupportedOperationException();
+	}
+
 	public default boolean isAuthorizeEnabled() {
 		return true;
 	}
@@ -133,6 +142,10 @@ public interface CommercePaymentMethod {
 		throw new UnsupportedOperationException();
 	}
 
+	public default int payedOrderInterval() {
+		return 0;
+	}
+
 	public default CommercePaymentResult postProcessPayment() throws Exception {
 		throw new UnsupportedOperationException();
 	}
@@ -152,6 +165,13 @@ public interface CommercePaymentMethod {
 	}
 
 	public default CommercePaymentResult refundPayment(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public default boolean suspendSubscription(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 

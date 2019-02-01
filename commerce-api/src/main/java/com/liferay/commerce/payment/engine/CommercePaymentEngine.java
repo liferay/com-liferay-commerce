@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
+import com.liferay.commerce.payment.result.CommerceSubscriptionStatusResult;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
@@ -70,7 +71,13 @@ public interface CommercePaymentEngine {
 
 	public String getPaymentMethodName(String paymentMethodKey, Locale locale);
 
+	public CommerceSubscriptionStatusResult getSubscriptionPaymentDetails(
+			long commerceOrderId)
+		throws Exception;
+
 	public CommercePaymentResult partiallyRefundPayment(long commerceOrderId);
+
+	public int payedOrderInterval(long commerceOrderId) throws PortalException;
 
 	public CommercePaymentResult postProcessPayment(long commerceOrderId)
 		throws Exception;
@@ -94,6 +101,8 @@ public interface CommercePaymentEngine {
 			long commerceOrderId, String checkoutStepUrl,
 			HttpServletRequest httpServletRequest)
 		throws Exception;
+
+	public boolean suspendSubscription(long commerceOrderId) throws Exception;
 
 	public CommercePaymentResult voidTransaction(
 			long commerceOrderId, String transactionId,
