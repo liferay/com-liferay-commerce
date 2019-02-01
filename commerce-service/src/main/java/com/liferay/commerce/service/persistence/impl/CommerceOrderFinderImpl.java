@@ -27,7 +27,9 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.Iterator;
@@ -91,15 +93,29 @@ public class CommerceOrderFinderImpl
 					sql, "[$ORDER_STATUS$]", StringPool.BLANK);
 			}
 
+			String[] names = new String[0];
+
 			String keywords = (String)queryDefinition.getAttribute("keywords");
 
-			String[] names = _customSQL.keywords(keywords, true);
+			if (Validator.isNotNull(keywords)) {
+				keywords = StringUtil.quote(
+					StringUtil.lowerCase(keywords), StringPool.PERCENT);
 
-			sql = _customSQL.replaceKeywords(
-				sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
-				names);
+				names = ArrayUtil.append(names, keywords);
 
-			sql = _customSQL.replaceAndOperator(sql, true);
+				sql = _customSQL.replaceKeywords(
+					sql, "lower(CommerceAccount.name)", StringPool.LIKE, false,
+					names);
+
+				sql = _customSQL.replaceAndOperator(sql, true);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql,
+					"AND (LOWER(CommerceAccount.name) LIKE ? " +
+						"[$AND_OR_NULL_CHECK$])",
+					StringPool.BLANK);
+			}
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -109,7 +125,9 @@ public class CommerceOrderFinderImpl
 
 			qPos.add(groupId);
 
-			qPos.add(names, 2);
+			if (Validator.isNotNull(keywords)) {
+				qPos.add(names, 2);
+			}
 
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
@@ -208,15 +226,29 @@ public class CommerceOrderFinderImpl
 					sql, "[$ORDER_STATUS$]", StringPool.BLANK);
 			}
 
+			String[] names = new String[0];
+
 			String keywords = (String)queryDefinition.getAttribute("keywords");
 
-			String[] names = _customSQL.keywords(keywords, true);
+			if (Validator.isNotNull(keywords)) {
+				keywords = StringUtil.quote(
+					StringUtil.lowerCase(keywords), StringPool.PERCENT);
 
-			sql = _customSQL.replaceKeywords(
-				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
-				names);
+				names = ArrayUtil.append(names, keywords);
 
-			sql = _customSQL.replaceAndOperator(sql, true);
+				sql = _customSQL.replaceKeywords(
+					sql, "lower(CommerceAccount.name)", StringPool.LIKE, true,
+					names);
+
+				sql = _customSQL.replaceAndOperator(sql, true);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql,
+					"AND (LOWER(CommerceAccount.name) LIKE ? " +
+						"[$AND_OR_NULL_CHECK$])",
+					StringPool.BLANK);
+			}
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -228,7 +260,9 @@ public class CommerceOrderFinderImpl
 
 			qPos.add(groupId);
 
-			qPos.add(names, 2);
+			if (Validator.isNotNull(keywords)) {
+				qPos.add(names, 2);
+			}
 
 			return (List<CommerceOrder>)QueryUtil.list(
 				q, getDialect(), queryDefinition.getStart(),
