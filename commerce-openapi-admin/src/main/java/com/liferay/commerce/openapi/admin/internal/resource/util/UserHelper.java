@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.UserService;
 import com.liferay.portal.kernel.service.permission.UserPermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
@@ -166,7 +167,7 @@ public class UserHelper {
 			userDTO.getAdditionalName(), userDTO.getFamilyName(), 0, 0,
 			"male".equals(userDTO.getGender()), birthDate.getMonth(),
 			birthDate.getDay(), birthDate.getYear(), userDTO.getJobTitle(),
-			null, userDTO.getCommerceAccountIds(),
+			null, ArrayUtil.toArray(userDTO.getCommerceAccountIds()),
 			_getRoleIds(companyId, userDTO.getRoleNames()), null, null, true,
 			new ServiceContext());
 
