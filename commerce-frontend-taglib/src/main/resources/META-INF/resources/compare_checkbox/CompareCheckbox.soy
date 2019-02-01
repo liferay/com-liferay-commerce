@@ -2,10 +2,10 @@
 
 {template .render}
 	{@param productId: number|string }
-	{@param? isCheckboxVisible: bool }
-	{@param? isCompareAvailable: bool }
-	{@param? isInCompare: bool }
-	{@param? isLabelVisible: bool }
+	{@param? checkboxVisible: bool }
+	{@param? compareAvailable: bool }
+	{@param? inCompare: bool }
+	{@param? labelVisible: bool }
 	{@param? _handleCompareCheckbox: any }
 
 	{let $checkboxId kind="text"}
@@ -16,22 +16,22 @@
 		id="{$checkboxId}"
 		class="product-compare-checkbox__input"
 		type="checkbox"
-		{if isNonnull($isInCompare) and $isInCompare == true}
+		{if isNonnull($inCompare) and $inCompare == true}
 			{sp}checked
 		{else}
-			{if isNonnull($isCompareAvailable) and $isCompareAvailable == false}
+			{if isNonnull($compareAvailable) and $compareAvailable == false}
 				{sp}disabled
 			{/if}
 		{/if}
 	{/let}
 
 	<div class="product-compare-checkbox">
-		{if isNonnull($isCheckboxVisible) and $isCheckboxVisible == true }
+		{if isNonnull($checkboxVisible) and $checkboxVisible == true }
 			<input
 				{$compareAttributes}
 				data-onchange="{$_handleCompareCheckbox}"
 			/>
-			{if isNonnull($isLabelVisible) and $isLabelVisible == true}
+			{if isNonnull($labelVisible) and $labelVisible == true}
 				<label
 					class="product-compare-checkbox__label"
 					for="{$checkboxId}"
