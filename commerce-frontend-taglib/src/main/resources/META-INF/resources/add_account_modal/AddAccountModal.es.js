@@ -15,20 +15,12 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 
 class AddAccountModal extends Component {
 
-	attached() {
-		this._fetchUsers();
-	}
-
-	close() {
-		return this._isVisible = false;
-	}
-
 	created() {
 		this._debouncedFetchUser = debounce(this._fetchUsers.bind(this), 300);
 	}
 
-	open() {
-		return this._isVisible = true;
+	attached() {
+		this._fetchUsers();
 	}
 
 	syncAddedUsers() {
@@ -58,7 +50,6 @@ class AddAccountModal extends Component {
 					email: this.query
 				}
 			];
-
 			this.query = '';
 			result = true;
 		}
@@ -72,12 +63,14 @@ class AddAccountModal extends Component {
 		else {
 			this.query = evt.target.value;
 		}
+		return evt;
 	}
-	
+
 	_handleInputName(evt) {
 		this.accountName = evt.target.value;
 		return evt;
 	}
+
 	_toggleInvitation(userToBeToggled) {
 		if (!userToBeToggled.id) {
 			this.query = '';

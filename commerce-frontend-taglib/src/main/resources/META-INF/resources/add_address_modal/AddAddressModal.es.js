@@ -14,14 +14,6 @@ class AddAddressModal extends Component {
 		return this._fetchCountries();
 	}
 
-	close() {
-		return this._isVisible = false;
-	}
-
-	open() {
-		return this._isVisible = true;
-	}
-
 	sync_addressType() {
 		return this._fetchCountries();
 	}
@@ -30,74 +22,14 @@ class AddAddressModal extends Component {
 		return this._validateForms();
 	}
 
-	toggle() {
-		return this._isVisible = !this._isVisible;
-	}
-
-	_addAddress(e) {
-		return this.emit(
-			'addAddressModalSave',
-			Object.assign(
-				{}, this._formData,
-				{addressType: this._addressType})
-		);
-	}
-
-	_fetchCountries() {
-		return fetch(
-			(this._addressType === 'shipping' ? this.shippingCountriesAPI : this.billingCountriesAPI) +
-				themeDisplay.getScopeGroupId(),
-			{
-				method: 'GET'
-			}
-		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				countries => {
-					return this._countries = countries;
-				}
-			);
-	}
-
-	_fetchRegions() {
-		return fetch(
-			this.regionsAPI + this._formData.country,
-			{
-				method: 'GET'
-			}
-		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				regions => {
-					return this._regions = regions;
-				}
-			);
-	}
-
-	_handleCloseModal(e) {
-		e.preventDefault();
-
-		this._isVisible = false;
-	}
-
 	_handleFirstDotClick(e) {
 		e.preventDefault();
 		this._stage = 1;
 		return this._stage;
 	}
 
-	_handleFormSubmit(e) {
-		e.preventDefault();
-
-		const isFormValid = e.target.checkValidity();
-
-		if (isFormValid) {
-			this._addAddress(e);
-		}
+	_handleSecondDotClick(e) {
+		return this._handleNextButton(e);
 	}
 
 	_handleTypeChange(evt) {
@@ -130,7 +62,6 @@ class AddAddressModal extends Component {
 					country: value
 				}
 			);
-
 			this._fetchRegions();
 		}
 		else {
@@ -142,12 +73,18 @@ class AddAddressModal extends Component {
 				}
 			);
 		}
-
 		return value;
 	}
 
-	_handleTypeChange(evt) {
-		return this._addressType = evt.target.value;
+	_handleInputBox(evt) {
+		this._formData = Object.assign(
+			{},
+			this._formData,
+			{
+				[evt.target.name]: evt.target.value
+			}
+		);
+		return evt.target.value;
 	}
 
 	_validateForms() {

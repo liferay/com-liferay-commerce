@@ -4,7 +4,6 @@ import template from './AccountSelector.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-import 'clay-icon';
 import './OrdersTable.es';
 import './AccountsTable.es';
 
@@ -70,10 +69,8 @@ class AccountSelector extends Component {
 				this.currentView = 'orders';
 				return this.currentView;
 			}
-
 			this.orders = null;
 		}
-
 		this.currentAccount = selectedAccount;
 
 		let formData = new FormData();
@@ -104,8 +101,9 @@ class AccountSelector extends Component {
 
 	_handleOrderSelected(selectedOrder) {
 		this.currentOrder = selectedOrder;
+		return this.toggleAccountSelector();
 	}
-	
+
 	_handleGetOrders(query = '') {
 		return this._fetchOrders(query);
 	}
@@ -144,9 +142,7 @@ class AccountSelector extends Component {
 					return this.orders;
 				}
 			);
-		}
 	}
-
 }
 
 Soy.register(AccountSelector, template);
