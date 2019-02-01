@@ -67,33 +67,37 @@ public class CommerceAccountUserRelLocalServiceImpl
 		Group group = commerceAccountLocalService.getCommerceAccountGroup(
 			commerceAccountId);
 
-		for (long userId : userIds) {
-			User user = userLocalService.getUser(userId);
+		if (userIds != null) {
+			for (long userId : userIds) {
+				User user = userLocalService.getUser(userId);
 
-			commerceAccountUserRelLocalService.addCommerceAccountUserRel(
-				commerceAccountId, user.getUserId(), serviceContext);
+				commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+					commerceAccountId, user.getUserId(), serviceContext);
 
-			if (roleIds != null) {
-				userGroupRoleLocalService.addUserGroupRoles(
-					user.getUserId(), group.getGroupId(), roleIds);
+				if (roleIds != null) {
+					userGroupRoleLocalService.addUserGroupRoles(
+						user.getUserId(), group.getGroupId(), roleIds);
+				}
 			}
 		}
 
-		for (String emailAddress : emailAddresses) {
-			User user = userLocalService.addUserWithWorkflow(
-				serviceContext.getUserId(), serviceContext.getCompanyId(), true,
-				StringPool.BLANK, StringPool.BLANK, true, StringPool.BLANK,
-				emailAddress, 0, StringPool.BLANK, serviceContext.getLocale(),
-				emailAddress, StringPool.BLANK, emailAddress, 0, 0, true, 1, 1,
-				1970, StringPool.BLANK, null, null, null, null, true,
-				serviceContext);
+		if (emailAddresses != null) {
+			for (String emailAddress : emailAddresses) {
+				User user = userLocalService.addUserWithWorkflow(
+					serviceContext.getUserId(), serviceContext.getCompanyId(),
+					true, StringPool.BLANK, StringPool.BLANK, true,
+					StringPool.BLANK, emailAddress, 0, StringPool.BLANK,
+					serviceContext.getLocale(), emailAddress, StringPool.BLANK,
+					emailAddress, 0, 0, true, 1, 1, 1970, StringPool.BLANK,
+					null, null, null, null, true, serviceContext);
 
-			commerceAccountUserRelLocalService.addCommerceAccountUserRel(
-				commerceAccountId, user.getUserId(), serviceContext);
+				commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+					commerceAccountId, user.getUserId(), serviceContext);
 
-			if (roleIds != null) {
-				userGroupRoleLocalService.addUserGroupRoles(
-					user.getUserId(), group.getGroupId(), roleIds);
+				if (roleIds != null) {
+					userGroupRoleLocalService.addUserGroupRoles(
+						user.getUserId(), group.getGroupId(), roleIds);
+				}
 			}
 		}
 	}
