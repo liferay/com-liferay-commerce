@@ -38,7 +38,10 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  * @author Ivica Cardic
  */
 @Component(
-	property = JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true",
+	property = {
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=*.Rest)",
+		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
+	},
 	service = MessageBodyWriter.class
 )
 @Produces(MediaType.APPLICATION_JSON)
