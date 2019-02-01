@@ -40,11 +40,11 @@
 				<span class="user-item__secondary-text">
 					{switch $_status}
 						{case 'user-not-found'}
-							User not found. You could invite a new user typing his email address.
+							{msg desc="User not found. You could invite a new user typing his email address."}user-not-found-you-could-invite-a-new-user{/msg}
 						{case 'email-not-valid'}
-							Please add a valid email address.
+							{msg desc="Please add a valid email address"}please-add-a-valid-email-address{/msg}
 						{case 'valid'}
-							Click to add to your Organization
+							{msg desc="Click to add to your Organization"}click-to-add-to-your-organization{/msg}
 						{default}
 					{/switch}
 				</span>

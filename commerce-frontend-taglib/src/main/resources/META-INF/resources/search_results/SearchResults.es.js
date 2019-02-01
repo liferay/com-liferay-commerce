@@ -1,5 +1,5 @@
 import Component from 'metal-component';
-import Soy from 'metal-soy';
+import Soy, {Config} from 'metal-soy';
 import debounce from 'metal-debounce';
 import template from './SearchResults.soy';
 
@@ -154,28 +154,19 @@ class SearchResults extends Component {
 Soy.register(SearchResults, template);
 
 SearchResults.STATE = {
-	loading: {
-		value: false
-	},
-	queryString: {
-		value: ''
-	},
-	queryValue: {
-		value: ''
-	},
+	loading: Config.bool().value(false),
+	queryString: Config.string().value(''),
+	queryValue: Config.string().value(''),
 	results: {
 		value: []
 	},
-	searchAPI: {
-		value: ''
-	},
+	searchAPI: Config.string().required(),
 	selectedIndex: {
 		setter: 'setSelected',
 		value: -1
 	},
-	visible: {
-		value: false
-	}
+	visible: Config.bool().value(false),
+	spritemap: Config.string().required()
 };
 
 export {SearchResults};

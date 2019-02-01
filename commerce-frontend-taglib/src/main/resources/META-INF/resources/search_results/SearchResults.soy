@@ -4,6 +4,7 @@
 	{@param? queryValue: string }
 	{@param? results: ? }
 	{@param visible: bool }
+	{@param spritemap: string }
 	{@param? loading: bool }
 
 	{@param? _handleClick: ? }
@@ -23,15 +24,27 @@
 			</div>
 
 			<div class="minium-suggestions__hints">
-				<svg class="minium-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-					<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5" />
-				</svg> to navigate
-				<svg class="minium-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-					<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5" />
-				</svg> to select
-				<svg class="minium-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-					<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5" />
-				</svg> to dismiss
+				{call ClayIcon.render}
+					{param spritemap: $spritemap /}
+					{param symbol: 'to-navigate' /}
+				{/call}
+				<span>
+					{msg desc="to navigate"}to-navigate{/msg}
+				</span>
+				{call ClayIcon.render}
+					{param spritemap: $spritemap /}
+					{param symbol: 'to-select' /}
+				{/call}
+				<span>
+					{msg desc="to select"}to-select{/msg}
+				</span>
+				{call ClayIcon.render}
+					{param spritemap: $spritemap /}
+					{param symbol: 'to-dismiss' /}
+				{/call}
+				<span>
+					{msg desc="to dismiss"}to-dismiss{/msg}
+				</span>
 			</div>
 		</div>
 	{/if}
