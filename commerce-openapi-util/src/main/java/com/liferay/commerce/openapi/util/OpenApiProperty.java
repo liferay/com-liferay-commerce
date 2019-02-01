@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.openapi.util;
 
+import com.liferay.commerce.openapi.util.util.ArrayProvider;
+import com.liferay.commerce.openapi.util.util.Provider;
+
 /**
  * @author Igor Beslic
  */
@@ -31,15 +34,17 @@ public class OpenApiProperty {
 		return _openApiFormat.getGetterSyntax();
 	}
 
-	public String getJavaType() {
+	public Provider getJavaTypeProvider() {
 		if (_openApiType == OpenApiType.ARRAY) {
-			return _itemFormat.getJavaType() + "[]";
+			return new ArrayProvider(_itemFormat.getProvider());
 		}
 		else if (_openApiType == OpenApiType.DICTIONARY) {
-			return "Map<String, String>";
+			OpenApiFormat dictionaryOpenApiFormat = OpenApiFormat.DICTIONARY;
+
+			return dictionaryOpenApiFormat.getProvider();
 		}
 
-		return _openApiFormat.getJavaType();
+		return _openApiFormat.getProvider();
 	}
 
 	public String getName() {

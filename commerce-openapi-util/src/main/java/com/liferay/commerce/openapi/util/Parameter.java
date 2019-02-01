@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.util;
 
+import com.liferay.commerce.openapi.util.util.Provider;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,8 +42,8 @@ public class Parameter {
 		return _content.getMimeType();
 	}
 
-	public String getJavaType() {
-		return _openApiFormat.getJavaType();
+	public Provider getJavaTypeProvider() {
+		return _openApiFormat.getProvider();
 	}
 
 	public String getLocation() {
