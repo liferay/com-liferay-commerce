@@ -6,6 +6,7 @@ Export-Package:\
 	com.fasterxml.jackson.databind,\
 	com.fasterxml.jackson.dataformat.xml,\
 	com.fasterxml.jackson.dataformat.xml.annotation,\
+	\
 	com.liferay.commerce.openapi.core.context,\
 	com.liferay.commerce.openapi.core.exception,\
 	com.liferay.commerce.openapi.core.model
@@ -14,4 +15,5 @@ Import-Package:\
 	!com.fasterxml.jackson.core.*,\
 	!com.fasterxml.jackson.databind.*,\
 	!com.fasterxml.jackson.module.jaxb.*,\
+	\
 	*
