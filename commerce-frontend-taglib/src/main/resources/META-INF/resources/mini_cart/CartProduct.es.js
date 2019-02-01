@@ -1,4 +1,5 @@
 'use strict';
+
 import template from './CartProduct.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
@@ -25,6 +26,9 @@ class CartProduct extends Component {
 Soy.register(CartProduct, template);
 
 CartProduct.STATE = {
+	collapsed: Config.bool().value(false),
+	deleteDisabled: Config.bool().value(false),
+	deleting: Config.bool().value(false),
 	errorMessages: Config.array().value(
 		[]
 	),
@@ -35,14 +39,11 @@ CartProduct.STATE = {
 		]
 	),
 	inputChanged: Config.bool().value(false),
-	collapsed: Config.bool().value(false),
-	deleteDisabled: Config.bool().value(false),
-	deleting: Config.bool().value(false),
-	updating: Config.bool().value(false),
+	quantity: Config.number().value(0),
 	settings: Config.object().value(
 		{}
 	),
-	quantity: Config.number().value(0)
+	updating: Config.bool().value(false)
 };
 
 export {CartProduct};

@@ -12,13 +12,31 @@ class AddToCartButton extends Component {
 		}
 	}
 
-	handleBtnClick(e) {
+	rendered() {
+		if (this.element.querySelector('input')) {
+			this.element.querySelector('input').focus();
+		}
+		else if (this.element.querySelector('select')) {
+			this.element.querySelector('select').focus();
+		}
+	}
+
+	_updateQuantity(quantity) {
+		this.quantity = quantity;
+	}
+
+	_submitQuantity(quantity) {
+		this.quantity = quantity;
+		this._handleSubmitClick();
+	}
+
+	_handleBtnClick(e) {
 		if (!this.editMode && this.element === e.target && !this.disabled) {
 			this.editMode = true;
 		}
 	}
 
-	handleSubmitClick() {
+	_handleSubmitClick() {
 		const formData = new FormData();
 
 		formData.append('accountId', this.accountId);
@@ -55,7 +73,7 @@ class AddToCartButton extends Component {
 
 						if (validatorErrors) {
 							validatorErrors.forEach(
-								function(validatorError) {
+								validatorError => {
 									this._showNotification(validatorError.message, 'danger');
 								}
 							);
@@ -66,25 +84,6 @@ class AddToCartButton extends Component {
 					}
 				}
 			);
-	}
-
-	rendered() {
-		if (this.element.querySelector('input')) {
-			this.element.querySelector('input').focus();
-		}
-		else if (this.element.querySelector('select')) {
-			this.element.querySelector('select').focus();
-		}
-	}
-
-	submitQuantity(quantity) {
-		this.quantity = quantity;
-
-		this.handleSubmitClick();
-	}
-
-	updateQuantity(quantity) {
-		this.quantity = quantity;
 	}
 
 	_showNotification(message, type) {
@@ -137,7 +136,7 @@ AddToCartButton.STATE = {
 	quantity: Config.number().value(0),
 	settings: Config.shapeOf(
 		{
-			allowedOptions: Config.array(Config.number()),
+			allowedQuantities: Config.array(Config.number()),
 			maxQuantity: Config.number(),
 			minQuantity: Config.number(),
 			multipleQuantities: Config.number()
