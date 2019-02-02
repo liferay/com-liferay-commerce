@@ -38,7 +38,7 @@ class CompareCheckbox extends Component {
 				compareAvailable: this.compareAvailable,
 				inCompare: this.inCompare
 			}
-		)
+		);
 	}
 
 	_handleCompareCheckbox(evt) {
