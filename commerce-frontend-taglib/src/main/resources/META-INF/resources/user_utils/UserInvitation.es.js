@@ -128,7 +128,7 @@ class UserInvitation extends Component {
 				}
 			);
 	}
-};
+}
 
 Soy.register(UserInvitation, template);
 
