@@ -35,7 +35,6 @@ import com.liferay.commerce.subscription.test.util.CommerceSubscriptionEntryTest
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.util.comparator.CommerceSubscriptionEntryCreateDateComparator;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
@@ -254,7 +253,7 @@ public class CommerceSubscriptionEntryTest {
 
 	private int _getRenewedCommerceSubscriptionEntriesCount(
 			CommerceSubscriptionEntry commerceSubscriptionEntry)
-		throws PortalException {
+		throws Exception {
 
 		_commerceSubscriptionEntryHelper.renewSubscriptionEntry(
 			commerceSubscriptionEntry);
