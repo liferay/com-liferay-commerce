@@ -34,41 +34,18 @@ class AddAccountModal extends Component {
 	syncAddedUsers() {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
 		this.element.querySelector('.autocomplete-input__box').focus();
-		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-	}
-
-	syncQuery() {
-		this._isLoading = true;
-
-		return this._debouncedFetchUser();
-	}
-
-	toggle() {
-		return this._isVisible = !this._isVisible;
-	}
-
-	_fetchUsers() {
-		return fetch(
-			this.usersAPI + '?q=' + this.query,
-			{
-				method: 'GET'
-			}
-		)
-			.then(
-				response => response.json()
-			)
-			.then(
-				response => {
-					this._isLoading = false;
-					return this.users = response.users;
-				}
-			);
+		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
 	}
 
 	_handleCloseModal(e) {
 		e.preventDefault();
-		this._isVisible = false;
+		this._modalVisible = false;
 		return e;
+	}
+
+	syncQuery() {
+		this._loading = true;
+		return this._debouncedFetchUser();
 	}
 
 	_handleFormSubmit(evt) {
@@ -95,28 +72,25 @@ class AddAccountModal extends Component {
 		else {
 			this.query = evt.target.value;
 		}
-		return evt;
 	}
-
+	
 	_handleInputName(evt) {
 		this.accountName = evt.target.value;
 		return evt;
 	}
-
 	_toggleInvitation(userToBeToggled) {
 		if (!userToBeToggled.id) {
 			this.query = '';
 		}
 
-		const hasUserAlreadyBeenAdded = this.addedUsers.reduce(
+		const userAlreadyAdded = this.addedUsers.reduce(
 			(alreadyAdded, user) => alreadyAdded || user.email === userToBeToggled.email,
 			false
 		);
 
-		this.addedUsers =
-			hasUserAlreadyBeenAdded ?
-				this.addedUsers.filter((user) => user.email !== userToBeToggled.email) :
-				[...this.addedUsers, userToBeToggled];
+		this.addedUsers = userAlreadyAdded ?
+			this.addedUsers.filter((user) => user.email !== userToBeToggled.email) :
+			[...this.addedUsers, userToBeToggled];
 
 		return this.addedUsers;
 	}
@@ -133,7 +107,7 @@ class AddAccountModal extends Component {
 			)
 			.then(
 				response => {
-					this._isLoading = false;
+					this._loading = false;
 					this.users = response.users;
 					return this.users;
 				}
@@ -141,9 +115,9 @@ class AddAccountModal extends Component {
 	}
 
 	_handleCreateAccount() {
-		if (!this.addedUsers.length || !this.accountName ) {
+		if (!this.addedUsers.length || !this.accountName) {
 			return false;
-		};
+		}
 
 		const data = {
 			accountName: this.accountName,
@@ -157,21 +131,20 @@ class AddAccountModal extends Component {
 	}
 
 	toggle() {
-		this._isVisible = !this._isVisible;
-		return this._isVisible;
+		this._modalVisible = !this._modalVisible;
+		return this._modalVisible;
 	}
 
 	open() {
-		this._isVisible = true;
-		return this._isVisible;
+		this._modalVisible = true;
+		return this._modalVisible;
 	}
 
 	close() {
-		this._isVisible = false;
-		return this._isVisible;
+		this._modalVisible = false;
+		return this._modalVisible;
 	}
-
-};
+}
 
 Soy.register(AddAccountModal, template);
 
@@ -190,14 +163,14 @@ const USER_SCHEMA = Config.shapeOf(
 );
 
 AddAccountModal.STATE = {
-	_isLoading: Config.bool().internal().value(false),
-	_isVisible: Config.bool().internal().value(false),
 	accountName: Config.string().value(''),
 	addedUsers: Config.array(USER_SCHEMA).value([]),
-	usersAPI: Config.string().value(''),
-	users: Config.array(USER_SCHEMA).value([]),
 	query: Config.string().value(''),
-	spritemap: Config.string()
+	spritemap: Config.string(),
+	users: Config.array(USER_SCHEMA).value([]),
+	usersAPI: Config.string().value(''),
+	_loading: Config.bool().internal().value(false),
+	_modalVisible: Config.bool().internal().value(false)
 };
 
 export {AddAccountModal};

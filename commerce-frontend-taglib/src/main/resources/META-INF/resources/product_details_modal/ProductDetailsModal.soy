@@ -18,7 +18,7 @@
 		minQuantity: number
 	]}
 
-	{@param? _isVisible: bool}
+	{@param? _modalVisible: bool}
 
 	{@param? _handleCloseModal: any}
 
@@ -117,7 +117,7 @@
 
 	{call ClayModal.render}
 		{param body: $body /}
-		{param visible: $_isVisible /}
+		{param visible: $_modalVisible /}
 		{param ref: 'modal' /}
 	{/call}
 

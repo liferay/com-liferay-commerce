@@ -31,12 +31,11 @@ class OrganizationListItem extends Component {
 		);
 	}
 
-};
+}
 
 Soy.register(OrganizationListItem, template);
 
 OrganizationListItem.STATE = {
-	_selected: Config.bool().value(false),
 	colorId: Config.number(),
 	id: Config.oneOfType(
 		[
@@ -60,7 +59,8 @@ OrganizationListItem.STATE = {
 		)
 	).value(
 		[]
-	)
+	),
+	_selected: Config.bool().value(false)
 };
 
 export {OrganizationListItem};

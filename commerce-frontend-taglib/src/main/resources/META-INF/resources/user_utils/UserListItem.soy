@@ -1,12 +1,12 @@
 {namespace UserListItem}
 
 {template .render}
-	{@param? thumbnail: string }
-	{@param? name: string }
 	{@param email: string }
-	{@param? _status: string}
-	{@param? _invited: bool }
+	{@param? name: string }
 	{@param? query: string }
+	{@param? thumbnail: string }
+	{@param? _invited: bool }
+	{@param? _status: string}
 
 	{@param? _handleToggleInvitation: ?}
 
@@ -53,7 +53,7 @@
 		{if $_status == 'valid'}
 			<button class="user-item__action" data-onclick="{$_handleToggleInvitation}">
 				{call AddToTickItem.render}
-					{param isAdded: $_invited /}
+					{param added: $_invited /}
 				{/call}
 			</button>
 		{/if}

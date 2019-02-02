@@ -20,7 +20,7 @@
 	{@param? query: string }
 	{@param spritemap: string }
 
-	{@param? _isVisible: bool }
+	{@param? _modalVisible: bool }
 	{@param? _toggleItem: any }
 	{@param? _handleInputBox: any }
 	{@param? _handleFormSubmit: any }
@@ -38,7 +38,7 @@
 		<div class="commerce-modal">
 			<div class="commerce-modal__header">
 				<h3 class="commerce-modal__title">
-					Choose User Roles
+					{msg desc="Choose User Roles"}choose-user-roles{/msg}
 				</h3>
 
 				<button
@@ -55,7 +55,7 @@
 			<div class="commerce-modal__content">
 
 				<label class="commerce-modal__label" for="user-roles-input-text">
-					Available roles
+					{msg desc="Available roles"}available-roles{/msg}
 				</label>
 
 				<div class="user-invitation">
@@ -106,7 +106,7 @@
 						{else}
 							{if isNonnull($query) and $query != ''}
 								<div class="no-element-found">
-									No element found
+									{msg desc="No elements found"}no-elements-found{/msg}
 								</div>
 							{else}
 								{if isNonnull($roles) and length($roles) > 0 }
@@ -137,14 +137,14 @@
 					class="minium-button minium-button--big minium-button--outline"
 					data-onclick="{$_handleCloseModal}"
 				>
-					Cancel
+					{msg desc="Cancel"}cancel{/msg}
 				</button>
 
 				<button
 					class="{$inviteButtonClasses}"
 					data-onclick="{$_updateRoles}"
 				>
-					Done
+					{msg desc="Done"}done{/msg}
 				</button>
 			</div>
 		</div>
@@ -153,7 +153,7 @@
 	<div class="commerce-modal-wrapper">
 		{call ClayModal.render}
 			{param body: $body /}
-			{param visible: $_isVisible /}
+			{param visible: $_modalVisible /}
 			{param events: ['hide': $_handleCloseModal] /}
 		{/call}
 	</div>

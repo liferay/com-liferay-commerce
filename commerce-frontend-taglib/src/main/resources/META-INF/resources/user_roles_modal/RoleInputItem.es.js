@@ -16,8 +16,7 @@ class RoleInputItem extends Component {
 			}
 		);
 	}
-
-};
+}
 
 Soy.register(RoleInputItem, template);
 

@@ -21,10 +21,10 @@
 		id: number,
 		name: string
 	]> }
-	{@param? _isFirstFormValid: bool }
-	{@param? _isSecondFormValid: bool }
+	{@param? _firstFormValid: bool }
+	{@param? _secondFormValid: bool }
 	{@param? _addressType: string }
-	{@param? _isVisible: bool }
+	{@param? _modalVisible: bool }
 	{@param? _handleInputBox: any }
 	{@param? _handleSelectBox: any }
 	{@param? _handleCloseModal: any }
@@ -198,7 +198,7 @@
 						<div class="col-12">
 							{let $nextButtonClasses kind="text"}
 								minium-button minium-button--big minium-button--icon
-								{if (isNonnull($_isFirstFormValid) and $_isFirstFormValid == true) == false}
+								{if (isNonnull($_firstFormValid) and $_firstFormValid == true) == false}
 									{sp}minium-button--disabled
 								{/if}
 							{/let}
@@ -245,7 +245,7 @@
 						<div class="col-12">
 							{let $addButtonClasses kind="text"}
 								minium-button minium-button--big
-								{if (isNonnull($_isSecondFormValid) and $_isSecondFormValid == true) == false}
+								{if (isNonnull($_secondFormValid) and $_secondFormValid == true) == false}
 									{sp}minium-button--disabled
 								{/if}
 							{/let}
@@ -275,7 +275,7 @@
 				{if isNonnull($_stage) and $_stage == 2}
 					{sp}commerce-dot-navigation__dot--active
 				{/if}
-				{if (isNonnull($_isFirstFormValid) and $_isFirstFormValid == true) == false}
+				{if (isNonnull($_firstFormValid) and $_firstFormValid == true) == false}
 					{sp}commerce-dot-navigation__dot--disabled
 				{/if}
 			{/let}
@@ -299,7 +299,7 @@
 	<div class="commerce-modal-wrapper">
 		{call ClayModal.render}
 			{param body: $body /}
-			{param visible: $_isVisible /}
+			{param visible: $_modalVisible /}
 			{param events: ['hide': $_handleCloseModal] /}
 			{param ref: 'modal' /}
 		{/call}
