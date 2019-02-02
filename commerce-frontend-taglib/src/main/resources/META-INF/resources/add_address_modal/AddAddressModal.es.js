@@ -11,7 +11,7 @@ import '../input_utils/CommerceInputText';
 class AddAddressModal extends Component {
 
 	attached() {
-		this._fetchCountries();
+		return this._fetchCountries();
 	}
 
 	close() {
@@ -86,8 +86,8 @@ class AddAddressModal extends Component {
 
 	_handleFirstDotClick(e) {
 		e.preventDefault();
-
-		return this._stage = 1;
+		this._stage = 1;
+		return this._stage;
 	}
 
 	_handleFormSubmit(e) {
@@ -100,38 +100,29 @@ class AddAddressModal extends Component {
 		}
 	}
 
-	_handleInputBox(evt) {
-		this._formData = Object.assign(
-			{},
-			this._formData,
-			{
-				[evt.target.name]: evt.target.value
-			}
-		);
-
-		return evt.target.value;
+	_handleTypeChange(evt) {
+		this.addressType = evt.target.value;
+		return this.addressType;
 	}
 
 	_handleNextButton(e) {
 		e.preventDefault();
-
-		this._isFirstFormValid = this.refs.modal.refs.firstForm.checkValidity();
-
-		if (this._isFirstFormValid) {
-			return this._stage = 2;
+		this._firstFormValid = this.refs.modal.refs.firstForm.checkValidity();
+		if (this._firstFormValid) {
+			this._stage = 2;
 		}
-
-		return false;
+		return e;
 	}
 
-	_handleSecondDotClick(e) {
-		return this._handleNextButton(e);
+	_handleCloseModal(e) {
+		e.preventDefault();
+		this._modalVisible = false;
+		return e;
 	}
 
-	_handleSelectBox(evt) {
-		const value = evt.target.value;
-
-		if (evt.target.name === 'commerceCountry') {
+	_handleSelectBox(e) {
+		const value = e.target.value;
+		if (e.target.name === 'commerceCountry') {
 			this._formData = Object.assign(
 				{},
 				this._formData,
@@ -159,29 +150,101 @@ class AddAddressModal extends Component {
 		return this._addressType = evt.target.value;
 	}
 
-	_validateForms(form) {
-		const isFirstFormValid =
-			!!(
-				this._formData.address && this._formData.address.length &&
-				this._formData.city && this._formData.city.length &&
-				this._formData.zipCode && this._formData.zipCode.length &&
-				this._formData.country && this._formData.country.length &&
-				this._formData.region && this._formData.region.length
-			);
+	_validateForms() {
+		const firstFormValid = !!(
+			this._formData.address && this._formData.address.length &&
+			this._formData.city && this._formData.city.length &&
+			this._formData.zipCode && this._formData.zipCode.length &&
+			this._formData.country && this._formData.country.length &&
+			this._formData.region && this._formData.region.length
+		);
+		this._firstFormValid = firstFormValid;
 
-		this._isFirstFormValid = isFirstFormValid;
+		const secondFormValid = !!(
+			this._formData.referent && this._formData.referent.length &&
+			this._formData.telephone && this._formData.telephone.length
+		);
+		this._secondFormValid = secondFormValid;
 
-		const isSecondFormValid =
-			!!(
-				this._formData.referent && this._formData.referent.length
-			);
-
-		this._isSecondFormValid = isSecondFormValid;
-
-		return this._isFirstFormValid && this._isSecondFormValid;
+		return this._firstFormValid && this._secondFormValid;
 	}
 
-};
+	_fetchCountries() {
+		return fetch(
+			(this.addressType === 'shipping' ?
+				this.shippingCountriesAPI :
+				this.billingCountriesAPI
+			) + themeDisplay.getScopeGroupId(),
+			{
+				method: 'GET'
+			}
+		)
+			.then(
+				response => response.json()
+			)
+			.then(
+				countries => {
+					this._countries = countries;
+					return this._countries;
+				}
+			);
+	}
+
+	_fetchRegions() {
+		return fetch(
+			this.regionsAPI + this._formData.country,
+			{
+				method: 'GET'
+			}
+		)
+			.then(
+				response => response.json()
+			)
+			.then(
+				regions => {
+					this._regions = regions;
+					return this._regions;
+				}
+			);
+	}
+
+	_handleFormSubmit(e) {
+		e.preventDefault();
+		const formValid = e.target.checkValidity();
+		if (formValid) {
+			this._addAddress(e);
+		}
+		return e;
+	}
+
+	_addAddress(e) {
+		return this.emit(
+			'addAddressModalSave',
+			Object.assign(
+				{},
+				this._formData,
+				{
+					addressType: this.addressType
+				}
+			)
+		);
+	}
+
+	toggle() {
+		this._modalVisible = !this._modalVisible;
+		return this._modalVisible;
+	}
+
+	open() {
+		this._modalVisible = true;
+		return this._modalVisible;
+	}
+
+	close() {
+		this._modalVisible = false;
+		return this._modalVisible;
+	}
+}
 
 Soy.register(AddAddressModal, template);
 
@@ -195,7 +258,7 @@ AddAddressModal.STATE = {
 			'billing',
 			'shipping'
 		]
-	).internal().value('shipping'),
+	).internal(),
 	_countries: Config.array(
 		Config.shapeOf(
 			{
@@ -204,41 +267,39 @@ AddAddressModal.STATE = {
 			}
 		)
 	).value([]),
+	_firstFormValid: Config.bool().value(false),
 	_formData: Config.shapeOf(
 		{
 			address: Config.string(),
 			city: Config.string(),
-			zipCode: Config.string(),
 			country: Config.oneOfType(
 				[
 					Config.string(),
 					Config.number()
 				]
 			),
+			referent: Config.string(),
 			region: Config.oneOfType(
 				[
 					Config.string(),
 					Config.number()
 				]
 			),
-			referent: Config.string(),
-			telephone: Config.string()
+			telephone: Config.string(),
+			zipCode: Config.string()
 		}
 	).value(
 		{
 			address: null,
 			city: null,
-			region: null,
-			zipCode: null,
 			country: null,
 			referent: null,
-			telephone: null
+			region: null,
+			telephone: null,
+			zipCode: null
 		}
 	),
-	_isFirstFormValid: Config.bool().value(false),
-	_isLoading: Config.bool().internal().value(false),
-	_isSecondFormValid: Config.bool().value(false),
-	_isVisible: Config.bool().internal().value(false),
+	_modalVisible: Config.bool().internal().value(false),
 	_regions: Config.array(
 		Config.shapeOf(
 			{
@@ -247,6 +308,7 @@ AddAddressModal.STATE = {
 			}
 		)
 	).value([]),
+	_secondFormValid: Config.bool().value(false),
 	_stage: Config.number(
 		Config.oneOf(
 			[

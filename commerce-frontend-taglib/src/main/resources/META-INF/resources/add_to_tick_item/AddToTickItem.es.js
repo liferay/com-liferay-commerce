@@ -9,7 +9,7 @@ class AddToTickItem extends Component {}
 Soy.register(AddToTickItem, template);
 
 AddToTickItem.STATE = {
-	isAdded: Config.bool().value(false)
+	addded: Config.bool().value(false)
 };
 
 export {AddToTickItem};
