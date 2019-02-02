@@ -247,7 +247,7 @@ class Cart extends Component {
 							errorMessages: validatorErrors ?
 								validatorErrors.map(item => item.message) :
 								jsonresponse.error,
-							updating: false,
+							updating: false
 						}
 					);
 
