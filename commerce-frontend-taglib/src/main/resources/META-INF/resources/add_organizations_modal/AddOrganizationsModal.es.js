@@ -25,7 +25,7 @@ class AddOrganizationModal extends Component {
 	}
 
 	attached() {
-		this._fetchOrganizations();
+		return this._fetchOrganizations();
 	}
 
 	close() {
@@ -44,31 +44,56 @@ class AddOrganizationModal extends Component {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
 
 		this.element.querySelector('.autocomplete-input__box').focus();
+		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+	}
 
-		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-
-		return true;
+	_handleCloseModal(e) {
+		e.preventDefault();
+		this._modalVisible = false;
 	}
 
 	syncQuery() {
-		this._isLoading = true;
-
+		this._loading = true;
 		return this._debouncedFetchOrganizations();
 	}
 
-	toggle() {
-		return this._isVisible = !this._isVisible;
+	_handleFormSubmit(e) {
+		e.preventDefault();
+
+		if (this.organizations.length) {
+			this._toggleItem(this.organizations[0]);
+
+			this.query = '';
+		}
+
+		return e;
 	}
 
-	_addOrganizations() {
-		if (!this.selectedOrganizations.length) {
-			return false;
-		};
+	_handleInputBox(e) {
+		if (e.keyCode === 8 && !this.query.length) {
+			this.selectedOrganizations = this.selectedOrganizations.slice(0, -1);
 
-		return this.emit(
-			'addOrganization',
-			this.selectedOrganizations
+			return false;
+		}
+		this.query = e.target.value;
+		return this.query;
+	}
+
+	_toggleItem(organizationToBeToggled) {
+		if (!organizationToBeToggled.id) {
+			this.query = '';
+		}
+
+		const hasOrganizationAlreadyBeenAdded = this.selectedOrganizations.reduce(
+			(alreadyAdded, organization) => alreadyAdded || organization.id === organizationToBeToggled.id,
+			false
 		);
+
+		this.selectedOrganizations = hasOrganizationAlreadyBeenAdded ?
+			this.selectedOrganizations.filter((organization) => organization.id !== organizationToBeToggled.id) :
+			[...this.selectedOrganizations, organizationToBeToggled];
+
+		return this.selectedOrganizations;
 	}
 
 	_fetchOrganizations() {
@@ -83,62 +108,50 @@ class AddOrganizationModal extends Component {
 			)
 			.then(
 				response => {
-					this._isLoading = false;
-
-					return this.organizations = this.addColorToOrganizations(response.organizations);
+					this._loading = false;
+					this.organizations = this.addColorToOrganizations(response.organizations);
+					return this.organizations;
 				}
 			);
 	}
 
-	_handleCloseModal(e) {
-		e.preventDefault();
-
-		this._isVisible = false;
+	addColorToOrganizations(organizations) {
+		return organizations.map(
+			organization => Object.assign(
+				{
+					colorId: Math.floor(Math.random() * 6) + 1
+				},
+				organization,
+			)
+		);
 	}
 
-	_handleFormSubmit(evt) {
-		evt.preventDefault();
-
-		if (this.organizations.length) {
-			this._toggleItem(this.organizations[0]);
-
-			this.query = '';
-
-			return true;
-		}
-
-		return false;
-	}
-
-	_handleInputBox(evt) {
-		if (evt.keyCode === 8 && !this.query.length) {
-			this.selectedOrganizations = this.selectedOrganizations.slice(0, -1);
-
+	_addOrganizations() {
+		if (!this.selectedOrganizations.length) {
 			return false;
 		}
 
-		return this.query = evt.target.value;
-	}
-
-	_toggleItem(organizationToBeToggled) {
-		if (!organizationToBeToggled.id) {
-			this.query = '';
-		}
-
-		const hasOrganizationAlreadyBeenAdded = this.selectedOrganizations.reduce(
-			(alreadyAdded, organization) => alreadyAdded || organization.id === organizationToBeToggled.id,
-			false
+		return this.emit(
+			'addOrganization',
+			this.selectedOrganizations
 		);
-
-		this.selectedOrganizations =
-			hasOrganizationAlreadyBeenAdded ?
-				this.selectedOrganizations.filter((organization) => organization.id !== organizationToBeToggled.id) :
-				[...this.selectedOrganizations, organizationToBeToggled];
-
-		return this.selectedOrganizations;
 	}
 
-};
+	toggle() {
+		this._modalVisible = !this._modalVisible;
+		return this._modalVisible;
+	}
+
+	open() {
+		this._modalVisible = true;
+		return this._modalVisible;
+	}
+
+	close() {
+		this._modalVisible = false;
+		return this._modalVisible;
+	}
+}
 
 Soy.register(AddOrganizationModal, template);
 
@@ -156,13 +169,13 @@ const ORGANIZATION_SCHEMA = Config.shapeOf(
 );
 
 AddOrganizationModal.STATE = {
+	organizations: Config.array(ORGANIZATION_SCHEMA).value([]),
 	organizationsAPI: Config.string().value(''),
 	query: Config.string().value(''),
-	spritemap: Config.string(),
-	organizations: Config.array(ORGANIZATION_SCHEMA).value([]),
 	selectedOrganizations: Config.array(ORGANIZATION_SCHEMA).value([]),
-	_isVisible: Config.bool().internal().value(false),
-	_isLoading: Config.bool().internal().value(false)
+	spritemap: Config.string(),
+	_loading: Config.bool().internal().value(false),
+	_modalVisible: Config.bool().internal().value(false)
 };
 
 export {AddOrganizationModal};

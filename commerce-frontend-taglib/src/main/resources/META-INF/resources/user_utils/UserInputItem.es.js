@@ -16,8 +16,7 @@ class UserInputItem extends Component {
 			}
 		);
 	}
-
-};
+}
 
 Soy.register(UserInputItem, template);
 

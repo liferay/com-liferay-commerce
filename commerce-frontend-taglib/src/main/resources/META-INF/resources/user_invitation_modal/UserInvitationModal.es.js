@@ -33,17 +33,17 @@ class UserInvitationModal extends Component {
 
 	syncAddedUsers() {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
-
 		this.element.querySelector('.autocomplete-input__box').focus();
+		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+	}
 
-		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-
-		return true;
+	_handleCloseModal(e) {
+		e.preventDefault();
+		this._modalVisible = false;
 	}
 
 	syncQuery() {
-		this._isLoading = true;
-
+		this._loading = true;
 		return this._debouncedFetchUser();
 	}
 
@@ -69,25 +69,23 @@ class UserInvitationModal extends Component {
 			];
 
 			this.query = '';
-
-			return true;
 		}
-
-		return false;
+		return this.query;
 	}
 
 	_handleInputBox(evt) {
 		if (evt.keyCode === 8 && !this.query.length) {
 			this.addedUsers = this.addedUsers.slice(0, -1);
-
-			return false;
 		}
-
-		return this.query = evt.target.value;
+		else {
+			this.query = evt.target.value;
+		}
+		return evt;
 	}
 
 	_handleInputName(evt) {
-		return this.accountName = evt.target.value;
+		this.accountName = evt.target.value;
+		return evt;
 	}
 
 	_toggleInvitation(userToBeToggled) {
@@ -100,10 +98,9 @@ class UserInvitationModal extends Component {
 			false
 		);
 
-		this.addedUsers =
-			hasUserAlreadyBeenAdded ?
-				this.addedUsers.filter((user) => user.email !== userToBeToggled.email) :
-				[...this.addedUsers, userToBeToggled];
+		this.addedUsers = hasUserAlreadyBeenAdded ?
+			this.addedUsers.filter((user) => user.email !== userToBeToggled.email) :
+			[...this.addedUsers, userToBeToggled];
 
 		return this.addedUsers;
 	}
@@ -120,24 +117,38 @@ class UserInvitationModal extends Component {
 			)
 			.then(
 				response => {
-					this._isLoading = false;
-					return this.users = response.users;
+					this._loading = false;
+					this.users = response.users;
+					return this.users;
 				}
 			);
 	}
 
 	_sendInvitations() {
-		if (!this.addedUsers.length) {
-			return false;
-		};
-
-		return this.emit(
-			'inviteUserToAccount',
-			this.addedUsers
-		);
+		if (this.addedUsers.length) {
+			this.emit(
+				'inviteUserToAccount',
+				this.addedUsers
+			);
+		}
+		return this.addedUsers;
 	}
 
-};
+	toggle() {
+		this._modalVisible = !this._modalVisible;
+		return this._modalVisible;
+	}
+
+	open() {
+		this._modalVisible = true;
+		return this._modalVisible;
+	}
+
+	close() {
+		this._modalVisible = false;
+		return this._modalVisible;
+	}
+}
 
 Soy.register(UserInvitationModal, template);
 
@@ -156,13 +167,22 @@ const USER_SCHEMA = Config.shapeOf(
 );
 
 UserInvitationModal.STATE = {
+<<<<<<< HEAD
 	_isLoading: Config.bool().internal().value(false),
 	_isVisible: Config.bool().internal().value(false),
+=======
+>>>>>>> COMMERCE-686 source formatting on modals
 	addedUsers: Config.array(USER_SCHEMA).value([]),
 	query: Config.string().value(''),
 	spritemap: Config.string(),
 	users: Config.array(USER_SCHEMA).value([]),
+<<<<<<< HEAD
 	usersAPI: Config.string().value('')
+=======
+	usersAPI: Config.string().value(''),
+	_loading: Config.bool().internal().value(false),
+	_modalVisible: Config.bool().internal().value(false)
+>>>>>>> COMMERCE-686 source formatting on modals
 };
 
 export {UserInvitationModal};

@@ -1,7 +1,5 @@
 'use strict';
 
-import {debounce} from 'metal-debounce';
-
 import template from './UserRolesModal.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
@@ -29,48 +27,40 @@ class UserRolesModal extends Component {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
 
 		this.element.querySelector('.autocomplete-input__box').focus();
-
-		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-
-		return true;
+		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
 	}
 
-	toggle() {
-		return this._isVisible = !this._isVisible;
+	_handleCloseModal(e) {
+		e.preventDefault();
+		this._modalVisible = false;
 	}
 
-	_handleCloseModal(evt) {
-		evt.preventDefault();
-
-		this._isVisible = false;
+	syncQuery() {
+		return this._filterRoles();
 	}
 
 	_handleFormSubmit(evt) {
 		evt.preventDefault();
+		let result = false;
 
 		if (this.filteredRoles.length) {
 			this._toggleItem(this.filteredRoles[0]);
 
 			this.query = '';
-
-			return true;
+			result = true;
 		}
 
-		return false;
-	}
-
-	_handleCheckBox(evt) {
-		console.log(evt);
+		return result;
 	}
 
 	_handleInputBox(evt) {
 		if (evt.keyCode === 8 && !this.query.length) {
 			this.selectedRoles = this.selectedRoles.slice(0, -1);
-
-			return false;
 		}
-
-		return this.query = evt.target.value;
+		else {
+			this.query = evt.target.value;
+		}
+		return evt;
 	}
 
 	_toggleItem(item) {
@@ -83,32 +73,43 @@ class UserRolesModal extends Component {
 			false
 		);
 
-		this.selectedRoles =
-			hasRoleAlreadyBeenAdded ?
-				this.selectedRoles.filter((role) => role.id !== item.id) :
-				[...this.selectedRoles, item];
+		this.selectedRoles = hasRoleAlreadyBeenAdded ?
+			this.selectedRoles.filter((role) => role.id !== item.id) :
+			[...this.selectedRoles, item];
 
 		return this.selectedRoles;
 	}
 
 	_filterRoles() {
-		return this.filteredRoles = this.roles.filter(role => role.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
+		this.filteredRoles = this.roles.filter(role => role.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1);
+		return this.filteredRoles;
 	}
 
 	_updateRoles() {
-		if (!this.selectedRoles.length) {
-			return false;
-		};
-
-		console.log(this.selectedRoles);
-
-		return this.emit(
-			'updateRoles',
-			this.selectedRoles
-		);
+		if (this.selectedRoles.length) {
+			this.emit(
+				'updateRoles',
+				this.selectedRoles
+			);
+		}
+		return this.selectedRoles;
 	}
 
-};
+	toggle() {
+		this._modalVisible = !this._modalVisible;
+		return this._modalVisible;
+	}
+
+	open() {
+		this._modalVisible = true;
+		return this._modalVisible;
+	}
+
+	close() {
+		this._modalVisible = false;
+		return this._modalVisible;
+	}
+}
 
 Soy.register(UserRolesModal, template);
 
@@ -130,7 +131,7 @@ UserRolesModal.STATE = {
 	roles: Config.array(ROLE_SCHEMA).value([]),
 	selectedRoles: Config.array(ROLE_SCHEMA).value([]),
 	spritemap: Config.string(),
-	_isVisible: Config.bool().internal().value(false)
+	_modalVisible: Config.bool().internal().value(false)
 };
 
 export {UserRolesModal};

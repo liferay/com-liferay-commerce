@@ -9,10 +9,11 @@ import '../autocomplete_item/AutocompleteItem.es';
 class RoleListItem extends Component {
 
 	syncSelectedRoles() {
-		return this._selected = this.selectedRoles.reduce(
-			(hasItemBeenSelected, item) =>
-				hasItemBeenSelected || item.id === this.id, false
+		this._selected = this.selectedRoles.reduce(
+			(hasItemBeenSelected, item) => hasItemBeenSelected || item.id === this.id,
+			false
 		);
+		return this._selected;
 	}
 
 	_handleToggleItem(evt) {
@@ -27,7 +28,7 @@ class RoleListItem extends Component {
 		);
 	}
 
-};
+}
 
 Soy.register(RoleListItem, template);
 
