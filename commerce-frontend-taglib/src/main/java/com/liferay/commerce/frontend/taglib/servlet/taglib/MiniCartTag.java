@@ -92,7 +92,7 @@ public class MiniCartTag extends ComponentRendererTag {
 				"spritemap",
 				themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 
-			setTemplateNamespace("Cart.render");
+			setTemplateNamespace("MiniCart.render");
 		}
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
