@@ -24,10 +24,10 @@ import com.liferay.commerce.openapi.util.util.StringUtils;
  */
 public class ParameterGenerator {
 
-	public String toAnnotatedMethodContextParameter(String parameterType) {
+	public String toAnnotatedMethodContextParameter(Provider provider) {
 		return String.format(
-			"@Context %s %s", parameterType,
-			StringUtils.lowerCaseFirstChar(parameterType));
+			"@Context %s %s", provider.getModelName(),
+			StringUtils.lowerCaseFirstChar(provider.getVariableName()));
 	}
 
 	public String toAnnotatedMethodParameter(Parameter parameter) {
@@ -84,10 +84,10 @@ public class ParameterGenerator {
 			StringUtils.toCamelCase(parameter.getName()));
 	}
 
-	public String toMethodParameter(String parameterType) {
+	public String toMethodParameter(Provider provider) {
 		return String.format(
-			"%s %s", parameterType,
-			StringUtils.lowerCaseFirstChar(parameterType));
+			"%s %s", provider.getModelName(),
+			StringUtils.lowerCaseFirstChar(provider.getVariableName()));
 	}
 
 }

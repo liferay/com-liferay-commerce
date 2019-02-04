@@ -366,12 +366,10 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			if (annotateParameter) {
 				sb.append(
 					_parameterGenerator.toAnnotatedMethodContextParameter(
-						provider.getModelName()));
+						provider));
 			}
 			else {
-				sb.append(
-					_parameterGenerator.toMethodParameter(
-						provider.getModelName()));
+				sb.append(_parameterGenerator.toMethodParameter(provider));
 			}
 
 			if (iterator.hasNext()) {
@@ -478,10 +476,10 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 		if (annotateParameter) {
 			return _parameterGenerator.toAnnotatedMethodContextParameter(
-				provider.getModelName());
+				provider);
 		}
 
-		return _parameterGenerator.toMethodParameter(provider.getModelName());
+		return _parameterGenerator.toMethodParameter(provider);
 	}
 
 	private String _getPathAnnotation(String path) {
