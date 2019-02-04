@@ -21,8 +21,13 @@ package com.liferay.commerce.openapi.util.util;
 public class Provider {
 
 	public Provider(String modelName, String fqcn) {
+		this(modelName, fqcn, modelName);
+	}
+
+	public Provider(String modelName, String fqcn, String variableName) {
 		_modelName = modelName;
 		_fqcn = fqcn;
+		_variableName = variableName;
 	}
 
 	public String getModelFQCN() {
@@ -33,7 +38,12 @@ public class Provider {
 		return _modelName;
 	}
 
+	public String getVariableName() {
+		return _variableName;
+	}
+
 	private final String _fqcn;
 	private final String _modelName;
+	private final String _variableName;
 
 }
