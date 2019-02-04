@@ -17,7 +17,6 @@ package com.liferay.commerce.openapi.admin.resource;
 import com.liferay.commerce.openapi.admin.model.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import javax.annotation.Generated;
 
@@ -41,26 +40,22 @@ public interface AccountResource {
 
 	@DELETE
 	@Path("/{id}")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteAccount(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public AccountDTO getAccount(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<AccountDTO> getAccounts(@Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateAccount(
 			@PathParam("id") String id, AccountDTO accountDTO)
 		throws Exception;
@@ -69,7 +64,6 @@ public interface AccountResource {
 	@Path("/")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public AccountDTO upsertAccount(AccountDTO accountDTO) throws Exception;
 
 }

@@ -18,7 +18,6 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import java.util.Locale;
 
@@ -45,7 +44,6 @@ public interface ProductOptionResource {
 
 	@DELETE
 	@Path("/{id}")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProductOption(
 			@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
@@ -53,7 +51,6 @@ public interface ProductOptionResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductOptionDTO getProductOption(
 			@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
@@ -61,7 +58,6 @@ public interface ProductOptionResource {
 	@GET
 	@Path("/")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionDTO> getProductOptions(
 			@QueryParam("groupId") Long groupId, @Context Locale locale,
 			@Context Pagination pagination)
@@ -70,7 +66,6 @@ public interface ProductOptionResource {
 	@GET
 	@Path("/{id}/productOptionValue")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
 			@PathParam("id") String id, @Context Locale locale,
 			@Context Pagination pagination)
@@ -79,7 +74,6 @@ public interface ProductOptionResource {
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOption(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			ProductOptionDTO productOptionDTO, @Context Locale locale)
@@ -89,7 +83,6 @@ public interface ProductOptionResource {
 	@Path("/")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductOptionDTO upsertProductOption(
 			@QueryParam("groupId") Long groupId,
 			ProductOptionDTO productOptionDTO, @Context Locale locale)
@@ -99,7 +92,6 @@ public interface ProductOptionResource {
 	@Path("/{id}/productOptionValue")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductOptionValueDTO upsertProductOptionValue(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			ProductOptionValueDTO productOptionValueDTO, @Context Locale locale)
