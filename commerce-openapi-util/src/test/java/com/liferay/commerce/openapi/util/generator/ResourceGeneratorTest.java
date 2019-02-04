@@ -72,12 +72,27 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 			containsOnlyOne(imports, "import javax.ws.rs.core.Context;"));
 
 		imports = resourceGenerator.toJavaxImports(
-			_getMethods(true, "testModel", _getExtensions("locale", "company")),
+			_getMethods(
+				true, "testModel",
+				_getExtensions(
+					"company", "locale", "pagination", "permissionchecker")),
 			_getRandomComponentDefinitions(4, "TestModel"));
 
 		Assert.assertTrue(
 			"Exactly one import statement expected",
-			containsOnlyOne(imports, "import java.util.Locale;"));
+			containsOnlyOne(
+				imports, "com.liferay.portal.kernel.model.Company;"));
+		Assert.assertTrue(
+			"Exactly one import statement expected",
+			containsOnlyOne(
+				imports,
+				"com.liferay.commerce.openapi.core.context.Pagination;"));
+		Assert.assertTrue(
+			"Exactly one import statement expected",
+			containsOnlyOne(
+				imports,
+				"com.liferay.portal.kernel.security.permission." +
+					"PermissionChecker;"));
 		Assert.assertTrue(
 			"Exactly one import statement expected",
 			containsOnlyOne(imports, "import javax.ws.rs.core.Context;"));
@@ -103,7 +118,8 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 
 		Assert.assertTrue(
 			"Context parameters with proper syntax expected",
-			interfaceMethods.contains("Locale locale, Pagination pagination"));
+			interfaceMethods.contains(
+				"String languageId, Pagination pagination"));
 	}
 
 	@Test
@@ -126,7 +142,7 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 		Assert.assertTrue(
 			"Context parameters with proper syntax expected",
 			interfaceMethods.contains(
-				"Locale locale, @Context Pagination pagination"));
+				"@Context String languageId, @Context Pagination pagination"));
 	}
 
 	private List<Extension> _getExtensions(String... extensionOpenApiNames) {
