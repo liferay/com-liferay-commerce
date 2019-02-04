@@ -16,9 +16,11 @@ package com.liferay.commerce.openapi.admin.internal.util;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.model.AccountDTO;
+import com.liferay.commerce.openapi.admin.model.CountryDTO;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
@@ -76,6 +78,23 @@ public class DTOUtils {
 		}
 
 		return accountDTO;
+	}
+
+	public static CountryDTO modelToDTO(CommerceCountry commerceCountry) {
+		CountryDTO countryDTO = new CountryDTO();
+
+		countryDTO.setBillingAllowed(commerceCountry.isBillingAllowed());
+		countryDTO.setId(commerceCountry.getCommerceCountryId());
+		countryDTO.setName(
+			LanguageUtils.getLanguageIdMap(commerceCountry.getNameMap()));
+		countryDTO.setNumericISOCode(commerceCountry.getNumericISOCode());
+		countryDTO.setShippingAllowed(commerceCountry.getShippingAllowed());
+		countryDTO.setSubjectToVAT(commerceCountry.getSubjectToVAT());
+		countryDTO.setThreeLettersISOCode(
+			commerceCountry.getThreeLettersISOCode());
+		countryDTO.setTwoLettersISOCode(commerceCountry.getTwoLettersISOCode());
+
+		return countryDTO;
 	}
 
 	public static PriceEntryDTO modelToDTO(

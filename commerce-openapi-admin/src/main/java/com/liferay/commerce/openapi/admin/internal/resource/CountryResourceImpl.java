@@ -14,18 +14,31 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.openapi.admin.internal.resource.util.CountryHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
+import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.util.LanguageUtils;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.CountryDTO;
 import com.liferay.commerce.openapi.admin.resource.CountryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.commerce.service.CommerceCountryService;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.GetterUtil;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -44,6 +57,8 @@ public class CountryResourceImpl implements CountryResource {
 
 	@Override
 	public Response deleteCountry(String id) throws Exception {
+		_countryHelper.deleteCountry(id);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -54,28 +69,38 @@ public class CountryResourceImpl implements CountryResource {
 			Long groupId, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _countryHelper.getCountryDTOs(groupId, pagination);
 	}
 
 	@Override
 	public CountryDTO getCountry(String id) throws Exception {
-		return new CountryDTO();
+		return _countryHelper.getCountryDTO(id);
 	}
 
 	@Override
-	public Response updateCountry(String id, CountryDTO countryDTO)
+	public Response updateCountry(
+			Long groupId, String id, CountryDTO countryDTO, Locale locale)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_countryHelper.updateCountry(groupId, id, countryDTO, _user);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	public CountryDTO upsertCountry(Long groupId, CountryDTO countryDTO)
+	public CountryDTO upsertCountry(
+			Long groupId, CountryDTO countryDTO, Locale locale)
 		throws Exception {
 
-		return new CountryDTO();
+		return _countryHelper.upsertCountry(groupId, countryDTO, _user);
 	}
+
+	@Reference
+	private CountryHelper _countryHelper;
+
+	@Context
+	private User _user;
 
 }
