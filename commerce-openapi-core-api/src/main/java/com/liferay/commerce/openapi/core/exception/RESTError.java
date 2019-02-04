@@ -23,6 +23,9 @@ import javax.ws.rs.core.Response;
  */
 public enum RESTError {
 
+	COUNTRY_NAME_ERROR(
+		977, "Invalid country name for given language tag",
+		Response.Status.BAD_REQUEST),
 	DUPLICATE_ACCOUNT(981, "Duplicate account", Response.Status.CONFLICT),
 	DUPLICATE_PRICE_ENTRY(
 		988, "Duplicated price entry", Response.Status.CONFLICT),
@@ -66,7 +69,13 @@ public enum RESTError {
 		Response.Status.NOT_FOUND),
 	SEARCH_ERROR(
 		986, "Unable to fix the search index after 10 attempts",
-		Response.Status.INTERNAL_SERVER_ERROR);
+		Response.Status.INTERNAL_SERVER_ERROR),
+	THREE_LETTERS_COUNTRY_ISO_CODE_ERROR(
+		979, "Invalid ISO 3166-1 three letter country code",
+		Response.Status.BAD_REQUEST),
+	TWO_LETTERS_COUNTRY_ISO_CODE_ERROR(
+		978, "Invalid ISO 3166-1 two letter country code",
+		Response.Status.BAD_REQUEST);
 
 	public int getErrorCode() {
 		return _errorCode;
