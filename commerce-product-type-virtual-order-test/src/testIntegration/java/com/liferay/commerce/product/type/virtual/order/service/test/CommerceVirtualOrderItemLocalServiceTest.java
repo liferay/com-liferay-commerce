@@ -83,7 +83,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		).given(
 			"An order item"
 		).when(
-			"An order is payed"
+			"An order is paid"
 		).then(
 			"I should be able to see the created virtual order item"
 		);
@@ -148,7 +148,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		).given(
 			"A subscription order item"
 		).when(
-			"An order is payed"
+			"An order is paid"
 		).then(
 			"I should be able to see the created virtual order item"
 		);

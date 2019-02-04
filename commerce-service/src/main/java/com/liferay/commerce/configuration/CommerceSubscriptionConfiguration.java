@@ -35,10 +35,8 @@ public interface CommerceSubscriptionConfiguration {
 	@Meta.AD(deflt = "10", name = "check-renew-interval", required = false)
 	public int checkRenewInterval();
 
-	@Meta.AD(
-		deflt = "10", name = "check-payed-order-interval", required = false
-	)
-	public int checkPayedOrderInterval();
+	@Meta.AD(deflt = "10", name = "check-paid-order-interval", required = false)
+	public int checkPaidOrderInterval();
 
 	@Meta.AD(deflt = "false", name = "cancel-subscription", required = false)
 	public boolean cancelSubscription();
