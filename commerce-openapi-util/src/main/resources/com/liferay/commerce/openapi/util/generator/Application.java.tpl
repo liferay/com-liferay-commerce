@@ -31,7 +31,11 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		${PORTAL_SESSION_AUTH_VERIFIER},
 		${BASIC_AUTH_VERIFIER},
 		${OAUTH2_AUTH_VERIFIER},
-		${GUEST_ALLOWED}
+		${GUEST_ALLOWED},
+		"liferay.jaxrs.context.providers.enabled=true",
+		"liferay.jaxrs.exception.mappers.enabled=true",
+		"liferay.jaxrs.message.body.readers.enabled=true",
+		"liferay.jaxrs.message.body.writers.enabled=true"
 	},
 	service = Application.class
 )
