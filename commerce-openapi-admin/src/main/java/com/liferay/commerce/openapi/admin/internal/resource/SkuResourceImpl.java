@@ -21,6 +21,7 @@ import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.SkuResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 
 import java.util.Locale;
@@ -49,6 +50,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class SkuResourceImpl implements SkuResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteSku(String id) throws Exception {
 		_skuHelper.deleteSKU(id, _company);
 
@@ -58,6 +60,7 @@ public class SkuResourceImpl implements SkuResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<InventoryDTO> getInventorys(
 			String id, Pagination pagination)
 		throws Exception {
@@ -66,11 +69,13 @@ public class SkuResourceImpl implements SkuResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public SkuDTO getSku(String id) throws Exception {
 		return _skuHelper.getSku(id, _company);
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateSku(
 			String id, Long groupId, SkuDTO skuDTO, Locale locale)
 		throws Exception {
@@ -83,6 +88,7 @@ public class SkuResourceImpl implements SkuResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public InventoryDTO upsertInventory(
 			String id, Long groupId, InventoryDTO inventoryDTO)
 		throws Exception {

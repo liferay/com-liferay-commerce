@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ProductOptionValueHelper;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductOptionValueResource;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 
 import java.util.Locale;
@@ -46,6 +47,7 @@ public class ProductOptionValueResourceImpl
 	implements ProductOptionValueResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProductOptionValue(String id, Locale locale)
 		throws Exception {
 
@@ -57,6 +59,7 @@ public class ProductOptionValueResourceImpl
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductOptionValueDTO getProductOptionValue(String id, Locale locale)
 		throws Exception {
 
@@ -65,6 +68,7 @@ public class ProductOptionValueResourceImpl
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOptionValue(
 			String id, Long groupId,
 			ProductOptionValueDTO productOptionValueDTO, Locale locale)

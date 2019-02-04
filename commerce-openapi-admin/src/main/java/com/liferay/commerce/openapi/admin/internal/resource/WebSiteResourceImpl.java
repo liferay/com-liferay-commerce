@@ -20,6 +20,7 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.openapi.admin.resource.WebSiteResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
@@ -54,6 +55,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class WebSiteResourceImpl implements WebSiteResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public WebSiteDTO getWebSite(String id, Locale locale) {
 		Group group = _getGroupById(id);
 
@@ -61,6 +63,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<WebSiteDTO> getWebSites(
 		Locale locale, Pagination pagination) {
 
