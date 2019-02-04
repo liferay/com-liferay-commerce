@@ -64,6 +64,10 @@ public class CommerceAccountOrganizationRelLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		if (organizationIds == null) {
+			return;
+		}
+
 		for (long organizationId : organizationIds) {
 			commerceAccountOrganizationRelLocalService.
 				addCommerceAccountOrganizationRel(
