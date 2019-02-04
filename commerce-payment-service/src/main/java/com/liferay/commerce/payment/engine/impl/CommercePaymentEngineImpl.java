@@ -378,11 +378,11 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	@Override
-	public int payedOrderInterval(long commerceOrderId) throws PortalException {
+	public int getOrderStatusUpdateMaxIntervalMinutes(long commerceOrderId) throws PortalException {
 		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
 			commerceOrderId);
 
-		return commercePaymentMethod.payedOrderInterval();
+		return commercePaymentMethod.getOrderStatusUpdateMaxIntervalMinutes();
 	}
 
 	@Override

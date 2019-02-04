@@ -142,7 +142,7 @@ public interface CommercePaymentMethod {
 		throw new UnsupportedOperationException();
 	}
 
-	public default int payedOrderInterval() {
+	public default int getOrderStatusUpdateMaxIntervalMinutes() {
 		return 0;
 	}
 
