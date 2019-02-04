@@ -145,7 +145,9 @@ public class CommerceAccountUserClayTable
 			_clayTableSchemaBuilderFactory.clayTableSchemaBuilder();
 
 		clayTableSchemaBuilder.addField("name", "name");
+
 		clayTableSchemaBuilder.addField("roles", "roles");
+
 		clayTableSchemaBuilder.addField("email", "email");
 
 		return clayTableSchemaBuilder.build();

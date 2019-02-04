@@ -165,8 +165,8 @@ SearchResults.STATE = {
 		setter: 'setSelected',
 		value: -1
 	},
-	visible: Config.bool().value(false),
-	spritemap: Config.string().required()
+	spritemap: Config.string().required(),
+	visible: Config.bool().value(false)
 };
 
 export {SearchResults};
