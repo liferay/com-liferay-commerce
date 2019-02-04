@@ -54,12 +54,12 @@ class UserRolesModal extends Component {
 			this.query = '';
 		}
 
-		const hasRoleAlreadyBeenAdded = this.selectedRoles.reduce(
+		const roleAlreadyAdded = this.selectedRoles.reduce(
 			(alreadyAdded, role) => alreadyAdded || role.id === item.id,
 			false
 		);
 
-		this.selectedRoles = hasRoleAlreadyBeenAdded ?
+		this.selectedRoles = roleAlreadyAdded ?
 			this.selectedRoles.filter((role) => role.id !== item.id) :
 			[...this.selectedRoles, item];
 

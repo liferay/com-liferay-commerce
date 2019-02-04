@@ -62,12 +62,12 @@ class AddOrganizationModal extends Component {
 			this.query = '';
 		}
 
-		const hasOrganizationAlreadyBeenAdded = this.selectedOrganizations.reduce(
+		const organizationAlreadyAdded = this.selectedOrganizations.reduce(
 			(alreadyAdded, organization) => alreadyAdded || organization.id === organizationToBeToggled.id,
 			false
 		);
 
-		this.selectedOrganizations = hasOrganizationAlreadyBeenAdded ?
+		this.selectedOrganizations = organizationAlreadyAdded ?
 			this.selectedOrganizations.filter((organization) => organization.id !== organizationToBeToggled.id) :
 			[...this.selectedOrganizations, organizationToBeToggled];
 

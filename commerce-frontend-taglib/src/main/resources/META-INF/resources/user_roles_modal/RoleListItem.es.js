@@ -10,7 +10,7 @@ class RoleListItem extends Component {
 
 	syncSelectedRoles() {
 		this._selected = this.selectedRoles.reduce(
-			(hasItemBeenSelected, item) => hasItemBeenSelected || item.id === this.id,
+			(itemSelected, item) => itemSelected || item.id === this.id,
 			false
 		);
 		return this._selected;
