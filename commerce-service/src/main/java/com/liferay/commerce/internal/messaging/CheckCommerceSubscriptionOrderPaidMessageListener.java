@@ -57,9 +57,9 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	configurationPid = "com.liferay.commerce.configuration.CommerceSubscriptionConfiguration",
 	immediate = true,
-	service = CheckCommerceSubscriptionOrderPayedMessageListener.class
+	service = CheckCommerceSubscriptionOrderPaidMessageListener.class
 )
-public class CheckCommerceSubscriptionOrderPayedMessageListener
+public class CheckCommerceSubscriptionOrderPaidMessageListener
 	extends BaseMessageListener {
 
 	@Activate
@@ -74,7 +74,7 @@ public class CheckCommerceSubscriptionOrderPayedMessageListener
 
 		Trigger trigger = _triggerFactory.createTrigger(
 			className, className, null, null,
-			_commerceSubscriptionConfiguration.checkPayedOrderInterval(),
+			_commerceSubscriptionConfiguration.checkPaidOrderInterval(),
 			TimeUnit.MINUTE);
 
 		SchedulerEntry schedulerEntry = new SchedulerEntryImpl(
