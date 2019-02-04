@@ -90,7 +90,8 @@ public class Extension {
 							"User", "com.liferay.portal.kernel.model.User"));
 					put(
 						LOCALE_CONTEXT,
-						new Provider("Locale", "java.util.Locale"));
+						new Provider(
+							"String", "java.lang.String", "languageId"));
 					put(
 						THEMEDISPLAY_CONTEXT,
 						new Provider(
