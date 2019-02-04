@@ -75,6 +75,10 @@ public interface CommercePaymentMethod {
 
 	public String getName(Locale locale);
 
+	public default int getOrderStatusUpdateMaxIntervalMinutes() {
+		return 0;
+	}
+
 	public int getPaymentType();
 
 	public String getServletPath();
@@ -140,10 +144,6 @@ public interface CommercePaymentMethod {
 		throws Exception {
 
 		throw new UnsupportedOperationException();
-	}
-
-	public default int getOrderStatusUpdateMaxIntervalMinutes() {
-		return 0;
 	}
 
 	public default CommercePaymentResult postProcessPayment() throws Exception {

@@ -69,6 +69,9 @@ public interface CommercePaymentEngine {
 			long commerceOrderId)
 		throws PortalException;
 
+	public int getOrderStatusUpdateMaxIntervalMinutes(long commerceOrderId)
+		throws PortalException;
+
 	public String getPaymentMethodName(String paymentMethodKey, Locale locale);
 
 	public CommerceSubscriptionStatusResult getSubscriptionPaymentDetails(
@@ -76,8 +79,6 @@ public interface CommercePaymentEngine {
 		throws Exception;
 
 	public CommercePaymentResult partiallyRefundPayment(long commerceOrderId);
-
-	public int getOrderStatusUpdateMaxIntervalMinutes(long commerceOrderId) throws PortalException;
 
 	public CommercePaymentResult postProcessPayment(long commerceOrderId)
 		throws Exception;
