@@ -244,10 +244,6 @@ public interface CommerceShippingFixedOptionRelLocalService
 	public int getCommerceShippingFixedOptionRelsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceShippingFixedOptionRelsCount(
-		long commerceShippingFixedOptionId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShippingFixedOptionRel> getCommerceShippingMethodFixedOptionRels(
 		long commerceShippingMethodId, int start, int end);
 

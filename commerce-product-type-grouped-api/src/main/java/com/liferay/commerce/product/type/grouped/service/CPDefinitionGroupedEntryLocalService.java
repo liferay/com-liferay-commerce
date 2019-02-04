@@ -73,10 +73,6 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 		long[] entryCPDefinitionIds, ServiceContext serviceContext)
 		throws PortalException;
 
-	public void addCPDefinitionGroupedEntriesByEntryCProductIds(
-		long cpDefinitionId, long[] entryCProductIds,
-		ServiceContext serviceContext) throws PortalException;
-
 	/**
 	* Adds the cp definition grouped entry to the database. Also notifies the appropriate model listeners.
 	*
@@ -210,18 +206,6 @@ public interface CPDefinitionGroupedEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntry(
 		long CPDefinitionGroupedEntryId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntry(
-		long cpDefinitionId, long entryCProductId);
-
-	/**
-	* @deprecated As of Mueller (7.2.x)
-	*/
-	@Deprecated
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
-		long cpDefinitionId, long entryCPDefinitionId);
 
 	/**
 	* Returns the cp definition grouped entry matching the UUID and group.

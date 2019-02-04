@@ -354,13 +354,6 @@ public class CommerceDiscountLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
-	public static com.liferay.commerce.discount.model.CommerceDiscount incrementCommerceDiscountNumberOfUse(
-		long commerceDiscountId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .incrementCommerceDiscountNumberOfUse(commerceDiscountId);
-	}
-
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.discount.model.CommerceDiscount> searchCommerceDiscounts(
 		long companyId, long groupId, String keywords, int status, int start,
 		int end, com.liferay.portal.kernel.search.Sort sort)

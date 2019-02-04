@@ -116,28 +116,6 @@ public class CommerceWarehouseItemLocalServiceUtil {
 		getService().deleteCommerceWarehouseItems(commerceWarehouseId);
 	}
 
-	public static void deleteCommerceWarehouseItemsByCPI_CPIU(long cProductId,
-		String cpInstanceUuid) {
-		getService()
-			.deleteCommerceWarehouseItemsByCPI_CPIU(cProductId, cpInstanceUuid);
-	}
-
-	/**
-	* @deprecated As of Mueller (7.2.x)
-	*/
-	@Deprecated
-	public static void deleteCommerceWarehouseItemsByCPInstanceId(
-		long cpInstanceId) {
-		getService().deleteCommerceWarehouseItemsByCPInstanceId(cpInstanceId);
-	}
-
-	public static void deleteCommerceWarehouseItemsByCWI_CPIU(
-		long commerceWarehouseId, String cpInstanceUuid) {
-		getService()
-			.deleteCommerceWarehouseItemsByCWI_CPIU(commerceWarehouseId,
-			cpInstanceUuid);
-	}
-
 	/**
 	* @throws PortalException
 	*/

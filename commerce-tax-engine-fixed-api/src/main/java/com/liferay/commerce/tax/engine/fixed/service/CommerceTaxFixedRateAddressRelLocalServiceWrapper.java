@@ -280,11 +280,6 @@ public class CommerceTaxFixedRateAddressRelLocalServiceWrapper
 	}
 
 	@Override
-	public int getCommerceTaxFixedRateAddressRelsCount(long cpTaxCategoryId) {
-		return _commerceTaxFixedRateAddressRelLocalService.getCommerceTaxFixedRateAddressRelsCount(cpTaxCategoryId);
-	}
-
-	@Override
 	public java.util.List<com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel> getCommerceTaxMethodFixedRateAddressRels(
 		long commerceTaxMethodId, int start, int end) {
 		return _commerceTaxFixedRateAddressRelLocalService.getCommerceTaxMethodFixedRateAddressRels(commerceTaxMethodId,

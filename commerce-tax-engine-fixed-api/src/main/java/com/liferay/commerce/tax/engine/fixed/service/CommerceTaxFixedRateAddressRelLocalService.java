@@ -242,9 +242,6 @@ public interface CommerceTaxFixedRateAddressRelLocalService
 	public int getCommerceTaxFixedRateAddressRelsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceTaxFixedRateAddressRelsCount(long cpTaxCategoryId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceTaxFixedRateAddressRel> getCommerceTaxMethodFixedRateAddressRels(
 		long commerceTaxMethodId, int start, int end);
 

@@ -92,9 +92,6 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	@Transactional(enabled = false)
 	public CPOptionCategory createCPOptionCategory(long CPOptionCategoryId);
 
-	public void deleteCPOptionCategories(long groupId)
-		throws PortalException;
-
 	/**
 	* Deletes the cp option category from the database. Also notifies the appropriate model listeners.
 	*

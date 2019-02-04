@@ -114,8 +114,6 @@ public interface CPMeasurementUnitLocalService extends BaseLocalService,
 	public CPMeasurementUnit deleteCPMeasurementUnit(long CPMeasurementUnitId)
 		throws PortalException;
 
-	public void deleteCPMeasurementUnits(long groupId);
-
 	/**
 	* @throws PortalException
 	*/

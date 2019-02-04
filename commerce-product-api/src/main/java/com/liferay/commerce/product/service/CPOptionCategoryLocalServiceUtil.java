@@ -76,11 +76,6 @@ public class CPOptionCategoryLocalServiceUtil {
 		return getService().createCPOptionCategory(CPOptionCategoryId);
 	}
 
-	public static void deleteCPOptionCategories(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteCPOptionCategories(groupId);
-	}
-
 	/**
 	* Deletes the cp option category from the database. Also notifies the appropriate model listeners.
 	*

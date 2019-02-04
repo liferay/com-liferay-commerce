@@ -116,12 +116,6 @@ public class CommercePaymentMethodGroupRelLocalServiceWrapper
 		return _commercePaymentMethodGroupRelLocalService.deleteCommercePaymentMethodGroupRel(commercePaymentMethodGroupRelId);
 	}
 
-	@Override
-	public void deleteCommercePaymentMethodGroupRels(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_commercePaymentMethodGroupRelLocalService.deleteCommercePaymentMethodGroupRels(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

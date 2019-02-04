@@ -82,12 +82,6 @@ public class CommerceNotificationTemplateUserSegmentRelLocalServiceUtil {
 			.deleteCNTemplateUserSegmentRelsByCommerceNotificationTemplateId(commerceNotificationTemplateId);
 	}
 
-	public static void deleteCNTemplateUserSegmentRelsByCommerceUserSegmentEntryId(
-		long commerceUserSegmentEntryId) {
-		getService()
-			.deleteCNTemplateUserSegmentRelsByCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
-	}
-
 	/**
 	* Deletes the commerce notification template user segment rel from the database. Also notifies the appropriate model listeners.
 	*

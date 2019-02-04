@@ -354,9 +354,6 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 		double priority, boolean active, ServiceContext serviceContext)
 		throws PortalException;
 
-	public CommerceCurrency updateCommerceCurrencyRate(
-		long commerceCurrencyId, BigDecimal rate) throws PortalException;
-
 	public void updateExchangeRate(long commerceCurrencyId,
 		String exchangeRateProviderKey) throws PortalException;
 

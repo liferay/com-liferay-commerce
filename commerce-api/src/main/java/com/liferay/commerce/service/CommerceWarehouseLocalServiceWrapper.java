@@ -98,11 +98,6 @@ public class CommerceWarehouseLocalServiceWrapper
 		return _commerceWarehouseLocalService.deleteCommerceWarehouse(commerceWarehouseId);
 	}
 
-	@Override
-	public void deleteCommerceWarehouses(long groupId) {
-		_commerceWarehouseLocalService.deleteCommerceWarehouses(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

@@ -100,13 +100,6 @@ public class CPRuleUserSegmentRelLocalServiceUtil {
 		return getService().deleteCPRuleUserSegmentRel(CPRuleUserSegmentRelId);
 	}
 
-	public static void deleteCPRuleUserSegmentRelsByCommerceUserSegmentEntryId(
-		long commerceUserSegmentEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService()
-			.deleteCPRuleUserSegmentRelsByCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
-	}
-
 	public static void deleteCPRuleUserSegmentRelsByCPRuleId(long cpRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().deleteCPRuleUserSegmentRelsByCPRuleId(cpRuleId);

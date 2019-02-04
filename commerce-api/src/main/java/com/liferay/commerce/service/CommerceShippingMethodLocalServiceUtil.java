@@ -120,11 +120,6 @@ public class CommerceShippingMethodLocalServiceUtil {
 				   .deleteCommerceShippingMethod(commerceShippingMethodId);
 	}
 
-	public static void deleteCommerceShippingMethods(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteCommerceShippingMethods(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

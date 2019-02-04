@@ -56,15 +56,6 @@ public class CPDefinitionGroupedEntryLocalServiceUtil {
 			entryCPDefinitionIds, serviceContext);
 	}
 
-	public static void addCPDefinitionGroupedEntriesByEntryCProductIds(
-		long cpDefinitionId, long[] entryCProductIds,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService()
-			.addCPDefinitionGroupedEntriesByEntryCProductIds(cpDefinitionId,
-			entryCProductIds, serviceContext);
-	}
-
 	/**
 	* Adds the cp definition grouped entry to the database. Also notifies the appropriate model listeners.
 	*
@@ -239,24 +230,6 @@ public class CPDefinitionGroupedEntryLocalServiceUtil {
 		long CPDefinitionGroupedEntryId) {
 		return getService()
 				   .fetchCPDefinitionGroupedEntry(CPDefinitionGroupedEntryId);
-	}
-
-	public static com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntry(
-		long cpDefinitionId, long entryCProductId) {
-		return getService()
-				   .fetchCPDefinitionGroupedEntry(cpDefinitionId,
-			entryCProductId);
-	}
-
-	/**
-	* @deprecated As of Mueller (7.2.x)
-	*/
-	@Deprecated
-	public static com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
-		long cpDefinitionId, long entryCPDefinitionId) {
-		return getService()
-				   .fetchCPDefinitionGroupedEntryByC_E(cpDefinitionId,
-			entryCPDefinitionId);
 	}
 
 	/**

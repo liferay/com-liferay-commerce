@@ -321,10 +321,6 @@ public interface CommerceDiscountLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
-	@Indexable(type = IndexableType.REINDEX)
-	public CommerceDiscount incrementCommerceDiscountNumberOfUse(
-		long commerceDiscountId) throws PortalException;
-
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceDiscount> searchCommerceDiscounts(
 		long companyId, long groupId, String keywords, int status, int start,

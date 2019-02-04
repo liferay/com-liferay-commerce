@@ -379,13 +379,6 @@ public class CommerceDiscountLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.discount.model.CommerceDiscount incrementCommerceDiscountNumberOfUse(
-		long commerceDiscountId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceDiscountLocalService.incrementCommerceDiscountNumberOfUse(commerceDiscountId);
-	}
-
-	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.discount.model.CommerceDiscount> searchCommerceDiscounts(
 		long companyId, long groupId, String keywords, int status, int start,
 		int end, com.liferay.portal.kernel.search.Sort sort)

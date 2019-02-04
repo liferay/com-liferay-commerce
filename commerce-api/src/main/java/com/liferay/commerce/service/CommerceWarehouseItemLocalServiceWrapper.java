@@ -112,29 +112,6 @@ public class CommerceWarehouseItemLocalServiceWrapper
 		_commerceWarehouseItemLocalService.deleteCommerceWarehouseItems(commerceWarehouseId);
 	}
 
-	@Override
-	public void deleteCommerceWarehouseItemsByCPI_CPIU(long cProductId,
-		String cpInstanceUuid) {
-		_commerceWarehouseItemLocalService.deleteCommerceWarehouseItemsByCPI_CPIU(cProductId,
-			cpInstanceUuid);
-	}
-
-	/**
-	* @deprecated As of Mueller (7.2.x)
-	*/
-	@Deprecated
-	@Override
-	public void deleteCommerceWarehouseItemsByCPInstanceId(long cpInstanceId) {
-		_commerceWarehouseItemLocalService.deleteCommerceWarehouseItemsByCPInstanceId(cpInstanceId);
-	}
-
-	@Override
-	public void deleteCommerceWarehouseItemsByCWI_CPIU(
-		long commerceWarehouseId, String cpInstanceUuid) {
-		_commerceWarehouseItemLocalService.deleteCommerceWarehouseItemsByCWI_CPIU(commerceWarehouseId,
-			cpInstanceUuid);
-	}
-
 	/**
 	* @throws PortalException
 	*/

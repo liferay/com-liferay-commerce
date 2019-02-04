@@ -405,12 +405,6 @@ public class CommerceCurrencyLocalServiceUtil {
 			roundingMode, primary, priority, active, serviceContext);
 	}
 
-	public static com.liferay.commerce.currency.model.CommerceCurrency updateCommerceCurrencyRate(
-		long commerceCurrencyId, java.math.BigDecimal rate)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().updateCommerceCurrencyRate(commerceCurrencyId, rate);
-	}
-
 	public static void updateExchangeRate(long commerceCurrencyId,
 		String exchangeRateProviderKey)
 		throws com.liferay.portal.kernel.exception.PortalException {

@@ -378,15 +378,6 @@ public class CPOptionValueLocalServiceUtil {
 		return getService().search(searchContext);
 	}
 
-	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPOptionValue> searchCPOptionValues(
-		long companyId, long groupId, long cpOptionId, String keywords,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .searchCPOptionValues(companyId, groupId, cpOptionId,
-			keywords, start, end, sort);
-	}
-
 	/**
 	* Updates the cp option value in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

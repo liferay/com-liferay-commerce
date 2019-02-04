@@ -109,9 +109,6 @@ public interface CommerceTaxMethodLocalService extends BaseLocalService,
 	public CommerceTaxMethod deleteCommerceTaxMethod(long commerceTaxMethodId)
 		throws PortalException;
 
-	public void deleteCommerceTaxMethods(long groupId)
-		throws PortalException;
-
 	/**
 	* @throws PortalException
 	*/
@@ -233,9 +230,6 @@ public interface CommerceTaxMethodLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceTaxMethodsCount();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceTaxMethodsCount(long groupId, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

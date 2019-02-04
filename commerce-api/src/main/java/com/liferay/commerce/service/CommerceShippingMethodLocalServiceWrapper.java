@@ -115,12 +115,6 @@ public class CommerceShippingMethodLocalServiceWrapper
 		return _commerceShippingMethodLocalService.deleteCommerceShippingMethod(commerceShippingMethodId);
 	}
 
-	@Override
-	public void deleteCommerceShippingMethods(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceShippingMethodLocalService.deleteCommerceShippingMethods(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

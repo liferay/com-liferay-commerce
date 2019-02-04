@@ -108,8 +108,6 @@ public interface CommerceWarehouseLocalService extends BaseLocalService,
 	public CommerceWarehouse deleteCommerceWarehouse(long commerceWarehouseId)
 		throws PortalException;
 
-	public void deleteCommerceWarehouses(long groupId);
-
 	/**
 	* @throws PortalException
 	*/

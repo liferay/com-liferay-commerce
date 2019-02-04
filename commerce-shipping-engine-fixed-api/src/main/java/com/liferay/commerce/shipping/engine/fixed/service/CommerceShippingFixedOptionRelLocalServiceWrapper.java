@@ -278,12 +278,6 @@ public class CommerceShippingFixedOptionRelLocalServiceWrapper
 	}
 
 	@Override
-	public int getCommerceShippingFixedOptionRelsCount(
-		long commerceShippingFixedOptionId) {
-		return _commerceShippingFixedOptionRelLocalService.getCommerceShippingFixedOptionRelsCount(commerceShippingFixedOptionId);
-	}
-
-	@Override
 	public java.util.List<com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel> getCommerceShippingMethodFixedOptionRels(
 		long commerceShippingMethodId, int start, int end) {
 		return _commerceShippingFixedOptionRelLocalService.getCommerceShippingMethodFixedOptionRels(commerceShippingMethodId,

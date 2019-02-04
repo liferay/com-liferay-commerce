@@ -275,12 +275,6 @@ public class CommerceTaxFixedRateAddressRelLocalServiceUtil {
 		return getService().getCommerceTaxFixedRateAddressRelsCount();
 	}
 
-	public static int getCommerceTaxFixedRateAddressRelsCount(
-		long cpTaxCategoryId) {
-		return getService()
-				   .getCommerceTaxFixedRateAddressRelsCount(cpTaxCategoryId);
-	}
-
 	public static java.util.List<com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel> getCommerceTaxMethodFixedRateAddressRels(
 		long commerceTaxMethodId, int start, int end) {
 		return getService()

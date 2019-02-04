@@ -124,11 +124,6 @@ public class CommercePaymentMethodGroupRelLocalServiceUtil {
 				   .deleteCommercePaymentMethodGroupRel(commercePaymentMethodGroupRelId);
 	}
 
-	public static void deleteCommercePaymentMethodGroupRels(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteCommercePaymentMethodGroupRels(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

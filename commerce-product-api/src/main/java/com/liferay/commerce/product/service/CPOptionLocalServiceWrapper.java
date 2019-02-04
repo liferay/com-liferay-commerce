@@ -111,12 +111,6 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 		return _cpOptionLocalService.deleteCPOption(CPOptionId);
 	}
 
-	@Override
-	public void deleteCPOptions(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_cpOptionLocalService.deleteCPOptions(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

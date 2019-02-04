@@ -100,11 +100,6 @@ public class CommerceTaxMethodLocalServiceUtil {
 		return getService().deleteCommerceTaxMethod(commerceTaxMethodId);
 	}
 
-	public static void deleteCommerceTaxMethods(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteCommerceTaxMethods(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/
@@ -252,10 +247,6 @@ public class CommerceTaxMethodLocalServiceUtil {
 	*/
 	public static int getCommerceTaxMethodsCount() {
 		return getService().getCommerceTaxMethodsCount();
-	}
-
-	public static int getCommerceTaxMethodsCount(long groupId, boolean active) {
-		return getService().getCommerceTaxMethodsCount(groupId, active);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {

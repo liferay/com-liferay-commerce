@@ -117,18 +117,6 @@ public interface CommerceWarehouseItemLocalService extends BaseLocalService,
 
 	public void deleteCommerceWarehouseItems(long commerceWarehouseId);
 
-	public void deleteCommerceWarehouseItemsByCPI_CPIU(long cProductId,
-		String cpInstanceUuid);
-
-	/**
-	* @deprecated As of Mueller (7.2.x)
-	*/
-	@Deprecated
-	public void deleteCommerceWarehouseItemsByCPInstanceId(long cpInstanceId);
-
-	public void deleteCommerceWarehouseItemsByCWI_CPIU(
-		long commerceWarehouseId, String cpInstanceUuid);
-
 	/**
 	* @throws PortalException
 	*/

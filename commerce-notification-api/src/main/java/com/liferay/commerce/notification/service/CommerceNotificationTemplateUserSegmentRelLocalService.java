@@ -89,9 +89,6 @@ public interface CommerceNotificationTemplateUserSegmentRelLocalService
 	public void deleteCNTemplateUserSegmentRelsByCommerceNotificationTemplateId(
 		long commerceNotificationTemplateId);
 
-	public void deleteCNTemplateUserSegmentRelsByCommerceUserSegmentEntryId(
-		long commerceUserSegmentEntryId);
-
 	/**
 	* Deletes the commerce notification template user segment rel from the database. Also notifies the appropriate model listeners.
 	*

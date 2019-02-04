@@ -94,11 +94,6 @@ public class CPMeasurementUnitLocalServiceWrapper
 		return _cpMeasurementUnitLocalService.deleteCPMeasurementUnit(CPMeasurementUnitId);
 	}
 
-	@Override
-	public void deleteCPMeasurementUnits(long groupId) {
-		_cpMeasurementUnitLocalService.deleteCPMeasurementUnits(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

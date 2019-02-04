@@ -125,8 +125,6 @@ public interface CPOptionLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.DELETE)
 	public CPOption deleteCPOption(long CPOptionId) throws PortalException;
 
-	public void deleteCPOptions(long groupId) throws PortalException;
-
 	/**
 	* @throws PortalException
 	*/

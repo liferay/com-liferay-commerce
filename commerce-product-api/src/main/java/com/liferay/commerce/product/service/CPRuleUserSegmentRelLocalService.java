@@ -111,9 +111,6 @@ public interface CPRuleUserSegmentRelLocalService extends BaseLocalService,
 	public CPRuleUserSegmentRel deleteCPRuleUserSegmentRel(
 		long CPRuleUserSegmentRelId) throws PortalException;
 
-	public void deleteCPRuleUserSegmentRelsByCommerceUserSegmentEntryId(
-		long commerceUserSegmentEntryId) throws PortalException;
-
 	public void deleteCPRuleUserSegmentRelsByCPRuleId(long cpRuleId)
 		throws PortalException;
 

@@ -122,9 +122,6 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 	public CPSpecificationOption deleteCPSpecificationOption(
 		long CPSpecificationOptionId) throws PortalException;
 
-	public void deleteCPSpecificationOptions(long groupId)
-		throws PortalException;
-
 	/**
 	* @throws PortalException
 	*/

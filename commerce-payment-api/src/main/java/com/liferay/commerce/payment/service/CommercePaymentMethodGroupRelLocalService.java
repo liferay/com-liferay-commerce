@@ -123,9 +123,6 @@ public interface CommercePaymentMethodGroupRelLocalService
 	public CommercePaymentMethodGroupRel deleteCommercePaymentMethodGroupRel(
 		long commercePaymentMethodGroupRelId) throws PortalException;
 
-	public void deleteCommercePaymentMethodGroupRels(long groupId)
-		throws PortalException;
-
 	/**
 	* @throws PortalException
 	*/

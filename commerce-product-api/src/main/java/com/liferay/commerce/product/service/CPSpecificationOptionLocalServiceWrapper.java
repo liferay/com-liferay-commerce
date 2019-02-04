@@ -98,12 +98,6 @@ public class CPSpecificationOptionLocalServiceWrapper
 		return _cpSpecificationOptionLocalService.deleteCPSpecificationOption(CPSpecificationOptionId);
 	}
 
-	@Override
-	public void deleteCPSpecificationOptions(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_cpSpecificationOptionLocalService.deleteCPSpecificationOptions(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

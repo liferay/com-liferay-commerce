@@ -69,12 +69,6 @@ public class CPOptionCategoryLocalServiceWrapper
 		return _cpOptionCategoryLocalService.createCPOptionCategory(CPOptionCategoryId);
 	}
 
-	@Override
-	public void deleteCPOptionCategories(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_cpOptionCategoryLocalService.deleteCPOptionCategories(groupId);
-	}
-
 	/**
 	* Deletes the cp option category from the database. Also notifies the appropriate model listeners.
 	*

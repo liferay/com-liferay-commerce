@@ -102,10 +102,6 @@ public class CommerceWarehouseLocalServiceUtil {
 		return getService().deleteCommerceWarehouse(commerceWarehouseId);
 	}
 
-	public static void deleteCommerceWarehouses(long groupId) {
-		getService().deleteCommerceWarehouses(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

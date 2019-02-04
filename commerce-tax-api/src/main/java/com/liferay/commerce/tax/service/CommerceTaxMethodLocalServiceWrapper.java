@@ -95,12 +95,6 @@ public class CommerceTaxMethodLocalServiceWrapper
 		return _commerceTaxMethodLocalService.deleteCommerceTaxMethod(commerceTaxMethodId);
 	}
 
-	@Override
-	public void deleteCommerceTaxMethods(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_commerceTaxMethodLocalService.deleteCommerceTaxMethods(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/
@@ -267,12 +261,6 @@ public class CommerceTaxMethodLocalServiceWrapper
 	@Override
 	public int getCommerceTaxMethodsCount() {
 		return _commerceTaxMethodLocalService.getCommerceTaxMethodsCount();
-	}
-
-	@Override
-	public int getCommerceTaxMethodsCount(long groupId, boolean active) {
-		return _commerceTaxMethodLocalService.getCommerceTaxMethodsCount(groupId,
-			active);
 	}
 
 	@Override

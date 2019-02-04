@@ -103,11 +103,6 @@ public class CPSpecificationOptionLocalServiceUtil {
 		return getService().deleteCPSpecificationOption(CPSpecificationOptionId);
 	}
 
-	public static void deleteCPSpecificationOptions(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteCPSpecificationOptions(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

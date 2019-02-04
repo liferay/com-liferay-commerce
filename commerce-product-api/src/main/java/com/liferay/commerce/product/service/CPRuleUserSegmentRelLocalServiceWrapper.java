@@ -96,13 +96,6 @@ public class CPRuleUserSegmentRelLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCPRuleUserSegmentRelsByCommerceUserSegmentEntryId(
-		long commerceUserSegmentEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_cpRuleUserSegmentRelLocalService.deleteCPRuleUserSegmentRelsByCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
-	}
-
-	@Override
 	public void deleteCPRuleUserSegmentRelsByCPRuleId(long cpRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_cpRuleUserSegmentRelLocalService.deleteCPRuleUserSegmentRelsByCPRuleId(cpRuleId);

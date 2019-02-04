@@ -99,10 +99,6 @@ public class CPMeasurementUnitLocalServiceUtil {
 		return getService().deleteCPMeasurementUnit(CPMeasurementUnitId);
 	}
 
-	public static void deleteCPMeasurementUnits(long groupId) {
-		getService().deleteCPMeasurementUnits(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/

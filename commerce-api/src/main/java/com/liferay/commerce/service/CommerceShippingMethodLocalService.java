@@ -120,9 +120,6 @@ public interface CommerceShippingMethodLocalService extends BaseLocalService,
 	public CommerceShippingMethod deleteCommerceShippingMethod(
 		long commerceShippingMethodId) throws PortalException;
 
-	public void deleteCommerceShippingMethods(long groupId)
-		throws PortalException;
-
 	/**
 	* @throws PortalException
 	*/

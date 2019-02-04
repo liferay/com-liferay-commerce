@@ -440,14 +440,6 @@ public class CommerceCurrencyLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.currency.model.CommerceCurrency updateCommerceCurrencyRate(
-		long commerceCurrencyId, java.math.BigDecimal rate)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCurrencyLocalService.updateCommerceCurrencyRate(commerceCurrencyId,
-			rate);
-	}
-
-	@Override
 	public void updateExchangeRate(long commerceCurrencyId,
 		String exchangeRateProviderKey)
 		throws com.liferay.portal.kernel.exception.PortalException {

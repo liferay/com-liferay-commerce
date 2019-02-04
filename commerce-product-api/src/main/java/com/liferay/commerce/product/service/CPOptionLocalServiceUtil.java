@@ -116,11 +116,6 @@ public class CPOptionLocalServiceUtil {
 		return getService().deleteCPOption(CPOptionId);
 	}
 
-	public static void deleteCPOptions(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteCPOptions(groupId);
-	}
-
 	/**
 	* @throws PortalException
 	*/
