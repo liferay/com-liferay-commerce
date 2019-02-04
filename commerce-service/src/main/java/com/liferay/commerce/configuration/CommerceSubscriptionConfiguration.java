@@ -49,7 +49,9 @@ public interface CommerceSubscriptionConfiguration {
 	@Meta.AD(deflt = "false", name = "suspend-subscription", required = false)
 	public boolean suspendSubscription();
 
-	@Meta.AD(deflt = "99", name = "payments-attempts", required = false)
-	public int paymentsAttempts();
+	@Meta.AD(
+		deflt = "99", name = "payment-attempts-max-count", required = false
+	)
+	public int paymentAttemptsMaxCount();
 
 }

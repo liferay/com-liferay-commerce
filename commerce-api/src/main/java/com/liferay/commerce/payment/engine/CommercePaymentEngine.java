@@ -77,7 +77,7 @@ public interface CommercePaymentEngine {
 
 	public CommercePaymentResult partiallyRefundPayment(long commerceOrderId);
 
-	public int payedOrderInterval(long commerceOrderId) throws PortalException;
+	public int getOrderStatusUpdateMaxIntervalMinutes(long commerceOrderId) throws PortalException;
 
 	public CommercePaymentResult postProcessPayment(long commerceOrderId)
 		throws Exception;
