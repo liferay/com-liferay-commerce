@@ -126,9 +126,13 @@ public class CommercePlacedOrderItemClayTable
 		skuField.setContentRenderer("imageName");
 
 		clayTableSchemaBuilder.addField("name", "name");
+
 		clayTableSchemaBuilder.addField("price", "price");
+
 		clayTableSchemaBuilder.addField("discount", "discount");
+
 		clayTableSchemaBuilder.addField("quantity", "quantity");
+
 		clayTableSchemaBuilder.addField("total", "total");
 
 		return clayTableSchemaBuilder.build();
