@@ -14,23 +14,12 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
-import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.openapi.admin.internal.resource.util.CountryHelper;
-import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
-import com.liferay.commerce.openapi.admin.internal.util.LanguageUtils;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.CountryDTO;
 import com.liferay.commerce.openapi.admin.resource.CountryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.GetterUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.Generated;
 
@@ -79,7 +68,7 @@ public class CountryResourceImpl implements CountryResource {
 
 	@Override
 	public Response updateCountry(
-			Long groupId, String id, CountryDTO countryDTO, Locale locale)
+			Long groupId, String id, CountryDTO countryDTO)
 		throws Exception {
 
 		_countryHelper.updateCountry(groupId, id, countryDTO, _user);
@@ -90,8 +79,7 @@ public class CountryResourceImpl implements CountryResource {
 	}
 
 	@Override
-	public CountryDTO upsertCountry(
-			Long groupId, CountryDTO countryDTO, Locale locale)
+	public CountryDTO upsertCountry(Long groupId, CountryDTO countryDTO)
 		throws Exception {
 
 		return _countryHelper.upsertCountry(groupId, countryDTO, _user);
