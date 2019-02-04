@@ -14,6 +14,8 @@
 
 package ${PACKAGE};
 
+import com.liferay.oauth2.provider.scope.RequiresScope;
+
 ${IMPORT_STATEMENTS}
 
 import java.util.Collections;
