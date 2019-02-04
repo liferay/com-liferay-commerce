@@ -19,8 +19,6 @@ import com.liferay.commerce.openapi.admin.model.CountryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.Consumes;
@@ -67,7 +65,7 @@ public interface CountryResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateCountry(
 			@QueryParam("groupId") Long groupId, @PathParam("id") String id,
-			CountryDTO countryDTO, @Context Locale locale)
+			CountryDTO countryDTO)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -76,8 +74,7 @@ public interface CountryResource {
 	@Produces("application/*")
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public CountryDTO upsertCountry(
-			@QueryParam("groupId") Long groupId, CountryDTO countryDTO,
-			@Context Locale locale)
+			@QueryParam("groupId") Long groupId, CountryDTO countryDTO)
 		throws Exception;
 
 }
