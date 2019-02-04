@@ -172,12 +172,22 @@ public class CommerceAccountLocalServiceImpl
 
 		User user = userLocalService.getUser(userId);
 
-		return commerceAccountLocalService.addCommerceAccount(
-			String.valueOf(user.getUserId()),
-			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-			user.getEmailAddress(), taxId,
-			CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL, true,
-			externalReferenceCode, serviceContext);
+		// Commerce account
+
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.addCommerceAccount(
+				String.valueOf(user.getUserId()),
+				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
+				user.getEmailAddress(), taxId,
+				CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL, true,
+				externalReferenceCode, serviceContext);
+
+		// Commerce account user rel
+
+		commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+			commerceAccount.getCommerceAccountId(), userId, serviceContext);
+
+		return commerceAccount;
 	}
 
 	@Indexable(type = IndexableType.DELETE)
