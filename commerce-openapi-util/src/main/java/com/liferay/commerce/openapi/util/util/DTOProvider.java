@@ -24,6 +24,11 @@ public class DTOProvider extends Provider {
 	}
 
 	@Override
+	public String decorateVariable(String baseVariableName) {
+		return baseVariableName + "DTO";
+	}
+
+	@Override
 	public String getModelName() {
 		return super.getModelName() + "DTO";
 	}
