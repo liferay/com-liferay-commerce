@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 	{
 		ProductOptionDTO.class, ProductOptionValueDTO.class, AccountDTO.class,
 		PriceEntryDTO.class, UserDTO.class, WebSiteDTO.class, ProductDTO.class,
-		SkuDTO.class, PriceListDTO.class, InventoryDTO.class
+		SkuDTO.class, PriceListDTO.class, InventoryDTO.class, CountryDTO.class
 	}
 )
 public class CollectionDTO<T> {
