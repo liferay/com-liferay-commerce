@@ -73,12 +73,12 @@ class UserInvitationModal extends Component {
 			this.query = '';
 		}
 
-		const hasUserAlreadyBeenAdded = this.addedUsers.reduce(
+		const userAlreadyAdded = this.addedUsers.reduce(
 			(alreadyAdded, user) => alreadyAdded || user.email === userToBeToggled.email,
 			false
 		);
 
-		this.addedUsers = hasUserAlreadyBeenAdded ?
+		this.addedUsers = userAlreadyAdded ?
 			this.addedUsers.filter((user) => user.email !== userToBeToggled.email) :
 			[...this.addedUsers, userToBeToggled];
 

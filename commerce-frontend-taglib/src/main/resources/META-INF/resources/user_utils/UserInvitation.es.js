@@ -1,4 +1,3 @@
-
 'use strict';
 
 import {debounce} from 'metal-debounce';
