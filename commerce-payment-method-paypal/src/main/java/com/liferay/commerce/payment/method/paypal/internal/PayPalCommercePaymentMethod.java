@@ -84,6 +84,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -306,18 +307,15 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		AgreementDetails agreementDetails = agreement.getAgreementDetails();
 
-		Long failedPaymentCount = GetterUtil.getLong(
+		long failedPaymentCount = GetterUtil.getLong(
 			agreementDetails.getFailedPaymentCount());
-		Long cyclesRemaining = GetterUtil.getLong(
+		long cyclesRemaining = GetterUtil.getLong(
 			agreementDetails.getCyclesRemaining());
-		Long cyclesCompleted = GetterUtil.getLong(
+		long cyclesCompleted = GetterUtil.getLong(
 			agreementDetails.getCyclesCompleted());
 
-		CommerceSubscriptionStatusResult commerceSubscriptionStatusResult =
-			new CommerceSubscriptionStatusResult(
-				failedPaymentCount, cyclesRemaining, cyclesCompleted);
-
-		return commerceSubscriptionStatusResult;
+		return new CommerceSubscriptionStatusResult(
+			failedPaymentCount, cyclesRemaining, cyclesCompleted);
 	}
 
 	@Override
@@ -582,7 +580,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		Agreement updatedAgreement = Agreement.get(
 			apiContext, agreement.getId());
 
-		if ("Suspended".equals(updatedAgreement.getState())) {
+		if (Objects.equals("Suspended", updatedAgreement.getState())) {
 			return true;
 		}
 
