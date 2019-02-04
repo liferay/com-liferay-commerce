@@ -118,14 +118,6 @@ public class CommerceShippingFixedOptionRelLocalServiceImpl
 	}
 
 	@Override
-	public int getCommerceShippingFixedOptionRelsCount(
-		long commerceShippingFixedOptionId) {
-
-		return commerceShippingFixedOptionRelPersistence.
-			countByCommerceShippingFixedOptionId(commerceShippingFixedOptionId);
-	}
-
-	@Override
 	public List<CommerceShippingFixedOptionRel>
 		getCommerceShippingMethodFixedOptionRels(
 			long commerceShippingMethodId, int start, int end) {

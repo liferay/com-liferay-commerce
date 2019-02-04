@@ -18,7 +18,9 @@ import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.service.base.CPDefinitionServiceBaseImpl;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
@@ -77,7 +79,8 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, serviceContext);
+			neverExpire, CPInstanceConstants.DEFAULT_SKU, StringPool.BLANK,
+			serviceContext);
 	}
 
 	@Override
@@ -104,11 +107,12 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 		return cpDefinitionLocalService.addCPDefinition(
 			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
 			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
-			ignoreSKUCombinations, ddmStructureKey, published, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			ignoreSKUCombinations, true, false, false, 0, 0, 0, 0, 0, 0, false,
+			false, ddmStructureKey, published, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
-			serviceContext);
+			CPInstanceConstants.DEFAULT_SKU, StringPool.BLANK, serviceContext);
 	}
 
 	@Override

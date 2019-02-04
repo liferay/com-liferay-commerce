@@ -149,21 +149,6 @@ public class CommerceShippingMethodLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommerceShippingMethods(long groupId)
-		throws PortalException {
-
-		List<CommerceShippingMethod> commerceShippingMethods =
-			commerceShippingMethodPersistence.findByGroupId(groupId);
-
-		for (CommerceShippingMethod commerceShippingMethod :
-				commerceShippingMethods) {
-
-			commerceShippingMethodLocalService.deleteCommerceShippingMethod(
-				commerceShippingMethod);
-		}
-	}
-
-	@Override
 	public CommerceShippingMethod fetchCommerceShippingMethod(
 		long groupId, String engineKey) {
 

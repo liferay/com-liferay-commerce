@@ -61,19 +61,6 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 		}
 	}
 
-	@Override
-	public void addCPDefinitionGroupedEntriesByEntryCProductIds(
-			long cpDefinitionId, long[] entryCProductIds,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		for (long entryCProductId : entryCProductIds) {
-			cpDefinitionGroupedEntryLocalService.
-				addCPDefinitionGroupedEntryByEntryCProductId(
-					cpDefinitionId, entryCProductId, 0, 1, serviceContext);
-		}
-	}
-
 	/**
 	 * @deprecated As of Mueller (7.2.x)
 	 */
@@ -177,34 +164,6 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 
 		cpDefinitionGroupedEntryPersistence.removeByCPDefinitionId(
 			cpDefinitionId);
-	}
-
-	@Override
-	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntry(
-		long cpDefinitionId, long entryCProductId) {
-
-		return cpDefinitionGroupedEntryPersistence.fetchByC_E(
-			cpDefinitionId, entryCProductId);
-	}
-
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
-	@Override
-	public CPDefinitionGroupedEntry fetchCPDefinitionGroupedEntryByC_E(
-		long cpDefinitionId, long entryCPDefinitionId) {
-
-		CPDefinition entryCPDefinition =
-			_cpDefinitionLocalService.fetchCPDefinition(entryCPDefinitionId);
-
-		if (entryCPDefinition == null) {
-			return null;
-		}
-
-		return cpDefinitionGroupedEntryLocalService.
-			fetchCPDefinitionGroupedEntry(
-				cpDefinitionId, entryCPDefinition.getCProductId());
 	}
 
 	@Override

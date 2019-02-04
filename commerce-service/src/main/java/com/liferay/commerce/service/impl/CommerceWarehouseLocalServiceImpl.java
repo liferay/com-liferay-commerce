@@ -110,17 +110,6 @@ public class CommerceWarehouseLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommerceWarehouses(long groupId) {
-		List<CommerceWarehouse> commerceWarehouses =
-			commerceWarehousePersistence.findByGroupId(groupId);
-
-		for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
-			commerceWarehouseLocalService.deleteCommerceWarehouse(
-				commerceWarehouse);
-		}
-	}
-
-	@Override
 	public CommerceWarehouse fetchDefaultCommerceWarehouse(long groupId) {
 		return commerceWarehousePersistence.fetchByG_P_First(
 			groupId, true, new CommerceWarehouseNameComparator(true));

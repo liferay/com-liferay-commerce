@@ -341,19 +341,6 @@ public class CommerceCurrencyLocalServiceImpl
 	}
 
 	@Override
-	public CommerceCurrency updateCommerceCurrencyRate(
-			long commerceCurrencyId, BigDecimal rate)
-		throws PortalException {
-
-		CommerceCurrency commerceCurrency =
-			commerceCurrencyPersistence.findByPrimaryKey(commerceCurrencyId);
-
-		commerceCurrency.setRate(rate);
-
-		return commerceCurrencyPersistence.update(commerceCurrency);
-	}
-
-	@Override
 	public void updateExchangeRate(
 			long commerceCurrencyId, String exchangeRateProviderKey)
 		throws PortalException {

@@ -67,17 +67,6 @@ public class CommerceTaxMethodLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommerceTaxMethods(long groupId) throws PortalException {
-		List<CommerceTaxMethod> commerceTaxMethods =
-			commerceTaxMethodPersistence.findByGroupId(groupId);
-
-		for (CommerceTaxMethod commerceTaxMethod : commerceTaxMethods) {
-			commerceTaxMethodLocalService.deleteCommerceTaxMethod(
-				commerceTaxMethod);
-		}
-	}
-
-	@Override
 	public CommerceTaxMethod fetchCommerceTaxMethod(
 		long groupId, String engineKey) {
 
@@ -94,11 +83,6 @@ public class CommerceTaxMethodLocalServiceImpl
 		long groupId, boolean active) {
 
 		return commerceTaxMethodPersistence.findByG_A(groupId, active);
-	}
-
-	@Override
-	public int getCommerceTaxMethodsCount(long groupId, boolean active) {
-		return commerceTaxMethodPersistence.countByG_A(groupId, active);
 	}
 
 	@Override

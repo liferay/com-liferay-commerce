@@ -135,21 +135,6 @@ public class CPSpecificationOptionLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCPSpecificationOptions(long groupId)
-		throws PortalException {
-
-		List<CPSpecificationOption> cpSpecificationOptions =
-			cpSpecificationOptionPersistence.findByGroupId(groupId);
-
-		for (CPSpecificationOption cpSpecificationOption :
-				cpSpecificationOptions) {
-
-			cpSpecificationOptionLocalService.deleteCPSpecificationOption(
-				cpSpecificationOption);
-		}
-	}
-
-	@Override
 	public CPSpecificationOption fetchCPSpecificationOption(
 		long groupId, String key) {
 

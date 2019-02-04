@@ -35,7 +35,6 @@ import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPDisplayLayout;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.impl.CPDefinitionImpl;
 import com.liferay.commerce.product.model.impl.CPDefinitionModelImpl;
@@ -120,80 +119,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CPDefinitionLocalServiceImpl
 	extends CPDefinitionLocalServiceBaseImpl {
-
-	@Indexable(type = IndexableType.REINDEX)
-	@Override
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, boolean hasDefaultInstance,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		String defaultSku = null;
-
-		if (hasDefaultInstance) {
-			defaultSku = CPInstanceConstants.DEFAULT_SKU;
-		}
-
-		return cpDefinitionLocalService.addCPDefinition(
-			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
-			ignoreSKUCombinations, shippable, freeShipping, shipSeparately,
-			shippingExtraPrice, width, height, depth, weight, cpTaxCategoryId,
-			taxExempt, telcoOrElectronics, ddmStructureKey, published,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, defaultSku, StringPool.BLANK, serviceContext);
-	}
-
-	@Override
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, ServiceContext serviceContext)
-		throws PortalException {
-
-		return cpDefinitionLocalService.addCPDefinition(
-			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
-			ignoreSKUCombinations, shippable, freeShipping, shipSeparately,
-			shippingExtraPrice, width, height, depth, weight, cpTaxCategoryId,
-			taxExempt, telcoOrElectronics, ddmStructureKey, published,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, CPInstanceConstants.DEFAULT_SKU, serviceContext);
-	}
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
@@ -380,40 +305,6 @@ public class CPDefinitionLocalServiceImpl
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, String defaultSku,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		return cpDefinitionLocalService.addCPDefinition(
-			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
-			ignoreSKUCombinations, shippable, freeShipping, shipSeparately,
-			shippingExtraPrice, width, height, depth, weight, cpTaxCategoryId,
-			taxExempt, telcoOrElectronics, ddmStructureKey, published,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, defaultSku, StringPool.BLANK, serviceContext);
-	}
-
-	@Override
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, String defaultSku,
 			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
@@ -428,34 +319,6 @@ public class CPDefinitionLocalServiceImpl
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, defaultSku, false, 1, StringPool.BLANK, null, 0,
 			externalReferenceCode, serviceContext);
-	}
-
-	@Override
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, String ddmStructureKey,
-			boolean published, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		return cpDefinitionLocalService.addCPDefinition(
-			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
-			ignoreSKUCombinations, true, false, false, 0, 0, 0, 0, 0, 0, false,
-			false, ddmStructureKey, published, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			serviceContext);
 	}
 
 	@Override
@@ -1367,19 +1230,6 @@ public class CPDefinitionLocalServiceImpl
 
 		for (CPDefinition cpDefinition : deletableCPDefinitions) {
 			cpDefinitionLocalService.deleteCPDefinition(cpDefinition);
-		}
-	}
-
-	@Override
-	public void moveCPDefinitionsToTrash(long groupId, long userId)
-		throws PortalException {
-
-		List<CPDefinition> cpDefinitions =
-			cpDefinitionPersistence.findByGroupId(groupId);
-
-		for (CPDefinition cpDefinition : cpDefinitions) {
-			cpDefinitionLocalService.moveCPDefinitionToTrash(
-				userId, cpDefinition);
 		}
 	}
 

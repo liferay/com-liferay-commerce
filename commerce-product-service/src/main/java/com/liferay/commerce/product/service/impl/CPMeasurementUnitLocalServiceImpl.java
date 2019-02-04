@@ -97,11 +97,6 @@ public class CPMeasurementUnitLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCPMeasurementUnits(long groupId) {
-		cpMeasurementUnitPersistence.removeByGroupId(groupId);
-	}
-
-	@Override
 	public CPMeasurementUnit fetchPrimaryCPMeasurementUnit(
 		long groupId, int type) {
 

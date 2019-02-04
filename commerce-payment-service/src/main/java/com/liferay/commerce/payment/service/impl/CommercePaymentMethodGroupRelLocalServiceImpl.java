@@ -160,22 +160,6 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommercePaymentMethodGroupRels(long groupId)
-		throws PortalException {
-
-		List<CommercePaymentMethodGroupRel> commercePaymentMethodGroupRels =
-			commercePaymentMethodGroupRelPersistence.findByGroupId(groupId);
-
-		for (CommercePaymentMethodGroupRel commercePaymentMethodGroupRel :
-				commercePaymentMethodGroupRels) {
-
-			commercePaymentMethodGroupRelLocalService.
-				deleteCommercePaymentMethodGroupRel(
-					commercePaymentMethodGroupRel);
-		}
-	}
-
-	@Override
 	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
 		long commercePaymentMethodGroupRelId, int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator) {

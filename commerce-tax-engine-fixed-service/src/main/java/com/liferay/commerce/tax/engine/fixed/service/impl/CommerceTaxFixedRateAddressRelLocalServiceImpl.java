@@ -109,12 +109,6 @@ public class CommerceTaxFixedRateAddressRelLocalServiceImpl
 	}
 
 	@Override
-	public int getCommerceTaxFixedRateAddressRelsCount(long cpTaxCategoryId) {
-		return commerceTaxFixedRateAddressRelPersistence.countByCPTaxCategoryId(
-			cpTaxCategoryId);
-	}
-
-	@Override
 	public List<CommerceTaxFixedRateAddressRel>
 		getCommerceTaxMethodFixedRateAddressRels(
 			long commerceTaxMethodId, int start, int end) {

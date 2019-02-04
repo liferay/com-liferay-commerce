@@ -104,15 +104,6 @@ public class CPRuleUserSegmentRelLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCPRuleUserSegmentRelsByCommerceUserSegmentEntryId(
-			long commerceUserSegmentEntryId)
-		throws PortalException {
-
-		cpRuleUserSegmentRelPersistence.removeByCommerceUserSegmentEntryId(
-			commerceUserSegmentEntryId);
-	}
-
-	@Override
 	public void deleteCPRuleUserSegmentRelsByCPRuleId(long cpRuleId)
 		throws PortalException {
 

@@ -200,18 +200,6 @@ public class CPOptionValueLocalServiceImpl
 		}
 	}
 
-	@Override
-	public BaseModelSearchResult<CPOptionValue> searchCPOptionValues(
-			long companyId, long groupId, long cpOptionId, String keywords,
-			int start, int end, Sort sort)
-		throws PortalException {
-
-		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, cpOptionId, keywords, start, end, sort);
-
-		return searchCPOptions(searchContext);
-	}
-
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPOptionValue updateCPOptionValue(

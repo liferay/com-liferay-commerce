@@ -95,52 +95,6 @@ public class CommerceWarehouseItemLocalServiceImpl
 			commerceWarehouseId);
 	}
 
-	@Override
-	public void deleteCommerceWarehouseItemsByCPI_CPIU(
-		long cProductId, String cpInstanceUuid) {
-
-		commerceWarehouseItemPersistence.removeByCPI_CPIU(
-			cProductId, cpInstanceUuid);
-	}
-
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
-	@Override
-	public void deleteCommerceWarehouseItemsByCPInstanceId(long cpInstanceId) {
-		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
-			cpInstanceId);
-
-		if (cpInstance == null) {
-			return;
-		}
-
-		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
-			cpInstance.getCPDefinitionId());
-
-		if (cpDefinition == null) {
-			return;
-		}
-
-		commerceWarehouseItemLocalService.
-			deleteCommerceWarehouseItemsByCPI_CPIU(
-				cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid());
-	}
-
-	@Override
-	public void deleteCommerceWarehouseItemsByCWI_CPIU(
-		long commerceWarehouseId, String cpInstanceUuid) {
-
-		CommerceWarehouseItem commerceWarehouseItem =
-			commerceWarehouseItemPersistence.fetchByCWI_CPIU(
-				commerceWarehouseId, cpInstanceUuid);
-
-		if (commerceWarehouseItem != null) {
-			commerceWarehouseItemPersistence.remove(commerceWarehouseItem);
-		}
-	}
-
 	/**
 	 * @deprecated As of Mueller (7.2.x)
 	 */

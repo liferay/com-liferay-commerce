@@ -74,14 +74,6 @@ public class CommerceNotificationTemplateUserSegmentRelLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCNTemplateUserSegmentRelsByCommerceUserSegmentEntryId(
-		long commerceUserSegmentEntryId) {
-
-		commerceNotificationTemplateUserSegmentRelPersistence.
-			removeByCommerceUserSegmentEntryId(commerceUserSegmentEntryId);
-	}
-
-	@Override
 	public CommerceNotificationTemplateUserSegmentRel
 		fetchCommerceNotificationTemplateUserSegmentRel(
 			long commerceNotificationTemplateId,

@@ -121,14 +121,6 @@ public class CommercePriceListUserSegmentEntryRelLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommercePriceListUserSegmentEntryRels(
-		long commercePriceListId) {
-
-		commercePriceListUserSegmentEntryRelPersistence.
-			removeByCommercePriceListId(commercePriceListId);
-	}
-
-	@Override
 	public CommercePriceListUserSegmentEntryRel
 		fetchCommercePriceListUserSegmentEntryRel(
 			long commercePriceListId, long commerceUserSegmentEntryId) {

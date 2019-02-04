@@ -16,6 +16,7 @@ package com.liferay.commerce.product.internal.osgi.commands;
 
 import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -88,7 +89,8 @@ public class CPOSGiCommands {
 				false, false, false, 0, 0, 0, 0, 0, 0, false, false, null, true,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, 0, 0, 0, 0, 0, true,
-				CPInstanceConstants.DEFAULT_SKU, serviceContext);
+				CPInstanceConstants.DEFAULT_SKU, StringPool.BLANK,
+				serviceContext);
 		}
 	}
 

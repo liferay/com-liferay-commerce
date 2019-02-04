@@ -260,22 +260,6 @@ public class CommerceDiscountLocalServiceImpl
 		return commerceDiscountPersistence.countByGroupId(groupId);
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
-	@Override
-	public CommerceDiscount incrementCommerceDiscountNumberOfUse(
-			long commerceDiscountId)
-		throws PortalException {
-
-		CommerceDiscount commerceDiscount =
-			commerceDiscountPersistence.findByPrimaryKey(commerceDiscountId);
-
-		commerceDiscount.setNumberOfUse(commerceDiscount.getNumberOfUse() + 1);
-
-		commerceDiscountPersistence.update(commerceDiscount);
-
-		return commerceDiscount;
-	}
-
 	@Override
 	public BaseModelSearchResult<CommerceDiscount> searchCommerceDiscounts(
 			long companyId, long groupId, String keywords, int status,

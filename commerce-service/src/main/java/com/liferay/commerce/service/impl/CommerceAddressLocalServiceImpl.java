@@ -203,25 +203,6 @@ public class CommerceAddressLocalServiceImpl
 		}
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
-	@Override
-	public CommerceAddress geolocateCommerceAddress(long commerceAddressId)
-		throws PortalException {
-
-		CommerceAddress commerceAddress =
-			commerceAddressPersistence.findByPrimaryKey(commerceAddressId);
-
-		double[] coordinates = _commerceGeocoder.getCoordinates(
-			commerceAddress.getStreet1(), commerceAddress.getCity(),
-			commerceAddress.getZip(), commerceAddress.getCommerceRegion(),
-			commerceAddress.getCommerceCountry());
-
-		commerceAddress.setLatitude(coordinates[0]);
-		commerceAddress.setLongitude(coordinates[1]);
-
-		return commerceAddressPersistence.update(commerceAddress);
-	}
-
 	@Override
 	public List<CommerceAddress> getCommerceAddresses(
 		long groupId, String className, long classPK) {
