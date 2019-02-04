@@ -281,6 +281,11 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	}
 
 	@Override
+	public int getOrderStatusUpdateMaxIntervalMinutes() {
+		return 2880;
+	}
+
+	@Override
 	public int getPaymentType() {
 		return CommercePaymentConstants.
 			COMMERCE_PAYMENT_METHOD_TYPE_ONLINE_REDIRECT;
@@ -414,11 +419,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			null, commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.ORDER_STATUS_PARTIALLY_REFUNDED, false, null,
 			null, messages, success);
-	}
-
-	@Override
-	public int getOrderStatusUpdateMaxIntervalMinutes() {
-		return 2880;
 	}
 
 	@Override
