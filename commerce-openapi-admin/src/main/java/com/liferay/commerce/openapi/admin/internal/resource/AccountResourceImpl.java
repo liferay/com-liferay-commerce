@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.model.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.resource.AccountResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 
@@ -43,6 +44,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class AccountResourceImpl implements AccountResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteAccount(String id) throws Exception {
 		_accountHelper.deleteAccount(id, _company);
 
@@ -52,6 +54,7 @@ public class AccountResourceImpl implements AccountResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public AccountDTO getAccount(String id) throws Exception {
 		return _accountHelper.getAccount(id, _company);
 	}
@@ -64,6 +67,7 @@ public class AccountResourceImpl implements AccountResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateAccount(String id, AccountDTO accountDTO)
 		throws Exception {
 
@@ -75,6 +79,7 @@ public class AccountResourceImpl implements AccountResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public AccountDTO upsertAccount(AccountDTO accountDTO) throws Exception {
 		return _accountHelper.upsertAccount(accountDTO);
 	}

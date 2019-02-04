@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.admin.resource.PriceListResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 
@@ -45,6 +46,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceList(String id, Long groupId, Locale locale)
 		throws Exception {
 
@@ -56,6 +58,7 @@ public class PriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceListDTO getPriceList(String id, Long groupId, Locale locale)
 		throws Exception {
 
@@ -64,6 +67,7 @@ public class PriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceListDTO> getPriceLists(
 			Long groupId, Locale locale, Pagination pagination)
 		throws Exception {
@@ -73,6 +77,7 @@ public class PriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceList(
 			String id, Long groupId, PriceListDTO priceListDTO, Locale locale)
 		throws Exception {
@@ -86,6 +91,7 @@ public class PriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceListDTO upsertPriceList(
 			Long groupId, PriceListDTO priceListDTO, Locale locale)
 		throws Exception {
