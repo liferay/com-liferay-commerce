@@ -62,7 +62,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			Provider javaTypeProvider = openApiProperty.getJavaTypeProvider();
 
 			Assert.assertTrue(
-				"DTO class name has private variable _" +
+				"DTO class has private variable _" +
 					openApiProperty.getName(),
 				containsOnlyOne(
 					classSource,
@@ -119,7 +119,102 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				openApiProperty, new HashSet<>(components));
 
 			Assert.assertTrue(
-				"DTO class name has private variable _" +
+				"DTO class has private variable _" +
+					openApiProperty.getName(),
+				containsOnlyOne(
+					classSource,
+					String.format(
+						"private %s _%s", javaTypeProvider.getModelName(),
+						openApiProperty.getName())));
+		}
+	}
+
+	@Test
+	public void testGetDTOSourceIfNestedObjectPresent() throws IOException {
+		ComponentImporter componentImporter = new ComponentImporter();
+
+		List<OpenApiComponent> components = componentImporter.getComponents(
+			OpenApiTestUtil.getOpenApiComponentsWithNestedObjectPattern());
+
+		OpenApiComponent hostOpenApiComponent = null;
+
+		for (OpenApiComponent openApiComponent : components) {
+			if ("HostComponent".equals(openApiComponent.getName())) {
+				hostOpenApiComponent = openApiComponent;
+
+				break;
+			}
+		}
+
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			"test", "test", "com.liferay.test", hostOpenApiComponent,
+			new HashSet<>(components));
+
+		String classSource = dtoGenerator.getClassSource();
+
+		System.out.println(classSource);
+
+		Assert.assertTrue(
+			"package statement is present",
+			containsOnlyOne(classSource, "package com.liferay.test;"));
+
+		for (OpenApiProperty openApiProperty :
+				hostOpenApiComponent.getOpenApiProperties()) {
+
+			if (!openApiProperty.isObject()) {
+				continue;
+			}
+
+			Provider javaTypeProvider = OpenApiFormat.getJavaTypeProvider(
+				openApiProperty, new HashSet<>(components));
+
+			String expectedVariableName = openApiProperty.getName() + "DTO";
+
+			Assert.assertTrue(
+				"DTO class has private variable _" + expectedVariableName,
+				containsOnlyOne(
+					classSource,
+					String.format(
+						"private %s _%s", javaTypeProvider.getModelName(),
+						expectedVariableName)));
+		}
+	}
+
+	@Test
+	public void testGetDTOSourceIfSimpleDictionaryPresent() throws IOException {
+		ComponentImporter componentImporter = new ComponentImporter();
+
+		List<OpenApiComponent> components = componentImporter.getComponents(
+			OpenApiTestUtil.getOpenApiComponentsWithSimpleDictionaryPattern());
+
+		OpenApiComponent childOpenApiComponent = null;
+
+		for (OpenApiComponent openApiComponent : components) {
+			if ("ChildComponent".equals(openApiComponent.getName())) {
+				childOpenApiComponent = openApiComponent;
+
+				break;
+			}
+		}
+
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			"test", "test", "com.liferay.test", childOpenApiComponent,
+			new HashSet<>(components));
+
+		String classSource = dtoGenerator.getClassSource();
+
+		Assert.assertTrue(
+			"package statement is present",
+			containsOnlyOne(classSource, "package com.liferay.test;"));
+
+		for (OpenApiProperty openApiProperty :
+				childOpenApiComponent.getOpenApiProperties()) {
+
+			Provider javaTypeProvider = OpenApiFormat.getJavaTypeProvider(
+				openApiProperty, new HashSet<>(components));
+
+			Assert.assertTrue(
+				"DTO class has private variable _" +
 					openApiProperty.getName(),
 				containsOnlyOne(
 					classSource,
