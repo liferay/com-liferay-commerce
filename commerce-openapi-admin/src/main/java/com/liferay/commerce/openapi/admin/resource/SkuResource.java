@@ -18,7 +18,6 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import java.util.Locale;
 
@@ -45,13 +44,11 @@ public interface SkuResource {
 
 	@DELETE
 	@Path("/{id}")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteSku(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/{id}/inventory")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<InventoryDTO> getInventorys(
 			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
@@ -59,13 +56,11 @@ public interface SkuResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public SkuDTO getSku(@PathParam("id") String id) throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateSku(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			SkuDTO skuDTO, @Context Locale locale)
@@ -75,7 +70,6 @@ public interface SkuResource {
 	@Path("/{id}/inventory")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public InventoryDTO upsertInventory(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			InventoryDTO inventoryDTO)

@@ -18,7 +18,6 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import java.util.Locale;
 
@@ -45,19 +44,16 @@ public interface ProductResource {
 
 	@DELETE
 	@Path("/{id}")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProduct(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductDTO getProduct(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductDTO> getProducts(
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
@@ -65,7 +61,6 @@ public interface ProductResource {
 	@GET
 	@Path("/{id}/sku")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<SkuDTO> getSkus(
 			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
@@ -73,7 +68,6 @@ public interface ProductResource {
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProduct(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			ProductDTO productDTO, @Context Locale locale)
@@ -83,7 +77,6 @@ public interface ProductResource {
 	@Path("/")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductDTO upsertProduct(
 			@QueryParam("groupId") Long groupId, ProductDTO productDTO,
 			@Context Locale locale)
@@ -93,7 +86,6 @@ public interface ProductResource {
 	@Path("/{id}/sku")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public SkuDTO upsertSku(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			SkuDTO skuDTO, @Context Locale locale)
