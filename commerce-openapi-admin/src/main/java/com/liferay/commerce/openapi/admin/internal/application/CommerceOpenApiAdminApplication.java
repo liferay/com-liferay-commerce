@@ -33,6 +33,10 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		"auth.verifier.auth.verifier.OAuth2RestAuthVerifier.urls.includes=/*",
 		"auth.verifier.auth.verifier.PortalSessionAuthVerifier.urls.includes=/*",
 		"auth.verifier.guest.allowed=true",
+		"liferay.jaxrs.context.providers.enabled=true",
+		"liferay.jaxrs.exception.mappers.enabled=true",
+		"liferay.jaxrs.message.body.readers.enabled=true",
+		"liferay.jaxrs.message.body.writers.enabled=true",
 		"oauth2.scopechecker.type=annotations"
 	},
 	service = Application.class

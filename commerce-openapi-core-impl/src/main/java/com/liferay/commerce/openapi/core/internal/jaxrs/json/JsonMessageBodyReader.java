@@ -36,7 +36,10 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  * @author Ivica Cardic
  */
 @Component(
-	property = JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true",
+	property = {
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(liferay.jaxrs.message.body.readers.enabled=true)",
+		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
+	},
 	service = MessageBodyReader.class
 )
 @Consumes(MediaType.APPLICATION_JSON)
