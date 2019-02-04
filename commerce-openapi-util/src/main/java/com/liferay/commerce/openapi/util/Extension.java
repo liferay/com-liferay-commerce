@@ -85,29 +85,20 @@ public class Extension {
 			new HashMap<ExtensionType, Provider>() {
 				{
 					put(
-						USER_CONTEXT,
-						new Provider(
-							"User", "com.liferay.portal.kernel.model.User"));
-					put(
-						LOCALE_CONTEXT,
-						new Provider(
-							"String", "java.lang.String", "languageId"));
-					put(
-						THEMEDISPLAY_CONTEXT,
-						new Provider(
-							"ThemeDisplay",
-							"com.liferay.portal.kernel.theme.ThemeDisplay"));
-					put(
 						COMPANY_CONTEXT,
 						new Provider(
 							"Company",
 							"com.liferay.portal.kernel.model.Company"));
 					put(
-						PERMISSION_CHEKCER_CONTEXT,
+						FILTER_CONTEXT,
 						new Provider(
-							"PermissionChecker",
-							"com.liferay.portal.kernel.security.permission." +
-								"PermissionChecker"));
+							"Filter",
+							"com.liferay.commerce.openapi.core.context." +
+								"Filter"));
+					put(
+						LOCALE_CONTEXT,
+						new Provider(
+							"String", "java.lang.String", "languageId"));
 					put(
 						PAGINATION_CONTEXT,
 						new Provider(
@@ -115,15 +106,24 @@ public class Extension {
 							"com.liferay.commerce.openapi.core.context." +
 								"Pagination"));
 					put(
+						PERMISSION_CHEKCER_CONTEXT,
+						new Provider(
+							"PermissionChecker",
+							"com.liferay.portal.kernel.security.permission." +
+								"PermissionChecker"));
+					put(
 						SORT_CONTEXT,
 						new Provider(
 							"Sort", "com.liferay.portal.kernel.search.Sort"));
 					put(
-						FILTER_CONTEXT,
+						THEMEDISPLAY_CONTEXT,
 						new Provider(
-							"Filter",
-							"com.liferay.commerce.openapi.core.context." +
-								"Filter"));
+							"ThemeDisplay",
+							"com.liferay.portal.kernel.theme.ThemeDisplay"));
+					put(
+						USER_CONTEXT,
+						new Provider(
+							"User", "com.liferay.portal.kernel.model.User"));
 				}
 			};
 
