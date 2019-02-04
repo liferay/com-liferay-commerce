@@ -66,8 +66,8 @@ public interface CountryResource {
 	@PUT
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateCountry(
-			@PathParam("id") String id, CountryDTO countryDTO,
-			@Context Locale locale)
+			@QueryParam("groupId") Long groupId, @PathParam("id") String id,
+			CountryDTO countryDTO, @Context Locale locale)
 		throws Exception;
 
 	@Consumes("application/*")
