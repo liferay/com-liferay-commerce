@@ -29,7 +29,17 @@ import com.liferay.portal.kernel.service.ServiceContext;
 public class CommerceAccountTestUtil {
 
 	public static CommerceAccount addBusinessCommerceAccount(
-			long userId, String name, String email, long[] userIds,
+			long userId, String name, String email,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		return addBusinessCommerceAccount(
+			userId, name, email, StringPool.BLANK, null, null, serviceContext);
+	}
+
+	public static CommerceAccount addBusinessCommerceAccount(
+			long userId, String name, String email,
+			String externalReferenceCode, long[] userIds,
 			long[] organizationIds, ServiceContext serviceContext)
 		throws Exception {
 
@@ -38,8 +48,8 @@ public class CommerceAccountTestUtil {
 		CommerceAccount commerceAccount =
 			CommerceAccountLocalServiceUtil.addBusinessCommerceAccount(
 				name, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID, email,
-				StringPool.BLANK, true, StringPool.BLANK, new long[] {userId},
-				null, serviceContext);
+				StringPool.BLANK, true, externalReferenceCode,
+				new long[] {userId}, null, serviceContext);
 
 		// Commerce account user rels
 
@@ -57,11 +67,12 @@ public class CommerceAccountTestUtil {
 
 	public static CommerceAccount addBusinessCommerceAccount(
 			long userId, String name, String email,
-			ServiceContext serviceContext)
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws Exception {
 
 		return addBusinessCommerceAccount(
-			userId, name, email, null, null, serviceContext);
+			userId, name, email, externalReferenceCode, null, null,
+			serviceContext);
 	}
 
 	public static void addCommerceAccountOrganizationRels(
