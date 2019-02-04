@@ -128,7 +128,7 @@ public class CheckCommerceSubscriptionOrderPayedMessageListener
 
 			calendar.add(
 				Calendar.MINUTE,
-				_commercePaymentEngine.payedOrderInterval(
+				_commercePaymentEngine.getOrderStatusUpdateMaxIntervalMinutes(
 					commerceOrder.getCommerceOrderId()));
 
 			boolean checkSubscriptionPayments = _checkSubscriptionPayments(

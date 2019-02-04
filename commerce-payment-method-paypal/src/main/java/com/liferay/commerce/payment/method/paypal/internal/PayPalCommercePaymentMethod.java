@@ -419,7 +419,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	}
 
 	@Override
-	public int payedOrderInterval() {
+	public int getOrderStatusUpdateMaxIntervalMinutes() {
 		return 2880;
 	}
 
