@@ -44,6 +44,7 @@ class AddToCartButton extends Component {
 		formData.append('options', '[]');
 		formData.append('productId', this.productId);
 		formData.append('quantity', this.quantity);
+		formData.append('options', this.options);
 
 		if (this.orderId) {
 			formData.append('orderId', this.orderId);
@@ -121,6 +122,7 @@ AddToCartButton.STATE = {
 	cartAPI: Config.string().required(),
 	disabled: Config.bool().value(false),
 	editMode: Config.bool().value(false),
+	options: Config.string().value('[]'),
 	orderId: Config.oneOfType(
 		[
 			Config.number(),

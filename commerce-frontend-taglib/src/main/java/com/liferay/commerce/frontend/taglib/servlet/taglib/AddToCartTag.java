@@ -19,6 +19,17 @@ import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+// import java.util.ArrayList;
+import java.util.HashMap;
+// import java.util.List;
+import java.util.Map;
 
 /**
  * @author Fabio Diego Mastrorilli
@@ -27,12 +38,35 @@ public class AddToCartTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
-		putValue(
-			"cartAPI",
-			PortalUtil.getPortalURL(request) + "/o/commerce-ui/cart-item");
-		putValue("productId", "ASD123456");
+		try {
+			CommerceContext commerceContext =
+				(CommerceContext)request.getAttribute(
+					CommerceWebKeys.COMMERCE_CONTEXT);
 
-		setTemplateNamespace("AddToCart.render");
+			CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+			setComponentId("TemporaryAddToCartButtonId");
+
+			putValue(
+				"cartAPI",
+				PortalUtil.getPortalURL(request) + "/o/commerce-ui/cart-item");
+			putValue("productId", "ASD123456");
+			putValue("accountId", commerceAccount.getCommerceAccountId());
+			putValue("quantity", 0);
+			putValue("editMode", false);
+
+			Map<String, Object> multiMap = new HashMap<String, Object>();
+			multiMap.put("maxQuantity", new Integer(1000));
+			multiMap.put("minQuantity", new Integer(1));
+			multiMap.put("multipleQuantities", new Integer(1));
+
+			putValue("settings", multiMap);
+
+			setTemplateNamespace("AddToCartButton.render");
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
 
 		return super.doStartTag();
 	}
@@ -46,7 +80,10 @@ public class AddToCartTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/add_to_cart/AddToCart.es");
+			"commerce-frontend-taglib/add_to_cart/AddToCartButton.es");
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		AccountSelectorTag.class);
 
 }
