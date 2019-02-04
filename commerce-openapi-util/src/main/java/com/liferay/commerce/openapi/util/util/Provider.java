@@ -30,6 +30,10 @@ public class Provider {
 		_variableName = variableName;
 	}
 
+	public String decorateVariable(String baseVariableName) {
+		return baseVariableName;
+	}
+
 	public String getModelFQCN() {
 		return _fqcn;
 	}

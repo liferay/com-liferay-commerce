@@ -77,10 +77,11 @@ public class DTOGenerator extends BaseSourceGenerator {
 		while (iterator.hasNext()) {
 			OpenApiProperty openApiProperty = iterator.next();
 
-			String name = openApiProperty.getName();
-
 			Provider javaTypeProvider = OpenApiFormat.getJavaTypeProvider(
 				openApiProperty, _openApiComponents);
+
+			String name = javaTypeProvider.decorateVariable(
+				openApiProperty.getName());
 
 			importableJavaTypes.add(javaTypeProvider.getModelFQCN());
 
