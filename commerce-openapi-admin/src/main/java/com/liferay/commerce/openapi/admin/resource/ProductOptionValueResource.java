@@ -15,7 +15,6 @@
 package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
-import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import java.util.Locale;
 
@@ -41,7 +40,6 @@ public interface ProductOptionValueResource {
 
 	@DELETE
 	@Path("/{id}")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProductOptionValue(
 			@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
@@ -49,7 +47,6 @@ public interface ProductOptionValueResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductOptionValueDTO getProductOptionValue(
 			@PathParam("id") String id, @Context Locale locale)
 		throws Exception;
@@ -57,7 +54,6 @@ public interface ProductOptionValueResource {
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOptionValue(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			ProductOptionValueDTO productOptionValueDTO, @Context Locale locale)

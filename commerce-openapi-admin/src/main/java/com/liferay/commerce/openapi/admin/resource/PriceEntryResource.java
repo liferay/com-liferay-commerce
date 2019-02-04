@@ -17,7 +17,6 @@ package com.liferay.commerce.openapi.admin.resource;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import javax.annotation.Generated;
 
@@ -42,14 +41,12 @@ public interface PriceEntryResource {
 
 	@DELETE
 	@Path("/{id}")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceEntry(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceEntryDTO> getPriceEntries(
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
@@ -57,14 +54,12 @@ public interface PriceEntryResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceEntryDTO getPriceEntry(@PathParam("id") String id)
 		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceEntry(
 			@PathParam("id") String id, PriceEntryDTO priceEntryDTO)
 		throws Exception;
@@ -73,7 +68,6 @@ public interface PriceEntryResource {
 	@Path("/")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceEntryDTO upsertPriceEntry(
 			@QueryParam("groupId") Long groupId, PriceEntryDTO priceEntryDTO)
 		throws Exception;

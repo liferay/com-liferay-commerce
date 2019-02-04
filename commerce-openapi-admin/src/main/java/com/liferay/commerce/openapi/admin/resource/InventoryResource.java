@@ -15,7 +15,6 @@
 package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
-import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import javax.annotation.Generated;
 
@@ -38,21 +37,18 @@ public interface InventoryResource {
 
 	@DELETE
 	@Path("/{id}")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteInventory(@PathParam("id") String id)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public InventoryDTO getInventory(@PathParam("id") String id)
 		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateInventory(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			InventoryDTO inventoryDTO)

@@ -17,7 +17,6 @@ package com.liferay.commerce.openapi.admin.resource;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.oauth2.provider.scope.RequiresScope;
 
 import java.util.Locale;
 
@@ -44,7 +43,6 @@ public interface PriceListResource {
 
 	@DELETE
 	@Path("/{id}")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceList(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			@Context Locale locale)
@@ -53,7 +51,6 @@ public interface PriceListResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceListDTO getPriceList(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			@Context Locale locale)
@@ -62,7 +59,6 @@ public interface PriceListResource {
 	@GET
 	@Path("/")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceListDTO> getPriceLists(
 			@QueryParam("groupId") Long groupId, @Context Locale locale,
 			@Context Pagination pagination)
@@ -71,7 +67,6 @@ public interface PriceListResource {
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceList(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			PriceListDTO priceListDTO, @Context Locale locale)
@@ -81,7 +76,6 @@ public interface PriceListResource {
 	@Path("/")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceListDTO upsertPriceList(
 			@QueryParam("groupId") Long groupId, PriceListDTO priceListDTO,
 			@Context Locale locale)

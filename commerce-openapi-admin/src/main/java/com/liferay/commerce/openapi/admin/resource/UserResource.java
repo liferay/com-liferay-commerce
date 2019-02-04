@@ -17,7 +17,6 @@ package com.liferay.commerce.openapi.admin.resource;
 import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.UserDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import javax.annotation.Generated;
@@ -42,13 +41,11 @@ public interface UserResource {
 
 	@DELETE
 	@Path("/{id}")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteUser(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public UserDTO getUser(
 			@PathParam("id") String id, @Context ThemeDisplay themeDisplay)
 		throws Exception;
@@ -56,7 +53,6 @@ public interface UserResource {
 	@GET
 	@Path("/")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<UserDTO> getUsers(
 			@Context ThemeDisplay themeDisplay, @Context Pagination pagination)
 		throws Exception;
@@ -64,7 +60,6 @@ public interface UserResource {
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateUser(@PathParam("id") String id, UserDTO userDTO)
 		throws Exception;
 
@@ -72,7 +67,6 @@ public interface UserResource {
 	@Path("/")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public UserDTO upsertUser(
 			UserDTO userDTO, @Context ThemeDisplay themeDisplay)
 		throws Exception;
