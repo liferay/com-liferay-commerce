@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.resource.PriceEntryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 
 import javax.annotation.Generated;
@@ -45,6 +46,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceEntry(String id) throws Exception {
 		_priceEntryHelper.deleteCommercePriceEntry(id, _company.getCompanyId());
 
@@ -54,6 +56,7 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<PriceEntryDTO> getPriceEntries(
 			Long groupId, Pagination pagination)
 		throws Exception {
@@ -62,11 +65,13 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceEntryDTO getPriceEntry(String id) throws Exception {
 		return _priceEntryHelper.getPriceEntryDTO(id, _company.getCompanyId());
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updatePriceEntry(String id, PriceEntryDTO priceEntryDTO)
 		throws Exception {
 
@@ -79,6 +84,7 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public PriceEntryDTO upsertPriceEntry(
 			Long groupId, PriceEntryDTO priceEntryDTO)
 		throws Exception {

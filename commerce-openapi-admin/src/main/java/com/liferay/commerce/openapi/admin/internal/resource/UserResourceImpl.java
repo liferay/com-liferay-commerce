@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.UserDTO;
 import com.liferay.commerce.openapi.admin.resource.UserResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -47,6 +48,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class UserResourceImpl implements UserResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteUser(String id) throws Exception {
 		_userHelper.deleteUser(_company.getCompanyId(), id);
 
@@ -56,6 +58,7 @@ public class UserResourceImpl implements UserResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public UserDTO getUser(String id, ThemeDisplay themeDisplay)
 		throws Exception {
 
@@ -64,6 +67,7 @@ public class UserResourceImpl implements UserResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<UserDTO> getUsers(
 			ThemeDisplay themeDisplay, Pagination pagination)
 		throws Exception {
@@ -74,6 +78,7 @@ public class UserResourceImpl implements UserResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateUser(String id, UserDTO userDTO) throws Exception {
 		_userHelper.updateUser(
 			_company.getCompanyId(), id, _permissionChecker, userDTO);
@@ -84,6 +89,7 @@ public class UserResourceImpl implements UserResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public UserDTO upsertUser(UserDTO userDTO, ThemeDisplay themeDisplay)
 		throws Exception {
 

@@ -21,6 +21,7 @@ import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductOptionResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 
 import java.util.Locale;
@@ -49,6 +50,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProductOption(String id, Locale locale)
 		throws Exception {
 
@@ -60,6 +62,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductOptionDTO getProductOption(String id, Locale locale)
 		throws Exception {
 
@@ -67,6 +70,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionDTO> getProductOptions(
 			Long groupId, Locale locale, Pagination pagination)
 		throws Exception {
@@ -76,6 +80,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
 			String id, Locale locale, Pagination pagination)
 		throws Exception {
@@ -85,6 +90,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOption(
 			String id, Long groupId, ProductOptionDTO productOptionDTO,
 			Locale locale)
@@ -99,6 +105,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductOptionDTO upsertProductOption(
 			Long groupId, ProductOptionDTO productOptionDTO, Locale locale)
 		throws Exception {
@@ -108,6 +115,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductOptionValueDTO upsertProductOptionValue(
 			String id, Long groupId,
 			ProductOptionValueDTO productOptionValueDTO, Locale locale)

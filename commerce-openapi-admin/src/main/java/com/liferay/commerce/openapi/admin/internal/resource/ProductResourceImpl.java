@@ -21,6 +21,7 @@ import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 
@@ -50,6 +51,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class ProductResourceImpl implements ProductResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProduct(String id) throws Exception {
 		_productHelper.deleteProduct(id, _company);
 
@@ -59,11 +61,13 @@ public class ProductResourceImpl implements ProductResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductDTO getProduct(String id) throws Exception {
 		return _productHelper.getProduct(id, _company);
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductDTO> getProducts(
 			Long groupId, Pagination pagination)
 		throws Exception {
@@ -72,6 +76,7 @@ public class ProductResourceImpl implements ProductResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<SkuDTO> getSkus(String id, Pagination pagination)
 		throws Exception {
 
@@ -79,6 +84,7 @@ public class ProductResourceImpl implements ProductResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProduct(
 			String id, Long groupId, ProductDTO productDTO, Locale locale)
 		throws Exception {
@@ -91,6 +97,7 @@ public class ProductResourceImpl implements ProductResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductDTO upsertProduct(
 			Long groupId, ProductDTO productDTO, Locale locale)
 		throws Exception {
@@ -99,6 +106,7 @@ public class ProductResourceImpl implements ProductResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public SkuDTO upsertSku(
 			String id, Long groupId, SkuDTO skuDTO, Locale locale)
 		throws Exception {

@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 import com.liferay.commerce.openapi.admin.internal.resource.util.InventoryHelper;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.resource.InventoryResource;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 
 import javax.annotation.Generated;
@@ -43,6 +44,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 public class InventoryResourceImpl implements InventoryResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteInventory(String id) throws Exception {
 		_inventoryHelper.deleteInventory(id);
 
@@ -52,11 +54,13 @@ public class InventoryResourceImpl implements InventoryResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public InventoryDTO getInventory(String id) throws Exception {
 		return _inventoryHelper.getInventory(id);
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateInventory(
 			String id, Long groupId, InventoryDTO inventoryDTO)
 		throws Exception {
