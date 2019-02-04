@@ -331,6 +331,16 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	}
 
 	@Override
+	public int getOrderStatusUpdateMaxIntervalMinutes(long commerceOrderId)
+		throws PortalException {
+
+		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
+			commerceOrderId);
+
+		return commercePaymentMethod.getOrderStatusUpdateMaxIntervalMinutes();
+	}
+
+	@Override
 	public String getPaymentMethodName(String paymentMethodKey, Locale locale) {
 		CommercePaymentMethod commercePaymentMethod =
 			_commercePaymentMethodRegistry.getCommercePaymentMethod(
@@ -375,14 +385,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	)
 	public CommercePaymentResult partiallyRefundPayment(long commerceOrderId) {
 		return _emptyResult(commerceOrderId);
-	}
-
-	@Override
-	public int getOrderStatusUpdateMaxIntervalMinutes(long commerceOrderId) throws PortalException {
-		CommercePaymentMethod commercePaymentMethod = _getCommercePaymentMethod(
-			commerceOrderId);
-
-		return commercePaymentMethod.getOrderStatusUpdateMaxIntervalMinutes();
 	}
 
 	@Override
