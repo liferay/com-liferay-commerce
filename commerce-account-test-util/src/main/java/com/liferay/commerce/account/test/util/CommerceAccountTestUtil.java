@@ -16,58 +16,17 @@ package com.liferay.commerce.account.test.util;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalServiceUtil;
 import com.liferay.commerce.account.service.CommerceAccountUserRelLocalServiceUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Group;
-import com.liferay.portal.kernel.model.GroupConstants;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
-import com.liferay.portal.kernel.test.util.GroupTestUtil;
-import com.liferay.portal.kernel.test.util.RandomTestUtil;
-import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
-
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Alessio Antonio Rendina
  */
 public class CommerceAccountTestUtil {
-
-	public static CommerceAccount addPersonalCommerceAccount(
-			long userId, ServiceContext serviceContext)
-		throws Exception {
-
-		return CommerceAccountLocalServiceUtil.addPersonalCommerceAccount(
-			userId, StringPool.BLANK, StringPool.BLANK, serviceContext);
-	}
-
-	public static void addCommerceAccountUserRels(
-			long commerceAccountId, long[] userIds, ServiceContext serviceContext)
-		throws PortalException {
-
-		CommerceAccountUserRelLocalServiceUtil.addCommerceAccountUserRels(
-			commerceAccountId, userIds, null, null, serviceContext);
-	}
-
-	public static void addCommerceAccountOrganizationRels(
-			long commerceAccountId, long[] organizationIds,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		CommerceAccountOrganizationRelLocalServiceUtil.
-			addCommerceAccountOrganizationRels(
-				commerceAccountId, organizationIds, serviceContext);
-	}
 
 	public static CommerceAccount addBusinessCommerceAccount(
 			long userId, String name, String email, long[] userIds,
@@ -89,7 +48,7 @@ public class CommerceAccountTestUtil {
 
 		// Commerce account organization rels
 
-		addCommerceAccountUserRels(
+		addCommerceAccountOrganizationRels(
 			commerceAccount.getCommerceAccountId(), organizationIds,
 			serviceContext);
 
@@ -103,6 +62,33 @@ public class CommerceAccountTestUtil {
 
 		return addBusinessCommerceAccount(
 			userId, name, email, null, null, serviceContext);
+	}
+
+	public static void addCommerceAccountOrganizationRels(
+			long commerceAccountId, long[] organizationIds,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CommerceAccountOrganizationRelLocalServiceUtil.
+			addCommerceAccountOrganizationRels(
+				commerceAccountId, organizationIds, serviceContext);
+	}
+
+	public static void addCommerceAccountUserRels(
+			long commerceAccountId, long[] userIds,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CommerceAccountUserRelLocalServiceUtil.addCommerceAccountUserRels(
+			commerceAccountId, userIds, null, null, serviceContext);
+	}
+
+	public static CommerceAccount addPersonalCommerceAccount(
+			long userId, ServiceContext serviceContext)
+		throws Exception {
+
+		return CommerceAccountLocalServiceUtil.addPersonalCommerceAccount(
+			userId, StringPool.BLANK, StringPool.BLANK, serviceContext);
 	}
 
 }

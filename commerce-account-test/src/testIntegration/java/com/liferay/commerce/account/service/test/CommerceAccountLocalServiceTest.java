@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.OrganizationConstants;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -35,7 +34,7 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
-import com.liferay.portal.kernel.test.util.OrganizationTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -113,14 +112,6 @@ public class CommerceAccountLocalServiceTest {
 			WorkflowConstants.STATUS_APPROVED, commerceAccount.getStatus());
 	}
 
-	private ServiceContext _getServiceContext() throws Exception {
-		Group group = GroupTestUtil.addGroup(
-			_user.getCompanyId(), _user.getUserId(),
-			GroupConstants.DEFAULT_PARENT_GROUP_ID);
-
-		return ServiceContextTestUtil.getServiceContext(group.getGroupId());
-	}
-
 	@Test
 	public void testAddPersonalCommerceAccount() throws Exception {
 		frutillaRule.scenario(
@@ -184,15 +175,20 @@ public class CommerceAccountLocalServiceTest {
 
 		ServiceContext serviceContext = _getServiceContext();
 
-		int count = 2;
+		String organizationName = RandomTestUtil.randomString();
 
-		for (int i = 1; i <= count; i++) {
-			Organization organization = OrganizationTestUtil.addOrganization(
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-				"organization" + i, false);
+		for (int i = 1; i < 3; i++) {
+			Organization organization =
+				OrganizationLocalServiceUtil.addOrganization(
+					_user.getUserId(),
+					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
+					organizationName + i, false);
 
 			User user = UserTestUtil.addUser(
-				"organizationUser" + i, serviceContext.getScopeGroupId());
+				_user.getCompanyId(), _user.getUserId(), "organizationUser" + i,
+				serviceContext.getLocale(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(),
+				new long[] {serviceContext.getScopeGroupId()}, serviceContext);
 
 			OrganizationLocalServiceUtil.addUserOrganization(
 				user.getUserId(), organization);
@@ -223,12 +219,12 @@ public class CommerceAccountLocalServiceTest {
 			organizationUser1CommerceAccounts.get(0);
 
 		Assert.assertEquals(
-			organizationUser1CommerceAccount.getName(),
-			"businessOrganizationAccount1");
+			"businessOrganizationAccount1",
+			organizationUser1CommerceAccount.getName());
 
 		List<CommerceAccount> organizationUser2CommerceAccounts =
 			_commerceAccountLocalService.getUserCommerceAccounts(
-				organizationUser1.getUserId(),
+				organizationUser2.getUserId(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
 				CommerceAccountConstants.SITE_TYPE_B2B, StringPool.BLANK,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -241,14 +237,12 @@ public class CommerceAccountLocalServiceTest {
 			organizationUser2CommerceAccounts.get(0);
 
 		Assert.assertEquals(
-			organizationUser2CommerceAccount.getName(),
-			"businessOrganizationAccount1");
+			"businessOrganizationAccount2",
+			organizationUser2CommerceAccount.getName());
 	}
 
 	@Test
-	public void testBusinessUserCommerceAccountsVisibility()
-		throws Exception {
-
+	public void testBusinessUserCommerceAccountsVisibility() throws Exception {
 		frutillaRule.scenario(
 			"Adding new business Commerce Accounts"
 		).given(
@@ -263,11 +257,12 @@ public class CommerceAccountLocalServiceTest {
 
 		ServiceContext serviceContext = _getServiceContext();
 
-		int count = 2;
-
-		for (int i = 1; i <= count; i++) {
+		for (int i = 1; i < 3; i++) {
 			User user = UserTestUtil.addUser(
-				"businessUser" + i, serviceContext.getScopeGroupId());
+				_user.getCompanyId(), _user.getUserId(), "businessUser" + i,
+				serviceContext.getLocale(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(),
+				new long[] {serviceContext.getScopeGroupId()}, serviceContext);
 
 			CommerceAccountTestUtil.addBusinessCommerceAccount(
 				_user.getUserId(), "businessUserAccount" + i,
@@ -295,7 +290,7 @@ public class CommerceAccountLocalServiceTest {
 			businessUser1CommerceAccounts.get(0);
 
 		Assert.assertEquals(
-			businessUser1CommerceAccount.getName(), "businessUserAccount1");
+			"businessUserAccount1", businessUser1CommerceAccount.getName());
 
 		List<CommerceAccount> businessUser2CommerceAccounts =
 			_commerceAccountLocalService.getUserCommerceAccounts(
@@ -312,22 +307,30 @@ public class CommerceAccountLocalServiceTest {
 			businessUser2CommerceAccounts.get(0);
 
 		Assert.assertEquals(
-			businessUser2CommerceAccount.getName(), "businessUserAccount2");
+			"businessUserAccount2", businessUser2CommerceAccount.getName());
 	}
 
 	@Rule
 	public final FrutillaRule frutillaRule = new FrutillaRule();
 
-	@Inject
-	private CommerceAccountLocalService _commerceAccountLocalService;
+	private ServiceContext _getServiceContext() throws Exception {
+		Group group = GroupTestUtil.addGroup(
+			_user.getCompanyId(), _user.getUserId(),
+			GroupConstants.DEFAULT_PARENT_GROUP_ID);
+
+		return ServiceContextTestUtil.getServiceContext(group.getGroupId());
+	}
 
 	@Inject
-	private UserLocalService _userLocalService;
+	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@DeleteAfterTestRun
 	private Company _company;
 
 	@DeleteAfterTestRun
 	private User _user;
+
+	@Inject
+	private UserLocalService _userLocalService;
 
 }
