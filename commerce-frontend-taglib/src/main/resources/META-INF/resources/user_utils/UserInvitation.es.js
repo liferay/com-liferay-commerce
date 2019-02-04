@@ -42,7 +42,7 @@ class UserInvitation extends Component {
 	}
 
 	testQuery() {
-		this._isLoading = true;
+		this._loading = true;
 
 		return this._debouncedFetchUsers();
 	}
@@ -92,15 +92,14 @@ class UserInvitation extends Component {
 			this.query = '';
 		}
 
-		const hasUserAlreadyBeenAdded = this.addedUsers.reduce(
+		const userAlreadyAdded = this.addedUsers.reduce(
 			(alreadyAdded, user) => alreadyAdded || user.email === userToBeToggled.email,
 			false
 		);
 
-		this.addedUsers =
-			hasUserAlreadyBeenAdded ?
-				this.addedUsers.filter((user) => user.email !== userToBeToggled.email) :
-				[...this.addedUsers, userToBeToggled];
+		this.addedUsers = userAlreadyAdded ?
+			this.addedUsers.filter((user) => user.email !== userToBeToggled.email) :
+			[...this.addedUsers, userToBeToggled];
 
 		this.testAddedUsers();
 
@@ -119,7 +118,7 @@ class UserInvitation extends Component {
 			)
 			.then(
 				response => {
-					this._isLoading = false;
+					this._loading = false;
 
 					this.users = response.users;
 
@@ -151,7 +150,7 @@ UserInvitation.STATE = {
 	spritemap: Config.string(),
 	users: Config.array(USER_SCHEMA).value([]),
 	usersAPI: Config.string().value(''),
-	_isLoading: Config.bool().internal().value(false)
+	_loading: Config.bool().internal().value(false)
 };
 
 export {UserInvitation};

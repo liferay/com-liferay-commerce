@@ -138,7 +138,9 @@ public class CommerceAccountClayTable
 		nameField.setContentRenderer("imageName");
 
 		clayTableSchemaBuilder.addField("accountId", "id");
+
 		clayTableSchemaBuilder.addField("email", "email");
+
 		clayTableSchemaBuilder.addField("address", "address");
 
 		return clayTableSchemaBuilder.build();
