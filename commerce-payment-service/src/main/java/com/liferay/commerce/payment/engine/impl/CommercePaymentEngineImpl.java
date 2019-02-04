@@ -353,11 +353,11 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			return null;
 		}
 
-		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
-
 		CommercePaymentRequestProvider commercePaymentRequestProvider =
 			_getCommercePaymentRequestProvider(commercePaymentMethod);
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 
 		CommercePaymentRequest commercePaymentRequest =
 			commercePaymentRequestProvider.getCommercePaymentRequest(

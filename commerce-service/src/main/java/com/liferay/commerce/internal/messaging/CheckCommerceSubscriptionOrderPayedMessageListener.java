@@ -164,17 +164,13 @@ public class CheckCommerceSubscriptionOrderPayedMessageListener
 			return false;
 		}
 
+		long maxSubscriptionCycles =
+			commerceSubscriptionEntry.getMaxSubscriptionCycles();
+
 		long retrievedCyclesCompleted =
 			subscriptionPaymentDetails.getCyclesCompleted();
 		long retrievedCyclesRemaining =
 			subscriptionPaymentDetails.getCyclesRemaining();
-		long paymentsFailed = subscriptionPaymentDetails.getPaymentsFailed();
-
-		int commerceSubscriptionCycleEntriesCount =
-			commerceSubscriptionEntry.
-				getCommerceSubscriptionCycleEntriesCount();
-		long maxSubscriptionCycles =
-			commerceSubscriptionEntry.getMaxSubscriptionCycles();
 
 		long retrievedMaxCycles =
 			retrievedCyclesCompleted + retrievedCyclesRemaining;
@@ -183,14 +179,20 @@ public class CheckCommerceSubscriptionOrderPayedMessageListener
 			return false;
 		}
 
+		int commerceSubscriptionCycleEntriesCount =
+			commerceSubscriptionEntry.
+				getCommerceSubscriptionCycleEntriesCount();
+
 		if (retrievedCyclesCompleted <
-				commerceSubscriptionCycleEntriesCount - 1) {
+				(commerceSubscriptionCycleEntriesCount - 1)) {
 
 			return false;
 		}
 
+		long paymentsFailed = subscriptionPaymentDetails.getPaymentsFailed();
+
 		if (paymentsFailed >
-				_commerceSubscriptionConfiguration.paymentsAttempts()) {
+				_commerceSubscriptionConfiguration.paymentAttemptsMaxCount()) {
 
 			return false;
 		}
