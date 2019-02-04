@@ -263,6 +263,8 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 			sb.append("\t@Override\n");
 
+			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
+
 			sb.append(_getMethodDeclaration(method, false, openApiComponents));
 
 			sb.append(" {\n");
@@ -315,8 +317,6 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			sb.append(_getProducesAnnotation(method.getResponses()));
 
 			sb.append(_getConsumesAnnotation(method.getRequestBody()));
-
-			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
 
 			sb.append(_getMethodDeclaration(method, true, openApiComponents));
 
