@@ -52,4 +52,51 @@ public class OpenApiTestUtil {
 		return jsonNode.get("components");
 	}
 
+	public static JsonNode getOpenApiComponentsWithNestedObjectPattern()
+		throws IOException {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{ \"components\": {\"schemas\": ");
+		sb.append("{\"NestedComponent\": {\"type\": \"object\", ");
+		sb.append("\"properties\": {\"code\": {\"type\": \"integer\", ");
+		sb.append("\"format\": \"int64\"}, \"modifyDate\": {\"type\": ");
+		sb.append("\"string\", \"format\": \"date\"}}}, ");
+		sb.append("\"HostComponent\": {\"type\": ");
+		sb.append("\"object\", \"properties\": {\"id\": {\"type\": ");
+		sb.append("\"integer\", \"format\": \"int64\"}, \"headerTitle\": ");
+		sb.append("{\"type\": \"string\"}, \"nestedComponent\": {\"$ref\": ");
+		sb.append("\"#/components/schemas/NestedComponent\"}}}}}}");
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode jsonNode = mapper.readTree(sb.toString());
+
+		return jsonNode.get("components");
+	}
+
+	public static JsonNode getOpenApiComponentsWithSimpleDictionaryPattern()
+		throws IOException {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{ \"components\": {\"schemas\": ");
+		sb.append("{\"ChildComponent\": {\"type\": \"object\", ");
+		sb.append("\"properties\": {\"code\": {\"type\": \"integer\", ");
+		sb.append("\"format\": \"int64\"}, \"localizedText\": {\"type\": ");
+		sb.append("\"object\", \"additionalProperties\": {\"type\": ");
+		sb.append("\"string\"}}}}, \"ParentComponent\": {\"type\": ");
+		sb.append("\"object\", \"properties\": {\"id\": {\"type\": ");
+		sb.append("\"integer\", \"format\": \"int64\"}, \"headerTitle\": ");
+		sb.append("{\"type\": \"object\", \"additionalProperties\": ");
+		sb.append("{\"type\": \"string\"}}, \"childComponent\": {\"$ref\": ");
+		sb.append("\"#/components/schemas/ChildComponent\"}}}}}}}");
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode jsonNode = mapper.readTree(sb.toString());
+
+		return jsonNode.get("components");
+	}
+
 }
