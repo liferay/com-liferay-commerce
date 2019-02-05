@@ -32,7 +32,7 @@ public class ComponentImporterTest {
 		ComponentImporter componentImporter = new ComponentImporter();
 
 		List<OpenApiComponent> components = componentImporter.getComponents(
-			OpenApiTestUtil.getComponentDefinitions());
+			OpenApiTestUtil.getOpenApiComponentsPattern());
 
 		Assert.assertEquals("Two components expected", 3, components.size());
 

@@ -90,7 +90,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		ComponentImporter componentImporter = new ComponentImporter();
 
 		List<OpenApiComponent> components = componentImporter.getComponents(
-			OpenApiTestUtil.getComponentDefinitions());
+			OpenApiTestUtil.getOpenApiComponentsPattern());
 
 		OpenApiComponent dictionaryConsumerOpenApiComponent = null;
 
