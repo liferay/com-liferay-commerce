@@ -14,10 +14,9 @@
 
 package com.liferay.commerce.openapi.admin.resource;
 
-import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.CountryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
-import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
 import javax.annotation.Generated;
 
@@ -42,13 +41,11 @@ public interface CountryResource {
 
 	@DELETE
 	@Path("/{id}")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteCountry(@PathParam("id") String id) throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<CountryDTO> getCountries(
 			@QueryParam("groupId") Long groupId, @Context Pagination pagination)
 		throws Exception;
@@ -56,13 +53,11 @@ public interface CountryResource {
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CountryDTO getCountry(@PathParam("id") String id) throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateCountry(
 			@QueryParam("groupId") Long groupId, @PathParam("id") String id,
 			CountryDTO countryDTO)
@@ -72,7 +67,6 @@ public interface CountryResource {
 	@Path("/")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public CountryDTO upsertCountry(
 			@QueryParam("groupId") Long groupId, CountryDTO countryDTO)
 		throws Exception;
