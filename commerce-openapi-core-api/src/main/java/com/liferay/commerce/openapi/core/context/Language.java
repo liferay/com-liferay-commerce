@@ -23,11 +23,16 @@ import java.util.Objects;
 public class Language {
 
 	public Language(Locale locale) {
-		this(locale.getLanguage());
+		this(locale.toString());
 	}
 
 	public Language(String languageId) {
 		Objects.requireNonNull(languageId);
+
+		if (!languageId.matches("^[a-z]{2}_[A-Z]{2}$")) {
+			throw new IllegalArgumentException(
+				"Not a valid Language ID. Expected format: \"en_US\".");
+		}
 
 		_languageId = languageId;
 	}
