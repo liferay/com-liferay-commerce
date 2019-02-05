@@ -41,8 +41,8 @@ public class CommerceAccountSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setName(model.getName());
 		soapModel.setParentCommerceAccountId(model.getParentCommerceAccountId());
+		soapModel.setName(model.getName());
 		soapModel.setLogoId(model.getLogoId());
 		soapModel.setEmail(model.getEmail());
 		soapModel.setTaxId(model.getTaxId());
@@ -165,20 +165,20 @@ public class CommerceAccountSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getName() {
-		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
 	public long getParentCommerceAccountId() {
 		return _parentCommerceAccountId;
 	}
 
 	public void setParentCommerceAccountId(long parentCommerceAccountId) {
 		_parentCommerceAccountId = parentCommerceAccountId;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
 	}
 
 	public long getLogoId() {
@@ -288,8 +288,8 @@ public class CommerceAccountSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _name;
 	private long _parentCommerceAccountId;
+	private String _name;
 	private long _logoId;
 	private String _email;
 	private String _taxId;

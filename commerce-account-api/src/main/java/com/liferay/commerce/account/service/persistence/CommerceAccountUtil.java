@@ -350,66 +350,6 @@ public class CommerceAccountUtil {
 	}
 
 	/**
-	* Returns the commerce account where companyId = &#63; and name = &#63; or throws a {@link NoSuchAccountException} if it could not be found.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @return the matching commerce account
-	* @throws NoSuchAccountException if a matching commerce account could not be found
-	*/
-	public static CommerceAccount findByC_N(long companyId, String name)
-		throws com.liferay.commerce.account.exception.NoSuchAccountException {
-		return getPersistence().findByC_N(companyId, name);
-	}
-
-	/**
-	* Returns the commerce account where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @return the matching commerce account, or <code>null</code> if a matching commerce account could not be found
-	*/
-	public static CommerceAccount fetchByC_N(long companyId, String name) {
-		return getPersistence().fetchByC_N(companyId, name);
-	}
-
-	/**
-	* Returns the commerce account where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce account, or <code>null</code> if a matching commerce account could not be found
-	*/
-	public static CommerceAccount fetchByC_N(long companyId, String name,
-		boolean retrieveFromCache) {
-		return getPersistence().fetchByC_N(companyId, name, retrieveFromCache);
-	}
-
-	/**
-	* Removes the commerce account where companyId = &#63; and name = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @return the commerce account that was removed
-	*/
-	public static CommerceAccount removeByC_N(long companyId, String name)
-		throws com.liferay.commerce.account.exception.NoSuchAccountException {
-		return getPersistence().removeByC_N(companyId, name);
-	}
-
-	/**
-	* Returns the number of commerce accounts where companyId = &#63; and name = &#63;.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @return the number of matching commerce accounts
-	*/
-	public static int countByC_N(long companyId, String name) {
-		return getPersistence().countByC_N(companyId, name);
-	}
-
-	/**
 	* Returns the commerce account where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchAccountException} if it could not be found.
 	*
 	* @param companyId the company ID

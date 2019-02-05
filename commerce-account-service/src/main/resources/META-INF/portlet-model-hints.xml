@@ -9,10 +9,10 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="parentCommerceAccountId" type="long" />
 		<field name="name" type="String">
 			<validator name="required" />
 		</field>
-		<field name="parentCommerceAccountId" type="long" />
 		<field name="logoId" type="long" />
 		<field name="email" type="String" />
 		<field name="taxId" type="String" />

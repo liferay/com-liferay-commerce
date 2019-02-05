@@ -65,8 +65,8 @@ public class CommerceAccountWrapper implements CommerceAccount,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("name", getName());
 		attributes.put("parentCommerceAccountId", getParentCommerceAccountId());
+		attributes.put("name", getName());
 		attributes.put("logoId", getLogoId());
 		attributes.put("email", getEmail());
 		attributes.put("taxId", getTaxId());
@@ -128,17 +128,17 @@ public class CommerceAccountWrapper implements CommerceAccount,
 			setModifiedDate(modifiedDate);
 		}
 
-		String name = (String)attributes.get("name");
-
-		if (name != null) {
-			setName(name);
-		}
-
 		Long parentCommerceAccountId = (Long)attributes.get(
 				"parentCommerceAccountId");
 
 		if (parentCommerceAccountId != null) {
 			setParentCommerceAccountId(parentCommerceAccountId);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
 		}
 
 		Long logoId = (Long)attributes.get("logoId");

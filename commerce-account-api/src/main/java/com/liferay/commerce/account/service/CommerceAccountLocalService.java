@@ -207,9 +207,6 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAccount fetchCommerceAccount(long commerceAccountId);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceAccount fetchCommerceAccount(long companyId, String name);
-
 	/**
 	* Returns the commerce account with the matching external reference code and company.
 	*
