@@ -32,7 +32,7 @@ public class Method {
 	public Method(
 		String name, List<Content> requestBody, String httpMethod,
 		String absolutePath, List<Parameter> parameters,
-		List<Response> responses, List<Extension> extensions) {
+		List<Response> responses, List<LiferayContextOpenApiExtension> liferayContextOpenApiExtensions) {
 
 		_name = name;
 
@@ -57,7 +57,7 @@ public class Method {
 			}
 		}
 
-		_extensions.addAll(extensions);
+		_liferayContextOpenApiExtensions.addAll(liferayContextOpenApiExtensions);
 
 		_hasResponseContent = hasResponseContent;
 	}
@@ -66,8 +66,8 @@ public class Method {
 		return _absolutePath;
 	}
 
-	public List<Extension> getExtensions() {
-		return new ArrayList<>(_extensions);
+	public List<LiferayContextOpenApiExtension> getLiferayContextOpenApiExtensions() {
+		return new ArrayList<>(_liferayContextOpenApiExtensions);
 	}
 
 	public String getHttpMethod() {
@@ -158,7 +158,7 @@ public class Method {
 	}
 
 	public boolean hasExtensions() {
-		if (_extensions.isEmpty()) {
+		if (_liferayContextOpenApiExtensions.isEmpty()) {
 			return false;
 		}
 
@@ -183,8 +183,8 @@ public class Method {
 	}
 
 	public boolean hasPaginationContextExtension() {
-		for (Extension extension : _extensions) {
-			if (extension.isPaginationContext()) {
+		for (LiferayContextOpenApiExtension liferayContextOpenApiExtension : _liferayContextOpenApiExtensions) {
+			if (liferayContextOpenApiExtension.isPaginationContext()) {
 				return true;
 			}
 		}
@@ -281,7 +281,7 @@ public class Method {
 	}
 
 	private final String _absolutePath;
-	private final List<Extension> _extensions = new ArrayList<>();
+	private final List<LiferayContextOpenApiExtension> _liferayContextOpenApiExtensions = new ArrayList<>();
 	private final boolean _hasResponseContent;
 	private final String _httpMethod;
 	private String _modelPath;

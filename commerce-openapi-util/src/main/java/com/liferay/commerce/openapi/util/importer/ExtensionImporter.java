@@ -16,11 +16,11 @@ package com.liferay.commerce.openapi.util.importer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import com.liferay.commerce.openapi.util.Extension;
+import com.liferay.commerce.openapi.util.LiferayContextOpenApiExtension;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
-import com.liferay.commerce.openapi.util.Parameter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,10 +32,16 @@ import org.slf4j.LoggerFactory;
  */
 public class ExtensionImporter {
 
-	public List<Extension> getExtensions(
-		JsonNode extensionJSONNode, List<OpenApiComponent> openApiComponents) {
+	public List<LiferayContextOpenApiExtension> getExtensions(
+		JsonNode parentJSONNode, List<OpenApiComponent> openApiComponents) {
 
-		List<Extension> extensions = new ArrayList<>();
+		JsonNode extensionJSONNode = parentJSONNode.get("x-liferay-context");
+
+		if (extensionJSONNode == null) {
+			return Collections.emptyList();
+		}
+
+		List<LiferayContextOpenApiExtension> liferayContextOpenApiExtensions = new ArrayList<>();
 
 		Iterator<String> iterator = extensionJSONNode.fieldNames();
 
@@ -46,22 +52,19 @@ public class ExtensionImporter {
 
 			JsonNode extensionDefinition = extensionJSONNode.get(name);
 
-			List<Parameter> parameters = parameterImporter.getParameters(
-				extensionDefinition.get("parameters"), openApiComponents);
-
 			_logger.info(
 				"Importing extension {} with parameter size {}", name,
 				parameters.size());
 
 			try {
-				extensions.add(new Extension(name, parameters));
+				liferayContextOpenApiExtensions.add(new LiferayContextOpenApiExtension(name, parameters));
 			}
 			catch (IllegalArgumentException iae) {
 				_logger.warn("Unable to process extension: {}", name);
 			}
 		}
 
-		return extensions;
+		return liferayContextOpenApiExtensions;
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
