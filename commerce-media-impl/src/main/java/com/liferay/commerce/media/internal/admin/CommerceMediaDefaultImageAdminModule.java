@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.commerce.media.web.internal.admin;
+package com.liferay.commerce.media.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
-import com.liferay.commerce.constants.CommerceConstants;
-import com.liferay.commerce.media.web.internal.display.context.CommerceMediaDefaultImageDisplayContext;
+import com.liferay.commerce.media.internal.display.context.CommerceMediaDefaultImageDisplayContext;
 import com.liferay.commerce.product.constants.CPActionKeys;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -138,9 +138,7 @@ public class CommerceMediaDefaultImageAdminModule
 	@Reference
 	private Portal _portal;
 
-	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
-	)
+	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
 	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(

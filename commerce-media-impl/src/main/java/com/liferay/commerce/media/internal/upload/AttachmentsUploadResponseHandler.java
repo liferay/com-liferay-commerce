@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.media.web.internal.upload;
+package com.liferay.commerce.media.internal.upload;
 
 import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.exception.CPAttachmentFileEntryNameException;

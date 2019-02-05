@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.media.web.internal.display.context;
+package com.liferay.commerce.media.internal.display.context;
 
 import com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration;
 import com.liferay.commerce.product.constants.CPActionKeys;

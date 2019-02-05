@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.media.web.internal.servlet;
+package com.liferay.commerce.media.internal.servlet;
 
 import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.media.constants.CommerceMediaConstants;
