@@ -22,8 +22,6 @@ import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.User;
 
-import javax.annotation.Generated;
-
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
