@@ -17,7 +17,7 @@ package com.liferay.commerce.openapi.util.importer;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import com.liferay.commerce.openapi.util.Content;
-import com.liferay.commerce.openapi.util.Extension;
+import com.liferay.commerce.openapi.util.LiferayContextOpenApiExtension;
 import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Parameter;
@@ -26,7 +26,6 @@ import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -123,13 +122,13 @@ public class MethodImporter {
 							ContentImporter.getContents(jsonNode)));
 				});
 
-			List<Extension> extensions = _getMethodExtensions(
+			List<LiferayContextOpenApiExtension> liferayContextOpenApiExtensions = _getMethodExtensions(
 				httpMethodJSONNode, openApiComponents);
 
 			methods.add(
 				new Method(
 					methodName, requestBodyContents, httpMethodName, path,
-					parameters, responses, extensions));
+					parameters, responses, liferayContextOpenApiExtensions));
 		}
 
 		_logger.trace("Imported {} methods for path {}", methods.size(), path);
@@ -137,21 +136,14 @@ public class MethodImporter {
 		return methods;
 	}
 
-	private List<Extension> _getMethodExtensions(
+	private List<LiferayContextOpenApiExtension> _getMethodExtensions(
 		JsonNode methodDefinitionJSONNode,
 		List<OpenApiComponent> openApiComponents) {
-
-		JsonNode liferayContextExtensionJSONNode = methodDefinitionJSONNode.get(
-			"x-liferay-context");
-
-		if (liferayContextExtensionJSONNode == null) {
-			return Collections.emptyList();
-		}
 
 		ExtensionImporter extensionImporter = new ExtensionImporter();
 
 		return extensionImporter.getExtensions(
-			liferayContextExtensionJSONNode, openApiComponents);
+			methodDefinitionJSONNode, openApiComponents);
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(

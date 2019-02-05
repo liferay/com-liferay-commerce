@@ -15,7 +15,7 @@
 package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.Content;
-import com.liferay.commerce.openapi.util.Extension;
+import com.liferay.commerce.openapi.util.LiferayContextOpenApiExtension;
 import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Response;
@@ -145,19 +145,19 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 				"@Context Language language, @Context Pagination pagination"));
 	}
 
-	private List<Extension> _getExtensions(String... extensionOpenApiNames) {
-		List<Extension> extensions = new ArrayList<>();
+	private List<LiferayContextOpenApiExtension> _getExtensions(String... extensionOpenApiNames) {
+		List<LiferayContextOpenApiExtension> liferayContextOpenApiExtensions = new ArrayList<>();
 
 		if (extensionOpenApiNames == null) {
-			return extensions;
+			return liferayContextOpenApiExtensions;
 		}
 
 		for (String extensionOpenApiName : extensionOpenApiNames) {
-			extensions.add(
-				new Extension(extensionOpenApiName, Collections.emptyList()));
+			liferayContextOpenApiExtensions.add(
+				new LiferayContextOpenApiExtension(extensionOpenApiName, Collections.emptyList()));
 		}
 
-		return extensions;
+		return liferayContextOpenApiExtensions;
 	}
 
 	private Method _getMethod(boolean responseContentArray) {
@@ -176,7 +176,7 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 
 	private List<Method> _getMethods(
 		boolean responseContentArray, String model,
-		List<Extension> extensions) {
+		List<LiferayContextOpenApiExtension> liferayContextOpenApiExtensions) {
 
 		List<Method> methods = new ArrayList<>();
 
@@ -188,18 +188,18 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 				Collections.emptyList(),
 				_getResponses(
 					responseContentArray, 201, 202, 400, 401, 404, 500),
-				extensions));
+				liferayContextOpenApiExtensions));
 		methods.add(
 			new Method(
 				"delete", Collections.emptyList(), "DELETE", absolutePath,
 				Collections.emptyList(),
-				_getResponses(responseContentArray, 204, 401), extensions));
+				_getResponses(responseContentArray, 204, 401), liferayContextOpenApiExtensions));
 		methods.add(
 			new Method(
 				"get", _getRequestContents(), "GET", absolutePath,
 				Collections.emptyList(),
 				_getResponses(responseContentArray, 200, 400, 404, 500),
-				extensions));
+				liferayContextOpenApiExtensions));
 
 		return methods;
 	}
