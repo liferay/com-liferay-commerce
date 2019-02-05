@@ -115,15 +115,8 @@ public class ComponentImporter {
 		List<String> requiredProperties = new ArrayList<>();
 
 		if (schemaEntryJSONNode.has("required")) {
-			JsonNode requiredJSONNode = schemaEntryJSONNode.get("required");
-
-			if (requiredJSONNode.isArray() && (requiredJSONNode.size() > 0)) {
-				for (int i = 0; i < requiredJSONNode.size(); i++) {
-					JsonNode jsonNode = requiredJSONNode.get(i);
-
-					requiredProperties.add(jsonNode.asText());
-				}
-			}
+			requiredProperties.addAll(
+				GetterUtil.getAsTextList(schemaEntryJSONNode.get("required")));
 		}
 
 		if (schemaEntryJSONNode.has("properties")) {

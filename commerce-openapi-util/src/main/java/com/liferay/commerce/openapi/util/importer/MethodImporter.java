@@ -17,9 +17,9 @@ package com.liferay.commerce.openapi.util.importer;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import com.liferay.commerce.openapi.util.Content;
-import com.liferay.commerce.openapi.util.LiferayContextOpenApiExtension;
 import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
+import com.liferay.commerce.openapi.util.OpenApiContextExtension;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Response;
 import com.liferay.commerce.openapi.util.Schema;
@@ -122,13 +122,13 @@ public class MethodImporter {
 							ContentImporter.getContents(jsonNode)));
 				});
 
-			List<LiferayContextOpenApiExtension> liferayContextOpenApiExtensions = _getMethodExtensions(
-				httpMethodJSONNode, openApiComponents);
+			List<OpenApiContextExtension> openApiContextExtensions =
+				_getMethodExtensions(httpMethodJSONNode);
 
 			methods.add(
 				new Method(
 					methodName, requestBodyContents, httpMethodName, path,
-					parameters, responses, liferayContextOpenApiExtensions));
+					parameters, responses, openApiContextExtensions));
 		}
 
 		_logger.trace("Imported {} methods for path {}", methods.size(), path);
@@ -136,14 +136,12 @@ public class MethodImporter {
 		return methods;
 	}
 
-	private List<LiferayContextOpenApiExtension> _getMethodExtensions(
-		JsonNode methodDefinitionJSONNode,
-		List<OpenApiComponent> openApiComponents) {
+	private List<OpenApiContextExtension> _getMethodExtensions(
+		JsonNode methodDefinitionJSONNode) {
 
 		ExtensionImporter extensionImporter = new ExtensionImporter();
 
-		return extensionImporter.getExtensions(
-			methodDefinitionJSONNode, openApiComponents);
+		return extensionImporter.getExtensions(methodDefinitionJSONNode);
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
