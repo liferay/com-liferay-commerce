@@ -17,8 +17,8 @@ package com.liferay.commerce.openapi.util.importer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.liferay.commerce.openapi.util.Definition;
 import com.liferay.commerce.openapi.util.Method;
+import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.PropertiesFactory;
 import com.liferay.commerce.openapi.util.importer.exception.ImporterException;
@@ -50,9 +50,9 @@ public class OpenAPIImporter {
 		OpenAPIImporter openAPIImporter = new OpenAPIImporter();
 
 		try {
-			Definition definition = openAPIImporter.getDefinition();
+			OpenApi openApi = openAPIImporter.getOpenApi();
 
-			_logger.debug("Resolved definition {}", definition);
+			_logger.debug("Resolved openApi {}", openApi);
 
 			System.exit(0);
 		}
@@ -86,18 +86,18 @@ public class OpenAPIImporter {
 			_properties.getProperty("openapi.swagger.protocol"));
 	}
 
-	public Definition getDefinition() {
-		if (_definition != null) {
-			return _definition;
+	public OpenApi getOpenApi() {
+		if (_openApi != null) {
+			return _openApi;
 		}
 
 		try {
 			_openAPIDefinitionJSON = _jsonWebServiceClient.doGet(
 				_apiDefinitionURL, Collections.emptyList(), _headers);
 
-			_definition = _getDefinition(_openAPIDefinitionJSON);
+			_openApi = _getDefinition(_openAPIDefinitionJSON);
 
-			return _definition;
+			return _openApi;
 		}
 		catch (JSONWebServiceException jsonwse) {
 			throw new ImporterException(
@@ -109,7 +109,7 @@ public class OpenAPIImporter {
 		}
 	}
 
-	private Definition _getDefinition(String json) throws IOException {
+	private OpenApi _getDefinition(String json) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 
 		JsonNode rootJSONNode = mapper.readTree(json);
@@ -120,7 +120,7 @@ public class OpenAPIImporter {
 		JsonNode titleJSONNode = infoJSONNode.get("title");
 		JsonNode versionJSONNode = infoJSONNode.get("version");
 
-		Definition definition = new Definition(
+		OpenApi openApi = new OpenApi(
 			versionJSONNode.asText(), descriptionJSONNode.asText(),
 			titleJSONNode.asText());
 
@@ -129,7 +129,7 @@ public class OpenAPIImporter {
 		List<OpenApiComponent> openApiComponents =
 			componentImporter.getComponents(rootJSONNode.get("components"));
 
-		definition.setOpenApiComponents(openApiComponents);
+		openApi.setOpenApiComponents(openApiComponents);
 
 		JsonNode pathsJSONNode = rootJSONNode.get("paths");
 
@@ -144,20 +144,20 @@ public class OpenAPIImporter {
 				path, pathsJSONNode.get(path), openApiComponents);
 
 			for (Method method : methods) {
-				definition.addMethod(method);
+				openApi.addMethod(method);
 			}
 		}
 
-		return definition;
+		return openApi;
 	}
 
 	private static Logger _logger = LoggerFactory.getLogger(
 		OpenAPIImporter.class);
 
 	private final String _apiDefinitionURL;
-	private Definition _definition;
 	private final List<NameValuePair> _headers = new ArrayList<>();
 	private final JSONWebServiceClient _jsonWebServiceClient;
+	private OpenApi _openApi;
 	private String _openAPIDefinitionJSON;
 	private final Properties _properties;
 
