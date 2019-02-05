@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -35,6 +36,8 @@ public class CommerceAccountUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
+		_dropIndex(CommerceAccountImpl.TABLE_NAME, "IX_462292EF");
+
 		_addIndexes(CommerceAccountImpl.TABLE_NAME);
 	}
 
@@ -62,6 +65,30 @@ public class CommerceAccountUpgradeProcess extends UpgradeProcess {
 					String.format(
 						"Index %s already exists on table %s",
 						indexMetadata.getIndexName(), tableName));
+			}
+		}
+	}
+
+	private void _dropIndex(String tableName, String indexName)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				String.format(
+					"Dropping index %s from table %s", indexName, tableName));
+		}
+
+		if (_tableHasIndex(tableName, indexName)) {
+			runSQL(
+				StringBundler.concat(
+					"drop index ", indexName, " on ", tableName));
+		}
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					String.format(
+						"Index %s already does not exist on table %s",
+						indexName, tableName));
 			}
 		}
 	}
