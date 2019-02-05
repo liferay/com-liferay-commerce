@@ -33,7 +33,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 public interface CPDefinitionLinkTypeConfiguration {
 
-	@Meta.AD(required = false)
+	@Meta.AD(name = "type", required = false)
 	public String type();
 
 }

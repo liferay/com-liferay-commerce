@@ -31,10 +31,10 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 public interface ExchangeRateProviderGroupServiceConfiguration {
 
-	@Meta.AD(deflt = "false", required = false)
+	@Meta.AD(deflt = "false", name = "auto-update", required = false)
 	public boolean autoUpdate();
 
-	@Meta.AD(required = false)
+	@Meta.AD(name = "default-exchange-rate-provider-key", required = false)
 	public String defaultExchangeRateProviderKey();
 
 }
