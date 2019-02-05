@@ -26,6 +26,11 @@ public enum RESTError {
 	COUNTRY_NAME_ERROR(
 		977, "Invalid country name for given language tag",
 		Response.Status.BAD_REQUEST),
+	CURRENCY_CODE_ERROR(
+		976, "Invalid currency code", Response.Status.BAD_REQUEST),
+	CURRENCY_NAME_ERROR(
+		975, "Invalid currency name for given language tag",
+		Response.Status.BAD_REQUEST),
 	DUPLICATE_ACCOUNT(981, "Duplicate account", Response.Status.CONFLICT),
 	DUPLICATE_PRICE_ENTRY(
 		988, "Duplicated price entry", Response.Status.CONFLICT),
