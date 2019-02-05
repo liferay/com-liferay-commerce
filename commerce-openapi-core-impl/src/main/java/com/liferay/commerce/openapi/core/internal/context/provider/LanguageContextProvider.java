@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.core.internal.context.provider;
 
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.portal.kernel.util.Portal;
 
 import java.util.Locale;
@@ -40,10 +41,10 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	service = ContextProvider.class
 )
 @Provider
-public class LocaleContextProvider implements ContextProvider<String> {
+public class LanguageContextProvider implements ContextProvider<Language> {
 
 	@Override
-	public String createContext(Message message) {
+	public Language createContext(Message message) {
 		HttpServletRequest httpServletRequest =
 			(HttpServletRequest)message.getContextualProperty("HTTP.REQUEST");
 
@@ -55,7 +56,7 @@ public class LocaleContextProvider implements ContextProvider<String> {
 					"HTTP.REQUEST"));
 		}
 
-		return locale.getLanguage();
+		return new Language(locale);
 	}
 
 	@Reference
