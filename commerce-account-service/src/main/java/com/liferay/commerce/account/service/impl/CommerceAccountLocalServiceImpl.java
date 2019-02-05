@@ -176,7 +176,7 @@ public class CommerceAccountLocalServiceImpl
 
 		CommerceAccount commerceAccount =
 			commerceAccountLocalService.addCommerceAccount(
-				String.valueOf(user.getUserId()),
+				user.getFullName(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
 				user.getEmailAddress(), taxId,
 				CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL, true,
@@ -264,11 +264,6 @@ public class CommerceAccountLocalServiceImpl
 	}
 
 	@Override
-	public CommerceAccount fetchCommerceAccount(long companyId, String name) {
-		return commerceAccountPersistence.fetchByC_N(companyId, name);
-	}
-
-	@Override
 	public CommerceAccount getCommerceAccount(
 		long userId, long commerceAccountId) {
 
@@ -318,12 +313,14 @@ public class CommerceAccountLocalServiceImpl
 			long companyId, long userId)
 		throws PortalException {
 
-		CommerceAccount commerceAccount =
-			commerceAccountLocalService.fetchCommerceAccount(
-				companyId, String.valueOf(userId));
+		List<CommerceAccount> commerceAccounts =
+			commerceAccountLocalService.getUserCommerceAccounts(
+				userId, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
+				CommerceAccountConstants.SITE_TYPE_B2C, StringPool.BLANK,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		if (commerceAccount != null) {
-			return commerceAccount;
+		if (!commerceAccounts.isEmpty()) {
+			return commerceAccounts.get(0);
 		}
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -493,11 +490,6 @@ public class CommerceAccountLocalServiceImpl
 			commerceAccountPersistence.fetchByC_ERC(
 				serviceContext.getCompanyId(), externalReferenceCode);
 
-		if (commerceAccount == null) {
-			commerceAccount = commerceAccountPersistence.fetchByC_N(
-				serviceContext.getCompanyId(), name);
-		}
-
 		if (commerceAccount != null) {
 			return commerceAccountLocalService.updateCommerceAccount(
 				commerceAccount.getCommerceAccountId(), name, logo, logoBytes,
@@ -641,29 +633,20 @@ public class CommerceAccountLocalServiceImpl
 			throw new CommerceAccountNameException();
 		}
 
-		CommerceAccount commerceAccount = null;
-		String errorMessage = null;
+		if (Validator.isNull(externalReferenceCode)) {
+			return;
+		}
 
-		if (Validator.isNotNull(externalReferenceCode)) {
-			commerceAccount = commerceAccountPersistence.fetchByC_ERC(
+		CommerceAccount commerceAccount =
+			commerceAccountPersistence.fetchByC_ERC(
 				companyId, externalReferenceCode);
-
-			errorMessage =
-				"There is another commerce account with external reference " +
-					"code " + externalReferenceCode;
-		}
-
-		if (commerceAccount == null) {
-			commerceAccount = commerceAccountPersistence.fetchByC_N(
-				companyId, name);
-
-			errorMessage = "There is another commerce account named " + name;
-		}
 
 		if ((commerceAccount != null) &&
 			(commerceAccount.getCommerceAccountId() != commerceAccountId)) {
 
-			throw new DuplicateCommerceAccountException(errorMessage);
+			throw new DuplicateCommerceAccountException(
+				"There is another commerce account with external reference " +
+					"code " + externalReferenceCode);
 		}
 	}
 
