@@ -23,9 +23,9 @@ import java.util.Set;
 /**
  * @author Igor Beslic
  */
-public class Definition {
+public class OpenApi {
 
-	public Definition(String version, String description, String title) {
+	public OpenApi(String version, String description, String title) {
 		_version = version;
 		_description = description;
 		_title = title;

@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
-import com.liferay.commerce.openapi.util.Definition;
+import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.PropertiesFactory;
@@ -158,21 +158,21 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private void _generateModule() throws IOException {
 		OpenAPIImporter openAPIImporter = new OpenAPIImporter();
 
-		Definition definition = openAPIImporter.getDefinition();
+		OpenApi openApi = openAPIImporter.getOpenApi();
 
 		try {
 			checkModuleOutputPaths(_moduleOutputPath);
 
 			_writeBNDSource();
 
-			_writeGradleSource(definition);
+			_writeGradleSource(openApi);
 
 			Set<OpenApiComponent> openApiComponents =
-				definition.getOpenApiComponents();
+				openApi.getOpenApiComponents();
 
-			for (Path path : definition.getPaths()) {
+			for (Path path : openApi.getPaths()) {
 				_resourceGenerator.writeResourceSources(
-					definition.getVersion(), path, openApiComponents);
+					openApi.getVersion(), path, openApiComponents);
 			}
 
 			Stream<OpenApiComponent> stream = openApiComponents.stream();
@@ -296,7 +296,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		writeSource(bndTpl, bndSourcePath);
 	}
 
-	private void _writeGradleSource(Definition definition) throws IOException {
+	private void _writeGradleSource(OpenApi openApi) throws IOException {
 		Properties properties = PropertiesFactory.getPropertiesFor(
 			OSGiRESTModuleGenerator.class);
 
@@ -310,7 +310,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		}
 
 		BuildGradleGenerator buildGradleGenerator = new BuildGradleGenerator(
-			definition.hasContextExtensions(), _moduleOutputPath,
+			openApi.hasContextExtensions(), _moduleOutputPath,
 			overwriteBuildGradle);
 
 		buildGradleGenerator.writeSource();
