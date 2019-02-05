@@ -24,7 +24,6 @@ import com.liferay.commerce.openapi.util.util.StringUtils;
 
 import java.io.IOException;
 
-import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -171,11 +170,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			Set<OpenApiComponent> openApiComponents =
 				definition.getOpenApiComponents();
 
-			Set<String> referencedModels = new HashSet<>();
-
 			for (Path path : definition.getPaths()) {
-				referencedModels.addAll(path.getReferencedModels());
-
 				_resourceGenerator.writeResourceSources(
 					definition.getVersion(), path, openApiComponents);
 			}

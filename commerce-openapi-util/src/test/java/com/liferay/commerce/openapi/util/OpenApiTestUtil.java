@@ -96,4 +96,36 @@ public class OpenApiTestUtil {
 		return jsonNode.get("components");
 	}
 
+	public static JsonNode getOpenApiContextExtensionPattern()
+		throws IOException {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{ \"x-liferay-context\": [");
+
+		OpenApiContextExtension[] openApiContextExtensions =
+			OpenApiContextExtension.values();
+
+		for (int i = 0; i < openApiContextExtensions.length; i++) {
+			sb.append("\"");
+
+			OpenApiContextExtension openApiContextExtension =
+				openApiContextExtensions[i];
+
+			sb.append(openApiContextExtension.getOpenApiName());
+
+			sb.append("\"");
+
+			if ((i + 1) < openApiContextExtensions.length) {
+				sb.append(",");
+			}
+		}
+
+		sb.append("]}");
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		return mapper.readTree(sb.toString());
+	}
+
 }
