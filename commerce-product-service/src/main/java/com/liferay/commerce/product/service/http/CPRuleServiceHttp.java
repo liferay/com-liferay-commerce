@@ -185,7 +185,7 @@ public class CPRuleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPRuleServiceUtil.class,
-					"initializeCPRules", _getCPRulesParameterTypes4);
+					"getCPRules", _getCPRulesParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					start, end, orderByComparator);
