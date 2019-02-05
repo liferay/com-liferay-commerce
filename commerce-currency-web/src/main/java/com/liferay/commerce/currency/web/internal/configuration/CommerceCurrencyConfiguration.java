@@ -16,6 +16,7 @@ package com.liferay.commerce.currency.web.internal.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
 
 /**
@@ -31,10 +32,12 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 )
 public interface CommerceCurrencyConfiguration {
 
-	@Meta.AD(deflt = "false", required = false)
+	@Meta.AD(
+		deflt = StringPool.FALSE, name = "enable-auto-update", required = false
+	)
 	public boolean enableAutoUpdate();
 
-	@Meta.AD(deflt = "60", required = false)
+	@Meta.AD(deflt = "60", name = "update-interval", required = false)
 	public int updateInterval();
 
 }
