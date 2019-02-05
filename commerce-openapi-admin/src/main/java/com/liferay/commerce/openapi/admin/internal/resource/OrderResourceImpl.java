@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.model.OrderDTO;
 import com.liferay.commerce.openapi.admin.resource.OrderResource;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -54,7 +55,7 @@ public class OrderResourceImpl implements OrderResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<OrderDTO> getOrder(
-			Long groupId, String languageId, Pagination pagination)
+			Long groupId, Language language, Pagination pagination)
 		throws Exception {
 
 		return new CollectionDTO(Collections.emptyList(), 0);
@@ -62,13 +63,13 @@ public class OrderResourceImpl implements OrderResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public OrderDTO getOrder(String id, String languageId) throws Exception {
+	public OrderDTO getOrder(String id, Language language) throws Exception {
 		return new OrderDTO();
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response updateOrder(String id, OrderDTO orderDTO, String languageId)
+	public Response updateOrder(String id, OrderDTO orderDTO, Language language)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();

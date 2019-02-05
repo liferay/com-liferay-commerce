@@ -19,6 +19,7 @@ import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
 import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
@@ -67,8 +68,7 @@ public class PriceListHelper {
 		);
 	}
 
-	public void deletePriceList(
-			String id, User user, String languageId, Company company)
+	public void deletePriceList(String id, User user, Company company)
 		throws PortalException {
 
 		CommercePriceList commercePriceList = null;
@@ -89,11 +89,12 @@ public class PriceListHelper {
 	}
 
 	public PriceListDTO getPriceList(
-			String id, long groupId, User user, String languageId,
+			String id, long groupId, User user, Language language,
 			Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(getPriceListById(id, company), languageId);
+		return DTOUtils.modelToDTO(
+			getPriceListById(id, company), language.getLanguageId());
 	}
 
 	public CommercePriceList getPriceListById(String id, Company company)
@@ -126,7 +127,7 @@ public class PriceListHelper {
 	}
 
 	public CollectionDTO<PriceListDTO> getPriceLists(
-			long groupId, User user, String languageId, Company company,
+			long groupId, User user, Language language, Company company,
 			Pagination pagination)
 		throws PortalException {
 
@@ -143,7 +144,7 @@ public class PriceListHelper {
 
 		return stream.map(
 			commercePriceList -> DTOUtils.modelToDTO(
-				commercePriceList, languageId)
+				commercePriceList, language.getLanguageId())
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -154,7 +155,7 @@ public class PriceListHelper {
 
 	public PriceListDTO updatePriceList(
 			String id, long groupId, PriceListDTO priceListDTO, User user,
-			String languageId, Company company)
+			Language language, Company company)
 		throws PortalException {
 
 		return DTOUtils.modelToDTO(
@@ -163,12 +164,12 @@ public class PriceListHelper {
 				priceListDTO.getPriority(), priceListDTO.isNeverExpire(),
 				priceListDTO.getDisplayDate(),
 				priceListDTO.getExpirationDate()),
-			languageId);
+			language.getLanguageId());
 	}
 
 	public PriceListDTO upsertPriceList(
 			long groupId, PriceListDTO priceListDTO, User user,
-			String languageId, Company company)
+			Language language, Company company)
 		throws PortalException {
 
 		return DTOUtils.modelToDTO(
@@ -179,7 +180,7 @@ public class PriceListHelper {
 				priceListDTO.getDisplayDate(), priceListDTO.getExpirationDate(),
 				priceListDTO.getExternalReferenceCode(),
 				priceListDTO.isActive(), user),
-			languageId);
+			language.getLanguageId());
 	}
 
 	private Calendar _convertDateToCalendar(Date date) {
