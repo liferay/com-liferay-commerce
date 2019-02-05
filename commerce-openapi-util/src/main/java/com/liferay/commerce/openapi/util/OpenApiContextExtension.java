@@ -16,73 +16,46 @@ package com.liferay.commerce.openapi.util;
 
 import com.liferay.commerce.openapi.util.util.Provider;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author Igor Beslic
  * @author Zoltán Takács
  */
-public class LiferayContextOpenApiExtension {
+public enum OpenApiContextExtension {
 
-	public LiferayContextOpenApiExtension(String name, List<Parameter> parameters) {
-		_name = name;
+	COMPANY_CONTEXT("company"), FILTER_CONTEXT("filter"),
+	LANGUAGE_CONTEXT("language"), PAGINATION_CONTEXT("pagination"),
+	PERMISSION_CHEKCER_CONTEXT("permissionchecker"), SORT_CONTEXT("sort"),
+	THEMEDISPLAY_CONTEXT("themedisplay"), USER_CONTEXT("user");
 
-		_parameters.addAll(parameters);
-
-		_extensionType = ExtensionType.fromOpenApiName(name);
-	}
-
-	public ExtensionType getExtensionType() {
-		return _extensionType;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public List<Parameter> getParameters() {
-		return _parameters;
-	}
-
-	public boolean isPaginationContext() {
-		if (_extensionType == ExtensionType.PAGINATION_CONTEXT) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public enum ExtensionType {
-
-		COMPANY_CONTEXT("company"), FILTER_CONTEXT("filter"),
-		LANGUAGE_CONTEXT("language"), PAGINATION_CONTEXT("pagination"),
-		PERMISSION_CHEKCER_CONTEXT("permissionchecker"), SORT_CONTEXT("sort"),
-		THEMEDISPLAY_CONTEXT("themedisplay"), USER_CONTEXT("user");
-
-		public static ExtensionType fromOpenApiName(String openApiName) {
-			for (ExtensionType extensionType : values()) {
-				if (openApiName.equals(extensionType._openApiName)) {
-					return extensionType;
-				}
+	public static OpenApiContextExtension fromOpenApiName(String openApiName) {
+		for (OpenApiContextExtension extensionType : values()) {
+			if (openApiName.equals(extensionType._openApiName)) {
+				return extensionType;
 			}
-
-			throw new IllegalArgumentException(
-				"Unsupported Open API name: " + openApiName);
 		}
 
-		public Provider getProvider() {
-			return _extensionToProvider.get(this);
-		}
+		throw new IllegalArgumentException(
+			"Unsupported Open API name: " + openApiName);
+	}
 
-		private ExtensionType(String openApiName) {
-			_openApiName = openApiName;
-		}
+	public String getOpenApiName() {
+		return _openApiName;
+	}
 
-		private static final Map<ExtensionType, Provider> _extensionToProvider =
-			new HashMap<ExtensionType, Provider>() {
+	public Provider getProvider() {
+		return _extensionToProvider.get(this);
+	}
+
+	private OpenApiContextExtension(String openApiName) {
+		_openApiName = openApiName;
+	}
+
+	private static final Map<OpenApiContextExtension, Provider>
+		_extensionToProvider =
+			new HashMap<OpenApiContextExtension, Provider>() {
 				{
 					put(
 						COMPANY_CONTEXT,
@@ -129,12 +102,6 @@ public class LiferayContextOpenApiExtension {
 				}
 			};
 
-		private final String _openApiName;
-
-	}
-
-	private final ExtensionType _extensionType;
-	private final String _name;
-	private final List<Parameter> _parameters = new ArrayList<>();
+	private final String _openApiName;
 
 }
