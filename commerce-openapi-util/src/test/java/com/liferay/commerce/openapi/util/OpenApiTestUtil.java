@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.openapi.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,9 +24,7 @@ import java.io.IOException;
  */
 public class OpenApiTestUtil {
 
-	public static JsonNode getComponentDefinitions()
-		throws IOException, JsonProcessingException {
-
+	public static JsonNode getOpenApiComponentsPattern() throws IOException {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("{ \"components\": {\"schemas\": ");
