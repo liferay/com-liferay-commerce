@@ -142,8 +142,7 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 		Assert.assertTrue(
 			"Context parameters with proper syntax expected",
 			interfaceMethods.contains(
-				"@Context Language language, @Context Pagination " +
-					"pagination"));
+				"@Context Language language, @Context Pagination pagination"));
 	}
 
 	private List<Extension> _getExtensions(String... extensionOpenApiNames) {
