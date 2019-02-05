@@ -19,8 +19,6 @@ import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.Consumes;
@@ -45,21 +43,21 @@ public interface ProductOptionResource {
 	@DELETE
 	@Path("/{id}")
 	public Response deleteProductOption(
-			@PathParam("id") String id, @Context Locale locale)
+			@PathParam("id") String id, @Context String languageId)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	public ProductOptionDTO getProductOption(
-			@PathParam("id") String id, @Context Locale locale)
+			@PathParam("id") String id, @Context String languageId)
 		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	public CollectionDTO<ProductOptionDTO> getProductOptions(
-			@QueryParam("groupId") Long groupId, @Context Locale locale,
+			@QueryParam("groupId") Long groupId, @Context String languageId,
 			@Context Pagination pagination)
 		throws Exception;
 
@@ -67,7 +65,7 @@ public interface ProductOptionResource {
 	@Path("/{id}/productOptionValue")
 	@Produces("application/*")
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
-			@PathParam("id") String id, @Context Locale locale,
+			@PathParam("id") String id, @Context String languageId,
 			@Context Pagination pagination)
 		throws Exception;
 
@@ -76,7 +74,7 @@ public interface ProductOptionResource {
 	@PUT
 	public Response updateProductOption(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			ProductOptionDTO productOptionDTO, @Context Locale locale)
+			ProductOptionDTO productOptionDTO, @Context String languageId)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -85,7 +83,7 @@ public interface ProductOptionResource {
 	@Produces("application/*")
 	public ProductOptionDTO upsertProductOption(
 			@QueryParam("groupId") Long groupId,
-			ProductOptionDTO productOptionDTO, @Context Locale locale)
+			ProductOptionDTO productOptionDTO, @Context String languageId)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -94,7 +92,8 @@ public interface ProductOptionResource {
 	@Produces("application/*")
 	public ProductOptionValueDTO upsertProductOptionValue(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			ProductOptionValueDTO productOptionValueDTO, @Context Locale locale)
+			ProductOptionValueDTO productOptionValueDTO,
+			@Context String languageId)
 		throws Exception;
 
 }
