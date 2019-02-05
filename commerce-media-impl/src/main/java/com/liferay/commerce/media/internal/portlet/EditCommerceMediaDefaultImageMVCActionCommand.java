@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.media.web.internal.portlet;
+package com.liferay.commerce.media.internal.portlet;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration;

@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.media.web.internal.portlet;
+package com.liferay.commerce.media.internal.portlet;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
-import com.liferay.commerce.media.web.internal.upload.AttachmentsUploadResponseHandler;
-import com.liferay.commerce.media.web.internal.upload.CommerceMediaDefaultImageUploadFileEntryHandler;
+import com.liferay.commerce.media.internal.upload.AttachmentsUploadResponseHandler;
+import com.liferay.commerce.media.internal.upload.CommerceMediaDefaultImageUploadFileEntryHandler;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.upload.UploadHandler;
