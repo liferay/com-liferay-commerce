@@ -19,8 +19,6 @@ import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.Consumes;
@@ -63,7 +61,7 @@ public interface SkuResource {
 	@PUT
 	public Response updateSku(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			SkuDTO skuDTO, @Context Locale locale)
+			SkuDTO skuDTO, @Context String languageId)
 		throws Exception;
 
 	@Consumes("application/*")

@@ -18,8 +18,6 @@ import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.GET;
@@ -39,14 +37,14 @@ public interface WebSiteResource {
 	@Path("/{id}")
 	@Produces("application/*")
 	public WebSiteDTO getWebSite(
-			@PathParam("id") String id, @Context Locale locale)
+			@PathParam("id") String id, @Context String languageId)
 		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	public CollectionDTO<WebSiteDTO> getWebSites(
-			@Context Locale locale, @Context Pagination pagination)
+			@Context String languageId, @Context Pagination pagination)
 		throws Exception;
 
 }

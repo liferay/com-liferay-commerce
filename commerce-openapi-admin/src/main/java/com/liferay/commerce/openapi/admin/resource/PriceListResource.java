@@ -18,8 +18,6 @@ import com.liferay.commerce.openapi.admin.model.PriceListDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.Consumes;
@@ -44,8 +42,7 @@ public interface PriceListResource {
 	@DELETE
 	@Path("/{id}")
 	public Response deletePriceList(
-			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			@Context Locale locale)
+			@PathParam("id") String id, @Context String languageId)
 		throws Exception;
 
 	@GET
@@ -53,14 +50,14 @@ public interface PriceListResource {
 	@Produces("application/*")
 	public PriceListDTO getPriceList(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			@Context Locale locale)
+			@Context String languageId)
 		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	public CollectionDTO<PriceListDTO> getPriceLists(
-			@QueryParam("groupId") Long groupId, @Context Locale locale,
+			@QueryParam("groupId") Long groupId, @Context String languageId,
 			@Context Pagination pagination)
 		throws Exception;
 
@@ -69,7 +66,7 @@ public interface PriceListResource {
 	@PUT
 	public Response updatePriceList(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			PriceListDTO priceListDTO, @Context Locale locale)
+			PriceListDTO priceListDTO, @Context String languageId)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -78,7 +75,7 @@ public interface PriceListResource {
 	@Produces("application/*")
 	public PriceListDTO upsertPriceList(
 			@QueryParam("groupId") Long groupId, PriceListDTO priceListDTO,
-			@Context Locale locale)
+			@Context String languageId)
 		throws Exception;
 
 }
