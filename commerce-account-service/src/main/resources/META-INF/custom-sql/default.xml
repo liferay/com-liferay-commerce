@@ -6,28 +6,29 @@
 			SELECT
 				COUNT(DISTINCT CommerceAccount.commerceAccountId) AS COUNT_VALUE
 			FROM
-				CommerceAccount
+				User_
 			LEFT JOIN
-			 	CommerceAccountUserRel ON
-			 		CommerceAccountUserRel.commerceAccountId = CommerceAccount.commerceAccountId
-			LEFT JOIN
-				CommerceAccountOrganizationRel ON
-					CommerceAccountOrganizationRel.commerceAccountId = CommerceAccount.commerceAccountId
-			LEFT JOIN
-				Organization_ ON
-					Organization_.organizationId = CommerceAccountOrganizationRel.organizationId
-			LEFT JOIN
-				Organization_ Org2 ON
-					Org2.treePath LIKE Organization_.treePath
+				CommerceAccountUserRel ON
+					CommerceAccountUserRel.commerceAccountUserId = User_.userId
 			LEFT JOIN
 				Users_Orgs ON
-					Users_Orgs.organizationId = Org2.organizationId
+					Users_Orgs.userId = User_.userId
+			LEFT JOIN
+				Organization_ ON
+					Organization_.organizationId = Users_Orgs.organizationId
+			LEFT JOIN
+				Organization_  Org2 ON
+					Org2.treePath LIKE CONCAT(Organization_.treePath, '%')
+			LEFT JOIN
+				CommerceAccountOrganizationRel ON
+					CommerceAccountOrganizationRel.organizationId = Org2.organizationId
+			LEFT JOIN
+				CommerceAccount ON
+					(CommerceAccount.commerceAccountId = CommerceAccountUserRel.commerceAccountId) OR
+					(CommerceAccount.commerceAccountId = CommerceAccountOrganizationRel.commerceAccountId)
 			WHERE
 				[$PARENT_ACCOUNT_ID$]
-				(
-					(Users_Orgs.userId = [$USER_ID$]) OR
-					(CommerceAccountUserRel.commerceAccountUserId = [$USER_ID$])
-				) AND
+				(User_.userId  = [$USER_ID$]) AND
 				(CommerceAccount.type_ != 0) AND
 				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
 		]]>
@@ -37,28 +38,29 @@
 			SELECT
 				DISTINCT CommerceAccount.*
 			FROM
-				CommerceAccount
+				User_
 			LEFT JOIN
-			 	CommerceAccountUserRel ON
-			 		CommerceAccountUserRel.commerceAccountId = CommerceAccount.commerceAccountId
-			LEFT JOIN
-				CommerceAccountOrganizationRel ON
-					CommerceAccountOrganizationRel.commerceAccountId = CommerceAccount.commerceAccountId
-			LEFT JOIN
-				Organization_ ON
-					Organization_.organizationId = CommerceAccountOrganizationRel.organizationId
-			LEFT JOIN
-				Organization_ Org2 ON
-					Org2.treePath LIKE Organization_.treePath
+				CommerceAccountUserRel ON
+					CommerceAccountUserRel.commerceAccountUserId = User_.userId
 			LEFT JOIN
 				Users_Orgs ON
-					Users_Orgs.organizationId = Org2.organizationId
+					Users_Orgs.userId = User_.userId
+			LEFT JOIN
+				Organization_ ON
+					Organization_.organizationId = Users_Orgs.organizationId
+			LEFT JOIN
+				Organization_  Org2 ON
+					Org2.treePath LIKE CONCAT(Organization_.treePath, '%')
+			LEFT JOIN
+				CommerceAccountOrganizationRel ON
+					CommerceAccountOrganizationRel.organizationId = Org2.organizationId
+			LEFT JOIN
+				CommerceAccount ON
+					(CommerceAccount.commerceAccountId = CommerceAccountUserRel.commerceAccountId) OR
+					(CommerceAccount.commerceAccountId = CommerceAccountOrganizationRel.commerceAccountId)
 			WHERE
 				[$PARENT_ACCOUNT_ID$]
-				(
-					(Users_Orgs.userId = [$USER_ID$]) OR
-					(CommerceAccountUserRel.commerceAccountUserId = [$USER_ID$])
-				) AND
+				(User_.userId  = [$USER_ID$]) AND
 				(CommerceAccount.type_ != 0) AND
 				(LOWER(CommerceAccount.name) LIKE ? [$AND_OR_NULL_CHECK$])
 		]]>
@@ -68,27 +70,28 @@
 			SELECT
 				DISTINCT CommerceAccount.*
 			FROM
-				CommerceAccount
+				User_
 			LEFT JOIN
-			 	CommerceAccountUserRel ON
-			 		CommerceAccountUserRel.commerceAccountId = CommerceAccount.commerceAccountId
-			LEFT JOIN
-				CommerceAccountOrganizationRel ON
-					CommerceAccountOrganizationRel.commerceAccountId = CommerceAccount.commerceAccountId
-			LEFT JOIN
-				Organization_ ON
-					Organization_.organizationId = CommerceAccountOrganizationRel.organizationId
-			LEFT JOIN
-				Organization_ Org2 ON
-					Org2.treePath LIKE Organization_.treePath
+				CommerceAccountUserRel ON
+					CommerceAccountUserRel.commerceAccountUserId = User_.userId
 			LEFT JOIN
 				Users_Orgs ON
-					Users_Orgs.organizationId = Org2.organizationId
+					Users_Orgs.userId = User_.userId
+			LEFT JOIN
+				Organization_ ON
+					Organization_.organizationId = Users_Orgs.organizationId
+			LEFT JOIN
+				Organization_  Org2 ON
+					Org2.treePath LIKE CONCAT(Organization_.treePath, '%')
+			LEFT JOIN
+				CommerceAccountOrganizationRel ON
+					CommerceAccountOrganizationRel.organizationId = Org2.organizationId
+			LEFT JOIN
+				CommerceAccount ON
+					(CommerceAccount.commerceAccountId = CommerceAccountUserRel.commerceAccountId) OR
+					(CommerceAccount.commerceAccountId = CommerceAccountOrganizationRel.commerceAccountId)
 			WHERE
-				(
-					(Users_Orgs.userId = [$USER_ID$]) OR
-					(CommerceAccountUserRel.commerceAccountUserId = [$USER_ID$])
-				) AND
+				(User_.userId  = [$USER_ID$]) AND
 				(CommerceAccount.type_ != 0) AND
 				(CommerceAccount.commerceAccountId = ?)
 		]]>
