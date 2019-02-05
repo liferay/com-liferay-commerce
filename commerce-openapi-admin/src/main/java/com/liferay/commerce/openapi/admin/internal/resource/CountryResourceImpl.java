@@ -15,10 +15,10 @@
 package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.CountryHelper;
-import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.CountryDTO;
 import com.liferay.commerce.openapi.admin.resource.CountryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.User;
 
