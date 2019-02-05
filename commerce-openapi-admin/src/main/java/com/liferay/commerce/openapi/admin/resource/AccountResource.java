@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.AccountDTO;
+import com.liferay.commerce.openapi.admin.model.OrderDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
@@ -28,6 +29,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -53,6 +55,15 @@ public interface AccountResource {
 	public CollectionDTO<AccountDTO> getAccounts(@Context Pagination pagination)
 		throws Exception;
 
+	@GET
+	@Path("/{id}/order")
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<OrderDTO> getOrder(
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			@Context Pagination pagination)
+		throws Exception;
+
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
@@ -65,5 +76,15 @@ public interface AccountResource {
 	@POST
 	@Produces("application/*")
 	public AccountDTO upsertAccount(AccountDTO accountDTO) throws Exception;
+
+	@Consumes("application/*")
+	@Path("/{id}/order")
+	@POST
+	@Produces("application/*")
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public OrderDTO upsertSku(
+			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
+			OrderDTO orderDTO, @Context String languageId)
+		throws Exception;
 
 }
