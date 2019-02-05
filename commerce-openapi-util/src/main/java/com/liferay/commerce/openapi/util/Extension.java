@@ -58,7 +58,7 @@ public class Extension {
 	public enum ExtensionType {
 
 		COMPANY_CONTEXT("company"), FILTER_CONTEXT("filter"),
-		LOCALE_CONTEXT("locale"), PAGINATION_CONTEXT("pagination"),
+		LANGUAGE_CONTEXT("language"), PAGINATION_CONTEXT("pagination"),
 		PERMISSION_CHEKCER_CONTEXT("permissionchecker"), SORT_CONTEXT("sort"),
 		THEMEDISPLAY_CONTEXT("themedisplay"), USER_CONTEXT("user");
 
@@ -96,9 +96,11 @@ public class Extension {
 							"com.liferay.commerce.openapi.core.context." +
 								"Filter"));
 					put(
-						LOCALE_CONTEXT,
+						LANGUAGE_CONTEXT,
 						new Provider(
-							"String", "java.lang.String", "languageId"));
+							"Language",
+							"com.liferay.commerce.openapi.core.context." +
+								"Language"));
 					put(
 						PAGINATION_CONTEXT,
 						new Provider(
