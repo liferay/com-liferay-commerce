@@ -25,8 +25,6 @@ import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.core.Context;
@@ -43,11 +41,10 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=1.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = ProductResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class ProductResourceImpl implements ProductResource {
 
 	@Override
@@ -86,7 +83,7 @@ public class ProductResourceImpl implements ProductResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProduct(
-			String id, Long groupId, ProductDTO productDTO, Locale locale)
+			String id, Long groupId, ProductDTO productDTO, String languageId)
 		throws Exception {
 
 		_productHelper.updateProductDTO(id, productDTO, _company);
@@ -99,7 +96,7 @@ public class ProductResourceImpl implements ProductResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductDTO upsertProduct(
-			Long groupId, ProductDTO productDTO, Locale locale)
+			Long groupId, ProductDTO productDTO, String languageId)
 		throws Exception {
 
 		return _productHelper.upsertProduct(groupId, productDTO, _user);
@@ -108,7 +105,7 @@ public class ProductResourceImpl implements ProductResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public SkuDTO upsertSku(
-			String id, Long groupId, SkuDTO skuDTO, Locale locale)
+			String id, Long groupId, SkuDTO skuDTO, String languageId)
 		throws Exception {
 
 		return _skuHelper.updateSKU(id, groupId, skuDTO, _company);

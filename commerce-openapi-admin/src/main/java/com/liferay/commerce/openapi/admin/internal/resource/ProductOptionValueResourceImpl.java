@@ -20,8 +20,6 @@ import com.liferay.commerce.openapi.admin.resource.ProductOptionValueResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.core.Context;
@@ -42,13 +40,12 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	scope = ServiceScope.PROTOTYPE, service = ProductOptionValueResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class ProductOptionValueResourceImpl
 	implements ProductOptionValueResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteProductOptionValue(String id, Locale locale)
+	public Response deleteProductOptionValue(String id, String languageId)
 		throws Exception {
 
 		_productOptionValueHelper.deleteProductOptionValue(id, _company);
@@ -60,22 +57,23 @@ public class ProductOptionValueResourceImpl
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public ProductOptionValueDTO getProductOptionValue(String id, Locale locale)
+	public ProductOptionValueDTO getProductOptionValue(
+			String id, String languageId)
 		throws Exception {
 
 		return _productOptionValueHelper.getProductOptionValue(
-			id, locale, _company);
+			id, languageId, _company);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOptionValue(
 			String id, Long groupId,
-			ProductOptionValueDTO productOptionValueDTO, Locale locale)
+			ProductOptionValueDTO productOptionValueDTO, String languageId)
 		throws Exception {
 
 		_productOptionValueHelper.updateProductOptionValue(
-			id, groupId, productOptionValueDTO, locale, _company);
+			id, groupId, productOptionValueDTO, languageId, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 

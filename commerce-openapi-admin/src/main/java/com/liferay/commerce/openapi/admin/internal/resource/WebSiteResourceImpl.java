@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.service.GroupService;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -56,16 +55,16 @@ public class WebSiteResourceImpl implements WebSiteResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public WebSiteDTO getWebSite(String id, Locale locale) {
+	public WebSiteDTO getWebSite(String id, String languageId) {
 		Group group = _getGroupById(id);
 
-		return DTOUtils.modelToDTO(group, locale);
+		return DTOUtils.modelToDTO(group, languageId);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<WebSiteDTO> getWebSites(
-		Locale locale, Pagination pagination) {
+		String languageId, Pagination pagination) {
 
 		final int totalItems;
 		List<Group> groups = null;
@@ -87,7 +86,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 		Stream<Group> stream = groups.stream();
 
 		return stream.map(
-			group -> DTOUtils.modelToDTO(group, locale)
+			group -> DTOUtils.modelToDTO(group, languageId)
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),

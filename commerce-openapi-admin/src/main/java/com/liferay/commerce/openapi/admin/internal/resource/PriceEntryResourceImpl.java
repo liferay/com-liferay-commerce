@@ -42,7 +42,6 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	scope = ServiceScope.PROTOTYPE, service = PriceEntryResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
