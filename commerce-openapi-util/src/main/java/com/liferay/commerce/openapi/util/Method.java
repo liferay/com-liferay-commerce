@@ -32,7 +32,8 @@ public class Method {
 	public Method(
 		String name, List<Content> requestBody, String httpMethod,
 		String absolutePath, List<Parameter> parameters,
-		List<Response> responses, List<LiferayContextOpenApiExtension> liferayContextOpenApiExtensions) {
+		List<Response> responses,
+		List<OpenApiContextExtension> openApiContextExtensions) {
 
 		_name = name;
 
@@ -57,17 +58,13 @@ public class Method {
 			}
 		}
 
-		_liferayContextOpenApiExtensions.addAll(liferayContextOpenApiExtensions);
+		_openApiContextExtensions.addAll(openApiContextExtensions);
 
 		_hasResponseContent = hasResponseContent;
 	}
 
 	public String getAbsolutePath() {
 		return _absolutePath;
-	}
-
-	public List<LiferayContextOpenApiExtension> getLiferayContextOpenApiExtensions() {
-		return new ArrayList<>(_liferayContextOpenApiExtensions);
 	}
 
 	public String getHttpMethod() {
@@ -93,6 +90,10 @@ public class Method {
 
 	public String getName() {
 		return _name;
+	}
+
+	public List<OpenApiContextExtension> getOpenApiContextExtensions() {
+		return new ArrayList<>(_openApiContextExtensions);
 	}
 
 	public List<Parameter> getParameters() {
@@ -158,7 +159,7 @@ public class Method {
 	}
 
 	public boolean hasExtensions() {
-		if (_liferayContextOpenApiExtensions.isEmpty()) {
+		if (_openApiContextExtensions.isEmpty()) {
 			return false;
 		}
 
@@ -183,8 +184,12 @@ public class Method {
 	}
 
 	public boolean hasPaginationContextExtension() {
-		for (LiferayContextOpenApiExtension liferayContextOpenApiExtension : _liferayContextOpenApiExtensions) {
-			if (liferayContextOpenApiExtension.isPaginationContext()) {
+		for (OpenApiContextExtension openApiContextExtension :
+				_openApiContextExtensions) {
+
+			if (openApiContextExtension ==
+					OpenApiContextExtension.PAGINATION_CONTEXT) {
+
 				return true;
 			}
 		}
@@ -281,11 +286,12 @@ public class Method {
 	}
 
 	private final String _absolutePath;
-	private final List<LiferayContextOpenApiExtension> _liferayContextOpenApiExtensions = new ArrayList<>();
 	private final boolean _hasResponseContent;
 	private final String _httpMethod;
 	private String _modelPath;
 	private final String _name;
+	private final List<OpenApiContextExtension> _openApiContextExtensions =
+		new ArrayList<>();
 	private final List<Parameter> _parameters = new ArrayList<>();
 	private String _path;
 	private Pattern _pathPattern = Pattern.compile(
