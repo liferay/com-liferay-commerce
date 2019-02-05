@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
+import com.liferay.commerce.openapi.core.context.Language;
 
 import javax.annotation.Generated;
 
@@ -39,14 +40,14 @@ public interface ProductOptionValueResource {
 	@DELETE
 	@Path("/{id}")
 	public Response deleteProductOptionValue(
-			@PathParam("id") String id, @Context String languageId)
+			@PathParam("id") String id, @Context Language language)
 		throws Exception;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	public ProductOptionValueDTO getProductOptionValue(
-			@PathParam("id") String id, @Context String languageId)
+			@PathParam("id") String id, @Context Language language)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -55,7 +56,7 @@ public interface ProductOptionValueResource {
 	public Response updateProductOptionValue(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			ProductOptionValueDTO productOptionValueDTO,
-			@Context String languageId)
+			@Context Language language)
 		throws Exception;
 
 }

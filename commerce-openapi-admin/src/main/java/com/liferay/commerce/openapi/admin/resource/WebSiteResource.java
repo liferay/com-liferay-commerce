@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
@@ -37,14 +38,14 @@ public interface WebSiteResource {
 	@Path("/{id}")
 	@Produces("application/*")
 	public WebSiteDTO getWebSite(
-			@PathParam("id") String id, @Context String languageId)
+			@PathParam("id") String id, @Context Language language)
 		throws Exception;
 
 	@GET
 	@Path("/")
 	@Produces("application/*")
 	public CollectionDTO<WebSiteDTO> getWebSites(
-			@Context String languageId, @Context Pagination pagination)
+			@Context Language language, @Context Pagination pagination)
 		throws Exception;
 
 }

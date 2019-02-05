@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.OrderDTO;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
@@ -82,7 +83,7 @@ public interface AccountResource {
 	@Produces("application/*")
 	public OrderDTO upsertSku(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			OrderDTO orderDTO, @Context String languageId)
+			OrderDTO orderDTO, @Context Language language)
 		throws Exception;
 
 }

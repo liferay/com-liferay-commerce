@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
@@ -61,7 +62,7 @@ public interface SkuResource {
 	@PUT
 	public Response updateSku(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			SkuDTO skuDTO, @Context String languageId)
+			SkuDTO skuDTO, @Context Language language)
 		throws Exception;
 
 	@Consumes("application/*")
