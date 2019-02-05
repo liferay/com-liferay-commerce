@@ -239,12 +239,6 @@ public class CommerceAccountLocalServiceWrapper
 		return _commerceAccountLocalService.fetchCommerceAccount(commerceAccountId);
 	}
 
-	@Override
-	public com.liferay.commerce.account.model.CommerceAccount fetchCommerceAccount(
-		long companyId, String name) {
-		return _commerceAccountLocalService.fetchCommerceAccount(companyId, name);
-	}
-
 	/**
 	* Returns the commerce account with the matching external reference code and company.
 	*
