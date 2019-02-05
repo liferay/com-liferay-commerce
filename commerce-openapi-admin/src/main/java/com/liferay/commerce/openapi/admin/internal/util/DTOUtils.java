@@ -44,8 +44,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 
-import java.util.Locale;
-
 /**
  * @author Zoltán Takács
  */
@@ -122,7 +120,7 @@ public class DTOUtils {
 	}
 
 	public static PriceListDTO modelToDTO(
-		CommercePriceList commercePriceList, Locale locale) {
+		CommercePriceList commercePriceList, String languageId) {
 
 		PriceListDTO priceListDTO = new PriceListDTO();
 
@@ -133,7 +131,7 @@ public class DTOUtils {
 			CommerceCurrency commerceCurrency =
 				commercePriceList.getCommerceCurrency();
 
-			priceListDTO.setCurrency(commerceCurrency.getName(locale));
+			priceListDTO.setCurrency(commerceCurrency.getName(languageId));
 
 			priceListDTO.setDisplayDate(commercePriceList.getDisplayDate());
 			priceListDTO.setExpirationDate(
@@ -223,18 +221,18 @@ public class DTOUtils {
 	}
 
 	public static ProductOptionDTO modelToDTO(
-		CPOption cpOption, Locale locale) {
+		CPOption cpOption, String languageId) {
 
 		ProductOptionDTO productOptionDTO = new ProductOptionDTO();
 
-		productOptionDTO.setDescription(cpOption.getDescription(locale));
+		productOptionDTO.setDescription(cpOption.getDescription(languageId));
 		productOptionDTO.setExternalReferenceCode(
 			cpOption.getExternalReferenceCode());
 		productOptionDTO.setFacetable(cpOption.isFacetable());
 		productOptionDTO.setFieldType(cpOption.getDDMFormFieldTypeName());
 		productOptionDTO.setId(cpOption.getCPOptionId());
 		productOptionDTO.setKey(cpOption.getKey());
-		productOptionDTO.setName(cpOption.getName(locale));
+		productOptionDTO.setName(cpOption.getName(languageId));
 		productOptionDTO.setRequired(cpOption.isRequired());
 		productOptionDTO.setSkuContributor(cpOption.isSkuContributor());
 
@@ -242,7 +240,7 @@ public class DTOUtils {
 	}
 
 	public static ProductOptionValueDTO modelToDTO(
-		CPOptionValue cpOptionValue, Locale locale) {
+		CPOptionValue cpOptionValue, String languageId) {
 
 		ProductOptionValueDTO productOptionValueDTO =
 			new ProductOptionValueDTO();
@@ -251,18 +249,18 @@ public class DTOUtils {
 			cpOptionValue.getExternalReferenceCode());
 		productOptionValueDTO.setId(cpOptionValue.getCPOptionValueId());
 		productOptionValueDTO.setKey(cpOptionValue.getKey());
-		productOptionValueDTO.setName(cpOptionValue.getName(locale));
+		productOptionValueDTO.setName(cpOptionValue.getName(languageId));
 		productOptionValueDTO.setPriority(cpOptionValue.getPriority());
 
 		return productOptionValueDTO;
 	}
 
-	public static WebSiteDTO modelToDTO(Group group, Locale locale) {
+	public static WebSiteDTO modelToDTO(Group group, String languageId) {
 		WebSiteDTO webSiteDTO = new WebSiteDTO();
 
-		webSiteDTO.setDescription(group.getDescription(locale));
+		webSiteDTO.setDescription(group.getDescription(languageId));
 		webSiteDTO.setId(group.getGroupId());
-		webSiteDTO.setName(group.getName(locale));
+		webSiteDTO.setName(group.getName(languageId));
 
 		return webSiteDTO;
 	}

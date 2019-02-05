@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -87,14 +88,14 @@ public class ProductOptionHelper {
 	}
 
 	public ProductOptionDTO getProductOption(
-			String id, Locale locale, Company company)
+			String id, String languageId, Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(getCPOptionById(id, company), locale);
+		return DTOUtils.modelToDTO(getCPOptionById(id, company), languageId);
 	}
 
 	public CollectionDTO<ProductOptionDTO> getProductOptions(
-			long groupId, Locale locale, Pagination pagination)
+			long groupId, String languageId, Pagination pagination)
 		throws PortalException {
 
 		List<CPOption> cpOptions = _cpOptionService.getCPOptions(
@@ -106,7 +107,7 @@ public class ProductOptionHelper {
 		Stream<CPOption> stream = cpOptions.stream();
 
 		return stream.map(
-			cpOption -> DTOUtils.modelToDTO(cpOption, locale)
+			cpOption -> DTOUtils.modelToDTO(cpOption, languageId)
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -117,12 +118,14 @@ public class ProductOptionHelper {
 
 	public ProductOptionDTO updateProductOption(
 			String id, long groupId, ProductOptionDTO productOptionDTO,
-			Locale locale, Company company)
+			String languageId, Company company)
 		throws PortalException {
 
 		CPOption cpOption = getCPOptionById(id, company);
 
 		Map<Locale, String> nameMap = cpOption.getNameMap();
+
+		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 		nameMap.put(locale, productOptionDTO.getName());
 
@@ -137,12 +140,14 @@ public class ProductOptionHelper {
 			productOptionDTO.getKey(),
 			_serviceContextHelper.getServiceContext(groupId));
 
-		return DTOUtils.modelToDTO(cpOption, locale);
+		return DTOUtils.modelToDTO(cpOption, languageId);
 	}
 
 	public ProductOptionDTO upsertProductOption(
-			long groupId, ProductOptionDTO productOptionDTO, Locale locale)
+			long groupId, ProductOptionDTO productOptionDTO, String languageId)
 		throws PortalException {
+
+		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>() {
 			{
@@ -163,7 +168,7 @@ public class ProductOptionHelper {
 			productOptionDTO.getExternalReferenceCode(),
 			_serviceContextHelper.getServiceContext(groupId));
 
-		return DTOUtils.modelToDTO(cpOption, locale);
+		return DTOUtils.modelToDTO(cpOption, languageId);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

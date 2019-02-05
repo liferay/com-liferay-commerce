@@ -41,7 +41,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -69,7 +68,7 @@ public class PriceListHelper {
 	}
 
 	public void deletePriceList(
-			String id, long groupId, User user, Locale locale, Company company)
+			String id, User user, String languageId, Company company)
 		throws PortalException {
 
 		CommercePriceList commercePriceList = null;
@@ -90,10 +89,11 @@ public class PriceListHelper {
 	}
 
 	public PriceListDTO getPriceList(
-			String id, long groupId, User user, Locale locale, Company company)
+			String id, long groupId, User user, String languageId,
+			Company company)
 		throws PortalException {
 
-		return DTOUtils.modelToDTO(getPriceListById(id, company), locale);
+		return DTOUtils.modelToDTO(getPriceListById(id, company), languageId);
 	}
 
 	public CommercePriceList getPriceListById(String id, Company company)
@@ -126,7 +126,7 @@ public class PriceListHelper {
 	}
 
 	public CollectionDTO<PriceListDTO> getPriceLists(
-			long groupId, User user, Locale locale, Company company,
+			long groupId, User user, String languageId, Company company,
 			Pagination pagination)
 		throws PortalException {
 
@@ -142,7 +142,8 @@ public class PriceListHelper {
 		Stream<CommercePriceList> stream = commercePriceLists.stream();
 
 		return stream.map(
-			commercePriceList -> DTOUtils.modelToDTO(commercePriceList, locale)
+			commercePriceList -> DTOUtils.modelToDTO(
+				commercePriceList, languageId)
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -153,7 +154,7 @@ public class PriceListHelper {
 
 	public PriceListDTO updatePriceList(
 			String id, long groupId, PriceListDTO priceListDTO, User user,
-			Locale locale, Company company)
+			String languageId, Company company)
 		throws PortalException {
 
 		return DTOUtils.modelToDTO(
@@ -162,12 +163,12 @@ public class PriceListHelper {
 				priceListDTO.getPriority(), priceListDTO.isNeverExpire(),
 				priceListDTO.getDisplayDate(),
 				priceListDTO.getExpirationDate()),
-			locale);
+			languageId);
 	}
 
 	public PriceListDTO upsertPriceList(
-			long groupId, PriceListDTO priceListDTO, User user, Locale locale,
-			Company company)
+			long groupId, PriceListDTO priceListDTO, User user,
+			String languageId, Company company)
 		throws PortalException {
 
 		return DTOUtils.modelToDTO(
@@ -178,7 +179,7 @@ public class PriceListHelper {
 				priceListDTO.getDisplayDate(), priceListDTO.getExpirationDate(),
 				priceListDTO.getExternalReferenceCode(),
 				priceListDTO.isActive(), user),
-			locale);
+			languageId);
 	}
 
 	private Calendar _convertDateToCalendar(Date date) {
