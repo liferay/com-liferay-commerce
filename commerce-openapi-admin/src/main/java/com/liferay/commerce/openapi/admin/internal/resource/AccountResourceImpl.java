@@ -18,6 +18,7 @@ import com.liferay.commerce.openapi.admin.internal.resource.util.AccountHelper;
 import com.liferay.commerce.openapi.admin.model.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.OrderDTO;
 import com.liferay.commerce.openapi.admin.resource.AccountResource;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -98,7 +99,7 @@ public class AccountResourceImpl implements AccountResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public OrderDTO upsertSku(
-			String id, Long groupId, OrderDTO orderDTO, String languageId)
+			String id, Long groupId, OrderDTO orderDTO, Language language)
 		throws Exception {
 
 		return null;

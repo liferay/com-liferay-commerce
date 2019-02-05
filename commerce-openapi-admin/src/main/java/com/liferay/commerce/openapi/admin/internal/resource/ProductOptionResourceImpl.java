@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.internal.resource.util.ProductOptionVa
 import com.liferay.commerce.openapi.admin.model.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductOptionResource;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -46,7 +47,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteProductOption(String id, String languageId)
+	public Response deleteProductOption(String id, Language language)
 		throws Exception {
 
 		_productOptionHelper.deleteProductOption(id, _company);
@@ -58,41 +59,41 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public ProductOptionDTO getProductOption(String id, String languageId)
+	public ProductOptionDTO getProductOption(String id, Language language)
 		throws Exception {
 
-		return _productOptionHelper.getProductOption(id, languageId, _company);
+		return _productOptionHelper.getProductOption(id, language, _company);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionDTO> getProductOptions(
-			Long groupId, String languageId, Pagination pagination)
+			Long groupId, Language language, Pagination pagination)
 		throws Exception {
 
 		return _productOptionHelper.getProductOptions(
-			groupId, languageId, pagination);
+			groupId, language, pagination);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
-			String id, String languageId, Pagination pagination)
+			String id, Language language, Pagination pagination)
 		throws Exception {
 
 		return _productOptionValueHelper.getProductOptionValues(
-			id, languageId, _company, pagination);
+			id, language, _company, pagination);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOption(
 			String id, Long groupId, ProductOptionDTO productOptionDTO,
-			String languageId)
+			Language language)
 		throws Exception {
 
 		_productOptionHelper.updateProductOption(
-			id, groupId, productOptionDTO, languageId, _company);
+			id, groupId, productOptionDTO, language, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
@@ -102,22 +103,22 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductOptionDTO upsertProductOption(
-			Long groupId, ProductOptionDTO productOptionDTO, String languageId)
+			Long groupId, ProductOptionDTO productOptionDTO, Language language)
 		throws Exception {
 
 		return _productOptionHelper.upsertProductOption(
-			groupId, productOptionDTO, languageId);
+			groupId, productOptionDTO, language);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductOptionValueDTO upsertProductOptionValue(
 			String id, Long groupId,
-			ProductOptionValueDTO productOptionValueDTO, String languageId)
+			ProductOptionValueDTO productOptionValueDTO, Language language)
 		throws Exception {
 
 		return _productOptionValueHelper.upsertProductOptionValue(
-			id, groupId, productOptionValueDTO, languageId, _company);
+			id, groupId, productOptionValueDTO, language, _company);
 	}
 
 	@Context

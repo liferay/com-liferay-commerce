@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ProductOptionValueHelper;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductOptionValueResource;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.Company;
 
@@ -43,7 +44,7 @@ public class ProductOptionValueResourceImpl
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response deleteProductOptionValue(String id, String languageId)
+	public Response deleteProductOptionValue(String id, Language language)
 		throws Exception {
 
 		_productOptionValueHelper.deleteProductOptionValue(id, _company);
@@ -56,22 +57,22 @@ public class ProductOptionValueResourceImpl
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductOptionValueDTO getProductOptionValue(
-			String id, String languageId)
+			String id, Language language)
 		throws Exception {
 
 		return _productOptionValueHelper.getProductOptionValue(
-			id, languageId, _company);
+			id, language, _company);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProductOptionValue(
 			String id, Long groupId,
-			ProductOptionValueDTO productOptionValueDTO, String languageId)
+			ProductOptionValueDTO productOptionValueDTO, Language language)
 		throws Exception {
 
 		_productOptionValueHelper.updateProductOptionValue(
-			id, groupId, productOptionValueDTO, languageId, _company);
+			id, groupId, productOptionValueDTO, language, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 

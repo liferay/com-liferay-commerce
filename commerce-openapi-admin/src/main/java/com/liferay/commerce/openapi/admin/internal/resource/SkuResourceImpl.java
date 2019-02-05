@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.internal.resource.util.SKUHelper;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.SkuResource;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -72,7 +73,7 @@ public class SkuResourceImpl implements SkuResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateSku(
-			String id, Long groupId, SkuDTO skuDTO, String languageId)
+			String id, Long groupId, SkuDTO skuDTO, Language language)
 		throws Exception {
 
 		_skuHelper.updateSKU(id, groupId, skuDTO, _company);

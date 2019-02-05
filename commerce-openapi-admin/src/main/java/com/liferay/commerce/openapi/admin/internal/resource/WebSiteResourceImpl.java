@@ -18,6 +18,7 @@ import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
 import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
 import com.liferay.commerce.openapi.admin.model.WebSiteDTO;
 import com.liferay.commerce.openapi.admin.resource.WebSiteResource;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -55,16 +56,16 @@ public class WebSiteResourceImpl implements WebSiteResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public WebSiteDTO getWebSite(String id, String languageId) {
+	public WebSiteDTO getWebSite(String id, Language language) {
 		Group group = _getGroupById(id);
 
-		return DTOUtils.modelToDTO(group, languageId);
+		return DTOUtils.modelToDTO(group, language.getLanguageId());
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<WebSiteDTO> getWebSites(
-		String languageId, Pagination pagination) {
+		Language language, Pagination pagination) {
 
 		final int totalItems;
 		List<Group> groups = null;
@@ -86,7 +87,7 @@ public class WebSiteResourceImpl implements WebSiteResource {
 		Stream<Group> stream = groups.stream();
 
 		return stream.map(
-			group -> DTOUtils.modelToDTO(group, languageId)
+			group -> DTOUtils.modelToDTO(group, language.getLanguageId())
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),

@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.util;
 import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
 import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
 import com.liferay.commerce.openapi.admin.model.ProductOptionValueDTO;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.product.exception.NoSuchCPOptionValueException;
@@ -92,15 +93,15 @@ public class ProductOptionValueHelper {
 	}
 
 	public ProductOptionValueDTO getProductOptionValue(
-			String id, String languageId, Company company)
+			String id, Language language, Company company)
 		throws PortalException {
 
 		return DTOUtils.modelToDTO(
-			getCPOptionValueById(id, company), languageId);
+			getCPOptionValueById(id, company), language.getLanguageId());
 	}
 
 	public CollectionDTO<ProductOptionValueDTO> getProductOptionValues(
-			String productOptionId, String languageId, Company company,
+			String productOptionId, Language language, Company company,
 			Pagination pagination)
 		throws PortalException {
 
@@ -117,7 +118,8 @@ public class ProductOptionValueHelper {
 		Stream<CPOptionValue> stream = cpOptions.stream();
 
 		return stream.map(
-			cpOptionValue -> DTOUtils.modelToDTO(cpOptionValue, languageId)
+			cpOptionValue -> DTOUtils.modelToDTO(
+				cpOptionValue, language.getLanguageId())
 		).collect(
 			Collectors.collectingAndThen(
 				Collectors.toList(),
@@ -128,7 +130,7 @@ public class ProductOptionValueHelper {
 
 	public ProductOptionValueDTO updateProductOptionValue(
 			String id, long groupId,
-			ProductOptionValueDTO productOptionValueDTO, String languageId,
+			ProductOptionValueDTO productOptionValueDTO, Language language,
 			Company company)
 		throws PortalException {
 
@@ -137,7 +139,7 @@ public class ProductOptionValueHelper {
 		Map<Locale, String> nameMap = cpOptionValue.getNameMap();
 
 		nameMap.put(
-			LocaleUtil.fromLanguageId(languageId),
+			LocaleUtil.fromLanguageId(language.getLanguageId()),
 			productOptionValueDTO.getName());
 
 		cpOptionValue = _cpOptionValueService.updateCPOptionValue(
@@ -145,12 +147,12 @@ public class ProductOptionValueHelper {
 			productOptionValueDTO.getPriority(), productOptionValueDTO.getKey(),
 			_serviceContextHelper.getServiceContext(groupId));
 
-		return DTOUtils.modelToDTO(cpOptionValue, languageId);
+		return DTOUtils.modelToDTO(cpOptionValue, language.getLanguageId());
 	}
 
 	public ProductOptionValueDTO upsertProductOptionValue(
 			String productOptionId, long groupId,
-			ProductOptionValueDTO productOptionValueDTO, String languageId,
+			ProductOptionValueDTO productOptionValueDTO, Language language,
 			Company company)
 		throws PortalException {
 
@@ -160,7 +162,7 @@ public class ProductOptionValueHelper {
 		Map<Locale, String> nameMap = new HashMap<Locale, String>() {
 			{
 				put(
-					LocaleUtil.fromLanguageId(languageId),
+					LocaleUtil.fromLanguageId(language.getLanguageId()),
 					productOptionValueDTO.getName());
 			}
 		};
@@ -171,7 +173,7 @@ public class ProductOptionValueHelper {
 			productOptionValueDTO.getExternalReferenceCode(),
 			_serviceContextHelper.getServiceContext(groupId));
 
-		return DTOUtils.modelToDTO(cpOptionValue, languageId);
+		return DTOUtils.modelToDTO(cpOptionValue, language.getLanguageId());
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

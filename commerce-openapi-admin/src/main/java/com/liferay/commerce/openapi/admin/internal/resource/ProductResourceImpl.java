@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.internal.resource.util.SKUHelper;
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.ProductResource;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -81,7 +82,7 @@ public class ProductResourceImpl implements ProductResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateProduct(
-			String id, Long groupId, ProductDTO productDTO, String languageId)
+			String id, Long groupId, ProductDTO productDTO, Language language)
 		throws Exception {
 
 		_productHelper.updateProductDTO(id, productDTO, _company);
@@ -94,7 +95,7 @@ public class ProductResourceImpl implements ProductResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public ProductDTO upsertProduct(
-			Long groupId, ProductDTO productDTO, String languageId)
+			Long groupId, ProductDTO productDTO, Language language)
 		throws Exception {
 
 		return _productHelper.upsertProduct(groupId, productDTO, _user);
@@ -103,7 +104,7 @@ public class ProductResourceImpl implements ProductResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public SkuDTO upsertSku(
-			String id, Long groupId, SkuDTO skuDTO, String languageId)
+			String id, Long groupId, SkuDTO skuDTO, Language language)
 		throws Exception {
 
 		return _skuHelper.updateSKU(id, groupId, skuDTO, _company);
