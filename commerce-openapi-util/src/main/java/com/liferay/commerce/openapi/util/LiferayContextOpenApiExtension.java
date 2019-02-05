@@ -25,9 +25,9 @@ import java.util.Map;
  * @author Igor Beslic
  * @author Zoltán Takács
  */
-public class Extension {
+public class LiferayContextOpenApiExtension {
 
-	public Extension(String name, List<Parameter> parameters) {
+	public LiferayContextOpenApiExtension(String name, List<Parameter> parameters) {
 		_name = name;
 
 		_parameters.addAll(parameters);

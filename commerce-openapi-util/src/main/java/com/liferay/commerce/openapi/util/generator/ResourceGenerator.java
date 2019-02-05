@@ -15,7 +15,7 @@
 package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.Content;
-import com.liferay.commerce.openapi.util.Extension;
+import com.liferay.commerce.openapi.util.LiferayContextOpenApiExtension;
 import com.liferay.commerce.openapi.util.Method;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.Parameter;
@@ -206,34 +206,23 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			if (method.hasExtensions()) {
 				importStatements.add("import javax.ws.rs.core.Context;\n");
 
-				for (Extension extension : method.getExtensions()) {
-					Extension.ExtensionType extensionType =
-						extension.getExtensionType();
+				for (LiferayContextOpenApiExtension liferayContextOpenApiExtension : method.getLiferayContextOpenApiExtensions()) {
+					LiferayContextOpenApiExtension.ExtensionType extensionType =
+						liferayContextOpenApiExtension.getExtensionType();
 
 					Provider provider = extensionType.getProvider();
 
-					List<Parameter> parameters = extension.getParameters();
-
-					if (parameters.isEmpty()) {
-						importStatements.add(
-							String.format(
-								"import %s;%n", provider.getModelFQCN()));
-					}
-					else {
-						importStatements.add(
-							String.format(
-								"import %s.%s;%n", _contextOutputPath,
-								StringUtils.upperCaseFirstChar(
-									provider.getModelName())));
-					}
+					importStatements.add(
+						String.format(
+							"import %s;%n", provider.getModelFQCN()));
 				}
 			}
 
 			if (method.hasImplicitPaginationContext(openApiComponents)) {
 				importStatements.add("import javax.ws.rs.core.Context;\n");
 
-				Extension.ExtensionType paginationExtensionType =
-					Extension.ExtensionType.PAGINATION_CONTEXT;
+				LiferayContextOpenApiExtension.ExtensionType paginationExtensionType =
+					LiferayContextOpenApiExtension.ExtensionType.PAGINATION_CONTEXT;
 
 				Provider provider = paginationExtensionType.getProvider();
 
@@ -349,17 +338,17 @@ public class ResourceGenerator extends BaseSourceGenerator {
 	private String _getContextParametersDeclaration(
 		Method method, boolean annotateParameter) {
 
-		List<Extension> extensions = method.getExtensions();
+		List<LiferayContextOpenApiExtension> liferayContextOpenApiExtensions = method.getLiferayContextOpenApiExtensions();
 
-		Iterator<Extension> iterator = extensions.iterator();
+		Iterator<LiferayContextOpenApiExtension> iterator = liferayContextOpenApiExtensions.iterator();
 
 		StringBuilder sb = new StringBuilder();
 
 		while (iterator.hasNext()) {
-			Extension extension = iterator.next();
+			LiferayContextOpenApiExtension liferayContextOpenApiExtension = iterator.next();
 
-			Extension.ExtensionType extensionType =
-				extension.getExtensionType();
+			LiferayContextOpenApiExtension.ExtensionType extensionType =
+				liferayContextOpenApiExtension.getExtensionType();
 
 			Provider provider = extensionType.getProvider();
 
@@ -469,8 +458,8 @@ public class ResourceGenerator extends BaseSourceGenerator {
 	private String _getPagingContextParametersDeclaration(
 		boolean annotateParameter) {
 
-		Extension.ExtensionType paginationContextExtension =
-			Extension.ExtensionType.PAGINATION_CONTEXT;
+		LiferayContextOpenApiExtension.ExtensionType paginationContextExtension =
+			LiferayContextOpenApiExtension.ExtensionType.PAGINATION_CONTEXT;
 
 		Provider provider = paginationContextExtension.getProvider();
 
