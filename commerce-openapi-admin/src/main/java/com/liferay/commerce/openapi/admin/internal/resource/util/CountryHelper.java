@@ -101,8 +101,7 @@ public class CountryHelper {
 		catch (NoSuchCountryException nsce) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Unable to find country with ID: " +
-						countryDTO.getId());
+					"Unable to find country with ID: " + countryDTO.getId());
 			}
 		}
 

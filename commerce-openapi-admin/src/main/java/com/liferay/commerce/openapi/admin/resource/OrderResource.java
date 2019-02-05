@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.OrderDTO;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
@@ -45,7 +46,7 @@ public interface OrderResource {
 	@GET
 	@Produces("application/*")
 	public CollectionDTO<OrderDTO> getOrder(
-			@QueryParam("groupId") Long groupId, @Context String languageId,
+			@QueryParam("groupId") Long groupId, @Context Language language,
 			@Context Pagination pagination)
 		throws Exception;
 
@@ -53,7 +54,7 @@ public interface OrderResource {
 	@Path("/{id}")
 	@Produces("application/*")
 	public OrderDTO getOrder(
-			@PathParam("id") String id, @Context String languageId)
+			@PathParam("id") String id, @Context Language language)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -61,7 +62,7 @@ public interface OrderResource {
 	@PUT
 	public Response updateOrder(
 			@PathParam("id") String id, OrderDTO orderDTO,
-			@Context String languageId)
+			@Context Language language)
 		throws Exception;
 
 }
