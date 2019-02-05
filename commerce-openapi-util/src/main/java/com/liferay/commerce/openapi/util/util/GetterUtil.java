@@ -16,6 +16,10 @@ package com.liferay.commerce.openapi.util.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +38,24 @@ public class GetterUtil {
 		}
 
 		return text;
+	}
+
+	public static List<String> getAsTextList(JsonNode arrayJSONNode) {
+		if (!arrayJSONNode.isArray() || (arrayJSONNode.size() == 0)) {
+			return Collections.emptyList();
+		}
+
+		List<String> requiredProperties = new ArrayList<>();
+
+		if (arrayJSONNode.isArray() && (arrayJSONNode.size() > 0)) {
+			for (int i = 0; i < arrayJSONNode.size(); i++) {
+				JsonNode jsonNode = arrayJSONNode.get(i);
+
+				requiredProperties.add(jsonNode.asText());
+			}
+		}
+
+		return requiredProperties;
 	}
 
 	public static String getAsTextOrNullIfMisses(

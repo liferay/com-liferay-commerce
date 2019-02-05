@@ -16,12 +16,11 @@ package com.liferay.commerce.openapi.util.importer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import com.liferay.commerce.openapi.util.LiferayContextOpenApiExtension;
-import com.liferay.commerce.openapi.util.OpenApiComponent;
+import com.liferay.commerce.openapi.util.OpenApiContextExtension;
+import com.liferay.commerce.openapi.util.util.GetterUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,39 +31,31 @@ import org.slf4j.LoggerFactory;
  */
 public class ExtensionImporter {
 
-	public List<LiferayContextOpenApiExtension> getExtensions(
-		JsonNode parentJSONNode, List<OpenApiComponent> openApiComponents) {
+	public List<OpenApiContextExtension> getExtensions(
+		JsonNode parentJSONNode) {
 
-		JsonNode extensionJSONNode = parentJSONNode.get("x-liferay-context");
+		JsonNode liferayContextOpenApiExtensionJSONNode = parentJSONNode.get(
+			"x-liferay-context");
 
-		if (extensionJSONNode == null) {
+		if (liferayContextOpenApiExtensionJSONNode == null) {
+			_logger.trace("No Liferay context extensions found");
+
 			return Collections.emptyList();
 		}
 
-		List<LiferayContextOpenApiExtension> liferayContextOpenApiExtensions = new ArrayList<>();
+		List<String> liferayContextOpenApiNames = GetterUtil.getAsTextList(
+			liferayContextOpenApiExtensionJSONNode);
 
-		Iterator<String> iterator = extensionJSONNode.fieldNames();
+		List<OpenApiContextExtension> openApiContextExtensions =
+			new ArrayList<>();
 
-		ParameterImporter parameterImporter = new ParameterImporter();
-
-		while (iterator.hasNext()) {
-			String name = iterator.next();
-
-			JsonNode extensionDefinition = extensionJSONNode.get(name);
-
-			_logger.info(
-				"Importing extension {} with parameter size {}", name,
-				parameters.size());
-
-			try {
-				liferayContextOpenApiExtensions.add(new LiferayContextOpenApiExtension(name, parameters));
-			}
-			catch (IllegalArgumentException iae) {
-				_logger.warn("Unable to process extension: {}", name);
-			}
+		for (String liferayContextOpenApiName : liferayContextOpenApiNames) {
+			openApiContextExtensions.add(
+				OpenApiContextExtension.fromOpenApiName(
+					liferayContextOpenApiName));
 		}
 
-		return liferayContextOpenApiExtensions;
+		return openApiContextExtensions;
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(
