@@ -75,7 +75,7 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 			_getMethods(
 				true, "testModel",
 				_getExtensions(
-					"company", "locale", "pagination", "permissionchecker")),
+					"company", "language", "pagination", "permissionchecker")),
 			_getRandomComponentDefinitions(4, "TestModel"));
 
 		Assert.assertTrue(
@@ -113,13 +113,13 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 			interfaceMethods.contains("Pagination pagination"));
 
 		interfaceMethods = resourceGenerator.toResourceImplementationMethods(
-			_getMethods(true, "testModel", _getExtensions("locale")),
+			_getMethods(true, "testModel", _getExtensions("language")),
 			_getRandomComponentDefinitions(4, "TestModel"));
 
 		Assert.assertTrue(
 			"Context parameters with proper syntax expected",
 			interfaceMethods.contains(
-				"String languageId, Pagination pagination"));
+				"Language language, Pagination pagination"));
 	}
 
 	@Test
@@ -136,13 +136,14 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 			interfaceMethods.contains("@Context Pagination pagination"));
 
 		interfaceMethods = resourceGenerator.toResourceInterfaceMethods(
-			_getMethods(true, "testModel", _getExtensions("locale")),
+			_getMethods(true, "testModel", _getExtensions("language")),
 			_getRandomComponentDefinitions(4, "TestModel"));
 
 		Assert.assertTrue(
 			"Context parameters with proper syntax expected",
 			interfaceMethods.contains(
-				"@Context String languageId, @Context Pagination pagination"));
+				"@Context Language language, @Context Pagination " +
+					"pagination"));
 	}
 
 	private List<Extension> _getExtensions(String... extensionOpenApiNames) {
