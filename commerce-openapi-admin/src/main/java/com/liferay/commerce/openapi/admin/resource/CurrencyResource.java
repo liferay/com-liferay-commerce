@@ -59,7 +59,8 @@ public interface CurrencyResource {
 	@Path("/{id}")
 	@PUT
 	public Response updateCurrency(
-			@PathParam("id") String id, CurrencyDTO currencyDTO)
+			@QueryParam("groupId") Long groupId, @PathParam("id") String id,
+			CurrencyDTO currencyDTO)
 		throws Exception;
 
 	@Consumes("application/*")
