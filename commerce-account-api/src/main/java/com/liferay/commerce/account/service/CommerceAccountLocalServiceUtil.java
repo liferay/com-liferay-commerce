@@ -230,11 +230,6 @@ public class CommerceAccountLocalServiceUtil {
 		return getService().fetchCommerceAccount(commerceAccountId);
 	}
 
-	public static com.liferay.commerce.account.model.CommerceAccount fetchCommerceAccount(
-		long companyId, String name) {
-		return getService().fetchCommerceAccount(companyId, name);
-	}
-
 	/**
 	* Returns the commerce account with the matching external reference code and company.
 	*

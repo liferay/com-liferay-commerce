@@ -236,56 +236,6 @@ public interface CommerceAccountPersistence extends BasePersistence<CommerceAcco
 	public int filterCountByCompanyId(long companyId);
 
 	/**
-	* Returns the commerce account where companyId = &#63; and name = &#63; or throws a {@link NoSuchAccountException} if it could not be found.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @return the matching commerce account
-	* @throws NoSuchAccountException if a matching commerce account could not be found
-	*/
-	public CommerceAccount findByC_N(long companyId, String name)
-		throws NoSuchAccountException;
-
-	/**
-	* Returns the commerce account where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @return the matching commerce account, or <code>null</code> if a matching commerce account could not be found
-	*/
-	public CommerceAccount fetchByC_N(long companyId, String name);
-
-	/**
-	* Returns the commerce account where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce account, or <code>null</code> if a matching commerce account could not be found
-	*/
-	public CommerceAccount fetchByC_N(long companyId, String name,
-		boolean retrieveFromCache);
-
-	/**
-	* Removes the commerce account where companyId = &#63; and name = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @return the commerce account that was removed
-	*/
-	public CommerceAccount removeByC_N(long companyId, String name)
-		throws NoSuchAccountException;
-
-	/**
-	* Returns the number of commerce accounts where companyId = &#63; and name = &#63;.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @return the number of matching commerce accounts
-	*/
-	public int countByC_N(long companyId, String name);
-
-	/**
 	* Returns the commerce account where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchAccountException} if it could not be found.
 	*
 	* @param companyId the company ID

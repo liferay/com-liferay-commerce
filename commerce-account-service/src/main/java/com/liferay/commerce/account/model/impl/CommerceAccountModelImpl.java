@@ -78,8 +78,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "name", Types.VARCHAR },
 			{ "parentCommerceAccountId", Types.BIGINT },
+			{ "name", Types.VARCHAR },
 			{ "logoId", Types.BIGINT },
 			{ "email", Types.VARCHAR },
 			{ "taxId", Types.VARCHAR },
@@ -103,8 +103,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("parentCommerceAccountId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("logoId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("email", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("taxId", Types.VARCHAR);
@@ -119,7 +119,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceAccount (externalReferenceCode VARCHAR(75) null,commerceAccountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,parentCommerceAccountId LONG,logoId LONG,email VARCHAR(75) null,taxId VARCHAR(75) null,type_ INTEGER,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceAccount (externalReferenceCode VARCHAR(75) null,commerceAccountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCommerceAccountId LONG,name VARCHAR(75) null,logoId LONG,email VARCHAR(75) null,taxId VARCHAR(75) null,type_ INTEGER,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceAccount";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceAccount.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceAccount.name ASC";
@@ -159,8 +159,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setName(soapModel.getName());
 		model.setParentCommerceAccountId(soapModel.getParentCommerceAccountId());
+		model.setName(soapModel.getName());
 		model.setLogoId(soapModel.getLogoId());
 		model.setEmail(soapModel.getEmail());
 		model.setTaxId(soapModel.getTaxId());
@@ -245,8 +245,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("name", getName());
 		attributes.put("parentCommerceAccountId", getParentCommerceAccountId());
+		attributes.put("name", getName());
 		attributes.put("logoId", getLogoId());
 		attributes.put("email", getEmail());
 		attributes.put("taxId", getTaxId());
@@ -311,17 +311,17 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 			setModifiedDate(modifiedDate);
 		}
 
-		String name = (String)attributes.get("name");
-
-		if (name != null) {
-			setName(name);
-		}
-
 		Long parentCommerceAccountId = (Long)attributes.get(
 				"parentCommerceAccountId");
 
 		if (parentCommerceAccountId != null) {
 			setParentCommerceAccountId(parentCommerceAccountId);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
 		}
 
 		Long logoId = (Long)attributes.get("logoId");
@@ -530,6 +530,17 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 	@JSON
 	@Override
+	public long getParentCommerceAccountId() {
+		return _parentCommerceAccountId;
+	}
+
+	@Override
+	public void setParentCommerceAccountId(long parentCommerceAccountId) {
+		_parentCommerceAccountId = parentCommerceAccountId;
+	}
+
+	@JSON
+	@Override
 	public String getName() {
 		if (_name == null) {
 			return "";
@@ -543,26 +554,7 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
-		if (_originalName == null) {
-			_originalName = _name;
-		}
-
 		_name = name;
-	}
-
-	public String getOriginalName() {
-		return GetterUtil.getString(_originalName);
-	}
-
-	@JSON
-	@Override
-	public long getParentCommerceAccountId() {
-		return _parentCommerceAccountId;
-	}
-
-	@Override
-	public void setParentCommerceAccountId(long parentCommerceAccountId) {
-		_parentCommerceAccountId = parentCommerceAccountId;
 	}
 
 	@JSON
@@ -852,8 +844,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		commerceAccountImpl.setUserName(getUserName());
 		commerceAccountImpl.setCreateDate(getCreateDate());
 		commerceAccountImpl.setModifiedDate(getModifiedDate());
-		commerceAccountImpl.setName(getName());
 		commerceAccountImpl.setParentCommerceAccountId(getParentCommerceAccountId());
+		commerceAccountImpl.setName(getName());
 		commerceAccountImpl.setLogoId(getLogoId());
 		commerceAccountImpl.setEmail(getEmail());
 		commerceAccountImpl.setTaxId(getTaxId());
@@ -934,8 +926,6 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 
 		commerceAccountModelImpl._setModifiedDate = false;
 
-		commerceAccountModelImpl._originalName = commerceAccountModelImpl._name;
-
 		commerceAccountModelImpl._columnBitmask = 0;
 	}
 
@@ -984,6 +974,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 			commerceAccountCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
+		commerceAccountCacheModel.parentCommerceAccountId = getParentCommerceAccountId();
+
 		commerceAccountCacheModel.name = getName();
 
 		String name = commerceAccountCacheModel.name;
@@ -991,8 +983,6 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		if ((name != null) && (name.length() == 0)) {
 			commerceAccountCacheModel.name = null;
 		}
-
-		commerceAccountCacheModel.parentCommerceAccountId = getParentCommerceAccountId();
 
 		commerceAccountCacheModel.logoId = getLogoId();
 
@@ -1085,10 +1075,10 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", name=");
-		sb.append(getName());
 		sb.append(", parentCommerceAccountId=");
 		sb.append(getParentCommerceAccountId());
+		sb.append(", name=");
+		sb.append(getName());
 		sb.append(", logoId=");
 		sb.append(getLogoId());
 		sb.append(", email=");
@@ -1155,12 +1145,12 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append(getName());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>parentCommerceAccountId</column-name><column-value><![CDATA[");
 		sb.append(getParentCommerceAccountId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>logoId</column-name><column-value><![CDATA[");
@@ -1231,9 +1221,8 @@ public class CommerceAccountModelImpl extends BaseModelImpl<CommerceAccount>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private String _name;
-	private String _originalName;
 	private long _parentCommerceAccountId;
+	private String _name;
 	private long _logoId;
 	private String _email;
 	private String _taxId;

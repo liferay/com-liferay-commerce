@@ -81,10 +81,10 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", name=");
-		sb.append(name);
 		sb.append(", parentCommerceAccountId=");
 		sb.append(parentCommerceAccountId);
+		sb.append(", name=");
+		sb.append(name);
 		sb.append(", logoId=");
 		sb.append(logoId);
 		sb.append(", email=");
@@ -150,6 +150,8 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 			commerceAccountImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		commerceAccountImpl.setParentCommerceAccountId(parentCommerceAccountId);
+
 		if (name == null) {
 			commerceAccountImpl.setName("");
 		}
@@ -157,7 +159,6 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 			commerceAccountImpl.setName(name);
 		}
 
-		commerceAccountImpl.setParentCommerceAccountId(parentCommerceAccountId);
 		commerceAccountImpl.setLogoId(logoId);
 
 		if (email == null) {
@@ -232,9 +233,9 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		name = objectInput.readUTF();
 
 		parentCommerceAccountId = objectInput.readLong();
+		name = objectInput.readUTF();
 
 		logoId = objectInput.readLong();
 		email = objectInput.readUTF();
@@ -280,14 +281,14 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
+		objectOutput.writeLong(parentCommerceAccountId);
+
 		if (name == null) {
 			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(name);
 		}
-
-		objectOutput.writeLong(parentCommerceAccountId);
 
 		objectOutput.writeLong(logoId);
 
@@ -333,8 +334,8 @@ public class CommerceAccountCacheModel implements CacheModel<CommerceAccount>,
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public String name;
 	public long parentCommerceAccountId;
+	public String name;
 	public long logoId;
 	public String email;
 	public String taxId;
