@@ -44,7 +44,6 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	scope = ServiceScope.PROTOTYPE, service = UserResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class UserResourceImpl implements UserResource {
 
 	@Override

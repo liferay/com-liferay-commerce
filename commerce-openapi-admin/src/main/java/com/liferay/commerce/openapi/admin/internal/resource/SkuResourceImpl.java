@@ -24,8 +24,6 @@ import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.model.Company;
 
-import java.util.Locale;
-
 import javax.annotation.Generated;
 
 import javax.ws.rs.core.Context;
@@ -46,7 +44,6 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	scope = ServiceScope.PROTOTYPE, service = SkuResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class SkuResourceImpl implements SkuResource {
 
 	@Override
@@ -77,7 +74,7 @@ public class SkuResourceImpl implements SkuResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateSku(
-			String id, Long groupId, SkuDTO skuDTO, Locale locale)
+			String id, Long groupId, SkuDTO skuDTO, String languageId)
 		throws Exception {
 
 		_skuHelper.updateSKU(id, groupId, skuDTO, _company);
