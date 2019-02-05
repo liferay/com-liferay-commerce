@@ -14,19 +14,21 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.CurrencyHelper;
 import com.liferay.commerce.openapi.admin.model.CurrencyDTO;
 import com.liferay.commerce.openapi.admin.resource.CurrencyResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-
-import java.util.Collections;
+import com.liferay.portal.kernel.model.User;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -46,6 +48,8 @@ public class CurrencyResourceImpl implements CurrencyResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteCurrency(String id) throws Exception {
+		_currencyHelper.deleteCurrency(id);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -57,21 +61,24 @@ public class CurrencyResourceImpl implements CurrencyResource {
 			Long groupId, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _currencyHelper.getCurrencyDTOs(groupId, pagination);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CurrencyDTO getCurrency(String id) throws Exception {
-		return new CurrencyDTO();
+		return _currencyHelper.getCurrencyDTO(id);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public Response updateCurrency(String id, CurrencyDTO currencyDTO)
+	public Response updateCurrency(
+			Long groupId, String id, CurrencyDTO currencyDTO)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_currencyHelper.updateCurrency(groupId, id, currencyDTO, _user);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -81,7 +88,13 @@ public class CurrencyResourceImpl implements CurrencyResource {
 	public CurrencyDTO upsertCurrency(Long groupId, CurrencyDTO currencyDTO)
 		throws Exception {
 
-		return new CurrencyDTO();
+		return _currencyHelper.upsertCurrency(groupId, currencyDTO, _user);
 	}
+
+	@Reference
+	private CurrencyHelper _currencyHelper;
+
+	@Context
+	private User _user;
 
 }
