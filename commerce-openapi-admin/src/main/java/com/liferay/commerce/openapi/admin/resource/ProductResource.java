@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.admin.resource;
 
 import com.liferay.commerce.openapi.admin.model.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.SkuDTO;
+import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
@@ -68,7 +69,7 @@ public interface ProductResource {
 	@PUT
 	public Response updateProduct(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			ProductDTO productDTO, @Context String languageId)
+			ProductDTO productDTO, @Context Language language)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -77,7 +78,7 @@ public interface ProductResource {
 	@Produces("application/*")
 	public ProductDTO upsertProduct(
 			@QueryParam("groupId") Long groupId, ProductDTO productDTO,
-			@Context String languageId)
+			@Context Language language)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -86,7 +87,7 @@ public interface ProductResource {
 	@Produces("application/*")
 	public SkuDTO upsertSku(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			SkuDTO skuDTO, @Context String languageId)
+			SkuDTO skuDTO, @Context Language language)
 		throws Exception;
 
 }
