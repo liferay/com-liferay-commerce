@@ -18,9 +18,9 @@ import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
 import com.liferay.commerce.openapi.admin.internal.util.LanguageUtils;
-import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.CountryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -101,7 +101,7 @@ public class CountryHelper {
 		catch (NoSuchCountryException nsce) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Unable to find price entry with ID: " +
+					"Unable to find country with ID: " +
 						countryDTO.getId());
 			}
 		}
