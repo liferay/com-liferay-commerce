@@ -40,21 +40,22 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	service = ContextProvider.class
 )
 @Provider
-public class LocaleContextProvider implements ContextProvider<Locale> {
+public class LocaleContextProvider implements ContextProvider<String> {
 
 	@Override
-	public Locale createContext(Message message) {
+	public String createContext(Message message) {
 		HttpServletRequest httpServletRequest =
 			(HttpServletRequest)message.getContextualProperty("HTTP.REQUEST");
 
 		Locale locale = httpServletRequest.getLocale();
 
-		if (locale.hashCode() > 0) {
-			return locale;
+		if (locale.hashCode() == 0) {
+			locale = _portal.getLocale(
+				(HttpServletRequest)message.getContextualProperty(
+					"HTTP.REQUEST"));
 		}
 
-		return _portal.getLocale(
-			(HttpServletRequest)message.getContextualProperty("HTTP.REQUEST"));
+		return locale.getLanguage();
 	}
 
 	@Reference
