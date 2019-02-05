@@ -193,6 +193,20 @@ public interface CommerceAccountModel extends AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Returns the parent commerce account ID of this commerce account.
+	 *
+	 * @return the parent commerce account ID of this commerce account
+	 */
+	public long getParentCommerceAccountId();
+
+	/**
+	 * Sets the parent commerce account ID of this commerce account.
+	 *
+	 * @param parentCommerceAccountId the parent commerce account ID of this commerce account
+	 */
+	public void setParentCommerceAccountId(long parentCommerceAccountId);
+
+	/**
 	 * Returns the name of this commerce account.
 	 *
 	 * @return the name of this commerce account
@@ -206,20 +220,6 @@ public interface CommerceAccountModel extends AuditedModel,
 	 * @param name the name of this commerce account
 	 */
 	public void setName(String name);
-
-	/**
-	 * Returns the parent commerce account ID of this commerce account.
-	 *
-	 * @return the parent commerce account ID of this commerce account
-	 */
-	public long getParentCommerceAccountId();
-
-	/**
-	 * Sets the parent commerce account ID of this commerce account.
-	 *
-	 * @param parentCommerceAccountId the parent commerce account ID of this commerce account
-	 */
-	public void setParentCommerceAccountId(long parentCommerceAccountId);
 
 	/**
 	 * Returns the logo ID of this commerce account.
