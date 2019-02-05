@@ -253,8 +253,8 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		CommerceAccount commerceAccount =
-			commerceAccountLocalService.fetchCommerceAccount(
-				permissionChecker.getCompanyId(), name);
+			commerceAccountLocalService.fetchCommerceAccountByReferenceCode(
+				permissionChecker.getCompanyId(), externalReferenceCode);
 
 		if (commerceAccount == null) {
 			PortalPermissionUtil.check(
