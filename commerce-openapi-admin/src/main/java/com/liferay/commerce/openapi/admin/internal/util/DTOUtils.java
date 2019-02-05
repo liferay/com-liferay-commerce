@@ -21,6 +21,7 @@ import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.model.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.CountryDTO;
+import com.liferay.commerce.openapi.admin.model.CurrencyDTO;
 import com.liferay.commerce.openapi.admin.model.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.model.PriceListDTO;
@@ -93,6 +94,28 @@ public class DTOUtils {
 		countryDTO.setTwoLettersISOCode(commerceCountry.getTwoLettersISOCode());
 
 		return countryDTO;
+	}
+
+	public static CurrencyDTO modelToDTO(CommerceCurrency commerceCurrency) {
+		CurrencyDTO currencyDTO = new CurrencyDTO();
+
+		currencyDTO.setCode(commerceCurrency.getCode());
+
+		currencyDTO.setFormatPattern(
+			LanguageUtils.getLanguageIdMap(
+				commerceCurrency.getFormatPatternMap()));
+		currencyDTO.setId(commerceCurrency.getCommerceCurrencyId());
+		currencyDTO.setMaxFractionDigits(
+			commerceCurrency.getMaxFractionDigits());
+		currencyDTO.setMinFractionDigits(
+			commerceCurrency.getMinFractionDigits());
+		currencyDTO.setName(
+			LanguageUtils.getLanguageIdMap(commerceCurrency.getNameMap()));
+		currencyDTO.setPrimary(commerceCurrency.getPrimary());
+		currencyDTO.setRate(commerceCurrency.getRate());
+		currencyDTO.setRoundingMode(commerceCurrency.getRoundingMode());
+
+		return currencyDTO;
 	}
 
 	public static PriceEntryDTO modelToDTO(
