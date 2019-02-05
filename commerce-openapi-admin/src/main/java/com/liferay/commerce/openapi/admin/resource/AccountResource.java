@@ -58,7 +58,6 @@ public interface AccountResource {
 	@GET
 	@Path("/{id}/order")
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<OrderDTO> getOrder(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			@Context Pagination pagination)
@@ -81,7 +80,6 @@ public interface AccountResource {
 	@Path("/{id}/order")
 	@POST
 	@Produces("application/*")
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public OrderDTO upsertSku(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			OrderDTO orderDTO, @Context String languageId)
