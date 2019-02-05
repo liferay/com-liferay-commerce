@@ -86,8 +86,8 @@ public class DTOUtils {
 		countryDTO.setName(
 			LanguageUtils.getLanguageIdMap(commerceCountry.getNameMap()));
 		countryDTO.setNumericISOCode(commerceCountry.getNumericISOCode());
-		countryDTO.setShippingAllowed(commerceCountry.getShippingAllowed());
-		countryDTO.setSubjectToVAT(commerceCountry.getSubjectToVAT());
+		countryDTO.setShippingAllowed(commerceCountry.isShippingAllowed());
+		countryDTO.setSubjectToVAT(commerceCountry.isSubjectToVAT());
 		countryDTO.setThreeLettersISOCode(
 			commerceCountry.getThreeLettersISOCode());
 		countryDTO.setTwoLettersISOCode(commerceCountry.getTwoLettersISOCode());
