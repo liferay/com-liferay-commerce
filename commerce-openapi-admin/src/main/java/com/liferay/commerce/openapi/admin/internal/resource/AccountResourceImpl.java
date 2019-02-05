@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.resource;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.AccountHelper;
 import com.liferay.commerce.openapi.admin.model.AccountDTO;
+import com.liferay.commerce.openapi.admin.model.OrderDTO;
 import com.liferay.commerce.openapi.admin.resource.AccountResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -60,10 +61,20 @@ public class AccountResourceImpl implements AccountResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<AccountDTO> getAccounts(Pagination pagination)
 		throws Exception {
 
 		return _accountHelper.getAccounts(_user, pagination);
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public CollectionDTO<OrderDTO> getOrder(
+			String id, Long groupId, Pagination pagination)
+		throws Exception {
+
+		return null;
 	}
 
 	@Override
@@ -82,6 +93,15 @@ public class AccountResourceImpl implements AccountResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public AccountDTO upsertAccount(AccountDTO accountDTO) throws Exception {
 		return _accountHelper.upsertAccount(accountDTO);
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public OrderDTO upsertSku(
+			String id, Long groupId, OrderDTO orderDTO, String languageId)
+		throws Exception {
+
+		return null;
 	}
 
 	@Reference

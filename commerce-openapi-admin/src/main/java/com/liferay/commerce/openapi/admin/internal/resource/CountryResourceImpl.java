@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.model.CollectionDTO;
 import com.liferay.commerce.openapi.admin.model.CountryDTO;
 import com.liferay.commerce.openapi.admin.resource.CountryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.model.User;
 
 import javax.annotation.Generated;
@@ -41,10 +42,10 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	scope = ServiceScope.PROTOTYPE, service = CountryResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class CountryResourceImpl implements CountryResource {
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteCountry(String id) throws Exception {
 		_countryHelper.deleteCountry(id);
 
@@ -54,6 +55,7 @@ public class CountryResourceImpl implements CountryResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<CountryDTO> getCountries(
 			Long groupId, Pagination pagination)
 		throws Exception {
@@ -62,11 +64,13 @@ public class CountryResourceImpl implements CountryResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CountryDTO getCountry(String id) throws Exception {
 		return _countryHelper.getCountryDTO(id);
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateCountry(
 			Long groupId, String id, CountryDTO countryDTO)
 		throws Exception {
@@ -79,6 +83,7 @@ public class CountryResourceImpl implements CountryResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public CountryDTO upsertCountry(Long groupId, CountryDTO countryDTO)
 		throws Exception {
 

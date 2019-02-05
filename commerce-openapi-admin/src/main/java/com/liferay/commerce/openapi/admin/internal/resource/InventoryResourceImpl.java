@@ -40,7 +40,6 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	scope = ServiceScope.PROTOTYPE, service = InventoryResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class InventoryResourceImpl implements InventoryResource {
 
 	@Override
