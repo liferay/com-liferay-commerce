@@ -18,6 +18,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import java.math.BigDecimal;
 
+import java.util.Map;
+
 import javax.annotation.Generated;
 
 /**
@@ -31,7 +33,7 @@ public class CurrencyDTO {
 		return _code;
 	}
 
-	public String getFormatPattern() {
+	public Map<String, String> getFormatPattern() {
 		return _formatPattern;
 	}
 
@@ -47,7 +49,7 @@ public class CurrencyDTO {
 		return _minFractionDigits;
 	}
 
-	public String getName() {
+	public Map<String, String> getName() {
 		return _name;
 	}
 
@@ -67,7 +69,7 @@ public class CurrencyDTO {
 		_code = code;
 	}
 
-	public void setFormatPattern(String formatPattern) {
+	public void setFormatPattern(Map<String, String> formatPattern) {
 		_formatPattern = formatPattern;
 	}
 
@@ -83,7 +85,7 @@ public class CurrencyDTO {
 		_minFractionDigits = minFractionDigits;
 	}
 
-	public void setName(String name) {
+	public void setName(Map<String, String> name) {
 		_name = name;
 	}
 
@@ -100,11 +102,11 @@ public class CurrencyDTO {
 	}
 
 	private String _code;
-	private String _formatPattern;
+	private Map<String, String> _formatPattern;
 	private Long _id;
 	private Integer _maxFractionDigits;
 	private Integer _minFractionDigits;
-	private String _name;
+	private Map<String, String> _name;
 	private Boolean _primary;
 	private BigDecimal _rate;
 	private String _roundingMode;
