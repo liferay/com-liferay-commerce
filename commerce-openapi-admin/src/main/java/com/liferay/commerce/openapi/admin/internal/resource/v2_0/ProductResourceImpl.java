@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.ProductHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.SKUHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.ProductResource;
@@ -21,14 +23,14 @@ import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.User;
 
-import java.util.Collections;
-
-import javax.annotation.Generated;
-
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -38,16 +40,17 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v2.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = ProductResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class ProductResourceImpl implements ProductResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProduct(String id) throws Exception {
+		_productHelper.deleteProduct(id, _company);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -56,7 +59,7 @@ public class ProductResourceImpl implements ProductResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public ProductDTO getProduct(String id) throws Exception {
-		return new ProductDTO();
+		return _productHelper.getProduct(id, _company);
 	}
 
 	@Override
@@ -65,7 +68,7 @@ public class ProductResourceImpl implements ProductResource {
 			Long groupId, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _productHelper.getProducts(groupId, pagination);
 	}
 
 	@Override
@@ -73,7 +76,7 @@ public class ProductResourceImpl implements ProductResource {
 	public CollectionDTO<SkuDTO> getSkus(String id, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _skuHelper.getSKUs(id, _company, pagination);
 	}
 
 	@Override
@@ -82,7 +85,9 @@ public class ProductResourceImpl implements ProductResource {
 			String id, Long groupId, ProductDTO productDTO, Language language)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_productHelper.updateProductDTO(id, productDTO, _company);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -93,7 +98,7 @@ public class ProductResourceImpl implements ProductResource {
 			Long groupId, ProductDTO productDTO, Language language)
 		throws Exception {
 
-		return new ProductDTO();
+		return _productHelper.upsertProduct(groupId, productDTO, _user);
 	}
 
 	@Override
@@ -102,7 +107,19 @@ public class ProductResourceImpl implements ProductResource {
 			String id, Long groupId, SkuDTO skuDTO, Language language)
 		throws Exception {
 
-		return new SkuDTO();
+		return _skuHelper.updateSKU(id, groupId, skuDTO, _company);
 	}
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private ProductHelper _productHelper;
+
+	@Reference
+	private SKUHelper _skuHelper;
+
+	@Context
+	private User _user;
 
 }

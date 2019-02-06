@@ -14,20 +14,21 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.UserHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.UserDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.UserResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 
-import java.util.Collections;
-
-import javax.annotation.Generated;
-
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -37,16 +38,17 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v2.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = UserResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class UserResourceImpl implements UserResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteUser(String id) throws Exception {
+		_userHelper.deleteUser(_company.getCompanyId(), id);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -57,7 +59,8 @@ public class UserResourceImpl implements UserResource {
 	public UserDTO getUser(String id, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		return new UserDTO();
+		return _userHelper.getUserDTO(
+			_company.getCompanyId(), id, _permissionChecker, themeDisplay);
 	}
 
 	@Override
@@ -66,13 +69,18 @@ public class UserResourceImpl implements UserResource {
 			ThemeDisplay themeDisplay, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _userHelper.getUserDTOs(
+			_company.getCompanyId(), pagination, _permissionChecker,
+			themeDisplay);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateUser(String id, UserDTO userDTO) throws Exception {
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_userHelper.updateUser(
+			_company.getCompanyId(), id, _permissionChecker, userDTO);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -82,7 +90,17 @@ public class UserResourceImpl implements UserResource {
 	public UserDTO upsertUser(UserDTO userDTO, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		return new UserDTO();
+		return _userHelper.upsertUser(
+			_company.getCompanyId(), _permissionChecker, userDTO, themeDisplay);
 	}
+
+	@Context
+	private Company _company;
+
+	@Context
+	private PermissionChecker _permissionChecker;
+
+	@Reference
+	private UserHelper _userHelper;
 
 }

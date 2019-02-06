@@ -14,19 +14,19 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.PriceEntryHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.PriceEntryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.model.Company;
 
-import java.util.Collections;
-
-import javax.annotation.Generated;
-
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -36,16 +36,17 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v2.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = PriceEntryResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class PriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceEntry(String id) throws Exception {
+		_priceEntryHelper.deleteCommercePriceEntry(id, _company.getCompanyId());
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -57,13 +58,13 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 			Long groupId, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _priceEntryHelper.getPriceEntryDTOs(groupId, pagination);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public PriceEntryDTO getPriceEntry(String id) throws Exception {
-		return new PriceEntryDTO();
+		return _priceEntryHelper.getPriceEntryDTO(id, _company.getCompanyId());
 	}
 
 	@Override
@@ -71,7 +72,10 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 	public Response updatePriceEntry(String id, PriceEntryDTO priceEntryDTO)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_priceEntryHelper.updateCommercePriceEntry(
+			id, _company.getCompanyId(), priceEntryDTO);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -82,7 +86,14 @@ public class PriceEntryResourceImpl implements PriceEntryResource {
 			Long groupId, PriceEntryDTO priceEntryDTO)
 		throws Exception {
 
-		return new PriceEntryDTO();
+		return _priceEntryHelper.upsertCommercePriceEntry(
+			groupId, priceEntryDTO);
 	}
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private PriceEntryHelper _priceEntryHelper;
 
 }

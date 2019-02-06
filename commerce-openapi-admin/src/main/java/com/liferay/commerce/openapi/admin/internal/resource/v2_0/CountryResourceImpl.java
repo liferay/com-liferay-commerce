@@ -14,19 +14,19 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.CountryHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.CountryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.model.User;
 
-import java.util.Collections;
-
-import javax.annotation.Generated;
-
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -36,16 +36,17 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v2.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = CountryResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class CountryResourceImpl implements CountryResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteCountry(String id) throws Exception {
+		_countryHelper.deleteCountry(id);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -57,13 +58,13 @@ public class CountryResourceImpl implements CountryResource {
 			Long groupId, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _countryHelper.getCountryDTOs(groupId, pagination);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CountryDTO getCountry(String id) throws Exception {
-		return new CountryDTO();
+		return _countryHelper.getCountryDTO(id);
 	}
 
 	@Override
@@ -72,7 +73,9 @@ public class CountryResourceImpl implements CountryResource {
 			Long groupId, String id, CountryDTO countryDTO)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_countryHelper.updateCountry(groupId, id, countryDTO, _user);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -82,7 +85,13 @@ public class CountryResourceImpl implements CountryResource {
 	public CountryDTO upsertCountry(Long groupId, CountryDTO countryDTO)
 		throws Exception {
 
-		return new CountryDTO();
+		return _countryHelper.upsertCountry(groupId, countryDTO, _user);
 	}
+
+	@Reference
+	private CountryHelper _countryHelper;
+
+	@Context
+	private User _user;
 
 }
