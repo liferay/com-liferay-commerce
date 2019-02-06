@@ -49,6 +49,28 @@ public class OpenApiTestUtil {
 		return jsonNode.get("components");
 	}
 
+	public static JsonNode getOpenApiComponentsWithArrayPattern()
+		throws IOException {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{ \"components\": {\"schemas\": ");
+		sb.append("{\"ArrayItemComponent\": {\"type\": \"object\", ");
+		sb.append("\"properties\": {\"code\": {\"type\": \"integer\", ");
+		sb.append("\"format\": \"int64\"}, \"text\": {\"type\": ");
+		sb.append("\"string\"}}}, \"HostComponent\": {\"type\": ");
+		sb.append("\"object\", \"properties\": {\"id\": {\"type\": ");
+		sb.append("\"integer\"}, \"arrayOfComponents\": ");
+		sb.append("{\"type\": \"array\", \"items\": {\"$ref\": ");
+		sb.append("\"#/components/schemas/ArrayItemComponent\"}}}}}}}}");
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode jsonNode = mapper.readTree(sb.toString());
+
+		return jsonNode.get("components");
+	}
+
 	public static JsonNode getOpenApiComponentsWithNestedObjectPattern()
 		throws IOException {
 
