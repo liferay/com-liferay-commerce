@@ -16,10 +16,8 @@ package com.liferay.commerce.product.internal.events;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
-import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.product.service.CPRuleLocalService;
+import com.liferay.commerce.product.catalog.rule.CPRuleHelper;
 import com.liferay.commerce.product.util.CPRulesThreadLocal;
-import com.liferay.commerce.user.segment.util.CommerceUserSegmentHelper;
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.LifecycleAction;
@@ -27,7 +25,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 
-import java.util.List;
+import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,22 +57,28 @@ public class CPRulesPreAction extends Action {
 				groupId = _portal.getScopeGroupId(httpServletRequest);
 			}
 
-			long[] commerceUserSegmentEntryIds = new long[0];
+			long commerceAccountId = ParamUtil.getLong(
+				httpServletRequest, "commerceAccountId", -1);
 
-			CommerceAccount commerceAccount =
-				_commerceAccountHelper.getCurrentCommerceAccount(
-					groupId, httpServletRequest);
+			if (commerceAccountId == -1) {
+				CommerceAccount commerceAccount =
+					_commerceAccountHelper.getCurrentCommerceAccount(
+						groupId, httpServletRequest);
 
-			if (commerceAccount != null) {
-				_commerceUserSegmentHelper.getCommerceUserSegmentIds(
-					groupId, commerceAccount.getCommerceAccountId(),
-					_portal.getUserId(httpServletRequest));
+				if (commerceAccount != null) {
+					commerceAccountId = commerceAccount.getCommerceAccountId();
+				}
 			}
 
-			List<CPRule> cpRules = _cpRuleLocalService.getCPRules(
-				groupId, commerceUserSegmentEntryIds);
+			if (commerceAccountId == -1) {
+				CPRulesThreadLocal.setCPRules(Collections.emptyList());
 
-			CPRulesThreadLocal.setCPRules(cpRules);
+				return;
+			}
+
+			_cpRuleHelper.initializeCPRules(
+				_portal.getUserId(httpServletRequest), commerceAccountId,
+				groupId);
 		}
 		catch (PortalException pe) {
 			throw new ActionException(pe);
@@ -85,10 +89,7 @@ public class CPRulesPreAction extends Action {
 	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
-	private CommerceUserSegmentHelper _commerceUserSegmentHelper;
-
-	@Reference
-	private CPRuleLocalService _cpRuleLocalService;
+	private CPRuleHelper _cpRuleHelper;
 
 	@Reference
 	private Portal _portal;
