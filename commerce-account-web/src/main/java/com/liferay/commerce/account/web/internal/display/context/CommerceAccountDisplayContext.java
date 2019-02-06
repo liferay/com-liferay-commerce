@@ -190,9 +190,13 @@ public class CommerceAccountDisplayContext
 		return _userFileUploadsConfiguration;
 	}
 
-	public boolean hasManageCommerceAccountPermissions()
-		throws PortalException {
+	public boolean hasAddAccountPermissions() {
+		return PortalPermissionUtil.contains(
+			commerceAccountRequestHelper.getPermissionChecker(),
+			CommerceAccountActionKeys.ADD_ACCOUNT);
+	}
 
+	public boolean hasManageCommerceAccountPermissions() {
 		return PortalPermissionUtil.contains(
 			commerceAccountRequestHelper.getPermissionChecker(),
 			CommerceAccountActionKeys.MANAGE_ACCOUNTS);

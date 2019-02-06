@@ -92,9 +92,9 @@ public class CommerceAccountMembersScreenNavigationEntry
 			if (_modelResourcePermission.contains(
 				permissionChecker, commerceAccount,
 				CommerceAccountActionKeys.VIEW_MEMBERS) ||
-					_modelResourcePermission.contains(
-						permissionChecker, commerceAccount,
-						CommerceAccountActionKeys.MANAGE_MEMBERS)) {
+				_modelResourcePermission.contains(
+					permissionChecker, commerceAccount,
+					CommerceAccountActionKeys.MANAGE_MEMBERS)) {
 
 				return true;
 			}

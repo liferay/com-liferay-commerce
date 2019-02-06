@@ -36,69 +36,71 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 	/>
 </div>
 
-<div class="minium-frame__cta is-visible">
-	<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openAddAccountModal();" %>' value="add-account" />
-</div>
+<c:if test="<%= commerceAccountDisplayContext.hasAddAccountPermissions() %>">
+	<div class="minium-frame__cta is-visible">
+		<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openAddAccountModal();" %>' value="add-account" />
+	</div>
 
-<portlet:actionURL name="editCommerceAccount" var="editCommerceAccountActionURL" />
+	<portlet:actionURL name="editCommerceAccount" var="editCommerceAccountActionURL" />
 
-<aui:form action="<%= editCommerceAccountActionURL %>" method="post" name="commerceAccountFm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-	<aui:input name="active" type="hidden" value="<%= true %>" />
-	<aui:input name="emailAddresses" type="hidden" />
-	<aui:input name="name" type="hidden" />
-	<aui:input name="userIds" type="hidden" />
-</aui:form>
+	<aui:form action="<%= editCommerceAccountActionURL %>" method="post" name="commerceAccountFm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+		<aui:input name="active" type="hidden" value="<%= true %>" />
+		<aui:input name="emailAddresses" type="hidden" />
+		<aui:input name="name" type="hidden" />
+		<aui:input name="userIds" type="hidden" />
+	</aui:form>
 
-<commerce-ui:add-account-modal
-	componentId="addAccountModal"
-/>
+	<commerce-ui:add-account-modal
+		componentId="addAccountModal"
+	/>
 
-<aui:script>
-	Liferay.provide(
-		window,
-		'<portlet:namespace />openAddAccountModal',
-		function(evt) {
-			const addAccountModal = Liferay.component('addAccountModal');
+	<aui:script>
+		Liferay.provide(
+			window,
+			'<portlet:namespace />openAddAccountModal',
+			function(evt) {
+				const addAccountModal = Liferay.component('addAccountModal');
 
-			addAccountModal.open();
-		}
-	);
+				addAccountModal.open();
+			}
+		);
 
-	Liferay.componentReady('addAccountModal').then(
-		function(addAccountModal) {
-			addAccountModal.on(
-				'AddAccountModalSave',
-				function(event) {
-					let existingUserIds = event.administratorsEmail.filter(
-						function(el) {
-							return el.userId;
-						}
-					).map(
-						function(usr) {
-							return usr.userId
-						}
-					).join(',');
+		Liferay.componentReady('addAccountModal').then(
+			function(addAccountModal) {
+				addAccountModal.on(
+					'AddAccountModalSave',
+					function(event) {
+						let existingUserIds = event.administratorsEmail.filter(
+							function(el) {
+								return el.userId;
+							}
+						).map(
+							function(usr) {
+								return usr.userId
+							}
+						).join(',');
 
-					let newUserEmails = event.administratorsEmail.filter(
-						function(el) {
-							return !el.userId;
-						}
-					).map(
-						function(usr) {
-							return usr.email
-						}
-					).join(',');
+						let newUserEmails = event.administratorsEmail.filter(
+							function(el) {
+								return !el.userId;
+							}
+						).map(
+							function(usr) {
+								return usr.email
+							}
+						).join(',');
 
-					document.querySelector('#<portlet:namespace />emailAddresses').value = newUserEmails;
-					document.querySelector('#<portlet:namespace />name').value = event.accountName;
-					document.querySelector('#<portlet:namespace />userIds').value = existingUserIds;
+						document.querySelector('#<portlet:namespace />emailAddresses').value = newUserEmails;
+						document.querySelector('#<portlet:namespace />name').value = event.accountName;
+						document.querySelector('#<portlet:namespace />userIds').value = existingUserIds;
 
-					addAccountModal.close();
+						addAccountModal.close();
 
-					submitForm(document.<portlet:namespace />commerceAccountFm);
-				}
-			);
-		}
-	);
-</aui:script>
+						submitForm(document.<portlet:namespace />commerceAccountFm);
+					}
+				);
+			}
+		);
+	</aui:script>
+</c:if>

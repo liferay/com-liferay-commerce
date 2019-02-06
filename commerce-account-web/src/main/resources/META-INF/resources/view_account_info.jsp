@@ -20,14 +20,6 @@
 CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
-<div class="minium-frame__cta is-visible">
-	<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openAddOrganizationsModal();" %>' value="add-organizations" />
-</div>
-
-<commerce-ui:add-organizations-modal
-	componentId="addOrganizationsModal"
-/>
-
 <div class="container-fluid-1280">
 	<commerce-ui:table
 		dataProviderKey="<%= CommerceAccountOrganizationClayTable.NAME %>"
@@ -40,45 +32,55 @@ CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDi
 	/>
 </div>
 
-<portlet:actionURL name="editCommerceAccountOrganizationRel" var="editCommerceAccountOrganizationRelActionURL" />
+<c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(CommerceAccountActionKeys.MANAGE_ORGANIZATIONS) %>">
+	<div class="minium-frame__cta is-visible">
+		<aui:button cssClass="js-invite-user minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openAddOrganizationsModal();" %>' value="add-organizations" />
+	</div>
 
-<aui:form action="<%= editCommerceAccountOrganizationRelActionURL %>" method="post" name="commerceAccountOrganizationRelFm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ASSIGN %>" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccountDisplayContext.getCurrentCommerceAccountId() %>" />
-	<aui:input name="addOrganizationIds" type="hidden" />
-</aui:form>
+	<commerce-ui:add-organizations-modal
+		componentId="addOrganizationsModal"
+	/>
 
-<aui:script>
-	Liferay.provide(
-		window,
-		'<portlet:namespace />openAddOrganizationsModal',
-		function(evt) {
-			const addOrganizationsModal = Liferay.component('addOrganizationsModal');
+	<portlet:actionURL name="editCommerceAccountOrganizationRel" var="editCommerceAccountOrganizationRelActionURL" />
 
-			addOrganizationsModal.open();
-		}
-	);
+	<aui:form action="<%= editCommerceAccountOrganizationRelActionURL %>" method="post" name="commerceAccountOrganizationRelFm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ASSIGN %>" />
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+		<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccountDisplayContext.getCurrentCommerceAccountId() %>" />
+		<aui:input name="addOrganizationIds" type="hidden" />
+	</aui:form>
 
-	Liferay.componentReady('addOrganizationsModal').then(
-		function(addOrganizationsModal) {
-			addOrganizationsModal.on(
-				'addOrganization',
-				function(event) {
-					let orgIds = event.map(
-						function(org) {
-							return org.id
-						}
-					).join(',');
+	<aui:script>
+		Liferay.provide(
+			window,
+			'<portlet:namespace />openAddOrganizationsModal',
+			function(evt) {
+				const addOrganizationsModal = Liferay.component('addOrganizationsModal');
 
-					document.querySelector('#<portlet:namespace />addOrganizationIds').value = orgIds;
+				addOrganizationsModal.open();
+			}
+		);
 
-					addOrganizationsModal.close();
+		Liferay.componentReady('addOrganizationsModal').then(
+			function(addOrganizationsModal) {
+				addOrganizationsModal.on(
+					'addOrganization',
+					function(event) {
+						let orgIds = event.map(
+							function(org) {
+								return org.id
+							}
+						).join(',');
 
-					submitForm(document.<portlet:namespace />commerceAccountOrganizationRelFm);
-				}
-			);
-		}
-	);
+						document.querySelector('#<portlet:namespace />addOrganizationIds').value = orgIds;
 
-</aui:script>
+						addOrganizationsModal.close();
+
+						submitForm(document.<portlet:namespace />commerceAccountOrganizationRelFm);
+					}
+				);
+			}
+		);
+
+	</aui:script>
+</c:if>

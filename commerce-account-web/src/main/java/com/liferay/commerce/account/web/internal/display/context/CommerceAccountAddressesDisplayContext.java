@@ -204,9 +204,7 @@ public class CommerceAccountAddressesDisplayContext
 	}
 
 	public boolean hasManageCommerceAddressPermission() throws PortalException {
-		return modelResourcePermission.contains(
-			commerceAccountRequestHelper.getPermissionChecker(),
-			getCurrentCommerceAccount(),
+		return hasCommerceAccountModelPermissions(
 			CommerceAccountActionKeys.MANAGE_ADDRESS);
 	}
 
