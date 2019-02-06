@@ -159,6 +159,9 @@ public class ComponentImporter {
 					_setIfHas(
 						itemsJSONNode, "format",
 						openApiPropertyBuilder ::itemOpenApiFormatDefinition);
+					_setIfHas(
+						itemsJSONNode, "$ref",
+						openApiPropertyBuilder :: componentReference);
 				}
 
 				_setIfHas(
