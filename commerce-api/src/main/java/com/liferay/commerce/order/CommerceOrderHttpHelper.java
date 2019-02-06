@@ -41,6 +41,11 @@ public interface CommerceOrderHttpHelper {
 			HttpServletRequest httpServletRequest, CommerceOrder commerceOrder)
 		throws PortalException;
 
+	public PortletURL getCommerceCartPortletURL(
+			long groupId, HttpServletRequest httpServletRequest,
+			CommerceOrder commerceOrder)
+		throws PortalException;
+
 	public PortletURL getCommerceCheckoutPortletURL(
 			HttpServletRequest httpServletRequest)
 		throws PortalException;
