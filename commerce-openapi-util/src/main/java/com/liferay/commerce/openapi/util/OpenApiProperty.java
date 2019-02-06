@@ -61,6 +61,14 @@ public class OpenApiProperty {
 		return _openApiFormat.getSetterSyntax();
 	}
 
+	public boolean isArray() {
+		if (_openApiType == OpenApiType.ARRAY) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isObject() {
 		if (_openApiType == OpenApiType.OBJECT) {
 			return true;
