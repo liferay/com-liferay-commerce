@@ -113,7 +113,7 @@ public class CommerceCartResource {
 				commerceOrderItem.getCommerceOrderItemId());
 
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrder.getCommerceOrderId(), themeDisplay,
+				commerceOrder.getCommerceOrderId(), themeDisplay.getLocale(),
 				commerceContext);
 		}
 		catch (Exception e) {
@@ -170,7 +170,7 @@ public class CommerceCartResource {
 				cartItemUpdate.getQuantity(), commerceContext, serviceContext);
 
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrder.getCommerceOrderId(), themeDisplay,
+				commerceOrder.getCommerceOrderId(), themeDisplay.getLocale(),
 				commerceContext);
 		}
 		catch (Exception e) {
@@ -225,9 +225,11 @@ public class CommerceCartResource {
 			serviceContext.setScopeGroupId(commerceOrder.getGroupId());
 
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrderId, themeDisplay, commerceContext);
+				commerceOrderId, themeDisplay.getLocale(), commerceContext);
 		}
 		catch (Exception e) {
+			_log.error(e, e);
+
 			cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
 		}
 

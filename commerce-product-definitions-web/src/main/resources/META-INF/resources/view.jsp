@@ -81,7 +81,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 							>
 
 								<%
-								String thumbnailSrc = cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
+								String thumbnailSrc = cpDefinition.getDefaultImageThumbnailSrc();
 
 								PortletURL rowURL = renderResponse.createRenderURL();
 

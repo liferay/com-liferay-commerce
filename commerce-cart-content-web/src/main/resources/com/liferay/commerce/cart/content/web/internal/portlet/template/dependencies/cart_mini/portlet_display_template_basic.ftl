@@ -23,9 +23,9 @@
 				name = cpDefinition.getName(themeDisplay.getLanguageId())
 			/>
 
-			<#if commerceCartContentMiniDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem, themeDisplay)??>
+			<#if commerceCartContentMiniDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem)??>
 				<#assign
-					image = commerceCartContentMiniDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem, themeDisplay)
+					image = commerceCartContentMiniDisplayContext.getCommerceOrderItemThumbnailSrc(curCommerceOrderItem)
 				/>
 			</#if>
 

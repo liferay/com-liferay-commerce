@@ -72,7 +72,7 @@ portletDisplay.setURLBack(redirect);
 
 					<liferay-ui:search-container-column-image
 						name="product"
-						src="<%= cpDefinition.getDefaultImageThumbnailSrc(themeDisplay) %>"
+						src="<%= cpDefinition.getDefaultImageThumbnailSrc() %>"
 					/>
 
 					<liferay-ui:search-container-column-text

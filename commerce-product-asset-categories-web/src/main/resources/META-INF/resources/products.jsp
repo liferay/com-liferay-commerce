@@ -52,7 +52,7 @@ cpDefinitionSearchContainer.setResults(cpDefinitions);
 			>
 
 				<%
-				String thumbnailSrc = cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
+				String thumbnailSrc = cpDefinition.getDefaultImageThumbnailSrc();
 
 				CPType cpType = cpAssetCategoryWebPortletUtil.getCPType(cpDefinition.getProductTypeName());
 				%>

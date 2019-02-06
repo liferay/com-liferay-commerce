@@ -83,11 +83,11 @@ public class OrderSummaryCheckoutStepDisplayContext {
 	}
 
 	public String getCommerceOrderItemThumbnailSrc(
-			CommerceOrderItem commerceOrderItem, ThemeDisplay themeDisplay)
+			CommerceOrderItem commerceOrderItem)
 		throws Exception {
 
 		return _cpInstanceHelper.getCPInstanceThumbnailSrc(
-			commerceOrderItem.getCPInstanceId(), themeDisplay);
+			commerceOrderItem.getCPInstanceId());
 	}
 
 	public CommerceOrderPrice getCommerceOrderPrice() throws PortalException {
