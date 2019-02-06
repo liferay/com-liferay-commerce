@@ -112,7 +112,7 @@ public class DTOUtils {
 			commerceCurrency.getMinFractionDigits());
 		currencyDTO.setName(
 			LanguageUtils.getLanguageIdMap(commerceCurrency.getNameMap()));
-		currencyDTO.setPrimary(commerceCurrency.getPrimary());
+		currencyDTO.setPrimary(commerceCurrency.isPrimary());
 		currencyDTO.setRate(commerceCurrency.getRate());
 		currencyDTO.setRoundingMode(commerceCurrency.getRoundingMode());
 
