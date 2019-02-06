@@ -116,12 +116,23 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
 
+		return getCommerceCartPortletURL(
+			groupId, httpServletRequest, commerceOrder);
+	}
+
+	@Override
+	public PortletURL getCommerceCartPortletURL(
+			long groupId, HttpServletRequest httpServletRequest,
+			CommerceOrder commerceOrder)
+		throws PortalException {
+
 		long plid = _portal.getPlidFromPortletId(
 			groupId, CommercePortletKeys.COMMERCE_ORDER_CONTENT);
 
 		if ((plid > 0) && (commerceOrder != null) && !commerceOrder.isOpen()) {
 			PortletURL portletURL = _getPortletURL(
-				httpServletRequest, CommercePortletKeys.COMMERCE_ORDER_CONTENT);
+				groupId, httpServletRequest,
+				CommercePortletKeys.COMMERCE_ORDER_CONTENT);
 
 			if (commerceOrder != null) {
 				portletURL.setParameter(
@@ -139,7 +150,8 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 		if (plid > 0) {
 			return _getPortletURL(
-				httpServletRequest, CommercePortletKeys.COMMERCE_CART_CONTENT);
+				groupId, httpServletRequest,
+				CommercePortletKeys.COMMERCE_CART_CONTENT);
 		}
 
 		plid = _portal.getPlidFromPortletId(
@@ -147,7 +159,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 		if ((plid > 0) && (commerceOrder != null) && commerceOrder.isOpen()) {
 			PortletURL portletURL = _getPortletURL(
-				httpServletRequest,
+				groupId, httpServletRequest,
 				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
 
 			if (commerceOrder != null) {
@@ -399,9 +411,17 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			HttpServletRequest httpServletRequest, String portletId)
 		throws PortalException {
 
-		PortletURL portletURL = null;
-
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
+
+		return _getPortletURL(groupId, httpServletRequest, portletId);
+	}
+
+	private PortletURL _getPortletURL(
+			long groupId, HttpServletRequest httpServletRequest,
+			String portletId)
+		throws PortalException {
+
+		PortletURL portletURL = null;
 
 		long plid = _portal.getPlidFromPortletId(groupId, portletId);
 
