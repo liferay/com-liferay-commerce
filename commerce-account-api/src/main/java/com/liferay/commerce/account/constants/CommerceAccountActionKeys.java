@@ -15,10 +15,23 @@
 package com.liferay.commerce.account.constants;
 
 /**
+ * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
 public class CommerceAccountActionKeys {
 
+	public static final String ADD_ACCOUNT = "ADD_ACCOUNT";
+
 	public static final String MANAGE_ACCOUNTS = "MANAGE_ACCOUNTS";
+
+	public static final String MANAGE_ADDRESS = "MANAGE_ADDRESS";
+
+	public static final String MANAGE_MEMBERS = "MANAGE_MEMBERS";
+
+	public static final String MANAGE_ORGANIZATIONS = "MANAGE_ORGANIZATIONS";
+
+	public static final String VIEW_ADDRESSES = "VIEW_ADDRESSES";
+
+	public static final String VIEW_MEMBERS = "VIEW_MEMBERS";
 
 }
