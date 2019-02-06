@@ -14,10 +14,13 @@
 
 package com.liferay.commerce.account.web.internal.frontend;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelService;
 import com.liferay.commerce.account.web.internal.model.Organization;
 import com.liferay.commerce.frontend.ClayTable;
+import com.liferay.commerce.frontend.ClayTableAction;
+import com.liferay.commerce.frontend.ClayTableActionProvider;
 import com.liferay.commerce.frontend.ClayTableSchema;
 import com.liferay.commerce.frontend.ClayTableSchemaBuilder;
 import com.liferay.commerce.frontend.ClayTableSchemaBuilderFactory;
@@ -26,14 +29,28 @@ import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
+import com.liferay.portal.kernel.theme.PortletDisplay;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,12 +66,50 @@ import org.osgi.service.component.annotations.Reference;
 		"commerce.data.provider.key=" + CommerceAccountOrganizationClayTable.NAME,
 		"commerce.table.name=" + CommerceAccountOrganizationClayTable.NAME
 	},
-	service = {ClayTable.class, CommerceDataSetDataProvider.class}
+	service = {
+		ClayTable.class, ClayTableActionProvider.class,
+		CommerceDataSetDataProvider.class
+	}
 )
 public class CommerceAccountOrganizationClayTable
-	implements CommerceDataSetDataProvider<Organization>, ClayTable {
+	implements CommerceDataSetDataProvider<Organization>, ClayTable,
+			   ClayTableActionProvider {
 
 	public static final String NAME = "commerceAccountOrganizations";
+
+	@Override
+	public List<ClayTableAction> clayTableActions(
+			HttpServletRequest httpServletRequest, long groupId, Object model)
+		throws PortalException {
+
+		List<ClayTableAction> clayTableActions = new ArrayList<>();
+
+		Organization organization = (Organization)model;
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		long commerceAccountId = ParamUtil.getLong(
+			httpServletRequest, "commerceAccountId");
+
+		if (_modelResourcePermission.contains(
+				themeDisplay.getPermissionChecker(), commerceAccountId,
+				ActionKeys.UPDATE)) {
+
+			String deleteURL = _getAccountOrganizationDeleteURL(
+				organization.getOrganizationId(), organization.getAccountId(),
+				themeDisplay);
+
+			ClayTableAction clayTableAction = new ClayTableAction(
+				deleteURL, StringPool.BLANK,
+				LanguageUtil.get(httpServletRequest, "delete"), false, false);
+
+			clayTableActions.add(clayTableAction);
+		}
+
+		return clayTableActions;
+	}
 
 	@Override
 	public int countItems(HttpServletRequest httpServletRequest, Filter filter)
@@ -107,7 +162,9 @@ public class CommerceAccountOrganizationClayTable
 
 			organizations.add(
 				new Organization(
-					organization.getOrganizationId(), organization.getName(),
+					organization.getOrganizationId(),
+					commerceAccountOrganizationRel.getCommerceAccountId(),
+					organization.getName(),
 					getPath(organization.getTreePath())));
 		}
 
@@ -138,12 +195,45 @@ public class CommerceAccountOrganizationClayTable
 		return sb.toString();
 	}
 
+	private String _getAccountOrganizationDeleteURL(
+		long organizationId, long commerceAccountId,
+		ThemeDisplay themeDisplay) {
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		PortletURL deleteURL = PortletURLFactoryUtil.create(
+			themeDisplay.getRequest(), portletDisplay.getId(),
+			themeDisplay.getPlid(), PortletRequest.ACTION_PHASE);
+
+		deleteURL.setParameter(
+			ActionRequest.ACTION_NAME, "editCommerceAccountOrganizationRel");
+		deleteURL.setParameter(Constants.CMD, Constants.REMOVE);
+
+		String redirect = ParamUtil.getString(
+			themeDisplay.getRequest(), "redirect",
+			themeDisplay.getURLCurrent());
+
+		deleteURL.setParameter("redirect", redirect);
+
+		deleteURL.setParameter(
+			"commerceAccountId", String.valueOf(commerceAccountId));
+		deleteURL.setParameter(
+			"organizationId", String.valueOf(organizationId));
+
+		return deleteURL.toString();
+	}
+
 	@Reference
 	private ClayTableSchemaBuilderFactory _clayTableSchemaBuilderFactory;
 
 	@Reference
 	private CommerceAccountOrganizationRelService
 		_commerceAccountOrganizationRelService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
+	)
+	private ModelResourcePermission<CommerceAccount> _modelResourcePermission;
 
 	@Reference
 	private OrganizationLocalService _organizationLocalService;
