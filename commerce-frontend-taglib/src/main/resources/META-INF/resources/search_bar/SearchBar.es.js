@@ -75,7 +75,7 @@ class SearchBar extends Component {
 
 		this.active = status;
 
-		this.emit('toggled', status);
+		this.emit('toogled', status);
 	}
 
 	_toggleClick() {
