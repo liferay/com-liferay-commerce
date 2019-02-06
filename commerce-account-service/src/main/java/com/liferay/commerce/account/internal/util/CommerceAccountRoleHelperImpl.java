@@ -104,9 +104,8 @@ public class CommerceAccountRoleHelperImpl
 				"com.liferay.commerce.account.model.CommerceAccount",
 				new String[] {
 					CommerceAccountActionKeys.MANAGE_ADDRESS,
-					CommerceAccountActionKeys.MANAGE_MEMBERS,
-					ActionKeys.UPDATE, ActionKeys.VIEW,
-					CommerceAccountActionKeys.VIEW_ADDRESSES,
+					CommerceAccountActionKeys.MANAGE_MEMBERS, ActionKeys.UPDATE,
+					ActionKeys.VIEW, CommerceAccountActionKeys.VIEW_ADDRESSES,
 					CommerceAccountActionKeys.VIEW_MEMBERS
 				});
 

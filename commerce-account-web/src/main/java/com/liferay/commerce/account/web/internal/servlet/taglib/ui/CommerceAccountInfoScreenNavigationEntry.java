@@ -15,7 +15,6 @@
 package com.liferay.commerce.account.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
-import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
@@ -32,17 +31,12 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.security.permission.PermissionCheckerFactoryImpl;
 import com.liferay.users.admin.configuration.UserFileUploadsConfiguration;
 
 import java.io.IOException;
@@ -95,6 +89,23 @@ public class CommerceAccountInfoScreenNavigationEntry
 	}
 
 	@Override
+	public boolean isVisible(User user, CommerceAccount commerceAccount) {
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		try {
+			return _modelResourcePermission.contains(
+				permissionChecker, commerceAccount,
+				CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
+
+		return false;
+	}
+
+	@Override
 	public void render(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)
@@ -115,32 +126,15 @@ public class CommerceAccountInfoScreenNavigationEntry
 			httpServletRequest, httpServletResponse, "/view_account_info.jsp");
 	}
 
-	@Override
-	public boolean isVisible(User user, CommerceAccount commerceAccount) {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		try {
-			return _modelResourcePermission.contains(
-				permissionChecker, commerceAccount,
-				CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-		}
-
-		return false;
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceAccountInfoScreenNavigationEntry.class);
-
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
 		_userFileUploadsConfiguration = ConfigurableUtil.createConfigurable(
 			UserFileUploadsConfiguration.class, properties);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAccountInfoScreenNavigationEntry.class);
 
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;

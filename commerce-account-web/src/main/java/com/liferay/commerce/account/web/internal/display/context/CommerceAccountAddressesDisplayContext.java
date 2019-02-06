@@ -19,7 +19,6 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.account.web.internal.servlet.taglib.ui.CommerceAccountScreenNavigationConstants;
-import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.service.CommerceAddressService;
@@ -31,7 +30,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -205,7 +203,7 @@ public class CommerceAccountAddressesDisplayContext
 		return portletURL;
 	}
 
-	public boolean hasManageCommerceAddressPermission() throws PortalException{
+	public boolean hasManageCommerceAddressPermission() throws PortalException {
 		return modelResourcePermission.contains(
 			commerceAccountRequestHelper.getPermissionChecker(),
 			getCurrentCommerceAccount(),

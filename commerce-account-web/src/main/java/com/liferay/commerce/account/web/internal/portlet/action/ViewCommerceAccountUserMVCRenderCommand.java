@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.account.web.internal.portlet.action;
 
-import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
@@ -25,7 +24,6 @@ import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -66,8 +64,7 @@ public class ViewCommerceAccountUserMVCRenderCommand
 				_commerceAccountHelper, _commerceAccountService,
 				_commerceAddressService, _commerceCountryService,
 				_commerceRegionService, httpServletRequest,
-				_modelResourcePermission, _portal,
-				null, _userLocalService);
+				_modelResourcePermission, _portal, null, _userLocalService);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);

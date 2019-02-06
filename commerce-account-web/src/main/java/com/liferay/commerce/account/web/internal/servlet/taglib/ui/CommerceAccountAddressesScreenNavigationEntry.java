@@ -19,7 +19,6 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.account.web.internal.display.context.CommerceAccountAddressesDisplayContext;
-import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
@@ -34,7 +33,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -85,6 +83,23 @@ public class CommerceAccountAddressesScreenNavigationEntry
 	}
 
 	@Override
+	public boolean isVisible(User user, CommerceAccount commerceAccount) {
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		try {
+			return _modelResourcePermission.contains(
+				permissionChecker, commerceAccount,
+				CommerceAccountActionKeys.MANAGE_ADDRESS);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
+
+		return false;
+	}
+
+	@Override
 	public void render(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)
@@ -107,26 +122,8 @@ public class CommerceAccountAddressesScreenNavigationEntry
 			"/view_account_addresses.jsp");
 	}
 
-	@Override
-	public boolean isVisible(User user, CommerceAccount commerceAccount) {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		try {
-			return _modelResourcePermission.contains(
-				permissionChecker, commerceAccount,
-				CommerceAccountActionKeys.MANAGE_ADDRESS);
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-		}
-
-		return false;
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceAccountAddressesScreenNavigationEntry.class);
-
 
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;
