@@ -25,17 +25,12 @@ public class CommerceAccountScreenNavigationConstants {
 	public static final String CATEGORY_KEY_ACCOUNT_ADDRESSES =
 		"account-addresses";
 
-	public static final String CATEGORY_KEY_ACCOUNT_BRANCHES =
-		"account-branches";
-
 	public static final String CATEGORY_KEY_ACCOUNT_INFO = "account-info";
 
 	public static final String CATEGORY_KEY_ACCOUNT_MEMBERS = "account-members";
 
 	public static final String ENTRY_KEY_ACCOUNT_ADDRESSES =
 		"account-addresses";
-
-	public static final String ENTRY_KEY_ACCOUNT_BRANCHES = "account-branches";
 
 	public static final String ENTRY_KEY_ACCOUNT_INFO = "account-info";
 

@@ -66,7 +66,7 @@ public class ViewCommerceAccountUserMVCRenderCommand
 				_commerceAccountHelper, _commerceAccountService,
 				_commerceAddressService, _commerceCountryService,
 				_commerceRegionService, httpServletRequest,
-				_modelResourcePermission, _portal, _portletResourcePermission,
+				_modelResourcePermission, _portal,
 				null, _userLocalService);
 
 		renderRequest.setAttribute(
@@ -97,11 +97,6 @@ public class ViewCommerceAccountUserMVCRenderCommand
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference
 	private UserLocalService _userLocalService;

@@ -72,7 +72,7 @@ public class EditCommerceAccountMVCRenderCommand implements MVCRenderCommand {
 				_commerceAccountHelper, _commerceAccountService,
 				_commerceAddressService, _commerceCountryService,
 				_commerceRegionService, httpServletRequest,
-				_modelResourcePermission, _portal, _portletResourcePermission,
+				_modelResourcePermission, _portal,
 				_userFileUploadsConfiguration, _userLocalService);
 
 		renderRequest.setAttribute(
@@ -110,11 +110,6 @@ public class EditCommerceAccountMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	private volatile UserFileUploadsConfiguration _userFileUploadsConfiguration;
 

@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.web.internal.servlet.taglib.ui;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
@@ -25,8 +26,13 @@ import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -81,12 +87,29 @@ public class CommerceAccountMembersScreenNavigationEntry
 
 	@Override
 	public boolean isVisible(User user, CommerceAccount commerceAccount) {
-		if (commerceAccount == null) {
-			return false;
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		try {
+			 if(_modelResourcePermission.contains(
+				permissionChecker, commerceAccount,
+				CommerceAccountActionKeys.VIEW_MEMBERS) ||
+					_modelResourcePermission.contains(
+						permissionChecker, commerceAccount,
+						CommerceAccountActionKeys.MANAGE_MEMBERS)){
+			 	return true;
+			 }
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
 		}
 
-		return true;
+		return false;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAccountMembersScreenNavigationEntry.class);
+
 
 	@Override
 	public void render(
@@ -99,7 +122,7 @@ public class CommerceAccountMembersScreenNavigationEntry
 				_commerceAccountHelper, _commerceAccountService,
 				_commerceAddressService, _commerceCountryService,
 				_commerceRegionService, httpServletRequest,
-				_modelResourcePermission, _portal, _portletResourcePermission,
+				_modelResourcePermission, _portal,
 				null, _userLocalService);
 
 		httpServletRequest.setAttribute(
@@ -135,11 +158,6 @@ public class CommerceAccountMembersScreenNavigationEntry
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceAccountConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference
 	private UserLocalService _userLocalService;

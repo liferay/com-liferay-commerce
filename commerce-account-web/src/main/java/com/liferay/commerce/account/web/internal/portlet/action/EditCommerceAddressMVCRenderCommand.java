@@ -65,8 +65,7 @@ public class EditCommerceAddressMVCRenderCommand implements MVCRenderCommand {
 					_commerceAccountHelper, _commerceAccountService,
 					_commerceAddressService, _commerceCountryService,
 					_commerceRegionService, httpServletRequest,
-					_modelResourcePermission, _portal,
-					_portletResourcePermission);
+					_modelResourcePermission, _portal);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -97,10 +96,5 @@ public class EditCommerceAddressMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 }

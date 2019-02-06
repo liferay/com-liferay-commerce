@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.web.internal.display.context;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
@@ -56,7 +57,7 @@ public class CommerceAccountAddressesDisplayContext
 		CommerceRegionService commerceRegionService,
 		HttpServletRequest httpServletRequest,
 		ModelResourcePermission<CommerceAccount> modelResourcePermission,
-		Portal portal, PortletResourcePermission portletResourcePermission) {
+		Portal portal) {
 
 		super(
 			commerceAccountHelper, commerceAccountService,
@@ -64,7 +65,6 @@ public class CommerceAccountAddressesDisplayContext
 			modelResourcePermission, portal);
 
 		_commerceAddressService = commerceAddressService;
-		_portletResourcePermission = portletResourcePermission;
 	}
 
 	public String getAddCommerceAddressHref() throws WindowStateException {
@@ -205,15 +205,14 @@ public class CommerceAccountAddressesDisplayContext
 		return portletURL;
 	}
 
-	public boolean hasManageCommerceAddressPermission() {
-		return _portletResourcePermission.contains(
+	public boolean hasManageCommerceAddressPermission() throws PortalException{
+		return modelResourcePermission.contains(
 			commerceAccountRequestHelper.getPermissionChecker(),
-			commerceAccountRequestHelper.getScopeGroupId(),
-			CommerceActionKeys.MANAGE_COMMERCE_ADDRESSES);
+			getCurrentCommerceAccount(),
+			CommerceAccountActionKeys.MANAGE_ADDRESS);
 	}
 
 	private final CommerceAddressService _commerceAddressService;
 	private String _keywords;
-	private final PortletResourcePermission _portletResourcePermission;
 
 }

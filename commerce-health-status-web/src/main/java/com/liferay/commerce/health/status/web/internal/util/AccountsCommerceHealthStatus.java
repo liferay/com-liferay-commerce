@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.RoleService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -106,11 +107,11 @@ public class AccountsCommerceHealthStatus implements CommerceHealthStatus {
 	public boolean isFixed(long groupId) throws PortalException {
 		Group group = _groupLocalService.getGroup(groupId);
 
-		List<Role> roles = _roleService.getRoles(
+		Role role = _roleLocalService.fetchRole(
 			group.getCompanyId(),
-			new int[] {CommerceAccountConstants.ACCOUNT_ROLE_TYPE});
+			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME );
 
-		return !roles.isEmpty();
+		return (role != null);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -127,7 +128,7 @@ public class AccountsCommerceHealthStatus implements CommerceHealthStatus {
 	private GroupLocalService _groupLocalService;
 
 	@Reference
-	private RoleService _roleService;
+	private RoleLocalService _roleLocalService;
 
 	private class AccountRoleCallable implements Callable<Object> {
 
