@@ -16,11 +16,13 @@ package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.Content;
 import com.liferay.commerce.openapi.util.Method;
+import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiContextExtension;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.Response;
+import com.liferay.commerce.openapi.util.util.PackageUtils;
 import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
@@ -46,16 +48,26 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		String applicationName, String author, String contextOutputPath,
 		String moduleOutputPath, String modelPackagePath,
 		boolean overwriteImplementation, String resourceInterfacePackagePath,
-		String resourcePackagePath) {
+		String resourcePackagePath, OpenApi openApi) {
 
 		_applicationName = applicationName;
 		_author = author;
 		_contextOutputPath = contextOutputPath;
 		_moduleOutputPath = moduleOutputPath;
-		_modelPackagePath = modelPackagePath;
+
+		String versionPackage = PackageUtils.toPackageName(
+			openApi.getVersion());
+
+		_modelPackagePath = modelPackagePath + "." + versionPackage;
+
 		_overwriteImplementation = overwriteImplementation;
-		_resourceInterfacePackagePath = resourceInterfacePackagePath;
-		_resourcePackagePath = resourcePackagePath;
+
+		_resourceInterfacePackagePath =
+			resourceInterfacePackagePath + "." + versionPackage;
+
+		_resourcePackagePath = resourcePackagePath + "." + versionPackage;
+
+		_openApi = openApi;
 	}
 
 	public String generateResourceGetters(List<Path> paths) {
@@ -132,13 +144,14 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return sb.toString();
 	}
 
-	public void writeResourceSources(
-			String version, Path path, Set<OpenApiComponent> openApiComponents)
-		throws IOException {
+	public void writeClassSources() throws IOException {
+		Set<OpenApiComponent> openApiComponents =
+			_openApi.getOpenApiComponents();
 
-		_writeResourceInterfaceSource(version, path, openApiComponents);
-
-		_writeResourceImplementationSource(version, path, openApiComponents);
+		for (Path path : _openApi.getPaths()) {
+			_writeResourceSources(
+				_openApi.getVersion(), path, openApiComponents);
+		}
 	}
 
 	protected String getReturnType(
@@ -315,6 +328,15 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		}
 
 		return sb.toString();
+	}
+
+	protected void _writeResourceSources(
+			String version, Path path, Set<OpenApiComponent> openApiComponents)
+		throws IOException {
+
+		_writeResourceInterfaceSource(version, path, openApiComponents);
+
+		_writeResourceImplementationSource(version, path, openApiComponents);
 	}
 
 	private String _getConsumesAnnotation(List<Content> requestBody) {
@@ -685,6 +707,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 	private final String _contextOutputPath;
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;
+	private final OpenApi _openApi;
 	private final boolean _overwriteImplementation;
 	private final ParameterGenerator _parameterGenerator =
 		new ParameterGenerator();

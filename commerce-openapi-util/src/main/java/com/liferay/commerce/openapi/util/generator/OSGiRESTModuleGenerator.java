@@ -15,8 +15,6 @@
 package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.OpenApi;
-import com.liferay.commerce.openapi.util.OpenApiComponent;
-import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.PropertiesFactory;
 import com.liferay.commerce.openapi.util.generator.exception.GeneratorException;
 import com.liferay.commerce.openapi.util.importer.OpenAPIImporter;
@@ -25,7 +23,6 @@ import com.liferay.commerce.openapi.util.util.StringUtils;
 import java.io.IOException;
 
 import java.util.Properties;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,15 +113,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			"%s/%s", moduleRootPath,
 			properties.getProperty("osgi.module.name"));
 
-		boolean overwriteImplementation = false;
-
-		if ("true".equals(
-				properties.getProperty(
-					"osgi.module.generator.overwrite.implementation"))) {
-
-			overwriteImplementation = true;
-		}
-
 		if ("true".equals(
 				properties.getProperty(
 					"osgi.module.generator.overwrite.bnd"))) {
@@ -139,13 +127,6 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			_author, _applicationName,
 			properties.getProperty("osgi.module.jaxrs.json.package"),
 			_moduleOutputPath);
-
-		_resourceGenerator = new ResourceGenerator(
-			_applicationName, _author,
-			_bundleSynbolicName + ".internal.context", _moduleOutputPath,
-			_modelPackagePath, overwriteImplementation,
-			properties.getProperty("osgi.module.resource.interface.package"),
-			properties.getProperty("osgi.module.resource.package"));
 	}
 
 	public void generate() throws IOException {
@@ -166,13 +147,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 			_writeGradleSource(openApi);
 
-			Set<OpenApiComponent> openApiComponents =
-				openApi.getOpenApiComponents();
-
-			for (Path path : openApi.getPaths()) {
-				_resourceGenerator.writeResourceSources(
-					openApi.getVersion(), path, openApiComponents);
-			}
+			_writeResourceSources(openApi);
 
 			_writeDTOSources(openApi);
 
@@ -276,6 +251,13 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		writeSource(bndTpl, bndSourcePath);
 	}
 
+	private void _writeDTOSources(OpenApi openApi) throws IOException {
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			_author, _moduleOutputPath, _modelPackagePath, openApi);
+
+		dtoGenerator.writeClassSources();
+	}
+
 	private void _writeGradleSource(OpenApi openApi) throws IOException {
 		Properties properties = PropertiesFactory.getPropertiesFor(
 			OSGiRESTModuleGenerator.class);
@@ -296,11 +278,27 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		buildGradleGenerator.writeSource();
 	}
 
-	private void _writeDTOSources(OpenApi openApi) throws IOException {
-		DTOGenerator dtoGenerator = new DTOGenerator(
-			_author, _moduleOutputPath, _modelPackagePath, openApi);
+	private void _writeResourceSources(OpenApi openApi) throws IOException {
+		Properties properties = PropertiesFactory.getPropertiesFor(
+			OSGiRESTModuleGenerator.class);
 
-		dtoGenerator.writeClassSources();
+		boolean overwriteImplementation = false;
+
+		if ("true".equals(
+				properties.getProperty(
+					"osgi.module.generator.overwrite.implementation"))) {
+
+			overwriteImplementation = true;
+		}
+
+		ResourceGenerator resourceGenerator = new ResourceGenerator(
+			_applicationName, _author,
+			_bundleSynbolicName + ".internal.context", _moduleOutputPath,
+			_modelPackagePath, overwriteImplementation,
+			properties.getProperty("osgi.module.resource.interface.package"),
+			properties.getProperty("osgi.module.resource.package"), openApi);
+
+		resourceGenerator.writeClassSources();
 	}
 
 	private static final String _TEMPLATE_FILE_APPLICATION =
@@ -326,6 +324,5 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private final String _moduleOutputPath;
 	private final boolean _oauth2SecurityAllowed;
 	private final boolean _overwriteBND;
-	private final ResourceGenerator _resourceGenerator;
 
 }
