@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountServiceUtil;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
@@ -26,6 +25,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.UserGroupRole;
 import com.liferay.portal.kernel.service.RoleServiceUtil;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalServiceUtil;
@@ -83,7 +83,7 @@ public class UserRolesModalTag extends ComponentRendererTag {
 
 			List<Role> roles = RoleServiceUtil.getRoles(
 				PortalUtil.getCompanyId(request),
-				new int[] {CommerceAccountConstants.ACCOUNT_ROLE_TYPE});
+				new int[] {RoleConstants.TYPE_SITE});
 
 			for (Role role : roles) {
 				availableRoles.add(
