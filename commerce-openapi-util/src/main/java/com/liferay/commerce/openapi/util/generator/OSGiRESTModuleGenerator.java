@@ -183,7 +183,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 				componentDefinition -> {
 					DTOGenerator dtoGenerator = new DTOGenerator(
 						_author, _moduleOutputPath, _modelPackagePath,
-						componentDefinition, openApiComponents);
+						componentDefinition, openApi);
 
 					try {
 						dtoGenerator.writeClassSource();
