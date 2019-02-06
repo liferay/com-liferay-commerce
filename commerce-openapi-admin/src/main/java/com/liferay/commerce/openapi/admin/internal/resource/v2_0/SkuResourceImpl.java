@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.InventoryHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.SKUHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.SkuResource;
@@ -21,14 +23,13 @@ import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.model.Company;
 
-import java.util.Collections;
-
-import javax.annotation.Generated;
-
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -38,16 +39,17 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v2.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = SkuResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class SkuResourceImpl implements SkuResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteSku(String id) throws Exception {
+		_skuHelper.deleteSKU(id, _company);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -59,13 +61,13 @@ public class SkuResourceImpl implements SkuResource {
 			String id, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _inventoryHelper.getInventories(id, _company, pagination);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public SkuDTO getSku(String id) throws Exception {
-		return new SkuDTO();
+		return _skuHelper.getSku(id, _company);
 	}
 
 	@Override
@@ -73,6 +75,8 @@ public class SkuResourceImpl implements SkuResource {
 	public Response updateSku(
 			String id, Long groupId, SkuDTO skuDTO, Language language)
 		throws Exception {
+
+		_skuHelper.updateSKU(id, groupId, skuDTO, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
@@ -85,7 +89,17 @@ public class SkuResourceImpl implements SkuResource {
 			String id, Long groupId, InventoryDTO inventoryDTO)
 		throws Exception {
 
-		return new InventoryDTO();
+		return _inventoryHelper.upsertInventory(
+			id, groupId, inventoryDTO, _company);
 	}
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private InventoryHelper _inventoryHelper;
+
+	@Reference
+	private SKUHelper _skuHelper;
 
 }
