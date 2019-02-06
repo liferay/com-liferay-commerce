@@ -52,7 +52,7 @@ List<CommerceVirtualOrderItem> results = commerceVirtualOrderContentDisplayConte
 					<%
 					CommerceOrderItem commerceOrderItem = commerceVirtualOrderItem.getCommerceOrderItem();
 
-					String thumbnailSrc = commerceVirtualOrderItemContentDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem, themeDisplay);
+					String thumbnailSrc = commerceVirtualOrderItemContentDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem);
 
 					List<KeyValuePair> keyValuePairs = commerceVirtualOrderItemContentDisplayContext.getKeyValuePairs(commerceOrderItem.getJson(), locale);
 
