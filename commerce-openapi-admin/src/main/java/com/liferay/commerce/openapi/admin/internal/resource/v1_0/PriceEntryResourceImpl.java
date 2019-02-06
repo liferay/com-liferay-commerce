@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.admin.internal.resource.util.PriceEntryHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.PriceEntryHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.PriceEntryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;

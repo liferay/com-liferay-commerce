@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.admin.internal.resource.util.CountryHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.CountryHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.CountryResource;
 import com.liferay.commerce.openapi.core.context.Pagination;

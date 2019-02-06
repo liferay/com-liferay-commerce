@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.admin.internal.resource.util.UserHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.UserHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.UserDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.UserResource;
 import com.liferay.commerce.openapi.core.context.Pagination;
