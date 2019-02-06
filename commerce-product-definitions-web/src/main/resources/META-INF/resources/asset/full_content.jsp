@@ -49,7 +49,7 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 				<dl>
 
 					<%
-					String defaultImageThumbnailSrc = cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
+					String defaultImageThumbnailSrc = cpDefinition.getDefaultImageThumbnailSrc();
 					%>
 
 					<c:if test="<%= Validator.isNotNull(defaultImageThumbnailSrc) %>">

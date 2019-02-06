@@ -84,7 +84,7 @@ public class CommerceSubscriptionContentDisplayContext {
 		throws Exception {
 
 		return _cpInstanceHelper.getCPInstanceThumbnailSrc(
-			commerceSubscriptionEntry.getCPInstanceId(), themeDisplay);
+			commerceSubscriptionEntry.getCPInstanceId());
 	}
 
 	public String getCPDefinitionURL(

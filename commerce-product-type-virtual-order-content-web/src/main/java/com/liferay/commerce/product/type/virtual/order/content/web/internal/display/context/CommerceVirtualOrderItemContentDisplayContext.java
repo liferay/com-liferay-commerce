@@ -116,11 +116,11 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 	}
 
 	public String getCommerceOrderItemThumbnailSrc(
-			CommerceOrderItem commerceOrderItem, ThemeDisplay themeDisplay)
+			CommerceOrderItem commerceOrderItem)
 		throws Exception {
 
 		return _cpInstanceHelper.getCPInstanceThumbnailSrc(
-			commerceOrderItem.getCPInstanceId(), themeDisplay);
+			commerceOrderItem.getCPInstanceId());
 	}
 
 	public String getCPDefinitionURL(

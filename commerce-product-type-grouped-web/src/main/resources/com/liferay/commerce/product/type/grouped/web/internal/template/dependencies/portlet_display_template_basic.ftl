@@ -75,7 +75,7 @@
 
 								<div class="row">
 									<div class="col-md-4">
-										<img class="img-responsive" src="${curCPDefinition.getDefaultImageThumbnailSrc(themeDisplay)}">
+										<img class="img-responsive" src="${curCPDefinition.getDefaultImageThumbnailSrc()}">
 									</div>
 
 									<div class="col-md-8">

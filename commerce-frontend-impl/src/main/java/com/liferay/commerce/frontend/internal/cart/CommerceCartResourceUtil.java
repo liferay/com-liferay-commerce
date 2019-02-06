@@ -37,7 +37,6 @@ import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 
 import java.math.BigDecimal;
@@ -56,7 +55,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceCartResourceUtil {
 
 	public Cart getCart(
-			long commerceOrderId, ThemeDisplay themeDisplay,
+			long commerceOrderId, Locale locale,
 			CommerceContext commerceContext)
 		throws Exception {
 
@@ -64,9 +63,8 @@ public class CommerceCartResourceUtil {
 			commerceOrderId);
 
 		return new Cart(
-			getProducts(commerceOrder, themeDisplay, commerceContext),
-			getSummary(
-				commerceOrder, themeDisplay.getLocale(), commerceContext));
+			getProducts(commerceOrder, locale, commerceContext),
+			getSummary(commerceOrder, locale, commerceContext));
 	}
 
 	protected String[] getErrorMessages(
@@ -130,7 +128,7 @@ public class CommerceCartResourceUtil {
 	}
 
 	protected List<Product> getProducts(
-			CommerceOrder commerceOrder, ThemeDisplay themeDisplay,
+			CommerceOrder commerceOrder, Locale locale,
 			CommerceContext commerceContext)
 		throws Exception {
 
@@ -140,8 +138,6 @@ public class CommerceCartResourceUtil {
 			commerceOrder.getCommerceOrderItems();
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			Locale locale = themeDisplay.getLocale();
-
 			Prices prices = getPrice(
 				commerceOrderItem, locale, commerceContext);
 
@@ -153,7 +149,7 @@ public class CommerceCartResourceUtil {
 					commerceOrderItem.getName(locale),
 					commerceOrderItem.getSku(), commerceOrderItem.getQuantity(),
 					_cpInstanceHelper.getCPInstanceThumbnailSrc(
-						commerceOrderItem.getCPInstanceId(), themeDisplay),
+						commerceOrderItem.getCPInstanceId()),
 					prices, settings,
 					getErrorMessages(locale, commerceOrderItem)));
 		}

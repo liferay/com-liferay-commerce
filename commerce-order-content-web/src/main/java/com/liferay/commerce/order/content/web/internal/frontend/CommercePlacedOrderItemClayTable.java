@@ -211,7 +211,7 @@ public class CommercePlacedOrderItemClayTable
 						commerceOrderItem.getName(themeDisplay.getLocale()),
 						price, discount, commerceOrderItem.getQuantity(), total,
 						_cpInstanceHelper.getCPInstanceThumbnailSrc(
-							commerceOrderItem.getCPInstanceId(), themeDisplay),
+							commerceOrderItem.getCPInstanceId()),
 						CommerceOrderClayTableUtil.getViewShipmentURL(
 							commerceOrderItem.getCommerceOrderId(),
 							themeDisplay)));
