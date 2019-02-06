@@ -31,6 +31,7 @@ CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDi
 <div class="container-fluid-1280">
 	<commerce-ui:table
 		dataProviderKey="<%= CommerceAccountOrganizationClayTable.NAME %>"
+		filter="<%= commerceAccountDisplayContext.getAccountFilter() %>"
 		itemPerPage="<%= 5 %>"
 		namespace="<%= renderResponse.getNamespace() %>"
 		pageNumber="1"
