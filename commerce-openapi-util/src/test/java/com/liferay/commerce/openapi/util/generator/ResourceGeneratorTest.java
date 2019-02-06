@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.util.generator;
 
 import com.liferay.commerce.openapi.util.Content;
 import com.liferay.commerce.openapi.util.Method;
+import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiContextExtension;
 import com.liferay.commerce.openapi.util.Response;
@@ -38,7 +39,8 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 	@Test
 	public void testGetReturnType() {
 		ResourceGenerator resourceGenerator = new ResourceGenerator(
-			"test", "test", "test", "test", "test", false, "test", "test");
+			"test", "test", "test", "test", "test", false, "test", "test",
+			new OpenApi("1.0", "Test Open Api", "Test Open Api"));
 
 		Method getMethod = _getMethod(true);
 
@@ -58,7 +60,8 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 	@Test
 	public void testToJavaxImports() {
 		ResourceGenerator resourceGenerator = new ResourceGenerator(
-			"test", "test", "test", "test", "test", false, "test", "test");
+			"test", "test", "test", "test", "test", false, "test", "test",
+			new OpenApi("1.0", "Test Open Api", "Test Open Api"));
 
 		String imports = resourceGenerator.toJavaxImports(
 			_getMethods(true, "testModel", Collections.emptyList()),
@@ -101,7 +104,8 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 	@Test
 	public void testToResourceImplementationMethods() {
 		ResourceGenerator resourceGenerator = new ResourceGenerator(
-			"test", "test", "test", "test", "test", false, "test", "test");
+			"test", "test", "test", "test", "test", false, "test", "test",
+			new OpenApi("1.0", "Test Open Api", "Test Open Api"));
 
 		String interfaceMethods =
 			resourceGenerator.toResourceImplementationMethods(
@@ -125,7 +129,8 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 	@Test
 	public void testToResourceInterfaceMethods() {
 		ResourceGenerator resourceGenerator = new ResourceGenerator(
-			"test", "test", "test", "test", "test", false, "test", "test");
+			"test", "test", "test", "test", "test", false, "test", "test",
+			new OpenApi("1.0", "Test Open Api", "Test Open Api"));
 
 		String interfaceMethods = resourceGenerator.toResourceInterfaceMethods(
 			_getMethods(true, "testModel", Collections.emptyList()),
