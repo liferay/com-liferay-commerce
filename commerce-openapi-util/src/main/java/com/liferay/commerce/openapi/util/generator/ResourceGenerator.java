@@ -149,7 +149,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 			_openApi.getOpenApiComponents();
 
 		for (Path path : _openApi.getPaths()) {
-			_writeResourceSources(
+			writeResourceSources(
 				_openApi.getVersion(), path, openApiComponents);
 		}
 	}
@@ -330,7 +330,7 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return sb.toString();
 	}
 
-	protected void _writeResourceSources(
+	protected void writeResourceSources(
 			String version, Path path, Set<OpenApiComponent> openApiComponents)
 		throws IOException {
 
