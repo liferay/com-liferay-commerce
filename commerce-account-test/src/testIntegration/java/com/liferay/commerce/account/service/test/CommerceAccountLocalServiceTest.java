@@ -347,14 +347,18 @@ public class CommerceAccountLocalServiceTest {
 				externalReferenceCodes.get(i - 1), serviceContext);
 		}
 
-		Organization liferayOrg = _organizationLocalService.getOrganization(
-			_user.getCompanyId(), "businessLiferay");
-		Organization italyOrg = _organizationLocalService.getOrganization(
-			_user.getCompanyId(), "businessItaly");
-		Organization chicagoOrg = _organizationLocalService.getOrganization(
-			_user.getCompanyId(), "businessChicago");
-		Organization losAngelesOrg = _organizationLocalService.getOrganization(
-			_user.getCompanyId(), "businessLosAngeles");
+		Organization liferayOrganization =
+			_organizationLocalService.getOrganization(
+				_user.getCompanyId(), "businessLiferay");
+		Organization italyOrganization =
+			_organizationLocalService.getOrganization(
+				_user.getCompanyId(), "businessItaly");
+		Organization chicagoOrganization =
+			_organizationLocalService.getOrganization(
+				_user.getCompanyId(), "businessChicago");
+		Organization losAngelesOrganization =
+			_organizationLocalService.getOrganization(
+				_user.getCompanyId(), "businessLosAngeles");
 
 		User user1 = _userLocalService.getUserByScreenName(
 			_user.getCompanyId(), "user1");
@@ -362,25 +366,28 @@ public class CommerceAccountLocalServiceTest {
 		User user2 = _userLocalService.getUserByScreenName(
 			_user.getCompanyId(), "user2");
 
+		_organizationLocalService.addUserOrganization(
+			user2.getUserId(), italyOrganization);
+		_organizationLocalService.addUserOrganization(
+			user2.getUserId(), chicagoOrganization);
+
 		User user3 = _userLocalService.getUserByScreenName(
 			_user.getCompanyId(), "user3");
 
+		_organizationLocalService.addUserOrganization(
+			user3.getUserId(), losAngelesOrganization);
+
 		User user4 = _userLocalService.getUserByScreenName(
 			_user.getCompanyId(), "user4");
+
+		_organizationLocalService.addUserOrganization(
+			user4.getUserId(), chicagoOrganization);
 
 		User user5 = _userLocalService.getUserByScreenName(
 			_user.getCompanyId(), "user5");
 
 		_organizationLocalService.addUserOrganization(
-			user2.getUserId(), italyOrg);
-		_organizationLocalService.addUserOrganization(
-			user2.getUserId(), chicagoOrg);
-		_organizationLocalService.addUserOrganization(
-			user3.getUserId(), losAngelesOrg);
-		_organizationLocalService.addUserOrganization(
-			user4.getUserId(), chicagoOrg);
-		_organizationLocalService.addUserOrganization(
-			user5.getUserId(), liferayOrg);
+			user5.getUserId(), liferayOrganization);
 
 		CommerceAccount commerceAccount1 =
 			_commerceAccountLocalService.fetchByExternalReferenceCode(
@@ -421,16 +428,19 @@ public class CommerceAccountLocalServiceTest {
 
 		CommerceAccountTestUtil.addCommerceAccountOrganizationRels(
 			commerceAccount2.getCommerceAccountId(),
-			new long[] {italyOrg.getOrganizationId()}, serviceContext);
+			new long[] {italyOrganization.getOrganizationId()}, serviceContext);
 		CommerceAccountTestUtil.addCommerceAccountOrganizationRels(
 			commerceAccount3.getCommerceAccountId(),
-			new long[] {chicagoOrg.getOrganizationId()}, serviceContext);
+			new long[] {chicagoOrganization.getOrganizationId()},
+			serviceContext);
 		CommerceAccountTestUtil.addCommerceAccountOrganizationRels(
 			commerceAccount4.getCommerceAccountId(),
-			new long[] {losAngelesOrg.getOrganizationId()}, serviceContext);
+			new long[] {losAngelesOrganization.getOrganizationId()},
+			serviceContext);
 		CommerceAccountTestUtil.addCommerceAccountOrganizationRels(
 			commerceAccount5.getCommerceAccountId(),
-			new long[] {losAngelesOrg.getOrganizationId()}, serviceContext);
+			new long[] {losAngelesOrganization.getOrganizationId()},
+			serviceContext);
 
 		List<CommerceAccount> userCommerceAccounts1 =
 			_commerceAccountLocalService.getUserCommerceAccounts(
@@ -566,7 +576,7 @@ public class CommerceAccountLocalServiceTest {
 	}
 
 	private List<String> _getExternalReferenceCodes(int count) {
-		List<String> externalReferenceCodes = new ArrayList<>();
+		List<String> externalReferenceCodes = new ArrayList<>(count);
 
 		for (int i = 0; i < count; i++) {
 			externalReferenceCodes.add(RandomTestUtil.randomString());
