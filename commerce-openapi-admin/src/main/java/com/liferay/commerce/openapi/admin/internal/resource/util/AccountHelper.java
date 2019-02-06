@@ -20,7 +20,7 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
 import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
-import com.liferay.commerce.openapi.admin.model.AccountDTO;
+import com.liferay.commerce.openapi.admin.model.v1_0.AccountDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.exception.PortalException;

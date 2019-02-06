@@ -19,7 +19,7 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
 import com.liferay.commerce.openapi.admin.internal.util.LanguageUtils;
-import com.liferay.commerce.openapi.admin.model.CurrencyDTO;
+import com.liferay.commerce.openapi.admin.model.v1_0.CurrencyDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.exception.PortalException;

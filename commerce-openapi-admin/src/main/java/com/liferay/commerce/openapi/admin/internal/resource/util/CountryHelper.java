@@ -18,7 +18,7 @@ import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
 import com.liferay.commerce.openapi.admin.internal.util.LanguageUtils;
-import com.liferay.commerce.openapi.admin.model.CountryDTO;
+import com.liferay.commerce.openapi.admin.model.v1_0.CountryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.service.CommerceCountryService;
