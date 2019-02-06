@@ -190,7 +190,7 @@ class Cart extends Component {
 
 	_sendUpdateRequest(productId) {
 		return fetch(
-			this.cartAPI + '/cart-item/' + productId,
+			this.cartAPI + '/cart-item/' + productId + '?groupId=' + themeDisplay.getScopeGroupId() + '&commerceAccountId=' + this.commerceAccountId,
 			{
 				body: JSON.stringify(
 					{
@@ -271,7 +271,7 @@ class Cart extends Component {
 
 	_getProducts() {
 		return fetch(
-			this.cartAPI + '/' + this.cartId,
+			this.cartAPI + '/' + this.cartId + '?groupId=' + themeDisplay.getScopeGroupId() + '&commerceAccountId=' + this.commerceAccountId,
 			{
 				method: 'GET'
 			}
@@ -296,7 +296,7 @@ class Cart extends Component {
 		this._addPendingOperation(productId);
 
 		return fetch(
-			this.cartAPI + '/cart-item/' + productId,
+			this.cartAPI + '/cart-item/' + productId + '?groupId=' + themeDisplay.getScopeGroupId() + '&commerceAccountId=' + this.commerceAccountId,
 			{
 				method: 'DELETE'
 			}
@@ -362,6 +362,12 @@ Cart.STATE = {
 		]
 	),
 	checkoutUrl: Config.string().required(),
+	commerceAccountId: Config.oneOfType(
+		[
+			Config.number(),
+			Config.string()
+		]
+	),
 	detailsUrl: Config.string().required(),
 	disabled: Config.bool().value(false),
 	pendingOperations: Config.array().value(

@@ -73,7 +73,7 @@ class SearchResults extends Component {
 		this.lock = true;
 
 		fetch(
-			`${this.searchAPI}${themeDisplay.getPlid()}?q=${this.queryString}`,
+			`${this.searchAPI}${themeDisplay.getPlid()}?q=${this.queryString}&groupId=${themeDisplay.getScopeGroupId()}&commerceAccountId=${this.commerceAccountId}`,
 			{
 				method: 'GET'
 			}
@@ -154,6 +154,12 @@ class SearchResults extends Component {
 Soy.register(SearchResults, template);
 
 SearchResults.STATE = {
+	commerceAccountId: Config.oneOfType(
+		[
+			Config.number(),
+			Config.string()
+		]
+	),
 	loading: Config.bool().value(false),
 	queryString: Config.string().value(''),
 	queryValue: Config.string().value(''),

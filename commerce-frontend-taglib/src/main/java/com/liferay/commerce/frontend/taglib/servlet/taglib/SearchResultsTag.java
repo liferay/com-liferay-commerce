@@ -14,10 +14,16 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -31,8 +37,25 @@ public class SearchResultsTag extends ComponentRendererTag {
 	public int doStartTag() {
 		putValue("queryString", StringPool.BLANK);
 
+		CommerceContext commerceContext = (CommerceContext)request.getAttribute(
+			CommerceWebKeys.COMMERCE_CONTEXT);
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		try {
+			CommerceAccount commerceAccount =
+				commerceContext.getCommerceAccount();
+
+			if (commerceAccount != null) {
+				putValue(
+					"commerceAccountId",
+					commerceAccount.getCommerceAccountId());
+			}
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
 
 		putValue(
 			"spritemap",
@@ -59,5 +82,8 @@ public class SearchResultsTag extends ComponentRendererTag {
 		return npmResolver.resolveModuleName(
 			"commerce-frontend-taglib/search_results/SearchResults.es");
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		SearchResultsTag.class);
 
 }

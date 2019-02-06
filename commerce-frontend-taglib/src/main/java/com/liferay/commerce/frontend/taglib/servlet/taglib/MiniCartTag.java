@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
@@ -60,6 +61,8 @@ public class MiniCartTag extends ComponentRendererTag {
 
 			if (commerceOrder != null) {
 				putValue("cartId", commerceOrder.getCommerceOrderId());
+				putValue(
+					"commerceAccountId", commerceOrder.getCommerceAccountId());
 
 				PortletURL commerceCheckoutPortletURL =
 					_commerceOrderHttpHelper.getCommerceCheckoutPortletURL(
@@ -67,6 +70,16 @@ public class MiniCartTag extends ComponentRendererTag {
 
 				if (commerceCheckoutPortletURL != null) {
 					checkoutURL = String.valueOf(commerceCheckoutPortletURL);
+				}
+			}
+			else {
+				CommerceAccount commerceAccount =
+					commerceContext.getCommerceAccount();
+
+				if (commerceAccount != null) {
+					putValue(
+						"commerceAccountId",
+						commerceAccount.getCommerceAccountId());
 				}
 			}
 
