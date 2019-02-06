@@ -293,8 +293,8 @@ public class CommerceCartResource {
 					0, options, commerceContext, serviceContext);
 
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrderItem.getCommerceOrderId(), themeDisplay,
-				commerceContext);
+				commerceOrderItem.getCommerceOrderId(),
+				themeDisplay.getLocale(), commerceContext);
 		}
 		catch (Exception e) {
 			if (e instanceof CommerceOrderValidatorException) {
