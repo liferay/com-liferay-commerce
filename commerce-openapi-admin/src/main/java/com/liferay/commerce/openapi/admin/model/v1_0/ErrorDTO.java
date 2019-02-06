@@ -25,12 +25,28 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "Error")
 public class ErrorDTO {
 
+	public Integer getErrorCode() {
+		return _errorCode;
+	}
+
+	public String getErrorDescription() {
+		return _errorDescription;
+	}
+
 	public String getMessage() {
 		return _message;
 	}
 
 	public Integer getStatus() {
 		return _status;
+	}
+
+	public void setErrorCode(Integer errorCode) {
+		_errorCode = errorCode;
+	}
+
+	public void setErrorDescription(String errorDescription) {
+		_errorDescription = errorDescription;
 	}
 
 	public void setMessage(String message) {
@@ -41,6 +57,8 @@ public class ErrorDTO {
 		_status = status;
 	}
 
+	private Integer _errorCode;
+	private String _errorDescription;
 	private String _message;
 	private Integer _status;
 
