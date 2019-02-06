@@ -35,7 +35,6 @@ import com.liferay.commerce.product.service.CProductLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.ModelHintsUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -201,9 +200,7 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 	}
 
 	@Override
-	public String getDefaultImageThumbnailSrc(ThemeDisplay themeDisplay)
-		throws Exception {
-
+	public String getDefaultImageThumbnailSrc() throws Exception {
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			CPDefinitionLocalServiceUtil.getDefaultImage(getCPDefinitionId());
 
