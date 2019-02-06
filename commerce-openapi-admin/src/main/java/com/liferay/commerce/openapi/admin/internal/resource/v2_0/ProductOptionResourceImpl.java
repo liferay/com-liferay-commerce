@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.ProductOptionHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.ProductOptionValueHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.ProductOptionResource;
@@ -21,14 +23,13 @@ import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.model.Company;
 
-import java.util.Collections;
-
-import javax.annotation.Generated;
-
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
@@ -38,17 +39,18 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v2.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = ProductOptionResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class ProductOptionResourceImpl implements ProductOptionResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteProductOption(String id, Language language)
 		throws Exception {
+
+		_productOptionHelper.deleteProductOption(id, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -60,7 +62,7 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 	public ProductOptionDTO getProductOption(String id, Language language)
 		throws Exception {
 
-		return new ProductOptionDTO();
+		return _productOptionHelper.getProductOption(id, language, _company);
 	}
 
 	@Override
@@ -69,7 +71,8 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			Long groupId, Language language, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _productOptionHelper.getProductOptions(
+			groupId, language, pagination);
 	}
 
 	@Override
@@ -78,7 +81,8 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			String id, Language language, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _productOptionValueHelper.getProductOptionValues(
+			id, language, _company, pagination);
 	}
 
 	@Override
@@ -87,6 +91,9 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			String id, Long groupId, ProductOptionDTO productOptionDTO,
 			Language language)
 		throws Exception {
+
+		_productOptionHelper.updateProductOption(
+			id, groupId, productOptionDTO, language, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
@@ -99,7 +106,8 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			Long groupId, ProductOptionDTO productOptionDTO, Language language)
 		throws Exception {
 
-		return new ProductOptionDTO();
+		return _productOptionHelper.upsertProductOption(
+			groupId, productOptionDTO, language);
 	}
 
 	@Override
@@ -109,7 +117,17 @@ public class ProductOptionResourceImpl implements ProductOptionResource {
 			ProductOptionValueDTO productOptionValueDTO, Language language)
 		throws Exception {
 
-		return new ProductOptionValueDTO();
+		return _productOptionValueHelper.upsertProductOptionValue(
+			id, groupId, productOptionValueDTO, language, _company);
 	}
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private ProductOptionHelper _productOptionHelper;
+
+	@Reference
+	private ProductOptionValueHelper _productOptionValueHelper;
 
 }

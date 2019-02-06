@@ -14,40 +14,42 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.PriceListHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.PriceListDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.PriceListResource;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.User;
 
-import java.util.Collections;
-
-import javax.annotation.Generated;
-
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
- * @author Igor Beslic
+ * @author Zoltán Takács
  */
 @Component(
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v2.0"
+		JaxrsWhiteboardConstants.JAX_RS_RESOURCE + "=true", "api.version=v1.0"
 	},
 	scope = ServiceScope.PROTOTYPE, service = PriceListResource.class
 )
-@Generated(value = "OSGiRESTModuleGenerator")
 public class PriceListResourceImpl implements PriceListResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deletePriceList(String id, Language language)
 		throws Exception {
+
+		_priceListHelper.deletePriceList(id, _user, _company);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -59,7 +61,8 @@ public class PriceListResourceImpl implements PriceListResource {
 	public PriceListDTO getPriceList(String id, Long groupId, Language language)
 		throws Exception {
 
-		return new PriceListDTO();
+		return _priceListHelper.getPriceList(
+			id, groupId, _user, language, _company);
 	}
 
 	@Override
@@ -68,7 +71,8 @@ public class PriceListResourceImpl implements PriceListResource {
 			Long groupId, Language language, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _priceListHelper.getPriceLists(
+			groupId, _user, language, _company, pagination);
 	}
 
 	@Override
@@ -78,7 +82,10 @@ public class PriceListResourceImpl implements PriceListResource {
 			Language language)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_priceListHelper.updatePriceList(
+			id, groupId, priceListDTO, _user, language, _company);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -89,7 +96,17 @@ public class PriceListResourceImpl implements PriceListResource {
 			Long groupId, PriceListDTO priceListDTO, Language language)
 		throws Exception {
 
-		return new PriceListDTO();
+		return _priceListHelper.upsertPriceList(
+			groupId, priceListDTO, _user, language, _company);
 	}
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private PriceListHelper _priceListHelper;
+
+	@Context
+	private User _user;
 
 }
