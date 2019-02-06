@@ -48,7 +48,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		throws PortalException {
 
 		PortalPermissionUtil.check(
-			getPermissionChecker(), CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+			getPermissionChecker(), CommerceAccountActionKeys.ADD_ACCOUNT);
 
 		return commerceAccountLocalService.addBusinessCommerceAccount(
 			name, parentCommerceAccountId, email, taxId, active,
@@ -63,7 +63,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		throws PortalException {
 
 		PortalPermissionUtil.check(
-			getPermissionChecker(), CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+			getPermissionChecker(), CommerceAccountActionKeys.ADD_ACCOUNT);
 
 		return commerceAccountLocalService.addCommerceAccount(
 			name, parentCommerceAccountId, email, taxId, type, active,
@@ -258,7 +258,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 		if (commerceAccount == null) {
 			PortalPermissionUtil.check(
-				permissionChecker, CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+				permissionChecker, CommerceAccountActionKeys.ADD_ACCOUNT);
 		}
 		else {
 			_commerceAccountModelResourcePermission.check(
