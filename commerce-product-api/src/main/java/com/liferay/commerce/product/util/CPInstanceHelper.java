@@ -24,7 +24,6 @@ import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.KeyValuePair;
 
 import java.util.List;
@@ -71,9 +70,7 @@ public interface CPInstanceHelper {
 			boolean skuContributor)
 		throws PortalException;
 
-	public String getCPInstanceThumbnailSrc(
-			long cpInstanceId, ThemeDisplay themeDisplay)
-		throws Exception;
+	public String getCPInstanceThumbnailSrc(long cpInstanceId) throws Exception;
 
 	public CPSku getDefaultCPSku(CPCatalogEntry cpCatalogEntry)
 		throws Exception;
