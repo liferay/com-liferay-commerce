@@ -40,6 +40,7 @@ class AddToCartButton extends Component {
 		const formData = new FormData();
 
 		formData.append('accountId', this.accountId);
+		formData.append('commerceAccountId', this.accountId);
 		formData.append('groupId', themeDisplay.getScopeGroupId());
 		formData.append('options', '[]');
 		formData.append('productId', this.productId);
