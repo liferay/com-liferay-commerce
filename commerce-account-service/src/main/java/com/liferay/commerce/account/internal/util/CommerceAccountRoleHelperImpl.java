@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.ResourceActionLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
@@ -50,8 +52,6 @@ public class CommerceAccountRoleHelperImpl
 		_checkRole(
 			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME,
 			serviceContext);
-		_checkRole(
-			CommerceAccountConstants.ACCOUNT_MANAGER_ROLE_NAME, serviceContext);
 	}
 
 	private void _checkRole(String name, ServiceContext serviceContext)
@@ -64,9 +64,8 @@ public class CommerceAccountRoleHelperImpl
 			role = _roleLocalService.addRole(
 				serviceContext.getUserId(), null, 0, name,
 				Collections.singletonMap(serviceContext.getLocale(), name),
-				Collections.emptyMap(),
-				CommerceAccountConstants.ACCOUNT_ROLE_TYPE, StringPool.BLANK,
-				serviceContext);
+				Collections.emptyMap(), RoleConstants.TYPE_SITE,
+				StringPool.BLANK, serviceContext);
 		}
 
 		_setRolePermissions(role, serviceContext);
@@ -98,12 +97,27 @@ public class CommerceAccountRoleHelperImpl
 
 		String name = role.getName();
 
-		if (name.equals(CommerceAccountConstants.ACCOUNT_MANAGER_ROLE_NAME)) {
+		if (name.equals(
+				CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME)) {
+
 			resourceActionIds.put(
-				"90", new String[] {CommerceAccountActionKeys.MANAGE_ACCOUNTS});
+				"90",
+				new String[] {
+					CommerceAccountActionKeys.MANAGE_ACCOUNTS,
+					CommerceAccountActionKeys.ADD_ACCOUNT
+				});
+
 			resourceActionIds.put(
-				CommerceAccountConstants.RESOURCE_NAME,
-				new String[] {CommerceAccountActionKeys.MANAGE_ACCOUNTS});
+				"com.liferay.commerce.account.model.CommerceAccount",
+				new String[] {
+					ActionKeys.DELETE, CommerceAccountActionKeys.MANAGE_ADDRESS,
+					CommerceAccountActionKeys.MANAGE_MEMBERS,
+					CommerceAccountActionKeys.MANAGE_ORGANIZATIONS,
+					ActionKeys.UPDATE, ActionKeys.VIEW,
+					CommerceAccountActionKeys.VIEW_ADDRESSES,
+					CommerceAccountActionKeys.VIEW_MEMBERS
+				});
+
 			resourceActionIds.put(
 				"com.liferay.commerce.order",
 				new String[] {
