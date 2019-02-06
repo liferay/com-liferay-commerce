@@ -23,25 +23,15 @@ public class CommerceAccountConstants {
 	public static final String ACCOUNT_ADMINISTRATOR_ROLE_NAME =
 		"Account Administrator";
 
-	public static final String ACCOUNT_MANAGER_ROLE_NAME = "Account Manager";
-
-	public static final int ACCOUNT_ROLE_TYPE = 100;
-
 	public static final int ACCOUNT_TYPE_BUSINESS = 2;
 
 	public static final int ACCOUNT_TYPE_GUEST = 0;
 
 	public static final int ACCOUNT_TYPE_PERSONAL = 1;
 
-	public static final String BUYER_ROLE_NAME = "Buyer";
-
 	public static final long DEFAULT_PARENT_ACCOUNT_ID = 0;
 
 	public static final long GUEST_ACCOUNT_ID = -1;
-
-	public static final String ORDER_MANAGER_ROLE_NAME = "Order Manager";
-
-	public static final String RESOURCE_NAME = "com.liferay.commerce.account";
 
 	public static final String SERVICE_NAME = "com.liferay.commerce.account";
 
