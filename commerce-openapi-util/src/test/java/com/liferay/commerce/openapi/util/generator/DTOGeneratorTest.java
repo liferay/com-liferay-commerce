@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
+import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
@@ -42,17 +43,18 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		List<OpenApiProperty> openApiProperties = _getPropertyDefinitions(
 			"string", "integer", "boolean");
 
-		DTOGenerator dtoGenerator = new DTOGenerator(
-			"test", "test", "com.liferay.test",
-			new OpenApiComponent(
-				"Component", openApiProperties, "object", null),
-			Collections.emptySet());
+		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
 
-		String classSource = dtoGenerator.getClassSource();
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			"test", "test", "com.liferay.test", openApi);
+
+		String classSource = dtoGenerator.getClassSource(
+			new OpenApiComponent(
+				"Component", openApiProperties, "object", null));
 
 		Assert.assertTrue(
 			"package statement is present",
-			containsOnlyOne(classSource, "package com.liferay.test;"));
+			containsOnlyOne(classSource, "package com.liferay.test.v1_0;"));
 
 		Assert.assertTrue(
 			"DTO class name has DTO in name",
@@ -102,15 +104,19 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			}
 		}
 
-		DTOGenerator dtoGenerator = new DTOGenerator(
-			"test", "test", "com.liferay.test",
-			dictionaryConsumerOpenApiComponent, new HashSet<>(components));
+		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
 
-		String classSource = dtoGenerator.getClassSource();
+		openApi.setOpenApiComponents(components);
+
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			"test", "test", "com.liferay.test", openApi);
+
+		String classSource = dtoGenerator.getClassSource(
+			dictionaryConsumerOpenApiComponent);
 
 		Assert.assertTrue(
 			"package statement is present",
-			containsOnlyOne(classSource, "package com.liferay.test;"));
+			containsOnlyOne(classSource, "package com.liferay.test.v1_0;"));
 
 		for (OpenApiProperty openApiProperty :
 				dictionaryConsumerOpenApiComponent.getOpenApiProperties()) {
@@ -146,17 +152,18 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			}
 		}
 
+		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
+
+		openApi.setOpenApiComponents(components);
+
 		DTOGenerator dtoGenerator = new DTOGenerator(
-			"test", "test", "com.liferay.test", hostOpenApiComponent,
-			new HashSet<>(components));
+			"test", "test", "com.liferay.test", openApi);
 
-		String classSource = dtoGenerator.getClassSource();
-
-		System.out.println(classSource);
+		String classSource = dtoGenerator.getClassSource(hostOpenApiComponent);
 
 		Assert.assertTrue(
 			"package statement is present",
-			containsOnlyOne(classSource, "package com.liferay.test;"));
+			containsOnlyOne(classSource, "package com.liferay.test.v1_0;"));
 
 		for (OpenApiProperty openApiProperty :
 				hostOpenApiComponent.getOpenApiProperties()) {
@@ -197,15 +204,18 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			}
 		}
 
-		DTOGenerator dtoGenerator = new DTOGenerator(
-			"test", "test", "com.liferay.test", childOpenApiComponent,
-			new HashSet<>(components));
+		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
 
-		String classSource = dtoGenerator.getClassSource();
+		openApi.setOpenApiComponents(components);
+
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			"test", "test", "com.liferay.test", openApi);
+
+		String classSource = dtoGenerator.getClassSource(childOpenApiComponent);
 
 		Assert.assertTrue(
 			"package statement is present",
-			containsOnlyOne(classSource, "package com.liferay.test;"));
+			containsOnlyOne(classSource, "package com.liferay.test.v1_0;"));
 
 		for (OpenApiProperty openApiProperty :
 				childOpenApiComponent.getOpenApiProperties()) {
