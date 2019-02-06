@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
-import com.liferay.portal.kernel.service.RoleService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -34,7 +33,6 @@ import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
@@ -109,9 +107,13 @@ public class AccountsCommerceHealthStatus implements CommerceHealthStatus {
 
 		Role role = _roleLocalService.fetchRole(
 			group.getCompanyId(),
-			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME );
+			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME);
 
-		return (role != null);
+		if (role != null) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

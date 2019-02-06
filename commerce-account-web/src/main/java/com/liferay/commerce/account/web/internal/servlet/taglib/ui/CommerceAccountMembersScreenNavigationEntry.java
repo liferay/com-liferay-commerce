@@ -15,7 +15,6 @@
 package com.liferay.commerce.account.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
-import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
@@ -34,7 +33,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -91,14 +89,15 @@ public class CommerceAccountMembersScreenNavigationEntry
 			PermissionThreadLocal.getPermissionChecker();
 
 		try {
-			 if(_modelResourcePermission.contains(
+			if (_modelResourcePermission.contains(
 				permissionChecker, commerceAccount,
 				CommerceAccountActionKeys.VIEW_MEMBERS) ||
 					_modelResourcePermission.contains(
 						permissionChecker, commerceAccount,
-						CommerceAccountActionKeys.MANAGE_MEMBERS)){
-			 	return true;
-			 }
+						CommerceAccountActionKeys.MANAGE_MEMBERS)) {
+
+				return true;
+			}
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -106,10 +105,6 @@ public class CommerceAccountMembersScreenNavigationEntry
 
 		return false;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceAccountMembersScreenNavigationEntry.class);
-
 
 	@Override
 	public void render(
@@ -122,8 +117,7 @@ public class CommerceAccountMembersScreenNavigationEntry
 				_commerceAccountHelper, _commerceAccountService,
 				_commerceAddressService, _commerceCountryService,
 				_commerceRegionService, httpServletRequest,
-				_modelResourcePermission, _portal,
-				null, _userLocalService);
+				_modelResourcePermission, _portal, null, _userLocalService);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);
@@ -132,6 +126,9 @@ public class CommerceAccountMembersScreenNavigationEntry
 			httpServletRequest, httpServletResponse,
 			"/view_account_members.jsp");
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAccountMembersScreenNavigationEntry.class);
 
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;
