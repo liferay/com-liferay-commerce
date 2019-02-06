@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.web.internal.frontend;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.CommerceAccountService;
@@ -39,7 +40,6 @@ import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletQName;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.theme.PortletDisplay;
@@ -100,30 +100,24 @@ public class CommerceAccountUserClayTable
 
 		if (_modelResourcePermission.contains(
 				themeDisplay.getPermissionChecker(), commerceAccountId,
-				ActionKeys.VIEW)) {
+				CommerceAccountActionKeys.MANAGE_MEMBERS)) {
 
 			String viewURL = _getAccountUserViewDetailURL(
 				member.getMemberId(), httpServletRequest);
 
-			ClayTableAction clayTableAction = new ClayTableAction(
-				viewURL, StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "view"), false, false);
-
-			clayTableActions.add(clayTableAction);
-		}
-
-		if (_modelResourcePermission.contains(
-				themeDisplay.getPermissionChecker(), commerceAccountId,
-				ActionKeys.UPDATE)) {
-
 			String deleteURL = _getAccountUserDeleteURL(
 				member.getMemberId(), member.getAccountId(), themeDisplay);
 
-			ClayTableAction clayTableAction = new ClayTableAction(
+			ClayTableAction viewClayTableAction = new ClayTableAction(
+				viewURL, StringPool.BLANK,
+				LanguageUtil.get(httpServletRequest, "view"), false, false);
+
+			ClayTableAction deleteClayTableAction = new ClayTableAction(
 				deleteURL, StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "delete"), false, false);
 
-			clayTableActions.add(clayTableAction);
+			clayTableActions.add(viewClayTableAction);
+			clayTableActions.add(deleteClayTableAction);
 		}
 
 		return clayTableActions;

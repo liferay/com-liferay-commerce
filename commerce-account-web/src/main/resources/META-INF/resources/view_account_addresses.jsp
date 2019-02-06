@@ -37,85 +37,87 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 	tableName="<%= CommerceAccountAddressClayTable.NAME %>"
 />
 
-<div class="minium-frame__cta is-visible">
-	<aui:button cssClass="js-add-address minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openAddAddressModal();" %>' value="add-address" />
-</div>
+<c:if test="<%= commerceAccountAddressesDisplayContext.hasManageCommerceAddressPermission() %>">
+	<div class="minium-frame__cta is-visible">
+		<aui:button cssClass="js-add-address minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openAddAddressModal();" %>' value="add-address" />
+	</div>
 
-<commerce-ui:add-address-modal
-	componentId="addAddressModal"
-/>
+	<commerce-ui:add-address-modal
+		componentId="addAddressModal"
+	/>
 
-<portlet:actionURL name="editCommerceAddress" var="editCommerceAddressActionURL" />
+	<portlet:actionURL name="editCommerceAddress" var="editCommerceAddressActionURL" />
 
-<aui:form action="<%= editCommerceAddressActionURL %>" method="post" name="addressFm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-	<aui:input name="redirect" type="hidden" value="<%= portletURL %>" />
-	<aui:input name="commerceAddressId" type="hidden" value="" />
-	<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccount.getCommerceAccountId() %>" />
-	<aui:input name="name" type="hidden" />
-	<aui:input name="street1" type="hidden" />
-	<aui:input name="description" type="hidden" />
-	<aui:input name="city" type="hidden" />
-	<aui:input name="zip" type="hidden" />
-	<aui:input name="commerceCountryId" type="hidden" />
-	<aui:input name="commerceRegionId" type="hidden" />
-	<aui:input name="phoneNumber" type="hidden" />
-	<aui:input name="addressType" type="hidden" />
-</aui:form>
+	<aui:form action="<%= editCommerceAddressActionURL %>" method="post" name="addressFm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+		<aui:input name="redirect" type="hidden" value="<%= portletURL %>" />
+		<aui:input name="commerceAddressId" type="hidden" value="" />
+		<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccount.getCommerceAccountId() %>" />
+		<aui:input name="name" type="hidden" />
+		<aui:input name="street1" type="hidden" />
+		<aui:input name="description" type="hidden" />
+		<aui:input name="city" type="hidden" />
+		<aui:input name="zip" type="hidden" />
+		<aui:input name="commerceCountryId" type="hidden" />
+		<aui:input name="commerceRegionId" type="hidden" />
+		<aui:input name="phoneNumber" type="hidden" />
+		<aui:input name="addressType" type="hidden" />
+	</aui:form>
 
-<aui:script>
-	Liferay.provide(
-		window,
-		'<portlet:namespace />openAddAddressModal',
-		function(evt) {
-			const addAddressModal = Liferay.component('addAddressModal');
-			addAddressModal.open();
-		}
-	);
+	<aui:script>
+		Liferay.provide(
+			window,
+			'<portlet:namespace />openAddAddressModal',
+			function(evt) {
+				const addAddressModal = Liferay.component('addAddressModal');
+				addAddressModal.open();
+			}
+		);
 
-	Liferay.provide(
-		window,
-		'editCommerceAddress',
-		function(evt) {
-			const addAddressModal = Liferay.component('addAddressModal');
-			addAddressModal.initAddress()
-			addAddressModal.open();
-		}
-	);
+		Liferay.provide(
+			window,
+			'editCommerceAddress',
+			function(evt) {
+				const addAddressModal = Liferay.component('addAddressModal');
+				addAddressModal.initAddress()
+				addAddressModal.open();
+			}
+		);
 
-	Liferay.provide(
-		window,
-		'deleteCommerceAddress',
-		function(id) {
-			document.querySelector('#<portlet:namespace /><%= Constants.CMD %>').value = '<%= Constants.DELETE %>';
-			document.querySelector('#<portlet:namespace />commerceAddressId').value = id;
+		Liferay.provide(
+			window,
+			'deleteCommerceAddress',
+			function(id) {
+				document.querySelector('#<portlet:namespace /><%= Constants.CMD %>').value = '<%= Constants.DELETE %>';
+				document.querySelector('#<portlet:namespace />commerceAddressId').value = id;
 
-			submitForm(document.<portlet:namespace />addressFm);
-		}
-	);
+				submitForm(document.<portlet:namespace />addressFm);
+			}
+		);
 
-	Liferay.componentReady('addAddressModal').then(
-		function(addAddressModal) {
-			addAddressModal.on(
-				'addAddressModalSave',
-				function(formData) {
+		Liferay.componentReady('addAddressModal').then(
+			function(addAddressModal) {
+				addAddressModal.on(
+					'addAddressModalSave',
+					function(formData) {
 
-					document.querySelector('#<portlet:namespace />name').value = formData.referent;
-					document.querySelector('#<portlet:namespace />street1').value = formData.address;
-					document.querySelector('#<portlet:namespace />city').value = formData.city;
-					document.querySelector('#<portlet:namespace />zip').value = formData.zipCode;
-					document.querySelector('#<portlet:namespace />commerceCountryId').value = formData.country;
-					document.querySelector('#<portlet:namespace />commerceRegionId').value = formData.region;
-					document.querySelector('#<portlet:namespace />phoneNumber').value = formData.telephone;
+						document.querySelector('#<portlet:namespace />name').value = formData.referent;
+						document.querySelector('#<portlet:namespace />street1').value = formData.address;
+						document.querySelector('#<portlet:namespace />city').value = formData.city;
+						document.querySelector('#<portlet:namespace />zip').value = formData.zipCode;
+						document.querySelector('#<portlet:namespace />commerceCountryId').value = formData.country;
+						document.querySelector('#<portlet:namespace />commerceRegionId').value = formData.region;
+						document.querySelector('#<portlet:namespace />phoneNumber').value = formData.telephone;
 
-					document.querySelector('#<portlet:namespace />addressType').value = formData.addressType;
+						document.querySelector('#<portlet:namespace />addressType').value = formData.addressType;
 
-					addAddressModal.close();
+						addAddressModal.close();
 
-					submitForm(document.<portlet:namespace />addressFm);
-				}
-			);
-		}
-	);
+						submitForm(document.<portlet:namespace />addressFm);
+					}
+				);
+			}
+		);
 
-</aui:script>
+	</aui:script>
+</c:if>
