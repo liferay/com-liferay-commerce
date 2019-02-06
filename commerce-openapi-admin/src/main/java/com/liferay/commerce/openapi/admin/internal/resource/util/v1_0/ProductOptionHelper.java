@@ -12,10 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.internal.resource.util;
+package com.liferay.commerce.openapi.admin.internal.resource.util.v1_0;
 
-import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
+import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
 import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
+import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOUtils;
 import com.liferay.commerce.openapi.admin.model.v1_0.ProductOptionDTO;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;

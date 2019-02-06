@@ -12,13 +12,14 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.internal.util;
+package com.liferay.commerce.openapi.admin.internal.util.v1_0;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
+import com.liferay.commerce.openapi.admin.internal.util.LanguageUtils;
 import com.liferay.commerce.openapi.admin.model.v1_0.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.v1_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.model.v1_0.CurrencyDTO;
