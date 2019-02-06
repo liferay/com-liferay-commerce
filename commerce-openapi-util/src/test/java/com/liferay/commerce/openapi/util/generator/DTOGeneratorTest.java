@@ -20,6 +20,7 @@ import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
 import com.liferay.commerce.openapi.util.OpenApiTestUtil;
 import com.liferay.commerce.openapi.util.importer.ComponentImporter;
+import com.liferay.commerce.openapi.util.util.ArrayProvider;
 import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
@@ -84,6 +85,64 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 						"public %s is%s", javaTypeProvider.getModelName(),
 						StringUtils.upperCaseFirstChar(
 							openApiProperty.getName()))));
+		}
+	}
+
+	@Test
+	public void testGetDTOSourceIfArrayWithReferencePresent()
+		throws IOException {
+
+		ComponentImporter componentImporter = new ComponentImporter();
+
+		List<OpenApiComponent> components = componentImporter.getComponents(
+			OpenApiTestUtil.getOpenApiComponentsWithArrayPattern());
+
+		OpenApiComponent hostOpenApiComponent = null;
+
+		for (OpenApiComponent openApiComponent : components) {
+			if ("HostComponent".equals(openApiComponent.getName())) {
+				hostOpenApiComponent = openApiComponent;
+
+				break;
+			}
+		}
+
+		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
+
+		openApi.setOpenApiComponents(components);
+
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			"test", "test", "com.liferay.test", openApi);
+
+		String classSource = dtoGenerator.getClassSource(hostOpenApiComponent);
+
+		Assert.assertTrue(
+			"package statement is present",
+			containsOnlyOne(classSource, "package com.liferay.test.v1_0;"));
+
+		for (OpenApiProperty openApiProperty :
+				hostOpenApiComponent.getOpenApiProperties()) {
+
+			if (!openApiProperty.isArray()) {
+				continue;
+			}
+
+			Provider javaTypeProvider = OpenApiFormat.getJavaTypeProvider(
+				openApiProperty, new HashSet<>(components));
+
+			String expectedVariableName = openApiProperty.getName();
+
+			Assert.assertTrue(
+				"array should be handled by array provider",
+				javaTypeProvider instanceof ArrayProvider);
+
+			Assert.assertTrue(
+				"DTO class has private variable _" + expectedVariableName,
+				containsOnlyOne(
+					classSource,
+					String.format(
+						"private %s _%s", javaTypeProvider.getModelName(),
+						expectedVariableName)));
 		}
 	}
 
