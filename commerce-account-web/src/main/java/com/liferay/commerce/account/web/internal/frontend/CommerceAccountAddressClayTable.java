@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.account.web.internal.frontend;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.web.internal.model.Address;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
@@ -34,8 +36,10 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
@@ -76,10 +80,16 @@ public class CommerceAccountAddressClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		long commerceAccountId = ParamUtil.getLong(
+			httpServletRequest, "commerceAccountId");
+
 		if (!_portletResourcePermission.contains(
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(),
-				CommerceActionKeys.MANAGE_COMMERCE_ADDRESSES)) {
+				CommerceActionKeys.MANAGE_COMMERCE_ADDRESSES) ||
+			!_modelResourcePermission.contains(
+				themeDisplay.getPermissionChecker(), commerceAccountId,
+				CommerceAccountActionKeys.MANAGE_ADDRESS)) {
 
 			return Collections.emptyList();
 		}
@@ -204,6 +214,11 @@ public class CommerceAccountAddressClayTable
 
 	@Reference
 	private CommerceAddressService _commerceAddressService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
+	)
+	private ModelResourcePermission<CommerceAccount> _modelResourcePermission;
 
 	@Reference(
 		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"

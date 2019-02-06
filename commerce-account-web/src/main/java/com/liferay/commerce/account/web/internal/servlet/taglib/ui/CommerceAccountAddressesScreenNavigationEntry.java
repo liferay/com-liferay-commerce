@@ -88,9 +88,15 @@ public class CommerceAccountAddressesScreenNavigationEntry
 			PermissionThreadLocal.getPermissionChecker();
 
 		try {
-			return _modelResourcePermission.contains(
-				permissionChecker, commerceAccount,
-				CommerceAccountActionKeys.MANAGE_ADDRESS);
+			if (_modelResourcePermission.contains(
+					permissionChecker, commerceAccount,
+					CommerceAccountActionKeys.VIEW_ADDRESSES) ||
+				_modelResourcePermission.contains(
+					permissionChecker, commerceAccount,
+					CommerceAccountActionKeys.MANAGE_ADDRESS)) {
+
+				return true;
+			}
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);

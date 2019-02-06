@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletQName;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -252,21 +251,30 @@ public abstract class BaseCommerceAccountDisplayContext {
 		return portletURL;
 	}
 
-	public boolean hasEditCommerceAccountPermissions(
-			CommerceAccount commerceAccount)
+	public boolean hasCommerceAccountModelPermissions(
+			CommerceAccount commerceAccount, String actionId)
 		throws PortalException {
 
 		return modelResourcePermission.contains(
 			commerceAccountRequestHelper.getPermissionChecker(),
-			commerceAccount, ActionKeys.UPDATE);
+			commerceAccount, actionId);
 	}
 
-	public boolean hasEditCommerceAccountPermissions(long commerceAccountId)
+	public boolean hasCommerceAccountModelPermissions(
+			long commerceAccountId, String actionId)
 		throws PortalException {
 
 		return modelResourcePermission.contains(
 			commerceAccountRequestHelper.getPermissionChecker(),
-			commerceAccountId, ActionKeys.UPDATE);
+			commerceAccountId, actionId);
+	}
+
+	public boolean hasCommerceAccountModelPermissions(String actionId)
+		throws PortalException {
+
+		return modelResourcePermission.contains(
+			commerceAccountRequestHelper.getPermissionChecker(),
+			getCurrentCommerceAccount(), actionId);
 	}
 
 	protected CommerceAccount getCurrentAccount() throws PortalException {

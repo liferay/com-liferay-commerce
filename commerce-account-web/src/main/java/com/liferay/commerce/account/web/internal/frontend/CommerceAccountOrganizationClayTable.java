@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.web.internal.frontend;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelService;
@@ -34,7 +35,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.theme.PortletDisplay;
@@ -95,7 +95,7 @@ public class CommerceAccountOrganizationClayTable
 
 		if (_modelResourcePermission.contains(
 				themeDisplay.getPermissionChecker(), commerceAccountId,
-				ActionKeys.UPDATE)) {
+				CommerceAccountActionKeys.MANAGE_ORGANIZATIONS)) {
 
 			String deleteURL = _getAccountOrganizationDeleteURL(
 				organization.getOrganizationId(), organization.getAccountId(),

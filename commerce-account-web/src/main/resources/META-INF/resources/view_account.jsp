@@ -62,7 +62,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
 			</div>
 		</c:if>
 
-		<c:if test="<%= commerceAccountDisplayContext.hasEditCommerceAccountPermissions(commerceAccount.getCommerceAccountId()) %>">
+		<c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(commerceAccount.getCommerceAccountId(), ActionKeys.UPDATE) %>">
 			<div class="details-header__action">
 				<aui:button cssClass="minium-button minium-button--big minium-button--outline" href="<%= editCommerceAccountURL %>" value='<%= LanguageUtil.get(request, "edit-account") %>' />
 			</div>
