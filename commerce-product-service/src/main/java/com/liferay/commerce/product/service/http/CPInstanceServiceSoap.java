@@ -118,10 +118,11 @@ public class CPInstanceServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPInstanceSoap fetchCPInstance(
-		long cpInstanceId) throws RemoteException {
+	public static com.liferay.commerce.product.model.CPInstanceSoap fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) throws RemoteException {
 		try {
-			com.liferay.commerce.product.model.CPInstance returnValue = CPInstanceServiceUtil.fetchCPInstance(cpInstanceId);
+			com.liferay.commerce.product.model.CPInstance returnValue = CPInstanceServiceUtil.fetchByExternalReferenceCode(companyId,
+					externalReferenceCode);
 
 			return com.liferay.commerce.product.model.CPInstanceSoap.toSoapModel(returnValue);
 		}
@@ -132,11 +133,10 @@ public class CPInstanceServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPInstanceSoap fetchByExternalReferenceCode(
-		long companyId, String externalReferenceCode) throws RemoteException {
+	public static com.liferay.commerce.product.model.CPInstanceSoap fetchCPInstance(
+		long cpInstanceId) throws RemoteException {
 		try {
-			com.liferay.commerce.product.model.CPInstance returnValue = CPInstanceServiceUtil.fetchByExternalReferenceCode(companyId,
-					externalReferenceCode);
+			com.liferay.commerce.product.model.CPInstance returnValue = CPInstanceServiceUtil.fetchCPInstance(cpInstanceId);
 
 			return com.liferay.commerce.product.model.CPInstanceSoap.toSoapModel(returnValue);
 		}

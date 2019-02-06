@@ -156,15 +156,17 @@ public class CPInstanceServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPInstance fetchCPInstance(
-		HttpPrincipal httpPrincipal, long cpInstanceId)
+	public static com.liferay.commerce.product.model.CPInstance fetchByExternalReferenceCode(
+		HttpPrincipal httpPrincipal, long companyId,
+		String externalReferenceCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPInstanceServiceUtil.class,
-					"fetchCPInstance", _fetchCPInstanceParameterTypes3);
+					"fetchByExternalReferenceCode",
+					_fetchByExternalReferenceCodeParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					cpInstanceId);
+					companyId, externalReferenceCode);
 
 			Object returnObj = null;
 
@@ -188,17 +190,15 @@ public class CPInstanceServiceHttp {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPInstance fetchByExternalReferenceCode(
-		HttpPrincipal httpPrincipal, long companyId,
-		String externalReferenceCode)
+	public static com.liferay.commerce.product.model.CPInstance fetchCPInstance(
+		HttpPrincipal httpPrincipal, long cpInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPInstanceServiceUtil.class,
-					"fetchByExternalReferenceCode",
-					_fetchByExternalReferenceCodeParameterTypes4);
+					"fetchCPInstance", _fetchCPInstanceParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, externalReferenceCode);
+					cpInstanceId);
 
 			Object returnObj = null;
 
@@ -705,11 +705,11 @@ public class CPInstanceServiceHttp {
 	private static final Class<?>[] _deleteCPInstanceParameterTypes2 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _fetchCPInstanceParameterTypes3 = new Class[] {
+	private static final Class<?>[] _fetchByExternalReferenceCodeParameterTypes3 =
+		new Class[] { long.class, String.class };
+	private static final Class<?>[] _fetchCPInstanceParameterTypes4 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _fetchByExternalReferenceCodeParameterTypes4 =
-		new Class[] { long.class, String.class };
 	private static final Class<?>[] _fetchCProductInstanceParameterTypes5 = new Class[] {
 			long.class, String.class
 		};
