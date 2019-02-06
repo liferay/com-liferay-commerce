@@ -6,6 +6,7 @@
 		<portlet-name>90</portlet-name>
 		<permissions>
 			<supports>
+				<action-key>ADD_ACCOUNT</action-key>
 				<action-key>MANAGE_ACCOUNTS</action-key>
 			</supports>
 			<site-member-defaults />
@@ -14,41 +15,33 @@
 		</permissions>
 	</portlet-resource>
 	<model-resource>
-		<model-name>com.liferay.commerce.account</model-name>
-		<portlet-ref>
-			<portlet-name>com_liferay_commerce_account_web_internal_portlet_CommerceAccountPortlet</portlet-name>
-		</portlet-ref>
-		<root>true</root>
-		<weight>2</weight>
-		<permissions>
-			<supports>
-				<action-key>MANAGE_ACCOUNTS</action-key>
-			</supports>
-			<site-member-defaults />
-			<guest-defaults />
-			<guest-unsupported>
-				<action-key>MANAGE_ACCOUNTS</action-key>
-			</guest-unsupported>
-		</permissions>
-	</model-resource>
-	<model-resource>
 		<model-name>com.liferay.commerce.account.model.CommerceAccount</model-name>
 		<portlet-ref>
 			<portlet-name>com_liferay_commerce_account_web_internal_portlet_CommerceAccountPortlet</portlet-name>
 		</portlet-ref>
-		<weight>2</weight>
+		<weight>3</weight>
 		<permissions>
 			<supports>
 				<action-key>DELETE</action-key>
+				<action-key>MANAGE_ADDRESS</action-key>
+				<action-key>MANAGE_MEMBERS</action-key>
+				<action-key>MANAGE_ORGANIZATIONS</action-key>
 				<action-key>UPDATE</action-key>
 				<action-key>VIEW</action-key>
+				<action-key>VIEW_ADDRESSES</action-key>
+				<action-key>VIEW_MEMBERS</action-key>
 			</supports>
 			<site-member-defaults />
 			<guest-defaults />
 			<guest-unsupported>
 				<action-key>DELETE</action-key>
+				<action-key>MANAGE_ADDRESS</action-key>
+				<action-key>MANAGE_MEMBERS</action-key>
+				<action-key>MANAGE_ORGANIZATIONS</action-key>
 				<action-key>UPDATE</action-key>
 				<action-key>VIEW</action-key>
+				<action-key>VIEW_ADDRESSES</action-key>
+				<action-key>VIEW_MEMBERS</action-key>
 			</guest-unsupported>
 		</permissions>
 	</model-resource>
