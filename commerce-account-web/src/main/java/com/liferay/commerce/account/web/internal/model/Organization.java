@@ -19,24 +19,32 @@ package com.liferay.commerce.account.web.internal.model;
  */
 public class Organization {
 
-	public Organization(long organizationId, String name, String path) {
+	public Organization(
+		long organizationId, long accountId, String name, String path) {
+
 		_organizationId = organizationId;
+		_accountId = accountId;
 		_name = name;
 		_path = path;
 	}
 
 	public long getAccountId() {
-		return _organizationId;
+		return _accountId;
 	}
 
 	public String getName() {
 		return _name;
 	}
 
+	public long getOrganizationId() {
+		return _organizationId;
+	}
+
 	public String getPath() {
 		return _path;
 	}
 
+	private final long _accountId;
 	private final String _name;
 	private final long _organizationId;
 	private final String _path;
