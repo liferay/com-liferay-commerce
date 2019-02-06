@@ -14,12 +14,12 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.base.CommerceAccountOrganizationRelServiceBaseImpl;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -40,7 +40,8 @@ public class CommerceAccountOrganizationRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
 
 		return commerceAccountOrganizationRelLocalService.
 			addCommerceAccountOrganizationRel(
@@ -54,7 +55,8 @@ public class CommerceAccountOrganizationRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
 
 		commerceAccountOrganizationRelLocalService.
 			addCommerceAccountOrganizationRels(
@@ -67,7 +69,8 @@ public class CommerceAccountOrganizationRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
 
 		CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK =
 			new CommerceAccountOrganizationRelPK(
@@ -84,7 +87,8 @@ public class CommerceAccountOrganizationRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
 
 		commerceAccountOrganizationRelLocalService.
 			deleteCommerceAccountOrganizationRels(
@@ -97,7 +101,8 @@ public class CommerceAccountOrganizationRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
 
 		return commerceAccountOrganizationRelLocalService.
 			getCommerceAccountOrganizationRels(commerceAccountId);
@@ -110,7 +115,8 @@ public class CommerceAccountOrganizationRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
 
 		return commerceAccountOrganizationRelLocalService.
 			getCommerceAccountOrganizationRels(commerceAccountId, start, end);
@@ -121,7 +127,8 @@ public class CommerceAccountOrganizationRelServiceImpl
 		throws PortalException {
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId,
+			CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
 
 		return commerceAccountOrganizationRelLocalService.
 			getCommerceAccountOrganizationRelsCount(commerceAccountId);
