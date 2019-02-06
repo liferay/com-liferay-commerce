@@ -16,9 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.AccountHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.AccountDTO;
-import com.liferay.commerce.openapi.admin.model.v1_0.OrderDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.AccountResource;
-import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
@@ -71,15 +69,6 @@ public class AccountResourceImpl implements AccountResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public CollectionDTO<OrderDTO> getOrder(
-			String id, Long groupId, Pagination pagination)
-		throws Exception {
-
-		return null;
-	}
-
-	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateAccount(String id, AccountDTO accountDTO)
 		throws Exception {
 
@@ -94,15 +83,6 @@ public class AccountResourceImpl implements AccountResource {
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public AccountDTO upsertAccount(AccountDTO accountDTO) throws Exception {
 		return _accountHelper.upsertAccount(accountDTO);
-	}
-
-	@Override
-	@RequiresScope("CommerceOpenApiAdmin.write")
-	public OrderDTO upsertSku(
-			String id, Long groupId, OrderDTO orderDTO, Language language)
-		throws Exception {
-
-		return null;
 	}
 
 	@Reference
