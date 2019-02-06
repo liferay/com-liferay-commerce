@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.admin.internal.resource.util.AccountHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.AccountHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.v1_0.OrderDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.AccountResource;

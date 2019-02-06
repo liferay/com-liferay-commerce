@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.admin.internal.resource.util.ProductOptionHelper;
-import com.liferay.commerce.openapi.admin.internal.resource.util.ProductOptionValueHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.ProductOptionHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.ProductOptionValueHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.v1_0.ProductOptionValueDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.ProductOptionResource;
