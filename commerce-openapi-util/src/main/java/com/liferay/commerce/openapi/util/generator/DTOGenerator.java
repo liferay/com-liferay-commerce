@@ -14,9 +14,11 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
+import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
+import com.liferay.commerce.openapi.util.util.PackageUtils;
 import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
@@ -35,15 +37,17 @@ public class DTOGenerator extends BaseSourceGenerator {
 
 	public DTOGenerator(
 		String author, String moduleOutputPath, String modelPackagePath,
-		OpenApiComponent openApiComponent,
-		Set<OpenApiComponent> openApiComponents) {
+		OpenApiComponent openApiComponent, OpenApi openApi) {
 
 		_author = author;
 		_moduleOutputPath = moduleOutputPath;
-		_modelPackagePath = modelPackagePath;
-		_openApiComponent = openApiComponent;
 
-		_openApiComponents.addAll(openApiComponents);
+		_modelPackagePath =
+			modelPackagePath + "." +
+				PackageUtils.toPackageName(openApi.getVersion());
+
+		_openApiComponent = openApiComponent;
+		_openApi = openApi;
 	}
 
 	public void writeClassSource() throws IOException {
@@ -78,7 +82,7 @@ public class DTOGenerator extends BaseSourceGenerator {
 			OpenApiProperty openApiProperty = iterator.next();
 
 			Provider javaTypeProvider = OpenApiFormat.getJavaTypeProvider(
-				openApiProperty, _openApiComponents);
+				openApiProperty, _openApi.getOpenApiComponents());
 
 			String name = javaTypeProvider.decorateVariable(
 				openApiProperty.getName());
@@ -167,7 +171,7 @@ public class DTOGenerator extends BaseSourceGenerator {
 	private final String _author;
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;
+	private final OpenApi _openApi;
 	private final OpenApiComponent _openApiComponent;
-	private final Set<OpenApiComponent> _openApiComponents = new HashSet<>();
 
 }
