@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.admin.internal.resource.util.PriceListHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.PriceListHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.PriceListDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.PriceListResource;
 import com.liferay.commerce.openapi.core.context.Language;

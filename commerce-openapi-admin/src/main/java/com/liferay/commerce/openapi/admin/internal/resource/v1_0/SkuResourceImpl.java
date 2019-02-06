@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.admin.internal.resource.util.InventoryHelper;
-import com.liferay.commerce.openapi.admin.internal.resource.util.SKUHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.InventoryHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v1_0.SKUHelper;
 import com.liferay.commerce.openapi.admin.model.v1_0.InventoryDTO;
 import com.liferay.commerce.openapi.admin.model.v1_0.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.SkuResource;
