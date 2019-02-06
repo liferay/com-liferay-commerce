@@ -69,9 +69,7 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 	public String getDefaultImageFileURL()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
-	public String getDefaultImageThumbnailSrc(
-		com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay)
-		throws Exception;
+	public String getDefaultImageThumbnailSrc() throws Exception;
 
 	public java.util.Map<java.util.Locale, String> getDescriptionMap();
 

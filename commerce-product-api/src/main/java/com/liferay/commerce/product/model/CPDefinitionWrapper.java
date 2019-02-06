@@ -468,10 +468,8 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	@Override
-	public String getDefaultImageThumbnailSrc(
-		com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay)
-		throws Exception {
-		return _cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
+	public String getDefaultImageThumbnailSrc() throws Exception {
+		return _cpDefinition.getDefaultImageThumbnailSrc();
 	}
 
 	/**
