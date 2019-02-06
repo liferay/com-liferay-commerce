@@ -16,7 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.util;
 
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.internal.util.DTOUtils;
-import com.liferay.commerce.openapi.admin.model.InventoryDTO;
+import com.liferay.commerce.openapi.admin.model.v1_0.InventoryDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.commerce.product.model.CPInstance;
