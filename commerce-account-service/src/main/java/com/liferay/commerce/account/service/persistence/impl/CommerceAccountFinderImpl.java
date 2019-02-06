@@ -238,7 +238,7 @@ public class CommerceAccountFinderImpl
 			List<CommerceAccount> list = (List<CommerceAccount>)QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-			if (list.isEmpty()) {
+			if (!list.isEmpty()) {
 				return list.get(0);
 			}
 
