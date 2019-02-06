@@ -126,7 +126,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 				<div class="row">
 					<div class="col-md-4">
-						<img class="img-responsive" src="<%= cProductCPDefinition.getDefaultImageThumbnailSrc(themeDisplay) %>">
+						<img class="img-responsive" src="<%= cProductCPDefinition.getDefaultImageThumbnailSrc() %>">
 					</div>
 
 					<div class="col-md-8">

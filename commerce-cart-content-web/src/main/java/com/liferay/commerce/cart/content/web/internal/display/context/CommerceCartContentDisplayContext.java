@@ -117,11 +117,11 @@ public class CommerceCartContentDisplayContext {
 	}
 
 	public String getCommerceOrderItemThumbnailSrc(
-			CommerceOrderItem commerceOrderItem, ThemeDisplay themeDisplay)
+			CommerceOrderItem commerceOrderItem)
 		throws Exception {
 
 		return cpInstanceHelper.getCPInstanceThumbnailSrc(
-			commerceOrderItem.getCPInstanceId(), themeDisplay);
+			commerceOrderItem.getCPInstanceId());
 	}
 
 	public CommerceOrderPrice getCommerceOrderPrice() throws PortalException {

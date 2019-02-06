@@ -56,7 +56,6 @@ import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -421,8 +420,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	}
 
 	@Override
-	public String getCPInstanceThumbnailSrc(
-			long cpInstanceId, ThemeDisplay themeDisplay)
+	public String getCPInstanceThumbnailSrc(long cpInstanceId)
 		throws Exception {
 
 		CPInstance cpInstance = _cpInstanceService.fetchCPInstance(
@@ -440,7 +438,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		if (cpAttachmentFileEntries.isEmpty()) {
 			CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
-			return cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
+			return cpDefinition.getDefaultImageThumbnailSrc();
 		}
 
 		CPAttachmentFileEntry cpAttachmentFileEntry =

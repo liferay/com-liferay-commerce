@@ -67,7 +67,7 @@ if (cpDefinitions == null) {
 									<dl class="sidebar-block">
 
 										<%
-										String defaultImageThumbnailSrc = cpDefinition.getDefaultImageThumbnailSrc(themeDisplay);
+										String defaultImageThumbnailSrc = cpDefinition.getDefaultImageThumbnailSrc();
 										%>
 
 										<c:if test="<%= Validator.isNotNull(defaultImageThumbnailSrc) %>">

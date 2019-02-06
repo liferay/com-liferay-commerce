@@ -86,7 +86,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 						<%
 						CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
 
-						String thumbnailSrc = orderSummaryCheckoutStepDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem, themeDisplay);
+						String thumbnailSrc = orderSummaryCheckoutStepDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem);
 						%>
 
 						<liferay-ui:search-container-column-image
