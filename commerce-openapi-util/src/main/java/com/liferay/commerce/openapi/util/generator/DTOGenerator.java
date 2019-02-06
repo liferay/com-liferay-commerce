@@ -37,7 +37,7 @@ public class DTOGenerator extends BaseSourceGenerator {
 
 	public DTOGenerator(
 		String author, String moduleOutputPath, String modelPackagePath,
-		OpenApiComponent openApiComponent, OpenApi openApi) {
+		OpenApi openApi) {
 
 		_author = author;
 		_moduleOutputPath = moduleOutputPath;
@@ -46,30 +46,38 @@ public class DTOGenerator extends BaseSourceGenerator {
 			modelPackagePath + "." +
 				PackageUtils.toPackageName(openApi.getVersion());
 
-		_openApiComponent = openApiComponent;
 		_openApi = openApi;
 	}
 
-	public void writeClassSource() throws IOException {
-		String dtoSourcePath = getClassSourcePath(
-			_moduleOutputPath, _getDTOClassName() + ".java", _modelPackagePath);
+	public void writeClassSources() throws IOException {
+		for (OpenApiComponent openApiComponent :
+				_openApi.getOpenApiComponents()) {
 
-		writeSource(getClassSource(), dtoSourcePath);
+			if (!openApiComponent.isObject()) {
+				continue;
+			}
+
+			writeClassSource(openApiComponent);
+		}
 	}
 
-	protected String getClassSource() throws IOException {
+	protected String getClassSource(OpenApiComponent openApiComponent)
+		throws IOException {
+
 		String dtoSource = getTemplate(_TEMPLATE_FILE_MODEL);
 
 		dtoSource = dtoSource.replace("${PACKAGE}", _modelPackagePath);
 
 		dtoSource = dtoSource.replace("${AUTHOR}", _author);
 
-		dtoSource = dtoSource.replace("${MODEL}", _getModelName());
+		dtoSource = dtoSource.replace(
+			"${MODEL}", _getModelName(openApiComponent));
 
-		dtoSource = dtoSource.replace("${DTO_CLASS}", _getDTOClassName());
+		dtoSource = dtoSource.replace(
+			"${DTO_CLASS}", _getDTOClassName(openApiComponent));
 
 		List<OpenApiProperty> openApiProperties =
-			_openApiComponent.getOpenApiProperties();
+			openApiComponent.getOpenApiProperties();
 
 		Iterator<OpenApiProperty> iterator = openApiProperties.iterator();
 
@@ -138,12 +146,22 @@ public class DTOGenerator extends BaseSourceGenerator {
 		return dtoSource;
 	}
 
-	private String _getDTOClassName() {
-		return _getModelName() + "DTO";
+	protected void writeClassSource(OpenApiComponent openApiComponent)
+		throws IOException {
+
+		String dtoSourcePath = getClassSourcePath(
+			_moduleOutputPath, _getDTOClassName(openApiComponent) + ".java",
+			_modelPackagePath);
+
+		writeSource(getClassSource(openApiComponent), dtoSourcePath);
 	}
 
-	private String _getModelName() {
-		return StringUtils.upperCaseFirstChar(_openApiComponent.getName());
+	private String _getDTOClassName(OpenApiComponent openApiComponent) {
+		return _getModelName(openApiComponent) + "DTO";
+	}
+
+	private String _getModelName(OpenApiComponent openApiComponent) {
+		return StringUtils.upperCaseFirstChar(openApiComponent.getName());
 	}
 
 	private String _toImportStatements(Set<String> importableJavaTypes) {
@@ -172,6 +190,5 @@ public class DTOGenerator extends BaseSourceGenerator {
 	private final String _modelPackagePath;
 	private final String _moduleOutputPath;
 	private final OpenApi _openApi;
-	private final OpenApiComponent _openApiComponent;
 
 }

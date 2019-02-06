@@ -26,7 +26,6 @@ import java.io.IOException;
 
 import java.util.Properties;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -175,26 +174,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 					openApi.getVersion(), path, openApiComponents);
 			}
 
-			Stream<OpenApiComponent> stream = openApiComponents.stream();
-
-			stream.filter(
-				componentDefinition -> componentDefinition.isObject()
-			).forEach(
-				componentDefinition -> {
-					DTOGenerator dtoGenerator = new DTOGenerator(
-						_author, _moduleOutputPath, _modelPackagePath,
-						componentDefinition, openApi);
-
-					try {
-						dtoGenerator.writeClassSource();
-					}
-					catch (IOException ioe) {
-						_logger.error(
-							"Unable to write DTO source for {}",
-							componentDefinition, ioe);
-					}
-				}
-			);
+			_writeDTOSources(openApi);
 
 			_writeApplicationSource();
 
@@ -314,6 +294,13 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 			overwriteBuildGradle);
 
 		buildGradleGenerator.writeSource();
+	}
+
+	private void _writeDTOSources(OpenApi openApi) throws IOException {
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			_author, _moduleOutputPath, _modelPackagePath, openApi);
+
+		dtoGenerator.writeClassSources();
 	}
 
 	private static final String _TEMPLATE_FILE_APPLICATION =
