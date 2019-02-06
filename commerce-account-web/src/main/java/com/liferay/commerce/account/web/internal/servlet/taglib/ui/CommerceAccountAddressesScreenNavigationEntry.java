@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.web.internal.servlet.taglib.ui;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
@@ -25,8 +26,13 @@ import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
@@ -79,15 +85,6 @@ public class CommerceAccountAddressesScreenNavigationEntry
 	}
 
 	@Override
-	public boolean isVisible(User user, CommerceAccount commerceAccount) {
-		if (commerceAccount == null) {
-			return false;
-		}
-
-		return true;
-	}
-
-	@Override
 	public void render(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)
@@ -99,8 +96,7 @@ public class CommerceAccountAddressesScreenNavigationEntry
 					_commerceAccountHelper, _commerceAccountService,
 					_commerceAddressService, _commerceCountryService,
 					_commerceRegionService, httpServletRequest,
-					_modelResourcePermission, _portal,
-					_portletResourcePermission);
+					_modelResourcePermission, _portal);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -110,6 +106,27 @@ public class CommerceAccountAddressesScreenNavigationEntry
 			httpServletRequest, httpServletResponse,
 			"/view_account_addresses.jsp");
 	}
+
+	@Override
+	public boolean isVisible(User user, CommerceAccount commerceAccount) {
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		try {
+			return _modelResourcePermission.contains(
+				permissionChecker, commerceAccount,
+				CommerceAccountActionKeys.MANAGE_ADDRESS);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
+
+		return false;
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAccountAddressesScreenNavigationEntry.class);
+
 
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;
@@ -136,10 +153,5 @@ public class CommerceAccountAddressesScreenNavigationEntry
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 }

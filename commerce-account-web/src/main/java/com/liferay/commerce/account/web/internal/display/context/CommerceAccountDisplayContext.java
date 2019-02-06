@@ -66,7 +66,7 @@ public class CommerceAccountDisplayContext
 		CommerceRegionService commerceRegionService,
 		HttpServletRequest httpServletRequest,
 		ModelResourcePermission<CommerceAccount> modelResourcePermission,
-		Portal portal, PortletResourcePermission portletResourcePermission,
+		Portal portal,
 		UserFileUploadsConfiguration userFileUploadsConfiguration,
 		UserLocalService userLocalService) {
 
@@ -76,7 +76,6 @@ public class CommerceAccountDisplayContext
 			modelResourcePermission, portal);
 
 		_commerceAddressService = commerceAddressService;
-		_portletResourcePermission = portletResourcePermission;
 		_userFileUploadsConfiguration = userFileUploadsConfiguration;
 		_userLocalService = userLocalService;
 
@@ -202,7 +201,6 @@ public class CommerceAccountDisplayContext
 
 	private final CommerceAddressService _commerceAddressService;
 	private final CommerceContext _commerceContext;
-	private final PortletResourcePermission _portletResourcePermission;
 	private final UserFileUploadsConfiguration _userFileUploadsConfiguration;
 	private final UserLocalService _userLocalService;
 

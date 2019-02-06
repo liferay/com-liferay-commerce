@@ -101,18 +101,10 @@ public class CommerceAccountRoleHelperImpl
 				CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME)) {
 
 			resourceActionIds.put(
-				"90",
-				new String[] {
-					CommerceAccountActionKeys.MANAGE_ACCOUNTS,
-					CommerceAccountActionKeys.ADD_ACCOUNT
-				});
-
-			resourceActionIds.put(
 				"com.liferay.commerce.account.model.CommerceAccount",
 				new String[] {
-					ActionKeys.DELETE, CommerceAccountActionKeys.MANAGE_ADDRESS,
+					CommerceAccountActionKeys.MANAGE_ADDRESS,
 					CommerceAccountActionKeys.MANAGE_MEMBERS,
-					CommerceAccountActionKeys.MANAGE_ORGANIZATIONS,
 					ActionKeys.UPDATE, ActionKeys.VIEW,
 					CommerceAccountActionKeys.VIEW_ADDRESSES,
 					CommerceAccountActionKeys.VIEW_MEMBERS
