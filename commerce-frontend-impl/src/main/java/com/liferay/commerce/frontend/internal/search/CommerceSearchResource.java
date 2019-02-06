@@ -225,6 +225,7 @@ public class CommerceSearchResource {
 			searchItemModel.setUrl(
 				String.valueOf(
 					_commerceOrderHttpHelper.getCommerceCartPortletURL(
+						themeDisplay.getScopeGroupId(),
 						themeDisplay.getRequest(), commerceOrder)));
 
 			searchItemModels.add(searchItemModel);
