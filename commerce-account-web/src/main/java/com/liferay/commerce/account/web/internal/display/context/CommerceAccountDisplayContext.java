@@ -18,11 +18,13 @@ import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.web.internal.display.context.util.CommerceAccountRequestHelper;
 import com.liferay.commerce.account.web.internal.frontend.AccountFilterImpl;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
@@ -32,21 +34,20 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.PortletQName;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 import com.liferay.users.admin.configuration.UserFileUploadsConfiguration;
 
 import java.util.List;
 
 import javax.portlet.PortletURL;
-import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -54,29 +55,28 @@ import javax.servlet.http.HttpServletRequest;
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
-public class CommerceAccountDisplayContext
-	extends BaseCommerceAccountDisplayContext {
+public class CommerceAccountDisplayContext {
 
 	public CommerceAccountDisplayContext(
-		CommerceAccountHelper commerceAccountHelper,
 		CommerceAccountService commerceAccountService,
 		CommerceAddressService commerceAddressService,
 		CommerceCountryService commerceCountryService,
 		CommerceRegionService commerceRegionService,
 		HttpServletRequest httpServletRequest,
 		ModelResourcePermission<CommerceAccount> modelResourcePermission,
-		Portal portal,
 		UserFileUploadsConfiguration userFileUploadsConfiguration,
 		UserLocalService userLocalService) {
 
-		super(
-			commerceAccountHelper, commerceAccountService,
-			commerceCountryService, commerceRegionService, httpServletRequest,
-			modelResourcePermission, portal);
-
+		_commerceAccountService = commerceAccountService;
 		_commerceAddressService = commerceAddressService;
+		_commerceCountryService = commerceCountryService;
+		_commerceRegionService = commerceRegionService;
+		_modelResourcePermission = modelResourcePermission;
 		_userFileUploadsConfiguration = userFileUploadsConfiguration;
 		_userLocalService = userLocalService;
+
+		_commerceAccountRequestHelper = new CommerceAccountRequestHelper(
+			httpServletRequest);
 
 		_commerceContext = (CommerceContext)httpServletRequest.getAttribute(
 			CommerceWebKeys.COMMERCE_CONTEXT);
@@ -85,54 +85,52 @@ public class CommerceAccountDisplayContext
 	public AccountFilterImpl getAccountFilter() throws PortalException {
 		AccountFilterImpl accountFilter = new AccountFilterImpl();
 
-		User user = getSelectedUser();
-
 		accountFilter.setAccountId(getCurrentCommerceAccountId());
-		accountFilter.setUserId(user.getUserId());
+		accountFilter.setUserId(getSelectedUserId());
 
 		accountFilter.setKeywords(getKeywords());
 
 		return accountFilter;
 	}
 
-	public String getAddCommerceAccountHref() throws WindowStateException {
-		HttpServletRequest httpServletRequest =
-			commerceAccountRequestHelper.getRequest();
-		LiferayPortletResponse liferayPortletResponse =
-			commerceAccountRequestHelper.getLiferayPortletResponse();
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		PortletURL portletURL = liferayPortletResponse.createRenderURL();
-
-		portletURL.setParameter("mvcRenderCommandName", "addCommerceAccount");
-		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
-
-		portletURL.setWindowState(LiferayWindowState.POP_UP);
-
-		StringBundler sb = new StringBundler(9);
-
-		sb.append("javascript:");
-		sb.append(liferayPortletResponse.getNamespace());
-		sb.append("addCommerceAccount");
-		sb.append(StringPool.OPEN_PARENTHESIS);
-		sb.append(StringPool.APOSTROPHE);
-		sb.append(portletURL.toString());
-		sb.append(StringPool.APOSTROPHE);
-		sb.append(StringPool.CLOSE_PARENTHESIS);
-		sb.append(StringPool.SEMICOLON);
-
-		return sb.toString();
-	}
-
 	public List<CommerceAccount> getCommerceAccounts() throws PortalException {
-		return commerceAccountService.getUserCommerceAccounts(
-			commerceAccountRequestHelper.getUserId(),
+		return _commerceAccountService.getUserCommerceAccounts(
+			_commerceAccountRequestHelper.getUserId(),
 			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
 			_commerceContext.getCommerceSiteType(), StringPool.BLANK,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List<CommerceCountry> getCommerceCountries() {
+		return _commerceCountryService.getCommerceCountries(
+			_commerceAccountRequestHelper.getScopeGroupId(), true);
+	}
+
+	public List<CommerceRegion> getCommerceRegions(long commerceCountryId) {
+		return _commerceRegionService.getCommerceRegions(
+			commerceCountryId, true);
+	}
+
+	public CommerceAccount getCurrentCommerceAccount() throws PortalException {
+		long commerceAccountId = ParamUtil.getLong(
+			_commerceAccountRequestHelper.getRequest(), "commerceAccountId");
+
+		if (commerceAccountId > 0) {
+			return _commerceAccountService.getCommerceAccount(
+				commerceAccountId);
+		}
+
+		return getCurrentAccount();
+	}
+
+	public long getCurrentCommerceAccountId() throws PortalException {
+		CommerceAccount commerceAccount = getCurrentCommerceAccount();
+
+		if (commerceAccount != null) {
+			return commerceAccount.getCommerceAccountId();
+		}
+
+		return 0;
 	}
 
 	public CommerceAddress getDefaultBillingCommerceAddress()
@@ -146,7 +144,7 @@ public class CommerceAccountDisplayContext
 
 		List<CommerceAddress> commerceAddresses =
 			_commerceAddressService.getCommerceAddresses(
-				commerceAccountRequestHelper.getScopeGroupId(),
+				_commerceAccountRequestHelper.getScopeGroupId(),
 				CommerceAccount.class.getName(),
 				commerceAccount.getCommerceAccountId());
 
@@ -159,9 +157,27 @@ public class CommerceAccountDisplayContext
 		return null;
 	}
 
+	public String getKeywords() {
+		if (Validator.isNotNull(_keywords)) {
+			return _keywords;
+		}
+
+		HttpServletRequest httpServletRequest =
+			PortalUtil.getOriginalServletRequest(
+				_commerceAccountRequestHelper.getRequest());
+
+		_keywords = ParamUtil.getString(httpServletRequest, "q", null);
+
+		if (_keywords == null) {
+			return StringPool.BLANK;
+		}
+
+		return _keywords;
+	}
+
 	public String getLogo(CommerceAccount commerceAccount) {
 		ThemeDisplay themeDisplay =
-			commerceAccountRequestHelper.getThemeDisplay();
+			_commerceAccountRequestHelper.getThemeDisplay();
 
 		StringBundler sb = new StringBundler(5);
 
@@ -175,15 +191,77 @@ public class CommerceAccountDisplayContext
 		return sb.toString();
 	}
 
-	public User getSelectedUser() throws PortalException {
-		long userId = ParamUtil.getLong(
-			commerceAccountRequestHelper.getRequest(), "userId");
+	public PortletURL getPortletURL() throws PortalException {
+		LiferayPortletResponse liferayPortletResponse =
+			_commerceAccountRequestHelper.getLiferayPortletResponse();
 
-		if (userId > 0) {
-			return _userLocalService.getUser(userId);
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+		HttpServletRequest httpServletRequest =
+			PortalUtil.getOriginalServletRequest(
+				_commerceAccountRequestHelper.getRequest());
+
+		String backURL = ParamUtil.getString(
+			httpServletRequest,
+			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL");
+
+		if (Validator.isNotNull(backURL)) {
+			portletURL.setParameter(
+				PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
+				backURL);
 		}
 
-		return portal.getUser(commerceAccountRequestHelper.getRequest());
+		String redirect = ParamUtil.getString(
+			_commerceAccountRequestHelper.getRequest(), "redirect");
+
+		if (Validator.isNotNull(redirect)) {
+			portletURL.setParameter("redirect", redirect);
+		}
+
+		String delta = ParamUtil.getString(
+			_commerceAccountRequestHelper.getRequest(), "delta");
+
+		if (Validator.isNotNull(delta)) {
+			portletURL.setParameter("delta", delta);
+		}
+
+		String deltaEntry = ParamUtil.getString(
+			_commerceAccountRequestHelper.getRequest(), "deltaEntry");
+
+		if (Validator.isNotNull(deltaEntry)) {
+			portletURL.setParameter("deltaEntry", deltaEntry);
+		}
+
+		String keywords = getKeywords();
+
+		if (Validator.isNotNull(keywords)) {
+			portletURL.setParameter("keywords", keywords);
+		}
+
+		CommerceAccount commerceAccount = getCurrentCommerceAccount();
+
+		if (commerceAccount != null) {
+			portletURL.setParameter(
+				"commerceAccountId",
+				String.valueOf(commerceAccount.getCommerceAccountId()));
+		}
+
+		return portletURL;
+	}
+
+	public User getSelectedUser() throws PortalException {
+		return _userLocalService.getUser(getSelectedUserId());
+	}
+
+	public long getSelectedUserId() throws PortalException {
+		long userId = ParamUtil.getLong(
+			_commerceAccountRequestHelper.getRequest(), "userId");
+
+		if (userId > 0) {
+			return userId;
+		}
+
+		return _commerceAccountRequestHelper.getUserId();
 	}
 
 	public UserFileUploadsConfiguration getUserFileUploadsConfiguration() {
@@ -192,18 +270,55 @@ public class CommerceAccountDisplayContext
 
 	public boolean hasAddAccountPermissions() {
 		return PortalPermissionUtil.contains(
-			commerceAccountRequestHelper.getPermissionChecker(),
+			_commerceAccountRequestHelper.getPermissionChecker(),
 			CommerceAccountActionKeys.ADD_ACCOUNT);
+	}
+
+	public boolean hasCommerceAccountModelPermissions(
+			CommerceAccount commerceAccount, String actionId)
+		throws PortalException {
+
+		return _modelResourcePermission.contains(
+			_commerceAccountRequestHelper.getPermissionChecker(),
+			commerceAccount, actionId);
+	}
+
+	public boolean hasCommerceAccountModelPermissions(
+			long commerceAccountId, String actionId)
+		throws PortalException {
+
+		return _modelResourcePermission.contains(
+			_commerceAccountRequestHelper.getPermissionChecker(),
+			commerceAccountId, actionId);
+	}
+
+	public boolean hasCommerceAccountModelPermissions(String actionId)
+		throws PortalException {
+
+		return _modelResourcePermission.contains(
+			_commerceAccountRequestHelper.getPermissionChecker(),
+			getCurrentCommerceAccount(), actionId);
 	}
 
 	public boolean hasManageCommerceAccountPermissions() {
 		return PortalPermissionUtil.contains(
-			commerceAccountRequestHelper.getPermissionChecker(),
-			CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+			_commerceAccountRequestHelper.getPermissionChecker(),
+			CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS);
 	}
 
+	protected CommerceAccount getCurrentAccount() throws PortalException {
+		return _commerceContext.getCommerceAccount();
+	}
+
+	private final CommerceAccountRequestHelper _commerceAccountRequestHelper;
+	private final CommerceAccountService _commerceAccountService;
 	private final CommerceAddressService _commerceAddressService;
 	private final CommerceContext _commerceContext;
+	private final CommerceCountryService _commerceCountryService;
+	private final CommerceRegionService _commerceRegionService;
+	private String _keywords;
+	private final ModelResourcePermission<CommerceAccount>
+		_modelResourcePermission;
 	private final UserFileUploadsConfiguration _userFileUploadsConfiguration;
 	private final UserLocalService _userLocalService;
 
