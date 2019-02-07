@@ -17,7 +17,6 @@ package com.liferay.commerce.account.web.internal.portlet.action;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.account.web.internal.display.context.CommerceAccountDisplayContext;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
@@ -60,19 +59,16 @@ public class ViewCommerceAccountMVCRenderCommand implements MVCRenderCommand {
 
 		CommerceAccountDisplayContext commerceAccountDisplayContext =
 			new CommerceAccountDisplayContext(
-				_commerceAccountHelper, _commerceAccountService,
-				_commerceAddressService, _commerceCountryService,
-				_commerceRegionService, httpServletRequest,
-				_modelResourcePermission, _portal, null, _userLocalService);
+				_commerceAccountService, _commerceAddressService,
+				_commerceCountryService, _commerceRegionService,
+				httpServletRequest, _modelResourcePermission, null,
+				_userLocalService);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);
 
 		return "/view_account.jsp";
 	}
-
-	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;

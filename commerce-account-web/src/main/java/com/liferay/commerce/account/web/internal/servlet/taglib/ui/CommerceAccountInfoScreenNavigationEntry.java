@@ -17,7 +17,6 @@ package com.liferay.commerce.account.web.internal.servlet.taglib.ui;
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.account.web.internal.display.context.CommerceAccountDisplayContext;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
@@ -35,7 +34,6 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.users.admin.configuration.UserFileUploadsConfiguration;
 
@@ -113,10 +111,9 @@ public class CommerceAccountInfoScreenNavigationEntry
 
 		CommerceAccountDisplayContext commerceAccountDisplayContext =
 			new CommerceAccountDisplayContext(
-				_commerceAccountHelper, _commerceAccountService,
-				_commerceAddressService, _commerceCountryService,
-				_commerceRegionService, httpServletRequest,
-				_modelResourcePermission, _portal,
+				_commerceAccountService, _commerceAddressService,
+				_commerceCountryService, _commerceRegionService,
+				httpServletRequest, _modelResourcePermission,
 				_userFileUploadsConfiguration, _userLocalService);
 
 		httpServletRequest.setAttribute(
@@ -137,9 +134,6 @@ public class CommerceAccountInfoScreenNavigationEntry
 		CommerceAccountInfoScreenNavigationEntry.class);
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
-
-	@Reference
 	private CommerceAccountService _commerceAccountService;
 
 	@Reference
@@ -158,9 +152,6 @@ public class CommerceAccountInfoScreenNavigationEntry
 		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
 	)
 	private ModelResourcePermission<CommerceAccount> _modelResourcePermission;
-
-	@Reference
-	private Portal _portal;
 
 	private volatile UserFileUploadsConfiguration _userFileUploadsConfiguration;
 

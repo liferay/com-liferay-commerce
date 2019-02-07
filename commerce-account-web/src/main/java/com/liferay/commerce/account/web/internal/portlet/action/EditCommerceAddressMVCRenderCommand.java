@@ -17,13 +17,13 @@ package com.liferay.commerce.account.web.internal.portlet.action;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
-import com.liferay.commerce.account.web.internal.display.context.CommerceAccountAddressesDisplayContext;
+import com.liferay.commerce.account.web.internal.display.context.CommerceAccountDisplayContext;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -57,23 +57,18 @@ public class EditCommerceAddressMVCRenderCommand implements MVCRenderCommand {
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			renderRequest);
 
-		CommerceAccountAddressesDisplayContext
-			commerceAccountAddressesDisplayContext =
-				new CommerceAccountAddressesDisplayContext(
-					_commerceAccountHelper, _commerceAccountService,
-					_commerceAddressService, _commerceCountryService,
-					_commerceRegionService, httpServletRequest,
-					_modelResourcePermission, _portal);
+		CommerceAccountDisplayContext commerceAccountDisplayContext =
+			new CommerceAccountDisplayContext(
+				_commerceAccountService, _commerceAddressService,
+				_commerceCountryService, _commerceRegionService,
+				httpServletRequest, _modelResourcePermission, null,
+				_userLocalService);
 
 		renderRequest.setAttribute(
-			WebKeys.PORTLET_DISPLAY_CONTEXT,
-			commerceAccountAddressesDisplayContext);
+			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);
 
 		return "/edit_address.jsp";
 	}
-
-	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
@@ -94,5 +89,8 @@ public class EditCommerceAddressMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
