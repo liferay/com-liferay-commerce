@@ -18,9 +18,9 @@ import com.liferay.commerce.exception.CommerceSubscriptionEntrySubscriptionStatu
 import com.liferay.commerce.exception.CommerceSubscriptionTypeException;
 import com.liferay.commerce.exception.NoSuchSubscriptionEntryException;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.payment.engine.CommerceSubscriptionEngine;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
-import com.liferay.commerce.subscription.CommerceSubscriptionEntryActionHelper;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -46,13 +46,12 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + CPPortletKeys.COMMERCE_SUBSCRIPTION_CONTENT_WEB,
 		"javax.portlet.name=" + CPPortletKeys.COMMERCE_SUBSCRIPTION_ENTRY,
 		"mvc.command.name=editCommerceSubscriptionEntry"
 	},
 	service = MVCActionCommand.class
 )
-public class EditCommerceSubscriptionEntryActionCommand
+public class EditCommerceSubscriptionEntryMVCActionCommand
 	extends BaseMVCActionCommand {
 
 	protected void deleteCommerceSubscriptionEntries(
@@ -100,19 +99,16 @@ public class EditCommerceSubscriptionEntryActionCommand
 					commerceSubscriptionEntryId, actionRequest);
 			}
 			else if (cmd.equals("activate")) {
-				_commerceSubscriptionEntryActionHelper.
-					activateCommerceSubscriptionEntry(
-						commerceSubscriptionEntryId);
+				_commerceSubscriptionEngine.activateRecurringPayment(
+					commerceSubscriptionEntryId);
 			}
 			else if (cmd.equals("cancel")) {
-				_commerceSubscriptionEntryActionHelper.
-					cancelCommerceSubscriptionEntry(
-						commerceSubscriptionEntryId);
+				_commerceSubscriptionEngine.cancelRecurringPayment(
+					commerceSubscriptionEntryId);
 			}
 			else if (cmd.equals("suspend")) {
-				_commerceSubscriptionEntryActionHelper.
-					suspendCommerceSubscriptionEntry(
-						commerceSubscriptionEntryId);
+				_commerceSubscriptionEngine.suspendRecurringPayment(
+					commerceSubscriptionEntryId);
 			}
 		}
 		catch (Exception e) {
@@ -153,8 +149,6 @@ public class EditCommerceSubscriptionEntryActionCommand
 				actionRequest, "subscriptionTypeSettings--");
 		long maxSubscriptionCycles = ParamUtil.getLong(
 			actionRequest, "maxSubscriptionCycles");
-		int subscriptionStatus = ParamUtil.getInteger(
-			actionRequest, "subscriptionStatus");
 
 		int startDateMonth = ParamUtil.getInteger(
 			actionRequest, "startDateMonth");
@@ -189,20 +183,24 @@ public class EditCommerceSubscriptionEntryActionCommand
 			nextIterationDateHour += 12;
 		}
 
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			_commerceSubscriptionEntryService.fetchCommerceSubscriptionEntry(
+				commerceSubscriptionEntryId);
+
 		return
 			_commerceSubscriptionEntryService.updateCommerceSubscriptionEntry(
 				commerceSubscriptionEntryId, subscriptionLength,
 				subscriptionType, subscriptionTypeSettingsProperties,
-				maxSubscriptionCycles, subscriptionStatus, startDateMonth,
-				startDateDay, startDateYear, startDateHour, startDateMinute,
-				nextIterationDateMonth, nextIterationDateDay,
+				maxSubscriptionCycles,
+				commerceSubscriptionEntry.getSubscriptionStatus(),
+				startDateMonth, startDateDay, startDateYear, startDateHour,
+				startDateMinute, nextIterationDateMonth, nextIterationDateDay,
 				nextIterationDateYear, nextIterationDateHour,
 				nextIterationDateMinute);
 	}
 
 	@Reference
-	private CommerceSubscriptionEntryActionHelper
-		_commerceSubscriptionEntryActionHelper;
+	private CommerceSubscriptionEngine _commerceSubscriptionEngine;
 
 	@Reference
 	private CommerceSubscriptionEntryService _commerceSubscriptionEntryService;
