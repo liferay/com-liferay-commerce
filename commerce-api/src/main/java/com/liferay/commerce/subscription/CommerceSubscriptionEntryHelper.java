@@ -31,11 +31,11 @@ public interface CommerceSubscriptionEntryHelper {
 	public void checkCommerceSubscriptions(CommerceOrder commerceOrder)
 		throws PortalException;
 
-	public void renewSubscriptionEntries(
+	public void checkSubscriptionEntriesStatus(
 			List<CommerceSubscriptionEntry> commerceSubscriptionEntries)
 		throws Exception;
 
-	public void renewSubscriptionEntry(
+	public void checkSubscriptionStatus(
 			CommerceSubscriptionEntry commerceSubscriptionEntry)
 		throws Exception;
 

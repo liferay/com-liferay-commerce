@@ -17,7 +17,6 @@ package com.liferay.commerce.subscription.web.internal.display.context;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.util.CPSubscriptionType;
@@ -49,7 +48,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.text.DateFormat;
 import java.text.Format;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletRequest;
@@ -148,55 +146,6 @@ public class CommerceSubscriptionEntryDisplayContext {
 		return 0;
 	}
 
-	public SearchContainer<CommerceOrder>
-			getCommerceSubscriptionEntryOrderSearchContainer()
-		throws PortalException {
-
-		if (_commerceSubscriptionEntryOrderSearchContainer != null) {
-			return _commerceSubscriptionEntryOrderSearchContainer;
-		}
-
-		SearchContainer<CommerceOrder> searchContainer = new SearchContainer<>(
-			_cpRequestHelper.getLiferayPortletRequest(), getPortletURL(), null,
-			"there-are-no-orders");
-
-		List<CommerceOrder> commerceOrders = new ArrayList<>();
-
-		CommerceSubscriptionEntry commerceSubscriptionEntry =
-			getCommerceSubscriptionEntry();
-
-		List<CommerceSubscriptionCycleEntry> commerceSubscriptionCycleEntries =
-			commerceSubscriptionEntry.getCommerceSubscriptionCycleEntries();
-
-		for (CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry :
-				commerceSubscriptionCycleEntries) {
-
-			CommerceOrder commerceOrder =
-				commerceSubscriptionCycleEntry.fetchCommerceOrder();
-
-			if (commerceOrder != null) {
-				commerceOrders.add(commerceOrder);
-			}
-		}
-
-		int end = searchContainer.getEnd();
-
-		int total = commerceOrders.size();
-
-		if (total < end) {
-			end = total;
-		}
-
-		searchContainer.setResults(
-			commerceOrders.subList(searchContainer.getStart(), end));
-
-		searchContainer.setTotal(total);
-
-		_commerceSubscriptionEntryOrderSearchContainer = searchContainer;
-
-		return _commerceSubscriptionEntryOrderSearchContainer;
-	}
-
 	public String getCommerceSubscriptionEntryRemainingCycles(
 		CommerceSubscriptionEntry commerceSubscriptionEntry) {
 
@@ -207,9 +156,8 @@ public class CommerceSubscriptionEntryDisplayContext {
 			return LanguageUtil.get(_httpServletRequest, "unlimited");
 		}
 
-		int commerceSubscriptionCycleEntriesCount =
-			commerceSubscriptionEntry.
-				getCommerceSubscriptionCycleEntriesCount();
+		long commerceSubscriptionCycleEntriesCount =
+			commerceSubscriptionEntry.getCurrentCycle();
 
 		long remainingCycles =
 			maxSubscriptionCycles - commerceSubscriptionCycleEntriesCount;
@@ -471,8 +419,6 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 	private final Format _commerceOrderDateFormatDateTime;
 	private CommerceSubscriptionEntry _commerceSubscriptionEntry;
-	private SearchContainer<CommerceOrder>
-		_commerceSubscriptionEntryOrderSearchContainer;
 	private final CommerceSubscriptionEntryService
 		_commerceSubscriptionEntryService;
 	private final ConfigurationProvider _configurationProvider;

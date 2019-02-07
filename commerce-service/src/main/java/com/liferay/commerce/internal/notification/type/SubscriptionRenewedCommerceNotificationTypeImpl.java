@@ -18,7 +18,7 @@ import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
+import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.notification.type.CommerceNotificationType;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
@@ -77,17 +77,17 @@ public class SubscriptionRenewedCommerceNotificationTypeImpl
 	public String getFilledTerm(String term, Object object, Locale locale)
 		throws PortalException {
 
-		if (!(object instanceof CommerceSubscriptionCycleEntry)) {
+		if (!(object instanceof CommerceSubscriptionEntry)) {
 			return term;
 		}
 
-		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
-			(CommerceSubscriptionCycleEntry)object;
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			(CommerceSubscriptionEntry)object;
 
 		if (_commerceOrderItem == null) {
 			_commerceOrderItem =
 				_commerceOrderItemLocalService.getCommerceOrderItem(
-					commerceSubscriptionCycleEntry.getCommerceOrderItemId());
+					commerceSubscriptionEntry.getCommerceOrderItemId());
 		}
 
 		if (term.equals(_ORDER_CREATOR)) {
