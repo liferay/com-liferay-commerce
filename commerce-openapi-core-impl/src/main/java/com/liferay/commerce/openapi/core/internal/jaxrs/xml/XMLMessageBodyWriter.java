@@ -42,7 +42,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	},
 	service = MessageBodyWriter.class
 )
-@Produces(MediaType.APPLICATION_XML)
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_XHTML_XML})
 @Provider
 public class XMLMessageBodyWriter implements MessageBodyWriter<Object> {
 
