@@ -17,7 +17,6 @@ package com.liferay.commerce.account.web.internal.servlet.taglib.ui;
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.account.web.internal.display.context.CommerceAccountDisplayContext;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
@@ -34,7 +33,6 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserLocalService;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -114,10 +112,10 @@ public class CommerceAccountMembersScreenNavigationEntry
 
 		CommerceAccountDisplayContext commerceAccountDisplayContext =
 			new CommerceAccountDisplayContext(
-				_commerceAccountHelper, _commerceAccountService,
-				_commerceAddressService, _commerceCountryService,
-				_commerceRegionService, httpServletRequest,
-				_modelResourcePermission, _portal, null, _userLocalService);
+				_commerceAccountService, _commerceAddressService,
+				_commerceCountryService, _commerceRegionService,
+				httpServletRequest, _modelResourcePermission, null,
+				_userLocalService);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);
@@ -129,9 +127,6 @@ public class CommerceAccountMembersScreenNavigationEntry
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceAccountMembersScreenNavigationEntry.class);
-
-	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
@@ -152,9 +147,6 @@ public class CommerceAccountMembersScreenNavigationEntry
 		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
 	)
 	private ModelResourcePermission<CommerceAccount> _modelResourcePermission;
-
-	@Reference
-	private Portal _portal;
 
 	@Reference
 	private UserLocalService _userLocalService;

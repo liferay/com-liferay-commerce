@@ -17,8 +17,7 @@ package com.liferay.commerce.account.web.internal.servlet.taglib.ui;
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
-import com.liferay.commerce.account.web.internal.display.context.CommerceAccountAddressesDisplayContext;
+import com.liferay.commerce.account.web.internal.display.context.CommerceAccountDisplayContext;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
@@ -33,8 +32,9 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.users.admin.configuration.UserFileUploadsConfiguration;
 
 import java.io.IOException;
 
@@ -50,6 +50,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alessio Antonio Rendina
  */
 @Component(
+	configurationPid = "com.liferay.user.admin.configuration.UserFileUploadsConfiguration",
 	property = {
 		"screen.navigation.category.order:Integer=30",
 		"screen.navigation.entry.order:Integer=10"
@@ -111,17 +112,15 @@ public class CommerceAccountAddressesScreenNavigationEntry
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
-		CommerceAccountAddressesDisplayContext
-			commerceAccountAddressesDisplayContext =
-				new CommerceAccountAddressesDisplayContext(
-					_commerceAccountHelper, _commerceAccountService,
-					_commerceAddressService, _commerceCountryService,
-					_commerceRegionService, httpServletRequest,
-					_modelResourcePermission, _portal);
+		CommerceAccountDisplayContext commerceAccountDisplayContext =
+			new CommerceAccountDisplayContext(
+				_commerceAccountService, _commerceAddressService,
+				_commerceCountryService, _commerceRegionService,
+				httpServletRequest, _modelResourcePermission,
+				_userFileUploadsConfiguration, _userLocalService);
 
 		httpServletRequest.setAttribute(
-			WebKeys.PORTLET_DISPLAY_CONTEXT,
-			commerceAccountAddressesDisplayContext);
+			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAccountDisplayContext);
 
 		_jspRenderer.renderJSP(
 			httpServletRequest, httpServletResponse,
@@ -130,9 +129,6 @@ public class CommerceAccountAddressesScreenNavigationEntry
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceAccountAddressesScreenNavigationEntry.class);
-
-	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
@@ -154,7 +150,9 @@ public class CommerceAccountAddressesScreenNavigationEntry
 	)
 	private ModelResourcePermission<CommerceAccount> _modelResourcePermission;
 
+	private volatile UserFileUploadsConfiguration _userFileUploadsConfiguration;
+
 	@Reference
-	private Portal _portal;
+	private UserLocalService _userLocalService;
 
 }
