@@ -28,6 +28,13 @@ import java.util.Locale;
 @ProviderType
 public interface CommercePaymentMethod {
 
+	public default boolean activateRecurringPayment(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		throw new UnsupportedOperationException();
+	}
+
 	public default CommercePaymentResult authorizePayment(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
@@ -42,8 +49,9 @@ public interface CommercePaymentMethod {
 		throw new UnsupportedOperationException();
 	}
 
-	public default CommercePaymentResult cancelRecurringPayment(
-		CommercePaymentRequest commercePaymentRequest) {
+	public default boolean cancelRecurringPayment(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
 
 		throw new UnsupportedOperationException();
 	}
@@ -86,6 +94,13 @@ public interface CommercePaymentMethod {
 	public default CommerceSubscriptionStatusResult
 			getSubscriptionPaymentDetails(
 				CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public default boolean getSubscriptionValidity(
+			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
 		throw new UnsupportedOperationException();
@@ -171,7 +186,7 @@ public interface CommercePaymentMethod {
 		throw new UnsupportedOperationException();
 	}
 
-	public default boolean suspendSubscription(
+	public default boolean suspendRecurringPayment(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
