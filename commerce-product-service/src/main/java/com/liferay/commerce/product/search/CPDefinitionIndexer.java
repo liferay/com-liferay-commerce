@@ -565,10 +565,18 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				cpAttachmentFileEntry.getCPAttachmentFileEntryId();
 		}
 
-		document.addKeyword(
-			FIELD_DEFAULT_IMAGE_FILE_URL,
-			_commerceMediaResolver.getUrl(
-				cpAttachmentFileEntryId, false, false, false));
+		if (cpAttachmentFileEntryId == 0) {
+			document.addKeyword(
+				FIELD_DEFAULT_IMAGE_FILE_URL,
+				_commerceMediaResolver.getDefaultUrl(
+					cpDefinition.getGroupId()));
+		}
+		else {
+			document.addKeyword(
+				FIELD_DEFAULT_IMAGE_FILE_URL,
+				_commerceMediaResolver.getUrl(
+					cpAttachmentFileEntryId, false, false, false));
+		}
 
 		CProduct cProduct = cpDefinition.getCProduct();
 

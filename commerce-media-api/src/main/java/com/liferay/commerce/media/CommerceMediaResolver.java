@@ -29,6 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 @ProviderType
 public interface CommerceMediaResolver {
 
+	public String getDefaultUrl(long groupId);
+
 	public String getDownloadUrl(long cpAttachmentFileEntryId)
 		throws PortalException;
 

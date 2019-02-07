@@ -142,7 +142,7 @@ public class CommerceMediaDefaultImageAdminModule
 	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.commerce.media.web)"
+		target = "(osgi.web.symbolicname=com.liferay.commerce.media.impl)"
 	)
 	private ServletContext _servletContext;
 

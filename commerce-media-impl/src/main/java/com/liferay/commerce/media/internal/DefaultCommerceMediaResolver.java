@@ -76,6 +76,19 @@ import org.osgi.service.component.annotations.Reference;
 public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 	@Override
+	public String getDefaultUrl(long groupId) {
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(_portal.getPathModule());
+		sb.append(StringPool.SLASH);
+		sb.append(CommerceMediaConstants.SERVLET_PATH);
+		sb.append("/default/?groupId=");
+		sb.append(groupId);
+
+		return _html.escape(sb.toString());
+	}
+
+	@Override
 	public String getDownloadUrl(long cpAttachmentFileEntryId)
 		throws PortalException {
 
@@ -135,15 +148,16 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		}
 
 		if (cpAttachmentFileEntry == null) {
-			sb.append("/default?groupId=");
-
 			HttpSession httpSession = PortalSessionThreadLocal.getHttpSession();
 
-			sb.append(
-				GetterUtil.getLong(
-					httpSession.getAttribute(WebKeys.VISITED_GROUP_ID_RECENT)));
+			if (httpSession == null) {
+				return _html.escape(sb.toString());
+			}
 
-			return _html.escape(sb.toString());
+			long groupId = GetterUtil.getLong(
+				httpSession.getAttribute(WebKeys.VISITED_GROUP_ID_RECENT));
+
+			return getDefaultUrl(groupId);
 		}
 
 		Locale siteDefaultLocale = _portal.getSiteDefaultLocale(
