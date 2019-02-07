@@ -15,7 +15,7 @@
 package com.liferay.commerce.product.internal.catalog.rule;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.service.CommerceAccountLocalService;
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.product.catalog.rule.CPRuleHelper;
 import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.service.CPRuleLocalService;
@@ -47,7 +47,7 @@ public class CPRuleHelperImpl implements CPRuleHelper {
 		}
 
 		CommerceAccount commerceAccount =
-			_commerceAccountLocalService.getCommerceAccount(commerceAccountId);
+			_commerceAccountService.getCommerceAccount(commerceAccountId);
 
 		long[] cpRuleIds = CPRuleCacheUtil.getCommerceAccountGroupCPRuleIds(
 			commerceAccountId, groupId);
@@ -94,7 +94,7 @@ public class CPRuleHelperImpl implements CPRuleHelper {
 	}
 
 	@Reference
-	private CommerceAccountLocalService _commerceAccountLocalService;
+	private CommerceAccountService _commerceAccountService;
 
 	@Reference
 	private CommerceUserSegmentHelper _commerceUserSegmentHelper;

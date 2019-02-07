@@ -102,6 +102,13 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	public CommerceAccount fetchCommerceAccount(long commerceAccountId)
 		throws PortalException {
 
+		User user = getUser();
+
+		if ((user == null) || user.isDefaultUser()) {
+			return commerceAccountLocalService.getGuestCommerceAccount(
+				user.getCompanyId());
+		}
+
 		if (_isAccountCompanyAdministrator()) {
 			return commerceAccountLocalService.fetchCommerceAccount(
 				commerceAccountId);
@@ -123,6 +130,13 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	@Override
 	public CommerceAccount getCommerceAccount(long commerceAccountId)
 		throws PortalException {
+
+		User user = getUser();
+
+		if ((user == null) || user.isDefaultUser()) {
+			return commerceAccountLocalService.getGuestCommerceAccount(
+				user.getCompanyId());
+		}
 
 		if (_isAccountCompanyAdministrator()) {
 			return commerceAccountLocalService.fetchCommerceAccount(

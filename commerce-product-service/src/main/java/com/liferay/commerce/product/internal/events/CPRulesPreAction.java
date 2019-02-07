@@ -58,22 +58,20 @@ public class CPRulesPreAction extends Action {
 			}
 
 			long commerceAccountId = ParamUtil.getLong(
-				httpServletRequest, "commerceAccountId", -1);
+				httpServletRequest, "commerceAccountId", -99);
 
-			if (commerceAccountId == -1) {
+			if (commerceAccountId == -99) {
 				CommerceAccount commerceAccount =
 					_commerceAccountHelper.getCurrentCommerceAccount(
 						groupId, httpServletRequest);
 
-				if (commerceAccount != null) {
-					commerceAccountId = commerceAccount.getCommerceAccountId();
+				if (commerceAccount == null) {
+					CPRulesThreadLocal.setCPRules(Collections.emptyList());
+
+					return;
 				}
-			}
 
-			if (commerceAccountId == -1) {
-				CPRulesThreadLocal.setCPRules(Collections.emptyList());
-
-				return;
+				commerceAccountId = commerceAccount.getCommerceAccountId();
 			}
 
 			_cpRuleHelper.initializeCPRules(
