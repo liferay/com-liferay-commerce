@@ -50,6 +50,10 @@ PayPalGroupServiceConfiguration payPalGroupServiceConfiguration = (PayPalGroupSe
 
 			</aui:select>
 		</aui:fieldset>
+
+		<aui:fieldset label="options">
+			<aui:input id="paypal-payment-attempts-max-count" label="payment-attempts-max-count" name="settings--paymentAttempts--" value="<%= payPalGroupServiceConfiguration.paymentAttemptsMaxCount() %>" />
+		</aui:fieldset>
 	</aui:fieldset-group>
 
 	<aui:button-row>
