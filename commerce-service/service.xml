@@ -654,48 +654,6 @@
 
 		<reference entity="Image" package-path="com.liferay.portal" />
 	</entity>
-	<entity local-service="true" name="CommerceSubscriptionCycleEntry" remote-service="true" table="CSubscriptionCycleEntry" uuid="true">
-
-		<!-- PK fields -->
-
-		<column db-name="CSubscriptionCycleEntryId" name="commerceSubscriptionCycleEntryId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="commerceOrderItemId" type="long" />
-		<column name="commerceSubscriptionEntryId" type="long" />
-		<column name="renew" type="boolean" />
-
-		<!-- Order -->
-
-		<order by="desc">
-			<order-column name="createDate" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
-		<finder name="CommerceOrderItemId" return-type="CommerceSubscriptionCycleEntry" unique="true">
-			<finder-column name="commerceOrderItemId" />
-		</finder>
-		<finder name="CommerceSubscriptionEntryId" return-type="Collection">
-			<finder-column name="commerceSubscriptionEntryId" />
-		</finder>
-	</entity>
 	<entity local-service="true" name="CommerceSubscriptionEntry" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
@@ -722,6 +680,7 @@
 		<column name="subscriptionLength" type="int" />
 		<column name="subscriptionType" type="String" />
 		<column name="subscriptionTypeSettings" type="String" />
+		<column name="currentCycle" type="long" />
 		<column name="maxSubscriptionCycles" type="long" />
 		<column name="subscriptionStatus" type="int" />
 		<column name="lastIterationDate" type="Date" />
