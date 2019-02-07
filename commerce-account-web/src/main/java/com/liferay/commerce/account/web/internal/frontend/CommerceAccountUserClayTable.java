@@ -40,8 +40,11 @@ import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletQName;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
+import com.liferay.portal.kernel.service.permission.RolePermissionUtil;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
@@ -98,26 +101,29 @@ public class CommerceAccountUserClayTable
 		long commerceAccountId = ParamUtil.getLong(
 			httpServletRequest, "commerceAccountId");
 
-		if (_modelResourcePermission.contains(
+		if (_accountModelResourcePermission.contains(
 				themeDisplay.getPermissionChecker(), commerceAccountId,
 				CommerceAccountActionKeys.MANAGE_MEMBERS)) {
 
 			String viewURL = _getAccountUserViewDetailURL(
 				member.getMemberId(), httpServletRequest);
 
-			String deleteURL = _getAccountUserDeleteURL(
-				member.getMemberId(), member.getAccountId(), themeDisplay);
-
 			ClayTableAction viewClayTableAction = new ClayTableAction(
 				viewURL, StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "view"), false, false);
 
-			ClayTableAction deleteClayTableAction = new ClayTableAction(
-				deleteURL, StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "delete"), false, false);
-
 			clayTableActions.add(viewClayTableAction);
-			clayTableActions.add(deleteClayTableAction);
+
+			if (member.getMemberId() == themeDisplay.getUserId()) {
+				String deleteURL = _getAccountUserDeleteURL(
+					member.getMemberId(), member.getAccountId(), themeDisplay);
+
+				ClayTableAction deleteClayTableAction = new ClayTableAction(
+					deleteURL, StringPool.BLANK,
+					LanguageUtil.get(httpServletRequest, "delete"), false, false);
+
+				clayTableActions.add(deleteClayTableAction);
+			}
 		}
 
 		return clayTableActions;
@@ -158,6 +164,10 @@ public class CommerceAccountUserClayTable
 			Pagination pagination, Sort sort)
 		throws PortalException {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 		AccountFilterImpl accountFilter = (AccountFilterImpl)filter;
 
 		List<Member> members = new ArrayList<>();
@@ -181,7 +191,10 @@ public class CommerceAccountUserClayTable
 					user.getUserId(), accountFilter.getAccountId(),
 					user.getFullName(), user.getEmailAddress(),
 					getUserRoles(
-						user, commerceAccount.getCommerceAccountGroupId())));
+						user, commerceAccount.getCommerceAccountGroupId(),
+						themeDisplay.getPermissionChecker()),
+					_getAccountUserViewDetailURL(
+						user.getUserId(), httpServletRequest)));
 		}
 
 		return members;
@@ -192,7 +205,8 @@ public class CommerceAccountUserClayTable
 		return true;
 	}
 
-	protected String[] getUserRoles(User user, long groupId)
+	protected String[] getUserRoles(
+			User user, long groupId, PermissionChecker permissionChecker)
 		throws PortalException {
 
 		List<Role> roles = new ArrayList<>();
@@ -202,7 +216,12 @@ public class CommerceAccountUserClayTable
 				user.getUserId(), groupId);
 
 		for (UserGroupRole userGroupRole : userGroupRoles) {
-			roles.add(userGroupRole.getRole());
+			if (RolePermissionUtil.contains(
+					permissionChecker, userGroupRole.getRoleId(),
+					ActionKeys.VIEW)) {
+
+				roles.add(userGroupRole.getRole());
+			}
 		}
 
 		Stream<Role> stream = roles.stream();
@@ -266,6 +285,12 @@ public class CommerceAccountUserClayTable
 		return viewURL.toString();
 	}
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
+	)
+	private ModelResourcePermission<CommerceAccount>
+		_accountModelResourcePermission;
+
 	@Reference
 	private ClayTableSchemaBuilderFactory _clayTableSchemaBuilderFactory;
 
@@ -274,11 +299,6 @@ public class CommerceAccountUserClayTable
 
 	@Reference
 	private CommerceAccountUserRelService _commerceAccountUserRelService;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.account.model.CommerceAccount)"
-	)
-	private ModelResourcePermission<CommerceAccount> _modelResourcePermission;
 
 	@Reference
 	private Portal _portal;
