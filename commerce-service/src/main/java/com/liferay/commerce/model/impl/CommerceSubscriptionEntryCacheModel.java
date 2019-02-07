@@ -65,7 +65,7 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -95,6 +95,8 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 		sb.append(subscriptionType);
 		sb.append(", subscriptionTypeSettings=");
 		sb.append(subscriptionTypeSettings);
+		sb.append(", currentCycle=");
+		sb.append(currentCycle);
 		sb.append(", maxSubscriptionCycles=");
 		sb.append(maxSubscriptionCycles);
 		sb.append(", subscriptionStatus=");
@@ -172,6 +174,7 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 			commerceSubscriptionEntryImpl.setSubscriptionTypeSettings(subscriptionTypeSettings);
 		}
 
+		commerceSubscriptionEntryImpl.setCurrentCycle(currentCycle);
 		commerceSubscriptionEntryImpl.setMaxSubscriptionCycles(maxSubscriptionCycles);
 		commerceSubscriptionEntryImpl.setSubscriptionStatus(subscriptionStatus);
 
@@ -226,6 +229,8 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 		subscriptionLength = objectInput.readInt();
 		subscriptionType = objectInput.readUTF();
 		subscriptionTypeSettings = objectInput.readUTF();
+
+		currentCycle = objectInput.readLong();
 
 		maxSubscriptionCycles = objectInput.readLong();
 
@@ -290,6 +295,8 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 			objectOutput.writeUTF(subscriptionTypeSettings);
 		}
 
+		objectOutput.writeLong(currentCycle);
+
 		objectOutput.writeLong(maxSubscriptionCycles);
 
 		objectOutput.writeInt(subscriptionStatus);
@@ -312,6 +319,7 @@ public class CommerceSubscriptionEntryCacheModel implements CacheModel<CommerceS
 	public int subscriptionLength;
 	public String subscriptionType;
 	public String subscriptionTypeSettings;
+	public long currentCycle;
 	public long maxSubscriptionCycles;
 	public int subscriptionStatus;
 	public long lastIterationDate;

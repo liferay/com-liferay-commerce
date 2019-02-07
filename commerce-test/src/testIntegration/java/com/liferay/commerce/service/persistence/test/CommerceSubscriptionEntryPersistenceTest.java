@@ -150,6 +150,8 @@ public class CommerceSubscriptionEntryPersistenceTest {
 
 		newCommerceSubscriptionEntry.setSubscriptionTypeSettings(RandomTestUtil.randomString());
 
+		newCommerceSubscriptionEntry.setCurrentCycle(RandomTestUtil.nextLong());
+
 		newCommerceSubscriptionEntry.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
 
 		newCommerceSubscriptionEntry.setSubscriptionStatus(RandomTestUtil.nextInt());
@@ -196,6 +198,8 @@ public class CommerceSubscriptionEntryPersistenceTest {
 			newCommerceSubscriptionEntry.getSubscriptionType());
 		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionTypeSettings(),
 			newCommerceSubscriptionEntry.getSubscriptionTypeSettings());
+		Assert.assertEquals(existingCommerceSubscriptionEntry.getCurrentCycle(),
+			newCommerceSubscriptionEntry.getCurrentCycle());
 		Assert.assertEquals(existingCommerceSubscriptionEntry.getMaxSubscriptionCycles(),
 			newCommerceSubscriptionEntry.getMaxSubscriptionCycles());
 		Assert.assertEquals(existingCommerceSubscriptionEntry.getSubscriptionStatus(),
@@ -301,9 +305,10 @@ public class CommerceSubscriptionEntryPersistenceTest {
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "CPInstanceUuid", true, "CProductId",
 			true, "commerceOrderItemId", true, "subscriptionLength", true,
-			"subscriptionType", true, "maxSubscriptionCycles", true,
-			"subscriptionStatus", true, "lastIterationDate", true,
-			"nextIterationDate", true, "startDate", true);
+			"subscriptionType", true, "currentCycle", true,
+			"maxSubscriptionCycles", true, "subscriptionStatus", true,
+			"lastIterationDate", true, "nextIterationDate", true, "startDate",
+			true);
 	}
 
 	@Test
@@ -578,6 +583,8 @@ public class CommerceSubscriptionEntryPersistenceTest {
 		commerceSubscriptionEntry.setSubscriptionType(RandomTestUtil.randomString());
 
 		commerceSubscriptionEntry.setSubscriptionTypeSettings(RandomTestUtil.randomString());
+
+		commerceSubscriptionEntry.setCurrentCycle(RandomTestUtil.nextLong());
 
 		commerceSubscriptionEntry.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
 

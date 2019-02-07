@@ -34,20 +34,6 @@ create table CPDefinitionInventory (
 	multipleOrderQuantity INTEGER
 );
 
-create table CSubscriptionCycleEntry (
-	uuid_ VARCHAR(75) null,
-	CSubscriptionCycleEntryId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	commerceOrderItemId LONG,
-	commerceSubscriptionEntryId LONG,
-	renew BOOLEAN
-);
-
 create table CommerceAddress (
 	commerceAddressId LONG not null primary key,
 	groupId LONG,
@@ -305,6 +291,7 @@ create table CommerceSubscriptionEntry (
 	subscriptionLength INTEGER,
 	subscriptionType VARCHAR(75) null,
 	subscriptionTypeSettings TEXT null,
+	currentCycle LONG,
 	maxSubscriptionCycles LONG,
 	subscriptionStatus INTEGER,
 	lastIterationDate DATE null,

@@ -298,6 +298,20 @@ public interface CommerceSubscriptionEntryModel extends BaseModel<CommerceSubscr
 	public void setSubscriptionTypeSettings(String subscriptionTypeSettings);
 
 	/**
+	 * Returns the current cycle of this commerce subscription entry.
+	 *
+	 * @return the current cycle of this commerce subscription entry
+	 */
+	public long getCurrentCycle();
+
+	/**
+	 * Sets the current cycle of this commerce subscription entry.
+	 *
+	 * @param currentCycle the current cycle of this commerce subscription entry
+	 */
+	public void setCurrentCycle(long currentCycle);
+
+	/**
 	 * Returns the max subscription cycles of this commerce subscription entry.
 	 *
 	 * @return the max subscription cycles of this commerce subscription entry
