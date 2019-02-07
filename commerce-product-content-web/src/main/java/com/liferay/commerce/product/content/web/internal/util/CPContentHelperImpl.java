@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.content.web.internal.util;
 
+import com.liferay.commerce.media.impl.configuration.CommerceMediaDefaultImageConfiguration;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.catalog.CPSku;
@@ -43,14 +44,17 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portlet.documentlibrary.lar.FileEntryUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -290,6 +294,24 @@ public class CPContentHelperImpl implements CPContentHelper {
 				cpAttachmentFileEntries) {
 
 			cpMedias.add(new CPMediaImpl(cpAttachmentFileEntry, themeDisplay));
+		}
+
+		if (cpMedias.isEmpty()) {
+			CommerceMediaDefaultImageConfiguration
+				commerceMediaDefaultImageConfiguration =
+					ConfigurationProviderUtil.getConfiguration(
+						CommerceMediaDefaultImageConfiguration.class,
+						new GroupServiceSettingsLocator(
+							themeDisplay.getScopeGroupId(),
+							CommerceMediaDefaultImageConfiguration.class.
+								getName()));
+
+			FileEntry fileEntry = FileEntryUtil.fetchByPrimaryKey(
+				commerceMediaDefaultImageConfiguration.defaultFileEntryId());
+
+			if (fileEntry != null) {
+				cpMedias.add(new CPMediaImpl(fileEntry, themeDisplay));
+			}
 		}
 
 		return cpMedias;

@@ -29,6 +29,13 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class CommerceMediaResolverUtil {
 
+	public static String getDefaultUrl(long groupId) {
+		CommerceMediaResolver commerceMediaResolver =
+			_serviceTracker.getService();
+
+		return commerceMediaResolver.getDefaultUrl(groupId);
+	}
+
 	public static String getDownloadUrl(long cpAttachmentFileEntryId)
 		throws PortalException {
 

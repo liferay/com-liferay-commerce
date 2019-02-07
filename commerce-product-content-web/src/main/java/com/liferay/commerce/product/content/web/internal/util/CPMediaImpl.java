@@ -17,6 +17,8 @@ package com.liferay.commerce.product.content.web.internal.util;
 import com.liferay.commerce.media.CommerceMediaResolverUtil;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
+import com.liferay.document.library.kernel.util.DLUtil;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -42,6 +44,22 @@ public class CPMediaImpl implements CPMedia {
 		_title = cpAttachmentFileEntry.getTitle(themeDisplay.getLanguageId());
 		_thumbnailUrl = CommerceMediaResolverUtil.getThumbnailUrl(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
+	}
+
+	public CPMediaImpl(FileEntry fileEntry, ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		String defaultUrl = DLUtil.getDownloadURL(
+			fileEntry, fileEntry.getFileVersion(), themeDisplay,
+			StringPool.BLANK);
+
+		_downloadUrl = defaultUrl;
+
+		_id = fileEntry.getFileEntryId();
+		_url = defaultUrl;
+		_thumbnailUrl = defaultUrl;
+		_mimeType = fileEntry.getMimeType();
+		_title = fileEntry.getTitle();
 	}
 
 	@Override
