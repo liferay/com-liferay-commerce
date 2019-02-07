@@ -7,4 +7,5 @@ Export-Package:\
 	com.liferay.commerce.payment.model,\
 	com.liferay.commerce.payment.service,\
 	com.liferay.commerce.payment.service.persistence,\
+	com.liferay.commerce.payment.util,\
 	com.liferay.commerce.payment.util.comparator
