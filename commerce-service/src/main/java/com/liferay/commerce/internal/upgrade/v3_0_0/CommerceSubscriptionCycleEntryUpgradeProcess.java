@@ -12,38 +12,43 @@
  * details.
  */
 
-package com.liferay.commerce.internal.upgrade.v1_2_0;
+package com.liferay.commerce.internal.upgrade.v3_0_0;
 
-import com.liferay.commerce.model.impl.CommerceOrderItemImpl;
-import com.liferay.commerce.model.impl.CommerceSubscriptionEntryImpl;
+import com.liferay.commerce.model.impl.CommerceSubscriptionEntryModelImpl;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.StringUtil;
 
 /**
- * @author Alessio Antonio Rendina
+ * @author Luca Pellizzon
  */
-public class CommerceSubscriptionUpgradeProcess extends UpgradeProcess {
+public class CommerceSubscriptionCycleEntryUpgradeProcess
+	extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		if (!hasTable(CommerceSubscriptionEntryImpl.TABLE_NAME)) {
-			String template = StringUtil.read(
-				CommerceSubscriptionUpgradeProcess.class.getResourceAsStream(
-					"dependencies/CommerceSubscriptionEntry.sql"));
+		_addColumn(
+			CommerceSubscriptionEntryModelImpl.class,
+			CommerceSubscriptionEntryModelImpl.TABLE_NAME, "currentCycle",
+			"LONG");
 
-			runSQLTemplateString(template, false, false);
+		if (hasColumn(
+				CommerceSubscriptionEntryModelImpl.TABLE_NAME,
+				"currentCycle")) {
+
+			runSQL(
+				"UPDATE CommerceSubscriptionEntry SET currentCycle = 0 WHERE " +
+					"currentCycle IS NULL");
 		}
 
-		_addColumn(
-			CommerceOrderItemImpl.class, CommerceOrderItemImpl.TABLE_NAME,
-			"subscription", "BOOLEAN");
+		if (hasTable("CSubscriptionCycleEntry")) {
+			runSQL("drop table CSubscriptionCycleEntry");
+		}
 	}
 
 	private void _addColumn(
-			Class<?> tableClass, String tableName, String columnName,
+			Class<?> entityClass, String tableName, String columnName,
 			String columnType)
 		throws Exception {
 
@@ -55,7 +60,7 @@ public class CommerceSubscriptionUpgradeProcess extends UpgradeProcess {
 
 		if (!hasColumn(tableName, columnName)) {
 			alter(
-				tableClass,
+				entityClass,
 				new AlterTableAddColumn(
 					columnName + StringPool.SPACE + columnType));
 		}
@@ -70,6 +75,6 @@ public class CommerceSubscriptionUpgradeProcess extends UpgradeProcess {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceSubscriptionUpgradeProcess.class);
+		CommerceSubscriptionCycleEntryUpgradeProcess.class);
 
 }
