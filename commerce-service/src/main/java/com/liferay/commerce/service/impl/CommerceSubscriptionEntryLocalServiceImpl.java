@@ -20,8 +20,12 @@ import com.liferay.commerce.exception.CommerceSubscriptionEntryNextIterationDate
 import com.liferay.commerce.exception.CommerceSubscriptionEntryStartDateException;
 import com.liferay.commerce.exception.CommerceSubscriptionEntrySubscriptionStatusException;
 import com.liferay.commerce.exception.CommerceSubscriptionTypeException;
+import com.liferay.commerce.internal.notification.type.SubscriptionRenewedCommerceNotificationTypeImpl;
 import com.liferay.commerce.internal.search.CommerceSubscriptionEntryIndexer;
+import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.notification.util.CommerceNotificationHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
@@ -133,6 +137,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			cpSubscriptionInfo.getSubscriptionLength());
 		commerceSubscriptionEntry.setSubscriptionType(
 			cpSubscriptionInfo.getSubscriptionType());
+		commerceSubscriptionEntry.setCurrentCycle(1);
 		commerceSubscriptionEntry.setMaxSubscriptionCycles(
 			cpSubscriptionInfo.getMaxSubscriptionCycles());
 		commerceSubscriptionEntry.setSubscriptionTypeSettingsProperties(
@@ -159,13 +164,15 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
 
-		// Add CommerceSubscriptionCycleEntry
-
-		commerceSubscriptionCycleEntryLocalService.
-			addCommerceSubscriptionCycleEntry(
-				commerceSubscriptionEntryId, commerceOrderItemId, false);
-
 		return commerceSubscriptionEntry;
+	}
+
+	@Override
+	public CommerceSubscriptionEntry fetchCommerceSubscriptionEntries(
+		String cpInstanceUuid, long cProductId, long commerceOrderItemId) {
+
+		return commerceSubscriptionEntryPersistence.fetchByC_C_C(
+			cpInstanceUuid, cProductId, commerceOrderItemId);
 	}
 
 	@Override
@@ -196,6 +203,64 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		return commerceSubscriptionEntryFinder.findByNextIterationDate(
 			new Date());
+	}
+
+	@Override
+	public CommerceSubscriptionEntry incrementCommerceSubscriptionEntryCycle(
+			long commerceSubscriptionEntryId)
+		throws PortalException {
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			commerceSubscriptionEntryPersistence.findByPrimaryKey(
+				commerceSubscriptionEntryId);
+
+		long currentSubscriptionCycle =
+			commerceSubscriptionEntry.getCurrentCycle();
+
+		commerceSubscriptionEntry.setCurrentCycle(currentSubscriptionCycle + 1);
+
+		User user = userLocalService.getUser(
+			commerceSubscriptionEntry.getUserId());
+
+		CPSubscriptionType cpSubscriptionType =
+			_cpSubscriptionTypeRegistry.getCPSubscriptionType(
+				commerceSubscriptionEntry.getSubscriptionType());
+
+		validateCPSubscriptionType(cpSubscriptionType);
+
+		commerceSubscriptionEntry.setLastIterationDate(
+			commerceSubscriptionEntry.getNextIterationDate());
+
+		Date subscriptionNextIterationDate =
+			cpSubscriptionType.getSubscriptionNextIterationDate(
+				user.getTimeZone(),
+				commerceSubscriptionEntry.getSubscriptionLength(),
+				commerceSubscriptionEntry.
+					getSubscriptionTypeSettingsProperties(),
+				commerceSubscriptionEntry.getNextIterationDate());
+
+		commerceSubscriptionEntry.setNextIterationDate(
+			subscriptionNextIterationDate);
+
+		CommerceSubscriptionEntry updatedSubscriptionEntry =
+			commerceSubscriptionEntryPersistence.update(
+				commerceSubscriptionEntry);
+
+		// Send user notification
+
+		CommerceOrderItem commerceOrderItem =
+			commerceSubscriptionEntry.fetchCommerceOrderItem();
+
+		if (commerceOrderItem != null) {
+			CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
+
+			_commerceNotificationHelper.sendNotifications(
+				commerceOrder.getGroupId(),
+				SubscriptionRenewedCommerceNotificationTypeImpl.KEY,
+				commerceOrder);
+		}
+
+		return updatedSubscriptionEntry;
 	}
 
 	@Override
@@ -466,6 +531,9 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 	private static final String[] _SELECTED_FIELD_NAMES =
 		{Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
+
+	@ServiceReference(type = CommerceNotificationHelper.class)
+	private CommerceNotificationHelper _commerceNotificationHelper;
 
 	@ServiceReference(type = CPDefinitionLocalService.class)
 	private CPDefinitionLocalService _cpDefinitionLocalService;
