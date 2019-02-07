@@ -17,12 +17,10 @@ package com.liferay.commerce.account.web.internal.frontend;
 import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.FilterFactory;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Portal;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
@@ -31,6 +29,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
+		"commerce.data.provider.key=" + CommerceAccountAddressClayTable.NAME,
 		"commerce.data.provider.key=" + CommerceAccountClayTable.NAME,
 		"commerce.data.provider.key=" + CommerceAccountOrganizationClayTable.NAME,
 		"commerce.data.provider.key=" + CommerceAccountUserClayTable.NAME
@@ -54,8 +53,5 @@ public class AccountFilterFactoryImpl implements FilterFactory {
 
 		return accountFilter;
 	}
-
-	@Reference
-	private Portal _portal;
 
 }
