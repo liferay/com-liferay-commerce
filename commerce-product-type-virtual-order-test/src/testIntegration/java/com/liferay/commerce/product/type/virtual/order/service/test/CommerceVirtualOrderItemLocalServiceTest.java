@@ -18,8 +18,6 @@ import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
-import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
@@ -30,7 +28,6 @@ import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOr
 import com.liferay.commerce.product.type.virtual.order.util.CommerceVirtualOrderItemChecker;
 import com.liferay.commerce.product.type.virtual.test.util.VirtualCPTypeTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -212,24 +209,6 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 				commerceVirtualOrderItem.getCommerceOrderItem();
 
 			Assert.assertEquals(true, commerceOrderItem.isSubscription());
-
-			CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
-				_commerceSubscriptionCycleEntryLocalService.
-					fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
-						commerceOrderItem.getCommerceOrderItemId());
-
-			if (commerceSubscriptionCycleEntry != null) {
-				CommerceSubscriptionEntry commerceSubscriptionEntry =
-					commerceSubscriptionCycleEntry.
-						getCommerceSubscriptionEntry();
-
-				Assert.assertEquals(
-					commerceSubscriptionEntry.getStartDate(),
-					commerceVirtualOrderItem.getStartDate());
-				Assert.assertEquals(
-					commerceSubscriptionEntry.getNextIterationDate(),
-					commerceVirtualOrderItem.getEndDate());
-			}
 		}
 	}
 
@@ -260,10 +239,6 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 	@Inject
 	private CommerceOrderLocalService _commerceOrderLocalService;
-
-	@Inject
-	private CommerceSubscriptionCycleEntryLocalService
-		_commerceSubscriptionCycleEntryLocalService;
 
 	@Inject
 	private CommerceSubscriptionEntryHelper _commerceSubscriptionEntryHelper;

@@ -16,7 +16,6 @@ package com.liferay.commerce.product.type.virtual.order.service.impl;
 
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
@@ -28,7 +27,7 @@ import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrde
 import com.liferay.commerce.product.type.virtual.order.service.base.CommerceVirtualOrderItemLocalServiceBaseImpl;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
-import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
+import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -386,19 +385,20 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 			long commerceOrderItemId)
 		throws PortalException {
 
-		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
-			_commerceSubscriptionCycleEntryLocalService.
-				fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
-					commerceOrderItemId);
+		CommerceOrderItem commerceOrderItem =
+			_commerceOrderItemLocalService.fetchCommerceOrderItem(
+				commerceOrderItemId);
 
-		if (commerceSubscriptionCycleEntry == null) {
+		if (commerceOrderItem == null) {
 			return null;
 		}
 
-		CommerceSubscriptionEntry commerceSubscriptionEntry =
-			commerceSubscriptionCycleEntry.getCommerceSubscriptionEntry();
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
-		return commerceSubscriptionEntry;
+		return _commerceSubscriptionEntryLocalService.
+			fetchCommerceSubscriptionEntries(
+				cpInstance.getCPInstanceUuid(),
+				commerceOrderItem.getCProductId(), commerceOrderItemId);
 	}
 
 	protected CommerceVirtualOrderItem setDurationDates(
@@ -452,9 +452,9 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 	@ServiceReference(type = CommerceOrderItemLocalService.class)
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
 
-	@ServiceReference(type = CommerceSubscriptionCycleEntryLocalService.class)
-	private CommerceSubscriptionCycleEntryLocalService
-		_commerceSubscriptionCycleEntryLocalService;
+	@ServiceReference(type = CommerceSubscriptionEntryLocalService.class)
+	private CommerceSubscriptionEntryLocalService
+		_commerceSubscriptionEntryLocalService;
 
 	@ServiceReference(type = CPDefinitionVirtualSettingLocalService.class)
 	private CPDefinitionVirtualSettingLocalService

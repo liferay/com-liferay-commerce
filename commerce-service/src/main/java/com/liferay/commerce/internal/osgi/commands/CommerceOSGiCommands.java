@@ -29,7 +29,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"osgi.command.function=renewSubscriptionEntries",
+		"osgi.command.function=checkSubscriptionEntriesStatus",
 		"osgi.command.scope=commerce"
 	},
 	service = CommerceOSGiCommands.class
@@ -41,7 +41,7 @@ public class CommerceOSGiCommands {
 			_commerceSubscriptionEntryLocalService.
 				getActiveCommerceSubscriptionEntries();
 
-		_commerceSubscriptionEntryHelper.renewSubscriptionEntries(
+		_commerceSubscriptionEntryHelper.checkSubscriptionEntriesStatus(
 			activeCommerceSubscriptionEntries);
 	}
 

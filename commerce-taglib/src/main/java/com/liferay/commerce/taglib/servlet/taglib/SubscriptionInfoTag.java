@@ -14,14 +14,15 @@
 
 package com.liferay.commerce.taglib.servlet.taglib;
 
-import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
+import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.service.CPInstanceServiceUtil;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
-import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalServiceUtil;
+import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
+import com.liferay.commerce.service.CommerceSubscriptionEntryLocalServiceUtil;
 import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
@@ -46,27 +47,36 @@ public class SubscriptionInfoTag extends IncludeTag {
 	@Override
 	public int doStartTag() throws JspException {
 		try {
-			CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
-				CommerceSubscriptionCycleEntryLocalServiceUtil.
-					fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
-						_commerceOrderItemId);
+			CommerceOrderItem commerceOrderItem =
+				CommerceOrderItemLocalServiceUtil.fetchCommerceOrderItem(
+					_commerceOrderItemId);
 
 			CPInstance cpInstance = CPInstanceServiceUtil.fetchCPInstance(
 				_cpInstanceId);
 
-			if ((commerceSubscriptionCycleEntry == null) &&
-				(cpInstance == null)) {
+			CommerceSubscriptionEntry commerceSubscriptionEntry = null;
 
+			try {
+				commerceSubscriptionEntry =
+					CommerceSubscriptionEntryLocalServiceUtil.
+						fetchCommerceSubscriptionEntries(
+							cpInstance.getCPInstanceUuid(),
+							commerceOrderItem.getCProductId(),
+							_commerceOrderItemId);
+			}
+			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(e.getMessage(), e);
+				}
+			}
+
+			if ((commerceSubscriptionEntry == null) && (cpInstance == null)) {
 				return SKIP_BODY;
 			}
 
 			String subscriptionType = null;
 
-			if (commerceSubscriptionCycleEntry != null) {
-				CommerceSubscriptionEntry commerceSubscriptionEntry =
-					commerceSubscriptionCycleEntry.
-						getCommerceSubscriptionEntry();
-
+			if (commerceSubscriptionEntry != null) {
 				_length = commerceSubscriptionEntry.getSubscriptionLength();
 
 				_duration =

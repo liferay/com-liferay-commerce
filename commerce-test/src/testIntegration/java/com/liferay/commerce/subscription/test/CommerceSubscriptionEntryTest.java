@@ -15,7 +15,6 @@
 package com.liferay.commerce.subscription.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -28,7 +27,6 @@ import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.type.simple.constants.SimpleCPTypeConstants;
-import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.commerce.subscription.test.util.CommerceSubscriptionEntryTestUtil;
@@ -48,7 +46,6 @@ import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
-import java.util.Date;
 import java.util.List;
 
 import org.frutilla.FrutillaRule;
@@ -186,82 +183,8 @@ public class CommerceSubscriptionEntryTest {
 		_testOverrideCPInstanceSubscriptionInfo(false, true);
 	}
 
-	@Ignore
-	@Test
-	public void testRenewCommerceSubscriptionEntry() throws Exception {
-		frutillaRule.scenario(
-			"Renew a subscription entry"
-		).given(
-			"An enabled subscription that has 1 max subscription cycle number"
-		).when(
-			"The next iteration date of the subscription is outdated"
-		).then(
-			"The product subscription entry is renewed"
-		).and(
-			"The product subscription entry is no more active"
-		);
-
-		CommerceSubscriptionEntryTestUtil.setUpCommerceSubscriptionEntry(
-			_group.getGroupId(), _user.getUserId(), 1,
-			_commerceSubscriptionEntryHelper);
-
-		List<CommerceSubscriptionEntry> commerceSubscriptionEntries =
-			_commerceSubscriptionEntryLocalService.
-				getCommerceSubscriptionEntries(
-					_group.getGroupId(), _user.getUserId(), QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS, null);
-
-		CommerceSubscriptionEntry commerceSubscriptionEntry =
-			commerceSubscriptionEntries.get(0);
-
-		// Renew with the original next iteration date
-
-		int commerceSubscriptionCycleEntriesCount =
-			_getRenewedCommerceSubscriptionEntriesCount(
-				commerceSubscriptionEntry);
-
-		Assert.assertEquals(1, commerceSubscriptionCycleEntriesCount);
-
-		Assert.assertEquals(
-			CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE,
-			commerceSubscriptionEntry.getSubscriptionStatus());
-
-		// Renew with the actual date
-
-		commerceSubscriptionEntry.setNextIterationDate(new Date());
-
-		commerceSubscriptionEntry =
-			_commerceSubscriptionEntryLocalService.
-				updateCommerceSubscriptionEntry(commerceSubscriptionEntry);
-
-		commerceSubscriptionCycleEntriesCount =
-			_getRenewedCommerceSubscriptionEntriesCount(
-				commerceSubscriptionEntry);
-
-		commerceSubscriptionEntry =
-			_commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntry(
-				commerceSubscriptionEntry.getCommerceSubscriptionEntryId());
-
-		Assert.assertEquals(2, commerceSubscriptionCycleEntriesCount);
-		Assert.assertEquals(
-			CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_COMPLETED,
-			commerceSubscriptionEntry.getSubscriptionStatus());
-	}
-
 	@Rule
 	public FrutillaRule frutillaRule = new FrutillaRule();
-
-	private int _getRenewedCommerceSubscriptionEntriesCount(
-			CommerceSubscriptionEntry commerceSubscriptionEntry)
-		throws Exception {
-
-		_commerceSubscriptionEntryHelper.checkSubscriptionStatus(
-			commerceSubscriptionEntry);
-
-		return _commerceSubscriptionCycleEntryLocalService.
-			getCommerceSubscriptionCycleEntriesCount(
-				commerceSubscriptionEntry.getCommerceSubscriptionEntryId());
-	}
 
 	private void _testOverrideCPInstanceSubscriptionInfo(
 			boolean cpDefinitionSubscriptionEnabled,
@@ -417,10 +340,6 @@ public class CommerceSubscriptionEntryTest {
 			}
 		}
 	}
-
-	@Inject
-	private CommerceSubscriptionCycleEntryLocalService
-		_commerceSubscriptionCycleEntryLocalService;
 
 	@Inject
 	private CommerceSubscriptionEntryHelper _commerceSubscriptionEntryHelper;

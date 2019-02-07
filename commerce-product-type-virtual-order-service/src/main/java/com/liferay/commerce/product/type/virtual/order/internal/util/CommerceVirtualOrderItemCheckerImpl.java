@@ -17,16 +17,15 @@ package com.liferay.commerce.product.type.virtual.order.internal.util;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommerceSubscriptionCycleEntry;
+import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
 import com.liferay.commerce.product.type.virtual.order.util.CommerceVirtualOrderItemChecker;
 import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.commerce.service.CommerceSubscriptionCycleEntryLocalService;
-import com.liferay.commerce.util.comparator.CommerceSubscriptionCycleEntryCreateDateComparator;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.SecureRandomUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -65,17 +64,22 @@ public class CommerceVirtualOrderItemCheckerImpl
 			commerceOrder.getCommerceOrderItems();
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry =
-				_commerceSubscriptionCycleEntryLocalService.
-					fetchCommerceSubscriptionCycleEntryByCommerceOrderItemId(
+			CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+			CommerceSubscriptionEntry commerceSubscriptionEntry =
+				_commerceSubscriptionEntryLocalService.
+					fetchCommerceSubscriptionEntries(
+						cpInstance.getCPInstanceUuid(),
+						commerceOrderItem.getCProductId(),
 						commerceOrderItem.getCommerceOrderItemId());
 
 			CommerceVirtualOrderItem commerceVirtualOrderItem =
 				_getCommerceVirtualOrderItem(
-					commerceOrderItem, commerceSubscriptionCycleEntry);
+					commerceOrderItem, commerceSubscriptionEntry);
 
 			if ((commerceVirtualOrderItem == null) &&
-				_isNewSubscription(commerceSubscriptionCycleEntry)) {
+				((commerceSubscriptionEntry == null) ||
+				 (commerceSubscriptionEntry.getCurrentCycle() == 1))) {
 
 				CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
 
@@ -123,7 +127,7 @@ public class CommerceVirtualOrderItemCheckerImpl
 
 	private CommerceVirtualOrderItem _getCommerceVirtualOrderItem(
 		CommerceOrderItem commerceOrderItem,
-		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry) {
+		CommerceSubscriptionEntry commerceSubscriptionCycleEntry) {
 
 		if (!commerceOrderItem.isSubscription()) {
 			return _commerceVirtualOrderItemLocalService.
@@ -135,20 +139,9 @@ public class CommerceVirtualOrderItemCheckerImpl
 			return null;
 		}
 
-		List<CommerceSubscriptionCycleEntry> commerceSubscriptionCycleEntries =
-			_commerceSubscriptionCycleEntryLocalService.
-				getCommerceSubscriptionCycleEntries(
-					commerceSubscriptionCycleEntry.
-						getCommerceSubscriptionEntryId(),
-					QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-					new CommerceSubscriptionCycleEntryCreateDateComparator());
-
-		CommerceSubscriptionCycleEntry firstCommerceSubscriptionCycleEntry =
-			commerceSubscriptionCycleEntries.get(0);
-
 		return _commerceVirtualOrderItemLocalService.
 			fetchCommerceVirtualOrderItemByCommerceOrderItemId(
-				firstCommerceSubscriptionCycleEntry.getCommerceOrderItemId());
+				commerceSubscriptionCycleEntry.getCommerceOrderItemId());
 	}
 
 	private ServiceContext _getServiceContext(CommerceOrder commerceOrder)
@@ -170,24 +163,12 @@ public class CommerceVirtualOrderItemCheckerImpl
 		return serviceContext;
 	}
 
-	private boolean _isNewSubscription(
-		CommerceSubscriptionCycleEntry commerceSubscriptionCycleEntry) {
-
-		if ((commerceSubscriptionCycleEntry != null) &&
-			commerceSubscriptionCycleEntry.isRenew()) {
-
-			return false;
-		}
-
-		return true;
-	}
-
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Reference
-	private CommerceSubscriptionCycleEntryLocalService
-		_commerceSubscriptionCycleEntryLocalService;
+	private CommerceSubscriptionEntryLocalService
+		_commerceSubscriptionEntryLocalService;
 
 	@Reference
 	private CommerceVirtualOrderItemLocalService
