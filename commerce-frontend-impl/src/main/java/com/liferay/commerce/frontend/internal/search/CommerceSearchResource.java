@@ -152,11 +152,6 @@ public class CommerceSearchResource {
 
 		List<SearchItemModel> searchItemModels = new ArrayList<>();
 
-		searchItemModels.add(
-			new SearchItemModel(
-				"label",
-				LanguageUtil.get(themeDisplay.getLocale(), "accounts")));
-
 		CommerceContext commerceContext = _commerceContextFactory.create(
 			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(), 0, 0,
 			StringPool.BLANK);
@@ -166,6 +161,13 @@ public class CommerceSearchResource {
 			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
 			commerceContext.getCommerceSiteType(), queryString, 1, 5,
 			themeDisplay.getPathImage());
+
+		if (accountList.getCount() > 0) {
+			searchItemModels.add(
+				new SearchItemModel(
+					"label",
+					LanguageUtil.get(themeDisplay.getLocale(), "accounts")));
+		}
 
 		for (Account account : accountList.getAccounts()) {
 			SearchItemModel searchItemModel = new SearchItemModel(
@@ -205,13 +207,16 @@ public class CommerceSearchResource {
 
 		List<SearchItemModel> searchItemModels = new ArrayList<>();
 
-		searchItemModels.add(
-			new SearchItemModel(
-				"label", LanguageUtil.get(themeDisplay.getLocale(), "orders")));
-
 		OrderList orderList = _commerceOrderResource.getOrderList(
 			themeDisplay.getScopeGroupId(), queryString, 1, 5,
 			themeDisplay.getRequest(), commerceAccount);
+
+		if (orderList.getCount() > 0) {
+			searchItemModels.add(
+				new SearchItemModel(
+					"label",
+					LanguageUtil.get(themeDisplay.getLocale(), "orders")));
+		}
 
 		for (Order order : orderList.getOrders()) {
 			SearchItemModel searchItemModel = new SearchItemModel(
@@ -258,10 +263,6 @@ public class CommerceSearchResource {
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", themeDisplay.getLocale(), getClass());
 
-		searchItemModels.add(
-			new SearchItemModel(
-				"label", LanguageUtil.get(resourceBundle, "catalog")));
-
 		SearchContext searchContext = new SearchContext();
 
 		Map<String, Serializable> attributes = new HashMap<>();
@@ -284,6 +285,12 @@ public class CommerceSearchResource {
 
 		CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
 			groupId, searchContext, cpQuery, 0, 5);
+
+		if (cpDataSourceResult.getLength() > 0) {
+			searchItemModels.add(
+				new SearchItemModel(
+					"label", LanguageUtil.get(resourceBundle, "catalog")));
+		}
 
 		for (CPCatalogEntry cpCatalogEntry :
 				cpDataSourceResult.getCPCatalogEntries()) {
