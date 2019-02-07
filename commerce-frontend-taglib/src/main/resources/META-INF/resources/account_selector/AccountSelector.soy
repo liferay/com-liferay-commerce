@@ -59,7 +59,6 @@
 			{call .currentState}
 				{param currentAccount: $currentAccount /}
 				{param currentOrder: $currentOrder /}
-				{param spritemap: $spritemap /}
 			{/call}
 
 			{call ClayIcon.render}
@@ -105,20 +104,11 @@
 {template .currentState }
 	{@param currentAccount: ? }
 	{@param currentOrder: ? }
-	{@param spritemap: string }
 
 	{if isNonnull($currentAccount)}
 		<div class="account-selector">
 			<div class="account-selector__image">
 				<img alt="{$currentAccount.name}" src="{$currentAccount.thumbnail}">
-				<span
-					class="account-selector__remove"
-				>
-					{call ClayIcon.render}
-						{param spritemap: $spritemap /}
-						{param symbol: 'close' /}
-					{/call}
-				</span>
 			</div>
 
 			<div class="account-selector__title">
