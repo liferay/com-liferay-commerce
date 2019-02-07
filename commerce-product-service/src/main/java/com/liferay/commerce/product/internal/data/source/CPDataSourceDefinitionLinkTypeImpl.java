@@ -91,6 +91,8 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 			"definitionLinkCPDefinitionId", cpCatalogEntry.getCPDefinitionId());
 		attributes.put(
 			"definitionLinkType", _cpDefinitionLinkTypeConfiguration.type());
+		attributes.put(
+			"excludedCPDefinitionId", cpCatalogEntry.getCPDefinitionId());
 
 		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
 
