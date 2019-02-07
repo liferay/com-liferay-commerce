@@ -7,11 +7,16 @@
 		<permissions>
 			<supports>
 				<action-key>ADD_ACCOUNT</action-key>
-				<action-key>MANAGE_ACCOUNTS</action-key>
+				<action-key>MANAGE_ALL_ACCOUNTS</action-key>
+				<action-key>MANAGE_AVAILABLE_ACCOUNTS</action-key>
 			</supports>
 			<site-member-defaults />
 			<guest-defaults />
-			<guest-unsupported />
+			<guest-unsupported>
+				<action-key>ADD_ACCOUNT</action-key>
+				<action-key>MANAGE_ALL_ACCOUNTS</action-key>
+				<action-key>MANAGE_AVAILABLE_ACCOUNTS</action-key>
+			</guest-unsupported>
 		</permissions>
 	</portlet-resource>
 	<model-resource>

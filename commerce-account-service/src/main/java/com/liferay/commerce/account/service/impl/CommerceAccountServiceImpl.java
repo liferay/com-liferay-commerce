@@ -102,13 +102,19 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	public CommerceAccount fetchCommerceAccount(long commerceAccountId)
 		throws PortalException {
 
-		CommerceAccount commerceAccount =
-			commerceAccountLocalService.fetchCommerceAccount(commerceAccountId);
+		if (_isAccountCompanyAdministrator()) {
+			return commerceAccountLocalService.fetchCommerceAccount(
+				commerceAccountId);
+		}
 
-		if (commerceAccount != null) {
-			_commerceAccountModelResourcePermission.check(
-				getPermissionChecker(), commerceAccount.getCommerceAccountId(),
-				ActionKeys.VIEW);
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.getCommerceAccount(
+				getUserId(), commerceAccountId);
+
+		if (commerceAccount == null) {
+			throw new PrincipalException.MustHavePermission(
+				getPermissionChecker(), CommerceAccount.class.getName(),
+				commerceAccountId, ActionKeys.VIEW);
 		}
 
 		return commerceAccount;
@@ -118,22 +124,18 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	public CommerceAccount getCommerceAccount(long commerceAccountId)
 		throws PortalException {
 
+		if (_isAccountCompanyAdministrator()) {
+			return commerceAccountLocalService.fetchCommerceAccount(
+				commerceAccountId);
+		}
+
 		CommerceAccount commerceAccount =
-			commerceAccountLocalService.fetchCommerceAccount(commerceAccountId);
+			commerceAccountLocalService.getCommerceAccount(
+				getUserId(), commerceAccountId);
 
 		if (commerceAccount == null) {
 			throw new NoSuchAccountException();
 		}
-
-		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountId, ActionKeys.VIEW);
-
-		if (_isAccountCompanyAdministrator(commerceAccount.getCompanyId())) {
-			return commerceAccount;
-		}
-
-		commerceAccount = commerceAccountLocalService.getCommerceAccount(
-			getUserId(), commerceAccountId);
 
 		if (commerceAccount == null) {
 			throw new PrincipalException.MustHavePermission(
@@ -172,14 +174,12 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			return Collections.emptyList();
 		}
 
-		if ((userId == getUserId()) &&
-			!_isAccountCompanyAdministrator(user.getCompanyId())) {
-
+		if ((userId == getUserId()) && !_isAccountCompanyAdministrator()) {
 			return commerceAccountLocalService.getUserCommerceAccounts(
 				userId, parentCommerceAccountId, commerceSiteType, keywords,
 				start, end);
 		}
-		else if (_isAccountCompanyAdministrator(user.getCompanyId())) {
+		else if (_isAccountCompanyAdministrator()) {
 			int accountType = CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS;
 
 			if (commerceSiteType == CommerceAccountConstants.SITE_TYPE_B2C) {
@@ -207,13 +207,11 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			return 0;
 		}
 
-		if ((userId == getUserId()) &&
-			!_isAccountCompanyAdministrator(user.getCompanyId())) {
-
+		if ((userId == getUserId()) && !_isAccountCompanyAdministrator()) {
 			return commerceAccountLocalService.getUserCommerceAccountsCount(
 				userId, parentCommerceAccountId, commerceSiteType, keywords);
 		}
-		else if (_isAccountCompanyAdministrator(user.getCompanyId())) {
+		else if (_isAccountCompanyAdministrator()) {
 			int accountType = CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS;
 
 			if (commerceSiteType == CommerceAccountConstants.SITE_TYPE_B2C) {
@@ -270,21 +268,22 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			active, externalReferenceCode, serviceContext);
 	}
 
-	private boolean _isAccountCompanyAdministrator(long companyId)
-		throws PortalException {
-
+	private boolean _isAccountCompanyAdministrator() throws PortalException {
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		if (permissionChecker.isOmniadmin()) {
 			return true;
 		}
 
-		if (permissionChecker.isCompanyAdmin(companyId)) {
+		if (permissionChecker.isCompanyAdmin(
+				permissionChecker.getCompanyId())) {
+
 			return true;
 		}
 
 		return PortalPermissionUtil.contains(
-			getPermissionChecker(), CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+			getPermissionChecker(),
+			CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS);
 	}
 
 	private static volatile ModelResourcePermission<CommerceAccount>
