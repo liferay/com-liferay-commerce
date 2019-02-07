@@ -193,6 +193,10 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 		Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceSubscriptionEntry fetchCommerceSubscriptionEntries(
+		String cpInstanceUuid, long cProductId, long commerceOrderItemId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceSubscriptionEntry fetchCommerceSubscriptionEntry(
 		long commerceSubscriptionEntryId);
 
@@ -314,6 +318,9 @@ public interface CommerceSubscriptionEntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
+
+	public CommerceSubscriptionEntry incrementCommerceSubscriptionEntryCycle(
+		long commerceSubscriptionEntryId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(

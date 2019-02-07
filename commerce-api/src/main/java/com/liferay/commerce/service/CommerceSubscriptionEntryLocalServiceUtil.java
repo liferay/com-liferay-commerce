@@ -198,6 +198,13 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry fetchCommerceSubscriptionEntries(
+		String cpInstanceUuid, long cProductId, long commerceOrderItemId) {
+		return getService()
+				   .fetchCommerceSubscriptionEntries(cpInstanceUuid,
+			cProductId, commerceOrderItemId);
+	}
+
 	public static com.liferay.commerce.model.CommerceSubscriptionEntry fetchCommerceSubscriptionEntry(
 		long commerceSubscriptionEntryId) {
 		return getService()
@@ -350,6 +357,13 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry incrementCommerceSubscriptionEntryCycle(
+		long commerceSubscriptionEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .incrementCommerceSubscriptionEntryCycle(commerceSubscriptionEntryId);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(

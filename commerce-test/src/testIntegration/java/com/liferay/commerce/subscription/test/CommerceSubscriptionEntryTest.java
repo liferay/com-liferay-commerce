@@ -255,7 +255,7 @@ public class CommerceSubscriptionEntryTest {
 			CommerceSubscriptionEntry commerceSubscriptionEntry)
 		throws Exception {
 
-		_commerceSubscriptionEntryHelper.renewSubscriptionEntry(
+		_commerceSubscriptionEntryHelper.checkSubscriptionStatus(
 			commerceSubscriptionEntry);
 
 		return _commerceSubscriptionCycleEntryLocalService.

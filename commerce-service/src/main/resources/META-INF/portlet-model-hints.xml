@@ -270,19 +270,6 @@
 		</field>
 		<field name="active" type="boolean" />
 	</model>
-	<model name="com.liferay.commerce.model.CommerceSubscriptionCycleEntry">
-		<field name="uuid" type="String" />
-		<field name="commerceSubscriptionCycleEntryId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="commerceOrderItemId" type="long" />
-		<field name="commerceSubscriptionEntryId" type="long" />
-		<field name="renew" type="boolean" />
-	</model>
 	<model name="com.liferay.commerce.model.CommerceSubscriptionEntry">
 		<field name="uuid" type="String" />
 		<field name="commerceSubscriptionEntryId" type="long" />
@@ -304,6 +291,7 @@
 		<field name="subscriptionTypeSettings" type="String">
 			<hint-collection name="CLOB" />
 		</field>
+		<field name="currentCycle" type="long" />
 		<field name="maxSubscriptionCycles" type="long" />
 		<field name="subscriptionStatus" type="int" />
 		<field name="lastIterationDate" type="Date" />

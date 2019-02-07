@@ -64,10 +64,6 @@ public interface CommerceSubscriptionEntry
 
 	public com.liferay.commerce.product.model.CPInstance fetchCPInstance();
 
-	public java.util.List<CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries();
-
-	public int getCommerceSubscriptionCycleEntriesCount();
-
 	public long getCPDefinitionId();
 
 	public long getCPInstanceId();
