@@ -21,7 +21,7 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.service.jaxrs", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "2.0.0"
 	compileOnly project(":apps:commerce:commerce-api")
-	compileOnly project(":apps:commerce:commerce-openapi-core-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.openapi.core.api", version: "1.1.0"
 	compileOnly project(":apps:commerce:commerce-product-api")
 
 	runtime group: "com.liferay.commerce", name: "com.liferay.commerce.openapi.core.impl", version: "1.0.0"
