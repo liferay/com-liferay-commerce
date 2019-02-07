@@ -189,14 +189,15 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			CPDefinitionLocalServiceUtil.getDefaultImage(getCPDefinitionId());
 
-		long cpAttachmentFileEntryId = 0;
+		if (cpAttachmentFileEntry == null) {
+			CProduct cProduct = getCProduct();
 
-		if (cpAttachmentFileEntry != null) {
-			cpAttachmentFileEntryId =
-				cpAttachmentFileEntry.getCPAttachmentFileEntryId();
+			return CommerceMediaResolverUtil.getDefaultUrl(
+				cProduct.getGroupId());
 		}
 
-		return CommerceMediaResolverUtil.getUrl(cpAttachmentFileEntryId);
+		return CommerceMediaResolverUtil.getUrl(
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
 	@Override
@@ -204,15 +205,15 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			CPDefinitionLocalServiceUtil.getDefaultImage(getCPDefinitionId());
 
-		long cpAttachmentFileEntryId = 0;
+		if (cpAttachmentFileEntry == null) {
+			CProduct cProduct = getCProduct();
 
-		if (cpAttachmentFileEntry != null) {
-			cpAttachmentFileEntryId =
-				cpAttachmentFileEntry.getCPAttachmentFileEntryId();
+			return CommerceMediaResolverUtil.getDefaultUrl(
+				cProduct.getGroupId());
 		}
 
 		return CommerceMediaResolverUtil.getThumbnailUrl(
-			cpAttachmentFileEntryId);
+			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
 	@Override
