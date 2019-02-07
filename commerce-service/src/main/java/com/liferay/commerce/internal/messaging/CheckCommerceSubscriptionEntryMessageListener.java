@@ -82,7 +82,7 @@ public class CheckCommerceSubscriptionEntryMessageListener
 			_commerceSubscriptionEntryLocalService.
 				getCommerceSubscriptionEntriesToRenew();
 
-		_commerceSubscriptionEntryHelper.renewSubscriptionEntries(
+		_commerceSubscriptionEntryHelper.checkSubscriptionEntriesStatus(
 			commerceSubscriptionEntriesToRenew);
 	}
 
