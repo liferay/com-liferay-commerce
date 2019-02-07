@@ -77,6 +77,7 @@ public class CommerceSubscriptionEntryWrapper
 		attributes.put("subscriptionLength", getSubscriptionLength());
 		attributes.put("subscriptionType", getSubscriptionType());
 		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
+		attributes.put("currentCycle", getCurrentCycle());
 		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
 		attributes.put("subscriptionStatus", getSubscriptionStatus());
 		attributes.put("lastIterationDate", getLastIterationDate());
@@ -175,6 +176,12 @@ public class CommerceSubscriptionEntryWrapper
 			setSubscriptionTypeSettings(subscriptionTypeSettings);
 		}
 
+		Long currentCycle = (Long)attributes.get("currentCycle");
+
+		if (currentCycle != null) {
+			setCurrentCycle(currentCycle);
+		}
+
 		Long maxSubscriptionCycles = (Long)attributes.get(
 				"maxSubscriptionCycles");
 
@@ -245,16 +252,6 @@ public class CommerceSubscriptionEntryWrapper
 		return _commerceSubscriptionEntry.getCommerceOrderItemId();
 	}
 
-	@Override
-	public java.util.List<CommerceSubscriptionCycleEntry> getCommerceSubscriptionCycleEntries() {
-		return _commerceSubscriptionEntry.getCommerceSubscriptionCycleEntries();
-	}
-
-	@Override
-	public int getCommerceSubscriptionCycleEntriesCount() {
-		return _commerceSubscriptionEntry.getCommerceSubscriptionCycleEntriesCount();
-	}
-
 	/**
 	* Returns the commerce subscription entry ID of this commerce subscription entry.
 	*
@@ -313,6 +310,16 @@ public class CommerceSubscriptionEntryWrapper
 	@Override
 	public Date getCreateDate() {
 		return _commerceSubscriptionEntry.getCreateDate();
+	}
+
+	/**
+	* Returns the current cycle of this commerce subscription entry.
+	*
+	* @return the current cycle of this commerce subscription entry
+	*/
+	@Override
+	public long getCurrentCycle() {
+		return _commerceSubscriptionEntry.getCurrentCycle();
 	}
 
 	@Override
@@ -568,6 +575,16 @@ public class CommerceSubscriptionEntryWrapper
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceSubscriptionEntry.setCreateDate(createDate);
+	}
+
+	/**
+	* Sets the current cycle of this commerce subscription entry.
+	*
+	* @param currentCycle the current cycle of this commerce subscription entry
+	*/
+	@Override
+	public void setCurrentCycle(long currentCycle) {
+		_commerceSubscriptionEntry.setCurrentCycle(currentCycle);
 	}
 
 	@Override

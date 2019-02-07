@@ -199,6 +199,13 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceSubscriptionEntry fetchCommerceSubscriptionEntries(
+		String cpInstanceUuid, long cProductId, long commerceOrderItemId) {
+		return _commerceSubscriptionEntryLocalService.fetchCommerceSubscriptionEntries(cpInstanceUuid,
+			cProductId, commerceOrderItemId);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceSubscriptionEntry fetchCommerceSubscriptionEntry(
 		long commerceSubscriptionEntryId) {
 		return _commerceSubscriptionEntryLocalService.fetchCommerceSubscriptionEntry(commerceSubscriptionEntryId);
@@ -363,6 +370,13 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceSubscriptionEntryLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceSubscriptionEntry incrementCommerceSubscriptionEntryCycle(
+		long commerceSubscriptionEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceSubscriptionEntryLocalService.incrementCommerceSubscriptionEntryCycle(commerceSubscriptionEntryId);
 	}
 
 	@Override

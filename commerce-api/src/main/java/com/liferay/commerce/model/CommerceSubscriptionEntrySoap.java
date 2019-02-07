@@ -49,6 +49,7 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		soapModel.setSubscriptionLength(model.getSubscriptionLength());
 		soapModel.setSubscriptionType(model.getSubscriptionType());
 		soapModel.setSubscriptionTypeSettings(model.getSubscriptionTypeSettings());
+		soapModel.setCurrentCycle(model.getCurrentCycle());
 		soapModel.setMaxSubscriptionCycles(model.getMaxSubscriptionCycles());
 		soapModel.setSubscriptionStatus(model.getSubscriptionStatus());
 		soapModel.setLastIterationDate(model.getLastIterationDate());
@@ -221,6 +222,14 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 		_subscriptionTypeSettings = subscriptionTypeSettings;
 	}
 
+	public long getCurrentCycle() {
+		return _currentCycle;
+	}
+
+	public void setCurrentCycle(long currentCycle) {
+		_currentCycle = currentCycle;
+	}
+
 	public long getMaxSubscriptionCycles() {
 		return _maxSubscriptionCycles;
 	}
@@ -275,6 +284,7 @@ public class CommerceSubscriptionEntrySoap implements Serializable {
 	private int _subscriptionLength;
 	private String _subscriptionType;
 	private String _subscriptionTypeSettings;
+	private long _currentCycle;
 	private long _maxSubscriptionCycles;
 	private int _subscriptionStatus;
 	private Date _lastIterationDate;
