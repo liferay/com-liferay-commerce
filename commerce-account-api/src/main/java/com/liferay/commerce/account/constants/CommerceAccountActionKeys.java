@@ -22,9 +22,12 @@ public class CommerceAccountActionKeys {
 
 	public static final String ADD_ACCOUNT = "ADD_ACCOUNT";
 
-	public static final String MANAGE_ACCOUNTS = "MANAGE_ACCOUNTS";
-
 	public static final String MANAGE_ADDRESS = "MANAGE_ADDRESS";
+
+	public static final String MANAGE_ALL_ACCOUNTS = "MANAGE_ALL_ACCOUNTS";
+
+	public static final String MANAGE_AVAILABLE_ACCOUNTS =
+		"MANAGE_AVAILABLE_ACCOUNTS";
 
 	public static final String MANAGE_MEMBERS = "MANAGE_MEMBERS";
 

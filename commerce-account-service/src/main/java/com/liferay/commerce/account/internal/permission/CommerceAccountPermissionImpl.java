@@ -68,7 +68,10 @@ public class CommerceAccountPermissionImpl
 			CommerceAccount commerceAccount, String actionId)
 		throws PortalException {
 
-		if (_contains(permissionChecker, commerceAccount, actionId)) {
+		if (contains(
+				permissionChecker, commerceAccount.getCommerceAccountId(),
+				actionId)) {
+
 			return true;
 		}
 
@@ -81,16 +84,22 @@ public class CommerceAccountPermissionImpl
 			String actionId)
 		throws PortalException {
 
-		if (commerceAccountId > 0) {
-			CommerceAccount commerceAccount =
-				_commerceAccountLocalService.getCommerceAccount(
-					commerceAccountId);
+		if (PortalPermissionUtil.contains(
+				permissionChecker,
+				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
 
-			return contains(permissionChecker, commerceAccount, actionId);
+			return true;
 		}
 
-		return PortalPermissionUtil.contains(
-			permissionChecker, CommerceAccountActionKeys.MANAGE_ACCOUNTS);
+		CommerceAccount commerceAccount =
+			_commerceAccountLocalService.getCommerceAccount(
+				permissionChecker.getUserId(), commerceAccountId);
+
+		if (commerceAccount == null) {
+			return false;
+		}
+
+		return _contains(permissionChecker, commerceAccount, actionId);
 	}
 
 	@Override
@@ -123,12 +132,6 @@ public class CommerceAccountPermissionImpl
 			return true;
 		}
 
-		if (PortalPermissionUtil.contains(
-				permissionChecker, CommerceAccountActionKeys.MANAGE_ACCOUNTS)) {
-
-			return true;
-		}
-
 		if (actionId.equals(ActionKeys.UPDATE)) {
 			return _containsUpdatePermission(
 				commerceAccount, permissionChecker);
@@ -136,12 +139,41 @@ public class CommerceAccountPermissionImpl
 		else if (actionId.equals(ActionKeys.VIEW)) {
 			return _containsViewPermission(commerceAccount, permissionChecker);
 		}
+		else if (actionId.equals(
+					CommerceAccountActionKeys.MANAGE_ORGANIZATIONS)) {
+
+			return _containsManageOrganizationPermission(
+				commerceAccount, permissionChecker);
+		}
 		else {
+			if (PortalPermissionUtil.contains(
+					permissionChecker,
+					CommerceAccountActionKeys.MANAGE_AVAILABLE_ACCOUNTS)) {
+
+				return true;
+			}
+
 			return permissionChecker.hasPermission(
 				commerceAccount.getCommerceAccountGroupId(),
 				CommerceAccount.class.getName(),
 				commerceAccount.getCommerceAccountId(), actionId);
 		}
+	}
+
+	private boolean _containsManageOrganizationPermission(
+			CommerceAccount commerceAccount,
+			PermissionChecker permissionChecker)
+		throws PortalException {
+
+		if (commerceAccount.isPersonalAccount()) {
+			return false;
+		}
+
+		return permissionChecker.hasPermission(
+			commerceAccount.getCommerceAccountGroupId(),
+			CommerceAccount.class.getName(),
+			commerceAccount.getCommerceAccountId(),
+			CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
 	}
 
 	private boolean _containsUpdatePermission(
@@ -151,6 +183,13 @@ public class CommerceAccountPermissionImpl
 
 		if (commerceAccount.isPersonalAccount()) {
 			return _hasOwnerPermission(commerceAccount, permissionChecker);
+		}
+
+		if (PortalPermissionUtil.contains(
+				permissionChecker,
+				CommerceAccountActionKeys.MANAGE_AVAILABLE_ACCOUNTS)) {
+
+			return true;
 		}
 
 		return permissionChecker.hasPermission(
@@ -166,6 +205,13 @@ public class CommerceAccountPermissionImpl
 
 		if (commerceAccount.isPersonalAccount()) {
 			return _hasOwnerPermission(commerceAccount, permissionChecker);
+		}
+
+		if (PortalPermissionUtil.contains(
+				permissionChecker,
+				CommerceAccountActionKeys.MANAGE_AVAILABLE_ACCOUNTS)) {
+
+			return true;
 		}
 
 		return permissionChecker.hasPermission(

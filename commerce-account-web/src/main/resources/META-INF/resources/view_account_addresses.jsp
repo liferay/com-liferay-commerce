@@ -30,6 +30,7 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 
 <commerce-ui:table
 	dataProviderKey="<%= CommerceAccountAddressClayTable.NAME %>"
+	filter="<%= commerceAccountAddressesDisplayContext.getAccountFilter() %>"
 	itemPerPage="<%= 5 %>"
 	namespace="<%= renderResponse.getNamespace() %>"
 	pageNumber="1"

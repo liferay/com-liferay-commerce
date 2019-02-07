@@ -14,11 +14,12 @@
 				Users_Orgs ON
 					Users_Orgs.userId = User_.userId
 			LEFT JOIN
-				Organization_ ON
-					Organization_.organizationId = Users_Orgs.organizationId
+				Organization_ Org1 ON
+					Org1.organizationId = Users_Orgs.organizationId
 			LEFT JOIN
 				Organization_  Org2 ON
-					Org2.treePath LIKE CONCAT(Organization_.treePath, '%')
+					(Org1.treePath IS NOT NULL) AND
+					(Org2.treePath LIKE CONCAT(Org1.treePath, '%'))
 			LEFT JOIN
 				CommerceAccountOrganizationRel ON
 					CommerceAccountOrganizationRel.organizationId = Org2.organizationId
@@ -46,11 +47,12 @@
 				Users_Orgs ON
 					Users_Orgs.userId = User_.userId
 			LEFT JOIN
-				Organization_ ON
-					Organization_.organizationId = Users_Orgs.organizationId
+				Organization_  Org1 ON
+					Org1.organizationId = Users_Orgs.organizationId
 			LEFT JOIN
 				Organization_  Org2 ON
-					Org2.treePath LIKE CONCAT(Organization_.treePath, '%')
+					(Org1.organizationId IS NOT NULL) AND
+					(Org2.treePath LIKE CONCAT(Org1.treePath, '%'))
 			LEFT JOIN
 				CommerceAccountOrganizationRel ON
 					CommerceAccountOrganizationRel.organizationId = Org2.organizationId
@@ -78,11 +80,12 @@
 				Users_Orgs ON
 					Users_Orgs.userId = User_.userId
 			LEFT JOIN
-				Organization_ ON
-					Organization_.organizationId = Users_Orgs.organizationId
+				Organization_ Org1 ON
+					Org1.organizationId = Users_Orgs.organizationId
 			LEFT JOIN
 				Organization_  Org2 ON
-					Org2.treePath LIKE CONCAT(Organization_.treePath, '%')
+					(Org1.treePath IS NOT NULL) AND
+					(Org2.treePath LIKE CONCAT(Org1.treePath, '%'))
 			LEFT JOIN
 				CommerceAccountOrganizationRel ON
 					CommerceAccountOrganizationRel.organizationId = Org2.organizationId
