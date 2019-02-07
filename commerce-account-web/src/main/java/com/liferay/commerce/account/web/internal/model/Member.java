@@ -21,13 +21,14 @@ public class Member {
 
 	public Member(
 		long memberId, long accountId, String name, String email,
-		String[] roles) {
+		String[] roles, String href) {
 
 		_memberId = memberId;
 		_accountId = accountId;
 		_name = name;
 		_email = email;
 		_roles = roles;
+		_href = href;
 	}
 
 	public long getAccountId() {
@@ -36,6 +37,10 @@ public class Member {
 
 	public String getEmail() {
 		return _email;
+	}
+
+	public String getHref() {
+		return _href;
 	}
 
 	public long getMemberId() {
@@ -52,6 +57,7 @@ public class Member {
 
 	private final long _accountId;
 	private final String _email;
+	private final String _href;
 	private final long _memberId;
 	private final String _name;
 	private final String[] _roles;
