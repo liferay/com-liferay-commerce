@@ -104,6 +104,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	public static final String KEY = "paypal";
 
 	public PayPalCommercePaymentMethod() {
+		_dateFormat = "yyyy-MM-dd'T'hh:mm:ss'Z'";
+
 		_payPalDecimalFormat = new DecimalFormat("#,###.##");
 
 		DecimalFormatSymbols decimalFormatSymbols =
@@ -113,6 +115,38 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		decimalFormatSymbols.setGroupingSeparator(CharPool.COMMA);
 
 		_payPalDecimalFormat.setDecimalFormatSymbols(decimalFormatSymbols);
+	}
+
+	@Override
+	public boolean activateRecurringPayment(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		Agreement agreement = new Agreement();
+
+		agreement.setId(commercePaymentRequest.getTransactionId());
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
+
+		APIContext apiContext = _getAPIContext(commerceOrder);
+
+		AgreementStateDescriptor agreementStateDescriptor =
+			new AgreementStateDescriptor();
+
+		agreementStateDescriptor.setNote("Reactivate the agreement");
+
+		agreement.reActivate(apiContext, agreementStateDescriptor);
+
+		Agreement updatedAgreement = Agreement.get(
+			apiContext, agreement.getId());
+
+		if (Objects.equals("Active", updatedAgreement.getState())) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -131,6 +165,38 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			null, commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderPaymentConstants.STATUS_CANCELLED, false, null, null,
 			Collections.emptyList(), true);
+	}
+
+	@Override
+	public boolean cancelRecurringPayment(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		Agreement agreement = new Agreement();
+
+		agreement.setId(commercePaymentRequest.getTransactionId());
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
+
+		APIContext apiContext = _getAPIContext(commerceOrder);
+
+		AgreementStateDescriptor agreementStateDescriptor =
+			new AgreementStateDescriptor();
+
+		agreementStateDescriptor.setNote("Cancel the agreement");
+
+		agreement.cancel(apiContext, agreementStateDescriptor);
+
+		Agreement updatedAgreement = Agreement.get(
+			apiContext, agreement.getId());
+
+		if (Objects.equals("Cancelled", updatedAgreement.getState())) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -296,6 +362,13 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		return PayPalCommercePaymentMethodConstants.SERVLET_PATH;
 	}
 
+	/**
+	 * @param commercePaymentRequest
+	 * @return
+	 * @throws Exception
+	 * @deprecated As of Mueller (7.2.x), this method will be removed
+	 */
+	@Deprecated
 	@Override
 	public CommerceSubscriptionStatusResult getSubscriptionPaymentDetails(
 			CommercePaymentRequest commercePaymentRequest)
@@ -321,6 +394,29 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		return new CommerceSubscriptionStatusResult(
 			failedPaymentCount, cyclesRemaining, cyclesCompleted);
+	}
+
+	@Override
+	public boolean getSubscriptionValidity(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(
+				commercePaymentRequest.getCommerceOrderId());
+
+		APIContext apiContext = _getAPIContext(commerceOrder);
+
+		Agreement agreement = Agreement.get(
+			apiContext, commercePaymentRequest.getTransactionId());
+
+		String agreementState = agreement.getState();
+
+		if (Objects.equals("Active", agreementState)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -556,7 +652,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	}
 
 	@Override
-	public boolean suspendSubscription(
+	public boolean suspendRecurringPayment(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
@@ -573,7 +669,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		AgreementStateDescriptor agreementStateDescriptor =
 			new AgreementStateDescriptor();
 
-		agreementStateDescriptor.setNote("Suspending the agreement");
+		agreementStateDescriptor.setNote("Suspend the agreement");
 
 		agreement.suspend(apiContext, agreementStateDescriptor);
 
@@ -632,9 +728,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		agreement.setName("Base Agreement");
 		agreement.setDescription("Basic Agreement");
 
-		String pattern = "yyyy-MM-dd'T'hh:mm:ss'Z'";
-
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(_dateFormat);
 
 		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 
@@ -695,11 +789,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		throws PortalException {
 
 		PayPalGroupServiceConfiguration payPalGroupServiceConfiguration =
-			_configurationProvider.getConfiguration(
-				PayPalGroupServiceConfiguration.class,
-				new GroupServiceSettingsLocator(
-					commerceOrder.getGroupId(),
-					PayPalCommercePaymentMethodConstants.SERVICE_NAME));
+			_getPayPalGroupServiceConfiguration(commerceOrder);
 
 		return new APIContext(
 			payPalGroupServiceConfiguration.clientId(),
@@ -798,15 +888,21 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		return payment.create(apiContext);
 	}
 
+	private PayPalGroupServiceConfiguration _getPayPalGroupServiceConfiguration(
+			CommerceOrder commerceOrder)
+		throws PortalException {
+
+		return _configurationProvider.getConfiguration(
+			PayPalGroupServiceConfiguration.class,
+			new GroupServiceSettingsLocator(
+				commerceOrder.getGroupId(),
+				PayPalCommercePaymentMethodConstants.SERVICE_NAME));
+	}
+
 	private Plan _getPlan(
 			CommercePaymentRequest commercePaymentRequest,
 			CommerceOrder commerceOrder, APIContext apiContext)
 		throws PayPalRESTException, PortalException {
-
-		String name = "Payment Plan";
-		String description = "Plan with regular payment definitions";
-
-		Plan plan = new Plan(name, description, "fixed");
 
 		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
 
@@ -816,47 +912,56 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		List<PaymentDefinition> paymentDefinitions = new ArrayList<>(
 			commerceOrderItems.size());
 
-		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			CPInstance cpInstance = commerceOrderItem.getCPInstance();
+		CommerceOrderItem commerceOrderItem = commerceOrderItems.get(0);
 
-			CPSubscriptionInfo cpSubscriptionInfo =
-				cpInstance.getCPSubscriptionInfo();
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
-			String subscriptionType = cpSubscriptionInfo.getSubscriptionType();
+		CPSubscriptionInfo cpSubscriptionInfo =
+			cpInstance.getCPSubscriptionInfo();
 
-			if (subscriptionType.equals(
-					CPConstants.MONTHLY_SUBSCRIPTION_TYPE)) {
+		String subscriptionType = cpSubscriptionInfo.getSubscriptionType();
 
-				subscriptionType = "month";
-			}
-
-			if (subscriptionType.equals(CPConstants.DAILY_SUBSCRIPTION_TYPE)) {
-				subscriptionType = "day";
-			}
-
-			if (subscriptionType.equals(CPConstants.WEEKLY_SUBSCRIPTION_TYPE)) {
-				subscriptionType = "week";
-			}
-
-			if (subscriptionType.equals(CPConstants.YEARLY_SUBSCRIPTION_TYPE)) {
-				subscriptionType = "year";
-			}
-
-			BigDecimal finalPrice = commerceOrderItem.getFinalPrice();
-
-			Currency amount = new Currency(
-				commerceCurrency.getCode(),
-				_payPalDecimalFormat.format(finalPrice));
-
-			PaymentDefinition paymentDefinition = new PaymentDefinition(
-				"Payment Definition", "REGULAR",
-				String.valueOf(cpSubscriptionInfo.getSubscriptionLength()),
-				subscriptionType,
-				String.valueOf(cpSubscriptionInfo.getMaxSubscriptionCycles()),
-				amount);
-
-			paymentDefinitions.add(paymentDefinition);
+		if (subscriptionType.equals(CPConstants.MONTHLY_SUBSCRIPTION_TYPE)) {
+			subscriptionType = "month";
 		}
+
+		if (subscriptionType.equals(CPConstants.DAILY_SUBSCRIPTION_TYPE)) {
+			subscriptionType = "day";
+		}
+
+		if (subscriptionType.equals(CPConstants.WEEKLY_SUBSCRIPTION_TYPE)) {
+			subscriptionType = "week";
+		}
+
+		if (subscriptionType.equals(CPConstants.YEARLY_SUBSCRIPTION_TYPE)) {
+			subscriptionType = "year";
+		}
+
+		BigDecimal finalPrice = commerceOrderItem.getFinalPrice();
+
+		Currency amount = new Currency(
+			commerceCurrency.getCode(),
+			_payPalDecimalFormat.format(finalPrice));
+
+		PaymentDefinition paymentDefinition = new PaymentDefinition(
+			"Payment Definition", "REGULAR",
+			String.valueOf(cpSubscriptionInfo.getSubscriptionLength()),
+			subscriptionType,
+			String.valueOf(cpSubscriptionInfo.getMaxSubscriptionCycles()),
+			amount);
+
+		paymentDefinitions.add(paymentDefinition);
+
+		String name = "Payment Plan";
+		String description = "Plan with regular payment definitions";
+
+		String type = "FIXED";
+
+		if (cpSubscriptionInfo.getMaxSubscriptionCycles() == 0) {
+			type = "INFINITE";
+		}
+
+		Plan plan = new Plan(name, description, type);
 
 		plan.setPaymentDefinitions(paymentDefinitions);
 
@@ -865,8 +970,22 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		merchantPreferences.setAutoBillAmount("YES");
 		merchantPreferences.setCancelUrl(commercePaymentRequest.getCancelUrl());
 		merchantPreferences.setInitialFailAmountAction("CONTINUE");
-		merchantPreferences.setMaxFailAttempts("0");
 		merchantPreferences.setReturnUrl(commercePaymentRequest.getReturnUrl());
+
+		PayPalGroupServiceConfiguration payPalGroupServiceConfiguration =
+			_getPayPalGroupServiceConfiguration(commerceOrder);
+
+		String attemptsMaxCount =
+			payPalGroupServiceConfiguration.paymentAttemptsMaxCount();
+
+		try {
+			Integer.parseInt(attemptsMaxCount);
+		}
+		catch (NumberFormatException nfe) {
+			attemptsMaxCount = "0";
+		}
+
+		merchantPreferences.setMaxFailAttempts(attemptsMaxCount);
 
 		plan.setMerchantPreferences(merchantPreferences);
 
@@ -939,6 +1058,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;
+
+	private final String _dateFormat;
 
 	@Reference
 	private Http _http;
