@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceAccountAddressesDisplayContext commerceAccountAddressesDisplayContext = (CommerceAccountAddressesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceAccount commerceAccount = commerceAccountAddressesDisplayContext.getCurrentCommerceAccount();
+CommerceAccount commerceAccount = commerceAccountDisplayContext.getCurrentCommerceAccount();
 
 PortletURL portletURL = currentURLObj;
 
@@ -30,15 +30,15 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 
 <commerce-ui:table
 	dataProviderKey="<%= CommerceAccountAddressClayTable.NAME %>"
-	filter="<%= commerceAccountAddressesDisplayContext.getAccountFilter() %>"
+	filter="<%= commerceAccountDisplayContext.getAccountFilter() %>"
 	itemPerPage="<%= 5 %>"
 	namespace="<%= renderResponse.getNamespace() %>"
 	pageNumber="1"
-	portletURL="<%= commerceAccountAddressesDisplayContext.getPortletURL() %>"
+	portletURL="<%= commerceAccountDisplayContext.getPortletURL() %>"
 	tableName="<%= CommerceAccountAddressClayTable.NAME %>"
 />
 
-<c:if test="<%= commerceAccountAddressesDisplayContext.hasManageCommerceAddressPermission() %>">
+<c:if test="<%= commerceAccountDisplayContext.hasManageCommerceAccountPermissions() %>">
 	<div class="minium-frame__cta is-visible">
 		<aui:button cssClass="js-add-address minium-button minium-button--big" onClick='<%= renderResponse.getNamespace() + "openAddAddressModal();" %>' value="add-address" />
 	</div>
