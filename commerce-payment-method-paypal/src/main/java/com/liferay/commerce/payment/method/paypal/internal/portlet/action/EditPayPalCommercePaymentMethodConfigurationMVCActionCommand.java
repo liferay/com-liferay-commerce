@@ -87,6 +87,11 @@ public class EditPayPalCommercePaymentMethodConfigurationMVCActionCommand
 
 		modifiableSettings.setValue("mode", mode);
 
+		String paymentAttempts = ParamUtil.getString(
+			actionRequest, "settings--paymentAttempts--");
+
+		modifiableSettings.setValue("paymentAttemptsMaxCount", paymentAttempts);
+
 		modifiableSettings.store();
 	}
 

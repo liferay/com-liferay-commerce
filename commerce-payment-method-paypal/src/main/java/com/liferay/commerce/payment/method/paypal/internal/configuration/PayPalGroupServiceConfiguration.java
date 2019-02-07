@@ -40,4 +40,7 @@ public interface PayPalGroupServiceConfiguration {
 	@Meta.AD(name = "client-secret", required = false)
 	public String clientSecret();
 
+	@Meta.AD(deflt = "0", name = "payment-attempts-max-count", required = false)
+	public String paymentAttemptsMaxCount();
+
 }
