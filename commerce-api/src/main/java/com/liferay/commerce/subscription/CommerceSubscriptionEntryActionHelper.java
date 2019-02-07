@@ -16,8 +16,6 @@ package com.liferay.commerce.subscription;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.portal.kernel.exception.PortalException;
-
 /**
  * @author Alessio Antonio Rendina
  */
@@ -26,14 +24,14 @@ public interface CommerceSubscriptionEntryActionHelper {
 
 	public void activateCommerceSubscriptionEntry(
 			long commerceSubscriptionEntryId)
-		throws PortalException;
+		throws Exception;
 
 	public void cancelCommerceSubscriptionEntry(
 			long commerceSubscriptionEntryId)
-		throws PortalException;
+		throws Exception;
 
 	public void suspendCommerceSubscriptionEntry(
 			long commerceSubscriptionEntryId)
-		throws PortalException;
+		throws Exception;
 
 }

@@ -122,18 +122,8 @@ if (maxSubscriptionCycles > 0) {
 				</div>
 			</div>
 
-			<aui:select name="subscriptionStatus">
-
-				<%
-				for (int curSubscriptionStatus : CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUSES) {
-				%>
-
-					<aui:option label="<%= CommerceSubscriptionEntryConstants.getSubscriptionStatusLabel(curSubscriptionStatus) %>" selected="<%= subscriptionStatus == curSubscriptionStatus %>" value="<%= curSubscriptionStatus %>" />
-
-				<%
-				}
-				%>
-
+			<aui:select disabled="<%= true %>" name="subscriptionStatus">
+				<aui:option label="<%= CommerceSubscriptionEntryConstants.getSubscriptionStatusLabel(subscriptionStatus) %>" selected="<%= true %>" value="" />
 			</aui:select>
 
 			<aui:input name="startDate" />

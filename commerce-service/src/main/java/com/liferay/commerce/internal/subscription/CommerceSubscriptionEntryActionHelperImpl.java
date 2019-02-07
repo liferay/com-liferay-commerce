@@ -17,9 +17,9 @@ package com.liferay.commerce.internal.subscription;
 import com.liferay.commerce.configuration.CommerceSubscriptionConfiguration;
 import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.payment.engine.CommerceSubscriptionEngine;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryActionHelper;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 
 import org.osgi.service.component.annotations.Component;
@@ -37,7 +37,7 @@ public class CommerceSubscriptionEntryActionHelperImpl
 	@Override
 	public void activateCommerceSubscriptionEntry(
 			long commerceSubscriptionEntryId)
-		throws PortalException {
+		throws Exception {
 
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
 			_commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntry(
@@ -49,15 +49,14 @@ public class CommerceSubscriptionEntryActionHelperImpl
 			return;
 		}
 
-		_commerceSubscriptionEntryLocalService.updateSubscriptionStatus(
-			commerceSubscriptionEntryId,
-			CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE);
+		_commerceSubscriptionEngine.activateRecurringPayment(
+			commerceSubscriptionEntryId);
 	}
 
 	@Override
 	public void cancelCommerceSubscriptionEntry(
 			long commerceSubscriptionEntryId)
-		throws PortalException {
+		throws Exception {
 
 		CommerceSubscriptionConfiguration commerceSubscriptionConfiguration =
 			_configurationProvider.getSystemConfiguration(
@@ -66,29 +65,28 @@ public class CommerceSubscriptionEntryActionHelperImpl
 		if (commerceSubscriptionConfiguration.
 				subscriptionCancellationAllowed()) {
 
-			_commerceSubscriptionEntryLocalService.updateSubscriptionStatus(
-				commerceSubscriptionEntryId,
-				CommerceSubscriptionEntryConstants.
-					SUBSCRIPTION_STATUS_CANCELLED);
+			_commerceSubscriptionEngine.cancelRecurringPayment(
+				commerceSubscriptionEntryId);
 		}
 	}
 
 	@Override
 	public void suspendCommerceSubscriptionEntry(
 			long commerceSubscriptionEntryId)
-		throws PortalException {
+		throws Exception {
 
 		CommerceSubscriptionConfiguration commerceSubscriptionConfiguration =
 			_configurationProvider.getSystemConfiguration(
 				CommerceSubscriptionConfiguration.class);
 
 		if (commerceSubscriptionConfiguration.subscriptionSuspensionAllowed()) {
-			_commerceSubscriptionEntryLocalService.updateSubscriptionStatus(
-				commerceSubscriptionEntryId,
-				CommerceSubscriptionEntryConstants.
-					SUBSCRIPTION_STATUS_SUSPENDED);
+			_commerceSubscriptionEngine.suspendRecurringPayment(
+				commerceSubscriptionEntryId);
 		}
 	}
+
+	@Reference
+	private CommerceSubscriptionEngine _commerceSubscriptionEngine;
 
 	@Reference
 	private CommerceSubscriptionEntryLocalService
