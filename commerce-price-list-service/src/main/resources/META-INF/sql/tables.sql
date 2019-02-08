@@ -55,6 +55,21 @@ create table CommercePriceList (
 	statusDate DATE null
 );
 
+create table CommercePriceListAccountRel (
+	uuid_ VARCHAR(75) null,
+	commercePriceListAccountRelId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	commerceAccountId LONG,
+	commercePriceListId LONG,
+	order_ INTEGER,
+	lastPublishDate DATE null
+);
+
 create table CommerceTierPriceEntry (
 	uuid_ VARCHAR(75) null,
 	externalReferenceCode VARCHAR(75) null,
