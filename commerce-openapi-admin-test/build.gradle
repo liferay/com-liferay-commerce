@@ -5,13 +5,13 @@ copyLibs {
 dependencies {
 	compileOnly group: "io.rest-assured", name: "rest-assured", version: "3.3.0"
 	compileOnly group: "javax.ws.rs", name: "javax.ws.rs-api", version: "2.1.1"
+	compileOnly group: "org.apache.servicemix.bundles", name: "org.apache.servicemix.bundles.hamcrest", version: "1.3_1"
 
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.10"
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.external.reference.api", version: "1.0.0"
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.petra.string", version: "2.0.0"
 	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.5.0"
 	testIntegrationCompile group: "junit", name: "junit", version: "4.12"
-	testIntegrationCompile group: "org.apache.servicemix.bundles", name: "org.apache.servicemix.bundles.hamcrest", version: "1.3_1"
 	testIntegrationCompile project(":apps:commerce:commerce-api")
 	testIntegrationCompile project(":apps:commerce:commerce-currency-api")
 	testIntegrationCompile project(":apps:commerce:commerce-product-api")
