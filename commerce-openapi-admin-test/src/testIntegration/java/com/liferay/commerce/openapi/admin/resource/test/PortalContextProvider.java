@@ -71,6 +71,10 @@ public abstract class PortalContextProvider {
 		return getPortalURL().concat(_ROOT_END_POINT_SUFFIX);
 	}
 
+	protected static final String PASSWORD = "test";
+
+	protected static final String USER = "test@liferay.com";
+
 	@Inject
 	protected static CompanyLocalService companyLocalService;
 
