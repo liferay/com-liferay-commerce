@@ -14,17 +14,24 @@
 
 package com.liferay.commerce.openapi.admin.resource.test;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.openapi.admin.resource.test.utils.CommerceTestSiteActivator;
+import com.liferay.petra.string.StringBundler;
+import com.liferay.portal.kernel.json.JSONFactory;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
+import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
-import org.junit.Assert;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -52,62 +59,55 @@ public class PriceListResourceTest extends PortalContextProvider {
 	}
 
 	@Test
-	public void testAddCollectionItem() {
-		Assert.assertTrue(true);
+	public void testAddResourceItem() {
+		JSONObject jsonObject = _jsonFactory.createJSONObject();
+
+		jsonObject.put("active", true);
+		jsonObject.put("currency", "USD");
+		jsonObject.put("name", RandomTestUtil.randomString());
+		jsonObject.put("neverExpire", true);
+		jsonObject.put("priority", 0);
+
+		RestAssured.given(
+		).request(
+		).auth(
+		).preemptive(
+		).basic(
+			USER, PASSWORD
+		).accept(
+			ContentType.JSON
+		).contentType(
+			ContentType.JSON
+		).body(
+			jsonObject.toString()
+		).queryParam(
+			"groupId", _group.getGroupId()
+		).when(
+		).post(
+			_getPriceListResourceURL()
+		).then(
+		).assertThat(
+		).body(
+			"name", equalTo(jsonObject.getString("name"))
+		);
 	}
 
-	@Test
-	public void testCollectionPostOperationPresent() {
-		Assert.assertThat("Something test here", notNullValue());
+	private String _getPriceListResourceURL() {
+		StringBundler sb = new StringBundler(3);
+
+		sb.append(getRootEndpointURL());
+		sb.append(_API_VERSION);
+		sb.append("priceList");
+
+		return sb.toString();
 	}
 
-	/*@Ignore
-	@Test
-	public void testDeleteCollectionItem() {
-		ApioResourceCollection commercePriceListApioResourceCollection =
-			getSiteRelatedApioResourceCollection(
-				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
-
-		int numberOfItems1 =
-			commercePriceListApioResourceCollection.getNumberOfItems();
-
-		String priceListId = _addPriceList(RandomTestUtil.randomString());
-
-		commercePriceListApioResourceCollection =
-			getSiteRelatedApioResourceCollection(
-				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
-
-		int numberOfItems2 =
-			commercePriceListApioResourceCollection.getNumberOfItems();
-
-		Assert.assertThat(numberOfItems1 + 1, equalTo(numberOfItems2));
-
-		try (RESTClient restClient = new RESTClient()) {
-			restClient.executeDeleteRequest(priceListId);
-		}
-
-		commercePriceListApioResourceCollection =
-			getSiteRelatedApioResourceCollection(
-				COMMERCE_PRICE_LIST_RESOURCE_NAME, _group.getDescriptiveName());
-
-		int numberOfItems3 =
-			commercePriceListApioResourceCollection.getNumberOfItems();
-
-		Assert.assertThat(numberOfItems1, equalTo(numberOfItems3));
-	}
-
-	private static final Map<String, String> _propertiesMap =
-		new HashMap<String, String>() {
-			{
-				put("name", RandomTestUtil.randomString());
-				put("active", Boolean.TRUE.toString());
-				put("currency", "USD");
-				put("neverExpire", Boolean.TRUE.toString());
-				put("priority", "0");
-			}
-		};*/
+	private static final String _API_VERSION = "v1.0/";
 
 	@DeleteAfterTestRun
 	private Group _group;
+
+	@Inject
+	private JSONFactory _jsonFactory;
 
 }
