@@ -97,7 +97,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		}
 
 		_bundleName = properties.getProperty("osgi.module.bundle.name");
-		_bundleSynbolicName = properties.getProperty(
+		_bundleSymbolicName = properties.getProperty(
 			"osgi.module.bundle.symbolic.name");
 		_bundleVersion = properties.getProperty("osgi.module.bundle.version");
 		_modelPackagePath = properties.getProperty("osgi.module.model.package");
@@ -245,7 +245,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 		String bndTpl = getTemplate(_TEMPLATE_FILE_BND);
 
 		bndTpl = bndTpl.replace("${BUNDLE_NAME}", _bundleName);
-		bndTpl = bndTpl.replace("${BUNDLE_SYMBOLIC_NAME}", _bundleSynbolicName);
+		bndTpl = bndTpl.replace("${BUNDLE_SYMBOLIC_NAME}", _bundleSymbolicName);
 		bndTpl = bndTpl.replace("${BUNDLE_VERSION}", _bundleVersion);
 
 		writeSource(bndTpl, bndSourcePath);
@@ -293,7 +293,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 
 		ResourceGenerator resourceGenerator = new ResourceGenerator(
 			_applicationName, _author,
-			_bundleSynbolicName + ".internal.context", _moduleOutputPath,
+			_bundleSymbolicName + ".internal.context", _moduleOutputPath,
 			_modelPackagePath, overwriteImplementation,
 			properties.getProperty("osgi.module.resource.interface.package"),
 			properties.getProperty("osgi.module.resource.package"), openApi);
@@ -316,7 +316,7 @@ public class OSGiRESTModuleGenerator extends BaseSourceGenerator {
 	private final String _author;
 	private final boolean _basicSecurityAllowed;
 	private final String _bundleName;
-	private final String _bundleSynbolicName;
+	private final String _bundleSymbolicName;
 	private final String _bundleVersion;
 	private final boolean _guestsAllowed;
 	private final JsonMessageBodyGenerator _jsonMessageBodyGenerator;
