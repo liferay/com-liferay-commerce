@@ -28,6 +28,8 @@ import io.restassured.http.ContentType;
 
 import java.io.IOException;
 
+import javax.ws.rs.core.Response;
+
 import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -67,6 +69,8 @@ public class BasicEndToEndTest extends PortalContextProvider {
 		).get(
 			webSiteResourceURLSB.toString()
 		).then(
+		).statusCode(
+			Response.Status.OK.getStatusCode()
 		).assertThat(
 		).extract(
 		).jsonPath(
