@@ -17,6 +17,11 @@ create index IX_863045BB on CommercePriceList (parentCommercePriceListId);
 create index IX_FCE28706 on CommercePriceList (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_554D1708 on CommercePriceList (uuid_[$COLUMN_LENGTH:75$], groupId);
 
+create unique index IX_3DEE5A98 on CommercePriceListAccountRel (commerceAccountId, commercePriceListId);
+create index IX_7279F379 on CommercePriceListAccountRel (commercePriceListId);
+create index IX_D598A152 on CommercePriceListAccountRel (uuid_[$COLUMN_LENGTH:75$], companyId);
+create unique index IX_E11D5454 on CommercePriceListAccountRel (uuid_[$COLUMN_LENGTH:75$], groupId);
+
 create unique index IX_A622C8AE on CommerceTierPriceEntry (commercePriceEntryId, minQuantity);
 create index IX_95D59361 on CommerceTierPriceEntry (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_D78EDFDE on CommerceTierPriceEntry (groupId);

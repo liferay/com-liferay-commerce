@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalService;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceEntryPersistence;
+import com.liferay.commerce.price.list.service.persistence.CommercePriceListAccountRelPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListFinder;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListUserSegmentEntryRelPersistence;
@@ -561,6 +562,44 @@ public abstract class CommerceTierPriceEntryLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the commerce price list account rel local service.
+	 *
+	 * @return the commerce price list account rel local service
+	 */
+	public com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService getCommercePriceListAccountRelLocalService() {
+		return commercePriceListAccountRelLocalService;
+	}
+
+	/**
+	 * Sets the commerce price list account rel local service.
+	 *
+	 * @param commercePriceListAccountRelLocalService the commerce price list account rel local service
+	 */
+	public void setCommercePriceListAccountRelLocalService(
+		com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService commercePriceListAccountRelLocalService) {
+		this.commercePriceListAccountRelLocalService = commercePriceListAccountRelLocalService;
+	}
+
+	/**
+	 * Returns the commerce price list account rel persistence.
+	 *
+	 * @return the commerce price list account rel persistence
+	 */
+	public CommercePriceListAccountRelPersistence getCommercePriceListAccountRelPersistence() {
+		return commercePriceListAccountRelPersistence;
+	}
+
+	/**
+	 * Sets the commerce price list account rel persistence.
+	 *
+	 * @param commercePriceListAccountRelPersistence the commerce price list account rel persistence
+	 */
+	public void setCommercePriceListAccountRelPersistence(
+		CommercePriceListAccountRelPersistence commercePriceListAccountRelPersistence) {
+		this.commercePriceListAccountRelPersistence = commercePriceListAccountRelPersistence;
+	}
+
+	/**
 	 * Returns the commerce price list user segment entry rel local service.
 	 *
 	 * @return the commerce price list user segment entry rel local service
@@ -849,6 +888,10 @@ public abstract class CommerceTierPriceEntryLocalServiceBaseImpl
 	protected CommercePriceListPersistence commercePriceListPersistence;
 	@BeanReference(type = CommercePriceListFinder.class)
 	protected CommercePriceListFinder commercePriceListFinder;
+	@BeanReference(type = com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService.class)
+	protected com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService commercePriceListAccountRelLocalService;
+	@BeanReference(type = CommercePriceListAccountRelPersistence.class)
+	protected CommercePriceListAccountRelPersistence commercePriceListAccountRelPersistence;
 	@BeanReference(type = com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalService.class)
 	protected com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalService commercePriceListUserSegmentEntryRelLocalService;
 	@BeanReference(type = CommercePriceListUserSegmentEntryRelPersistence.class)
