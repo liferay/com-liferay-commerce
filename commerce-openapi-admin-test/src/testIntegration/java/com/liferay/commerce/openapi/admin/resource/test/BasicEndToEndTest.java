@@ -60,7 +60,7 @@ public class BasicEndToEndTest extends PortalContextProvider {
 		).auth(
 		).preemptive(
 		).basic(
-			"test@liferay.com", "test"
+			USER, PASSWORD
 		).accept(
 			ContentType.JSON
 		).when(
