@@ -328,6 +328,10 @@ public class PriceListHelper {
 			expirationDateHour += 12;
 		}
 
+		if (commercePriceListId == null) {
+			commercePriceListId = 0L;
+		}
+
 		CommercePriceList commercePriceList =
 			_commercePriceListService.upsertCommercePriceList(
 				commercePriceListId, commerceCurrencyId, name, priority,
