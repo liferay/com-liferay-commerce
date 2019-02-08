@@ -17,6 +17,7 @@ package com.liferay.commerce.price.list.service.base;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceEntryPersistence;
+import com.liferay.commerce.price.list.service.persistence.CommercePriceListAccountRelPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListFinder;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListUserSegmentEntryRelPersistence;
@@ -190,6 +191,63 @@ public abstract class CommercePriceEntryServiceBaseImpl extends BaseServiceImpl
 	public void setCommercePriceListFinder(
 		CommercePriceListFinder commercePriceListFinder) {
 		this.commercePriceListFinder = commercePriceListFinder;
+	}
+
+	/**
+	 * Returns the commerce price list account rel local service.
+	 *
+	 * @return the commerce price list account rel local service
+	 */
+	public com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService getCommercePriceListAccountRelLocalService() {
+		return commercePriceListAccountRelLocalService;
+	}
+
+	/**
+	 * Sets the commerce price list account rel local service.
+	 *
+	 * @param commercePriceListAccountRelLocalService the commerce price list account rel local service
+	 */
+	public void setCommercePriceListAccountRelLocalService(
+		com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService commercePriceListAccountRelLocalService) {
+		this.commercePriceListAccountRelLocalService = commercePriceListAccountRelLocalService;
+	}
+
+	/**
+	 * Returns the commerce price list account rel remote service.
+	 *
+	 * @return the commerce price list account rel remote service
+	 */
+	public com.liferay.commerce.price.list.service.CommercePriceListAccountRelService getCommercePriceListAccountRelService() {
+		return commercePriceListAccountRelService;
+	}
+
+	/**
+	 * Sets the commerce price list account rel remote service.
+	 *
+	 * @param commercePriceListAccountRelService the commerce price list account rel remote service
+	 */
+	public void setCommercePriceListAccountRelService(
+		com.liferay.commerce.price.list.service.CommercePriceListAccountRelService commercePriceListAccountRelService) {
+		this.commercePriceListAccountRelService = commercePriceListAccountRelService;
+	}
+
+	/**
+	 * Returns the commerce price list account rel persistence.
+	 *
+	 * @return the commerce price list account rel persistence
+	 */
+	public CommercePriceListAccountRelPersistence getCommercePriceListAccountRelPersistence() {
+		return commercePriceListAccountRelPersistence;
+	}
+
+	/**
+	 * Sets the commerce price list account rel persistence.
+	 *
+	 * @param commercePriceListAccountRelPersistence the commerce price list account rel persistence
+	 */
+	public void setCommercePriceListAccountRelPersistence(
+		CommercePriceListAccountRelPersistence commercePriceListAccountRelPersistence) {
+		this.commercePriceListAccountRelPersistence = commercePriceListAccountRelPersistence;
 	}
 
 	/**
@@ -557,6 +615,12 @@ public abstract class CommercePriceEntryServiceBaseImpl extends BaseServiceImpl
 	protected CommercePriceListPersistence commercePriceListPersistence;
 	@BeanReference(type = CommercePriceListFinder.class)
 	protected CommercePriceListFinder commercePriceListFinder;
+	@BeanReference(type = com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService.class)
+	protected com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService commercePriceListAccountRelLocalService;
+	@BeanReference(type = com.liferay.commerce.price.list.service.CommercePriceListAccountRelService.class)
+	protected com.liferay.commerce.price.list.service.CommercePriceListAccountRelService commercePriceListAccountRelService;
+	@BeanReference(type = CommercePriceListAccountRelPersistence.class)
+	protected CommercePriceListAccountRelPersistence commercePriceListAccountRelPersistence;
 	@BeanReference(type = com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalService.class)
 	protected com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalService commercePriceListUserSegmentEntryRelLocalService;
 	@BeanReference(type = com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelService.class)
