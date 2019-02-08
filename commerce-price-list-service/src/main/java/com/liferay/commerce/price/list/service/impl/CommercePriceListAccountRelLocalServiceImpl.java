@@ -17,24 +17,8 @@ package com.liferay.commerce.price.list.service.impl;
 import com.liferay.commerce.price.list.service.base.CommercePriceListAccountRelLocalServiceBaseImpl;
 
 /**
- * The implementation of the commerce price list account rel local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
- * @author Alessio Antonio Rendina
- * @see CommercePriceListAccountRelLocalServiceBaseImpl
- * @see com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalServiceUtil
+ * @author Ethan Bustad
  */
 public class CommercePriceListAccountRelLocalServiceImpl
 	extends CommercePriceListAccountRelLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalServiceUtil} to access the commerce price list account rel local service.
-	 */
 }
