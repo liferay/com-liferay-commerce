@@ -56,31 +56,45 @@ public class ComponentImporter {
 	private OpenApiComponent _getOpenApiComponent(
 		String name, JsonNode schemaEntryJSONNode) {
 
+		OpenApiComponent.OpenApiComponentBuilder openApiComponentBuilder =
+			new OpenApiComponent.OpenApiComponentBuilder();
+
+		openApiComponentBuilder.name(name);
+
+		_setIfHas(
+			schemaEntryJSONNode, "$ref",
+			openApiComponentBuilder :: itemsReference);
+
 		String type = GetterUtil.getAsText(
 			"type", schemaEntryJSONNode, "object");
 
-		String itemsReference = GetterUtil.getAsTextOrNullIfMisses(
-			"$ref", schemaEntryJSONNode);
+		openApiComponentBuilder.type(type);
 
 		if ("array".equals(type)) {
 			JsonNode itemsJSONNode = schemaEntryJSONNode.get("items");
 
-			itemsReference = GetterUtil.getAsTextOrNullIfMisses(
-				"$ref", itemsJSONNode);
+			_setIfHas(
+				itemsJSONNode, "$ref",
+				openApiComponentBuilder :: itemsReference);
 		}
 		else if (schemaEntryJSONNode.has("additionalProperties")) {
 			JsonNode additionalPropertiesJSONNode = schemaEntryJSONNode.get(
 				"additionalProperties");
 
-			itemsReference = GetterUtil.getAsTextOrNullIfMisses(
-				"$ref", additionalPropertiesJSONNode);
+			_setIfHas(
+				additionalPropertiesJSONNode, "$ref",
+				openApiComponentBuilder :: itemsReference);
+			_setIfHas(
+				additionalPropertiesJSONNode, "type",
+				openApiComponentBuilder::itemsType);
 
-			type = "dictionary";
+			openApiComponentBuilder.type("dictionary");
 		}
 
-		return new OpenApiComponent(
-			name, _getPropertyDefinitions(schemaEntryJSONNode), type,
-			itemsReference);
+		openApiComponentBuilder.openApiProperties(
+			_getPropertyDefinitions(schemaEntryJSONNode));
+
+		return openApiComponentBuilder.build();
 	}
 
 	private List<OpenApiComponent> _getParameters(JsonNode componentsJSONNode) {
@@ -94,13 +108,17 @@ public class ComponentImporter {
 		while (fields.hasNext()) {
 			Map.Entry<String, JsonNode> parameterField = fields.next();
 
-			OpenApiComponent openApiComponent = new OpenApiComponent(
-				parameterField.getKey(),
+			OpenApiComponent.OpenApiComponentBuilder openApiComponentBuilder =
+				new OpenApiComponent.OpenApiComponentBuilder();
+
+			openApiComponentBuilder.name(parameterField.getKey());
+			openApiComponentBuilder.parameter(
 				ParameterImporter.fromJSONNode(parameterField.getValue()));
 
-			components.add(openApiComponent);
+			components.add(openApiComponentBuilder.build());
 
-			_logger.debug("Resolved parameter {}", openApiComponent);
+			_logger.debug(
+				"Resolved parameter {}", components.get(components.size() - 1));
 		}
 
 		return components;
@@ -146,17 +164,17 @@ public class ComponentImporter {
 					openApiPropertyBuilder :: example);
 				_setIfHas(
 					propertyJSONNode, "format",
-					openApiPropertyBuilder ::openApiFormatValue);
+					openApiPropertyBuilder :: openApiFormatValue);
 
 				if (propertyJSONNode.has("items")) {
 					JsonNode itemsJSONNode = propertyJSONNode.get("items");
 
 					_setIfHas(
 						itemsJSONNode, "type",
-						openApiPropertyBuilder ::itemOpenApiTypeValue);
+						openApiPropertyBuilder :: itemOpenApiTypeValue);
 					_setIfHas(
 						itemsJSONNode, "format",
-						openApiPropertyBuilder ::itemOpenApiFormatValue);
+						openApiPropertyBuilder :: itemOpenApiFormatValue);
 					_setIfHas(
 						itemsJSONNode, "$ref",
 						openApiPropertyBuilder :: componentReference);

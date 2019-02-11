@@ -50,9 +50,15 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		DTOGenerator dtoGenerator = new DTOGenerator(
 			"test", "test", "com.liferay.test", openApi);
 
+		OpenApiComponent.OpenApiComponentBuilder openApiComponentBuilder =
+			new OpenApiComponent.OpenApiComponentBuilder();
+
+		openApiComponentBuilder.name("Component");
+		openApiComponentBuilder.type("object");
+		openApiComponentBuilder.openApiProperties(openApiProperties);
+
 		String classSource = dtoGenerator.getClassSource(
-			new OpenApiComponent(
-				"Component", openApiProperties, "object", null));
+			openApiComponentBuilder.build());
 
 		Assert.assertTrue(
 			"package statement is present",
@@ -212,6 +218,12 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			}
 		}
 
+		List<OpenApiProperty> openApiProperties =
+			hostOpenApiComponent.getOpenApiProperties();
+
+		Assert.assertEquals(
+			"open api properties count", 4, openApiProperties.size());
+
 		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
 
 		openApi.setOpenApiComponents(components);
@@ -228,7 +240,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			containsOnlyOne(classSource, "package com.liferay.test.v1_0;"));
 
 		for (OpenApiProperty openApiProperty :
-				hostOpenApiComponent.getOpenApiProperties()) {
+			openApiProperties) {
 
 			if (!openApiProperty.isDictionary()) {
 				continue;
