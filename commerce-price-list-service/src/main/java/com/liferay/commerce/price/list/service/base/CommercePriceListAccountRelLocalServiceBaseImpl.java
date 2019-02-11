@@ -135,11 +135,13 @@ public abstract class CommercePriceListAccountRelLocalServiceBaseImpl
 	 *
 	 * @param commercePriceListAccountRel the commerce price list account rel
 	 * @return the commerce price list account rel that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommercePriceListAccountRel deleteCommercePriceListAccountRel(
-		CommercePriceListAccountRel commercePriceListAccountRel) {
+		CommercePriceListAccountRel commercePriceListAccountRel)
+		throws PortalException {
 		return commercePriceListAccountRelPersistence.remove(commercePriceListAccountRel);
 	}
 

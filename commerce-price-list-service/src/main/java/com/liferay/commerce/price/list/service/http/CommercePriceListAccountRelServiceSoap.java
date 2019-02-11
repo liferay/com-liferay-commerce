@@ -16,9 +16,16 @@ package com.liferay.commerce.price.list.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.price.list.service.CommercePriceListAccountRelServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.commerce.price.list.service.CommercePriceListAccountRelServiceUtil} service utility. The
+ * {@link CommercePriceListAccountRelServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +60,72 @@ import aQute.bnd.annotation.ProviderType;
  * @author Alessio Antonio Rendina
  * @see CommercePriceListAccountRelServiceHttp
  * @see com.liferay.commerce.price.list.model.CommercePriceListAccountRelSoap
- * @see com.liferay.commerce.price.list.service.CommercePriceListAccountRelServiceUtil
+ * @see CommercePriceListAccountRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommercePriceListAccountRelServiceSoap {
+	public static com.liferay.commerce.price.list.model.CommercePriceListAccountRelSoap addCommercePriceListAccountRel(
+		long commercePriceListId, long commerceAccountId, int order,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.price.list.model.CommercePriceListAccountRel returnValue =
+				CommercePriceListAccountRelServiceUtil.addCommercePriceListAccountRel(commercePriceListId,
+					commerceAccountId, order, serviceContext);
+
+			return com.liferay.commerce.price.list.model.CommercePriceListAccountRelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteCommercePriceListAccountRel(
+		long commercePriceListAccountRelId) throws RemoteException {
+		try {
+			CommercePriceListAccountRelServiceUtil.deleteCommercePriceListAccountRel(commercePriceListAccountRelId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.price.list.model.CommercePriceListAccountRelSoap fetchCommercePriceListAccountRel(
+		long commercePriceListId, long commerceAccountId)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.price.list.model.CommercePriceListAccountRel returnValue =
+				CommercePriceListAccountRelServiceUtil.fetchCommercePriceListAccountRel(commercePriceListId,
+					commerceAccountId);
+
+			return com.liferay.commerce.price.list.model.CommercePriceListAccountRelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.price.list.model.CommercePriceListAccountRelSoap[] getCommercePriceListAccountRels(
+		long commercePriceListId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.price.list.model.CommercePriceListAccountRel> returnValue =
+				CommercePriceListAccountRelServiceUtil.getCommercePriceListAccountRels(commercePriceListId);
+
+			return com.liferay.commerce.price.list.model.CommercePriceListAccountRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CommercePriceListAccountRelServiceSoap.class);
 }

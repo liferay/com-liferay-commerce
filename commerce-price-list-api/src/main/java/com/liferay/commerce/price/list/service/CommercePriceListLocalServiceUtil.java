@@ -316,10 +316,11 @@ public class CommercePriceListLocalServiceUtil {
 	}
 
 	public static java.util.Optional<com.liferay.commerce.price.list.model.CommercePriceList> getCommercePriceList(
-		long groupId, long[] commerceUserSegmentEntryIds)
+		long groupId, long commerceAccountId, long[] commerceUserSegmentEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommercePriceList(groupId, commerceUserSegmentEntryIds);
+				   .getCommercePriceList(groupId, commerceAccountId,
+			commerceUserSegmentEntryIds);
 	}
 
 	/**
