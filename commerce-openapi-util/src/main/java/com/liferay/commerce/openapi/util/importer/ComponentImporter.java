@@ -18,9 +18,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
+import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
+import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +48,8 @@ public class ComponentImporter {
 			components.addAll(_getParameters(componentsJSONNode));
 		}
 
+		_resolveReferences(components);
+
 		return components;
 	}
 
@@ -54,27 +59,21 @@ public class ComponentImporter {
 		String type = GetterUtil.getAsText(
 			"type", schemaEntryJSONNode, "object");
 
-		String itemsReference = null;
+		String itemsReference = GetterUtil.getAsTextOrNullIfMisses(
+			"$ref", schemaEntryJSONNode);
 
 		if ("array".equals(type)) {
 			JsonNode itemsJSONNode = schemaEntryJSONNode.get("items");
 
-			if (itemsJSONNode.has("$ref")) {
-				JsonNode referenceJSONNode = itemsJSONNode.get("$ref");
-
-				itemsReference = referenceJSONNode.asText();
-			}
+			itemsReference = GetterUtil.getAsTextOrNullIfMisses(
+				"$ref", itemsJSONNode);
 		}
 		else if (schemaEntryJSONNode.has("additionalProperties")) {
 			JsonNode additionalPropertiesJSONNode = schemaEntryJSONNode.get(
 				"additionalProperties");
 
-			if (additionalPropertiesJSONNode.has("$ref")) {
-				JsonNode referenceJSONNode = additionalPropertiesJSONNode.get(
-					"$ref");
-
-				itemsReference = referenceJSONNode.asText();
-			}
+			itemsReference = GetterUtil.getAsTextOrNullIfMisses(
+				"$ref", additionalPropertiesJSONNode);
 
 			type = "dictionary";
 		}
@@ -128,37 +127,36 @@ public class ComponentImporter {
 			while (fields.hasNext()) {
 				Map.Entry<String, JsonNode> propertyEntry = fields.next();
 
-				String name = propertyEntry.getKey();
+				String propertyNameValue = propertyEntry.getKey();
 
 				JsonNode propertyJSONNode = propertyEntry.getValue();
 
 				OpenApiProperty.OpenApiPropertyBuilder openApiPropertyBuilder =
 					new OpenApiProperty.OpenApiPropertyBuilder();
 
-				openApiPropertyBuilder.name(name);
+				openApiPropertyBuilder.name(propertyNameValue);
 
-				String openApiTypeDefinition = GetterUtil.getAsText(
+				String openApiTypeValue = GetterUtil.getAsText(
 					"type", propertyJSONNode, "object");
 
-				openApiPropertyBuilder.openApiTypeDefinition(
-					openApiTypeDefinition);
+				openApiPropertyBuilder.openApiTypeValue(openApiTypeValue);
 
 				_setIfHas(
 					propertyJSONNode, "example",
 					openApiPropertyBuilder :: example);
 				_setIfHas(
 					propertyJSONNode, "format",
-					openApiPropertyBuilder :: openApiFormatDefinition);
+					openApiPropertyBuilder ::openApiFormatValue);
 
 				if (propertyJSONNode.has("items")) {
 					JsonNode itemsJSONNode = propertyJSONNode.get("items");
 
 					_setIfHas(
 						itemsJSONNode, "type",
-						openApiPropertyBuilder :: itemOpenApiTypeDefinition);
+						openApiPropertyBuilder ::itemOpenApiTypeValue);
 					_setIfHas(
 						itemsJSONNode, "format",
-						openApiPropertyBuilder ::itemOpenApiFormatDefinition);
+						openApiPropertyBuilder ::itemOpenApiFormatValue);
 					_setIfHas(
 						itemsJSONNode, "$ref",
 						openApiPropertyBuilder :: componentReference);
@@ -168,17 +166,16 @@ public class ComponentImporter {
 					propertyJSONNode, "$ref",
 					openApiPropertyBuilder :: componentReference);
 
-				if (requiredProperties.contains(name)) {
+				if (requiredProperties.contains(propertyNameValue)) {
 					openApiPropertyBuilder.required(true);
 				}
 
-				if ("object".equals(openApiTypeDefinition)) {
+				if ("object".equals(openApiTypeValue)) {
 					OpenApiComponent openApiComponent = _getOpenApiComponent(
-						propertyEntry.getKey(), propertyJSONNode);
+						propertyNameValue, propertyJSONNode);
 
 					if (openApiComponent.isDictionary()) {
-						openApiPropertyBuilder.openApiTypeDefinition(
-							"dictionary");
+						openApiPropertyBuilder.openApiTypeValue("dictionary");
 						openApiPropertyBuilder.componentReference(
 							openApiComponent.getItemsReference());
 					}
@@ -213,6 +210,40 @@ public class ComponentImporter {
 		}
 
 		return components;
+	}
+
+	private void _resolveReferences(List<OpenApiComponent> components) {
+		Iterator<OpenApiComponent> iterator = components.iterator();
+
+		while (iterator.hasNext()) {
+			OpenApiComponent openApiComponent = iterator.next();
+
+			for (OpenApiProperty openApiProperty :
+					openApiComponent.getOpenApiProperties()) {
+
+				if (openApiProperty.getComponentReference() == null) {
+					continue;
+				}
+
+				OpenApiComponent referredOpenApiComponent =
+					OpenApiComponentUtil.getSchemaOpenApiComponent(
+						Schema.getReferencedModel(
+							openApiProperty.getComponentReference()),
+						new HashSet<>(components));
+
+				if (referredOpenApiComponent == null) {
+					_logger.warn(
+						"No open API component resolution for reference {}",
+						openApiProperty.getComponentReference());
+
+					continue;
+				}
+
+				if (referredOpenApiComponent.isDictionary()) {
+					openApiProperty.setType("dictionary");
+				}
+			}
+		}
 	}
 
 	private void _setIfHas(
