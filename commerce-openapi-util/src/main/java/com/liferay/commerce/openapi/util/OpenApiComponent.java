@@ -15,7 +15,6 @@
 package com.liferay.commerce.openapi.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -42,12 +41,20 @@ public class OpenApiComponent {
 		return openApiComponentBuilder.build();
 	}
 
+	public OpenApiFormat getItemsFormat() {
+		return _itemsFormat;
+	}
+
 	public String getItemsReference() {
 		return _itemsReference;
 	}
 
 	public String getItemsReferencedModel() {
 		return _itemsReferencedModel;
+	}
+
+	public OpenApiType getItemsType() {
+		return _itemsType;
 	}
 
 	public String getName() {
@@ -130,16 +137,55 @@ public class OpenApiComponent {
 		return _toString;
 	}
 
-	public enum ComponentType {
-
-		ARRAY, DICTIONARY, OBJECT, PARAMETER
-
-	}
-
 	public static class OpenApiComponentBuilder {
 
-		public OpenApiComponentBuilder type(String type) {
-			_type = type;
+		public OpenApiComponent build() {
+			ComponentType componentType = ComponentType.OBJECT;
+
+			if (_parameter != null) {
+				componentType = ComponentType.PARAMETER;
+			}
+
+			if (_type != null) {
+				if (_type.equals("array")) {
+					componentType = ComponentType.ARRAY;
+				}
+				else if (_type.equals("dictionary")) {
+					componentType = ComponentType.DICTIONARY;
+				}
+			}
+
+			String itemsReferencedModel = _itemsReference;
+
+			if (_itemsReference != null) {
+				Matcher matcher = _itemsReferenceModelPattern.matcher(
+					_itemsReference);
+
+				if (matcher.find()) {
+					itemsReferencedModel = matcher.group(2);
+				}
+			}
+
+			OpenApiType itemsOpenApiType = _fromOpenApiDefinition(_itemsType);
+
+			OpenApiFormat itemsOpenApiFormat =
+				OpenApiFormat.fromOpenApiTypeAndFormat(
+					itemsOpenApiType, _itemsFormat);
+
+			List<OpenApiProperty> openApiProperties = new ArrayList<>();
+
+			if (_openApiProperties != null) {
+				openApiProperties.addAll(_openApiProperties);
+			}
+
+			return new OpenApiComponent(
+				_name, componentType, _itemsReference, itemsReferencedModel,
+				itemsOpenApiType, itemsOpenApiFormat, openApiProperties,
+				_parameter);
+		}
+
+		public OpenApiComponentBuilder itemsFormat(String openApiFormatName) {
+			_itemsFormat = openApiFormatName;
 
 			return this;
 		}
@@ -152,12 +198,6 @@ public class OpenApiComponent {
 
 		public OpenApiComponentBuilder itemsType(String openApiTypeName) {
 			_itemsType = openApiTypeName;
-
-			return this;
-		}
-
-		public OpenApiComponentBuilder itemsFormat(String openApiFormatName) {
-			_itemsFormat = openApiFormatName;
 
 			return this;
 		}
@@ -182,66 +222,35 @@ public class OpenApiComponent {
 			return this;
 		}
 
-		public OpenApiComponent build() {
-			ComponentType componentType = ComponentType.OBJECT;
+		public OpenApiComponentBuilder type(String type) {
+			_type = type;
 
-			if (_parameter != null) {
-				componentType = ComponentType.PARAMETER;
-			}
-			if (_type != null) {
-				if (_type.equals("array")) {
-					componentType = ComponentType.ARRAY;
-				}
-				else if (_type.equals("dictionary")) {
-					componentType = ComponentType.DICTIONARY;
-				}
-			}
-
-			String itemsReferencedModel = _itemsReference;
-
-			if (_itemsReference != null) {
-				Matcher matcher = _itemsReferenceModelPattern.matcher(
-					_itemsReference);
-
-				if (matcher.find()) {
-					itemsReferencedModel = matcher.group(2);
-				}
-			}
-
-			OpenApiType itemsOpenApiType = _fromOpenApiDefinition(
-				_itemsType);
-
-			OpenApiFormat itemsOpenApiFormat =
-				OpenApiFormat.fromOpenApiTypeAndFormat(
-					itemsOpenApiType, _itemsFormat);
-
-			List<OpenApiProperty> openApiProperties = new ArrayList<>();
-
-			if (_openApiProperties != null) {
-				openApiProperties.addAll(_openApiProperties);
-			}
-
-			return new OpenApiComponent(
-				_name, componentType, _itemsReference, itemsReferencedModel,
-				itemsOpenApiType, itemsOpenApiFormat, openApiProperties,
-				_parameter);
+			return this;
 		}
 
-		private OpenApiType _fromOpenApiDefinition(String openApiTypeDefinition) {
+		private OpenApiType _fromOpenApiDefinition(
+			String openApiTypeDefinition) {
+
 			if (openApiTypeDefinition == null) {
-				return OpenApiType.OBJECT;
+				return null;
 			}
 
 			return OpenApiType.fromDefinition(openApiTypeDefinition);
 		}
 
-		private String _type;
+		private String _itemsFormat;
 		private String _itemsReference;
 		private String _itemsType;
-		private String _itemsFormat;
 		private String _name;
 		private List<OpenApiProperty> _openApiProperties;
 		private Parameter _parameter;
+		private String _type;
+
+	}
+
+	public enum ComponentType {
+
+		ARRAY, DICTIONARY, OBJECT, PARAMETER
 
 	}
 
@@ -265,10 +274,10 @@ public class OpenApiComponent {
 		"^#/?(\\w+/)+(\\w+)$");
 
 	private final ComponentType _componentType;
-	private String _itemsReference;
-	private String _itemsReferencedModel;
-	private final OpenApiType _itemsType;
 	private final OpenApiFormat _itemsFormat;
+	private final String _itemsReference;
+	private final String _itemsReferencedModel;
+	private final OpenApiType _itemsType;
 	private final String _name;
 	private final List<OpenApiProperty> _openApiProperties;
 	private final Parameter _parameter;

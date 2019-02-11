@@ -32,7 +32,7 @@ public class ObjectOpenApiProperty extends OpenApiProperty {
 		super(openApiPropertyBuilder);
 
 		_provider = new DTOProvider(
-			Schema.getReferencedModel(super.getComponentReference()));
+			Schema.getReferencedModel(super.getReference()));
 	}
 
 	private final Provider _provider;
