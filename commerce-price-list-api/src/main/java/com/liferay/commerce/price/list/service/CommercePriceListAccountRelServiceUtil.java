@@ -42,6 +42,35 @@ public class CommercePriceListAccountRelServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.price.list.service.impl.CommercePriceListAccountRelServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.price.list.model.CommercePriceListAccountRel addCommercePriceListAccountRel(
+		long commercePriceListId, long commerceAccountId, int order,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommercePriceListAccountRel(commercePriceListId,
+			commerceAccountId, order, serviceContext);
+	}
+
+	public static void deleteCommercePriceListAccountRel(
+		long commercePriceListAccountRelId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.deleteCommercePriceListAccountRel(commercePriceListAccountRelId);
+	}
+
+	public static com.liferay.commerce.price.list.model.CommercePriceListAccountRel fetchCommercePriceListAccountRel(
+		long commercePriceListId, long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .fetchCommercePriceListAccountRel(commercePriceListId,
+			commerceAccountId);
+	}
+
+	public static java.util.List<com.liferay.commerce.price.list.model.CommercePriceListAccountRel> getCommercePriceListAccountRels(
+		long commercePriceListId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommercePriceListAccountRels(commercePriceListId);
+	}
 
 	/**
 	* Returns the OSGi service identifier.

@@ -272,7 +272,8 @@ public interface CommercePriceListLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Optional<CommercePriceList> getCommercePriceList(long groupId,
-		long[] commerceUserSegmentEntryIds) throws PortalException;
+		long commerceAccountId, long[] commerceUserSegmentEntryIds)
+		throws PortalException;
 
 	/**
 	* Returns the commerce price list matching the UUID and group.
