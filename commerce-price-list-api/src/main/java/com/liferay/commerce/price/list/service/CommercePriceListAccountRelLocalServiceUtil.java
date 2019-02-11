@@ -55,6 +55,15 @@ public class CommercePriceListAccountRelLocalServiceUtil {
 				   .addCommercePriceListAccountRel(commercePriceListAccountRel);
 	}
 
+	public static com.liferay.commerce.price.list.model.CommercePriceListAccountRel addCommercePriceListAccountRel(
+		long commercePriceListId, long commerceAccountId, int order,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommercePriceListAccountRel(commercePriceListId,
+			commerceAccountId, order, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce price list account rel with the primary key. Does not add the commerce price list account rel to the database.
 	*
@@ -72,9 +81,11 @@ public class CommercePriceListAccountRelLocalServiceUtil {
 	*
 	* @param commercePriceListAccountRel the commerce price list account rel
 	* @return the commerce price list account rel that was removed
+	* @throws PortalException
 	*/
 	public static com.liferay.commerce.price.list.model.CommercePriceListAccountRel deleteCommercePriceListAccountRel(
-		com.liferay.commerce.price.list.model.CommercePriceListAccountRel commercePriceListAccountRel) {
+		com.liferay.commerce.price.list.model.CommercePriceListAccountRel commercePriceListAccountRel)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .deleteCommercePriceListAccountRel(commercePriceListAccountRel);
 	}
@@ -91,6 +102,11 @@ public class CommercePriceListAccountRelLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .deleteCommercePriceListAccountRel(commercePriceListAccountRelId);
+	}
+
+	public static void deleteCommercePriceListAccountRels(
+		long commercePriceListId) {
+		getService().deleteCommercePriceListAccountRels(commercePriceListId);
 	}
 
 	/**
@@ -186,6 +202,13 @@ public class CommercePriceListAccountRelLocalServiceUtil {
 				   .fetchCommercePriceListAccountRel(commercePriceListAccountRelId);
 	}
 
+	public static com.liferay.commerce.price.list.model.CommercePriceListAccountRel fetchCommercePriceListAccountRel(
+		long commercePriceListId, long commerceAccountId) {
+		return getService()
+				   .fetchCommercePriceListAccountRel(commercePriceListId,
+			commerceAccountId);
+	}
+
 	/**
 	* Returns the commerce price list account rel matching the UUID and group.
 	*
@@ -247,6 +270,11 @@ public class CommercePriceListAccountRelLocalServiceUtil {
 	public static java.util.List<com.liferay.commerce.price.list.model.CommercePriceListAccountRel> getCommercePriceListAccountRels(
 		int start, int end) {
 		return getService().getCommercePriceListAccountRels(start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.price.list.model.CommercePriceListAccountRel> getCommercePriceListAccountRels(
+		long commercePriceListId) {
+		return getService().getCommercePriceListAccountRels(commercePriceListId);
 	}
 
 	/**

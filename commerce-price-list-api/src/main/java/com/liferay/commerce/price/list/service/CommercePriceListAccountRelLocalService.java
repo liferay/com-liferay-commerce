@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -74,6 +75,10 @@ public interface CommercePriceListAccountRelLocalService
 	public CommercePriceListAccountRel addCommercePriceListAccountRel(
 		CommercePriceListAccountRel commercePriceListAccountRel);
 
+	public CommercePriceListAccountRel addCommercePriceListAccountRel(
+		long commercePriceListId, long commerceAccountId, int order,
+		ServiceContext serviceContext) throws PortalException;
+
 	/**
 	* Creates a new commerce price list account rel with the primary key. Does not add the commerce price list account rel to the database.
 	*
@@ -89,10 +94,12 @@ public interface CommercePriceListAccountRelLocalService
 	*
 	* @param commercePriceListAccountRel the commerce price list account rel
 	* @return the commerce price list account rel that was removed
+	* @throws PortalException
 	*/
 	@Indexable(type = IndexableType.DELETE)
 	public CommercePriceListAccountRel deleteCommercePriceListAccountRel(
-		CommercePriceListAccountRel commercePriceListAccountRel);
+		CommercePriceListAccountRel commercePriceListAccountRel)
+		throws PortalException;
 
 	/**
 	* Deletes the commerce price list account rel with the primary key from the database. Also notifies the appropriate model listeners.
@@ -104,6 +111,8 @@ public interface CommercePriceListAccountRelLocalService
 	@Indexable(type = IndexableType.DELETE)
 	public CommercePriceListAccountRel deleteCommercePriceListAccountRel(
 		long commercePriceListAccountRelId) throws PortalException;
+
+	public void deleteCommercePriceListAccountRels(long commercePriceListId);
 
 	/**
 	* @throws PortalException
@@ -181,6 +190,10 @@ public interface CommercePriceListAccountRelLocalService
 	public CommercePriceListAccountRel fetchCommercePriceListAccountRel(
 		long commercePriceListAccountRelId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommercePriceListAccountRel fetchCommercePriceListAccountRel(
+		long commercePriceListId, long commerceAccountId);
+
 	/**
 	* Returns the commerce price list account rel matching the UUID and group.
 	*
@@ -232,6 +245,10 @@ public interface CommercePriceListAccountRelLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
 		int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
+		long commercePriceListId);
 
 	/**
 	* Returns all the commerce price list account rels matching the UUID and company.

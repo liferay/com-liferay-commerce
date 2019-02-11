@@ -16,14 +16,20 @@ package com.liferay.commerce.price.list.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+
+import java.util.List;
 
 /**
  * Provides the remote service interface for CommercePriceListAccountRel. Methods of this
@@ -49,6 +55,21 @@ public interface CommercePriceListAccountRelService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommercePriceListAccountRelServiceUtil} to access the commerce price list account rel remote service. Add custom service methods to {@link com.liferay.commerce.price.list.service.impl.CommercePriceListAccountRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CommercePriceListAccountRel addCommercePriceListAccountRel(
+		long commercePriceListId, long commerceAccountId, int order,
+		ServiceContext serviceContext) throws PortalException;
+
+	public void deleteCommercePriceListAccountRel(
+		long commercePriceListAccountRelId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommercePriceListAccountRel fetchCommercePriceListAccountRel(
+		long commercePriceListId, long commerceAccountId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
+		long commercePriceListId) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
