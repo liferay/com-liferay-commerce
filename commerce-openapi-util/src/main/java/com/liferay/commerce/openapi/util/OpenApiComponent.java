@@ -166,11 +166,12 @@ public class OpenApiComponent {
 				}
 			}
 
-			OpenApiType itemsOpenApiType = _fromOpenApiDefinition(_itemsType);
+			OpenApiType itemsOpenApiType = _fromOpenApiDefinition(
+				_itemsOpenApiTypeDefinition);
 
 			OpenApiFormat itemsOpenApiFormat =
 				OpenApiFormat.fromOpenApiTypeAndFormat(
-					itemsOpenApiType, _itemsFormat);
+					itemsOpenApiType, _itemsOpenApiFormatDefinition);
 
 			List<OpenApiProperty> openApiProperties = new ArrayList<>();
 
@@ -184,20 +185,24 @@ public class OpenApiComponent {
 				_parameter);
 		}
 
-		public OpenApiComponentBuilder itemsFormat(String openApiFormatName) {
-			_itemsFormat = openApiFormatName;
+		public OpenApiComponentBuilder itemsOpenApiFormatDefinition(
+			String openApiFormatDefinition) {
+
+			_itemsOpenApiFormatDefinition = openApiFormatDefinition;
+
+			return this;
+		}
+
+		public OpenApiComponentBuilder itemsOpenApiTypeDefinition(
+			String openApiTypeDefinition) {
+
+			_itemsOpenApiTypeDefinition = openApiTypeDefinition;
 
 			return this;
 		}
 
 		public OpenApiComponentBuilder itemsReference(String itemsReference) {
 			_itemsReference = itemsReference;
-
-			return this;
-		}
-
-		public OpenApiComponentBuilder itemsType(String openApiTypeName) {
-			_itemsType = openApiTypeName;
 
 			return this;
 		}
@@ -238,9 +243,9 @@ public class OpenApiComponent {
 			return OpenApiType.fromDefinition(openApiTypeDefinition);
 		}
 
-		private String _itemsFormat;
+		private String _itemsOpenApiFormatDefinition;
+		private String _itemsOpenApiTypeDefinition;
 		private String _itemsReference;
-		private String _itemsType;
 		private String _name;
 		private List<OpenApiProperty> _openApiProperties;
 		private Parameter _parameter;
