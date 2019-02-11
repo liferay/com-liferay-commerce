@@ -31,7 +31,7 @@ public class ArrayOpenApiProperty extends OpenApiProperty {
 
 		super(openApiPropertyBuilder);
 
-		OpenApiFormat itemOpenApiFormat = super.getItemFormat();
+		OpenApiFormat itemOpenApiFormat = super.getItemsFormat();
 
 		_provider = new ArrayProvider(itemOpenApiFormat.getProvider());
 	}
