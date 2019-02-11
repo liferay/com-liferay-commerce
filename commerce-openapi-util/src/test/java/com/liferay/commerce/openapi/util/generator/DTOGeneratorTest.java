@@ -21,6 +21,7 @@ import com.liferay.commerce.openapi.util.OpenApiProperty;
 import com.liferay.commerce.openapi.util.OpenApiTestUtil;
 import com.liferay.commerce.openapi.util.importer.ComponentImporter;
 import com.liferay.commerce.openapi.util.util.ArrayProvider;
+import com.liferay.commerce.openapi.util.util.MapStringStringProvider;
 import com.liferay.commerce.openapi.util.util.MapStringWildcardProvider;
 import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
@@ -248,7 +249,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			String expectedVariableName = openApiProperty.getName();
 
 			Assert.assertEquals(
-				"free form object should be handled by wildcard dictionary " +
+				"free form object should be handled by map<String, ?> " +
 					"provider",
 				MapStringWildcardProvider.class, javaTypeProvider.getClass());
 
@@ -358,6 +359,13 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 					String.format(
 						"private %s _%s", javaTypeProvider.getModelName(),
 						openApiProperty.getName())));
+
+			if (openApiProperty.isDictionary()) {
+				Assert.assertEquals(
+					"free form object should be handled by " +
+						"map<String, String> provider",
+					MapStringStringProvider.class, javaTypeProvider.getClass());
+			}
 		}
 	}
 
