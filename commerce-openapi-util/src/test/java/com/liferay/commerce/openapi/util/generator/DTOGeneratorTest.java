@@ -21,6 +21,7 @@ import com.liferay.commerce.openapi.util.OpenApiProperty;
 import com.liferay.commerce.openapi.util.OpenApiTestUtil;
 import com.liferay.commerce.openapi.util.importer.ComponentImporter;
 import com.liferay.commerce.openapi.util.util.ArrayProvider;
+import com.liferay.commerce.openapi.util.util.MapStringWildcardProvider;
 import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
 
@@ -195,6 +196,70 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 	}
 
 	@Test
+	public void testGetDTOSourceIfFreeFormObjectPresent() throws IOException {
+		ComponentImporter componentImporter = new ComponentImporter();
+
+		List<OpenApiComponent> components = componentImporter.getComponents(
+			OpenApiTestUtil.getOpenApiComponentsWithFreeFormObjectPattern());
+
+		OpenApiComponent hostOpenApiComponent = null;
+
+		for (OpenApiComponent openApiComponent : components) {
+			if ("FreeFormObjectConsumer".equals(openApiComponent.getName())) {
+				hostOpenApiComponent = openApiComponent;
+
+				break;
+			}
+		}
+
+		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
+
+		openApi.setOpenApiComponents(components);
+
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			"test", "test", "com.liferay.test", openApi);
+
+		String classSource = dtoGenerator.getClassSource(hostOpenApiComponent);
+
+		System.out.println(classSource);
+
+		Assert.assertTrue(
+			"package statement is present",
+			containsOnlyOne(classSource, "package com.liferay.test.v1_0;"));
+
+		for (OpenApiProperty openApiProperty :
+				hostOpenApiComponent.getOpenApiProperties()) {
+
+			if (!openApiProperty.isDictionary()) {
+				continue;
+			}
+
+			Provider javaTypeProvider = OpenApiFormat.getJavaTypeProvider(
+				openApiProperty, new HashSet<>(components));
+
+			String expectedVariableName = openApiProperty.getName();
+
+			System.out.println(
+				"Expected provider: " + MapStringWildcardProvider.class);
+			System.out.println(
+				"  Actual provider: " + javaTypeProvider.getClass());
+
+			Assert.assertEquals(
+				"fre form object should be handled by wildcard dictionary " +
+					"provider",
+				MapStringWildcardProvider.class, javaTypeProvider.getClass());
+
+			Assert.assertTrue(
+				"DTO class has private variable _" + expectedVariableName,
+				containsOnlyOne(
+					classSource,
+					String.format(
+						"private %s _%s", javaTypeProvider.getModelName(),
+						expectedVariableName)));
+		}
+	}
+
+	@Test
 	public void testGetDTOSourceIfNestedObjectPresent() throws IOException {
 		ComponentImporter componentImporter = new ComponentImporter();
 
@@ -307,7 +372,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 
 		for (String openApiTypeDefinition : openApiTypeDefinitions) {
 			openApiPropertyBuilder.name(openApiTypeDefinition);
-			openApiPropertyBuilder.openApiTypeDefinition(openApiTypeDefinition);
+			openApiPropertyBuilder.openApiTypeValue(openApiTypeDefinition);
 
 			openApiProperties.add(openApiPropertyBuilder.build());
 		}

@@ -71,6 +71,36 @@ public class OpenApiTestUtil {
 		return jsonNode.get("components");
 	}
 
+	public static JsonNode getOpenApiComponentsWithFreeFormObjectPattern()
+		throws IOException {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{ \"components\": {\"schemas\": ");
+		sb.append("{\"FreeFormObjectA\": {\"type\": \"object\", ");
+		sb.append("\"additionalProperties\": {}}, ");
+		sb.append("\"FreeFormObjectB\": {\"type\": \"object\", ");
+		sb.append("\"additionalProperties\": \"true\"}, ");
+		sb.append("\"SimpleComponent\": {\"type\": \"object\", ");
+		sb.append("\"properties\": {\"code\": {\"type\": \"integer\", ");
+		sb.append("\"format\": \"int64\"}, \"text\": {\"type\": ");
+		sb.append("\"string\"}}}, \"FreeFormObjectConsumer\": {\"type\": ");
+		sb.append("\"object\", \"properties\": {\"id\": {\"type\": ");
+		sb.append("\"integer\", \"format\": \"int64\"}, \"noodles\": ");
+		sb.append("{\"$ref\": ");
+		sb.append("\"#/components/schemas/FreeFormObjectA\"}, ");
+		sb.append("\"burgers\": {\"$ref\": ");
+		sb.append("\"#/components/schemas/FreeFormObjectB\"}, \"cakes\": {");
+		sb.append("\"type\": \"object\", \"additionalProperties\": \"true\"}");
+		sb.append("}}}}}}");
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode jsonNode = mapper.readTree(sb.toString());
+
+		return jsonNode.get("components");
+	}
+
 	public static JsonNode getOpenApiComponentsWithNestedObjectPattern()
 		throws IOException {
 
