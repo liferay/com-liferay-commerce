@@ -375,7 +375,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 
 		for (String openApiTypeDefinition : openApiTypeDefinitions) {
 			openApiPropertyBuilder.name(openApiTypeDefinition);
-			openApiPropertyBuilder.openApiTypeValue(openApiTypeDefinition);
+			openApiPropertyBuilder.openApiTypeDefinition(openApiTypeDefinition);
 
 			openApiProperties.add(openApiPropertyBuilder.build());
 		}
