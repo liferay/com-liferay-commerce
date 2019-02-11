@@ -113,23 +113,23 @@ public class OpenApiProperty {
 	public static class OpenApiPropertyBuilder {
 
 		public OpenApiProperty build() {
-			if (_openApiTypeValue.equals("array")) {
+			if (_openApiTypeDefinition.equals("array")) {
 				if (_componentReference != null) {
 					return new ReferenceArrayOpenApiProperty(this);
 				}
 
 				return new ArrayOpenApiProperty(this);
 			}
-			else if (_openApiTypeValue.equals("dictionary")) {
-				if ((_itemsOpenApiTypeValue == null) &&
-					(_itemComponentReference == null)) {
+			else if (_openApiTypeDefinition.equals("dictionary")) {
+				if ((_itemsOpenApiTypeDefinition == null) &&
+					(_itemsReference == null)) {
 
 					return new FreeFormDictionaryOpenApiProperty(this);
 				}
 
 				return new DictionaryOpenApiProperty(this);
 			}
-			else if (_openApiTypeValue.equals("object")) {
+			else if (_openApiTypeDefinition.equals("object")) {
 				return new ObjectOpenApiProperty(this);
 			}
 
@@ -150,26 +150,24 @@ public class OpenApiProperty {
 			return this;
 		}
 
-		public OpenApiPropertyBuilder itemsOpenApiFormatValue(
-			String itemsOpenApiFormatValue) {
+		public OpenApiPropertyBuilder itemsOpenApiFormatDefinition(
+			String openApiFormatDefinition) {
 
-			_itemsOpenApiFormatValue = itemsOpenApiFormatValue;
-
-			return this;
-		}
-
-		public OpenApiPropertyBuilder itemsOpenApiTypeValue(
-			String itemsOpenApiTypeValue) {
-
-			_itemsOpenApiTypeValue = itemsOpenApiTypeValue;
+			_itemsOpenApiFormatDefinition = openApiFormatDefinition;
 
 			return this;
 		}
 
-		public OpenApiPropertyBuilder itemsReference(
-			String componentReference) {
+		public OpenApiPropertyBuilder itemsOpenApiTypeDefinition(
+			String openApiTypeDefinition) {
 
-			_itemComponentReference = componentReference;
+			_itemsOpenApiTypeDefinition = openApiTypeDefinition;
+
+			return this;
+		}
+
+		public OpenApiPropertyBuilder itemsReference(String itemsReference) {
+			_itemsReference = itemsReference;
 
 			return this;
 		}
@@ -180,18 +178,18 @@ public class OpenApiProperty {
 			return this;
 		}
 
-		public OpenApiPropertyBuilder openApiFormatValue(
-			String openApiFormatValue) {
+		public OpenApiPropertyBuilder openApiFormatDefinition(
+			String openApiFormatDefinition) {
 
-			_openApiFormatValue = openApiFormatValue;
+			_openApiFormatDefinition = openApiFormatDefinition;
 
 			return this;
 		}
 
-		public OpenApiPropertyBuilder openApiTypeValue(
-			String openApiTypeValue) {
+		public OpenApiPropertyBuilder openApiTypeDefinition(
+			String openApiTypeDefinition) {
 
-			_openApiTypeValue = openApiTypeValue;
+			_openApiTypeDefinition = openApiTypeDefinition;
 
 			return this;
 		}
@@ -204,12 +202,12 @@ public class OpenApiProperty {
 
 		private String _componentReference;
 		private String _example;
-		private String _itemComponentReference;
-		private String _itemsOpenApiFormatValue;
-		private String _itemsOpenApiTypeValue;
+		private String _itemsOpenApiFormatDefinition;
+		private String _itemsOpenApiTypeDefinition;
+		private String _itemsReference;
 		private String _name;
-		private String _openApiFormatValue;
-		private String _openApiTypeValue;
+		private String _openApiFormatDefinition;
+		private String _openApiTypeDefinition;
 		private boolean _required;
 
 	}
@@ -217,26 +215,27 @@ public class OpenApiProperty {
 	protected OpenApiProperty(OpenApiPropertyBuilder openApiPropertyBuilder) {
 		_example = openApiPropertyBuilder._example;
 
-		if (openApiPropertyBuilder._itemsOpenApiTypeValue != null) {
+		if (openApiPropertyBuilder._itemsOpenApiTypeDefinition != null) {
 			_itemsType = _fromOpenApiDefinition(
-				openApiPropertyBuilder._itemsOpenApiTypeValue);
+				openApiPropertyBuilder._itemsOpenApiTypeDefinition);
 
 			_itemsFormat = OpenApiFormat.fromOpenApiTypeAndFormat(
-				_itemsType, openApiPropertyBuilder._itemsOpenApiFormatValue);
+				_itemsType,
+				openApiPropertyBuilder._itemsOpenApiFormatDefinition);
 		}
 		else {
 			_itemsType = null;
 			_itemsFormat = null;
 		}
 
-		_itemsReference = openApiPropertyBuilder._itemComponentReference;
+		_itemsReference = openApiPropertyBuilder._itemsReference;
 		_name = openApiPropertyBuilder._name;
 		_required = openApiPropertyBuilder._required;
 		_openApiType = _fromOpenApiDefinition(
-			openApiPropertyBuilder._openApiTypeValue);
+			openApiPropertyBuilder._openApiTypeDefinition);
 
 		_openApiFormat = OpenApiFormat.fromOpenApiTypeAndFormat(
-			_openApiType, openApiPropertyBuilder._openApiFormatValue);
+			_openApiType, openApiPropertyBuilder._openApiFormatDefinition);
 
 		_reference = openApiPropertyBuilder._componentReference;
 	}

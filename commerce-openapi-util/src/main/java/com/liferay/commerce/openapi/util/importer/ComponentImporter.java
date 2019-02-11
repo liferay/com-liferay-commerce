@@ -84,10 +84,10 @@ public class ComponentImporter {
 				openApiComponentBuilder :: itemsReference);
 			_setIfHas(
 				additionalPropertiesJSONNode, "format",
-				openApiComponentBuilder::itemsFormat);
+				openApiComponentBuilder :: itemsOpenApiFormatDefinition);
 			_setIfHas(
 				additionalPropertiesJSONNode, "type",
-				openApiComponentBuilder::itemsType);
+				openApiComponentBuilder :: itemsOpenApiTypeDefinition);
 
 			openApiComponentBuilder.type("dictionary");
 		}
@@ -158,24 +158,24 @@ public class ComponentImporter {
 				String openApiTypeValue = GetterUtil.getAsText(
 					"type", propertyJSONNode, "object");
 
-				openApiPropertyBuilder.openApiTypeValue(openApiTypeValue);
+				openApiPropertyBuilder.openApiTypeDefinition(openApiTypeValue);
 
 				_setIfHas(
 					propertyJSONNode, "example",
 					openApiPropertyBuilder :: example);
 				_setIfHas(
 					propertyJSONNode, "format",
-					openApiPropertyBuilder :: openApiFormatValue);
+					openApiPropertyBuilder ::openApiFormatDefinition);
 
 				if (propertyJSONNode.has("items")) {
 					JsonNode itemsJSONNode = propertyJSONNode.get("items");
 
 					_setIfHas(
 						itemsJSONNode, "type",
-						openApiPropertyBuilder ::itemsOpenApiTypeValue);
+						openApiPropertyBuilder :: itemsOpenApiTypeDefinition);
 					_setIfHas(
 						itemsJSONNode, "format",
-						openApiPropertyBuilder ::itemsOpenApiFormatValue);
+						openApiPropertyBuilder :: itemsOpenApiFormatDefinition);
 					_setIfHas(
 						itemsJSONNode, "$ref",
 						openApiPropertyBuilder :: componentReference);
@@ -191,7 +191,8 @@ public class ComponentImporter {
 
 				if ("object".equals(openApiTypeValue)) {
 					if (propertyJSONNode.has("additionalProperties")) {
-						openApiPropertyBuilder.openApiTypeValue("dictionary");
+						openApiPropertyBuilder.openApiTypeDefinition(
+							"dictionary");
 
 						JsonNode additionalPropertiesJSONNode =
 							propertyJSONNode.get("additionalProperties");
@@ -201,10 +202,12 @@ public class ComponentImporter {
 							openApiPropertyBuilder :: itemsReference);
 						_setIfHas(
 							additionalPropertiesJSONNode, "format",
-							openApiPropertyBuilder::itemsOpenApiFormatValue);
+							openApiPropertyBuilder ::
+								itemsOpenApiFormatDefinition);
 						_setIfHas(
 							additionalPropertiesJSONNode, "type",
-							openApiPropertyBuilder::itemsOpenApiTypeValue);
+							openApiPropertyBuilder ::
+								itemsOpenApiTypeDefinition);
 					}
 				}
 
@@ -291,7 +294,7 @@ public class ComponentImporter {
 					new OpenApiProperty.OpenApiPropertyBuilder();
 
 				openApiPropertyBuilder.name(openApiProperty.getName());
-				openApiPropertyBuilder.openApiTypeValue("dictionary");
+				openApiPropertyBuilder.openApiTypeDefinition("dictionary");
 
 				resolvedOpenApiProperties.add(openApiPropertyBuilder.build());
 
