@@ -17,7 +17,9 @@ package com.liferay.commerce.openapi.util.importer;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import com.liferay.commerce.openapi.util.OpenApiComponent;
+import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
+import com.liferay.commerce.openapi.util.OpenApiType;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
 import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
@@ -82,6 +84,9 @@ public class ComponentImporter {
 			_setIfHas(
 				additionalPropertiesJSONNode, "$ref",
 				openApiComponentBuilder :: itemsReference);
+			_setIfHas(
+				additionalPropertiesJSONNode, "format",
+				openApiComponentBuilder::itemsFormat);
 			_setIfHas(
 				additionalPropertiesJSONNode, "type",
 				openApiComponentBuilder::itemsType);
@@ -169,10 +174,10 @@ public class ComponentImporter {
 
 					_setIfHas(
 						itemsJSONNode, "type",
-						openApiPropertyBuilder :: itemOpenApiTypeValue);
+						openApiPropertyBuilder ::itemsOpenApiTypeValue);
 					_setIfHas(
 						itemsJSONNode, "format",
-						openApiPropertyBuilder :: itemOpenApiFormatValue);
+						openApiPropertyBuilder ::itemsOpenApiFormatValue);
 					_setIfHas(
 						itemsJSONNode, "$ref",
 						openApiPropertyBuilder :: componentReference);
@@ -192,8 +197,25 @@ public class ComponentImporter {
 
 					if (openApiComponent.isDictionary()) {
 						openApiPropertyBuilder.openApiTypeValue("dictionary");
-						openApiPropertyBuilder.componentReference(
+						openApiPropertyBuilder.itemsReference(
 							openApiComponent.getItemsReference());
+
+						OpenApiType itemsOpenApiType =
+							openApiComponent.getItemsType();
+
+						if (itemsOpenApiType != null) {
+							openApiPropertyBuilder.itemsOpenApiTypeValue(
+								itemsOpenApiType.getOpenApiTypeDefinition());
+						}
+
+						OpenApiFormat itemsOpenApiFormat =
+							openApiComponent.getItemsFormat();
+
+						if (itemsOpenApiFormat != null) {
+							openApiPropertyBuilder.itemsOpenApiFormatValue(
+								itemsOpenApiFormat.
+									getOpenApiFormatDefinition());
+						}
 					}
 
 					_logger.warn("Detected nested object {}", openApiComponent);
@@ -228,7 +250,9 @@ public class ComponentImporter {
 		return components;
 	}
 
-	private List<OpenApiComponent> _resolveReferences(List<OpenApiComponent> components) {
+	private List<OpenApiComponent> _resolveReferences(
+		List<OpenApiComponent> components) {
+
 		List<OpenApiComponent> resolvedComponents = new ArrayList<>();
 
 		Iterator<OpenApiComponent> iterator = components.iterator();
@@ -248,7 +272,7 @@ public class ComponentImporter {
 			for (OpenApiProperty openApiProperty :
 					unresolvedOpenApiComponent.getOpenApiProperties()) {
 
-				if (openApiProperty.getComponentReference() == null) {
+				if (openApiProperty.getReference() == null) {
 					resolvedOpenApiProperties.add(openApiProperty);
 
 					continue;
@@ -257,7 +281,7 @@ public class ComponentImporter {
 				OpenApiComponent referredOpenApiComponent =
 					OpenApiComponentUtil.getSchemaOpenApiComponent(
 						Schema.getReferencedModel(
-							openApiProperty.getComponentReference()),
+							openApiProperty.getReference()),
 						new HashSet<>(components));
 
 				if (referredOpenApiComponent == null) {
@@ -265,7 +289,7 @@ public class ComponentImporter {
 
 					_logger.warn(
 						"No open API component resolution for reference {}",
-						openApiProperty.getComponentReference());
+						openApiProperty.getReference());
 
 					continue;
 				}
@@ -276,9 +300,8 @@ public class ComponentImporter {
 					continue;
 				}
 
-				OpenApiProperty.OpenApiPropertyBuilder
-					openApiPropertyBuilder =
-					new OpenApiProperty.OpenApiPropertyBuilder();
+				OpenApiProperty.OpenApiPropertyBuilder openApiPropertyBuilder =
+				new OpenApiProperty.OpenApiPropertyBuilder();
 
 				openApiPropertyBuilder.name(openApiProperty.getName());
 				openApiPropertyBuilder.openApiTypeValue("dictionary");
