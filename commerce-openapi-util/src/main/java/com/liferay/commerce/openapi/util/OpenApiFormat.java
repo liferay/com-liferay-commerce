@@ -65,7 +65,7 @@ public enum OpenApiFormat {
 
 			if ((openApiFormatDefinition != null) &&
 				openApiFormatDefinition.equals(
-					openApiFormat._openApiFormatExpression)) {
+					openApiFormat._openApiFormatName)) {
 
 				return openApiFormat;
 			}
@@ -117,6 +117,10 @@ public enum OpenApiFormat {
 		return "get";
 	}
 
+	public String getOpenApiFormatName() {
+		return _openApiFormatName;
+	}
+
 	public Provider getProvider() {
 		return _provider;
 	}
@@ -126,17 +130,17 @@ public enum OpenApiFormat {
 	}
 
 	private OpenApiFormat(
-		String openApiFormatExpression, OpenApiType openApiType,
+		String openApiFormatName, OpenApiType openApiType,
 		Provider javaTypeProvider, boolean defaultFormat) {
 
 		_default = defaultFormat;
-		_openApiFormatExpression = openApiFormatExpression;
+		_openApiFormatName = openApiFormatName;
 		_openApiType = openApiType;
 		_provider = javaTypeProvider;
 	}
 
 	private final boolean _default;
-	private final String _openApiFormatExpression;
+	private final String _openApiFormatName;
 	private final OpenApiType _openApiType;
 	private final Provider _provider;
 
