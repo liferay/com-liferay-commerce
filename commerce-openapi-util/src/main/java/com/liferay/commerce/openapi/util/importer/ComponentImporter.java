@@ -48,9 +48,7 @@ public class ComponentImporter {
 			components.addAll(_getParameters(componentsJSONNode));
 		}
 
-		_resolveReferences(components);
-
-		return components;
+		return _resolveReferences(components);
 	}
 
 	private OpenApiComponent _getOpenApiComponent(
@@ -230,16 +228,29 @@ public class ComponentImporter {
 		return components;
 	}
 
-	private void _resolveReferences(List<OpenApiComponent> components) {
+	private List<OpenApiComponent> _resolveReferences(List<OpenApiComponent> components) {
+		List<OpenApiComponent> resolvedComponents = new ArrayList<>();
+
 		Iterator<OpenApiComponent> iterator = components.iterator();
 
 		while (iterator.hasNext()) {
-			OpenApiComponent openApiComponent = iterator.next();
+			OpenApiComponent unresolvedOpenApiComponent = iterator.next();
+
+			if (!unresolvedOpenApiComponent.isObject()) {
+				resolvedComponents.add(unresolvedOpenApiComponent);
+
+				continue;
+			}
+
+			int changedPropertiesCount = 0;
+			List<OpenApiProperty> resolvedOpenApiProperties = new ArrayList<>();
 
 			for (OpenApiProperty openApiProperty :
-					openApiComponent.getOpenApiProperties()) {
+					unresolvedOpenApiComponent.getOpenApiProperties()) {
 
 				if (openApiProperty.getComponentReference() == null) {
+					resolvedOpenApiProperties.add(openApiProperty);
+
 					continue;
 				}
 
@@ -250,6 +261,8 @@ public class ComponentImporter {
 						new HashSet<>(components));
 
 				if (referredOpenApiComponent == null) {
+					resolvedOpenApiProperties.add(openApiProperty);
+
 					_logger.warn(
 						"No open API component resolution for reference {}",
 						openApiProperty.getComponentReference());
@@ -257,11 +270,44 @@ public class ComponentImporter {
 					continue;
 				}
 
-				if (referredOpenApiComponent.isDictionary()) {
-					openApiProperty.setType("dictionary");
+				if (!referredOpenApiComponent.isDictionary()) {
+					resolvedOpenApiProperties.add(openApiProperty);
+
+					continue;
 				}
+
+				OpenApiProperty.OpenApiPropertyBuilder
+					openApiPropertyBuilder =
+					new OpenApiProperty.OpenApiPropertyBuilder();
+
+				openApiPropertyBuilder.name(openApiProperty.getName());
+				openApiPropertyBuilder.openApiTypeValue("dictionary");
+
+				resolvedOpenApiProperties.add(openApiPropertyBuilder.build());
+
+				changedPropertiesCount++;
 			}
+
+			if (changedPropertiesCount == 0) {
+				resolvedComponents.add(unresolvedOpenApiComponent);
+
+				continue;
+			}
+
+			OpenApiComponent.OpenApiComponentBuilder openApiComponentBuilder =
+				new OpenApiComponent.OpenApiComponentBuilder();
+
+			openApiComponentBuilder.name(unresolvedOpenApiComponent.getName());
+
+			openApiComponentBuilder.openApiProperties(
+				resolvedOpenApiProperties);
+
+			openApiComponentBuilder.type("object");
+
+			resolvedComponents.add(openApiComponentBuilder.build());
 		}
+
+		return resolvedComponents;
 	}
 
 	private void _setIfHas(
