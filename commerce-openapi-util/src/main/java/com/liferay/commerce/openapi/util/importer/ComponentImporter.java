@@ -17,9 +17,7 @@ package com.liferay.commerce.openapi.util.importer;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import com.liferay.commerce.openapi.util.OpenApiComponent;
-import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
-import com.liferay.commerce.openapi.util.OpenApiType;
 import com.liferay.commerce.openapi.util.Schema;
 import com.liferay.commerce.openapi.util.util.GetterUtil;
 import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
@@ -192,33 +190,22 @@ public class ComponentImporter {
 				}
 
 				if ("object".equals(openApiTypeValue)) {
-					OpenApiComponent openApiComponent = _getOpenApiComponent(
-						propertyNameValue, propertyJSONNode);
-
-					if (openApiComponent.isDictionary()) {
+					if (propertyJSONNode.has("additionalProperties")) {
 						openApiPropertyBuilder.openApiTypeValue("dictionary");
-						openApiPropertyBuilder.itemsReference(
-							openApiComponent.getItemsReference());
 
-						OpenApiType itemsOpenApiType =
-							openApiComponent.getItemsType();
+						JsonNode additionalPropertiesJSONNode =
+							propertyJSONNode.get("additionalProperties");
 
-						if (itemsOpenApiType != null) {
-							openApiPropertyBuilder.itemsOpenApiTypeValue(
-								itemsOpenApiType.getOpenApiTypeDefinition());
-						}
-
-						OpenApiFormat itemsOpenApiFormat =
-							openApiComponent.getItemsFormat();
-
-						if (itemsOpenApiFormat != null) {
-							openApiPropertyBuilder.itemsOpenApiFormatValue(
-								itemsOpenApiFormat.
-									getOpenApiFormatDefinition());
-						}
+						_setIfHas(
+							additionalPropertiesJSONNode, "$ref",
+							openApiPropertyBuilder :: itemsReference);
+						_setIfHas(
+							additionalPropertiesJSONNode, "format",
+							openApiPropertyBuilder::itemsOpenApiFormatValue);
+						_setIfHas(
+							additionalPropertiesJSONNode, "type",
+							openApiPropertyBuilder::itemsOpenApiTypeValue);
 					}
-
-					_logger.warn("Detected nested object {}", openApiComponent);
 				}
 
 				openApiProperties.add(openApiPropertyBuilder.build());
@@ -301,7 +288,7 @@ public class ComponentImporter {
 				}
 
 				OpenApiProperty.OpenApiPropertyBuilder openApiPropertyBuilder =
-				new OpenApiProperty.OpenApiPropertyBuilder();
+					new OpenApiProperty.OpenApiPropertyBuilder();
 
 				openApiPropertyBuilder.name(openApiProperty.getName());
 				openApiPropertyBuilder.openApiTypeValue("dictionary");
