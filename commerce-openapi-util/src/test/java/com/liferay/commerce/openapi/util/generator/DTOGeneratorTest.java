@@ -233,15 +233,11 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 
 		String classSource = dtoGenerator.getClassSource(hostOpenApiComponent);
 
-		System.out.println(classSource);
-
 		Assert.assertTrue(
 			"package statement is present",
 			containsOnlyOne(classSource, "package com.liferay.test.v1_0;"));
 
-		for (OpenApiProperty openApiProperty :
-			openApiProperties) {
-
+		for (OpenApiProperty openApiProperty : openApiProperties) {
 			if (!openApiProperty.isDictionary()) {
 				continue;
 			}
@@ -251,13 +247,8 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 
 			String expectedVariableName = openApiProperty.getName();
 
-			System.out.println(
-				"Expected provider: " + MapStringWildcardProvider.class);
-			System.out.println(
-				"  Actual provider: " + javaTypeProvider.getClass());
-
 			Assert.assertEquals(
-				"fre form object should be handled by wildcard dictionary " +
+				"free form object should be handled by wildcard dictionary " +
 					"provider",
 				MapStringWildcardProvider.class, javaTypeProvider.getClass());
 
