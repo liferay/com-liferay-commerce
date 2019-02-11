@@ -24,21 +24,23 @@ public enum OpenApiType {
 	ARRAY("array"), BOOLEAN("boolean"), DICTIONARY("dictionary"),
 	INTEGER("integer"), NUMBER("number"), OBJECT("object"), STRING("string");
 
-	public static OpenApiType fromDefinition(String openApiDefinition) {
+	public static OpenApiType fromDefinition(String openApiTypeDefinition) {
 		for (OpenApiType openApiType : values()) {
-			if (openApiDefinition.equals(openApiType._openApiDefinition)) {
+			if (openApiTypeDefinition.equals(
+					openApiType._openApiTypeDefinition)) {
+
 				return openApiType;
 			}
 		}
 
 		throw new OpenApiException(
-			"Unknown Open API type " + openApiDefinition);
+			"Unknown Open API type " + openApiTypeDefinition);
 	}
 
-	private OpenApiType(String openApiDefinition) {
-		_openApiDefinition = openApiDefinition;
+	private OpenApiType(String openApiTypeDefinition) {
+		_openApiTypeDefinition = openApiTypeDefinition;
 	}
 
-	private final String _openApiDefinition;
+	private final String _openApiTypeDefinition;
 
 }
