@@ -222,10 +222,14 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 			"#/components/schemas/%s", modelPattern);
 
 		for (int i = 0; i < size; i++) {
-			openApiComponents.add(
-				new OpenApiComponent(
-					modelPattern + i, Collections.emptyList(), "object",
-					modelReferencePattern + i));
+			OpenApiComponent.OpenApiComponentBuilder openApiComponentBuilder =
+				new OpenApiComponent.OpenApiComponentBuilder();
+
+			openApiComponentBuilder.name(modelPattern + i);
+			openApiComponentBuilder.type("object");
+			openApiComponentBuilder.itemsReference(modelReferencePattern + i);
+
+			openApiComponents.add(openApiComponentBuilder.build());
 		}
 
 		return openApiComponents;
