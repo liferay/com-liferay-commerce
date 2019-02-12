@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.openapi.core.util;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.LocaleUtil;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
@@ -35,12 +38,25 @@ public class LanguageUtils {
 		return Collections.unmodifiableMap(localizedMap);
 	}
 
-	public static Map<Locale, String> getLocalizedMap(Map<String, String> map) {
+	public static Map<Locale, String> getLocalizedMap(Map<String, String> map)
+		throws PortalException {
+
 		Map<Locale, String> localizedMap = new HashMap<>();
 
-		map.forEach(
-			(languageId, value) -> localizedMap.put(
-				Locale.forLanguageTag(languageId), value));
+		if (map == null) {
+			return null;
+		}
+
+		for (Map.Entry<String, String> entry : map.entrySet()) {
+			Locale locale = LocaleUtil.fromLanguageId(entry.getKey());
+
+			if (locale == null) {
+				throw new PortalException(
+					"No Locale exist with languageId : " + entry.getKey());
+			}
+
+			localizedMap.put(locale, entry.getValue());
+		}
 
 		return Collections.unmodifiableMap(localizedMap);
 	}
