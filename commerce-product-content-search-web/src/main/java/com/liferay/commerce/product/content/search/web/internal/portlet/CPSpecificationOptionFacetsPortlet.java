@@ -20,7 +20,6 @@ import com.liferay.commerce.product.content.search.web.internal.display.context.
 import com.liferay.commerce.product.content.search.web.internal.util.CPSpecificationOptionFacetsUtil;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
-import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -150,7 +149,6 @@ public class CPSpecificationOptionFacetsPortlet
 			CPSpecificationOptionFacetsDisplayContext
 				cpSpecificationOptionFacetsDisplayContext =
 					new CPSpecificationOptionFacetsDisplayContext(
-						_cpDefinitionSpecificationOptionValueService,
 						_cpSpecificationOptionLocalService, renderRequest,
 						filledFacets, portletSharedSearchResponse);
 
@@ -245,10 +243,6 @@ public class CPSpecificationOptionFacetsPortlet
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPSpecificationOptionFacetsPortlet.class);
-
-	@Reference
-	private CPDefinitionSpecificationOptionValueService
-		_cpDefinitionSpecificationOptionValueService;
 
 	@Reference
 	private CPSpecificationOptionLocalService
