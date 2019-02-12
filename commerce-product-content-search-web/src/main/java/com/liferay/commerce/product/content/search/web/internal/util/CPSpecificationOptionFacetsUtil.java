@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.content.search.web.internal.util;
 
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -23,7 +24,7 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class CPSpecificationOptionFacetsUtil {
 
-	public static String getCPSpecificationOptionIdFromIndexFieldName(
+	public static String getCPSpecificationOptionKeyFromIndexFieldName(
 		String fieldName) {
 
 		if (Validator.isNull(fieldName)) {
@@ -33,11 +34,12 @@ public class CPSpecificationOptionFacetsUtil {
 		String[] fieldNameParts = StringUtil.split(
 			fieldName, StringPool.UNDERLINE);
 
-		return fieldNameParts[1];
+		return fieldNameParts[3];
 	}
 
-	public static String getIndexFieldName(String key) {
-		return "SPECIFICATION_" + key + "_VALUE_ID";
+	public static String getIndexFieldName(String key, String languageId) {
+		return StringBundler.concat(
+			languageId, "_SPECIFICATION_", key, "_VALUE_NAME");
 	}
 
 }
