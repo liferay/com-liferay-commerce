@@ -233,6 +233,18 @@ public class CommercePriceListLocalServiceImpl
 		commercePriceEntryLocalService.deleteCommercePriceEntries(
 			commercePriceList.getCommercePriceListId());
 
+		// Commerce price list account rels
+
+		commercePriceListAccountRelLocalService.
+			deleteCommercePriceListAccountRels(
+				commercePriceList.getCommercePriceListId());
+
+		// Commerce price list user segment entry rels
+
+		commercePriceListUserSegmentEntryRelLocalService.
+			deleteCommercePriceListUserSegmentEntryRels(
+				commercePriceList.getCommercePriceListId());
+
 		// Commerce price list
 
 		commercePriceListPersistence.remove(commercePriceList);

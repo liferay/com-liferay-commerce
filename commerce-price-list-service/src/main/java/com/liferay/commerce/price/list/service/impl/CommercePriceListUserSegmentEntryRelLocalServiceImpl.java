@@ -63,11 +63,11 @@ public class CommercePriceListUserSegmentEntryRelLocalServiceImpl
 		commercePriceListUserSegmentEntryRel.setExpandoBridgeAttributes(
 			serviceContext);
 
-		//Commerce price list
+		// Commerce price list
 
 		reindexCommerceUserSegmentEntry(commercePriceListId);
 
-		//Cache
+		// Cache
 
 		commercePriceListLocalService.cleanPriceListCache(groupId);
 
@@ -85,7 +85,7 @@ public class CommercePriceListUserSegmentEntryRelLocalServiceImpl
 		commercePriceListUserSegmentEntryRelPersistence.remove(
 			commercePriceListUserSegmentEntryRel);
 
-		//Commerce price list
+		// Commerce price list
 
 		reindexCommerceUserSegmentEntry(
 			commercePriceListUserSegmentEntryRel.getCommercePriceListId());
@@ -96,7 +96,7 @@ public class CommercePriceListUserSegmentEntryRelLocalServiceImpl
 			commercePriceListUserSegmentEntryRel.
 				getCommercePriceListUserSegmentEntryRelId());
 
-		//Cache
+		// Cache
 
 		commercePriceListLocalService.cleanPriceListCache(
 			commercePriceListUserSegmentEntryRel.getGroupId());
@@ -181,12 +181,12 @@ public class CommercePriceListUserSegmentEntryRelLocalServiceImpl
 		commercePriceListUserSegmentEntryRel.setExpandoBridgeAttributes(
 			serviceContext);
 
-		//Commerce price list
+		// Commerce price list
 
 		reindexCommerceUserSegmentEntry(
 			commercePriceListUserSegmentEntryRel.getCommercePriceListId());
 
-		//Cache
+		// Cache
 
 		commercePriceListLocalService.cleanPriceListCache(
 			serviceContext.getScopeGroupId());
