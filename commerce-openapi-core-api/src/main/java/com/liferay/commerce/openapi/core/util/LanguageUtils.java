@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.internal.util;
+package com.liferay.commerce.openapi.core.util;
 
 import java.util.Collections;
 import java.util.HashMap;
