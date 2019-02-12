@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.openapi.core.internal.jaxrs.nested.resource;
 
+import com.liferay.commerce.openapi.core.annotation.Nested;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto.ProductOptionDTO;
 import com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto.SkuDTO;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
-import com.liferay.commerce.openapi.core.nested.Nested;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.util.Arrays;

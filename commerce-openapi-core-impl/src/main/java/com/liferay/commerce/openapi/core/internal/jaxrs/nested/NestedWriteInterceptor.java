@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
 
+import com.liferay.commerce.openapi.core.annotation.Nested;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
-import com.liferay.commerce.openapi.core.nested.Nested;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
