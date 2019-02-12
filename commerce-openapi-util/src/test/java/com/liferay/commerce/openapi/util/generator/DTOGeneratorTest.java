@@ -249,8 +249,7 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			String expectedVariableName = openApiProperty.getName();
 
 			Assert.assertEquals(
-				"free form object should be handled by map<String, ?> " +
-					"provider",
+				"free form object should be handled by map<String, ?> provider",
 				MapStringWildcardProvider.class, javaTypeProvider.getClass());
 
 			Assert.assertTrue(
@@ -362,8 +361,8 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 
 			if (openApiProperty.isDictionary()) {
 				Assert.assertEquals(
-					"free form object should be handled by " +
-						"map<String, String> provider",
+					"free form object should be handled by map<String, " +
+						"String> provider",
 					MapStringStringProvider.class, javaTypeProvider.getClass());
 			}
 		}
