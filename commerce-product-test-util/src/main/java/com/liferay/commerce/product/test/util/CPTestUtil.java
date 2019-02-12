@@ -101,8 +101,7 @@ public class CPTestUtil {
 		serviceContext.setWorkflowAction(workflowAction);
 
 		return _addCPDefinition(
-			SimpleCPTypeConstants.NAME, ignoreSKUCombinations,
-			hasDefaultInstance, serviceContext);
+			SimpleCPTypeConstants.NAME, ignoreSKUCombinations, serviceContext);
 	}
 
 	public static CPDefinition addCPDefinition(
@@ -114,8 +113,7 @@ public class CPTestUtil {
 			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return _addCPDefinition(
-			productTypeName, ignoreSKUCombinations, hasDefaultInstance,
-			serviceContext);
+			productTypeName, ignoreSKUCombinations, serviceContext);
 	}
 
 	public static CPDefinitionOptionRel addCPDefinitionOptionRel(
@@ -136,7 +134,7 @@ public class CPTestUtil {
 			ServiceContextTestUtil.getServiceContext(groupId);
 
 		CPDefinition cpDefinition = _addCPDefinition(
-			SimpleCPTypeConstants.NAME, true, true, serviceContext);
+			SimpleCPTypeConstants.NAME, true, serviceContext);
 
 		return CPInstanceLocalServiceUtil.getCPInstance(
 			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
@@ -222,7 +220,7 @@ public class CPTestUtil {
 
 	private static CPDefinition _addCPDefinition(
 			String productTypeName, boolean ignoreSKUCombinations,
-			boolean hasDefaultInstance, ServiceContext serviceContext)
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		User user = UserLocalServiceUtil.getUser(serviceContext.getUserId());
@@ -300,7 +298,8 @@ public class CPTestUtil {
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, hasDefaultInstance, serviceContext);
+			neverExpire, CPInstanceConstants.DEFAULT_SKU, StringPool.BLANK,
+			serviceContext);
 	}
 
 }
