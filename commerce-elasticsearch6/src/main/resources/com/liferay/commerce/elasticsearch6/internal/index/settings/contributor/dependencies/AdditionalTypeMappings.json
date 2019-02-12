@@ -21,6 +21,16 @@
 			}
 		},
 		{
+			"template_commerce_specification": {
+				"mapping": {
+					"store": true,
+					"type": "keyword"
+				},
+				"match": "*_VALUE_NAME",
+				"match_mapping_type": "string"
+			}
+		},
+		{
 			"template_terms_set_required_matches": {
 				"mapping": {
 					"store": true,
