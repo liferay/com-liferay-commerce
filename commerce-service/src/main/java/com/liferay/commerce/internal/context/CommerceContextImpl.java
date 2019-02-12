@@ -120,9 +120,12 @@ public class CommerceContextImpl implements CommerceContext {
 			return _commercePriceList;
 		}
 
+		CommerceAccount commerceAccount = getCommerceAccount();
+
 		_commercePriceList =
 			_commercePriceListLocalService.getCommercePriceList(
-				_groupId, getCommerceUserSegmentEntryIds());
+				_groupId, commerceAccount.getCommerceAccountId(),
+				getCommerceUserSegmentEntryIds());
 
 		return _commercePriceList;
 	}
