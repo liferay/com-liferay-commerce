@@ -15,7 +15,9 @@
 package com.liferay.commerce.price.list.internal.search;
 
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
 import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
+import com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -39,6 +41,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.search.filter.FilterBuilders;
+import com.liferay.portal.search.filter.TermsSetFilter;
 import com.liferay.portal.search.filter.TermsSetFilterBuilder;
 
 import java.util.ArrayList;
@@ -107,10 +110,12 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 				BooleanClauseOccur.MUST_NOT);
 		}
 
+		TermsSetFilter userSegmentEntryIdsTermsSetFilter = null;
+
 		long[] commerceUserSegmentEntryIds = GetterUtil.getLongValues(
 			searchContext.getAttribute("commerceUserSegmentEntryIds"), null);
 
-		if (commerceUserSegmentEntryIds != null) {
+		if (ArrayUtil.isNotEmpty(commerceUserSegmentEntryIds)) {
 			TermsSetFilterBuilder termsSetFilterBuilder =
 				_filterBuilders.termsSetFilterBuilder();
 
@@ -129,8 +134,31 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 
 			termsSetFilterBuilder.setValues(values);
 
+			userSegmentEntryIdsTermsSetFilter = termsSetFilterBuilder.build();
+		}
+
+		long commerceAccountId = GetterUtil.getLong(
+			searchContext.getAttribute("commerceAccountId"));
+
+		if ((commerceAccountId > 0) &&
+			(userSegmentEntryIdsTermsSetFilter != null)) {
+
+			BooleanFilter applicabilityBooleanFilter = new BooleanFilter();
+
+			applicabilityBooleanFilter.add(userSegmentEntryIdsTermsSetFilter);
+			applicabilityBooleanFilter.addTerm(
+				"commerceAccountId", commerceAccountId);
+
 			contextBooleanFilter.add(
-				termsSetFilterBuilder.build(), BooleanClauseOccur.MUST);
+				applicabilityBooleanFilter, BooleanClauseOccur.MUST);
+		}
+		else if (commerceAccountId > 0) {
+			contextBooleanFilter.addRequiredTerm(
+				"commerceAccountId", commerceAccountId);
+		}
+		else if (userSegmentEntryIdsTermsSetFilter != null) {
+			contextBooleanFilter.add(
+				userSegmentEntryIdsTermsSetFilter, BooleanClauseOccur.MUST);
 		}
 	}
 
@@ -187,18 +215,35 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 		document.addNumberSortable(
 			Field.PRIORITY, commercePriceList.getPriority());
 
+		List<CommercePriceListAccountRel> commercePriceListAccountRels =
+			_commercePriceListAccountRelLocalService.
+				getCommercePriceListAccountRels(
+					commercePriceList.getCommercePriceListId());
+
+		Stream<CommercePriceListAccountRel> commercePriceListAccountRelStream =
+			commercePriceListAccountRels.stream();
+
+		long[] commerceAccountIds = commercePriceListAccountRelStream.mapToLong(
+			CommercePriceListAccountRel::getCommerceAccountId
+		).toArray();
+
+		document.addNumber("commerceAccountId", commerceAccountIds);
+
 		List<CommercePriceListUserSegmentEntryRel>
 			commercePriceListUserSegmentEntryRels =
 				_commercePriceListUserSegmentEntryRelLocalService.
 					getCommercePriceListUserSegmentEntryRels(
 						commercePriceList.getCommercePriceListId());
 
-		Stream<CommercePriceListUserSegmentEntryRel> stream =
-			commercePriceListUserSegmentEntryRels.stream();
+		Stream<CommercePriceListUserSegmentEntryRel>
+			commercePriceListUserSegmentEntryRelStream =
+				commercePriceListUserSegmentEntryRels.stream();
 
-		long[] commerceUserSegmentEntryIds = stream.mapToLong(
-			CommercePriceListUserSegmentEntryRel::getCommerceUserSegmentEntryId
-		).toArray();
+		long[] commerceUserSegmentEntryIds =
+			commercePriceListUserSegmentEntryRelStream.mapToLong(
+				CommercePriceListUserSegmentEntryRel::
+					getCommerceUserSegmentEntryId
+			).toArray();
 
 		document.addNumber(
 			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);
@@ -286,6 +331,10 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
+	private CommercePriceListAccountRelLocalService
+		_commercePriceListAccountRelLocalService;
 
 	@Reference
 	private CommercePriceListLocalService _commercePriceListLocalService;
