@@ -37,6 +37,7 @@ import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.util.CPRulesThreadLocal;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -60,6 +61,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -71,6 +73,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -478,10 +481,33 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			specificationOptionIds.add(
 				cpSpecificationOption.getCPSpecificationOptionId());
 
+			Set<Locale> availableLocales = LanguageUtil.getAvailableLocales(
+				cpDefinitionSpecificationOptionValue.getGroupId());
+
+			for (Locale locale : availableLocales) {
+				String languageId = LanguageUtil.getLanguageId(locale);
+
+				String localizedSpecificationOptionValue =
+					cpDefinitionSpecificationOptionValue.getValue(languageId);
+
+				if (Validator.isBlank(localizedSpecificationOptionValue)) {
+					localizedSpecificationOptionValue =
+						cpDefinitionSpecificationOptionValue.getValue(
+							cpDefinitionDefaultLanguageId);
+				}
+
+				document.addText(
+					StringBundler.concat(
+						languageId, "_SPECIFICATION_",
+						cpSpecificationOption.getKey(), "_VALUE_NAME"),
+					localizedSpecificationOptionValue);
+			}
+
 			document.addText(
 				"SPECIFICATION_" + cpSpecificationOption.getKey() +
 					"_VALUE_NAME",
-				cpDefinitionSpecificationOptionValue.getValue());
+				cpDefinitionSpecificationOptionValue.getValue(
+					cpDefinitionDefaultLanguageId));
 
 			document.addText(
 				"SPECIFICATION_" +
