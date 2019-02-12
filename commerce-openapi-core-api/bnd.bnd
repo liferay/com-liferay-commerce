@@ -2,7 +2,7 @@ Bundle-Name: Liferay Commerce OpenAPI Core API
 Bundle-SymbolicName: com.liferay.commerce.openapi.core.api
 Bundle-Version: 1.2.0
 Export-Package:\
+	com.liferay.commerce.openapi.core.annotation,\
 	com.liferay.commerce.openapi.core.context,\
 	com.liferay.commerce.openapi.core.exception,\
-	com.liferay.commerce.openapi.core.model,\
-	com.liferay.commerce.openapi.core.nested
+	com.liferay.commerce.openapi.core.model
