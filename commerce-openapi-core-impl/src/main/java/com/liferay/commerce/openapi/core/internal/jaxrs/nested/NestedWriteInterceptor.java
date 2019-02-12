@@ -183,7 +183,8 @@ public class NestedWriteInterceptor implements WriterInterceptor {
 
 			try {
 				return dateFormat.parse(value);
-			} catch (ParseException pe) {
+			}
+			catch (ParseException pe) {
 				throw new IllegalArgumentException(pe);
 			}
 		}
