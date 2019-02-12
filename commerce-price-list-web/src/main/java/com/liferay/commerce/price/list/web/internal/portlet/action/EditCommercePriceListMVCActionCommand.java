@@ -18,7 +18,9 @@ import com.liferay.commerce.price.list.constants.CommercePriceListPortletKeys;
 import com.liferay.commerce.price.list.exception.CommercePriceListCurrencyException;
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
 import com.liferay.commerce.price.list.model.CommercePriceListUserSegmentEntryRel;
+import com.liferay.commerce.price.list.service.CommercePriceListAccountRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -225,11 +227,54 @@ public class EditCommercePriceListMVCActionCommand
 		}
 
 		if (commercePriceList != null) {
+			updateCommercePriceListAccountRels(
+				actionRequest, commercePriceList);
 			updateCommercePriceListUserSegmentEntryRels(
 				actionRequest, commercePriceList);
 		}
 
 		return commercePriceList;
+	}
+
+	protected void updateCommercePriceListAccountRels(
+			ActionRequest actionRequest, CommercePriceList commercePriceList)
+		throws PortalException {
+
+		long[] deleteCommercePriceListAccountRelIds = ParamUtil.getLongValues(
+			actionRequest, "deleteCommercePriceListAccountRelIds");
+
+		if (deleteCommercePriceListAccountRelIds.length > 0) {
+			for (long deleteCommercePriceListAccountRelId :
+					deleteCommercePriceListAccountRelIds) {
+
+				_commercePriceListAccountRelService.
+					deleteCommercePriceListAccountRel(
+						deleteCommercePriceListAccountRelId);
+			}
+		}
+
+		long[] addCommerceAccountIds = ParamUtil.getLongValues(
+			actionRequest, "addCommerceAccountIds");
+
+		if (addCommerceAccountIds.length > 0) {
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				CommercePriceListAccountRel.class.getName(), actionRequest);
+
+			for (long addCommerceAccountId : addCommerceAccountIds) {
+				CommercePriceListAccountRel commercePriceListAccountRel =
+					_commercePriceListAccountRelService.
+						fetchCommercePriceListAccountRel(
+							commercePriceList.getCommercePriceListId(),
+							addCommerceAccountId);
+
+				if (commercePriceListAccountRel == null) {
+					_commercePriceListAccountRelService.
+						addCommercePriceListAccountRel(
+							commercePriceList.getCommercePriceListId(),
+							addCommerceAccountId, 0, serviceContext);
+				}
+			}
+		}
 	}
 
 	protected void updateCommercePriceListUserSegmentEntryRels(
@@ -277,6 +322,10 @@ public class EditCommercePriceListMVCActionCommand
 			}
 		}
 	}
+
+	@Reference
+	private CommercePriceListAccountRelService
+		_commercePriceListAccountRelService;
 
 	@Reference
 	private CommercePriceListService _commercePriceListService;

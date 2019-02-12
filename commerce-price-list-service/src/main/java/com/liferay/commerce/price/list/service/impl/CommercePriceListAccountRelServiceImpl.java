@@ -22,6 +22,7 @@ import com.liferay.commerce.price.list.service.base.CommercePriceListAccountRelS
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
+import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.List;
 
@@ -30,6 +31,66 @@ import java.util.List;
  */
 public class CommercePriceListAccountRelServiceImpl
 	extends CommercePriceListAccountRelServiceBaseImpl {
+
+	@Override
+	public CommercePriceListAccountRel addCommercePriceListAccountRel(
+			long commercePriceListId, long commerceAccountId, int order,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CommercePriceList commercePriceList =
+			commercePriceListLocalService.getCommercePriceList(
+				commercePriceListId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceList.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
+		return commercePriceListAccountRelLocalService.
+			addCommercePriceListAccountRel(
+				commercePriceListId, commerceAccountId, order, serviceContext);
+	}
+
+	@Override
+	public void deleteCommercePriceListAccountRel(
+			long commercePriceListAccountRelId)
+		throws PortalException {
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			commercePriceListAccountRelLocalService.
+				fetchCommercePriceListAccountRel(commercePriceListAccountRelId);
+
+		if (commercePriceListAccountRel == null) {
+			return;
+		}
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commercePriceListAccountRel.getGroupId(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
+		commercePriceListAccountRelLocalService.
+			deleteCommercePriceListAccountRel(commercePriceListAccountRelId);
+	}
+
+	@Override
+	public CommercePriceListAccountRel fetchCommercePriceListAccountRel(
+			long commercePriceListId, long commerceAccountId)
+		throws PortalException {
+
+		CommercePriceListAccountRel commercePriceListAccountRel =
+			commercePriceListAccountRelLocalService.
+				fetchCommercePriceListAccountRel(
+					commercePriceListId, commerceAccountId);
+
+		if (commercePriceListAccountRel != null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(),
+				commercePriceListAccountRel.getGroupId(),
+				CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+		}
+
+		return commercePriceListAccountRel;
+	}
 
 	@Override
 	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
