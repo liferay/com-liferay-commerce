@@ -99,14 +99,14 @@ public class CPSpecificationOptionFacetsPortlet
 			List<Facet> facets = getFacets(renderRequest);
 
 			for (Facet facet : facets) {
-				String cpSpecificationOptionId =
+				String cpSpecificationOptionKey =
 					CPSpecificationOptionFacetsUtil.
-						getCPSpecificationOptionIdFromIndexFieldName(
+						getCPSpecificationOptionKeyFromIndexFieldName(
 							facet.getFieldName());
 
 				Optional<String[]> parameterValuesOptional =
 					portletSharedSearchSettings.getParameterValues(
-						cpSpecificationOptionId);
+						cpSpecificationOptionKey);
 
 				MultiValueFacet multiValueFacet = new MultiValueFacet(
 					searchContext);
@@ -188,6 +188,9 @@ public class CPSpecificationOptionFacetsPortlet
 	protected List<Facet> getFacets(RenderRequest renderRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		List<Facet> facets = new ArrayList<>();
 
 		AssetCategory assetCategory = (AssetCategory)renderRequest.getAttribute(
@@ -202,14 +205,14 @@ public class CPSpecificationOptionFacetsPortlet
 
 		Facet facet = new SimpleFacet(searchContext);
 
-		facet.setFieldName(CPDefinitionIndexer.FIELD_SPECIFICATION_IDS);
+		facet.setFieldName(CPDefinitionIndexer.FIELD_SPECIFICATION_NAMES);
 
 		searchContext.addFacet(facet);
 
 		QueryConfig queryConfig = new QueryConfig();
 
 		queryConfig.addSelectedFieldNames(
-			CPDefinitionIndexer.FIELD_SPECIFICATION_IDS);
+			CPDefinitionIndexer.FIELD_SPECIFICATION_NAMES);
 
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
@@ -229,7 +232,7 @@ public class CPSpecificationOptionFacetsPortlet
 
 			multiValueFacet.setFieldName(
 				CPSpecificationOptionFacetsUtil.getIndexFieldName(
-					termCollector.getTerm()));
+					termCollector.getTerm(), themeDisplay.getLanguageId()));
 
 			facets.add(multiValueFacet);
 		}
