@@ -107,7 +107,7 @@ public class ProductResourceImpl implements ProductResource {
 			String id, Long groupId, SkuDTO skuDTO, Language language)
 		throws Exception {
 
-		return _skuHelper.updateSKU(id, groupId, skuDTO, _company);
+		return _skuHelper.upsertSKU(id, groupId, skuDTO, _company);
 	}
 
 	@Context
