@@ -38,6 +38,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		"liferay.jaxrs.message.body.readers.enabled=true",
 		"liferay.jaxrs.message.body.writers.enabled=true",
 		"liferay.jaxrs.nested.enabled=true",
+		"liferay.jaxrs.status.feature.enabled=true",
 		"oauth2.scopechecker.type=annotations"
 	},
 	service = Application.class
