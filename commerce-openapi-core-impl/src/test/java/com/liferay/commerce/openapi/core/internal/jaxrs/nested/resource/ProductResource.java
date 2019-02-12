@@ -12,9 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.nested.util;
+package com.liferay.commerce.openapi.core.internal.jaxrs.nested.resource;
 
 import com.liferay.commerce.openapi.core.context.Pagination;
+import com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto.ProductOptionDTO;
+import com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto.SkuDTO;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
 import java.util.List;
