@@ -14,10 +14,6 @@
 
 package com.liferay.commerce.openapi.admin.resource.test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNull.notNullValue;
-
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
@@ -50,7 +46,7 @@ public class BasicEndToEndTest extends PortalContextProvider {
 		new LiferayIntegrationTestRule();
 
 	@Test
-	public void testDefaultSiteExistence() throws IOException {
+	public void testDefaultSiteExistence() {
 		StringBundler webSiteResourceURLSB = new StringBundler(3);
 
 		webSiteResourceURLSB.append(getRootEndpointURL());
@@ -71,7 +67,6 @@ public class BasicEndToEndTest extends PortalContextProvider {
 		).then(
 		).statusCode(
 			Response.Status.OK.getStatusCode()
-		).assertThat(
 		).extract(
 		).jsonPath(
 		).param(
@@ -80,14 +75,14 @@ public class BasicEndToEndTest extends PortalContextProvider {
 			"items.find { item -> item.name == globalSiteName }.name"
 		);
 
-		Assert.assertThat(siteName, equalTo(DEFAULT_SITE_NAME));
+		Assert.assertEquals(DEFAULT_SITE_NAME, siteName);
 	}
 
 	@Test
 	public void testPortalURL() throws IOException {
 		String portalURL = getPortalURL();
 
-		Assert.assertThat(portalURL, is(notNullValue()));
+		Assert.assertNotNull(portalURL, portalURL);
 	}
 
 	private static final String _API_VERSION = "v1.0/";
