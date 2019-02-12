@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.nested;
+package com.liferay.commerce.openapi.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
