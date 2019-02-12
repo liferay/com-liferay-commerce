@@ -32,6 +32,8 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
+import javax.ws.rs.core.Response;
+
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -86,6 +88,8 @@ public class PriceListResourceTest extends PortalContextProvider {
 		).post(
 			_getPriceListResourceURL()
 		).then(
+		).statusCode(
+			Response.Status.CREATED.getStatusCode()
 		).assertThat(
 		).body(
 			"name", equalTo(jsonObject.getString("name"))
