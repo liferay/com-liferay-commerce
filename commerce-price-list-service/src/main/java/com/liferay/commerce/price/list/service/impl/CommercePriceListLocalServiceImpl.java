@@ -22,6 +22,7 @@ import com.liferay.commerce.price.list.exception.CommercePriceListExpirationDate
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.base.CommercePriceListLocalServiceBaseImpl;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
@@ -299,12 +300,15 @@ public class CommercePriceListLocalServiceImpl
 
 	@Override
 	public Optional<CommercePriceList> getCommercePriceList(
-			long groupId, long[] commerceUserSegmentEntryIds)
+			long groupId, long commerceAccountId,
+			long[] commerceUserSegmentEntryIds)
 		throws PortalException {
 
 		Group group = groupLocalService.getGroup(groupId);
 
-		String cacheKey = StringUtil.merge(commerceUserSegmentEntryIds);
+		String cacheKey =
+			commerceAccountId + StringPool.POUND +
+				StringUtil.merge(commerceUserSegmentEntryIds);
 
 		PortalCache<String, Serializable> portalCache =
 			MultiVMPoolUtil.getPortalCache("PRICE_LISTS_" + groupId);
@@ -320,7 +324,8 @@ public class CommercePriceListLocalServiceImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			group.getCompanyId(), groupId, commerceUserSegmentEntryIds);
+			group.getCompanyId(), groupId, commerceAccountId,
+			commerceUserSegmentEntryIds);
 
 		Indexer<CommercePriceList> indexer =
 			IndexerRegistryUtil.nullSafeGetIndexer(CommercePriceList.class);
@@ -684,13 +689,15 @@ public class CommercePriceListLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, long[] commerceUserSegmentEntryIds) {
+		long companyId, long groupId, long commerceAccountId,
+		long[] commerceUserSegmentEntryIds) {
 
 		SearchContext searchContext = new SearchContext();
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
+		attributes.put("commerceAccountId", commerceAccountId);
 		attributes.put(
 			"commerceUserSegmentEntryIds", commerceUserSegmentEntryIds);
 
