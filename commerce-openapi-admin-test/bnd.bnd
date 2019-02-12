@@ -36,6 +36,8 @@ Import-Package:\
 	@lib/groovy-json.jar,\
 	@lib/groovy-xml.jar,\
 	@lib/groovy.jar,\
+	@lib/hamcrest-core.jar,\
+	@lib/hamcrest-library.jar,\
 	@lib/httpclient.jar,\
 	@lib/httpcore.jar,\
 	@lib/httpmime.jar,\
@@ -43,7 +45,6 @@ Import-Package:\
 	@lib/jaxb-api.jar,\
 	@lib/jaxb-osgi.jar,\
 	@lib/json-path.jar,\
-	@lib/org.apache.servicemix.bundles.hamcrest.jar,\
 	@lib/rest-assured-common.jar,\
 	@lib/rest-assured.jar,\
 	@lib/tagsoup.jar,\
