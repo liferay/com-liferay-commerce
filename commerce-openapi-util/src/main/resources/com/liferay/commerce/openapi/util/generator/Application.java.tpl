@@ -36,7 +36,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		"liferay.jaxrs.exception.mappers.enabled=true",
 		"liferay.jaxrs.message.body.readers.enabled=true",
 		"liferay.jaxrs.message.body.writers.enabled=true",
-		"liferay.jaxrs.nested.enabled=true",
+		"liferay.jaxrs.nested.enabled=true"
 	},
 	service = Application.class
 )
