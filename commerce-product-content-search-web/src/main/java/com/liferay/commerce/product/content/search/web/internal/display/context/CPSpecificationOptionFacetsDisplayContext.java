@@ -16,7 +16,6 @@ package com.liferay.commerce.product.content.search.web.internal.display.context
 
 import com.liferay.commerce.product.content.search.web.internal.util.CPSpecificationOptionFacetsUtil;
 import com.liferay.commerce.product.model.CPSpecificationOption;
-import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.facet.Facet;
@@ -36,14 +35,10 @@ import javax.portlet.RenderRequest;
 public class CPSpecificationOptionFacetsDisplayContext {
 
 	public CPSpecificationOptionFacetsDisplayContext(
-		CPDefinitionSpecificationOptionValueService
-			cpDefinitionSpecificationOptionValueService,
 		CPSpecificationOptionLocalService cpSpecificationOptionLocalService,
 		RenderRequest renderRequest, List<Facet> facets,
 		PortletSharedSearchResponse portletSharedSearchResponse) {
 
-		_cpDefinitionSpecificationOptionValueService =
-			cpDefinitionSpecificationOptionValueService;
 		_cpSpecificationOptionLocalService = cpSpecificationOptionLocalService;
 		_renderRequest = renderRequest;
 		_facets = facets;
@@ -105,8 +100,6 @@ public class CPSpecificationOptionFacetsDisplayContext {
 		return false;
 	}
 
-	private final CPDefinitionSpecificationOptionValueService
-		_cpDefinitionSpecificationOptionValueService;
 	private final CPSpecificationOptionLocalService
 		_cpSpecificationOptionLocalService;
 	private final List<Facet> _facets;
