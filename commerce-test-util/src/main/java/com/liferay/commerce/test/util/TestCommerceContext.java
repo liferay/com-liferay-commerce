@@ -72,7 +72,8 @@ public class TestCommerceContext implements CommerceContext {
 		}
 
 		return CommercePriceListLocalServiceUtil.getCommercePriceList(
-			_contextGroup.getGroupId(), getCommerceUserSegmentEntryIds());
+			_contextGroup.getGroupId(), _commerceAccount.getCommerceAccountId(),
+			getCommerceUserSegmentEntryIds());
 	}
 
 	@Override

@@ -128,9 +128,12 @@ public class CommerceContextHttpImpl implements CommerceContext {
 
 		long groupId = _portal.getScopeGroupId(_httpServletRequest);
 
+		CommerceAccount commerceAccount = getCommerceAccount();
+
 		_commercePriceList =
 			_commercePriceListLocalService.getCommercePriceList(
-				groupId, getCommerceUserSegmentEntryIds());
+				groupId, commerceAccount.getCommerceAccountId(),
+				getCommerceUserSegmentEntryIds());
 
 		return _commercePriceList;
 	}

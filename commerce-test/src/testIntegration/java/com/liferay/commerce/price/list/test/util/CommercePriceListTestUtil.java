@@ -121,15 +121,16 @@ public class CommercePriceListTestUtil {
 	}
 
 	public static Optional<CommercePriceList> getCommercePriceList(
-			long groupId, long organizationId, long userId)
+			long groupId, long commerceAccountId, long userId)
 		throws Exception {
 
 		long[] commerceUserSegmentEntryIds =
 			CommerceUserSegmentEntryLocalServiceUtil.
-				getCommerceUserSegmentEntryIds(groupId, organizationId, userId);
+				getCommerceUserSegmentEntryIds(
+					groupId, commerceAccountId, userId);
 
 		return CommercePriceListLocalServiceUtil.getCommercePriceList(
-			groupId, commerceUserSegmentEntryIds);
+			groupId, commerceAccountId, commerceUserSegmentEntryIds);
 	}
 
 }
