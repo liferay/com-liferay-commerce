@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.nested.util;
+package com.liferay.commerce.openapi.core.internal.jaxrs.nested.dto;
 
 /**
  * @author Ivica Cardic
