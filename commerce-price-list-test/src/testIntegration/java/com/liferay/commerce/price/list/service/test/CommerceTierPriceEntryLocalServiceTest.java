@@ -17,6 +17,8 @@ package com.liferay.commerce.price.list.service.test;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.price.list.exception.DuplicateCommerceTierPriceEntryException;
 import com.liferay.commerce.price.list.exception.NoSuchPriceEntryException;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
@@ -37,14 +39,15 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.math.BigDecimal;
 
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,7 +55,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Zoltán Takács
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceTierPriceEntryLocalServiceTest {
 
@@ -64,6 +66,11 @@ public class CommerceTierPriceEntryLocalServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
+
+		Currency currency = Currency.getInstance(Locale.US);
+
+		_usCommerceCurrency = CommerceCurrencyTestUtil.addCommerceCurrency(
+			_group.getGroupId(), currency.getCurrencyCode());
 	}
 
 	@Test
@@ -426,5 +433,8 @@ public class CommerceTierPriceEntryLocalServiceTest {
 
 	@DeleteAfterTestRun
 	private Group _group;
+
+	@DeleteAfterTestRun
+	private CommerceCurrency _usCommerceCurrency;
 
 }
