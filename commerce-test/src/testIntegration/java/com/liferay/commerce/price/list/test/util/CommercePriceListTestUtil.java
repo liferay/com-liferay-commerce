@@ -35,8 +35,41 @@ import java.util.Optional;
 
 /**
  * @author Luca Pellizzon
+ * @author Ethan Bustad
  */
 public class CommercePriceListTestUtil {
+
+	public static CommercePriceList addCommercePriceList(
+			long groupId, double priority)
+		throws Exception {
+
+		CommerceCurrency commerceCurrency =
+			CommerceCurrencyTestUtil.addCommerceCurrency(groupId);
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
+
+		User user = UserLocalServiceUtil.getDefaultUser(
+			serviceContext.getCompanyId());
+
+		Calendar calendar = CalendarFactoryUtil.getCalendar(user.getTimeZone());
+
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
+
+		CommercePriceList commercePriceList =
+			CommercePriceListLocalServiceUtil.addCommercePriceList(
+				commerceCurrency.getCommerceCurrencyId(),
+				RandomTestUtil.randomString(), priority,
+				calendar.get(Calendar.MONTH),
+				calendar.get(Calendar.DAY_OF_MONTH),
+				calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
+				calendar.get(Calendar.MINUTE), calendar.get(Calendar.MONTH),
+				calendar.get(Calendar.DAY_OF_MONTH),
+				calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
+				calendar.get(Calendar.MINUTE), true, serviceContext);
+
+		return commercePriceList;
+	}
 
 	public static void addOrganizationSegmentToPriceList(
 			CommercePriceList commercePriceList, long... organizationIds)
@@ -82,34 +115,15 @@ public class CommercePriceListTestUtil {
 			long groupId, double priority, long userId)
 		throws Exception {
 
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(groupId);
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
-		User user = UserLocalServiceUtil.getDefaultUser(
-			serviceContext.getCompanyId());
-
-		Calendar calendar = CalendarFactoryUtil.getCalendar(user.getTimeZone());
-
-		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
-
-		CommercePriceList commercePriceList =
-			CommercePriceListLocalServiceUtil.addCommercePriceList(
-				commerceCurrency.getCommerceCurrencyId(),
-				RandomTestUtil.randomString(), priority,
-				calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DAY_OF_MONTH),
-				calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
-				calendar.get(Calendar.MINUTE), calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DAY_OF_MONTH),
-				calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
-				calendar.get(Calendar.MINUTE), true, serviceContext);
+		CommercePriceList commercePriceList = addCommercePriceList(
+			groupId, priority);
 
 		CommerceUserSegmentEntry commerceUserSegmentEntry =
 			CommerceUserSegmentTestUtil.addUserCommerceUserSegmentEntry(
 				groupId, userId);
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		CommercePriceListUserSegmentEntryRelServiceUtil.
 			addCommercePriceListUserSegmentEntryRel(
