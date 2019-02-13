@@ -15,7 +15,11 @@
 package com.liferay.commerce.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.test.util.CommerceAccountTestUtil;
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalServiceUtil;
+import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
 import com.liferay.commerce.price.list.test.util.CommercePriceListTestUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
@@ -23,20 +27,24 @@ import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroupRole;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.OrganizationTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.RoleTestUtil;
+import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.frutilla.FrutillaRule;
@@ -51,9 +59,10 @@ import org.junit.runner.RunWith;
 
 /**
  * @author Luca Pellizzon
+ * @author Ethan Bustad
  */
 @RunWith(Arquillian.class)
-public class CommercePriceListUserSegmentWithOrganizationTest {
+public class CommercePriceListUserSegmentWithAccountTest {
 
 	@ClassRule
 	@Rule
@@ -66,29 +75,294 @@ public class CommercePriceListUserSegmentWithOrganizationTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
+		_creatorUser = UserTestUtil.addUser();
+
 		_organization1 = OrganizationTestUtil.addOrganization();
 		_organization2 = OrganizationTestUtil.addOrganization();
 
-		_user = UserTestUtil.addUser();
+		_user = UserTestUtil.addUser(
+			_group.getGroupId(), LocaleUtil.getDefault());
 
 		_role1 = RoleTestUtil.addRole(RoleConstants.TYPE_REGULAR);
 		_role2 = RoleTestUtil.addRole(RoleConstants.TYPE_REGULAR);
 	}
 
 	@Test
-	public void testPriceListPriority() throws Exception {
+	public void testPriceListPriorityWithAccount() throws Exception {
 		frutillaRule.scenario(
 			"When multiple price lists are available, check that only the " +
 				"matching one is retrieved"
 		).given(
-			"I add some price lists with different priorities"
+			"I add an account, a group, and a user"
 		).and(
-			"An organization, a group and a user"
+			"I assign the user to the account"
+		).and(
+			"I add price lists with different priorities linked to the user"
+		).when(
+			"I try to get the best matching price list by segments and accounts"
+		).then(
+			"The price list with the highest priority should be retrieved"
+		);
+
+		CommerceAccount commerceAccount =
+			CommerceAccountTestUtil.addBusinessCommerceAccount(
+				_creatorUser.getUserId(), RandomTestUtil.randomString(),
+				_randomEmail(), _getServiceContext());
+
+		CommerceAccountTestUtil.addCommerceAccountUserRels(
+			commerceAccount.getCommerceAccountId(),
+			new long[] {_user.getUserId()}, _getServiceContext());
+
+		CommercePriceList commercePriceList1 =
+			CommercePriceListTestUtil.addUserPriceList(
+				_group.getGroupId(), 1, _user.getUserId());
+
+		CommercePriceListAccountRelLocalServiceUtil.
+			addCommercePriceListAccountRel(
+				commercePriceList1.getCommercePriceListId(),
+				commerceAccount.getCommerceAccountId(), 1,
+				_getServiceContext());
+
+		CommercePriceList commercePriceList2 =
+			CommercePriceListTestUtil.addUserPriceList(
+				_group.getGroupId(), 2, _user.getUserId());
+
+		CommercePriceListAccountRelLocalServiceUtil.
+			addCommercePriceListAccountRel(
+				commercePriceList2.getCommercePriceListId(),
+				commerceAccount.getCommerceAccountId(), 1,
+				_getServiceContext());
+
+		CommercePriceList commercePriceList3 =
+			CommercePriceListTestUtil.addUserPriceList(
+				_group.getGroupId(), 3, _user.getUserId());
+
+		CommercePriceListAccountRelLocalServiceUtil.
+			addCommercePriceListAccountRel(
+				commercePriceList3.getCommercePriceListId(),
+				commerceAccount.getCommerceAccountId(), 1,
+				_getServiceContext());
+
+		Optional<CommercePriceList> actualCommercePriceList =
+			CommercePriceListTestUtil.getCommercePriceList(
+				_group.getGroupId(), commerceAccount.getCommerceAccountId(),
+				_user.getUserId());
+
+		Assert.assertTrue(
+			"Expected to find a price list, but none found",
+			actualCommercePriceList.isPresent());
+
+		Assert.assertEquals(
+			commercePriceList3.getCommercePriceListId(),
+			actualCommercePriceList.get().getCommercePriceListId());
+	}
+
+	@Test
+	public void testPriceListPriorityWithAccountAndConflictingUserSegments1()
+		throws Exception {
+
+		frutillaRule.scenario(
+			"When multiple price lists are available, check that only the " +
+				"matching one is retrieved"
+		).given(
+			"I add an account, a group, and a user"
+		).and(
+			"I assign the user to the account"
+		).and(
+			"I add a price list with low priority to the user"
+		).and(
+			"I add a price list with high priority to the account"
 		).when(
 			"I try to get the best matching price list"
 		).then(
 			"The price list with the highest priority should be retrieved"
 		);
+
+		CommerceAccount commerceAccount =
+			CommerceAccountTestUtil.addBusinessCommerceAccount(
+				_creatorUser.getUserId(), RandomTestUtil.randomString(),
+				_randomEmail(), _getServiceContext());
+
+		CommerceAccountTestUtil.addCommerceAccountUserRels(
+			commerceAccount.getCommerceAccountId(),
+			new long[] {_user.getUserId()}, _getServiceContext());
+
+		CommercePriceListTestUtil.addUserPriceList(
+			_group.getGroupId(), 1, _user.getUserId());
+
+		CommercePriceList commercePriceList2 =
+			CommercePriceListTestUtil.addCommercePriceList(
+				_group.getGroupId(), 2);
+
+		CommercePriceListAccountRelLocalServiceUtil.
+			addCommercePriceListAccountRel(
+				commercePriceList2.getCommercePriceListId(),
+				commerceAccount.getCommerceAccountId(), 1,
+				_getServiceContext());
+
+		Optional<CommercePriceList> actualCommercePriceList =
+			CommercePriceListTestUtil.getCommercePriceList(
+				_group.getGroupId(), commerceAccount.getCommerceAccountId(),
+				_user.getUserId());
+
+		Assert.assertTrue(
+			"Expected to find a price list, but none found",
+			actualCommercePriceList.isPresent());
+
+		Assert.assertEquals(
+			commercePriceList2.getCommercePriceListId(),
+			actualCommercePriceList.get().getCommercePriceListId());
+	}
+
+	@Test
+	public void testPriceListPriorityWithAccountAndConflictingUserSegments2()
+		throws Exception {
+
+		frutillaRule.scenario(
+			"When multiple price lists are available, check that only the " +
+				"matching one is retrieved"
+		).given(
+			"I add an account, a group, and a user"
+		).and(
+			"I assign the user to the account"
+		).and(
+			"I add a price list with high priority to the user"
+		).and(
+			"I add a price list with low priority to the account"
+		).when(
+			"I try to get the best matching price list"
+		).then(
+			"The price list with the highest priority should be retrieved"
+		);
+
+		CommerceAccount commerceAccount =
+			CommerceAccountTestUtil.addBusinessCommerceAccount(
+				_creatorUser.getUserId(), RandomTestUtil.randomString(),
+				_randomEmail(), _getServiceContext());
+
+		CommerceAccountTestUtil.addCommerceAccountUserRels(
+			commerceAccount.getCommerceAccountId(),
+			new long[] {_user.getUserId()}, _getServiceContext());
+
+		CommercePriceList commercePriceList1 =
+			CommercePriceListTestUtil.addCommercePriceList(
+				_group.getGroupId(), 1);
+
+		CommercePriceListAccountRelLocalServiceUtil.
+			addCommercePriceListAccountRel(
+				commercePriceList1.getCommercePriceListId(),
+				commerceAccount.getCommerceAccountId(), 1,
+				_getServiceContext());
+
+		CommercePriceList commercePriceList2 =
+			CommercePriceListTestUtil.addUserPriceList(
+				_group.getGroupId(), 2, _user.getUserId());
+
+		Optional<CommercePriceList> actualCommercePriceList =
+			CommercePriceListTestUtil.getCommercePriceList(
+				_group.getGroupId(), commerceAccount.getCommerceAccountId(),
+				_user.getUserId());
+
+		Assert.assertTrue(
+			"Expected to find a price list, but none found",
+			actualCommercePriceList.isPresent());
+
+		Assert.assertEquals(
+			commercePriceList2.getCommercePriceListId(),
+			actualCommercePriceList.get().getCommercePriceListId());
+	}
+
+	@Test
+	public void testPriceListPriorityWithAccountAndNoUserSegments()
+		throws Exception {
+
+		frutillaRule.scenario(
+			"When multiple price lists are available, check that only the " +
+				"matching one is retrieved"
+		).given(
+			"I add an account, a group, and a user"
+		).and(
+			"I assign the user to the account"
+		).and(
+			"I add price lists with different priorities linked to the account"
+		).when(
+			"I try to get the best matching price list by account only"
+		).then(
+			"The price list with the highest priority should be retrieved"
+		);
+
+		CommerceAccount commerceAccount =
+			CommerceAccountTestUtil.addBusinessCommerceAccount(
+				_creatorUser.getUserId(), RandomTestUtil.randomString(),
+				_randomEmail(), _getServiceContext());
+
+		CommerceAccountTestUtil.addCommerceAccountUserRels(
+			commerceAccount.getCommerceAccountId(),
+			new long[] {_user.getUserId()}, _getServiceContext());
+
+		CommercePriceList commercePriceList1 =
+			CommercePriceListTestUtil.addUserPriceList(
+				_group.getGroupId(), 1, _user.getUserId());
+
+		CommercePriceListAccountRelLocalServiceUtil.
+			addCommercePriceListAccountRel(
+				commercePriceList1.getCommercePriceListId(),
+				commerceAccount.getCommerceAccountId(), 1,
+				_getServiceContext());
+
+		CommercePriceList commercePriceList2 =
+			CommercePriceListTestUtil.addUserPriceList(
+				_group.getGroupId(), 2, _user.getUserId());
+
+		CommercePriceListAccountRelLocalServiceUtil.
+			addCommercePriceListAccountRel(
+				commercePriceList2.getCommercePriceListId(),
+				commerceAccount.getCommerceAccountId(), 1,
+				_getServiceContext());
+
+		CommercePriceList commercePriceList3 =
+			CommercePriceListTestUtil.addUserPriceList(
+				_group.getGroupId(), 3, _user.getUserId());
+
+		CommercePriceListAccountRelLocalServiceUtil.
+			addCommercePriceListAccountRel(
+				commercePriceList3.getCommercePriceListId(),
+				commerceAccount.getCommerceAccountId(), 1,
+				_getServiceContext());
+
+		Optional<CommercePriceList> actualCommercePriceList =
+			CommercePriceListLocalServiceUtil.getCommercePriceList(
+				_group.getGroupId(), commerceAccount.getCommerceAccountId(),
+				new long[0]);
+
+		Assert.assertTrue(
+			"Expected to find a price list, but none found",
+			actualCommercePriceList.isPresent());
+
+		Assert.assertEquals(
+			commercePriceList3.getCommercePriceListId(),
+			actualCommercePriceList.get().getCommercePriceListId());
+	}
+
+	@Test
+	public void testPriceListPriorityWithUnusedAccount() throws Exception {
+		frutillaRule.scenario(
+			"When multiple price lists are available, check that only the " +
+				"matching one is retrieved"
+		).given(
+			"I add an account, a group, and a user"
+		).and(
+			"I add price lists with different priorities linked to the user"
+		).when(
+			"I try to get the best matching price list by segments and accounts"
+		).then(
+			"The price list with the highest priority should be retrieved"
+		);
+
+		CommerceAccount commerceAccount =
+			CommerceAccountTestUtil.addBusinessCommerceAccount(
+				_creatorUser.getUserId(), RandomTestUtil.randomString(),
+				_randomEmail(), _getServiceContext());
 
 		CommercePriceListTestUtil.addUserPriceList(
 			_group.getGroupId(), 1, _user.getUserId());
@@ -102,17 +376,19 @@ public class CommercePriceListUserSegmentWithOrganizationTest {
 
 		Optional<CommercePriceList> actualCommercePriceList =
 			CommercePriceListTestUtil.getCommercePriceList(
-				_group.getGroupId(), _organization1.getOrganizationId(),
+				_group.getGroupId(), commerceAccount.getCommerceAccountId(),
 				_user.getUserId());
 
-		Assert.assertNotNull(actualCommercePriceList.get());
+		Assert.assertTrue(
+			"Expected to find a price list, but none found",
+			actualCommercePriceList.isPresent());
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
 			actualCommercePriceList.get().getCommercePriceListId());
 	}
 
-	@Test(expected = NoSuchElementException.class)
+	@Test
 	public void testPriceListWithUserAndDifferentRoleUserSegments()
 		throws Exception {
 
@@ -130,9 +406,8 @@ public class CommercePriceListUserSegmentWithOrganizationTest {
 		).when(
 			"I try to get the price list"
 		).then(
-			"The price list should be returned only if all segments " +
-				"requirements are met. In this specific case the result " +
-					"should be empty"
+			"The result should be empty, because the price list should be " +
+				"returned only if all segment requirements are met"
 		);
 
 		_userLocalService.addOrganizationUser(
@@ -157,7 +432,9 @@ public class CommercePriceListUserSegmentWithOrganizationTest {
 				_group.getGroupId(), _organization1.getOrganizationId(),
 				_user.getUserId());
 
-		actualCommercePriceList.get();
+		Assert.assertFalse(
+			"Expected not to find a price list, but one was found",
+			actualCommercePriceList.isPresent());
 	}
 
 	@Test
@@ -224,7 +501,7 @@ public class CommercePriceListUserSegmentWithOrganizationTest {
 	}
 
 	@Ignore
-	@Test(expected = NoSuchElementException.class)
+	@Test
 	public void testPriceListWithUserAndRoleAndMoreOrganizationUserSegments2()
 		throws Exception {
 
@@ -276,7 +553,9 @@ public class CommercePriceListUserSegmentWithOrganizationTest {
 				_group.getGroupId(), _organization2.getOrganizationId(),
 				_user.getUserId());
 
-		actualCommercePriceList.get();
+		Assert.assertFalse(
+			"Expected not to find a price list, but one was found",
+			actualCommercePriceList.isPresent());
 	}
 
 	@Test
@@ -324,7 +603,9 @@ public class CommercePriceListUserSegmentWithOrganizationTest {
 				_group.getGroupId(), _organization1.getOrganizationId(),
 				_user.getUserId());
 
-		Assert.assertNotNull(actualCommercePriceList.get());
+		Assert.assertTrue(
+			"Expected to find a price list, but none found",
+			actualCommercePriceList.isPresent());
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
@@ -370,7 +651,9 @@ public class CommercePriceListUserSegmentWithOrganizationTest {
 				_group.getGroupId(), _organization1.getOrganizationId(),
 				_user.getUserId());
 
-		Assert.assertNotNull(actualCommercePriceList.get());
+		Assert.assertTrue(
+			"Expected to find a price list, but none found",
+			actualCommercePriceList.isPresent());
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
@@ -379,6 +662,24 @@ public class CommercePriceListUserSegmentWithOrganizationTest {
 
 	@Rule
 	public FrutillaRule frutillaRule = new FrutillaRule();
+
+	private static String _randomEmail() {
+		String randomEmail = null;
+
+		while (!Validator.isEmailAddress(randomEmail)) {
+			randomEmail = RandomTestUtil.randomString() + "@example.com";
+		}
+
+		return randomEmail;
+	}
+
+	private ServiceContext _getServiceContext() {
+		return ServiceContextTestUtil.getServiceContext(
+			_user.getCompanyId(), _group.getGroupId(), _user.getUserId());
+	}
+
+	@DeleteAfterTestRun
+	private User _creatorUser;
 
 	@DeleteAfterTestRun
 	private Group _group;
