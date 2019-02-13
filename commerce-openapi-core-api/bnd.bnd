@@ -5,4 +5,5 @@ Export-Package:\
 	com.liferay.commerce.openapi.core.annotation,\
 	com.liferay.commerce.openapi.core.context,\
 	com.liferay.commerce.openapi.core.exception,\
-	com.liferay.commerce.openapi.core.model
+	com.liferay.commerce.openapi.core.model,\
+	com.liferay.commerce.openapi.core.util
