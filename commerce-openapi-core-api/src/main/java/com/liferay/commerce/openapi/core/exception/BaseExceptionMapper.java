@@ -36,13 +36,7 @@ public abstract class BaseExceptionMapper<E extends Throwable>
 
 	@Override
 	public Response toResponse(E e) {
-		if (_log.isWarnEnabled()) {
-			_log.warn(e.getLocalizedMessage());
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("General exception", e);
-		}
+		_log.error("General REST exception", e);
 
 		Response.ResponseBuilder responseBuilder = Response.status(getStatus());
 
