@@ -1,3 +1,5 @@
+jar.enabled = false
+
 copyLibs {
 	enabled = true
 }
