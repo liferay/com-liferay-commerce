@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Commerce Media Web
-Bundle-SymbolicName: com.liferay.commerce.media.web
-Bundle-Version: 1.0.4
-Web-ContextPath: /commerce-media-web
