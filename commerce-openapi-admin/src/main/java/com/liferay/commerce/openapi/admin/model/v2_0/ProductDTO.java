@@ -71,6 +71,10 @@ public class ProductDTO {
 		return _shortDescription;
 	}
 
+	public SkuDTO[] getSkus() {
+		return _skus;
+	}
+
 	public Boolean isActive() {
 		return _active;
 	}
@@ -115,6 +119,10 @@ public class ProductDTO {
 		_shortDescription = shortDescription;
 	}
 
+	public void setSkus(SkuDTO[] skus) {
+		_skus = skus;
+	}
+
 	private Boolean _active;
 
 	@Nullable
@@ -139,5 +147,7 @@ public class ProductDTO {
 
 	@Nullable
 	private Map<String, String> _shortDescription;
+
+	private SkuDTO[] _skus;
 
 }
