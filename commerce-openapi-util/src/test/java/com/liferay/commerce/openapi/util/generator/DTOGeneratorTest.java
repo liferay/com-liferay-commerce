@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.util.generator;
 
+import static org.hamcrest.CoreMatchers.containsString;
+
 import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiFormat;
@@ -220,19 +222,17 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				classSource,
 				"import com.fasterxml.jackson.annotation.JsonFormat;"));
 
-		Assert.assertTrue(
-			"modifyDate getter method is annotated",
-			containsOnlyOne(
-				classSource,
-				"@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
-					"\"yyyy-MM-dd\")\n\tpublic Date getModifyDate"));
+		Assert.assertThat(
+			classSource,
+			containsString(
+				"@JsonFormat(pattern = \"yyyy-MM-dd\", shape = " +
+					"JsonFormat.Shape.STRING)\n\tpublic Date getModifyDate"));
 
-		Assert.assertTrue(
-			"modifyDate setter method is annotated",
-			containsOnlyOne(
-				classSource,
-				"@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
-					"\"yyyy-MM-dd\")\n\tpublic void setModifyDate"));
+		Assert.assertThat(
+			classSource,
+			containsString(
+				"@JsonFormat(pattern = \"yyyy-MM-dd\", shape = " +
+					"JsonFormat.Shape.STRING)\n\tpublic void setModifyDate"));
 	}
 
 	@Test
@@ -260,20 +260,18 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 				classSource,
 				"import com.fasterxml.jackson.annotation.JsonFormat;"));
 
-		Assert.assertTrue(
-			"modifyDateTime getter method is annotated",
-			containsOnlyOne(
-				classSource,
-				"@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
-					"\"yyyy-MM-dd'T'HH:mm:ss'Z'\")\n\t@Nullable\n\tpublic " +
-						"Date getModifyDateTime"));
+		Assert.assertThat(
+			classSource,
+			containsString(
+				"@JsonFormat(pattern = \"yyyy-MM-dd'T'HH:mm:ss'Z'\", shape = " +
+					"JsonFormat.Shape.STRING)\n\t@Nullable\n\tpublic Date " +
+						"getModifyDateTime"));
 
-		Assert.assertTrue(
-			"modifyDateTime setter method is annotated",
-			containsOnlyOne(
-				classSource,
-				"@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
-					"\"yyyy-MM-dd'T'HH:mm:ss'Z'\")\n\tpublic void " +
+		Assert.assertThat(
+			classSource,
+			containsString(
+				"@JsonFormat(pattern = \"yyyy-MM-dd'T'HH:mm:ss'Z'\", shape = " +
+					"JsonFormat.Shape.STRING)\n\tpublic void " +
 						"setModifyDateTime"));
 	}
 
