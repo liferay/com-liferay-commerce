@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import javax.annotation.Generated;
 
 /**
@@ -29,6 +31,7 @@ public class WebSiteDTO {
 		return _description;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -50,7 +53,10 @@ public class WebSiteDTO {
 	}
 
 	private String _description;
+
+	@Nullable
 	private Long _id;
+
 	private String _name;
 
 }

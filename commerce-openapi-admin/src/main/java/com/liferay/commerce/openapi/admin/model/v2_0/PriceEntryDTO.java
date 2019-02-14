@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import java.math.BigDecimal;
 
 import javax.annotation.Generated;
@@ -31,6 +33,7 @@ public class PriceEntryDTO {
 		return _commercePriceListId;
 	}
 
+	@Nullable
 	public Long getCommerceProductInstanceId() {
 		return _commerceProductInstanceId;
 	}
@@ -39,6 +42,7 @@ public class PriceEntryDTO {
 		return _externalReferenceCode;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -51,14 +55,17 @@ public class PriceEntryDTO {
 		return _promoPrice;
 	}
 
+	@Nullable
 	public String getSku() {
 		return _sku;
 	}
 
+	@Nullable
 	public String getSkuExternalReferenceCode() {
 		return _skuExternalReferenceCode;
 	}
 
+	@Nullable
 	public Boolean isHasTierPrice() {
 		return _hasTierPrice;
 	}
@@ -108,14 +115,27 @@ public class PriceEntryDTO {
 	}
 
 	private Long _commercePriceListId;
+
+	@Nullable
 	private Long _commerceProductInstanceId;
+
 	private String _externalReferenceCode;
+
+	@Nullable
 	private Boolean _hasTierPrice;
+
+	@Nullable
 	private Long _id;
+
 	private BigDecimal _price;
 	private BigDecimal _promoPrice;
+
+	@Nullable
 	private String _sku;
+
+	@Nullable
 	private String _skuExternalReferenceCode;
+
 	private Boolean _standardPrice;
 
 }

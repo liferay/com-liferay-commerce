@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import java.util.Date;
 
 import javax.annotation.Generated;
@@ -27,22 +29,27 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "User")
 public class UserDTO {
 
+	@Nullable
 	public String getAdditionalName() {
 		return _additionalName;
 	}
 
+	@Nullable
 	public String getAlternateName() {
 		return _alternateName;
 	}
 
+	@Nullable
 	public Date getBirthDate() {
 		return _birthDate;
 	}
 
+	@Nullable
 	public Long[] getCommerceAccountIds() {
 		return _commerceAccountIds;
 	}
 
+	@Nullable
 	public String getDashboardURL() {
 		return _dashboardURL;
 	}
@@ -59,6 +66,7 @@ public class UserDTO {
 		return _familyName;
 	}
 
+	@Nullable
 	public String getGender() {
 		return _gender;
 	}
@@ -67,26 +75,32 @@ public class UserDTO {
 		return _givenName;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
+	@Nullable
 	public String getImage() {
 		return _image;
 	}
 
+	@Nullable
 	public String getJobTitle() {
 		return _jobTitle;
 	}
 
+	@Nullable
 	public String getName() {
 		return _name;
 	}
 
+	@Nullable
 	public String getProfileURL() {
 		return _profileURL;
 	}
 
+	@Nullable
 	public String[] getRoleNames() {
 		return _roleNames;
 	}
@@ -155,21 +169,46 @@ public class UserDTO {
 		_roleNames = roleNames;
 	}
 
+	@Nullable
 	private String _additionalName;
+
+	@Nullable
 	private String _alternateName;
+
+	@Nullable
 	private Date _birthDate;
+
+	@Nullable
 	private Long[] _commerceAccountIds;
+
+	@Nullable
 	private String _dashboardURL;
+
 	private String _email;
 	private String _externalReferenceCode;
 	private String _familyName;
+
+	@Nullable
 	private String _gender;
+
 	private String _givenName;
+
+	@Nullable
 	private Long _id;
+
+	@Nullable
 	private String _image;
+
+	@Nullable
 	private String _jobTitle;
+
+	@Nullable
 	private String _name;
+
+	@Nullable
 	private String _profileURL;
+
+	@Nullable
 	private String[] _roleNames;
 
 }
