@@ -16,6 +16,8 @@ package com.liferay.commerce.discount.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -48,7 +50,6 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -68,9 +69,12 @@ public class CommerceDiscountTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 		_user = UserTestUtil.addUser();
+
+		_commerceAccount =
+			_commerceAccountLocalService.getPersonalCommerceAccount(
+				_user.getCompanyId(), _user.getUserId());
 	}
 
-	@Ignore
 	@Test
 	public void testCommerceFixedDiscount() throws Exception {
 		frutillaRule.scenario(
@@ -104,7 +108,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, null, null, null);
+			commerceCurrency, _user, _group, _commerceAccount, null, null);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -126,7 +130,6 @@ public class CommerceDiscountTest {
 			actualPrice.stripTrailingZeros());
 	}
 
-	@Ignore
 	@Test
 	public void testCommerceFixedDiscounts() throws Exception {
 		frutillaRule.scenario(
@@ -203,7 +206,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, null, null, null);
+			commerceCurrency, _user, _group, _commerceAccount, null, null);
 
 		CommerceProductPrice commerceProductPrice1 =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -279,7 +282,6 @@ public class CommerceDiscountTest {
 			actualPrice5.stripTrailingZeros());
 	}
 
-	@Ignore
 	@Test
 	public void testCommercePercentageDiscounts() throws Exception {
 		frutillaRule.scenario(
@@ -358,7 +360,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, null, null, null);
+			commerceCurrency, _user, _group, _commerceAccount, null, null);
 
 		CommerceProductPrice commerceProductPrice1 =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -441,7 +443,6 @@ public class CommerceDiscountTest {
 			actualPrice5.stripTrailingZeros());
 	}
 
-	@Ignore
 	@Test
 	public void testCouponCodeDiscount() throws Exception {
 		frutillaRule.scenario(
@@ -477,7 +478,8 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, null, null, couponCode);
+			commerceCurrency, _user, _group, _commerceAccount, null,
+			couponCode);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -509,7 +511,6 @@ public class CommerceDiscountTest {
 			actualPrice.stripTrailingZeros());
 	}
 
-	@Ignore
 	@Test
 	public void testUserSegmentDiscount() throws Exception {
 		frutillaRule.scenario(
@@ -549,7 +550,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, null, null, null);
+			commerceCurrency, _user, _group, _commerceAccount, null, null);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -589,6 +590,12 @@ public class CommerceDiscountTest {
 	}
 
 	private static final BigDecimal _ONE_HUNDRED = BigDecimal.valueOf(100);
+
+	@DeleteAfterTestRun
+	private CommerceAccount _commerceAccount;
+
+	@Inject
+	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Inject
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;

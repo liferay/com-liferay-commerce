@@ -15,6 +15,8 @@
 package com.liferay.commerce.internal.order.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
@@ -51,7 +53,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -92,8 +93,12 @@ public class CommerceOrderHttpHelperImplTest {
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
+		_commerceAccount =
+			_commerceAccountLocalService.getPersonalCommerceAccount(
+				_user.getCompanyId(), _user.getUserId());
+
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, null, null, null);
+			commerceCurrency, _user, _group, _commerceAccount, null, null);
 
 		_httpServletRequest.setAttribute(WebKeys.THEME_DISPLAY, _themeDisplay);
 		_httpServletRequest.setAttribute(
@@ -107,7 +112,6 @@ public class CommerceOrderHttpHelperImplTest {
 		CentralizedThreadLocal.clearShortLivedThreadLocals();
 	}
 
-	@Ignore
 	@Test
 	public void testGetCommerceOrder() throws Exception {
 		frutillaRule.scenario(
@@ -132,7 +136,6 @@ public class CommerceOrderHttpHelperImplTest {
 			actualCommerceOrder.getCommerceOrderId());
 	}
 
-	@Ignore
 	@Test
 	public void testGetCommerceOrderItemsQuantity() throws Exception {
 		frutillaRule.scenario(
@@ -173,6 +176,12 @@ public class CommerceOrderHttpHelperImplTest {
 
 	@Rule
 	public FrutillaRule frutillaRule = new FrutillaRule();
+
+	@DeleteAfterTestRun
+	private CommerceAccount _commerceAccount;
+
+	@Inject
+	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Inject
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;

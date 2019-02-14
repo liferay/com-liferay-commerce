@@ -15,6 +15,8 @@
 package com.liferay.commerce.discount.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -47,7 +49,6 @@ import java.math.BigDecimal;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,9 +68,12 @@ public class CommerceOrderDiscountTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 		_user = UserTestUtil.addUser();
+
+		_commerceAccount =
+			_commerceAccountLocalService.getPersonalCommerceAccount(
+				_user.getCompanyId(), _user.getUserId());
 	}
 
-	@Ignore
 	@Test
 	public void testMultiTargetDiscounts() throws Exception {
 		CommerceCurrency commerceCurrency =
@@ -130,7 +134,8 @@ public class CommerceOrderDiscountTest {
 			cpInstancePlain.getCPInstanceId(), orderedQuantity);
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, null, commerceOrder, null);
+			commerceCurrency, _user, _group, _commerceAccount, commerceOrder,
+			null);
 
 		CommerceMoney total = _commerceOrderPriceCalculation.getTotal(
 			commerceOrder, commerceContext);
@@ -166,7 +171,6 @@ public class CommerceOrderDiscountTest {
 			totalPrice.stripTrailingZeros());
 	}
 
-	@Ignore
 	@Test
 	public void testMultiTargetDiscountsWithCoupon() throws Exception {
 		CommerceCurrency commerceCurrency =
@@ -221,7 +225,8 @@ public class CommerceOrderDiscountTest {
 				CommerceDiscountConstants.TARGET_TOTAL, null);
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, null, commerceOrder, couponCode);
+			commerceCurrency, _user, _group, _commerceAccount, commerceOrder,
+			couponCode);
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(),
@@ -266,6 +271,12 @@ public class CommerceOrderDiscountTest {
 			expectedTotal.stripTrailingZeros(),
 			totalPrice.stripTrailingZeros());
 	}
+
+	@DeleteAfterTestRun
+	private CommerceAccount _commerceAccount;
+
+	@Inject
+	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Inject
 	private CommerceOrderLocalService _commerceOrderLocalService;
