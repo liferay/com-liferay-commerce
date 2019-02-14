@@ -71,6 +71,42 @@ public class OpenApiTestUtil {
 		return jsonNode.get("components");
 	}
 
+	public static JsonNode getOpenApiComponentsWithFormatDatePattern()
+		throws IOException {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{ \"components\": {\"schemas\": ");
+		sb.append("{\"HostComponent\": {\"type\": \"object\", ");
+		sb.append("\"properties\": {\"code\": {\"type\": \"integer\", ");
+		sb.append("\"format\": \"int64\"}, \"modifyDate\": {\"type\": ");
+		sb.append("\"string\", \"format\": \"date\"}}}}}}");
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode jsonNode = mapper.readTree(sb.toString());
+
+		return jsonNode.get("components");
+	}
+
+	public static JsonNode getOpenApiComponentsWithFormatDateTimePattern()
+		throws IOException {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{ \"components\": {\"schemas\": ");
+		sb.append("{\"HostComponent\": {\"type\": \"object\", ");
+		sb.append("\"properties\": {\"code\": {\"type\": \"integer\", ");
+		sb.append("\"format\": \"int64\"}, \"modifyDateTime\": {\"type\": ");
+		sb.append("\"string\", \"format\": \"date-time\"}}}}}}");
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode jsonNode = mapper.readTree(sb.toString());
+
+		return jsonNode.get("components");
+	}
+
 	public static JsonNode getOpenApiComponentsWithFreeFormObjectPattern()
 		throws IOException {
 
