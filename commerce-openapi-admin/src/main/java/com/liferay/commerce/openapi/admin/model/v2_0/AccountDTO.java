@@ -32,6 +32,7 @@ public class AccountDTO {
 		return _addresses;
 	}
 
+	@Nullable
 	public String[] getEmailAddresses() {
 		return _emailAddresses;
 	}
@@ -59,6 +60,7 @@ public class AccountDTO {
 		return _organizationId;
 	}
 
+	@Nullable
 	public String getTaxId() {
 		return _taxId;
 	}
@@ -165,6 +167,7 @@ public class AccountDTO {
 	@Nullable
 	private Boolean _root;
 
+	@Nullable
 	private String _taxId;
 
 	@Nullable
