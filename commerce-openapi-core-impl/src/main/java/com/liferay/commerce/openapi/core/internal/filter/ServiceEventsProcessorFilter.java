@@ -12,8 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.internal.filter;
+package com.liferay.commerce.openapi.core.internal.filter;
 
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -29,22 +30,23 @@ import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.Context;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Matija Petanjek
+ * @author Zoltán Takács
  */
 @Component(
 	immediate = true,
 	property = {
-		"osgi.jaxrs.application.select=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
-		"osgi.jaxrs.extension=true",
-		"osgi.jaxrs.name=Filter.CommerceAdminEventsProcessorFilter"
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.SERVICE_EVENT_FILTER_ENABLED + ")",
+		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true",
+		JaxrsWhiteboardConstants.JAX_RS_NAME + "=Filter.ServiceEventsProcessorFilter"
 	},
 	service = ContainerRequestFilter.class
 )
 @PreMatching
-public class CommerceAdminEventsProcessorFilter
-	implements ContainerRequestFilter {
+public class ServiceEventsProcessorFilter implements ContainerRequestFilter {
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) {
@@ -60,7 +62,7 @@ public class CommerceAdminEventsProcessorFilter
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceAdminEventsProcessorFilter.class);
+		ServiceEventsProcessorFilter.class);
 
 	@Context
 	private HttpServletRequest _httpServletRequest;
