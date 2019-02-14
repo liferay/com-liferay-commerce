@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
 
 import com.liferay.commerce.openapi.core.annotation.Nested;
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -70,7 +71,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  */
 @Component(
 	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(liferay.jaxrs.nested.enabled=true)",
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.NESTED_FILTER_ENABLED + ")",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
 	},
 	service = WriterInterceptor.class

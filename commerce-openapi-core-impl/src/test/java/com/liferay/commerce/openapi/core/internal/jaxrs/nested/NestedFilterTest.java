@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
 
+import com.liferay.commerce.openapi.core.internal.filter.NestedFilter;
+
 import java.io.IOException;
 
 import java.util.List;
