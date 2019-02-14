@@ -29,7 +29,10 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  * @author Matija Petanjek
  */
 @Component(
-	property = JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true",
+	property = {
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(osgi.jaxrs.name=CommerceOpenApiAdmin.Rest)",
+		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
+	},
 	service = ExceptionMapper.class
 )
 @Provider
