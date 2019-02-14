@@ -265,8 +265,8 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 			containsOnlyOne(
 				classSource,
 				"@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
-					"\"yyyy-MM-dd'T'HH:mm:ss'Z'\")\n\tpublic Date " +
-						"getModifyDateTime"));
+					"\"yyyy-MM-dd'T'HH:mm:ss'Z'\")\n\t@Nullable\n\tpublic " +
+						"Date getModifyDateTime"));
 
 		Assert.assertTrue(
 			"modifyDateTime setter method is annotated",

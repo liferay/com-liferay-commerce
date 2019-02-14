@@ -1,0 +1,13 @@
+components:
+  schemas:
+    HostComponent:
+      type: object
+      required:
+        - modifyDate
+      properties:
+        code:
+          type: integer
+          format: int64
+        modifyDate:
+          type: string
+          format: date
