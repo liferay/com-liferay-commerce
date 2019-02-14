@@ -73,6 +73,10 @@ public class OpenApiProperty {
 		return false;
 	}
 
+	public boolean isRequired() {
+		return _required;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
