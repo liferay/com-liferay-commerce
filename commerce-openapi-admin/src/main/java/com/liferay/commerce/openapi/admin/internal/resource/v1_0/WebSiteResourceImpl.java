@@ -14,13 +14,13 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v1_0;
 
-import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
 import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOUtils;
 import com.liferay.commerce.openapi.admin.model.v1_0.WebSiteDTO;
 import com.liferay.commerce.openapi.admin.resource.v1_0.WebSiteResource;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
+import com.liferay.commerce.openapi.core.util.IdUtils;
 import com.liferay.oauth2.provider.scope.RequiresScope;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;

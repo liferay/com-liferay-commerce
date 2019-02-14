@@ -15,11 +15,11 @@
 package com.liferay.commerce.openapi.admin.internal.resource.util.v1_0;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
-import com.liferay.commerce.openapi.admin.internal.util.IdUtils;
 import com.liferay.commerce.openapi.admin.internal.util.v1_0.DTOUtils;
 import com.liferay.commerce.openapi.admin.model.v1_0.SkuDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
+import com.liferay.commerce.openapi.core.util.IdUtils;
 import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
