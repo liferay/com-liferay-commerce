@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.resource.v2_0;
 
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.RegionDTO;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 
@@ -55,6 +56,13 @@ public interface CountryResource {
 	@Produces("application/*")
 	public CountryDTO getCountry(@PathParam("id") String id) throws Exception;
 
+	@GET
+	@Path("/{id}/region")
+	@Produces("application/*")
+	public CollectionDTO<RegionDTO> getRegions(
+			@PathParam("id") String id, @Context Pagination pagination)
+		throws Exception;
+
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
@@ -69,6 +77,14 @@ public interface CountryResource {
 	@Produces("application/*")
 	public CountryDTO upsertCountry(
 			@QueryParam("groupId") Long groupId, CountryDTO countryDTO)
+		throws Exception;
+
+	@Consumes("application/*")
+	@Path("/{id}/region")
+	@POST
+	@Produces("application/*")
+	public RegionDTO upsertRegion(
+			@PathParam("id") String id, RegionDTO regionDTO)
 		throws Exception;
 
 }
