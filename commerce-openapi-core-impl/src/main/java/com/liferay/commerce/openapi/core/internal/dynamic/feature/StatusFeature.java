@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.core.internal.dynamic.feature;
 
 import com.liferay.commerce.openapi.core.annotation.Status;
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 import com.liferay.commerce.openapi.core.internal.filter.StatusControlFilter;
 
 import java.lang.reflect.Method;
@@ -32,7 +33,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  */
 @Component(
 	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(liferay.jaxrs.status.feature.enabled=true)",
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.STATUS_FEATURE_ENABLED + ")",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
 	},
 	service = DynamicFeature.class

@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.core.internal.jaxrs.xml;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -37,7 +39,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  */
 @Component(
 	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(liferay.jaxrs.message.body.writers.enabled=true)",
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.MESSAGE_BODY_WRITERS_ENABLED + ")",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
 	},
 	service = MessageBodyWriter.class

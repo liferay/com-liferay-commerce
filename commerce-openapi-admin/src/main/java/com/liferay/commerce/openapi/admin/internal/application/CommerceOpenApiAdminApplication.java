@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.openapi.admin.internal.application;
 
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
+
 import javax.annotation.Generated;
 
 import javax.ws.rs.core.Application;
@@ -29,16 +31,17 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_BASE + "=/commerce-admin",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION_SELECT + "=(osgi.jaxrs.name=Liferay.OAuth2)",
 		JaxrsWhiteboardConstants.JAX_RS_NAME + "=CommerceOpenApiAdmin.Rest",
+		OpenApiPropsKeys.CONTEXT_PROVIDERS_ENABLED,
+		OpenApiPropsKeys.EXCEPTION_MAPPERS_ENABLED,
+		OpenApiPropsKeys.MESSAGE_BODY_READERS_ENABLED,
+		OpenApiPropsKeys.MESSAGE_BODY_WRITERS_ENABLED,
+		OpenApiPropsKeys.NESTED_FILTER_ENABLED,
+		OpenApiPropsKeys.SERVICE_EVENT_FILTER_ENABLED,
+		OpenApiPropsKeys.STATUS_FEATURE_ENABLED,
 		"auth.verifier.auth.verifier.BasicAuthHeaderAuthVerifier.urls.includes=/*",
 		"auth.verifier.auth.verifier.OAuth2RestAuthVerifier.urls.includes=/*",
 		"auth.verifier.auth.verifier.PortalSessionAuthVerifier.urls.includes=/*",
 		"auth.verifier.guest.allowed=true",
-		"liferay.jaxrs.context.providers.enabled=true",
-		"liferay.jaxrs.exception.mappers.enabled=true",
-		"liferay.jaxrs.message.body.readers.enabled=true",
-		"liferay.jaxrs.message.body.writers.enabled=true",
-		"liferay.jaxrs.nested.enabled=true",
-		"liferay.jaxrs.status.feature.enabled=true",
 		"oauth2.scopechecker.type=annotations"
 	},
 	service = Application.class
