@@ -12,8 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.core.internal.jaxrs.nested;
+package com.liferay.commerce.openapi.core.internal.filter;
 
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
+import com.liferay.commerce.openapi.core.internal.jaxrs.nested.NestedContext;
+import com.liferay.commerce.openapi.core.internal.jaxrs.nested.NestedContextThreadLocal;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
@@ -37,7 +40,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  */
 @Component(
 	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(liferay.jaxrs.nested.enabled=true)",
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.NESTED_FILTER_ENABLED + ")",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
 	},
 	service = ContainerRequestFilter.class

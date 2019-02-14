@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.core.internal.exception;
 
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
 import com.liferay.commerce.openapi.core.exception.RESTError;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -30,7 +31,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  */
 @Component(
 	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(liferay.jaxrs.exception.mappers.enabled=true)",
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.EXCEPTION_MAPPERS_ENABLED + ")",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
 	},
 	service = ExceptionMapper.class

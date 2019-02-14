@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.core.internal.context.provider;
 
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.portal.kernel.util.Portal;
 
@@ -35,7 +36,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  */
 @Component(
 	property = {
-		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(liferay.jaxrs.context.providers.enabled=true)",
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.CONTEXT_PROVIDERS_ENABLED + ")",
 		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
 	},
 	service = ContextProvider.class

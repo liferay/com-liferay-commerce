@@ -14,6 +14,8 @@
 
 package ${PACKAGE};
 
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
+
 import javax.annotation.Generated;
 
 import javax.ws.rs.core.Application;
@@ -28,16 +30,17 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 	property = {
 		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_BASE + "=${APPLICATION_BASE}",
 		JaxrsWhiteboardConstants.JAX_RS_NAME + "=${APPLICATION_NAME}.Rest",
+		OpenApiPropsKeys.CONTEXT_PROVIDERS_ENABLED,
+		OpenApiPropsKeys.EXCEPTION_MAPPERS_ENABLED,
+		OpenApiPropsKeys.MESSAGE_BODY_READERS_ENABLED,
+		OpenApiPropsKeys.MESSAGE_BODY_WRITERS_ENABLED,
+		OpenApiPropsKeys.NESTED_FILTER_ENABLED,
+		OpenApiPropsKeys.SERVICE_EVENT_FILTER_ENABLED,
+		OpenApiPropsKeys.STATUS_FEATURE_ENABLED,
 		${PORTAL_SESSION_AUTH_VERIFIER},
 		${BASIC_AUTH_VERIFIER},
 		${OAUTH2_AUTH_VERIFIER},
-		${GUEST_ALLOWED},
-		"liferay.jaxrs.context.providers.enabled=true",
-		"liferay.jaxrs.exception.mappers.enabled=true",
-		"liferay.jaxrs.message.body.readers.enabled=true",
-		"liferay.jaxrs.message.body.writers.enabled=true",
-		"liferay.jaxrs.nested.enabled=true",
-		"liferay.jaxrs.status.feature.enabled=true"
+		${GUEST_ALLOWED}
 	},
 	service = Application.class
 )
