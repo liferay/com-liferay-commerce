@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.io.IOException;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -41,6 +42,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -149,11 +151,26 @@ public class NestedWriteInterceptor implements WriterInterceptor {
 		return resources;
 	}
 
-	private Object _checkReturnType(Object result) {
+	private Object _checkReturnType(Class<?> fieldType, Object result) {
 		if (result instanceof CollectionDTO) {
 			CollectionDTO collectionDTO = (CollectionDTO)result;
 
 			result = collectionDTO.getItems();
+		}
+
+		if (fieldType.isArray() && result instanceof Collection) {
+			Collection collection = (Collection)result;
+
+			result = Array.newInstance(
+				fieldType.getComponentType(), collection.size());
+
+			Iterator iterator = collection.iterator();
+
+			int i = 0;
+
+			while (iterator.hasNext()) {
+				Array.set(result, i++, iterator.next());
+			}
 		}
 
 		return result;
@@ -416,7 +433,8 @@ public class NestedWriteInterceptor implements WriterInterceptor {
 
 			field.set(
 				entity,
-				_checkReturnType(_getFieldValue(fieldName, nestedContext)));
+				_checkReturnType(
+					field.getType(), _getFieldValue(fieldName, nestedContext)));
 		}
 	}
 
