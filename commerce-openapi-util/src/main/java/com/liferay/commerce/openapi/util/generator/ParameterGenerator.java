@@ -58,6 +58,11 @@ public class ParameterGenerator {
 			parameterAnnotation = "@PathParam";
 		}
 
+		if (!parameter.isRequired()) {
+			parameterAnnotation =
+				GeneratorConstants.NULLABLE_ANNOTATION + parameterAnnotation;
+		}
+
 		Provider javaTypeProvider = parameter.getJavaTypeProvider();
 
 		return String.format(
@@ -79,8 +84,14 @@ public class ParameterGenerator {
 
 		Provider javaTypeProvider = parameter.getJavaTypeProvider();
 
+		String nullableAnnotation = "";
+
+		if (!parameter.isRequired()) {
+			nullableAnnotation = GeneratorConstants.NULLABLE_ANNOTATION;
+		}
+
 		return String.format(
-			"%s %s", javaTypeProvider.getModelName(),
+			"%s %s %s", nullableAnnotation, javaTypeProvider.getModelName(),
 			StringUtils.toCamelCase(parameter.getName()));
 	}
 
