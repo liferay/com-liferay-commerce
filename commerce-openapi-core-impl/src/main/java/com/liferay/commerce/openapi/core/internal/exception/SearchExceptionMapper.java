@@ -12,8 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.openapi.admin.internal.exception;
+package com.liferay.commerce.openapi.core.internal.exception;
 
+import com.liferay.commerce.openapi.core.constants.OpenApiPropsKeys;
 import com.liferay.commerce.openapi.core.exception.BaseExceptionMapper;
 import com.liferay.commerce.openapi.core.exception.RESTError;
 import com.liferay.portal.kernel.search.SearchException;
@@ -29,7 +30,10 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
  * @author Matija Petanjek
  */
 @Component(
-	property = JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true",
+	property = {
+		JaxrsWhiteboardConstants.JAX_RS_APPLICATION_SELECT + "=(" + OpenApiPropsKeys.EXCEPTION_MAPPERS_ENABLED + ")",
+		JaxrsWhiteboardConstants.JAX_RS_EXTENSION + "=true"
+	},
 	service = ExceptionMapper.class
 )
 @Provider
