@@ -101,6 +101,7 @@ public class DTOGenerator extends BaseSourceGenerator {
 			importableJavaTypes.add(javaTypeProvider.getModelFQCN());
 
 			String javaType = javaTypeProvider.getModelName();
+			methodsSb.append(javaTypeProvider.getGetterMethodAnnotation());
 
 			if (!openApiProperty.isRequired()) {
 				importableJavaTypes.add(
@@ -110,8 +111,6 @@ public class DTOGenerator extends BaseSourceGenerator {
 				methodsSb.append(GeneratorConstants.NULLABLE_ANNOTATION);
 				methodsSb.append("\n");
 			}
-
-			methodsSb.append(javaTypeProvider.getGetterMethodAnnotation());
 
 			methodsSb.append("\tpublic ");
 			methodsSb.append(javaType);
