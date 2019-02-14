@@ -33,17 +33,6 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 public interface CommerceSubscriptionConfiguration {
 
 	@Meta.AD(
-		deflt = "10", name = "order-status-update-interval-minutes",
-		required = false
-	)
-	public int orderStatusUpdateIntervalMinutes();
-
-	@Meta.AD(
-		deflt = "99", name = "payment-attempts-max-count", required = false
-	)
-	public int paymentAttemptsMaxCount();
-
-	@Meta.AD(
 		deflt = "10", name = "renewal-check-interval-minutes", required = false
 	)
 	public int renewalCheckIntervalMinutes();
