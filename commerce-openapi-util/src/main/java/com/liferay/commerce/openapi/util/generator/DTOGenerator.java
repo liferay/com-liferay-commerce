@@ -95,6 +95,8 @@ public class DTOGenerator extends BaseSourceGenerator {
 			String name = javaTypeProvider.decorateVariable(
 				openApiProperty.getName());
 
+			importableJavaTypes.addAll(
+				javaTypeProvider.getAdditionalImportableJavaTypes());
 			importableJavaTypes.add(javaTypeProvider.getModelFQCN());
 
 			String javaType = javaTypeProvider.getModelName();
@@ -108,6 +110,8 @@ public class DTOGenerator extends BaseSourceGenerator {
 				methodsSb.append("\n");
 			}
 
+			methodsSb.append(javaTypeProvider.getGetterMethodAnnotation());
+
 			methodsSb.append("\tpublic ");
 			methodsSb.append(javaType);
 			methodsSb.append(" ");
@@ -116,6 +120,8 @@ public class DTOGenerator extends BaseSourceGenerator {
 			methodsSb.append("() {\n\t\treturn _");
 			methodsSb.append(name);
 			methodsSb.append(";\n\t}\n\n");
+
+			methodsSb.append(javaTypeProvider.getSetterMethodAnnotation());
 
 			methodsSb.append("\tpublic void ");
 			methodsSb.append(openApiProperty.getSetterSyntax());

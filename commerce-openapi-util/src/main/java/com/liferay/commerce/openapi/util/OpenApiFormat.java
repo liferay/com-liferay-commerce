@@ -17,6 +17,8 @@ package com.liferay.commerce.openapi.util;
 import com.liferay.commerce.openapi.util.exception.OpenApiException;
 import com.liferay.commerce.openapi.util.util.ArrayProvider;
 import com.liferay.commerce.openapi.util.util.DTOProvider;
+import com.liferay.commerce.openapi.util.util.DateProvider;
+import com.liferay.commerce.openapi.util.util.DateTimeProvider;
 import com.liferay.commerce.openapi.util.util.OpenApiComponentUtil;
 import com.liferay.commerce.openapi.util.util.Provider;
 
@@ -34,12 +36,8 @@ public enum OpenApiFormat {
 	BOOLEAN(
 		"boolean", OpenApiType.BOOLEAN, new Provider("Boolean", null), true),
 	BYTE("byte", OpenApiType.STRING, new Provider("Byte", null), false),
-	DATE(
-		"date", OpenApiType.STRING, new Provider("Date", "java.util.Date"),
-		false),
-	DATE_TIME(
-		"date-time", OpenApiType.STRING, new Provider("Date", "java.util.Date"),
-		false),
+	DATE("date", OpenApiType.STRING, new DateProvider(), false),
+	DATE_TIME("date-time", OpenApiType.STRING, new DateTimeProvider(), false),
 	DICTIONARY(
 		null, OpenApiType.DICTIONARY, new Provider("Map", "java.util.Map"),
 		true),
