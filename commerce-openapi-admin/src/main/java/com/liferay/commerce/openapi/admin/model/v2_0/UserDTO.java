@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.model.v2_0;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import com.liferay.commerce.openapi.core.annotation.Nullable;
@@ -39,6 +40,7 @@ public class UserDTO {
 		return _alternateName;
 	}
 
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
 	@Nullable
 	public Date getBirthDate() {
 		return _birthDate;
@@ -113,6 +115,7 @@ public class UserDTO {
 		_alternateName = alternateName;
 	}
 
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
 	public void setBirthDate(Date birthDate) {
 		_birthDate = birthDate;
 	}

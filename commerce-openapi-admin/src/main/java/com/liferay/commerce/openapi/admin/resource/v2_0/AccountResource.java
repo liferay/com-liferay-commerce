@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.resource.v2_0;
 
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
@@ -41,6 +42,14 @@ import javax.ws.rs.core.Response;
 @Path("/v2.0/account")
 public interface AccountResource {
 
+	@Consumes("application/*")
+	@Path("/{id}/address")
+	@POST
+	@Produces("application/*")
+	public AddressDTO addAddress(
+			@PathParam("id") String id, AddressDTO addressDTO)
+		throws Exception;
+
 	@DELETE
 	@Path("/{id}")
 	public Response deleteAccount(@PathParam("id") String id) throws Exception;
@@ -54,6 +63,13 @@ public interface AccountResource {
 	@Path("/")
 	@Produces("application/*")
 	public CollectionDTO<AccountDTO> getAccounts(@Context Pagination pagination)
+		throws Exception;
+
+	@GET
+	@Path("/{id}/address")
+	@Produces("application/*")
+	public CollectionDTO<AddressDTO> getAddresses(
+			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
 
 	@GET

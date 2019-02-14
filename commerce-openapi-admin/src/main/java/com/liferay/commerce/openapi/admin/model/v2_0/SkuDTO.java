@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.model.v2_0;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import com.liferay.commerce.openapi.core.annotation.Nullable;
@@ -41,11 +42,13 @@ public class SkuDTO {
 		return _depth;
 	}
 
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
 	@Nullable
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
 
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
 	@Nullable
 	public Date getExpirationDate() {
 		return _expirationDate;
@@ -122,10 +125,12 @@ public class SkuDTO {
 		_depth = depth;
 	}
 
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
 	public void setDisplayDate(Date displayDate) {
 		_displayDate = displayDate;
 	}
 
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
 	public void setExpirationDate(Date expirationDate) {
 		_expirationDate = expirationDate;
 	}

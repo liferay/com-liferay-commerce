@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.resource.v2_0;
 
+import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
@@ -24,6 +25,7 @@ import javax.annotation.Generated;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -44,6 +46,12 @@ public interface OrderResource {
 	public Response deleteOrder(@PathParam("id") String id) throws Exception;
 
 	@GET
+	@Path("/{id}/billingAddress")
+	@Produces("application/*")
+	public AddressDTO getBillingAddress(@PathParam("id") String id)
+		throws Exception;
+
+	@GET
 	@Path("/{id}")
 	@Produces("application/*")
 	public OrderDTO getOrder(
@@ -57,12 +65,34 @@ public interface OrderResource {
 			@Context Pagination pagination)
 		throws Exception;
 
+	@GET
+	@Path("/{id}/shippingAddress")
+	@Produces("application/*")
+	public AddressDTO getShippingAddress(@PathParam("id") String id)
+		throws Exception;
+
 	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	public Response updateOrder(
 			@PathParam("id") String id, OrderDTO orderDTO,
 			@Context Language language)
+		throws Exception;
+
+	@Consumes("application/*")
+	@Path("/{id}/billingAddress")
+	@POST
+	@Produces("application/*")
+	public AddressDTO upsertBillingAddress(
+			@PathParam("id") String id, AddressDTO addressDTO)
+		throws Exception;
+
+	@Consumes("application/*")
+	@Path("/{id}/shippingAddress")
+	@POST
+	@Produces("application/*")
+	public AddressDTO upsertShippingAddress(
+			@PathParam("id") String id, AddressDTO addressDTO)
 		throws Exception;
 
 }
