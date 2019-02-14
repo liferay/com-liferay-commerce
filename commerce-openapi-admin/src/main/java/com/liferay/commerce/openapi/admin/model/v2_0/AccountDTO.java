@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import javax.annotation.Generated;
 
 /**
@@ -25,6 +27,11 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "Account")
 public class AccountDTO {
 
+	@Nullable
+	public AddressDTO[] getAddresses() {
+		return _addresses;
+	}
+
 	public String[] getEmailAddresses() {
 		return _emailAddresses;
 	}
@@ -33,10 +40,12 @@ public class AccountDTO {
 		return _externalReferenceCode;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
+	@Nullable
 	public Long getLogoId() {
 		return _logoId;
 	}
@@ -45,6 +54,7 @@ public class AccountDTO {
 		return _name;
 	}
 
+	@Nullable
 	public Long getOrganizationId() {
 		return _organizationId;
 	}
@@ -53,6 +63,7 @@ public class AccountDTO {
 		return _taxId;
 	}
 
+	@Nullable
 	public String getType() {
 		return _type;
 	}
@@ -61,16 +72,23 @@ public class AccountDTO {
 		return _userIds;
 	}
 
+	@Nullable
 	public Boolean isBusiness() {
 		return _business;
 	}
 
+	@Nullable
 	public Boolean isPersonal() {
 		return _personal;
 	}
 
+	@Nullable
 	public Boolean isRoot() {
 		return _root;
+	}
+
+	public void setAddresses(AddressDTO[] addresses) {
+		_addresses = addresses;
 	}
 
 	public void setBusiness(Boolean business) {
@@ -121,17 +139,37 @@ public class AccountDTO {
 		_userIds = userIds;
 	}
 
+	@Nullable
+	private AddressDTO[] _addresses;
+
+	@Nullable
 	private Boolean _business;
+
 	private String[] _emailAddresses;
 	private String _externalReferenceCode;
+
+	@Nullable
 	private Long _id;
+
+	@Nullable
 	private Long _logoId;
+
 	private String _name;
+
+	@Nullable
 	private Long _organizationId;
+
+	@Nullable
 	private Boolean _personal;
+
+	@Nullable
 	private Boolean _root;
+
 	private String _taxId;
+
+	@Nullable
 	private String _type;
+
 	private Long[] _userIds;
 
 }

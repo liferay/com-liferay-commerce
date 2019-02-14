@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import java.util.Date;
 
 import javax.annotation.Generated;
@@ -27,6 +29,7 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "PriceList")
 public class PriceListDTO {
 
+	@Nullable
 	public Long getCommercePriceListId() {
 		return _commercePriceListId;
 	}
@@ -35,10 +38,12 @@ public class PriceListDTO {
 		return _currency;
 	}
 
+	@Nullable
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
 
+	@Nullable
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
@@ -47,6 +52,7 @@ public class PriceListDTO {
 		return _externalReferenceCode;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -108,12 +114,23 @@ public class PriceListDTO {
 	}
 
 	private Boolean _active;
+
+	@Nullable
 	private Long _commercePriceListId;
+
 	private String _currency;
+
+	@Nullable
 	private Date _displayDate;
+
+	@Nullable
 	private Date _expirationDate;
+
 	private String _externalReferenceCode;
+
+	@Nullable
 	private Long _id;
+
 	private String _name;
 	private Boolean _neverExpire;
 	private Double _priority;

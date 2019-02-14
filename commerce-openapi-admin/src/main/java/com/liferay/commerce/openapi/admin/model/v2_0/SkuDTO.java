@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import java.math.BigDecimal;
 
 import java.util.Date;
@@ -29,18 +31,22 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "Sku")
 public class SkuDTO {
 
+	@Nullable
 	public BigDecimal getCost() {
 		return _cost;
 	}
 
+	@Nullable
 	public Double getDepth() {
 		return _depth;
 	}
 
+	@Nullable
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
 
+	@Nullable
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
@@ -49,26 +55,32 @@ public class SkuDTO {
 		return _externalReferenceCode;
 	}
 
+	@Nullable
 	public String getGtin() {
 		return _gtin;
 	}
 
+	@Nullable
 	public Double getHeight() {
 		return _height;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
+	@Nullable
 	public String getManufacturerPartNumber() {
 		return _manufacturerPartNumber;
 	}
 
+	@Nullable
 	public BigDecimal getPrice() {
 		return _price;
 	}
 
+	@Nullable
 	public BigDecimal getPromoPrice() {
 		return _promoPrice;
 	}
@@ -77,22 +89,27 @@ public class SkuDTO {
 		return _sku;
 	}
 
+	@Nullable
 	public Double getWeight() {
 		return _weight;
 	}
 
+	@Nullable
 	public Double getWidth() {
 		return _width;
 	}
 
+	@Nullable
 	public Boolean isNeverExpire() {
 		return _neverExpire;
 	}
 
+	@Nullable
 	public Boolean isPublished() {
 		return _published;
 	}
 
+	@Nullable
 	public Boolean isPurchasable() {
 		return _purchasable;
 	}
@@ -165,22 +182,53 @@ public class SkuDTO {
 		_width = width;
 	}
 
+	@Nullable
 	private BigDecimal _cost;
+
+	@Nullable
 	private Double _depth;
+
+	@Nullable
 	private Date _displayDate;
+
+	@Nullable
 	private Date _expirationDate;
+
 	private String _externalReferenceCode;
+
+	@Nullable
 	private String _gtin;
+
+	@Nullable
 	private Double _height;
+
+	@Nullable
 	private Long _id;
+
+	@Nullable
 	private String _manufacturerPartNumber;
+
+	@Nullable
 	private Boolean _neverExpire;
+
+	@Nullable
 	private BigDecimal _price;
+
+	@Nullable
 	private BigDecimal _promoPrice;
+
+	@Nullable
 	private Boolean _published;
+
+	@Nullable
 	private Boolean _purchasable;
+
 	private String _sku;
+
+	@Nullable
 	private Double _weight;
+
+	@Nullable
 	private Double _width;
 
 }

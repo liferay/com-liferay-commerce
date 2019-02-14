@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import java.math.BigDecimal;
 
 import java.util.Map;
@@ -37,14 +39,17 @@ public class CurrencyDTO {
 		return _formatPattern;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
+	@Nullable
 	public Integer getMaxFractionDigits() {
 		return _maxFractionDigits;
 	}
 
+	@Nullable
 	public Integer getMinFractionDigits() {
 		return _minFractionDigits;
 	}
@@ -61,6 +66,7 @@ public class CurrencyDTO {
 		return _roundingMode;
 	}
 
+	@Nullable
 	public Boolean isPrimary() {
 		return _primary;
 	}
@@ -103,11 +109,21 @@ public class CurrencyDTO {
 
 	private String _code;
 	private Map<String, String> _formatPattern;
+
+	@Nullable
 	private Long _id;
+
+	@Nullable
 	private Integer _maxFractionDigits;
+
+	@Nullable
 	private Integer _minFractionDigits;
+
 	private Map<String, String> _name;
+
+	@Nullable
 	private Boolean _primary;
+
 	private BigDecimal _rate;
 	private String _roundingMode;
 

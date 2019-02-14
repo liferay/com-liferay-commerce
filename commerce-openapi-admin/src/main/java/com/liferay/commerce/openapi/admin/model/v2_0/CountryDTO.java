@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import java.util.Map;
 
 import javax.annotation.Generated;
@@ -27,6 +29,7 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "Country")
 public class CountryDTO {
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -39,6 +42,11 @@ public class CountryDTO {
 		return _numericISOCode;
 	}
 
+	@Nullable
+	public RegionDTO[] getRegions() {
+		return _regions;
+	}
+
 	public String getThreeLettersISOCode() {
 		return _threeLettersISOCode;
 	}
@@ -47,14 +55,17 @@ public class CountryDTO {
 		return _twoLettersISOCode;
 	}
 
+	@Nullable
 	public Boolean isBillingAllowed() {
 		return _billingAllowed;
 	}
 
+	@Nullable
 	public Boolean isShippingAllowed() {
 		return _shippingAllowed;
 	}
 
+	@Nullable
 	public Boolean isSubjectToVAT() {
 		return _subjectToVAT;
 	}
@@ -75,6 +86,10 @@ public class CountryDTO {
 		_numericISOCode = numericISOCode;
 	}
 
+	public void setRegions(RegionDTO[] regions) {
+		_regions = regions;
+	}
+
 	public void setShippingAllowed(Boolean shippingAllowed) {
 		_shippingAllowed = shippingAllowed;
 	}
@@ -91,12 +106,24 @@ public class CountryDTO {
 		_twoLettersISOCode = twoLettersISOCode;
 	}
 
+	@Nullable
 	private Boolean _billingAllowed;
+
+	@Nullable
 	private Long _id;
+
 	private Map<String, String> _name;
 	private Integer _numericISOCode;
+
+	@Nullable
+	private RegionDTO[] _regions;
+
+	@Nullable
 	private Boolean _shippingAllowed;
+
+	@Nullable
 	private Boolean _subjectToVAT;
+
 	private String _threeLettersISOCode;
 	private String _twoLettersISOCode;
 
