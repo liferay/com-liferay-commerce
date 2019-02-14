@@ -210,6 +210,13 @@ public class ResourceGenerator extends BaseSourceGenerator {
 					continue;
 				}
 
+				if (!parameter.isRequired()) {
+					importStatements.add(
+						"import " +
+							GeneratorConstants.NULLABLE_ANNOTATION_FQCN +
+								";\n");
+				}
+
 				importStatements.add(
 					String.format(
 						"import javax.ws.rs.%sParam;%n",

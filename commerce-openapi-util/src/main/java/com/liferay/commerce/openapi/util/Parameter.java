@@ -58,6 +58,10 @@ public class Parameter {
 		return _schema;
 	}
 
+	public boolean isRequired() {
+		return _required;
+	}
+
 	@Override
 	public String toString() {
 		if (_toString != null) {
