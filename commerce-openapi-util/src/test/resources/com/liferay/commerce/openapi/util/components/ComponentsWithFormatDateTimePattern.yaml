@@ -1,0 +1,11 @@
+components:
+  schemas:
+    HostComponent:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        modifyDateTime:
+          type: string
+          format: date-time
