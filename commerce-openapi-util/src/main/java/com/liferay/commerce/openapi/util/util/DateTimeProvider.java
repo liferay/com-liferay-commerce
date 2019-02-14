@@ -18,51 +18,29 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author Zoltán Takács
- * @author Igor Beslic
+ * @author Ivica Cardic
  */
-public class Provider {
+public class DateTimeProvider extends Provider {
 
-	public Provider(String modelName, String fqcn) {
-		this(modelName, fqcn, modelName);
-	}
-
-	public Provider(String modelName, String fqcn, String variableName) {
-		_modelName = modelName;
-		_fqcn = fqcn;
-		_variableName = variableName;
-	}
-
-	public String decorateVariable(String baseVariableName) {
-		return baseVariableName;
+	public DateTimeProvider() {
+		super("Date", "java.util.Date");
 	}
 
 	public List<String> getAdditionalImportableJavaTypes() {
-		return Collections.emptyList();
+		return Collections.singletonList(
+			"com.fasterxml.jackson.annotation.JsonFormat");
 	}
 
 	public String getGetterMethodAnnotation() {
-		return "";
-	}
-
-	public String getModelFQCN() {
-		return _fqcn;
-	}
-
-	public String getModelName() {
-		return _modelName;
+		return _JSON_DATE_TIME_FORMAT;
 	}
 
 	public String getSetterMethodAnnotation() {
-		return "";
+		return _JSON_DATE_TIME_FORMAT;
 	}
 
-	public String getVariableName() {
-		return _variableName;
-	}
-
-	private final String _fqcn;
-	private final String _modelName;
-	private final String _variableName;
+	private static final String _JSON_DATE_TIME_FORMAT =
+		"\t@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
+			"\"yyyy-MM-dd'T'HH:mm:ss'Z'\")\n";
 
 }
