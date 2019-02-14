@@ -16,6 +16,10 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
+import java.util.Map;
+
 import javax.annotation.Generated;
 
 /**
@@ -24,6 +28,16 @@ import javax.annotation.Generated;
 @Generated(value = "OSGiRESTModuleGenerator")
 @JacksonXmlRootElement(localName = "Order")
 public class OrderDTO {
+
+	@Nullable
+	public Map<String, String> getBillingAddress() {
+		return _billingAddress;
+	}
+
+	@Nullable
+	public Long getBillingAddressId() {
+		return _billingAddressId;
+	}
 
 	public Long getCommerceAccountId() {
 		return _commerceAccountId;
@@ -37,8 +51,27 @@ public class OrderDTO {
 		return _externalReferenceCode;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
+	}
+
+	@Nullable
+	public Map<String, String> getShippingAddress() {
+		return _shippingAddress;
+	}
+
+	@Nullable
+	public Long getShippingAddressId() {
+		return _shippingAddressId;
+	}
+
+	public void setBillingAddress(Map<String, String> billingAddress) {
+		_billingAddress = billingAddress;
+	}
+
+	public void setBillingAddressId(Long billingAddressId) {
+		_billingAddressId = billingAddressId;
 	}
 
 	public void setCommerceAccountId(Long commerceAccountId) {
@@ -57,9 +90,31 @@ public class OrderDTO {
 		_id = id;
 	}
 
+	public void setShippingAddress(Map<String, String> shippingAddress) {
+		_shippingAddress = shippingAddress;
+	}
+
+	public void setShippingAddressId(Long shippingAddressId) {
+		_shippingAddressId = shippingAddressId;
+	}
+
+	@Nullable
+	private Map<String, String> _billingAddress;
+
+	@Nullable
+	private Long _billingAddressId;
+
 	private Long _commerceAccountId;
 	private String _currency;
 	private String _externalReferenceCode;
+
+	@Nullable
 	private Long _id;
+
+	@Nullable
+	private Map<String, String> _shippingAddress;
+
+	@Nullable
+	private Long _shippingAddressId;
 
 }

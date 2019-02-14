@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import javax.annotation.Generated;
 
 /**
@@ -25,6 +27,7 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "Inventory")
 public class InventoryDTO {
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -45,6 +48,7 @@ public class InventoryDTO {
 		return _warehouseId;
 	}
 
+	@Nullable
 	public String getWarehouseName() {
 		return _warehouseName;
 	}
@@ -73,11 +77,15 @@ public class InventoryDTO {
 		_warehouseName = warehouseName;
 	}
 
+	@Nullable
 	private Long _id;
+
 	private Integer _quantity;
 	private String _skuExternalReferenceCode;
 	private Long _skuId;
 	private Long _warehouseId;
+
+	@Nullable
 	private String _warehouseName;
 
 }

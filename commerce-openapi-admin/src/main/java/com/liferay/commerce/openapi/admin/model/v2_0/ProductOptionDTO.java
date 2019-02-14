@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import javax.annotation.Generated;
 
 /**
@@ -25,6 +27,7 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "ProductOption")
 public class ProductOptionDTO {
 
+	@Nullable
 	public String getDescription() {
 		return _description;
 	}
@@ -37,6 +40,7 @@ public class ProductOptionDTO {
 		return _fieldType;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -49,14 +53,17 @@ public class ProductOptionDTO {
 		return _name;
 	}
 
+	@Nullable
 	public Boolean isFacetable() {
 		return _facetable;
 	}
 
+	@Nullable
 	public Boolean isRequired() {
 		return _required;
 	}
 
+	@Nullable
 	public Boolean isSkuContributor() {
 		return _skuContributor;
 	}
@@ -97,14 +104,26 @@ public class ProductOptionDTO {
 		_skuContributor = skuContributor;
 	}
 
+	@Nullable
 	private String _description;
+
 	private String _externalReferenceCode;
+
+	@Nullable
 	private Boolean _facetable;
+
 	private String _fieldType;
+
+	@Nullable
 	private Long _id;
+
 	private String _key;
 	private String _name;
+
+	@Nullable
 	private Boolean _required;
+
+	@Nullable
 	private Boolean _skuContributor;
 
 }

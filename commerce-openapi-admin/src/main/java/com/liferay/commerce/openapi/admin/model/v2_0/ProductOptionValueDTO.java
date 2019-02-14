@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import com.liferay.commerce.openapi.core.annotation.Nullable;
+
 import javax.annotation.Generated;
 
 /**
@@ -29,6 +31,7 @@ public class ProductOptionValueDTO {
 		return _externalReferenceCode;
 	}
 
+	@Nullable
 	public Long getId() {
 		return _id;
 	}
@@ -41,6 +44,7 @@ public class ProductOptionValueDTO {
 		return _name;
 	}
 
+	@Nullable
 	public Double getPriority() {
 		return _priority;
 	}
@@ -66,9 +70,14 @@ public class ProductOptionValueDTO {
 	}
 
 	private String _externalReferenceCode;
+
+	@Nullable
 	private Long _id;
+
 	private String _key;
 	private String _name;
+
+	@Nullable
 	private Double _priority;
 
 }
