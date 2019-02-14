@@ -19,6 +19,7 @@ import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.SKUHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.SkuDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.ProductResource;
+import com.liferay.commerce.openapi.core.annotation.Nested;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -71,6 +72,7 @@ public class ProductResourceImpl implements ProductResource {
 		return _productHelper.getProducts(groupId, pagination);
 	}
 
+	@Nested("skus")
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<SkuDTO> getSkus(String id, Pagination pagination)
