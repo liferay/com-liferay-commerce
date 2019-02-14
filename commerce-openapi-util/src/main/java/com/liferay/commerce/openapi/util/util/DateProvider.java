@@ -40,7 +40,7 @@ public class DateProvider extends Provider {
 	}
 
 	private static final String _JSON_DATE_FORMAT =
-		"\t@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
-			"\"yyyy-MM-dd\")\n";
+		"\t@JsonFormat(pattern = \"yyyy-MM-dd\", shape = " +
+			"JsonFormat.Shape.STRING)\n";
 
 }

@@ -40,7 +40,7 @@ public class DateTimeProvider extends Provider {
 	}
 
 	private static final String _JSON_DATE_TIME_FORMAT =
-		"\t@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
-			"\"yyyy-MM-dd'T'HH:mm:ss'Z'\")\n";
+		"\t@JsonFormat(pattern = \"yyyy-MM-dd'T'HH:mm:ss'Z'\", shape = " +
+			"JsonFormat.Shape.STRING)\n";
 
 }
