@@ -18,6 +18,7 @@ import com.liferay.commerce.openapi.util.OpenApi;
 import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiFormat;
 import com.liferay.commerce.openapi.util.OpenApiProperty;
+import com.liferay.commerce.openapi.util.generator.constants.GeneratorConstants;
 import com.liferay.commerce.openapi.util.util.PackageUtils;
 import com.liferay.commerce.openapi.util.util.Provider;
 import com.liferay.commerce.openapi.util.util.StringUtils;
