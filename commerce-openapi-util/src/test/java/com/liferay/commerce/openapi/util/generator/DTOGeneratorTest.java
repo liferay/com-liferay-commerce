@@ -105,15 +105,8 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		List<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getOpenApiComponentsWithArrayPattern());
 
-		OpenApiComponent hostOpenApiComponent = null;
-
-		for (OpenApiComponent openApiComponent : components) {
-			if ("HostComponent".equals(openApiComponent.getName())) {
-				hostOpenApiComponent = openApiComponent;
-
-				break;
-			}
-		}
+		OpenApiComponent hostOpenApiComponent = _getHostOpenApiComponent(
+			components);
 
 		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
 
@@ -203,6 +196,88 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 	}
 
 	@Test
+	public void testGetDTOSourceIfFormatDatePresent() throws IOException {
+		ComponentImporter componentImporter = new ComponentImporter();
+
+		List<OpenApiComponent> components = componentImporter.getComponents(
+			OpenApiTestUtil.getOpenApiComponentsWithFormatDatePattern());
+
+		OpenApiComponent hostOpenApiComponent = _getHostOpenApiComponent(
+			components);
+
+		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
+
+		openApi.setOpenApiComponents(components);
+
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			"test", "test", "com.liferay.test", openApi);
+
+		String classSource = dtoGenerator.getClassSource(hostOpenApiComponent);
+
+		Assert.assertTrue(
+			"import statement is present",
+			containsOnlyOne(
+				classSource,
+				"import com.fasterxml.jackson.annotation.JsonFormat;"));
+
+		Assert.assertTrue(
+			"modifyDate getter method is annotated",
+			containsOnlyOne(
+				classSource,
+				"@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
+					"\"yyyy-MM-dd\")\n\tpublic Date getModifyDate"));
+
+		Assert.assertTrue(
+			"modifyDate setter method is annotated",
+			containsOnlyOne(
+				classSource,
+				"@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
+					"\"yyyy-MM-dd\")\n\tpublic void setModifyDate"));
+	}
+
+	@Test
+	public void testGetDTOSourceIfFormatDateTimePresent() throws IOException {
+		ComponentImporter componentImporter = new ComponentImporter();
+
+		List<OpenApiComponent> components = componentImporter.getComponents(
+			OpenApiTestUtil.getOpenApiComponentsWithFormatDateTimePattern());
+
+		OpenApiComponent hostOpenApiComponent = _getHostOpenApiComponent(
+			components);
+
+		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
+
+		openApi.setOpenApiComponents(components);
+
+		DTOGenerator dtoGenerator = new DTOGenerator(
+			"test", "test", "com.liferay.test", openApi);
+
+		String classSource = dtoGenerator.getClassSource(hostOpenApiComponent);
+
+		Assert.assertTrue(
+			"import statement is present",
+			containsOnlyOne(
+				classSource,
+				"import com.fasterxml.jackson.annotation.JsonFormat;"));
+
+		Assert.assertTrue(
+			"modifyDateTime getter method is annotated",
+			containsOnlyOne(
+				classSource,
+				"@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
+					"\"yyyy-MM-dd'T'HH:mm:ss'Z'\")\n\tpublic Date " +
+						"getModifyDateTime"));
+
+		Assert.assertTrue(
+			"modifyDateTime setter method is annotated",
+			containsOnlyOne(
+				classSource,
+				"@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = " +
+					"\"yyyy-MM-dd'T'HH:mm:ss'Z'\")\n\tpublic void " +
+						"setModifyDateTime"));
+	}
+
+	@Test
 	public void testGetDTOSourceIfFreeFormObjectPresent() throws IOException {
 		ComponentImporter componentImporter = new ComponentImporter();
 
@@ -269,15 +344,8 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 		List<OpenApiComponent> components = componentImporter.getComponents(
 			OpenApiTestUtil.getOpenApiComponentsWithNestedObjectPattern());
 
-		OpenApiComponent hostOpenApiComponent = null;
-
-		for (OpenApiComponent openApiComponent : components) {
-			if ("HostComponent".equals(openApiComponent.getName())) {
-				hostOpenApiComponent = openApiComponent;
-
-				break;
-			}
-		}
+		OpenApiComponent hostOpenApiComponent = _getHostOpenApiComponent(
+			components);
 
 		OpenApi openApi = new OpenApi("1.0", "Test Open Api", "Test Open Api");
 
@@ -366,6 +434,22 @@ public class DTOGeneratorTest extends BaseGeneratorTest {
 					MapStringStringProvider.class, javaTypeProvider.getClass());
 			}
 		}
+	}
+
+	private OpenApiComponent _getHostOpenApiComponent(
+		List<OpenApiComponent> components) {
+
+		OpenApiComponent hostOpenApiComponent = null;
+
+		for (OpenApiComponent openApiComponent : components) {
+			if ("HostComponent".equals(openApiComponent.getName())) {
+				hostOpenApiComponent = openApiComponent;
+
+				break;
+			}
+		}
+
+		return hostOpenApiComponent;
 	}
 
 	private List<OpenApiProperty> _getPropertyDefinitions(
