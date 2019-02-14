@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.OrderResource;
 import com.liferay.commerce.openapi.core.context.Language;
@@ -54,6 +55,15 @@ public class OrderResourceImpl implements OrderResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
+	public AddressDTO getBillingAddress(String id) throws Exception {
+
+		// TODO
+
+		return null;
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public OrderDTO getOrder(String id, Language language) throws Exception {
 		return new OrderDTO();
 	}
@@ -68,6 +78,15 @@ public class OrderResourceImpl implements OrderResource {
 	}
 
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public AddressDTO getShippingAddress(String id) throws Exception {
+
+		// TODO
+
+		return null;
+	}
+
+	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response updateOrder(String id, OrderDTO orderDTO, Language language)
 		throws Exception {
@@ -75,6 +94,26 @@ public class OrderResourceImpl implements OrderResource {
 		Response.ResponseBuilder responseBuilder = Response.accepted();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public AddressDTO upsertBillingAddress(String id, AddressDTO addressDTO)
+		throws Exception {
+
+		// TODO
+
+		return null;
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public AddressDTO upsertShippingAddress(String id, AddressDTO addressDTO)
+		throws Exception {
+
+		// TODO
+
+		return null;
 	}
 
 }

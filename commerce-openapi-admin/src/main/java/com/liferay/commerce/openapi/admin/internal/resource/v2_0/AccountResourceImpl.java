@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.AccountHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.AccountResource;
 import com.liferay.commerce.openapi.core.context.Language;
@@ -47,6 +48,16 @@ public class AccountResourceImpl implements AccountResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
+	public AddressDTO addAddress(String id, AddressDTO addressDTO)
+		throws Exception {
+
+		// TODO
+
+		return null;
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteAccount(String id) throws Exception {
 		_accountHelper.deleteAccount(id, _company);
 
@@ -69,11 +80,24 @@ public class AccountResourceImpl implements AccountResource {
 		return _accountHelper.getAccounts(_user, pagination);
 	}
 
-	//TODO
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<AddressDTO> getAddresses(
+			String id, Pagination pagination)
+		throws Exception {
+
+		//TODO
+
+		return null;
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
 	public CollectionDTO<OrderDTO> getOrder(
 			String id, Long groupId, Pagination pagination)
 		throws Exception {
+
+		// TODO
 
 		return null;
 	}
@@ -96,11 +120,13 @@ public class AccountResourceImpl implements AccountResource {
 		return _accountHelper.upsertAccount(accountDTO);
 	}
 
-	//TODO
 	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
 	public OrderDTO upsertSku(
 			String id, Long groupId, OrderDTO orderDTO, Language language)
 		throws Exception {
+
+		//TODO
 
 		return null;
 	}
