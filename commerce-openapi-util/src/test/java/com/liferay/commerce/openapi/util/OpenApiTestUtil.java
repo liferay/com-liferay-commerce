@@ -16,8 +16,13 @@ package com.liferay.commerce.openapi.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author Igor Beslic
@@ -74,17 +79,14 @@ public class OpenApiTestUtil {
 	public static JsonNode getOpenApiComponentsWithFormatDatePattern()
 		throws IOException {
 
-		StringBuilder sb = new StringBuilder();
+		String resource = _getResource(
+			"components/ComponentsWithFormatDatePattern.yaml");
 
-		sb.append("{ \"components\": {\"schemas\": ");
-		sb.append("{\"HostComponent\": {\"type\": \"object\", ");
-		sb.append("\"properties\": {\"code\": {\"type\": \"integer\", ");
-		sb.append("\"format\": \"int64\"}, \"modifyDate\": {\"type\": ");
-		sb.append("\"string\", \"format\": \"date\"}}}}}}");
+		String componentJSON = _convertYamlToJsonString(resource);
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		JsonNode jsonNode = mapper.readTree(sb.toString());
+		JsonNode jsonNode = mapper.readTree(componentJSON);
 
 		return jsonNode.get("components");
 	}
@@ -92,17 +94,14 @@ public class OpenApiTestUtil {
 	public static JsonNode getOpenApiComponentsWithFormatDateTimePattern()
 		throws IOException {
 
-		StringBuilder sb = new StringBuilder();
+		String resource = _getResource(
+			"components/ComponentsWithFormatDateTimePattern.yaml");
 
-		sb.append("{ \"components\": {\"schemas\": ");
-		sb.append("{\"HostComponent\": {\"type\": \"object\", ");
-		sb.append("\"properties\": {\"code\": {\"type\": \"integer\", ");
-		sb.append("\"format\": \"int64\"}, \"modifyDateTime\": {\"type\": ");
-		sb.append("\"string\", \"format\": \"date-time\"}}}}}}");
+		String componentJSON = _convertYamlToJsonString(resource);
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		JsonNode jsonNode = mapper.readTree(sb.toString());
+		JsonNode jsonNode = mapper.readTree(componentJSON);
 
 		return jsonNode.get("components");
 	}
@@ -214,6 +213,41 @@ public class OpenApiTestUtil {
 		ObjectMapper mapper = new ObjectMapper();
 
 		return mapper.readTree(sb.toString());
+	}
+
+	private static String _convertYamlToJsonString(String yaml)
+		throws IOException {
+
+		ObjectMapper yamlReader = new ObjectMapper(new YAMLFactory());
+
+		Object obj = yamlReader.readValue(yaml, Object.class);
+
+		ObjectMapper jsonWriter = new ObjectMapper();
+
+		return jsonWriter.writeValueAsString(obj);
+	}
+
+	private static String _getResource(String resourcePath) throws IOException {
+		Class<?> clazz = OpenApiTestUtil.class;
+
+		try (BufferedReader reader = new BufferedReader(
+				new InputStreamReader(
+					clazz.getResourceAsStream(resourcePath),
+					StandardCharsets.UTF_8))) {
+
+			String line = null;
+			StringBuilder stringBuilder = new StringBuilder();
+			String ls = System.getProperty("line.separator");
+
+			while ((line = reader.readLine()) != null) {
+				stringBuilder.append(line);
+				stringBuilder.append(ls);
+			}
+
+			stringBuilder.setLength(stringBuilder.length() - ls.length());
+
+			return stringBuilder.toString();
+		}
 	}
 
 }
