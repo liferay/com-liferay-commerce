@@ -157,9 +157,24 @@ public class CommerceOrderServiceUtil {
 		return getService().getCommerceOrders(groupId, orderStatuses);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder> getCommerceOrders(
+		long groupId, long commerceAccountId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceOrder> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceOrders(groupId, commerceAccountId, start, end,
+			orderByComparator);
+	}
+
 	public static int getCommerceOrdersCount(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCommerceOrdersCount(groupId);
+	}
+
+	public static int getCommerceOrdersCount(long groupId,
+		long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceOrdersCount(groupId, commerceAccountId);
 	}
 
 	/**
@@ -321,6 +336,26 @@ public class CommerceOrderServiceUtil {
 		long commerceOrderId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().updateUser(commerceOrderId, userId);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder upsertCommerceOrder(
+		long commerceAccountId, long commerceCurrencyId, long billingAddressId,
+		long shippingAddressId, String commercePaymentMethodKey,
+		long commerceShippingMethodId, String shippingOptionName,
+		String purchaseOrderNumber, java.math.BigDecimal subtotal,
+		java.math.BigDecimal shippingAmount, java.math.BigDecimal total,
+		int paymentStatus, int orderStatus, String advanceStatus,
+		String externalReferenceCode,
+		com.liferay.commerce.context.CommerceContext commerceContext,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .upsertCommerceOrder(commerceAccountId, commerceCurrencyId,
+			billingAddressId, shippingAddressId, commercePaymentMethodKey,
+			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
+			subtotal, shippingAmount, total, paymentStatus, orderStatus,
+			advanceStatus, externalReferenceCode, commerceContext,
+			serviceContext);
 	}
 
 	public static CommerceOrderService getService() {
