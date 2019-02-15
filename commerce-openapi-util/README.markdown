@@ -50,12 +50,23 @@ Example 3 - generate module at location other than defined in config file and ov
 
 `../gradlew -PmainClass=com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator runClass`
 
+# IDE Aid
+### Code Analyse
+As an aid to developers, generator marks all non required request parameters and schema properties with ``@Nullable`` annotation. If code analyse tools are enabled IDE will warn developer about possible NullPointerExceptions. Very useful as generator do not generaty primitive java types, but wrapper objects which may cause NPEs during autoboxing/unboxing process.
+
+***How to perform code analyse in IntelliJ IDEA***
+
+In IntelliJ IDEA ``Preferences`` go to ``Build, Execution, Deployment/Deployment``. On the area on right locate option ``Add runtime assertions for notnull-annotated methods and parameters`` and make sure that it is enabled. Now click ``Configure annotations`` button. If IntelliJ IDE hasn't already imported ``com.liferay.commerce.openapi.core.annotation.Nullable`` annotation, please do it by clicking ``+`` sign.
+Once annotations are configured and settings are applied one can run code inspection.
+
+Run inspection either via shortcut or by right click against module ``Analyze / Run Inspection by Name``. In popup window start typing ``Constant conditions & exceptions`` and choose it once you see it in the list. Click ``Run``. Inspections Results tab would appear and list all accesses of nullable fields.     
+
 # OpenAPI examples
 
 **Free Form Dictionary**
 
 Free form dictionary is special Open Api structure that supports mixed value types. As regular dictionaries, free form dictionaries only support string key values. Free form dictionary is advised way to store Liferay expando fields.
-Here is `Item` object described by following schema: 
+Here is `Item` object described by following schema:
 ```
  Item:
    required:
@@ -82,7 +93,7 @@ Content body of an submitted Item has form:
     "name": "Blue handle",
     "active": "true",
     "itemCode": "I-002",
-    "itemParts": 
+    "itemParts":
         {
             "structure": "solid",
             "color": "blue",
