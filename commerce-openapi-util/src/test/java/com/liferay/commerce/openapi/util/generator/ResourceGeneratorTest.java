@@ -21,6 +21,7 @@ import com.liferay.commerce.openapi.util.OpenApiComponent;
 import com.liferay.commerce.openapi.util.OpenApiContextExtension;
 import com.liferay.commerce.openapi.util.Response;
 import com.liferay.commerce.openapi.util.Schema;
+import com.liferay.commerce.openapi.util.Security;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,22 +108,40 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 			"test", "test", "test", "test", "test", false, "test", "test",
 			new OpenApi("1.0", "Test Open Api", "Test Open Api"));
 
-		String interfaceMethods =
+		String implementationMethods =
 			resourceGenerator.toResourceImplementationMethods(
 				_getMethods(true, "testModel", Collections.emptyList()),
 				_getRandomComponentDefinitions(4, "TestModel"));
 
 		Assert.assertTrue(
-			"Pagination context expected",
-			interfaceMethods.contains("Pagination pagination"));
+			"RequiresScope read expected",
+			implementationMethods.contains(
+				"@RequiresScope(\"CommerceOpenApiAdmin.read\")\n\tpublic " +
+					"CollectionDTO<TestModel1DTO> get(Pagination pagination)"));
 
-		interfaceMethods = resourceGenerator.toResourceImplementationMethods(
-			_getMethods(true, "testModel", _getExtensions("language")),
-			_getRandomComponentDefinitions(4, "TestModel"));
+		Assert.assertTrue(
+			"RequiresScope write expected",
+			implementationMethods.contains(
+				"@RequiresScope(\"CommerceOpenApiAdmin.write\")\n\tpublic " +
+					"Response update()"));
+
+		Assert.assertTrue(
+			"no RequiresScope expected",
+			implementationMethods.contains(
+				"@Override\n\tpublic Response delete()"));
+
+		Assert.assertTrue(
+			"Pagination context expected",
+			implementationMethods.contains("Pagination pagination"));
+
+		implementationMethods =
+			resourceGenerator.toResourceImplementationMethods(
+				_getMethods(true, "testModel", _getExtensions("language")),
+				_getRandomComponentDefinitions(4, "TestModel"));
 
 		Assert.assertTrue(
 			"Context parameters with proper syntax expected",
-			interfaceMethods.contains(
+			implementationMethods.contains(
 				"Language language, Pagination pagination"));
 	}
 
@@ -192,20 +211,22 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 
 		methods.add(
 			new Method(
-				"update", _getRequestContents(), "PUT", absolutePath,
+				"update", _getSecurity("CommerceOpenApiAdmin.write"),
+				_getRequestContents(), "PUT", absolutePath,
 				Collections.emptyList(),
 				_getResponses(
 					responseContentArray, 201, 202, 400, 401, 404, 500),
 				openApiContextExtensions));
 		methods.add(
 			new Method(
-				"delete", Collections.emptyList(), "DELETE", absolutePath,
+				"delete", null, Collections.emptyList(), "DELETE", absolutePath,
 				Collections.emptyList(),
 				_getResponses(responseContentArray, 204, 401),
 				openApiContextExtensions));
 		methods.add(
 			new Method(
-				"get", _getRequestContents(), "GET", absolutePath,
+				"get", _getSecurity("CommerceOpenApiAdmin.read"),
+				_getRequestContents(), "GET", absolutePath,
 				Collections.emptyList(),
 				_getResponses(responseContentArray, 200, 400, 404, 500),
 				openApiContextExtensions));
@@ -290,6 +311,14 @@ public class ResourceGeneratorTest extends BaseGeneratorTest {
 		}
 
 		return responses;
+	}
+
+	private Security _getSecurity(String oAuth2Scope) {
+		Security security = new Security();
+
+		security.setOAuth2Scopes(Collections.singletonList(oAuth2Scope));
+
+		return security;
 	}
 
 }
