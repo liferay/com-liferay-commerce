@@ -271,12 +271,34 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
+	public List<CommerceOrder> getCommerceOrders(
+			long groupId, long commerceAccountId, int start, int end,
+			OrderByComparator<CommerceOrder> orderByComparator)
+		throws PortalException {
+
+		_checkAccountOrderPermissions(groupId, commerceAccountId);
+
+		return commerceOrderLocalService.getCommerceOrders(
+			groupId, commerceAccountId, start, end, orderByComparator);
+	}
+
+	@Override
 	public int getCommerceOrdersCount(long groupId) throws PortalException {
 		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
 			CommerceOrderActionKeys.MANAGE_COMMERCE_ORDERS);
 
 		return commerceOrderLocalService.getCommerceOrdersCount(groupId);
+	}
+
+	@Override
+	public int getCommerceOrdersCount(long groupId, long commerceAccountId)
+		throws PortalException {
+
+		_checkAccountOrderPermissions(groupId, commerceAccountId);
+
+		return commerceOrderLocalService.getCommerceOrdersCount(
+			groupId, commerceAccountId);
 	}
 
 	@Override
@@ -524,6 +546,41 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			getPermissionChecker(), commerceOrderId, ActionKeys.UPDATE);
 
 		return commerceOrderLocalService.updateUser(commerceOrderId, userId);
+	}
+
+	@Override
+	public CommerceOrder upsertCommerceOrder(
+			long commerceAccountId, long commerceCurrencyId,
+			long billingAddressId, long shippingAddressId,
+			String commercePaymentMethodKey, long commerceShippingMethodId,
+			String shippingOptionName, String purchaseOrderNumber,
+			BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
+			int paymentStatus, int orderStatus, String advanceStatus,
+			String externalReferenceCode, CommerceContext commerceContext,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CommerceOrder commerceOrder =
+			commerceOrderLocalService.fetchByExternalReferenceCode(
+				serviceContext.getCompanyId(), externalReferenceCode);
+
+		if (commerceOrder == null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(), serviceContext.getScopeGroupId(),
+				CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
+		}
+		else {
+			_commerceOrderModelResourcePermission.check(
+				getPermissionChecker(), commerceOrder, ActionKeys.UPDATE);
+		}
+
+		return commerceOrderLocalService.upsertCommerceOrder(
+			commerceAccountId, commerceCurrencyId, billingAddressId,
+			shippingAddressId, commercePaymentMethodKey,
+			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
+			subtotal, shippingAmount, total, paymentStatus, orderStatus,
+			advanceStatus, externalReferenceCode, commerceContext,
+			serviceContext);
 	}
 
 	private void _checkAccountOrderPermissions(
