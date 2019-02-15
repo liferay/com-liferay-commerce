@@ -25,6 +25,7 @@ import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.AccountMemberDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountOrganizationDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
@@ -73,6 +74,26 @@ import java.util.stream.Stream;
  * @author Alessio Antonio Rendina
  */
 public class DTOUtils {
+
+	public static AccountMemberDTO[] modelsToAccountMemberDTOArray(
+		List<CommerceAccountUserRel> commerceAccountUserRels) {
+
+		if (commerceAccountUserRels == null) {
+			return null;
+		}
+
+		List<AccountMemberDTO> accountMembers = new ArrayList<>();
+
+		for (CommerceAccountUserRel commerceAccountUserRel :
+				commerceAccountUserRels) {
+
+			accountMembers.add(modelToDTO(commerceAccountUserRel));
+		}
+
+		Stream<AccountMemberDTO> stream = accountMembers.stream();
+
+		return stream.toArray(AccountMemberDTO[]::new);
+	}
 
 	public static AccountOrganizationDTO[] modelsToAccountOrganizationDTOArray(
 		List<CommerceAccountOrganizationRel> commerceAccountOrganizationRels) {
@@ -197,6 +218,37 @@ public class DTOUtils {
 		addressDTO.setZip(commerceAddress.getZip());
 
 		return addressDTO;
+	}
+
+	public static AccountMemberDTO modelToDTO(
+		CommerceAccountUserRel commerceAccountUserRel) {
+
+		AccountMemberDTO accountMemberDTO = new AccountMemberDTO();
+
+		if (commerceAccountUserRel == null) {
+			return accountMemberDTO;
+		}
+
+		try {
+			accountMemberDTO.setCommerceAccountId(
+				commerceAccountUserRel.getCommerceAccountId());
+
+			User user = commerceAccountUserRel.getUser();
+
+			accountMemberDTO.setName(user.getFullName());
+			accountMemberDTO.setUserId(user.getUserId());
+
+			accountMemberDTO.setRoles(
+				modelsToAccountRoleDTOArray(
+					commerceAccountUserRel.getUserGroupRoles()));
+		}
+		catch (Exception e) {
+			_log.error("Cannot instantiate AccountOrganizationDTO ", e);
+
+			throw new RuntimeException(e);
+		}
+
+		return accountMemberDTO;
 	}
 
 	public static CountryDTO modelToDTO(CommerceCountry commerceCountry) {
