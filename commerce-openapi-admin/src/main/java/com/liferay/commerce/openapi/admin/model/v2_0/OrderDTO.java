@@ -16,9 +16,7 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import com.liferay.commerce.openapi.core.annotation.Nullable;
-
-import java.util.Map;
+import java.math.BigDecimal;
 
 import javax.annotation.Generated;
 
@@ -29,12 +27,14 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "Order")
 public class OrderDTO {
 
-	@Nullable
-	public Map<String, String> getBillingAddress() {
-		return _billingAddress;
+	public String getAdvanceStatus() {
+		return _advanceStatus;
 	}
 
-	@Nullable
+	public AddressDTO getBillingAddressDTO() {
+		return _billingAddressDTO;
+	}
+
 	public Long getBillingAddressId() {
 		return _billingAddressId;
 	}
@@ -51,23 +51,60 @@ public class OrderDTO {
 		return _externalReferenceCode;
 	}
 
-	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
-	@Nullable
-	public Map<String, String> getShippingAddress() {
-		return _shippingAddress;
+	public Integer getOrderStatus() {
+		return _orderStatus;
 	}
 
-	@Nullable
+	public String getPaymentMethod() {
+		return _paymentMethod;
+	}
+
+	public Integer getPaymentStatus() {
+		return _paymentStatus;
+	}
+
+	public String getPurchaseOrderNumber() {
+		return _purchaseOrderNumber;
+	}
+
+	public AddressDTO getShippingAddressDTO() {
+		return _shippingAddressDTO;
+	}
+
 	public Long getShippingAddressId() {
 		return _shippingAddressId;
 	}
 
-	public void setBillingAddress(Map<String, String> billingAddress) {
-		_billingAddress = billingAddress;
+	public BigDecimal getShippingAmount() {
+		return _shippingAmount;
+	}
+
+	public String getShippingMethod() {
+		return _shippingMethod;
+	}
+
+	public String getShippingOption() {
+		return _shippingOption;
+	}
+
+	public BigDecimal getSubtotal() {
+		return _subtotal;
+	}
+
+	public BigDecimal getTotal() {
+		return _total;
+	}
+
+	public void setAdvanceStatus(String advanceStatus) {
+		_advanceStatus = advanceStatus;
+	}
+
+	public void setBillingAddressDTO(AddressDTO billingAddressDTO) {
+		_billingAddressDTO = billingAddressDTO;
 	}
 
 	public void setBillingAddressId(Long billingAddressId) {
@@ -90,31 +127,67 @@ public class OrderDTO {
 		_id = id;
 	}
 
-	public void setShippingAddress(Map<String, String> shippingAddress) {
-		_shippingAddress = shippingAddress;
+	public void setOrderStatus(Integer orderStatus) {
+		_orderStatus = orderStatus;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		_paymentMethod = paymentMethod;
+	}
+
+	public void setPaymentStatus(Integer paymentStatus) {
+		_paymentStatus = paymentStatus;
+	}
+
+	public void setPurchaseOrderNumber(String purchaseOrderNumber) {
+		_purchaseOrderNumber = purchaseOrderNumber;
+	}
+
+	public void setShippingAddressDTO(AddressDTO shippingAddressDTO) {
+		_shippingAddressDTO = shippingAddressDTO;
 	}
 
 	public void setShippingAddressId(Long shippingAddressId) {
 		_shippingAddressId = shippingAddressId;
 	}
 
-	@Nullable
-	private Map<String, String> _billingAddress;
+	public void setShippingAmount(BigDecimal shippingAmount) {
+		_shippingAmount = shippingAmount;
+	}
 
-	@Nullable
+	public void setShippingMethod(String shippingMethod) {
+		_shippingMethod = shippingMethod;
+	}
+
+	public void setShippingOption(String shippingOption) {
+		_shippingOption = shippingOption;
+	}
+
+	public void setSubtotal(BigDecimal subtotal) {
+		_subtotal = subtotal;
+	}
+
+	public void setTotal(BigDecimal total) {
+		_total = total;
+	}
+
+	private String _advanceStatus;
+	private AddressDTO _billingAddressDTO;
 	private Long _billingAddressId;
-
 	private Long _commerceAccountId;
 	private String _currency;
 	private String _externalReferenceCode;
-
-	@Nullable
 	private Long _id;
-
-	@Nullable
-	private Map<String, String> _shippingAddress;
-
-	@Nullable
+	private Integer _orderStatus;
+	private String _paymentMethod;
+	private Integer _paymentStatus;
+	private String _purchaseOrderNumber;
+	private AddressDTO _shippingAddressDTO;
 	private Long _shippingAddressId;
+	private BigDecimal _shippingAmount;
+	private String _shippingMethod;
+	private String _shippingOption;
+	private BigDecimal _subtotal;
+	private BigDecimal _total;
 
 }
