@@ -77,9 +77,9 @@ public interface AccountResource {
 	@GET
 	@Path("/{id}/order")
 	@Produces("application/*")
-	public CollectionDTO<OrderDTO> getOrder(
+	public CollectionDTO<OrderDTO> getOrders(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
-			@Context Pagination pagination)
+			@Context Language language, @Context Pagination pagination)
 		throws Exception;
 
 	@Consumes("application/*")
@@ -106,7 +106,7 @@ public interface AccountResource {
 	@Path("/{id}/order")
 	@POST
 	@Produces("application/*")
-	public OrderDTO upsertSku(
+	public OrderDTO upsertOrder(
 			@PathParam("id") String id, @QueryParam("groupId") Long groupId,
 			OrderDTO orderDTO, @Context Language language)
 		throws Exception;
