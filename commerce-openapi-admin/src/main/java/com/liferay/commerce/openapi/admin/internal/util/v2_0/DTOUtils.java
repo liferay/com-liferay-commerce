@@ -17,6 +17,7 @@ package com.liferay.commerce.openapi.admin.internal.util.v2_0;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
@@ -28,6 +29,7 @@ import com.liferay.commerce.openapi.admin.model.v2_0.PriceListDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductOptionDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductOptionValueDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.RegionDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.SkuDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.UserDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.WebSiteDTO;
@@ -38,7 +40,10 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
+import com.liferay.commerce.service.CommerceRegionLocalServiceUtil;
+import com.liferay.commerce.util.comparator.CommerceRegionPriorityComparator;
 import com.liferay.expando.kernel.model.ExpandoBridge;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -49,12 +54,34 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 public class DTOUtils {
+
+	public static RegionDTO[] modelsToRegionDTOArray(
+		List<CommerceRegion> commerceRegions) {
+
+		if (commerceRegions == null) {
+			return null;
+		}
+
+		List<RegionDTO> regions = new ArrayList<>();
+
+		for (CommerceRegion commerceRegion : commerceRegions) {
+			regions.add(modelToDTO(commerceRegion));
+		}
+
+		Stream<RegionDTO> stream = regions.stream();
+
+		return stream.toArray(RegionDTO[]::new);
+	}
 
 	public static AccountDTO modelToDTO(CommerceAccount commerceAccount) {
 		AccountDTO accountDTO = new AccountDTO();
@@ -93,6 +120,14 @@ public class DTOUtils {
 		countryDTO.setName(
 			LanguageUtils.getLanguageIdMap(commerceCountry.getNameMap()));
 		countryDTO.setNumericISOCode(commerceCountry.getNumericISOCode());
+
+		List<CommerceRegion> commerceRegions =
+			CommerceRegionLocalServiceUtil.getCommerceRegions(
+				commerceCountry.getCommerceCountryId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, new CommerceRegionPriorityComparator());
+
+		countryDTO.setRegions(modelsToRegionDTOArray(commerceRegions));
+
 		countryDTO.setShippingAllowed(commerceCountry.isShippingAllowed());
 		countryDTO.setSubjectToVAT(commerceCountry.isSubjectToVAT());
 		countryDTO.setThreeLettersISOCode(
@@ -178,6 +213,23 @@ public class DTOUtils {
 		}
 
 		return priceListDTO;
+	}
+
+	public static RegionDTO modelToDTO(CommerceRegion commerceRegion) {
+		RegionDTO regionDTO = new RegionDTO();
+
+		if (commerceRegion == null) {
+			return regionDTO;
+		}
+
+		regionDTO.setActive(commerceRegion.isActive());
+		regionDTO.setCode(commerceRegion.getCode());
+		regionDTO.setCommerceCountryId(commerceRegion.getCommerceCountryId());
+		regionDTO.setId(commerceRegion.getCommerceRegionId());
+		regionDTO.setName(commerceRegion.getName());
+		regionDTO.setPriority(commerceRegion.getPriority());
+
+		return regionDTO;
 	}
 
 	public static InventoryDTO modelToDTO(
