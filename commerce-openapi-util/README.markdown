@@ -49,3 +49,70 @@ Example 3 - generate module at location other than defined in config file and ov
 ### Run with Gradle `runClass` task
 
 `../gradlew -PmainClass=com.liferay.commerce.openapi.util.generator.OSGiRESTModuleGenerator runClass`
+
+# OpenAPI examples
+
+**Free Form Dictionary**
+
+Free form dictionary is special Open Api structure that supports mixed value types. As regular dictionaries, free form dictionaries only support string key values. Free form dictionary is advised way to store Liferay expando fields.
+Here is `Item` object described by following schema: 
+```
+ Item:
+   required:
+     - itemCode
+   type: object
+   properties:
+     name:
+       type: string
+       example: 'Blue handle'
+     active:
+       type: boolean
+       example: true
+     itemCode:
+       type: string
+       example: 'AB-34098-789-N'
+     itemParts:
+       type: object
+       additionalProperties: true
+```
+`itemParts` property is free form directory. It is optional and if has entries, entry type can be arbitrary open api type.
+Content body of an submitted Item has form:
+```
+{
+    "name": "Blue handle",
+    "active": "true",
+    "itemCode": "I-002",
+    "itemParts": 
+        {
+            "structure": "solid",
+            "color": "blue",
+            "length": 45,
+            "width": 12,
+            "percetage": 99.9
+        }
+}
+```
+Generated REST module would convert free form directory structure into variable of type Map<String, ?>. Underlying deserializer would load map with submitted values.  Proper map handling is up to implementation developer. Here is suggested example how to persist received map as expando field values:
+```
+protected void updateExpando(
+		long companyId, Class<?> clazz, long classPK,
+		Map<String, ?> itemParts) {
+
+		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
+			companyId, clazz.getName(), classPK);
+
+		Enumeration<String> attributeNames = expandoBridge.getAttributeNames();
+
+		while (attributeNames.hasMoreElements()) {
+			String attributeName = attributeNames.nextElement();
+
+			if (!itemParts.containsKey(attributeName)) {
+				continue;
+			}
+
+			expandoBridge.setAttribute(
+				attributeName,
+				(Serializable)itemParts.get(attributeName));
+		}
+	}
+```
