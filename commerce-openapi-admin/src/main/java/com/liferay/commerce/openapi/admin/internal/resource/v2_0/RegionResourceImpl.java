@@ -14,20 +14,24 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.RegionHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.RegionDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.RegionResource;
 import com.liferay.oauth2.provider.scope.RequiresScope;
+import com.liferay.portal.kernel.model.User;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
- * @author Igor Beslic
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	property = {
@@ -42,6 +46,8 @@ public class RegionResourceImpl implements RegionResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteRegion(String id) throws Exception {
+		_regionHelper.deleteRegion(id);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -50,7 +56,7 @@ public class RegionResourceImpl implements RegionResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public RegionDTO getRegion(String id) throws Exception {
-		return new RegionDTO();
+		return _regionHelper.getRegionDTO(id);
 	}
 
 	@Override
@@ -58,9 +64,17 @@ public class RegionResourceImpl implements RegionResource {
 	public Response updateRegion(String id, RegionDTO regionDTO)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_regionHelper.updateRegion(id, regionDTO, _user);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
+
+	@Reference
+	private RegionHelper _regionHelper;
+
+	@Context
+	private User _user;
 
 }
