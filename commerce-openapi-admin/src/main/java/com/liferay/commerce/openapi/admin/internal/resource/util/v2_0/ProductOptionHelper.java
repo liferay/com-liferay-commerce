@@ -138,8 +138,8 @@ public class ProductOptionHelper {
 
 		cpOption = _cpOptionService.updateCPOption(
 			cpOption.getCPOptionId(), nameMap, descriptionMap,
-			productOptionDTO.getFieldType(), productOptionDTO.isFacetable(),
-			productOptionDTO.isRequired(), productOptionDTO.isSkuContributor(),
+			productOptionDTO.getFieldType(), _isFacetable(productOptionDTO),
+			_isRequired(productOptionDTO), _isSkuContributor(productOptionDTO),
 			productOptionDTO.getKey(),
 			_serviceContextHelper.getServiceContext(groupId));
 
@@ -166,12 +166,42 @@ public class ProductOptionHelper {
 
 		CPOption cpOption = _cpOptionService.upsertCPOption(
 			nameMap, descriptionMap, productOptionDTO.getFieldType(),
-			productOptionDTO.isFacetable(), productOptionDTO.isRequired(),
-			productOptionDTO.isSkuContributor(), productOptionDTO.getKey(),
+			_isFacetable(productOptionDTO), _isRequired(productOptionDTO),
+			_isSkuContributor(productOptionDTO), productOptionDTO.getKey(),
 			productOptionDTO.getExternalReferenceCode(),
 			_serviceContextHelper.getServiceContext(groupId));
 
 		return DTOUtils.modelToDTO(cpOption, language.getLanguageId());
+	}
+
+	private boolean _isFacetable(ProductOptionDTO productOptionDTO) {
+		boolean facetable = false;
+
+		if (productOptionDTO.isFacetable() != null) {
+			facetable = productOptionDTO.isFacetable();
+		}
+
+		return facetable;
+	}
+
+	private boolean _isRequired(ProductOptionDTO productOptionDTO) {
+		boolean required = false;
+
+		if (productOptionDTO.isRequired() != null) {
+			required = productOptionDTO.isRequired();
+		}
+
+		return required;
+	}
+
+	private boolean _isSkuContributor(ProductOptionDTO productOptionDTO) {
+		boolean skuContributor = false;
+
+		if (productOptionDTO.isSkuContributor() != null) {
+			skuContributor = productOptionDTO.isSkuContributor();
+		}
+
+		return skuContributor;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
