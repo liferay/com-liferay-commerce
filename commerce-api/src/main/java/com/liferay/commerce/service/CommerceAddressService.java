@@ -87,8 +87,18 @@ public interface CommerceAddressService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getCommerceAddresses(String className,
+		long classPK, int start, int end,
+		OrderByComparator<CommerceAddress> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount(long groupId, String className,
 		long classPK) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAddressesCount(String className, long classPK)
+		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
