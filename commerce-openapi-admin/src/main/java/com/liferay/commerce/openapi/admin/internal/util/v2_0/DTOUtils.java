@@ -159,22 +159,27 @@ public class DTOUtils {
 	public static AccountDTO modelToDTO(CommerceAccount commerceAccount) {
 		AccountDTO accountDTO = new AccountDTO();
 
+		if (commerceAccount == null) {
+			return accountDTO;
+		}
+
 		try {
-			accountDTO.setId(commerceAccount.getCommerceAccountId());
-			accountDTO.setRoot(commerceAccount.isRoot());
-			accountDTO.setPersonal(commerceAccount.isPersonalAccount());
-			accountDTO.setBusiness(commerceAccount.isBusinessAccount());
-			accountDTO.setOrganizationId(
-				commerceAccount.getCommerceAccountGroupId());
-			accountDTO.setExternalReferenceCode(
-				commerceAccount.getExternalReferenceCode());
-			accountDTO.setName(commerceAccount.getName());
-			accountDTO.setLogoId(commerceAccount.getLogoId());
-			accountDTO.setTaxId(commerceAccount.getTaxId());
-			accountDTO.setType(_getAccountType(commerceAccount.getType()));
-			accountDTO.setUserIds(new Long[] {commerceAccount.getUserId()});
 			accountDTO.setEmailAddresses(
 				new String[] {commerceAccount.getEmail()});
+			accountDTO.setId(commerceAccount.getCommerceAccountId());
+			accountDTO.setExternalReferenceCode(
+				commerceAccount.getExternalReferenceCode());
+			accountDTO.setLogoId(commerceAccount.getLogoId());
+			accountDTO.setName(commerceAccount.getName());
+			accountDTO.setOrganizations(
+				modelsToAccountOrganizationDTOArray(
+					commerceAccount.getCommerceAccountOrganizationRels()));
+			accountDTO.setRoot(commerceAccount.isRoot());
+			accountDTO.setTaxId(commerceAccount.getTaxId());
+			accountDTO.setType(commerceAccount.getType());
+			accountDTO.setUsers(
+				modelsToAccountMemberDTOArray(
+					commerceAccount.getCommerceAccountUserRels()));
 		}
 		catch (Exception e) {
 			_log.error("Cannot instantiate AccountDTO ", e);
