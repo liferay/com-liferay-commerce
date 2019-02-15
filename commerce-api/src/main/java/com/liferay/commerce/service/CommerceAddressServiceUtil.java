@@ -88,11 +88,25 @@ public class CommerceAddressServiceUtil {
 			end, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceAddress> getCommerceAddresses(
+		String className, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddress> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceAddresses(className, classPK, start, end,
+			orderByComparator);
+	}
+
 	public static int getCommerceAddressesCount(long groupId, String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceAddressesCount(groupId, className, classPK);
+	}
+
+	public static int getCommerceAddressesCount(String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceAddressesCount(className, classPK);
 	}
 
 	/**
