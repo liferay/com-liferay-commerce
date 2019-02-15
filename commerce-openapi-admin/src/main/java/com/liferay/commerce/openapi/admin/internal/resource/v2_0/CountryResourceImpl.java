@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
 import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.CountryHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.RegionHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.RegionDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.CountryResource;
@@ -33,6 +34,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Igor Beslic
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	property = {
@@ -73,9 +75,7 @@ public class CountryResourceImpl implements CountryResource {
 	public CollectionDTO<RegionDTO> getRegions(String id, Pagination pagination)
 		throws Exception {
 
-		// TODO
-
-		return null;
+		return _regionHelper.getRegionDTOs(id, pagination);
 	}
 
 	@Override
@@ -104,13 +104,14 @@ public class CountryResourceImpl implements CountryResource {
 	public RegionDTO upsertRegion(String id, RegionDTO regionDTO)
 		throws Exception {
 
-		// TODO
-
-		return null;
+		return _regionHelper.upsertRegion(id, regionDTO, _user);
 	}
 
 	@Reference
 	private CountryHelper _countryHelper;
+
+	@Reference
+	private RegionHelper _regionHelper;
 
 	@Context
 	private User _user;
