@@ -19,6 +19,7 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
@@ -26,6 +27,7 @@ import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CurrencyDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.InventoryDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.OrderNoteDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.PriceListDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductDTO;
@@ -59,6 +61,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -185,6 +189,24 @@ public class DTOUtils {
 		currencyDTO.setRoundingMode(commerceCurrency.getRoundingMode());
 
 		return currencyDTO;
+	}
+
+	public static OrderNoteDTO modelToDTO(CommerceOrderNote commerceOrderNote) {
+		OrderNoteDTO orderNoteDTO = new OrderNoteDTO();
+
+		if (commerceOrderNote == null) {
+			return orderNoteDTO;
+		}
+
+		orderNoteDTO.setAuthor(commerceOrderNote.getUserName());
+		orderNoteDTO.setCommerceOrderId(commerceOrderNote.getCommerceOrderId());
+		orderNoteDTO.setContent(commerceOrderNote.getContent());
+		orderNoteDTO.setExternalReferenceCode(
+			commerceOrderNote.getExternalReferenceCode());
+		orderNoteDTO.setId(commerceOrderNote.getCommerceOrderNoteId());
+		orderNoteDTO.setRestricted(commerceOrderNote.isRestricted());
+
+		return orderNoteDTO;
 	}
 
 	public static PriceEntryDTO modelToDTO(
