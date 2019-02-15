@@ -244,6 +244,17 @@ public class CommerceAddressLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceAddress> getCommerceAddresses(
+		String className, long classPK, int start, int end,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
+		long classNameId = classNameLocalService.getClassNameId(className);
+
+		return commerceAddressPersistence.findByC_C(
+			classNameId, classPK, start, end, orderByComparator);
+	}
+
+	@Override
 	public int getCommerceAddressesCount(
 		long groupId, String className, long classPK) {
 
@@ -251,6 +262,13 @@ public class CommerceAddressLocalServiceImpl
 
 		return commerceAddressPersistence.countByG_C_C(
 			groupId, classNameId, classPK);
+	}
+
+	@Override
+	public int getCommerceAddressesCount(String className, long classPK) {
+		long classNameId = classNameLocalService.getClassNameId(className);
+
+		return commerceAddressPersistence.countByC_C(classNameId, classPK);
 	}
 
 	@Override
