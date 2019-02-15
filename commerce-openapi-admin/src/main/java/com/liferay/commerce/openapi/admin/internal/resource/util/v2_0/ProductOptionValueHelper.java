@@ -145,7 +145,7 @@ public class ProductOptionValueHelper {
 
 		cpOptionValue = _cpOptionValueService.updateCPOptionValue(
 			cpOptionValue.getCPOptionValueId(), nameMap,
-			productOptionValueDTO.getPriority(), productOptionValueDTO.getKey(),
+			_getPriority(productOptionValueDTO), productOptionValueDTO.getKey(),
 			_serviceContextHelper.getServiceContext(groupId));
 
 		return DTOUtils.modelToDTO(cpOptionValue, language.getLanguageId());
@@ -170,11 +170,21 @@ public class ProductOptionValueHelper {
 
 		CPOptionValue cpOptionValue = _cpOptionValueService.upsertCPOptionValue(
 			cpOption.getCPOptionId(), nameMap,
-			productOptionValueDTO.getPriority(), productOptionValueDTO.getKey(),
+			_getPriority(productOptionValueDTO), productOptionValueDTO.getKey(),
 			productOptionValueDTO.getExternalReferenceCode(),
 			_serviceContextHelper.getServiceContext(groupId));
 
 		return DTOUtils.modelToDTO(cpOptionValue, language.getLanguageId());
+	}
+
+	private double _getPriority(ProductOptionValueDTO productOptionValueDTO) {
+		double priority = 0;
+
+		if (productOptionValueDTO.getPriority() != null) {
+			priority = productOptionValueDTO.getPriority();
+		}
+
+		return priority;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
