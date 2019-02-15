@@ -14,20 +14,17 @@
 
 package com.liferay.commerce.service.impl;
 
-import com.liferay.commerce.constants.CommerceActionKeys;
-import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.base.CommerceAddressServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.List;
 
@@ -46,7 +43,7 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		checkPermission(serviceContext.getScopeGroupId(), className, classPK);
+		checkPermission(className, classPK);
 
 		return commerceAddressLocalService.addCommerceAddress(
 			className, classPK, name, description, street1, street2, street3,
@@ -97,7 +94,7 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			long groupId, String className, long classPK)
 		throws PortalException {
 
-		checkPermission(groupId, className, classPK);
+		checkPermission(className, classPK);
 
 		return commerceAddressLocalService.getCommerceAddresses(
 			groupId, className, classPK);
@@ -109,10 +106,22 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			OrderByComparator<CommerceAddress> orderByComparator)
 		throws PortalException {
 
-		checkPermission(groupId, className, classPK);
+		checkPermission(className, classPK);
 
 		return commerceAddressLocalService.getCommerceAddresses(
 			groupId, className, classPK, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommerceAddress> getCommerceAddresses(
+			String className, long classPK, int start, int end,
+			OrderByComparator<CommerceAddress> orderByComparator)
+		throws PortalException {
+
+		checkPermission(className, classPK);
+
+		return commerceAddressLocalService.getCommerceAddresses(
+			className, classPK, start, end, orderByComparator);
 	}
 
 	@Override
@@ -120,10 +129,20 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			long groupId, String className, long classPK)
 		throws PortalException {
 
-		checkPermission(groupId, className, classPK);
+		checkPermission(className, classPK);
 
 		return commerceAddressLocalService.getCommerceAddressesCount(
 			groupId, className, classPK);
+	}
+
+	@Override
+	public int getCommerceAddressesCount(String className, long classPK)
+		throws PortalException {
+
+		checkPermission(className, classPK);
+
+		return commerceAddressLocalService.getCommerceAddressesCount(
+			className, classPK);
 	}
 
 	@Override
@@ -132,7 +151,7 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			String keywords, int start, int end, Sort sort)
 		throws PortalException {
 
-		checkPermission(groupId, className, classPK);
+		checkPermission(className, classPK);
 
 		return commerceAddressLocalService.searchCommerceAddresses(
 			companyId, groupId, className, classPK, keywords, start, end, sort);
@@ -162,31 +181,21 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 		throws PortalException {
 
 		checkPermission(
-			commerceAddress.getGroupId(), commerceAddress.getClassName(),
-			commerceAddress.getClassPK());
+			commerceAddress.getClassName(), commerceAddress.getClassPK());
 	}
 
-	protected void checkPermission(long groupId, String className, long classPK)
+	protected void checkPermission(String className, long classPK)
 		throws PortalException {
 
 		if (className.equals(CommerceOrder.class.getName())) {
 			commerceOrderService.getCommerceOrder(classPK);
 		}
-		else if (className.equals(User.class.getName())) {
-			if ((classPK != getUserId()) &&
-				!_portletResourcePermission.contains(
-					getPermissionChecker(), groupId,
-					CommerceActionKeys.MANAGE_COMMERCE_ADDRESSES)) {
-
-				throw new PrincipalException();
-			}
+		else if (className.equals(CommerceAccount.class.getName())) {
+			_commerceAccountService.getCommerceAccount(classPK);
 		}
 	}
 
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CommerceAddressServiceImpl.class, "_portletResourcePermission",
-				CommerceConstants.RESOURCE_NAME);
+	@ServiceReference(type = CommerceAccountService.class)
+	private CommerceAccountService _commerceAccountService;
 
 }
