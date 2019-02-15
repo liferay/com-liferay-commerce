@@ -306,6 +306,10 @@ public class DTOUtils {
 	public static CurrencyDTO modelToDTO(CommerceCurrency commerceCurrency) {
 		CurrencyDTO currencyDTO = new CurrencyDTO();
 
+		if (commerceCurrency == null) {
+			return currencyDTO;
+		}
+
 		currencyDTO.setCode(commerceCurrency.getCode());
 
 		currencyDTO.setFormatPattern(
@@ -374,6 +378,10 @@ public class DTOUtils {
 
 		PriceEntryDTO priceEntryDTO = new PriceEntryDTO();
 
+		if (commercePriceEntry == null) {
+			return priceEntryDTO;
+		}
+
 		priceEntryDTO.setCommercePriceListId(
 			commercePriceEntry.getCommercePriceListId());
 		priceEntryDTO.setExternalReferenceCode(
@@ -396,6 +404,10 @@ public class DTOUtils {
 		CommercePriceList commercePriceList, String languageId) {
 
 		PriceListDTO priceListDTO = new PriceListDTO();
+
+		if (commercePriceList == null) {
+			return priceListDTO;
+		}
 
 		try {
 			priceListDTO.setActive(!commercePriceList.isInactive());
@@ -447,6 +459,10 @@ public class DTOUtils {
 
 		InventoryDTO inventoryDTO = new InventoryDTO();
 
+		if (commerceWarehouseItem == null) {
+			return inventoryDTO;
+		}
+
 		inventoryDTO.setId(commerceWarehouseItem.getCommerceWarehouseId());
 		inventoryDTO.setQuantity(commerceWarehouseItem.getQuantity());
 
@@ -467,6 +483,10 @@ public class DTOUtils {
 
 	public static ProductDTO modelToDTO(CPDefinition cpDefinition) {
 		ProductDTO productDTO = new ProductDTO();
+
+		if (cpDefinition == null) {
+			return productDTO;
+		}
 
 		productDTO.setActive(!cpDefinition.isInactive());
 
@@ -493,6 +513,10 @@ public class DTOUtils {
 
 	public static SkuDTO modelToDTO(CPInstance cpInstance) {
 		SkuDTO skuDTO = new SkuDTO();
+
+		if (cpInstance == null) {
+			return skuDTO;
+		}
 
 		skuDTO.setCost(cpInstance.getCost());
 		skuDTO.setDepth(cpInstance.getDepth());
@@ -521,6 +545,10 @@ public class DTOUtils {
 
 		ProductOptionDTO productOptionDTO = new ProductOptionDTO();
 
+		if (cpOption == null) {
+			return productOptionDTO;
+		}
+
 		productOptionDTO.setDescription(cpOption.getDescription(languageId));
 		productOptionDTO.setExternalReferenceCode(
 			cpOption.getExternalReferenceCode());
@@ -541,6 +569,10 @@ public class DTOUtils {
 		ProductOptionValueDTO productOptionValueDTO =
 			new ProductOptionValueDTO();
 
+		if (cpOptionValue == null) {
+			return productOptionValueDTO;
+		}
+
 		productOptionValueDTO.setExternalReferenceCode(
 			cpOptionValue.getExternalReferenceCode());
 		productOptionValueDTO.setId(cpOptionValue.getCPOptionValueId());
@@ -553,6 +585,10 @@ public class DTOUtils {
 
 	public static WebSiteDTO modelToDTO(Group group, String languageId) {
 		WebSiteDTO webSiteDTO = new WebSiteDTO();
+
+		if (group == null) {
+			return webSiteDTO;
+		}
 
 		webSiteDTO.setDescription(group.getDescription(languageId));
 		webSiteDTO.setId(group.getGroupId());
@@ -567,6 +603,10 @@ public class DTOUtils {
 		throws PortalException {
 
 		UserDTO userDTO = new UserDTO();
+
+		if (user == null) {
+			return userDTO;
+		}
 
 		userDTO.setAdditionalName(user.getMiddleName());
 		userDTO.setAlternateName(user.getScreenName());
