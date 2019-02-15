@@ -256,6 +256,16 @@ public class CommerceAccountWrapper implements CommerceAccount,
 		return _commerceAccount.getCommerceAccountId();
 	}
 
+	@Override
+	public java.util.List<CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels() {
+		return _commerceAccount.getCommerceAccountOrganizationRels();
+	}
+
+	@Override
+	public java.util.List<CommerceAccountUserRel> getCommerceAccountUserRels() {
+		return _commerceAccount.getCommerceAccountUserRels();
+	}
+
 	/**
 	* Returns the company ID of this commerce account.
 	*
