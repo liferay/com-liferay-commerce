@@ -81,26 +81,23 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder addCommerceOrder(CommerceOrder commerceOrder);
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder addCommerceOrder(long groupId, long userId,
 		long commerceAccountId) throws PortalException;
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder addCommerceOrder(long groupId, long userId,
 		long commerceAccountId, long commerceCurrencyId)
 		throws PortalException;
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder addCommerceOrder(long groupId, long userId,
 		long commerceAccountId, long commerceCurrencyId,
 		long shippingAddressId, String purchaseOrderNumber)
 		throws PortalException;
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder addCommerceOrder(long groupId, long userId,
 		long commerceAccountId, long shippingAddressId,
 		String purchaseOrderNumber) throws PortalException;
 
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder addCommerceOrder(long commerceAccountId,
 		long commerceCurrencyId, long billingAddressId, long shippingAddressId,
 		String commercePaymentMethodKey, long commerceShippingMethodId,
@@ -499,4 +496,13 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 
 	public CommerceOrder updateUser(long commerceOrderId, long userId)
 		throws PortalException;
+
+	public CommerceOrder upsertCommerceOrder(long commerceAccountId,
+		long commerceCurrencyId, long billingAddressId, long shippingAddressId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
+		String shippingOptionName, String purchaseOrderNumber,
+		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
+		int paymentStatus, int orderStatus, String advanceStatus,
+		String externalReferenceCode, CommerceContext commerceContext,
+		ServiceContext serviceContext) throws PortalException;
 }
