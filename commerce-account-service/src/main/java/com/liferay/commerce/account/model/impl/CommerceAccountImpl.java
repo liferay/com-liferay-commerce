@@ -18,9 +18,15 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
+import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
+import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalServiceUtil;
+import com.liferay.commerce.account.service.CommerceAccountUserRelLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
+
+import java.util.List;
 
 /**
  * @author Marco Leo
@@ -44,6 +50,21 @@ public class CommerceAccountImpl extends CommerceAccountBaseImpl {
 			getCommerceAccountId());
 
 		return group.getGroupId();
+	}
+
+	@Override
+	public List<CommerceAccountOrganizationRel>
+		getCommerceAccountOrganizationRels() {
+
+		return CommerceAccountOrganizationRelLocalServiceUtil.
+			getCommerceAccountOrganizationRels(getCommerceAccountId());
+	}
+
+	@Override
+	public List<CommerceAccountUserRel> getCommerceAccountUserRels() {
+		return
+			CommerceAccountUserRelLocalServiceUtil.getCommerceAccountUserRels(
+				getCommerceAccountId());
 	}
 
 	@Override
