@@ -22,6 +22,7 @@ import com.liferay.commerce.openapi.util.OpenApiContextExtension;
 import com.liferay.commerce.openapi.util.Parameter;
 import com.liferay.commerce.openapi.util.Path;
 import com.liferay.commerce.openapi.util.Response;
+import com.liferay.commerce.openapi.util.Security;
 import com.liferay.commerce.openapi.util.generator.constants.GeneratorConstants;
 import com.liferay.commerce.openapi.util.util.PackageUtils;
 import com.liferay.commerce.openapi.util.util.Provider;
@@ -32,7 +33,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -275,7 +275,12 @@ public class ResourceGenerator extends BaseSourceGenerator {
 
 			sb.append("\t@Override\n");
 
-			sb.append(_getRequiresScopeAnnotation(method.getHttpMethod()));
+			Security security = method.getSecurity();
+
+			if (security != null) {
+				sb.append(
+					_getRequiresScopeAnnotation(security.getOAuth2Scopes()));
+			}
 
 			sb.append(_getMethodDeclaration(method, false, openApiComponents));
 
@@ -552,21 +557,30 @@ public class ResourceGenerator extends BaseSourceGenerator {
 		return sb.toString();
 	}
 
-	private String _getRequiresScopeAnnotation(String httpMethod) {
+	private String _getRequiresScopeAnnotation(List<String> oAuth2Scopes) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("\t@RequiresScope(\"");
-		sb.append(_applicationName);
-		sb.append(".");
+		sb.append("\t@RequiresScope(");
 
-		if (Objects.equals(httpMethod, "GET")) {
-			sb.append("read");
-		}
-		else {
-			sb.append("write");
+		if (oAuth2Scopes.size() > 1) {
+			sb.append("{");
 		}
 
-		sb.append("\")\n");
+		for (int i = 0; i < oAuth2Scopes.size(); i++) {
+			sb.append("\"");
+			sb.append(oAuth2Scopes.get(i));
+			sb.append("\"");
+
+			if (i < oAuth2Scopes.size() - 1) {
+				sb.append(",");
+			}
+		}
+
+		if (oAuth2Scopes.size() > 1) {
+			sb.append("}");
+		}
+
+		sb.append(")\n");
 
 		return sb.toString();
 	}
