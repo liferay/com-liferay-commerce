@@ -14,26 +14,37 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.AddressHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.OrderHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.OrderItemHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.OrderNoteHelper;
+import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
 import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.OrderItemDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.OrderNoteDTO;
 import com.liferay.commerce.openapi.admin.resource.v2_0.OrderResource;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
 import com.liferay.oauth2.provider.scope.RequiresScope;
-
-import java.util.Collections;
+import com.liferay.portal.kernel.model.Company;
 
 import javax.annotation.Generated;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ServiceScope;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
- * @author Igor Beslic
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	property = {
@@ -48,6 +59,28 @@ public class OrderResourceImpl implements OrderResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
 	public Response deleteOrder(String id) throws Exception {
+		_orderHelper.deleteOrder(id, _company);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public Response deleteOrderItem(String id, String id2) throws Exception {
+		_orderItemHelper.deleteOrderItem(id2, _company);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public Response deleteOrderNote(String id, String id2) throws Exception {
+		_orderNoteHelper.deleteOrderNote(id, _company);
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -56,16 +89,48 @@ public class OrderResourceImpl implements OrderResource {
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public AddressDTO getBillingAddress(String id) throws Exception {
+		CommerceOrder commerceOrder = _orderHelper.getOrderById(id, _company);
 
-		// TODO
+		CommerceAddress commerceAddress = _addressHelper.getAddressById(
+			String.valueOf(commerceOrder.getBillingAddressId()));
 
-		return null;
+		return DTOUtils.modelToDTO(commerceAddress);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public OrderDTO getOrder(String id, Language language) throws Exception {
-		return new OrderDTO();
+		return _orderHelper.getOrder(id, language, _company);
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public OrderItemDTO getOrderItem(String id, String id2) throws Exception {
+		return _orderItemHelper.getOrderItem(id2, _company);
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<OrderItemDTO> getOrderItems(
+			String id, Pagination pagination)
+		throws Exception {
+
+		return _orderItemHelper.getOrderItems(id, pagination, _company);
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public OrderNoteDTO getOrderNote(String id, String id2) throws Exception {
+		return _orderNoteHelper.getOrderNote(id2, _company);
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.read")
+	public CollectionDTO<OrderNoteDTO> getOrderNotes(
+			String id, Pagination pagination)
+		throws Exception {
+
+		return _orderNoteHelper.getOrderNotes(id, pagination, _company);
 	}
 
 	@Override
@@ -74,16 +139,29 @@ public class OrderResourceImpl implements OrderResource {
 			Long groupId, Language language, Pagination pagination)
 		throws Exception {
 
-		return new CollectionDTO(Collections.emptyList(), 0);
+		return _orderHelper.getOrders(
+			null, groupId, language, pagination, _company);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
 	public AddressDTO getShippingAddress(String id) throws Exception {
+		CommerceOrder commerceOrder = _orderHelper.getOrderById(id, _company);
 
-		// TODO
+		CommerceAddress commerceAddress = _addressHelper.getAddressById(
+			String.valueOf(commerceOrder.getShippingAddressId()));
 
-		return null;
+		return DTOUtils.modelToDTO(commerceAddress);
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public OrderDTO updateBillingAddress(
+			String id, AddressDTO addressDTO, Language language)
+		throws Exception {
+
+		return _orderHelper.updateOrderBillingAddress(
+			id, addressDTO, language, _company);
 	}
 
 	@Override
@@ -91,29 +169,76 @@ public class OrderResourceImpl implements OrderResource {
 	public Response updateOrder(String id, OrderDTO orderDTO, Language language)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.accepted();
+		_orderHelper.updateOrder(
+			id, orderDTO, language, _company, _commerceContext);
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public AddressDTO upsertBillingAddress(String id, AddressDTO addressDTO)
+	public OrderItemDTO updateOrderItem(
+			String id, String id2, OrderItemDTO orderItemDTO)
 		throws Exception {
 
-		// TODO
-
-		return null;
+		return _orderItemHelper.updateOrderItem(
+			id2, orderItemDTO, _company, _commerceContext);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public AddressDTO upsertShippingAddress(String id, AddressDTO addressDTO)
+	public OrderNoteDTO updateOrderNote(
+			String id, String id2, OrderNoteDTO orderNoteDTO)
 		throws Exception {
 
-		// TODO
-
-		return null;
+		return _orderNoteHelper.updateOrderNote(id2, orderNoteDTO, _company);
 	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public OrderDTO updateShippingAddress(
+			String id, AddressDTO addressDTO, Language language)
+		throws Exception {
+
+		return _orderHelper.updateOrderShippingAddress(
+			id, addressDTO, language, _company);
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public OrderItemDTO upsertOrderItem(String id, OrderItemDTO orderItemDTO)
+		throws Exception {
+
+		return _orderItemHelper.upsertOrder(
+			id, orderItemDTO, _company, _commerceContext);
+	}
+
+	@Override
+	@RequiresScope("CommerceOpenApiAdmin.write")
+	public OrderNoteDTO upsertOrderNote(String id, OrderNoteDTO orderNoteDTO)
+		throws Exception {
+
+		return _orderNoteHelper.upsertOrder(id, orderNoteDTO, _company);
+	}
+
+	@Reference
+	private AddressHelper _addressHelper;
+
+	@Context
+	private CommerceContext _commerceContext;
+
+	@Context
+	private Company _company;
+
+	@Reference
+	private OrderHelper _orderHelper;
+
+	@Reference
+	private OrderItemHelper _orderItemHelper;
+
+	@Reference
+	private OrderNoteHelper _orderNoteHelper;
 
 }
