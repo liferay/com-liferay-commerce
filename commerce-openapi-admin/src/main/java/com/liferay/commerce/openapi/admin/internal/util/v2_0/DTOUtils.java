@@ -16,11 +16,13 @@ package com.liferay.commerce.openapi.admin.internal.util.v2_0;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CurrencyDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.InventoryDTO;
@@ -110,6 +112,32 @@ public class DTOUtils {
 		}
 
 		return accountDTO;
+	}
+
+	public static AddressDTO modelToDTO(CommerceAddress commerceAddress) {
+		AddressDTO addressDTO = new AddressDTO();
+
+		if (commerceAddress == null) {
+			return addressDTO;
+		}
+
+		addressDTO.setCity(commerceAddress.getCity());
+		addressDTO.setCommerceCountryId(commerceAddress.getCommerceCountryId());
+		addressDTO.setCommerceRegionId(commerceAddress.getCommerceRegionId());
+		addressDTO.setDefaultBilling(commerceAddress.isDefaultBilling());
+		addressDTO.setDefaultShipping(commerceAddress.isDefaultShipping());
+		addressDTO.setDescription(commerceAddress.getDescription());
+		addressDTO.setId(commerceAddress.getCommerceAddressId());
+		addressDTO.setLatitude(commerceAddress.getLatitude());
+		addressDTO.setLongitude(commerceAddress.getLongitude());
+		addressDTO.setName(commerceAddress.getName());
+		addressDTO.setPhoneNumber(commerceAddress.getPhoneNumber());
+		addressDTO.setStreet1(commerceAddress.getStreet1());
+		addressDTO.setStreet2(commerceAddress.getStreet2());
+		addressDTO.setStreet3(commerceAddress.getStreet3());
+		addressDTO.setZip(commerceAddress.getZip());
+
+		return addressDTO;
 	}
 
 	public static CountryDTO modelToDTO(CommerceCountry commerceCountry) {
