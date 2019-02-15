@@ -16,8 +16,6 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import com.liferay.commerce.openapi.core.annotation.Nullable;
-
 import java.util.Map;
 
 import javax.annotation.Generated;
@@ -29,21 +27,18 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "AccountRole")
 public class AccountRoleDTO {
 
-	@Nullable
 	public Map<String, String> getDescription() {
 		return _description;
-	}
-
-	@Nullable
-	public Long getId() {
-		return _id;
 	}
 
 	public String getName() {
 		return _name;
 	}
 
-	@Nullable
+	public Long getRoleId() {
+		return _roleId;
+	}
+
 	public Map<String, String> getTitle() {
 		return _title;
 	}
@@ -52,27 +47,21 @@ public class AccountRoleDTO {
 		_description = description;
 	}
 
-	public void setId(Long id) {
-		_id = id;
-	}
-
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public void setRoleId(Long roleId) {
+		_roleId = roleId;
 	}
 
 	public void setTitle(Map<String, String> title) {
 		_title = title;
 	}
 
-	@Nullable
 	private Map<String, String> _description;
-
-	@Nullable
-	private Long _id;
-
 	private String _name;
-
-	@Nullable
+	private Long _roleId;
 	private Map<String, String> _title;
 
 }

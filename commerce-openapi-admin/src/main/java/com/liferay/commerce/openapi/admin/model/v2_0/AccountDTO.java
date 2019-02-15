@@ -16,8 +16,6 @@ package com.liferay.commerce.openapi.admin.model.v2_0;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import com.liferay.commerce.openapi.core.annotation.Nullable;
-
 import javax.annotation.Generated;
 
 /**
@@ -27,12 +25,10 @@ import javax.annotation.Generated;
 @JacksonXmlRootElement(localName = "Account")
 public class AccountDTO {
 
-	@Nullable
 	public AddressDTO[] getAddresses() {
 		return _addresses;
 	}
 
-	@Nullable
 	public String[] getEmailAddresses() {
 		return _emailAddresses;
 	}
@@ -41,12 +37,10 @@ public class AccountDTO {
 		return _externalReferenceCode;
 	}
 
-	@Nullable
 	public Long getId() {
 		return _id;
 	}
 
-	@Nullable
 	public Long getLogoId() {
 		return _logoId;
 	}
@@ -55,46 +49,28 @@ public class AccountDTO {
 		return _name;
 	}
 
-	@Nullable
-	public Long getOrganizationId() {
-		return _organizationId;
+	public AccountOrganizationDTO[] getOrganizations() {
+		return _organizations;
 	}
 
-	@Nullable
 	public String getTaxId() {
 		return _taxId;
 	}
 
-	@Nullable
-	public String getType() {
+	public Integer getType() {
 		return _type;
 	}
 
-	public Long[] getUserIds() {
-		return _userIds;
+	public AccountMemberDTO[] getUsers() {
+		return _users;
 	}
 
-	@Nullable
-	public Boolean isBusiness() {
-		return _business;
-	}
-
-	@Nullable
-	public Boolean isPersonal() {
-		return _personal;
-	}
-
-	@Nullable
 	public Boolean isRoot() {
 		return _root;
 	}
 
 	public void setAddresses(AddressDTO[] addresses) {
 		_addresses = addresses;
-	}
-
-	public void setBusiness(Boolean business) {
-		_business = business;
 	}
 
 	public void setEmailAddresses(String[] emailAddresses) {
@@ -117,12 +93,8 @@ public class AccountDTO {
 		_name = name;
 	}
 
-	public void setOrganizationId(Long organizationId) {
-		_organizationId = organizationId;
-	}
-
-	public void setPersonal(Boolean personal) {
-		_personal = personal;
+	public void setOrganizations(AccountOrganizationDTO[] organizations) {
+		_organizations = organizations;
 	}
 
 	public void setRoot(Boolean root) {
@@ -133,46 +105,24 @@ public class AccountDTO {
 		_taxId = taxId;
 	}
 
-	public void setType(String type) {
+	public void setType(Integer type) {
 		_type = type;
 	}
 
-	public void setUserIds(Long[] userIds) {
-		_userIds = userIds;
+	public void setUsers(AccountMemberDTO[] users) {
+		_users = users;
 	}
 
-	@Nullable
 	private AddressDTO[] _addresses;
-
-	@Nullable
-	private Boolean _business;
-
 	private String[] _emailAddresses;
 	private String _externalReferenceCode;
-
-	@Nullable
 	private Long _id;
-
-	@Nullable
 	private Long _logoId;
-
 	private String _name;
-
-	@Nullable
-	private Long _organizationId;
-
-	@Nullable
-	private Boolean _personal;
-
-	@Nullable
+	private AccountOrganizationDTO[] _organizations;
 	private Boolean _root;
-
-	@Nullable
 	private String _taxId;
-
-	@Nullable
-	private String _type;
-
-	private Long[] _userIds;
+	private Integer _type;
+	private AccountMemberDTO[] _users;
 
 }
