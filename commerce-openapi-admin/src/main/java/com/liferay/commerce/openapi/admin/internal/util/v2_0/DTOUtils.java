@@ -16,6 +16,7 @@ package com.liferay.commerce.openapi.admin.internal.util.v2_0;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
+import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
@@ -27,6 +28,7 @@ import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountMemberDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountOrganizationDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.AccountRoleDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CurrencyDTO;
@@ -58,7 +60,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.model.UserGroupRole;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 
@@ -114,6 +118,24 @@ public class DTOUtils {
 		Stream<AccountOrganizationDTO> stream = accountOrganizations.stream();
 
 		return stream.toArray(AccountOrganizationDTO[]::new);
+	}
+
+	public static AccountRoleDTO[] modelsToAccountRoleDTOArray(
+		List<UserGroupRole> userGroupRoles) {
+
+		if (userGroupRoles == null) {
+			return null;
+		}
+
+		List<AccountRoleDTO> accountRoles = new ArrayList<>();
+
+		for (UserGroupRole userGroupRole : userGroupRoles) {
+			accountRoles.add(modelToDTO(userGroupRole));
+		}
+
+		Stream<AccountRoleDTO> stream = accountRoles.stream();
+
+		return stream.toArray(AccountRoleDTO[]::new);
 	}
 
 	public static RegionDTO[] modelsToRegionDTOArray(
@@ -194,32 +216,6 @@ public class DTOUtils {
 		return accountOrganizationDTO;
 	}
 
-	public static AddressDTO modelToDTO(CommerceAddress commerceAddress) {
-		AddressDTO addressDTO = new AddressDTO();
-
-		if (commerceAddress == null) {
-			return addressDTO;
-		}
-
-		addressDTO.setCity(commerceAddress.getCity());
-		addressDTO.setCommerceCountryId(commerceAddress.getCommerceCountryId());
-		addressDTO.setCommerceRegionId(commerceAddress.getCommerceRegionId());
-		addressDTO.setDefaultBilling(commerceAddress.isDefaultBilling());
-		addressDTO.setDefaultShipping(commerceAddress.isDefaultShipping());
-		addressDTO.setDescription(commerceAddress.getDescription());
-		addressDTO.setId(commerceAddress.getCommerceAddressId());
-		addressDTO.setLatitude(commerceAddress.getLatitude());
-		addressDTO.setLongitude(commerceAddress.getLongitude());
-		addressDTO.setName(commerceAddress.getName());
-		addressDTO.setPhoneNumber(commerceAddress.getPhoneNumber());
-		addressDTO.setStreet1(commerceAddress.getStreet1());
-		addressDTO.setStreet2(commerceAddress.getStreet2());
-		addressDTO.setStreet3(commerceAddress.getStreet3());
-		addressDTO.setZip(commerceAddress.getZip());
-
-		return addressDTO;
-	}
-
 	public static AccountMemberDTO modelToDTO(
 		CommerceAccountUserRel commerceAccountUserRel) {
 
@@ -249,6 +245,32 @@ public class DTOUtils {
 		}
 
 		return accountMemberDTO;
+	}
+
+	public static AddressDTO modelToDTO(CommerceAddress commerceAddress) {
+		AddressDTO addressDTO = new AddressDTO();
+
+		if (commerceAddress == null) {
+			return addressDTO;
+		}
+
+		addressDTO.setCity(commerceAddress.getCity());
+		addressDTO.setCommerceCountryId(commerceAddress.getCommerceCountryId());
+		addressDTO.setCommerceRegionId(commerceAddress.getCommerceRegionId());
+		addressDTO.setDefaultBilling(commerceAddress.isDefaultBilling());
+		addressDTO.setDefaultShipping(commerceAddress.isDefaultShipping());
+		addressDTO.setDescription(commerceAddress.getDescription());
+		addressDTO.setId(commerceAddress.getCommerceAddressId());
+		addressDTO.setLatitude(commerceAddress.getLatitude());
+		addressDTO.setLongitude(commerceAddress.getLongitude());
+		addressDTO.setName(commerceAddress.getName());
+		addressDTO.setPhoneNumber(commerceAddress.getPhoneNumber());
+		addressDTO.setStreet1(commerceAddress.getStreet1());
+		addressDTO.setStreet2(commerceAddress.getStreet2());
+		addressDTO.setStreet3(commerceAddress.getStreet3());
+		addressDTO.setZip(commerceAddress.getZip());
+
+		return addressDTO;
 	}
 
 	public static CountryDTO modelToDTO(CommerceCountry commerceCountry) {
@@ -561,15 +583,30 @@ public class DTOUtils {
 		return userDTO;
 	}
 
-	private static String _getAccountType(int type) {
-		if (type == 1) {
-			return "Personal";
-		}
-		else if (type == 2) {
-			return "Business";
+	public static AccountRoleDTO modelToDTO(UserGroupRole userGroupRole) {
+		AccountRoleDTO accountRoleDTO = new AccountRoleDTO();
+
+		if (userGroupRole == null) {
+			return accountRoleDTO;
 		}
 
-		return "Guest";
+		try {
+			Role role = userGroupRole.getRole();
+
+			accountRoleDTO.setDescription(
+				LanguageUtils.getLanguageIdMap(role.getDescriptionMap()));
+			accountRoleDTO.setName(role.getName());
+			accountRoleDTO.setRoleId(role.getRoleId());
+			accountRoleDTO.setTitle(
+				LanguageUtils.getLanguageIdMap(role.getTitleMap()));
+		}
+		catch (Exception e) {
+			_log.error("Cannot instantiate AccountRoleDTO ", e);
+
+			throw new RuntimeException(e);
+		}
+
+		return accountRoleDTO;
 	}
 
 	private DTOUtils() {
