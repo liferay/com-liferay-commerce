@@ -18,8 +18,9 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
-import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
+import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
@@ -27,6 +28,7 @@ import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CurrencyDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.InventoryDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.OrderItemDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderNoteDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.PriceEntryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.PriceListDTO;
@@ -61,8 +63,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -189,6 +189,31 @@ public class DTOUtils {
 		currencyDTO.setRoundingMode(commerceCurrency.getRoundingMode());
 
 		return currencyDTO;
+	}
+
+	public static OrderItemDTO modelToDTO(CommerceOrderItem commerceOrderItem) {
+		OrderItemDTO orderItemDTO = new OrderItemDTO();
+
+		if (commerceOrderItem == null) {
+			return orderItemDTO;
+		}
+
+		orderItemDTO.setCommerceOrderId(commerceOrderItem.getCommerceOrderId());
+		orderItemDTO.setDiscountAmount(commerceOrderItem.getDiscountAmount());
+		orderItemDTO.setExternalReferenceCode(
+			commerceOrderItem.getExternalReferenceCode());
+		orderItemDTO.setFinalPrice(commerceOrderItem.getFinalPrice());
+		orderItemDTO.setId(commerceOrderItem.getCommerceOrderItemId());
+		orderItemDTO.setName(
+			LanguageUtils.getLanguageIdMap(commerceOrderItem.getNameMap()));
+		orderItemDTO.setQuantity(commerceOrderItem.getQuantity());
+		orderItemDTO.setShippedQuantity(commerceOrderItem.getShippedQuantity());
+		orderItemDTO.setSku(commerceOrderItem.getSku());
+		orderItemDTO.setSkuId(commerceOrderItem.getCPInstanceId());
+		orderItemDTO.setSubscription(commerceOrderItem.isSubscription());
+		orderItemDTO.setUnitPrice(commerceOrderItem.getUnitPrice());
+
+		return orderItemDTO;
 	}
 
 	public static OrderNoteDTO modelToDTO(CommerceOrderNote commerceOrderNote) {
