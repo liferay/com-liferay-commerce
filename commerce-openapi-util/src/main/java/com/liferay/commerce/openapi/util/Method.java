@@ -30,12 +30,13 @@ import java.util.regex.Pattern;
 public class Method {
 
 	public Method(
-		String name, List<Content> requestBody, String httpMethod,
-		String absolutePath, List<Parameter> parameters,
+		String name, Security security, List<Content> requestBody,
+		String httpMethod, String absolutePath, List<Parameter> parameters,
 		List<Response> responses,
 		List<OpenApiContextExtension> openApiContextExtensions) {
 
 		_name = name;
+		_security = security;
 
 		if (requestBody != null) {
 			_requestBody.addAll(requestBody);
@@ -139,6 +140,10 @@ public class Method {
 		}
 
 		return schemaOpenApiComponent.getName();
+	}
+
+	public Security getSecurity() {
+		return _security;
 	}
 
 	public boolean hasCollectionReturnType(
@@ -298,6 +303,7 @@ public class Method {
 		"^/(\\w+)(/\\{?\\w+\\}?)*/?$");
 	private final List<Content> _requestBody = new ArrayList<>();
 	private final List<Response> _responses = new ArrayList<>();
+	private final Security _security;
 	private String _toString;
 
 }
