@@ -20,9 +20,11 @@ import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
@@ -33,6 +35,7 @@ import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CurrencyDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.InventoryDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderItemDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderNoteDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.PriceEntryDTO;
@@ -327,6 +330,62 @@ public class DTOUtils {
 		currencyDTO.setRoundingMode(commerceCurrency.getRoundingMode());
 
 		return currencyDTO;
+	}
+
+	public static OrderDTO modelToDTO(
+		CommerceOrder commerceOrder, String languageId) {
+
+		OrderDTO orderDTO = new OrderDTO();
+
+		if (commerceOrder == null) {
+			return orderDTO;
+		}
+
+		try {
+			orderDTO.setAdvanceStatus(commerceOrder.getAdvanceStatus());
+			orderDTO.setBillingAddressDTO(
+				modelToDTO(commerceOrder.getBillingAddress()));
+			orderDTO.setBillingAddressId(commerceOrder.getBillingAddressId());
+			orderDTO.setCommerceAccountId(commerceOrder.getCommerceAccountId());
+
+			CommerceCurrency commerceCurrency =
+				commerceOrder.getCommerceCurrency();
+
+			orderDTO.setCurrency(commerceCurrency.getName(languageId));
+
+			orderDTO.setExternalReferenceCode(
+				commerceOrder.getExternalReferenceCode());
+			orderDTO.setId(commerceOrder.getCommerceOrderId());
+			orderDTO.setOrderStatus(commerceOrder.getOrderStatus());
+			orderDTO.setPaymentMethod(
+				commerceOrder.getCommercePaymentMethodKey());
+			orderDTO.setPaymentStatus(commerceOrder.getPaymentStatus());
+			orderDTO.setPurchaseOrderNumber(
+				commerceOrder.getPurchaseOrderNumber());
+			orderDTO.setShippingAddressDTO(
+				modelToDTO(commerceOrder.getShippingAddress()));
+			orderDTO.setShippingAddressId(commerceOrder.getShippingAddressId());
+			orderDTO.setShippingAmount(commerceOrder.getShippingAmount());
+
+			CommerceShippingMethod commerceShippingMethod =
+				commerceOrder.getCommerceShippingMethod();
+
+			if (commerceShippingMethod != null) {
+				orderDTO.setShippingMethod(
+					commerceShippingMethod.getEngineKey());
+			}
+
+			orderDTO.setShippingOption(commerceOrder.getShippingOptionName());
+			orderDTO.setSubtotal(commerceOrder.getSubtotal());
+			orderDTO.setTotal(commerceOrder.getTotal());
+		}
+		catch (Exception e) {
+			_log.error("Cannot instantiate OrderDTO ", e);
+
+			throw new RuntimeException(e);
+		}
+
+		return orderDTO;
 	}
 
 	public static OrderItemDTO modelToDTO(CommerceOrderItem commerceOrderItem) {
