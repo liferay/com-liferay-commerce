@@ -241,6 +241,11 @@ public interface CommerceAddressLocalService extends BaseLocalService,
 		String className, long classPK, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getCommerceAddresses(String className,
+		long classPK, int start, int end,
+		OrderByComparator<CommerceAddress> orderByComparator);
+
 	/**
 	* Returns the number of commerce addresses.
 	*
@@ -252,6 +257,9 @@ public interface CommerceAddressLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount(long groupId, String className,
 		long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAddressesCount(String className, long classPK);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

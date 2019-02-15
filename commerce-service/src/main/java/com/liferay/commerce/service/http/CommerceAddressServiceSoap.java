@@ -144,6 +144,24 @@ public class CommerceAddressServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceAddressSoap[] getCommerceAddresses(
+		String className, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddress> orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceAddress> returnValue =
+				CommerceAddressServiceUtil.getCommerceAddresses(className,
+					classPK, start, end, orderByComparator);
+
+			return com.liferay.commerce.model.CommerceAddressSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceAddressSoap[] getCommerceAddresses(
 		long groupId, String className, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddress> orderByComparator)
 		throws RemoteException {
@@ -153,6 +171,21 @@ public class CommerceAddressServiceSoap {
 					className, classPK, start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceAddressSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceAddressesCount(String className, long classPK)
+		throws RemoteException {
+		try {
+			int returnValue = CommerceAddressServiceUtil.getCommerceAddressesCount(className,
+					classPK);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
