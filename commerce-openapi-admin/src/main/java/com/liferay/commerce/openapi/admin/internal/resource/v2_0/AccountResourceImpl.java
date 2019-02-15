@@ -14,7 +14,11 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.v2_0;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.AccountHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.AddressHelper;
+import com.liferay.commerce.openapi.admin.internal.resource.util.v2_0.OrderHelper;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
@@ -39,6 +43,7 @@ import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
 /**
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	property = {
@@ -54,9 +59,12 @@ public class AccountResourceImpl implements AccountResource {
 	public AddressDTO addAddress(String id, AddressDTO addressDTO)
 		throws Exception {
 
-		// TODO
+		CommerceAccount commerceAccount = _accountHelper.getAccountById(
+			id, _company);
 
-		return null;
+		return _addressHelper.addAddress(
+			commerceAccount.getModelClassName(),
+			commerceAccount.getCommerceAccountId(), addressDTO);
 	}
 
 	@Override
@@ -89,20 +97,22 @@ public class AccountResourceImpl implements AccountResource {
 			String id, Pagination pagination)
 		throws Exception {
 
-		//TODO
+		CommerceAccount commerceAccount = _accountHelper.getAccountById(
+			id, _company);
 
-		return null;
+		return _addressHelper.getAddresses(
+			commerceAccount.getModelClassName(),
+			commerceAccount.getCommerceAccountId(), pagination);
 	}
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.read")
-	public CollectionDTO<OrderDTO> getOrder(
-			String id, Long groupId, Pagination pagination)
+	public CollectionDTO<OrderDTO> getOrders(
+			String id, Long groupId, Language language, Pagination pagination)
 		throws Exception {
 
-		// TODO
-
-		return null;
+		return _orderHelper.getOrders(
+			id, groupId, language, pagination, _company);
 	}
 
 	@Override
@@ -139,20 +149,28 @@ public class AccountResourceImpl implements AccountResource {
 
 	@Override
 	@RequiresScope("CommerceOpenApiAdmin.write")
-	public OrderDTO upsertSku(
+	public OrderDTO upsertOrder(
 			String id, Long groupId, OrderDTO orderDTO, Language language)
 		throws Exception {
 
-		//TODO
-
-		return null;
+		return _orderHelper.upsertOrder(
+			id, groupId, orderDTO, language, _company, _commerceContext);
 	}
 
 	@Reference
 	private AccountHelper _accountHelper;
 
+	@Reference
+	private AddressHelper _addressHelper;
+
+	@Context
+	private CommerceContext _commerceContext;
+
 	@Context
 	private Company _company;
+
+	@Reference
+	private OrderHelper _orderHelper;
 
 	@Context
 	private User _user;
