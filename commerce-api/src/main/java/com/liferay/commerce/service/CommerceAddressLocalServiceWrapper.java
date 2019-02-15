@@ -287,6 +287,14 @@ public class CommerceAddressLocalServiceWrapper
 			className, classPK, start, end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceAddress> getCommerceAddresses(
+		String className, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddress> orderByComparator) {
+		return _commerceAddressLocalService.getCommerceAddresses(className,
+			classPK, start, end, orderByComparator);
+	}
+
 	/**
 	* Returns the number of commerce addresses.
 	*
@@ -302,6 +310,12 @@ public class CommerceAddressLocalServiceWrapper
 		long classPK) {
 		return _commerceAddressLocalService.getCommerceAddressesCount(groupId,
 			className, classPK);
+	}
+
+	@Override
+	public int getCommerceAddressesCount(String className, long classPK) {
+		return _commerceAddressLocalService.getCommerceAddressesCount(className,
+			classPK);
 	}
 
 	@Override
