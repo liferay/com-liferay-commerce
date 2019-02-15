@@ -212,6 +212,12 @@ public class CommerceAccountUserRelWrapper implements CommerceAccountUserRel,
 		return _commerceAccountUserRel.getUser();
 	}
 
+	@Override
+	public java.util.List<com.liferay.portal.kernel.model.UserGroupRole> getUserGroupRoles()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountUserRel.getUserGroupRoles();
+	}
+
 	/**
 	* Returns the user ID of this commerce account user rel.
 	*
