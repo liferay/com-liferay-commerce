@@ -38,6 +38,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
+import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -45,6 +46,10 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
+
+import java.io.Serializable;
+
+import java.util.Map;
 
 /**
  * @author Zoltán Takács
@@ -215,6 +220,12 @@ public class DTOUtils {
 				cpDefinition.getShortDescriptionMap()));
 		productDTO.setName(
 			LanguageUtils.getLanguageIdMap(cpDefinition.getNameMap()));
+
+		ExpandoBridge expandoBridge = cpDefinition.getExpandoBridge();
+
+		Map<String, Serializable> attributes = expandoBridge.getAttributes();
+
+		productDTO.setExpando(attributes);
 
 		return productDTO;
 	}
