@@ -16,6 +16,8 @@ package com.liferay.commerce.openapi.admin.resource.v2_0;
 
 import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.OrderDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.OrderItemDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.OrderNoteDTO;
 import com.liferay.commerce.openapi.core.context.Language;
 import com.liferay.commerce.openapi.core.context.Pagination;
 import com.liferay.commerce.openapi.core.model.CollectionDTO;
@@ -45,6 +47,18 @@ public interface OrderResource {
 	@Path("/{id}")
 	public Response deleteOrder(@PathParam("id") String id) throws Exception;
 
+	@DELETE
+	@Path("/{id}/orderItem/{id2}")
+	public Response deleteOrderItem(
+			@PathParam("id") String id, @PathParam("id2") String id2)
+		throws Exception;
+
+	@DELETE
+	@Path("/{id}/orderNote/{id2}")
+	public Response deleteOrderNote(
+			@PathParam("id") String id, @PathParam("id2") String id2)
+		throws Exception;
+
 	@GET
 	@Path("/{id}/billingAddress")
 	@Produces("application/*")
@@ -56,6 +70,34 @@ public interface OrderResource {
 	@Produces("application/*")
 	public OrderDTO getOrder(
 			@PathParam("id") String id, @Context Language language)
+		throws Exception;
+
+	@GET
+	@Path("/{id}/orderItem/{id2}")
+	@Produces("application/*")
+	public OrderItemDTO getOrderItem(
+			@PathParam("id") String id, @PathParam("id2") String id2)
+		throws Exception;
+
+	@GET
+	@Path("/{id}/orderItem")
+	@Produces("application/*")
+	public CollectionDTO<OrderItemDTO> getOrderItems(
+			@PathParam("id") String id, @Context Pagination pagination)
+		throws Exception;
+
+	@GET
+	@Path("/{id}/orderNote/{id2}")
+	@Produces("application/*")
+	public OrderNoteDTO getOrderNote(
+			@PathParam("id") String id, @PathParam("id2") String id2)
+		throws Exception;
+
+	@GET
+	@Path("/{id}/orderNote")
+	@Produces("application/*")
+	public CollectionDTO<OrderNoteDTO> getOrderNotes(
+			@PathParam("id") String id, @Context Pagination pagination)
 		throws Exception;
 
 	@GET
@@ -72,6 +114,15 @@ public interface OrderResource {
 		throws Exception;
 
 	@Consumes("application/*")
+	@Path("/{id}/billingAddress")
+	@POST
+	@Produces("application/*")
+	public OrderDTO updateBillingAddress(
+			@PathParam("id") String id, AddressDTO addressDTO,
+			@Context Language language)
+		throws Exception;
+
+	@Consumes("application/*")
 	@Path("/{id}")
 	@PUT
 	public Response updateOrder(
@@ -80,19 +131,46 @@ public interface OrderResource {
 		throws Exception;
 
 	@Consumes("application/*")
-	@Path("/{id}/billingAddress")
+	@Path("/{id}/orderItem/{id2}")
 	@POST
 	@Produces("application/*")
-	public AddressDTO upsertBillingAddress(
-			@PathParam("id") String id, AddressDTO addressDTO)
+	public OrderItemDTO updateOrderItem(
+			@PathParam("id") String id, @PathParam("id2") String id2,
+			OrderItemDTO orderItemDTO)
+		throws Exception;
+
+	@Consumes("application/*")
+	@Path("/{id}/orderNote/{id2}")
+	@POST
+	@Produces("application/*")
+	public OrderNoteDTO updateOrderNote(
+			@PathParam("id") String id, @PathParam("id2") String id2,
+			OrderNoteDTO orderNoteDTO)
 		throws Exception;
 
 	@Consumes("application/*")
 	@Path("/{id}/shippingAddress")
 	@POST
 	@Produces("application/*")
-	public AddressDTO upsertShippingAddress(
-			@PathParam("id") String id, AddressDTO addressDTO)
+	public OrderDTO updateShippingAddress(
+			@PathParam("id") String id, AddressDTO addressDTO,
+			@Context Language language)
+		throws Exception;
+
+	@Consumes("application/*")
+	@Path("/{id}/orderItem")
+	@POST
+	@Produces("application/*")
+	public OrderItemDTO upsertOrderItem(
+			@PathParam("id") String id, OrderItemDTO orderItemDTO)
+		throws Exception;
+
+	@Consumes("application/*")
+	@Path("/{id}/orderNote")
+	@POST
+	@Produces("application/*")
+	public OrderNoteDTO upsertOrderNote(
+			@PathParam("id") String id, OrderNoteDTO orderNoteDTO)
 		throws Exception;
 
 }
