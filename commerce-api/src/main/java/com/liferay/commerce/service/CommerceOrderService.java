@@ -123,7 +123,17 @@ public interface CommerceOrderService extends BaseService {
 		int[] orderStatuses) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getCommerceOrders(long groupId,
+		long commerceAccountId, int start, int end,
+		OrderByComparator<CommerceOrder> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceOrdersCount(long groupId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceOrdersCount(long groupId, long commerceAccountId)
+		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -206,4 +216,13 @@ public interface CommerceOrderService extends BaseService {
 
 	public CommerceOrder updateUser(long commerceOrderId, long userId)
 		throws PortalException;
+
+	public CommerceOrder upsertCommerceOrder(long commerceAccountId,
+		long commerceCurrencyId, long billingAddressId, long shippingAddressId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
+		String shippingOptionName, String purchaseOrderNumber,
+		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
+		int paymentStatus, int orderStatus, String advanceStatus,
+		String externalReferenceCode, CommerceContext commerceContext,
+		ServiceContext serviceContext) throws PortalException;
 }
