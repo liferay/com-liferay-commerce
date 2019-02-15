@@ -87,9 +87,11 @@ public class CurrencyHelper {
 			LanguageUtils.getLocalizedMap(currencyDTO.getName()),
 			currencyDTO.getRate(),
 			LanguageUtils.getLocalizedMap(currencyDTO.getFormatPattern()),
-			currencyDTO.getMaxFractionDigits(),
-			currencyDTO.getMinFractionDigits(), currencyDTO.getRoundingMode(),
-			currencyDTO.isPrimary(), 0D, true, serviceContext);
+			GetterUtil.get(currencyDTO.getMaxFractionDigits(), 0),
+			GetterUtil.get(currencyDTO.getMinFractionDigits(), 0),
+			currencyDTO.getRoundingMode(),
+			GetterUtil.get(currencyDTO.isPrimary(), false), 0D, true,
+			serviceContext);
 	}
 
 	public CurrencyDTO upsertCurrency(
@@ -119,10 +121,11 @@ public class CurrencyHelper {
 				LanguageUtils.getLocalizedMap(currencyDTO.getName()),
 				currencyDTO.getRate(),
 				LanguageUtils.getLocalizedMap(currencyDTO.getFormatPattern()),
-				currencyDTO.getMaxFractionDigits(),
-				currencyDTO.getMinFractionDigits(),
-				currencyDTO.getRoundingMode(), currencyDTO.isPrimary(), 0D,
-				true, serviceContext);
+				GetterUtil.get(currencyDTO.getMaxFractionDigits(), 0),
+				GetterUtil.get(currencyDTO.getMinFractionDigits(), 0),
+				currencyDTO.getRoundingMode(),
+				GetterUtil.get(currencyDTO.isPrimary(), false), 0D, true,
+				serviceContext);
 
 		return DTOUtils.modelToDTO(commerceCurrency);
 	}

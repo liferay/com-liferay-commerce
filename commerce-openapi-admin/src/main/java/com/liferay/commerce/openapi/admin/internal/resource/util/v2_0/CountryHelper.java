@@ -83,10 +83,12 @@ public class CountryHelper {
 		return _commerceCountryService.updateCommerceCountry(
 			GetterUtil.getLong(id),
 			LanguageUtils.getLocalizedMap(countryDTO.getName()),
-			countryDTO.isBillingAllowed(), countryDTO.isShippingAllowed(),
+			GetterUtil.get(countryDTO.isBillingAllowed(), false),
+			GetterUtil.get(countryDTO.isShippingAllowed(), false),
 			countryDTO.getTwoLettersISOCode(),
 			countryDTO.getThreeLettersISOCode(), countryDTO.getNumericISOCode(),
-			countryDTO.isSubjectToVAT(), 0D, true, serviceContext);
+			GetterUtil.get(countryDTO.isSubjectToVAT(), false), 0D, true,
+			serviceContext);
 	}
 
 	public CountryDTO upsertCountry(
@@ -112,11 +114,13 @@ public class CountryHelper {
 		CommerceCountry commerceCountry =
 			_commerceCountryService.addCommerceCountry(
 				LanguageUtils.getLocalizedMap(countryDTO.getName()),
-				countryDTO.isBillingAllowed(), countryDTO.isShippingAllowed(),
+				GetterUtil.get(countryDTO.isBillingAllowed(), false),
+				GetterUtil.get(countryDTO.isShippingAllowed(), false),
 				countryDTO.getTwoLettersISOCode(),
 				countryDTO.getThreeLettersISOCode(),
-				countryDTO.getNumericISOCode(), countryDTO.isSubjectToVAT(), 0D,
-				true, serviceContext);
+				countryDTO.getNumericISOCode(),
+				GetterUtil.get(countryDTO.isSubjectToVAT(), false), 0D, true,
+				serviceContext);
 
 		return DTOUtils.modelToDTO(commerceCountry);
 	}

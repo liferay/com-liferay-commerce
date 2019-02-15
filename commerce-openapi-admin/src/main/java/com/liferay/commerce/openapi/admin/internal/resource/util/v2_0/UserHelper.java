@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -144,12 +145,12 @@ public class UserHelper {
 			user.getOpenId(), user.getLanguageId(), user.getTimeZoneId(),
 			user.getGreeting(), user.getComments(), userDTO.getGivenName(),
 			user.getMiddleName(), userDTO.getFamilyName(), 0L, 0L,
-			user.isMale(), birthday.getMonth(), birthday.getDate(),
-			birthday.getYear(), contact.getSmsSn(), contact.getFacebookSn(),
-			contact.getJabberSn(), contact.getSkypeSn(), contact.getTwitterSn(),
-			userDTO.getJobTitle(), user.getGroupIds(),
-			user.getOrganizationIds(), user.getRoleIds(), null,
-			user.getUserGroupIds(), new ServiceContext());
+			user.isMale(), _getBirthdayMonth(birthday),
+			_getBirthdayDay(birthday), _getBirthdayYear(birthday),
+			contact.getSmsSn(), contact.getFacebookSn(), contact.getJabberSn(),
+			contact.getSkypeSn(), contact.getTwitterSn(), userDTO.getJobTitle(),
+			user.getGroupIds(), user.getOrganizationIds(), user.getRoleIds(),
+			null, user.getUserGroupIds(), new ServiceContext());
 	}
 
 	public UserDTO upsertUser(
@@ -165,9 +166,10 @@ public class UserHelper {
 			userDTO.getAlternateName(), userDTO.getEmail(),
 			LocaleUtil.getDefault(), userDTO.getGivenName(),
 			userDTO.getAdditionalName(), userDTO.getFamilyName(), 0, 0,
-			"male".equals(userDTO.getGender()), birthDate.getMonth(),
-			birthDate.getDay(), birthDate.getYear(), userDTO.getJobTitle(),
-			null, ArrayUtil.toArray(userDTO.getCommerceAccountIds()),
+			"male".equals(userDTO.getGender()), _getBirthdayMonth(birthDate),
+			_getBirthdayDay(birthDate), _getBirthdayYear(birthDate),
+			userDTO.getJobTitle(), null,
+			ArrayUtil.toArray(_getCommerceAccountIds(userDTO)),
 			_getRoleIds(companyId, userDTO.getRoleNames()), null, null, true,
 			new ServiceContext());
 
@@ -192,6 +194,52 @@ public class UserHelper {
 		}
 
 		return userDTO.getBirthDate();
+	}
+
+	private int _getBirthdayDay(Date birthDate) {
+		if (birthDate == null) {
+			return 1;
+		}
+
+		Calendar calendar = Calendar.getInstance();
+
+		calendar.setTime(birthDate);
+
+		return calendar.get(Calendar.DAY_OF_MONTH);
+	}
+
+	private int _getBirthdayMonth(Date birthDate) {
+		if (birthDate == null) {
+			return 0;
+		}
+
+		Calendar calendar = Calendar.getInstance();
+
+		calendar.setTime(birthDate);
+
+		return calendar.get(Calendar.MONTH);
+	}
+
+	private int _getBirthdayYear(Date birthDate) {
+		if (birthDate == null) {
+			return 1970;
+		}
+
+		Calendar calendar = Calendar.getInstance();
+
+		calendar.setTime(birthDate);
+
+		return calendar.get(Calendar.YEAR);
+	}
+
+	private Long[] _getCommerceAccountIds(UserDTO userDTO) {
+		Long[] commerceAccountIds = userDTO.getCommerceAccountIds();
+
+		if (commerceAccountIds == null) {
+			return new Long[0];
+		}
+
+		return commerceAccountIds;
 	}
 
 	private String _getDashboardURL(User user, ThemeDisplay themeDisplay)
@@ -220,6 +268,10 @@ public class UserHelper {
 
 	private long[] _getRoleIds(long companyId, String[] roleNames)
 		throws PortalException {
+
+		if (roleNames == null) {
+			roleNames = new String[0];
+		}
 
 		long[] roleIds = new long[roleNames.length];
 

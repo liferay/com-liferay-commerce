@@ -135,8 +135,8 @@ public class PriceEntryHelper {
 
 		commercePriceEntry =
 			_commercePriceEntryService.upsertCommercePriceEntry(
-				priceEntryDTO.getId(),
-				priceEntryDTO.getCommerceProductInstanceId(),
+				GetterUtil.get(priceEntryDTO.getId(), 0),
+				GetterUtil.get(priceEntryDTO.getCommerceProductInstanceId(), 0),
 				priceEntryDTO.getCommercePriceListId(),
 				priceEntryDTO.getExternalReferenceCode(),
 				priceEntryDTO.getPrice(), priceEntryDTO.getPromoPrice(),
