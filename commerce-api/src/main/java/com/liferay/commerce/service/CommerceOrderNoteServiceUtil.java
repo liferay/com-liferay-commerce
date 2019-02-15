@@ -64,6 +64,12 @@ public class CommerceOrderNoteServiceUtil {
 			externalReferenceCode);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderNote fetchCommerceOrderNote(
+		long commerceOrderNoteId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().fetchCommerceOrderNote(commerceOrderNoteId);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderNote getCommerceOrderNote(
 		long commerceOrderNoteId)
 		throws com.liferay.portal.kernel.exception.PortalException {

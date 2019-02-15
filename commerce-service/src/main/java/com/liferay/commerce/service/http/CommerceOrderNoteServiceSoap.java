@@ -109,6 +109,20 @@ public class CommerceOrderNoteServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderNoteSoap fetchCommerceOrderNote(
+		long commerceOrderNoteId) throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceOrderNote returnValue = CommerceOrderNoteServiceUtil.fetchCommerceOrderNote(commerceOrderNoteId);
+
+			return com.liferay.commerce.model.CommerceOrderNoteSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderNoteSoap getCommerceOrderNote(
 		long commerceOrderNoteId) throws RemoteException {
 		try {
