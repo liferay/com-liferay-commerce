@@ -77,6 +77,14 @@ public class CommerceShippingMethodServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceShippingMethod fetchCommerceShippingMethod(
+		long groupId, String engineKey)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceShippingMethodService.fetchCommerceShippingMethod(groupId,
+			engineKey);
+	}
+
+	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceAddressRestriction> getCommerceAddressRestrictions(
 		long commerceShippingMethodId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAddressRestriction> orderByComparator)
