@@ -57,6 +57,13 @@ public class CommerceOrderNoteServiceWrapper implements CommerceOrderNoteService
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrderNote fetchCommerceOrderNote(
+		long commerceOrderNoteId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderNoteService.fetchCommerceOrderNote(commerceOrderNoteId);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrderNote getCommerceOrderNote(
 		long commerceOrderNoteId)
 		throws com.liferay.portal.kernel.exception.PortalException {
