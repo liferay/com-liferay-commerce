@@ -121,6 +121,24 @@ public class CommerceShippingMethodServiceImpl
 	}
 
 	@Override
+	public CommerceShippingMethod fetchCommerceShippingMethod(
+			long groupId, String engineKey)
+		throws PortalException {
+
+		CommerceShippingMethod commerceShippingMethod =
+			commerceShippingMethodLocalService.fetchCommerceShippingMethod(
+				groupId, engineKey);
+
+		if (commerceShippingMethod != null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(), commerceShippingMethod.getGroupId(),
+				CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
+		}
+
+		return commerceShippingMethod;
+	}
+
+	@Override
 	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
 			long commerceShippingMethodId, int start, int end,
 			OrderByComparator<CommerceAddressRestriction> orderByComparator)
