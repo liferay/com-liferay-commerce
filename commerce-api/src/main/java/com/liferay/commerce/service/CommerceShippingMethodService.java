@@ -80,6 +80,10 @@ public interface CommerceShippingMethodService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceShippingMethod fetchCommerceShippingMethod(long groupId,
+		String engineKey) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
 		long commerceShippingMethodId, int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator)

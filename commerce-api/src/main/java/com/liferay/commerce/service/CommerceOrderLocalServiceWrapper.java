@@ -708,6 +708,26 @@ public class CommerceOrderLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrder upsertCommerceOrder(
+		long commerceAccountId, long commerceCurrencyId, long billingAddressId,
+		long shippingAddressId, String commercePaymentMethodKey,
+		long commerceShippingMethodId, String shippingOptionName,
+		String purchaseOrderNumber, java.math.BigDecimal subtotal,
+		java.math.BigDecimal shippingAmount, java.math.BigDecimal total,
+		int paymentStatus, int orderStatus, String advanceStatus,
+		String externalReferenceCode,
+		com.liferay.commerce.context.CommerceContext commerceContext,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderLocalService.upsertCommerceOrder(commerceAccountId,
+			commerceCurrencyId, billingAddressId, shippingAddressId,
+			commercePaymentMethodKey, commerceShippingMethodId,
+			shippingOptionName, purchaseOrderNumber, subtotal, shippingAmount,
+			total, paymentStatus, orderStatus, advanceStatus,
+			externalReferenceCode, commerceContext, serviceContext);
+	}
+
+	@Override
 	public CommerceOrderLocalService getWrappedService() {
 		return _commerceOrderLocalService;
 	}
