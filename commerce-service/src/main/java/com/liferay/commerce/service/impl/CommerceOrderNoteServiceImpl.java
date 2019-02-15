@@ -28,6 +28,7 @@ import java.util.List;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class CommerceOrderNoteServiceImpl
 	extends CommerceOrderNoteServiceBaseImpl {
@@ -94,6 +95,19 @@ public class CommerceOrderNoteServiceImpl
 	}
 
 	@Override
+	public CommerceOrderNote fetchCommerceOrderNote(long commerceOrderNoteId)
+		throws PortalException {
+
+		CommerceOrderNote commerceOrderNote =
+			commerceOrderNoteLocalService.fetchCommerceOrderNote(
+				commerceOrderNoteId);
+
+		checkCommerceOrderNotePermissions(commerceOrderNote);
+
+		return commerceOrderNote;
+	}
+
+	@Override
 	public CommerceOrderNote getCommerceOrderNote(long commerceOrderNoteId)
 		throws PortalException {
 
@@ -101,16 +115,7 @@ public class CommerceOrderNoteServiceImpl
 			commerceOrderNoteLocalService.getCommerceOrderNote(
 				commerceOrderNoteId);
 
-		String actionId = ActionKeys.VIEW;
-
-		if (commerceOrderNote.isRestricted()) {
-			actionId =
-				CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES;
-		}
-
-		_commerceOrderModelResourcePermission.check(
-			getPermissionChecker(), commerceOrderNote.getCommerceOrderId(),
-			actionId);
+		checkCommerceOrderNotePermissions(commerceOrderNote);
 
 		return commerceOrderNote;
 	}
@@ -221,6 +226,26 @@ public class CommerceOrderNoteServiceImpl
 		return commerceOrderNoteLocalService.upsertCommerceOrderNote(
 			commerceOrderNoteId, commerceOrderId, content, restricted,
 			externalReferenceCode, serviceContext);
+	}
+
+	protected void checkCommerceOrderNotePermissions(
+			CommerceOrderNote commerceOrderNote)
+		throws PortalException {
+
+		if (commerceOrderNote == null) {
+			return;
+		}
+
+		String actionId = ActionKeys.VIEW;
+
+		if (commerceOrderNote.isRestricted()) {
+			actionId =
+				CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES;
+		}
+
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderNote.getCommerceOrderId(),
+			actionId);
 	}
 
 	private static volatile ModelResourcePermission<CommerceOrder>
