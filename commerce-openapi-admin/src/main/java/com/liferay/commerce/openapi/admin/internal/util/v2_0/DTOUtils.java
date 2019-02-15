@@ -15,6 +15,7 @@
 package com.liferay.commerce.openapi.admin.internal.util.v2_0;
 
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
@@ -24,6 +25,7 @@ import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.openapi.admin.model.v2_0.AccountDTO;
+import com.liferay.commerce.openapi.admin.model.v2_0.AccountOrganizationDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.AddressDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CountryDTO;
 import com.liferay.commerce.openapi.admin.model.v2_0.CurrencyDTO;
@@ -54,6 +56,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -70,6 +73,27 @@ import java.util.stream.Stream;
  * @author Alessio Antonio Rendina
  */
 public class DTOUtils {
+
+	public static AccountOrganizationDTO[] modelsToAccountOrganizationDTOArray(
+		List<CommerceAccountOrganizationRel> commerceAccountOrganizationRels) {
+
+		if (commerceAccountOrganizationRels == null) {
+			return null;
+		}
+
+		List<AccountOrganizationDTO> accountOrganizations = new ArrayList<>();
+
+		for (CommerceAccountOrganizationRel commerceAccountOrganizationRel :
+				commerceAccountOrganizationRels) {
+
+			accountOrganizations.add(
+				modelToDTO(commerceAccountOrganizationRel));
+		}
+
+		Stream<AccountOrganizationDTO> stream = accountOrganizations.stream();
+
+		return stream.toArray(AccountOrganizationDTO[]::new);
+	}
 
 	public static RegionDTO[] modelsToRegionDTOArray(
 		List<CommerceRegion> commerceRegions) {
@@ -116,6 +140,37 @@ public class DTOUtils {
 		}
 
 		return accountDTO;
+	}
+
+	public static AccountOrganizationDTO modelToDTO(
+		CommerceAccountOrganizationRel commerceAccountOrganizationRel) {
+
+		AccountOrganizationDTO accountOrganizationDTO =
+			new AccountOrganizationDTO();
+
+		if (commerceAccountOrganizationRel == null) {
+			return accountOrganizationDTO;
+		}
+
+		try {
+			accountOrganizationDTO.setCommerceAccountId(
+				commerceAccountOrganizationRel.getCommerceAccountId());
+
+			Organization organization =
+				commerceAccountOrganizationRel.getOrganization();
+
+			accountOrganizationDTO.setName(organization.getName());
+			accountOrganizationDTO.setOrganizationId(
+				organization.getOrganizationId());
+			accountOrganizationDTO.setTreePath(organization.getTreePath());
+		}
+		catch (Exception e) {
+			_log.error("Cannot instantiate AccountOrganizationDTO ", e);
+
+			throw new RuntimeException(e);
+		}
+
+		return accountOrganizationDTO;
 	}
 
 	public static AddressDTO modelToDTO(CommerceAddress commerceAddress) {
