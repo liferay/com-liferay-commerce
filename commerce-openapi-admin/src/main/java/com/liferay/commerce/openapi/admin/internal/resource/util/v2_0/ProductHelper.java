@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.openapi.admin.internal.resource.util.v2_0;
 
+import com.liferay.commerce.openapi.admin.internal.resource.util.BaseHelper;
 import com.liferay.commerce.openapi.admin.internal.resource.util.ServiceContextHelper;
 import com.liferay.commerce.openapi.admin.internal.util.v2_0.DTOUtils;
 import com.liferay.commerce.openapi.admin.model.v2_0.ProductDTO;
@@ -50,7 +51,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Igor Beslic
  */
 @Component(immediate = true, service = ProductHelper.class)
-public class ProductHelper {
+public class ProductHelper extends BaseHelper {
 
 	public void deleteProduct(String id, Company company)
 		throws PortalException {
@@ -137,7 +138,8 @@ public class ProductHelper {
 		return DTOUtils.modelToDTO(
 			_updateProduct(
 				id, company, productDTO.getDescription(),
-				productDTO.getShortDescription(), productDTO.getName()));
+				productDTO.getShortDescription(), productDTO.getName(),
+				productDTO.getExpando()));
 	}
 
 	public ProductDTO upsertProduct(
@@ -150,7 +152,8 @@ public class ProductHelper {
 				productDTO.getDescription(),
 				productDTO.getExternalReferenceCode(),
 				productDTO.getProductTypeName(),
-				productDTO.getShortDescription(), productDTO.getName(), user));
+				productDTO.getShortDescription(), productDTO.getName(), user,
+				productDTO.getExpando()));
 	}
 
 	private DateConfig _getDateConfig(Calendar calendar) {
@@ -173,7 +176,8 @@ public class ProductHelper {
 
 	private CPDefinition _updateProduct(
 			String id, Company company, Map<String, String> description,
-			Map<String, String> shortDescription, Map<String, String> name)
+			Map<String, String> shortDescription, Map<String, String> name,
+			Map<String, ?> expando)
 		throws PortalException {
 
 		CPDefinition cpDefinition = getProductById(id, company);
@@ -197,7 +201,7 @@ public class ProductHelper {
 
 		boolean neverExpire = Boolean.TRUE;
 
-		return _cpDefinitionService.updateCPDefinition(
+		cpDefinition = _cpDefinitionService.updateCPDefinition(
 			cpDefinition.getCPDefinitionId(),
 			LanguageUtils.getLocalizedMap(name),
 			LanguageUtils.getLocalizedMap(shortDescription),
@@ -212,13 +216,21 @@ public class ProductHelper {
 			expirationDateConfig._month, expirationDateConfig._day,
 			expirationDateConfig._year, expirationDateConfig._hour,
 			expirationDateConfig._minute, neverExpire, serviceContext);
+
+		if (!expando.isEmpty()) {
+			updateExpando(
+				serviceContext.getCompanyId(), CPDefinition.class,
+				cpDefinition.getPrimaryKey(), expando);
+		}
+
+		return cpDefinition;
 	}
 
 	private CPDefinition _upsertProduct(
 			Long groupId, boolean active, String defaultSku,
 			Map<String, String> description, String externalReferenceCode,
 			String productTypeName, Map<String, String> shortDescription,
-			Map<String, String> name, User currentUser)
+			Map<String, String> name, User currentUser, Map<String, ?> expando)
 		throws PortalException {
 
 		boolean neverExpire = Boolean.TRUE;
@@ -261,6 +273,12 @@ public class ProductHelper {
 				currentUser.getUserId(), cpDefinition.getCPDefinitionId(),
 				WorkflowConstants.STATUS_INACTIVE, serviceContext,
 				workflowContext);
+		}
+
+		if (!expando.isEmpty()) {
+			updateExpando(
+				serviceContext.getCompanyId(), CPDefinition.class,
+				cpDefinition.getPrimaryKey(), expando);
 		}
 
 		return cpDefinition;
