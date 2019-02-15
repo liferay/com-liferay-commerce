@@ -420,8 +420,8 @@ public class CommerceTierPriceEntryLocalServiceTest {
 		BigDecimal actualPrice = commerceTierPriceEntry.getPrice();
 		BigDecimal actualPromoPrice = commerceTierPriceEntry.getPromoPrice();
 
-		Assert.assertThat(price, equalTo(actualPrice.doubleValue()));
-		Assert.assertThat(promoPrice, equalTo(actualPromoPrice.doubleValue()));
+		Assert.assertEquals(price, actualPrice.doubleValue(), 0.0001);
+		Assert.assertEquals(promoPrice, actualPromoPrice.doubleValue(), 0.0001);
 	}
 
 	@Inject
